@@ -12644,7 +12644,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用一张虚构订单和五个异常样本测试自己：是否能正确隔离批次、记录证据并选择升级对象。"
+              "探索设备监控、批次核对与实际产线任务兴趣，不代表安全资格。"
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.fit.personality-fit-block.7",
@@ -12659,7 +12659,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣测评不能替代产线训练、首件确认、标签核对和安全授权。"
+              "编辑探索建议；未验证本测评对该职业的预测或比较效度。"
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.fit.riasec-fit-block.8",
@@ -12682,7 +12682,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "防护装置与PPE：传动、夹点、切封与输送区域需要有效护罩；PPE 要依据危害评估选择，且不能增加卷入风险。"
+              "OSHA资料为美国机械防护与能源控制背景，不替代中国法域和现场SOP；实际设备操作须获岗位授权。"
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.risk.career-risk-cards.1",
@@ -12697,7 +12697,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "卡料停机升级：缺瓶、堵袋或产品卡住时先使用安全停机与升级程序，不能徒手越过防护区抢修。"
+              "机械夹点、清堵、残余能源、串批标签、重复搬取与复机验证需要分别控制。"
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.risk.career-risk-cards.2",
@@ -12712,7 +12712,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "维修和能量隔离授权边界：停止按钮不代表危险能源已被隔离，进入危险区前按程序锁定并验证。"
+              "OSHA支持美国机械防护和危险能源培训授权背景；NIOSH是通用工效背景；O*NET支持标签称重等任务。批次场景和具体控制为编辑归纳，非本職发生率或中国SOP。"
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.risk.career-risk-cards.3",
@@ -12726,7 +12726,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "工效风险：高频搬取、推拉、举升与扭转应通过供料高度、辅助装置、容器重量和任务设计优先控制。"
+              "操作员与设备附近人员"
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.risk.career-risk-cards.4",
@@ -12740,7 +12740,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "责任边界：操作员执行获准的设置、监控、检查和记录；质量放行、维修拆卸和隔离复机由相应授权人员负责。"
+              "可能造成夹伤或卷入伤害。"
             ]
           },
           "id": "packaging-and-filling-machine-operators-and-tenders.risk.career-risk-cards.5",
@@ -14017,28 +14017,28 @@
         ],
         "risk_rows": [
           {
-            "为什么重要": "可能造成批次质量或人员安全事故。",
-            "控制方式": "停机、隔离、记录、升级并由获授权人员复核。",
+            "为什么重要": "错标可使订单、批号或目的地记录失真。",
+            "控制方式": "对照实物订单标签，核受影响批次与数量。",
             "风险": "错标"
           },
           {
-            "为什么重要": "可能造成批次质量或人员安全事故。",
-            "控制方式": "停机、隔离、记录、升级并由获授权人员复核。",
+            "为什么重要": "欠量偏差可能漏剔或进入交付批次。",
+            "控制方式": "核秤状态、原值和剔除，不由报警自动放行。",
             "风险": "欠量"
           },
           {
-            "为什么重要": "可能造成批次质量或人员安全事故。",
-            "控制方式": "停机、隔离、记录、升级并由获授权人员复核。",
+            "为什么重要": "封口缺陷可能使包装保护不符要求。",
+            "控制方式": "保缺陷样本，交质量复核参数与放行。",
             "风险": "封口缺陷"
           },
           {
-            "为什么重要": "可能造成批次质量或人员安全事故。",
-            "控制方式": "停机、隔离、记录、升级并由获授权人员复核。",
+            "为什么重要": "越防护清堵可能造成卷入伤害。",
+            "控制方式": "按安全停机与升级程序，清堵权另核。",
             "风险": "卡料卷入"
           },
           {
-            "为什么重要": "可能造成批次质量或人员安全事故。",
-            "控制方式": "停机、隔离、记录、升级并由获授权人员复核。",
+            "为什么重要": "未核防护与首件可能使异常继续。",
+            "控制方式": "授权人员核故障、防护、剔除和首件并记录。",
             "风险": "错误复机"
           }
         ],
@@ -14159,29 +14159,29 @@
               {
                 "credentials": "核对岗位培训与设备授权。",
                 "next_moves": "补足换型和异常判断。",
-                "readiness_evidence": "首件表、缺陷样本与交接记录。",
-                "responsibility": "按训练与雇主授权承担设备操作。",
+                "readiness_evidence": "观察笔记、输入清单与未知项。",
+                "responsibility": "在获准观察或模拟中学习基础学习的输入、交付与责任，不独立处理真实对象。",
                 "role": "职业探索者"
               },
               {
                 "credentials": "核对岗位培训与设备授权。",
                 "next_moves": "补足换型和异常判断。",
-                "readiness_evidence": "首件表、缺陷样本与交接记录。",
-                "responsibility": "按训练与雇主授权承担设备操作。",
+                "readiness_evidence": "监督反馈、核对表与更正记录。",
+                "responsibility": "在岗位训练及监督中练习基础学习，核原始输入、记录反馈和异常。",
                 "role": "培训学员"
               },
               {
                 "credentials": "核对岗位培训与设备授权。",
                 "next_moves": "补足换型和异常判断。",
-                "readiness_evidence": "首件表、缺陷样本与交接记录。",
-                "responsibility": "按训练与雇主授权承担设备操作。",
+                "readiness_evidence": "对应训练权限、任务记录与接收人。",
+                "responsibility": "完成训练并取得相应权限后承担基础学习职责，保留执行与交接记录；操作、调参、维修、危险能源控制与质量放行权限分别核。",
                 "role": "在岗操作员"
               },
               {
                 "credentials": "核对岗位培训与设备授权。",
                 "next_moves": "补足换型和异常判断。",
-                "readiness_evidence": "首件表、缺陷样本与交接记录。",
-                "responsibility": "按训练与雇主授权承担设备操作。",
+                "readiness_evidence": "异常复盘与修订反馈；不自动扩大权限。",
+                "responsibility": "在相应职责内复盘基础学习的复杂异常并改进交接；承担新任务前另核能力和权限。",
                 "role": "在岗操作员"
               }
             ],
@@ -14193,29 +14193,29 @@
               {
                 "credentials": "核对岗位培训与设备授权。",
                 "next_moves": "补足换型和异常判断。",
-                "readiness_evidence": "首件表、缺陷样本与交接记录。",
-                "responsibility": "按训练与雇主授权承担设备操作。",
+                "readiness_evidence": "观察笔记、输入清单与未知项。",
+                "responsibility": "在获准观察或模拟中学习监督下操作的输入、交付与责任，不独立处理真实对象。",
                 "role": "职业探索者"
               },
               {
                 "credentials": "核对岗位培训与设备授权。",
                 "next_moves": "补足换型和异常判断。",
-                "readiness_evidence": "首件表、缺陷样本与交接记录。",
-                "responsibility": "按训练与雇主授权承担设备操作。",
+                "readiness_evidence": "监督反馈、核对表与更正记录。",
+                "responsibility": "在岗位训练及监督中练习监督下操作，核原始输入、记录反馈和异常。",
                 "role": "培训学员"
               },
               {
                 "credentials": "核对岗位培训与设备授权。",
                 "next_moves": "补足换型和异常判断。",
-                "readiness_evidence": "首件表、缺陷样本与交接记录。",
-                "responsibility": "按训练与雇主授权承担设备操作。",
+                "readiness_evidence": "对应训练权限、任务记录与接收人。",
+                "responsibility": "完成训练并取得相应权限后承担监督下操作职责，保留执行与交接记录；操作、调参、维修、危险能源控制与质量放行权限分别核。",
                 "role": "在岗操作员"
               },
               {
                 "credentials": "核对岗位培训与设备授权。",
                 "next_moves": "补足换型和异常判断。",
-                "readiness_evidence": "首件表、缺陷样本与交接记录。",
-                "responsibility": "按训练与雇主授权承担设备操作。",
+                "readiness_evidence": "异常复盘与修订反馈；不自动扩大权限。",
+                "responsibility": "在相应职责内复盘监督下操作的复杂异常并改进交接；承担新任务前另核能力和权限。",
                 "role": "在岗操作员"
               }
             ],
@@ -14227,29 +14227,29 @@
               {
                 "credentials": "核对岗位培训与设备授权。",
                 "next_moves": "补足换型和异常判断。",
-                "readiness_evidence": "首件表、缺陷样本与交接记录。",
-                "responsibility": "按训练与雇主授权承担设备操作。",
+                "readiness_evidence": "观察笔记、输入清单与未知项。",
+                "responsibility": "在获准观察或模拟中学习独立监控与发展的输入、交付与责任，不独立处理真实对象。",
                 "role": "职业探索者"
               },
               {
                 "credentials": "核对岗位培训与设备授权。",
                 "next_moves": "补足换型和异常判断。",
-                "readiness_evidence": "首件表、缺陷样本与交接记录。",
-                "responsibility": "按训练与雇主授权承担设备操作。",
+                "readiness_evidence": "监督反馈、核对表与更正记录。",
+                "responsibility": "在岗位训练及监督中练习独立监控与发展，核原始输入、记录反馈和异常。",
                 "role": "培训学员"
               },
               {
                 "credentials": "核对岗位培训与设备授权。",
                 "next_moves": "补足换型和异常判断。",
-                "readiness_evidence": "首件表、缺陷样本与交接记录。",
-                "responsibility": "按训练与雇主授权承担设备操作。",
+                "readiness_evidence": "对应训练权限、任务记录与接收人。",
+                "responsibility": "完成训练并取得相应权限后承担独立监控与发展职责，保留执行与交接记录；操作、调参、维修、危险能源控制与质量放行权限分别核。",
                 "role": "在岗操作员"
               },
               {
                 "credentials": "核对岗位培训与设备授权。",
                 "next_moves": "补足换型和异常判断。",
-                "readiness_evidence": "首件表、缺陷样本与交接记录。",
-                "responsibility": "按训练与雇主授权承担设备操作。",
+                "readiness_evidence": "异常复盘与修订反馈；不自动扩大权限。",
+                "responsibility": "在相应职责内复盘独立监控与发展的复杂异常并改进交接；承担新任务前另核能力和权限。",
                 "role": "在岗操作员"
               }
             ],
@@ -14462,68 +14462,68 @@
               "onet"
             ],
             "id": "cost-change",
-            "mitigation": "按设备防护、停机、隔离、复核和升级程序处理。",
-            "scenario": "输送和封口运动部件附近作业。",
+            "mitigation": "防护异常按程序停机通知负责者，不擅拆护罩。",
+            "scenario": "输送或封口运动部件防护异常仍操作。",
             "title": "夹点卷入"
           },
           {
-            "affected_roles": "操作员、维修人员和相关批次接收方。",
-            "consequence": "可能伤人或造成产品批次质量问题。",
+            "affected_roles": "操作员与清堵维修者",
+            "consequence": "可能造成突然动作、挤压或割伤。",
             "evidence_refs": [
               "onet",
               "privacy"
             ],
             "id": "record-version",
-            "mitigation": "按设备防护、停机、隔离、复核和升级程序处理。",
-            "scenario": "越过护罩伸手处理堵塞。",
+            "mitigation": "按安全停机和升级程序处理，不越护罩抢修。",
+            "scenario": "为恢复产量越过护罩伸手清堵。",
             "title": "卡料误清"
           },
           {
-            "affected_roles": "操作员、维修人员和相关批次接收方。",
-            "consequence": "可能伤人或造成产品批次质量问题。",
+            "affected_roles": "进入危险区的作业者",
+            "consequence": "可能因意外启动或储能释放伤人。",
             "evidence_refs": [
               "privacy",
               "privacy"
             ],
             "id": "personal-data",
-            "mitigation": "按设备防护、停机、隔离、复核和升级程序处理。",
-            "scenario": "停机后仍有残余能量。",
+            "mitigation": "由训练获授权者按适用能源控制程序隔离验证。",
+            "scenario": "把停机按钮当成全部危险能源已隔离。",
             "title": "危险能源"
           },
           {
-            "affected_roles": "操作员、维修人员和相关批次接收方。",
-            "consequence": "可能伤人或造成产品批次质量问题。",
+            "affected_roles": "批次接收方和质量人员",
+            "consequence": "可能损害标识追溯和批次质量。",
             "evidence_refs": [
               "facilities",
               "facilities"
             ],
             "id": "technical-boundary",
-            "mitigation": "按设备防护、停机、隔离、复核和升级程序处理。",
-            "scenario": "旧标签混入新批次。",
+            "mitigation": "核订单物料模板和首件，隔离疑似串批并交质量决定。",
+            "scenario": "换型后旧标签或物料混入新批。",
             "title": "错标串批"
           },
           {
-            "affected_roles": "操作员、维修人员和相关批次接收方。",
-            "consequence": "可能伤人或造成产品批次质量问题。",
+            "affected_roles": "搬取人员",
+            "consequence": "可能增加肌肉骨骼负担。",
             "evidence_refs": [
               "bls",
               "bls"
             ],
             "id": "single-coverage",
-            "mitigation": "按设备防护、停机、隔离、复核和升级程序处理。",
-            "scenario": "频繁搬箱和扭转。",
+            "mitigation": "观察工作站、重量轮换和辅助装置，向现场负责人反馈。",
+            "scenario": "重复举搬扭转，工作站和辅助安排未核。",
             "title": "重复搬取"
           },
           {
-            "affected_roles": "操作员、维修人员和相关批次接收方。",
-            "consequence": "可能伤人或造成产品批次质量问题。",
+            "affected_roles": "操作员、质量人员和批次接收者",
+            "consequence": "可能使人员安全或产品偏差持续失控。",
             "evidence_refs": [
               "onet",
               "privacy"
             ],
             "id": "delivery-acceptance",
-            "mitigation": "按设备防护、停机、隔离、复核和升级程序处理。",
-            "scenario": "未验证护罩与剔除即开机。",
+            "mitigation": "获授权人员核故障消除、防护剔除和首件，记录复机决定。",
+            "scenario": "护罩、剔除或首件未核即复机。",
             "title": "错误复机"
           }
         ],
@@ -14544,8 +14544,8 @@
           {
             "href": "https://www.onetonline.org/link/summary/51-9111.00",
             "id": "facilities",
-            "label": "O*NET 包装与灌装任务",
-            "scope": "贴标、称重、检查与记录任务；串批情境为编辑示例"
+            "label": "O*NET任务背景；控制为编辑建议",
+            "scope": "不证明风险概率、隐私法律或机构授权"
           },
           {
             "href": "https://www.osha.gov/control-hazardous-energy",
@@ -14754,7 +14754,7 @@
         "growth": "4.1%",
         "heading": "美国包装灌装职业工资与就业",
         "industry_heading": "行业与岗位差异",
-        "industry_period": "2025",
+        "industry_period": "产线条件核对；无行业工资统计",
         "industry_rows": [
           {
             "industry": "食品饮料产线",
@@ -14777,7 +14777,7 @@
             "note": "全国中位数不是个人报价。"
           }
         ],
-        "industry_value_label": "美国精确职业口径",
+        "industry_value_label": "数据状态",
         "interpretation_heading": "如何解读",
         "interpretation_rows": [
           {
@@ -14823,9 +14823,9 @@
         "outlook_heading": "就业前景",
         "outlook_period": "2025—2035",
         "wage_column_labels": [
-          "工资层级",
+          "工资统计范围",
           "年薪参考",
-          "月度等值",
+          "计酬边界",
           "解释"
         ],
         "wage_heading": "工资数据",
@@ -15026,68 +15026,68 @@
         ],
         "transitions": [
           {
-            "capability_gaps": "目标工艺、设备和安全授权需补足",
-            "shared_capabilities": "设备监控、异常记录与质量核对",
+            "capability_gaps": "补胶黏剂、配比固化、材料相容和接触防护工艺。",
+            "shared_capabilities": "设备监控、首件与异常记录。",
             "target_href": "/zh/career/jobs/adhesive-bonding-machine-operators-and-tenders",
             "target_slug": "adhesive-bonding-machine-operators-and-tenders",
             "target_title": "胶粘设备操作工",
-            "transition_distance": "需核对具体岗位"
+            "transition_distance": "编辑判断：需补目标任务与资格"
           },
           {
-            "capability_gaps": "目标工艺、设备和安全授权需补足",
-            "shared_capabilities": "设备监控、异常记录与质量核对",
+            "capability_gaps": "补纸材、模切成形、刀具张力及换型工艺。",
+            "shared_capabilities": "供料、尺寸检查与停机交接。",
             "target_href": "/zh/career/jobs/paper-goods-machine-setters-operators-and-tenders",
             "target_slug": "paper-goods-machine-setters-operators-and-tenders",
             "target_title": "纸制品设备操作工",
-            "transition_distance": "需核对具体岗位"
+            "transition_distance": "编辑判断：需补目标任务与资格"
           },
           {
-            "capability_gaps": "目标工艺、设备和安全授权需补足",
-            "shared_capabilities": "设备监控、异常记录与质量核对",
+            "capability_gaps": "补手工包装方法、搬取工效及目标产品规范，设备权限不自动沿用。",
+            "shared_capabilities": "标签数量与包装质量核对。",
             "target_href": "/zh/career/jobs/packers-and-packagers-hand",
             "target_slug": "packers-and-packagers-hand",
             "target_title": "手工包装员",
-            "transition_distance": "需核对具体岗位"
+            "transition_distance": "编辑判断：需补目标任务与资格"
           },
           {
-            "capability_gaps": "目标工艺、设备和安全授权需补足",
-            "shared_capabilities": "设备监控、异常记录与质量核对",
+            "capability_gaps": "补配方称量、混合、食品卫生及配料设备训练。",
+            "shared_capabilities": "批号原料核对及生产记录。",
             "target_href": "/zh/career/jobs/food-batchmakers",
             "target_slug": "food-batchmakers",
             "target_title": "食品配料工",
-            "transition_distance": "需核对具体岗位"
+            "transition_distance": "编辑判断：需补目标任务与资格"
           },
           {
-            "capability_gaps": "目标工艺、设备和安全授权需补足",
-            "shared_capabilities": "设备监控、异常记录与质量核对",
+            "capability_gaps": "补检验方法、抽样、量具及质量判定授权。",
+            "shared_capabilities": "缺陷分类、称重及隔离证据。",
             "target_href": "/zh/career/jobs/inspectors-testers-sorters-samplers-and-weighers",
             "target_slug": "inspectors-testers-sorters-samplers-and-weighers",
             "target_title": "质量检验员",
-            "transition_distance": "需核对具体岗位"
+            "transition_distance": "编辑判断：需补目标任务与资格"
           },
           {
-            "capability_gaps": "目标工艺、设备和安全授权需补足",
-            "shared_capabilities": "设备监控、异常记录与质量核对",
+            "capability_gaps": "补机械诊断、拆修及危险能源训练授权，操作员不能直接维修。",
+            "shared_capabilities": "设备异常观察和故障交接。",
             "target_href": "/zh/career/jobs/industrial-machinery-mechanics",
             "target_slug": "industrial-machinery-mechanics",
             "target_title": "工业机械维修技师",
-            "transition_distance": "需核对具体岗位"
+            "transition_distance": "编辑判断：需补目标任务与资格"
           },
           {
-            "capability_gaps": "目标工艺、设备和安全授权需补足",
-            "shared_capabilities": "设备监控、异常记录与质量核对",
+            "capability_gaps": "补化工过程、危险物料、工艺参数和设备安全训练。",
+            "shared_capabilities": "仪表监控、批次记录与异常升级。",
             "target_href": "/zh/career/jobs/chemical-equipment-operators-and-tenders",
             "target_slug": "chemical-equipment-operators-and-tenders",
             "target_title": "化工设备操作员",
-            "transition_distance": "需核对具体岗位"
+            "transition_distance": "编辑判断：需补目标任务与资格"
           },
           {
-            "capability_gaps": "目标工艺、设备和安全授权需补足",
-            "shared_capabilities": "设备监控、异常记录与质量核对",
+            "capability_gaps": "补目标辅助工艺与现场防护，角色权限另核。",
+            "shared_capabilities": "物料搬运、供料和记录。",
             "target_href": "/zh/career/jobs/helpers-production-workers",
             "target_slug": "helpers-production-workers",
             "target_title": "生产辅助工",
-            "transition_distance": "需核对具体岗位"
+            "transition_distance": "编辑判断：需补目标任务与资格"
           }
         ]
       },
@@ -15146,8 +15146,8 @@
               "type": "prose"
             },
             "id": "riasec",
-            "label": "首件与批次核对",
-            "question": "测评能证明产线能力吗？",
+            "label": "霍兰德职业兴趣",
+            "question": "如何用霍兰德职业兴趣探索包装与灌装工作？",
             "signals": {
               "$item": "packaging-and-filling-machine-operators-and-tenders.fit.riasec-fit-block.1",
               "block": "fit",
@@ -15157,13 +15157,13 @@
             "watchout": "不能替代现场训练与授权。"
           },
           {
-            "answer": "包装与灌装机操作员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "反思节拍下的细节记录与停机习惯；用带教反馈观察。",
+            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
             "cta_label": "了解人格特质",
-            "evidence_level": "职业探索线索，不是安全资格。",
+            "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "big-five",
-            "label": "设备节拍与记录",
-            "question": "测评能证明产线能力吗？",
+            "label": "大五人格",
+            "question": "如何用大五人格探索包装与灌装工作？",
             "signals": {
               "$item": "packaging-and-filling-machine-operators-and-tenders.fit.personality-fit-block.2",
               "block": "fit",
@@ -15173,13 +15173,13 @@
             "watchout": "不能替代现场训练与授权。"
           },
           {
-            "answer": "包装与灌装机操作员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "描述动手、分析和沟通偏好，类型不决定产线能力。",
+            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
             "cta_label": "探索职业兴趣",
-            "evidence_level": "职业探索线索，不是安全资格。",
+            "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "mbti",
-            "label": "缺陷描述与升级",
-            "question": "测评能证明产线能力吗？",
+            "label": "MBTI 偏好",
+            "question": "如何用MBTI 偏好探索包装与灌装工作？",
             "signals": {
               "$item": "packaging-and-filling-machine-operators-and-tenders.fit.personality-fit-block.3",
               "block": "fit",
@@ -15189,13 +15189,13 @@
             "watchout": "不能替代现场训练与授权。"
           },
           {
-            "answer": "包装与灌装机操作员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "用压力反思探索产量与偏差冲突时的反应，不能代质量判断。",
+            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
             "cta_label": "了解人格特质",
-            "evidence_level": "职业探索线索，不是安全资格。",
+            "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "enneagram",
-            "label": "实物标签复核",
-            "question": "测评能证明产线能力吗？",
+            "label": "九型人格",
+            "question": "如何用九型人格探索包装与灌装工作？",
             "signals": {
               "$item": "packaging-and-filling-machine-operators-and-tenders.fit.personality-fit-block.4",
               "block": "fit",
@@ -15205,13 +15205,13 @@
             "watchout": "不能替代现场训练与授权。"
           },
           {
-            "answer": "包装与灌装机操作员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "观察标签数量规则和缺陷分类；在线成绩不替代设备训练。",
+            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "探索职业兴趣",
-            "evidence_level": "职业探索线索，不是安全资格。",
+            "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "iq",
-            "label": "防护与停机习惯",
-            "question": "测评能证明产线能力吗？",
+            "label": "认知能力测评",
+            "question": "如何用认知能力测评探索包装与灌装工作？",
             "signals": {
               "$item": "packaging-and-filling-machine-operators-and-tenders.fit.personality-fit-block.5",
               "block": "fit",
@@ -15221,13 +15221,13 @@
             "watchout": "不能替代现场训练与授权。"
           },
           {
-            "answer": "包装与灌装机操作员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "关注向生产质量维修描述批号、异常和未决项，非量表决定岗位。",
+            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "了解人格特质",
-            "evidence_level": "职业探索线索，不是安全资格。",
+            "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "eq",
-            "label": "搬取与工效观察",
-            "question": "测评能证明产线能力吗？",
+            "label": "情绪与沟通自评",
+            "question": "如何用情绪与沟通自评探索包装与灌装工作？",
             "signals": {
               "$item": "packaging-and-filling-machine-operators-and-tenders.fit.personality-fit-block.6",
               "block": "fit",
@@ -15242,63 +15242,63 @@
         "directions": [
           {
             "direction": "胶粘设备操作工方向",
-            "fit_signals": "可迁移设备监控与质量记录。",
+            "fit_signals": "若偏好该方向的具体任务，可进一步观察：设备监控、首件与异常记录。",
             "target": {
               "href": "/zh/career/jobs/adhesive-bonding-machine-operators-and-tenders",
               "slug": "adhesive-bonding-machine-operators-and-tenders",
               "title": "胶粘设备操作工"
             },
-            "watchouts": "需补目标产线工艺与授权。"
+            "watchouts": "补胶黏剂、配比固化、材料相容和接触防护工艺。"
           },
           {
             "direction": "纸制品设备操作工方向",
-            "fit_signals": "可迁移设备监控与质量记录。",
+            "fit_signals": "若偏好该方向的具体任务，可进一步观察：供料、尺寸检查与停机交接。",
             "target": {
               "href": "/zh/career/jobs/paper-goods-machine-setters-operators-and-tenders",
               "slug": "paper-goods-machine-setters-operators-and-tenders",
               "title": "纸制品设备操作工"
             },
-            "watchouts": "需补目标产线工艺与授权。"
+            "watchouts": "补纸材、模切成形、刀具张力及换型工艺。"
           },
           {
             "direction": "手工包装员方向",
-            "fit_signals": "可迁移设备监控与质量记录。",
+            "fit_signals": "若偏好该方向的具体任务，可进一步观察：标签数量与包装质量核对。",
             "target": {
               "href": "/zh/career/jobs/packers-and-packagers-hand",
               "slug": "packers-and-packagers-hand",
               "title": "手工包装员"
             },
-            "watchouts": "需补目标产线工艺与授权。"
+            "watchouts": "补手工包装方法、搬取工效及目标产品规范，设备权限不自动沿用。"
           },
           {
             "direction": "食品配料工方向",
-            "fit_signals": "可迁移设备监控与质量记录。",
+            "fit_signals": "若偏好该方向的具体任务，可进一步观察：批号原料核对及生产记录。",
             "target": {
               "href": "/zh/career/jobs/food-batchmakers",
               "slug": "food-batchmakers",
               "title": "食品配料工"
             },
-            "watchouts": "需补目标产线工艺与授权。"
+            "watchouts": "补配方称量、混合、食品卫生及配料设备训练。"
           },
           {
             "direction": "质量检验员方向",
-            "fit_signals": "可迁移设备监控与质量记录。",
+            "fit_signals": "若偏好该方向的具体任务，可进一步观察：缺陷分类、称重及隔离证据。",
             "target": {
               "href": "/zh/career/jobs/inspectors-testers-sorters-samplers-and-weighers",
               "slug": "inspectors-testers-sorters-samplers-and-weighers",
               "title": "质量检验员"
             },
-            "watchouts": "需补目标产线工艺与授权。"
+            "watchouts": "补检验方法、抽样、量具及质量判定授权。"
           },
           {
             "direction": "工业机械维修技师方向",
-            "fit_signals": "可迁移设备监控与质量记录。",
+            "fit_signals": "若偏好该方向的具体任务，可进一步观察：设备异常观察和故障交接。",
             "target": {
               "href": "/zh/career/jobs/industrial-machinery-mechanics",
               "slug": "industrial-machinery-mechanics",
               "title": "工业机械维修技师"
             },
-            "watchouts": "需补目标产线工艺与授权。"
+            "watchouts": "补机械诊断、拆修及危险能源训练授权，操作员不能直接维修。"
           }
         ],
         "heading": "岗位适配与安全习惯",
@@ -15324,24 +15324,24 @@
             "question": "能接受重复性工作吗？"
           },
           {
-            "answer": "用模拟订单验证。",
-            "question": "能持续核对标签批次吗？"
+            "answer": "不能自动授；按设备、雇主危险能源程序及授权核。",
+            "question": "课程能授清堵或维修权限吗？"
           },
           {
-            "answer": "保存缺陷样本。",
-            "question": "能区分欠量与封口缺陷吗？"
+            "answer": "需另学产品卫生、标签、设备和质量要求。",
+            "question": "食品与工业品产线可直接换岗吗？"
           },
           {
-            "answer": "不跨越护罩。",
-            "question": "卡料时会按程序停机吗？"
+            "answer": "还须核样本、传感器、剔除及质量授权，不由模型放行。",
+            "question": "AI检测通过等于批次放行吗？"
           },
           {
-            "answer": "保留时间和数量。",
-            "question": "能准确记录停机原因吗？"
+            "answer": "保未知，按现场程序核原始记录与责任者；纸面示例非真实产品公差。",
+            "question": "重量记录空项能当合格吗？"
           },
           {
-            "answer": "现场试岗观察。",
-            "question": "能接受重复性工作吗？"
+            "answer": "核班次、加班、计件、福利、产品与质量责任及公告期。",
+            "question": "如何比较岗位薪酬？"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -15353,13 +15353,13 @@
             "tone": "positive"
           },
           {
-            "body": "把缺陷、时间和批次写清。",
+            "body": "若为赶产量绕过护罩、擅清堵或不愿逐项核批次，应先纠正并在监督中观察。",
             "id": "caution",
             "label": "异常描述",
             "tone": "caution"
           },
           {
-            "body": "不徒手越过防护区。",
+            "body": "用虚构订单、标签、重量和剔除记录核偏差，不真实灌装、调参、清堵或放行。",
             "id": "experiment",
             "label": "安全边界",
             "tone": "action"
@@ -15445,7 +15445,7 @@
             "type": "prose"
           },
           "source": "O*NET 51-9111.00、OSHA 机械防护与危险能源资料。",
-          "updated_at": "资料核查：2026-10-02"
+          "updated_at": "资料核查：2026-10-12"
         },
         "note": "证据只支持包装与灌装机操作员在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -15805,7 +15805,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "包装灌装 · 设备监控 · 批次质量",
@@ -15856,7 +15856,7 @@
       "text": "包装与灌装机操作员：工作内容、薪资与安全边界"
     }
   },
-  "source_content_sha256": "954a6137035bab02d946776f8b8ba282fe929fea1e2b9b9713763a78b9740233",
+  "source_content_sha256": "897bd78a91d0e6d5af23062814cf6a63b86fbf3b525e4deee42d385d24318901",
   "subject": {
     "canonical_slug": "packaging-and-filling-machine-operators-and-tenders",
     "name": "包装与灌装机操作员",

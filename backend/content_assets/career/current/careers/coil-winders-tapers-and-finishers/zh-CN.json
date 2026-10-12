@@ -14,6 +14,69 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:coil-nine-cn-industry-manufacturing-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-cn-industry-science-tech-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-cn-professional-technical-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-cn-urban-nonprivate-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-occupation-identity": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-us-change-2025-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-us-employment-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-us-employment-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-us-growth-2025-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-us-industry-wage-aerospace-mfg-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-us-industry-wage-engineering-services-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-us-industry-wage-federal-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-us-industry-wage-instruments-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-us-industry-wage-rd-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-us-openings-2025-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-us-wage-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-us-wage-high10-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-us-wage-hourly-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-us-wage-low10-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-us-wage-p25-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:coil-nine-us-wage-p75-2025": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -12004,52 +12067,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.href": {
-        "ref": {
-          "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.18",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.label": {
-        "ref": {
-          "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.18",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.05.headers.explanation": {
         "ref": {
@@ -23685,11 +23708,11 @@
             ]
           },
           "fact_refs": [
-            "occupation-identity"
+            "coil-nine-occupation-identity"
           ],
           "id": "coil-winders-tapers-and-finishers.profile.definition-block.1",
           "source_refs": [
-            "onet-details"
+            "coil-onet-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23704,7 +23727,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.profile.definition-block.2",
           "source_refs": [
-            "onet-details"
+            "coil-onet-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23719,7 +23742,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.profile.definition-block.3",
           "source_refs": [
-            "onet-details"
+            "coil-onet-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23734,7 +23757,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.profile.definition-block.4",
           "source_refs": [
-            "onet-details"
+            "coil-onet-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23749,7 +23772,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.profile.definition-block.5",
           "source_refs": [
-            "nasa-seh"
+            "editorial"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23764,7 +23787,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.profile.definition-block.6",
           "source_refs": [
-            "bls-entry"
+            "coil-cert-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23779,7 +23802,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.profile.definition-block.7",
           "source_refs": [
-            "onet-hot-tech"
+            "coil-hot-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23809,7 +23832,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.profile.definition-block.9",
           "source_refs": [
-            "nasa-seh"
+            "editorial"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23944,10 +23967,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "电机与电动工具修理工以故障诊断与修理为主；本职业以按规格绕制与精整为目标并把电测结果留痕"
+              "电机与工具修理重点修理维护安装电机线路开关，样本含Electric Motor Winder；绕制与维修可交叠，不按故障修理/线圈制造作互斥分类。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.profile.career-quick-answers-block.11",
+          "source_refs": [
+            "coil-neighbor-49-2092.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -23999,10 +24027,20 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "人身与设备安全优先于产量；设备护罩不得拆除或旁路；清堵与维修前按适用程序隔离危险能量并验证零能量状态；电气测试与量测按适用制度执行并佩戴相应防护；重复动作与弯扭姿势按人因建议安排间歇与工位调整；超出授权范围的维修与测试须停止并升级"
+              "安全优先；不得擅自旁路护罩危险运行，适用内部维修清堵先按程序控制能源；电气暴露、测试和复能依实际资格程序，工位姿势及持续不适按评估升级。美国1910.147覆盖可能意外启动/释放储能致伤的维修维护，有普通生产适用条件及例外；authorized employee须真实职责训练，头衔不自动授权。储能消除/断开/约束或使安全，作业前验证隔离断能，不一律零能量；停止按钮非隔离，复能按程序核设备人员清场与通知，异常消失不自动获复产权限。 美国1910.333适用暴露电气危险场景：原则上先断能，特殊不停电条件须由雇主核且仍有安全程序，不是测试可随意带电。断电未按程序锁挂仍按带电对待，qualified person核不能重启并用测试设备验无电/反送电或感应电；涉及未断能暴露电路仅合格人员按规定防护操作，普通绕线头衔不自动取得资格。复能须合格人员按程序核工具装置及清场通知，不凭测量结果正常直接恢复。 美国1910.212操作点与卷入旋转等需适当机器防护，手工具不能代防护；不得擅自拆除/旁路防护危险运行，维修拆卸按实际控制程序，不把所有拆卸一律禁止。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.profile.career-quick-answers-block.16",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24021,10 +24059,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国该职业准备层级为 Job Zone 1-2（很少或部分准备），SVP 低于 6.0，该页面教育分布显示 57% 的受访者回答需要高中文凭或同等学历、41% 回答需要中等后证书、2% 回答低于高中文凭（页面仅显示这三档比例）；常见路径为入职后的岗位培训与在岗带教，并逐步承担绕制参数设定与电测与异常处置职责"
+              "O*NET新入职教育要求57%高中同等、41%中学后非学位证书、2%低于高中，非现职学历/中国招聘；JobZone1–2/SVP低于6为准备分组，非个人统一年限。 美国OOH Assemblers and Fabricators父级组通常高中同等、数月在岗培训，进阶装配需经验/训练，部分依雇主需专项训练或副学士；航空国防等电气电子装配可能焊接认证，不能转为所有绕线工统一资格。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.profile.career-quick-answers-block.18",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-ooh-parent"
+          ],
           "type": "prose"
         },
         {
@@ -24032,10 +24074,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "证据不足：中国全国精确职业工资本轮未取得；以下分类与行业参考已核。中国岗位须按具体工件、设备与职责核对职业分类及培训授权；本页不建立与美国代码的一一等价。国家统计局2025年制造业城镇单位就业人员年平均工资为非私营113,594元、私营76,055元（2026-05-15发布）。这是制造业雇主的行业均值参考，不是本职业中位数、起薪或到手收入。本轮未取得与该职业精确对应的中国全国工资分布。境外证书不能直接视为中国作业资格。"
+              "中国岗位分类及具体培训授权须按工件设备任务核，本轮未核一一等价细类，不以分类入口代核定。NBS2025表2/5制造C非私113,594/私76,055元/年为主营制造单位全门类年平均工资背景，非绕线工中位数起薪月薪；中国精确全国职业工资、地区及一一对应映射本轮未取得。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.profile.career-quick-answers-block.19",
+          "source_refs": [
+            "coil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24153,10 +24199,20 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "确认护罩与联锁完好，不拆除或旁路；清堵或维修前按适用程序隔离危险能源并验证零能量状态后再作业。"
+              "美国1910.147覆盖可能意外启动/释放储能致伤的维修维护，有普通生产适用条件及例外；authorized employee须真实职责训练，头衔不自动授权。储能消除/断开/约束或使安全，作业前验证隔离断能，不一律零能量；停止按钮非隔离，复能按程序核设备人员清场与通知，异常消失不自动获复产权限。 美国1910.212操作点与卷入旋转等需适当机器防护，手工具不能代防护；不得擅自拆除/旁路防护危险运行，维修拆卸按实际控制程序，不把所有拆卸一律禁止。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.profile.career-quick-answers-block.30",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24175,10 +24231,20 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按人因建议安排工位高度与工具与间歇，出现持续手腕不适或明显疲劳时按流程上报并调整，而不是靠忍耐撑过班次。"
+              "编辑人因核对：评估用力姿势、重复强度和持续时间，优先核工位工具等工程改进，再依现场安排任务轮换或间歇，持续不适及时升级。NIOSH一般风险指引支持重复、用力、姿势及持续时间/强度/频率评估，不是本职业发生率或个人诊断。工程消除/替代/改工具工位优先，轮岗休息等管理控制补充，PPE不能代替更有效措施；具体方案由实际评估确定，不给统一间歇时间。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.profile.career-quick-answers-block.32",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24219,10 +24285,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "本页按 O*NET-SOC 51-2021.00（Coil Winders, Tapers, and Finishers，线圈绕线工、包扎工、修整工；2026 年更新页面）的精确职业口径：该职业把用于电气元件（如电阻器与变压器）以及电气设备与仪器（如励磁铁芯与线架与电枢铁芯与电动机与发电机与控制设备）的导线绕成线圈。该职业兴趣代码为 RC（现实型、常规型），准备层级为 Job Zone 1-2（很少或部分准备），SVP 低于 6.0；该页面教育分布显示 57% 的受访者回答需要高中文凭或同等学历、41% 回答需要中等后证书、2% 回答低于高中文凭（页面仅显示这三档比例）；该职业页面未为该代码标注 Bright Outlook。"
+              "本页按 O*NET-SOC 51-2021.00（Coil Winders, Tapers, and Finishers，线圈绕线工、包扎工、修整工；2026 年更新页面）的精确职业口径：该职业把用于电气元件（如电阻器与变压器）以及电气设备与仪器（如励磁铁芯与线架与电枢铁芯与电动机与发电机与控制设备）的导线绕成线圈。该职业兴趣代码为 RC（现实型、常规型），准备层级为 Job Zone 1-2（很少或部分准备），SVP 低于 6.0；该页面教育分布显示 57% 的受访者回答需要高中文凭或同等学历、41% 回答需要中等后证书、2% 回答低于高中文凭（页面仅显示这三档比例）；该职业页面未为该代码标注 Bright Outlook。 新入职教育问卷不是现职学历；11任务7核心4补充，任务不授电气作业权。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-ooh-parent"
+          ],
           "type": "prose"
         },
         {
@@ -24245,6 +24315,10 @@
             ]
           },
           "id": "coil-winders-tapers-and-finishers.profile.onet-structured-fields-block.3",
+          "source_refs": [
+            "coil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24252,10 +24326,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 表1.2（2025—2035年，SOC 51-2021）预测：2025年就业约12,900人，2035年约12,400人，变化-4.0%，年均空缺约1,200个。预测包含自雇和替补需求，空缺不是净新增岗位；含模型假设与误差，不是某企业的招聘保证，也不是AI因果结论。O*NET现页行业就业结构为制造业92%、其他行业合计8%，属于就业结构，不是行业工资。"
+              "BLS表1.2 SOC51-2021：2025就业12.9千→2035预计12.4千，净变-0.5千、变化-4.0%、年均空缺1.2千；自雇比例列为“—”，不填0或给具体占比。空缺含增长/转职退出替换，非每年净增；全国预测非个人录用或AI因果。 O*NET2025行业制造92%、其他8%是就业结构，非行业工资。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.profile.onet-structured-fields-block.4",
+          "source_refs": [
+            "coil-ep-current",
+            "coil-industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -24263,10 +24341,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "技术与工作情境：该职业招聘技术关键词页显示 0 项软件技能（无雇主招聘关键词统计），职业详细资料页另列出 3 项软件（电动机测试系统软件、图纸显示软件与线圈绕制控制软件）；工作情境显示 100% 每天佩戴普通防护或安全装备、92% 认为精确或高度准确极其重要、87% 持续或几乎持续用手操作与感受工具与工件、83% 持续做重复动作、57% 每天接触污染物、53% 每天暴露于噪声、43% 每天进行面对面讨论、42% 认为与工作组或团队协作极其重要、39% 每天面临严格时限、46% 对作出决定拥有很大自由度。"
+              "O*NET软件目录3类：电机测试、图纸显示、绕线控制；Hot2025美国全国0条可列招聘词，不能推没有软件需求、零提及率或零AI采用。 原情境百分比是受访类别非各岗位保证；100%每日普通PPE不表示每人同时须全部列举用品。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.profile.onet-structured-fields-block.5",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -24290,10 +24372,20 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "沟通与协作｜43% 每天进行面对面讨论、52% 每周一次以上但不每天；42% 认为与工作组或团队协作极其重要、24% 认为非常重要、13% 认为重要。\n手工作业与体力｜87% 持续或几乎持续用手操作与感受工具与工件；83% 持续做重复动作、16% 约一半时间做重复动作；工作以精细手工与设备看护相结合。\n精确与自主｜92% 认为精确或高度准确极其重要；46% 对作出决定拥有很大自由度、17% 拥有一定自由度、36% 自由度有限。\n环境暴露与作业条件｜57% 每天接触污染物（气体、粉尘、气味）、29% 每周一次以上但不每天；53% 每天暴露于令人分心或不适的噪声；41% 每天可能接触轻微烧伤、割伤或叮咬。\n防护与安全装备｜100% 每天佩戴普通防护或安全装备（安全鞋、防护眼镜、手套、听力防护、安全帽等）；具体装备与设备防护由雇主的危害评估与设备说明书决定。\n时间与节奏｜39% 每天面临严格时限、45% 每周一次以上但不每天；绕制节拍与后续工序交付相互牵制。\n责任范围与影响｜44% 对他人健康与安全负有很高责任、14% 负有较高责任；匝数与端头与绝缘缺陷会影响下游装配与整机可靠性。\n工作场所与作业环境｜以制造车间为主（行业分布：制造业 92%、其他行业 8%）；环境受控但存在噪声与污染物与轻微外伤暴露。\n边界与授权｜设备护罩与危险能源隔离与电气测试由雇主按适用法规与制度评估与配置；操作员不能自行拆除或旁路防护，维修或清堵时须按适用程序隔离危险能量，超出本人职责的测试与维修按流程升级。"
+              "沟通与协作｜43% 每天进行面对面讨论、52% 每周一次以上但不每天；42% 认为与工作组或团队协作极其重要、24% 认为非常重要、13% 认为重要。\n手工作业与体力｜87% 持续或几乎持续用手操作与感受工具与工件；83% 持续做重复动作、16% 约一半时间做重复动作；工作以精细手工与设备看护相结合。\n精确与自主｜92% 认为精确或高度准确极其重要；46% 对作出决定拥有很大自由度、17% 拥有一定自由度、36% 自由度有限。\n环境暴露与作业条件｜57% 每天接触污染物（气体、粉尘、气味）、29% 每周一次以上但不每天；53% 每天暴露于令人分心或不适的噪声；41% 每天可能接触轻微烧伤、割伤或叮咬。\n防护与安全装备｜100% 每天佩戴普通防护或安全装备（安全鞋、防护眼镜、手套、听力防护、安全帽等）；具体装备与设备防护由雇主的危害评估与设备说明书决定。\n时间与节奏｜39% 每天面临严格时限、45% 每周一次以上但不每天；绕制节拍与后续工序交付相互牵制。\n责任范围与影响｜44% 对他人健康与安全负有很高责任、14% 负有较高责任；匝数与端头与绝缘缺陷会影响下游装配与整机可靠性。\n工作场所与作业环境｜以制造车间为主（行业分布：制造业 92%、其他行业 8%）；44%每日在无环境控制室内、16%每周，29%从不在受控室内；不能一律说环境受控。\n边界与授权｜设备护罩与危险能源隔离与电气测试由雇主按适用法规与制度评估与配置；不得擅自旁路防护危险运行，维修或清堵时须按适用程序隔离危险能量，超出本人职责的测试与维修按流程升级。 86%报告典型周40小时、14%超40；情境不等法律权限。美国1910.147覆盖可能意外启动/释放储能致伤的维修维护，有普通生产适用条件及例外；authorized employee须真实职责训练，头衔不自动授权。储能消除/断开/约束或使安全，作业前验证隔离断能，不一律零能量；停止按钮非隔离，复能按程序核设备人员清场与通知，异常消失不自动获复产权限。 美国1910.333适用暴露电气危险场景：原则上先断能，特殊不停电条件须由雇主核且仍有安全程序，不是测试可随意带电。断电未按程序锁挂仍按带电对待，qualified person核不能重启并用测试设备验无电/反送电或感应电；涉及未断能暴露电路仅合格人员按规定防护操作，普通绕线头衔不自动取得资格。复能须合格人员按程序核工具装置及清场通知，不凭测量结果正常直接恢复。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.profile.work-context-block.1",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         }
       ]
@@ -24954,10 +25046,10 @@
                 "url": "https://www.onetonline.org/link/details/51-2021.00"
               },
               {
-                "entity": "O*NET 招聘技术关键词页（51-2021.00）",
+                "entity": "O*NET-SOC 51-2021.00 职业详细资料",
                 "id": "link-14",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/hot_tech/51-2021.00"
+                "url": "https://www.onetonline.org/link/details/51-2021.00"
               },
               {
                 "entity": "O*NET-SOC 51-2021.00 职业详细资料",
@@ -24972,10 +25064,10 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
+                "entity": "美国OSHA1910.333电气作业安全（限适用场景）",
                 "id": "link-17",
                 "relation": "related-evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.333"
               },
               {
                 "entity": "O*NET-SOC 51-2021.00 职业摘要",
@@ -24984,10 +25076,10 @@
                 "url": "https://www.onetonline.org/link/summary/51-2021.00"
               },
               {
-                "entity": "O*NET 招聘技术关键词页（51-2021.00）",
+                "entity": "O*NET-SOC 51-2021.00 职业详细资料",
                 "id": "link-19",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/hot_tech/51-2021.00"
+                "url": "https://www.onetonline.org/link/details/51-2021.00"
               }
             ]
           },
@@ -25032,10 +25124,21 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把工具用在工单解析与检查清单生成与参数记录整理上，但把线径与匝数与张力与首件确认的最终判断留在本人与班组之内，并按规程处置设备异常与停机。"
+              "编辑试用候选：工单解析、清单与参数记录草稿，核材料版本单位现场读数；首件和正式参数由实际责任人确认，未取得模型正确率。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.13",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-nist-current"
+          ],
           "type": "prose"
         },
         {
@@ -25120,7 +25223,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "OEWS工资；BLS预测"
+              "O*NET全国工资分位：BLS精确SOC51-2021受雇工资"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.21",
@@ -25131,7 +25234,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "全国受雇工资；含自雇预测"
+              "只支持2025年5月全国年时工资分位；就业预测另见第7项BLS表1.2，自雇比例未提供，不填0。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.22",
@@ -25252,10 +25355,21 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表按三条真实工作方向比较：AI 与数字工具主要改变什么，以及哪些责任仍然留在人这一侧。三条方向来自该职业的任务结构（绕制作业与设备看护、端头与绝缘与涂覆处理、检查测试与拆装维护）。"
+              "三工作面是任务编辑归纳，拟用记录工具待验证，不能由目录证明已改变产线或取得权限。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.33",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-nist-current"
+          ],
           "type": "prose"
         },
         {
@@ -25263,10 +25377,21 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按工单与历史参数生成绕制检查清单与首件核对要点，把设备点检与参数记录整理成可核对的摘要。"
+              "编辑候选：合法工单和历史参数生成清单摘要，核原文版本与遗漏，不直接改设备参数。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.34",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-nist-current"
+          ],
           "type": "prose"
         },
         {
@@ -25274,10 +25399,21 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "确认线径与匝数与张力与排线状态、判断首件是否合格，并在参数偏离或设备异常时停机与调整。"
+              "现场参数首件与异常依实际安全质量程序核，由获授权者调整和恢复，不凭清单操作。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.35",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-nist-current"
+          ],
           "type": "prose"
         },
         {
@@ -25285,10 +25421,21 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "自动汇总端头与绝缘处理记录、生成工序检查与交接记录草稿。"
+              "编辑候选：端头绝缘记录与交接草稿，实测错误遗漏和复核耗时，不称已自动正确。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.36",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-nist-current"
+          ],
           "type": "prose"
         },
         {
@@ -25296,10 +25443,21 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断剥皮与弯折与绝缘嵌入是否达标、决定该件是否转入下道工序，并对处理质量与记录承担责任。"
+              "端头绝缘及转序判定按真实职责和授权；阶段或绕线头衔不赋所有质量放行权。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.37",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-nist-current"
+          ],
           "type": "prose"
         },
         {
@@ -25307,10 +25465,21 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "生成测试数据汇总与设备点检与备件台账模板。"
+              "编辑候选：测试、点检和备件汇总草稿，核设备材料版本与实际读数，非自动测试判定。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.38",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-nist-current"
+          ],
           "type": "prose"
         },
         {
@@ -25322,6 +25491,17 @@
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.39",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-nist-current"
+          ],
           "type": "prose"
         },
         {
@@ -25384,10 +25564,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得本职业行业工资中位数；已核全国工资边界如下。全国OEWS分位描述受雇工资薪金岗位的统计位置，不是起薪；on average的页面简写不能证明算术均值等于中位数。本轮未取得该职业行业工资中位数；地区工资可另由州或邮编查询。"
+              "全国受雇工资分位非起薪，on average不证明均值等同；精确行业工资本轮未取得，OOH父级51-2000行业中位仅作标注背景。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.45",
+          "source_refs": [
+            "coil-wage-current",
+            "coil-ooh-parent",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25549,10 +25734,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该职业的招聘技术关键词页显示 0 项软件技能；职业详细资料页另列出 3 项软件（电动机测试系统软件、图纸显示软件与线圈绕制控制软件），但未给出提及率；两者都不等于绕制与电测能力"
+              "O*NET软件目录3类：电机测试、图纸显示、绕线控制；Hot2025美国全国0条可列招聘词，不能推没有软件需求、零提及率或零AI采用。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.60",
+          "source_refs": [
+            "coil-hot-current",
+            "coil-onet-current"
+          ],
           "type": "prose"
         },
         {
@@ -25582,10 +25771,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "岗位结果回答就业规模预测，BLS 表1.2（2025—2035年，SOC 51-2021）预测：2025年就业约12,900人，2035年约12,400人，变化-4.0%，年均空缺约1,200个。预测包含自雇和替补需求，空缺不是净新增岗位；含模型假设与误差，不是某企业的招聘保证，也不是AI因果结论。"
+              "BLS表1.2 SOC51-2021：2025就业12.9千→2035预计12.4千，净变-0.5千、变化-4.0%、年均空缺1.2千；自雇比例列为“—”，不填0或给具体占比。空缺含增长/转职退出替换，非每年净增；全国预测非个人录用或AI因果。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.63",
+          "source_refs": [
+            "coil-ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -25626,7 +25818,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 51-2021.00 任务与工作活动；O*NET 招聘技术关键词页（51-2021.00）"
+              "O*NET51-2021.00详细资料Education/JobZone；新入职要求问卷，非现职学历或统一准入。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.67",
@@ -25659,10 +25851,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 表1.2（2025—2035年，SOC 51-2021）预测：2025年就业约12,900人，2035年约12,400人，变化-4.0%，年均空缺约1,200个。预测包含自雇和替补需求，空缺不是净新增岗位；含模型假设与误差，不是某企业的招聘保证，也不是AI因果结论。"
+              "BLS表1.2 SOC51-2021：2025就业12.9千→2035预计12.4千，净变-0.5千、变化-4.0%、年均空缺1.2千；自雇比例列为“—”，不填0或给具体占比。空缺含增长/转职退出替换，非每年净增；全国预测非个人录用或AI因果。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.70",
+          "source_refs": [
+            "coil-ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -25681,10 +25876,21 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。绕制参数与首件确认的最终判断、端头与绝缘处理质量判定、电气测试结论与设备维修与危险能源隔离须由具备相应训练与授权的岗位按适用法规与雇主制度作出；工具不承担该责任，也不免除设备安全义务。"
+              "工具不授参数、测试、维修或复能资格，不一概免除供应方责任。美国1910.147覆盖可能意外启动/释放储能致伤的维修维护，有普通生产适用条件及例外；authorized employee须真实职责训练，头衔不自动授权。储能消除/断开/约束或使安全，作业前验证隔离断能，不一律零能量；停止按钮非隔离，复能按程序核设备人员清场与通知，异常消失不自动获复产权限。 美国1910.333适用暴露电气危险场景：原则上先断能，特殊不停电条件须由雇主核且仍有安全程序，不是测试可随意带电。断电未按程序锁挂仍按带电对待，qualified person核不能重启并用测试设备验无电/反送电或感应电；涉及未断能暴露电路仅合格人员按规定防护操作，普通绕线头衔不自动取得资格。复能须合格人员按程序核工具装置及清场通知，不凭测量结果正常直接恢复。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.72",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-nist-current"
+          ],
           "type": "prose"
         },
         {
@@ -25692,10 +25898,21 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 51-2021.00 任务与工作活动；雇主与适用安全规程要求"
+              "美国OSHA333（本问主按钮）、147危险能源及212防护见风险/路径实际入口，各限适用场景，不是中国统一电工许可或NIST授权。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.73",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-nist-current"
+          ],
           "type": "prose"
         },
         {
@@ -25703,10 +25920,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有可靠公开来源支持给该职业设定消失年份；本页不提供这类预测。更有用的是跟踪绕制工艺与自动化与测试要求与安全制度的变化，而不是等待一个日期。"
+              "本轮未取得本职业消失年份可靠证据，不提供时间表；可核实际工艺设备、安全与测试要求变化。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.74",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25736,7 +25956,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 招聘技术关键词页（51-2021.00）；NIST AI RMF 1.0"
+              "O*NET51-2021.00任务；训练次序为编辑建议，非0条Hot或NIST证明的顺序；NIST仅为自愿通用治理框架。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.77",
@@ -25769,10 +25989,21 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "由工具完成工单解析与参数与点检与测试与交接记录整理，并记录所用工具与版本与数据来源与时间。"
+              "编辑待验证用途：从合法原材料试工单、参数点检及测试摘要，核准确遗漏和复核总耗时，未经核不替正式参数或测试结论。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.80",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-nist-current"
+          ],
           "type": "prose"
         },
         {
@@ -25784,6 +26015,17 @@
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.81",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-nist-current"
+          ],
           "type": "prose"
         },
         {
@@ -25802,10 +26044,21 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "由具备相应训练与授权的岗位确认电气测试判定与设备维修与停机复位；工具不承担该责任，也不免除设备与电气安全义务。"
+              "实际有训练职责权限的人员核测试、维修与停复机，工具不移转义务；供应方责任依具体规则，不一概免责。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.83",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-nist-current"
+          ],
           "type": "prose"
         },
         {
@@ -25846,10 +26099,21 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按信息分级与权限选择可用工具与部署方式，对可识别信息脱敏或使用受控系统，并保留访问与导出记录。"
+              "先核客户产品、个人信息、工单资料的合法用途及上传权限，再选获准系统；去标识/受控平台不自动合法，保留访问导出记录。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.87",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-nist-current"
+          ],
           "type": "prose"
         },
         {
@@ -26235,6 +26499,17 @@
             ]
           },
           "id": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.122",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-nist-current"
+          ],
           "type": "prose"
         }
       ]
@@ -26255,7 +26530,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-wages-2025"
+            "coil-nbs-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26270,7 +26545,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wages-2025"
+            "coil-nbs-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26373,10 +26648,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "同一行业门类下非私营与私营单位的均值差异主要反映单位类型与用工与薪酬结构差异，不表示本职业在两处的岗位差别；用它替代本职业工资会引入行业与用工形式两重偏差。"
+              "非私营与私营是不同单位调查人口，均值差不能分离单位、岗位、工时和人员结构效应，不推本职业工资差异。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.china-salary.career-snapshot-primary-locale.10",
+          "source_refs": [
+            "coil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26593,10 +26872,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：参数与检验方向通常要求设备操作经验与量测与电测基础；本页不把学历直接对应到收入区间。"
+              "编辑能力核对：设备、量测电测训练与实际权限逐岗核，无本轮代表性招聘证明统一条件。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.china-salary.career-snapshot-primary-locale.30",
+          "source_refs": [
+            "coil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26626,7 +26909,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：电气安全与设备操作相关培训是岗位要求的组成部分，实际认定以主管部门与企业规定为准，本页不代替报考与取证条件。"
+              "编辑核对建议：按目标工件、设备、任务和真实法域核电气安全/设备操作培训及授权；本轮未取得中国统一招聘门槛，美国OSHA不作为中国统一证照条件。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.china-salary.career-snapshot-primary-locale.33",
@@ -26769,10 +27052,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "比较不同机会时应确认用工形式（电机与电气元件制造、家用电器与电动工具制造、工业设备维修与再制造）、班次与计件方式与防护与设备条件与培训要求，并明确本页两条数值是行业均值代理而非本职业口径。"
+              "比较具体雇主主营行业、真实用工形式、班次计件、防护设备与培训；电机制造或维修是行业/业务场景，不是用工形式。NBS2025表2/5制造C非私113,594/私76,055元/年为主营制造单位全门类年平均工资背景，非绕线工中位数起薪月薪；中国精确全国职业工资、地区及一一对应映射本轮未取得。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.china-salary.career-snapshot-primary-locale.46",
+          "source_refs": [
+            "coil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26791,7 +27078,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不提供中国大陆该岗位的月薪区间或城市排名；工件类型与地区与用工形态差异很大，比较时应把绕制与端头与绝缘与电测职责范围与设备与安全要求纳入书面确认。"
+              "本页不提供中国本职业月薪区间或城市排名；编辑建议核工件、地区、用工形态、绕制端头绝缘电测职责、设备及安全条件，本轮无收入差异幅度估计。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.china-salary.career-snapshot-primary-locale.48",
@@ -26936,11 +27223,11 @@
             ]
           },
           "fact_refs": [
-            "us-wage-2025"
+            "coil-nine-us-wage-2025"
           ],
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "bls-pay"
+            "coil-wage-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26955,7 +27242,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "bls-pay"
+            "coil-wage-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26985,7 +27272,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "bls-entry"
+            "coil-cert-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27000,7 +27287,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "bls-pay"
+            "coil-wage-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27030,7 +27317,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.7",
           "source_refs": [
-            "bls-pay"
+            "coil-wage-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27150,10 +27437,17 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位。该分位不包含班次与加班与地区与用工形态差异的个体分布。；O*NET 全国工资分位页面（51-2021.00）｜https://www.onetonline.org/link/localwages/51-2021.00"
+              "第90分位是聚合分布上端，无法分离班次、加班、地区和资历效应，非个人报价。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.18",
+          "source_refs": [
+            "coil-wage-current",
+            "coil-ep-current",
+            "coil-oews-current",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27227,10 +27521,17 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界：OEWS2025工资分位覆盖受雇工资薪金，不含自雇业主收入；BLS2025—2035就业预测包含自雇，不能套用工资覆盖。全国中位数不是起薪或个人报价，on average简写不是均值证明。本轮未取得行业中位数与班次细分；地区工资可用O*NET州/邮编入口另查。"
+              "OEWS受雇工资排自雇，EP就业覆盖另核；本职业自雇比例表为“—”不填0。全国Median非均值起薪，精确行业、地区与班次数据本轮未完整取得；父级装配行业中位只作背景。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.25",
+          "source_refs": [
+            "coil-wage-current",
+            "coil-ep-current",
+            "coil-oews-current",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27249,10 +27550,17 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该职业的用工形态差异较大（正式岗与劳务派遣与计件与夜班与订单波动），因此公开分位主要反映受雇工资薪金岗位；行业与产品类型与地区会影响收入水平，但需按精确职业与地区数据比较。"
+              "聚合受雇工资不按计件/夜班/派遣标签全部排除；本轮未有各用工类型工资效应，核具体报价与工资组成。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.27",
+          "source_refs": [
+            "coil-wage-current",
+            "coil-ep-current",
+            "coil-oews-current",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27271,10 +27579,17 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 工作情境显示 39% 每天面临严格时限、45% 每周一次以上但不每天、46% 对作出决定拥有很大自由度；加班与轮班会显著影响阶段性收入。"
+              "O*NET39%每日时限/45%每周、46%决策多自由度为受访情境，不证明加班轮班收入显著效应。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.29",
+          "source_refs": [
+            "coil-wage-current",
+            "coil-ep-current",
+            "coil-oews-current",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27293,10 +27608,17 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工作场景以制造业为主（该职业行业分布 92%）、其他行业合计 8%；不同地区的电机制造与电气元件与设备维修产业密度会影响机会与收入水平，本页不逐州列出，也不以最高值或州示例当作普遍水平。"
+              "O*NET2025制造92%/其他8%为就业结构，不证明产业密度收入效应；核具体单位岗位报价。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.31",
+          "source_refs": [
+            "coil-wage-current",
+            "coil-ep-current",
+            "coil-oews-current",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27326,10 +27648,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "制造业"
+              "运输设备制造（父级装配职业背景）"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.34",
+          "source_refs": [
+            "coil-ooh-parent"
+          ],
           "type": "prose"
         },
         {
@@ -27337,10 +27662,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行业就业占比 92%（O*NET 行业分布）"
+              "50,790美元/年（2025年5月父级51-2000行业中位数）"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.35",
+          "source_refs": [
+            "coil-ooh-parent"
+          ],
           "type": "prose"
         },
         {
@@ -27348,10 +27676,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行为就业占比而非行业工资；O*NET 该职业页面未提供行业工资中位数。"
+              "BLS OOH父级Assemblers and Fabricators（51-2000）2025年5月行业年工资中位，含多种装配职业，非SOC51-2021绕线工行业工资；精确本职业行业、地区及班次细分本轮未完整取得。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.36",
+          "source_refs": [
+            "coil-ooh-parent"
+          ],
           "type": "prose"
         },
         {
@@ -27359,10 +27690,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他行业合计"
+              "机械制造（父级装配职业背景）"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.37",
+          "source_refs": [
+            "coil-ooh-parent"
+          ],
           "type": "prose"
         },
         {
@@ -27370,10 +27704,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行业就业占比合计 8%（O*NET 行业分布）"
+              "47,350美元/年（2025年5月父级51-2000行业中位数）"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.38",
+          "source_refs": [
+            "coil-ooh-parent"
+          ],
           "type": "prose"
         },
         {
@@ -27381,10 +27718,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行为就业占比而非行业工资；页面把其他行业合并为一档（含其他服务（除公共行政）），未进一步拆分。"
+              "BLS OOH父级Assemblers and Fabricators（51-2000）2025年5月行业年工资中位，含多种装配职业，非SOC51-2021绕线工行业工资；精确本职业行业、地区及班次细分本轮未完整取得。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.39",
+          "source_refs": [
+            "coil-ooh-parent"
+          ],
           "type": "prose"
         },
         {
@@ -27392,10 +27732,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与地区工资细分"
+              "计算机及电子产品制造（父级装配职业背景）"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.40",
+          "source_refs": [
+            "coil-ooh-parent"
+          ],
           "type": "prose"
         },
         {
@@ -27403,10 +27746,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该职业按行业或地区细分的工资中位数"
+              "45,540美元/年（2025年5月父级51-2000行业中位数）"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.41",
+          "source_refs": [
+            "coil-ooh-parent"
+          ],
           "type": "prose"
         },
         {
@@ -27414,10 +27760,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "缺少细分数值时不使用行业均值或相邻职业数据替代；如需比较可查阅 OEWS 的行业与地区查询入口。"
+              "BLS OOH父级Assemblers and Fabricators（51-2000）2025年5月行业年工资中位，含多种装配职业，非SOC51-2021绕线工行业工资；精确本职业行业、地区及班次细分本轮未完整取得。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.42",
+          "source_refs": [
+            "coil-ooh-parent"
+          ],
           "type": "prose"
         },
         {
@@ -27425,10 +27774,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "班次与加班与资历差异"
+              "金属制品制造（父级装配职业背景）"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.43",
+          "source_refs": [
+            "coil-ooh-parent"
+          ],
           "type": "prose"
         },
         {
@@ -27436,10 +27788,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得按班次（日班与夜班与轮班）或加班时长细分的工资中位数"
+              "45,500美元/年（2025年5月父级51-2000行业中位数）"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.44",
+          "source_refs": [
+            "coil-ooh-parent"
+          ],
           "type": "prose"
         },
         {
@@ -27447,10 +27802,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该页面的分位数据来自受雇工资薪金岗位统计，不能用于推断某一班次或某一用工形态的个人收入。"
+              "BLS OOH父级Assemblers and Fabricators（51-2000）2025年5月行业年工资中位，含多种装配职业，非SOC51-2021绕线工行业工资；精确本职业行业、地区及班次细分本轮未完整取得。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.45",
+          "source_refs": [
+            "coil-ooh-parent"
+          ],
           "type": "prose"
         },
         {
@@ -27458,7 +27816,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不是。中位数描述的是全部受雇者在统计期的中间位置，第 10 分位 37,540 美元也不能当作入门起薪；入门薪酬还取决于地区、行业、班次与培训与授权要求。"
+              "不是。精确SOC51-2021中位数是受雇群体统计位置，第10分位37540美元不是起薪；编辑建议核目标地区、行业、班次、培训授权及实际报价，不推个人入门薪酬。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.46",
@@ -27469,10 +27827,17 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不能。该页面的年度工资按统计方法折算，并非每个人实际有薪时数；该职业加班与轮班较常见，没有个人工时与班次安排时，不能推算年薪、月收入或税后所得。"
+              "OEWS通常以2080小时折算年值，非个人实际有薪工时；官方年/时中位不用于推本人月薪加班或税后。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.47",
+          "source_refs": [
+            "coil-wage-current",
+            "coil-ep-current",
+            "coil-oews-current",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27491,10 +27856,17 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与产品类型（电机制造、变压器与电感、家电与电动工具、设备维修与再制造）、班次与加班与资历与是否承担参数设定与电测职责都会影响实际收入；本页不预测个人收入。"
+              "比较具体报价的设备产品、班次工时、参数测试责任、训练和福利；本轮未取得各因素独立工资效应。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.49",
+          "source_refs": [
+            "coil-wage-current",
+            "coil-ep-current",
+            "coil-oews-current",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27604,7 +27976,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.fit.riasec-fit-block.4",
           "source_refs": [
-            "bls-entry"
+            "coil-cert-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27664,7 +28036,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.fit.riasec-fit-block.8",
           "source_refs": [
-            "nasa-seh"
+            "editorial"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27849,10 +28221,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格在本页只用于描述工作方式，不作为录用依据。与该职业任务更相关的是尽责性维度下的规格执行与逐件核对、以及情绪稳定性在重复精细操作与设备节拍条件下的作用；这些特质影响你如何稳定出件，而不是你能不能学会绕制与端头处理。"
+              "职业风格可作编辑观察线索，本轮未取得绕线工大五绩效预测效度；核规格和记录行为，不给人格影响稳定出件的因果结论。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.fit.personality-fit-block.6",
+          "source_refs": [
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27894,10 +28270,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣取向：该职业群体的兴趣代码为 RC（现实型、常规型），日常任务以绕制作业与端头与绝缘处理与检查测试与拆装维护为主。"
+              "O*NET职业内容兴趣RC，R92/C53/I21/E7/S2/A0，非从业者比例、个人测评分或录用成功率。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.fit.personality-fit-block.10",
+          "source_refs": [
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27928,7 +28308,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：MBTI 类型不是招聘条件，本页不提供按类型筛选岗位的建议。"
+              "本轮未核所有雇主招聘规则，本页不据MBTI作录用判断；本职业适用预测效度未取得。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.fit.personality-fit-block.13",
@@ -27939,10 +28319,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样不是职业测评工具，没有官方职业证据支持。可替代的做法是用具体行为验证兴趣：能否就一个虚构工件与线材写出绕制与端头与绝缘要点，能否把一组虚构参数与测试记录整理成排查清单，能否写出一页含设备防护与危险能源隔离与人因安排要点的作业方案摘要。"
+              "本轮未取得本职业九型适配效度，不据类型筛选；可用合法虚构纸面工单、参数记录核计量与异常沟通，实机另需训练权限。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.fit.personality-fit-block.14",
+          "source_refs": [
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28085,10 +28469,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：与该职业任务最贴合的信号是「愿意按规格逐件核对并稳定完成重复精细操作」与「在产量压力下仍守住质量与安全步骤」；兴趣代码为 RC，但代码只描述群体分布，不决定个人是否适合。"
+              "编辑适配线索是愿意按规格核对重复操作并守安全；O*NET职业内容兴趣RC，R92/C53/I21/E7/S2/A0，非从业者比例、个人测评分或录用成功率。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.fit.personality-fit-block.27",
+          "source_refs": [
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28122,6 +28510,11 @@
             ]
           },
           "id": "coil-winders-tapers-and-finishers.fit.personality-fit-block.30",
+          "source_refs": [
+            "coil-neighbor-49-2092.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28140,7 +28533,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：愿意在航空装配环境按严格文件与扭矩要求作业。"
+              "编辑适合信号：愿意按真实航空产品装配文件核部件连接与紧固、记录及对应训练；具体标准逐岗位核。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.fit.personality-fit-block.32",
@@ -28155,6 +28548,11 @@
             ]
           },
           "id": "coil-winders-tapers-and-finishers.fit.personality-fit-block.33",
+          "source_refs": [
+            "coil-neighbor-51-2011.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28188,6 +28586,11 @@
             ]
           },
           "id": "coil-winders-tapers-and-finishers.fit.personality-fit-block.36",
+          "source_refs": [
+            "coil-neighbor-51-2022.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28221,6 +28624,11 @@
             ]
           },
           "id": "coil-winders-tapers-and-finishers.fit.personality-fit-block.39",
+          "source_refs": [
+            "coil-neighbor-51-2031.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28254,6 +28662,11 @@
             ]
           },
           "id": "coil-winders-tapers-and-finishers.fit.personality-fit-block.42",
+          "source_refs": [
+            "coil-neighbor-51-2061.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28287,6 +28700,11 @@
             ]
           },
           "id": "coil-winders-tapers-and-finishers.fit.personality-fit-block.45",
+          "source_refs": [
+            "coil-neighbor-53-7063.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28294,7 +28712,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不是。把职业简化为「最合适的一种性格」会掩盖真实差异：电机制造企业与变压器与电感企业与大修与再制造车间的工作方式差别很大。更有用的做法是用一次可交付的绕制与端头处理与电测练习验证。"
+              "本页不据单一性格裁定适配。编辑建议逐岗核电机、变压器电感、维修或再制造现场的工件设备和分工；本轮未量化差异，可在合法教学条件下观察参数、质量与安全核对。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.fit.personality-fit-block.46",
@@ -28305,10 +28723,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。该职业以设备看护与精细手工与记录为主，O*NET 工作情境显示 87% 持续用手操作、83% 持续做重复动作、57% 每天接触污染物；内向者可以通过固定点检与首件清单建立可靠的工作方式，但与班组与上下工序的交接与异常上报仍然是硬性要求。"
+              "手作、重复和污染物比例不证明内向适配，固定清单是编辑建议，需核班组交接与异常沟通，不按内外向给录用预测。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.fit.personality-fit-block.47",
+          "source_refs": [
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28316,7 +28738,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。外向本身不是优势或劣势，关键是能否把参数与规格要求讲清并守住核对步骤；如果更偏好协作与沟通，可以侧重班组交接与质量异常协调与设备点检组织类任务。"
+              "本轮无内外向绩效比较证据，不判断外向优势或劣势；编辑建议以参数说明、规格核对、交接和异常协调实际记录观察。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.fit.personality-fit-block.48",
@@ -28360,10 +28782,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业对数量理解为实用要求：O*NET 知识清单包含数学与控制精度与知觉速度相关能力，绕制匝数与线径与电阻与量测换算需要可靠的计量习惯。"
+              "数学知识66、控制精度56、知觉速度44支持计量核对，不是个人IQ或数学准入分数；数量理解用单位、匝数和记录任务观察。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.fit.personality-fit-block.52",
+          "source_refs": [
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28371,10 +28797,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业对人因与安全的要求突出：O*NET 工作情境显示 83% 持续做重复动作、87% 持续用手操作、41% 每天可能接触轻微烧伤或割伤、53% 每天暴露于噪声；把工位高度与工具与间歇安排固定为习惯，并按公开职业健康机构的人因建议执行，是可练习的技术。"
+              "NIOSH一般风险指引支持重复、用力、姿势及持续时间/强度/频率评估，不是本职业发生率或个人诊断。工程消除/替代/改工具工位优先，轮岗休息等管理控制补充，PPE不能代替更有效措施；具体方案由实际评估确定，不给统一间歇时间。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.fit.personality-fit-block.53",
+          "source_refs": [
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28492,10 +28923,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对准备层级（Job Zone 1-2）与该页面显示的教育分布（57% 受访者回答需要高中文凭或同等学历）"
+              "O*NET新入职教育要求57%高中同等、41%中学后非学位证书、2%低于高中，非现职学历/中国招聘；JobZone1–2/SVP低于6为准备分组，非个人统一年限。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.fit.personality-fit-block.64",
+          "source_refs": [
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28582,7 +29017,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.risk.career-risk-cards.1",
           "source_refs": [
-            "nasa-seh"
+            "editorial"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28612,7 +29047,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.risk.career-risk-cards.3",
           "source_refs": [
-            "nasa-seh"
+            "editorial"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28627,7 +29062,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.risk.career-risk-cards.4",
           "source_refs": [
-            "nasa-seh"
+            "editorial"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28735,10 +29170,20 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：任务与情境用O*NET美国职业资料；工资为OEWS2025受雇工资薪金，预测为BLS表1.2含自雇就业。OSHA1910.212与1910.147支持美国覆盖范围内的防护和能量控制；NIOSH支持一般人因风险识别。中国具体程序须核适用法规、企业制度与设备说明书。"
+              "O*NET支持任务情境；美国147维修危险能源、333暴露电气工作、212机器防护与NIOSH一般人因指引各支持适用范围，中国具体资格程序本轮未完整核。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.risk.career-risk-cards.10",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28768,10 +29213,20 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按工单核对线径与匝数与张力，先做首件确认再批量绕制，发现排线不齐或匝数偏差先停机调整并留样记录。"
+              "编辑规格核对：按批准工单核线径匝数张力、首件记录，异常按真实安全质量程序停止升级，调整复产依实际权限。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.risk.career-risk-cards.13",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28801,7 +29256,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "剥皮长度或弯折角度不当或绝缘嵌入压伤导线，会造成导通不良与绝缘耐压不合格，且在后续装配后才暴露。"
+              "剥皮、弯折或绝缘处理中损伤导线，可能造成导通或耐压问题，可能在自检、电测或后续装配发现；不假定全部缺陷都在装配后才暴露。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.risk.career-risk-cards.16",
@@ -28856,10 +29311,20 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程设置量测与电测条件并记录结果，对超差或绝缘异常先隔离并上报，判定标准与判定人写清，测试结论由具备相应职责的岗位确认。"
+              "按批准条件测试记录，超差绝缘异常隔离并上报，判定人/标准留痕；电气暴露场景须核真实资格程序。美国1910.333适用暴露电气危险场景：原则上先断能，特殊不停电条件须由雇主核且仍有安全程序，不是测试可随意带电。断电未按程序锁挂仍按带电对待，qualified person核不能重启并用测试设备验无电/反送电或感应电；涉及未断能暴露电路仅合格人员按规定防护操作，普通绕线头衔不自动取得资格。复能须合格人员按程序核工具装置及清场通知，不凭测量结果正常直接恢复。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.risk.career-risk-cards.21",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28900,10 +29365,20 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "确认护罩与联锁完好并功能有效，不拆除或旁路；清堵与维修前按适用程序隔离危险能源并验证零能量状态后再作业，超出本人职责的维修交给授权岗位。"
+              "美国1910.147覆盖可能意外启动/释放储能致伤的维修维护，有普通生产适用条件及例外；authorized employee须真实职责训练，头衔不自动授权。储能消除/断开/约束或使安全，作业前验证隔离断能，不一律零能量；停止按钮非隔离，复能按程序核设备人员清场与通知，异常消失不自动获复产权限。 美国1910.212操作点与卷入旋转等需适当机器防护，手工具不能代防护；不得擅自拆除/旁路防护危险运行，维修拆卸按实际控制程序，不把所有拆卸一律禁止。 美国1910.333适用暴露电气危险场景：原则上先断能，特殊不停电条件须由雇主核且仍有安全程序，不是测试可随意带电。断电未按程序锁挂仍按带电对待，qualified person核不能重启并用测试设备验无电/反送电或感应电；涉及未断能暴露电路仅合格人员按规定防护操作，普通绕线头衔不自动取得资格。复能须合格人员按程序核工具装置及清场通知，不凭测量结果正常直接恢复。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.risk.career-risk-cards.25",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28944,10 +29419,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按人因建议调整工位高度与工具与间歇安排，使用适用夹具减少重复用力，出现持续不适按流程上报并调整。"
+              "NIOSH一般风险指引支持重复、用力、姿势及持续时间/强度/频率评估，不是本职业发生率或个人诊断。工程消除/替代/改工具工位优先，轮岗休息等管理控制补充，PPE不能代替更有效措施；具体方案由实际评估确定，不给统一间歇时间。 持续不适按现场职业健康途径报告，不自行诊断或用休息代工程控制。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.risk.career-risk-cards.29",
+          "source_refs": [
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28977,7 +29457,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "工单与材料批次与参数与测试结果与异常处置记录缺失或不可追溯，会在质量追溯与客户投诉处理中无法定位原因，也难以证明本岗位已按规格执行。"
+              "工单、材料批次、参数、测试或异常记录缺失，可能妨碍质量追溯、原因定位及执行证明，不断言无法由其他证据定位。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.risk.career-risk-cards.32",
@@ -29032,10 +29512,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对知识、能力与兴趣代码 RC 与工作风格清单"
+              "NIOSH一般重复用力姿势、强度频率持续时间风险识别，不是本职业发生率、知识兴趣或个人诊断"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.risk.career-risk-cards.37",
+          "source_refs": [
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29043,10 +29528,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对行业分布与就业结构"
+              "美国1910.147覆盖可能意外启动/释放储能致伤的维修维护，有普通生产适用条件及例外；authorized employee须真实职责训练，头衔不自动授权。储能消除/断开/约束或使安全，作业前验证隔离断能，不一律零能量；停止按钮非隔离，复能按程序核设备人员清场与通知，异常消失不自动获复产权限。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.risk.career-risk-cards.38",
+          "source_refs": [
+            "coil-osha-loto"
+          ],
           "type": "prose"
         },
         {
@@ -29054,10 +29542,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明任务暴露的度量思路与其指标限制"
+              "美国1910.212操作点与卷入旋转等需适当机器防护，手工具不能代防护；不得擅自拆除/旁路防护危险运行，维修拆卸按实际控制程序，不把所有拆卸一律禁止。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.risk.career-risk-cards.39",
+          "source_refs": [
+            "coil-osha-guard"
+          ],
           "type": "prose"
         }
       ]
@@ -29078,7 +29569,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.1",
           "source_refs": [
-            "onet-training"
+            "coil-onet-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -29352,10 +29843,22 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界：学历、岗位培训、证书、执照与岗位授权必须分别核对。该职业页面的全国认证页显示未找到认证，因此本页不列出任何认证名目；培训证书不等于上岗授权，设备操作、电气测试、维修与危险能源隔离权限应以岗位说明、企业培训与适用安全制度为准；在美国，雇主的机器防护与危险能源控制义务由适用职业安全法规规定（本页按 1910.212 与 1910.147 的一般框架表述）；在中国大陆，电气安全与设备操作与维修要求须按主管部门与企业规定执行；本页不把任何培训写成法定资质。"
+              "认证页本轮仍未找到，不能推没有全部行业资格；按职责核训练与授权，美国电气暴露须另核333，147不代全部电气条款。美国1910.147覆盖可能意外启动/释放储能致伤的维修维护，有普通生产适用条件及例外；authorized employee须真实职责训练，头衔不自动授权。储能消除/断开/约束或使安全，作业前验证隔离断能，不一律零能量；停止按钮非隔离，复能按程序核设备人员清场与通知，异常消失不自动获复产权限。 美国1910.333适用暴露电气危险场景：原则上先断能，特殊不停电条件须由雇主核且仍有安全程序，不是测试可随意带电。断电未按程序锁挂仍按带电对待，qualified person核不能重启并用测试设备验无电/反送电或感应电；涉及未断能暴露电路仅合格人员按规定防护操作，普通绕线头衔不自动取得资格。复能须合格人员按程序核工具装置及清场通知，不凭测量结果正常直接恢复。 中国具体资格细则本轮未完整核，不移植美国qualified person为中国证。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.21",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-cert-current",
+            "coil-ooh-parent"
+          ],
           "type": "prose"
         },
         {
@@ -29418,10 +29921,22 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对机器防护的一般要求（护罩与联锁不得拆除或旁路）"
+              "美国1910.212操作点与卷入旋转等需适当机器防护，手工具不能代防护；不得擅自拆除/旁路防护危险运行，维修拆卸按实际控制程序，不把所有拆卸一律禁止。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.27",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-cert-current",
+            "coil-ooh-parent"
+          ],
           "type": "prose"
         },
         {
@@ -29429,10 +29944,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求岗位培训与基本识图与计量能力。"
+              "编辑能力核对：可核岗位培训与基本识图与计量能力。 非统一雇主门槛，具体职责权限另核。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.28",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29451,10 +29976,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示一份可复核的绕制与安全记录。"
+              "能出示一份可复核的绕制与安全记录。 无经历用合法明确虚构材料，不冒真实产线记录。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.30",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29484,10 +30019,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "须具备张力与排线判断与异常识别能力。"
+              "编辑能力核对：可核张力与排线判断与异常识别能力。 非统一雇主门槛，具体职责权限另核。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.33",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29506,10 +30051,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示参数与首件与检验记录。"
+              "能出示参数与首件与检验记录。 无经历用合法明确虚构材料，不冒真实产线记录。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.35",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29539,10 +30094,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求多工件与多线材经验。"
+              "编辑能力核对：可核多工件与多线材经验。 非统一雇主门槛，具体职责权限另核。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.38",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29561,10 +30126,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示工艺文件与分析报告与带教记录。"
+              "能出示工艺文件与分析报告与带教记录。 无经历用合法明确虚构材料，不冒真实产线记录。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.40",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29594,10 +30169,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求企业内职责与长期经验。"
+              "编辑能力核对：可核企业内职责与长期经验。 非统一雇主门槛，具体职责权限另核。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.43",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29616,10 +30201,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示制度文件与培训与检查记录。"
+              "能出示制度文件与培训与检查记录。 无经历用合法明确虚构材料，不冒真实产线记录。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.45",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29649,10 +30244,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求量具与电测基础。"
+              "编辑能力核对：可核量具与电测基础。 非统一雇主门槛，具体职责权限另核。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.48",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29671,10 +30276,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示量测数据与记录与支持记录。"
+              "能出示量测数据与记录与支持记录。 无经历用合法明确虚构材料，不冒真实产线记录。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.50",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29704,10 +30319,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "须具备测试条件与判定标准理解并获得相应授权。"
+              "编辑能力核对：可核测试条件与判定标准理解并获得相应授权。 非统一雇主门槛，具体职责权限另核。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.53",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29726,10 +30351,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示测试记录与判定依据与处置记录。"
+              "能出示测试记录与判定依据与处置记录。 无经历用合法明确虚构材料，不冒真实产线记录。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.55",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29759,10 +30394,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求工艺与测试综合经验。"
+              "编辑能力核对：可核工艺与测试综合经验。 非统一雇主门槛，具体职责权限另核。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.58",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29781,10 +30426,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示分析报告与改进与追溯记录。"
+              "能出示分析报告与改进与追溯记录。 无经历用合法明确虚构材料，不冒真实产线记录。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.60",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29814,10 +30469,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求企业内职责与长期经验。"
+              "编辑能力核对：可核企业内职责与长期经验。 非统一雇主门槛，具体职责权限另核。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.63",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29836,10 +30501,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示标准文件与培训与检查记录。"
+              "能出示标准文件与培训与检查记录。 无经历用合法明确虚构材料，不冒真实产线记录。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.65",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29869,10 +30544,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求设备结构与安全理解。"
+              "编辑能力核对：可核设备结构与安全理解。 非统一雇主门槛，具体职责权限另核。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.68",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29891,10 +30576,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示点检记录与异常上报记录。"
+              "能出示点检记录与异常上报记录。 无经历用合法明确虚构材料，不冒真实产线记录。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.70",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29924,10 +30619,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "须熟悉设备结构与维修流程。"
+              "编辑能力核对：可核设备结构与维修流程。 非统一雇主门槛，具体职责权限另核。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.73",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29935,10 +30640,22 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "把停机与复位流程写成书面步骤。"
+              "编辑制度整理：在获准范围记录现场正式停机复能程序与责任人，不自己编步骤当操作许可。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.74",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-cert-current",
+            "coil-ooh-parent"
+          ],
           "type": "prose"
         },
         {
@@ -29946,10 +30663,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示保养记录与工单与协调记录。"
+              "能出示保养记录与工单与协调记录。 无经历用合法明确虚构材料，不冒真实产线记录。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.75",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29979,10 +30706,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求授权资质与安全管理经验。"
+              "编辑能力核对：可核授权资质与安全管理经验。 非统一雇主门槛，具体职责权限另核。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.78",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -30001,10 +30738,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示授权与培训与检查与整改记录。"
+              "能出示授权与培训与检查与整改记录。 无经历用合法明确虚构材料，不冒真实产线记录。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.80",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -30034,10 +30781,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求企业内职责与长期经验。"
+              "编辑能力核对：可核企业内职责与长期经验。 非统一雇主门槛，具体职责权限另核。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.83",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -30056,10 +30813,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示制度文件与授权与培训记录。"
+              "能出示制度文件与授权与培训记录。 无经历用合法明确虚构材料，不冒真实产线记录。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.career-path-block.85",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -30098,7 +30865,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "编辑能力核对（非招聘样本）",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -30108,39 +30875,51 @@
                 "在督导下完成材料装载与简单绕制与端头处理并执行防护与安全要求。",
                 "操作规范性、防护是否佩戴、异常是否及时上报。",
                 "用岗位培训与操作记录与班组长评价证明。",
-                "本页设计的入门体验重心为装载、记录与异常升级；参数设定、首件及电测判定是否包含在真实岗位，须看训练与授权。"
+                "本页设计的入门体验重心为装载、记录与异常升级；参数设定、首件及电测判定是否包含在真实岗位，须看训练与授权。 具体训练、测试及放行权限按真实分工。"
               ],
               [
                 "绕制与参数岗",
                 "独立完成参数设定与首件确认与批量绕制并处理常见异常。",
                 "参数是否达标、首件是否确认、异常处置是否及时完整。",
                 "用参数记录与首件与检验记录证明。",
-                "本页设计的参数阶段重心为既定规格下的参数核对；换产与新材料工艺责任须按具体岗位核对。"
+                "本页设计的参数阶段重心为既定规格下的参数核对；换产与新材料工艺责任须按具体岗位核对。 具体训练、测试及放行权限按真实分工。"
               ],
               [
                 "工艺与不合格分析岗",
                 "承担换产与新工件与线材的工艺设定与不合格分析并带教新同事。",
                 "工艺稳定性、分析依据、带教与检查执行情况。",
                 "用工艺文件与分析报告与带教记录证明。",
-                "与参数岗相比增加工艺设定与质量把关责任。"
+                "与参数岗相比增加工艺设定与质量把关责任。 具体训练、测试及放行权限按真实分工。"
               ],
               [
                 "设备与电气测试岗",
                 "参与设备点检与维修协调与电气测试与危险能源隔离与防护制度建设。",
                 "点检与测试记录、异常处置、培训与防护覆盖。",
                 "用点检与测试与培训记录证明。",
-                "与参数岗相比侧重设备与测试体系而非单一工件产出。"
+                "与参数岗相比侧重设备与测试体系而非单一工件产出。 具体训练、测试及放行权限按真实分工。"
               ],
               [
                 "产线与质量管理岗",
                 "负责产线节拍与质量标准与不合格品处置与对外质量沟通。",
                 "质量与交付指标、不合格品处置、客户与下游沟通。",
                 "用质量与产线运营记录证明。",
-                "与参数岗相比增加不合格品判定与对外质量责任。"
+                "与参数岗相比增加不合格品判定与对外质量责任。 具体训练、测试及放行权限按真实分工。"
               ]
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.entry-role-comparison.1",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-cert-current",
+            "coil-ooh-parent"
+          ],
           "title": "入门方向比较",
           "type": "table"
         },
@@ -30310,7 +31089,7 @@
                 "试用或带岗期",
                 "在督导下承担实际绕制与端头处理并接受安全与质量与记录检查。",
                 "是否按规格与规程执行、是否及时上报异常、被指出问题后的改正速度。",
-                "带岗期表现不等于长期能力上限，产品类型与带教质量影响很大。"
+                "带岗期表现不等于长期能力上限；编辑建议另核目标产品、带教安排与观察条件，本轮未量化其影响。"
               ]
             ]
           },
@@ -30415,7 +31194,7 @@
               "求职现实作用",
               "是否普遍入职门槛",
               "报考／注册条件",
-              "投入等级",
+              "本轮投入证据",
               "重要限制"
             ],
             "rows": [
@@ -30424,8 +31203,8 @@
                 "需核对目标岗位学历条件的求职者",
                 "帮助对照具体岗位公告；本页没有中国全国入职条件调查。",
                 "否（部分岗位以在岗培训与经验替代部分学历要求）",
-                "完成基础教育并具备基本计量与识图与工艺文件阅读能力",
-                "低",
+                "按具体岗位教育和能力条件核，不是统一认证报考条件",
+                "证据不足：本轮未取得费用、学习工时或投入等级",
                 "O*NET新聘学历需求调查所示三档为57%高中或同等、41%中学后非学位证书、2%低于高中；这些比例不是中国录用条件，也不能直接对应收入。"
               ],
               [
@@ -30434,7 +31213,7 @@
                 "影响可独立承担的设备与工序范围",
                 "按目标雇主与岗位核对",
                 "按雇主制度完成培训与在岗带教与考核",
-                "低中",
+                "证据不足：本轮未取得费用、学习工时或投入等级",
                 "在岗培训是承担一线工作的基础，但不等于企业外的资质或授权。"
               ],
               [
@@ -30452,8 +31231,8 @@
                 "决定可执行的设备内部作业范围",
                 "适用维修维护职责时核对",
                 "按雇主程序完成授权与培训与验证",
-                "中",
-                "该规则把实施上锁或挂牌的人定义为 authorized employee；受影响的设备操作员只有在职责包含规则覆盖的维修维护并获得相应程序与培训时才转为该角色，岗位名称本身不授予该权限。"
+                "证据不足：本轮未取得费用、学习工时或投入等级",
+                "美国1910.147覆盖可能意外启动/释放储能致伤的维修维护，有普通生产适用条件及例外；authorized employee须真实职责训练，头衔不自动授权。储能消除/断开/约束或使安全，作业前验证隔离断能，不一律零能量；停止按钮非隔离，复能按程序核设备人员清场与通知，异常消失不自动获复产权限。"
               ],
               [
                 "电气测试与量测授权",
@@ -30461,21 +31240,33 @@
                 "决定可执行的测试项目与判定范围",
                 "按测试职责与雇主制度核对",
                 "按企业与适用制度完成培训与授权",
-                "中",
-                "电气测试结论应由具备相应职责与训练的岗位作出，本页不把培训证书等同于测试判定授权。"
+                "证据不足：本轮未取得费用、学习工时或投入等级",
+                "美国1910.333适用暴露电气危险场景：原则上先断能，特殊不停电条件须由雇主核且仍有安全程序，不是测试可随意带电。断电未按程序锁挂仍按带电对待，qualified person核不能重启并用测试设备验无电/反送电或感应电；涉及未断能暴露电路仅合格人员按规定防护操作，普通绕线头衔不自动取得资格。复能须合格人员按程序核工具装置及清场通知，不凭测量结果正常直接恢复。"
               ],
               [
                 "个人防护与工位人因安排",
                 "进入车间并做重复精细操作的人",
-                "决定可进入的作业区域与作业方式",
+                "按危害评估安排，PPE不自动取得区域进入或测试权限",
                 "按实际危害评估核对",
                 "由雇主评估危害并选择合适且合身的防护用品并按人因建议调整工位",
-                "低中",
-                "防护用品与工位安排由雇主按危害评估与人因建议落实，操作员不能脱离现场评估自行把通用清单当作授权。"
+                "证据不足：本轮未取得费用、学习工时或投入等级",
+                "NIOSH一般风险指引支持重复、用力、姿势及持续时间/强度/频率评估，不是本职业发生率或个人诊断。工程消除/替代/改工具工位优先，轮岗休息等管理控制补充，PPE不能代替更有效措施；具体方案由实际评估确定，不给统一间歇时间。 美国PPE另核1910.132危害评估、合身选择及培训。"
               ]
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.credential-decision.1",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-cert-current",
+            "coil-ooh-parent"
+          ],
           "title": "资格选择",
           "type": "table"
         },
@@ -30484,13 +31275,25 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "学历、岗位训练、认证与授权分别核对。当前O*NET认证页未找到认证，不等于没有任何行业资格。设备维护能量隔离和电测判定须核覆盖职责、训练与雇主程序；个人防护安排依据实际危害评估。任何一项都不能替代其他项。",
-              "美国：该职业的准备层级为 Job Zone 1-2、SVP 低于 6.0，该页面教育分布显示 57% 的受访者回答需要高中文凭或同等学历、41% 回答需要中等后证书、2% 回答低于高中文凭（页面仅显示这三档比例）；雇主的机器防护与危险能源控制义务按适用职业安全法规逐项评估，岗位名称本身不授予上锁挂牌权限。",
+              "学历、岗位训练、认证与授权分别核对。当前O*NET认证页未找到认证，不等于没有任何行业资格。设备维护能量隔离和电测判定须核覆盖职责、训练与雇主程序；个人防护安排依据实际危害评估。任何一项都不能替代其他项。 美国1910.333适用暴露电气危险场景：原则上先断能，特殊不停电条件须由雇主核且仍有安全程序，不是测试可随意带电。断电未按程序锁挂仍按带电对待，qualified person核不能重启并用测试设备验无电/反送电或感应电；涉及未断能暴露电路仅合格人员按规定防护操作，普通绕线头衔不自动取得资格。复能须合格人员按程序核工具装置及清场通知，不凭测量结果正常直接恢复。",
+              "美国：该职业的准备层级为 Job Zone 1-2、SVP 低于 6.0，该页面新入职教育要求问卷显示 57% 的受访回答需要高中文凭或同等学历、41% 回答需要中等后证书、2% 回答低于高中文凭（页面仅显示这三档比例）；雇主的机器防护与危险能源控制义务按适用职业安全法规逐项评估，岗位名称本身不授予上锁挂牌权限。",
               "中国岗位请按具体工件与任务核职业归类和适用训练、操作与维修要求。本页未建立与美国51-2021.00一一对应的细类，不把境外证书或行业工资映射成中国法定资格。",
               "本页不保证任何培训被特定雇主承认，也不代替危险能源隔离与电气测试判定与不合格品处置的具体判断。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.path.credential-boundary.1",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-cert-current",
+            "coil-ooh-parent"
+          ],
           "title": "资格与练习边界",
           "type": "notice"
         },
@@ -30524,11 +31327,11 @@
             ]
           },
           "fact_refs": [
-            "us-employment-2025"
+            "coil-nine-us-employment-2025"
           ],
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls-projections-2025-2035"
+            "coil-ep-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30542,11 +31345,11 @@
             ]
           },
           "fact_refs": [
-            "us-growth-2025-2035"
+            "coil-nine-us-growth-2025-2035"
           ],
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls-projections-2025-2035"
+            "coil-ep-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30561,7 +31364,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls-projections-2025-2035"
+            "coil-ep-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30575,11 +31378,11 @@
             ]
           },
           "fact_refs": [
-            "us-openings-2025-2035"
+            "coil-nine-us-openings-2025-2035"
           ],
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls-projections-2025-2035"
+            "coil-ep-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30594,7 +31397,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.5",
           "source_refs": [
-            "onet-industry"
+            "coil-industry-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30609,7 +31412,7 @@
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.6",
           "source_refs": [
-            "bls-projections-2025-2035"
+            "coil-ep-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30933,7 +31736,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆（未建立一一对应的职业细类；以行业均值为显式代理）"
+              "中国大陆（本轮未核一一对应细类；制造业单位工资为背景）"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.28",
@@ -30999,10 +31802,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少电气与机械故障诊断与试运行维修经验。"
+              "编辑差距核对：电机线路开关安装与故障修理逐岗核，样本含电机绕线者，维护任务可能已交叠，先核本人已具能力。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.34",
+          "source_refs": [
+            "coil-neighbor-49-2092.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31014,6 +31822,11 @@
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.35",
+          "source_refs": [
+            "coil-neighbor-49-2092.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31021,10 +31834,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "另核岗位要求"
+              "本轮未核转岗时间、难度或成功率；依实际岗位任务和资格核，不因相邻自动互认。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.36",
+          "source_refs": [
+            "coil-neighbor-49-2092.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31032,10 +31850,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少航空装配的严格文件与扭矩与检验训练。"
+              "编辑差距核对：航空结构系统及真实产品装配标准和训练逐项核，先核本人已具能力。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.37",
+          "source_refs": [
+            "coil-neighbor-51-2011.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31047,6 +31870,11 @@
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.38",
+          "source_refs": [
+            "coil-neighbor-51-2011.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31054,10 +31882,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "另核岗位要求"
+              "本轮未核转岗时间、难度或成功率；依实际岗位任务和资格核，不因相邻自动互认。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.39",
+          "source_refs": [
+            "coil-neighbor-51-2011.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31065,10 +31898,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少更广的部件装配与接线与整机连接经验。"
+              "编辑差距核对：装配/改装电机电池电脑测试设备等依产品核，不假设全部无接线经验，先核本人已具能力。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.40",
+          "source_refs": [
+            "coil-neighbor-51-2022.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31080,6 +31918,11 @@
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.41",
+          "source_refs": [
+            "coil-neighbor-51-2022.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31087,10 +31930,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "另核岗位要求"
+              "本轮未核转岗时间、难度或成功率；依实际岗位任务和资格核，不因相邻自动互认。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.42",
+          "source_refs": [
+            "coil-neighbor-51-2022.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31098,10 +31946,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少整机装配与总装调试经验。"
+              "编辑差距核对：整机发动机/涡轮及类似机器构造装配重建逐项核，先核本人已具能力。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.43",
+          "source_refs": [
+            "coil-neighbor-51-2031.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31113,6 +31966,11 @@
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.44",
+          "source_refs": [
+            "coil-neighbor-51-2031.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31120,10 +31978,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "另核岗位要求"
+              "本轮未核转岗时间、难度或成功率；依实际岗位任务和资格核，不因相邻自动互认。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.45",
+          "source_refs": [
+            "coil-neighbor-51-2031.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31131,10 +31994,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少微小公差装配与走时调校经验。"
+              "编辑差距核对：计时装置窄公差装调及电气电子部件逐项核，不比较统一微小公差高低，先核本人已具能力。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.46",
+          "source_refs": [
+            "coil-neighbor-51-2061.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31146,6 +32014,11 @@
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.47",
+          "source_refs": [
+            "coil-neighbor-51-2061.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31153,10 +32026,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "另核岗位要求"
+              "本轮未核转岗时间、难度或成功率；依实际岗位任务和资格核，不因相邻自动互认。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.48",
+          "source_refs": [
+            "coil-neighbor-51-2061.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31164,10 +32042,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少产线送料与搬取与设备看护经验。"
+              "编辑差距核对：送料取料设备由其他人看护或自动，绕线任务已有装载取件，不假定全缺，先核本人已具能力。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.49",
+          "source_refs": [
+            "coil-neighbor-53-7063.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31179,6 +32062,11 @@
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.50",
+          "source_refs": [
+            "coil-neighbor-53-7063.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31186,10 +32074,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "另核岗位要求"
+              "本轮未核转岗时间、难度或成功率；依实际岗位任务和资格核，不因相邻自动互认。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.51",
+          "source_refs": [
+            "coil-neighbor-53-7063.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31197,10 +32090,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少工具刃磨与磨削工艺经验。"
+              "编辑差距核对：金属精密修整刃磨抛光磨削逐项核，先核本人已具能力。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.52",
+          "source_refs": [
+            "coil-neighbor-51-4194.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31212,6 +32110,11 @@
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.53",
+          "source_refs": [
+            "coil-neighbor-51-4194.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31219,10 +32122,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "另核岗位要求"
+              "本轮未核转岗时间、难度或成功率；依实际岗位任务和资格核，不因相邻自动互认。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.54",
+          "source_refs": [
+            "coil-neighbor-51-4194.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31230,10 +32138,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少磨削与抛光工艺与表面质量控制经验。"
+              "编辑差距核对：金属塑料去料毛刺、锐化及研磨抛光工艺按设备补，先核本人已具能力。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.55",
+          "source_refs": [
+            "coil-neighbor-51-4033.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31245,6 +32158,11 @@
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.56",
+          "source_refs": [
+            "coil-neighbor-51-4033.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31252,10 +32170,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "另核岗位要求"
+              "本轮未核转岗时间、难度或成功率；依实际岗位任务和资格核，不因相邻自动互认。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.market-signals.market-signal-card.57",
+          "source_refs": [
+            "coil-neighbor-51-4033.00",
+            "coil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         }
       ]
@@ -31399,6 +32322,26 @@
             ]
           },
           "id": "coil-winders-tapers-and-finishers.sources.source-card.1",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-hot-current",
+            "coil-cert-current",
+            "coil-industry-current",
+            "coil-wage-current",
+            "coil-ep-current",
+            "coil-ooh-parent",
+            "coil-nbs-current",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "coil-nist-current",
+            "coil-oews-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "ilo-genai",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31406,10 +32349,30 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源为美国 O*NET OnLine 公开页面（含职业详细资料与摘要与行业分布与技术与工资与就业趋势与认证信息）、U.S. Bureau of Labor Statistics 的公开统计口径、美国职业安全与健康管理局（OSHA）关于机器防护与危险能源控制的公开标准页面，以及公开职业健康机构的人机工程与人因风险因素页面；中国大陆口径引用国家统计局与人社部的公开信息入口。所有数值均保留其职业与地域与期间与单位与统计口径；来源清单见页面「资料来源」。"
+              "本轮实际核O*NET职业任务/情境/教育/12风格及3软件、BLS精确预测与全国工资；OOH父级51-2000行业工资只作背景，NBS2025制造C单位工资非职业工资。美国OSHA147/212/333/132与NIOSH指引分别核，不当中国程序。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.sources.source-card.2",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-hot-current",
+            "coil-cert-current",
+            "coil-industry-current",
+            "coil-wage-current",
+            "coil-ep-current",
+            "coil-ooh-parent",
+            "coil-nbs-current",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "coil-nist-current",
+            "coil-oews-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "ilo-genai",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31417,10 +32380,30 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容检索与更新于 2026 年 9 月。"
+              "本轮检索更新2026-10-09；仍缺中国精确工资就业/映射、代表性招聘、精确美国行业地区班次、具体中国职业健康特种作业及全部雇主资格、AI采用效果和人格绩效、转岗成功率。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.sources.source-card.3",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-hot-current",
+            "coil-cert-current",
+            "coil-industry-current",
+            "coil-wage-current",
+            "coil-ep-current",
+            "coil-ooh-parent",
+            "coil-nbs-current",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "coil-nist-current",
+            "coil-oews-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "ilo-genai",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31428,10 +32411,21 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "使用提示：本页是职业信息服务，不构成电气安全、设备安全、人因、环境、法律或医疗建议；涉及电气测试与设备维修与危险能源隔离与工位人因安排的决定，须以适用法规与雇主制度与设备说明书及具备相应资质人员的意见为准。"
+              "职业信息及编辑流程不授停复产、内部维修或电气测试/放行资格；依真实程序权限及评估核，背景工资非个人收入承诺。"
             ]
           },
           "id": "coil-winders-tapers-and-finishers.sources.source-card.4",
+          "source_refs": [
+            "coil-onet-current",
+            "coil-osha-loto",
+            "coil-osha-guard",
+            "coil-osha-electrical",
+            "coil-osha-ppe",
+            "coil-niosh-risk",
+            "coil-niosh-control",
+            "editorial",
+            "coil-nbs-current"
+          ],
           "type": "prose"
         }
       ]
@@ -31884,6 +32878,366 @@
                 "publisher": "国家统计局（中华人民共和国）",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET新入职教育要求57%高中同等、41%中学后非学位证书、2%低于高中，非现职学历/中国招聘；JobZone1–2/SVP低于6为准备分组，非个人统一年限。 O*NET职业内容兴趣RC，R92/C53/I21/E7/S2/A0，非从业者比例、个人测评分或录用成功率。"
+                ],
+                "evidence_type": "official occupational database",
+                "id": "coil-onet-current",
+                "limitation": "11任务7核心4补充，57情境、33知识52能力、12风格有Impact，非个人录用阈值",
+                "market": "美国",
+                "name": "O*NET51-2021.00 Updated2026",
+                "period": "Updated2026",
+                "publisher": "O*NET OnLine",
+                "scope": "occupation_specific",
+                "url": "https://www.onetonline.org/link/details/51-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际0 software skills shown及分母，不等零需求"
+                ],
+                "evidence_type": "job-posting keyword statistics",
+                "id": "coil-hot-current",
+                "limitation": "O*NET软件目录3类：电机测试、图纸显示、绕线控制；Hot2025美国全国0条可列招聘词，不能推没有软件需求、零提及率或零AI采用。",
+                "market": "美国",
+                "name": "O*NET2025招聘词0条",
+                "period": "2025-01-01—12-31",
+                "publisher": "O*NET/Lightcast",
+                "scope": "occupation_specific",
+                "url": "https://www.onetonline.org/link/hot_tech/51-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际目录返回，不推不存在所有外部资格"
+                ],
+                "evidence_type": "credential directory",
+                "id": "coil-cert-current",
+                "limitation": "实际No certifications were found，非全行业无资格",
+                "market": "美国",
+                "name": "O*NET认证目录未找到",
+                "period": "2026-10-09检索",
+                "publisher": "O*NET/CareerOneStop",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/localcert/51-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际industry表和details行业期间"
+                ],
+                "evidence_type": "official statistical summary",
+                "id": "coil-industry-current",
+                "limitation": "制造92%/其他8%，含其他服务，非工资",
+                "market": "美国",
+                "name": "O*NET2025行业分布",
+                "period": "2025",
+                "publisher": "O*NET/BLS",
+                "scope": "occupation_specific",
+                "url": "https://www.onetonline.org/link/industry/51-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际五分位表与OOH本职业Median"
+                ],
+                "evidence_type": "official statistical table",
+                "id": "coil-wage-current",
+                "limitation": "年37540/42050/48220/58770/63300，时18.05/20.21/23.18/28.26/30.43；受雇排自雇，50为中位非均值",
+                "market": "美国",
+                "name": "O*NET/BLS全国2025工资",
+                "period": "2025年5月",
+                "publisher": "O*NET/BLS",
+                "scope": "occupation_specific",
+                "url": "https://www.onetonline.org/link/localwages/51-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "列头及51-2021行，—不填0"
+                ],
+                "evidence_type": "official statistical table",
+                "id": "coil-ep-current",
+                "limitation": "BLS表1.2 SOC51-2021：2025就业12.9千→2035预计12.4千，净变-0.5千、变化-4.0%、年均空缺1.2千；自雇比例列为“—”，不填0或给具体占比。空缺含增长/转职退出替换，非每年净增；全国预测非个人录用或AI因果。",
+                "market": "美国",
+                "name": "BLS表1.2 SOC51-2021",
+                "period": "2025；2025—2035预测",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "occupation_specific",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本职业48220及12900/12400/-4%行精确，行业工资50790/47350/45540/45500/36860是父级51-2000"
+                ],
+                "evidence_type": "official occupational statistical summary",
+                "id": "coil-ooh-parent",
+                "limitation": "BLS OOH父级Assemblers and Fabricators（51-2000）2025年5月行业年工资中位，含多种装配职业，非SOC51-2021绕线工行业工资；精确本职业行业、地区及班次细分本轮未完整取得。 美国OOH Assemblers and Fabricators父级组通常高中同等、数月在岗培训，进阶装配需经验/训练，部分依雇主需专项训练或副学士；航空国防等电气电子装配可能焊接认证，不能转为所有绕线工统一资格。",
+                "market": "美国",
+                "name": "BLS父级装配制造者及本职业行",
+                "period": "2025年5月；2025—2035预测",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/ooh/production/assemblers-and-fabricators.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "同版表2/5及调查定义，5人以上法人、税前包含代扣个人缴费"
+                ],
+                "evidence_type": "official statistical release",
+                "id": "coil-nbs-current",
+                "limitation": "NBS2025表2/5制造C非私113,594/私76,055元/年为主营制造单位全门类年平均工资背景，非绕线工中位数起薪月薪；中国精确全国职业工资、地区及一一对应映射本轮未取得。",
+                "market": "中国大陆",
+                "name": "NBS2025制造C单位工资",
+                "period": "2025；2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际风险因素、强度频率持续时间、现场观察及无通用清单"
+                ],
+                "evidence_type": "official occupational health guidance",
+                "id": "coil-niosh-risk",
+                "limitation": "NIOSH一般风险指引支持重复、用力、姿势及持续时间/强度/频率评估，不是本职业发生率或个人诊断。工程消除/替代/改工具工位优先，轮岗休息等管理控制补充，PPE不能代替更有效措施；具体方案由实际评估确定，不给统一间歇时间。",
+                "market": "美国指引",
+                "name": "NIOSH人因风险因素",
+                "period": "正文及Reviewed 2024-03-01；2026-10-09检索记录",
+                "publisher": "U.S. CDC/NIOSH",
+                "scope": "contextual",
+                "url": "https://www.cdc.gov/niosh/ergonomics/ergo-programs/risk-factors.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际工程控制优先，轮岗/缩短暴露/增加休息/培训及PPE限制"
+                ],
+                "evidence_type": "official occupational health guidance",
+                "id": "coil-niosh-control",
+                "limitation": "NIOSH一般风险指引支持重复、用力、姿势及持续时间/强度/频率评估，不是本职业发生率或个人诊断。工程消除/替代/改工具工位优先，轮岗休息等管理控制补充，PPE不能代替更有效措施；具体方案由实际评估确定，不给统一间歇时间。",
+                "market": "美国指引",
+                "name": "NIOSH人因控制方案",
+                "period": "2024-03-05页面；2026-10-09核",
+                "publisher": "U.S. CDC/NIOSH",
+                "scope": "contextual",
+                "url": "https://www.cdc.gov/niosh/ergonomics/ergo-programs/implement.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "同版导言及Govern/Map/Measure/Manage"
+                ],
+                "evidence_type": "official voluntary framework",
+                "id": "coil-nist-current",
+                "limitation": "自愿通用框架非职业效果或强制流程",
+                "market": "通用",
+                "name": "NIST AI RMF1.0",
+                "period": "2023-01；同版",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "同版年度工资估计段"
+                ],
+                "evidence_type": "official statistical methodology",
+                "id": "coil-oews-current",
+                "limitation": "通常按2080小时年化，非本人工作时数或税后",
+                "market": "美国",
+                "name": "BLS OEWS工资计算",
+                "period": "本任务同版",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/opub/hom/oews/calculation.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本任务同版a/b/c8/d5/d6/e1/e2/e3"
+                ],
+                "evidence_type": "official regulatory text",
+                "id": "coil-osha-loto",
+                "limitation": "美国1910.147覆盖可能意外启动/释放储能致伤的维修维护，有普通生产适用条件及例外；authorized employee须真实职责训练，头衔不自动授权。储能消除/断开/约束或使安全，作业前验证隔离断能，不一律零能量；停止按钮非隔离，复能按程序核设备人员清场与通知，异常消失不自动获复产权限。",
+                "market": "美国",
+                "name": "OSHA1910.147 危险能源控制",
+                "period": "2026-10-09核",
+                "publisher": "U.S. OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本任务同版a1/a3"
+                ],
+                "evidence_type": "official regulatory text",
+                "id": "coil-osha-guard",
+                "limitation": "美国1910.212操作点与卷入旋转等需适当机器防护，手工具不能代防护；不得擅自拆除/旁路防护危险运行，维修拆卸按实际控制程序，不把所有拆卸一律禁止。",
+                "market": "美国",
+                "name": "OSHA1910.212 机器防护",
+                "period": "2026-10-09核",
+                "publisher": "U.S. OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.212"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际a1/a2/b1/b2ii–v/c2"
+                ],
+                "evidence_type": "official regulatory text",
+                "id": "coil-osha-electrical",
+                "limitation": "美国1910.333适用暴露电气危险场景：原则上先断能，特殊不停电条件须由雇主核且仍有安全程序，不是测试可随意带电。断电未按程序锁挂仍按带电对待，qualified person核不能重启并用测试设备验无电/反送电或感应电；涉及未断能暴露电路仅合格人员按规定防护操作，普通绕线头衔不自动取得资格。复能须合格人员按程序核工具装置及清场通知，不凭测量结果正常直接恢复。",
+                "market": "美国",
+                "name": "OSHA1910.333 电气安全作业",
+                "period": "2026-10-09核",
+                "publisher": "U.S. OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.333"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本任务同版d1/d2/f"
+                ],
+                "evidence_type": "official regulatory text",
+                "id": "coil-osha-ppe",
+                "limitation": "美国危害评估、选择合适合身及训练不代工位工程改进",
+                "market": "美国",
+                "name": "OSHA1910.132 个人防护要求",
+                "period": "2026-10-09核",
+                "publisher": "U.S. OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.132"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本条电机修理职业定义及样本头衔含Electric Motor Winder；不用于证明送料职业定义。"
+                ],
+                "evidence_type": "official occupational database",
+                "id": "coil-neighbor-49-2092.00",
+                "limitation": "仅已读定义，非转岗时间/成功率/许可互认",
+                "market": "美国",
+                "name": "O*NET49-2092.00 电机与电动工具修理工",
+                "period": "当前定义",
+                "publisher": "O*NET OnLine",
+                "scope": "adjacent_occupation",
+                "url": "https://www.onetonline.org/link/details/49-2092.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "仅支持本条相邻职业定义；转岗核对为编辑建议，非距离或成功率证据。"
+                ],
+                "evidence_type": "official occupational database",
+                "id": "coil-neighbor-51-2011.00",
+                "limitation": "仅已读定义，非转岗时间/成功率/许可互认",
+                "market": "美国",
+                "name": "O*NET51-2011.00 飞机结构与系统装配工",
+                "period": "当前定义",
+                "publisher": "O*NET OnLine",
+                "scope": "adjacent_occupation",
+                "url": "https://www.onetonline.org/link/details/51-2011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "仅支持本条相邻职业定义；转岗核对为编辑建议，非距离或成功率证据。"
+                ],
+                "evidence_type": "official occupational database",
+                "id": "coil-neighbor-51-2022.00",
+                "limitation": "仅已读定义，非转岗时间/成功率/许可互认",
+                "market": "美国",
+                "name": "O*NET51-2022.00 电气与电子设备装配工",
+                "period": "当前定义",
+                "publisher": "O*NET OnLine",
+                "scope": "adjacent_occupation",
+                "url": "https://www.onetonline.org/link/details/51-2022.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "仅支持本条相邻职业定义；转岗核对为编辑建议，非距离或成功率证据。"
+                ],
+                "evidence_type": "official occupational database",
+                "id": "coil-neighbor-51-2031.00",
+                "limitation": "仅已读定义，非转岗时间/成功率/许可互认",
+                "market": "美国",
+                "name": "O*NET51-2031.00 发动机及其他机器装配工",
+                "period": "当前定义",
+                "publisher": "O*NET OnLine",
+                "scope": "adjacent_occupation",
+                "url": "https://www.onetonline.org/link/details/51-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "仅支持本条相邻职业定义；转岗核对为编辑建议，非距离或成功率证据。"
+                ],
+                "evidence_type": "official occupational database",
+                "id": "coil-neighbor-51-2061.00",
+                "limitation": "仅已读定义，非转岗时间/成功率/许可互认",
+                "market": "美国",
+                "name": "O*NET51-2061.00 计时装置装配与调校工",
+                "period": "当前定义",
+                "publisher": "O*NET OnLine",
+                "scope": "adjacent_occupation",
+                "url": "https://www.onetonline.org/link/details/51-2061.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本条送料取料职业定义支持机器/设备送料取料；不用于证明电机修理头衔。"
+                ],
+                "evidence_type": "official occupational database",
+                "id": "coil-neighbor-53-7063.00",
+                "limitation": "仅已读定义，非转岗时间/成功率/许可互认",
+                "market": "美国",
+                "name": "O*NET53-7063.00 机器送料下料工",
+                "period": "当前定义",
+                "publisher": "O*NET OnLine",
+                "scope": "adjacent_occupation",
+                "url": "https://www.onetonline.org/link/details/53-7063.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "仅支持本条相邻职业定义；转岗核对为编辑建议，非距离或成功率证据。"
+                ],
+                "evidence_type": "official occupational database",
+                "id": "coil-neighbor-51-4194.00",
+                "limitation": "仅已读定义，非转岗时间/成功率/许可互认",
+                "market": "美国",
+                "name": "O*NET51-4194.00 工具磨削锉削刃磨工",
+                "period": "当前定义",
+                "publisher": "O*NET OnLine",
+                "scope": "adjacent_occupation",
+                "url": "https://www.onetonline.org/link/details/51-4194.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "仅支持本条相邻职业定义；转岗核对为编辑建议，非距离或成功率证据。"
+                ],
+                "evidence_type": "official occupational database",
+                "id": "coil-neighbor-51-4033.00",
+                "limitation": "仅已读定义，非转岗时间/成功率/许可互认",
+                "market": "美国",
+                "name": "O*NET51-4033.00 金属塑料磨削研磨抛光设备操作员",
+                "period": "当前定义",
+                "publisher": "O*NET OnLine",
+                "scope": "adjacent_occupation",
+                "url": "https://www.onetonline.org/link/details/51-4033.00"
               }
             ]
           },
@@ -32282,7 +33636,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方工资与就业统计（精确职业口径）",
+            "类型": "官方工资统计（精确SOC51-2021）",
             "适用范围": {
               "$item": "coil-winders-tapers-and-finishers.ai-impact.ai-impact-table.22",
               "block": "ai-impact",
@@ -33335,6 +34689,30 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147",
+            "id": "coil-loto",
+            "label": "美国OSHA1910.147危险能源控制",
+            "scope": "限覆盖维修危险能源与实际例外/授权角色"
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.333",
+            "id": "coil-electrical",
+            "label": "美国OSHA1910.333电气安全",
+            "scope": "限暴露电气场景/qualified及验证复能条件"
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.132",
+            "id": "coil-ppe",
+            "label": "美国OSHA1910.132 PPE一般要求",
+            "scope": "危害评估与适用PPE培训，非测试授权"
+          },
+          {
+            "href": "https://www.cdc.gov/niosh/ergonomics/ergo-programs/implement.html",
+            "id": "coil-ergo-control",
+            "label": "NIOSH人因控制",
+            "scope": "一般工程优先及管理补充指导，非绕线工干预效果"
           }
         ],
         "tracks": [
@@ -34160,7 +35538,8 @@
             },
             "evidence_refs": [
               "onet",
-              "onet-context"
+              "onet-context",
+              "coil-electrical"
             ],
             "id": "risk-test-judgment",
             "mitigation": {
@@ -34192,7 +35571,8 @@
             },
             "evidence_refs": [
               "osha-guarding",
-              "osha-loto"
+              "osha-loto",
+              "coil-electrical"
             ],
             "id": "risk-rotating-parts",
             "mitigation": {
@@ -34224,6 +35604,7 @@
             },
             "evidence_refs": [
               "niosh-ergo",
+              "coil-ergo-control",
               "onet-context"
             ],
             "id": "risk-ergonomics",
@@ -34390,6 +35771,18 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.333",
+            "id": "coil-electrical",
+            "label": "美国OSHA1910.333电气安全工作",
+            "scope": "美国1910.333适用暴露电气危险场景：原则上先断能，特殊不停电条件须由雇主核且仍有安全程序，不是测试可随意带电。断电未按程序锁挂仍按带电对待，qualified person核不能重启并用测试设备验无电/反送电或感应电；涉及未断能暴露电路仅合格人员按规定防护操作，普通绕线头衔不自动取得资格。复能须合格人员按程序核工具装置及清场通知，不凭测量结果正常直接恢复。"
+          },
+          {
+            "href": "https://www.cdc.gov/niosh/ergonomics/ergo-programs/implement.html",
+            "id": "coil-ergo-control",
+            "label": "NIOSH人因控制方案",
+            "scope": "NIOSH一般风险指引支持重复、用力、姿势及持续时间/强度/频率评估，不是本职业发生率或个人诊断。工程消除/替代/改工具工位优先，轮岗休息等管理控制补充，PPE不能代替更有效措施；具体方案由实际评估确定，不给统一间歇时间。"
           }
         ]
       },
@@ -34397,7 +35790,7 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "数据与口径",
+              "指标": "非私营制造C背景",
               "数值": {
                 "$item": "coil-winders-tapers-and-finishers.china-salary.career-snapshot-primary-locale.7",
                 "block": "china-salary",
@@ -34412,7 +35805,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "私营制造C背景",
               "数值": {
                 "$item": "coil-winders-tapers-and-finishers.china-salary.career-snapshot-primary-locale.9",
                 "block": "china-salary",
@@ -34427,7 +35820,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "职业映射边界",
               "数值": {
                 "$item": "coil-winders-tapers-and-finishers.china-salary.career-snapshot-primary-locale.11",
                 "block": "china-salary",
@@ -34442,7 +35835,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "招聘与行业适用",
               "数值": {
                 "$item": "coil-winders-tapers-and-finishers.china-salary.career-snapshot-primary-locale.13",
                 "block": "china-salary",
@@ -34457,7 +35850,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "调查覆盖范围",
               "数值": {
                 "$item": "coil-winders-tapers-and-finishers.china-salary.career-snapshot-primary-locale.15",
                 "block": "china-salary",
@@ -34472,7 +35865,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "2025资料期",
               "数值": {
                 "$item": "coil-winders-tapers-and-finishers.china-salary.career-snapshot-primary-locale.17",
                 "block": "china-salary",
@@ -34487,7 +35880,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "精确职业仍缺",
               "数值": {
                 "$item": "coil-winders-tapers-and-finishers.china-salary.career-snapshot-primary-locale.19",
                 "block": "china-salary",
@@ -34502,7 +35895,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "本轮检索边界",
               "数值": {
                 "$item": "coil-winders-tapers-and-finishers.china-salary.career-snapshot-primary-locale.21",
                 "block": "china-salary",
@@ -34756,7 +36149,7 @@
           "ui": {
             "ai_heading": "AI 会影响线圈绕线工、包扎工、修整工的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "2025制造C单位背景与精确职业缺口",
             "scenario_caption": "学历背景、岗位方向与说明（编辑整理，不是薪资统计）",
             "scenario_heading": "不同学历背景对应哪些岗位方向？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -34786,7 +36179,7 @@
         },
         "bls_table": [
           {
-            "fact_ref": "us-wage-low10-2025",
+            "fact_ref": "coil-nine-us-wage-low10-2025",
             "指标": "薪资 · 10 分位",
             "数值": {
               "$item": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.9",
@@ -34802,7 +36195,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-p25-2025",
+            "fact_ref": "coil-nine-us-wage-p25-2025",
             "指标": "薪资 · 25 分位",
             "数值": {
               "$item": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.11",
@@ -34818,7 +36211,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-2025",
+            "fact_ref": "coil-nine-us-wage-2025",
             "指标": "薪资 · 中位数",
             "数值": {
               "$item": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.13",
@@ -34834,7 +36227,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-p75-2025",
+            "fact_ref": "coil-nine-us-wage-p75-2025",
             "指标": "薪资 · 75 分位",
             "数值": {
               "$item": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.15",
@@ -34850,7 +36243,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-high10-2025",
+            "fact_ref": "coil-nine-us-wage-high10-2025",
             "指标": "薪资 · 90 分位",
             "数值": {
               "$item": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.17",
@@ -34881,7 +36274,7 @@
             }
           },
           {
-            "fact_ref": "us-growth-2025-2035",
+            "fact_ref": "coil-nine-us-growth-2025-2035",
             "指标": "就业 · 增长率",
             "数值": {
               "$item": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.21",
@@ -34897,7 +36290,7 @@
             }
           },
           {
-            "fact_ref": "us-openings-2025-2035",
+            "fact_ref": "coil-nine-us-openings-2025-2035",
             "指标": "就业 · 年均职位空缺",
             "数值": {
               "$item": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.23",
@@ -34969,7 +36362,7 @@
             }
           }
         ],
-        "factors_heading": "哪些因素真正影响线圈绕线工、包扎工、修整工的工作与收入？",
+        "factors_heading": "比较具体书面报价时核哪些条件？",
         "growth": {
           "$item": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.33",
           "block": "us-salary",
@@ -34977,14 +36370,14 @@
           "type": "prose"
         },
         "heading": "美国线圈绕线工、包扎工、修整工工资与就业数据？",
-        "industry_heading": "不同行业的美国工资差多少？",
+        "industry_heading": "2025年5月父级装配职业行业工资背景",
         "industry_period": {
-          "$fact": "us-wage-2025",
+          "$fact": "coil-nine-us-wage-2025",
           "field": "period"
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "coil-nine-us-industry-wage-aerospace-mfg-2025",
             "industry": {
               "$item": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -35005,7 +36398,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "coil-nine-us-industry-wage-engineering-services-2025",
             "industry": {
               "$item": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -35026,7 +36419,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "coil-nine-us-industry-wage-federal-2025",
             "industry": {
               "$item": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -35047,7 +36440,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "coil-nine-us-industry-wage-rd-2025",
             "industry": {
               "$item": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -35068,7 +36461,7 @@
             }
           }
         ],
-        "industry_value_label": "该行业内本职业工资中位数",
+        "industry_value_label": "父级51-2000行业年工资中位数（非绕线工）",
         "interpretation_heading": "美国线圈绕线工、包扎工、修整工工资怎么理解？",
         "interpretation_rows": [
           {
@@ -35116,7 +36509,7 @@
         },
         "outlook_heading": "美国就业前景",
         "outlook_period": {
-          "$fact": "us-growth-2025-2035",
+          "$fact": "coil-nine-us-growth-2025-2035",
           "field": "period"
         },
         "wage_column_labels": [
@@ -35128,7 +36521,7 @@
         "wage_heading": "美国工资分布",
         "wage_tiers": [
           {
-            "equivalent": "官方折算，非个人月收入",
+            "equivalent": "来源年工资，非本人月薪或实发",
             "interpretation": {
               "$item": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
@@ -35137,7 +36530,7 @@
             },
             "label": "第 10 百分位",
             "value": {
-              "$fact": "us-wage-low10-2025",
+              "$fact": "coil-nine-us-wage-low10-2025",
               "field": "display_value"
             }
           },
@@ -35151,12 +36544,12 @@
             },
             "label": "第 50 百分位",
             "value": {
-              "$fact": "us-wage-2025",
+              "$fact": "coil-nine-us-wage-2025",
               "field": "display_value"
             }
           },
           {
-            "equivalent": "官方折算，非个人实发工资",
+            "equivalent": "来源年工资，非本人月薪或实发",
             "interpretation": {
               "$item": "coil-winders-tapers-and-finishers.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
@@ -35165,7 +36558,7 @@
             },
             "label": "第 90 百分位",
             "value": {
-              "$fact": "us-wage-high10-2025",
+              "$fact": "coil-nine-us-wage-high10-2025",
               "field": "display_value"
             }
           }
@@ -36568,6 +37961,12 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.cdc.gov/niosh/ergonomics/ergo-programs/implement.html",
+            "id": "coil-ergo-control",
+            "label": "NIOSH人因控制指导",
+            "scope": "工程优先、管理补充，不是个人人格绩效或统一休息时长"
           }
         ]
       },
@@ -37063,6 +38462,260 @@
         "source_refs": [
           "onet-localwages"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET-SOC 51-2021.00（线圈绕线工、包扎工、修整工；页面未标注 Bright Outlook）",
+        "fact_id": "coil-nine-occupation-identity",
+        "market": "美国",
+        "measure": "官方职业代码（本页身份口径）",
+        "occupation_scope": "线圈绕线工、包扎工、修整工",
+        "period": "Updated2026；2026-10-09检索",
+        "source_refs": [
+          "coil-onet-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "48,220美元/年（中位数）",
+        "fact_id": "coil-nine-us-wage-2025",
+        "market": "美国",
+        "measure": "OEWS2025全国年薪中位数（SOC51-2021受雇工资薪金岗位；不代表算术均值）",
+        "occupation_scope": "线圈绕线工、包扎工、修整工",
+        "period": "2025年5月",
+        "source_refs": [
+          "coil-wage-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "23.18美元/小时（中位数）",
+        "fact_id": "coil-nine-us-wage-hourly-2025",
+        "market": "美国",
+        "measure": "O*NET 该职业页面显示的 BLS OEWS 时薪中位数（51-2021.00 精确职业口径）",
+        "occupation_scope": "线圈绕线工、包扎工、修整工",
+        "period": "2025年5月",
+        "source_refs": [
+          "coil-wage-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "12,900人（2025年）",
+        "fact_id": "coil-nine-us-employment-2025",
+        "market": "美国",
+        "measure": "BLS表1.2就业规模",
+        "occupation_scope": "线圈绕线工、包扎工、修整工",
+        "period": "2025年",
+        "source_refs": [
+          "coil-ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约12,400人（2035年预计）",
+        "fact_id": "coil-nine-us-employment-2035",
+        "market": "美国",
+        "measure": "BLS表1.2预计就业规模",
+        "occupation_scope": "线圈绕线工、包扎工、修整工",
+        "period": "2035年（预测）",
+        "source_refs": [
+          "coil-ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "下降4.0%（2025—2035年）",
+        "fact_id": "coil-nine-us-growth-2025-2035",
+        "market": "美国",
+        "measure": "BLS表1.2就业变化率",
+        "occupation_scope": "线圈绕线工、包扎工、修整工",
+        "period": "2025—2035年（预测）",
+        "source_refs": [
+          "coil-ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约-500人（2025—2035年）",
+        "fact_id": "coil-nine-us-change-2025-2035",
+        "market": "美国",
+        "measure": "BLS表1.2预计净变化；原表千人换算",
+        "occupation_scope": "线圈绕线工、包扎工、修整工",
+        "period": "2025—2035年（预测）",
+        "source_refs": [
+          "coil-ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约1,200个/年（2025—2035年年均）",
+        "fact_id": "coil-nine-us-openings-2025-2035",
+        "market": "美国",
+        "measure": "BLS表1.2年均空缺，含更替需求",
+        "occupation_scope": "线圈绕线工、包扎工、修整工",
+        "period": "2025—2035年（预测）",
+        "source_refs": [
+          "coil-ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：科学技术服务业不作为该线圈制造任务的行业工资参考；本页使用制造业雇主背景，不发布职业工资。",
+        "fact_id": "coil-nine-cn-industry-science-tech-2024",
+        "market": "中国大陆",
+        "measure": "公开数据缺口（不代填）",
+        "occupation_scope": "线圈绕线工、包扎工、修整工",
+        "period": "2025年（2026-05-15发布）",
+        "source_refs": [
+          "coil-nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "113,594元/年（2025城镇非私营制造业均值，非职业工资）",
+        "fact_id": "coil-nine-cn-industry-manufacturing-2024",
+        "market": "中国大陆",
+        "measure": "2025制造C单位年平均工资背景，非中位数或月薪",
+        "occupation_scope": "按主营活动匹配制造C单位的全门类所有职业，非绕线工职业工资",
+        "period": "2025年（2026-05-15发布）",
+        "source_refs": [
+          "coil-nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：未取得与该岗位精确对应的中国大陆全国职业工资分布；本页不发布职业级数值",
+        "fact_id": "coil-nine-cn-professional-technical-2024",
+        "market": "中国大陆",
+        "measure": "公开数据缺口（不代填）",
+        "occupation_scope": "线圈绕线工、包扎工、修整工",
+        "period": "2025年（2026-05-15发布）",
+        "source_refs": [
+          "coil-nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "76,055元/年（2025城镇私营制造业均值，非职业工资）",
+        "fact_id": "coil-nine-cn-urban-nonprivate-2024",
+        "market": "中国大陆",
+        "measure": "2025制造C单位年平均工资背景，非中位数或月薪",
+        "occupation_scope": "按主营活动匹配制造C单位的全门类所有职业，非绕线工职业工资",
+        "period": "2025年（2026-05-15发布）",
+        "source_refs": [
+          "coil-nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "37,540美元/年（第 10 分位）",
+        "fact_id": "coil-nine-us-wage-low10-2025",
+        "market": "美国",
+        "measure": "O*NET 该职业页面显示的 BLS OEWS 工资分位（精确职业口径，统计位置）",
+        "occupation_scope": "线圈绕线工、包扎工、修整工",
+        "period": "2025年5月",
+        "source_refs": [
+          "coil-wage-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "63,300美元/年（第 90 分位）",
+        "fact_id": "coil-nine-us-wage-high10-2025",
+        "market": "美国",
+        "measure": "O*NET 该职业页面显示的 BLS OEWS 工资分位（精确职业口径，统计位置）",
+        "occupation_scope": "线圈绕线工、包扎工、修整工",
+        "period": "2025年5月",
+        "source_refs": [
+          "coil-wage-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "50,790美元/年（父级装配职业在运输设备制造）",
+        "fact_id": "coil-nine-us-industry-wage-aerospace-mfg-2025",
+        "market": "美国",
+        "measure": "父级51-2000装配制造者行业年工资中位数，非绕线职业工资",
+        "occupation_scope": "Assemblers and Fabricators SOC51-2000，含多个装配职业",
+        "period": "2025年5月",
+        "source_refs": [
+          "coil-ooh-parent"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "47,350美元/年（父级装配职业在机械制造）",
+        "fact_id": "coil-nine-us-industry-wage-engineering-services-2025",
+        "market": "美国",
+        "measure": "父级51-2000装配制造者行业年工资中位数，非绕线职业工资",
+        "occupation_scope": "Assemblers and Fabricators SOC51-2000，含多个装配职业",
+        "period": "2025年5月",
+        "source_refs": [
+          "coil-ooh-parent"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "45,540美元/年（父级装配职业在计算机及电子产品制造）",
+        "fact_id": "coil-nine-us-industry-wage-federal-2025",
+        "market": "美国",
+        "measure": "父级51-2000装配制造者行业年工资中位数，非绕线职业工资",
+        "occupation_scope": "Assemblers and Fabricators SOC51-2000，含多个装配职业",
+        "period": "2025年5月",
+        "source_refs": [
+          "coil-ooh-parent"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "45,500美元/年（父级装配职业在金属制品制造）",
+        "fact_id": "coil-nine-us-industry-wage-rd-2025",
+        "market": "美国",
+        "measure": "父级51-2000装配制造者行业年工资中位数，非绕线职业工资",
+        "occupation_scope": "Assemblers and Fabricators SOC51-2000，含多个装配职业",
+        "period": "2025年5月",
+        "source_refs": [
+          "coil-ooh-parent"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：本轮未取得绕线工精确行业/地区/班次工资细分；父级行业中位仅作背景",
+        "fact_id": "coil-nine-us-industry-wage-instruments-2025",
+        "market": "美国",
+        "measure": "本轮精确职业细分工资缺口",
+        "occupation_scope": "线圈绕线工、包扎工、修整工",
+        "period": "2025 年",
+        "source_refs": [
+          "coil-wage-current",
+          "coil-ooh-parent",
+          "editorial"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "42,050美元/年（第 25 分位）",
+        "fact_id": "coil-nine-us-wage-p25-2025",
+        "market": "美国",
+        "measure": "O*NET 该职业页面显示的 BLS OEWS 工资分位（精确职业口径，统计位置）",
+        "occupation_scope": "线圈绕线工、包扎工、修整工",
+        "period": "2025年5月",
+        "source_refs": [
+          "coil-wage-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "58,770美元/年（第 75 分位）",
+        "fact_id": "coil-nine-us-wage-p75-2025",
+        "market": "美国",
+        "measure": "O*NET 该职业页面显示的 BLS OEWS 工资分位（精确职业口径，统计位置）",
+        "occupation_scope": "线圈绕线工、包扎工、修整工",
+        "period": "2025年5月",
+        "source_refs": [
+          "coil-wage-current"
+        ]
       }
     ]
   },
@@ -37071,7 +38724,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "RIASEC · RC",
@@ -37122,7 +38775,7 @@
       "text": "线圈绕线工、包扎工、修整工"
     }
   },
-  "source_content_sha256": "0c0ed6851d8b2e09f78e987d9e60859a3ae2667b6a782c018cda927b76ff3b8a",
+  "source_content_sha256": "6581ca7caad5b80f47da42bd358998a4360696f5bf0dc6a0f6f14222a80b481d",
   "subject": {
     "canonical_slug": "coil-winders-tapers-and-finishers",
     "name": "线圈绕线工、包扎工、修整工",

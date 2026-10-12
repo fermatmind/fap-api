@@ -24200,12 +24200,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "范围与边界｜本页覆盖 O*NET-SOC 45-4011.00「Forest and Conservation Workers」：在监督下从事开发与维护与保护森林与林地与湿地与牧场等区域所需的体力劳动，包括培育与运输苗木、防治有害于植物的昆虫与害虫与病害、修建控制水分与土壤侵蚀与渗漏的设施，含林务助理、起苗工、植树工与非木质林产品采集者。不含：独立调查设计与质量监督（需相应技术岗位职责）、林分经营与采伐与长期规划决策（属林务专业人员）、自然资源与生态系统的科学研究与方案制定（属保护科学家）、防火检查与预防与火因调查（属森林防火检查员与预防专家）、环境介质采样与监测（属环境科学与保护技术员）、以采伐运材为主的独立伐木岗位、以及许可与执法与法律适用的最终裁定（属主管机关与执法与司法岗位）。涉及经营决策、科学研究结论与执法裁量，不属于本职业自行决定的范围。"
+              "范围｜O*NET45-4011为在监督下从事森林、湿地及牧场保护维护的体力作业。当前任务还包括调查协助、GIS外业地图、规程说明或执行、按指挥防火与灭火，不能一概排除制图或防火工作；具体设计、许可、执法及火场指挥须核真实任务、任命和法域。"
             ]
           },
           "id": "forest-and-conservation-workers.profile.onet-structured-fields-block.1",
           "source_refs": [
-            "onet"
+            "bls",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24233,7 +24234,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作情境｜O*NET 45-4011.00 工作情境显示：作业以受监督的体力劳动为主，户外作业与团队协作突出。\n沟通与协作｜每天使用电子邮件（97%），每天与个人及团队面对面讨论（78%），团队协作极其重要（52%），持续接触他人（48%）。\n户外与环境｜每天在户外暴露于各种天气（70%），每天在室内非受控环境作业（57%），每周一次以上暴露于很热或很冷温度（44%），每周一次以上在室内受控环境（31%）。\n危害与防护｜每天佩戴常规防护或安全装备（56%），每天暴露于危险设备（30%），每周一次以上暴露于污染物（53%），每周一次以上暴露于令人分心的噪音（45%）。\n车辆与器械｜每天在封闭车辆内或操作封闭设备（60%），每天电话沟通（66%）。\n决策与自主｜确定任务与优先级有一些自由（49%），决策自由度有一些（56%），每月一次或以上但非每周做出决策（36%），决策对同事与单位结果有重要影响（52%），错误的后果很严重（36%）。\n带领与责任｜带领或协调他人很重要（35%），对他人的健康与安全负高责任（41%），对他人工作结果负很高责任（33%）。\n时间与体力｜典型工作周为 40 小时（70%），每月一次以上存在时间压力（46%），超过一半时间站立（47%），超过一半时间走动或跑动（44%），用手操作或控制或感受物件少于一半时间（31%）。\n其他条件｜与外部客户或公众打交道很重要（40%），每天撰写信件与备忘录（29%），岗位竞争度中等（30%），身体距离为轻微接近（43%）。"
+              "工作情境｜O*NET 45-4011.00 工作情境显示：作业以受监督的体力劳动为主，户外作业与团队协作突出。\n沟通与协作｜每天使用电子邮件（97%），每天与个人及团队面对面讨论（78%），团队协作极其重要（52%），持续接触他人（48%）。\n户外与环境｜每天在户外暴露于各种天气（70%），每天在室内非受控环境作业（57%），每周至少一次但非每天暴露于很热或很冷温度（44%），每周至少一次但非每天在室内受控环境（31%）。\n危害与防护｜每天佩戴常规防护或安全装备（56%），每天暴露于危险设备（30%），每周至少一次但非每天暴露于污染物（53%），每周至少一次但非每天暴露于令人分心的噪音（45%）。\n车辆与器械｜每天在封闭车辆内或操作封闭设备（60%），每天电话沟通（66%）。\n决策与自主｜确定任务与优先级有一些自由（49%），决策自由度有一些（56%），每月一次或以上但非每周做出决策（36%），决策对同事与单位结果有重要影响（52%），错误的后果很严重（36%）。\n带领与责任｜带领或协调他人很重要（35%），对他人的健康与安全负高责任（41%），对他人工作结果负很高责任（33%）。\n时间与体力｜典型工作周为 40 小时（70%），每月至少一次但非每周存在时间压力（46%），超过一半时间站立（47%），超过一半时间走动或跑动（44%），用手操作或控制或感受物件少于一半时间（31%）。\n其他条件｜与外部客户或公众打交道很重要（40%），每天撰写信件与备忘录（29%），岗位竞争度中等（30%），身体距离为轻微接近（43%）。 比例为受访者回答分布，不是个人工时或事故率。"
             ]
           },
           "id": "forest-and-conservation-workers.profile.work-context-block.1",
@@ -24247,13 +24248,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "环境与节奏｜作业场所为林地与苗圃与保护区与巡护站与野外道路与营地以及部分办公室。多数工作日包含野外作业（每天户外全天气 70%、每天室内非受控 57%），可遇高温、低温及噪音环境（每周一次以上很热很冷温度 44%、每周一次以上噪音 45%），需在林地与车队与器械环境中作业（每天封闭车辆或设备 60%、每天危险设备 30%）。节奏受季节与作业窗口与防火期影响，典型工作周为 40 小时（70%），但防火期与造林季可能出现加班与值班（每月一次以上时间压力 46%）。体力负荷较高，以走动与站立与搬抬与重复动作为主（站立超过一半 47%、走动超过一半 44%），并在小队中分担安全与作业质量责任（带领或协调他人很重要 35%、他人健康与安全负高责任 41%）。"
+              "环境｜70%受访者回答每天户外全天气，57%每天室内非受控，44%每周至少一次但非每天冷热温度、45%该频率噪音，60%每天封闭车辆设备、30%每天危险设备；70%典型周40小时、46%每月至少一次但非每周时间压力、47%站立超过半时44%走动超过半时。是回答分布非个人工时。OOH说明常有体力要求、可能携重设备长途步行，兼职季节工作常见、紧急响应可能加时；不从压力频率推出特定防火期强度。"
             ]
           },
           "id": "forest-and-conservation-workers.profile.career-quick-answers-block.2",
           "source_refs": [
-            "onet",
-            "ep"
+            "bls",
+            "ep",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24290,12 +24292,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "质量标准｜作业应按技术员与带队人员给出的作业设计与标记执行：栽植与间伐与除草按规格完成且质量达标、器械与药剂按规程使用与保管、巡查与设施维护有记录、计数与记录如实不虚报、章程与指令按要求执行。涉及调查与测量与制图结论、作业设计与质量签认、林分经营与采伐决策、科学研究结论与执法裁量不得自行作出。凡与规程或指令不一致、或出现野外与用火与药剂与器械异常，须先停止作业并按程序报告与转交，不得自行放宽标准或补记记录。"
+              "质量建议｜按真实设计标记、苗木规格、设备及安全规程执行并核记录，GIS制图亦为任务。非紧急设计或许可变更核授权；直接人身威胁先安全避险和报警上报，不等待确认才停危险作业。"
             ]
           },
           "id": "forest-and-conservation-workers.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "onet"
+            "bls",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24346,13 +24349,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "与 forest-and-conservation-technicians（林业与保护技术员）的区别：后者承担样地选设与测量与记录与制图与数据库、作业安排与质量监督与带队与宣教等技术责任；本职业在其与带队人员的作业设计与监督下执行栽植与抚育与清理与设施维护等体力与作业任务，并协助调查与如实计数。"
+              "比较｜工人也包含调查协助和GIS外业地图；技术员更侧重数据、技术监督及带队，实际任务交叉，不能以制图意愿绝对划界。"
             ]
           },
           "id": "forest-and-conservation-workers.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "onet",
-            "comparison-technician"
+            "bls",
+            "comparison-technician",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24538,12 +24542,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "实践响应｜先把数字工具放进可回滚、可审计的低风险步骤（作业与巡查记录整理与录入、影像与地图整理、档案检索、报告与宣教材料草拟），以作业人员与带队人员确认与实地核查为准；根据差错与事故记录决定是否扩大使用范围，作业与安全与合规判断始终保留人工确认。"
+              "工具探索建议｜在虚构记录中试照片、计数与地图辅助，核输入和更正痕迹；真实位置、影像、合同及林权资料按权限处理，不因整理操作就视为低风险。"
             ]
           },
           "id": "forest-and-conservation-workers.profile.career-quick-answers-block.17",
           "source_refs": [
-            "onet"
+            "ilo",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24766,12 +24771,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国薪资证据—职业范围｜本页数值对应 SOC 45-4011（Forest and Conservation Workers）；不含林业与保护技术员（19-4071）、林务专业人员（19-1032）、保护科学家（19-1031）、森林防火检查员与预防专家（33-2022）、环境科学与保护技术员（19-4042）、渔猎执法员（33-3031）、农林渔一线主管（45-1011）、农业技术员（19-4012）与伐木工（45-4022）。跨职业的工资不可混用。"
+              "美国薪资证据—职业范围｜本页数值对应 SOC 45-4011（Forest and Conservation Workers）；不含林业与保护技术员（19-4071）、林务专业人员（19-1032）、保护科学家（19-1031）、森林防火检查员与预防专家（33-2022）、环境科学与保护技术员（19-4042）、渔猎执法员（33-3031）、农林渔一线主管（45-1011）、农业技术员（19-4012）与伐木工（45-4021）。跨职业的工资不可混用。 45-4021为Fallers，45-4022为Logging Equipment Operators，伐木工是多个SOC的集合。"
             ]
           },
           "id": "forest-and-conservation-workers.profile.career-quick-answers-block.33",
           "source_refs": [
-            "onet"
+            "weforum",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24780,13 +24786,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国薪资证据—抽样与缺失限制｜OEWS为抽样估计，细分行业与地区可能缺失或不可靠。OOH本职业2025就业约14,700个岗位含自雇，O*NET仍呈现2024约10,800人；基期不同。OOH已核州政府（不含教育与医院）43,680美元/年及宗教、资助、市民、专业和类似组织39,590美元/年两类行业中位工资；其他方向未核得精确值留空，不用估算代填。"
+              "当前May2025全国及三个具体行业正常Profiles已读，OEWS6050雇员；OOH14700岗位含自雇。所选州政府43680、地方政府40150、企业专业劳工政治等组织56800，OOH组合宗教资助公民专业等39590，细类组合不同，不估算未选行业。"
             ]
           },
           "id": "forest-and-conservation-workers.profile.career-quick-answers-block.34",
           "source_refs": [
-            "ep",
-            "oews-methods"
+            "oews-profile-2025",
+            "ep"
           ],
           "type": "prose"
         }
@@ -25329,25 +25335,25 @@
                 "url": "https://www.onetonline.org/link/details/45-4011.00"
               },
               {
-                "entity": "BLS 职业就业预测（2025—2035）",
+                "entity": "O*NET当前任务与软件",
                 "id": "link-14",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/details/45-4011.00"
+              },
+              {
+                "entity": "O*NET任务与编辑探索建议",
+                "id": "link-15",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/details/45-4011.00"
+              },
+              {
+                "entity": "BLS2025—2035职业预测",
+                "id": "link-16",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
-                "id": "link-15",
-                "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
-              },
-              {
-                "entity": "ILO工作论文140：生成式AI与职业任务暴露",
-                "id": "link-16",
-                "relation": "career.authority",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
-              },
-              {
-                "entity": "NIST 人工智能风险管理框架（AI RMF 1.0）",
+                "entity": "NIST通用治理框架",
                 "id": "link-17",
                 "relation": "career.authority",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
@@ -26121,12 +26127,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "岗位结果：任务变化是否导致岗位增减，取决于林业与保护投入与季节用工与机械化程度，不能由技术可行直接推断。"
+              "本页未取得AI导致本职业就业增减的因果研究；OOH讨论遥感及机械自动化可能减员，并非专指生成式AI或机构实测效果。"
             ]
           },
           "id": "forest-and-conservation-workers.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet"
+            "ep",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26179,12 +26186,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业就业预测（口径说明）"
+              "O*NET当前任务与软件"
             ]
           },
           "id": "forest-and-conservation-workers.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -26208,12 +26215,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS OEWS（工资口径）"
+              "O*NET任务与编辑探索建议"
             ]
           },
           "id": "forest-and-conservation-workers.ai-impact.ai-impact-table.69",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -26222,11 +26229,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS预计2025—2035就业下降约2%，空缺来自替换需求；这是美国职业预测，不能当作AI导致岗位减少的证据。"
+              "2025—2035矩阵-1.5%、OOH整百分数-2%，年均空缺2200为更替需求；不是生成式AI减员因果证据。"
             ]
           },
           "id": "forest-and-conservation-workers.ai-impact.ai-impact-table.70",
           "source_refs": [
+            "weforum",
             "ep"
           ],
           "type": "prose"
@@ -26236,12 +26244,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 未来工作研究（任务暴露机制）"
+              "BLS2025—2035职业预测"
             ]
           },
           "id": "forest-and-conservation-workers.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "onet"
+            "weforum"
           ],
           "type": "prose"
         },
@@ -26264,12 +26272,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST AI RMF（治理原则）"
+              "NIST通用治理框架"
             ]
           },
           "id": "forest-and-conservation-workers.ai-impact.ai-impact-table.73",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -26405,12 +26413,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "升级与确认：涉及停止作业、越界或违反许可、火灾与用火异常、药剂与器械事故与人员受伤的决定须经带队与安全负责人与主管机关确认并留痕。"
+              "紧急安全｜火情、受伤或直接威胁先安全避险并报警上报，不等待带队或机关确认才停止危险作业。中国2026条例规定发现火情立即报警，未经专业培训不得安排直接灭火，参与须服从统一指挥。非紧急设计与许可变更按真实程序核。"
             ]
           },
           "id": "forest-and-conservation-workers.ai-impact.ai-impact-table.83",
           "source_refs": [
-            "onet"
+            "cn-forest-fire-2026",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27132,13 +27141,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜OOH就业含自雇，2025年约14,700个岗位；边界｜O*NET仍展示2024年约10,800人，基期不同，不作同年对照。"
+              "口径｜当前2025预测就业14.7千、2035约14.5千，净-0.2千、-1.5%，自雇26.7%；边界｜OEWS雇员6050，预测含自雇且方法不同，不互换。"
             ]
           },
           "id": "forest-and-conservation-workers.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "ep",
-            "onet"
+            "weforum",
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -27161,11 +27170,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测增长率（下降），变化约 -200 人；边界｜增长类别不等于绝对岗位数，也不适用其他法域。"
+              "口径｜矩阵-1.5%、OOH整百分数-2%，2025—2035净-0.2千；边界｜四舍五入层级不同，空缺非净新增。"
             ]
           },
           "id": "forest-and-conservation-workers.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
+            "weforum",
             "ep"
           ],
           "type": "prose"
@@ -27218,12 +27228,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业定义｜在监督下从事开发与维护与保护森林与林地与湿地与牧场等区域所需的体力劳动，包括培育与运输苗木、防治有害于植物的昆虫与害虫与病害、修建控制水分与土壤侵蚀与渗漏的设施；通过苗木准备与栽植与补植、除草与间伐与枝条与灌木清理与搬运、道路与围栏与营地维护、在指导下施用与保管药剂与器械、按指挥参与用火管理与灭火与防火带开设、以及协助调查与如实计数并告知露营与用火与卫生等规程，产出完成的作业任务与可核验记录；不独立承担调查设计、质量监督与经营规划决策、林分经营与采伐与长期规划决策、自然资源与生态系统的科学研究与方案制定、防火检查与预防与火因调查、环境介质采样与监测、以采伐运材为主的独立伐木岗位、以及许可与执法与法律适用的最终裁定。"
+              "定义｜美国SOC45-4011在监督下从事森林、湿地及牧场保护维护体力劳动，包括设备检查、栽植抚育、防火带及按指挥灭火、调查协助和GIS外业地图。不同职业任务交叉，设计、许可、执法和火场指挥按任命与法域核；不作一概排除制图和防火的边界。"
             ]
           },
           "id": "forest-and-conservation-workers.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet"
+            "bls",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27260,12 +27271,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "在带班指导下学习野外安全与器械与基础作业，不独立承担作业质量与安全与器械与药剂使用责任。"
+              "编辑核对方向｜按实际中国公告核学历、任务、专业培训与任命，本页无代表性招聘样本；学历不自动授予药剂、器械、灭火或执法权限，不保证可担任某层级。"
             ]
           },
           "id": "forest-and-conservation-workers.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -27302,12 +27313,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "可执行栽植与抚育与清理与器械与设施维护并在指导下使用药剂与参与防火作业；此处为编辑学习线索；证据不足：未核中国大陆本职业学历要求的招聘样本。"
+              "编辑核对方向｜按实际中国公告核学历、任务、专业培训与任命，本页无代表性招聘样本；学历不自动授予药剂、器械、灭火或执法权限，不保证可担任某层级。"
             ]
           },
           "id": "forest-and-conservation-workers.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -27344,12 +27355,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "可承担更复杂的作业与协助调查与记录，并可作为转向技术员岗位的准备。"
+              "编辑核对方向｜按实际中国公告核学历、任务、专业培训与任命，本页无代表性招聘样本；学历不自动授予药剂、器械、灭火或执法权限，不保证可担任某层级。"
             ]
           },
           "id": "forest-and-conservation-workers.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -27386,12 +27397,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "在经营与保护方案与研究中承担更高层级职责；需相应岗位与机构授权。"
+              "编辑核对方向｜按实际中国公告核学历、任务、专业培训与任命，本页无代表性招聘样本；学历不自动授予药剂、器械、灭火或执法权限，不保证可担任某层级。"
             ]
           },
           "id": "forest-and-conservation-workers.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -27414,12 +27425,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "主要雇主；涉及造林与抚育与防火与巡护与设施维护，规程与安全要求严格，季节用工常见。"
+              "机构核对方向｜核真实公告、任务及用工；美国主要雇主构成不推出中国占比，本页无中国代表性招聘样本。"
             ]
           },
           "id": "forest-and-conservation-workers.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -27526,12 +27537,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "说明｜国家统计局按行业门类公布城镇单位就业人员平均工资，属全国城镇单位口径，不区分职业；本职业多在农、林、牧、渔业与相关自然保护与绿化养护场景从业，且编制与公益性岗位与季节性用工与劳务派遣的差异较大，与行业平均值口径不同，不可直接比较。来源与口径｜中国部分引用国家统计局（行业门类平均工资，2025 年农、林、牧、渔业：城镇非私营 74,424 元/年、城镇私营 46,552 元/年）作为背景代理；美国部分来自 BLS OEWS May 2025 与 BLS 职业展望手册 2025—2035；两者法域、期间与统计口径不同，本页不拼接、不换算。"
+              "NBS2025农林牧渔非私营74424、私营46552元/年与本窗全文核查一致，为城镇5人以上法人单位行业均值，不是本职业工资或主要雇主分布。编制、合同、季节、派遣身份不单独决定覆盖，需核报告单位；含奖金津补贴及代扣税社保公积金，中美不拼接。"
             ]
           },
           "id": "forest-and-conservation-workers.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27892,13 +27904,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜OOH就业含自雇，2025年约14,700个岗位；边界｜O*NET仍展示2024年约10,800人，基期不同，不作同年对照。"
+              "口径｜当前2025预测就业14.7千、2035约14.5千，净-0.2千、-1.5%，自雇26.7%；边界｜OEWS雇员6050，预测含自雇且方法不同，不互换。"
             ]
           },
           "id": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "ep",
-            "onet"
+            "weforum",
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -27921,11 +27933,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测增长率（下降），变化约 -200 人；边界｜增长类别不等于绝对岗位数，也不适用其他法域。"
+              "口径｜矩阵-1.5%、OOH整百分数-2%，2025—2035净-0.2千；边界｜四舍五入层级不同，空缺非净新增。"
             ]
           },
           "id": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
+            "weforum",
             "ep"
           ],
           "type": "prose"
@@ -27963,14 +27976,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界｜美国工资为OEWS雇员口径；OOH就业含自雇，2025—2035空缺是预测。OOH公布两类行业中位工资，其他未核得单列值的方向仍明确缺口。"
+              "当前全国及三个具体行业由正常BLSProfiles取得，OOH组合行业另列；OEWS6050雇员与预测14700含自雇不同，行业细类与组合不能直接排名。"
             ]
           },
           "id": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "ep",
-            "r2-pay-1",
-            "oews-methods"
+            "oews-profile-2025",
+            "oews-methods",
+            "weforum"
           ],
           "type": "prose"
         },
@@ -27994,12 +28007,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "核对建议｜OOH列示州政府（不含教育、医院）中位年薪43,680美元，宗教、资助、公民、专业及类似组织39,590美元；不能泛化为政府岗位总比企业高。"
+              "具体行业中位已读，州政府43680、地方政府40150、企业专业等组织56800；不是政府一概高于企业的证明。"
             ]
           },
           "id": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.27",
           "source_refs": [
-            "ep"
+            "oews-profile-2025",
+            "oews-methods",
+            "weforum"
           ],
           "type": "prose"
         },
@@ -28092,12 +28107,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "州政府（不含教育、医院）"
+              "州政府，不含学校与医院"
             ]
           },
           "id": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.34",
           "source_refs": [
-            "ep"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28106,12 +28121,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "43,680美元/年（May 2025，OOH列示的本职业行业中位数）"
+              "43680美元/年（May2025，本职业行业内中位）"
             ]
           },
           "id": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "ep"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28120,12 +28135,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国本职业在该行业的工资中位数，非全部政府岗位工资或个人起薪。"
+              "本行业内SOC45-4011工资中位，不是行业全部人员工资、主要雇主排名或起薪。"
             ]
           },
           "id": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "ep"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28134,12 +28149,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "林业与伐木与木材加工"
+              "企业、专业、劳工、政治及类似组织"
             ]
           },
           "id": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.37",
           "source_refs": [
-            "ep"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28148,12 +28163,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "56800美元/年（May2025，本职业行业内中位）"
             ]
           },
           "id": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "ep"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28162,12 +28177,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "涉及造林与更新与采伐作业与清理与作业执行，季节性与作业窗口特征明显。"
+              "本行业内SOC45-4011工资中位，不是行业全部人员工资、主要雇主排名或起薪。"
             ]
           },
           "id": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "ep"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28176,12 +28191,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "苗圃与园林绿化与景观服务"
+              "地方政府，不含学校与医院"
             ]
           },
           "id": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.40",
           "source_refs": [
-            "ep"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28190,12 +28205,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "40150美元/年（May2025，本职业行业内中位）"
             ]
           },
           "id": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "ep"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28204,12 +28219,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "涉及育苗与栽植与养护与清理，项目制与季节性明显。"
+              "本行业内SOC45-4011工资中位，不是行业全部人员工资、主要雇主排名或起薪。"
             ]
           },
           "id": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "ep"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28218,7 +28233,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "宗教、资助、公民、专业及类似组织"
+              "宗教、资助、公民、专业及类似组织（OOH组合）"
             ]
           },
           "id": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.43",
@@ -28232,7 +28247,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "39,590美元/年（May 2025，OOH列示的本职业行业中位数）"
+              "39590美元/年（May2025，本职业行业内中位）"
             ]
           },
           "id": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.44",
@@ -28246,7 +28261,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业组合口径，不能缩写为某个公益组织或自然教育岗位工资。"
+              "本行业内SOC45-4011工资中位，不是行业全部人员工资、主要雇主排名或起薪。"
             ]
           },
           "id": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.45",
@@ -28274,12 +28289,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "折算解读｜21.00×2,080=43,680美元，为OEWS全年全职统计折算；个人收入须按实际工时、合同及包含项另核。"
+              "OEWS覆盖全职兼职雇员，排自雇等；含生产奖金佣金小费，排加班班次差额非生产奖金及福利。季节身份不自动排除，工资率不表示实际全年收入。 21×2080=43680为统计折算，不是季节雇员实收。"
             ]
           },
           "id": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "oews-methods"
+            "oews-profile-2025",
+            "oews-methods",
+            "weforum"
           ],
           "type": "prose"
         },
@@ -28288,13 +28305,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "统计项目｜本页工资分位由O*NET展示BLS May 2025 OEWS数据；就业和空缺取OOH 2025—2035预测，项目与覆盖人群不同。"
+              "当前全国工资及分位正常动态表读取；预测矩阵2025—2035另核。O*NET所展示旧基期不替代当前BLS。"
             ]
           },
           "id": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "r2-pay-1",
-            "ep"
+            "oews-profile-2025",
+            "oews-methods",
+            "weforum"
           ],
           "type": "prose"
         },
@@ -28528,12 +28546,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜中等：兴趣代码来自 O*NET 对从业者与职业分析的结果，但个体分数与职业代码之间不是一一对应关系。"
+              "O*NET兴趣RC（R100/C51），不是本页问卷职业效度研究；不评中等证据等级，个人分数不等于录用或绩效。"
             ]
           },
           "id": "forest-and-conservation-workers.fit.personality-fit-block.3",
           "source_refs": [
-            "onet"
+            "bls",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28926,12 +28945,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答｜工具与测评不能预测你是否能通过机构与雇主的实习与考核、能否在季节与防火期的高强度下稳定完成体力与作业任务，也不能替代野外与器械体验。最可靠的判断方式是用一次真实或模拟的作业任务来检验作业质量与安全习惯、器械与药剂使用方式与团队协作与异常处置方式。"
+              "探索建议｜先用虚构记录观察核对与沟通过程；合法训练与指导下了解真实作业及安全成本。一次模拟或实操不称最可靠判断，不证明长期适配、资质或独立权限。"
             ]
           },
           "id": "forest-and-conservation-workers.fit.personality-fit-block.27",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -29010,12 +29029,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "若希望承担调查与制图与技术协调责任，需在积累经验后补齐学历与培训并转向该方向。"
+              "比较｜本职业当前也含调查协助和GIS外业制图；技术员更侧重技术数据、监督与带队，实际任务交叉，按具体公告核，不因偏好制图就必须转岗。"
             ]
           },
           "id": "forest-and-conservation-workers.fit.personality-fit-block.33",
           "source_refs": [
-            "onet"
+            "bls",
+            "comparison-technician",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29066,12 +29087,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "保护科学家｜以自然资源与生态系统的科学研究与管理方案为产出：生态与资源调查与建模、保护与修复方案设计、监测与评估与发表"
+              "保护科学家｜保护管理方案及项目实施、监督也是任务，不限科学研究和发表；按实际任务核专业与任命。"
             ]
           },
           "id": "forest-and-conservation-workers.fit.personality-fit-block.37",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -29094,12 +29115,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "若偏好野外作业执行而非研究与方案设计，不建议选择此方向。"
+              "编辑比较｜核目标岗位保护方案、项目实施与监督等任务；保护科学家也有现场工作，不能因喜欢野外作业而一概排除。"
             ]
           },
           "id": "forest-and-conservation-workers.fit.personality-fit-block.39",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -29220,12 +29241,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "入行前要准备什么？先了解真实节奏（季节性与防火期高强度、每天户外全天气 70%、很可能需要野外住宿与长距离徒步与负重），并准备野外安全与器械与药剂常识；可先从季节工或作业辅助做起。"
+              "美国OOH说明工作常有体力要求，可能携重设备长途步行及偏远作业；70%受访者每天户外全天气，不等于住宿概率。多数全职、兼职季节工作常见，紧急响应可能延长工时；具体防火期强度、住宿、培训和健康要求按岗位核。"
             ]
           },
           "id": "forest-and-conservation-workers.fit.personality-fit-block.48",
           "source_refs": [
-            "onet"
+            "ep",
+            "bls",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29234,7 +29257,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "日常压力主要来自哪里？错误的后果很严重（36%）、每天在室内非受控环境作业（57%）、每周一次以上暴露于污染物（53%）、每周一次以上暴露于很热或很冷温度（44%）、每周一次以上噪音（45%）、对他人的健康与安全负高责任（41%）。"
+              "日常压力主要来自哪里？错误的后果很严重（36%）、每天在室内非受控环境作业（57%）、每周至少一次但非每天暴露于污染物（53%）、每周至少一次但非每天暴露于很热或很冷温度（44%）、每周至少一次但非每天噪音（45%）、对他人的健康与安全负高责任（41%）。 比例为受访者回答分布，不是个人工时或事故率。"
             ]
           },
           "id": "forest-and-conservation-workers.fit.personality-fit-block.49",
@@ -29248,12 +29271,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "身体条件有要求吗？需长期户外作业并负重与走动与通过复杂地形（站立超过一半 47%、走动超过一半 44%）；具体用工与体检与安全培训要求以雇主与所在地规定为准，本页不提供体检结论。"
+              "47%回答站立超过半时、44%走动超过半时，为受访者分布；OOH描述可能携重设备长途步行，不代表每人每天负重。具体健康及防护条件按任务和专业要求核。"
             ]
           },
           "id": "forest-and-conservation-workers.fit.personality-fit-block.50",
           "source_refs": [
-            "onet"
+            "ep",
+            "bls",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29417,12 +29442,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于了解该职业通常需要的准备与培训层级。"
+              "localtraining是课程目录，Job Zone1–2为职业准备组别；具体培训时间核岗位，不能由目录推统一职业周期。"
             ]
           },
           "id": "forest-and-conservation-workers.fit.personality-fit-block.62",
           "source_refs": [
-            "onet"
+            "bls",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29672,13 +29698,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "编辑核对建议｜发现火情先执行所在场所的撤离、报警和报告安排；本页不指导未培训人员扑救或处置初起火灾，是否参与须依现场指挥与实际授权。"
+              "中国2026条例｜发现火情立即报警并先保障避险；未经专业培训不得安排直接灭火，参与须服从统一指挥。本页不提供灭火操作参数，具体防火区、时期和用火审批核当地现行规定。"
             ]
           },
           "id": "forest-and-conservation-workers.risk.career-risk-cards.17",
           "source_refs": [
-            "onet",
-            "ep"
+            "cn-forest-fire-2026",
+            "employer"
           ],
           "type": "prose"
         },
@@ -30022,7 +30048,7 @@
                 "样地测量与记录辅助、制图与数据录入辅助、巡查记录辅助",
                 "实习与测绘与野外安全培训记录",
                 "一份虚构的样地调查与制图记录",
-                "承担调查与制图与作业安排与监督，本职业在监督下执行作业与协助调查"
+                "工人也可能GIS制图与调查协助；技术员更侧重技术数据、监督带队，按实际任务核"
               ],
               [
                 "环境科学与保护技术员",
@@ -30646,12 +30672,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域｜本页OOH学历、驾照与在职培训资料适用美国；部分州商业农药使用另有培训或许可。证据不足：未核得中国大陆具体岗位统一资格清单，须按地点、作业与雇主查现行要求。"
+              "法域｜美国OOH入门高中、驾照和在职培训，部分州商业农药训练或许可；中国按现行2026森林草原防灭火条例核专业训练、指挥和用火条件，不自动获得执法、药剂或其他权限，具体地方要求另核。"
             ]
           },
           "id": "forest-and-conservation-workers.path.career-path-block.22",
           "source_refs": [
-            "ep"
+            "ep",
+            "cn-forest-fire-2026",
+            "employer"
           ],
           "type": "prose"
         },
@@ -30716,12 +30744,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于了解该职业通常需要的准备与培训层级（O*NET 训练资料口径）。"
+              "localtraining为课程目录，Job Zone1–2为准备组别；BLS典型高中/无相关经历/中期OJT分类，实际安排另核。"
             ]
           },
           "id": "forest-and-conservation-workers.path.career-path-block.27",
           "source_refs": [
-            "onet"
+            "bls",
+            "weforum"
           ],
           "type": "prose"
         },
@@ -30870,12 +30899,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "带班与防火与药剂与器械资质与雇主任命。"
+              "带班、器械、药剂和防火专项要求分别核实际制度及任命，不称存在本职业统一资质。"
             ]
           },
           "id": "forest-and-conservation-workers.path.career-path-block.38",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -31010,12 +31039,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "数据与档案管理培训；无作业设计与越界判定权。"
+              "数据档案及GIS培训；设计和边界权限核实际任命。"
             ]
           },
           "id": "forest-and-conservation-workers.path.career-path-block.48",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -31290,12 +31319,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "设施维护培训；无采购与设计决定权。"
+              "设施维护培训；采购和设计权限核实际任命。"
             ]
           },
           "id": "forest-and-conservation-workers.path.career-path-block.68",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -31731,13 +31760,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "OOH就业与预测含自雇；美国基期2025年。O*NET仍呈现2024年就业与2024—2034预测，不混为同一期。预测不是实际招聘数。"
+              "预测2025—2035含自雇26.7%，就业14.7千、2035约14.5千、净-0.2千、-1.5%，空缺2.2千/年；OEWS雇员6050及工资另项目，不互换。"
             ]
           },
           "id": "forest-and-conservation-workers.market-signals.market-signal-card.12",
           "source_refs": [
-            "ep",
-            "onet"
+            "weforum",
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -31830,12 +31859,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "OEWS正常工时税前工资不含加班溢价、非生产奖金和雇主福利成本；OOH已列示两类行业中位工资，其余方向的未核值留空。"
+              "OEWS覆盖全职兼职雇员，排自雇等；含生产奖金佣金小费，排加班班次差额非生产奖金及福利。季节身份不自动排除，工资率不表示实际全年收入。 当前四个选定行业中位已核，具体细类与OOH组合分别标注。"
             ]
           },
           "id": "forest-and-conservation-workers.market-signals.market-signal-card.19",
           "source_refs": [
             "oews-methods",
+            "oews-profile-2025",
             "ep"
           ],
           "type": "prose"
@@ -31915,12 +31945,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业门类平均工资不区分职业，且本职业用工形式（编制内、公益性岗位、劳务派遣与季节性用工）与统计口径差异较大，不能替代职业工资。"
+              "NBS为城镇5人以上法人单位行业均值，不区分职业；编制、季节及派遣身份本身不决定覆盖，核实际单位报告。"
             ]
           },
           "id": "forest-and-conservation-workers.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet"
+            "nbs",
+            "employer"
           ],
           "type": "prose"
         },
@@ -32055,12 +32086,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "样地测量与记录、制图与数据库、间伐与除草与补植作业安排与监督"
+              "计数、调查协助、GIS地图及作业核对习惯可复用；技术数据、监督带队任务按目标岗位另补。"
             ]
           },
           "id": "forest-and-conservation-workers.market-signals.market-signal-card.35",
           "source_refs": [
-            "onet"
+            "bls",
+            "comparison-technician",
+            "employer"
           ],
           "type": "prose"
         },
@@ -32069,12 +32102,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近，同属林业现场但由作业执行转向调查与监督与带队"
+              "编辑比较｜任务与任命逐项核，本页无量化转岗距离研究，不保证资格互认或晋升。"
             ]
           },
           "id": "forest-and-conservation-workers.market-signals.market-signal-card.36",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -32111,12 +32144,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等，需学习经营与规划与专业决策"
+              "编辑比较｜任务与任命逐项核，本页无量化转岗距离研究，不保证资格互认或晋升。"
             ]
           },
           "id": "forest-and-conservation-workers.market-signals.market-signal-card.39",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -32153,12 +32186,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等，需研究方法与生态分析"
+              "编辑比较｜任务与任命逐项核，本页无量化转岗距离研究，不保证资格互认或晋升。"
             ]
           },
           "id": "forest-and-conservation-workers.market-signals.market-signal-card.42",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -32195,12 +32228,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近，同属防火但由灭火协助转向检查与调查"
+              "编辑比较｜任务与任命逐项核，本页无量化转岗距离研究，不保证资格互认或晋升。"
             ]
           },
           "id": "forest-and-conservation-workers.market-signals.market-signal-card.45",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -32237,12 +32270,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等，由造林抚育转向环境介质监测"
+              "编辑比较｜任务与任命逐项核，本页无量化转岗距离研究，不保证资格互认或晋升。"
             ]
           },
           "id": "forest-and-conservation-workers.market-signals.market-signal-card.48",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -32279,12 +32312,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等，需通过执法岗位与培训要求"
+              "编辑比较｜任务与任命逐项核，本页无量化转岗距离研究，不保证资格互认或晋升。"
             ]
           },
           "id": "forest-and-conservation-workers.market-signals.market-signal-card.51",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -32321,12 +32354,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近，由作业执行转向一线管理"
+              "编辑比较｜任务与任命逐项核，本页无量化转岗距离研究，不保证资格互认或晋升。"
             ]
           },
           "id": "forest-and-conservation-workers.market-signals.market-signal-card.54",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -32363,12 +32396,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等，由林业与保护转向农业技术"
+              "编辑比较｜任务与任命逐项核，本页无量化转岗距离研究，不保证资格互认或晋升。"
             ]
           },
           "id": "forest-and-conservation-workers.market-signals.market-signal-card.57",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         }
@@ -32497,12 +32530,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜研究流程：先核对 O*NET-SOC 45-4011.00 的职业范围、任务与工作情境，再取 BLS OEWS May 2025 工资与 BLS 职业展望手册 2025—2035 就业与增长与空缺，最后以国家统计局 2025 年行业门类平均工资（农、林、牧、渔业）作为中国大陆的背景代理；美国与中国大陆数据分别列示，不拼接、不换算。"
+              "2026-10-11核当前O*NET任务情境和新聘学历要求、BLS正常Profiles全国与具体行业、OOH2025—2035及矩阵，NBS2025复用本窗已读全文。ILO/NIST仅各自任务暴露及通用治理；新增当前2026森林草原防灭火条例用于中国防火行为，不作全职业资格依据。"
             ]
           },
           "id": "forest-and-conservation-workers.sources.source-card.1",
           "source_refs": [
-            "onet"
+            "bls",
+            "ep",
+            "weforum",
+            "oews-profile-2025",
+            "nbs",
+            "cn-forest-fire-2026"
           ],
           "type": "prose"
         },
@@ -32525,7 +32563,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜2026-10-02复核O*NET职业任务、完整全国工资分位及OOH 2025—2035数据，国家统计局2025年行业工资；O*NET就业仍为2024—2034，数据期与本轮查阅日分开。"
+              "当前核查2026-10-11；O*NET2026、May2025工资、2025—2035预测、NBS2025。共享原来源历史日期不代当前核查。"
             ]
           },
           "id": "forest-and-conservation-workers.sources.source-card.3",
@@ -32542,7 +32580,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜OOH已核两类行业中位工资，余下方向未核得精确值留缺口；中国本职业工资/就业、城市收入、精确AI结果及测评效度未在本页核得。可见标记限定实际查阅范围，不称全部公开数据不存在。"
+              "缺口｜中国精确职业及城市工资、代表性招聘、AI采用效果因果及问卷职业效度未取；中国具体地方用火、药剂及任命另核。所选美国行业工资已取；共享来源旧标题、保护摘要和FAQ及练习不在本轮开放，冲突列作者报告。"
             ]
           },
           "id": "forest-and-conservation-workers.sources.source-card.4",
@@ -33094,6 +33132,38 @@
                 "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-4042.00"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "SOC45-4011全国及行业内年工资中位",
+                  "不得跨法域或作为个人结果"
+                ],
+                "evidence_type": "official wage estimates",
+                "id": "oews-profile-2025",
+                "limitation": "具体岗位收入或授权另核",
+                "market": "美国",
+                "name": "BLS May2025森林与保护工人工资Profiles",
+                "period": "May2025",
+                "publisher": "BLS",
+                "scope": "SOC45-4011全国及行业内年工资中位",
+                "url": "https://data.bls.gov/oesprofile/?year=2025&major_group=450000&occupation=454011&measure=13&areas=INDUSTRY,STATE,MSA"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "中国森林草原防灭火行为与主体",
+                  "不得跨法域或作为个人结果"
+                ],
+                "evidence_type": "official regulation",
+                "id": "cn-forest-fire-2026",
+                "limitation": "具体岗位收入或授权另核",
+                "market": "中国大陆",
+                "name": "森林草原防灭火条例",
+                "period": "2026-01-01施行",
+                "publisher": "国家林业和草原局转载国务院",
+                "scope": "中国森林草原防灭火行为与主体",
+                "url": "https://www.forestry.gov.cn/c/www/szxx/650617.jhtml"
               }
             ]
           },
@@ -34142,7 +34212,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "数量、金额与期间错误"
+            "风险": "原始作业与数量记录失真"
           },
           {
             "为什么重要": {
@@ -34175,13 +34245,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.96",
+              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.97",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.97",
+              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.96",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34201,13 +34271,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.100",
+              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.101",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.101",
+              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.100",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34227,13 +34297,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.104",
+              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.105",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.105",
+              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.104",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34253,13 +34323,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.108",
+              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.109",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.109",
+              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.108",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34279,13 +34349,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.112",
+              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.113",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.113",
+              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.112",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34305,13 +34375,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.116",
+              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.117",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.117",
+              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.116",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34331,13 +34401,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.120",
+              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.121",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.121",
+              "$item": "forest-and-conservation-workers.ai-impact.ai-impact-table.120",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -36022,7 +36092,6 @@
             }
           },
           {
-            "fact_ref": "us-wage-q25-2025",
             "指标": "薪资 · 25 分位",
             "数值": {
               "$item": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.13",
@@ -36038,7 +36107,6 @@
             }
           },
           {
-            "fact_ref": "us-wage-q75-2025",
             "指标": "薪资 · 75 分位",
             "数值": {
               "$item": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.15",
@@ -36189,7 +36257,6 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
             "industry": {
               "$item": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -36210,7 +36277,6 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
             "industry": {
               "$item": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -36231,7 +36297,6 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
             "industry": {
               "$item": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -36252,7 +36317,6 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
             "industry": {
               "$item": "forest-and-conservation-workers.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -38166,7 +38230,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "森林与自然保护从业人员 · 任务、交付与责任边界",
@@ -38217,7 +38281,7 @@
       "text": "森林与自然保护从业人员"
     }
   },
-  "source_content_sha256": "e11b8902094d905e8ea21de2faf4cf632f71d3da3661651c08b4f11fdd9f5283",
+  "source_content_sha256": "425519d6febc80b8ab96af8cc1fbef064c3edc7d7cd6f465e3f64f08b39bbb3d",
   "subject": {
     "canonical_slug": "forest-and-conservation-workers",
     "name": "森林与自然保护从业人员",

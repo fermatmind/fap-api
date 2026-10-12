@@ -7281,7 +7281,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页机车工程师指 O*NET 53-4011.00：驾驶电力、柴电、蒸汽或燃气轮机电力机车运输乘客或货物；接收发车信号并操纵列车，在车站间运输或在调车场编组与解编；运行中监控仪表与轨道、解读调度命令与信号并与列车长、调度中心沟通；运行前后检查机车并处理故障、报告事故与延误。工作以驾驶室与线上作业为主，涉及轮班与重大安全责任。本页不含列车长与调车场场长、信号与道岔维修员、地铁与有轨电车操作员等相邻岗位。"
+              "本页冻结名称“机车工程师”对应 O*NET53-4011.00 Locomotive Engineers，实际工作为机车司机驾驶与操纵，不是机车设计研发工程师。驾驶机车运输客货，按调度命令与信号运行，监控仪表和线路、完成运行检查与报告；实际准驾车型、路线、故障处置和调车范围须按法域及铁路企业授权核验。"
             ]
           },
           "id": "locomotive-engineers.profile.definition-block.1",
@@ -7554,7 +7554,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "列车自动防护、正线监控与调度系统可辅助限速提示、状态记录与调度协同，但操纵机车、判断信号与线路状况、异常处置与安全责任仍由机车工程师与调度承担。"
+              "编辑试验候选：用虚构行车记录测试状态资料整理与报告草稿；列车防护、信号和调度系统不等于AI采用证据，也不允许模型建议改变已批准行车规则。操纵、异常处置与报告按资格、系统和铁路规章由责任人执行。"
             ]
           },
           "id": "locomotive-engineers.ai-impact.ai-impact-table.2",
@@ -7582,7 +7582,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不同环节受影响不同：状态记录、限速提示与调度协同更易自动化，但操纵判断、异常处置与安全责任仍由人负责。"
+              "编辑任务拆分：上述辅助步骤是待验证候选。本轮未取得各环节自动化难度排序或实际采用效果，现场判断和授权责任由岗位责任人确认。"
             ]
           },
           "id": "locomotive-engineers.ai-impact.ai-impact-table.4",
@@ -7596,7 +7596,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "人的控制点是核对调度命令与信号、判断速度与制动、观察线路与仪表、在异常时按程序停车并报告，并对行车安全承担责任。"
+              "人的控制点：按批准规章核调度命令、信号、速度制动与线路仪表；异常依已受训程序和指挥链处置报告，不能由本页提供统一停车或减速规则。"
             ]
           },
           "id": "locomotive-engineers.ai-impact.ai-impact-table.5",
@@ -7638,7 +7638,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以调度命令、信号与现场状况为准，保留人工判断与报告记录。"
+              "系统状态、调度命令或现场信息不一致时按铁路已批准规则处置报告；不得依本页自行决定绕过或关闭防护系统。"
             ]
           },
           "id": "locomotive-engineers.ai-impact.ai-impact-table.8",
@@ -7660,7 +7660,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开职业工资：国家统计局按行业门类发布城镇单位就业人员年平均工资，铁路运输岗位主要计入交通运输、仓储和邮政业，行业平均不能替代本职业工资。"
+              "中国大陆工资边界：国家统计局交通运输仓储邮政业年平均仅作铁路企业宽行业参考，本轮未建立机车司机单列工资对应，不能用行业平均代表职业中位数。"
             ]
           },
           "id": "locomotive-engineers.china-salary.career-snapshot-primary-locale.1",
@@ -7738,7 +7738,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国全国口径下，该职业 2025 年年薪中位数为 81,410 美元（约 39.14 美元/小时），经 O*NET 展示的 2025 年 BLS OEWS 分位为第 10 至第 90 分位 60,680—109,220 美元；O*NET 引用 BLS 数据显示 2024 年就业约 27,000 人、2024—2034 年预计增长约 1%（低于平均）、2034 年约 27,200 人、年均职位空缺约 2,200 个。"
+              "美国全国2025 OEWS工资分位见下表；工资中位数与小时值按原职业来源分别使用。就业预测另为2025年27,400人、2035年27,600人，2025—2035增长1%，年均空缺2,000个（增长与替补）。"
             ]
           },
           "id": "locomotive-engineers.us-salary.career-snapshot-secondary-locale.2",
@@ -7752,7 +7752,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资统计位置：以上为美国全国职业工资口径；该职业常含加班与轮班津贴，分位不代表起薪或个人到手收入。"
+              "2025 OEWS职业工资分位不是个人到手收入；本轮未核实工资表包含加班或轮班津贴的说法，具体合同、津贴与计酬制度逐岗核验。"
             ]
           },
           "id": "locomotive-engineers.us-salary.career-snapshot-secondary-locale.3",
@@ -7766,7 +7766,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "怎样理解这些位置：第 10 分位约 60,680 美元、第 90 分位约 109,220 美元，说明同职业内部差异与资历、线路与企业约定相关；分位不是新手或资深等级。"
+              "第10与90百分位是美国全国该职业工资分布边界，不对应新手或资深等级；分位表不能分解学历、经验、地区或雇主等因素的作用。"
             ]
           },
           "id": "locomotive-engineers.us-salary.career-snapshot-secondary-locale.4",
@@ -7780,7 +7780,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布与局限：O*NET 显示本职业高度集中于运输与仓储业（约 97%）；行业分布是雇主场景信号，不是需求预测。"
+              "O*NET2025行业就业份额：运输与仓储97%。是本职业就业场景信息，非工资、招聘需求或个人机会。"
             ]
           },
           "id": "locomotive-engineers.us-salary.career-snapshot-secondary-locale.5",
@@ -7794,7 +7794,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "规模与口径提示：本职业就业规模较小（约 27,000 人）且预计小幅增长，引用时须标明年份、地域与覆盖范围，且分位与增长率不能跨市场拼接。"
+              "2025就业27,400人、2025—2035增长1%。年均空缺2,000包含替补，并非当前在招岗位或每年新增人数；不推导个人机会或AI因果。"
             ]
           },
           "id": "locomotive-engineers.us-salary.career-snapshot-secondary-locale.6",
@@ -7900,7 +7900,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "大五等通用人格量表不提供本职业的岗位证据，只能用于自我反思；应结合真实模拟操作、规章学习与轮班体验继续核对。"
+              "证据不足：本轮未取得机车司机人格预测效度研究。虚构规章与记录样本仅作兴趣观察，不能证明健康、驾驶适应性或安全胜任；正式适任条件须按法域与企业要求检查。"
             ]
           },
           "id": "locomotive-engineers.fit.riasec-fit-block.7",
@@ -8029,7 +8029,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国侧该职业通常属 Job Zone 1—2（很少到少量准备），多以高中文凭或同等学历为常见起点（约 64% 受访者），并在岗培训数天至一年；铁路企业通常另有内部培训与资格认证流程，须按雇主与线路要求核对。"
+              "O*NET教育问题询问新入职者需要什么：64%受访者选择高中或同等、27%高中后证书、9%低于高中，非在岗学历分布。JobZone1—2培训是组别信息，不抵销机车司机专门认证、训练和驾驶要求。"
             ]
           },
           "id": "locomotive-engineers.path.career-path-block.2",
@@ -8043,12 +8043,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国：以在职培训与企业资格认证为主，相关培训不等于独立驾驶授权。中国大陆：无与该 O*NET 精确对应的统一职业资格，岗位多按铁路企业与主管部门要求确定，须分别核对。"
+              "中国大陆：国家铁路局2025实施细则要求铁路机车车辆驾驶人员经考试取得相应类别驾驶证，企业另有岗前培训、考核与健康检查要求；准驾车型与作业范围须匹配。美国：FRA按49 CFR Part240监管机车司机资格与铁路企业认证。两地制度分别核验，培训证明不能代替驾驶资格。"
             ]
           },
           "id": "locomotive-engineers.path.career-path-block.3",
           "source_refs": [
-            "onet-education"
+            "nra-driver-2025",
+            "fra-engineer-cert"
           ],
           "type": "prose"
         },
@@ -8113,7 +8114,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "向更高责任过渡：积累经验后可负责更复杂线路或编组作业、带教新人，或转向调度、运输管理与机车检修方向。"
+              "编辑目标示例：复杂线路或带教须核新的适任与任用条件；调度、运输管理、检修是独立目标岗位，不由驾驶证自动覆盖。"
             ]
           },
           "id": "locomotive-engineers.path.career-path-block.8",
@@ -8149,7 +8150,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 O*NET 引用 BLS 数据：该职业 2024 年就业约 27,000 人，2024—2034 年预计增长约 1%（低于平均），2034 年约 27,200 人，年均职位空缺约 2,200 个；这是职业统计，不是个人录用概率，也不同于招聘样本。"
+              "美国O*NET/BLS：2025就业27,400、2035预计27,600，2025—2035增长1%，年均空缺2,000（增长与替补）。职业预测非当前招聘样本或个人录用概率。"
             ]
           },
           "id": "locomotive-engineers.market-signals.market-signal-card.2",
@@ -8163,7 +8164,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 显示本职业高度集中于运输与仓储业（约 97%）；就业与空缺为统计预测，须与个人机会分开解释。"
+              "O*NET2025行业就业份额：运输与仓储97%。是本职业就业场景信息，非工资、招聘需求或个人机会。"
             ]
           },
           "id": "locomotive-engineers.market-signals.market-signal-card.3",
@@ -8191,7 +8192,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：目标企业的培训与驾驶授权、线路与车型知识，或转向调度、运输管理与机车检修所需的资格与责任经验。"
+              "转列车长/调车场管理需补行车组织、编组协同与目标岗位专门训练和认证；机车驾驶资格不自动覆盖列车长、调度或检修。"
             ]
           },
           "id": "locomotive-engineers.market-signals.market-signal-card.5",
@@ -8613,6 +8614,36 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "机车驾驶专门资格、认证与监管边界；不作为行车操作指令"
+                ],
+                "evidence_type": "official railway authority",
+                "id": "nra-driver-2025",
+                "limitation": "两地制度不得互认推断；车型线路与实际岗位要求另核",
+                "market": "中国大陆",
+                "name": "国家铁路局铁路机车车辆驾驶人员资格许可实施细则2025",
+                "period": "当前，2026-10-11核查",
+                "publisher": "国家铁路局",
+                "scope": "中国大陆机车驾驶",
+                "url": "https://source.nra.gov.cn/xxgk/gkml/ztjg/gfzd/gfxw/zuti/xzxk/202503/t20250326_348317.shtml"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "机车驾驶专门资格、认证与监管边界；不作为行车操作指令"
+                ],
+                "evidence_type": "official railway authority",
+                "id": "fra-engineer-cert",
+                "limitation": "两地制度不得互认推断；车型线路与实际岗位要求另核",
+                "market": "美国",
+                "name": "FRA机车司机资格与认证监管",
+                "period": "当前，2026-10-11核查",
+                "publisher": "Federal Railroad Administration",
+                "scope": "美国机车驾驶",
+                "url": "https://railroads.dot.gov/railroad-safety/divisions/operating-practices/operating-practices-0"
               }
             ]
           },
@@ -8801,12 +8832,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "限速提示与状态记录",
+            "AI主要改变": "编辑待验证候选：限速提示与状态记录",
             "仍由人负责": "操纵与安全判断",
             "方向": "操纵与监控"
           },
           {
-            "AI主要改变": "状态整理",
+            "AI主要改变": "编辑待验证候选：状态整理",
             "仍由人负责": "事故与故障报告",
             "方向": "记录与报告"
           }
@@ -8840,7 +8871,7 @@
           {
             "使用限制": "不替代所在地授权与铁路规章。",
             "来源": {
-              "$source": "onet-context",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -8849,7 +8880,7 @@
             "研究对象": "53-4011.00 的任务与工作情境",
             "结论": "支持任务拆分，不支持 AI 采用率",
             "链接": {
-              "$source": "onet-context",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8866,7 +8897,7 @@
               "item": "locomotive-engineers.source-register.published.1"
             },
             "研究对象": "美国精确职业就业预测",
-            "结论": "支持规模与增长判断",
+            "结论": "支持2025—2035职业就业预测，不证明AI因果",
             "链接": {
               "$source": "onet-trends",
               "block": "source-register",
@@ -8916,7 +8947,7 @@
             "问题": "AI 会取代机车工程师吗？"
           },
           {
-            "回答": "目前只写到可辅助的限速提示、状态记录与调度协同，操纵与安全判断仍由人承担。",
+            "回答": "编辑试验候选：用虚构行车记录测试状态资料整理与报告草稿；列车防护、信号和调度系统不等于AI采用证据，也不允许模型建议改变已批准行车规则。操纵、异常处置与报告按资格、系统和铁路规章由责任人执行。",
             "来源": {
               "$source": "onet-details",
               "block": "source-register",
@@ -8931,10 +8962,10 @@
               "field": "url",
               "item": "locomotive-engineers.source-register.published.1"
             },
-            "问题": "数字化工具会先影响哪个环节？"
+            "问题": "数字化工具可在哪些步骤做受控试验？"
           },
           {
-            "回答": "没有职业级采用率来源，本页不提供这类数字。",
+            "回答": "证据不足：本轮未取得该职业AI采用率、节省工时或因果就业研究。",
             "来源": {
               "$source": "onet-details",
               "block": "source-register",
@@ -8973,7 +9004,7 @@
           },
           {
             "步骤": "记录升级",
-            "说明": "异常立即停车并报告。"
+            "说明": "异常按已受训、已批准行车规章处置并报告。"
           }
         ],
         "risk_rows": [
@@ -9017,7 +9048,7 @@
             "当前变化": "可能辅助限速提示"
           },
           {
-            "人的控制点": "按规章停车并报告。",
+            "人的控制点": "按已批准规章处理并报告，不由本页设统一停车规则。",
             "任务": "异常与紧急处置",
             "工作方向": "安全与应急",
             "当前变化": "不作自动安全判断"
@@ -9164,12 +9195,12 @@
       },
       "career_ai_description_block": {
         "body": [
-          "列车自动防护、正线监控与调度系统可辅助限速提示、状态记录与调度协同，但操纵机车、判断信号与线路状况、异常处置与安全责任仍由机车工程师与调度承担。"
+          "编辑试验候选：用虚构行车记录测试状态资料整理与报告草稿；列车防护、信号和调度系统不等于AI采用证据，也不允许模型建议改变已批准行车规则。操纵、异常处置与报告按资格、系统和铁路规章由责任人执行。"
         ],
         "heading": "机车工程师的工作对象与 AI 边界"
       },
       "career_path_block": {
-        "boundary": "资质、企业认证与驾驶授权由具体法域、铁路企业与主管部门核验；培训完成不等于驾驶授权。",
+        "boundary": "三路线为编辑目标比较，非固定晋升序列。中国相应准驾驾驶证、健康及岗前培训，美国Part240认证与线路适任，和调度/检修岗位授权分别核验。",
         "competence_ladder": [
           {
             "description": "确认调度命令、信号与机车状态。",
@@ -9317,7 +9348,7 @@
                 "role": "学员/助理"
               },
               {
-                "credentials": "按企业与线路要求核验。",
+                "credentials": "核适用法域驾驶资格、准驾车型与企业上岗/线路要求。",
                 "next_moves": {
                   "$item": "locomotive-engineers.path.career-path-block.8",
                   "block": "path",
@@ -9326,21 +9357,21 @@
                 },
                 "readiness_evidence": "保留运行检查与行车记录。",
                 "responsibility": "按授权独立操纵并完成行车交付。",
-                "role": "机车工程师"
+                "role": "机车司机"
               },
               {
                 "credentials": "按企业与岗位要求核验。",
                 "next_moves": "补足复杂作业与带教证据。",
                 "readiness_evidence": "保留复杂行车与带教记录。",
                 "responsibility": "负责复杂线路或编组作业并带教新人。",
-                "role": "资深机车工程师"
+                "role": "资深机车司机"
               },
               {
                 "credentials": "按企业与岗位要求核验。",
                 "next_moves": "补足管理与安全责任证据。",
                 "readiness_evidence": "保留指导与质量检查记录。",
                 "responsibility": "负责运行指导与安全质量。",
-                "role": "值班/指导工程师"
+                "role": "运行指导/带教岗位"
               }
             ],
             "title": "机车驾驶与运输交付"
@@ -9400,18 +9431,18 @@
                 "credentials": "按企业要求核验。",
                 "next_moves": "补足系统与标准知识。",
                 "readiness_evidence": "保留复杂检修与维护记录。",
-                "responsibility": "负责复杂检修与信号设备维护。",
-                "role": "信号/检修骨干"
+                "responsibility": "在检修授权内处理复杂机车故障；信号设备维护需另核专门知识与任用。",
+                "role": "机车检修骨干"
               },
               {
                 "credentials": "按企业要求核验。",
                 "next_moves": "补足管理责任证据。",
                 "readiness_evidence": "保留质量与安全记录。",
                 "responsibility": "负责检修质量与安全管理。",
-                "role": "检修/信号主管"
+                "role": "检修主管"
               }
             ],
-            "title": "转向机车检修与信号设备"
+            "title": "转向机车检修（信号维护另评估）"
           }
         ]
       },
@@ -9564,17 +9595,17 @@
           }
         ],
         "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
-        "evidence_scope": "依据 O*NET 53-4011.00 的任务与工作情境，以及行车规章、信号解读、运行检查与事故报告中的安全与准确要求；具体规则按铁路企业、线路与所在地核对，驾驶授权按适用法域确认，不跨范围外推。",
+        "evidence_scope": "基于驾驶、信号解读、检查、报告任务的编辑风险情境，不是事故率或行车操作规程。驾驶制度按NRA中国细则或FRA美国Part240分别核，实际异常动作与系统使用以铁路已批准规章为准。",
         "heading": "机车工程师的工作风险与边界",
         "risks": [
           {
             "affected_roles": "行车操纵岗位",
             "consequence": "可能造成行车事故与重大后果。",
             "evidence_refs": [
-              "onet-tasks"
+              "locomotive-engineers.display.source.onet-tasks"
             ],
             "id": "risk-1",
-            "mitigation": "按规章确认并复诵信号，不确定时减速或停车确认。",
+            "mitigation": "信号或调度信息不确定时按铁路已批准规章确认、处置和报告；本页不指定通用减速或停车动作。",
             "scenario": "信号或调度命令被误判或未复诵确认时。",
             "title": {
               "$item": "locomotive-engineers.risk.career-risk-cards.1",
@@ -9587,7 +9618,7 @@
             "affected_roles": "运行检查岗位",
             "consequence": "可能导致途中故障或安全风险。",
             "evidence_refs": [
-              "onet-tasks"
+              "locomotive-engineers.display.source.onet-tasks"
             ],
             "id": "risk-2",
             "mitigation": "按清单检查燃料、沙、水与机械并保留记录。",
@@ -9603,7 +9634,7 @@
             "affected_roles": "行车操纵与值班岗位",
             "consequence": "可能影响判断与反应速度。",
             "evidence_refs": [
-              "onet-context"
+              "locomotive-engineers.display.source.onet-context"
             ],
             "id": "risk-3",
             "mitigation": "按规定休息与交接，状态不佳时如实报告。",
@@ -9619,7 +9650,7 @@
             "affected_roles": "行车操纵岗位",
             "consequence": "可能扩大事故后果。",
             "evidence_refs": [
-              "onet-context"
+              "locomotive-engineers.display.source.onet-context"
             ],
             "id": "risk-4",
             "mitigation": "按安全程序处置并立即报告调度。",
@@ -9635,7 +9666,7 @@
             "affected_roles": "记录与报告岗位",
             "consequence": "可能影响调查与后续处置。",
             "evidence_refs": [
-              "onet-details"
+              "locomotive-engineers.display.source.onet-details"
             ],
             "id": "risk-5",
             "mitigation": "按规程及时填写报告并保存记录。",
@@ -9651,10 +9682,10 @@
             "affected_roles": "行车操纵岗位",
             "consequence": "可能在系统与现场不一致时作出错误判断。",
             "evidence_refs": [
-              "onet-details"
+              "locomotive-engineers.display.source.onet-details"
             ],
             "id": "risk-6",
-            "mitigation": "以调度命令、信号与现场状况为准，保留人工判断与报告记录。",
+            "mitigation": "信息冲突按批准规则与指挥链处置，核防护系统使用要求并留记录；不因本页内容而停用或越过防护。",
             "scenario": "把自动防护或提示未经核对当作行车依据时。",
             "title": "自动化提示或防护系统的直接依赖"
           }
@@ -9741,7 +9772,7 @@
             {
               "指标": "中国大陆职业工资",
               "数值": "证据不足：未单列",
-              "说明": "国家统计局按行业门类发布，未单列本职业工资。"
+              "说明": "本轮国家统计局行业资料未建立本职业单列对应；不表示所有公开渠道均无数据。"
             },
             {
               "指标": "中国大陆行业代理",
@@ -9828,7 +9859,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国大陆无本职业单列工资；下列为行业代理，不是起薪、中位数或到手收入。",
+          "china_open": "证据不足：本轮未建立本职业单列工资对应；下列行业平均仅作宽口径代理，非职业中位数、起薪或到手收入。",
           "china_ref": {
             "$join": [
               {
@@ -10048,7 +10079,7 @@
           },
           {
             "指标": "就业 · 规模",
-            "数值": "27,000 人（2024）",
+            "数值": "27,400人（2025）",
             "说明": {
               "$join": [
                 {
@@ -10072,7 +10103,7 @@
           },
           {
             "指标": "就业 · 增长",
-            "数值": "约 +1%（2024—2034）",
+            "数值": "1%（2025—2035）",
             "说明": {
               "$join": [
                 {
@@ -10096,7 +10127,7 @@
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "约 2,200 个/年（2024—2034 年均）",
+            "数值": "2,000个/年（2025—2035增长与替补）",
             "说明": {
               "$join": [
                 {
@@ -10119,7 +10150,7 @@
             }
           }
         ],
-        "boundary": "美国全国口径：工资为 BLS 2025 年 OEWS 数据，就业与展望为 2024—2034 年预测；不含个人到手收入、起薪或授权结论。",
+        "boundary": "美国全国：2025 OEWS工资与2025—2035就业预测分别解释，不跨职业/法域拼接，不作为个人报价。",
         "direct_answer": {
           "$item": "locomotive-engineers.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10128,15 +10159,15 @@
         },
         "factor_rows": [
           {
-            "answer": "通常以高中文凭或同等学历为起点并在岗培训；铁路企业另有内部培训与驾驶授权。",
+            "answer": "美国FRA Part240认证要求、中国相应驾驶证及企业岗前培训分别核验；教育调查不是资格许可。",
             "factor": "资格"
           },
           {
-            "answer": "多在岗与师徒学习；行车经验与安全记录比课程名称更常被参考。",
+            "answer": "编辑建议：展示正式训练、规章学习与受监督运行检查记录；经验不替代驾驶资格、车型线路适任或健康条件，不比较其与课程的录用效度。",
             "factor": "经验"
           },
           {
-            "answer": "受铁路企业与线路分布影响大，不得跨地区外推。",
+            "answer": "目标企业、线路与工资合同单独核，全国分位未分解其收入影响。",
             "factor": "地区"
           }
         ],
@@ -10146,7 +10177,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "约 +1%（低于平均，2024—2034）",
+        "growth": "1%（2025—2035）",
         "heading": {
           "$item": "locomotive-engineers.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10159,27 +10190,27 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024",
+        "industry_period": "2025",
         "industry_rows": [
           {
             "industry": "运输与仓储业",
             "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体分位为准。"
+            "note": "证据不足：本轮未取得该职业×行业工资子表；整体分位不能冒充分行业中位工资。"
           },
           {
             "industry": "其他行业",
             "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体分位为准。"
+            "note": "证据不足：本轮未取得该职业×行业工资子表；整体分位不能冒充分行业中位工资。"
           },
           {
             "industry": "行业口径说明一",
             "median": "见就业行",
-            "note": "以 O*NET/BLS 行业口径为准，不跨职业外推。"
+            "note": "证据不足：本轮未取得该职业×行业工资子表；整体分位不能冒充分行业中位工资。"
           },
           {
             "industry": "行业口径说明二",
             "median": "见就业行",
-            "note": "就业规模较小，不得跨地区外推。"
+            "note": "证据不足：本轮未取得该职业×行业工资子表；整体分位不能冒充分行业中位工资。"
           }
         ],
         "industry_value_label": "行业值",
@@ -10195,11 +10226,11 @@
             "question": "工资"
           },
           {
-            "answer": "2024 年在岗人数，不是招聘职位数。",
+            "answer": "2025就业人数，不是当前在招职位。",
             "question": "就业"
           },
           {
-            "answer": "2024—2034 预测增长约 1%（低于平均），不是个人录用概率。",
+            "answer": "2025—2035增长1%；不推导个人录用概率或AI因果。",
             "question": "展望"
           },
           {
@@ -10209,7 +10240,7 @@
         ],
         "median": "$81,410/年（2025）",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "2024—2034",
+        "outlook_period": "2025—2035",
         "wage_column_labels": [
           "分位",
           "年度参考",
@@ -10226,7 +10257,7 @@
           {
             "equivalent": "$29.17/小时",
             "interpretation": "第 10 分位边界，不是个人报价。",
-            "label": "最低 10%",
+            "label": "第10百分位",
             "value": "$60,680/年"
           },
           {
@@ -10238,7 +10269,7 @@
           {
             "equivalent": "$52.51/小时",
             "interpretation": "第 90 分位边界，不是个人报价。",
-            "label": "最高 90%",
+            "label": "第90百分位",
             "value": "$109,220/年"
           }
         ]
@@ -10320,7 +10351,7 @@
         "outlook_evidence": [
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
+            "horizon": "2025—2035",
             "interpretation": "就业规模、增长率与职位空缺必须分别解释。",
             "limitation": "不能作为个人就业保证。",
             "metric": "就业规模与增长",
@@ -10334,12 +10365,12 @@
           },
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
+            "horizon": "2025—2035",
             "interpretation": "含替代与新增需求，不等于在招岗位数。",
             "limitation": "不能作为个人录用概率。",
             "metric": "年均职位空缺",
             "occupation_scope": "O*NET 53-4011.00（美国全国）",
-            "value": "约 2,200 个/年"
+            "value": "2,000个/年（增长与替补）"
           },
           {
             "geography": "美国全国",
@@ -10628,7 +10659,7 @@
           {
             "direction": "规章与信号",
             "fit_signals": "愿意学习并遵守铁路规章。",
-            "watchouts": "不确定须停车并确认。"
+            "watchouts": "不确定按已批准行车规章确认与报告。"
           },
           {
             "direction": "运行检查与维护协同",
@@ -10662,7 +10693,7 @@
             "question": "你能严格按规章作业吗？"
           },
           {
-            "answer": "如实评估是否先减速或停车确认。",
+            "answer": "核对能否遵循已经训练的行车规则确认、处置和报告；本页不规定具体操纵动作。",
             "question": "面对信号不确定你如何反应？"
           },
           {
@@ -10972,7 +11003,7 @@
             "item": "locomotive-engineers.source-register.published.1"
           }
         },
-        "note": "来源范围、限制和统计时期按原始证据分别核对。来源使用说明：O*NET 53-4011.00 机车工程师（摘要）：提供 53-4011.00 的职业身份、描述、任务、兴趣代码、教育与相关职业。；摘要与详细档案需合并解释。；O*NET 53-4011.00（详细档案）：提供 53-4011.00 的任务、工作活动、工作情境、技能与工具技术细节。；任务与铁路企业规程存在差异。；O*NET 53-4011.00 任务（Tasks）：提供驾驶与操纵、监控与观察、规章解读、运行前后检查与事故报告等任务清单。；任务样本不代表每个岗位执行全部任务。；O*NET 53-4011.00 工作情境（Work Context）：描述驾驶室环境、持续性注意、时间压力与安全后果等情境。；美国工作情境不替代中国法规与企业规程。；O*NET 53-4011.00 全国工资（BLS OEWS 展示）：2025 BLS OEWS 分位与中位工资（美国全国）。；分位不是起薪；保留所示时期、人群与单位。；O*NET 53-4011.00 全国就业趋势：53-4011.00 的就业规模与 2024—2034 年预测与年均职位空缺。；预测不是录用保证。；Industries: 53-4011.00：53-4011.00 的行业分布（运输与仓储业约 97%）。；行业分布是雇主场景信号，不是增长或需求预测。；O*NET 53-4011.00 教育与职业准备：受访者教育水平分布与 Job Zone 1—2（很少到少量准备）。；教育分布不等于每个雇主的硬性要求。；2025年城镇单位就业人员年平均工资情况：提供城镇非私营与私营单位分行业门类年平均工资，用于核对中国工资公开口径。；行业平均不是职业中位数，且不含个体工商户与自由职业者。；企业薪酬调查信息（2024年）：人力资源和社会保障部企业薪酬调查信息，按职业/岗位分类的薪酬查询入口。；覆盖城镇企业，不含机关事业单位；本页未取得与 53-4011.00 精确对应的条目。；FermatMind 机车工程师任务影响量表：整理可辅助任务与人工控制点，用于任务级 AI 与适配讨论。；编辑量表不等于采用率、裁员、法规或证照证据。；"
+        "note": "本页53-4011.00是机车司机驾驶职业，非机车设计工程师。2025工资60680/75190/81410/93260/109220；2025—2035就业27400→27600、1%、空缺2000；行业2025运输仓储97%。Education为新入职教育需要调查，JobZone分组不替代专门驾驶制度。国家统计局2025交通运输仓储邮政平均133981/73133及全国129441仅代理。NRA2025实施细则支持中国驾驶证/岗前培训/健康条件；FRA Part240支持美国认证边界。原共享源事实及冻结身份由保护FAQ/hero消费，旧预测、学历、资格和工程师名称冲突记录待独立复核。精确中国工资、AI和人格结果、行业工资仍缺。"
       },
       "work_context_block": {
         "$item": "locomotive-engineers.profile.work-context-block.5",
@@ -11162,7 +11193,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "机车驾驶与操纵",
@@ -11213,7 +11244,7 @@
       "text": "机车工程师职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "6ea6e14f7433d74834899343df6d46afee93199873876f9c4340817223f7afc0",
+  "source_content_sha256": "2690f6a88ae8c833ce3c84dc870ae8adf54bfc28dc5c36a71a7d5e6077c088c3",
   "subject": {
     "canonical_slug": "locomotive-engineers",
     "name": "机车工程师",

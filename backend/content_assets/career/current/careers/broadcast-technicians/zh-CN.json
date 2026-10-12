@@ -14,20 +14,35 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:industry-mean-period-current": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
       "fact:us-change-2025-2035": {
         "status": "pending_mapping"
       },
+      "fact:us-change-2025-2035-current": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
+      },
+      "fact:us-employment-2025-current": {
+        "status": "pending_mapping"
       },
       "fact:us-employment-2035": {
         "status": "pending_mapping"
       },
+      "fact:us-employment-2035-current": {
+        "status": "pending_mapping"
+      },
       "fact:us-growth-2025-2035": {
         "status": "mapped"
+      },
+      "fact:us-growth-2025-2035-current": {
+        "status": "pending_mapping"
       },
       "fact:us-industry-wage-aerospace-mfg-2025": {
         "status": "pending_mapping"
@@ -46,6 +61,9 @@
       },
       "fact:us-openings-2025-2035": {
         "status": "mapped"
+      },
+      "fact:us-openings-2025-2035-current": {
+        "status": "pending_mapping"
       },
       "fact:us-wage-2025": {
         "status": "mapped"
@@ -11480,52 +11498,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.href": {
-        "ref": {
-          "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.label": {
-        "ref": {
-          "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.headers.explanation": {
         "ref": {
@@ -12135,28 +12113,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.href": {
-        "ref": {
-          "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.20",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.label": {
         "ref": {
@@ -12266,28 +12224,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.href": {
-        "ref": {
-          "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.22",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.label": {
         "ref": {
@@ -12397,28 +12335,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.href": {
-        "ref": {
-          "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.24",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.label": {
         "ref": {
@@ -23900,10 +23818,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "广播技术员以播出链路的设备搭建、值守与排障为核心；广播播音员与电台唱片骑师面向稿件、播报与串联，产出是播出内容；音频与视频技术员面向现场或录制活动的音视频系统搭建与运行；音响工程技术员以录音棚内的拾音与混音为主；计算机网络支持专家面向办公与业务系统，不承担播出链路；电信工程专家负责通信网络与传输系统的设计；电子工程师负责电路与系统设计。名称相近或同处一个机房，都不代表责任可以互换。"
+              "广播技术员重播出设备链路、值守及排障；播音/DJ重内容表达；AV重活动音视频系统；音响工程兼录音及现场声音，不能限定录音棚；网络支持也可服务广播IP系统，但须另补信号与台站规程。电信与电子工程方向更重各自设计任务，职责与授权按岗位核。"
             ]
           },
           "id": "broadcast-technicians.profile.career-quick-answers-block.7",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24010,10 +23932,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "播出链路的设备状态与值守质量由技术员与其班组负责；节目内容与播出安排由节目部门与值班负责人负责；用电与高处作业由具备资格的人员实施；传输覆盖网工程与设备验收由取得相应资格的单位与单位主管部门按规定确认；超出本人训练与授权范围的判断须按流程升级。"
+              "中国现行《广播电视管理条例》第22条：传输覆盖网工程选址、设计、施工、安装按国家规定办理且由依法取得相应资格证书的单位承担；竣工由广播电视行政部门组织验收，合格才能投用。第20条：核准频率频段不得出租转让、已批准技术参数不得擅改。日常内部配置复核不等于法定工程验收。 日常技术、节目安排、班组和承包单位按真实职责协作，不因职业名自动获得最终决定权。"
             ]
           },
           "id": "broadcast-technicians.profile.career-quick-answers-block.17",
+          "source_refs": [
+            "cn-broadcast-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24032,10 +23958,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "能否调整链路与参数基线、能否切换备用通道、能否停机检修，由运行方案、单位规程与设备手册决定；操作与检修权限来自岗位授权与培训记录，不由熟练程度或资历自行产生。"
+              "链路切换、内部配置及停机检修按实际授权、预案和设备要求；培训记录不自动授操作权，已批准发射技术参数改变还须核第20条监管要求。"
             ]
           },
           "id": "broadcast-technicians.profile.career-quick-answers-block.19",
+          "source_refs": [
+            "cn-broadcast-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24087,10 +24017,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧为 O*NET-SOC 27-4012.00（SOC 27-4012），归属于艺术、设计、娱乐、体育与媒体职业群；O*NET 2024 年行业分布为信息业 67%、其他行业 33%（含艺术、娱乐和休闲与教育服务）。BLS 职业展望手册的 Broadcast, Sound, and Video Technicians 同时覆盖本职业与音频与视频技术员（27-4011）与音响工程技术员（27-4014），属于更宽的群体口径。中国大陆《中华人民共和国职业分类大典（2022 年版）》设有广播电视传输与覆盖、广播电视发送与接收等相关职业类别，但同名岗位可能落在广播电台、电视台、网络平台、发射台站或设备厂商中，其值班制度、设备授权与安全要求随之不同，需按岗位实际职责判断。"
+              "本页精确O*NET27-4012，媒体职业群。O*NET现行2025行业份额：信息业70%、其他30%（含教育与艺术娱乐休闲）；美国27-4012结构，不推导中国用工、具体行业人数或工资。 BLS合并组含AV、广播、音响和灯光四子项，且另有单列工资/预测。中国一一映射未核实，不断言存在某特定细类或完全无细类。"
             ]
           },
           "id": "broadcast-technicians.profile.career-quick-answers-block.24",
+          "source_refs": [
+            "summary-current",
+            "industry-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -24109,10 +24044,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把该职业列为 Job Zone Three（SVP 6.0 至低于 7.0），学历构成包含学士学位、副学士或其他两年制学位以及高中或同等学历三类；实际入行多依靠电子与通信相关专业学习、设备厂商培训与台内带教，设备操作与排障能力常通过值班记录与故障处理记录来判断。"
+              "O*NET教育回答为学士、副学士/其他两年制、高中等学历“部分岗位要求”，未给比例，不是现职学历构成。Job Zone3/SVP6至<7为职业组准备概括；BLS精确27-4012典型入门副学士、不需相关职业经验、短期在岗培训，具体雇主另核。"
             ]
           },
           "id": "broadcast-technicians.profile.career-quick-answers-block.26",
+          "source_refs": [
+            "details-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -24131,10 +24070,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 技术清单共列出 11 类技术与软件技能（另有 13 项 Hot Technology 与 2 项 In Demand 技能），含 Microsoft Office、Microsoft Excel、Microsoft Outlook、Microsoft Word、Microsoft PowerPoint、Linux、Microsoft Windows、UNIX，以及 AutoCAD、Adobe 系列（Photoshop／Illustrator／InDesign／After Effects／Premiere Pro）、Adobe Audition 等；标注表示招聘启事中的出现频率，不代表单位已部署或岗位已被替代。现场工具以发射与传输设备、控制台、监视器、测量仪器与网络与服务器设备为主。"
+              "详细页11软件类别与Hot单页13产品计数不同；2025招聘提及Office9%、Excel6%、Outlook/Linux/PowerPoint各3%、Word2%、AutoCAD/Photoshop/Windows各1%、AfterEffects/UNIX<1%，Illustrator/InDesign无比例；前二InDemand，不是部署、效率或替代率。 现场设备、服务器和测量仪器按岗位实际配置核。"
             ]
           },
           "id": "broadcast-technicians.profile.career-quick-answers-block.28",
+          "source_refs": [
+            "details-current",
+            "hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -24153,10 +24096,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作涉及发射设备的用电与高频暴露、天馈系统的高处作业、机房与蓄电池的受限空间与化学品风险，以及夜间与连续值守的疲劳；核对上锁挂牌与停电检修流程、接地与防雷措施、高处作业与射频防护安排，并确认哪些作业必须由具备资格的人员实施。"
+              "按真实设备和作业核用电、射频与高处风险，不把所有机房或蓄电池场所自动认作受限空间。中国目录内特种作业须持相应有效操作证，单位核真伪；普通接线不按职业名自动算电工或高处特种作业。美国OSHA1910.333停电、锁定标识和合格人员测试仅按该条适用条件；中国按适用规定、单位规程执行。 夜间轮值和疲劳安排按真实班表核，96%每周40小时不能证明夜班。"
             ]
           },
           "id": "broadcast-technicians.profile.career-quick-answers-block.30",
+          "source_refs": [
+            "cn-special-current",
+            "osha-electric-current",
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24175,10 +24124,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "在中国大陆，广播电视传输覆盖网的工程选址、设计、施工与安装应当按照国家有关规定办理，并由依法取得相应资格证书的单位承担，工程竣工须经验收合格方可投入使用；广播电视发射台、转播台应当按照规定发射、转播节目，经核准使用的频率与技术参数不得擅自变更；使用他人作品与录制的表演还须按《中华人民共和国著作权法》取得许可并支付报酬。"
+              "中国现行《广播电视管理条例》第22条：传输覆盖网工程选址、设计、施工、安装按国家规定办理且由依法取得相应资格证书的单位承担；竣工由广播电视行政部门组织验收，合格才能投用。第20条：核准频率频段不得出租转让、已批准技术参数不得擅改。日常内部配置复核不等于法定工程验收。 著作权法第46条特例限广播电台电视台：播放他人未发表作品许可付酬，已发表作品可免许可但规定付酬；不能直接套普通网络上架。第45条录音制品公开传播付酬，以及录制表演、制作制品等不同权利和例外分别核，单位许可清单不能一项覆盖全部行为。"
             ]
           },
           "id": "broadcast-technicians.profile.career-quick-answers-block.32",
+          "source_refs": [
+            "cn-broadcast-current",
+            "cn-copyright-current"
+          ],
           "type": "prose"
         },
         {
@@ -24197,10 +24150,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "岗位常见按轮班制（含夜间与节假日值班）安排，外包运维与项目制用工也较常见；比较时把值班与待命时间、夜间与节假日补贴、外派与差旅安排、个人工具与防护用品成本的承担方式，以及设备与信号的保密与使用约定纳入书面协议。"
+              "编辑合同核对：值班、待命、补贴、外包和项目结算须看真实安排；未采集本职业招聘频率，不能断言某种计酬或用工普遍。"
             ]
           },
           "id": "broadcast-technicians.profile.career-quick-answers-block.34",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24208,10 +24164,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "广播技术员（美国侧 O*NET-SOC 27-4012.00，Broadcast Technicians）搭建、操作并维护用于采集、编辑与传输音视频的电子设备，服务对象是广播与电视节目；控制并调整收发的播出信号，以调节音量、信号强度与清晰度；操作卫星、微波或其他发射设备播出节目。日常工作包括用自动化系统播放与录制节目、监控收发信号的强度与清晰度并调整设备、监看监视器并与台内人员沟通音视频电平与播出状态、监控并记录发射机读数、调整视频传输的保真度与亮度对比度、设置并维护台内计算机与网络、安装设备并排障与做小修。它不承担节目定位与内容取舍的决定权，也不代替单位对播出内容的合规审查。"
+              "广播技术员（美国侧 O*NET-SOC 27-4012.00，Broadcast Technicians）搭建、操作并维护用于采集、编辑与传输音视频的电子设备，服务对象是广播与电视节目；控制并调整收发的播出信号，以调节音量、信号强度与清晰度；操作卫星、微波或其他发射设备播出节目。日常工作包括用自动化系统播放与录制节目、监控收发信号的强度与清晰度并调整设备、监看监视器并与台内人员沟通音视频电平与播出状态、监控并记录发射机读数、调整视频传输的保真度与亮度对比度、设置并维护台内计算机与网络、安装设备并排障与做小修。完整任务还含程序替换Core74、电子编辑Core73、图形Supplemental77、脚本与训练片Supplemental54及内容报告51；不把技术员一概排除内容工作，最终播出审核及安排权另按机构职责核。"
             ]
           },
           "id": "broadcast-technicians.profile.definition-block.11",
+          "source_refs": [
+            "details-current",
+            "cn-broadcast-current"
+          ],
           "type": "prose"
         },
         {
@@ -24219,10 +24179,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业身份与任务：O*NET-SOC 27-4012.00 Broadcast Technicians，2026 年更新页面，Job Zone Three（SVP 6.0 至低于 7.0），该职业未被标注 Bright Outlook。官方职责为「搭建、操作并维护用于采集、编辑与传输广播或电视节目音视频的电子设备；控制和调整收发的播出信号以调节音量、信号强度与清晰度；操作卫星、微波或其他发射设备播出广播或电视节目」；共 28 项任务，高重要度任务包括用自动化系统播放与录制节目（88）、报告设备问题并确保维修落实必要时做应急修复（88）、设置并维护台内计算机与网络（87）、监看监视器并与台内人员确认音视频电平与播出状态（85）、监控收发信号的强度与清晰度并调整设备（85）。"
+              "O*NET 职业身份与任务：O*NET-SOC 27-4012.00 Broadcast Technicians，2026 年更新页面，Job Zone Three（SVP 6.0 至低于 7.0），该职业未被标注 Bright Outlook。官方职责为「搭建、操作并维护用于采集、编辑与传输广播或电视节目音视频的电子设备；控制和调整收发的播出信号以调节音量、信号强度与清晰度；操作卫星、微波或其他发射设备播出广播或电视节目」；共 28 项任务，高重要度任务包括用自动化系统播放与录制节目（88）、报告设备问题并确保维修落实必要时做应急修复（88）、设置并维护台内计算机与网络（87）、监看监视器并与台内人员确认音视频电平与播出状态（85）、监控收发信号的强度与清晰度并调整设备（85）。 共28任务为19Core/9Supplemental；另41一般活动、25详细活动和57工作情境，各自计数。"
             ]
           },
           "id": "broadcast-technicians.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -24241,10 +24204,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：国家统计局《2025 年城镇单位就业人员年平均工资情况》（2026-05-15 发布）按行业门类与岗位大类公布平均工资，但没有单列「广播技术员」这一职业；本页按证据路由 （暂无可安全使用的数据）不发布职业级工资数值，也不用行业均值或美国数据替代，只保留统计口径、覆盖范围与可见缺口标记。"
+              "证据不足：尚未取得中国本职业全国工资分布及一一对应细类映射。背景参考：2025文化体育娱乐业城镇非私营129447、私营64015元/年税前（NBS）；门类混合多岗位，不代表广播技术员或所有台站实际行业归类，不推起薪/月薪。"
             ]
           },
           "id": "broadcast-technicians.profile.onet-structured-fields-block.3",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24252,10 +24219,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "就业与前景：O*NET 页面显示本职业 2024 年就业 24,800 人，2024—2034 年预测增长标签为 Decline（下降 1% 或更低），预测期年均职位空缺 1,800 个；BLS 职业展望手册的群体口径给出2025 年在岗 136,600 人、2025—2035 年增长 1%（慢于平均）、净增约 1,700 人、年均约 9,800 个空缺，两者口径与统计期不同，不可互换。"
+              "2025就业24100、2035预测23300，2025—2035净减800、下降3.1%、年均空缺1600（BLS表1.2）；O*NET显示整数-3%。空缺非新增，不是AI归因或个人就业保证。 OOH四子项合并组136600→138400、1.3%、净增1700、空缺9800另计，人数独立舍入。"
             ]
           },
           "id": "broadcast-technicians.profile.onet-structured-fields-block.4",
+          "source_refs": [
+            "ep-current",
+            "ooh-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -24263,10 +24235,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业分布与工具信号：O*NET 2024 年行业分布为信息业 67%、其他行业 33%（含艺术、娱乐和休闲与教育服务）；技术清单含 13 项 Hot Technology 与 2 项 In Demand 技能。行业分布描述统计分类，不能推导行业工资、雇主类型或个人岗位归属。"
+              "O*NET现行2025行业份额：信息业70%、其他30%（含教育与艺术娱乐休闲）；美国27-4012结构，不推导中国用工、具体行业人数或工资。 详细页11软件类别与Hot单页13产品计数不同；2025招聘提及Office9%、Excel6%、Outlook/Linux/PowerPoint各3%、Word2%、AutoCAD/Photoshop/Windows各1%、AfterEffects/UNIX<1%，Illustrator/InDesign无比例；前二InDemand，不是部署、效率或替代率。"
             ]
           },
           "id": "broadcast-technicians.profile.onet-structured-fields-block.5",
+          "source_refs": [
+            "industry-current",
+            "hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -24936,22 +24912,22 @@
                 "url": "https://www.onetonline.org/link/hot_tech/27-4012.00"
               },
               {
-                "entity": "ILO 工作论文 140《Generative AI and Jobs: A Refined Global Index of Occupational Exposure》",
+                "entity": "BLS合并页：广播子表及AI就业讨论",
                 "id": "link-11",
+                "relation": "career.source",
+                "url": "https://www.bls.gov/ooh/media-and-communication/broadcast-and-sound-engineering-technicians.htm"
+              },
+              {
+                "entity": "ILO工作论文140任务暴露",
+                "id": "link-12",
                 "relation": "career.source",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "O*NET-SOC 27-4012.00 行业分布",
-                "id": "link-12",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/27-4012.00"
-              },
-              {
-                "entity": "O*NET-SOC 27-4012.00 职业摘要",
+                "entity": "BLS就业章节AI用人讨论",
                 "id": "link-13",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/27-4012.00"
+                "url": "https://www.bls.gov/ooh/media-and-communication/broadcast-and-sound-engineering-technicians.htm"
               },
               {
                 "entity": "O*NET-SOC 27-4012.00 详细资料（任务与工作活动）",
@@ -24966,16 +24942,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/27-4012.00"
               },
               {
-                "entity": "BLS《Occupational Outlook Handbook》Broadcast, Sound, and Video Technicians",
+                "entity": "BLS表1.2精确27-4012",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/media-and-communication/broadcast-and-sound-engineering-technicians.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET-SOC 27-4012.00 职业摘要",
+                "entity": "现行著作权法",
                 "id": "link-17",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/27-4012.00"
+                "url": "https://www.ncac.gov.cn/xxfb/flfg/flfg_532/202103/t20210309_50530.html"
               },
               {
                 "entity": "O*NET-SOC 27-4012.00 自定义职业档案",
@@ -24984,7 +24960,7 @@
                 "url": "https://www.onetonline.org/link/custom/27-4012.00"
               },
               {
-                "entity": "O*NET-SOC 27-4012.00 详细资料（任务与工作活动）",
+                "entity": "O*NET完整任务教育档案",
                 "id": "link-19",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/27-4012.00"
@@ -25010,7 +24986,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先在带教下完成一次从链路核对、设备状态确认、参数调整、播出值守与异常处置到记录与交接的小型闭环，再谈证书与作品；同时核对目标岗位属于广播电台、电视台、发射台站、网络平台还是设备厂商，其值班制度、设备授权与安全要求不同。"
+              "编辑学习建议：先用纸面或离线虚构链路练习参数核对、故障假设与记录交接。受监督实训须先核合适培训、必要资格及单位设备授权；目录内特种作业上岗须满足适用持证条件，不能先做真实作业再补证。目标岗位属于广播电台、电视台、发射台站、网络平台还是设备厂商，其制度、设备授权与安全要求应分别核对。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.11",
@@ -25087,10 +25063,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：数字化工具可以改变台账、读数汇总、工单流转与配置版本管理，但没有官方证据表明它会取代参数判断、故障定位、应急处置、停电检修与播出责任。任务暴露、设备自动化程度与就业数量是三个不同概念。"
+              "BLS明确技术包括AI可能减少搭建操作广播系统所需技术员；不能保证故障判断等任务永不变化，也不能从整体预测推出本职业AI替代率。编辑核对：测量输入、异常升级、安全与播出权限按真实系统和岗位确认。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.18",
+          "source_refs": [
+            "ooh-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25175,10 +25155,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 11 类技术技能（含 13 项 Hot Technology、2 项 In Demand）；不代表设备自动化程度或岗位替代。"
+              "详细页11软件类别与Hot单页13产品计数不同；2025招聘提及Office9%、Excel6%、Outlook/Linux/PowerPoint各3%、Word2%、AutoCAD/Photoshop/Windows各1%、AfterEffects/UNIX<1%，Illustrator/InDesign无比例；前二InDemand，不是部署、效率或替代率。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.26",
+          "source_refs": [
+            "details-current",
+            "hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -25219,10 +25203,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明 Broadcast Technicians（SOC 27-4012）口径 的就业规模与 2024—2034 年预测。"
+              "2025就业24100、2035预测23300，2025—2035净减800、下降3.1%、年均空缺1600（BLS表1.2）；O*NET显示整数-3%。空缺非新增，不是AI归因或个人就业保证。 BLS就业段明确技术包括AI可让更少技术员搭建操作广播等系统；没有AI单独归因的数量或替代率。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.30",
+          "source_refs": [
+            "ep-current",
+            "ooh-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -25329,10 +25318,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、行业分布、就业与工资数据以及任务暴露研究，不是 AI 替代率或岗位数量预测。"
+              "五证据卡分任务、招聘软件、工资就业与全球暴露；BLS有总体岗位数量预测，缺的是本职业AI归因预测，不混作“没有数量预测”。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.40",
+          "source_refs": [
+            "ep-current",
+            "ooh-current",
+            "ilo-genai"
+          ],
           "type": "prose"
         },
         {
@@ -25461,10 +25455,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面共列出 11 类技术与软件技能（含 13 项 Hot Technology），标注 Hot Technology 的包括 Autodesk AutoCAD、Adobe InDesign／Illustrator／Photoshop／After Effects、Microsoft Outlook／PowerPoint／Word、Linux、Microsoft Windows 与 UNIX；In Demand 技能为 Microsoft Office software 与 Microsoft Excel。"
+              "详细页11软件类别与Hot单页13产品计数不同；2025招聘提及Office9%、Excel6%、Outlook/Linux/PowerPoint各3%、Word2%、AutoCAD/Photoshop/Windows各1%、AfterEffects/UNIX<1%，Illustrator/InDesign无比例；前二InDemand，不是部署、效率或替代率。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.52",
+          "source_refs": [
+            "details-current",
+            "hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -25472,10 +25470,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "为 Broadcast Technicians（SOC 27-4012）口径 的本职业口径，不是父类或行业代理数据，也不构成个人就业保证。"
+              "BLS合并组与27-4012精确子表分读；总体预测不是AI单独归因，也不保证个人就业。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.53",
+          "source_refs": [
+            "ep-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -25494,10 +25496,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "覆盖本职业与 27-4011／27-4014 的群体口径（2025—2035 年）"
+              "合并组含AV/广播/音响/灯光四子项，另列27-4012工资与预测。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.55",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -25505,10 +25510,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该页同时覆盖广播技术员（27-4012）、音频与视频技术员（27-4011）与音响工程技术员（27-4014），给出 2025 年 5 月年薪中位数 60,150 美元、2025 年在岗 136,600 人、2025—2035 年增长 1%、净增约 1,700 人、年均约 9,800 个空缺；它不单列本职业，因此不能替代本页身份口径的数值。"
+              "OOH另列广播2025年薪中位59570、就业24100→23300/净减800；EP精确下降3.1%、空缺1600。合并组136600/增长1.3%/空缺9800不能替代广播；AI段讨论广播等用人减少，不量化AI占比。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.56",
+          "source_refs": [
+            "ooh-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -25560,10 +25569,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在台账管理、读数汇总、工单流转与配置版本比对这类可复核环节，工具确实能提高效率。但工具不知道现场设备的老化程度、接地与屏蔽的实际情况以及临时调度带来的链路变化，产出必须回到测量结果与设备实况逐条核对。"
+              "编辑工具试用：台账、读数、工单与版本比对先测输入完整性、时效、准确和实际效率。具有传感输入的系统并非一概不了解现场；生成摘要不能凭空补真实测量或把过期数据当实况。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.61",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25582,10 +25594,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露、设备自动化程度与就业数量是不同测量对象。O*NET 页面仍显示该职业 2024 年就业 24,800 人、2024—2034 年预测下降 1% 或更低、年均 1,800 个空缺；而参数判断、故障定位与停电检修无法由工具承担，因此不能从暴露度推断岗位消失。"
+              "2025就业24100、2035预测23300，2025—2035净减800、下降3.1%、年均空缺1600（BLS表1.2）；O*NET显示整数-3%。空缺非新增，不是AI归因或个人就业保证。 BLS就业段明确技术包括AI可让更少技术员搭建操作广播等系统；没有AI单独归因的数量或替代率。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.63",
+          "source_refs": [
+            "ep-current",
+            "ooh-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -25593,10 +25610,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不会以整体取代的方式发生：参数基线与链路安排、异常判断与应急处置、测量与校准、停电检修安全以及记录责任仍需由受过训练并获得授权的人负责；工具改变的是可复核的记录与流程环节。"
+              "没有本职业整体替代率可据；BLS讨论AI可能减少部分系统操作人员，不能保证永不替代。法定和单位责任、真实测量与权限仍按适用场景核，不据责任存在推定岗位数量稳定。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.64",
+          "source_refs": [
+            "ooh-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25615,10 +25636,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不需要会写代码。O*NET 技术清单列出的是操作系统、办公与 Adobe 系列等常用工具以及 CAD 类软件；设备原理、测量与排障、安全规程才是门槛，数字化工具有助于记录与协作，但不替代设备与安全训练。"
+              "是否编程按目标岗位核；O*NET含计算机设置、网络维护与Working with Computers活动，软件目录不能证明所有岗位均不需代码。信号、设备、测量与安全训练和数字工具并行评估。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.66",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25659,10 +25684,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 页面显示该职业 2024—2034 年预测增长标签为 Decline（下降 1% 或更低）、年均约 1,800 个空缺；BLS 职业展望手册的群体口径显示 2025—2035 年增长 1%。该预测为统计口径，不构成个人就业保证；实际岗位受播出机构结构、外包运维安排与台站数量影响较大。"
+              "2025就业24100、2035预测23300，2025—2035净减800、下降3.1%、年均空缺1600（BLS表1.2）；O*NET显示整数-3%。空缺非新增，不是AI归因或个人就业保证。 BLS就业段明确技术包括AI可让更少技术员搭建操作广播等系统；没有AI单独归因的数量或替代率。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.70",
+          "source_refs": [
+            "ep-current",
+            "ooh-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -25670,10 +25700,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业摘要（就业与预测字段）"
+              "BLS表1.2精确27-4012，2025—2035预测；OOH就业段AI讨论。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.71",
+          "source_refs": [
+            "ep-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -25681,10 +25715,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。故障与安全结论须由具备资格的人员按流程认定；使用他人作品与录制的表演还涉及著作权与表演者权利，工具既不能承担这些责任，也不能取得相应授权。"
+              "著作权法第46条特例限广播电台电视台：播放他人未发表作品许可付酬，已发表作品可免许可但规定付酬；不能直接套普通网络上架。第45条录音制品公开传播付酬，以及录制表演、制作制品等不同权利和例外分别核，单位许可清单不能一项覆盖全部行为。 软件建议不授信号变更、检修或播出权限。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.72",
+          "source_refs": [
+            "cn-copyright-current",
+            "cn-broadcast-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25692,10 +25731,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页方法说明 /《中华人民共和国著作权法》"
+              "现行著作权法与广播条例；工具控制为编辑建议。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.73",
+          "source_refs": [
+            "cn-copyright-current",
+            "cn-broadcast-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25703,7 +25747,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有任何官方来源给出这样的年份。任务暴露、设备自动化程度与就业数量是不同概念，本页不做岗位消失年份预测。"
+              "本轮所查来源未取得本职业因AI整体消失的年份证据。任务暴露、设备自动化程度与就业数量是不同概念，本页不做岗位消失年份预测。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.74",
@@ -25725,10 +25769,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "优先学信号链与设备原理、测量与校准方法、故障定位顺序、发射与传输设备的安全规程、以及记录与交接习惯，并完成一次受监督的完整值守；把工具使用排在设备与安全能力之后。"
+              "编辑学习建议：先用纸面或离线虚构链路练核对、读数、故障假设和交接，再按合适培训及授权安排受监督实训。信号设备、安全与工具并行学习；不把首次学习前已有台站实训设成前提。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.76",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25736,10 +25784,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 培训与教育信息 / 自定义职业档案"
+              "O*NET详细任务与教育、BLS典型入门；学习次序为编辑建议。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.77",
+          "source_refs": [
+            "details-current",
+            "ep-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25747,10 +25800,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数字化工具进入运维流程时，人的控制点应按以下五步固定下来；任何一步缺失都不应扩大使用范围。"
+              "编辑治理建议：按以下核对输入、权限、版本与复核记录；NIST通用框架不授台站操作或检修权，具体步骤按单位真实制度核。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.78",
+          "source_refs": [
+            "nist-ai-rmf",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25769,10 +25826,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只把可复核的台账、读数、工单与版本比对环节交给工具。"
+              "编辑试用边界：生成工具从可复核文档开始；原任务已有自动化播放与录制Core88，不能把所有系统自动化限定为记录。进入播出控制须单独核可靠性、授权和应急安排。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.80",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25824,10 +25885,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把系统记录标记为初稿，经现场测量与设备核对后再作为运维依据。"
+              "生成草稿不得冒充真实测量；日志系统原始采集、时间戳与生成解释分开留存，复核缺失输入，不把所有真实系统数据统称初稿。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.85",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25857,10 +25921,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "无法追溯的配置与检修记录不能在故障复盘时重现过程，也无法支持责任划分。"
+              "版本、权限及过程记录帮助复现调查，不自动决定法律责任或证明处置正确。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.88",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25890,10 +25957,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按台站与设备固定配置基线；变更时记录理由与影响范围并重新测试与验收。"
+              "内部配置按批准基线、记录影响并作适用测试复核；工程竣工按条例22由广播电视行政部门组织验收，不要求每一次普通配置编辑均重新法定验收。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.91",
+          "source_refs": [
+            "cn-broadcast-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25912,10 +25983,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在值班前确认报告人与升级链；超出本人训练与授权范围时停止并上报。"
+              "按预案报告异常并停止越权或危险作业；主链路停播、备用切换及恢复按有权岗位指令和实际预案，不能把“停止”写成个人擅停播出授权。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.93",
+          "source_refs": [
+            "cn-broadcast-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26187,10 +26262,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对播出链路的稳定运行与检修安全负主要责任。"
+              "具体人员按岗位和授权承担运行检修职责；单位、资格施工方与验收主体各负适用责任，不把全部播出与检修安全的主要责任归单个技术员。"
             ]
           },
           "id": "broadcast-technicians.ai-impact.ai-impact-table.118",
+          "source_refs": [
+            "cn-broadcast-current",
+            "cn-special-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26340,10 +26420,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "未取得与广播技术员精确对应的中国大陆全国职业工资分布；按证据路由 （暂无可安全使用的数据）处理，本页不发布职业级工资数值。"
+              "证据不足：尚未取得中国本职业全国工资分布及一一对应细类映射。背景参考：2025文化体育娱乐业城镇非私营129447、私营64015元/年税前（NBS）；门类混合多岗位，不代表广播技术员或所有台站实际行业归类，不推起薪/月薪。"
             ]
           },
           "id": "broadcast-technicians.china-salary.career-snapshot-primary-locale.7",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26351,7 +26435,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "截至 2026 年 9 月，有界检索未找到单列「广播技术员」的全国职业工资统计；本页身份为 O*NET-SOC 27-4012.00，中国大陆同样没有与之对应的职业细类，且按证据路由不发布职业级数值，也不用行业均值或美国数据替代。"
+              "截至 2026 年 9 月，有界检索未找到单列「广播技术员」的全国职业工资统计；本页身份为 O*NET-SOC 27-4012.00，本轮尚未核验其与中国大陆职业细类的一一对应关系，且按证据路由不发布职业级数值，行业均值仅作显式背景，不用其或美国数据替代精确职业工资。"
             ]
           },
           "id": "broadcast-technicians.china-salary.career-snapshot-primary-locale.8",
@@ -26362,10 +26446,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》按行业门类公布平均工资，但没有单列本职业。"
+              "2025文化体育娱乐业城镇非私营单位：129447元/年税前行业均值，混合多岗位，不是本职业工资。"
             ]
           },
           "id": "broadcast-technicians.china-salary.career-snapshot-primary-locale.9",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26373,10 +26460,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业门类平均工资混合广播、电视、网络平台、发射台站与设备运维等多类岗位，不能替代本职业职业工资；按证据路由本页不展示该类数值，只登记该口径不可替代。"
+              "NBS行业背景参考；台站和相关企业实际行业分类须另核，不按职业名称直接归入该门类。"
             ]
           },
           "id": "broadcast-technicians.china-salary.career-snapshot-primary-locale.10",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26384,10 +26475,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "同一发布另有城镇私营单位口径，同样按行业门类汇总，也不单列本职业。"
+              "同门类城镇私营单位：64015元/年税前行业均值，与非私营统计人群分开。"
             ]
           },
           "id": "broadcast-technicians.china-salary.career-snapshot-primary-locale.11",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26395,10 +26489,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "私营单位与非私营单位覆盖的机构类型不同，且都不提供本职业职业级数值，两者均不可作为本职业工资。"
+              "城镇单位覆盖边界下行业均值，不含个体和自由职业，非全部项目收入。"
             ]
           },
           "id": "broadcast-technicians.china-salary.career-snapshot-primary-locale.12",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26406,10 +26503,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与广播技术员精确对应的中国大陆全国职业工资；本页不发布职业级数值，也不用行业门类均值替代。"
+              "证据不足：尚未取得中国本职业全国工资分布及一一对应细类映射。背景参考：2025文化体育娱乐业城镇非私营129447、私营64015元/年税前（NBS）；门类混合多岗位，不代表广播技术员或所有台站实际行业归类，不推起薪/月薪。"
             ]
           },
           "id": "broadcast-technicians.china-salary.career-snapshot-primary-locale.13",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26439,10 +26540,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "台站外包运维、轮班补贴与项目制结算收入不在该统计覆盖范围内；本页要求读者以当地真实招聘与合同为准。"
+              "统计覆盖按法人单位与就业人数等定义判断，项目制或外包员工不是自动排除；个体工商户与自由职业者不在此统计内。"
             ]
           },
           "id": "broadcast-technicians.china-salary.career-snapshot-primary-locale.16",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26461,10 +26565,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国工资资料期为 2025 年（BLS OEWS）与 2024—2034 年预测；两个市场的资料期与口径不同，不能并列比较。"
+              "中国行业参考2025；美国本职业工资2025、预测2025—2035分别核，不跨法域换算。"
             ]
           },
           "id": "broadcast-technicians.china-salary.career-snapshot-primary-locale.18",
+          "source_refs": [
+            "nbs-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -26483,10 +26591,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "工资总额为税前口径，包含单位代扣代缴的个人所得税、社会保险和住房公积金个人缴纳部分，不等于到手收入；值班与夜间补贴、外派差旅补助另按实际约定计算。"
+              "NBS税前工资总额含定义内奖金津贴补贴等，不统一把轮班、项目员工或补贴排除；实发与实际结算另核。"
             ]
           },
           "id": "broadcast-technicians.china-salary.career-snapshot-primary-locale.20",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26494,10 +26605,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论：中国大陆无本职业精确职业数据；本页只展示统计口径、覆盖范围与缺口标记，不给出任何替代数值。"
+              "证据不足：尚未取得中国本职业全国工资分布及一一对应细类映射。背景参考：2025文化体育娱乐业城镇非私营129447、私营64015元/年税前（NBS）；门类混合多岗位，不代表广播技术员或所有台站实际行业归类，不推起薪/月薪。"
             ]
           },
           "id": "broadcast-technicians.china-salary.career-snapshot-primary-locale.21",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26516,7 +26631,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "数字化工具会改变台账、读数与工单等环节，但不改变中国大陆对该职业的统计口径：统计缺口与工具无关。"
+              "编辑分析：数字化工具可能辅助台账、读数与工单等环节，具体效果须验证。本轮未取得本职业工具采用对工资统计影响的数据；当前NBS发布未单列本职业工资，工具信号不能填补精确工资，也不能判断缺口成因或未来分类。"
             ]
           },
           "id": "broadcast-technicians.china-salary.career-snapshot-primary-locale.23",
@@ -26527,10 +26642,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业分类：中国大陆《中华人民共和国职业分类大典（2022 年版）》设有广播电视传输与覆盖、广播电视发送与接收等相关职业类别，但没有与「广播技术员」一一对应的细类；相关岗位可能落在广播电台、电视台、发射台站、网络平台或设备运维企业中，值班制度与设备授权随之不同，须按岗位实际职责判断。"
+              "美国身份O*NET27-4012；证据不足：中国一一对应细类代码及全国职业工资未核实，不把尚未找到写成不存在。"
             ]
           },
           "id": "broadcast-technicians.china-salary.career-snapshot-primary-locale.24",
+          "source_refs": [
+            "summary-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26593,10 +26712,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "传输覆盖网工程须由依法取得相应资格证书的单位承担并经验收合格；发射台与转播台须按核准的技术参数运行，涉及用电与高处作业的环节须由具备资格的人员实施。"
+              "O*NET教育回答为学士、副学士/其他两年制、高中等学历“部分岗位要求”，未给比例，不是现职学历构成。Job Zone3/SVP6至<7为职业组准备概括；BLS精确27-4012典型入门副学士、不需相关职业经验、短期在岗培训，具体雇主另核。 中国岗位学历门槛未核；中国现行《广播电视管理条例》第22条：传输覆盖网工程选址、设计、施工、安装按国家规定办理且由依法取得相应资格证书的单位承担；竣工由广播电视行政部门组织验收，合格才能投用。第20条：核准频率频段不得出租转让、已批准技术参数不得擅改。日常内部配置复核不等于法定工程验收。"
             ]
           },
           "id": "broadcast-technicians.china-salary.career-snapshot-primary-locale.30",
+          "source_refs": [
+            "details-current",
+            "ep-current",
+            "cn-broadcast-current"
+          ],
           "type": "prose"
         },
         {
@@ -26626,10 +26750,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "参数基线与重大变更的批准权仍由值班负责人与单位行使，不因经验年限自动取得。"
+              "编辑核对：工程岗位、日常运行和监管批准参数边界分别核；中国现行《广播电视管理条例》第22条：传输覆盖网工程选址、设计、施工、安装按国家规定办理且由依法取得相应资格证书的单位承担；竣工由广播电视行政部门组织验收，合格才能投用。第20条：核准频率频段不得出租转让、已批准技术参数不得擅改。日常内部配置复核不等于法定工程验收。"
             ]
           },
           "id": "broadcast-technicians.china-salary.career-snapshot-primary-locale.33",
+          "source_refs": [
+            "cn-broadcast-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26681,7 +26809,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆行业统计中，广播与电视相关岗位可能归入文化、体育和娱乐业或信息传输等门类；本页不展示其平均值，也不据此推算本职业工资。"
+              "中国大陆按实际雇主主要经济活动匹配行业；本页已展示2025文化、体育和娱乐业非私营129,447元/年、私营64,015元/年的税前年平均工资作为显式背景，不能据此推算本职业工资或把所有台站归入该门类。"
             ]
           },
           "id": "broadcast-technicians.china-salary.career-snapshot-primary-locale.38",
@@ -26758,10 +26886,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆目前没有单列该职业的全国职业工资统计；按证据路由本页只展示可核对的统计口径、覆盖范围与缺口，不给出替代数值。"
+              "证据不足：尚未取得中国本职业全国工资分布及一一对应细类映射。背景参考：2025文化体育娱乐业城镇非私营129447、私营64015元/年税前（NBS）；门类混合多岗位，不代表广播技术员或所有台站实际行业归类，不推起薪/月薪。"
             ]
           },
           "id": "broadcast-technicians.china-salary.career-snapshot-primary-locale.45",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26868,10 +27000,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业对照：美国 O*NET-SOC 27-4012.00（Broadcast Technicians，SOC 27-4012）；音频与视频技术员（27-4011.00）与音响工程技术员（27-4014.00）为独立相邻条目；中国大陆无直接对应的职业细类代码。"
+              "美国身份O*NET27-4012；证据不足：中国一一对应细类代码及全国职业工资未核实，不把尚未找到写成不存在。"
             ]
           },
           "id": "broadcast-technicians.china-salary.career-snapshot-primary-locale.55",
+          "source_refs": [
+            "summary-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26902,10 +27038,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "下降 1% 或更低（Decline）"
+              "下降3.1%（2025—2035；27-4012）"
             ]
           },
           "id": "broadcast-technicians.china-salary.career-snapshot-primary-locale.58",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27062,10 +27201,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "对应时薪第 10 分位 15.09 美元，为分布下限，不是入门起薪的承诺。；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/27-4012.00"
+              "时薪P10为15.09美元，描述第10分位，不是分布最低值、最低工资或新人起薪。"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.10",
+          "source_refs": [
+            "wages-current"
+          ],
           "type": "prose"
         },
         {
@@ -27150,7 +27292,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同口径时薪第 90 分位为 59.46 美元，高分段通常与台站规模、值班责任与资历相关。；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/27-4012.00"
+              "同口径时薪第 90 分位为 59.46 美元，全国分位不显示这些因素的分组相关或因果贡献；编辑建议按目标雇主合同核对台站类型、责任、资历要求和实际报价；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/27-4012.00"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.18",
@@ -27161,10 +27303,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "24,800人（2024 年，Broadcast Technicians（SOC 27-4012）口径）"
+              "24100人（2025；27-4012）"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.19",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27172,10 +27317,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为 Broadcast Technicians（SOC 27-4012）口径 的就业基数，该职业集中于信息业（67%），其余分布在艺术、娱乐和休闲与教育服务等行业。；O*NET 职业摘要｜https://www.onetonline.org/link/summary/27-4012.00"
+              "2025就业24100、2035预测23300，2025—2035净减800、下降3.1%、年均空缺1600（BLS表1.2）；O*NET显示整数-3%。空缺非新增，不是AI归因或个人就业保证。"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.20",
+          "source_refs": [
+            "ep-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -27183,10 +27332,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "下降 1% 或更低（Decline，2024—2034 年）"
+              "下降3.1%（2025—2035）"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.21",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27194,10 +27346,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该增长标签为 Broadcast Technicians（SOC 27-4012）口径，该职业未被标注 Bright Outlook。；O*NET 职业摘要｜https://www.onetonline.org/link/summary/27-4012.00"
+              "2025就业24100、2035预测23300，2025—2035净减800、下降3.1%、年均空缺1600（BLS表1.2）；O*NET显示整数-3%。空缺非新增，不是AI归因或个人就业保证。"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.22",
+          "source_refs": [
+            "ep-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -27205,10 +27361,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "1,800个/年（2024—2034 年预测）"
+              "1600个/年（2025—2035空缺）"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.23",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27216,10 +27375,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为预测期年均职位空缺，主要来自替代需求，不是净新增，也不构成个人就业保证。；O*NET 职业摘要｜https://www.onetonline.org/link/summary/27-4012.00"
+              "2025就业24100、2035预测23300，2025—2035净减800、下降3.1%、年均空缺1600（BLS表1.2）；O*NET显示整数-3%。空缺非新增，不是AI归因或个人就业保证。"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.24",
+          "source_refs": [
+            "ep-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -27227,10 +27390,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界：本页身份口径为 O*NET-SOC 27-4012.00（Broadcast Technicians），美国工资、就业与预测采用该口径（2025 年 BLS OEWS 与 2024—2034 年预测）；BLS《Occupational Outlook Handbook》的 Broadcast, Sound, and Video Technicians 是覆盖音频与视频技术员（27-4011）、广播技术员（27-4012）与音响工程技术员（27-4014）的群体口径，期间为 2025—2035 年，只作对照标注，不可与本页数值混用或相加。"
+              "全国工资2025、预测2025—2035均按精确27-4012；OOH合并组含四子项，其广播子表可单读，组工资和行业均值不替代本职业。"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.25",
+          "source_refs": [
+            "ep-current",
+            "wages-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27238,10 +27406,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：美国公开数据给出本职业的工资分布——2025 年时薪中位数 28.64 美元、年薪中位数 59,570 美元，年薪第 10 至第 90 分位为 31,390 至 123,670 美元；2024 年就业 24,800 人，2024—2034 年预测下降 1% 或更低、年均职位空缺 1,800 个。这些数字描述统计分类，不是个人起薪承诺。"
+              "2025时薪中位28.64、年薪59570美元，P10至P90为31390至123670；2025就业24100、2035预测23300，2025—2035净减800、下降3.1%、年均空缺1600（BLS表1.2）；O*NET显示整数-3%。空缺非新增，不是AI归因或个人就业保证。"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.26",
+          "source_refs": [
+            "wages-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27249,10 +27421,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "学历与训练通常影响起点：O*NET 列该职业为 Job Zone Three（SVP 6.0 至低于 7.0），学历构成包含学士学位、副学士或其他两年制学位以及高中或同等学历三类；实际入行多依靠电子与通信相关专业学习、设备厂商培训与台内带教。"
+              "O*NET教育回答为学士、副学士/其他两年制、高中等学历“部分岗位要求”，未给比例，不是现职学历构成。Job Zone3/SVP6至<7为职业组准备概括；BLS精确27-4012典型入门副学士、不需相关职业经验、短期在岗培训，具体雇主另核。 教育与工资因果贡献未量化，不推特定学历加薪。"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.27",
+          "source_refs": [
+            "details-current",
+            "ep-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27271,10 +27448,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与雇主类型影响报酬：O*NET 2024 年行业分布为信息业 67%、其他行业 33%（含艺术、娱乐和休闲与教育服务）；广播电台、电视台、发射台站、网络平台与设备运维企业的用工形式与值班制度不同。"
+              "O*NET现行2025行业份额：信息业70%、其他30%（含教育与艺术娱乐休闲）；美国27-4012结构，不推导中国用工、具体行业人数或工资。 下表单独展示2023职业×行业均值，不与现行全国分位或就业份额混用。"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.29",
+          "source_refs": [
+            "industry-current",
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27293,10 +27474,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "职责范围影响报酬：是否独立值守主链路、是否承担台站技术负责人职责、是否具备停电检修与高处作业授权，通常比单纯值班时长更影响报酬水平。"
+              "编辑薪酬核对：职责、训练、授权、地区、实际班次与结算项目逐项看合同；现有资料不足以声称职责比工时更影响收入。"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.31",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27315,10 +27499,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "下降 1% 或更低（Decline）"
+              "下降3.1%（2025—2035）"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.33",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27326,10 +27513,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "信息业（67%）"
+              "广播电台与电视台"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.34",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27337,10 +27527,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "50300美元/年（2023均值）"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.35",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27348,10 +27541,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 2024 年行业分布显示该职业 67% 位于信息业。"
+              "2023职业×行业；时薪均值24.18美元。 不是2025中位数或个人实发。"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.36",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27359,10 +27555,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他行业（33%，未细分）"
+              "媒体分发、社交网络及其他媒体网络内容供应商"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.37",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27370,10 +27569,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "80010美元/年（2023均值）"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.38",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27381,10 +27583,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 2024 年行业分布把其余 33% 合并为「其他行业」，并注明含艺术、娱乐和休闲与教育服务；本页不据此推算其工资。"
+              "2023职业×行业；时薪均值38.47美元。 不是2025中位数或个人实发。"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.39",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27392,10 +27597,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "艺术、娱乐和休闲（归入其他行业）"
+              "电影与视频业"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.40",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27403,10 +27611,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "104700美元/年（2023均值）"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.41",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27414,10 +27625,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 说明「其他行业」包含艺术、娱乐和休闲；该行业未单列百分比，本页不推算其工资。"
+              "2023职业×行业；时薪均值50.34美元。 不是2025中位数或个人实发。"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.42",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27425,10 +27639,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "教育服务（归入其他行业）"
+              "大学及专业学校"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.43",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27436,10 +27653,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "63640美元/年（2023均值）"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.44",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27447,10 +27667,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 说明「其他行业」包含教育服务；该行业未单列百分比，本页不推算其工资。"
+              "2023职业×行业；时薪均值30.60美元。 不是2025中位数或个人实发。"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.45",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27469,10 +27692,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "时薪与年薪是同一 OEWS 口径的两种呈现（该统计按标准工作年折算），不能据此推算个人实发收入、值班补贴或加班收入。"
+              "OEWS正常工时税前工资，排除加班溢价、轮班差额、非生产奖金等，包含定义内佣金/生产奖金；通常按2080小时折成年值，不据此推个人工时、实发或全部自由职业收入。"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.47",
+          "source_refs": [
+            "bls-oews-methods",
+            "wages-current"
+          ],
           "type": "prose"
         },
         {
@@ -27480,10 +27707,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "数字来自 O*NET 展示的 BLS 2025 年 OEWS 工资数据，口径为 Broadcast Technicians（SOC 27-4012），即本页身份口径；就业与预测期为 2024—2034 年。BLS 职业展望手册的群体页只公布覆盖三个工种的中位数与预测（2025—2035 年），没有按本职业拆分，因此本页不把它的数值当作本职业数值。"
+              "OOH四子项合并页另列广播技术员2025中位59570和2025—2035预测；本页全国分位/精确EP可单读，下方行业比较为2023历史职业×行业均值，精确行业中位数仍未取得。"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.48",
+          "source_refs": [
+            "ooh-current",
+            "ep-current",
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27535,10 +27767,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位为年薪 123,670 美元；高端通常与台站规模、值班责任与资历相关，不代表普遍水平。"
+              "第90分位123670美元，分布高端非普遍水平；未取得各类台站、资历或责任对该分位的因果贡献。"
             ]
           },
           "id": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.53",
+          "source_refs": [
+            "wages-current",
+            "editor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -27747,16 +27983,16 @@
                 "url": "/zh/career/jobs/electronics-engineers-except-computer"
               },
               {
-                "entity": "O*NET-SOC 27-4012.00 培训与教育信息",
+                "entity": "O*NET教育与Job Zone",
                 "id": "link-13",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtraining/27-4012.00"
+                "url": "https://www.onetonline.org/link/details/27-4012.00"
               },
               {
-                "entity": "《中华人民共和国著作权法》",
+                "entity": "现行广播电视管理条例",
                 "id": "link-14",
                 "relation": "career.authority",
-                "url": "https://www.npc.gov.cn/c2/c12435/c12488/201905/t20190522_66009.html"
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=1751"
               },
               {
                 "entity": "O*NET-SOC 27-4012.00 详细资料（任务与工作活动）",
@@ -27783,7 +28019,7 @@
                 "url": "https://www.onetonline.org/link/summary/27-4012.00"
               },
               {
-                "entity": "O*NET-SOC 27-4012.00 职业摘要（入门学历构成）",
+                "entity": "O*NET-SOC 27-4012.00 职业摘要（部分岗位入门教育要求）",
                 "id": "link-19",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/27-4012.00"
@@ -27849,10 +28085,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格中与工作方式更相关的是尽责性（按规程值守、如实记录读数与检修情况）、情绪稳定性（面对播出中断与设备异常时的处置压力）与宜人性（与节目部门、值班负责人与外包团队配合）。这些关联来自一般性研究结论，强度低于实际值班与检修表现。"
+              "编辑观察建议：是否如实记读数、按规程核未知并接受纠正，是否与节目和运维人员清楚交接。未取得本职业大五测评效度或相对解释力证据，不把工作风格目录当人格因果研究。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.6",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27860,10 +28100,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：人格与工作行为的相关性属于一般性研究结论，不能替代工作样本与受监督的值班经历。"
+              "编辑观察建议：是否如实记读数、按规程核未知并接受纠正，是否与节目和运维人员清楚交接。未取得本职业大五测评效度或相对解释力证据，不把工作风格目录当人格因果研究。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.7",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27871,8 +28115,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "尽责性有助于按班次记录读数、跟踪故障闭环与完成交接。",
-              "注意细节与谨慎有助于发现接头松动、指标漂移与接地异常，但仍须通过测量与复核验证判断。"
+              "编辑建议观察：能否按班次记录读数、跟踪故障闭环与完成交接；本轮未取得尽责性量表预测这些表现的本职业效度研究。",
+              "编辑建议观察：能否注意接头松动、指标漂移与接地异常，并通过测量与复核验证判断；职业细节/谨慎描述不验证个人量表效度。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.8",
@@ -27894,10 +28138,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业适配或值班胜任的评估工具，也没有官方资料支持「某种类型最适合广播技术员」的说法。可用于自我反思与沟通偏好理解，但不能用于培训投入或录用筛选。"
+              "本轮O*NET/BLS职业资料未提供本职业MBTI或九型人格的胜任预测、效度及类型排名证据；不据类型或分数决定录用和培训投入。编辑仅用偏好提出待观察问题，不宣称已核所有研究均无结论。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.10",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27905,10 +28153,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：MBTI 的职业预测效度有限，且不被 O*NET 或 BLS 用作适配标准。"
+              "本轮O*NET/BLS职业资料未提供本职业MBTI或九型人格的胜任预测、效度及类型排名证据；不据类型或分数决定录用和培训投入。编辑仅用偏好提出待观察问题，不宣称已核所有研究均无结论。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.11",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27939,10 +28191,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样不是职业适配工具，缺乏官方职业资料支持，也不用于录用或胜任判断。可用于自我反思，但不能据此决定是否投入长期训练。"
+              "本轮O*NET/BLS职业资料未提供本职业MBTI或九型人格的胜任预测、效度及类型排名证据；不据类型或分数决定录用和培训投入。编辑仅用偏好提出待观察问题，不宣称已核所有研究均无结论。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.14",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27950,10 +28206,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：无官方职业资料来源支持将九型人格用于职业适配判断。"
+              "本轮O*NET/BLS职业资料未提供本职业MBTI或九型人格的胜任预测、效度及类型排名证据；不据类型或分数决定录用和培训投入。编辑仅用偏好提出待观察问题，不宣称已核所有研究均无结论。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.15",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28029,10 +28289,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力有帮助：需要在播出中断、指标异常与临时调度中保持专注，在需要停电检修或切换链路时坚持按规程执行。但这类能力不能用单一分数定义，也不能替代设备训练与安全纪律。"
+              "编辑观察：异常和时限下能否报告未知、按权限核测量与切换、清楚交接。未取得本职业情绪智力测验效度，不把沟通或耐受分数推成胜任门槛。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.22",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28040,10 +28304,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：O*NET 工作风格包含注意细节与可靠性等特征；情绪智力测验的预测效度有限，不能替代实践证据。"
+              "O*NET工作风格有可靠性85、注意细节82、压力耐受55、自我控制44等；职业群体字段不能证明情绪智力测验预测效度。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.23",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28051,7 +28318,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能在切换链路前完成确认与记录，比情绪分数高低更重要。",
+              "编辑建议观察：能否在切换链路前完成确认与记录；本轮未取得与情绪量表的比较预测效度研究。",
               "愿意承认操作或记录差错并立即纠正，是专业能力的一部分。"
             ]
           },
@@ -28074,10 +28341,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。真正有解释力的证据是受监督的值班与检修表现。"
+              "编辑适配观察：按规程记录、核真实测量、报告异常并接受纠正；停止越权危险作业与主链路停播是不同权限。兴趣、人格或一次样本均不能单独作录用/胜任结论；未取得比较解释力研究。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.26",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28085,10 +28356,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：更有解释力的适配信号是能按规程完成值守并如实记录、在指标越限或设备异常时先停下并按升级链报告、能按测量结果而不是印象判断链路状态；对设备的兴趣本身不足以证明胜任。"
+              "编辑适配观察：按规程记录、核真实测量、报告异常并接受纠正；停止越权危险作业与主链路停播是不同权限。兴趣、人格或一次样本均不能单独作录用/胜任结论；未取得比较解释力研究。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.27",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28162,10 +28437,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更偏录音棚与声音制作的方向"
+              "更偏录音与现场声音与声音制作的方向 相邻方向差距为编辑判断，不限制其只在录音棚工作。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.34",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28305,7 +28584,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合与否不取决于内外向。工作情境显示 93% 每天在环境受控的室内工作、96% 每天使用电子邮件、93% 每天进行面对面讨论、68% 表示与他人持续接触；能否在设备与节目部门之间把状态讲清楚并协作，比外向程度更关键。"
+              "不能仅凭内外向判断适配。工作情境显示 93% 每天在环境受控的室内工作、96% 每天使用电子邮件、93% 每天进行面对面讨论、68% 表示与他人持续接触；编辑建议核对能否在设备与节目部门之间把状态讲清楚并协作，未取得与外向量表的比较效度研究。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.47",
@@ -28316,10 +28595,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能。外向有助于与节目部门、外包团队和供应商沟通，但值班工作要求把注意力放在指标、规程与记录上；能否接受技术纠正并改进操作，比表达欲更关键。"
+              "外向或内向均不能决定是否胜任；编辑观察交接、接受纠正、持续核读数和说明未知，不把表达欲写成沟通效果因果。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.48",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28327,10 +28609,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有官方结论，也不存在最适合的类型。MBTI 只能帮助整理偏好并提出核对问题，不能预测值班胜任力或录用结果；本页不提供类型名单。"
+              "本轮O*NET/BLS职业资料未提供本职业MBTI或九型人格的胜任预测、效度及类型排名证据；不据类型或分数决定录用和培训投入。编辑仅用偏好提出待观察问题，不宣称已核所有研究均无结论。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.49",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28360,10 +28646,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不建议在该职业上长期投入：该职业以室内作业为主（93% 每天在环境受控的室内），但存在轮班与夜间值班（96% 每周 40 小时）、指标越限与播出中断的处置压力；可以先跟随一次台站巡检与值班过程，再判断自己是否适应。"
+              "数学薄弱不能单独判定不宜投入；BLS建议数学、物理及电子课程，O*NET含测量设备、指标判断与数学推理41。编辑先练单位换算、读数和基本公式，再识别需补的知识；96%每周40小时不证明夜班或数学要求。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.52",
+          "source_refs": [
+            "ooh-current",
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28371,10 +28662,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力确实有帮助：需要在播出异常与临时调度中保持处置顺序、坚持按规程作业。但这类能力不能用单一分数定义，也不能替代设备训练与安全纪律。"
+              "编辑观察：异常和时限下能否报告未知、按权限核测量与切换、清楚交接。未取得本职业情绪智力测验效度，不把沟通或耐受分数推成胜任门槛。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.53",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28393,10 +28688,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用可复核的产出判断：一份按班次完成的运行与读数记录、一份设备配置与检修记录、一份故障处理与变更说明。若你能按流程完成并被复核通过，说明你具备基本适配条件。"
+              "用可复核记录和故障/变更说明讨论差距，再结合合适带教反馈；完成一次样本不能证明已具备基本适配或取得现场操作资格。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.55",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28404,10 +28702,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "你能在值班前核对链路与设备状态、把参数与处置写成可核对的形式；你愿意在指标越限或需要停电处理时如实报告，而不是先让节目带病播出。"
+              "编辑观察：核链路、读数与交接，异常按预案报告并停止越权危险作业；停播与切换须按有权岗位和真实规程，不以个人自行处置作适配门槛。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.56",
+          "source_refs": [
+            "editor-current",
+            "cn-broadcast-current"
+          ],
           "type": "prose"
         },
         {
@@ -28437,10 +28739,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 Job Zone、学历构成与培训路径。"
+              "O*NET教育回答为学士、副学士/其他两年制、高中等学历“部分岗位要求”，未给比例，不是现职学历构成。Job Zone3/SVP6至<7为职业组准备概括；BLS精确27-4012典型入门副学士、不需相关职业经验、短期在岗培训，具体雇主另核。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.59",
+          "source_refs": [
+            "details-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -28448,10 +28754,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明广播电视传输覆盖网工程、发射台参数与规范用语等要求。"
+              "现行广播条例第20/22条支持核准参数与覆盖网工程、行政部门组织验收；不是著作权法或个人作业授权。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.60",
+          "source_refs": [
+            "cn-broadcast-current"
+          ],
           "type": "prose"
         },
         {
@@ -28470,10 +28779,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明 Broadcast Technicians（SOC 27-4012）口径 的就业与 2024—2034 年预测。"
+              "2025就业24100、2035预测23300，2025—2035净减800、下降3.1%、年均空缺1600（BLS表1.2）；O*NET显示整数-3%。空缺非新增，不是AI归因或个人就业保证。"
             ]
           },
           "id": "broadcast-technicians.fit.personality-fit-block.62",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -28525,10 +28837,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "适配信号：更有解释力的信号是能按规程完成值守并如实记录、在指标越限或设备异常时先停下并按升级链报告、能按测量结果而不是印象判断链路状态；对设备的兴趣本身不足以证明胜任。"
+              "编辑适配观察：按规程记录、核真实测量、报告异常并接受纠正；停止越权危险作业与主链路停播是不同权限。兴趣、人格或一次样本均不能单独作录用/胜任结论；未取得比较解释力研究。"
             ]
           },
           "id": "broadcast-technicians.fit.riasec-fit-block.9",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28547,10 +28863,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 兴趣代码：CR（常规型、现实型）。现实型下的具体领域为机械与电子、工程；该职业页面未列出常规型的进一步子领域。"
+              "兴趣CR：常规69/现实63。完整41细领域含机械电子77、媒体62、工程51、IT49、办公11、数学统计9、会计3等；不能把前三项当未列常规细领域，分数非个人录用阈值。"
             ]
           },
           "id": "broadcast-technicians.fit.riasec-fit-block.11",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28686,22 +29005,40 @@
                 "url": "https://www.onetonline.org/link/details/27-4012.00"
               },
               {
-                "entity": "《中华人民共和国著作权法》",
+                "entity": "现行著作权法：45/46及录制制作权利",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.npc.gov.cn/c2/c12435/c12488/201905/t20190522_66009.html"
+                "url": "https://www.ncac.gov.cn/xxfb/flfg/flfg_532/202103/t20210309_50530.html"
               },
               {
-                "entity": "《广播电视管理条例》",
+                "entity": "现行广播电视管理条例：20/22条",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.gd.gov.cn/zwgk/wjk/zcfgk/content/post_2521422.html"
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=1751"
               },
               {
                 "entity": "NIST AI Risk Management Framework 1.0",
                 "id": "link-6",
                 "relation": "career.source",
                 "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "entity": "中国特种作业规定（目录适用）",
+                "id": "link-7",
+                "relation": "career.source",
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
+              },
+              {
+                "entity": "美国OSHA电气条件（不可跨法域套用）",
+                "id": "link-8",
+                "relation": "career.source",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.333"
+              },
+              {
+                "entity": "编辑风险核对建议",
+                "id": "link-9",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/details/27-4012.00"
               }
             ]
           },
@@ -28713,10 +29050,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界：本节描述的是职业风险与责任边界，不是对个人或机构的评价；具体法定义务与处置流程由适用法域、单位运行规程与值班制度决定。"
+              "法定义务按适用法律决定，单位规程只能落实具体分工和步骤；本节不授个人停播、恢复、工程验收或危险作业权限。"
             ]
           },
           "id": "broadcast-technicians.risk.career-risk-cards.8",
+          "source_refs": [
+            "cn-broadcast-current",
+            "cn-special-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28724,10 +29066,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答：主要风险包括设备与链路故障导致播出中断、发射与天馈系统的高处作业与射频与用电风险、参数或接地不当导致设备损坏与指标越限、夜间与连续值守的疲劳、以及设备与链路信息与节目素材外泄；控制依赖运行方案与值班制度、逐项确认与测量、由具备资格的人员实施用电与高处作业、个体防护以及异常报告与升级流程。"
+              "主要核信号中断、设备参数与信息权限，现场存在高处/电气/射频时另核适用作业制度，班表与疲劳按真实负荷；风险不是每个岗位都承受全部场景。禁止将通用“停止”当个人停播授权。"
             ]
           },
           "id": "broadcast-technicians.risk.career-risk-cards.9",
+          "source_refs": [
+            "details-current",
+            "cn-broadcast-current",
+            "cn-special-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28735,10 +29083,18 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：风险与边界条目依据 O*NET 27-4012.00 的官方任务、工作活动与工作情境、O*NET 培训与教育信息、《广播电视管理条例》与《中华人民共和国著作权法》的公开条文整理；不替代所在单位的运行规程、值班制度与适用法域的具体规定。"
+              "职业任务和情境支持场景识别，广播条例/著作权法支持对应主体条款，MEM和美国OSHA支持各自法域作业条件；防护、疲劳、权限和升级安排为编辑核对，不替代单位现场规程或职业暴露测量。"
             ]
           },
           "id": "broadcast-technicians.risk.career-risk-cards.10",
+          "source_refs": [
+            "details-current",
+            "cn-broadcast-current",
+            "cn-copyright-current",
+            "cn-special-current",
+            "osha-electric-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28812,10 +29168,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程办理作业审批与监护，执行上锁挂牌与停电验电，按规定设置射频防护与防坠落措施。"
+              "按真实设备和作业核用电、射频与高处风险，不把所有机房或蓄电池场所自动认作受限空间。中国目录内特种作业须持相应有效操作证，单位核真伪；普通接线不按职业名自动算电工或高处特种作业。美国OSHA1910.333停电、锁定标识和合格人员测试仅按该条适用条件；中国按适用规定、单位规程执行。 射频暴露和防护要核实际场所评估与设备，不给未测限值或凭普通用品宣称安全。"
             ]
           },
           "id": "broadcast-technicians.risk.career-risk-cards.17",
+          "source_refs": [
+            "cn-special-current",
+            "osha-electric-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28856,10 +29217,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按设备手册与核准的技术参数运行，变更后重新测量并记录，异常时先停止再报告。"
+              "第20条核准频率/批准技术参数不得擅改；日常配置依授权基线核、测量并记录。异常按预案报告并停止危险越权作业，主链路切换/停播由有权岗位按真实预案安排。"
             ]
           },
           "id": "broadcast-technicians.risk.career-risk-cards.21",
+          "source_refs": [
+            "cn-broadcast-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28900,10 +29265,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "合理安排轮班与休息、在交接时明确未闭环事项，避免在疲劳状态下执行高风险检修。"
+              "编辑核对真实夜间与连续值守、休息轮换、交接和异常支持；96%40小时不证明夜班，未取得本职业疲劳患病率，不统一给医学处方。"
             ]
           },
           "id": "broadcast-technicians.risk.career-risk-cards.25",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28988,10 +29357,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在方案与协议中明确使用范围与期限，并按《中华人民共和国著作权法》取得许可与支付报酬。"
+              "著作权法第46条特例限广播电台电视台：播放他人未发表作品许可付酬，已发表作品可免许可但规定付酬；不能直接套普通网络上架。第45条录音制品公开传播付酬，以及录制表演、制作制品等不同权利和例外分别核，单位许可清单不能一项覆盖全部行为。"
             ]
           },
           "id": "broadcast-technicians.risk.career-risk-cards.33",
+          "source_refs": [
+            "cn-copyright-current"
+          ],
           "type": "prose"
         },
         {
@@ -29010,10 +29382,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明美国职业身份与官方职责，不用于风险评估。"
+              "O*NET27-4012摘要支持身份与职责，不提供本页实际风险发生率。"
             ]
           },
           "id": "broadcast-technicians.risk.career-risk-cards.35",
+          "source_refs": [
+            "summary-current"
+          ],
           "type": "prose"
         },
         {
@@ -29021,10 +29396,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明官方任务、工作活动与工作情境口径，不用于风险评估。"
+              "O*NET完整任务、活动与情境支持场景，不是现场合规或个体暴露评估。"
             ]
           },
           "id": "broadcast-technicians.risk.career-risk-cards.36",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -29032,10 +29410,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明 Broadcast Technicians（SOC 27-4012）口径 的就业与预测，不用于风险评估。"
+              "现行著作权法45/46及录制制作权利：按特定主体、行为、许可/付酬和例外分核。"
             ]
           },
           "id": "broadcast-technicians.risk.career-risk-cards.37",
+          "source_refs": [
+            "cn-copyright-current"
+          ],
           "type": "prose"
         },
         {
@@ -29043,10 +29424,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明使用他人作品、录制表演与制作录音录像制品的许可与付酬规则。"
+              "现行广播电视条例第20/22条支持核准参数、覆盖网工程与行政部门组织验收，不授个人切换/停播权。"
             ]
           },
           "id": "broadcast-technicians.risk.career-risk-cards.38",
+          "source_refs": [
+            "cn-broadcast-current"
+          ],
           "type": "prose"
         },
         {
@@ -29054,10 +29438,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明传输覆盖网工程、发射台参数与安全播出等要求，不构成对具体台站或作业的合规判定。"
+              "NIST AI RMF为通用治理框架，不是广播条例、工程验收、职业暴露或个人处置权限。"
             ]
           },
           "id": "broadcast-technicians.risk.career-risk-cards.39",
+          "source_refs": [
+            "nist-ai-rmf"
+          ],
           "type": "prose"
         }
       ]
@@ -29215,22 +29602,22 @@
                 "url": "https://www.onetonline.org/link/summary/27-4012.00"
               },
               {
-                "entity": "O*NET-SOC 27-4012.00 培训与教育信息",
+                "entity": "O*NET任务教育与Job Zone",
                 "id": "link-2",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/27-4012.00"
+                "url": "https://www.onetonline.org/link/details/27-4012.00"
               },
               {
-                "entity": "BLS《Occupational Outlook Handbook》Broadcast, Sound, and Video Technicians",
+                "entity": "BLS表1.2精确27-4012预测",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/media-and-communication/broadcast-and-sound-engineering-technicians.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "《中华人民共和国著作权法》",
+                "entity": "现行著作权法",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.npc.gov.cn/c2/c12435/c12488/201905/t20190522_66009.html"
+                "url": "https://www.ncac.gov.cn/xxfb/flfg/flfg_532/202103/t20210309_50530.html"
               }
             ]
           },
@@ -29341,10 +29728,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：美国侧该职业被列为 Job Zone Three（SVP 6.0 至低于 7.0），学历构成包含学士学位、副学士或其他两年制学位以及高中或同等学历三类；在中国大陆，传输覆盖网工程须由取得相应资格的单位承担并经验收合格，发射台与转播台须按核准的技术参数运行，具体岗位的设备授权与检修权限由单位与主管部门规定确定。"
+              "O*NET教育回答为学士、副学士/其他两年制、高中等学历“部分岗位要求”，未给比例，不是现职学历构成。Job Zone3/SVP6至<7为职业组准备概括；BLS精确27-4012典型入门副学士、不需相关职业经验、短期在岗培训，具体雇主另核。 中国现行《广播电视管理条例》第22条：传输覆盖网工程选址、设计、施工、安装按国家规定办理且由依法取得相应资格证书的单位承担；竣工由广播电视行政部门组织验收，合格才能投用。第20条：核准频率频段不得出租转让、已批准技术参数不得擅改。日常内部配置复核不等于法定工程验收。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.20",
+          "source_refs": [
+            "details-current",
+            "ep-current",
+            "cn-broadcast-current"
+          ],
           "type": "prose"
         },
         {
@@ -29396,10 +29788,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 Job Zone、学历构成与培训入口。"
+              "教育要求问答与Job Zone位于O*NET详细页；培训目录是项目检索入口，不证明学历构成或全国无项目。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.25",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -29407,10 +29802,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的就业与 2024—2034 年预测口径。"
+              "2025就业24100、2035预测23300，2025—2035净减800、下降3.1%、年均空缺1600（BLS表1.2）；O*NET显示整数-3%。空缺非新增，不是AI归因或个人就业保证。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.26",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -29418,10 +29816,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明使用他人作品、录制表演与制作录音录像制品的许可与付酬规则。"
+              "著作权法第46条特例限广播电台电视台：播放他人未发表作品许可付酬，已发表作品可免许可但规定付酬；不能直接套普通网络上架。第45条录音制品公开传播付酬，以及录制表演、制作制品等不同权利和例外分别核，单位许可清单不能一项覆盖全部行为。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.27",
+          "source_refs": [
+            "cn-copyright-current"
+          ],
           "type": "prose"
         },
         {
@@ -29451,10 +29852,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见起点岗位：总控值班辅助岗位。"
+              "编辑岗位示例：总控值班辅助岗位。 未采集招聘频率；称谓、职责与晋级按真实用工方核。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.30",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29506,10 +29910,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：播出中心值班技术员。"
+              "编辑岗位示例：播出中心值班技术员。 未采集招聘频率；称谓、职责与晋级按真实用工方核。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.35",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29561,10 +29968,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：播出系统技术负责人。"
+              "编辑岗位示例：播出系统技术负责人。 未采集招聘频率；称谓、职责与晋级按真实用工方核。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.40",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29583,10 +29993,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：系统改造须经单位审批与验收。"
+              "编辑边界：内部系统改造按适用制度核；若属第22条覆盖网工程，竣工须由广播电视行政部门组织验收合格，不以单位内部确认代替。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.42",
+          "source_refs": [
+            "cn-broadcast-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29616,10 +30030,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：播出技术管理部门负责人。"
+              "编辑岗位示例：播出技术管理部门负责人。 未采集招聘频率；称谓、职责与晋级按真实用工方核。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.45",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29671,10 +30088,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见起点岗位：台站维护辅助岗位。"
+              "编辑岗位示例：台站维护辅助岗位。 未采集招聘频率；称谓、职责与晋级按真实用工方核。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.50",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29693,10 +30113,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：用电与高处作业须由具备资格的人员实施。"
+              "中国目录内电气/高处等特种作业核相应操作证及单位真伪有效核验；普通线缆、吊挂按真实作业分类与适用制度，不一概要求同证。现场许可不替代依法持证。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.52",
+          "source_refs": [
+            "cn-special-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29726,10 +30150,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：台站维护技术员。"
+              "编辑岗位示例：台站维护技术员。 未采集招聘频率；称谓、职责与晋级按真实用工方核。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.55",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29781,10 +30208,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：台站技术负责人。"
+              "编辑岗位示例：台站技术负责人。 未采集招聘频率；称谓、职责与晋级按真实用工方核。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.60",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29803,10 +30233,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：工程验收须由取得相应资格的单位与单位主管部门确认。"
+              "中国现行《广播电视管理条例》第22条：传输覆盖网工程选址、设计、施工、安装按国家规定办理且由依法取得相应资格证书的单位承担；竣工由广播电视行政部门组织验收，合格才能投用。第20条：核准频率频段不得出租转让、已批准技术参数不得擅改。日常内部配置复核不等于法定工程验收。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.62",
+          "source_refs": [
+            "cn-broadcast-current"
+          ],
           "type": "prose"
         },
         {
@@ -29836,10 +30269,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：台站管理部门技术负责人。"
+              "编辑岗位示例：台站管理部门技术负责人。 未采集招聘频率；称谓、职责与晋级按真实用工方核。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.65",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29891,10 +30327,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见起点岗位：演播与现场技术助理岗位。"
+              "编辑岗位示例：演播与现场技术助理岗位。 未采集招聘频率；称谓、职责与晋级按真实用工方核。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.70",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29913,10 +30352,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：用电与吊挂作业须由具备资格的人员实施。"
+              "中国目录内电气/高处等特种作业核相应操作证及单位真伪有效核验；普通线缆、吊挂按真实作业分类与适用制度，不一概要求同证。现场许可不替代依法持证。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.72",
+          "source_refs": [
+            "cn-special-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29946,10 +30389,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：演播与现场技术员。"
+              "编辑岗位示例：演播与现场技术员。 未采集招聘频率；称谓、职责与晋级按真实用工方核。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.75",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30001,10 +30447,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：转播技术负责人。"
+              "编辑岗位示例：转播技术负责人。 未采集招聘频率；称谓、职责与晋级按真实用工方核。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.80",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30023,10 +30472,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：活动整体安全与用电放行由具备资格的人员与主办方决定。"
+              "活动安全由各相关主体按适用法律、合同和真实职责承担；用电放行依适用制度及有权岗位，不把全部责任归主办方或凭个人资格授整场放行。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.82",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30056,10 +30508,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：制作技术部门负责人。"
+              "编辑岗位示例：制作技术部门负责人。 未采集招聘频率；称谓、职责与晋级按真实用工方核。"
             ]
           },
           "id": "broadcast-technicians.path.career-path-block.85",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30106,35 +30561,35 @@
               [
                 "台站值班辅助岗位",
                 "在带教下核对链路与设备状态、记录读数、协助巡检与线缆敷设，学习值班与交接流程。",
-                "用工方看重出勤稳定性、规程意识与学习意愿；通常要求中专或大专相关专业并经台内带教。",
+                "编辑招聘核对建议，非雇主频率调查：用工方看重出勤稳定性、规程意识与学习意愿；具体学历及带教依真实岗位核。",
                 "提交一份受监督完成的值班与读数记录，注明检查项与结果。",
                 "此路径不独立决定链路与参数基线；须核对培训与操作授权范围。"
               ],
               [
                 "设备安装与线缆敷设岗位",
                 "按图纸与工艺要求安装设备、敷设与端接线缆并做基础测试。",
-                "用工方看施工规范意识、工具使用与细心程度，以及高处与用电作业的持证情况。",
+                "编辑招聘核对建议，非雇主频率调查：用工方看施工规范意识、工具使用与细心程度，以及高处与用电作业的持证情况。",
                 "提交一份设备安装与线缆端接测试记录。",
                 "用电与高处作业须由具备资格的人员实施或按场地规定办理审批与监护。"
               ],
               [
                 "播出中心运维辅助岗位",
                 "协助监看信号与监视器、记录发射机读数、跟踪工单与备件，学习变更与交接流程。",
-                "用工方看记录准确性、值班纪律与协作能力。",
+                "编辑招聘核对建议，非雇主频率调查：用工方看记录准确性、值班纪律与协作能力。",
                 "提交一份链路拓扑与配置基线说明样例。",
                 "配置与参数变更须经值班负责人确认，不得擅自修改。"
               ],
               [
                 "设备厂商技术支持岗位",
                 "参与设备交付、调试与售后技术支持，处理客户现场的基础故障。",
-                "用工方看设备知识、沟通能力与差旅适应性。",
+                "编辑招聘核对建议，非雇主频率调查：用工方看设备知识、沟通能力与差旅适应性。",
                 "提交一份调试与验收记录样例。",
                 "厂商建议不替代单位运行规程；涉及带电与高处作业须按现场规定执行。"
               ],
               [
                 "相邻工种转入（网络运维、电子维修、安防弱电）",
                 "承接设备准备、网络与线缆维护、基础测量任务，熟悉机房与台站环境。",
-                "用工方看相关经验与安全记录，并核对信号与传输基础。",
+                "编辑招聘核对建议，非雇主频率调查：用工方看相关经验与安全记录，并核对信号与传输基础。",
                 "提交一份从既有岗位整理的可复核记录，并说明与播出运维的差距。",
                 "相邻经验不等于播出链路授权；转岗须补足信号链、发射设备与安全规程训练。"
               ]
@@ -30152,16 +30607,16 @@
               {
                 "id": "education",
                 "values": [
-                  "美国侧：O*NET 把该职业列为 Job Zone Three（SVP 6.0 至低于 7.0），学历构成包含学士学位、副学士或其他两年制学位以及高中或同等学历三类。",
-                  "实际入行多依靠电子与通信相关专业学习、设备厂商培训与台内带教；值班记录与故障处理记录常被用作能力依据。",
+                  "O*NET教育回答为学士、副学士/其他两年制、高中等学历“部分岗位要求”，未给比例，不是现职学历构成。Job Zone3/SVP6至<7为职业组准备概括；BLS精确27-4012典型入门副学士、不需相关职业经验、短期在岗培训，具体雇主另核。",
+                  "编辑核对专业学习、适用培训、带教反馈、值班和故障记录；未采集雇主频率，不把某路径称所有岗位常规。",
                   "该职业页面未标注 Bright Outlook，本页不使用该标签。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "进入现场通常需要完成单位安全教育，并按作业类型办理用电、高处与受限空间作业审批与监护。",
-                  "在中国大陆，广播电视传输覆盖网的工程选址、设计、施工与安装应由依法取得相应资格证书的单位承担并经验收合格；发射台与转播台须按核准的技术参数运行。",
+                  "按真实设备和作业核用电、射频与高处风险，不把所有机房或蓄电池场所自动认作受限空间。中国目录内特种作业须持相应有效操作证，单位核真伪；普通接线不按职业名自动算电工或高处特种作业。美国OSHA1910.333停电、锁定标识和合格人员测试仅按该条适用条件；中国按适用规定、单位规程执行。",
+                  "中国现行《广播电视管理条例》第22条：传输覆盖网工程选址、设计、施工、安装按国家规定办理且由依法取得相应资格证书的单位承担；竣工由广播电视行政部门组织验收，合格才能投用。第20条：核准频率频段不得出租转让、已批准技术参数不得擅改。日常内部配置复核不等于法定工程验收。",
                   "个体防护（安全帽、绝缘防护、防坠落装备与射频防护用品）由用工方配备并检查。"
                 ]
               },
@@ -30176,7 +30631,7 @@
               {
                 "id": "tools",
                 "values": [
-                  "O*NET 技术清单共 11 类技术与软件技能（含 13 项 Hot Technology 与 2 项 In Demand），含 Linux、Microsoft Windows、UNIX、Microsoft Office／Excel／Outlook／Word／PowerPoint，以及 AutoCAD、Adobe Photoshop／Illustrator／InDesign／After Effects 与 Adobe Audition。",
+                  "详细页11软件类别与Hot单页13产品计数不同；2025招聘提及Office9%、Excel6%、Outlook/Linux/PowerPoint各3%、Word2%、AutoCAD/Photoshop/Windows各1%、AfterEffects/UNIX<1%，Illustrator/InDesign无比例；前二InDemand，不是部署、效率或替代率。",
                   "现场工具以发射与传输设备、控制台、监视器、测量仪器与网络与服务器设备为主。",
                   "把数字工具用于运行记录或配置管理前，须确认变更与复核要求。"
                 ]
@@ -30421,7 +30876,7 @@
               [
                 "副学士或其他两年制学位（美国）",
                 "计划在美国从事该职业的人",
-                "O*NET 列出该职业学历构成中包含此类背景，是常见路径之一。",
+                "O*NET列为部分岗位入门教育要求，非现职学历构成；典型27-4012入门按BLS副学士，雇主另核。",
                 "不是所有雇主的硬性门槛。",
                 "视专业方向（电子、通信、广播电视工程等）与单位要求而定。",
                 "通常两年。",
@@ -30430,7 +30885,7 @@
               [
                 "学士学位（美国）",
                 "希望进入系统设计与技术负责人路径的人",
-                "O*NET 列出该职业学历构成中包含此类背景。",
+                "O*NET列为部分岗位入门教育要求，非现职学历构成；典型27-4012入门按BLS副学士，雇主另核。",
                 "属于部分岗位要求，多见于系统与工程岗位。",
                 "视专业方向与单位要求而定。",
                 "通常四年。",
@@ -30439,7 +30894,7 @@
               [
                 "高中或同等学历（美国）",
                 "以在岗培训入行的人",
-                "O*NET 列出该职业学历构成中包含此类背景。",
+                "O*NET列为部分岗位入门教育要求，非现职学历构成；典型27-4012入门按BLS副学士，雇主另核。",
                 "属于部分岗位的实际情况，通常需配合在岗培训与厂商培训。",
                 "须以实践与培训记录补足。",
                 "数月到数年。",
@@ -30447,11 +30902,11 @@
               ],
               [
                 "设备厂商培训与台内带教（美国与中国大陆通用）",
-                "所有新入职的技术人员",
-                "决定能否独立操作特定设备体系。",
-                "属于用工单位与厂商的通行做法；O*NET 培训页面未登记该职业的全国性培训项目。",
-                "须完成规定的培训与考核。",
-                "数天到数周不等，随设备更新需要复训。",
+                "需熟悉目标设备及流程的人员；项目和人员范围按实际单位核。",
+                "可形成目标设备训练证据，不能仅凭培训经历推出已可独立操作。",
+                "BLS支持在岗训练及继续教育，具体雇主/厂商项目和通用入职要求未核；培训目录不是全国无项目证明。",
+                "按实际项目核课程、考核与操作授权；未核统一厂商培训标准。",
+                "具体课程时长与考核未核，不统一给数天到数周。",
                 "培训记录不等于播出链路与停电检修的授权。"
               ],
               [
@@ -30459,7 +30914,7 @@
                 "传输覆盖网工程与相关单位",
                 "决定工程能否投入使用。",
                 "属于法定要求：工程选址、设计、施工与安装应按国家有关规定办理，并由依法取得相应资格证书的单位承担，竣工须经验收合格。",
-                "须依据《广播电视管理条例》与单位制度执行。",
+                "中国现行《广播电视管理条例》第22条：传输覆盖网工程选址、设计、施工、安装按国家规定办理且由依法取得相应资格证书的单位承担；竣工由广播电视行政部门组织验收，合格才能投用。第20条：核准频率频段不得出租转让、已批准技术参数不得擅改。日常内部配置复核不等于法定工程验收。",
                 "按工程周期与验收流程。",
                 "验收合格不替代日常运行中的参数与安全要求。"
               ],
@@ -30475,6 +30930,14 @@
             ]
           },
           "id": "broadcast-technicians.path.credential-decision.1",
+          "source_refs": [
+            "details-current",
+            "ep-current",
+            "ooh-current",
+            "cn-broadcast-current",
+            "cn-special-current",
+            "editor-current"
+          ],
           "title": "资格选择",
           "type": "table"
         },
@@ -30484,8 +30947,8 @@
           "data": {
             "paragraphs": [
               "资格边界：培训经历、设备熟练度、值班与检修记录、操作授权与停电检修许可权是不同状态，任何一项都不能由另一项自动推出。",
-              "美国侧：O*NET 把该职业列为 Job Zone Three（SVP 6.0 至低于 7.0），学历构成包含学士学位、副学士或其他两年制学位以及高中或同等学历；O*NET 培训页面未登记该职业的全国性培训项目。",
-              "中国大陆侧：广播电视传输覆盖网的工程选址、设计、施工与安装应按国家有关规定办理，并由依法取得相应资格证书的单位承担，工程竣工须经验收合格方可投入使用；发射台与转播台须按核准的技术参数运行，经核准的频率与频段不得出租、转让或擅自变更。",
+              "O*NET教育回答为学士、副学士/其他两年制、高中等学历“部分岗位要求”，未给比例，不是现职学历构成。Job Zone3/SVP6至<7为职业组准备概括；BLS精确27-4012典型入门副学士、不需相关职业经验、短期在岗培训，具体雇主另核。 O*NET培训目录为检索入口，不证明全国性培训项目不存在。",
+              "中国现行《广播电视管理条例》第22条：传输覆盖网工程选址、设计、施工、安装按国家规定办理且由依法取得相应资格证书的单位承担；竣工由广播电视行政部门组织验收，合格才能投用。第20条：核准频率频段不得出租转让、已批准技术参数不得擅改。日常内部配置复核不等于法定工程验收。",
               "入职前应逐项核实培训与安全教育记录、设备操作授权范围、防护配备、值班与结算约定，并保留书面确认。"
             ]
           },
@@ -30498,11 +30961,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明：本节不引用具体雇主的招聘公告，只说明岗位核对应关注的项目；公开渠道出现的岗位名称包括广播技术员、播出值班员、发射台站维护、总控运维、视听系统运维等，其作业范围与用工形式差别很大。",
+              "本轮未采集具体招聘公告；所列值班、运维、厂商支持等为编辑岗位示例。阅读真实公告时核用工、班次、训练、作业授权与结算；不把短训宣传当独立值守授权。",
               "阅读招聘信息时应核对用工形式（全职轮班、外包运维或项目制）、值班与夜间频次、设备与安全培训安排、作业授权范围、计酬方式与结算周期，并警惕把短期培训宣传为可独立承担播出链路值守的表述。"
             ]
           },
           "id": "broadcast-technicians.path.recruitment-sample.1",
+          "source_refs": [
+            "editor-current"
+          ],
           "title": "招聘样本使用说明",
           "type": "notice"
         }
@@ -30523,7 +30989,7 @@
             ]
           },
           "fact_refs": [
-            "us-employment-2025"
+            "us-employment-2025-current"
           ],
           "id": "broadcast-technicians.market-signals.market-signal-card.1",
           "source_refs": [
@@ -30541,7 +31007,7 @@
             ]
           },
           "fact_refs": [
-            "us-growth-2025-2035"
+            "us-growth-2025-2035-current"
           ],
           "id": "broadcast-technicians.market-signals.market-signal-card.2",
           "source_refs": [
@@ -30574,7 +31040,7 @@
             ]
           },
           "fact_refs": [
-            "us-openings-2025-2035"
+            "us-openings-2025-2035-current"
           ],
           "id": "broadcast-technicians.market-signals.market-signal-card.4",
           "source_refs": [
@@ -30631,10 +31097,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET-SOC 27-4012.00 职业摘要（就业与预测字段）",
+                "entity": "BLS表1.2精确27-4012就业预测",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/27-4012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET-SOC 27-4012.00 职业摘要",
@@ -30712,10 +31178,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：公开数据支持的是 Broadcast Technicians（SOC 27-4012）口径 的判断——2024 年就业 24,800 人，2024—2034 年预测下降 1% 或更低、年均职位空缺 1,800 个；BLS 职业展望手册的 Broadcast, Sound, and Video Technicians 是覆盖三个工种的更宽群体口径（2025 年在岗 136,600 人、2025—2035 年增长 1%、年均约 9,800 个空缺），与本职业口径不同，须分别标注；中国大陆按证据路由只登记统计口径与缺口，不发布替代数值。"
+              "2025就业24100、2035预测23300，2025—2035净减800、下降3.1%、年均空缺1600（BLS表1.2）；O*NET显示整数-3%。空缺非新增，不是AI归因或个人就业保证。 OOH四子项合并组另计，中国精确缺口和行业工资背景分读。"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.8",
+          "source_refs": [
+            "ep-current",
+            "ooh-current",
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30734,10 +31205,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024 年"
+              "2025年"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.10",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30756,10 +31230,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该职业集中于信息业，岗位数量受播出机构结构、台站数量与运维外包安排影响。"
+              "O*NET现行2025行业份额：信息业70%、其他30%（含教育与艺术娱乐休闲）；美国27-4012结构，不推导中国用工、具体行业人数或工资。 BLS讨论技术含AI可能减少广播系统操作所需人员；外包频率未核。"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.12",
+          "source_refs": [
+            "industry-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -30789,10 +31267,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "24,800 人"
+              "24100人"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.15",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30811,10 +31292,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年"
+              "2025—2035年"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.17",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30822,10 +31306,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 页面标注为 Decline（下降 1% 或更低），口径为 Broadcast Technicians（SOC 27-4012）。"
+              "2025就业24100、2035预测23300，2025—2035净减800、下降3.1%、年均空缺1600（BLS表1.2）；O*NET显示整数-3%。空缺非新增，不是AI归因或个人就业保证。"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.18",
+          "source_refs": [
+            "ep-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -30833,10 +31321,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该预测为本职业统计口径；BLS 职业展望手册的群体口径与期间（2025—2035 年，增长 1%）不同，不构成个人就业保证。"
+              "2025就业24100、2035预测23300，2025—2035净减800、下降3.1%、年均空缺1600（BLS表1.2）；O*NET显示整数-3%。空缺非新增，不是AI归因或个人就业保证。"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.19",
+          "source_refs": [
+            "ep-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -30866,10 +31358,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "下降 1% 或更低（年均空缺 1,800 个）"
+              "下降3.1%（年均空缺1600）"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.22",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30899,10 +31394,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局按行业门类公布平均工资，但没有单列本职业；按证据路由 （暂无可安全使用的数据），本页不展示行业均值也不据此推算本职业工资。"
+              "证据不足：尚未取得中国本职业全国工资分布及一一对应细类映射。背景参考：2025文化体育娱乐业城镇非私营129447、私营64015元/年税前（NBS）；门类混合多岗位，不代表广播技术员或所有台站实际行业归类，不推起薪/月薪。"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.25",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30910,10 +31409,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该口径为行业门类平均工资，混合多类岗位；本页只登记其不可替代性，不发布职业级或代理数值。"
+              "证据不足：尚未取得中国本职业全国工资分布及一一对应细类映射。背景参考：2025文化体育娱乐业城镇非私营129447、私营64015元/年税前（NBS）；门类混合多岗位，不代表广播技术员或所有台站实际行业归类，不推起薪/月薪。"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.26",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30921,10 +31424,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业门类口径（仅登记，不展示数值）"
+              "文化体育娱乐门类均值背景（2025；非本职业）"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.27",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30943,10 +31449,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该职业的全国职业工资与就业分布"
+              "行业背景：非私营129447、私营64015元/年税前；精确职业工资与就业分布仍缺。"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.29",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30954,10 +31463,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明 Broadcast Technicians（SOC 27-4012）口径 的就业与 2024—2034 年预测；BLS 职业展望手册的群体口径另行标注。"
+              "2025就业24100、2035预测23300，2025—2035净减800、下降3.1%、年均空缺1600（BLS表1.2）；O*NET显示整数-3%。空缺非新增，不是AI归因或个人就业保证。"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.30",
+          "source_refs": [
+            "ep-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -30965,10 +31478,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明该职业的就业规模与预测字段，须与工资数据分开解读。"
+              "2025就业24100、2035预测23300，2025—2035净减800、下降3.1%、年均空缺1600（BLS表1.2）；O*NET显示整数-3%。空缺非新增，不是AI归因或个人就业保证。"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.31",
+          "source_refs": [
+            "ep-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -31020,10 +31537,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同处播出链条，但对象从设备转为内容。"
+              "编辑距离判断：距离较近：同处播出链条，但对象从设备转为内容。 未取得转岗成功率；真实目标职责、训练与权限另核。"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.36",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31053,10 +31573,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：都面向音视频设备，但作业场景不同。"
+              "编辑距离判断：距离中等：都面向音视频设备，但作业场景不同。 未取得转岗成功率；真实目标职责、训练与权限另核。"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.39",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31086,10 +31609,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属音频技术链条，交付形式不同。"
+              "编辑距离判断：距离中等：同属音频技术链条，交付形式不同。 未取得转岗成功率；真实目标职责、训练与权限另核。"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.42",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31097,10 +31623,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足网络协议、账号与系统管理训练。"
+              "编辑差距：网络支持按目标系统补协议、账户与支持范围；原广播任务已有计算机及网络维护Core87，不把网络知识全部写成从零学习。"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.43",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31119,10 +31649,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：都在机房与网络环境中作业，但服务对象不同。"
+              "编辑距离判断：距离较近：都在机房与网络环境中作业，但服务对象不同。 未取得转岗成功率；真实目标职责、训练与权限另核。"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.45",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31152,10 +31685,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属传输领域，设计深度不同。"
+              "编辑距离判断：距离中等：同属传输领域，设计深度不同。 未取得转岗成功率；真实目标职责、训练与权限另核。"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.48",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31185,10 +31721,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较远：岗位要求与培养路径不同。"
+              "编辑距离判断：距离较远：岗位要求与培养路径不同。 未取得转岗成功率；真实目标职责、训练与权限另核。"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.51",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31218,10 +31757,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属网络领域，职责层级不同。"
+              "编辑距离判断：距离中等：同属网络领域，职责层级不同。 未取得转岗成功率；真实目标职责、训练与权限另核。"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.54",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31251,10 +31793,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较远：应用领域与项目模式不同。"
+              "编辑距离判断：距离较远：应用领域与项目模式不同。 未取得转岗成功率；真实目标职责、训练与权限另核。"
             ]
           },
           "id": "broadcast-technicians.market-signals.market-signal-card.57",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -31367,8 +31912,8 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "边界一：本页身份口径为 O*NET-SOC 27-4012.00（Broadcast Technicians，广播技术员）；BLS 职业展望手册的 Broadcast, Sound, and Video Technicians 同时覆盖音频与视频技术员（27-4011）与音响工程技术员（27-4014），属于更宽的群体口径，其数值不与本页混用或相加；这两个工种在本地为各自独立的条目。",
-              "边界二：本页把美国口径与中国大陆口径分开标注，不跨法域套用或换算；美国身份口径为 2025 年 BLS OEWS 工资与 2024—2034 年预测，BLS 群体页为 2025—2035 年、覆盖三个工种的口径；中国大陆按证据路由 cn-exact-wage-unavailable（documented_unavailable）只登记统计口径与缺口，不发布职业级数值、也不用行业均值或美国数据替代。",
+              "边界一：精确27-4012；BLS合并组包含AV27-4011、广播27-4012、音响27-4014、灯光27-4015，且有广播单列工资与预测；合并组数值不代替或相加。",
+              "边界二：美国2025全国工资和2025—2035精确预测；中国精确职业工资、分类映射缺口保留，2025文化体育娱乐行业背景单独标人群与边界，不推职业工资或汇率起薪。",
               "边界三：编辑练习与作品建议均为虚构材料，读者不应据此在真实台站作业、带电操作或接触发射设备，也不得把练习结果包装成设备验收或安全结论。",
               "边界四：本页由 O*NET、BLS、国家统计局、《广播电视管理条例》《中华人民共和国著作权法》、NIST AI 风险管理框架与 ILO 任务暴露研究等公开资料及编辑设计组成；每项资料的适用范围与缺口单独标记。"
             ]
@@ -31406,10 +31951,23 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源：O*NET-SOC 27-4012.00 职业摘要、详细资料、自定义职业档案、技术清单、行业分布、培训与教育信息与全国工资分位页面；BLS《Occupational Outlook Handbook》Broadcast, Sound, and Video Technicians（覆盖广播技术员、音频与视频技术员与音响工程技术员的群体页）；国家统计局《2025 年城镇单位就业人员年平均工资情况》；ILO 工作论文 140。"
+              "本轮核O*NET完整任务教育/兴趣/情境、2025行业70/30及Hot13产品、全国分位和现行趋势；BLS精确EP、四子项OOH及AI段、2023精确行业均值；NBS2025行业背景、2024广播条例、2020修正版权与2026生效MEM令19，OSHA电气条件。ILO/NIST同版一般方法复用，不作本职业采用率或测评效度。"
             ]
           },
           "id": "broadcast-technicians.sources.source-card.2",
+          "source_refs": [
+            "details-current",
+            "industry-current",
+            "hot-current",
+            "ep-current",
+            "ooh-current",
+            "oews2023-current",
+            "nbs-current",
+            "cn-broadcast-current",
+            "cn-copyright-current",
+            "cn-special-current",
+            "osha-electric-current"
+          ],
           "type": "prose"
         },
         {
@@ -31417,10 +31975,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：O*NET 页面为 2026 年更新；工资为 2025 年 BLS OEWS（本职业口径）；就业与预测为 2024 年与 2024—2034 年；行业分布为 2024 年；BLS 职业展望手册为群体口径（2025 年 5 月工资与 2025—2035 年预测）；国家统计局数据为 2025 年、2026-05-15 发布；《广播电视管理条例》为国务院令第 228 号（1997 年发布并多次修订）的公开转载文本；检索日 2026-09-16。"
+              "本轮检索2026-10-09：美国全国工资/行业份额/软件招聘2025，预测2025—2035，行业均值2023；中国行业2025、广播条例2024修订、版权2020修正/2021生效、MEM令19于2026-06-01生效；旧共享登记保留历史元数据，现行资料隔离追加。"
             ]
           },
           "id": "broadcast-technicians.sources.source-card.3",
+          "source_refs": [
+            "ep-current",
+            "industry-current",
+            "oews2023-current",
+            "nbs-current",
+            "cn-broadcast-current",
+            "cn-copyright-current",
+            "cn-special-current"
+          ],
           "type": "prose"
         },
         {
@@ -31428,10 +31995,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "使用说明：本页身份口径为 O*NET-SOC 27-4012.00，美国工资、就业与预测采用该口径；BLS 职业展望手册的 Broadcast, Sound, and Video Technicians 是更宽的群体口径，只作对照标注；中国大陆按证据路由 （暂无可安全使用的数据）处理，不发布职业级工资数值，也不用行业均值或美国数据替代，缺口以「证据不足」标记。"
+              "使用说明：全国分位、历史行业均值、精确职业预测和四子项合并组分开。中国行业背景不替代精确缺口；任务及兴趣非个人阈值，编辑路径风险和试用不是处置授权、心理实证或效率保证。"
             ]
           },
           "id": "broadcast-technicians.sources.source-card.4",
+          "source_refs": [
+            "editor-current",
+            "ep-current",
+            "nbs-current"
+          ],
           "type": "prose"
         }
       ]
@@ -31772,6 +32344,246 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET27-4012 完整职责教育情境与兴趣",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "details-current",
+                "limitation": "28任务19Core/9Supplemental；41一般活动、25详细活动、57情境；教育为部分岗位要求而非学历构成比例。",
+                "market": "美国",
+                "name": "O*NET27-4012 完整职责教育情境与兴趣",
+                "period": "2026更新",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/27-4012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET27-4012 现行职业摘要",
+                  "2026更新；2025就业"
+                ],
+                "evidence_type": "primary_document",
+                "id": "summary-current",
+                "limitation": "精确27-4012；未标Bright Outlook。",
+                "market": "美国",
+                "name": "O*NET27-4012 现行职业摘要",
+                "period": "2026更新；2025就业",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/27-4012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET27-4012 行业份额",
+                  "2025"
+                ],
+                "evidence_type": "primary_document",
+                "id": "industry-current",
+                "limitation": "信息70%/其他30%；不推算行业人数或工资。",
+                "market": "美国",
+                "name": "O*NET27-4012 行业份额",
+                "period": "2025",
+                "publisher": "O*NET OnLine / BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/27-4012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET27-4012 13项招聘软件产品",
+                  "2025全年美国招聘"
+                ],
+                "evidence_type": "primary_document",
+                "id": "hot-current",
+                "limitation": "Office9/Excel6/Outlook3/Linux3/PowerPoint3/Word2/AutoCAD1/Photoshop1/Windows1/AfterEffects与UNIX<1/Illustrator与InDesign无比例；前二InDemand，非部署率。",
+                "market": "美国",
+                "name": "O*NET27-4012 13项招聘软件产品",
+                "period": "2025全年美国招聘",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/27-4012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET27-4012 现行就业趋势",
+                  "2025—2035"
+                ],
+                "evidence_type": "primary_document",
+                "id": "trends-current",
+                "limitation": "24100→23300/-3%/1600年均空缺；BLS精确-3.1%；非AI因果预测。",
+                "market": "美国",
+                "name": "O*NET27-4012 现行就业趋势",
+                "period": "2025—2035",
+                "publisher": "O*NET OnLine / BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/27-4012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET27-4012 全国工资五分位",
+                  "2025 OEWS"
+                ],
+                "evidence_type": "primary_document",
+                "id": "wages-current",
+                "limitation": "31390/40320/59570/83520/123670年；15.09/19.38/28.64/40.16/59.46小时，正常工时税前受雇工资。",
+                "market": "美国",
+                "name": "O*NET27-4012 全国工资五分位",
+                "period": "2025 OEWS",
+                "publisher": "O*NET OnLine / BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/27-4012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS表1.2精确27-4012",
+                  "2025—2035"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ep-current",
+                "limitation": "24100→23300/净减800/-3.1%/1600空缺；Associate’s/None/Short-term；空缺非新增。",
+                "market": "美国",
+                "name": "BLS表1.2精确27-4012",
+                "period": "2025—2035",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS广播声音视频技术员现行页及子表",
+                  "2025工资/2025—2035预测"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ooh-current",
+                "limitation": "合并组含AV/广播/音响/灯光四子项；确另列广播59570及24100→23300，组行业工资不可当广播；AI段讨论用人减少。",
+                "market": "美国",
+                "name": "BLS广播声音视频技术员现行页及子表",
+                "period": "2025工资/2025—2035预测",
+                "publisher": "BLS",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/ooh/media-and-communication/broadcast-and-sound-engineering-technicians.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS2023年27-4012行业工资均值",
+                  "2023-05"
+                ],
+                "evidence_type": "primary_document",
+                "id": "oews2023-current",
+                "limitation": "电台电视台50300/媒体分发80010/电影视频104700/大学63640年均值；历史均值非2025中位数。",
+                "market": "美国",
+                "name": "BLS2023年27-4012行业工资均值",
+                "period": "2023-05",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/oes/2023/May/oes274012.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "国家统计局2025文化体育娱乐业工资",
+                  "2025；2026-05-15发布"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbs-current",
+                "limitation": "城镇非私营129447/私营64015元年税前；文化体育娱乐门类混合岗位，非本职业、非特定台站行业归类或起薪。",
+                "market": "中国大陆",
+                "name": "国家统计局2025文化体育娱乐业工资",
+                "period": "2025；2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "现行广播电视管理条例20/22条",
+                  "2024-12-06修订"
+                ],
+                "evidence_type": "regulation",
+                "id": "cn-broadcast-current",
+                "limitation": "覆盖网工程由资格单位承担，竣工广播电视行政部门组织验收；批准技术参数不得擅改，非所有内部配置改动均工程验收。",
+                "market": "中国大陆",
+                "name": "现行广播电视管理条例20/22条",
+                "period": "2024-12-06修订",
+                "publisher": "国务院；司法部法规库",
+                "scope": "contextual",
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=1751"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "现行著作权法45/46及38/39/42/43条",
+                  "2020修正；2021-06-01施行"
+                ],
+                "evidence_type": "law",
+                "id": "cn-copyright-current",
+                "limitation": "电台电视台已发表作品免许可但付酬特例不可泛化网络上架；录制表演、制品与传播等分别核。",
+                "market": "中国大陆",
+                "name": "现行著作权法45/46及38/39/42/43条",
+                "period": "2020修正；2021-06-01施行",
+                "publisher": "全国人大常委会；国家版权局",
+                "scope": "contextual",
+                "url": "https://www.ncac.gov.cn/xxfb/flfg/flfg_532/202103/t20210309_50530.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "特种作业人员安全技术培训考核管理规定",
+                  "令19；2026-06-01施行"
+                ],
+                "evidence_type": "regulation",
+                "id": "cn-special-current",
+                "limitation": "目录内特种作业须培训考核取得操作证；单位核真伪有效；普通接线不按职业名自动归类。",
+                "market": "中国大陆",
+                "name": "特种作业人员安全技术培训考核管理规定",
+                "period": "令19；2026-06-01施行",
+                "publisher": "应急管理部",
+                "scope": "contextual",
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "OSHA1910.333电气安全",
+                  "2026-10-09现行条文"
+                ],
+                "evidence_type": "regulation",
+                "id": "osha-electric-current",
+                "limitation": "美国暴露带电部件停电、锁定标识与合格人员测试等适用条件，不能跨法域套作中国操作授权。",
+                "market": "美国",
+                "name": "OSHA1910.333电气安全",
+                "period": "2026-10-09现行条文",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.333"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "广播任务工具与适配核对建议",
+                  "2026-10-09"
+                ],
+                "evidence_type": "editorial_synthesis",
+                "id": "editor-current",
+                "limitation": "工具试用、风险提示、训练、岗位及转岗距离为编辑判断，无效率、测评效度、招聘频率或成功率实证。",
+                "market": "美国",
+                "name": "广播任务工具与适配核对建议",
+                "period": "2026-10-09",
+                "publisher": "费马测试职业内容编辑组",
+                "scope": "editorial_synthesis",
+                "url": "https://www.onetonline.org/link/details/27-4012.00"
               }
             ]
           },
@@ -33983,8 +34795,10 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.bls-outlook"
+              "onet-summary",
+              "onet-details",
+              "faa-design-approvals",
+              "editorial"
             ],
             "id": "signal-and-outage",
             "mitigation": {
@@ -34015,8 +34829,11 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.nasa-seh"
+              "onet-details",
+              "faa-design-approvals",
+              "safety-cn",
+              "safety-us",
+              "editorial"
             ],
             "id": "rf-and-electrical",
             "mitigation": {
@@ -34047,8 +34864,10 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.onet-summary"
+              "onet-summary",
+              "onet-details",
+              "faa-design-approvals",
+              "editorial"
             ],
             "id": "equipment-and-parameters",
             "mitigation": {
@@ -34079,8 +34898,10 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.onet-summary"
+              "onet-summary",
+              "onet-details",
+              "faa-design-approvals",
+              "editorial"
             ],
             "id": "shift-fatigue",
             "mitigation": {
@@ -34111,8 +34932,10 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.onet-summary"
+              "onet-summary",
+              "onet-details",
+              "faa-design-approvals",
+              "editorial"
             ],
             "id": "information-security",
             "mitigation": {
@@ -34143,8 +34966,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.faa-design-approvals",
-              "career.source.onet-summary"
+              "bls-outlook",
+              "onet-details"
             ],
             "id": "content-rights",
             "mitigation": {
@@ -34278,6 +35101,60 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$link": "broadcast-technicians.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "url"
+            },
+            "id": "safety-cn",
+            "label": {
+              "$link": "broadcast-technicians.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "entity"
+            },
+            "scope": "职业任务和情境支持场景识别，广播条例/著作权法支持对应主体条款，MEM和美国OSHA支持各自法域作业条件；防护、疲劳、权限和升级安排为编辑核对，不替代单位现场规程或职业暴露测量。"
+          },
+          {
+            "href": {
+              "$link": "broadcast-technicians.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-8",
+              "field": "url"
+            },
+            "id": "safety-us",
+            "label": {
+              "$link": "broadcast-technicians.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-8",
+              "field": "entity"
+            },
+            "scope": "职业任务和情境支持场景识别，广播条例/著作权法支持对应主体条款，MEM和美国OSHA支持各自法域作业条件；防护、疲劳、权限和升级安排为编辑核对，不替代单位现场规程或职业暴露测量。"
+          },
+          {
+            "href": {
+              "$link": "broadcast-technicians.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-9",
+              "field": "url"
+            },
+            "id": "editorial",
+            "label": {
+              "$link": "broadcast-technicians.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-9",
+              "field": "entity"
+            },
+            "scope": "职业任务和情境支持场景识别，广播条例/著作权法支持对应主体条款，MEM和美国OSHA支持各自法域作业条件；防护、疲劳、权限和升级安排为编辑核对，不替代单位现场规程或职业暴露测量。"
           }
         ]
       },
@@ -34769,7 +35646,7 @@
             }
           },
           {
-            "fact_ref": "us-growth-2025-2035",
+            "fact_ref": "us-growth-2025-2035-current",
             "指标": "就业 · 增长率",
             "数值": {
               "$item": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.21",
@@ -34785,7 +35662,7 @@
             }
           },
           {
-            "fact_ref": "us-openings-2025-2035",
+            "fact_ref": "us-openings-2025-2035-current",
             "指标": "就业 · 年均职位空缺",
             "数值": {
               "$item": "broadcast-technicians.us-salary.career-snapshot-secondary-locale.23",
@@ -34867,7 +35744,7 @@
         "heading": "美国广播技术员工资多少？",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
-          "$fact": "us-wage-2025",
+          "$fact": "industry-mean-period-current",
           "field": "period"
         },
         "industry_rows": [
@@ -34956,7 +35833,7 @@
             }
           }
         ],
-        "industry_value_label": "该行业内本职业工资中位数",
+        "industry_value_label": "该行业内本职业年薪均值（2023）",
         "interpretation_heading": "美国广播技术员工资怎么理解？",
         "interpretation_rows": [
           {
@@ -35004,7 +35881,7 @@
         },
         "outlook_heading": "美国就业前景",
         "outlook_period": {
-          "$fact": "us-growth-2025-2035",
+          "$fact": "us-growth-2025-2035-current",
           "field": "period"
         },
         "wage_column_labels": [
@@ -35661,7 +36538,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 就业与预测字段（2024—2034 年）",
+            "label": "O*NET 就业与预测字段（2025—2035 年）",
             "secondary_value": null,
             "value": {
               "$item": "broadcast-technicians.profile.onet-structured-fields-block.4",
@@ -36539,7 +37416,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "Big Five (English)"
           },
           {
             "href": {
@@ -36549,7 +37426,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
+            "label": "MBTI (中文)"
           },
           {
             "href": {
@@ -36559,7 +37436,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (中文)"
+            "label": "九型人格 (中文)"
           },
           {
             "href": {
@@ -36569,7 +37446,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (中文)"
+            "label": "智力与推理 (中文)"
           }
         ]
       },
@@ -36944,6 +37821,78 @@
         "source_refs": [
           "bls-pay"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "24100人",
+        "fact_id": "us-employment-2025-current",
+        "market": "美国",
+        "measure": "2025就业",
+        "occupation_scope": "广播技术员",
+        "period": "2025—2035；BLS27-4012（就业基数为2025）",
+        "source_refs": [
+          "ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "23300人",
+        "fact_id": "us-employment-2035-current",
+        "market": "美国",
+        "measure": "2035预测就业",
+        "occupation_scope": "广播技术员",
+        "period": "2025—2035；BLS27-4012（就业基数为2025）",
+        "source_refs": [
+          "ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "下降3.1%",
+        "fact_id": "us-growth-2025-2035-current",
+        "market": "美国",
+        "measure": "预测增长率",
+        "occupation_scope": "广播技术员",
+        "period": "2025—2035；BLS27-4012（就业基数为2025）",
+        "source_refs": [
+          "ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "净减800人",
+        "fact_id": "us-change-2025-2035-current",
+        "market": "美国",
+        "measure": "预测净变化",
+        "occupation_scope": "广播技术员",
+        "period": "2025—2035；BLS27-4012（就业基数为2025）",
+        "source_refs": [
+          "ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "1600个/年",
+        "fact_id": "us-openings-2025-2035-current",
+        "market": "美国",
+        "measure": "年均职位空缺",
+        "occupation_scope": "广播技术员",
+        "period": "2025—2035；BLS27-4012（就业基数为2025）",
+        "source_refs": [
+          "ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2023职业×行业年薪均值",
+        "fact_id": "industry-mean-period-current",
+        "market": "美国",
+        "measure": "行业比较数据期",
+        "occupation_scope": "广播技术员",
+        "period": "2023-05；BLS27-4012职业×行业均值",
+        "source_refs": [
+          "oews2023-current"
+        ]
       }
     ]
   },
@@ -36952,7 +37901,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 27-4012.00 · 播出链路值守 / 发射与传输 / 设备检修 · 机房与台站",
@@ -37003,7 +37952,7 @@
       "text": "广播技术员"
     }
   },
-  "source_content_sha256": "ddf9273fa4fd786f4958b1231931c6ac4a4ccbb69a0c88b0d75c2b5337d6e133",
+  "source_content_sha256": "264e850ab9ccb0823ddfec3b7a0cf6e16b79019a3c2d6589d5289fc64c94a564",
   "subject": {
     "canonical_slug": "broadcast-technicians",
     "name": "广播技术员",

@@ -1708,6 +1708,12 @@
       },
       "item:agricultural-engineers.us-salary.career-snapshot-secondary-locale.9": {
         "status": "mapped"
+      },
+      "item:agricultural-engineers.us-salary.cross-review-industry_period": {
+        "status": "pending_mapping"
+      },
+      "item:agricultural-engineers.us-salary.cross-review-outlook_period": {
+        "status": "pending_mapping"
       }
     },
     "module_order": [
@@ -12448,14 +12454,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.industry_period": {
-        "ref": {
-          "id": "us-wage-2025",
-          "path": [
-            "period"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.industry_rows.01.industry": {
         "ref": {
@@ -12736,14 +12736,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.outlook_period": {
-        "ref": {
-          "id": "us-growth-2025-2035",
-          "path": [
-            "period"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.wage_heading": {
         "ref": {
@@ -23429,8 +23423,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.1",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23444,7 +23438,7 @@
           },
           "id": "agricultural-engineers.profile.onet-structured-fields-block.1",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23463,8 +23457,8 @@
           },
           "id": "agricultural-engineers.profile.responsibilities-block.1",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "list"
         },
@@ -23478,8 +23472,8 @@
           },
           "id": "agricultural-engineers.profile.work-context-block.1",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23493,8 +23487,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.2",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23508,7 +23502,7 @@
           },
           "id": "agricultural-engineers.profile.onet-structured-fields-block.2",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23522,8 +23516,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.3",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23537,7 +23531,7 @@
           },
           "id": "agricultural-engineers.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -23551,8 +23545,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.4",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23566,7 +23560,7 @@
           },
           "id": "agricultural-engineers.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23580,8 +23574,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.5",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23595,7 +23589,7 @@
           },
           "id": "agricultural-engineers.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "editor"
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -23609,8 +23603,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.6",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23624,9 +23618,9 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.7",
           "source_refs": [
-            "onet",
-            "ep",
-            "onet"
+            "onet-cross-repair",
+            "ep-cross-repair",
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23640,8 +23634,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23655,8 +23649,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23670,8 +23664,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.10",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23685,8 +23679,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.11",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23700,9 +23694,9 @@
           },
           "id": "agricultural-engineers.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "bls",
-            "cnclass"
+            "onet-cross-repair",
+            "bls-cross-repair",
+            "cnclass-cross-repair"
           ],
           "type": "prose"
         },
@@ -23716,8 +23710,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.12",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23731,8 +23725,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.13",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23746,8 +23740,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.14",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23761,8 +23755,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.15",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23776,8 +23770,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.16",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23791,8 +23785,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.17",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23806,8 +23800,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.18",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23821,8 +23815,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23836,8 +23830,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.20",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23851,8 +23845,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.21",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23866,8 +23860,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.22",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23881,7 +23875,7 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.23",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23895,8 +23889,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.24",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23910,7 +23904,7 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.25",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23924,8 +23918,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.26",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -23939,7 +23933,7 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.27",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23953,8 +23947,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.28",
           "source_refs": [
-            "bls",
-            "bls"
+            "bls-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23968,7 +23962,7 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.29",
           "source_refs": [
-            "ilo"
+            "ilo-cross-repair"
           ],
           "type": "prose"
         },
@@ -23982,8 +23976,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.30",
           "source_refs": [
-            "ilo",
-            "ilo"
+            "ilo-cross-repair",
+            "ilo-cross-repair"
           ],
           "type": "prose"
         },
@@ -23997,8 +23991,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.31",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -24012,8 +24006,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.32",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -24027,8 +24021,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.33",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -24042,8 +24036,8 @@
           },
           "id": "agricultural-engineers.profile.career-quick-answers-block.34",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         }
@@ -24650,14 +24644,14 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.9",
           "source_refs": [
-            "onet",
-            "ep",
-            "onet",
-            "ep",
-            "onet",
-            "ep",
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair",
+            "onet-cross-repair",
+            "ep-cross-repair",
+            "onet-cross-repair",
+            "ep-cross-repair",
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "links"
         },
@@ -24671,8 +24665,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.10",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -24686,8 +24680,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.11",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -24701,8 +24695,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.12",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -24716,8 +24710,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.13",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -24731,8 +24725,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.14",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -24746,8 +24740,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.15",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -24761,9 +24755,9 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.16",
           "source_refs": [
-            "onet",
-            "ep",
-            "onet"
+            "onet-cross-repair",
+            "ep-cross-repair",
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -24777,9 +24771,9 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.17",
           "source_refs": [
-            "onet",
-            "ep",
-            "onet"
+            "onet-cross-repair",
+            "ep-cross-repair",
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -24793,10 +24787,10 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "ep",
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair",
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -24810,7 +24804,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.19",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -24824,7 +24818,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.20",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -24838,8 +24832,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.21",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -24853,8 +24847,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.22",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -24868,7 +24862,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.23",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -24882,7 +24876,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.24",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -24896,7 +24890,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.25",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -24910,7 +24904,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.26",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -24924,7 +24918,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.27",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -24938,7 +24932,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.28",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -24952,7 +24946,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.29",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -24966,7 +24960,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.30",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -24980,7 +24974,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.31",
           "source_refs": [
-            "facilities"
+            "facilities-cross-repair"
           ],
           "type": "prose"
         },
@@ -24994,7 +24988,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.32",
           "source_refs": [
-            "facilities"
+            "facilities-cross-repair"
           ],
           "type": "prose"
         },
@@ -25008,8 +25002,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25023,8 +25017,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25038,8 +25032,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.35",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25053,8 +25047,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25068,8 +25062,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.37",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25083,8 +25077,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.38",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25098,8 +25092,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.39",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25113,7 +25107,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.40",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25127,7 +25121,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.41",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25141,7 +25135,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.42",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25155,7 +25149,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.43",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25169,7 +25163,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.44",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25183,7 +25177,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.45",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25197,7 +25191,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.46",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25211,7 +25205,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.47",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25225,7 +25219,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.48",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25239,7 +25233,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.49",
           "source_refs": [
-            "facilities"
+            "facilities-cross-repair"
           ],
           "type": "prose"
         },
@@ -25253,7 +25247,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.50",
           "source_refs": [
-            "facilities"
+            "facilities-cross-repair"
           ],
           "type": "prose"
         },
@@ -25267,7 +25261,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.51",
           "source_refs": [
-            "facilities"
+            "facilities-cross-repair"
           ],
           "type": "prose"
         },
@@ -25281,7 +25275,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25295,7 +25289,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.53",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25309,7 +25303,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25323,7 +25317,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25337,7 +25331,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25351,7 +25345,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.57",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25365,7 +25359,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.58",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25379,7 +25373,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.59",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25388,12 +25382,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET档案注明2024行业分布：专业与技术服务45%、政府25%、教育15%、其他含制造15%。BLS2025雇主比例使用另一发布期，不能混用；本行未测AI采用或效能。"
+              "本次O*NET17-2021行业表：政府28%、专业科学技术服务27%、教育17%、制造11%、其他17%；详细档案标2025。与BLS雇主分组分别使用，不测AI采用或效能。"
             ]
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "onet"
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -25407,8 +25401,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.61",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25422,8 +25416,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.62",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25437,8 +25431,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25452,8 +25446,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25467,8 +25461,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25482,8 +25476,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.66",
           "source_refs": [
-            "facilities",
-            "bls"
+            "facilities-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -25497,8 +25491,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25512,8 +25506,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25527,7 +25521,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.69",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25541,8 +25535,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25556,8 +25550,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25571,8 +25565,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25586,7 +25580,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.73",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25600,8 +25594,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25615,8 +25609,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25630,8 +25624,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.76",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25645,8 +25639,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.77",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25660,8 +25654,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.78",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25675,8 +25669,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.79",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25690,8 +25684,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.80",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25705,8 +25699,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.81",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25720,8 +25714,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.82",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25735,8 +25729,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.83",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25750,8 +25744,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.84",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25765,8 +25759,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.85",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25780,8 +25774,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.86",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25795,8 +25789,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.87",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25810,7 +25804,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.88",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25824,8 +25818,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.89",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25839,8 +25833,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.90",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25854,8 +25848,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.91",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25869,8 +25863,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.92",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25884,8 +25878,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.93",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25899,7 +25893,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.94",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25913,7 +25907,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.95",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25927,7 +25921,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.96",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25941,8 +25935,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.97",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -25956,7 +25950,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.98",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25970,7 +25964,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.99",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25984,7 +25978,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.100",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -25998,8 +25992,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.101",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -26013,7 +26007,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.102",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -26027,7 +26021,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.103",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -26041,7 +26035,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.104",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -26055,8 +26049,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.105",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -26070,7 +26064,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.106",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -26084,7 +26078,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.107",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -26098,7 +26092,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.108",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -26112,8 +26106,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.109",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -26127,7 +26121,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.110",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -26141,7 +26135,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.111",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -26155,7 +26149,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.112",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -26169,8 +26163,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.113",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -26184,7 +26178,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.114",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -26198,7 +26192,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.115",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -26212,7 +26206,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.116",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -26226,7 +26220,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.117",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -26240,7 +26234,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.118",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -26254,7 +26248,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.119",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -26268,7 +26262,7 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.120",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -26282,8 +26276,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.121",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -26297,8 +26291,8 @@
           },
           "id": "agricultural-engineers.ai-impact.ai-impact-table.122",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         }
@@ -26320,7 +26314,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26334,7 +26328,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26348,7 +26342,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26362,7 +26356,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26376,7 +26370,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26390,7 +26384,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26404,7 +26398,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26418,7 +26412,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26432,7 +26426,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26446,7 +26440,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26460,7 +26454,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26474,7 +26468,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26488,7 +26482,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26502,7 +26496,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26516,7 +26510,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26530,7 +26524,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26544,8 +26538,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26559,7 +26553,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26573,8 +26567,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26588,8 +26582,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26603,8 +26597,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26618,8 +26612,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.28",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26633,8 +26627,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26648,8 +26642,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26663,8 +26657,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.31",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26678,8 +26672,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.32",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26693,8 +26687,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26708,8 +26702,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.34",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26723,8 +26717,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.35",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26738,8 +26732,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26753,8 +26747,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.37",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26768,8 +26762,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26783,8 +26777,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.39",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26798,8 +26792,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26813,8 +26807,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.41",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26828,8 +26822,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.42",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26843,7 +26837,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.43",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26857,8 +26851,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26872,8 +26866,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26887,8 +26881,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26902,7 +26896,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.47",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26916,8 +26910,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26931,7 +26925,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26945,7 +26939,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26959,7 +26953,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26973,7 +26967,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -26987,7 +26981,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -27001,7 +26995,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -27015,8 +27009,8 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "nbs",
-            "nbs"
+            "nbs-cross-repair",
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -27030,7 +27024,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -27044,7 +27038,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         },
@@ -27058,7 +27052,7 @@
           },
           "id": "agricultural-engineers.china-salary.career-snapshot-primary-locale.59",
           "source_refs": [
-            "nbs"
+            "nbs-cross-repair"
           ],
           "type": "prose"
         }
@@ -27080,9 +27074,9 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "bls",
-            "oews",
-            "bls"
+            "bls-cross-repair",
+            "oews-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27096,7 +27090,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27110,7 +27104,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27124,7 +27118,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27138,7 +27132,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27152,7 +27146,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27166,7 +27160,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27180,7 +27174,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27194,7 +27188,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27208,7 +27202,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27222,7 +27216,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27236,7 +27230,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27250,8 +27244,8 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "bls",
-            "oews"
+            "bls-cross-repair",
+            "oews-cross-repair"
           ],
           "type": "prose"
         },
@@ -27265,7 +27259,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27279,7 +27273,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27293,7 +27287,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27307,8 +27301,8 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "bls",
-            "oews"
+            "bls-cross-repair",
+            "oews-cross-repair"
           ],
           "type": "prose"
         },
@@ -27322,8 +27316,8 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "bls",
-            "oews"
+            "bls-cross-repair",
+            "oews-cross-repair"
           ],
           "type": "prose"
         },
@@ -27337,8 +27331,8 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "bls",
-            "oews"
+            "bls-cross-repair",
+            "oews-cross-repair"
           ],
           "type": "prose"
         },
@@ -27352,7 +27346,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.27",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27366,7 +27360,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.28",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27375,12 +27369,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "98,590 美元是 17-2021 单一职业口径的中位数。O*NET 页面同时列出 2024—2034 年口径的在岗 1,700 人与 5%—6% 增长，与 BLS 2025—2035 年口径的 1,500 人与 7% 不同，属于不同发布期，不能混用。"
+              "98,590美元为2025年5月17-2021单职业中位工资。当前O*NET摘要已列2025就业1,500人、2025—2035增长7%或以上及年均100空缺，与BLS当前期一致；行业分布旧表另有年份，不能混作当前就业。"
             ]
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27394,7 +27388,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.30",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27408,7 +27402,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.31",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27422,8 +27416,8 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.32",
           "source_refs": [
-            "bls",
-            "oews"
+            "bls-cross-repair",
+            "oews-cross-repair"
           ],
           "type": "prose"
         },
@@ -27437,7 +27431,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27451,7 +27445,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.34",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27465,7 +27459,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27479,7 +27473,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27493,7 +27487,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.37",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27507,7 +27501,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27521,7 +27515,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27535,7 +27529,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.40",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27549,7 +27543,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27563,7 +27557,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27577,7 +27571,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.43",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27591,7 +27585,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27605,7 +27599,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27619,8 +27613,8 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "bls",
-            "oews"
+            "bls-cross-repair",
+            "oews-cross-repair"
           ],
           "type": "prose"
         },
@@ -27634,7 +27628,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27648,7 +27642,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27662,8 +27656,8 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "bls",
-            "oews"
+            "bls-cross-repair",
+            "oews-cross-repair"
           ],
           "type": "prose"
         },
@@ -27677,7 +27671,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27691,8 +27685,8 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "bls",
-            "oews"
+            "bls-cross-repair",
+            "oews-cross-repair"
           ],
           "type": "prose"
         },
@@ -27706,7 +27700,7 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -27720,8 +27714,36 @@
           },
           "id": "agricultural-engineers.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "bls",
-            "oews"
+            "bls-cross-repair",
+            "oews-cross-repair"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "2025年5月"
+            ]
+          },
+          "id": "agricultural-engineers.us-salary.cross-review-industry_period",
+          "source_refs": [
+            "bls-cross-repair"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "2025—2035年"
+            ]
+          },
+          "id": "agricultural-engineers.us-salary.cross-review-outlook_period",
+          "source_refs": [
+            "bls-cross-repair"
           ],
           "type": "prose"
         }
@@ -27862,12 +27884,12 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.1",
           "source_refs": [
-            "onet",
-            "ep",
-            "onet",
-            "ep",
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair",
+            "onet-cross-repair",
+            "ep-cross-repair",
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "links"
         },
@@ -27881,8 +27903,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.2",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -27896,7 +27918,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.3",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27911,8 +27933,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.4",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "list"
         },
@@ -27926,7 +27948,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.5",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27940,8 +27962,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.6",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -27955,7 +27977,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.7",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27970,8 +27992,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.8",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "list"
         },
@@ -27985,7 +28007,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.9",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27999,8 +28021,8 @@
           },
           "id": "agricultural-engineers.fit.riasec-fit-block.9",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28014,7 +28036,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.10",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28028,7 +28050,7 @@
           },
           "id": "agricultural-engineers.fit.riasec-fit-block.10",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28042,7 +28064,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.11",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28056,8 +28078,8 @@
           },
           "id": "agricultural-engineers.fit.riasec-fit-block.11",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28072,7 +28094,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.12",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "list"
         },
@@ -28086,7 +28108,7 @@
           },
           "id": "agricultural-engineers.fit.riasec-fit-block.12",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28100,7 +28122,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.13",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28114,7 +28136,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.14",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28128,7 +28150,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.15",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28143,7 +28165,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.16",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "list"
         },
@@ -28157,7 +28179,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.17",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28171,8 +28193,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.18",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28186,7 +28208,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.19",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28201,7 +28223,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.20",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "list"
         },
@@ -28215,7 +28237,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.21",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28229,8 +28251,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.22",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28244,7 +28266,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.23",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28259,8 +28281,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.24",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "list"
         },
@@ -28274,7 +28296,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.25",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28288,7 +28310,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.26",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28302,8 +28324,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.27",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28317,8 +28339,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.28",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28332,8 +28354,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.29",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28347,8 +28369,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.30",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28362,8 +28384,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.31",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28377,8 +28399,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.32",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28392,8 +28414,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.33",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28407,8 +28429,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.34",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28422,8 +28444,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.35",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28432,13 +28454,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "缺少工程与现场背景，需补专业知识与安全责任意识。"
+              "转向数据科学须按目标任务补建模、数据工程和业务交付；不能由职业名称断言申请者缺少工程或现场背景，已有经历应逐项核对。"
             ]
           },
           "id": "agricultural-engineers.fit.personality-fit-block.36",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28452,8 +28474,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.37",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28467,8 +28489,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.38",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28482,8 +28504,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.39",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28497,9 +28519,9 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.40",
           "source_refs": [
-            "onet",
-            "ep",
-            "onet"
+            "onet-cross-repair",
+            "ep-cross-repair",
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28513,9 +28535,9 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.41",
           "source_refs": [
-            "onet",
-            "ep",
-            "onet"
+            "onet-cross-repair",
+            "ep-cross-repair",
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28529,9 +28551,9 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.42",
           "source_refs": [
-            "onet",
-            "ep",
-            "onet"
+            "onet-cross-repair",
+            "ep-cross-repair",
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28545,8 +28567,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.43",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28560,8 +28582,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.44",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28575,8 +28597,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.45",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28590,8 +28612,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.46",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28605,8 +28627,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.47",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28620,8 +28642,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.48",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28635,7 +28657,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.49",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28649,8 +28671,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.50",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28664,7 +28686,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.51",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28678,8 +28700,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.52",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28693,8 +28715,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.53",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28708,7 +28730,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.54",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28722,7 +28744,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.55",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28736,8 +28758,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.56",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28751,8 +28773,8 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.57",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28766,7 +28788,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.58",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28780,7 +28802,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.59",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28794,7 +28816,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.60",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28808,7 +28830,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.61",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28822,7 +28844,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.62",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28836,7 +28858,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.63",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28845,12 +28867,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 17-2021.00 详细工作活动，用于设计入行练习任务。"
+              "O*NET17-2021行业分布，仅说明就业行业背景；设计任务与练习观察依据另查Tasks和工作活动。"
             ]
           },
           "id": "agricultural-engineers.fit.personality-fit-block.64",
           "source_refs": [
-            "onet"
+            "arxiv-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -28864,7 +28887,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.65",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28878,7 +28901,7 @@
           },
           "id": "agricultural-engineers.fit.personality-fit-block.66",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         }
@@ -28908,25 +28931,25 @@
                 "url": "https://www.onetonline.org/link/details/17-2021.00"
               },
               {
-                "entity": "安全生产法2021修正（SAMR全文）",
+                "entity": "O*NET OnLine 17-2021.00 职业详细资料（任务与工作活动）",
                 "id": "link-3",
-                "relation": "career.source",
-                "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html"
-              },
-              {
-                "entity": "BLS农业工程师职业展望",
-                "id": "link-4",
-                "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/agricultural-engineers.htm"
-              },
-              {
-                "entity": "O*NET农业工程师详细工作活动",
-                "id": "link-5",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/17-2021.00"
               },
               {
-                "entity": "编辑风险归纳所参照的O*NET任务",
+                "entity": "中华人民共和国安全生产法（2021 年修正）",
+                "id": "link-4",
+                "relation": "career.source",
+                "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html"
+              },
+              {
+                "entity": "U.S. BLS 职业展望手册：农业工程师（2025 年版）",
+                "id": "link-5",
+                "relation": "career.source",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/agricultural-engineers.htm"
+              },
+              {
+                "entity": "O*NET OnLine 17-2021.00 详细工作活动",
                 "id": "link-6",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/17-2021.00"
@@ -28935,11 +28958,11 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.7",
           "source_refs": [
-            "ep",
-            "editor",
-            "bls",
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair",
+            "bls-cross-repair",
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "links"
         },
@@ -28953,9 +28976,9 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.8",
           "source_refs": [
-            "ep",
-            "editor",
-            "bls"
+            "ep-cross-repair",
+            "editor-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -28969,9 +28992,9 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.9",
           "source_refs": [
-            "ep",
-            "editor",
-            "bls"
+            "ep-cross-repair",
+            "editor-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -28985,10 +29008,10 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.10",
           "source_refs": [
-            "ep",
-            "editor",
-            "bls",
-            "ep"
+            "ep-cross-repair",
+            "editor-cross-repair",
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -29002,8 +29025,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.11",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29017,8 +29040,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.12",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29032,8 +29055,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.13",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29047,8 +29070,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.14",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29062,8 +29085,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.15",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29077,8 +29100,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.16",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29092,8 +29115,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.17",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29107,8 +29130,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.18",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29122,7 +29145,7 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.19",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -29136,7 +29159,7 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.20",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -29150,7 +29173,7 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.21",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -29164,8 +29187,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.22",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29179,8 +29202,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.23",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29194,8 +29217,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.24",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29209,8 +29232,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.25",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29224,8 +29247,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.26",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29239,8 +29262,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.27",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29254,8 +29277,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.28",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29269,8 +29292,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.29",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29284,8 +29307,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.30",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29299,8 +29322,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.31",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29314,8 +29337,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.32",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29329,8 +29352,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.33",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29344,8 +29367,8 @@
           },
           "id": "agricultural-engineers.risk.career-risk-cards.34",
           "source_refs": [
-            "ep",
-            "editor"
+            "ep-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29354,12 +29377,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 17-2021.00 任务与工作情境（美国，单一职业受访资料）。"
+              "O*NET农业工程师17-2021工作情境，单职业受访资料。"
             ]
           },
           "id": "agricultural-engineers.risk.career-risk-cards.35",
           "source_refs": [
-            "ep"
+            "privacy-cross-repair"
           ],
           "type": "prose"
         },
@@ -29368,12 +29391,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "《中华人民共和国安全生产法》（2021 年修正）与中国大陆安全生产要求。"
+              "O*NET17-2021任务与活动；设计、测试和记录背景，控制办法为编辑建议。"
             ]
           },
           "id": "agricultural-engineers.risk.career-risk-cards.36",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -29382,12 +29405,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册（2025 年版），用于说明就业背景，不用于风险概率。"
+              "中国大陆安全生产法2021修正；生产经营主体及特种作业等适用条件分别核对。"
             ]
           },
           "id": "agricultural-engineers.risk.career-risk-cards.37",
           "source_refs": [
-            "ep"
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -29396,12 +29419,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 17-2021.00 详细工作活动（美国，单一职业口径）。"
+              "BLS农业工程师就业、入行与工作环境背景，不含风险概率。"
             ]
           },
           "id": "agricultural-engineers.risk.career-risk-cards.38",
           "source_refs": [
-            "ep"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -29410,12 +29433,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本页编辑归纳（条件性建议），不代表行业统一流程或法定要求。"
+              "O*NET17-2021详细工作活动，不是雇主统一流程或全国岗位授权。"
             ]
           },
           "id": "agricultural-engineers.risk.career-risk-cards.39",
           "source_refs": [
-            "ep"
+            "employer-cross-repair"
           ],
           "type": "prose"
         }
@@ -29485,9 +29508,9 @@
           },
           "id": "agricultural-engineers.path.entry-role-comparison.1",
           "source_refs": [
-            "ep",
-            "bls",
-            "editor"
+            "ep-cross-repair",
+            "bls-cross-repair",
+            "editor-cross-repair"
           ],
           "title": "农业工程师的入门岗位与初期任务怎么比较？",
           "type": "table"
@@ -29533,8 +29556,8 @@
           },
           "id": "agricultural-engineers.path.employer-evidence.1",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "title": "入行准备：来源事实与编辑核对建议",
           "type": "cards"
@@ -29845,11 +29868,11 @@
           },
           "id": "agricultural-engineers.path.credential-decision.1",
           "source_refs": [
-            "ep",
-            "bls",
-            "editor",
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair",
+            "editor-cross-repair",
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -29867,9 +29890,9 @@
           },
           "id": "agricultural-engineers.path.credential-boundary.1",
           "source_refs": [
-            "ep",
-            "bls",
-            "editor"
+            "ep-cross-repair",
+            "bls-cross-repair",
+            "editor-cross-repair"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -29885,10 +29908,10 @@
           },
           "id": "agricultural-engineers.path.recruitment-sample.1",
           "source_refs": [
-            "ep",
-            "bls",
-            "editor",
-            "ep"
+            "ep-cross-repair",
+            "bls-cross-repair",
+            "editor-cross-repair",
+            "ep-cross-repair"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -29926,10 +29949,10 @@
           },
           "id": "agricultural-engineers.path.career-path-block.10",
           "source_refs": [
-            "ep",
-            "bls",
-            "editor",
-            "ep"
+            "ep-cross-repair",
+            "bls-cross-repair",
+            "editor-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "links"
         },
@@ -29943,8 +29966,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.11",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -29958,8 +29981,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.12",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -29973,7 +29996,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.13",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -29987,8 +30010,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.14",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30002,7 +30025,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.15",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30016,8 +30039,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.16",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30031,7 +30054,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.17",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30045,8 +30068,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.18",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30060,7 +30083,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.19",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30074,8 +30097,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.20",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30089,9 +30112,9 @@
           },
           "id": "agricultural-engineers.path.career-path-block.21",
           "source_refs": [
-            "ep",
-            "bls",
-            "editor"
+            "ep-cross-repair",
+            "bls-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -30105,9 +30128,9 @@
           },
           "id": "agricultural-engineers.path.career-path-block.22",
           "source_refs": [
-            "ep",
-            "bls",
-            "editor"
+            "ep-cross-repair",
+            "bls-cross-repair",
+            "editor-cross-repair"
           ],
           "type": "prose"
         },
@@ -30121,8 +30144,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.23",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30136,7 +30159,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.24",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30150,7 +30173,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.25",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30164,7 +30187,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.26",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30178,7 +30201,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.27",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30192,8 +30215,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.28",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30207,7 +30230,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.29",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30221,8 +30244,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.30",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30236,8 +30259,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.31",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30251,7 +30274,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.32",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30265,8 +30288,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.33",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30280,7 +30303,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.34",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30294,8 +30317,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.35",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30309,8 +30332,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.36",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30324,7 +30347,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.37",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30338,8 +30361,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.38",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30353,7 +30376,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.39",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30367,8 +30390,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.40",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30382,8 +30405,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.41",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30397,7 +30420,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.42",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30411,8 +30434,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.43",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30426,7 +30449,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.44",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30440,8 +30463,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.45",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30455,8 +30478,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.46",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30470,7 +30493,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.47",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30484,8 +30507,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.48",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30499,7 +30522,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.49",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30513,8 +30536,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.50",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30528,8 +30551,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.51",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30543,7 +30566,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.52",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30557,8 +30580,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.53",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30572,7 +30595,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.54",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30586,8 +30609,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.55",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30601,8 +30624,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.56",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30616,7 +30639,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.57",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30630,8 +30653,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.58",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30645,7 +30668,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.59",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30659,8 +30682,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.60",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30674,8 +30697,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.61",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30689,7 +30712,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.62",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30703,8 +30726,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.63",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30718,7 +30741,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.64",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30732,8 +30755,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.65",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30747,8 +30770,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.66",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30762,7 +30785,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.67",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30776,8 +30799,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.68",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30791,7 +30814,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.69",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30805,8 +30828,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.70",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30820,8 +30843,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.71",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30835,7 +30858,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.72",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30849,8 +30872,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.73",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30864,7 +30887,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.74",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30878,8 +30901,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.75",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30893,8 +30916,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.76",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30908,7 +30931,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.77",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30922,8 +30945,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.78",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30937,7 +30960,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.79",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30951,8 +30974,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.80",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30966,8 +30989,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.81",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -30981,7 +31004,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.82",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -30995,8 +31018,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.83",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31010,7 +31033,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.84",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31024,8 +31047,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.85",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31039,8 +31062,8 @@
           },
           "id": "agricultural-engineers.path.career-path-block.86",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31054,7 +31077,7 @@
           },
           "id": "agricultural-engineers.path.career-path-block.87",
           "source_refs": [
-            "ep"
+            "ep-cross-repair"
           ],
           "type": "prose"
         }
@@ -31159,10 +31182,10 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.7",
           "source_refs": [
-            "bls",
-            "ep",
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair",
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "links"
         },
@@ -31176,9 +31199,9 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.8",
           "source_refs": [
-            "bls",
-            "ep",
-            "bls"
+            "bls-cross-repair",
+            "ep-cross-repair",
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31192,7 +31215,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.9",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31206,7 +31229,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.10",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31220,7 +31243,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.11",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31234,7 +31257,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.12",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31248,7 +31271,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.13",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31262,7 +31285,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.14",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31276,7 +31299,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.15",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31290,7 +31313,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.16",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31304,7 +31327,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.17",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31318,7 +31341,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.18",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31327,12 +31350,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "不能解释为个人就业保证；O*NET 页面同时列出 2024—2034 年口径的 1,700 人与 5%—6%，与 BLS 2025—2035 年口径不同，不能混用。"
+              "全国预测不保证个人就业；当前O*NET和BLS均使用2025基年与2025—2035预测。不同来源的增长区间标签及舍入值不能当作不同趋势，也不代表具体雇主扩招。"
             ]
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.19",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31346,7 +31369,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.20",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31360,7 +31383,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.21",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31374,7 +31397,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.22",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31388,7 +31411,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.23",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31402,7 +31425,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.24",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31416,7 +31439,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.25",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31430,7 +31453,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.26",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31444,7 +31467,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.27",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31458,7 +31481,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.28",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31472,7 +31495,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.29",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31486,7 +31509,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.30",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31500,7 +31523,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.31",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31514,7 +31537,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.32",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31528,7 +31551,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.33",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31542,8 +31565,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.34",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31557,8 +31580,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.35",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31572,8 +31595,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.36",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31587,8 +31610,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.37",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31602,8 +31625,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.38",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31617,8 +31640,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.39",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31632,8 +31655,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.40",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31647,8 +31670,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.41",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31662,8 +31685,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.42",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31677,8 +31700,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.43",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31692,8 +31715,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.44",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31707,8 +31730,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.45",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31722,8 +31745,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.46",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31737,8 +31760,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.47",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31752,8 +31775,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.48",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31767,8 +31790,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.49",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31782,7 +31805,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.50",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31796,7 +31819,7 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.51",
           "source_refs": [
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -31810,8 +31833,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.52",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31825,8 +31848,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.53",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31840,8 +31863,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.54",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31855,8 +31878,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.55",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31870,8 +31893,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.56",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         },
@@ -31885,8 +31908,8 @@
           },
           "id": "agricultural-engineers.market-signals.market-signal-card.57",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         }
@@ -31987,7 +32010,7 @@
           },
           "id": "agricultural-engineers.sources.source-card.1",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -32001,9 +32024,9 @@
           },
           "id": "agricultural-engineers.sources.source-card.2",
           "source_refs": [
-            "onet",
-            "ep",
-            "onet"
+            "onet-cross-repair",
+            "ep-cross-repair",
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -32012,12 +32035,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核对与更新日期：2026-10-02。"
+              "2026-10-08（本轮限定九板块修订）"
             ]
           },
           "id": "agricultural-engineers.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -32031,8 +32054,8 @@
           },
           "id": "agricultural-engineers.sources.source-card.4",
           "source_refs": [
-            "onet",
-            "ep"
+            "onet-cross-repair",
+            "ep-cross-repair"
           ],
           "type": "prose"
         }
@@ -32504,6 +32527,406 @@
                 "period": "职业动态资料；访问2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "O*NET OnLine 17-2021.00 职业摘要（任务与兴趣）｜农业工程师17-2021.00职业背景（非AI效果研究）",
+                "url": "https://www.onetonline.org/link/summary/17-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "O*NET OnLine 17-2021.00 农业工程师职业摘要",
+                  "职业动态资料；访问2026-10-02"
+                ],
+                "evidence_type": "官方职业档案",
+                "id": "onet-cross-repair",
+                "limitation": "用于职业身份、任务与工作情境；美国单一职业口径。",
+                "market": "美国",
+                "name": "O*NET OnLine 17-2021.00 农业工程师职业摘要",
+                "period": "职业动态资料；访问2026-10-02",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "U.S. BLS 职业展望手册：农业工程师（2025 年版）",
+                  "工资2025年5月；就业2025年及2025—2035预测"
+                ],
+                "evidence_type": "官方职业展望",
+                "id": "bls-cross-repair",
+                "limitation": "用于美国工资中位数、就业规模与 2025—2035 年预测；全国单一职业 17-2021。",
+                "market": "美国",
+                "name": "U.S. BLS 职业展望手册：农业工程师（2025 年版）",
+                "period": "工资2025年5月；就业2025年及2025—2035预测",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/agricultural-engineers.htm"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "O*NET OnLine 17-2021.00 职业详细资料（任务与工作活动）",
+                  "职业动态资料；访问2026-10-02"
+                ],
+                "evidence_type": "官方职业档案",
+                "id": "ep-cross-repair",
+                "limitation": "用于任务、工作活动与工作情境；美国单一职业口径。",
+                "market": "美国",
+                "name": "O*NET OnLine 17-2021.00 职业详细资料（任务与工作活动）",
+                "period": "职业动态资料；访问2026-10-02",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "O*NET 展示的 BLS OEWS 2025 年 5 月：17-2021.00 全国工资分位",
+                  "2025年工资"
+                ],
+                "evidence_type": "官方工资统计",
+                "id": "oews-cross-repair",
+                "limitation": "用于工资分位；单一职业口径。",
+                "market": "美国",
+                "name": "O*NET 展示的 BLS OEWS 2025 年 5 月：17-2021.00 全国工资分位",
+                "period": "2025年工资",
+                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/17-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
+                  "2025年，2026-05-15发布"
+                ],
+                "evidence_type": "官方工资统计",
+                "id": "nbs-cross-repair",
+                "limitation": "用于中国大陆行业门类与单位类型年平均工资；不含本职业单列工资。",
+                "market": "中国大陆",
+                "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
+                "period": "2025年，2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry",
+                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "福建人社2023年第二季度公共就业供求分析（农业工程技术人员代码）",
+                  "2023年第二季度；2023-07-12发布"
+                ],
+                "evidence_type": "官方公共就业供求数据",
+                "id": "cnclass-cross-repair",
+                "limitation": "仅核表列农业工程技术人员2-03-09-00；不能代替未读到全文的2022大典、当前季度供求或全国职业工资。",
+                "market": "中国大陆（福建）",
+                "name": "福建人社2023年第二季度公共就业供求分析（农业工程技术人员代码）",
+                "period": "2023年第二季度；2023-07-12发布",
+                "publisher": "福建省人力资源和社会保障厅",
+                "scope": "contextual",
+                "url": "https://rst.fujian.gov.cn/zw/ztzl/zxzt/jygqxxzt/gqrkfx/202307/t20230712_6206244.htm"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "O*NET OnLine 17-2021.00 工作情境（Work Context）",
+                  "职业动态资料；访问2026-10-02"
+                ],
+                "evidence_type": "官方职业档案",
+                "id": "privacy-cross-repair",
+                "limitation": "用于工作情境、工作时间与安全责任等受访比例。",
+                "market": "美国",
+                "name": "O*NET OnLine 17-2021.00 工作情境（Work Context）",
+                "period": "职业动态资料；访问2026-10-02",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "O*NET OnLine 17-2021.00 技术清单（Hot Technologies）",
+                  "Lightcast2025-01-01至2025-12-31招聘文本"
+                ],
+                "evidence_type": "招聘软件提及表",
+                "id": "facilities-cross-repair",
+                "limitation": "列软件名称，未给本职业招聘占比；不能推0%、高频程度、实际采用率或AI提效。",
+                "market": "美国",
+                "name": "O*NET OnLine 17-2021.00 技术清单（Hot Technologies）",
+                "period": "Lightcast2025-01-01至2025-12-31招聘文本",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/17-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "O*NET OnLine 17-2021.00 认证目录",
+                  "职业动态资料；访问2026-10-02"
+                ],
+                "evidence_type": "职业认证目录",
+                "id": "operations-cross-repair",
+                "limitation": "未据目录核各证书的现行条件；目录不代表强制资格或所有认证均可选。",
+                "market": "美国",
+                "name": "O*NET OnLine 17-2021.00 认证目录",
+                "period": "职业动态资料；访问2026-10-02",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localcert/17-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "O*NET OnLine 17-2021.00 培训目录",
+                  "IPEDS2025—2026目录；2024—2025毕业数据"
+                ],
+                "evidence_type": "职业培训目录",
+                "id": "hr-cross-repair",
+                "limitation": "用于寻找训练，不验证课程质量、费用、当前招生或就业结果。",
+                "market": "美国",
+                "name": "O*NET OnLine 17-2021.00 培训目录",
+                "period": "IPEDS2025—2026目录；2024—2025毕业数据",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtraining/17-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "国家统计局《关于工资总额组成的规定》",
+                  "1990年工资总额组成规定；页面发布2026-05"
+                ],
+                "evidence_type": "官方工资统计",
+                "id": "health-cross-repair",
+                "limitation": "用于解释工资总额为税前口径及其组成范围。",
+                "market": "中国大陆",
+                "name": "国家统计局《关于工资总额组成的规定》",
+                "period": "1990年工资总额组成规定；页面发布2026-05",
+                "publisher": "国家统计局",
+                "scope": "exact",
+                "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "中华人民共和国劳动合同法",
+                  "2012年修正劳动合同法"
+                ],
+                "evidence_type": "法规原文",
+                "id": "ilo-cross-repair",
+                "limitation": "用于中国大陆劳动合同与用工条件的一般性说明。",
+                "market": "中国大陆",
+                "name": "中华人民共和国劳动合同法",
+                "period": "2012年修正劳动合同法",
+                "publisher": "国家市场监督管理总局（公布法律全文）",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_0abfdd261c03417b949df19d869add8d.html"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "中华人民共和国安全生产法（2021 年修正）",
+                  "2021年修正"
+                ],
+                "evidence_type": "法规原文",
+                "id": "editor-cross-repair",
+                "limitation": "用于中国大陆生产经营单位安全生产责任与双重预防机制要求。",
+                "market": "中国大陆",
+                "name": "中华人民共和国安全生产法（2021 年修正）",
+                "period": "2021年修正",
+                "publisher": "国家市场监督管理总局（公布法律全文）",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "O*NET OnLine 17-2021.00 任务与工作活动",
+                  "职业动态资料；访问2026-10-02"
+                ],
+                "evidence_type": "官方职业档案",
+                "id": "nist-cross-repair",
+                "limitation": "用于职业任务、工作活动与记录要求。",
+                "market": "美国",
+                "name": "O*NET OnLine 17-2021.00 任务与工作活动",
+                "period": "职业动态资料；访问2026-10-02",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "政府28%；专业、科学和技术服务27%；教育17%；制造11%；其他17%。",
+                  "当前原表，不能替代旧期快照或BLS不同雇主分组。"
+                ],
+                "evidence_type": "官方职业行业分布",
+                "id": "arxiv-cross-repair",
+                "limitation": "美国本职业行业就业结构；不是工资、招聘增长或AI效果。",
+                "market": "美国",
+                "name": "O*NET OnLine 17-2021.00 行业分布",
+                "period": "2025年行业就业分布",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/17-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "O*NET OnLine 17-2021.00 教育要求（Job Zone）",
+                  "职业动态资料；访问2026-10-02"
+                ],
+                "evidence_type": "官方职业档案",
+                "id": "weforum-cross-repair",
+                "limitation": "用于职业准备等级与学历要求说明。",
+                "market": "美国",
+                "name": "O*NET OnLine 17-2021.00 教育要求（Job Zone）",
+                "period": "职业动态资料；访问2026-10-02",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "O*NET OnLine 17-2021.00 详细工作活动",
+                  "职业动态资料；访问2026-10-02"
+                ],
+                "evidence_type": "官方职业档案",
+                "id": "employer-cross-repair",
+                "limitation": "用于详细工作活动与任务过程资料。",
+                "market": "美国",
+                "name": "O*NET OnLine 17-2021.00 详细工作活动",
+                "period": "职业动态资料；访问2026-10-02",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "O*NET OnLine 17-2021.00 相关职业",
+                  "职业动态资料；访问2026-10-02"
+                ],
+                "evidence_type": "官方职业档案",
+                "id": "purchasing-managers-cross-repair",
+                "limitation": "用于相关职业与边界参考。",
+                "market": "美国",
+                "name": "O*NET OnLine 17-2021.00 相关职业",
+                "period": "职业动态资料；访问2026-10-02",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "O*NET OnLine 17-2021.00 任务与工作活动",
+                  "职业动态资料；访问2026-10-02"
+                ],
+                "evidence_type": "官方职业档案",
+                "id": "r2-pay-1-cross-repair",
+                "limitation": "用于任务资料。",
+                "market": "美国",
+                "name": "O*NET OnLine 17-2021.00 任务与工作活动",
+                "period": "职业动态资料；访问2026-10-02",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "O*NET OnLine 17-2021.00 自定义职业档案",
+                  "职业动态资料；访问2026-10-02"
+                ],
+                "evidence_type": "职业档案选择入口",
+                "id": "r2-pay-2-cross-repair",
+                "limitation": "本轮只核自定义页面入口，不声称已生成并读取完整定制档案。",
+                "market": "美国",
+                "name": "O*NET OnLine 17-2021.00 自定义职业档案",
+                "period": "职业动态资料；访问2026-10-02",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/custom/17-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "政府28%；专业、科学和技术服务27%；教育17%；制造11%；其他17%。",
+                  "当前原表，不能替代旧期快照或BLS不同雇主分组。"
+                ],
+                "evidence_type": "官方职业行业分布",
+                "id": "r2-pay-3-cross-repair",
+                "limitation": "美国本职业行业就业结构；不是工资、招聘增长或AI效果。",
+                "market": "美国",
+                "name": "O*NET OnLine 17-2021.00 行业分布",
+                "period": "2025年行业就业分布",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/17-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "O*NET OnLine 17-2021.00 教育要求（Education）",
+                  "职业动态资料；访问2026-10-02"
+                ],
+                "evidence_type": "官方职业档案",
+                "id": "census-cross-repair",
+                "limitation": "用于新人学历要求的受访比例。",
+                "market": "美国",
+                "name": "O*NET OnLine 17-2021.00 教育要求（Education）",
+                "period": "职业动态资料；访问2026-10-02",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "BLS 职业展望手册：农业工程师 · 入行与教育要求",
+                  "工资2025年5月；就业2025年及2025—2035预测"
+                ],
+                "evidence_type": "官方职业展望",
+                "id": "msresearch-cross-repair",
+                "limitation": "用于入行学历要求与工作环境说明。",
+                "market": "美国",
+                "name": "BLS 职业展望手册：农业工程师 · 入行与教育要求",
+                "period": "工资2025年5月；就业2025年及2025—2035预测",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/agricultural-engineers.htm"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "BLS 职业展望手册：农业工程师 · 薪资与就业前景",
+                  "工资2025年5月；就业2025年及2025—2035预测"
+                ],
+                "evidence_type": "官方职业展望",
+                "id": "onet-wages-cross-repair",
+                "limitation": "用于工资、就业与预测数据。",
+                "market": "美国",
+                "name": "BLS 职业展望手册：农业工程师 · 薪资与就业前景",
+                "period": "工资2025年5月；就业2025年及2025—2035预测",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/agricultural-engineers.htm"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "O*NET OnLine 17-2021.00 职业摘要（任务与兴趣）",
+                  "职业动态资料；访问2026-10-02"
+                ],
+                "evidence_type": "官方职业档案",
+                "id": "archivists-cross-repair",
+                "limitation": "用于任务与兴趣代码参考。",
+                "market": "美国",
+                "name": "O*NET OnLine 17-2021.00 职业摘要（任务与兴趣）",
+                "period": "职业动态资料；访问2026-10-02",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/17-2021.00"
               }
             ]
@@ -34816,7 +35239,7 @@
             },
             "evidence_refs": [
               "privacy",
-              "operations"
+              "ep"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -34847,7 +35270,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
+              "ep",
               "employer"
             ],
             "id": "single-coverage",
@@ -34880,7 +35303,7 @@
             },
             "evidence_refs": [
               "ep",
-              "hr"
+              "ep"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35014,6 +35437,18 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.onetonline.org/link/details/17-2021.00",
+            "id": "ep",
+            "label": "O*NET OnLine 17-2021.00 职业详细资料（任务与工作活动）",
+            "scope": "本职业任务及工作活动背景；非风险概率或法定统一流程。"
+          },
+          {
+            "href": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html",
+            "id": "editor",
+            "label": "中华人民共和国安全生产法（2021 年修正）",
+            "scope": "中国大陆生产经营单位安全责任；资格、培训及验收按具体角色、目录和法域核。"
           }
         ]
       },
@@ -35598,8 +36033,10 @@
         "heading": "美国农业工程师工资多少？",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
-          "$fact": "us-wage-2025",
-          "field": "period"
+          "$item": "agricultural-engineers.us-salary.cross-review-industry_period",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
         },
         "industry_rows": [
           {
@@ -35735,8 +36172,10 @@
         },
         "outlook_heading": "美国就业前景",
         "outlook_period": {
-          "$fact": "us-growth-2025-2035",
-          "field": "period"
+          "$item": "agricultural-engineers.us-salary.cross-review-outlook_period",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
         },
         "wage_column_labels": [
           "工资统计位置",
@@ -37818,7 +38257,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "任务：需求调研 · 设计计算 · 施工与运行监督",
@@ -37869,7 +38308,7 @@
       "text": "农业工程师：职业内容、薪资与就业前景"
     }
   },
-  "source_content_sha256": "7a8e8f355f44390afcff161c8b27846bd7233f2409ced5f0039a3439c147b652",
+  "source_content_sha256": "3ec2c6d458d97fbc8b7b2f1d29dd23d1ebad4a0b897851f8da83657830230ebc",
   "subject": {
     "canonical_slug": "agricultural-engineers",
     "name": "农业工程师",

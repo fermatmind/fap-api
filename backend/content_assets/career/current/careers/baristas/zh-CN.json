@@ -35,11 +35,17 @@
       "fact:us-employment-2025": {
         "status": "mapped"
       },
+      "fact:us-employment-current-2025": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
         "status": "mapped"
+      },
+      "fact:us-growth-current-2025": {
+        "status": "pending_mapping"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
@@ -61,6 +67,9 @@
       },
       "fact:us-openings-2025-2035": {
         "status": "mapped"
+      },
+      "fact:us-openings-current-2025": {
+        "status": "pending_mapping"
       },
       "fact:us-openings-parent": {
         "status": "pending_mapping"
@@ -9034,18 +9043,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.03.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            2,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.03.mitigation": {
         "ref": {
@@ -9123,18 +9122,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.04.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            3,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.04.mitigation": {
         "ref": {
@@ -9301,18 +9290,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.06.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            5,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.06.mitigation": {
         "ref": {
@@ -11260,52 +11239,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.href": {
-        "ref": {
-          "id": "baristas.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.label": {
-        "ref": {
-          "id": "baristas.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.headers.explanation": {
         "ref": {
@@ -11522,28 +11461,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.03.explanation.sources.02.href": {
-        "ref": {
-          "id": "baristas.us-salary.career-snapshot-secondary-locale.14",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.03.explanation.sources.02.label": {
         "ref": {
@@ -23455,13 +23374,16 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜94% 持续或几乎持续站立，67% 持续或几乎持续用手处理与控制或感觉物体与工具，47% 持续或几乎持续做重复动作（另有 32% 超过一半时间），36% 持续或几乎持续行走或跑动，23% 约一半时间弯腰或扭转身体；100% 持续与他人接触，86% 每天面对面讨论，66% 与他人身体距离非常近（接近接触），29% 每天有电话交谈；92% 每天在环境受控的室内工作，18% 每天在无环境控制的室内工作；43% 每天暴露于极热或极冷温度，44% 每天暴露于分散注意或不适的噪音，26% 每天暴露于轻微烧伤或割伤或咬伤，19% 每天暴露于污染物，17% 每天佩戴常规防护或安全装备；92% 从不处于危险条件，94% 从不接触危险设备，97% 从不暴露于疾病或感染；68% 从不坐着，79% 少于一半时间跪蹲弯腰或爬行。\n主要装备与工具｜浓缩咖啡机与磨豆机与冷饮与蒸汽设备、冷冻柜与冰箱与加热设备与温度计、咖啡豆与茶叶与乳制品与糖浆与配料与已备食品、清洁与消毒用品与一次性用品、收银与点单与库存系统、个人防护（按作业需要的手套与围裙与防烫用品）。\n任务节奏｜88% 的典型工作周少于 40 小时；52% 为固定作息、40% 为不规律作息；16% 每天面临时间压力（64% 从不）；33% 在决定上有很多自由、39% 有一些自由；55% 认为工作稍微自动化、22% 认为完全非自动化；22% 认为节奏由设备速度决定非常重要（25% 认为完全不重要）。\n协作对象｜与同班咖啡师与后厨与前台同事协作；64% 认为与工作组或团队合作极其重要（另有 23% 非常重要），15% 对他人健康与安全承担很高责任（另有 44% 中等责任），76% 认为要与外部顾客或公众打交道极其重要（另有 22% 非常重要）。\n竞争与压力｜35% 认为精确或准确极其重要（另有 35% 非常重要、30% 重要）；23% 每天与不好打交道或不礼貌的人打交道（53% 每周一次以上）；24% 每周一次以上处于冲突情境；20% 认为错误后果严重；40% 认为竞争轻微、27% 认为完全没有竞争。\n合规与安全｜饮品制作与出餐与器具消毒与设备温度须符合适用食品安全与场所卫生与设备安全要求；美国侧 BLS 指出该合并组通常无正式教育或经验要求、技能通过在岗学习获得；O*NET 列出 3 项国家认证（含咖啡与餐饮服务方向）。中国大陆侧须按适用的食品安全与公共场所卫生要求执行，企业承担食品安全主体责任。\n记录与复盘｜订单与出品、设备温度检查、器具清洁与消毒处理、食品标签与保质期核对、顾客反馈与异常需要可追溯。\n技能与训练｜O*NET 把该职业列为 Job Zone 1–2（SVP 低于 6.0）；基本技能以积极倾听 60 与口语表达 56 与监控 50 与阅读理解 47 与批判性思维 41 为主；可迁移技能以服务导向 60、协调 50、社会洞察力 50、操作与控制 41、说服 38、谈判 35、时间管理 35 为主；知识以客户与个人服务 89、行政与管理 65、销售与营销 62、食品生产 54、英语语言 52 为主（能力与工作风格字段本页未取得）。\n准入与授权｜学历与认证不等于设备操作或食品安全判定或停机与退款权限；BLS 指出该合并组通常无正式教育或经验要求、技能通过在岗学习获得；O*NET 列出 3 项国家认证，均不等于录用门槛或雇主任命。\n行业与雇主｜O*NET 行业分布为住宿与餐饮服务 87%、其他行业（含零售贸易）13%（同族母职业口径）；常见雇主为连锁品牌门店、独立咖啡馆、零售与酒店与机构饮吧。"
+              "工作环境｜94% 持续或几乎持续站立，67% 持续或几乎持续用手处理与控制或感觉物体与工具，47% 持续或几乎持续做重复动作（另有 32% 超过一半时间），36% 持续或几乎持续行走或跑动，23% 约一半时间弯腰或扭转身体；100% 持续与他人接触，86% 每天面对面讨论，66% 与他人身体距离非常近（接近接触），29% 每天有电话交谈；92% 每天在环境受控的室内工作，18% 每天在无环境控制的室内工作；43% 每天暴露于极热或极冷温度，44% 每天暴露于分散注意或不适的噪音，26% 每天暴露于轻微烧伤或割伤或咬伤，19% 每天暴露于污染物，17% 每天佩戴常规防护或安全装备；92% 从不处于危险条件，94% 从不接触危险设备，97% 从不暴露于疾病或感染；68% 从不坐着，79% 少于一半时间跪蹲弯腰或爬行。\n主要装备与工具｜浓缩咖啡机与磨豆机与冷饮与蒸汽设备、冷冻柜与冰箱与加热设备与温度计、咖啡豆与茶叶与乳制品与糖浆与配料与已备食品、清洁与消毒用品与一次性用品、收银与点单与库存系统、个人防护（按作业需要的手套与围裙与防烫用品）。\n任务节奏｜88% 的典型工作周少于 40 小时；52% 为固定作息、40% 为不规律作息；16% 每天面临时间压力（64% 从不）；33% 在决定上有很多自由、39% 有一些自由；55% 认为工作稍微自动化、22% 认为完全非自动化；22% 认为节奏由设备速度决定非常重要（25% 认为完全不重要）。\n协作对象｜与同班咖啡师与后厨与前台同事协作；64% 认为与工作组或团队合作极其重要（另有 23% 非常重要），15% 对他人健康与安全承担很高责任（另有 44% 中等责任），76% 认为要与外部顾客或公众打交道极其重要（另有 22% 非常重要）。\n竞争与压力｜35% 认为精确或准确极其重要（另有 35% 非常重要、30% 重要）；23% 每天与不好打交道或不礼貌的人打交道（53% 每周一次以上）；24% 每周一次以上处于冲突情境；20% 认为错误后果严重；40% 认为竞争轻微、27% 认为完全没有竞争。\n合规与安全｜饮品制作与出餐与器具消毒与设备温度须符合适用食品安全与场所卫生与设备安全要求；美国侧 BLS 指出该合并组通常无正式教育或经验要求、技能通过在岗学习获得；O*NET 列出 3 项国家认证（含咖啡与餐饮服务方向）。中国食品安全法第44条要求食品生产经营企业开展食品安全知识培训；第45条要求从事接触直接入口食品工作的人员每年健康检查并取得健康证明后上岗。具体设备、退款和管理权限另核雇主，不能由学历或职业证书推出。。\n记录与复盘｜订单与出品、设备温度检查、器具清洁与消毒处理、食品标签与保质期核对、顾客反馈与异常需要可追溯。\n技能与训练｜O*NET 把该职业列为 Job Zone 1–2（SVP 低于 6.0）；基本技能以积极倾听 60 与口语表达 56 与监控 50 与阅读理解 47 与批判性思维 41 为主；可迁移技能以服务导向 60、协调 50、社会洞察力 50、操作与控制 41、说服 38、谈判 35、时间管理 35 为主；知识以客户与个人服务 89、行政与管理 65、销售与营销 62、食品生产 54、英语语言 52 为主；现行能力列言语清晰度、口头理解、口头表达及控制精确性等；工作风格社交倾向73、合作69、可靠性69、细致55、自我控制50，均非个人准入分数。\n准入与授权｜学历与认证不等于设备操作或食品安全判定或停机与退款权限；BLS 指出该合并组通常无正式教育或经验要求、技能通过在岗学习获得；O*NET 列出 3 项国家认证，均不等于录用门槛或雇主任命。\n行业与雇主｜O*NET 行业分布为住宿与餐饮服务 87%、其他行业（含零售贸易）13%（同族母职业口径）；常见雇主为连锁品牌门店、独立咖啡馆、零售与酒店与机构饮吧。"
             ]
           },
           "id": "baristas.profile.work-context-block.1",
           "source_refs": [
             "onet",
-            "onet"
+            "facilities",
+            "nbs",
+            "census",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -23485,12 +23407,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国工资分布（同族母职业口径，非咖啡师单列）：O*NET 展示的 2025 年BLS 职业就业与工资统计（OEWS）页面「首行明确写明「Wage data for Fast Food and Counter Workers」」，即数据属同族母职业 35-3023.00；按该口径给出年薪第 10 分位 22,840 美元、第 25 分位 27,700 美元、中位数 31,200 美元、第 75 分位 36,070 美元、第 90 分位 42,650 美元；时薪第 10 分位 10.98 美元、第 25 分位 13.32 美元、中位数 15.00 美元、第 75 分位 17.34 美元、第 90 分位 20.51 美元。中位数不等于入门工资，也不构成收入承诺，且小费与兼职收入不在该口径内；本页不把母职业数据当作咖啡师单列数据。"
+              "美国工资为母职业35-3023.00口径，非咖啡师单列。2025 OEWS年薪第10/25/50/75/90分位依次22,840/27,700/31,200/36,070/42,650美元；时薪依次10.98/13.32/15.00/17.34/20.51美元。涵盖全职与兼职受雇人员，含小费、佣金与生产奖金，排除自雇收入和加班溢价；年薪不是个人实际工时所得，中位数不是起薪。"
             ]
           },
           "id": "baristas.profile.onet-structured-fields-block.2",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews-methods"
           ],
           "type": "prose"
         },
@@ -23514,12 +23437,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：按本页证据口径（暂无可安全使用的数据、尚未建立精确职业映射），「中国大陆未取得咖啡师的精确全国职业工资分布；本模块保留 暂无可安全使用的数据 边界，行业工资统计不能提供本职业全国职业中位数与统一起薪或个人到手收入」。国家统计局《2025 年城镇单位就业人员年平均工资情况》只有行业门类与岗位大类口径、没有本职业的精确职业条目；有界检索也未找到单列咖啡师的公开职业条目与全国收入统计，因此本页不发布任何中国大陆职业工资数值。需要比较时应按城市与用人单位类型（连锁品牌门店、独立咖啡馆、零售与酒店与机构饮吧）与任职方式与班次与小费结构逐项核对。"
+              "人社部2022年国家职业技能标准颁布目录列明咖啡师4-03-02-08。该目录确证名称与代码，本次未取得该版完整标准，不能据目录推学历、等级条件或与美国35-3023.01完全等价。中国精确职业工资仍缺；住宿和餐饮业城镇单位均值仅作行业背景。"
             ]
           },
           "id": "baristas.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "onet"
+            "cn-coffee-code",
+            "cn-wages-current"
           ],
           "type": "prose"
         },
@@ -23543,12 +23467,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "就业与前景（同族母职业口径，非咖啡师单列）：O*NET 就业趋势页「页首写明「Employment data for Fast Food and Counter Workers」」，按该口径给出 2024 年在岗约 3,796,000 人、2034 年约 4,029,200 人（2024—2034 年 +6%，标签为快于平均（5% 至 6%））、预测期年均职位空缺约 904,300（含增长与替换）。BLS 职业展望手册的对应章节是「Food and Beverage Serving and Related Workers」合并组：2025 年在岗 5,143,000 人、2025—2035 年 +5%（快于平均）、变化 +280,800、年均空缺约 1,078,500（多来自替代需求）。两种口径都比咖啡师单列更宽，该口径描述职业群体，不代表个人录用保证。"
+              "就业与前景（同族母职业口径，非咖啡师单列）：O*NET 就业趋势页「页首写明「Employment data for Fast Food and Counter Workers」」，按该口径给出 2025 年在岗约 3,855,900 人、2035 年约 4,079,100 人（2025—2035 年 +6%，标签为快于平均（5% 至 6%））、预测期年均职位空缺约 827,400（含增长与替换）。BLS 职业展望手册的对应章节是「Food and Beverage Serving and Related Workers」合并组：2025 年在岗 5,143,000 人、2025—2035 年 +5%（快于平均）、变化 +280,800、年均空缺约 1,078,500（多来自替代需求）。两种口径都比咖啡师单列更宽，该口径描述职业群体，不代表个人录用保证。"
             ]
           },
           "id": "baristas.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23572,12 +23497,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业分布与工具信号（同族母职业口径）：O*NET 行业分布给出住宿与餐饮服务 87%、其他行业（含零售贸易）13%（2024 年）；该页对行业数据同样标注取自同族母职业 35-3023.00。样本职位名称包括 Bobarista、Catering Barista。招聘技术信号方面，O*NET 列出 3 项技术技能并均标注为热门技术（Microsoft Office、Microsoft Excel、Microsoft Word），页面未公布出现比例。这些来自招聘公告文本，不代表岗位采用率或自动化程度。"
+              "现行O*NET行业页为母职业口径：住宿与餐饮服务87%、其他行业（含零售）13%，未单列资料年；样本职位名称有Bobarista、Catering Barista。O*NET热门技术页按2025年1月1日至12月31日美国Lightcast招聘广告列Microsoft Office、Excel、Word，三者提及均低于1%；广告提及不是采用率、能力阈值或统一录用条件。"
             ]
           },
           "id": "baristas.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "onet"
+            "r2-pay-2",
+            "hr"
           ],
           "type": "prose"
         },
@@ -23798,13 +23724,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把 35-3023.01（Baristas）列为 Job Zone 1–2（SVP 低于 6.0），页面公布的学历构成中 64% 为要求低于高中文凭、29% 为要求高中文凭或同等学历、2% 为要求高中后证书，并指出该区职业通常需要高中文凭或同等学历、经验要求从很少到几个月至一年、在岗训练从几天到一年。BLS 职业展望手册对应章节把该合并组的典型入门教育列为「无正式学历凭证」、无相关工作经验要求、短期在岗训练，并指出作息常含清晨与深夜与周末与节假日、兼职常见。O*NET 培训页面显示全国未登记该职业的培训项目，职业摘要另提供 Apprenticeship.gov 学徒机会入口（按该职业代码查询）；认证页面列出 3 项国家认证（含咖啡与餐饮服务方向）。中国大陆侧以用人单位岗前培训与在岗带教为主，并须符合适用的食品安全与公共场所卫生要求。"
+              "O*NET 把 35-3023.01（Baristas）列为 Job Zone 1–2（SVP 低于 6.0），页面公布的学历构成中 64% 为要求低于高中文凭、29% 为要求高中文凭或同等学历、2% 为要求高中后证书，并指出该区职业通常需要高中文凭或同等学历、经验要求从很少到几个月至一年、在岗训练从几天到一年。BLS 职业展望手册对应章节把该合并组的典型入门教育列为「无正式学历凭证」、无相关工作经验要求、短期在岗训练，并指出作息常含清晨与深夜与周末与节假日、兼职常见。O*NET 培训页面显示全国未登记该职业的培训项目，职业摘要另提供 Apprenticeship.gov 学徒机会入口（按该职业代码查询）；认证页面列出 3 项国家认证（含咖啡与餐饮服务方向）。中国大陆已核咖啡师4-03-02-08标准目录；具体门店带教须核雇主。中国食品安全法第44条要求食品生产经营企业开展食品安全知识培训；第45条要求从事接触直接入口食品工作的人员每年健康检查并取得健康证明后上岗。具体设备、退款和管理权限另核雇主，不能由学历或职业证书推出。。"
             ]
           },
           "id": "baristas.profile.career-quick-answers-block.19",
           "source_refs": [
             "onet",
-            "onet"
+            "nbs",
+            "nist",
+            "census",
+            "cn-coffee-code",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -23872,13 +23802,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧为 O*NET 35-3023.01（Baristas），并在 O*NET 标注为 Bright Outlook；「其工资、就业与行业数据在 O*NET 页面上明确标注取自同族母职业 35-3023.00（Fast Food and Counter Workers）」，不是咖啡师单列口径。BLS 职业展望手册的对应章节是「Food and Beverage Serving and Related Workers」合并组（含服务员与调酒与柜台等），比同族母职业更宽，同样不能当作咖啡师单列口径。中国大陆侧本页未取得咖啡师的精确全国职业工资分布，保留 暂无可安全使用的数据 边界、行业工资统计不能提供全国职业中位数与统一起薪；比较时应先辨认岗位属于连锁品牌门店、独立咖啡馆、还是零售与酒店与机构的饮吧岗位，以及任职方式与班次与小费结构。"
+              "美国身份与任务是35-3023.01，工资、就业及行业页明示采用母职业35-3023.00。OOH Food and Beverage Serving and Related Workers本章就业表含快餐柜台工人、非餐厅食品服务员、餐厅助理及迎宾员四组，不含服务员和调酒师；其合并组不是咖啡师细分。人社部2022年国家职业技能标准颁布目录列明咖啡师4-03-02-08。该目录确证名称与代码，本次未取得该版完整标准，不能据目录推学历、等级条件或与美国35-3023.01完全等价。精确全国咖啡师工资仍不足。"
             ]
           },
           "id": "baristas.profile.career-quick-answers-block.24",
           "source_refs": [
             "onet",
-            "onet"
+            "nbs",
+            "cn-coffee-code"
           ],
           "type": "prose"
         },
@@ -23901,13 +23832,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧 O*NET 学历构成为低于高中文凭 64%、高中文凭或同等学历 29%、高中后证书 2%；BLS 职业展望手册把该合并组的典型入门教育列为「无正式学历凭证」并指出技能通过在岗学习获得；O*NET 全国未登记该职业的培训项目，另有学徒机会入口与 3 项国家认证。中国大陆以用人单位岗前培训与在岗带教为主，并须符合适用的食品安全与公共场所卫生要求，具体学历与经验要求由用人单位规定。"
+              "美国侧 O*NET 学历构成为低于高中文凭 64%、高中文凭或同等学历 29%、高中后证书 2%；BLS 职业展望手册把该合并组的典型入门教育列为「无正式学历凭证」并指出技能通过在岗学习获得；O*NET 全国未登记该职业的培训项目，另有学徒机会入口与 3 项国家认证。中国大陆已核咖啡师4-03-02-08标准目录；具体学历、经验与带教另核雇主。中国食品安全法第44条要求食品生产经营企业开展食品安全知识培训；第45条要求从事接触直接入口食品工作的人员每年健康检查并取得健康证明后上岗。具体设备、退款和管理权限另核雇主，不能由学历或职业证书推出。。"
             ]
           },
           "id": "baristas.profile.career-quick-answers-block.26",
           "source_refs": [
             "onet",
-            "onet"
+            "nbs",
+            "nist",
+            "census",
+            "cn-coffee-code",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -24019,13 +23954,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "菜单与设备与食品安全要求更新较快；O*NET 列出 3 项软件技能并均标注为热门技术（Microsoft Office、Microsoft Excel、Microsoft Word，页面未公布出现比例）；基本技能以积极倾听 60 与口语表达 56 与监控 50 与阅读理解 47 为主；可迁移技能以服务导向 60、协调 50、社会洞察力 50、操作与控制 41 为主；知识字段公布客户与个人服务 89 与行政与管理 65 与销售与营销 62 与食品生产 54 与英语语言 52。入职前确认培训安排、设备操作与授权与复核机制。"
+              "O*NET热门技术页按2025年1月1日至12月31日美国Lightcast招聘广告列Microsoft Office、Excel、Word，三者提及均低于1%；广告提及不是采用率、能力阈值或统一录用条件。基本技能积极倾听60、口语表达56、监控50、阅读理解47；知识客户与个人服务89、行政管理65、销售营销62、食品生产54、英语52。编辑建议：入职前核培训、设备权限及复核安排。"
             ]
           },
           "id": "baristas.profile.career-quick-answers-block.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "hr",
+            "bls"
           ],
           "type": "prose"
         }
@@ -24545,10 +24480,10 @@
                 "url": "https://www.onetonline.org/link/industry/35-3023.01"
               },
               {
-                "entity": "O*NET 35-3023.01 职业摘要（就业与预测字段）",
+                "entity": "O*NET咖啡师页面2025—2035全国就业趋势（母职业35-3023.00）",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/35-3023.01"
+                "url": "https://www.onetonline.org/link/localtrends/35-3023.01"
               },
               {
                 "entity": "O*NET 35-3023.01 全国工资分位",
@@ -24557,28 +24492,28 @@
                 "url": "https://www.onetonline.org/link/localwages/35-3023.01"
               },
               {
-                "entity": "O*NET 35-3023.01 培训与教育信息",
+                "entity": "O*NET 35-3023.01 职业摘要（咖啡师）",
                 "id": "link-8",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/35-3023.01"
+                "url": "https://www.onetonline.org/link/summary/35-3023.01"
               },
               {
-                "entity": "O*NET 35-3023.01 详细资料（工作情境与工作活动）",
+                "entity": "O*NET 35-3023.01 详细资料（任务与工作活动）",
                 "id": "link-9",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/35-3023.01"
               },
               {
-                "entity": "O*NET 35-3023.01 认证发现（国家认证口径）",
+                "entity": "O*NET 35-3023.01 技术清单（热门技术信号）",
                 "id": "link-10",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localcert/35-3023.01"
+                "url": "https://www.onetonline.org/link/hot_tech/35-3023.01"
               },
               {
-                "entity": "O*NET 35-3023.01 行业分布（行业与雇主类型口径）",
+                "entity": "O*NET咖啡师页面2025—2035全国就业趋势（母职业35-3023.00）",
                 "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/35-3023.01"
+                "url": "https://www.onetonline.org/link/localtrends/35-3023.01"
               },
               {
                 "entity": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
@@ -24587,46 +24522,46 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "O*NET 35-3023.01 职业摘要",
+                "entity": "O*NET 35-3023.01 职业摘要（咖啡师）",
                 "id": "link-13",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/summary/35-3023.01"
               },
               {
-                "entity": "O*NET 35-3023.01 详细资料",
+                "entity": "O*NET 35-3023.01 技术清单（热门技术信号）",
                 "id": "link-14",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/35-3023.01"
-              },
-              {
-                "entity": "O*NET 35-3023.01 技术清单",
-                "id": "link-15",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/hot_tech/35-3023.01"
               },
               {
-                "entity": "O*NET 35-3023.01 行业分布",
-                "id": "link-16",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/35-3023.01"
-              },
-              {
-                "entity": "O*NET 35-3023.01 职业摘要（就业与预测字段）",
-                "id": "link-17",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/35-3023.01"
-              },
-              {
-                "entity": "O*NET 35-3023.01 详细资料（工作情境）",
-                "id": "link-18",
+                "entity": "O*NET 35-3023.01 详细资料（任务与工作活动）",
+                "id": "link-15",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/35-3023.01"
               },
               {
-                "entity": "O*NET 35-3023.01 培训与教育信息",
+                "entity": "O*NET咖啡师页面2025—2035全国就业趋势（母职业35-3023.00）",
+                "id": "link-16",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/localtrends/35-3023.01"
+              },
+              {
+                "entity": "《中华人民共和国食品安全法》2025修正版",
+                "id": "link-17",
+                "relation": "career.source",
+                "url": "https://sjfg.samr.gov.cn/law/file/pdf/3238901/1763351546670.pdf"
+              },
+              {
+                "entity": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
+                "id": "link-18",
+                "relation": "career.source",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "entity": "O*NET 35-3023.01 详细资料（任务与工作活动）",
                 "id": "link-19",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/35-3023.01"
+                "url": "https://www.onetonline.org/link/details/35-3023.01"
               }
             ]
           },
@@ -24770,15 +24705,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：AI 与自动化可以改变点单与订单转达、库存与用品订购摘要、排班与高峰预测参考、设备提示的初步分类，但没有官方证据表明它会整体取代配方与出品质量判定、设备温度异常的判断与处置、食品过敏原与温度控制、以及退款与免单与投诉处置决定；任务自动化程度不等于岗位数量变化。"
+              "编辑建议：可评估点单文字、库存摘要、菜单说明与记录草稿等辅助用途，先实测准确性、数据权限及人工复核。证据不足：本次已核来源未给出咖啡师AI采用率、生产率或替代结果。饮品制作、温度异常和过敏原处置仍按现场规程。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.18",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet"
+            "ilo",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -24887,12 +24821,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明雇主招聘中出现的软件技能；页面未公布出现比例，不代表岗位采用率。"
+              "O*NET热门技术页按2025年1月1日至12月31日美国Lightcast招聘广告列Microsoft Office、Excel、Word，三者提及均低于1%；广告提及不是采用率、能力阈值或统一录用条件。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.26",
           "source_refs": [
-            "onet"
+            "hr"
           ],
           "type": "prose"
         },
@@ -24943,12 +24877,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于该职业的就业与 2024—2034 年预测口径（同族母职业口径）。"
+              "用于该职业的就业与 2025—2035 年预测口径（同族母职业口径）。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.30",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -24985,13 +24920,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表比较三组环节在自动化影响上的差别：哪些可被辅助，哪些判断与责任仍由人承担。"
+              "下表是编辑候选用途对照，须实测；没有本职业采用率或效果证据。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.33",
           "source_refs": [
             "onet",
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25000,13 +24935,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "点单与订单转达、库存与用品订购摘要、排班与高峰预测参考可辅助完成。"
+              "编辑候选用途：整理订单转达、库存订购摘要、排班参考草稿，先核数据与输出。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.34",
           "source_refs": [
             "onet",
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25030,13 +24965,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "订单与库存与设备提示数据可借助系统整理。"
+              "编辑候选用途：整理订单、库存与设备提示数据；可靠性须在真实授权场景核验。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.36",
           "source_refs": [
             "onet",
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25060,13 +24995,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "订单与温度与清洁与交接记录可自动生成与归档。"
+              "编辑候选用途：整理订单、温度、清洁与交班记录草稿；能否可靠归档须实测，保留原始记录与人工修订。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.38",
           "source_refs": [
             "onet",
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25258,12 +25193,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面列出 3 项软件技能并均标注为热门技术：Microsoft Office、Microsoft Excel、Microsoft Word；页面未公布出现比例。"
+              "O*NET热门技术页按2025年1月1日至12月31日美国Lightcast招聘广告列Microsoft Office、Excel、Word，三者提及均低于1%；广告提及不是采用率、能力阈值或统一录用条件。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "onet"
+            "hr"
           ],
           "type": "prose"
         },
@@ -25300,12 +25235,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "就业与 2024—2034 年预测"
+              "就业与 2025—2035 年预测"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -25314,12 +25250,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页写明「Employment data for Fast Food and Counter Workers」，按该同族母职业口径给出 2024 年在岗约 3,796,000 人、2034 年约 4,029,200 人（2024—2034 年 +6%，快于平均（5% 至 6%））、预测期年均职位空缺约 904,300。"
+              "O*NET 就业趋势页写明「Employment data for Fast Food and Counter Workers」，按该同族母职业口径给出 2025 年在岗约 3,855,900 人、2035 年约 4,079,100 人（2025—2035 年 +6%，快于平均（5% 至 6%））、预测期年均职位空缺约 827,400。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -25328,12 +25265,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业分布描述统计分类（同族母职业口径），不能用于推导行业工资、就业规模或个人岗位归属。"
+              "ILO研究测量任务的潜在生成式AI暴露，不是咖啡师采用率、裁员率、生产率或就业预测。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.57",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25342,12 +25279,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 35-3023.01 行业分布"
+              "ILO Generative AI and Jobs: A Refined Global Index of Occupational Exposure"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.58",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25356,12 +25293,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业分布"
+              "跨职业任务层面的潜在生成式AI暴露"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.59",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25370,12 +25307,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面按 2024 年给出该职业的行业分布为住宿与餐饮服务 87%、其他行业（含零售贸易）13%，并同样标注取自同族母职业 35-3023.00。"
+              "2025年ILO工作论文140结合任务评价、专家信息与模型估计潜在暴露；不能由暴露推出咖啡师整岗替代或具体消失年份。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25384,13 +25321,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助的是点单与订单转达、库存与用品订购摘要、排班与高峰预测参考、设备提示的初步分类等可回滚环节；这些是辅助能力，输出仍需经现场核对与人工复核后才能使用。技术可行不等于已采用。"
+              "编辑候选用途为点单文本、库存摘要及设备提示整理，不能预设可靠可用；先实测并现场复核。本次未取得咖啡师部署或成效研究。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.61",
           "source_refs": [
             "onet",
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25399,13 +25336,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "取决于雇主的点单与库存与排班系统、食品安全与设备管理规程、以及上岗与复核安排；本页不推测采用进度，也没有该职业的采用率统计。"
+              "采用进度须核具体雇主系统、管理规程与实测结果；本次已核资料没有咖啡师AI采用率统计。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.62",
           "source_refs": [
             "onet",
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25414,13 +25351,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露、实际采用、生产率与就业是不同测量对象；O*NET 展示的 BLS 数据仍给出同族母职业 2024—2034 年 +6%（快于平均（5% 至 6%）），本页不把任务自动化程度等同于岗位数量变化。"
+              "任务暴露、实际采用、生产率与就业是不同测量对象；O*NET 展示的 BLS 数据仍给出同族母职业 2025—2035 年 +6%（快于平均（5% 至 6%）），本页不把任务自动化程度等同于岗位数量变化。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -25429,13 +25366,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有官方证据支持「被整体取代」。自动化可能辅助点单与库存与排班与提示分类，但配方与出品质量判定、设备温度异常处置、食品过敏原与温度控制与退款与免单决定仍由人承担。"
+              "本次已核资料不能支持整体替代结论。编辑候选辅助用途须先实测，现场出品、温度异常及食品安全处置由有职责人员依规程负责。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.64",
           "source_refs": [
             "onet",
-            "onet"
+            "ilo",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -25459,13 +25397,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不需要入门即会编程，但会用点单与库存类软件与办公软件已成为部分门店的常见要求。核心能力来自配方与标准程序与出品一致性、设备操作与温度检查、器具清洁与消毒、顾客沟通与投诉处置；是否要求软件或系统能力取决于门店与雇主，具体要求以用人单位规定为准。"
+              "本页不把编程设为入门门槛；是否需点单、库存或办公软件须核目标雇主。O*NET热门技术页按2025年1月1日至12月31日美国Lightcast招聘广告列Microsoft Office、Excel、Word，三者提及均低于1%；广告提及不是采用率、能力阈值或统一录用条件。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.66",
           "source_refs": [
             "onet",
-            "onet"
+            "hr"
           ],
           "type": "prose"
         },
@@ -25474,13 +25412,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 技术清单 / 培训与教育信息"
+              "O*NET 2025招聘广告热门软件信号"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet",
-            "onet"
+            "hr"
           ],
           "type": "prose"
         },
@@ -25489,13 +25426,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "点单与订单转达、库存与用品订购摘要、排班与高峰预测参考、设备提示初步分类；都是可回滚、可复核的辅助环节。"
+              "编辑候选用途：订单文字、库存摘要、排班参考与设备提示整理；须确认数据、复核及回滚条件后测试。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.68",
           "source_refs": [
             "onet",
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25518,13 +25455,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 展示的 BLS 数据对同族母职业 2024—2034 年的口径为 +6%（快于平均（5% 至 6%））、预测期年均职位空缺约 904,300；该口径描述职业群体，不代表个人录用概率。"
+              "O*NET 展示的 BLS 数据对同族母职业 2025—2035 年的口径为 +6%（快于平均（5% 至 6%））、预测期年均职位空缺约 827,400；该口径描述职业群体，不代表个人录用概率。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -25533,13 +25470,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业摘要（就业与预测字段）"
+              "O*NET 2025—2035母职业就业趋势"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25563,12 +25499,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业摘要 / 详细资料"
+              "中国食品安全法与编辑责任边界"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.73",
           "source_refs": [
-            "onet"
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -25577,13 +25513,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有任何官方来源给出这样的年份。任务暴露、采用率与岗位数量是不同概念，本页不做岗位消失年份预测；官方预测只给出同族母职业 2024—2034 年 +6%并列出就业与空缺口径。"
+              "本次已核来源未提供岗位消失年份。美国母职业35-3023.00（Fast Food and Counter Workers）2025年3,855,900人，2035年4,079,100人，增长6%，年均空缺827,400；均非咖啡师细分统计，也非AI归因。任务暴露、实际采用与就业数量不能互相推算。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25592,13 +25528,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页方法说明"
+              "ILO潜在任务暴露研究与本页编辑边界"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "onet",
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25622,13 +25557,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 培训与教育信息"
+              "O*NET咖啡师详细任务资料"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.77",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25637,13 +25571,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具进入点单与记录流程时，人的控制点应按以下五步固定下来；任何一步缺失都不应扩大使用范围。"
+              "编辑流程建议：工具进入点单与记录前，按下列五步核用途、数据、人工复核及责任；适用的强制义务来自法规与门店规程。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.78",
           "source_refs": [
             "onet",
-            "onet"
+            "cn-food-law",
+            "cn-pipl"
           ],
           "type": "prose"
         },
@@ -26274,13 +26209,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以上内容区分自动化能力、实际部署与就业结果；进入下一节可以查看中国大陆薪资的证据边界与缺口说明。"
+              "以上区分任务、候选工具用途、实际部署与就业结果；中国职业工资缺口和行业背景另列。"
             ]
           },
           "id": "baristas.ai-impact.ai-impact-table.122",
           "source_refs": [
             "onet",
-            "onet"
+            "ilo",
+            "ep-current"
           ],
           "type": "prose"
         }
@@ -26297,12 +26233,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆未取得与 35-3023.01 对应的咖啡师精确职业条目与全国职业工资分布；本页不把中文页面语言当作中国等价职业或工资映射。"
+              "人社部2022年国家职业技能标准颁布目录列明咖啡师4-03-02-08。该目录确证名称与代码，本次未取得该版完整标准，不能据目录推学历、等级条件或与美国35-3023.01完全等价。"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "cn-coffee-code"
           ],
           "type": "prose"
         },
@@ -26311,12 +26247,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "截至 2026 年 9 月，有界检索未找到单列咖啡师（或与之精确对应的门店咖啡与饮品制作职业序列）的公开职业条目与全国收入统计；按本页证据口径（暂无可安全使用的数据、尚未建立精确职业映射），本页不陈述该职业的官方月薪、起薪、中位数或分位数，行业工资统计也不能提供全国职业中位数与统一起薪或个人到手收入。"
+              "证据不足：未取得中国大陆咖啡师全国职业月薪、起薪、中位数或分位；官方名称和代码已核，职业分类缺口与工资缺口须分开。"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "cn-coffee-code",
+            "cn-wages-current"
           ],
           "type": "prose"
         },
@@ -26325,12 +26262,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "全国月薪与分位数：证据不足（未取得可安全使用的精确职业统计）。"
+              "62,461元/年：2025全国城镇非私营单位住宿和餐饮业税前平均工资。"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "cn-coffee-code"
           ],
           "type": "prose"
         },
@@ -26339,12 +26277,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "缺失原因是统计口径不覆盖该职业细分，且同类作业分布在连锁品牌门店、独立咖啡馆、零售与酒店与机构饮吧，任职与计酬结构（时薪与班次与小费与兼职）差异较大，无法用单一月薪口径概括。"
+              "咖啡门店制作与餐饮服务有场景联系，该行业包含其他岗位与机构；此数不是咖啡师工资、中位数、起薪或到手收入。"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "cn-coffee-code"
           ],
           "type": "prose"
         },
@@ -26353,12 +26292,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "代理口径不适用：证据包明确保留 暂无可安全使用的数据 边界、行业工资统计不能提供本职业全国职业中位数与统一起薪；国家统计局《2025 年城镇单位就业人员年平均工资情况》只有区域与行业门类与岗位大类口径、没有本职业的精确条目，因此本页不引用任何大陆工资数值作为代理。"
+              "55,123元/年：2025全国城镇私营单位住宿和餐饮业税前平均工资。"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "cn-coffee-code"
           ],
           "type": "prose"
         },
@@ -26367,12 +26307,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "因此本页不出示中国大陆的月薪、起薪、中位数或分位数；这不是零收入，而是证据无法支持该精度。"
+              "私营与非私营是不同调查人群，不能拼成咖啡师工资区间；也不涵盖个体门店经营利润。"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "cn-coffee-code"
           ],
           "type": "prose"
         },
@@ -26409,12 +26350,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "统计覆盖：城镇单位工资统计以城镇地域内就业人数 5 人及以上的法人单位为范围、调查对象不含个体工商户和自由职业者；咖啡门店岗位中相当比例分布在连锁与小微门店与兼职岗位，进一步限制可比较性。"
+              "统计覆盖城镇地域就业人数5人及以上法人单位，不含个体工商户和自由职业者；不能将均值推给所有咖啡门店。"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "cn-coffee-code"
           ],
           "type": "prose"
         },
@@ -26423,12 +26365,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "浮动项：小费与全勤与绩效与超时补贴在部分门店存在；这部分不在统一统计口径内。"
+              "国家统计局工资总额为税前劳动报酬口径，含奖金、津贴补贴、加班加点工资等；不能声称绩效、全勤或超时补贴一概排除。具体小费是否计入另核发放形式。"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "cn-coffee-code"
           ],
           "type": "prose"
         },
@@ -26437,12 +26380,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "资料期：本页未发布中国大陆职业工资数值。"
+              "2025年数据，2026-05-15发布。"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "cn-coffee-code"
           ],
           "type": "prose"
         },
@@ -26451,12 +26395,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国的工资资料为 2025 年（OEWS，同族母职业 35-3023.00 口径，中位时薪 15.00 美元、中位年薪 31,200 美元）与 2024—2034 年预测；两个市场的统计口径与资料期不同，不能直接换算。"
+              "美国的工资资料为 2025 年（OEWS，同族母职业 35-3023.00 口径，中位时薪 15.00 美元、中位年薪 31,200 美元）与 2025—2035 年预测；两个市场的统计口径与资料期不同，不能直接换算。"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26479,12 +26424,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "若未来取得可核验来源，须同时标注是否为税前工资总额口径、是否含小费与全勤补贴与加班，以及统计覆盖范围；本页不推测数值。"
+              "行业均值按税前工资总额读；个人报价另核工时、班次、小费发放与税费，不能从行业均值推实发。"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "cn-coffee-code"
           ],
           "type": "prose"
         },
@@ -26493,12 +26439,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论：中国大陆未取得精确职业工资数据；本页以证据不足标记，并且不用行业工资统计替代，不补数。"
+              "精确咖啡师职业工资仍为证据不足；行业均值仅作注明人群的背景。"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "cn-coffee-code"
           ],
           "type": "prose"
         },
@@ -26507,12 +26454,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "缺口在本页以「证据不足」标记；这不是零收入，而是证据无法支持该精度。若需比较，请以书面任职条件（城市、用人单位类型、任职方式与班次、税前税后）为准。"
+              "行业均值不是精确职业薪资。比较个人书面报价应核城市、雇主、工时、班次及计酬条件。"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "cn-coffee-code"
           ],
           "type": "prose"
         },
@@ -26536,12 +26484,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业分类：本页未取得与 35-3023.01 精确对应的中国大陆公开职业条目；《中华人民共和国职业分类大典（2022 年版）》以中类与细类划分职业，同类作业分布在住宿与餐饮与零售服务等序列中，须按用人单位类型与岗位职责辨认。"
+              "人社部2022年国家职业技能标准颁布目录列明咖啡师4-03-02-08。该目录确证名称与代码，本次未取得该版完整标准，不能据目录推学历、等级条件或与美国35-3023.01完全等价。"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet"
+            "cn-coffee-code"
           ],
           "type": "prose"
         },
@@ -26670,13 +26618,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "饮品制作与出餐与器具消毒与设备温度须符合适用食品安全与场所卫生与设备安全要求。美国侧 BLS 指出该合并组通常无正式教育或经验要求、技能通过在岗学习获得，并指出作息常含清晨与深夜与周末与节假日、兼职常见；O*NET 列出 3 项国家认证（含咖啡与餐饮服务方向），不等于录用门槛或雇主任命。中国大陆侧须按适用的食品安全与公共场所卫生要求执行，企业承担食品安全主体责任。入职前核对培训与授权，不能从学历或经验直接推断。"
+              "中国食品安全法第44条要求食品生产经营企业开展食品安全知识培训；第45条要求从事接触直接入口食品工作的人员每年健康检查并取得健康证明后上岗。具体设备、退款和管理权限另核雇主，不能由学历或职业证书推出。"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
+            "cn-food-law",
             "onet",
-            "onet"
+            "nbs",
+            "census"
           ],
           "type": "prose"
         },
@@ -26745,13 +26695,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按 O*NET 行业分布（同族母职业 35-3023.00 口径），该职业在住宿与餐饮服务占 87%（2024 年，美国口径）；该门类与咖啡门店高度相关，但中国大陆该门类的职业工资数字不在本页展示范围内。"
+              "按 O*NET 行业分布（同族母职业 35-3023.00 口径），该职业在住宿与餐饮服务占 87%（现行页面，美国口径）；该门类与咖啡门店高度相关，但中国行业单位均值另列背景，不与美国行业占比混用。"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "r2-pay-2",
+            "cn-wages-current"
           ],
           "type": "prose"
         },
@@ -26775,13 +26725,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按 O*NET 行业分布（同族母职业口径），该职业另有 13% 归入其他行业（含零售贸易）（2024 年，美国口径）；中国大陆该门类的职业工资数字不在本页展示范围内。"
+              "按 O*NET 行业分布（同族母职业口径），该职业另有 13% 归入其他行业（含零售贸易）（现行页面，美国口径）；中国行业单位均值另列背景，不与美国行业占比混用。"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
-            "onet",
-            "onet"
+            "r2-pay-2",
+            "cn-wages-current"
           ],
           "type": "prose"
         },
@@ -26922,12 +26872,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与该职业精确对应的公开职业条目与全国职业月薪分布。"
+              "证据不足：未取得全国咖啡师职业月薪分布；已核官方名称与代码4-03-02-08。"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "cn-coffee-code"
           ],
           "type": "prose"
         },
@@ -26992,13 +26943,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业对照：美国 O*NET 35-3023.01（Baristas，Bright Outlook），其工资与就业与行业数据取自同族母职业 35-3023.00（Fast Food and Counter Workers）；本页未取得中国大陆精确等价的公开职业条目，中文页面语言不构成等价映射。"
+              "人社部2022年国家职业技能标准颁布目录列明咖啡师4-03-02-08。该目录确证名称与代码，本次未取得该版完整标准，不能据目录推学历、等级条件或与美国35-3023.01完全等价。"
             ]
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-coffee-code"
           ],
           "type": "prose"
         },
@@ -27026,7 +26976,8 @@
           },
           "id": "baristas.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27087,11 +27038,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为分布的下限，不是入门起薪的承诺，同口径时薪第 10 分位为 10.98 美元。；O*NET 展示的 BLS 2025 年工资分位（同族母职业 35-3023.00 口径）｜https://www.onetonline.org/link/localwages/35-3023.01"
+              "第10分位22,840美元/年、10.98美元/小时是母职业统计位置，不是分布最小值，也不是新人起薪。"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
+            "onet-wages",
+            "oews-methods",
             "onet"
           ],
           "type": "prose"
@@ -27143,11 +27096,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为同族母职业 35-3023.00 口径的年薪中位数（2025 年 OEWS），对应中位时薪 15.00 美元；该页面明确写明工资数据属母职业，不是咖啡师单列口径；中位数不等于入门工资，也不构成收入承诺，且小费与兼职收入不在该口径内。；O*NET 展示的 BLS 2025 年工资分位（同族母职业口径）｜https://www.onetonline.org/link/localwages/35-3023.01"
+              "母职业2025 OEWS中位31,200美元/年、15.00美元/小时，非咖啡师单列；涵盖全职和兼职受雇人员并包含小费、佣金与生产奖金，排自雇与加班溢价。"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
+            "onet-wages",
+            "oews-methods",
             "onet"
           ],
           "type": "prose"
@@ -27213,12 +27168,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "3,796,000 人（2024 年，同族母职业 35-3023.00 口径）"
+              "3,855,900 人（2025 年，同族母职业 35-3023.00 口径）"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27232,8 +27188,8 @@
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27242,12 +27198,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "快于平均（5% 至 6%）（2024—2034 年，同族母职业口径）"
+              "快于平均（5% 至 6%）（2025—2035 年，同族母职业口径）"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27261,7 +27218,8 @@
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27270,12 +27228,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约 904,300（2024—2034 年，同族母职业口径，含增长与替换）"
+              "约 827,400（2025—2035 年，同族母职业口径，含增长与替换）"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27289,8 +27248,8 @@
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27314,13 +27273,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：美国公开数据给出的是同族母职业的时薪与年薪分位与2024—2034 年就业与预测；可核对的是分位、中位数与预测数字，以及它们各自的口径与资料期。"
+              "直接回答：美国公开数据给出的是同族母职业的时薪与年薪分位与2025—2035 年就业与预测；可核对的是分位、中位数与预测数字，以及它们各自的口径与资料期。"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27357,11 +27316,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "资历与职责影响收入：能承担设备调试与出品标准把控、或具备带训与门店值班职责，通常对应更高区间。"
+              "编辑核对建议：比较设备调试、带训、值班职责及计酬方案；来源没有把工资分位绑定资历、职级或带训人员，不能推更高收入区间。"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
+            "onet-wages",
+            "oews-methods",
             "onet"
           ],
           "type": "prose"
@@ -27419,7 +27380,8 @@
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27442,12 +27404,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "证据不足：本次已核O*NET及OOH未给出咖啡师35-3023.01细分的本行工资中位数；母职业或合并组行业表不能替代。"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27456,12 +27419,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布列出该职业在住宿与餐饮服务占 87%（2024 年，且同样为同族母职业口径）；行业分布不提供行业工资水平。"
+              "O*NET 行业分布列出该职业在住宿与餐饮服务占 87%（现行页面，且同样为同族母职业口径）；行业分布不提供行业工资水平。"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "onet"
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -27484,12 +27447,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "证据不足：本次已核O*NET及OOH未给出咖啡师35-3023.01细分的本行工资中位数；母职业或合并组行业表不能替代。"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27498,12 +27462,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布同时把 13% 归入「其他行业（含零售贸易）」（2024 年），未单独公布这些行业的职业工资。"
+              "O*NET 行业分布同时把 13% 归入「其他行业（含零售贸易）」（现行页面），未单独公布这些行业的职业工资。"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "onet"
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -27526,12 +27490,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未按雇主类型公布该职业工资中位数。"
+              "证据不足：本次已核O*NET及OOH未给出咖啡师35-3023.01细分的本行工资中位数；母职业或合并组行业表不能替代。"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27568,11 +27533,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未按任职形态公布该职业收入，本页不把小费与兼职收入年化，也不把自雇门店收入计入受雇口径。"
+              "证据不足：本次未取得咖啡师细分自雇经营收入或不同任职形态收入分布；OEWS含兼职受雇人员和小费，年化统计不等于个人实际年收入。"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
+            "onet-wages",
+            "oews-methods",
             "onet"
           ],
           "type": "prose"
@@ -27611,11 +27578,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本职业同时公布时薪与年薪分位，两者同源；不能用「时薪 × 工时」推算个人年收入，因为 88% 的典型工作周少于 40 小时，且工时与小费办法因门店而异。"
+              "来源同时列母职业时薪和年薪分位；OEWS年化按2,080小时假设，非个人实际有薪时数。O*NET本职业88%典型工作周少于40小时，不应将年化母职业工资视为咖啡师个人所得。"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
+            "onet-wages",
+            "oews-methods",
             "onet"
           ],
           "type": "prose"
@@ -27625,12 +27594,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "数字来自 BLS 职业就业与工资统计（OEWS，2025 年，同族母职业 35-3023.00 口径）与 O*NET 展示的 BLS 2024—2034 年就业预测；BLS 职业展望手册的合并组章节为另一口径。"
+              "数字来自 BLS 职业就业与工资统计（OEWS，2025 年，同族母职业 35-3023.00 口径）与 O*NET 展示的 BLS 2025—2035 年就业预测；BLS 职业展望手册的合并组章节为另一口径。"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27697,12 +27667,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位为年薪 42,650 美元；高端通常与年限、门店类型或带训与值班与管理职责相关，不代表普遍水平，也不代表咖啡师单列水平。"
+              "第90分位42,650美元/年是母职业受雇工资的统计位置；来源未把它定义为资深或带训管理岗，更不是咖啡师细分高端收入。"
             ]
           },
           "id": "baristas.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet",
+            "onet-wages",
+            "oews-methods",
             "onet"
           ],
           "type": "prose"
@@ -27917,13 +27888,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格中与工作方式更相关的是尽责性（按配方与卫生规程执行、记录与清洁不漏项、按班次交付）、情绪稳定性（在高峰排队与顾客投诉与连续站立中保持准确与礼貌）与宜人性（在顾客接待与投诉处置中保持分寸）。这些是群体层面的相关性，不能用于个人录用筛选。"
+              "编辑自检维度：按配方与卫生规程执行、记录不漏项，投诉时先确认再处理，与顾客保持礼貌。这里只列工作行为，不把大五分数当能力或群体相关研究结论。"
             ]
           },
           "id": "baristas.fit.personality-fit-block.6",
           "source_refs": [
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27932,7 +27903,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：人格与工作表现的相关性证据属于一般性研究结论，强度低于现场出品与卫生记录与复核评价。"
+              "证据不足：本页未提供大五人格与咖啡师表现的匹配研究；以下为编辑反思题，不是选拔量表。"
             ]
           },
           "id": "baristas.fit.personality-fit-block.7",
@@ -27946,8 +27917,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "尽责性有助于按配方与标准程序完成出品并如实记录温度与清洁，在高峰期不漏项。",
-              "情绪稳定性有助于在顾客投诉或订单异常时先确认再处理，而不是为赶单跳过消毒与温度检查。"
+              "编辑反思：高峰时能否按配方与卫生规程逐项执行、如实记录温度与清洁？",
+              "编辑反思：投诉或异常时能否先确认再处理，避免赶单跳过卫生核对？"
             ]
           },
           "id": "baristas.fit.personality-fit-block.8",
@@ -27991,7 +27962,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业匹配或选拔工具，也没有官方资料支持「某种类型最适合咖啡师」的说法。可用于整理与同班同事与顾客的沟通协作偏好，但不能据以判断适配或用于录用。"
+              "本页未提供支持某种MBTI类型最适合咖啡师的匹配证据；只可借偏好提出沟通问题，不作录用或胜任结论。"
             ]
           },
           "id": "baristas.fit.personality-fit-block.10",
@@ -28019,7 +27990,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：MBTI 的职业预测效度有限，且不被 O*NET 或 BLS 用作适配标准。"
+              "证据不足：本页未提供MBTI对咖啡师表现的效度研究；职业任务资料不能替它验证。"
             ]
           },
           "id": "baristas.fit.personality-fit-block.11",
@@ -28091,7 +28062,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样不是职业适配工具，缺乏官方职业资料支持，也不用于录用或筛选判断。可用于自我反思，但不能据此下结论。"
+              "本页将九型人格仅作自我反思话题；未提供支持职业适配或录用筛选的证据。"
             ]
           },
           "id": "baristas.fit.personality-fit-block.14",
@@ -28105,7 +28076,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：无官方职业资料来源支持将九型人格用于职业适配判断。"
+              "证据不足：本页未提供九型人格与咖啡师表现的匹配研究。"
             ]
           },
           "id": "baristas.fit.personality-fit-block.15",
@@ -28221,12 +28192,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：O*NET 的知识字段公布客户与个人服务 89、行政与管理 65、销售与营销 62、食品生产 54、英语语言 52；基本技能以积极倾听 60 与口语表达 56 与监控 50 为主；「能力与工作风格字段本页未取得」，属于职业特征描述；测验不能替代现场实作与复核评价。"
+              "O*NET现行能力包括言语清晰度、口头理解和口头表达；工作风格列社交倾向73、合作69、可靠性69、细致55、自我控制50。它们描述职业群体，非个人准入分数，不能替代出品与卫生实作评价。"
             ]
           },
           "id": "baristas.fit.personality-fit-block.23",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28612,7 +28583,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有官方结论，也不存在最适合的类型。MBTI 只能帮助整理偏好并提出核对问题，不能预测出品与卫生记录质量或现场表现。"
+              "本页没有最适合的MBTI类型证据；偏好不能预测出品、卫生记录或现场表现。"
             ]
           },
           "id": "baristas.fit.personality-fit-block.49",
@@ -28641,7 +28612,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。人格与兴趣工具的效度有限，不能替代有监督下的出品一致性记录质量、设备温度检查记录与器具清洁与消毒记录；本页只用它们提出核对问题。"
+              "本页不以人格或兴趣分数作录用结论；它们不能替代有监督的出品、温度检查与卫生记录评价。"
             ]
           },
           "id": "baristas.fit.personality-fit-block.51",
@@ -28685,7 +28656,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。九型人格不是职业适配工具，也不被官方职业资料用作选拔依据；可用于自我反思，但不能据此下结论。"
+              "本页未取得九型人格职业匹配证据；只作反思，不用于选拔。"
             ]
           },
           "id": "baristas.fit.personality-fit-block.54",
@@ -28799,12 +28770,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明雇主招聘公告中的软件技能信号；页面未公布比例，不代表岗位采用率。"
+              "O*NET热门技术页按2025年1月1日至12月31日美国Lightcast招聘广告列Microsoft Office、Excel、Word，三者提及均低于1%；广告提及不是采用率、能力阈值或统一录用条件。"
             ]
           },
           "id": "baristas.fit.personality-fit-block.62",
           "source_refs": [
-            "onet"
+            "onet",
+            "hr"
           ],
           "type": "prose"
         },
@@ -28855,12 +28827,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆统计口径与证据边界（本页未取得精确等价职业条目）。"
+              "人社部2022年国家职业技能标准颁布目录列明咖啡师4-03-02-08。该目录确证名称与代码，本次未取得该版完整标准，不能据目录推学历、等级条件或与美国35-3023.01完全等价。"
             ]
           },
           "id": "baristas.fit.personality-fit-block.66",
           "source_refs": [
-            "onet"
+            "cn-coffee-code"
           ],
           "type": "prose"
         }
@@ -28896,22 +28868,22 @@
                 "url": "https://www.onetonline.org/link/details/35-3023.01"
               },
               {
-                "entity": "O*NET 35-3023.01 职业摘要（就业与预测字段）",
+                "entity": "FDA Food Allergies",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/35-3023.01"
+                "url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies?lv=true"
               },
               {
-                "entity": "O*NET 35-3023.01 全国工资分位",
+                "entity": "《中华人民共和国个人信息保护法》",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/35-3023.01"
+                "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
               },
               {
-                "entity": "BLS 职业展望手册《Food and Beverage Serving and Related Workers》",
+                "entity": "《中华人民共和国食品安全法》2025修正版",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/food-preparation-and-serving/food-and-beverage-serving-and-related-workers.htm"
+                "url": "https://sjfg.samr.gov.cn/law/file/pdf/3238901/1763351546670.pdf"
               }
             ]
           },
@@ -28930,14 +28902,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界：本节描述的是职业风险与边界管理，不是对个人或雇主的评价；具体的食品安全与场所卫生要求、器具消毒与温度控制、热饮与蒸汽与设备操作防护、顾客信息与支付信息处理、以及设备停机与退款与免单授权范围由适用法域、主管部门与用人单位流程决定。本页依据 O*NET 35-3023.01 的官方职责与工作情境字段，以及美国 BLS 职业展望手册该合并组的公开口径。"
+              "本节区分官方任务情境、食品及个人信息法规、编辑控制建议。中国食品安全责任由生产经营者承担，设备停机/恢复、退款等内部权限须另核；美国FDA过敏说明不能当中国标签法。没有门店程序时，不把建议写成操作授权。"
             ]
           },
           "id": "baristas.risk.career-risk-cards.8",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "bls",
+            "cn-food-law",
+            "cn-pipl",
+            "fda-allergens"
           ],
           "type": "prose"
         },
@@ -28979,12 +28953,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "顾客与本人"
+              "咖啡师、备料与设备清洁岗位"
             ]
           },
           "id": "baristas.risk.career-risk-cards.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29039,12 +29012,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "顾客与本人"
+              "饮品制作、轻食备料与交付岗位"
             ]
           },
           "id": "baristas.risk.career-risk-cards.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29054,13 +29026,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "食品与饮品若温度控制或标签与保质期管理不当，可能造成食源性疾病；过敏原交叉接触可能引发过敏反应。"
+              "食品储存与设备温度管理不当有食品安全风险；FDA说明食品过敏可引发严重反应。中国卫生与经营主体责任按食品安全法，具体过敏原控制程序须另核适用门店。"
             ]
           },
           "id": "baristas.risk.career-risk-cards.16",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-food-law",
+            "fda-allergens"
           ],
           "type": "prose"
         },
@@ -29069,13 +29041,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程检查冷冻柜与冰箱与加热设备温度、核对标签与保质期并按先进先出摆放、分开处理并标识含过敏原的成分，异常时停止并隔离。"
+              "编辑建议：依据食品安全法第54、56条核储存、过期食品清理、设备维护和器具清洁；过敏原核原料标签、交叉接触控制与门店规程。发现疑似问题按报告流程交由有职责人员处理，不自行决定召回或恢复销售。"
             ]
           },
           "id": "baristas.risk.career-risk-cards.17",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-food-law",
+            "fda-allergens"
           ],
           "type": "prose"
         },
@@ -29099,7 +29071,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "顾客与雇主"
+              "收银、会员运营与门店管理岗位"
             ]
           },
           "id": "baristas.risk.career-risk-cards.19",
@@ -29127,12 +29099,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按适用的个人信息保护与支付安全要求与用人单位规定处理顾客信息，不向未授权渠道提供或传播。"
+              "中国个人信息保护法第28条将金融账户列为敏感个人信息；处理按必要性、保护、单独同意及告知等适用要求核查。编辑建议：不把顾客、账户或交易资料发入未经授权的工具，访问与留存另核门店流程。"
             ]
           },
           "id": "baristas.risk.career-risk-cards.21",
           "source_refs": [
-            "onet"
+            "cn-pipl"
           ],
           "type": "prose"
         },
@@ -29156,12 +29128,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本人与同事"
+              "咖啡师、备料与补货岗位"
             ]
           },
           "id": "baristas.risk.career-risk-cards.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29186,13 +29157,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程使用防滑地面与合适工作台高度、轮换岗位与安排间歇、正确搬运并及早报告不适。"
+              "编辑建议：结合长时间站立与重复手部作业，向雇主核防滑、台面、轮换、间歇与搬运安排，发现不适及时报告；本次未核具体门店的人体工学控制成效。"
             ]
           },
           "id": "baristas.risk.career-risk-cards.25",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -29216,12 +29186,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本人与主管与顾客"
+              "咖啡师、交班与门店管理岗位"
             ]
           },
           "id": "baristas.risk.career-risk-cards.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29246,13 +29215,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程记录订单与出品、设备温度检查、器具清洁与消毒处理、食品标签与保质期核对与异常，未决事项显式标记，保留人工修改痕迹。"
+              "编辑建议：按真实门店程序保存订单、温度、清洁、标签及异常交班信息，未决事项标记并保留修订痕迹；本次未核统一咖啡师记录模板或强制保存期限。"
             ]
           },
           "id": "baristas.risk.career-risk-cards.29",
           "source_refs": [
             "onet",
-            "onet"
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -29276,12 +29245,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本人与同事与顾客"
+              "值班协调、食品安全管理与设备维护岗位"
             ]
           },
           "id": "baristas.risk.career-risk-cards.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29306,13 +29274,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按雇主授权执行设备停机与问题食品隔离与退款与免单；BLS 指出该合并组通常无正式教育或经验要求、技能通过在岗学习获得，因此上岗培训与授权边界尤其需要在入职时明确；保留复核与升级机制，异常与疑似污染按程序上报。"
+              "中国食品安全法第47、63条将风险处置及问题食品停止经营等责任赋予生产经营者；普通咖啡师不能据本页自获召回或恢复权限。入职时核设备异常、食品隔离、上报、复核及退款授权，依适用程序交有职责人员处理。"
             ]
           },
           "id": "baristas.risk.career-risk-cards.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -29364,12 +29331,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明同族母职业口径的就业与 2024—2034 年预测，不用于个案判断。"
+              "美国FDA食品过敏及严重反应说明；美国标签法不外推中国。"
             ]
           },
           "id": "baristas.risk.career-risk-cards.37",
           "source_refs": [
-            "onet"
+            "fda-allergens"
           ],
           "type": "prose"
         },
@@ -29378,12 +29345,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明同族母职业口径的全国工资分位，不用于个案判断。"
+              "中国个人信息保护法第28—30条；金融账户及其处理边界。"
             ]
           },
           "id": "baristas.risk.career-risk-cards.38",
           "source_refs": [
-            "onet"
+            "cn-pipl"
           ],
           "type": "prose"
         },
@@ -29392,12 +29359,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆场所卫生与食品安全要求与证据边界（本页未取得精确等价职业条目）。"
+              "中国食品安全法的经营卫生、培训、健康管理及主体责任。"
             ]
           },
           "id": "baristas.risk.career-risk-cards.39",
           "source_refs": [
-            "onet"
+            "cn-food-law"
           ],
           "type": "prose"
         }
@@ -29423,7 +29390,7 @@
             "column_labels": [
               "岗位方向",
               "起步任务",
-              "雇主依据",
+              "雇主要求核对建议",
               "零经验可提交的证据",
               "需要区分的边界"
             ],
@@ -29431,35 +29398,35 @@
               [
                 "连锁品牌门店咖啡岗",
                 "在有监督下按品牌标准程序完成点单与制作与出品，并按规程完成器具清洁与消毒与温度检查与交班记录。",
-                "通常看出品一致性与标准程序执行、卫生与温度记录规范程度、高峰客流下的稳定性；上岗资格由雇主岗前培训与考核决定。",
+                "编辑核对建议：向目标雇主核对出品一致性与标准程序执行、卫生与温度记录规范程度、高峰客流下的稳定性；上岗资格由雇主岗前培训与考核决定。",
                 "提交一份含虚构菜单与配方卡、订单与出品记录、设备温度检查与清洁消毒说明的服务记录，不使用真实顾客与交易数据。",
                 "门店岗位不决定设备采购与食品安全制度；涉及设备停机与退款须由有职责人员按规程处理。"
               ],
               [
                 "独立咖啡馆制作岗",
                 "在较小团队中独立完成点单与制作与出品，并兼顾设备调试与清洁与补货。",
-                "通常看配方理解与出品稳定性、设备基本调试与保养、顾客沟通与产品介绍能力。",
+                "编辑核对建议：向目标雇主核对配方理解与出品稳定性、设备基本调试与保养、顾客沟通与产品介绍能力。",
                 "提交一份含配方与出品记录、设备调试与清洁记录与顾客反馈的虚构记录。",
                 "设备调试与停机须按门店授权执行；本页不提供作业指令。"
               ],
               [
                 "零售与酒店与机构饮吧岗",
                 "在零售或酒店或机构场景按机构标准提供饮品与轻食，配合其他岗位完成接待与卫生与库存。",
-                "通常看服务规范与跨岗位协作、卫生与库存与温度记录能力。",
+                "编辑核对建议：向目标雇主核对服务规范与跨岗位协作、卫生与库存与温度记录能力。",
                 "提交一份含服务流程、温度与清洁记录与库存与异常上报的虚构方案。",
                 "机构标准与食品安全管理须按主管部门与用人单位规定执行；本页不提供管理指令。"
               ],
               [
                 "烘焙与采购支持岗",
                 "在授权范围内参与咖啡豆选品与烘焙记录与库存管理，进行杯测与出品参数记录。",
-                "通常看感官描述与记录、参数与批次管理能力。",
+                "编辑核对建议：向目标雇主核对感官描述与记录、参数与批次管理能力。",
                 "提交一份含目标、参数记录、感官描述与批次对照的虚构说明。",
                 "选品与配方批准须按门店授权执行；支持岗不等于配方或采购批准。"
               ],
               [
                 "值班与班组协调岗",
                 "安排班次与分工、带训新人、检查卫生与温度与设备状态、处理顾客投诉与异常与交班。",
-                "通常看排班与带训与异常处置与记录复核能力。",
+                "编辑核对建议：向目标雇主核对排班与带训与异常处置与记录复核能力。",
                 "提交一份含排班与分工、温度与清洁检查、异常处置与改进建议的虚构方案。",
                 "停机与退款决定须按门店规程与授权作出；本页不提供管理指令。"
               ]
@@ -29468,8 +29435,8 @@
           "id": "baristas.path.entry-role-comparison.1",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "bls",
+            "nbs"
           ],
           "title": "岗位方向与起步任务比较",
           "type": "table"
@@ -29484,7 +29451,7 @@
                 "values": [
                   "美国侧：O*NET 把 35-3023.01（Baristas）列为 Job Zone 1–2（SVP 低于 6.0），页面公布的学历构成中 64% 为要求低于高中文凭、29% 为要求高中文凭或同等学历、2% 为要求高中后证书；BLS 职业展望手册对应章节把该合并组的典型入门教育列为「无正式学历凭证」、无相关工作经验要求、短期在岗训练，并指出作息常含清晨与深夜与周末与节假日、兼职常见。",
                   "O*NET 培训页面显示全国未登记该职业的培训项目；职业摘要另提供 Apprenticeship.gov 学徒机会入口（按该职业代码查询）；认证页面列出 3 项国家认证（Certified Restaurant Server、Certified Home Brewers、Certified Coffee Specialist）。",
-                  "中国大陆以用人单位岗前培训与在岗带教为主，并须符合适用的食品安全与公共场所卫生要求；本页不提供选拔标准。"
+                  "人社部2022年国家职业技能标准颁布目录列明咖啡师4-03-02-08。该目录确证名称与代码，本次未取得该版完整标准，不能据目录推学历、等级条件或与美国35-3023.01完全等价。中国食品安全法第44条要求食品生产经营企业开展食品安全知识培训；第45条要求从事接触直接入口食品工作的人员每年健康检查并取得健康证明后上岗。具体设备、退款和管理权限另核雇主，不能由学历或职业证书推出。"
                 ]
               },
               {
@@ -29507,7 +29474,7 @@
                 "id": "tools",
                 "values": [
                   "浓缩咖啡机与磨豆机与冷饮与蒸汽设备、冷冻柜与冰箱与加热设备与温度计、咖啡豆与茶叶与乳制品与糖浆与配料与已备食品、清洁与消毒用品与一次性用品、收银与点单与库存系统、个人防护（按作业需要的手套与围裙与防烫用品）。",
-                  "O*NET 列出 3 项软件技能并均标注为热门技术（Microsoft Office、Microsoft Excel、Microsoft Word），页面未公布出现比例。",
+                  "O*NET热门技术页按2025年1月1日至12月31日美国Lightcast招聘广告列Microsoft Office、Excel、Word，三者提及均低于1%；广告提及不是采用率、能力阈值或统一录用条件。",
                   "把点单与库存与排班系统用于门店流程前，须确认顾客信息与支付信息保护、设备温度与清洁记录与人工复核安排。"
                 ]
               }
@@ -29516,7 +29483,14 @@
           "id": "baristas.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "nbs",
+            "nist",
+            "census",
+            "hr",
+            "cn-coffee-code",
+            "cn-food-law",
+            "cn-pipl"
           ],
           "title": "雇主看重的准备证据",
           "type": "cards"
@@ -29771,7 +29745,7 @@
               [
                 "高中文凭或同等学历",
                 "希望进入该职业的人",
-                "决定能否满足多数岗位的基本要求。",
+                "并非多数岗位必需：O*NET64%要求低于高中，具体目标岗位学历另核。",
                 "O*NET 页面公布的学历构成中 64% 为要求低于高中文凭、29% 为要求高中文凭或同等学历、2% 为要求高中后证书；BLS 指出该合并组通常无正式教育要求。",
                 "按学制完成。",
                 "按学制年限。",
@@ -29781,7 +29755,7 @@
                 "用人单位岗前培训与在岗带教",
                 "进入具体门店的人",
                 "决定能否按门店配方与标准程序与卫生要求作业。",
-                "多数雇主作为上岗条件（BLS 指出技能通常通过在岗学习获得）。",
+                "BLS合并组说明技能通常通过在岗学习获得；本次未取得具体雇主上岗条件样本。",
                 "须完成门店安排的岗前培训与考核并按班次接受带训。",
                 "按门店安排。",
                 "岗前培训不等于设备停机与退款或食品安全判定授权。"
@@ -29790,7 +29764,7 @@
                 "行业认证（咖啡与餐饮服务方向）",
                 "希望证明专项能力的人",
                 "作为专项能力的第三方证明。",
-                "不是普遍门槛，但对岗位层级与晋升有一定作用。",
+                "O*NET目录不证明普遍门槛或晋升收益；目标雇主是否认可须另核。",
                 "O*NET 认证页面列出 3 项：Certified Restaurant Server、Certified Home Brewers（Specialty Coffee Association of America）、Certified Coffee Specialist（National Automatic Merchandising Association）。",
                 "按发证机构安排与证书有效期维护。",
                 "认证不等于录用门槛或雇主任命，也不等于设备与食品安全授权。"
@@ -29814,11 +29788,11 @@
                 "授权有设备与岗位范围限制，不等于可在任何门店或设备作业。"
               ],
               [
-                "中国大陆侧：食品安全与场所卫生要求",
+                "中国食品安全培训与直接入口食品人员健康证明",
                 "在中国大陆从事相关服务的人",
                 "决定能否在门店从事饮品制作与出餐。",
-                "属法定要求：食品经营与从业人员须符合适用的食品安全与公共场所卫生与健康管理要求，企业承担食品安全主体责任。",
-                "须完成用人单位安排的食品安全与卫生培训并按要求取得相应资格或证明。",
+                "中国食品安全法第44条要求食品生产经营企业开展食品安全知识培训；第45条要求从事接触直接入口食品工作的人员每年健康检查并取得健康证明后上岗。具体设备、退款和管理权限另核雇主，不能由学历或职业证书推出。",
+                "依实际接触直接入口食品的职责核健康证明，并核企业食品安全培训及雇主设备授权。",
                 "按主管部门与用人单位安排维护。",
                 "健康与培训证明不等于设备与收银与退款的全部授权，具体岗位授权仍由用人单位规定。"
               ]
@@ -29827,10 +29801,10 @@
           "id": "baristas.path.credential-decision.1",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "nbs",
+            "nist",
+            "census",
+            "cn-food-law"
           ],
           "title": "资格与执照决策",
           "type": "table"
@@ -29842,15 +29816,18 @@
             "paragraphs": [
               "资格边界：学历、职业培训、行业认证、雇主任用与门店作业授权、以及设备启停与食品安全判定与退款与免单权限是不同状态，任何一项都不能由另一项自动推出；场所卫生与器具消毒与食品温度控制受适用法域与主管部门与用人单位约束。",
               "美国侧：O*NET 把 35-3023.01（Baristas）列为 Job Zone 1–2（SVP 低于 6.0），页面公布的学历构成为低于高中文凭 64%、高中文凭或同等学历 29%、高中后证书 2%；BLS 职业展望手册对应章节把该合并组的典型入门教育列为「无正式学历凭证」、无相关工作经验要求、短期在岗训练；O*NET 培训页面显示全国未登记该职业的培训项目，认证页面列出 3 项国家认证（含咖啡与餐饮服务方向）。该职业的工资、就业与行业数据在 O*NET 页面上标注取自同族母职业 35-3023.00（Fast Food and Counter Workers），BLS 章节亦为「Food and Beverage Serving and Related Workers」合并组。",
-              "中国大陆侧：本页未取得与 35-3023.01 精确等价的公开职业条目与准入依据；食品经营与从业人员须符合适用的食品安全与公共场所卫生与健康管理要求，企业承担食品安全主体责任。",
+              "人社部2022年国家职业技能标准颁布目录列明咖啡师4-03-02-08。该目录确证名称与代码，本次未取得该版完整标准，不能据目录推学历、等级条件或与美国35-3023.01完全等价。中国食品安全法第44条要求食品生产经营企业开展食品安全知识培训；第45条要求从事接触直接入口食品工作的人员每年健康检查并取得健康证明后上岗。具体设备、退款和管理权限另核雇主，不能由学历或职业证书推出。",
               "操作建议：入职前把「学历／职业培训／行业认证／门店岗前培训／设备操作与停机授权／收银与退款授权／食品安全与卫生培训」分列成一张表，逐项写明来源与资料期与法域；无法核实的项留空并标记为证据不足，不用推测填补。"
             ]
           },
           "id": "baristas.path.credential-boundary.1",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "nbs",
+            "nist",
+            "census",
+            "cn-coffee-code",
+            "cn-food-law"
           ],
           "title": "资格边界",
           "type": "notice"
@@ -29860,7 +29837,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明：本节不引用具体雇主的招聘公告，只说明核对应关注的项目；公开渠道出现的岗位名称包括咖啡师、吧台咖啡师、饮品制作员、门店伙伴、咖啡门店店员、值班伙伴等。",
+              "招聘样本缺口：本节未引用具体雇主公告。以下为编辑核对清单，岗位方向是任务整理，不作为招聘覆盖率或真实在招岗位证据。",
               "核对清单：岗位属于连锁品牌门店、独立咖啡馆，还是零售与酒店与机构饮吧；任职方式为全职或兼职；是否需要设备操作与停机与退款授权；班次（清晨与深夜与周末与节假日）与小费与加班安排；以及食品安全与卫生与顾客信息保护培训要求。"
             ]
           },
@@ -29898,10 +29875,10 @@
                 "url": "https://www.onetonline.org/link/localtraining/35-3023.01"
               },
               {
-                "entity": "O*NET 35-3023.01 认证发现",
+                "entity": "《中华人民共和国食品安全法》2025修正版",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localcert/35-3023.01"
+                "url": "https://sjfg.samr.gov.cn/law/file/pdf/3238901/1763351546670.pdf"
               }
             ]
           },
@@ -30081,14 +30058,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域：美国（O*NET 35-3023.01 与雇主人事与食品安全规程；BLS 职业展望手册该合并组指出通常无正式教育或经验要求、技能通过在岗学习获得）。中国大陆侧本页未取得精确等价的公开职业条目与准入依据，食品安全与场所卫生须符合适用法规与用人单位规程，企业承担食品安全主体责任。"
+              "美国任务口径35-3023.01，具体雇主人事与食品安全要求另核；BLS合并组入行背景不是个别岗位条件。人社部2022年国家职业技能标准颁布目录列明咖啡师4-03-02-08。该目录确证名称与代码，本次未取得该版完整标准，不能据目录推学历、等级条件或与美国35-3023.01完全等价。中国食品安全法第44条要求食品生产经营企业开展食品安全知识培训；第45条要求从事接触直接入口食品工作的人员每年健康检查并取得健康证明后上岗。具体设备、退款和管理权限另核雇主，不能由学历或职业证书推出。"
             ]
           },
           "id": "baristas.path.career-path-block.22",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "nbs",
+            "cn-coffee-code",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -30097,13 +30075,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "路径概要：从在有监督下完成制作与出品与清洁，到独立完成常见饮品与出餐与设备温度检查，再到带训、规程改进与班组协调；设备启停与食品安全判定与退款权限由门店与岗位职责决定，转向出品质量与运营与烘焙采购需补充相应训练与授权。"
+              "编辑路径：下列岗位阶段按任务复杂度、复核与职责安排组织，不是统一职级、晋升时间或薪酬承诺。设备维护等转向需另补训练并核目标岗授权。"
             ]
           },
           "id": "baristas.path.career-path-block.23",
           "source_refs": [
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -30154,12 +30132,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆食品安全与场所卫生要求与证据边界（本页未取得精确等价职业条目）。"
+              "中国食品安全法第44、45条培训与直接入口食品人员健康要求；职业目录仅核名称代码，不给全部门店权限。"
             ]
           },
           "id": "baristas.path.career-path-block.27",
           "source_refs": [
-            "onet"
+            "cn-food-law",
+            "cn-coffee-code"
           ],
           "type": "prose"
         },
@@ -31065,28 +31044,28 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 35-3023.01 职业摘要（就业与预测字段）",
+                "entity": "O*NET咖啡师页面2025—2035全国就业趋势（母职业35-3023.00）",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/35-3023.01"
+                "url": "https://www.onetonline.org/link/localtrends/35-3023.01"
               },
               {
-                "entity": "O*NET 35-3023.01 行业分布",
+                "entity": "O*NET咖啡师页面2025—2035全国就业趋势（母职业35-3023.00）",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/35-3023.01"
+                "url": "https://www.onetonline.org/link/localtrends/35-3023.01"
               },
               {
-                "entity": "BLS 职业展望手册《Food and Beverage Serving and Related Workers》",
+                "entity": "国家统计局《2025年城镇单位就业人员年平均工资情况》",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/food-preparation-and-serving/food-and-beverage-serving-and-related-workers.htm"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "entity": "O*NET 35-3023.01 全国工资分位",
+                "entity": "O*NET 35-3023.01 职业摘要（咖啡师）",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/35-3023.01"
+                "url": "https://www.onetonline.org/link/summary/35-3023.01"
               },
               {
                 "entity": "食品柜台工人",
@@ -31152,14 +31131,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：O*NET 就业趋势页按同族母职业 35-3023.00（Fast Food and Counter Workers，页首写明 Employment data for Fast Food and Counter Workers）给出 2024 年在岗约 3,796,000 人、2034 年约 4,029,200 人（+6%，快于平均（5% 至 6%））、预测期年均职位空缺约 904,300（含增长与替换）。BLS 职业展望手册的合并组章节另给出 2025 年在岗 5,143,000 人、2025—2035 年 +5%、年均空缺约 1,078,500，两者口径不同且都比咖啡师单列更宽，不能混用。"
+              "直接回答：O*NET 就业趋势页按同族母职业 35-3023.00（Fast Food and Counter Workers，页首写明 Employment data for Fast Food and Counter Workers）给出 2025 年在岗约 3,855,900 人、2035 年约 4,079,100 人（+6%，快于平均（5% 至 6%））、预测期年均职位空缺约 827,400（含增长与替换）。BLS 职业展望手册的合并组章节另给出 2025 年在岗 5,143,000 人、2025—2035 年 +5%、年均空缺约 1,078,500，两者口径不同且都比咖啡师单列更宽，不能混用。"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31182,12 +31160,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024 年"
+              "2025 年"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31201,7 +31180,8 @@
           },
           "id": "baristas.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31252,12 +31232,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "3,796,000 人（同族母职业口径）"
+              "3,855,900 人（同族母职业口径）"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31280,12 +31261,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年"
+              "2025—2035 年"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31294,12 +31276,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 按同族母职业 35-3023.00 口径归为「快于平均（5% 至 6%）」，预测期年均职位空缺约 904,300（含增长与替换）；BLS 职业展望手册的合并组章节另给出 2025—2035 年 +5% 与年均空缺约 1,078,500。需求还受人口与消费与门店租金与平台获客与复购与时尚周期与自雇比例影响；就业增长不能保证个人客源或门店利润。"
+              "美国母职业35-3023.00（Fast Food and Counter Workers）2025年3,855,900人，2035年4,079,100人，增长6%，年均空缺827,400；均非咖啡师细分统计，也非AI归因。OOH合并组2025—2035增长5%、年均空缺1,078,500，是另一口径，不能混用，也不能预测个人录用或门店利润。"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31350,12 +31333,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "快于平均（年均职位空缺约 904,300，同族母职业口径）"
+              "快于平均（年均职位空缺约 827,400，同族母职业口径）"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31392,12 +31376,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆未取得咖啡师的精确全国职业工资分布，本页不把中文页面语言当作中国等价职业或工资映射，也不发布本职业的精确月薪或中位数；本模块保留 暂无可安全使用的数据 边界，行业工资统计不能提供全国职业中位数与统一起薪；需比较时应按用人单位类型与任职方式与班次与小费结构逐项核对。"
+              "人社部2022年国家职业技能标准颁布目录列明咖啡师4-03-02-08。该目录确证名称与代码，本次未取得该版完整标准，不能据目录推学历、等级条件或与美国35-3023.01完全等价。证据不足：全国职业工资分布仍未取得。2025住宿餐饮业单位均值仅作行业背景，非需求预测或个人月薪。"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet"
+            "cn-coffee-code",
+            "cn-wages-current"
           ],
           "type": "prose"
         },
@@ -31448,12 +31433,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该职业的公开职业条目与全国收入分布，本页以证据边界说明并保留缺口标记"
+              "证据不足：咖啡师全国职业收入分布未取得；职业名称与代码已核，住宿和餐饮业城镇单位均值可作注明范围的行业背景。"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "cn-coffee-code",
+            "cn-wages-current"
           ],
           "type": "prose"
         },
@@ -31476,12 +31462,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明同族母职业口径的就业与 2024—2034 年预测。"
+              "用于说明同族母职业口径的就业与 2025—2035 年预测。"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.31",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31490,12 +31477,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆职业工资的证据边界，不提供本职业数值。"
+              "中国住宿和餐饮业城镇单位工资背景，非咖啡师精确工资或需求预测。"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.32",
           "source_refs": [
-            "onet"
+            "cn-wages-current"
           ],
           "type": "prose"
         },
@@ -31518,12 +31505,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补更宽范围的门店作业训练；饮品专精经验不等于全柜台作业能力。"
+              "需要补更宽范围的门店作业训练；饮品专精经验不等于全柜台作业能力。 编辑比较：同族母职业与细分身份关系，作业范围更宽。"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31548,12 +31534,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离最近：同族母职业与细分身份关系，作业范围更宽。"
+              "编辑判断：较近"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31563,12 +31548,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补桌边服务与上菜顺序训练；柜台出餐经验不等于桌边服务能力。"
+              "需要补桌边服务与上菜顺序训练；柜台出餐经验不等于桌边服务能力。 编辑比较：同属餐饮服务，但交付从柜台出餐转向桌边服务。"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31593,12 +31577,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属餐饮服务，但交付从柜台出餐转向桌边服务。"
+              "编辑判断：较近"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31608,12 +31591,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补酒类知识与许可与年龄核验训练；无酒精饮品经验不等于酒类调制与合规能力。"
+              "需要补酒类知识与许可与年龄核验训练；无酒精饮品经验不等于酒类调制与合规能力。 编辑比较：同属饮品调制，但涉及酒类许可与年龄核验，合规要求不同。"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.40",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31638,12 +31620,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属饮品调制，但涉及酒类许可与年龄核验，合规要求不同。"
+              "编辑判断：中等"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.42",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31653,12 +31634,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补收银与账务与对账训练；门店收银经验不等于独立账务能力。"
+              "需要补收银与账务与对账训练；门店收银经验不等于独立账务能力。 编辑比较：同属门店前台作业，但责任范围从制作与出餐转向账务与对账。"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31683,12 +31663,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属门店前台作业，但责任范围从制作与出餐转向账务与对账。"
+              "编辑判断：较近"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31698,12 +31677,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补备料与初加工训练；柜台出品经验不等于后厨备料能力。"
+              "需要补备料与初加工训练；柜台出品经验不等于后厨备料能力。 编辑比较：同属餐饮备制，但责任从直接出品转向备料与初加工。"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31728,12 +31706,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属餐饮备制，但责任从直接出品转向备料与初加工。"
+              "编辑判断：较近"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31743,12 +31720,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补接待与排位与订位管理训练；制作与收银经验不等于接待与排位能力。"
+              "需要补接待与排位与订位管理训练；制作与收银经验不等于接待与排位能力。 编辑比较：同属门店服务，但交付从制作与出餐转向接待与排位。"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.49",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31772,7 +31748,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属门店服务，但交付从制作与出餐转向接待与排位。"
+              "编辑判断：中等"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.51",
@@ -31786,12 +31762,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补门店运营与排班与成本与合规训练；出品专精不等于运营管理能力。"
+              "需要补门店运营与排班与成本与合规训练；出品专精不等于运营管理能力。 编辑比较：同属门店环境，但从个人交付转向门店运营与人员管理。"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.52",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31816,12 +31791,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属门店环境，但从个人交付转向门店运营与人员管理。"
+              "编辑判断：中等"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.54",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31831,12 +31805,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补排班与带训与卫生与食品安全检查训练；资深出品能力不等于带训与管理能力。"
+              "需要补排班与带训与卫生与食品安全检查训练；资深出品能力不等于带训与管理能力。 编辑比较：同属餐饮服务体系，但从个人服务转向一线督导职责。"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.55",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31861,12 +31834,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属餐饮服务体系，但从个人服务转向一线督导职责。"
+              "编辑判断：中等"
             ]
           },
           "id": "baristas.market-signals.market-signal-card.57",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31963,12 +31935,23 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "费马测试职业内容编辑组：依据 O*NET 与美国 BLS 的公开职业资料、BLS 职业展望手册《Food and Beverage Serving and Related Workers》与 2025 年 OEWS 工资，以及中国大陆国家统计局《2025 年城镇单位就业人员年平均工资情况》；逐项标注口径、资料期与使用限制。"
+              "本轮九板块核O*NET咖啡师任务与情境、母职业工资和2025—2035就业、BLS统计方法与合并组OOH、中国咖啡师标准目录及行业工资、食品安全和个人信息法规、FDA过敏说明及ILO任务暴露研究。编辑候选用途与事实分别标注。"
             ]
           },
           "id": "baristas.sources.source-card.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls",
+            "onet-wages",
+            "ep-current",
+            "oews-methods",
+            "nbs",
+            "cn-coffee-code",
+            "cn-wages-current",
+            "cn-food-law",
+            "cn-pipl",
+            "fda-allergens",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -31977,14 +31960,27 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源：O*NET 35-3023.01 职业摘要、详细资料、自定义职业档案、技术清单、行业分布、认证发现、培训与教育信息、全国工资分位与就业趋势页面；O*NET Resource Center 的数据库与分类口径；BLS 职业展望手册对应章节；国家统计局 2025 年城镇单位工资。"
+              "主要原文：O*NET35-3023.01摘要、详细任务、全国工资/趋势、行业、热门技术、培训与认证；BLSMay2025OEWS方法及OOH；ILO工作论文140；人社部2022标准目录第6项；国家统计局2025单位工资；食品安全法与个人信息保护法；FDA食品过敏指南。"
             ]
           },
           "id": "baristas.sources.source-card.2",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "bls",
+            "onet-wages",
+            "ep-current",
+            "r2-pay-2",
+            "hr",
+            "nist",
+            "census",
+            "oews-methods",
+            "nbs",
+            "ilo",
+            "cn-coffee-code",
+            "cn-wages-current",
+            "cn-food-law",
+            "cn-pipl",
+            "fda-allergens"
           ],
           "type": "prose"
         },
@@ -31993,12 +31989,20 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：O*NET 页面为 2026 年更新；工资分位为 2025 年 OEWS（同族母职业 35-3023.00 口径，时薪与年薪）；O*NET 就业与预测为 2024—2034 年；BLS 职业展望手册章节为 2025 年 5 月工资与 2025—2035 年预测（合并组口径）；国家统计局数据为 2025 年、2026-05-15 发布。"
+              "本轮核读2026-10-08：O*NET页面2026更新，工资May2025、就业2025—2035；热门软件数据为2025美国广告，行业页未单列资料年。中国标准目录2022，单位工资2025；食品安全法2025修正版2025-12-01施行，ILO论文2025。访问日与资料期分别读。"
             ]
           },
           "id": "baristas.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "onet",
+            "onet-wages",
+            "ep-current",
+            "hr",
+            "r2-pay-2",
+            "cn-coffee-code",
+            "cn-wages-current",
+            "cn-food-law",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -32007,13 +32011,20 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "使用说明（三层口径）：① 职业身份与任务与工作情境与技能与知识为 O*NET 35-3023.01 本职业口径；② 工资、就业与行业数据在 O*NET 页面上明确标注取自同族母职业 35-3023.00（Fast Food and Counter Workers），不是咖啡师单列数据；③ BLS 职业展望手册章节为「Food and Beverage Serving and Related Workers」合并组，比母职业更宽。中国大陆未取得本职业的精确全国职业工资分布，本页不发布中国大陆职业工资数值且不用行业工资统计替代；涉及食品安全与场所卫生与设备安全的内容须以适用法规与主管部门与用人单位规定为准。"
+              "咖啡师任务是美国35-3023.01；工资、就业与行业页采用母职业35-3023.00，OOH合并组再宽一层。中国名称和代码已核，完整新版职业标准与精确工资仍不足；住宿餐饮行业均值不是职业统计。法律与指南保留法域，认证目录不是门槛，任务暴露不是采用或替代结果。"
             ]
           },
           "id": "baristas.sources.source-card.4",
           "source_refs": [
             "onet",
-            "onet"
+            "onet-wages",
+            "ep-current",
+            "nbs",
+            "cn-coffee-code",
+            "cn-wages-current",
+            "cn-food-law",
+            "fda-allergens",
+            "ilo"
           ],
           "type": "prose"
         }
@@ -32143,7 +32154,7 @@
                 ],
                 "evidence_type": "official wage percentiles (parent occupation)",
                 "id": "oews",
-                "limitation": "页面首行写明「Wage data for Fast Food and Counter Workers」，即分位数据属同族母职业 35-3023.00；中位数不是起薪，也不是收入承诺，且小费与兼职收入不在该口径内。",
+                "limitation": "母职业35-3023.00受雇工资，含全职/兼职、小费、佣金和生产奖金；排除自雇与加班溢价，非咖啡师细分。",
                 "market": "美国",
                 "name": "O*NET 展示的 BLS 2025 年工资分位（35-3023.01）",
                 "period": "May 2025（OEWS）；访问 2026-09-15",
@@ -32159,7 +32170,7 @@
                 ],
                 "evidence_type": "official occupation outlook",
                 "id": "nbs",
-                "limitation": "该章节覆盖「食品与饮料服务及相关工作者」合并组（含服务员与调酒与柜台等）：2025 年合并中位年薪 31,710 美元、合并中位时薪 15.24 美元、在岗 5,143,000 人、2025—2035 年 +5%（快于平均）、变化 +280,800、年均空缺约 1,078,500，典型入门教育为「无正式学历凭证」、无相关工作经验、短期在岗训练，作息常含清晨与深夜与周末与节假日、兼职常见。合并组口径比同族母职业更宽，不得当作咖啡师单列口径。",
+                "limitation": "本章就业表为快餐柜台、非餐厅食品服务、餐厅助理及迎宾员四组；不含服务员、调酒师。2025合并规模5,143,000、增长5%、年均空缺1,078,500；合并组工资与训练非咖啡师细分。",
                 "market": "美国",
                 "name": "BLS 职业展望手册《Food and Beverage Serving and Related Workers》（合并组章节）",
                 "period": "2025 年 5 月工资与 2025—2035 年预测；访问 2026-09-15",
@@ -32232,17 +32243,17 @@
                 "url": "https://www.onetonline.org/link/summary/35-3023.01"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "technology signals",
                   "2026 年更新页面；访问 2026-09-15"
                 ],
                 "evidence_type": "technology signals",
                 "id": "hr",
-                "limitation": "页面列出 3 项软件技能并均标注为热门技术（Microsoft Office、Microsoft Excel、Microsoft Word），页面未公布出现比例；不代表岗位采用率或自动化程度。",
+                "limitation": "O*NET热门技术页按2025年1月1日至12月31日美国Lightcast招聘广告列Microsoft Office、Excel、Word，三者提及均低于1%；广告提及不是采用率、能力阈值或统一录用条件。",
                 "market": "美国",
                 "name": "O*NET 35-3023.01 技术清单（热门技术信号）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2025年美国Lightcast招聘广告；核读2026-10-08",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/35-3023.01"
@@ -32392,17 +32403,17 @@
                 "url": "https://www.onetonline.org/link/localwages/35-3023.01"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "industry distribution",
-                  "2024 年；访问 2026-09-15"
+                  "现行页面；核读2026-10-08，未单列资料年"
                 ],
                 "evidence_type": "industry distribution",
                 "id": "r2-pay-2",
-                "limitation": "页面对行业数据同样标注取自同族母职业 35-3023.00；行业分布描述统计分类，不提供行业工资水平。",
+                "limitation": "母职业35-3023.00：住宿餐饮87%、其他13%；不是咖啡师行业工资或雇主类型分布。",
                 "market": "美国",
                 "name": "O*NET 35-3023.01 行业分布",
-                "period": "2024 年；访问 2026-09-15",
+                "period": "现行页面；核读2026-10-08，未单列资料年",
                 "publisher": "O*NET OnLine",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/industry/35-3023.01"
@@ -32486,6 +32497,118 @@
                 "publisher": "O*NET OnLine",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/summary/35-3023.00"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "official statistical methods",
+                  "May2025"
+                ],
+                "evidence_type": "official statistical methods",
+                "id": "oews-methods",
+                "limitation": "涵盖全职与兼职受雇人员；工资含小费、佣金和生产奖金，排自雇及加班溢价；年化2,080小时非实际个人工时。",
+                "market": "美国",
+                "name": "BLS May2025 OEWS技术说明",
+                "period": "May2025",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "official employment trends",
+                  "2025—2035"
+                ],
+                "evidence_type": "official employment trends",
+                "id": "ep-current",
+                "limitation": "美国母职业35-3023.00（Fast Food and Counter Workers）2025年3,855,900人，2035年4,079,100人，增长6%，年均空缺827,400；均非咖啡师细分统计，也非AI归因。",
+                "market": "美国",
+                "name": "O*NET咖啡师页面2025—2035全国就业趋势（母职业35-3023.00）",
+                "period": "2025—2035",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/localtrends/35-3023.01"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "official occupational standard directory",
+                  "2022年"
+                ],
+                "evidence_type": "official occupational standard directory",
+                "id": "cn-coffee-code",
+                "limitation": "第6项咖啡师4-03-02-08；目录非标准全文，不支持工资与具体学历/等级条件。",
+                "market": "中国大陆",
+                "name": "人社部2022年国家职业技能标准颁布目录",
+                "period": "2022年",
+                "publisher": "人力资源和社会保障部",
+                "scope": "partial_mapping",
+                "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/rcrs_4225/jnrc/zyyjnpj/202208/W020220805349190578672.pdf"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "official wage statistics",
+                  "2025年数据；2026-05-15发布"
+                ],
+                "evidence_type": "official wage statistics",
+                "id": "cn-wages-current",
+                "limitation": "住宿和餐饮业非私营62,461、私营55,123元/年税前均值；5人及以上法人单位，不含个体工商户/自由职业者，非咖啡师工资分布。",
+                "market": "中国大陆",
+                "name": "国家统计局《2025年城镇单位就业人员年平均工资情况》",
+                "period": "2025年数据；2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "law",
+                  "2025-09-12修正；2025-12-01施行"
+                ],
+                "evidence_type": "law",
+                "id": "cn-food-law",
+                "limitation": "第33、44、45、47、54、56、63条食品经营卫生、培训、健康管理与主体责任；不赋予每位咖啡师召回/恢复营业授权。",
+                "market": "中国大陆",
+                "name": "《中华人民共和国食品安全法》2025修正版",
+                "period": "2025-09-12修正；2025-12-01施行",
+                "publisher": "全国人大常委会公报／国家市场监督管理总局法规库",
+                "scope": "jurisdiction_specific",
+                "url": "https://sjfg.samr.gov.cn/law/file/pdf/3238901/1763351546670.pdf"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "law",
+                  "2021-11-01施行"
+                ],
+                "evidence_type": "law",
+                "id": "cn-pipl",
+                "limitation": "金融账户属于第28条敏感个人信息；第29—30条单独同意及告知要求；按真实信息类别与适用例外判断，非海外通用支付规则。",
+                "market": "中国大陆",
+                "name": "《中华人民共和国个人信息保护法》",
+                "period": "2021-11-01施行",
+                "publisher": "国家市场监督管理总局",
+                "scope": "jurisdiction_specific",
+                "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "official food safety guidance",
+                  "本次核读2026-10-08"
+                ],
+                "evidence_type": "official food safety guidance",
+                "id": "fda-allergens",
+                "limitation": "过敏原可引发严重反应；美国标签要求不能当中国法律，门店控制步骤另核适用规程。",
+                "market": "美国",
+                "name": "FDA Food Allergies",
+                "period": "本次核读2026-10-08",
+                "publisher": "U.S. Food and Drug Administration",
+                "scope": "jurisdiction_specific",
+                "url": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies?lv=true"
               }
             ]
           },
@@ -33063,7 +33186,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "方向": "价目与菜单与说明文字"
+            "方向": "记录草稿与人工复核"
           }
         ],
         "evidence_intro": {
@@ -34732,8 +34855,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-context"
+              "onet-outlook",
+              "bls-ooh"
             ],
             "id": "crisis-escalation",
             "mitigation": {
@@ -34764,8 +34887,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-context"
+              "onet-wage"
             ],
             "id": "record-material-privacy",
             "mitigation": {
@@ -34796,7 +34918,6 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
               "onet-context"
             ],
             "id": "material-harm",
@@ -34829,7 +34950,7 @@
             },
             "evidence_refs": [
               "onet",
-              "onet-context"
+              "bls-ooh"
             ],
             "id": "record-custody",
             "mitigation": {
@@ -34860,8 +34981,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-context"
+              "bls-ooh"
             ],
             "id": "supervision-referral",
             "mitigation": {
@@ -35356,10 +35476,10 @@
             "ai_heading": "AI 会影响咖啡师的工资吗？",
             "driver_heading": "哪些行业与岗位可能涉及这个职业？",
             "official_heading": "中国大陆薪资参考（行业代理口径，非本职业工资）",
-            "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
+            "scenario_caption": "训练、岗位任务与核对建议（编辑整理，非工资统计）",
             "scenario_heading": "咖啡师在中国大陆通常从哪里起步？",
             "scenario_interpretation_label": "说明与核对建议",
-            "scenario_role_label": "学历背景",
+            "scenario_role_label": "训练与授权类别",
             "scenario_value_label": "常见岗位方向"
           },
           "us_growth": {
@@ -35465,7 +35585,7 @@
             }
           },
           {
-            "fact_ref": "us-employment-2025",
+            "fact_ref": "us-employment-current-2025",
             "指标": "就业 · 就业规模",
             "数值": {
               "$item": "baristas.us-salary.career-snapshot-secondary-locale.19",
@@ -35481,7 +35601,7 @@
             }
           },
           {
-            "fact_ref": "us-growth-2025-2035",
+            "fact_ref": "us-growth-current-2025",
             "指标": "就业 · 增长率",
             "数值": {
               "$item": "baristas.us-salary.career-snapshot-secondary-locale.21",
@@ -35497,7 +35617,7 @@
             }
           },
           {
-            "fact_ref": "us-openings-2025-2035",
+            "fact_ref": "us-openings-current-2025",
             "指标": "就业 · 年均职位空缺",
             "数值": {
               "$item": "baristas.us-salary.career-snapshot-secondary-locale.23",
@@ -35735,7 +35855,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最低 10%",
+            "label": "第10分位",
             "value": {
               "$fact": "us-wage-low10-2025",
               "field": "display_value"
@@ -35763,7 +35883,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最高 10%",
+            "label": "第90分位",
             "value": {
               "$fact": "us-wage-high10-2025",
               "field": "display_value"
@@ -36362,7 +36482,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中国大陆行业与岗位大类口径（证据不足）",
+            "label": "中国职业名称代码与行业工资边界",
             "secondary_value": null,
             "value": {
               "$item": "baristas.profile.onet-structured-fields-block.3",
@@ -37516,50 +37636,54 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "证据不足：本次已核未取得咖啡师细分的本行工资中位数。",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
         "measure": "不适用：来源未公布该字段",
         "occupation_scope": "咖啡师",
         "period": "不适用：来源未公布该字段",
         "source_refs": [
-          "operations"
+          "onet-wages",
+          "nbs"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "证据不足：本次已核未取得咖啡师细分的本行工资中位数。",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
         "measure": "不适用：来源未公布该字段",
         "occupation_scope": "咖啡师",
         "period": "不适用：来源未公布该字段",
         "source_refs": [
-          "operations"
+          "onet-wages",
+          "nbs"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "证据不足：本次已核未取得咖啡师细分的本行工资中位数。",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
         "measure": "不适用：来源未公布该字段",
         "occupation_scope": "咖啡师",
         "period": "不适用：来源未公布该字段",
         "source_refs": [
-          "operations"
+          "onet-wages",
+          "nbs"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "证据不足：本次已核未取得咖啡师细分的本行工资中位数。",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
         "measure": "不适用：来源未公布该字段",
         "occupation_scope": "咖啡师",
         "period": "不适用：来源未公布该字段",
         "source_refs": [
-          "operations"
+          "onet-wages",
+          "nbs"
         ]
       },
       {
@@ -37717,6 +37841,42 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "3,855,900人（母职业35-3023.00）",
+        "fact_id": "us-employment-current-2025",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "35-3023.00 Fast Food and Counter Workers；不是咖啡师细分",
+        "period": "2025年",
+        "source_refs": [
+          "ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "6%（母职业35-3023.00，非AI归因）",
+        "fact_id": "us-growth-current-2025",
+        "market": "美国",
+        "measure": "总体就业增长率",
+        "occupation_scope": "35-3023.00 Fast Food and Counter Workers；不是咖啡师细分",
+        "period": "2025—2035年",
+        "source_refs": [
+          "ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "827,400个/年（母职业35-3023.00）",
+        "fact_id": "us-openings-current-2025",
+        "market": "美国",
+        "measure": "预测期年均职位空缺",
+        "occupation_scope": "35-3023.00 Fast Food and Counter Workers；不是咖啡师细分",
+        "period": "2025—2035年",
+        "source_refs": [
+          "ep-current"
+        ]
       }
     ]
   },
@@ -37725,7 +37885,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 35-3023.01 · Job Zone 1–2 · 入门准备低 · Bright Outlook",
@@ -37776,7 +37936,7 @@
       "text": "咖啡师"
     }
   },
-  "source_content_sha256": "2d345355b51ed7b0a8d933df259379af471fe4ff9bb96f42b439358250399bc7",
+  "source_content_sha256": "3d9da35fca2756cb70d4e3dfd596baea72b6ef24495fb6c4c830b61280623430",
   "subject": {
     "canonical_slug": "baristas",
     "name": "咖啡师",

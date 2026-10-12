@@ -9055,18 +9055,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.03.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            2,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.03.mitigation": {
         "ref": {
@@ -9144,18 +9134,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.04.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            3,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.04.mitigation": {
         "ref": {
@@ -9233,18 +9213,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.05.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            4,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.05.mitigation": {
         "ref": {
@@ -11936,28 +11906,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.href": {
-        "ref": {
-          "id": "agricultural-sciences-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.20",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.label": {
         "ref": {
@@ -23560,7 +23510,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS Table 1.2的25-1041单一职业：2025年10,900人→2035年11,200人，净增300人，增长2.9%（OOH取整3%），年均800个职位空缺。 O*NET仍展示旧期2024年10,700人、2024—2034增长3%—4%、年均800空缺；两个基期分开，不拼接。"
+              "BLS Table 1.2的25-1041单一职业：2025年10,900人→2035年11,200人，净增300人，增长2.9%（OOH取整3%），年均800个职位空缺。O*NET当前页就业基年也为2025，不能把未取得当期存档的旧期人数与当前预测拼接。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.profile.onet-structured-fields-block.4",
@@ -24791,7 +24741,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS2025年5月工资与2025—2035就业表；O*NET旧期另标"
+              "BLS2025年5月工资与2025—2035就业表；职业工资与预测分别使用。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.ai-impact.ai-impact-table.21",
@@ -24966,7 +24916,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑纸面试验按课程准备、评分反馈、研究记录三类任务设计；并非实际采用或效果对比。"
+              "按教学为主、教学与科研结合、科研与研究生培养三种职责重心作编辑比较；不是按院校类型分类，也没有AI实际采用、效果或任务比重数据。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.ai-impact.ai-impact-table.33",
@@ -24980,7 +24930,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "虚构试验：只输入G01题面，草拟六课目标和练习；人工逐项查是否偏离给定数据与20分钟安排，不声称比教师备课更快。"
+              "教学为主的编辑试验：可草拟课程目标、讲义及评分反馈；需人工核农业知识、难度和课程目标。未取得本方向采用率或备课提效结果。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.ai-impact.ai-impact-table.34",
@@ -24994,7 +24944,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "知识准确性、难度分层与教学目标的匹配必须人工判断与修订。"
+              "教师核知识准确性与教学安排、评分依据和学生反馈，承担教学判断；不能把工具草稿直接作为真实成绩或胜任证明。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.ai-impact.ai-impact-table.35",
@@ -25008,7 +24958,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "虚构试验：按固定R1—4量表草拟甲乙评分与反馈；作者独立核甲4/8乙8/8，不直接写入真实成绩。"
+              "教学与科研结合的编辑试验：可整理课程素材、研究记录及文献检索线索；必须区分可验证文献、已有数据与工具生成内容，不宣称处理提速。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.ai-impact.ai-impact-table.36",
@@ -25022,7 +24972,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "评分标准、主观题评判与个性化反馈的内容仍由教师负责。"
+              "人员复核教学与研究材料的准确性、方法及引用，依机构职责组织课程、研究和学生指导；工具不代替署名责任或科研结论。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.ai-impact.ai-impact-table.37",
@@ -25036,7 +24986,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "虚构试验：整理G01计数、率、百分点及局限；不得虚构文献、把一次数据当因果或声称研究处理提速。"
+              "科研与研究生培养的编辑试验：可整理研究记录、文献线索和学生草稿中的待核问题；未取得本方向实际采用或效果实测。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.ai-impact.ai-impact-table.38",
@@ -25050,7 +25000,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "研究设计、因果解释、结论与发表伦理由研究者负责。"
+              "人员核研究设计、原始证据、学生研究训练与成果评价；不虚构文献或从一次资料推出因果，具体指导及审批权限依机构安排。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.ai-impact.ai-impact-table.39",
@@ -25390,7 +25340,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得AI对农业教师岗位数量的因果研究。BLS Table1.2的2025—2035单一职业25-1041为10,900→11,200人、净增300、增长2.9%、年均800空缺；OOH增长取整3%。旧O*NET2024—2034为3%—4%；就业预测与AI作用是不同问题，不互相证明。"
+              "证据不足：未取得AI对农业教师岗位数量的因果研究。BLS 2025—2035总体就业预测，非AI归因：25-1041就业10,900→11,200人，增长2.9%，年均800空缺；不能据此判断AI单独造成的岗位变化。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.ai-impact.ai-impact-table.63",
@@ -27001,7 +26951,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS2025年5月25-1041全国工资行｜https://www.onetonline.org/link/localwages/25-1041.00?st=NE；BLS Table1.2 2025—2035就业｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET2024行业与旧期就业另列｜https://www.onetonline.org/link/details/25-1041.00"
+              "OEWS2025年5月25-1041全国工资行｜https://www.onetonline.org/link/localwages/25-1041.00?st=NE；BLS Table1.2 2025—2035就业｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET2025行业分布｜https://www.onetonline.org/link/details/25-1041.00"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.8",
@@ -27172,7 +27122,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS EP2025全国25-1041就业人数；不同于O*NET旧期2024的10,700人，不能混基年。；BLS Table1.2 25-1041就业，2025—2035｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "BLS EP2025全国25-1041就业人数，2025—2035预测；https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm。基年人数不能与其他时期混用。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.20",
@@ -27384,7 +27334,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得教育服务行业内25-1041的可核工资中位数；O*NET details明列2024该职业99%在教育服务行业，分布不是工资。"
+              "证据不足：本页未取得教育服务行业内25-1041的可核工资中位数；O*NET details明列2025该职业99%在教育服务行业，分布不是工资。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.35",
@@ -27427,7 +27377,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得其余行业25-1041可核工资中位数；O*NET2024行业分布其余1%，并非招聘量。"
+              "证据不足：本页未取得其余行业25-1041可核工资中位数；O*NET2025行业分布其余1%，并非招聘量。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.38",
@@ -28768,7 +28718,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 25-1041.00 详细工作活动，用于设计入行练习任务。"
+              "O*NET25-1041行业分布，教育服务业就业占比；不验证入行练习、人格或个人表现。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.fit.personality-fit-block.64",
@@ -29159,7 +29109,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "抄袭、数据造假或成果署名不当会损害学术声誉，并可能触发学术不端处理。"
+              "编辑风险情境：投稿内容若含未核实引用、虚构数据或贡献归属不清，应按实际投稿与院校学术规范复核；O*NET只支持科研发表任务，不证明本情境必然属于学术不端。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.risk.career-risk-cards.28",
@@ -29272,13 +29222,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本链接为中国教师法，支持教师职责、资格和聘任规定；资格条例见来源登记的独立链接，不是风险发生率研究。"
+              "O*NET美国25-1041教学、评价、学生指导与科研任务；支持风险情境的任务前提，不规定中国院校控制流程。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.risk.career-risk-cards.36",
           "source_refs": [
-            "editor",
-            "operations"
+            "ep"
           ],
           "type": "prose"
         },
@@ -29287,12 +29236,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 25-1041.00 详细工作活动与职业摘要（美国，单一职业口径）。"
+              "中国教师法第7—9条教师权利、义务和教学条件；不提供事故率、数据保护细则或学术不端处理规程。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.risk.career-risk-cards.37",
           "source_refs": [
-            "ep"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29301,12 +29250,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本页编辑归纳（条件性建议），不代表院校统一制度或强制流程。"
+              "中国教师资格条例用于资格制度及认定主体；不用于学生个人信息保护或院校AI采用证据。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.risk.career-risk-cards.38",
           "source_refs": [
-            "ep"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31053,7 +31002,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS Table1.2的2025—2035单一职业25-1041为10,900→11,200人、净增300、增长2.9%、年均800空缺；OOH增长取整3%。 O*NET2024行业分布教育服务99%、其余1%；美国预测不能代中国招聘或个人保证。"
+              "BLS Table 1.2的25-1041单一职业：2025年10,900人→2035年11,200人，净增300人，增长2.9%（OOH取整3%），年均800个职位空缺。O*NET2025行业分布教育服务99%、其余1%；美国预测不能代中国招聘或个人保证。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.market-signals.market-signal-card.8",
@@ -31096,7 +31045,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS Table1.2 2025年该职业10,900人，O*NET旧期2024为10,700；2024行业分布另外标年。"
+              "BLS Table1.2基年2025该职业10,900人；O*NET行业分布也为2025，教育99%、其他1%。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.market-signals.market-signal-card.11",
@@ -31194,7 +31143,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS Table1.2增长2.9%、净增300人、年均800空缺；OOH增长取整3%，不用旧O*NET3%—4%拼当前基期。"
+              "BLS Table1.2增长2.9%、净增300人、年均800空缺；OOH增长取整3%。统计范围与期次必须一致，不拼接其他时期。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.market-signals.market-signal-card.18",
@@ -31362,7 +31311,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS Table1.2，25-1041，2025—2035；O*NET旧期另列2024—2034。"
+              "BLS Table1.2，25-1041单一职业，2025—2035。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.market-signals.market-signal-card.30",
@@ -31859,7 +31808,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮依据O*NET25-1041任务、教育及工作情境；OEWS2025年5月全国年薪；BLS Table1.2 2025—2035就业；NBS2025宽类别工资；教师法、教师资格条例及高等教育法。旧O*NET就业另标2024—2034。"
+              "依据O*NET25-1041任务、教育及工作情境；OEWS2025年5月全国年薪；BLS Table1.2 2025—2035就业；NBS2025宽类别工资；教师法、教师资格条例及高等教育法。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.sources.source-card.2",
@@ -31893,7 +31842,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "美国工资OEWS与就业BLS EP分别核范围，旧期O*NET另列；中国工资只是NBS宽类别背景。中国资格、教师职务与聘任依法律，本文纸面作品、任务比较和适配提问均为编辑示例，不能外推实际效果或个人胜任。"
+              "美国工资OEWS与就业BLS EP分别核范围与期次；中国工资只是NBS宽类别背景。中国资格、教师职务与聘任依法律，本文纸面作品、任务比较和适配提问均为编辑示例，不能外推实际效果或个人胜任。"
             ]
           },
           "id": "agricultural-sciences-teachers-postsecondary.sources.source-card.4",
@@ -31982,7 +31931,7 @@
                   "教授农业科学课程，包含教学为主以及教学科研结合人员。",
                   "美国职业档案支持课程、评价及研究任务，不提供中国职业编码映射。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet",
                 "limitation": "职业身份及任务；不是AI或人格验证研究。",
                 "market": "美国",
@@ -31998,14 +31947,14 @@
                   "2025年高校教师大组中位85,330美元，农业细项98,700美元。",
                   "大组2025—2035年均103,300空缺；农业细项增长取整3%，两种范围分开。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "bls",
                 "limitation": "大组工资85,330，农业细项98,700；大组和细项分别使用，不混职业范围。",
                 "market": "美国全国",
                 "name": "BLS OOH：Postsecondary Teachers",
                 "period": "2025工资；2025—2035就业",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "contextual",
+                "scope": "parent",
                 "url": "https://www.bls.gov/ooh/education-training-and-library/postsecondary-teachers.htm"
               },
               {
@@ -32014,7 +31963,7 @@
                   "包括讲授、学生指导、实验室及田间监督、研究发表和委员会工作。",
                   "补充任务可包括系主任等行政职责，不能断言农业教师均无管理权限。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "ep",
                 "limitation": "支持教学、研究、学生指导及部分行政任务；本页编辑练习及风险建议非该来源规定。",
                 "market": "美国",
@@ -32030,7 +31979,7 @@
                   "2025年5月全国年薪P10/25/50/75/90为50,870/66,410/98,700/126,850/163,150美元。",
                   "读取United States行；同页Nebraska中位97,640美元不作为全国值。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "oews",
                 "limitation": "P10/25/50/75/90=50,870/66,410/98,700/126,850/163,150美元，网页含Nebraska不可混全国。",
                 "market": "美国全国；仅United States行",
@@ -32046,7 +31995,7 @@
                   "非私营129,441、私营71,590元/年；教育对应133,539和63,908元/年。",
                   "非私营科研技术182,064；规上企业专业技术155,491、办事人员94,936元/年，类别分别标明。"
                 ],
-                "evidence_type": "industry_proxy",
+                "evidence_type": "primary_document",
                 "id": "nbs",
                 "limitation": "宽行业、单位类型及规上企业岗位类别；不是农业教师职业工资、分城市待遇或招聘需求。",
                 "market": "中国大陆；该调查范围",
@@ -32062,14 +32011,14 @@
                   "2000年教育部令10号；第6—8条列职责、学历及教育教学能力条件。",
                   "第9条对博士或拟聘副教授以上申请者规定认定条件，并非自动取得教师资格。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnclass",
                 "limitation": "资格认定条件；第9条对拟聘副教授以上或博士学位申请者规定条件，不代表已获资格或聘任。未用于中国职业编码。",
                 "market": "中国大陆",
                 "name": "教育部：《教师资格条例》实施办法",
                 "period": "2000教育部令10号；页面2021",
                 "publisher": "中华人民共和国教育部",
-                "scope": "contextual",
+                "scope": "parent",
                 "url": "https://www.moe.gov.cn/jyb_xxgk/xxgk/zhengce/guizhang/202112/t20211206_585106.html"
               },
               {
@@ -32078,7 +32027,7 @@
                   "99%每天电子邮件、89%每天面对面、55%每天公开演讲。",
                   "97%任务目标很大自由、73%决策很大自由，75%通常周工时超过40小时。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "privacy",
                 "limitation": "频次、自由度及竞争等选项比例，不是人格预测、隐私法规或因果风险研究。",
                 "market": "美国受访资料",
@@ -32094,7 +32043,7 @@
                   "2025年全国招聘广告中Office提及3%。",
                   "Epic Systems、Google Docs及Excel、Outlook、PowerPoint、Word列出但比例Not Available。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "facilities",
                 "limitation": "Office3%，其余列出软件无比例；不是AI采用、培训资格或教学效果。",
                 "market": "美国全国招聘广告",
@@ -32110,14 +32059,14 @@
                   "1995年国务院令188号；第4条列教师资格分类。",
                   "第13条受委托高校限认定本校任职或拟聘人员，其余依行政隶属核主体。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "operations",
                 "limitation": "依法资格、分类、考试和认定；受委托高校限本校任职/拟聘人员，不是可选认证目录。",
                 "market": "中国大陆",
                 "name": "教育部：《教师资格条例》",
                 "period": "1995国务院令188号",
                 "publisher": "中华人民共和国教育部",
-                "scope": "contextual",
+                "scope": "parent",
                 "url": "https://www.moe.gov.cn/s78/A10/moe_918/tnull_11555.html"
               },
               {
@@ -32126,14 +32075,14 @@
                   "分析培训需求、准备材料、交付培训并评价其效果。",
                   "培训对象可包括员工和客户，不限企业内部；用于相邻任务对照。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "hr",
                 "limitation": "面向员工或客户的培训需求、材料、交付及评价；相邻任务不是农业教师门槛。",
                 "market": "美国",
                 "name": "O*NET13-1151：Training and Development Specialists",
                 "period": "2026更新",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "contextual",
+                "scope": "cross_occupation",
                 "url": "https://www.onetonline.org/link/details/13-1151.00"
               },
               {
@@ -32142,14 +32091,14 @@
                   "覆盖有薪兼职及全职，排除自雇、合伙人、私人家庭雇员和无薪家庭工作者。",
                   "正常税前工资含生产奖金和佣金等，排除加班溢价和非生产奖金等。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "health",
                 "limitation": "覆盖有薪兼职/全职，排除自雇；正常税前工资含生产奖金佣金等，排除加班溢价非生产奖金等。",
                 "market": "美国OEWS",
                 "name": "BLS OEWS Frequently Asked Questions",
-                "period": "本轮核对2026-10-02",
+                "period": "动态OEWS方法说明；工资数据另标统计期",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "contextual",
+                "scope": "parent",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
@@ -32158,14 +32107,14 @@
                   "现行页面列2018年第二次修正；第46条规定高校教师资格条件。",
                   "第47条列助教、讲师、副教授、教授，第48条聘任、第49条教学辅助人员分别说明。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "ilo",
                 "limitation": "46资格、47教师职务、48聘任、49辅助人员；不能替代具体职位公告或个人授权。",
                 "market": "中国大陆",
                 "name": "教育部：《中华人民共和国高等教育法》",
                 "period": "1998制定；2018第二次修正",
                 "publisher": "中华人民共和国教育部",
-                "scope": "contextual",
+                "scope": "parent",
                 "url": "https://hudong.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/202204/t20220421_620257.html"
               },
               {
@@ -32174,14 +32123,14 @@
                   "1993年制定、2009年修正；第7条包括指导并评定学生学业。",
                   "第10—13条资格条件、学历或考试路线及认定；第17条平等聘任并签合同。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "editor",
                 "limitation": "7评定学业、10—13资格学历/考试与认定、17聘任合同；不支持个体人格、AI性能或作者虚构试验效果。",
                 "market": "中国大陆",
                 "name": "教育部：《中华人民共和国教师法》",
                 "period": "1993制定；2009修正",
                 "publisher": "中华人民共和国教育部",
-                "scope": "contextual",
+                "scope": "parent",
                 "url": "https://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/tnull_1314.html"
               },
               {
@@ -32190,7 +32139,7 @@
                   "25-1041单位千人：2025年10.9→2035年11.2、净增0.3、增长2.9%、年均空缺0.8。",
                   "典型入门博士或专业学位；相关职业经验None、在职培训None，不等同个人录用保证。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "nist",
                 "limitation": "单位千人：10.9→11.2、净增0.3、增长2.9%、年均0.8空缺；典型博士或专业学位，相关经验及OJT None。",
                 "market": "美国全国",
@@ -32201,17 +32150,17 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
-                  "details页明确2024行业分布教育服务99%，其他1%。",
-                  "独立industry页不标年；此处年份来自同职业details，比例不表示工资或招聘增长。"
+                  "2025教育服务99%、其他1%。",
+                  "年度来自同职业details；就业分布不是工资或招聘增长。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "arxiv",
                 "limitation": "教育服务99%、其他1%；就业分布不是招聘增长、工资或AI效果。",
                 "market": "美国",
                 "name": "O*NET25-1041行业分布",
-                "period": "details明确2024；industry页不标年",
+                "period": "2025行业分布",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/25-1041.00"
@@ -32222,7 +32171,7 @@
                   "Job Zone5为大量准备；新人学历回答55%博士、27%博士后培训、14%硕士。",
                   "博士后培训不是学位；这些受访回答不等同BLS典型学历或中国岗位分布。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "weforum",
                 "limitation": "新人55%博士、27%博士后培训、14%硕士；不同于BLS典型学历，非中国聘任分布。",
                 "market": "美国受访资料",
@@ -32238,14 +32187,14 @@
                   "管理自然科学研究人员、预算和项目相关资源。",
                   "可开展本人研究；用于任务准备对照，不证明农业教师转岗成功率。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "employer",
                 "limitation": "研究人员、预算和项目管理，也可开展本人研究；不保证由教师经验自动转岗。",
                 "market": "美国",
                 "name": "O*NET11-9121：Natural Sciences Managers",
                 "period": "2026更新",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "contextual",
+                "scope": "cross_occupation",
                 "url": "https://www.onetonline.org/link/details/11-9121.00"
               },
               {
@@ -32254,30 +32203,30 @@
                   "研究土壤、植物及作物生产相关问题。",
                   "原任务也列讲授课程、研讨会或工作坊，不能据科学家名称排除授课。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "purchasing-managers",
                 "limitation": "研究土壤植物并可讲授课程/研讨/工作坊；纠正科学家绝不教学的二分。",
                 "market": "美国",
                 "name": "O*NET19-1013：Soil and Plant Scientists",
                 "period": "2026更新",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "contextual",
+                "scope": "cross_occupation",
                 "url": "https://www.onetonline.org/link/details/19-1013.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "农业工程设计及相关实施任务，用于工程方案与教师课程产出的对照。",
-                  "复用本目标此前实际读取的任务原文，不作为本职业工资或统一执业许可依据。"
+                  "仅用于相邻职业任务对照，不作为农业教师工资、AI效果或统一资格依据。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-1",
                 "limitation": "农业工程设计及相关实施任务，不用于教师工资或统一许可。",
                 "market": "美国",
                 "name": "O*NET17-2021：Agricultural Engineers",
-                "period": "本目标此前原文读取，本页具体复用",
+                "period": "动态职业档案；统计年度不适用于任务描述",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "contextual",
+                "scope": "cross_occupation",
                 "url": "https://www.onetonline.org/link/details/17-2021.00"
               },
               {
@@ -32286,30 +32235,30 @@
                   "研究动物营养、饲养和繁育等问题。",
                   "只支持相邻专业研究任务，不支持农业教师AI采用或转岗概率。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-2",
                 "limitation": "动物营养、饲养及繁育研究；不是农业教师任务采用或转岗成功率。",
                 "market": "美国",
                 "name": "O*NET19-1011：Animal Scientists",
                 "period": "2026更新",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "contextual",
+                "scope": "cross_occupation",
                 "url": "https://www.onetonline.org/link/details/19-1011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "农业技术任务包括采样、实验及记录分析，不一概排除方法判断。",
-                  "复用本目标此前任务原文；19-4012农业技术员不是19-4013食品技术员全部任务。"
+                  "仅用于相邻职业任务对照，不作为农业教师工资、AI效果或统一资格依据。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-3",
                 "limitation": "实验、采样与分析等任务，不统一排除方法参与和判断；与食品技术员并非完全同一细项。",
                 "market": "美国",
                 "name": "O*NET19-4012：Agricultural Technicians",
-                "period": "本目标此前原文读取，本页具体复用",
+                "period": "动态职业档案；统计年度不适用于任务描述",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "contextual",
+                "scope": "cross_occupation",
                 "url": "https://www.onetonline.org/link/details/19-4012.00"
               },
               {
@@ -32318,14 +32267,14 @@
                   "教师等通常按年计酬且不一定全年工作2,080小时，只公布年薪估计。",
                   "本职业所读全国工资表只有年薪，不用年薪除2,080编造官方时薪。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "census",
                 "limitation": "教师等通常按年计酬且不工作2080小时，仅发布年薪；不能把本职业年薪除2080作官方时薪。",
                 "market": "美国OEWS",
                 "name": "BLS OEWS May 2025 Survey Methods",
                 "period": "2025年5月方法",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "contextual",
+                "scope": "parent",
                 "url": "https://www.bls.gov/oes/methods_25.pdf"
               },
               {
@@ -32334,7 +32283,7 @@
                   "职业兴趣SI，S87、I73是职业维度描述；工作能力包含口头表达和推理。",
                   "兴趣与能力描述不提供MBTI、九型、大五、IQ或EI个人筛选阈值。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "msresearch",
                 "limitation": "SI；S87/I73，口头表达及推理等工作能力，不是MBTI、九型、大五、IQ或EI预测研究。",
                 "market": "美国职业描述",
@@ -32345,17 +32294,17 @@
                 "url": "https://www.onetonline.org/link/details/25-1041.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
-                  "仍列2024年10,700人、2024—2034增长3%—4%、年均800空缺。",
-                  "与BLS2025—2035当前预测分开使用，不把旧期人数拼成2025基年。"
+                  "2025年10,900人、2025—2035增长类别3%—4%、年均800空缺。",
+                  "O*NET增长类别与BLS Table1.2的2.9%是不同展示方式；不拼接其他基期。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet-wages",
-                "limitation": "旧期10,700人、3%—4%、800年均；与BLS2025—2035分开，不当当前基期。",
+                "limitation": "全国单一职业2025就业与2025—2035预测；动态页面不提供旧期存档。",
                 "market": "美国",
-                "name": "O*NET25-1041旧期就业资料",
-                "period": "2024人数；2024—2034预测",
+                "name": "O*NET25-1041当前就业资料",
+                "period": "2025人数；2025—2035预测",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/25-1041.00"
@@ -32366,14 +32315,14 @@
                   "可设计学生学习成果评价、指导学生、管理人员和预算。",
                   "行政管理也有评价及教学支持任务，具体个人权限不能只由职业名称判断。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "archivists",
                 "limitation": "可设计学习成果评价、指导学生、管理人员及预算，不与所有教学评价互斥。",
                 "market": "美国",
                 "name": "O*NET11-9033：Education Administrators, Postsecondary",
                 "period": "2026更新",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "contextual",
+                "scope": "cross_occupation",
                 "url": "https://www.onetonline.org/link/details/11-9033.00"
               }
             ]
@@ -32922,7 +32871,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "方向": "课程与讲义准备"
+            "方向": "教学为主"
           },
           {
             "AI主要改变": {
@@ -32937,7 +32886,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "方向": "学习评价与反馈"
+            "方向": "教学与科研结合"
           },
           {
             "AI主要改变": {
@@ -32952,7 +32901,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "方向": "科研与数据整理"
+            "方向": "科研与研究生培养"
           }
         ],
         "evidence_intro": {
@@ -33964,7 +33913,7 @@
                 }
               }
             ],
-            "title": "教学为主方向（教学型院校与职业院校）"
+            "title": "教学为主方向"
           },
           {
             "id": "supplier-cost",
@@ -34098,7 +34047,7 @@
                 }
               }
             ],
-            "title": "教学与科研并重方向（研究型大学）"
+            "title": "教学与科研结合方向"
           },
           {
             "id": "records-information",
@@ -34589,8 +34538,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "ep",
-              "editor"
+              "bls",
+              "facilities"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -34621,8 +34570,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "ep",
-              "editor"
+              "bls",
+              "facilities"
             ],
             "id": "record-version",
             "mitigation": {
@@ -34653,8 +34602,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "ep",
-              "editor"
+              "bls"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34685,8 +34633,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "ep",
-              "privacy"
+              "bls"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -34717,8 +34664,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "ep",
-              "editor"
+              "bls"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -34749,8 +34695,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "privacy",
-              "ilo"
+              "onet",
+              "employer"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -37700,7 +37646,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "任务：课程设计 · 讲授与实验指导 · 学习评价",
@@ -37751,7 +37697,7 @@
       "text": "农业教师：高等教育阶段的职业内容、薪资与就业前景"
     }
   },
-  "source_content_sha256": "49f70c4d675be36b93e2a4075e837813b6b44974217ef1da0a205829d93992f5",
+  "source_content_sha256": "85776634d2f84ccb2224234b3b7ca770f004d459cb291cfe0c38a26b17a766a4",
   "subject": {
     "canonical_slug": "agricultural-sciences-teachers-postsecondary",
     "name": "农业教师",

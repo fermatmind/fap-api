@@ -1705,6 +1705,12 @@
       },
       "item:agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.9": {
         "status": "mapped"
+      },
+      "item:agricultural-and-food-science-technicians.us-salary.cross-review-industry_period": {
+        "status": "pending_mapping"
+      },
+      "item:agricultural-and-food-science-technicians.us-salary.cross-review-outlook_period": {
+        "status": "pending_mapping"
       }
     },
     "module_order": [
@@ -12445,14 +12451,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.industry_period": {
-        "ref": {
-          "id": "us-wage-2025",
-          "path": [
-            "period"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.industry_rows.01.industry": {
         "ref": {
@@ -12733,14 +12733,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.outlook_period": {
-        "ref": {
-          "id": "us-growth-2025-2035",
-          "path": [
-            "period"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.wage_heading": {
         "ref": {
@@ -23783,7 +23777,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "技术员负责执行、记录、分析结果并编制描述性报告，科学家或负责人定义要求与判定边界，质量岗负责复核。"
+              "技术员可执行、记录、分析结果并编制描述性报告；研究要求、数据复核、报告签发和生产放行分别按方案及机构授权分工，不能由职业名称统一指定质量岗复核。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.profile.career-quick-answers-block.17",
@@ -24034,7 +24028,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "入门通常有带教，等级与路径需问清。"
+              "美国BLS描述入职后通常接受在岗培训，可跟随有经验的技术员或科学家学习；中国岗位是否带教、培训期限和考核条件须核雇主，不把美国典型路径泛作全部入门安排。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.profile.career-quick-answers-block.34",
@@ -24651,7 +24645,7 @@
             "bls",
             "operations",
             "employer",
-            "cnclass",
+            "cnclass-cross-repair",
             "onet",
             "oews",
             "bls"
@@ -24907,7 +24901,7 @@
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.27",
           "source_refs": [
-            "cnclass"
+            "cnclass-cross-repair"
           ],
           "type": "prose"
         },
@@ -24921,7 +24915,7 @@
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.28",
           "source_refs": [
-            "cnclass"
+            "cnclass-cross-repair"
           ],
           "type": "prose"
         },
@@ -25014,7 +25008,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "方法选择、异常判定与结果放行仍由具备资质的复核人负责。"
+              "技术员可在职责内分析结果、按方法判断异常并提出复测；方法批准、对外签发与生产放行分别核实际资质和权限，不由AI或一个统一复核人包办。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.ai-impact.ai-impact-table.35",
@@ -27414,7 +27408,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH食品19-4013在食品制造业中位50,590，不是全部制造业；ONet52%是另一个宽行业就业占比。"
+              "BLS OOH食品19-4013在食品制造业中位50,590，不是全部制造业；本次ONet53%是另一个宽行业就业占比。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.36",
@@ -27498,7 +27492,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH食品19-4013此行业中位50,610；ONet其他25%不能当该行业单独占比。"
+              "BLS OOH食品19-4013此行业中位50,610；本次ONet其他18%不能当该行业单独占比。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.42",
@@ -27554,26 +27548,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "这里是食品科学技术员（19-4013）口径的全国中位年薪，不区分行业、地区与单位类型。"
+              "不是。中位数只表示分布的中间位置，一半从业者低于、一半高于该值，不能当作新人起薪或固定月薪。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "oews",
-            "bls"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "不是。中位数只表示分布的中间位置，一半从业者低于、一半高于该值，不能当作新人起薪或固定月薪。"
-            ]
-          },
-          "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.47",
-          "source_refs": [
+            "bls",
             "oews"
           ],
           "type": "prose"
@@ -27586,8 +27566,9 @@
               "不能。OEWS 的年薪与小时工资来自同一统计口径，小时值是统计折算，不代表每个人实际有薪时数。实际收入还取决于行业、单位类型、专业方向与季节性或加班安排，不能由全国分位推算个人到手收入。"
             ]
           },
-          "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.48",
+          "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
+            "bls",
             "oews"
           ],
           "type": "prose"
@@ -27600,10 +27581,25 @@
               "工资来自2025年5月OEWS雇员口径：食品19-4013与农业19-4012分位分别列，不混成一分布；BLS就业40,400/预测5%为合并职业。范围/产品分别核，不推个人到手收入。"
             ]
           },
+          "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.48",
+          "source_refs": [
+            "bls",
+            "oews"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "具体收入须核目标地区、雇主、农业或食品方向、合同工时及季节/加班安排；两个子职业全国分位不保证个人报价或到手收入。"
+            ]
+          },
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "oews",
-            "bls"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27661,6 +27657,34 @@
           "id": "agricultural-and-food-science-technicians.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
             "oews",
+            "bls"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "工资统计期：2025年5月；农业19-4012与食品19-4013分别列，不混分布。"
+            ]
+          },
+          "id": "agricultural-and-food-science-technicians.us-salary.cross-review-industry_period",
+          "source_refs": [
+            "bls"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "就业预测期：2025—2035；农业与食品合并职业。"
+            ]
+          },
+          "id": "agricultural-and-food-science-technicians.us-salary.cross-review-outlook_period",
+          "source_refs": [
             "bls"
           ],
           "type": "prose"
@@ -27805,7 +27829,7 @@
             "hr",
             "ep",
             "operations",
-            "cnclass",
+            "cnclass-cross-repair",
             "privacy",
             "facilities"
           ],
@@ -27816,12 +27840,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 把 19-4013.00 的兴趣代码列为 RCI（现实型居首，常规型与研究型随后）：现实型对应动手操作、仪器与田间作业，常规型对应按程序记录、核对与整理数据，研究型对应分析样品、查找原因与解释结果。验证方式是做一次虚构取样与检测记录练习，看自己是否愿意按标准方法重复操作并如实记录；兴趣代码不能推断能力或录用结果。"
+              "食品19-4013的RCI仅用于食品方向；农业19-4012为RIC（现实型、研究型、常规型）。两者描述环境偏好，不是合并职业统一标签或能力/录用标准。可分别观察食品测量记录与田间采样任务是否愿意重复。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.fit.personality-fit-block.2",
           "source_refs": [
-            "onet"
+            "onet",
+            "weforum"
           ],
           "type": "prose"
         },
@@ -27930,12 +27955,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "该职业要求按标准方法取样与测量、维护设备并如实记录数据。O*NET 兴趣代码 RCI 描述的是这些环境偏好，不是录用阈值；验证方式是做一次虚构取样与检测记录练习，并观察自己是否愿意重复操作与核对。"
+              "食品19-4013的RCI仅用于食品方向；农业19-4012为RIC（现实型、研究型、常规型）。两者描述环境偏好，不是合并职业统一标签或能力/录用标准。可分别观察食品测量记录与田间采样任务是否愿意重复。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.fit.riasec-fit-block.9",
           "source_refs": [
-            "onet"
+            "onet",
+            "weforum"
           ],
           "type": "prose"
         },
@@ -27958,12 +27984,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣代码描述职业环境偏好：现实型对应动手操作、仪器与田间作业，常规型对应按程序记录与整理数据，研究型对应分析样品与解释结果；它用于探索任务偏好，不是能力门槛。"
+              "食品19-4013的RCI仅用于食品方向；农业19-4012为RIC（现实型、研究型、常规型）。两者描述环境偏好，不是合并职业统一标签或能力/录用标准。可分别观察食品测量记录与田间采样任务是否愿意重复。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.fit.riasec-fit-block.10",
           "source_refs": [
-            "onet"
+            "onet",
+            "weforum"
           ],
           "type": "prose"
         },
@@ -27986,7 +28013,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "RCI"
+              "食品 RCI；农业 RIC"
             ]
           },
           "id": "agricultural-and-food-science-technicians.fit.riasec-fit-block.11",
@@ -28015,7 +28042,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "现实型·常规型·研究型"
+              "食品：现实型·常规型·研究型；农业：现实型·研究型·常规型"
             ]
           },
           "id": "agricultural-and-food-science-technicians.fit.riasec-fit-block.12",
@@ -28228,7 +28255,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适配看任务行为而非标签：是否愿意按标准方法重复取样与测量、如实记录并保留原始数据、在数据异常或授权不明时停下来并上报。人格与兴趣测评只提供讨论线索，不能作为录用或能力门槛。O*NET 调查显示该职业入门学历中本科学历占 32%、副学士占 23%、高中及同等学历占 17%，BLS 职业展望显示通常要求副学士学历；中国大陆从事食品检验还须符合食品检验相关要求。"
+              "适配看按方法取样、测量、记录和处理异常的行为，不以人格或兴趣筛选。食品19-4013教育反馈本科32%、副学士23%、高中及同等17%，不能套全部农业方向；BLS合并职业典型副学士，部分雇主接受高中加相关经验。中国食品检验条件另核，学历不授予签发或放行权限。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.fit.personality-fit-block.27",
@@ -28551,12 +28578,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 把该职业的兴趣代码列为 RCI（现实型居首，常规型与研究型随后），描述的是职业环境偏好：现实型对应动手操作、仪器与田间作业，常规型对应按程序记录与整理数据，研究型对应分析样品与解释结果。这只是环境偏好标签，不是能力门槛，也不能推断录用与收入。可用一次模拟取样与记录验证：你是否愿意按方法与质控要求修正方案。"
+              "食品19-4013的RCI仅用于食品方向；农业19-4012为RIC（现实型、研究型、常规型）。两者描述环境偏好，不是合并职业统一标签或能力/录用标准。可分别观察食品测量记录与田间采样任务是否愿意重复。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.fit.personality-fit-block.50",
           "source_refs": [
-            "onet"
+            "onet",
+            "weforum"
           ],
           "type": "prose"
         },
@@ -28959,7 +28987,7 @@
           },
           "id": "agricultural-and-food-science-technicians.risk.career-risk-cards.15",
           "source_refs": [
-            "privacy",
+            "onet-wages-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28974,7 +29002,7 @@
           },
           "id": "agricultural-and-food-science-technicians.risk.career-risk-cards.16",
           "source_refs": [
-            "privacy",
+            "onet-wages-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28989,7 +29017,7 @@
           },
           "id": "agricultural-and-food-science-technicians.risk.career-risk-cards.17",
           "source_refs": [
-            "privacy",
+            "onet-wages-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28999,12 +29027,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "把客户配方、检测结果或批次信息直接外发给无关第三方。"
+              "中国境内资质认定适用机构及人员的保密义务见评审准则第8条（四）。编辑核对：目标记录的访问、复核与分发权限按适用制度确认；不把食品安全法84—89条作为商业秘密保密义务依据。"
             ]
           },
           "id": "agricultural-and-food-science-technicians.risk.career-risk-cards.18",
           "source_refs": [
-            "privacy",
+            "onet-wages-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29748,7 +29776,7 @@
             "bls",
             "editor",
             "r2-pay-1",
-            "onet-wages",
+            "onet-wages-cross-repair",
             "ep"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
@@ -29788,7 +29816,7 @@
             "bls",
             "editor",
             "r2-pay-1",
-            "onet-wages"
+            "onet-wages-cross-repair"
           ],
           "title": "招聘样本与岗位名称说明",
           "type": "notice"
@@ -31156,7 +31184,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 单职业口径（19-4013.00）"
+              "O*NET 食品子职业口径（19-4013.00），非合并职业"
             ]
           },
           "id": "agricultural-and-food-science-technicians.market-signals.market-signal-card.14",
@@ -31913,7 +31941,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-02"
+              "2026-10-08（本轮限定九板块修订）"
             ]
           },
           "id": "agricultural-and-food-science-technicians.sources.source-card.3",
@@ -32413,6 +32441,54 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/19-4012.00"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "食品19-4013：制造业53%；农林牧渔业29%；其他行业18%。",
+                  "当前页面未标数据年；仅食品分支职业就业行业占比，不是全部农业技术员结构。"
+                ],
+                "evidence_type": "官方行业分布",
+                "id": "cnclass-cross-repair",
+                "limitation": "只给出行业就业占比，不含行业工资；不能据此推断中国行业结构。",
+                "market": "美国",
+                "name": "O*NET 19-4013.00 行业分布",
+                "period": "当前行业分布页面未标数据年；2026-10-08核对",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/19-4013.00"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "合并职业 2025 年中位年薪 $51,160（$24.60/小时）",
+                  "农业技术员 $49,630；食品科学技术员 $52,130（2025 年 5 月）"
+                ],
+                "evidence_type": "官方职业章节",
+                "id": "census-cross-repair",
+                "limitation": "Pay给合并及两子职业中位数，并列部分主要行业内各子职业工资；不提供所有地区、行业或雇主报价。",
+                "market": "美国",
+                "name": "U.S. BLS 职业展望手册：农业与食品科学技术员 · 工资（Pay）",
+                "period": "2025 年 5 月；访问 2026-10-02",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/agricultural-and-food-science-technicians.htm#tab-5"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "第9条人员须符合工作需要；授权签字人中级以上相关职称或同等能力及技术能力",
+                  "第8条（四）机构及人员保密义务；第11条计量溯源；第12条方法、完整数据、记录追溯与计算机信息安全。"
+                ],
+                "evidence_type": "官方技术评审准则",
+                "id": "onet-wages-cross-repair",
+                "limitation": "用于中国境内机构资质认定技术评审；学习记录不能自动授予签字、机构资质或食品生产放行权限。",
+                "market": "中国大陆",
+                "name": "检验检测机构资质认定评审准则（2023）",
+                "period": "2023-12-01施行；访问2026-10-02",
+                "publisher": "国家市场监督管理总局",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/rkjcs/art/2023/art_b97b0b1addbf4e8aaca43cb26f13883b.html"
               }
             ]
           },
@@ -34660,7 +34736,7 @@
             },
             "evidence_refs": [
               "onet",
-              "privacy"
+              "facilities"
             ],
             "id": "record-version",
             "mitigation": {
@@ -35282,7 +35358,7 @@
           "ui": {
             "ai_heading": "AI 会影响农业与食品科学技术员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "公开招聘样本（历史公告，非官方统计）",
+            "official_heading": "官方宽口径工资代理（不是招聘样本）",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
             "scenario_heading": "农业与食品科学技术员在不同学历背景下通常从哪些岗位方向开始？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -35506,8 +35582,10 @@
         "heading": "美国农业与食品科学技术员工资多少？",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
-          "$fact": "us-wage-2025",
-          "field": "period"
+          "$item": "agricultural-and-food-science-technicians.us-salary.cross-review-industry_period",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
         },
         "industry_rows": [
           {
@@ -35643,8 +35721,10 @@
         },
         "outlook_heading": "美国就业前景",
         "outlook_period": {
-          "$fact": "us-growth-2025-2035",
-          "field": "period"
+          "$item": "agricultural-and-food-science-technicians.us-salary.cross-review-outlook_period",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
         },
         "wage_column_labels": [
           "工资统计位置",
@@ -37711,7 +37791,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "RIASEC · RCI",
@@ -37762,7 +37842,7 @@
       "text": "农业与食品科学技术员"
     }
   },
-  "source_content_sha256": "0b384b5ca16ec14160ea51bc61fd68385c305f3888388df3e10450b42f4b9d90",
+  "source_content_sha256": "d662632c68765e056246ea6e15db8e5bcc03ec491e31d998dcb4130c8e20d5bd",
   "subject": {
     "canonical_slug": "agricultural-and-food-science-technicians",
     "name": "农业与食品科学技术员",

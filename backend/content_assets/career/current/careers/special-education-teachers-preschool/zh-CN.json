@@ -28208,7 +28208,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025中位64830美元，2025–2035为30500→31300、官方净增700、2.4%、年均2000空缺。端点按千人取整，不能相减改写净800；O*NET旧2024–2034为29300、年均2100不混期。"
+              "2025中位64830美元，2025–2035为30500→31300、官方净增700、2.4%、年均2000空缺。EP表以千人为单位保留一位小数，不能用舍入端点差800替代官方净增700；当前O*NET就业栏也列2025–2035，不能混入旧期29300与年均2100。"
             ]
           },
           "id": "special-education-teachers-preschool.us-salary.career-snapshot-secondary-locale.26",
@@ -28293,7 +28293,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "学段、地区、公私学校、合同、经验和岗位职责影响报价；两个行业中位是群体统计，不是同人转换雇主的固定差价。"
+              "学段、地区、公私学校、合同、经验和岗位职责影响报价；本页四项行业工资仍为未取得缺口，不能据职业中位推同人转换雇主的固定差价。"
             ]
           },
           "id": "special-education-teachers-preschool.us-salary.career-snapshot-secondary-locale.31",
@@ -32733,7 +32733,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "采用EP2025–2035，净增700按官方发布，取整端点不重算；旧O*NET另分且非AI因果。"
+              "采用EP2025–2035，净增700按官方发布，不能用舍入端点相减替代；当前O*NET就业栏也是2025–2035，不能混旧期，预测非AI因果。"
             ]
           },
           "id": "special-education-teachers-preschool.market-signals.market-signal-card.12",
@@ -33039,7 +33039,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS总职业提供教学工作和需求背景，不用于本页合并工资分位。"
+              "BLS总职业提供教学工作和需求背景，不用于本页25-2051学前独立工资分位。"
             ]
           },
           "id": "special-education-teachers-preschool.market-signals.market-signal-card.30",
@@ -33090,7 +33090,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET25-2051学前任务兴趣中位，旧预测另分。"
+              "O*NET25-2051学前任务兴趣与中位，当前就业栏为2025–2035，不混旧期。"
             ]
           },
           "id": "special-education-teachers-preschool.market-signals.market-signal-card.33",
@@ -33655,7 +33655,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "美国25-2051学前任务兴趣工资及独立预测，旧期间另分；中国专业标准资格、宽工资、上海特殊学校学前历史条件及泰河普通有薪背景分别限范围。"
+              "美国25-2051学前任务兴趣工资及独立预测，当前O*NET与EP就业期间均为2025–2035；中国专业标准资格、宽工资、上海特殊学校学前历史条件及泰河普通有薪背景分别限范围。"
             ]
           },
           "id": "special-education-teachers-preschool.sources.source-card.2",
@@ -39400,7 +39400,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "学前特殊教育 · Preschool",
@@ -39451,7 +39451,7 @@
       "text": "特殊教育教师（学前）"
     }
   },
-  "source_content_sha256": "0099c779d8d13870a1c480a8410f538396f4f7b3520f180c861aff8e0f84f799",
+  "source_content_sha256": "10e872e640ebdad1ca573707f59b086b436599a074647880c21791c8e3600b71",
   "subject": {
     "canonical_slug": "special-education-teachers-preschool",
     "name": "特殊教育教师（学前）",

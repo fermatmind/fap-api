@@ -14,20 +14,35 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:industry-mean-period-current": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
       "fact:us-change-2025-2035": {
         "status": "pending_mapping"
       },
+      "fact:us-change-2025-2035-current": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
+      },
+      "fact:us-employment-2025-current": {
+        "status": "pending_mapping"
       },
       "fact:us-employment-2035": {
         "status": "pending_mapping"
       },
+      "fact:us-employment-2035-current": {
+        "status": "pending_mapping"
+      },
       "fact:us-growth-2025-2035": {
         "status": "mapped"
+      },
+      "fact:us-growth-2025-2035-current": {
+        "status": "pending_mapping"
       },
       "fact:us-industry-wage-aerospace-mfg-2025": {
         "status": "pending_mapping"
@@ -46,6 +61,9 @@
       },
       "fact:us-openings-2025-2035": {
         "status": "mapped"
+      },
+      "fact:us-openings-2025-2035-current": {
+        "status": "pending_mapping"
       },
       "fact:us-wage-2025": {
         "status": "mapped"
@@ -399,6 +417,9 @@
         "status": "mapped"
       },
       "item:brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.9": {
+        "status": "pending_mapping"
+      },
+      "item:brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.9.unconsumed": {
         "status": "pending_mapping"
       },
       "item:brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.90": {
@@ -4515,7 +4536,7 @@
       },
       "ai_impact_table.evidence_rows.05.link": {
         "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.9",
+          "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.9.unconsumed",
           "path": [
             "data",
             "entries",
@@ -5198,7 +5219,7 @@
       },
       "ai_impact_table.questions.05.link": {
         "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.9",
+          "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.9.unconsumed",
           "path": [
             "data",
             "entries",
@@ -11480,52 +11501,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.href": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.label": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.headers.explanation": {
         "ref": {
@@ -12004,28 +11985,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.href": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.18",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.label": {
         "ref": {
@@ -12135,28 +12096,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.href": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.20",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.label": {
         "ref": {
@@ -12266,28 +12207,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.href": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.22",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.label": {
         "ref": {
@@ -12397,28 +12318,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.href": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.24",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.label": {
         "ref": {
@@ -23098,28 +22999,8 @@
         "status": "unfilled"
       },
       "work_context_block.01.description": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              0,
-              9
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "work_context_block.01.label": {
         "ref": {
@@ -23146,388 +23027,68 @@
         "status": "mapped"
       },
       "work_context_block.02.description": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              1,
-              9
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "work_context_block.02.label": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              1,
-              9
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "work_context_block.03.description": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              2,
-              9
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "work_context_block.03.label": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              2,
-              9
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "work_context_block.04.description": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              3,
-              9
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "work_context_block.04.label": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              3,
-              9
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "work_context_block.05.description": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              4,
-              9
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "work_context_block.05.label": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              4,
-              9
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "work_context_block.06.description": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              5,
-              9
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "work_context_block.06.label": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              5,
-              9
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "work_context_block.07.description": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              6,
-              9
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "work_context_block.07.label": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              6,
-              9
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "work_context_block.08.description": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              7,
-              9
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "work_context_block.08.label": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              7,
-              9
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "work_context_block.09.description": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              8,
-              9
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "work_context_block.09.label": {
-        "ref": {
-          "id": "brownfield-redevelopment-specialists-and-site-managers.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              8,
-              9
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       }
     }
   },
@@ -23900,10 +23461,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "棕地再开发专家与场地经理以受污染地块的调查、修复方案与再开发统筹为核心；环境科学家与专家负责采样分析与环境监测；土木工程师负责工程设计与结构安全；施工经理负责现场施工组织；危险物品清除工负责现场清运作业；合规官负责合规制度与调查配合；成本估算师负责造价；建筑师与城市规划师负责空间与用地规划。名称相近或同处一个项目，都不代表责任与签字权限可以互换。"
+              "环境科学家与专家也可调查、分析风险并提出防治方案，不限采样监测；棕地岗位偏清理再开发统筹，实际职责重叠按项目核，不能互换许可。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.profile.career-quick-answers-block.7",
+          "source_refs": [
+            "details-current",
+            "onet-17-3021",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24010,10 +23576,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "方案的可行性与项目统筹由该职业与其团队负责；调查、风险评估与效果评估报告的真实性、准确性与完整性由受委托、具备相应专业能力的单位负责（中国大陆《土壤污染防治法》）；土壤污染风险管控和修复义务由土壤污染责任人、土地使用权人按法定顺序承担；用地规划与准入条件由主管部门确定；超出本人授权与专业范围的判断须按流程交由具备资格的机构处理。"
+              "中国现行生态环境法典438：相关调查、评估、风险管控、修复及后期管理单位应具相应专业能力；受委托单位对报告真实、准确、完整负责，并依约对活动结果负责。不是全部人员统一证照或“法律结论”签发权。439—442分别核污染责任人、无法认定时土地使用权人、承继及争议认定，不把场地经理自动当污染责任人。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.profile.career-quick-answers-block.17",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -24032,10 +23601,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "能否调整修复目标、能否变更方案与预算、能否转运污染土壤、能否确认效果达标，由法规程序、主管部门规定与单位授权决定；操作与签署权限来自岗位授权与资质要求，不由资历或熟练程度自行产生；涉及重大变更与验收结论的事项须按程序报批并留痕。"
+              "建设用地：454地方生态环境会同自然资源组织调查报告评审；455—456风险报告报省级并组织评审/名录；459需修复名录地块方案结合国土空间规划、报地方生态环境备案；460责任人另行委托效果评估并备案；461省级会同有关部门评审移出名录。备案、评审、批准和工程验收不同，具体变更另核适用规则。 生态环境法典435施工公告牌公开情况和保护措施；436施工单位制定转运计划，将时间、方式、线路、数量、去向与最终处置措施提前报送所在地及接受地生态环境部门；属危险废物再按适用规定处置，非所有污染土壤自动危废，也非统一报批。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.profile.career-quick-answers-block.19",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -24054,10 +23626,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "报告说明的是「在该阶段的调查数据与标准下，地块的污染状况与风险如何、拟采取哪些措施」；它不等于法律结论，也不替代主管部门的评审与验收，且会随新增调查数据与标准更新而修订。"
+              "建设用地：454地方生态环境会同自然资源组织调查报告评审；455—456风险报告报省级并组织评审/名录；459需修复名录地块方案结合国土空间规划、报地方生态环境备案；460责任人另行委托效果评估并备案；461省级会同有关部门评审移出名录。备案、评审、批准和工程验收不同，具体变更另核适用规则。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.profile.career-quick-answers-block.21",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -24087,10 +23662,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧为 O*NET-SOC 11-9199.11（SOC 11-9199），归属于管理职业群；该职业标注 Bright Outlook，列为 Job Zone Four（SVP 7.0 至低于 8.0）。O*NET 2024 年行业分布为政府 11%、其他行业 89%（含专业、科学与技术服务）。中国大陆《中华人民共和国职业分类大典（2022 年版）》没有与「棕地再开发专家与场地经理」一一对应的细类，相关职责可能落在环境咨询、土壤修复工程、环评与用地咨询、政府生态环境管理或地产开发等岗位中，其业务授权、资质与责任边界各不相同，需按岗位实际职责判断。"
+              "美国身份11-9199.11、BrightOutlook及JobZone4；2025行业政府11%、其他89%（含专业科学技术服务），摘要明确来自11-9199父类；不是棕地细类11-9199.11分布，不由份额推工资。 中国一一对应细类代码证据不足。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.profile.career-quick-answers-block.24",
+          "source_refs": [
+            "summary-current",
+            "industry-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24109,10 +23689,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把该职业列为 Job Zone Four（SVP 7.0 至低于 8.0），受访者中 77% 认为需学士学位、9% 认为需学士后证书、9% 认为需硕士学位；实际入行多依靠环境科学、环境工程、地质、土木或规划等相关专业学习，加上土壤与地下水调查、修复技术、法规与项目管理的实践积累。"
+              "O*NET新入职教育要求问答77%学士、9%学士后证书、9%硕士，非从业者学历构成；JobZone4/SVP7至不足8为准备概括。BLS父类典型学士/不足5年相关经验/在岗培训None，非细类统一门槛。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.profile.career-quick-answers-block.26",
+          "source_refs": [
+            "details-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -24131,10 +23715,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 技术清单共 22 项技术与软件技能（其中 18 项标注 Hot Technology，2 项 In Demand）；标注 Hot Technology 的包括 Microsoft Office／Excel／Word／PowerPoint、ESRI ArcGIS、Linux、Microsoft Access／Outlook／PowerShell／Project／SharePoint、SQL Server Reporting Services、Oracle Database、PostgreSQL、Python、Salesforce、SAP 与 Tableau；In Demand 为 Microsoft Office 与 Microsoft Excel。现场方法以场地调查与采样、地球物理与遥感、地下水监测、风险评估与成本估算工具为主；标注表示招聘启事中的出现频率，不代表机构已部署或岗位已被替代。"
+              "22软件类别、18Hot产品、2InDemand；2025细类招聘Office7%、Excel5%、Word4%、PowerPoint4%，其余14产品NA非0，含ArcGIS、Linux、Access、Outlook、PowerShell、Project、SharePoint、SSRS、Oracle、PostgreSQL、Python、Salesforce、SAP、Tableau；不是部署率或所有岗位必会清单。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.profile.career-quick-answers-block.28",
+          "source_refs": [
+            "details-current",
+            "hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -24153,10 +23741,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作风险以污染暴露、场地与施工安全、责任链与数据完整性为主；O*NET 工作情境显示暴露于疾病或感染、全身振动、辐射等项目多数为「从未」，但需按场地制度执行个体防护、危害沟通与有限空间与开挖等作业审批；对接主管部门与评审程序时须保证数据来源与结论可追溯。"
+              "编辑先核地块实际暴露、开挖/有限空间等作业条件、职责、场地应急与撤离程序及法域，落实适用防护/监护/许可，不能由岗位名认定所有现场均需同一审批。美国1910.120先核a适用作业，b雇主场地安全计划及e按岗位暴露培训；40h+3日/24h+1日有条件，不能套中国或所有办公室棕地岗位。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.profile.career-quick-answers-block.30",
+          "source_refs": [
+            "details-current",
+            "us-hazwoper-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24175,10 +23768,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "在中国大陆，土壤污染风险管控和修复包括土壤污染状况调查、风险评估、风险管控、修复、效果评估与后期管理；从事这些活动的单位应当具备相应专业能力，并对其出具报告的真实性、准确性、完整性负责；建设用地被列入土壤污染风险管控和修复名录的，不得作为住宅、公共管理与公共服务用地；修复施工期间应设立公告牌，转运污染土壤须提前报主管部门。"
+              "中国现行生态环境法典438：相关调查、评估、风险管控、修复及后期管理单位应具相应专业能力；受委托单位对报告真实、准确、完整负责，并依约对活动结果负责。不是全部人员统一证照或“法律结论”签发权。439—442分别核污染责任人、无法认定时土地使用权人、承继及争议认定，不把场地经理自动当污染责任人。 生态环境法典435施工公告牌公开情况和保护措施；436施工单位制定转运计划，将时间、方式、线路、数量、去向与最终处置措施提前报送所在地及接受地生态环境部门；属危险废物再按适用规定处置，非所有污染土壤自动危废，也非统一报批。 456列入名录地块不得作居住、公共管理与公共服务用地。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.profile.career-quick-answers-block.32",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -24197,10 +23793,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "岗位通常按项目节奏安排，64% 受访者为固定班制、59% 每周 40 小时，现场阶段与评审节点可能出现集中加班与出差；比较时把项目类型、现场频率、资质与培训成本的承担方式，以及项目奖金与绩效口径纳入书面约定。"
+              "64%固定班制、59%典型周40h、32%超过40h；统计不提供因项目评审而加班的因果比例。出差和节点安排按目标岗位核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.profile.career-quick-answers-block.34",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24208,10 +23808,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "棕地再开发专家与场地经理（美国侧 O*NET-SOC 11-9199.11，Brownfield Redevelopment Specialists and Site Managers）为受污染地块的清理与再利用制定并推动方案：识别环境污染来源，协调场地清理或修复活动以确保符合环境法律、标准与法规，识别并申请项目资金，规划或实施棕地再开发项目以保证安全、质量与合规，估算清理与再开发成本，开展面向人体健康与环境的定量风险评估，设计或实施地表水与地下水修复方案，设计或实施改善土壤、水与空气质量的措施，评审修复项目提案，编制沟通再开发需求、状态与进展的报告，检查场地以评估环境损害或监控清理进展，并保存与再开发项目相关的决策、行动与进展记录。官方说明特别指出，该职业不包括污染程度足以构成 Superfund 场地（超级基金场地）的地块。它承担方案与统筹责任，但不代替具备资格的机构出具法律意义上的调查、风险评估与效果评估结论。"
+              "O*NET职责为受污染地块清理和再开发，原文排除污染足够符合Superfund的地块；这是美国本条职业描述边界，不能作为EPA全部项目或中国污染地块分类。中国现行生态环境法典438：相关调查、评估、风险管控、修复及后期管理单位应具相应专业能力；受委托单位对报告真实、准确、完整负责，并依约对活动结果负责。不是全部人员统一证照或“法律结论”签发权。439—442分别核污染责任人、无法认定时土地使用权人、承继及争议认定，不把场地经理自动当污染责任人。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.profile.definition-block.11",
+          "source_refs": [
+            "summary-current",
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -24219,10 +23823,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业身份与任务：O*NET-SOC 11-9199.11 Brownfield Redevelopment Specialists and Site Managers，2025 年更新页面，Job Zone Four（SVP 7.0 至低于 8.0），标注 Bright Outlook。官方职责为「Plan and direct cleanup and redevelopment of contaminated properties for reuse. Does not include properties sufficiently contaminated to qualify as Superfund sites.」；共 23 项任务，其中识别环境污染来源重要性为 85、协调场地清理或修复活动以确保合规为 85、识别并申请项目资金为 81、规划或实施棕地再开发项目为 80、估算清理与再开发成本为 80、开展人体健康与环境定量风险评估为 73。"
+              "职业2025更新；23任务20Core/3Supplemental，41一般活动、19详细活动、57情境；原85污染来源/85协调/81资金/80项目/80成本/73风险及91信息/88合规/88决策/83沟通核实保留，不等个人权限。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -24241,10 +23848,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：国家统计局《2025 年城镇单位就业人员年平均工资情况》（2026-05-15 发布）按行业门类与岗位大类公布平均工资，但没有单列「棕地再开发专家与场地经理」这一职业；本页按证据路由 （暂无可安全使用的数据）不发布职业级工资数值，也不用行业均值或美国数据替代，只保留统计口径、覆盖范围与缺口标记。"
+              "中国精确职业代码映射、全国/城市职业工资仍证据不足；2025科学研究技术服务业非私营182064/私营83560元年税前均值仅环境咨询检测等用工行业背景，混合全部岗位，非棕地职业工资。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.profile.onet-structured-fields-block.3",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -24252,10 +23862,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "就业与前景：O*NET 页面显示该职业所属口径（Managers, All Other，SOC 11-9199）2024 年就业 1,333,700 人，2024—2034 年预测增长标签为 Faster than average（快于平均，5% 至 6%），预测期年均职位空缺 106,700 个。该口径为父类合计，不是 11-9199.11 单列统计；BLS 职业展望手册的管理职业群页面（群级背景）给出该群 2025—2035 年就业增长快于平均、年均约 110 万个空缺，2025 年 5 月中位年薪 126,520 美元，两者口径与期间不同，本页分别标注。"
+              "2025—2035美国11-9199父类Managers All Other：1338800→1404400人，净增65600，增长4.9%，年均空缺100900；O*NET显示整数5%及Faster than average（5%—6%）标签，不是11-9199.11细类就业预测。 管理职业群11-0000中位126520/年空缺约110万仅群级背景，不能等同11-9199父类。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.profile.onet-structured-fields-block.4",
+          "source_refs": [
+            "ep-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -24263,10 +23877,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业分布与工具信号：O*NET 2024 年行业分布为政府 11%、其他行业 89%（含专业、科学与技术服务）；技术清单 22 项中 18 项标注 Hot Technology、2 项 In Demand。行业分布描述统计分类，不能推导行业工资、雇主类型或个人岗位归属。"
+              "2025行业政府11%、其他89%（含专业科学技术服务），摘要明确来自11-9199父类；不是棕地细类11-9199.11分布，不由份额推工资。 22软件类别、18Hot产品、2InDemand；2025细类招聘Office7%、Excel5%、Word4%、PowerPoint4%，其余14产品NA非0，含ArcGIS、Linux、Access、Outlook、PowerShell、Project、SharePoint、SSRS、Oracle、PostgreSQL、Python、Salesforce、SAP、Tableau；不是部署率或所有岗位必会清单。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.profile.onet-structured-fields-block.5",
+          "source_refs": [
+            "industry-current",
+            "hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -24290,10 +23908,14 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "沟通方式｜91% 受访者每天使用电子邮件、68% 每天通电话；50% 每天进行面对面讨论。\n协作对象｜55% 大部分时间与他人接触；需要与业主、施工方、监管与社区多方协调。\n作业场所｜45% 每天在环境受控的室内工作；现场阶段涉及户外与受污染场地，须按制度防护。\n姿态与体力｜73% 超过一半时间久坐；91% 少于一半时间走动或跑动；77% 少于一半时间站立。\n决策自由度｜68% 表示有一定决策自由；方案比选与预算安排通常需在授权与程序内决定。\n工作时间｜64% 为固定班制；59% 每周 40 小时；项目与评审节点可能集中加班与出差。\n数据与责任｜工作以数据核对与程序推进为核心；结论会随新数据与标准更新而修订。\n暴露与安全｜暴露于疾病或感染、全身振动、辐射等项目多数为「从未」；现场仍须执行防护与作业审批。\n结果影响｜方案与估算直接影响清理成本、工期与用地条件，须保留可追溯的依据与变更记录。"
+              "91%每日邮件/68%每日通话/50%每日面谈/55%大部分时间联系他人；45%每日室内受控/73%超过半时久坐/91%不足半时走动/77%不足半时站立；68%一定决策自由、64%固定班、59%周40h。均为受访情境，不签法律授权、不证明项目节点加班原因。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.profile.work-context-block.1",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -24942,12 +24564,6 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "O*NET-SOC 11-9199.11 行业分布",
-                "id": "link-12",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/11-9199.11"
-              },
-              {
                 "entity": "O*NET-SOC 11-9199.11 职业摘要",
                 "id": "link-13",
                 "relation": "career.source",
@@ -24966,16 +24582,10 @@
                 "url": "https://www.onetonline.org/link/hot_tech/11-9199.11"
               },
               {
-                "entity": "BLS《Occupational Outlook Handbook》管理职业群页面",
+                "entity": "BLS管理职业群11-0000背景",
                 "id": "link-16",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/ooh/management/home.htm"
-              },
-              {
-                "entity": "O*NET-SOC 11-9199.11 职业摘要",
-                "id": "link-17",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/11-9199.11"
               },
               {
                 "entity": "O*NET-SOC 11-9199.11 自定义职业档案",
@@ -25010,10 +24620,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先在带教下完整参与一次从场地初步调查、风险筛选、方案比选、成本估算到施工与验收配合的小型闭环，再谈证书与实习；同时核对目标岗位属于环境咨询、修复工程、政府监管还是地产开发，其资质要求、可签署文件范围与责任边界不同。"
+              "编辑学习次序：先用公开或虚构资料练污染识别、单位标准、方案与成本要素，再核专业能力、场地培训及带教后参与实训；首次学习不要求已参与真实闭环，也不把证书和实习统一排后。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.11",
+          "source_refs": [
+            "editor-current",
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -25087,10 +24701,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：数字化工具可以改变资料检索、数据整理、成本与进度比对、报表与材料生成，但没有官方证据表明它会取代污染源判断、修复目标确定、成本与资金合规以及与环境责任的承担。任务暴露、流程自动化程度与就业数量是三个不同概念。"
+              "本轮资料未给棕地细类AI替代率；不能由法律责任仍存在保证污染识别、成本估算等任务不会自动化，也不能承诺整体不会取代。技术判断和受委托单位责任、岗位数量分别核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.18",
+          "source_refs": [
+            "cn-code-current",
+            "ilo-genai",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25175,10 +24794,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 22 项技术与软件技能（含 18 项 Hot Technology、2 项 In Demand）；不代表机构已部署或岗位已被替代。"
+              "22软件类别、18Hot产品、2InDemand；2025细类招聘Office7%、Excel5%、Word4%、PowerPoint4%，其余14产品NA非0，含ArcGIS、Linux、Access、Outlook、PowerShell、Project、SharePoint、SSRS、Oracle、PostgreSQL、Python、Salesforce、SAP、Tableau；不是部署率或所有岗位必会清单。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.26",
+          "source_refs": [
+            "details-current",
+            "hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -25197,10 +24820,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明政府 11%、其他行业 89%；不能推导行业工资或就业规模。"
+              "2025行业政府11%、其他89%（含专业科学技术服务），摘要明确来自11-9199父类；不是棕地细类11-9199.11分布，不由份额推工资。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.28",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -25219,10 +24845,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明 Managers, All Other（SOC 11-9199 父类）口径 的就业规模与 2024—2034 年预测。"
+              "2025—2035美国11-9199父类Managers All Other：1338800→1404400人，净增65600，增长4.9%，年均空缺100900；O*NET显示整数5%及Faster than average（5%—6%）标签，不是11-9199.11细类就业预测。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.30",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -25329,10 +24958,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、招聘技术信号、就业与工资数据以及任务暴露研究，不是 AI 替代率或岗位数量预测。"
+              "五张证据卡分别介绍职责、任务、招聘软件、BLS管理职业群11-0000背景与全球任务暴露；管理群数值不是11-9199父类或棕地细类指标。11-9199父类数量预测另见本区2035问答，不提供棕地细类AI替代率或AI归因数量预测。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.40",
+          "source_refs": [
+            "ooh-current",
+            "ilo-genai"
+          ],
           "type": "prose"
         },
         {
@@ -25461,10 +25094,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面共列出 22 项技术与软件技能，其中 18 项标注 Hot Technology，包括 ESRI ArcGIS、Linux、Microsoft Access／Outlook／PowerShell／Project／SharePoint、SQL Server Reporting Services、Oracle Database、PostgreSQL、Python、Salesforce、SAP 与 Tableau，以及 Microsoft Office／Excel／Word／PowerPoint；In Demand 技能为 Microsoft Office 与 Microsoft Excel。"
+              "22软件类别、18Hot产品、2InDemand；2025细类招聘Office7%、Excel5%、Word4%、PowerPoint4%，其余14产品NA非0，含ArcGIS、Linux、Access、Outlook、PowerShell、Project、SharePoint、SSRS、Oracle、PostgreSQL、Python、Salesforce、SAP、Tableau；不是部署率或所有岗位必会清单。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.52",
+          "source_refs": [
+            "details-current",
+            "hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -25472,10 +25109,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "为 Managers, All Other（SOC 11-9199 父类）口径 的父类口径，不是 11-9199.11 单列数据，也不构成个人就业保证。"
+              "BLS管理职业群11-0000，非11-9199父类或11-9199.11细类，126520/约110万空缺仅群级背景。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.53",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -25560,10 +25200,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在场地资料检索、调查数据整理、成本与进度比对、报告初稿生成这类可复核环节，工具确实能提高效率。但工具不知道地块历史与污染成因、不掌握采样与检测质量，产出必须回到原始数据、检测报告与适用标准逐条核对。"
+              "编辑实际测效率、输入来源和质量；有地块历史/传感器/实验室输入的系统可能掌握相关数据，不能一概说工具不知道；无输入不能补造采样与检测原始记录。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.61",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25582,10 +25225,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露、流程自动化程度与就业数量是不同测量对象。O*NET 页面显示父类口径（Managers, All Other）2024 年就业 1,333,700 人、2024—2034 年增长 5% 至 6%、年均约 106,700 个空缺；而污染源判断、修复目标确定与合规责任无法由工具承担，因此不能从暴露度推断岗位消失。"
+              "2025—2035美国11-9199父类Managers All Other：1338800→1404400人，净增65600，增长4.9%，年均空缺100900；O*NET显示整数5%及Faster than average（5%—6%）标签，不是11-9199.11细类就业预测。 未分解棕地细类需求或AI贡献；法律责任存在不推出岗位数量不会减少。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.63",
+          "source_refs": [
+            "ep-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25593,10 +25240,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不会以整体取代的方式发生：污染源识别与迁移判断、修复目标与方案比选、成本与资金合规、与监管和社区的沟通责任，仍需由受过训练并获得授权的人负责；工具改变的是可复核的数据与文档环节。"
+              "不能保证整体不取代；本轮未取得细类AI替代率。机构、责任人和主管部门承担适用义务与程序，任务工具化范围及就业数量另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.64",
+          "source_refs": [
+            "cn-code-current",
+            "ep-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25615,10 +25267,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不需要会写代码，但需要数据素养：会读监测数据与检出限、看懂单位与工程量、能做成本拆分与敏感性判断；高阶建模不是入门门槛，但回避数据与标准会直接影响方案质量。"
+              "是否编程按目标职责核：目录含Python/SQL/PowerShell，不能证明所有岗位均不需代码或高阶模型；编辑先练污染原理、单位/检出限、标准和成本，专业与工具并行学习。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.66",
+          "source_refs": [
+            "details-current",
+            "hot-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25659,10 +25316,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 页面显示父类口径 2024—2034 年增长标签为 Faster than average（5% 至 6%）、预测期年均约 106,700 个空缺；BLS 管理职业群页面为群级背景（2025—2035 年）。该预测为统计口径，不构成个人就业保证；实际岗位受环境监管力度、土地再开发需求与财政资金安排影响。"
+              "2025—2035美国11-9199父类Managers All Other：1338800→1404400人，净增65600，增长4.9%，年均空缺100900；O*NET显示整数5%及Faster than average（5%—6%）标签，不是11-9199.11细类就业预测。 未分解棕地细类需求或AI贡献；法律责任存在不推出岗位数量不会减少。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.70",
+          "source_refs": [
+            "ep-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25670,7 +25331,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业摘要（就业与预测字段）"
+              "BLS表1.2：2025—2035父类11-9199预测，非棕地细类"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.71",
@@ -25681,10 +25342,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。风险评估与效果评估结论须由具备相应专业能力的单位按技术规范出具，并对其真实性、准确性、完整性负责；工具既不能承担责任，也不能取得相应资质。"
+              "中国现行生态环境法典438：相关调查、评估、风险管控、修复及后期管理单位应具相应专业能力；受委托单位对报告真实、准确、完整负责，并依约对活动结果负责。不是全部人员统一证照或“法律结论”签发权。439—442分别核污染责任人、无法认定时土地使用权人、承继及争议认定，不把场地经理自动当污染责任人。 工具生成内容不能代替报告真实性责任或主管部门法定程序；不由此断言所有模型判断均无法辅助。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.72",
+          "source_refs": [
+            "cn-code-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25692,10 +25357,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页方法说明 /《中华人民共和国土壤污染防治法》"
+              "现行生态环境法典438专业能力/报告责任与454—461建设用地程序；旧土法已废止。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.73",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -25703,10 +25371,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有任何官方来源给出这样的年份。任务暴露、流程自动化程度与就业数量是不同概念，本页不做岗位消失年份预测。"
+              "本轮O*NET/BLS/ILO未提供棕地细类岗位消失年份，保留具体检索边界，不宣称所有官方来源均无结论。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.74",
+          "source_refs": [
+            "ep-current",
+            "ilo-genai",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25725,10 +25398,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "优先学场地调查与采样基础、土壤与地下水污染原理、风险管控与修复技术、土壤污染风险管控标准与调查—评估—修复—效果评估—后期管理的程序，以及成本估算与项目管理；把工具使用排在专业判断与法规理解之后。"
+              "编辑专业与工具并行学习：调查/采样、污染原理、风险管控与修复、标准与现行程序、成本项目管理；现场实践先核相应培训和参与权限。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.76",
+          "source_refs": [
+            "editor-current",
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -25736,10 +25413,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 培训与教育信息 / 自定义职业档案"
+              "O*NET教育要求/JobZone与本轮编辑学习建议；培训目录不支持学习次序或全国资格推论。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.77",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25747,10 +25428,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数字化工具进入项目流程时，人的控制点应按以下五步固定下来；任何一步缺失都不应扩大使用范围。"
+              "以下为编辑治理核对点，结合真实风险和适用法规落实；NIST框架不授报告签署或停复工权，不把任一建议缺失写成统一法定禁用。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.78",
+          "source_refs": [
+            "nist-ai-rmf",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25769,10 +25454,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只把可复核的资料检索、数据整理、成本与进度比对、报表与材料初稿交给工具。"
+              "编辑初期选择易复核的资料与估算工具，按数据和权限再评估使用范围；14%中等自动化/36%轻度/50%无自动化不是AI部署率，也不证明工具只能文档。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.80",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25802,10 +25491,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "修复目标与方案变更、污染土壤转运、效果评估与用地条件由具备权限的单位与主管部门按程序确认并留痕。"
+              "建设用地：454地方生态环境会同自然资源组织调查报告评审；455—456风险报告报省级并组织评审/名录；459需修复名录地块方案结合国土空间规划、报地方生态环境备案；460责任人另行委托效果评估并备案；461省级会同有关部门评审移出名录。备案、评审、批准和工程验收不同，具体变更另核适用规则。 生态环境法典435施工公告牌公开情况和保护措施；436施工单位制定转运计划，将时间、方式、线路、数量、去向与最终处置措施提前报送所在地及接受地生态环境部门；属危险废物再按适用规定处置，非所有污染土壤自动危废，也非统一报批。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.83",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -25824,10 +25516,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把工具输出标记为待复核，经与原始数据、检测报告与标准核对后再作为依据。"
+              "生成推断与原始采样/监测数据分开；真实监测系统正式输出不一概当草稿，按批准质量流程核数据和标准，不补造来源。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.85",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25868,10 +25563,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录数据来源与版本、检测方法与检出限、计算假设、修改理由及责任人。"
+              "编辑留数据方法、检出限、版本、假设与修改依据用于复核；留痕不自动决定法律责任或证明结论正确。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.89",
+          "source_refs": [
+            "editor-current",
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -25901,10 +25600,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把不具备资格的事项写入报告或对外承诺，会造成程序瑕疵与责任真空。"
+              "专业能力、适用证照和项目授权分别核，不把单位专业能力要求改为所有从业者统一资质许可。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.92",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -25912,10 +25614,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在编制与签署前确认资质与授权边界；超出本人专业与授权范围时交由具备资格的机构处理。"
+              "中国现行生态环境法典438：相关调查、评估、风险管控、修复及后期管理单位应具相应专业能力；受委托单位对报告真实、准确、完整负责，并依约对活动结果负责。不是全部人员统一证照或“法律结论”签发权。439—442分别核污染责任人、无法认定时土地使用权人、承继及争议认定，不把场地经理自动当污染责任人。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.93",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -26011,10 +25716,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "比选修复技术、审定成本与工期假设，并对方案可行性与预算负责。"
+              "按真实职责、质量和权限比选技术、核成本工期；不能把每位普通技术人员都授方案审定及资金决策权。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.102",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26099,10 +25808,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断现场异常是否影响目标，决定停工、变更或补充调查，并对记录负责。"
+              "发现现场异常按实际职责报告、采取适用应急和撤离措施；停复工/变更/补充调查依真实安全程序和权限，不自动授任何场地岗位决策权。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.110",
+          "source_refs": [
+            "editor-current",
+            "us-hazwoper-current",
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -26236,6 +25950,29 @@
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.122",
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "O*NET-SOC 11-9199.11 行业分布",
+                "id": "link-12",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/industry/11-9199.11"
+              },
+              {
+                "entity": "O*NET-SOC 11-9199.11 职业摘要",
+                "id": "link-17",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/summary/11-9199.11"
+              }
+            ]
+          },
+          "id": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.9.unconsumed",
+          "type": "links",
+          "visibility": "internal"
         }
       ]
     },
@@ -26340,10 +26077,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "未取得与棕地再开发专家与场地经理精确对应的中国大陆全国职业工资分布；按证据路由 （暂无可安全使用的数据）处理，本页不发布职业级工资数值。"
+              "中国精确职业代码映射、全国/城市职业工资仍证据不足；2025科学研究技术服务业非私营182064/私营83560元年税前均值仅环境咨询检测等用工行业背景，混合全部岗位，非棕地职业工资。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.7",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26351,10 +26092,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "截至 2026 年 9 月，有界检索未找到单列「棕地再开发专家与场地经理」的全国职业工资统计；该路由的 consequence 为「不能可靠陈述全国中位数、分位数或统一起薪」，因此本页不把任何行业或岗位大类平均数写成该职业工资，也不用美国数据替代。"
+              "中国精确职业代码映射、全国/城市职业工资仍证据不足；2025科学研究技术服务业非私营182064/私营83560元年税前均值仅环境咨询检测等用工行业背景，混合全部岗位，非棕地职业工资。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.8",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26362,10 +26107,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》按行业门类公布平均工资，但没有单列本职业。"
+              "2025科学研究和技术服务业非私营182064元年税前均值；门类包含多类专业服务，单列本职业资料未取得。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.9",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26373,10 +26121,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业门类平均工资混合环境咨询、修复工程、工程技术与公共管理等多类岗位，不能替代本职业职业工资；按证据路由本页不展示该类数值，只登记该口径不可替代。"
+              "可将匹配行业均值作为明确背景参考，不能估算本职业薪资；原“证据路由禁止展示所有代理”的说法不适用于本轮授权。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.10",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26384,10 +26136,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "同一发布另有城镇私营单位口径，同样按行业门类汇总，也不单列本职业。"
+              "同门类2025私营83560元年税前均值，与非私营人群分读。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.11",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26406,10 +26161,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与棕地再开发专家与场地经理精确对应的中国大陆全国职业工资；本页不发布职业级数值，也不用行业门类均值替代。"
+              "中国精确职业代码映射、全国/城市职业工资仍证据不足；2025科学研究技术服务业非私营182064/私营83560元年税前均值仅环境咨询检测等用工行业背景，混合全部岗位，非棕地职业工资。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.13",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26439,10 +26198,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按项目结算、劳务派遣与自由执业的环境咨询岗位收入不在该统计覆盖范围内；本页要求读者以当地真实招聘与合同为准。"
+              "项目、派遣和外包用工不按形式自动排除，按法人和工资统计归属核；个体工商户与自由职业者不含。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.16",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26461,10 +26223,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国工资资料期为 2025 年（BLS OEWS）与 2024—2034 年预测；两个市场的资料期与口径不同，不能并列比较。"
+              "中国行业2025，美国工资2025/预测2025—2035；行业比较2023均值，分期分市场，不推汇率职业工资。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.18",
+          "source_refs": [
+            "nbs-current",
+            "ep-current",
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -26483,10 +26250,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "工资总额为税前口径，包含单位代扣代缴的个人所得税、社会保险和住房公积金个人缴纳部分，不等于到手收入；项目奖金与绩效另按实际约定计算。"
+              "工资总额税前含定义内奖金津贴及个人代扣部分，不把项目绩效奖金一概置统计外；合同奖金范围和到手另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.20",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26494,10 +26264,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论：中国大陆无本职业精确职业数据；本页只展示统计口径、覆盖范围与缺口标记，不给出任何替代数值。"
+              "中国精确职业代码映射、全国/城市职业工资仍证据不足；2025科学研究技术服务业非私营182064/私营83560元年税前均值仅环境咨询检测等用工行业背景，混合全部岗位，非棕地职业工资。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.21",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26516,7 +26290,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "数字化工具会改变资料检索与数据分析等环节，但不改变中国大陆对该职业的统计口径：统计缺口与工具无关。"
+              "编辑分析：数字化工具可能辅助资料检索与数据分析，具体效果须验证。本轮未取得本职业工具对工资统计影响的证据；当前NBS发布未单列此职业工资，工具信号不能补足精确统计，也不能判断缺口成因或未来分类。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.23",
@@ -26527,10 +26301,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业分类：中国大陆《中华人民共和国职业分类大典（2022 年版）》没有与「棕地再开发专家与场地经理」一一对应的细类；相关职责可能落在环境咨询、土壤修复工程、环评与用地咨询、政府生态环境管理或地产开发等岗位中，业务授权、资质与责任边界随之不同，须按岗位实际职责判断。"
+              "美国11-9199.11细类职责/11-9199父类统计；证据不足：中国精确代码与全国职业工资映射尚未核实，不把有界未找到写成不存在。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.24",
+          "source_refs": [
+            "summary-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26538,10 +26316,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本科（环境、地质、土木、规划等相关方向）"
+              "编辑路径示例：本科（环境、地质、土木、规划等相关方向），实际机构招聘和岗位条件未采样。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.25",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26560,10 +26341,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "通常不独立签署调查、风险评估或效果评估结论；应核对资质与授权范围。"
+              "中国现行生态环境法典438：相关调查、评估、风险管控、修复及后期管理单位应具相应专业能力；受委托单位对报告真实、准确、完整负责，并依约对活动结果负责。不是全部人员统一证照或“法律结论”签发权。439—442分别核污染责任人、无法认定时土地使用权人、承继及争议认定，不把场地经理自动当污染责任人。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.27",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -26571,10 +26355,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本科或硕士（环境工程、地质、水文等方向），并有项目管理与法规实践经历"
+              "编辑路径示例：本科或硕士（环境工程、地质、水文等方向），并有项目管理与法规实践经历，实际机构招聘和岗位条件未采样。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.28",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26593,10 +26380,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "相关活动须由具备相应专业能力的单位实施，并对其出具报告的真实性、准确性、完整性负责（《土壤污染防治法》）；涉及评审、备案与验收的事项按主管部门程序执行。"
+              "中国现行生态环境法典438：相关调查、评估、风险管控、修复及后期管理单位应具相应专业能力；受委托单位对报告真实、准确、完整负责，并依约对活动结果负责。不是全部人员统一证照或“法律结论”签发权。439—442分别核污染责任人、无法认定时土地使用权人、承继及争议认定，不把场地经理自动当污染责任人。 建设用地：454地方生态环境会同自然资源组织调查报告评审；455—456风险报告报省级并组织评审/名录；459需修复名录地块方案结合国土空间规划、报地方生态环境备案；460责任人另行委托效果评估并备案；461省级会同有关部门评审移出名录。备案、评审、批准和工程验收不同，具体变更另核适用规则。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.30",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -26604,10 +26394,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "具备多类地块经验并熟悉评审与验收程序"
+              "编辑路径示例：具备多类地块经验并熟悉评审与验收程序，实际机构招聘和岗位条件未采样。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.31",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26626,10 +26419,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "修复目标与方案变更、效果评估结论仍须由具备资格的单位与主管部门按程序确认，不因经验年限自动取得。"
+              "建设用地：454地方生态环境会同自然资源组织调查报告评审；455—456风险报告报省级并组织评审/名录；459需修复名录地块方案结合国土空间规划、报地方生态环境备案；460责任人另行委托效果评估并备案；461省级会同有关部门评审移出名录。备案、评审、批准和工程验收不同，具体变更另核适用规则。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.33",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -26637,10 +26433,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "跨区域或跨境项目经验"
+              "编辑路径示例：跨区域或跨境项目经验，实际机构招聘和岗位条件未采样。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.34",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26670,10 +26469,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "水利、环境和公共设施管理业（仅说明归类）"
+              "水利、环境和公共设施管理业（行业背景）"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.37",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26681,10 +26483,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "生态保护与环境治理类岗位可能归入该门类；该类仅公布行业平均数，本页不据此推算或展示本职业工资。"
+              "2025非私营70172/私营49527元年税前行业均值；生态治理单位可核此门类，非职业工资。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.38",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26692,10 +26497,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "科学研究和技术服务业（仅说明归类）"
+              "科学研究和技术服务业（行业背景）"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.39",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26703,10 +26511,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "环境咨询与检测、工程技术与设计服务类岗位可能归入该门类；同样不单列本职业，本页不据此推算工资。"
+              "2025非私营182064/私营83560元年税前行业均值；咨询检测实际归类另核，非职业工资。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.40",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26714,10 +26525,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "建筑业（仅说明归类）"
+              "建筑业（行业背景）"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.41",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26725,10 +26539,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "修复施工与工程实施类岗位可能归入该门类；本页不把该门类均值当作本职业工资，仅提示归类可能。"
+              "2025非私营92036/私营66275元年税前行业均值；修复施工单位实际归类另核，非职业工资。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.42",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26758,10 +26575,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆目前没有单列该职业的全国职业工资统计；按证据路由本页只展示可核对的统计口径、覆盖范围与缺口，不给出替代数值。"
+              "中国精确职业代码映射、全国/城市职业工资仍证据不足；2025科学研究技术服务业非私营182064/私营83560元年税前均值仅环境咨询检测等用工行业背景，混合全部岗位，非棕地职业工资。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.45",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26868,10 +26689,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业对照：美国 O*NET-SOC 11-9199.11（Brownfield Redevelopment Specialists and Site Managers，SOC 11-9199）；环境科学家与专家（19-2041.00）等为独立相邻条目；中国大陆无直接对应的职业细类代码。"
+              "美国11-9199.11细类职责/11-9199父类统计；证据不足：中国精确代码与全国职业工资映射尚未核实，不把有界未找到写成不存在。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.55",
+          "source_refs": [
+            "summary-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26902,10 +26727,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 5% 至 6%（Faster than average）"
+              "增长4.9%（2025—2035；美国11-9199父类）"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.china-salary.career-snapshot-primary-locale.58",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27062,10 +26890,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "对应时薪第 10 分位 35.72 美元，为分布下限，不是入门起薪的承诺。；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/11-9199.11"
+              "35.72美元时为父类P10，非最低值、最低工资或新人起薪。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.10",
+          "source_refs": [
+            "wages-current"
+          ],
           "type": "prose"
         },
         {
@@ -27150,10 +26981,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同口径时薪第 90 分位为 114.55 美元，高分段通常与行业、职责层级与资历相关。；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/11-9199.11"
+              "父类P90为238270美元年/114.55美元时，非普遍水平；未取得行业、资历、职责对分位的因果分解。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.18",
+          "source_refs": [
+            "wages-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27161,10 +26996,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "1,333,700人（2024 年，Managers, All Other（SOC 11-9199 父类）口径）"
+              "1338800人（2025；11-9199父类）"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.19",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27172,10 +27010,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为 Managers, All Other（SOC 11-9199 父类）口径 的就业基数，该口径覆盖所有其他管理者。；O*NET 职业摘要｜https://www.onetonline.org/link/summary/11-9199.11"
+              "2025—2035美国11-9199父类Managers All Other：1338800→1404400人，净增65600，增长4.9%，年均空缺100900；O*NET显示整数5%及Faster than average（5%—6%）标签，不是11-9199.11细类就业预测。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.20",
+          "source_refs": [
+            "ep-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -27183,10 +27025,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 5% 至 6%（Faster than average，2024—2034 年）"
+              "增长4.9%（2025—2035；11-9199父类）"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.21",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27194,10 +27039,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该增长标签为 Managers, All Other（SOC 11-9199 父类）口径，页面标注 Bright Outlook。；O*NET 职业摘要｜https://www.onetonline.org/link/summary/11-9199.11"
+              "2025—2035美国11-9199父类Managers All Other：1338800→1404400人，净增65600，增长4.9%，年均空缺100900；O*NET显示整数5%及Faster than average（5%—6%）标签，不是11-9199.11细类就业预测。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.22",
+          "source_refs": [
+            "ep-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -27205,10 +27054,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "106,700个/年（2024—2034 年预测）"
+              "100900个/年（2025—2035；11-9199父类）"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.23",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27216,10 +27068,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为预测期年均职位空缺，来自增长与替代需求，不是净新增，也不构成个人就业保证。；O*NET 职业摘要｜https://www.onetonline.org/link/summary/11-9199.11"
+              "2025—2035美国11-9199父类Managers All Other：1338800→1404400人，净增65600，增长4.9%，年均空缺100900；O*NET显示整数5%及Faster than average（5%—6%）标签，不是11-9199.11细类就业预测。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.24",
+          "source_refs": [
+            "ep-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -27227,10 +27083,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界：本页美国工资、就业与预测数据口径为 Managers, All Other（SOC 11-9199 父类）口径（2025 年 BLS OEWS 与 2024—2034 年预测），不是 11-9199.11 单列统计；O*NET 页面本身即以「Managers, All Other」标注工资数据。BLS 职业展望手册的管理职业群页面属于群级背景，其数值不可与本页混用或相加；行业分布描述统计分类而不是工资水平，本页不据此推导行业工资。"
+              "全国工资2025/就业预测2025—2035/行业均值2023均为11-9199父类，非棕地细类；管理职业群11-0000另作背景，互不替代。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.25",
+          "source_refs": [
+            "wages-current",
+            "ep-current",
+            "oews2023-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27238,10 +27100,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：美国公开数据给出该口径的工资分布——2025 年时薪中位数 68.22 美元、年薪中位数 141,900 美元，年薪第 10 至第 90 分位为 74,300 至 238,270 美元；2024 年就业 1,333,700 人，2024—2034 年预测增长 5% 至 6%、年均职位空缺 106,700 个。这些数字的口径为 Managers, All Other（SOC 11-9199 父类），不是个人起薪承诺。"
+              "父类2025中位141900美元年/68.22美元时，P10—P90为74300—238270年，原五分位正确；2025—2035美国11-9199父类Managers All Other：1338800→1404400人，净增65600，增长4.9%，年均空缺100900；O*NET显示整数5%及Faster than average（5%—6%）标签，不是11-9199.11细类就业预测。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.26",
+          "source_refs": [
+            "wages-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27249,10 +27115,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "学历与训练通常影响起点：O*NET 列该职业为 Job Zone Four（SVP 7.0 至低于 8.0），受访者中 77% 认为需学士学位、9% 认为需学士后证书、9% 认为需硕士学位；实际入行多依靠环境、地质、土木或规划等相关专业学习与项目实践。"
+              "O*NET新入职教育要求问答77%学士、9%学士后证书、9%硕士，非从业者学历构成；JobZone4/SVP7至不足8为准备概括。BLS父类典型学士/不足5年相关经验/在岗培训None，非细类统一门槛。 未量化学历加薪效应。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.27",
+          "source_refs": [
+            "details-current",
+            "ep-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27271,10 +27142,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与雇主类型影响报酬：O*NET 2024 年行业分布为政府 11%、其他行业 89%（含专业、科学与技术服务）；政府部门、环境咨询机构、修复工程公司与地产开发企业的薪酬与项目奖金口径不同。"
+              "2025行业政府11%、其他89%（含专业科学技术服务），摘要明确来自11-9199父类；不是棕地细类11-9199.11分布，不由份额推工资。 下表2023父类×行业均值分读，非就业行业份额或棕地工资。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.29",
+          "source_refs": [
+            "industry-current",
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27293,10 +27168,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "职责范围影响报酬：是否负责多类地块与复杂污染物的统筹、是否承担方案审定与资金申请、是否具备跨专业协调与评审答辩能力，通常比单纯执行更影响报酬水平。"
+              "编辑核合同地区、职责、实际经验、项目量及奖金；未取得方案统筹比执行“更影响工资”的因果比较。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.31",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27315,10 +27193,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 5% 至 6%（Faster than average）"
+              "增长4.9%（美国11-9199父类）"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.33",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27326,10 +27207,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "政府（11%）"
+              "政府（排除州地方学校医院及USPS）"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.34",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27337,10 +27221,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "144260美元/年（2023父类均值）"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.35",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27348,10 +27235,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 2024 年行业分布显示该职业 11% 位于政府。"
+              "2023年11-9199父类×行业时薪均值69.36美元，非棕地细类、2025全国分位或行业中位数。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.36",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27359,10 +27249,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他行业（89%，含专业、科学与技术服务）"
+              "企业与公司管理"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.37",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27370,10 +27263,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "170030美元/年（2023父类均值）"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.38",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27381,10 +27277,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 2024 年行业分布把其余 89% 合并为「其他行业」，其中含专业、科学与技术服务；本页不据此推算其工资。"
+              "2023年11-9199父类×行业时薪均值81.75美元，非棕地细类、2025全国分位或行业中位数。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.39",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27392,10 +27291,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "专业、科学与技术服务（归入其他行业）"
+              "管理、科学和技术咨询服务"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.40",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27403,10 +27305,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "173100美元/年（2023父类均值）"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.41",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27414,10 +27319,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 未单列该行业比例，本页不推算其工资；环境咨询与检测机构可能归入此类。"
+              "2023年11-9199父类×行业时薪均值83.22美元，非棕地细类、2025全国分位或行业中位数。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.42",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27425,10 +27333,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他未细分行业（合计 89%）"
+              "科学研究与开发服务"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.43",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27436,10 +27347,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "199550美元/年（2023父类均值）"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.44",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27447,10 +27361,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布只区分政府与其他行业两类；本页不拆分未细分部分，也不推算其工资。"
+              "2023年11-9199父类×行业时薪均值95.94美元，非棕地细类、2025全国分位或行业中位数。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.45",
+          "source_refs": [
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27469,10 +27386,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "时薪与年薪是同一 OEWS 口径的两种呈现（该统计按标准工作年折算），不能据此推算个人实发收入、项目奖金或加班收入。"
+              "OEWS受雇正常工时税前工资，按定义含生产奖金佣金、不含加班溢价轮班差额等；通常2080小时折算年值，不推个人工时、实发或全部自由职业收入。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.47",
+          "source_refs": [
+            "bls-oews-methods",
+            "wages-current"
+          ],
           "type": "prose"
         },
         {
@@ -27480,10 +27401,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "数字来自 O*NET 展示的 BLS 2025 年 OEWS 工资数据，口径为 Managers, All Other（SOC 11-9199 父类）；就业与预测期为 2024—2034 年。该口径涵盖许多管理岗位，不是 11-9199.11 单列数据。"
+              "全国工资2025父类11-9199，预测2025—2035；2023父类×行业均值另示。细类工资就业和当前行业中位数证据不足，不把行业均值说成官方未发布任何相关工资。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.48",
+          "source_refs": [
+            "wages-current",
+            "ep-current",
+            "oews2023-current"
+          ],
           "type": "prose"
         },
         {
@@ -27535,10 +27461,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位为年薪 238,270 美元；高端通常与行业、职责层级与资历相关，不代表普遍水平。"
+              "父类P90为238270美元年/114.55美元时，非普遍水平；未取得行业、资历、职责对分位的因果分解。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.53",
+          "source_refs": [
+            "wages-current",
+            "editor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -27747,16 +27677,16 @@
                 "url": "/zh/career/jobs/cost-estimators"
               },
               {
-                "entity": "O*NET-SOC 11-9199.11 培训与教育信息",
+                "entity": "O*NET教育要求与JobZone",
                 "id": "link-13",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtraining/11-9199.11"
+                "url": "https://www.onetonline.org/link/details/11-9199.11"
               },
               {
-                "entity": "《中华人民共和国土壤污染防治法》",
+                "entity": "现行生态环境法典：土壤章节",
                 "id": "link-14",
                 "relation": "career.authority",
-                "url": "https://www.mee.gov.cn/ywgz/fgbz/fl/201809/t20180907_549845.shtml"
+                "url": "https://www.mee.gov.cn/ywgz/fgbz/fl/202603/t20260313_1146496.shtml"
               },
               {
                 "entity": "O*NET-SOC 11-9199.11 详细资料（任务与工作活动）",
@@ -27783,7 +27713,7 @@
                 "url": "https://www.onetonline.org/link/summary/11-9199.11"
               },
               {
-                "entity": "O*NET-SOC 11-9199.11 职业摘要（入门学历构成）",
+                "entity": "O*NET新入职教育要求（非学历构成）",
                 "id": "link-19",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/11-9199.11"
@@ -27804,10 +27734,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "霍兰德兴趣代码为 CER（常规型、企业型、现实型）：常规型对应按规程与既定程序处理数据与文件，具体领域为办公室工作与工程与技术；企业型对应通过沟通与推动影响项目与资源，具体领域为商业与金融；现实型对应使用工具、设备与现场作业处理实际问题，具体领域为机械与电子、工程与技术。"
+              "兴趣CER：常规62/企业59/现实58，调查研究55亦在完整六类；群体兴趣不是个人录用阈值。原办公室/工程、商业金融、机械电子等解释仅泛化描述，不能宣称其为全部职业特定细分领域。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.2",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27849,10 +27783,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格中与工作方式更相关的是尽责性（逐项核对数据、如实记录与跟踪问题闭环）、情绪稳定性（面对评审质询、成本压力与多方冲突）与宜人性（与业主、施工方、监管与社区配合）。这些关联来自一般性研究结论，强度低于实际项目表现。"
+              "编辑观察是否逐项核数据/标准、如实留痕、接受复核及清楚交接；未取得棕地职业大五预测效度或相对解释力实证，不由一般性标签推人格因果效果。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.6",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -27860,10 +27798,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：人格与工作行为的相关性属于一般性研究结论，不能替代工作样本与受监督的项目实践。"
+              "编辑观察是否逐项核数据/标准、如实留痕、接受复核及清楚交接；未取得棕地职业大五预测效度或相对解释力实证，不由一般性标签推人格因果效果。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.7",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -27871,8 +27813,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "尽责性有助于发现数据、单位与标准适用上的不一致，并按程序完成留痕。",
-              "注意细节与谨慎有助于识别数据缺口与程序瑕疵，但仍须通过复核与主管部门程序确认。"
+              "编辑观察是否核单位、标准与方法并记录未知。",
+              "编辑观察是否接受修订、按职责处理不完整数据，谨慎人格分数不证明判断正确。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.8",
@@ -27894,10 +27836,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业适配或专业胜任的评估工具，也没有官方资料支持「某种类型最适合棕地再开发专家与场地经理」的说法。可用于自我反思与沟通偏好理解，但不能用于培训投入或录用筛选。"
+              "本轮O*NET/BLS资料未给棕地细类MBTI/九型胜任预测效度或最佳类型排名；编辑仅用偏好提出观察问题，不据类型决定录用/培训，也不把未找到写成所有研究无结论。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.10",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27905,10 +27851,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：MBTI 的职业预测效度有限，且不被 O*NET 或 BLS 用作适配标准。"
+              "本轮O*NET/BLS资料未给棕地细类MBTI/九型胜任预测效度或最佳类型排名；编辑仅用偏好提出观察问题，不据类型决定录用/培训，也不把未找到写成所有研究无结论。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.11",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27939,10 +27889,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样不是职业适配工具，缺乏官方职业资料支持，也不用于录用或胜任判断。可用于自我反思，但不能据此决定是否投入长期训练。"
+              "本轮O*NET/BLS资料未给棕地细类MBTI/九型胜任预测效度或最佳类型排名；编辑仅用偏好提出观察问题，不据类型决定录用/培训，也不把未找到写成所有研究无结论。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.14",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27950,10 +27904,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：无官方职业资料来源支持将九型人格用于职业适配判断。"
+              "本轮O*NET/BLS资料未给棕地细类MBTI/九型胜任预测效度或最佳类型排名；编辑仅用偏好提出观察问题，不据类型决定录用/培训，也不把未找到写成所有研究无结论。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.15",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28029,10 +27987,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力有帮助：需要在评审质询、成本压力与多方冲突中保持稳定，并在数据不足或程序不明时坚持按标准与程序推进。但这类能力不能用单一分数定义，也不能替代专业技术训练与合规判断。"
+              "编辑观察压力/质询时能否报告未知、核标准并清楚交接；本轮未取得本职业情绪智力测验预测效度，不能由工作情境推出分数门槛或情绪稳定因果效果。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.22",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28040,10 +28002,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：O*NET 工作风格包含注意细节与可靠性等特征；情绪智力测验的预测效度有限，不能替代实践证据。"
+              "编辑观察压力/质询时能否报告未知、核标准并清楚交接；本轮未取得本职业情绪智力测验预测效度，不能由工作情境推出分数门槛或情绪稳定因果效果。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.23",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28051,7 +28017,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能在数据不足或结论存疑时先停下并请示，比情绪分数高低更重要。",
+              "编辑建议观察：能否在数据不足或结论存疑时暂停相关结论采用并按权限请示；本轮未取得与情绪量表的比较效度研究。",
               "愿意承认估算或判断偏差并立即更正与留痕，是专业能力的一部分。"
             ]
           },
@@ -28074,10 +28040,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。真正有解释力的证据是受监督的项目实践与可复核的产出。"
+              "编辑观察数据核对、未知标注、复核与修订记录用于讨论能力差距；未取得与人格/兴趣测验相对解释力研究，单次产出不签胜任、授权或单位专业能力。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.26",
+          "source_refs": [
+            "editor-current",
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -28085,10 +28055,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：更有解释力的适配信号是能按标准逐项核对数据并如实记录、在数据不足或程序不明时先停下请示、能接受评审意见并据此修改；对环境议题的兴趣本身不足以证明胜任。"
+              "编辑观察数据核对、未知标注、复核与修订记录用于讨论能力差距；未取得与人格/兴趣测验相对解释力研究，单次产出不签胜任、授权或单位专业能力。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.27",
+          "source_refs": [
+            "editor-current",
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -28118,10 +28092,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足监测规范与分析方法训练；对项目统筹与合规的责任较轻。"
+              "环境科学家方向补监测分析、污染调查和风险/治理建议能力；可能参与项目技术与合规，不一概责任较轻。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.30",
+          "source_refs": [
+            "onet-17-3021",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28151,10 +28129,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足工程设计能力与执业资格；对修复目标与程序统筹的责任较轻。"
+              "工程设计方向补目标工程计算和适用注册条件，亦可能负责环境修复设计或合规；不能统一判定修复责任较轻。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.33",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28184,10 +28165,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可迁移的是现场与协调能力；目标设定与合规推进的职责较轻。"
+              "施工管理补组织、安全和承包合同；可能承担修复实施与程序合规责任，不统一归作目标/合规职责较轻。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.36",
+          "source_refs": [
+            "editor-current",
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -28195,7 +28180,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更偏合规检查的方向"
+              "更偏危险物品清除与现场防护的方向"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.37",
@@ -28206,7 +28191,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意做合规检查与整改推动，接受制度与文书工作。"
+              "编辑观察建议：是否愿意按程序进行污染物识别、隔离、清除、包装与记录，并接受实际防护、设备和现场训练要求；兴趣不证明作业资格。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.38",
@@ -28217,7 +28202,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足法规体系与检查方法；技术方案统筹的经验较少。"
+              "需补目标污染物与清除工艺、暴露控制、废物分类处置及适用训练资格；棕地项目统筹经验不自动证明清除设备操作或进入危险现场权限。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.39",
@@ -28228,7 +28213,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更偏造价与成本控制的方向"
+              "更偏合规检查与整改跟踪的方向"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.40",
@@ -28239,7 +28224,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意做造价方法与投标预算，接受数字与合同工作。"
+              "编辑观察建议：是否愿意核对记录、法规条件与执行证据，整理检查报告并跟踪问题；观察不签人格效度或执法资格。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.41",
@@ -28250,7 +28235,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可迁移的是成本拆分能力；修复技术判断与环境责任的涉及较少。"
+              "需补目标行业法规体系、证据审查和检查方法；企业内部合规职责不自动产生行政许可、处罚或执法权，按实际岗位主体与权限核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.42",
@@ -28261,7 +28246,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更偏用地规划与城市更新的方向"
+              "更偏成本估算与预算控制的方向"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.43",
@@ -28272,7 +28257,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意做空间与用地规划，接受规划程序与公众参与要求。"
+              "编辑观察建议：是否愿意分析图纸与资料、拆分材料人工时间、核历史成本并持续比对预算和实际成本；不能由兴趣推录用。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.44",
@@ -28283,7 +28268,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足规划编制与用地政策能力；污染与修复技术的涉及较少。"
+              "需补目标工程或产品估算方法、计量、成本数据与合同投标规则；污染修复成本经验可作交集，不替代其他专业估算能力或法域资格。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.45",
@@ -28305,7 +28290,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合与否不取决于内外向。工作情境显示 91% 每天使用电子邮件、68% 每天通电话、50% 每天进行面对面讨论、55% 大部分时间与他人接触；能否在多方沟通中把问题确认清楚并推动闭环，比外向程度更关键。"
+              "不能仅凭内外向判断适配。工作情境显示 91% 每天使用电子邮件、68% 每天通电话、50% 每天进行面对面讨论、55% 大部分时间与他人接触；编辑建议核对能否在多方沟通中把问题确认清楚并推动闭环，未取得与外向量表的比较效度研究。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.47",
@@ -28316,10 +28301,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能。外向有助于与业主、施工方与社区沟通，但工作还要把注意力放在数据、标准与程序上；能否接受评审纠正并改进方案，比表达欲更关键。"
+              "外向内向不决定胜任；编辑看是否确认数据、清楚沟通并接受纠正，不宣称外向能提升沟通效果。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.48",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28327,10 +28315,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有官方结论，也不存在最适合的类型。MBTI 只能帮助整理偏好并提出核对问题，不能预测专业胜任力或录用结果；本页不提供类型名单。"
+              "本轮O*NET/BLS资料未给棕地细类MBTI/九型胜任预测效度或最佳类型排名；编辑仅用偏好提出观察问题，不据类型决定录用/培训，也不把未找到写成所有研究无结论。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.49",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28338,10 +28330,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 把该职业的兴趣代码列为 CER（常规型、企业型、现实型）：常规型对应按规程处理数据与文件（办公室工作、工程与技术），企业型对应通过沟通推动项目与资源（商业与金融），现实型对应使用工具与现场作业（机械与电子、工程与技术）。兴趣代码描述职业群体特征，不是个人适配结论。"
+              "兴趣CER：常规62/企业59/现实58，调查研究55亦在完整六类；群体兴趣不是个人录用阈值。原办公室/工程、商业金融、机械电子等解释仅泛化描述，不能宣称其为全部职业特定细分领域。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.50",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28360,10 +28356,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不建议在该职业上长期投入：工作以文件、数据与多方沟通为主（91% 每天邮件、68% 每天通话），68% 拥有一定决策自由但也承担对应责任，现场与评审节点会出现集中加班与出差；可以先在一次受监督的项目中体验完整流程，再判断自己是否适应这种节奏。"
+              "数学薄弱不能直接判定不建议长期投入：O*NET数学技能66/知识62，任务含风险评估、费用估算和数据分析；编辑先练单位、比例、统计假设、工程量与计算复核，区分实际能力差距。电话/决策自由度百分比不是数学门槛或投资回报证据。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.52",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28371,10 +28371,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力确实有帮助：需要在评审质询与多方冲突时保持稳定、坚持按标准与程序处理。但这类能力不能用单一分数定义，也不能替代专业技术训练与合规判断。"
+              "编辑观察压力/质询时能否报告未知、核标准并清楚交接；本轮未取得本职业情绪智力测验预测效度，不能由工作情境推出分数门槛或情绪稳定因果效果。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.53",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28393,10 +28397,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用可复核的产出判断：一份注明来源与不确定性的污染识别说明、一份方案比选与成本估算、一份与标准逐条对照的核对记录。若你能按流程完成并被复核通过，说明你具备基本适配条件。"
+              "污染识别、方案比选和成本样例可帮助讨论差距，结合带教与多次反馈；按流程完成一次不自动证明基本胜任、签署权或现场权限。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.55",
+          "source_refs": [
+            "editor-current",
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -28437,10 +28445,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 Job Zone、学历构成与培训路径。"
+              "O*NET新入职教育要求问答77%学士、9%学士后证书、9%硕士，非从业者学历构成；JobZone4/SVP7至不足8为准备概括。BLS父类典型学士/不足5年相关经验/在岗培训None，非细类统一门槛。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.59",
+          "source_refs": [
+            "details-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -28448,10 +28460,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明土壤污染风险管控与修复的程序与专业能力要求。"
+              "中国现行生态环境法典438：相关调查、评估、风险管控、修复及后期管理单位应具相应专业能力；受委托单位对报告真实、准确、完整负责，并依约对活动结果负责。不是全部人员统一证照或“法律结论”签发权。439—442分别核污染责任人、无法认定时土地使用权人、承继及争议认定，不把场地经理自动当污染责任人。 建设用地：454地方生态环境会同自然资源组织调查报告评审；455—456风险报告报省级并组织评审/名录；459需修复名录地块方案结合国土空间规划、报地方生态环境备案；460责任人另行委托效果评估并备案；461省级会同有关部门评审移出名录。备案、评审、批准和工程验收不同，具体变更另核适用规则。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.60",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -28470,10 +28485,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明 Managers, All Other（SOC 11-9199 父类）口径 的就业与 2024—2034 年预测。"
+              "2025—2035美国11-9199父类Managers All Other：1338800→1404400人，净增65600，增长4.9%，年均空缺100900；O*NET显示整数5%及Faster than average（5%—6%）标签，不是11-9199.11细类就业预测。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.62",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -28492,10 +28510,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 Job Zone 与培训路径。"
+              "JobZone4和教育要求在详情页；培训目录只供项目检索，证书目录列霉菌专业证书也不签棕地职业统一资格。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.personality-fit-block.64",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28525,10 +28547,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "适配信号：更有解释力的信号是能按标准逐项核对数据并如实记录、在数据不足或程序不明时先停下请示、能接受复核与评审意见并据此修改；对环境议题的兴趣本身不足以证明胜任。"
+              "编辑观察数据核对、未知标注、复核与修订记录用于讨论能力差距；未取得与人格/兴趣测验相对解释力研究，单次产出不签胜任、授权或单位专业能力。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.riasec-fit-block.9",
+          "source_refs": [
+            "editor-current",
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -28547,10 +28573,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 兴趣代码：CER（常规型、企业型、现实型）。常规型下的具体领域为办公室工作、工程与技术；企业型下的具体领域为商业与金融；现实型下的具体领域为机械与电子、工程与技术。"
+              "兴趣CER：常规62/企业59/现实58，调查研究55亦在完整六类；群体兴趣不是个人录用阈值。原办公室/工程、商业金融、机械电子等解释仅泛化描述，不能宣称其为全部职业特定细分领域。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.fit.riasec-fit-block.11",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28686,22 +28716,34 @@
                 "url": "https://www.onetonline.org/link/details/11-9199.11"
               },
               {
-                "entity": "《中华人民共和国土壤污染防治法》",
+                "entity": "现行生态环境法典：土壤专业能力与建设用地",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.mee.gov.cn/ywgz/fgbz/fl/201809/t20180907_549845.shtml"
+                "url": "https://www.mee.gov.cn/ywgz/fgbz/fl/202603/t20260313_1146496.shtml"
               },
               {
-                "entity": "《中华人民共和国环境保护法》",
+                "entity": "现行生态环境法典：公众参与与新旧法衔接",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.gov.cn/zhengce/2014-04/25/content_2666434.htm"
+                "url": "https://www.mee.gov.cn/ywgz/fgbz/fl/202603/t20260313_1146496.shtml"
               },
               {
                 "entity": "NIST AI Risk Management Framework 1.0",
                 "id": "link-6",
                 "relation": "career.source",
                 "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "entity": "美国适用危废作业安全培训",
+                "id": "link-7",
+                "relation": "career.source",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.120"
+              },
+              {
+                "entity": "编辑风险与复核核对",
+                "id": "link-8",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/details/11-9199.11"
               }
             ]
           },
@@ -28724,10 +28766,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答：主要风险包括污染暴露与现场作业安全、数据与结论差错、责任链与专业资格边界不清、信息披露与社区关系处理不当，以及在成本与工期压力下跳过标准与程序；控制依赖数据与标准逐项核对、资质与授权边界管理、现场防护与作业审批、程序留痕与复核，以及持续的专业与法规培训。"
+              "风险含场地暴露、数据和标准差错、权限/责任主体不清、公众沟通、成本资金及记录；编辑先核地块实际暴露、开挖/有限空间等作业条件、职责、场地应急与撤离程序及法域，落实适用防护/监护/许可，不能由岗位名认定所有现场均需同一审批。美国1910.120先核a适用作业，b雇主场地安全计划及e按岗位暴露培训；40h+3日/24h+1日有条件，不能套中国或所有办公室棕地岗位。 中国现行生态环境法典438：相关调查、评估、风险管控、修复及后期管理单位应具相应专业能力；受委托单位对报告真实、准确、完整负责，并依约对活动结果负责。不是全部人员统一证照或“法律结论”签发权。439—442分别核污染责任人、无法认定时土地使用权人、承继及争议认定，不把场地经理自动当污染责任人。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.9",
+          "source_refs": [
+            "details-current",
+            "cn-code-current",
+            "us-hazwoper-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28735,10 +28783,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：风险与边界条目依据 O*NET 11-9199.11 的官方任务、工作活动与工作情境、O*NET 培训与教育信息、《中华人民共和国土壤污染防治法》与《中华人民共和国环境保护法》的公开条文整理；不替代所在机构的制度与适用法域的具体规定。"
+              "O*NET支持任务情境，现行生态环境法典430—442/453—463及101支持对应主体程序；OSHA仅美国适用作业。敏感性分析/记录清单等为编辑建议，非统一已实施制度或风险发生率。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.10",
+          "source_refs": [
+            "details-current",
+            "cn-code-current",
+            "us-hazwoper-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28768,10 +28822,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按场地制度执行个体防护与危害沟通，办理开挖、有限空间等作业审批与监护，并由具备资格的人员实施需持证的作业。"
+              "编辑先核地块实际暴露、开挖/有限空间等作业条件、职责、场地应急与撤离程序及法域，落实适用防护/监护/许可，不能由岗位名认定所有现场均需同一审批。美国1910.120先核a适用作业，b雇主场地安全计划及e按岗位暴露培训；40h+3日/24h+1日有条件，不能套中国或所有办公室棕地岗位。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.13",
+          "source_refs": [
+            "us-hazwoper-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28812,10 +28870,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "由具备相应专业能力的单位实施并对其报告的真实性、准确性、完整性负责；数据与计算过程保留可追溯记录。"
+              "中国现行生态环境法典438：相关调查、评估、风险管控、修复及后期管理单位应具相应专业能力；受委托单位对报告真实、准确、完整负责，并依约对活动结果负责。不是全部人员统一证照或“法律结论”签发权。439—442分别核污染责任人、无法认定时土地使用权人、承继及争议认定，不把场地经理自动当污染责任人。 编辑保留方法、单位、检出限和假设供复核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.17",
+          "source_refs": [
+            "cn-code-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28845,10 +28907,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "修复目标与方案变更、污染土壤转运与用地条件若未按程序报批，会造成程序瑕疵与责任真空。"
+              "专业能力、报告真实性、建设用地备案评审或转运提前报送混淆，会造成技术和程序错误；不能把所有事项写成统一报批。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.20",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -28856,10 +28921,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按主管部门程序办理评审、备案与变更；建设用地列入名录的地块不得作为住宅、公共管理与公共服务用地。"
+              "建设用地：454地方生态环境会同自然资源组织调查报告评审；455—456风险报告报省级并组织评审/名录；459需修复名录地块方案结合国土空间规划、报地方生态环境备案；460责任人另行委托效果评估并备案；461省级会同有关部门评审移出名录。备案、评审、批准和工程验收不同，具体变更另核适用规则。 456列入名录地块不得作居住、公共管理与公共服务用地；461未达目标或未按规定完成相关活动的地块不得开工无关项目，已开工应立即停施工。生态环境法典435施工公告牌公开情况和保护措施；436施工单位制定转运计划，将时间、方式、线路、数量、去向与最终处置措施提前报送所在地及接受地生态环境部门；属危险废物再按适用规定处置，非所有污染土壤自动危废，也非统一报批。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.21",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -28867,10 +28935,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "把不具备资格的事项写入报告或对外承诺，或以口头方式变更方案。"
+              "无相应专业能力仍承接报告、未按真实变更规则办理手续，或以口头承诺代替应有备案/评审。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.22",
+          "source_refs": [
+            "cn-code-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28900,10 +28972,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按信息披露与公众参与程序处理；涉及企业与个人信息的，按适用规定与最小必要范围使用。"
+              "生态环境法典435施工公告牌；101对可能重大影响且应编生态环境影响报告书的建设项目，除不公开情形外报批前征求可能受影响公众等意见，不是所有岗位统一公众听证。企业/个人信息按实际适用法律与授权核，不把授权写成全部依法公开的前提。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.25",
+          "source_refs": [
+            "cn-code-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28911,10 +28987,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在未经授权的情况下对外披露地块数据或承诺处理结果。"
+              "未依适用公开义务披露相关材料，或越权披露应保密信息/承诺结果；公开与保密条件分别核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.26",
+          "source_refs": [
+            "cn-code-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28944,10 +29024,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "把技术方案、法规要求与工期纳入估算并做敏感性分析；资金申请与使用按条件匹配并留痕。"
+              "编辑按技术、环境目标和工期核估算与敏感性；实际资金申请条件另核，不能认为列有O*NET资金任务即所有申请已符合项目资金规则。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.29",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29032,10 +29116,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明 Managers, All Other（SOC 11-9199 父类）口径 的就业与预测，不用于风险评估。"
+              "现行生态环境法典438单位专业能力/报告责任，435—436施工公开/转运及454—461建设用地程序；旧土法已废止。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.37",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -29043,10 +29130,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明土壤污染风险管控与修复的程序、专业能力与用地限制要求。"
+              "生态环境法典101有条件公众意见及1242施行废止条款，不是旧环保法继续有效证明。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.38",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -29054,10 +29144,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明环境保护的基本义务、环境影响评价与按日连续处罚等要求，不构成对具体项目的合规判定。"
+              "NIST通用AI治理框架，不是环保法或项目合规判定，不授技术签署或停复工权限。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.39",
+          "source_refs": [
+            "nist-ai-rmf"
+          ],
           "type": "prose"
         }
       ]
@@ -29227,10 +29320,10 @@
                 "url": "https://www.bls.gov/ooh/management/home.htm"
               },
               {
-                "entity": "《中华人民共和国土壤污染防治法》",
+                "entity": "现行生态环境法典：土壤章节",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.mee.gov.cn/ywgz/fgbz/fl/201809/t20180907_549845.shtml"
+                "url": "https://www.mee.gov.cn/ywgz/fgbz/fl/202603/t20260313_1146496.shtml"
               }
             ]
           },
@@ -29341,10 +29434,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：美国侧该职业被列为 Job Zone Four（SVP 7.0 至低于 8.0），受访者中 77% 认为需学士学位、9% 认为需学士后证书、9% 认为需硕士学位；在中国大陆，场地调查、风险评估、风险管控与修复及其效果评估等活动应当由具备相应专业能力的单位实施，受委托单位对其出具报告的真实性、准确性、完整性负责，具体程序由适用法规与主管部门规定确定。"
+              "O*NET新入职教育要求问答77%学士、9%学士后证书、9%硕士，非从业者学历构成；JobZone4/SVP7至不足8为准备概括。BLS父类典型学士/不足5年相关经验/在岗培训None，非细类统一门槛。 中国现行生态环境法典438：相关调查、评估、风险管控、修复及后期管理单位应具相应专业能力；受委托单位对报告真实、准确、完整负责，并依约对活动结果负责。不是全部人员统一证照或“法律结论”签发权。439—442分别核污染责任人、无法认定时土地使用权人、承继及争议认定，不把场地经理自动当污染责任人。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.20",
+          "source_refs": [
+            "details-current",
+            "ep-current",
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -29352,10 +29450,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界：培训经历、技术熟练度、项目经验、专业能力资质与可签署文件范围是不同状态；熟练不等于有权签署调查、风险评估或效果评估结论。"
+              "专业学习、项目经历、单位专业能力、适用证照和个人参与/签署权限分开；438不设所有人员统一“专业能力资质证”，具体项目签署条件另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.21",
+          "source_refs": [
+            "cn-code-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29363,10 +29465,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域：美国（O*NET-SOC 11-9199.11、机构制度与行业规范）与中国大陆（《中华人民共和国土壤污染防治法》《中华人民共和国环境保护法》及主管部门程序）分别核对，不跨法域直接套用。"
+              "美国11-9199.11职责与适用OSHA规则、中国现行生态环境法典土壤条款分别核；旧环保法/土法已于2026-08-15废止。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.22",
+          "source_refs": [
+            "summary-current",
+            "us-hazwoper-current",
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -29374,10 +29481,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "路径概要：以环境、地质、土木或规划等相关专业学习为基础，通过项目实践积累调查、评估、方案与成本能力，先取得参与授权，再逐步承担方案统筹与评审答辩职责；跨区域经验仅作能力材料。"
+              "以下为编辑学习/职责递进示例，非招聘频率或法定统一晋级；先学污染原理、标准与数据，再核带教和场地培训后实践；经验不自动扩大签署和决策权限。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.23",
+          "source_refs": [
+            "editor-current",
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -29396,10 +29507,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 Job Zone、学历构成与培训入口。"
+              "O*NET新入职教育要求问答77%学士、9%学士后证书、9%硕士，非从业者学历构成；JobZone4/SVP7至不足8为准备概括。BLS父类典型学士/不足5年相关经验/在岗培训None，非细类统一门槛。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.25",
+          "source_refs": [
+            "details-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -29407,10 +29522,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明 Managers, All Other（SOC 11-9199 父类）口径 的就业与 2024—2034 年预测。"
+              "2025—2035美国11-9199父类Managers All Other：1338800→1404400人，净增65600，增长4.9%，年均空缺100900；O*NET显示整数5%及Faster than average（5%—6%）标签，不是11-9199.11细类就业预测。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.26",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -29418,10 +29536,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明土壤污染风险管控与修复的程序与专业能力要求。"
+              "中国现行生态环境法典438：相关调查、评估、风险管控、修复及后期管理单位应具相应专业能力；受委托单位对报告真实、准确、完整负责，并依约对活动结果负责。不是全部人员统一证照或“法律结论”签发权。439—442分别核污染责任人、无法认定时土地使用权人、承继及争议认定，不把场地经理自动当污染责任人。 建设用地：454地方生态环境会同自然资源组织调查报告评审；455—456风险报告报省级并组织评审/名录；459需修复名录地块方案结合国土空间规划、报地方生态环境备案；460责任人另行委托效果评估并备案；461省级会同有关部门评审移出名录。备案、评审、批准和工程验收不同，具体变更另核适用规则。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.27",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -29451,10 +29572,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见起点岗位：环境咨询机构的调查与评估辅助岗位。"
+              "编辑岗位示例：环境咨询机构的调查与评估辅助岗位。；未采集招聘频率，实际岗位与晋级另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.30",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29506,10 +29630,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：调查与评估工程师。"
+              "编辑岗位示例：调查与评估工程师。；未采集招聘频率，实际岗位与晋级另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.35",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29561,10 +29688,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：调查与评估技术负责人。"
+              "编辑岗位示例：调查与评估技术负责人。；未采集招聘频率，实际岗位与晋级另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.40",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29583,10 +29713,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：评估结论的签署须符合资质与管理要求。"
+              "438为单位专业能力/报告责任，具体签署人和项目条件按适用规则与授权核，不推出统一职业证照。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.42",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -29616,10 +29749,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：技术管理部门负责人。"
+              "编辑岗位示例：技术管理部门负责人。；未采集招聘频率，实际岗位与晋级另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.45",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29671,10 +29807,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见起点岗位：修复工程公司的方案与实施辅助岗位。"
+              "编辑岗位示例：修复工程公司的方案与实施辅助岗位。；未采集招聘频率，实际岗位与晋级另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.50",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29693,10 +29832,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：修复目标与方案变更须按程序报批。"
+              "建设用地：454地方生态环境会同自然资源组织调查报告评审；455—456风险报告报省级并组织评审/名录；459需修复名录地块方案结合国土空间规划、报地方生态环境备案；460责任人另行委托效果评估并备案；461省级会同有关部门评审移出名录。备案、评审、批准和工程验收不同，具体变更另核适用规则。 生态环境法典435施工公告牌公开情况和保护措施；436施工单位制定转运计划，将时间、方式、线路、数量、去向与最终处置措施提前报送所在地及接受地生态环境部门；属危险废物再按适用规定处置，非所有污染土壤自动危废，也非统一报批。 具体变更规定和项目工程验收另核，不把所有方案调整写成统一报批/公布。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.52",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -29726,10 +29868,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：修复项目工程师。"
+              "编辑岗位示例：修复项目工程师。；未采集招聘频率，实际岗位与晋级另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.55",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29748,10 +29893,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：关键变更与验收结论须经授权与程序确认。"
+              "建设用地：454地方生态环境会同自然资源组织调查报告评审；455—456风险报告报省级并组织评审/名录；459需修复名录地块方案结合国土空间规划、报地方生态环境备案；460责任人另行委托效果评估并备案；461省级会同有关部门评审移出名录。备案、评审、批准和工程验收不同，具体变更另核适用规则。 生态环境法典435施工公告牌公开情况和保护措施；436施工单位制定转运计划，将时间、方式、线路、数量、去向与最终处置措施提前报送所在地及接受地生态环境部门；属危险废物再按适用规定处置，非所有污染土壤自动危废，也非统一报批。 具体变更规定和项目工程验收另核，不把所有方案调整写成统一报批/公布。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.57",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -29781,10 +29929,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：修复工程项目负责人。"
+              "编辑岗位示例：修复工程项目负责人。；未采集招聘频率，实际岗位与晋级另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.60",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29803,10 +29954,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：用地条件与验收结论由主管部门确认。"
+              "建设用地：454地方生态环境会同自然资源组织调查报告评审；455—456风险报告报省级并组织评审/名录；459需修复名录地块方案结合国土空间规划、报地方生态环境备案；460责任人另行委托效果评估并备案；461省级会同有关部门评审移出名录。备案、评审、批准和工程验收不同，具体变更另核适用规则。 生态环境法典435施工公告牌公开情况和保护措施；436施工单位制定转运计划，将时间、方式、线路、数量、去向与最终处置措施提前报送所在地及接受地生态环境部门；属危险废物再按适用规定处置，非所有污染土壤自动危废，也非统一报批。 具体变更规定和项目工程验收另核，不把所有方案调整写成统一报批/公布。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.62",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -29836,10 +29990,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：修复业务管理部门负责人。"
+              "编辑岗位示例：修复业务管理部门负责人。；未采集招聘频率，实际岗位与晋级另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.65",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29891,10 +30048,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见起点岗位：环评与用地咨询辅助岗位；政府技术管理辅助岗位。"
+              "编辑岗位示例：环评与用地咨询辅助岗位；政府技术管理辅助岗位。；未采集招聘频率，实际岗位与晋级另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.70",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29946,10 +30106,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：项目统筹与合规专员。"
+              "编辑岗位示例：项目统筹与合规专员。；未采集招聘频率，实际岗位与晋级另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.75",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30001,10 +30164,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：再开发项目负责人。"
+              "编辑岗位示例：再开发项目负责人。；未采集招聘频率，实际岗位与晋级另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.80",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30023,10 +30189,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：重大方案调整须按程序报批并公布。"
+              "建设用地：454地方生态环境会同自然资源组织调查报告评审；455—456风险报告报省级并组织评审/名录；459需修复名录地块方案结合国土空间规划、报地方生态环境备案；460责任人另行委托效果评估并备案；461省级会同有关部门评审移出名录。备案、评审、批准和工程验收不同，具体变更另核适用规则。 生态环境法典435施工公告牌公开情况和保护措施；436施工单位制定转运计划，将时间、方式、线路、数量、去向与最终处置措施提前报送所在地及接受地生态环境部门；属危险废物再按适用规定处置，非所有污染土壤自动危废，也非统一报批。 具体变更规定和项目工程验收另核，不把所有方案调整写成统一报批/公布。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.82",
+          "source_refs": [
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -30056,10 +30225,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：业务管理部门负责人。"
+              "编辑岗位示例：业务管理部门负责人。；未采集招聘频率，实际岗位与晋级另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.85",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30078,10 +30250,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：制度与标准适用争议须提交法务与主管部门判断。"
+              "制度和标准争议按真实职责核适用规则、寻求专业复核及必要主管部门程序；法务咨询本身不代法定评审或个人技术职责。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.career-path-block.87",
+          "source_refs": [
+            "editor-current",
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -30106,35 +30282,35 @@
               [
                 "环境咨询机构调查与评估岗位",
                 "在带教下参与资料收集、现场踏勘与采样配合、数据整理与初步分析，学习调查与评估规范。",
-                "用工方看重细致程度、数据素养与合规意识；通常要求环境或相关专业并经培训。",
+                "编辑招聘核对建议（无雇主频率证据）：用工方看重细致程度、数据素养与合规意识；通常要求环境或相关专业并经培训。",
                 "提交一份受监督完成的数据整理与核对记录，注明来源与不确定项。",
                 "此路径不独立签署调查或评估结论；须核对资质与可参与范围。"
               ],
               [
                 "修复工程公司方案与实施岗位",
                 "协助方案比选、成本拆分与进度跟踪，参与现场施工与监测的协调与记录。",
-                "用工方看技术理解、成本意识与现场协调能力。",
+                "编辑招聘核对建议（无雇主频率证据）：用工方看技术理解、成本意识与现场协调能力。",
                 "提交一份方案比选与成本拆分说明样例。",
-                "修复目标与方案变更须按程序报批，个人不得自行变更。"
+                "建设用地：454地方生态环境会同自然资源组织调查报告评审；455—456风险报告报省级并组织评审/名录；459需修复名录地块方案结合国土空间规划、报地方生态环境备案；460责任人另行委托效果评估并备案；461省级会同有关部门评审移出名录。备案、评审、批准和工程验收不同，具体变更另核适用规则。"
               ],
               [
                 "环评与用地咨询岗位",
                 "协助编制环境影响评价与用地相关材料，学习标准适用与程序要求。",
-                "用工方看法规理解、材料组织与多任务处理能力。",
+                "编辑招聘核对建议（无雇主频率证据）：用工方看法规理解、材料组织与多任务处理能力。",
                 "提交一份标准适用与程序清单样例。",
-                "对外提交材料的结论须由具备资格的单位与授权人员确认。"
+                "中国现行生态环境法典438：相关调查、评估、风险管控、修复及后期管理单位应具相应专业能力；受委托单位对报告真实、准确、完整负责，并依约对活动结果负责。不是全部人员统一证照或“法律结论”签发权。439—442分别核污染责任人、无法认定时土地使用权人、承继及争议认定，不把场地经理自动当污染责任人。 环境影响评价适用事项另核。"
               ],
               [
                 "政府生态环境管理岗位",
                 "参与监管、评审组织与资料审核，学习名录管理与信息公开要求。",
-                "用工方看政策理解、程序执行与沟通协调能力。",
+                "编辑招聘核对建议（无雇主频率证据）：用工方看政策理解、程序执行与沟通协调能力。",
                 "提交一份评审要点与问题清单样例。",
                 "名录、准入与处罚等决定由主管部门按法定程序作出。"
               ],
               [
                 "相邻工种转入（环境监测、施工管理、造价）",
                 "承接监测数据整理、现场协调或造价拆分任务，熟悉地块与修复项目的流程。",
-                "用工方看相关经验与合规记录，并核对土壤与地下水基础。",
+                "编辑招聘核对建议（无雇主频率证据）：用工方看相关经验与合规记录，并核对土壤与地下水基础。",
                 "提交一份从既有岗位整理的可复核记录，并说明与方案统筹的差距。",
                 "相邻经验不等于方案授权；转岗须补足污染原理、修复技术与程序训练。"
               ]
@@ -30152,16 +30328,16 @@
               {
                 "id": "education",
                 "values": [
-                  "美国侧：O*NET 把该职业列为 Job Zone Four（SVP 7.0 至低于 8.0），受访者中 77% 认为需学士学位、9% 认为需学士后证书、9% 认为需硕士学位。",
-                  "实际入行多依靠环境、地质、土木或规划等相关专业学习与项目实践；方案统筹与评审答辩经历常被用作能力依据。",
+                  "O*NET新入职教育要求问答77%学士、9%学士后证书、9%硕士，非从业者学历构成；JobZone4/SVP7至不足8为准备概括。BLS父类典型学士/不足5年相关经验/在岗培训None，非细类统一门槛。",
+                  "编辑核专业课程与项目实践，未采集专业招聘频率，不推统一专业或经历门槛。",
                   "该职业页面标注 Bright Outlook，本页按官方标注呈现。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "进入场地需完成安全与危害沟通教育，并按场地制度办理开挖、有限空间等作业审批与监护。",
-                  "在中国大陆，场地调查、风险评估、风险管控与修复及其效果评估等活动应由具备相应专业能力的单位实施；修复施工期间应设立公告牌，转运污染土壤须提前报主管部门。",
+                  "编辑先核地块实际暴露、开挖/有限空间等作业条件、职责、场地应急与撤离程序及法域，落实适用防护/监护/许可，不能由岗位名认定所有现场均需同一审批。美国1910.120先核a适用作业，b雇主场地安全计划及e按岗位暴露培训；40h+3日/24h+1日有条件，不能套中国或所有办公室棕地岗位。",
+                  "中国现行生态环境法典438：相关调查、评估、风险管控、修复及后期管理单位应具相应专业能力；受委托单位对报告真实、准确、完整负责，并依约对活动结果负责。不是全部人员统一证照或“法律结论”签发权。439—442分别核污染责任人、无法认定时土地使用权人、承继及争议认定，不把场地经理自动当污染责任人。 生态环境法典435施工公告牌公开情况和保护措施；436施工单位制定转运计划，将时间、方式、线路、数量、去向与最终处置措施提前报送所在地及接受地生态环境部门；属危险废物再按适用规定处置，非所有污染土壤自动危废，也非统一报批。",
                   "涉及企业与个人信息的资料按适用规定与最小必要范围使用。"
                 ]
               },
@@ -30176,7 +30352,7 @@
               {
                 "id": "tools",
                 "values": [
-                  "O*NET 技术清单共 22 项技术与软件技能（18 项 Hot Technology、2 项 In Demand），含 ESRI ArcGIS、Microsoft Office／Excel／Word／PowerPoint、Microsoft Access／Outlook／PowerShell／Project／SharePoint、SQL Server Reporting Services、Oracle Database、PostgreSQL、Python、Salesforce、SAP 与 Tableau。",
+                  "22软件类别、18Hot产品、2InDemand；2025细类招聘Office7%、Excel5%、Word4%、PowerPoint4%，其余14产品NA非0，含ArcGIS、Linux、Access、Outlook、PowerShell、Project、SharePoint、SSRS、Oracle、PostgreSQL、Python、Salesforce、SAP、Tableau；不是部署率或所有岗位必会清单。",
                   "日常工具以场地调查与采样设备、监测与检测报告、风险评估与成本估算工具、归档与工单系统为主。",
                   "把数字工具用于评估或验收依据前，须确认数据与资质责任要求。"
                 ]
@@ -30421,45 +30597,45 @@
               [
                 "学士学位（美国）",
                 "计划在美国长期从事该职业的人",
-                "O*NET 受访者中 77% 认为需要，属于常见要求。",
+                "77%学士、9%学士后证书/9%硕士是新入职教育要求问答，非学历构成或全国所有雇主频率。",
                 "不是所有雇主的硬性门槛。",
                 "视专业方向（环境、地质、土木、规划等）与机构要求而定。",
-                "通常四年。",
+                "实际学制/课程与机构费用未核，不由学历名推统一时间投入。",
                 "学历本身不等于可签署文件或项目统筹授权。"
               ],
               [
                 "学士后证书或硕士学位（美国）",
                 "希望提升专业深度与技术管理能力的人",
-                "O*NET 受访者中各约 9% 认为需要，属于部分岗位要求。",
+                "77%学士、9%学士后证书/9%硕士是新入职教育要求问答，非学历构成或全国所有雇主频率。",
                 "属于岗位偏好与进阶要求。",
                 "视方向与机构要求而定。",
-                "一至两年不等。",
+                "实际学制/课程与机构费用未核，不由学历名推统一时间投入。",
                 "学位不自动产生专业能力资质或签署权限。"
               ],
               [
                 "机构培训与项目实践（美国与中国大陆通用）",
                 "所有新入职人员",
-                "决定能否独立承担所在岗位的任务。",
-                "属于机构的通行做法。",
+                "编辑以合适培训和实践形成能力证据，培训本身不签独立胜任。",
+                "具体机构课程未核；适用美国危废现场培训按1910.120a/e条件核，非全球统一项目。",
                 "须完成机构规定的培训与考核。",
-                "数周到数年不等，随标准与项目类型更新需要复训。",
+                "实际课程与项目实训时间未核；美国适用危废作业的课时和现场训练按1910.120e分别核。",
                 "培训记录不等于报告签署与方案审批权限。"
               ],
               [
-                "专业能力资质（中国大陆）",
+                "单位相应专业能力（中国大陆）",
                 "从事土壤污染状况调查、风险评估、风险管控、修复与效果评估的单位",
-                "决定能否实施相应活动并出具报告。",
-                "属于法定要求：应当具备相应专业能力，并对其出具报告的真实性、准确性、完整性负责。",
-                "须依据《中华人民共和国土壤污染防治法》与相关技术规范执行。",
+                "中国现行生态环境法典438：相关调查、评估、风险管控、修复及后期管理单位应具相应专业能力；受委托单位对报告真实、准确、完整负责，并依约对活动结果负责。不是全部人员统一证照或“法律结论”签发权。439—442分别核污染责任人、无法认定时土地使用权人、承继及争议认定，不把场地经理自动当污染责任人。",
+                "生态环境法典438专业能力及受委托单位报告责任，不是统一个人资格证。",
+                "须依现行生态环境法典438及适用技术规范核单位相应专业能力、项目条件与报告责任。",
                 "按机构能力建设与项目要求持续投入。",
-                "具备能力不等于获得主管部门的评审或验收结论。"
+                "单位能力和报告责任不替代主管部门法定评审/名录决定。"
               ],
               [
                 "主管部门程序与备案（中国大陆）",
                 "项目实施单位与责任人",
-                "决定修复目标、方案变更、污染土壤转运与用地条件能否实施。",
-                "属于法定程序：评审、备案与名录管理由主管部门按规实施。",
-                "建设用地列入名录的地块不得作为住宅、公共管理与公共服务用地。",
+                "建设用地：454地方生态环境会同自然资源组织调查报告评审；455—456风险报告报省级并组织评审/名录；459需修复名录地块方案结合国土空间规划、报地方生态环境备案；460责任人另行委托效果评估并备案；461省级会同有关部门评审移出名录。备案、评审、批准和工程验收不同，具体变更另核适用规则。 生态环境法典435施工公告牌公开情况和保护措施；436施工单位制定转运计划，将时间、方式、线路、数量、去向与最终处置措施提前报送所在地及接受地生态环境部门；属危险废物再按适用规定处置，非所有污染土壤自动危废，也非统一报批。",
+                "现行生态环境法典相应评审、备案、报送及名录管理，非所有事项统一报批。",
+                "456列入名录不得作居住、公共管理与公共服务用地；461相应开工限制另核。",
                 "按程序周期安排。",
                 "程序性文件不替代技术判断与数据核对。"
               ],
@@ -30467,7 +30643,7 @@
                 "授权与责任约定（书面）",
                 "所有项目参与岗位",
                 "决定可签署哪些文件、由谁复核、如何留痕。",
-                "属于机构管理要求，是差错追责与职业保护的前提。",
+                "编辑书面职责/复核建议，非已核全部机构统一门槛或责任唯一依据。",
                 "须与机构确认授权范围、复核层级与留痕方式并保留书面记录。",
                 "谈判与确认时间。",
                 "书面约定不替代机构对数据真实性与程序合规的义务。"
@@ -30483,10 +30659,10 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界：培训经历、技术熟练度、项目经验、专业能力资质与可签署文件范围是不同状态，任何一项都不能由另一项自动推出。",
-              "美国侧：O*NET 把该职业列为 Job Zone Four（SVP 7.0 至低于 8.0），受访者中 77% 认为需学士学位、9% 认为需学士后证书、9% 认为需硕士学位。",
-              "中国大陆侧：土壤污染风险管控和修复包括调查、风险评估、风险管控、修复、效果评估与后期管理；从事这些活动的单位应当具备相应专业能力并对其出具报告的真实性、准确性、完整性负责；建设用地列入风险管控和修复名录的，不得作为住宅、公共管理与公共服务用地。",
-              "入职前应逐项核实培训与资质记录、可参与与可签署范围、现场安全与防护安排，以及绩效与项目奖金口径，并保留书面确认。"
+              "专业学习/培训、经验、单位相应专业能力、适用证照和个人授权分别核。",
+              "O*NET新入职教育要求问答77%学士、9%学士后证书、9%硕士，非从业者学历构成；JobZone4/SVP7至不足8为准备概括。BLS父类典型学士/不足5年相关经验/在岗培训None，非细类统一门槛。",
+              "中国现行生态环境法典438：相关调查、评估、风险管控、修复及后期管理单位应具相应专业能力；受委托单位对报告真实、准确、完整负责，并依约对活动结果负责。不是全部人员统一证照或“法律结论”签发权。439—442分别核污染责任人、无法认定时土地使用权人、承继及争议认定，不把场地经理自动当污染责任人。 建设用地：454地方生态环境会同自然资源组织调查报告评审；455—456风险报告报省级并组织评审/名录；459需修复名录地块方案结合国土空间规划、报地方生态环境备案；460责任人另行委托效果评估并备案；461省级会同有关部门评审移出名录。备案、评审、批准和工程验收不同，具体变更另核适用规则。 生态环境法典435施工公告牌公开情况和保护措施；436施工单位制定转运计划，将时间、方式、线路、数量、去向与最终处置措施提前报送所在地及接受地生态环境部门；属危险废物再按适用规定处置，非所有污染土壤自动危废，也非统一报批。",
+              "编辑入职核参与与签署范围、场地安全、复核与奖金安排；不能由短训推独立报告或真实现场权限。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.credential-boundary.1",
@@ -30498,8 +30674,8 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明：本节不引用具体雇主的招聘公告，只说明岗位核对应关注的项目；公开渠道出现的岗位名称包括土壤修复工程师、环境咨询顾问、场地调查工程师、环评技术员、生态环境管理岗位等，其资质要求与用工形式差别很大。",
-              "阅读招聘信息时应核对用工形式（企业、事业单位、政府购买服务或项目制）、项目类型与出差频率、资质与培训要求、可签署文件范围、绩效与奖金口径，并警惕把短期培训宣传为可独立签署调查与评估结论的表述。"
+              "本轮未采集具体招聘公告，土壤修复工程师、咨询顾问、调查工程师和生态环境管理等仅编辑岗位示例，不宣称公开频率。",
+              "编辑核真实职责、专业能力、参与与签署范围、场地培训/出差、计酬及现行备案评审要求；短训不自动授权独立报告或现场。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.path.recruitment-sample.1",
@@ -30523,7 +30699,7 @@
             ]
           },
           "fact_refs": [
-            "us-employment-2025"
+            "us-employment-2025-current"
           ],
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.1",
           "source_refs": [
@@ -30541,7 +30717,7 @@
             ]
           },
           "fact_refs": [
-            "us-growth-2025-2035"
+            "us-growth-2025-2035-current"
           ],
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.2",
           "source_refs": [
@@ -30574,7 +30750,7 @@
             ]
           },
           "fact_refs": [
-            "us-openings-2025-2035"
+            "us-openings-2025-2035-current"
           ],
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.4",
           "source_refs": [
@@ -30631,10 +30807,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET-SOC 11-9199.11 职业摘要（就业与预测字段）",
+                "entity": "BLS表1.2父类11-9199",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/11-9199.11"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET-SOC 11-9199.11 职业摘要",
@@ -30712,10 +30888,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：公开数据支持的是 Managers, All Other（SOC 11-9199 父类）口径 的判断——2024 年就业 1,333,700 人，2024—2034 年预测增长 5% 至 6%、年均职位空缺约 106,700 个；该口径为 Managers, All Other 父类合计，不是 11-9199.11 单列数据。BLS 管理职业群页面为群级背景（2025 年中位 126,520 美元、2025—2035 年增长快于平均、年均约 110 万个空缺），与本页口径不同，须分别标注；中国大陆按证据路由只登记统计口径与缺口，不发布替代数值。"
+              "2025—2035美国11-9199父类Managers All Other：1338800→1404400人，净增65600，增长4.9%，年均空缺100900；O*NET显示整数5%及Faster than average（5%—6%）标签，不是11-9199.11细类就业预测。 管理职业群126520中位/约110万空缺仅更宽群背景；中国精确职业代码映射、全国/城市职业工资仍证据不足；2025科学研究技术服务业非私营182064/私营83560元年税前均值仅环境咨询检测等用工行业背景，混合全部岗位，非棕地职业工资。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.8",
+          "source_refs": [
+            "ep-current",
+            "ooh-current",
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30734,10 +30915,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024 年"
+              "2025年"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.10",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30745,10 +30929,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为 Managers, All Other（SOC 11-9199 父类）口径 的就业基数。"
+              "2025—2035美国11-9199父类Managers All Other：1338800→1404400人，净增65600，增长4.9%，年均空缺100900；O*NET显示整数5%及Faster than average（5%—6%）标签，不是11-9199.11细类就业预测。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.11",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30756,10 +30943,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该口径覆盖所有其他管理者；本职业岗位数量受环境监管力度、土地再开发需求与财政资金安排影响。"
+              "2025行业政府11%、其他89%（含专业科学技术服务），摘要明确来自11-9199父类；不是棕地细类11-9199.11分布，不由份额推工资。 本轮未量化棕地细类需求与监管/资金或AI的因果贡献。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.12",
+          "source_refs": [
+            "industry-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30778,10 +30969,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact"
+              "parent_occupation_proxy"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.14",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30789,10 +30983,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "1,333,700 人"
+              "1338800人（11-9199父类）"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.15",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30811,10 +31008,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年"
+              "2025—2035年"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.17",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30822,10 +31022,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 页面标注为 Faster than average（5% 至 6%），口径为 Managers, All Other（SOC 11-9199 父类）。"
+              "2025—2035美国11-9199父类Managers All Other：1338800→1404400人，净增65600，增长4.9%，年均空缺100900；O*NET显示整数5%及Faster than average（5%—6%）标签，不是11-9199.11细类就业预测。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.18",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30833,10 +31036,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该预测为父类统计口径；BLS 管理职业群口径与期间（2025—2035 年）不同，不构成个人就业保证。"
+              "2025—2035美国11-9199父类Managers All Other：1338800→1404400人，净增65600，增长4.9%，年均空缺100900；O*NET显示整数5%及Faster than average（5%—6%）标签，不是11-9199.11细类就业预测。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.19",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30855,10 +31061,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact"
+              "parent_occupation_proxy"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.21",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30866,10 +31075,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增长 5% 至 6%（年均空缺约 106,700 个）"
+              "增长4.9%/年均空缺100900（11-9199父类）"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.22",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30899,10 +31111,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局按行业门类公布平均工资，但没有单列本职业；按证据路由 （暂无可安全使用的数据），本页不展示行业均值也不据此推算本职业工资。"
+              "中国精确职业代码映射、全国/城市职业工资仍证据不足；2025科学研究技术服务业非私营182064/私营83560元年税前均值仅环境咨询检测等用工行业背景，混合全部岗位，非棕地职业工资。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.25",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30910,10 +31125,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该口径为行业门类平均工资，混合多类岗位；本页只登记其不可替代性，不发布职业级或代理数值。"
+              "中国精确职业代码映射、全国/城市职业工资仍证据不足；2025科学研究技术服务业非私营182064/私营83560元年税前均值仅环境咨询检测等用工行业背景，混合全部岗位，非棕地职业工资。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.26",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30921,10 +31139,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业门类口径（仅登记，不展示数值）"
+              "科学研究技术服务业2025均值背景"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.27",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30943,10 +31164,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该职业的全国职业工资与就业分布"
+              "非私营182064/私营83560元年税前行业均值；棕地精确工资和就业缺口保留。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.29",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30954,10 +31178,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明 Managers, All Other（SOC 11-9199 父类）口径 的就业与 2024—2034 年预测；BLS 管理职业群页面另行标注。"
+              "2025—2035美国11-9199父类Managers All Other：1338800→1404400人，净增65600，增长4.9%，年均空缺100900；O*NET显示整数5%及Faster than average（5%—6%）标签，不是11-9199.11细类就业预测。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.30",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30965,10 +31192,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明该职业的就业规模与预测字段，须与工资数据分开解读。"
+              "2025—2035美国11-9199父类Managers All Other：1338800→1404400人，净增65600，增长4.9%，年均空缺100900；O*NET显示整数5%及Faster than average（5%—6%）标签，不是11-9199.11细类就业预测。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.31",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30987,10 +31217,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明官方任务与工作活动口径。"
+              "BLS管理职业群11-0000背景，非O*NET任务活动来源。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.33",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -31020,10 +31253,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同处环境治理链条，但侧重调查与评估。"
+              "编辑距离较近：环境科学家可调查污染、分析风险并提防治建议，不限采样；补目标专业训练，实际执业条件另核，无成功率。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.36",
+          "source_refs": [
+            "onet-17-3021",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31053,10 +31290,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：都需要现场与合规判断，但输出从方案转为设计。"
+              "编辑距离判断：距离中等：都需要现场与合规判断，但输出从方案转为设计。；无转岗成功率，实际资格与职责另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.39",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31086,10 +31326,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：都在项目现场，但责任从方案转为施工执行。"
+              "编辑距离判断：距离中等，两职都涉及项目计划、实施、现场协调与合规；转向施工管理需按目标工程补施工组织、承包合同、进度成本、安全及管理权限，不能二分为方案与执行。未取得转岗成功率，实际资格与职责另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.42",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31119,10 +31362,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同处修复现场，但作业层级不同。"
+              "编辑距离判断：距离较近：同处修复现场，但作业层级不同。；无转岗成功率，实际资格与职责另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.45",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31130,10 +31376,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足合规检查与执法程序知识。"
+              "编辑核合规检查领域与职责；企业合规岗位不自动取得行政执法权，执法方向另核招录/身份及程序。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.46",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31152,10 +31401,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：都依据法规，但职责从方案转为检查。"
+              "编辑距离判断：距离中等：都依据法规，但职责从方案转为检查。；无转岗成功率，实际资格与职责另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.48",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31185,10 +31437,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属项目成本环节，但技术判断较少。"
+              "编辑距离判断：距离较近：同属项目成本环节，但技术判断较少。；无转岗成功率，实际资格与职责另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.51",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31218,10 +31473,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：都面向用地与空间，但对象从污染转为规划。"
+              "编辑距离判断：距离中等：都面向用地与空间，但对象从污染转为规划。；无转岗成功率，实际资格与职责另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.54",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31251,10 +31509,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属项目管理职能，但技术深度不同。"
+              "编辑距离判断：距离较近：同属项目管理职能，但技术深度不同。；无转岗成功率，实际资格与职责另核。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.57",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -31367,10 +31628,10 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "边界一：本页身份口径为 O*NET-SOC 11-9199.11（Brownfield Redevelopment Specialists and Site Managers，棕地再开发专家与场地经理）；美国工资、就业与预测数据在 O*NET 页面本身即以 Managers, All Other（SOC 11-9199 父类）标注，属于更宽的口径，其数值不是 11-9199.11 单列统计；BLS 职业展望手册的管理职业群页面为群级背景，只作对照标注，不与本页混用或相加。",
-              "边界二：本页把美国口径与中国大陆口径分开标注，不跨法域套用或换算；美国身份口径含 Bright Outlook 标注与 Job Zone Four（SVP 7.0 至低于 8.0）；中国大陆按证据路由 china-exact-wage-unavailable（documented_unavailable，severity=material）只登记统计口径与缺口，不发布职业级数值、也不用行业均值或美国数据替代。",
+              "边界一：职责11-9199.11，美国2025工资/行业及2025—2035就业为11-9199父类，管理职业群11-0000另作背景；2023父类×行业均值非细类工资，均不作个人起薪或保证。",
+              "边界二：美国与中国分读；中国精确职业代码/工资缺口保留，科学技术等行业均值仅明确背景。生态环境法典2026-08-15施行，旧环保法/土法废止；保护FAQ/练习共享旧源仍留历史冲突，不能宣称全页现行一致。",
               "边界三：编辑练习与作品建议均为虚构材料，读者不应据此在真实地块取样、施工、转运污染土壤或对外披露信息，也不得把练习结果包装成评估、验收或用地结论。",
-              "边界四：本页由 O*NET、BLS、国家统计局、《中华人民共和国土壤污染防治法》《中华人民共和国环境保护法》、NIST AI 风险管理框架与 ILO 任务暴露研究等公开资料及编辑设计组成；每项资料的适用范围与缺口单独标记。"
+              "边界四：本轮O*NET/BLS/NBS、现行生态环境法典与适用OSHA资料，以及同版ILO/NIST一般方法和编辑设计分别标注；原保护内容和共享旧源保留历史冲突，不能作当前全页事实核实声明。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.sources.boundary.1",
@@ -31395,10 +31656,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "费马测试职业内容编辑组：依据 O*NET、BLS、国家统计局、《中华人民共和国土壤污染防治法》与《中华人民共和国环境保护法》等公开资料整理，逐项标注口径与数据期。"
+              "本轮按11-9199.11职责和11-9199父类统计分别核；法律使用现行生态环境法典土壤/公众参与条款，编辑路径、适配与距离不等事实频率或授权。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.sources.source-card.1",
+          "source_refs": [
+            "summary-current",
+            "ep-current",
+            "cn-code-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31406,10 +31673,20 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源：O*NET-SOC 11-9199.11 职业摘要、详细资料、自定义职业档案、技术清单、行业分布、培训与教育信息与全国工资分位页面；BLS《Occupational Outlook Handbook》管理职业群页面（群级背景）；国家统计局《2025 年城镇单位就业人员年平均工资情况》；ILO 工作论文 140。"
+              "本轮核O*NET完整23任务/41一般19详细活动/57情境、教育和六类兴趣、22软件类别/18Hot产品；BLS父类表1.2、管理职业群及2023父类行业均值；NBS2025匹配行业；现行生态环境法典430—442/453—463/101/1242，OSHA1910.120a/b/e。ILO140/NIST一般方法同版复用，不作细类替代率。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.sources.source-card.2",
+          "source_refs": [
+            "details-current",
+            "hot-current",
+            "ep-current",
+            "ooh-current",
+            "oews2023-current",
+            "nbs-current",
+            "cn-code-current",
+            "us-hazwoper-current"
+          ],
           "type": "prose"
         },
         {
@@ -31417,10 +31694,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：O*NET 页面为 2025 年更新；工资为 2025 年 BLS OEWS（Managers, All Other 口径）；就业与预测为 2024 年与 2024—2034 年；行业分布为 2024 年；BLS 管理职业群页面为 2025 年 5 月工资与 2025—2035 年预测；国家统计局数据为 2025 年、2026-05-15 发布；《中华人民共和国土壤污染防治法》自 2019-01-01 施行；《中华人民共和国环境保护法》自 2015-01-01 施行；检索日 2026-09-16。"
+              "2026-10-09核：职业档案2025更新；工资/行业/招聘2025，预测2025—2035，父类行业工资2023；NBS2025。生态环境法典2026-08-15施行且旧环保法/土法废止；原共享来源与事实仅保留历史记录，新证据隔离。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.sources.source-card.3",
+          "source_refs": [
+            "details-current",
+            "industry-current",
+            "ep-current",
+            "oews2023-current",
+            "nbs-current",
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -31428,10 +31713,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "使用说明：本页美国工资、就业与预测采用 Managers, All Other（SOC 11-9199 父类）口径，不是 11-9199.11 单列统计；BLS 管理职业群页面属于群级背景，只作对照标注；中国大陆按证据路由 （暂无可安全使用的数据）处理，不发布职业级工资数值，也不用行业均值或美国数据替代，缺口以「证据不足」标记。"
+              "使用说明：父类/管理职业群/行业背景不填细类精确缺口；教育要求非学历构成，兴趣非个人阈值，路径/距离无招聘频率或成功率。专业能力、法定责任人、个体权限、备案评审与批准分别核，不用旧法作现行许可。"
             ]
           },
           "id": "brownfield-redevelopment-specialists-and-site-managers.sources.source-card.4",
+          "source_refs": [
+            "editor-current",
+            "cn-code-current",
+            "ep-current"
+          ],
           "type": "prose"
         }
       ]
@@ -31772,6 +32062,214 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET11-9199.11 完整任务活动与教育情境",
+                  "职业2025更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "details-current",
+                "limitation": "23任务20Core/3Supplemental；41一般、19详细活动和57情境；教育为新入职要求问答。",
+                "market": "美国",
+                "name": "O*NET11-9199.11 完整任务活动与教育情境",
+                "period": "职业2025更新",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/11-9199.11"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET11-9199.11 身份与父类数据边界",
+                  "职业2025更新/数据2025"
+                ],
+                "evidence_type": "primary_document",
+                "id": "summary-current",
+                "limitation": "职责11-9199.11；工资、就业、行业均来自11-9199父类。",
+                "market": "美国",
+                "name": "O*NET11-9199.11 身份与父类数据边界",
+                "period": "职业2025更新/数据2025",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-9199.11"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET11-9199.11 招聘软件信号",
+                  "2025全年招聘"
+                ],
+                "evidence_type": "primary_document",
+                "id": "hot-current",
+                "limitation": "22软件类别非22产品；18Hot产品/2InDemand；Office7、Excel5、Word4、PowerPoint4，其余NA非0。",
+                "market": "美国",
+                "name": "O*NET11-9199.11 招聘软件信号",
+                "period": "2025全年招聘",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/11-9199.11"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET11-9199.11 全国父类工资分位",
+                  "2025"
+                ],
+                "evidence_type": "primary_document",
+                "id": "wages-current",
+                "limitation": "11-9199 Managers All Other，非11-9199.11单列；原5分位核实正确。",
+                "market": "美国",
+                "name": "O*NET11-9199.11 全国父类工资分位",
+                "period": "2025",
+                "publisher": "O*NET OnLine",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/localwages/11-9199.11"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET11-9199.11 父类就业预测",
+                  "2025—2035"
+                ],
+                "evidence_type": "primary_document",
+                "id": "trends-current",
+                "limitation": "1338800→1404400/整数5%/100900；BLS精确4.9%，非细类。",
+                "market": "美国",
+                "name": "O*NET11-9199.11 父类就业预测",
+                "period": "2025—2035",
+                "publisher": "O*NET OnLine",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/localtrends/11-9199.11"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET11-9199.11 父类行业分布",
+                  "2025"
+                ],
+                "evidence_type": "primary_document",
+                "id": "industry-current",
+                "limitation": "摘要明确Industry data for Managers All Other；政府11其他89，非细类行业份额。",
+                "market": "美国",
+                "name": "O*NET11-9199.11 父类行业分布",
+                "period": "2025",
+                "publisher": "O*NET OnLine",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/industry/11-9199.11"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS表1.2 Managers All Other父类",
+                  "2025—2035"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ep-current",
+                "limitation": "1338.8→1404.4千/净增65.6千/4.9%/100.9千空缺；BA/相关经验不足5年/在岗培训None，为父类。",
+                "market": "美国",
+                "name": "BLS表1.2 Managers All Other父类",
+                "period": "2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS管理职业群背景",
+                  "2025工资/2025—2035"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ooh-current",
+                "limitation": "群中位126520与110万空缺正确，但为11-0000群，非11-9199父类也非细类。",
+                "market": "美国",
+                "name": "BLS管理职业群背景",
+                "period": "2025工资/2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/ooh/management/home.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS2023父类×行业均值",
+                  "2023-05"
+                ],
+                "evidence_type": "primary_document",
+                "id": "oews2023-current",
+                "limitation": "11-9199全体其他管理者；政府144260、公司管理170030、管理科学技术咨询173100、科研199550美元年均值，非棕地或2025中位。",
+                "market": "美国",
+                "name": "BLS2023父类×行业均值",
+                "period": "2023-05",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/oes/2023/may/oes119199.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "国家统计局2025行业工资背景",
+                  "2025/2026-05-15发布"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbs-current",
+                "limitation": "科学技术182064/83560；水利环境公共设施70172/49527；建筑92036/66275，顺序非私营/私营，元年税前均值，非职业工资。",
+                "market": "中国大陆",
+                "name": "国家统计局2025行业工资背景",
+                "period": "2025/2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中华人民共和国生态环境法典（现行）",
+                  "2026-03-12通过/2026-08-15施行"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-code-current",
+                "limitation": "430—442总体、453—463建设用地、101公众意见及1242生效废止；旧环保法/土法已废止，专业能力不等于统一职业证照。",
+                "market": "中国大陆",
+                "name": "中华人民共和国生态环境法典（现行）",
+                "period": "2026-03-12通过/2026-08-15施行",
+                "publisher": "全国人民代表大会",
+                "scope": "contextual",
+                "url": "https://www.mee.gov.cn/ywgz/fgbz/fl/202603/t20260313_1146496.shtml"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "OSHA1910.120危险废物作业",
+                  "现行美国联邦条款/2026-10-09核"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-hazwoper-current",
+                "limitation": "a适用作业；b雇主安全计划；e按职责/暴露有40h+3日或24h+1日、管理附加8h及年度复训，非所有棕地职务统一资格。",
+                "market": "美国",
+                "name": "OSHA1910.120危险废物作业",
+                "period": "现行美国联邦条款/2026-10-09核",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.120"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "费马测试本轮编辑核对建议",
+                  "2026-10-09作者整理"
+                ],
+                "evidence_type": "editorial_synthesis",
+                "id": "editor-current",
+                "limitation": "路径递进、学习安排、测评观察、转岗距离和额外复核为编辑建议，非招聘频率、测评效度、法律许可或安全保证。",
+                "market": "跨市场",
+                "name": "费马测试本轮编辑核对建议",
+                "period": "2026-10-09作者整理",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": "https://www.onetonline.org/link/details/11-9199.11"
               }
             ]
           },
@@ -32484,7 +32982,7 @@
               "$link": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.9",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
-              "entry": "link-11",
+              "entry": "link-16",
               "field": "url"
             }
           },
@@ -32517,7 +33015,7 @@
               "$link": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.9",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
-              "entry": "link-12",
+              "entry": "link-11",
               "field": "url"
             }
           }
@@ -32633,10 +33131,10 @@
               "type": "prose"
             },
             "链接": {
-              "$link": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.9",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "entry": "link-16",
+              "$link": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.7",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-3",
               "field": "url"
             },
             "问题": "到 2035 年这个职业会变少吗？"
@@ -32655,10 +33153,10 @@
               "type": "prose"
             },
             "链接": {
-              "$link": "brownfield-redevelopment-specialists-and-site-managers.ai-impact.ai-impact-table.9",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "entry": "link-17",
+              "$link": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-4",
               "field": "url"
             },
             "问题": "工具能代替人做评估与验收结论吗？"
@@ -33983,8 +34481,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.bls-outlook"
+              "onet-summary",
+              "safety-us",
+              "editorial"
             ],
             "id": "site-exposure",
             "mitigation": {
@@ -34015,8 +34514,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.faa-design-approvals"
+              "onet-summary",
+              "bls-outlook",
+              "editorial"
             ],
             "id": "data-and-conclusions",
             "mitigation": {
@@ -34047,8 +34547,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.nasa-seh"
+              "bls-outlook",
+              "editorial"
             ],
             "id": "qualification-boundary",
             "mitigation": {
@@ -34079,8 +34579,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.nasa-seh",
-              "career.source.faa-design-approvals"
+              "bls-outlook",
+              "nasa-seh",
+              "editorial"
             ],
             "id": "disclosure-and-community",
             "mitigation": {
@@ -34111,8 +34612,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-summary",
-              "career.source.bls-outlook"
+              "onet-summary",
+              "editorial"
             ],
             "id": "cost-and-schedule-pressure",
             "mitigation": {
@@ -34143,8 +34644,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.onet-summary"
+              "onet-summary",
+              "bls-outlook",
+              "editorial"
             ],
             "id": "records-and-audit",
             "mitigation": {
@@ -34215,7 +34717,7 @@
               "$link": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.7",
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
-              "entry": "link-4",
+              "entry": "link-5",
               "field": "url"
             },
             "id": "bls-outlook",
@@ -34234,13 +34736,7 @@
             }
           },
           {
-            "href": {
-              "$link": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.7",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "entry": "link-5",
-              "field": "url"
-            },
+            "href": "https://www.mee.gov.cn/ywgz/fgbz/fl/202603/t20260313_1146496.shtml",
             "id": "nasa-seh",
             "label": {
               "$link": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.7",
@@ -34278,6 +34774,42 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$link": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "url"
+            },
+            "id": "safety-us",
+            "label": {
+              "$link": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "entity"
+            },
+            "scope": "O*NET支持任务情境，现行生态环境法典430—442/453—463及101支持对应主体程序；OSHA仅美国适用作业。敏感性分析/记录清单等为编辑建议，非统一已实施制度或风险发生率。"
+          },
+          {
+            "href": {
+              "$link": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-8",
+              "field": "url"
+            },
+            "id": "editorial",
+            "label": {
+              "$link": "brownfield-redevelopment-specialists-and-site-managers.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-8",
+              "field": "entity"
+            },
+            "scope": "O*NET支持任务情境，现行生态环境法典430—442/453—463及101支持对应主体程序；OSHA仅美国适用作业。敏感性分析/记录清单等为编辑建议，非统一已实施制度或风险发生率。"
           }
         ]
       },
@@ -34769,7 +35301,7 @@
             }
           },
           {
-            "fact_ref": "us-growth-2025-2035",
+            "fact_ref": "us-growth-2025-2035-current",
             "指标": "就业 · 增长率",
             "数值": {
               "$item": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.21",
@@ -34785,7 +35317,7 @@
             }
           },
           {
-            "fact_ref": "us-openings-2025-2035",
+            "fact_ref": "us-openings-2025-2035-current",
             "指标": "就业 · 年均职位空缺",
             "数值": {
               "$item": "brownfield-redevelopment-specialists-and-site-managers.us-salary.career-snapshot-secondary-locale.23",
@@ -34867,7 +35399,7 @@
         "heading": "美国棕地再开发专家与场地经理工资多少？",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
-          "$fact": "us-wage-2025",
+          "$fact": "industry-mean-period-current",
           "field": "period"
         },
         "industry_rows": [
@@ -34956,7 +35488,7 @@
             }
           }
         ],
-        "industry_value_label": "该行业内本职业工资中位数",
+        "industry_value_label": "该行业内父类年薪均值（2023）",
         "interpretation_heading": "美国棕地再开发专家与场地经理工资怎么理解？",
         "interpretation_rows": [
           {
@@ -35004,7 +35536,7 @@
         },
         "outlook_heading": "美国就业前景",
         "outlook_period": {
-          "$fact": "us-growth-2025-2035",
+          "$fact": "us-growth-2025-2035-current",
           "field": "period"
         },
         "wage_column_labels": [
@@ -35295,13 +35827,7 @@
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
-            "href": {
-              "$link": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.7",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "entry": "link-3",
-              "field": "url"
-            },
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "onet-summary",
             "label": {
               "$link": "brownfield-redevelopment-specialists-and-site-managers.market-signals.market-signal-card.7",
@@ -35650,7 +36176,7 @@
           },
           {
             "alternate_value": null,
-            "label": "国家统计局 2025 年工资（未单列本职业，本页不展示数值）",
+            "label": "国家统计局2025年工资（相关行业显式背景，未单列本职业）",
             "secondary_value": null,
             "value": {
               "$item": "brownfield-redevelopment-specialists-and-site-managers.profile.onet-structured-fields-block.3",
@@ -35661,7 +36187,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 就业与预测字段（2024—2034 年，父类口径）",
+            "label": "O*NET 就业与预测字段（2025—2035 年，父类口径）",
             "secondary_value": null,
             "value": {
               "$item": "brownfield-redevelopment-specialists-and-site-managers.profile.onet-structured-fields-block.4",
@@ -36539,7 +37065,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "Big Five (English)"
           },
           {
             "href": {
@@ -36549,7 +37075,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
+            "label": "MBTI (中文)"
           },
           {
             "href": {
@@ -36559,7 +37085,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (中文)"
+            "label": "九型人格 (中文)"
           },
           {
             "href": {
@@ -36569,7 +37095,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (中文)"
+            "label": "智力与推理 (中文)"
           }
         ]
       },
@@ -36944,6 +37470,78 @@
         "source_refs": [
           "bls-pay"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "1338800人",
+        "fact_id": "us-employment-2025-current",
+        "market": "美国",
+        "measure": "2025父类就业",
+        "occupation_scope": "Managers All Other（美国SOC11-9199父类，非棕地细类）",
+        "period": "2025—2035；BLS11-9199父类（基数2025）",
+        "source_refs": [
+          "ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "1404400人",
+        "fact_id": "us-employment-2035-current",
+        "market": "美国",
+        "measure": "2035父类预测就业",
+        "occupation_scope": "Managers All Other（美国SOC11-9199父类，非棕地细类）",
+        "period": "2025—2035；BLS11-9199父类（基数2025）",
+        "source_refs": [
+          "ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "增长4.9%",
+        "fact_id": "us-growth-2025-2035-current",
+        "market": "美国",
+        "measure": "父类预测增长率",
+        "occupation_scope": "Managers All Other（美国SOC11-9199父类，非棕地细类）",
+        "period": "2025—2035；BLS11-9199父类（基数2025）",
+        "source_refs": [
+          "ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "净增65600人",
+        "fact_id": "us-change-2025-2035-current",
+        "market": "美国",
+        "measure": "父类预测净变化",
+        "occupation_scope": "Managers All Other（美国SOC11-9199父类，非棕地细类）",
+        "period": "2025—2035；BLS11-9199父类（基数2025）",
+        "source_refs": [
+          "ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "100900个/年",
+        "fact_id": "us-openings-2025-2035-current",
+        "market": "美国",
+        "measure": "父类年均空缺",
+        "occupation_scope": "Managers All Other（美国SOC11-9199父类，非棕地细类）",
+        "period": "2025—2035；BLS11-9199父类（基数2025）",
+        "source_refs": [
+          "ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2023父类×行业均值",
+        "fact_id": "industry-mean-period-current",
+        "market": "美国",
+        "measure": "行业比较资料期",
+        "occupation_scope": "Managers All Other（SOC11-9199父类）",
+        "period": "2023-05；11-9199父类×行业均值",
+        "source_refs": [
+          "oews2023-current"
+        ]
       }
     ]
   },
@@ -36952,7 +37550,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 11-9199.11 · 污染地块调查 / 修复方案与成本 / 再开发统筹",
@@ -37003,7 +37601,7 @@
       "text": "棕地再开发专家与场地经理"
     }
   },
-  "source_content_sha256": "f4c448f7abc4f78ef291d2b441882f73e4263ea3a33cab953c598d7111b88522",
+  "source_content_sha256": "4c6f520d219c3ef8540a6928c2dd0b968b8343595514c4f25bcc86460db252ca",
   "subject": {
     "canonical_slug": "brownfield-redevelopment-specialists-and-site-managers",
     "name": "棕地再开发专家与场地经理",

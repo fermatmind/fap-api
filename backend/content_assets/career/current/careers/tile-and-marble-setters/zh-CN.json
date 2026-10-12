@@ -27814,7 +27814,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：2025精确职业第25、75百分位明细未取得，不插值或以47-2040合并数代填。已核CareerOneStop全国第90百分位86,110美元/年，官方High指90%低于此值，不是工龄等级。"
+              "美国May2025 SOC47-2044全国P25/P75为45,200/70,220美元/年，直接读取O*NET National Wages United States行；P90为86,110美元/年、41.40美元/小时。分位不是工龄等级，不以47-2040合并数代填。"
             ]
           },
           "fact_refs": [
@@ -28181,7 +28181,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "职业工资用47-2044，行业表用47-2040且逐行明确合并范围；不沿用O*NET旧2024—2034预测，不把合并空缺6,400当本职业空缺或单独归因AI。"
+              "职业工资用47-2044，行业表用47-2040且逐行明确合并范围；O*NET本轮也已2025—2035就业，不把合并空缺6,400当本职业空缺或单独归因AI。"
             ]
           },
           "id": "tile-and-marble-setters.display.career_snapshot_secondary_locale.boundary.detail",
@@ -28607,7 +28607,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "把结果变为准备、核查与修订问题：单位是否一致，材料是否对应，改版后是否复算。没有某维度高低的合格线，观察行为比贴标签有用。"
+              "把结果变为准备、核查与修订问题：单位是否一致，材料是否对应，改版后是否复算。没有某维度高低的合格线，分别记录具体行为和反馈，不以标签替代验证。"
             ]
           },
           "id": "tile-and-marble-setters.display.personality_fit_block.assessments.big-five.answer",
@@ -32430,7 +32430,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：本轮官方域名检索未形成匹配中国铺贴任务的完整招聘薪酬样本；流程入口、校招和工程管理不当在招热度。"
+              "证据不足：前次2026-10-01官方域名定向检索未形成匹配中国铺贴任务的完整招聘薪酬样本，本轮未重查招聘；流程入口、校招和工程管理不当当前在招热度。"
             ]
           },
           "id": "tile-and-marble-setters.market-signals.market-signal-card.4",
@@ -32943,7 +32943,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "各相邻O*NET精确定义提供产出比较，转换建议为编辑判断。"
+              "本链接支持O*NET47-2044任务；各相邻精确档案分别提供产出比较，转换建议属编辑判断。"
             ]
           },
           "id": "tile-and-marble-setters.display.market_signal_card.source.onet",
@@ -33349,7 +33349,7 @@
                 "accessed_at": "2026-10-01",
                 "details": [
                   "硬质瓷砖石材铺贴定义、25项任务、工作情境、软件与RC兴趣。",
-                  "2025中位工资55,690美元/年；该页就业仍2024—2034，最新另取BLS。"
+                  "原2026-10-01读取2025中位工资55,690美元/年；本轮O*NET就业已2025—2035，精确预测取BLS表1.2，历史访问日期保持。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "employer",
@@ -33471,19 +33471,20 @@
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-01",
+                "accessed_at": "2026-10-12",
                 "details": [
-                  "Low为10%低于90%高于；Median各50%；High为90%低于10%高于。"
+                  "United States年工资P10/P25/P50/P75/P90：37140/45200/55690/70220/86110美元。",
+                  "小时17.86/21.73/26.77/33.76/41.40，直接年度值，不自行年化。"
                 ],
-                "evidence_type": "official statistical methods",
+                "evidence_type": "official wage statistics",
                 "id": "r2-pay-2",
-                "limitation": "工资位置不是工龄等级、技能认证或就业保证",
-                "market": "美国",
-                "name": "CareerOneStop Salary Finder帮助",
-                "period": "当前在线定义；2026-10-01核读",
-                "publisher": "CareerOneStop",
-                "scope": "contextual",
-                "url": "https://cloudfront.careeronestop.org/Toolkit/Wages/salary-finder-help.aspx"
+                "limitation": "分位不是职级、起薪或个人实收；不套中国，OEWS不含自雇。",
+                "market": "美国全国",
+                "name": "O*NET National Wages：47-2044 May2025全国分位",
+                "period": "May2025",
+                "publisher": "U.S. Department of Labor / O*NET；BLS OEWS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/47-2044.00"
               },
               {
                 "accessed_at": "2026-10-01",
@@ -33565,7 +33566,7 @@
                 "accessed_at": "2026-10-01",
                 "details": [
                   "硬质瓷砖石材铺贴定义、25项任务、工作情境、软件与RC兴趣。",
-                  "2025中位工资55,690美元/年；该页就业仍2024—2034，最新另取BLS。"
+                  "原2026-10-01读取2025中位工资55,690美元/年；本轮O*NET就业已2025—2035，精确预测取BLS表1.2，历史访问日期保持。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "interest-profiler",
@@ -39131,7 +39132,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "O*NET-SOC 47-2044.00 精确职业口径",
@@ -39182,7 +39183,7 @@
       "text": "瓷砖与石材铺设工"
     }
   },
-  "source_content_sha256": "273208a47e8f9acab8661385ca7bdf04878ba122c1ebc938bf4e1b9448cdc4a8",
+  "source_content_sha256": "5e9ab218938d0967903937c534aba3cbd9b7b765e9ac475212f88d228e058401",
   "subject": {
     "canonical_slug": "tile-and-marble-setters",
     "name": "瓷砖与石材铺设工",

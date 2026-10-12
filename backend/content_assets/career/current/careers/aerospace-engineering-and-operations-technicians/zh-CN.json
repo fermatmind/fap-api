@@ -1696,6 +1696,12 @@
       },
       "item:aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.9": {
         "status": "mapped"
+      },
+      "item:aerospace-engineering-and-operations-technicians.us-salary.cross-review-industry_period": {
+        "status": "pending_mapping"
+      },
+      "item:aerospace-engineering-and-operations-technicians.us-salary.cross-review-outlook_period": {
+        "status": "pending_mapping"
       }
     },
     "module_order": [
@@ -12436,14 +12442,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.industry_period": {
-        "ref": {
-          "id": "us-wage-2025",
-          "path": [
-            "period"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.industry_rows.01.industry": {
         "ref": {
@@ -12724,14 +12724,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.outlook_period": {
-        "ref": {
-          "id": "us-growth-2025-2035",
-          "path": [
-            "period"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.wage_heading": {
         "ref": {
@@ -24898,7 +24892,7 @@
           },
           "id": "aerospace-engineering-and-operations-technicians.ai-impact.ai-impact-table.27",
           "source_refs": [
-            "cnclass"
+            "cnclass-cross-repair"
           ],
           "type": "prose"
         },
@@ -24912,7 +24906,7 @@
           },
           "id": "aerospace-engineering-and-operations-technicians.ai-impact.ai-impact-table.28",
           "source_refs": [
-            "cnclass"
+            "cnclass-cross-repair"
           ],
           "type": "prose"
         },
@@ -26514,7 +26508,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "航空电子装配与测试助理、试验台操作辅助、设备维护技工等以安装、校准和数据记录为主的岗位。"
+              "编辑探索方向，未有该学历段招聘样本支持：航空电子装配与测试助理、试验台操作辅助、设备维护技工等以安装、校准和数据记录为主的岗位。须核具体岗位学历、职责和授权，不能按学历直接分配岗位。"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.26",
@@ -26558,7 +26552,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "航空航天测试技术员、航空电子测试技术员、仪器与校准技术员等需要独立操作试验设备并记录数据的岗位。"
+              "编辑探索方向，未有该学历段招聘样本支持：航空航天测试技术员、航空电子测试技术员、仪器与校准技术员等需要独立操作试验设备并记录数据的岗位。须核具体岗位学历、职责和授权，不能按学历直接分配岗位。"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.29",
@@ -26602,7 +26596,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "试验台工程师、飞行试验仪器技术员、系统测试与验证岗位。"
+              "编辑探索方向，未有该学历段招聘样本支持：试验台工程师、飞行试验仪器技术员、系统测试与验证岗位。须核具体岗位学历、职责和授权，不能按学历直接分配岗位。"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.32",
@@ -26646,7 +26640,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "试验方案与测试系统设计、型号验证与技术管理岗位。"
+              "编辑探索方向，未有该学历段招聘样本支持：试验方案与测试系统设计、型号验证与技术管理岗位。须核具体岗位学历、职责和授权，不能按学历直接分配岗位。"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.35",
@@ -26661,7 +26655,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆无可核验招聘样本，本页不提供该学历段薪酬。"
+              "证据不足：本页未取得中国大陆该学历段可核验招聘报价样本，不提供该学历段薪酬。"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.36",
@@ -26857,7 +26851,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国大陆一线城市航空航天工程与运营技术员的月薪统计或可核验公开招聘样本。国家统计局的行业门类年平均工资覆盖行业全部就业人员，既不含岗位与资格差异，也未区分城市与单位类型，因此不能换算成该岗位的月薪参考，本页也不使用相邻职业数据替代。后续如取得可核验的官方或招聘样本，再在同一职业文件补入并移除本标记。"
+              "证据不足：未取得中国大陆一线城市航空航天工程与运营技术员的月薪统计或可核验公开招聘样本。国家统计局的行业门类年平均工资限调查范围内城镇非私营法人单位就业人员，未单列本职、城市及资格分布，因此不能换算成该岗位的月薪参考，本页也不使用相邻职业数据替代。后续如取得可核验的官方或招聘样本，再在同一职业文件补入并移除本标记。"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.50",
@@ -26913,7 +26907,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得按企业类型（航空制造企业、科研院所、航空运输与维修单位等）划分的航空航天工程与运营技术员工资数据。不同类型单位的岗位设置与津贴差异较大，官方统计不区分单位类型，本页不作推断，也不用海外数据代填。"
+              "证据不足：本页未取得按制造企业、研究机构或试验服务单位划分的本职业工资与津贴数据。须逐项核合同、项目和工时条款；行业均值不能量化这些差异。"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.china-salary.career-snapshot-primary-locale.54",
@@ -27428,7 +27422,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 2025 年 5 月该行业内本职业中位数；不能对应 O*NET 36% 宽行业占比。"
+              "BLS 2025 年 5 月该行业内本职业中位数；不能对应 本次O*NET 35% 宽行业占比。"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.39",
@@ -27526,25 +27520,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "这是全国口径的中位年薪，不区分行业、地区与单位类型。"
+              "不是。中位数只表示分布的中间位置，一半从业者低于、一半高于该值，不能当作新人起薪或固定月薪。"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "oews"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "不是。中位数只表示分布的中间位置，一半从业者低于、一半高于该值，不能当作新人起薪或固定月薪。"
-            ]
-          },
-          "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.47",
-          "source_refs": [
+            "bls",
             "oews"
           ],
           "type": "prose"
@@ -27557,8 +27538,9 @@
               "不能。OEWS 的年薪与小时工资来自同一统计口径，小时值是统计折算，不代表每个人实际有薪时数。实际收入还取决于行业、资格等级、项目安排与加班，不能由全国分位推算个人到手收入。"
             ]
           },
-          "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.48",
+          "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
+            "bls",
             "oews"
           ],
           "type": "prose"
@@ -27571,10 +27553,25 @@
               "工资来自 BLS OEWS 2025 年 5 月，由 O*NET 展示全国分位；就业与空缺来自 BLS 2025—2035 年预测。两个统计项目、年份与覆盖范围须分别理解。"
             ]
           },
+          "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.48",
+          "source_refs": [
+            "bls",
+            "oews"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "具体收入须核目标地区、行业、雇主、职责、资格要求和合同工时；本页全国统计不能推个人到手收入，不承诺某项准备必然增薪。"
+            ]
+          },
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "oews",
-            "bls"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27631,6 +27628,34 @@
           "id": "aerospace-engineering-and-operations-technicians.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
             "oews"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "工资统计期：2025年5月；17-3021全国职业工资。"
+            ]
+          },
+          "id": "aerospace-engineering-and-operations-technicians.us-salary.cross-review-industry_period",
+          "source_refs": [
+            "bls"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "就业预测期：2025—2035；基年2025。"
+            ]
+          },
+          "id": "aerospace-engineering-and-operations-technicians.us-salary.cross-review-outlook_period",
+          "source_refs": [
+            "bls"
           ],
           "type": "prose"
         }
@@ -28240,7 +28265,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要更高学历与设计责任，动手环节较少。"
+              "工程设计方向通常另核相关本科学历与设计责任；动手环节随具体任务变化，不能仅凭方向断言较少。"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.fit.personality-fit-block.30",
@@ -29685,9 +29710,9 @@
               ],
               [
                 "校准、无损检测或焊接等培训证书",
-                "希望补充操作类培训记录以增强竞争力的人。",
-                "可作加分项，不改变入门条件。",
-                "没有统一法定要求，是否被看重取决于单位与岗位。",
+                "希望补充操作类培训记录的人。",
+                "可展示特定培训内容；是否满足或补充岗位要求须核公告，本页未测录用效果。",
+                "本页未核得覆盖所有法域与岗位的统一要求；具体操作资格及授权须另核。",
                 "按培训机构要求完成课程并通过考核，并保留操作记录。",
                 "低到中：以课程与考试费用为主。",
                 "培训证书不等于试验放行、维修签放或安全许可。"
@@ -30022,12 +30047,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "支持官方培训与资格路径核对"
+              "O*NET本职任务、工作情境和准备分类资料；不证明所有法域的培训或资格准入。"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.path.career-path-block.26",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -30050,7 +30075,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求工程技术副学士或相关实训经历。"
+              "美国典型学历为工程技术相关副学士，部分雇主接受高中或证书项目；实训不能自动替代学历要求，中国具体岗位另核。"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.path.career-path-block.28",
@@ -30342,13 +30367,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求工程技术副学士或相关实训经历。"
+              "美国BLS典型入门为工程技术副学士；部分雇主接受高中或证书项目候选人。实训可作编辑准备项，不能自动替学历；中国和具体岗位条件另核。"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.path.career-path-block.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31287,7 +31311,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业口径含全部就业人员，不能拆分岗位。"
+              "限调查范围内城镇非私营法人单位就业人员；不能拆成本职工资或覆盖所有从业者。"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.market-signals.market-signal-card.26",
@@ -31876,7 +31900,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-02"
+              "2026-10-08（本轮限定九板块修订）"
             ]
           },
           "id": "aerospace-engineering-and-operations-technicians.sources.source-card.3",
@@ -32375,6 +32399,22 @@
                 "publisher": "国家知识产权局",
                 "scope": "contextual",
                 "url": "https://www.cnipa.gov.cn/art/2019/7/31/art_104_67810.html"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "制造业55%；专业、科学和技术服务业35%；其他行业10%。",
+                  "页面未标统计年，仅作为本次当前页面职业行业占比，不是中国结构或行业工资。"
+                ],
+                "evidence_type": "官方行业分布",
+                "id": "cnclass-cross-repair",
+                "limitation": "只给出行业就业占比，不含行业工资；不能据此推断中国行业结构。",
+                "market": "美国",
+                "name": "O*NET 17-3021.00 行业分布",
+                "period": "当前行业分布页面未标数据年；2026-10-08核对",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/17-3021.00"
               }
             ]
           },
@@ -35244,7 +35284,7 @@
           "ui": {
             "ai_heading": "AI 会影响航空航天工程与运营技术员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "公开招聘样本（历史公告，非官方统计）",
+            "official_heading": "官方宽口径工资代理（不是招聘样本）",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
             "scenario_heading": "航空航天工程与运营技术员在不同学历背景下通常从哪些岗位方向开始？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -35468,8 +35508,10 @@
         "heading": "美国航空航天工程与运营技术员工资多少？",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
-          "$fact": "us-wage-2025",
-          "field": "period"
+          "$item": "aerospace-engineering-and-operations-technicians.us-salary.cross-review-industry_period",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
         },
         "industry_rows": [
           {
@@ -35605,8 +35647,10 @@
         },
         "outlook_heading": "美国就业前景",
         "outlook_period": {
-          "$fact": "us-growth-2025-2035",
-          "field": "period"
+          "$item": "aerospace-engineering-and-operations-technicians.us-salary.cross-review-outlook_period",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
         },
         "wage_column_labels": [
           "工资统计位置",
@@ -36262,7 +36306,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测表 1.2（2024–34）",
+            "label": "BLS 就业预测（2025—2035）",
             "secondary_value": null,
             "value": {
               "$item": "aerospace-engineering-and-operations-technicians.profile.onet-structured-fields-block.4",
@@ -37637,7 +37681,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "RIASEC · RCI",
@@ -37688,7 +37732,7 @@
       "text": "航空航天工程与运营技术员"
     }
   },
-  "source_content_sha256": "4c3eb23c1c7c62de7487606ba2ae594aacbbb92d7980eec22db9fd173e6136c6",
+  "source_content_sha256": "9476a6b1d0931c9d151aaa1a3b26260a4ca02e78dbfa8f6e7434d29e596d1d19",
   "subject": {
     "canonical_slug": "aerospace-engineering-and-operations-technicians",
     "name": "航空航天工程与运营技术员",

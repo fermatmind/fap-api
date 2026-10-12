@@ -12863,7 +12863,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更强证据是受监督工作样本、原始记录和反馈；兴趣测评不能证明设备启动、人员避让、地下管线确认和现场停机责任能力。"
+              "能力判断需受监督的设备训练、作业观察及班前检查和异常停机反馈；兴趣量表只作探索，不授权操机。"
             ]
           },
           "id": "operating-engineers-and-other-construction-equipment-operators.fit.riasec-fit-block.7",
@@ -14081,7 +14081,7 @@
             "链接": "https://www.onetonline.org/link/details/47-2073.00"
           }
         ],
-        "difference_intro": "资料汇总可加快；设备启动、人员避让、地下管线确认和现场停机责任需要人的检查。",
+        "difference_intro": "以下为基于任务的编辑试用建议；资料整理与记录草稿须核真实图纸和设备状态，未取得单项AI采用或提效实测。",
         "difference_rows": [
           {
             "AI主要改变": "辅助归纳记录与候选",
@@ -14335,8 +14335,8 @@
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
-            "label": "教育与资格",
-            "scope": "美国47-2073.00精确职业"
+            "label": "BLS典型教育与在岗培训",
+            "scope": "美国47-2073典型高中或同等学历、中期在岗培训；具体州、机型、运输驾驶许可及工地授权另核。"
           },
           {
             "href": "https://www.onetonline.org/link/details/47-2073.00",
@@ -14651,16 +14651,28 @@
         "risks": [
           {
             "affected_roles": {
-              "$item": "operating-engineers-and-other-construction-equipment-operators.risk.career-risk-cards.4",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "开挖设备操作员、附近工人及管线相关人员。风险背景：",
+                {
+                  "$item": "operating-engineers-and-other-construction-equipment-operators.risk.career-risk-cards.4",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "consequence": {
-              "$item": "operating-engineers-and-other-construction-equipment-operators.risk.career-risk-cards.5",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "可能造成触电、管线破坏、泄漏或停工。升级边界：",
+                {
+                  "$item": "operating-engineers-and-other-construction-equipment-operators.risk.career-risk-cards.5",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "evidence_refs": [
               "onet",
@@ -14672,11 +14684,11 @@
             "title": "地下管线"
           },
           {
-            "affected_roles": "建筑施工工程师操作员工作需围绕操作动力施工设备完成挖掘、移动、整平或建造任务，协调班组信号，维护设备并守住现场安全与授权边界核对输入、执行、结果和责任交接。",
-            "consequence": "建筑施工工程师操作员工作需围绕操作动力施工设备完成挖掘、移动、整平或建造任务，协调班组信号，维护设备并守住现场安全与授权边界核对输入、执行、结果和责任交接。",
+            "affected_roles": "操作员、地面指挥人员及机械回转或倒车区人员。",
+            "consequence": "可能发生碰撞或挤压伤害。",
             "evidence_refs": [
               "onet",
-              "privacy"
+              "onet"
             ],
             "id": "record-version",
             "mitigation": "设隔离区并核指挥信号。",
@@ -14684,11 +14696,11 @@
             "title": "人员盲区"
           },
           {
-            "affected_roles": "建筑施工工程师操作员工作需围绕操作动力施工设备完成挖掘、移动、整平或建造任务，协调班组信号，维护设备并守住现场安全与授权边界核对输入、执行、结果和责任交接。",
-            "consequence": "建筑施工工程师操作员工作需围绕操作动力施工设备完成挖掘、移动、整平或建造任务，协调班组信号，维护设备并守住现场安全与授权边界核对输入、执行、结果和责任交接。",
+            "affected_roles": "操作员、附近班组及设备维护人员。",
+            "consequence": "可能导致失控或物体打击。",
             "evidence_refs": [
-              "privacy",
-              "privacy"
+              "onet",
+              "onet"
             ],
             "id": "personal-data",
             "mitigation": "班前检查，故障停机报告。",
@@ -14696,8 +14708,8 @@
             "title": "设备故障"
           },
           {
-            "affected_roles": "建筑施工工程师操作员工作需围绕操作动力施工设备完成挖掘、移动、整平或建造任务，协调班组信号，维护设备并守住现场安全与授权边界核对输入、执行、结果和责任交接。",
-            "consequence": "建筑施工工程师操作员工作需围绕操作动力施工设备完成挖掘、移动、整平或建造任务，协调班组信号，维护设备并守住现场安全与授权边界核对输入、执行、结果和责任交接。",
+            "affected_roles": "在边坡或地基作业的操作员与附近班组。",
+            "consequence": "可能造成机械倾覆和人员伤害。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14708,11 +14720,11 @@
             "title": "地面失稳"
           },
           {
-            "affected_roles": "建筑施工工程师操作员工作需围绕操作动力施工设备完成挖掘、移动、整平或建造任务，协调班组信号，维护设备并守住现场安全与授权边界核对输入、执行、结果和责任交接。",
-            "consequence": "建筑施工工程师操作员工作需围绕操作动力施工设备完成挖掘、移动、整平或建造任务，协调班组信号，维护设备并守住现场安全与授权边界核对输入、执行、结果和责任交接。",
+            "affected_roles": "操作臂架的人员与附近班组。",
+            "consequence": "可能引发触电及设备损坏。",
             "evidence_refs": [
-              "bls",
-              "bls"
+              "onet",
+              "onet"
             ],
             "id": "single-coverage",
             "mitigation": "保留法定和工地安全距离。",
@@ -14720,8 +14732,8 @@
             "title": "高压线路"
           },
           {
-            "affected_roles": "建筑施工工程师操作员工作需围绕操作动力施工设备完成挖掘、移动、整平或建造任务，协调班组信号，维护设备并守住现场安全与授权边界核对输入、执行、结果和责任交接。",
-            "consequence": "建筑施工工程师操作员工作需围绕操作动力施工设备完成挖掘、移动、整平或建造任务，协调班组信号，维护设备并守住现场安全与授权边界核对输入、执行、结果和责任交接。",
+            "affected_roles": "前后班操作员、指挥人员及现场主管。",
+            "consequence": "可能遗漏停机状态和未结风险，使下一班误启动或误判。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14738,31 +14750,31 @@
             "href": "https://www.onetonline.org/link/details/47-2073.00",
             "id": "onet",
             "label": "任务",
-            "scope": "美国47-2073.00精确职业"
+            "scope": "O*NET支持美国47-2073任务与环境；BLS表1.2支持统计及典型教育训练。风险为编辑提示，非事故频率、具体施工规程或所在地许可。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
             "label": "资格",
-            "scope": "美国47-2073.00精确职业"
+            "scope": "O*NET支持美国47-2073任务与环境；BLS表1.2支持统计及典型教育训练。风险为编辑提示，非事故频率、具体施工规程或所在地许可。"
           },
           {
             "href": "https://www.onetonline.org/link/details/47-2073.00",
             "id": "facilities",
             "label": "工作环境",
-            "scope": "美国47-2073.00精确职业"
+            "scope": "O*NET支持美国47-2073任务与环境；BLS表1.2支持统计及典型教育训练。风险为编辑提示，非事故频率、具体施工规程或所在地许可。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "privacy",
             "label": "就业资料",
-            "scope": "美国47-2073.00精确职业"
+            "scope": "O*NET支持美国47-2073任务与环境；BLS表1.2支持统计及典型教育训练。风险为编辑提示，非事故频率、具体施工规程或所在地许可。"
           },
           {
             "href": "https://www.onetonline.org/link/details/47-2073.00",
             "id": "onet",
             "label": "职业活动",
-            "scope": "美国47-2073.00精确职业"
+            "scope": "O*NET支持美国47-2073任务与环境；BLS表1.2支持统计及典型教育训练。风险为编辑提示，非事故频率、具体施工规程或所在地许可。"
           }
         ]
       },
@@ -14900,28 +14912,28 @@
         "bls_table": [
           {
             "指标": "薪资第10百分位",
-            "数值": "未单列",
-            "说明": "无精确分位则保持缺口。"
+            "数值": "$42,190",
+            "说明": "O*NET展示BLS 2025美国47-2073年薪分布；非起薪或个人报价。"
           },
           {
             "指标": "薪资第25百分位",
-            "数值": "未单列",
-            "说明": "无精确分位则保持缺口。"
+            "数值": "$48,680",
+            "说明": "O*NET展示BLS 2025美国47-2073年薪分布；非起薪或个人报价。"
           },
           {
             "指标": "薪资中位数",
             "数值": "$59,850",
-            "说明": "2025年美国47-2073中位年薪，非起薪或个人报价。"
+            "说明": "O*NET展示BLS 2025美国47-2073年薪分布；非起薪或个人报价。"
           },
           {
             "指标": "薪资第75百分位",
-            "数值": "未单列",
-            "说明": "无精确分位则保持缺口。"
+            "数值": "$77,170",
+            "说明": "O*NET展示BLS 2025美国47-2073年薪分布；非起薪或个人报价。"
           },
           {
             "指标": "薪资第90百分位",
-            "数值": "未单列",
-            "说明": "无精确分位则保持缺口。"
+            "数值": "$101,090",
+            "说明": "O*NET展示BLS 2025美国47-2073年薪分布；非起薪或个人报价。"
           },
           {
             "指标": "就业人数",
@@ -14993,7 +15005,7 @@
             "note": "精确职业行业分位在本页未单列。"
           }
         ],
-        "industry_value_label": "年薪中位数（美元）",
+        "industry_value_label": "单项行业工资数据状态",
         "interpretation_heading": "如何解读",
         "interpretation_rows": [
           {
@@ -15060,8 +15072,8 @@
               ],
               "separator": "；"
             },
-            "label": "低工资分位",
-            "value": "未单列"
+            "label": "第10百分位",
+            "value": "$42,190"
           },
           {
             "equivalent": "不换算中国月薪",
@@ -15094,8 +15106,8 @@
               ],
               "separator": "；"
             },
-            "label": "高工资分位",
-            "value": "未单列"
+            "label": "第90百分位",
+            "value": "$101,090"
           }
         ]
       },
@@ -15163,30 +15175,39 @@
         "heading": "美国47-2073.00就业展望",
         "outlook_evidence": [
           {
-            "geography": {
-              "$item": "operating-engineers-and-other-construction-equipment-operators.market-signals.market-signal-card.2",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "horizon": {
-              "$item": "operating-engineers-and-other-construction-equipment-operators.market-signals.market-signal-card.3",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "geography": "美国",
+            "horizon": "2025基期",
             "interpretation": {
-              "$item": "operating-engineers-and-other-construction-equipment-operators.market-signals.market-signal-card.4",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
+              "$join": [
+                "单项就业与其他背景分别解读：",
+                {
+                  "$item": "operating-engineers-and-other-construction-equipment-operators.market-signals.market-signal-card.2",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "operating-engineers-and-other-construction-equipment-operators.market-signals.market-signal-card.3",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "operating-engineers-and-other-construction-equipment-operators.market-signals.market-signal-card.4",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "operating-engineers-and-other-construction-equipment-operators.market-signals.market-signal-card.5",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
-            "limitation": {
-              "$item": "operating-engineers-and-other-construction-equipment-operators.market-signals.market-signal-card.5",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "limitation": "47-2073单项就业存量；非47-2070组合、当前招聘或AI归因。",
             "metric": "2025在岗",
             "occupation_scope": "美国47-2073.00",
             "source_id": "bls",
@@ -15354,7 +15375,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
+            "cta_label": "查看霍兰德兴趣测评",
             "evidence_level": {
               "$item": "operating-engineers-and-other-construction-equipment-operators.fit.personality-fit-block.8",
               "block": "fit",
@@ -15373,10 +15394,10 @@
             "watchout": "兴趣测评不证明设备启动、人员避让、地下管线确认和现场停机责任能力或资格。"
           },
           {
-            "answer": "建筑施工工程师操作员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "观察能否逐项核设备、液压、制动、警示与人员位置，并记录遗漏。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "建筑施工工程师操作员工作需围绕操作动力施工设备完成挖掘、移动、整平或建造任务，协调班组信号，维护设备并守住现场安全与授权边界核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据O*NET任务的编辑探索建议；本页自评预测操机安全或绩效的效度未取得。",
             "id": "big-five",
             "label": "细节能力",
             "question": "做建筑施工工程师操作员需要怎样的能力与工作方式？",
@@ -15389,10 +15410,10 @@
             "watchout": "兴趣测评不证明设备启动、人员避让、地下管线确认和现场停机责任能力或资格。"
           },
           {
-            "answer": "建筑施工工程师操作员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "遇地下管线不明、人员入盲区或设备异常，练清楚停止条件与升级链。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "建筑施工工程师操作员工作需围绕操作动力施工设备完成挖掘、移动、整平或建造任务，协调班组信号，维护设备并守住现场安全与授权边界核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据O*NET任务的编辑探索建议；本页自评预测操机安全或绩效的效度未取得。",
             "id": "mbti",
             "label": "风险处理",
             "question": "做建筑施工工程师操作员需要怎样的能力与工作方式？",
@@ -15405,10 +15426,10 @@
             "watchout": "兴趣测评不证明设备启动、人员避让、地下管线确认和现场停机责任能力或资格。"
           },
           {
-            "answer": "建筑施工工程师操作员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较设备控制、班组协作和遵守安全程序是否符合自己的工作价值。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "建筑施工工程师操作员工作需围绕操作动力施工设备完成挖掘、移动、整平或建造任务，协调班组信号，维护设备并守住现场安全与授权边界核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据O*NET任务的编辑探索建议；本页自评预测操机安全或绩效的效度未取得。",
             "id": "enneagram",
             "label": "工作价值",
             "question": "做建筑施工工程师操作员需要怎样的能力与工作方式？",
@@ -15421,10 +15442,10 @@
             "watchout": "兴趣测评不证明设备启动、人员避让、地下管线确认和现场停机责任能力或资格。"
           },
           {
-            "answer": "建筑施工工程师操作员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "核户外天气、噪声、振动、季节与夜间作业是否可接受。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "建筑施工工程师操作员工作需围绕操作动力施工设备完成挖掘、移动、整平或建造任务，协调班组信号，维护设备并守住现场安全与授权边界核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据O*NET任务的编辑探索建议；本页自评预测操机安全或绩效的效度未取得。",
             "id": "iq",
             "label": "场景偏好",
             "question": "做建筑施工工程师操作员需要怎样的能力与工作方式？",
@@ -15437,10 +15458,10 @@
             "watchout": "兴趣测评不证明设备启动、人员避让、地下管线确认和现场停机责任能力或资格。"
           },
           {
-            "answer": "建筑施工工程师操作员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "用虚构工地图练路线、盲区和交接说明；样本不能证明真实操机能力。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "建筑施工工程师操作员工作需围绕操作动力施工设备完成挖掘、移动、整平或建造任务，协调班组信号，维护设备并守住现场安全与授权边界核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据O*NET任务的编辑探索建议；本页自评预测操机安全或绩效的效度未取得。",
             "id": "eq",
             "label": "虚构案例",
             "question": "做建筑施工工程师操作员需要怎样的能力与工作方式？",
@@ -15660,8 +15681,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "BLS 47-2073.00 2025—2035精确职业统计；O*NET任务；国家统计局中国工资缺口。",
-          "updated_at": "2026-09-26核官方职业任务与当前统计。"
+          "source": "BLS美国47-2073单项统计；O*NET任务和2025工资；NBS2025生产制造宽岗位统计。",
+          "updated_at": "2026-10-12"
         },
         "note": "证据只支持建筑施工工程师操作员在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -15673,7 +15694,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "职业任务"
+            "label": "MBTI测评（英文）"
           },
           {
             "href": {
@@ -15683,7 +15704,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "工资就业"
+            "label": "大五人格测评（英文）"
           },
           {
             "href": {
@@ -15693,7 +15714,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "资格或规则"
+            "label": "MBTI测评（中文）"
           },
           {
             "href": {
@@ -15703,7 +15724,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "统计边界"
+            "label": "大五人格测评（中文）"
           }
         ]
       },
@@ -15923,7 +15944,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "工程机械操作员 · O*NET 47-2073.00",
@@ -15974,7 +15995,7 @@
       "text": "工程机械操作员：工作、工资与入行路径"
     }
   },
-  "source_content_sha256": "8ef900854527f446119f3b7de6d9e8cdd2a720a2adc173f52984f898fcd0c886",
+  "source_content_sha256": "49f508aefb3da925b471257b9db8aacabea540dfda8fced55943cd7c5b0a093f",
   "subject": {
     "canonical_slug": "operating-engineers-and-other-construction-equipment-operators",
     "name": "工程机械操作员",

@@ -29,6 +29,27 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:revision-cn-education-0-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:revision-cn-education-1-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:revision-us-wage-p10-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:revision-us-wage-p25-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:revision-us-wage-p50-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:revision-us-wage-p75-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:revision-us-wage-p90-2025": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -23308,7 +23329,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "用完全虚构的班级作答做一课时教案：列目标、诊断题、讲解活动、课后反馈和下一步调整。不使用真实学生成绩。"
+              "需要慎重的是不愿保护学生隐私、接受学科与评价复核，或不愿按学校程序升级安全信号。教师资格、学段学科和学校聘任须另核，网页练习不授予任教权限。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.quick-decision.fit-decision-checklist.1",
@@ -23323,7 +23344,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适合愿意反复解释学科概念、倾听学生误解、维持课堂秩序并接受教学反馈的人；人格类型不是资格。"
+              "用完全虚构的班级作答做一课时教案：列目标、诊断题、讲解活动、课后反馈和下一步调整。不使用真实学生成绩。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.quick-decision.fit-decision-checklist.2",
@@ -23337,7 +23358,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "与学校辅导员相比，高中教师的核心是学科教学、课堂组织和学习评价；辅导员更侧重学业与生涯发展指导。"
+              "适合愿意反复解释学科概念、倾听学生误解、维持课堂秩序并接受教学反馈的人；人格类型不是资格。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.quick-decision.fit-decision-checklist.3",
@@ -23557,12 +23578,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 列美国典型入门学士学位；公立学校须核州级教师证照。中国教师资格依学段学科和所在地规定另核。"
+              "中国教师法第10、11、13条区分高级中学教师学历与资格认定；美国公校按州核学科和证照。学位、训练课程、教师资格及具体岗位任用不是同一件事。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "privacy"
+            "revision-teacher-cn-law",
+            "revision-teacher-bls"
           ],
           "type": "prose"
         },
@@ -23843,7 +23865,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "所教学段与学科是否清楚。"
+              "确认年级、课程、授课班数和课时。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.profile.career-quick-answers-block.23",
@@ -23857,7 +23879,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "确认年级、课程、授课班数和课时。"
+              "所教学段与学科是否清楚。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.profile.career-quick-answers-block.24",
@@ -23872,7 +23894,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "教师资格与课堂权限如何核。"
+              "中国核教师资格及岗位公告；美国公校核州颁证书和学科要求。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.profile.career-quick-answers-block.25",
@@ -23886,7 +23908,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国核教师资格及岗位公告；美国公校核州颁证书和学科要求。"
+              "教师资格与课堂权限如何核。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.profile.career-quick-answers-block.26",
@@ -23901,7 +23923,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "如何评价学习并支持差异。"
+              "核作业与测验要求、反馈时间及学生支持分工。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.profile.career-quick-answers-block.27",
@@ -23915,7 +23937,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核作业与测验要求、反馈时间及学生支持分工。"
+              "如何评价学习并支持差异。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.profile.career-quick-answers-block.28",
@@ -23930,7 +23952,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "课堂安全和学生保护怎样升级。"
+              "确认报告、家校沟通和紧急处置链。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.profile.career-quick-answers-block.29",
@@ -23944,7 +23966,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "确认报告、家校沟通和紧急处置链。"
+              "课堂安全和学生保护怎样升级。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.profile.career-quick-answers-block.30",
@@ -23959,7 +23981,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "合同工作量与工资口径是否一致。"
+              "核学年、授课课时、备课批改、课外活动及福利。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.profile.career-quick-answers-block.31",
@@ -23974,7 +23996,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核学年、授课课时、备课批改、课外活动及福利。"
+              "合同工作量与工资口径是否一致。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.profile.career-quick-answers-block.32",
@@ -23989,7 +24011,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "能否先做低风险课堂练习。"
+              "用完全虚构班级数据做一课时教案与评价复盘，不接触真实学生记录。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.profile.career-quick-answers-block.33",
@@ -24004,7 +24026,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "用完全虚构班级数据做一课时教案与评价复盘，不接触真实学生记录。"
+              "能否先做低风险课堂练习。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.profile.career-quick-answers-block.34",
@@ -24761,7 +24783,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得25-2031单列AI采用率、替代率或消失年份。作为任务级编辑观察，许可工具可辅助教案、练习题与匿名反馈草稿；学科正确性、课堂教学、学习评价、学生隐私和安全由有资格教师负责。潜在暴露不等于已部署。"
+              "证据不足：未取得25-2031单列AI实测准确率、节时效果、机构采用率、替代率或消失年份。任务级编辑试验可用虚构教案、题目与反馈草稿；学科正确性、课堂教学、评价、学生隐私和安全责任仍按学校规则人工复核。潜在暴露不等于已部署。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.ai-impact.ai-impact-table.18",
@@ -25420,7 +25442,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。工具可辅助教案与匿名反馈；学科教学与成绩评价仍由合资格教师负责。"
+              "证据不足：未取得高中教师职业级AI因果替代率或消失年份。任务暴露研究不能判断岗位必然被替代或永不被替代；教案草稿与匿名反馈候选仍须教师核学科、评价与学生责任。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.ai-impact.ai-impact-table.64",
@@ -25480,7 +25502,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先影响文书草稿、研究检索和匿名数据整理；现场观察与学生信任无法由文本模型替代。"
+              "任务暴露研究只估计潜在文本任务影响，未给出本页高中教师任务的采用先后次序。可先用虚构教案或练习做可复核试验；课堂观察、评分与学生责任需人工判断。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.ai-impact.ai-impact-table.68",
@@ -25539,7 +25561,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。AI 不能独立给学生评分、发布未经核实的教材或处理安全事件。"
+              "本页不提供独立评分或安全处置授权。按学校政策可试验题目草稿，正式评价由有权教师核原题与作答；安全信号交学校指定负责人，不能等模型回复。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.ai-impact.ai-impact-table.72",
@@ -25909,7 +25931,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可减少草稿时间；不能替代教师设目标。"
+              "编辑试验：草拟教学活动提纲；未取得高中教师该任务实测节时数据。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.ai-impact.ai-impact-table.97",
@@ -25966,7 +25988,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可统一字段；不能替代现场观察。"
+              "编辑试验：生成观察模板；是否减少遗漏须与人工模板比较。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.ai-impact.ai-impact-table.101",
@@ -26023,7 +26045,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可提示错误类型；不能自动判定个人能力。"
+              "编辑试验：提出练习与评分待核项；题目、作答和评分须逐项回查。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.ai-impact.ai-impact-table.105",
@@ -26080,7 +26102,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助归类；结论由教师判断。"
+              "编辑试验：整理虚构错题类型；标签只能依据已给作答，不从人数猜原因。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.ai-impact.ai-impact-table.109",
@@ -26137,7 +26159,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可列选项；不能自动决定学生分组。"
+              "编辑试验：提出不同练习备选；教师核难度与目标，不能自动决定学生分组。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.ai-impact.ai-impact-table.113",
@@ -26194,7 +26216,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助制图；不能自行判定班级有效性。"
+              "编辑试验：汇总虚构班级比例；核分母、时间和缺失，不自行判定因果。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.ai-impact.ai-impact-table.117",
@@ -26250,7 +26272,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可提醒待核项；不能替代即时报告。"
+              "编辑试验：列课堂复盘待核项；安全信号按学校程序即时处理。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.ai-impact.ai-impact-table.121",
@@ -26512,7 +26534,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "没有可靠量化证据表明 AI 已改变该精确职业的中国工资；不从工具使用推算收入。"
+              "证据不足：本页未取得AI对中国高中学科教师工资的职业级因果数据；教育行业均值不能补齐该缺口。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.china-salary.career-snapshot-primary-locale.23",
@@ -26541,7 +26563,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按目标地区与岗位公告核实"
+              "中国高级中学教师资格"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.china-salary.career-snapshot-primary-locale.25",
@@ -26556,7 +26578,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "高中学科教学岗位"
+              "教师法学历条款：本科及以上"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.china-salary.career-snapshot-primary-locale.26",
@@ -26571,7 +26593,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "先核学校、学段学科、教师资格、课程和合同工时。"
+              "教师法第10、11、13条：高级中学学历要求为本科及以上；须具备相应条件并经认定，学科、考试和当年办理按主管部门公告核。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.china-salary.career-snapshot-primary-locale.27",
@@ -26840,7 +26862,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "下表为核查方向，不是已采纳雇主招聘报价；实际学历、教师资格和任教学科应看目标地区及公告。"
+              "下表核对中国高中教师法定学历、资格认定与美国公校要求；学历不是执教许可，任用、学科及当年手续按目标地区核。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.china-salary.career-snapshot-primary-locale.45",
@@ -26870,7 +26892,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局 2025 年城镇单位工资｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              "国家统计局2025年城镇单位工资｜https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.china-salary.career-snapshot-primary-locale.47",
@@ -26899,7 +26921,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国匹配高中学科教师岗位的招聘样本未取得"
+              "教育行业·非私营（2025）"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.china-salary.career-snapshot-primary-locale.49",
@@ -26913,7 +26935,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "未提供报价：学段、学科和任教身份尚未核准。"
+              "133,539元/年 · 税前年均"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.china-salary.career-snapshot-primary-locale.50",
@@ -26927,7 +26949,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国招聘核查：计酬口径未取得"
+              "教育行业·私营（2025）"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.china-salary.career-snapshot-primary-locale.51",
@@ -26941,7 +26963,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "未提供报价：编制、学年工时、地区与福利未核。"
+              "63,908元/年 · 税前年均"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.china-salary.career-snapshot-primary-locale.52",
@@ -26955,7 +26977,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国招聘核查：任教资格未取得"
+              "高中教师精确职业工资"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.china-salary.career-snapshot-primary-locale.53",
@@ -26969,7 +26991,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "未提供报价：教师资格、学科及学校责任未核。"
+              "证据不足：全国中位数、地区及职级分布未取得"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.china-salary.career-snapshot-primary-locale.54",
@@ -26998,7 +27020,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局 2025 年城镇单位工资｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              "国家统计局2025年城镇单位工资｜https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.china-salary.career-snapshot-primary-locale.57",
@@ -27048,7 +27070,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 2025 OEWS 全国表｜https://www.bls.gov/news.release/ocwage.t01.htm；BLS 2025–2035 职业预测表｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS 2023 SOC 25-2031 工资表｜https://www.bls.gov/oes/2023/may/oes252031.htm"
+              "O*NET/BLS2025全国工资｜https://www.onetonline.org/link/localwages/25-2031.00；BLS2025–2035预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS2023行业均值｜https://www.bls.gov/oes/2023/may/oes252031.htm"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.8",
@@ -27064,7 +27086,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "48,040 美元/年（2023）"
+              "48,780 美元/年（2025）"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.9",
@@ -27078,7 +27100,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 2023 年 5 月 SOC 25-2031 年薪第 10 分位 48,040 美元；不是入门工资。；BLS 2023 SOC 25-2031 工资表｜https://www.bls.gov/oes/2023/may/oes252031.htm"
+              "美国全国2025年SOC25-2031年工资第10分位；非入门工资或资历等级。；O*NET/BLS2025工资｜https://www.onetonline.org/link/localwages/25-2031.00"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.10",
@@ -27092,7 +27114,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "54,290 美元/年（2023）"
+              "59,980 美元/年（2025）"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.11",
@@ -27106,7 +27128,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 2023 年 5 月 SOC 25-2031 年薪第 25 分位 54,290 美元；与 2025 中位数不同期。；BLS 2023 SOC 25-2031 工资表｜https://www.bls.gov/oes/2023/may/oes252031.htm"
+              "美国全国2025年SOC25-2031年工资第25分位；非入门工资或资历等级。；O*NET/BLS2025工资｜https://www.onetonline.org/link/localwages/25-2031.00"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.12",
@@ -27134,7 +27156,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS EP 表列 2025 年 SOC 25-2031 年薪中位数 72,040 美元；不等于个人报价。；BLS 2025–2035 职业预测表｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "美国全国2025年SOC25-2031年工资第50分位；非入门工资或资历等级。；O*NET/BLS2025工资｜https://www.onetonline.org/link/localwages/25-2031.00"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.14",
@@ -27148,7 +27170,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "83,340 美元/年（2023）"
+              "92,570 美元/年（2025）"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.15",
@@ -27162,7 +27184,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 2023 年 5 月 SOC 25-2031 年薪第 75 分位 83,340 美元；非固定资历等级。；BLS 2023 SOC 25-2031 工资表｜https://www.bls.gov/oes/2023/may/oes252031.htm"
+              "美国全国2025年SOC25-2031年工资第75分位；非入门工资或资历等级。；O*NET/BLS2025工资｜https://www.onetonline.org/link/localwages/25-2031.00"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.16",
@@ -27176,7 +27198,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "106,380 美元/年（2023）"
+              "107,600 美元/年（2025）"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.17",
@@ -27190,7 +27212,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 2023 年 5 月 SOC 25-2031 年薪第 90 分位 106,380 美元；不是管理工资。；BLS 2023 SOC 25-2031 工资表｜https://www.bls.gov/oes/2023/may/oes252031.htm"
+              "美国全国2025年SOC25-2031年工资第90分位；非入门工资或资历等级。；O*NET/BLS2025工资｜https://www.onetonline.org/link/localwages/25-2031.00"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.18",
@@ -27303,7 +27325,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 2025 年 SOC 25-2031 年薪中位数 72,040 美元；2025–2035 就业预测下降 0.2%。两项统计口径分别说明。"
+              "美国高中学科教师2025年薪中位数72040美元；五分位同为2025。2025–2035精确就业变动-0.2%，OOH四舍五入为0%；年均空缺63500含补缺。2023行业均值单列历史年，不能当同年中位数。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.26",
@@ -27599,7 +27621,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不能。统计年薪不是个人合同年薪；学年天数、工作量和福利须按雇主条款核。"
+              "本职业未报告小时工资；不能用2080小时反算时薪，也不以除12承诺实发月薪。学校学年、暑期安排、非授课工作量及福利按合同核。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.47",
@@ -27656,7 +27678,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 2023 年第 10 分位 48,040 美元，不是入门工资。"
+              "2025年工资第10分位，是受薪职业分布位置，不证明个人任教年限、职级或合同收入。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.51",
@@ -27670,7 +27692,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 2025 年职业年薪中位数 72,040 美元是分布中点，不代表个人合同收入。"
+              "2025年工资第50分位，是受薪职业分布位置，不证明个人任教年限、职级或合同收入。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.52",
@@ -27684,7 +27706,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 2023 年第 90 分位 106,380 美元，不代表管理职级或个人最高收入。"
+              "2025年工资第90分位，是受薪职业分布位置，不证明个人任教年限、职级或合同收入。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.53",
@@ -27844,7 +27866,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适配度看是否愿意解释学科概念、听取学生困惑、管理课堂并保护学生资料，而非人格类型。"
+              "O*NET列S社会型：教学、帮助和服务。可观察你是否愿意解释概念、听取不同作答并修订讲法；不是教师资格或录用结论。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.fit.personality-fit-block.2",
@@ -27859,7 +27881,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "职业兴趣可帮助自问是否喜欢教学和学生发展，不能预测教师资格。"
+              "O*NET兴趣资料支持S；具体自我观察为编辑练习，不提供个人录用预测。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.fit.personality-fit-block.3",
@@ -27962,13 +27984,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业活动说明任务，不给个人匹配分数。"
+              "O*NET当前职业兴趣为S（社会型），描述教学与服务环境，不是个人匹配分数。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.fit.riasec-fit-block.9",
           "source_refs": [
-            "onet",
-            "editor"
+            "revision-teacher-onet"
           ],
           "type": "prose"
         },
@@ -27991,12 +28012,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣线索是愿意帮助学生学习并持续调整讲法。"
+              "社会型任务：解释概念、倾听困惑并根据学习证据调整教学。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.fit.riasec-fit-block.10",
           "source_refs": [
-            "onet"
+            "revision-teacher-onet"
           ],
           "type": "prose"
         },
@@ -28019,13 +28040,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "BLS 就业规模和空缺不是个人录用概率。"
+              "S"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.fit.riasec-fit-block.11",
           "source_refs": [
-            "editor",
-            "onet"
+            "revision-teacher-onet"
           ],
           "type": "prose"
         },
@@ -28034,8 +28054,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "喜欢帮助学生理解难点。",
-              "愿意与家庭和同事复核支持。"
+              "把自己的解题过程写成学生可跟随的步骤。",
+              "请同伴指出教案里跳过的先备知识。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.fit.personality-fit-block.12",
@@ -28049,12 +28069,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "用虚构课堂练习检验是否愿意处理不同作答、反馈、纪律和学生隐私。"
+              "S · 社会型"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.fit.riasec-fit-block.12",
           "source_refs": [
-            "editor"
+            "revision-teacher-onet"
           ],
           "type": "prose"
         },
@@ -28612,7 +28632,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 描述职业兴趣，不给个人通过线。"
+              "当前O*NET兴趣代码为S社会型；反映教学服务环境，不给个人通过线。兴趣不能代替学科知识、教师资格和课堂实践。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.fit.personality-fit-block.50",
@@ -28627,7 +28647,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。人格分数不证明可合法任教或独立处理安全事件。"
+              "本页未取得针对25-2031、方法和误差可核的个体表现预测模型，不能据人格分数给个人录用结论。一般人格研究不等于教师资格或课堂胜任，宜结合学科训练、教案与受监督反馈。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.fit.personality-fit-block.51",
@@ -28641,7 +28661,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能区分学生作答、误解类型与数据限制，提出下一课调整。"
+              "先核任教学科要求。数学教师需要相应学科知识和推理，其他学科也须掌握本学科内容；一次数学练习不评价所有高中教师。可用本页虚构作答练区分误解、数据限制与下一课调整。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.fit.personality-fit-block.52",
@@ -28876,16 +28896,16 @@
                 "url": "https://www.onetonline.org/link/details/25-2031.00"
               },
               {
-                "entity": "BLS 高中教师职业手册",
+                "entity": "中华人民共和国教师法（2009修正）",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/ooh/education-training-and-library/high-school-teachers.htm"
+                "url": "https://www.gjxfj.gov.cn/gjxfj/fgwj/flfg/webinfo/2014/05/1601761496653503.htm"
               },
               {
                 "entity": "中国个人信息保护法",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.npc.gov.cn/npc/c2/c30834/202108/t20210820_313088.html"
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               },
               {
                 "entity": "NIST 生成式 AI 风险管理画像",
@@ -28948,7 +28968,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 25-2031 描述职业任务；BLS 职业手册说明美国公立学校证照；中国学生资料处理参考个人信息保护法，具体学校程序另核。"
+              "六情境是编辑示例，非风险发生率。O*NET支持教学与评价任务；中国教师法支持尊重学生及制止侵害义务，个人信息保护法为资料规则；NIST提示工具风险，学校升级流程另核。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.risk.career-risk-cards.10",
@@ -28965,7 +28985,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "学生、家庭及任课教师。"
+              "承担学科教学与学习评价的任课教师。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.risk.career-risk-cards.11",
@@ -28980,7 +29000,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "学生可能被错误标签化，教学调整偏离实际困难。"
+              "学生可能被错误标签化，家庭也可能误解其学习状况，教学调整偏离实际困难。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.risk.career-risk-cards.12",
@@ -29025,7 +29045,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "学生、家庭、学校和资料接收人。"
+              "处理学生成绩及记录的任课教师、获授权的资料管理人员。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.risk.career-risk-cards.15",
@@ -29085,7 +29105,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "学生、教师与教研团队。"
+              "编写、审核题目并批改作业的任课教师与教研人员。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.risk.career-risk-cards.19",
@@ -29142,7 +29162,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "学生、教师和家长。"
+              "负责学情反馈与教学调整的任课教师；必要时与班主任协作。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.risk.career-risk-cards.23",
@@ -29202,7 +29222,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "学生、学校保护负责人及家庭。"
+              "收到学生安全信息的任课教师、班主任及学校指定保护负责人。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.risk.career-risk-cards.27",
@@ -29217,7 +29237,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险因被当普通纪律问题而延迟处置。"
+              "学生的安全风险因被当普通纪律问题而延迟处置。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.risk.career-risk-cards.28",
@@ -29262,7 +29282,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "学生、教师、学校与资料管理员。"
+              "使用或审核AI教学草稿的任课教师、教研人员和学校资料管理员。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.risk.career-risk-cards.31",
@@ -29336,7 +29356,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS 高中教师手册用于说明美国公校教师证照，具体州和中国资格分别核。"
+              "中国教师法第8条：尊重学生人格、制止侵害；具体学校保护流程与地区报告义务另核。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.risk.career-risk-cards.36",
@@ -29470,7 +29490,7 @@
                 "id": "education",
                 "values": [
                   "未采用单一中国雇主公告",
-                  "本轮未取得学段、学科、资格、职责和计酬均可核的精确公告；不推断全国门槛。",
+                  "证据不足：本次未取得学段、学科、资格、职责和计酬同时可核的中国高中学科教师精确公告；法律条件不替代具体招聘样本。",
                   "逐条核目标学校课程、任教资格、班级、合同和待遇。"
                 ]
               },
@@ -29517,11 +29537,11 @@
                 "id": "exercise-materials",
                 "values": [
                   "虚构材料：高一数学一次方程课",
-                  "M1｜完全虚构的 20 人班级 B01。教学目标是解决含括号的一次方程；不含真实学生身份或成绩。",
-                  "M2｜课前诊断题 7/20 答对，正确率 35%；这只是这道题的班级基线，不代表综合数学能力。",
-                  "M3｜讲解与练习后，出口题 13/20 答对，即 65%；另 4 人有符号错误、3 人移项错误。分类与总人数相加为 20。",
+                  "M1｜完全虚构的 20 人班级 B01。教学目标是解决含括号的一次方程；不含真实学生身份或成绩。 本练习使用原创方程，均只在纸面模拟。",
+                  "M2｜课前题2(x−3)=10，参考解x=8。20人中7人答对（35%），13人未答对；没有这些13人的逐人作答，不能判具体错因。",
+                  "M3｜出口题3(x−2)=12，参考解x=6。13/20答对（65%）；另4人的虚构作答把括号展开成3x+6=12→x=2，3人的作答为3x−6=12→3x=12−6→x=2。两类互斥，总计20人。",
                   "M4｜课前设定目标：课后同类出口题至少 80% 正确，并能指出两类常见错误；目标须在看结果前写好。",
-                  "M5｜下一次同类练习 16/20 答对，即 80%；本次数值达到 80% 阈值，但无法仅据两次班级比例证明教学因果。",
+                  "M5｜下一次题4(x−1)=20，参考解x=6。16/20答对（80%），4人未答对；达到M4数值阈值，但无配对数据，不能证明每人进步或教学因果。",
                   "M6｜题目难度、评分标准和学生出勤可能变化；须核同一口径、匿名作答和题目答案。真实评价交任课教师按学校程序。"
                 ]
               },
@@ -29530,7 +29550,7 @@
                 "values": [
                   "任务：计算、解释与复核",
                   "T1｜算 M2、M3、M5 正确率和 M3 相对 M2 的百分点变化；判断 M3、M5 是否达到预设 80%。",
-                  "T2｜依据 M3 的 4 个符号错误和 3 个移项错误，设计下一步反馈；指出 M6 的可比性限制。"
+                  "T2｜对照M3两种给定作答，分别指出展开负号与移项等式错误，写一段反馈及一道原创复查题（自算答案）；说明M6口径限制。"
                 ]
               },
               {
@@ -29538,7 +29558,7 @@
                 "values": [
                   "参考答案与边界",
                   "M2 7/20=35%；M3 13/20=65%；M5 16/20=80%。M3 比 M2 高 30 个百分点；M3 未达 80%，M5 达到。",
-                  "M3 仍有 7/20 错误：4 个符号、3 个移项。可分别示范并给对应练习，再用同难度题复查。",
+                  "M3两类错误有给定过程：3(x−2)应展开为3x−6；3x−6=12应两边加6得到3x=18。可给复查题2(x−4)=6，答案x=7；先核负号与等式两边操作，再看学生新作答，不用人数推断固定能力。",
                   "三次班级比例没有配对学生数据或对照组，不能据此断言每名学生进步或课程造成改善；先核题目和出勤。"
                 ]
               },
@@ -29546,7 +29566,7 @@
                 "id": "exercise-boundary",
                 "values": [
                   "复核清单",
-                  "只用虚构代号；核 7+13=20 与 4+3+13=20，分清正确率、百分点、预设目标和因果解释。"
+                  "课前7正确+13未正确=20；课后13正确+4括号符号错+3移项错=20；M5为16正确+4未正确=20。课前7和课后13属于不同时间，不可相加证明总数或每人进步。区分正确率、百分点、预设目标与因果。"
                 ]
               }
             ]
@@ -29766,8 +29786,8 @@
                 "目标地区教师资格",
                 "拟申请学校学科教师岗位的人",
                 "核学段、学科、认定与考试条件",
-                "按目标地区法规和雇主",
-                "查主管部门与学校原文",
+                "中国大陆实行教师资格制度；按目标学段与岗位核",
+                "教师法10/11/13条：高级中学本科及以上学历条件、教育教学能力与资格认定；当年考试、认定及学校学科另核",
                 "周期因地而异",
                 "美国分类不等于中国许可"
               ],
@@ -29820,11 +29840,8 @@
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.path.credential-decision.1",
           "source_refs": [
-            "bls",
-            "editor",
-            "editor",
-            "onet",
-            "privacy"
+            "revision-teacher-cn-law",
+            "revision-teacher-bls"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -30075,14 +30092,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国 O*NET 和 BLS 描述职业与统计；公校州级证照与中国教师资格不能互认。"
+              "中国大陆 / 美国"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.path.career-path-block.22",
           "source_refs": [
-            "nbs",
-            "bls",
-            "onet"
+            "revision-teacher-cn-law",
+            "revision-teacher-bls"
           ],
           "type": "prose"
         },
@@ -30091,7 +30107,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本页未把单一招聘广告当全国门槛；求职须核授课班级、学年工时、备课批改、学生保护和薪资单位。"
+              "中国教师法第10、11、13条区分学历与资格认定；高级中学学历条款为本科及以上，学科、考试及当年认定按公告核。美国公校需州级证照；中国、美国不建立互认。招聘公告未取得，不将法律条件当具体雇主门槛。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.path.career-path-block.23",
@@ -31059,10 +31075,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "BLS 2025–2035 职业预测表",
+                "entity": "BLS High School Teachers职业手册",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+                "url": "https://www.bls.gov/ooh/education-training-and-library/high-school-teachers.htm"
               },
               {
                 "entity": "BLS 就业预测说明",
@@ -31071,10 +31087,10 @@
                 "url": "https://www.bls.gov/emp/"
               },
               {
-                "entity": "国家统计局 2025 城镇单位工资",
+                "entity": "国家统计局2025年城镇单位工资",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET 25-2031 职业详情",
@@ -31204,7 +31220,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "显示值经四舍五入；采用官方变化列，预测不是具体学科或地区招聘承诺。"
+              "EP精确变化列为-0.2%；OOH列0%为四舍五入。非AI归因，不是中国或具体学科的招聘承诺。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.market-signals.market-signal-card.12",
@@ -31542,7 +31558,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中：学段和发展需求不同。"
+              "学段转换"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.market-signals.market-signal-card.36",
@@ -31587,7 +31603,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中高：教学内容转职业技能。"
+              "实践教学"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.market-signals.market-signal-card.39",
@@ -31632,7 +31648,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "高：对象与专业责任不同。"
+              "特殊教育"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.market-signals.market-signal-card.42",
@@ -31677,7 +31693,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中高：从学科课堂转向规划辅导。"
+              "规划辅导"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.market-signals.market-signal-card.45",
@@ -31722,7 +31738,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中：从授课转向协调。"
+              "课程协调"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.market-signals.market-signal-card.48",
@@ -31766,7 +31782,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "低：本职业内深化。"
+              "教学深化"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.market-signals.market-signal-card.51",
@@ -31810,7 +31826,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "低至中：本职业内扩展。"
+              "支持扩展"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.market-signals.market-signal-card.54",
@@ -31855,7 +31871,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中：本职业内增加协作。"
+              "教研协作"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.market-signals.market-signal-card.57",
@@ -31918,12 +31934,13 @@
                 ]
               },
               {
-                "answer": "BLS 2025 年 SOC 25-2031 年薪中位数 72,040 美元；2023 历史分位另标年份，统计不等于个人学年合同。",
+                "answer": "美国2025年SOC25-2031年薪中位数72040美元；当前五分位同为2025，2023行业年平均工资另列历史年。分位不是资历或个人学年合同收入。",
                 "id": "secondary-school-teachers-except-special-and-career-technical-education.faq.5",
                 "question": "美国年薪中位数是多少？",
                 "question_key": "career.faq.secondary-school-teachers-except-special-and-career-technical-education.q5",
                 "source_refs": [
-                  "ep"
+                  "revision-teacher-wages2025",
+                  "oews"
                 ]
               },
               {
@@ -31978,7 +31995,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "职业任务、美国统计和虚构课堂练习分开；AI 仅辅助草拟，不批准真实评分或学生数据处理。"
+              "FermatMind 编辑整理"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.sources.source-card.1",
@@ -31992,7 +32009,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "职业任务依据 O*NET 25-2031；美国工资和就业预测按 BLS 独立行；中国行业工资取国家统计局 2025 数据；美国公校许可说明取 BLS 职业手册。"
+              "国家统计局2025年城镇单位工资｜https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.sources.source-card.2",
@@ -32008,7 +32025,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页来源核读日期：2026-09-28。统计年份、预测期和 M1–M6 虚构数据分别标注。"
+              "2026-10-08（本轮核查）"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.sources.source-card.3",
@@ -32022,7 +32039,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "中文解释美国职业分类，不建立中外教师资格互认。真实任教、学生资料、合同和工资按目标地区及学校原文核。"
+              "美国2025五分位来自O*NET/BLS；2023行业年平均工资保留历史年。EP预测与OEWS调查就业分开；教育行业平均工资不是中国高中教师工资。教师法为中国条件，BLS为美国州许可说明；兴趣S不决定能力，M1–M6是原创虚构练习。历史来源和保护消费者保留，本轮新增独立条目。"
             ]
           },
           "id": "secondary-school-teachers-except-special-and-career-technical-education.sources.source-card.4",
@@ -32574,6 +32591,98 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/21-1012.00"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "备课、授课、课堂规则、学习评价与家校沟通；当前兴趣代码S。"
+                ],
+                "evidence_type": "官方职业、工资或法律资料，按条目范围",
+                "id": "revision-teacher-onet",
+                "limitation": "职业环境资料，不提供个人能力分数或中国资格。",
+                "market": "美国",
+                "name": "O*NET高中学科教师25-2031.00",
+                "period": "2026页面",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/25-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "年工资10/25/50/75/90分位为48780/59980/72040/92570/107600美元。"
+                ],
+                "evidence_type": "官方职业、工资或法律资料，按条目范围",
+                "id": "revision-teacher-wages2025",
+                "limitation": "分位不是职级、起薪或个人实发；该职业未报告小时工资。",
+                "market": "美国",
+                "name": "O*NET/BLS 2025高中教师全国工资",
+                "period": "2025年5月",
+                "publisher": "O*NET OnLine / BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/25-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "教育行业非私营133539、私营63908元/年，税前年平均工资。"
+                ],
+                "evidence_type": "官方职业、工资或法律资料，按条目范围",
+                "id": "revision-teacher-nbs2025",
+                "limitation": "行业包含教学管理支持岗位，不是高中教师全国中位数、具体地区薪级或学年合同。",
+                "market": "中国大陆",
+                "name": "国家统计局2025年城镇单位工资",
+                "period": "2025；发布2026-05-15",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "第10、11、13条教师资格、相应学历与认定；高级中学学历条款为本科及以上。",
+                  "第8条尊重学生人格及制止侵害；第17条聘任合同。"
+                ],
+                "evidence_type": "官方职业、工资或法律资料，按条目范围",
+                "id": "revision-teacher-cn-law",
+                "limitation": "学历只是资格条件之一，认定、考试、岗位学科与地方当年办理公告另核；不把法律待遇条款当工资实测。",
+                "market": "中国大陆",
+                "name": "中华人民共和国教师法（2009修正）",
+                "period": "2009修正；网页2014-05-12",
+                "publisher": "国家信访局",
+                "scope": "contextual",
+                "url": "https://www.gjxfj.gov.cn/gjxfj/fgwj/flfg/webinfo/2014/05/1601761496653503.htm"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "年薪中位72040美元、年均空缺63500；十年变化0%为四舍五入，EP精确行-0.2%。",
+                  "通常教授9–12年级；公校要求州级证照及学士学位，私校通常不同；学年与非授课工作另核。"
+                ],
+                "evidence_type": "官方职业、工资或法律资料，按条目范围",
+                "id": "revision-teacher-bls",
+                "limitation": "不建立中国资格互认；空缺含补缺，预测非AI归因。",
+                "market": "美国",
+                "name": "BLS High School Teachers职业手册",
+                "period": "工资2025；预测2025–2035",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/education-training-and-library/high-school-teachers.htm"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "第6条最小范围；第13、17条处理依据与告知；第28–31条敏感信息及不满14周岁规则。"
+                ],
+                "evidence_type": "官方法律全文",
+                "id": "revision-teacher-privacy",
+                "limitation": "学校资料操作仍须核处理依据和具体权限；不把匿名代号等同彻底匿名化。",
+                "market": "中国大陆",
+                "name": "中华人民共和国个人信息保护法（2021）",
+                "period": "2021-08-20公布；2021-11-01施行",
+                "publisher": "中央网信办转载法律全文",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               }
             ]
           },
@@ -34852,8 +34961,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "privacy",
-              "privacy"
+              "onet",
+              "onet"
             ],
             "id": "subject-error",
             "mitigation": {
@@ -34916,8 +35025,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
-              "bls"
+              "employer",
+              "employer"
             ],
             "id": "student-safety",
             "mitigation": {
@@ -34948,8 +35057,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet"
+              "nist",
+              "nist"
             ],
             "id": "ai-draft",
             "mitigation": {
@@ -35442,13 +35551,13 @@
           },
           "ui": {
             "ai_heading": "AI 会影响高中教师的工资吗？",
-            "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "公开招聘样本（未取得匹配样本）",
-            "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "高中教师在不同学历背景下通常从哪些岗位方向开始？",
+            "driver_heading": "教学场景与责任边界",
+            "official_heading": "中国教育行业年平均工资（参考）",
+            "scenario_caption": "法域与资格核对；不是学历工资表",
+            "scenario_heading": "高中任教资格与训练如何核对？",
             "scenario_interpretation_label": "说明与核对建议",
-            "scenario_role_label": "学历背景",
-            "scenario_value_label": "常见岗位方向"
+            "scenario_role_label": "核对事项",
+            "scenario_value_label": "对应要求"
           },
           "us_growth": {
             "$item": "secondary-school-teachers-except-special-and-career-technical-education.china-salary.career-snapshot-primary-locale.58",
@@ -35473,7 +35582,7 @@
         },
         "bls_table": [
           {
-            "fact_ref": "us-wage-low10-2025",
+            "fact_ref": "revision-us-wage-p10-2025",
             "指标": "薪资 · 10 分位",
             "数值": {
               "$item": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.9",
@@ -35489,7 +35598,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-q25-2025",
+            "fact_ref": "revision-us-wage-p25-2025",
             "指标": "薪资 · 25 分位",
             "数值": {
               "$item": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.11",
@@ -35505,7 +35614,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-2025",
+            "fact_ref": "revision-us-wage-p50-2025",
             "指标": "薪资 · 中位数",
             "数值": {
               "$item": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.13",
@@ -35521,7 +35630,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-q75-2025",
+            "fact_ref": "revision-us-wage-p75-2025",
             "指标": "薪资 · 75 分位",
             "数值": {
               "$item": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.15",
@@ -35537,7 +35646,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-high10-2025",
+            "fact_ref": "revision-us-wage-p90-2025",
             "指标": "薪资 · 90 分位",
             "数值": {
               "$item": "secondary-school-teachers-except-special-and-career-technical-education.us-salary.career-snapshot-secondary-locale.17",
@@ -35775,7 +35884,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "question": "时薪能推算个人年薪吗？"
+            "question": "官方年工资可以折成个人月薪吗？"
           },
           {
             "answer": {
@@ -35813,7 +35922,7 @@
           "折算边界",
           "怎样理解这个位置"
         ],
-        "wage_heading": "美国工资分布（2023 分位；2025 中位数）",
+        "wage_heading": "美国工资分布（2025年工资）",
         "wage_tiers": [
           {
             "equivalent": "官方年工资，非个人月收入",
@@ -35825,7 +35934,7 @@
             },
             "label": "最低 10%",
             "value": {
-              "$fact": "us-wage-low10-2025",
+              "$fact": "revision-us-wage-p10-2025",
               "field": "display_value"
             }
           },
@@ -35839,7 +35948,7 @@
             },
             "label": "中位数（50%）",
             "value": {
-              "$fact": "us-wage-2025",
+              "$fact": "revision-us-wage-p50-2025",
               "field": "display_value"
             }
           },
@@ -35853,7 +35962,7 @@
             },
             "label": "最高 10%",
             "value": {
-              "$fact": "us-wage-high10-2025",
+              "$fact": "revision-us-wage-p90-2025",
               "field": "display_value"
             }
           }
@@ -36445,7 +36554,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Occupational Outlook Handbook",
+            "label": "BLS 2025 OEWS：调查就业与年平均工资",
             "secondary_value": null,
             "value": {
               "$item": "secondary-school-teachers-except-special-and-career-technical-education.profile.onet-structured-fields-block.2",
@@ -36478,7 +36587,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中华人民共和国个人信息保护法",
+            "label": "中国资格认定 / 美国公校州级许可",
             "secondary_value": null,
             "value": {
               "$item": "secondary-school-teachers-except-special-and-career-technical-education.profile.onet-structured-fields-block.5",
@@ -36552,7 +36661,7 @@
             },
             "id": "big-five",
             "label": "五因素人格模型（大五人格）",
-            "question": "大五人格哪些特质与这份工作更相关？",
+            "question": "面对课堂变化，怎样观察工作方式？",
             "signals": {
               "$item": "secondary-school-teachers-except-special-and-career-technical-education.fit.personality-fit-block.8",
               "block": "fit",
@@ -36589,7 +36698,7 @@
             },
             "id": "mbti",
             "label": "迈尔斯-布里格斯类型指标（MBTI）",
-            "question": "MBTI 能用来判断我适不适合高中教师吗？",
+            "question": "MBTI偏好如何用于教学反思？",
             "signals": {
               "$item": "secondary-school-teachers-except-special-and-career-technical-education.fit.personality-fit-block.12",
               "block": "fit",
@@ -36663,7 +36772,7 @@
             },
             "id": "iq",
             "label": "智力商数（IQ）与数理推理",
-            "question": "数学不好，能做高中教师吗？",
+            "question": "数学教学需要核对哪些推理证据？",
             "signals": {
               "$item": "secondary-school-teachers-except-special-and-career-technical-education.fit.personality-fit-block.20",
               "block": "fit",
@@ -37388,7 +37497,7 @@
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
-      "interface.fit.directions_heading": "你更可能适合哪条本职业工作方向？",
+      "interface.fit.directions_heading": "你更可能适合哪条教学工作方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
@@ -37752,6 +37861,90 @@
           "onet",
           "nbs"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "48,780美元/年（2025年第10分位）",
+        "fact_id": "revision-us-wage-p10-2025",
+        "market": "美国",
+        "measure": "本职业年工资第10分位",
+        "occupation_scope": "SOC25-2031高中学科教师",
+        "period": "2025年5月",
+        "source_refs": [
+          "revision-teacher-wages2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "59,980美元/年（2025年第25分位）",
+        "fact_id": "revision-us-wage-p25-2025",
+        "market": "美国",
+        "measure": "本职业年工资第25分位",
+        "occupation_scope": "SOC25-2031高中学科教师",
+        "period": "2025年5月",
+        "source_refs": [
+          "revision-teacher-wages2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "72,040美元/年（2025年第50分位）",
+        "fact_id": "revision-us-wage-p50-2025",
+        "market": "美国",
+        "measure": "本职业年工资第50分位",
+        "occupation_scope": "SOC25-2031高中学科教师",
+        "period": "2025年5月",
+        "source_refs": [
+          "revision-teacher-wages2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "92,570美元/年（2025年第75分位）",
+        "fact_id": "revision-us-wage-p75-2025",
+        "market": "美国",
+        "measure": "本职业年工资第75分位",
+        "occupation_scope": "SOC25-2031高中学科教师",
+        "period": "2025年5月",
+        "source_refs": [
+          "revision-teacher-wages2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "107,600美元/年（2025年第90分位）",
+        "fact_id": "revision-us-wage-p90-2025",
+        "market": "美国",
+        "measure": "本职业年工资第90分位",
+        "occupation_scope": "SOC25-2031高中学科教师",
+        "period": "2025年5月",
+        "source_refs": [
+          "revision-teacher-wages2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "133,539元/年（教育行业非私营税前年平均工资）",
+        "fact_id": "revision-cn-education-0-2025",
+        "market": "中国大陆",
+        "measure": "教育行业税前年平均工资",
+        "occupation_scope": "城镇单位教育行业全部岗位，非高中教师精确职业",
+        "period": "2025年",
+        "source_refs": [
+          "revision-teacher-nbs2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "63,908元/年（教育行业私营税前年平均工资）",
+        "fact_id": "revision-cn-education-1-2025",
+        "market": "中国大陆",
+        "measure": "教育行业税前年平均工资",
+        "occupation_scope": "城镇单位教育行业全部岗位，非高中教师精确职业",
+        "period": "2025年",
+        "source_refs": [
+          "revision-teacher-nbs2025"
+        ]
       }
     ]
   },
@@ -37760,7 +37953,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "高中学科教师 · 备课授课 · 学习评价",
@@ -37811,7 +38004,7 @@
       "text": "高中教师"
     }
   },
-  "source_content_sha256": "c63cd33d63f217cf7b7d96c1ef200c0a234439fc5c10f4debc0d0ebf28f10943",
+  "source_content_sha256": "76b0ced73fdcbf0e5dd5c6d8e4aea7d0900e29b67281ffb56c579809da551677",
   "subject": {
     "canonical_slug": "secondary-school-teachers-except-special-and-career-technical-education",
     "name": "高中教师",

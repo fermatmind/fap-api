@@ -35,6 +35,39 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:r5-current-china-jiaojiang-featured-daily-2026": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-employment": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-high": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-identity": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-amusement": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-education": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-theater": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-low": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-median": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-openings": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -1560,7 +1593,7 @@
         "status": "mapped"
       },
       "item:actors.market-signals.market-signal-card.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.market-signals.market-signal-card.2": {
         "status": "mapped"
@@ -1587,7 +1620,7 @@
         "status": "mapped"
       },
       "item:actors.path.credential-boundary.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.credential-decision.1": {
         "status": "mapped"
@@ -8971,20 +9004,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.05.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            {
-              "id": "project-data"
-            },
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.05.mitigation": {
         "ref": {
@@ -9336,18 +9357,8 @@
         "status": "mapped"
       },
       "career_snapshot_primary_locale.salary.bls_table.01.explanation": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_primary_locale",
-            "salary",
-            "bls_table",
-            0,
-            "说明"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_primary_locale.salary.bls_table.01.headers.explanation": {
         "ref": {
@@ -22767,12 +22778,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "环境与节奏：以室内受控与不规律排期为主，工作场所含婚礼与宴会场地、商业活动与展演与娱乐场所；决策自由度「很大」72%，工作时间「不规律」60%，与外部客户或公众打交道「极其重要」60%，公开演讲「每周以上」48%，电话交谈「每周以上」50%，时间压力「每周以上」44%，暴露于干扰性或不适噪声「每周以上」32%，持续站立 36%，持续用手操作 44%，竞争程度「极其激烈」40%。"
+              "O*NET57情境调查：决策自由很大72%、每日邮件63%、公众服务极重要60%、持续接触40/大部分接触44%、持续站立36/超过半时36、持续用手44、极激烈竞争40。电话25每天/50每周但非每天；公开讲话24每天/48每周但非每天；严格期限16每天/44每周但非每天；不适噪声20每天/32每周但非每天，原每周以上标签不能当每周及以上。受控室内42每周非每天/42每月非每周；不一律每日室内。排班60不规律/24季节/16规律；周72少于40/20恰40。自动化48略有/16中等/28没有非GenAI采用；调查非每个岗位、安全事故率或听力门槛。"
             ]
           },
           "id": "actors.profile.work-context-block.8",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -22921,12 +22933,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本表把本页职业与相邻岗位按核心目的、主要对象与依据、核心过程、主要产出、责任主体、协作与督导、结论边界七项逐一对照：本页职业（O*NET-SOC 27-2091.00）是面向客户与现场人群的有偿音乐与气氛服务岗位，负责设备操作与选曲与混音、按环节安排顺序、气氛调动与点歌、以及合同与发票与推广；广播主持人与电台唱片骑师在广播机构内主持节目并与导播与播出制度绑定；音乐家与歌手演奏与演唱现场音乐并对其艺术呈现负责；音响工程技术员负责扩声系统搭建与调音与设备维护；会议与会展与活动策划师负责活动整体策划与供应商与预算与现场协调。比较时要以岗位职责、主办方与场地授权与所在法域法规逐项核对，不能按岗位名称互换，也不能把现场音乐服务职责读成演出经营资质或扩声系统工程责任。"
+              "编辑任务比较：DJ播放预录音乐并可主持；广播人员做节目播出；音乐家歌手可现场、广播或音视频录制演奏演唱；音响工程涵盖录制、同步、混音、编辑与声音再现；活动策划协调活动整体。实际兼任、合同与法域权限另核，名称不等身份互换。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.answer",
           "source_refs": [
-            "onet"
+            "agent",
+            "directing",
+            "announcing",
+            "enrichment",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -22963,12 +22979,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的核心目的：广播主持人与电台唱片骑师完成节目播出；音乐家与歌手完成现场演奏与演唱；音响工程技术员保证扩声系统可靠与声音质量；会议与会展与活动策划师保证活动整体策划与供应商与预算落地。"
+              "音乐家歌手演奏演唱可用于现场、广播及录制；音响工程以录制同步混音编辑再现为定义；广播节目与活动整体策划是其他任务方向，不只现场扩声。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.purpose.secondary",
           "source_refs": [
-            "onet"
+            "agent",
+            "directing",
+            "announcing",
+            "enrichment",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23005,12 +23025,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的对象与依据：节目与播出制度（广播机构编排与导播要求）；作品与演出呈现（乐谱与排练与演出安排）；扩声系统与声学（系统设计与设备手册）；活动整体方案与预算（合同与供应商与场地方制度）。"
+              "邻职分别面向播出节目、现场或录制的作品、录音及声音再现设备、活动整体方案预算；具体设备、依据与岗位权限另核，不缩成仅扩声。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.inputs.secondary",
           "source_refs": [
-            "onet"
+            "agent",
+            "directing",
+            "announcing",
+            "enrichment",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23117,12 +23141,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业对现场音乐服务的设备与选曲与气氛执行与收费与开票承担责任；营业性演出经营主体资质与场地与用电与消防安全与音乐著作权使用责任分别由依法取得资质或许可的主办方与场地方与相关权利人承担。"
+              "任务责任按实际角色和合同核，主体经营、演出审批、版权和安全各有适用义务；DJ亦可能具备相应主体身份，不因名称自动排除或授权。中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。 中国2020修正著作权法：10条区分表演/复制/广播/网络传播等权利，26/29条许可按权利、地域、期间核；38条组织演出由组织者取得作品许可及付酬，表演者和组织者按实际情形核。45条用设备向公众播送录音须向录音制作者付酬；复制/网络传播另核44条作品和表演者权利。作品、录音、表演权分别核，购买文件或个人订阅不自动含商业公开播放/复制/传播；集体管理为获授权的一条途径，不一概只能协会许可。24条法定例外另核，私人学习不自动授权营利公开活动；本轮未核具体曲库条款或收费标准。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.responsibility.primary",
           "source_refs": [
-            "onet"
+            "cn-rule",
+            "r5-cn-details",
+            "r5-cn-copyright"
           ],
           "type": "prose"
         },
@@ -23131,12 +23157,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的责任：播出内容与合规由广播机构与其主持人承担；演出呈现由音乐家与歌手承担；扩声系统安全与声音质量由音响工程技术员承担；活动整体安全与供应商与预算由活动策划方与主办方承担。"
+              "编辑比较：艺术演奏演唱、节目播出、声音录制与再现、活动策划各有岗位责任；实际安全与内容责任依本人身份、合同和适用法域，不由职业定义一概划分全部法律责任。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.responsibility.secondary",
           "source_refs": [
-            "onet"
+            "agent",
+            "directing",
+            "announcing",
+            "enrichment",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23313,12 +23343,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按适用法规与制度执行：公开播放音乐作品须取得相应许可或使用符合授权与集体管理要求的来源，不得擅自使用未经许可的作品公开播放或录音与传播；营业性演出经营活动须由依法取得营业性演出许可证的主体举办并经审批，演出场所经营单位与个体演员与个体演出经纪人须按规定备案；场地用电与消防与临时搭建舞台看台须符合安全要求。具体合规要求以所在法域法规与主办方与场地方制度为准。"
+              "中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。 2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。 中国2020修正著作权法：10条区分表演/复制/广播/网络传播等权利，26/29条许可按权利、地域、期间核；38条组织演出由组织者取得作品许可及付酬，表演者和组织者按实际情形核。45条用设备向公众播送录音须向录音制作者付酬；复制/网络传播另核44条作品和表演者权利。作品、录音、表演权分别核，购买文件或个人订阅不自动含商业公开播放/复制/传播；集体管理为获授权的一条途径，不一概只能协会许可。24条法定例外另核，私人学习不自动授权营利公开活动；本轮未核具体曲库条款或收费标准。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.04.answer",
           "source_refs": [
-            "onet"
+            "cn-rule",
+            "r5-cn-details",
+            "r5-cn-copyright"
           ],
           "type": "prose"
         },
@@ -23439,12 +23471,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "责任边界：本职业承担现场音乐服务的设备与选曲与气氛执行与收费与开票责任；不擅自使用未经许可的音乐作品公开播放或传播、不在未确认用电与承重与通道条件下搭建设备、不对客户作出超出合同的服务承诺、不代替主办方承担安全与应急指挥职责，异常与越权事项立即上报。"
+              "仅作为音乐服务人员时按合同与授权履行设备、选曲、现场执行及记录责任；若兼具举办单位或场所主体身份，应另履行其法定义务，不一概排除主办安全责任。音乐权利许可、设备搭设与应急处置按适用法规、真实规程及人员权限核。"
             ]
           },
           "id": "actors.display.responsibilities_block.06",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "cn-rule",
+            "r5-cn-details",
+            "r5-cn-copyright"
           ],
           "type": "prose"
         },
@@ -23467,12 +23502,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "以室内受控与不规律排期为主并与大量人员接触：决策自由度「很大」72%，每天使用电子邮件 63%，与外部客户或公众打交道「极其重要」60%，工作时间「不规律」60%，电话交谈「每周以上」50%，公开演讲「每周以上」48%，时间压力「每周以上」44%，持续用手操作 44%，与他人接触「大部分时间」44%，持续站立 36%，暴露于干扰性或不适噪声「每周以上」32%，竞争程度「极其激烈」40%。"
+              "O*NET57情境调查：决策自由很大72%、每日邮件63%、公众服务极重要60%、持续接触40/大部分接触44%、持续站立36/超过半时36、持续用手44、极激烈竞争40。电话25每天/50每周但非每天；公开讲话24每天/48每周但非每天；严格期限16每天/44每周但非每天；不适噪声20每天/32每周但非每天，原每周以上标签不能当每周及以上。受控室内42每周非每天/42每月非每周；不一律每日室内。排班60不规律/24季节/16规律；周72少于40/20恰40。自动化48略有/16中等/28没有非GenAI采用；调查非每个岗位、安全事故率或听力门槛。"
             ]
           },
           "id": "actors.display.work_context_block.summary",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23523,12 +23559,14 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "排期以晚间、周末与节假日为主且不规律（60% 反馈工作时间不规律）；旺季与节假日集中，单场时长与往返与搭建时间需计入工时。"
+              "O*NET57情境调查：决策自由很大72%、每日邮件63%、公众服务极重要60%、持续接触40/大部分接触44%、持续站立36/超过半时36、持续用手44、极激烈竞争40。电话25每天/50每周但非每天；公开讲话24每天/48每周但非每天；严格期限16每天/44每周但非每天；不适噪声20每天/32每周但非每天，原每周以上标签不能当每周及以上。受控室内42每周非每天/42每月非每周；不一律每日室内。排班60不规律/24季节/16规律；周72少于40/20恰40。自动化48略有/16中等/28没有非GenAI采用；调查非每个岗位、安全事故率或听力门槛。 OOH组级可能早晚周末假日、兼职背景；编辑核目标具体档期而非全部夜班。"
             ]
           },
           "id": "actors.display.work_context_block.schedule",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "r5-ooh-current"
           ],
           "type": "prose"
         },
@@ -23593,12 +23631,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 27-2091.00：2024 年就业约 15,400 人，2024—2034 年增长 3%～4%（平均），预计空缺 1,500；准备层级 Job Zone 1-2（SVP 低于 6.0），兴趣代码 AEC。"
+              "本职业2025就业16,900→2035预计17,600；BLS表1.2增长3.8%、OOH和O*NET全国取整4%、O*NET摘要分组3—4%。官方净增600，基期/终期各独立取整，不用两端显示数相减改700。2025—2035年均空缺1,700含增长与更替，非十年合计、年净增或个人接单率；BLS2025自雇56.1%（OOH取整56%）。 BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH同职业明细支持高中及一定在岗训练。O*NET JZ1—2/SVP低于6，几天到一年为准备组说明，非本职业固定培训期；52%高中/36%以下/4%部分大学无学位是对新入职所需学历意见，不是52%雇主或员工。目标美国法域许可、雇主和课程费用未逐核。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.onet",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -23607,12 +23648,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "工资为 BLS 2025 年工资数据口径（经 O*NET 全国工资页）：小时中位 21.61 美元；小时分位 13.50／16.91／21.61／37.50／60.17 美元。该来源对本职业只公布小时口径，未公布年薪中位数与年度分位，本页不自行折算并保留缺口。"
+              "美国27-2091.00，2025年5月全国小时工资10/25/50/75/90分位13.50/16.91/21.61/37.50/60.17美元；来源未公布年度分位，不按固定工时年化。OEWS直时税前受雇工资包含基本工资、小费、规定津贴和佣金/生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；按场次结算是否纳入看受雇身份/覆盖，不一律全部排除。受雇工资不是扣设备交通成本后的接单净收入，也非单场报价。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
           "source_refs": [
-            "onet"
+            "bls",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -23621,12 +23663,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "常见岗位含 Event DJ、Club DJ、Mobile DJ、Wedding DJ 等，多为按场次或按小时计酬的自由职业或受雇岗位；软件与热门技术含音乐与声音编辑软件（Adobe Audition、Avid Pro Tools）与办公与表格软件。"
+              "O*NET2025就业艺术娱乐休闲24%/住宿餐饮15%；职位名示例MC/MobileDJ/WeddingDJ，非计酬市场实采。本轮未取得本职业生成式AI采用率、节时减错、可靠性、替代率或工资因果证据。O*NET4软件类型列Audition/VoxPro/ProTools和Office/Excel/Word，只是示例；2025美国关联本职业全部唯一招聘帖Office5/Excel3/Word1%，不是采用者或含技术帖分母，音乐软件缺招聘数值不填0。自动节拍/混音分析、设备监测与生成式AI分开核实际功能/效果。ILO2025未逐核本细类ISCO映射/暴露评分，NIST AI RMF1.0自愿框架不授版权或演出许可。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "r5-ooh-current"
           ],
           "type": "prose"
         },
@@ -23635,12 +23679,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆相关依据为《营业性演出管理条例》（2005 年国务院令第 439 号公布，2020-11-29 国务院令第 732 号第四次修订）与《营业性演出管理条例实施细则》（文化部令第 47 号，2022 年修订）：营业性演出经营活动须由取得营业性演出许可证的主体举办并经审批，演出场所经营单位与个体演员与个体演出经纪人须按规定备案。"
+              "中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。 2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
           "source_refs": [
-            "onet"
+            "cn-rule",
+            "r5-cn-details"
           ],
           "type": "prose"
         },
@@ -23649,12 +23694,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "本页不使用演员工会或影视行业口径；来源与使用边界见来源登记。"
+              "本轮未取得本职业生成式AI采用率、节时减错、可靠性、替代率或工资因果证据。O*NET4软件类型列Audition/VoxPro/ProTools和Office/Excel/Word，只是示例；2025美国关联本职业全部唯一招聘帖Office5/Excel3/Word1%，不是采用者或含技术帖分母，音乐软件缺招聘数值不填0。自动节拍/混音分析、设备监测与生成式AI分开核实际功能/效果。ILO2025未逐核本细类ISCO映射/暴露评分，NIST AI RMF1.0自愿框架不授版权或演出许可。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
           "source_refs": [
-            "onet"
+            "r5-nist-current",
+            "r5-ilo-current",
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -23663,12 +23710,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页精确对应美国 O*NET 27-2091.00 Disc Jockeys, Except Radio（非电台唱片骑师）：操作唱片骑师控制器与麦克风等音视频设备，为客户与现场人群提供有偿的音乐与气氛服务；与客户或场地负责人沟通音乐偏好与排期与预计人数，按活动环节定制播放清单，组装设备并做声音检查，结合人群偏好与气氛选曲与混音并接受点歌，操作灯光与视觉特效并带动气氛，撰写预订合同与开具明细发票并推广服务；不含电台节目主持与音乐制作与录音工程，也不承担演出经营与场馆经营资质。"
+              "O*NET定义为在俱乐部、聚会或婚宴等为现场观众播放预录音乐，可混音切音采样，也可主持MC。20任务为19核心及1新任务；控制器/客户沟通/排期/收款/合同/设备组装/选曲/声音检查/清单/试听/曲库/发票/发行趋势/混音/引导舞蹈/点歌/广告/视觉设备/派对游戏均核心；写活动公告稿为New且重要性未提供，不填0或叫核心。设备操作与声音录制编辑存在任务交叉，不一律排除音乐制作/工程兼任；岗位描述不自动赋工程、用电或演出经营许可。"
             ]
           },
           "id": "actors.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         }
@@ -24136,13 +24184,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以下为基于职业任务与工作情境的有限编辑推演，并非该职业的实际部署证据：AI 与信息系统在现场音乐服务里主要辅助播放清单建议、节拍与调性分析与混音辅助、设备状态提示、报价与合同与发票整理与推广文案起草。"
+              "本轮未取得本职业生成式AI采用率、节时减错、可靠性、替代率或工资因果证据。O*NET4软件类型列Audition/VoxPro/ProTools和Office/Excel/Word，只是示例；2025美国关联本职业全部唯一招聘帖Office5/Excel3/Word1%，不是采用者或含技术帖分母，音乐软件缺招聘数值不填0。自动节拍/混音分析、设备监测与生成式AI分开核实际功能/效果。ILO2025未逐核本细类ISCO映射/暴露评分，NIST AI RMF1.0自愿框架不授版权或演出许可。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.1",
           "source_refs": [
+            "r5-nist-current",
+            "r5-ilo-current",
             "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24151,13 +24202,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采用取决于设备与软件集成、场地网络与用电条件、音乐授权与著作权要求、客户与场地的接受度，以及从业者是否完成培训与验证。"
+              "编辑采用核查：设备软件兼容、网络用电、音乐授权、客户需求、训练和用途验证须按真实产品与活动核。本轮未核代表性采用机制或效果，不把这些问题当已证决定因素。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current",
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24181,13 +24232,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "节拍与调性分析与自动混音可减少技术失误，但是否切歌、如何衔接与何时调动气氛仍在人，且作品使用须符合授权要求。"
+              "节拍调性或混音功能需核具体设备软件；未取得本职业减少失误幅度，普通信号分析不自动等生成式AI。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24196,15 +24247,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "设备状态提示与声音检查工具可提高可靠性，但用电与接线与固定与备用方案与应急处理不能交给系统。"
+              "设备提示和声音检查是可核任务；未核AI提高可靠性，真实电气搭设须按适用条件与专业分工。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -24226,13 +24278,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "客户与来宾信息、场地资料与合同与支付信息属于敏感信息，只能在批准的系统内按最小必要原则处理并留痕。"
+              "中国个人信息保护法按合法依据、明确合理目的、最小必要和安全责任处理可识别客户/来宾资料；金融账户等敏感信息另核充分必要、严格保护、适用单独同意及事前影响评估，13条其他依据另核。合同、全部支付或场地商业资料不自动都属敏感个人信息；单位批准系统不自动允许外部AI上传，去标识非匿名化，不一律禁止一切其他合法处理。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -24256,13 +24307,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "国际劳工组织等研究把「任务暴露」与「实际采用、岗位增减」分开；本页没有本职业的采用率、裁员率或因果就业证据，这些数字保持未知，须以具体从业者与场地验证。"
+              "本轮未取得本职业生成式AI采用率、节时减错、可靠性、替代率或工资因果证据。O*NET4软件类型列Audition/VoxPro/ProTools和Office/Excel/Word，只是示例；2025美国关联本职业全部唯一招聘帖Office5/Excel3/Word1%，不是采用者或含技术帖分母，音乐软件缺招聘数值不填0。自动节拍/混音分析、设备监测与生成式AI分开核实际功能/效果。ILO2025未逐核本细类ISCO映射/暴露评分，NIST AI RMF1.0自愿框架不授版权或演出许可。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.9",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current",
+            "r5-ilo-current",
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24286,13 +24338,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 可辅助清单建议、混音辅助、设备提示与报价与合同与文案整理，但不能替代现场判断、音乐授权与著作权合规、设备与用电安全责任以及客户沟通与服务交付。"
+              "编辑可试虚构清单/文案/报价草稿，未核自动混音或设备提示效果。本轮未取得本职业生成式AI采用率、节时减错、可靠性、替代率或工资因果证据。O*NET4软件类型列Audition/VoxPro/ProTools和Office/Excel/Word，只是示例；2025美国关联本职业全部唯一招聘帖Office5/Excel3/Word1%，不是采用者或含技术帖分母，音乐软件缺招聘数值不填0。自动节拍/混音分析、设备监测与生成式AI分开核实际功能/效果。ILO2025未逐核本细类ISCO映射/暴露评分，NIST AI RMF1.0自愿框架不授版权或演出许可。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current",
+            "r5-ilo-current",
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24321,8 +24374,7 @@
           },
           "id": "actors.display.ai_impact_table.evidence.1.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24336,8 +24388,7 @@
           },
           "id": "actors.display.ai_impact_table.evidence.1.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24346,13 +24397,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS OEWS 工资与就业统计"
+              "BLS本职业预测与典型训练"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -24376,13 +24427,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 治理与风险管理来源"
+              "NIST AI风险管理框架"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24391,13 +24441,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "治理原则供参考：透明、隐私、人工监督与留痕。"
+              "NIST自愿治理框架，不授版权或演出许可。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24421,13 +24470,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业与用工结构来源"
+              "BLS本职业就业及行业明细"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ooh-current"
           ],
           "type": "prose"
         },
@@ -24436,13 +24484,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "说明本职业多以按场次或不规律排期的受雇与自由职业岗位为主。"
+              "本职业2025自雇56.1%；就业行业份额非AI采用或招聘比例。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -24466,13 +24514,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合（本页说明与练习设计）"
+              "O*NET招聘技术关键词"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24481,13 +24528,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅用于整理本页的说明与练习边界。"
+              "本轮未取得本职业生成式AI采用率、节时减错、可靠性、替代率或工资因果证据。O*NET4软件类型列Audition/VoxPro/ProTools和Office/Excel/Word，只是示例；2025美国关联本职业全部唯一招聘帖Office5/Excel3/Word1%，不是采用者或含技术帖分母，音乐软件缺招聘数值不填0。自动节拍/混音分析、设备监测与生成式AI分开核实际功能/效果。ILO2025未逐核本细类ISCO映射/暴露评分，NIST AI RMF1.0自愿框架不授版权或演出许可。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24496,13 +24542,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合不是外部事实、资格、法规或工资证据。"
+              "全部唯一关联本职业招聘帖为分母；音乐工具缺关键词比例不是0，关键词非采用效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24526,13 +24571,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能从任务暴露推导替代日期；现场判断、客户沟通、设备与用电安全与音乐授权合规仍由人负责。"
+              "本轮未取得本职业生成式AI采用率、节时减错、可靠性、替代率或工资因果证据。O*NET4软件类型列Audition/VoxPro/ProTools和Office/Excel/Word，只是示例；2025美国关联本职业全部唯一招聘帖Office5/Excel3/Word1%，不是采用者或含技术帖分母，音乐软件缺招聘数值不填0。自动节拍/混音分析、设备监测与生成式AI分开核实际功能/效果。ILO2025未逐核本细类ISCO映射/暴露评分，NIST AI RMF1.0自愿框架不授版权或演出许可。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.1.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current",
+            "r5-ilo-current",
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24556,13 +24602,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先限定在清单建议、混音辅助、设备状态提示与报价与合同与文案整理等可复核环节。"
+              "编辑试用虚构清单/文本/报价材料；具体混音、设备功能和效果未验证。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24631,13 +24678,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能；报价与承接由合同与档期与客户要求与成本核算决定。"
+              "编辑辅助报价不能代真实合同、成本及档期核对，未核全部场景一律禁止辅助报价计算。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24661,13 +24707,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只在批准的系统内按最小必要处理，不用于活动以外用途，合同与支付信息按期留存与销毁。"
+              "中国个人信息保护法按合法依据、明确合理目的、最小必要和安全责任处理可识别客户/来宾资料；金融账户等敏感信息另核充分必要、严格保护、适用单独同意及事前影响评估，13条其他依据另核。合同、全部支付或场地商业资料不自动都属敏感个人信息；单位批准系统不自动允许外部AI上传，去标识非匿名化，不一律禁止一切其他合法处理。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.6.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -24691,13 +24736,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用可比活动的准备耗时、现场技术失误次数与结算差错率做前后对照，并保留人工复核记录。"
+              "编辑初筛：在获准或虚构素材上记录准备耗时、错误与人工质量，同时核活动类型规模、设备和经验变化等混杂。可比前后观察只是线索，不能单独证明工具因果效果或现场安全。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.7.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24736,13 +24780,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合"
+              "官方招聘技术关键词"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24751,13 +24794,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅用于本页 AI 边界的说明，不代表采用率或替代结论。"
+              "本轮未取得本职业生成式AI采用率、节时减错、可靠性、替代率或工资因果证据。O*NET4软件类型列Audition/VoxPro/ProTools和Office/Excel/Word，只是示例；2025美国关联本职业全部唯一招聘帖Office5/Excel3/Word1%，不是采用者或含技术帖分母，音乐软件缺招聘数值不填0。自动节拍/混音分析、设备监测与生成式AI分开核实际功能/效果。ILO2025未逐核本细类ISCO映射/暴露评分，NIST AI RMF1.0自愿框架不授版权或演出许可。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24766,13 +24808,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "北美行业口径（不适用于本职业）"
+              "ILO任务暴露研究"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag"
           ],
           "type": "prose"
         },
@@ -24781,13 +24822,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用演员工会或影视行业口径，仅登记其不适用。"
+              "实际ILO2025而非演员工会；未核本细类映射与评分，不据此推采用/裁员。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag"
           ],
           "type": "prose"
         },
@@ -24796,13 +24836,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "北美行业口径（不适用于本职业）"
+              "官方职业详细档案"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24811,13 +24851,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用该口径，仅登记其不适用。"
+              "O*NET定义为在俱乐部、聚会或婚宴等为现场观众播放预录音乐，可混音切音采样，也可主持MC。20任务为19核心及1新任务；控制器/客户沟通/排期/收款/合同/设备组装/选曲/声音检查/清单/试听/曲库/发票/发行趋势/混音/引导舞蹈/点歌/广告/视觉设备/派对游戏均核心；写活动公告稿为New且重要性未提供，不填0或叫核心。设备操作与声音录制编辑存在任务交叉，不一律排除音乐制作/工程兼任；岗位描述不自动赋工程、用电或演出经营许可。 O*NET57情境调查：决策自由很大72%、每日邮件63%、公众服务极重要60%、持续接触40/大部分接触44%、持续站立36/超过半时36、持续用手44、极激烈竞争40。电话25每天/50每周但非每天；公开讲话24每天/48每周但非每天；严格期限16每天/44每周但非每天；不适噪声20每天/32每周但非每天，原每周以上标签不能当每周及以上。受控室内42每周非每天/42每月非每周；不一律每日室内。排班60不规律/24季节/16规律；周72少于40/20恰40。自动化48略有/16中等/28没有非GenAI采用；调查非每个岗位、安全事故率或听力门槛。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24826,13 +24866,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业发布口径（不适用于本职业）"
+              "职业认证查询入口"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "ratify"
           ],
           "type": "prose"
         },
@@ -24841,13 +24880,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用该口径，仅登记其不适用。"
+              "入口不能证明所有法域免许可或全美统一要求；目标州/机构未逐核。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "ratify"
           ],
           "type": "prose"
         },
@@ -24856,13 +24894,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "官方统计"
+              "官方工资统计"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-current",
+            "r5-trends-current",
+            "r5-ooh-current"
           ],
           "type": "prose"
         },
@@ -24871,13 +24912,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅按 BLS/OEWS 2025 年工资与 O*NET 2024—2034 年预测口径使用。"
+              "美国27-2091.00，2025年5月全国小时工资10/25/50/75/90分位13.50/16.91/21.61/37.50/60.17美元；来源未公布年度分位，不按固定工时年化。OEWS直时税前受雇工资包含基本工资、小费、规定津贴和佣金/生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；按场次结算是否纳入看受雇身份/覆盖，不一律全部排除。受雇工资不是扣设备交通成本后的接单净收入，也非单场报价。 预测与行业另列当前BLS实际明细。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-current",
+            "r5-trends-current",
+            "r5-ooh-current"
           ],
           "type": "prose"
         },
@@ -24991,13 +25035,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助整理需求清单与建议曲目"
+              "编辑试用建议：可辅助整理需求清单与建议曲目；本轮未核具体软件功能及节时、准确性或效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.1.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25051,13 +25096,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助生成清单草稿与顺序建议"
+              "编辑试用建议：可辅助生成清单草稿与顺序建议；本轮未核具体软件功能及节时、准确性或效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.2.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25111,13 +25157,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "设备提示可辅助发现异常"
+              "编辑试用建议：设备提示可辅助发现异常；本轮未核具体软件功能及节时、准确性或效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25171,13 +25218,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "混音与节拍分析可辅助技术操作"
+              "编辑试用建议：混音与节拍分析可辅助技术操作；本轮未核具体软件功能及节时、准确性或效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25231,13 +25279,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助生成公告文案与效果预设"
+              "编辑试用建议：可辅助生成公告文案与效果预设；本轮未核具体软件功能及节时、准确性或效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25291,13 +25340,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助生成合同与发票草稿"
+              "编辑试用建议：可辅助生成合同与发票草稿；本轮未核具体软件功能及节时、准确性或效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25351,13 +25401,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助生成推广素材与复盘表草稿"
+              "编辑试用建议：可辅助生成推广素材与复盘表草稿；本轮未核具体软件功能及节时、准确性或效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.7.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25396,13 +25447,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "清单建议与节拍分析"
+              "编辑试用建议：清单建议与节拍分析；本轮未核具体软件功能及节时、准确性或效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.1.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25441,13 +25493,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "设备提示与检查辅助"
+              "编辑试用建议：设备提示与检查辅助；本轮未核具体软件功能及节时、准确性或效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.2.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25486,13 +25539,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "报价与合同与发票与推广文案整理"
+              "编辑试用建议：报价与合同与发票与推广文案整理；本轮未核具体软件功能及节时、准确性或效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.3.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25681,13 +25735,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "会导致忌播或环节错位与客户不满。"
+              "编辑风险情景：可能出现忌播、环节错位或客户不满；本轮未核发生率或因果效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.1.consequence",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25786,13 +25840,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按著作权与集体管理要求使用授权来源的音乐。"
+              "中国2020修正著作权法：10条区分表演/复制/广播/网络传播等权利，26/29条许可按权利、地域、期间核；38条组织演出由组织者取得作品许可及付酬，表演者和组织者按实际情形核。45条用设备向公众播送录音须向录音制作者付酬；复制/网络传播另核44条作品和表演者权利。作品、录音、表演权分别核，购买文件或个人订阅不自动含商业公开播放/复制/传播；集体管理为获授权的一条途径，不一概只能协会许可。24条法定例外另核，私人学习不自动授权营利公开活动；本轮未核具体曲库条款或收费标准。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.3.control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-copyright"
           ],
           "type": "prose"
         },
@@ -25816,13 +25869,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "会造成静音与啸叫与活动中断。"
+              "编辑风险情景：可能出现静音、啸叫或活动中断；实际设备功能及故障机制另核。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.4.consequence",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25861,13 +25914,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "会削弱气氛调动与客户体验。"
+              "编辑风险情景：可能影响气氛和客户体验；本轮未核实际影响大小或必然结果。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.5.consequence",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -26019,12 +26072,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与中国大陆「非电台唱片骑师」精确对应的全国单职业工资口径。中国大陆公开工资资料按行业与单位类型统计，且本职业相关从业者多为按场次或按合同结算的个体演出者或场所与活动受雇人员，未建立与美国 O*NET 27-2091.00 一一对应的全国职业工资分布。"
+              "证据不足：本轮未取得与27-2091精确对应的中国全国职业工资分布，不断言中国全部资料最高只到行业或一定无相关细类。国家统计局2025城镇文化体育娱乐业年平均非私营129,447/私营64,015元税前，行业内多职业背景非DJ中位/起薪/月薪。城镇5人以上法人，非私营不只国企，个体/自由职业等不在该调查；受雇按场次计酬不必然排除。目标单位实际归类娱乐/餐饮/商务等须核，不套所有DJ服务场景。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26075,12 +26128,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "计酬口径常见差异：有的按场次包干、有的按小时、有的含底薪加提成、有的按驻场月度结算；比较时必须先确认统计量与工时与是否含设备与交通，再作比较。"
+              "编辑核真实合同是否按场次/小时/月、设备交通与税费/成本由谁承担；未采代表性中国报价，不称普遍组合。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26131,26 +26184,27 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本职业的报酬通常由「单场或月度基本费用＋旺季与节假日加成＋设备或驻场补贴（如适用）－设备租赁与交通等成本」构成，个体与受雇与驻场差别较大。"
+              "编辑逐项核真实合同金额、计酬和设备交通成本承担；无代表性样本，不称通常旺季加成或多数不公开。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业门类平均工资覆盖的是行业就业人员，不等于本职业的岗位报酬，也不覆盖个体演出者与零星接单的结算方式。"
+              "国家统计局2025城镇文化体育娱乐业年平均非私营129,447/私营64,015元税前，行业内多职业背景非DJ中位/起薪/月薪。城镇5人以上法人，非私营不只国企，个体/自由职业等不在该调查；受雇按场次计酬不必然排除。目标单位实际归类娱乐/餐饮/商务等须核，不套所有DJ服务场景。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26159,40 +26213,42 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "婚礼与节假日与年末高峰期与平日淡季差别明显，报酬与档期密度会随季节与地区变化。"
+              "编辑核城市、活动/场所、时长与档期真实记录；没有中国全国淡旺季报价或工资变化量化。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆未发布与美国 27-2091.00 一一对应的全国职业工资分布，因此不给出中位数或分位数。"
+              "证据不足：本轮未取得精确职业分布，不证明官方从未发布相关资料。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "影响报酬的因素主要是城市与场地类型、单场时长与档期密度、是否含设备与交通与住宿、是否驻场与是否有底薪、以及个人口碑与作品与客户资源。"
+              "编辑合同核查：城市场地、时长档期、设备交通住宿、驻场底薪及收费成本怎样约定？本轮未取代表性报酬因素或主次排序，不由行业均值推口碑等收入因果。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26201,12 +26257,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与信息系统可辅助需求整理、清单生成、报价与合同与发票，但报酬与录用结论不由此产生；本页只说明口径与边界。"
+              "未取得该职业中国AI薪酬因果，软件或草稿示例不证明收入提升。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
           "source_refs": [
-            "sag-moa"
+            "r5-nist-current",
+            "r5-ilo-current",
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -26267,13 +26325,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "按小时披露的工资不能在没有个人工时与档期安排时直接推算稳定年薪或月收入；本职业以按场次与不规律排期为主，更不宜直接年化。"
+              "当前来源只列小时分位，不能在未核个人实际工时档期下年化稳定年薪。本轮未核多数按场次计薪；不规律排班的调查与自雇比例不能代计酬分布。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
             "bls",
-            "oews"
+            "sag-moa",
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -26402,13 +26461,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024 年就业约 15,400 人，2024—2034 年预计增长 3%～4%（平均），预计空缺 1,500；空缺同时包含增长与更替，不是净增岗位。"
+              "本职业2025就业16,900→2035预计17,600；BLS表1.2增长3.8%、OOH和O*NET全国取整4%、O*NET摘要分组3—4%。官方净增600，基期/终期各独立取整，不用两端显示数相减改700。2025—2035年均空缺1,700含增长与更替，非十年合计、年净增或个人接单率；BLS2025自雇56.1%（OOH取整56%）。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.project",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -26432,13 +26491,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "常见岗位含活动与婚礼与俱乐部与流动唱片骑师等，多为按场次或按小时计酬的受雇或自由职业岗位，部分兼做设备租赁与主持。"
+              "本职业2025年5月表演艺术、观赏体育及相关行业小时工资中位24.98美元，来自OOH独立27-2091明细；不是电台DJ行业值、全国工资分位或自雇净收入。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
+            "r5-ooh-current",
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26447,13 +26507,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "教育反馈：52% 要求高中或同等学历、36% 高中以下即可、4% 要求部分大学无学位；在职培训通常从几天到一年。"
+              "本职业2025年5月食品服务与饮酒场所小时工资中位20.00美元，来自OOH独立27-2091明细；不是电台DJ行业值、全国工资分位或自雇净收入。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
+            "r5-ooh-current",
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26462,13 +26523,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工作场景含婚礼与宴会场地、商业活动与展演与促销现场、娱乐场所与酒吧与俱乐部；不同场景的排期与计酬差别较大。"
+              "本职业2025年5月游乐、博彩与休闲行业小时工资中位16.86美元，来自OOH独立27-2091明细；不是电台DJ行业值、全国工资分位或自雇净收入。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.amusement",
           "source_refs": [
+            "r5-ooh-current",
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26477,13 +26539,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "自营与自由职业比例较高：承接活动与设备租赁与交通等成本需自行承担，其收入口径与受雇工资不可直接比较。"
+              "BLS2025本职业自雇56.1%/OOH取整56%；预测含自雇而OEWS受雇工资不含，承接净收入须另扣实际成本核。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
           "source_refs": [
+            "r5-bls-current",
+            "r5-trends-current",
             "bls",
-            "oews"
+            "r5-oews-concepts",
+            "r5-ooh-current"
           ],
           "type": "prose"
         },
@@ -26507,13 +26572,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "城市与场地类型、单场时长与档期密度、是否含设备租赁与交通与住宿、是否驻场与是否有底薪、以及口碑与客户资源都会影响实际收入。"
+              "编辑合同清单：核场地、时长档期、设备交通成本、底薪或接单费用，区分收费与净收入；本轮未取这些变量影响大小或因果资料。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.paid-work",
           "source_refs": [
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26567,13 +26632,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国统计不代表中国大陆职业报酬或就业结果；本页未引用 BLS 职业展望页数值。"
+              "美国27-2091.00，2025年5月全国小时工资10/25/50/75/90分位13.50/16.91/21.61/37.50/60.17美元；来源未公布年度分位，不按固定工时年化。OEWS直时税前受雇工资包含基本工资、小费、规定津贴和佣金/生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；按场次结算是否纳入看受雇身份/覆盖，不一律全部排除。受雇工资不是扣设备交通成本后的接单净收入，也非单场报价。 本职业2025就业16,900→2035预计17,600；BLS表1.2增长3.8%、OOH和O*NET全国取整4%、O*NET摘要分组3—4%。官方净增600，基期/终期各独立取整，不用两端显示数相减改700。2025—2035年均空缺1,700含增长与更替，非十年合计、年净增或个人接单率；BLS2025自雇56.1%（OOH取整56%）。 当前OOH组合含本职业独立行业明细；组合38700/下降3%/3700年均空缺不套本职业，电台AI段也不套。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.boundary.detail",
           "source_refs": [
             "bls",
-            "oews"
+            "r5-oews-concepts",
+            "r5-bls-current",
+            "r5-trends-current",
+            "r5-ooh-current"
           ],
           "type": "prose"
         }
@@ -26730,12 +26798,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "官方兴趣代码 AEC（艺术型＋企业型＋常规型）：以音乐与媒体的艺术表达、面向公众的沟通与说服、以及按流程与清单与记录办事为主；艺术型子领域含音乐与媒体，企业型子领域含公开演讲。"
+              "O*NET兴趣A64/E43/C42/R33/S32/I9，AEC保留；职业维度评分非人群占比、个人能力或录用门槛。"
             ]
           },
           "id": "actors.display.riasec_fit_block.interest",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26786,12 +26855,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "这是工作样本与现场观察核对，不是人格诊断或录用结论。"
+              "兴趣人格测试仅探索，纸面练习/偏好不认定听力、设备能力、资格或录用。O*NET风格社交82/可靠81/乐观74/合作61/适应60/自信60/抗压50/细节49等Impact分数，非大五/IQ/EQ或百分比。"
             ]
           },
           "id": "actors.display.personality_fit_block.boundary",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27458,12 +27528,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "现场执行与气氛"
+              "音乐家与歌手"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.direction",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27472,12 +27542,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否按时间表选曲与混音并调动气氛与接受点歌"
+              "编辑任务对照：乐器演奏/演唱、现场或广播/录音呈现"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.signals",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27486,12 +27556,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不超出授权范围公开播放或传播音乐。"
+              "选曲混音经验不等演奏演唱能力。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.watchouts",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27500,12 +27570,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "灯光与视觉"
+              "广播主持人与电台DJ"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.direction",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27514,12 +27584,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否安全操作灯光与视觉特效设备"
+              "编辑任务对照：广播电视等媒体读稿/播出、排曲、台站识别及采访"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.signals",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27528,12 +27598,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不擅自改动场地电气与固定设施。"
+              "现场主持可交叉，媒体播出责任及机构条件另核。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.watchouts",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27542,12 +27612,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "合同与结算"
+              "音响工程技术员"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.direction",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         },
@@ -27556,12 +27626,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否写清报价与合同与开具明细发票"
+              "编辑任务对照：设备组装操作以录音、同步、混音、编辑及复现声音"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.signals",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         },
@@ -27570,12 +27640,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不得对客户作出超出合同的承诺。"
+              "扩声也可交叉，不能只补现场清单或把其职责限扩声。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.watchouts",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         },
@@ -27584,12 +27654,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "长期适应"
+              "会议会展活动策划师"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.direction",
           "source_refs": [
-            "onet"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -27598,12 +27668,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否长期适应晚间与周末与节假日与不规律排期"
+              "编辑任务对照：协调人员/客户及群体会议活动安排"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.signals",
           "source_refs": [
-            "onet"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -27612,12 +27682,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "注意作息与听力保护与身体负荷。"
+              "现场DJ合同经验不代活动整体人员/预算组织责任。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.watchouts",
           "source_refs": [
-            "onet"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -27710,12 +27780,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要：与外部客户或公众打交道「极其重要」60%、与他人接触「大部分时间」44%、公开演讲「每周以上」48%；沟通内容以需求确认与现场协调与气氛调动为主。"
+              "O*NET57情境调查：决策自由很大72%、每日邮件63%、公众服务极重要60%、持续接触40/大部分接触44%、持续站立36/超过半时36、持续用手44、极激烈竞争40。电话25每天/50每周但非每天；公开讲话24每天/48每周但非每天；严格期限16每天/44每周但非每天；不适噪声20每天/32每周但非每天，原每周以上标签不能当每周及以上。受控室内42每周非每天/42每月非每周；不一律每日室内。排班60不规律/24季节/16规律；周72少于40/20恰40。自动化48略有/16中等/28没有非GenAI采用；调查非每个岗位、安全事故率或听力门槛。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.outgoing.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27738,12 +27809,17 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "美国反馈显示 52% 要求高中或同等学历、36% 高中以下即可、4% 要求部分大学无学位；在职培训通常从几天到一年。中国大陆无统一准入类证书，但涉及营业性演出经营的须由取得许可的主体举办并按规定审批与备案，实际以主办方与场地要求为准。"
+              "BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH同职业明细支持高中及一定在岗训练。O*NET JZ1—2/SVP低于6，几天到一年为准备组说明，非本职业固定培训期；52%高中/36%以下/4%部分大学无学位是对新入职所需学历意见，不是52%雇主或员工。目标美国法域许可、雇主和课程费用未逐核。 中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.appearance.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "r5-bls-current",
+            "r5-trends-current",
+            "cn-rule",
+            "r5-cn-details"
           ],
           "type": "prose"
         },
@@ -27766,12 +27842,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本职业工作时间「不规律」60%，噪声暴露「每周以上」32%，持续站立 36%；具体排期与防护按合同与场地条件与所在法域规定执行。"
+              "O*NET57情境调查：决策自由很大72%、每日邮件63%、公众服务极重要60%、持续接触40/大部分接触44%、持续站立36/超过半时36、持续用手44、极激烈竞争40。电话25每天/50每周但非每天；公开讲话24每天/48每周但非每天；严格期限16每天/44每周但非每天；不适噪声20每天/32每周但非每天，原每周以上标签不能当每周及以上。受控室内42每周非每天/42每月非每周；不一律每日室内。排班60不规律/24季节/16规律；周72少于40/20恰40。自动化48略有/16中等/28没有非GenAI采用；调查非每个岗位、安全事故率或听力门槛。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.schedule.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27892,12 +27969,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "合同与场地与主办方制度：用于说明设备用电与场地与准入与责任边界。"
+              "本轮未实采用人制度，OOH仅典型职业背景。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.employer",
           "source_refs": [
-            "onet"
+            "r5-ooh-current"
           ],
           "type": "prose"
         },
@@ -27920,12 +27997,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻岗位对照（音乐家与歌手与广播主持人）：用于说明艺术呈现与节目播出责任的差异。"
+              "该单一实际链接为音乐家与歌手档案，用于现场、广播及录制演奏演唱任务比较；广播主持人另查其自身档案。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.agent",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27934,12 +28011,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻岗位对照（音响工程与活动策划）：用于说明扩声系统与活动整体策划责任的差异。"
+              "广播27-3011定义任务对照。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.teacher",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27948,12 +28025,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "《营业性演出管理条例》与《著作权法》相关要求：用于说明演出经营资质与备案与音乐作品使用边界。"
+              "音响27-4014定义任务对照。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.enrichment",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         },
@@ -27962,12 +28039,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑综合：用于本页练习与边界设计，不构成外部事实或资格证据。"
+              "会议活动策划13-1121定义任务对照。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.art",
           "source_refs": [
-            "onet"
+            "enrichment"
           ],
           "type": "prose"
         }
@@ -27984,13 +28061,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "客户与来宾信息与影像风险：把客户与来宾个人信息、活动影像或场地资料用于活动以外用途或对外传播。"
+              "中国个人资料场景：客户来宾身份、影像或可识别信息用途与提供应核合法依据、必要性及保护要求；不是所有场地资料自动敏感，不一概禁止其他合法目的。"
             ]
           },
           "id": "actors.risk.career-risk-cards.1",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -27999,13 +28075,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "设备与用电与搬运安全风险：设备搭设与线路与用电与承重与通道不当，或搬运与吊装造成断电、设备损坏或人员伤害。"
+              "编辑安全场景：设备线路、用电、搬运和固定可能有损坏伤害风险。具体搭设与应急按真实场地规程及授权人员处理；兼任举办方/场所身份时另核营业性演出相关义务，本轮未取全部用电标准或事故率。"
             ]
           },
           "id": "actors.risk.career-risk-cards.2",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa",
+            "cn-rule",
+            "r5-cn-details"
           ],
           "type": "prose"
         },
@@ -28014,13 +28091,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "计酬与档期与结算风险：单场费用与档期与超时与设备租赁与交通成本未写清，或结算与开票与收款口径不透明。"
+              "编辑合同场景：音乐作品、录音或公开传播的权利未核清可能发生争议；中国按所涉权利与实际许可、法定例外分别核，不把私人订阅或购买文件当全部商业授权。具体曲库合同费率未核。"
             ]
           },
           "id": "actors.risk.career-risk-cards.3",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-copyright"
           ],
           "type": "prose"
         },
@@ -28029,13 +28105,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "授权与演出经营合规风险：由未依法取得营业性演出许可证的主体举办营业性演出，或未按规定申请审批与备案。"
+              "编辑合规情景：未按实际主体资格及具体演出规则申请批准/备案；不一律只有许可证主体才能举办。中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。 2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。"
             ]
           },
           "id": "actors.risk.career-risk-cards.4",
           "source_refs": [
-            "sag",
-            "nist"
+            "cn-rule",
+            "r5-cn-details"
           ],
           "type": "prose"
         },
@@ -28044,13 +28120,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "客户与支付数据风险：合同与支付与客户名单被不当记录、共享或对外提供，或超出必要范围保存。"
+              "中国可识别客户与支付资料处理应核合法依据、必要范围及保护；金融账户等敏感信息另核条件，合同不自动全属敏感，不由ILO/NIST证明法律要求。"
             ]
           },
           "id": "actors.risk.career-risk-cards.5",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -28104,13 +28179,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险项按本职业内容与所列来源（O*NET 工作情境、《营业性演出管理条例》与《著作权法》与主办方与场地制度）边界解释。"
+              "O*NET57情境调查：决策自由很大72%、每日邮件63%、公众服务极重要60%、持续接触40/大部分接触44%、持续站立36/超过半时36、持续用手44、极激烈竞争40。电话25每天/50每周但非每天；公开讲话24每天/48每周但非每天；严格期限16每天/44每周但非每天；不适噪声20每天/32每周但非每天，原每周以上标签不能当每周及以上。受控室内42每周非每天/42每月非每周；不一律每日室内。排班60不规律/24季节/16规律；周72少于40/20恰40。自动化48略有/16中等/28没有非GenAI采用；调查非每个岗位、安全事故率或听力门槛。 版权/演出条例支持适用义务，情景为编辑风险而非事故率。"
             ]
           },
           "id": "actors.display.career_risk_cards.evidence-scope",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "sag-moa",
+            "cn-rule",
+            "r5-cn-details",
+            "r5-cn-copyright"
           ],
           "type": "prose"
         },
@@ -28359,13 +28437,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "由未取得营业性演出许可证的主体举办营业性演出，或未按规定申请审批与备案。"
+              "编辑合规情景：未按实际主体资格及具体演出规则申请批准/备案；不一律只有许可证主体才能举办。中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。 2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。"
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "cn-rule",
+            "r5-cn-details"
           ],
           "type": "prose"
         },
@@ -28419,13 +28497,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "合同、支付与客户名单数据被不当记录、共享或对外提供，或超出必要范围保存。"
+              "编辑风险情景：可识别数据超目的外传或过度保存。中国个人信息保护法按合法依据、明确合理目的、最小必要和安全责任处理可识别客户/来宾资料；金融账户等敏感信息另核充分必要、严格保护、适用单独同意及事前影响评估，13条其他依据另核。合同、全部支付或场地商业资料不自动都属敏感个人信息；单位批准系统不自动允许外部AI上传，去标识非匿名化，不一律禁止一切其他合法处理。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -28509,13 +28586,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS/OEWS 与 O*NET：用于工资、就业与工作情境口径。"
+              "情境用O*NET，工资不证风险发生率。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.bls",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28524,13 +28601,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "合同与主办方与场地制度：用于设备用电与场地与准入与责任边界。"
+              "未实采合同/场地制度；OOH实际明细仅典型环境/出行背景，非特定主办方规程。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.employer",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-ooh-current"
           ],
           "type": "prose"
         },
@@ -28539,13 +28615,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "《营业性演出管理条例》与《营业性演出管理条例实施细则》与《著作权法》：用于演出经营资质与备案与音乐作品使用要求。"
+              "中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。 2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。 中国2020修正著作权法：10条区分表演/复制/广播/网络传播等权利，26/29条许可按权利、地域、期间核；38条组织演出由组织者取得作品许可及付酬，表演者和组织者按实际情形核。45条用设备向公众播送录音须向录音制作者付酬；复制/网络传播另核44条作品和表演者权利。作品、录音、表演权分别核，购买文件或个人订阅不自动含商业公开播放/复制/传播；集体管理为获授权的一条途径，不一概只能协会许可。24条法定例外另核，私人学习不自动授权营利公开活动；本轮未核具体曲库条款或收费标准。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.cn-rule",
           "source_refs": [
-            "sag",
-            "nist"
+            "cn-rule",
+            "r5-cn-details",
+            "r5-cn-copyright"
           ],
           "type": "prose"
         },
@@ -28554,13 +28631,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "不使用影视或演员工会口径；仅登记其不适用。"
+              "链接是O*NET本职业详细档案，不是工会协议。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.sag",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28569,13 +28646,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "AI 风险管理框架：用于说明系统辅助的治理边界，不构成本职业合规清单。"
+              "中国个人信息保护法按合法依据、明确合理目的、最小必要和安全责任处理可识别客户/来宾资料；金融账户等敏感信息另核充分必要、严格保护、适用单独同意及事前影响评估，13条其他依据另核。合同、全部支付或场地商业资料不自动都属敏感个人信息；单位批准系统不自动允许外部AI上传，去标识非匿名化，不一律禁止一切其他合法处理。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.nist",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         }
@@ -28592,14 +28668,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "接单与招聘信息中的学历、经验与设备条件与放宽关系必须逐条读取；本职业多数机会以设备熟练度与现场经验为主，一项可放宽不代表音乐授权、用电安全或演出经营与备案要求可以替代。"
+              "BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH同职业明细支持高中及一定在岗训练。O*NET JZ1—2/SVP低于6，几天到一年为准备组说明，非本职业固定培训期；52%高中/36%以下/4%部分大学无学位是对新入职所需学历意见，不是52%雇主或员工。目标美国法域许可、雇主和课程费用未逐核。 无代表性接单/招聘实采，设备、现场经验和资质按真实公告/合同逐项核。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current",
+            "r5-trends-current",
+            "r5-ooh-current"
           ],
           "type": "notice"
         },
@@ -28625,35 +28703,35 @@
               [
                 "活动与婚礼唱片骑师助理",
                 "在受监督下参与需求确认、清单编排、设备搬运与组装与声音检查。",
-                "能说明如何按活动环节排清单并完成设备与声音检查。",
+                "编辑观察建议，未实采雇主/接单样本；实际能力条件按目标岗位/合同核。",
                 "纸面清单与设备检查记录、受监督活动的带班评语。",
                 "偏现场音乐服务执行，不承担演出经营与场地安全指挥。"
               ],
               [
                 "俱乐部与驻场唱片骑师助理",
                 "按驻场流程与时段播放与混音，维持音控位设备与秩序。",
-                "能在连续时段保持播放与混音与音量控制。",
+                "编辑观察建议，未实采雇主/接单样本；实际能力条件按目标岗位/合同核。",
                 "驻场排班与播放记录与主管评语。",
                 "偏驻场时段执行，与客户沟通与结算分工不同。"
               ],
               [
                 "设备租赁与技术支持助理",
                 "按清单准备与检查与运送设备，协助搭建与线路与声音检查。",
-                "能按清单核对设备完好并处理线路与用电问题。",
+                "编辑观察建议，未实采雇主/接单样本；实际能力条件按目标岗位/合同核。",
                 "设备清单与检查与交接记录。",
                 "偏设备与后勤，不承担选曲与气氛与合同责任。"
               ],
               [
                 "活动执行与场务助理",
                 "协助活动流程与时间表跟随与场地协调与来宾引导。",
-                "能按时间表跟进并处理临时变更并及时上报。",
+                "编辑观察建议，未实采雇主/接单样本；实际能力条件按目标岗位/合同核。",
                 "活动执行表与变更记录。",
                 "偏流程与场务，与音乐与设备岗位分工协作。"
               ],
               [
                 "宣传与结算助理",
                 "协助报价与合同与发票与推广素材的整理与分发。",
-                "能按约定整理合同与发票并统计触达。",
+                "编辑观察建议，未实采雇主/接单样本；实际能力条件按目标岗位/合同核。",
                 "合同与发票与推广记录。",
                 "偏经营事务执行，不决定报价与条款。"
               ]
@@ -28662,8 +28740,11 @@
           "id": "actors.path.entry-role-comparison.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current",
+            "r5-trends-current",
+            "cn-rule",
+            "r5-cn-details"
           ],
           "title": "常见入门方向与初期任务",
           "type": "table"
@@ -28834,7 +28915,7 @@
               [
                 "音乐与声音编辑软件与设备操作培训",
                 "希望系统学习设备与混音的人",
-                "现实作用：有助于设备操作与混音能力，但不是准入资格。",
+                "编辑准备建议，未核课程录用/工资效应。",
                 "否：属能力培训。",
                 "按培训机构报名条件参加。",
                 "培训时间与费用。",
@@ -28843,7 +28924,7 @@
               [
                 "活动现场执行与客户沟通经验",
                 "希望承接活动的人",
-                "求职现实作用：实际活动经验是用人方与客户主要核对项。",
+                "编辑建议记录实际现场反馈，不称全部雇主主要核查项。",
                 "否：属经验积累。",
                 "通过带教与协助与试场积累。",
                 "时间与机会成本。",
@@ -28854,7 +28935,7 @@
                 "拟从事营业性演出经营活动的主体",
                 "经营硬条件：由文化主管部门批准后颁发。",
                 "是（针对经营主体）：文艺表演团体与演出经纪机构须经审批取得。",
-                "向县级（文艺表演团体）或省级（演出经纪机构）文化主管部门申请，20 日内作出决定。",
+                "中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。",
                 "申请材料与人员与资金条件。",
                 "许可证针对经营主体，不等同个人执业证书，也不替代场地与消防与著作权要求。"
               ],
@@ -28862,17 +28943,17 @@
                 "演出场所经营单位备案与个体演员备案（中国大陆）",
                 "演出场所经营单位与以演出为职业的个体演员与个体演出经纪人",
                 "合规要求：依法注册登记后按规定期限向县级文化主管部门备案。",
-                "是（针对相应主体）：须自领取营业执照之日起 20 日内备案。",
-                "持营业执照等材料向所在地县级文化主管部门备案。",
+                "场所及个体主体备案分别按条例7/9与细则9核，不将全部申请材料视同。",
+                "2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。",
                 "备案材料与时间。",
                 "备案不等同取得营业性演出许可证，也不替代演出审批与著作权要求。"
               ],
               [
                 "营业性演出审批（举办活动）",
                 "拟举办营业性演出的举办单位",
-                "合规要求：举办前向演出所在地县级文化主管部门申请批准。",
+                "普通境内营业性演出向所在地县级申请；外国及港澳参演向省级，台湾参演按国务院相关规定的审批机关，不一律县级。",
                 "是（针对举办单位）：一般应在演出日期 3 日前提交申请，涉外或涉港澳台演出 20 日前。",
-                "按《营业性演出管理条例》与《实施细则》提交材料并经审批。",
+                "中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。 2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。",
                 "审批时间与材料。",
                 "审批针对具体演出活动，不等同设备操作资格或著作权许可。"
               ],
@@ -28880,8 +28961,8 @@
                 "音乐作品使用与著作权许可",
                 "公开播放或录音或传播音乐作品的人",
                 "合规要求：使用音乐作品应取得许可或使用符合授权与集体管理要求的来源。",
-                "是：公开播放与传播涉及著作权使用。",
-                "按著作权与集体管理要求取得许可或使用授权来源。",
+                "按所涉权利、法定例外及真实授权核，不一概仅协会许可。",
+                "中国2020修正著作权法：10条区分表演/复制/广播/网络传播等权利，26/29条许可按权利、地域、期间核；38条组织演出由组织者取得作品许可及付酬，表演者和组织者按实际情形核。45条用设备向公众播送录音须向录音制作者付酬；复制/网络传播另核44条作品和表演者权利。作品、录音、表演权分别核，购买文件或个人订阅不自动含商业公开播放/复制/传播；集体管理为获授权的一条途径，不一概只能协会许可。24条法定例外另核，私人学习不自动授权营利公开活动；本轮未核具体曲库条款或收费标准。",
                 "许可费用与手续。",
                 "著作权许可不等同演出经营资质，也不能替代设备与场地安全要求。"
               ]
@@ -28889,9 +28970,9 @@
           },
           "id": "actors.path.credential-decision.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "cn-rule",
+            "r5-cn-details",
+            "r5-cn-copyright"
           ],
           "title": "训练、资格与材料怎么选择",
           "type": "table"
@@ -28901,17 +28982,22 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "学历与经验条件必须逐条读取：本职业多数机会以设备熟练度与现场经验为主；一项可放宽不代表音乐授权、用电安全或演出经营与备案要求可以替代。",
-              "本页建议的作品与七天体验只用于职业探索，不构成设备操作资格、营业性演出经营资质、演出审批或著作权许可。",
-              "进入本职业不是只报一个课程：先核对目标机会的职责范围、是否需要依法取得或经审批的主体资质、设备与交通与用电条件，以及结算与开票安排。",
-              "涉及公开播放音乐作品、营业性演出经营、场地用电与临时搭建舞台看台的工作，须先确认法规与主办方与场地要求并取得授权；不得在无培训与无授权条件下进行真实操作。"
+              "BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH同职业明细支持高中及一定在岗训练。O*NET JZ1—2/SVP低于6，几天到一年为准备组说明，非本职业固定培训期；52%高中/36%以下/4%部分大学无学位是对新入职所需学历意见，不是52%雇主或员工。目标美国法域许可、雇主和课程费用未逐核。",
+              "中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。",
+              "2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。",
+              "中国2020修正著作权法：10条区分表演/复制/广播/网络传播等权利，26/29条许可按权利、地域、期间核；38条组织演出由组织者取得作品许可及付酬，表演者和组织者按实际情形核。45条用设备向公众播送录音须向录音制作者付酬；复制/网络传播另核44条作品和表演者权利。作品、录音、表演权分别核，购买文件或个人订阅不自动含商业公开播放/复制/传播；集体管理为获授权的一条途径，不一概只能协会许可。24条法定例外另核，私人学习不自动授权营利公开活动；本轮未核具体曲库条款或收费标准。",
+              "编辑先核真实主体、活动、角色、场地及合同，不由培训/作品自动授许可。"
             ]
           },
           "id": "actors.path.credential-boundary.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current",
+            "r5-trends-current",
+            "cn-rule",
+            "r5-cn-details",
+            "r5-cn-copyright"
           ],
           "title": "训练、授权与演出经营边界",
           "type": "notice"
@@ -29152,14 +29238,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国无统一执照，以设备熟练度与现场经验为主；中国大陆举办营业性演出须由依法取得营业性演出许可证的主体按规定申请审批，演出场所经营单位与个体演员与个体演出经纪人须按规定备案。"
+              "中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。 2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。 美国目标法域许可未逐核，不称全国免照。"
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "cn-rule",
+            "r5-cn-details"
           ],
           "type": "prose"
         },
@@ -29168,14 +29253,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆相关依据为《营业性演出管理条例》（2005 年国务院令第 439 号公布，2020-11-29 国务院令第 732 号第四次修订）第六条与第十条与第十三条与第十五条，以及《营业性演出管理条例实施细则》（文化部令第 47 号）第十四条与第十五条：经营主体须经审批取得营业性演出许可证，相关主体须按规定备案，举办营业性演出须在演出日期前提交申请并经审批，涉外或涉港澳台演出向省级或国务院文化主管部门申请。"
+              "中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。 2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。"
             ]
           },
           "id": "actors.display.career_path_block.locale.summary",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "cn-rule",
+            "r5-cn-details"
           ],
           "type": "prose"
         },
@@ -29184,14 +29268,17 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国以在职培训与带教为主（几天到一年），52% 岗位要求高中或同等学历；中国大陆无统一准入类个人证书，设备与音乐授权与场地安全要求按法规与主办方与场地制度执行。"
+              "BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH同职业明细支持高中及一定在岗训练。O*NET JZ1—2/SVP低于6，几天到一年为准备组说明，非本职业固定培训期；52%高中/36%以下/4%部分大学无学位是对新入职所需学历意见，不是52%雇主或员工。目标美国法域许可、雇主和课程费用未逐核。 2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。"
             ]
           },
           "id": "actors.display.career_path_block.locale.credentials",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current",
+            "r5-trends-current",
+            "cn-rule",
+            "r5-cn-details"
           ],
           "type": "prose"
         },
@@ -30336,14 +30423,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS/OEWS 与 O*NET：用于工资、就业与工作情境与准备层级口径。"
+              "BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH同职业明细支持高中及一定在岗训练。O*NET JZ1—2/SVP低于6，几天到一年为准备组说明，非本职业固定培训期；52%高中/36%以下/4%部分大学无学位是对新入职所需学历意见，不是52%雇主或员工。目标美国法域许可、雇主和课程费用未逐核。"
             ]
           },
           "id": "actors.display.career_path_block.source.bls",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -30352,14 +30438,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "合同与主办方与场地制度：用于入口要求与设备与场地与责任边界。"
+              "没有实采招聘/场地制度；OOH典型职业描述不代具体公告。"
             ]
           },
           "id": "actors.display.career_path_block.source.employer",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-ooh-current"
           ],
           "type": "prose"
         },
@@ -30368,14 +30452,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "《营业性演出管理条例》与《营业性演出管理条例实施细则》：用于演出经营资质与备案与演出审批口径。"
+              "中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。 2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。"
             ]
           },
           "id": "actors.display.career_path_block.source.cn-rule",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "cn-rule",
+            "r5-cn-details"
           ],
           "type": "prose"
         },
@@ -30384,14 +30467,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "薪资与环境口径：本页不使用影视或演员工会口径；工资引用 OEWS（小时口径），环境引用 O*NET。"
+              "工资页只支持工资，资格/训练另用表1.2与条例。"
             ]
           },
           "id": "actors.display.career_path_block.source.r2-pay-3",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-bls-current",
+            "r5-trends-current",
+            "cn-rule",
+            "r5-cn-details"
           ],
           "type": "prose"
         }
@@ -30408,13 +30492,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 27-2091.00 精确职业数据：2024 年就业约 15,400 人。"
+              "本职业2025就业16,900→2035预计17,600；BLS表1.2增长3.8%、OOH和O*NET全国取整4%、O*NET摘要分组3—4%。官方净增600，基期/终期各独立取整，不用两端显示数相减改700。2025—2035年均空缺1,700含增长与更替，非十年合计、年净增或个人接单率；BLS2025自雇56.1%（OOH取整56%）。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -30423,13 +30507,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年预计增长 3%～4%（平均），预计空缺 1,500；空缺同时包含增长与更替，不是净增岗位。"
+              "本职业2025就业16,900→2035预计17,600；BLS表1.2增长3.8%、OOH和O*NET全国取整4%、O*NET摘要分组3—4%。官方净增600，基期/终期各独立取整，不用两端显示数相减改700。2025—2035年均空缺1,700含增长与更替，非十年合计、年净增或个人接单率；BLS2025自雇56.1%（OOH取整56%）。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -30453,13 +30537,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本职业多以按场次或按小时结算的受雇与自由职业岗位为主，排期不规律（60% 反馈工作时间不规律），部分兼做设备租赁与主持。"
+              "本职业2025自雇56.1%，O*NET不规律排班60/季节24/规律16；不推所有按场次或人人兼设备租赁。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-trends-current",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30498,13 +30584,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国统计仅适用于 27-2091.00 与所列期间，不外推到中国岗位或某个城市。"
+              "本职业2025就业16,900→2035预计17,600；BLS表1.2增长3.8%、OOH和O*NET全国取整4%、O*NET摘要分组3—4%。官方净增600，基期/终期各独立取整，不用两端显示数相减改700。2025—2035年均空缺1,700含增长与更替，非十年合计、年净增或个人接单率；BLS2025自雇56.1%（OOH取整56%）。"
             ]
           },
           "id": "actors.display.market_signal_card.outlook.us.limit",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -30543,13 +30629,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：音乐素材与曲风与现场感受的理解、设备与播放操作经验。"
+              "编辑对照：音乐风格及现场沟通；不等个人已具备"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30558,13 +30645,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：乐器演奏或演唱能力、乐理与排练与舞台呈现。"
+              "转入目标核：乐器演奏或演唱，现场/广播/录音呈现"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30573,13 +30661,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，呈现方式不同"
+              "编辑比较，未量化距离、成功率或固定训练时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30588,13 +30677,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：话筒表达与临场串联、音乐与内容编排。"
+              "编辑对照：话筒表达、音乐编排；不等个人已具备"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30603,13 +30693,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：播出制度与导播协作、内容审核与播音规范。"
+              "转入目标核：广播电视媒体读稿/排曲台站识别/采访及实际机构条件"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30618,13 +30709,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，场景不同"
+              "编辑比较，未量化距离、成功率或固定训练时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30633,13 +30725,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：扩声设备操作与线路与声音检查经验。"
+              "编辑对照：声音检查与设备操作可能交叉；不等个人已具备"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "art",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30648,13 +30741,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：系统设计与声学、调音与检测与设备维护。"
+              "转入目标核：录音同步混音编辑复现声音，非仅现场扩声；目标设备/制作责任另核"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "art",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30663,13 +30757,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，需技术训练"
+              "编辑比较，未量化距离、成功率或固定训练时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "art",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30678,13 +30773,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：活动流程与时间表跟随、供应商与场地沟通。"
+              "编辑对照：客户/现场流程协调；不等个人已具备"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30693,13 +30789,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：活动整体策划与预算与供应商与现场统筹。"
+              "转入目标核：会议活动整体人员、安排和供应商预算责任"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30708,13 +30805,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，职责范围不同"
+              "编辑比较，未量化距离、成功率或固定训练时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30723,13 +30821,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：音视频设备安装与线路与检查经验。"
+              "编辑对照：音视频安装拆卸可交叉；不等个人已具备"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30738,13 +30837,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：系统集成与信号与视频工程与设备维护。"
+              "转入目标核：27-4011设置维护拆卸现场/录制音视频设备，目标系统和信号条件另核"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30753,13 +30853,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，技术方向不同"
+              "编辑比较，未量化距离、成功率或固定训练时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30768,13 +30869,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：现场流程与拍摄配合与时间表跟随。"
+              "编辑对照：现场拍摄配合；不等个人已具备"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30783,13 +30885,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：摄像构图与运镜与灯光与后期基础。"
+              "转入目标核：27-4031摄像录制电视视频电影镜头，构图运镜与实际系统训练另核"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30798,13 +30901,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，技能不同"
+              "编辑比较，未量化距离、成功率或固定训练时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30813,13 +30917,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：现场执行与团队协作与流程把控。"
+              "编辑对照：现场流程团队协调；不等个人已具备"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-producer",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30828,13 +30933,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：内容策划与制作管理与预算与版权。"
+              "转入目标核：27-2012制作导演与剧本演员布景声效等创作决策、预算排期，非演员或普通编辑"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-producer",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30843,13 +30949,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，需管理能力"
+              "编辑比较，未量化距离、成功率或固定训练时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-producer",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30858,13 +30965,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：客户与活动沟通、报价与合同与档期协调经验。"
+              "编辑对照：客户合同及档期协调；不等个人已具备"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-agent",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30873,13 +30981,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：艺人代理与商务谈判与合同与版税与合规。"
+              "转入目标核：13-1011代表推广艺人/运动员与雇主交涉、合同商务；中国经纪资格另核"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-agent",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30888,13 +30997,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，需商务能力"
+              "编辑比较，未量化距离、成功率或固定训练时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-agent",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30903,13 +31013,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS/OEWS 与 O*NET：用于工资、就业与工作情境口径。"
+              "当前预测用表1.2，工资非就业来源。"
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -30918,13 +31028,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "合同与主办方与场地制度：用于设备与场地与责任边界。"
+              "本位置引O*NET全国趋势，认证入口不支持规模。"
             ]
           },
           "id": "actors.display.market_signal_card.source.ratify",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -30933,13 +31043,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "招募与接单信息：用于理解需求，不代表个人承接结果。"
+              "BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH同职业明细支持高中及一定在岗训练。O*NET JZ1—2/SVP低于6，几天到一年为准备组说明，非本职业固定培训期；52%高中/36%以下/4%部分大学无学位是对新入职所需学历意见，不是52%雇主或员工。目标美国法域许可、雇主和课程费用未逐核。 没有本轮实采招聘。"
             ]
           },
           "id": "actors.display.market_signal_card.source.employer",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-ooh-current",
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -30953,8 +31064,7 @@
           },
           "id": "actors.display.market_signal_card.source.onet",
           "source_refs": [
-            "bls",
-            "oews"
+            "sag-moa"
           ],
           "type": "prose"
         }
@@ -31111,12 +31221,22 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET 27-2091.00、BLS/OEWS、《营业性演出管理条例》（国务院令第 439 号，2020 年第 732 号修订）"
+              "O*NET27-2091任务情境兴趣/技术；OEWS2025小时工资；BLS2025—2035表1.2和组合OOH自身明细；中国演出条例/2022细则、2020版权法、个人信息保护法及2025文化体育娱乐行业工资。"
             ]
           },
           "id": "actors.display.source_card.source",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-current",
+            "r5-trends-current",
+            "r5-ooh-current",
+            "cn-rule",
+            "r5-cn-details",
+            "r5-cn-copyright",
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -31125,12 +31245,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-09-19"
+              "2026-10-09：九模块作者修订与自审，独立审阅待后续阶段。"
             ]
           },
           "id": "actors.display.source_card.updated-at",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -31139,12 +31260,22 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源范围、限制与统计时期按原始证据分别核对；未取得的数据在相应位置可见标记。"
+              "小时工资不年化，工资/年均空缺/行业工资和份额分开。中国许可证与备案主体、活动审批、作品和录音权分别核；行业工资背景非职业报价。原共享事实和范围外FAQ保护，作者自审不签全页一致。"
             ]
           },
           "id": "actors.display.source_card.note",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-current",
+            "r5-trends-current",
+            "r5-ooh-current",
+            "cn-rule",
+            "r5-cn-details",
+            "r5-cn-copyright",
+            "r5-nbs-current"
           ],
           "type": "prose"
         }
@@ -31297,14 +31428,13 @@
                 "url": "https://www.onetonline.org/link/summary/27-4014.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "核验 2025 年工资数据的小时中位与分位（13.50／16.91／21.61／37.50／60.17 美元/时）；该来源未公布年薪中位数与年度分位。",
-                  "该来源对本职业只公布小时口径，不构成个人报价或收入保证。"
+                  "美国27-2091.00，2025年5月全国小时工资10/25/50/75/90分位13.50/16.91/21.61/37.50/60.17美元；来源未公布年度分位，不按固定工时年化。OEWS直时税前受雇工资包含基本工资、小费、规定津贴和佣金/生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；按场次结算是否纳入看受雇身份/覆盖，不一律全部排除。受雇工资不是扣设备交通成本后的接单净收入，也非单场报价。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official wage statistics",
                 "id": "bls",
-                "limitation": "该来源对本职业只公布小时口径，不构成个人报价或收入保证。",
+                "limitation": "美国27-2091.00，2025年5月全国小时工资10/25/50/75/90分位13.50/16.91/21.61/37.50/60.17美元；来源未公布年度分位，不按固定工时年化。OEWS直时税前受雇工资包含基本工资、小费、规定津贴和佣金/生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；按场次结算是否纳入看受雇身份/覆盖，不一律全部排除。受雇工资不是扣设备交通成本后的接单净收入，也非单场报价。",
                 "market": "美国",
                 "name": "O*NET OnLine（转引 U.S. Bureau of Labor Statistics）：27-2091.00 全国工资",
                 "period": "2025 年工资数据; accessed 2026-09-19",
@@ -31313,14 +31443,13 @@
                 "url": "https://www.onetonline.org/link/localwages/27-2091.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "第六条（文艺表演团体与演出经纪机构审批与营业性演出许可证）与第十条（演出场所经营单位与个体演员与个体演出经纪人备案）与第十三条（举办营业性演出向县级文化主管部门申请）与第十五条（涉外或涉港澳台演出向省级或国务院文化主管部门申请）。",
-                  "为营业性演出管理要求，不规定工资水平，也不等同于美国州或雇主要求。"
+                  "中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official regulation",
                 "id": "cn-rule",
-                "limitation": "为营业性演出管理要求，不规定工资水平，也不等同于美国州或雇主要求。",
+                "limitation": "中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。",
                 "market": "中国大陆",
                 "name": "《营业性演出管理条例》（2005 年国务院令第 439 号公布，2020-11-29 国务院令第 732 号第四次修订）",
                 "period": "2020-11-29 第四次修订；accessed 2026-09-19",
@@ -31393,14 +31522,13 @@
                 "url": "https://zwgk.mct.gov.cn/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "为 BLS 职业展望检索入口，本职业页本轮未取得。",
-                  "本轮未取得本职业页一手口径，未引用其数值；就业与预测改用 O*NET 摘要页。"
+                  "旧检索入口非具体用人制度；当前组合OOH实际取得含自身独立明细，另列r5-ooh-current。"
                 ],
-                "evidence_type": "official employment projections",
+                "evidence_type": "official occupation outlook",
                 "id": "employer",
-                "limitation": "本轮未取得本职业页一手口径，未引用其数值；场地与雇主要求仍需逐项核验。",
+                "limitation": "旧检索入口非具体用人制度；当前组合OOH实际取得含自身独立明细，另列r5-ooh-current。",
                 "market": "美国",
                 "name": "BLS Occupational Outlook Handbook：Disc Jockeys, Except Radio（本轮未取得一手口径）",
                 "period": "本轮未取得本职业页一手口径；accessed 2026-09-19",
@@ -31441,14 +31569,13 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明分行业与单位类型工资统计的发布口径。",
-                  "公开统计未建立与本职业对应的职业级工资分布。"
+                  "国家统计局2025城镇文化体育娱乐业年平均非私营129,447/私营64,015元税前，行业内多职业背景非DJ中位/起薪/月薪。城镇5人以上法人，非私营不只国企，个体/自由职业等不在该调查；受雇按场次计酬不必然排除。目标单位实际归类娱乐/餐饮/商务等须核，不套所有DJ服务场景。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official industry wage statistics",
                 "id": "nbs",
-                "limitation": "公开统计未建立与本职业对应的职业级工资分布。",
+                "limitation": "国家统计局2025城镇文化体育娱乐业年平均非私营129,447/私营64,015元税前，行业内多职业背景非DJ中位/起薪/月薪。城镇5人以上法人，非私营不只国企，个体/自由职业等不在该调查；受雇按场次计酬不必然排除。目标单位实际归类娱乐/餐饮/商务等须核，不套所有DJ服务场景。",
                 "market": "中国大陆",
                 "name": "国家统计局公开渠道（分行业与单位类型的工资统计口径）",
                 "period": "accessed 2026-09-19",
@@ -31469,18 +31596,17 @@
                 "name": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
                 "period": "NIST AI 100-1, 2023; accessed 2026-09-19",
                 "publisher": "U.S. National Institute of Standards and Technology",
-                "scope": "industry_proxy",
+                "scope": "contextual",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明本职业工资统计的来源与方法。",
-                  "该来源对本职业只公布小时口径，不是个人报价。"
+                  "美国27-2091.00，2025年5月全国小时工资10/25/50/75/90分位13.50/16.91/21.61/37.50/60.17美元；来源未公布年度分位，不按固定工时年化。OEWS直时税前受雇工资包含基本工资、小费、规定津贴和佣金/生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；按场次结算是否纳入看受雇身份/覆盖，不一律全部排除。受雇工资不是扣设备交通成本后的接单净收入，也非单场报价。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official wage statistics",
                 "id": "oews",
-                "limitation": "该来源对本职业只公布小时口径，不是个人报价。",
+                "limitation": "美国27-2091.00，2025年5月全国小时工资10/25/50/75/90分位13.50/16.91/21.61/37.50/60.17美元；来源未公布年度分位，不按固定工时年化。OEWS直时税前受雇工资包含基本工资、小费、规定津贴和佣金/生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；按场次结算是否纳入看受雇身份/覆盖，不一律全部排除。受雇工资不是扣设备交通成本后的接单净收入，也非单场报价。",
                 "market": "美国",
                 "name": "BLS Occupational Employment and Wage Statistics（OEWS）",
                 "period": "2025 年工资数据口径; accessed 2026-09-19",
@@ -31489,14 +31615,13 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "核验职业定义、任务（20 项）、工作情境（21 项）、准备层级（Job Zone 1-2，SVP 低于 6.0）与 2024 年就业 15,400 与 2024—2034 年预测。",
-                  "美国精确职业数据；不定义中国资格、工资或岗位授权。"
+                  "O*NET定义为在俱乐部、聚会或婚宴等为现场观众播放预录音乐，可混音切音采样，也可主持MC。20任务为19核心及1新任务；控制器/客户沟通/排期/收款/合同/设备组装/选曲/声音检查/清单/试听/曲库/发票/发行趋势/混音/引导舞蹈/点歌/广告/视觉设备/派对游戏均核心；写活动公告稿为New且重要性未提供，不填0或叫核心。设备操作与声音录制编辑存在任务交叉，不一律排除音乐制作/工程兼任；岗位描述不自动赋工程、用电或演出经营许可。 O*NET57情境调查：决策自由很大72%、每日邮件63%、公众服务极重要60%、持续接触40/大部分接触44%、持续站立36/超过半时36、持续用手44、极激烈竞争40。电话25每天/50每周但非每天；公开讲话24每天/48每周但非每天；严格期限16每天/44每周但非每天；不适噪声20每天/32每周但非每天，原每周以上标签不能当每周及以上。受控室内42每周非每天/42每月非每周；不一律每日室内。排班60不规律/24季节/16规律；周72少于40/20恰40。自动化48略有/16中等/28没有非GenAI采用；调查非每个岗位、安全事故率或听力门槛。 本职业2025就业16,900→2035预计17,600；BLS表1.2增长3.8%、OOH和O*NET全国取整4%、O*NET摘要分组3—4%。官方净增600，基期/终期各独立取整，不用两端显示数相减改700。2025—2035年均空缺1,700含增长与更替，非十年合计、年净增或个人接单率；BLS2025自雇56.1%（OOH取整56%）。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet",
-                "limitation": "美国精确职业数据；不定义中国资格、工资或岗位授权。",
+                "limitation": "O*NET定义为在俱乐部、聚会或婚宴等为现场观众播放预录音乐，可混音切音采样，也可主持MC。20任务为19核心及1新任务；控制器/客户沟通/排期/收款/合同/设备组装/选曲/声音检查/清单/试听/曲库/发票/发行趋势/混音/引导舞蹈/点歌/广告/视觉设备/派对游戏均核心；写活动公告稿为New且重要性未提供，不填0或叫核心。设备操作与声音录制编辑存在任务交叉，不一律排除音乐制作/工程兼任；岗位描述不自动赋工程、用电或演出经营许可。 O*NET57情境调查：决策自由很大72%、每日邮件63%、公众服务极重要60%、持续接触40/大部分接触44%、持续站立36/超过半时36、持续用手44、极激烈竞争40。电话25每天/50每周但非每天；公开讲话24每天/48每周但非每天；严格期限16每天/44每周但非每天；不适噪声20每天/32每周但非每天，原每周以上标签不能当每周及以上。受控室内42每周非每天/42每月非每周；不一律每日室内。排班60不规律/24季节/16规律；周72少于40/20恰40。自动化48略有/16中等/28没有非GenAI采用；调查非每个岗位、安全事故率或听力门槛。 本职业2025就业16,900→2035预计17,600；BLS表1.2增长3.8%、OOH和O*NET全国取整4%、O*NET摘要分组3—4%。官方净增600，基期/终期各独立取整，不用两端显示数相减改700。2025—2035年均空缺1,700含增长与更替，非十年合计、年净增或个人接单率；BLS2025自雇56.1%（OOH取整56%）。",
                 "market": "美国",
                 "name": "O*NET OnLine：Disc Jockeys, Except Radio（27-2091.00）职业档案",
                 "period": "updated 2026; accessed 2026-09-19",
@@ -31505,14 +31630,13 @@
                 "url": "https://www.onetonline.org/link/summary/27-2091.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明本职业常见的音乐与声音编辑软件与办公软件。",
-                  "工具清单不等于自动化程度或替代结论。"
+                  "本轮未取得本职业生成式AI采用率、节时减错、可靠性、替代率或工资因果证据。O*NET4软件类型列Audition/VoxPro/ProTools和Office/Excel/Word，只是示例；2025美国关联本职业全部唯一招聘帖Office5/Excel3/Word1%，不是采用者或含技术帖分母，音乐软件缺招聘数值不填0。自动节拍/混音分析、设备监测与生成式AI分开核实际功能/效果。ILO2025未逐核本细类ISCO映射/暴露评分，NIST AI RMF1.0自愿框架不授版权或演出许可。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "official technology keywords",
                 "id": "r2-ai",
-                "limitation": "工具清单不等于自动化程度或替代结论。",
+                "limitation": "本轮未取得本职业生成式AI采用率、节时减错、可靠性、替代率或工资因果证据。O*NET4软件类型列Audition/VoxPro/ProTools和Office/Excel/Word，只是示例；2025美国关联本职业全部唯一招聘帖Office5/Excel3/Word1%，不是采用者或含技术帖分母，音乐软件缺招聘数值不填0。自动节拍/混音分析、设备监测与生成式AI分开核实际功能/效果。ILO2025未逐核本细类ISCO映射/暴露评分，NIST AI RMF1.0自愿框架不授版权或演出许可。",
                 "market": "美国",
                 "name": "O*NET OnLine：27-2091.00 Hot Technologies（工具与技术）",
                 "period": "updated 2026; accessed 2026-09-19",
@@ -31521,14 +31645,13 @@
                 "url": "https://www.onetonline.org/link/hot_tech/27-2091.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "为行业与单位类型层级口径，未提供与 27-2091.00 一一对应的全国职业工资分布。",
-                  "行业平均工资不是本职业岗位报酬，也不覆盖自由职业与按场次结算。"
+                  "国家统计局2025城镇文化体育娱乐业年平均非私营129,447/私营64,015元税前，行业内多职业背景非DJ中位/起薪/月薪。城镇5人以上法人，非私营不只国企，个体/自由职业等不在该调查；受雇按场次计酬不必然排除。目标单位实际归类娱乐/餐饮/商务等须核，不套所有DJ服务场景。 原URL首页，实际表另列r5-nbs-current。"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "r2-pay-1",
-                "limitation": "行业平均工资不是本职业岗位报酬，也不覆盖自由职业与按场次结算。",
+                "limitation": "国家统计局2025城镇文化体育娱乐业年平均非私营129,447/私营64,015元税前，行业内多职业背景非DJ中位/起薪/月薪。城镇5人以上法人，非私营不只国企，个体/自由职业等不在该调查；受雇按场次计酬不必然排除。目标单位实际归类娱乐/餐饮/商务等须核，不套所有DJ服务场景。 原URL首页，实际表另列r5-nbs-current。",
                 "market": "中国大陆",
                 "name": "2025年城镇单位就业人员年平均工资情况",
                 "period": "2025; accessed 2026-09-19",
@@ -31549,18 +31672,17 @@
                 "name": "BLS Handbook of Methods：Occupational Employment and Wage Statistics",
                 "period": "accessed 2026-09-19",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "industry_proxy",
+                "scope": "contextual",
                 "url": "https://www.bls.gov/opub/hom/oews/home.htm"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于核验 25 分位（16.91 美元/时）与 75 分位（37.50 美元/时）等分位值。",
-                  "分位是统计位置，不是起薪或单场报价承诺。"
+                  "美国27-2091.00，2025年5月全国小时工资10/25/50/75/90分位13.50/16.91/21.61/37.50/60.17美元；来源未公布年度分位，不按固定工时年化。OEWS直时税前受雇工资包含基本工资、小费、规定津贴和佣金/生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；按场次结算是否纳入看受雇身份/覆盖，不一律全部排除。受雇工资不是扣设备交通成本后的接单净收入，也非单场报价。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official wage statistics",
                 "id": "r2-pay-3",
-                "limitation": "分位是统计位置，不是起薪或单场报价承诺。",
+                "limitation": "美国27-2091.00，2025年5月全国小时工资10/25/50/75/90分位13.50/16.91/21.61/37.50/60.17美元；来源未公布年度分位，不按固定工时年化。OEWS直时税前受雇工资包含基本工资、小费、规定津贴和佣金/生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；按场次结算是否纳入看受雇身份/覆盖，不一律全部排除。受雇工资不是扣设备交通成本后的接单净收入，也非单场报价。",
                 "market": "美国",
                 "name": "O*NET OnLine（转引 U.S. Bureau of Labor Statistics）：27-2091.00 工资分位",
                 "period": "2025 年工资数据; accessed 2026-09-19",
@@ -31617,20 +31739,199 @@
                 "url": "https://www.onetonline.org/link/details/27-2091.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "第十四条（申请举办营业性演出应在演出日期 3 日前提交材料，涉外或涉港澳台演出 20 日前）与第十五条（持营业性演出许可证或备案证明提交材料；临时搭建舞台与看台须符合《大型群众性活动安全管理条例》并提交验收合格材料）。",
-                  "为演出管理实施细则要求，不规定工资水平，也不等同于美国州或雇主要求。"
+                  "2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。 原URL首页，实际全文另列r5-cn-details。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official regulation",
                 "id": "teacher",
-                "limitation": "为演出管理实施细则要求，不规定工资水平，也不等同于美国州或雇主要求。",
+                "limitation": "2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。 原URL首页，实际全文另列r5-cn-details。",
                 "market": "中国大陆",
                 "name": "《营业性演出管理条例实施细则》（文化部令第 47 号公布，2022 年修订）",
                 "period": "2022 年修订；accessed 2026-09-19",
                 "publisher": "中华人民共和国文化和旅游部",
                 "scope": "industry_proxy",
                 "url": "https://zwgk.mct.gov.cn/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-oews-concepts",
+                "limitation": "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。",
+                "market": "美国",
+                "name": "BLS OEWS工资人群与组成",
+                "period": "现行方法；本批检索2026-10-09",
+                "publisher": "Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国个人信息保护法按合法依据、明确合理目的、最小必要和安全责任处理可识别客户/来宾资料；金融账户等敏感信息另核充分必要、严格保护、适用单独同意及事前影响评估，13条其他依据另核。合同、全部支付或场地商业资料不自动都属敏感个人信息；单位批准系统不自动允许外部AI上传，去标识非匿名化，不一律禁止一切其他合法处理。"
+                ],
+                "evidence_type": "official law",
+                "id": "r5-cn-pipl",
+                "limitation": "中国个人信息保护法按合法依据、明确合理目的、最小必要和安全责任处理可识别客户/来宾资料；金融账户等敏感信息另核充分必要、严格保护、适用单独同意及事前影响评估，13条其他依据另核。合同、全部支付或场地商业资料不自动都属敏感个人信息；单位批准系统不自动允许外部AI上传，去标识非匿名化，不一律禁止一切其他合法处理。",
+                "market": "中国内地",
+                "name": "个人信息保护法患者与健康资料边界",
+                "period": "2021法；本批实际读；检索2026-10-09",
+                "publisher": "全国人大/中央网信办",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "自愿跨职业治理建议，DJ实际产品用途、采用与效果未核；音乐许可、演出管理及设备规程另有适用依据。"
+                ],
+                "evidence_type": "official framework",
+                "id": "r5-nist-current",
+                "limitation": "自愿AI治理框架，不授音乐版权、营业性演出许可或设备安全权限，不证DJ采用率、节时、故障或听力效果。",
+                "market": "跨市场",
+                "name": "NIST AI RMF官方框架说明",
+                "period": "自愿框架1.0；本批实际读；检索2026-10-09",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本批实际读ILO2025摘要，本职业未核SOC27-2091与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。"
+                ],
+                "evidence_type": "official research summary",
+                "id": "r5-ilo-current",
+                "limitation": "本批实际读ILO2025摘要，本职业未核SOC27-2091与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。",
+                "market": "跨市场",
+                "name": "ILO2025 GenAI暴露研究官方摘要",
+                "period": "2025研究摘要；本批实际读；检索2026-10-09",
+                "publisher": "ILO",
+                "scope": "contextual",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本职业2025就业16,900→2035预计17,600；BLS表1.2增长3.8%、OOH和O*NET全国取整4%、O*NET摘要分组3—4%。官方净增600，基期/终期各独立取整，不用两端显示数相减改700。2025—2035年均空缺1,700含增长与更替，非十年合计、年净增或个人接单率；BLS2025自雇56.1%（OOH取整56%）。"
+                ],
+                "evidence_type": "official projections",
+                "id": "r5-trends-current",
+                "limitation": "本职业2025就业16,900→2035预计17,600；BLS表1.2增长3.8%、OOH和O*NET全国取整4%、O*NET摘要分组3—4%。官方净增600，基期/终期各独立取整，不用两端显示数相减改700。2025—2035年均空缺1,700含增长与更替，非十年合计、年净增或个人接单率；BLS2025自雇56.1%（OOH取整56%）。",
+                "market": "美国",
+                "name": "O*NET27-2091全国趋势2025—2035",
+                "period": "2025—2035",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/27-2091.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本职业2025就业16,900→2035预计17,600；BLS表1.2增长3.8%、OOH和O*NET全国取整4%、O*NET摘要分组3—4%。官方净增600，基期/终期各独立取整，不用两端显示数相减改700。2025—2035年均空缺1,700含增长与更替，非十年合计、年净增或个人接单率；BLS2025自雇56.1%（OOH取整56%）。 BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH同职业明细支持高中及一定在岗训练。O*NET JZ1—2/SVP低于6，几天到一年为准备组说明，非本职业固定培训期；52%高中/36%以下/4%部分大学无学位是对新入职所需学历意见，不是52%雇主或员工。目标美国法域许可、雇主和课程费用未逐核。"
+                ],
+                "evidence_type": "official projections",
+                "id": "r5-bls-current",
+                "limitation": "本职业2025就业16,900→2035预计17,600；BLS表1.2增长3.8%、OOH和O*NET全国取整4%、O*NET摘要分组3—4%。官方净增600，基期/终期各独立取整，不用两端显示数相减改700。2025—2035年均空缺1,700含增长与更替，非十年合计、年净增或个人接单率；BLS2025自雇56.1%（OOH取整56%）。 BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH同职业明细支持高中及一定在岗训练。O*NET JZ1—2/SVP低于6，几天到一年为准备组说明，非本职业固定培训期；52%高中/36%以下/4%部分大学无学位是对新入职所需学历意见，不是52%雇主或员工。目标美国法域许可、雇主和课程费用未逐核。",
+                "market": "美国",
+                "name": "BLS表1.2非电台DJ预测与典型入门",
+                "period": "2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "组合38700/总体下降3%/年均3700非本职业；本职业16900/增长取整4%/净增600，行业时薪表演艺术观赏体育相关24.98、食品服务饮酒场所20.00、游乐博彩休闲16.86。职业自身就业自雇56%、表演艺术相关21%、餐饮饮酒14%、游乐休闲4%；O*NET更宽行业艺术娱乐休闲24/住宿餐饮15非同层不能混。早晚周末假日/兼职为组合背景，DJs室内外出行自身明细；广播AI限广播段，不能套非电台职业。"
+                ],
+                "evidence_type": "official occupation outlook",
+                "id": "r5-ooh-current",
+                "limitation": "组合38700/总体下降3%/年均3700非本职业；本职业16900/增长取整4%/净增600，行业时薪表演艺术观赏体育相关24.98、食品服务饮酒场所20.00、游乐博彩休闲16.86。职业自身就业自雇56%、表演艺术相关21%、餐饮饮酒14%、游乐休闲4%；O*NET更宽行业艺术娱乐休闲24/住宿餐饮15非同层不能混。早晚周末假日/兼职为组合背景，DJs室内外出行自身明细；广播AI限广播段，不能套非电台职业。",
+                "market": "美国",
+                "name": "BLS播音员与DJ组合档案（含27-2091独立明细）",
+                "period": "2025基期及2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_with_exact_rows",
+                "url": "https://www.bls.gov/ooh/media-and-communication/announcers.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "r5-cn-details",
+                "limitation": "2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。",
+                "market": "中国大陆",
+                "name": "营业性演出实施细则2022修订全文",
+                "period": "2022修订",
+                "publisher": "文化和旅游部",
+                "scope": "jurisdiction_rule",
+                "url": "https://zwgk.mct.gov.cn/zfxxgkml/zcfg/bmgz/202205/t20220517_933037.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国2020修正著作权法：10条区分表演/复制/广播/网络传播等权利，26/29条许可按权利、地域、期间核；38条组织演出由组织者取得作品许可及付酬，表演者和组织者按实际情形核。45条用设备向公众播送录音须向录音制作者付酬；复制/网络传播另核44条作品和表演者权利。作品、录音、表演权分别核，购买文件或个人订阅不自动含商业公开播放/复制/传播；集体管理为获授权的一条途径，不一概只能协会许可。24条法定例外另核，私人学习不自动授权营利公开活动；本轮未核具体曲库条款或收费标准。"
+                ],
+                "evidence_type": "official law",
+                "id": "r5-cn-copyright",
+                "limitation": "中国2020修正著作权法：10条区分表演/复制/广播/网络传播等权利，26/29条许可按权利、地域、期间核；38条组织演出由组织者取得作品许可及付酬，表演者和组织者按实际情形核。45条用设备向公众播送录音须向录音制作者付酬；复制/网络传播另核44条作品和表演者权利。作品、录音、表演权分别核，购买文件或个人订阅不自动含商业公开播放/复制/传播；集体管理为获授权的一条途径，不一概只能协会许可。24条法定例外另核，私人学习不自动授权营利公开活动；本轮未核具体曲库条款或收费标准。",
+                "market": "中国大陆",
+                "name": "中华人民共和国著作权法2020修正",
+                "period": "2021施行",
+                "publisher": "全国人大常委会；国家版权局公开",
+                "scope": "jurisdiction_rule",
+                "url": "https://www.ncac.gov.cn/xxfb/flfg/flfg_532/202103/t20210309_50530.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "国家统计局2025城镇文化体育娱乐业年平均非私营129,447/私营64,015元税前，行业内多职业背景非DJ中位/起薪/月薪。城镇5人以上法人，非私营不只国企，个体/自由职业等不在该调查；受雇按场次计酬不必然排除。目标单位实际归类娱乐/餐饮/商务等须核，不套所有DJ服务场景。"
+                ],
+                "evidence_type": "official industry wage statistics",
+                "id": "r5-nbs-current",
+                "limitation": "国家统计局2025城镇文化体育娱乐业年平均非私营129,447/私营64,015元税前，行业内多职业背景非DJ中位/起薪/月薪。城镇5人以上法人，非私营不只国企，个体/自由职业等不在该调查；受雇按场次计酬不必然排除。目标单位实际归类娱乐/餐饮/商务等须核，不套所有DJ服务场景。",
+                "market": "中国大陆",
+                "name": "国家统计局2025文化体育娱乐行业工资",
+                "period": "2025",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "制作导演舞台电视广播视频电影，创作决策剧本演员布景声效舞蹈及管理预算排期；只作目标任务对照，非自动录用或资格互认。"
+                ],
+                "evidence_type": "official related occupation profile",
+                "id": "r5-producer",
+                "limitation": "制作导演舞台电视广播视频电影，创作决策剧本演员布景声效舞蹈及管理预算排期；只作目标任务对照，非自动录用或资格互认。",
+                "market": "美国",
+                "name": "O*NET制片人与导演27-2012定义任务",
+                "period": "检索2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "related_occupation",
+                "url": "https://www.onetonline.org/link/summary/27-2012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "代表推广艺人运动员与现/潜在雇主交涉，可能合同谈判商务事务；目标资格按法域核，不自动由DJ合同经验取得经纪资格。"
+                ],
+                "evidence_type": "official related occupation profile",
+                "id": "r5-agent",
+                "limitation": "代表推广艺人运动员与现/潜在雇主交涉，可能合同谈判商务事务；目标资格按法域核，不自动由DJ合同经验取得经纪资格。",
+                "market": "美国",
+                "name": "O*NET艺人经纪业务经理13-1011定义任务",
+                "period": "检索2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "related_occupation",
+                "url": "https://www.onetonline.org/link/summary/13-1011.00"
               }
             ]
           },
@@ -32222,7 +32523,7 @@
         },
         "evidence_rows": [
           {
-            "source_ref": "r2-ai",
+            "source_ref": "sag-moa",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.1.limit",
               "block": "ai-impact",
@@ -32230,7 +32531,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "r2-ai",
+              "$source": "sag-moa",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32249,7 +32550,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "r2-ai",
+              "$source": "sag-moa",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32257,7 +32558,7 @@
             }
           },
           {
-            "source_ref": "sag",
+            "source_ref": "r5-bls-current",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.2.limit",
               "block": "ai-impact",
@@ -32265,7 +32566,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32278,13 +32579,13 @@
               "type": "prose"
             },
             "结论": {
-              "$item": "actors.ai-impact.ai-impact-table.5",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
+              "$item": "actors.market-signals.market-signal-card.1",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
             "链接": {
-              "$source": "sag",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32292,7 +32593,7 @@
             }
           },
           {
-            "source_ref": "sag-moa",
+            "source_ref": "r5-nist-current",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.3.limit",
               "block": "ai-impact",
@@ -32300,7 +32601,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag-moa",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32319,7 +32620,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "sag-moa",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32327,7 +32628,7 @@
             }
           },
           {
-            "source_ref": "bls",
+            "source_ref": "r5-ooh-current",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.4.limit",
               "block": "ai-impact",
@@ -32335,7 +32636,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "bls",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32354,7 +32655,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32362,7 +32663,7 @@
             }
           },
           {
-            "source_ref": "nist",
+            "source_ref": "r2-ai",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.5.limit",
               "block": "ai-impact",
@@ -32370,7 +32671,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "nist",
+              "$source": "r2-ai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32389,7 +32690,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "nist",
+              "$source": "r2-ai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32449,7 +32750,7 @@
         ],
         "questions": [
           {
-            "source_ref": "bls",
+            "source_ref": "r5-ilo-current",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.1.answer",
               "block": "ai-impact",
@@ -32457,14 +32758,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "onet",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "onet",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32478,7 +32779,7 @@
             }
           },
           {
-            "source_ref": "r2-ai",
+            "source_ref": "r5-nist-current",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.2.answer",
               "block": "ai-impact",
@@ -32486,14 +32787,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "r2-ai",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "r2-ai",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32507,7 +32808,7 @@
             }
           },
           {
-            "source_ref": "nist",
+            "source_ref": "r5-cn-copyright",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.3.answer",
               "block": "ai-impact",
@@ -32515,14 +32816,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag-moa",
+              "$source": "r5-cn-copyright",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "sag-moa",
+              "$source": "r5-cn-copyright",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32536,7 +32837,7 @@
             }
           },
           {
-            "source_ref": "onet",
+            "source_ref": "r5-nist-current",
             "回答": {
               "$item": "actors.ai-impact.ai-impact-table.6",
               "block": "ai-impact",
@@ -32544,14 +32845,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag-moa",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "sag-moa",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32565,7 +32866,7 @@
             }
           },
           {
-            "source_ref": "nist",
+            "source_ref": "r5-nist-current",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.5.answer",
               "block": "ai-impact",
@@ -32573,14 +32874,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "bls",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32594,7 +32895,7 @@
             }
           },
           {
-            "source_ref": "sag",
+            "source_ref": "r5-cn-pipl",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.6.answer",
               "block": "ai-impact",
@@ -32602,14 +32903,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "sag",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32623,7 +32924,7 @@
             }
           },
           {
-            "source_ref": "onet",
+            "source_ref": "r5-nist-current",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.7.answer",
               "block": "ai-impact",
@@ -32631,14 +32932,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "nist",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "nist",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33158,7 +33459,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33166,7 +33467,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33181,7 +33482,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33189,7 +33490,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33227,7 +33528,7 @@
           },
           {
             "href": {
-              "$source": "r2-pay-3",
+              "$source": "r5-cn-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33235,7 +33536,7 @@
             },
             "id": "r2-pay-3",
             "label": {
-              "$source": "r2-pay-3",
+              "$source": "r5-cn-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34091,7 +34392,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "sag-moa"
             ],
             "id": "image-use",
             "mitigation": {
@@ -34127,7 +34428,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "sag-moa"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -34163,7 +34464,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "cn-rule"
+              "employer"
             ],
             "id": "project-income",
             "mitigation": {
@@ -34235,8 +34536,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "nist",
-              "sag-moa"
+              "nist"
             ],
             "id": "project-data",
             "mitigation": {
@@ -34272,7 +34572,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
+              "sag-moa",
               "employer"
             ],
             "id": "audition-feedback",
@@ -34300,7 +34600,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "sag-moa",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34308,7 +34608,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "sag-moa",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34323,7 +34623,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34331,7 +34631,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34392,7 +34692,7 @@
           },
           {
             "href": {
-              "$source": "nist",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34400,7 +34700,7 @@
             },
             "id": "nist",
             "label": {
-              "$source": "nist",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34427,7 +34727,12 @@
             {
               "指标": "数据类型",
               "数值": "中国大陆职业级工资缺口",
-              "说明": "中国大陆公开工资统计按行业门类与单位类型发布，且本职业相关从业者多为按场次或按合同结算的自由职业者或场所与活动受雇人员，未建立与本职业对应的职业级口径；本页因此保留缺口，不以行业均值替代。"
+              "说明": {
+                "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
             },
             {
               "指标": "经营资质",
@@ -34437,22 +34742,22 @@
             {
               "指标": "备案",
               "数值": "场所与个体演员与经纪人须备案",
-              "说明": "按第十条，演出场所经营单位以及以从事营业性演出为职业的个体演员与个体演出经纪人，应依法注册登记并自领取营业执照之日起 20 日内向所在地县级人民政府文化主管部门备案。"
+              "说明": "中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。 2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。"
             },
             {
               "指标": "演出审批",
-              "数值": "向演出所在地县级文化主管部门申请",
-              "说明": "按第十三条，举办营业性演出应向演出所在地县级人民政府文化主管部门提出申请；按第十五条，涉外或涉港澳台演出向省级或国务院文化主管部门申请。"
+              "数值": "普通境内县级申请；外国及港澳参演省级，台湾按规定机关，具体活动及所在地流程另核。",
+              "说明": "中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。 2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。"
             },
             {
               "指标": "音乐使用",
               "数值": "著作权与集体管理要求",
-              "说明": "公开播放或传播音乐作品应取得许可或使用符合授权与集体管理要求的来源；具体许可要求以著作权法规与相关集体管理组织规定为准。"
+              "说明": "中国2020修正著作权法：10条区分表演/复制/广播/网络传播等权利，26/29条许可按权利、地域、期间核；38条组织演出由组织者取得作品许可及付酬，表演者和组织者按实际情形核。45条用设备向公众播送录音须向录音制作者付酬；复制/网络传播另核44条作品和表演者权利。作品、录音、表演权分别核，购买文件或个人订阅不自动含商业公开播放/复制/传播；集体管理为获授权的一条途径，不一概只能协会许可。24条法定例外另核，私人学习不自动授权营利公开活动；本轮未核具体曲库条款或收费标准。"
             },
             {
               "指标": "计酬方式",
-              "数值": "按场次或合同结算",
-              "说明": "本职业相关报酬多按场次或合同或场所薪酬制度确定，可能含旺季与节假日加成与设备或驻场补贴，需自行承担设备与交通等成本，多数不作公开披露。"
+              "数值": "真实合同计酬与成本另核",
+              "说明": "未实采代表性工资/报价，不推普遍旺季加成或多数未披露。"
             },
             {
               "指标": "样本边界",
@@ -34462,7 +34767,7 @@
             {
               "指标": "地区比较",
               "数值": "中美证据分别解释",
-              "说明": "美国为受雇小时工资统计口径（不含设备租赁与交通等自付成本与自由职业收入）；中国大陆为按场次或合同结算，两者应分别解释，不能直接换算或合并。"
+              "说明": "美国27-2091.00，2025年5月全国小时工资10/25/50/75/90分位13.50/16.91/21.61/37.50/60.17美元；来源未公布年度分位，不按固定工时年化。OEWS直时税前受雇工资包含基本工资、小费、规定津贴和佣金/生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；按场次结算是否纳入看受雇身份/覆盖，不一律全部排除。受雇工资不是扣设备交通成本后的接单净收入，也非单场报价。 中国精确职业工资仍缺口。"
             }
           ],
           "china_ai_row": {
@@ -34475,43 +34780,23 @@
           "china_edu_table": [
             {
               "学历段": "经营资质",
-              "岗位方向": "文艺表演团体与演出经纪机构须经审批取得营业性演出许可证（第六条）。",
-              "说明": {
-                "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
-                "block": "china-salary",
-                "copy_key": "career.item.career-snapshot-primary-locale",
-                "type": "prose"
-              }
+              "岗位方向": "中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。",
+              "说明": "中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。"
             },
             {
               "学历段": "备案",
-              "岗位方向": "演出场所经营单位与个体演员与个体演出经纪人须自领取营业执照之日起 20 日内向县级文化主管部门备案（第十条）。",
-              "说明": {
-                "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
-                "block": "china-salary",
-                "copy_key": "career.item.career-snapshot-primary-locale",
-                "type": "prose"
-              }
+              "岗位方向": "2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。",
+              "说明": "2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。"
             },
             {
               "学历段": "演出审批",
-              "岗位方向": "举办营业性演出须在演出日期前向县级文化主管部门申请；涉外或涉港澳台演出向省级或国务院文化主管部门申请（第十三条与第十五条）。",
-              "说明": {
-                "$item": "actors.display.career_snapshot_primary_locale.scenario.theater",
-                "block": "china-salary",
-                "copy_key": "career.item.career-snapshot-primary-locale",
-                "type": "prose"
-              }
+              "岗位方向": "中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。 2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。",
+              "说明": "中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。 2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。"
             },
             {
               "学历段": "全国职业级工资分布",
-              "岗位方向": "本轮未取得可核对的职业级工资统计；不以行业均值或接单报价替代。",
-              "说明": {
-                "$item": "actors.display.career_snapshot_primary_locale.scenario.national",
-                "block": "china-salary",
-                "copy_key": "career.item.career-snapshot-primary-locale",
-                "type": "prose"
-              }
+              "岗位方向": "精确中国职业工资未取得，行业均值不代填。",
+              "说明": "精确中国职业工资未取得，行业均值不代填。"
             }
           ],
           "china_industry_table": [
@@ -34578,14 +34863,14 @@
           "china_ref": {
             "$join": [
               {
-                "$source": "r2-pay-1",
+                "$source": "r5-nbs-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
                 "item": "actors.source-register.published.1"
               },
               {
-                "$source": "r2-pay-1",
+                "$source": "r5-nbs-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -34615,7 +34900,7 @@
               "月薪参考": {
                 "$join": [
                   {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
+                    "$fact": "r5-current-china-jiaojiang-featured-daily-2026",
                     "field": "display_value"
                   },
                   {
@@ -34641,7 +34926,7 @@
           "china_soc_row": "中国大陆薪资口径",
           "edu": "训练与授权见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "r5-current-china-jiaojiang-featured-daily-2026"
           ],
           "sources_note": "来源链接按各自适用范围使用。",
           "ui": {
@@ -34704,10 +34989,10 @@
         },
         "bls_table": [
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-low",
             "指标": "薪资 · 10 分位",
             "数值": {
-              "$fact": "low",
+              "$fact": "r5-current-low",
               "field": "display_value"
             },
             "说明": "本职业 BLS 2025 年工资数据小时口径的分布低端，是统计位置而不是起薪或单场报价。"
@@ -34718,10 +35003,10 @@
             "说明": "本职业 BLS 2025 年工资数据小时口径的下四分位。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-median",
             "指标": "薪资 · 中位数",
             "数值": {
-              "$fact": "median",
+              "$fact": "r5-current-median",
               "field": "display_value"
             },
             "说明": "本职业 BLS 2025 年工资数据小时口径的中间位置：一半从业者低于、一半高于该值（21.61 美元/时）。"
@@ -34732,40 +35017,40 @@
             "说明": "本职业 BLS 2025 年工资数据小时口径的上四分位。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-high",
             "指标": "薪资 · 90 分位",
             "数值": {
-              "$fact": "high",
+              "$fact": "r5-current-high",
               "field": "display_value"
             },
-            "说明": "本职业 BLS 2025 年工资数据小时口径的分布高端，通常与地区、客户类型与档期密度相关。"
+            "说明": "第90小时分位非起薪/单场报价；源工资表不证明客户/档期/口碑因果。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024 就业 · 本职业人数",
+            "fact_ref": "r5-current-employment",
+            "指标": "2025就业",
             "数值": {
-              "$fact": "employment",
+              "$fact": "r5-current-employment",
               "field": "display_value"
             },
-            "说明": "2024 年本职业就业规模（O*NET 摘要页口径约 15,400 人）；全国总量不说明某城市或某场地类型的机会。"
+            "说明": "2025就业16,900；全国非地方接单数量"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 增长预测",
+            "fact_ref": "r5-current-growth",
+            "指标": "2025—2035增长预测",
             "数值": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "display_value"
             },
-            "说明": "O*NET 摘要页标注为增长 3% 至 4%（平均）；本页未取得 BLS 职业展望本职业页一手口径，故不并列第二个数值。"
+            "说明": "2025—2035 BLS3.8%，OOH/O*NET取整4%，摘要3—4%"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 预计空缺",
+            "fact_ref": "r5-current-openings",
+            "指标": "2025—2035年均空缺",
             "数值": {
-              "$fact": "openings",
+              "$fact": "r5-current-openings",
               "field": "display_value"
             },
-            "说明": "约 1,500 个，为预测期内因增长与更替等形成的合计空缺，不是每年净增。"
+            "说明": "2025—2035年均1,700空缺含增长更替，非十年合计或年净增"
           }
         ],
         "boundary": {
@@ -34827,7 +35112,7 @@
           "type": "prose"
         },
         "growth": {
-          "$fact": "growth",
+          "$fact": "r5-current-growth",
           "field": "display_value"
         },
         "heading": {
@@ -34842,13 +35127,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024 年基期（O*NET 摘要页与详细资料页）",
+        "industry_period": "2025年5月本职业行业小时中位；就业行业占比另解释",
         "industry_rows": [
           {
-            "fact_ref": "median",
-            "industry": "婚礼与宴会场地、商业活动与展演与促销现场、娱乐场所与酒吧与俱乐部（O*NET 任务描述的场景，未附行业门类占比与人数）",
+            "fact_ref": "r5-current-industry-theater",
+            "industry": "表演艺术、观赏体育及相关行业",
             "median": {
-              "$fact": "industry-theater",
+              "$fact": "r5-current-industry-theater",
               "field": "display_value"
             },
             "note": {
@@ -34859,10 +35144,10 @@
             }
           },
           {
-            "fact_ref": "median",
-            "industry": "以按场次或按小时结算的受雇与自由职业岗位为主，部分兼做设备租赁与主持",
+            "fact_ref": "r5-current-industry-education",
+            "industry": "食品服务与饮酒场所",
             "median": {
-              "$fact": "industry-education",
+              "$fact": "r5-current-industry-education",
               "field": "display_value"
             },
             "note": {
@@ -34873,10 +35158,10 @@
             }
           },
           {
-            "fact_ref": "median",
-            "industry": "工作情境：决策自由度「很大」72%、工作时间「不规律」60%、与外部客户或公众打交道「极其重要」60%、公开演讲「每周以上」48%、噪声暴露「每周以上」32%",
+            "fact_ref": "r5-current-industry-amusement",
+            "industry": "游乐、博彩与休闲行业",
             "median": {
-              "$fact": "industry-amusement",
+              "$fact": "r5-current-industry-amusement",
               "field": "display_value"
             },
             "note": {
@@ -34887,8 +35172,8 @@
             }
           },
           {
-            "industry": "O*NET 未提供更细的行业分布与行业工资",
-            "median": "统计不含自雇",
+            "industry": "就业自雇56.1%；O*NET宽行业24/15与OOH细行业21/14/4分层",
+            "median": "工资不含自雇；就业预测含自雇",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -34897,7 +35182,7 @@
             }
           }
         ],
-        "industry_value_label": "主要场景与工作情境",
+        "industry_value_label": "本职业行业小时工资",
         "interpretation_heading": {
           "$item": "actors.display.career_snapshot_secondary_locale.interpretation-heading",
           "block": "us-salary",
@@ -34943,7 +35228,7 @@
           }
         ],
         "median": {
-          "$fact": "median",
+          "$fact": "r5-current-median",
           "field": "display_value"
         },
         "outlook_heading": {
@@ -34953,7 +35238,7 @@
           "type": "prose"
         },
         "outlook_period": {
-          "$fact": "growth",
+          "$fact": "r5-current-growth",
           "field": "period"
         },
         "wage_column_labels": [
@@ -34979,7 +35264,7 @@
             },
             "label": "较低工资位置",
             "value": {
-              "$fact": "low",
+              "$fact": "r5-current-low",
               "field": "display_value"
             }
           },
@@ -34993,7 +35278,7 @@
             },
             "label": "全国小时中位工资",
             "value": {
-              "$fact": "median",
+              "$fact": "r5-current-median",
               "field": "display_value"
             }
           },
@@ -35007,7 +35292,7 @@
             },
             "label": "较高工资位置",
             "value": {
-              "$fact": "high",
+              "$fact": "r5-current-high",
               "field": "display_value"
             }
           }
@@ -35135,12 +35420,7 @@
         ],
         "direct_answer": {
           "$join": [
-            {
-              "$item": "actors.market-signals.market-signal-card.1",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "本职业2025就业16,900→2035预计17,600；BLS表1.2增长3.8%、OOH和O*NET全国取整4%、O*NET摘要分组3—4%。官方净增600，基期/终期各独立取整，不用两端显示数相减改700。2025—2035年均空缺1,700含增长与更替，非十年合计、年净增或个人接单率；BLS2025自雇56.1%（OOH取整56%）。",
             {
               "$item": "actors.market-signals.market-signal-card.5",
               "block": "market-signals",
@@ -35160,7 +35440,7 @@
           {
             "geography": "美国",
             "horizon": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "period"
             },
             "interpretation": {
@@ -35179,13 +35459,13 @@
             "occupation_scope": "非电台唱片骑师（O*NET-SOC 27-2091.00）",
             "source_id": "bls",
             "value": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "display_value"
             }
           },
           {
             "geography": "美国",
-            "horizon": "2024 年基期",
+            "horizon": "2025基期",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -35201,7 +35481,7 @@
             "metric": "本职业就业规模",
             "occupation_scope": "非电台唱片骑师（O*NET-SOC 27-2091.00）",
             "source_id": "ratify",
-            "value": "2024 年约 15,400 人（O*NET 摘要页口径）；实际承接受活动与娱乐场所需求与自由职业情况影响"
+            "value": "本职业16,900岗位；非地方接单量"
           },
           {
             "geography": "美国与中国大陆",
@@ -35221,14 +35501,14 @@
             "metric": "训练与资格路径",
             "occupation_scope": "非电台唱片骑师（O*NET-SOC 27-2091.00）",
             "source_id": "employer",
-            "value": "美国以在职培训与带教为主（几天到一年），52% 岗位要求高中或同等学历；中国大陆无统一准入类个人证书，但营业性演出经营活动须由依法取得营业性演出许可证的主体按规定审批与备案，音乐作品公开播放须符合著作权与集体管理要求"
+            "value": "BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH同职业明细支持高中及一定在岗训练。O*NET JZ1—2/SVP低于6，几天到一年为准备组说明，非本职业固定培训期；52%高中/36%以下/4%部分大学无学位是对新入职所需学历意见，不是52%雇主或员工。目标美国法域许可、雇主和课程费用未逐核。 中国2020修订营业性演出条例2条针对营利目的向公众的现场文艺表演；不是所有私人放歌自动构成该活动。6条文艺团体县级/经纪机构省级审批许可证；7条场所注册及20日内备案，9条个体演员/经纪人注册及20日内备案，原归第10条错误。12条文艺团体/个体演员可自行举办，组台一般由经纪机构、场所可在自身场所举办；13普通演出县级申请，15外国/港澳省级、台湾按国务院会同规定机关；不一律每名DJ持经纪人证或许可证。 2022实施细则9条场所持执照/消防卫生材料20日内备案；个体演员可持身份及艺术能力证明、个体经纪人持身份及经纪人员资格证向户籍或常驻县级申请备案。7条艺术能力证明为相关中专以上毕业证/职称或其他有效证明，2022删除协会演员资格证明。14条普通演出3日前、涉外港澳台20日前提交，15条持许可证或备案证明；临时舞台看台申请提交安全方案和安全消防文件，演出前另提交验收合格，不一概申请时已有竣工验收。19条酒吧、宾馆餐饮等非演出场所单位在本场所营业性演出须委托经纪机构；35条国家演出经纪人员资格不等每名DJ个人门槛。具体身份和活动所在地流程另核。"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35236,7 +35516,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35251,7 +35531,7 @@
           },
           {
             "href": {
-              "$source": "ratify",
+              "$source": "r5-trends-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35259,7 +35539,7 @@
             },
             "id": "ratify",
             "label": {
-              "$source": "ratify",
+              "$source": "r5-trends-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35274,7 +35554,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35282,7 +35562,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36314,14 +36594,14 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "employer",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36380,14 +36660,14 @@
           },
           {
             "href": {
-              "$source": "teacher",
+              "$source": "announcing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "teacher",
+              "$source": "announcing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36402,14 +36682,14 @@
           },
           {
             "href": {
-              "$source": "enrichment",
+              "$source": "art",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "enrichment",
+              "$source": "art",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36424,14 +36704,14 @@
           },
           {
             "href": {
-              "$source": "art",
+              "$source": "enrichment",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "art",
+              "$source": "enrichment",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -37062,6 +37342,151 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "21.61美元/时（2025中位）",
+        "fact_id": "r5-current-median",
+        "market": "美国",
+        "measure": "全国小时工资分位",
+        "occupation_scope": "美国27-2091.00，2025年5月全国小时工资10/25/50/75/90分位13.50/16.91/21.61/37.50/60.17美元；来源未公布年度分位，不按固定工时年化。OEWS直时税前受雇工资包含基本工资、小费、规定津贴和佣金/生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；按场次结算是否纳入看受雇身份/覆盖，不一律全部排除。受雇工资不是扣设备交通成本后的接单净收入，也非单场报价。",
+        "period": "2025年5月",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "13.50美元/时（2025第10分位）",
+        "fact_id": "r5-current-low",
+        "market": "美国",
+        "measure": "全国小时工资分位",
+        "occupation_scope": "美国27-2091.00，2025年5月全国小时工资10/25/50/75/90分位13.50/16.91/21.61/37.50/60.17美元；来源未公布年度分位，不按固定工时年化。OEWS直时税前受雇工资包含基本工资、小费、规定津贴和佣金/生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；按场次结算是否纳入看受雇身份/覆盖，不一律全部排除。受雇工资不是扣设备交通成本后的接单净收入，也非单场报价。",
+        "period": "2025年5月",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "60.17美元/时（2025第90分位）",
+        "fact_id": "r5-current-high",
+        "market": "美国",
+        "measure": "全国小时工资分位",
+        "occupation_scope": "美国27-2091.00，2025年5月全国小时工资10/25/50/75/90分位13.50/16.91/21.61/37.50/60.17美元；来源未公布年度分位，不按固定工时年化。OEWS直时税前受雇工资包含基本工资、小费、规定津贴和佣金/生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；按场次结算是否纳入看受雇身份/覆盖，不一律全部排除。受雇工资不是扣设备交通成本后的接单净收入，也非单场报价。",
+        "period": "2025年5月",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "16,900岗位（2025）",
+        "fact_id": "r5-current-employment",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "本职业2025就业16,900→2035预计17,600；BLS表1.2增长3.8%、OOH和O*NET全国取整4%、O*NET摘要分组3—4%。官方净增600，基期/终期各独立取整，不用两端显示数相减改700。2025—2035年均空缺1,700含增长与更替，非十年合计、年净增或个人接单率；BLS2025自雇56.1%（OOH取整56%）。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-current",
+          "r5-trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "BLS3.8%；OOH/O*NET取整4%、摘要3—4%",
+        "fact_id": "r5-current-growth",
+        "market": "美国",
+        "measure": "十年就业变化",
+        "occupation_scope": "本职业2025就业16,900→2035预计17,600；BLS表1.2增长3.8%、OOH和O*NET全国取整4%、O*NET摘要分组3—4%。官方净增600，基期/终期各独立取整，不用两端显示数相减改700。2025—2035年均空缺1,700含增长与更替，非十年合计、年净增或个人接单率；BLS2025自雇56.1%（OOH取整56%）。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-current",
+          "r5-trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均1,700空缺（2025—2035含增长更替）",
+        "fact_id": "r5-current-openings",
+        "market": "美国",
+        "measure": "年均空缺",
+        "occupation_scope": "本职业2025就业16,900→2035预计17,600；BLS表1.2增长3.8%、OOH和O*NET全国取整4%、O*NET摘要分组3—4%。官方净增600，基期/终期各独立取整，不用两端显示数相减改700。2025—2035年均空缺1,700含增长与更替，非十年合计、年净增或个人接单率；BLS2025自雇56.1%（OOH取整56%）。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-current",
+          "r5-trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET定义为在俱乐部、聚会或婚宴等为现场观众播放预录音乐，可混音切音采样，也可主持MC。20任务为19核心及1新任务；控制器/客户沟通/排期/收款/合同/设备组装/选曲/声音检查/清单/试听/曲库/发票/发行趋势/混音/引导舞蹈/点歌/广告/视觉设备/派对游戏均核心；写活动公告稿为New且重要性未提供，不填0或叫核心。设备操作与声音录制编辑存在任务交叉，不一律排除音乐制作/工程兼任；岗位描述不自动赋工程、用电或演出经营许可。",
+        "fact_id": "r5-current-identity",
+        "market": "美国",
+        "measure": "职业定义任务边界",
+        "occupation_scope": "O*NET定义为在俱乐部、聚会或婚宴等为现场观众播放预录音乐，可混音切音采样，也可主持MC。20任务为19核心及1新任务；控制器/客户沟通/排期/收款/合同/设备组装/选曲/声音检查/清单/试听/曲库/发票/发行趋势/混音/引导舞蹈/点歌/广告/视觉设备/派对游戏均核心；写活动公告稿为New且重要性未提供，不填0或叫核心。设备操作与声音录制编辑存在任务交叉，不一律排除音乐制作/工程兼任；岗位描述不自动赋工程、用电或演出经营许可。",
+        "period": "2026页面",
+        "source_refs": [
+          "onet",
+          "sag-moa"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "表演艺术、观赏体育及相关行业：24.98美元/时（2025行业中位）",
+        "fact_id": "r5-current-industry-theater",
+        "market": "美国",
+        "measure": "本职业行业小时中位",
+        "occupation_scope": "OOH独立27-2091行业明细；非广播DJ、全国分位、就业份额或自雇净收入",
+        "period": "2025年5月",
+        "source_refs": [
+          "r5-ooh-current",
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "食品服务与饮酒场所：20.00美元/时（2025行业中位）",
+        "fact_id": "r5-current-industry-education",
+        "market": "美国",
+        "measure": "本职业行业小时中位",
+        "occupation_scope": "OOH独立27-2091行业明细；非广播DJ、全国分位、就业份额或自雇净收入",
+        "period": "2025年5月",
+        "source_refs": [
+          "r5-ooh-current",
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "游乐博彩与休闲行业：16.86美元/时（2025行业中位）",
+        "fact_id": "r5-current-industry-amusement",
+        "market": "美国",
+        "measure": "本职业行业小时中位",
+        "occupation_scope": "OOH独立27-2091行业明细；非广播DJ、全国分位、就业份额或自雇净收入",
+        "period": "2025年5月",
+        "source_refs": [
+          "r5-ooh-current",
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "中国精确全国DJ工资缺口；2025文化体育娱乐业非私营129447/私营64015元税前年平均，仅相关单位行业背景",
+        "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
+        "market": "中国大陆",
+        "measure": "职业工资缺口与行业背景",
+        "occupation_scope": "国家统计局2025城镇文化体育娱乐业年平均非私营129,447/私营64,015元税前，行业内多职业背景非DJ中位/起薪/月薪。城镇5人以上法人，非私营不只国企，个体/自由职业等不在该调查；受雇按场次计酬不必然排除。目标单位实际归类娱乐/餐饮/商务等须核，不套所有DJ服务场景。",
+        "period": "2025及检索2026-10-09",
+        "source_refs": [
+          "r5-nbs-current"
+        ]
       }
     ]
   },
@@ -37070,7 +37495,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "现场音乐与气氛服务 · 设备与声音检查 · 合同与结算",
@@ -37121,7 +37546,7 @@
       "text": "非电台唱片骑师"
     }
   },
-  "source_content_sha256": "1a459253dae2f9d45a8f87d0b22e8cbbcb23f1ab45d49ff49ae562614c21111a",
+  "source_content_sha256": "239ba6a61339c5ef57cca6b486876f8ed0046ea2624503fcf27e4edb354fa98a",
   "subject": {
     "canonical_slug": "disc-jockeys-except-radio",
     "name": "非电台唱片骑师",

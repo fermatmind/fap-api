@@ -27494,7 +27494,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：2025年美国51-6061第10百分位工资未取得可读取的明细。已查OEWS当前档案、表格及官方替代入口；不将2023历史值伪装为2025。"
+              "美国May 2025本职业第10百分位为30,300美元/年、14.57美元/小时，取O*NET National Wages的United States行；它不是新人起薪或最低保证待遇。"
             ]
           },
           "fact_refs": [
@@ -27514,7 +27514,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：2025年美国51-6061第90百分位工资未取得可读取的明细。不由中位数推算，较高分位也不等于资深岗位固定待遇。"
+              "美国May 2025本职业第90百分位为48,100美元/年、23.12美元/小时；分位不是资深岗位固定待遇或个人收入承诺，年度值直接引用原表。"
             ]
           },
           "fact_refs": [
@@ -27861,7 +27861,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本模块工资中位数来自2025数据，行业比较明确为2023历史年均值，最新分位留缺口。所有数值保留SOC 51-6061美国范围；全国预测不代表个人录用概率或AI净损失。"
+              "工资中位数和分位来自2025美国精确SOC51-6061；行业比较明确为2023历史年均值。全国预测不代表个人录用概率或AI净损失；不把统计工资当个人到手。"
             ]
           },
           "id": "textile-bleaching-and-dyeing-machine-operators-and-tenders.display.career_snapshot_secondary_locale.boundary.detail",
@@ -29206,7 +29206,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "把测验描述改成一个可验证的问题，例如是否愿意持续查错，再对照E1/E2记录和现实条件。保留支持、反例和未知，不反复测到理想标签；更重视真实任务反馈，而非强行统一人格结果。"
+              "把测验描述改成一个可验证的问题，例如是否愿意持续查错，再对照E1/E2记录和现实条件。保留支持、反例和未知，不反复测到理想标签；分别记录真实任务反馈和测验线索，不据本页作相对预测效度排序。"
             ]
           },
           "id": "textile-bleaching-and-dyeing-machine-operators-and-tenders.display.personality_fit_block.questions.test.answer",
@@ -31720,7 +31720,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET与BLS美国任务和典型训练；阶段路线为本页编辑设计。"
+              "本链接为BLS表1.2的美国典型训练与就业；任务另见O*NET，阶段路线为本页编辑设计。"
             ]
           },
           "id": "textile-bleaching-and-dyeing-machine-operators-and-tenders.display.career_path_block.source.bls",
@@ -32365,7 +32365,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET本职业及相邻档案支持任务比较，迁移建议为编辑归纳。"
+              "本链接支持O*NET漂染任务；相邻工种各按独立档案核范围，迁移建议为编辑归纳。"
             ]
           },
           "id": "textile-bleaching-and-dyeing-machine-operators-and-tenders.display.market_signal_card.source.onet",
@@ -32745,7 +32745,7 @@
                 "accessed_at": "2026-09-30",
                 "details": [
                   "51-6061.00定义、Tasks、Work Context、Education与RC兴趣。",
-                  "工资2025；页面就业仍为2024—2034，最新就业另用BLS表。"
+                  "原2026-09-30读取的就业描述保留在作者证据；本轮页面已显示2025—2035，最新精确就业仍以BLS表1.2为依据。工资为2025。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "editor",
@@ -32761,7 +32761,7 @@
                 "accessed_at": "2026-09-30",
                 "details": [
                   "51-6061.00定义、Tasks、Work Context、Education与RC兴趣。",
-                  "工资2025；页面就业仍为2024—2034，最新就业另用BLS表。"
+                  "原2026-09-30读取的就业描述保留在作者证据；本轮页面已显示2025—2035，最新精确就业仍以BLS表1.2为依据。工资为2025。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "employer",
@@ -32869,20 +32869,20 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-10-12",
                 "details": [
-                  "51-6061.00定义、Tasks、Work Context、Education与RC兴趣。",
-                  "工资2025；页面就业仍为2024—2034，最新就业另用BLS表。"
+                  "United States年工资P10/P25/P50/P75/P90：30300/35680/38180/45280/48100美元。",
+                  "小时对应14.57/17.16/18.36/21.77/23.12；直接年度值，不按假定工时重算。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "official wage statistics",
                 "id": "r2-pay-1",
-                "limitation": "不能外推中国资格或个人适配",
-                "market": "美国",
-                "name": "O*NET 51-6061.00 纺织漂染机器操作员与看护员",
-                "period": "2026 occupational profile",
-                "publisher": "U.S. Department of Labor, O*NET",
+                "limitation": "分位不是职级或个人税后待遇；OEWS不覆盖自雇，不套中国。",
+                "market": "美国全国",
+                "name": "O*NET National Wages：51-6061 May2025全国分位",
+                "period": "May2025",
+                "publisher": "U.S. Department of Labor / O*NET；BLS OEWS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/51-6061.00"
+                "url": "https://www.onetonline.org/link/localwages/51-6061.00"
               },
               {
                 "accessed_at": "2026-09-30",
@@ -32983,7 +32983,7 @@
                 "accessed_at": "2026-09-30",
                 "details": [
                   "51-6061.00定义、Tasks、Work Context、Education与RC兴趣。",
-                  "工资2025；页面就业仍为2024—2034，最新就业另用BLS表。"
+                  "原2026-09-30读取的就业描述保留在作者证据；本轮页面已显示2025—2035，最新精确就业仍以BLS表1.2为依据。工资为2025。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "interest-profiler",
@@ -38424,27 +38424,27 @@
         ]
       },
       {
-        "derivation": "已查OEWS当前档案、表格和官方替代入口，未读得明细；不以历史值代填",
-        "display_value": "证据不足：2025年第10百分位工资未取得可读明细",
+        "derivation": "直接采用O*NET National Wages May2025 United States行，不重算年化，不以历史值代填。",
+        "display_value": "30,300美元/年；14.57美元/小时",
         "fact_id": "us-p10-2025",
         "market": "美国",
         "measure": "第10百分位工资",
         "occupation_scope": "SOC 51-6061纺织漂染机器操作员与看护员，美国精确职业",
         "period": "2025",
         "source_refs": [
-          "oews"
+          "r2-pay-1"
         ]
       },
       {
-        "derivation": "未取得明细；不由中位数推算",
-        "display_value": "证据不足：2025年第90百分位工资未取得可读明细",
+        "derivation": "直接采用O*NET National Wages May2025 United States行，不重算年化，不以历史值代填。",
+        "display_value": "48,100美元/年；23.12美元/小时",
         "fact_id": "us-p90-2025",
         "market": "美国",
         "measure": "第90百分位工资",
         "occupation_scope": "SOC 51-6061纺织漂染机器操作员与看护员，美国精确职业",
         "period": "2025",
         "source_refs": [
-          "oews"
+          "r2-pay-1"
         ]
       },
       {
@@ -38550,7 +38550,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "O*NET-SOC 51-6061.00 精确职业口径",
@@ -38601,7 +38601,7 @@
       "text": "纺织漂染机器操作员与看护员"
     }
   },
-  "source_content_sha256": "cefd73a02b84baa0c44e20f78f96d3f13912cf0ef53349da070b64e5c9f66aac",
+  "source_content_sha256": "1b97e7f0452a59295844f7ba686c39fb3f1cd45729a8a816924ea12caaa8388e",
   "subject": {
     "canonical_slug": "textile-bleaching-and-dyeing-machine-operators-and-tenders",
     "name": "纺织漂染机器操作员与看护员",

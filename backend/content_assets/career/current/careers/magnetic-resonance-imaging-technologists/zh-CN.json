@@ -7269,12 +7269,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页磁共振成像技师指 O*NET 29-2035.00：操作磁共振成像（MRI）扫描仪，监控患者安全与舒适度，查看扫描区域图像以保证质量；可经静脉注射钆对比剂，可对患者进行访谈、解释 MRI 程序并安置于检查台，可将病史、部位、方位与进入位置录入计算机。工作以医院与影像中心的检查室为主。本页不含放射技师、核医学技师、超声诊断医师、放射治疗师等相邻岗位。"
+              "本页指O*NET29-2035.00 MRI技师：按医嘱与批准协议采集影像、核图像技术质量和患者安全、沟通并记录；O*NET给药任务明确限执业范围。技师不是放射诊断医师，不因职位名获得给药、镇静或诊断报告签发权限。"
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.profile.definition-block.1",
           "source_refs": [
-            "onet-summary"
+            "onet-summary",
+            "arrt-mri-postprimary"
           ],
           "type": "prose"
         },
@@ -7339,7 +7340,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "环境与节奏：以医院或影像中心的检查室为主，多数全职；需长时间站立、操作设备与显示器，接触强磁场与噪音并须遵守安全与防护规程；时间压力来自检查排程与患者状况。"
+              "医院与影像中心的患者接触、设备操作和排程协作，姿势与班次按岗位核；O*NET并不支持所有人长期站立。MRI不用电离辐射，仍有强磁场、射频热、噪声与设备相容性风险。"
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.profile.work-context-block.6",
@@ -7383,7 +7384,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作闭环：从核对医嘱与筛查禁忌症开始，经过解释与体位安置、线圈与扫描参数选择、采像与监护、图像质量核对与异常排查，到备份与汇报、记录与耗材管理；任一安全条件或图像质量未确认前不结束检查。"
+              "工作闭环：核医嘱、身份与机构筛查资料，按批准协议完成体位、采像、监护和质量记录；安全条件不清或患者异常按机构程序升级，不为图像质量坚持继续检查；技术质量核查不是疾病诊断。"
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.profile.career-quick-answers-block.9",
@@ -7397,7 +7398,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "相邻职责边界：本页只覆盖磁共振成像技师；放射技师负责 X 线与 CT 等成像、核医学技师负责核素成像、诊断医学超声医师负责超声、放射治疗师负责放疗；执业范围、对比剂使用与诊断责任不得与本页互换。"
+              "相邻方向包括放射/CT、核医学、超声技术与放疗，各有训练与资格；美国sonographer是超声技术角色，不自动等于中国诊断医师。MRI经验不能直接转让临床范围或诊断签发权。"
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.profile.definition-block.10",
@@ -7542,7 +7543,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "图像重建、自动分割与后处理、排程与记录工具可辅助生成与整理图像、优化序列并汇总数据，但患者筛查与禁忌判断、体位安置、对比剂与监护、图像质量判定与安全操作仍由人负责。"
+              "编辑受控试验候选：仅在完全虚构的预约和检查记录上试验整理核验。图像重建、分割等算法不等于生成式AI或机构采用；真实参数与影像须按批准协议复核，安全筛查、给药和诊断责任不得交给未验证工具。"
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.ai-impact.ai-impact-table.2",
@@ -7570,7 +7571,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不同环节受影响不同：图像重建、后处理与数据汇总更易自动化，但禁忌筛查、体位安置、对比剂与监护、图像质量判定仍由人负责。"
+              "编辑任务拆分：上述辅助步骤是待验证候选。本轮未取得各环节自动化难度排序或实际采用效果，现场判断和授权责任由岗位责任人确认。"
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.ai-impact.ai-impact-table.4",
@@ -7648,7 +7649,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开职业工资：国家统计局按行业门类发布城镇单位就业人员年平均工资，磁共振成像技师主要计入卫生和社会工作门类，行业平均不能替代本职业工资。"
+              "本轮未建立中国MRI技师全国职业工资中位数对应；NBS2025卫生和社会工作146266/75631、全国非私营129441元为宽口径年平均代理，非MRI起薪或到手。"
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.china-salary.career-snapshot-primary-locale.1",
@@ -7726,7 +7727,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 该页显示 2025 年 BLS OEWS 年薪中位数为 95,480 美元（约 45.91 美元/小时）；就业方面 2024 年约 44,100 人、2024—2034 年预计远快于平均（Much faster than average，7% 或更高）、期间职位空缺约 2,600 个。该页未展示分位工资。以上为美国全国口径且属本职业 29-2035.00，「远快于平均」为统计预测，不等于个人就业结果。"
+              "2025美国MRI技师全国年薪第10/25/50/75/90分位68890/81040/95480/106340/127670美元，小时中位45.91。2025就业43900、2035预计47300，2025—2035增长8%，年均空缺2300含增长与替补，不是十年合计。"
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.us-salary.career-snapshot-secondary-locale.2",
@@ -7740,7 +7741,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资统计位置：以上为美国全国口径且属本职业 29-2035.00；中位数不代表起薪或个人到手收入，且未披露分位。"
+              "2025美国MRI单职业工资分位已核；分位不是起薪、等级或到手，不与放射及MRI组合中位拼接。"
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.us-salary.career-snapshot-secondary-locale.3",
@@ -7754,7 +7755,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "怎样理解这些位置：O*NET 该页只展示中位数，不展示分位；中位数不是新手或资深等级。就业规模与「远快于平均」是职业统计，须与个人机会分开解释。"
+              "第10与90百分位是美国全国该职业工资分布边界，不对应新手或资深等级；分位表不能分解学历、经验、地区或雇主等因素的作用。"
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.us-salary.career-snapshot-secondary-locale.4",
@@ -7768,7 +7769,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布与局限：该页 2024 年主要行业为 Health Care and Social Assistance；行业分布是雇主场景信号，不是需求预测。"
+              "O*NET2025 MRI技师就业94%在卫生和社会工作；这是美国行业就业构成，非中国构成、行业工资或需求增长。"
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.us-salary.career-snapshot-secondary-locale.5",
@@ -7782,7 +7783,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "规模与口径提示：该职业 2024 年就业约 44,100 人、预计远快于平均；引用时须标明年份、覆盖范围与本职业口径，且本职业与放射/MRI 组合口径不能跨口径拼接。"
+              "2025就业43,900人、2025—2035增长8%。年均空缺2,300包含替补，并非当前在招岗位或每年新增人数；不推导个人机会或AI因果。"
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.us-salary.career-snapshot-secondary-locale.6",
@@ -7888,7 +7889,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "大五等通用人格量表不提供本职业的岗位证据，只能用于自我反思；应结合真实的影像检查、患者沟通与安全操作体验继续核对。"
+              "本轮未取得MRI技师人格效度研究；虚构记录仅观察核验与沟通习惯，不能证明植入物安全决策、给药或临床操作适任。"
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.fit.riasec-fit-block.7",
@@ -7929,7 +7930,9 @@
           },
           "id": "magnetic-resonance-imaging-technologists.risk.career-risk-cards.1",
           "source_refs": [
-            "onet-context"
+            "onet-context",
+            "fda-mri-risks",
+            "fda-mri-professionals"
           ],
           "type": "prose"
         },
@@ -8017,7 +8020,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国侧该职业属 Job Zone 3（中等准备）：多数岗位要求副学士学位或两年制学位（约 65%），并需相关经验或一至两年培训；MRI 技师通常还需数年相关工作经历；具体要求按雇主与州法域核对。"
+              "O*NET新入职教育需要调查：65%副学士或两年制、13%中学后证书、9%本科；非在岗学历或全雇主硬门槛。JobZone3组别训练描述不规定每名MRI技师一至两年或必须先有数年放射经历；ARRT两种路径另核。"
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.path.career-path-block.2",
@@ -8031,12 +8034,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国：以放射技术副学士学位加受监督的临床实践为常见路径；多数州要求放射技师持照或认证，少数州对 MRI 技师要求执照，雇主通常要求或偏好认证。中国大陆：无与该 O*NET 精确对应的统一职业资格，医学影像技师岗位多按卫生主管部门与用人单位要求确定，须分别核对。"
+              "美国ARRT MRI可走primary或postprimary路径：前者需副学士或以上及认可MRI教育、伦理与考试，后者另核支持学科资格、结构化教育与临床经验。ARRT认证与州执照分别核，均不自动授予对比剂给药、镇静或诊断权限。中国本轮未建立全国精确MRI技师准入与给药授权对应，卫生专业技术职称和机构任用另核，不宣称无统一资格。"
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.path.career-path-block.3",
           "source_refs": [
-            "ooh-radiologic"
+            "arrt-mri-primary",
+            "arrt-mri-postprimary",
+            "arrt-state-license"
           ],
           "type": "prose"
         },
@@ -8138,7 +8143,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 引用 BLS 数据显示，该职业 2024 年就业约 44,100 人，2024—2034 年预计远快于平均（7% 或更高），期间职位空缺约 2,600 个；这是职业统计，不是个人录用概率，也不同于招聘样本。"
+              "美国O*NET/BLS：2025就业43,900、2035预计47,300，2025—2035增长8%，年均空缺2,300（增长与替补）。职业预测非当前招聘样本或个人录用概率。"
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.market-signals.market-signal-card.2",
@@ -8152,7 +8157,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该页 2024 年主要行业为 Health Care and Social Assistance；就业与空缺为统计预测，须与个人机会分开解释。"
+              "O*NET2025 MRI技师就业94%在卫生和社会工作；这是美国行业就业构成，非中国构成、行业工资或需求增长。"
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.market-signals.market-signal-card.3",
@@ -8180,7 +8185,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：目标法域的执照或认证、对比剂给药与监护授权、复杂序列与质量控制经验，或转向影像教学与管理所需的经验与责任证据。"
+              "转放射技师需补X线/CT物理、辐射防护、目标学科教育与获准临床经验，核州许可和机构范围；MRI资格不自动获得放射或CT及给药权限。"
             ]
           },
           "id": "magnetic-resonance-imaging-technologists.market-signals.market-signal-card.5",
@@ -8635,6 +8640,96 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "美国MRI直接认证路径"
+                ],
+                "evidence_type": "official guidance",
+                "id": "arrt-mri-primary",
+                "limitation": "非州执照或给药许可",
+                "market": "美国",
+                "name": "ARRT Primary requirements",
+                "period": "当前，2026-10-11核查",
+                "publisher": "ARRT",
+                "scope": "美国MRI直接认证路径",
+                "url": "https://www.arrt.org/pages/earn-arrt-credentials/initial-requirements/primary-requirements"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "美国MRI追加认证与技师角色"
+                ],
+                "evidence_type": "official guidance",
+                "id": "arrt-mri-postprimary",
+                "limitation": "诊断由放射医师负责；非中国准入",
+                "market": "美国",
+                "name": "ARRT MRI postprimary",
+                "period": "当前，2026-10-11核查",
+                "publisher": "ARRT",
+                "scope": "美国MRI追加认证与技师角色",
+                "url": "https://www.arrt.org/pages/resources/earn-additional-credentials/earn-additional-credentials-postprimary/magnetic-resonance-imaging"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "美国州许可与ARRT认证区别"
+                ],
+                "evidence_type": "official guidance",
+                "id": "arrt-state-license",
+                "limitation": "具体州规则仍需独立核",
+                "market": "美国",
+                "name": "ARRT State licensing FAQ",
+                "period": "当前，2026-10-11核查",
+                "publisher": "ARRT",
+                "scope": "美国州许可与ARRT认证区别",
+                "url": "https://state.arrt.org/pages/faq"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "美国MRI静磁场、热、听力和植入物风险"
+                ],
+                "evidence_type": "official guidance",
+                "id": "fda-mri-risks",
+                "limitation": "不代设备条件、现场规则或临床权限",
+                "market": "美国",
+                "name": "FDA MRI benefits and risks",
+                "period": "当前，2026-10-11核查",
+                "publisher": "FDA",
+                "scope": "美国MRI静磁场、热、听力和植入物风险",
+                "url": "https://www.fda.gov/radiation-emitting-products/mri-magnetic-resonance-imaging/benefits-and-risks"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "现场筛查及安全负责人升级"
+                ],
+                "evidence_type": "official guidance",
+                "id": "fda-mri-professionals",
+                "limitation": "不代机构完整方案",
+                "market": "美国",
+                "name": "FDA MRI information for professionals",
+                "period": "当前，2026-10-11核查",
+                "publisher": "FDA",
+                "scope": "现场筛查及安全负责人升级",
+                "url": "https://www.fda.gov/radiation-emitting-products/mri-magnetic-resonance-imaging/information-professionals"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "2026安全手册入口与适用人员"
+                ],
+                "evidence_type": "official guidance",
+                "id": "acr-mri-safety",
+                "limitation": "入口已读；完整PDF未读取，不声称全文验收",
+                "market": "美国",
+                "name": "ACR MRI safety resources 2026",
+                "period": "当前，2026-10-11核查",
+                "publisher": "ACR",
+                "scope": "2026安全手册入口与适用人员",
+                "url": "https://www.acr.org/Clinical-Resources/Clinical-Tools-and-Reference/radiology-safety/mr-safety"
               }
             ]
           },
@@ -8823,12 +8918,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "自动重建与分割",
+            "AI主要改变": "编辑待验证候选：自动重建与分割",
             "仍由人负责": "图像质量判定与安全边界",
             "方向": "图像重建与后处理"
           },
           {
-            "AI主要改变": "数据汇总",
+            "AI主要改变": "编辑待验证候选：数据汇总",
             "仍由人负责": "检查确认与患者沟通",
             "方向": "记录与排程"
           }
@@ -8888,7 +8983,7 @@
               "item": "magnetic-resonance-imaging-technologists.source-register.published.1"
             },
             "研究对象": "放射与 MRI 技师组合口径",
-            "结论": "支持岗位与执照背景",
+            "结论": "提供放射与MRI组合背景；不替代MRI单职业数据或所在地执照规则",
             "链接": {
               "$source": "ooh-radiologic",
               "block": "source-register",
@@ -8938,7 +9033,7 @@
             "问题": "AI 会取代磁共振成像技师吗？"
           },
           {
-            "回答": "目前只写到可辅助的图像重建、后处理与数据汇总，禁忌筛查、体位安置、对比剂与监护仍由人承担。",
+            "回答": "编辑受控试验候选：仅在完全虚构的预约和检查记录上试验整理核验。图像重建、分割等算法不等于生成式AI或机构采用；真实参数与影像须按批准协议复核，安全筛查、给药和诊断责任不得交给未验证工具。",
             "来源": {
               "$source": "onet-tasks",
               "block": "source-register",
@@ -8953,10 +9048,10 @@
               "field": "url",
               "item": "magnetic-resonance-imaging-technologists.source-register.published.1"
             },
-            "问题": "自动化会先影响哪个环节？"
+            "问题": "数字化工具可在哪些步骤做受控试验？"
           },
           {
-            "回答": "没有职业级采用率来源，本页不提供这类数字。",
+            "回答": "证据不足：本轮未取得该职业AI采用率、节省工时或因果就业研究。",
             "来源": {
               "$source": "onet-summary",
               "block": "source-register",
@@ -9186,12 +9281,12 @@
       },
       "career_ai_description_block": {
         "body": [
-          "图像重建、自动分割与后处理、排程与记录工具可辅助整理图像与数据，但患者筛查与禁忌判断、体位安置、对比剂与监护、图像质量判定与安全操作仍由人负责。"
+          "编辑受控试验候选：仅在完全虚构的预约和检查记录上试验整理核验。图像重建、分割等算法不等于生成式AI或机构采用；真实参数与影像须按批准协议复核，安全筛查、给药和诊断责任不得交给未验证工具。"
         ],
         "heading": "磁共振成像技师的工作对象与 AI 边界"
       },
       "career_path_block": {
-        "boundary": "执业执照、认证与对比剂给药授权由具体法域与机构核验；认证不等于州级执照或执业范围。",
+        "boundary": "三路线为编辑目标非固定晋升。无真实患者练习授权前仅做虚构记录；给药、镇静、诊断、MRI安全决策及转放射/CT须各自核准，设备厂商训练不自动扩大执业范围。",
         "competence_ladder": [
           {
             "description": "确认医嘱、禁忌与患者安全条件。",
@@ -9229,7 +9324,7 @@
             "copy_key": "career.item.career-path-block",
             "type": "prose"
           },
-          "jurisdiction": "美国副学士学位与州级执照/认证；中国大陆按卫生主管部门与用人单位要求核对",
+          "jurisdiction": "美国ARRT两路径、州许可与机构授权分别核；中国核医学影像技术职称、机构任用与具体操作权限",
           "summary": {
             "$item": "magnetic-resonance-imaging-technologists.path.career-path-block.3",
             "block": "path",
@@ -9335,7 +9430,7 @@
             "id": "track-0",
             "stages": [
               {
-                "credentials": "按副学士学位与临床实践要求核验。",
+                "credentials": "按目标ARRT primary或postprimary教育与临床经验、州和机构要求核。",
                 "next_moves": {
                   "$item": "magnetic-resonance-imaging-technologists.path.career-path-block.7",
                   "block": "path",
@@ -9365,14 +9460,14 @@
                   "type": "prose"
                 },
                 "readiness_evidence": "保留检查与质量记录。",
-                "responsibility": "独立完成安全筛查、采像与图像质量核对。",
+                "responsibility": "在核准范围与批准协议内完成MRI采像、技术质量核查和记录，未决安全条件升级。",
                 "role": "磁共振成像技师"
               },
               {
                 "credentials": "按机构要求核验。",
                 "next_moves": "补足复杂序列与质量控制证据。",
                 "readiness_evidence": "保留复杂病例与带教记录。",
-                "responsibility": "负责复杂序列与带教新人。",
+                "responsibility": "在批准范围内协作复杂序列、复盘技术质量并带教，诊断由相应医师负责。",
                 "role": "高级技师/带教"
               },
               {
@@ -9389,69 +9484,69 @@
             "id": "track-1",
             "stages": [
               {
-                "credentials": "按机构要求核验。",
-                "next_moves": "补足质量体系知识。",
-                "readiness_evidence": "保留质量核查记录。",
-                "responsibility": "在监督下参与质量控制。",
-                "role": "质量助理"
+                "credentials": "核机构数据访问和质量训练",
+                "next_moves": "补MRI伪影分类与批准协议",
+                "readiness_evidence": "去标识质控台账与复核反馈",
+                "responsibility": "监督下整理重复扫描原因、质控和协议版本记录",
+                "role": "MRI质量助理"
               },
               {
-                "credentials": "按机构要求核验。",
-                "next_moves": "补足质控与法规知识。",
-                "readiness_evidence": "保留质量与改进记录。",
-                "responsibility": "独立开展质量核查与改进。",
-                "role": "影像质量专员"
+                "credentials": "核MRI质控职责和机构任用",
+                "next_moves": "补质量改进评估与带教",
+                "readiness_evidence": "重复扫描分析与改进记录",
+                "responsibility": "协作协议合规、图像技术质量与改进复核",
+                "role": "MRI质量协调员"
               },
               {
-                "credentials": "按机构要求核验。",
-                "next_moves": "补足教育与评估知识。",
-                "readiness_evidence": "保留教学与带教记录。",
-                "responsibility": "负责教学与培训。",
-                "role": "教学/培训师"
+                "credentials": "核临床资质、带教权限与隐私要求",
+                "next_moves": "补教学目标与质量审核",
+                "readiness_evidence": "获准临床带教评估与反馈",
+                "responsibility": "核准范围内带教筛查采像和记录，未决安全问题升级",
+                "role": "MRI临床带教技师"
               },
               {
-                "credentials": "按机构要求核验。",
-                "next_moves": "补足管理责任证据。",
-                "readiness_evidence": "保留运行与团队记录。",
-                "responsibility": "负责影像科运行与团队。",
-                "role": "影像管理"
+                "credentials": "核机构质量和培训任用",
+                "next_moves": "补跨团队质量治理",
+                "readiness_evidence": "质量指标、批准变更与培训记录",
+                "responsibility": "组织技术质量、协议版本及培训复盘，协作医师和安全负责人",
+                "role": "MRI质量与培训负责人"
               }
             ],
-            "title": "转向影像质量与教学"
+            "title": "转向MRI质量与教学"
           },
           {
             "id": "track-2",
             "stages": [
               {
-                "credentials": "按机构要求核验。",
-                "next_moves": "补足设备与安全基础。",
-                "readiness_evidence": "保留操作与记录。",
-                "responsibility": "在监督下参与多设备操作。",
-                "role": "影像设备助理"
+                "credentials": "核放射技术目标教育和州准入",
+                "next_moves": "补放射学科资格与临床要求",
+                "readiness_evidence": "课程及获准临床训练记录",
+                "responsibility": "在获准教育与监督下补X线物理、辐射防护和患者体位",
+                "role": "放射技术转入学员"
               },
               {
-                "credentials": "按州法域与机构要求核验。",
-                "next_moves": "补足相应设备与物理知识。",
-                "readiness_evidence": "保留成像与安全记录。",
-                "responsibility": "独立开展相应成像。",
-                "role": "放射/CT 或核医学技师"
+                "credentials": "核放射技术资格、州许可与机构授权",
+                "next_moves": "补CT支持学科与临床训练",
+                "readiness_evidence": "图像技术质量和辐射防护记录",
+                "responsibility": "按准入与医嘱在核准范围采集X线图像",
+                "role": "放射技师"
               },
               {
-                "credentials": "按机构要求核验。",
-                "next_moves": "补足跨设备知识。",
-                "readiness_evidence": "保留多模态与改进记录。",
-                "responsibility": "负责多模态成像。",
-                "role": "多模态技师"
+                "credentials": "核目标CT认证路径与给药权限",
+                "next_moves": "补CT协议和剂量质量复核",
+                "readiness_evidence": "CT临床训练及技术质量记录",
+                "responsibility": "监督下补CT协议、剂量与对比剂协作",
+                "role": "CT技术转入技师"
               },
               {
-                "credentials": "按机构要求核验。",
-                "next_moves": "补足设备治理证据。",
-                "readiness_evidence": "保留设备与团队记录。",
-                "responsibility": "负责设备与团队。",
-                "role": "影像技术主管"
+                "credentials": "核各模态资质和协调岗位任用",
+                "next_moves": "补多模态质量协同，不替代诊断",
+                "readiness_evidence": "批准协议、质量复盘与带教记录",
+                "responsibility": "在各自核准范围协调技术质量、协议与带教",
+                "role": "放射/CT技术协调员"
               }
             ],
-            "title": "转向相关影像设备"
+            "title": "转向放射与CT技术"
           }
         ]
       },
@@ -9604,18 +9699,19 @@
           }
         ],
         "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
-        "evidence_scope": "依据 O*NET 29-2035.00 的任务与工作情境，以及磁场安全、禁忌筛查、对比剂与监护、图像质量与感染控制中的具体要求；具体规则按机构与适用法规核对，不跨范围外推。",
+        "evidence_scope": "O*NET任务与情境仅提供风险对象；FDA说明MRI静磁场、射频热、听力与植入设备风险及现场筛查升级。ACR2026入口已核但完整手册未读取；本页不提供可执行临床安全方案。",
         "heading": "磁共振成像技师的工作风险与边界",
         "risks": [
           {
             "affected_roles": "检查室岗位",
             "consequence": "可能造成患者或设备伤害。",
             "evidence_refs": [
-              "onet-context"
+              "magnetic-resonance-imaging-technologists.display.source.onet-context",
+              "magnetic-resonance-imaging-technologists.display.source.fda-mri-risks"
             ],
             "id": "risk-1",
-            "mitigation": "严格禁忌筛查并遵守磁场安全规程。",
-            "scenario": "未筛查或漏判铁磁物品/植入物时。",
+            "mitigation": "按机构筛查程序确认设备身份及MR安全状态；MR Conditional须核具体条件，未知状态不得凭外观、去除随身金属或以往检查放行，交MRI安全负责人复核。",
+            "scenario": "人员、物品或植入/外部设备的MR安全状态与适用条件未确认即进入或采像。",
             "title": {
               "$item": "magnetic-resonance-imaging-technologists.risk.career-risk-cards.1",
               "block": "risk",
@@ -9627,10 +9723,10 @@
             "affected_roles": "对比剂使用岗位",
             "consequence": "可能造成过敏或不良反应。",
             "evidence_refs": [
-              "onet-tasks"
+              "magnetic-resonance-imaging-technologists.display.source.onet-tasks"
             ],
             "id": "risk-2",
-            "mitigation": "按规程评估、给药与监护并备应急流程。",
+            "mitigation": "由具有相应权限的人员按医嘱、给药与监护制度执行并核应急支持；MRI认证或雇主安排不自动赋予给药和镇静权。",
             "scenario": "对比剂给药未评估或未监护时。",
             "title": {
               "$item": "magnetic-resonance-imaging-technologists.risk.career-risk-cards.2",
@@ -9643,7 +9739,7 @@
             "affected_roles": "检查室岗位",
             "consequence": "可能造成跌倒或检查中断。",
             "evidence_refs": [
-              "onet-context"
+              "magnetic-resonance-imaging-technologists.display.source.onet-context"
             ],
             "id": "risk-3",
             "mitigation": "安抚并按规程固定与防护。",
@@ -9659,7 +9755,7 @@
             "affected_roles": "影像采集岗位",
             "consequence": "可能需要重扫并延误诊断。",
             "evidence_refs": [
-              "onet-tasks"
+              "magnetic-resonance-imaging-technologists.display.source.onet-tasks"
             ],
             "id": "risk-4",
             "mitigation": "按标准核对图像质量并排查异常。",
@@ -9675,7 +9771,7 @@
             "affected_roles": "检查室岗位",
             "consequence": "可能造成感染或职业暴露。",
             "evidence_refs": [
-              "onet-context"
+              "magnetic-resonance-imaging-technologists.display.source.onet-context"
             ],
             "id": "risk-5",
             "mitigation": "遵守感染控制与防护规程。",
@@ -9689,14 +9785,15 @@
           },
           {
             "affected_roles": "检查室岗位",
-            "consequence": "可能造成图像无效与安全风险。",
+            "consequence": "可能造成热损伤、听力损伤或无效图像，需专业处置。",
             "evidence_refs": [
-              "onet-tasks"
+              "magnetic-resonance-imaging-technologists.display.source.onet-tasks",
+              "magnetic-resonance-imaging-technologists.display.source.fda-mri-risks"
             ],
             "id": "risk-6",
-            "mitigation": "立即停止、按规程排查并上报。",
-            "scenario": "发现扫描仪或外围设备异常仍继续时。",
-            "title": "设备异常未停止即继续处置"
+            "mitigation": "按机构批准异常程序停止相关采像并通知负责人，停止扫描不等于静磁场消失；不自行维修、消磁或旁路设备安全条件。",
+            "scenario": "设备报警或患者报告发热、不适、听力防护问题仍继续采像。",
+            "title": "设备异常与热、听力风险"
           }
         ],
         "schema_version": "career.work_risk.v1",
@@ -9772,6 +9869,24 @@
               "item": "magnetic-resonance-imaging-technologists.source-register.published.1"
             },
             "scope": "组合背景与执照说明；不替代执业规范。"
+          },
+          {
+            "href": {
+              "$source": "fda-mri-risks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "magnetic-resonance-imaging-technologists.source-register.published.1"
+            },
+            "id": "magnetic-resonance-imaging-technologists.display.source.fda-mri-risks",
+            "label": {
+              "$source": "fda-mri-risks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "magnetic-resonance-imaging-technologists.source-register.published.1"
+            },
+            "scope": "美国MRI风险；非操作方案"
           }
         ]
       },
@@ -9781,7 +9896,7 @@
             {
               "指标": "中国大陆职业工资",
               "数值": "证据不足：未单列",
-              "说明": "国家统计局按行业门类发布，未单列本职业工资。"
+              "说明": "本轮国家统计局行业资料未建立本职业单列对应；不表示所有公开渠道均无数据。"
             },
             {
               "指标": "中国大陆行业代理",
@@ -9868,7 +9983,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国大陆无本职业单列工资；下列为行业代理，不是起薪、中位数或到手收入。",
+          "china_open": "证据不足：本轮未建立本职业单列工资对应；下列行业平均仅作宽口径代理，非职业中位数、起薪或到手收入。",
           "china_ref": {
             "$join": [
               {
@@ -10015,8 +10130,8 @@
             }
           },
           {
-            "指标": "薪资 · 最低 10%",
-            "数值": "未披露",
+            "指标": "薪资 · 第10百分位",
+            "数值": "$68,890/年（2025）",
             "说明": {
               "$join": [
                 {
@@ -10039,8 +10154,8 @@
             }
           },
           {
-            "指标": "薪资 · 最高 90%",
-            "数值": "未披露",
+            "指标": "薪资 · 第90百分位",
+            "数值": "$127,670/年（2025）",
             "说明": {
               "$join": [
                 {
@@ -10088,7 +10203,7 @@
           },
           {
             "指标": "就业 · 规模",
-            "数值": "44,100 人（2024）",
+            "数值": "43,900人（2025）",
             "说明": {
               "$join": [
                 {
@@ -10112,7 +10227,7 @@
           },
           {
             "指标": "就业 · 变化",
-            "数值": "远快于平均（7% 或更高，2024—2034）",
+            "数值": "8%（2025—2035）",
             "说明": {
               "$join": [
                 {
@@ -10136,7 +10251,7 @@
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "约 2,600 个（2024—2034 期合计）",
+            "数值": "2,300个/年（2025—2035增长与替补）",
             "说明": {
               "$join": [
                 {
@@ -10159,7 +10274,7 @@
             }
           }
         ],
-        "boundary": "美国全国口径：工资、就业与行业均为 O*NET 展示的本职业 29-2035.00 数据，工资为 2025 OEWS、就业展望为 2024—2034 预测；不含个人到手收入、起薪或录用结论。",
+        "boundary": "美国全国：2025 OEWS工资与2025—2035就业预测分别解释，不跨职业/法域拼接，不作为个人报价。",
         "direct_answer": {
           "$item": "magnetic-resonance-imaging-technologists.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10168,11 +10283,11 @@
         },
         "factor_rows": [
           {
-            "answer": "多数岗位要求副学士学位或两年制学位并需相关经验；多数州要求放射技师持照或认证，少数州对 MRI 技师要求执照，雇主通常要求或偏好认证。",
+            "answer": "美国ARRT MRI可走primary或postprimary路径：前者需副学士或以上及认可MRI教育、伦理与考试，后者另核支持学科资格、结构化教育与临床经验。ARRT认证与州执照分别核，均不自动授予对比剂给药、镇静或诊断权限。中国本轮未建立全国精确MRI技师准入与给药授权对应，卫生专业技术职称和机构任用另核，不宣称无统一资格。",
             "factor": "资格"
           },
           {
-            "answer": "MRI 技师通常需数年相关工作经历；受监督临床实践与图像质量经验比证书名称更常被参考。",
+            "answer": "按目标路径核受监督临床经验和质量记录；本轮未取得经验比证书更重要的比较依据，临床权限不能由纸面样本替代。",
             "factor": "经验"
           },
           {
@@ -10186,7 +10301,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "远快于平均（2024—2034）",
+        "growth": "8%（2025—2035）",
         "heading": {
           "$item": "magnetic-resonance-imaging-technologists.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10199,27 +10314,27 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024",
+        "industry_period": "2025",
         "industry_rows": [
           {
             "industry": "Health Care and Social Assistance",
             "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体中位数为准。"
+            "note": "证据不足：本轮未取得该职业×行业工资子表；整体分位不能冒充分行业中位工资。"
           },
           {
             "industry": "行业口径说明一",
             "median": "见就业行",
-            "note": "工资、就业与行业均为本职业展示口径，不跨职业外推。"
+            "note": "证据不足：本轮未取得该职业×行业工资子表；整体分位不能冒充分行业中位工资。"
           },
           {
             "industry": "行业口径说明二",
             "median": "见就业行",
-            "note": "地区与机构差异大，不得跨地区外推。"
+            "note": "证据不足：本轮未取得该职业×行业工资子表；整体分位不能冒充分行业中位工资。"
           },
           {
             "industry": "行业口径说明三",
             "median": "见就业行",
-            "note": "分位工资未披露，不以推断值替代。"
+            "note": "证据不足：本轮未取得该职业×行业工资子表；整体分位不能冒充分行业中位工资。"
           }
         ],
         "industry_value_label": "行业值",
@@ -10231,25 +10346,25 @@
         },
         "interpretation_rows": [
           {
-            "answer": "美元/年；为 BLS 2025 OEWS 全国中位数（本职业 29-2035.00 口径），未展示分位，不含个人到手收入。",
+            "answer": "2025 MRI单职业OEWS五分位已核，中位95480美元；不表示起薪或临床等级。",
             "question": "工资"
           },
           {
-            "answer": "2024 年在岗人数，不是招聘职位数。",
+            "answer": "2025就业人数，不是当前在招职位。",
             "question": "就业"
           },
           {
-            "answer": "2024—2034 预测远快于平均（7% 或更高），是职业统计，不是个人录用结果。",
+            "answer": "2025—2035增长8%；不推导个人录用概率或AI因果。",
             "question": "展望"
           },
           {
-            "answer": "按 O*NET/BLS 行业口径列为卫生和社会工作，不等于全部从业者收入。",
+            "answer": "2025就业94%在卫生和社会工作；非职业×行业工资。",
             "question": "行业"
           }
         ],
         "median": "$95,480/年（2025）",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "2024—2034",
+        "outlook_period": "2025—2035",
         "wage_column_labels": [
           "分位",
           "年度参考",
@@ -10264,10 +10379,10 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "—",
-            "interpretation": "O*NET 该页未展示分位工资；不以推断值替代。",
-            "label": "最低 10%",
-            "value": "未披露"
+            "equivalent": "$33.12/小时",
+            "interpretation": "2025美国MRI技师全国工资分位，非经验等级或起薪。",
+            "label": "第10百分位",
+            "value": "$68,890/年"
           },
           {
             "equivalent": "$45.91/小时",
@@ -10276,10 +10391,10 @@
             "value": "$95,480/年"
           },
           {
-            "equivalent": "—",
-            "interpretation": "O*NET 该页未展示分位工资；不以推断值替代。",
-            "label": "最高 90%",
-            "value": "未披露"
+            "equivalent": "$61.38/小时",
+            "interpretation": "2025美国MRI技师全国工资分位，非经验等级或起薪。",
+            "label": "第90百分位",
+            "value": "$127,670/年"
           }
         ]
       },
@@ -10360,7 +10475,7 @@
         "outlook_evidence": [
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
+            "horizon": "2025—2035",
             "interpretation": "就业规模、变化与职位空缺必须分别解释。",
             "limitation": "为职业统计，不能作为个人就业保证。",
             "metric": "就业规模与变化",
@@ -10374,18 +10489,18 @@
           },
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
-            "interpretation": "为 2024—2034 年期间合计，含增长与替代需求，不等于在招岗位数。",
+            "horizon": "2025—2035",
+            "interpretation": "2025—2035年均增长与替补，非十年合计、净新增或当前在招。",
             "limitation": "不能作为个人录用概率。",
-            "metric": "职位空缺（期合计）",
+            "metric": "预计年均职位空缺",
             "occupation_scope": "展示口径：MRI Technologists（29-2035.00）",
-            "value": "约 2,600 个"
+            "value": "2,300个/年（增长与替补）"
           },
           {
             "geography": "美国全国",
             "horizon": "2025",
             "interpretation": "为 BLS 2025 OEWS 全国中位数，不代表起薪或到手收入。",
-            "limitation": "未披露分位；不含个人到手收入。",
+            "limitation": "分位已核；工资不能说明临床等级或个人到手。",
             "metric": "年薪中位数",
             "occupation_scope": "展示口径：MRI Technologists（29-2035.00）",
             "value": "$95,480/年"
@@ -10494,7 +10609,7 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补足超声成像与判读知识。",
+            "capability_gaps": "需补超声成像、目标学科教育与临床能力及所在法域资格；美国sonographer是技术角色，不由MRI经验自动取得诊断医师权限。",
             "shared_capabilities": "影像与患者沟通基础。",
             "target_href": "/zh/career/jobs/diagnostic-medical-sonographers",
             "target_slug": "diagnostic-medical-sonographers",
@@ -10502,7 +10617,7 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补足放疗计划与实施知识。",
+            "capability_gaps": "需补放疗技术训练、计划执行与剂量安全及目标资格；治疗计划批准和临床处方不由MRI转入经验授予。",
             "shared_capabilities": "影像与安全基础。",
             "target_href": "/zh/career/jobs/radiation-therapists",
             "target_slug": "radiation-therapists",
@@ -11012,7 +11127,7 @@
             "item": "magnetic-resonance-imaging-technologists.source-register.published.1"
           }
         },
-        "note": "来源范围、限制和统计时期按原始证据分别核对。来源使用说明：O*NET 29-2035.00 磁共振成像技师（摘要）：提供 29-2035.00 的职业身份、官方描述、兴趣代码、Job Zone、技能与知识。；该页工资与就业数据为本职业口径。；O*NET 29-2035.00 任务（Tasks）：提供患者筛查与禁忌识别、体位安置、线圈与成像技术、操作扫描仪、注射对比剂、连接监护、图像质量核对与故障排查等任务清单。；任务样本不代表每个岗位执行全部任务。；O*NET 29-2035.00 工作情境（Work Context）：描述患者接触、站立、精确性要求、设备使用与暴露条件等工作情境。；美国工作情境不替代中国法律与机构规程。；Radiologic and MRI Technologists（BLS 职业展望手册）：提供放射与 MRI 技师组合口径的 2025 年工资、2025 年岗位与 2025—2035 展望，并说明执照与认证要求。；组合口径不与本职业数字混用。；O*NET 29-2035.00 全国工资（BLS OEWS 展示）：2025 BLS OEWS MRI 技师中位工资；该页为本职业口径。；本页未展示分位工资。；O*NET 29-2035.00 全国就业趋势：2024 年就业规模与 2024—2034 年增长与职位空缺预测。；预测不是录用保证。；Industries: 29-2035.00：该页 2024 年主要行业为 Health Care and Social Assistance。；行业分布是雇主场景信号，不是增长或需求预测。；O*NET 29-2035.00 教育与职业准备：Job Zone 3（中等准备）：多数岗位要求副学士学位或两年制学位并需相关经验或一至两年培训。；教育分布不等于每个雇主的硬性要求。；National Certifications: 29-2035.00：O*NET 提供的美国全国认证查询入口。；认证不等于州级执照或雇主录用条件。；Generative AI and Jobs (ILO Working Paper 140, 2025)：按任务层面评估生成式 AI 的职业暴露。；暴露指数不等于采用率、岗位结果或录用概率。；2025年城镇单位就业人员年平均工资情况：提供城镇非私营与私营单位分行业门类年平均工资（含卫生和社会工作门类）。；行业平均不是职业中位数，且不含个体工商户与自由职业者。；企业薪酬调查信息（2024年）：人力资源和社会保障部企业薪酬调查信息，按职业/岗位分类的薪酬查询入口。；覆盖城镇企业，不含机关事业单位；本页未取得与本职业精确对应的条目。；FermatMind 磁共振成像技师任务影响量表：整理可辅助任务与人工控制点，用于任务级 AI 与适配讨论。；编辑量表不等于采用率、裁员、法规或执照证据。；"
+        "note": "MRI29-2035.00：2025五分位68890/81040/95480/106340/127670美元，小时中位45.91；2025—2035就业43900→47300、8%、年均空缺2300，行业卫生94%。教育65/13/9为新入职意见，RCI74/66/63为兴趣偏好。ARRT有直接与追加认证路径，认证不等于州许可或给药权限。FDA核筛查、热/听力及植入物条件风险；ACR2026手册入口已确认，大PDF未完整读取，不能声称已按全文验收。NBS卫生代理非职业工资。原共享事实和受保护FAQ的旧时期、合计和资格说法保留为范围冲突；中国精确准入、州/机构给药监督及完整安全规则仍待核。"
       },
       "work_context_block": {
         "$item": "magnetic-resonance-imaging-technologists.profile.work-context-block.5",
@@ -11158,7 +11273,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "MRI 扫描操作",
@@ -11209,7 +11324,7 @@
       "text": "磁共振成像技师职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "47f2479893146887ed05da5e000eb304656ccac8d05e73feb4c582624299e048",
+  "source_content_sha256": "e4e5d3f745faefdbb9f9508c0ebccd3bdf197e5295a3e9e9e88bca8bee3d21a1",
   "subject": {
     "canonical_slug": "magnetic-resonance-imaging-technologists",
     "name": "磁共振成像技师",

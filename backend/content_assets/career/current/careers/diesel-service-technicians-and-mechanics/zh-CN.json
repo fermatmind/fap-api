@@ -35,6 +35,36 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:r5-current-china-jiaojiang-featured-daily-2026": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-employment": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-high": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-amusement": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-education": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-theater": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-low": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-median": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-openings": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -23201,12 +23231,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本页是美国 O*NET-SOC 49-3031.00 口径：准备层级为 Job Zone Three（中等准备，SVP 6.0 到低于 7.0），通常需要 1—2 年培训，多数雇主提供长期在职培训，部分地区存在注册学徒项目；雇主可能要求或优先考虑行业认证，试驾大型公交与卡车可能需要商业驾驶执照。这些是美国口径，不等于中国大陆的汽车维修工职业技能等级与机动车维修经营备案管理要求。"
+              "美国BLS典型入口高中或同等学力、无相关工作经验、长期在岗训练；雇主可能偏好高中后柴油维修课程，认证可要求或偏好，大型公交卡车路试可能需CDL。O*NET JobZone3/SVP6到低于7及组级1—2年训练不保证本职业每人周期；学历受访意见39%高中后证书/37%高中，不等于法律或员工学历构成。 中美技能评价、经营备案和驾驶资格分项核，不互相等价。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.boundary.primary",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "employer",
+            "r5-cn-standard",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -23243,12 +23276,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "常见误解是把「会换件」当成诊断能力、把看教学视频当成能独立作业、把收入按网传报价单推算，或把排放相关维修当成可以为通过检验而变通。本页按任务、来源与边界逐项说明：诊断需要读懂故障码与测量值并按手册确认原因；独立作业需要经过受监督训练并在安全与质量上被确认；工资应看官方统计的分位与口径；排放相关维修不得通过临时更换污染控制装置或破坏车载排放诊断系统使车辆通过检验。"
+              "编辑常见误解核对：维修技能、培训与经营备案分别核，不以网传报价推工资。中国机动车维修经营者登记后向所在地县级交通运输主管部门备案，备案不收费用，范围与类别按经营项目。第12条一二类技术负责/质量检验/接待和各类维修人员各至少1名；三类综合小修、发动机、车身、电气、自动变速器维修也配技术负责与质量检验，不能遗漏。质量检验人员须相适应驾驶证，非所有维修工统一驾驶门槛；企业备案不代个人技能/岗位权限。 2018汽车维修工标准设五级到一级、普通文化初中；五级累计本职业/规定相关职业1年或学徒期满，四级有五级证后4年/累计6年/规定学校专业学历等不同分支，理论技能及适用综合评审各60合格、技师高级技师综合评审。2024官方附件在4-12-01-01下新增商用车维修工工种；旧标准申报分支不冒充新增工种当前评价公告，费用、实际周期和补贴本轮未核。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.answer",
           "source_refs": [
-            "onet"
+            "cn-rule",
+            "r5-cn-standard",
+            "r5-cn-editor-attachment"
           ],
           "type": "prose"
         },
@@ -23313,12 +23348,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 的任务与工作情境数据显示本职业仍以机械拆装、测量与现场判断为核心，诊断仪与远程信息主要提供线索而不是结论；技术变化更可能改变诊断入口与例行保养的工作量（例如车队中电动与替代燃料车辆比例上升），而不是取消对发动机、传动、制动与液压系统的实际检修能力。判断应以本职业任务数据与雇主的实际岗位要求为准，不以趋势口号替代。"
+              "BLS预测货运和老车辆维修带来需求，同时电动车维修较少可减少部分需求；它不是GenAI效果。当前美国自身49-3031：2025约316000个岗位，2035约327400，2025—2035增长4%、净增11400，年均24400空缺含增长与更替。O*NET/BLS当前同预测期，不能把旧2024—2034值再称当前另一口径；空缺非净新增或个人机会。 替代燃料任务列入Core不证明其占比增长或所有柴油技能永不失效。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.04.answer",
           "source_refs": [
-            "onet"
+            "employer",
+            "sag-moa",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -23467,12 +23504,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "以车间作业为主，通风较为良好但有时嘈杂，偶尔在路边或作业现场维修；多数为全职，部分每周超过 40 小时；作业伴随油污、粉尘、噪音与受限空间，需要通过防护装备与作业规程管理风险。"
+              "美国57项情境实际核：污染85%每天、噪声81%每天、危险设备60%每天、PPE78%每天；手操作80%持续、站立59%持续、弯身59%持续；准确53%极其重要、他人安全72%很高责任、面对面90%每天。是调查频率/意见，不是事故率、全部工位条件或中国分布。 O*NET典型周53%超过40小时/46%40小时，87%规律排班不等固定工作日无夜班，时间压力40%每天。BLS部分晚间周末或24小时服务场所，不据此称所有车队随时待命或品牌服务站更规律。"
             ]
           },
           "id": "actors.display.work_context_block.summary",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "employer"
           ],
           "type": "prose"
         },
@@ -23509,12 +23547,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作按工单与车间排期组织，通常是班组建制，由班组长或车间主管分配工单；涉及安全部件与排放相关作业时须经质量检验人员或技术负责人复核。"
+              "编辑组织示例：可按工单与车间排期分配任务，实际班组和分工以单位制度为准。中国《机动车维修管理规定》第31条对二级维护、总成修理、整车修理设维修前、过程及竣工检验；第32条合格证由维修质量检验人员签发，不把所有安全部件或排放作业都概括成技术负责人统一复核。"
             ]
           },
           "id": "actors.display.work_context_block.organization",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -23523,12 +23562,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "以正常班次为主，车队与货运维修存在轮班与随时抢修；典型工作周超过 40 小时占 53%，时间压力 40% 每天。"
+              "O*NET典型周53%超过40小时/46%40小时，87%规律排班不等固定工作日无夜班，时间压力40%每天。BLS部分晚间周末或24小时服务场所，不据此称所有车队随时待命或品牌服务站更规律。"
             ]
           },
           "id": "actors.display.work_context_block.schedule",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "employer"
           ],
           "type": "prose"
         },
@@ -23593,12 +23633,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 摘要页与详细资料页：本职业 26 项任务（含使用手动与动力工具、检查制动与转向与车轮轴承、举升车辆与重件、连接测试仪器读表诊断、拆解并大修发动机与总成、检修燃油喷射系统、试车验证）、兴趣代码 RCI、工作情境比例与 Job Zone Three（SVP 6.0 到低于 7.0）。"
+              "自身26任务23Core/3Supplemental：排放测量、绿色实践、阀座研磨为补充；替代燃料系统保养维修为核心。任务含汽油或柴油发动机及车门座椅窗/轮胎/冷暖系统，不把页名当零交叉边界。美国BLS典型入口高中或同等学力、无相关工作经验、长期在岗训练；雇主可能偏好高中后柴油维修课程，认证可要求或偏好，大型公交卡车路试可能需CDL。O*NET JobZone3/SVP6到低于7及组级1—2年训练不保证本职业每人周期；学历受访意见39%高中后证书/37%高中，不等于法律或员工学历构成。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.onet",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24151,13 +24192,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "差异说明：同一项任务在三个层面上的结论往往不同。以故障诊断为例，技术上工具已能读取故障码、给出可能原因排序并提示历史相似案例；实际采用中，企业通常把工具用作线索而不是结论，因为拆检与测量仍需人来完成，且维修结论直接关系行车安全与责任归属；岗位结果上，采用更多体现为诊断入口变化与记录要求提高，而不是取消该任务。"
+              "BLS描述许多维修场所使用电脑诊断，非GenAI采用实测。编辑情景：只有具体工具经验证具备读码/检索/排序能力时，才能讨论辅助；本轮未核具体产品功能、采用率、诊断提速/记录提高或岗位因果。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "employer",
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24166,12 +24207,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据说明：本页使用的证据限于可核对的公开来源，包括 O*NET 的职业任务与工作情境数据、O*NET 记载的与诊断和检测相关的技术条目、ILO 关于生成式人工智能职业暴露的研究，以及 NIST 的人工智能风险管理框架。证据的用途是限定讨论范围与说明限制，不足以推出某位从业者、某个企业或某个地区的就业结果。"
+              "2025美国招聘关键词6项：Office/Excel各1%，Word/SAP低于1%，AutoCAD/SolidWorks为NA而非0；分母是全部关联本职业代码的唯一招聘帖，不是使用率/AI采用率。BLS描述电脑诊断，不能把普通诊断软件等同生成式AI。 ILO研究摘要未核与49-3031对应的ISCO细类评分；NIST自愿风险框架非维修规程或法律授权。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.3",
           "source_refs": [
             "r2-ai",
+            "sag",
             "nist"
           ],
           "type": "prose"
@@ -24241,12 +24283,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论与不宜推断的内容：就现有公开证据而言，可以说明的是任务层面的技术能力与采用方向，以及在安全与合规环节必须保留人工判断；不宜推断的是个人收入变化、某个城市的岗位数量变化，或某家企业是否因此裁员。本页不提供这些推断。"
+              "本轮可核任务、招聘技术词、BLS预测及风险治理参考；未核具体GenAI能力/实际采用与工资或裁员因果，不能称已证明采用方向或岗位无下降。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.8",
           "source_refs": [
+            "sag-moa",
             "r2-ai",
+            "employer",
+            "sag",
             "nist"
           ],
           "type": "prose"
@@ -24286,12 +24331,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答：AI 与自动化正在改变本职业的故障诊断入口与记录方式，但尚未改变其以实物拆检、测量与安全复装为核心的任务结构。O*NET 记载的相关技术条目集中在诊断、检测与信息查询环节；ILO 的职业暴露研究把这类职业界定为受生成式人工智能影响有限的一类；NIST 的风险管理框架则要求把工具输出视为需验证的输入。因此合理的判断是「诊断更快、记录更严、现场判断仍由人负责」，而不是「被取代」或「无影响」。"
+              "BLS有电脑诊断的职业描述；2025美国招聘关键词6项：Office/Excel各1%，Word/SAP低于1%，AutoCAD/SolidWorks为NA而非0；分母是全部关联本职业代码的唯一招聘帖，不是使用率/AI采用率。BLS描述电脑诊断，不能把普通诊断软件等同生成式AI。 编辑建议对具体工具先核功能/手册及测量依据，再考虑辅助记录和查询。本轮无本职业GenAI采用、提效或替代率，不能写“诊断更快、记录更严”已发生或永远不能替代。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
           "source_refs": [
+            "employer",
             "r2-ai",
+            "sag-moa",
             "nist"
           ],
           "type": "prose"
@@ -24316,13 +24363,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 记载的与诊断、检测和信息查询相关的技术条目，说明本职业已在使用诊断软件与检测设备。"
+              "2025美国招聘关键词6项：Office/Excel各1%，Word/SAP低于1%，AutoCAD/SolidWorks为NA而非0；分母是全部关联本职业代码的唯一招聘帖，不是使用率/AI采用率。BLS描述电脑诊断，不能把普通诊断软件等同生成式AI。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.1.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24346,13 +24392,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 关于生成式人工智能与职业暴露的研究，用于判断本职业在「暴露程度」分类中的位置。"
+              "ILO2025任务暴露研究摘要；本轮未核49-3031与ISCO映射评分，不据摘要确定本职业暴露类别。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag"
           ],
           "type": "prose"
         },
@@ -24361,13 +24406,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "限制：该研究衡量的是任务与技术的重叠程度，不是实际替代率，也未按国家或企业规模细分。"
+              "任务暴露与真实采用/替代/收入因果分开；摘要未核职业细类，不能由未读完整附表称研究没有。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag"
           ],
           "type": "prose"
         },
@@ -24391,13 +24435,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：任务结构决定工具只能改变入口与记录，不能替代实物作业。"
+              "当前任务含实物拆装测量及诊断；这不能证明任何自动化永远无法替代或只改变入口，具体能力与效果需另核。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24436,13 +24479,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：用工以车队与维修企业为主，长期在职培训是主要入门方式。"
+              "BLS自身2025主要雇主卡车运输18%、批发13%、地方政府（不含教育医院）9%、汽车维修9%、租赁6%；不是整个运输仓储大类占比。相应行业本职业中位年薪59820/63070/71460/60330/60220美元，不是全行业平均工资或技能因果。 美国BLS典型入口高中或同等学力、无相关工作经验、长期在岗训练；雇主可能偏好高中后柴油维修课程，认证可要求或偏好，大型公交卡车路试可能需CDL。O*NET JobZone3/SVP6到低于7及组级1—2年训练不保证本职业每人周期；学历受访意见39%高中后证书/37%高中，不等于法律或员工学历构成。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "employer",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24481,13 +24524,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：工具输出应作为待验证输入，并对涉及安全与合规的判定设置人工复核。"
+              "编辑参照自愿NIST框架把输出列待验证假设；实际维修安全、检验与记录按适用规章和厂家信息，不称框架规定本职业人工签署授权。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "nist",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -24526,13 +24569,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能由现有证据得出这一结论。BLS 职业展望给出的 2025—2035 年预测为 +4%（净增 11,400），O*NET 摘要页的 2024—2034 年口径为增长 1% 至 2%，两者都是职业总量变化；诊断工具影响的更可能是任务入口与记录要求。岗位数量还取决于货运量、公共交通预算与车辆保有量等与本页无关的因素。"
+              "当前美国自身49-3031：2025约316000个岗位，2035约327400，2025—2035增长4%、净增11400，年均24400空缺含增长与更替。O*NET/BLS当前同预测期，不能把旧2024—2034值再称当前另一口径；空缺非净新增或个人机会。 BLS货运/老车辆需求与电动车较少维修的解释非GenAI因果；本轮未核AI岗位结果。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.1.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "employer",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -24556,13 +24599,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "最清楚的是诊断与检测环节：读取故障码、参数趋势与历史相似案例，以及由此形成的结构化记录；其次是例行保养的排程与提醒。这些变化在 O*NET 的技术条目与任务描述中有对应，但技术条目只说明可得性，不说明采用比例。"
+              "2025美国招聘关键词6项：Office/Excel各1%，Word/SAP低于1%，AutoCAD/SolidWorks为NA而非0；分母是全部关联本职业代码的唯一招聘帖，不是使用率/AI采用率。BLS描述电脑诊断，不能把普通诊断软件等同生成式AI。 可核的是电脑诊断描述；相似案例/预测提醒/自动排程/提效为待核具体产品情景，不由技术词证明已经变化。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "employer",
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24586,13 +24629,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不可以。按 NIST 风险管理框架的思路，工具输出应作为待验证输入，需要用手册规定的测量与拆检确认；尤其是制动、转向与车轮轴承等安全部件，以及排放相关作业，结论必须经人工确认并留痕。"
+              "编辑建议不把原因排序直接当故障结论，依厂家技术信息及测量核实。NIST自愿框架仅治理参考；中国安全作业、适用检验与签署依机动车维修规定，不将所有项目强制质检同一流程。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.3.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "nist",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -24661,13 +24704,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现有证据不支持「柴油技能立即失效」的判断。本职业的对象是各类柴油发动机及其装用车辆，货运与公共交通中的重型车辆在可预见期内仍需维护；同时 O*NET 任务清单已包含维护或修理生物柴油、混合动力与压缩天然气等替代燃料系统的内容，说明技能本身在扩展。合理做法是保持机械与液压的基本功，并逐步补足高压电气与替代燃料系统的安全知识。"
+              "替代燃料系统保养维修是O*NET核心任务，但任务目录不是采用时间序列。BLS称电动车维修较少可能减少需求，不能保证所有柴油技能永不失效；编辑按目标车型和岗位范围核电气/燃料系统训练，未给通用高压操作方法。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.6.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24751,13 +24794,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET OnLine 本职业相关技术条目：用于说明诊断、检测与信息查询类技术的可得性，不说明采用比例。"
+              "2025美国招聘关键词6项：Office/Excel各1%，Word/SAP低于1%，AutoCAD/SolidWorks为NA而非0；分母是全部关联本职业代码的唯一招聘帖，不是使用率/AI采用率。BLS描述电脑诊断，不能把普通诊断软件等同生成式AI。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24781,13 +24823,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 生成式人工智能与职业暴露研究：用于判断本职业的暴露类别，不构成替代率或岗位结论。"
+              "ILO2025摘要未核49-3031映射和评分；不能据此把本职业归受GenAI影响有限类别。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag"
           ],
           "type": "prose"
         },
@@ -24856,13 +24897,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "就业与工资统计"
+              "全国工资分位"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls"
           ],
           "type": "prose"
         },
@@ -24871,13 +24911,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业展望与 OEWS 工资统计：用于说明岗位数量、预测期间、缺口与工资分位，均为美国受雇统计口径。"
+              "2025全国五分位年44530/50540/61770/75470/88740美元，时21.41/24.30/29.70/36.29/42.66。OEWS是雇员直时税前工资，含佣金等激励、生产奖金及规定津贴，排除加班溢价/轮班差额/非生产奖金等；非一概排除计件提成，不含自雇，非个人全年到手。 就业预测另见BLS手册与当前趋势，不把就业统称OEWS受雇覆盖。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24931,13 +24972,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "实际采用：企业与车队在成本、责任与合规约束下真正使用的程度，通常限于辅助诊断与记录，不替代实物验证。"
+              "实际采用是企业与车队真正使用相关技术的程度。本轮未取得本职业代表性AI采用调查；辅助诊断或记录是编辑建议研究场景，不是已核普遍采用范围，采用后仍需实物验证与授权复核。"
             ]
           },
           "id": "actors.display.ai_impact_table.method.2.concept",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "nist",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24991,13 +25033,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具的读码与趋势分析能力提升，可更快缩小排查范围"
+              "编辑情景：若诊断工具功能已验证，可辅助读码/整理参数，非已核GenAI功能或提速"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.1.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "cn-rule",
+            "employer"
           ],
           "type": "prose"
         },
@@ -25051,13 +25094,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "实物拆装与配合间隙的检查仍依赖人的手感与量具"
+              "编辑情景：若有适用数据和已验证模型，可辅助安排检查，本轮无预测维护产品/效果证据"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.2.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "cn-rule",
+            "employer"
           ],
           "type": "prose"
         },
@@ -25111,13 +25155,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "保养排程与提醒更多由车队系统或诊断提示驱动"
+              "实物拆检测量目前在任务清单；未核自动化替代能力，不能永久判“难替代”"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "cn-rule",
+            "employer"
           ],
           "type": "prose"
         },
@@ -25171,13 +25216,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "检测设备与法规要求同步更新，工具辅助判读"
+              "依现行规章、车型和厂家技术信息核具体检测；本轮无工具随法规同步更新实测"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "cn-rule",
+            "employer"
           ],
           "type": "prose"
         },
@@ -25291,13 +25337,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录从纸质转向结构化，配件来源与更换件更易追溯"
+              "规定已有电子维修档案/系统接口要求；是制度非纸转结构化采用率或AI效果"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "cn-rule",
+            "employer"
           ],
           "type": "prose"
         },
@@ -25306,12 +25353,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录的真实完整与签名责任仍由作业人员承担"
+              "编辑建议：作业人员如实核对本人维修记录与实物；质量检验与竣工合格证签发由适用法规及单位制度规定的人员承担。中国第32条签发主体是维修质量检验人员，不将作业记录责任等同全部签发责任。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.human-control",
           "source_refs": [
-            "r2-ai",
+            "cn-rule",
+            "employer",
             "nist"
           ],
           "type": "prose"
@@ -25351,13 +25399,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "历史工单与知识库可辅助说明维修方案"
+              "编辑情景：经授权且适用的历史工单可以辅助说明，未核知识库产品功能或普及"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.7.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "cn-rule",
+            "employer"
           ],
           "type": "prose"
         },
@@ -25396,13 +25445,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具已能在给定数据下完成读码、参数趋势分析与相似案例检索，并给出可能原因排序。"
+              "编辑条件情景：若具体工具有经验证读码/检索/排序功能，可辅助提出假设；本轮未核产品功能。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.1.change",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "employer",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -25441,13 +25491,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "多数维修企业与车队把工具用于辅助诊断与记录留痕，不用于替代实物验证。"
+              "2025美国招聘关键词6项：Office/Excel各1%，Word/SAP低于1%，AutoCAD/SolidWorks为NA而非0；分母是全部关联本职业代码的唯一招聘帖，不是使用率/AI采用率。BLS描述电脑诊断，不能把普通诊断软件等同生成式AI。 未取得维修企业/车队GenAI采用比例，不称多数企业的用法。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.2.change",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "employer",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -25486,13 +25537,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "尚无公开证据显示本职业因工具采用出现岗位总量下降；预测仍为增长或基本持平。"
+              "当前美国自身49-3031：2025约316000个岗位，2035约327400，2025—2035增长4%、净增11400，年均24400空缺含增长与更替。O*NET/BLS当前同预测期，不能把旧2024—2034值再称当前另一口径；空缺非净新增或个人机会。 本轮未取得GenAI采用引起岗位结果的因果资料，不称所有公开证据均无下降。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.3.change",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "employer",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -26019,12 +26071,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与柴油设备维修技师与机械师（美国 O*NET 49-3031.00）对应的中国大陆全国单职业工资分布。中国大陆的柴油车辆维修人员分布在一类、二类与三类机动车维修经营者、品牌服务站、公交与货运企业自有维修场站以及个体维修点，报酬按用工单位岗位薪酬制度与计件、工时或提成办法确定，公开统计未建立与该职业一一对应的职业级口径，本页不以行业均值或招聘报价替代。"
+              "证据不足：本轮未取得中国柴油维修单职业工资分布及代表性招聘样本。NBS2025居民服务、修理和其他服务业非私营70226/私营52059元年均，实际运输单位另有133981/73133；5人以上城镇法人、多职业、非私营不限国企，排除个体自由职业，仅匹配单位行业背景而非本职业工资/中位数/报价。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26033,12 +26085,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "统计口径：国家统计局发布的城镇单位就业人员平均工资按行业门类与单位类型发布，交通运输、仓储和邮政业等行业均值包含大量与本职业无关的岗位，居民服务、修理和其他服务业同样无法拆分到本职业，因此不能当作本职业工资；本页在该板块保留可见缺口标记，并说明缺口的具体位置。"
+              "证据不足：本轮未取得中国柴油维修单职业工资分布及代表性招聘样本。NBS2025居民服务、修理和其他服务业非私营70226/私营52059元年均，实际运输单位另有133981/73133；5人以上城镇法人、多职业、非私营不限国企，排除个体自由职业，仅匹配单位行业背景而非本职业工资/中位数/报价。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26047,12 +26099,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "计酬与披露：行业内常见的形式包括岗位月薪加绩效、按工时单价与完成工单结算、按项目或按件计酬，以及自营与合伙经营的营业收入；一些企业按维修工时定额与工时单价计算工时费并另有材料费，另有企业实行技能等级与绩效挂钩。上述形式彼此差异较大，无法折算成一个全国中位数，也不适合与美国的受雇工资统计直接比较。"
+              "编辑核具体劳动合同的月薪、计件/绩效及工时待遇；本轮无样本证明普遍方式。第25—26条维修工时费/材料费是向托修方收费，不是员工工资算法；结算单不代工资条。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "sag-moa"
+            "cn-rule",
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26061,12 +26114,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "用工与训练费用：用工形式包括维修企业员工、车队与公交企业维修人员、品牌服务站技术人员与个体经营者；训练与取证费用按单位制度与地方政策执行，部分地区对取得职业技能等级证书的人员有技能提升补贴政策，具体条件以当地人力资源社会保障部门公布为准。"
+              "雇员与自营营业收入分开，按真实单位核训练取证支出；本轮未核当地技能补贴条件、费用周期，不给统一可领补贴结论。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "sag-moa"
+            "r5-cn-standard",
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26075,12 +26129,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "比较与边界：美国分位是受雇税前工资统计口径，不含加班费与计件提成；中国大陆的岗位薪酬制度与自营收入在计酬方式与覆盖人群上与美国统计不同，应分别解释而不是直接换算；本页不据网络流传报价推算任何数值。"
+              "2025全国五分位年44530/50540/61770/75470/88740美元，时21.41/24.30/29.70/36.29/42.66。OEWS是雇员直时税前工资，含佣金等激励、生产奖金及规定津贴，排除加班溢价/轮班差额/非生产奖金等；非一概排除计件提成，不含自雇，非个人全年到手。 证据不足：本轮未取得中国柴油维修单职业工资分布及代表性招聘样本。NBS2025居民服务、修理和其他服务业非私营70226/私营52059元年均，实际运输单位另有133981/73133；5人以上城镇法人、多职业、非私营不限国企，排除个体自由职业，仅匹配单位行业背景而非本职业工资/中位数/报价。 中美分市场解释，不直接汇率换算。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "bls",
+            "r5-oews-concepts",
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26103,12 +26159,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "引用范围：本板块只说明中国大陆的统计口径、计酬方式与可核对的制度性要求；凡未取得职业级数据的数值，均以可见缺口标记保留，不以任何代理值填充。"
+              "职业工资缺口保留；匹配行业年均仅补充背景，维修收费/企业备案与雇员报酬、技能评价分开。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26117,12 +26174,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与柴油设备维修技师与机械师（美国 O*NET 49-3031.00）对应的中国大陆全国单职业工资分布；公开工资统计最高细分到行业门类与人员类别，行业均值与网络招聘报价均不可替代本职业工资。"
+              "证据不足：本轮未取得中国柴油维修单职业工资分布及代表性招聘样本。NBS2025居民服务、修理和其他服务业非私营70226/私营52059元年均，实际运输单位另有133981/73133；5人以上城镇法人、多职业、非私营不限国企，排除个体自由职业，仅匹配单位行业背景而非本职业工资/中位数/报价。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26131,12 +26188,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "品牌服务站与一类维修企业：以技术负责人员、质量检验人员与机修、电器、钣金、涂漆维修技术人员的配备要求组织生产，报酬通常为岗位薪酬加绩效，技能等级与认证影响定级。"
+              "中国机动车维修经营者登记后向所在地县级交通运输主管部门备案，备案不收费用，范围与类别按经营项目。第12条一二类技术负责/质量检验/接待和各类维修人员各至少1名；三类综合小修、发动机、车身、电气、自动变速器维修也配技术负责与质量检验，不能遗漏。质量检验人员须相适应驾驶证，非所有维修工统一驾驶门槛；企业备案不代个人技能/岗位权限。 人员配备要求不证明岗位薪酬加绩效普遍或技能等级必然影响定级。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "sag-moa"
+            "cn-rule",
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26145,12 +26203,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "公交与货运企业自有维修场站：服务本单位车队，工作按运营班次与停运窗口安排，常见轮班与值班抢修，报酬按企业岗位薪酬制度与班次待遇确定。"
+              "编辑车队维修岗位例须核真实班次/停运窗口及报酬约定；本轮无中国样本证明轮班、抢修普遍。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "sag-moa"
+            "cn-rule",
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26159,12 +26218,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "三类专项维修与个体维修点：按备案经营项目开展发动机维修、电气系统维修、喷油泵和喷油器维修等专项作业，计酬更接近按件或按工时议价，收入波动与当地业务量和个人客户资源相关。"
+              "三类备案项目包括发动机、电气、喷油泵喷油器等，不以此证明按件/工时工资普遍或收入波动因果。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "sag-moa"
+            "cn-rule",
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26173,12 +26233,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "统计与制度口径：机动车维修经营实行备案管理，维修工时定额与工时单价标准可依行业协会标准、备案标准或生产厂家公布标准执行，三者不一致时优先适用备案标准；这些制度约束说明计酬方式的多样性，但不提供本职业的全国工资分布。"
+              "第25—26条规定维修收费公开工时单价/定额与材料分列，标准冲突优先备案；这是客户维修费用，不证明员工计薪方式。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
           "source_refs": [
-            "sag-moa"
+            "cn-rule",
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26187,12 +26248,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "连续性说明：车辆维修收入受货运量与公共交通预算、车辆保有量与车龄结构、以及替代燃料与电动化进程影响，不同年份与地区之间波动明显；本页不把某一年的单点报价写成稳定水平。"
+              "编辑需核真实业务/合同和可比连续样本；BLS美国需求说明不能推出中国个人收入明显波动，本轮没有本职业收入时间序列。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
           "source_refs": [
-            "sag-moa"
+            "cn-rule",
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26252,13 +26314,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "分位怎么读：第 10 分位表示约有一成从业者低于该水平，第 90 分位表示约有一成从业者高于该水平；工资差异通常与专精方向（诊断、燃油喷射、电气、总成大修或车队主管）、认证数量、雇主类型、地区生活成本与班次加班安排相关，来源未证明分位与经验年限的对应关系。"
+              "低/高分位是统计位置非起薪/技能或年限线；全国分布未证明专精、认证数量、地区或班次与分位的因果。BLS认证可能带来更高工资的描述非定量保证；具体合同与地区工资另核。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
             "bls",
-            "oews"
+            "employer",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26267,13 +26330,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业与预测：O*NET 摘要页以 2024 年为基期给出约 319,900 人的就业规模、2024—2034 年增长 1% 至 2%（低于平均）与约 26,500 个预计空缺；BLS 职业展望以 2025 年 316,000 个岗位、2025—2035 年 +4%（与平均相当）、净增 11,400 给出另一口径。两者基期与期间不同，应分别引用，不能直接相加或换算。"
+              "当前美国自身49-3031：2025约316000个岗位，2035约327400，2025—2035增长4%、净增11400，年均24400空缺含增长与更替。O*NET/BLS当前同预测期，不能把旧2024—2034值再称当前另一口径；空缺非净新增或个人机会。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "bls",
-            "oews"
+            "employer",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -26297,13 +26360,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与工作情境：O*NET 以 2024 年为基期给出的主要行业门类是运输与仓储、批发贸易，未附占比与人数，也未提供行业工资数值；工作情境显示接触污染物 85% 每天、噪音 81% 每天、室内但无环境控制 74% 每天、处于封闭车辆或操作封闭设备 68% 每天，这些条件在判断长期适配时同样重要。"
+              "BLS自身2025主要雇主卡车运输18%、批发13%、地方政府（不含教育医院）9%、汽车维修9%、租赁6%；不是整个运输仓储大类占比。相应行业本职业中位年薪59820/63070/71460/60330/60220美元，不是全行业平均工资或技能因果。 美国57项情境实际核：污染85%每天、噪声81%每天、危险设备60%每天、PPE78%每天；手操作80%持续、站立59%持续、弯身59%持续；准确53%极其重要、他人安全72%很高责任、面对面90%每天。是调查频率/意见，不是事故率、全部工位条件或中国分布。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "bls",
-            "oews"
+            "employer",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26312,13 +26375,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "比较边界：本职业的受雇工资统计不含加班费、轮班津贴与计件提成，也不含自营与承包收入；与其他职业比较时应先确认职业代码、统计期、单位（年或小时）与是否包含津贴，缺一不可比较。"
+              "2025全国五分位年44530/50540/61770/75470/88740美元，时21.41/24.30/29.70/36.29/42.66。OEWS是雇员直时税前工资，含佣金等激励、生产奖金及规定津贴，排除加班溢价/轮班差额/非生产奖金等；非一概排除计件提成，不含自雇，非个人全年到手。 中美覆盖/单位/期间分别核，不能直接推个人收入。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26387,13 +26450,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "分位是统计位置：低分位不代表入职起薪，高分位也不代表个人可主张的报价；专精方向、认证、雇主类型与地区差异会明显影响实际水平。"
+              "低/高分位是统计位置非起薪/技能或年限线；全国分布未证明专精、认证数量、地区或班次与分位的因果。BLS认证可能带来更高工资的描述非定量保证；具体合同与地区工资另核。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.percentile",
           "source_refs": [
             "bls",
-            "oews"
+            "employer",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26402,13 +26466,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "预测是职业总量变化：O*NET 摘要页 2024—2034 年为增长 1% 至 2%，BLS 职业展望 2025—2035 年为 +4%；期间与基期不同，应分别引用。"
+              "当前美国自身49-3031：2025约316000个岗位，2035约327400，2025—2035增长4%、净增11400，年均24400空缺含增长与更替。O*NET/BLS当前同预测期，不能把旧2024—2034值再称当前另一口径；空缺非净新增或个人机会。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.project",
           "source_refs": [
-            "bls",
-            "oews"
+            "employer",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -26432,13 +26496,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "运输与仓储、批发贸易（O*NET 2024 年基期给出的主要行业门类，未附占比与人数）。"
+              "BLS自身2025主要雇主卡车运输18%、批发13%、地方政府（不含教育医院）9%、汽车维修9%、租赁6%；不是整个运输仓储大类占比。相应行业本职业中位年薪59820/63070/71460/60330/60220美元，不是全行业平均工资或技能因果。 行业职业工资非工作情境；暴露调查与受雇统计分开。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
-            "bls",
-            "oews"
+            "employer",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26447,13 +26511,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "典型作业场所为维修车间与车队场站，通风较为良好但有时嘈杂，偶尔在路边或作业现场维修；多数全职，部分每周超过 40 小时。"
+              "BLS自身2025主要雇主卡车运输18%、批发13%、地方政府（不含教育医院）9%、汽车维修9%、租赁6%；不是整个运输仓储大类占比。相应行业本职业中位年薪59820/63070/71460/60330/60220美元，不是全行业平均工资或技能因果。 行业职业工资非工作情境；暴露调查与受雇统计分开。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
-            "bls",
-            "oews"
+            "employer",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26462,13 +26526,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工作情境：接触污染物 85% 每天、噪音 81% 每天、用手操作与控制工具 80% 持续、穿戴防护装备 78% 每天、处于封闭车辆或操作封闭设备 68% 每天。"
+              "BLS自身2025主要雇主卡车运输18%、批发13%、地方政府（不含教育医院）9%、汽车维修9%、租赁6%；不是整个运输仓储大类占比。相应行业本职业中位年薪59820/63070/71460/60330/60220美元，不是全行业平均工资或技能因果。 行业职业工资非工作情境；暴露调查与受雇统计分开。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.amusement",
           "source_refs": [
-            "bls",
-            "oews"
+            "employer",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26507,13 +26571,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "有薪岗位的可得性：货运量、公共交通预算与车队规模影响维修岗位数量与加班机会，进而影响实际年收入。"
+              "BLS美国需求解释和行业工资可作背景；未核班次/地区与个人全年收入因果。BLS自身2025主要雇主卡车运输18%、批发13%、地方政府（不含教育医院）9%、汽车维修9%、租赁6%；不是整个运输仓储大类占比。相应行业本职业中位年薪59820/63070/71460/60330/60220美元，不是全行业平均工资或技能因果。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.paid-work",
           "source_refs": [
-            "bls",
-            "oews"
+            "employer",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26522,13 +26586,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "专精方向与认证：诊断、燃油喷射、电气与总成大修的专精程度以及行业认证数量，通常与工资分位高低相关。"
+              "低/高分位是统计位置非起薪/技能或年限线；全国分布未证明专精、认证数量、地区或班次与分位的因果。BLS认证可能带来更高工资的描述非定量保证；具体合同与地区工资另核。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.scope",
           "source_refs": [
             "bls",
-            "oews"
+            "employer",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26537,13 +26602,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "雇主类型与班次：品牌服务站、车队与公交企业自有场站、批发与经销维护环节的薪酬结构与轮班安排不同。"
+              "BLS美国需求解释和行业工资可作背景；未核班次/地区与个人全年收入因果。BLS自身2025主要雇主卡车运输18%、批发13%、地方政府（不含教育医院）9%、汽车维修9%、租赁6%；不是整个运输仓储大类占比。相应行业本职业中位年薪59820/63070/71460/60330/60220美元，不是全行业平均工资或技能因果。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.setting",
           "source_refs": [
-            "bls",
-            "oews"
+            "employer",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26567,13 +26632,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界：本板块为美国官方统计口径，不含津贴、加班与自营收入，也不等同于中国大陆的岗位薪酬制度与自营收入；两个市场的计酬方式与覆盖人群不同，应分别解释而不是直接换算。"
+              "2025全国五分位年44530/50540/61770/75470/88740美元，时21.41/24.30/29.70/36.29/42.66。OEWS是雇员直时税前工资，含佣金等激励、生产奖金及规定津贴，排除加班溢价/轮班差额/非生产奖金等；非一概排除计件提成，不含自雇，非个人全年到手。 中美覆盖/单位/期间分别核，不能直接推个人收入。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.boundary.detail",
           "source_refs": [
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         }
@@ -26730,12 +26795,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 给出的本职业兴趣代码为 RCI：现实型（Realistic）居首，工作涉及设计、建造或修理设备与材料、进行体力活动或在户外工作，其子领域包括机械与电子维修、体力与手工劳动、工程；常规型（Conventional）次之，工作涉及遵循程序与规程来组织信息或数据；研究型（Investigative）再次，工作涉及研究实物与原因。"
+              "O*NET兴趣R100/C46/I38/S9/E5/A0支持RCI，非个人能力/录用线；17工作风格Impact可靠82、细节81、谨慎65、坚持59、抗压42等，非大五分数或人口比例。近距视力75/手部稳定72为能力重要性，不是IQ阈值；本职业人格测试/学习预测效度未核。"
             ]
           },
           "id": "actors.display.riasec_fit_block.interest",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26744,12 +26809,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "这个组合说明：本职业既需要动手与实物判断（现实型），也需要按手册与规程办事（常规型），并需要为确定故障原因做假设与验证（研究型）。三者缺一时，实际工作体验往往与期待不符——例如偏好抽象分析但不愿动手的人，会在拆检与举升环节感到吃力。兴趣代码只用于自我了解，不用于录用、筛选或诊断。"
+              "编辑观察动手、规程与故障假设体验；兴趣代码不决定个人承受力或录用。O*NET兴趣R100/C46/I38/S9/E5/A0支持RCI，非个人能力/录用线；17工作风格Impact可靠82、细节81、谨慎65、坚持59、抗压42等，非大五分数或人口比例。近距视力75/手部稳定72为能力重要性，不是IQ阈值；本职业人格测试/学习预测效度未核。"
             ]
           },
           "id": "actors.display.riasec_fit_block.fit-interest",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26842,12 +26907,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 兴趣代码为 RCI：现实型居首，常规型与研究型紧随。若你偏好动手与实物判断、同时能接受规程与记录要求，方向吻合度较高。"
+              "O*NET兴趣R100/C46/I38/S9/E5/A0支持RCI，非个人能力/录用线；17工作风格Impact可靠82、细节81、谨慎65、坚持59、抗压42等，非大五分数或人口比例。近距视力75/手部稳定72为能力重要性，不是IQ阈值；本职业人格测试/学习预测效度未核。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.riasec.answer",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26884,12 +26949,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：中。依据 O*NET 兴趣条目（从业者与分析师评定的职业特征），用于职业层面的自我了解。"
+              "六个职业兴趣评分及RCI已核；不由此给个人适配预测中等级，个体效度未核。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26940,12 +27005,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本职业需要较高的尽责性（按规格执行、复核不省略）与一定情绪稳定性（面对客户催促与现场突发状况）。大五模型在职业行为研究中使用较广，但个体预测力有限。"
+              "O*NET兴趣R100/C46/I38/S9/E5/A0支持RCI，非个人能力/录用线；17工作风格Impact可靠82、细节81、谨慎65、坚持59、抗压42等，非大五分数或人口比例。近距视力75/手部稳定72为能力重要性，不是IQ阈值；本职业人格测试/学习预测效度未核。 不由工作风格推个人需要“较高尽责/情绪稳定”测验阈值。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.big-five.answer",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26982,12 +27047,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：中。大五模型有较丰富的实证研究支撑，但对个体岗位表现的预测力有限，且受情境影响。"
+              "本轮未取得本职业测验预测效度，不能给中/低等级或一般研究相关性作已核职业依据；编辑自我观察不代技能训练和岗位条件。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27024,12 +27089,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 可用于自我反思与沟通风格讨论，但没有充分证据支持其预测岗位表现或职业适配；本职业所需的动手能力、规程执行与安全判断，无法由类型字母推断。"
+              "编辑可用偏好描述作自我观察，本轮未核MBTI职业表现预测研究；类型不直接推出维修技能或任务许可。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.answer",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27066,12 +27131,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：低。类型划分的稳定性与预测效度受到质疑，不应用于招录、晋升或淘汰。"
+              "本轮未取得本职业测验预测效度，不能给中/低等级或一般研究相关性作已核职业依据；编辑自我观察不代技能训练和岗位条件。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27122,12 +27187,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格属流行性自我探索工具，缺乏与岗位表现相关的实证支持；它可以帮助反思动机与压力反应，但不能判断是否适合体力与规程并重的工作。"
+              "编辑自我探索参考；本轮未核九型人格与本职业表现关系，不以类型判体力规程工作胜任。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.enneagram.answer",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27164,12 +27229,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：低。缺少可靠的预测效度证据。"
+              "本轮未取得本职业测验预测效度，不能给中/低等级或一般研究相关性作已核职业依据；编辑自我观察不代技能训练和岗位条件。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27220,12 +27285,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "认知能力与学习新机型、读懂手册和排查故障确有关系，但单一分数不能决定职业适配，也无法反映动手能力、规程执行与安全判断；本职业的入门学历要求为高中或同等学力，准备层级为 Job Zone Three。"
+              "O*NET兴趣R100/C46/I38/S9/E5/A0支持RCI，非个人能力/录用线；17工作风格Impact可靠82、细节81、谨慎65、坚持59、抗压42等，非大五分数或人口比例。近距视力75/手部稳定72为能力重要性，不是IQ阈值；本职业人格测试/学习预测效度未核。 美国BLS典型入口高中或同等学力、无相关工作经验、长期在岗训练；雇主可能偏好高中后柴油维修课程，认证可要求或偏好，大型公交卡车路试可能需CDL。O*NET JobZone3/SVP6到低于7及组级1—2年训练不保证本职业每人周期；学历受访意见39%高中后证书/37%高中，不等于法律或员工学历构成。 标准职业能力特征不是通用测验录用线，未核分数与具体维修学习相关幅度。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.answer",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "employer",
+            "r5-cn-standard"
           ],
           "type": "prose"
         },
@@ -27262,12 +27329,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：中。认知能力与工作学习有相关，但对具体岗位的预测不应被夸大，且测量结果受练习与情境影响。"
+              "本轮未取得本职业测验预测效度，不能给中/低等级或一般研究相关性作已核职业依据；编辑自我观察不代技能训练和岗位条件。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.evidence-level",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27318,12 +27385,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本职业需要与服务顾问、客户、配件供应与班组长沟通，也需要在客户催促与复修压力下保持克制；情绪与沟通能力有帮助，但「情绪智力」缺乏统一测量标准，不宜作为准入判断。"
+              "面对面90%每天/联系51%持续提示沟通存在，不代表EQ测验阈值或统一概念无标准；编辑核故障澄清与交接行为，本轮未核测试效度。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.eq.answer",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27360,12 +27427,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：低到中。概念与测量方法尚不统一，用于自我反思更合适。"
+              "本轮未取得本职业测验预测效度，不能给中/低等级或一般研究相关性作已核职业依据；编辑自我观察不代技能训练和岗位条件。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.eq.evidence-level",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27458,12 +27525,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻职业：汽车维修技师与机械师：以汽油发动机乘用车与轻型车为主，作业更标准化，车载电控与快修比例较高。"
+              "相邻汽车维修49-3023诊断调整修理或大修汽车；与柴油维修有交叉，不据标题保证更标准化/快修电控比例更高。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.direction",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27486,12 +27553,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "转向前需补齐柴油燃油与排放系统、总成大修工艺与重型车辆安全规程。"
+              "从柴油维修转向49-3023时核目标车型汽车系统/流程和实际岗位权限，不反向要求补柴油作为目标差距；未量化训练周期。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.watchouts",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27584,12 +27651,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻职业：铁路车辆检修工：按铁路修程体系与检修规程作业，受行车组织与轨道作业安全约束。"
+              "相邻铁路车辆检修49-3043诊断调整修理或大修铁路车辆、矿车或轨道公交，编辑按实际对象与岗位安全体系核。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.direction",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27612,12 +27679,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "作业窗口与安全约束更严格，跨行业转岗需重新学习规程体系。"
+              "铁路车辆49-3043诊断调整修理或大修车辆含铁路/矿车/轨道公交；编辑核目标对象与实际安全体系，未比较比公路维修更严格。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.watchouts",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27682,12 +27749,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "两种兴趣都可能支持入行，但走向不同：来自动手的人更容易适应日常拆检与保养；来自结果的人更需要通过专精方向（诊断、燃油喷射、总成）建立成就感。可以先在受监督的保养与拆检任务中验证自己是否享受过程。"
+              "编辑通过安全纸面任务观察愿不愿动手、按规格核查和记录；本轮未核兴趣来源与适应/成就感的因果，不能按来自动手或结果分配专精。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.interest.answer",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27710,12 +27777,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。本职业的沟通对象相对固定（服务顾问、配件供应、班组长与客户），且面对面讨论 90% 每天说明沟通是日常工作的一部分，但不需要高强度社交。关键是能否把故障、费用与时间说清楚，并在压力下保持克制。"
+              "面对面90%每天/联系51%持续；沟通强度和对象按岗位核，不据此保证内外向均适岗或无需高强度社交。编辑关注故障、费用与交接说明。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.outgoing.answer",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27738,12 +27805,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有外形门槛，但有明确的防护与着装要求：需要穿戴安全鞋、护目镜、手套、听力保护与工作服，焊接与高处作业另有专项防护；部分工种对身体条件有要求（如色觉与手部灵活性）。这些要求出于安全作业需要，不构成对外形的评价。"
+              "PPE78%每天为美国调查而非统一每人装备清单。2018中国标准正常色觉仅从事车身涂装修复人员；其他具体健康/防护要求按实际工序，不泛化所有维修人员外形或色觉门槛。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.appearance.answer",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "r5-cn-standard",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -27766,12 +27835,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "典型工作周超过 40 小时占 53%，车队与货运维修存在轮班与随时抢修；时间压力 40% 每天。若无法接受这样的节奏，可优先考虑作业时间更固定的品牌服务站岗位。"
+              "O*NET典型周53%超过40小时/46%40小时，87%规律排班不等固定工作日无夜班，时间压力40%每天。BLS部分晚间周末或24小时服务场所，不据此称所有车队随时待命或品牌服务站更规律。 先核目标岗位班表，未核品牌服务站时间更固定。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.schedule.answer",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27878,12 +27948,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "BLS 职业展望：本职业的准备层级、典型入门学历与在职培训说明，用于说明训练路径而非个人能力判断。"
+              "原bls为工资页非准备层级；美国BLS典型入口高中或同等学力、无相关工作经验、长期在岗训练；雇主可能偏好高中后柴油维修课程，认证可要求或偏好，大型公交卡车路试可能需CDL。O*NET JobZone3/SVP6到低于7及组级1—2年训练不保证本职业每人周期；学历受访意见39%高中后证书/37%高中，不等于法律或员工学历构成。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.bls",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27892,12 +27963,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "雇主实际岗位要求：不同企业与车队对认证、驾照与专精方向的要求不同，应以招聘信息与岗位说明为准。"
+              "原employer为BLS手册而非实采招聘，认证/CDL偏好按真实岗位核，本轮无招聘样本。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.employer",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -27962,12 +28033,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻职业作业体系（铁路车辆检修工）：用于说明修程体系与公路车辆维修在节奏与规程上的差异。"
+              "显示目标铁路车辆49-3043，原art为49-9044设备安装不能支持铁路；转向对象、任务与实际训练核。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.art",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         }
@@ -28104,12 +28175,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：以下风险条目依据 O*NET 的任务与工作情境数据（接触污染物 85% 每天、噪音 81% 每天、暴露于危险设备 60% 每天、对其他工人健康与安全负很高责任 72%）、中国大陆《机动车维修管理规定》关于从业人员执行安全生产操作规程与配件追溯的要求，以及 NIST 人工智能风险管理框架关于工具输出需验证的要求整理。"
+              "风险是编辑场景，实际O*NET情境频率非伤病率，机动车维修第29—33条质量/档案与责任限定项目。未取得真实单位停工恢复制度或事故率；NIST自愿框架非维修安全授权。"
             ]
           },
           "id": "actors.display.career_risk_cards.evidence-scope",
           "source_refs": [
-            "sag",
+            "sag-moa",
+            "cn-rule",
             "nist"
           ],
           "type": "prose"
@@ -28374,13 +28446,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "属明令禁止的作业，可能导致行政处罚、检验结果无效与信誉损失。"
+              "第29条禁止维修经营者为过检临时替换污染控制/破坏OBD；经营者与个人责任分开，本轮未逐核具体处罚条款或检验无效程序，不给统一个人处罚结论。"
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -28494,13 +28565,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "收入增长与岗位选择受限，遇到技术变化时适应较慢。"
+              "编辑风险场景：目标设备变化时需核任务训练差距；本轮未核单一重复工作导致收入增长受限的因果或幅度。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28509,13 +28580,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS 职业展望与 O*NET 工作情境：用于说明作业条件与责任程度（对其他工人健康与安全负很高责任 72%、暴露于危险设备 60% 每天）。"
+              "原bls是工资页面，不支持危险设备或安全责任；实际O*NET详细情境美国57项情境实际核：污染85%每天、噪声81%每天、危险设备60%每天、PPE78%每天；手操作80%持续、站立59%持续、弯身59%持续；准确53%极其重要、他人安全72%很高责任、面对面90%每天。是调查频率/意见，不是事故率、全部工位条件或中国分布。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.bls",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28524,13 +28594,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "雇主安全制度与岗位说明：实际的防护要求、作业许可与培训安排以雇主制度为准。"
+              "原employer是BLS手册非真实雇主制度；实际安全授权、防护和训练须读目标单位，本轮未实采。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.employer",
           "source_refs": [
-            "sag",
-            "nist"
+            "employer",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -28554,13 +28624,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "ILO 职业暴露研究：用于说明技术变化对任务的影响范围，不作为安全风险的依据。"
+              "美国57项情境实际核：污染85%每天、噪声81%每天、危险设备60%每天、PPE78%每天；手操作80%持续、站立59%持续、弯身59%持续；准确53%极其重要、他人安全72%很高责任、面对面90%每天。是调查频率/意见，不是事故率、全部工位条件或中国分布。 当前链接为O*NET详细档案，不是ILO研究。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.sag",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28627,7 +28696,7 @@
                 "在师傅或班组长指导下完成换油、滤芯与电池检查、润滑与轮胎拆装，并按工单记录完成情况",
                 "是否按安全规程穿戴防护与支撑车辆、是否按规格操作、是否能如实填写工单",
                 "用受监督作业的评价记录或职业教育实训记录说明自己按规程完成过基础任务",
-                "以例行保养与拆装为主，不独立做诊断与总成大修，是进入维修岗最常见的起点"
+                "编辑入门方向例，未核最常见起点或所有初期权限"
               ],
               [
                 "诊断辅助岗",
@@ -28648,21 +28717,21 @@
                 "按运营停运窗口完成车辆检查与维修，参与抢修并填写维修记录",
                 "是否能在班次与时间压力下保持规程执行、是否按记录要求交接",
                 "用轮班与抢修情境下的任务清单说明自己理解时间压力下仍不能省略的步骤",
-                "作业节奏由运营安排决定，需要适应轮班与随时抢修"
+                "具体班次/抢修和运营窗口按真实岗位核，未核随时待命普遍"
               ],
               [
                 "专项维修与个体经营岗",
                 "从事喷油泵与喷油器维修、电气系统维修、发动机维修等备案经营范围内的专项作业",
                 "是否具备相应专项能力、是否按备案经营范围承接业务、是否留存配件来源与结算清单",
                 "用一份专项作业的工艺说明与记录模板说明自己理解合规与追溯要求",
-                "收入更接近按件或按工时议价，需要同时具备技术与客户与合规意识"
+                "经营收费与雇员工资分开，未核按件/工时工资普遍；专项项目按备案范围"
               ]
             ]
           },
           "id": "actors.path.entry-role-comparison.1",
           "source_refs": [
-            "onet",
-            "bls",
+            "sag-moa",
+            "employer",
             "cn-rule"
           ],
           "title": "常见入门方向与初期任务",
@@ -28677,37 +28746,36 @@
                 "id": "employer-0",
                 "values": [
                   "安全作业与防护",
-                  "是否穿戴防护装备并按规程举升支撑、断电与泄压；这是雇主最先观察、也最不允许省略的一项"
+                  "编辑核实际规程和授权；未核雇主最先观察或统一顺序"
                 ]
               },
               {
                 "id": "employer-1",
                 "values": [
                   "按规格与手册作业",
-                  "是否查手册、按扭矩与间隙规格复装、是否使用规定量具而不是凭手感判断"
+                  "第29条按适用标准、无相应标准时参厂家信息，不凭手感代规格"
                 ]
               },
               {
                 "id": "employer-2",
                 "values": [
                   "测量与记录",
-                  "是否会读取并记录压力、温度、间隙与电压等数据，记录是否可让同事复核"
+                  "O*NET填写工单记录为任务；编辑观察数据可复核，非统一雇主录用门槛"
                 ]
               },
               {
                 "id": "availability",
                 "values": [
                   "协作与交付",
-                  "是否愿意按流程交接、接受质量检验人员的复核意见、并如实说明尚未确认的问题"
+                  "编辑核未确认问题交接；质检签署与额外档案限定第31—33条相应维修项目"
                 ]
               }
             ]
           },
           "id": "actors.path.employer-evidence.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "cn-rule",
+            "sag-moa"
           ],
           "title": "雇主与机构会核对什么",
           "type": "cards"
@@ -28835,18 +28903,18 @@
                 "高中或同等学力",
                 "所有希望进入本职业的人",
                 "多数雇主的入门学历要求；高中或中等职业学校阶段的汽车与电子与数学课程构成知识基础",
-                "在美国属于典型入门要求，不构成对所有人的硬性门槛，但缺此学历会显著缩小选择",
+                "BLS典型入口不是法定所有雇主学历线",
                 "按当地学制完成学业",
                 "时间为数年，主要投入是学业本身",
                 "学历不说明动手能力，也不替代安全与规程训练"
               ],
               [
                 "职业院校或中学后柴油机维修课程",
-                "希望缩短入职适应期、提高起薪竞争力的人",
+                "希望系统学习柴油维修知识与实操的候选人；课程是否提高起薪本轮未核。",
                 "部分雇主优先录用完成柴油机维修证书或学位课程的候选人",
-                "不是普遍强制要求，但会影响能否进入品牌服务站或车队核心岗位",
+                "BLS支持部分雇主偏好完成高中后柴油维修课程；未核品牌服务站或车队核心岗位统一门槛，应查目标企业实际要求。",
                 "技工院校或职业院校相关专业入学条件；课程通常混合课堂与实操",
-                "时间从数月到两年不等，费用按院校标准",
+                "证据不足：本轮未核具体课程实际费用/周期；长期在岗是典型类别",
                 "课程完成不等于持证或取得作业授权，仍须在职训练与确认"
               ],
               [
@@ -28854,8 +28922,8 @@
                 "希望在专精方向建立可核对证据的在岗人员",
                 "用于证明特定方向的能力，部分雇主将认证与定级和工资挂钩",
                 "通常不是法定入职门槛，但雇主可能要求或优先考虑",
-                "一般需具备一定工作经历并通过考试，具体方向与条件按认证机构公布",
-                "报名费、备考时间与维持认证的持续要求",
+                "BLS只支持认证可要求/偏好，具体认证当前经验考试条件未全核",
+                "证据不足：机构费用周期及续证未核",
                 "认证证明能力方向，不等于执照、授权或对安全部件的独立签字权"
               ],
               [
@@ -28863,35 +28931,36 @@
                 "需要试驾公交与大型卡车、或承担道路测试任务的人",
                 "试驾大型车辆通常需要相应驾驶资格，否则无法完成路试环节",
                 "不是所有岗位都需要，取决于是否涉及大型车辆路试",
-                "按当地机动车驾驶许可规定申请与考试",
-                "申请与培训费用、时间，并涉及驾驶记录审查",
+                "维修路试可能需CDL，按目标车型/法域核；不是所有岗位必需",
+                "证据不足：具体办理费时未核",
                 "持有驾照不等于维修授权，反之亦然；两者不可互相替代"
               ],
               [
                 "中国大陆：汽车维修工职业技能等级（含商用车维修工工种）",
                 "在中国大陆从事汽车与柴油车辆维修并希望建立技能等级证据的人",
-                "用于说明技能水平，部分地区与岗位定级、补贴政策相关",
-                "国家职业技能标准设五级/初级工至一级/高级技师；是否作为招聘硬性条件由用人单位决定",
-                "按国家职业技能标准的申报条件报名，由职业技能等级认定机构组织理论与技能考核",
-                "培训与认定费用、时间；部分地区对取得等级证书人员有技能提升补贴",
+                "技能评价证据，不由此推工资/补贴或全国招聘硬门槛",
+                "2018汽车维修工标准设五级到一级、普通文化初中；五级累计本职业/规定相关职业1年或学徒期满，四级有五级证后4年/累计6年/规定学校专业学历等不同分支，理论技能及适用综合评审各60合格、技师高级技师综合评审。2024官方附件在4-12-01-01下新增商用车维修工工种；旧标准申报分支不冒充新增工种当前评价公告，费用、实际周期和补贴本轮未核。",
+                "2018旧版五级/四级等分支须核专业和相关职业脚注及当前机构公告；不直接套2024新增工种",
+                "证据不足：当前评价费时/当地补贴未核",
                 "等级证书说明技能水平，不等于可以独立承接备案经营范围之外的作业，也不替代安全规程"
               ],
               [
                 "中国大陆：机动车维修经营备案（个人经营者）",
                 "计划自行设立或合伙经营维修点的人",
                 "合法开展维修经营的前提；备案范围决定可以承接哪些维修业务",
-                "对个人雇员不是门槛，对经营者是前提条件",
+                "中国机动车维修经营者登记后向所在地县级交通运输主管部门备案，备案不收费用，范围与类别按经营项目。第12条一二类技术负责/质量检验/接待和各类维修人员各至少1名；三类综合小修、发动机、车身、电气、自动变速器维修也配技术负责与质量检验，不能遗漏。质量检验人员须相适应驾驶证，非所有维修工统一驾驶门槛；企业备案不代个人技能/岗位权限。",
                 "依法办理市场主体登记后，向所在地县级交通运输主管部门备案，并提交场地、设备、技术人员与管理制度等材料",
-                "场地与设备投入、人员配备与管理制度的合规成本",
+                "备案不收费用；场地设备投入另计，本轮未核金额和办理周期",
                 "备案对象是经营者而非个人资格；三类业务与专项作业的范围受备案经营项目限制"
               ]
             ]
           },
           "id": "actors.path.credential-decision.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "employer",
+            "cn-rule",
+            "r5-cn-standard",
+            "r5-cn-editor-attachment"
           ],
           "title": "训练、资格与材料怎么选择",
           "type": "table"
@@ -28937,14 +29006,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国口径：本职业准备层级为 Job Zone Three（中等准备，SVP 6.0 到低于 7.0），通常需要 1—2 年培训；BLS 职业展望给出的典型入门学历为高中或同等学力、无相关工作经验要求、由雇主提供长期在职培训；部分雇主优先录用完成柴油机维修课程的候选人，行业认证可能被要求，试驾大型公交与卡车可能需要商业驾驶执照。"
+              "美国BLS典型入口高中或同等学力、无相关工作经验、长期在岗训练；雇主可能偏好高中后柴油维修课程，认证可要求或偏好，大型公交卡车路试可能需CDL。O*NET JobZone3/SVP6到低于7及组级1—2年训练不保证本职业每人周期；学历受访意见39%高中后证书/37%高中，不等于法律或员工学历构成。"
             ]
           },
           "id": "actors.path.career-path-block.2",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28953,14 +29021,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆口径：机动车维修经营实行备案管理，一类与二类汽车维修业务须配备技术负责人员、质量检验人员、业务接待人员以及机修、电器、钣金、涂漆维修技术人员，从业人员应当执行安全生产操作规程；汽车维修工国家职业技能标准设五级/初级工至一级/高级技师，2024 年 7 月增设商用车维修工工种；这些是作业与经营管理制度，不与美国的认证与驾照体系一一对应。"
+              "中国机动车维修经营者登记后向所在地县级交通运输主管部门备案，备案不收费用，范围与类别按经营项目。第12条一二类技术负责/质量检验/接待和各类维修人员各至少1名；三类综合小修、发动机、车身、电气、自动变速器维修也配技术负责与质量检验，不能遗漏。质量检验人员须相适应驾驶证，非所有维修工统一驾驶门槛；企业备案不代个人技能/岗位权限。 2018汽车维修工标准设五级到一级、普通文化初中；五级累计本职业/规定相关职业1年或学徒期满，四级有五级证后4年/累计6年/规定学校专业学历等不同分支，理论技能及适用综合评审各60合格、技师高级技师综合评审。2024官方附件在4-12-01-01下新增商用车维修工工种；旧标准申报分支不冒充新增工种当前评价公告，费用、实际周期和补贴本轮未核。"
             ]
           },
           "id": "actors.path.career-path-block.3",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "cn-rule",
+            "r5-cn-standard",
+            "r5-cn-editor-attachment"
           ],
           "type": "prose"
         },
@@ -29152,14 +29220,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国与中国的管理方式不同：美国以雇主在职培训、行业认证与州驾驶许可为主；中国大陆以机动车维修经营备案与汽车维修工职业技能等级为主。"
+              "美国BLS典型入口/雇主认证和可能CDL与中国技能评价/经营备案分项说明；本轮未核所有地区个人准入法清单，不称全国无许可。"
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "employer",
+            "cn-rule",
+            "r5-cn-standard"
           ],
           "type": "prose"
         },
@@ -29168,14 +29236,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本职业在美国的典型入门学历为高中或同等学力、无相关工作经验要求、长期在职培训；在中国大陆不设职业准入许可，实际条件由用人单位与市场监管与交通运输管理要求共同决定。"
+              "美国BLS典型入口高中或同等学力、无相关工作经验、长期在岗训练；雇主可能偏好高中后柴油维修课程，认证可要求或偏好，大型公交卡车路试可能需CDL。O*NET JobZone3/SVP6到低于7及组级1—2年训练不保证本职业每人周期；学历受访意见39%高中后证书/37%高中，不等于法律或员工学历构成。 中国机动车维修经营者登记后向所在地县级交通运输主管部门备案，备案不收费用，范围与类别按经营项目。第12条一二类技术负责/质量检验/接待和各类维修人员各至少1名；三类综合小修、发动机、车身、电气、自动变速器维修也配技术负责与质量检验，不能遗漏。质量检验人员须相适应驾驶证，非所有维修工统一驾驶门槛；企业备案不代个人技能/岗位权限。 2018汽车维修工标准设五级到一级、普通文化初中；五级累计本职业/规定相关职业1年或学徒期满，四级有五级证后4年/累计6年/规定学校专业学历等不同分支，理论技能及适用综合评审各60合格、技师高级技师综合评审。2024官方附件在4-12-01-01下新增商用车维修工工种；旧标准申报分支不冒充新增工种当前评价公告，费用、实际周期和补贴本轮未核。"
             ]
           },
           "id": "actors.display.career_path_block.locale.summary",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "employer",
+            "cn-rule",
+            "r5-cn-standard",
+            "r5-cn-editor-attachment"
           ],
           "type": "prose"
         },
@@ -29392,13 +29462,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入门阶段通常无专门证照要求；需完成雇主的岗前安全培训"
+              "编辑入门工位须核真实雇主训练、车型及法域条件；不能统一称无专门证照。美国BLS典型入口高中或同等学力、无相关工作经验、长期在岗训练；雇主可能偏好高中后柴油维修课程，认证可要求或偏好，大型公交卡车路试可能需CDL。O*NET JobZone3/SVP6到低于7及组级1—2年训练不保证本职业每人周期；学历受访意见39%高中后证书/37%高中，不等于法律或员工学历构成。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.credentials",
           "source_refs": [
-            "onet",
-            "bls",
+            "employer",
             "cn-rule"
           ],
           "type": "prose"
@@ -29456,14 +29525,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "拆解与复装记录可被师傅复核，返工率低"
+              "编辑观察拆解标记/规格复装记录能否复核；未取得统一返工率门槛或真实雇主筛选。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.02.readiness_evidence",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29728,13 +29795,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入门阶段无强制证照，需完成岗前安全培训"
+              "按地区、企业和实际任务核准入条件。美国BLS称认证可能被要求或优先考虑，公交与大型卡车路试可能需CDL；中国维修质量检验人员有相适应车型驾驶证要求，不扩为所有维修工统一门槛。岗前安全训练不能替代相应资格。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.01.credentials",
           "source_refs": [
-            "onet",
-            "bls",
+            "employer",
             "cn-rule"
           ],
           "type": "prose"
@@ -30336,14 +30402,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS 职业展望：本职业准备层级、典型入门学历、长期在职培训与行业认证说明，用于说明美国口径的训练路径。"
+              "该原bls来源实际为O*NET全国工资，不支持准备层级。美国BLS典型入口高中或同等学力、无相关工作经验、长期在岗训练；雇主可能偏好高中后柴油维修课程，认证可要求或偏好，大型公交卡车路试可能需CDL。O*NET JobZone3/SVP6到低于7及组级1—2年训练不保证本职业每人周期；学历受访意见39%高中后证书/37%高中，不等于法律或员工学历构成。"
             ]
           },
           "id": "actors.display.career_path_block.source.bls",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "employer"
           ],
           "type": "prose"
         },
@@ -30352,14 +30417,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "雇主岗位说明与安全制度：实际的岗前培训、认证偏好、驾照要求与防护要求以雇主制度与招聘公告为准。"
+              "原employer来源为BLS手册非实采雇主制度/招聘；美国BLS典型入口高中或同等学力、无相关工作经验、长期在岗训练；雇主可能偏好高中后柴油维修课程，认证可要求或偏好，大型公交卡车路试可能需CDL。O*NET JobZone3/SVP6到低于7及组级1—2年训练不保证本职业每人周期；学历受访意见39%高中后证书/37%高中，不等于法律或员工学历构成。 本轮无真实招聘样本。"
             ]
           },
           "id": "actors.display.career_path_block.source.employer",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "employer",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30368,14 +30432,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆口径：《机动车维修管理规定》关于维修经营备案与技术人员配备、从业人员执行安全生产操作规程的要求，以及汽车维修工国家职业技能标准的等级设置。"
+              "中国机动车维修经营者登记后向所在地县级交通运输主管部门备案，备案不收费用，范围与类别按经营项目。第12条一二类技术负责/质量检验/接待和各类维修人员各至少1名；三类综合小修、发动机、车身、电气、自动变速器维修也配技术负责与质量检验，不能遗漏。质量检验人员须相适应驾驶证，非所有维修工统一驾驶门槛；企业备案不代个人技能/岗位权限。 2018汽车维修工标准设五级到一级、普通文化初中；五级累计本职业/规定相关职业1年或学徒期满，四级有五级证后4年/累计6年/规定学校专业学历等不同分支，理论技能及适用综合评审各60合格、技师高级技师综合评审。2024官方附件在4-12-01-01下新增商用车维修工工种；旧标准申报分支不冒充新增工种当前评价公告，费用、实际周期和补贴本轮未核。"
             ]
           },
           "id": "actors.display.career_path_block.source.cn-rule",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "cn-rule",
+            "r5-cn-standard",
+            "r5-cn-editor-attachment"
           ],
           "type": "prose"
         },
@@ -30384,14 +30448,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "工资与训练的关系：O*NET 与 BEWS 工资分位用于说明岗位与技能差异，不作为训练投入的回报承诺。"
+              "O*NET/OEWS工资分位不证明技能差异或训练投资收益；2025全国五分位年44530/50540/61770/75470/88740美元，时21.41/24.30/29.70/36.29/42.66。OEWS是雇员直时税前工资，含佣金等激励、生产奖金及规定津贴，排除加班溢价/轮班差额/非生产奖金等；非一概排除计件提成，不含自雇，非个人全年到手。"
             ]
           },
           "id": "actors.display.career_path_block.source.r2-pay-3",
           "source_refs": [
-            "onet",
             "bls",
-            "cn-rule"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         }
@@ -30408,13 +30471,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "前景要看两件事：总量与更替。O*NET 摘要页给出 2024 年约 319,900 人的就业规模、2024—2034 年增长 1% 至 2%（低于平均）；BLS 职业展望以 2025 年 316,000 个岗位、2025—2035 年 +4%（与平均相当）、净增 11,400 给出另一口径。两者基期与期间不同，应分别引用。更能说明用工结构的是空缺来源：空缺以更替需求为主，即在职人员转岗、退休形成补充。"
+              "当前美国自身49-3031：2025约316000个岗位，2035约327400，2025—2035增长4%、净增11400，年均24400空缺含增长与更替。O*NET/BLS当前同预测期，不能把旧2024—2034值再称当前另一口径；空缺非净新增或个人机会。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls",
-            "oews"
+            "employer",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -30423,13 +30486,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "影响需求的因素：货运量与物流规模、公共交通预算与车队更新、车辆保有量与车龄结构、以及替代燃料与电动化进程。柴油重型车辆在货运与公共交通中仍占主体，因此维修需求不会因单一技术变化而消失，但车辆结构变化会改变具体作业的构成——例如排放相关与电气相关作业比重上升。"
+              "BLS预测货运增长和老车辆维修需求，同时电动车通常较少维护可减少部分需求；不是中国柴油重型占比或排放电气作业份额上升实测。当前美国自身49-3031：2025约316000个岗位，2035约327400，2025—2035增长4%、净增11400，年均24400空缺含增长与更替。O*NET/BLS当前同预测期，不能把旧2024—2034值再称当前另一口径；空缺非净新增或个人机会。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls",
-            "oews"
+            "employer",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -30438,13 +30501,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "招聘信号怎么读：招聘公告中的岗位名称差异较大（维修技工、机电维修、发动机维修、商用车维修工等），应逐条核对实际职责、班次安排、认证与驾照要求，以及是否提供在职培训与学徒机会；把「急招」「高薪」等表述当作薪资证据是不成立的。"
+              "BLS美国2025就业规模是岗位数，不是本轮企业招聘数量。查看具体招聘时建议核实际职责、班次、认证、驾照和训练，不把岗位名称或高薪宣传作工资样本。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls",
-            "oews"
+            "employer"
           ],
           "type": "prose"
         },
@@ -30453,13 +30515,17 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转型方向：横向可转向汽车维修技师、工业机械维修工、磨坊装配工、铁路车辆检修工与飞机机械师与服务技师等相邻方向；纵向可在诊断、燃油喷射与电气、总成大修或车队维修管理方向专精。转岗时真正的门槛是对象知识、规程体系与安全要求，而不是工具熟练度。"
+              "编辑比较方向：汽车维修、工业机械维修、机械装配移装、铁路车辆检修和飞机维修分别有不同对象与规程，可用于探索学习差距，不保证柴油维修经验可直接转岗。诊断、燃油喷射与电气、总成维修及管理也是待核岗位方向；资格、授权、对象知识和安全要求须按目标核。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent",
+            "enrichment",
+            "art",
+            "announcing",
+            "dancing",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30468,13 +30534,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "风险提示：区域差异明显——车队与货运枢纽、公交企业所在地的需求更集中，偏远地区岗位少但竞争也小；自营与个体维修的收入波动大于受雇岗位；把某一年的招聘热度或身边个别案例当作长期趋势，容易高估或低估机会。"
+              "编辑核目标地区真实岗位/合同和时间序列；本轮没有偏远岗位少竞争小、自营收入波动更大的可比资料，不以个案作长期趋势。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.5",
           "source_refs": [
-            "bls",
-            "oews"
+            "employer"
           ],
           "type": "prose"
         },
@@ -30498,13 +30563,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "限制：本行是美国官方统计口径的就业与预测，不能用于推断个人录用概率或某地区的岗位数量。"
+              "美国BLS2025—2035预测不是中国或个人机会预测；O*NET趋势页本轮仍显示2024—2034，不能合成同一当前期。"
             ]
           },
           "id": "actors.display.market_signal_card.outlook.us.limit",
           "source_refs": [
-            "bls",
-            "oews"
+            "employer",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -30513,13 +30578,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "限制：本行为用工与训练路径的制度性说明，不构成招聘承诺或薪资预期。"
+              "本行是BLS美国2025职业就业规模；不是中国规模、当前招聘量、雇用承诺或个人待遇。"
             ]
           },
           "id": "actors.display.market_signal_card.outlook.contract.limit",
           "source_refs": [
-            "bls",
-            "oews"
+            "employer"
           ],
           "type": "prose"
         },
@@ -30543,13 +30607,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "汽车维修技师与机械师：都使用量具与扭矩规格、都需要读故障码与测量数据、都强调安全防护与工单记录；对象都是机动车辆。"
+              "49-3023汽车车辆诊断调整修理或大修；从柴油维修转向须核目标汽车系统和流程，不反向把柴油训练写成目标差距；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30558,13 +30621,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补齐柴油燃油与排放系统、重型车辆总成大修工艺与举升安全要求；汽油车电控经验不直接等同于柴油机诊断能力。"
+              "49-3023汽车车辆诊断调整修理或大修；从柴油维修转向须核目标汽车系统和流程，不反向把柴油训练写成目标差距；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30573,13 +30635,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属车辆维修，主要差别在对象与总成范围，通常可通过在职学习与转岗训练完成。"
+              "49-3023汽车车辆诊断调整修理或大修；从柴油维修转向须核目标汽车系统和流程，不反向把柴油训练写成目标差距；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30588,13 +30649,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "重型与牵引挂车卡车司机：都熟悉重型车辆的结构与日常检查项目，都理解车辆停运与运营节奏的关系。"
+              "53-3032驾驶拖挂或GVW至少26001磅重卡，可能卸货，含拖车司机且定义要求CDL；目标是运输安全和相应驾驶资格，维修经验不代驾驶许可；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30603,13 +30663,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需取得相应驾驶资格并接受运输安全与法规训练；驾驶与运输责任不能由维修经验替代。"
+              "53-3032驾驶拖挂或GVW至少26001磅重卡，可能卸货，含拖车司机且定义要求CDL；目标是运输安全和相应驾驶资格，维修经验不代驾驶许可；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30618,13 +30677,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：共享车辆知识，但职责从维修转为运输，需要重新取得资格与适应工作节奏。"
+              "53-3032驾驶拖挂或GVW至少26001磅重卡，可能卸货，含拖车司机且定义要求CDL；目标是运输安全和相应驾驶资格，维修经验不代驾驶许可；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30633,13 +30691,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "工业机械维修工：都使用量具与扭矩规范、都需要液压与传动知识、都按维护规程作业。"
+              "49-9041维修安装调整维护工业生产加工或炼厂管线机械，可安装拆卸移动设备；按目标工业设备系统与实际安全训练核，不保证原技能完整迁移；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30648,13 +30705,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需学习产线设备的维护节拍与生产协作方式；车辆特有的路试与排放环节不再是主体。"
+              "49-9041维修安装调整维护工业生产加工或炼厂管线机械，可安装拆卸移动设备；按目标工业设备系统与实际安全训练核，不保证原技能完整迁移；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30663,13 +30719,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：通用机械基础相通，差别在对象与作业组织方式。"
+              "49-9041维修安装调整维护工业生产加工或炼厂管线机械，可安装拆卸移动设备；按目标工业设备系统与实际安全训练核，不保证原技能完整迁移；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30678,13 +30733,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "磨坊装配工（设备安装与维护机械工）：都重视装配精度、对中与紧固规范，都需要读懂图纸与技术资料。"
+              "49-9044按布置图或蓝图安装拆卸移动机械和重设备；目标安装移动布局技能，不称同精度或故障诊断比重必降；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30693,13 +30747,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需强化安装与对中工艺；故障诊断与试车验证的比重下降。"
+              "49-9044按布置图或蓝图安装拆卸移动机械和重设备；目标安装移动布局技能，不称同精度或故障诊断比重必降；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30708,13 +30761,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：精度要求相同，工作内容从诊断检修转向安装与维护。"
+              "49-9044按布置图或蓝图安装拆卸移动机械和重设备；目标安装移动布局技能，不称同精度或故障诊断比重必降；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30723,13 +30775,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "公交司机（市内与城际）：都接触公交车辆并理解其运营与停运窗口，都需要在班次约束下工作。"
+              "53-3052驾驶公交或客车含固定线路包车私人运输，可助行李或收票；按目标客运职责与法域资格核，当前定义未列统一CDL细则；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30738,13 +30789,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需取得相应驾驶资格并通过客运安全训练；日常检查不等于维修能力。"
+              "53-3052驾驶公交或客车含固定线路包车私人运输，可助行李或收票；按目标客运职责与法域资格核，当前定义未列统一CDL细则；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30753,13 +30803,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：共用车辆与运营知识，职责边界清晰但资格要求不同。"
+              "53-3052驾驶公交或客车含固定线路包车私人运输，可助行李或收票；按目标客运职责与法域资格核，当前定义未列统一CDL细则；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30768,13 +30817,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "铁路车辆检修工：都按检修规程与等级修程作业，都重视制动系统与轴承配合。"
+              "49-3043诊断调整修理或大修铁路车辆、矿车或轨道公交；核目标车辆系统与实际安全体系，不假定统一等级修程/运行图窗口；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30783,13 +30831,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需重新学习铁路检修规程体系与轨道作业安全约束，作业窗口由列车运行图决定。"
+              "49-3043诊断调整修理或大修铁路车辆、矿车或轨道公交；核目标车辆系统与实际安全体系，不假定统一等级修程/运行图窗口；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30798,13 +30845,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较远：基础机械知识可迁移，但规程体系与作业组织需要重新适应。"
+              "49-3043诊断调整修理或大修铁路车辆、矿车或轨道公交；核目标车辆系统与实际安全体系，不假定统一等级修程/运行图窗口；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30813,13 +30859,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "轮胎修理与更换工：都需要安全举升、拆装与扭矩规范，都涉及车轮与轮胎相关作业。"
+              "49-3093修理与更换轮胎；目标轮胎任务训练与实际设备权限，不反向要求扩展发动机作为转入轮胎的差距；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30828,13 +30873,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需扩展至发动机、燃油与排放系统的诊断与大修；专项作业能力不能替代总成检修能力。"
+              "49-3093修理与更换轮胎；目标轮胎任务训练与实际设备权限，不反向要求扩展发动机作为转入轮胎的差距；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30843,13 +30887,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近但纵深不同：可从轮胎专项进入，再向总成与诊断方向扩展。"
+              "49-3093修理与更换轮胎；目标轮胎任务训练与实际设备权限，不反向要求扩展发动机作为转入轮胎的差距；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30858,13 +30901,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "飞机机械师与服务技师：都按手册与工卡作业、都强调记录可追溯与安全规范，都需要严格的质量复核。"
+              "49-3011诊断调整修理或大修飞机发动机及总成含液压气动；维修技能交叉不代航空资格，具体法域申报本轮未全核；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30873,13 +30915,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需重新取得航空维修的专门资格与培训；航空件的适航与放行要求不能由车辆维修经验替代。"
+              "49-3011诊断调整修理或大修飞机发动机及总成含液压气动；维修技能交叉不代航空资格，具体法域申报本轮未全核；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30888,13 +30929,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较远：作业习惯相似，但资格体系与合规要求完全不同。"
+              "49-3011诊断调整修理或大修飞机发动机及总成含液压气动；维修技能交叉不代航空资格，具体法域申报本轮未全核；仅编辑任务对照，未量化距离/转岗时长或保证录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30903,13 +30943,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 职业展望与 OEWS：用于本页的岗位数量、预测期间与工资分位，均为美国受雇统计口径。"
+              "BLS职业手册当前2025基期316000岗位、2035预计327400，增长4%、净增11400、年均24400空缺。O*NET趋势页实际仍列2024—2034；分开版本和期，空缺含增长与更替，非净新增或个人机会。"
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
           "source_refs": [
-            "bls",
-            "oews"
+            "employer",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -30918,13 +30958,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 执照与训练入口：用于核对该职业代码下的认证与学徒信息入口，不等于行业认证或执业授权本身。"
+              "O*NET认证入口供进一步查找本职业认证；入口本身不等于当前机构全部条件、学徒训练或独立作业授权。"
             ]
           },
           "id": "actors.display.market_signal_card.source.ratify",
           "source_refs": [
-            "bls",
-            "oews"
+            "ratify"
           ],
           "type": "prose"
         },
@@ -30933,13 +30972,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "雇主招聘与岗位说明：用于说明实际的职责范围、班次与训练安排，不代表任何企业的当前招聘状态或薪酬水平。"
+              "该来源实际是BLS职业手册，支持美国职责、工作班次和典型训练描述；不是本轮采集的企业招聘公告，也不证明中国企业岗位或具体待遇。"
             ]
           },
           "id": "actors.display.market_signal_card.source.employer",
           "source_refs": [
-            "bls",
-            "oews"
+            "employer"
           ],
           "type": "prose"
         },
@@ -30948,13 +30986,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET OnLine 本职业档案：用于任务、兴趣代码 RCI、工作情境比例与准备层级，属于职业特征描述而非个人能力判断。"
+              "O*NET自身职业档案用于任务、兴趣、情境和准备层级描述；调查分数不是个人能力线或录用效度。"
             ]
           },
           "id": "actors.display.market_signal_card.source.onet",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         }
@@ -31074,14 +31112,28 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "中国与美国数据分栏：美国使用 OEWS 工资与 BLS 职业展望的岗位与预测；中国大陆使用《机动车维修管理规定》与汽车维修工国家职业技能标准的制度性说明，未取得职业级工资口径处保留可见缺口标记。",
-              "口径不互换：精确职业、组合职业、父职业与行业代理各有其适用范围；本页不以行业均值替代职业工资，也不以某一企业的招聘报价替代统计口径。",
-              "边界不越界：本页的纸面练习与七天体验只用于职业探索；真实的举升、拆装、电气、焊接、高压燃油与排放相关作业须由具备相应能力并获授权的人员按安全规程与厂家技术要求执行，本页不构成安全操作、合规或法律意见。"
+              "BLS职业手册当前2025基期316000、2035预计327400，增长4%、净增11400、年均24400空缺；O*NET趋势页本轮仍显示2024—2034。不同发布版本与期应分别解释，空缺非净新增或个人机会。",
+              "2025全国五分位年44530/50540/61770/75470/88740美元，时21.41/24.30/29.70/36.29/42.66。OEWS是雇员直时税前工资，含佣金等激励、生产奖金及规定津贴，排除加班溢价/轮班差额/非生产奖金等；非一概排除计件提成，不含自雇，非个人全年到手。",
+              "证据不足：本轮未取得中国柴油维修单职业工资分布及代表性招聘样本。NBS2025居民服务、修理和其他服务业非私营70226/私营52059元年均，实际运输单位另有133981/73133；5人以上城镇法人、多职业、非私营不限国企，排除个体自由职业，仅匹配单位行业背景而非本职业工资/中位数/报价。",
+              "美国BLS典型入口高中或同等学力、无相关工作经验、长期在岗训练；雇主可能偏好高中后柴油维修课程，认证可要求或偏好，大型公交卡车路试可能需CDL。O*NET JobZone3/SVP6到低于7及组级1—2年训练不保证本职业每人周期；学历受访意见39%高中后证书/37%高中，不等于法律或员工学历构成。",
+              "2018汽车维修工标准设五级到一级、普通文化初中；五级累计本职业/规定相关职业1年或学徒期满，四级有五级证后4年/累计6年/规定学校专业学历等不同分支，理论技能及适用综合评审各60合格、技师高级技师综合评审。2024官方附件在4-12-01-01下新增商用车维修工工种；旧标准申报分支不冒充新增工种当前评价公告，费用、实际周期和补贴本轮未核。",
+              "中国机动车维修经营者登记后向所在地县级交通运输主管部门备案，备案不收费用，范围与类别按经营项目。第12条一二类技术负责/质量检验/接待和各类维修人员各至少1名；三类综合小修、发动机、车身、电气、自动变速器维修也配技术负责与质量检验，不能遗漏。质量检验人员须相适应驾驶证，非所有维修工统一驾驶门槛；企业备案不代个人技能/岗位权限。",
+              "第30条配件采购使用留凭证，禁止假冒伪劣，允许定义下同质配件，非只准原厂；原厂、同质、修复配件分别标明和明价。第31—33条二级维护、总成修理、整车修理有进厂/过程/竣工检验、质检人员签发合格证及额外档案要求，不套所有换油项目；档案电子管理及上传按规定，签署主体分清。",
+              "2025美国招聘技术关键词：分母是全部关联本职业O*NET-SOC代码的唯一招聘帖，非仅含技术要求的帖子；NA表示未提供值而非0。关键词频率不代表软件或AI采用率；电脑诊断也不等于生成式AI。",
+              "O*NET兴趣R100/C46/I38/S9/E5/A0支持RCI，非个人能力/录用线；17工作风格Impact可靠82、细节81、谨慎65、坚持59、抗压42等，非大五分数或人口比例。近距视力75/手部稳定72为能力重要性，不是IQ阈值；本职业人格测试/学习预测效度未核。",
+              "中国原标准图片403，未绕过；取得68页原文仅读p6—9及相关前言、目视p7；2024附件p14—15/目视15。未签全部标准工作表或当前机构公告。"
             ]
           },
           "id": "actors.sources.boundary.1",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "employer",
+            "bls",
+            "r5-oews-concepts",
+            "r5-nbs-current",
+            "r5-cn-standard",
+            "r5-cn-editor-attachment",
+            "cn-rule"
           ],
           "type": "list"
         },
@@ -31104,12 +31156,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源使用范围：来源链接按各自适用范围使用——美国工资与就业来自 OEWS 与 BLS 职业展望，任务与工作情境来自 O*NET，中国大陆来自《机动车维修管理规定》与人力资源和社会保障部发布的职业信息通知；来源名称与适用范围不互换。"
+              "本轮O*NET自身详细/2025工资招聘词及八相邻定义，BLS手册/OEWS concepts、中国维修规定、2025行业工资、2018标准原文及2024新增工种附件。ILO/NIST复用同批已读对应版，未核职业映射效果；旧名称URL保持，补具体文档与限制。"
             ]
           },
           "id": "actors.display.source_card.source",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "employer",
+            "r5-oews-concepts",
+            "r5-nbs-current",
+            "r5-cn-standard",
+            "r5-cn-editor-attachment",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -31118,12 +31176,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "更新与检索说明：本页核对日期为 2026-09-19；O*NET 页面标注 2026 年更新，工资数据为 2025 年 5 月，BLS 职业展望预测期为 2025—2035 年，O*NET 摘要页就业基期为 2024 年，各期间不同，引用时应分别说明。"
+              "检索整理2026-10-09；美国2025工资/2025—2035预测，中国2025行业工资/2018标准与2024新增工种分别核。"
             ]
           },
           "id": "actors.display.source_card.updated-at",
           "source_refs": [
-            "onet"
+            "r5-trends-current",
+            "r5-nbs-current",
+            "r5-cn-standard",
+            "r5-cn-editor-attachment"
           ],
           "type": "prose"
         },
@@ -31290,14 +31351,15 @@
                 "url": "https://www.onetonline.org/link/summary/49-9044.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页工资中位与分位数值。",
-                  "不代表任何个人的到手收入或入职起薪。"
+                  "不代表任何个人的到手收入或入职起薪。",
+                  "本轮核查：2025全国五分位年44530/50540/61770/75470/88740美元，时21.41/24.30/29.70/36.29/42.66。OEWS是雇员直时税前工资，含佣金等激励、生产奖金及规定津贴，排除加班溢价/轮班差额/非生产奖金等；非一概排除计件提成，不含自雇，非个人全年到手。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "提供本职业全国工资的分位数值：年度 44,530／50,540／61,770／75,470／88,740 美元，小时 21.41／24.30／29.70／36.29／42.66 美元；属受雇税前工资统计口径，不含加班费、班次津贴与计件提成，也不含自营收入。",
+                "limitation": "2025全国五分位年44530/50540/61770/75470/88740美元，时21.41/24.30/29.70/36.29/42.66。OEWS是雇员直时税前工资，含佣金等激励、生产奖金及规定津贴，排除加班溢价/轮班差额/非生产奖金等；非一概排除计件提成，不含自雇，非个人全年到手。",
                 "market": "美国",
                 "name": "O*NET OnLine：Bus and Truck Mechanics and Diesel Engine Specialists 全国工资（2025 年 5 月工资数据，49-3031.00）",
                 "period": "2025 年 5 月工资数据；检索 2026-09-19",
@@ -31306,14 +31368,15 @@
                 "url": "https://www.onetonline.org/link/localwages/49-3031.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页对中国大陆维修经营与从业人员要求的说明。",
-                  "规章约束的是维修经营者的经营条件与从业人员作业行为，不等于职业准入许可。"
+                  "规章约束的是维修经营者的经营条件与从业人员作业行为，不等于职业准入许可。",
+                  "本轮核查：中国机动车维修经营者登记后向所在地县级交通运输主管部门备案，备案不收费用，范围与类别按经营项目。第12条一二类技术负责/质量检验/接待和各类维修人员各至少1名；三类综合小修、发动机、车身、电气、自动变速器维修也配技术负责与质量检验，不能遗漏。质量检验人员须相适应驾驶证，非所有维修工统一驾驶门槛；企业备案不代个人技能/岗位权限。 第30条配件采购使用留凭证，禁止假冒伪劣，允许定义下同质配件，非只准原厂；原厂、同质、修复配件分别标明和明价。第31—33条二级维护、总成修理、整车修理有进厂/过程/竣工检验、质检人员签发合格证及额外档案要求，不套所有换油项目；档案电子管理及上传按规定，签署主体分清。 第25—26条收费非员工工资。"
                 ],
                 "evidence_type": "official regulation",
                 "id": "cn-rule",
-                "limitation": "规定机动车维修经营实行备案管理，按维修对象与经营项目分类；一类与二类汽车维修业务须配备技术负责人员、质量检验人员、业务接待人员以及从事机修、电器、钣金、涂漆的维修技术人员，质量检验人员须持有与承修车型种类相适应的机动车驾驶证；经营者应加强从业人员安全教育和职业道德教育，从业人员应执行安全生产操作规程、不得违章作业；维修配件实行追溯制度，不得使用假冒伪劣配件，不得通过临时更换污染控制装置或破坏车载排放诊断系统使车辆通过排放检验。",
+                "limitation": "中国机动车维修经营者登记后向所在地县级交通运输主管部门备案，备案不收费用，范围与类别按经营项目。第12条一二类技术负责/质量检验/接待和各类维修人员各至少1名；三类综合小修、发动机、车身、电气、自动变速器维修也配技术负责与质量检验，不能遗漏。质量检验人员须相适应驾驶证，非所有维修工统一驾驶门槛；企业备案不代个人技能/岗位权限。 第30条配件采购使用留凭证，禁止假冒伪劣，允许定义下同质配件，非只准原厂；原厂、同质、修复配件分别标明和明价。第31—33条二级维护、总成修理、整车修理有进厂/过程/竣工检验、质检人员签发合格证及额外档案要求，不套所有换油项目；档案电子管理及上传按规定，签署主体分清。 第25—26条收费非员工工资。",
                 "market": "中国内地",
                 "name": "机动车维修管理规定（交通运输部令 2021 年第 18 号，2023 年 11 月 10 日第五次修正后重新公布）",
                 "period": "现行有效；检索 2026-09-19",
@@ -31370,14 +31433,15 @@
                 "url": "https://www.onetonline.org/link/summary/49-3093.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页对中国大陆商用车维修工工种的说明。",
-                  "工种的设立不等于强制持证或岗位准入。"
+                  "工种的设立不等于强制持证或岗位准入。",
+                  "本轮核查：通知正文不含工种细节；已读官方附件p14—15另列，不以新增工种推工资/许可。"
                 ],
                 "evidence_type": "official notice",
                 "id": "editor",
-                "limitation": "在「汽车维修工（4-12-01-01）」职业下增设「商用车维修工」工种，同时在「汽车装调工（6-22-02-01）」下增设「商用车装调工」工种；该通知说明国家职业分类对新工种的增补，不规定工资水平，也不改变用人单位自主用人。",
+                "limitation": "通知正文不含工种细节；已读官方附件p14—15另列，不以新增工种推工资/许可。",
                 "market": "中国内地",
                 "name": "人力资源社会保障部办公厅 市场监管总局办公厅 国家统计局办公室关于发布生物工程技术人员等职业信息的通知（人社厅发〔2024〕36 号）",
                 "period": "2024 年 7 月 25 日发布；检索 2026-09-19",
@@ -31386,14 +31450,15 @@
                 "url": "https://www.gov.cn/zhengce/zhengceku/202407/content_6965461.htm"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页的美国岗位数量、预测与训练路径说明。",
-                  "预测是职业总量变化，不代表个人录用概率。"
+                  "预测是职业总量变化，不代表个人录用概率。",
+                  "本轮核查：当前美国自身49-3031：2025约316000个岗位，2035约327400，2025—2035增长4%、净增11400，年均24400空缺含增长与更替。O*NET/BLS当前同预测期，不能把旧2024—2034值再称当前另一口径；空缺非净新增或个人机会。 BLS自身2025主要雇主卡车运输18%、批发13%、地方政府（不含教育医院）9%、汽车维修9%、租赁6%；不是整个运输仓储大类占比。相应行业本职业中位年薪59820/63070/71460/60330/60220美元，不是全行业平均工资或技能因果。 美国BLS典型入口高中或同等学力、无相关工作经验、长期在岗训练；雇主可能偏好高中后柴油维修课程，认证可要求或偏好，大型公交卡车路试可能需CDL。O*NET JobZone3/SVP6到低于7及组级1—2年训练不保证本职业每人周期；学历受访意见39%高中后证书/37%高中，不等于法律或员工学历构成。 是手册非实采雇主制度。"
                 ],
                 "evidence_type": "official outlook",
                 "id": "employer",
-                "limitation": "提供本职业 2025 年 316,000 个岗位、2025—2035 年 +4%、净增 11,400 与年均约 24,400 个空缺；典型入门学历为高中或同等学力、无相关工作经验要求、长期在职培训；说明雇主可能要求行业认证，试驾大型公交与卡车可能需要商业驾驶执照。与 O*NET 摘要页的 2024—2034 年口径不同，应分别引用。",
+                "limitation": "当前美国自身49-3031：2025约316000个岗位，2035约327400，2025—2035增长4%、净增11400，年均24400空缺含增长与更替。O*NET/BLS当前同预测期，不能把旧2024—2034值再称当前另一口径；空缺非净新增或个人机会。 BLS自身2025主要雇主卡车运输18%、批发13%、地方政府（不含教育医院）9%、汽车维修9%、租赁6%；不是整个运输仓储大类占比。相应行业本职业中位年薪59820/63070/71460/60330/60220美元，不是全行业平均工资或技能因果。 美国BLS典型入口高中或同等学力、无相关工作经验、长期在岗训练；雇主可能偏好高中后柴油维修课程，认证可要求或偏好，大型公交卡车路试可能需CDL。O*NET JobZone3/SVP6到低于7及组级1—2年训练不保证本职业每人周期；学历受访意见39%高中后证书/37%高中，不等于法律或员工学历构成。 是手册非实采雇主制度。",
                 "market": "美国",
                 "name": "BLS Occupational Outlook Handbook：Diesel Service Technicians and Mechanics",
                 "period": "2025 年数据与 2025—2035 年预测；检索 2026-09-19",
@@ -31434,14 +31499,15 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页对中国大陆技能等级设置的说明。",
-                  "标准不规定工资水平，也不构成个人执业授权。"
+                  "标准不规定工资水平，也不构成个人执业授权。",
+                  "本轮核查：旧人社首页不代标准全文；已取得2018原文另列，不以2018规定所有当前新增工种公告或全国执业许可。"
                 ],
                 "evidence_type": "official occupational standard",
                 "id": "nbs",
-                "limitation": "职业定义为使用工、夹、量具和仪器仪表、检修设备，维护、修理和调试汽车及特种车辆的人员；设五级/初级工、四级/中级工、三级/高级工、二级/技师、一级/高级技师五个等级，评价方式含理论知识考试、技能考核与综合评审；职业能力特征要求具有一般智力水平、表达能力、动作协调性和空间感，手指和手臂灵活性好，并有一定计算能力。该标准是技能等级评价依据，不是执业许可。",
+                "limitation": "旧人社首页不代标准全文；已取得2018原文另列，不以2018规定所有当前新增工种公告或全国执业许可。",
                 "market": "中国内地",
                 "name": "汽车维修工国家职业技能标准（人力资源和社会保障部、交通运输部 2018 年 12 月 28 日颁布）",
                 "period": "2018 年 12 月 28 日颁布施行；检索 2026-09-19",
@@ -31450,14 +31516,15 @@
                 "url": "https://www.mohrss.gov.cn/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页 AI 影响模块中关于人工控制点与治理的说明。",
-                  "不提供本职业的岗位或工资结论。"
+                  "不提供本职业的岗位或工资结论。",
+                  "本轮核查：同批已读AI RMF1.0自愿框架，不代维修法律、厂家规程或个人操作授权，未核本职业效果。"
                 ],
                 "evidence_type": "framework",
                 "id": "nist",
-                "limitation": "提供人工智能风险管理的原则与流程框架，用于说明把工具输出作为待验证输入、并对涉及安全与合规的判断设置人工复核的方法；框架是自愿性风险管理指引，不构成对本职业的合规要求清单。",
+                "limitation": "同批已读AI RMF1.0自愿框架，不代维修法律、厂家规程或个人操作授权，未核本职业效果。",
                 "market": "美国",
                 "name": "NIST：Artificial Intelligence Risk Management Framework（AI RMF 1.0）",
                 "period": "2023 年 1 月发布；检索 2026-09-19",
@@ -31466,14 +31533,15 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页对美国工资统计口径的说明。",
-                  "不用于替代具体职业的分位数值。"
+                  "不用于替代具体职业的分位数值。",
+                  "本轮核查：2025全国五分位年44530/50540/61770/75470/88740美元，时21.41/24.30/29.70/36.29/42.66。OEWS是雇员直时税前工资，含佣金等激励、生产奖金及规定津贴，排除加班溢价/轮班差额/非生产奖金等；非一概排除计件提成，不含自雇，非个人全年到手。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "oews",
-                "limitation": "提供美国职业工资统计的调查口径与方法说明；具体职业数值经 O*NET 全国工资页转引，使用时应同时核对统计期与单位。",
+                "limitation": "2025全国五分位年44530/50540/61770/75470/88740美元，时21.41/24.30/29.70/36.29/42.66。OEWS是雇员直时税前工资，含佣金等激励、生产奖金及规定津贴，排除加班溢价/轮班差额/非生产奖金等；非一概排除计件提成，不含自雇，非个人全年到手。",
                 "market": "美国",
                 "name": "BLS Occupational Employment and Wage Statistics（OEWS）：工资统计入口",
                 "period": "现行发布口径；检索 2026-09-19",
@@ -31482,14 +31550,15 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页的任务、兴趣代码与工作情境描述。",
-                  "不提供岗位数量承诺或中国大陆的对应分类。"
+                  "不提供岗位数量承诺或中国大陆的对应分类。",
+                  "本轮核查：美国57项情境实际核：污染85%每天、噪声81%每天、危险设备60%每天、PPE78%每天；手操作80%持续、站立59%持续、弯身59%持续；准确53%极其重要、他人安全72%很高责任、面对面90%每天。是调查频率/意见，不是事故率、全部工位条件或中国分布。 O*NET兴趣R100/C46/I38/S9/E5/A0支持RCI，非个人能力/录用线；17工作风格Impact可靠82、细节81、谨慎65、坚持59、抗压42等，非大五分数或人口比例。近距视力75/手部稳定72为能力重要性，不是IQ阈值；本职业人格测试/学习预测效度未核。 美国BLS典型入口高中或同等学力、无相关工作经验、长期在岗训练；雇主可能偏好高中后柴油维修课程，认证可要求或偏好，大型公交卡车路试可能需CDL。O*NET JobZone3/SVP6到低于7及组级1—2年训练不保证本职业每人周期；学历受访意见39%高中后证书/37%高中，不等于法律或员工学历构成。"
                 ],
                 "evidence_type": "official occupational profile",
                 "id": "onet",
-                "limitation": "提供本职业定义、任务清单、兴趣代码 RCI、工作情境比例、教育反馈与 Job Zone 说明；O*NET 使用 Bus and Truck Mechanics and Diesel Engine Specialists 作为标题，与 BLS 职业展望的 Diesel Service Technicians and Mechanics 指同一职业代码（49-3031.00），两者不是两个职业；该页未提供行业就业人数占比与行业工资数值。",
+                "limitation": "美国57项情境实际核：污染85%每天、噪声81%每天、危险设备60%每天、PPE78%每天；手操作80%持续、站立59%持续、弯身59%持续；准确53%极其重要、他人安全72%很高责任、面对面90%每天。是调查频率/意见，不是事故率、全部工位条件或中国分布。 O*NET兴趣R100/C46/I38/S9/E5/A0支持RCI，非个人能力/录用线；17工作风格Impact可靠82、细节81、谨慎65、坚持59、抗压42等，非大五分数或人口比例。近距视力75/手部稳定72为能力重要性，不是IQ阈值；本职业人格测试/学习预测效度未核。 美国BLS典型入口高中或同等学力、无相关工作经验、长期在岗训练；雇主可能偏好高中后柴油维修课程，认证可要求或偏好，大型公交卡车路试可能需CDL。O*NET JobZone3/SVP6到低于7及组级1—2年训练不保证本职业每人周期；学历受访意见39%高中后证书/37%高中，不等于法律或员工学历构成。",
                 "market": "美国",
                 "name": "O*NET OnLine：Bus and Truck Mechanics and Diesel Engine Specialists（49-3031.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-19",
@@ -31498,14 +31567,15 @@
                 "url": "https://www.onetonline.org/link/summary/49-3031.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页 AI 影响模块中关于技术能力层的说明。",
-                  "不说明实际采用比例，也不预测岗位数量。"
+                  "不说明实际采用比例，也不预测岗位数量。",
+                  "本轮核查：2025美国招聘关键词6项：Office/Excel各1%，Word/SAP低于1%，AutoCAD/SolidWorks为NA而非0；分母是全部关联本职业代码的唯一招聘帖，不是使用率/AI采用率。BLS描述电脑诊断，不能把普通诊断软件等同生成式AI。"
                 ],
                 "evidence_type": "official technology listing",
                 "id": "r2-ai",
-                "limitation": "列出本职业使用较多的技术与工具类条目，用于说明诊断、检测与信息查询类技术的可得性；该页说明的是技术使用情况，不代表企业采用比例，也不构成岗位替代结论。",
+                "limitation": "2025美国招聘关键词6项：Office/Excel各1%，Word/SAP低于1%，AutoCAD/SolidWorks为NA而非0；分母是全部关联本职业代码的唯一招聘帖，不是使用率/AI采用率。BLS描述电脑诊断，不能把普通诊断软件等同生成式AI。",
                 "market": "美国",
                 "name": "O*NET OnLine：Bus and Truck Mechanics and Diesel Engine Specialists 相关技术条目（49-3031.00）",
                 "period": "页面 2026 年更新；检索 2026-09-19",
@@ -31514,14 +31584,15 @@
                 "url": "https://www.onetonline.org/link/hot_tech/49-3031.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页对中国大陆统计口径与缺口的说明。",
-                  "不提供本职业的职业级工资数值。"
+                  "不提供本职业的职业级工资数值。",
+                  "本轮核查：旧首页不代统计表，具体2025行业背景另列；不能说所有公开工资最高细分或从未有职业数据。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-1",
-                "limitation": "国家统计局按行业门类与单位类型发布城镇单位就业人员平均工资，未建立与美国 O*NET 职业代码一一对应的职业级口径；交通运输、仓储和邮政业等行业均值包含大量与本职业无关的岗位，不能替代本职业工资。",
+                "limitation": "旧首页不代统计表，具体2025行业背景另列；不能说所有公开工资最高细分或从未有职业数据。",
                 "market": "中国内地",
                 "name": "国家统计局：城镇单位就业人员平均工资情况",
                 "period": "现行发布口径；检索 2026-09-19",
@@ -31530,14 +31601,15 @@
                 "url": "https://www.stats.gov.cn/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页对分位数与统计口径的说明。",
-                  "不提供具体职业数值。"
+                  "不提供具体职业数值。",
+                  "本轮核查：旧首页不代正文；本轮实际读OEWS concepts组成，含佣金等激励及规定津贴，排除加班溢价/轮班差额。"
                 ],
                 "evidence_type": "official methodology",
                 "id": "r2-pay-2",
-                "limitation": "说明 OEWS 的调查范围、抽样与发布口径，包括分位数的含义与自营人员是否纳入；用于解释本页工资数值的统计含义。",
+                "limitation": "旧首页不代正文；本轮实际读OEWS concepts组成，含佣金等激励及规定津贴，排除加班溢价/轮班差额。",
                 "market": "美国",
                 "name": "BLS Handbook of Methods：Occupational Employment and Wage Statistics",
                 "period": "现行方法说明；检索 2026-09-19",
@@ -31546,14 +31618,15 @@
                 "url": "https://www.bls.gov/opub/hom/oews/home.htm"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页的工资口径说明。",
-                  "不能用于推导个人收入。"
+                  "不能用于推导个人收入。",
+                  "本轮核查：2025全国五分位年44530/50540/61770/75470/88740美元，时21.41/24.30/29.70/36.29/42.66。OEWS是雇员直时税前工资，含佣金等激励、生产奖金及规定津贴，排除加班溢价/轮班差额/非生产奖金等；非一概排除计件提成，不含自雇，非个人全年到手。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-3",
-                "limitation": "同一全国工资页的年与小时双口径数值；用于说明分位与单位换算的边界，以及受雇口径不含加班与计件提成的限制。",
+                "limitation": "2025全国五分位年44530/50540/61770/75470/88740美元，时21.41/24.30/29.70/36.29/42.66。OEWS是雇员直时税前工资，含佣金等激励、生产奖金及规定津贴，排除加班溢价/轮班差额/非生产奖金等；非一概排除计件提成，不含自雇，非个人全年到手。",
                 "market": "美国",
                 "name": "O*NET OnLine：Bus and Truck Mechanics and Diesel Engine Specialists 全国工资（49-3031.00）",
                 "period": "2025 年 5 月工资数据；检索 2026-09-19",
@@ -31562,14 +31635,15 @@
                 "url": "https://www.onetonline.org/link/localwages/49-3031.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页对认证与学徒路径入口的说明。",
-                  "不构成认证要求或授权结论。"
+                  "不构成认证要求或授权结论。",
+                  "本轮核查：训练认证入口不等完整各州法定资格清单，BLS认证可能要求偏好/CDL可能，具体当前费时考试条件未全核。"
                 ],
                 "evidence_type": "official guidance",
                 "id": "ratify",
-                "limitation": "提供该职业代码下的执照、认证与学徒信息入口，以及雇主可能要求行业认证的说明；入口不预测岗位数量或工资水平，行业认证也不等于执业许可。",
+                "limitation": "训练认证入口不等完整各州法定资格清单，BLS认证可能要求偏好/CDL可能，具体当前费时考试条件未全核。",
                 "market": "美国",
                 "name": "O*NET OnLine：Bus and Truck Mechanics and Diesel Engine Specialists 执照与训练入口（49-3031.00）",
                 "period": "页面 2026 年更新；检索 2026-09-19",
@@ -31578,14 +31652,15 @@
                 "url": "https://www.onetonline.org/link/localcert/49-3031.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页对技术影响范围与限制的说明。",
-                  "不能用于推断岗位数量或工资变化。"
+                  "不能用于推断岗位数量或工资变化。",
+                  "本轮核查：同批已读ILO2025摘要，未核49-3031—ISCO匹配评分/GenAI采用、替代或工资因果，不称完整研究无数据。"
                 ],
                 "evidence_type": "research report",
                 "id": "sag",
-                "limitation": "提供生成式人工智能对不同职业的暴露程度指数，用于判断本职业在暴露分类中的位置；暴露指数衡量任务与技术的重叠程度，不是实际替代率，也未按国家或企业规模细分。",
+                "limitation": "同批已读ILO2025摘要，未核49-3031—ISCO匹配评分/GenAI采用、替代或工资因果，不称完整研究无数据。",
                 "market": "全球",
                 "name": "ILO：Generative AI and Jobs — A Refined Global Index of Occupational Exposure",
                 "period": "2025 年发布；检索 2026-09-19",
@@ -31594,14 +31669,15 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页对工作情境与准备层级的说明。",
-                  "工作情境比例为从业者反馈的总体情况。"
+                  "工作情境比例为从业者反馈的总体情况。",
+                  "本轮核查：美国57项情境实际核：污染85%每天、噪声81%每天、危险设备60%每天、PPE78%每天；手操作80%持续、站立59%持续、弯身59%持续；准确53%极其重要、他人安全72%很高责任、面对面90%每天。是调查频率/意见，不是事故率、全部工位条件或中国分布。 O*NET兴趣R100/C46/I38/S9/E5/A0支持RCI，非个人能力/录用线；17工作风格Impact可靠82、细节81、谨慎65、坚持59、抗压42等，非大五分数或人口比例。近距视力75/手部稳定72为能力重要性，不是IQ阈值；本职业人格测试/学习预测效度未核。 自身26任务23Core/3Supp，不是每岗全做；替代燃料任务非增长时间序列。"
                 ],
                 "evidence_type": "official occupational profile",
                 "id": "sag-moa",
-                "limitation": "同一详细资料页，用于核对工作情境比例与准备层级说明（Job Zone Three，SVP 6.0 到低于 7.0，通常需要 1—2 年培训）。",
+                "limitation": "美国57项情境实际核：污染85%每天、噪声81%每天、危险设备60%每天、PPE78%每天；手操作80%持续、站立59%持续、弯身59%持续；准确53%极其重要、他人安全72%很高责任、面对面90%每天。是调查频率/意见，不是事故率、全部工位条件或中国分布。 O*NET兴趣R100/C46/I38/S9/E5/A0支持RCI，非个人能力/录用线；17工作风格Impact可靠82、细节81、谨慎65、坚持59、抗压42等，非大五分数或人口比例。近距视力75/手部稳定72为能力重要性，不是IQ阈值；本职业人格测试/学习预测效度未核。 自身26任务23Core/3Supp，不是每岗全做；替代燃料任务非增长时间序列。",
                 "market": "美国",
                 "name": "O*NET OnLine：Bus and Truck Mechanics and Diesel Engine Specialists 详细资料（49-3031.00）",
                 "period": "页面 2026 年更新；检索 2026-09-19",
@@ -31624,6 +31700,81 @@
                 "publisher": "O*NET OnLine",
                 "scope": "related",
                 "url": "https://www.onetonline.org/link/summary/53-3032.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "自身316000到327400、增长4%、净增11400、年均24400空缺含增长和更替；非个人录用或区域岗位。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-trends-current",
+                "limitation": "自身316000到327400、增长4%、净增11400、年均24400空缺含增长和更替；非个人录用或区域岗位。",
+                "market": "美国",
+                "name": "O*NET柴油设备维修2025—2035全国预测",
+                "period": "2025基期/2025—2035；检索2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/49-3031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "全兼职非农雇员直时税前，含生活成本/危险津贴、佣金等激励和生产奖金；排除加班溢价、轮班差额和非生产奖金等，自雇不覆盖；并非一概排除计件提成或津贴。"
+                ],
+                "evidence_type": "official statistical methodology",
+                "id": "r5-oews-concepts",
+                "limitation": "全兼职非农雇员直时税前，含生活成本/危险津贴、佣金等激励和生产奖金；排除加班溢价、轮班差额和非生产奖金等，自雇不覆盖；并非一概排除计件提成或津贴。",
+                "market": "美国",
+                "name": "BLS OEWS工资组成与覆盖",
+                "period": "现行方法；检索2026-10-09",
+                "publisher": "Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "表2/5居民服务修理其他服务业非私营70226/私营52059元年平均；运输仓储邮政133981/73133。5人以上城镇法人，排除个体自由职业；非私营不限国企。按实际单位匹配背景，不代表柴油维修单职业/中位数/报价或个人到手。"
+                ],
+                "evidence_type": "official industry wage statistics",
+                "id": "r5-nbs-current",
+                "limitation": "表2/5居民服务修理其他服务业非私营70226/私营52059元年平均；运输仓储邮政133981/73133。5人以上城镇法人，排除个体自由职业；非私营不限国企。按实际单位匹配背景，不代表柴油维修单职业/中位数/报价或个人到手。",
+                "market": "中国内地",
+                "name": "国家统计局2025维修服务与运输业工资背景",
+                "period": "2025年；2026-05-15发布；检索2026-10-09",
+                "publisher": "国家统计局",
+                "scope": "contextual",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "68页PDF实际读职业概况及申报鉴定p6—9，目视p7；五等级/初中文化，正常色觉仅车身涂装修复人员。五级工作1年或学徒期满；四级证后4年/累计6年/规定学校专业学历等分支；理论技能及适用综合评审各60分，技师高级技师综合评审。旧版非2024新增工种的更新申报公告，不假称全部分等级工作表已审；评价机构当前费用周期及补贴未核。"
+                ],
+                "evidence_type": "original national occupational skill standard",
+                "id": "r5-cn-standard",
+                "limitation": "68页PDF实际读职业概况及申报鉴定p6—9，目视p7；五等级/初中文化，正常色觉仅车身涂装修复人员。五级工作1年或学徒期满；四级证后4年/累计6年/规定学校专业学历等分支；理论技能及适用综合评审各60分，技师高级技师综合评审。旧版非2024新增工种的更新申报公告，不假称全部分等级工作表已审；评价机构当前费用周期及补贴未核。",
+                "market": "中国内地",
+                "name": "汽车维修工国家职业技能标准2018版原文PDF",
+                "period": "2018-12-28公布；2019印次；检索2026-10-09",
+                "publisher": "人社部、交通运输部制定；职业技能标准平台载原文",
+                "scope": "contextual",
+                "url": "https://www.osta.org.cn/api/sys/downloadFile/decrypt?fileName=4eNsZIOv3WFNDfbnldJHeA%2F2024%2F4%2F29%2Fe2e79679ef4848a188f59fa29954e280.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读附件p14—15并目视p15：汽车维修工4-12-01-01下增商用车维修工，不是新独立职业或个人执业许可，不自动推出工资、证书费用或申报条件。"
+                ],
+                "evidence_type": "official occupation classification notification",
+                "id": "r5-cn-editor-attachment",
+                "limitation": "实际读附件p14—15并目视p15：汽车维修工4-12-01-01下增商用车维修工，不是新独立职业或个人执业许可，不自动推出工资、证书费用或申报条件。",
+                "market": "中国内地",
+                "name": "2024新增工种通知官方附件：商用车维修工",
+                "period": "2024-07-25通知附件；检索2026-10-09",
+                "publisher": "人社部等三部门/中国政府网",
+                "scope": "contextual",
+                "url": "https://www.gov.cn/zhengce/zhengceku/202407/P020240731502013926154.pdf"
               }
             ]
           },
@@ -34084,7 +34235,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "sag-moa"
             ],
             "id": "image-use",
             "mitigation": {
@@ -34120,7 +34271,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "sag-moa"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -34265,7 +34416,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
+              "sag-moa",
               "employer"
             ],
             "id": "audition-feedback",
@@ -34293,7 +34444,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "sag-moa",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34301,7 +34452,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "sag-moa",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34420,42 +34571,42 @@
             {
               "指标": "数据类型",
               "数值": "制度与计酬方式为主",
-              "说明": "中国大陆公开工资统计按行业门类与单位类型发布，未建立与本职业对应的职业级口径；本页因此保留缺口，不以行业均值替代。"
+              "说明": "行业背景非职业工资；本轮未取得全国单职业/代表性招聘/计薪普遍分布；维修收费非员工工资"
             },
             {
               "指标": "管理方式",
               "数值": "机动车维修经营备案",
-              "说明": "《机动车维修管理规定》对机动车维修经营实行备案管理；一类与二类汽车维修业务须配备技术负责人员、质量检验人员、业务接待人员以及机修、电器、钣金、涂漆维修技术人员。"
+              "说明": "行业背景非职业工资；本轮未取得全国单职业/代表性招聘/计薪普遍分布；维修收费非员工工资"
             },
             {
               "指标": "技能等级",
               "数值": "汽车维修工（含商用车维修工）",
-              "说明": "《汽车维修工国家职业技能标准》设五级/初级工至一级/高级技师；2024 年 7 月人力资源社会保障部等部门在汽车维修工职业下增设商用车维修工工种。"
+              "说明": "行业背景非职业工资；本轮未取得全国单职业/代表性招聘/计薪普遍分布；维修收费非员工工资"
             },
             {
               "指标": "计酬方式",
-              "数值": "岗位薪酬加绩效或按件按工时",
-              "说明": "行业内常见岗位月薪加绩效、按维修工时定额与工时单价结算、按件计酬以及自营经营收入等多种形式，彼此差异较大。"
+              "数值": "计酬以具体合同和单位制度核对；未核全国普遍形式，维修收费不等员工工资。",
+              "说明": "行业背景非职业工资；本轮未取得全国单职业/代表性招聘/计薪普遍分布；维修收费非员工工资"
             },
             {
               "指标": "用工形式",
-              "数值": "企业与车队岗位为主",
-              "说明": "以机动车维修企业、品牌服务站、公交与货运企业自有维修场站以及个体维修点为主要载体。"
+              "数值": "维修企业、车队可作岗位场景例；未核中国全国用工构成。",
+              "说明": "行业背景非职业工资；本轮未取得全国单职业/代表性招聘/计薪普遍分布；维修收费非员工工资"
             },
             {
               "指标": "训练与取证费用",
               "数值": "按单位制度与地方政策",
-              "说明": "培训与取证费用按用工单位制度与地方政策执行；部分地区对取得职业技能等级证书的人员有技能提升补贴政策，条件以当地人力资源社会保障部门公布为准。"
+              "说明": "行业背景非职业工资；本轮未取得全国单职业/代表性招聘/计薪普遍分布；维修收费非员工工资"
             },
             {
               "指标": "样本边界",
               "数值": "职业级缺口",
-              "说明": "网络招聘报价、行业门类均值与个体经营收入都不能折算为全国中位数，也不能与美国受雇工资统计直接比较。"
+              "说明": "行业背景非职业工资；本轮未取得全国单职业/代表性招聘/计薪普遍分布；维修收费非员工工资"
             },
             {
               "指标": "地区比较",
               "数值": "中美证据分别解释",
-              "说明": "美国分位为受雇税前工资统计口径（不含加班与计件提成）；中国大陆为岗位薪酬制度与自营收入，两者在地域、人群与计酬方式上不同，应分别解释。"
+              "说明": "行业背景非职业工资；本轮未取得全国单职业/代表性招聘/计薪普遍分布；维修收费非员工工资"
             }
           ],
           "china_ai_row": {
@@ -34464,11 +34615,11 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_class_row": "中国大陆官方与制度性材料",
+          "china_class_row": "汽车维修工4-12-01-01，2024新增商用车维修工工种，技能评价非备案",
           "china_edu_table": [
             {
               "学历段": "作业与经营要求",
-              "岗位方向": "《机动车维修管理规定》要求从业人员执行机动车维修安全生产操作规程、不得违章作业；经营者应加强从业人员安全教育和职业道德教育；维修配件实行追溯制度，不得使用假冒伪劣配件。",
+              "岗位方向": "美国典型入口与中国2018技能标准分开；2024新增工种当前评价公告另核",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
                 "block": "china-salary",
@@ -34478,7 +34629,7 @@
             },
             {
               "学历段": "技能等级路径",
-              "岗位方向": "汽车维修工国家职业技能标准设五级/初级工至一级/高级技师，评价方式含理论知识考试、技能考核与综合评审；职业能力特征要求手指和手臂灵活性好，并有动作协调性与空间感。",
+              "岗位方向": "美国典型入口与中国2018技能标准分开；2024新增工种当前评价公告另核",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
                 "block": "china-salary",
@@ -34488,7 +34639,7 @@
             },
             {
               "学历段": "专项作业范围",
-              "岗位方向": "三类汽车维修业务按备案经营项目可从事发动机维修、车身维修、电气系统维修、喷油泵和喷油器维修、轮胎动平衡及修补、四轮定位检测调整等专项作业，范围受备案限制。",
+              "岗位方向": "美国典型入口与中国2018技能标准分开；2024新增工种当前评价公告另核",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.theater",
                 "block": "china-salary",
@@ -34498,7 +34649,7 @@
             },
             {
               "学历段": "全国职业级工资分布",
-              "岗位方向": "本轮未取得可核对的职业级工资统计；不以行业均值或招聘报价替代。",
+              "岗位方向": "证据不足：本轮未取得中国柴油维修单职业全国工资分布或代表性招聘样本；行业均值不能替代。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.national",
                 "block": "china-salary",
@@ -34561,7 +34712,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "统计口径状态",
+          "china_open": "本轮NBS2025匹配行业背景，柴油维修职业工资/招聘样本缺口；维修收费非员工计薪",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34608,7 +34759,7 @@
               "月薪参考": {
                 "$join": [
                   {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
+                    "$fact": "r5-current-china-jiaojiang-featured-daily-2026",
                     "field": "display_value"
                   },
                   {
@@ -34631,10 +34782,10 @@
               }
             }
           ],
-          "china_soc_row": "中国大陆薪资口径",
+          "china_soc_row": "美国49-3031自身与中国职业/工种分别核，非一一映射",
           "edu": "训练与技能等级见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "r5-current-china-jiaojiang-featured-daily-2026"
           ],
           "sources_note": "来源链接按各自适用范围使用。",
           "ui": {
@@ -34697,68 +34848,70 @@
         },
         "bls_table": [
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-low",
             "指标": "薪资 · 10 分位",
             "数值": {
-              "$fact": "low",
+              "$fact": "r5-current-low",
               "field": "display_value"
             },
             "说明": "本职业 2025 年 5 月工资数据的分布低端，是统计位置而不是入职起薪。"
           },
           {
+            "fact_ref": "r5-current-median",
             "指标": "薪资 · 25 分位",
             "数值": "50,540 美元/年",
             "说明": "本职业 2025 年 5 月工资数据的下四分位；小时口径为 24.30 美元。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-median",
             "指标": "薪资 · 中位数",
             "数值": {
-              "$fact": "median",
+              "$fact": "r5-current-median",
               "field": "display_value"
             },
             "说明": "本职业 2025 年 5 月工资数据的中间位置：一半从业者低于、一半高于该值（中位时薪 29.70 美元）。"
           },
           {
+            "fact_ref": "r5-current-median",
             "指标": "薪资 · 75 分位",
             "数值": "75,470 美元/年",
             "说明": "本职业 2025 年 5 月工资数据的上四分位；小时口径为 36.29 美元。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-high",
             "指标": "薪资 · 90 分位",
             "数值": {
-              "$fact": "high",
+              "$fact": "r5-current-high",
               "field": "display_value"
             },
-            "说明": "本职业 2025 年 5 月工资数据的分布高端，通常与专精方向、认证数量与雇主类型相关。"
+            "说明": "第90分位是分布位置，不证明技能/认证数量因果"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024 就业 · 本职业人数",
+            "fact_ref": "r5-current-employment",
+            "指标": "2025就业 · 本职业岗位",
             "数值": {
-              "$fact": "employment",
+              "$fact": "r5-current-employment",
               "field": "display_value"
             },
-            "说明": "2024 年本职业就业规模（O*NET 摘要页口径约 319,900 人）；BLS 职业展望 2025 年口径为 316,000 个岗位，覆盖略有差别。"
+            "说明": "当前美国自身49-3031：2025约316000个岗位，2035约327400，2025—2035增长4%、净增11400，年均24400空缺含增长与更替。O*NET/BLS当前同预测期，不能把旧2024—2034值再称当前另一口径；空缺非净新增或个人机会。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 增长预测",
+            "fact_ref": "r5-current-growth",
+            "指标": "2025—2035就业 · 增长预测",
             "数值": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "display_value"
             },
-            "说明": "O*NET 摘要页标注为增长 1% 至 2%（低于平均）；BLS 职业展望的 2025—2035 年口径为 +4%（与平均相当）。"
+            "说明": "当前美国自身49-3031：2025约316000个岗位，2035约327400，2025—2035增长4%、净增11400，年均24400空缺含增长与更替。O*NET/BLS当前同预测期，不能把旧2024—2034值再称当前另一口径；空缺非净新增或个人机会。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 预计空缺",
+            "fact_ref": "r5-current-openings",
+            "指标": "2025—2035就业 · 年均空缺",
             "数值": {
-              "$fact": "openings",
+              "$fact": "r5-current-openings",
               "field": "display_value"
             },
-            "说明": "约 26,500 个（O*NET 摘要页口径）；BLS 职业展望 2025—2035 年年均约 24,400 个，均以更替需求为主。"
+            "说明": "当前美国自身49-3031：2025约316000个岗位，2035约327400，2025—2035增长4%、净增11400，年均24400空缺含增长与更替。O*NET/BLS当前同预测期，不能把旧2024—2034值再称当前另一口径；空缺非净新增或个人机会。"
           }
         ],
         "boundary": {
@@ -34820,7 +34973,7 @@
           "type": "prose"
         },
         "growth": {
-          "$fact": "growth",
+          "$fact": "r5-current-growth",
           "field": "display_value"
         },
         "heading": {
@@ -34835,13 +34988,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024年基期（O*NET 摘要页与详细资料页）",
+        "industry_period": "2025美国49-3031自身行业子集",
         "industry_rows": [
           {
-            "fact_ref": "median",
-            "industry": "运输与仓储、批发贸易（O*NET 2024 年基期给出的主要行业门类，未附占比与人数）",
+            "fact_ref": "r5-current-industry-theater",
+            "industry": "地方政府（不含教育医院）",
             "median": {
-              "$fact": "industry-theater",
+              "$fact": "r5-current-industry-theater",
               "field": "display_value"
             },
             "note": {
@@ -34852,10 +35005,10 @@
             }
           },
           {
-            "fact_ref": "median",
-            "industry": "维修车间与车队场站为主，偶尔在路边或作业现场维修",
+            "fact_ref": "r5-current-industry-education",
+            "industry": "批发贸易",
             "median": {
-              "$fact": "industry-education",
+              "$fact": "r5-current-industry-education",
               "field": "display_value"
             },
             "note": {
@@ -34866,10 +35019,10 @@
             }
           },
           {
-            "fact_ref": "median",
-            "industry": "工作情境：接触污染物 85% 每天、噪音 81% 每天、用手操作与控制工具 80% 持续、处于封闭车辆或操作封闭设备 68% 每天",
+            "fact_ref": "r5-current-industry-amusement",
+            "industry": "汽车维修",
             "median": {
-              "$fact": "industry-amusement",
+              "$fact": "r5-current-industry-amusement",
               "field": "display_value"
             },
             "note": {
@@ -34880,7 +35033,7 @@
             }
           },
           {
-            "industry": "O*NET 未提供更细的行业分布与行业工资",
+            "industry": "其他行业及自雇边界",
             "median": "统计不含自雇",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
@@ -34936,7 +35089,7 @@
           }
         ],
         "median": {
-          "$fact": "median",
+          "$fact": "r5-current-median",
           "field": "display_value"
         },
         "outlook_heading": {
@@ -34946,7 +35099,7 @@
           "type": "prose"
         },
         "outlook_period": {
-          "$fact": "growth",
+          "$fact": "r5-current-growth",
           "field": "period"
         },
         "wage_column_labels": [
@@ -34963,7 +35116,7 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "不可按固定工时年化",
+            "equivalent": "官方年度统计值，非个人全年到手",
             "interpretation": {
               "$item": "actors.us-salary.career-snapshot-secondary-locale.2",
               "block": "us-salary",
@@ -34972,7 +35125,7 @@
             },
             "label": "较低工资位置",
             "value": {
-              "$fact": "low",
+              "$fact": "r5-current-low",
               "field": "display_value"
             }
           },
@@ -34986,7 +35139,7 @@
             },
             "label": "全国中位工资",
             "value": {
-              "$fact": "median",
+              "$fact": "r5-current-median",
               "field": "display_value"
             }
           },
@@ -35000,7 +35153,7 @@
             },
             "label": "较高工资位置",
             "value": {
-              "$fact": "high",
+              "$fact": "r5-current-high",
               "field": "display_value"
             }
           }
@@ -35153,7 +35306,7 @@
           {
             "geography": "美国",
             "horizon": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "period"
             },
             "interpretation": {
@@ -35172,13 +35325,13 @@
             "occupation_scope": "柴油设备维修技师与机械师（O*NET-SOC 49-3031.00）",
             "source_id": "bls",
             "value": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "display_value"
             }
           },
           {
             "geography": "美国",
-            "horizon": "2024 年基期",
+            "horizon": "2025年基期（BLS）",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -35193,8 +35346,8 @@
             },
             "metric": "本职业就业规模",
             "occupation_scope": "柴油设备维修技师与机械师（O*NET-SOC 49-3031.00）",
-            "source_id": "ratify",
-            "value": "2024 年约 319,900 人（O*NET 摘要页口径）；BLS 职业展望 2025 年为 316,000 个岗位"
+            "source_id": "bls",
+            "value": "BLS职业手册：2025年约316000个岗位；O*NET趋势页本轮仍列2024—2034期，另作历史版本说明。"
           },
           {
             "geography": "美国与中国大陆",
@@ -35221,7 +35374,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "employer",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35229,7 +35382,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "employer",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35532,7 +35685,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 摘要页与 BLS 职业展望（就业与预测，两个口径）",
+            "label": "O*NET摘要与趋势发布版本、BLS职业手册2025—2035预测分别核对",
             "secondary_value": null,
             "value": {
               "$item": "actors.display.onet_structured_fields_block.employer",
@@ -37055,6 +37208,132 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "61770美元/年；29.70美元/时（2025中位数）",
+        "fact_id": "r5-current-median",
+        "market": "美国",
+        "measure": "全国工资分位",
+        "occupation_scope": "49-3031雇员直时税前，含佣金等激励及规定津贴，不一概排除计件提成；非个人到手/自雇/技能线",
+        "period": "2025",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "44530美元/年；21.41美元/时（2025第10分位）",
+        "fact_id": "r5-current-low",
+        "market": "美国",
+        "measure": "全国工资分位",
+        "occupation_scope": "49-3031雇员直时税前，含佣金等激励及规定津贴，不一概排除计件提成；非个人到手/自雇/技能线",
+        "period": "2025",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "88740美元/年；42.66美元/时（2025第90分位）",
+        "fact_id": "r5-current-high",
+        "market": "美国",
+        "measure": "全国工资分位",
+        "occupation_scope": "49-3031雇员直时税前，含佣金等激励及规定津贴，不一概排除计件提成；非个人到手/自雇/技能线",
+        "period": "2025",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约316000岗位（2025）",
+        "fact_id": "r5-current-employment",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "49-3031自身美国，不是个人机会",
+        "period": "2025基期/2025—2035",
+        "source_refs": [
+          "employer",
+          "r5-trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "增长4%，净增11400；2035约327400岗位",
+        "fact_id": "r5-current-growth",
+        "market": "美国",
+        "measure": "十年就业变化",
+        "occupation_scope": "49-3031自身美国，不是个人机会",
+        "period": "2025基期/2025—2035",
+        "source_refs": [
+          "employer",
+          "r5-trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均约24400空缺（含增长及更替）",
+        "fact_id": "r5-current-openings",
+        "market": "美国",
+        "measure": "年均空缺",
+        "occupation_scope": "49-3031自身美国，不是个人机会",
+        "period": "2025基期/2025—2035",
+        "source_refs": [
+          "employer",
+          "r5-trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "地方政府（排除教育医院）｜71460美元中位年薪；9%就业",
+        "fact_id": "r5-current-industry-theater",
+        "market": "美国",
+        "measure": "行业本职业工资/就业占比",
+        "occupation_scope": "49-3031自身行业子集，不是全行业年平均",
+        "period": "2025",
+        "source_refs": [
+          "employer"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "批发贸易｜63070美元中位年薪；13%就业",
+        "fact_id": "r5-current-industry-education",
+        "market": "美国",
+        "measure": "行业本职业工资/就业占比",
+        "occupation_scope": "49-3031自身行业子集，不是全行业年平均",
+        "period": "2025",
+        "source_refs": [
+          "employer"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "汽车维修｜60330美元中位年薪；9%就业",
+        "fact_id": "r5-current-industry-amusement",
+        "market": "美国",
+        "measure": "行业本职业工资/就业占比",
+        "occupation_scope": "49-3031自身行业子集，不是全行业年平均",
+        "period": "2025",
+        "source_refs": [
+          "employer"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：本轮未取得中国柴油维修单职业工资分布及代表性招聘样本。NBS2025居民服务、修理和其他服务业非私营70226/私营52059元年均，实际运输单位另有133981/73133；5人以上城镇法人、多职业、非私营不限国企，排除个体自由职业，仅匹配单位行业背景而非本职业工资/中位数/报价。",
+        "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
+        "market": "中国内地",
+        "measure": "职业工资缺口与匹配行业背景",
+        "occupation_scope": "中国按实际单位行业匹配，多职业非柴油维修自身",
+        "period": "2025行业/检索2026-10-09",
+        "source_refs": [
+          "r5-nbs-current"
+        ]
       }
     ]
   },
@@ -37063,7 +37342,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "柴油机诊断 · 拆装与大修 · 安全部件复核与试车",
@@ -37114,7 +37393,7 @@
       "text": "柴油设备维修技师与机械师"
     }
   },
-  "source_content_sha256": "608563184836a378aa9df843a83676a1187f463accd5a189aa3cc90019ac0304",
+  "source_content_sha256": "f4f5db5f2ac4794bdfa9609c0d11741e7de02a3d6be96352afe24f3908d4f3e6",
   "subject": {
     "canonical_slug": "diesel-service-technicians-and-mechanics",
     "name": "柴油设备维修技师与机械师",

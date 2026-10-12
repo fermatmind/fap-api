@@ -12372,7 +12372,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆《职业分类大典》未单列与该 O*NET 精确职业一一对应的职业。"
+              "未取得与美国MEMS职业精确对应的中国全国工资；匹配科研服务雇主可参考2025行业年均182,064/83,560元，不套制造雇主。"
             ]
           },
           "id": "microsystems-engineers.china-salary.career-snapshot-primary-locale.2",
@@ -12400,7 +12400,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国大陆微系统工程师的全国职业工资（本轮公开口径）；本页标注缺失，不用行业代理或美国数字填补。"
+              "精确职业工资与统一起薪未取得；行业年均不能填补缺口，不从美国父职业工资推中国收入。"
             ]
           },
           "id": "microsystems-engineers.china-salary.career-snapshot-primary-locale.4",
@@ -12838,35 +12838,35 @@
             ],
             "rows": [
               [
-                "入职 0—6 个月",
+                "监督学习",
                 "在指导下参与设计与仿真",
                 "不得独立放行结果",
                 "设计练习与评审记录",
                 "扩展到独立设计"
               ],
               [
-                "6—18 个月",
+                "常见设计考核",
                 "独立完成版图、仿真与制程核对",
                 "工艺变更须经评审",
                 "设计、工艺与测试记录",
                 "扩展到器件负责"
               ],
               [
-                "2—4 年",
+                "获准器件负责",
                 "负责一类器件的开发闭环",
                 "放行须由授权人签署",
                 "器件与验证记录",
                 "扩展到多器件平台"
               ],
               [
-                "4—8 年",
+                "获准体系协作",
                 "主导工艺与验证体系的一部分",
                 "授权与合规由机构确认",
                 "规范与评审记录",
                 "扩展到体系与规范职责"
               ],
               [
-                "8 年以上",
+                "获准规范与带教",
                 "在授权范围内主导流程与评审",
                 "不得替代机构质量与安全职能",
                 "规范与带教记录",
@@ -12904,14 +12904,14 @@
                 "设计与口径说明"
               ],
               [
-                "试用期前 6 个月",
+                "监督学习阶段",
                 "在指导下完成设计与测试任务",
                 "由导师复核设计与记录",
                 "设计与测试记录"
               ],
               [
-                "试用期结束",
-                "独立完成常见设计并撰写报告",
+                "岗位评价阶段",
+                "经过实际考核与授权承担对应设计任务，不以试用结束自动放行",
                 "由负责人确认贡献与合规",
                 "报告与合规记录"
               ]
@@ -12939,7 +12939,7 @@
             "rows": [
               [
                 "学历",
-                "学士为起点、多需硕士或博士",
+                "新入职调查硕士34%、学士31%、博士22%；按实际雇主核验",
                 "用人单位与院校",
                 "按方向核验",
                 "学历不等同操作授权",
@@ -13012,7 +13012,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国就业与增长采用父级口径 Engineers, All Other（17-2199.00）：2024 年就业约 158,800 人，2034 年预计约 162,100 人，2024—2034 年预计增长约 2%（慢于平均），年均职位空缺约 9,300 个。"
+              "父职业Engineers, All Other（17-2199.00）：2025—2035就业166,700→173,000人，增长4%、净增6,300人，年均空缺8,800含增长与替换需求；非微系统单列预测或AI归因。"
             ]
           },
           "id": "microsystems-engineers.market-signals.market-signal-card.1",
@@ -13040,7 +13040,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034"
+              "2025—2035预测；实际招聘样本未采集，父职业数据不能证明MEMS精确需求。"
             ]
           },
           "id": "microsystems-engineers.market-signals.market-signal-card.3",
@@ -13707,7 +13707,7 @@
             }
           }
         ],
-        "answer": "工具可辅助版图与参数扫描、数据处理与文档起草，但设计判断、制程放行与验证结论仍由工程师负责。",
+        "answer": "编辑试用：获准设计资料检索、测试数据整理和文档起草；传统CAD、仿真、统计过程控制与生成式AI分开。具体版图生成/参数优化可靠效果未取得；设计、变更与验证责任由人确认。",
         "authority_links": [
           {
             "来源": "17-2199.06 Microsystems Engineers",
@@ -13755,22 +13755,22 @@
         "difference_intro": "AI 对设计、制程与验证的影响不同，剩余责任也不同。",
         "difference_rows": [
           {
-            "AI主要改变": "版图与参数扫描辅助",
+            "AI主要改变": "编辑试用建议：版图与参数扫描辅助",
             "仍由人负责": "设计判断与规格确认",
             "方向": "设计与仿真"
           },
           {
-            "AI主要改变": "工艺窗口与统计优化辅助",
+            "AI主要改变": "编辑试用建议：工艺窗口与统计优化辅助",
             "仍由人负责": "制程变更与放行",
             "方向": "制程与封装"
           },
           {
-            "AI主要改变": "测试数据整理与异常筛选辅助",
+            "AI主要改变": "编辑试用建议：测试数据整理与异常筛选辅助",
             "仍由人负责": "判据确认与验证结论",
             "方向": "测试与验证"
           }
         ],
-        "evidence_intro": "三类证据分开核对：任务能力、组织采用与岗位结果不能互相替代。",
+        "evidence_intro": "证据不足：本职业生成式AI采用率、可靠效果和岗位因果未取得；任务/软件/ILO暴露与父职业预测不能互相替代。",
         "evidence_rows": [
           {
             "使用限制": "为全球暴露度指标，不构成地区采用率或替代结论。",
@@ -13794,10 +13794,10 @@
             "链接": "https://www.onetonline.org/link/summary/17-2199.06"
           },
           {
-            "使用限制": "行业分布是雇主场景信号，不是需求预测。",
+            "使用限制": "Engineers, All Other父职业雇主分布；非MEMS单列分布、工资或预测。",
             "来源": "Industries: 17-2199.06 - Microsystems Engineers",
             "研究对象": "行业分布（O*NET Industries）",
-            "结论": "政府约 28%、专业科学技术服务约 24%、制造约 23%",
+            "结论": "父职业行业：专业科学技术26%、政府25%、制造21%、其他28%",
             "链接": "https://www.onetonline.org/link/industry/17-2199.06"
           },
           {
@@ -13811,7 +13811,7 @@
         "heading": "微系统工程师的任务与 AI 边界",
         "method_cards": [
           {
-            "含义": "版图生成、参数扫描、数据整理与文档起草可被软件辅助；设计判断、制程放行与验证结论仍由工程师负责。",
+            "含义": "CAD/仿真/统计与生成式AI区分；本页语言模型辅助只是编辑试用建议，不证明实际部署或可靠效果。",
             "概念": "任务层面的可被辅助能力"
           },
           {
@@ -13831,7 +13831,7 @@
             "问题": "AI 会取代微系统工程师吗？"
           },
           {
-            "回答": "版图生成与参数扫描可被辅助，但设计判断与规格确认仍由工程师负责。",
+            "回答": "传统CAD/仿真可支持工程流程；生成式AI版图或参数建议须另核真实正确性，设计和规格由负责人确认。",
             "来源": "Microsystems Engineers detailed occupation profile",
             "链接": "https://www.onetonline.org/link/details/17-2199.06",
             "问题": "版图与仿真能自动化吗？"
@@ -13922,43 +13922,43 @@
             "人的控制点": "由设计负责人确认规格与版图评审",
             "任务": "创建 MEMS 器件的原理图与物理版图，并核对工艺、功能与封装约束",
             "工作方向": "设计与仿真",
-            "当前变化": "版图生成与参数扫描可被仿真工具加速"
+            "当前变化": "编辑试用/工具线索：版图生成与参数扫描可被仿真工具加速；未核本职业可靠效果"
           },
           {
             "人的控制点": "由工艺负责人确认制程窗口与变更",
             "任务": "开发 MEMS 生产方法，如集成电路制程、光刻电铸建模与微加工",
             "工作方向": "器件与制程开发",
-            "当前变化": "制程参数优化可借助统计过程控制与仿真辅助"
+            "当前变化": "编辑试用/工具线索：制程参数优化可借助统计过程控制与仿真辅助；未核本职业可靠效果"
           },
           {
             "人的控制点": "由封装负责人确认可靠性与装配合规",
             "任务": "评估材料、接合方式、表面处理与封装方案",
             "工作方向": "封装与装配",
-            "当前变化": "封装方案比较可被建模与数据工具辅助"
+            "当前变化": "编辑试用/工具线索：封装方案比较可被建模与数据工具辅助；未核本职业可靠效果"
           },
           {
             "人的控制点": "由测试负责人确认判据与结果放行",
             "任务": "执行环境测试、加速老化与器件表征以验证器件",
             "工作方向": "测试与验证",
-            "当前变化": "测试数据整理与异常筛选可被自动化"
+            "当前变化": "编辑试用/工具线索：测试数据整理与异常筛选可被自动化；未核本职业可靠效果"
           },
           {
             "人的控制点": "由可靠性负责人确认失效结论",
             "任务": "开展失效、可靠性与良率分析",
             "工作方向": "失效与良率分析",
-            "当前变化": "失效模式统计与数据挖掘可被辅助"
+            "当前变化": "编辑试用/工具线索：失效模式统计与数据挖掘可被辅助；未核本职业可靠效果"
           },
           {
             "人的控制点": "由作者与法务确认文档与知识产权内容",
             "任务": "编写规范、BOM、工艺与质量文档，并处理专利与知识产权披露",
             "工作方向": "技术文档与知识产权",
-            "当前变化": "文档起草与既有资料检索可被语言工具辅助"
+            "当前变化": "编辑试用/工具线索：文档起草与既有资料检索可被语言工具辅助；未核本职业可靠效果"
           },
           {
             "人的控制点": "由采购与质量负责人确认供应商与来料",
             "任务": "执行来料验收、供应商资格、审核与纠正措施核对",
             "工作方向": "来料与供应商",
-            "当前变化": "来料记录与合规核对可被系统辅助"
+            "当前变化": "编辑试用/工具线索：来料记录与合规核对可被系统辅助；未核本职业可靠效果"
           }
         ],
         "transition": "从微系统工程师转向相邻方向，优先比较可迁移能力，再补齐目标方向特有的知识、工具与资格要求。"
@@ -14033,32 +14033,32 @@
         "locale_requirements": {
           "credential_boundary": "学历、培训与机构授权不是同一状态；学位不等于工艺、设备或结果放行授权。",
           "jurisdiction": "本页采用美国 O*NET/BLS 口径说明职业事实；中国大陆的学历、工艺与安全规则以当地主管部门与用人单位为准。",
-          "summary": "美国本职业调查中 34% 为硕士、31% 为学士、22% 为博士；中国大陆按用人单位、项目与主管部门规则核验学历与资格。"
+          "summary": "O*NET新入职教育调查：34%回答需硕士、31%学士、22%博士；未显示类别不补至100%。JobZone5为组说明，实际岗位另核。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+            "href": "https://www.onetonline.org/link/summary/17-2199.06#Tasks",
             "id": "bls",
-            "label": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+            "label": "MEMS任务",
             "scope": "职业范围与职责"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+            "href": "https://www.onetonline.org/link/summary/17-2199.06#Education",
             "id": "nasa",
-            "label": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+            "label": "教育/JobZone",
             "scope": "教育与训练"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+            "href": "https://www.onetonline.org/link/summary/17-2199.06#JobZone",
             "id": "onet-training",
-            "label": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+            "label": "训练线索",
             "scope": "认证与培训"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+            "href": "https://www.onetonline.org/link/localtrends/17-2199.06",
             "id": "faa",
-            "label": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+            "label": "父职业就业与工资",
             "scope": "就业与工资口径"
           }
         ],
@@ -14342,7 +14342,7 @@
         "context_links": [
           {
             "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-risk"
+            "label": "查看前景与转向"
           }
         ],
         "direct_answer": {
@@ -14373,73 +14373,73 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet"
+              "onet-details",
+              "onet-context"
             ],
             "id": "cost-change",
             "mitigation": "按需求规格评审并由设计负责人确认关键判断，保留评审记录。",
             "scenario": "需求或规格理解偏差时，版图与仿真可能偏离真实约束，导致返工或批次报废。",
-            "title": "微系统工程师"
+            "title": "设计规格偏差"
           },
           {
             "affected_roles": "工艺工程师与产线操作相关人员。",
             "consequence": "可能造成批次报废、良率下降与交期延误。",
             "evidence_refs": [
-              "onet",
-              "privacy"
+              "onet-details",
+              "onet-context"
             ],
             "id": "record-version",
             "mitigation": "按统计过程控制与变更控制复核，异常先隔离再评审。",
             "scenario": "制程漂移或工艺窗口越界：产线参数偏离既有窗口，器件性能或良率下降。",
-            "title": "微系统工程师"
+            "title": "制程漂移与越界"
           },
           {
             "affected_roles": "封装工程师与可靠性验证人员。",
             "consequence": "可能影响器件寿命与现场可靠性，带来返修与索赔。",
             "evidence_refs": [
-              "privacy",
-              "privacy"
+              "onet-details",
+              "onet-context"
             ],
             "id": "personal-data",
             "mitigation": "按可靠性测试与封装规范核对，并把结论交负责人确认。",
             "scenario": "封装或接合方式不当导致可靠性下降：器件在老化或现场使用中失效。",
-            "title": "微系统工程师"
+            "title": "封装与接合可靠性"
           },
           {
             "affected_roles": "测试工程师与结果放行授权人。",
             "consequence": "可能误放行不合格器件，影响客户与产品可靠性。",
             "evidence_refs": [
-              "onet",
-              "onet"
+              "onet-details",
+              "onet-context"
             ],
             "id": "technical-boundary",
             "mitigation": "按测试判据与复核流程确认，放行须由授权人签署。",
             "scenario": "测试判据或数据解释错误：把不合格器件误判为合格并放行。",
-            "title": "微系统工程师"
+            "title": "测试判据与放行"
           },
           {
             "affected_roles": "技术文档作者与知识产权相关负责人。",
             "consequence": "影响追溯、合规与知识产权保护。",
             "evidence_refs": [
-              "bls",
-              "bls"
+              "onet-details",
+              "onet-context"
             ],
             "id": "single-coverage",
             "mitigation": "按文档与记录规范留痕，披露内容经法务与负责人确认。",
             "scenario": "文档或知识产权记录不完整：版本不一致或披露遗漏。",
-            "title": "微系统工程师"
+            "title": "文档与知识产权"
           },
           {
             "affected_roles": "设计、工艺、测试与质量相关人员。",
             "consequence": "可避免在证据不足时继续推进并放大风险。",
             "evidence_refs": [
-              "onet",
-              "onet"
+              "onet-details",
+              "onet-context"
             ],
             "id": "delivery-acceptance",
             "mitigation": "保留异常记录，按流程升级并等待授权确认。",
             "scenario": "共同升级规则：出现设计、制程或数据疑问时，先隔离相关批次与数据，把事实、影响与待决问题交有权限者确认后再继续。",
-            "title": "微系统工程师"
+            "title": "异常升级与批次控制"
           }
         ],
         "schema_version": "career.work_risk.v1",
@@ -14486,8 +14486,8 @@
             },
             {
               "指标": "行业平均工资",
-              "数值": "不替代职业工资",
-              "说明": "行业平均不能直接当作职业中位数。"
+              "数值": "182,064/83,560元/年",
+              "说明": "非私营/私营科研技术行业税前年均，不套半导体制造企业"
             },
             {
               "指标": "统一起薪",
@@ -14543,7 +14543,7 @@
               "需求": "需核对课题方向、平台条件与责任交接。"
             }
           ],
-          "china_intl": "企业薪酬调查信息｜https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html",
+          "china_intl": "美国MEMS任务背景｜https://www.onetonline.org/link/summary/17-2199.06",
           "china_name_row": {
             "$item": "microsystems-engineers.china-salary.career-snapshot-primary-locale.1",
             "block": "china-salary",
@@ -14552,20 +14552,20 @@
           },
           "china_open": "可用公开职责与技能信息做职业探索，但不能据此推导中国市场工资。",
           "china_open_note": "如需薪资判断，应回到具体城市、雇主、岗位级别和公开招聘条件核对。",
-          "china_ref": "17-2199.06 Microsystems Engineers｜https://www.onetonline.org/link/summary/17-2199.06",
-          "china_salary_note": "中国精确职业工资数据不可得；本页不展示、不换算中国薪资数字。",
+          "china_ref": "国家统计局2025行业工资｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+          "china_salary_note": "精确中国职业工资未取得；可按实际科研雇主参考2025科学研究和技术服务业非私营182,064、私营83,560元年均，非微系统工程师工资。",
           "china_salary_table": [
             {
-              "城市/区间": "中国数据状态",
-              "月薪参考": "不展示数字"
+              "城市/区间": "非私营科研技术服务",
+              "月薪参考": "182,064元/年；年均非月薪"
             },
             {
-              "城市/区间": "公开来源覆盖",
-              "月薪参考": "不足以支持该职业的精确工资"
+              "城市/区间": "私营科研技术服务",
+              "月薪参考": "83,560元/年；年均非月薪"
             },
             {
-              "城市/区间": "使用边界",
-              "月薪参考": "不得用其他职业或泛岗位数字替代"
+              "城市/区间": "本职业中位/起薪",
+              "月薪参考": "未取得；年均非月薪"
             }
           ],
           "china_soc_row": {
@@ -14583,10 +14583,10 @@
             "scenario_heading": "场景化判断",
             "scenario_interpretation_label": "解释",
             "scenario_role_label": "岗位方向",
-            "scenario_value_label": "数据状态"
+            "scenario_value_label": "行业年薪参考"
           },
-          "us_growth": "约 2%（2024—2034，父级口径）",
-          "us_median": "122,930 美元（父级口径）"
+          "us_growth": "+4%（2025—2035；父职业）",
+          "us_median": "122,930美元/年（2025；父职业）"
         }
       },
       "career_snapshot_secondary_locale": {
@@ -14595,41 +14595,41 @@
           {
             "指标": "薪资第10百分位",
             "数值": "66,810 美元/年（父级口径）",
-            "说明": "O*NET 全国工资｜https://www.onetonline.org/link/localwages/17-2199.06"
+            "说明": "2025父职业全国直接时薪$32.12；https://www.onetonline.org/link/localwages/17-2199.06"
           },
           {
             "指标": "薪资第25百分位",
             "数值": "90,970 美元/年（父级口径）",
-            "说明": "O*NET 全国工资｜https://www.onetonline.org/link/localwages/17-2199.06"
+            "说明": "2025父职业全国直接时薪$43.73；https://www.onetonline.org/link/localwages/17-2199.06"
           },
           {
             "指标": "薪资中位数",
             "数值": "122,930 美元/年（父级口径）",
-            "说明": "O*NET 全国工资｜https://www.onetonline.org/link/localwages/17-2199.06"
+            "说明": "2025父职业全国直接时薪$59.10；https://www.onetonline.org/link/localwages/17-2199.06"
           },
           {
             "指标": "薪资第75百分位",
             "数值": "158,090 美元/年（父级口径）",
-            "说明": "O*NET 全国工资｜https://www.onetonline.org/link/localwages/17-2199.06"
+            "说明": "2025父职业全国直接时薪$76.01；https://www.onetonline.org/link/localwages/17-2199.06"
           },
           {
             "指标": "薪资第90百分位",
             "数值": "189,950 美元/年（父级口径）",
-            "说明": "O*NET 全国工资｜https://www.onetonline.org/link/localwages/17-2199.06"
+            "说明": "2025父职业全国直接时薪$91.32；https://www.onetonline.org/link/localwages/17-2199.06"
           },
           {
-            "指标": "就业人数（2024）",
-            "数值": "158,800 人（父级口径）",
+            "指标": "就业人数（2025；父职业）",
+            "数值": "166,700→173,000人（2035）",
             "说明": "O*NET 全国就业趋势｜https://www.onetonline.org/link/localtrends/17-2199.06"
           },
           {
-            "指标": "就业前景（2024—2034）",
-            "数值": "约 2%（慢于平均）",
+            "指标": "就业增长（2025—2035；父职业）",
+            "数值": "+4%",
             "说明": "O*NET 全国就业趋势｜https://www.onetonline.org/link/localtrends/17-2199.06"
           },
           {
             "指标": "就业岗位空缺（平均年度）",
-            "数值": "约 9,300 个（父级口径）",
+            "数值": "8,800个/年（父职业）",
             "说明": "O*NET 全国就业趋势｜https://www.onetonline.org/link/localtrends/17-2199.06"
           }
         ],
@@ -14661,33 +14661,33 @@
           }
         ],
         "factors_heading": "影响实际报价的因素",
-        "growth": "约 2%（慢于平均）",
+        "growth": "+4%（父职业）",
         "heading": "微系统工程师的美国薪资与就业",
         "industry_heading": "行业与岗位差异",
         "industry_period": "2025",
         "industry_rows": [
           {
-            "industry": "政府（约 28%）",
-            "median": "需核对具体岗位",
-            "note": "机构类型、项目与授权可能不同。"
+            "industry": "专业科学技术服务",
+            "median": "26%",
+            "note": "父职业Engineers, All Other就业份额，非MEMS单列或行业工资"
           },
           {
-            "industry": "专业、科学与技术服务（约 24%）",
-            "median": "需核对具体岗位",
-            "note": "研发阶段、项目与记录要求可能不同。"
+            "industry": "政府",
+            "median": "25%",
+            "note": "父职业Engineers, All Other就业份额，非MEMS单列或行业工资"
           },
           {
-            "industry": "制造（约 23%）",
-            "median": "需核对具体岗位",
-            "note": "工艺平台、班次与产线职责可能不同。"
+            "industry": "制造",
+            "median": "21%",
+            "note": "父职业Engineers, All Other就业份额，非MEMS单列或行业工资"
           },
           {
-            "industry": "其他行业（约 25%）",
-            "median": "需核对具体岗位",
-            "note": "地点、经验、福利与资格会改变实际条件。"
+            "industry": "其他",
+            "median": "28%",
+            "note": "父职业Engineers, All Other就业份额，非MEMS单列或行业工资"
           }
         ],
-        "industry_value_label": "行业分布",
+        "industry_value_label": "父职业就业占比，非行业工资",
         "interpretation_heading": "如何解读",
         "interpretation_rows": [
           {
@@ -14731,11 +14731,11 @@
         ],
         "median": "122,930 美元（父级口径）",
         "outlook_heading": "就业前景",
-        "outlook_period": "2024—2034",
+        "outlook_period": "2025—2035",
         "wage_column_labels": [
           "统计位置",
           "年薪参考",
-          "月度等值",
+          "等值与换算边界",
           "解释"
         ],
         "wage_heading": "工资数据",
@@ -14754,7 +14754,7 @@
               ],
               "separator": "；"
             },
-            "label": "已取得的中位水平",
+            "label": "已取得的中位水平（父职业）",
             "value": "122,930 美元/年（父级口径）"
           },
           {
@@ -14771,7 +14771,7 @@
               ],
               "separator": "；"
             },
-            "label": "25—75 分位",
+            "label": "25—75 分位（父职业）",
             "value": "90,970 — 158,090 美元/年"
           },
           {
@@ -14788,7 +14788,7 @@
               ],
               "separator": "；"
             },
-            "label": "10—90 分位",
+            "label": "10—90 分位（父职业）",
             "value": "66,810 — 189,950 美元/年"
           }
         ]
@@ -14881,57 +14881,57 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "metric": "2024 年就业规模",
+            "metric": "2025就业规模及2035预测",
             "occupation_scope": "父级职业口径：O*NET 17-2199.00 Engineers, All Other",
-            "source_id": "ep",
-            "value": "158,800 人"
+            "source_id": "bls",
+            "value": "166,700→173,000；净增6,300"
           },
           {
             "geography": "美国",
-            "horizon": "2024—2034",
+            "horizon": "2025—2035",
             "interpretation": "就业规模、增长率、净变化与年均空缺必须分别解释。",
             "limitation": "为父级职业口径，不推定中国大陆对应关系。",
             "metric": "就业增长预测",
             "occupation_scope": "父级职业口径：O*NET 17-2199.00 Engineers, All Other",
             "source_id": "bls",
-            "value": "约 2%（慢于平均）"
+            "value": "+4%"
           },
           {
             "geography": "美国",
-            "horizon": "2024—2034",
+            "horizon": "2025—2035",
             "interpretation": "含增长与替换需求，不等于个人机会保证。",
             "limitation": "为父级职业口径，不推定中国大陆对应关系。",
             "metric": "年均职位空缺",
             "occupation_scope": "父级职业口径：O*NET 17-2199.00 Engineers, All Other",
-            "source_id": "nbs",
-            "value": "约 9,300 个/年"
+            "source_id": "bls",
+            "value": "8,800个/年"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+            "href": "https://www.onetonline.org/link/localtrends/17-2199.06",
             "id": "bls",
-            "label": "National Employment Trends 17-2199.06 Microsystems Engineers",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "父职业就业预测",
+            "scope": "美国父职业统计或全球暴露，各守口径"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+            "href": "https://www.onetonline.org/link/localwages/17-2199.06",
             "id": "ep",
-            "label": "National Wages 17-2199.06 Microsystems Engineers",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "父职业工资",
+            "scope": "美国父职业统计或全球暴露，各守口径"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+            "href": "https://www.onetonline.org/link/industry/17-2199.06",
             "id": "nbs",
-            "label": "Industries: 17-2199.06 - Microsystems Engineers",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "父职业行业",
+            "scope": "美国父职业统计或全球暴露，各守口径"
           },
           {
             "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
             "id": "onet",
-            "label": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "ILO全球暴露边界",
+            "scope": "美国父职业统计或全球暴露，各守口径"
           }
         ],
         "transitions": [
@@ -14941,7 +14941,7 @@
             "target_href": "/zh/career/jobs/electronics-engineers-except-computer",
             "target_slug": "electronics-engineers-except-computer",
             "target_title": "电子工程师",
-            "transition_distance": "中等"
+            "transition_distance": "编辑比较；需目标任务与资格证据"
           },
           {
             "capability_gaps": "电力系统与电气规范。",
@@ -14949,7 +14949,7 @@
             "target_href": "/zh/career/jobs/electrical-engineers",
             "target_slug": "electrical-engineers",
             "target_title": "电气工程师",
-            "transition_distance": "中等"
+            "transition_distance": "编辑比较；需目标任务与资格证据"
           },
           {
             "capability_gaps": "宏观机构与结构分析。",
@@ -14957,7 +14957,7 @@
             "target_href": "/zh/career/jobs/mechanical-engineers",
             "target_slug": "mechanical-engineers",
             "target_title": "机械工程师",
-            "transition_distance": "中等"
+            "transition_distance": "编辑比较；需目标任务与资格证据"
           },
           {
             "capability_gaps": "材料表征与失效机理。",
@@ -14965,7 +14965,7 @@
             "target_href": "/zh/career/jobs/materials-engineers",
             "target_slug": "materials-engineers",
             "target_title": "材料工程师",
-            "transition_distance": "较近"
+            "transition_distance": "编辑比较；需目标任务与资格证据"
           },
           {
             "capability_gaps": "生产系统与精益方法。",
@@ -14973,7 +14973,7 @@
             "target_href": "/zh/career/jobs/industrial-engineers",
             "target_slug": "industrial-engineers",
             "target_title": "工业工程师",
-            "transition_distance": "中等"
+            "transition_distance": "编辑比较；需目标任务与资格证据"
           },
           {
             "capability_gaps": "特定工艺设备与产线经验。",
@@ -14981,23 +14981,23 @@
             "target_href": "/zh/career/jobs/semiconductor-processing-technicians",
             "target_slug": "semiconductor-processing-technicians",
             "target_title": "半导体加工技师",
-            "transition_distance": "较近"
+            "transition_distance": "编辑比较；需目标任务与资格证据"
           },
           {
-            "capability_gaps": "可靠性建模与统计方法。",
+            "capability_gaps": "补质量体系、组织监督、审核及管理责任；不是仅可靠性建模即可任经理",
             "shared_capabilities": "测试方案、数据分析与判据设计。",
             "target_href": "/zh/career/jobs/quality-control-systems-managers",
             "target_slug": "quality-control-systems-managers",
             "target_title": "质量控制体系经理",
-            "transition_distance": "较近"
+            "transition_distance": "编辑比较；需目标任务与资格证据"
           },
           {
             "capability_gaps": "预算、排期与跨部门管理。",
             "shared_capabilities": "跨专业沟通与项目协调。",
             "target_href": "/zh/career/jobs/architectural-and-engineering-managers",
             "target_slug": "architectural-and-engineering-managers",
-            "target_title": "工程与项目管理",
-            "transition_distance": "中等"
+            "target_title": "建筑与工程经理",
+            "transition_distance": "编辑比较；需目标任务与资格证据"
           }
         ]
       },
@@ -15021,19 +15021,19 @@
             "alternate_value": null,
             "label": "准备层级",
             "secondary_value": null,
-            "value": "准备层级 5：多需研究生学历；以雇主与用人单位规则核验"
+            "value": "JobZone5组说明：大量准备，通常研究生教育；实际岗位学历另核"
           },
           {
             "alternate_value": null,
-            "label": "美国就业（2024）",
+            "label": "美国就业（2025；父职业）",
             "secondary_value": null,
-            "value": "父级口径约 158,800 人"
+            "value": "166,700人"
           },
           {
             "alternate_value": null,
-            "label": "美国增长（2024—2034）",
+            "label": "美国增长（2025—2035；父职业）",
             "secondary_value": null,
-            "value": "父级口径约 2%，慢于平均"
+            "value": "+4%；非AI归因"
           }
         ],
         "schema_version": "career.onet_structured_fields.v1"
@@ -15048,7 +15048,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "测我的兴趣代码",
+            "cta_label": "继续做RIASEC职业兴趣探索",
             "evidence_level": {
               "$item": "microsystems-engineers.fit.riasec-fit-block.8",
               "block": "fit",
@@ -15069,7 +15069,7 @@
           {
             "answer": "大五人格只描述倾向，不能替代真实项目、制程与安全经验；请在真实任务中核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "测我的大五倾向",
+            "cta_label": "继续做RIASEC职业兴趣探索",
             "evidence_level": "探索性工具",
             "id": "big-five",
             "label": "大五人格（OCEAN）",
@@ -15085,7 +15085,7 @@
           {
             "answer": "MBTI 类型标签不能判断是否胜任微纳器件设计与制程工作，也不能证明工艺或设备操作能力。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "测我的 MBTI 类型",
+            "cta_label": "继续做RIASEC职业兴趣探索",
             "evidence_level": "探索性工具",
             "id": "mbti",
             "label": "MBTI 十六型人格类型测试",
@@ -15101,7 +15101,7 @@
           {
             "answer": "九型人格只描述动机倾向，不构成工程判断或协作表现的证据。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "测我的九型类型",
+            "cta_label": "继续做RIASEC职业兴趣探索",
             "evidence_level": "探索性工具",
             "id": "enneagram",
             "label": "九型人格（Enneagram）",
@@ -15117,7 +15117,7 @@
           {
             "answer": "认知能力测验只反映部分认知特征，不覆盖制程经验与安全判断。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "测我的认知特征",
+            "cta_label": "继续做RIASEC职业兴趣探索",
             "evidence_level": "探索性工具",
             "id": "iq",
             "label": "认知能力测验（IQ）",
@@ -15133,7 +15133,7 @@
           {
             "answer": "情绪智力测验不构成团队协作或数据诚信的证据；协作需用真实任务核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "测我的情绪智力",
+            "cta_label": "继续做RIASEC职业兴趣探索",
             "evidence_level": "探索性工具",
             "id": "eq",
             "label": "情绪智力测验（EQ 量表）",
@@ -15269,7 +15269,7 @@
             "tone": "caution"
           },
           {
-            "body": "难以承受反复失败、长期周期或强规范约束时，可先比较相邻工程方向。",
+            "body": "若难以承受长周期、反复失败或强约束，须比较实际岗位；相邻工程也有这些条件。",
             "id": "experiment",
             "label": "需要谨慎的信号",
             "tone": "action"
@@ -15277,43 +15277,43 @@
         ],
         "source_links": [
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
-            "label": "17-2199.06 Microsystems Engineers",
+            "href": "https://www.onetonline.org/link/summary/17-2199.06#Tasks",
+            "label": "任务",
             "usage": "职业身份与职责范围"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
-            "label": "Microsystems Engineers detailed occupation profile",
+            "href": "https://www.onetonline.org/link/summary/17-2199.06#WorkContext",
+            "label": "工作情境",
             "usage": "任务与工作情境"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
-            "label": "Hot Technologies 17-2199.06 Microsystems Engineers",
+            "href": "https://www.onetonline.org/link/summary/17-2199.06#SoftwareSkills",
+            "label": "软件",
             "usage": "在需求软件技能"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
-            "label": "Industries: 17-2199.06 - Microsystems Engineers",
+            "href": "https://www.onetonline.org/link/industry/17-2199.06",
+            "label": "父职业行业",
             "usage": "行业分布"
           },
           {
             "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
-            "label": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+            "label": "ILO全球暴露边界",
             "usage": "AI 暴露度边界"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
-            "label": "National Employment Trends 17-2199.06 Microsystems Engineers",
+            "href": "https://www.onetonline.org/link/localtrends/17-2199.06",
+            "label": "父职业就业预测",
             "usage": "就业与增长口径"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
-            "label": "National Wages 17-2199.06 Microsystems Engineers",
+            "href": "https://www.onetonline.org/link/localwages/17-2199.06",
+            "label": "父职业工资",
             "usage": "工资口径"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
-            "label": "17-2199.06 Microsystems Engineers",
+            "href": "https://www.onetonline.org/link/summary/17-2199.06#Education",
+            "label": "教育与兴趣",
             "usage": "兴趣代码与教育分布"
           }
         ]
@@ -15354,10 +15354,10 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "本页职业事实来自 O*NET 17-2199.06（Microsystems Engineers）官方档案，工资与就业来自 O*NET 展示的 BLS 2025 年工资数据与 2024—2034 年预测（父级口径 Engineers, All Other）。",
-          "updated_at": "O*NET 档案更新 2026；BLS 工资 2025；BLS 预测 2024—2034；本页查阅 2026-09-25。"
+          "source": "O*NET17-2199.06任务、2025工资与2025—2035预测；国家统计局行业参考",
+          "updated_at": "九模块核查2026-10-11"
         },
-        "note": "证据只支持微系统工程师在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
+        "note": "任务与调查为微系统本职业；2025工资五分位66810/90970/122930/158090/189950及直接时薪32.12/43.73/59.10/76.01/91.32、就业和行业采用Engineers, All Other父职业。软件/全球暴露不证明生成式AI采用。",
         "secondary_links": [
           {
             "href": {
@@ -15367,7 +15367,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "测我的职业兴趣是否适合微系统工程师"
+            "label": "英文MBTI测试"
           },
           {
             "href": {
@@ -15377,7 +15377,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "微系统工程师 MBTI 性格参考"
+            "label": "英文大五人格测试"
           },
           {
             "href": {
@@ -15387,7 +15387,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "微系统工程师大五参考"
+            "label": "中文MBTI测试"
           },
           {
             "href": {
@@ -15397,7 +15397,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "微系统工程师职业库条目"
+            "label": "中文大五人格测试"
           }
         ]
       },
@@ -15618,7 +15618,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "MEMS 设计与仿真",
@@ -15669,7 +15669,7 @@
       "text": "微系统工程师：工作内容、美国工资与就业 | 费马测试"
     }
   },
-  "source_content_sha256": "ca86e41453becfbd3669fdf98a579c9e0c76b31cf4cb7f777fef1815df7e2658",
+  "source_content_sha256": "338f6aa1023f8b7da96dfccc4ddecb2e6d5077ee18de9510aa25b71057587964",
   "subject": {
     "canonical_slug": "microsystems-engineers",
     "name": "微系统工程师",

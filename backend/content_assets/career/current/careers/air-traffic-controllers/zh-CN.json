@@ -11933,28 +11933,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.href": {
-        "ref": {
-          "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.20",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.label": {
         "ref": {
@@ -12064,28 +12044,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.href": {
-        "ref": {
-          "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.22",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.label": {
         "ref": {
@@ -23503,12 +23463,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册 53-2021：2025 年 5 月年薪中位数 148,080 美元（时薪 71.19 美元），2025 年在岗约 24,000 人，2025—2035 年预计增长 2%（低于所有职业平均，净增约 400 人），年均约 2,100 个空缺且多数来自替代需求；入门学历通常为副学士，并配长期在职培训。多数岗位要求美国公民身份、体检与背景审查，并须完成 FAA 学院训练。"
+              "BLS美国53-2021：2025年5月年薪中位148,080美元、时薪71.19美元；BLS2025—2035预测：2025年24,000岗位→2035年24,400，增长2%、净增约400，年均约2,100空缺，多数为替代需求；不是个人就业保证或AI因果结果。典型入门副学士与长期在职培训是统计描述；具体公民身份、医学、安审、教育/经验及训练须核FAA当期路径。美国FAA路径：Standard AT-CTI毕业生可免Basics课程，仍进入Academy进行相应初始训练；Enhanced AT-CTI毕业生被录用后可直接进入设施本地训练，仍须通过ATSA并满足医学和安审要求。毕业或课程经历不等于录用或独立值勤资格。"
             ]
           },
           "id": "air-traffic-controllers.profile.onet-structured-fields-block.2",
           "source_refs": [
-            "onet"
+            "bls",
+            "faa-cti"
           ],
           "type": "prose"
         },
@@ -23537,7 +23498,7 @@
           },
           "id": "air-traffic-controllers.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23561,12 +23522,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 就业预测：2025—2035 年该职业增长 2%（低于所有职业平均），净增约 400 人；同期年均约 2,100 个空缺，多数来自替代需求。空缺数不等于净新增，也不代表个人就业保证。O*NET 展示的 2024—2034 年预测为 1% 至 2%（低于平均），年均约 2,200 个空缺；两组期间不同，本页分别标注。"
+              "BLS2025—2035预测：2025年24,000岗位→2035年24,400，增长2%、净增约400，年均约2,100空缺，多数为替代需求；不是个人就业保证或AI因果结果。"
             ]
           },
           "id": "air-traffic-controllers.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -23701,8 +23662,7 @@
           "id": "air-traffic-controllers.profile.definition-block.11",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23821,8 +23781,7 @@
           },
           "id": "air-traffic-controllers.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -24042,8 +24001,7 @@
           },
           "id": "air-traffic-controllers.profile.career-quick-answers-block.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         }
@@ -24681,13 +24639,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先核对 FAA 门槛（公民身份、年龄、体检与背景审查）与 CTI 或学历路径，理解执照与训练周期；不要相信非官方渠道的承诺。"
+              "先核目标法域：中国求职者查现行管制执照规则及当期招募；美国FAA求职者核公民身份、年龄、医学、安审与教育/经验路径。美国FAA路径：Standard AT-CTI毕业生可免Basics课程，仍进入Academy进行相应初始训练；Enhanced AT-CTI毕业生被录用后可直接进入设施本地训练，仍须通过ATSA并满足医学和安审要求。毕业或课程经历不等于录用或独立值勤资格。"
             ]
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls",
+            "faa-cti"
           ],
           "type": "prose"
         },
@@ -24838,8 +24797,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.21",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -24853,8 +24811,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.22",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -24896,7 +24853,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.25",
           "source_refs": [
-            "onet"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -24910,7 +24867,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.26",
           "source_refs": [
-            "onet"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -24924,7 +24881,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.27",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -24938,7 +24895,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.28",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -24952,7 +24909,9 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.29",
           "source_refs": [
-            "onet"
+            "arxiv",
+            "census",
+            "bls"
           ],
           "type": "prose"
         },
@@ -25141,7 +25100,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.42",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25155,7 +25114,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.43",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25169,7 +25128,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.44",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25239,7 +25198,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.49",
           "source_refs": [
-            "onet"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -25253,7 +25212,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.50",
           "source_refs": [
-            "onet"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -25267,7 +25226,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.51",
           "source_refs": [
-            "onet"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -25281,7 +25240,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "onet"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -25309,7 +25268,8 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "onet"
+            "arxiv",
+            "census"
           ],
           "type": "prose"
         },
@@ -25323,7 +25283,8 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "onet"
+            "arxiv",
+            "census"
           ],
           "type": "prose"
         },
@@ -25337,7 +25298,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25351,7 +25312,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.57",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25365,7 +25326,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.58",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25379,7 +25340,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.59",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25388,12 +25349,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ONet行业页显示政府宽类91%、其他含运输仓储9%，未标数据年度；BLS2025联邦政府92%为不同分类与期间，不混为同一数。"
+              "O*NET2025行业分布政府宽类93%、其他7%；BLS2025联邦政府92%是不同分类，不互相混用。"
             ]
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "onet"
+            "operations",
+            "bls"
           ],
           "type": "prose"
         },
@@ -25408,7 +25370,7 @@
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.61",
           "source_refs": [
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25437,8 +25399,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25468,7 +25429,7 @@
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.65",
           "source_refs": [
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25482,8 +25443,8 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.66",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25497,8 +25458,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25536,13 +25496,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 预测 2025—2035 年该职业增长 2%（低于所有职业平均），净增约 400 人；O*NET 展示的 2024—2034 年预测为 1% 至 2%（低于平均）。两组期间不同，均不表示自动化导致岗位减少。"
+              "BLS2025—2035预测：2025年24,000岗位→2035年24,400，增长2%、净增约400，年均约2,100空缺，多数为替代需求；不是个人就业保证或AI因果结果。"
             ]
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25556,8 +25515,7 @@
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25646,7 +25604,7 @@
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.77",
           "source_refs": [
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25775,7 +25733,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "漏听或未核对关键数值是最直接的间隔风险来源之一。"
+              "编辑风险场景：遗漏关键数值核对可能影响间隔与指令准确；本页未取得风险来源排名，不称最直接。"
             ]
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.86",
@@ -25993,7 +25951,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑条件场景（采用与效果未核）：排序建议与流量管理工具可减少人工计算。"
+              "编辑条件场景：排序建议或流量管理可作为辅助讨论项；未核采用效果，不能称已减少人工计算。"
             ]
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.101",
@@ -26164,7 +26122,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑条件场景（采用与效果未核）：电子移交工具可减少电话协调步骤。"
+              "编辑条件场景：电子移交可作为记录辅助讨论项；未核采用效果或减少电话协调步骤的幅度。"
             ]
           },
           "id": "air-traffic-controllers.ai-impact.ai-impact-table.113",
@@ -26320,7 +26278,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26334,7 +26292,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26348,7 +26306,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26362,7 +26320,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26376,7 +26334,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26390,7 +26348,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26404,7 +26362,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26413,12 +26371,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按岗位类别统计，用于对照行政事务类岗位的收入水平。"
+              "2025规模以上企业办事人员和有关人员类别年均；不对应行政事务单一职业，也不是管制员工资。"
             ]
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26432,7 +26390,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26446,7 +26404,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26460,7 +26418,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26474,7 +26432,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26488,7 +26446,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26502,7 +26460,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26516,7 +26474,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26530,7 +26488,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26544,8 +26502,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26559,7 +26516,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26573,8 +26530,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -26588,8 +26544,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -26617,8 +26572,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -26632,8 +26586,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -26661,8 +26614,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.31",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -26735,8 +26687,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -26824,8 +26775,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.42",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -26839,7 +26789,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.43",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -26898,7 +26848,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.47",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26907,13 +26857,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局数据覆盖城镇 5 人及以上法人单位，不含个体工商户与自由职业者；工资为税前工资总额，含个人缴纳的社保、公积金与个税。行业门类数字不等于本职业工资。管制员薪酬按中国民航局与用人单位制度执行。"
+              "NBS覆盖城镇5人及以上法人单位，不含个体工商户与自由职业者，工资为税前总额；行业数字不是本职工资。本职薪酬应核实际单位的书面条款，本页未核统一管制员薪酬标准。"
             ]
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26969,7 +26918,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26997,7 +26946,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27011,8 +26960,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27026,7 +26974,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27040,7 +26988,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27054,7 +27002,7 @@
           },
           "id": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.59",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         }
@@ -27076,9 +27024,8 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27092,7 +27039,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27106,7 +27053,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27120,7 +27067,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27134,7 +27081,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27148,7 +27095,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27162,7 +27109,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27176,7 +27123,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27190,7 +27137,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27204,7 +27151,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27213,12 +27160,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "年薪第 90 分位下界（时薪 103.66 美元），高收入端常与设施繁忙程度、地区与资历相关。；O*NET 展示的 BLS 2025 年 5 月工资分位｜https://www.onetonline.org/link/localwages/53-2021.00"
+              "年薪第90分位边界为215,610美元、时薪103.66美元；统计分位本身不能说明该群体的资历、地区或设施构成。O*NET展示BLS2025工资｜https://www.onetonline.org/link/localwages/53-2021.00"
             ]
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27232,7 +27179,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27241,13 +27188,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS2025岗位约24,000；ONet政府宽类91%未标数据年度，不同于BLS2025联邦政府92%。；BLS职业展望手册：空中交通管制员｜https://www.bls.gov/ooh/transportation-and-material-moving/air-traffic-controllers.htm"
+              "BLS2025岗位约24,000；O*NET2025行业分布政府宽类93%、其他7%；BLS2025联邦政府92%是不同分类，不互相混用。"
             ]
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "operations"
           ],
           "type": "prose"
         },
@@ -27261,7 +27208,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27270,12 +27217,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "低于所有职业平均，净增约 400 人，O*NET 展示的 2024—2034 年预测为 1% 至 2%。；BLS 职业展望手册：空中交通管制员｜https://www.bls.gov/ooh/transportation-and-material-moving/air-traffic-controllers.htm"
+              "2025—2035增长2%、净增约400岗位，低于所有职业平均；不拼接其他时期。"
             ]
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27289,7 +27236,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27303,8 +27250,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27318,8 +27264,8 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27333,8 +27279,8 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27348,7 +27294,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.27",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27362,7 +27308,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.28",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27376,7 +27322,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27390,7 +27336,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.30",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27404,7 +27350,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.31",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27418,8 +27364,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.32",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27433,7 +27378,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27447,7 +27392,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.34",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27470,7 +27415,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH：2025年5月该职业在联邦政府行业的年薪中位156,250美元；就业雇主占比另为2025年92%，不能与ONet政府宽类别91%混作同一口径。"
+              "BLS OOH：2025年5月本职业联邦政府行业年薪中位156,250美元，2025雇主占比92%；O*NET政府宽类别93%是不同分类。"
             ]
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.36",
@@ -27490,7 +27435,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.37",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27513,12 +27458,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH：2025年5月该职业在航空运输辅助活动行业的年薪中位83,890美元；不代表其他行业合计9%的工资。"
+              "BLS OOH：2025年5月本职业航空运输辅助行业年薪中位83,890美元；不代表O*NET其他行业合计7%的工资。"
             ]
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "bls"
+            "bls",
+            "operations"
           ],
           "type": "prose"
         },
@@ -27532,7 +27478,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.40",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27546,7 +27492,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27555,12 +27501,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "ONet政府类别91%没有拆出州地政府，本页不以联邦政府工资代填州地政府。"
+              "O*NET政府宽类别93%未拆州和地方政府，本页不以联邦政府工资代填州地政府。"
             ]
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "onet"
+            "bls",
+            "operations"
           ],
           "type": "prose"
         },
@@ -27574,7 +27521,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.43",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27588,7 +27535,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27602,7 +27549,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27616,8 +27563,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27631,7 +27577,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27645,7 +27591,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27659,8 +27605,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27674,7 +27619,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27688,8 +27633,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27703,7 +27647,7 @@
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27712,13 +27656,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "最高 10%：高于 215,610 美元/年，高收入端常与设施繁忙程度、地区与资历相关。"
+              "最高10%的年薪边界为215,610美元；不代表资深岗位固定工资，不能从分位推具体设施、地区或资历构成。"
             ]
           },
           "id": "air-traffic-controllers.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         }
@@ -28475,7 +28418,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需补民用维修资质与设备培训。"
+              "编辑比较：先区分航空器航电维修与地面通信导航监视设施维护，核目标工作范围、法域资质及实际培训；不把两类岗位等同。"
             ]
           },
           "id": "air-traffic-controllers.fit.personality-fit-block.39",
@@ -28792,7 +28735,7 @@
           },
           "id": "air-traffic-controllers.fit.personality-fit-block.60",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28862,7 +28805,7 @@
           },
           "id": "air-traffic-controllers.fit.personality-fit-block.65",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -28876,7 +28819,7 @@
           },
           "id": "air-traffic-controllers.fit.personality-fit-block.66",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         }
@@ -29371,7 +29314,7 @@
           },
           "id": "air-traffic-controllers.risk.career-risk-cards.36",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -29463,14 +29406,14 @@
                 "在带教下练习扇区移交、航路间隔与流量管理。",
                 "编辑观察示例：核对应任务记录与依据；正式认可能力按主管部门和单位考核。",
                 "AT30 V2待核与缺失清单。",
-                "与航空电子技术员不同：面向空域与航空器，不负责设备维修。"
+                "本方向面向责任空域、航空器和扇区移交；日常设备检查、调节与专业维修分工不同。是否承担具体检查或兼任职责须核岗位文件，不由名称统一排除设备工作。"
               ],
               [
                 "检查与复诵核对",
                 "执行席位交接检查并核对关键指令数值。",
                 "编辑观察示例：核对应任务记录与依据；正式认可能力按主管部门和单位考核。",
                 "AT30 10:15交接及甲回执边界。",
-                "与值班主管不同：不承担运行管理决定权。"
+                "本方向核交接及关键指令数值；运行管理决定权和兼任主管职责须核真实岗位授权，不由复诵核对任务一概推无管理权限。"
               ],
               [
                 "应急处置与复盘",
@@ -29532,7 +29475,10 @@
           "id": "air-traffic-controllers.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "editor",
+            "facilities",
+            "census"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -29795,13 +29741,13 @@
                 "学历不等执照；不能将一般项写无例外"
               ],
               [
-                "FAA 学院或院校训练",
-                "美国路径",
-                "决定能否取得管制岗位资格",
-                "美国通常必备",
-                "按 FAA 规定",
-                "数月至数年",
-                "训练与分配按需要安排"
+                "FAA Academy或AT-CTI训练路径",
+                "美国FAA求职路径",
+                "完成相应路径要求后仍须录用与设施训练",
+                "不是人人必须到Academy，按实际路径核",
+                "Standard免Basics后到Academy；Enhanced被录用后可直接设施训练，仍过ATSA/医学/安审",
+                "按官方项目及实际招募核，不估统一周期",
+                "学校毕业不等录用、执照或独立值勤资格"
               ],
               [
                 "体检与背景审查",
@@ -29843,11 +29789,9 @@
           },
           "id": "air-traffic-controllers.path.credential-decision.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "bls",
+            "editor",
+            "faa-cti"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -29940,8 +29884,8 @@
           },
           "id": "air-traffic-controllers.path.career-path-block.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29950,13 +29894,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成 FAA 学院或院校训练，取得管制岗位资格并在带教下完成见习，掌握检查单、标准用语与基本间隔。"
+              "编辑阶段示例：按目标法域与实际录用路径完成必要训练，并在正式监督下开展设施见习。美国FAA路径：Standard AT-CTI毕业生可免Basics课程，仍进入Academy进行相应初始训练；Enhanced AT-CTI毕业生被录用后可直接进入设施本地训练，仍须通过ATSA并满足医学和安审要求。毕业或课程经历不等于录用或独立值勤资格。中国按现行执照申请、培训、技能考核及注册要求核，不以FAA路径替代中国条件。"
             ]
           },
           "id": "air-traffic-controllers.path.career-path-block.12",
           "source_refs": [
-            "onet",
-            "onet"
+            "faa-cti",
+            "editor"
           ],
           "type": "prose"
         },
@@ -30071,8 +30015,8 @@
           },
           "id": "air-traffic-controllers.path.career-path-block.20",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -30116,8 +30060,8 @@
           },
           "id": "air-traffic-controllers.path.career-path-block.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -30131,7 +30075,8 @@
           },
           "id": "air-traffic-controllers.path.career-path-block.24",
           "source_refs": [
-            "onet"
+            "bls",
+            "faa-cti"
           ],
           "type": "prose"
         },
@@ -30159,7 +30104,7 @@
           },
           "id": "air-traffic-controllers.path.career-path-block.26",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -30173,7 +30118,7 @@
           },
           "id": "air-traffic-controllers.path.career-path-block.27",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -30401,7 +30346,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长资历与检查员资格；按民航局规定。"
+              "编辑阶段示例：带教、管制检查员与运行管理是不同职责，资格和聘任须按目标法域及实际岗位分别核；不能统一要求检查员资格或给最低资历。"
             ]
           },
           "id": "air-traffic-controllers.path.career-path-block.43",
@@ -30693,7 +30638,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长资历与检查员资格。"
+              "编辑阶段示例：带教、管制检查员与运行管理是不同职责，资格和聘任须按目标法域及实际岗位分别核；不能统一要求检查员资格或给最低资历。"
             ]
           },
           "id": "air-traffic-controllers.path.career-path-block.63",
@@ -30985,7 +30930,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长资历与检查员资格。"
+              "编辑阶段示例：带教、管制检查员与运行管理是不同职责，资格和聘任须按目标法域及实际岗位分别核；不能统一要求检查员资格或给最低资历。"
             ]
           },
           "id": "air-traffic-controllers.path.career-path-block.83",
@@ -31166,14 +31111,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册预测 2025—2035 年美国空中交通管制员就业增长 2%（低于所有职业平均，净增约 400 人），年均约 2,100 个职位空缺且多数来自替代需求；O*NET 展示的 2024—2034 年预测为 1% 至 2%（低于平均），年均约 2,200 个空缺。两组期间不同，本页分别标注；这是全国单一职业预测，不代表个人就业保证，也不能外推为中国大陆。"
+              "BLS2025—2035预测：2025年24,000岗位→2035年24,400，增长2%、净增约400，年均约2,100空缺，多数为替代需求；不是个人就业保证或AI因果结果。全国单一职业预测不能代中国招聘。"
             ]
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31187,7 +31130,7 @@
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31201,7 +31144,7 @@
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31210,12 +31153,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册显示该职业 2025 年在岗约 24,000 人；O*NET 行业分布显示政府占约 91%，雇主结构高度集中。"
+              "BLS2025约24,000岗位；O*NET2025行业分布政府宽类93%、其他7%；BLS2025联邦政府92%是不同分类，不互相混用。"
             ]
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "bls",
+            "operations"
           ],
           "type": "prose"
         },
@@ -31224,12 +31168,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS就业预测基数24,000为2025年岗位数；ONet另展示2024年24,100，期间不同不能混。未使用未核OEWS22,510估计。"
+              "BLS就业预测基数为2025年24,000岗位；O*NET当前也标2025，不使用未取得原表的其他年度人数或OEWS就业估计。"
             ]
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.12",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31243,7 +31187,7 @@
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31257,7 +31201,7 @@
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31271,7 +31215,7 @@
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31285,7 +31229,7 @@
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31299,7 +31243,7 @@
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31313,7 +31257,7 @@
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31322,12 +31266,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增速低于所有职业平均；空缺数不等于净新增。O*NET 展示的 2024—2034 年预测为 1% 至 2%（低于平均）。"
+              "增速低于所有职业平均；年均空缺与净新增不同，统一使用2025—2035。"
             ]
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31341,7 +31285,7 @@
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31355,7 +31299,7 @@
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31369,7 +31313,7 @@
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31383,7 +31327,7 @@
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31397,7 +31341,7 @@
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31406,12 +31350,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "同一来源给出年均约 2,100 个职位空缺，多数来自转职与退休造成的替代需求；O*NET 展示的年均约 2,200 个。"
+              "BLS2025—2035年均约2,100空缺，多数来自转职及退休的替代需求，不是净增或十年合计。"
             ]
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31425,7 +31369,7 @@
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.26",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31439,7 +31383,7 @@
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31453,7 +31397,7 @@
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31467,7 +31411,7 @@
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31481,7 +31425,7 @@
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.30",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31490,7 +31434,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS空中交通管制员总览：2025年24,000岗位，ONet2024年24,100另列，不混期间。"
+              "BLS空中交通管制员总览：2025年24,000岗位，统一标明基年；不拼接无存档支持旧期人数。"
             ]
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.31",
@@ -31562,7 +31506,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "跨体系转向，通常需重新取得民用航空资质。"
+              "编辑核对：目标飞行岗位法域、执照及已有经历认可；管制经历不自动授予飞行权限，也不能据此断言所有人从零重取。"
             ]
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.36",
@@ -31607,7 +31551,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "跨体系转向，须重新取得民用航空资质。"
+              "编辑核对：目标飞行职责、执照、机型及运行条件，已有资格的认可依真实规则，不作统一重取或转岗保证。"
             ]
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.39",
@@ -31652,7 +31596,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近距离转向，通常以培训与岗位轮换为主。"
+              "编辑比较：运行资源与应急计划是需补的能力项；未核转岗成功样本，不保证仅培训或轮岗即可进入。"
             ]
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.42",
@@ -31667,7 +31611,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补电子设备检测与维修能力并通过相应资质。"
+              "编辑比较：航空器航电维修与地面通信导航监视设施维护不同，先核目标职责、法域资质和设备培训，不给统一证照。"
             ]
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.43",
@@ -31697,7 +31641,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等距离转向，需民用维修资质培训。"
+              "编辑核对：目标航电维修职责、实际训练与法域许可，未取得转向距离实证。"
             ]
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.45",
@@ -31712,7 +31656,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需按民航维修资质要求培训并取证。"
+              "编辑核对：目标航空器维修职责及是否要求许可、机型训练；不宣称所有维修岗位同一证照。"
             ]
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.46",
@@ -31742,7 +31686,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等距离转向，需民用维修资质。"
+              "编辑核对：目标维修训练、许可和已有经历认可；未取得转向距离实证。"
             ]
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.48",
@@ -31786,7 +31730,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远距离转向，需补充工程教育。"
+              "编辑核对：目标工程设计、教育与项目经历，未取得转向距离或统一门槛样本。"
             ]
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.51",
@@ -31830,7 +31774,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等距离转向，需补充法规与检查知识。"
+              "编辑核对：目标法规知识、检查方法及实际授权，未取得转向距离实证。"
             ]
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.54",
@@ -31845,7 +31789,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需通过军事或民航飞行岗位的选拔与训练。"
+              "目标air-crew-members是美国O*NET55-3011机组成员军职，需核具体军种岗位与正式选拔训练；民航岗位是其他职业，不能以民航选拔代此军职。"
             ]
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.55",
@@ -31875,7 +31819,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "跨体系转向，须重新取得相应资格。"
+              "编辑核对：军职目标实际任职条件与授权；管制经验不自动取得机上任务权限，未取得转向成功数据。"
             ]
           },
           "id": "air-traffic-controllers.market-signals.market-signal-card.57",
@@ -32024,8 +31968,10 @@
           },
           "id": "air-traffic-controllers.sources.source-card.4",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "oews",
+            "nbs",
+            "editor"
           ],
           "type": "prose"
         }
@@ -32105,14 +32051,14 @@
                   "当前职业摘要，任务/情境/CRE/新人学历及工资预测各按栏目的期间；不作中国资格或AI效果因果依据",
                   "本轮实际核读2026-10-02"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet",
                 "limitation": "不作中国资格或AI效果因果依据",
                 "market": "美国53-2021",
                 "name": "O*NET OnLine 53-2021.00 空中交通管制员职业摘要",
-                "period": "页面更新2026；工资2025；预测2024—2034",
+                "period": "页面更新2026；工资2025；预测2025—2035",
                 "publisher": "O*NET OnLine",
-                "scope": "当前职业摘要，任务/情境/CRE/新人学历及工资预测各按栏目的期间",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/53-2021.00"
               },
               {
@@ -32121,14 +32067,14 @@
                   "职业职责、教育/经验路径、工资及就业预测；全国中位与两行业中位分开，空缺不是净增长，不外推中国",
                   "本轮实际核读2026-10-02"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "bls",
                 "limitation": "全国中位与两行业中位分开，空缺不是净增长，不外推中国",
                 "market": "美国53-2021",
                 "name": "U.S. BLS 职业展望手册：空中交通管制员",
                 "period": "工资2025年5月、岗位2025、预测2025—2035；OOH更新2026-08-27",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "职业职责、教育/经验路径、工资及就业预测",
+                "scope": "exact",
                 "url": "https://www.bls.gov/ooh/transportation-and-material-moving/air-traffic-controllers.htm"
               },
               {
@@ -32137,14 +32083,14 @@
                   "任务与工作活动；不包含本页AI效果或选拔阈值",
                   "本轮实际核读2026-10-02"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "ep",
                 "limitation": "不包含本页AI效果或选拔阈值",
                 "market": "美国53-2021",
                 "name": "O*NET OnLine 53-2021.00 职业详细资料（任务与工作活动）",
                 "period": "页面当前职业资料，调查各指标",
                 "publisher": "O*NET OnLine",
-                "scope": "任务与工作活动",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-2021.00"
               },
               {
@@ -32153,14 +32099,14 @@
                   "全国年薪/时薪分位；P10/P25/P50/P75/P90非起薪最低工资",
                   "本轮实际核读2026-10-02"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "oews",
                 "limitation": "P10/P25/P50/P75/P90非起薪最低工资",
                 "market": "美国53-2021",
                 "name": "O*NET 展示的 BLS OEWS 2025 年 5 月工资分位：53-2021.00",
                 "period": "2025年5月工资",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
-                "scope": "全国年薪/时薪分位",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/53-2021.00"
               },
               {
@@ -32169,14 +32115,14 @@
                   "城镇单位工资背景；非本职业工资分布或个人报价",
                   "本轮实际核读2026-10-02"
                 ],
-                "evidence_type": "industry_proxy",
+                "evidence_type": "primary_document",
                 "id": "nbs",
                 "limitation": "非本职业工资分布或个人报价",
                 "market": "中国大陆行业/单位类型与规上岗位类别",
                 "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
                 "period": "2025年度；2026-05-15发布",
                 "publisher": "国家统计局",
-                "scope": "城镇单位工资背景",
+                "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
@@ -32185,14 +32131,14 @@
                   "职业分类公示导航，本轮访问失败",
                   "旧访问记录保留，不冒称重新核全文"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnclass",
                 "limitation": "本轮链接不可读，不作为本职具体分类、工时或聘用规则依据",
                 "market": "中国大陆",
                 "name": "《中华人民共和国职业分类大典（2022 年版）》公示说明",
                 "period": "历史来源入口，非本职统计期间",
                 "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "历史延伸导航",
+                "scope": "parent",
                 "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/dongtaixinwen/buneiyaowen/rsxw/202207/t20220714_457800.html"
               },
               {
@@ -32201,14 +32147,14 @@
                   "工作情境受访比例；受访比例非全部岗位保证或事故概率",
                   "本轮实际核读2026-10-02"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "privacy",
                 "limitation": "受访比例非全部岗位保证或事故概率",
                 "market": "美国53-2021",
                 "name": "O*NET OnLine 53-2021.00 工作情境（Work Context）",
                 "period": "当前Work Context调查页",
                 "publisher": "O*NET OnLine",
-                "scope": "工作情境受访比例",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-2021.00"
               },
               {
@@ -32217,30 +32163,30 @@
                   "8项HotTech软件及招聘提及份额；Office16%、Outlook10%、Excel9%为去重招聘提及，非设施采用或AI能力效果",
                   "本轮实际核读2026-10-02"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "recruitment",
                 "id": "facilities",
                 "limitation": "Office16%、Outlook10%、Excel9%为去重招聘提及，非设施采用或AI能力效果",
                 "market": "美国53-2021招聘",
                 "name": "O*NET OnLine 53-2021.00 技术清单（Hot Technologies）",
                 "period": "Lightcast2025-01-01至2025-12-31",
                 "publisher": "O*NET OnLine",
-                "scope": "8项HotTech软件及招聘提及份额",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/53-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
-                  "政府91%、其他含运输仓储9%就业宽类份额；非BLS2025联邦政府92%同口径，不含行业工资",
-                  "本轮实际核读2026-10-02"
+                  "政府宽类93%、其他7%。",
+                  "与BLS2025联邦政府92%分类不同，不含行业工资。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "operations",
-                "limitation": "非BLS2025联邦政府92%同口径，不含行业工资",
+                "limitation": "仅本职业2025宽类行业就业份额，不同于联邦雇主分组。",
                 "market": "美国53-2021",
                 "name": "O*NET OnLine 53-2021.00 行业分布",
-                "period": "访问2026-10-02；该页未标统计数据年度",
+                "period": "2025年行业分布",
                 "publisher": "O*NET OnLine",
-                "scope": "政府91%、其他含运输仓储9%就业宽类份额",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/53-2021.00"
               },
               {
@@ -32249,14 +32195,14 @@
                   "延伸认证目录导航",
                   "保留历史访问记录；本轮未重新核目录正文"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "hr",
                 "limitation": "本轮未核此目录细项，不作强制资格、健康或招聘证据",
                 "market": "美国53-2021导航",
                 "name": "O*NET OnLine 53-2021.00 认证目录",
                 "period": "导航入口，非工资/预测期间",
                 "publisher": "O*NET OnLine",
-                "scope": "延伸导航",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/53-2021.00"
               },
               {
@@ -32265,14 +32211,14 @@
                   "延伸培训目录导航",
                   "保留历史访问记录；本轮未重新核目录正文"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "health",
                 "limitation": "本轮未核此目录细项，不作强制资格、健康或招聘证据",
                 "market": "美国53-2021导航",
                 "name": "O*NET OnLine 53-2021.00 培训目录",
                 "period": "导航入口，非工资/预测期间",
                 "publisher": "O*NET OnLine",
-                "scope": "延伸导航",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtraining/53-2021.00"
               },
               {
@@ -32281,14 +32227,14 @@
                   "劳动合同法历史链接，本轮访问失败",
                   "旧访问记录保留，不冒称重新核全文"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "ilo",
                 "limitation": "本轮链接不可读，不作为本职具体分类、工时或聘用规则依据",
                 "market": "中国大陆",
                 "name": "中华人民共和国劳动合同法",
                 "period": "历史来源入口，非本职统计期间",
                 "publisher": "中国政府网",
-                "scope": "历史延伸导航",
+                "scope": "parent",
                 "url": "https://www.gov.cn/jrzg/2007-06/29/content_667720.htm"
               },
               {
@@ -32297,14 +32243,14 @@
                   "中国民用管制执照条件、例外、签注与注册；第21/30/42/74例外按人群核，不是当年招聘或美国规则",
                   "本轮实际核读2026-10-02"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "editor",
                 "limitation": "第21/30/42/74例外按人群核，不是当年招聘或美国规则",
                 "market": "中国大陆民用管制",
                 "name": "《民用航空空中交通管制员执照管理规则》（交通运输部令2026年第9号，2026-07-01 施行）",
                 "period": "2026年第9号；2026-07-01施行",
                 "publisher": "交通运输部制定，中国民航局公布全文",
-                "scope": "中国民用管制执照条件、例外、签注与注册",
+                "scope": "exact",
                 "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/202604/t20260410_230516.html"
               },
               {
@@ -32313,14 +32259,14 @@
                   "工资组成定义",
                   "沿用同工作日0027实际核读，不称本轮新请求"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "nist",
-                "limitation": "沿同工作日0027实际核读，只作统计定义，不作本职待遇或资格",
+                "limitation": "工资总额统计组成定义，不提供本职业工资、待遇或资格。",
                 "market": "中国大陆统计定义",
                 "name": "国家统计局《关于工资总额组成的规定》",
                 "period": "规定正文，非职业工资期间",
                 "publisher": "国家统计局",
-                "scope": "工资总额组成定义",
+                "scope": "parent",
                 "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
               },
               {
@@ -32329,14 +32275,14 @@
                   "Job Zone3中等准备等级；准备等级不是FAA法定门槛或中国条件",
                   "本轮实际核读2026-10-02"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "arxiv",
                 "limitation": "准备等级不是FAA法定门槛或中国条件",
                 "market": "美国53-2021",
                 "name": "O*NET OnLine 53-2021.00 教育要求（Job Zone 3）",
                 "period": "当前Job Zone描述",
                 "publisher": "O*NET OnLine",
-                "scope": "Job Zone3中等准备等级",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-2021.00"
               },
               {
@@ -32345,14 +32291,14 @@
                   "工作活动描述与重要性；不作个人能力得分或选拔阈值",
                   "本轮实际核读2026-10-02"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "weforum",
                 "limitation": "不作个人能力得分或选拔阈值",
                 "market": "美国53-2021",
                 "name": "O*NET OnLine 53-2021.00 职业详细资料（工作活动重要性）",
                 "period": "当前职业调查资料",
                 "publisher": "O*NET OnLine",
-                "scope": "工作活动描述与重要性",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-2021.00"
               },
               {
@@ -32361,14 +32307,14 @@
                   "延伸自定义职业档案导航",
                   "保留历史访问记录；本轮未重新核目录正文"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "employer",
                 "limitation": "本轮未核此目录细项，不作强制资格、健康或招聘证据",
                 "market": "美国53-2021导航",
                 "name": "O*NET OnLine 53-2021.00 自定义职业档案",
                 "period": "导航入口，非工资/预测期间",
                 "publisher": "O*NET OnLine",
-                "scope": "延伸导航",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/custom/53-2021.00"
               },
               {
@@ -32377,14 +32323,14 @@
                   "任务清单；旧稳定ID非采购经理职业，任务支持本管制职业",
                   "本轮实际核读2026-10-02"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "purchasing-managers",
-                "limitation": "旧稳定ID非采购经理职业，任务支持本管制职业",
+                "limitation": "支持本管制职业任务，不作为其他职业任务或资格资料。",
                 "market": "美国53-2021",
                 "name": "O*NET OnLine 53-2021.00 职业摘要（任务清单）",
                 "period": "当前职业摘要",
                 "publisher": "O*NET OnLine",
-                "scope": "任务清单",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/53-2021.00"
               },
               {
@@ -32393,30 +32339,30 @@
                   "任务活动；不作工资或AI效果依据",
                   "本轮实际核读2026-10-02"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-1",
                 "limitation": "不作工资或AI效果依据",
                 "market": "美国53-2021",
                 "name": "O*NET OnLine 53-2021.00 任务与工作活动",
                 "period": "当前职业资料",
                 "publisher": "O*NET OnLine",
-                "scope": "任务活动",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
-                  "政府及其他宽类就业份额；份额不等行业工资/预测",
-                  "本轮实际核读2026-10-02"
+                  "政府宽类93%、其他7%。",
+                  "与BLS2025联邦政府92%分类不同，不含行业工资。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-2",
-                "limitation": "份额不等行业工资/预测",
+                "limitation": "仅本职业2025宽类行业就业份额，不同于联邦雇主分组。",
                 "market": "美国53-2021",
                 "name": "O*NET OnLine 53-2021.00 行业分布",
-                "period": "访问2026-10-02；页未标数据年度",
+                "period": "2025年行业分布",
                 "publisher": "O*NET OnLine",
-                "scope": "政府及其他宽类就业份额",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/53-2021.00"
               },
               {
@@ -32425,14 +32371,14 @@
                   "全国工资分位；非个人收入报价或中国工资",
                   "本轮实际核读2026-10-02"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-3",
                 "limitation": "非个人收入报价或中国工资",
                 "market": "美国53-2021",
                 "name": "O*NET 展示的 BLS OEWS 2025 年 5 月工资分位：53-2021.00",
                 "period": "2025年5月工资",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
-                "scope": "全国工资分位",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/53-2021.00"
               },
               {
@@ -32441,14 +32387,14 @@
                   "新人学历受访比例；高中36%、证书21%、学士20%非录用概率或法定门槛",
                   "本轮实际核读2026-10-02"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "census",
                 "limitation": "高中36%、证书21%、学士20%非录用概率或法定门槛",
                 "market": "美国53-2021",
                 "name": "O*NET OnLine 53-2021.00 教育要求（Education）",
                 "period": "当前Education调查资料",
                 "publisher": "O*NET OnLine",
-                "scope": "新人学历受访比例",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-2021.00"
               },
               {
@@ -32457,14 +32403,14 @@
                   "任务与CRE兴趣代码；兴趣不是个人诊断或职业效度证明",
                   "本轮实际核读2026-10-02"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "msresearch",
                 "limitation": "兴趣不是个人诊断或职业效度证明",
                 "market": "美国53-2021",
                 "name": "O*NET OnLine 53-2021.00 职业摘要（任务与兴趣）",
                 "period": "当前职业摘要",
                 "publisher": "O*NET OnLine",
-                "scope": "任务与CRE兴趣代码",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/53-2021.00"
               },
               {
@@ -32473,14 +32419,14 @@
                   "全国工资分位（不含此页就业人数）；工资页不能作为22,510就业估计依据",
                   "本轮实际核读2026-10-02"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet-wages",
                 "limitation": "工资页不能作为22,510就业估计依据",
                 "market": "美国53-2021",
                 "name": "O*NET 展示的 BLS 职业就业与工资统计（53-2021.00）",
                 "period": "2025年5月工资",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
-                "scope": "全国工资分位（不含此页就业人数）",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/53-2021.00"
               },
               {
@@ -32489,15 +32435,31 @@
                   "记录、协调及详细活动；不是档案员职业或中国记录保存年限",
                   "本轮实际核读2026-10-02"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "archivists",
                 "limitation": "不是档案员职业或中国记录保存年限",
                 "market": "美国53-2021",
                 "name": "O*NET OnLine 53-2021.00 详细工作活动与记录要求",
                 "period": "当前职业资料",
                 "publisher": "O*NET OnLine",
-                "scope": "记录、协调及详细活动",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "美国FAA部分培养路径；毕业不等录用或独立值勤。",
+                  "Standard及Enhanced条件分别说明。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "faa-cti",
+                "limitation": "Enhanced毕业且被录用才可直接设施训练，仍过ATSA/医学/安审；Standard仅免Basics后进入Academy，不外推中国或保证录用。",
+                "market": "美国FAA",
+                "name": "FAA Air Traffic Collegiate Training Initiatives：Standard与Enhanced路径",
+                "period": "动态AT-CTI路径说明，当前查阅2026-10-08",
+                "publisher": "Federal Aviation Administration",
+                "scope": "exact",
+                "url": "https://www.faa.gov/air_traffic/air-traffic-collegiate-training-initiatives-cti"
               }
             ]
           },
@@ -35367,12 +35329,12 @@
           "ui": {
             "ai_heading": "AI 会影响空中交通管制员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "公开招聘样本（历史公告，非官方统计）",
-            "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "空中交通管制员在不同学历背景下通常从哪些岗位方向开始？",
+            "official_heading": "NBS行业与规上岗位类别背景（非职业工资）",
+            "scenario_caption": "编辑路径提示；执照条件与适用例外分别核，不是常见分布或薪资统计",
+            "scenario_heading": "不同学历背景应核对哪些管制员申请路径？",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "学历背景",
-            "scenario_value_label": "常见岗位方向"
+            "scenario_value_label": "需核对的路径方向"
           },
           "us_growth": {
             "$item": "air-traffic-controllers.china-salary.career-snapshot-primary-locale.58",
@@ -37810,7 +37772,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "任务：监视与排序航空器 · 发布许可与核对复诵 · 移交与应急处置",
@@ -37861,7 +37823,7 @@
       "text": "空中交通管制员：职业内容、薪资与就业前景"
     }
   },
-  "source_content_sha256": "2b6701e091a9ef3fd60a6adfc9de32267aac02a5291996f4fe3210a9177cee76",
+  "source_content_sha256": "3e8e3df4c72cc89ab5e81670a10b257d229d289e72273d766e904bf7081d2e8c",
   "subject": {
     "canonical_slug": "air-traffic-controllers",
     "name": "空中交通管制员",

@@ -23406,7 +23406,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "核心任务包括记录精准农业信息、采集地块边界和土壤属性、分析收割机数据制产量图，以及向农场解释地理空间工具。真实施药、设备编程与驾驶依授权。"
+              "用于核对地块信息记录、空间采集、产量地图和设备协作任务；不作为个人操作许可。"
             ]
           },
           "id": "precision-agriculture-technicians.profile.onet-structured-fields-block.1",
@@ -23470,7 +23470,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "农业、GIS和数据分析知识用于采集、制图与解释；项目所需作物和工具训练另核。"
+              "用于说明农业、GIS、数据分析及工具背景；具体作物和项目训练另核。"
             ]
           },
           "id": "precision-agriculture-technicians.profile.onet-structured-fields-block.2",
@@ -23500,7 +23500,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "19-4012.01为O*NET细分任务；19-4012为BLS农业技术员父组统计。"
+              "O*NET19-4012.01支持细分任务；BLS表1.2的19-4012数据只支持农业技术员父组统计。"
             ]
           },
           "id": "precision-agriculture-technicians.profile.onet-structured-fields-block.3",
@@ -23530,7 +23530,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "纸面数据质量单不是施药处方、农机驾驶或灌溉执行许可。"
+              "O*NET支持作业任务描述；本页纸面练习为编辑设计，不授予设备、施药或灌溉操作权。"
             ]
           },
           "id": "precision-agriculture-technicians.profile.onet-structured-fields-block.4",
@@ -23560,7 +23560,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "可用资料包括地块边界、土壤样本、收割机产量、遥感和天气；核原始来源与采集条件。"
+              "用于核对地块、土壤、产量、遥感和天气图层的任务输入；实际数据质量须另行复核。"
             ]
           },
           "id": "precision-agriculture-technicians.profile.onet-structured-fields-block.5",
@@ -24715,16 +24715,16 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "NIST 生成式人工智能风险管理画像",
+                "entity": "O*NET精准农业技术员：知识、软件与任务",
                 "id": "link-14",
                 "relation": "career.evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+                "url": "https://www.onetonline.org/link/details/19-4012.01"
               },
               {
-                "entity": "《GPTs are GPTs》（任务影响估计与限制）",
+                "entity": "NIST生成式人工智能风险管理画像",
                 "id": "link-15",
                 "relation": "career.evidence",
-                "url": "https://arxiv.org/abs/2303.10130"
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
               },
               {
                 "entity": "BLS表1.2 19-4012",
@@ -24745,10 +24745,10 @@
                 "url": "https://arxiv.org/abs/2303.10130"
               },
               {
-                "entity": "NIST 风险管理框架（人工复核与责任分配）",
+                "entity": "O*NET精准农业技术员：空间数据任务",
                 "id": "link-19",
                 "relation": "career.evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+                "url": "https://www.onetonline.org/link/details/19-4012.01"
               }
             ]
           },
@@ -25811,7 +25811,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET任务；F田编辑虚构。"
+              "O*NET空间数据任务；F田练习是本页编辑设计。"
             ]
           },
           "id": "precision-agriculture-technicians.ai-impact.ai-impact-table.77",
@@ -27585,7 +27585,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "地区、作物和实际责任不同；49,630美元为父组中位数，非个人报价。 BLS父组2025–2035约19,500至20,600、+5.4%、2,800年均空缺，非细分专属。 BLS 19-4012约19,500到20,600、+5.4%，年均约2,800空缺；非细分专属。 49,630美元/年为美国农业技术员宽职业中位数，非中国或细分待遇。"
+              "地区、作物和实际责任会影响个人报价；49,630美元为2025年美国农业技术员19-4012父组中位数，不是精准农业细分或中国待遇。"
             ]
           },
           "id": "precision-agriculture-technicians.us-salary.career-snapshot-secondary-locale.27",
@@ -29301,8 +29301,9 @@
             "onet",
             "bls",
             "facilities",
-            "privacy",
-            "employer"
+            "employer",
+            "nist",
+            "editor"
           ],
           "type": "links"
         },
@@ -29908,7 +29909,7 @@
             "employer",
             "editor"
           ],
-          "title": "雇主在招聘中通常看什么？",
+          "title": "入行核查依据与编辑准备建议",
           "type": "cards"
         },
         {
@@ -30182,7 +30183,7 @@
                 "地块数据采集者",
                 "核坐标与图层",
                 "依项目",
-                "练地图质量",
+                "核所选GPS/GIS课程的具体报名条件；本页无统一资格要求。",
                 "持续",
                 "不代替农艺"
               ],
@@ -30191,7 +30192,7 @@
                 "分析作物数据者",
                 "识别异常与误差",
                 "依作物",
-                "核原始数据",
+                "核课程或岗位培训条件，作物和数据基础按项目。",
                 "持续",
                 "不能猜处方"
               ],
@@ -30200,7 +30201,7 @@
                 "授权设备操作员",
                 "核设备设置与安全",
                 "依场所",
-                "专项培训",
+                "核具体设备培训与岗位授权条件。",
                 "持续",
                 "不自动给施药许可"
               ],
@@ -30209,7 +30210,7 @@
                 "涉及施用者",
                 "关注漂移和过量投入",
                 "依当地法规",
-                "核责任人",
+                "核作业所在法域、药剂类别与责任主体要求。",
                 "持续",
                 "最终放行另授权"
               ]
@@ -30441,7 +30442,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "先做F田虚构纸面练习，再核真实岗位设备资格。"
+              "先用编辑设计的F田纸面练习核数据质量，再核真实岗位条件。以下三条四阶段路径为编辑归纳，不是统一职级或录用承诺。"
             ]
           },
           "id": "precision-agriculture-technicians.path.career-path-block.20",
@@ -35387,7 +35388,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "privacy",
+              "facilities",
               "employer"
             ],
             "id": "personal-data",
@@ -35419,7 +35420,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "facilities",
+              "privacy",
               "onet"
             ],
             "id": "technical-boundary",
@@ -35451,7 +35452,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
+              "onet",
               "employer"
             ],
             "id": "single-coverage",
@@ -36969,7 +36970,7 @@
         "rows": [
           {
             "alternate_value": null,
-            "label": "O*NET 19-4012.01任务；BLS 19-4012宽统计",
+            "label": "O*NET精准农业技术员：任务",
             "secondary_value": null,
             "value": {
               "$item": "precision-agriculture-technicians.profile.onet-structured-fields-block.1",
@@ -36980,7 +36981,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Occupational Outlook Handbook",
+            "label": "O*NET精准农业技术员：知识与技能",
             "secondary_value": null,
             "value": {
               "$item": "precision-agriculture-technicians.profile.onet-structured-fields-block.2",
@@ -36991,7 +36992,7 @@
           },
           {
             "alternate_value": null,
-            "label": "国家统计局 2025 年城镇单位工资",
+            "label": "O*NET与BLS：细分任务和父组统计",
             "secondary_value": null,
             "value": {
               "$item": "precision-agriculture-technicians.profile.onet-structured-fields-block.3",
@@ -37002,7 +37003,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测表 1.2（2025–35）",
+            "label": "O*NET任务与本页编辑练习边界",
             "secondary_value": null,
             "value": {
               "$item": "precision-agriculture-technicians.profile.onet-structured-fields-block.4",
@@ -37013,7 +37014,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中华人民共和国个人信息保护法",
+            "label": "O*NET精准农业技术员：数据与地图",
             "secondary_value": null,
             "value": {
               "$item": "precision-agriculture-technicians.profile.onet-structured-fields-block.5",
@@ -38294,7 +38295,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "精准农业 · GIS与地块数据",
@@ -38345,7 +38346,7 @@
       "text": "精准农业技术员"
     }
   },
-  "source_content_sha256": "8e409062805e3bb4d4c63c7258157964c0b7dab4ffc7af1982ee827c7975ae12",
+  "source_content_sha256": "47bf7b8f71502d085d2520d2d3faf8665a4156d05b8a2db14ab030594b379084",
   "subject": {
     "canonical_slug": "precision-agriculture-technicians",
     "name": "精准农业技术员",

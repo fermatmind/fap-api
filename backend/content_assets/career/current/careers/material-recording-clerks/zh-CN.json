@@ -7318,7 +7318,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页物料记录文员指 O*NET 43-5071.00：验核并维护涉及库存的进出货记录，核验并记录进货物料或商品并安排运输，可能准备发货物品，含收货员、发货文员与订单履行专员等职称。工作包括核对货物与单据、申领与存放包装物料、编制工单与提单、打包封装贴标、记录重量费用与差异、沟通处理差错、按线路配送、联络承运商并确定运输方式与费率、核算费用。工作以仓库、货站与非受控室内环境为主。本页不含工业生产经理、运输仓储与配送经理、供应链经理、物流分析师等相邻岗位。"
+              "固定slug为material-recording-clerks，实际对象为ONet43-5071.00收货、发货与库存文员，核对进出货与单据、维护库存记录，按岗位打包贴标、记录重量费用差异、联络承运商。不是物料记录文员全部子职业，也不是53-7065补货拣货员；设备搬运、运输安排和异常处理依岗位授权，不与生产管理或物流分析职责互换。"
             ]
           },
           "id": "material-recording-clerks.profile.definition-block.1",
@@ -7592,7 +7592,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "条码与扫描、库存与订单系统、单据自动生成、运费与费率查询、差异与异常提醒等工具可辅助录入、核对与生成记录；但实物核对、差异判断、与承运商及内部部门的沟通处理与记录责任仍由人负责，工具不能替代实物核验。"
+              "编辑任务假设：条码/RFID、ERP库存系统和固定费率计算不等于生成式AI；后者可能整理虚构货件说明或差异记录草稿，未取得本职业采用率或岗位结果。实物数量/损坏、单据和费率由人核对，未经批准不上传真实客户/运单信息，不自动确认收货、收费或发运。"
             ]
           },
           "id": "material-recording-clerks.ai-impact.ai-impact-table.2",
@@ -7620,7 +7620,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不同环节受影响不同：单据生成、数据录入与费率查询更易被工具辅助，但实物核对、差异处理与沟通协调仍由人负责。"
+              "编辑比较：草稿可能被辅助，未取得采用先后证据；RFID/自动库存的效率预测不能当生成式AI采用率。实物、差异和交接核验保留。"
             ]
           },
           "id": "material-recording-clerks.ai-impact.ai-impact-table.4",
@@ -7662,7 +7662,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议：单据生成、数据录入与费率查询可由工具辅助；当前资料不证明机构普遍采用这些系统。"
+              "编辑假设：可辅助草稿整理，未证明机构采用或岗位替代。"
             ]
           },
           "id": "material-recording-clerks.ai-impact.ai-impact-table.7",
@@ -7676,7 +7676,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以单据与实物一致、记录准确与合规为准，保留人工判断与记录。"
+              "核实实物/单据/费率及审批权限，异常如实留痕升级；自动文字不能代设备操作授权。"
             ]
           },
           "id": "material-recording-clerks.ai-impact.ai-impact-table.8",
@@ -7698,7 +7698,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开职业工资：国家统计局按行业门类发布城镇单位就业人员年平均工资，物料记录文员主要计入交通运输、仓储和邮政业等行业，行业平均不能替代本职业工资。"
+              "证据不足：本次未取得与43-5071.00安全对应的中国职业工资分布。运输仓储邮政单位均值仅作该类雇主背景，制造/零售等雇主另核，不证明本职业主要归单一行业或公开工资不存在。"
             ]
           },
           "fact_refs": [
@@ -7793,7 +7793,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 该页显示 2025 年 BLS OEWS 年薪中位数为 45,260 美元（约 21.76 美元/小时）；就业方面 2024 年约 862,200 人、2024—2034 年预计下降（Decline，-1% 或更低）、期间职位空缺约 69,300 个。该页未展示分位工资。以上为美国全国口径且属本职业 43-5071.00，「下降」为统计预测，不等于个人就业结果。"
+              "2025美国43-5071工资中位45,260美元/年、21.76美元/小时，完整分位见表；旧2024年862,200人、2024—2034年均69,300空缺分开保留。最新2025年827,700人、2025—2035下降8%、年均61,300；不是全物料记录组或个人录用概率。"
             ]
           },
           "fact_refs": [
@@ -7813,7 +7813,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资统计位置：以上为美国全国口径且属本职业 43-5071.00；中位数不代表起薪或个人到手收入，且未披露分位。"
+              "2025美国全国43-5071本职业工资，年薪与时薪分位按原表分别录入，非个人工时换算或到手收入。"
             ]
           },
           "fact_refs": [
@@ -7830,7 +7830,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "怎样理解这些位置：O*NET 该页只展示中位数，不展示分位；中位数不是新手或资深等级。就业规模与「下降」是职业统计，须与个人机会分开解释；整体下降不代表每个地区或雇主都没有岗位。"
+              "P10/25/50/75/90是工资分布位置，不是新手/资深等级；就业规模、空缺与个人机会分开。"
             ]
           },
           "fact_refs": [
@@ -7847,15 +7847,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布与局限：该页 2024 年主要行业为 Manufacturing 与 Retail Trade；行业分布是雇主场景信号，不是需求预测。"
+              "证据不足：未取得43-5071精确分行业工资。BLS物料记录多职业组2025年5月行业年薪中位作代理：制造48,950、运输仓储47,990、批发46,310、零售39,290美元；包含生产计划及称量检验记录等职业，不当本细分职业行业值或行业就业占比。"
             ]
           },
           "fact_refs": [
-            "us-employment-2024"
+            "us-combined-median-wage"
           ],
           "id": "material-recording-clerks.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "onet-industry"
+            "bls-ooh-recording"
           ],
           "type": "prose"
         },
@@ -7864,7 +7864,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "规模与口径提示：该职业 2024 年就业约 862,200 人、预计下降；引用时须标明年份、覆盖范围与本职业口径，且中位数与增长描述不能跨市场拼接。"
+              "旧69,300是2024—2034年均空缺，非期合计；新2025—2035年均61,300主要替补需求，下降8%不等于无岗位，不与全物料记录组98,600年均混用。"
             ]
           },
           "fact_refs": [
@@ -8103,12 +8103,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国侧该职业属 Job Zone 1-2（所需准备很少至一些）：多数岗位要求高中文凭或 GED（约 75%），在职培训从数天到一年；具体学历与培训要求按雇主与行业核对。"
+              "ONet新聘学历调查75%高中/GED、12%两年制/大专、11%本科，非每个雇主门槛。BLS物料记录组通常高中+在职培训，多数至一个月；生产计划文员可至六个月属于其他细分。JobZone1—2数天至一年是组描述，具体岗位培训另核。"
             ]
           },
           "id": "material-recording-clerks.path.career-path-block.2",
           "source_refs": [
-            "onet-education"
+            "onet-education",
+            "bls-ooh-recording"
           ],
           "type": "prose"
         },
@@ -8117,12 +8118,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国：以高中文凭加在职培训、仓储或物流系统操作经验为常见路径，部分岗位提供学徒机会。中国大陆：无与该 O*NET 精确对应的统一职业资格，仓储与物流文员岗位多按用人单位与行业要求确定，涉及叉车与场内机动车作业须按所在地安全与特种作业规定核对。"
+              "美国一般记录岗位按雇主培训，真实学徒项目另查；涉及动力工业卡车须OSHA正式教学、实操和工作场所评估。中国本职业资格尚未建立精确对应；目录内叉车司机N1属市场监管特种设备资格，非通用文员证或应急管理特种作业证。"
             ]
           },
           "id": "material-recording-clerks.path.career-path-block.3",
           "source_refs": [
-            "onet-education"
+            "osha-pit",
+            "samr-n1"
           ],
           "type": "prose"
         },
@@ -8224,7 +8226,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 引用 BLS 数据显示，该职业 2024 年就业约 862,200 人，2024—2034 年预计下降（-1% 或更低），期间职位空缺约 69,300 个；该职业规模大但整体收缩，空缺主要来自替代需求；这是职业统计，不是个人录用概率，也不同于招聘样本。"
+              "旧2024年862,200人、2024—2034年均69,300保留；最新43-5071在2025年827,700人、2025—2035下降8%、年均61,300空缺，主要替补，非十年合计或当前招聘数。"
             ]
           },
           "id": "material-recording-clerks.market-signals.market-signal-card.2",
@@ -8266,7 +8268,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：目标雇主的系统与流程、物流与合规知识、叉车等设备授权，或转向仓储主管、物流调度与供应链方向所需的经验与责任证据。"
+              "第一目标工业生产经理：须补生产工艺与质量控制、人员/设备资源配置、生产计划/成本预算及带队经验；BLS通常本科和相关多年经验，也有高中加丰富生产经验路径。收发货记录与纸面库存作品不能证明生产管理胜任。"
             ]
           },
           "id": "material-recording-clerks.market-signals.market-signal-card.5",
@@ -8705,6 +8707,66 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "工资/就业按细分列；行业工资为包含生产计划/检验记录的多职业组。"
+                ],
+                "evidence_type": "primary source",
+                "id": "bls-ooh-recording",
+                "limitation": "组行业值不是43-5071细分行业工资。",
+                "market": "美国",
+                "name": "BLS物料记录文员手册",
+                "period": "现行页面；查阅2026-10-11",
+                "publisher": "BLS",
+                "scope": "broad occupational group",
+                "url": "https://www.bls.gov/ooh/office-and-administrative-support/material-recording-clerks.htm"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "指出搬运肌肉骨骼损伤、叉车撞击和其他仓储危害。"
+                ],
+                "evidence_type": "primary source",
+                "id": "osha-warehouse",
+                "limitation": "美国仓储危害参考，非中国法或单职业事故率。",
+                "market": "美国",
+                "name": "OSHA仓储风险概览",
+                "period": "现行页面；查阅2026-10-11",
+                "publisher": "OSHA",
+                "scope": "workplace hazards",
+                "url": "https://www.osha.gov/warehousing"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "1910.178含正式教学、实操与工作场所评估，操作授权按现场和设备核。"
+                ],
+                "evidence_type": "primary source",
+                "id": "osha-pit",
+                "limitation": "仅适用相应美国设备/工作场所，普通记录训练不授操作权。",
+                "market": "美国",
+                "name": "OSHA动力工业卡车规范",
+                "period": "现行页面；查阅2026-10-11",
+                "publisher": "OSHA",
+                "scope": "jurisdiction-specific safety",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.178"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "2021年第41号公告附件2叉车司机N1。"
+                ],
+                "evidence_type": "primary source",
+                "id": "samr-n1",
+                "limitation": "中国目录内叉车，非全部设备/文员。",
+                "market": "中国大陆",
+                "name": "市场监管叉车作业资格分类",
+                "period": "现行页面；查阅2026-10-11",
+                "publisher": "国家市场监管总局",
+                "scope": "jurisdiction-specific qualification",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/tzsbs/art/2023/art_6608605c3b334954ac72e19851c38a35.html"
               }
             ]
           },
@@ -8893,12 +8955,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "录入与生成",
+            "AI主要改变": "可能整理单据草稿；条码/ERP/固定费率计算与生成式AI分开。",
             "仍由人负责": "实物核对",
             "方向": "单据与录入"
           },
           {
-            "AI主要改变": "查询与汇总",
+            "AI主要改变": "可能归纳差异说明；实物、费用和交接仍须核验。",
             "仍由人负责": "口径与核算责任",
             "方向": "费率和数据"
           }
@@ -9008,7 +9070,7 @@
             "问题": "AI 会取代物料记录文员吗？"
           },
           {
-            "回答": "目前只写到可辅助的单据生成、数据录入与费率查询，实物核对、差异处理与沟通协调仍由人承担。",
+            "回答": "仅列任务假设，未取得采用先后或岗位结果研究；真实任务与授权需人员核验。",
             "来源": {
               "$source": "onet-tasks",
               "block": "source-register",
@@ -9256,7 +9318,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "条码与扫描、库存与订单系统、单据自动生成、运费与费率查询、差异与异常提醒等工具可辅助录入、核对与生成记录；但实物核对、差异判断、与承运商及内部部门的沟通处理与记录责任仍由人负责，工具不能替代实物核验。"
+          "编辑任务假设：条码/RFID、ERP库存系统和固定费率计算不等于生成式AI；后者可能整理虚构货件说明或差异记录草稿，未取得本职业采用率或岗位结果。实物数量/损坏、单据和费率由人核对，未经批准不上传真实客户/运单信息，不自动确认收货、收费或发运。"
         ],
         "heading": "物料记录文员的工作对象与 AI 边界"
       },
@@ -9398,6 +9460,18 @@
               "item": "material-recording-clerks.source-register.published.1"
             },
             "scope": "中国行业工资口径；不等于本职业精确工资。"
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.178",
+            "id": "material-recording-clerks.display.source.osha-pit",
+            "label": "OSHA动力工业卡车",
+            "scope": "设备培训评估另核。"
+          },
+          {
+            "href": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/tzsbs/art/2023/art_6608605c3b334954ac72e19851c38a35.html",
+            "id": "material-recording-clerks.display.source.samr-n1",
+            "label": "市场监管叉车N1",
+            "scope": "中国目录内叉车。"
           }
         ],
         "tracks": [
@@ -9681,7 +9755,7 @@
             "affected_roles": "收发货岗位",
             "consequence": "可能造成库存与账目错误。",
             "evidence_refs": [
-              "onet-tasks"
+              "material-recording-clerks.display.source.onet-tasks"
             ],
             "id": "risk-1",
             "mitigation": "核对实物与单据并记录差异。",
@@ -9697,7 +9771,7 @@
             "affected_roles": "记录与核对岗位",
             "consequence": "可能影响追溯与索赔。",
             "evidence_refs": [
-              "onet-tasks"
+              "material-recording-clerks.display.source.onet-tasks"
             ],
             "id": "risk-2",
             "mitigation": "如实记录并按流程上报。",
@@ -9713,7 +9787,7 @@
             "affected_roles": "计费与记录岗位",
             "consequence": "可能造成多收少收。",
             "evidence_refs": [
-              "onet-context"
+              "material-recording-clerks.display.source.onet-tasks"
             ],
             "id": "risk-3",
             "mitigation": "按费率与口径核算并复核。",
@@ -9729,10 +9803,10 @@
             "affected_roles": "仓储与搬运岗位",
             "consequence": "可能造成伤害或货损。",
             "evidence_refs": [
-              "onet-context"
+              "material-recording-clerks.display.source.osha-warehouse"
             ],
             "id": "risk-4",
-            "mitigation": "按安全规定堆放与防护。",
+            "mitigation": "核重量/搬运工具与现场堆放条件，按培训执行，无法安全搬运时求助并升级，不以赶单跳过安全检查。",
             "scenario": "堆放或搬运不符合安全要求。",
             "title": {
               "$item": "material-recording-clerks.risk.career-risk-cards.4",
@@ -9745,7 +9819,7 @@
             "affected_roles": "沟通与交接岗位",
             "consequence": "可能造成延误或责任不明。",
             "evidence_refs": [
-              "onet-summary"
+              "material-recording-clerks.display.source.onet-tasks"
             ],
             "id": "risk-5",
             "mitigation": "明确交接内容并留痕。",
@@ -9761,10 +9835,11 @@
             "affected_roles": "仓储与搬运岗位",
             "consequence": "可能违反安全规定。",
             "evidence_refs": [
-              "onet-cert"
+              "material-recording-clerks.display.source.osha-pit",
+              "material-recording-clerks.display.source.samr-n1"
             ],
             "id": "risk-6",
-            "mitigation": "仅在获得授权后操作设备。",
+            "mitigation": "记录训练不授叉车操作权；美国核OSHA车型/现场实操评估，中国目录内叉车核N1及雇主授权，未授权不操作。",
             "scenario": "操作叉车等设备而未取得授权。",
             "title": "设备操作未经授权"
           }
@@ -9842,6 +9917,24 @@
               "item": "material-recording-clerks.source-register.published.1"
             },
             "scope": "执照与认证入口；不替代作业授权。"
+          },
+          {
+            "href": "https://www.osha.gov/warehousing",
+            "id": "material-recording-clerks.display.source.osha-warehouse",
+            "label": "OSHA仓储风险",
+            "scope": "搬运/设备危害。"
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.178",
+            "id": "material-recording-clerks.display.source.osha-pit",
+            "label": "OSHA动力工业卡车",
+            "scope": "美国设备培训与评估。"
+          },
+          {
+            "href": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/tzsbs/art/2023/art_6608605c3b334954ac72e19851c38a35.html",
+            "id": "material-recording-clerks.display.source.samr-n1",
+            "label": "市场监管叉车N1",
+            "scope": "中国目录内叉车资格。"
           }
         ]
       },
@@ -9851,7 +9944,7 @@
             {
               "指标": "中国大陆职业工资",
               "数值": "证据不足：未单列",
-              "说明": "国家统计局按行业门类发布，未单列本职业工资。"
+              "说明": "未取得安全职业映射与分布，不推断公开数据不存在。"
             },
             {
               "指标": "中国大陆行业代理",
@@ -9938,7 +10031,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国大陆无本职业单列工资；下列为行业代理，不是起薪、中位数或到手收入。",
+          "china_open": "本次未取得精确职业工资；运输仓储邮政单位均值仅对应雇主背景，非本职业中位数或个体经营收入。",
           "china_ref": {
             "$join": [
               {
@@ -10018,20 +10111,26 @@
         "authority_sources": {
           "$join": [
             {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "material-recording-clerks.source-register.published.1"
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "material-recording-clerks.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "material-recording-clerks.source-register.published.1"
+                }
+              ],
+              "separator": ""
             },
-            "｜",
-            {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "material-recording-clerks.source-register.published.1"
-            }
+            "；BLS职业手册｜https://www.bls.gov/ooh/office-and-administrative-support/material-recording-clerks.htm"
           ],
           "separator": ""
         },
@@ -10086,7 +10185,7 @@
           },
           {
             "指标": "薪资 · 最低 10%",
-            "数值": "未披露",
+            "数值": "$34,650/年（P10，2025）",
             "说明": {
               "$join": [
                 {
@@ -10109,8 +10208,8 @@
             }
           },
           {
-            "指标": "薪资 · 最高 90%",
-            "数值": "未披露",
+            "指标": "薪资 · P90分位",
+            "数值": "$62,190/年（P90，2025）",
             "说明": {
               "$join": [
                 {
@@ -10206,7 +10305,7 @@
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "约 69,300 个（2024—2034 期合计）",
+            "数值": "约69,300个/年（旧2024—2034）",
             "说明": {
               "$join": [
                 {
@@ -10229,7 +10328,7 @@
             }
           }
         ],
-        "boundary": "美国全国口径：工资、就业与行业均为 O*NET 展示的本职业 43-5071.00 数据，工资为 2025 OEWS、就业展望为 2024—2034 预测；不含个人到手收入、起薪或录用结论。",
+        "boundary": "2025全国43-5071工资；行业表为物料记录多职业组代理，细分行业工资仍缺。旧/新就业预测分开，非个人收入或录用。",
         "direct_answer": {
           "$item": "material-recording-clerks.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10238,11 +10337,11 @@
         },
         "factor_rows": [
           {
-            "answer": "多数岗位要求高中文凭并在职培训；设备操作须按雇主与所在地规定获得授权。",
+            "answer": "ONet75%高中/12%大专/11%本科是调查；BLS组在职培训通常至一个月，具体岗位和设备实操授权另核。",
             "factor": "资格"
           },
           {
-            "answer": "以单据核对、记录与系统操作经验为主；准确性与差异处理记录比证书名称更常被参考。",
+            "answer": "核准确记录/差异处理和系统操作实证；未取得作品与证书录用权重比较，纸面练习不代现场设备授权。",
             "factor": "经验"
           },
           {
@@ -10269,30 +10368,30 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024",
+        "industry_period": "2025年5月",
         "industry_rows": [
           {
-            "industry": "Manufacturing",
-            "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体中位数为准。"
+            "industry": "物料记录多职业组：制造",
+            "median": "$48,950/年",
+            "note": "2025年5月美国物料记录多职业组代理（非43-5071细分）；非个人收入承诺。"
           },
           {
-            "industry": "Retail Trade",
-            "median": "见就业行",
-            "note": "行业口径为雇主场景信号，不跨职业外推。"
+            "industry": "物料记录多职业组：运输仓储",
+            "median": "$47,990/年",
+            "note": "2025年5月美国物料记录多职业组代理（非43-5071细分）；非个人收入承诺。"
           },
           {
-            "industry": "行业口径说明二",
-            "median": "见就业行",
-            "note": "地区与行业差异大，不得跨地区外推。"
+            "industry": "物料记录多职业组：批发",
+            "median": "$46,310/年",
+            "note": "2025年5月美国物料记录多职业组代理（非43-5071细分）；非个人收入承诺。"
           },
           {
-            "industry": "行业口径说明三",
-            "median": "见就业行",
-            "note": "分位工资未披露，不以推断值替代。"
+            "industry": "物料记录多职业组：零售",
+            "median": "$39,290/年",
+            "note": "2025年5月美国物料记录多职业组代理（非43-5071细分）；非个人收入承诺。"
           }
         ],
-        "industry_value_label": "行业值",
+        "industry_value_label": "年薪中位数（美元/年）",
         "interpretation_heading": {
           "$item": "material-recording-clerks.us-salary.career-snapshot-secondary-locale.4",
           "block": "us-salary",
@@ -10301,7 +10400,7 @@
         },
         "interpretation_rows": [
           {
-            "answer": "美元/年；为 BLS 2025 OEWS 全国中位数（本职业 43-5071.00 口径），未展示分位，不含个人到手收入。",
+            "answer": "2025完整年薪/时薪分位，43-5071本职业，非资历、起薪或到手收入。",
             "question": "工资"
           },
           {
@@ -10309,11 +10408,11 @@
             "question": "就业"
           },
           {
-            "answer": "2024—2034 预测下降（-1% 或更低），是职业统计，不是个人录用结果；整体下降不代表每个地区或雇主都无机会。",
+            "answer": "最新本职业2025—2035下降8%、年均61,300空缺；旧预测另列，非个人录用。",
             "question": "展望"
           },
           {
-            "answer": "按 O*NET/BLS 行业口径列为制造业与零售业，不等于全部从业者收入。",
+            "answer": "行业表是物料记录多职业组代理，包含生产计划/检验记录，不当43-5071精确行业值。",
             "question": "行业"
           }
         ],
@@ -10334,22 +10433,34 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "—",
-            "interpretation": "O*NET 该页未展示分位工资；不以推断值替代。",
-            "label": "最低 10%",
-            "value": "未披露"
+            "equivalent": "$16.66/小时",
+            "interpretation": "2025美国全国43-5071本职业分位，非资历、起薪或个人工时换算。",
+            "label": "P10",
+            "value": "$34,650/年"
+          },
+          {
+            "equivalent": "$18.37/小时",
+            "interpretation": "2025美国全国43-5071本职业分位，非资历、起薪或个人工时换算。",
+            "label": "P25",
+            "value": "$38,200/年"
           },
           {
             "equivalent": "$21.76/小时",
-            "interpretation": "2025 美国全国年薪中位数（本职业 43-5071.00 口径）。",
-            "label": "中位数（50%）",
+            "interpretation": "2025美国全国43-5071本职业分位，非资历、起薪或个人工时换算。",
+            "label": "P50（中位数）",
             "value": "$45,260/年"
           },
           {
-            "equivalent": "—",
-            "interpretation": "O*NET 该页未展示分位工资；不以推断值替代。",
-            "label": "最高 90%",
-            "value": "未披露"
+            "equivalent": "$24.79/小时",
+            "interpretation": "2025美国全国43-5071本职业分位，非资历、起薪或个人工时换算。",
+            "label": "P75",
+            "value": "$51,570/年"
+          },
+          {
+            "equivalent": "$29.90/小时",
+            "interpretation": "2025美国全国43-5071本职业分位，非资历、起薪或个人工时换算。",
+            "label": "P90",
+            "value": "$62,190/年"
           }
         ]
       },
@@ -10445,17 +10556,17 @@
           {
             "geography": "美国全国",
             "horizon": "2024—2034",
-            "interpretation": "为 2024—2034 年期间合计，含增长与替代需求，不等于在招岗位数。",
+            "interpretation": "旧2024—2034年均；新2025—2035本职业年均61,300，非当前在招或期合计。",
             "limitation": "不能作为个人录用概率。",
-            "metric": "职位空缺（期合计）",
+            "metric": "预测年均职位空缺",
             "occupation_scope": "展示口径：Shipping, Receiving, and Inventory Clerks（43-5071.00）",
-            "value": "约 69,300 个"
+            "value": "约69,300个/年（旧版）"
           },
           {
             "geography": "美国全国",
             "horizon": "2025",
             "interpretation": "为 BLS 2025 OEWS 全国中位数，不代表起薪或到手收入。",
-            "limitation": "未披露分位；不含个人到手收入。",
+            "limitation": "2025完整工资分位已取得；43-5071本职业，不代个人收入或资历。",
             "metric": "年薪中位数",
             "occupation_scope": "展示口径：Shipping, Receiving, and Inventory Clerks（43-5071.00）",
             "value": "$45,260/年"
@@ -10534,6 +10645,12 @@
               "item": "material-recording-clerks.source-register.published.1"
             },
             "scope": "任务与工作情境；仅用于提出转型假设。"
+          },
+          {
+            "href": "https://www.bls.gov/ooh/management/industrial-production-managers.htm",
+            "id": "material-recording-clerks.display.source.bls-target-production",
+            "label": "BLS工业生产经理",
+            "scope": "第一目标实际管理职责与入行。"
           }
         ],
         "transitions": [
@@ -10588,7 +10705,7 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补足流程与系统深度。",
+            "capability_gaps": "补货件接收/计数、货架补货、实际拣货搬运及相关客户协作；记录系统熟悉不自动证明这些现场任务。",
             "shared_capabilities": "收发货与记录基础。",
             "target_href": "/zh/career/jobs/stockers-and-order-fillers",
             "target_slug": "stockers-and-order-fillers",
@@ -10626,7 +10743,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "riasec",
             "label": "RIASEC",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10645,7 +10762,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "big-five",
             "label": "大五人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10664,7 +10781,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "mbti",
             "label": "MBTI",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10678,7 +10795,7 @@
             "answer": "需要结合真实任务、边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "enneagram",
             "label": "九型人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10692,7 +10809,7 @@
             "answer": "需要结合真实任务、边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "iq",
             "label": "认知能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10706,7 +10823,7 @@
             "answer": "需要结合真实任务、边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "eq",
             "label": "情绪能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -11228,7 +11345,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "进出货记录",
@@ -11279,7 +11396,7 @@
       "text": "物料记录文员职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "19aae19e275cc4312671ccccc46b47234a145e1da4a2c8eb1d30f0c0b6720425",
+  "source_content_sha256": "9aa00b23eae14107d2dd3f5c45f6baa988a29a35c65d1b4cb7d0f3641b79a69b",
   "subject": {
     "canonical_slug": "material-recording-clerks",
     "name": "物料记录文员",

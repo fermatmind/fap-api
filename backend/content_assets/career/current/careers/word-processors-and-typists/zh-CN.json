@@ -27341,7 +27341,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "上海市委办公厅2025排版1人，专科理工、35岁以下，方正证书优先，夜间应急值守，编内按规定待遇，7月25日截止。"
+              "上海市委办公厅2025排版1人，专科以上理工专业、35岁以下；熟悉方正排版软件优先、持相关证书优先，长期夜间和应急值守，编内按规定待遇，7月25日截止。"
             ]
           },
           "id": "word-processors-and-typists.display.career_snapshot_primary_locale.scenario.background",
@@ -31750,7 +31750,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "WordOffice等软件背景不测生成式AI采用、净节时或替代率。"
+              "美国43-9022本职2025—2035就业预计下降34.4%，十年净减少13,900人；年均1,900空缺含替补需求，非净新增、AI替代率或中国同期变化。"
             ]
           },
           "id": "word-processors-and-typists.market-signals.market-signal-card.2",
@@ -31920,7 +31920,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转结构化字段和录入错误复核，补系统字段规则。"
+              "编辑判断：转结构化字段和录入错误复核，补系统字段规则。"
             ]
           },
           "id": "word-processors-and-typists.display.market_signal_card.transitions.agent.distance",
@@ -31965,7 +31965,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "职责更广，补办公室流程而非只打字。"
+              "编辑判断：职责更广，补办公室流程而非只打字。"
             ]
           },
           "id": "word-processors-and-typists.display.market_signal_card.transitions.teacher.distance",
@@ -32010,7 +32010,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "两本地名称同美国口径，不能当独立工资样本。"
+              "编辑判断：两本地名称同美国口径，不能当独立工资样本。"
             ]
           },
           "id": "word-processors-and-typists.display.market_signal_card.transitions.enrichment.distance",
@@ -32055,7 +32055,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转设备输出作业，补机器和材料条件。"
+              "编辑判断：转设备输出作业，补机器和材料条件。"
             ]
           },
           "id": "word-processors-and-typists.display.market_signal_card.transitions.art.distance",
@@ -32100,7 +32100,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转专门校样标记规则，不等原创内容编辑。"
+              "编辑判断：转专门校样标记规则，不等原创内容编辑。"
             ]
           },
           "id": "word-processors-and-typists.display.market_signal_card.transitions.directing.distance",
@@ -32145,7 +32145,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "补分类检索保管和访问责任。"
+              "编辑判断：补分类检索保管和访问责任。"
             ]
           },
           "id": "word-processors-and-typists.display.market_signal_card.transitions.announcing.distance",
@@ -32190,7 +32190,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转具体业务答复，补事实政策及回复责任。"
+              "编辑判断：转具体业务答复，补事实政策及回复责任。"
             ]
           },
           "id": "word-processors-and-typists.display.market_signal_card.transitions.editing.distance",
@@ -32235,7 +32235,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "补图文版式印前产出，不由打字授设计责任。"
+              "编辑判断：补图文版式印前产出，不由打字授设计责任。"
             ]
           },
           "id": "word-processors-and-typists.display.market_signal_card.transitions.dancing.distance",
@@ -32265,7 +32265,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET转写校对及软件背景。"
+              "个人信息保护法第6、8、9、51条：目的范围、准确完整、处理者责任及操作权限；责任要求不是新增岗位数。"
             ]
           },
           "id": "word-processors-and-typists.display.market_signal_card.source.ratify",
@@ -36319,7 +36319,7 @@
         "industry_period": "2023年5月历史；43-9022",
         "industry_rows": [
           {
-            "fact_ref": "industry-theater",
+            "fact_ref": "industry-primary",
             "industry": "地方政府（排学校医院）｜本职",
             "median": {
               "$fact": "industry-primary",
@@ -36333,7 +36333,7 @@
             }
           },
           {
-            "fact_ref": "industry-education",
+            "fact_ref": "industry-secondary",
             "industry": "中小学｜本职",
             "median": {
               "$fact": "industry-secondary",
@@ -36347,7 +36347,7 @@
             }
           },
           {
-            "fact_ref": "industry-amusement",
+            "fact_ref": "industry-tertiary",
             "industry": "州政府（排学校医院）｜本职",
             "median": {
               "$fact": "industry-tertiary",
@@ -36713,7 +36713,7 @@
           },
           {
             "href": {
-              "$source": "ratify",
+              "$source": "cn-rule",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -36721,7 +36721,7 @@
             },
             "id": "ratify",
             "label": {
-              "$source": "ratify",
+              "$source": "cn-rule",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -38532,7 +38532,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "O*NET-SOC43-9022.00",
@@ -38583,7 +38583,7 @@
       "text": "文字处理员与打字员"
     }
   },
-  "source_content_sha256": "249bea7294efe78c7ba56c08fc0d3d4536c1108b3e207d34972df20f899d4fb3",
+  "source_content_sha256": "103b651e7fb5de6fca9046b0d97a49d186903aa8956f61f7c7ca3c4be2f6e8a4",
   "subject": {
     "canonical_slug": "word-processors-and-typists",
     "name": "文字处理员与打字员",

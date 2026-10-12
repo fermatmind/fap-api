@@ -7543,7 +7543,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "排班与任务分配、库存与耗材管理、清洁检查记录等工具可辅助分配任务与汇总数据，但现场清洁、布草整理、化学品与防护、损坏失物判断以及客人隐私保护仍由人负责。"
+              "编辑任务假设：普通排班、库存和检查记录软件与生成式AI分开；后者可能草拟虚构清洁交接记录，未取得本职业采用率或岗位结果。现场清洁、化学品标签/防护与失物隐私须人员核验，自动文本不能替代现场质量确认。"
             ]
           },
           "id": "maids-and-housekeeping-cleaners.ai-impact.ai-impact-table.2",
@@ -7571,7 +7571,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不同环节受影响不同：排班、库存与记录汇总更易自动化，但现场清洁、布草整理、化学品与防护以及损坏失物判断仍由人负责。"
+              "编辑分析：排班、库存与记录汇总可作为辅助工具的试用候选；本页未取得各环节自动化程度的比较研究。现场清洁、布草整理、化学品防护与异常报告仍按岗位规程和授权落实。"
             ]
           },
           "id": "maids-and-housekeeping-cleaners.ai-impact.ai-impact-table.4",
@@ -7613,7 +7613,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议：工具可辅助排班、库存与检查记录；当前资料不证明住宿与清洁机构普遍采用这些系统。"
+              "编辑试用建议：仅虚构资料下的小样草稿；普通专用软件与生成式AI不同，未证明本职业机构普遍采用。"
             ]
           },
           "id": "maids-and-housekeeping-cleaners.ai-impact.ai-impact-table.7",
@@ -8054,7 +8054,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国侧该职业属 Job Zone 1-2（极少至一些准备）：通常需要高中文凭或同等学历，部分岗位无硬性要求，在岗培训从数天到一年；具体要求按雇主与行业核对。"
+              "美国 O*NET 将本职业列入 Job Zone 1—2；该组的学历与数天至一年培训描述是职业组准备信息，不是本职业统一要求。本职业教育调查中，45%受访者选择低于高中学历、36%选择高中或同等学历；具体岗位门槛仍核雇主公告。"
             ]
           },
           "id": "maids-and-housekeeping-cleaners.path.career-path-block.2",
@@ -8217,7 +8217,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：目标雇主的化学品与安全培训、设备操作与检查要求，或转向清洁主管、洗衣布草管理与物业清洁所需的经验与责任证据。"
+              "转向物业清洁需补足公共设施与地面养护、目标场所清洁设备、安全培训和质量检查要求；原有清洁顺序与记录经验可作为起点，仍须验证目标岗位操作能力。"
             ]
           },
           "id": "maids-and-housekeeping-cleaners.market-signals.market-signal-card.5",
@@ -8657,6 +8657,22 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "第1—2页说明皮肤和呼吸道危害、漂白剂与氨混合危险，以及标签、SDS、稀释、通风与防护训练。",
+                  "面向美国清洁作业人员的安全指导；不建立中国许可或本职业工资。"
+                ],
+                "evidence_type": "official safety guidance",
+                "id": "osha-cleaning-chemicals",
+                "limitation": "跨清洁岗位安全指导，不替代所在地法规、产品标签或雇主规程。",
+                "market": "美国清洁作业",
+                "name": "OSHA／NIOSH：清洁化学品使用者防护说明",
+                "period": "OSHA 3512，2012；本轮查阅2026-10-11",
+                "publisher": "OSHA / NIOSH",
+                "scope": "industry_proxy",
+                "url": "https://www.osha.gov/sites/default/files/publications/OSHA3512.pdf"
               }
             ]
           },
@@ -8845,12 +8861,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "任务分配与数据汇总",
+            "AI主要改变": "交接草稿可能被辅助；排班软件不证明生成式AI采用。",
             "仍由人负责": "标准核对与现场确认",
             "方向": "排班与记录"
           },
           {
-            "AI主要改变": "有限辅助",
+            "AI主要改变": "编辑分析：须按具体设备和场景验证辅助能力，不提供自动化比例。",
             "仍由人负责": "清洁顺序与质量",
             "方向": "现场清洁"
           }
@@ -9208,7 +9224,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "排班与任务分配、库存与耗材管理、清洁检查记录等工具可辅助分配任务与汇总数据，但现场清洁、布草整理、化学品与防护、损坏失物判断以及客人隐私保护仍由人负责。"
+          "编辑任务假设：普通排班、库存和检查记录软件与生成式AI分开；后者可能草拟虚构清洁交接记录，未取得本职业采用率或岗位结果。现场清洁、化学品标签/防护与失物隐私须人员核验，自动文本不能替代现场质量确认。"
         ],
         "heading": "客房清洁员与清洁工的工作对象与 AI 边界"
       },
@@ -9633,7 +9649,7 @@
             "affected_roles": "清洁作业岗位",
             "consequence": "可能造成肌肉骨骼劳损。",
             "evidence_refs": [
-              "onet-context"
+              "maids-and-housekeeping-cleaners.display.source.onet-context"
             ],
             "id": "risk-1",
             "mitigation": "采用正确姿势、轮换并适当休息。",
@@ -9649,7 +9665,7 @@
             "affected_roles": "清洁作业岗位",
             "consequence": "可能造成皮肤或呼吸道刺激。",
             "evidence_refs": [
-              "onet-tasks"
+              "maids-and-housekeeping-cleaners.display.source.osha-cleaning-chemicals"
             ],
             "id": "risk-2",
             "mitigation": "按标签与规程使用并佩戴防护。",
@@ -9665,7 +9681,7 @@
             "affected_roles": "公共区域清洁岗位",
             "consequence": "可能造成滑倒与跌倒。",
             "evidence_refs": [
-              "onet-context"
+              "maids-and-housekeeping-cleaners.display.source.onet-context"
             ],
             "id": "risk-3",
             "mitigation": "及时清理、设置提示并保持通道畅通。",
@@ -9681,7 +9697,7 @@
             "affected_roles": "清洁作业岗位",
             "consequence": "可能造成扭伤或拉伤。",
             "evidence_refs": [
-              "onet-tasks"
+              "maids-and-housekeeping-cleaners.display.source.onet-tasks"
             ],
             "id": "risk-4",
             "mitigation": "使用辅助器具并正确搬运。",
@@ -9697,7 +9713,7 @@
             "affected_roles": "客房清洁岗位",
             "consequence": "可能造成财物损失或信任受损。",
             "evidence_refs": [
-              "onet-tasks"
+              "maids-and-housekeeping-cleaners.display.source.onet-tasks"
             ],
             "id": "risk-5",
             "mitigation": "遵守规程并如实报告损坏与失物。",
@@ -9713,7 +9729,7 @@
             "affected_roles": "清洁作业岗位",
             "consequence": "可能产生有害气体与伤害。",
             "evidence_refs": [
-              "onet-context"
+              "maids-and-housekeeping-cleaners.display.source.osha-cleaning-chemicals"
             ],
             "id": "risk-6",
             "mitigation": "按标签使用、保持通风并禁止违规混用。",
@@ -9794,6 +9810,12 @@
               "item": "maids-and-housekeeping-cleaners.source-register.published.1"
             },
             "scope": "工资口径；不替代安全规程。"
+          },
+          {
+            "href": "https://www.osha.gov/sites/default/files/publications/OSHA3512.pdf",
+            "id": "maids-and-housekeeping-cleaners.display.source.osha-cleaning-chemicals",
+            "label": "OSHA／NIOSH 清洁化学品安全指导",
+            "scope": "美国跨清洁岗位安全指导；不替代中国法域或产品标签。"
           }
         ]
       },
@@ -10181,7 +10203,7 @@
             }
           }
         ],
-        "boundary": "美国全国口径：工资、就业与行业均为 O*NET 展示的本职业 37-2012.00 数据，工资为 2025 OEWS、就业展望为 2024—2034 预测；不含个人到手收入、起薪或录用结论。",
+        "boundary": "美国全国口径：工资、就业与行业均为 O*NET 展示的本职业 37-2012.00 数据，工资为 2025 OEWS、就业展望为 2024—2034 预测；不含个人到手收入、起薪或录用结论。 本页保留的就业数为旧版历史预测；2026-10-11 当前 O*NET 已展示2025—2035预测，保护 Hero 与共享事实未同步，本页不是最新全页就业版本。",
         "direct_answer": {
           "$item": "maids-and-housekeeping-cleaners.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10190,11 +10212,11 @@
         },
         "factor_rows": [
           {
-            "answer": "通常需要高中文凭或同等学历、部分岗位无硬性要求；在岗培训从数天到一年，认证不等于执业授权。",
+            "answer": "O*NET 本职业教育调查中，45%受访者选择低于高中学历、36%选择高中或同等学历；Job Zone 1—2 是准备分组，不构成统一学历或培训期限。",
             "factor": "资格"
           },
           {
-            "answer": "多以在岗培训进入；清洁标准、化学品防护与设备使用经验比证书名称更常被参考。",
+            "answer": "编辑建议：核对目标雇主要求的清洁标准、化学品防护与设备使用训练，以受监督的操作和检查记录展示经验；不推断经验与证书的招聘权重。",
             "factor": "经验"
           },
           {
@@ -10225,22 +10247,22 @@
         "industry_rows": [
           {
             "industry": "Accommodation and Food Services",
-            "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体中位数为准。"
+            "median": "证据不足：本轮未取得行业工资分项",
+            "note": "住宿与餐饮服务是雇主行业；全国职业中位数不代填行业工资。"
           },
           {
             "industry": "Other Services",
-            "median": "见就业行",
+            "median": "证据不足：本轮未取得行业工资分项",
             "note": "行业口径为雇主场景信号，不跨职业外推。"
           },
           {
             "industry": "行业口径说明二",
-            "median": "见就业行",
+            "median": "证据不足：本轮未取得行业工资分项",
             "note": "地区与雇主差异大，不得跨地区外推。"
           },
           {
             "industry": "行业口径说明三",
-            "median": "见就业行",
+            "median": "证据不足：本轮未取得行业工资分项",
             "note": "全国工资五分位已公布；不能作为住宿和餐饮业内具体行业工资分项。"
           }
         ],
@@ -10384,7 +10406,7 @@
             "geography": "美国全国",
             "horizon": "2024—2034",
             "interpretation": "就业规模、变化与职位空缺必须分别解释。",
-            "limitation": "为职业统计，不能作为个人就业保证。",
+            "limitation": "此行保留2024—2034历史预测；当前 O*NET 已改为2025—2035。Hero及共享事实属保护消费者，未同步；不得视为最新全页统计或个人就业保证。",
             "metric": "就业规模与变化",
             "occupation_scope": "展示口径：Maids and Housekeeping Cleaners（37-2012.00）",
             "value": {
@@ -10398,7 +10420,7 @@
             "geography": "美国全国",
             "horizon": "2024—2034",
             "interpretation": "为 2024—2034 年预测期年均值（O*NET 标注为 annual job openings），含增长与替代需求，不等于在招岗位数。",
-            "limitation": "不能作为个人录用概率。",
+            "limitation": "本行保留旧预测期年均空缺；当前来源已展示新预测期，保护共享事实未同步。不是在招数或录用概率。",
             "metric": "职位空缺（年均）",
             "occupation_scope": "展示口径：Maids and Housekeeping Cleaners（37-2012.00）",
             "value": "约 193,500 个/年"
@@ -10578,7 +10600,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "riasec",
             "label": "RIASEC",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10597,7 +10619,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "big-five",
             "label": "大五人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10616,7 +10638,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "mbti",
             "label": "MBTI",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10630,7 +10652,7 @@
             "answer": "需要结合真实任务、安全边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "enneagram",
             "label": "九型人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10644,7 +10666,7 @@
             "answer": "需要结合真实任务、安全边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "iq",
             "label": "认知能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10658,7 +10680,7 @@
             "answer": "需要结合真实任务、安全边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "eq",
             "label": "情绪能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10716,7 +10738,7 @@
         },
         "questions": [
           {
-            "answer": "用本页工作样本核对体力与节奏适应度。",
+            "answer": "本页纸面数量核对只能观察记录与核算习惯；体力与持续站立适应度需在安全、受监督的实际清洁体验中另行观察。",
             "question": "你能长时间站立并重复操作吗？"
           },
           {
@@ -11180,7 +11202,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "客房与区域清洁",
@@ -11231,7 +11253,7 @@
       "text": "客房清洁员与清洁工职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "12e19b7fb61688ab4de99a46f0bbcf65d9d1f6520f72f078abb434a947722de0",
+  "source_content_sha256": "a87c62f3ca5ee0d5b89e6d70232bd5218d67c8eb7794e02cb6cab3fcab1a9fc4",
   "subject": {
     "canonical_slug": "maids-and-housekeeping-cleaners",
     "name": "客房清洁员与清洁工",

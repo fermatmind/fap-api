@@ -7335,7 +7335,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "关键判断：判断灯位与承重、用电与线路安全、何时停止并报告设备或现场风险，以及哪些改动须经灯光指导或制作方确认。"
+              "关键判断：与灯光指导确认效果，与具备相应能力和授权的人员核对结构、吊挂及供电；发现缺陷停止受影响作业并报告。职业任务描述不授予结构承重审批、电工作业或登高权限。"
             ]
           },
           "id": "lighting-technicians.profile.work-context-block.5",
@@ -7349,12 +7349,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "环境与节奏：多在摄影棚、演播室、剧场或外景工作，常加班、昼夜颠倒与赶工；需频繁搬运、举升、登高与布线，暴露于噪音、热量与时间压力。"
+              "可能在棚内、剧场或外景搬运、搭建和运行设备。BLS较宽设备技术员组说明夜晚/周末与赶工情境；O*NET本职业档案为部分资料，未提供本页所称工时、噪声或登高频率，具体条件须按项目核对。"
             ]
           },
           "id": "lighting-technicians.profile.work-context-block.6",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "review-bls-ooh"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -7407,7 +7408,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "相邻职责边界：本页只覆盖灯光技术员；电工负责固定电气与供电合规，电气与电子工程技术员偏系统设计与测试，机器人技术员与管道/光伏岗位在对象与授权上不同，资格与最终责任不得与本页互换。"
+              "灯光技术员可进行其训练和授权内的灯光接线与小修；不能据此取得固定供电、结构审批或相邻电工/工程岗位权限。电工与技术员有工作对象交叉，边界按实际作业与所在地规则核验，不以职位名称排除全部电气任务。"
             ]
           },
           "id": "lighting-technicians.profile.definition-block.10",
@@ -7552,7 +7553,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "灯具库管理、控台程序与可视化预演可辅助排灯位、生成 cue 与快速回收，但结构承重、用电安全、现场遮挡与效果验收仍由灯光技术员现场核对。"
+              "编辑建议：可在离线环境测试灯位预演、cue草稿及设备清单；控台自动化与生成式AI分开。未取得职业采用率或调试节时效果，结构、供电及现场验收须由相应授权人员核对。"
             ]
           },
           "id": "lighting-technicians.ai-impact.ai-impact-table.2",
@@ -7581,12 +7582,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不同环节受影响不同：预演与程序自动化减少重复调试，但不等于现场安全与效果责任已被替代。"
+              "BLS在广播、灯光及声音系统的较宽职业组预测中提到技术及AI可能减少设置/操作所需人员；这是预测机制，不是灯光技术员已发生裁员的因果研究，也不提供机构采用率。"
             ]
           },
           "id": "lighting-technicians.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "internal-rubric"
+            "review-bls-ooh"
           ],
           "type": "prose"
         },
@@ -7595,7 +7596,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "人的控制点是搭建前核对结构与供电、调试时确认控台与回路匹配、运行中保留手动接管与急停能力，并保留调试与异常记录。"
+              "搭前由相应人员核对供电、结构与吊挂，调试核对控台及回路；运行按设备、项目应急规程操作，不能把一律断电当成所有异常的安全响应。"
             ]
           },
           "id": "lighting-technicians.ai-impact.ai-impact-table.5",
@@ -7637,7 +7638,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以现场安全与效果验收为准，工具输出仅作辅助并保留人工复核与升级记录。"
+              "搭建与接线前核对设备清单、连接方案及作业权限；真实结构、供电与固定条件由相应人员核验，不用离线预演替代现场检查。"
             ]
           },
           "id": "lighting-technicians.ai-impact.ai-impact-table.8",
@@ -7659,7 +7660,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开职业工资：国家统计局按行业门类发布城镇单位就业人员年平均工资，演艺灯光岗位多计入文化、体育和娱乐业与信息传输、软件和信息技术服务业，行业平均不能替代本职业工资。"
+              "本轮NBS行业表未单列对应27-4015的中国精确职业工资；文化体育娱乐与信息技术业仅作行业背景，未建立灯光技术员在这些中国行业的就业份额。"
             ]
           },
           "id": "lighting-technicians.china-salary.career-snapshot-primary-locale.1",
@@ -7738,13 +7739,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国全国口径下，该职业 2025 年年薪中位数为 68,060 美元（约 32.72 美元/小时），经 O*NET 展示的 2025 年 BLS OEWS 分位为第 10 至第 90 分位 42,310—130,760 美元；O*NET 引用 BLS 数据显示 2024 年就业约 12,100 人、2024—2034 年预计下降约 1% 或更低、预计年均职位空缺约 800 个。"
+              "美国27-4015：2025年5月年薪中位68,060美元、时薪中位32.72。BLS 2025—2035精确行就业9,900至9,400人，下降4.8%（OOH取整-5%），净减约500，年均空缺600；O*NET页面仍展示旧2024预测，不能混接。除中位外的分位本轮未重新取得在线原表。"
             ]
           },
           "id": "lighting-technicians.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "onet-wages",
-            "onet-trends"
+            "review-bls-projections",
+            "review-bls-ooh",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7753,12 +7755,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资统计位置：以上为美国全国职业工资口径；该职业多为项目制或自由职业，收入随项目数量、地区与工时波动，分位不代表起薪或全年到手收入。"
+              "OEWS雇员工资不含自雇收入；BLS精确职业2025就业含自雇比例12.2%，并不支持“多数自由职业”。项目合同费用、时长与成本后的净收入须另核。"
             ]
           },
           "id": "lighting-technicians.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "onet-wages"
+            "review-bls-projections",
+            "review-bls-ooh"
           ],
           "type": "prose"
         },
@@ -7767,7 +7770,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "怎样理解这些位置：第 10 分位约 42,310 美元、第 90 分位约 130,760 美元，说明同职业内部差异较大；高分段常反映资深、巡演或工会剧组岗位。"
+              "工资分位描述分布位置，不是新人、资深、巡演或工会剧组工资档。除中位外，本轮分位原表未重新取得；保留数值尚待独立核验，不据此推断收入成因。"
             ]
           },
           "id": "lighting-technicians.us-salary.career-snapshot-secondary-locale.4",
@@ -7781,13 +7784,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布与局限：O*NET 显示 2024 年主要行业为信息业、艺术/娱乐与休闲；行业分布是雇主场景信号，不是需求预测。"
+              "O*NET当前页面列2024就业行业信息业25%、艺术娱乐休闲24%，其余51%未拆分；这是旧期份额。BLS OOH的四项行业工资属于27-4010宽组，不能填成27-4015灯光工资。"
             ]
           },
           "id": "lighting-technicians.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "onet-industry",
-            "onet-trends"
+            "onet-details",
+            "review-bls-ooh"
           ],
           "type": "prose"
         },
@@ -7796,12 +7799,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "规模与口径提示：本职业就业规模较小（约 1.2 万人），且 O*NET 标注该职业档案目前仅提供部分数据；引用时须标明年份、地域与覆盖范围。"
+              "BLS精确职业2025就业约9,900人；O*NET档案仅部分资料。工资、就业和行业资料各标时期及范围，不能将宽组的136,600人或9,800年均空缺写成本职业。"
             ]
           },
           "id": "lighting-technicians.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "onet-summary"
+            "review-bls-ooh"
           ],
           "type": "prose"
         }
@@ -7888,7 +7891,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "RIASEC 兴趣代码为 RC（现实型—常规型）：偏动手与按规程操作；相关标签只描述活动偏好，不能决定胜任或证照资格。"
+              "O*NET当前职业兴趣分值R100、C52，前两类为RC；工作风格有可靠性、细节和谨慎等资料，均不是个人量表测量或安全资格。"
             ]
           },
           "id": "lighting-technicians.fit.riasec-fit-block.6",
@@ -7983,12 +7986,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "版权、肖像与素材授权风险"
+              "小修边界与越权维修"
             ]
           },
           "id": "lighting-technicians.risk.career-risk-cards.4",
           "source_refs": [
-            "internal-rubric"
+            "onet-details",
+            "review-osha-electrical"
           ],
           "type": "prose"
         },
@@ -7997,11 +8001,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "合同、场地许可与未成年人边界"
+              "临时改单与信息交接失配"
             ]
           },
           "id": "lighting-technicians.risk.career-risk-cards.5",
           "source_refs": [
+            "onet-details",
             "internal-rubric"
           ],
           "type": "prose"
@@ -8034,12 +8039,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国侧该职业多从灯光助理、场务或设备租赁起步，通常通过在职学习、剧组实践与作品积累进入；O*NET 显示该职业档案目前仅提供部分数据，入门教育与培训要求按雇主与地区核对。"
+              "美国BLS精确职业典型入门为高中之后的非学位证书、相关经验None及短期在职训练；OOH说明具体岗位可从高中到大学。O*NET Job Zone 3为一般准备描述，不等同统一学历、年限或法律许可。"
             ]
           },
           "id": "lighting-technicians.path.career-path-block.2",
           "source_refs": [
-            "onet-summary"
+            "review-bls-projections",
+            "review-bls-ooh",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8048,13 +8055,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国：以实际剧组经验、控台操作与安全培训为常见要求，相关认证不等于许可或场地授权。中国大陆：无与该 O*NET 精确对应的统一职业资格，岗位多按雇主与项目要求确定，须分别核对。"
+              "美国岗位教育、训练和电气作业规则分别核验；中国须按实际作业核对是否属于特种作业目录，适用时专门培训、考核及操作证后方可上岗。不能因职位叫灯光技术员而声称全国无资格要求。"
             ]
           },
           "id": "lighting-technicians.path.career-path-block.3",
           "source_refs": [
-            "onet-cert",
-            "onet-summary"
+            "review-cn-special",
+            "review-osha-electrical"
           ],
           "type": "prose"
         },
@@ -8077,11 +8084,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入口阶段：在监督下练习装卸灯架、布线、控台基础与安全防护，记录搭建与调试过程。"
+              "入口可先做纸面方案、清点及离线控台练习；真实接线、登高和吊挂须先核作业资格、培训、监督及项目授权，监督不自动免除持证要求。"
             ]
           },
           "id": "lighting-technicians.path.career-path-block.5",
           "source_refs": [
+            "review-cn-special",
             "onet-details"
           ],
           "type": "prose"
@@ -8119,12 +8127,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "向更高责任过渡：积累经验后可负责灯位设计与编程、带教新人，或转向灯光指导、舞台与演出技术管理方向。"
+              "可准备编程、效果设计、带教或技术管理方向；岗位聘任、结构和供电审批需另有能力及授权，不按工龄自动扩大法定作业范围。"
             ]
           },
           "id": "lighting-technicians.path.career-path-block.8",
           "source_refs": [
-            "onet-trends"
+            "onet-details"
           ],
           "type": "prose"
         }
@@ -8156,12 +8164,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 O*NET 引用 BLS 数据：该职业 2024 年就业约 12,100 人，2024—2034 年预计下降约 1% 或更低，预计年均职位空缺约 800 个；这是职业统计，不是个人录用概率，也不同于招聘样本。"
+              "BLS精确27-4015：2025就业9,900，2035约9,400，下降4.8%、净减约500，年均空缺600。不能与O*NET旧2024—2034预测或27-4010宽组混用。"
             ]
           },
           "id": "lighting-technicians.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-trends"
+            "review-bls-projections",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8170,13 +8179,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 显示主要行业为信息业、艺术/娱乐与休闲，且该职业档案目前仅提供部分数据；就业与空缺为统计预测，须与个人项目机会分开解释。"
+              "当前O*NET页面仍列2024行业份额信息业25%、艺术娱乐休闲24%，职业档案部分资料；BLS预测单独标2025—2035。预测、行业结构及具体项目机会分别解释。"
             ]
           },
           "id": "lighting-technicians.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-trends",
-            "onet-industry"
+            "review-bls-projections",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8606,6 +8615,58 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "27-4015：9.9至9.4千人，-4.8%，净减0.5千人，年均0.6千人空缺；自雇12.2%；典型高中后非学位、None经验、短期在职训练。"
+                ],
+                "id": "review-bls-projections",
+                "limitation": "预测与实证分开；安全规则按实际场景适用，不能替代培训或审批。",
+                "name": "BLS Occupational projections and characteristics 2025—2035",
+                "period": "当前官方页面；本轮核对",
+                "publisher": "BLS",
+                "scope": "按职业精确/宽组及法域分别核对",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "精确灯光行中位68,060、就业9,900，2035约9,400；行业工资及AI机制描述为较宽组，不写成灯光精确行业工资或观察结果。"
+                ],
+                "id": "review-bls-ooh",
+                "limitation": "预测与实证分开；安全规则按实际场景适用，不能替代培训或审批。",
+                "name": "BLS Broadcast, Sound, and Video Technicians",
+                "period": "当前官方页面；本轮核对",
+                "publisher": "BLS",
+                "scope": "按职业精确/宽组及法域分别核对",
+                "url": "https://www.bls.gov/ooh/media-and-communication/broadcast-and-sound-engineering-technicians.htm"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "2026年6月1日起施行；按实际作业目录适用时培训考核及操作证后上岗，不能用职业名称决定豁免。"
+                ],
+                "id": "review-cn-special",
+                "limitation": "预测与实证分开；安全规则按实际场景适用，不能替代培训或审批。",
+                "name": "应急管理部令19号：特种作业人员培训考核管理",
+                "period": "当前官方页面；本轮核对",
+                "publisher": "应急管理部",
+                "scope": "按职业精确/宽组及法域分别核对",
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "美国适用电气作业实践、断电隔离与合格人员边界；不是本页完整操作规程或中国资格。"
+                ],
+                "id": "review-osha-electrical",
+                "limitation": "预测与实证分开；安全规则按实际场景适用，不能替代培训或审批。",
+                "name": "OSHA 1910.333 electrical work practices",
+                "period": "当前官方页面；本轮核对",
+                "publisher": "OSHA",
+                "scope": "按职业精确/宽组及法域分别核对",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.333"
               }
             ]
           },
@@ -8713,7 +8774,7 @@
         "action_rows": [
           {
             "人群": "入行者",
-            "应对重点": "练习搭建、接线与安全防护。"
+            "应对重点": "先做纸面清单和离线练习；真实接线、登高及吊挂先核作业训练、资格和授权。"
           },
           {
             "人群": "在岗者",
@@ -8733,7 +8794,7 @@
         "authority_links": [
           {
             "来源": {
-              "$source": "onet-summary",
+              "$source": "review-bls-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -8742,7 +8803,7 @@
             "类型": "官方或研究来源",
             "适用范围": "仅按来源原始口径使用",
             "链接": {
-              "$source": "onet-summary",
+              "$source": "review-bls-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8812,18 +8873,18 @@
         },
         "evidence_rows": [
           {
-            "使用限制": "美国精确职业；该档案目前为部分数据。",
+            "使用限制": "预测与观察到的采用率/因果结果分开，不把宽组机制当成精确职业实证。",
             "来源": {
-              "$source": "onet-summary",
+              "$source": "review-bls-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lighting-technicians.source-register.published.1"
             },
-            "研究对象": "27-4015.00 的身份与官方范围",
-            "结论": "支持身份与任务边界",
+            "研究对象": "广播、声音和灯光设备技术员组及灯光精确职业行",
+            "结论": "宽组预测讨论AI降低人员需求；精确灯光预测下降，不证明已发生的AI岗位效果。",
             "链接": {
-              "$source": "onet-summary",
+              "$source": "review-bls-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8885,7 +8946,7 @@
             "概念": "采用条件"
           },
           {
-            "含义": "没有职业级岗位结果研究就不推导裁员时间、编制变化或录用概率。",
+            "含义": "预测可陈述并标明宽组范围；没有观察到的因果结果就不提供裁员时间或个人概率。",
             "概念": "岗位结果"
           }
         ],
@@ -8977,7 +9038,7 @@
           },
           {
             "为什么重要": "可能造成坠落或电气事故。",
-            "控制方式": "搭前核对结构与供电。",
+            "控制方式": "交相应授权人员核验承重、供电及现场风险，不让新人独立审批。",
             "风险": "承重或用电不当"
           },
           {
@@ -9200,7 +9261,7 @@
             "copy_key": "career.item.career-path-block",
             "type": "prose"
           },
-          "jurisdiction": "美国项目与地区规定；中国大陆按雇主与项目要求核对",
+          "jurisdiction": "美国岗位及适用电气规则；中国实际作业目录和项目授权分别核验",
           "summary": {
             "$item": "lighting-technicians.path.career-path-block.3",
             "block": "path",
@@ -9248,7 +9309,7 @@
           },
           {
             "href": {
-              "$source": "onet-hot",
+              "$source": "review-cn-special",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9256,17 +9317,17 @@
             },
             "id": "lighting-technicians.display.source.2",
             "label": {
-              "$source": "onet-hot",
+              "$source": "review-cn-special",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lighting-technicians.source-register.published.1"
             },
-            "scope": "关联技术；不等于采用率。"
+            "scope": "中国特种作业培训与持证；不能仅以项目要求代替。"
           },
           {
             "href": {
-              "$source": "onet-industry",
+              "$source": "review-bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9274,13 +9335,13 @@
             },
             "id": "lighting-technicians.display.source.3",
             "label": {
-              "$source": "onet-industry",
+              "$source": "review-bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lighting-technicians.source-register.published.1"
             },
-            "scope": "行业分布；不等于需求预测。"
+            "scope": "美国精确职业典型入门分类，不是个人法定学历。"
           }
         ],
         "tracks": [
@@ -9318,22 +9379,22 @@
                   "type": "prose"
                 },
                 "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "灯光技术员"
+                "responsibility": "按已确认方案设置和操作设备，测试效果并记录异常。",
+                "role": "灯光运行技术员"
               },
               {
                 "credentials": "按项目类型与设备类别核验。",
-                "next_moves": "补足工具、资格和责任证据。",
+                "next_moves": "围绕该职责核对目标项目工具、训练、作业资格和授权；这是准备方向，不保证晋升。",
                 "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "资深灯光技术员"
+                "responsibility": "在授权内小修和维护，大修报主管，与合格人员核对电气问题。",
+                "role": "设备调试与维护骨干"
               },
               {
                 "credentials": "按项目与雇主聘任决定。",
-                "next_moves": "补足工具、资格和责任证据。",
+                "next_moves": "围绕该职责核对目标项目工具、训练、作业资格和授权；这是准备方向，不保证晋升。",
                 "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "灯光设计/带班"
+                "responsibility": "示范清点和控台操作，协调交班；不自行批准结构或供电。",
+                "role": "灯光带教/班组协同"
               }
             ],
             "title": "现场灯光"
@@ -9343,31 +9404,31 @@
             "stages": [
               {
                 "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
+                "next_moves": "围绕该职责核对目标项目工具、训练、作业资格和授权；这是准备方向，不保证晋升。",
                 "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "独立交付阶段 1"
+                "responsibility": "核对灯具型号、参数与设计要求，向灯光指导反馈不匹配。",
+                "role": "灯具参数核对"
               },
               {
                 "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
+                "next_moves": "围绕该职责核对目标项目工具、训练、作业资格和授权；这是准备方向，不保证晋升。",
                 "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "独立交付阶段 2"
+                "responsibility": "按方案在离线环境组织cue和版本，不能替代现场验收。",
+                "role": "离线控台编程"
               },
               {
                 "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
+                "next_moves": "围绕该职责核对目标项目工具、训练、作业资格和授权；这是准备方向，不保证晋升。",
                 "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "独立交付阶段 3"
+                "responsibility": "与制作及搭建人员核对遮挡和效果，变更需负责人确认。",
+                "role": "彩排效果协调"
               },
               {
                 "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
+                "next_moves": "围绕该职责核对目标项目工具、训练、作业资格和授权；这是准备方向，不保证晋升。",
                 "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "独立交付阶段 4"
+                "responsibility": "整理节目需求与方案版本，技术可行和安全条件交相应人员核验。",
+                "role": "节目灯光方案协同"
               }
             ],
             "title": "灯光设计与编程"
@@ -9377,31 +9438,31 @@
             "stages": [
               {
                 "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
+                "next_moves": "围绕该职责核对目标项目工具、训练、作业资格和授权；这是准备方向，不保证晋升。",
                 "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "扩大责任阶段 1"
+                "responsibility": "清点归还及状态记录，缺损按租赁和设备流程处理。",
+                "role": "设备与租赁协同"
               },
               {
                 "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
+                "next_moves": "围绕该职责核对目标项目工具、训练、作业资格和授权；这是准备方向，不保证晋升。",
                 "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "扩大责任阶段 2"
+                "responsibility": "记录缺陷及隔离状态，向维修/安全负责人交接，不越权恢复使用或送电。",
+                "role": "故障与安全信息协同"
               },
               {
                 "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
+                "next_moves": "围绕该职责核对目标项目工具、训练、作业资格和授权；这是准备方向，不保证晋升。",
                 "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "扩大责任阶段 3"
+                "responsibility": "协调搭建、控台与制作信息，报告未完成的检查和变更。",
+                "role": "项目技术协调"
               },
               {
                 "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
+                "next_moves": "围绕该职责核对目标项目工具、训练、作业资格和授权；这是准备方向，不保证晋升。",
                 "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "扩大责任阶段 4"
+                "responsibility": "补足人员安排、项目沟通和规则知识，另核聘任及责任授权。",
+                "role": "技术管理准备"
               }
             ],
             "title": "转向与技术管理"
@@ -9557,14 +9618,15 @@
           }
         ],
         "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
-        "evidence_scope": "依据 O*NET 27-4015.00 的任务与工作情境，以及灯光设备、临时用电与现场安全通行要求；具体规则按项目、雇主与所在地核对，版权与肖像、合同与未成年人事项按适用法域确认，不跨范围外推。",
+        "evidence_scope": "O*NET提供搭建、接线、小修及重大故障上报任务；中国特种作业规定和美国电气规则分别限定适用范围。风险情境及控制建议是编辑归纳，不由技术/行业提及证明法律要求。",
         "heading": "灯光技术员的工作风险与边界",
         "risks": [
           {
             "affected_roles": "搭建与吊挂岗位",
             "consequence": "坠落、物体打击或灯具掉落。",
             "evidence_refs": [
-              "source-pack-onet-custom"
+              "lighting-technicians.display.source.1",
+              "lighting-technicians.display.source.2"
             ],
             "id": "risk-1",
             "mitigation": "搭前核对结构与承重、使用合规吊挂与防护，条件不足时停止并升级。",
@@ -9580,10 +9642,11 @@
             "affected_roles": "灯光电气岗位",
             "consequence": "触电、短路或火灾。",
             "evidence_refs": [
-              "source-pack-onet-details"
+              "lighting-technicians.display.source.2",
+              "lighting-technicians.display.source.3"
             ],
             "id": "risk-2",
-            "mitigation": "按额定容量与规范接线，交由有资质人员处理供电端。",
+            "mitigation": "未核验容量、线路、能源状态及人员资格时停止受影响作业，交符合适用规则的人员按程序处理；本页不提供接线步骤。",
             "scenario": "临时用电、线径或接地不当时。",
             "title": {
               "$item": "lighting-technicians.risk.career-risk-cards.2",
@@ -9596,7 +9659,7 @@
             "affected_roles": "灯具操作岗位",
             "consequence": "灼伤、设备损坏或停机。",
             "evidence_refs": [
-              "source-pack-onet-hot_tech"
+              "lighting-technicians.display.source.1"
             ],
             "id": "risk-3",
             "mitigation": "保持散热与安全距离、固定稳固并巡检温度与状态。",
@@ -9609,14 +9672,15 @@
             }
           },
           {
-            "affected_roles": "涉及拍摄与内容岗位",
-            "consequence": "版权或肖像侵权与合规风险。",
+            "affected_roles": "维护与接线岗位",
+            "consequence": "触电、火灾或设备故障。",
             "evidence_refs": [
-              "source-pack-onet-industry"
+              "lighting-technicians.display.source.1",
+              "lighting-technicians.display.source.3"
             ],
             "id": "risk-4",
-            "mitigation": "按授权链确权、保留授权记录，未授权不得使用。",
-            "scenario": "使用未授权素材或肖像时。",
+            "mitigation": "超出能力与授权的小修停止并报主管；电气隔离、确认和维修由符合适用规则的人员按程序处理。",
+            "scenario": "将小修扩大为供电改造或在未确定能源状态时拆修。",
             "title": {
               "$item": "lighting-technicians.risk.career-risk-cards.4",
               "block": "risk",
@@ -9625,14 +9689,14 @@
             }
           },
           {
-            "affected_roles": "涉及合同与现场岗位",
-            "consequence": "纠纷、违规作业或法律风险。",
+            "affected_roles": "编程、搭建与现场运行岗位",
+            "consequence": "效果或操作失配、未复核安全条件。",
             "evidence_refs": [
-              "source-pack-onet-localcert"
+              "lighting-technicians.display.source.1"
             ],
             "id": "risk-5",
-            "mitigation": "按适用法域核对合同、许可与未成年人保护要求后再作业。",
-            "scenario": "合同、场地许可或涉未成年人安排不明时。",
+            "mitigation": "变更由负责人确认并同步版本，受影响安全条件由相应人员复核后恢复作业。",
+            "scenario": "彩排或开演前临时改灯位/回路，版本未同步给控制和搭建人员。",
             "title": {
               "$item": "lighting-technicians.risk.career-risk-cards.5",
               "block": "risk",
@@ -9644,7 +9708,8 @@
             "affected_roles": "灯位设计与搭建岗位",
             "consequence": "灯位、承重或回路与实际现场不符。",
             "evidence_refs": [
-              "source-pack-onet-localtraining"
+              "lighting-technicians.display.source.1",
+              "lighting-technicians.display.source.3"
             ],
             "id": "risk-6",
             "mitigation": "以现场结构与供电核对为准，保留复核与升级记录。",
@@ -9692,7 +9757,7 @@
           },
           {
             "href": {
-              "$source": "onet-hot",
+              "$source": "review-cn-special",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9700,17 +9765,17 @@
             },
             "id": "lighting-technicians.display.source.2",
             "label": {
-              "$source": "onet-hot",
+              "$source": "review-cn-special",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lighting-technicians.source-register.published.1"
             },
-            "scope": "关联技术；不等于采用率。"
+            "scope": "中国2026特种作业培训考核及持证边界，按实际作业是否落入目录核验。"
           },
           {
             "href": {
-              "$source": "onet-industry",
+              "$source": "review-osha-electrical",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9718,13 +9783,13 @@
             },
             "id": "lighting-technicians.display.source.3",
             "label": {
-              "$source": "onet-industry",
+              "$source": "review-osha-electrical",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lighting-technicians.source-register.published.1"
             },
-            "scope": "行业分布；不等于需求预测。"
+            "scope": "美国1910.333电气作业要求；按适用场景核验，不是全球证照或完整操作程序。"
           }
         ]
       },
@@ -9922,50 +9987,12 @@
           {
             "指标": "薪资 · 10 分位",
             "数值": "$42,310/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-summary",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "lighting-technicians.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-summary",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "lighting-technicians.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "保留分位尚待复核：本轮在线原表未重新取得；不能作为起薪或经验档。"
           },
           {
             "指标": "薪资 · 25 分位",
             "数值": "$52,770/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-details",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "lighting-technicians.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-details",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "lighting-technicians.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "保留分位尚待复核：本轮在线原表未重新取得；不能作为起薪或经验档。"
           },
           {
             "指标": "薪资 · 中位数",
@@ -9994,68 +10021,30 @@
           {
             "指标": "薪资 · 75 分位",
             "数值": "$95,640/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-details",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "lighting-technicians.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-details",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "lighting-technicians.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "保留分位尚待复核：本轮在线原表未重新取得；不能作为起薪或经验档。"
           },
           {
             "指标": "薪资 · 90 分位",
             "数值": "$130,760/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-summary",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "lighting-technicians.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-summary",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "lighting-technicians.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "说明": "保留分位尚待复核：本轮在线原表未重新取得；不能作为起薪或经验档。"
           },
           {
             "指标": "就业 · 规模",
-            "数值": "12,100 人（2024）",
-            "说明": "不能从军种宽口径外推。"
+            "数值": "9,900人（2025）",
+            "说明": "BLS精确27-4015：2025—2035；空缺含替代，不是招聘数。"
           },
           {
             "指标": "就业 · 增长",
-            "数值": "约 -1% 或更低（2024—2034）",
-            "说明": "不能从军种宽口径外推。"
+            "数值": "-4.8%（净减约500人）",
+            "说明": "BLS精确27-4015：2025—2035；空缺含替代，不是招聘数。"
           },
           {
             "指标": "就业 · 年均空缺",
-            "数值": "约 800 个/年（预测期年均）",
-            "说明": "不能从军种宽口径外推。"
+            "数值": "600个/年",
+            "说明": "BLS精确27-4015：2025—2035；空缺含替代，不是招聘数。"
           }
         ],
-        "boundary": "美国全国口径：工资为 BLS 2025 年 OEWS 数据，就业与展望为 2024—2034 年预测；该职业多为项目制或自由职业，不含个人到手收入、起薪或授权结论。",
+        "boundary": "美国27-4015精确职业：2025年5月中位工资、2025—2035预测；O*NET行业份额仍为2024。除中位外分位原表本轮未重取，保留值待复核；不代表自雇净收入。",
         "direct_answer": {
           "$item": "lighting-technicians.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10064,11 +10053,11 @@
         },
         "factor_rows": [
           {
-            "answer": "多以剧组经验、控台操作与安全培训为常见要求；认证不等于许可或场地授权。",
+            "answer": "岗位操作训练与所在地作业资格分别核验，厂商证书或控台经验不自动授予电工、吊挂及高处权限。",
             "factor": "资格"
           },
           {
-            "answer": "多从助理或场务起步；经验与作品集比学历更常被参考。",
+            "answer": "BLS典型入门为高中后非学位证书、相关经验None、短期在职训练；O*NET Job Zone 3是较宽准备描述，不是统一法定年限。",
             "factor": "经验"
           },
           {
@@ -10082,7 +10071,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "约 -1% 或更低（2024—2034）",
+        "growth": "-4.8%（OOH取整-5%）",
         "heading": {
           "$item": "lighting-technicians.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10095,27 +10084,27 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024",
+        "industry_period": "2024（O*NET旧期）",
         "industry_rows": [
           {
             "industry": "信息业",
-            "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体分位为准。"
+            "median": "2024就业份额25%",
+            "note": "O*NET旧期；未取得灯光行业工资分项。"
           },
           {
-            "industry": "艺术、娱乐和休闲",
-            "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体分位为准。"
+            "industry": "艺术娱乐休闲",
+            "median": "2024就业份额24%",
+            "note": "O*NET旧期，不是2025份额。"
           },
           {
-            "industry": "其他行业（含演出与设备租赁）",
-            "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体分位为准。"
+            "industry": "其余未拆分行业",
+            "median": "2024就业份额51%",
+            "note": "按前两项合计补余，不细分设备租赁等。"
           },
           {
-            "industry": "行业口径说明",
-            "median": "见就业行",
-            "note": "以 O*NET/BLS 行业口径为准，不跨职业外推。"
+            "industry": "2025行业工资与份额",
+            "median": "精确分项未取得",
+            "note": "不以BLS宽组行业工资填补；整体中位另列。"
           }
         ],
         "industry_value_label": "行业值",
@@ -10131,11 +10120,11 @@
             "question": "工资"
           },
           {
-            "answer": "2024 年在岗人数，不是招聘职位数。",
+            "answer": "BLS 2025就业9,900人，不是招聘数。",
             "question": "就业"
           },
           {
-            "answer": "2024—2034 预测下降约 1% 或更低，不是个人录用概率。",
+            "answer": "BLS 2025—2035下降4.8%，仍有600年均空缺；职业预测不是个人项目机会。",
             "question": "展望"
           },
           {
@@ -10145,11 +10134,11 @@
         ],
         "median": "$68,060/年（2025）",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "2024—2034",
+        "outlook_period": "2025—2035",
         "wage_column_labels": [
           "分位",
-          "年度参考",
-          "月度等值",
+          "年薪",
+          "时薪",
           "解释"
         ],
         "wage_heading": {
@@ -10161,7 +10150,7 @@
         "wage_tiers": [
           {
             "equivalent": "$20.34/小时",
-            "interpretation": "第 10 分位边界，不是个人报价。",
+            "interpretation": "第10分位保留值本轮未重取，待复核。",
             "label": "最低 10%",
             "value": "$42,310/年"
           },
@@ -10173,8 +10162,8 @@
           },
           {
             "equivalent": "$62.87/小时",
-            "interpretation": "第 90 分位边界，不是个人报价。",
-            "label": "最高 90%",
+            "interpretation": "第90分位保留值本轮未重取，待复核。",
+            "label": "第90分位",
             "value": "$130,760/年"
           }
         ]
@@ -10256,7 +10245,7 @@
         "outlook_evidence": [
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
+            "horizon": "2025—2035",
             "interpretation": "就业规模、增长率与职位空缺必须分别解释。",
             "limitation": "不能作为个人就业保证。",
             "metric": "就业规模与增长",
@@ -10270,12 +10259,12 @@
           },
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
+            "horizon": "2025—2035",
             "interpretation": "含替代与新增需求，不等于在招岗位数。",
             "limitation": "不能作为个人录用概率。",
             "metric": "预计年均职位空缺",
             "occupation_scope": "O*NET 27-4015.00（美国全国）",
-            "value": "800 个/年（预测期年均）"
+            "value": "600个/年"
           },
           {
             "geography": "美国全国",
@@ -10291,7 +10280,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "onet-summary",
+              "$source": "review-bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10299,13 +10288,13 @@
             },
             "id": "lighting-technicians.display.source.0",
             "label": {
-              "$source": "onet-summary",
+              "$source": "review-bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lighting-technicians.source-register.published.1"
             },
-            "scope": "就业规模与预测；不提供个人录用概率。"
+            "scope": "美国27-4015精确2025—2035规模、净变动及年均空缺。"
           },
           {
             "href": {
@@ -10452,7 +10441,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "职业活动资料与编辑纸面试验建议",
             "id": "riasec",
             "label": "RIASEC",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10471,7 +10460,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "职业活动资料与编辑纸面试验建议",
             "id": "big-five",
             "label": "大五人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10479,7 +10468,7 @@
               "可观察任务",
               "过程记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "职业工作风格不等于大五测量，不能证明接线、登高或吊挂胜任。"
           },
           {
             "answer": {
@@ -10490,7 +10479,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "职业活动资料与编辑纸面试验建议",
             "id": "mbti",
             "label": "MBTI",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10504,7 +10493,7 @@
             "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "职业活动资料与编辑纸面试验建议",
             "id": "enneagram",
             "label": "九型人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10518,7 +10507,7 @@
             "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "职业活动资料与编辑纸面试验建议",
             "id": "iq",
             "label": "认知能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10532,7 +10521,7 @@
             "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "职业活动资料与编辑纸面试验建议",
             "id": "eq",
             "label": "情绪能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10874,7 +10863,7 @@
             "item": "lighting-technicians.source-register.published.1"
           }
         },
-        "note": "来源范围、限制和统计时期按原始证据分别核对。来源使用说明：O*NET 27-4015.00 灯光技术员（摘要）：提供 27-4015.00 的职业身份、官方范围、任务、就业与增长标签。；O*NET 标注该职业档案目前仅提供部分数据。；O*NET 27-4015.00（详细档案）：提供 27-4015.00 的任务与工作活动细节。；任务与所在地授权存在差异。；O*NET 27-4015.00 全国工资（BLS OEWS 展示）：2025 BLS OEWS 分位与中位工资（美国全国）。；分位不是起薪；保留所示时期、人群与单位。；O*NET 27-4015.00 全国就业趋势：27-4015.00 的就业规模与 2024—2034 年预测。；预测不是录用保证；职业规模较小。；Hot Technologies: 27-4015.00：与该职业关联的技术与软件提及（如 CAD、控台/PLC 相关软件、办公与项目管理软件）。；招聘提及不证明熟练度、采用率或自动化比例。；Industries: 27-4015.00：27-4015.00 的行业分布（信息业、艺术/娱乐与休闲等）。；行业分布是雇主场景信号，不是增长或需求预测。；National Certifications: 27-4015.00：与该职业相关的全国性认证发现入口。；认证不等于许可、授权或雇佣决定。；2025年城镇单位就业人员年平均工资情况：提供城镇非私营与私营单位分行业门类年平均工资，用于核对中国工资公开口径。；行业平均不是职业中位数，且不含个体工商户与自由职业者。；企业薪酬调查信息（2024年）：人力资源和社会保障部企业薪酬调查信息，按职业/岗位分类的薪酬查询入口。；覆盖城镇企业，不含机关事业单位；本页未取得与 27-4015.00 精确对应的条目。；FermatMind 灯光技术员任务影响量表：整理可辅助任务与人工控制点，用于任务级 AI 与适配讨论。；编辑量表不等于采用率、裁员、法规或证照证据。；"
+        "note": "2026-10-11核对：BLS精确27-4015为2025—2035；O*NET仍有2024预测及行业资料，时期不混用。68,060中位已核；分位原表本轮未取得，保留值待复核。AI在BLS宽组中是预测机制，非已发生岗位结果。中国特种作业及美国电气规则分列；保护FAQ/事实和实作的冲突留待独立复核。"
       },
       "work_context_block": {
         "$item": "lighting-technicians.profile.work-context-block.5",
@@ -11052,7 +11041,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "灯具与控台设置",
@@ -11103,7 +11092,7 @@
       "text": "灯光技术员职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "0b90d3bdea66b7d7ca65b3f6c846ace7fcf03b16c297a5d559b915064186eddd",
+  "source_content_sha256": "62ee60afffb88482ee492e6f94b510d42c1c06d5f63477327a7f4883fa98ba8c",
   "subject": {
     "canonical_slug": "lighting-technicians",
     "name": "灯光技术员",

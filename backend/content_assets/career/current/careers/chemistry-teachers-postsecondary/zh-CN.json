@@ -14,6 +14,27 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:ct-change2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ct-cn-education-nonprivate2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ct-cn-education-private2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ct-employment2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ct-employment2035": {
+        "status": "pending_mapping"
+      },
+      "fact:ct-growth2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ct-openings2025": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -8273,23 +8294,8 @@
         "status": "mapped"
       },
       "career_quick_answers_block.items.01.table.rows.02.value.steps.06": {
-        "ref": {
-          "id": "chemistry-teachers-postsecondary.profile.career-quick-answers-block.5",
-          "parts": [
-            [
-              "→",
-              5,
-              6
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_quick_answers_block.items.01.table.rows.03.alternate_value": {
         "ref": null,
@@ -9076,18 +9082,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.01.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            0,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.01.mitigation": {
         "ref": {
@@ -9343,18 +9339,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.04.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            3,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.04.mitigation": {
         "ref": {
@@ -9521,18 +9507,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.06.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            5,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.06.mitigation": {
         "ref": {
@@ -23689,7 +23665,7 @@
           ],
           "id": "chemistry-teachers-postsecondary.profile.definition-block.1",
           "source_refs": [
-            "onet-details"
+            "ct-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23704,7 +23680,7 @@
           },
           "id": "chemistry-teachers-postsecondary.profile.definition-block.2",
           "source_refs": [
-            "onet-details"
+            "ct-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23719,7 +23695,7 @@
           },
           "id": "chemistry-teachers-postsecondary.profile.definition-block.3",
           "source_refs": [
-            "onet-details"
+            "ct-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23734,7 +23710,7 @@
           },
           "id": "chemistry-teachers-postsecondary.profile.definition-block.4",
           "source_refs": [
-            "onet-details"
+            "ct-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23749,7 +23725,8 @@
           },
           "id": "chemistry-teachers-postsecondary.profile.definition-block.5",
           "source_refs": [
-            "nasa-seh"
+            "ct-teacher-law",
+            "ct-qual"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23764,7 +23741,7 @@
           },
           "id": "chemistry-teachers-postsecondary.profile.definition-block.6",
           "source_refs": [
-            "bls-entry"
+            "ct-cert"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23779,7 +23756,7 @@
           },
           "id": "chemistry-teachers-postsecondary.profile.definition-block.7",
           "source_refs": [
-            "onet-hot-tech"
+            "ct-hot"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23809,7 +23786,8 @@
           },
           "id": "chemistry-teachers-postsecondary.profile.definition-block.9",
           "source_refs": [
-            "nasa-seh"
+            "ct-teacher-law",
+            "ct-qual"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23834,7 +23812,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "高校化学教师的工作可以分成三类相连但独立的工作面。第一类是教学与课程：准备课程材料与教学大纲、讲授有机化学与分析化学等课程、发起与主持课堂讨论、编制与评阅考试并评估与修订课程体系。第二类是实验与安全：指导学生的实验室工作、建立并讲授化学品与设备与危险材料的安全规则并监督遵守、选择与订购与维护实验材料与耗材并维护实验设施。第三类是科研与指导与学术服务：在专业领域开展研究并发表成果、撰写项目申请以获取经费、指导研究生与毕业论文、维持答疑时间并撰写推荐信、参与院系与学术委员会与专业学会工作。三类工作的共同点是以课程目标、安全规程、评分依据与可复核记录说话，区别在于评价主体不同：教学由学生与同行评价，研究由同行评议，安全与学术规范由院系与院校制度认定。"
+              "以下按O*NET任务归纳三类工作面，具体负荷依院校及聘任轨道确定。高校化学教师的工作可以分成三类相连但独立的工作面。第一类是教学与课程：准备课程材料与教学大纲、讲授有机化学与分析化学等课程、发起与主持课堂讨论、编制与评阅考试并评估与修订课程体系。第二类是实验与安全：指导学生的实验室工作、建立并讲授化学品与设备与危险材料的安全规则并监督遵守、选择与订购与维护实验材料与耗材并维护实验设施。第三类是科研与指导与学术服务：在专业领域开展研究并发表成果、撰写项目申请以获取经费、指导研究生与毕业论文、维持答疑时间并撰写推荐信、参与院系与学术委员会与专业学会工作。教师承担教学、评分和指导职责；教学评价、学术不端调查处理与安全管理各依制度及法域分工，不等于全由委员会决定。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.profile.career-quick-answers-block.1",
@@ -23878,7 +23856,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对实验项目与化学品与设备与废弃物处置要求 → 讲授安全规则与应急流程并确认学生已知悉 → 准备试剂与器材并检查设备与安全设施状态 → 在实验过程中督导操作并纠正违规行为 → 处理事故与泄漏与异常并按制度上报 → 记录学生表现与安全事件与改进措施"
+              "编辑核对流程：核实验项目、危险源和风险评估 → 落实本校规定的准入、培训考核及防护条件 → 按规程准备试剂设备并检查安全设施 → 监督操作；遇危险按应急制度及时制止、报告或求助 → 保存教学及安全记录。中国《高等学校实验室安全规范》适用于高校教学科研实验实训；第7条将实验室负责人和项目负责人（含教学任课教师）分别列为直接责任人、项目安全第一责任人。实验前培训考核、危险源识别和项目风险评估须落实；重大隐患未消除不得开展。2024分级分类办法第2条明确不含中试及工业化放大场所，不能泛化。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.profile.career-quick-answers-block.5",
@@ -23944,7 +23922,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "科学家的任务是产出研究成果；本职业还需把知识转化为课程与教学并对学生负责"
+              "化学家也可能从事分析检测、质量控制、产品和方法开发；高校化学教师的身份核心是高等教育阶段的化学授课与学生指导，可教学为主或教学科研结合。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.profile.career-quick-answers-block.11",
@@ -23966,7 +23944,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "化学家在研究机构以研究为主；本职业以教学与学生指导为核心并可能结合科研"
+              "化学家可在研发、检测、制造等场景承担研究与分析任务；两职业可共享实验技能，是否持续承担课程教学须核实际岗位。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.profile.career-quick-answers-block.13",
@@ -23988,7 +23966,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "生物化学家与分子生物学家更偏实验室研究；本职业以教学与学生培养为主"
+              "生物化学家与分子细胞生物学家也可教学和指导学生；与本职业主要差别是生命体系的研究对象及训练，而非绝对研究/教学分界。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.profile.career-quick-answers-block.15",
@@ -23999,7 +23977,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "任课教师对课程与评分依据负责；成绩认定与学位与聘任由院校制度与委员会决定"
+              "任课教师承担授课、学业评价和成绩记录职责；成绩复核依本校程序。学位授予、聘任及学术不端调查处理另有主体与制度，不能把日常评分全部归给委员会。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.profile.career-quick-answers-block.16",
@@ -24021,7 +23999,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国多数岗位要求研究生学历；院校聘任制度是实际门槛，无全国统一教师资格执照"
+              "美国BLS表1.2列典型入职学历为博士或专业学位；OOH父级说明四年制院校通常要求博士，部分专业、兼职或社区学院可接受硕士。聘任轨道、课程和专业许可条件分别核，不能从表中None推断完全不需培训或资格。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.profile.career-quick-answers-block.18",
@@ -24032,7 +24010,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国大陆高校教师岗位涉及事业单位公开招聘与高等学校教师资格与职称评审制度"
+              "中国《教师法》第10—13条及《教师资格条例》第4、6—8、12—16条区分高等学校教师资格的学历条件、考试适用与认定：法律学历条件为研究生或大学本科毕业，仍须符合其他条件并依法认定；与院校招聘中的博士、研究成果、聘任条件不同，不是所有申请者都走同一培训考试程序。 公办事业单位招聘规则按实际单位核，不能覆盖所有民办、兼职和其他聘任形式。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.profile.career-quick-answers-block.19",
@@ -24054,7 +24032,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "跨岗位比较不能只看名称相近；机构类型（研究型大学与教学型院校与社区学院）、学科领域与聘任轨道不同，任务看起来相似但考核标准完全不同。"
+              "跨岗位比较须核研究型/教学型院校、社区学院、全职/兼职及聘任轨道；相似任务不保证相同考核，也不能宣称考核完全不同。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.profile.career-quick-answers-block.21",
@@ -24109,7 +24087,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "确认学生已知悉安全规则与应急流程，并在实验过程中持续观察；发现护目镜与通风柜与废弃物处置等违规时立即制止，不因为赶进度而放宽要求。"
+              "中国高校实验前依制度完成安全培训与考核，不仅口头知悉；持续监督防护、通风及废弃物操作，遇违规及时制止并报告。防护选择和处置依据项目风险评估、本校规程及实际应急职责。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.profile.career-quick-answers-block.26",
@@ -24175,7 +24153,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "对疑似抄袭或数据造假先按制度取证与记录，再交由院系或学术委员会处理；不私下处理也不公开指控，避免影响学生申诉权利。"
+              "疑似一般作业作弊按学校考核与学生管理规则核；科研及相关活动的学术不端，在中国按教育部令40号由学校受理，学术委员会组织调查、认定，学校依程序处理。保留线索、按职责报告，保护陈述申辩及保密，不由教师公开定罪。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.profile.career-quick-answers-block.32",
@@ -24208,7 +24186,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "高校化学教师教授与物质的化学与物理性质及其组成变化相关的课程，可包含定性与定量化学分析方法的教学，既有以教学为主者，也有教学与科研结合者（O*NET-SOC 25-1052.00 官方范围）。在日常工作中，他们要准备并讲授有机化学、分析化学与化学分离等主题的本科或研究生课程；建立并讲授与监督学生对化学品、设备与其他危险材料安全规则的遵守；评估与评阅学生的课堂作业、实验表现、作业与论文；指导学生实验室工作；维护学生出勤、成绩与其他必需记录；指导本科生或研究生的教学、实习与研究工作；编制、实施并评阅考试，或将此工作分配他人；准备课程材料，如教学大纲、作业与讲义；规划、评估与修订课程体系、课程内容、教材与教学方法；维持固定的答疑时间以指导学生；在特定领域开展研究并在专业期刊、书籍或电子媒体发表成果；发起、促进并主持课堂讨论；通过阅读文献、与同事交流与参加专业会议跟进领域发展；就学业与职业课程与职业问题指导学生；撰写项目申请书以获取外部研究经费；选择、订购与维护教学与研究用材料与耗材；与同事合作处理教学与科研问题；为学生撰写推荐信；准备并提交与教学相关的必需报告；在涉及机构政策、院系事务与学术问题的学术或行政委员会任职；清洁实验室设施；参与学生招生、注册与就业安置活动；在委员会或专业学会任职；并可能承担行政职责（如担任系主任）、参与校园与社区活动、担任学生组织顾问、汇编专门材料书目，或向政府与产业提供专业咨询服务。责任边界：教师对课程内容与教学质量、实验与化学品安全的教学与监督、评分的依据与记录的真实完整、研究数据的可复核与学术规范负责；但成绩认定与学位授予、聘任与晋升、以及学术不端与安全事故的最终认定，由院校制度与相应委员会决定，不能由本页推断为任课教师个人可以决定的事项。"
+              "高校化学教师教授与物质的化学与物理性质及其组成变化相关的课程，可包含定性与定量化学分析方法的教学，既有以教学为主者，也有教学与科研结合者（O*NET-SOC 25-1052.00 官方范围）。在日常工作中，他们要准备并讲授有机化学、分析化学与化学分离等主题的本科或研究生课程；建立并讲授与监督学生对化学品、设备与其他危险材料安全规则的遵守；评估与评阅学生的课堂作业、实验表现、作业与论文；指导学生实验室工作；维护学生出勤、成绩与其他必需记录；指导本科生或研究生的教学、实习与研究工作；编制、实施并评阅考试，或将此工作分配他人；准备课程材料，如教学大纲、作业与讲义；规划、评估与修订课程体系、课程内容、教材与教学方法；维持固定的答疑时间以指导学生；在特定领域开展研究并在专业期刊、书籍或电子媒体发表成果；发起、促进并主持课堂讨论；通过阅读文献、与同事交流与参加专业会议跟进领域发展；就学业与职业课程与职业问题指导学生；撰写项目申请书以获取外部研究经费；选择、订购与维护教学与研究用材料与耗材；与同事合作处理教学与科研问题；为学生撰写推荐信；准备并提交与教学相关的必需报告；在涉及机构政策、院系事务与学术问题的学术或行政委员会任职；清洁实验室设施；参与学生招生、注册与就业安置活动；在委员会或专业学会任职；并可能承担行政职责（如担任系主任）、参与校园与社区活动、担任学生组织顾问、汇编专门材料书目，或向政府与产业提供专业咨询服务。责任边界：任课教师有教学、评价学业及记录职责；在中国，项目负责人（含教学任课教师）落实项目实验安全责任。学位、聘任、科研学术不端及事故处理按各自适用主体与程序核，不能把全部成绩或安全责任归给委员会。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.profile.definition-block.11",
@@ -24219,7 +24197,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET-SOC 25-1052.00（Chemistry Teachers, Postsecondary）：Job Zone Five（需大量准备），SVP 区间 8.0 及以上；兴趣代码 IS（研究型、社会型）；官方列出 28 项任务，重要度从 94（为本科生或研究生准备并讲授有机化学与分析化学与化学分离等课程）到 38（向政府或产业提供专业咨询服务）；多数岗位要求研究生学历，许多要求博士学位。"
+              "O*NET-SOC25-1052.00：Job Zone Five、SVP8.0及以上，兴趣IS（研究80、社会79），28任务（23 Core、5 Supplemental），最高授课94、最低向政府/产业咨询38。Job Zone是职业群准备程度，不是每人统一学习年限；BLS典型入职学历与OOH院校差别另列。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.profile.onet-structured-fields-block.1",
@@ -24241,7 +24219,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆：本条证据路由把精确职业工资登记为已核实不可得（cn-exact-wage-unavailable，severity=material，closure_reason=null）；resolution 为「保留模块级不可得，不以行业平均、美国数据或不透明招聘样本填补」。因此本页不发布任何中国大陆数值，也不以招聘报价或美国数值换算代填；本页不声称中国官方从未发布相关统计，只说明本轮未取得与本职业精确对应的全国口径。"
+              "中国精确职业工资中位/分位及地区月薪本轮未取得，保留缺口。国家统计局2025年教育门类城镇非私营/私营单位就业人员年平均工资为133,539/63,908元。仅作教育行业背景：涵盖其他学段、学科及非教师职工，非高校化学教师职业中位数、起薪、到手收入或公立/民办高校对照。 行业背景不关闭精确缺口，不换算美国工资；未取得不等于官方从未发布。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.profile.onet-structured-fields-block.3",
@@ -24252,7 +24230,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业与就业：O*NET 行业分布为教育服务 100%；BLS 就业预测显示 2024 年 25,400 人、2034 年预计 26,000 人，2024—2034 年增长 2%（Slower than average，慢于所有职业平均），年均空缺 1,900 个。该职业的行业工资中位数本轮未取得：BLS Occupational Outlook Handbook 只提供「后中等教师」整体（多学科合并）的行业内中位数，未提供化学教师职业口径，本页据此只登记缺口，不把整体口径写成职业口径。"
+              "O*NET当前行业页：美国教育服务100%（2025）；BLS表1.2的2025—2035年美国SOC25-1052预测：24,900→25,400人，增长2.3%，年均空缺1,700；OOH整数展示为2%（慢于平均）。官方净增0.6千人独立舍入，与两端已舍入数之差0.5千人不同，不能重算覆盖。空缺含增长及转岗、退出劳动力市场等替补需求，非在招岗位存量或AI替代率。 化学教师按机构类型的工资中位本轮未取得；OOH多学科后中等教师的行业中位仅是父级背景。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.profile.onet-structured-fields-block.4",
@@ -24263,7 +24241,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "技术与工作情境：O*NET 技术清单覆盖 10 类软件，含科学分析软件（Origin、ChemDraw 等）、在线教学与学习管理系统（Blackboard Learn、Moodle、LMS 等）、电子邮件（Outlook）、查重与检索（Turnitin 等）、办公套件与演示与电子表格与文字处理（Office、PowerPoint、Excel、Word 与 Google Docs）等，页面标注 6 项热门技术与 1 项招聘需求技能；工作情境显示教学与研究型作业特征突出——98% 每天使用电子邮件、88% 每天在环境受控的室内工作、82% 每天面对面讨论、46% 每天公开演讲、79% 对如何决策有很大自由、50% 认为精确或准确极其重要、48% 对他人健康与安全承担很高责任、68% 的工作完全未自动化、18% 轻微自动化、92% 为规律排班。招聘技术关键词是市场信号，不等于熟练度、采用率或长期趋势。"
+              "技术与工作情境：O*NET 技术清单覆盖 10 类软件，含科学分析软件（Origin、ChemDraw 等）、在线教学与学习管理系统（Blackboard Learn、Moodle、LMS 等）、电子邮件（Outlook）、查重与检索（Turnitin 等）、办公套件与演示与电子表格与文字处理（Office、PowerPoint、Excel、Word 与 Google Docs）等，页面标注 6 项热门技术与 1 项招聘需求技能；工作情境显示教学与研究型作业特征突出——98% 每天使用电子邮件、88% 每天在环境受控的室内工作、82% 每天面对面讨论、46% 每天公开演讲、79% 对如何决策有很大自由、50% 认为精确或准确极其重要、48% 对他人健康与安全承担很高责任、68% 的工作完全未自动化、18% 轻微自动化、92% 为规律排班。招聘技术关键词是市场信号，不等于熟练度、采用率或长期趋势。 6项Hot是跨职业常见关键词：Office/Excel/PowerPoint出现率4%/2%/2%，其余Google Docs/Outlook/Word为Not available，不填0；详情单列LMS为1项In Demand。2025美国招聘样本不是AI采用率。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.profile.onet-structured-fields-block.5",
@@ -24274,11 +24252,11 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "教学与课程｜准备并讲授课程并主持课堂讨论｜为本科生或研究生准备并讲授有机化学与分析化学与化学分离等主题课程，发起与促进与主持课堂讨论，准备课程材料与教学大纲与作业与讲义（对应 O*NET 任务重要度 94、84、76）。",
-              "考核与评价｜编制与评阅考核并评估与修订课程｜编制与实施并评阅考试或将此工作分配他人，评估与评阅学生的课堂作业与实验表现与作业与论文，并规划与评估与修订课程体系与课程内容与教材与教学方法（对应任务重要度 89、84、84）。",
+              "教学与课程｜准备并讲授课程并主持课堂讨论｜为本科生或研究生准备并讲授有机化学与分析化学与化学分离等主题课程，发起与促进与主持课堂讨论，准备课程材料与教学大纲与作业与讲义（对应 O*NET 任务重要度 94、76、84）。",
+              "考核与评价｜编制与评阅考核并评估与修订课程｜编制与实施并评阅考试或将此工作分配他人，评估与评阅学生的课堂作业与实验表现与作业与论文，并规划与评估与修订课程体系与课程内容与教材与教学方法（对应任务重要度 84、89、84）。",
               "实验与安全｜指导实验并建立与监督安全规则｜建立并讲授与监督学生对化学品与设备与其他危险材料安全规则的遵守，指导学生实验室工作，并选择与订购与维护教学与研究用材料与耗材与清洁实验室设施（对应任务重要度 93、88、68、59）。",
-              "指导与答疑｜维持答疑时间并指导学业与职业发展｜维护学生出勤与成绩与其他必需记录，维持固定的答疑时间以指导学生，就学业与职业课程与职业问题指导学生，并指导学生教学与实习与研究工作与撰写推荐信（对应任务重要度 86、80、86、69、65）。",
-              "科研与经费｜开展研究并发表成果并申请经费｜在特定领域开展研究并在专业期刊与书籍或电子媒体发表成果，撰写项目申请书以获取外部研究经费，并通过阅读文献与与同事交流与参加专业会议跟进领域发展（对应任务重要度 77、69、73、66）。",
+              "指导与答疑｜维持答疑时间并指导学业与职业发展｜维护学生出勤与成绩与其他必需记录，维持固定的答疑时间以指导学生，就学业与职业课程与职业问题指导学生，并指导学生教学与实习与研究工作与撰写推荐信（对应任务重要度 86、80、69、86、65）。",
+              "科研与经费｜开展研究并发表成果并申请经费｜在特定领域开展研究并在专业期刊与书籍或电子媒体发表成果，撰写项目申请书以获取外部研究经费，并通过阅读文献与与同事交流与参加专业会议跟进领域发展（对应任务重要度 77、69、73）。",
               "学术服务与行政｜参与委员会与学会并承担行政职责｜准备并提交与教学相关的必需报告，在涉及机构政策与院系事务与学术问题的学术或行政委员会任职，参与学生招生与注册与就业安置活动并在委员会或专业学会任职，并可能承担系主任等行政职责与参与校园与社区活动（对应任务重要度 64、64、59、55、67、48）。"
             ]
           },
@@ -24290,7 +24268,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "环境与作业空间｜88% 每天在环境受控的室内工作（11% 从不）；在非受控室内工作与户外工作与极端温度与高处与噪声的暴露比例均很低（例如非受控室内工作 96% 从不、露天天气 95% 从不、高处 100% 从不）。\n防护与安全｜20% 每天佩戴常规防护或安全装备、41% 每周以上但非每天；30% 每天暴露于危险条件、31% 每周以上但非每天、30% 从不；25% 每天接触污染物、36% 每周以上但非每天、23% 从不；15% 每周以上佩戴专用防护装备、77% 从不。\n准确性与重复性｜50% 认为精确或准确极其重要、39% 认为非常重要；27% 认为重复同一任务极其重要、21% 非常重要；68% 的工作完全未自动化、18% 轻微自动化。\n协作与沟通｜98% 每天使用电子邮件；82% 每天进行面对面讨论；52% 大部分时间需要与他人接触；45% 认为与工作团队协作极其重要、26% 非常重要；46% 每天进行公开演讲、54% 每周以上；30% 每天进行电话交谈；16% 与他人距离中等接近。\n工时与排班｜83% 的典型工作周超过 40 小时；92% 为规律排班、8% 为不规律排班。\n身体与作业负荷｜37% 持续或几乎持续坐着工作、36% 超过一半工时坐着、18% 少于一半工时坐着；站立时间 73% 少于一半工时；22% 的工作需要持续或经常用手处理或操控物体，42% 少于一半工时，42% 从不。\n决策与自主｜79% 对如何决策有很大自由、18% 有一些自由；79% 对确定任务与优先级有很大自由、18% 有一些自由；25% 每天做决策、48% 每月以上但非每周。\n责任与影响｜48% 对他人健康与安全承担很高责任、29% 高责任、16% 中等责任；49% 对他人工作结果承担很高责任、27% 高责任；32% 认为决策对同事与机构结果非常重要；17% 认为出错后果极其严重、46% 严重。\n竞争与压力｜34% 认为竞争极其激烈、34% 高度竞争、21% 中等竞争；27% 每天面临时间压力、31% 每周以上但非每天；15% 每周以上遇到不愉快或不礼貌的人。"
+              "环境与作业空间｜88% 每天在环境受控的室内工作（11% 从不）；其他环境暴露问卷分布不同，不能统一称极低：噪声15%每天；例如非受控室内工作 96% 从不、露天天气 95% 从不、高处 100% 从不。\n防护与安全｜20% 每天佩戴常规防护或安全装备、41% 每周以上但非每天；30% 每天暴露于危险条件、31% 每周以上但非每天、30% 从不；25% 每天接触污染物、36% 每周以上但非每天、23% 从不；15% 每周以上佩戴专用防护装备、77% 从不。\n准确性与重复性｜50% 认为精确或准确极其重要、39% 认为非常重要；27% 认为重复同一任务极其重要、21% 非常重要；68% 的工作完全未自动化、18% 轻微自动化。\n协作与沟通｜98% 每天使用电子邮件；82% 每天进行面对面讨论；52% 持续需要与他人接触；45% 认为与工作团队协作极其重要、26% 非常重要；46% 每天进行公开演讲、54% 每周以上；30% 每天进行电话交谈；16% 与他人距离中等接近。\n工时与排班｜83% 的典型工作周超过 40 小时；92% 为规律排班（未展示其余答项，不能将余数全部判为不规律）。\n身体与作业负荷｜37% 持续或几乎持续坐着工作、36% 超过一半工时坐着、18% 少于一半工时坐着；站立时间 73% 少于一半工时；12% 持续或几乎持续用手处理或操控物体，42% 少于一半工时，42% 从不。\n决策与自主｜79% 对如何决策有很大自由、18% 有一些自由；79% 对确定任务与优先级有很大自由、18% 有一些自由；25% 每天做决策、48% 每月以上但非每周。\n责任与影响｜48% 对他人健康与安全承担很高责任、29% 高责任、16% 中等责任；49% 对他人工作结果承担很高责任、27% 高责任；32% 认为决策对同事与机构结果非常重要；17% 认为出错后果极其严重、46% 严重。\n竞争与压力｜34% 认为竞争极其激烈、34% 高度竞争、21% 中等竞争；27% 每天面临时间压力、31% 每周以上但非每天；15% 每周以上遇到不愉快或不礼貌的人。\n以上为美国受访者具体答项，不是个人工时保证、事故发生率或中国岗位分布。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.profile.work-context-block.1",
@@ -24882,10 +24860,10 @@
                 "url": "https://www.onetonline.org/link/details/25-1052.00"
               },
               {
-                "entity": "BLS Occupational Outlook Handbook：Postsecondary Teachers",
+                "entity": "O*NET全国工资分位（BLS OEWS2025年5月）",
                 "id": "link-2",
                 "relation": "related-evidence",
-                "url": "https://www.bls.gov/ooh/education-training-and-library/postsecondary-teachers.htm"
+                "url": "https://www.onetonline.org/link/localwages/25-1052.00"
               },
               {
                 "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
@@ -24912,34 +24890,34 @@
                 "url": "https://www.onetonline.org/link/summary/25-1052.00"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（25-1052.00，显示 BLS 就业预测）",
+                "entity": "BLS表1.2职业预测2025—2035",
                 "id": "link-7",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/25-1052.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "entity": "O*NET25-1052任务",
                 "id": "link-8",
-                "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
-              },
-              {
-                "entity": "O*NET-SOC 25-1052.00 职业详细资料",
-                "id": "link-9",
                 "relation": "related-evidence",
                 "url": "https://www.onetonline.org/link/details/25-1052.00"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
-                "id": "link-10",
+                "entity": "O*NET全国工资分位2025",
+                "id": "link-9",
                 "relation": "related-evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://www.onetonline.org/link/localwages/25-1052.00"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（25-1052.00，显示 BLS 就业预测）",
+                "entity": "ILO生成式AI职业暴露研究",
+                "id": "link-10",
+                "relation": "related-evidence",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "entity": "NIST AI RMF1.0自愿框架",
                 "id": "link-11",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/25-1052.00"
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
                 "entity": "O*NET 技术清单（25-1052.00 招聘技术关键词）",
@@ -24966,22 +24944,22 @@
                 "url": "https://www.onetonline.org/link/details/25-1052.00"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（25-1052.00，显示 BLS 就业预测）",
+                "entity": "BLS表1.2职业预测2025—2035",
                 "id": "link-16",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/25-1052.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
+                "entity": "本页风险板块：对应法规/资格的官方来源按钮",
                 "id": "link-17",
                 "relation": "related-evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://fermatmind.com/zh/career/jobs/chemistry-teachers-postsecondary#career-visual-group-risk"
               },
               {
-                "entity": "O*NET 全国工资分位页面（25-1052.00）",
+                "entity": "BLS表1.2预测（不提供消失年份）",
                 "id": "link-18",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localwages/25-1052.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET-SOC 25-1052.00 职业摘要",
@@ -25087,7 +25065,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把技术能力、实际采用与岗位结果分开看：公开资料能支持的是「备课与材料整理与反馈草拟与学习数据分析可借助软件提速」，以及「招聘中出现学习管理系统与办公与演示工具的关键词」；不支持「该职业被替代」「某个年份岗位消失」这类结论。BLS 对 2024—2034 年的预测是增长 2%、年均空缺 1,900 个，这是就业规模预测，不是 AI 采用率或替代率。"
+              "公开证据可核职责、招聘软件关键词、AI任务暴露方法及美国就业预测；材料、习题、反馈草拟和数据汇总是编辑试用建议，本轮没有该职业可靠性或提速实测。BLS表1.2的2025—2035年美国SOC25-1052预测：24,900→25,400人，增长2.3%，年均空缺1,700；OOH整数展示为2%（慢于平均）。官方净增0.6千人独立舍入，与两端已舍入数之差0.5千人不同，不能重算覆盖。空缺含增长及转岗、退出劳动力市场等替补需求，非在招岗位存量或AI替代率。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.18",
@@ -25230,7 +25208,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Employment Projections（经 O*NET Employment Trends 显示）"
+              "BLS Employment Projections表1.2（SOC25-1052，2025—2035）"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.31",
@@ -25241,7 +25219,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024—2034 年的就业预测与年均空缺"
+              "核2025—2035职业级预测；O*NET旧期趋势不作本轮现行值"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.32",
@@ -25252,7 +25230,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表按三条真实工作方向比较：AI 主要改变什么，以及哪些责任仍然留在人这一侧。三条方向来自该职业的任务结构（教学与课程、实验与安全、科研与指导与学术服务），不是行业统一职级。"
+              "编辑按任务分为教学、实验安全、科研指导三面，比较可能的工具用途及需落实的复核职责；不是采用率、效果测量、实施时序或永久分工。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.33",
@@ -25263,7 +25241,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把课程材料与习题与示例草拟成初稿、把学生提问与常见错误归类整理、把成绩与作业数据汇总成学习分析报表。"
+              "编辑用途建议，须在授权数据和验证条件下试用：把课程材料与习题与示例草拟成初稿、把学生提问与常见错误归类整理、把成绩与作业数据汇总成学习分析报表。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.34",
@@ -25285,7 +25263,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按实验项目生成安全提示与检查清单、把化学品与废弃物处置要求转成可核对的条目、对仪器使用记录与耗材库存给出提醒。"
+              "编辑用途建议，须在授权数据和验证条件下试用：按实验项目生成安全提示与检查清单、把化学品与废弃物处置要求转成可核对的条目、对仪器使用记录与耗材库存给出提醒。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.36",
@@ -25296,7 +25274,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "确认学生已知悉安全规则与应急流程、在实验过程中观察并制止违规操作、以及决定是否立即停止实验并上报。"
+              "中国高校依实验室安全制度完成准入、培训考核和项目风险评估；现场监督、即时制止或报告按实际职责及应急方案落实，AI清单不授权实验或恢复。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.37",
@@ -25307,7 +25285,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把文献检索结果与实验数据整理成表与图、把项目进展与经费使用整理成报告草稿、核对引文与数据是否可追溯。"
+              "编辑用途建议，须在授权数据和验证条件下试用：把文献检索结果与实验数据整理成表与图、把项目进展与经费使用整理成报告草稿、核对引文与数据是否可追溯。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.38",
@@ -25340,7 +25318,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅覆盖 O*NET 该职业页面所列任务；不含具体院校的教学与学术规范要求"
+              "任务资料是美国职业描述，不能证明中国聘任、安全或学术处理权限，也不测量AI能力。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.41",
@@ -25505,7 +25483,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "框架要求把用途、限制、监测与责任写清，可直接用于本页的复核与留痕建议"
+              "NIST AI RMF1.0是自愿风险治理框架，可启发用途、限制、复核与记录建议；不规定本职业法定评分或签署权限。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.56",
@@ -25549,7 +25527,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该职业技术清单覆盖科学分析软件（Origin、ChemDraw 等）、学习管理系统（Blackboard、Moodle 等）、电子邮件、查重与检索、办公套件与演示与表格与文字处理等 10 类"
+              "Hot页面仅列6项热门办公软件关键词，Office4%、Excel2%、PowerPoint2%，Google Docs/Outlook/Word出现率未提供。完整详情才列10类软件及LMS为1项In Demand；两页面对象不同，不能当AI使用率。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.60",
@@ -25560,7 +25538,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术能力回答「模型在原则上能做什么」。对本职业而言，较可靠的部分是材料草拟与整理、习题与提示生成、学习数据汇总与文献检索；不可靠的部分是学科准确性判断、学生能力评估与学术诚信认定。"
+              "材料整理、习题草拟、学习数据汇总和文献辅助是编辑可试用途；本轮未取得高校化学教师的准确率、可靠性或提速实测。学科内容、学业评价、实验提示、引文和数据均须验证。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.61",
@@ -25571,7 +25549,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采用证据回答「机构实际在用什么」。公开资料能支持的是该职业招聘中出现学习管理系统与办公与演示与表格工具的关键词，以及在线教学平台的普及；具体院校的落地范围属于机构信息，本页不推断。"
+              "O*NET的2025美国招聘样本提供软件关键词，详情列LMS为In Demand；不证明具体院校使用生成式AI或在线平台普及率。实际采用与效果须核机构信息。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.62",
@@ -25582,7 +25560,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "岗位结果回答「就业规模有没有变」。BLS 对 2024—2034 年的预测是增长 2%、年均空缺 1,900 个，属于就业规模预测；公开资料未提供把该数字归因于 AI 的证据，因此本页不写替代率或消失年份。"
+              "BLS表1.2的2025—2035年美国SOC25-1052预测：24,900→25,400人，增长2.3%，年均空缺1,700；OOH整数展示为2%（慢于平均）。官方净增0.6千人独立舍入，与两端已舍入数之差0.5千人不同，不能重算覆盖。空缺含增长及转岗、退出劳动力市场等替补需求，非在招岗位存量或AI替代率。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.63",
@@ -25593,7 +25571,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能这样推断。该职业的核心任务以课程设计与讲授、评阅与反馈、实验安全监督与学术指导为主：判断学生是否真正掌握、处理学术诚信问题、以及在实验室现场制止违规都需要对人与安全负责的教师来做。AI 会改变备课与整理与反馈的方式，但公开资料不支持「职业被取代」的结论。"
+              "目前任务描述、软件关键词、ILO暴露研究及BLS预测不足以判定本职业被替代或永远不被替代。可以按教学、评阅、实验监督和指导任务评估工具用途，责任依实际法域及院校制度落实。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.64",
@@ -25604,7 +25582,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 25-1052.00 任务与工作活动；BLS 就业预测"
+              "ILO暴露研究；O*NET25-1052任务；BLS表1.2预测（各自范围不同）"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.65",
@@ -25615,7 +25593,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不把编程当作入行门槛。O*NET 该职业的技术清单以科学分析软件、学习管理系统与办公与演示与表格工具为主；BLS 显示多数岗位要求研究生学历，许多要求博士学位。更实用的顺序是先掌握学科内容与课程设计与评阅，再学用学习管理系统与数据工具支持教学与科研。"
+              "编程不是所有岗位统一条件：O*NET可迁移技能Programming重要度22，软件覆盖分析、LMS和办公工具。编辑建议先学学科、课程设计与评阅，再按研究和机构工具要求补数据/编程能力；不能据关键词排除所有编程需求。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.66",
@@ -25626,7 +25604,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Employment Projections（经 O*NET 显示）；O*NET Hot Technologies 25-1052.00"
+              "O*NET详情Software Skills/Transferable Skills；BLS OOH父级教育说明"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.67",
@@ -25637,7 +25615,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "从任务结构看，受影响较早的是可结构化输入的环节：材料与习题草稿、反馈文字整理、学习数据汇总与文献检索与引文整理。受影响较晚的是必须在现场判断并对人与安全负责的环节：课堂互动与学科准确性把关、实验安全监督与事故处置、学术诚信认定与学业指导。"
+              "编辑比较：可先评估草稿、反馈整理、学习数据和文献用途；课堂互动、概念把关、实验监督及学术处理还须核现场与制度条件。没有职业级采用时间序列，不断言哪些环节必然先或后受影响。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.68",
@@ -25659,7 +25637,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 预测 2024—2034 年该职业就业增长 2%，属「慢于所有职业平均」，年均空缺 1,900 个，其中相当部分来自离职与退休带来的替补需求。预测本身有假设与误差，不等于逐年的实际岗位数。"
+              "BLS表1.2的2025—2035年美国SOC25-1052预测：24,900→25,400人，增长2.3%，年均空缺1,700；OOH整数展示为2%（慢于平均）。官方净增0.6千人独立舍入，与两端已舍入数之差0.5千人不同，不能重算覆盖。空缺含增长及转岗、退出劳动力市场等替补需求，非在招岗位存量或AI替代率。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.70",
@@ -25670,7 +25648,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Employment Projections（经 O*NET Employment Trends 显示）"
+              "BLS表1.2职业级2025—2035预测；OOH化学教师分项"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.71",
@@ -25681,7 +25659,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。成绩认定与学位授予与学术不端处理与企业与院校的聘任决定属于院校制度与相应委员会的责任行为；在需要签署的教学与研究文件上，通常还涉及机构授权与署名责任。AI 生成的文本不具备这种责任能力，也不能替代教师对学生的判断与现场安全管理。"
+              "AI文字不替代依法应由教师、授权人员或学校承担的责任。中国《教师法》第7条包含教师评价学业权；科研学术不端依教育部令40号由学术委员会调查认定及学校程序处理，学位和聘任另依各自制度。不能把所有成绩认定都归委员会，也不能用NIST证明法律权限。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.72",
@@ -25692,7 +25670,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST AI RMF 1.0 责任与记录要求；O*NET 25-1052.00 任务描述"
+              "中国教师法第7条；教育部令40号第2、16、25—29条（中国范围）；NIST仅自愿治理参考 对应官方正文见本页风险板块的独立来源按钮；此问链接是本页法源核对入口。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.73",
@@ -25714,7 +25692,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Employment Projections（2024—2034 年预测期与说明）"
+              "BLS表1.2（2025—2035）；预测不提供职业消失年份"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.75",
@@ -25802,7 +25780,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按院校与法域要求由有授权的岗位确认成绩与学位与学术不端处理；系统与工具不承担该责任，也不免除教师对学生与实验安全的义务。"
+              "成绩由依学校制度具备职责的教师或岗位评价记录；学位、学术不端、聘任另核适用主体和程序。使用工具不免除教师的教学、学生指导及实验安全责任。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.83",
@@ -25835,7 +25813,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "学生成绩与个人信息与未发表研究数据属于受保护信息，上传到外部服务可能违反隐私与数据管理规定或泄露研究成果。"
+              "学生个人信息及部分未公开研究资料可能受法律、合同或学校规定约束；研究资料不因未发表就自动成为个人信息或商业秘密。外传前核数据类别、授权和服务条款。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.86",
@@ -25846,7 +25824,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按院校数据分级选择可用工具与部署方式，对学生信息做脱敏或使用校内系统，并保留访问与导出记录。"
+              "编辑建议：先核学校许可、数据使用目的和适用规则；脱敏不自动等于匿名化或取得外传权限，校内系统也须按职责限制访问。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.87",
@@ -25857,7 +25835,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "同一材料在不同工具与版本下可能给出不同结论；缺少版本与时间记录会使复核与责任追溯无法进行。"
+              "工具或版本变化可能使结果不同；保留足以复核的输入、输出、时间与变更记录，不把缺一字段推断为追溯完全不可能。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.88",
@@ -25879,7 +25857,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "单位与量纲、有效数字与引用标注的错误在化学教学材料中直接影响知识传递，且系统不会主动提示。"
+              "单位、量纲、有效数字和引文错误可能影响化学教学；系统提示不能保证识别全部错误，须主动核关键数值与原始来源。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.90",
@@ -25956,7 +25934,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "材料草拟与整理与学习数据分析可加速；课程设计与学科准确性把关仍是教师职责"
+              "编辑用途建议：试验材料整理和学习数据辅助，验证准确性及教学适用性；未取得本职业提速实测。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.97",
@@ -25967,7 +25945,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "确认学生已知悉安全规则与应急流程，并在实验过程中持续观察与制止违规操作。"
+              "中国高校实验依准入、培训考核与风险评估执行；现场监督和异常应急按具体职责落实，不仅确认学生已知悉。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.98",
@@ -26000,7 +25978,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "安全提示与检查清单可数字化；现场监督与违规制止不可外包"
+              "编辑用途建议：清单和提醒须回到规程核对；不能替代依法应落实的项目安全责任或授权实验。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.101",
@@ -26044,7 +26022,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "批量批改辅助可加速；评分判断与理由说明仍由教师负责"
+              "编辑用途建议：可试验评阅辅助并核对评分依据、偏差及申诉条件；未取得本职业提速或评分有效性实测。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.105",
@@ -26132,7 +26110,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "检索与整理与图表可加速；科学判断与署名与数据真实性仍由人负责"
+              "编辑用途建议：可试验检索和图表整理；原始数据、引文、署名及科学解释须核，未取得实测效果。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.113",
@@ -26176,7 +26154,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "会议与文件流转可自动化；规范判断与责任表决仍由人完成"
+              "编辑用途建议：文件流转辅助按制度核；调查认定、表决及学生权益处理仍须落实适用主体与程序。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.117",
@@ -26231,7 +26209,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "如果要用一句话概括：AI 与数字化会显著改变高校化学教师备课、整理材料、批改与数据分析的方式，但不会改变「谁对课程质量、学生判断与实验安全负责」这一结构；判断依据始终是学科准确性、与课程目标的一致性、可追溯的评分依据与合规的数据与安全管理。"
+              "AI及数字化工具可按具体课程、研究和数据条件试用；本轮未取得职业级改变幅度或替代时序证据。核学科准确性、课程目标、评分依据和数据、安全制度，不能把建议写成必然效果或永久责任结构。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.ai-impact.ai-impact-table.122",
@@ -26255,7 +26233,7 @@
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-wages"
+            "ct-nbs2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26270,7 +26248,7 @@
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wages"
+            "ct-nbs2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26340,7 +26318,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与高校化学教师精确对应的中国大陆全国职业工资分布；本条证据路由把该缺口登记为 （暂无可安全使用的数据，尚无缺口关闭结论），处理说明 为「保留模块级不可得，不以行业平均、美国数据或不透明招聘样本填补」，本页据此不发布任何中国大陆数值。"
+              "证据不足：未取得中国高校化学教师职业工资中位数、分位数、起薪与地区月薪。国家统计局2025年教育门类城镇非私营/私营单位就业人员年平均工资为133,539/63,908元。仅作教育行业背景：涵盖其他学段、学科及非教师职工，非高校化学教师职业中位数、起薪、到手收入或公立/民办高校对照。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.7",
@@ -26351,7 +26329,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮查阅范围为：国家统计局公开工资资料入口、人力资源社会保障部与教育行政部门公开信息，以及本职业的 O*NET/BLS 精确职业来源；后者其市场与辖区明确为美国，不支持中国精确工资口径。因此本页不给出中位数、分位数、起薪或稳定月薪，也不把美国数值换算成人民币。"
+              "本轮核国家统计局2025工资原文表2/5、教师资格及高校安全法规、O*NET/BLS美国职业资料；不使用未核招聘样本或美国换算填中国职业级缺口。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.8",
@@ -26362,7 +26340,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业门类口径：国家统计局按行业门类公布城镇单位就业人员年平均工资，高校化学教师属于教育门类中的岗位，但该口径不是职业级数值，本页不采用它替代本职业工资。"
+              "教育门类背景：2025城镇非私营133,539元/年、私营63,908元/年（就业人员年平均工资）。非高校、化学学科或教师专属统计。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.9",
@@ -26373,7 +26351,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "该口径覆盖城镇地域内就业人数 5 人及以上法人单位，不含个体工商户与自由职业者；用它替代本职业工资会同时引入行业与用工形式两重偏差。"
+              "NBS覆盖城镇5人及以上法人单位，按规定视同法人的产业活动单位亦纳入；不含个体工商户、自由职业者。工资含代扣个税及个人社保公积金等，为税前劳动报酬平均，不是到手或中位数。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.10",
@@ -26384,7 +26362,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "较宽职业口径：公开统计与职业分类使用较宽的高校教师口径，未单列与 O*NET-SOC 25-1052.00 一一对应的职业细类，不能把其分位数写成本职业的全国中位数。"
+              "本轮未取得与美国25-1052一一对应的中国职业工资细类，不声称取得更宽高校教师工资分布；NBS本次原文仅按行业等口径公布平均工资。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.11",
@@ -26417,7 +26395,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本条证据路由不使用招聘样本或相邻岗位报价填补职业级缺口，因为无法核验其统计对象与抽样方法。"
+              "本轮未取得有可核对象、样本和统计方法的招聘待遇数据；单条承诺不能填全国职业分位。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.14",
@@ -26428,7 +26406,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "统计覆盖范围：中国大陆公开工资统计以城镇法人单位为对象，高校编制内与合同制与项目制与兼职等用工形式的覆盖不同，与本职业的实际用工结构并不完全重合。"
+              "统计覆盖按NBS调查对象核，不以编制/合同/项目/兼职标签自动判定是否纳入。比较机会先核雇主、劳动关系、计酬及履职安排。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.15",
@@ -26450,7 +26428,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "资料期：本轮查阅以 2025 年及以前已发布的公开资料为范围；资料期不同会影响可比性，本页不跨期拼接。"
+              "资料期：行业背景为2025全年，NBS发布2026-05-15、本轮检索2026-10-09；不能混成2026工资或跨期拼接职业分布。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.17",
@@ -26461,7 +26439,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结构与津贴口径：高校收入通常由岗位工资与绩效与课时与科研奖励与人才项目等构成，在不同院校与地区差异较大，本页不给出统一的收入结构数值。"
+              "编辑核对建议：书面确认工资、绩效、课时酬金、科研奖励、人才资助等是否适用、支付期间及条件；未取得可量化的本职业收入结构，不假定所有院校都有相同项目。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.18",
@@ -26472,7 +26450,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论与缺口：本页对中国大陆只登记可核对的统计口径、岗位映射边界与检索记录，不给出替代数值。"
+              "保留中国精确职业级缺口，同时提供明确标注的教育行业均值背景；不以行业、招聘或美国数值代填。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.19",
@@ -26516,7 +26494,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "自动化与数字化会改变备课与教学与评价的组织方式，但不改变中国大陆对本职业的统计口径：职业级统计缺口与工具无关。"
+              "工具可能改变备课或评价流程，本轮没有本职业工资影响或统计分类变化证据；行业背景与精确职业工资分开，不据软件词推算收入。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.23",
@@ -26527,7 +26505,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "资格与聘任边界：高校教师岗位涉及事业单位公开招聘、高等学校教师资格、职称评审与聘期考核等制度，不同层次与类型院校（研究型大学、教学型本科、高职高专）要求不同；涉及实验教学与危险化学品的岗位另有实验室安全管理要求，须按所在地与院校规定确认。"
+              "中国《教师法》第10—13条及《教师资格条例》第4、6—8、12—16条区分高等学校教师资格的学历条件、考试适用与认定：法律学历条件为研究生或大学本科毕业，仍须符合其他条件并依法认定；与院校招聘中的博士、研究成果、聘任条件不同，不是所有申请者都走同一培训考试程序。 公办事业单位与民办、兼职等聘任规则分别核；实验岗位另落实培训考核和项目安全要求。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.24",
@@ -26538,7 +26516,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "博士研究生（多数高校专任教师岗位的常见起点）"
+              "博士研究背景（具体岗位要求另核）"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.25",
@@ -26571,7 +26549,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "硕士研究生（部分高职高专与应用型院校岗位）"
+              "硕士研究背景（具体岗位要求另核）"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.28",
@@ -26604,7 +26582,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "博士后或海外经历（部分研究型岗位的常见要求）"
+              "博士后或其他研究经历（非统一门槛）"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.31",
@@ -26626,7 +26604,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：这些岗位与教学为主岗位相邻但考核与任务结构不同，若目标为科研为主型岗位，需要另行完成成果与项目与团队准备。"
+              "编辑整理：研究经历可用于证明研究方向和成果，但不自动获得学科带头人、负责人、教师资格或高薪；需实际聘任条件及岗位授权。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.33",
@@ -26659,7 +26637,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：教师资格与安全培训要求取决于院校类型与岗位职责，须以主管部门与院校制度为准，本页不代替报考或认定条件。"
+              "中国教师资格依法认定，院校聘任和实验安全培训是不同环节，不能因院校类型直接免除法律适用。中国《教师法》第10—13条及《教师资格条例》第4、6—8、12—16条区分高等学校教师资格的学历条件、考试适用与认定：法律学历条件为研究生或大学本科毕业，仍须符合其他条件并依法认定；与院校招聘中的博士、研究成果、聘任条件不同，不是所有申请者都走同一培训考试程序。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.36",
@@ -26703,7 +26681,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：以技能导向课程与实训教学为主，对实践经历与双师型要求更高。"
+              "编辑方向示例：可含实训、实验及应用型课程，实践与双师要求须核实际岗位公告；本轮未取得足以概括各院校统一要求的招聘样本。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.40",
@@ -26725,7 +26703,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：以研究任务为主并承担部分教学与人才培养职责，考核侧重项目与成果。"
+              "科研院所研究岗与本页高校教学身份不同；兼教学或联合培养须核实际职责，不把所有研究人员映射为高校化学教师。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.42",
@@ -26736,7 +26714,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《城镇单位就业人员年平均工资情况》检索入口｜https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html"
+              "国家统计局2025工资表2/5（教育行业背景）｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.43",
@@ -26747,7 +26725,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆薪资参考：官方统计口径与缺口"
+              "中国职业工资缺口与教育行业背景"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.44",
@@ -26758,7 +26736,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆目前没有单列该岗位的全国职业工资统计可供本页引用；本页只登记可核对的统计口径、岗位映射边界与检索记录，不给出替代数值。"
+              "本轮未取得高校化学教师全国职业工资分布；国家统计局2025年教育门类城镇非私营/私营单位就业人员年平均工资为133,539/63,908元。仅作教育行业背景：涵盖其他学段、学科及非教师职工，非高校化学教师职业中位数、起薪、到手收入或公立/民办高校对照。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.45",
@@ -26769,7 +26747,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "比较不同机会时应确认聘任形式（编制内、合同制、项目制、兼职）、岗位层次与考核要求、是否承担实验教学与危险化学品管理，并明确本页不提供中国大陆该岗位的工资数值。"
+              "比较机会核聘任形式、岗位层次、教学科研和安全职责、工资组成及聘期条件；本页行业均值不代表具体岗位待遇。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.46",
@@ -26802,7 +26780,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆（本条路由不发布数值）"
+              "中国大陆（职业月薪缺口；行业年均值另列）"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.49",
@@ -26891,7 +26869,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《城镇单位就业人员年平均工资情况》检索入口｜https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html；O*NET 全国工资分位页面（25-1052.00）｜https://www.onetonline.org/link/localwages/25-1052.00"
+              "国家统计局2025教育行业背景｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html；美国O*NET全国工资分位｜https://www.onetonline.org/link/localwages/25-1052.00（不能换算填中国职业工资）"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.57",
@@ -26902,7 +26880,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 2%（慢于所有职业平均）"
+              "美国2025—2035增长2.3%（OOH整数2%，慢于平均）"
             ]
           },
           "id": "chemistry-teachers-postsecondary.china-salary.career-snapshot-primary-locale.58",
@@ -26940,7 +26918,8 @@
           ],
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "bls-pay"
+            "ct-wages",
+            "ct-methods"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26955,7 +26934,7 @@
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "bls-pay"
+            "ct-ooh"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26985,7 +26964,8 @@
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "bls-entry"
+            "ct-ep2025",
+            "ct-ooh"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27030,7 +27010,8 @@
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.7",
           "source_refs": [
-            "bls-pay"
+            "ct-wages",
+            "ct-methods"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27040,7 +27021,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS Occupational Outlook Handbook：Postsecondary Teachers（含化学教师分项中位数）｜https://www.bls.gov/ooh/education-training-and-library/postsecondary-teachers.htm；O*NET 全国工资分位页面（25-1052.00）｜https://www.onetonline.org/link/localwages/25-1052.00；O*NET 全国就业趋势页面（25-1052.00，显示 BLS 就业预测）｜https://www.onetonline.org/link/localtrends/25-1052.00"
+              "O*NET25-1052全国工资分位（OEWS2025年5月）｜https://www.onetonline.org/link/localwages/25-1052.00；BLS OOH化学教师分项与父级边界｜https://www.bls.gov/ooh/education-training-and-library/postsecondary-teachers.htm；BLS表1.2预测2025—2035｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；OEWS方法｜https://www.bls.gov/oes/2025/may/oes_tec.htm"
             ]
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.8",
@@ -27150,7 +27131,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位。该分位包含医学院与法学院等高收入院系的影响，也不含自雇主收入。；BLS 全国工资分位（25-1052.00，2025 年 5 月）｜https://www.onetonline.org/link/localwages/25-1052.00"
+              "第90分位仅描述SOC25-1052化学教师工资上端，不来自医学院或法学院其他学科教师的收入；OEWS不含自雇。｜https://www.onetonline.org/link/localwages/25-1052.00"
             ]
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.18",
@@ -27161,7 +27142,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "25,400 人（2024 年）"
+              "24,900人（2025）"
             ]
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.19",
@@ -27172,7 +27153,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 就业预测公布的 2024 年该职业就业人数；2034 年预计为 26,000 人，2024—2034 年变化约 +600 人。；BLS 就业预测（经 O*NET 就业趋势页面显示）｜https://www.onetonline.org/link/localtrends/25-1052.00"
+              "2025就业24.9千人、2035预计25.4千人；官方净增0.6千人，端点独立舍入不可重算覆盖。｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.20",
@@ -27183,7 +27164,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 2%"
+              "增长2.3%（OOH整数2%）"
             ]
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.21",
@@ -27194,7 +27175,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024—2034 年预测期，属「慢于所有职业平均」。预测含假设与误差，不等于逐年实际值。；BLS 就业预测（经 O*NET 就业趋势页面显示）｜https://www.onetonline.org/link/localtrends/25-1052.00"
+              "2025—2035预测，OOH分类慢于平均；预测有假设与误差，非逐年实际岗位或AI替代率。｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.22",
@@ -27205,7 +27186,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约 1,900 个/年"
+              "约1,700个/年"
             ]
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.23",
@@ -27216,7 +27197,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024—2034 年年均空缺，含增长与替补（离职与退休）需求。空缺是流量，不等于在招岗位存量。；BLS 就业预测（经 O*NET 就业趋势页面显示）｜https://www.onetonline.org/link/localtrends/25-1052.00"
+              "2025—2035年均空缺1.7千，含增长及转岗/退出等替补流量；非在招存量。｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.24",
@@ -27227,7 +27208,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界：以上数值均为美国全国口径，面向受雇工资薪金岗位；兼职与暑期课程与项目经费等安排不体现在统计中，本页不据此推算个人年收入，也不构成对中国大陆的推断。"
+              "OEWS工资覆盖美国受雇全职和兼职，排除自雇等，统计税前正常工时工资，含/排项目按方法说明核；不是个人总收入。EP就业范围另依预测口径，不能将工资覆盖直接推及所有就业值。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.25",
@@ -27238,7 +27219,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：BLS 显示 2025 年 5 月该职业年薪中位数为 93,250 美元；2024—2034 年就业预计增长 2%，年均空缺 1,900 个。O*NET 该职业工资页当次只提供年薪分位、未提供时薪分位，本页不折算或推算时薪。这些是美国受雇岗位的统计位置，不是个人起薪或到手收入。"
+              "2025年5月年工资中位93,250美元，五分位原值见表。BLS表1.2的2025—2035年美国SOC25-1052预测：24,900→25,400人，增长2.3%，年均空缺1,700；OOH整数展示为2%（慢于平均）。官方净增0.6千人独立舍入，与两端已舍入数之差0.5千人不同，不能重算覆盖。空缺含增长及转岗、退出劳动力市场等替补需求，非在招岗位存量或AI替代率。 O*NET当前只展示年薪分位，不用2080小时推算本职业时薪或个人薪酬。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.26",
@@ -27249,7 +27230,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "多数高校教师全职工作，但兼职授课较为常见（BLS 说明）；兼职教师可能在多所院校授课，也有人在本领域全职工作之余兼课。统计的年度工资不区分兼职与全职与暑期安排，因此不能反推个人收入结构。"
+              "OOH父级说明兼职任教常见，可跨院校或兼本专业工作；OEWS纳入全职和兼职，不提供本页所需的个人合同、暑期及资助收入拆分。按年度支付但不工作2080小时的教师直接报告年工资，不能当标准工时折算。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.27",
@@ -27271,7 +27252,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "院校类型与学科与聘任轨道决定任务结构与考核：研究型大学与教学型院校与社区学院在教学负荷与科研要求上差别较大，不同学科的中位数也存在明显差距（BLS OOH 按学科列出该组职业的中位数）。"
+              "OOH父级说明院校类型、聘任轨道及任务负荷存在差异；不能将其他学科中位数差异归因于本化学职业的90分位，也不以院系名称预测个人收入。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.29",
@@ -27315,7 +27296,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 2%（慢于所有职业平均）"
+              "增长2.3%（2025—2035；OOH整数2%）"
             ]
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.33",
@@ -27337,7 +27318,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：BLS Occupational Outlook Handbook 只提供「后中等教师」整体（多学科合并）的行业内中位数（如公立高校与专业学院 96,120、私立 89,660 美元/年），未提供化学教师职业口径；本页不把整体口径写成职业口径。"
+              "职业级缺口：未取得化学教师按机构类型的工资中位。父级背景仅供比较：OOH2025多学科后中等教师在州所属高校/专业学院96,120、私营高校/专业学院89,660美元/年；非公立全部单位，也非本职业统计。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.35",
@@ -27348,7 +27329,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布显示该职业全部集中在教育服务；按机构类型细分的本职业工资中位数本轮未取得（见缺口说明）。"
+              "O*NET当前页面显示教育服务100%，呈现美国职业就业行业结构；本职业按机构类型的工资中位本轮未取得，不能据行业占比推算工资。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.36",
@@ -27414,7 +27395,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同组职业内部不同学科的中位数差异明显，说明学科与院系结构会影响收入水平。"
+              "OOH列多学科后中等教师的学科分项，但该表不足以解释化学教师内部的院系收入差异或其原因。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.42",
@@ -27469,7 +27450,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该职业的 O*NET 工资页当次只提供年薪分位，未提供时薪；即使有时薪数值，也不能由年度工资直接推算个人年薪或税后所得，因为兼职与暑期安排与项目经费不计入统计。"
+              "O*NET当前只展示年工资分位；OEWS包含兼职，教师的年度工资不统一按2080小时折算。不能由此推算时薪、个人完整年收入或税后所得，合同与计酬期须另核。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.47",
@@ -27535,7 +27516,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该分位描述分布上端位置，受高收入院系影响，不能据此推断个人或某一院系的收入。"
+              "第90分位是化学教师受雇工资分布上端；不支持归因于其他学科高收入院系，也不预测个人或特定院系收入。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.53",
@@ -27804,7 +27785,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业兴趣代码为 IS（研究型、社会型）。研究型对应「研究非生命物体与材料与现象」的取向（具体领域为物理科学与生命科学）；社会型对应「与他人协作、教学、帮助他人」的取向（具体领域为教学与教育）。该职业的工作活动以培训与教学他人（92）、使用计算机（84）、为他人解释信息含义（77）为最高分项，说明它更像「把知识讲清楚并带人做研究」而不是「独立做纯实验研究」。"
+              "O*NET兴趣IS，研究80、社会79，属职业兴趣评分，不是人群比例或个人诊断。工作活动培训教学92、使用计算机84、解释信息77；本职业可教学为主或教学科研结合，不能据此排除研究。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.2",
@@ -27815,7 +27796,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 兴趣代码与工作活动重要性为官方职业测评数据，描述的是职业群体的取向分布，不是个人适配结论，也不是录用标准。"
+              "证据等级：美国O*NET职业兴趣及活动评分，非个人适配率、人群分布或录用标准。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.3",
@@ -27838,7 +27819,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：O*NET 工作风格清单列出社会取向、成就取向、求知欲、谨慎性、诚信、注重细节与可靠性七项；如果你不喜欢公开演讲或不愿意面对长期评阅，这份工作的日常负荷会持续带来压力。"
+              "O*NET详情列20项工作风格；较高者求知欲91、注重细节86、可靠85、谨慎77、诚信72、成就71、社会69。与教学、实验和评阅任务结合考虑，不能称只有七项或人格门槛。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.5",
@@ -27849,7 +27830,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格在本页只用于描述工作方式，不作为录用或淘汰依据。与该职业任务更相关的是外向性维度下的「社会取向」、尽责性维度下的「注重细节」与「可靠性」、以及开放性维度下的「求知欲」；O*NET 工作情境显示50% 认为精确或准确极其重要、46% 每天进行公开演讲、34% 认为竞争极其激烈、27% 每天面临时间压力。"
+              "大五维度仅作编辑描述工作方式的参照，不由O*NET直接映射个人量表分数。工作情境：50%认为精确极重要、46%每天公开演讲、34%竞争极激烈、27%每天时间压力；不能证明人格与成功因果。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.6",
@@ -27860,7 +27841,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 工作风格为职业级描述性数据；大五人格量表本身不是职业选拔工具。"
+              "证据等级：O*NET职业风格描述；本页未取得高校化学教师大五预测效度或录用阈值。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.7",
@@ -27984,7 +27965,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业对学科与数学的要求偏系统：O*NET 基本技能中阅读理解与口语表达与写作各 78、主动学习与主动倾听与批判性思维与学习策略与监控与科学各 75、数学 56；知识清单为化学、英语语言、数学、教育与培训、生物学、物理学、工程与技术、计算机与电子、公共安全与安保 9 项；可迁移技能以复杂问题解决与教导各 72 为最高分项。"
+              "O*NET10基本技能：阅读/表达/写作78，主动学习/倾听/批判思维/学习策略/监控/科学75，数学56；25可迁移技能中复杂解决及教导72。知识详情33项，较高为化学94、英语/数学89、教育培训88等，非只有摘要九项；不是个人IQ门槛。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.18",
@@ -28018,7 +27999,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：如果对化学计算与单位与量纲长期吃力，讲授与答疑环节会持续出现错误，直接影响教学质量。"
+              "编辑自查建议：若化学计算、单位或量纲掌握吃力，可补基础并通过可核验的计算、讲解及反馈检查能力；不由技能需求分值预测持续教学错误或教学质量因果。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.21",
@@ -28029,7 +28010,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业沟通强度高：O*NET 工作情境显示 82% 每天进行面对面讨论、98% 每天使用电子邮件、46% 每天进行公开演讲、52% 大部分时间需要与他人接触，工作活动「培训与教学他人」重要性 92、「指导与发展他人」75；情绪智力在这里体现为在课堂上处理学生情绪与冲突、在评阅中保持公正并给出可接受的反馈。"
+              "美国工作情境82%每天面对面讨论、98%每天邮件、46%每天公开演讲、52%持续与他人接触；活动教学92、指导发展75。情绪/冲突反馈行为是编辑观察建议，非测得的情绪智力分数或因果。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.22",
@@ -28085,7 +28066,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：与该职业任务最贴合的信号是「愿意把知识讲清楚并反复调整」与「对实验安全与评分公正较真」；兴趣代码 IS 说明该职业同时偏向研究型与社会型，但代码只描述群体分布，不决定个人是否适合。"
+              "直接回答：与该职业任务最贴合的信号是「愿意把知识讲清楚并反复调整」与「对实验安全与评分公正较真」；兴趣代码 IS 说明该职业同时偏向研究型与社会型，但代码描述职业层面的工作兴趣特征，不是教师人群占比或分布，不决定个人是否适合。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.27",
@@ -28096,7 +28077,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "课程教学与学生指导方向"
+              "化学家"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.28",
@@ -28107,7 +28088,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：喜欢讲授与答疑，愿意长期面对学生并以教学为主要职责，并能接受教学型岗位的考核方式。"
+              "编辑适配信号：愿意研究分析、方法或产品开发，能保持可复核实验记录。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.29",
@@ -28118,7 +28099,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你不愿意面对公开演讲与持续评阅，这条方向的压力会很大。"
+              "编辑谨慎信号：研究与质量/产品任务、行业条件须另补；偏好研究不自动证明适配。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.30",
@@ -28129,7 +28110,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "实验教学与安全管理方向"
+              "自然科学经理"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.31",
@@ -28140,7 +28121,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：愿意承担实验室教学与安全管理，能把规程写成学生能执行的步骤并持续监督。"
+              "编辑适配信号：愿意协调人员、预算、研究或生产项目，并积累管理证据。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.32",
@@ -28151,7 +28132,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你不愿意在违规与事故处置上坚持制度，这条方向会持续出现风险。"
+              "编辑谨慎信号：课题经历不自动等于招聘、预算、绩效权限，须补实际管理责任。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.33",
@@ -28162,7 +28143,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "科研与研究生指导方向"
+              "高校物理教师"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.34",
@@ -28173,7 +28154,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：愿意承担课题与经费与论文产出，并能把研究训练与指导结合起来。"
+              "编辑适配信号：愿意研究并讲授物理课程及实验，可迁移教学评阅方法。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.35",
@@ -28184,7 +28165,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：这条方向对成果与经费的持续要求较高，需要有长期投入的准备。"
+              "编辑谨慎信号：须补物理学科、研究方向和课程实验体系，不凭化学背景直接转任。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.36",
@@ -28195,7 +28176,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "化学家"
+              "生物化学家与生物物理学家"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.37",
@@ -28206,7 +28187,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：更希望把主要精力放在研究产出而不是课程教学。"
+              "编辑适配信号：愿意研究生命体系的化学与物理机制，训练实验和解释。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.38",
@@ -28217,7 +28198,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你愿意以教学与学生培养为主，本职业更合适。"
+              "编辑谨慎信号：须补生命体系技术及成果；该职业也可教学生、指导研究，非纯研究无教学。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.39",
@@ -28228,7 +28209,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "自然科学经理"
+              "分子与细胞生物学家"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.40",
@@ -28239,7 +28220,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：更希望做团队与资源与项目管理，并愿意承担经营与协调责任。"
+              "编辑适配信号：愿意研究细胞/分子机制并维护实验数据，可共享实验写作习惯。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.41",
@@ -28250,7 +28231,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你希望留在一线教学与科研，本职业更合适。"
+              "编辑谨慎信号：须补分子细胞实验及研究方向，教学能力不能替代专业训练。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.42",
@@ -28261,7 +28242,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "高校物理教师"
+              "生物医学工程师"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.43",
@@ -28272,7 +28253,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：更喜欢物理学科的课程与实验，并愿意在对应学科体系内教学。"
+              "编辑适配信号：愿意把实验分析用于生物医学设备或过程设计验证。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.44",
@@ -28283,7 +28264,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你更偏好化学与分析检测与实验室安全管理，本职业更合适。"
+              "编辑谨慎信号：须补工程设计、验证及产品条件，不能由科研/教学经历直接获得工程权限。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.45",
@@ -28338,7 +28319,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 该职业的兴趣代码为 IS（研究型、社会型）。这表示职业群体同时分布在研究型与社会型取向，但代码不是个人适配结论，仍需用实际任务验证。"
+              "O*NET兴趣代码IS，职业层面研究和社会分较高；不是个人适配结论或人群比例，仍须实际任务验证。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.50",
@@ -28349,7 +28330,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。人格特质分数与工作表现的关联在不同研究中强弱不一，且受机构与岗位影响；本页不用它作为聘用或适配判断依据。"
+              "本页没有可验证的高校化学教师人格预测效度或录用阈值，不能据测评分数作确定的工作表现结论。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.51",
@@ -28371,7 +28352,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业沟通强度高于多数实验室岗位：工作活动「培训与教学他人」92、「指导与发展他人」75，工作情境显示 46% 每天进行公开演讲；重点是讲授与反馈与冲突处理，不要求处理顾客情绪。"
+              "本职业有教学、指导、评阅沟通任务，O*NET教学92、指导发展75、46%每天公开演讲；本轮未核与多数实验室职业的量化比较，不据此要求高情商或排除某种人。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.53",
@@ -28459,7 +28440,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024—2034 年就业预测与年均空缺"
+              "核BLS表1.2的2025—2035职业预测及空缺"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.personality-fit-block.61",
@@ -28536,7 +28517,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣取向：该职业群体同时具有研究型与社会型取向，日常任务以准备与讲授课程、指导实验与评阅、以及围绕学科内容开展研究与交流为主。"
+              "职业层面的兴趣研究80、社会79；任务含授课、实验、评阅及研究。此为职业兴趣描述，非个人群体比例或命运结论。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.fit.riasec-fit-block.10",
@@ -28582,7 +28563,8 @@
           },
           "id": "chemistry-teachers-postsecondary.risk.career-risk-cards.1",
           "source_refs": [
-            "nasa-seh"
+            "ct-lab2023",
+            "ct-lab2024"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28612,7 +28594,7 @@
           },
           "id": "chemistry-teachers-postsecondary.risk.career-risk-cards.3",
           "source_refs": [
-            "nasa-seh"
+            "ct-academic"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28627,7 +28609,8 @@
           },
           "id": "chemistry-teachers-postsecondary.risk.career-risk-cards.4",
           "source_refs": [
-            "nasa-seh"
+            "ct-academic",
+            "ct-teacher-law"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28686,22 +28669,22 @@
                 "url": "https://www.onetonline.org/link/details/25-1052.00#WorkContext"
               },
               {
-                "entity": "O*NET-SOC 25-1052.00 职业摘要",
+                "entity": "教育部令40号学术不端办法（政府公开原文）",
                 "id": "link-4",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/summary/25-1052.00"
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/201905/t20190522_59345.html"
               },
               {
-                "entity": "O*NET-SOC 25-1052.00 行业分布",
+                "entity": "教育部高校实验室安全规范2023",
                 "id": "link-5",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/industry/25-1052.00"
+                "url": "https://www.moe.gov.cn/srcsite/A16/moe_784/202302/W020230220303827581190.pdf"
               },
               {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "entity": "教育部令40号研究数据与署名规范",
                 "id": "link-6",
                 "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/201905/t20190522_59345.html"
               }
             ]
           },
@@ -28735,7 +28718,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：任务与工作情境来自 O*NET 25-1052.00（美国口径）；实验安全与危险化学品与学术规范要求来自公开法规与院校制度的一般框架；具体阈值、许可与责任划分属于院校与法域事项，本条为编辑归纳，不构成合规或安全操作意见。"
+              "任务和问卷来自美国O*NET；中国实验准入/项目责任依据教育部2023规范及2024试行办法，科研学术不端依据教育部令40号。课堂作弊与科研学术不端分开核；制度控制为编辑建议，非事故发生率或通用操作授权。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.risk.career-risk-cards.10",
@@ -28812,7 +28795,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "建立并讲授安全规则与应急流程并确认学生已知悉；实验前检查设备与通风与应急设施；发现违规立即制止并按制度记录与处理。"
+              "中国高校依项目风险评估落实培训考核和准入、防护及设备条件；重大隐患未消除不得实验，遇危险依应急职责及时制止、报告和求助，不因待复核延误。中国《高等学校实验室安全规范》适用于高校教学科研实验实训；第7条将实验室负责人和项目负责人（含教学任课教师）分别列为直接责任人、项目安全第一责任人。实验前培训考核、危险源识别和项目风险评估须落实；重大隐患未消除不得开展。2024分级分类办法第2条明确不含中试及工业化放大场所，不能泛化。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.risk.career-risk-cards.17",
@@ -28900,7 +28883,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按院校数据分级使用系统与工具，不在公开或外部服务中处理学生信息；对疑似学术不端先按制度取证再提交委员会处理；保留处理过程与决定记录。"
+              "按学校许可、用途、数据分级及适用规则核工具和外传条件，不将一切外部服务一律禁止。一般作业作弊按考核制度；科研及相关活动在中国按教育部令40号由学校受理、学术委员会调查认定并依程序处理，保密并保护陈述申辩。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.risk.career-risk-cards.25",
@@ -28911,7 +28894,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "把成绩表或论文草稿发到外部工具处理；在课堂上或私下公开点名指控学生抄袭。"
+              "未核许可、处理条件和服务条款即外传可识别成绩表或受限研究草稿；未经程序即公开指控抄袭。不是使用外部工具就必然违规。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.risk.career-risk-cards.26",
@@ -28944,7 +28927,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "建立化学品与耗材台账并定期盘点；按类别与兼容性存放并标注有效期；按制度处置废弃物并保留处置记录。"
+              "中国高校按2023规范23—28条核合规采购、分类兼容贮存、清晰标签及动态台账；实验危险废物按适用管理计划和合资格处置单位制度处理，不仅留记录。管制化学品的审批按具体类别核，不是全体教师统一执照。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.risk.career-risk-cards.29",
@@ -28988,7 +28971,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按数据管理与署名规范保留原始数据与授权记录；经费使用按制度审批与留痕；对学生作者署名与贡献按规范确认。"
+              "中国教育部令40号第7、9、27条涉及学生学术指导、原始资料及数据/署名诚信；经费另按资助和本校制度核授权及记录，不能用ILO或行业分布证明中国经费规范。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.risk.career-risk-cards.33",
@@ -29032,7 +29015,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对职业摘要中的知识、能力与工作风格"
+              "教育部令40号适用科研相关活动的学术不端调查认定、保密与处理主体，不是教师法评价学业权条文。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.risk.career-risk-cards.37",
@@ -29043,7 +29026,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对行业分布与教学与科研环境说明"
+              "2023高校实验室安全规范支持培训准入、项目责任、化学品与实验危险废物要求；2024分级分类办法的适用排除另见对应来源。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.risk.career-risk-cards.38",
@@ -29054,7 +29037,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明任务暴露的度量思路与其指标限制"
+              "教育部令40号学生指导、原始资料、署名与学术不端处理（科研及相关活动）；非所有普通作业或经费规则"
             ]
           },
           "id": "chemistry-teachers-postsecondary.risk.career-risk-cards.39",
@@ -29078,7 +29061,10 @@
           },
           "id": "chemistry-teachers-postsecondary.path.career-path-block.1",
           "source_refs": [
-            "onet-training"
+            "ct-details",
+            "ct-ooh",
+            "ct-qual",
+            "ct-lab2023"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -29209,10 +29195,10 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET 全国就业趋势页面（25-1052.00，显示 BLS 就业预测）",
+                "entity": "BLS表1.2：SOC25-1052职业预测2025—2035",
                 "id": "link-1",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/25-1052.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET-SOC 25-1052.00 准备层级（Job Zone）",
@@ -29221,16 +29207,16 @@
                 "url": "https://www.onetonline.org/link/details/25-1052.00#JobZone"
               },
               {
-                "entity": "O*NET-SOC 25-1052.00 培训与教育信息入口",
+                "entity": "O*NET25-1052全国认证发现入口",
                 "id": "link-3",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtraining/25-1052.00"
+                "url": "https://www.onetonline.org/link/localcert/25-1052.00"
               },
               {
-                "entity": "O*NET-SOC 25-1052.00 认证信息入口",
+                "entity": "O*NET25-1052职业任务原文",
                 "id": "link-4",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localcert/25-1052.00"
+                "url": "https://www.onetonline.org/link/details/25-1052.00"
               }
             ]
           },
@@ -29341,7 +29327,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：进入该职业最常见的路径是完成研究生教育（多数岗位要求博士学位，社区学院等岗位硕士学位可能足够），在读期间承担助教与实验带教并完成学位论文，之后通过院校公开招聘进入教师岗位并经历聘期考核；O*NET 把该职业列为 Job Zone Five（需大量准备）、SVP 区间 8.0 及以上。能否进入岗位主要看三点：是否具备系统的学科知识与教学能力、能否在实验教学中守住安全与规范、以及能否产出可被同行评价的研究成果（研究型院校尤为看重）。"
+              "美国BLS典型学历为博士或专业学位；OOH父级：四年制院校通常博士，部分兼职/专业或社区学院硕士可行，部分化学教师有博士后经历。O*NET Job Zone Five/SVP8.0+是群体准备程度；中国学历法定条件、教师资格认定及岗位聘任另核，不把美国惯例移成中国统一公开招聘。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.path.career-path-block.20",
@@ -29352,7 +29338,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界：学历与培训、行业认证、法定与岗位资格、院校聘任与授权是四件不同的事。在美国，高校教师没有全国统一的教师资格执照，聘任与晋升由院校制度与院系评审决定；O*NET 认证页面当次列出 2 项全国性认证（National Board Certification - Science - Adolescence and Young Adulthood；LIUNA Instructor Certification），属能力证明与雇主偏好，不等于高校聘任资格。在中国大陆，高校教师岗位涉及事业单位公开招聘、高等学校教师资格、职称评审与聘期考核等制度，涉及实验教学与危险化学品的岗位另有实验室安全管理要求。本页不把某一法域的要求推到其他法域，也不把认证写成聘任资格。"
+              "中国《教师法》第10—13条及《教师资格条例》第4、6—8、12—16条区分高等学校教师资格的学历条件、考试适用与认定：法律学历条件为研究生或大学本科毕业，仍须符合其他条件并依法认定；与院校招聘中的博士、研究成果、聘任条件不同，不是所有申请者都走同一培训考试程序。 美国应按院校、课程及州规则核；OOH父级说教授执照职业的教师可能需相应资格，不由此证明全国任意高校岗位都免许可。O*NET列出的2认证仅是发现入口，未核高校认可范围，不写雇主偏好或入职条件。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.path.career-path-block.21",
@@ -29374,7 +29360,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本页关于入行与培养采用 O*NET/BLS 口径：Job Zone Five、SVP 区间 8.0 及以上、多数岗位要求研究生学历，许多要求博士学位；中国大陆部分只说明公开的高校教师招聘与教师资格与职称制度框架，不对中国大陆的院校门槛作统一结论，因为院校类型与学科差异较大。"
+              "O*NET准备程度及BLS学历描述为美国口径；中国教师资格的法定学历条件与认定、院校招聘的研究成果/学位/聘任条件不同；本轮未取有方法的中国招聘样本，不给统一院校门槛。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.path.career-path-block.23",
@@ -29385,7 +29371,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024—2034 年就业预测与年均空缺"
+              "核BLS表1.2的2025—2035职业预测；不作中国招生或招聘承诺"
             ]
           },
           "id": "chemistry-teachers-postsecondary.path.career-path-block.24",
@@ -29396,7 +29382,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对准备层级与教育要求说明"
+              "核O*NET Job Zone/SVP，准备程度不是每人资格或统一年限"
             ]
           },
           "id": "chemistry-teachers-postsecondary.path.career-path-block.25",
@@ -29407,7 +29393,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对认证入口（该职业页当次列出 2 项全国性认证）"
+              "O*NET当次列2认证：NBPTS科学Adolescence and Young Adulthood、LIUNA Instructor Certification；未核高校任教适用条件或认可，不作付费考证推荐"
             ]
           },
           "id": "chemistry-teachers-postsecondary.path.career-path-block.26",
@@ -29484,7 +29470,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按院校要求取得教师资格或完成入职教学培训；实验教学岗位须完成实验室安全培训。"
+              "中国依法申请高等学校教师资格认定，与入职教学培训不同；其他法域核本地规则。实验岗位按中国高校规范落实安全培训、考核及准入，不能互相替代。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.path.career-path-block.33",
@@ -29704,7 +29690,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "涉及危险化学品与特种设备的岗位须按所在地规定取得相应资格。"
+              "中国高校实验安全培训考核与准入须落实；管制化学品和特种设备按具体类别、岗位及法规核，不能将接触危险化学品泛化为所有教师统一个人资格。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.path.career-path-block.53",
@@ -29814,7 +29800,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在要求签署的岗位须具备相应法域资格与院校授权。"
+              "承担实验室或项目责任须核具体任职与授权，不虚构统一实验室签署执照；中国规范区分校、二级单位、实验室及项目负责人（含教学任课教师）。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.path.career-path-block.63",
@@ -29847,7 +29833,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "对实验室安全与教学条件负责，在争议中坚持依据并承担说明责任。"
+              "在实际职责内落实项目或实验室安全条件、风险评估、培训和记录；重大隐患未消除不得实验，不能从能力阶段推导个人具有恢复授权。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.path.career-path-block.66",
@@ -30098,14 +30084,14 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "编辑建议核对项（向目标院校核聘任标准）",
               "没经验如何证明",
               "与其他方向的区别"
             ],
             "rows": [
               [
                 "助教／实验带教",
-                "在主讲教师指导下带习题课与实验，评阅作业并答疑，不独立设计课程与考核。",
+                "在主讲指导及授权内协助习题课、实验、评阅及答疑；是否参与课程/考核设计依岗位核，不一概排除。",
                 "是否按规范执行与评阅、记录是否如实、异常是否及时上报。",
                 "用教学培训记录与学生反馈与评阅样本证明。",
                 "与独立主讲相比更偏执行与协助，课程设计与成绩认定权限有限。"
@@ -30122,21 +30108,21 @@
                 "负责实验教学组织与实验室安全与耗材与废弃物管理。",
                 "安全制度落地、台账与处置合规、异常处置能力。",
                 "用安全检查与培训与整改记录证明。",
-                "与理论课教师相比增加安全与合规责任，通常需专门培训或资格。"
+                "与理论课相比增加实验组织及项目安全责任；培训、准入和特殊资格按具体岗位核。"
               ],
               [
-                "科研骨干",
+                "科研与研究生指导（进阶方向）",
                 "承担课题与经费与研究生指导与成果产出。",
                 "课题组织、数据与署名规范、经费合规。",
                 "用项目与成果与经费使用与数据管理记录证明。",
-                "与教学岗相比考核侧重成果与经费，教学任务通常仍须承担。"
+                "研究、经费或导师职责须实际聘任/授权，不是无经验直接入门岗。"
               ],
               [
-                "教学管理岗位",
+                "教学管理（相邻/进阶方向）",
                 "负责培养方案与课程体系与教学质量保障与认证。",
                 "制度设计、评价体系建设、跨部门协调。",
                 "用培养方案与认证材料与评价报告证明。",
-                "与管理岗位相比更偏教学事务，通常不直接承担全部授课任务。"
+                "教学及学术事务管理需人员、预算、制度经验，不保证作为无经验首岗。"
               ]
             ]
           },
@@ -30152,25 +30138,25 @@
               {
                 "id": "education",
                 "values": [
-                  "博士学历（多数高校专任教师岗位），部分高职高专与应用型院校与实验教学岗位接受硕士学历；",
-                  "研究方向与院系学科方向需匹配，在读期间通常承担助教与实验带教；",
-                  "部分岗位要求博士后或海外研究经历，或具备相应教学与实验室安全培训经历。"
+                  "美国学历按BLS/OOH院校及岗位说明；中国实际招聘学位与成果条件须核公告，本轮未取系统样本。",
+                  "学科研究方向与岗位任务匹配；助教、实验带教经历可作教学能力证据。",
+                  "博士后或海外经历不是所有岗位统一要求，不能自动取得导师或负责人资格。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "院校公开招聘与聘任评审是实际门槛，包含试讲与学术评议与聘期考核；",
-                  "中国大陆高校教学岗位一般要求高等学校教师资格，涉及危险化学品的岗位另有实验室安全管理要求；",
-                  "涉及学生信息与数据处理需遵守院校数据与隐私管理规定。"
+                  "中国《教师法》第10—13条及《教师资格条例》第4、6—8、12—16条区分高等学校教师资格的学历条件、考试适用与认定：法律学历条件为研究生或大学本科毕业，仍须符合其他条件并依法认定；与院校招聘中的博士、研究成果、聘任条件不同，不是所有申请者都走同一培训考试程序。",
+                  "聘任、试讲和考核条件依单位及聘任形式核，不把所有民办/兼职纳入事业单位公开招聘。",
+                  "实验准入培训考核与项目责任、学生数据处理按实际制度和法域落实。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "O*NET 工作风格列出社会取向、成就取向、求知欲、谨慎性、诚信、注重细节与可靠性七项；",
-                  "基本技能中阅读理解与口语表达与写作各 78、主动学习与批判性思维与科学等各 75、数学 56；",
-                  "可迁移技能以复杂问题解决与教导各 72 为最高分项。"
+                  "O*NET详情20项工作风格，求知欲91、细节86、可靠85等；非只有摘要七项。",
+                  "基本技能阅读/表达/写作78，主动学习/批判思维/科学75、数学56。",
+                  "复杂问题解决和教导72为可迁移技能最高项；分值不是个人门槛。"
                 ]
               },
               {
@@ -30421,57 +30407,57 @@
             "rows": [
               [
                 "博士学位",
-                "多数高校专任教师岗位的常见起点",
-                "是求职的基础门槛，决定可进入的岗位序列",
-                "是（多数院校与学科）",
-                "完成博士阶段研究并通过学位论文答辩；研究方向与岗位匹配",
-                "高（学制数年）",
-                "学位本身不等于聘任资格与教学资格，也不代表可持续产出"
+                "美国四年制院校常见要求；中国岗位按公告核",
+                "证明学科研究准备，具体聘任另核",
+                "非所有院校/岗位统一条件",
+                "学位授予条件按院校核；与法定教师资格认定不同",
+                "高（期间因项目不同）",
+                "学位不等于聘任、教师资格、导师或负责人授权"
               ],
               [
                 "硕士学位",
-                "部分高职高专与应用型院校与实验教学岗位",
-                "在相应岗位上是可接受条件",
-                "视院校类型与岗位职责而定",
-                "完成硕士阶段学习；实践型岗位更看重项目与实训经历",
-                "中（学制两年）",
-                "学历层次影响可进入的岗位序列，本页不据此推断收入"
+                "美国部分社区学院、兼职等；中国具体岗位另核",
+                "在明确接受该学历的岗位可作条件",
+                "依实际岗位",
+                "完成相应学位及岗位要求；不承诺通用两年学制",
+                "按项目核",
+                "不能据学历推收入或获得全部教学授权"
               ],
               [
                 "博士后或海外经历",
-                "部分研究型大学与科研为主型岗位",
-                "在竞争性岗位上是加分或常见要求",
+                "美国部分化学等学科教师；中国具体招聘条件另核",
+                "可提供研究经历证据，不保证聘任",
                 "否（并非所有岗位都要求）",
                 "完成博士后研究或具备海外学习研究经历；以机构要求为准",
-                "高（数年）",
+                "按项目期间与资助核",
                 "经历不等于聘任结果，聘任由机构岗位与评审决定"
               ],
               [
-                "高等学校教师资格（中国大陆）",
-                "在高校承担教学任务的教师",
-                "在相应岗位上是实质条件",
-                "是（中国大陆高校教学岗位的一般要求）",
-                "按教育行政部门与院校规定参加岗前培训与考试；条件以官方公布为准",
-                "中（培训与考核周期）",
-                "教师资格与院校聘任是两个环节，本页不代替官方认定条件"
+                "高等学校教师资格（中国）",
+                "适用高校任教的中国公民",
+                "法定资格认定，与院校聘任分开",
+                "按教师法及条例适用",
+                "教师法11条：研究生或本科毕业等学历条件；另核其他条件、考试适用及认定机关，不是一律岗前培训考试",
+                "按具体认定安排核",
+                "学位不自动取得资格，资格也不自动获得聘任或导师授权"
               ],
               [
-                "行业认证（教学与安全相关）",
-                "希望证明特定能力的人员",
-                "部分机构认可，属于加分项",
-                "否",
-                "各认证机构自定报考条件与考试要求，须逐项核实",
-                "中到高（培训与考试费用）",
-                "行业认证不等于法定资格或聘任资格，也不替代院校授权"
+                "O*NET列举认证（非高校统一资格）",
+                "NBPTS科学青春期/青年期认证与LIUNA讲师认证分别核",
+                "仅作发现入口，本轮未核高校认可或招聘效力",
+                "否；不能据入口证明要求",
+                "机构条件、有效期和适用对象未实核",
+                "证据不足：未核实际费用与期间",
+                "不推荐付费报考，不替代高校教师资格或聘任"
               ],
               [
-                "实验室安全管理资格",
-                "承担实验室安全与危险化学品管理的岗位",
-                "在相应岗位上是实质条件或加分项",
-                "视机构与岗位要求而定",
-                "按所在地与机构规定参加培训与考核；条件以官方公布为准",
-                "中（培训与考核周期）",
-                "资格与授权范围按机构与项目核定，本页不代替官方条件"
+                "高校实验安全培训、考核与准入（中国）",
+                "进入高校实验室学习/工作的相关人员",
+                "实验操作前落实培训考核；项目安全责任另核",
+                "适用实验操作，不是统一个人安全执照",
+                "依2023规范及2024办法、本校项目风险和准入规则",
+                "按本校培训与考核安排",
+                "管制化学品/特种设备按具体法源和岗位核，不覆盖中试放大"
               ]
             ]
           },
@@ -30484,10 +30470,10 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "本页把「学历与培训」「行业认证」「法定与岗位资格」与「院校聘任与授权」分列：学历决定你能进入哪些岗位序列，行业认证用于证明特定方向的能力，教师资格与安全资格由法域主管部门规定，聘任与授权由院校制度决定，四者不能互相替代。",
-              "美国：高校教师没有全国统一的教师资格执照，聘任与晋升由院校制度与院系评审决定；O*NET 该职业的认证页面当次列出 2 项全国性认证（National Board Certification - Science；LIUNA Instructor Certification），属能力证明与雇主偏好。",
-              "中国大陆：高校教师岗位涉及事业单位公开招聘、高等学校教师资格、职称评审与聘期考核；涉及实验教学与危险化学品管理的岗位另有实验室安全管理要求，须按所在地主管部门与院校制度确认；本页不代替官方报考或认定条件。",
-              "本页涉及的认证信息来自 O*NET 的认证发现入口，其报考条件、有效期与认可范围须由各认证机构原文核实；本页不保证任何认证在特定院校或法域被承认，也不保证特定岗位的聘任结果。"
+              "学历、教师资格认定、院校聘任、实验准入及项目授权不能互相替代；四段能力阶段为编辑设计，不是统一职级或晋升期限。",
+              "美国学历按BLS/OOH机构条件核；O*NET列2认证仅是发现入口，不证明高校聘任认可或雇主偏好；教授需许可职业的课程另核相应资格。",
+              "中国《教师法》第10—13条及《教师资格条例》第4、6—8、12—16条区分高等学校教师资格的学历条件、考试适用与认定：法律学历条件为研究生或大学本科毕业，仍须符合其他条件并依法认定；与院校招聘中的博士、研究成果、聘任条件不同，不是所有申请者都走同一培训考试程序。",
+              "中国《高等学校实验室安全规范》适用于高校教学科研实验实训；第7条将实验室负责人和项目负责人（含教学任课教师）分别列为直接责任人、项目安全第一责任人。实验前培训考核、危险源识别和项目风险评估须落实；重大隐患未消除不得开展。2024分级分类办法第2条明确不含中试及工业化放大场所，不能泛化。 培训考核不是全体教师统一危险化学品个人执照，项目/导师授权另核。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.path.credential-boundary.1",
@@ -30528,7 +30514,7 @@
           ],
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls-outlook"
+            "ct-ep2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30546,7 +30532,7 @@
           ],
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls-outlook"
+            "ct-ep2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30561,7 +30547,7 @@
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls-outlook"
+            "ct-ep2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30579,7 +30565,7 @@
           ],
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls-outlook"
+            "ct-ep2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30609,7 +30595,7 @@
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.6",
           "source_refs": [
-            "bls-outlook"
+            "ct-ep2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30632,10 +30618,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（25-1052.00，显示 BLS 就业预测）",
+                "entity": "BLS表1.2职业预测2025—2035",
                 "id": "link-3",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/25-1052.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
@@ -30644,10 +30630,10 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "国家统计局《城镇单位就业人员年平均工资情况》检索入口",
+                "entity": "国家统计局2025城镇单位工资（教育行业背景）",
                 "id": "link-5",
                 "relation": "related-evidence",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET-SOC 25-1052.00 职业详细资料",
@@ -30713,7 +30699,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：BLS 就业预测显示 2024—2034 年美国该职业就业增长 2%（Slower than average，慢于所有职业平均），2024 年 25,400 人、2034 年预计 26,000 人，年均空缺 1,900 个，其中相当部分来自离职与退休的替补需求。中国大陆未取得与该岗位精确对应的全国工资与就业统计口径，本页只登记缺口，不给出替代数值。"
+              "BLS表1.2的2025—2035年美国SOC25-1052预测：24,900→25,400人，增长2.3%，年均空缺1,700；OOH整数展示为2%（慢于平均）。官方净增0.6千人独立舍入，与两端已舍入数之差0.5千人不同，不能重算覆盖。空缺含增长及转岗、退出劳动力市场等替补需求，非在招岗位存量或AI替代率。 中国本轮没有精确职业就业/工资预测；国家统计局2025年教育门类城镇非私营/私营单位就业人员年平均工资为133,539/63,908元。仅作教育行业背景：涵盖其他学段、学科及非教师职工，非高校化学教师职业中位数、起薪、到手收入或公立/民办高校对照。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.8",
@@ -30735,7 +30721,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年（预测）"
+              "2025—2035（预测）"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.10",
@@ -30746,7 +30732,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增长 2% 属「慢于所有职业平均」；预测以现有机构结构为假设，含误差，不等于逐年的实际岗位数。"
+              "表1.2增长2.3%，OOH整数2%/慢于平均；假设和误差不等于实际逐年岗位或某一院校空缺。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.11",
@@ -30790,7 +30776,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增长 2%（2024—2034 年）"
+              "增长2.3%（2025—2035；OOH整数2%）"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.15",
@@ -30889,7 +30875,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025 年及以前已发布资料"
+              "2025全年行业工资；2026-05-15发布"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.24",
@@ -30900,7 +30886,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本条证据路由把中国大陆的精确职业工资登记为已核实不可得（severity=material），本页只登记统计口径与缺口，不发布数值。"
+              "国家统计局2025年教育门类城镇非私营/私营单位就业人员年平均工资为133,539/63,908元。仅作教育行业背景：涵盖其他学段、学科及非教师职工，非高校化学教师职业中位数、起薪、到手收入或公立/民办高校对照。 精确职业分位、月薪和就业预测本轮未取得。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.25",
@@ -30911,7 +30897,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业或较宽职业口径不能替代本职业的精确全国口径；本页不采用招聘样本或相邻岗位报价填补。"
+              "可匹配行业背景与精确职业缺口同时保留，不以行业均值、美国数值或未核报价代填。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.26",
@@ -30922,7 +30908,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精确职业工资口径"
+              "教育门类就业人员年平均工资（行业背景）"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.27",
@@ -30933,7 +30919,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆（未建立一一对应的职业细类）"
+              "中国城镇非私营/私营教育行业就业人员，含其他学段学科和非教师"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.28",
@@ -30944,7 +30930,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该岗位的中国大陆全国工资口径"
+              "行业均值133,539/63,908元/年；职业中位/分位仍证据不足"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.29",
@@ -30977,7 +30963,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于登记中国大陆的统计口径与缺口"
+              "核NBS2025教育行业背景、统计覆盖及精确职业缺口"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.32",
@@ -30999,7 +30985,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少课程教学与学生指导经验，也缺少课堂组织与评阅与反馈能力。"
+              "转向化学家需按目标补方法/产品、质量体系或产业场景；不是从本职业转出还缺课程经验。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.34",
@@ -31021,7 +31007,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。化学家方向以研究产出为主，通常不需要授课与评阅经验。"
+              "编辑判断：与化学家共享化学分析实验，转向距离依目标行业和已有项目核；还可能承担教导，不一概免除教学。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.36",
@@ -31054,7 +31040,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。生物化学与生物物理方向需要专门的学科训练与研究方向匹配。"
+              "编辑判断：补生命体系研究训练和方向匹配，已有相关研究可能缩小距离；该职业也可教学和指导，不作纯研究承诺。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.39",
@@ -31087,7 +31073,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较大。分子与细胞生物学方向需要生物学背景与研究积累。"
+              "编辑判断：补分子/细胞实验与机制研究，距离依已有项目核，不凭职业名称固定为较大。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.42",
@@ -31120,7 +31106,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。自然科学经理方向以管理与资源配置为主，通常不再承担授课。"
+              "编辑判断：补人员、预算、绩效及项目管理授权；经理也可开展研究，教学负荷取决于实际岗位。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.45",
@@ -31153,7 +31139,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较大。生物医学工程方向需要工程学历与产品开发与验证经验。"
+              "编辑判断：补工程设计、设备/过程验证与产品约束，岗位学历及权限另核，不把所有方向统一为必须工程学历。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.48",
@@ -31186,7 +31172,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。高校物理教师方向的教学能力可迁移，但学科内容与实验体系不同。"
+              "编辑判断：可迁移课程、评阅和实验教学，但须补物理学科和研究方向；化学资历不自动获聘。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.51",
@@ -31219,7 +31205,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较小。高等教育管理方向以教学与学术事务管理为主，通常不再承担全部授课任务。"
+              "编辑判断：教学经验可迁移到教务，但仍需机构运营、人员、预算及学生事务能力，不能固定说距离较小或无需授课。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.54",
@@ -31252,7 +31238,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。材料科学家方向需要材料学训练与研究积累，通常不承担系统授课。"
+              "编辑判断：可共享化学、表征及研究记录；材料结构/性能、加工和应用能力依已有项目补，不保证转入后不授课。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.market-signals.market-signal-card.57",
@@ -31395,7 +31381,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容由费马测试职业内容编辑组按公开官方来源整理，职业身份、任务与工作情境采用 O*NET-SOC 25-1052.00，美国工资采用 BLS OEWS（2025 年 5 月），就业与展望采用 BLS 就业预测（2024—2034 年，经 O*NET 页面显示）；编辑归纳与虚构练习单独标注。"
+              "本轮由费马测试按O*NET25-1052任务、OEWS2025工资分位、BLS表1.2的2025—2035预测核九板块；中国教育行业背景与教师资格、高校实验安全及科研学术不端按具体官方原文核。编辑用途与转岗建议不充作研究实测。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.sources.source-card.1",
@@ -31406,7 +31392,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源为美国 O*NET OnLine 与 U.S. Bureau of Labor Statistics 的公开页面，以及国家统计局与人力资源社会保障部的公开信息入口。所有数值均保留其职业、地域、期间、单位与统计口径；来源清单见页面「资料来源」。"
+              "本轮使用O*NET详情/工资/技术、BLS职业预测及方法、NBS2025表2/5和教育部具体法律政策。共享旧17来源与21facts为保护范围外消费者保留；九板块现行值以本轮ct-*源/事实及正文为准，旧FAQ、快速决策的旧期/旧口径冲突留待其授权修订。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.sources.source-card.2",
@@ -31417,7 +31403,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容检索与更新于 2026 年 9 月。"
+              "本轮九板块检索与修订：2026-10-09；未生成HTML或完整页面验收，不表示范围外内容同步更新。"
             ]
           },
           "id": "chemistry-teachers-postsecondary.sources.source-card.3",
@@ -31772,6 +31758,246 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET25-1052.00职业详情",
+                  "28任务、10基本/25可迁移技能、33知识、52能力、20风格、兴趣IS及情境；非中国法定条件"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "ct-details",
+                "limitation": "28任务、10基本/25可迁移技能、33知识、52能力、20风格、兴趣IS及情境；非中国法定条件",
+                "market": "美国",
+                "name": "O*NET25-1052.00职业详情",
+                "period": "当前页面；2026-10-09核",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/25-1052.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS表1.2职业预测",
+                  "SOC25-1052：24.9→25.4千、净0.6千、2.3%、空缺1.7千；舍入独立，非AI因果"
+                ],
+                "evidence_type": "official employment projection",
+                "id": "ct-ep2025",
+                "limitation": "SOC25-1052：24.9→25.4千、净0.6千、2.3%、空缺1.7千；舍入独立，非AI因果",
+                "market": "美国",
+                "name": "BLS表1.2职业预测",
+                "period": "2025—2035预测",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS OOH后中等教师（含化学分项）",
+                  "化学教师中位93250及2%分项；教育/兼职/机构行业说明为多学科父级，不能代化学分布"
+                ],
+                "evidence_type": "official occupation profile and wage statistics",
+                "id": "ct-ooh",
+                "limitation": "化学教师中位93250及2%分项；教育/兼职/机构行业说明为多学科父级，不能代化学分布",
+                "market": "美国",
+                "name": "BLS OOH后中等教师（含化学分项）",
+                "period": "工资2025年5月；预测2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "broader_occupation_proxy",
+                "url": "https://www.bls.gov/ooh/education-training-and-library/postsecondary-teachers.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET全国工资分位",
+                  "年薪五分位57870/68530/93250/127280/172110；无时薪展示，不套2080折算"
+                ],
+                "evidence_type": "official wage statistics",
+                "id": "ct-wages",
+                "limitation": "年薪五分位57870/68530/93250/127280/172110；无时薪展示，不套2080折算",
+                "market": "美国",
+                "name": "O*NET全国工资分位",
+                "period": "2025年5月OEWS",
+                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/25-1052.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "OEWS2025技术说明",
+                  "含全兼职，税前正常工时工资；教师按适用年工资报告，不等于个人总所得"
+                ],
+                "evidence_type": "official statistical methodology",
+                "id": "ct-methods",
+                "limitation": "含全兼职，税前正常工时工资；教师按适用年工资报告，不等于个人总所得",
+                "market": "美国",
+                "name": "OEWS2025技术说明",
+                "period": "方法说明，非工资期间",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "国家统计局2025城镇单位工资表2/5",
+                  "教育非私营133539/私营63908元均值，所有学段学科和非教师；非本职业/公民办高校对照"
+                ],
+                "evidence_type": "official industry wage statistics",
+                "id": "ct-nbs2025",
+                "limitation": "教育非私营133539/私营63908元均值，所有学段学科和非教师；非本职业/公民办高校对照",
+                "market": "中国大陆",
+                "name": "国家统计局2025城镇单位工资表2/5",
+                "period": "2025全年；2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中华人民共和国教师法",
+                  "第7、10—13条教学评价权、资格制度、法定学历和认定，不是雇主博士门槛"
+                ],
+                "evidence_type": "official law",
+                "id": "ct-teacher-law",
+                "limitation": "第7、10—13条教学评价权、资格制度、法定学历和认定，不是雇主博士门槛",
+                "market": "中国大陆",
+                "name": "中华人民共和国教师法",
+                "period": "现行公开法律原文，非统计期",
+                "publisher": "教育部政府门户网站",
+                "scope": "jurisdictional",
+                "url": "https://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/tnull_1314.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "教师资格条例",
+                  "第4、6—8、12—16条资格、学历、考试及认定，不是一律培训考试或学位自动取得"
+                ],
+                "evidence_type": "official administrative regulation",
+                "id": "ct-qual",
+                "limitation": "第4、6—8、12—16条资格、学历、考试及认定，不是一律培训考试或学位自动取得",
+                "market": "中国大陆",
+                "name": "教师资格条例",
+                "period": "现行公开条例原文，非统计期",
+                "publisher": "教育部政府门户网站",
+                "scope": "jurisdictional",
+                "url": "https://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyxzfg/202204/t20220422_620496.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "高等学校实验室安全规范",
+                  "教学科研实验实训、7/10—17责任及准入培训风险评估、23—28化学品和危废；非统一个人执照"
+                ],
+                "evidence_type": "official safety policy",
+                "id": "ct-lab2023",
+                "limitation": "教学科研实验实训、7/10—17责任及准入培训风险评估、23—28化学品和危废；非统一个人执照",
+                "market": "中国大陆",
+                "name": "高等学校实验室安全规范",
+                "period": "教科信厅函2023〔5〕，2023-02",
+                "publisher": "教育部",
+                "scope": "jurisdictional",
+                "url": "https://www.moe.gov.cn/srcsite/A16/moe_784/202302/W020230220303827581190.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "高等学校实验室安全分级分类管理办法（试行）",
+                  "第2条不含中试工业放大、15重大隐患、17项目风险，具体本校制度仍核"
+                ],
+                "evidence_type": "official safety policy",
+                "id": "ct-lab2024",
+                "limitation": "第2条不含中试工业放大、15重大隐患、17项目风险，具体本校制度仍核",
+                "market": "中国大陆",
+                "name": "高等学校实验室安全分级分类管理办法（试行）",
+                "period": "教科信2024〔4〕，2024-03-26",
+                "publisher": "教育部",
+                "scope": "jurisdictional",
+                "url": "https://www.moe.gov.cn/srcsite/A16/s7062/202404/t20240419_1126415.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "高等学校预防与处理学术不端行为办法（政府转载原文）",
+                  "第2/7/9/16/25—29科研及相关活动，学校受理处理、委员会调查认定，非普通作业统一程序；MOE原站本轮403后读政府全文"
+                ],
+                "evidence_type": "official departmental regulation",
+                "id": "ct-academic",
+                "limitation": "第2/7/9/16/25—29科研及相关活动，学校受理处理、委员会调查认定，非普通作业统一程序；MOE原站本轮403后读政府全文",
+                "market": "中国大陆",
+                "name": "高等学校预防与处理学术不端行为办法（政府转载原文）",
+                "period": "教育部令40号，2016-09-01施行",
+                "publisher": "教育部 / 北京市人民政府门户网站",
+                "scope": "jurisdictional",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/201905/t20190522_59345.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "NIST AI RMF1.0",
+                  "自愿治理参考，无职业采用率、效果或法定签署/评分权限"
+                ],
+                "evidence_type": "voluntary risk management framework",
+                "id": "ct-nist",
+                "limitation": "自愿治理参考，无职业采用率、效果或法定签署/评分权限",
+                "market": "美国/框架参考",
+                "name": "NIST AI RMF1.0",
+                "period": "2023版本",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET25-1052热门技术",
+                  "6Hot，4/2/2%，三项出现率未提供；完整详情另列LMS为In Demand，不是AI采用率"
+                ],
+                "evidence_type": "official presentation of job posting signals",
+                "id": "ct-hot",
+                "limitation": "6Hot，4/2/2%，三项出现率未提供；完整详情另列LMS为In Demand，不是AI采用率",
+                "market": "美国",
+                "name": "O*NET25-1052热门技术",
+                "period": "2025美国招聘样本",
+                "publisher": "O*NET OnLine / Lightcast",
+                "scope": "market_signal",
+                "url": "https://www.onetonline.org/link/hot_tech/25-1052.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET25-1052全国认证发现入口",
+                  "仅列NBPTS科学青春青年及LIUNA讲师两项；未核高校聘任认可、机构报考条件、费用及效力"
+                ],
+                "evidence_type": "credential discovery directory",
+                "id": "ct-cert",
+                "limitation": "仅列NBPTS科学青春青年及LIUNA讲师两项；未核高校聘任认可、机构报考条件、费用及效力",
+                "market": "美国",
+                "name": "O*NET25-1052全国认证发现入口",
+                "period": "2026-10-09访问",
+                "publisher": "O*NET OnLine / CareerOneStop",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/localcert/25-1052.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相邻职业O*NET职责原文",
+                  "另读11-9121/25-1054/19-1021/19-1029.02/17-2031/11-9033/19-2032；转岗距离为编辑条件判断，不是录用概率"
+                ],
+                "evidence_type": "official occupation profiles",
+                "id": "ct-adjacent",
+                "limitation": "另读11-9121/25-1054/19-1021/19-1029.02/17-2031/11-9033/19-2032；转岗距离为编辑条件判断，不是录用概率",
+                "market": "美国",
+                "name": "相邻职业O*NET职责原文",
+                "period": "当前页面；2026-10-09访问",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/19-2031.00"
               }
             ]
           },
@@ -32661,7 +32887,7 @@
               "entry": "link-17",
               "field": "url"
             },
-            "问题": "AI 能签署设计或放行文件吗？"
+            "问题": "AI能替代评分、学术处理或教学文件责任吗？"
           },
           {
             "回答": {
@@ -33223,6 +33449,24 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/tnull_1314.html",
+            "id": "ct-teacher-law",
+            "label": "中国教师法",
+            "scope": "法定学历、资格制度与教学权"
+          },
+          {
+            "href": "https://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyxzfg/202204/t20220422_620496.html",
+            "id": "ct-qual",
+            "label": "教师资格条例",
+            "scope": "考试适用与认定，非统一博士门槛"
+          },
+          {
+            "href": "https://www.moe.gov.cn/srcsite/A16/moe_784/202302/W020230220303827581190.pdf",
+            "id": "ct-lab2023",
+            "label": "高校实验室安全规范2023",
+            "scope": "培训考核、准入、项目安全责任"
           }
         ],
         "tracks": [
@@ -33983,8 +34227,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-summary"
+              "ct-details"
             ],
             "id": "teaching-alignment",
             "mitigation": {
@@ -34015,8 +34258,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-context"
+              "ct-details",
+              "ct-lab2023",
+              "ct-lab2024"
             ],
             "id": "lab-safety-oversight",
             "mitigation": {
@@ -34047,8 +34291,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-summary"
+              "ct-details",
+              "ct-teacher-law"
             ],
             "id": "grading-integrity",
             "mitigation": {
@@ -34079,8 +34323,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-context"
+              "ct-academic"
             ],
             "id": "student-data-integrity",
             "mitigation": {
@@ -34111,8 +34354,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-industry"
+              "ct-lab2023",
+              "ct-lab2024"
             ],
             "id": "chemical-inventory-waste",
             "mitigation": {
@@ -34143,8 +34386,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "ilo"
+              "ct-academic"
             ],
             "id": "research-integrity-funding",
             "mitigation": {
@@ -34278,6 +34520,36 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.onetonline.org/link/details/25-1052.00",
+            "id": "ct-details",
+            "label": "O*NET25-1052任务",
+            "scope": "美国职业描述，非中国资格权限"
+          },
+          {
+            "href": "https://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/tnull_1314.html",
+            "id": "ct-teacher-law",
+            "label": "中国教师法",
+            "scope": "教师教学评价权与资格制度"
+          },
+          {
+            "href": "https://www.moe.gov.cn/srcsite/A16/moe_784/202302/W020230220303827581190.pdf",
+            "id": "ct-lab2023",
+            "label": "高校实验室安全规范2023",
+            "scope": "中国教学科研实验准入、项目责任及危废"
+          },
+          {
+            "href": "https://www.moe.gov.cn/srcsite/A16/s7062/202404/t20240419_1126415.html",
+            "id": "ct-lab2024",
+            "label": "高校实验室分级分类2024",
+            "scope": "中国教学科研；不含中试工业放大"
+          },
+          {
+            "href": "https://www.beijing.gov.cn/zhengce/zhengcefagui/201905/t20190522_59345.html",
+            "id": "ct-academic",
+            "label": "教育部令40号学术不端办法",
+            "scope": "中国科研及相关活动的调查认定和保密"
           }
         ]
       },
@@ -34630,8 +34902,8 @@
             "type": "prose"
           },
           "fact_refs": [
-            "cn-industry-science-tech-2024",
-            "cn-industry-manufacturing-2024",
+            "ct-cn-education-nonprivate2025",
+            "ct-cn-education-private2025",
             "cn-professional-technical-2024",
             "cn-urban-nonprivate-2024"
           ],
@@ -34769,7 +35041,7 @@
             }
           },
           {
-            "fact_ref": "us-growth-2025-2035",
+            "fact_ref": "ct-growth2025",
             "指标": "就业 · 增长率",
             "数值": {
               "$item": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.21",
@@ -34785,7 +35057,7 @@
             }
           },
           {
-            "fact_ref": "us-openings-2025-2035",
+            "fact_ref": "ct-openings2025",
             "指标": "就业 · 年均职位空缺",
             "数值": {
               "$item": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.23",
@@ -34866,10 +35138,7 @@
         },
         "heading": "美国高校化学教师工资与就业数据？",
         "industry_heading": "不同行业的美国工资差多少？",
-        "industry_period": {
-          "$fact": "us-wage-2025",
-          "field": "period"
-        },
+        "industry_period": "2025年5月（职业缺口；父级背景另标）",
         "industry_rows": [
           {
             "fact_ref": "us-industry-wage-aerospace-mfg-2025",
@@ -35003,10 +35272,7 @@
           "type": "prose"
         },
         "outlook_heading": "美国就业前景",
-        "outlook_period": {
-          "$fact": "us-growth-2025-2035",
-          "field": "period"
-        },
+        "outlook_period": "2025—2035（预测）",
         "wage_column_labels": [
           "工资统计位置",
           "年工资参考",
@@ -35016,7 +35282,7 @@
         "wage_heading": "美国工资分布",
         "wage_tiers": [
           {
-            "equivalent": "官方折算，非个人月收入",
+            "equivalent": "年度工资统计，非个人起薪",
             "interpretation": {
               "$item": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
@@ -35044,7 +35310,7 @@
             }
           },
           {
-            "equivalent": "官方折算，非个人实发工资",
+            "equivalent": "年度工资统计，非个人实发所得",
             "interpretation": {
               "$item": "chemistry-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
@@ -35645,7 +35911,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 工资（2025 年 5 月）与就业预测（2024—2034 年）",
+            "label": "BLS工资（2025年5月）与职业预测（2025—2035）",
             "secondary_value": null,
             "value": {
               "$item": "chemistry-teachers-postsecondary.profile.onet-structured-fields-block.2",
@@ -35656,7 +35922,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中国大陆统计口径与缺口（本条路由不发布数值）",
+            "label": "中国精确职业工资缺口与教育行业背景",
             "secondary_value": null,
             "value": {
               "$item": "chemistry-teachers-postsecondary.profile.onet-structured-fields-block.3",
@@ -36951,6 +37217,90 @@
         "source_refs": [
           "onet-localwages"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "24,900人（2025）",
+        "fact_id": "ct-employment2025",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "高校化学教师",
+        "period": "2025",
+        "source_refs": [
+          "ct-ep2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "25,400人（2035预计）",
+        "fact_id": "ct-employment2035",
+        "market": "美国",
+        "measure": "预测就业规模",
+        "occupation_scope": "高校化学教师",
+        "period": "2035预测",
+        "source_refs": [
+          "ct-ep2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "增长2.3%（OOH整数2%，慢于平均）",
+        "fact_id": "ct-growth2025",
+        "market": "美国",
+        "measure": "就业增长率",
+        "occupation_scope": "高校化学教师",
+        "period": "2025—2035预测",
+        "source_refs": [
+          "ct-ep2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "官方净增约600人（独立舍入）",
+        "fact_id": "ct-change2025",
+        "market": "美国",
+        "measure": "净就业变化",
+        "occupation_scope": "高校化学教师",
+        "period": "2025—2035预测",
+        "source_refs": [
+          "ct-ep2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约1,700个/年",
+        "fact_id": "ct-openings2025",
+        "market": "美国",
+        "measure": "年均空缺流量",
+        "occupation_scope": "高校化学教师",
+        "period": "2025—2035预测",
+        "source_refs": [
+          "ct-ep2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "133,539元/年（教育行业均值）",
+        "fact_id": "ct-cn-education-nonprivate2025",
+        "market": "中国大陆",
+        "measure": "非私营单位就业人员年平均工资",
+        "occupation_scope": "教育行业全部学段学科和非教师",
+        "period": "2025全年",
+        "source_refs": [
+          "ct-nbs2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "63,908元/年（教育行业均值）",
+        "fact_id": "ct-cn-education-private2025",
+        "market": "中国大陆",
+        "measure": "私营单位就业人员年平均工资",
+        "occupation_scope": "教育行业全部学段学科和非教师",
+        "period": "2025全年",
+        "source_refs": [
+          "ct-nbs2025"
+        ]
       }
     ]
   },
@@ -36959,7 +37309,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "RIASEC · IS",
@@ -37010,7 +37360,7 @@
       "text": "高校化学教师"
     }
   },
-  "source_content_sha256": "c9dec9ade6882278b76d184e9a02040ae2ad4fb179d28da72e6de14f3a51fc27",
+  "source_content_sha256": "b845a6c04ce0bf6e0b5b4a6ab5a25b1928abc7ffad2617fddd05c96b4739c3b9",
   "subject": {
     "canonical_slug": "chemistry-teachers-postsecondary",
     "name": "高校化学教师",

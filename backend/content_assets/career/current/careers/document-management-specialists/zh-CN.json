@@ -35,6 +35,39 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:r5-current-china-jiaojiang-featured-daily-2026": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-employment": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-high": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-identity": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-amusement": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-education": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-theater": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-low": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-median": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-openings": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -1587,7 +1620,7 @@
         "status": "mapped"
       },
       "item:actors.path.credential-boundary.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.credential-decision.1": {
         "status": "mapped"
@@ -8971,20 +9004,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.05.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            {
-              "id": "project-data"
-            },
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.05.mitigation": {
         "ref": {
@@ -22669,12 +22690,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的工作对象是组织的文件与记录及其管理系统：政策与分类体系与元数据规范、业务与办公系统产生的电子内容与其格式与接口、密级与保存期限与销毁要求、用户与部门的访问与检索与分发需求、系统的功能与权限与版本与审计日志与备份，以及技术功能与规格与绩效数据。产出是让组织文件与记录可控可查可合规的管理结果：可执行的文档管理政策与分类体系、按规则配置的系统功能与访问权限与版本控制、可检索可追溯的电子资产与其元数据、保存期限与到期鉴定与销毁的记录，以及可核对的技术规格与绩效报告与交接。判断依据是文档管理政策与分类与元数据规范、密级与保存期限与法规要求、本组织制度与授权规则，而不是个人习惯或岗位名称。"
+              "本职业的工作对象是组织的文件与记录及其管理系统：政策与分类体系与元数据规范、业务与办公系统产生的电子内容与其格式与接口、密级与保存期限与销毁要求、用户与部门的访问与检索与分发需求、系统的功能与权限与版本与审计日志与备份，以及技术功能与规格；部分岗位另涉及绩效数据。产出是让组织文件与记录可控可查可合规的管理结果：可执行的文档管理政策与分类体系、按规则配置的系统功能与访问权限与版本控制、可检索可追溯的电子资产与其元数据、保存期限与到期鉴定与销毁的记录，以及可核对的技术规格与交接；部分岗位另产出系统绩效报告。判断依据是文档管理政策与分类与元数据规范、密级与保存期限与法规要求、本组织制度与授权规则，而不是个人习惯或岗位名称。"
             ]
           },
           "id": "actors.profile.work-context-block.1",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -22767,12 +22788,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "环境与节奏：以室内受控环境与屏幕与系统为主并与多方协作；每天使用电子邮件 100%、每天电话交谈 74%、每天面对面讨论 59%、与他人持续接触 16%（另 47% 大部分时间接触）；团队协作「极其重要」33%，决策自由度「很大」20%，精确或准确「极其重要」35%，每天面对时间压力 20%，每天作出决定 16%，工作时间「规律（固定日程）」95%，持续坐着 35%（另 50% 超过一半时间），与外部客户或公众打交道「非常重要」26%。"
+              "O*NET57情境：邮件每天100/电话74/面对面59，持续接触16/大部分47/半时37；团队极重要33/非常56；准确极重要35/非常45；日严格期限20/每周40；日决策16；持续坐35/超过半时50；规律95；每周40小时79/超过40为21；室内受控每天61/从不22。调查不证明每人常加班或大量陌生人沟通；公众服务26非常重要、37重要。自动化28高度/44中等/28略有非GenAI采用。实际节点加班、值班及流程需核具体雇主。"
             ]
           },
           "id": "actors.profile.work-context-block.8",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -22781,12 +22803,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "文档管理专员的工作可分成三类相连但独立的工作面。第一类是制度与分类与需求：参与确定文档管理政策，建立文档与内容分类体系以支持信息捕获与检索，按密级与功能与元数据识别与分类文档，并开展需求评估以识别部门与最终用户的文档管理要求，编写标准与最佳实践与系统使用规程。第二类是系统与配置与捕获：与其他信息技术专业人员协同实施电子文档处理与检索与分发系统，评估与采购与部署新系统，配置用户界面与访问配置文件与文档工作流，实施访问权限与版本控制，操作数据捕获技术（含扫描与影像与自动数据录入）把数字化文档导入系统，并对文档处理与复制与分发与存储与归档实施安全监督。第三类是检索与合规与支持：在授权范围内从库中检索电子资产并分发给用户，就电子内容访问问题咨询最终用户并提供支持文档与培训材料，监控法规动态与保存期限并按期组织鉴定与销毁，编写系统测试计划与技术功能与规格，分析并解释系统绩效数据。三类工作面都在政策与分类体系、密级与保存期限、本组织制度与授权规则内推进。"
+              "文档管理专员的工作可分成三类相连但独立的工作面。第一类是制度与分类与需求：参与确定文档管理政策，建立文档与内容分类体系以支持信息捕获与检索，按密级与功能与元数据识别与分类文档，并开展需求评估以识别部门与最终用户的文档管理要求，编写标准与最佳实践与系统使用规程。第二类是系统与配置与捕获：与其他信息技术专业人员协同实施电子文档处理与检索与分发系统，协助评估与采购与部署新系统，配置用户界面与访问配置文件与文档工作流，实施访问权限与版本控制，操作数据捕获技术（含扫描与影像与自动数据录入）把数字化文档导入系统，并对文档处理与复制与分发与存储与归档实施安全监督。第三类是检索与合规与支持：在授权范围内从库中检索电子资产并分发给用户，就电子内容访问问题咨询最终用户并提供支持文档与培训材料，监控法规动态与保存期限并按期组织鉴定与销毁，编写系统测试计划与技术功能与规格，部分岗位还分析并解释系统绩效数据（补充任务）。三类工作面都在政策与分类体系、密级与保存期限、本组织制度与授权规则内推进。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.answer",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -22921,12 +22943,19 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本表把本页职业与相邻岗位按核心目的、主要对象与依据、核心过程、主要产出、责任主体、协作与督导、结论边界七项逐一对照：本页职业（O*NET-SOC 15-1299.03）是文档与记录管理岗位，负责政策与分类与元数据、系统功能与权限与版本、捕获与检索与分发、保存期限与销毁与留痕；计算机与信息系统经理（11-3021.00）负责信息技术的整体战略与预算与团队与系统组合；行政服务经理（11-3012.00）负责机构行政事务与设施与采购与记录服务的统筹管理；合规经理（11-9199.02）负责合规体系与监管沟通与违规调查；管理咨询分析师（13-1111.00）面向组织问题提供分析方法与建议；计算机系统分析师（15-1211.00）负责系统需求与设计与实施衔接；档案管理员（25-4011.00）负责档案的典藏与鉴定与编研与提供利用。比较时要以岗位职责、本组织制度与所在法域法规逐项核对，不能按岗位名称互换，也不能把文档与记录管理职责读成信息技术管理权、法务与合规判断权、安全运营权或档案典藏职能。"
+              "O*NET15-1299.03实施管理企业文档系统和规程，捕获存储检索共享销毁电子记录。23任务中22Core/1Supplemental，系统绩效数据分析解释传播是补充，不当全部岗位必做。政策/分类、新系统评估采购部署为协助参与，配置访问和版本控制、捕获、检索、需求、测试、法规跟踪和用户支持为核心。监控法规不自动给法务裁决权；任务与邻职可交叉，不能一律排除档案工作、系统开发配置或技术职责，只按主要产出/授权区分。 行政服务经理以记录信息/邮件等支持统筹，设施与采购不是仅凭该定义所有岗位必做；邻职任务有交叉，责任依授权而非名称排除。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "agent",
+            "announcing",
+            "art",
+            "dancing",
+            "directing",
+            "r5-archivists"
           ],
           "type": "prose"
         },
@@ -23313,12 +23342,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按本组织制度与法规要求执行：涉密文件与密级管理、个人信息与商业秘密保护、网络与数据安全要求须符合《中华人民共和国保守国家秘密法》《中华人民共和国网络安全法》《中华人民共和国数据安全法》《中华人民共和国个人信息保护法》与本组织制度；档案与电子档案按《中华人民共和国档案法》管理，电子档案应当来源可靠、程序规范、要素合规；档案损毁、信息泄露与安全隐患须按规定上报，不得隐瞒或延迟。具体合规要求以所在法域法规与本组织制度为准，本页按法规名称与一般要求引用而未逐条核对条文编号。"
+              "中国档案法2020修订、2021-01-01施行：11条专业知识技能/可按规定评职称非统一资格证；21条禁擅销。36—39条系统衔接、电子档案来源可靠/程序规范/要素合规及凭证效力、数字化原件保管、移交和接收检测；44条安全隐患及时补救、损毁泄露及时向档案主管部门报告，个人按机构授权协作。电子记录并非一律已归档档案，按范围和适用主体核。 2024国家档案局22号电子档案管理办法（11-01施行）：3/5/14/16—19条来源程序要素、元数据全过程、归档范围/期限、检测及责任人确认；26—28条备份/迁移制度与转换后检测；29/30条到期鉴定、继续保存重划期限、履行审批后才销毁并记录，不能到期自动删。35条提出AI等用于编研/展览/专题数据库开发，不证明本职业部署率/效益或AI自动授权。 个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.04.answer",
           "source_refs": [
-            "onet"
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current",
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -23341,12 +23373,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按本组织制度记录并维护技术功能与规格与系统绩效数据，按保存期限组织到期鉴定并形成鉴定意见与销毁清册；记录应与系统日志与审批单据一致，便于复核与交接；会计档案等专门档案按《会计档案管理办法》等专门规定执行。"
+              "财政部国家档案局79号办法（2016-01-01施行），适用会计档案不是所有企业文件。8/9条电子单套保存有具体条件，不能一律扫描后销纸；12条移交电子及元数据/特殊格式平台和接收检测。14/15条永久与定期10/30年、年度终了次日起、附表规定最低期限；16—18条到期鉴定/续存/清册/签署/共同监销，19条未结清债权债务及其他未了事项凭证不得销毁。预算计划制度文书按28条不适用本办法。 系统绩效数据是O*NET补充任务，不能所有岗位一律强加。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.05.answer",
           "source_refs": [
-            "onet"
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23383,12 +23419,12 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "核心产出：可执行的文档管理政策与分类与元数据规范、按规则配置的系统功能与权限与版本控制记录、数字化与数据捕获与安全监督记录、检索与分发记录与支持文档与培训材料、保存期限与鉴定与销毁记录、系统测试计划与技术功能与规格与绩效分析，以及待办与异常交接记录。"
+              "核心产出：可执行的文档管理政策与分类与元数据规范、按规则配置的系统功能与权限与版本控制记录、数字化与数据捕获与安全监督记录、检索与分发记录与支持文档与培训材料、保存期限与鉴定与销毁记录、系统测试计划与技术功能与规格；部分岗位另有系统绩效分析，以及待办与异常交接记录。"
             ]
           },
           "id": "actors.display.responsibilities_block.02",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23397,12 +23433,12 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "典型流程：参与确定政策与建立分类—协同实施与配置系统与权限与版本—抓捕获与数字化—检索与分发并提供支持—监控法规与保存期限并组织鉴定与销毁—编写规格与分析绩效并交接。"
+              "典型流程：参与确定政策与建立分类—协同实施与配置系统与权限与版本—抓捕获与数字化—检索与分发并提供支持—监控法规与保存期限并组织鉴定与销毁—编写规格并交接；系统绩效分析为部分岗位补充任务。"
             ]
           },
           "id": "actors.display.responsibilities_block.03",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23439,12 +23475,16 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "责任边界：本职业承担政策参与与分类与系统配置与权限与版本与捕获与检索与分发与期限与销毁的执行责任；不凭印象给权限或改动版本、不跳过元数据与分类要求、不擅自扩大检索复制与分发范围、不把涉密与个人信息内容带出批准环境、不隐瞒或延迟上报档案损毁与信息泄露与安全隐患，越权与安全事项立即上报。"
+              "O*NET15-1299.03实施管理企业文档系统和规程，捕获存储检索共享销毁电子记录。23任务中22Core/1Supplemental，系统绩效数据分析解释传播是补充，不当全部岗位必做。政策/分类、新系统评估采购部署为协助参与，配置访问和版本控制、捕获、检索、需求、测试、法规跟踪和用户支持为核心。监控法规不自动给法务裁决权；任务与邻职可交叉，不能一律排除档案工作、系统开发配置或技术职责，只按主要产出/授权区分。 2024国家档案局22号电子档案管理办法（11-01施行）：3/5/14/16—19条来源程序要素、元数据全过程、归档范围/期限、检测及责任人确认；26—28条备份/迁移制度与转换后检测；29/30条到期鉴定、继续保存重划期限、履行审批后才销毁并记录，不能到期自动删。35条提出AI等用于编研/展览/专题数据库开发，不证明本职业部署率/效益或AI自动授权。"
             ]
           },
           "id": "actors.display.responsibilities_block.06",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current"
           ],
           "type": "prose"
         },
@@ -23467,12 +23507,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "以室内受控环境与屏幕与系统为主并与多方协作：每天使用电子邮件 100%，每天电话交谈 74%，每天面对面讨论 59%，与他人持续接触 16%（另 47% 大部分时间接触）；团队协作「极其重要」33%（另 56% 非常重要），决策自由度「很大」20%（另 45% 一些、30% 有限），精确或准确「极其重要」35%（另 45% 非常重要），每天面对时间压力 20%，每天作出决定 16%，工作时间「规律（固定日程）」95%，持续坐着 35%（另 50% 超过一半时间），与外部客户或公众打交道「非常重要」26%。"
+              "O*NET57情境：邮件每天100/电话74/面对面59，持续接触16/大部分47/半时37；团队极重要33/非常56；准确极重要35/非常45；日严格期限20/每周40；日决策16；持续坐35/超过半时50；规律95；每周40小时79/超过40为21；室内受控每天61/从不22。调查不证明每人常加班或大量陌生人沟通；公众服务26非常重要、37重要。自动化28高度/44中等/28略有非GenAI采用。实际节点加班、值班及流程需核具体雇主。"
             ]
           },
           "id": "actors.display.work_context_block.summary",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23523,12 +23564,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作时间「规律（固定日程）」95%，但系统上线与迁移与审计与记录到期节点常需加班；节奏由项目节点与用户请求与合规期限决定。"
+              "O*NET57情境：邮件每天100/电话74/面对面59，持续接触16/大部分47/半时37；团队极重要33/非常56；准确极重要35/非常45；日严格期限20/每周40；日决策16；持续坐35/超过半时50；规律95；每周40小时79/超过40为21；室内受控每天61/从不22。调查不证明每人常加班或大量陌生人沟通；公众服务26非常重要、37重要。自动化28高度/44中等/28略有非GenAI采用。实际节点加班、值班及流程需核具体雇主。"
             ]
           },
           "id": "actors.display.work_context_block.schedule",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23551,12 +23593,14 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "复核方式含分类与元数据抽查、权限与版本与审计日志核对、捕获与检索与分发留痕检查、保存期限与鉴定与销毁清册与审批复核、技术规格与绩效数据核对；档案损毁与信息泄露与安全隐患按规定上报。"
+              "编辑建议核分类/元数据/权限/日志和交接；实际机构程序未采。2024国家档案局22号电子档案管理办法（11-01施行）：3/5/14/16—19条来源程序要素、元数据全过程、归档范围/期限、检测及责任人确认；26—28条备份/迁移制度与转换后检测；29/30条到期鉴定、继续保存重划期限、履行审批后才销毁并记录，不能到期自动删。35条提出AI等用于编研/展览/专题数据库开发，不证明本职业部署率/效益或AI自动授权。"
             ]
           },
           "id": "actors.display.work_context_block.review",
           "source_refs": [
-            "onet"
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current"
           ],
           "type": "prose"
         },
@@ -23593,12 +23637,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 15-1299.03（细类口径）：准备层级 Job Zone Four（SVP 7.0 至 <8.0），兴趣代码 CI；页面标注 Bright Outlook、Updated 2026，任务共 23 项；就业与预测与工资取自父类 Computer Occupations, All Other（15-1299）：2024 年就业约 472,000 人、2024—2034 年预测为「远高于平均（7% 或更高）」、预计空缺 31,300。"
+              "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。 O*NET细类JZ4/SVP7至<8，准备组通常需数年相关经验、在岗和/或职业训练，不是几周/几月统一课程即可入行。60%学士/15%硕士/10%副学士是新入职所需学历受访反馈，不是60%岗位/雇主或员工学历。BLS父类典型本科/相关经验None/典型OJT None不能覆盖细类组级准备要求；None非免培训。未逐核中国现行准入目录/美国全部州要求，不宣称全国免照或统一必考证。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.onet",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -23607,12 +23653,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "工资为 BLS 2025 年工资数据的父类（Computer Occupations, All Other）口径：中位 116,580 美元/年（56.05 美元/时）；年度分位 55,940／79,370／116,580／157,500／188,470 美元；小时分位 26.89／38.16／56.05／75.72／90.61 美元。该口径不是 15-1299.03 单职业精确值，本页据实标注为父类代理口径。"
+              "美国父类15-1299其他计算机职业，2025全国10/25/50/75/90分位：年55,940/79,370/116,580/157,500/188,470美元；时26.89/38.16/56.05/75.72/90.61美元。不是文档管理细类15-1299.03精确工资。OEWS直时税前受雇口径含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不排全部项目受雇奖金/合同雇员。分位不等起薪/年限/到手/上限，年度官方统计不凭个人工时另造。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
           "source_refs": [
-            "onet"
+            "bls",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -23621,12 +23668,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "主要行业为信息与技术服务、金融与保险、医疗与教育、公共管理与制造等依赖大量电子记录的组织；常见岗位含记录经理、文档控制经理、电子内容经理、记录系统分析师、企业内容管理顾问等，多为需数年相关经验的专业岗位。"
+              "O*NET2025父类15-1299行业份额：专业科学技术服务26%、政府22%、信息10%，不是文档管理细类行业占比或工资。细行业工资及具体组织岗位分布本轮未取得。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23635,12 +23683,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆相关要求按制度与法规区分：文件与记录与电子档案管理按《中华人民共和国档案法》（2020 年修订，2021 年 1 月 1 日施行）执行，电子档案应当来源可靠、程序规范、要素合规；会计档案按《会计档案管理办法》（财政部 国家档案局令第 79 号）执行；涉密文件与密级管理、网络与数据与个人信息安全分别按《中华人民共和国保守国家秘密法》《中华人民共和国网络安全法》《中华人民共和国数据安全法》《中华人民共和国个人信息保护法》等执行。本条按法规名称与一般要求引用，未逐条核对条文编号。"
+              "中国档案法2020修订、2021-01-01施行：11条专业知识技能/可按规定评职称非统一资格证；21条禁擅销。36—39条系统衔接、电子档案来源可靠/程序规范/要素合规及凭证效力、数字化原件保管、移交和接收检测；44条安全隐患及时补救、损毁泄露及时向档案主管部门报告，个人按机构授权协作。电子记录并非一律已归档档案，按范围和适用主体核。 2024国家档案局22号电子档案管理办法（11-01施行）：3/5/14/16—19条来源程序要素、元数据全过程、归档范围/期限、检测及责任人确认；26—28条备份/迁移制度与转换后检测；29/30条到期鉴定、继续保存重划期限、履行审批后才销毁并记录，不能到期自动删。35条提出AI等用于编研/展览/专题数据库开发，不证明本职业部署率/效益或AI自动授权。 财政部国家档案局79号办法（2016-01-01施行），适用会计档案不是所有企业文件。8/9条电子单套保存有具体条件，不能一律扫描后销纸；12条移交电子及元数据/特殊格式平台和接收检测。14/15条永久与定期10/30年、年度终了次日起、附表规定最低期限；16—18条到期鉴定/续存/清册/签署/共同监销，19条未结清债权债务及其他未了事项凭证不得销毁。预算计划制度文书按28条不适用本办法。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
           "source_refs": [
-            "onet"
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current"
           ],
           "type": "prose"
         },
@@ -23649,12 +23699,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "本页不使用演员工会或影视行业口径；来源与使用边界见来源登记。"
+              "35软件类含内容工作流、文档管理、OCR、数据库和开发等，不等GenAI。Hot2025关联细类全部唯一美国招聘帖30关键词：Office28/Excel27/Outlook13/PowerPoint13/Word12/SharePoint11%、Access3/Visio2/AutoCAD2/Acrobat1/SolidWorks1，Project/Windows/HTML<1，其余比例Not available非0。非实际采用率/效果；OCR、普通检索、去重与自动工作流和GenAI分开。无具体工具功能/效率减错/采用/替代或工资就业因果，ILO2025未核本细类ISCO映射分数；NIST AI RMF1.0自愿框架不授法规/销毁权。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
           "source_refs": [
-            "onet"
+            "r2-ai",
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -23663,12 +23715,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页精确对应美国 O*NET 15-1299.03 Document Management Specialists（文档管理专员）：实施与管理企业级文档管理系统及相关规程，使组织能够捕获、存储、检索、共享和销毁电子记录与文档；工作含参与确定文档管理政策、建立分类体系、协同实施电子文档处理与检索与分发系统、按密级与功能与元数据识别与分类文档、制定与维护标准与最佳实践与系统使用规程、评估与采购与部署新系统、管理访问权限与版本控制、记录官方文件变更并与法务与合规及记录管理人员确认、编写与执行系统测试计划、跟踪法规动态以保持合规、实施扫描与自动数据录入与数字化、对文档处理与复制与分发与存储与归档实施安全监督、开展需求评估与配置系统功能、编写支持文档与培训材料、分析并解释系统绩效数据；属文档与记录管理岗位，不含图书馆与档案库房的典藏与读者服务、信息技术部门的整体战略与团队管理、合规与法务判断、管理咨询、软件开发、数据库内核运维与信息安全攻防。"
+              "O*NET15-1299.03实施管理企业文档系统和规程，捕获存储检索共享销毁电子记录。23任务中22Core/1Supplemental，系统绩效数据分析解释传播是补充，不当全部岗位必做。政策/分类、新系统评估采购部署为协助参与，配置访问和版本控制、捕获、检索、需求、测试、法规跟踪和用户支持为核心。监控法规不自动给法务裁决权；任务与邻职可交叉，不能一律排除档案工作、系统开发配置或技术职责，只按主要产出/授权区分。"
             ]
           },
           "id": "actors.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         }
@@ -24136,13 +24189,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以下为基于职业任务与工作情境的有限编辑推演，并非该职业的实际部署证据：AI 与信息系统在文档与记录管理里主要辅助分类与元数据建议、光学字符识别与批量捕获、检索与去重与版本比对、权限与访问异常提示、保存期限与到期提醒以及绩效与台账汇总。"
+              "35软件类含内容工作流、文档管理、OCR、数据库和开发等，不等GenAI。Hot2025关联细类全部唯一美国招聘帖30关键词：Office28/Excel27/Outlook13/PowerPoint13/Word12/SharePoint11%、Access3/Visio2/AutoCAD2/Acrobat1/SolidWorks1，Project/Windows/HTML<1，其余比例Not available非0。非实际采用率/效果；OCR、普通检索、去重与自动工作流和GenAI分开。无具体工具功能/效率减错/采用/替代或工资就业因果，ILO2025未核本细类ISCO映射分数；NIST AI RMF1.0自愿框架不授法规/销毁权。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24151,13 +24203,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采用取决于本组织的系统集成与授权规则、数据准确性与完整性、以及是否完成验证与培训，尤其在涉及涉密与个人信息与合规环节时。"
+              "编辑采用核查：组织系统集成、真实权限、数据质量和用途验证培训是否满足？本轮无代表性采用机制调查，不称这些因素已决定采用。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24166,13 +24217,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "分类与元数据建议可提高效率，但密级与保存期限与分类口径仍须由文档管理专员与法务合规与记录管理人员确认。"
+              "编辑拟试分类建议，效率提升未核；密级/期限和口径由授权职能核。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.3",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24181,13 +24233,17 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "光学字符识别与批量捕获可减少录入差错，但来源可靠与要素合规与原件保管仍须按制度核对。"
+              "OCR/批捕具体准确率须实测，原件和归档条件依法核，不称已减少录入错。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.4",
           "source_refs": [
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current",
             "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24196,28 +24252,29 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "检索与版本比对可辅助定位与追溯，但访问与复制与分发仍须在授权范围内由人确认并留痕。"
+              "条件试用：若具体获准系统有经过验证的检索或版本比对能力，可探索定位追溯；功能、效果及审批方式需另核，不称全部访问必须逐笔人工。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current",
+            "sag-moa"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "到期鉴定与销毁（尤其涉密与会计与未了事项档案）需要程序判断与多岗监销，难以完全交给系统。"
+              "电子档案22号29/30条要求到期鉴定、继续保存时重划期限、依法履行销毁审批并记录；会计档案79号17/18条清册签署和共同监销，电子会计档案另有信息系统机构参与，19条未了事项凭证不得销毁。共同监销不推广为全部普通文档规则；不能凭责任划分断言技术不可替代。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-electronic-current",
+            "r5-account-current"
           ],
           "type": "prose"
         },
@@ -24226,13 +24283,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "组织文件与用户与个人信息与涉密内容属于敏感信息，只能在批准的系统内按最小必要原则处理并留痕。"
+              "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -24256,13 +24312,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "国际劳工组织等研究把「任务暴露」与「实际采用、岗位增减」分开；本页没有本职业的采用率、裁员率或因果就业证据，这些数字保持未知，须以具体组织与岗位验证。"
+              "35软件类含内容工作流、文档管理、OCR、数据库和开发等，不等GenAI。Hot2025关联细类全部唯一美国招聘帖30关键词：Office28/Excel27/Outlook13/PowerPoint13/Word12/SharePoint11%、Access3/Visio2/AutoCAD2/Acrobat1/SolidWorks1，Project/Windows/HTML<1，其余比例Not available非0。非实际采用率/效果；OCR、普通检索、去重与自动工作流和GenAI分开。无具体工具功能/效率减错/采用/替代或工资就业因果，ILO2025未核本细类ISCO映射分数；NIST AI RMF1.0自愿框架不授法规/销毁权。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.9",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24286,13 +24341,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 可辅助分类与元数据建议、光学字符识别与批量捕获、检索与去重与版本比对与到期提醒，但不能替代密级与保存期限判断、授权范围内的访问与分发、涉密与个人信息处理、到期鉴定与销毁程序与合规责任。"
+              "编辑试用分类/元数据草稿及支持问答；具体工具/授权须核，OCR与普通检索不直接当GenAI。35软件类含内容工作流、文档管理、OCR、数据库和开发等，不等GenAI。Hot2025关联细类全部唯一美国招聘帖30关键词：Office28/Excel27/Outlook13/PowerPoint13/Word12/SharePoint11%、Access3/Visio2/AutoCAD2/Acrobat1/SolidWorks1，Project/Windows/HTML<1，其余比例Not available非0。非实际采用率/效果；OCR、普通检索、去重与自动工作流和GenAI分开。无具体工具功能/效率减错/采用/替代或工资就业因果，ILO2025未核本细类ISCO映射分数；NIST AI RMF1.0自愿框架不授法规/销毁权。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24316,13 +24374,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业档案（任务与工作情境）"
+              "2025招聘软件关键词"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.1.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24331,13 +24388,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅适用于美国 15-1299.03 的任务与情境描述，不映射中国岗位或组织制度。"
+              "只支持所述文档范围，无机构实际部署/GenAI效果实采。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.1.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24346,13 +24402,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS OEWS 工资与就业统计"
+              "ILO2025任务暴露研究"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24361,13 +24416,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅适用于所列职业与期间，不提供自动化或替代结论。"
+              "只支持所述文档范围，无机构实际部署/GenAI效果实采。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24376,13 +24430,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 治理与风险管理来源"
+              "O*NET细类任务情境"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24391,13 +24445,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "治理原则供参考：透明、隐私、人工监督与留痕。"
+              "O*NET15-1299.03实施管理企业文档系统和规程，捕获存储检索共享销毁电子记录。23任务中22Core/1Supplemental，系统绩效数据分析解释传播是补充，不当全部岗位必做。政策/分类、新系统评估采购部署为协助参与，配置访问和版本控制、捕获、检索、需求、测试、法规跟踪和用户支持为核心。监控法规不自动给法务裁决权；任务与邻职可交叉，不能一律排除档案工作、系统开发配置或技术职责，只按主要产出/授权区分。 O*NET57情境：邮件每天100/电话74/面对面59，持续接触16/大部分47/半时37；团队极重要33/非常56；准确极重要35/非常45；日严格期限20/每周40；日决策16；持续坐35/超过半时50；规律95；每周40小时79/超过40为21；室内受控每天61/从不22。调查不证明每人常加班或大量陌生人沟通；公众服务26非常重要、37重要。自动化28高度/44中等/28略有非GenAI采用。实际节点加班、值班及流程需核具体雇主。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24406,13 +24460,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不提供本职业采用率、替代概率或时间表。"
+              "只支持所述文档范围，无机构实际部署/GenAI效果实采。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24421,13 +24475,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业与用工结构来源"
+              "OEWS2025父类工资"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24436,13 +24490,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "说明本职业岗位分布在信息与技术服务、金融与保险、医疗与教育、公共管理与制造等依赖大量电子记录的组织。"
+              "美国父类15-1299其他计算机职业，2025全国10/25/50/75/90分位：年55,940/79,370/116,580/157,500/188,470美元；时26.89/38.16/56.05/75.72/90.61美元。不是文档管理细类15-1299.03精确工资。OEWS直时税前受雇口径含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不排全部项目受雇奖金/合同雇员。分位不等起薪/年限/到手/上限，年度官方统计不凭个人工时另造。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24451,13 +24505,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用工结构不等于个人录用或收入保证。"
+              "只支持所述文档范围，无机构实际部署/GenAI效果实采。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24466,13 +24520,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合（本页说明与练习设计）"
+              "NIST AI RMF1.0"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24481,13 +24534,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅用于整理本页的说明与练习边界。"
+              "35软件类含内容工作流、文档管理、OCR、数据库和开发等，不等GenAI。Hot2025关联细类全部唯一美国招聘帖30关键词：Office28/Excel27/Outlook13/PowerPoint13/Word12/SharePoint11%、Access3/Visio2/AutoCAD2/Acrobat1/SolidWorks1，Project/Windows/HTML<1，其余比例Not available非0。非实际采用率/效果；OCR、普通检索、去重与自动工作流和GenAI分开。无具体工具功能/效率减错/采用/替代或工资就业因果，ILO2025未核本细类ISCO映射分数；NIST AI RMF1.0自愿框架不授法规/销毁权。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24496,13 +24548,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合不是外部事实、资格、法规或工资证据。"
+              "只支持所述文档范围，无机构实际部署/GenAI效果实采。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24556,13 +24607,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先限定在分类与元数据建议、光学字符识别与批量捕获、检索与去重与版本比对与到期提醒等可复核环节。"
+              "先试非操作性支持文稿/元数据草稿；按实际系统实测，自动检索/OCR与GenAI分开。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24631,13 +24683,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能；权限与销毁由文档管理政策与本组织制度与保存期限与审批程序决定。"
+              "模型输出不自带权限。是否允许经验证、获组织授权的自动化执行特定访问或处置步骤，按适用对象和真实制度核；电子及会计档案须完成其法定鉴定、审批、监销等具体程序，不将全部普通文档一律禁止自动化。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-electronic-current",
+            "r5-account-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24661,13 +24714,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只在批准的系统内按最小必要处理，不用于工作以外用途，并按制度留痕并接受审计。"
+              "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.6.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -24691,13 +24743,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用可比批次的分类一致率、检索召回与去重准确与返工与用户投诉量做前后对照，并保留人工复核记录。"
+              "编辑评估可比批次分类/召回/去重/返工，先定口径核样本难度与审核人变化；前后差异不单独证明AI因果。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.7.answer",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24736,13 +24789,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合"
+              "官方招聘技术关键词"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24751,13 +24803,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅用于本页 AI 边界的说明，不代表采用率或替代结论。"
+              "35软件类含内容工作流、文档管理、OCR、数据库和开发等，不等GenAI。Hot2025关联细类全部唯一美国招聘帖30关键词：Office28/Excel27/Outlook13/PowerPoint13/Word12/SharePoint11%、Access3/Visio2/AutoCAD2/Acrobat1/SolidWorks1，Project/Windows/HTML<1，其余比例Not available非0。非实际采用率/效果；OCR、普通检索、去重与自动工作流和GenAI分开。无具体工具功能/效率减错/采用/替代或工资就业因果，ILO2025未核本细类ISCO映射分数；NIST AI RMF1.0自愿框架不授法规/销毁权。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24766,13 +24817,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "北美行业口径（不适用于本职业）"
+              "ILO全球任务暴露研究"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24781,13 +24831,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用演员工会或影视行业口径，仅登记其不适用。"
+              "35软件类含内容工作流、文档管理、OCR、数据库和开发等，不等GenAI。Hot2025关联细类全部唯一美国招聘帖30关键词：Office28/Excel27/Outlook13/PowerPoint13/Word12/SharePoint11%、Access3/Visio2/AutoCAD2/Acrobat1/SolidWorks1，Project/Windows/HTML<1，其余比例Not available非0。非实际采用率/效果；OCR、普通检索、去重与自动工作流和GenAI分开。无具体工具功能/效率减错/采用/替代或工资就业因果，ILO2025未核本细类ISCO映射分数；NIST AI RMF1.0自愿框架不授法规/销毁权。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24796,13 +24845,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "北美行业口径（不适用于本职业）"
+              "美国精确职业档案"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24811,13 +24860,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用该口径，仅登记其不适用。"
+              "O*NET15-1299.03实施管理企业文档系统和规程，捕获存储检索共享销毁电子记录。23任务中22Core/1Supplemental，系统绩效数据分析解释传播是补充，不当全部岗位必做。政策/分类、新系统评估采购部署为协助参与，配置访问和版本控制、捕获、检索、需求、测试、法规跟踪和用户支持为核心。监控法规不自动给法务裁决权；任务与邻职可交叉，不能一律排除档案工作、系统开发配置或技术职责，只按主要产出/授权区分。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24826,13 +24875,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业发布口径（不适用于本职业）"
+              "认证查询入口"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "ratify"
           ],
           "type": "prose"
         },
@@ -24841,13 +24889,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用该口径，仅登记其不适用。"
+              "认证查询不能证明全国免照、就业或机构制度。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "ratify"
           ],
           "type": "prose"
         },
@@ -24856,13 +24903,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "官方统计"
+              "官方父类工资和就业预测"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -24871,13 +24919,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅按 BLS/OEWS 2025 年工资与 O*NET 2024—2034 年预测口径使用（工资与就业为父类 Computer Occupations, All Other 口径）。"
+              "美国父类15-1299其他计算机职业，2025全国10/25/50/75/90分位：年55,940/79,370/116,580/157,500/188,470美元；时26.89/38.16/56.05/75.72/90.61美元。不是文档管理细类15-1299.03精确工资。OEWS直时税前受雇口径含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不排全部项目受雇奖金/合同雇员。分位不等起薪/年限/到手/上限，年度官方统计不凭个人工时另造。 BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -24991,13 +25040,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助分类与元数据建议与需求文本整理"
+              "编辑待验证场景：分类与元数据建议；具体系统能力、准确性及效果需另核，普通OCR/检索/工作流不当然是GenAI。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.1.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25051,13 +25100,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助配置模板与权限规则与版本比对建议"
+              "编辑待验证场景：配置模板或权限规则检查；具体系统能力、准确性及效果需另核，普通OCR/检索/工作流不当然是GenAI。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.2.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25111,13 +25160,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助光学字符识别与批量捕获与异常提示"
+              "编辑待验证场景：OCR批量捕获异常提示；具体系统能力、准确性及效果需另核，普通OCR/检索/工作流不当然是GenAI。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25171,13 +25220,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助检索与去重与引用汇总与支持问答"
+              "编辑待验证场景：授权检索与引用整理；具体系统能力、准确性及效果需另核，普通OCR/检索/工作流不当然是GenAI。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25186,13 +25235,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "访问与复制与分发授权与对外口径由人确认。"
+              "访问、复制、分发需真实授权；是否逐笔人工确认按适用规定与组织制度，不把全部访问一律设为人工操作。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current",
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -25231,13 +25280,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助到期提醒与清单生成与台账汇总"
+              "编辑待验证场景：到期提醒与台账整理；具体系统能力、准确性及效果需另核，普通OCR/检索/工作流不当然是GenAI。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25246,13 +25295,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "鉴定意见与销毁审批与监销由人与相关职能执行。"
+              "先识别普通文档、电子档案、会计档案等对象，再按相应鉴定审批及监销程序执行；共同监销具体适用于会计档案，不推广至所有记录。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-electronic-current",
+            "r5-account-current"
           ],
           "type": "prose"
         },
@@ -25276,13 +25325,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编写系统测试计划与技术功能与规格并分析绩效"
+              "编写系统测试计划与技术规格；系统绩效分析解释传播为部分岗位补充任务，按实际职责核。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.task",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25291,13 +25339,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助测试用例与规格文本与绩效报表生成"
+              "编辑待验证场景：测试案例技术规格或部分岗位绩效报告草稿；具体系统能力、准确性及效果需另核，普通OCR/检索/工作流不当然是GenAI。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25351,13 +25399,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助法规动态推送与安全告警汇总"
+              "编辑待验证场景：法规动态与安全告警整理；具体系统能力、准确性及效果需另核，普通OCR/检索/工作流不当然是GenAI。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.7.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25681,13 +25729,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "会导致检索失败、口径不一致与合规争议。"
+              "编辑可能情景：可能导致检索失败、口径不一致与合规争议。发生率和工具因果未核；法律责任按实际行为及适用条款判断。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.1.consequence",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25726,13 +25774,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可能导致越权访问、版本混乱与文件被误改。"
+              "编辑可能情景：可能导致越权访问、版本混乱与文件被误改。发生率和工具因果未核；法律责任按实际行为及适用条款判断。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.2.consequence",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25771,13 +25819,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "会造成失密与隐私侵权与监管处罚。"
+              "编辑可能情景：可能造成失密与隐私侵权与监管处罚。发生率和工具因果未核；法律责任按实际行为及适用条款判断。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.3.consequence",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -25816,13 +25863,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "会造成该留未留或该销未销与审计风险。"
+              "编辑可能情景：可能造成该留未留或该销未销与审计风险。发生率和工具因果未核；法律责任按实际行为及适用条款判断。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.4.consequence",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-electronic-current",
+            "r5-account-current"
           ],
           "type": "prose"
         },
@@ -25861,13 +25908,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "会延误处置并放大档案损毁与泄露风险。"
+              "编辑可能情景：可能延误处置并放大档案损毁与泄露风险。发生率和工具因果未核；法律责任按实际行为及适用条款判断。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.5.consequence",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25996,13 +26043,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "公开密级与数据与档案要求并接受监督与审计。"
+              "明确数据使用/访问及审核责任，公开规则的对象与范围按法律和机构授权核；不能公开密级目录/秘密内容。"
             ]
           },
           "id": "actors.display.ai_impact_table.actions.4.action",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current"
           ],
           "type": "prose"
         }
@@ -26019,12 +26067,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与中国大陆「文档管理专员」精确对应的全国单职业工资口径。中国大陆公开工资资料按行业与单位类型统计，且本职业相关岗位分散在信息与技术服务、金融与保险、医疗与教育、公共管理与制造等不同行业，未建立与美国 O*NET 15-1299.03 一一对应的全国职业工资分布。"
+              "国家统计局2025信息传输软件信息技术服务业城镇非私营248,752/私营128,166元税前年平均，仅行业多职业背景，非文档专员中位/起薪/月薪。城镇5人以上法人、排除个体/自由职业等，不笼统排除兼职或外包法人受雇人员。岗位跨行业，不能全套IT行业。未取得中国精确职业分布及代表性招聘计酬样本，不断言全国所有公开统计最高只到行业。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26075,12 +26123,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "计酬口径常见差异：有的按固定月薪与年度奖金，有的按项目或实施周期结算，有的含系统上线与运维值班补贴；比较时必须先确认统计量与工时与结算方式，再作比较。"
+              "编辑核月/年/项目计酬、奖金类别、值班工时、福利及扣费；未实采常见结构。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26131,12 +26179,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本职业相关报酬通常由「基本工资＋年度奖金或项目奖金（如适用）＋系统上线与值班安排补贴」构成，内部记录管理岗位与外部咨询或系统实施岗位差别较大。"
+              "未取得代表性薪资公告/合同；逐项核工资、适用奖金、值班工时福利，不概括全国通常组合。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26145,12 +26193,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业门类平均工资覆盖的是行业就业人员，不等于本职业的岗位工资，也不覆盖项目制外包与兼职与个人接单。"
+              "国家统计局2025信息传输软件信息技术服务业城镇非私营248,752/私营128,166元税前年平均，仅行业多职业背景，非文档专员中位/起薪/月薪。城镇5人以上法人、排除个体/自由职业等，不笼统排除兼职或外包法人受雇人员。岗位跨行业，不能全套IT行业。未取得中国精确职业分布及代表性招聘计酬样本，不断言全国所有公开统计最高只到行业。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26159,12 +26207,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "系统上线与迁移与年度审计与记录到期节点工单量上升，项目制岗位的计酬与加班安排会随业务波动变化。"
+              "编辑核真实上线/迁移/审计排期及计酬加班，未实采普遍业务/工资变化。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26173,12 +26221,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆未发布与美国 15-1299.03 一一对应的全国职业工资分布，因此不给出中位数或分位数。"
+              "证据不足：本轮未取得中国精确全国职业工资分布，不断言所有公开统计未发布。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26187,12 +26235,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "影响计酬的因素主要是城市与行业、单位类型、岗位是内部管理还是外部咨询或实施、是否含项目奖金与补贴、以及岗位是否含团队管理与涉密授权要求。"
+              "编辑合同核查：实际城市行业、单位、内部管理或外部实施角色、奖金补贴及团队和涉密职责如何约定？本轮未取职业计酬因素主次或影响大小样本。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26201,12 +26249,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与信息系统可辅助分类与元数据与检索与配置，但工资与录用结论不由此产生；本页只说明口径与边界。"
+              "编辑可验证分类、元数据、检索或配置的辅助场景；本轮未核具体产品能力与采用效果，工资录用不能从技术清单或暴露研究推断。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
           "source_refs": [
-            "sag-moa"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -26237,13 +26286,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国统计口径：本细类 O*NET-SOC 15-1299.03 的任务与准备层级为精确职业口径；但 O*NET 摘要页与全国工资页明确标注，其工资与就业与行业数据取自父类 Computer Occupations, All Other（15-1299），因此本页把工资与就业与预测写成父类代理口径，不与细类任务口径混同。BLS 2025 年工资数据父类中位为 116,580 美元/年（56.05 美元/时）。"
+              "美国父类15-1299其他计算机职业，2025全国10/25/50/75/90分位：年55,940/79,370/116,580/157,500/188,470美元；时26.89/38.16/56.05/75.72/90.61美元。不是文档管理细类15-1299.03精确工资。OEWS直时税前受雇口径含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不排全部项目受雇奖金/合同雇员。分位不等起薪/年限/到手/上限，年度官方统计不凭个人工时另造。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26402,13 +26451,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "父类口径下 2024 年就业约 472,000 人；2024—2034 年预测为「远高于平均（7% 或更高）」，预计空缺 31,300；该来源只给出类别与阈值而未给出单一精确百分比，本页按口径原文表述；空缺同时包含增长与更替，不是净增岗位；三项均为父类口径。"
+              "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.project",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -26432,13 +26480,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "相关岗位分布在信息与技术服务、金融与保险、医疗与教育、公共管理与制造等依赖大量电子记录的组织；既有单位内部记录管理岗位，也有咨询与系统实施类岗位。"
+              "O*NET2025父类15-1299行业份额：专业科学技术服务26%、政府22%、信息10%，不是文档管理细类行业占比或工资。细行业工资及具体组织岗位分布本轮未取得。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26447,13 +26495,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "教育反馈（细类口径）：60% 要求学士学位、15% 要求硕士学位、10% 要求副学士或两年制学位；在职通常需要相关经验与系统与法规培训（该页未展示其余教育选项及百分比）。"
+              "O*NET57情境：邮件每天100/电话74/面对面59，持续接触16/大部分47/半时37；团队极重要33/非常56；准确极重要35/非常45；日严格期限20/每周40；日决策16；持续坐35/超过半时50；规律95；每周40小时79/超过40为21；室内受控每天61/从不22。调查不证明每人常加班或大量陌生人沟通；公众服务26非常重要、37重要。自动化28高度/44中等/28略有非GenAI采用。实际节点加班、值班及流程需核具体雇主。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
-            "bls",
-            "oews"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26462,13 +26509,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工作场景为办公室与机房或系统运行环境；不同行业与组织的系统工具与合规要求差别较大。"
+              "BLS父类2025自雇4.9%，不是文档管理细类比例；细行业工资与组织分布仍缺，不能用父类份额或自雇范围当细类工资。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.amusement",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26477,13 +26524,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本职业以受雇岗位为主；外部咨询与系统实施按项目结算的收入口径与受雇工资不可直接比较。"
+              "BLS父类2025自雇4.9%，非细类比例；OEWS不含自雇但不排所有项目受雇者。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
           "source_refs": [
+            "r5-bls-current",
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26507,13 +26555,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "城市与行业、单位类型、岗位是内部记录管理还是外部咨询或实施、是否含项目奖金与补贴、以及是否含团队管理与涉密授权要求都会影响实际收入。"
+              "编辑比较地区/岗位/工时与适用奖金福利，分位不证明管理/涉密资格溢价。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.paid-work",
           "source_refs": [
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26567,13 +26615,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国统计不代表中国大陆职业工资或就业结果；本页未引用 BLS 职业展望本职业页数值。"
+              "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。 不代中国精确工资。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.boundary.detail",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current"
           ],
           "type": "prose"
         }
@@ -26660,12 +26707,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "工作负荷包括每天邮件 100% 与电话 74% 与面对面 59% 的沟通负荷、持续坐着 35% 与超过一半时间坐着 50%、每天时间压力 20%、以及系统上线与审计与到期节点的高峰。"
+              "O*NET57情境：邮件每天100/电话74/面对面59，持续接触16/大部分47/半时37；团队极重要33/非常56；准确极重要35/非常45；日严格期限20/每周40；日决策16；持续坐35/超过半时50；规律95；每周40小时79/超过40为21；室内受控每天61/从不22。调查不证明每人常加班或大量陌生人沟通；公众服务26非常重要、37重要。自动化28高度/44中等/28略有非GenAI采用。实际节点加班、值班及流程需核具体雇主。"
             ]
           },
           "id": "actors.fit.personality-fit-block.6",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27458,12 +27506,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "捕获与检索与分发"
+              "计算机信息系统经理"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.direction",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "agent"
           ],
           "type": "prose"
         },
@@ -27472,12 +27522,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否在授权范围内检索并分发并提供用户支持"
+              "编辑探索：能否从文档系统执行扩展统筹IT活动"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.signals",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "agent"
           ],
           "type": "prose"
         },
@@ -27486,12 +27538,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "超出授权的访问与复制须先确认。"
+              "补数据处理/信息系统/分析/编程活动组织管理"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.watchouts",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "agent"
           ],
           "type": "prose"
         },
@@ -27500,12 +27554,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "保存期限与鉴定与销毁"
+              "行政服务经理"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.direction",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27514,12 +27570,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否按保存期限组织鉴定与销毁并保留清册与审批"
+              "编辑探索：能否从记录管理转向机构支持服务统筹"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.signals",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27528,12 +27586,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "涉密与会计与未了事项档案须按专门程序执行。"
+              "补记录信息/邮件及其他办公支持统筹，设施范围另核"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.watchouts",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27542,12 +27602,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "合规与安全与上报"
+              "合规经理"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.direction",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "art"
           ],
           "type": "prose"
         },
@@ -27556,12 +27618,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否跟踪法规并实施安全监督并按规定上报异常"
+              "编辑探索：能否从记录合规协作转到组织合规协调"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.signals",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "art"
           ],
           "type": "prose"
         },
@@ -27570,12 +27634,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不得隐瞒或延迟上报。"
+              "补伦理/监管标准的计划协调和对应管理责任"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.watchouts",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "art"
           ],
           "type": "prose"
         },
@@ -27584,12 +27650,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "长期适应"
+              "管理咨询分析师"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.direction",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "dancing"
           ],
           "type": "prose"
         },
@@ -27598,12 +27666,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否长期适应持续用屏与节点压力与项目节奏"
+              "编辑探索：能否将记录流程分析转成组织问题评估"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.signals",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "dancing"
           ],
           "type": "prose"
         },
@@ -27612,12 +27682,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "注意用眼与颈椎与作息安排。"
+              "补组织研究、工作测量/流程方法和建议交付"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.watchouts",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "dancing"
           ],
           "type": "prose"
         },
@@ -27710,12 +27782,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要：每天使用电子邮件 100%、每天电话交谈 74%、每天面对面讨论 59%、与他人持续接触 16%（另 47% 大部分时间接触）；但沟通以需求转述与制度核对与用户支持为主。"
+              "O*NET57情境：邮件每天100/电话74/面对面59，持续接触16/大部分47/半时37；团队极重要33/非常56；准确极重要35/非常45；日严格期限20/每周40；日决策16；持续坐35/超过半时50；规律95；每周40小时79/超过40为21；室内受控每天61/从不22。调查不证明每人常加班或大量陌生人沟通；公众服务26非常重要、37重要。自动化28高度/44中等/28略有非GenAI采用。实际节点加班、值班及流程需核具体雇主。 邮件/团队沟通不等大量陌生人沟通。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.outgoing.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27738,12 +27811,17 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "美国细类反馈显示 60% 要求学士学位、15% 要求硕士学位、10% 要求副学士或两年制学位。中国大陆本职业不设统一准入类职业资格，档案与涉密岗位按单位制度与保密制度要求从业，实际以本组织与法域要求为准。"
+              "O*NET细类JZ4/SVP7至<8，准备组通常需数年相关经验、在岗和/或职业训练，不是几周/几月统一课程即可入行。60%学士/15%硕士/10%副学士是新入职所需学历受访反馈，不是60%岗位/雇主或员工学历。BLS父类典型本科/相关经验None/典型OJT None不能覆盖细类组级准备要求；None非免培训。未逐核中国现行准入目录/美国全部州要求，不宣称全国免照或统一必考证。 中国档案法2020修订、2021-01-01施行：11条专业知识技能/可按规定评职称非统一资格证；21条禁擅销。36—39条系统衔接、电子档案来源可靠/程序规范/要素合规及凭证效力、数字化原件保管、移交和接收检测；44条安全隐患及时补救、损毁泄露及时向档案主管部门报告，个人按机构授权协作。电子记录并非一律已归档档案，按范围和适用主体核。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.appearance.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "r5-bls-current",
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current"
           ],
           "type": "prose"
         },
@@ -27766,12 +27844,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本职业持续坐着 35%（另 50% 超过一半时间）、工作时间「规律（固定日程）」95%，但系统上线与迁移与审计与记录到期节点常需加班；用眼与颈椎保护与作息安排按本组织制度执行。"
+              "O*NET57情境：邮件每天100/电话74/面对面59，持续接触16/大部分47/半时37；团队极重要33/非常56；准确极重要35/非常45；日严格期限20/每周40；日决策16；持续坐35/超过半时50；规律95；每周40小时79/超过40为21；室内受控每天61/从不22。调查不证明每人常加班或大量陌生人沟通；公众服务26非常重要、37重要。自动化28高度/44中等/28略有非GenAI采用。实际节点加班、值班及流程需核具体雇主。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.schedule.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27878,12 +27957,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "BLS/OEWS：用于说明工资与就业口径与统计位置（工资与就业为父类 Computer Occupations, All Other 口径）。"
+              "实际链接支持父类工资口径；就业预测另见BLS表1.2，文档管理细类工作情境另见O*NET，勿混用。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.bls",
           "source_refs": [
-            "onet"
+            "bls",
+            "r5-bls-current",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27892,12 +27973,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本组织制度与授权规则：用于说明分类、权限、分发、保存期限与销毁与数据与审计管理边界。"
+              "未实采组织公告/授权规程，编辑观察不当机构制度。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.employer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27920,12 +28002,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻岗位对照（信息技术与行政与合规与管理与系统分析）：用于说明信息技术管理权、行政统筹、合规判断与咨询建议的差异。"
+              "实际目标档案定义支持任务差距，不证明个人转岗结果。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.agent",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27934,12 +28016,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻岗位对照（档案管理与数据与安全）：用于说明档案典藏职能与数据与安全职责的差异。"
+              "实际目标档案定义支持任务差距，不证明个人转岗结果。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.teacher",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27948,12 +28030,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "档案与会计档案与保密与数据法规（《档案法》与《会计档案管理办法》与保密与数据与个人信息法规）：用于说明电子档案与保密与数据要求（按法规名称与一般要求引用）。"
+              "实际目标档案定义支持任务差距，不证明个人转岗结果。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.enrichment",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         },
@@ -27962,12 +28044,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑综合：用于本页练习与边界设计，不构成外部事实或资格证据。"
+              "实际目标档案定义支持任务差距，不证明个人转岗结果。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.art",
           "source_refs": [
-            "onet"
+            "dancing"
           ],
           "type": "prose"
         }
@@ -27984,13 +28066,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "分类与元数据差错风险：政策与分类与元数据核对不清，导致检索失败、口径不一致与合规争议。"
+              "编辑风险核对情景：分类与元数据差错风险：政策与分类与元数据核对不清，可能导致检索失败、口径不一致与合规争议。本轮未核发生率或因果。"
             ]
           },
           "id": "actors.risk.career-risk-cards.1",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -27999,13 +28081,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "权限与版本失控风险：权限配置与版本控制与审计日志管理不当，导致越权访问、版本混乱与文件被误改。"
+              "编辑风险核对情景：权限与版本失控风险：权限配置与版本控制与审计日志管理不当，可能导致越权访问、版本混乱与文件被误改。本轮未核发生率或因果。"
             ]
           },
           "id": "actors.risk.career-risk-cards.2",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -28014,13 +28096,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "涉密与个人信息泄露风险：密级与个人信息与商业秘密内容被不当检索、复制、分发或带出批准环境。"
+              "编辑风险核对情景：涉密与个人信息泄露风险：密级与个人信息与商业秘密内容被不当检索、复制、分发或带出批准环境。本轮未核发生率或因果。"
             ]
           },
           "id": "actors.risk.career-risk-cards.3",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -28029,13 +28110,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "保存期限与销毁违规风险：未按保存期限与鉴定与销毁程序执行，导致该留未留或该销未销与审计风险。"
+              "编辑风险核对情景：保存期限与销毁违规风险：未按保存期限与鉴定与销毁程序执行，可能导致该留未留或该销未销与审计风险。本轮未核发生率或因果。"
             ]
           },
           "id": "actors.risk.career-risk-cards.4",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-electronic-current",
+            "r5-account-current"
           ],
           "type": "prose"
         },
@@ -28044,13 +28125,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "项目与计酬与用工风险：外部的实施与咨询与运维岗位在计酬与加班与责任范围上约定不清，或工时记录与实际不符。"
+              "编辑风险核对情景：项目与计酬与用工风险：外部的实施与咨询与运维岗位在计酬与加班与责任范围上约定不清，或工时记录与实际不符。本轮未核发生率或因果。"
             ]
           },
           "id": "actors.risk.career-risk-cards.5",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -28194,13 +28275,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "造成用户找不到文件与合规争议与返工。"
+              "编辑可能情景：可能造成用户找不到文件与合规争议与返工。发生率和工具因果未核；法律责任按实际行为及适用条款判断。"
             ]
           },
           "id": "actors.display.career_risk_cards.image-use.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -28254,13 +28335,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "造成信息泄露与文件失效与责任不清。"
+              "编辑可能情景：可能造成信息泄露与文件失效与责任不清。发生率和工具因果未核；法律责任按实际行为及适用条款判断。"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -28299,13 +28380,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "密级与个人信息与商业秘密内容被不当检索、复制、分发或带出批准环境。"
+              "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-income.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -28314,13 +28394,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "造成失密与隐私侵权与监管处罚。"
+              "可能涉及失密/隐私侵权/法律责任，具体处罚按实际行为和法律条款核，不一律发生。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-income.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current"
           ],
           "type": "prose"
         },
@@ -28359,13 +28440,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未按保存期限与鉴定与销毁程序执行，导致该留未留或该销未销与审计风险。"
+              "2024国家档案局22号电子档案管理办法（11-01施行）：3/5/14/16—19条来源程序要素、元数据全过程、归档范围/期限、检测及责任人确认；26—28条备份/迁移制度与转换后检测；29/30条到期鉴定、继续保存重划期限、履行审批后才销毁并记录，不能到期自动删。35条提出AI等用于编研/展览/专题数据库开发，不证明本职业部署率/效益或AI自动授权。 财政部国家档案局79号办法（2016-01-01施行），适用会计档案不是所有企业文件。8/9条电子单套保存有具体条件，不能一律扫描后销纸；12条移交电子及元数据/特殊格式平台和接收检测。14/15条永久与定期10/30年、年度终了次日起、附表规定最低期限；16—18条到期鉴定/续存/清册/签署/共同监销，19条未结清债权债务及其他未了事项凭证不得销毁。预算计划制度文书按28条不适用本办法。"
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current"
           ],
           "type": "prose"
         },
@@ -28374,13 +28456,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "造成合规与审计风险与档案损失。"
+              "编辑可能情景：可能造成合规与审计风险与档案损失。发生率和工具因果未核；法律责任按实际行为及适用条款判断。"
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-electronic-current",
+            "r5-account-current"
           ],
           "type": "prose"
         },
@@ -28434,13 +28516,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "影响实际收入与用工合规。"
+              "编辑可能情景：影响实际收入与用工合规。发生率和工具因果未核；法律责任按实际行为及适用条款判断。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -28494,13 +28575,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "造成问题反复与声誉与合规风险。"
+              "编辑可能情景：可能造成问题反复与声誉与合规风险。发生率和工具因果未核；法律责任按实际行为及适用条款判断。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -28509,13 +28590,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS/OEWS 与 O*NET：用于工资、就业与工作情境与准备层级口径（工资与就业为父类口径）。"
+              "实际链接是O*NET文档管理細类任务及情境页，非父类工资和就业预测；工资及预测另见对应BLS来源。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.bls",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa",
+            "bls",
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -28524,13 +28606,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本组织制度与授权规则：用于分类、权限、分发、保存期限、销毁与数据与审计管理边界。"
+              "未实采机构授权/审计制度，场景为编辑核对建议。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.employer",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28539,13 +28621,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "《中华人民共和国档案法》与《会计档案管理办法》与保密与数据与个人信息法规：用于电子档案与档案与保密与数据要求（按名称与一般要求引用）。"
+              "实际链接是国家档案局22号电子档案管理办法：针对适用电子档案的元数据、归档检测、备份迁移和到期鉴定审批等要求；不由这一个链接证明档案法或会计档案79号条款，也不是实采雇主制度。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.cn-rule",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-electronic-current"
           ],
           "type": "prose"
         },
@@ -28554,13 +28635,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "不使用影视或演员工会口径；仅登记其不适用。"
+              "实际O*NET细类任务支持情境；ILO任务暴露不证明文档合规。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.sag",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28569,13 +28650,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "AI 风险管理框架：用于说明系统辅助的治理边界，不构成本职业合规清单。"
+              "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.nist",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         }
@@ -28592,14 +28672,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘公告中的学历、专业、经验与放宽关系必须逐条读取；本职业多数岗位要求学士学位并接受在职培训，一项可放宽不代表密级、个人数据、档案与保存期限、授权与审计要求可以替代。"
+              "O*NET细类JZ4/SVP7至<8，准备组通常需数年相关经验、在岗和/或职业训练，不是几周/几月统一课程即可入行。60%学士/15%硕士/10%副学士是新入职所需学历受访反馈，不是60%岗位/雇主或员工学历。BLS父类典型本科/相关经验None/典型OJT None不能覆盖细类组级准备要求；None非免培训。未逐核中国现行准入目录/美国全部州要求，不宣称全国免照或统一必考证。 未实采多数雇主招聘条件，逐条核目标公告。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current"
           ],
           "type": "notice"
         },
@@ -28625,35 +28705,35 @@
               [
                 "文档与记录管理（内部）",
                 "在监督下参与政策与分类与元数据维护、权限与版本与用户支持与台账整理。",
-                "分类与元数据准确率、权限与版本记录、需求转述与用户支持评语。",
+                "编辑观察建议；未实采雇主公告/制度，按实际角色、培训和权限核。",
                 "纸面分类与权限与销毁台账练习、受监督岗位的带教评语。",
                 "偏文档与记录管理执行，不承担合规与法务判断。"
               ],
               [
                 "系统配置与实施（内部或厂商）",
                 "参与文档与内容管理系统的功能配置与工作流与权限与版本与迁移与测试。",
-                "配置与权限与版本与测试记录、迁移与上线支持记录。",
+                "编辑观察建议；未实采雇主公告/制度，按实际角色、培训和权限核。",
                 "配置模板与测试用例与迁移清单。",
-                "偏配置与实施，架构与编码由信息技术职能承担。"
+                "主要配置实施，与其他IT职能协作；不能绝对排除本职业开发/配置任务。"
               ],
               [
                 "捕获与数字化（内部或服务商）",
                 "操作扫描与影像与光学字符识别并实施数据捕获与质量控制。",
-                "来源可靠与要素合规与原件保管记录、捕获质量抽检。",
+                "编辑观察建议；未实采雇主公告/制度，按实际角色、培训和权限核。",
                 "扫描与影像与识别与质检练习。",
                 "偏捕获执行，来源可靠与要素合规由制度确认。"
               ],
               [
                 "记录与信息管理（RIM）",
                 "按保存期限与法规组织鉴定与销毁与保留清册与合规配合。",
-                "保存期限台账与鉴定意见与销毁清册与审批记录。",
+                "编辑观察建议；未实采雇主公告/制度，按实际角色、培训和权限核。",
                 "保存期限与鉴定与销毁台账练习。",
                 "偏期限与合规执行，涉密与会计与未了事项按专门程序。"
               ],
               [
                 "用户支持与培训",
                 "编写支持文档与培训材料并处理访问与检索问题与工单。",
-                "支持文档与培训材料与工单处理与满意度记录。",
+                "编辑观察建议；未实采雇主公告/制度，按实际角色、培训和权限核。",
                 "支持文档与培训大纲与工单记录。",
                 "偏支持与培训执行，不决定授权与合规结论。"
               ]
@@ -28662,8 +28742,10 @@
           "id": "actors.path.entry-role-comparison.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current"
           ],
           "title": "常见入门方向与初期任务",
           "type": "table"
@@ -28684,7 +28766,7 @@
                 "id": "employer-1",
                 "values": [
                   "分类与权限与版本与保存期限记录",
-                  "能提供分类与元数据与权限与版本或保存期限与鉴定与销毁的示例记录（涉密内容按制度脱敏）。"
+                  "编辑建议仅提供自行制作的公开模拟分类、元数据、权限、版本、保存期限与鉴定审批记录；不展示涉密或未经授权的单位资料，脱敏不自动取得外传许可。"
                 ]
               },
               {
@@ -28834,16 +28916,16 @@
               [
                 "电子档案合规要求（中国大陆，档案管理岗位）",
                 "在机关与团体与企业事业单位与其他组织中从事文件与电子档案管理的人员",
-                "合规要求：电子档案应当来源可靠、程序规范、要素合规，并与传统载体档案具有同等效力。",
-                "是（针对档案管理）：按《中华人民共和国档案法》第三十七条等要求执行。",
-                "按本组织制度与档案主管部门要求参加培训与考核。",
+                "中国档案法2020修订、2021-01-01施行：11条专业知识技能/可按规定评职称非统一资格证；21条禁擅销。36—39条系统衔接、电子档案来源可靠/程序规范/要素合规及凭证效力、数字化原件保管、移交和接收检测；44条安全隐患及时补救、损毁泄露及时向档案主管部门报告，个人按机构授权协作。电子记录并非一律已归档档案，按范围和适用主体核。 2024国家档案局22号电子档案管理办法（11-01施行）：3/5/14/16—19条来源程序要素、元数据全过程、归档范围/期限、检测及责任人确认；26—28条备份/迁移制度与转换后检测；29/30条到期鉴定、继续保存重划期限、履行审批后才销毁并记录，不能到期自动删。35条提出AI等用于编研/展览/专题数据库开发，不证明本职业部署率/效益或AI自动授权。",
+                "档案管理规则是行为/机构要求，不是个人通用考试证。",
+                "22号13条支持业务培训和专业知识技能；未规定所有机构统一考核方式。",
                 "培训与制度落实时间。",
                 "本条依据《中华人民共和国档案法》（2020 年修订，2021 年 1 月 1 日施行）；具体实施以国家档案主管部门规定与本组织制度为准。"
               ],
               [
                 "会计档案管理要求（中国大陆，会计档案岗位）",
                 "经管会计档案的单位档案管理与会计人员",
-                "合规要求：会计档案保管期限分永久与定期，定期一般 10 年与 30 年；到期须鉴定，销毁须按程序并监销。",
+                "财政部国家档案局79号办法（2016-01-01施行），适用会计档案不是所有企业文件。8/9条电子单套保存有具体条件，不能一律扫描后销纸；12条移交电子及元数据/特殊格式平台和接收检测。14/15条永久与定期10/30年、年度终了次日起、附表规定最低期限；16—18条到期鉴定/续存/清册/签署/共同监销，19条未结清债权债务及其他未了事项凭证不得销毁。预算计划制度文书按28条不适用本办法。",
                 "是（针对会计档案）：按《会计档案管理办法》执行。",
                 "按《会计档案管理办法》（财政部 国家档案局令第 79 号）与本单位制度执行。",
                 "制度与清册与监销流程时间。",
@@ -28852,17 +28934,17 @@
               [
                 "涉密文件与密级管理（中国大陆，涉密岗位）",
                 "接触国家秘密文件与载体的岗位人员",
-                "岗位硬条件：涉密岗位按保密制度管理，涉密人员按规定审查与管理。",
-                "是（针对涉密岗位）：按《中华人民共和国保守国家秘密法》与本组织保密制度执行。",
+                "涉密角色审查/训练和授权需由具体职能核现行规则，本轮未逐核保密法条款。",
+                "按实际岗位主管条件核，未列未核统一门槛。",
                 "按保密管理部门规定参加审查与培训。",
                 "审查与培训时间。",
                 "本条按法规名称与一般要求引用，本轮未逐条核对条文编号；具体以保密法规与主管机关规定为准。"
               ],
               [
-                "文档与内容管理系统训练（数周到数月）",
+                "文档系统训练与相关准备（时长由目标岗位核）",
                 "零基础入行者",
-                "现实入口：多数岗位通过系统与制度培训与在职带教上手。",
-                "是：O*NET 指出本职业准备层级为 Job Zone Four。",
+                "O*NET细类JZ4/SVP7至<8，准备组通常需数年相关经验、在岗和/或职业训练，不是几周/几月统一课程即可入行。60%学士/15%硕士/10%副学士是新入职所需学历受访反馈，不是60%岗位/雇主或员工学历。BLS父类典型本科/相关经验None/典型OJT None不能覆盖细类组级准备要求；None非免培训。未逐核中国现行准入目录/美国全部州要求，不宣称全国免照或统一必考证。",
+                "JZ4为准备组，不证明所有岗位统一数周课程或必考证。",
                 "按本组织或厂商培训计划完成并接受考核。",
                 "时间投入与学习节奏。",
                 "完成培训不等于取得合规或安全或档案专业授权。"
@@ -28870,7 +28952,7 @@
               [
                 "数据与个人信息与网络安全训练",
                 "处理组织文件与个人与业务数据的人员",
-                "现场能力：有助于按最小必要处理数据与留痕与应对安全事件。",
+                "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。",
                 "视本组织制度要求。",
                 "按制度参加并定期复训。",
                 "培训时间。",
@@ -28890,8 +28972,12 @@
           "id": "actors.path.credential-decision.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current",
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current",
+            "r5-cn-pipl"
           ],
           "title": "训练、授权与资格怎么选择",
           "type": "table"
@@ -28901,17 +28987,21 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "学历与经验要求必须逐条读取：本职业多数岗位要求学士学位并接受在职培训；一项可放宽不代表密级、个人数据、档案与保存期限、授权与审计要求可以替代。",
-              "本页建议的作品与七天体验只用于职业探索，不构成岗位培训、档案专业资格、涉密授权或合规与安全授权。",
-              "进入本职业不是只报一个课程：先核对目标岗位的职责与项目节点与系统类型、是否需要档案或涉密或数据合规训练、以及本组织或雇主的授权与审计规则。",
-              "涉及涉密文件、个人信息、会计档案与保存期限与销毁的工作，须先确认法规与本组织制度并取得授权；不得在无资格与无授权条件下独立承担相应职责。"
+              "O*NET细类JZ4/SVP7至<8，准备组通常需数年相关经验、在岗和/或职业训练，不是几周/几月统一课程即可入行。60%学士/15%硕士/10%副学士是新入职所需学历受访反馈，不是60%岗位/雇主或员工学历。BLS父类典型本科/相关经验None/典型OJT None不能覆盖细类组级准备要求；None非免培训。未逐核中国现行准入目录/美国全部州要求，不宣称全国免照或统一必考证。",
+              "中国档案法2020修订、2021-01-01施行：11条专业知识技能/可按规定评职称非统一资格证；21条禁擅销。36—39条系统衔接、电子档案来源可靠/程序规范/要素合规及凭证效力、数字化原件保管、移交和接收检测；44条安全隐患及时补救、损毁泄露及时向档案主管部门报告，个人按机构授权协作。电子记录并非一律已归档档案，按范围和适用主体核。",
+              "2024国家档案局22号电子档案管理办法（11-01施行）：3/5/14/16—19条来源程序要素、元数据全过程、归档范围/期限、检测及责任人确认；26—28条备份/迁移制度与转换后检测；29/30条到期鉴定、继续保存重划期限、履行审批后才销毁并记录，不能到期自动删。35条提出AI等用于编研/展览/专题数据库开发，不证明本职业部署率/效益或AI自动授权。",
+              "财政部国家档案局79号办法（2016-01-01施行），适用会计档案不是所有企业文件。8/9条电子单套保存有具体条件，不能一律扫描后销纸；12条移交电子及元数据/特殊格式平台和接收检测。14/15条永久与定期10/30年、年度终了次日起、附表规定最低期限；16—18条到期鉴定/续存/清册/签署/共同监销，19条未结清债权债务及其他未了事项凭证不得销毁。预算计划制度文书按28条不适用本办法。",
+              "编辑先核真实岗位/法域/权限，再学系统；未核全国准入目录，不宣称全部免证。"
             ]
           },
           "id": "actors.path.credential-boundary.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current",
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current"
           ],
           "title": "训练、涉密与合规边界",
           "type": "notice"
@@ -29152,14 +29242,17 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国由本组织与雇主规定并须遵守相关记录与数据要求；中国大陆文件与电子档案按《中华人民共和国档案法》管理，会计档案按《会计档案管理办法》管理，涉密岗位按保密制度管理。"
+              "中国档案法2020修订、2021-01-01施行：11条专业知识技能/可按规定评职称非统一资格证；21条禁擅销。36—39条系统衔接、电子档案来源可靠/程序规范/要素合规及凭证效力、数字化原件保管、移交和接收检测；44条安全隐患及时补救、损毁泄露及时向档案主管部门报告，个人按机构授权协作。电子记录并非一律已归档档案，按范围和适用主体核。 2024国家档案局22号电子档案管理办法（11-01施行）：3/5/14/16—19条来源程序要素、元数据全过程、归档范围/期限、检测及责任人确认；26—28条备份/迁移制度与转换后检测；29/30条到期鉴定、继续保存重划期限、履行审批后才销毁并记录，不能到期自动删。35条提出AI等用于编研/展览/专题数据库开发，不证明本职业部署率/效益或AI自动授权。 财政部国家档案局79号办法（2016-01-01施行），适用会计档案不是所有企业文件。8/9条电子单套保存有具体条件，不能一律扫描后销纸；12条移交电子及元数据/特殊格式平台和接收检测。14/15条永久与定期10/30年、年度终了次日起、附表规定最低期限；16—18条到期鉴定/续存/清册/签署/共同监销，19条未结清债权债务及其他未了事项凭证不得销毁。预算计划制度文书按28条不适用本办法。 美国全部州/中国准入目录未逐核。"
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current",
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current"
           ],
           "type": "prose"
         },
@@ -29168,14 +29261,17 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆相关依据：《中华人民共和国档案法》（2020 年修订，2021 年 1 月 1 日施行）要求电子档案来源可靠、程序规范、要素合规，并与传统载体档案具有同等效力，机关与团体与企业事业单位与其他组织应推进电子档案管理信息系统建设并与办公自动化系统与业务系统衔接，档案主管部门可检查档案信息化建设和信息安全保障情况；《会计档案管理办法》（财政部 国家档案局令第 79 号）规定会计档案保管期限分永久与定期、定期一般 10 年与 30 年，到期须鉴定、销毁须按程序并监销；涉密与数据与个人信息按《中华人民共和国保守国家秘密法》《中华人民共和国网络安全法》《中华人民共和国数据安全法》《中华人民共和国个人信息保护法》等执行（上述专门法规外的部分按名称与一般要求引用，本轮未逐条核对条文编号）。"
+              "中国档案法2020修订、2021-01-01施行：11条专业知识技能/可按规定评职称非统一资格证；21条禁擅销。36—39条系统衔接、电子档案来源可靠/程序规范/要素合规及凭证效力、数字化原件保管、移交和接收检测；44条安全隐患及时补救、损毁泄露及时向档案主管部门报告，个人按机构授权协作。电子记录并非一律已归档档案，按范围和适用主体核。 2024国家档案局22号电子档案管理办法（11-01施行）：3/5/14/16—19条来源程序要素、元数据全过程、归档范围/期限、检测及责任人确认；26—28条备份/迁移制度与转换后检测；29/30条到期鉴定、继续保存重划期限、履行审批后才销毁并记录，不能到期自动删。35条提出AI等用于编研/展览/专题数据库开发，不证明本职业部署率/效益或AI自动授权。 财政部国家档案局79号办法（2016-01-01施行），适用会计档案不是所有企业文件。8/9条电子单套保存有具体条件，不能一律扫描后销纸；12条移交电子及元数据/特殊格式平台和接收检测。14/15条永久与定期10/30年、年度终了次日起、附表规定最低期限；16—18条到期鉴定/续存/清册/签署/共同监销，19条未结清债权债务及其他未了事项凭证不得销毁。预算计划制度文书按28条不适用本办法。 个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。"
             ]
           },
           "id": "actors.display.career_path_block.locale.summary",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current",
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current"
           ],
           "type": "prose"
         },
@@ -29184,14 +29280,17 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国本职业准备层级为 Job Zone Four（SVP 7.0 至 <8.0），以在职培训与带教为主，60% 岗位要求学士学位；中国大陆不设统一准入类职业资格，档案与涉密与数据岗位按单位制度与主管机关要求从业，实际以本组织与法域要求为准。"
+              "O*NET细类JZ4/SVP7至<8，准备组通常需数年相关经验、在岗和/或职业训练，不是几周/几月统一课程即可入行。60%学士/15%硕士/10%副学士是新入职所需学历受访反馈，不是60%岗位/雇主或员工学历。BLS父类典型本科/相关经验None/典型OJT None不能覆盖细类组级准备要求；None非免培训。未逐核中国现行准入目录/美国全部州要求，不宣称全国免照或统一必考证。 档案法11专业知识技能/职称不是统一考试证；未核全国准入目录。"
             ]
           },
           "id": "actors.display.career_path_block.locale.credentials",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current",
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current"
           ],
           "type": "prose"
         },
@@ -29312,14 +29411,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "分析并解释系统绩效数据，做好待办与异常交接并带教新的文档管理人员。"
+              "编辑学习方向：技术规格与交接可按实际职责练习；系统绩效分析为部分岗位补充任务，带教也需实际授权，非全部岗位晋级阶段。"
             ]
           },
           "id": "actors.display.career_path_block.ladder.develop.description",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30336,14 +30433,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS/OEWS 与 O*NET：用于工资、就业与工作情境与准备层级口径（工资与就业与预测为父类 Computer Occupations, All Other 口径）。"
+              "O*NET细类JZ4/SVP7至<8，准备组通常需数年相关经验、在岗和/或职业训练，不是几周/几月统一课程即可入行。60%学士/15%硕士/10%副学士是新入职所需学历受访反馈，不是60%岗位/雇主或员工学历。BLS父类典型本科/相关经验None/典型OJT None不能覆盖细类组级准备要求；None非免培训。未逐核中国现行准入目录/美国全部州要求，不宣称全国免照或统一必考证。"
             ]
           },
           "id": "actors.display.career_path_block.source.bls",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -30352,14 +30449,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本组织制度与授权规则：用于入口要求与分类与权限与分发与保存期限与销毁与审计边界。"
+              "未实采雇主公告/晋升或培训制度，原阶段为编辑探索。"
             ]
           },
           "id": "actors.display.career_path_block.source.employer",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30368,14 +30464,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "《中华人民共和国档案法》与《会计档案管理办法》与保密与数据与个人信息法规：用于电子档案与档案与保密与数据口径（专门法规外的部分按名称与一般要求引用）。"
+              "中国档案法2020修订、2021-01-01施行：11条专业知识技能/可按规定评职称非统一资格证；21条禁擅销。36—39条系统衔接、电子档案来源可靠/程序规范/要素合规及凭证效力、数字化原件保管、移交和接收检测；44条安全隐患及时补救、损毁泄露及时向档案主管部门报告，个人按机构授权协作。电子记录并非一律已归档档案，按范围和适用主体核。 2024国家档案局22号电子档案管理办法（11-01施行）：3/5/14/16—19条来源程序要素、元数据全过程、归档范围/期限、检测及责任人确认；26—28条备份/迁移制度与转换后检测；29/30条到期鉴定、继续保存重划期限、履行审批后才销毁并记录，不能到期自动删。35条提出AI等用于编研/展览/专题数据库开发，不证明本职业部署率/效益或AI自动授权。 财政部国家档案局79号办法（2016-01-01施行），适用会计档案不是所有企业文件。8/9条电子单套保存有具体条件，不能一律扫描后销纸；12条移交电子及元数据/特殊格式平台和接收检测。14/15条永久与定期10/30年、年度终了次日起、附表规定最低期限；16—18条到期鉴定/续存/清册/签署/共同监销，19条未结清债权债务及其他未了事项凭证不得销毁。预算计划制度文书按28条不适用本办法。"
             ]
           },
           "id": "actors.display.career_path_block.source.cn-rule",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current"
           ],
           "type": "prose"
         },
@@ -30384,14 +30480,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "薪资与环境口径：本页不使用影视或演员工会口径；工资引用 OEWS（父类口径），环境引用 O*NET。"
+              "工资页支持父类工资；训练用细类O*NET，资格用具体中国法规。"
             ]
           },
           "id": "actors.display.career_path_block.source.r2-pay-3",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current"
           ],
           "type": "prose"
         }
@@ -30408,13 +30506,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 15-1299.03 细类数据：任务 23 项，准备层级 Job Zone Four（SVP 7.0 至 <8.0），兴趣代码 CI；工资与就业与预测取自父类 Computer Occupations, All Other（15-1299）：2024 年就业约 472,000 人。"
+              "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -30423,13 +30520,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年预测为「远高于平均（7% 或更高）」，预计空缺 31,300；该来源只给出类别与阈值而未给出单一精确百分比，本页按口径原文表述；空缺同时包含增长与更替，不是净增岗位；就业与预测为父类口径。"
+              "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -30453,15 +30549,16 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本职业相关岗位分布在信息与技术服务、金融与保险、医疗与教育、公共管理与制造等依赖大量电子记录的组织，既有单位内部记录管理岗位，也有咨询与系统实施类岗位。"
+              "O*NET2025父类15-1299行业份额：专业科学技术服务26%、政府22%、信息10%，不是文档管理细类行业占比或工资。细行业工资及具体组织岗位分布本轮未取得。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -30543,13 +30640,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：系统需求与配置与权限与记录与多方沟通经验。"
+              "编辑对照：系统配置和需求协作；非个人能力已证"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "agent"
           ],
           "type": "prose"
         },
@@ -30558,13 +30656,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：信息技术战略与预算与团队与系统组合与供应商管理。"
+              "目标需核：统筹信息系统/数据处理/分析/编程活动管理"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "agent"
           ],
           "type": "prose"
         },
@@ -30573,13 +30672,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，层次不同"
+              "编辑探索差距，未量化转岗距离/成功率/固定训练时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "agent"
           ],
           "type": "prose"
         },
@@ -30588,13 +30688,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：机构流程与记录与采购与设施协作理解。"
+              "编辑对照：记录和流程协作；非个人能力已证"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30603,13 +30704,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：设施与采购与安保与行政流程统筹与资源管理。"
+              "目标需核：记录信息、邮件及办公支持服务统筹"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30618,13 +30720,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，范围不同"
+              "编辑探索差距，未量化转岗距离/成功率/固定训练时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30633,13 +30736,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：制度与记录与风险与合规口径理解。"
+              "编辑对照：制度和法规记录；非个人能力已证"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "art"
           ],
           "type": "prose"
         },
@@ -30648,13 +30752,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：合规体系与监管沟通与风险评估与违规调查。"
+              "目标需核：组织伦理/监管标准合规计划协调"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "art"
           ],
           "type": "prose"
         },
@@ -30663,13 +30768,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，职能不同"
+              "编辑探索差距，未量化转岗距离/成功率/固定训练时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "art"
           ],
           "type": "prose"
         },
@@ -30678,13 +30784,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：问题分析与流程梳理与记录经验。"
+              "编辑对照：流程问题分析；非个人能力已证"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30693,13 +30800,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：面向组织问题的分析方法与建议交付与合同责任。"
+              "目标需核：组织评估、工作测量、系统规程设计及建议"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30708,13 +30816,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，产出不同"
+              "编辑探索差距，未量化转岗距离/成功率/固定训练时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30723,13 +30832,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：系统功能配置与需求转述与测试经验。"
+              "编辑对照：需求配置测试；非个人能力已证"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "directing"
           ],
           "type": "prose"
         },
@@ -30738,13 +30848,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：系统需求分析与架构与软件工程与实施衔接。"
+              "目标需核：复杂应用/系统管理集成、数据处理问题与能力评估"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "directing"
           ],
           "type": "prose"
         },
@@ -30753,13 +30864,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，需工程方法"
+              "编辑探索差距，未量化转岗距离/成功率/固定训练时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "directing"
           ],
           "type": "prose"
         },
@@ -30768,13 +30880,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：数据与权限与检索与台账理解。"
+              "编辑对照：权限检索记录；非个人能力已证"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "editing"
           ],
           "type": "prose"
         },
@@ -30783,13 +30896,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：数据库部署与备份与性能与内核运维。"
+              "目标需核：数据库管理测试实施、容量性能扩展与安全"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "editing"
           ],
           "type": "prose"
         },
@@ -30798,13 +30912,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，需运维训练"
+              "编辑探索差距，未量化转岗距离/成功率/固定训练时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "editing"
           ],
           "type": "prose"
         },
@@ -30813,13 +30928,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：权限与版本与审计与安全监督理解。"
+              "编辑对照：权限安全协作；非个人能力已证"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30828,13 +30944,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：安全防护与攻防与事件响应与安全运营。"
+              "目标需核：网络信息保护、漏洞风险减缓及事件响应"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30843,13 +30960,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，需安全训练"
+              "编辑探索差距，未量化转岗距离/成功率/固定训练时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30858,13 +30976,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：分类与元数据与保存期限与检索理解。"
+              "编辑对照：分类保存检索；非个人能力已证"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "r5-archivists"
           ],
           "type": "prose"
         },
@@ -30873,13 +30992,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：档案典藏与鉴定与编研与提供利用与档案专业训练。"
+              "目标需核：永久/历史价值记录鉴定编辑保管和档案研究"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "r5-archivists"
           ],
           "type": "prose"
         },
@@ -30888,13 +31008,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，场景不同"
+              "编辑探索差距，未量化转岗距离/成功率/固定训练时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "r5-archivists"
           ],
           "type": "prose"
         },
@@ -30903,13 +31024,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS/OEWS 与 O*NET：用于工资、就业与工作情境与准备层级口径（工资与就业为父类口径）。"
+              "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。"
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -30918,13 +31038,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本组织制度与授权规则：用于分类、权限、分发、保存期限、销毁与审计边界。"
+              "认证入口不支持就业存量，现引BLS父类表。"
             ]
           },
           "id": "actors.display.market_signal_card.source.ratify",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -30933,13 +31052,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "档案与会计档案与保密与数据法规：用于电子档案与档案与保密与数据要求（按名称与一般要求引用，专门法规外的部分未逐条核对条号）。"
+              "实际链接是国家档案局22号电子档案管理办法：针对适用电子档案的元数据、归档检测、备份迁移和到期鉴定审批等要求；不由这一个链接证明档案法或会计档案79号条款，也不是实采雇主制度。"
             ]
           },
           "id": "actors.display.market_signal_card.source.employer",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-electronic-current"
           ],
           "type": "prose"
         },
@@ -30948,13 +31066,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 15-1299.03：用于任务与工作情境与准备层级。"
+              "O*NET15-1299.03实施管理企业文档系统和规程，捕获存储检索共享销毁电子记录。23任务中22Core/1Supplemental，系统绩效数据分析解释传播是补充，不当全部岗位必做。政策/分类、新系统评估采购部署为协助参与，配置访问和版本控制、捕获、检索、需求、测试、法规跟踪和用户支持为核心。监控法规不自动给法务裁决权；任务与邻职可交叉，不能一律排除档案工作、系统开发配置或技术职责，只按主要产出/授权区分。 O*NET57情境：邮件每天100/电话74/面对面59，持续接触16/大部分47/半时37；团队极重要33/非常56；准确极重要35/非常45；日严格期限20/每周40；日决策16；持续坐35/超过半时50；规律95；每周40小时79/超过40为21；室内受控每天61/从不22。调查不证明每人常加班或大量陌生人沟通；公众服务26非常重要、37重要。自动化28高度/44中等/28略有非GenAI采用。实际节点加班、值班及流程需核具体雇主。"
             ]
           },
           "id": "actors.display.market_signal_card.source.onet",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         }
@@ -31111,12 +31229,21 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET 15-1299.03、BLS/OEWS、《中华人民共和国档案法》与《会计档案管理办法》"
+              "O*NET文档细类任务/情境/软件与父类行业，OEWS2025父类工资，BLS2025—2035父类预测，2020档案法/2024电子档案/2016会计档案具体条款，PIPL及NBS2025信息行业背景。"
             ]
           },
           "id": "actors.display.source_card.source",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-current",
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current",
+            "r5-nbs-current",
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -31125,12 +31252,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-09-19"
+              "2026-10-09：九模块作者修订自审，独立审阅待后续阶段。"
             ]
           },
           "id": "actors.display.source_card.updated-at",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -31139,12 +31267,20 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源范围、限制与统计时期按原始证据分别核对；未取得的数据在相应位置可见标记。"
+              "细类任务与父类统计分开，法定行为要求非统一考试资格；24旧source名URL和11旧facts及Hero/FAQ/7练习保护，不签全页一致。"
             ]
           },
           "id": "actors.display.source_card.note",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-current",
+            "r5-archive-current",
+            "r5-electronic-current",
+            "r5-account-current",
+            "r5-nbs-current"
           ],
           "type": "prose"
         }
@@ -31297,14 +31433,13 @@
                 "url": "https://www.onetonline.org/link/summary/11-9199.02"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "核验 2025 年工资数据父类中位与分位（55,940／79,370／116,580／157,500／188,470 美元/年；26.89／38.16／56.05／75.72／90.61 美元/时）。",
-                  "该口径为父类 Computer Occupations, All Other（15-1299），不是 15-1299.03 单职业精确值；全国统计位置不是个人起薪或地区报价。"
+                  "美国父类15-1299其他计算机职业，2025全国10/25/50/75/90分位：年55,940/79,370/116,580/157,500/188,470美元；时26.89/38.16/56.05/75.72/90.61美元。不是文档管理细类15-1299.03精确工资。OEWS直时税前受雇口径含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不排全部项目受雇奖金/合同雇员。分位不等起薪/年限/到手/上限，年度官方统计不凭个人工时另造。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official wage statistics",
                 "id": "bls",
-                "limitation": "该口径为父类 Computer Occupations, All Other（15-1299），不是 15-1299.03 单职业精确值；全国统计位置不是个人起薪或地区报价。",
+                "limitation": "美国父类15-1299其他计算机职业，2025全国10/25/50/75/90分位：年55,940/79,370/116,580/157,500/188,470美元；时26.89/38.16/56.05/75.72/90.61美元。不是文档管理细类15-1299.03精确工资。OEWS直时税前受雇口径含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不排全部项目受雇奖金/合同雇员。分位不等起薪/年限/到手/上限，年度官方统计不凭个人工时另造。",
                 "market": "美国",
                 "name": "O*NET OnLine（转引 U.S. Bureau of Labor Statistics）：15-1299.03 全国工资（父类 Computer Occupations, All Other 口径）",
                 "period": "2025 年工资数据; accessed 2026-09-19",
@@ -31313,14 +31448,13 @@
                 "url": "https://www.onetonline.org/link/localwages/15-1299.03"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "第三十六条（推进电子档案管理信息系统建设，与办公自动化系统与业务系统衔接）与第三十七条（电子档案应当来源可靠、程序规范、要素合规，与传统载体档案具有同等效力）与第三十八条（推进传统载体档案数字化，已数字化的应对原件妥善保管）与第三十九条（电子档案应通过符合安全管理要求的网络或存储介质向档案馆移交并检测真实性完整性可用性安全性）与第四十二条（档案主管部门检查含档案信息化建设和信息安全保障情况）与第四十四条（发现档案安全隐患及时补救，发生档案损毁与信息泄露及时报告）。",
-                  "为档案与电子档案的管理与信息化要求，不规定工资水平，也不等同于美国州或雇主要求。"
+                  "中国档案法2020修订、2021-01-01施行：11条专业知识技能/可按规定评职称非统一资格证；21条禁擅销。36—39条系统衔接、电子档案来源可靠/程序规范/要素合规及凭证效力、数字化原件保管、移交和接收检测；44条安全隐患及时补救、损毁泄露及时向档案主管部门报告，个人按机构授权协作。电子记录并非一律已归档档案，按范围和适用主体核。 原档案局URL本轮超时，用新增汕头政府转载成功全文核。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official legislation",
                 "id": "cn-rule",
-                "limitation": "为档案与电子档案的管理与信息化要求，不规定工资水平，也不等同于美国州或雇主要求。",
+                "limitation": "中国档案法2020修订、2021-01-01施行：11条专业知识技能/可按规定评职称非统一资格证；21条禁擅销。36—39条系统衔接、电子档案来源可靠/程序规范/要素合规及凭证效力、数字化原件保管、移交和接收检测；44条安全隐患及时补救、损毁泄露及时向档案主管部门报告，个人按机构授权协作。电子记录并非一律已归档档案，按范围和适用主体核。 原档案局URL本轮超时，用新增汕头政府转载成功全文核。",
                 "market": "中国大陆",
                 "name": "《中华人民共和国档案法》（2020 年 6 月 20 日修订通过，2021 年 1 月 1 日施行）",
                 "period": "2020 年修订，2021 年 1 月 1 日施行；accessed 2026-09-19",
@@ -31393,14 +31527,13 @@
                 "url": "https://www.saac.gov.cn/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明分类、权限、分发、保存期限与销毁与数据与审计管理边界由本组织制度与授权规则确定。",
-                  "不是招聘规模或录用保证，也不代替本组织制度原文。"
+                  "档案局门户不代表具体机构制度/招聘；编辑观察建议未取得机构原文。"
                 ],
-                "evidence_type": "editorial synthesis",
+                "evidence_type": "official portal",
                 "id": "employer",
-                "limitation": "不是招聘规模或录用保证，也不代替本组织制度原文。",
+                "limitation": "档案局门户不代表具体机构制度/招聘；编辑观察建议未取得机构原文。",
                 "market": "雇主与任职辖区",
                 "name": "本组织文档与记录管理授权与审计制度（编辑综合）",
                 "period": "current employer context; reviewed 2026-09-19",
@@ -31441,14 +31574,13 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明分行业与单位类型工资统计的发布口径。",
-                  "公开统计未建立与本职业对应的职业级工资分布。"
+                  "国家统计局2025信息传输软件信息技术服务业城镇非私营248,752/私营128,166元税前年平均，仅行业多职业背景，非文档专员中位/起薪/月薪。城镇5人以上法人、排除个体/自由职业等，不笼统排除兼职或外包法人受雇人员。岗位跨行业，不能全套IT行业。未取得中国精确职业分布及代表性招聘计酬样本，不断言全国所有公开统计最高只到行业。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official industry wage statistics",
                 "id": "nbs",
-                "limitation": "公开统计未建立与本职业对应的职业级工资分布。",
+                "limitation": "国家统计局2025信息传输软件信息技术服务业城镇非私营248,752/私营128,166元税前年平均，仅行业多职业背景，非文档专员中位/起薪/月薪。城镇5人以上法人、排除个体/自由职业等，不笼统排除兼职或外包法人受雇人员。岗位跨行业，不能全套IT行业。未取得中国精确职业分布及代表性招聘计酬样本，不断言全国所有公开统计最高只到行业。",
                 "market": "中国大陆",
                 "name": "国家统计局公开渠道（分行业与单位类型的工资统计口径）",
                 "period": "accessed 2026-09-19",
@@ -31473,14 +31605,13 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明本职业工资统计的来源与方法。",
-                  "全国统计位置不是个人起薪或地区报价。"
+                  "美国父类15-1299其他计算机职业，2025全国10/25/50/75/90分位：年55,940/79,370/116,580/157,500/188,470美元；时26.89/38.16/56.05/75.72/90.61美元。不是文档管理细类15-1299.03精确工资。OEWS直时税前受雇口径含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不排全部项目受雇奖金/合同雇员。分位不等起薪/年限/到手/上限，年度官方统计不凭个人工时另造。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official wage statistics",
                 "id": "oews",
-                "limitation": "全国统计位置不是个人起薪或地区报价。",
+                "limitation": "美国父类15-1299其他计算机职业，2025全国10/25/50/75/90分位：年55,940/79,370/116,580/157,500/188,470美元；时26.89/38.16/56.05/75.72/90.61美元。不是文档管理细类15-1299.03精确工资。OEWS直时税前受雇口径含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不排全部项目受雇奖金/合同雇员。分位不等起薪/年限/到手/上限，年度官方统计不凭个人工时另造。",
                 "market": "美国",
                 "name": "BLS Occupational Employment and Wage Statistics（OEWS）",
                 "period": "2025 年工资数据口径; accessed 2026-09-19",
@@ -31489,14 +31620,13 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "核验职业定义、任务（23 项）、工作情境与准备层级（Job Zone Four，SVP 7.0 至 <8.0）与兴趣代码 CI。",
-                  "美国精确职业数据；不定义中国资格、工资或岗位授权。"
+                  "O*NET15-1299.03实施管理企业文档系统和规程，捕获存储检索共享销毁电子记录。23任务中22Core/1Supplemental，系统绩效数据分析解释传播是补充，不当全部岗位必做。政策/分类、新系统评估采购部署为协助参与，配置访问和版本控制、捕获、检索、需求、测试、法规跟踪和用户支持为核心。监控法规不自动给法务裁决权；任务与邻职可交叉，不能一律排除档案工作、系统开发配置或技术职责，只按主要产出/授权区分。 O*NET57情境：邮件每天100/电话74/面对面59，持续接触16/大部分47/半时37；团队极重要33/非常56；准确极重要35/非常45；日严格期限20/每周40；日决策16；持续坐35/超过半时50；规律95；每周40小时79/超过40为21；室内受控每天61/从不22。调查不证明每人常加班或大量陌生人沟通；公众服务26非常重要、37重要。自动化28高度/44中等/28略有非GenAI采用。实际节点加班、值班及流程需核具体雇主。 BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet",
-                "limitation": "美国精确职业数据；不定义中国资格、工资或岗位授权。",
+                "limitation": "O*NET15-1299.03实施管理企业文档系统和规程，捕获存储检索共享销毁电子记录。23任务中22Core/1Supplemental，系统绩效数据分析解释传播是补充，不当全部岗位必做。政策/分类、新系统评估采购部署为协助参与，配置访问和版本控制、捕获、检索、需求、测试、法规跟踪和用户支持为核心。监控法规不自动给法务裁决权；任务与邻职可交叉，不能一律排除档案工作、系统开发配置或技术职责，只按主要产出/授权区分。 O*NET57情境：邮件每天100/电话74/面对面59，持续接触16/大部分47/半时37；团队极重要33/非常56；准确极重要35/非常45；日严格期限20/每周40；日决策16；持续坐35/超过半时50；规律95；每周40小时79/超过40为21；室内受控每天61/从不22。调查不证明每人常加班或大量陌生人沟通；公众服务26非常重要、37重要。自动化28高度/44中等/28略有非GenAI采用。实际节点加班、值班及流程需核具体雇主。 BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。",
                 "market": "美国",
                 "name": "O*NET OnLine：Document Management Specialists（15-1299.03）职业档案",
                 "period": "updated 2026; accessed 2026-09-19",
@@ -31505,14 +31635,13 @@
                 "url": "https://www.onetonline.org/link/summary/15-1299.03"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明本职业常见的文档与内容管理与捕获与办公工具。",
-                  "工具清单不等于自动化程度或替代结论。"
+                  "35软件类含内容工作流、文档管理、OCR、数据库和开发等，不等GenAI。Hot2025关联细类全部唯一美国招聘帖30关键词：Office28/Excel27/Outlook13/PowerPoint13/Word12/SharePoint11%、Access3/Visio2/AutoCAD2/Acrobat1/SolidWorks1，Project/Windows/HTML<1，其余比例Not available非0。非实际采用率/效果；OCR、普通检索、去重与自动工作流和GenAI分开。无具体工具功能/效率减错/采用/替代或工资就业因果，ILO2025未核本细类ISCO映射分数；NIST AI RMF1.0自愿框架不授法规/销毁权。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "official technology keywords",
                 "id": "r2-ai",
-                "limitation": "工具清单不等于自动化程度或替代结论。",
+                "limitation": "35软件类含内容工作流、文档管理、OCR、数据库和开发等，不等GenAI。Hot2025关联细类全部唯一美国招聘帖30关键词：Office28/Excel27/Outlook13/PowerPoint13/Word12/SharePoint11%、Access3/Visio2/AutoCAD2/Acrobat1/SolidWorks1，Project/Windows/HTML<1，其余比例Not available非0。非实际采用率/效果；OCR、普通检索、去重与自动工作流和GenAI分开。无具体工具功能/效率减错/采用/替代或工资就业因果，ILO2025未核本细类ISCO映射分数；NIST AI RMF1.0自愿框架不授法规/销毁权。",
                 "market": "美国",
                 "name": "O*NET OnLine：15-1299.03 Hot Technologies（工具与技术）",
                 "period": "updated 2026; accessed 2026-09-19",
@@ -31521,14 +31650,13 @@
                 "url": "https://www.onetonline.org/link/hot_tech/15-1299.03"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "为行业与单位类型层级口径，未提供与 15-1299.03 一一对应的全国职业工资分布。",
-                  "行业平均工资不是本职业岗位工资，也不覆盖项目制外包与兼职与个人接单。"
+                  "国家统计局2025信息传输软件信息技术服务业城镇非私营248,752/私营128,166元税前年平均，仅行业多职业背景，非文档专员中位/起薪/月薪。城镇5人以上法人、排除个体/自由职业等，不笼统排除兼职或外包法人受雇人员。岗位跨行业，不能全套IT行业。未取得中国精确职业分布及代表性招聘计酬样本，不断言全国所有公开统计最高只到行业。 旧URL首页，不是2025全文。"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "r2-pay-1",
-                "limitation": "行业平均工资不是本职业岗位工资，也不覆盖项目制外包与兼职与个人接单。",
+                "limitation": "国家统计局2025信息传输软件信息技术服务业城镇非私营248,752/私营128,166元税前年平均，仅行业多职业背景，非文档专员中位/起薪/月薪。城镇5人以上法人、排除个体/自由职业等，不笼统排除兼职或外包法人受雇人员。岗位跨行业，不能全套IT行业。未取得中国精确职业分布及代表性招聘计酬样本，不断言全国所有公开统计最高只到行业。 旧URL首页，不是2025全文。",
                 "market": "中国大陆",
                 "name": "2025年城镇单位就业人员年平均工资情况",
                 "period": "2025; accessed 2026-09-19",
@@ -31537,30 +31665,28 @@
                 "url": "https://www.stats.gov.cn/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明 OEWS 抽样、计酬口径与公布方法。",
-                  "方法说明不是本职业具体工资结论。"
+                  "旧URL是OOH检索非OEWS方法，方法另列r5-oews-concepts。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official outlook search portal",
                 "id": "r2-pay-2",
-                "limitation": "方法说明不是本职业具体工资结论。",
+                "limitation": "旧URL是OOH检索非OEWS方法，方法另列r5-oews-concepts。",
                 "market": "美国",
                 "name": "BLS Handbook of Methods：Occupational Employment and Wage Statistics",
                 "period": "accessed 2026-09-19",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "industry_proxy",
+                "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/occupation-finder.htm"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于核验父类口径 25 分位（79,370 美元/年；38.16 美元/时）与 75 分位（157,500 美元/年；75.72 美元/时）等分位值。",
-                  "该口径为父类 Computer Occupations, All Other（15-1299）；分位是统计位置，不是起薪或上限承诺。"
+                  "美国父类15-1299其他计算机职业，2025全国10/25/50/75/90分位：年55,940/79,370/116,580/157,500/188,470美元；时26.89/38.16/56.05/75.72/90.61美元。不是文档管理细类15-1299.03精确工资。OEWS直时税前受雇口径含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不排全部项目受雇奖金/合同雇员。分位不等起薪/年限/到手/上限，年度官方统计不凭个人工时另造。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official wage statistics",
                 "id": "r2-pay-3",
-                "limitation": "该口径为父类 Computer Occupations, All Other（15-1299）；分位是统计位置，不是起薪或上限承诺。",
+                "limitation": "美国父类15-1299其他计算机职业，2025全国10/25/50/75/90分位：年55,940/79,370/116,580/157,500/188,470美元；时26.89/38.16/56.05/75.72/90.61美元。不是文档管理细类15-1299.03精确工资。OEWS直时税前受雇口径含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不排全部项目受雇奖金/合同雇员。分位不等起薪/年限/到手/上限，年度官方统计不凭个人工时另造。",
                 "market": "美国",
                 "name": "O*NET OnLine（转引 U.S. Bureau of Labor Statistics）：15-1299.03 工资分位（父类口径）",
                 "period": "2025 年工资数据; accessed 2026-09-19",
@@ -31569,14 +31695,13 @@
                 "url": "https://www.onetonline.org/link/localwages/15-1299.03"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于核对本职业的执照与认证查询入口。",
-                  "该页不列出本职业的强制证书；上岗与授权要求以本组织与雇主与法域为准。"
+                  "认证查询不证明全国免照/强制资格缺失/就业规模。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official certification search portal",
                 "id": "ratify",
-                "limitation": "该页不列出本职业的强制证书；上岗与授权要求以本组织与雇主与法域为准。",
+                "limitation": "认证查询不证明全国免照/强制资格缺失/就业规模。",
                 "market": "美国",
                 "name": "O*NET OnLine：15-1299.03 执照与认证入口",
                 "period": "accessed 2026-09-19",
@@ -31617,20 +31742,169 @@
                 "url": "https://www.onetonline.org/link/details/15-1299.03"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "第十二条/第十四条（保管期限分永久与定期，定期一般 10 年与 30 年，自会计年度终了后第一天算起）与第十六条（到期鉴定并形成鉴定意见书）与第十七条（鉴定由档案管理机构牵头，组织会计与审计与纪检监察等共同进行）与第十八条（销毁清册、五方签署、共同派员监销，电子会计档案另按国家电子档案规定由档案管理与会计管理与信息系统管理机构共同监销）与第十九条（保管期满但未结清的债权债务会计凭证等不得销毁）。",
-                  "为会计档案的管理要求，不规定工资水平，也不等同于美国州或雇主要求。"
+                  "财政部国家档案局79号办法（2016-01-01施行），适用会计档案不是所有企业文件。8/9条电子单套保存有具体条件，不能一律扫描后销纸；12条移交电子及元数据/特殊格式平台和接收检测。14/15条永久与定期10/30年、年度终了次日起、附表规定最低期限；16—18条到期鉴定/续存/清册/签署/共同监销，19条未结清债权债务及其他未了事项凭证不得销毁。预算计划制度文书按28条不适用本办法。 旧第12/14并列期限不准确：12为移交，14才期限；新增财政部全文。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official regulation",
                 "id": "teacher",
-                "limitation": "为会计档案的管理要求，不规定工资水平，也不等同于美国州或雇主要求。",
+                "limitation": "财政部国家档案局79号办法（2016-01-01施行），适用会计档案不是所有企业文件。8/9条电子单套保存有具体条件，不能一律扫描后销纸；12条移交电子及元数据/特殊格式平台和接收检测。14/15条永久与定期10/30年、年度终了次日起、附表规定最低期限；16—18条到期鉴定/续存/清册/签署/共同监销，19条未结清债权债务及其他未了事项凭证不得销毁。预算计划制度文书按28条不适用本办法。 旧第12/14并列期限不准确：12为移交，14才期限；新增财政部全文。",
                 "market": "中国大陆",
                 "name": "《会计档案管理办法》（中华人民共和国财政部、国家档案局令第 79 号，2016 年 1 月 1 日施行）",
                 "period": "2016 年 1 月 1 日施行；accessed 2026-09-19",
                 "publisher": "中华人民共和国财政部 / 国家档案局",
                 "scope": "industry_proxy",
                 "url": "https://www.gov.cn/gongbao/content/2016/content_5041555.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-oews-concepts",
+                "limitation": "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。",
+                "market": "美国",
+                "name": "BLS OEWS工资人群与组成",
+                "period": "现行方法；本批检索2026-10-09",
+                "publisher": "Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。"
+                ],
+                "evidence_type": "official law",
+                "id": "r5-cn-pipl",
+                "limitation": "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。",
+                "market": "中国内地",
+                "name": "个人信息保护法：文档中个人信息处理边界",
+                "period": "2021法；本批实际读；检索2026-10-09",
+                "publisher": "全国人大/中央网信办",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "按具体获准系统及适用资料验证风险与效果，不把法律责任当技术无法替代证据。"
+                ],
+                "evidence_type": "official framework",
+                "id": "r5-nist-current",
+                "limitation": "跨职业自愿AI治理框架，不是文档权限、电子或会计档案销毁法，也不是具体工具效果测量。",
+                "market": "跨市场",
+                "name": "NIST AI RMF官方框架说明",
+                "period": "自愿框架1.0；本批实际读；检索2026-10-09",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本批实际读ILO2025摘要，本职业未核SOC15-1299.03与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。"
+                ],
+                "evidence_type": "official research summary",
+                "id": "r5-ilo-current",
+                "limitation": "本批实际读ILO2025摘要，本职业未核SOC15-1299.03与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。",
+                "market": "跨市场",
+                "name": "ILO2025 GenAI暴露研究官方摘要",
+                "period": "2025研究摘要；本批实际读；检索2026-10-09",
+                "publisher": "ILO",
+                "scope": "contextual",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "国家统计局2025信息传输软件信息技术服务业城镇非私营248,752/私营128,166元税前年平均，仅行业多职业背景，非文档专员中位/起薪/月薪。城镇5人以上法人、排除个体/自由职业等，不笼统排除兼职或外包法人受雇人员。岗位跨行业，不能全套IT行业。未取得中国精确职业分布及代表性招聘计酬样本，不断言全国所有公开统计最高只到行业。"
+                ],
+                "evidence_type": "official industry wage statistics",
+                "id": "r5-nbs-current",
+                "limitation": "国家统计局2025信息传输软件信息技术服务业城镇非私营248,752/私营128,166元税前年平均，仅行业多职业背景，非文档专员中位/起薪/月薪。城镇5人以上法人、排除个体/自由职业等，不笼统排除兼职或外包法人受雇人员。岗位跨行业，不能全套IT行业。未取得中国精确职业分布及代表性招聘计酬样本，不断言全国所有公开统计最高只到行业。",
+                "market": "中国大陆",
+                "name": "国家统计局2025城镇单位工资：信息传输、软件和信息技术服务业",
+                "period": "2025年",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。 O*NET细类JZ4/SVP7至<8，准备组通常需数年相关经验、在岗和/或职业训练，不是几周/几月统一课程即可入行。60%学士/15%硕士/10%副学士是新入职所需学历受访反馈，不是60%岗位/雇主或员工学历。BLS父类典型本科/相关经验None/典型OJT None不能覆盖细类组级准备要求；None非免培训。未逐核中国现行准入目录/美国全部州要求，不宣称全国免照或统一必考证。"
+                ],
+                "evidence_type": "official projections",
+                "id": "r5-bls-current",
+                "limitation": "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。 O*NET细类JZ4/SVP7至<8，准备组通常需数年相关经验、在岗和/或职业训练，不是几周/几月统一课程即可入行。60%学士/15%硕士/10%副学士是新入职所需学历受访反馈，不是60%岗位/雇主或员工学历。BLS父类典型本科/相关经验None/典型OJT None不能覆盖细类组级准备要求；None非免培训。未逐核中国现行准入目录/美国全部州要求，不宣称全国免照或统一必考证。",
+                "market": "美国",
+                "name": "BLS表1.2其他计算机职业父类就业预测与典型训练",
+                "period": "2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国档案法2020修订、2021-01-01施行：11条专业知识技能/可按规定评职称非统一资格证；21条禁擅销。36—39条系统衔接、电子档案来源可靠/程序规范/要素合规及凭证效力、数字化原件保管、移交和接收检测；44条安全隐患及时补救、损毁泄露及时向档案主管部门报告，个人按机构授权协作。电子记录并非一律已归档档案，按范围和适用主体核。"
+                ],
+                "evidence_type": "official legislation",
+                "id": "r5-archive-current",
+                "limitation": "中国档案法2020修订、2021-01-01施行：11条专业知识技能/可按规定评职称非统一资格证；21条禁擅销。36—39条系统衔接、电子档案来源可靠/程序规范/要素合规及凭证效力、数字化原件保管、移交和接收检测；44条安全隐患及时补救、损毁泄露及时向档案主管部门报告，个人按机构授权协作。电子记录并非一律已归档档案，按范围和适用主体核。",
+                "market": "中国大陆",
+                "name": "2020档案法相关条款（汕头商务局转载）",
+                "period": "2020修订；2021施行",
+                "publisher": "全国人大常委会；汕头商务局转载",
+                "scope": "industry_proxy",
+                "url": "https://www.shantou.gov.cn/stsswbj/gkmlpt/content/1/1772/mpost_1772149.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2024国家档案局22号电子档案管理办法（11-01施行）：3/5/14/16—19条来源程序要素、元数据全过程、归档范围/期限、检测及责任人确认；26—28条备份/迁移制度与转换后检测；29/30条到期鉴定、继续保存重划期限、履行审批后才销毁并记录，不能到期自动删。35条提出AI等用于编研/展览/专题数据库开发，不证明本职业部署率/效益或AI自动授权。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "r5-electronic-current",
+                "limitation": "2024国家档案局22号电子档案管理办法（11-01施行）：3/5/14/16—19条来源程序要素、元数据全过程、归档范围/期限、检测及责任人确认；26—28条备份/迁移制度与转换后检测；29/30条到期鉴定、继续保存重划期限、履行审批后才销毁并记录，不能到期自动删。35条提出AI等用于编研/展览/专题数据库开发，不证明本职业部署率/效益或AI自动授权。",
+                "market": "中国大陆",
+                "name": "2024电子档案管理办法22号（龙口档案馆转载）",
+                "period": "2024-11-01施行",
+                "publisher": "国家档案局；龙口档案馆转载",
+                "scope": "industry_proxy",
+                "url": "https://www.longkou.gov.cn/col/col120150/zcfg0503/art/2026/art_bb789dfc52b54a8da12640be98f76677.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "财政部国家档案局79号办法（2016-01-01施行），适用会计档案不是所有企业文件。8/9条电子单套保存有具体条件，不能一律扫描后销纸；12条移交电子及元数据/特殊格式平台和接收检测。14/15条永久与定期10/30年、年度终了次日起、附表规定最低期限；16—18条到期鉴定/续存/清册/签署/共同监销，19条未结清债权债务及其他未了事项凭证不得销毁。预算计划制度文书按28条不适用本办法。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "r5-account-current",
+                "limitation": "财政部国家档案局79号办法（2016-01-01施行），适用会计档案不是所有企业文件。8/9条电子单套保存有具体条件，不能一律扫描后销纸；12条移交电子及元数据/特殊格式平台和接收检测。14/15条永久与定期10/30年、年度终了次日起、附表规定最低期限；16—18条到期鉴定/续存/清册/签署/共同监销，19条未结清债权债务及其他未了事项凭证不得销毁。预算计划制度文书按28条不适用本办法。",
+                "market": "中国大陆",
+                "name": "2016会计档案管理办法79号财政部全文",
+                "period": "2016-01-01施行",
+                "publisher": "财政部；国家档案局",
+                "scope": "industry_proxy",
+                "url": "https://www.mof.gov.cn/gp/xxgkml/tfs/201512/t20151214_2510365.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "鉴定编辑保管永久及历史价值记录，参与档案研究；仅目标任务对照。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "r5-archivists",
+                "limitation": "鉴定编辑保管永久及历史价值记录，参与档案研究；仅目标任务对照。",
+                "market": "美国",
+                "name": "O*NET25-4011档案管理员",
+                "period": "检索2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/25-4011.00"
               }
             ]
           },
@@ -32243,7 +32517,7 @@
               "type": "prose"
             },
             "结论": {
-              "$item": "actors.ai-impact.ai-impact-table.9",
+              "$item": "actors.ai-impact.ai-impact-table.1",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -32257,7 +32531,7 @@
             }
           },
           {
-            "source_ref": "sag",
+            "source_ref": "r5-ilo-current",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.2.limit",
               "block": "ai-impact",
@@ -32265,7 +32539,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32278,13 +32552,13 @@
               "type": "prose"
             },
             "结论": {
-              "$item": "actors.ai-impact.ai-impact-table.5",
+              "$item": "actors.ai-impact.ai-impact-table.9",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "链接": {
-              "$source": "sag",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32362,7 +32636,7 @@
             }
           },
           {
-            "source_ref": "nist",
+            "source_ref": "r5-nist-current",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.5.limit",
               "block": "ai-impact",
@@ -32370,7 +32644,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "nist",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32389,7 +32663,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "nist",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32405,12 +32679,7 @@
         },
         "method_cards": [
           {
-            "含义": {
-              "$item": "actors.ai-impact.ai-impact-table.1",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "type": "prose"
-            },
+            "含义": "35软件类含内容工作流、文档管理、OCR、数据库和开发等，不等GenAI。Hot2025关联细类全部唯一美国招聘帖30关键词：Office28/Excel27/Outlook13/PowerPoint13/Word12/SharePoint11%、Access3/Visio2/AutoCAD2/Acrobat1/SolidWorks1，Project/Windows/HTML<1，其余比例Not available非0。非实际采用率/效果；OCR、普通检索、去重与自动工作流和GenAI分开。无具体工具功能/效率减错/采用/替代或工资就业因果，ILO2025未核本细类ISCO映射分数；NIST AI RMF1.0自愿框架不授法规/销毁权。",
             "概念": {
               "$item": "actors.display.ai_impact_table.method.1.concept",
               "block": "ai-impact",
@@ -32594,7 +32863,7 @@
             }
           },
           {
-            "source_ref": "sag",
+            "source_ref": "r5-cn-pipl",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.6.answer",
               "block": "ai-impact",
@@ -33158,7 +33427,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33166,7 +33435,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33204,7 +33473,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "r5-electronic-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33212,7 +33481,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "r5-electronic-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33227,7 +33496,7 @@
           },
           {
             "href": {
-              "$source": "r2-pay-3",
+              "$source": "r5-account-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33235,7 +33504,7 @@
             },
             "id": "r2-pay-3",
             "label": {
-              "$source": "r2-pay-3",
+              "$source": "r5-account-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34091,7 +34360,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "sag-moa"
             ],
             "id": "image-use",
             "mitigation": {
@@ -34127,7 +34396,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "sag-moa"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -34235,8 +34504,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "nist",
-              "sag-moa"
+              "employer"
             ],
             "id": "project-data",
             "mitigation": {
@@ -34272,7 +34540,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
+              "sag-moa",
               "employer"
             ],
             "id": "audition-feedback",
@@ -34300,7 +34568,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "sag-moa",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34308,7 +34576,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "sag-moa",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34346,7 +34614,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "r5-electronic-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34354,7 +34622,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "r5-electronic-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34392,7 +34660,7 @@
           },
           {
             "href": {
-              "$source": "nist",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34400,7 +34668,7 @@
             },
             "id": "nist",
             "label": {
-              "$source": "nist",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34426,33 +34694,33 @@
           "bls_table": [
             {
               "指标": "数据类型",
-              "数值": "制度与法规与授权要求为主",
-              "说明": "中国大陆公开工资统计按行业门类与单位类型发布，且本职业相关岗位分散在信息与技术服务、金融与保险、医疗与教育、公共管理与制造等不同行业，未建立与本职业对应的职业级口径；本页因此保留缺口，不以行业均值替代。"
+              "数值": "职业工资缺口；行业背景",
+              "说明": "国家统计局2025信息传输软件信息技术服务业城镇非私营248,752/私营128,166元税前年平均，仅行业多职业背景，非文档专员中位/起薪/月薪。城镇5人以上法人、排除个体/自由职业等，不笼统排除兼职或外包法人受雇人员。岗位跨行业，不能全套IT行业。未取得中国精确职业分布及代表性招聘计酬样本，不断言全国所有公开统计最高只到行业。"
             },
             {
               "指标": "电子档案合规",
               "数值": "来源可靠与程序规范与要素合规",
-              "说明": "按《中华人民共和国档案法》（2020 年修订，2021 年 1 月 1 日施行）第三十六条与第三十七条，组织应推进电子档案管理信息系统建设并与办公自动化系统与业务系统衔接，电子档案应当来源可靠、程序规范、要素合规，且与传统载体档案具有同等效力。"
+              "说明": "中国档案法2020修订、2021-01-01施行：11条专业知识技能/可按规定评职称非统一资格证；21条禁擅销。36—39条系统衔接、电子档案来源可靠/程序规范/要素合规及凭证效力、数字化原件保管、移交和接收检测；44条安全隐患及时补救、损毁泄露及时向档案主管部门报告，个人按机构授权协作。电子记录并非一律已归档档案，按范围和适用主体核。 2024国家档案局22号电子档案管理办法（11-01施行）：3/5/14/16—19条来源程序要素、元数据全过程、归档范围/期限、检测及责任人确认；26—28条备份/迁移制度与转换后检测；29/30条到期鉴定、继续保存重划期限、履行审批后才销毁并记录，不能到期自动删。35条提出AI等用于编研/展览/专题数据库开发，不证明本职业部署率/效益或AI自动授权。"
             },
             {
               "指标": "会计档案",
               "数值": "保管期限与鉴定与销毁",
-              "说明": "按《会计档案管理办法》（财政部 国家档案局令第 79 号），会计档案保管期限分永久与定期，定期一般 10 年与 30 年；到期须鉴定，销毁须编制清册、签署意见并共同派员监销，未结清债权债务会计凭证不得销毁。"
+              "说明": "财政部国家档案局79号办法（2016-01-01施行），适用会计档案不是所有企业文件。8/9条电子单套保存有具体条件，不能一律扫描后销纸；12条移交电子及元数据/特殊格式平台和接收检测。14/15条永久与定期10/30年、年度终了次日起、附表规定最低期限；16—18条到期鉴定/续存/清册/签署/共同监销，19条未结清债权债务及其他未了事项凭证不得销毁。预算计划制度文书按28条不适用本办法。"
             },
             {
               "指标": "涉密与数据",
               "数值": "保密与数据与个人信息要求",
-              "说明": "按《中华人民共和国保守国家秘密法》《中华人民共和国网络安全法》《中华人民共和国数据安全法》《中华人民共和国个人信息保护法》与本组织制度执行密级与网络与数据与个人信息保护（本页按法规名称与一般要求引用，未逐条核对条文编号）。"
+              "说明": "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。"
             },
             {
               "指标": "计酬方式",
-              "数值": "固定月薪或含项目奖金",
-              "说明": "相关岗位计酬结构差别较大，常见基本工资加年度奖金与项目奖金（如外部实施与咨询）与系统上线与值班安排补贴。"
+              "数值": "计酬结构未实采，按合同核",
+              "说明": "未实采常见工资奖金结构，按真实合同核。"
             },
             {
               "指标": "工作节奏",
-              "数值": "固定日程与节点加班",
-              "说明": "美国反馈工作时间「规律（固定日程）」95%，但系统上线与迁移与审计与记录到期节点常需加班；作息安排按本组织制度执行。"
+              "数值": "中国工时与节点加班未实采",
+              "说明": "95%规律为美国情境，不证明中国岗位普遍节点加班。"
             },
             {
               "指标": "样本边界",
@@ -34462,7 +34730,7 @@
             {
               "指标": "地区比较",
               "数值": "中美证据分别解释",
-              "说明": "美国分位为父类 Computer Occupations, All Other 受雇税前工资统计口径（不含奖金与项目与外包结算收入）；中国大陆按单位与岗位制度确定，两者应分别解释，不能直接换算或合并。"
+              "说明": "美国父类15-1299其他计算机职业，2025全国10/25/50/75/90分位：年55,940/79,370/116,580/157,500/188,470美元；时26.89/38.16/56.05/75.72/90.61美元。不是文档管理细类15-1299.03精确工资。OEWS直时税前受雇口径含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不排全部项目受雇奖金/合同雇员。分位不等起薪/年限/到手/上限，年度官方统计不凭个人工时另造。"
             }
           ],
           "china_ai_row": {
@@ -34475,7 +34743,7 @@
           "china_edu_table": [
             {
               "学历段": "文件与电子档案岗位",
-              "岗位方向": "按《中华人民共和国档案法》，电子档案应当来源可靠、程序规范、要素合规；组织应推进电子档案管理信息系统建设并与办公自动化系统与业务系统衔接，已数字化的传统载体档案应对原件妥善保管。",
+              "岗位方向": "中国档案法2020修订、2021-01-01施行：11条专业知识技能/可按规定评职称非统一资格证；21条禁擅销。36—39条系统衔接、电子档案来源可靠/程序规范/要素合规及凭证效力、数字化原件保管、移交和接收检测；44条安全隐患及时补救、损毁泄露及时向档案主管部门报告，个人按机构授权协作。电子记录并非一律已归档档案，按范围和适用主体核。 2024国家档案局22号电子档案管理办法（11-01施行）：3/5/14/16—19条来源程序要素、元数据全过程、归档范围/期限、检测及责任人确认；26—28条备份/迁移制度与转换后检测；29/30条到期鉴定、继续保存重划期限、履行审批后才销毁并记录，不能到期自动删。35条提出AI等用于编研/展览/专题数据库开发，不证明本职业部署率/效益或AI自动授权。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
                 "block": "china-salary",
@@ -34485,7 +34753,7 @@
             },
             {
               "学历段": "会计档案岗位",
-              "岗位方向": "按《会计档案管理办法》，保管期限分永久与定期（定期一般 10 年与 30 年），到期须鉴定，销毁须按程序并共同派员监销，未结清债权债务会计凭证不得销毁。",
+              "岗位方向": "财政部国家档案局79号办法（2016-01-01施行），适用会计档案不是所有企业文件。8/9条电子单套保存有具体条件，不能一律扫描后销纸；12条移交电子及元数据/特殊格式平台和接收检测。14/15条永久与定期10/30年、年度终了次日起、附表规定最低期限；16—18条到期鉴定/续存/清册/签署/共同监销，19条未结清债权债务及其他未了事项凭证不得销毁。预算计划制度文书按28条不适用本办法。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
                 "block": "china-salary",
@@ -34495,7 +34763,7 @@
             },
             {
               "学历段": "涉密与数据管理",
-              "岗位方向": "按《中华人民共和国保守国家秘密法》与网络与数据与个人信息法规及本组织制度执行密级与数据保护；组织文件与用户与个人信息按最小必要原则处理并留痕并接受审计。",
+              "岗位方向": "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.theater",
                 "block": "china-salary",
@@ -34578,14 +34846,14 @@
           "china_ref": {
             "$join": [
               {
-                "$source": "r2-pay-1",
+                "$source": "r5-nbs-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
                 "item": "actors.source-register.published.1"
               },
               {
-                "$source": "r2-pay-1",
+                "$source": "r5-nbs-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -34615,7 +34883,7 @@
               "月薪参考": {
                 "$join": [
                   {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
+                    "$fact": "r5-current-china-jiaojiang-featured-daily-2026",
                     "field": "display_value"
                   },
                   {
@@ -34641,7 +34909,7 @@
           "china_soc_row": "中国大陆薪资口径",
           "edu": "训练与授权见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "r5-current-china-jiaojiang-featured-daily-2026"
           ],
           "sources_note": "来源链接按各自适用范围使用。",
           "ui": {
@@ -34704,10 +34972,10 @@
         },
         "bls_table": [
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-low",
             "指标": "薪资 · 10 分位",
             "数值": {
-              "$fact": "low",
+              "$fact": "r5-current-low",
               "field": "display_value"
             },
             "说明": "父类 Computer Occupations, All Other 口径的分布低端，是统计位置而不是入职起薪。"
@@ -34718,10 +34986,10 @@
             "说明": "父类口径的下四分位；小时口径为 38.16 美元。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-median",
             "指标": "薪资 · 中位数",
             "数值": {
-              "$fact": "median",
+              "$fact": "r5-current-median",
               "field": "display_value"
             },
             "说明": "父类口径的中间位置：一半从业者低于、一半高于该值（中位时薪 56.05 美元）；该口径不是 15-1299.03 单职业精确值。"
@@ -34732,40 +35000,40 @@
             "说明": "父类口径的上四分位；小时口径为 75.72 美元。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-high",
             "指标": "薪资 · 90 分位",
             "数值": {
-              "$fact": "high",
+              "$fact": "r5-current-high",
               "field": "display_value"
             },
-            "说明": "父类口径的分布高端，通常与行业与岗位类型、地区与是否含团队管理与专业领域职责相关。"
+            "说明": "2025父类90分位，不是细类或带班/专业资格薪资溢价证明。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024 就业 · 父类人数",
+            "fact_ref": "r5-current-employment",
+            "指标": "2025就业 · 父类人数",
             "数值": {
-              "$fact": "employment",
+              "$fact": "r5-current-employment",
               "field": "display_value"
             },
-            "说明": "2024 年父类 Computer Occupations, All Other 就业规模（O*NET 摘要页口径约 472,000 人）；全国总量不说明某行业与某组织的具体机会。"
+            "说明": "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 增长预测",
+            "fact_ref": "r5-current-growth",
+            "指标": "2025—2035就业 · 父类净变化",
             "数值": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "display_value"
             },
-            "说明": "O*NET 摘要页标注为「远高于平均（7% 或更高）」（父类口径），该页未给出单一精确百分比，本页按口径原文表述；未取得 BLS 职业展望本职业页一手口径。"
+            "说明": "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 预计空缺",
+            "fact_ref": "r5-current-openings",
+            "指标": "2025—2035就业 · 父类年均空缺",
             "数值": {
-              "$fact": "openings",
+              "$fact": "r5-current-openings",
               "field": "display_value"
             },
-            "说明": "约 31,300 个（父类口径），为预测期内因增长与更替等形成的合计空缺，不是每年净增。"
+            "说明": "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。"
           }
         ],
         "boundary": {
@@ -34827,7 +35095,7 @@
           "type": "prose"
         },
         "growth": {
-          "$fact": "growth",
+          "$fact": "r5-current-growth",
           "field": "display_value"
         },
         "heading": {
@@ -34842,13 +35110,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024 年基期（O*NET 摘要页与详细资料页）",
+        "industry_period": "2025父类行业/自雇与2026細类情境（非行业工资）",
         "industry_rows": [
           {
-            "fact_ref": "median",
-            "industry": "信息与技术服务、金融与保险、医疗与教育、公共管理与制造等依赖大量电子记录的组织（O*NET 摘要页与任务描述，未附行业门类占比与人数）",
+            "fact_ref": "r5-current-industry-theater",
+            "industry": "2025父类就业行业份额（非细类工资）",
             "median": {
-              "$fact": "industry-theater",
+              "$fact": "r5-current-industry-theater",
               "field": "display_value"
             },
             "note": {
@@ -34859,10 +35127,10 @@
             }
           },
           {
-            "fact_ref": "median",
-            "industry": "办公室与机房或系统运行环境，按项目与系统节点推进",
+            "fact_ref": "r5-current-industry-education",
+            "industry": "细类工作情境（非行业工资）",
             "median": {
-              "$fact": "industry-education",
+              "$fact": "r5-current-industry-education",
               "field": "display_value"
             },
             "note": {
@@ -34873,10 +35141,10 @@
             }
           },
           {
-            "fact_ref": "median",
-            "industry": "工作情境：每天使用电子邮件 100%、每天电话交谈 74%、每天面对面讨论 59%、工作时间「规律（固定日程）」95%、持续坐着 35%（另 50% 超过一半时间）、每天面对时间压力 20%",
+            "fact_ref": "r5-current-industry-amusement",
+            "industry": "父类自雇份额与细行业工资缺口",
             "median": {
-              "$fact": "industry-amusement",
+              "$fact": "r5-current-industry-amusement",
               "field": "display_value"
             },
             "note": {
@@ -34887,7 +35155,7 @@
             }
           },
           {
-            "industry": "O*NET 未提供更细的行业分布与行业工资",
+            "industry": "父类自雇4.9%；细行业工资缺口",
             "median": "统计不含自雇",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
@@ -34943,7 +35211,7 @@
           }
         ],
         "median": {
-          "$fact": "median",
+          "$fact": "r5-current-median",
           "field": "display_value"
         },
         "outlook_heading": {
@@ -34953,7 +35221,7 @@
           "type": "prose"
         },
         "outlook_period": {
-          "$fact": "growth",
+          "$fact": "r5-current-growth",
           "field": "period"
         },
         "wage_column_labels": [
@@ -34979,7 +35247,7 @@
             },
             "label": "较低工资位置",
             "value": {
-              "$fact": "low",
+              "$fact": "r5-current-low",
               "field": "display_value"
             }
           },
@@ -34993,7 +35261,7 @@
             },
             "label": "全国中位工资",
             "value": {
-              "$fact": "median",
+              "$fact": "r5-current-median",
               "field": "display_value"
             }
           },
@@ -35007,7 +35275,7 @@
             },
             "label": "较高工资位置",
             "value": {
-              "$fact": "high",
+              "$fact": "r5-current-high",
               "field": "display_value"
             }
           }
@@ -35160,7 +35428,7 @@
           {
             "geography": "美国",
             "horizon": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "period"
             },
             "interpretation": {
@@ -35177,15 +35445,15 @@
             },
             "metric": "就业总体变化",
             "occupation_scope": "文档管理专员（O*NET-SOC 15-1299.03；父类 15-1299 口径）",
-            "source_id": "bls",
+            "source_id": "r5-bls-current",
             "value": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "display_value"
             }
           },
           {
             "geography": "美国",
-            "horizon": "2024 年基期",
+            "horizon": "2025父类基期",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -35200,16 +35468,16 @@
             },
             "metric": "就业规模（父类口径）",
             "occupation_scope": "文档管理专员（O*NET-SOC 15-1299.03；父类 15-1299 口径）",
-            "source_id": "ratify",
-            "value": "2024 年约 472,000 人（父类 Computer Occupations, All Other 口径）；实际招聘受组织电子记录增长与系统自动化程度影响"
+            "source_id": "r5-bls-current",
+            "value": "父类15-1299就业471,200人，非细类或地方招聘量"
           },
           {
-            "geography": "美国与中国大陆",
+            "geography": "美国",
             "horizon": "现行口径",
             "interpretation": {
-              "$item": "actors.market-signals.market-signal-card.4",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
+              "$item": "actors.display.onet_structured_fields_block.onet",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
               "type": "prose"
             },
             "limitation": {
@@ -35220,15 +35488,15 @@
             },
             "metric": "训练与授权路径",
             "occupation_scope": "文档管理专员（O*NET-SOC 15-1299.03；父类 15-1299 口径）",
-            "source_id": "employer",
-            "value": "美国以在职培训与带教为主（Job Zone Four），无统一执照；中国大陆不设统一准入类职业资格，文件与电子档案按《档案法》管理、会计档案按《会计档案管理办法》管理、涉密岗位按保密制度管理"
+            "source_id": "onet",
+            "value": "O*NET细类JZ4/SVP7至<8，准备组通常需数年相关经验、在岗和/或职业训练，不是几周/几月统一课程即可入行。60%学士/15%硕士/10%副学士是新入职所需学历受访反馈，不是60%岗位/雇主或员工学历。BLS父类典型本科/相关经验None/典型OJT None不能覆盖细类组级准备要求；None非免培训。未逐核中国现行准入目录/美国全部州要求，不宣称全国免照或统一必考证。"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35236,7 +35504,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35251,7 +35519,7 @@
           },
           {
             "href": {
-              "$source": "ratify",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35259,7 +35527,7 @@
             },
             "id": "ratify",
             "label": {
-              "$source": "ratify",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35274,7 +35542,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-electronic-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35282,7 +35550,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-electronic-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35519,12 +35787,7 @@
             "alternate_value": null,
             "label": "O*NET（15-1299.03：任务 23 项、兴趣代码 CI 与工作情境）",
             "secondary_value": null,
-            "value": {
-              "$item": "actors.display.onet_structured_fields_block.onet",
-              "block": "profile",
-              "copy_key": "career.item.onet-structured-fields-block",
-              "type": "prose"
-            }
+            "value": "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。 O*NET细类JZ4/SVP7至<8，准备组通常需数年相关经验、在岗和/或职业训练，不是几周/几月统一课程即可入行。60%学士/15%硕士/10%副学士是新入职所需学历受访反馈，不是60%岗位/雇主或员工学历。BLS父类典型本科/相关经验None/典型OJT None不能覆盖细类组级准备要求；None非免培训。未逐核中国现行准入目录/美国全部州要求，不宣称全国免照或统一必考证。"
           },
           {
             "alternate_value": null,
@@ -36380,14 +36643,14 @@
           },
           {
             "href": {
-              "$source": "teacher",
+              "$source": "announcing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "teacher",
+              "$source": "announcing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36402,14 +36665,14 @@
           },
           {
             "href": {
-              "$source": "enrichment",
+              "$source": "art",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "enrichment",
+              "$source": "art",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36424,14 +36687,14 @@
           },
           {
             "href": {
-              "$source": "art",
+              "$source": "dancing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "art",
+              "$source": "dancing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -37062,6 +37325,144 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "父类15-1299：116,580美元/年；56.05美元/时（2025中位）",
+        "fact_id": "r5-current-median",
+        "market": "美国",
+        "measure": "父类全国受雇工资分位",
+        "occupation_scope": "美国父类15-1299其他计算机职业，2025全国10/25/50/75/90分位：年55,940/79,370/116,580/157,500/188,470美元；时26.89/38.16/56.05/75.72/90.61美元。不是文档管理细类15-1299.03精确工资。OEWS直时税前受雇口径含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不排全部项目受雇奖金/合同雇员。分位不等起薪/年限/到手/上限，年度官方统计不凭个人工时另造。",
+        "period": "2025",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "父类15-1299：55,940美元/年；26.89美元/时（2025第10分位）",
+        "fact_id": "r5-current-low",
+        "market": "美国",
+        "measure": "父类全国受雇工资分位",
+        "occupation_scope": "美国父类15-1299其他计算机职业，2025全国10/25/50/75/90分位：年55,940/79,370/116,580/157,500/188,470美元；时26.89/38.16/56.05/75.72/90.61美元。不是文档管理细类15-1299.03精确工资。OEWS直时税前受雇口径含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不排全部项目受雇奖金/合同雇员。分位不等起薪/年限/到手/上限，年度官方统计不凭个人工时另造。",
+        "period": "2025",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "父类15-1299：188,470美元/年；90.61美元/时（2025第90分位）",
+        "fact_id": "r5-current-high",
+        "market": "美国",
+        "measure": "父类全国受雇工资分位",
+        "occupation_scope": "美国父类15-1299其他计算机职业，2025全国10/25/50/75/90分位：年55,940/79,370/116,580/157,500/188,470美元；时26.89/38.16/56.05/75.72/90.61美元。不是文档管理细类15-1299.03精确工资。OEWS直时税前受雇口径含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不排全部项目受雇奖金/合同雇员。分位不等起薪/年限/到手/上限，年度官方统计不凭个人工时另造。",
+        "period": "2025",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "父类15-1299：2025就业471,200人",
+        "fact_id": "r5-current-employment",
+        "market": "美国",
+        "measure": "父类就业存量",
+        "occupation_scope": "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "父类2025—2035增加5.1%；官方净增24,200人",
+        "fact_id": "r5-current-growth",
+        "market": "美国",
+        "measure": "父类净变化预测",
+        "occupation_scope": "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "父类2025—2035年均空缺27,000个含更替",
+        "fact_id": "r5-current-openings",
+        "market": "美国",
+        "measure": "父类年均空缺",
+        "occupation_scope": "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET15-1299.03实施管理企业文档系统和规程，捕获存储检索共享销毁电子记录。23任务中22Core/1Supplemental，系统绩效数据分析解释传播是补充，不当全部岗位必做。政策/分类、新系统评估采购部署为协助参与，配置访问和版本控制、捕获、检索、需求、测试、法规跟踪和用户支持为核心。监控法规不自动给法务裁决权；任务与邻职可交叉，不能一律排除档案工作、系统开发配置或技术职责，只按主要产出/授权区分。",
+        "fact_id": "r5-current-identity",
+        "market": "美国",
+        "measure": "细类职业定义任务边界",
+        "occupation_scope": "O*NET15-1299.03实施管理企业文档系统和规程，捕获存储检索共享销毁电子记录。23任务中22Core/1Supplemental，系统绩效数据分析解释传播是补充，不当全部岗位必做。政策/分类、新系统评估采购部署为协助参与，配置访问和版本控制、捕获、检索、需求、测试、法规跟踪和用户支持为核心。监控法规不自动给法务裁决权；任务与邻职可交叉，不能一律排除档案工作、系统开发配置或技术职责，只按主要产出/授权区分。",
+        "period": "2026页面",
+        "source_refs": [
+          "onet",
+          "sag-moa"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET2025父类15-1299行业份额：专业科学技术服务26%、政府22%、信息10%，不是文档管理细类行业占比或工资。细行业工资及具体组织岗位分布本轮未取得。",
+        "fact_id": "r5-current-industry-theater",
+        "market": "美国",
+        "measure": "父类行业就业份额非细类工资",
+        "occupation_scope": "O*NET2025父类15-1299行业份额：专业科学技术服务26%、政府22%、信息10%，不是文档管理细类行业占比或工资。细行业工资及具体组织岗位分布本轮未取得。",
+        "period": "2025",
+        "source_refs": [
+          "onet",
+          "sag-moa"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET57情境：邮件每天100/电话74/面对面59，持续接触16/大部分47/半时37；团队极重要33/非常56；准确极重要35/非常45；日严格期限20/每周40；日决策16；持续坐35/超过半时50；规律95；每周40小时79/超过40为21；室内受控每天61/从不22。调查不证明每人常加班或大量陌生人沟通；公众服务26非常重要、37重要。自动化28高度/44中等/28略有非GenAI采用。实际节点加班、值班及流程需核具体雇主。",
+        "fact_id": "r5-current-industry-education",
+        "market": "美国",
+        "measure": "细类工作情境非行业工资",
+        "occupation_scope": "O*NET57情境：邮件每天100/电话74/面对面59，持续接触16/大部分47/半时37；团队极重要33/非常56；准确极重要35/非常45；日严格期限20/每周40；日决策16；持续坐35/超过半时50；规律95；每周40小时79/超过40为21；室内受控每天61/从不22。调查不证明每人常加班或大量陌生人沟通；公众服务26非常重要、37重要。自动化28高度/44中等/28略有非GenAI采用。实际节点加班、值班及流程需核具体雇主。",
+        "period": "2026页面",
+        "source_refs": [
+          "onet",
+          "sag-moa"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "父类2025自雇4.9%；未取得细类行业工资",
+        "fact_id": "r5-current-industry-amusement",
+        "market": "美国",
+        "measure": "父类自雇与工资缺口",
+        "occupation_scope": "BLS父类15-1299：2025就业471,200→2035预计495,300，官方净增24,200、5.1%；已取整端点差24,100不替代官方净变化。2025—2035年均空缺27,000含增长和更替，非十年合计/每年净增；自雇4.9%，OOH本行破折号。工资/就业/行业数据为其他计算机职业父类，不当文档管理细类规模、个人录用率或AI因果。",
+        "period": "2025",
+        "source_refs": [
+          "r5-bls-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "中国精确全国文档管理专员工资缺口；2025信息软件IT非私营248752/私营128166元税前年平均仅行业背景",
+        "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
+        "market": "中国大陆",
+        "measure": "职业工资缺口与行业背景",
+        "occupation_scope": "国家统计局2025信息传输软件信息技术服务业城镇非私营248,752/私营128,166元税前年平均，仅行业多职业背景，非文档专员中位/起薪/月薪。城镇5人以上法人、排除个体/自由职业等，不笼统排除兼职或外包法人受雇人员。岗位跨行业，不能全套IT行业。未取得中国精确职业分布及代表性招聘计酬样本，不断言全国所有公开统计最高只到行业。",
+        "period": "2025",
+        "source_refs": [
+          "r5-nbs-current"
+        ]
       }
     ]
   },
@@ -37070,7 +37471,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "文档与记录管理 · 分类与元数据 · 权限与保存期限",
@@ -37121,7 +37522,7 @@
       "text": "文档管理专员"
     }
   },
-  "source_content_sha256": "c42b8530de18be4bef2a9648236099107dbccf342403e497b2c1f42be55d686c",
+  "source_content_sha256": "830d69cacd13be908da77cdc478721416415af4eb2f02b645e53feb57e236db9",
   "subject": {
     "canonical_slug": "document-management-specialists",
     "name": "文档管理专员",

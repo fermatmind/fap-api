@@ -722,6 +722,9 @@
       "item:adult-literacy-and-ged-teachers.fit.personality-fit-block.1": {
         "status": "pending_mapping"
       },
+      "item:adult-literacy-and-ged-teachers.fit.personality-fit-block.1.historical-unconsumed": {
+        "status": "pending_mapping"
+      },
       "item:adult-literacy-and-ged-teachers.fit.personality-fit-block.10": {
         "status": "mapped"
       },
@@ -1074,6 +1077,9 @@
         "status": "mapped"
       },
       "item:adult-literacy-and-ged-teachers.market-signals.market-signal-card.7": {
+        "status": "pending_mapping"
+      },
+      "item:adult-literacy-and-ged-teachers.market-signals.market-signal-card.7.historical-unconsumed": {
         "status": "pending_mapping"
       },
       "item:adult-literacy-and-ged-teachers.market-signals.market-signal-card.8": {
@@ -16889,7 +16895,7 @@
       },
       "market_signal_card.transitions.01.target_href": {
         "ref": {
-          "id": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.7",
+          "id": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.7.historical-unconsumed",
           "path": [
             "data",
             "entries",
@@ -17442,30 +17448,12 @@
         "status": "mapped"
       },
       "market_signal_card.transitions.08.target_slug": {
-        "ref": {
-          "path": [
-            "components",
-            "market_signal_card",
-            "transitions",
-            7,
-            "target_slug"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "market_signal_card.transitions.08.target_title": {
-        "ref": {
-          "path": [
-            "components",
-            "market_signal_card",
-            "transitions",
-            7,
-            "target_title"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "market_signal_card.transitions.08.transition_distance": {
         "ref": {
@@ -18560,7 +18548,7 @@
       },
       "personality_fit_block.directions.03.target.href": {
         "ref": {
-          "id": "adult-literacy-and-ged-teachers.fit.personality-fit-block.1",
+          "id": "adult-literacy-and-ged-teachers.fit.personality-fit-block.1.historical-unconsumed",
           "path": [
             "data",
             "entries",
@@ -18589,7 +18577,7 @@
       },
       "personality_fit_block.directions.03.target.title": {
         "ref": {
-          "id": "adult-literacy-and-ged-teachers.fit.personality-fit-block.1",
+          "id": "adult-literacy-and-ged-teachers.fit.personality-fit-block.1.historical-unconsumed",
           "path": [
             "data",
             "entries",
@@ -18814,18 +18802,8 @@
         "status": "mapped"
       },
       "personality_fit_block.directions.06.target.slug": {
-        "ref": {
-          "path": [
-            "components",
-            "personality_fit_block",
-            "directions",
-            5,
-            "target",
-            "slug"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "personality_fit_block.directions.06.target.title": {
         "ref": {
@@ -23753,14 +23731,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "诊断成年人的读写、算术或语言起点，按目标改编材料并组织课堂练习，形成可验证的能力进展与升学、就业准备。"
+              "本页侧重成人识字、基础技能与GED备考：先了解读写与数学起点，再按学习目标改编材料、组织练习并记录进展。美国统计沿用25-3011成人基础、成人中等及ESL合并职业，非GED教师单独样本。GED考试含语言推理、数学、科学与社会研究四科；备考教学不授予考试资格或学历认定权。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.profile.definition-block.11",
           "source_refs": [
-            "ep",
             "onet",
-            "bls"
+            "ged-subjects-current"
           ],
           "type": "prose"
         },
@@ -25138,7 +25115,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "同一职业内部不同方向受影响程度不同：面向考试与语言课程的方向，材料生产受工具影响更直接；涉及学员诊断、跨机构协调与合规记录的方向，人工判断与授权占比更高。"
+              "以下是按职业任务整理的AI辅助候选（编辑判断）；未取得各教学方向的影响比较，不能据文本生产与现场判断排列受影响程度。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.ai-impact.ai-impact-table.33",
@@ -25155,7 +25132,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "备课与反馈初稿的生成速度最快。"
+              "备课与反馈初稿可作为生成候选；未测量本职业的速度或效果排名。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.ai-impact.ai-impact-table.34",
@@ -25257,15 +25234,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下面是五条可核验证据，分别涉及自动反馈的作用路径、自动写作评价的总体效应、AI 与人工反馈的差异、反馈组合的效果，以及该职业的美国就业预测。每张卡说明研究对象、原始结论与使用限制；它们不是就业效果证明，也不能外推到其他学段、语种或国家。"
+              "下面五卡分别为职业任务、招聘技术词、行业分布、BLS预测与工作情境，不能证明AI采用或教学效果。来源登记的Schiller等自动反馈研究为453名平均16.11岁的EFL学习者、GPT-3.5 Turbo反馈与无反馈比较；迁移任务直接效应不显著，不能当作成人识字或GED项目部署研究。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.ai-impact.ai-impact-table.40",
           "source_refs": [
-            "nbs",
             "hr",
-            "health",
-            "ilo"
+            "onet"
           ],
           "type": "prose"
         },
@@ -25325,7 +25300,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "观察并评价作业以判断进展（85 分）、调整教法与材料（81 分）、维护学生记录（78 分）是该职业评分最高的核心任务，说明教学循环以评估、调整与留痕为中心；任务重要性来自美国在职者评分，反映职业整体口径，不代表任一机构的岗位说明书。"
+              "观察并评价作业以判断进展（85 分）、调整教法与材料（81 分）、维护学生记录（78 分）是本页选取的代表任务，可作为评估、调整与记录的任务背景；任务重要性来自美国在职者评分，反映职业整体口径，不代表任一机构的岗位说明书。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.ai-impact.ai-impact-table.44",
@@ -25376,7 +25351,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国雇主招聘文本中的技术提及次数统计。"
+              "2025年美国全国招聘文本（Lightcast，经O*NET展示）的软件提及比例，非采用率。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.ai-impact.ai-impact-table.47",
@@ -25461,7 +25436,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "教育服务约占该职业美国就业的 75% 左右。"
+              "O*NET当前行业表：美国25-3011.00就业中教育服务78%、其他行业22%（访问2026-10-08）；行业份额不是AI采用率或招生增长。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.ai-impact.ai-impact-table.52",
@@ -25631,7 +25606,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "「实际组织采用」看的是机构是否真的把工具放进流程。对成人教育而言，采用门槛包括机构许可、数据授权与最小化、版权来源、学习者知情、设备可及性，以及教师是否有时间复核输出。技术可用不等于会被采用。"
+              "证据不足：成人识字或GED岗位机构部署与采用率未取得。数据授权、版权、学习者知情、设备条件与人工复核是使用条件，不是已采用的证明。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.ai-impact.ai-impact-table.62",
@@ -25665,7 +25640,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不会在可预见期内被整体取代：BLS 预测 2025—2035 年就业下降 14%，但没有把下降归因于生成式 AI；工具主要改变备课与反馈初稿，分级认定与课堂责任仍由持证教师承担。"
+              "证据不足：无法判断本职业何时或是否被整体取代。BLS下降14%没有AI因果归因；生成工具不替代教师观察、评价及机构按适用法域承担的教学责任。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.ai-impact.ai-impact-table.64",
@@ -25733,7 +25708,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "最直接的是备课与材料生产：起草分级文本、例句、练习与反馈初稿；其次是翻译、简化和题库整理。观察并评价学员进展、处理课堂突发情况与沟通安排，仍依赖教师的现场判断与记录。"
+              "分级文本、练习、翻译候选与反馈初稿可探索辅助使用（编辑判断）；未取得本职业任务间效果比较，不能将某项列为最易改变。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.ai-impact.ai-impact-table.68",
@@ -25767,7 +25742,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 预测 2025—2035 年该职业就业下降 14%，净减少约 5,700 人；同期年均约 3,800 个空缺全部来自替代需求，也就是说岗位总量收缩但仍有稳定补员。该预测是全国口径，不反映各国或各机构差异，也未把变化归因于生成式 AI，不能据此推断某一地区或机构的具体情况。"
+              "BLS预测2025–2035合并职业下降14%、净减5,700人，年均约3,800个替代空缺。总量收缩与替代空缺可同时存在，但不能保证某机构稳定补员或归因于AI。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.ai-impact.ai-impact-table.70",
@@ -25801,7 +25776,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。本职业不涉及合同签署或付款审批，这类事务属于会计与法律职责；教学评价、分级认定与资格签署由持证教师和机构按所在法域规定完成，工具输出不能替代。"
+              "AI不能独立决定学习分级、批准结业或代表机构签署承诺；有权人员按机构规则与法域要求确认。教师是否承担合同等行政事务也须按岗位分工核对。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.ai-impact.ai-impact-table.72",
@@ -25869,7 +25844,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "优先补三类能力：其一，把学习目标拆成可观察行为并做分层设计；其二，对 AI 生成的文本、题目与反馈核对事实、难度、语气与版权；其三，掌握学员记录与隐私合规操作。这些能力在任务级证据里比工具熟练度更稳定。"
+              "编辑学习建议：探索学习目标与分层设计，核对AI候选文本的事实、难度、语气及版权，并核机构记录与隐私制度。本页未比较这些能力和工具熟练度的长期稳定性。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.ai-impact.ai-impact-table.76",
@@ -26226,7 +26201,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "已研究能力"
+              "任务背景；效果需按学习者与课程验证"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.ai-impact.ai-impact-table.97",
@@ -26294,7 +26269,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "明确项目采用"
+              "编辑候选；未核实本职业项目采用"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.ai-impact.ai-impact-table.101",
@@ -26362,7 +26337,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "有任务级证据"
+              "跨人群反馈研究；非本职业评估结果"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.ai-impact.ai-impact-table.105",
@@ -26430,7 +26405,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "明确项目采用"
+              "编辑候选；未核实本职业项目采用"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.ai-impact.ai-impact-table.109",
@@ -26676,14 +26651,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆尚无与美国 25-3011.00 完全对应的全国职业工资分布；本页采用人社部 2025 年企业薪酬调查「教学人员」职业中类父级代理，不能当作本职业个人报价。"
+              "证据不足：中国大陆本职业全国精确工资分布和一对一统计映射未取得；以下仅为人社部2025年全国企业教学人员（代码208）的父级参考。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "cnclass",
-            "privacy",
-            "gap"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -26740,14 +26713,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆尚无本职业对应的全国职业工资分布，本页沿用同一父级代理口径，不能当作本职业个人报价。"
+              "教学人员第25分位：3.90万元/年（2025，企业样本）"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "cnclass",
-            "privacy",
-            "gap"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -26772,14 +26743,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "同口径第 10 与第 90 分位为 3.00 万—13.33 万元/年（P10—P90）；不能据此推算个人月收入。"
+              "教学人员中位数：5.31万元/年（2025，企业样本）"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "cnclass",
-            "privacy",
-            "gap"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -26804,14 +26773,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆尚无本职业对应的全国职业工资分布；本页采用人社部 2025 年企业薪酬调查父级代理。"
+              "教学人员第75分位：8.20万元/年（2025，企业样本）"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "cnclass",
-            "privacy",
-            "gap"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -26836,14 +26803,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "同口径第 10 与第 90 分位为 3.00 万—13.33 万元/年（P10—P90）；跨度不能拆解为起薪或稳定月薪。"
+              "教学人员第90分位：13.33万元/年（2025，企业样本）"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "cnclass",
-            "privacy",
-            "gap"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -26868,14 +26833,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆尚无本职业对应的全国职业工资分布；本页采用人社部 2025 年企业薪酬调查父级代理。"
+              "统计范围：全国企业中的教学专业人员，不含机关事业单位全体教师。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "cnclass",
-            "privacy",
-            "gap"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -26900,14 +26863,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "同口径第 10 与第 90 分位为 3.00 万—13.33 万元/年（P10—P90）；不覆盖全部机关事业单位。"
+              "证据不足：本职业按地区、机构与用工形态的精确工资。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "cnclass",
-            "privacy",
-            "gap"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -26932,14 +26893,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆尚无与美国 25-3011.00 完全对应的全国职业工资分布，本页采用人社部 2025 年企业薪酬调查「教学人员」职业中类父级代理，中位数为 {{fact:mohrss-cn-teaching-p50-2025}}，对象是企业中从事各级各类教育工作的专业人员，包含基本工资、奖金、补贴与加班工资，不能当作本职业单人报价；目前没有该职业 AI 与工资的因果关系研究，本页不据任务暴露推断降薪或涨薪。"
+              "证据不足：本职业中国AI采用率与工资因果影响未取得。企业教学人员中位数5.31万元/年仅作父级背景，不能据此推断本职业涨薪、降薪或替代率。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
-            "cnclass",
-            "privacy",
-            "gap"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -27805,15 +27764,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国全国口径，来自 BLS OEWS 2025 年 5 月工资与 BLS 职业展望手册 2025—2035 年预测；OEWS 不覆盖自雇者，该职业兼职普遍，小时工资与年薪均按全年全职等效工时折算，不能直接换算为个人收入或固定月薪。"
+              "美国工资为OEWS2025全国雇员统计，不覆盖自雇；就业预测另为2025–2035。官方年、时工资不能确定兼职课时、个人全年收入或固定月薪，应另核合同期、无课期和福利。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "bls",
-            "oews",
-            "facilities",
-            "careeronestop"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27822,15 +27778,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国 O*NET/SOC 25-3011.00 是成人基础与中等教育及 ESL 教学的合并职业口径。BLS 2025 年 5 月该职业工资中位数为 $61,540/年（$29.59/小时）；OEWS 2025 年五分位为 $41,810／$49,100／$61,540／$77,690／$98,030（$20.10／$23.61／$29.59／$37.35／$47.13）。该职业兼职普遍，小时与年薪均以全年全职等效工时为前提，中位数不代表新人起薪。就业方面，2025 年在岗 41,100 人；BLS 预计 2025—2035 年下降 14%，净减 5,700 人，同期年均约 3,800 个空缺全部来自转职或退出。以上均为美国全国口径，不能换算到中国大陆，也不解释某一州或某一机构的实际情况。"
+              "美国25-3011合并职业的2025工资中位数为$61,540/年、$29.59/小时；没有GED教师独立分布。兼职常见，需另核课时、合同期、无课期与福利。2025–2035预计下降14%、净减5,700人，年均约3,800个替代空缺；非中国收入或AI就业因果证据。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "bls",
-            "oews",
-            "facilities",
-            "careeronestop"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27958,15 +27911,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "教育服务"
+              "地方公立小学和中学"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.us-salary.career-snapshot-secondary-locale.34",
           "source_refs": [
-            "bls",
-            "oews",
-            "facilities",
-            "careeronestop"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27975,15 +27925,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得教育服务行业内该职业工资。"
+              "$63,010/年（2025）"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "bls",
-            "oews",
-            "facilities",
-            "careeronestop"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27992,15 +27939,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布页只提供该职业的行业就业占比，不提供按行业划分的工资或招聘数量。"
+              "BLS OOH行业内25-3011职业中位工资，非行业全部人员或招聘占比。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "bls",
-            "oews",
-            "facilities",
-            "careeronestop"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28009,15 +27953,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "政府（含公立机构）"
+              "地方公立初级学院"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.us-salary.career-snapshot-secondary-locale.37",
           "source_refs": [
-            "bls",
-            "oews",
-            "facilities",
-            "careeronestop"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28026,15 +27967,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得政府行业内该职业工资。"
+              "$62,530/年（2025）"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "bls",
-            "oews",
-            "facilities",
-            "careeronestop"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28043,15 +27981,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业页只给就业占比，不给行业工资。"
+              "BLS OOH行业内本职业中位工资，非GED课程费。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "bls",
-            "oews",
-            "facilities",
-            "careeronestop"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28060,15 +27995,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "医疗及社会援助"
+              "州立初级学院"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.us-salary.career-snapshot-secondary-locale.40",
           "source_refs": [
-            "bls",
-            "oews",
-            "facilities",
-            "careeronestop"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28077,15 +28009,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得医疗及社会援助行业内该职业工资。"
+              "$57,780/年（2025）"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "bls",
-            "oews",
-            "facilities",
-            "careeronestop"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28094,15 +28023,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布页只提供该职业的行业就业占比，不提供按行业划分的工资或招聘数量。"
+              "BLS OOH行业内本职业中位工资，不保证个人课时与合同。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "bls",
-            "oews",
-            "facilities",
-            "careeronestop"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28111,15 +28037,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他行业"
+              "私营教育服务"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.us-salary.career-snapshot-secondary-locale.43",
           "source_refs": [
-            "bls",
-            "oews",
-            "facilities",
-            "careeronestop"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28128,15 +28051,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得其他行业内该职业工资。"
+              "$51,870/年（2025）"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "bls",
-            "oews",
-            "facilities",
-            "careeronestop"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28145,15 +28065,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布页只提供该职业的行业就业占比，不提供按行业划分的工资或招聘数量。"
+              "BLS OOH行业内本职业中位工资，非整个教育行业均值。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "bls",
-            "oews",
-            "facilities",
-            "careeronestop"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28162,15 +28079,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位数描述的是 2025 年 5 月全职等效口径下的分布中间位置；该职业兼职普遍，因此它不等于新人起薪，也不代表某一机构的报价。"
+              "不是。2025全国中位数不对应新人、具体雇主、GED单独岗位或兼职报价。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "bls",
-            "oews",
-            "facilities",
-            "careeronestop"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28179,15 +28093,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "小时工资与年薪来自同一 OEWS 口径：年薪按全年全职等效工时折算，小时工资为对应值。该职业兼职普遍，实际年收入要结合课时数、学期安排、无课期与福利覆盖判断；两个数字不能与按课程报价、学期合同或当地招聘公告直接比较，也不能互相换算成固定月薪或个人到手收入。"
+              "官方年、时工资反映统计口径，不是个人实际工时和到手收入的对应表。OEWS一般按2080小时折算；本页数字不保证兼职教师全年有相同课时，实际收入需核对计薪方式、合同期、无课期、税费和福利。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "bls",
-            "oews",
-            "facilities",
-            "careeronestop"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28247,15 +28158,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 10 分位年薪 $41,810（$20.10/小时），表示该职业美国从业者中有 10% 的收入低于这一水平。它描述的是 BLS OEWS 2025 年 5 月全职等效口径下的分布位置，不等于应届生或新人起薪，也不代表某一州、某一机构、某一课程类型或兼职岗位的实际报价；由于该职业兼职普遍、部分岗位按课程签约，读这个数字时应把课时数、学期安排与无课期一并考虑，并回到目标机构现行公布的要求逐项核对，也不能与按课程计酬或当地招聘公告直接比较。"
+              "最低10%是美国合并职业统计位置，不是新人起薪；兼职收入需另核课时与合同。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "bls",
-            "oews",
-            "facilities",
-            "careeronestop"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28264,15 +28172,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位年薪 $61,540（$29.59/小时），表示分布的中间位置，一半从业者低于、一半高于该值。它同样是 BLS OEWS 2025 年 5 月全国全职等效口径的汇总，不反映州与机构差异，也不等于新人起薪；判断具体岗位时应同时核对计薪方式、课时数、学期安排与福利覆盖。"
+              "中位数是美国合并职业全国分布中间位置，不是GED专属工资或个人报价。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "bls",
-            "oews",
-            "facilities",
-            "careeronestop"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28281,15 +28186,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位年薪 $98,030（$47.13/小时），表示该职业美国从业者中有 10% 的收入高于这一水平。高值通常与全职岗位、资深经验、州与机构差异，以及是否兼任项目协调或行政职责有关。本页没有取得可核验的行业工资与城市工资细分，因此不能据此承诺个人收入，也不能把该数字当作课程或机构的定价依据；如需比较，应回到目标州与机构公布的现行工资口径逐项核对，并注意该职业兼职普遍、年薪以全职等效工时为前提。"
+              "最高10%是统计位置；未核实哪些因素造成该位置，不作经验或行政职责的因果解释，也不保证个人收入。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "bls",
-            "oews",
-            "facilities",
-            "careeronestop"
+            "oews"
           ],
           "type": "prose"
         }
@@ -28353,12 +28255,6 @@
                 "id": "link-8",
                 "relation": "career.adjacent",
                 "url": "/zh/career/jobs/elementary-school-teachers-except-special-education"
-              },
-              {
-                "entity": "成人基础与中等教育及ESL教师",
-                "id": "link-9",
-                "relation": "career.adjacent",
-                "url": "/zh/career/jobs/adult-literacy-and-ged-teachers"
               },
               {
                 "entity": "教学协调员",
@@ -28765,7 +28661,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本职业不要求高等数学能力，但需要能解读分级数据、测评结果与教学记录。智力分数不是准入条件，也不能预测教学质量；判断方式是用一次基础技能诊断与一次数据复盘来验证实际任务表现。"
+              "数学深度随基础技能、GED科目与实际岗位而异，需掌握所教考纲并能解释错误、读取测评与进展记录；不能用IQ分数或统一数学门槛判断适配。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.fit.personality-fit-block.18",
@@ -28814,7 +28710,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用智商分数筛选会排除合格候选人；本职业的数学要求限于教学与记录所需，需按岗位实际核对。"
+              "核对实际考纲与数学教学责任；认知测验不能替代学科和教学任务表现。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.fit.personality-fit-block.21",
@@ -28936,7 +28832,8 @@
             "bls",
             "editor"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -28952,7 +28849,8 @@
             "bls",
             "editor"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -28968,7 +28866,8 @@
             "bls",
             "editor"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -29231,7 +29130,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合。内向并不妨碍教学：结构化小组任务、书面反馈与一对一辅导都能发挥作用，关键在于给学员留出表达与练习时间，而不是依靠长时间高强度社交。可以先用一次小组课与一次一对一辅导做对照，记录哪种形式的备课负担更可承受、课堂节奏是否稳定。这能帮助你选择课程形式与用工方式，但不能推断课堂效果或录用结果。"
+              "内向或外向不决定适配。可在模拟小组课与个别辅导中检查讲解、等待练习和反馈记录，以具体行为判断准备度，不能推断长期胜任或录用。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.fit.personality-fit-block.47",
@@ -29247,7 +29146,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。外向者在课堂互动与动员学员参与上常更自然，但需要注意成人学员往往希望有思考时间，过度输出会压缩练习机会。可用一次 20 分钟微课验证：刻意减少讲解、增加等待与检查环节，再记录学员是否完成练习、是否愿意提问。这次观察只说明某节课的组织方式是否有效，不等于整体教学能力或适配结论。"
+              "外向不自动证明课堂动员能力。可在模拟微课中减少连续讲解、留出回答时间并检查练习完成情况，依据行为反馈调整。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.fit.personality-fit-block.48",
@@ -29295,7 +29194,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "现有证据不支持用人格或兴趣分数预测个体教学表现：这些工具的分数与课堂效果的关联有限，且受情境、训练与学员构成影响。可用的替代方式是任务证据：一次分层教案、一段试讲录像、学员的修改记录与同事的反馈。把这些材料与岗位要求逐条对照，能说明你目前能做什么；但样本量小，不能推断长期胜任、录用概率或收入水平。"
+              "本页未取得用人格或兴趣分数预测个体教学表现的验证证据，不从任务档案推断分数与课堂效果的关联大小。可以用分层教案、模拟试讲、修改记录及反馈核对准备度；单次练习不能证明长期胜任、录用或收入。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.fit.personality-fit-block.51",
@@ -29311,7 +29210,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。该职业对数学的要求集中在分级数据、测评结果、课时与出勤记录，以及把基础算术讲清楚，不涉及高等数学。若目标方向包含成人中等教育的数学科目，则需要系统补齐学科内容与考纲要求。可用一次分级诊断题与一节课的算术教学来验证：你能否解释清楚、能否判断学员的错误来源。这次验证只说明该任务的可完成度，不代表整体适配。"
+              "若负责GED数学或其他中等教育科目，应补目标考纲内容与讲解能力；不能一概断言数学要求只限基础算术。用分级题和错误讲解检查学习缺口，不由单一分数下职业结论。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.fit.personality-fit-block.52",
@@ -29545,6 +29444,28 @@
             "editor"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "entries": [
+              {
+                "entity": "成人基础与中等教育及ESL教师",
+                "id": "link-9",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/adult-literacy-and-ged-teachers"
+              }
+            ]
+          },
+          "id": "adult-literacy-and-ged-teachers.fit.personality-fit-block.1.historical-unconsumed",
+          "source_refs": [
+            "ep",
+            "bls",
+            "editor"
+          ],
+          "type": "links",
+          "visibility": "internal"
         }
       ]
     },
@@ -30890,15 +30811,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国公立学校通常要求学士学位并持有执照或证书，部分州设成人教育专门证书；中国大陆按成人教育的层次确定教师资格类别，并具备相应学历条件。"
+              "美国公立学校通常要求学士学位和州执照或认证；中国教师资格条例第4、7条要求成人教育按层次确定资格类别和相应学历。GED备考知识不等于教师资格、中国学历或考试认定权，项目准入仍须向目标机构核对。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.path.career-path-block.23",
           "source_refs": [
             "bls",
-            "privacy",
-            "operations",
-            "practice"
+            "cn-teacher-regulation-current",
+            "ged-subjects-current"
           ],
           "type": "prose"
         },
@@ -31230,7 +31150,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "管理岗通常要求相关学位或多年教学经验。"
+              "探索管理任务前，逐项核目标岗位公告的学历、教学或项目经验、教师资格及管理授权；本页未建立该类岗位的统一常见门槛。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.path.career-path-block.43",
@@ -31570,7 +31490,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "管理岗通常要求相关学位与多年项目经验。"
+              "探索管理任务前，逐项核目标岗位公告的学历、教学或项目经验、教师资格及管理授权；本页未建立该类岗位的统一常见门槛。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.path.career-path-block.63",
@@ -31825,7 +31745,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "管理岗通常要求学位与管理经验。"
+              "探索管理任务前，逐项核目标岗位公告的学历、教学或项目经验、教师资格及管理授权；本页未建立该类岗位的统一常见门槛。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.path.career-path-block.78",
@@ -32040,12 +31960,6 @@
                 "url": "https://www.onetonline.org/link/details/25-3011.00"
               },
               {
-                "entity": "成人基础与中等教育及ESL教师",
-                "id": "link-7",
-                "relation": "career.adjacent",
-                "url": "/zh/career/jobs/adult-literacy-and-ged-teachers"
-              },
-              {
                 "entity": "小学教师",
                 "id": "link-8",
                 "relation": "career.adjacent",
@@ -32137,7 +32051,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2025 年"
+              "2025年"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.10",
@@ -32205,7 +32119,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact（合并职业口径）"
+              "美国25-3011：成人基础、成人中等与ESL教学合并职业，非GED单独统计"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.14",
@@ -32324,7 +32238,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact（合并职业口径）"
+              "美国25-3011：成人基础、成人中等与ESL教学合并职业，非GED单独统计"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.21",
@@ -32443,7 +32357,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact（合并职业口径）"
+              "美国25-3011：成人基础、成人中等与ESL教学合并职业，非GED单独统计"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.28",
@@ -32545,7 +32459,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "项目对应的考试科目与结业标准"
+              "当前链接仍指向本页，属于同一职业内部学习侧重，非跨职业转岗。可核对目标GED科目、考试版本和项目规则；如需真实转向链接，应在另行授权中确定目标。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.34",
@@ -32555,7 +32469,8 @@
             "cnclass",
             "careeronestop"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -32572,14 +32487,15 @@
             "cnclass",
             "careeronestop"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离近"
+              "同职业：当前链接回本页"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.36",
@@ -32589,7 +32505,8 @@
             "cnclass",
             "careeronestop"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -32630,7 +32547,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较远"
+              "距离较远（任务比较的编辑判断）"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.39",
@@ -32681,7 +32598,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较远"
+              "距离较远（任务比较的编辑判断）"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.42",
@@ -32698,7 +32615,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "商业化排课与家长沟通节奏"
+              "需核对目标学习者、辅导合同、排课计薪与个别化需求；成人辅导不必然涉及家长沟通。"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.43",
@@ -32732,7 +32649,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离近"
+              "距离近（任务比较的编辑判断）"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.45",
@@ -32783,7 +32700,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等"
+              "距离中等（任务比较的编辑判断）"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.48",
@@ -32834,7 +32751,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较远"
+              "距离较远（任务比较的编辑判断）"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.51",
@@ -32885,7 +32802,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离远"
+              "距离远（任务比较的编辑判断）"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.54",
@@ -32936,7 +32853,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等"
+              "距离中等（任务比较的编辑判断）"
             ]
           },
           "id": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.57",
@@ -32947,6 +32864,29 @@
             "careeronestop"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "entries": [
+              {
+                "entity": "成人基础与中等教育及ESL教师",
+                "id": "link-7",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/adult-literacy-and-ged-teachers"
+              }
+            ]
+          },
+          "id": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.7.historical-unconsumed",
+          "source_refs": [
+            "bls",
+            "oews",
+            "cnclass",
+            "careeronestop"
+          ],
+          "type": "links",
+          "visibility": "internal"
         }
       ]
     },
@@ -33284,17 +33224,17 @@
                 "url": "https://www.jszg.edu.cn/pages/html/serviceguide/serviceguide1.html"
               },
               {
-                "accessed_at": "2026-09-13",
+                "accessed_at": "2026-10-08",
                 "details": [
-                  "该职业在美国教育服务行业就业约 75%，其余约 25% 分布于政府、医疗及社会援助等行业。",
-                  "其他行业合计约 25%，官方页面把政府与医疗及社会援助并入同一组，不区分行业工资。"
+                  "美国25-3011.00当前行业份额：教育服务78%、其他行业22%（访问2026-10-08）。",
+                  "不是职业工资、招聘增长或AI采用率。"
                 ],
                 "evidence_type": "官方行业分布",
                 "id": "facilities",
                 "limitation": "只含行业就业占比，不含按行业划分的工资或招聘数量。",
                 "market": "美国",
                 "name": "onet_industry_distribution_25-3011_2026",
-                "period": "2026 年访问",
+                "period": "当前行业页面；访问2026-10-08",
                 "publisher": "O*NET OnLine",
                 "scope": "本职业在美国的行业就业占比",
                 "url": "https://www.onetonline.org/link/industry/25-3011.00"
@@ -33334,13 +33274,12 @@
               {
                 "accessed_at": "2026-09-13",
                 "details": [
-                  "综述汇总多项元分析：自动写作评价对写作质量总体效应较大（Zhai & Ma 2023，g=0.861）。",
-                  "Sun & Zhou（2024）对 41 项研究、4,813 名参与者的比较显示，AI 反馈与人工反馈差异不显著（g=0.25，置信区间跨零）。",
-                  "AI 与教师反馈结合的混合反馈优于仅用 AI；结论随学习者水平、反馈类型、干预时长与教学设计而变。"
+                  "生成式AI与读写教学证据综述；本页尚未定位其所引原始元分析的精确效应量、参与人数及反馈比较。",
+                  "本页不采用未核验的g值、研究数量或混合反馈优越性作为职业效果依据。"
                 ],
                 "evidence_type": "同行评审证据综述",
                 "id": "health",
-                "limitation": "多数纳入研究在高等教育受控情境完成，样本小、周期短；不是成人基础教育课堂证据，也不能说明采用率、岗位替代或长期学习结果。",
+                "limitation": "跨人群研究背景；不证明成人基础教育、GED岗位采用、效果或就业因果。",
                 "market": "国际（以高等教育英语写作研究为主）",
                 "name": "genai_reading_writing_synthesis_2025",
                 "period": "覆盖 2023—2025 年证据",
@@ -33430,6 +33369,38 @@
                 "publisher": "FermatMind 职业内容团队（本页登记）",
                 "scope": "not_available",
                 "url": "https://www.mohrss.gov.cn/"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "教育部：教师资格条例第4、7条",
+                  "现行条例"
+                ],
+                "evidence_type": "官方资料",
+                "id": "cn-teacher-regulation-current",
+                "limitation": "资格类别按成人教育层次确定，不保证机构聘任。",
+                "market": "中国大陆",
+                "name": "教育部：教师资格条例第4、7条",
+                "period": "现行条例",
+                "publisher": "教育部",
+                "scope": "stated_scope_only",
+                "url": "https://www.moe.gov.cn/s78/A10/moe_918/tnull_11555.html"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "GED 官方考试科目",
+                  "2026-10-08页面"
+                ],
+                "evidence_type": "官方资料",
+                "id": "ged-subjects-current",
+                "limitation": "考试科目信息不授予教师资格，也不等同中国学历。",
+                "market": "GED考试适用地区",
+                "name": "GED 官方考试科目",
+                "period": "2026-10-08页面",
+                "publisher": "GED Testing Service",
+                "scope": "stated_scope_only",
+                "url": "https://www.ged.com/?link=6"
               }
             ]
           },
@@ -34337,7 +34308,7 @@
               "entry": "link-17",
               "field": "url"
             },
-            "问题": "AI 能签署合同或批准付款吗？"
+            "问题": "AI能独立决定学习分级或批准结业吗？"
           },
           {
             "回答": {
@@ -35659,8 +35630,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details-253011",
-              "fermatmind-entry-practice-design"
+              "ep",
+              "practice"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -35691,8 +35662,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details-253011",
-              "us-ed-adult-education"
+              "ep",
+              "operations"
             ],
             "id": "record-version",
             "mitigation": {
@@ -35723,8 +35694,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details-253011",
-              "fermatmind-editorial-fit-signals"
+              "ep",
+              "editor"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -35755,8 +35726,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "cn-teacher-qualification",
-              "fermatmind-editorial-fit-signals"
+              "cn-teacher-regulation-current",
+              "editor"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -35787,8 +35758,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls-ooh-adult-esl",
-              "onet-details-253011"
+              "bls",
+              "ep"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -35819,8 +35790,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "fermatmind-ai-task-rubric",
-              "us-news-automated-feedback-2025"
+              "ilo",
+              "hr"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -36314,12 +36285,12 @@
           "ui": {
             "ai_heading": "AI 会影响成人基础教育、成人中等教育、英语作为第二语言的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "公开招聘样本（历史公告，非官方统计）",
-            "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "成人基础教育、成人中等教育、英语作为第二语言在不同学历背景下通常从哪些岗位方向开始？",
+            "official_heading": "中国官方教学人员父类工资参考（非本职业精确分布）",
+            "scenario_caption": "学历与任务探索（编辑建议，非招聘分布）",
+            "scenario_heading": "不同学历背景可探索哪些成人教学任务？",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "学历背景",
-            "scenario_value_label": "常见岗位方向"
+            "scenario_value_label": "可探索任务方向"
           },
           "us_growth": {
             "$item": "adult-literacy-and-ged-teachers.china-salary.career-snapshot-primary-locale.58",
@@ -37061,35 +37032,6 @@
         "transitions": [
           {
             "capability_gaps": {
-              "$item": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.34",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "shared_capabilities": {
-              "$item": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.35",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "target_href": {
-              "$link": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.7",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "entry": "link-7",
-              "field": "url"
-            },
-            "target_slug": "adult-literacy-and-ged-teachers",
-            "target_title": "成人基础与中等教育及ESL教师",
-            "transition_distance": {
-              "$item": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.36",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            }
-          },
-          {
-            "capability_gaps": {
               "$item": "adult-literacy-and-ged-teachers.market-signals.market-signal-card.37",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
@@ -37593,43 +37535,6 @@
           "type": "prose"
         },
         "directions": [
-          {
-            "direction": {
-              "$item": "adult-literacy-and-ged-teachers.fit.personality-fit-block.28",
-              "block": "fit",
-              "copy_key": "career.item.personality-fit-block",
-              "type": "prose"
-            },
-            "fit_signals": {
-              "$item": "adult-literacy-and-ged-teachers.fit.personality-fit-block.29",
-              "block": "fit",
-              "copy_key": "career.item.personality-fit-block",
-              "type": "prose"
-            },
-            "target": {
-              "href": {
-                "$link": "adult-literacy-and-ged-teachers.fit.personality-fit-block.1",
-                "block": "fit",
-                "copy_key": "career.item.personality-fit-block",
-                "entry": "link-9",
-                "field": "url"
-              },
-              "slug": "adult-literacy-and-ged-teachers",
-              "title": {
-                "$link": "adult-literacy-and-ged-teachers.fit.personality-fit-block.1",
-                "block": "fit",
-                "copy_key": "career.item.personality-fit-block",
-                "entry": "link-9",
-                "field": "entity"
-              }
-            },
-            "watchouts": {
-              "$item": "adult-literacy-and-ged-teachers.fit.personality-fit-block.30",
-              "block": "fit",
-              "copy_key": "career.item.personality-fit-block",
-              "type": "prose"
-            }
-          },
           {
             "direction": {
               "$item": "adult-literacy-and-ged-teachers.fit.personality-fit-block.31",
@@ -38899,7 +38804,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 暴露·未评分"
     },
     "badges": [
       "RIASEC · SA",
@@ -38950,7 +38855,7 @@
       "text": "成人基础与中等教育及ESL教师"
     }
   },
-  "source_content_sha256": "7e3368efca2a141c8dbfc3d04ff5d33923a73a4c950c11d360ecbbdacd3ada75",
+  "source_content_sha256": "6193018799cf25af83d7902d89f7c758482561bd1bb74216e726341123b9efb5",
   "subject": {
     "canonical_slug": "adult-literacy-and-ged-teachers",
     "name": "成人基础与中等教育及ESL教师",

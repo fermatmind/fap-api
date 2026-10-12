@@ -12583,7 +12583,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更强证据是受监督工作样本、原始记录和反馈；兴趣测评不能证明处方参数核对、设备安全和成品放行责任能力。"
+              "能力判断可观察受监督测量、设备训练及质检返工反馈；兴趣仅探索，不授加工放行权。"
             ]
           },
           "id": "ophthalmic-laboratory-technicians.fit.riasec-fit-block.7",
@@ -13747,7 +13747,7 @@
             "链接": "https://www.onetonline.org/link/details/51-9083.00"
           }
         ],
-        "difference_intro": "资料汇总可加快；处方参数核对、设备安全和成品放行责任需要人的检查。",
+        "difference_intro": "BLS描述镜片制造已有自动设备且自动化限制机会；本页参数校验、图像提示和维护辅助为编辑试用建议，未取得单项AI采用或提效实测。",
         "difference_rows": [
           {
             "AI主要改变": "辅助归纳记录与候选",
@@ -14036,8 +14036,8 @@
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
-            "label": "教育与资格",
-            "scope": "美国51-9083.00精确职业"
+            "label": "典型教育与在岗培训",
+            "scope": "美国51-9083高中或同等学历、中期在岗培训；设备防护、工艺及质量放行权按实际岗位核。"
           },
           {
             "href": "https://www.onetonline.org/link/details/51-9083.00",
@@ -14357,16 +14357,28 @@
         "risks": [
           {
             "affected_roles": {
-              "$item": "ophthalmic-laboratory-technicians.risk.career-risk-cards.4",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "接单核参、加工和终检人员及顾客。工单背景：",
+                {
+                  "$item": "ophthalmic-laboratory-technicians.risk.career-risk-cards.4",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "consequence": {
-              "$item": "ophthalmic-laboratory-technicians.risk.career-risk-cards.5",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "可能使成品不符合订单而无法使用。异常升级边界：",
+                {
+                  "$item": "ophthalmic-laboratory-technicians.risk.career-risk-cards.5",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "evidence_refs": [
               "onet",
@@ -14378,11 +14390,11 @@
             "title": "参数错配"
           },
           {
-            "affected_roles": "眼科技工室技术员工作需围绕眼科技工室技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "眼科技工室技术员工作需围绕眼科技工室技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "切磨操作员、附近人员及质检人员。",
+            "consequence": "可能造成碎片伤害、材料损失及返工。",
             "evidence_refs": [
               "onet",
-              "privacy"
+              "onet"
             ],
             "id": "record-version",
             "mitigation": "防护并检查设备设定。",
@@ -14390,11 +14402,11 @@
             "title": "镜片破损"
           },
           {
-            "affected_roles": "眼科技工室技术员工作需围绕眼科技工室技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "眼科技工室技术员工作需围绕眼科技工室技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "镀膜、检查人员及使用该镜片的人。",
+            "consequence": "可能降低成品视觉质量并需返工。",
             "evidence_refs": [
-              "privacy",
-              "privacy"
+              "onet",
+              "onet"
             ],
             "id": "personal-data",
             "mitigation": "仪器终检与返工。",
@@ -14402,8 +14414,8 @@
             "title": "涂层缺陷"
           },
           {
-            "affected_roles": "眼科技工室技术员工作需围绕眼科技工室技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "眼科技工室技术员工作需围绕眼科技工室技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "切磨操作员及维护人员。",
+            "consequence": "可能造成手部夹卷伤害。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14414,11 +14426,11 @@
             "title": "设备夹卷"
           },
           {
-            "affected_roles": "眼科技工室技术员工作需围绕眼科技工室技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "眼科技工室技术员工作需围绕眼科技工室技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "切磨、镀膜人员及附近车间人员。",
+            "consequence": "可能造成粉尘或化学材料暴露相关健康风险。",
             "evidence_refs": [
-              "bls",
-              "bls"
+              "onet",
+              "onet"
             ],
             "id": "single-coverage",
             "mitigation": "通风、防护与材料程序。",
@@ -14426,8 +14438,8 @@
             "title": "粉尘化学品"
           },
           {
-            "affected_roles": "眼科技工室技术员工作需围绕眼科技工室技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "眼科技工室技术员工作需围绕眼科技工室技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "接单、加工、装配、终检人员及顾客。",
+            "consequence": "可能错装镜片参数，需隔离重核和返工。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14444,31 +14456,31 @@
             "href": "https://www.onetonline.org/link/details/51-9083.00",
             "id": "onet",
             "label": "任务",
-            "scope": "美国51-9083.00精确职业"
+            "scope": "O*NET支持51-9083任务和环境；BLS表1.2只支持工资、预测、典型训练。风险为编辑提示，非事故频率、设备防护或材料操作规程。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
             "label": "资格",
-            "scope": "美国51-9083.00精确职业"
+            "scope": "O*NET支持51-9083任务和环境；BLS表1.2只支持工资、预测、典型训练。风险为编辑提示，非事故频率、设备防护或材料操作规程。"
           },
           {
             "href": "https://www.onetonline.org/link/details/51-9083.00",
             "id": "facilities",
             "label": "工作环境",
-            "scope": "美国51-9083.00精确职业"
+            "scope": "O*NET支持51-9083任务和环境；BLS表1.2只支持工资、预测、典型训练。风险为编辑提示，非事故频率、设备防护或材料操作规程。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "privacy",
             "label": "就业资料",
-            "scope": "美国51-9083.00精确职业"
+            "scope": "O*NET支持51-9083任务和环境；BLS表1.2只支持工资、预测、典型训练。风险为编辑提示，非事故频率、设备防护或材料操作规程。"
           },
           {
             "href": "https://www.onetonline.org/link/details/51-9083.00",
             "id": "onet",
             "label": "职业活动",
-            "scope": "美国51-9083.00精确职业"
+            "scope": "O*NET支持51-9083任务和环境；BLS表1.2只支持工资、预测、典型训练。风险为编辑提示，非事故频率、设备防护或材料操作规程。"
           }
         ]
       },
@@ -14596,27 +14608,27 @@
           {
             "指标": "薪资第10百分位",
             "数值": "$33,530",
-            "说明": "无精确分位则保持缺口。"
+            "说明": "O*NET展示BLS 2025美国51-9083年薪分布；非起薪、个人合同或三类合并统计。"
           },
           {
             "指标": "薪资第25百分位",
             "数值": "$36,470",
-            "说明": "无精确分位则保持缺口。"
+            "说明": "O*NET展示BLS 2025美国51-9083年薪分布；非起薪、个人合同或三类合并统计。"
           },
           {
             "指标": "薪资中位数",
             "数值": "$39,460",
-            "说明": "无精确分位则保持缺口。"
+            "说明": "O*NET展示BLS 2025美国51-9083年薪分布；非起薪、个人合同或三类合并统计。"
           },
           {
             "指标": "薪资第75百分位",
             "数值": "$47,010",
-            "说明": "无精确分位则保持缺口。"
+            "说明": "O*NET展示BLS 2025美国51-9083年薪分布；非起薪、个人合同或三类合并统计。"
           },
           {
             "指标": "薪资第90百分位",
             "数值": "$57,380",
-            "说明": "无精确分位则保持缺口。"
+            "说明": "O*NET展示BLS 2025美国51-9083年薪分布；非起薪、个人合同或三类合并统计。"
           },
           {
             "指标": "就业人数",
@@ -14688,7 +14700,7 @@
             "note": "精确职业行业分位在本页未单列。"
           }
         ],
-        "industry_value_label": "年薪中位数（美元）",
+        "industry_value_label": "单项行业工资数据状态",
         "interpretation_heading": "如何解读",
         "interpretation_rows": [
           {
@@ -14863,30 +14875,39 @@
         "heading": "美国51-9083.00就业展望",
         "outlook_evidence": [
           {
-            "geography": {
-              "$item": "ophthalmic-laboratory-technicians.market-signals.market-signal-card.2",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "horizon": {
-              "$item": "ophthalmic-laboratory-technicians.market-signals.market-signal-card.3",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "geography": "美国",
+            "horizon": "2025基期",
             "interpretation": {
-              "$item": "ophthalmic-laboratory-technicians.market-signals.market-signal-card.4",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
+              "$join": [
+                "就业及其他背景分开解读：",
+                {
+                  "$item": "ophthalmic-laboratory-technicians.market-signals.market-signal-card.2",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "ophthalmic-laboratory-technicians.market-signals.market-signal-card.3",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "ophthalmic-laboratory-technicians.market-signals.market-signal-card.4",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "ophthalmic-laboratory-technicians.market-signals.market-signal-card.5",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
-            "limitation": {
-              "$item": "ophthalmic-laboratory-technicians.market-signals.market-signal-card.5",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "limitation": "51-9083单项就业，非51-9080三类合并；非当前招聘、AI归因或中国需求。",
             "metric": "2025在岗",
             "occupation_scope": "美国51-9083.00",
             "source_id": "bls",
@@ -15031,7 +15052,7 @@
           },
           {
             "alternate_value": null,
-            "label": "知识",
+            "label": "任务相关知识（编辑归纳）",
             "secondary_value": null,
             "value": "镜片材料、切磨抛光、光学参数、镀膜和车间安全"
           },
@@ -15054,7 +15075,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
+            "cta_label": "查看霍兰德兴趣测评",
             "evidence_level": {
               "$item": "ophthalmic-laboratory-technicians.fit.riasec-fit-block.8",
               "block": "fit",
@@ -15073,10 +15094,10 @@
             "watchout": "兴趣测评不证明处方参数核对、设备安全和成品放行责任能力或资格。"
           },
           {
-            "answer": "眼科技工室技术员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "核镜片材料、参数、尺寸、标签和终检记录，观察能否发现不符并留痕。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "眼科技工室技术员工作需围绕眼科技工室技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "big-five",
             "label": "细节能力",
             "question": "做眼科技工室技术员需要怎样的能力与工作方式？",
@@ -15089,10 +15110,10 @@
             "watchout": "兴趣测评不证明处方参数核对、设备安全和成品放行责任能力或资格。"
           },
           {
-            "answer": "眼科技工室技术员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "遇破损、夹卷或表面缺陷，练说明暂停、隔离及交有权限人员处理的条件。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "眼科技工室技术员工作需围绕眼科技工室技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "mbti",
             "label": "风险处理",
             "question": "做眼科技工室技术员需要怎样的能力与工作方式？",
@@ -15105,10 +15126,10 @@
             "watchout": "兴趣测评不证明处方参数核对、设备安全和成品放行责任能力或资格。"
           },
           {
-            "answer": "眼科技工室技术员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较精密加工、重复核参和质量责任是否符合自己的工作价值。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "眼科技工室技术员工作需围绕眼科技工室技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "enneagram",
             "label": "工作价值",
             "question": "做眼科技工室技术员需要怎样的能力与工作方式？",
@@ -15121,10 +15142,10 @@
             "watchout": "兴趣测评不证明处方参数核对、设备安全和成品放行责任能力或资格。"
           },
           {
-            "answer": "眼科技工室技术员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "核车间噪声、粉尘、化学材料防护、站立及班制是否可接受。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "眼科技工室技术员工作需围绕眼科技工室技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "iq",
             "label": "场景偏好",
             "question": "做眼科技工室技术员需要怎样的能力与工作方式？",
@@ -15137,10 +15158,10 @@
             "watchout": "兴趣测评不证明处方参数核对、设备安全和成品放行责任能力或资格。"
           },
           {
-            "answer": "眼科技工室技术员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "沿既有虚构工单做代码和缺陷比对；纸面样本不授权加工或放行。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "眼科技工室技术员工作需围绕眼科技工室技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "eq",
             "label": "虚构案例",
             "question": "做眼科技工室技术员需要怎样的能力与工作方式？",
@@ -15360,8 +15381,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "BLS 51-9083.00 2025—2035精确职业统计；O*NET任务；国家统计局中国工资缺口。",
-          "updated_at": "2026-09-26核官方职业任务与当前统计。"
+          "source": "BLS美国51-9083单项工资与预测；O*NET加工任务和2025分位；NBS2025生产制造宽岗位统计。",
+          "updated_at": "2026-10-12"
         },
         "note": "证据只支持眼科技工室技术员在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -15373,7 +15394,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "职业任务"
+            "label": "MBTI测评（英文）"
           },
           {
             "href": {
@@ -15383,7 +15404,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "工资就业"
+            "label": "大五人格测评（英文）"
           },
           {
             "href": {
@@ -15393,7 +15414,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "资格或规则"
+            "label": "MBTI测评（中文）"
           },
           {
             "href": {
@@ -15403,7 +15424,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "统计边界"
+            "label": "大五人格测评（中文）"
           }
         ]
       },
@@ -15552,7 +15573,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "眼镜光学实验室技师 · O*NET 51-9083.00",
@@ -15603,7 +15624,7 @@
       "text": "眼镜光学实验室技师：工作、工资与入行路径"
     }
   },
-  "source_content_sha256": "e98a68465015bd76d6c8a3c3dd159f898e371fac4307a1573800ff33f3b62b79",
+  "source_content_sha256": "2d387727b51f1cee753446b66f993abd7b370fc72f4d3c0354818c7cf26f6eab",
   "subject": {
     "canonical_slug": "ophthalmic-laboratory-technicians",
     "name": "眼镜光学实验室技师",

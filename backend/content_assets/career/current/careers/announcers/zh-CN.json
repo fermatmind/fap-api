@@ -8868,18 +8868,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.01.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            0,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.01.mitigation": {
         "ref": {
@@ -8957,18 +8947,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.02.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            1,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.02.mitigation": {
         "ref": {
@@ -9046,18 +9026,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.03.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            2,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.03.mitigation": {
         "ref": {
@@ -9135,18 +9105,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.04.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            3,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.04.mitigation": {
         "ref": {
@@ -23445,7 +23405,8 @@
           },
           "id": "announcers.profile.onet-structured-fields-block.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-education"
           ],
           "type": "prose"
         },
@@ -23458,14 +23419,13 @@
               "在播呈现与串联｜稳定输出并控制时长｜朗读新闻快讯，报台并开场或结束节目（即兴或使用记忆稿与脚本），播报与点评音乐、天气与交通，发出网络提示信号并按时间档控制各段时长。",
               "采访与访谈｜把嘉宾讲清楚｜采访嘉宾关于其经历、工作或时事话题，寻找并确认嘉宾，主持专题讨论与谈话节目，必要时在电话中与听众或观众交流。",
               "现场活动与推广｜代表机构出面｜在体育赛事、游行与会议中解说与采访，主持公益与推广活动，出席新闻发布会收集信息，出席公开或私人活动代表雇主。",
-              "技术操作与录制｜保障可播出｜操作控制台，播放与编排音乐选段与广告与公共服务信息，录制广告供后续播出，与制作与技术人员配合完成直播或录播。",
-              "记录与归档｜让播出可追溯｜保存每日节目日志，记录当日播出的音乐选择与台内推广等要素，整理与维护素材与音乐库，出现播出异常时按程序报告与记录。"
+              "技术操作与录制｜保障可播出｜操作控制台，播放与编排音乐选段与广告与公共服务信息，录制广告供后续播出；具体制作/技术协作为编辑岗位核问。",
+              "记录与归档｜让播出可追溯｜保存每日节目日志，记录当日播出的音乐选择与台内推广等要素，整理与维护素材与音乐库；异常报告与记录流程为编辑岗位核问，须向实际机构确认。"
             ]
           },
           "id": "announcers.profile.responsibilities-block.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "list"
         },
@@ -23474,7 +23434,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "沟通与接触｜美国ONET受访：66%持续接触、16%大部分时间；69%每天面对面讨论、67%每天电话、91%每天邮件；公开演讲31%每天/30%每周，不是中国岗位条件。\n决策与判断｜65%每天决定、17%每周；决策自由35%很大/56%一定；影响58%非常重要/19%重要；准确性24%重要，不推未显示类别。\n时间压力与工作周｜85%每日期限压力/15%每周；周工时47%40小时/42%超过40/11%少于40，不等于兼职率；87%规律/11%不规律。\n错误后果与责任｜无法及时更正时，37%后果极其严重/20%非常严重/20%比较严重/19%不严重，是后果评价不是错误率；58%决策影响非常重要。\n协作与竞争｜团队62%极其重要/29%非常重要；协调领导22%极其重要/46%非常重要；竞争31%极度/17%高度/34%中度/18%轻微。\n环境与姿势｜92%每天室内可控；久坐60%超过半天/30%持续；手操作设备29%持续/24%少于半天/39%从不，是受访情境非个人工时。\n公众接触与冲突｜外部客户/公众交流24%非常重要、14%重要，不是24%极其重要；冲突19%每周/31%每年/30%从不。\n技能与活动侧重｜技能重要性Speaking94、倾听75、阅读72、批判思考69；活动创造性92/面向公众86/外部沟通85，不是个人技能分数。\n播出安排与外部条件｜OOH另述美国可能早晨、夜间、周末或节假日工作；不是由87%规律日程推导，实际机构排班、审核、技术与记录分工另核。"
+              "沟通与接触｜美国ONET受访：66%持续接触、16%大部分时间；69%每天面对面讨论、67%每天电话、91%每天邮件；公开演讲31%每天/30%每周但非每日，不是中国岗位条件。\n决策与判断｜65%每天作出影响他人、机构资源或形象的决定、17%每周但非每日；决策自由35%很大/56%一定；影响58%非常重要/19%重要；准确性24%重要，不推未显示类别。\n时间压力与工作周｜85%每日期限压力/15%每周但非每日；周工时47%40小时/42%超过40/11%少于40，不等于兼职率；87%规律/11%不规律。\n错误后果与责任｜错误不容易纠正时，37%后果极其严重/20%非常严重/20%比较严重/19%不严重，是后果评价不是错误率；58%决策影响非常重要。\n协作与竞争｜团队62%极其重要/29%非常重要；协调领导22%极其重要/46%非常重要；竞争31%极度/17%高度/34%中度/18%轻微。\n环境与姿势｜92%每天室内可控；久坐60%超过半天/30%持续；手操作设备29%持续/24%少于半天/39%从不，是受访情境非个人工时。\n公众接触与冲突｜外部客户/公众交流24%非常重要、14%重要，不是24%极其重要；冲突19%每周但非每日/31%每年但非每月/30%从不。\n技能与活动侧重｜技能重要性Speaking94、倾听75、阅读72、批判思考69；活动创造性92/面向公众86/外部沟通85，不是个人技能分数。\n播出安排与外部条件｜OOH另述美国可能早晨、夜间、周末或节假日工作；不是由87%规律日程推导，实际机构排班、审核、技术与记录分工另核。"
             ]
           },
           "id": "announcers.profile.work-context-block.1",
@@ -23504,13 +23464,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "ONET新聘教育问题列学士、部分大学无学位、高中或同等三类但不展示比例，不是从业者学历分布。Job Zone4/SVP7.0—<8.0为美国职业准备参照；ONET仍展示2024年24,100人、信息业85%、2024—2034下降/年空缺2,300旧期。当前预测采用BLS EP2025—2035，不把旧期当最新。"
+              "ONET新聘教育列学士、部分大学无学位、高中同等三类但未显示比例，不是从业者学历分布。Job Zone4/SVP7.0—<8.0为美国准备参照；当前2025就业21,800、信息业80%，2025—2035下降分类及年空缺2,000。精确下降7.6%和官方净减1,700按BLS EP核，分类不当精确率。"
             ]
           },
           "id": "announcers.profile.onet-structured-fields-block.2",
           "source_refs": [
             "onet",
-            "operations"
+            "ep"
           ],
           "type": "prose"
         },
@@ -24653,13 +24613,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -24674,7 +24627,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24689,7 +24641,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24704,7 +24655,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24719,7 +24669,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24734,7 +24683,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24749,7 +24697,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24764,8 +24711,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.16",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24780,8 +24725,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.17",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24839,8 +24782,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.21",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -24854,8 +24796,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.22",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -24869,7 +24810,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.23",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -24883,7 +24824,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.24",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -24892,7 +24833,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP2025—2035（27-3011）"
+              "BLS OOH：职责及工作安排"
             ]
           },
           "id": "announcers.ai-impact.ai-impact-table.25",
@@ -24906,7 +24847,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职业增长-7.6%、官方净减1700、年空缺2000。"
+              "美国职业职责可能重叠，工作可能在早晨、夜间、周末或节假日。"
             ]
           },
           "id": "announcers.ai-impact.ai-impact-table.26",
@@ -24920,7 +24861,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS OOH：职责及工作安排"
+              "BLS EP2025—2035（27-3011）"
             ]
           },
           "id": "announcers.ai-impact.ai-impact-table.27",
@@ -24934,7 +24875,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国职业职责可能重叠，工作可能在早晨、夜间、周末或节假日。"
+              "本职业增长-7.6%、官方净减1700、年空缺2000。"
             ]
           },
           "id": "announcers.ai-impact.ai-impact-table.28",
@@ -24990,12 +24931,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "表头人数/空缺单位千人；本职业与组合分开。"
+              "BLS EP 27-3011单列就业预测、年均空缺、自雇比例及典型教育、经验和在岗训练特征；不是行业工资、工作班表或AI采用率。"
             ]
           },
           "id": "announcers.ai-impact.ai-impact-table.32",
           "source_refs": [
-            "onet"
+            "ilo",
+            "bls"
           ],
           "type": "prose"
         },
@@ -25009,7 +24951,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25024,7 +24965,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25039,7 +24979,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25054,7 +24993,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25069,7 +25007,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25084,7 +25021,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25099,7 +25035,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25114,7 +25049,10 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.40",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "ep",
+            "bls"
           ],
           "type": "prose"
         },
@@ -25170,7 +25108,8 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.44",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-guide"
           ],
           "type": "prose"
         },
@@ -25184,7 +25123,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.45",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25198,7 +25137,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.46",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25212,7 +25151,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.47",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25226,7 +25165,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.48",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25254,7 +25193,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.50",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25268,7 +25207,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.51",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25282,8 +25221,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25297,8 +25235,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.53",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25312,8 +25249,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25327,8 +25263,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25342,8 +25277,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25357,8 +25291,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.57",
           "source_refs": [
-            "facilities",
-            "operations"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -25372,8 +25305,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.58",
           "source_refs": [
-            "facilities",
-            "operations"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -25387,8 +25319,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.59",
           "source_refs": [
-            "facilities",
-            "operations"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -25402,8 +25333,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "facilities",
-            "operations"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -25417,7 +25347,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.61",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25432,7 +25361,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.62",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25477,8 +25405,8 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25492,8 +25420,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.66",
           "source_refs": [
-            "facilities",
-            "operations"
+            "onet"
           ],
           "type": "prose"
         },
@@ -25507,8 +25434,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "facilities",
-            "operations"
+            "onet"
           ],
           "type": "prose"
         },
@@ -25522,7 +25448,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25551,8 +25476,8 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "ep",
-            "bls"
+            "bls",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25566,8 +25491,8 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "ep",
-            "bls"
+            "bls",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25581,8 +25506,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "bls",
-            "ep"
+            "onet"
           ],
           "type": "prose"
         },
@@ -25610,8 +25534,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25625,8 +25548,7 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25655,8 +25577,8 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.77",
           "source_refs": [
-            "facilities",
-            "operations"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -25670,7 +25592,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.78",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25680,13 +25601,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先确认节目定位、稿件与内容审核流程、广告与版权合规要求，明确哪些判断必须由主持人本人承担。"
+              "核节目定位、稿件审核、广告与素材条件、主持及机构各自职责；中国适用机构的持证注册与嘉宾主持边界按NRTA核，不断言全部判断只能由主持本人承担。OOH讨论AI DJ可能性，未提供采用率。"
             ]
           },
           "id": "announcers.ai-impact.ai-impact-table.79",
           "source_refs": [
             "onet",
-            "onet"
+            "cn-guide",
+            "cn-behavior"
           ],
           "type": "prose"
         },
@@ -25700,7 +25622,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.80",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25715,7 +25636,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.81",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25725,12 +25645,11 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按机构要求如实填写节目日志、保留稿件与素材版本与更正记录，使播出内容可复核、可追溯。"
+              "编辑记录核问：按真实机构要求保留实际节目日志、稿件与素材原值、版次及更正信息便于复核；缺失如实说明，本页未核保存期或全面追溯效果。"
             ]
           },
           "id": "announcers.ai-impact.ai-impact-table.82",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25746,7 +25665,7 @@
           "id": "announcers.ai-impact.ai-impact-table.83",
           "source_refs": [
             "onet",
-            "onet"
+            "cn-behavior"
           ],
           "type": "prose"
         },
@@ -25755,12 +25674,11 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把工具生成的稿件初稿直接播出，会让未经核实的内容被当作已确认事实。"
+              "编辑风险识别：核工具草稿事实、数据、引语与来源，未核实内容不得当已确认事实；本轮未取得错误率或误导受众的因果估计。"
             ]
           },
           "id": "announcers.ai-impact.ai-impact-table.84",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25775,7 +25693,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.85",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25785,12 +25702,11 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "受访者与听众的联络资料、未播出选题与内部编排信息属个人或机构内部信息，外发会造成隐私与信任风险。"
+              "编辑资料核问：确认受访者/听众识别资料、未播选题和内部编排的授权、用途及接收方；本轮未核完整资料处理法规或泄露对信任的因果大小。"
             ]
           },
           "id": "announcers.ai-impact.ai-impact-table.86",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25805,7 +25721,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.87",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25815,7 +25730,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "节目日志与稿件版本需要可复核，工具输出若无版本与来源说明将难以追溯。"
+              "编辑追溯核问：区分计划与实际日志，保留原值、来源、版本及更正信息便于复核；缺失不补成实际播出，本页不保证完整证据链。"
             ]
           },
           "id": "announcers.ai-impact.ai-impact-table.88",
@@ -25834,7 +25749,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.89",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25844,12 +25758,11 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "稿件中的事实、数据与播出时间填写错误会直接影响播出准确性与机构信誉。"
+              "编辑核对稿件事实、数据、时间与实际播出记录；错误的真实影响和责任须按具体事件与分工核，本轮未取得机构信誉因果估计。"
             ]
           },
           "id": "announcers.ai-impact.ai-impact-table.90",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25864,7 +25777,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.91",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25879,7 +25791,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.92",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25894,7 +25805,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.93",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25951,7 +25861,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.97",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26008,7 +25917,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.101",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26065,7 +25973,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.105",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26122,7 +26029,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.109",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26179,7 +26085,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.113",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26245,7 +26150,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断曲目与素材的使用范围，确保版权与授权条件满足。"
+              "编辑素材核问：确认具体曲目/素材授权范围、条件与凭证，疑问按机构实际专业渠道处理；本页未核完整版权法规，不保证授权满足。"
             ]
           },
           "id": "announcers.ai-impact.ai-impact-table.118",
@@ -26292,7 +26197,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.121",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26307,7 +26211,6 @@
           },
           "id": "announcers.ai-impact.ai-impact-table.122",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26330,7 +26233,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26344,7 +26248,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26358,7 +26263,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26372,7 +26278,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26386,7 +26293,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26400,7 +26308,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26414,7 +26323,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26428,7 +26338,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26442,7 +26353,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26456,7 +26368,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26470,7 +26383,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26484,7 +26398,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26498,7 +26413,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26512,7 +26428,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26526,7 +26443,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26540,7 +26458,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26554,8 +26473,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26569,7 +26488,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26583,8 +26503,11 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
+            "cnclass",
+            "cn-guide",
+            "cn-education",
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -26598,8 +26521,11 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
+            "cnclass",
+            "cn-guide",
+            "cn-education",
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -26613,8 +26539,11 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
+            "cnclass",
             "cn-guide",
-            "cnclass"
+            "cn-education",
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -26628,8 +26557,11 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.28",
           "source_refs": [
+            "cnclass",
+            "cn-guide",
+            "cn-education",
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -26643,8 +26575,11 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
+            "cnclass",
+            "cn-guide",
+            "cn-education",
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -26658,8 +26593,11 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
+            "cnclass",
             "cn-guide",
-            "cnclass"
+            "cn-education",
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -26673,8 +26611,11 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.31",
           "source_refs": [
+            "cnclass",
+            "cn-guide",
+            "cn-education",
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -26688,8 +26629,11 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.32",
           "source_refs": [
+            "cnclass",
+            "cn-guide",
+            "cn-education",
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -26703,9 +26647,11 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
+            "cnclass",
+            "cn-guide",
+            "cn-education",
             "onet",
-            "bls",
-            "cn-guide"
+            "bls"
           ],
           "type": "prose"
         },
@@ -26719,8 +26665,11 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.34",
           "source_refs": [
+            "cnclass",
+            "cn-guide",
+            "cn-education",
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -26734,8 +26683,11 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.35",
           "source_refs": [
+            "cnclass",
+            "cn-guide",
+            "cn-education",
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -26749,8 +26701,11 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
+            "cnclass",
             "cn-guide",
-            "cnclass"
+            "cn-education",
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -26764,7 +26719,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.37",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26778,7 +26734,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26792,7 +26749,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.39",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26806,7 +26764,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26820,7 +26779,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.41",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26834,7 +26794,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.42",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26848,7 +26809,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.43",
           "source_refs": [
-            "oews"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26862,8 +26824,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26877,8 +26839,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26892,8 +26854,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26902,12 +26864,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.47",
           "source_refs": [
-            "onet"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26921,7 +26884,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26935,7 +26899,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "onet"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26949,7 +26914,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26963,7 +26929,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "onet"
+            "nbs",
+            "health"
           ],
           "type": "prose"
         },
@@ -26977,7 +26944,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "cn-guide"
           ],
           "type": "prose"
         },
@@ -26991,7 +26959,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cn-guide"
           ],
           "type": "prose"
         },
@@ -27005,7 +26974,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "cn-guide"
           ],
           "type": "prose"
         },
@@ -27019,8 +26989,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "cn-education",
-            "nbs"
+            "nbs",
+            "cn-guide"
           ],
           "type": "prose"
         },
@@ -27029,12 +26999,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cn-guide"
           ],
           "type": "prose"
         },
@@ -27048,7 +27019,8 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "ep"
+            "nbs",
+            "cn-guide"
           ],
           "type": "prose"
         },
@@ -27062,7 +27034,7 @@
           },
           "id": "announcers.china-salary.career-snapshot-primary-locale.59",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         }
@@ -27084,8 +27056,9 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet",
-            "onet",
+            "oews",
+            "ep",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -27128,7 +27101,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27156,7 +27129,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27184,7 +27157,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27240,8 +27213,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "ep",
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27255,8 +27227,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "ep",
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27270,8 +27241,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "ep",
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27285,8 +27255,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "ep",
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27300,8 +27269,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "ep",
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27315,8 +27283,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "ep",
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27325,12 +27292,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国工资采用ONET展示BLS May2025 27-3011分位，预测采用BLS EP2025—2035单列27-3011。OOH本职业行业时薪与组合数字分别标注；ONET旧2024—2034数据不是当前EP。雇员工资不能替代自雇收入或中国工资。"
+              "全国工资按ONET展示BLS May2025 27-3011分位，预测按BLS EP2025—2035单列；ONET现期也列2025就业和25—35分类，不再称旧期。OOH本职业行业时薪与含非电台DJ组合分别标注。雇员分位不代自雇收入、中国工资或新人起薪。"
             ]
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "onet",
+            "oews",
+            "ep",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -27359,9 +27328,9 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.27",
           "source_refs": [
-            "privacy",
+            "onet",
             "ep",
-            "oews"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27375,7 +27344,9 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.28",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27384,12 +27355,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "固定时段与加班、外出活动现场解说、商业配音与推广等安排会影响计酬范围；本页不提供分方向或分平台的工资数字。"
+              "编辑计酬核问：确认固定时段、加班、外出解说、配音与推广是否在实际合同计酬范围；本轮未取得各任务对工资的因果量、分方向或分平台工资。"
             ]
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27403,7 +27374,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.30",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27417,8 +27388,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.31",
           "source_refs": [
-            "privacy",
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27432,8 +27402,8 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.32",
           "source_refs": [
-            "onet",
-            "onet"
+            "privacy",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27447,8 +27417,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "ep",
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27462,7 +27431,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.34",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27476,7 +27445,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27490,7 +27459,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27504,7 +27473,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.37",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27518,7 +27487,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27532,7 +27501,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27546,7 +27515,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.40",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27560,7 +27529,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27574,7 +27543,9 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "bls"
+            "bls",
+            "ep",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27588,7 +27559,9 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.43",
           "source_refs": [
-            "bls"
+            "bls",
+            "ep",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27602,7 +27575,9 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "bls"
+            "bls",
+            "ep",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27616,7 +27591,9 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "bls"
+            "bls",
+            "ep",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27658,6 +27635,9 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
+            "oews",
+            "ep",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -27672,8 +27652,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27687,7 +27666,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27715,7 +27694,7 @@
           },
           "id": "announcers.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27870,11 +27849,6 @@
           },
           "id": "announcers.fit.personality-fit-block.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -27889,7 +27863,6 @@
           },
           "id": "announcers.fit.personality-fit-block.2",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27920,7 +27893,6 @@
           },
           "id": "announcers.fit.personality-fit-block.4",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -27949,7 +27921,6 @@
           },
           "id": "announcers.fit.personality-fit-block.6",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27980,7 +27951,6 @@
           },
           "id": "announcers.fit.personality-fit-block.8",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -28066,7 +28036,6 @@
           },
           "id": "announcers.fit.riasec-fit-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28124,7 +28093,8 @@
           },
           "id": "announcers.fit.personality-fit-block.14",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-guide"
           ],
           "type": "prose"
         },
@@ -28162,7 +28132,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用类型标签解释播出受挫，会减少改进机会。"
+              "编辑自查可讨论压力下的反应与改进安排；本轮未取得类型标签对播出表现或改进机会的因果证据，不以类型解释胜任。"
             ]
           },
           "id": "announcers.fit.personality-fit-block.17",
@@ -28181,7 +28151,6 @@
           },
           "id": "announcers.fit.personality-fit-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28239,7 +28208,6 @@
           },
           "id": "announcers.fit.personality-fit-block.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28269,7 +28237,6 @@
           },
           "id": "announcers.fit.personality-fit-block.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -28298,8 +28265,7 @@
           },
           "id": "announcers.fit.personality-fit-block.26",
           "source_refs": [
-            "onet",
-            "cn-guide"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28314,7 +28280,8 @@
           "id": "announcers.fit.personality-fit-block.27",
           "source_refs": [
             "onet",
-            "onet"
+            "cn-education",
+            "bls"
           ],
           "type": "prose"
         },
@@ -28328,7 +28295,6 @@
           },
           "id": "announcers.fit.personality-fit-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28343,7 +28309,6 @@
           },
           "id": "announcers.fit.personality-fit-block.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28358,7 +28323,6 @@
           },
           "id": "announcers.fit.personality-fit-block.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28373,7 +28337,6 @@
           },
           "id": "announcers.fit.personality-fit-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28388,7 +28351,6 @@
           },
           "id": "announcers.fit.personality-fit-block.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28403,7 +28365,6 @@
           },
           "id": "announcers.fit.personality-fit-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28418,7 +28379,6 @@
           },
           "id": "announcers.fit.personality-fit-block.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28433,7 +28393,6 @@
           },
           "id": "announcers.fit.personality-fit-block.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28448,7 +28407,6 @@
           },
           "id": "announcers.fit.personality-fit-block.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28463,7 +28421,6 @@
           },
           "id": "announcers.fit.personality-fit-block.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28478,7 +28435,6 @@
           },
           "id": "announcers.fit.personality-fit-block.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28488,12 +28444,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "以活动与场所演出的音乐编排与互动为主，不承担电台或电视节目的编排与合规流程。"
+              "编辑比较：非电台DJ主要在活动与场所编排音乐并互动；具体是否兼广播、审核或商业内容职责按岗位核，不断言职责普遍互斥。"
             ]
           },
           "id": "announcers.fit.personality-fit-block.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28508,8 +28463,6 @@
           },
           "id": "announcers.fit.personality-fit-block.40",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28524,8 +28477,6 @@
           },
           "id": "announcers.fit.personality-fit-block.41",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28540,8 +28491,6 @@
           },
           "id": "announcers.fit.personality-fit-block.42",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28556,7 +28505,6 @@
           },
           "id": "announcers.fit.personality-fit-block.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28571,7 +28519,6 @@
           },
           "id": "announcers.fit.personality-fit-block.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28581,12 +28528,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "负责机构对外沟通与传播方案，通常在机构一侧工作，不承担日常节目在播呈现。"
+              "编辑比较：公关方向重机构传播与沟通；是否兼日常节目呈现按实际岗位，不据名称排除。"
             ]
           },
           "id": "announcers.fit.personality-fit-block.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28601,7 +28547,6 @@
           },
           "id": "announcers.fit.personality-fit-block.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28616,7 +28561,6 @@
           },
           "id": "announcers.fit.personality-fit-block.47",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28631,7 +28575,6 @@
           },
           "id": "announcers.fit.personality-fit-block.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28660,7 +28603,6 @@
           },
           "id": "announcers.fit.personality-fit-block.50",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28689,7 +28631,6 @@
           },
           "id": "announcers.fit.personality-fit-block.52",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28704,7 +28645,6 @@
           },
           "id": "announcers.fit.personality-fit-block.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28749,7 +28689,8 @@
           "id": "announcers.fit.personality-fit-block.56",
           "source_refs": [
             "onet",
-            "onet"
+            "cn-education",
+            "bls"
           ],
           "type": "prose"
         },
@@ -28763,7 +28704,8 @@
           },
           "id": "announcers.fit.personality-fit-block.57",
           "source_refs": [
-            "privacy",
+            "onet",
+            "cn-education",
             "bls"
           ],
           "type": "prose"
@@ -28830,12 +28772,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "ONET旧2024年信息业85%与旧预测明确另期；当前OOH2025雇主广播56%、教育州地方6%、表演艺术体育相关6%、电视3%，类别不相同。"
+              "ONET当前2025信息业80%，OOH2025雇主广播56%、教育州地方6%、表演体育相关6%、电视3%；类别不同，不能互代，不推其余行业或中国份额。"
             ]
           },
           "id": "announcers.fit.personality-fit-block.62",
           "source_refs": [
-            "onet",
+            "ilo",
             "bls"
           ],
           "type": "prose"
@@ -28850,7 +28792,7 @@
           },
           "id": "announcers.fit.personality-fit-block.63",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -28949,11 +28891,9 @@
           },
           "id": "announcers.risk.career-risk-cards.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "cn-behavior",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "links"
         },
@@ -28962,14 +28902,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险清单不能替代广播电视主管部门的资格与持证上岗规定、机构的播出与内容审核制度、广告与版权合规要求以及个人信息处理要求；涉及违法有害内容、涉密信息、未成年人保护或侵权争议的事项必须按机构程序与主管部门规定处理。本页不构成法律或合规意见。"
+              "中国适用机构资格、持证注册、外部活动报批/报备、商业代言推广及直播带货审批和嘉宾主持边界依NRTA真实规定核；版权与个人信息的完整法规本轮未核，编辑风险清单不能替代实际机构和法域判断。"
             ]
           },
           "id": "announcers.risk.career-risk-cards.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "cn-behavior",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -28984,8 +28924,7 @@
           "id": "announcers.risk.career-risk-cards.9",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28994,16 +28933,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "美国ONET85%每天期限压力；错误无法及时更正时37%后果极其严重、20%非常严重、20%比较严重，是后果评价不是失误率。58%决策影响非常重要、92%每天室内可控、60%超过半天久坐。中国资格用26号/2023指南及2006注册办法，2022职业行为意见要求持证与注册；不引用已废止旧10号。"
+              "美国ONET85%每天期限压力；错误不容易纠正时37%后果极其严重、20%非常严重、20%比较严重，是后果评价不是失误率。58%决策影响非常重要、92%每天室内可控、60%超过半天久坐。中国资格用26号/2023指南及2006注册办法，2022职业行为意见要求持证与注册；不引用已废止旧10号。"
             ]
           },
           "id": "announcers.risk.career-risk-cards.10",
           "source_refs": [
-            "privacy",
-            "cnclass",
-            "cn-guide",
-            "cn-registration",
-            "cn-behavior"
+            "onet"
           ],
           "type": "prose"
         },
@@ -29017,7 +28952,6 @@
           },
           "id": "announcers.risk.career-risk-cards.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29027,12 +28961,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "影响播出准确性与机构公信力，事后更正成本高。"
+              "编辑风险场景：核事实/口误、更正流程和责任分工；ONET提供错误不容易纠正时的后果评价，本页不量化公信力或更正成本因果。"
             ]
           },
           "id": "announcers.risk.career-risk-cards.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29047,7 +28980,6 @@
           },
           "id": "announcers.risk.career-risk-cards.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29062,7 +28994,6 @@
           },
           "id": "announcers.risk.career-risk-cards.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29077,8 +29008,9 @@
           },
           "id": "announcers.risk.career-risk-cards.15",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-behavior",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -29087,13 +29019,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "可能引发投诉、监管处理与声誉损失。"
+              "编辑风险核问：核嘉宾和合作/购买节目的持证注册、言行审核，以及内容与广告实际分工；本轮未取得投诉率、处罚或声誉损失估计。"
             ]
           },
           "id": "announcers.risk.career-risk-cards.16",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-behavior",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -29102,13 +29035,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按机构审核流程送审，设定话题边界与预案，必要时延时或替换内容。"
+              "NRTA2022意见规定合作/购买节目审核嘉宾持证注册与言行；未持证未注册不担任，常设新闻评论不得以嘉宾身份行使主持作用；晚会非常设及个别专业性常设确需嘉宾主持须报备行政。具体审核分工向机构核。"
             ]
           },
           "id": "announcers.risk.career-risk-cards.17",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-behavior",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -29122,8 +29056,9 @@
           },
           "id": "announcers.risk.career-risk-cards.18",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-behavior",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -29146,7 +29081,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "侵害隐私并造成信任风险，泄露机构内部未公开信息。"
+              "编辑资料风险：核受访者/听众联络资料和内部信息的实际授权、用途与接收方；完整个人信息法律和信任影响本轮未核。"
             ]
           },
           "id": "announcers.risk.career-risk-cards.20",
@@ -29160,7 +29095,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按机构信息管理与保密要求处理，不上传可识别个人或机构内部身份的资料。"
+              "编辑资料处理核问：向机构确认允许的资料、授权、用途和接收方，不把本页当统一法律操作清单。"
             ]
           },
           "id": "announcers.risk.career-risk-cards.21",
@@ -29179,7 +29114,6 @@
           },
           "id": "announcers.risk.career-risk-cards.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29194,7 +29128,6 @@
           },
           "id": "announcers.risk.career-risk-cards.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29209,7 +29142,6 @@
           },
           "id": "announcers.risk.career-risk-cards.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29219,12 +29151,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "核对授权范围与播出次数，保留授权凭证并按机构要求记录。"
+              "编辑核授权范围、次数、条件和凭证及机构记录要求；本轮未核完整版权法律，不从页面保证授权有效。"
             ]
           },
           "id": "announcers.risk.career-risk-cards.25",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29239,7 +29170,6 @@
           },
           "id": "announcers.risk.career-risk-cards.26",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29255,7 +29185,7 @@
           "id": "announcers.risk.career-risk-cards.27",
           "source_refs": [
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -29270,7 +29200,7 @@
           "id": "announcers.risk.career-risk-cards.28",
           "source_refs": [
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -29285,7 +29215,7 @@
           "id": "announcers.risk.career-risk-cards.29",
           "source_refs": [
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -29300,7 +29230,7 @@
           "id": "announcers.risk.career-risk-cards.30",
           "source_refs": [
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -29315,7 +29245,7 @@
           "id": "announcers.risk.career-risk-cards.31",
           "source_refs": [
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -29324,13 +29254,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "排班和替班条件会影响能否持续履行任务；本轮不量化失误或医学因果。"
+              "编辑核排班、替班和真实任务条件；本轮未取得排班对失误或医学后果的因果估计。"
             ]
           },
           "id": "announcers.risk.career-risk-cards.32",
           "source_refs": [
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -29339,13 +29269,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按排班轮换并合理安排休息，出现身体或嗓音异常时按机构规定报告。"
+              "核真实机构排班、休息和报告/替班程序；身体或嗓音异常向对应专业渠道咨询，本页不提供医学方案。"
             ]
           },
           "id": "announcers.risk.career-risk-cards.33",
           "source_refs": [
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -29360,7 +29290,7 @@
           "id": "announcers.risk.career-risk-cards.34",
           "source_refs": [
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -29374,7 +29304,8 @@
           },
           "id": "announcers.risk.career-risk-cards.35",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -29383,12 +29314,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS EP 27-3011：2025年21,800人，2035年20,200人，2025—2035年下降7.6%，官方净减1,700人，年均2,000个职位空缺，自雇2.3%。人数已取整，净减采用官方列值；空缺含替代需求，不等于净新增或个人录用机会。"
+              "BLS OOH另述早晨、夜间、周末、节假日及可能兼职；工作安排是美国职业描述，非中国排班规则或医学因果。"
             ]
           },
           "id": "announcers.risk.career-risk-cards.36",
           "source_refs": [
-            "ep"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -29397,16 +29329,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "NRTA26号规定、2023办证指南、2006注册办法及2022职业行为意见，用于资格/注册和机构责任，不用旧10号等级规则。"
+              "NRTA2023办证指南用于学历、考试、岗位一年实习和机构注册；不代版权/个人信息法规、事故率或医学证据。"
             ]
           },
           "id": "announcers.risk.career-risk-cards.37",
           "source_refs": [
-            "privacy",
-            "cnclass",
+            "cn-behavior",
             "cn-guide",
-            "cn-registration",
-            "cn-behavior"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -29415,12 +29345,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 27-3011.00 职业摘要（任务与职责），用于任务与责任边界。"
+              "ONET详情用于美国任务与记录情境，不是资料处理法规或中国强制流程。"
             ]
           },
           "id": "announcers.risk.career-risk-cards.38",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -29429,12 +29360,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本页编辑归纳（条件性建议），不代表监管或机构的强制流程。"
+              "NRTA2022意见实际核外部活动事前报批/报备；商业广告代言推广直播带货须所在播出机构批准，新闻栏目从严；任职机构及个人网络平台信息分开标注。适用角色按原文核，不外推全部自由配音任务。"
             ]
           },
           "id": "announcers.risk.career-risk-cards.39",
           "source_refs": [
-            "onet"
+            "cn-behavior",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         }
@@ -29505,7 +29438,9 @@
           "id": "announcers.path.entry-role-comparison.1",
           "source_refs": [
             "onet",
-            "bls"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "title": "广播主持人与电台DJ的入门岗位与初期任务怎么比较？",
           "type": "table"
@@ -29553,10 +29488,8 @@
           "source_refs": [
             "onet",
             "bls",
-            "cnclass",
             "cn-guide",
-            "cn-registration",
-            "facilities"
+            "cnclass"
           ],
           "title": "可核问哪些教育、资格、情境与工具要求？",
           "type": "cards"
@@ -29860,11 +29793,11 @@
               [
                 "内容审核与版权与个人信息合规意识",
                 "全部在播岗位",
-                "决定能否安全播出并避免侵权与隐私风险",
-                "岗位必备",
-                "按机构播出与广告管理规定与版权授权条件",
+                "编辑核内容、版权与资料条件及机构分工；不保证安全或无侵权",
+                "按真实机构、角色与法域核",
+                "具体法规与授权条件另核，本轮不是完整法律清单",
                 "持续",
-                "违规播出或未授权使用素材可能引发投诉与赔偿"
+                "本轮未取得完整法规、投诉或赔偿统计，不能据场景断责任"
               ],
               [
                 "用声任务与工作安排",
@@ -29879,11 +29812,10 @@
           },
           "id": "announcers.path.credential-decision.1",
           "source_refs": [
-            "cnclass",
-            "cn-guide",
-            "cn-registration",
             "onet",
-            "bls"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -29901,11 +29833,10 @@
           },
           "id": "announcers.path.credential-boundary.1",
           "source_refs": [
-            "cnclass",
-            "cn-guide",
-            "cn-registration",
             "onet",
-            "bls"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -29924,8 +29855,8 @@
           "source_refs": [
             "onet",
             "bls",
-            "nbs",
-            "cn-guide"
+            "cn-guide",
+            "cnclass"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -29963,10 +29894,10 @@
           },
           "id": "announcers.path.career-path-block.10",
           "source_refs": [
+            "bls",
+            "cn-guide",
             "onet",
-            "onet",
-            "onet",
-            "onet"
+            "cnclass"
           ],
           "type": "links"
         },
@@ -29981,7 +29912,9 @@
           "id": "announcers.path.career-path-block.11",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -29990,13 +29923,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能在指导下整理背景资料与稿件、完成试播并按规范填写节目日志，如实记录播出要素与异常。"
+              "编辑发展场景：能在指导下整理背景资料与稿件、完成试播并按规范填写节目日志，如实记录播出要素与异常。 实际任务、机构分工、训练与资格分别核，阶段称谓和作品不证明独立履职或全部管理能力。"
             ]
           },
           "id": "announcers.path.career-path-block.12",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30019,13 +29954,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能独立完成常规节目的稿件准备与在播呈现，按审核流程送审并处理口误与突发情况。"
+              "编辑发展场景：能独立完成常规节目的稿件准备与在播呈现，按审核流程送审并处理口误与突发情况。 实际任务、机构分工、训练与资格分别核，阶段称谓和作品不证明独立履职或全部管理能力。"
             ]
           },
           "id": "announcers.path.career-path-block.14",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30048,13 +29985,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能承担固定时段或复杂节目（新闻、谈话、体育与现场）并处理话题边界与合规判断。"
+              "编辑发展场景：能承担固定时段或复杂节目（新闻、谈话、体育与现场）并处理话题边界与合规判断。 实际任务、机构分工、训练与资格分别核，阶段称谓和作品不证明独立履职或全部管理能力。"
             ]
           },
           "id": "announcers.path.career-path-block.16",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30077,13 +30016,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能设计节目形态与编排标准、带教新人并承接重点节目与大型活动解说。"
+              "编辑发展场景：能设计节目形态与编排标准、带教新人并承接重点节目与大型活动解说。 实际任务、机构分工、训练与资格分别核，阶段称谓和作品不证明独立履职或全部管理能力。"
             ]
           },
           "id": "announcers.path.career-path-block.18",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30112,7 +30053,9 @@
           "id": "announcers.path.career-path-block.20",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30174,7 +30117,7 @@
           },
           "id": "announcers.path.career-path-block.24",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -30235,7 +30178,8 @@
           "id": "announcers.path.career-path-block.28",
           "source_refs": [
             "cnclass",
-            "cn-guide"
+            "cn-guide",
+            "cn-registration"
           ],
           "type": "prose"
         },
@@ -30272,13 +30216,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在编辑与主播指导下整理资料、核对事实、试播稿件并填写节目日志。"
+              "编辑发展场景：在编辑与主播指导下整理资料、核对事实、试播稿件并填写节目日志。 实际任务、机构分工、训练与资格分别核，阶段称谓和作品不证明独立履职或全部管理能力。"
             ]
           },
           "id": "announcers.path.career-path-block.31",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30306,8 +30252,9 @@
           },
           "id": "announcers.path.career-path-block.33",
           "source_refs": [
+            "cnclass",
             "cn-guide",
-            "onet"
+            "cn-registration"
           ],
           "type": "prose"
         },
@@ -30345,13 +30292,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立准备并主持常规节目，按审核流程送审并处理一般突发情况。"
+              "编辑发展场景：独立准备并主持常规节目，按审核流程送审并处理一般突发情况。 实际任务、机构分工、训练与资格分别核，阶段称谓和作品不证明独立履职或全部管理能力。"
             ]
           },
           "id": "announcers.path.career-path-block.36",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30417,13 +30366,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承担固定时段或复杂节目，处理话题边界与合规判断并带教新人。"
+              "编辑发展场景：承担固定时段或复杂节目，处理话题边界与合规判断并带教新人。 实际任务、机构分工、训练与资格分别核，阶段称谓和作品不证明独立履职或全部管理能力。"
             ]
           },
           "id": "announcers.path.career-path-block.41",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30451,8 +30402,7 @@
           },
           "id": "announcers.path.career-path-block.43",
           "source_refs": [
-            "onet",
-            "cn-guide"
+            "onet"
           ],
           "type": "prose"
         },
@@ -30490,13 +30440,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "设计节目形态与编排标准、管理主持团队并对播出内容与合规负责。"
+              "编辑发展场景：设计节目形态与编排标准、管理主持团队并对播出内容与合规负责。 实际任务、机构分工、训练与资格分别核，阶段称谓和作品不证明独立履职或全部管理能力。"
             ]
           },
           "id": "announcers.path.career-path-block.46",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30524,8 +30476,9 @@
           },
           "id": "announcers.path.career-path-block.48",
           "source_refs": [
+            "cnclass",
             "cn-guide",
-            "cnclass"
+            "cn-registration"
           ],
           "type": "prose"
         },
@@ -30563,13 +30516,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在主播与制作人指导下完成选题、稿件与音频剪辑，协助完成播出。"
+              "编辑发展场景：在主播与制作人指导下完成选题、稿件与音频剪辑，协助完成播出。 实际任务、机构分工、训练与资格分别核，阶段称谓和作品不证明独立履职或全部管理能力。"
             ]
           },
           "id": "announcers.path.career-path-block.51",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30597,7 +30552,6 @@
           },
           "id": "announcers.path.career-path-block.53",
           "source_refs": [
-            "cn-guide",
             "onet"
           ],
           "type": "prose"
@@ -30636,13 +30590,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立完成选题、撰稿、录制与发布，并对内容合规与质量负责。"
+              "编辑发展场景：独立完成选题、撰稿、录制与发布，并对内容合规与质量负责。 实际任务、机构分工、训练与资格分别核，阶段称谓和作品不证明独立履职或全部管理能力。"
             ]
           },
           "id": "announcers.path.career-path-block.56",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30708,13 +30664,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "负责节目定位与编排、协调制作资源并对内容质量与合规负责。"
+              "编辑发展场景：负责节目定位与编排、协调制作资源并对内容质量与合规负责。 实际任务、机构分工、训练与资格分别核，阶段称谓和作品不证明独立履职或全部管理能力。"
             ]
           },
           "id": "announcers.path.career-path-block.61",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30780,13 +30738,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "管理内容团队与栏目矩阵，对内容方向、合规与商业合作负责。"
+              "编辑发展场景：管理内容团队与栏目矩阵，对内容方向、合规与商业合作负责。 实际任务、机构分工、训练与资格分别核，阶段称谓和作品不证明独立履职或全部管理能力。"
             ]
           },
           "id": "announcers.path.career-path-block.66",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30814,8 +30774,9 @@
           },
           "id": "announcers.path.career-path-block.68",
           "source_refs": [
+            "cnclass",
             "cn-guide",
-            "cnclass"
+            "cn-registration"
           ],
           "type": "prose"
         },
@@ -30853,13 +30814,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按脚本与导演要求完成配音与活动串场，配合修改并按时交付。"
+              "编辑发展场景：按脚本与导演要求完成配音与活动串场，配合修改并按时交付。 实际任务、机构分工、训练与资格分别核，阶段称谓和作品不证明独立履职或全部管理能力。"
             ]
           },
           "id": "announcers.path.career-path-block.71",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30925,13 +30888,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立承接配音与活动主持项目，把控质量与交付时间。"
+              "编辑发展场景：独立承接配音与活动主持项目，把控质量与交付时间。 实际任务、机构分工、训练与资格分别核，阶段称谓和作品不证明独立履职或全部管理能力。"
             ]
           },
           "id": "announcers.path.career-path-block.76",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30997,13 +30962,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承担长期品牌项目与专业领域配音，并处理复杂现场与多方协作。"
+              "编辑发展场景：承担长期品牌项目与专业领域配音，并处理复杂现场与多方协作。 实际任务、机构分工、训练与资格分别核，阶段称谓和作品不证明独立履职或全部管理能力。"
             ]
           },
           "id": "announcers.path.career-path-block.81",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -31069,13 +31036,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "管理工作室与团队，对客户交付、版权合规与经营结果负责。"
+              "编辑发展场景：管理工作室与团队，对客户交付、版权合规与经营结果负责。 实际任务、机构分工、训练与资格分别核，阶段称谓和作品不证明独立履职或全部管理能力。"
             ]
           },
           "id": "announcers.path.career-path-block.86",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -31119,10 +31088,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 27-3011.00 广播主持人与电台DJ职业摘要",
+                "entity": "BLS OOH本职业与播音员/DJ组合边界",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/27-3011.00"
+                "url": "https://www.bls.gov/ooh/media-and-communication/announcers.htm"
               },
               {
                 "entity": "BLS EP2025—2035：本职业预测与特征",
@@ -31134,7 +31103,7 @@
                 "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "ONET详情：美国教育与任务",
@@ -31195,9 +31164,9 @@
           "id": "announcers.market-signals.market-signal-card.7",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet"
+            "ep",
+            "bls",
+            "nbs"
           ],
           "type": "links"
         },
@@ -31212,7 +31181,10 @@
           "id": "announcers.market-signals.market-signal-card.8",
           "source_refs": [
             "ep",
-            "bls"
+            "bls",
+            "nbs",
+            "cn-guide",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -31226,7 +31198,7 @@
           },
           "id": "announcers.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31240,8 +31212,7 @@
           },
           "id": "announcers.market-signals.market-signal-card.10",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31255,8 +31226,7 @@
           },
           "id": "announcers.market-signals.market-signal-card.11",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31270,7 +31240,7 @@
           },
           "id": "announcers.market-signals.market-signal-card.12",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31284,7 +31254,7 @@
           },
           "id": "announcers.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31298,7 +31268,7 @@
           },
           "id": "announcers.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31312,8 +31282,7 @@
           },
           "id": "announcers.market-signals.market-signal-card.15",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31327,7 +31296,7 @@
           },
           "id": "announcers.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31341,7 +31310,7 @@
           },
           "id": "announcers.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31355,7 +31324,7 @@
           },
           "id": "announcers.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31369,7 +31338,7 @@
           },
           "id": "announcers.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31383,7 +31352,7 @@
           },
           "id": "announcers.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31397,7 +31366,7 @@
           },
           "id": "announcers.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31411,7 +31380,7 @@
           },
           "id": "announcers.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31425,7 +31394,8 @@
           },
           "id": "announcers.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cn-guide"
           ],
           "type": "prose"
         },
@@ -31439,7 +31409,8 @@
           },
           "id": "announcers.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cn-guide"
           ],
           "type": "prose"
         },
@@ -31483,7 +31454,8 @@
           },
           "id": "announcers.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cn-guide"
           ],
           "type": "prose"
         },
@@ -31497,7 +31469,8 @@
           },
           "id": "announcers.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cn-guide"
           ],
           "type": "prose"
         },
@@ -31526,7 +31499,7 @@
           },
           "id": "announcers.market-signals.market-signal-card.30",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31540,8 +31513,7 @@
           },
           "id": "announcers.market-signals.market-signal-card.31",
           "source_refs": [
-            "ep",
-            "bls"
+            "onet"
           ],
           "type": "prose"
         },
@@ -31555,7 +31527,8 @@
           },
           "id": "announcers.market-signals.market-signal-card.32",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cn-guide"
           ],
           "type": "prose"
         },
@@ -31578,12 +31551,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足采访与调查取证能力，通常需相应专业教育背景。"
+              "编辑转向比较：需补足采访与调查取证能力，通常需相应专业教育背景。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31593,12 +31565,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "稿件写作、事实核对与播出流程理解可直接迁移。"
+              "编辑转向比较：稿件写作、事实核对与播出流程理解可作目标岗位核问线索。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31608,12 +31579,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近：同属新闻内容链条，但职责从在播呈现转为一线采写。"
+              "编辑转向比较：较近：同属新闻内容链条，但职责从在播呈现转为一线采写。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31623,12 +31593,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足节目立项、预算管理与团队协调能力。"
+              "编辑转向比较：需补足节目立项、预算管理与团队协调能力。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31638,12 +31607,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "节目内容理解、会场控制与表达经验有帮助。"
+              "编辑转向比较：节目内容理解、会场控制与表达经验有帮助。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31653,12 +31621,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等：都与节目内容相关，但目标从呈现转为立项与统筹。"
+              "编辑转向比较：中等：都与节目内容相关，但目标从呈现转为立项与统筹。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31668,12 +31635,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足编辑规范、定稿标准与内容把关能力。"
+              "编辑转向比较：需补足编辑规范、定稿标准与内容把关能力。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.40",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31683,12 +31649,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "文字功底、事实核对与内容判断可迁移。"
+              "编辑转向比较：文字功底、事实核对与内容判断可作目标岗位核问线索。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31698,12 +31663,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近：都在内容链条上，但职责从呈现转为定稿与编排。"
+              "编辑转向比较：较近：都在内容链条上，但职责从呈现转为定稿与编排。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.42",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31713,12 +31677,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足现场音乐编排与即兴互动能力。"
+              "编辑转向比较：需补足现场音乐编排与即兴互动能力。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31728,12 +31691,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "音乐素养、串场表达与临场应变可直接迁移。"
+              "编辑转向比较：音乐素养、串场表达与临场应变可作目标岗位核问线索。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31743,12 +31705,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近：表达与音乐编排相通，但播出环境与合规要求不同。"
+              "编辑转向比较：较近：表达与音乐编排相通，但播出环境与合规要求不同。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31758,12 +31719,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足调音、录音与播出系统操作及设备维护能力。"
+              "编辑转向比较：需补足调音、录音与播出系统操作及设备维护能力。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31773,12 +31733,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "对播出流程与设备协同的理解有帮助。"
+              "编辑转向比较：对播出流程与设备协同的理解有帮助。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.47",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31788,12 +31747,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等：都在播出链条上，但职责从内容呈现转为技术操作。"
+              "编辑转向比较：中等：都在播出链条上，但职责从内容呈现转为技术操作。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31803,12 +31761,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足对外沟通与传播策划能力。"
+              "编辑转向比较：需补足对外沟通与传播策划能力。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.49",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31818,7 +31775,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "面向公众的表达与议题把握可迁移。"
+              "编辑转向比较：面向公众的表达与议题把握可作目标岗位核问线索。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.50",
@@ -31832,7 +31789,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑比较中等：从节目呈现转向机构对外传播策划，职责与机构立场需重新适应，不是从外宣转节目。"
+              "编辑转向比较：中等：从节目呈现转向机构对外传播策划，职责与机构立场需重新适应，不是从外宣转节目。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.51",
@@ -31846,12 +31803,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足长篇写作与选题策划能力。"
+              "编辑转向比较：需补足长篇写作与选题策划能力。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.52",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31861,12 +31817,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "文字表达与资料整理能力可迁移。"
+              "编辑转向比较：文字表达与资料整理能力可作目标岗位核问线索。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31876,12 +31831,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远：从口头表达到书面创作，产出形态不同。"
+              "编辑转向比较：较远：从口头表达到书面创作，产出形态不同。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.54",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31891,12 +31845,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足设备操作、信号处理与工程维护能力。"
+              "编辑转向比较：需补足设备操作、信号处理与工程维护能力。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.55",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31906,12 +31859,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "对播出流程与音频质量判断有帮助。"
+              "编辑转向比较：对播出流程与音频质量判断有帮助。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31921,12 +31873,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远：资格与技术要求不同，不能直接平移。"
+              "编辑转向比较：较远：资格与技术要求不同，不能直接平移。 具体目标任务、训练、资格与考核另核，未取得直接转岗效度或成功率，不保证转职。"
             ]
           },
           "id": "announcers.market-signals.market-signal-card.57",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -32028,9 +31979,6 @@
             ]
           },
           "id": "announcers.sources.source-card.1",
-          "source_refs": [
-            "onet"
-          ],
           "type": "prose"
         },
         {
@@ -32061,13 +32009,10 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核对与修订日期：2026-10-03。"
+              "本窗口2026-10-09核ONET详情与May2025全国工资、BLS EP/OOH、NRTA26号/2023指南/2006注册办法/2022职业行为意见；教育部2025教学标准PDF只读第1页。NBS宽参照有限复用同批10月8日已核原文，不称新核旧工资总额解释端点。"
             ]
           },
           "id": "announcers.sources.source-card.3",
-          "source_refs": [
-            "onet"
-          ],
           "type": "prose"
         },
         {
@@ -32075,7 +32020,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "美国全国工资为May2025 27-3011分位，预测为EP2025—2035单列；OOH四行业为时薪中位，组合另含非电台DJ。ONET旧2024—2034趋势不当最新。中国NBS2025只作宽参照；办证、注册、辅助及岗位语言条件按NRTA实际材料核，不用废止旧10号甲乙要求。软件有12类示例；AI DJ可能性在OOH明确讨论，但不提供采用率、因果效果或消失年份。练习与路径为编辑建议，不证明实播/录用。"
+              "美国全国工资为May2025 27-3011分位，预测为EP2025—2035单列；OOH四行业为时薪中位，组合另含非电台DJ。ONET当前已列2025就业/信息业80%和2025—2035预测分类，精确变化按EP。中国NBS2025只作宽参照；办证、注册、辅助及岗位语言条件按NRTA实际材料核，不用废止旧10号甲乙要求。软件有12类示例；AI DJ可能性在OOH明确讨论，但不提供采用率、因果效果或消失年份。练习与路径为编辑建议，不证明实播/录用。 证据不足：中国职业精确工资/预测/自营平台占比、AI采用和因果效果、P90合同构成、人格筛选效度、完整相邻准入及版权/个人信息法规仍缺。"
             ]
           },
           "id": "announcers.sources.source-card.4",
@@ -32161,42 +32106,42 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "访问2026-10-03"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "onet",
-                "limitation": "24任务（19核心/5补充）、AES、技能和教育。ONET仍有2024就业/2024—2034旧预测，明确另期。",
+                "limitation": "24任务19核心/5补充、AES、技能教育及现期2025就业21800/信息业80%、25—35下降分类和年空缺2000；精确-7.6%/净-1700按EP核。美国统计不授中国资格。",
                 "market": "美国",
                 "name": "O*NET OnLine 27-3011.00 广播主持人与电台DJ职业摘要",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/27-3011.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "parent_occupation_proxy",
-                  "访问2026-10-03"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "parent_occupation_proxy",
                 "id": "bls",
                 "limitation": "同页含本职业27-3011的职责、雇主分布和四行业时薪，也含非电台DJ及组合。按段区分；展望直接讨论无现场DJ/AI DJ可能性，不是采用率或因果效果。",
                 "market": "美国",
                 "name": "BLS 职业展望手册《播音员与唱片骑师》",
-                "period": "2025年（就业与工资）／2025—2035年（预测）；访问 2026-09-15",
+                "period": "2025年（就业与工资）／2025—2035年（预测）；访问 2026-10-09",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/ooh/media-and-communication/announcers.htm"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "访问2026-10-03"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "ep",
@@ -32209,26 +32154,26 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "访问2026-10-03"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "oews",
                 "limitation": "May2025全国年/时薪10/25/50/75/90分位，低端or less/高端or more；雇员统计不代自雇收入、新人起薪或P90构成。",
                 "market": "美国",
                 "name": "O*NET 展示的 BLS 2025 年 5 月工资分位（27-3011.00）",
-                "period": "2025年5月；访问 2026-09-15",
-                "publisher": "O*NET OnLine",
+                "period": "2025年5月；访问 2026-10-09",
+                "publisher": "O*NET OnLine（BLS OEWS数据）",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/27-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "industry_proxy",
-                  "访问 2026-09-15"
+                  "同批已核NBS有限复用 2026-10-08"
                 ],
                 "evidence_type": "industry_proxy",
                 "id": "nbs",
@@ -32238,13 +32183,13 @@
                 "period": "2025年；2026-05-15 发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "访问2026-10-03"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "cnclass",
@@ -32257,65 +32202,65 @@
                 "url": "https://www.nrta.gov.cn/art/2016/3/29/art_1588_43920.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "访问2026-10-03"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "privacy",
                 "limitation": "本职业受访工作情境，比例/重要程度不是时间占比、个人条件、中国规则或失误率。",
                 "market": "美国",
                 "name": "O*NET 27-3011.00 详细资料（工作情境）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/27-3011.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "访问2026-10-03"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "facilities",
                 "limitation": "实际列12软件类别含数据库、声音编辑、ERP、Office、Zoom等，不是无软件清单，不是AI效果或普遍必备。",
                 "market": "美国",
                 "name": "ONET27-3011详情：12类软件技能",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/27-3011.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "访问2026-10-03"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "operations",
                 "limitation": "24任务、工作活动、技能、软件和情境；任务可重叠，不授中国资格。",
                 "market": "美国",
                 "name": "O*NET 27-3011.00 详细资料（任务与工作活动）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/27-3011.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "访问2026-10-03"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "hr",
                 "limitation": "周工时42%超40/47%40/11%少40、规律87%及久坐；不是兼职率。早夜周末节假日由OOH另支持。",
                 "market": "美国",
                 "name": "O*NET 27-3011.00 详细资料（工作时间与环境）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/27-3011.00"
@@ -32337,34 +32282,34 @@
                 "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "访问2026-10-03"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "ilo",
-                "limitation": "信息业85%为ONET2024旧期，不能与OOH2025雇主行业类别互代，不推其余15%具体行业。",
+                "limitation": "现期2025信息业80%为美国职业就业结构，不是工资/AI采用率；不与OOH雇主行业类别互代，不推余下行业。",
                 "market": "美国",
                 "name": "O*NET 27-3011.00 行业分布",
-                "period": "2024年行业分布（ONET当前页旧数据）",
+                "period": "2025就业行业结构；2026-10-09核详细页",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/27-3011.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "访问2026-10-03"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "editor",
                 "limitation": "典型学士、实习/校园媒体及部分高中岗位说明；不是全美执照法律清单，本轮未逐州核，不由认证空页断无要求。",
                 "market": "美国",
                 "name": "BLS OOH：美国教育与准备边界",
-                "period": "2026 年更新页面；访问 2026-09-15",
-                "publisher": "O*NET OnLine",
+                "period": "2026 年更新页面；访问 2026-10-09",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/media-and-communication/announcers.htm"
               },
@@ -32385,49 +32330,49 @@
                 "url": "https://www.onetonline.org/link/custom/27-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "arxiv",
                 "limitation": "用于记录与成果要求说明。",
                 "market": "美国",
                 "name": "O*NET 27-3011.00 详细资料（记录与成果要求）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/27-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "weforum",
                 "limitation": "用于任务清单核对。",
                 "market": "美国",
                 "name": "O*NET 27-3011.00 详细资料（任务清单）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/27-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "employer",
                 "limitation": "用于记录与数据要求与合规责任说明。",
                 "market": "美国",
                 "name": "O*NET 27-3011.00 详细资料（记录与数据要求）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/27-3011.00"
@@ -32481,90 +32426,90 @@
                 "url": "https://www.onetonline.org/link/summary/27-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-3",
                 "limitation": "用于数据说明核对。",
                 "market": "美国",
                 "name": "O*NET 27-3011.00 详细资料（数据说明）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/27-3011.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "访问2026-10-03"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "census",
                 "limitation": "Job Zone4/SVP7.0—<8.0美国准备与新聘教育选项，无显示比例，不是中国资格。",
                 "market": "美国",
                 "name": "O*NET 27-3011.00 培训与教育信息（Job Zone 4）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/27-3011.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "访问2026-10-03"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "msresearch",
                 "limitation": "新聘岗位教育列学士、部分大学无学位、高中同等，但无显示比例，不是从业者学历分布。",
                 "market": "美国",
                 "name": "O*NET 27-3011.00 培训与教育信息（学历构成）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/27-3011.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "访问2026-10-03"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "onet-wages",
                 "limitation": "实际核May2025全国分位及分州入口；未以分州/邮编数字代填全国或中国。",
                 "market": "美国",
                 "name": "O*NET 27-3011.00 全国工资分位页面",
-                "period": "2025年5月；访问 2026-09-15",
-                "publisher": "O*NET OnLine",
+                "period": "2025年5月；访问 2026-10-09",
+                "publisher": "O*NET OnLine（BLS OEWS数据）",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/27-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "archivists",
                 "limitation": "用于工作情境与责任说明。",
                 "market": "美国",
                 "name": "O*NET 27-3011.00 详细资料（工作情境与安全责任）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/27-3011.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "访问2026-10-03"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "cn-guide",
@@ -32577,10 +32522,10 @@
                 "url": "https://www.nrta.gov.cn/col/col2451/index.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "访问2026-10-03"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "cn-registration",
@@ -32593,10 +32538,10 @@
                 "url": "https://www.nrta.gov.cn/art/2006/5/29/art_2531_40050.html?xxgkhide=1"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "访问2026-10-03"
+                  "本窗口实际读同URL/同职业官方原文 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "cn-behavior",
@@ -32609,10 +32554,10 @@
                 "url": "https://www.nrta.gov.cn/art/2022/1/26/art_113_59409.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "访问2026-10-03"
+                  "本窗口实际读官方原文；教育PDF限第1页 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "cn-education",
@@ -34837,8 +34782,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "operations"
+              "onet"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -34869,8 +34813,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "cn-behavior",
-              "operations"
+              "employer"
             ],
             "id": "record-version",
             "mitigation": {
@@ -34901,8 +34844,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "cn-behavior",
-              "operations"
+              "privacy"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34933,7 +34875,6 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
               "onet"
             ],
             "id": "technical-boundary",
@@ -34997,7 +34938,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "hr",
+              "privacy",
               "bls"
             ],
             "id": "delivery-acceptance",
@@ -37916,7 +37857,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "在播呈现：稿件准备与核对 · 直播或录播呈现与临场应变 · 节目串联与嘉宾采访",
@@ -37967,7 +37908,7 @@
       "text": "广播主持人与电台DJ"
     }
   },
-  "source_content_sha256": "69a10411efda6b75857df5d95235166a1b807fcb01f7427d4f84b3fc0b2519c4",
+  "source_content_sha256": "4adb8b38828b2ac3d4318c19f6a11a0ac61f74c59f70de36620a9525dd3553c7",
   "subject": {
     "canonical_slug": "announcers",
     "name": "广播主持人与电台DJ",

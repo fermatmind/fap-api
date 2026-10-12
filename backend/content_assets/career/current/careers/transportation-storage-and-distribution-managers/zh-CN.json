@@ -27572,12 +27572,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得2025完整第25／75分位数值，不插值。其余已核年度阈值、工资中位和行业值保留；本模块采用最新2025—2035就业口径，O*NET旧2024—2034不混用。"
+              "本轮取得2025精确职业全国Annual五分位65,120／82,440／107,230／146,770／194,900美元/年，不自行插值或年化。中位、分位、行业工资与BLS2025—2035预测分别解释，不能转换为经验等级、个人收入或AI因果。"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.career_snapshot_secondary_locale.boundary.detail",
           "source_refs": [
-            "bls-ooh"
+            "bls-ooh",
+            "us-wage-percentiles-2025"
           ],
           "type": "prose"
         }
@@ -31347,7 +31348,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "补多部门经营、政策和资源范围，以实际经营任务证明能力。"
+              "补多部门经营、政策和资源范围，以实际经营任务证明能力。 范围扩大，物流经验不覆盖全部经营责任。"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.market_signal_card.transitions.agent.gaps",
@@ -31362,7 +31363,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "范围扩大，物流经验不覆盖全部经营责任。"
+              "编辑判断：多部门经营范围"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.market_signal_card.transitions.agent.distance",
@@ -31392,7 +31393,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "补建筑运行、维护与设施专业要求及具体岗位经验。"
+              "补建筑运行、维护与设施专业要求及具体岗位经验。 任务对象变化，库存经验不是全部设施能力。"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.market_signal_card.transitions.teacher.gaps",
@@ -31407,7 +31408,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "任务对象变化，库存经验不是全部设施能力。"
+              "编辑判断：建筑设施运行"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.market_signal_card.transitions.teacher.distance",
@@ -31437,7 +31438,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "补制造流程、质量数量和生产资源管理经验。"
+              "补制造流程、质量数量和生产资源管理经验。 需制造责任证据，不把配送绩效当生产绩效。"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.market_signal_card.transitions.enrichment.gaps",
@@ -31452,7 +31453,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需制造责任证据，不把配送绩效当生产绩效。"
+              "编辑判断：制造质量与生产责任"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.market_signal_card.transitions.enrichment.distance",
@@ -31482,7 +31483,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "补采购对象、买方活动与采购决策经验。"
+              "补采购对象、买方活动与采购决策经验。 责任不同，运输议价不是全部采购能力。"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.market_signal_card.transitions.art.gaps",
@@ -31497,7 +31498,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "责任不同，运输议价不是全部采购能力。"
+              "编辑判断：采购决策责任"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.market_signal_card.transitions.art.distance",
@@ -31527,7 +31528,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "补生产采购预测等全链协调与优化经验。"
+              "补生产采购预测等全链协调与优化经验。 11-3071.04是更具体档案，不视为完全互斥BLS人群。"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.market_signal_card.transitions.directing.gaps",
@@ -31542,7 +31543,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "11-3071.04是更具体档案，不视为完全互斥BLS人群。"
+              "编辑判断：供应链全环节协调"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.market_signal_card.transitions.directing.distance",
@@ -31572,7 +31573,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "补产品生命周期、分析方法与相应物流方案证据。"
+              "补产品生命周期、分析方法与相应物流方案证据。 分析协调与管理人员预算的责任不同。"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.market_signal_card.transitions.announcing.gaps",
@@ -31587,7 +31588,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "分析协调与管理人员预算的责任不同。"
+              "编辑判断：生命周期物流分析"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.market_signal_card.transitions.announcing.distance",
@@ -31617,7 +31618,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "补数据分析、流程诊断和改进建议的技术与作品。"
+              "补数据分析、流程诊断和改进建议的技术与作品。 更具体分析任务需证明，不由经理头衔推定。"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.market_signal_card.transitions.editing.gaps",
@@ -31632,7 +31633,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "更具体分析任务需证明，不由经理头衔推定。"
+              "编辑判断：流程诊断与数据分析"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.market_signal_card.transitions.editing.distance",
@@ -31662,7 +31663,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "补具体项目范围、进度、采购和人员交付经验。"
+              "补具体项目范围、进度、采购和人员交付经验。 项目交付与持续运营分开，专业要求逐岗核。"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.market_signal_card.transitions.dancing.gaps",
@@ -31677,7 +31678,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "项目交付与持续运营分开，专业要求逐岗核。"
+              "编辑判断：具体项目交付"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.market_signal_card.transitions.dancing.distance",
@@ -31924,7 +31925,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-01本地制作；统计期间、来源日期与核读范围分别见说明"
+              "2026-10-12复核O*NET任务与EC、BLS本職OOH/预测、全国Annual五分位、盐田9月24日经理案例、Amazon新加坡条件及人社标准目录。NBS/NIST沿本窗已核原文按经理任务独立适用。共享bls-oews旧未取得25/75说明被保护，保留并与本轮新增工资源区分。"
             ]
           },
           "id": "transportation-storage-and-distribution-managers.display.source_card.updated-at",
@@ -32193,14 +32194,14 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-12",
                 "details": [
-                  "当前May2025入口及已核OOH中位、低高阈值和行业中位。",
-                  "本轮ONet精确11-3071全国工资页Internal Error，未取得2025完整25/75分位，不插值。"
+                  "May2025入口及OOH中位、低高阈值和行业中位分别引用。",
+                  "本轮普通urllib取得O*NET原URL全国Annual五分位65120/82440/107230/146770/194900美元/年。"
                 ],
                 "evidence_type": "official statistical data portal",
                 "id": "oews",
-                "limitation": "证据不足：本职2025完整25/75分位未取得；OEWS入口不证明完整表已核，不插值，不由年度阈值伪算小时分位。",
+                "limitation": "完整全国分位已取得；OEWS不含自雇，不以分位推定资历或个人合同。",
                 "market": "美国",
                 "name": "BLS May2025 OEWS数据入口",
                 "period": "May2025",
@@ -32531,6 +32532,22 @@
                 "publisher": "深圳市盐田区人力资源局",
                 "scope": "sample",
                 "url": "https://www.yantian.gov.cn/cn/service/ldjy/jyzpxx/content/post_12996283.html"
+              },
+              {
+                "accessed_at": "2026-10-12",
+                "details": [
+                  "United States Annual行：65120/82440/107230/146770/194900美元/年。",
+                  "2026-10-12普通urllib原链接读取；仅用全国Annual行。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-wage-percentiles-2025",
+                "limitation": "分位不是年限等级、入职报价或个人收入；与OOH行业工资分别看。",
+                "market": "美国",
+                "name": "O*NET/BLS：11-3071全国2025年工资五分位",
+                "period": "2025年5月",
+                "publisher": "O*NET OnLine；原始BLS OEWS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/11-3071.00?p=annual&st=CA"
               }
             ]
           },
@@ -35581,6 +35598,25 @@
                 }
               ],
               "separator": "｜"
+            },
+            {
+              "$join": [
+                {
+                  "$source": "us-wage-percentiles-2025",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "transportation-storage-and-distribution-managers.source-register.published.1"
+                },
+                {
+                  "$source": "us-wage-percentiles-2025",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "transportation-storage-and-distribution-managers.source-register.published.1"
+                }
+              ],
+              "separator": "｜"
             }
           ],
           "separator": "；"
@@ -35597,8 +35633,8 @@
           },
           {
             "指标": "2025薪资·第25分位",
-            "数值": "证据不足：完整2025第25分位未取得，不插值。",
-            "说明": "证据不足：完整2025第25分位未取得，不插值。"
+            "数值": "82,440美元/年",
+            "说明": "2025精确职业全国Annual值，非资历或个人合同。"
           },
           {
             "fact_ref": "us-median-2025",
@@ -35611,8 +35647,8 @@
           },
           {
             "指标": "2025薪资·第75分位",
-            "数值": "证据不足：完整2025第75分位未取得，不插值。",
-            "说明": "证据不足：完整2025第75分位未取得，不插值。"
+            "数值": "146,770美元/年",
+            "说明": "2025精确职业全国Annual值，非资历或个人合同。"
           },
           {
             "fact_ref": "us-p90-2025",
@@ -37955,7 +37991,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "O*NET-SOC 11-3071.00 精确职业口径",
@@ -38006,7 +38042,7 @@
       "text": "运输、仓储与配送经理"
     }
   },
-  "source_content_sha256": "47d0dda6f590d500e0ad34fddaaf7a31e4cc6f10c5cb473b6d4e04354885c9be",
+  "source_content_sha256": "47cef9f77bfd1500038c0b847564d14f35c20bb8601049cce562c04af1c24e38",
   "subject": {
     "canonical_slug": "transportation-storage-and-distribution-managers",
     "name": "运输、仓储与配送经理",

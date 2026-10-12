@@ -13762,7 +13762,7 @@
             "链接": "https://www.onetonline.org/link/details/29-1122.00"
           }
         ],
-        "difference_intro": "将工具能力、实际部署和临床责任分开：文书可加速，但缺少可信病史与真实活动观察时不能推治疗方案。",
+        "difference_intro": "以下是依据职业任务提出的编辑试用方向；文书处理速度、准确性和临床效果未在本页验证。真实活动观察和可信病史仍须由有权限人员核实。",
         "difference_rows": [
           {
             "AI主要改变": "整理非敏感活动记录草稿。",
@@ -13780,7 +13780,7 @@
             "方向": "进展复查"
           }
         ],
-        "evidence_intro": "AOTA政策强调准确、安全、透明和专业判断；O*NET/BLS说明本职业任务。它们没有测量本职业AI采用率或净就业影响。 BLS表1.2总体预测另列，非AI归因。",
+        "evidence_intro": "本表O*NET/BLS链接说明美国职业任务和总体就业预测，不证明AI采用率或净就业影响。准确、安全和人工判断是编辑提出的使用边界；本表不将重复任务链接当成多项AI效果研究。",
         "evidence_rows": [
           {
             "使用限制": "职业任务描述，不能推断AI采用率或替代率。",
@@ -13963,7 +13963,7 @@
             "人的控制点": "核准确性、来源和签署权限",
             "任务": "整理去标识化草稿",
             "工作方向": "病历记录",
-            "当前变化": "可节省文书时间"
+            "当前变化": "编辑试用建议：整理草稿；节时效果未在本页验证"
           },
           {
             "人的控制点": "解释变化、调整目标并升级风险",
@@ -14340,7 +14340,7 @@
             },
             "evidence_refs": [
               "onet",
-              "onet"
+              "bls"
             ],
             "id": "cost-change",
             "mitigation": "先评估承重与环境，按机构流程配人和辅具。",
@@ -14348,11 +14348,11 @@
             "title": "转移跌倒"
           },
           {
-            "affected_roles": "现场重新评估活动能力并遵守机构停止、上报与记录流程。",
-            "consequence": "现场重新评估活动能力并遵守机构停止、上报与记录流程。",
+            "affected_roles": "当事人、照护者、治疗师",
+            "consequence": "干预可能偏离当事人参与目标，难以解释进展或需要重订计划。",
             "evidence_refs": [
               "onet",
-              "privacy"
+              "bls"
             ],
             "id": "record-version",
             "mitigation": "协商可观察目标并定期复评。",
@@ -14360,11 +14360,11 @@
             "title": "目标不合适"
           },
           {
-            "affected_roles": "现场重新评估活动能力并遵守机构停止、上报与记录流程。",
-            "consequence": "现场重新评估活动能力并遵守机构停止、上报与记录流程。",
+            "affected_roles": "当事人、照护者、器具使用指导人员",
+            "consequence": "尺寸或环境不适配可能增加跌倒、疼痛或使用障碍。",
             "evidence_refs": [
-              "privacy",
-              "privacy"
+              "onet",
+              "bls"
             ],
             "id": "personal-data",
             "mitigation": "现场试用，核环境和使用训练。",
@@ -14372,10 +14372,10 @@
             "title": "辅具不适配"
           },
           {
-            "affected_roles": "现场重新评估活动能力并遵守机构停止、上报与记录流程。",
-            "consequence": "现场重新评估活动能力并遵守机构停止、上报与记录流程。",
+            "affected_roles": "当事人、治疗师、机构数据负责人",
+            "consequence": "可识别健康信息可能泄露，损害隐私和信任。",
             "evidence_refs": [
-              "onet",
+              "privacy",
               "onet"
             ],
             "id": "technical-boundary",
@@ -14384,11 +14384,11 @@
             "title": "隐私泄露"
           },
           {
-            "affected_roles": "现场重新评估活动能力并遵守机构停止、上报与记录流程。",
-            "consequence": "现场重新评估活动能力并遵守机构停止、上报与记录流程。",
+            "affected_roles": "当事人、治疗团队及后续接手人员",
+            "consequence": "遗漏疼痛、疲劳和活动变化可能延误方案调整与风险升级。",
             "evidence_refs": [
               "bls",
-              "bls"
+              "onet"
             ],
             "id": "single-coverage",
             "mitigation": "及时记录、交接并升级异常。",
@@ -14396,10 +14396,10 @@
             "title": "漏记变化"
           },
           {
-            "affected_roles": "现场重新评估活动能力并遵守机构停止、上报与记录流程。",
-            "consequence": "现场重新评估活动能力并遵守机构停止、上报与记录流程。",
+            "affected_roles": "当事人、实习人员、监督治疗师及机构",
+            "consequence": "未经授权的结论可能造成不当干预、责任不清和记录失实。",
             "evidence_refs": [
-              "onet",
+              "bls",
               "onet"
             ],
             "id": "delivery-acceptance",
@@ -14429,10 +14429,10 @@
             "scope": "职业任务与工作场景"
           },
           {
-            "href": "https://www.bls.gov/ooh/healthcare/occupational-therapists.htm",
+            "href": "https://www.aota.org/-/media/corporate/files/aboutaota/officialdocs/policies/e19-ethical-use-of-artificial-intelligence-ai-2025.pdf",
             "id": "privacy",
-            "label": "BLS工作环境",
-            "scope": "职业任务与工作场景"
+            "label": "AOTA AI伦理政策 E.19",
+            "scope": "美国专业协会AI安全、伦理与人工判断政策；非隐私法或采用率，具体数据权限另核机构和所在地规则。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1122.00",
@@ -14873,14 +14873,14 @@
             "value": "约10,000"
           },
           {
-            "geography": "美国BLS预计需求增长；判断中国岗位须看具体机构与地区。",
+            "geography": "中国大陆；单一上海机构招聘仅为岗位样本。",
             "horizon": "美国BLS预计需求增长；判断中国岗位须看具体机构与地区。",
             "interpretation": "美国BLS预计需求增长；判断中国岗位须看具体机构与地区。",
             "limitation": "美国BLS预计需求增长；判断中国岗位须看具体机构与地区。",
             "metric": "中国岗位",
             "occupation_scope": "具体招聘、机构和地区分别核",
             "source_id": "nbs",
-            "value": "无可比全国预测"
+            "value": "证据不足：本次所核资料未取得中国同口径职业预测"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -15024,7 +15024,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
+            "cta_label": "查看RIASEC兴趣测评",
             "evidence_level": {
               "$item": "occupational-therapists.fit.personality-fit-block.8",
               "block": "fit",
@@ -15043,10 +15043,10 @@
             "watchout": "测评结果不是临床录用或执照依据。"
           },
           {
-            "answer": "作业治疗师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "观察自己是否愿意耐心访谈、持续记录并面对缓慢进展；类型标签不决定治疗能力。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "愿意观察活动、和当事人沟通目标、记录效果并重视安全边界。",
+            "cta_label": "查看RIASEC兴趣测评",
+            "evidence_level": "编辑自我反思建议；无本页职业预测效度证据",
             "id": "big-five",
             "label": "性格倾向",
             "question": "做作业治疗师需要怎样的能力与工作方式？",
@@ -15059,10 +15059,10 @@
             "watchout": "测评结果不是临床录用或执照依据。"
           },
           {
-            "answer": "作业治疗师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "用观察、沟通和记录任务了解待学能力，并请带教者反馈，不用单次分数替代专业训练。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "愿意观察活动、和当事人沟通目标、记录效果并重视安全边界。",
+            "cta_label": "查看RIASEC兴趣测评",
+            "evidence_level": "编辑任务观察建议；不是能力诊断",
             "id": "mbti",
             "label": "能力线索",
             "question": "做作业治疗师需要怎样的能力与工作方式？",
@@ -15075,10 +15075,10 @@
             "watchout": "测评结果不是临床录用或执照依据。"
           },
           {
-            "answer": "作业治疗师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较自己是否重视当事人目标、隐私和可复核的进展，并观察遇到目标冲突时如何沟通。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "愿意观察活动、和当事人沟通目标、记录效果并重视安全边界。",
+            "cta_label": "查看RIASEC兴趣测评",
+            "evidence_level": "编辑价值反思建议；不推出录用概率",
             "id": "enneagram",
             "label": "价值观",
             "question": "做作业治疗师需要怎样的能力与工作方式？",
@@ -15091,10 +15091,10 @@
             "watchout": "测评结果不是临床录用或执照依据。"
           },
           {
-            "answer": "作业治疗师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较医院、学校、居家和老年服务的任务、出行、身体负荷及团队分工，再选择体验场景。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "愿意观察活动、和当事人沟通目标、记录效果并重视安全边界。",
+            "cta_label": "查看RIASEC兴趣测评",
+            "evidence_level": "职业环境与编辑探索建议；非人格岗位匹配试验",
             "id": "iq",
             "label": "工作场景",
             "question": "做作业治疗师需要怎样的能力与工作方式？",
@@ -15107,10 +15107,10 @@
             "watchout": "测评结果不是临床录用或执照依据。"
           },
           {
-            "answer": "作业治疗师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "先读官方职责与所在地教育要求，再安排合规见习并记录反馈；未获授权不接触真实治疗。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "愿意观察活动、和当事人沟通目标、记录效果并重视安全边界。",
+            "cta_label": "查看RIASEC兴趣测评",
+            "evidence_level": "编辑探索建议；不授予执照或机构权限",
             "id": "eq",
             "label": "探索行动",
             "question": "做作业治疗师需要怎样的能力与工作方式？",
@@ -15319,7 +15319,7 @@
       "riasec_fit_block": {
         "fit_interest": "愿意反复调整任务与环境，能在不确定病情下审慎沟通和记录。",
         "interest": "喜欢观察人的日常活动、倾听目标、设计练习并看见具体进步。",
-        "riasec": "社会型 S 与研究型 I 倾向常见；量表只提供兴趣线索，不证明临床胜任。",
+        "riasec": "O*NET职业兴趣环境中的社会型S和研究型I可作任务偏好线索；不是从业者类型分布或临床胜任验证。",
         "riasec_short": "S/I：助人与分析活动。"
       },
       "source_card": {
@@ -15331,7 +15331,7 @@
             "type": "prose"
           },
           "source": "BLS与O*NET为美国职业数据；中国培训和招聘按其各自适用范围使用。",
-          "updated_at": "BLS与O*NET为美国职业数据；中国培训和招聘按其各自适用范围使用。"
+          "updated_at": "2026-10-12 本次九模块作者核对；各来源统计期分别保留。"
         },
         "note": "美国BLS的2025工资、2025—2035预测不代表中国收入或个人结果；州许可与中国任职规则须分别核。",
         "secondary_links": [
@@ -15343,7 +15343,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "职业任务来源"
+            "label": "了解MBTI测评（英文）"
           },
           {
             "href": {
@@ -15353,7 +15353,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "美国工资来源"
+            "label": "了解大五测评（英文）"
           },
           {
             "href": {
@@ -15363,7 +15363,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "中国培训来源"
+            "label": "了解MBTI测评（中文）"
           },
           {
             "href": {
@@ -15373,7 +15373,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "职业边界说明"
+            "label": "了解大五测评（中文）"
           }
         ]
       },
@@ -15602,7 +15602,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "作业治疗师 · O*NET 29-1122.00",
@@ -15653,7 +15653,7 @@
       "text": "作业治疗师：职责、执照、工资与入门路径"
     }
   },
-  "source_content_sha256": "7056664bb8471a4ec6ba058a234a89058121dd7b10c3ebcdc9da5956f79c7335",
+  "source_content_sha256": "9d7aa8550b8e8ceca750694ef2b38836d33cb18bf7615c9eb3d5e851baf6834d",
   "subject": {
     "canonical_slug": "occupational-therapists",
     "name": "作业治疗师",

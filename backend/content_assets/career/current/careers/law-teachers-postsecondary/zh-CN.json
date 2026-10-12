@@ -7382,7 +7382,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入｜SI保：S91/I73/C45/E42/A40/R24为兴趣强度非能力，未标Bright。O*NET Job Zone第五级是同区职业通用准备说明，不是本职业统一M.D.要求或五年执业门槛。本职业教育调查46%专业学位、35%博士、15%硕士；BLS精确25-1112典型入门为博士或专业学位、相关经验少于5年、OJT无列项，均美国统计而非个人许可。主要行业2024教育服务100%，非2026行业统计。五工资64,250/88,700/128,500/176,490/287,900美元年保。O*NET旧期2024就业29,500→2034年30,200、增长2%、年均空缺2,200；新旧期分列，不相加。"
+              "研究输入｜SI保：S91/I73/C45/E42/A40/R24为兴趣强度非能力，未标Bright。O*NET Job Zone第五级是同区职业通用准备说明，不是本职业统一M.D.要求或五年执业门槛。本职业教育调查46%专业学位、35%博士、15%硕士；BLS精确25-1112典型入门为博士或专业学位、相关经验少于5年、OJT无列项，均美国统计而非个人许可。主要行业2025教育服务100%，非访问年行业统计。五工资64,250/88,700/128,500/176,490/287,900美元年保。O*NET旧期2024就业29,500→2034年30,200、增长2%、年均空缺2,200；新旧期分列，不相加。"
             ]
           },
           "id": "law-teachers-postsecondary.profile.onet-structured-fields-block.7",
@@ -7768,7 +7768,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答｜按 O*NET 呈现的 BLS 精确职业口径：2025 年年薪第 10 分位 64,250 美元、第 25 分位 88,700 美元、中位 128,500 美元、第 75 分位 176,490 美元、第 90 分位 287,900 美元；2024 年就业 29,500 人、2024—2034 预测增长 2%（slower than average）、预计年均空缺 2,200 个、2034 年预测就业 30,200 人；主要行业为教育服务（100%）。"
+              "美国精确25-1112.00：2025年年薪10/25/50/75/90分位64,250/88,700/128,500/176,490/287,900美元；2025年就业25,800人，2025—2035预测增长2.6%、2035年26,500人；表列净增700人，年均空缺1,800个（含增长与替换），不是当前招聘或净新增。2025行业分布教育服务100%，非行业工资。"
             ]
           },
           "fact_refs": [
@@ -7776,7 +7776,9 @@
           ],
           "id": "law-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "source-pack-onet-localwages"
+            "source-pack-onet-localwages",
+            "review-bls",
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -7819,7 +7821,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业口径｜O*NET details列2024教育服务100%，仅美国本职业就业行业分布，不是行业工资或中国比例。"
+              "行业口径｜O*NET Top industries (2025)教育服务100%，仅美国本职业就业行业分布，不是行业工资或中国比例。"
             ]
           },
           "fact_refs": [
@@ -8117,7 +8119,9 @@
           },
           "id": "law-teachers-postsecondary.path.career-path-block.4",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "review-teacherlaw",
+            "review-lawyerlaw",
+            "review-gzhu"
           ],
           "type": "prose"
         },
@@ -8173,7 +8177,11 @@
           },
           "id": "law-teachers-postsecondary.path.career-path-block.8",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "source-pack-onet-details",
+            "review-adj-admin",
+            "review-adj-polit",
+            "review-adj-lawyer",
+            "review-lawyerlaw"
           ],
           "type": "prose"
         }
@@ -9103,12 +9111,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "信息整理",
+            "AI主要改变": "可试验信息整理，效果未测",
             "仍由人负责": "责任与授权",
             "方向": "材料与检索辅助"
           },
           {
-            "AI主要改变": "检索与复盘",
+            "AI主要改变": "可试验检索与复盘，效果未测",
             "仍由人负责": "原始记录核对",
             "方向": "教学与研究判断"
           }
@@ -9297,8 +9305,8 @@
         ],
         "task_rows": [
           {
-            "人的控制点": "核对原始记录与失败模式。",
-            "任务": "整理记录",
+            "人的控制点": "核适用版本与原文引文，虚构R1不当真实法律。",
+            "任务": "对照原始法条、判例与课程目标整理材料",
             "工作方向": "材料与检索",
             "当前变化": {
               "$item": "law-teachers-postsecondary.ai-impact.ai-impact-table.7",
@@ -9314,9 +9322,9 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "任务": "执行核心任务",
+            "任务": "设计课堂问题与讨论顺序",
             "工作方向": "教学与讨论",
-            "当前变化": "辅助信息汇总"
+            "当前变化": "可试验汇总，须核课程目标和原文"
           },
           {
             "人的控制点": "按学校评分复议和学术程序处理，不把线索自定不端。",
@@ -10368,74 +10376,35 @@
           },
           {
             "指标": "就业 · 规模",
-            "数值": "29,500 人（2024 年）",
+            "数值": "25,800人（2025年）",
             "说明": {
-              "$join": [
-                {
-                  "$source": "review-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "law-teachers-postsecondary.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "review-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "law-teachers-postsecondary.source-register.published.1"
-                }
-              ],
-              "separator": ""
+              "$source": "review-bls",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "law-teachers-postsecondary.source-register.published.1"
             }
           },
           {
             "指标": "就业 · 增长",
-            "数值": "2%（2024—2034）",
+            "数值": "2.6%（2025—2035）",
             "说明": {
-              "$join": [
-                {
-                  "$source": "review-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "law-teachers-postsecondary.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "review-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "law-teachers-postsecondary.source-register.published.1"
-                }
-              ],
-              "separator": ""
+              "$source": "review-bls",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "law-teachers-postsecondary.source-register.published.1"
             }
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "2,200 个/年（2024—2034）",
+            "数值": "1,800个/年（2025—2035，含增长与替换）",
             "说明": {
-              "$join": [
-                {
-                  "$source": "review-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "law-teachers-postsecondary.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "review-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "law-teachers-postsecondary.source-register.published.1"
-                }
-              ],
-              "separator": ""
+              "$source": "review-bls",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "law-teachers-postsecondary.source-register.published.1"
             }
           }
         ],
@@ -10466,7 +10435,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "2.6%（BLS2025—2035）；旧期2%（2024—2034）",
+        "growth": "2.6%（BLS2025—2035精确职业）",
         "heading": {
           "$item": "law-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10479,12 +10448,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "O*NET details行业统计2024；2026访问",
+        "industry_period": "O*NET Top industries (2025)，美国本职业就业行业",
         "industry_rows": [
           {
             "industry": "教育服务（Educational Services）",
             "median": "暂无安全数值",
-            "note": "2024教育服务100%就业，非行业工资。"
+            "note": "2025教育服务100%就业，非行业工资。"
           },
           {
             "industry": "其他未单列行业",
@@ -10515,11 +10484,11 @@
             "question": "这是不是个人报价？"
           },
           {
-            "answer": "需核对覆盖范围。",
+            "answer": "工资与新期预测均为25-1112精确职业；高校教师父级不得替代本行。",
             "question": "这是否覆盖精确职业？"
           },
           {
-            "answer": "以来源时期为准。",
+            "answer": "工资及行业2025；主展望2025—2035，历史旧期另标。",
             "question": "时期是什么？"
           },
           {
@@ -10766,7 +10735,7 @@
             "transition_distance": "须补目标学科职责与资格证据，不量化距离"
           },
           {
-            "capability_gaps": "政治学课程与学科体系",
+            "capability_gaps": "政治学研究问题、研究设计及理论方法证据；政治学家不等政治学教师。",
             "shared_capabilities": "研究写作、课程或工单记录可作比较基础，目标学科和行政能力须另举证。",
             "target_href": "/zh/career/jobs/political-scientists",
             "target_slug": "political-scientists",
@@ -10783,7 +10752,7 @@
           },
           {
             "capability_gaps": "商科课程体系与研究",
-            "shared_capabilities": "研究写作、课程或工单记录可作比较基础，目标学科和行政能力须另举证。",
+            "shared_capabilities": "课程设计、评价反馈和研究记录可作比较基础，商科学科成果须另核。",
             "target_href": "/zh/career/jobs/business-teachers-postsecondary",
             "target_slug": "business-teachers-postsecondary",
             "target_title": "商学教师（高等教育）",
@@ -10839,7 +10808,7 @@
             "evidence_level": "工作样本",
             "id": "riasec",
             "label": "RIASEC",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "你是否愿意反复核课程目标与考核是否一致？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10858,7 +10827,7 @@
             "evidence_level": "工作样本",
             "id": "big-five",
             "label": "大五人格",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "遇同题评分差异时，能否保留标准并解释修改？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10877,7 +10846,7 @@
             "evidence_level": "工作样本",
             "id": "mbti",
             "label": "MBTI",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "能否把类型标签变为待验证的教学问题？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10885,13 +10854,13 @@
             "watchout": "不能据此推导录用、资格或表现。"
           },
           {
-            "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
+            "answer": "观察评分争议中是否回核证据；九型标签不能认定教学或执业资格。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "工作样本",
             "id": "enneagram",
             "label": "九型人格",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "被要求改分时，能否引用标准并遵守复议程序？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10899,13 +10868,13 @@
             "watchout": "不能据此推导录用、资格或表现。"
           },
           {
-            "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
+            "answer": "记录条件、例外与引文的漏项及纠错依据，认知测验不替代正式教学评价。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "工作样本",
             "id": "iq",
             "label": "认知能力",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "能否区分R1条件、例外与批准状态，而不凭印象补充？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10913,13 +10882,13 @@
             "watchout": "不能据此推导录用、资格或表现。"
           },
           {
-            "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
+            "answer": "观察对A/B的反馈是否具体、可复核，情绪量表不替代学校程序或学生权益判断。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "工作样本",
             "id": "eq",
             "label": "情绪能力",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "能否给错误答案具体反馈，并清楚说明待核部分？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10974,31 +10943,31 @@
         },
         "questions": [
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "分别记录对课程设计、评分解释和研究核引的兴趣，不以SI强度推能力。",
             "question": "喜欢哪些任务？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "在10分钟虚构课中核目标与步骤时间；不把纸面速度推成真实教学工作量。",
             "question": "能否承受工作节奏？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "给每项评分保留R1、标准与修订版本，真实学生信息不进入公开作品。",
             "question": "是否愿意记录过程？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "遇无法判断的引文或争议先列事实与问题，按学校流程交有权限部门。",
             "question": "能否在不确定时升级？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "说明模拟教学不授课、不认定不端，也不授律师执业权限。",
             "question": "是否理解授权边界？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "逐项比较双4分草稿与原标准，记录错误原因及同行反馈。",
             "question": "能否复盘失败？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "四作品只证明纸面核对，正式教学研究需学校授权和实际评价。",
             "question": "是否有可观察交付？"
           },
           {
@@ -11176,14 +11145,14 @@
         "eeat_signals": {
           "author": "FermatMind research workflow",
           "source": {
-            "$source": "cn-wage-attempt",
+            "$source": "source-pack-onet-details",
             "block": "source-register",
             "copy_key": "career.item.published-sources",
             "field": "name",
             "item": "law-teachers-postsecondary.source-register.published.1"
           },
           "updated_at": {
-            "$source": "cn-wage-attempt",
+            "$source": "source-pack-onet-details",
             "block": "source-register",
             "copy_key": "career.item.published-sources",
             "field": "period",
@@ -11409,7 +11378,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "高校法学教师 · 教学、学术规范与执业边界",
@@ -11460,7 +11429,7 @@
       "text": "高校法学教师职业判断：教学、学术规范与执业边界"
     }
   },
-  "source_content_sha256": "b4cd9417da70199f7e99c25f66d4f8a8738326adf65411450beca44d6989e7c5",
+  "source_content_sha256": "2a4f82d483562a645ca57794e2337a38189effeda80806db5e8b868470de61c9",
   "subject": {
     "canonical_slug": "law-teachers-postsecondary",
     "name": "高校法学教师",

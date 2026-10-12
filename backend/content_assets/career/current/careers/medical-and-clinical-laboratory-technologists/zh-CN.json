@@ -7348,7 +7348,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入：O*NET 29-2011.00 的官方描述、任务、技能、兴趣代码、工作活动与工作情境，以及 BLS 2025 年工资数据与 2024—2034 年就业预测（后者为 Clinical Laboratory Technologists and Technicians 组合口径）；研究结论不据此推定中国大陆的资格、工资或就业口径。"
+              "研究输入：O*NET29-2011.00身份、16项任务、IRC与情境为技术员；工资、行业、就业是Clinical Laboratory Technologists and Technicians组合。2025工资、2025—2035预测；BLS OOH组合SOC29-2010，与O*NET技术员代码不同，不外推中国资格或工资。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.profile.onet-structured-fields-block.7",
@@ -7706,7 +7706,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国医疗临床技术专家薪资与就业口径（BLS 2025 年工资数据与 2024—2034 年预测；O*NET 展示为 Clinical Laboratory Technologists and Technicians组合口径）"
+              "美国2025组合工资、2025—2035组合预测：Clinical Laboratory Technologists and Technicians（BLS OOH SOC29-2010）；非单列O*NET29-2011.00技术员。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.us-salary.career-snapshot-secondary-locale.1",
@@ -7748,7 +7748,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得美国各行业工资，不能用全国分位填行业工资。行业组合范围：O*NET摘要明确行业数据覆盖Clinical Laboratory Technologists and Technicians。83%医疗保健与社会援助、17%其他行业沿本职业冻结报告2026-09-25记录，本轮完整行业页未成功读取，不作为新核比例。"
+              "当前O*NET组合行业页83%医疗保健与社会援助、17%其他已读取；BLS2025取得五个组合职业×细行业中位工资，非技术专家单列，也不是以全国分位代填；行业份额与行业工资分开。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.us-salary.career-snapshot-secondary-locale.4",
@@ -7762,7 +7762,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业规模与口径提示：2024 年组合口径就业约 351,200 人，2034 年预计约 357,200 人，2024—2034 年预计慢于平均（约 2%），年均职位空缺约 22,600 个（含替换需求）；引用时须标明年份、覆盖范围（组合口径）与统计口径。"
+              "美国Clinical Laboratory Technologists and Technicians组合2025就业343,000，2035预计352,400；2025—2035增长3%、净增9,400、年均空缺20,800含替换。非技术专家单列、当前在招岗位或个人录用概率。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.us-salary.career-snapshot-secondary-locale.5",
@@ -8117,7 +8117,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "官方与行业信号：美国 Clinical Laboratory Technologists and Technicians组合口径 2024 年就业约 351,200 人，2034 年预计约 357,200 人，2024—2034 年预计慢于平均（约 2%），年均职位空缺约 22,600 个（含替换需求）；为组合口径，口径边界必须随数字保留。"
+              "美国Clinical Laboratory Technologists and Technicians组合2025就业343,000，2035预计352,400；2025—2035增长3%、净增9,400、年均空缺20,800含替换。非技术专家单列、当前在招岗位或个人录用概率。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.market-signals.market-signal-card.1",
@@ -8146,7 +8146,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国组合统计：2024年351,200人→2034年357,200人，净增6,000（约2%），年均空缺22,600含增长与替换；净变化不等于年均空缺，也不是当前在招岗位或本技术专家单列需求。"
+              "美国Clinical Laboratory Technologists and Technicians组合2025就业343,000，2035预计352,400；2025—2035增长3%、净增9,400、年均空缺20,800含替换。非技术专家单列、当前在招岗位或个人录用概率。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.market-signals.market-signal-card.3",
@@ -8766,6 +8766,22 @@
                 "publisher": "O*NET OnLine / BLS",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/localwages/29-2012.00"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "OOH组合统计表SOC29-2010；O*NET本技术员工资、行业与就业引用同名组合，并非29-2011.00单列。",
+                  "五个细行业工资为组合职业×细行业中位数；人员教育区分技术师与技术员，州执照和认证另核。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "bls-clinical-lab-ooh",
+                "limitation": "非技术专家单列，不提供中国工资或临床诊断权限。",
+                "market": "美国全国",
+                "name": "BLS OOH 临床实验室技术师与技术员组合：2025工资与2025—2035预测",
+                "period": "2025工资；2025—2035预测",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/ooh/healthcare/clinical-laboratory-technologists-and-technicians.htm"
               }
             ]
           },
@@ -8887,7 +8903,7 @@
         "action_rows": [
           {
             "人群": "入行者",
-            "应对重点": "练习可复核的检验、质控与方法记录。"
+            "应对重点": "先完成原M0/M1纸面比较与交接，不接触患者、标本或真实仪器。"
           },
           {
             "人群": "在岗者",
@@ -9055,7 +9071,7 @@
             "概念": "任务能力"
           },
           {
-            "含义": "工具出现或厂商演示不等于机构已采用；需核对数据、权限、版本与质量要求。",
+            "含义": "未取得本职业生成式工具临床性能、机构采用率或岗位结果；工具技能提及和厂商演示不能补足验证、权限、版本与质量要求。",
             "概念": "采用条件"
           },
           {
@@ -9336,7 +9352,7 @@
         "heading": "医疗临床技术专家的工作对象与 AI 边界"
       },
       "career_path_block": {
-        "boundary": "入口要求、执业与监督边界由具体法域、机构或雇主核验；证书与学位不等于执照、签字权或最终责任。",
+        "boundary": "三轨四阶为编辑成长示例，实际检测、审核、诊断报告与带教须先满足当地资格和机构授权；纸面作品不替代临床训练或真实质量记录，不保证晋升。",
         "competence_ladder": [
           {
             "description": "确认标本、申请、方法与质量要求。",
@@ -9399,13 +9415,13 @@
         "locale_requirements": {
           "credential_boundary": "中国大陆：医疗机构临床实验室专业技术人员应具相应专业学历与专业技术职务任职资格；检验报告区分操作者与审核者，诊断性临床检验报告由执业医师出具，乡、民族乡、镇医疗机构可由执业助理医师出具（管理办法第12、16—19条）。美国：CLIA按检测复杂程度设质量与人员要求，非豁免检测须满足相应人员标准，另核州规则及机构授权。技术专家称谓不自动授予诊断、报告签发或监督权。",
           "jurisdiction": "中美法域分别核，Job Zone不是临床授权",
-          "summary": "美国 Job Zone 4：多数相关岗位需要四年制学士学位，但有例外，并通常需要较多工作相关技能、经验或训练；52%是O*NET受访者对新入职者所需学历回答“学士”的比例，不是中国要求、录用率或全员学历分布。"
+          "summary": "美国JobZone4为职业组通常准备；本子职业受访教育52%本科是对新入职所需学历回答。BLS技术师通常本科，部分州需执照/注册，认证与雇主偏好另核；中国人员学历/专业技术资格按管理办法，不互认。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
             "href": {
-              "$source": "nbs-wages",
+              "$source": "nhc-lab",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9413,13 +9429,13 @@
             },
             "id": "medical-and-clinical-laboratory-technologists.display.source.0",
             "label": {
-              "$source": "nbs-wages",
+              "$source": "nhc-lab",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "scope": "中国行业工资不能代替本职业工资"
+            "scope": "中国临床人员、报告、质控与安全"
           },
           {
             "href": {
@@ -9459,7 +9475,7 @@
           },
           {
             "href": {
-              "$source": "onet-trends",
+              "$source": "bls-clinical-lab-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9467,13 +9483,13 @@
             },
             "id": "medical-and-clinical-laboratory-technologists.display.source.3",
             "label": {
-              "$source": "onet-trends",
+              "$source": "bls-clinical-lab-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "scope": "美国组合2024—2034就业与空缺预测"
+            "scope": "美国组合2025—2035预测；技术师本科与州许可范围"
           }
         ],
         "tracks": [
@@ -9740,14 +9756,15 @@
           }
         ],
         "direct_answer": "风险必须按触发、后果、控制和升级边界处理，不以编辑归纳代替医疗标准与感染控制要求。",
-        "evidence_scope": "O*NET支持美国任务与情境；中国医疗机构实验室管理办法与美国CLIA分别支持各自法域的人员和质量边界。",
+        "evidence_scope": "O*NET为美国任务和受访情境，非事故率；中国管理办法第12/16—19/25/34—38条支持人员、报告、质控与安全要求，美国CLIA按复杂度分别核验。风险后果与共同升级为编辑归纳，不提供临床操作指令。",
         "heading": "医疗临床技术专家的工作风险与边界",
         "risks": [
           {
             "affected_roles": "标本处理岗位",
             "consequence": "可能导致错误结果与患者风险。",
             "evidence_refs": [
-              "onet-details"
+              "medical-and-clinical-laboratory-technologists.display.source.0",
+              "medical-and-clinical-laboratory-technologists.display.source.1"
             ],
             "id": "risk-1",
             "mitigation": "按规程核对标本与申请信息。",
@@ -9763,7 +9780,8 @@
             "affected_roles": "结果与方法岗位",
             "consequence": "可能影响诊疗与质量体系。",
             "evidence_refs": [
-              "onet-details"
+              "medical-and-clinical-laboratory-technologists.display.source.0",
+              "medical-and-clinical-laboratory-technologists.display.source.1"
             ],
             "id": "risk-2",
             "mitigation": "按质控与方法验证规则复核并升级。",
@@ -9779,7 +9797,10 @@
             "affected_roles": "检验与培养岗位",
             "consequence": "可能造成职业暴露与感染。",
             "evidence_refs": [
-              "source-pack-onet-custom"
+              "medical-and-clinical-laboratory-technologists.display.source.0",
+              "medical-and-clinical-laboratory-technologists.display.source.1",
+              "medical-and-clinical-laboratory-technologists.display.source.2",
+              "medical-and-clinical-laboratory-technologists.display.source.3"
             ],
             "id": "risk-3",
             "mitigation": "按感染控制与防护规程作业。",
@@ -9795,7 +9816,10 @@
             "affected_roles": "质量保证岗位",
             "consequence": "可能造成系统性错误。",
             "evidence_refs": [
-              "onet-details"
+              "medical-and-clinical-laboratory-technologists.display.source.0",
+              "medical-and-clinical-laboratory-technologists.display.source.1",
+              "medical-and-clinical-laboratory-technologists.display.source.2",
+              "medical-and-clinical-laboratory-technologists.display.source.3"
             ],
             "id": "risk-4",
             "mitigation": "按质量系统记录、查因、纠正与复核，恢复须由授权人员判断。",
@@ -9808,15 +9832,17 @@
             }
           },
           {
-            "affected_roles": "结果与沟通岗位",
+            "affected_roles": "检验、质控、结果与报告岗位",
             "consequence": "可能改变医疗与法律责任。",
             "evidence_refs": [
-              "nhc-lab",
-              "cms-clia"
+              "medical-and-clinical-laboratory-technologists.display.source.0",
+              "medical-and-clinical-laboratory-technologists.display.source.1",
+              "medical-and-clinical-laboratory-technologists.display.source.2",
+              "medical-and-clinical-laboratory-technologists.display.source.3"
             ],
             "id": "risk-5",
-            "mitigation": "按监督与授权规则交有权限者确认。",
-            "scenario": "在授权范围外作出诊断或放行结论。",
+            "mitigation": "停止或隔离相关环节，保留事实和待决问题，按机构规程交有权限者确认。",
+            "scenario": "标本、结果、设备或感染控制出现未决疑问，或要求在授权范围外作诊断/放行。",
             "title": {
               "$item": "medical-and-clinical-laboratory-technologists.risk.career-risk-cards.5",
               "block": "risk",
@@ -9828,7 +9854,8 @@
             "affected_roles": "检验与技术岗位",
             "consequence": "可能导致资格与责任错配。",
             "evidence_refs": [
-              "onet-summary"
+              "medical-and-clinical-laboratory-technologists.display.source.0",
+              "medical-and-clinical-laboratory-technologists.display.source.1"
             ],
             "id": "risk-6",
             "mitigation": "按 O*NET 29-2011.00 的范围区分相邻岗位。",
@@ -9840,7 +9867,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "nbs-wages",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9848,13 +9875,13 @@
             },
             "id": "medical-and-clinical-laboratory-technologists.display.source.0",
             "label": {
-              "$source": "nbs-wages",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "scope": "不提供该职业采用率、失业概率或替代日期。"
+            "scope": "美国复杂检验任务/受访情境，非事故率"
           },
           {
             "href": {
@@ -9872,11 +9899,11 @@
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "scope": "未建立与该 O*NET 精确职业一一对应的中国全国工资分布。"
+            "scope": "美国方法/质控任务，非中国法律"
           },
           {
             "href": {
-              "$source": "onet-summary",
+              "$source": "nhc-lab",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9884,17 +9911,17 @@
             },
             "id": "medical-and-clinical-laboratory-technologists.display.source.2",
             "label": {
-              "$source": "onet-summary",
+              "$source": "nhc-lab",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "scope": "美国数据为 Clinical Laboratory Technologists and Technicians组合口径。"
+            "scope": "中国人员、报告、质控与安全规则"
           },
           {
             "href": {
-              "$source": "onet-trends",
+              "$source": "cdc-complexity",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9902,13 +9929,13 @@
             },
             "id": "medical-and-clinical-laboratory-technologists.display.source.3",
             "label": {
-              "$source": "onet-trends",
+              "$source": "cdc-complexity",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "scope": "工作情境与行业分布为调查结果，不替代雇主与地方法规。"
+            "scope": "美国CLIA非豁免质量/人员要求"
           }
         ]
       },
@@ -10009,7 +10036,7 @@
           "china_ref": {
             "$join": [
               {
-                "$source": "onet-summary",
+                "$source": "nbs-wages",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -10017,7 +10044,7 @@
               },
               "｜",
               {
-                "$source": "onet-summary",
+                "$source": "nbs-wages",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10050,19 +10077,45 @@
           "sources_note": {
             "$join": [
               {
-                "$source": "onet-summary",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "name",
-                "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
+                "$join": [
+                  {
+                    "$source": "nbs-wages",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "name",
+                    "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
+                  },
+                  "｜",
+                  {
+                    "$source": "nbs-wages",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "url",
+                    "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
+                  }
+                ],
+                "separator": ""
               },
-              "｜",
+              "；",
               {
-                "$source": "onet-summary",
-                "block": "source-register",
-                "copy_key": "career.item.published-sources",
-                "field": "url",
-                "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
+                "$join": [
+                  {
+                    "$source": "nhc-lab",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "name",
+                    "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
+                  },
+                  "｜",
+                  {
+                    "$source": "nhc-lab",
+                    "block": "source-register",
+                    "copy_key": "career.item.published-sources",
+                    "field": "url",
+                    "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
+                  }
+                ],
+                "separator": ""
               }
             ],
             "separator": ""
@@ -10085,35 +10138,45 @@
         "authority_sources": {
           "$join": [
             {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "｜",
-            {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
+                }
+              ],
+              "separator": ""
             },
             "；",
             {
-              "$source": "onet-trends",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "｜",
-            {
-              "$source": "onet-trends",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
+              "$join": [
+                {
+                  "$source": "bls-clinical-lab-ooh",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "bls-clinical-lab-ooh",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
+                }
+              ],
+              "separator": ""
             }
           ],
           "separator": ""
@@ -10241,11 +10304,11 @@
           },
           {
             "指标": "就业 · 规模",
-            "数值": "351,200 人（2024；组合口径）",
+            "数值": "组合343,000人（2025）；预计352,400（2035）",
             "说明": {
               "$join": [
                 {
-                  "$source": "onet-trends",
+                  "$source": "bls-clinical-lab-ooh",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10253,7 +10316,7 @@
                 },
                 "｜",
                 {
-                  "$source": "onet-trends",
+                  "$source": "bls-clinical-lab-ooh",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10265,11 +10328,11 @@
           },
           {
             "指标": "就业 · 增长",
-            "数值": "慢于平均（约 2%）",
+            "数值": "组合增长3%；净增9,400（2025—2035）",
             "说明": {
               "$join": [
                 {
-                  "$source": "onet-trends",
+                  "$source": "bls-clinical-lab-ooh",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10277,7 +10340,7 @@
                 },
                 "｜",
                 {
-                  "$source": "onet-trends",
+                  "$source": "bls-clinical-lab-ooh",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10289,11 +10352,11 @@
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "约 22,600 个/年（组合口径）",
+            "数值": "组合20,800个/年（2025—2035）",
             "说明": {
               "$join": [
                 {
-                  "$source": "onet-trends",
+                  "$source": "bls-clinical-lab-ooh",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10301,7 +10364,7 @@
                 },
                 "｜",
                 {
-                  "$source": "onet-trends",
+                  "$source": "bls-clinical-lab-ooh",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10314,10 +10377,39 @@
         ],
         "boundary": "美国数据为 O*NET 展示的 Clinical Laboratory Technologists and Technicians（组合口径），非单列 29-2011.00；分位为统计位置，不等于个人到手收入。",
         "direct_answer": {
-          "$item": "medical-and-clinical-laboratory-technologists.us-salary.career-snapshot-secondary-locale.2",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
+          "$join": [
+            {
+              "$item": "medical-and-clinical-laboratory-technologists.us-salary.career-snapshot-secondary-locale.2",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technologists.us-salary.career-snapshot-secondary-locale.3",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technologists.us-salary.career-snapshot-secondary-locale.4",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technologists.us-salary.career-snapshot-secondary-locale.5",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technologists.us-salary.career-snapshot-secondary-locale.6",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
         },
         "factor_rows": [
           {
@@ -10333,55 +10425,45 @@
             "factor": "地区"
           }
         ],
-        "factors_heading": {
-          "$item": "medical-and-clinical-laboratory-technologists.us-salary.career-snapshot-secondary-locale.6",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
-        "growth": "慢于平均（约 2%，2024—2034；组合口径）",
+        "factors_heading": "岗位差异与资格核验",
+        "growth": "组合增长3%（2025—2035）",
         "heading": {
           "$item": "medical-and-clinical-laboratory-technologists.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_heading": {
-          "$item": "medical-and-clinical-laboratory-technologists.us-salary.career-snapshot-secondary-locale.5",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
-        "industry_period": "2024组合比例，沿本职业历史2026-09-25记录；本轮完整行业页未读取成功",
+        "industry_heading": "组合职业的行业工资与范围",
+        "industry_period": "当前O*NET组合行业页；查阅2026-10-11",
         "industry_rows": [
           {
-            "industry": "医疗保健与社会援助（约 83%）",
-            "median": "证据不足：未取得美国各行业工资",
-            "note": "行业比例或编辑场景不是行业工资；全国组合分位不能填入此格。"
+            "industry": "私营普通内外科医院",
+            "median": "69,190美元/年",
+            "note": "BLS2025组合职业×细行业中位数；非技术专家单列，非起薪、到手或个人报价。"
           },
           {
-            "industry": "其他行业（约 17%）",
-            "median": "证据不足：未取得美国各行业工资",
-            "note": "行业比例或编辑场景不是行业工资；全国组合分位不能填入此格。"
+            "industry": "教育服务（州/地方/私营）",
+            "median": "63,690美元/年",
+            "note": "BLS2025组合职业×细行业中位数；非技术专家单列，非起薪、到手或个人报价。"
           },
           {
-            "industry": "方法学与质控岗位",
-            "median": "证据不足：未取得美国各行业工资",
-            "note": "行业比例或编辑场景不是行业工资；全国组合分位不能填入此格。"
+            "industry": "医学与诊断实验室",
+            "median": "58,320美元/年",
+            "note": "BLS2025组合职业×细行业中位数；非技术专家单列，非起薪、到手或个人报价。"
           },
           {
-            "industry": "地区差异",
-            "median": "证据不足：未取得美国各行业工资",
-            "note": "行业比例或编辑场景不是行业工资；全国组合分位不能填入此格。"
+            "industry": "医师诊所",
+            "median": "56,850美元/年",
+            "note": "BLS2025组合职业×细行业中位数；非技术专家单列，非起薪、到手或个人报价。"
+          },
+          {
+            "industry": "其他门诊医疗服务",
+            "median": "48,140美元/年",
+            "note": "BLS2025组合职业×细行业中位数；非技术专家单列，非起薪、到手或个人报价。"
           }
         ],
-        "industry_value_label": "行业工资证据",
-        "interpretation_heading": {
-          "$item": "medical-and-clinical-laboratory-technologists.us-salary.career-snapshot-secondary-locale.4",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "industry_value_label": "2025组合职业×细行业年薪中位数",
+        "interpretation_heading": "统计分布与使用限制",
         "interpretation_rows": [
           {
             "answer": "不是，分位为统计位置。",
@@ -10392,7 +10474,7 @@
             "question": "这是否覆盖精确职业？"
           },
           {
-            "answer": "2025 年工资数据；2024—2034 年预测。",
+            "answer": "2025组合工资；2025—2035组合预测，非单列技术员。",
             "question": "时期是什么？"
           },
           {
@@ -10402,19 +10484,14 @@
         ],
         "median": "62,930 美元/年（组合口径）",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "2024—2034；查阅2026-10-03",
+        "outlook_period": "2025—2035（组合口径）",
         "wage_column_labels": [
           "分位",
           "年度参考",
           "时薪参考",
           "解释"
         ],
-        "wage_heading": {
-          "$item": "medical-and-clinical-laboratory-technologists.us-salary.career-snapshot-secondary-locale.3",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "wage_heading": "工资分位（组合全国口径）",
         "wage_tiers": [
           {
             "equivalent": "约 18.71 美元/小时",
@@ -10540,8 +10617,8 @@
         },
         "outlook_evidence": [
           {
-            "geography": "来源覆盖范围",
-            "horizon": "2024—2034",
+            "geography": "美国全国",
+            "horizon": "2025—2035",
             "interpretation": "组合口径的就业规模、变化与职位空缺必须分别解释。",
             "limitation": "为组合口径统计预测，不能当作单列本职业或个人就业保证。",
             "metric": "就业规模与变化",
@@ -10554,16 +10631,16 @@
             }
           },
           {
-            "geography": "来源覆盖范围",
-            "horizon": "2024—2034",
-            "interpretation": "为 2024—2034 年十年平均，含增长与替换需求，不等于在招岗位数。",
+            "geography": "美国全国",
+            "horizon": "2025—2035",
+            "interpretation": "2025—2035十年年均，含增长与替换，非当前在招或净增。",
             "limitation": "不能作为个人录用概率。",
             "metric": "职位空缺（年均）",
             "occupation_scope": "展示口径：Clinical Laboratory Technologists and Technicians组合",
-            "value": "约 22,600 个/年（组合口径）"
+            "value": "组合20,800个/年（2025—2035）"
           },
           {
-            "geography": "来源覆盖范围",
+            "geography": "美国全国",
             "horizon": "2025",
             "interpretation": "为 BLS 2025 年组合口径工资数据中位数，不代表起薪或到手收入。",
             "limitation": "组合口径；分位为统计位置。",
@@ -10630,7 +10707,7 @@
           },
           {
             "href": {
-              "$source": "onet-trends",
+              "$source": "bls-clinical-lab-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10638,13 +10715,13 @@
             },
             "id": "medical-and-clinical-laboratory-technologists.display.source.3",
             "label": {
-              "$source": "onet-trends",
+              "$source": "bls-clinical-lab-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "scope": "美国组合2024—2034就业与空缺预测"
+            "scope": "美国组合2025—2035预测，非本技术专家单列。"
           }
         ],
         "transitions": [
@@ -10736,8 +10813,8 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "cta_label": "前往职业兴趣试验，设计观察",
+            "evidence_level": "编辑自查；非本职业效度证据",
             "id": "riasec",
             "label": "RIASEC",
             "question": "IRC 兴趣代码对应哪些可观察行为？",
@@ -10755,8 +10832,8 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "cta_label": "前往职业兴趣试验，设计观察",
+            "evidence_level": "编辑自查；非本职业效度证据",
             "id": "big-five",
             "label": "大五人格",
             "question": "注重精确与方法学在哪些任务上体现？",
@@ -10774,8 +10851,8 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "cta_label": "前往职业兴趣试验，设计观察",
+            "evidence_level": "编辑自查；非本职业效度证据",
             "id": "mbti",
             "label": "MBTI",
             "question": "人格标签能否判断检验岗位适配？",
@@ -10788,8 +10865,8 @@
           {
             "answer": "记录原312、差12和失败理由；此行为题不验证九型人格与职业表现的关系。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "cta_label": "前往职业兴趣试验，设计观察",
+            "evidence_level": "编辑自查；非本职业效度证据",
             "id": "enneagram",
             "label": "九型人格",
             "question": "面对K3失败会改原值还是如实交接？",
@@ -10802,8 +10879,8 @@
           {
             "answer": "用原值重算并保留纠错；算术题不是IQ常模、岗位资格或临床能力测验。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "cta_label": "前往职业兴趣试验，设计观察",
+            "evidence_level": "编辑自查；非本职业效度证据",
             "id": "iq",
             "label": "认知能力",
             "question": "能否逐对计算2、2、12并识别规则失败？",
@@ -10816,8 +10893,8 @@
           {
             "answer": "展示原值、规则、未决审批并请求复核；不能由一次交接判断EQ分数。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "cta_label": "前往职业兴趣试验，设计观察",
+            "evidence_level": "编辑自查；非本职业效度证据",
             "id": "eq",
             "label": "情绪能力",
             "question": "同伴质疑方法结论时怎样沟通？",
@@ -10946,37 +11023,20 @@
         "source_links": [
           {
             "href": {
-              "$source": "nbs-wages",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
             "label": {
-              "$source": "nbs-wages",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-database",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-database",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
+            "usage": "美国IRC与工作风格；非人格职业效度"
           },
           {
             "href": {
@@ -10993,211 +11053,41 @@
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "usage": "来源范围与限制"
+            "usage": "复杂检验、方法和质量任务"
           },
           {
             "href": {
-              "$source": "onet-summary",
+              "$source": "nhc-lab",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
             "label": {
-              "$source": "onet-summary",
+              "$source": "nhc-lab",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "usage": "来源范围与限制"
+            "usage": "中国专业人员与报告权限"
           },
           {
             "href": {
-              "$source": "onet-taxonomy",
+              "$source": "cdc-complexity",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
             "label": {
-              "$source": "onet-taxonomy",
+              "$source": "cdc-complexity",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-trends",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-trends",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-industry",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-industry",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localcert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localcert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localtraining",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localtraining",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localwages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localwages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
+            "usage": "美国非豁免质量/人员要求"
           }
         ]
       },
@@ -11278,7 +11168,7 @@
             "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
           }
         },
-        "note": "来源逐项区分：O*NET支持美国复杂检验职责、IRC、Job Zone与情境；工资/就业/行业覆盖Clinical Laboratory Technologists and Technicians组合，不是本技术专家单列。完整工资页未读取成功，分位经同组合29-2012.00表核，行业83/17仅沿本职业冻结历史记录。热门技术是招聘软件提及；认证38条与培训452项仅作发现。NBS行业均值不填中国职业工资；中美人员、质量与报告规则分别见管理办法和CLIA/CDC。编辑纸面题与AI试验不是临床规程。"
+        "note": "本轮直接读取O*NET29-2011.00完整工资页，全国五档年薪/小时与原值一致，industry83/17当前已读；16任务、IRC、95/93/95/85/61及47%高度自动化正确，后者不等于GenAI。52%本科是新入职所需学历回答。38认证/452全国培训目录仅发现，不保证资格。新增不同BLS OOH组合SOC29-2010，五行业工资与343000至352400、3%、9400、年均20800预测；中国管理办法与CMS/CDC分法域核。行业/就业段落移入直接回答，标题还原标签。共享旧预测/工资读取失败记录及NBS条目混入美国工资说明递归保护保留，实际NBS仍只作行业背景。"
       },
       "work_context_block": {
         "$item": "medical-and-clinical-laboratory-technologists.profile.work-context-block.6",
@@ -11376,7 +11266,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "复杂检验与结果验证",
@@ -11427,7 +11317,7 @@
       "text": "医疗临床技术专家：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "11fb7461d3d53f1833a6479503a3c6f81ccc007254640ed23cc5ad307a9eebc3",
+  "source_content_sha256": "c7536cc73c70667625a836e484fc315b42bf6f3efe7c69c4a9341b4dca9f7aae",
   "subject": {
     "canonical_slug": "medical-and-clinical-laboratory-technologists",
     "name": "医疗临床技术专家",

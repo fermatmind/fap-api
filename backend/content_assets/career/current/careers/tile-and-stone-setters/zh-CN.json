@@ -27592,7 +27592,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：同日中国建筑及上海政府域名相关检索未得到任务、金额与完整条件匹配的铺贴招聘样本，校招或工程管理金额不能代填。"
+              "证据不足：前次2026-10-01中国建筑及上海政府域名相关检索未得到任务、金额与完整条件匹配的铺贴招聘样本，本轮未重查招聘；校招或工程管理金额不能代填。"
             ]
           },
           "id": "tile-and-stone-setters.china-salary.career-snapshot-primary-locale.4",
@@ -27822,7 +27822,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：2025精确第25和75百分位未取得；保持缺口不插值。已核High86,110美元/年为第90百分位，不是资深技能级别。"
+              "美国May2025 SOC47-2044全国P25/P75为45,200/70,220美元/年，直接读取O*NET National Wages United States行；P90为86,110美元/年、41.40美元/小时。分位不是工龄等级，不以47-2040合并数代填。"
             ]
           },
           "fact_refs": [
@@ -28189,7 +28189,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "精确工资预测用47-2044；行业背景明确47-2040。O*NET就业仍2024—2034，最新改用BLS精确表，不混4200旧空缺与6400合并空缺。"
+              "职业工资用47-2044，行业表用47-2040且逐行明确合并范围；O*NET本轮也已2025—2035就业，不把合并空缺6,400当本职业空缺或单独归因AI。"
             ]
           },
           "id": "tile-and-stone-setters.display.career_snapshot_secondary_locale.boundary.detail",
@@ -28680,7 +28680,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。独立核图和现场协作都是任务，偏好不能证明手工技能或风险条件可承受。描述具体准备和沟通方式更有用。"
+              "不能。独立核图和现场协作都是任务，偏好不能证明手工技能或风险条件可承受。分别记录具体准备、沟通方式及反馈，不以类型替代任务验证。"
             ]
           },
           "id": "tile-and-stone-setters.display.personality_fit_block.assessments.mbti.answer",
@@ -30411,7 +30411,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "证据不足：本目标同日中国建筑及上海政府官方域名瓷砖镶贴招聘工资检索未取得任务、金额、计酬条件匹配的完整样本，不用校招工程管理代填。"
+              "证据不足：前次2026-10-01中国建筑及上海政府官方域名瓷砖镶贴招聘工资检索未取得任务、金额、计酬条件匹配的完整样本，本轮未重查招聘；不用校招工程管理代填。"
             ]
           },
           "id": "tile-and-stone-setters.path.recruitment-sample.1",
@@ -32355,7 +32355,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：本目标同日有限官方域名检索未形成任务及薪酬条件匹配样本，不以校招或管理岗位推铺贴招聘热度。"
+              "证据不足：前次2026-10-01官方域名定向检索未形成匹配中国铺贴任务的完整招聘薪酬样本，本轮未重查招聘；流程入口、校招和工程管理不当当前在招热度。"
             ]
           },
           "id": "tile-and-stone-setters.market-signals.market-signal-card.4",
@@ -32868,7 +32868,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻各自精确定义支持对象比较，转换为编辑建议。"
+              "本链接支持O*NET47-2044任务；各相邻精确档案分别提供产出比较，转换建议属编辑判断。"
             ]
           },
           "id": "tile-and-stone-setters.display.market_signal_card.source.onet",
@@ -33271,7 +33271,7 @@
                 "accessed_at": "2026-10-01",
                 "details": [
                   "硬质瓷砖石材铺贴定义、25项任务、工作情境、软件与RC兴趣。",
-                  "2025中位工资55,690美元/年；该页就业仍2024—2034，最新另取BLS。"
+                  "原2026-10-01读取2025中位工资55,690美元/年；本轮O*NET就业已2025—2035，精确预测取BLS表1.2，历史访问日期保持。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "employer",
@@ -33393,19 +33393,20 @@
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-01",
+                "accessed_at": "2026-10-12",
                 "details": [
-                  "Low为10%低于90%高于；Median各50%；High为90%低于10%高于。"
+                  "United States年工资P10/P25/P50/P75/P90：37140/45200/55690/70220/86110美元。",
+                  "小时17.86/21.73/26.77/33.76/41.40，直接年度值，不自行年化。"
                 ],
-                "evidence_type": "official statistical methods",
+                "evidence_type": "official wage statistics",
                 "id": "r2-pay-2",
-                "limitation": "工资位置不是工龄等级、技能认证或就业保证",
-                "market": "美国",
-                "name": "CareerOneStop Salary Finder帮助",
-                "period": "当前在线定义；2026-10-01核读",
-                "publisher": "CareerOneStop",
-                "scope": "contextual",
-                "url": "https://cloudfront.careeronestop.org/Toolkit/Wages/salary-finder-help.aspx"
+                "limitation": "分位不是职级、起薪或个人实收；不套中国，OEWS不含自雇。",
+                "market": "美国全国",
+                "name": "O*NET National Wages：47-2044 May2025全国分位",
+                "period": "May2025",
+                "publisher": "U.S. Department of Labor / O*NET；BLS OEWS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/47-2044.00"
               },
               {
                 "accessed_at": "2026-10-01",
@@ -33487,7 +33488,7 @@
                 "accessed_at": "2026-10-01",
                 "details": [
                   "硬质瓷砖石材铺贴定义、25项任务、工作情境、软件与RC兴趣。",
-                  "2025中位工资55,690美元/年；该页就业仍2024—2034，最新另取BLS。"
+                  "原2026-10-01读取2025中位工资55,690美元/年；本轮O*NET就业已2025—2035，精确预测取BLS表1.2，历史访问日期保持。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "interest-profiler",
@@ -39053,7 +39054,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "O*NET-SOC 47-2044.00 精确职业口径",
@@ -39104,7 +39105,7 @@
       "text": "瓷砖和石材铺设工"
     }
   },
-  "source_content_sha256": "32e4a758dbbb163c0c2f4c956cf89816eaf6297cf8d5ca1332ac92577f138c5d",
+  "source_content_sha256": "a8a283dbbf15604ad85eac8e2a8b6c9f66cb61dc0bb9fe2edade2f7854740e02",
   "subject": {
     "canonical_slug": "tile-and-stone-setters",
     "name": "瓷砖和石材铺设工",

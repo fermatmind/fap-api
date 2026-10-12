@@ -14,6 +14,30 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:cpso-cn-nonprivate": {
+        "status": "pending_mapping"
+      },
+      "fact:cpso-cn-private": {
+        "status": "pending_mapping"
+      },
+      "fact:cpso-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:cpso-industry-gap-0": {
+        "status": "pending_mapping"
+      },
+      "fact:cpso-industry-gap-1": {
+        "status": "pending_mapping"
+      },
+      "fact:cpso-industry-gap-2": {
+        "status": "pending_mapping"
+      },
+      "fact:cpso-industry-gap-3": {
+        "status": "pending_mapping"
+      },
+      "fact:cpso-openings": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -12004,28 +12028,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.href": {
-        "ref": {
-          "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.18",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.label": {
         "ref": {
@@ -12135,28 +12139,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.href": {
-        "ref": {
-          "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.20",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.label": {
         "ref": {
@@ -12266,28 +12250,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.href": {
-        "ref": {
-          "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.22",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.label": {
         "ref": {
@@ -12397,52 +12361,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.href": {
-        "ref": {
-          "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.24",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.label": {
-        "ref": {
-          "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.24",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.08.headers.explanation": {
         "ref": {
@@ -23749,7 +23673,7 @@
           },
           "id": "chemical-plant-and-system-operators.profile.definition-block.5",
           "source_refs": [
-            "nasa-seh"
+            "cpso-class"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23779,7 +23703,7 @@
           },
           "id": "chemical-plant-and-system-operators.profile.definition-block.7",
           "source_refs": [
-            "onet-hot-tech"
+            "cpso-hot"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23809,7 +23733,7 @@
           },
           "id": "chemical-plant-and-system-operators.profile.definition-block.9",
           "source_refs": [
-            "nasa-seh"
+            "cpso-class"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23834,7 +23758,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "化工装置操作员的工作可以分成三类相连但独立的工作面。第一类是系统运行与监控：监控仪表与流量计与面板灯与报警信号，巡检作业区并检查塔与洗涤器与捕集器与干燥器等运行单元，判断整套系统的工况是否符合工艺条件。第二类是参数调节与设备操作：按配方与工艺要求调整设备单元的控制设定，转动阀门调节产品与副产物的流量与罐位，启动或停用泵与压缩机并调节蒸汽与水与空气供应，必要时按监督人员指示调整或停机设备。第三类是取样与记录与交接：按规定取样并做质量控制检测，记录工艺条件与检测结果与仪表读数，完成罐位测量与物料与收率计算，并把异常与处置交清给下一班。三类工作的共同点是以工艺条件、设定值与可追溯记录说话，区别在于调整与停机处置的授权范围不同。"
+              "编辑按任务整理：化工装置操作员的工作可以分成三类相连但独立的工作面。第一类是系统运行与监控：监控仪表与流量计与面板灯与报警信号，巡检作业区并检查塔与洗涤器与捕集器与干燥器等运行单元，判断整套系统的工况是否符合工艺条件。第二类是参数调节与设备操作：按配方与工艺要求调整设备单元的控制设定，转动阀门调节产品与副产物的流量与罐位，启动或停用泵与压缩机并调节蒸汽与水与空气供应，必要时按监督人员指示调整或停机设备。第三类是取样与记录与交接：按规定取样并做质量控制检测，记录工艺条件与检测结果与仪表读数，完成罐位测量与物料与收率计算，并把异常与处置交清给下一班。三类工作的共同点是以工艺条件、设定值与可追溯记录说话，区别在于调整与停机处置的授权范围不同。"
             ]
           },
           "id": "chemical-plant-and-system-operators.profile.career-quick-answers-block.1",
@@ -23889,10 +23813,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按规定取样并做质量控制检测以监控加工并确保达标；记录取样点与时间与批次与结果；通过视镜或电视监视器解读可见化学反应，并审阅实验室检测报告以调整工艺；对异常结果先复核取样方法与仪器状态，再按程序报告；不得用估计值代替实测记录，也不以合格记录掩盖结果。"
+              "按方法取样/质量检测、记录点位时间批次与结果，视镜/监视器和实验室报告供工艺判断；异常及时报告并按危险执行应急程序，复测仅安全条件确认后进行，不能为复测延误报告或冒充实测。"
             ]
           },
           "id": "chemical-plant-and-system-operators.profile.career-quick-answers-block.6",
+          "source_refs": [
+            "cpso-safety"
+          ],
           "type": "prose"
         },
         {
@@ -23999,10 +23926,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "现场处置由操作人员执行；工艺变更与系统开停车与放行由有授权的岗位决定"
+              "操作、变更、开停车/恢复与放行按实际机构职责确认，不由本页统一分配最终权。中国安法55条直接危及人身安全紧急情况可停止作业或采取可能应急措施后撤离，并及时报告，不等待额外批准；普通调参/停机顺序与恢复按实际规程及职责核。"
             ]
           },
           "id": "chemical-plant-and-system-operators.profile.career-quick-answers-block.16",
+          "source_refs": [
+            "cpso-safety"
+          ],
           "type": "prose"
         },
         {
@@ -24021,10 +23951,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国入门不要求执照；企业安全培训与岗位授权是实际门槛"
+              "美国BLS典型学历/培训不证明所有入门岗位无执照；适用PSM按1910.119(a)/(f)/(g)核覆盖、操作程序和培训，资格/许可及机构授权按任务、装置与州/辖区另核。"
             ]
           },
           "id": "chemical-plant-and-system-operators.profile.career-quick-answers-block.18",
+          "source_refs": [
+            "cpso-psm",
+            "cpso-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -24032,10 +23966,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国大陆涉及危险化学品与特种设备作业的岗位另有安全生产与特种作业规定"
+              "中国按实际特种作业目录类别取证，非全部化工装置操作岗位统一证。19号令2026-06-01施行：3/4/6条核直接作业、培训考核/操作证，危险化学品特种作业须高中或相当以上；9条培训豁免须满足条件，不等免考试/证；23条全国6年有效、26—29条换证另核。特种设备法2/13/14条按设备目录与资格项目；有限空间培训不统一等独立操作证。"
             ]
           },
           "id": "chemical-plant-and-system-operators.profile.career-quick-answers-block.19",
+          "source_refs": [
+            "cpso-special",
+            "cpso-equipment"
+          ],
           "type": "prose"
         },
         {
@@ -24109,7 +24047,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "对报警与异常指示先核对仪表状态、测点与现场实际情况，确认是真实工况变化还是仪表与信号问题；不把单次可疑指示直接当作调整依据。"
+              "编辑报警核对：核仪表、测点与工况，异常须及时报告并执行装置应急程序，不能要求先完成现场复测或排除仪表问题才处置。"
             ]
           },
           "id": "chemical-plant-and-system-operators.profile.career-quick-answers-block.26",
@@ -24131,10 +24069,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "在授权范围内的常规偏差可按规程调整；涉及泄漏、超温超压、溢罐、安全设施动作或人员伤害风险时，按监督人员指示调整或停机并升级，不凭经验继续运行。"
+              "按本装置异常/应急程序处置和报告，具体停机方式/顺序须避免新增危险；O*NET美国任务有按监督人员指示紧急调节/停机，不等中国撤离权受指示限制。中国安法55条直接危及人身安全紧急情况可停止作业或采取可能应急措施后撤离，并及时报告，不等待额外批准；普通调参/停机顺序与恢复按实际规程及职责核。"
             ]
           },
           "id": "chemical-plant-and-system-operators.profile.career-quick-answers-block.28",
+          "source_refs": [
+            "cpso-safety"
+          ],
           "type": "prose"
         },
         {
@@ -24153,7 +24094,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按工艺要求关注罐体液位与产品与副产物流量，防止罐体或槽内溶液溢出；使用校准杆测量罐位并核对读数与仪表是否一致，发现不一致时先复核再处置。"
+              "编辑罐位核对：按实际方法核液位/流量、防溢出；仪表与复核不一致应及时报告和按危害处置，复核/校准杆仅在允许的安全条件下使用，不统一先复核后报告。"
             ]
           },
           "id": "chemical-plant-and-system-operators.profile.career-quick-answers-block.30",
@@ -24175,7 +24116,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按规定位置与时间取样并做质量控制检测；对不合格或异常结果先复核取样方法与仪器状态，再按程序报告，不以合格记录掩盖结果。"
+              "按规定点位/时间/方法取样检测并真实记录；异常及时报告、必要应急处置，复测须先具备安全条件，不改记录掩盖结果。"
             ]
           },
           "id": "chemical-plant-and-system-operators.profile.career-quick-answers-block.32",
@@ -24208,7 +24149,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "化工装置操作员控制或操作整套化学工艺或机器系统（O*NET-SOC 51-8091.00 官方职责）。在日常工作中，他们要监控并记录仪表、流量计、面板灯或其他指示并倾听报警信号以核实工艺条件符合性；调整设备单元的控制设定以改变化学反应速度、质量或收率；取样并做质量控制检测以监控加工并确保达标；记录工艺条件、检测结果或仪表读数等运行数据；使用配电盘、控制板或半自动设备控制或操作化学工艺或机器系统；巡检作业区以确保罐体或槽内溶液不会溢出；在紧急情况下按监督人员指示调整或停机设备；启动泵以清洗与冲洗反应釜、排出气体或蒸气、调节油或蒸汽或空气流向、或向转化器或混合罐加料；与技术与管理监督人员沟通以报告或解决影响安全、效率或产品质量的状况；转动阀门以调节产品与副产物通过搅拌罐、储罐或中和罐的流量；通知维修或动力或其他辅助人员纠正设备故障或调整电力、蒸汽、水或空气供应；检查塔、喷雾储罐、洗涤器、捕集器或干燥器等运行单元以确保其正常运行并保持最高效率；通过视镜或电视监视器解读可见化学反应，并审阅实验室检测报告以调整工艺；按配方计算物料需求量或收率；指导从事调节物料与产品流量的机械操作人员；使用校准杆测量罐体液位；修理或更换损坏设备；监督塔、滤网或喷头的清洁；并使用蒸汽软管解冻冻结的阀门。责任边界：操作人员对按规程操作整套系统、参数与罐位的监控、取样与记录的真实完整、报警与异常的处置与报告负责；但工艺变更与配方变更、系统开停车与放行、以及安全与环境合规的最终认定，由具备相应授权的岗位与制度决定，不能由本页推断为操作岗位普遍拥有的权限。"
+              "化工装置操作员控制或操作整套化学工艺或机器系统（O*NET-SOC 51-8091.00 官方职责）。在日常工作中，他们要监控并记录仪表、流量计、面板灯或其他指示并倾听报警信号以核实工艺条件符合性；调整设备单元的控制设定以改变化学反应速度、质量或收率；取样并做质量控制检测以监控加工并确保达标；记录工艺条件、检测结果或仪表读数等运行数据；使用配电盘、控制板或半自动设备控制或操作化学工艺或机器系统；巡检作业区以确保罐体或槽内溶液不会溢出；在紧急情况下按监督人员指示调整或停机设备；启动泵以清洗与冲洗反应釜、排出气体或蒸气、调节油或蒸汽或空气流向、或向转化器或混合罐加料；与技术与管理监督人员沟通以报告或解决影响安全、效率或产品质量的状况；转动阀门以调节产品与副产物通过搅拌罐、储罐或中和罐的流量；通知维修或动力或其他辅助人员纠正设备故障或调整电力、蒸汽、水或空气供应；检查塔、喷雾储罐、洗涤器、捕集器或干燥器等运行单元以确保其正常运行并保持最高效率；通过视镜或电视监视器解读可见化学反应，并审阅实验室检测报告以调整工艺；按配方计算物料需求量或收率；指导从事调节物料与产品流量的机械操作人员；使用校准杆测量罐体液位；修理或更换损坏设备；监督塔、滤网或喷头的清洁；并使用蒸汽软管解冻冻结的阀门。责任边界：任务清单不授带能维修、气体排放或自行解冻许可；普通操作、变更、检修、开停车、放行按实际程序/授权核。中国安法55条直接危及人身安全紧急情况可停止作业或采取可能应急措施后撤离，并及时报告，不等待额外批准；普通调参/停机顺序与恢复按实际规程及职责核。"
             ]
           },
           "id": "chemical-plant-and-system-operators.profile.definition-block.11",
@@ -24219,7 +24160,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET-SOC 51-8091.00（Chemical Plant and System Operators）：Job Zone 1-2，SVP 区间低于 6.0；兴趣代码 RCI；官方列出 19 项任务（全部为核心任务），重要度从 96（监控并记录仪表、流量计、面板灯或其他指示并倾听报警信号以核实工艺条件符合性）到 65（使用蒸汽软管解冻冻结的阀门）；入行学历通常为高中文凭或同等学历，在职培训为数天到一年。"
+              "O*NET51-8091.00：JobZone1-2、SVP<6、RCI，19任务全部Core，重要度96至65。BLS典型高中/GED、经验None、中等期限在岗培训；JobZone通用“数天至一年”不是本职业BLS培训分类。"
             ]
           },
           "id": "chemical-plant-and-system-operators.profile.onet-structured-fields-block.1",
@@ -24241,7 +24182,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆：本条证据路由把精确职业工资登记为已核实不可得（cn-exact-wage-unavailable，severity=material）；resolution 为「已打开国家统计局行业工资来源，但没有本职业精确全国工资口径」。因此本页不发布任何中国大陆数值，也不以行业均值或招聘报价或美国数值换算代填；本页不声称中国官方从未发布相关统计，只说明本轮未取得与本职业精确对应的全国口径。"
+              "证据不足：本轮未取得中国精确职业全国工资分布。国家统计局2025制造业城镇非私营113,594元/年、私营76,055元/年，均为单位全部就业岗位税前年平均背景，非化工装置操作员工资/中位/起薪/上下限/月薪。"
             ]
           },
           "id": "chemical-plant-and-system-operators.profile.onet-structured-fields-block.3",
@@ -24252,10 +24193,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业与就业：O*NET 行业分布为制造业 88%、其他行业（含批发贸易）12%；BLS 就业预测显示 2024 年 18,100 人、2034 年预计 17,000 人，2024—2034 年下降 6%（Decline，低于所有职业平均），年均空缺 1,600 个。行业工资中位数（按行业细分）本轮未取得：BLS Occupational Outlook Handbook 该职业页面本轮访问返回 HTTP 403，按有界尝试登记为访问缺口，不以其他数值代填。"
+              "O*NET详情2025制造业占87%；当前行业子页87%、其他13%（含专业科学技术服务/批发），子页未另标资料年；行业占比不是工资。 BLS表1.2精确51-8091：2025就业16.7千、2035预测15.9千，官方净变化−0.9千、−5.2%（OOH舍入−5%，下降），年均空缺1.3千，含增长与替补；端点/净值分别舍入，不据端点重算覆盖官方净值。自雇“—”非0。典型高中/GED、相关经验None、中等期限在岗培训。 美国分行业本职业工资中位未取得，OOH未详细覆盖清单不代行业工资。"
             ]
           },
           "id": "chemical-plant-and-system-operators.profile.onet-structured-fields-block.4",
+          "source_refs": [
+            "cpso-details",
+            "cpso-ep",
+            "cpso-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -24278,8 +24224,8 @@
               "参数调节｜按配方与工艺设定调整控制与流量｜调整设备单元的控制设定以改变化学反应速度、质量或收率，转动阀门以调节产品与副产物通过搅拌罐与储罐或中和罐的流量（对应任务重要度 94、89）。",
               "设备操作与紧急处置｜按指示启停与操作设备并协调动力供应｜使用配电盘与控制板或半自动设备控制或操作化学工艺或机器系统，启动泵以清洗与冲洗反应釜、排出气体或蒸气、调节油或蒸汽或空气流向、或向转化器或混合罐加料，并在紧急情况下按监督人员指示调整或停机设备（对应任务重要度 92、91、91）。",
               "取样与工艺判断｜按规定取样并做质量控制检测｜取样并做质量控制检测以监控加工并确保达标，通过视镜或电视监视器解读可见化学反应，并审阅实验室检测报告以调整工艺（对应任务重要度 93、87）。",
-              "记录与计算与协作｜记录运行数据并完成罐位与物料计算｜记录工艺条件与检测结果或仪表读数等运行数据，使用校准杆测量罐体液位，按配方计算物料需求量或收率，与技术与管理监督人员沟通影响安全效率或产品质量的状况，并指导调节物料与产品流量的机械操作人员（对应任务重要度 93、82、82、82、90）。",
-              "设备检查与维护｜检查运行单元并按需维修与清洁｜检查塔、喷雾储罐、洗涤器、捕集器或干燥器等运行单元以确保其正常运行并保持最高效率，通知维修或动力或其他辅助人员纠正设备故障或调整电力、蒸汽、水或空气供应，修理或更换损坏设备，监督塔、滤网或喷头的清洁，并使用蒸汽软管解冻冻结的阀门（对应任务重要度 87、87、80、71、65）。"
+              "记录与计算与协作｜记录运行数据并完成罐位与物料计算｜记录工艺条件与检测结果或仪表读数等运行数据，使用校准杆测量罐体液位，按配方计算物料需求量或收率，与技术与管理监督人员沟通影响安全效率或产品质量的状况，并指导调节物料与产品流量的机械操作人员（对应任务重要度 93、82、82、90、82）。",
+              "设备检查与维护｜检查运行单元并按需维修与清洁｜检查塔、喷雾储罐、洗涤器、捕集器或干燥器等运行单元以确保其正常运行并保持最高效率，通知维修或动力或其他辅助人员纠正设备故障或调整电力、蒸汽、水或空气供应，修理或更换损坏设备，监督塔、滤网或喷头的清洁，并使用蒸汽软管解冻冻结的阀门（对应任务重要度 87、87、80、71、65）。 检修/清洁/解冻按实际危险能量与作业程序核，不因清单而可带能作业。"
             ]
           },
           "id": "chemical-plant-and-system-operators.profile.responsibilities-block.1",
@@ -24918,28 +24864,28 @@
                 "url": "https://www.onetonline.org/link/localtrends/51-8091.00"
               },
               {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "entity": "O*NET本职业任务详情",
                 "id": "link-8",
-                "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
-              },
-              {
-                "entity": "O*NET-SOC 51-8091.00 职业详细资料",
-                "id": "link-9",
                 "relation": "related-evidence",
                 "url": "https://www.onetonline.org/link/details/51-8091.00"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
-                "id": "link-10",
+                "entity": "O*NET转引BLS全国工资",
+                "id": "link-9",
                 "relation": "related-evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://www.onetonline.org/link/localwages/51-8091.00"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（51-8091.00，显示 BLS 就业预测）",
+                "entity": "ILO2025任务暴露研究",
+                "id": "link-10",
+                "relation": "related-evidence",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "entity": "NIST AI RMF1.0",
                 "id": "link-11",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/51-8091.00"
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
                 "entity": "O*NET 技术清单（51-8091.00 招聘技术关键词）",
@@ -24948,16 +24894,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/51-8091.00"
               },
               {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "entity": "O*NET任务详情",
                 "id": "link-13",
                 "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.onetonline.org/link/details/51-8091.00"
               },
               {
-                "entity": "O*NET 技术清单（51-8091.00 招聘技术关键词）",
+                "entity": "BLS典型学历培训与预测",
                 "id": "link-14",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/hot_tech/51-8091.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET-SOC 51-8091.00 职业详细资料",
@@ -24972,22 +24918,22 @@
                 "url": "https://www.onetonline.org/link/localtrends/51-8091.00"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
+                "entity": "中国安法紧急停止撤离",
                 "id": "link-17",
                 "relation": "related-evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html"
               },
               {
-                "entity": "BLS 职业就业与工资统计（2025 年 5 月 OEWS）",
+                "entity": "BLS2025—2035预测",
                 "id": "link-18",
                 "relation": "related-evidence",
-                "url": "https://www.bls.gov/oes/current/oes518091.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET-SOC 51-8091.00 职业摘要",
+                "entity": "O*NET招聘关键词",
                 "id": "link-19",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/summary/51-8091.00"
+                "url": "https://www.onetonline.org/link/hot_tech/51-8091.00"
               }
             ]
           },
@@ -25032,7 +24978,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把数字化工具用在趋势记录与报表与交接信息上，但把控制设定调整、异常判断与停机与升级保留在规程与人工确认之内。"
+              "编辑试用：趋势、报表/交接可尝试辅助，调参、联锁和异常控制须验证并按实际程序落实职责，不断言永远全人工。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.13",
@@ -25054,7 +25000,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用数据看板缩短交接时间、提高报警与偏差的可见性，但把操作界限、变更审批与应急处置的授权写清楚，避免让系统提示替代现场确认。"
+              "编辑试用：比较看板对交接耗时/异常发现的实际效果，尚无本职业实测；界限、变更和应急责任按适用程序核。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.15",
@@ -25087,7 +25033,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把技术能力、实际采用与岗位结果分开看：公开资料能支持的是「监控、记录与报警类任务可借助数字化与控制系统提速」，以及「招聘中出现工业控制与办公与表格工具的关键词」；不支持「该职业被替代」「某个年份岗位消失」这类结论。BLS 对 2024—2034 年的预测是下降 6%、年均空缺 1,600 个，这是就业规模预测，不是 AI 采用率或替代率。"
+              "招聘单年关键词支持办公软件出现，不证明DCS普及、效率或增长；用途是编辑试用，效果另核。BLS表1.2精确51-8091：2025就业16.7千、2035预测15.9千，官方净变化−0.9千、−5.2%（OOH舍入−5%，下降），年均空缺1.3千，含增长与替补；端点/净值分别舍入，不据端点重算覆盖官方净值。自雇“—”非0。典型高中/GED、相关经验None、中等期限在岗培训。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.18",
@@ -25241,7 +25187,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024—2034 年的就业预测与年均空缺"
+              "用于核BLS2025—2035预测与年均空缺，直接核表1.2精确51-8091"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.32",
@@ -25252,7 +25198,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表按三条真实工作方向比较：AI 主要改变什么，以及哪些责任仍然留在人这一侧。三条方向来自该职业的任务结构（系统运行与监控、参数调节与设备操作、取样与记录与交接），不是行业统一职级。"
+              "编辑按三任务面比较工具可能用途及程序/验证/责任条件，不是已实现效果或永久人工分工。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.33",
@@ -25274,7 +25220,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "确认仪表与传感器与联锁状态、判断偏差是真实工况变化还是测量问题、以及在超出工艺设定时按程序处置与停机升级。"
+              "编辑控制点：核仪表/联锁与测量方法，危险异常按本装置应急程序处置并报告，停机方式/顺序按实际条件，不能由通用表格授权。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.35",
@@ -25505,10 +25451,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "框架要求把用途、限制、监测与责任写清，可直接用于本页的复核与留痕建议"
+              "NIST AI RMF1.0为自愿跨行业治理框架，本页用途/限制/监测/责任核对为编辑参考，不是强制化工程序或效果实测。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.56",
+          "source_refs": [
+            "cpso-nist"
+          ],
           "type": "prose"
         },
         {
@@ -25549,7 +25498,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该职业技术清单覆盖工业控制软件、网络与 VPN 管理软件、办公套件、电子表格与文字处理等 5 类"
+              "详情5软件类别；招聘Hot只有3名称：Lightcast2025美国关联独立招聘Excel6%、Office6%、Word2%。关键词不证DCS/联锁/工业控制实际部署率或增长。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.60",
@@ -25560,7 +25509,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术能力回答「模型在原则上能做什么」。对本职业而言，较可靠的部分是数据采集与趋势呈现、报表与交接信息整理、清单与提示生成；不可靠的部分是未经现场核实的反应与设备异常判断，以及超出操作界限的处置建议。"
+              "编辑试用：数据/趋势、报表/交接、清单/提示可尝试辅助，输入与方法需验证；未经验证的异常/操作建议不统一称可靠。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.61",
@@ -25571,7 +25520,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采用证据回答「企业实际在用什么」。公开资料能支持的是该职业招聘中出现工业控制软件与办公与表格工具的关键词，以及集散控制系统与联锁停车系统在连续过程中的普及；具体企业的落地范围属于商业信息，本页不推断。"
+              "本轮招聘Hot为办公软件关键词；DCS/联锁来自详情技能例子，不是部署调查。未取得企业实际采用或增长证据，不以商业信息断言普遍不可得。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.62",
@@ -25582,7 +25531,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "岗位结果回答「就业规模有没有变」。BLS 对 2024—2034 年的预测是下降 6%、年均空缺 1,600 个，属于就业规模预测；公开资料未提供把该数字归因于 AI 的证据，因此本页不写替代率或消失年份。"
+              "BLS表1.2精确51-8091：2025就业16.7千、2035预测15.9千，官方净变化−0.9千、−5.2%（OOH舍入−5%，下降），年均空缺1.3千，含增长与替补；端点/净值分别舍入，不据端点重算覆盖官方净值。自雇“—”非0。典型高中/GED、相关经验None、中等期限在岗培训。 未取得将职业变动归因AI的证据，不写替代率/消失年份。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.63",
@@ -25593,7 +25542,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能这样推断。该职业的任务结构以现场监控、按规程处置与可追溯记录为主：监控仪表与报警、巡检并防止溢罐、检查运行单元并在紧急情况下按指示停机，都需要在现场并对安全负责的人来做。AI 会改变数据采集与控制与记录的方式，但公开资料不支持「职业被取代」的结论。"
+              "本轮证据不支持整体取代或固定消失年份。任务有现场和安全责任，也有自动/半自动控制，不断言监控、巡检、停机永远全部由现场人工做。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.64",
@@ -25615,7 +25564,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不把编程当作入行门槛。O*NET 该职业的技术清单只列出工业控制软件（报警管理系统、DCS、联锁停车系统）、网络与 VPN 管理软件、办公套件与表格与文字处理等常见系统；BLS 显示入行学历通常为高中文凭或同等学历、在职培训为数天到一年。更实用的顺序是先掌握规程阅读、单位与量纲、仪表与报警与记录，再学用表格或企业系统整理数据。"
+              "BLS典型高中/GED、中等期限在岗培训，不是编程准入调查；详情5类别与Hot3软件不同。编辑建议先规程、仪表/报警、真实记录，再按目标任务选工具，招聘具体条件未取得。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.66",
@@ -25637,7 +25586,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "从任务结构看，受影响较早的是可结构化输入的环节：仪表数据采集与趋势整理、报警与联锁事件记录、报表与交接摘要生成、检查清单与提示、物料与罐位对账。受影响较晚的是必须在现场判断并对安全负责的环节：溢罐与泄漏与异响异味的识别、反应与传热异常处置、紧急停机与人员隔离。"
+              "编辑试用排序：可先用可追溯输入核数据/报表和清单，安全相关操作须按危害和责任验证。本轮没有影响先后年份/时间实测，不从任务重要度推自动化早晚。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.68",
@@ -25659,7 +25608,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 预测 2024—2034 年该职业就业下降 6%，属「低于所有职业平均」，年均空缺 1,600 个，其中相当部分来自离职与退休带来的替补需求。预测本身有假设与误差，不等于逐年的实际岗位数。"
+              "BLS表1.2精确51-8091：2025就业16.7千、2035预测15.9千，官方净变化−0.9千、−5.2%（OOH舍入−5%，下降），年均空缺1.3千，含增长与替补；端点/净值分别舍入，不据端点重算覆盖官方净值。自雇“—”非0。典型高中/GED、相关经验None、中等期限在岗培训。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.70",
@@ -25681,10 +25630,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。工艺变更与配方变更与系统开停车与放行的决定属于企业授权岗位与制度的责任行为；涉及工程判断的对外文件通常还涉及相应法域的专业资格要求。AI 生成的文本不具备这种责任能力，也不能替代现场确认。"
+              "工具文本不自动取得机构授权或法定资格，变更、开停车/恢复及放行分别核业务/法域，不把普通文件统一称PE签章。中国安法55条直接危及人身安全紧急情况可停止作业或采取可能应急措施后撤离，并及时报告，不等待额外批准；普通调参/停机顺序与恢复按实际规程及职责核。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.72",
+          "source_refs": [
+            "cpso-safety"
+          ],
           "type": "prose"
         },
         {
@@ -25692,7 +25644,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST AI RMF 1.0 责任与记录要求；O*NET 51-8091.00 任务描述"
+              "中国安法55条及美国适用PSM程序/培训；NIST只为自愿治理参考。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.73",
@@ -25714,7 +25666,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Employment Projections（2024—2034 年预测期与说明）"
+              "BLS表1.2（2025—2035预测），非AI消失时间表"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.75",
@@ -25802,10 +25754,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按企业与法域要求由有授权的岗位确认工艺变更与开停车与放行；系统与工具不承担该责任，也不免除值勤人员按规程操作的义务。"
+              "按实际机构程序核变更、开停车/恢复和放行，工具不免除职责。中国安法55条直接危及人身安全紧急情况可停止作业或采取可能应急措施后撤离，并及时报告，不等待额外批准；普通调参/停机顺序与恢复按实际规程及职责核。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.83",
+          "source_refs": [
+            "cpso-safety"
+          ],
           "type": "prose"
         },
         {
@@ -25824,7 +25779,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅以在有效期内的仪表与已确认的取样数据为依据；对异常先现场核对与复测，再把判断记入记录。"
+              "编辑核对：数据/方法须可追溯，异常及时报告/应急处置，现场复测仅安全条件确认后进行，不统一先复测后报告。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.85",
@@ -25835,7 +25790,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "配方、批记录、产能与客户信息属于企业核心信息，上传到外部服务可能构成违规披露或知识产权风险。"
+              "配方、工艺和客户资料可能涉及商业秘密、合同或个人信息；权利/保密条件逐项核，不统一称全部核心秘密。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.86",
@@ -25846,7 +25801,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按企业数据分级选择可用工具与部署方式，对敏感信息做脱敏或使用内部系统，并保留访问与导出记录。"
+              "编辑保密核对：核合同、权利、数据分级/访问；脱敏、审批或内部部署不自动合规，个人信息另核基础、范围和期限。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.87",
@@ -25879,7 +25834,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "单位与量纲、基准与工况、上下限方向的错误在运行调整中后果直接，且系统不会主动提示。"
+              "单位、基准、工况和界限方向错误可导致误操作；系统可能提示也可能漏检，不能断言不会主动提示。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.90",
@@ -25923,7 +25878,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "确认偏差是真实工况变化还是仪表漂移或信号问题；涉及泄漏或超温超压或溢罐或安全设施动作时优先按指示停机与升级。"
+              "编辑控制点：危险报警/异常按本装置预案及时处置报告，不等待统一复测或主管指令后才撤离。中国安法55条直接危及人身安全紧急情况可停止作业或采取可能应急措施后撤离，并及时报告，不等待额外批准；普通调参/停机顺序与恢复按实际规程及职责核。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.94",
@@ -25956,7 +25911,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数据采集与报警与趋势呈现的自动化程度提高；现场识别与异常处置仍是人工职责"
+              "编辑任务分析：数据/报警/趋势整理可试用；异常识别和处置须落实适用程序和职责；本轮未取得效率或自动化趋势实测。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.97",
@@ -26000,7 +25955,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "清单与提示可自动化；控制设定变更与流量调节仍由值勤人员按授权执行"
+              "编辑任务分析：清单/提示可试用；控制设定与流量操作须验证/授权；本轮未取得效率或自动化趋势实测。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.101",
@@ -26044,7 +25999,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结果录入与报告生成可加速；取样代表性与异常判断仍由人负责"
+              "编辑任务分析：结果录入与报告整理可试用；取样代表性和异常判断须核方法；本轮未取得效率或自动化趋势实测。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.105",
@@ -26055,7 +26010,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "确认联锁与报警与安全设施状态，判断异常是否触发紧急程序，并按监督人员指示执行。"
+              "按本装置程序核联锁/报警与危害，执行应急处置并报告；O*NET美国紧急任务有监督指示，不等任何法域个人撤离都须等待指示。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.106",
@@ -26088,7 +26043,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "报警与联锁的监测可数字化；现场隔离与停机与人员保护不可外包"
+              "编辑任务分析：报警整理可试用；隔离/停机/人员保护按实际程序与职责核，工具不转移责任；本轮未取得效率或自动化趋势实测。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.109",
@@ -26132,7 +26087,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "摘要与报表可自动生成；记录真实性与交接责任仍由人承担"
+              "编辑任务分析：摘要/报表可试用；记录真实性和交接责任须落实；本轮未取得效率或自动化趋势实测。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.113",
@@ -26176,7 +26131,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "报修单流转与状态监测可自动化；故障判断与现场隔离仍由人负责"
+              "编辑任务分析：报修/状态整理可试用；实际维修和能量隔离须落实程序；本轮未取得效率或自动化趋势实测。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.117",
@@ -26220,7 +26175,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "步骤清单可数字化；维修质量与解冻是否达标仍需现场确认"
+              "编辑任务分析：步骤清单可试用；维修/清洁/解冻达标须按实际方法验证；本轮未取得效率或自动化趋势实测。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.121",
@@ -26231,7 +26186,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "如果要用一句话概括：AI 与数字化会显著改变化工装置操作员采集数据、整理记录与获取报警提示的方式，但不会改变「谁在现场对整套系统与安全负责」这一结构；判断依据始终是有效的仪表与取样数据、明确的工艺设定与操作界限，以及有授权的处置与确认。"
+              "数据、记录和提示可尝试辅助，效果须验证；仪表/样品可信、程序适用和职责落实是控制要点，不是责任结构永远不变的证据。"
             ]
           },
           "id": "chemical-plant-and-system-operators.ai-impact.ai-impact-table.122",
@@ -26255,7 +26210,7 @@
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-wages"
+            "cpso-nbs"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26270,7 +26225,7 @@
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wages"
+            "cpso-nbs"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26340,7 +26295,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与化工装置操作员精确对应的中国大陆全国职业工资分布；本条证据路由把该缺口登记为 （暂无可安全使用的数据，尚无缺口关闭结论），处理说明 为「已打开国家统计局行业工资来源，但没有本职业精确全国工资口径」，本页据此不发布任何中国大陆数值。"
+              "证据不足：本轮未取得中国精确职业全国工资；制造业年度背景另列，非职业中位/分位/起薪。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.7",
@@ -26351,7 +26306,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮查阅范围为：国家统计局公开工资资料入口、人力资源社会保障部公开信息，以及本职业的 O*NET/BLS 精确职业来源；后者其市场与辖区明确为美国，不支持中国精确工资口径。因此本页不给出中位数、分位数、起薪或稳定月薪，也不把美国数值换算成人民币。"
+              "本轮核NBS2025行业表及大典2022正文，并核O*NET/BLS美国资料；未取得中国一一对应职业工资，不换算美国工资。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.8",
@@ -26362,7 +26317,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业门类口径：国家统计局按行业门类公布城镇单位就业人员年平均工资，但化工装置操作员并不是该口径下的独立行业门类，且本页不采用行业均值替代职业数值。"
+              "国家统计局2025制造业城镇非私营113,594元/年、私营76,055元/年，均为单位全部就业岗位税前年平均背景，非化工装置操作员工资/中位/起薪/上下限/月薪。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.9",
@@ -26373,7 +26328,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "该口径覆盖城镇地域内就业人数 5 人及以上法人单位，不含个体工商户与自由职业者；用它替代本职业工资会同时引入行业与用工形式两重偏差。"
+              "NBS覆盖城镇5人以上法人及规定视同单位，不含个体/自由职业；派遣/兼职不按形式自动排除，须核单位及工资支付。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.10",
@@ -26384,7 +26339,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "较宽职业口径：企业薪酬调查与职业分类使用较宽的职业口径，未单列与 O*NET-SOC 51-8091.00 一一对应的职业细类，不能把其分位数写成本职业的全国中位数。"
+              "未取得与51-8091一一映射全国职业薪酬调查，不断言全部中国调查从未单列。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.11",
@@ -26417,7 +26372,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本条证据路由不使用招聘样本或相邻岗位报价填补职业级缺口，因为无法核验其统计对象与抽样方法。"
+              "本轮未取得可核验招聘样本，不用报价代全国统计；实际公告须核任务、时期、计酬/班制。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.14",
@@ -26428,7 +26383,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "统计覆盖范围：中国大陆公开工资统计以城镇法人单位为对象，劳务派遣与外包与个体经营等形式的覆盖不同，与本职业的实际用工结构并不完全重合。"
+              "行业均值含单位全部岗位，不代本职业；具体用工须核工资调查覆盖，不一概排除派遣/外包。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.15",
@@ -26450,7 +26405,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "资料期：本轮查阅以 2025 年及以前已发布的公开资料为范围；资料期不同会影响可比性，本页不跨期拼接。"
+              "中国背景2025工资（2026-05发布）及大典2022；本轮2026-10-09核读。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.17",
@@ -26461,7 +26416,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "班制与津贴口径：化工装置多连续运行，倒班与夜班与高温与有毒有害岗位津贴在不同企业与地区差异较大，本页不给出统一的班制与津贴数值。"
+              "班制/津贴须核具体合同/规程，本轮未取得统一数值，不把整套系统全部称连续倒班。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.18",
@@ -26472,7 +26427,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论与缺口：本页对中国大陆只登记可核对的统计口径、岗位映射边界与检索记录，不给出替代数值。"
+              "精确职业全国工资缺口保留。国家统计局2025制造业城镇非私营113,594元/年、私营76,055元/年，均为单位全部就业岗位税前年平均背景，非化工装置操作员工资/中位/起薪/上下限/月薪。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.19",
@@ -26494,7 +26449,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "岗位映射边界：本条证据路由未建立与 O*NET-SOC 51-8091.00 一一对应的职业细类，相关职责可能分布在与化工装置运行、化工生产操作、化学品生产与加工相关的多个岗位中，须按岗位实际职责与资质判断。"
+              "大典2022物理381—382页化工总控工6-11-01-03：操作仪表及自动控制系统监控/调节反应或单元操作，开停车、调工艺参数/分析生产状况、协助现场、试车验收、物料能量平衡及回收消耗核定、设备异常和生产记录。与美国51-8091职责重叠，未建立一一统计映射；产品和具体任务须另分类。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.21",
@@ -26516,7 +26471,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "自动化与数字化会改变巡检与记录与报警的组织方式，但不改变中国大陆对本职业的统计口径：职业级统计缺口与工具无关。"
+              "工具使用不能补足职业统计映射/工资证据，不从AI用途推个人或全国工资。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.23",
@@ -26527,7 +26482,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "作业与资格边界：与化工装置运行相关的岗位可能同时在化工生产操作、化学品生产与加工、检验与包装等多个序列中，其用工形式、班制、作业范围与任职要求各不相同，须按岗位实际职责与所在地规定判断。涉及危险化学品与特种设备作业与有限空间作业的岗位另有安全生产与特种作业管理规定。"
+              "中国按实际特种作业目录类别取证，非全部化工装置操作岗位统一证。19号令2026-06-01施行：3/4/6条核直接作业、培训考核/操作证，危险化学品特种作业须高中或相当以上；9条培训豁免须满足条件，不等免考试/证；23条全国6年有效、26—29条换证另核。特种设备法2/13/14条按设备目录与资格项目；有限空间培训不统一等独立操作证。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.24",
@@ -26538,7 +26493,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "高中或中等职业学校（化工工艺或相关专业优先）"
+              "编辑学历示例：高中或化工中职；专业优先待核实际招聘"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.25",
@@ -26593,7 +26548,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：学历与专业对能否进入主操或技术序列有影响，本页不把学历直接对应到收入区间。"
+              "编辑主操/检验方向示例，目标学历/经验按实际招聘核，无学历去向或工资因果研究。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.30",
@@ -26626,7 +26581,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：这些岗位与现场操作相邻但职责与授权不同，若目标为工艺技术或管理岗位，需要另行完成学历与项目经验准备。"
+              "编辑技术/管理相邻方向，职责不同；目标学历/项目经验另核，不断言全部须追加学历。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.33",
@@ -26659,7 +26614,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：是否必须取证取决于岗位涉及的作业类型与所在地规定，须以主管部门与企业制度为准，本页不代替考证条件。"
+              "中国按实际特种作业目录类别取证，非全部化工装置操作岗位统一证。19号令2026-06-01施行：3/4/6条核直接作业、培训考核/操作证，危险化学品特种作业须高中或相当以上；9条培训豁免须满足条件，不等免考试/证；23条全国6年有效、26—29条换证另核。特种设备法2/13/14条按设备目录与资格项目；有限空间培训不统一等独立操作证。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.36",
@@ -26681,7 +26636,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：整套反应与分离与精制装置最集中的行业之一，涉及危险化学品的岗位对作业资格与防护要求较高。"
+              "编辑化工制造场景示例：涉及反应/分离与设备；未取得中国本职业行业集中度，不写最集中。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.38",
@@ -26725,7 +26680,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：多品种小批量与批记录要求较严格，对记录与清洗与切换要求较高。"
+              "编辑医药/精细化工场景示例：产品、批次、清洗/记录随工艺核，不统一称小批量。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.42",
@@ -26736,7 +26691,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《城镇单位就业人员年平均工资情况》检索入口｜https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html"
+              "NBS2025制造业单位年平均工资表及附注｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.43",
@@ -26758,7 +26713,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆目前没有单列该岗位的全国职业工资统计可供本页引用；本页只登记可核对的统计口径、岗位映射边界与检索记录，不给出替代数值。"
+              "精确职业全国工资本轮未取得；提供2025制造业年度背景，不称中国统计从不存在。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.45",
@@ -26769,7 +26724,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "比较不同机会时应确认用工形式（企业内设、劳务派遣、项目制）、实际承担的装置与系统与班制、是否涉及危险化学品与特种设备作业、以及安全与环保与质量责任划分，并明确本页不提供中国大陆该岗位的工资数值。"
+              "比较用工主体、具体系统/任务、班制津贴、作业资格与责任；精确工资缺口保留，行业年均另标。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.46",
@@ -26780,7 +26735,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中华人民共和国职业分类大典（2022 年版）公布信息｜https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
+              "大典2022物理381—382页化工总控工正文｜https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.47",
@@ -26802,7 +26757,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆（本条路由不发布数值）"
+              "中国精确职业月薪未取得；制造业年度背景另列"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.49",
@@ -26813,7 +26768,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与化工装置操作员精确对应的中国大陆全国职业月薪分布；本页不发布替代数值，也不以相邻岗位报价推算。"
+              "证据不足：未取得中国精确职业全国月薪，行业税前年均非月薪区间。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.50",
@@ -26857,7 +26812,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未有官方或可核验来源支持其他地区该岗位的月薪区间。"
+              "证据不足：本轮未取得其他地区本职业月薪，不据此称从无公开数据。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.54",
@@ -26868,7 +26823,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业对照：美国 O*NET-SOC 51-8091.00（Chemical Plant and System Operators，SOC 51-8091）；中国大陆本条证据路由未建立一一对应的职业细类，相关职责可能分布在化工装置运行、化工生产操作、化学品生产与加工等多个序列，须按岗位实际职责与资质与机构授权归类，页面语言不构成职业等价或工资映射。"
+              "大典2022物理381—382页化工总控工6-11-01-03：操作仪表及自动控制系统监控/调节反应或单元操作，开停车、调工艺参数/分析生产状况、协助现场、试车验收、物料能量平衡及回收消耗核定、设备异常和生产记录。与美国51-8091职责重叠，未建立一一统计映射；产品和具体任务须另分类。"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.55",
@@ -26891,7 +26846,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《城镇单位就业人员年平均工资情况》检索入口｜https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html；O*NET 全国工资分位页面（51-8091.00）｜https://www.onetonline.org/link/localwages/51-8091.00"
+              "NBS2025制造业年度背景｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html；美国全国工资｜https://www.onetonline.org/link/localwages/51-8091.00"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.57",
@@ -26902,7 +26857,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "下降 6%（低于所有职业平均）"
+              "2025—2035下降5.2%（OOH舍入5%）"
             ]
           },
           "id": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.58",
@@ -27150,7 +27105,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位。该分位不包含津贴与加班的个体差异，也不含自雇主收入。；BLS 全国工资分位（51-8091.00，2025 年 5 月）｜https://www.onetonline.org/link/localwages/51-8091.00"
+              "第90分位为受雇工资位置非职级；OEWS含规定危险工作津贴/激励，排除加班/轮班差额/非生产奖金/福利成本，不含自雇，不反推个人报酬。"
             ]
           },
           "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.18",
@@ -27161,7 +27116,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "18,100 人（2024 年）"
+              "16,700人（2025基期）"
             ]
           },
           "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.19",
@@ -27172,7 +27127,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 就业预测公布的 2024 年该职业就业人数；2034 年预计为 17,000 人，2024—2034 年变化约 −1,100 人。；BLS 就业预测（经 O*NET 就业趋势页面显示）｜https://www.onetonline.org/link/localtrends/51-8091.00"
+              "BLS表1.2精确51-8091：2025就业16.7千、2035预测15.9千，官方净变化−0.9千、−5.2%（OOH舍入−5%，下降），年均空缺1.3千，含增长与替补；端点/净值分别舍入，不据端点重算覆盖官方净值。自雇“—”非0。典型高中/GED、相关经验None、中等期限在岗培训。 工资受雇样本与就业预测模型分开。"
             ]
           },
           "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.20",
@@ -27183,7 +27138,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "下降 6%"
+              "下降5.2%（OOH舍入5%）"
             ]
           },
           "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.21",
@@ -27194,7 +27149,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024—2034 年预测期，低于所有职业平均。预测含假设与误差，不等于逐年实际值。；BLS 就业预测（经 O*NET 就业趋势页面显示）｜https://www.onetonline.org/link/localtrends/51-8091.00"
+              "2025—2035预测，下降；模型有假设/误差，非逐年实际值。"
             ]
           },
           "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.22",
@@ -27205,7 +27160,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约 1,600 个/年"
+              "约1,300个/年"
             ]
           },
           "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.23",
@@ -27216,7 +27171,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024—2034 年年均空缺，含增长与替补（离职与退休）需求。空缺是流量，不等于在招岗位存量。；BLS 就业预测（经 O*NET 就业趋势页面显示）｜https://www.onetonline.org/link/localtrends/51-8091.00"
+              "2025—2035年均空缺含增长与替补，非在招存量。"
             ]
           },
           "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.24",
@@ -27227,7 +27182,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界：以上数值均为美国全国口径，面向受雇工资薪金岗位；实际到手收入还受班制与加班与夜班与高温与有毒有害岗位津贴影响，本页不据此推算个人年收入，也不构成对中国大陆的推断。"
+              "工资为受雇岗位，全国就业预测另有模型覆盖；不混为同一样本，不推个人到手/起薪或中国工资。"
             ]
           },
           "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.25",
@@ -27238,7 +27193,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：BLS 显示 2025 年 5 月该职业年薪中位数为 78,120 美元、时薪中位数为 37.56 美元；2024—2034 年就业预计下降 6%，年均空缺 1,600 个。这些是美国受雇岗位的统计位置，不是个人起薪或到手收入。"
+              "2025 OEWS中位78,120美元/年、37.56美元/时；2025—2035下降5.2%、年均空缺1,300，工资和预测分别统计，非个人起薪。"
             ]
           },
           "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.26",
@@ -27249,10 +27204,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 工作情境显示 82% 的受访者典型工作周超过 40 小时、18% 为 40 小时；连续装置多采用倒班制，夜班与加班与高温与有毒有害岗位津贴在不同企业差异较大，统计的年度工资不区分这些构成，因此不能反推个人收入结构。"
+              "82%超40h/18%40h来自O*NET情境，非BLS工时保证。OEWS含规定激励/危险工作津贴，排除加班/轮班差额/非生产奖金/福利成本，年度工资不能反推个人班制。"
             ]
           },
           "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.27",
+          "source_refs": [
+            "cpso-methods",
+            "cpso-details"
+          ],
           "type": "prose"
         },
         {
@@ -27315,7 +27274,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "下降 6%（低于所有职业平均）"
+              "2025—2035下降5.2%（OOH舍入5%）"
             ]
           },
           "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.33",
@@ -27326,7 +27285,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "制造业（占该职业就业 88%）"
+              "制造业（O*NET2025占87%）"
             ]
           },
           "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.34",
@@ -27337,7 +27296,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：BLS Occupational Outlook Handbook 该职业页面的行业工资表本轮访问返回 HTTP 403，未取得制造业内的工资中位数；本页不以全国中位数或其他行业数值代填。"
+              "证据不足：本轮未取得制造业内本职业工资中位，不用全国值代填；OOH未详细覆盖清单不代行业工资表。"
             ]
           },
           "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.35",
@@ -27348,7 +27307,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布显示本职业 88% 集中在制造业；行业工资中位数本轮未取得（见缺口说明）。"
+              "O*NET详情2025制造业占87%；当前行业子页87%、其他13%（含专业科学技术服务/批发），子页未另标资料年；行业占比不是工资。 行业职业工资中位未取得。"
             ]
           },
           "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.36",
@@ -27359,7 +27318,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他行业（占该职业就业 12%，含批发贸易）"
+              "其他行业（当前子页13%，含专业科学技术服务/批发；子页未另标年）"
             ]
           },
           "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.37",
@@ -27414,7 +27373,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布只区分制造业与其他行业，不提供更细的行业工资口径。"
+              "O*NET就业行业占比非行业工资；BLS另有行业/州估计入口，本轮未取得细分中位，不断言全部来源只分两组。"
             ]
           },
           "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.42",
@@ -27491,7 +27450,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与地区、装置类型与工艺危险程度、班制与津贴、以及是否持特种作业与危化品作业资格都会影响实际收入；本页只给出统计口径下的分布，不预测个人收入。"
+              "行业、地区、班制、任务/资格可作实际报价核对项；未取得危险程度/持证导致收入变化的因果研究，不预测个人工资。"
             ]
           },
           "id": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.49",
@@ -27664,7 +27623,7 @@
           },
           "id": "chemical-plant-and-system-operators.fit.riasec-fit-block.8",
           "source_refs": [
-            "nasa-seh"
+            "cpso-class"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27815,7 +27774,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 兴趣代码与工作活动重要性为官方职业测评数据，描述的是职业群体的取向分布，不是个人适配结论，也不是录用标准。"
+              "O*NET兴趣代码为职业任务兴趣特征，活动分数为重要性，非人口类型分布、个人结论或录用阈值。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.3",
@@ -27838,7 +27797,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：O*NET 工作风格清单列出压力耐受、自我控制、谨慎、诚信、注重细节与可靠性六项；如果你容易在重复作业中松懈，或不愿意持续佩戴防护装备，这份工作的安全要求会持续带来压力。"
+              "O*NET17工作风格，前六谨慎91/可靠88/细节86/压力72/诚信71/自控69，以上六项为前列项目，非完整清单；重复/防护习惯为编辑观察非人格准入。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.5",
@@ -27860,7 +27819,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 工作风格为职业级描述性数据；大五人格量表本身不是职业选拔工具。"
+              "O*NET风格为职业描述；本轮未取得特定大五测分预测本职业表现的研究，不断言全部量表无选拔用途。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.7",
@@ -27894,7 +27853,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 等类型学工具与本职业适配没有官方证据支持。本页不使用「哪种类型最适合化工装置操作员」的表述：类型学描述的是偏好，不预测工作表现，也不对应岗位准入。"
+              "本轮未取得MBTI等类型学用于本职业表现/准入的效度，不据类型筛资格。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.10",
@@ -27905,7 +27864,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：无职业级官方证据支持类型学与职业表现的因果关系。"
+              "本轮未取得类型学与本职业表现的证据。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.11",
@@ -27939,7 +27898,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样不是职业测评工具，没有官方职业证据支持。可替代的做法是用具体行为验证兴趣：能否在受监督下完整执行一次巡检并如实记录，能否在报警出现时按程序处置与上报。"
+              "本轮未取得九型职业适配效度；监督演练/记录可作编辑观察，不等正式胜任认证。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.14",
@@ -27984,7 +27943,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业对数学的要求以实用计算为主：O*NET 基本技能中监控为最高分项（69），批判性思维 66，阅读理解与口语表达与主动倾听各 53；知识清单包含机械、化学、数学、物理、生产与加工、公共安全与安保、工程与技术、计算机与电子等 9 项。实际工作中大量比例与换算由控制系统完成，真正需要的是理解配方与配比与单位与量纲，并能判断读数是否合理。"
+              "技能监控69/批判66/阅读倾听口语53、数学44/科学41；知识共33项，前九含机械83/化学82/数学82等，以上九项示例非完整清单。编辑建议练配方、单位和读数判断，未取得大量计算由系统完成的部署证据。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.18",
@@ -28018,7 +27977,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：如果对基本单位与配比计算长期吃力，取样与记录与物料计算环节会持续出错，风险直接落在安全与质量上。"
+              "编辑提醒：单位/配比理解不足可能影响取样、记录和物料判断，可在监督培训/虚构演练核并补足，不预测必然持续出错或事故。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.21",
@@ -28085,7 +28044,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：与该职业任务最贴合的信号是「愿意按规程长期重复并如实记录」与「报警与异常出现时先确认再处置」；兴趣代码 RCI 说明该职业偏向现实型并带有常规型成分，但代码只描述群体分布，不决定个人是否适合。"
+              "编辑适配观察：按规程重复、真实记录与及时报告可作监督演练核对项；危险异常执行实际应急程序，不要求先复测。RCI为职业兴趣非人口类型分布。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.27",
@@ -28096,7 +28055,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "系统运行与监控方向"
+              "化工设备操作与看护员"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.28",
@@ -28107,7 +28066,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：喜欢在现场走动与观察，愿意按路线与清单逐项确认，并能接受班制与防护装备带来的不便。"
+              "编辑信号：愿聚焦设备/批次、仪表、取样和真实记录。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.29",
@@ -28118,7 +28077,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你更希望工作环境安静舒适或不需要持续防护，这条方向会很吃力。"
+              "整体系统经验与设备任务重叠，具体工艺/危害和授权另核。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.30",
@@ -28129,7 +28088,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "参数调节与设备操作方向"
+              "化学技术员"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.31",
@@ -28140,7 +28099,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：愿意承担控制设定调整与流量调节与批次判断，能在授权范围内做决定并把依据说明清楚。"
+              "编辑信号：关注检测方法、仪器和可追溯数据。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.32",
@@ -28151,7 +28110,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你不愿意为判断承担责任或不愿与人协同，这条方向的压力会更大。"
+              "补分析/质量控制，技术员亦可在厂内协助安全生产，不全部限实验室。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.33",
@@ -28162,7 +28121,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "安全与设备可靠性方向"
+              "固定式发动机与锅炉操作员"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.34",
@@ -28173,7 +28132,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：愿意研读安全与环境与设备管理规定，并能把要求转成可执行的巡检项与检查记录。"
+              "编辑信号：关注动力、锅炉、蒸汽和设备运行。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.35",
@@ -28184,7 +28143,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：这条方向经常要给出不受欢迎的结论（停机、隔离、整改），需要有承担冲突的准备。"
+              "补公用工程与设备知识；资格按设备/辖区核，不统一称全部目标需证。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.36",
@@ -28195,7 +28154,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "化工设备操作与看护员"
+              "水与废水处理系统操作员"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.37",
@@ -28206,7 +28165,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：更希望聚焦单套或单元设备的看护与操作，愿意把一套设备与批次管到稳定。"
+              "编辑信号：关注水质、加药和处理工艺记录。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.38",
@@ -28217,7 +28176,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你希望负责更大范围的系统运行，本职业更合适。"
+              "补水处理法规、许可和方法，操作经验不自动满足准入。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.39",
@@ -28228,7 +28187,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "化学技术员"
+              "气体厂操作员"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.40",
@@ -28239,7 +28198,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：更喜欢实验室检测与方法与仪器细节。"
+              "编辑信号：关注气体分配、压缩/液化/再气化和压力流量。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.41",
@@ -28250,7 +28209,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你更愿意在现场而不是实验室，这条方向不合适。"
+              "补气体性质、设备/管线与安全条件，不能只当纯度检测岗。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.42",
@@ -28261,7 +28220,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "固定式发动机与锅炉操作员"
+              "化学工程师"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.43",
@@ -28272,7 +28231,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：更关注动力与蒸汽系统的运行与能效，并愿意另行取得相应操作资格。"
+              "编辑信号：愿学习工程计算、设计/放大和验证。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.44",
@@ -28283,7 +28242,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你希望处理化学品与反应过程，本职业更合适。"
+              "目标教育与工程技能另核；许可按业务/法域，不等操作经验自动转工程职责。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.45",
@@ -28316,7 +28275,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。外向本身不是优势或劣势，关键是能否把报警与异常与交接说清楚；如果更偏好独立工作，可以选择相对独立的巡检与设备看护岗位。"
+              "外向程度不决定胜任；编辑建议核报警报告/交接沟通，独立工作比例按具体岗位核，不由巡检标签保证独立。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.48",
@@ -28327,7 +28286,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有官方证据支持某种 MBTI 类型更适合该职业；本页不提供这种排序。"
+              "本轮未取得某MBTI类型更适合本职业的证据，不作类型排序。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.49",
@@ -28338,7 +28297,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 该职业的兴趣代码为 RCI（现实型、常规型、研究型）。这表示职业群体更多分布在现实型与常规型取向，但代码不是个人适配结论，仍需用实际任务验证。"
+              "RCI表示现实型、常规型、研究型职业任务兴趣特征，非从业人口分布或个人适配结论。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.50",
@@ -28349,7 +28308,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。人格特质分数与工作表现的关联在不同研究中强弱不一，且受岗位与组织影响；本页不用它作为录用或适配判断依据。"
+              "本轮未取得特定人格测分预测本职业表现的研究，不单靠测分决定录用/适配。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.51",
@@ -28360,7 +28319,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业对数学的要求是实用层面的：O*NET 基本技能中监控为最高分项（69）、批判性思维 66，知识清单包含数学与化学与机械；如果连配方配比与单位换算都长期吃力，需要通过培训或演练补齐，否则会在现场作业中持续出错。"
+              "数学技能44，知识数学82/化学82/机械83；编辑建议通过监督培训/虚构演练核配方和单位，不据困难预测必然持续误操作。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.52",
@@ -28371,7 +28330,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业需要沟通但不是情绪劳动型岗位：工作活动「与主管、同事或下属沟通」87、「培训与教导他人」81；重点是报警与异常报告与交接与协同，不要求处理顾客情绪。"
+              "沟通活动87/培训教导81、面对面100/电话76%每天支持沟通任务；未取得情绪劳动分类或情绪测分胜任效度，不据此宣称无需情绪劳动。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.53",
@@ -28382,7 +28341,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不建议。九型人格不是职业测评工具，也没有官方职业适配证据。"
+              "本轮未取得九型职业适配效度，不据类型决定准入或能力上限。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.54",
@@ -28459,7 +28418,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024—2034 年就业预测与年均空缺"
+              "用于核BLS2025—2035就业预测与空缺"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.61",
@@ -28492,7 +28451,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对认证与学徒入口（该职业未列出全国性认证，列出 1 个注册学徒制岗位）"
+              "当前认证入口未检索到认证；详情1学徒岗位名称仅支持路径发现，不证全国从无认证或项目开放。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.personality-fit-block.64",
@@ -28536,7 +28495,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣取向：该职业群体以现实型为主，并带有明显的常规型成分，研究与分析成分较少；日常任务以现场监控、按规程操作与记录为主。"
+              "职业任务兴趣RCI（现实型、常规型、研究型）；日常有系统监控、规程操作与记录，非人口类型分布。"
             ]
           },
           "id": "chemical-plant-and-system-operators.fit.riasec-fit-block.10",
@@ -28582,7 +28541,7 @@
           },
           "id": "chemical-plant-and-system-operators.risk.career-risk-cards.1",
           "source_refs": [
-            "nasa-seh"
+            "cpso-class"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28612,7 +28571,7 @@
           },
           "id": "chemical-plant-and-system-operators.risk.career-risk-cards.3",
           "source_refs": [
-            "nasa-seh"
+            "cpso-class"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28627,7 +28586,7 @@
           },
           "id": "chemical-plant-and-system-operators.risk.career-risk-cards.4",
           "source_refs": [
-            "nasa-seh"
+            "cpso-class"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28735,7 +28694,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：任务与工作情境来自 O*NET 51-8091.00（美国口径）；安全与危险化学品与特种设备要求来自公开法规与标准的一般框架；具体阈值、许可与责任划分属于企业与法域事项，本条为编辑归纳，不构成合规或安全操作意见。"
+              "美国任务/情境由O*NET支持，措施为编辑核对；中国安法/19号令/特种设备法/工贸有限空间规则分别核适用，美国PSM/LOTO按覆盖条件，不跨套法域。未取得企业限值/停复工程序。"
             ]
           },
           "id": "chemical-plant-and-system-operators.risk.career-risk-cards.10",
@@ -28812,7 +28771,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "确认仪表与联锁在校验有效期内并核对相邻测点；使用校准杆等方式复核罐位读数；按规定方法取样并记录批次与时间；异常结果先复测再报告。"
+              "编辑核对：数据、方法/点位与仪表须可追溯，异常及时报告/应急处置，复核罐位或复测只在允许安全条件下，不统一先复测后报告。"
             ]
           },
           "id": "chemical-plant-and-system-operators.risk.career-risk-cards.17",
@@ -28856,10 +28815,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程佩戴防护装备并使用气体检测与通风设施；发现泄漏或溢罐按预案隔离与上报；参与应急演练并熟悉撤离与集合点与洗眼器位置。"
+              "编辑防护：危险报警/泄漏按装置预案处置、撤离/报告；隔离救援由具备相应培训防护及授权人员执行，不主动嗅探/盲目进入，硫化氢不能靠嗅觉排除。中国安法55条直接危及人身安全紧急情况可停止作业或采取可能应急措施后撤离，并及时报告，不等待额外批准；普通调参/停机顺序与恢复按实际规程及职责核。"
             ]
           },
           "id": "chemical-plant-and-system-operators.risk.career-risk-cards.21",
+          "source_refs": [
+            "cpso-h2s",
+            "cpso-safety"
+          ],
           "type": "prose"
         },
         {
@@ -28867,7 +28830,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "巡检中发现异味或异响或雾状喷出或检测报警，但未按程序隔离与上报而先尝试自行处理。"
+              "发现可见/可听异常、检测报警或偶然异常气味，却未按预案处置和及时报告而自行靠近；不要求个人先隔离，也不能凭嗅觉排除泄漏。"
             ]
           },
           "id": "chemical-plant-and-system-operators.risk.career-risk-cards.22",
@@ -28900,10 +28863,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规定的介质与时间与检查方法确认清洗与置换；在交接与检修票证上记录确认结果；对未达标项拒绝进入下一步并上报。"
+              "编辑清洗/检修：核适用能量隔离、置换与方法，未达条件及时报告，票证不能证明实际可进入。美国1910.147限适用检修；中国工贸13号令2条限定工贸行业，不能套全部化工厂或当独立空间操作证。"
             ]
           },
           "id": "chemical-plant-and-system-operators.risk.career-risk-cards.25",
+          "source_refs": [
+            "cpso-loto",
+            "cpso-confined"
+          ],
           "type": "prose"
         },
         {
@@ -28933,7 +28900,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "配方与工艺参数与批记录属于企业核心信息，拍照或外发会造成商业损失；把受控资料上传到外部工具可能构成违规披露。"
+              "配方/工艺/批记录可能涉及商业秘密或合同，拍摄/外发影响依权利和保密条件核，不称全部天然秘密或一次必损失。"
             ]
           },
           "id": "chemical-plant-and-system-operators.risk.career-risk-cards.28",
@@ -28944,10 +28911,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按企业数据分级使用设备与工具；不在现场使用个人设备拍摄工艺资料；对外提供信息前按制度审批并留痕。"
+              "编辑保密：核权利、合同、信息分级/访问，审批/脱敏不自动合规。PSM(p)安全信息获取与保密安排不等上传外部模型许可。"
             ]
           },
           "id": "chemical-plant-and-system-operators.risk.career-risk-cards.29",
+          "source_refs": [
+            "cpso-psm"
+          ],
           "type": "prose"
         },
         {
@@ -28977,7 +28947,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "装置自动化与数字化程度提高后，如果只熟悉一种老设备或一套操作方式，在装置改造或岗位调整时会面临选择空间收窄。"
+              "编辑能力风险：装置/流程变化可能需新技能，具体影响另核，不把关键词或ILO暴露称实际自动化增长。"
             ]
           },
           "id": "chemical-plant-and-system-operators.risk.career-risk-cards.32",
@@ -29043,7 +29013,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对行业分布与现场作业环境说明"
+              "用于核对行业就业分布，不提供现场作业环境、防护或暴露数据；相应情境见WorkContext。"
             ]
           },
           "id": "chemical-plant-and-system-operators.risk.career-risk-cards.38",
@@ -29078,7 +29048,7 @@
           },
           "id": "chemical-plant-and-system-operators.path.career-path-block.1",
           "source_refs": [
-            "onet-training"
+            "cpso-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -29227,7 +29197,7 @@
                 "url": "https://www.onetonline.org/link/localtraining/51-8091.00"
               },
               {
-                "entity": "O*NET-SOC 51-8091.00 认证与学徒信息入口",
+                "entity": "O*NET-SOC 51-8091.00 认证查询入口",
                 "id": "link-4",
                 "relation": "related-evidence",
                 "url": "https://www.onetonline.org/link/localcert/51-8091.00"
@@ -29341,7 +29311,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：进入该职业最常见的路径是完成高中或中等职业教育后，由企业提供数天到一年的在职培训，从在监督下执行基础任务开始；O*NET 把该职业列为 Job Zone 1-2、SVP 区间低于 6.0，BLS 显示入行学历通常为高中文凭或同等学历。能否进入岗位主要看三点：是否理解并遵守安全规程、能否稳定执行重复作业并如实记录、以及能否与班组配合完成交接。"
+              "BLS典型高中/GED、经验None、中等期限OJT；JobZone1-2/SVP<6是准备分类，通用数天至一年非本职业BLS培训分类。编辑建议练规程/记录/交接，未取得三点统一决定录用证据。"
             ]
           },
           "id": "chemical-plant-and-system-operators.path.career-path-block.20",
@@ -29352,10 +29322,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界：学历与培训、行业认证、法定与作业资格、岗位授权是四件不同的事。在美国，入门岗位不要求执照，但企业通常要求完成内部安全培训并按岗位授权作业；O*NET 认证页面显示「No certifications were found.」，未列出全国性认证，但列出 1 个已获美国劳工部批准用于注册学徒制的岗位名称（Plant Operator, Furnace Pro），学徒岗位属于可用路径而非执业资格。在中国大陆，化工装置运行涉及危险化学品与特种设备与有限空间作业的岗位另有安全生产与特种作业管理规定，须按主管部门与企业制度取得相应资格。本页不把某一法域的要求推到其他法域，也不把认证写成作业许可。"
+              "学历、认证、法定资格与机构授权分开。美国BLS典型学历/培训不证明所有入门岗位无执照；适用PSM按1910.119(a)/(f)/(g)核覆盖、操作程序和培训，资格/许可及机构授权按任务、装置与州/辖区另核。 当前认证目录未检索到认证，详情1学徒岗位名称Plant Operator, Furnace Pro仅支持发现，不证全国从无认证/开放项目。中国按实际特种作业目录类别取证，非全部化工装置操作岗位统一证。19号令2026-06-01施行：3/4/6条核直接作业、培训考核/操作证，危险化学品特种作业须高中或相当以上；9条培训豁免须满足条件，不等免考试/证；23条全国6年有效、26—29条换证另核。特种设备法2/13/14条按设备目录与资格项目；有限空间培训不统一等独立操作证。"
             ]
           },
           "id": "chemical-plant-and-system-operators.path.career-path-block.21",
+          "source_refs": [
+            "cpso-special",
+            "cpso-equipment",
+            "cpso-psm"
+          ],
           "type": "prose"
         },
         {
@@ -29374,7 +29349,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本页关于入行与培训采用 O*NET/BLS 口径：Job Zone 1-2、SVP 区间低于 6.0、入行学历通常为高中文凭或同等学历、在职培训为数天到一年；中国大陆部分只说明公开的安全生产与特种作业制度框架，不对中国大陆的雇主门槛作统一结论，因为企业与岗位差异较大。"
+              "美国典型学历/中等期限OJT按BLS表1.2；中国资格按实际作业与法规，未取得统一雇主门槛。中国按实际特种作业目录类别取证，非全部化工装置操作岗位统一证。19号令2026-06-01施行：3/4/6条核直接作业、培训考核/操作证，危险化学品特种作业须高中或相当以上；9条培训豁免须满足条件，不等免考试/证；23条全国6年有效、26—29条换证另核。特种设备法2/13/14条按设备目录与资格项目；有限空间培训不统一等独立操作证。"
             ]
           },
           "id": "chemical-plant-and-system-operators.path.career-path-block.23",
@@ -29385,7 +29360,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024—2034 年就业预测与年均空缺"
+              "用于核BLS2025—2035预测/空缺"
             ]
           },
           "id": "chemical-plant-and-system-operators.path.career-path-block.24",
@@ -29407,7 +29382,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对认证与学徒发现入口（该职业未列出全国性认证）"
+              "用于培训项目发现；项目开放、内容与条件另核，不是认证或学徒名称的直接出处。"
             ]
           },
           "id": "chemical-plant-and-system-operators.path.career-path-block.26",
@@ -29418,7 +29393,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对官方职业身份与任务结构"
+              "认证查询入口本次未检索到认证，不证明全国不存在；学徒岗位名称来自O*NET详情，不保证开放名额。"
             ]
           },
           "id": "chemical-plant-and-system-operators.path.career-path-block.27",
@@ -29429,7 +29404,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求高中或中等职业教育学历并完成企业安全培训；涉及危险化学品作业的岗位须按所在地规定取得相应作业资格。"
+              "BLS典型高中/GED，中国具体招聘学历另核；中国特种作业按实际目录，不按化工岗位名称统一取证。"
             ]
           },
           "id": "chemical-plant-and-system-operators.path.career-path-block.28",
@@ -29539,7 +29514,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "部分企业对主操岗位设有内部认证或资格要求；以企业制度与当地规定为准。"
+              "编辑主操阶段例子，具体内部考核/任命条件未取得，按目标企业核。"
             ]
           },
           "id": "chemical-plant-and-system-operators.path.career-path-block.38",
@@ -29759,7 +29734,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "部分企业要求主操岗位通过内部考核；以企业制度为准。"
+              "编辑主操阶段例子，具体内部考核条件未取得。"
             ]
           },
           "id": "chemical-plant-and-system-operators.path.career-path-block.58",
@@ -29869,7 +29844,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "该阶段无强制资格要求；参与现场检查须完成相应安全培训。"
+              "编辑安全检查学习阶段，强制资格按实际任务/法域核，不能统称无强制资格。"
             ]
           },
           "id": "chemical-plant-and-system-operators.path.career-path-block.68",
@@ -29979,10 +29954,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆相关岗位可能要求注册安全工程师或相应资格，须按当地与行业规定确认。"
+              "中国安法27危险物品生产/储存/装卸等法定单位应有注册安全工程师从事管理，不要求每位操作员持证；管理任职和机构职责另核。"
             ]
           },
           "id": "chemical-plant-and-system-operators.path.career-path-block.78",
+          "source_refs": [
+            "cpso-safety"
+          ],
           "type": "prose"
         },
         {
@@ -30098,7 +30076,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "编辑建议核对的能力",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -30152,23 +30130,23 @@
               {
                 "id": "education",
                 "values": [
-                  "高中文凭或同等学历；化工工艺或化工装备相关中等职业教育优先；",
-                  "BLS 显示该职业入行学历通常为高中文凭或同等学历，在职培训为数天到一年；",
-                  "部分企业要求或优先考虑持有特种作业与危险化学品作业资格的人员。"
+                  "BLS典型高中/GED，化工中职优先条件按具体招聘核，未取得雇主样本。",
+                  "BLS典型中等期限在岗培训；JobZone通用周期非本职业要求。",
+                  "目录特种作业/设备资格为法定条件，不能用企业偏好替代。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "企业通常要求完成安全教育与岗位培训并通过考核后才可独立作业；",
-                  "涉及危险化学品与特种设备与受限空间作业的岗位须按所在地规定取得相应资格；",
-                  "部分岗位可能需要体检或职业健康检查结论作为上岗条件。"
+                  "中国安法28安全培训合格；美国适用PSM(g)培训和理解确认，机构独立作业条件另核。",
+                  "中国按实际特种作业目录类别取证，非全部化工装置操作岗位统一证。19号令2026-06-01施行：3/4/6条核直接作业、培训考核/操作证，危险化学品特种作业须高中或相当以上；9条培训豁免须满足条件，不等免考试/证；23条全国6年有效、26—29条换证另核。特种设备法2/13/14条按设备目录与资格项目；有限空间培训不统一等独立操作证。",
+                  "健康/职业健康条件依作业与法源核；19号令18条材料为健康承诺，不统一体检报告。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "O*NET 工作风格列出压力耐受、自我控制、谨慎、诚信、注重细节与可靠性六项；",
+                  "O*NET17风格，谨慎91/可靠88/细节86/压力72/诚信71/自控69为前六，非全部。",
                   "基本技能中监控为最高分项（69），批判性思维 66，阅读理解与口语表达与主动倾听各 53；",
                   "工作活动以监控过程材料或环境（99）与使用计算机（92）为最高分项。"
                 ]
@@ -30298,7 +30276,7 @@
                 "面试与安全知识",
                 "对常用安全要求与个人防护的理解、对报警与紧急处置流程的认识。",
                 "是否知道越限与泄漏与溢罐时的处置与上报路径。",
-                "面试问答不等同于现场能力，企业通常另有实操培训与考核。"
+                "编辑面试例子，问答不等实际能力，企业实操培训/考核条件另核。"
               ],
               [
                 "实操或模拟",
@@ -30421,11 +30399,11 @@
             "rows": [
               [
                 "高中文凭或同等学历",
-                "绝大多数入行者",
-                "是求职的基础门槛，决定可进入的岗位序列",
-                "是（BLS 显示入行学历通常为高中文凭或同等学历）",
-                "完成高中或同等学历教育；化工相关中等职业教育有加分",
-                "中低（学制数年）",
+                "参考目标岗位典型学历的入行者，非已核人数比例",
+                "美国典型准备学历，非全部雇主统一岗位序列条件",
+                "BLS典型分类，非普遍硬门槛",
+                "目标学历认可和中职优先按具体招聘核，未取得样本。",
+                "教育投入按实际学制/已有教育核，未取得统一费用/年限。",
                 "学历本身不等于作业资格，也不代表可独立操作危险化学品设备"
               ],
               [
@@ -30434,34 +30412,34 @@
                 "是实际作业的前提条件",
                 "是（由企业制度规定）",
                 "按企业培训与考核制度取得授权；涉及特种作业的另需取证",
-                "低到中（数天到数周）",
+                "实际培训/考核时长与费用按法域和企业核，无统一数天至数周证据。",
                 "授权与企业绑定，换单位后通常需要重新培训与授权"
               ],
               [
                 "特种作业与危险化学品作业资格",
-                "从事危险化学品与特种设备与受限空间等作业的人员",
+                "实际目录特种作业/设备资格项目人员，有限空间参与条件另核",
                 "在相应岗位上是实质条件",
                 "视岗位涉及的作业类别而定",
-                "按所在地主管部门规定参加培训与考核；具体条件以官方公布为准",
-                "中（培训与考核周期）",
-                "作业资格按类别与地区管理，须核对有效期与作业范围，本页不代替官方条件"
+                "中国按实际特种作业目录类别取证，非全部化工装置操作岗位统一证。19号令2026-06-01施行：3/4/6条核直接作业、培训考核/操作证，危险化学品特种作业须高中或相当以上；9条培训豁免须满足条件，不等免考试/证；23条全国6年有效、26—29条换证另核。特种设备法2/13/14条按设备目录与资格项目；有限空间培训不统一等独立操作证。",
+                "条件、培训/考核费用按具体类别核，未取得统一投入等级。",
+                "19号令证全国6年有效，换证与作业范围另核；特种设备项目资格另核。"
               ],
               [
                 "注册学徒制（Plant Operator, Furnace Pro）",
                 "希望边工作边系统培训的入行者",
-                "在美国属于可用路径之一",
+                "岗位名称支持路径发现，当前项目/名额/条件未取得。",
                 "否",
-                "由雇主与学徒计划共同确定；岗位名称见 O*NET 认证与学徒入口",
-                "中（在职培训与课程并行）",
+                "详情列Plant Operator, Furnace Pro学徒岗位名称，非当前开放项目证明。",
+                "实际课程/在岗培训/费用未取得，不能统一评级。",
                 "学徒制项目由雇主与计划方管理，名额与条件随企业与地区变化"
               ],
               [
                 "行业与技术培训证书",
                 "希望证明特定方向能力的人员",
-                "部分岗位认可，属于加分项",
+                "未取得特定雇主认可/加分证据，证书条件逐项核。",
                 "否",
                 "各培训机构与行业组织自定条件与考试要求，须逐项核实",
-                "中到高（培训与考试费用）",
+                "具体机构收费/周期未取得，不能统一评级。",
                 "行业证书不等于法定作业资格，也不替代企业授权"
               ],
               [
@@ -30470,12 +30448,16 @@
                 "在相应岗位上是实质条件",
                 "否（并非所有操作岗位都要求）",
                 "按所在地规定参加考试或培训；中国大陆相关岗位可能要求注册安全工程师",
-                "高（考试与年限要求）",
+                "学历/工作年限/考试/费用按实际资格核，未取统一投入等级。",
                 "注册与执业范围以主管部门规定为准，本页不代替官方条件"
               ]
             ]
           },
           "id": "chemical-plant-and-system-operators.path.credential-decision.1",
+          "source_refs": [
+            "cpso-special",
+            "cpso-equipment"
+          ],
           "title": "资格选择",
           "type": "table"
         },
@@ -30484,13 +30466,18 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "本页把「学历与培训」「行业认证」「法定与作业资格」与「岗位授权」分列：学历决定你能进入哪些岗位序列，行业认证用于证明特定方向的能力，作业资格由法域主管部门规定，岗位授权由企业制度决定，四者不能互相替代。",
-              "美国：入门岗位不要求执照，但企业通常要求完成内部安全培训并按岗位授权作业；O*NET 该职业的认证页面显示「No certifications were found.」，并列出 1 个注册学徒制岗位名称（Plant Operator, Furnace Pro）；学徒岗位属可用路径，不等于执业资格。",
-              "中国大陆：涉及危险化学品与特种设备与有限空间等作业的岗位另有安全生产与特种作业管理规定，须按所在地主管部门与企业制度取得相应资格；本页不代替官方报考或取证条件。",
-              "本页涉及的认证与学徒信息来自 O*NET 的认证发现入口，其报考条件、有效期与认可范围须由各认证机构原文核实；本页不保证任何认证在特定雇主或法域被承认，也不保证学徒制岗位在特定地区有开放名额。"
+              "学历、认证、法定资格与机构授权分开，学历不单独决定岗位序列，目录不证认可。",
+              "美国BLS典型学历/培训不证明所有入门岗位无执照；适用PSM按1910.119(a)/(f)/(g)核覆盖、操作程序和培训，资格/许可及机构授权按任务、装置与州/辖区另核。 当前认证未找到、详情1学徒岗位名称仅支持发现，不等全国不存在认证/项目开放。",
+              "中国按实际特种作业目录类别取证，非全部化工装置操作岗位统一证。19号令2026-06-01施行：3/4/6条核直接作业、培训考核/操作证，危险化学品特种作业须高中或相当以上；9条培训豁免须满足条件，不等免考试/证；23条全国6年有效、26—29条换证另核。特种设备法2/13/14条按设备目录与资格项目；有限空间培训不统一等独立操作证。",
+              "认证查询来自O*NET localcert，本次未找到认证；Plant Operator, Furnace Pro学徒岗位名称来自O*NET详情的Apprenticeship段。目录和名称仅支持发现，不证明开放项目、认可、费用或资格条件；目标项目与法域另核。"
             ]
           },
           "id": "chemical-plant-and-system-operators.path.credential-boundary.1",
+          "source_refs": [
+            "cpso-special",
+            "cpso-equipment",
+            "cpso-psm"
+          ],
           "title": "资格与练习边界",
           "type": "notice"
         },
@@ -30499,7 +30486,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "关于招聘样本：本页不使用招聘平台报价作为工资依据，也不把单条招聘公告写成行业统一门槛；招聘信息中的学历、作业资格、班制与经验要求会随企业与年份变化。",
+              "本轮未取得招聘样本；入门/层级/考察表为编辑例子，不冒充雇主通常要求，报价不代全国工资。",
               "关于岗位名称：化工现场岗位可能使用化工操作工、装置操作、内操与外操、主操、值班长等多种名称，比较时应以实际职责、系统类型与授权范围为准，而不是名称。"
             ]
           },
@@ -30528,7 +30515,7 @@
           ],
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls-outlook"
+            "cpso-ep"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30546,7 +30533,7 @@
           ],
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls-outlook"
+            "cpso-ep"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30561,7 +30548,7 @@
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls-outlook"
+            "cpso-ep"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30579,7 +30566,7 @@
           ],
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls-outlook"
+            "cpso-ep"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30594,7 +30581,7 @@
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.5",
           "source_refs": [
-            "onet-industry"
+            "cpso-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30609,7 +30596,7 @@
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.6",
           "source_refs": [
-            "bls-outlook"
+            "cpso-ep"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30644,10 +30631,10 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "国家统计局《城镇单位就业人员年平均工资情况》检索入口",
+                "entity": "NBS2025制造业单位工资表",
                 "id": "link-5",
                 "relation": "related-evidence",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET-SOC 51-8091.00 职业详细资料",
@@ -30713,7 +30700,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：BLS 就业预测显示 2024—2034 年美国该职业就业下降 6%（Decline，低于所有职业平均），2024 年 18,100 人、2034 年预计 17,000 人，年均空缺 1,600 个，其中相当部分来自离职与退休的替补需求。就业规模下降不等于岗位消失，也不等于个人没有机会：空缺仍来自替补需求与特定装置与地区的用人需要。中国大陆未取得与该岗位精确对应的全国工资与就业统计口径，本页只登记缺口，不给出替代数值。"
+              "BLS表1.2精确51-8091：2025就业16.7千、2035预测15.9千，官方净变化−0.9千、−5.2%（OOH舍入−5%，下降），年均空缺1.3千，含增长与替补；端点/净值分别舍入，不据端点重算覆盖官方净值。自雇“—”非0。典型高中/GED、相关经验None、中等期限在岗培训。 中国精确职业工资/就业缺口保留；制造业年度背景另标。"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.8",
@@ -30735,7 +30722,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年（预测）"
+              "2025—2035（预测）"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.10",
@@ -30746,7 +30733,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "下降 6% 属「低于所有职业平均」；预测以现有产业结构为假设，含误差，不等于逐年的实际岗位数。"
+              "BLS精确下降5.2%、OOH舍入5%，模型有假设/误差，不称只固定现有产业结构。"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.11",
@@ -30757,7 +30744,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为全国职业级预测，不区分行业与地区；也不能用于推断某一企业或某一城市的机会数量。"
+              "本页展示全国值，来源另有行业和州机构预测入口；未取具体企业/城市机会数。"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.12",
@@ -30790,7 +30777,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "下降 6%（2024—2034 年）"
+              "下降5.2%（2025—2035，OOH舍入5%）"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.15",
@@ -30889,7 +30876,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025 年及以前已发布资料"
+              "工资背景2025（2026-05发布），大典2022"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.24",
@@ -30900,7 +30887,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本条证据路由把中国大陆的精确职业工资登记为已核实不可得（severity=material），本页只登记统计口径与缺口，不发布数值。"
+              "中国精确职业工资未取得；制造业非私113594/私76055元税前年均背景另列，非职业工资。"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.25",
@@ -30911,7 +30898,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业或较宽职业口径不能替代本职业的精确全国口径；本页不采用招聘样本或相邻岗位报价填补。"
+              "行业背景不代精确职业，无招聘样本，不用相邻报价填全国统计。"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.26",
@@ -30933,7 +30920,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆（未建立一一对应的职业细类）"
+              "中国化工总控职责重叠，未建立美国代码一一映射"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.28",
@@ -30944,7 +30931,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该岗位的中国大陆全国工资口径"
+              "精确职业工资未取得，2025制造业年度背景另列"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.29",
@@ -30977,7 +30964,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于登记中国大陆的统计口径与缺口"
+              "用于核NBS2025行业表/覆盖，保留精确职业缺口"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.32",
@@ -30999,7 +30986,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少整套系统运行与跨单元调节的经验，以及对系统级联锁与开停车的理解。"
+              "编辑差距：转设备看护须补目标设备/反应和取样维护细节，整体系统经验可重叠；不是转出时反而缺整套系统经验。"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.34",
@@ -31021,7 +31008,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较小。化工设备操作与看护员方向是本职业最直接的相邻方向，但责任范围收窄到单套或单元设备。"
+              "编辑能力比较：转向距离：较小。化工设备操作与看护员方向是本职业最直接的相邻方向，但责任范围收窄到单套或单元设备。；距离非量化研究或工资/转岗成功率，具体任务资格另核。"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.36",
@@ -31054,7 +31041,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。化学技术员方向更依赖实验室方法与仪器与数据出具能力。"
+              "编辑能力比较：转向距离：中等。化学技术员方向更依赖实验室方法与仪器与数据出具能力。；距离非量化研究或工资/转岗成功率，具体任务资格另核。"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.39",
@@ -31065,7 +31052,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少工艺计算、放大判断与工艺文件编制的系统训练，且通常需要相应学历与工程资格。"
+              "编辑差距：补工程计算/设计放大和文件能力；美国典型本科，许可按业务/法域核，不统一所有工程入门持证。"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.40",
@@ -31087,7 +31074,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：大。化学工程师方向需要工程学历与设计能力，不是运行经验的自然延伸。"
+              "编辑能力比较：转向距离：大。化学工程师方向需要工程学历与设计能力，不是运行经验的自然延伸。；距离非量化研究或工资/转岗成功率，具体任务资格另核。"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.42",
@@ -31120,7 +31107,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。固定式发动机与锅炉操作员方向通常另有按法域签发的取证要求。"
+              "编辑距离中等：补锅炉/公用工程技能；资格按设备/辖区，不统一全部目标需证。"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.45",
@@ -31153,7 +31140,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。水与废水处理厂与系统操作员方向的对象与法规体系不同。"
+              "编辑能力比较：转向距离：中等。水与废水处理厂与系统操作员方向的对象与法规体系不同。；距离非量化研究或工资/转岗成功率，具体任务资格另核。"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.48",
@@ -31164,7 +31151,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少气体生产与净化系统与气体纯度控制的专门经验。"
+              "编辑差距：补气体分配/处理、压缩/液化/再气化、主干管压力和检测控制，不限气体生产纯度。"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.49",
@@ -31186,7 +31173,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较小。气体厂操作员方向以气体生产与净化系统为主，产品与工况相对集中。"
+              "编辑距离比较：过程控制经验重叠，具体气体/管线和安全条件另核，不把产品/工况都称集中。"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.51",
@@ -31219,7 +31206,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。粉碎与研磨与抛光机器操作员方向以物料预处理为主。"
+              "编辑距离比较：补粉碎研磨与粒径/粉尘控制，任务不限预处理；具体物料危害和资格另核。"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.54",
@@ -31252,7 +31239,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。工业机械维修技师方向更偏检修与故障诊断，通常另有培训或认证要求。"
+              "编辑距离中等：补拆装、诊断、测试维修和制造商手册能力；资格/培训按任务辖区核，不统一称需行业认证。"
             ]
           },
           "id": "chemical-plant-and-system-operators.market-signals.market-signal-card.57",
@@ -31395,7 +31382,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容由费马测试职业内容编辑组按公开官方来源整理，职业身份、任务与工作情境采用 O*NET-SOC 51-8091.00，美国工资采用 BLS OEWS（2025 年 5 月），就业与展望采用 BLS 就业预测（2024—2034 年，经 O*NET 页面显示）；编辑归纳与虚构练习单独标注。"
+              "费马测试按O*NET51-8091任务/情境、BLS2025工资/2025—2035预测、NBS2025制造业背景、大典2022及所列安全法规整理，辅助用途/能力比较为编辑分析。"
             ]
           },
           "id": "chemical-plant-and-system-operators.sources.source-card.1",
@@ -31406,7 +31393,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源为美国 O*NET OnLine 与 U.S. Bureau of Labor Statistics 的公开页面，以及国家统计局与人力资源社会保障部的公开信息入口。所有数值均保留其职业、地域、期间、单位与统计口径；来源清单见页面「资料来源」。"
+              "一手依据含O*NET/BLS表1.2和OEWS方法、NBS行业表、大典正文、中国安法/19号令/设备法/工贸有限空间及OSHA适用规则、ILO/NIST；主页/目录不代具体法条或雇主事实。"
             ]
           },
           "id": "chemical-plant-and-system-operators.sources.source-card.2",
@@ -31417,7 +31404,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容检索与更新于 2026 年 9 月。"
+              "2026-10-09实际核读，工资2025/预测2025—2035/Hot Lightcast2025，中国背景2025、分类2022、19号令2026-06-01施行；认证/开放项目/全部地方要求未核。"
             ]
           },
           "id": "chemical-plant-and-system-operators.sources.source-card.3",
@@ -31772,6 +31759,231 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国特种作业按实际目录类别，不按“化工操作员”名称统一取证。应急管理部19号令2026-06-01施行：第3/4/6条核直接特种作业、培训考核与操作证；危险化学品特种作业人员须高中或相当及以上。第9条有相应学历/技能证培训免予条件，免培训不等免考试或免证；23条证全国有效6年，26—29条换证/失效条件另核。特种设备人员按安全法13/14条与实际资格项目核，有限/受限空间培训审批不能统一称独立“有限空间操作证”。"
+                ],
+                "evidence_type": "部门规章正文",
+                "id": "cpso-special",
+                "limitation": "中国特种作业按实际目录类别，不按“化工操作员”名称统一取证。应急管理部19号令2026-06-01施行：第3/4/6条核直接特种作业、培训考核与操作证；危险化学品特种作业人员须高中或相当及以上。第9条有相应学历/技能证培训免予条件，免培训不等免考试或免证；23条证全国有效6年，26—29条换证/失效条件另核。特种设备人员按安全法13/14条与实际资格项目核，有限/受限空间培训审批不能统一称独立“有限空间操作证”。",
+                "market": "中国大陆",
+                "name": "特种作业培训考核19号令",
+                "period": "2026-06-01施行",
+                "publisher": "中国官方",
+                "scope": "contextual",
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国安法55条直接危及人身安全的紧急情况，从业人员可停止作业或采取可能应急措施后撤离，并履行及时报告；不以等待额外岗位批准为前提。普通调参、生产放行与恢复运行按具体规程和授权核，不能由页内建议给操作许可。"
+                ],
+                "evidence_type": "法律正文",
+                "id": "cpso-safety",
+                "limitation": "中国安法55条直接危及人身安全的紧急情况，从业人员可停止作业或采取可能应急措施后撤离，并履行及时报告；不以等待额外岗位批准为前提。普通调参、生产放行与恢复运行按具体规程和授权核，不能由页内建议给操作许可。",
+                "market": "中国大陆",
+                "name": "安全生产法",
+                "period": "2021修正",
+                "publisher": "中国官方",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "13/14培训与相应资格，2条设备目录，不等全部化工岗位证"
+                ],
+                "evidence_type": "法律正文",
+                "id": "cpso-equipment",
+                "limitation": "13/14培训与相应资格，2条设备目录，不等全部化工岗位证",
+                "market": "中国大陆",
+                "name": "特种设备安全法",
+                "period": "2013",
+                "publisher": "中国官方",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2023/art_ad5e293574484b48b45047ee0ede6099.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2条限定工贸企业；4/5/7/9/14/15责任、监护、培训审批通风检测及撤离，不代独立许可证"
+                ],
+                "evidence_type": "部门规章正文",
+                "id": "cpso-confined",
+                "limitation": "2条限定工贸企业；4/5/7/9/14/15责任、监护、培训审批通风检测及撤离，不代独立许可证",
+                "market": "中国大陆",
+                "name": "工贸有限空间13号令",
+                "period": "2024-01-01施行",
+                "publisher": "中国官方",
+                "scope": "contextual",
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/202312/t20231208_471355.shtml"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "适用工艺覆盖、操作程序/人员培训与商业秘密，不跨套中国"
+                ],
+                "evidence_type": "联邦法规正文",
+                "id": "cpso-psm",
+                "limitation": "适用工艺覆盖、操作程序/人员培训与商业秘密，不跨套中国",
+                "market": "美国",
+                "name": "OSHA1910.119",
+                "period": "2026-10-09核读",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.119"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "适用检修危险能量控制/授权与受影响人员培训，不凭任务清单维修"
+                ],
+                "evidence_type": "联邦法规正文",
+                "id": "cpso-loto",
+                "limitation": "适用检修危险能量控制/授权与受影响人员培训，不凭任务清单维修",
+                "market": "美国",
+                "name": "OSHA1910.147",
+                "period": "2026-10-09核读",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "不能依赖嗅觉检测硫化氢；合格人员用适当仪器，非所有气体统一限值"
+                ],
+                "evidence_type": "官方安全指南",
+                "id": "cpso-h2s",
+                "limitation": "不能依赖嗅觉检测硫化氢；合格人员用适当仪器，非所有气体统一限值",
+                "market": "美国",
+                "name": "OSHA硫化氢暴露控制",
+                "period": "2026-10-09核读",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/hydrogen-sulfide/evaluating-controlling-exposure"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "非强制化工流程或效率实测"
+                ],
+                "evidence_type": "官方自愿治理框架",
+                "id": "cpso-nist",
+                "limitation": "非强制化工流程或效率实测",
+                "market": "跨行业",
+                "name": "NIST AI RMF1.0",
+                "period": "2023",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "受雇覆盖及工资包含排除项"
+                ],
+                "evidence_type": "官方统计方法",
+                "id": "cpso-methods",
+                "limitation": "受雇覆盖及工资包含排除项",
+                "market": "美国",
+                "name": "OEWS2025技术说明",
+                "period": "2025估计方法",
+                "publisher": "BLS",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/current/oes_tec.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "国家统计局2025制造业城镇非私营113,594元/年、私营76,055元/年，均为单位全部就业岗位税前年平均背景，非化工装置操作员工资/中位/起薪/上下限/月薪。"
+                ],
+                "evidence_type": "官方行业统计",
+                "id": "cpso-nbs",
+                "limitation": "国家统计局2025制造业城镇非私营113,594元/年、私营76,055元/年，均为单位全部就业岗位税前年平均背景，非化工装置操作员工资/中位/起薪/上下限/月薪。",
+                "market": "中国大陆",
+                "name": "NBS2025制造业单位工资",
+                "period": "2025",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "大典2022物理381—382页化工总控工6-11-01-03：操作仪表及自动控制系统监控/调节反应或单元操作，开停车、调工艺参数/分析生产状况、协助现场、试车验收、物料能量平衡及回收消耗核定、设备异常和生产记录。与美国51-8091职责重叠，未建立一一统计映射；产品和具体任务须另分类。"
+                ],
+                "evidence_type": "官方分类正文",
+                "id": "cpso-class",
+                "limitation": "大典2022物理381—382页化工总控工6-11-01-03：操作仪表及自动控制系统监控/调节反应或单元操作，开停车、调工艺参数/分析生产状况、协助现场、试车验收、物料能量平衡及回收消耗核定、设备异常和生产记录。与美国51-8091职责重叠，未建立一一统计映射；产品和具体任务须另分类。",
+                "market": "中国大陆",
+                "name": "大典化工总控工正文",
+                "period": "2022物理381—382页",
+                "publisher": "中国官方",
+                "scope": "contextual",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET详情2025制造业占87%；当前行业子页87%、其他13%（含专业科学技术服务/批发），子页未另标资料年；行业占比不是工资。 19全Core任务/17风格/5软件类别"
+                ],
+                "evidence_type": "官方职业调查",
+                "id": "cpso-details",
+                "limitation": "O*NET详情2025制造业占87%；当前行业子页87%、其他13%（含专业科学技术服务/批发），子页未另标资料年；行业占比不是工资。 19全Core任务/17风格/5软件类别",
+                "market": "美国",
+                "name": "O*NET当前本职业详情",
+                "period": "2026更新/行业2025",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-8091.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "3名称Excel6/Office6/Word2%，非工业控制部署率"
+                ],
+                "evidence_type": "招聘数据统计",
+                "id": "cpso-hot",
+                "limitation": "3名称Excel6/Office6/Word2%，非工业控制部署率",
+                "market": "美国",
+                "name": "O*NET本职业招聘Hot",
+                "period": "Lightcast2025",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/51-8091.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS表1.2精确51-8091：2025就业16.7千、2035预测15.9千，官方净变化−0.9千、−5.2%（OOH舍入−5%，下降），年均空缺1.3千，含增长与替补；端点/净值分别舍入，不据端点重算覆盖官方净值。自雇“—”非0。典型高中/GED、相关经验None、中等期限在岗培训。"
+                ],
+                "evidence_type": "官方就业预测",
+                "id": "cpso-ep",
+                "limitation": "BLS表1.2精确51-8091：2025就业16.7千、2035预测15.9千，官方净变化−0.9千、−5.2%（OOH舍入−5%，下降），年均空缺1.3千，含增长与替补；端点/净值分别舍入，不据端点重算覆盖官方净值。自雇“—”非0。典型高中/GED、相关经验None、中等期限在岗培训。",
+                "market": "美国",
+                "name": "BLS表1.2",
+                "period": "2025—2035",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本职业典型高中/GED/中期OJT、下降5%舍入，非行业工资表"
+                ],
+                "evidence_type": "官方职业概况",
+                "id": "cpso-ooh",
+                "limitation": "本职业典型高中/GED/中期OJT、下降5%舍入，非行业工资表",
+                "market": "美国",
+                "name": "OOH未详细覆盖清单",
+                "period": "2025—2035",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm"
               }
             ]
           },
@@ -33984,7 +34196,8 @@
             },
             "evidence_refs": [
               "onet",
-              "onet-context"
+              "onet-context",
+              "cpso-psm"
             ],
             "id": "limit-exceedance",
             "mitigation": {
@@ -34016,7 +34229,8 @@
             },
             "evidence_refs": [
               "onet",
-              "onet-context"
+              "onet-context",
+              "cpso-safety"
             ],
             "id": "alarm-reading-integrity",
             "mitigation": {
@@ -34047,8 +34261,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-context"
+              "onet-context",
+              "cpso-safety",
+              "cpso-h2s"
             ],
             "id": "overspill-leak-exposure",
             "mitigation": {
@@ -34080,7 +34295,9 @@
             },
             "evidence_refs": [
               "onet",
-              "onet-summary"
+              "cpso-loto",
+              "cpso-confined",
+              "cpso-psm"
             ],
             "id": "shutdown-changeover-control",
             "mitigation": {
@@ -34111,8 +34328,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-industry"
+              "cpso-psm",
+              "editorial"
             ],
             "id": "controlled-information",
             "mitigation": {
@@ -34144,7 +34361,8 @@
             },
             "evidence_refs": [
               "onet",
-              "ilo"
+              "ilo",
+              "editorial"
             ],
             "id": "skill-obsolescence",
             "mitigation": {
@@ -34278,6 +34496,42 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html",
+            "id": "cpso-safety",
+            "label": "安全生产法",
+            "scope": "中国安法55紧急停止撤离及59及时报告，普通停复工按实际程序。"
+          },
+          {
+            "href": "https://www.osha.gov/hydrogen-sulfide/evaluating-controlling-exposure",
+            "id": "cpso-h2s",
+            "label": "OSHA硫化氢暴露控制",
+            "scope": "OSHA硫化氢检测指南，不依赖嗅觉，不推所有气体阈值。"
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147",
+            "id": "cpso-loto",
+            "label": "OSHA1910.147",
+            "scope": "美国1910.147实际适用检修危险能量控制与授权培训。"
+          },
+          {
+            "href": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/202312/t20231208_471355.shtml",
+            "id": "cpso-confined",
+            "label": "工贸有限空间13号令",
+            "scope": "中国13号令限定工贸企业；审批监护培训通风检测与异常撤离。"
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.119",
+            "id": "cpso-psm",
+            "label": "OSHA1910.119",
+            "scope": "美国1910.119按(a)覆盖工艺，(f)/(g)程序培训及(p)安全信息取得与保密。"
+          },
+          {
+            "href": "#career-visual-group-risk",
+            "id": "editorial",
+            "label": "编辑核对建议",
+            "scope": "记录及能力更新为编辑核对，不是控制实测或操作许可。"
           }
         ]
       },
@@ -34630,10 +34884,8 @@
             "type": "prose"
           },
           "fact_refs": [
-            "cn-industry-science-tech-2024",
-            "cn-industry-manufacturing-2024",
-            "cn-professional-technical-2024",
-            "cn-urban-nonprivate-2024"
+            "cpso-cn-nonprivate",
+            "cpso-cn-private"
           ],
           "sources_note": {
             "$item": "chemical-plant-and-system-operators.china-salary.career-snapshot-primary-locale.57",
@@ -34644,7 +34896,7 @@
           "ui": {
             "ai_heading": "AI 会影响化工装置操作员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "精确职业缺口与制造业年度工资背景",
             "scenario_caption": "学历背景、岗位方向与说明（编辑整理，不是薪资统计）",
             "scenario_heading": "不同学历背景对应哪些岗位方向？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -34769,7 +35021,7 @@
             }
           },
           {
-            "fact_ref": "us-growth-2025-2035",
+            "fact_ref": "cpso-growth",
             "指标": "就业 · 增长率",
             "数值": {
               "$item": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.21",
@@ -34785,7 +35037,7 @@
             }
           },
           {
-            "fact_ref": "us-openings-2025-2035",
+            "fact_ref": "cpso-openings",
             "指标": "就业 · 年均职位空缺",
             "数值": {
               "$item": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.23",
@@ -34866,13 +35118,10 @@
         },
         "heading": "美国化工装置操作员工资与就业数据？",
         "industry_heading": "不同行业的美国工资差多少？",
-        "industry_period": {
-          "$fact": "us-wage-2025",
-          "field": "period"
-        },
+        "industry_period": "工资资料2025年；行业分布详情2025/当前子页",
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "cpso-industry-gap-0",
             "industry": {
               "$item": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -34893,7 +35142,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "cpso-industry-gap-1",
             "industry": {
               "$item": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -34914,7 +35163,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "cpso-industry-gap-2",
             "industry": {
               "$item": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -34935,7 +35184,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "cpso-industry-gap-3",
             "industry": {
               "$item": "chemical-plant-and-system-operators.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -35004,7 +35253,7 @@
         },
         "outlook_heading": "美国就业前景",
         "outlook_period": {
-          "$fact": "us-growth-2025-2035",
+          "$fact": "cpso-growth",
           "field": "period"
         },
         "wage_column_labels": [
@@ -35645,7 +35894,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 工资（2025 年 5 月 OEWS）与就业预测（2024—2034 年）",
+            "label": "BLS2025工资与2025—2035就业预测",
             "secondary_value": null,
             "value": {
               "$item": "chemical-plant-and-system-operators.profile.onet-structured-fields-block.2",
@@ -35656,7 +35905,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中国大陆统计口径与缺口（本条路由不发布数值）",
+            "label": "中国精确职业缺口与制造业年度背景",
             "secondary_value": null,
             "value": {
               "$item": "chemical-plant-and-system-operators.profile.onet-structured-fields-block.3",
@@ -35667,7 +35916,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 行业分布与就业结构（行业工资表为访问缺口）",
+            "label": "美国2025行业分布与未取得的行业职业工资",
             "secondary_value": null,
             "value": {
               "$item": "chemical-plant-and-system-operators.profile.onet-structured-fields-block.4",
@@ -36951,6 +37200,106 @@
         "source_refs": [
           "onet-localwages"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "制造业城镇非私营单位113,594元/年（税前平均，2025）",
+        "fact_id": "cpso-cn-nonprivate",
+        "market": "中国大陆",
+        "measure": "行业单位全部岗位年均",
+        "occupation_scope": "制造业，非本职业",
+        "period": "2025",
+        "source_refs": [
+          "cpso-nbs"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "制造业城镇私营单位76,055元/年（税前平均，2025）",
+        "fact_id": "cpso-cn-private",
+        "market": "中国大陆",
+        "measure": "行业单位全部岗位年均",
+        "occupation_scope": "制造业，非本职业",
+        "period": "2025",
+        "source_refs": [
+          "cpso-nbs"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "下降5.2%（OOH舍入5%）",
+        "fact_id": "cpso-growth",
+        "market": "美国",
+        "measure": "官方预测变化率",
+        "occupation_scope": "SOC51-8091",
+        "period": "2025—2035",
+        "source_refs": [
+          "cpso-ep"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约1,300个/年",
+        "fact_id": "cpso-openings",
+        "market": "美国",
+        "measure": "官方年均空缺含增长与替补",
+        "occupation_scope": "SOC51-8091",
+        "period": "2025—2035",
+        "source_refs": [
+          "cpso-ep"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：本轮未取得制造业本职业工资中位",
+        "fact_id": "cpso-industry-gap-0",
+        "market": "美国",
+        "measure": "本轮未取得细分职业工资",
+        "occupation_scope": "SOC51-8091；制造业",
+        "period": "2025",
+        "source_refs": [
+          "cpso-details",
+          "cpso-methods"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：本轮未取得其他行业本职业工资中位",
+        "fact_id": "cpso-industry-gap-1",
+        "market": "美国",
+        "measure": "本轮未取得细分职业工资",
+        "occupation_scope": "SOC51-8091；其他行业",
+        "period": "2025",
+        "source_refs": [
+          "cpso-details",
+          "cpso-methods"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：本轮未取得更多行业细分本职业工资中位",
+        "fact_id": "cpso-industry-gap-2",
+        "market": "美国",
+        "measure": "本轮未取得细分职业工资",
+        "occupation_scope": "SOC51-8091；更多行业细分",
+        "period": "2025",
+        "source_refs": [
+          "cpso-details",
+          "cpso-methods"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：本轮未取得所有制/地区本职业工资中位",
+        "fact_id": "cpso-industry-gap-3",
+        "market": "美国",
+        "measure": "本轮未取得细分职业工资",
+        "occupation_scope": "SOC51-8091；所有制/地区",
+        "period": "2025",
+        "source_refs": [
+          "cpso-details",
+          "cpso-methods"
+        ]
       }
     ]
   },
@@ -36959,7 +37308,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "RIASEC · RCI",
@@ -37010,7 +37359,7 @@
       "text": "化工装置操作员"
     }
   },
-  "source_content_sha256": "bf6d7b45631c6106ead407a1ecde69863ad39519450675dbf34d6a15b4588e9c",
+  "source_content_sha256": "1e902d879d45281e37d39d86102dee00fff06afd8be4d2af899cad4533efe9b5",
   "subject": {
     "canonical_slug": "chemical-plant-and-system-operators",
     "name": "化工装置操作员",

@@ -13903,7 +13903,7 @@
             }
           }
         ],
-        "answer": "AI可辅助整理巡查、采样和整改记录；是否采用、如何核实异常、采取何种控制以及停复工决定仍依现场证据和授权程序。现有来源不支持本职业替代率。",
+        "answer": "可在巡查、采样和整改记录整理中探索AI辅助，以下用途是编辑建议；本页未提供本职业采用率、实测效果或替代率。异常核实、控制与停复工决定仍依现场证据和授权程序。",
         "authority_links": [
           {
             "来源": "ILO数字化与AI在职业安全健康中的作用",
@@ -13948,7 +13948,7 @@
             "链接": "https://www.onetonline.org/link/details/19-5011.00"
           }
         ],
-        "difference_intro": "分别看任务、工具和责任：同一系统可能加快记录处理，却无法从缺失或错误的现场证据中得出可靠控制结论。",
+        "difference_intro": "以下是依据职业任务提出的编辑试用建议；本页未测量记录处理速度、识别准确率或整改效果，不能视为已经发生的职业变化。",
         "difference_rows": [
           {
             "AI主要改变": "汇总图片与检查记录，提示疑似缺失防护。",
@@ -14151,7 +14151,7 @@
             "人的控制点": "确认语言、工况、适用标准及理解情况",
             "任务": "生成不同受众的安全提示草稿",
             "工作方向": "培训沟通",
-            "当前变化": "可提高初稿速度"
+            "当前变化": "编辑试用建议：起草提示语，逐项核对事实；节时效果尚未在本页验证"
           },
           {
             "人的控制点": "授权人确认完成条件并签收",
@@ -15117,11 +15117,11 @@
             "geography": "中国",
             "horizon": "2025",
             "interpretation": "国家统计局宽行业工资不能替代本职业就业预测；看具体地区招聘。",
-            "limitation": "没有可与BLS同口径比较的中国预测。",
+            "limitation": "本次核对的BLS/O*NET是美国统计，国家统计局是中国宽岗位工资；不能据此给出本职业中国增速。",
             "metric": "本职业就业增速",
             "occupation_scope": "职业健康与安全专员及技术员",
             "source_id": "nbs",
-            "value": "暂无同口径公开数值"
+            "value": "证据不足：本次所核来源未取得中国同口径职业就业预测"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -15284,8 +15284,8 @@
             "watchout": "只提示是否喜欢调查、分析和帮助他人，不判断能否执业。"
           },
           {
-            "answer": "观察自己能否记录校准、时间、位置和版本；量表不能预测安全绩效。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "观察自己能否记录校准、时间、位置和版本；本页未提供量表预测该职业安全绩效的验证证据。",
+            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
             "cta_label": "用大五观察工作习惯",
             "evidence_level": "自我反思工具；不提供职业胜任预测",
             "id": "big-five",
@@ -15301,7 +15301,7 @@
           },
           {
             "answer": "用A/B/C案例向同伴讲清已知、未知和升级对象，不以类型定岗位。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
             "cta_label": "用MBTI提出沟通问题",
             "evidence_level": "自我反思工具；不提供职业胜任预测",
             "id": "mbti",
@@ -15318,7 +15318,7 @@
           {
             "answer": "模拟发现A防护缺失时能否暂停判断并按程序上报。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "用九型提问压力反应",
+            "cta_label": "用兴趣量表补充任务偏好",
             "evidence_level": "自我反思工具；不提供职业胜任预测",
             "id": "enneagram",
             "label": "九型压力反应",
@@ -15334,7 +15334,7 @@
           {
             "answer": "试读O*NET任务和OSHA控制指南，再解释采样误差与控制顺序。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "用认知题反思学习方式",
+            "cta_label": "用兴趣量表补充任务偏好",
             "evidence_level": "自我反思工具；不提供职业胜任预测",
             "id": "iq",
             "label": "认知学习",
@@ -15345,12 +15345,12 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "学习标准与解释数据比单次分数更重要。"
+            "watchout": "将学习标准和解释数据的实际表现与岗位要求对照；本页没有量表与工作样本预测效度的比较证据。"
           },
           {
             "answer": "让同伴挑战B采样和C湿滑方案，记录分歧并修订。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "用情绪能力提问沟通",
+            "cta_label": "用兴趣量表补充任务偏好",
             "evidence_level": "自我反思工具；不提供职业胜任预测",
             "id": "eq",
             "label": "情绪与协作",
@@ -15572,7 +15572,7 @@
             "type": "prose"
           },
           "source": "BLS、O*NET、OSHA、中国国家统计局与应急管理部公开资料；各结论按来源口径标注。",
-          "updated_at": "2026-09-26 核对来源与页面内容"
+          "updated_at": "2026-10-12 核对本次九模块来源与内容"
         },
         "note": "证据只支持职业健康与安全专员及技术员在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -15775,7 +15775,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "职业健康与安全专员及技术员 · 美国组合职业",
@@ -15826,7 +15826,7 @@
       "text": "职业健康与安全专员及技术员"
     }
   },
-  "source_content_sha256": "6bc0960d56bd4fb23bb3f2886b04b5fd7b2b9dfb9ed64f38b2a85be311106de1",
+  "source_content_sha256": "10e408d775bf85ea449e4265b7b50bd69b2dc77f5a658196ded79850daa4d68b",
   "subject": {
     "canonical_slug": "occupational-health-and-safety-specialists-and-technicians",
     "name": "职业健康与安全专员及技术员",

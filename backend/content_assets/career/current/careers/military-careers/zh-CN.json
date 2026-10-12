@@ -11749,7 +11749,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 均未发布该军事职业代码（55-3019.00）的工资与就业数据；本页不以外推或代理数字填补。"
+              "证据不足：55-3019.00无职业工资分布；BLS军事总体说明基本薪酬按军衔、服役时间，同薪级跨军种，额外给付与住房另核；DFAS现行表须按实际等级和条件，不填本代码分位。"
             ]
           },
           "id": "military-careers.us-salary.career-snapshot-secondary-locale.1",
@@ -11841,7 +11841,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "该代码没有可引用的官方兴趣代码，本页不提供适配判断。",
+              "本代码无RIASEC调查；兴趣探索不代军种标准",
               "把信号与真实观察、军种官方说明对照。"
             ]
           },
@@ -11856,7 +11856,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "愿意核对代码范围与来源。",
+              "大五描述倾向；来源核对不是军事岗位胜任证据",
               "能区分“没有数据”与“数值为零”。",
               "遇到缺口会如实登记并继续。"
             ]
@@ -11872,7 +11872,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "该代码没有官方兴趣代码，不能用其他职业代码替代。",
+              "MBTI只作探索，不代军种资格/安全评估",
               "人格工具不能替代军种资格与安全评估。"
             ]
           },
@@ -11887,7 +11887,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "强匹配证据是能核对的来源与范围，而不是自我标签。",
+              "九型探索动机，不能据此预测军种选拔或职责表现",
               "把结论限定在来源支持的范围。"
             ]
           },
@@ -11902,7 +11902,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "若能在信息不足时主动缩小结论，是比性格标签更强的信号。",
+              "民用认知测验不代军种正式选拔，须核实际标准",
               "把信号与具体工作样本和官方说明对照。"
             ]
           },
@@ -11917,7 +11917,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "若你倾向于用标签代替证据，应先练习来源核对。",
+              "EQ仅探索，不能替代军种评估或任务授权",
               "把结论限定在来源支持的范围。"
             ]
           },
@@ -11968,7 +11968,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "把民用职业数据当作军事岗位结论：引用其他职业的任务或工资推断本代码；控制为标注代码与来源边界，只陈述来源支持的范围。"
+              "此处是编辑使用来源的风险控制，非该军事代码的职业伤害调查；没有具体工作风险调查，不据此推断部署环境。"
             ]
           },
           "id": "military-careers.risk.career-risk-cards.1",
@@ -11982,7 +11982,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "把总体说明当岗位级数据：用 BLS 军事职业总体说明推断具体岗位待遇；控制为明确来源只提供总体说明。"
+              "读者应先确认代码、军种和官方来源，数据或授权疑问交实际机构核验。"
             ]
           },
           "id": "military-careers.risk.career-risk-cards.2",
@@ -11996,7 +11996,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "忽略授权与安全约束：把工具或流程当作可直接套用；控制为以军种官方规则与授权为准。"
+              "O*NET说明不收集，BLS提供军事总体信息；不能拼成岗位级证据。"
             ]
           },
           "id": "military-careers.risk.career-risk-cards.3",
@@ -12010,7 +12010,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "推测未公开内容：对未公开的能力或要求作具体描述；控制为不推测未公开内容，缺口如实标注。"
+              "误用民用职业数据的编辑与读者。"
             ]
           },
           "id": "military-careers.risk.career-risk-cards.4",
@@ -12024,7 +12024,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "共同规则：遇到来源不适用、数据缺口或授权疑问时，先保留来源证据、限制结论范围，把事实与待决问题交有权限者确认后再更新页面；不得把“未发布”当成零值。"
+              "可能对职责、工资或资格形成错误预期。"
             ]
           },
           "id": "military-careers.risk.career-risk-cards.5",
@@ -12909,46 +12909,46 @@
         "answer": "该代码没有 O*NET 任务与工资数据；关于 AI 的影响只能作一般性讨论，须以军种官方说明与授权为准，不能据此推断岗位替代。",
         "authority_links": [
           {
-            "来源": "55-3019.00 - Military Enlisted Tactical Operations and Air/Weapons Specialists and Crew Members, All Other",
+            "来源": "代码范围",
             "类型": "官方职业来源",
-            "适用范围": "仅用于说明代码范围与数据边界",
+            "适用范围": "身份或官方信息入口；非本代码AI采用证明",
             "链接": "https://www.onetonline.org/link/summary/55-3019.00"
           },
           {
-            "来源": "Military Careers (BLS Occupational Outlook Handbook)",
+            "来源": "军事总体",
             "类型": "官方统计来源",
-            "适用范围": "仅用于说明代码范围与数据边界",
+            "适用范围": "身份或官方信息入口；非本代码AI采用证明",
             "链接": "https://www.bls.gov/ooh/military/military-careers.htm"
           },
           {
-            "来源": "O*NET OnLine",
+            "来源": "美国陆军入口",
             "类型": "官方职业来源",
-            "适用范围": "仅用于说明代码范围与数据边界",
-            "链接": "https://www.onetonline.org/link/summary/55-3019.00"
+            "适用范围": "身份或官方信息入口；非本代码AI采用证明",
+            "链接": "https://www.army.mil/"
           },
           {
-            "来源": "O*NET OnLine",
+            "来源": "美国海军入口",
             "类型": "官方职业来源",
-            "适用范围": "仅用于说明代码范围与数据边界",
-            "链接": "https://www.onetonline.org/link/details/55-3019.00"
+            "适用范围": "身份或官方信息入口；非本代码AI采用证明",
+            "链接": "https://www.navy.mil/"
           },
           {
-            "来源": "O*NET OnLine",
+            "来源": "美国空军入口",
             "类型": "官方职业来源",
-            "适用范围": "仅用于说明代码范围与数据边界",
-            "链接": "https://www.onetonline.org/link/custom/55-3019.00"
+            "适用范围": "身份或官方信息入口；非本代码AI采用证明",
+            "链接": "https://www.af.mil/"
           },
           {
-            "来源": "O*NET OnLine",
+            "来源": "美国海军陆战队入口",
             "类型": "官方职业来源",
-            "适用范围": "仅用于说明代码范围与数据边界",
-            "链接": "https://www.onetonline.org/link/hot_tech/55-3019.00"
+            "适用范围": "身份或官方信息入口；非本代码AI采用证明",
+            "链接": "https://www.marines.mil/"
           },
           {
-            "来源": "O*NET OnLine",
+            "来源": "美国太空军入口",
             "类型": "官方职业来源",
-            "适用范围": "仅用于说明代码范围与数据边界",
-            "链接": "https://www.onetonline.org/link/localtraining/55-3019.00"
+            "适用范围": "身份或官方信息入口；非本代码AI采用证明",
+            "链接": "https://www.spaceforce.mil/"
           }
         ],
         "difference_intro": "本页不对该代码做方向差异的量化比较。",
@@ -12969,7 +12969,7 @@
             "方向": "数据边界"
           }
         ],
-        "evidence_intro": "三类证据分开核对：本页没有该代码的任务级数据，不把一般性讨论写成职业结论。",
+        "evidence_intro": "证据不足：未取得本代码任务调查、实际AI采用、可靠效果或净就业因果；不收集不等于任务不存在，也不等于AI零影响。",
         "evidence_rows": [
           {
             "使用限制": "不构成任务、工资或就业结论。",
@@ -12996,14 +12996,14 @@
             "使用限制": "不得用其他职业数据替代。",
             "来源": "O*NET OnLine",
             "研究对象": "军事职业数据说明",
-            "结论": "任务与工作情境数据不存在",
+            "结论": "该O*NET档未发布调查，非现实任务不存在",
             "链接": "https://www.onetonline.org/link/details/55-3019.00"
           },
           {
             "使用限制": "不用于推断授权或资格。",
             "来源": "O*NET OnLine",
             "研究对象": "职业代码与相邻代码关系",
-            "结论": "相邻代码不能替代本代码结论",
+            "结论": "邻近军事代码只能核范围，不能填本代码任务调查",
             "链接": "https://www.onetonline.org/link/custom/55-3019.00"
           }
         ],
@@ -13119,45 +13119,45 @@
         "task_rows": [
           {
             "人的控制点": "不以民用数据替代",
-            "任务": "该代码没有 O*NET 任务清单",
+            "任务": "O*NET未收集本代码任务，不能据此作AI暴露度测算",
             "工作方向": "数据状态",
-            "当前变化": "无职业级任务数据可测算"
+            "当前变化": "编辑信息核对：无职业级任务数据可测算"
           },
           {
             "人的控制点": "由授权机构决定",
             "任务": "军事工具使用受授权与安全规则约束",
             "工作方向": "授权与安全",
-            "当前变化": "采用取决于军种授权"
+            "当前变化": "编辑信息核对：采用取决于军种授权"
           },
           {
             "人的控制点": "由有权限者确认",
             "任务": "高风险判断由有授权者确认",
             "工作方向": "人工复核",
-            "当前变化": "不得自动放行"
+            "当前变化": "编辑信息核对：不得自动放行"
           },
           {
             "人的控制点": "按规程留痕",
             "任务": "行动与设备记录须按规定留痕",
             "工作方向": "记录与审计",
-            "当前变化": "按军种规定记录"
+            "当前变化": "编辑信息核对：按军种规定记录"
           },
           {
             "人的控制点": "按军种标准核验",
             "任务": "资质与训练由军种认定",
             "工作方向": "训练与资质",
-            "当前变化": "按军种规定认定"
+            "当前变化": "编辑信息核对：按军种规定认定"
           },
           {
             "人的控制点": "回到官方来源核对",
             "任务": "任务条件随单位与部署变化",
             "工作方向": "部署条件",
-            "当前变化": "以官方说明为准"
+            "当前变化": "编辑信息核对：以官方说明为准"
           },
           {
             "人的控制点": "按授权范围处理",
             "任务": "本页不含涉密或未授权信息",
             "工作方向": "信息边界",
-            "当前变化": "不推测未公开能力"
+            "当前变化": "编辑信息核对：不推测未公开能力"
           }
         ],
         "transition": "继续了解军事职业请以各军种官方来源为准；本页不作岗位级结论。"
@@ -13198,7 +13198,7 @@
         ],
         "direct_answer": "该代码没有可引用的 O*NET 任务、工资与就业数据；了解资格、训练与岗位要求请以各军种官方来源为准。",
         "entry_heading": "从了解范围到核对官方来源",
-        "heading": "军事职业的资格与信息来源",
+        "heading": "军事职业的官方核对与资格边界",
         "locale_requirements": {
           "credential_boundary": "训练经历、资格与授权不是同一状态；本页不判定任何个人是否符合军事岗位要求。",
           "jurisdiction": "本页采用美国 O*NET/BLS 口径说明数据边界；具体资格与待遇规则以官方主管部门为准。",
@@ -13209,25 +13209,25 @@
           {
             "href": "https://www.bls.gov/ooh/military/military-careers.htm",
             "id": "bls",
-            "label": "Military Careers, Occupational Outlook Handbook",
+            "label": "BLS军事职业总体",
             "scope": "代码范围与数据状态"
           },
           {
-            "href": "https://www.bls.gov/ooh/military/military-careers.htm",
+            "href": "https://www.onetonline.org/link/summary/55-3019.00",
             "id": "nasa",
-            "label": "Military Careers, Occupational Outlook Handbook",
+            "label": "O*NET代码范围",
             "scope": "军事职业总体说明"
           },
           {
-            "href": "https://www.bls.gov/ooh/military/military-careers.htm",
+            "href": "https://www.army.mil/",
             "id": "onet-training",
-            "label": "Military Careers, Occupational Outlook Handbook",
+            "label": "美国陆军官方入口",
             "scope": "来源登记"
           },
           {
-            "href": "https://www.bls.gov/ooh/military/military-careers.htm",
+            "href": "https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/",
             "id": "faa",
-            "label": "Military Careers, Occupational Outlook Handbook",
+            "label": "现行薪酬表入口",
             "scope": "来源登记"
           }
         ],
@@ -13506,7 +13506,7 @@
         "context_links": [
           {
             "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-risk"
+            "label": "查看官方信息与转向边界"
           }
         ],
         "direct_answer": {
@@ -13537,73 +13537,73 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet"
+              "onet-details",
+              "bls-military-careers"
             ],
             "id": "cost-change",
             "mitigation": "标注代码与来源边界，只陈述来源实际支持的范围。",
             "scenario": "把民用职业数据当作军事岗位结论：引用其他职业的任务或工资来推断本代码。",
-            "title": "其他军事战术行动与空中/武器专业人员"
+            "title": "民用数据错套"
           },
           {
             "affected_roles": "引用统计数据的编辑与读者。",
             "consequence": "可能造成对岗位待遇与要求的误判。",
             "evidence_refs": [
-              "onet",
-              "privacy"
+              "onet-details",
+              "bls-military-careers"
             ],
             "id": "record-version",
             "mitigation": "明确来源只提供总体说明，不作岗位级结论。",
             "scenario": "把总体说明当岗位级数据：用 BLS 军事职业总体说明推断具体岗位待遇。",
-            "title": "其他军事战术行动与空中/武器专业人员"
+            "title": "总体信息错用"
           },
           {
             "affected_roles": "涉及军事岗位信息的使用者。",
             "consequence": "可能误导安全与合规预期。",
             "evidence_refs": [
-              "privacy",
-              "privacy"
+              "onet-details",
+              "bls-military-careers"
             ],
             "id": "personal-data",
             "mitigation": "以军种官方规则与授权为准。",
             "scenario": "忽略授权与安全约束：把工具或流程当作可直接套用。",
-            "title": "其他军事战术行动与空中/武器专业人员"
+            "title": "授权与安全疑问"
           },
           {
             "affected_roles": "页面编辑与内容维护者。",
             "consequence": "可能涉及未授权信息并损害可信度。",
             "evidence_refs": [
-              "onet",
-              "onet"
+              "onet-details",
+              "bls-military-careers"
             ],
             "id": "technical-boundary",
             "mitigation": "不推测未公开内容，缺口如实标注。",
             "scenario": "推测未公开内容：对未公开的能力或要求作具体描述。",
-            "title": "其他军事战术行动与空中/武器专业人员"
+            "title": "未公开信息推测"
           },
           {
             "affected_roles": "阅读统计缺口的读者。",
             "consequence": "会造成错误的精确感。",
             "evidence_refs": [
-              "bls",
-              "bls"
+              "onet-details",
+              "bls-military-careers"
             ],
             "id": "single-coverage",
             "mitigation": "区分“没有数据”与“数值为零”，按数据不足规则处理。",
             "scenario": "把缺失当成零值：把“未发布”理解为“没有该职业”或“收入为零”。",
-            "title": "其他军事战术行动与空中/武器专业人员"
+            "title": "缺失值误当零"
           },
           {
             "affected_roles": "编辑、内容维护者与来源核对者。",
             "consequence": "可避免在证据不足时给出错误结论。",
             "evidence_refs": [
-              "onet",
-              "onet"
+              "onet-details",
+              "bls-military-careers"
             ],
             "id": "delivery-acceptance",
             "mitigation": "登记缺口并按官方来源更新。",
             "scenario": "共同规则：遇到来源不适用、数据缺口或授权疑问时，先保留来源证据、限制结论范围，把事实与待决问题交有权限者确认后再更新页面。",
-            "title": "其他军事战术行动与空中/武器专业人员"
+            "title": "来源与结论升级"
           }
         ],
         "schema_version": "career.work_risk.v1",
@@ -13627,10 +13627,10 @@
             "scope": "来源登记"
           },
           {
-            "href": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
+            "href": "https://www.bls.gov/ooh/military/military-careers.htm",
             "id": "nbs-wages-boundary",
-            "label": "2025年城镇单位就业人员年平均工资情况",
-            "scope": "公开信息边界"
+            "label": "BLS军事总体边界",
+            "scope": "总体背景，不证明部署或岗位法律义务"
           },
           {
             "href": "https://www.onetonline.org/link/details/55-3019.00",
@@ -13707,7 +13707,7 @@
               "需求": "待遇结构须回到官方规则核对。"
             }
           ],
-          "china_intl": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
+          "china_intl": "美国军事总体待遇背景｜https://www.bls.gov/ooh/military/military-careers.htm",
           "china_name_row": {
             "$item": "military-careers.china-salary.career-snapshot-primary-locale.1",
             "block": "china-salary",
@@ -13716,7 +13716,7 @@
           },
           "china_open": "军事职业的待遇与保障结构须回到主管部门与用人单位规则核对，本页不作推断。",
           "china_open_note": "如需判断，应回到具体岗位、机构与官方薪酬规则核对。",
-          "china_ref": "55-3019.00 Military Enlisted Tactical Operations and Air/Weapons Specialists and Crew Members, All Other｜https://www.onetonline.org/link/summary/55-3019.00",
+          "china_ref": "O*NET身份边界｜https://www.onetonline.org/link/summary/55-3019.00",
           "china_salary_note": {
             "$join": [
               "中国精确职业工资数据不可得；本页不展示或换算中国薪资数字。",
@@ -13765,7 +13765,7 @@
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "55-3019.00 occupation summary｜https://www.onetonline.org/link/summary/55-3019.00",
+        "authority_sources": "O*NET代码范围｜https://www.onetonline.org/link/summary/55-3019.00；BLS总体待遇｜https://www.bls.gov/ooh/military/military-careers.htm",
         "bls_table": [
           {
             "指标": "薪资第10百分位",
@@ -13793,12 +13793,12 @@
             "说明": "该代码无 BLS 工资数字｜https://www.bls.gov/ooh/military/military-careers.htm"
           },
           {
-            "指标": "就业人数（2024）",
+            "指标": "本代码就业规模",
             "数值": "未发布",
             "说明": "该代码无 BLS 就业数字｜https://www.bls.gov/ooh/military/military-careers.htm"
           },
           {
-            "指标": "就业前景（2024—2034）",
+            "指标": "本代码就业预测",
             "数值": "未发布",
             "说明": "该代码无 BLS 预测数字｜https://www.bls.gov/ooh/military/military-careers.htm"
           },
@@ -13811,7 +13811,7 @@
         "boundary": "美国该军事职业代码没有 O*NET 任务数据与 BLS 工资与就业数字；本页如实标注缺失，不以外推或代理数字填补。",
         "direct_answer": {
           "$join": [
-            "O*NET 不收集军事职业数据，BLS 未发布该代码的工资与就业数字",
+            "本代码无职业工资分布；BLS军事总体参考：基本薪酬按军衔和服役时间，军种共用薪级；任务/资格额外给付及住房安排另核，不是本代码中位数。",
             {
               "$item": "military-careers.us-salary.career-snapshot-secondary-locale.1",
               "block": "us-salary",
@@ -13823,12 +13823,12 @@
         },
         "factor_rows": [
           {
-            "answer": "以军种官方岗位说明与授权为准。",
-            "factor": "岗位与授权"
+            "answer": "BLS总体说明按军衔和服役时间；非55-3019专属职业工资",
+            "factor": "基本薪酬"
           },
           {
-            "answer": "以军种认定标准为准。",
-            "factor": "训练与资格"
+            "answer": "BLS总体说明任务/资格可能影响额外给付，住房或补助另核",
+            "factor": "其他待遇"
           },
           {
             "answer": "本页不载入涉密或未授权信息。",
@@ -13906,7 +13906,7 @@
         ],
         "median": "未发布",
         "outlook_heading": "数据状态",
-        "outlook_period": "当前",
+        "outlook_period": "BLS不编军事职业预测",
         "wage_column_labels": [
           "统计位置",
           "数值",
@@ -14069,7 +14069,7 @@
             "metric": "数据来源",
             "occupation_scope": "O*NET 55-3019.00（军事职业；O*NET 不收集数据）",
             "source_id": "bls",
-            "value": "各军种官方说明"
+            "value": "O*NET/军种官方；BLS总体说明"
           },
           {
             "geography": "美国",
@@ -14078,101 +14078,101 @@
             "limitation": "不推定未公开能力或要求。",
             "metric": "公开信息边界",
             "occupation_scope": "O*NET 55-3019.00（军事职业；O*NET 不收集数据）",
-            "source_id": "nbs",
+            "source_id": "onet",
             "value": "不含涉密或未授权信息"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
-            "href": "https://www.bls.gov/ooh/military/military-careers.htm",
+            "href": "https://www.onetonline.org/link/summary/55-3019.00",
             "id": "bls",
-            "label": "55-3019.00 occupation summary",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET代码范围",
+            "scope": "信息入口与范围核对，不证明转向能力"
           },
           {
             "href": "https://www.bls.gov/ooh/military/military-careers.htm",
             "id": "ep",
-            "label": "Military Careers (BLS Occupational Outlook Handbook)",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "BLS总体与预测边界",
+            "scope": "信息入口与范围核对，不证明转向能力"
           },
           {
-            "href": "https://www.bls.gov/ooh/military/military-careers.htm",
+            "href": "https://www.army.mil/",
             "id": "nbs",
-            "label": "O*NET OnLine",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "美国陆军官方入口",
+            "scope": "信息入口与范围核对，不证明转向能力"
           },
           {
-            "href": "https://www.bls.gov/ooh/military/military-careers.htm",
+            "href": "https://www.navy.mil/",
             "id": "onet",
-            "label": "O*NET OnLine",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "美国海军官方入口",
+            "scope": "信息入口与范围核对，不证明转向能力"
           }
         ],
         "transitions": [
           {
             "capability_gaps": "以军种官方岗位说明为准。",
-            "shared_capabilities": "军事职业背景。",
+            "shared_capabilities": "证据不足：未核本代码与目标岗位共享能力",
             "target_href": "/zh/career/jobs/air-crew-members",
             "target_slug": "air-crew-members",
-            "target_title": "航空乘务相关人员",
-            "transition_distance": "按军种认定"
+            "target_title": "军事航空机组成员",
+            "transition_distance": "仅相邻代码核对，不是转岗建议"
           },
           {
             "capability_gaps": "以军种官方岗位说明为准。",
-            "shared_capabilities": "军事航空保障基础。",
+            "shared_capabilities": "证据不足：未核本代码与目标岗位共享能力",
             "target_href": "/zh/career/jobs/aircraft-launch-and-recovery-specialists",
             "target_slug": "aircraft-launch-and-recovery-specialists",
             "target_title": "飞机弹射与回收专业人员",
-            "transition_distance": "按军种认定"
+            "transition_distance": "仅相邻代码核对，不是转岗建议"
           },
           {
             "capability_gaps": "以军种官方岗位说明为准。",
-            "shared_capabilities": "军事装备与安全规范。",
+            "shared_capabilities": "证据不足：未核本代码与目标岗位共享能力",
             "target_href": "/zh/career/jobs/armored-assault-vehicle-crew-members",
             "target_slug": "armored-assault-vehicle-crew-members",
             "target_title": "装甲突击车乘员",
-            "transition_distance": "按军种认定"
+            "transition_distance": "仅相邻代码核对，不是转岗建议"
           },
           {
             "capability_gaps": "以军种官方岗位说明为准。",
-            "shared_capabilities": "军事任务与纪律要求。",
+            "shared_capabilities": "证据不足：未核本代码与目标岗位共享能力",
             "target_href": "/zh/career/jobs/artillery-and-missile-crew-members",
             "target_slug": "artillery-and-missile-crew-members",
             "target_title": "炮兵与导弹乘员",
-            "transition_distance": "按军种认定"
+            "transition_distance": "仅相邻代码核对，不是转岗建议"
           },
           {
             "capability_gaps": "以军种官方岗位说明为准。",
-            "shared_capabilities": "军事训练与体能要求。",
+            "shared_capabilities": "证据不足：未核本代码与目标岗位共享能力",
             "target_href": "/zh/career/jobs/infantry",
             "target_slug": "infantry",
             "target_title": "步兵",
-            "transition_distance": "按军种认定"
+            "transition_distance": "仅相邻代码核对，不是转岗建议"
           },
           {
             "capability_gaps": "以军种官方岗位说明为准。",
-            "shared_capabilities": "军事指挥与程序.",
-            "target_href": "/zh/career/jobs/military-officer-special-and-tactical-operations-officers",
-            "target_slug": "military-officer-special-and-tactical-operations-officers",
-            "target_title": "军事军官（战术行动）",
-            "transition_distance": "按军种认定"
+            "shared_capabilities": "证据不足：未核本代码与目标岗位共享能力",
+            "target_href": "/zh/career/jobs/air-crew-officers",
+            "target_slug": "air-crew-officers",
+            "target_title": "军事航空机组军官",
+            "transition_distance": "仅相邻代码核对，不是转岗建议"
           },
           {
             "capability_gaps": "以军种官方岗位说明为准。",
-            "shared_capabilities": "指挥系统与沟通.",
+            "shared_capabilities": "证据不足：未核本代码与目标岗位共享能力",
             "target_href": "/zh/career/jobs/command-and-control-center-specialists",
             "target_slug": "command-and-control-center-specialists",
             "target_title": "指挥控制中心专业人员",
-            "transition_distance": "按军种认定"
+            "transition_distance": "仅相邻代码核对，不是转岗建议"
           },
           {
             "capability_gaps": "以军种官方岗位说明为准。",
-            "shared_capabilities": "设备操作与维护基础。",
-            "target_href": "/zh/career/jobs/radar-and-sonar-technicians",
-            "target_slug": "radar-and-sonar-technicians",
-            "target_title": "雷达与声呐技术员",
-            "transition_distance": "按军种认定"
+            "shared_capabilities": "证据不足：未核本代码与目标岗位共享能力",
+            "target_href": "/zh/career/jobs/special-forces",
+            "target_slug": "special-forces",
+            "target_title": "特种部队人员",
+            "transition_distance": "仅相邻代码核对，不是转岗建议"
           }
         ]
       },
@@ -14223,7 +14223,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "了解兴趣工具",
+            "cta_label": "了解RIASEC兴趣工具",
             "evidence_level": {
               "$item": "military-careers.fit.personality-fit-block.8",
               "block": "fit",
@@ -14244,7 +14244,7 @@
           {
             "answer": "大五人格只描述倾向，不能替代军种的资格与安全评估。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "了解大五工具",
+            "cta_label": "了解RIASEC兴趣工具",
             "evidence_level": "探索性工具",
             "id": "big-five",
             "label": "大五人格（OCEAN）",
@@ -14260,7 +14260,7 @@
           {
             "answer": "MBTI 类型标签不能用于军种选拔或岗位适配判断。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "了解 MBTI 工具",
+            "cta_label": "了解RIASEC兴趣工具",
             "evidence_level": "探索性工具",
             "id": "mbti",
             "label": "MBTI 十六型人格类型测试",
@@ -14276,7 +14276,7 @@
           {
             "answer": "九型人格只描述动机倾向，不构成军事岗位适配的证据。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "了解九型工具",
+            "cta_label": "了解RIASEC兴趣工具",
             "evidence_level": "探索性工具",
             "id": "enneagram",
             "label": "九型人格（Enneagram）",
@@ -14292,7 +14292,7 @@
           {
             "answer": "民用认知测验不能替代军种官方选拔标准。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "了解认知能力工具",
+            "cta_label": "了解RIASEC兴趣工具",
             "evidence_level": "探索性工具",
             "id": "iq",
             "label": "认知能力测验（IQ）",
@@ -14308,7 +14308,7 @@
           {
             "answer": "情绪智力测验不能替代军种的评估与授权。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "了解情绪智力工具",
+            "cta_label": "了解RIASEC兴趣工具",
             "evidence_level": "探索性工具",
             "id": "eq",
             "label": "情绪智力测验（EQ 量表）",
@@ -14326,64 +14326,64 @@
         "direct_answer": "由于该代码没有可引用的兴趣与任务数据，本页不给出适配信号，只说明如何核对权威来源。",
         "directions": [
           {
-            "direction": "职业范围核对",
-            "fit_signals": "能读懂代码范围与“未单独列出”的含义。",
+            "direction": "范围核对：军事职业（本页）",
+            "fit_signals": "相邻代码仅作官方岗位目录核对，不据此推定共享能力",
             "target": {
               "href": "/zh/career/jobs/military-careers",
               "slug": "military-careers",
               "title": "军事职业（本页）"
             },
-            "watchouts": "把相邻代码当成本代码。"
+            "watchouts": "不提供个人适配或自动转岗结论"
           },
           {
-            "direction": "数据状态核对",
-            "fit_signals": "能区分“没有数据”和“数值为零”。",
+            "direction": "范围核对：航空乘务相关人员",
+            "fit_signals": "相邻代码仅作官方岗位目录核对，不据此推定共享能力",
             "target": {
               "href": "/zh/career/jobs/air-crew-members",
               "slug": "air-crew-members",
-              "title": "航空乘务相关人员"
+              "title": "军事航空机组成员"
             },
-            "watchouts": "把缺失当成零值。"
+            "watchouts": "不提供个人适配或自动转岗结论"
           },
           {
-            "direction": "权威来源核对",
-            "fit_signals": "能回到军种官方说明核对岗位。",
+            "direction": "范围核对：飞机弹射与回收专业人员",
+            "fit_signals": "相邻代码仅作官方岗位目录核对，不据此推定共享能力",
             "target": {
               "href": "/zh/career/jobs/aircraft-launch-and-recovery-specialists",
               "slug": "aircraft-launch-and-recovery-specialists",
               "title": "飞机弹射与回收专业人员"
             },
-            "watchouts": "引用不适用的民用来源。"
+            "watchouts": "不提供个人适配或自动转岗结论"
           },
           {
-            "direction": "资格与训练",
-            "fit_signals": "了解资格与训练由军种认定。",
+            "direction": "范围核对：装甲突击车乘员",
+            "fit_signals": "相邻代码仅作官方岗位目录核对，不据此推定共享能力",
             "target": {
               "href": "/zh/career/jobs/armored-assault-vehicle-crew-members",
               "slug": "armored-assault-vehicle-crew-members",
               "title": "装甲突击车乘员"
             },
-            "watchouts": "把民用资格当军事资格。"
+            "watchouts": "不提供个人适配或自动转岗结论"
           },
           {
-            "direction": "安全与授权",
-            "fit_signals": "了解工具与行动受授权约束。",
+            "direction": "范围核对：炮兵与导弹乘员",
+            "fit_signals": "相邻代码仅作官方岗位目录核对，不据此推定共享能力",
             "target": {
               "href": "/zh/career/jobs/artillery-and-missile-crew-members",
               "slug": "artillery-and-missile-crew-members",
               "title": "炮兵与导弹乘员"
             },
-            "watchouts": "忽略授权与安全约束。"
+            "watchouts": "不提供个人适配或自动转岗结论"
           },
           {
-            "direction": "公开信息边界",
-            "fit_signals": "不把涉密或未授权信息带入公开页面。",
+            "direction": "范围核对：步兵",
+            "fit_signals": "相邻代码仅作官方岗位目录核对，不据此推定共享能力",
             "target": {
               "href": "/zh/career/jobs/infantry",
               "slug": "infantry",
               "title": "步兵"
             },
-            "watchouts": "推测未公开内容。"
+            "watchouts": "不提供个人适配或自动转岗结论"
           }
         ],
         "heading": "适配讨论的边界",
@@ -14529,10 +14529,10 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "本页只说明 O*NET 55-3019.00 的代码范围与数据边界：O*NET 不收集军事职业数据，BLS 只发布军事职业总体说明。",
-          "updated_at": "O*NET 55-3019.00 档案；BLS OOH Military Careers；本页查阅 2026-09-25。"
+          "source": "O*NET55-3019代码范围；BLS军事总体（2026-08-27更新）；不宣称工资、任务或预测数字",
+          "updated_at": "九模块核查2026-10-11"
         },
-        "note": "证据只支持其他军事战术行动与空中/武器专业人员在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
+        "note": "本代码不收集O*NET任务调查，BLS不做军事预测；总体待遇按军衔和服役时间，职业工资分布仍不足；中国无适配民用行业代理。",
         "secondary_links": [
           {
             "href": {
@@ -14542,7 +14542,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "了解兴趣工具"
+            "label": "英文MBTI测试"
           },
           {
             "href": {
@@ -14552,7 +14552,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "了解人格工具"
+            "label": "英文大五人格测试"
           },
           {
             "href": {
@@ -14562,7 +14562,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "军事职业总体说明（BLS）"
+            "label": "中文MBTI测试"
           },
           {
             "href": {
@@ -14572,7 +14572,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "O*NET 55-3019.00 摘要"
+            "label": "中文大五人格测试"
           }
         ]
       },
@@ -14756,7 +14756,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "军事职业",
@@ -14807,7 +14807,7 @@
       "text": "军事战术行动与空中/武器专业人员：范围、数据边界 | 费马测试"
     }
   },
-  "source_content_sha256": "0343c535b3de6ca30c7eb6a800c6ca08c4bb8c59babaaf8991d76c2a1e7957cf",
+  "source_content_sha256": "0beb62d744e8a9b456edf6e953696ee5bc008f496db1f68baa06e55e7da8ce4f",
   "subject": {
     "canonical_slug": "military-careers",
     "name": "其他军事战术行动与空中/武器专业人员",

@@ -2,6 +2,18 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:chem-cn-0": {
+        "status": "pending_mapping"
+      },
+      "fact:chem-cn-1": {
+        "status": "pending_mapping"
+      },
+      "fact:chem-cn-2": {
+        "status": "pending_mapping"
+      },
+      "fact:chem-cn-3": {
+        "status": "pending_mapping"
+      },
       "fact:cn-industry-manufacturing-2024": {
         "status": "pending_mapping"
       },
@@ -12135,28 +12147,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.href": {
-        "ref": {
-          "id": "chemical-engineers.us-salary.career-snapshot-secondary-locale.20",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.label": {
         "ref": {
@@ -23749,7 +23741,7 @@
           },
           "id": "chemical-engineers.profile.definition-block.5",
           "source_refs": [
-            "nasa-seh"
+            "chem-cn-class"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23779,7 +23771,7 @@
           },
           "id": "chemical-engineers.profile.definition-block.7",
           "source_refs": [
-            "onet-hot-tech"
+            "chem-hot"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23809,7 +23801,7 @@
           },
           "id": "chemical-engineers.profile.definition-block.9",
           "source_refs": [
-            "nasa-seh"
+            "chem-cn-class"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23834,7 +23826,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "化学工程师的工作可以分成三类相连但独立的工作面。第一类是需求与总体：把产品与产能与原料与法规要求转成工艺概念、物料与能量衡算、总体布置与投资与运营成本框架。第二类是专业域分析：针对反应、分离、传热、流体、控制等具体专业方向做选型与计算与调整。第三类是验证与符合性证据：用实验与中试与仿真数据、安全与环境与质量记录证明设计在实际工况下仍然成立。三类工作的共同点是都以可复核的数字与记录说话，区别在于决策层级与责任对象不同。"
+              "编辑按任务整理：化学工程师的工作可以分成三类相连但独立的工作面。第一类是需求与总体：把产品与产能与原料与法规要求转成工艺概念、物料与能量衡算、总体布置与投资与运营成本框架。第二类是专业域分析：针对反应、分离、传热、流体、控制等具体专业方向做选型与计算与调整。第三类是验证与符合性证据：用实验与中试与仿真数据、安全与环境与质量记录证明设计在实际工况下仍然成立。三类工作的共同点是都以可复核的数字与记录说话，区别在于决策层级与责任对象不同。"
             ]
           },
           "id": "chemical-engineers.profile.career-quick-answers-block.1",
@@ -23889,7 +23881,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "输出实验与中试数据与验证报告、变更与合规与检查整改记录，用于证明设计在放大与长期运行后仍然成立；缺少证据时必须明确标注缺口而不是用估计值补齐。"
+              "输出实验、中试和验证报告及变更、检查整改记录，说明设计结论适用的范围。估计须说明方法、假设和不确定度，不能冒充实测值或完整验证；实际证据缺口如实记录。"
             ]
           },
           "id": "chemical-engineers.profile.career-quick-answers-block.6",
@@ -23999,7 +23991,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "由取得授权的工艺负责人、专业工程师与安全与环境管理部门承担放行与签署责任"
+              "工程师对本人承担的设计、数据与文件负责；机构放行、法规审查与受监管签章按法律和实际岗位分工确认，不把安全部门或PE一概当作所有文件/事故的认定主体。"
             ]
           },
           "id": "chemical-engineers.profile.career-quick-answers-block.16",
@@ -24021,10 +24013,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国入门岗位不要求执照；以工程师名义对外执业通常受各州 PE 制度约束"
+              "美国BLS称入门化学工程师不要求执照；PE由州/辖区许可机关管理，一般路径含EAC/ABET认可工程学位、FE、相关可验证经验和PE考试，州另有路径/例外。考试通过不自动取得执照/签章权，不把企业内部普通文件与受监管对外工程服务混为一类。"
             ]
           },
           "id": "chemical-engineers.profile.career-quick-answers-block.18",
+          "source_refs": [
+            "chem-ncees"
+          ],
           "type": "prose"
         },
         {
@@ -24032,10 +24027,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国大陆的注册化工工程师属于勘察设计注册工程师考试的一个专业"
+              "中国注册化工工程师暂行规定适用化工、石化、化纤、医药和轻化设计及相关业务；资格证与注册证不同，考试分基础和专业。按13/20—23/26—28条核注册后的业务范围、受聘设计资质单位、统一承接收费、主要技术文件签章与个人/单位责任；不是所有生产工艺工程岗位统一持此证。具体现行文件种类、申请办理与目标项目条件另核。"
             ]
           },
           "id": "chemical-engineers.profile.career-quick-answers-block.19",
+          "source_refs": [
+            "chem-cn-reg"
+          ],
           "type": "prose"
         },
         {
@@ -24153,7 +24151,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "传热与传质、混合、停留时间分布与杂质积累在放大后会明显变化，应尽早用中试或可靠模型暴露偏差，而不是投产后再修正。"
+              "编辑判断：放大可能改变混合、传热传质、停留时间与杂质控制，变化方向和大小须用适用模型或中试验证，不断言所有放大都明显改变。"
             ]
           },
           "id": "chemical-engineers.profile.career-quick-answers-block.30",
@@ -24175,10 +24173,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "设备、原料、工况或控制逻辑的任何变更都要记录依据与影响范围，并重新核对受影响的验证结论，否则原有证据链失效。"
+              "编辑变更建议：核原料、设备、工况、控制逻辑变化对图纸与验证的影响，记录依据并复核受影响结论；不称每次变更均使全部证据失效。美国1910.119仅适用(a)列物质/数量与例外覆盖工艺，不按职业名称统一套；(d)过程安全信息、(e)危害分析、(i)启动前审查、(l)变更管理各有责任/条件，同规格更换有例外。中国岗位另核适用法，不跨用美国阈值。"
             ]
           },
           "id": "chemical-engineers.profile.career-quick-answers-block.32",
+          "source_refs": [
+            "chem-psm"
+          ],
           "type": "prose"
         },
         {
@@ -24197,10 +24198,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "化学工程师可以给出设计与优化建议，但是否投产、是否对外签署、是否接受风险由有相应授权的岗位与机构决定。"
+              "工艺工程师可提出方案，也须对本人承担的设计履责；投产放行和受监管签章按机构分工与适用法确认。中国安法55条直接危及人身安全的紧急情形，本人可停止作业或采取可能应急措施后撤离，不以等待额外批准为前提。"
             ]
           },
           "id": "chemical-engineers.profile.career-quick-answers-block.34",
+          "source_refs": [
+            "chem-cn-safety"
+          ],
           "type": "prose"
         },
         {
@@ -24208,10 +24212,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "化学工程师设计化工装置设备并制定把原料转化为化学品的制造工艺，产品范围包括汽油、合成橡胶、塑料、洗涤剂、水泥、纸与纸浆等，工作依托化学、物理与工程学的原理与技术（O*NET-SOC 17-2041.00 官方职责）。在日常工作中，化学工程师要制定操作设备或接近进行中化学反应作业的工人所采用的安全程序；对制造过程做故障排查；监控并分析过程与实验数据；评估设备与工艺以优化性能或确保符合安全与环境法规；设计设备布置；编制生产成本估算与生产进度报告；在生产各阶段检测温度、密度、比重、压力等变量并监控控制程度；开发新的与改进的制造工艺；确定混合、粉碎、传热、蒸馏、干燥等操作的最高效安排；开发分离液体或气体组分或产生电流的受控化学工艺；基于实验室与中试数据设计测量与控制系统；执行实验室研究与中试放大；开发过程的计算机模型；并指导从事吸收、蒸发或电磁设备建造与改进的作业人员。责任边界：化学工程师对工艺设计依据、计算与假设、数据记录、安全与环境约束的落实和变更可追溯负责；但是否放行投产、是否签发对外工程文件、是否认定事故与整改责任，由具备相应授权的工艺负责人、安全与环境管理部门、以及在美国按州取得 PE 执照的工程师各自承担，不能由本页推断为普遍权限。"
+              "化学工程师设计化工装置设备并制定把原料转化为化学品的制造工艺，产品范围包括汽油、合成橡胶、塑料、洗涤剂、水泥、纸与纸浆等，工作依托化学、物理与工程学的原理与技术（O*NET-SOC 17-2041.00 官方职责）。在日常工作中，化学工程师要制定操作设备或接近进行中化学反应作业的工人所采用的安全程序；对制造过程做故障排查；监控并分析过程与实验数据；评估设备与工艺以优化性能或确保符合安全与环境法规；设计设备布置；编制生产成本估算与生产进度报告；在生产各阶段检测温度、密度、比重、压力等变量并监控控制程度；开发新的与改进的制造工艺；确定混合、粉碎、传热、蒸馏、干燥等操作的最高效安排；开发分离液体或气体组分或产生电流的受控化学工艺；基于实验室与中试数据设计测量与控制系统；执行实验室研究与中试放大；开发过程的计算机模型；并指导从事吸收、蒸发或电磁设备建造与改进的作业人员。责任边界：设计、数据、复核与签章按实际任务和适用法承担；生产放行、事故调查及监管认定各有规则，不能统一归给工艺负责人、安全部门或美国PE。美国BLS称入门化学工程师不要求执照；PE由州/辖区许可机关管理，一般路径含EAC/ABET认可工程学位、FE、相关可验证经验和PE考试，州另有路径/例外。考试通过不自动取得执照/签章权，不把企业内部普通文件与受监管对外工程服务混为一类。 中国注册化工工程师暂行规定适用化工、石化、化纤、医药和轻化设计及相关业务；资格证与注册证不同，考试分基础和专业。按13/20—23/26—28条核注册后的业务范围、受聘设计资质单位、统一承接收费、主要技术文件签章与个人/单位责任；不是所有生产工艺工程岗位统一持此证。具体现行文件种类、申请办理与目标项目条件另核。"
             ]
           },
           "id": "chemical-engineers.profile.definition-block.11",
+          "source_refs": [
+            "chem-ncees",
+            "chem-cn-reg"
+          ],
           "type": "prose"
         },
         {
@@ -24219,7 +24227,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET-SOC 17-2041.00（Chemical Engineers）：Job Zone Four，SVP 区间 7.0 至 8.0 以下；教育调查 91% 学士、4% 学士后证书、4% 硕士后证书；兴趣代码 RIC；官方列出 14 项核心任务与 2 项新技术任务，核心任务重要度从 86（制定安全程序）到 52（开发计算机模型、指导作业人员）。"
+              "O*NET-SOC 17-2041.00（Chemical Engineers）：Job Zone Four，SVP 区间 7.0 至 8.0 以下；受访者对新员工执行工作所需学历的判断（非从业者学历构成、非统一招聘门槛）： 91% 学士、4% 学士后证书、4% 硕士后证书；兴趣代码 RIC；官方列出 14 项核心任务与 2 项新技术任务，核心任务重要度从 86（制定安全程序）到 52（开发计算机模型、指导作业人员）。"
             ]
           },
           "id": "chemical-engineers.profile.onet-structured-fields-block.1",
@@ -24241,7 +24249,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆：本条证据路由把精确职业工资登记为已核实不可得（cn-exact-wage-unavailable，severity=material）；已打开的 O*NET/BLS 精确职业来源其市场与辖区明确为美国，不支持中国精确工资口径。因此本页不发布任何中国大陆数值，也不以行业均值、招聘报价或美国数值代填；本页不声称中国官方从未发布相关统计，只说明本轮未取得与本职业精确对应的全国口径。"
+              "证据不足：本轮未取得中国大陆精确职业全国工资分布。2025国家统计局税前年均：制造业非私营113,594/私营76,055元；科学研究和技术服务业非私营182,064/私营83,560元。制造业可作生产装置岗位背景，科学技术服务可作设计/研发单位背景；两类行业全部单位岗位均值，不是化学工程师工资、起薪、上下限或月薪，不对应化工细分行业。"
             ]
           },
           "id": "chemical-engineers.profile.onet-structured-fields-block.3",
@@ -24252,10 +24260,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业与就业：O*NET 行业分布为制造业 47%、专业与科学与技术服务 25%、其他行业 28%；BLS 显示 2025 年 21,900 个岗位，2025—2035 年增长 5%（快于所有职业平均），变化约 +1,000 人，年均空缺约 1,100 个。"
+              "本轮O*NET详情与行业子页一致：2025行业就业分布为制造业50%、专业科学技术服务24%、其他26%；旧47%/25%/28%不作当前值。行业就业结构不证明工资或AI采用率。 BLS表1.2就业2025为21.9千、2035为22.9千、净增1.0千、增4.7%（OOH舍入5%）、年均空缺1.1千、自雇占2.4%。预测非在招存量，不归因AI。"
             ]
           },
           "id": "chemical-engineers.profile.onet-structured-fields-block.4",
+          "source_refs": [
+            "chem-current-details",
+            "chem-ep"
+          ],
           "type": "prose"
         },
         {
@@ -24263,7 +24275,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "技术与工作情境：O*NET 技术清单覆盖分析或科学软件、计算机辅助设计与制图、数据库与查询、开发环境、企业资源计划、工业控制、过程绘图与设计、项目管理、办公与表格与演示等 16 类；工作情境显示以室内环境受控工作为主（83% 每天），沟通密集（电子邮件 100% 每天、面对面讨论 83% 每天），且对准确性与错误后果的要求高（30% 认为精确极其重要、35% 认为错误后果极其严重）。招聘技术关键词是市场信号，不等于熟练度、采用率或长期趋势。"
+              "技术与工作情境：O*NET 技术清单覆盖分析或科学软件、计算机辅助设计与制图、数据库与查询、开发环境、企业资源计划、工业控制、过程绘图与设计、项目管理、办公与表格与演示等 16 类；工作情境显示以室内环境受控工作为主（83% 每天），沟通密集（电子邮件 100% 每天、面对面讨论 83% 每天），且对准确性与错误后果的要求高（30% 认为精确极其重要、35% 认为错误后果极其严重）。详情16软件类别与Hot16项名称不同；Hot统计为Lightcast2025美国关联本职业独立招聘信息占比。招聘技术关键词是市场信号，不等于熟练度、采用率或长期趋势。"
             ]
           },
           "id": "chemical-engineers.profile.onet-structured-fields-block.5",
@@ -24290,10 +24302,14 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "协作与沟通｜电子邮件使用 100% 每天，面对面讨论 83% 每天，电话交谈 52% 每天；与主管、同事或下属沟通在工作活动中的重要性为 83。\n工时与节奏｜70% 的受访者典型工作周超过 40 小时，30% 为正好 40 小时；87% 为常规排班、13% 为不规律排班。\n决策与自主｜30% 表示对如何安排任务有很大自由、43% 有一些自由、26% 自由有限；26% 表示对确定任务与优先级有很大自由。\n责任与影响｜35% 表示出错后果极其严重、35% 非常严重、22% 严重；39% 对他人健康与安全承担很高责任、39% 为高责任。\n环境与作业空间｜83% 每天在环境受控室内工作，13% 每周在非受控室内工作，26% 每周在户外暴露于各种天气。\n身体与作业负荷｜86% 表示站立时间少于一半工时、87% 表示走动或跑动少于一半工时；57% 表示用手处理或操控物体与工具的时间少于一半工时。\n防护与安全｜17% 每天佩戴常规防护或安全装备、48% 每周至少一次；13% 每天暴露于危险条件、35% 每周接触污染物；作业须按企业与法域规定执行危险化学品与特种设备的安全要求。\n竞争与压力｜52% 认为竞争程度为高度竞争、35% 为中度竞争、13% 为轻微竞争；43% 每周至少一次面临时间压力、43% 每月至少一次。\n记录与交接｜工艺流程图与管道仪表流程图、计算书、实验与中试记录、变更与合规与检查整改记录、成本与进度报告须完整可追溯；交接须说明未完成事项、数据缺口与设备与工艺异常。"
+              "协作与沟通｜电子邮件使用 100% 每天，面对面讨论 83% 每天，电话交谈 52% 每天；与主管、同事或下属沟通在工作活动中的重要性为 83。\n工时与节奏｜70% 的受访者典型工作周超过 40 小时，30% 为正好 40 小时；87% 为常规排班、13% 为不规律排班。\n决策与自主｜30% 表示无监督做决策有很大自由、43% 有一些自由、26% 自由有限；26% 表示对确定任务与优先级有很大自由。\n责任与影响｜35% 表示出错后果极其严重、35% 非常严重、22% 严重；39% 对他人健康与安全承担很高责任、39% 为高责任。\n环境与作业空间｜83% 每天在环境受控室内工作，35% 每周至少一次但非每天在非受控室内工作，26% 每周在户外暴露于各种天气。\n身体与作业负荷｜86% 表示站立时间少于一半工时、87% 表示走动或跑动少于一半工时；57% 表示用手处理或操控物体与工具的时间少于一半工时。\n防护与安全｜17% 每天佩戴常规防护或安全装备、48% 每周至少一次；13% 每天暴露于危险条件、35% 每周接触污染物；作业须按企业与法域规定执行危险化学品与特种设备的安全要求。\n竞争与压力｜52% 认为竞争程度为高度竞争、35% 为中度竞争、13% 为轻微竞争；43% 每周至少一次面临时间压力、43% 每月至少一次。\n记录与交接｜工艺流程图与管道仪表流程图、计算书、实验与中试记录、变更与合规与检查整改记录、成本与进度报告须完整可追溯；交接须说明未完成事项、数据缺口与设备与工艺异常。 中国安法27—30条分别规定主要负责人/安全管理人员能力与特定单位考核、从业及实习人员安全教育培训、特种作业资格；危险物品生产/储存/装卸等法定单位应有注册安全工程师从事管理，不要求每位化学工程师都持此证。涉及具体特种作业须另核目录与实际任务。"
             ]
           },
           "id": "chemical-engineers.profile.work-context-block.1",
+          "source_refs": [
+            "chem-current-details",
+            "chem-cn-safety"
+          ],
           "type": "prose"
         }
       ]
@@ -24918,28 +24934,28 @@
                 "url": "https://www.bls.gov/ooh/architecture-and-engineering/chemical-engineers.htm"
               },
               {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "entity": "O*NET本职业任务详情",
                 "id": "link-8",
-                "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
-              },
-              {
-                "entity": "O*NET-SOC 17-2041.00 职业详细资料",
-                "id": "link-9",
                 "relation": "related-evidence",
                 "url": "https://www.onetonline.org/link/details/17-2041.00"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
-                "id": "link-10",
+                "entity": "O*NET转引BLS全国工资",
+                "id": "link-9",
                 "relation": "related-evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://www.onetonline.org/link/localwages/17-2041.00"
               },
               {
-                "entity": "BLS Occupational Outlook Handbook：Chemical Engineers",
+                "entity": "ILO2025任务暴露研究",
+                "id": "link-10",
+                "relation": "related-evidence",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "entity": "NIST AI RMF1.0",
                 "id": "link-11",
                 "relation": "related-evidence",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/chemical-engineers.htm"
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
                 "entity": "O*NET 技术清单（17-2041.00 招聘技术关键词）",
@@ -24948,16 +24964,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/17-2041.00"
               },
               {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "entity": "O*NET任务详情",
                 "id": "link-13",
                 "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.onetonline.org/link/details/17-2041.00"
               },
               {
-                "entity": "O*NET 技术清单（17-2041.00 招聘技术关键词）",
+                "entity": "BLS本职业入行说明",
                 "id": "link-14",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/hot_tech/17-2041.00"
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/chemical-engineers.htm"
               },
               {
                 "entity": "O*NET-SOC 17-2041.00 职业详细资料",
@@ -24972,22 +24988,22 @@
                 "url": "https://www.bls.gov/ooh/architecture-and-engineering/chemical-engineers.htm"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
+                "entity": "本页风险板块：对应法规/资格的官方来源按钮",
                 "id": "link-17",
                 "relation": "related-evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://fermatmind.com/zh/career/jobs/chemical-engineers#career-visual-group-risk"
               },
               {
-                "entity": "BLS 职业就业与工资统计（2025 年 5 月 OEWS）",
+                "entity": "BLS本职业预测",
                 "id": "link-18",
                 "relation": "related-evidence",
-                "url": "https://www.bls.gov/oes/current/oes172041.htm"
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/chemical-engineers.htm"
               },
               {
-                "entity": "O*NET-SOC 17-2041.00 职业摘要",
+                "entity": "O*NET本职业Hot技术",
                 "id": "link-19",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/summary/17-2041.00"
+                "url": "https://www.onetonline.org/link/hot_tech/17-2041.00"
               }
             ]
           },
@@ -25087,7 +25103,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把技术能力、实际采用与岗位结果分开看：当前公开资料能支持的是「部分分析与文档任务可以借助模型提速」，以及「招聘中对数据与仿真工具的要求在增加」；不支持「该职业被替代」「某个年份岗位消失」这类结论。BLS 对 2025—2035 年的预测是增长 5%、年均空缺约 1,100 个，这是就业规模预测，不是 AI 采用率或替代率。"
+              "单年Hot清单支持招聘中出现某些技术关键词，不证明要求在增加或企业采用。数据整理、仿真与文档辅助为编辑试用方向，效率须在真实流程验证；ILO暴露不等就业替代。BLS2025—2035增4.7%（OOH舍入5%）、年均空缺约1100，不是AI效果。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.18",
@@ -25252,7 +25268,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表按三条真实工作方向比较：AI 主要改变什么，以及哪些责任仍然留在人这一侧。三条方向来自该职业的任务结构（需求与总体、专业域分析、验证与符合性证据），不是行业统一职级。"
+              "按O*NET任务整理三方向作编辑比较，所列辅助环节与责任接口并非已实现效果或永久人工分工；实际控制与验证按装置、机构和法域确认。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.33",
@@ -25505,10 +25521,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "框架要求把用途、限制、监测与责任写清，可直接用于本页的复核与留痕建议"
+              "NIST AI RMF1.0为自愿使用的跨行业治理框架，可参考用途、风险与监测；本页复核建议是编辑整理，不是该框架强制规定的化学工程流程。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.56",
+          "source_refs": [
+            "chem-nist"
+          ],
           "type": "prose"
         },
         {
@@ -25549,7 +25568,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该职业技术清单覆盖 MATLAB、AutoCAD、SAP、R、C++、Visio、Project 等 16 类软件"
+              "详情软件技能16类别，Hot16项具体名称是另一清单；2025美国独立关联招聘Excel/Office各12%、PowerPoint9%、AutoCAD7%、SolidWorks4%、Word3%、SAP/MATLAB各2%，其余按原表；没有跨年增长证据。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.60",
@@ -25560,7 +25579,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术能力回答「模型在原则上能做什么」。对本职业而言，可靠的部分是数据整理、趋势识别、文献与标准检索、仿真前处理与文档比对；不可靠的部分是未经核实的物性数据、机理外推与安全结论。"
+              "编辑试用建议：数据整理、趋势识别、文献/标准检索、仿真前处理与文档比对可尝试工具辅助。准确性取决于输入、模型与验证，不把这些任务统一称可靠，也不把未经验证的物性/安全输出当结论。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.61",
@@ -25571,7 +25590,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采用证据回答「企业实际在用什么」。公开资料能支持的是该职业招聘中数据与仿真工具关键词在增加，以及工艺与过程数据量大、适合引入统计与机器学习方法；具体企业的落地范围属于商业信息，本页不推断。"
+              "本轮Hot是Lightcast2025关联招聘关键词，并非采用调查或时间序列；没有企业实际部署范围/采用增长证据。过程数据适合何种方法须按质量与目标验证，不能仅从数据多推适合机器学习。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.62",
@@ -25593,7 +25612,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能这样推断。该职业的任务结构以判断、权衡与责任为主：制定安全程序、故障排查、评估设备与工艺是否合规，都需要对现场与法规负责的人来做。AI 会改变这些任务的做法与速度，但公开资料不支持「职业被取代」的结论。"
+              "本轮O*NET、BLS、ILO不支持化学工程师整体被AI取代或固定消失年份。安全程序、诊断与合规任务需要落实验证和法定责任，实际任务可包含自动化；效率与采用须另取本职业证据。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.64",
@@ -25615,7 +25634,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不把编程当作入行门槛。O*NET 该职业的技术清单显示招聘中出现 MATLAB、R、C++、Python 相关与数据库与可视化等工具，但没有把它们写成入门条件；BLS 显示入行学历为学士学位、无需相关工作经验。更实用的顺序是先掌握衡算、物性与反应数据、单位与量纲，再用工具解决具体计算与数据处理问题。"
+              "本轮资料没有统一编程准入要求；目标岗位另核。Hot含MATLAB、R、C++、SQL等，但不列Python，本页不能把它称为该表招聘关键词。BLS典型本科、相关经验None；编辑建议先衡算/物性/量纲再选工具，非全国雇主固定学习顺序。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.66",
@@ -25637,7 +25656,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "从任务结构看，受影响较早的是可结构化输入的环节：数据整理与趋势识别、文献与标准检索、仿真前处理、文档与图纸比对、报告初稿。受影响较晚的是需要在不确定条件下做权衡并对结果负责的环节：设计基础的确定、放大判断、异常工况处置与合规结论。"
+              "结合任务的编辑试用排序：可从输入明确的数据整理、检索、文档比较和报告草稿开始；放大、异常处置和合规判断按危险与责任验证。本轮没有先后受影响时间的实测，不从任务重要性直接推自动化早晚。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.68",
@@ -25681,10 +25700,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。对外的设计文件、工艺包、安全与环境合规文件的签署属于有资质的人与法定主体的责任行为；在美国通常涉及按州签发的 PE 执照，在中国大陆涉及单位与注册人员的责任划分。AI 生成的文本不具备这种责任能力。"
+              "AI输出不自动取得PE或中国注册人员身份；受监管工程服务/签章按所在地资格、业务范围和机构条件落实。美国BLS称入门化学工程师不要求执照；PE由州/辖区许可机关管理，一般路径含EAC/ABET认可工程学位、FE、相关可验证经验和PE考试，州另有路径/例外。考试通过不自动取得执照/签章权，不把企业内部普通文件与受监管对外工程服务混为一类。 中国注册化工工程师暂行规定适用化工、石化、化纤、医药和轻化设计及相关业务；资格证与注册证不同，考试分基础和专业。按13/20—23/26—28条核注册后的业务范围、受聘设计资质单位、统一承接收费、主要技术文件签章与个人/单位责任；不是所有生产工艺工程岗位统一持此证。具体现行文件种类、申请办理与目标项目条件另核。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.72",
+          "source_refs": [
+            "chem-ncees",
+            "chem-cn-reg"
+          ],
           "type": "prose"
         },
         {
@@ -25692,7 +25715,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NCEES 认证入口（O*NET 认证页面所列）；NIST AI RMF 1.0 责任与记录要求"
+              "BLS OOH执照说明、NCEES许可路径与中国注册化工工程师暂行规定；NIST仅治理参考。 对应官方正文见本页风险板块的独立来源按钮；此问链接是本页法源核对入口。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.73",
@@ -25846,10 +25869,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按企业数据分级选择可用工具与部署方式，对敏感信息做脱敏或使用内部部署，并保留访问与导出记录。"
+              "编辑保密建议：按合同、资料权利与数据分级选择工具；脱敏或内部部署须验证访问和泄露风险，不能自动证明合规。中国注册人员按暂行规定28条保守商业技术秘密；涉及个人信息另核合法基础、必要范围和保留期限。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.87",
+          "source_refs": [
+            "chem-cn-reg"
+          ],
           "type": "prose"
         },
         {
@@ -25879,7 +25905,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "单位与量纲、基准与工况、边界条件的错误在工程计算中后果严重，且模型不会主动提示。"
+              "单位、量纲、基准、工况和边界错误可影响设备与安全判断；模型可能漏检，也可能提示，不能绝对称不会主动提示。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.90",
@@ -25956,7 +25982,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "趋势识别与异常预警的自动化程度在提高；判断原因与处置仍是人工职责"
+              "编辑任务分析：趋势识别与异常预警的自动化程度可尝试验证；判断原因与处置须落实验证与岗位责任 本轮未取得此任务的效率/自动化趋势实测。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.97",
@@ -26000,7 +26026,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "参数扫描与前处理可自动化；放大依据与机理判断缺少结果级证据"
+              "编辑任务分析：参数扫描与前处理可自动化；放大依据与机理判断缺少结果级证据 本轮未取得此任务的效率/自动化趋势实测。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.101",
@@ -26044,7 +26070,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "图纸与文件比对可自动化；设计意图与变更授权的判断仍由人承担"
+              "编辑任务分析：图纸与文件比对可自动化；设计意图与变更授权的判断须核验证与授权 本轮未取得此任务的效率/自动化趋势实测。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.105",
@@ -26088,7 +26114,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "标准检索与检查表生成可辅助；风险判定与整改责任不可转移"
+              "编辑任务分析：标准检索与检查表生成可辅助；风险判定与整改责任不可转移 本轮未取得此任务的效率/自动化趋势实测。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.109",
@@ -26132,7 +26158,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数据汇总与报表生成可自动化；假设设定与对外承诺仍由人负责"
+              "编辑任务分析：数据汇总与报表生成可自动化；假设设定与对外承诺仍由人负责 本轮未取得此任务的效率/自动化趋势实测。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.113",
@@ -26176,7 +26202,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数据整理与图表生成可加速；实验设计与有效性判断仍由人负责"
+              "编辑任务分析：数据整理与图表生成可尝试辅助；实验设计与有效性判断仍由人负责 本轮未取得此任务的效率/自动化趋势实测。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.117",
@@ -26220,7 +26246,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "文字与翻译与摘要可辅助；评审中的技术承诺与责任不可外包"
+              "编辑任务分析：文字与翻译与摘要可辅助；评审中的技术承诺与责任不可外包 本轮未取得此任务的效率/自动化趋势实测。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.121",
@@ -26231,7 +26257,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "如果要用一句话概括：AI 会显著改变化学工程师处理数据、文献与文档的方式，但不会改变「谁对装置与工艺负责」这一结构；判断的依据始终是可核实的物性与实验数据、可追溯的变更记录，以及具备授权的签署。"
+              "AI可能改变数据、文献与文档处理；具体效果须验证。输入可核、版本可追溯及法定责任是控制要点，不是职业不变或永远人工的预测。"
             ]
           },
           "id": "chemical-engineers.ai-impact.ai-impact-table.122",
@@ -26255,7 +26281,7 @@
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-wages"
+            "chem-cn-wage"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26270,7 +26296,7 @@
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wages"
+            "chem-cn-wage"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26340,7 +26366,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与化学工程师精确对应的中国大陆全国职业工资分布；本条证据路由把该缺口登记为 （暂无可安全使用的数据，尚无缺口关闭结论），并要求以可见缺口呈现而不是用代理数字替代，本页据此不发布任何中国大陆数值。"
+              "证据不足：未取得中国大陆精确化学工程师全国工资分布。可读下列行业背景，不能代本职业中位数、分位或起薪。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.7",
@@ -26351,7 +26377,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "resolution 原文为「已打开当前 O*NET/BLS 精确职业来源，其市场和辖区明确为美国，不支持中国精确工资口径」；consequence 为「不能可靠陈述中国全国中位数、分位数或统一起薪」，因此本页不给出中位数、分位数、起薪或稳定月薪，也不把美国数值换算成人民币。"
+              "本职业美国工资不能换成人民币。中国全国中位/分位/统一起薪本轮未取得；行业参考另列并保留行业、单位性质、税前年度与覆盖边界。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.8",
@@ -26362,7 +26388,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业门类口径：国家统计局按行业门类公布城镇单位就业人员年平均工资，但化学工程师并不是该口径下的独立行业门类，且本页不采用行业均值替代职业数值。"
+              "2025行业参考：制造业非私营113,594/私营76,055元税前年均；科学研究和技术服务业非私营182,064/私营83,560元。均是行业单位全部岗位，不是本职业工资。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.9",
@@ -26373,7 +26399,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "该口径覆盖城镇地域内就业人数 5 人及以上法人单位，不含个体工商户与自由职业者；用它替代本职业工资会同时引入行业与用工形式两重偏差。"
+              "城镇5人及以上法人单位（含规定视同法人单位），不含个体工商户和自由职业者；兼职、计时、派遣等形式不自动决定覆盖，核实际工资支付与调查单位。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.10",
@@ -26384,7 +26410,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "较宽职业口径：企业薪酬调查与职业分类使用较宽的职业口径，未单列与 O*NET-SOC 17-2041.00 一一对应的职业细类，不能把其分位数写成本职业的全国中位数。"
+              "本轮未取得与美国17-2041一一对应的中国职业薪酬调查分位；不能仅凭美国资料断言中国企业调查均未单列。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.11",
@@ -26417,7 +26443,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本条证据路由不使用招聘样本或相邻岗位报价填补职业级缺口，因为无法核验其统计对象与抽样方法。"
+              "本轮未取得可核验招聘样本；不会用单条报价填全国职业统计。比较具体机会可核公告时期、职责和计酬，不把没有样本写成所有公告方法不可核。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.14",
@@ -26428,7 +26454,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "统计覆盖范围：中国大陆公开工资统计以城镇法人单位为对象，对个体工商户与平台用工与自由职业者的覆盖不同，与本职业的实际用工结构并不完全重合。"
+              "行业均值覆盖城镇法人单位全部就业岗位，不含个体和自由职业；平台/派遣形式须核是否纳入实际单位工资调查，不能一概排除。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.15",
@@ -26450,7 +26476,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "资料期：本轮查阅以 2025 年及以前已发布的公开资料为范围；资料期不同会影响可比性，本页不跨期拼接。"
+              "资料期：工资参考为2025年、2026-05发布；职业大典2022版。本轮2026-10-09核读，不把发布时间与工资年度混用。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.17",
@@ -26461,7 +26487,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "查阅范围包含国家统计局公开资料入口、人力资源社会保障部公开信息，以及本职业的 O*NET/BLS 精确职业来源，均未能支持中国大陆精确职业工资口径。"
+              "本轮取得国家统计局2025行业表与覆盖说明、中国职业大典化工工程技术人员正文；未取得一一映射的全国职业工资分布。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.18",
@@ -26472,7 +26498,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论与缺口：本页对中国大陆只登记可核对的统计口径、职业映射边界与检索记录，不给出替代数值。"
+              "精确职业缺口保留。2025国家统计局税前年均：制造业非私营113,594/私营76,055元；科学研究和技术服务业非私营182,064/私营83,560元。制造业可作生产装置岗位背景，科学技术服务可作设计/研发单位背景；两类行业全部单位岗位均值，不是化学工程师工资、起薪、上下限或月薪，不对应化工细分行业。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.19",
@@ -26494,7 +26520,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业分类与映射边界：本条证据路由把中国大陆映射记为未建立一一对应的职业细类，相关职责可能分布在与化工工艺、化工装置运行、化学品生产技术与研发相关的多个岗位中，须按岗位实际职责与资质判断。"
+              "中国大典2022正文物理40页列化工工程技术人员2-02-06，包括实验2-02-06-01、设计02和生产03。设计细类含物料热量平衡、设备选型、跨专业设计条件、成本、工艺图与扩大设计；实验和生产细类分别含实验数据报告、生产技术规程及异常处理。与美国17-2041有职责重叠，但本轮没有建立一一统计映射，不把中文名称直接换成工资或执业资格。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.21",
@@ -26505,7 +26531,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中文页面名称不构成中国等价职业或工资映射，页面语言只表示本页的阅读语言。"
+              "中国大典2022正文物理40页列化工工程技术人员2-02-06，包括实验2-02-06-01、设计02和生产03。设计细类含物料热量平衡、设备选型、跨专业设计条件、成本、工艺图与扩大设计；实验和生产细类分别含实验数据报告、生产技术规程及异常处理。与美国17-2041有职责重叠，但本轮没有建立一一统计映射，不把中文名称直接换成工资或执业资格。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.22",
@@ -26527,7 +26553,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业分类：本条证据路由未建立与 O*NET-SOC 17-2041.00 一一对应的中国大陆职业细类；与化工相关的岗位可能同时在工艺设计、装置运行、化学品生产技术、检验与研发等多个序列中，其用工形式、作业范围与任职要求各不相同，须按岗位实际职责与所在地规定判断。涉及危险化学品与特种设备作业的岗位另有安全生产与特种作业管理规定。"
+              "中国大典2022正文物理40页列化工工程技术人员2-02-06，包括实验2-02-06-01、设计02和生产03。设计细类含物料热量平衡、设备选型、跨专业设计条件、成本、工艺图与扩大设计；实验和生产细类分别含实验数据报告、生产技术规程及异常处理。与美国17-2041有职责重叠，但本轮没有建立一一统计映射，不把中文名称直接换成工资或执业资格。 中国安法27—30条分别规定主要负责人/安全管理人员能力与特定单位考核、从业及实习人员安全教育培训、特种作业资格；危险物品生产/储存/装卸等法定单位应有注册安全工程师从事管理，不要求每位化学工程师都持此证。涉及具体特种作业须另核目录与实际任务。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.24",
@@ -26560,7 +26586,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理，不是薪资统计：学历是入门条件之一，岗位方向由企业业务与项目类型决定，不能据此推断收入。"
+              "编辑岗位方向示例，未取得中国招聘样本；目标岗位学历另核，不以本科表格证明统一准入或工资。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.27",
@@ -26626,7 +26652,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：博士路径更多进入研发与技术攻关岗位，与生产运行岗位的日常任务差异明显。"
+              "编辑研发/放大/技术方向示例，未取得各学历去向比例；不能断言博士更多进入某岗位或对应收入。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.33",
@@ -26659,7 +26685,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：这些岗位与化学工程师相邻但职责与权责不同，若目标为工艺工程岗位，需要另行完成学历与项目经验准备。"
+              "相邻操作、检验、仪表方向和工程岗位职责不同；目标学历与项目要求另核，不由学历单独决定序列或必须重读学历。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.36",
@@ -26681,7 +26707,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：工艺工程岗位最集中的行业之一，涉及反应、分离、精制与公用工程等单元。"
+              "编辑行业示例：化工产品涉及反应、分离、精制等；本轮未取得中国该职业行业集中度。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.38",
@@ -26736,7 +26762,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《城镇单位就业人员年平均工资情况》检索入口｜https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html"
+              "国家统计局2025年城镇单位就业人员年平均工资表2/5及附注｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.43",
@@ -26758,7 +26784,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆目前没有单列该职业的全国职业工资统计可供本页引用；本页只登记可核对的统计口径、职业映射边界与检索记录，不给出替代数值。"
+              "本轮未取得精确职业全国工资；保留缺口并提供2025制造业、科学研究技术服务业行业单位工资背景，不能冒充本职业。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.45",
@@ -26769,7 +26795,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "比较不同机会时应确认用工形式（企业内设技术岗、项目制、设计与工程公司派驻）、实际承担的工艺范围与是否有权对外签署技术文件、以及安全与环保与质量责任划分，并明确本页不提供中国大陆该职业的工资数值。"
+              "比较机会核用工主体、设计/生产/研发任务、工资总额和实际工时、签章与安全责任；行业均值只能作背景。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.46",
@@ -26780,7 +26806,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中华人民共和国职业分类大典（2022 年版）公布信息｜https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
+              "职业大典2022化工工程技术人员正文（物理40页）｜https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.47",
@@ -26802,7 +26828,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆（本条路由不发布数值）"
+              "中国大陆精确职业月薪未取得；行业税前年均另列"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.49",
@@ -26868,7 +26894,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业对照：美国 O*NET-SOC 17-2041.00（Chemical Engineers，SOC 17-2041）；中国大陆本条证据路由未建立一一对应的职业细类，相关职责可能分布在化工工艺、装置运行、化学品生产技术与研发等多个序列，须按岗位实际职责与资质与机构授权归类，页面语言不构成职业等价或工资映射。"
+              "中国大典2022正文物理40页列化工工程技术人员2-02-06，包括实验2-02-06-01、设计02和生产03。设计细类含物料热量平衡、设备选型、跨专业设计条件、成本、工艺图与扩大设计；实验和生产细类分别含实验数据报告、生产技术规程及异常处理。与美国17-2041有职责重叠，但本轮没有建立一一统计映射，不把中文名称直接换成工资或执业资格。"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.55",
@@ -26891,7 +26917,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《城镇单位就业人员年平均工资情况》检索入口｜https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html；O*NET 全国工资分位页面（17-2041.00）｜https://www.onetonline.org/link/localwages/17-2041.00"
+              "国家统计局2025行业表｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html；O*NET美国全国工资分位｜https://www.onetonline.org/link/localwages/17-2041.00"
             ]
           },
           "id": "chemical-engineers.china-salary.career-snapshot-primary-locale.57",
@@ -27172,7 +27198,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH 公布的 2025 年该职业岗位数。预测期到 2035 年，按公布的变化 +1,000 人推算约为 22,900 人。；BLS Occupational Outlook Handbook：Chemical Engineers｜https://www.bls.gov/ooh/architecture-and-engineering/chemical-engineers.htm"
+              "BLS OOH直接公布2025就业21,900、2035预测22,900及净增1000，并非本页推算；表1.2含自雇（占2.4%），与OEWS工资人群不同。"
             ]
           },
           "id": "chemical-engineers.us-salary.career-snapshot-secondary-locale.20",
@@ -27227,7 +27253,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界：以上数值均为美国全国口径，面向受雇工资薪金岗位；不代表自雇主、合伙人与按项目计酬者的收入，也不构成对中国大陆的推断。"
+              "工资为美国受雇工资薪金岗位，不含自雇主/合伙人经营收入；按项目计酬不自动排除，须核雇佣与工资口径。就业预测含自雇，不能把全部就业称同一受雇样本；不推中国岗位。"
             ]
           },
           "id": "chemical-engineers.us-salary.career-snapshot-secondary-locale.25",
@@ -27238,7 +27264,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：BLS 显示 2025 年 5 月该职业年薪中位数为 125,040 美元、时薪中位数为 60.12 美元，2025—2035 年就业预计增长 5%，年均空缺约 1,100 个。这些是美国受雇岗位的统计位置，不是个人起薪或到手收入。"
+              "2025 OEWS年薪中位125040美元/时薪60.12；2025—2035预测增4.7%（OOH舍入5%）/年均约1100空缺。工资分布与就业预测分别统计，不是个人起薪或到手收入。"
             ]
           },
           "id": "chemical-engineers.us-salary.career-snapshot-secondary-locale.26",
@@ -27249,7 +27275,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 公布的工作时间为「多数全职、部分超过每周 40 小时」，O*NET 工作情境显示 70% 的受访者典型工作周超过 40 小时；统计的年度工资不区分加班与津贴的构成，因此不能反推个人时薪结构。"
+              "OOH多数全职部分超过40小时；O*NET70%受访者超过40小时，不保证个人工时。OEWS为税前正常工时工资，含基本工资、保证工资、危险工作津贴及规定激励报酬，排除加班工资、轮班差额、非生产奖金与福利成本；不能用年薪反推个人加班收入。"
             ]
           },
           "id": "chemical-engineers.us-salary.career-snapshot-secondary-locale.27",
@@ -27447,7 +27473,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "研发行业口径；研发岗位的薪酬结构可能包含与项目或专利相关的部分，本页不作推断。"
+              "2025年5月该研发行业内化学工程师年薪中位124540美元；非全行业均值或专利/项目收益，工资构成按OEWS方法。"
             ]
           },
           "id": "chemical-engineers.us-salary.career-snapshot-secondary-locale.45",
@@ -27491,7 +27517,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与地区、企业规模与产品线、学历与执业资格、以及是否承担安全与环境责任都会影响实际收入；本页只给出统计口径下的分布，不预测个人收入。"
+              "行业和地区工资分布可供比较；规模、产品线、学历/资格、职责与实际报价需结合岗位核，本轮无各条件工资溢价因果研究。"
             ]
           },
           "id": "chemical-engineers.us-salary.career-snapshot-secondary-locale.49",
@@ -27664,7 +27690,7 @@
           },
           "id": "chemical-engineers.fit.riasec-fit-block.8",
           "source_refs": [
-            "nasa-seh"
+            "chem-cn-class"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27815,7 +27841,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 兴趣代码与工作活动重要性为官方职业测评数据，描述的是职业群体的取向分布，不是个人适配结论，也不是录用标准。"
+              "证据等级：O*NET 兴趣代码与工作活动重要性为官方职业测评数据，描述职业任务的兴趣特征，不是个人适配结论，也不是录用标准。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.3",
@@ -27849,7 +27875,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格在本页只用于描述工作方式，不作为录用或淘汰依据。与该职业任务更相关的是尽责性维度下的「注重细节」与「可靠性」，以及开放性维度下的「求知欲」。O*NET 工作风格清单列出创新、成就导向、求知欲、谨慎、诚信、注重细节与可靠性七项，其中注重细节与可靠性直接对应「精确或准确极其重要」的 30% 与「非常重要」的 52%。"
+              "大五在此为编辑反思框架，不用于录用/淘汰。本职业O*NET21工作风格中注重细节89、谨慎87、可靠86、创新81、求知79、成就71、诚信70；与大五的联系为编辑解释，不由30%极重要/52%非常重要准确性情境直接证明人格效度。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.6",
@@ -27860,7 +27886,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 工作风格为职业级描述性数据；大五人格量表本身不是职业选拔工具。"
+              "工作风格为职业级描述；本页未取得特定大五测分预测本职业表现的效度，不能笼统说所有大五量表均不是选拔工具。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.7",
@@ -27939,7 +27965,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样不是职业测评工具，没有官方职业证据支持。可替代的做法是用具体可交付物验证兴趣：能否独立完成一次物料衡算并说明假设，能否把一个异常数据追到来源。"
+              "本轮没有取得九型人格用于本职业准入或表现的证据；可用衡算与数据追溯任务作编辑观察，不能从一次可交付物证明正式胜任。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.14",
@@ -28085,7 +28111,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：与该职业任务最贴合的信号是「愿意用数据与记录支撑结论」与「能在不确定条件下给出带边界的判断」；兴趣代码 RIC 说明该职业偏向现实型与研究型并带有常规型成分，但代码只描述群体分布，不决定个人是否适合。"
+              "直接回答：与该职业任务最贴合的信号是「愿意用数据与记录支撑结论」与「能在不确定条件下给出带边界的判断」；兴趣代码 RIC 说明该职业偏向现实型与研究型并带有常规型成分，但代码描述职业兴趣特征，不决定个人是否适合。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.27",
@@ -28096,7 +28122,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "工艺开发与放大方向"
+              "化学家"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.28",
@@ -28107,7 +28133,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：喜欢从实验与中试数据出发设计工业方案，愿意处理传热传质与放大这类没有唯一答案的问题。"
+              "编辑信号：喜欢分析与实验研究物质/反应和方法，愿意整理可复核检测证据。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.29",
@@ -28118,7 +28144,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你更希望有明确标准答案与固定流程，这条方向会持续带来不确定感。"
+              "需核表征、分析与实验职责；化学家也可开发工艺，不把其排除全部工艺改进。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.30",
@@ -28129,7 +28155,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "生产运行与优化方向"
+              "材料科学家"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.31",
@@ -28140,7 +28166,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：愿意长期跟踪同一套装置的运行数据，从趋势中找改进点，并能接受值夜班与现场条件。"
+              "编辑信号：关注材料结构、性质和应用，愿意用实验及模型验证。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.32",
@@ -28151,7 +28177,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你期待频繁的新项目与变化，运行优化的节奏可能偏平稳。"
+              "需补材料表征与性质方法；材料科学家也可监督生产或处理工艺，非绝对纯微观。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.33",
@@ -28162,7 +28188,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "工艺安全与环境合规方向"
+              "工业工程师"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.34",
@@ -28173,7 +28199,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：愿意研读法规与标准原文，并能把合规要求转成可执行的检查与整改项。"
+              "编辑信号：喜欢整合人、设备、物流、质量与成本分析生产系统。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.35",
@@ -28184,7 +28210,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：这条方向经常要给出不受欢迎的结论（停机、整改、延期），需要有承担冲突的准备。"
+              "需补系统方法与人的因素；不将工业工程统一简化为管理岗位。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.36",
@@ -28195,7 +28221,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "化学家"
+              "机械工程师"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.37",
@@ -28206,7 +28232,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：对物质与反应本身更感兴趣，愿意在分析与表征上投入长期时间。"
+              "编辑信号：喜欢机械设备设计、安装、运行和故障分析。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.38",
@@ -28217,7 +28243,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你更想做装置与放大，化学家方向的产出形态会不同。"
+              "需补力学、机械设计与设备标准，不能凭化工设备经验自动具备独立设计资格。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.39",
@@ -28228,7 +28254,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "材料科学家"
+              "核工程师"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.40",
@@ -28239,7 +28265,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：关注材料结构与性能机理，并愿意把材料放进工艺环境检验。"
+              "编辑信号：愿意研究核能控制利用及核废物问题，并核专门安全要求。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.41",
@@ -28250,7 +28276,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你对微观表征缺乏耐心，这条方向会比较吃力。"
+              "核专业、辐射防护与目标资格另核，不用同类工程文件证明可直接转岗。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.42",
@@ -28261,7 +28287,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "工业工程师"
+              "石油工程师"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.43",
@@ -28272,7 +28298,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：喜欢优化流程、排产与资源配置，愿意处理组织与人的问题。"
+              "编辑信号：愿意研究油气开采、钻井及工具改进，处理地下与现场信息。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.44",
@@ -28283,7 +28309,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你希望深入化学与物理过程本身，工业工程方向会偏管理视角。"
+              "需补储层/井筒/开采知识，目标岗位法域与现场条件另核。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.45",
@@ -28316,7 +28342,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。外向本身不是优势或劣势，关键是能否把技术结论讲清楚、并在评审与跨部门协作中推进事项；如果更偏好独立工作，可以选择偏研究与开发的岗位。"
+              "外向程度不决定胜任；编辑建议核技术说明、评审和跨部门沟通。研究/开发也可沟通密集，不能靠岗位标签保证独立工作比例。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.48",
@@ -28338,7 +28364,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 该职业的兴趣代码为 RIC（现实型、研究型、常规型）。这表示职业群体更多分布在现实型与研究型取向，但代码不是个人适配结论，仍需用实际任务验证。"
+              "O*NET 该职业的兴趣代码为 RIC（现实型、研究型、常规型）。这表示职业任务包含现实型、研究型和常规型兴趣特征，但代码不是个人适配结论，仍需用实际任务验证。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.50",
@@ -28349,7 +28375,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。人格特质分数与工作表现的关联在不同研究中强弱不一，且受岗位与组织影响；本页不用它作为录用或适配判断依据。"
+              "本轮未取得特定人格/兴趣测分预测化学工程师工作表现的研究；不能替代资格与实际任务证据。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.51",
@@ -28382,7 +28408,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不建议。九型人格不是职业测评工具，也没有官方职业适配证据；用它判断适配容易把偏好当成能力上限。"
+              "本轮未取得九型人格的本职业适配效度，不据类型决定资格投入或能力上限。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.54",
@@ -28492,7 +28518,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业招聘中出现的技术关键词，不代表熟练度或使用率"
+              "用于发现相关认证；具体名称、条件及适用资格须当前核实，不是软件招聘频率。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.64",
@@ -28503,7 +28529,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对行业分布与就业结构"
+              "Hot Technology为2025招聘文本中的软件关键词频率，不代表熟练度、使用率或增长趋势。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.65",
@@ -28514,7 +28540,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对本职业的就业预测与行业工资中位数"
+              "用于核对2025行业就业分布50%/24%/26%，不是行业工资或就业预测。"
             ]
           },
           "id": "chemical-engineers.fit.personality-fit-block.66",
@@ -28536,7 +28562,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣取向：该职业群体分布在现实型与研究型并带有常规型成分，日常任务以数据与判断为主，动手实验与现场观察也占一定比重。"
+              "兴趣取向：该职业任务有现实型、研究型与常规型兴趣特征，日常任务以数据与判断为主，动手实验与现场观察也占一定比重。"
             ]
           },
           "id": "chemical-engineers.fit.riasec-fit-block.10",
@@ -28582,7 +28608,7 @@
           },
           "id": "chemical-engineers.risk.career-risk-cards.1",
           "source_refs": [
-            "nasa-seh"
+            "chem-cn-class"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28612,7 +28638,7 @@
           },
           "id": "chemical-engineers.risk.career-risk-cards.3",
           "source_refs": [
-            "nasa-seh"
+            "chem-cn-class"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28627,7 +28653,7 @@
           },
           "id": "chemical-engineers.risk.career-risk-cards.4",
           "source_refs": [
-            "nasa-seh"
+            "chem-cn-class"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28735,10 +28761,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：任务与工作情境来自 O*NET 17-2041.00（美国口径）；安全与环境与合规要求来自公开法规与标准的一般框架；具体阈值、许可与责任划分属于企业与法域事项，本条为编辑归纳，不构成合规意见。"
+              "O*NET支持美国职业任务与情境；控制动作多为编辑建议。法律主张分别核中国安法、注册化工制度和美国1910.119适用范围；没有企业全套操作、排放/接触限值与停复工程序，不以泛框架证明全部合规。"
             ]
           },
           "id": "chemical-engineers.risk.career-risk-cards.10",
+          "source_refs": [
+            "chem-psm",
+            "chem-cn-reg",
+            "chem-cn-safety"
+          ],
           "type": "prose"
         },
         {
@@ -28768,10 +28799,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "可以核对的动作：把设计基础写成清单，逐项标注数据来源与不确定度；对关键物性注明适用温度压力组成范围；把无法确认的输入列为待验证项并明确验证方式与责任人。"
+              "可以核对的动作：把设计基础写成清单，逐项标注数据来源与不确定度；对关键物性注明适用温度压力组成范围；把无法确认的输入列为待验证项并明确验证方式与责任人。 这是编辑核对建议；美国适用PSM工艺的(d)有物质/技术/设备安全信息要求，先核(a)覆盖，不套全部实验室。"
             ]
           },
           "id": "chemical-engineers.risk.career-risk-cards.13",
+          "source_refs": [
+            "chem-psm"
+          ],
           "type": "prose"
         },
         {
@@ -28889,7 +28923,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "可能后果：变更未同步更新图纸、控制逻辑与验证结论，导致文件与实际装置不一致，在安全检查或客户审核中失去证据链。"
+              "变更未评估、图纸/程序未同步可能使受影响验证不再适用并引起事故或返工；不是所有变更使全部证据自动失效。"
             ]
           },
           "id": "chemical-engineers.risk.career-risk-cards.24",
@@ -28900,10 +28934,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "可以核对的动作：建立变更影响范围清单；对受影响的验证结论重新评估并记录结论；在流程图与管道仪表流程图与仪表清单上同步标记版本。"
+              "编辑建议列变更影响、受影响验证及文件版本。美国适用PSM工艺按(l)核技术依据、安全影响、程序、时间与授权，更新安全信息/操作程序，并对受影响人员启动前告知培训；同规格替换例外。"
             ]
           },
           "id": "chemical-engineers.risk.career-risk-cards.25",
+          "source_refs": [
+            "chem-psm"
+          ],
           "type": "prose"
         },
         {
@@ -28944,10 +28981,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "可以核对的动作：按企业数据分级选择工具与部署方式；对敏感信息做脱敏或使用内部环境；保留访问与导出记录并按制度审批。"
+              "编辑保密建议：核资料权利、合同/保密义务、数据分级与访问权限；脱敏或内部环境不能自动合规。中国注册人员按暂行规定28条保密；美国PSM(p)不得以商业秘密阻止法定安全信息获得，可有保密协议，不给模型服务开放上传许可。"
             ]
           },
           "id": "chemical-engineers.risk.career-risk-cards.29",
+          "source_refs": [
+            "chem-psm",
+            "chem-cn-reg"
+          ],
           "type": "prose"
         },
         {
@@ -28988,7 +29029,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "可以核对的动作：定期回到基础（衡算、传递过程、反应工程）验证自己的判断是否仍成立；每年至少完成一次跨工具的对比练习；把可迁移能力（问题拆解、数据判断、文件写作）显性化。"
+              "编辑学习建议：定期复核衡算、数据判断和文件能力，按岗位变化选择跨工具比较；没有“每年至少一次”统一标准或效果证据。"
             ]
           },
           "id": "chemical-engineers.risk.career-risk-cards.33",
@@ -29043,7 +29084,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明任务暴露的度量思路与其指标限制"
+              "链接实际为O*NET摘要，用于职业身份与任务概览，不提供ILO暴露模型或指标方法。"
             ]
           },
           "id": "chemical-engineers.risk.career-risk-cards.38",
@@ -29054,10 +29095,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明本卡的编辑归纳性质与适用范围"
+              "ILO用于任务暴露度方法及样本、指标局限，不证明本职业事故率或中国紧急撤离法律权利。"
             ]
           },
           "id": "chemical-engineers.risk.career-risk-cards.39",
+          "source_refs": [
+            "chem-cn-safety"
+          ],
           "type": "prose"
         }
       ]
@@ -29078,7 +29122,7 @@
           },
           "id": "chemical-engineers.path.career-path-block.1",
           "source_refs": [
-            "onet-training"
+            "chem-current-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -29341,10 +29385,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：进入该职业最常见的路径是完成化学工程或相关工程专业的本科教育，在学习期间通过实习、合作教育或校内项目获得真实的工艺计算与实验经验；BLS 显示该职业入行学历为学士学位，不需要相关工作经验，也不需要雇主提供在职培训，但雇主通常偏好有实习或合作教育经历的候选人。能否进入岗位主要看三点：专业基础是否扎实、是否做过完整的数据—计算—方案—记录闭环、以及沟通与协作是否可靠。"
+              "美国BLS典型本科、相关职业经验None、在岗训练None；这是典型职业分类，不表示雇主免除培训。OOH有雇主偏好实习/合作教育；编辑建议用衡算、实验与记录证据核准备，不称三个条件统一决定录用。中国安法27—30条分别规定主要负责人/安全管理人员能力与特定单位考核、从业及实习人员安全教育培训、特种作业资格；危险物品生产/储存/装卸等法定单位应有注册安全工程师从事管理，不要求每位化学工程师都持此证。涉及具体特种作业须另核目录与实际任务。"
             ]
           },
           "id": "chemical-engineers.path.career-path-block.20",
+          "source_refs": [
+            "chem-cn-safety",
+            "chem-ep"
+          ],
           "type": "prose"
         },
         {
@@ -29352,10 +29400,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界：学历与培训、行业认证、法定执业资格与岗位授权是四件不同的事。美国入门岗位不要求执照；以专业工程师名义对外执业、签署工程文件或监督他人工程成果通常要求各州签发的 PE 执照，一般路径为工程类本科或以上学历、通过 FE 考试、若干年相关工作经验并通过 PE 考试。中国大陆的注册化工工程师属于全国勘察设计注册工程师执业资格考试的一个专业，分基础考试与专业考试两个阶段，由住房和城乡建设部执业资格注册中心与人力资源社会保障部人事考试中心组织。本页不把认证或培训写成自动执业授权，也不把某一法域的资格要求推到其他法域。"
+              "美国BLS称入门化学工程师不要求执照；PE由州/辖区许可机关管理，一般路径含EAC/ABET认可工程学位、FE、相关可验证经验和PE考试，州另有路径/例外。考试通过不自动取得执照/签章权，不把企业内部普通文件与受监管对外工程服务混为一类。 中国注册化工工程师暂行规定适用化工、石化、化纤、医药和轻化设计及相关业务；资格证与注册证不同，考试分基础和专业。按13/20—23/26—28条核注册后的业务范围、受聘设计资质单位、统一承接收费、主要技术文件签章与个人/单位责任；不是所有生产工艺工程岗位统一持此证。具体现行文件种类、申请办理与目标项目条件另核。"
             ]
           },
           "id": "chemical-engineers.path.career-path-block.21",
+          "source_refs": [
+            "chem-ncees",
+            "chem-cn-reg"
+          ],
           "type": "prose"
         },
         {
@@ -29374,7 +29426,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本页关于入行与教育采用美国 O*NET/BLS 口径：Job Zone Four、SVP 区间 7.0 至 8.0 以下、教育调查 91% 为学士学位；中国大陆部分只说明公开的考试与注册制度框架，不对中国大陆的雇主门槛作统一结论，因为不同企业与岗位差异较大。"
+              "本页关于入行与教育采用美国 O*NET/BLS 口径：Job Zone Four、SVP 区间 7.0 至 8.0 以下、受访者对新员工执行工作所需学历的判断（非从业者学历构成、非统一招聘门槛）： 91% 为学士学位；中国大陆部分只说明公开的考试与注册制度框架，不对中国大陆的雇主门槛作统一结论，因为不同企业与岗位差异较大。"
             ]
           },
           "id": "chemical-engineers.path.career-path-block.23",
@@ -29396,7 +29448,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对美国入行要求与工作环境说明"
+              "用于核对Job Zone准备层级与受访者对新员工完成工作所需学历的判断，不是工作环境调查。"
             ]
           },
           "id": "chemical-engineers.path.career-path-block.25",
@@ -29407,7 +29459,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对准备层级与教育调查数据"
+              "localtraining用于发现培训项目，具体项目、条件与是否适合目标岗位另核，不是学历调查。"
             ]
           },
           "id": "chemical-engineers.path.career-path-block.26",
@@ -29429,7 +29481,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求化学工程或相关专业本科在读或已毕业；该阶段没有强制执业资格要求。"
+              "编辑能力起点：学习相关工程基础；美国典型本科，中国目标学历另核。实习/现场任务也有安全培训，不能称该阶段无任何强制资格。"
             ]
           },
           "id": "chemical-engineers.path.career-path-block.28",
@@ -29484,7 +29536,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国部分企业要求 PE 或倾向招聘已通过 FE 的候选人；应以具体招聘公告为准。"
+              "编辑中试/单元岗位示例，具体公告未取得；美国PE通常用于受监管工程服务，是否要求FE/PE另核，不冒充部分已核企业招聘。"
             ]
           },
           "id": "chemical-engineers.path.career-path-block.33",
@@ -29539,7 +29591,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "部分岗位要求 PE 执照或同等资历；中国大陆部分岗位要求相应注册资格。"
+              "编辑路线/装置岗位示例；是否要求PE或中国注册资格取决于法域、业务和具体项目，未取得雇主样本。"
             ]
           },
           "id": "chemical-engineers.path.career-path-block.38",
@@ -29594,7 +29646,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在要求署名的岗位须具备相应法域资格；不具备资格时不得以工程师名义对外签署。"
+              "受监管署名按相应资格、机构与业务范围核；不把一般内部工程师称谓或普通文件统一当法定PE/注册签章。"
             ]
           },
           "id": "chemical-engineers.path.career-path-block.43",
@@ -29869,7 +29921,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "该阶段无强制资格要求；参与现场分析须完成相应安全培训。"
+              "编辑安全分析起点，任务适用培训/资格按实际职责核，不统一称无强制资格；中国从业/实习安全培训按安法28条。"
             ]
           },
           "id": "chemical-engineers.path.career-path-block.68",
@@ -29979,10 +30031,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆相关岗位可能要求注册安全工程师或相应注册资格，须按当地与行业规定确认。"
+              "中国安法27—30条分别规定主要负责人/安全管理人员能力与特定单位考核、从业及实习人员安全教育培训、特种作业资格；危险物品生产/储存/装卸等法定单位应有注册安全工程师从事管理，不要求每位化学工程师都持此证。涉及具体特种作业须另核目录与实际任务。"
             ]
           },
           "id": "chemical-engineers.path.career-path-block.78",
+          "source_refs": [
+            "chem-cn-safety"
+          ],
           "type": "prose"
         },
         {
@@ -30098,7 +30153,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "编辑建议核对的能力",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -30108,7 +30163,7 @@
                 "整理物性与反应数据、做单元衡算、按方案执行实验并记录偏差。",
                 "专业基础、实验与数据记录习惯、能否把假设写清楚。",
                 "用课程设计或毕设中的完整衡算与实验报告证明，附数据来源与单位说明。",
-                "与运行岗位相比更偏设计与验证，现场时间较少但与不确定性打交道的更多。"
+                "编辑比较：设计与验证侧重不等于现场更少，实际工时/现场比例按机构核。"
               ],
               [
                 "装置技术（工艺工程师）",
@@ -30129,7 +30184,7 @@
                 "设计实验、验证反应与分离方案、整理数据并给出结论。",
                 "实验设计能力、对偏差与误差的处理、文献与数据检索。",
                 "用一份包含对照与误差分析的实验报告证明。",
-                "与工程岗位相比更深入物质与反应本身，与装置与成本的关联较弱。"
+                "实验/反应研究也可联系工艺、装置和成本；重心按真实项目，不能统一说关联较弱。"
               ],
               [
                 "设计与工程服务",
@@ -30160,9 +30215,9 @@
               {
                 "id": "clearance",
                 "values": [
-                  "美国部分岗位（尤其涉及政府项目或敏感工艺）可能需要背景调查或安全许可；",
+                  "背景调查或安全许可须查目标项目、雇主与法域；本轮未取得具体岗位要求。",
                   "中国大陆涉及危险化学品与特种设备的岗位须符合相应安全与作业规定；",
-                  "涉及出口管制技术的岗位可能有额外的身份与合规要求。"
+                  "出口管制相关技术须按技术、法域与访问权限核合规；本轮未取得具体岗位身份限制证据。"
                 ]
               },
               {
@@ -30170,7 +30225,7 @@
                 "values": [
                   "批判性思维与科学为基本技能中重要度最高的两项（均为 78）；",
                   "数学重要度 69、阅读理解 75、主动学习 72；",
-                  "工作风格中注重细节与可靠性直接对应高准确度要求。"
+                  "O*NET注重细节89/可靠86；准确性情境是另项问卷，不证人格因果。"
                 ]
               },
               {
@@ -30422,8 +30477,8 @@
               [
                 "本科学位（化学工程或相关工程专业）",
                 "绝大多数入行者",
-                "是求职的基础门槛，影响岗位序列与起薪区间",
-                "是（美国 BLS 显示入行学历为学士）",
+                "美国典型准备学历；中国学历和实际岗位序列/报价另核，无统一起薪研究。",
+                "美国BLS典型学历（不是所有雇主统一硬门槛）",
                 "完成相关专业课程并通过毕业要求；具体专业认定以院校与雇主为准",
                 "中高（学制数年）",
                 "学位本身不等于执业资格，也不代表具备独立签署技术文件的能力"
@@ -30431,7 +30486,7 @@
               [
                 "实习或合作教育经历",
                 "在校生与应届毕业生",
-                "明显提升获得面试与录用机会的可能性",
+                "OOH称雇主通常偏好相关实习/合作教育，录用提升幅度未取得。",
                 "否（但雇主通常偏好）",
                 "通过学校或企业项目获得，通常有选拔流程",
                 "中（数周到数月）",
@@ -30442,8 +30497,8 @@
                 "计划走 PE 路径的美国工程师",
                 "是取得 PE 执照的前置步骤之一",
                 "否（入门岗位不要求）",
-                "通常需工程类专业学历或即将毕业；具体以 NCEES 与所在州规定为准",
-                "中（备考数月）",
+                "FE报考资格按所在州/辖区与NCEES项目核；本轮未逐项核所有报考例外，不设全国统一学历门槛。",
+                "编辑投入提示：费用和准备时间按个人与官方项目核，未取得统一数月数据。",
                 "通过 FE 不等于取得 PE，也不自动获得签署权"
               ],
               [
@@ -30451,31 +30506,35 @@
                 "需要对外执业或签署文件的美国工程师",
                 "在要求署名的岗位上是实质性条件",
                 "否（但部分岗位或晋升路径要求）",
-                "工程类本科或以上学历、通过 FE、若干年相关工作经验、通过 PE 考试；由各州分别签发",
+                "美国BLS称入门化学工程师不要求执照；PE由州/辖区许可机关管理，一般路径含EAC/ABET认可工程学位、FE、相关可验证经验和PE考试，州另有路径/例外。考试通过不自动取得执照/签章权，不把企业内部普通文件与受监管对外工程服务混为一类。",
                 "高（数年经验积累）",
-                "执照按州与专业签发，跨境或跨州执业须核对当地要求"
+                "执照由州/辖区许可机关管理，工程专业权限与跨辖区执业按当地核，不统一称所有州按专业单独发证。"
               ],
               [
                 "注册化工工程师（中国大陆）",
                 "在中国大陆从事勘察设计相关化工工程岗位的人员",
                 "在相应岗位序列中具有实质作用",
                 "否（并非所有化工岗位都要求）",
-                "全国勘察设计注册工程师执业资格考试的一个专业，分基础考试与专业考试；报考条件以住房和城乡建设部执业资格注册中心与中国人事考试网公布为准",
+                "中国注册化工工程师暂行规定适用化工、石化、化纤、医药和轻化设计及相关业务；资格证与注册证不同，考试分基础和专业。按13/20—23/26—28条核注册后的业务范围、受聘设计资质单位、统一承接收费、主要技术文件签章与个人/单位责任；不是所有生产工艺工程岗位统一持此证。具体现行文件种类、申请办理与目标项目条件另核。",
                 "高（考试与年限要求）",
                 "注册与执业范围以主管部门规定为准；本页不代替官方报考条件"
               ],
               [
                 "行业认证（如 ASQ、NCCCCE 等）",
                 "希望证明特定方向的从业者",
-                "部分岗位认可，属于加分项",
+                "认证目录支持名称发现；特定雇主认可或加分未取得。",
                 "否",
                 "各认证机构自定报考条件与考试要求，须逐项核实",
-                "中（备考与费用）",
+                "费用、准备时间与认可范围逐项核，不能由目录统一定中等投入。",
                 "认证是行业自律性质，不等于法定执业资格，也不替代岗位授权"
               ]
             ]
           },
           "id": "chemical-engineers.path.credential-decision.1",
+          "source_refs": [
+            "chem-ncees",
+            "chem-cn-reg"
+          ],
           "title": "资格选择",
           "type": "table"
         },
@@ -30484,13 +30543,16 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "本页把「学历与培训」「行业认证」「法定执业资格」与「岗位授权」分列：学历决定你能进入哪些岗位序列，行业认证用于证明特定方向的能力，法定资格由法域主管部门规定，岗位授权由企业制度决定，四者不能互相替代。",
+              "学历/培训、认证、法定资格和岗位授权分别核；学历不单独决定岗位序列，学徒/工作路径与资格例外须按法域确认。",
               "美国：入门岗位不要求执照；对外执业与签署工程文件通常受各州 PE 制度约束。本页不列具体州的条件，也不把某一州的要求当作全国统一要求。",
-              "中国大陆：注册化工工程师是全国勘察设计注册工程师执业资格考试的一个专业，分基础考试与专业考试；报考条件以住房和城乡建设部执业资格注册中心与中国人事考试网公布的信息为准，本页不代替官方条件。",
+              "中国注册化工工程师暂行规定适用化工、石化、化纤、医药和轻化设计及相关业务；资格证与注册证不同，考试分基础和专业。按13/20—23/26—28条核注册后的业务范围、受聘设计资质单位、统一承接收费、主要技术文件签章与个人/单位责任；不是所有生产工艺工程岗位统一持此证。具体现行文件种类、申请办理与目标项目条件另核。",
               "本页涉及的认证名称来自 O*NET 的认证发现入口，其报考条件、有效期与认可范围须由各认证机构原文核实；本页不保证任何认证在特定雇主或法域被承认。"
             ]
           },
           "id": "chemical-engineers.path.credential-boundary.1",
+          "source_refs": [
+            "chem-cn-reg"
+          ],
           "title": "资格与练习边界",
           "type": "notice"
         },
@@ -30499,7 +30561,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "关于招聘样本：本页不使用招聘平台报价作为工资依据，也不把单条招聘公告写成行业统一门槛；招聘信息中的学历、专业、经验与工具要求会随企业与年份变化。",
+              "本轮未取得具体中国招聘样本。入门岗位、层级与考察表为编辑例子，不称已核雇主通常要求；实习偏好只按美国OOH说明。",
               "关于岗位名称：化工相关岗位可能使用工艺工程师、研发工程师、装置工程师、技术服务工程师等多种名称，比较时应以实际职责与授权范围为准，而不是名称。"
             ]
           },
@@ -30594,7 +30656,7 @@
           },
           "id": "chemical-engineers.market-signals.market-signal-card.5",
           "source_refs": [
-            "onet-industry"
+            "chem-current-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30644,10 +30706,10 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "国家统计局《城镇单位就业人员年平均工资情况》检索入口",
+                "entity": "国家统计局2025城镇单位行业工资表",
                 "id": "link-5",
                 "relation": "related-evidence",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET-SOC 17-2041.00 职业详细资料",
@@ -30713,7 +30775,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：BLS 预测 2025—2035 年美国该职业就业增长 5%（快于所有职业平均），2025 年岗位数 21,900 个、变化约 +1,000 人、年均空缺约 1,100 个，其中相当部分来自离职与退休的替补需求。中国大陆未取得与该职业精确对应的全国工资与就业统计口径，本页只登记缺口，不给出替代数值。"
+              "BLS2025—2035就业21.9→22.9千、净增1.0千、增4.7%（OOH舍入5%）、年均1.1千空缺含替补；不归因AI。中国精确工资与就业未取得，行业工资背景按国家统计局2025表另列。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.8",
@@ -30746,7 +30808,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增长 5% 属「快于所有职业平均」；预测以现有产业结构为假设，含误差，不等于逐年的实际岗位数。"
+              "美国全国预测含模型假设与误差；表1.2增4.7%、OOH舍入5%，不能说仅固定现有产业结构。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.11",
@@ -30757,7 +30819,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为全国职业级预测，不区分行业与地区；也不能用于推断某一企业或某一城市的机会数量。"
+              "本页展示全国值；BLS另有行业预测和州级机构预测，不称来源不能区分行业地区。本轮未取得特定企业/城市在招机会。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.12",
@@ -30889,7 +30951,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025 年及以前公开资料"
+              "工资参考2025年（2026-05发布），职业大典2022版"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.24",
@@ -30900,7 +30962,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本条证据路由把中国大陆的精确职业工资登记为已核实不可得，本页只登记统计口径与缺口，不发布数值。"
+              "中国精确职业工资本轮未取得；可核制造业、科学研究技术服务业行业参考，不能代职业工资。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.25",
@@ -30911,7 +30973,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业或较宽职业口径不能替代本职业的精确全国口径；本页不采用招聘样本或相邻岗位报价填补。"
+              "行业参考标单位性质、税前年均和覆盖边界，不替代精确职业；无真实招聘样本，不以相邻报价填全国值。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.26",
@@ -30933,7 +30995,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆（未建立一一对应的职业细类）"
+              "中国大典化工工程技术人员含实验、设计、生产三个细类；与美国代码一一统计映射未建立"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.28",
@@ -30944,7 +31006,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该职业的中国大陆全国工资口径"
+              "精确全国职业工资未取得；制造业和科学技术服务业2025行业背景另列"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.29",
@@ -30977,7 +31039,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于登记中国大陆的统计口径与缺口"
+              "用于核国家统计局2025行业工资与覆盖，并保留精确职业缺口"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.32",
@@ -30999,7 +31061,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少化工工艺的单元操作与传递过程训练，以及把物性与反应数据用于设计与放大的经验。"
+              "编辑能力比较：补分析表征、实验设计和方法验证经验；化学家也可工艺改进，不能把化工单元缺口当转向化学家的主要差距。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.34",
@@ -31010,7 +31072,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共享能力：定量分析与实验能力、数据处理与记录习惯、把问题拆成可计算对象的能力。"
+              "编辑能力比较：共享实验/定量分析、数据记录与问题拆解。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.35",
@@ -31021,7 +31083,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。化学家方向需要补强分析表征与机理研究能力，并把工作重心从装置与工艺转到物质与反应本身。"
+              "编辑能力比较：化学家：工作更偏物质分析与实验；本页距离为编辑比较，未取得量化距离/成功率。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.36",
@@ -31032,7 +31094,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少对材料结构与性能关系、以及材料在特定环境下的失效机理的系统训练。"
+              "编辑能力比较：补材料性能规范、制造/加工方法、选择与失效分析经验。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.37",
@@ -31043,7 +31105,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共享能力：实验与数据方法、材料与工艺界面问题的分析能力。"
+              "编辑能力比较：共享材料/工艺界面分析、试验与工程数据。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.38",
@@ -31054,7 +31116,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等偏大。材料科学家方向更依赖微观表征与材料学基础。"
+              "编辑能力比较：材料工程师：评价材料并开发满足性能要求的制造设备与过程，非材料科学家标签；距离编辑比较。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.39",
@@ -31065,7 +31127,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少对生产系统、排产、成本与组织效率方法的系统训练（价值流、工时与产能与库存等）。"
+              "编辑能力比较：补生产系统、人的因素、排产、物流与质量/成本方法。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.40",
@@ -31076,7 +31138,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共享能力：过程分析、数据与成本意识、跨部门协作。"
+              "编辑能力比较：共享过程数据、成本分析和协作。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.41",
@@ -31087,7 +31149,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。工业工程师方向更强调系统层面与人的因素。"
+              "编辑能力比较：工业工程师：整合生产系统，不统一当管理岗位；距离编辑比较。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.42",
@@ -31098,7 +31160,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少设备与结构的力学与运动学设计经验，以及对制造工艺与公差的理解。"
+              "编辑能力比较：补制造系统集成、工艺实现、可制造性与生产质量方法。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.43",
@@ -31109,7 +31171,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共享能力：工程计算、设备选型与故障分析、标准与规范的使用。"
+              "编辑能力比较：共享工程计算、设备/工艺分析、成本与文件习惯。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.44",
@@ -31120,7 +31182,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等偏大。机械工程师方向需要补强力学与结构设计。"
+              "编辑能力比较：制造工程师：设计整合改进制造系统，不能承接机械设计卡；距离编辑比较。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.45",
@@ -31131,7 +31193,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少对储层与井筒与流体开采的系统知识，以及现场作业与地下不确定性条件下的决策经验。"
+              "编辑能力比较：补材料结构/性质研究、表征与实验模型方法。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.46",
@@ -31142,7 +31204,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共享能力：流体与热力学基础、过程分析与安全与环境意识。"
+              "编辑能力比较：共享化学/材料试验、数据判断和记录。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.47",
@@ -31153,7 +31215,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：大。石油工程师方向的对象与作业环境差异明显。"
+              "编辑能力比较：材料科学家：材料结构与性质研究，也可能联系生产过程；不能承接石油储层卡；距离编辑比较。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.48",
@@ -31164,7 +31226,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少核安全与辐射防护的制度性训练，以及中子与热工水力等核工程专门知识。"
+              "编辑能力比较：补机械力学/设备设计、安装运行维护与标准。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.49",
@@ -31175,7 +31237,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共享能力：强约束条件下的过程分析与安全分析、以及工程文件与验证记录的习惯。"
+              "编辑能力比较：共享工程计算、设备诊断和跨专业协作。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.50",
@@ -31186,7 +31248,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：大。核工程师方向需要额外的核工程与辐射防护知识与资格确认。"
+              "编辑能力比较：机械工程师：设备和机械系统，不是核能控制卡；距离编辑比较。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.51",
@@ -31197,7 +31259,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少设备强度与振动与密封等机械设计的系统训练。"
+              "编辑能力比较：补储层、井筒、钻采与地下数据经验。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.52",
@@ -31208,7 +31270,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共享能力：工程计算、绘图与文件规范、跨专业协作。"
+              "编辑能力比较：共享流体/热力学、过程分析和安全意识。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.53",
@@ -31219,7 +31281,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等偏大。机械工程师方向需要补强力学与机械设计基础。"
+              "编辑能力比较：石油工程师：油气开采与钻井工具，不能承接重复机械卡；距离编辑比较。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.54",
@@ -31230,7 +31292,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少对不同化学品生产技术的具体工艺与催化剂体系的经验。"
+              "编辑能力比较：补核能控制利用、核废物、核安全/辐射防护与目标资格。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.55",
@@ -31241,7 +31303,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共享能力：化学与工程基础、过程分析、质量控制与安全与环境意识。"
+              "编辑能力比较：共享受约束工程分析、验证与记录。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.56",
@@ -31252,7 +31314,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。制造工程师方向更强调工艺实现与产线稳定，需要补齐制造与质量体系知识。"
+              "编辑能力比较：核工程师：对象为核能及废物；不能承接化工制造卡；距离编辑比较。 目标资格/岗位条件另核，未有转岗成效研究。"
             ]
           },
           "id": "chemical-engineers.market-signals.market-signal-card.57",
@@ -31406,7 +31468,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源为美国 O*NET OnLine 与 U.S. Bureau of Labor Statistics 的公开页面，以及国家统计局与人力资源社会保障部的公开信息入口。所有数值均保留其职业、地域、期间、单位与统计口径；来源清单见页面「资料来源」。"
+              "一手来源为O*NET职业详情/Hot/全国工资/认证、BLS表1.2与OOH、国家统计局2025行业表、职业大典2022正文、中国注册化工暂行规定/安法、美国NCEES及1910.119、ILO研究与NIST自愿框架。编辑辅助用途/转岗比较非效果实测。"
             ]
           },
           "id": "chemical-engineers.sources.source-card.2",
@@ -31417,7 +31479,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容检索与更新于 2026 年 9 月。"
+              "本轮2026-10-09实际核读；美国工资2025、预测2025—2035、Hot Lightcast2025；中国工资2025、分类2022、注册制度/安全法规按所列原文。未逐项核地方许可、项目状态、认证费用。"
             ]
           },
           "id": "chemical-engineers.sources.source-card.3",
@@ -31428,7 +31490,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "使用提示：本页是职业信息服务，不构成执业、法律、投资、医疗或安全操作建议；涉及工艺设计、安全与环境合规与执业资格的决定，须以适用法规、标准原文与具备相应授权的人员意见为准。"
+              "使用提示：本页是职业信息服务，不构成执业、法律、投资、医疗或安全操作建议；涉及工艺设计、安全与环境合规与执业资格的决定，须以适用法规、标准原文与具备相应授权的人员意见为准。 中国精确职业缺口不排除行业参考；普通文件、法定签章和生产放行分开，紧急停止/撤离权不以额外岗位批准为前提。"
             ]
           },
           "id": "chemical-engineers.sources.source-card.4",
@@ -31772,6 +31834,156 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025国家统计局税前年均：制造业非私营113,594/私营76,055元；科学研究和技术服务业非私营182,064/私营83,560元。制造业可作生产装置岗位背景，科学技术服务可作设计/研发单位背景；两类行业全部单位岗位均值，不是化学工程师工资、起薪、上下限或月薪，不对应化工细分行业。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "chem-cn-wage",
+                "limitation": "2025国家统计局税前年均：制造业非私营113,594/私营76,055元；科学研究和技术服务业非私营182,064/私营83,560元。制造业可作生产装置岗位背景，科学技术服务可作设计/研发单位背景；两类行业全部单位岗位均值，不是化学工程师工资、起薪、上下限或月薪，不对应化工细分行业。",
+                "market": "中国大陆",
+                "name": "国家统计局2025行业单位工资",
+                "period": "2025",
+                "publisher": "中国官方",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国大典2022正文物理40页列化工工程技术人员2-02-06，包括实验2-02-06-01、设计02和生产03。设计细类含物料热量平衡、设备选型、跨专业设计条件、成本、工艺图与扩大设计；实验和生产细类分别含实验数据报告、生产技术规程及异常处理。与美国17-2041有职责重叠，但本轮没有建立一一统计映射，不把中文名称直接换成工资或执业资格。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "chem-cn-class",
+                "limitation": "中国大典2022正文物理40页列化工工程技术人员2-02-06，包括实验2-02-06-01、设计02和生产03。设计细类含物料热量平衡、设备选型、跨专业设计条件、成本、工艺图与扩大设计；实验和生产细类分别含实验数据报告、生产技术规程及异常处理。与美国17-2041有职责重叠，但本轮没有建立一一统计映射，不把中文名称直接换成工资或执业资格。",
+                "market": "中国大陆",
+                "name": "职业大典化工工程技术人员正文",
+                "period": "2022物理40页",
+                "publisher": "中国官方",
+                "scope": "contextual",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国注册化工工程师暂行规定适用化工、石化、化纤、医药和轻化设计及相关业务；资格证与注册证不同，考试分基础和专业。按13/20—23/26—28条核注册后的业务范围、受聘设计资质单位、统一承接收费、主要技术文件签章与个人/单位责任；不是所有生产工艺工程岗位统一持此证。具体现行文件种类、申请办理与目标项目条件另核。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "chem-cn-reg",
+                "limitation": "中国注册化工工程师暂行规定适用化工、石化、化纤、医药和轻化设计及相关业务；资格证与注册证不同，考试分基础和专业。按13/20—23/26—28条核注册后的业务范围、受聘设计资质单位、统一承接收费、主要技术文件签章与个人/单位责任；不是所有生产工艺工程岗位统一持此证。具体现行文件种类、申请办理与目标项目条件另核。",
+                "market": "中国大陆",
+                "name": "注册化工工程师暂行规定与考试办法",
+                "period": "2003现行公开文本",
+                "publisher": "中国官方",
+                "scope": "contextual",
+                "url": "https://rsj.beijing.gov.cn/xxgk/2024zcwj/202406/t20240617_3717378.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国安法27—30条分别规定主要负责人/安全管理人员能力与特定单位考核、从业及实习人员安全教育培训、特种作业资格；危险物品生产/储存/装卸等法定单位应有注册安全工程师从事管理，不要求每位化学工程师都持此证。涉及具体特种作业须另核目录与实际任务。 33设计责任、55紧急停止撤离、57—59履责培训报告。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "chem-cn-safety",
+                "limitation": "中国安法27—30条分别规定主要负责人/安全管理人员能力与特定单位考核、从业及实习人员安全教育培训、特种作业资格；危险物品生产/储存/装卸等法定单位应有注册安全工程师从事管理，不要求每位化学工程师都持此证。涉及具体特种作业须另核目录与实际任务。 33设计责任、55紧急停止撤离、57—59履责培训报告。",
+                "market": "中国大陆",
+                "name": "中华人民共和国安全生产法",
+                "period": "2021修正",
+                "publisher": "中国官方",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国1910.119仅适用(a)列物质/数量与例外覆盖工艺，不按职业名称统一套；(d)过程安全信息、(e)危害分析、(i)启动前审查、(l)变更管理各有责任/条件，同规格更换有例外。中国岗位另核适用法，不跨用美国阈值。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "chem-psm",
+                "limitation": "美国1910.119仅适用(a)列物质/数量与例外覆盖工艺，不按职业名称统一套；(d)过程安全信息、(e)危害分析、(i)启动前审查、(l)变更管理各有责任/条件，同规格更换有例外。中国岗位另核适用法，不跨用美国阈值。",
+                "market": "美国",
+                "name": "OSHA1910.119过程安全管理",
+                "period": "现行正文2026-10-09核读",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.119"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国BLS称入门化学工程师不要求执照；PE由州/辖区许可机关管理，一般路径含EAC/ABET认可工程学位、FE、相关可验证经验和PE考试，州另有路径/例外。考试通过不自动取得执照/签章权，不把企业内部普通文件与受监管对外工程服务混为一类。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "chem-ncees",
+                "limitation": "美国BLS称入门化学工程师不要求执照；PE由州/辖区许可机关管理，一般路径含EAC/ABET认可工程学位、FE、相关可验证经验和PE考试，州另有路径/例外。考试通过不自动取得执照/签章权，不把企业内部普通文件与受监管对外工程服务混为一类。",
+                "market": "美国",
+                "name": "NCEES许可路径",
+                "period": "2026-10-09核读",
+                "publisher": "NCEES",
+                "scope": "contextual",
+                "url": "https://ncees.org/licensure/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "自愿治理框架，非化工自动化效率或强制操作规程。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "chem-nist",
+                "limitation": "自愿治理框架，非化工自动化效率或强制操作规程。",
+                "market": "跨行业",
+                "name": "NIST AI RMF1.0",
+                "period": "2023",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本轮O*NET详情与行业子页一致：2025行业就业分布为制造业50%、专业科学技术服务24%、其他26%；旧47%/25%/28%不作当前值。行业就业结构不证明工资或AI采用率。 工作风格21项，非原文7项总量。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "chem-current-details",
+                "limitation": "本轮O*NET详情与行业子页一致：2025行业就业分布为制造业50%、专业科学技术服务24%、其他26%；旧47%/25%/28%不作当前值。行业就业结构不证明工资或AI采用率。 工作风格21项，非原文7项总量。",
+                "market": "美国",
+                "name": "O*NET化学工程师当前详情",
+                "period": "2026更新/行业2025",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-2041.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "16具体软件名称与详情16类别不同，单年非增长/采用证据。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "chem-hot",
+                "limitation": "16具体软件名称与详情16类别不同，单年非增长/采用证据。",
+                "market": "美国",
+                "name": "O*NET化学工程师Hot",
+                "period": "Lightcast2025",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/17-2041.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "21.9→22.9千，增1.0千/4.7%，自雇2.4%，年均空缺1.1千；本科、相关经验None/OJTNone不是免培训。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "chem-ep",
+                "limitation": "21.9→22.9千，增1.0千/4.7%，自雇2.4%，年均空缺1.1千；本科、相关经验None/OJTNone不是免培训。",
+                "market": "美国",
+                "name": "BLS表1.2化学工程师",
+                "period": "2025—2035",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               }
             ]
           },
@@ -33984,7 +34196,8 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "chem-psm",
+              "chem-cn-safety"
             ],
             "id": "design-basis-gap",
             "mitigation": {
@@ -34016,7 +34229,8 @@
             },
             "evidence_refs": [
               "onet",
-              "bls"
+              "chem-psm",
+              "editorial"
             ],
             "id": "model-unit-validity",
             "mitigation": {
@@ -34047,8 +34261,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-context"
+              "onet-context",
+              "editorial"
             ],
             "id": "pilot-data-integrity",
             "mitigation": {
@@ -34080,7 +34294,7 @@
             },
             "evidence_refs": [
               "onet",
-              "onet-context"
+              "chem-psm"
             ],
             "id": "change-control",
             "mitigation": {
@@ -34111,8 +34325,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-industry"
+              "chem-cn-reg",
+              "chem-psm"
             ],
             "id": "controlled-information",
             "mitigation": {
@@ -34144,7 +34358,8 @@
             },
             "evidence_refs": [
               "onet",
-              "ilo"
+              "ilo",
+              "editorial"
             ],
             "id": "skill-obsolescence",
             "mitigation": {
@@ -34278,6 +34493,36 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.119",
+            "id": "chem-psm",
+            "label": "OSHA1910.119过程安全管理",
+            "scope": "美国1910.119仅适用(a)覆盖工艺；(d)设计基础、(l)变更、(p)资料及保密。"
+          },
+          {
+            "href": "https://rsj.beijing.gov.cn/xxgk/2024zcwj/202406/t20240617_3717378.html",
+            "id": "chem-cn-reg",
+            "label": "注册化工工程师暂行规定与考试办法",
+            "scope": "中国注册化工工程师适用设计业务，28条含保守执业秘密，不扩大到所有岗位准入。"
+          },
+          {
+            "href": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html",
+            "id": "chem-cn-safety",
+            "label": "中华人民共和国安全生产法",
+            "scope": "中国安全生产法33设计责任、55紧急停止撤离、57—59义务；紧急撤离不受岗位批准前置。"
+          },
+          {
+            "href": "#career-visual-group-risk",
+            "id": "editorial",
+            "label": "编辑核对建议",
+            "scope": "模型、实验记录及学习建议为编辑整理，不证明措施实测效果。"
+          },
+          {
+            "href": "https://ncees.org/licensure/",
+            "id": "chem-ncees",
+            "label": "NCEES许可路径（美国）",
+            "scope": "原AI问答的许可路径参考；各州资格和签章范围另核，不用于中国注册制度。"
           }
         ]
       },
@@ -34630,10 +34875,10 @@
             "type": "prose"
           },
           "fact_refs": [
-            "cn-industry-science-tech-2024",
-            "cn-industry-manufacturing-2024",
-            "cn-professional-technical-2024",
-            "cn-urban-nonprivate-2024"
+            "chem-cn-0",
+            "chem-cn-1",
+            "chem-cn-2",
+            "chem-cn-3"
           ],
           "sources_note": {
             "$item": "chemical-engineers.china-salary.career-snapshot-primary-locale.57",
@@ -34644,7 +34889,7 @@
           "ui": {
             "ai_heading": "AI 会影响化学工程师的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "中国行业工资背景与精确职业缺口",
             "scenario_caption": "学历背景、岗位方向与说明（编辑整理，不是薪资统计）",
             "scenario_heading": "不同学历背景对应哪些岗位方向？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -35656,7 +35901,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中国大陆统计口径与缺口（本条路由不发布数值）",
+            "label": "中国大陆精确缺口与行业工资背景",
             "secondary_value": null,
             "value": {
               "$item": "chemical-engineers.profile.onet-structured-fields-block.3",
@@ -36951,6 +37196,54 @@
         "source_refs": [
           "onet-localwages"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "制造业城镇非私营单位113,594元/年（税前平均，2025）",
+        "fact_id": "chem-cn-0",
+        "market": "中国大陆",
+        "measure": "行业单位全部就业岗位年平均工资",
+        "occupation_scope": "制造业城镇非私营单位，非化学工程师",
+        "period": "2025",
+        "source_refs": [
+          "chem-cn-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "制造业城镇私营单位76,055元/年（税前平均，2025）",
+        "fact_id": "chem-cn-1",
+        "market": "中国大陆",
+        "measure": "行业单位全部就业岗位年平均工资",
+        "occupation_scope": "制造业城镇私营单位，非化学工程师",
+        "period": "2025",
+        "source_refs": [
+          "chem-cn-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "科学研究和技术服务业城镇非私营单位182,064元/年（税前平均，2025）",
+        "fact_id": "chem-cn-2",
+        "market": "中国大陆",
+        "measure": "行业单位全部就业岗位年平均工资",
+        "occupation_scope": "科学研究和技术服务业城镇非私营单位，非化学工程师",
+        "period": "2025",
+        "source_refs": [
+          "chem-cn-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "科学研究和技术服务业城镇私营单位83,560元/年（税前平均，2025）",
+        "fact_id": "chem-cn-3",
+        "market": "中国大陆",
+        "measure": "行业单位全部就业岗位年平均工资",
+        "occupation_scope": "科学研究和技术服务业城镇私营单位，非化学工程师",
+        "period": "2025",
+        "source_refs": [
+          "chem-cn-wage"
+        ]
       }
     ]
   },
@@ -36959,7 +37252,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "RIASEC · RIC",
@@ -37010,7 +37303,7 @@
       "text": "化学工程师"
     }
   },
-  "source_content_sha256": "647d5718ccdf2368819a243f90bbaad0c7444d5f6cc41ec9af55692219d56a92",
+  "source_content_sha256": "ca27a8ac69523fe096bcbb5590dd065559965dd8eb8a65a4f1276dc8b88f0ef2",
   "subject": {
     "canonical_slug": "chemical-engineers",
     "name": "化学工程师",

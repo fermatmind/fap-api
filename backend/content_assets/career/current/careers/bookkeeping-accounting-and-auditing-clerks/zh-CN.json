@@ -1386,7 +1386,7 @@
         "status": "mapped"
       },
       "item:bookkeeping-accounting-and-auditing-clerks.path.credential-decision.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:bookkeeping-accounting-and-auditing-clerks.path.employer-evidence.1": {
         "status": "pending_mapping"
@@ -9165,18 +9165,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.02.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            1,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.02.mitigation": {
         "ref": {
@@ -9521,18 +9511,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.06.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            5,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.06.mitigation": {
         "ref": {
@@ -11480,28 +11460,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.href": {
-        "ref": {
-          "id": "bookkeeping-accounting-and-auditing-clerks.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.label": {
         "ref": {
@@ -24138,10 +24098,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 技术清单列出 28 类软件与工具，其中 19 项标注为 Hot Technology，常见方向包括会计软件（QuickBooks、Sage 50、SAP Concur）、电子表格与办公套件（Excel、Word、Office）、ERP 与数据库（SAP、Microsoft Access、Oracle Database）以及文档与报表工具（Adobe Acrobat、Crystal Reports）；工具只是实现手段，科目判断与核对责任仍需由人负责。"
+              "详细页28软件类别，Hot单页19产品、5项In-Demand：Excel31%、QuickBooks21%、Office19%、Outlook10%、SAP6%；Word4%、PowerPoint2%、Concur/PeopleSoft1%，另8项低于1%，Project/Oracle Database未公布不填0。分母2025美国唯一招聘广告，非采用率、技能必修或AI替代率。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.profile.career-quick-answers-block.28",
+          "source_refs": [
+            "details-current",
+            "onet-hot-tech"
+          ],
           "type": "prose"
         },
         {
@@ -24218,10 +24182,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "簿记、会计与审计文员（美国侧 O*NET-SOC 43-3031.00，Bookkeeping, Accounting, and Auditing Clerks）计算、分类并记录数值数据以保持财务记录完整；执行例行的计算、过账与核对工作，获得用于维护会计记录的基础财务数据；也可能核对其他人员所记录业务交易的数字、计算与过账是否准确。它既不是财务决策岗位，也不承担审计意见或税务结论的签署责任。"
+              "簿记、会计与审计文员（美国侧 O*NET-SOC 43-3031.00，Bookkeeping, Accounting, and Auditing Clerks）计算、分类并记录数值数据以保持财务记录完整；执行例行的计算、过账与核对工作，获得用于维护会计记录的基础财务数据；也可能核对其他人员所记录业务交易的数字、计算与过账是否准确。它既不是财务决策岗位，官方定义不自动授予审计意见或税务结论签署资格；兼任其他岗位须另核其法域资格与责任。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.profile.definition-block.11",
+          "source_refs": [
+            "details-current",
+            "cn-accounting-law-2024"
+          ],
           "type": "prose"
         },
         {
@@ -24229,10 +24197,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业身份与任务：O*NET-SOC 43-3031.00 Bookkeeping, Accounting, and Auditing Clerks，Bright Outlook，2026 年更新，Job Zone Three（SVP 6.0 至 <7.0）。官方职责为「计算、分类和记录数值数据以保持财务记录完整」；共 28 项任务，高重要度任务包括使用会计软件记录与分析信息（94）、核对数字、过账与单据的录入、计算准确性与编码（92）、遵守联邦、州与公司政策规程（89）、使用计算器与复印设备完成计算与制单（87）、接收记录并存入现金、支票与凭证（87）。"
+              "O*NET 职业身份与任务：O*NET-SOC 43-3031.00 Bookkeeping, Accounting, and Auditing Clerks，Bright Outlook，2026 年更新，Job Zone Three（SVP 6.0 至 <7.0）。官方职责为「计算、分类和记录数值数据以保持财务记录完整」；共28项任务（13Core、15Supplemental），高重要度任务包括使用会计软件记录与分析信息（94）、核对数字、过账与单据的录入、计算准确性与编码（92）、遵守联邦、州与公司政策规程（89）、使用计算器与复印设备完成计算与制单（87）、接收记录并存入现金、支票与凭证（87）。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -24251,10 +24222,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：国家统计局《2025 年城镇单位就业人员年平均工资情况》（2026-05-15 发布）按行业门类与岗位大类公布平均工资，但没有单列「簿记、会计与审计文员」这一职业；本页按证据路由只展示规模以上企业整体平均工资 106,080 元/年与「办事人员和有关人员」岗位大类平均工资 94,936 元/年作为代理口径，并明确它不是本职业的职业工资。"
+              "NBS2025匹配参照（税前年平均元/年）：租赁和商务服务业城镇非私营110,162/私营68,919，规模以上全部92,849、办事人员88,460、专业技术149,542；金融业非私营211,164/私营140,451；批发零售135,749/69,622、规模以上全部112,030/办事97,096/专业技术140,999。按实际雇主行业及本人职责选择；会计专业核算可能属于专业技术，不能仅凭美国Clerk译名认定全部是办事人员。跨行业规模以上全部106,080/办事94,936仍只作背景，非职业中位或起薪。 精确全国职业工资及城市月薪仍证据不足。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.profile.onet-structured-fields-block.3",
+          "source_refs": [
+            "nbs-current",
+            "cn-industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -24262,10 +24237,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS现行SOC 43-3031精确职业预测：2025年就业1,532,400人，2035年1,446,800人；2025—2035年下降6%、净减少85,600人，年均约144,100个空缺全部来自人员转岗或退出劳动力市场后的替补需求，不是净新增岗位。 O*NET摘要的2024年1,613,400人、2024—2034年Decline与170,000空缺属于历史期间，不混入本页当前主指标。"
+              "当前O*NET与BLS均采用2025—2035：就业1,532,400→1,446,800，下降6%、BLS净减少85,600，年均144,100空缺全部来自转岗或退出后的替代需求，不是净新增、录用保证或生成式AI单独因果估计。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.profile.onet-structured-fields-block.4",
+          "source_refs": [
+            "bls-outlook",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -24273,10 +24252,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业分布与工具信号：O*NET 2024 年行业分布为专业、科学与技术服务 13%、其他行业（含建筑与医疗健康及社会援助等）87%；技术清单共 28 类，其中 19 项标注为 Hot Technology，5 项为 In-Demand 技能。行业分布描述统计分类，不能推导行业工资或个人岗位归属。"
+              "O*NET2025美国43-3031.00行业分布：专业、科学与技术服务14%、其他86%（含建筑、医疗健康和社会援助）。这是美国行业归属，非工资解释、中国行业或个人雇主分类。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.profile.onet-structured-fields-block.5",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -25042,10 +25024,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把生成式工具用在凭证信息提取、票据分类初筛、对账差异描述草稿、报表附注与流程文档整理等可复核环节；科目判断、期间归属、差异定性与对外报送口径仍须由人负责。"
+              "编辑任务分析：把生成式工具用在凭证信息提取、票据分类初筛、对账差异描述草稿、报表附注与流程文档整理等可复核环节；科目判断、期间归属、差异定性与对外报送口径仍须由人负责。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.13",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25064,10 +25050,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "引入工具前先明确可用环节、账务与薪酬数据的知悉范围与保密要求、过账与调整的审批权限、生成内容的核对与留痕流程、出错升级路径和复核责任人，保证任何输出都回到可追溯的账簿记录。"
+              "编辑任务分析：引入工具前先明确可用环节、账务与薪酬数据的知悉范围与保密要求、过账与调整的审批权限、生成内容的核对与留痕流程、出错升级路径和复核责任人，保证任何输出都回到可追溯的账簿记录。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.15",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25086,10 +25076,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把训练重点放在会计科目与借贷逻辑、凭证与期间判断、对账与差异处理、内部控制和数据保密上，同时训练对自动识别结果的核对习惯与对不确定事项的升级意识。"
+              "编辑任务分析：把训练重点放在会计科目与借贷逻辑、凭证与期间判断、对账与差异处理、内部控制和数据保密上，同时训练对自动识别结果的核对习惯与对不确定事项的升级意识。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.17",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25185,10 +25179,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 28 类软件与工具及 19 项 Hot Technology 标注；不代表自动化程度或岗位替代。"
+              "详细页28软件类别，Hot单页19产品、5项In-Demand：Excel31%、QuickBooks21%、Office19%、Outlook10%、SAP6%；Word4%、PowerPoint2%、Concur/PeopleSoft1%，另8项低于1%，Project/Oracle Database未公布不填0。分母2025美国唯一招聘广告，非采用率、技能必修或AI替代率。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.26",
+          "source_refs": [
+            "details-current",
+            "onet-hot-tech"
+          ],
           "type": "prose"
         },
         {
@@ -25207,10 +25205,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明该职业的行业分布；不能推导行业工资或就业规模。"
+              "O*NET2025美国43-3031.00行业分布：专业、科学与技术服务14%、其他86%（含建筑、医疗健康和社会援助）。这是美国行业归属，非工资解释、中国行业或个人雇主分类。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.28",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -25229,10 +25230,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页当前就业指标采用BLS2025—2035年SOC 43-3031预测；O*NET摘要历史期间另行标明，不混用。"
+              "当前O*NET与BLS均采用2025—2035：就业1,532,400→1,446,800，下降6%、BLS净减少85,600，年均144,100空缺全部来自转岗或退出后的替代需求，不是净新增、录用保证或生成式AI单独因果估计。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.30",
+          "source_refs": [
+            "trends-current",
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -25262,10 +25267,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表比较三组工作方向在自动化影响上的差别：哪些环节可被辅助，哪些判断与责任仍由人承担。"
+              "编辑任务分析：下表比较三组工作方向在自动化影响上的差别：哪些环节可被辅助，哪些判断与责任仍由人承担。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.33",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25273,10 +25282,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "凭证信息提取、票据分类初筛与文档结构整理可辅助生成。"
+              "编辑任务分析：凭证信息提取、票据分类初筛与文档结构整理可辅助生成。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.34",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25284,10 +25297,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断科目与期间归属、确认差异性质、决定是否需要调整已入账记录并对账簿准确性负责。"
+              "编辑任务分析：判断科目与期间归属、确认差异性质、决定是否需要调整已入账记录并对账簿准确性负责。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.35",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25295,10 +25312,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "重复录入、格式转换与批量比对可自动完成。"
+              "编辑任务分析：重复录入、格式转换与批量比对可自动完成。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.36",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25306,10 +25327,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核对自动比对结果与原始凭证、确认金额与编码无误、保留复核痕迹并承担记录可追溯责任。"
+              "编辑任务分析：核对自动比对结果与原始凭证、确认金额与编码无误、保留复核痕迹并承担记录可追溯责任。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.37",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25317,10 +25342,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对账说明草稿、差异描述与流程文档初稿可由工具生成。"
+              "编辑任务分析：对账说明草稿、差异描述与流程文档初稿可由工具生成。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.38",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25328,10 +25357,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不得把工具输出当作已核对结论或对外报送依据，须逐条对照凭证与账簿核对并由责任人确认。"
+              "编辑任务分析：不得把工具输出当作已核对结论或对外报送依据，须逐条对照凭证与账簿核对并由责任人确认。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.39",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25339,10 +25372,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、行业分布、就业与工资数据以及任务暴露研究，不是 AI 替代率或岗位数量预测。"
+              "证据卡分别对应任务、技术招聘、BLS工资和就业预测、ILO任务暴露。BLS确实给职业就业数量预测；ILO暴露和Hot招聘指标不等AI替代率、采用率或失业预测，不能混作一项。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.40",
+          "source_refs": [
+            "bls-outlook",
+            "onet-hot-tech",
+            "ilo-genai"
+          ],
           "type": "prose"
         },
         {
@@ -25471,10 +25509,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面列出 28 类软件与工具，其中 19 项标注 Hot Technology，5 项为 In-Demand 技能，常见包括 QuickBooks、SAP Concur、SAP、Microsoft Excel、Word、Office、Access、Oracle Database、Adobe Acrobat、Microsoft SharePoint、Google Docs、PowerPoint 等。"
+              "详细页28软件类别，Hot单页19产品、5项In-Demand：Excel31%、QuickBooks21%、Office19%、Outlook10%、SAP6%；Word4%、PowerPoint2%、Concur/PeopleSoft1%，另8项低于1%，Project/Oracle Database未公布不填0。分母2025美国唯一招聘广告，非采用率、技能必修或AI替代率。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.52",
+          "source_refs": [
+            "onet-hot-tech",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25631,10 +25673,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "需要熟悉会计软件与电子表格。O*NET 技术清单列出 28 类工具，其中 19 项为 Hot Technology，QuickBooks、Excel、Office 等标注为 In-Demand；真正的门槛是能按科目与规程把记录做准并接受复核。"
+              "编辑建议按真实岗位核会计软件与表格要求；详细页28软件类别、19Hot、5In-Demand，产品标签非全体岗位门槛。记录准确、凭证与科目判断及复核有官方职责依据，不能以掌握某款软件替代专业能力或授权。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.66",
+          "source_refs": [
+            "details-current",
+            "onet-hot-tech",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25642,10 +25689,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 技术清单 / 详细资料"
+              "实际链接详细页支持软件类别与任务；产品招聘比例另见Hot。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.67",
+          "source_refs": [
+            "details-current",
+            "onet-hot-tech"
+          ],
           "type": "prose"
         },
         {
@@ -25653,10 +25704,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "凭证信息提取、票据分类初筛、批量比对、格式转换、对账说明与流程文档草稿等；这些环节可复核、可追溯。"
+              "编辑任务分析：凭证信息提取、票据分类初筛、批量比对、格式转换、对账说明与流程文档草稿等；这些环节可复核、可追溯。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.68",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25664,10 +25719,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 详细资料 / 本页方法说明"
+              "实际链接Hot单页，只支持招聘技术信号；辅助任务排序为编辑分析。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.69",
+          "source_refs": [
+            "onet-hot-tech",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25700,10 +25759,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具输出不会自行产生岗位权限或签署资格。NIST AI RMF GOVERN要求明确人的角色、责任与监督；中国会计及法定审计责任具体见本页资格板块的会计法，不由美国AI框架决定。"
+              "工具文字不会产生岗位权限或签署资格。NIST AI RMF1.0自愿框架GOVERN2.1—2.3/3.2建议明确责任、培训与人类监督；中国会计及依法审计的具体责任另按会计法核。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.72",
+          "source_refs": [
+            "nist-pdf-current",
+            "cn-accounting-law-2024"
+          ],
           "type": "prose"
         },
         {
@@ -25722,10 +25785,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有任何官方来源给出这样的年份。任务暴露、工具采用程度与就业数量是不同概念，本页不做岗位消失年份预测。"
+              "本轮已读官方资料没有本职业岗位消失年份；本页不作年份预测，未声称穷尽所有官方资料。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.74",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25733,10 +25799,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页方法说明"
+              "实际custom入口可选职业字段，不给岗位消失年份。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.75",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25755,10 +25824,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 培训与教育信息 / 自定义职业档案"
+              "实际链接详细页支持Job Zone与教育要求问答；localtraining另为项目检索，非实时招生。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.77",
+          "source_refs": [
+            "details-current",
+            "training-current"
+          ],
           "type": "prose"
         },
         {
@@ -25854,10 +25927,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "账务与薪酬数据属敏感信息，泄露可能造成经营损失并违反保密与合规要求。"
+              "账务与薪酬数据可能涉及个人信息、金融账户及商业秘密；不能将全部账务一概称法定敏感个人信息。中国个人信息保护法28/51条要求按种类与风险采取保护、合理设置操作权限，具体外部处理用途须核。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.86",
+          "source_refs": [
+            "pip-current"
+          ],
           "type": "prose"
         },
         {
@@ -26220,10 +26296,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "带教新入行的记账人员，示范凭证核对与对账要点，纠正不规范操作。"
+              "编辑场景：带教新人演示凭证核对与对账；O*NET培训他人为一般活动（35），不是28项具体任务之一；对部门质量负责须有实际岗位授权。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.ai-impact.ai-impact-table.119",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26373,10 +26453,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮2026-10-03核对的国家统计局2025年城镇单位工资发布未单列本职业；本页保留全国与城市职业工资缺口，不以行业或岗位大类平均工资代填。"
+              "本轮2026-10-09复核NBS2025同版发布，未单列本职业。行业/人员大类匹配参考与全国/城市精确职业工资缺口分别展示，不用均值代填。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.china-salary.career-snapshot-primary-locale.8",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26395,10 +26478,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业门类平均工资混合企业财务、代理记账、事业单位财务与共享中心等多类岗位，不能替代本职业职业工资；本页只把它作为对照口径。"
+              "NBS2025匹配参照（税前年平均元/年）：租赁和商务服务业城镇非私营110,162/私营68,919，规模以上全部92,849、办事人员88,460、专业技术149,542；金融业非私营211,164/私营140,451；批发零售135,749/69,622、规模以上全部112,030/办事97,096/专业技术140,999。按实际雇主行业及本人职责选择；会计专业核算可能属于专业技术，不能仅凭美国Clerk译名认定全部是办事人员。跨行业规模以上全部106,080/办事94,936仍只作背景，非职业中位或起薪。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.china-salary.career-snapshot-primary-locale.10",
+          "source_refs": [
+            "nbs-current",
+            "cn-industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -26428,10 +26515,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "规模以上企业就业人员年平均工资 106,080 元/年，其中办事人员和有关人员 94,936 元/年、专业技术人员 155,491 元/年、中层及以上管理人员 210,016 元/年（2025 年）。"
+              "NBS2025匹配参照（税前年平均元/年）：租赁和商务服务业城镇非私营110,162/私营68,919，规模以上全部92,849、办事人员88,460、专业技术149,542；金融业非私营211,164/私营140,451；批发零售135,749/69,622、规模以上全部112,030/办事97,096/专业技术140,999。按实际雇主行业及本人职责选择；会计专业核算可能属于专业技术，不能仅凭美国Clerk译名认定全部是办事人员。跨行业规模以上全部106,080/办事94,936仍只作背景，非职业中位或起薪。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.china-salary.career-snapshot-primary-locale.13",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26439,10 +26529,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "上述为规模以上企业与岗位大类的官方平均工资，按《中华人民共和国职业分类大典（2022 年版）》五类岗位汇总，不区分具体职业；本页把它作为代理口径展示，不写成该职业工资。"
+              "NBS五类人员按2022职业分类归类；办事人员与专业技术人员按实际职责选择，不把文员译名或整个会计岗位自动归一大类。规模以上16行业覆盖与城镇单位总体不同。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.china-salary.career-snapshot-primary-locale.14",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26516,10 +26609,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论：本页所查中国大陆官方发布未提供同口径职业工资；只展示已核代理工资、覆盖范围与缺口。"
+              "未取得同口径精确职业工资；本页展示实际雇主行业和人员大类匹配参照及统计覆盖，不能作个人薪资预期。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.china-salary.career-snapshot-primary-locale.21",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26538,10 +26634,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与财务软件会改变凭证提取、分类初筛与文档整理等辅助环节，但不改变中国大陆对该职业的统计口径：统计缺口与工具无关。"
+              "编辑任务推演：工具可能辅助提取、初筛与文档；统计缺口取决所查资料覆盖，不能从工具存在推中国职业工资或分类已改变。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.china-salary.career-snapshot-primary-locale.23",
+          "source_refs": [
+            "editor-current",
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26692,10 +26792,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "专业、科学与技术服务"
+              "租赁和商务服务业（中国行业门类）"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.china-salary.career-snapshot-primary-locale.37",
+          "source_refs": [
+            "cn-industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -26703,10 +26806,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "会计师事务所、代理记账与财务咨询机构的记账岗位可能归入该门类；该门类平均工资按行业汇总，不单列本职业，本页不据此推算本职业工资。"
+              "中国2017行业分类注释L7241会计、审计及税务服务含记账、财务报表编制与会计咨询；单位或集团特定财务结算报账另7214，亦在商务服务。不能套用美国专业科学技术门类；实际雇主主要经济活动另核。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.china-salary.career-snapshot-primary-locale.38",
+          "source_refs": [
+            "cn-industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -26725,10 +26831,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "银行、保险与证券机构的后台账务与核算岗位可能归入该门类；同样只有行业平均数，不能表示本职业工资。"
+              "实际金融机构后台核算可按雇主金融行业作参照：NBS2025非私营211,164/私营140,451元年平均；非本职业工资，不用金融行业均值代替会计岗位中位。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.china-salary.career-snapshot-primary-locale.40",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26747,10 +26856,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "商贸企业的应收应付、库存与门店账务岗位可能归入该门类；同样只有行业平均数，不能表示本职业工资。"
+              "实际商贸雇主可参考NBS2025批发零售非私营135,749/私营69,622元年平均；规模以上办事97,096/专业技术140,999须按实际职责选择，非本职业工资。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.china-salary.career-snapshot-primary-locale.42",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26780,10 +26892,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "在本次核对的国家统计局2025年城镇单位工资发布中未单列本职业；本页展示其规模以上企业和岗位大类平均工资代理，不主张已穷尽中国所有调查。"
+              "NBS2025匹配参照（税前年平均元/年）：租赁和商务服务业城镇非私营110,162/私营68,919，规模以上全部92,849、办事人员88,460、专业技术149,542；金融业非私营211,164/私营140,451；批发零售135,749/69,622、规模以上全部112,030/办事97,096/专业技术140,999。按实际雇主行业及本人职责选择；会计专业核算可能属于专业技术，不能仅凭美国Clerk译名认定全部是办事人员。跨行业规模以上全部106,080/办事94,936仍只作背景，非职业中位或起薪。 全国/城市精确工资与实时招聘分布缺口保留，未穷尽所有调查。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.china-salary.career-snapshot-primary-locale.45",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -27084,10 +27199,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "对应时薪第 10 分位 17.31 美元，为分布下限，不是入门起薪的承诺。；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/43-3031.00?st=NH"
+              "全国时薪第10分位17.31美元是较低分位，仍有工资低于它；不是分布最小值或入门起薪承诺。2025 OEWS全国行，页面NH地方选择不替代全国值。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.us-salary.career-snapshot-secondary-locale.10",
+          "source_refs": [
+            "onet-localwages"
+          ],
           "type": "prose"
         },
         {
@@ -27225,12 +27343,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS现行SOC 43-3031预测，不用O*NET历史Decline标签替代。；O*NET历史摘要（2024—2034，非当前表数据）｜https://www.onetonline.org/link/summary/43-3031.00"
+              "O*NET已更新同一2025—2035预测期，下降6%；工资与预测对象分指标解读。｜https://www.onetonline.org/link/localtrends/43-3031.00"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "bls-outlook"
+            "trends-current"
           ],
           "type": "prose"
         },
@@ -27253,11 +27371,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS年均空缺全部为转岗或退出后的替补需求，不是净新增或录用保证。；O*NET历史摘要（2024—2034，非当前表数据）｜https://www.onetonline.org/link/summary/43-3031.00"
+              "当前O*NET年空缺144,100；BLS解释全为转岗或退出替代需求，非净新增。｜https://www.onetonline.org/link/localtrends/43-3031.00"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
+            "trends-current",
             "bls-outlook"
           ],
           "type": "prose"
@@ -27267,10 +27386,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国工资为2025年BLS OEWS全国SOC 43-3031分布，当前就业为BLS2025—2035年同职业预测。O*NET历史2024—2034年字段不混入现行表；行业工资是各行业内本职业中位数，非行业整体工资。"
+              "2025全国OEWS工资、2025—2035就业预测分别核；当前ONet已更新同期间。行业工资是该行业内本职业中位，不是行业全体均值。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.us-salary.career-snapshot-secondary-locale.25",
+          "source_refs": [
+            "onet-localwages",
+            "trends-current",
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -27311,10 +27435,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与雇主类型影响报酬：O*NET 2024 年行业分布为专业、科学与技术服务 13%、其他行业（含建筑与医疗健康及社会援助等）87%，不同雇主的计酬方式与结账周期不同。"
+              "O*NET2025美国43-3031.00行业分布：专业、科学与技术服务14%、其他86%（含建筑、医疗健康和社会援助）。这是美国行业归属，非工资解释、中国行业或个人雇主分类。 行业工资另以BLS各行业内本职业中位比较，分布不能证明收入因果。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.us-salary.career-snapshot-secondary-locale.29",
+          "source_refs": [
+            "industry-current",
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -27531,10 +27659,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "实际收入还受教育与训练、行业与雇主类型、职责范围与责任层级、所在地区影响。"
+              "编辑建议：逐项比较雇主实际报价、地区、职责、工时与结账加班。教育/责任对工资的独立增幅未核，不作因果或个人收入预测。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.us-salary.career-snapshot-secondary-locale.49",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27823,7 +27954,7 @@
                 "url": "https://www.onetonline.org/link/summary/43-3031.00"
               },
               {
-                "entity": "O*NET-SOC 43-3031.00 职业摘要（入门学历构成）",
+                "entity": "O*NET-SOC 43-3031.00 职业摘要（入门教育要求调查）",
                 "id": "link-19",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/43-3031.00"
@@ -27934,10 +28065,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业适配或账务胜任的评估工具，也没有官方资料支持「某种类型最适合簿记与会计文员」的说法。可用于自我反思与沟通偏好理解，但不能用于培训投入或录用筛选。"
+              "MBTI 不是职业适配或账务胜任的评估工具，本轮所读O*NET/BLS未支持「某种类型最适合簿记与会计文员」的说法。可用于自我反思与沟通偏好理解，但不能用于培训投入或录用筛选。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.fit.personality-fit-block.10",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -27979,10 +28114,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样不是职业适配工具，缺乏官方职业资料支持，也不用于录用或胜任判断。可用于自我反思，但不能据此决定是否投入长期训练。"
+              "九型人格同样不是职业适配工具，本轮所读职业资料没有给出本职业预测效度，也不用于录用或胜任判断。可用于自我反思，但不能据此决定是否投入长期训练。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.fit.personality-fit-block.14",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -27990,10 +28129,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：无官方职业资料来源支持将九型人格用于职业适配判断。"
+              "证据强度：本轮所读职业资料未支持将九型人格用于职业适配判断。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.fit.personality-fit-block.15",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28069,10 +28212,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪能力有帮助：需要在结账与报税期承受时间压力、在发现差异或他人错误时保持沟通、在面对不合规要求时坚持按制度处理。但情绪能力不能用单一分数定义，也不能替代专业训练与职业纪律。"
+              "编辑观察：检查截止日前的注意、差异沟通及面对违规要求的处理。O*NET自控/耐压均23，属于工作风格，不验证情绪智力测验或其因果收益；本页未取得专属测验效度。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.fit.personality-fit-block.22",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28091,7 +28238,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能在截止日前保持准确与沟通，比分数高低更重要。",
+              "编辑建议观察截止日前是否保持准确并沟通，不把这与情绪测试分数作已验证预测效力排序。",
               "愿意承认记录错误并主动更正，是专业能力的一部分。"
             ]
           },
@@ -28114,10 +28261,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。真正有解释力的证据是受复核的账务实践表现。"
+              "边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。编辑建议观察受复核的账务实践表现。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.fit.personality-fit-block.26",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28125,10 +28276,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：更有解释力的适配信号是能按科目与规程把记录做准、愿意逐项核对凭证与余额、接受他人复核并在发现差异时如实报告；对数字或软件的兴趣本身不足以证明胜任。"
+              "直接回答：编辑建议观察的表现是能按科目与规程把记录做准、愿意逐项核对凭证与余额、接受他人复核并在发现差异时如实报告；对数字或软件的兴趣本身不足以证明胜任。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.fit.personality-fit-block.27",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28345,10 +28500,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合与否不取决于内外向。工作情境显示 94% 每天使用电子邮件、86% 每天通电话、67% 每天进行面对面讨论，66% 与他人持续接触；能否清楚核对与交接比外向程度更关键。"
+              "适合与否不取决于内外向。工作情境显示 94% 每天使用电子邮件、86% 每天通电话、67% 每天进行面对面讨论，66% 与他人持续接触；编辑建议实际观察核对与交接，未核与外向分数的预测效力排序。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.fit.personality-fit-block.47",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28356,10 +28515,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能。外向有助于与客户和同事沟通，但账务工作要求把注意力放在凭证、数字与规程上；能否接受复核并修正记录，比表达欲更关键。"
+              "外向标签不决定胜任。编辑建议实际观察凭证核对、复核接受与记录更正，未核外向对本职业沟通或绩效的因果收益，不用表达欲作筛选条件。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.fit.personality-fit-block.48",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28367,10 +28530,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有官方结论，也不存在最适合的类型。MBTI 只能帮助整理偏好并提出核对问题，不能预测账务胜任力或录用结果；本页不提供类型名单。"
+              "本轮所读职业资料没有给出最适合的类型。MBTI 只能帮助整理偏好并提出核对问题，不能预测账务胜任力或录用结果；本页不提供类型名单。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.fit.personality-fit-block.49",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28411,10 +28578,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪能力确实有帮助：需要在结账与报税期承受时间压力、在发现差异或他人错误时保持沟通。但情绪能力不能用单一分数定义，也不能替代专业训练与职业纪律。"
+              "编辑观察：检查截止日前的注意、差异沟通及面对违规要求的处理。O*NET自控/耐压均23，属于工作风格，不验证情绪智力测验或其因果收益；本页未取得专属测验效度。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.fit.personality-fit-block.53",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28477,10 +28648,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 Job Zone、学历构成与培训入口。"
+              "实际链接localtraining：730相关学校项目，IPEDS2025—26/授位2024—25，非Job Zone或岗位教育调查。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.fit.personality-fit-block.59",
+          "source_refs": [
+            "training-current"
+          ],
           "type": "prose"
         },
         {
@@ -28488,10 +28662,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明账务与薪酬数据的保密、访问控制与留痕要求。"
+              "实际会计法37条支持会计人员遵守国家保密规定；最小权限、外部上传及个人信息处理还须核具体制度和个人信息保护法，不以会计法单独证明所有技术控制。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.fit.personality-fit-block.60",
+          "source_refs": [
+            "cn-accounting-law-2024",
+            "pip-current"
+          ],
           "type": "prose"
         },
         {
@@ -28510,10 +28688,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本页当前就业使用BLS2025—2035年预测，O*NET旧期间字段仅作历史说明。"
+              "实际ONet摘要已更新2025—2035预测，非2024—2034历史字段。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.fit.personality-fit-block.62",
+          "source_refs": [
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -28532,7 +28713,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 Job Zone 与学历构成。"
+              "用于说明该职业的 Job Zone 与岗位教育要求调查。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.fit.personality-fit-block.64",
@@ -28565,10 +28746,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "适配信号：更有解释力的信号是能按科目与规程把记录做准、愿意逐项核对凭证与余额、接受复核并在发现差异时如实报告；对数字或软件的兴趣本身不足以证明胜任。"
+              "适配信号：编辑建议观察的表现是能按科目与规程把记录做准、愿意逐项核对凭证与余额、接受复核并在发现差异时如实报告；对数字或软件的兴趣本身不足以证明胜任。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.fit.riasec-fit-block.9",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28714,16 +28899,16 @@
                 "url": "#career-visual-group-ai-impact"
               },
               {
-                "entity": "O*NET-SOC 43-3031.00 职业摘要",
+                "entity": "O*NET Bookkeeping details",
                 "id": "link-2",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/43-3031.00"
+                "url": "https://www.onetonline.org/link/details/43-3031.00"
               },
               {
-                "entity": "O*NET-SOC 43-3031.00 详细资料（任务与工作活动）",
+                "entity": "O*NET Bookkeeping summary",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/43-3031.00"
+                "url": "https://www.onetonline.org/link/summary/43-3031.00"
               },
               {
                 "entity": "中华人民共和国会计法（2024年修正全文）",
@@ -28732,16 +28917,28 @@
                 "url": "https://kjs.mof.gov.cn/zt/kjfxcgc/kjfqw/202408/t20240814_3941788.htm"
               },
               {
-                "entity": "COSO 内部控制与舞弊防范框架",
+                "entity": "COSO2013内部控制执行摘要",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.coso.org/"
+                "url": "https://www.coso.org/_files/ugd/3059fc_1df7d5dd38074006bce8fdf621a942cf.pdf"
               },
               {
                 "entity": "NIST AI Risk Management Framework 1.0",
                 "id": "link-6",
                 "relation": "career.source",
                 "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "entity": "中国个人信息保护法28/51条",
+                "id": "link-7",
+                "relation": "career.source",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "entity": "BLS职业展望：工作时间",
+                "id": "link-8",
+                "relation": "career.source",
+                "url": "https://www.bls.gov/ooh/office-and-administrative-support/bookkeeping-accounting-and-auditing-clerks.htm"
               }
             ]
           },
@@ -28775,10 +28972,17 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：风险与边界条目依据 O*NET 43-3031.00 的官方任务与工作活动、O*NET 培训与教育信息、BLS 职业展望手册、《中华人民共和国会计法》（2024 年第三次修正）与 COSO 内部控制框架的公开资料；不覆盖具体单位的内部制度。"
+              "依据美国职责、中国会计法与个人信息保护法、COSO2013一般内控及BLS加班情境分别核。控制建议非单位SOP，不给事故或差错率、审计合格保证；培训目录不作为风险程序依据。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.risk.career-risk-cards.10",
+          "source_refs": [
+            "details-current",
+            "cn-accounting-law-2024",
+            "pip-current",
+            "coso-current",
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -28808,10 +29012,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按《中华人民共和国会计法》要求依法设置并保证会计账簿真实完整，保留凭证书面审批与核对痕迹。"
+              "会计法3/9/14/15条要求真实完整账簿、按真实业务及审核凭证核算。编辑建议按单位制度保存审批与核对痕迹，未声称所有业务均须同一书面审批形式。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.risk.career-risk-cards.13",
+          "source_refs": [
+            "cn-accounting-law-2024",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28899,10 +29107,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "建立银行与往来对账周期，差异逐项记录、追查并留有处理结论。"
+              "中国会计法17/27条要求定期核对，差异在有权范围及时处理、无权立即向单位负责人报告；具体银行/往来周期、追查记录为单位制度与编辑建议，非本页统一时限。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.risk.career-risk-cards.21",
+          "source_refs": [
+            "cn-accounting-law-2024",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28943,10 +29155,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按最小知悉与最小权限设置账套访问，薪酬等个人数据另行控制；对外提供数据须经审批并留痕。"
+              "个人信息保护法51条要求分类、安全措施与合理操作权限；编辑建议核账套访问、导出、个人数据及外部工具用途，具体审批留痕依单位制度。财务资料不是一概法定敏感个人信息，金融账户等按28条核。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.risk.career-risk-cards.25",
+          "source_refs": [
+            "pip-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29034,10 +29250,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "提前安排结账计划、合理分配工作量并设置检查点。"
+              "编辑建议提前安排结账、分工与检查点；未核疲劳对本职业差错率或这些控制的实测收益。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.risk.career-risk-cards.33",
+          "source_refs": [
+            "editor-current",
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -29045,10 +29265,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在截止日前连续加班且缺少检查点，导致错误集中出现。"
+              "编辑风险场景：截止日加班及检查遗漏可能使错误未被及时发现，未取得本职业加班导致错误集中发生的因果统计。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.risk.career-risk-cards.34",
+          "source_refs": [
+            "editor-current",
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -29056,10 +29280,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明美国职业身份与官方任务口径，不用于风险评估。"
+              "实际详细页支持任务/活动/情境，非单位风险率或SOP。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.risk.career-risk-cards.35",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -29067,10 +29294,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明官方任务与工作活动口径，不用于风险评估。"
+              "实际摘要支持职业身份与当期数据，非检查授权。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.risk.career-risk-cards.36",
+          "source_refs": [
+            "onet-summary"
+          ],
           "type": "prose"
         },
         {
@@ -29078,10 +29308,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明 Bookkeeping, Accounting, and Auditing Clerks（SOC 43-3031）口径 的就业与预测，不用于风险评估。"
+              "实际中国会计法全文支持责任、凭证审核、差异处理与不相容职责分离；不是BLS预测。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.risk.career-risk-cards.37",
+          "source_refs": [
+            "cn-accounting-law-2024"
+          ],
           "type": "prose"
         },
         {
@@ -29089,10 +29322,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明会计账簿真实完整、单位负责人责任与会计人员依法核算监督的要求。"
+              "实际COSO2013执行摘要控制活动与五构成，提供合理非绝对保证；不能豁免中国法定职责分离。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.risk.career-risk-cards.38",
+          "source_refs": [
+            "coso-current"
+          ],
           "type": "prose"
         },
         {
@@ -29100,10 +29336,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明内部控制与舞弊防范的一般框架，不构成对具体单位的合规判定。"
+              "实际NIST自愿AI风险框架，支持一般角色与监督建议，非COSO或中国会计法。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.risk.career-risk-cards.39",
+          "source_refs": [
+            "nist-pdf-current"
+          ],
           "type": "prose"
         }
       ]
@@ -29288,10 +29527,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：本节描述的是可核对的资格与路径信息，不构成对任何机构、项目或个人的评价，也不提供录用或通过考试的建议。"
+              "路径的阶段、角色及作品示例为编辑建议，非所有雇主晋级制度；美国职业条件与中国会计/主管/依法审计分别核，课程或软件证书不自动生单位授权。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.path.career-path-block.11",
+          "source_refs": [
+            "editor-current",
+            "bls-entry",
+            "cn-accounting-law-2024"
+          ],
           "type": "prose"
         },
         {
@@ -29420,10 +29664,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "路径概要：美国以会计相关课程、在岗培训与雇主偏好学历为主；中国大陆以会计专业教育、实务经验与单位制度为主，海外资格仅作能力材料。"
+              "美国课程/在岗培训/雇主条件另核；关联认证目录23项含不同角色及软件证书，不是23个全体文员必备许可。中国按岗位能力、会计主管条件与继续教育适用范围核，海外资格不自动转授权。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.path.career-path-block.23",
+          "source_refs": [
+            "cert-current",
+            "bls-entry",
+            "cn-accounting-law-2024",
+            "cn-continuing-current"
+          ],
           "type": "prose"
         },
         {
@@ -29442,10 +29692,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "该链接用于检索美国培训项目；Job Zone与教育要求调查由O*NET职业摘要和详细资料支持，不由项目列表证明。"
+              "实际localtraining目录730相关项目，IPEDS2025—26学校/2024—25授位与CIP映射，非实时招生。Job Zone3、41/21/12教育调查及3个批准学徒标题来自详细页；通用1—2年描述非所有文员强制训练期。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.path.career-path-block.25",
+          "source_refs": [
+            "training-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -30222,7 +30476,7 @@
               {
                 "id": "tools",
                 "values": [
-                  "O*NET 技术清单列出 28 类软件与工具，其中 19 项标注 Hot Technology、5 项为 In-Demand 技能。",
+                  "详细页28软件类别，Hot单页19产品、5项In-Demand：Excel31%、QuickBooks21%、Office19%、Outlook10%、SAP6%；Word4%、PowerPoint2%、Concur/PeopleSoft1%，另8项低于1%，Project/Oracle Database未公布不填0。分母2025美国唯一招聘广告，非采用率、技能必修或AI替代率。",
                   "常见包括 QuickBooks、SAP Concur、SAP、Microsoft Excel、Word、Office、Access、Oracle Database、Adobe Acrobat、SharePoint、Google Docs 与 PowerPoint 等。",
                   "把工具用于正式账套前，须确认单位的账套权限、数据保密与留痕要求是否覆盖该用途。"
                 ]
@@ -30497,7 +30751,7 @@
               [
                 "会计软件与表格能力证明",
                 "希望提升岗位竞争力的人",
-                "O*NET 技术清单列出 28 类工具，其中 19 项为 Hot Technology。",
+                "详细页28软件类别，Hot单页19产品，5项In-Demand；只是技术招聘信号。",
                 "不是普遍法律门槛。",
                 "通常以课程、项目或认证方式证明。",
                 "培训与考核成本因路径而异。",
@@ -30529,13 +30783,29 @@
                 "出纳不得兼任稽核、档案保管及收入支出费用债权债务账目登记。",
                 "学习单位制度及岗位交接流程。",
                 "不能用同人“复核过”替代法定不相容岗位分离。"
+              ],
+              [
+                "AIPB Certified Bookkeeper（美国CB）",
+                "拟证明簿记技能者",
+                "自愿专业认证；不是CPA或中国会计授权",
+                "BLS认证通常不必需，按雇主核",
+                "当前发证方：四部分考试、签职业伦理，2年全职或3000小时兼职/自由职业经验，可考后3年补。O*NET教育/经验问答不能替代这些路径。",
+                "当前链接的2024-11自学手册：申请会员25/非会员60美元，Prometric前两部分合计200美元，书籍/复考等另算；99小时课程是另一准备路径。",
+                "手册续证每3年60CPEC、登记3美元/学分；实际2026报价、完整认定与当前可报名状态需发证方确认，非所有工种入职许可。"
               ]
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.path.credential-decision.1",
           "source_refs": [
+            "bls-entry",
+            "details-current",
+            "onet-hot-tech",
             "cn-accounting-law-2024",
-            "cn-accounting-continuing-2018"
+            "cn-continuing-current",
+            "cert-current",
+            "cb-directory",
+            "cb-current",
+            "cb-handbook"
           ],
           "title": "资格选择",
           "type": "table"
@@ -30697,10 +30967,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET-SOC 43-3031.00 职业摘要（就业与预测字段）",
+                "entity": "BLS现行2025—2035职业预测",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/43-3031.00"
+                "url": "https://www.bls.gov/ooh/office-and-administrative-support/bookkeeping-accounting-and-auditing-clerks.htm"
               },
               {
                 "entity": "O*NET-SOC 43-3031.00 职业摘要",
@@ -30974,10 +31244,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局按行业门类与岗位大类公布平均工资，但没有单列「簿记、会计与审计文员」这一职业；规模以上企业就业人员年平均工资 106,080 元，其中办事人员和有关人员 94,936 元。"
+              "NBS2025匹配参照（税前年平均元/年）：租赁和商务服务业城镇非私营110,162/私营68,919，规模以上全部92,849、办事人员88,460、专业技术149,542；金融业非私营211,164/私营140,451；批发零售135,749/69,622、规模以上全部112,030/办事97,096/专业技术140,999。按实际雇主行业及本人职责选择；会计专业核算可能属于专业技术，不能仅凭美国Clerk译名认定全部是办事人员。跨行业规模以上全部106,080/办事94,936仍只作背景，非职业中位或起薪。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.25",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30985,10 +31258,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该口径为规模以上企业与岗位大类平均工资，混合多类岗位，不能作为本职业的职业工资或就业规模。"
+              "行业和人员大类均值按实际单位/职责匹配，不是精确职业工资、就业规模或城市起薪；办事人员不覆盖所有专业核算人员。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.26",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -31029,10 +31305,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于BLS现行2025—2035年就业预测；O*NET历史期间另行标明。"
+              "实际链接BLS现行职业预测，软件自动化下降需求与空缺全替代的解释分开读。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.30",
+          "source_refs": [
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -31040,10 +31319,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明该精确职业的就业与预测字段，须与工资数据分开解读。"
+              "实际ONet摘要已更新2025—2035预测；不是2024—2034历史字段。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.31",
+          "source_refs": [
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -31051,10 +31333,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆的代理口径与统计范围，不作为职业工资。"
+              "NBS2025行业与人员大类税前年平均，按覆盖和职责匹配，非本职业统计。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.32",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -31062,10 +31347,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明官方任务与工作活动口径。"
+              "实际链接BLS职业展望手册支持职责、资格、工资与预测，不是O*NET41活动清单。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.33",
+          "source_refs": [
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -31073,10 +31361,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足会计准则、报表与审计程序训练。"
+              "编辑转岗比较：需要补足会计准则、报表与审计程序训练。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.34",
+          "source_refs": [
+            "adj-accountant",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31084,10 +31376,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是账务记录与核对能力。"
+              "编辑转岗比较：可迁移的是账务记录与核对能力。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.35",
+          "source_refs": [
+            "adj-accountant",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31095,10 +31391,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：账务链条上下游相邻。"
+              "编辑转岗比较：距离较近：账务链条上下游相邻。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.36",
+          "source_refs": [
+            "adj-accountant",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31106,10 +31406,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足计费规则与应收管理训练。"
+              "编辑转岗比较：需要补足计费规则与应收管理训练。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.37",
+          "source_refs": [
+            "adj-billing",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31117,10 +31421,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是单据核对与录入能力。"
+              "编辑转岗比较：可迁移的是单据核对与录入能力。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.38",
+          "source_refs": [
+            "adj-billing",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31128,10 +31436,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离很近：工作范围部分重叠。"
+              "编辑转岗比较：距离很近：工作范围部分重叠。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.39",
+          "source_refs": [
+            "adj-billing",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31139,10 +31451,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足薪酬计算与用工合规知识。"
+              "编辑转岗比较：需要补足薪酬计算与用工合规知识。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.40",
+          "source_refs": [
+            "adj-payroll",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31150,10 +31466,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是数据核对与保密意识。"
+              "编辑转岗比较：可迁移的是数据核对与保密意识。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.41",
+          "source_refs": [
+            "adj-payroll",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31161,10 +31481,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：都处理个人相关财务数据。"
+              "编辑转岗比较：距离较近：都处理个人相关财务数据。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.42",
+          "source_refs": [
+            "adj-payroll",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31172,10 +31496,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足银行柜台收付、客户身份核验及机构流程；美国Tellers是银行柜员，不是中国企业出纳。"
+              "编辑转岗比较：需要补足银行柜台收付、客户身份核验及机构流程；美国Tellers是银行柜员，不是中国企业出纳。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.43",
+          "source_refs": [
+            "adj-teller",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31183,10 +31511,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是现金与凭证管理经验。"
+              "编辑转岗比较：可迁移的是现金与凭证管理经验。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.44",
+          "source_refs": [
+            "adj-teller",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31194,10 +31526,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑比较：均涉及交易与数字核对，但单位、客户对象和权限不同。"
+              "编辑转岗比较：编辑比较：均涉及交易与数字核对，但单位、客户对象和权限不同。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.45",
+          "source_refs": [
+            "adj-teller",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31205,10 +31541,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足财务分析与风险判断训练。"
+              "编辑转岗比较：需要补足财务分析与风险判断训练。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.46",
+          "source_refs": [
+            "adj-credit",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31216,10 +31556,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是财务数据理解能力。"
+              "编辑转岗比较：可迁移的是财务数据理解能力。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.47",
+          "source_refs": [
+            "adj-credit",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31227,10 +31571,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：从记录转向判断与建议。"
+              "编辑转岗比较：距离中等：从记录转向判断与建议。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.48",
+          "source_refs": [
+            "adj-credit",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31238,10 +31586,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足资金、预算与管理能力。"
+              "编辑转岗比较：需要补足资金、预算与管理能力。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.49",
+          "source_refs": [
+            "adj-manager",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31249,10 +31601,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是数据与流程理解。"
+              "编辑转岗比较：可迁移的是数据与流程理解。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.50",
+          "source_refs": [
+            "adj-manager",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31260,10 +31616,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较远：需要经验与管理训练。"
+              "编辑转岗比较：距离较远：需要经验与管理训练。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.51",
+          "source_refs": [
+            "adj-manager",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31271,10 +31631,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足授信评估与客户调查训练。"
+              "编辑转岗比较：需要补足授信评估与客户调查训练。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.52",
+          "source_refs": [
+            "adj-loan",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31282,10 +31646,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是财务数据核对能力。"
+              "编辑转岗比较：可迁移的是财务数据核对能力。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.53",
+          "source_refs": [
+            "adj-loan",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31293,10 +31661,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：从记录转向客户与风险评估。"
+              "编辑转岗比较：距离中等：从记录转向客户与风险评估。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.54",
+          "source_refs": [
+            "adj-loan",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31304,10 +31676,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足公文处理与综合事务训练。"
+              "编辑转岗比较：需要补足公文处理与综合事务训练。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.55",
+          "source_refs": [
+            "adj-office",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31315,10 +31691,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是细致、守时与文件管理能力。"
+              "编辑转岗比较：可迁移的是细致、守时与文件管理能力。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.56",
+          "source_refs": [
+            "adj-office",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31326,10 +31706,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离很近：可横向转入综合办公岗位。"
+              "编辑转岗比较：距离很近：可横向转入综合办公岗位。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.57",
+          "source_refs": [
+            "adj-office",
+            "editor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -31480,10 +31864,23 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源：O*NET-SOC 43-3031.00 职业摘要、详细资料、自定义职业档案、技术清单、行业分布、培训与教育信息与全国工资分位页面；BLS《Occupational Outlook Handbook》Bookkeeping, Accounting, and Auditing Clerks；国家统计局《2025 年城镇单位就业人员年平均工资情况》；ILO 工作论文 140。"
+              "主要资料：ONet43-3031.00当前任务、2025行业/工资、2025—2035预测与训练/认证目录；BLS职业展望；NBS2025表与附注、2017中国行业注释L7241；会计法2024全文/2018继续教育原附件；个人信息保护法28/51、COSO2013执行摘要、NIST指定GOVERN章节与ILO140背景；AIPB现行步骤和链接自学手册。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.sources.source-card.2",
+          "source_refs": [
+            "details-current",
+            "industry-current",
+            "trends-current",
+            "nbs-current",
+            "cn-industry-current",
+            "cn-continuing-current",
+            "pip-current",
+            "coso-current",
+            "nist-pdf-current",
+            "cb-current",
+            "cb-handbook"
+          ],
           "type": "prose"
         },
         {
@@ -31491,10 +31888,21 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：O*NET2026年更新；全国工资为2025年BLS OEWS；现行就业预测为BLS2025—2035年。中国代理工资为2025年、2026-05-15发布；本轮查阅2026-10-03，会计法为2024年修正全文，继续教育为2018规定解释。"
+              "本轮2026-10-09：职业资料2026、行业及全国OEWS工资2025、ONet/BLS预测2025—2035、招聘广告2025；训练IPEDS2025—26/授位2024—25。中国NBS2025、行业注释2017、会计法2024/继续教育2018/个人信息法2021，COSO2013、AIPB手册2024-11。历史共享metadata不改，只新增当前来源。"
             ]
           },
           "id": "bookkeeping-accounting-and-auditing-clerks.sources.source-card.3",
+          "source_refs": [
+            "details-current",
+            "industry-current",
+            "trends-current",
+            "training-current",
+            "nbs-current",
+            "cn-industry-current",
+            "cn-continuing-current",
+            "coso-current",
+            "cb-handbook"
+          ],
           "type": "prose"
         },
         {
@@ -31877,6 +32285,374 @@
                 "publisher": "中华人民共和国财政部",
                 "scope": "contextual",
                 "url": "https://m.mof.gov.cn/czxw/201805/t20180529_2910608.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "完整任务技能情境",
+                  "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "details-current",
+                "limitation": "职业群体非个人门槛；课程/认证目录非实时招生、普遍必备或职业许可。",
+                "market": "美国",
+                "name": "完整任务技能情境",
+                "period": "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/43-3031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025行业分布",
+                  "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "industry-current",
+                "limitation": "职业群体非个人门槛；课程/认证目录非实时招生、普遍必备或职业许可。",
+                "market": "美国",
+                "name": "2025行业分布",
+                "period": "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/43-3031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025—2035预测",
+                  "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "trends-current",
+                "limitation": "职业群体非个人门槛；课程/认证目录非实时招生、普遍必备或职业许可。",
+                "market": "美国",
+                "name": "2025—2035预测",
+                "period": "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/43-3031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "730相关训练目录",
+                  "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "training-current",
+                "limitation": "职业群体非个人门槛；课程/认证目录非实时招生、普遍必备或职业许可。",
+                "market": "美国",
+                "name": "730相关训练目录",
+                "period": "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/localtraining/43-3031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "23相关认证目录",
+                  "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cert-current",
+                "limitation": "职业群体非个人门槛；课程/认证目录非实时招生、普遍必备或职业许可。",
+                "market": "美国",
+                "name": "23相关认证目录",
+                "period": "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/localcert/43-3031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "记账任务辅助、观察、控制及转岗建议",
+                  "2026-10-09"
+                ],
+                "evidence_type": "editorial_synthesis",
+                "id": "editor-current",
+                "limitation": "具体建议与路径为编辑分析，非因果、统一晋级、录用或程序授权。",
+                "market": "美国",
+                "name": "记账任务辅助、观察、控制及转岗建议",
+                "period": "2026-10-09",
+                "publisher": "费马测试职业内容编辑组",
+                "scope": "editorial_synthesis",
+                "url": "https://www.onetonline.org/link/summary/43-3031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "NBS2025表2/5/6/7与附注",
+                  "2025；2026-05-15"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbs-current",
+                "limitation": "按真实单位行业及人员职责匹配；税前年平均非本职业中位、起薪，办事/专业技术类别不能按文员名称互代。",
+                "market": "中国大陆",
+                "name": "NBS2025表2/5/6/7与附注",
+                "period": "2025；2026-05-15",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2017国民经济行业分类注释L7241及例外",
+                  "2017分类注释；2020官方文件入口"
+                ],
+                "evidence_type": "classification",
+                "id": "cn-industry-current",
+                "limitation": "会计审计税务含记账在L租赁商务；单位集团结算报账另7214。雇主实际活动分类非个人职业或美国行业分类。",
+                "market": "中国大陆",
+                "name": "2017国民经济行业分类注释L7241及例外",
+                "period": "2017分类注释；2020官方文件入口",
+                "publisher": "国家统计局",
+                "scope": "contextual",
+                "url": "https://www.stats.gov.cn/xxgk/tjbz/gjtjbz/202008/P020200811608157848094.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "财会〔2018〕10号继续教育规定原附件",
+                  "2018-07-01施行"
+                ],
+                "evidence_type": "regulation",
+                "id": "cn-continuing-current",
+                "limitation": "实际读官方docx第2/6/12/14/27条；适用者次年、年90学分/专业一般2/3，当年有效不结转，地方认定另核。",
+                "market": "中国大陆",
+                "name": "财会〔2018〕10号继续教育规定原附件",
+                "period": "2018-07-01施行",
+                "publisher": "财政部/人社部",
+                "scope": "contextual",
+                "url": "https://www.mof.gov.cn/zcsjtsgb/gfxwj/201805/t20180519_3583586.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "COSO2013执行摘要控制活动与限制",
+                  "2013-05"
+                ],
+                "evidence_type": "framework",
+                "id": "coso-current",
+                "limitation": "五构成/控制活动及合理非绝对保证，非中国岗位分离法定豁免或单位SOP。",
+                "market": "美国",
+                "name": "COSO2013执行摘要控制活动与限制",
+                "period": "2013-05",
+                "publisher": "COSO",
+                "scope": "contextual",
+                "url": "https://www.coso.org/_files/ugd/3059fc_1df7d5dd38074006bce8fdf621a942cf.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "AI RMF1.0 GOVERN2.1—2.3/3.2",
+                  "2023 AI100-1"
+                ],
+                "evidence_type": "framework",
+                "id": "nist-pdf-current",
+                "limitation": "自愿框架的人类职责与监督建议，非账务签署资格或中国会计义务。",
+                "market": "美国",
+                "name": "AI RMF1.0 GOVERN2.1—2.3/3.2",
+                "period": "2023 AI100-1",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "个人信息保护法第28/51条",
+                  "2021-11-01施行"
+                ],
+                "evidence_type": "law",
+                "id": "pip-current",
+                "limitation": "个人信息和敏感个人信息分类、操作权限与安全保护，非所有账务均属敏感个人信息或自动同意上传。",
+                "market": "中国大陆",
+                "name": "个人信息保护法第28/51条",
+                "period": "2021-11-01施行",
+                "publisher": "国家网信办转载法律",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "AIPB Certified Bookkeeper目录详情",
+                  "2026-10-09读取"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cb-directory",
+                "limitation": "目录教育经验问答与发证方具体路径不完全相同，以当前发证方条件核，不强行合并。",
+                "market": "美国",
+                "name": "AIPB Certified Bookkeeper目录详情",
+                "period": "2026-10-09读取",
+                "publisher": "O*NET / CareerOneStop",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/certinfo/4483-A"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "AIPB当前CB四项申请步骤",
+                  "2026-10-09读取"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cb-current",
+                "limitation": "自愿专业认证，四部分考试+职业伦理+2年全职或3000小时兼职/自由职业经验，考试后3年补经验；非CPA或全国法定记账许可。",
+                "market": "美国",
+                "name": "AIPB当前CB四项申请步骤",
+                "period": "2026-10-09读取",
+                "publisher": "AIPB",
+                "scope": "contextual",
+                "url": "https://aipb.org/certification-program/certification-individual/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "AIPB SelfStudy Handbook成本与续证章节",
+                  "2024-11文件；当前入口链接"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cb-handbook",
+                "limitation": "读考试与CPEC章节；费用为手册列价，非2026实际订单报价；总费用还取决书籍、复考、会员和学习选择。",
+                "market": "美国",
+                "name": "AIPB SelfStudy Handbook成本与续证章节",
+                "period": "2024-11文件；当前入口链接",
+                "publisher": "AIPB",
+                "scope": "contextual",
+                "url": "https://aipb.org/wp-content/uploads/2024/11/AIPB_SelfStudyHandbook.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "会计审计师实际职责",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-accountant",
+                "limitation": "目标职责支持；转岗距离与补课建议为编辑分析，非统一年限或录用保证。",
+                "market": "美国",
+                "name": "会计审计师实际职责",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/13-2011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "账单过账实际职责",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-billing",
+                "limitation": "目标职责支持；转岗距离与补课建议为编辑分析，非统一年限或录用保证。",
+                "market": "美国",
+                "name": "账单过账实际职责",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/43-3021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "薪资工时实际职责",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-payroll",
+                "limitation": "目标职责支持；转岗距离与补课建议为编辑分析，非统一年限或录用保证。",
+                "market": "美国",
+                "name": "薪资工时实际职责",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/43-3051.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "信贷分析实际职责",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-credit",
+                "limitation": "目标职责支持；转岗距离与补课建议为编辑分析，非统一年限或录用保证。",
+                "market": "美国",
+                "name": "信贷分析实际职责",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/13-2041.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "财务经理实际职责",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-manager",
+                "limitation": "目标职责支持；转岗距离与补课建议为编辑分析，非统一年限或录用保证。",
+                "market": "美国",
+                "name": "财务经理实际职责",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/11-3031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "信贷员实际职责",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-loan",
+                "limitation": "目标职责支持；转岗距离与补课建议为编辑分析，非统一年限或录用保证。",
+                "market": "美国",
+                "name": "信贷员实际职责",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/13-2072.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "银行柜员实际职责",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-teller",
+                "limitation": "目标职责支持；转岗距离与补课建议为编辑分析，非统一年限或录用保证。",
+                "market": "美国",
+                "name": "银行柜员实际职责",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/43-3071.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "一般办公文员实际职责",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-office",
+                "limitation": "目标职责支持；转岗距离与补课建议为编辑分析，非统一年限或录用保证。",
+                "market": "美国",
+                "name": "一般办公文员实际职责",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/43-9061.00"
               }
             ]
           },
@@ -34088,8 +34864,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.faa-design-approvals"
+              "onet-details",
+              "bls-outlook"
             ],
             "id": "false-or-incomplete-vouchers",
             "mitigation": {
@@ -34120,8 +34896,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.faa-design-approvals",
-              "career.source.bls-outlook"
+              "bls-outlook"
             ],
             "id": "unauthorized-adjustment",
             "mitigation": {
@@ -34152,8 +34927,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.nasa-seh"
+              "onet-details",
+              "bls-outlook",
+              "faa-design-approvals"
             ],
             "id": "reconciliation-gap",
             "mitigation": {
@@ -34184,8 +34960,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.faa-design-approvals",
-              "career.source.nasa-seh"
+              "pip-law-current",
+              "bls-outlook"
             ],
             "id": "data-confidentiality",
             "mitigation": {
@@ -34216,8 +34992,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-summary",
-              "career.source.bls-outlook"
+              "bls-outlook",
+              "faa-design-approvals"
             ],
             "id": "review-gap",
             "mitigation": {
@@ -34248,8 +35024,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-summary",
-              "career.source.onet-details"
+              "bls-current"
             ],
             "id": "closing-fatigue",
             "mitigation": {
@@ -34383,6 +35158,42 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$link": "bookkeeping-accounting-and-auditing-clerks.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "url"
+            },
+            "id": "pip-law-current",
+            "label": {
+              "$link": "bookkeeping-accounting-and-auditing-clerks.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "entity"
+            },
+            "scope": "个人信息保护法51条要求分类、安全措施与合理操作权限；编辑建议核账套访问、导出、个人数据及外部工具用途，具体审批留痕依单位制度。财务资料不是一概法定敏感个人信息，金融账户等按28条核。"
+          },
+          {
+            "href": {
+              "$link": "bookkeeping-accounting-and-auditing-clerks.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-8",
+              "field": "url"
+            },
+            "id": "bls-current",
+            "label": {
+              "$link": "bookkeeping-accounting-and-auditing-clerks.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-8",
+              "field": "entity"
+            },
+            "scope": "BLS说明年末、报税和审计阶段可能加班；编辑建议观察疲劳及核对遗漏，并安排检查点。本页没有本职业加班对差错率的量化研究。"
           }
         ]
       },
@@ -35343,7 +36154,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls-outlook",
+            "source_id": "onet-summary",
             "value": {
               "$item": "bookkeeping-accounting-and-auditing-clerks.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -37057,7 +37868,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 43-3031.00 · Bright Outlook · 账务与核对责任",
@@ -37108,7 +37919,7 @@
       "text": "簿记、会计与审计文员"
     }
   },
-  "source_content_sha256": "b80a9abe53b8e88c88a2f99408503bf8da21c5c43dc7b1db780d2b11e39a34fa",
+  "source_content_sha256": "916b76fcb8284302e9926fb9e3b3bbbe94ca22437167d48d201ae1a61e539b03",
   "subject": {
     "canonical_slug": "bookkeeping-accounting-and-auditing-clerks",
     "name": "簿记、会计与审计文员",

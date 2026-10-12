@@ -12054,7 +12054,8 @@
           },
           "id": "new-accounts-clerks.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-details"
+            "source-pack-onet-details",
+            "pbc-personal-accounts"
           ],
           "type": "list"
         },
@@ -12253,7 +12254,7 @@
           },
           "id": "new-accounts-clerks.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -12267,7 +12268,7 @@
           },
           "id": "new-accounts-clerks.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -12281,7 +12282,7 @@
           },
           "id": "new-accounts-clerks.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -12295,7 +12296,7 @@
           },
           "id": "new-accounts-clerks.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -12304,12 +12305,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不可交给 AI｜核验与采信身份证件、判断开户意愿、决定是否核准开户或暂缓办理、认定可疑交易、向客户承诺审批结果。"
+              "责任不能交给通用模型：开户意愿、证件采信、核准或暂缓、可疑情形判断与客户承诺按机构授权处理。合规数字核验可辅助，不等于必须逐步纯人工或通用模型有办理权限。"
             ]
           },
           "id": "new-accounts-clerks.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -12318,12 +12319,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "人的控制点｜核对客户身份与证件原件、确认客户本人意愿、按机构授权决定是否办理，并对异常情形按流程上报与记录。"
+              "按渠道与适用规则核验有效身份资料、开户意愿及合法代理关系；异常按授权链复核并留痕，不将所有开户外推必须本人到场。"
             ]
           },
           "id": "new-accounts-clerks.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -12337,7 +12338,7 @@
           },
           "id": "new-accounts-clerks.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -12351,7 +12352,7 @@
           },
           "id": "new-accounts-clerks.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         }
@@ -12368,12 +12369,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "名称与范围｜本职业对应 O*NET-SOC 43-4141.00（New Accounts Clerks）。中国大陆银行业没有一一对应的「新账户文员」职业分类；账户开立依《人民币银行结算账户管理办法》分为单位银行结算账户与个人银行结算账户，个人账户须凭个人身份证件以自然人名称开立，基本存款账户、临时存款账户与预算单位专用存款账户实行核准制度。"
+              "美国O*NET43-4141.00开户服务职业，本轮未核中国一一分类映射。中国账户分单位与个人，个人实名和开户意愿按适用规则核。中国2019取消企业银行账户许可：境内企业法人、非法人企业和个体工商户的基本、临时存款账户由核准改备案；机关事业等其他单位按适用规则核，不称全部单位账户都取消。"
             ]
           },
           "id": "new-accounts-clerks.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "pbc-accounts"
+            "pbc-cancel-2019"
           ],
           "type": "prose"
         },
@@ -12382,7 +12383,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径对照｜国家统计局按行业门类公布城镇单位就业人员平均工资，未单列「新账户文员」「银行柜员」等岗位，因此本页只以「金融业」行业门类平均值作参照。"
+              "国家统计局此份行业表不单列新账户文员，金融业均值仅相关金融机构雇主参考；本轮未取得同口径职业工资分布。"
             ]
           },
           "id": "new-accounts-clerks.china-salary.career-snapshot-primary-locale.2",
@@ -12410,7 +12411,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未公布与「新账户文员（O*NET 43-4141.00）」对应的全国职业工资分布；本页以金融业行业门类平均值作参照并标明其边界，不据此推算本职业中位数、分位数或个人收入。合规核验｜个人账户开户须核验身份证件并核实开户意愿，不得为身份不明者开户或开立匿名、假名账户；反洗钱义务依法由金融机构承担，具体资料与流程以机构现行制度为准。"
+              "证据不足：本轮未取得中国同口径全国职业工资，行业均值不推个人或分位。核验有效身份、开户意愿及合法代理关系；金融机构承担尽调、保存与报告义务，柜面按现行授权分工执行。"
             ]
           },
           "id": "new-accounts-clerks.china-salary.career-snapshot-primary-locale.4",
@@ -12475,12 +12476,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS 为机构工资薪金雇员调查，不含自雇与合伙收入，也不反映销售提成、绩效奖金与全勤津贴等浮动部分。"
+              "OEWS包含销售提成、激励薪酬与生产奖金，排除全勤、非生产性奖金和加班溢价等；不能把绩效奖金笼统视为全部排除。雇员工资不含自雇和合伙所得，非到手工资。"
             ]
           },
           "id": "new-accounts-clerks.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "onet-wages"
+            "bls-oews-definitions"
           ],
           "type": "prose"
         },
@@ -12665,7 +12666,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答｜本职业的主要风险是身份核验流于形式、资料缺失仍继续办理、把客户自述当作核验依据、未识别代办或异常开户信号、客户信息与证件影像保管不当，以及发现可疑情形后未按流程上报；控制依赖双人复核、留痕记录、明确升级阈值与持续培训。"
+              "身份、资料、意愿、异常信号及保密风险须按机构处理；合法代理不等于可疑。双人复核与抽查是按风险裁剪的编辑建议，不宣称所有机构统一强制或已核效果。"
             ]
           },
           "id": "new-accounts-clerks.risk.career-risk-cards.2",
@@ -12679,7 +12680,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围｜风险项来自 O*NET 43-4141.00 的任务与工作情境（67% 认为精确性或准确性极其重要、27% 报告错误后果极其严重），以及 FinCEN 客户尽职调查规则的客户身份与受益所有人核验要求、中国大陆银行结算账户实名制与反洗钱法关于客户尽职调查与大额可疑交易报告的要求；控制要求应按机构与辖区范围裁剪。"
+              "O*NET精确性67%和错误极严重27%支持工作前提，非风险发生率。美国FinCEN CDD需连同2026-R001理解，非所有新账户逐次重核受益所有人；中国企业许可改革与反洗钱尽调按主体核。控制为编辑建议，相关业务部门和人员仍承担法定/授权责任。"
             ]
           },
           "id": "new-accounts-clerks.risk.career-risk-cards.3",
@@ -12694,7 +12695,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "受影响角色｜负责开户面谈、身份核验、资料录入与归档的柜面人员，以及其现场主管、合规与反洗钱岗位；出现可疑情形时，经验不足的柜面人员最容易在客户催促下省略核验步骤。"
+              "开户一线、主管及合规反洗钱岗位均可能受影响；本轮没有经验不足者风险最高的比较证据，不作群体排序。"
             ]
           },
           "id": "new-accounts-clerks.risk.career-risk-cards.4",
@@ -12735,8 +12736,8 @@
           },
           "id": "new-accounts-clerks.path.career-path-block.1",
           "source_refs": [
-            "source-pack-onet-localtraining",
-            "pbc-accounts"
+            "source-pack-onet-details",
+            "pbc-cancel-2019"
           ],
           "type": "prose"
         },
@@ -12750,7 +12751,7 @@
           },
           "id": "new-accounts-clerks.path.career-path-block.2",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -12764,7 +12765,7 @@
           },
           "id": "new-accounts-clerks.path.career-path-block.3",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -12778,7 +12779,7 @@
           },
           "id": "new-accounts-clerks.path.career-path-block.4",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -12792,7 +12793,7 @@
           },
           "id": "new-accounts-clerks.path.career-path-block.5",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -12806,7 +12807,7 @@
           },
           "id": "new-accounts-clerks.path.career-path-block.6",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -12820,7 +12821,7 @@
           },
           "id": "new-accounts-clerks.path.career-path-block.7",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -12834,7 +12835,7 @@
           },
           "id": "new-accounts-clerks.path.career-path-block.8",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -12889,7 +12890,7 @@
           },
           "id": "new-accounts-clerks.path.entry-role-comparison.9",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "source-pack-onet-details"
           ],
           "type": "table"
         },
@@ -12917,14 +12918,14 @@
                 "沟通记录与处理结果"
               ],
               [
-                "疑似代办或他人控制账户",
+                "代理关系无法核实或疑似他人控制账户",
                 "按机构流程询问开户意愿并升级",
                 "由合规或反洗钱岗位判断",
                 "询问记录与上报痕迹"
               ],
               [
                 "发现可疑交易或异常资金特征",
-                "按流程提交报告并保存记录",
+                "按授权链提交内部线索并留痕，由机构依法分析和对外报告",
                 "由反洗钱岗位依法处理",
                 "报告编号与留痕"
               ]
@@ -12974,7 +12975,7 @@
                 "理解客户尽职调查与上报义务",
                 "由机构合规或反洗钱部门组织",
                 "按监管要求与机构制度核对",
-                "个人不承担对外报告决定权",
+                "柜面不自动具有对外决定权；具体合规岗位按机构授权核",
                 "合规与反洗钱岗位",
                 "核对培训频次与内容"
               ],
@@ -12989,9 +12990,9 @@
               ],
               [
                 "单位账户核准或备案",
-                "办理单位结算账户开立的前置程序",
-                "依《人民币银行结算账户管理办法》由人民银行核准或备案",
-                "按账户类别核对资料与流程",
+                "按单位主体和账户类别分别核程序",
+                "企业基本/临时账户按2019改革备案，其他单位按适用核准规定",
+                "核存款人主体、账户类别及最新适用制度",
                 "核准结果不由柜面决定",
                 "中国人民银行与所在机构",
                 "核对账户类别与资料"
@@ -13009,9 +13010,8 @@
           },
           "id": "new-accounts-clerks.path.credential-decision.11",
           "source_refs": [
-            "pbc-accounts",
-            "pbc-aml",
-            "fincen-cdd"
+            "pbc-cancel-2019",
+            "pbc-aml"
           ],
           "type": "table"
         }
@@ -13028,12 +13028,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国精确职业信号｜O*NET 转发的数据以 43-4141.00 口径给出：2024 年就业 38,900 人，2024—2034 年预计下降 −13%（Decline），年均职位空缺 2,300 个；这代表需求以替换为主并伴随岗位总量收缩，不代表中国大陆需求。"
+              "BLS43-4141美国2025—2035：就业37,900→35,500人，下降6.5%，年均2,300空缺，主要为替换。非当前招聘、非中国需求或AI因果。"
             ]
           },
           "id": "new-accounts-clerks.market-signals.market-signal-card.1",
           "source_refs": [
-            "onet-summary"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -13056,12 +13056,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "统计期间｜工资为 2025 年数据，就业与预测为 2024—2034 年，行业分布为 2024 年数据。"
+              "OEWS工资2025、BLS就业预测2025—2035；行业详情2025，独立子页未列年度。"
             ]
           },
           "id": "new-accounts-clerks.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-summary"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -13070,12 +13070,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "解读｜就业总量下降但年均仍有 2,300 个空缺，说明需求主要来自人员更替；岗位内容正在向资料核验与合规操作集中，网点自助渠道替代了部分标准化交易。"
+              "就业下降仍有年均2,300替换空缺。当前原表不分解原因；自助渠道、网点调整与重组应另查机构证据，不宣称已核岗位正在向合规集中。"
             ]
           },
           "id": "new-accounts-clerks.market-signals.market-signal-card.4",
           "source_refs": [
-            "onet-summary"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -13539,6 +13539,96 @@
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "BLS43-4141美国2025—2035：就业37,900→35,500人，下降6.5%，年均2,300空缺，主要为替换。非当前招聘、非中国需求或AI因果。"
+                ],
+                "evidence_type": "official",
+                "id": "bls-ep-2025-2035",
+                "limitation": "仅所标地域主体行为，非录用或个人授权证明",
+                "market": "US",
+                "name": "BLS2025—2035职业预测",
+                "period": "2025—2035",
+                "publisher": "BLS2025—2035职业预测",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "OEWS包含销售提成、激励薪酬与生产奖金，排除全勤、非生产性奖金和加班溢价等；不能把绩效奖金笼统视为全部排除。雇员工资不含自雇和合伙所得，非到手工资。"
+                ],
+                "evidence_type": "official",
+                "id": "bls-oews-definitions",
+                "limitation": "仅所标地域主体行为，非录用或个人授权证明",
+                "market": "US",
+                "name": "BLS OEWS统计定义",
+                "period": "现行",
+                "publisher": "BLS OEWS统计定义",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "中国2019取消企业银行账户许可：境内企业法人、非法人企业和个体工商户的基本、临时存款账户由核准改备案；机关事业等其他单位按适用规则核，不称全部单位账户都取消。"
+                ],
+                "evidence_type": "official",
+                "id": "pbc-cancel-2019",
+                "limitation": "仅所标地域主体行为，非录用或个人授权证明",
+                "market": "CN",
+                "name": "取消企业银行账户许可决定",
+                "period": "2019施行",
+                "publisher": "取消企业银行账户许可决定",
+                "scope": "contextual",
+                "url": "https://www.pbc.gov.cn/zhengwugongkai/attachDir/2025/11/2025111914490534889.pdf"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "可选择豁免逐次新账户核受益所有人，首次、可靠性存疑或风险程序需要时仍核；其他义务保留。"
+                ],
+                "evidence_type": "official",
+                "id": "fincen-relief-2026",
+                "limitation": "仅所标地域主体行为，非录用或个人授权证明",
+                "market": "US",
+                "name": "FIN-2026-R001",
+                "period": "2026",
+                "publisher": "FIN-2026-R001",
+                "scope": "contextual",
+                "url": "https://www.fincen.gov/system/files/2026-02/FinCEN-Order-CCDExceptiveRelief.pdf"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "规定机构尽调、风险措施与保存要求；非每项都柜面独立决定。"
+                ],
+                "evidence_type": "official",
+                "id": "china-cdd-2026",
+                "limitation": "仅所标地域主体行为，非录用或个人授权证明",
+                "market": "CN",
+                "name": "2025第11号客户尽调办法",
+                "period": "2026-01-01施行",
+                "publisher": "2025第11号客户尽调办法",
+                "scope": "contextual",
+                "url": "https://jrj.sh.gov.cn/YWTBZCCX166/20251201/18143bfe9fd14a36b3bc422a2895d593.html"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "资料交易通常至少保存十年，可疑报告保密；各业务部门及人员按职责履行义务。"
+                ],
+                "evidence_type": "official",
+                "id": "china-aml-current",
+                "limitation": "仅所标地域主体行为，非录用或个人授权证明",
+                "market": "CN",
+                "name": "反洗钱法2024修订官方转载",
+                "period": "2025-01-01施行",
+                "publisher": "反洗钱法2024修订官方转载",
+                "scope": "contextual",
+                "url": "https://www.jsjrb.gov.cn/art/2025/4/22/art_33_40770.html"
               }
             ]
           },
@@ -13753,15 +13843,15 @@
             "链接": "https://www.onetonline.org/link/localwages/43-4141.00"
           },
           {
-            "来源": "O*NET 就业与预测 43-4141.00",
+            "来源": "BLS2025—2035职业预测",
             "类型": "官方就业预测",
-            "适用范围": "2024 年就业与 2024—2034 年预测",
-            "链接": "https://www.onetonline.org/link/localtrends/43-4141.00"
+            "适用范围": "43-4141下降6.5%，年均2,300空缺",
+            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
             "来源": "O*NET 行业分布 43-4141.00",
             "类型": "官方行业来源",
-            "适用范围": "2024 年行业分布",
+            "适用范围": "独立子页97/3未列年度；详情2025金融保险97%",
             "链接": "https://www.onetonline.org/link/industry/43-4141.00"
           },
           {
@@ -13771,7 +13861,7 @@
             "链接": "https://www.onetonline.org/link/localcert/43-4141.00"
           }
         ],
-        "difference_intro": "本职业不同工作方向受到的影响不同，下表比较职业内的真实方向。",
+        "difference_intro": "条件性任务分析；自助渠道与生成式工具分别理解，不声称已核职业部署或效果。",
         "difference_rows": [
           {
             "AI主要改变": "资料清单与字段核对可被辅助",
@@ -13779,7 +13869,7 @@
             "方向": "柜面开户办理"
           },
           {
-            "AI主要改变": "标准化交易可由自助渠道替代",
+            "AI主要改变": "机构自助交易渠道可承接部分标准流程，非生成式AI采用证据",
             "仍由人负责": "异常交易识别与客户协助",
             "方向": "柜面交易与收付"
           },
@@ -13789,7 +13879,7 @@
             "方向": "产品说明与转介"
           }
         ],
-        "evidence_intro": "以下证据分别说明技术能力、雇主技术信号与就业口径，样本、范围与限制随条目写明。",
+        "evidence_intro": "任务支持职责，2025全国Hot招聘Office9/Excel5/Word2/PowerPoint<1/SharePointN/A仅技能提及；生成式AI能力、职业采用与因果未取得，辅助候选为授权条件下编辑分析。自助交易不是生成式AI证据。",
         "evidence_rows": [
           {
             "使用限制": "美国职业档案，不含中国开户制度或工资结论",
@@ -13807,13 +13897,13 @@
           },
           {
             "使用限制": "宏观预测，不是个人录用保证；页面未给出下降的原因分解",
-            "来源": "O*NET OnLine（BLS 数据）",
-            "研究对象": "43-4141.00 就业与预测（2024—2034）",
-            "结论": "2024 年就业 38,900 人，预计 2034 年 33,800 人，变化 −13%（Decline），年均空缺 2,300 个",
-            "链接": "https://www.onetonline.org/link/localtrends/43-4141.00"
+            "来源": "BLS",
+            "研究对象": "43-4141就业2025—2035",
+            "结论": "BLS43-4141美国2025—2035：就业37,900→35,500人，下降6.5%，年均2,300空缺，主要为替换。非当前招聘、非中国需求或AI因果。",
+            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
-            "使用限制": "机构雇员调查，不含自雇收入与销售提成，也不是个人到手收入",
+            "使用限制": "OEWS包含销售提成、激励薪酬与生产奖金，排除全勤、非生产性奖金和加班溢价等；不能把绩效奖金笼统视为全部排除。雇员工资不含自雇和合伙所得，非到手工资。",
             "来源": "O*NET OnLine（BLS 数据）",
             "研究对象": "43-4141.00 全国工资（2025 BLS OEWS）",
             "结论": "中位时薪 22.92 美元、中位年薪 47,670 美元；年薪分位 38,180—60,910 美元",
@@ -13822,8 +13912,8 @@
           {
             "使用限制": "行业分布不说明具体机构的网点形态、授权分工或薪酬结构",
             "来源": "O*NET OnLine",
-            "研究对象": "43-4141.00 行业分布（2024）",
-            "结论": "金融与保险业 97%、其他行业 3%",
+            "研究对象": "行业背景：子页无年度，详情2025",
+            "结论": "子页金融保险97%、其他3%；详情2025金融保险97%，非行业工资",
             "链接": "https://www.onetonline.org/link/industry/43-4141.00"
           }
         ],
@@ -13838,25 +13928,25 @@
             "概念": "采用证据：机构是否在用"
           },
           {
-            "含义": "O*NET 页面显示 43-4141.00 在 2024—2034 年预计下降 13%（Decline）、年均空缺 2,300 个；页面未给出原因分解，不能把它直接读作 AI 造成的岗位变化。",
+            "含义": "BLS43-4141美国2025—2035：就业37,900→35,500人，下降6.5%，年均2,300空缺，主要为替换。非当前招聘、非中国需求或AI因果。",
             "概念": "岗位结果：任务如何被重组"
           }
         ],
         "questions": [
           {
-            "回答": "现有证据不支持简单替代结论：O*NET 未提供本职业的生成式 AI 采用率；岗位总量预计收缩（2024—2034 年 −13%）但页面未给出原因分解，身份核验与办理决定仍须由授权人员承担。",
+            "回答": "BLS43-4141美国2025—2035：就业37,900→35,500人，下降6.5%，年均2,300空缺，主要为替换。非当前招聘、非中国需求或AI因果。 本轮未取得生成式AI职业采用与因果，工具不代机构责任。",
             "来源": "O*NET OnLine",
             "链接": "https://www.onetonline.org/link/details/43-4141.00",
             "问题": "AI 会取代新账户文员吗？"
           },
           {
-            "回答": "标准化柜面交易可由自助渠道完成；资料清单核对、表格字段检查、说明材料草稿与回访提醒可由工具辅助。",
+            "回答": "授权环境下清单、字段与说明草稿可作辅助候选；自助交易渠道另核，不据O*NET任务页宣称已实现生成式替代。",
             "来源": "O*NET OnLine",
             "链接": "https://www.onetonline.org/link/details/43-4141.00",
             "问题": "哪些环节更可能被工具或自助渠道替代？"
           },
           {
-            "回答": "核验与采信身份证件、确认开户意愿、判断资料是否足以办理、决定暂缓或升级、认定可疑交易以及说明条款与风险。",
+            "回答": "证件采信、意愿确认、办理或升级、可疑情形处理与条款说明按机构授权链负责；数字核验可辅助，不能自行放宽规则。",
             "来源": "O*NET OnLine",
             "链接": "https://www.onetonline.org/link/details/43-4141.00",
             "问题": "哪些环节必须由人负责？"
@@ -13890,7 +13980,7 @@
         "responsibility_steps": [
           {
             "步骤": "核对输入",
-            "说明": "确认客户身份证件原件、开户资料完整性与客户本人到场情况。"
+            "说明": "核对有效身份资料、开户意愿与适用渠道；代理业务另核代理关系和身份，不将本人到场当所有账户统一要求。"
           },
           {
             "步骤": "使用条件",
@@ -13906,17 +13996,17 @@
           },
           {
             "步骤": "异常与升级",
-            "说明": "出现资料不一致、疑似代办或可疑资金特征时按机构流程立即升级。"
+            "说明": "资料不一致、代理关系无法核实或可疑资金特征按流程升级；合法代办不等于可疑。"
           }
         ],
         "risk_rows": [
           {
             "为什么重要": "实名制与客户尽职调查是开户的法定前提",
-            "控制方式": "核对证件原件、比对人证一致性并保留核验记录",
+            "控制方式": "按办理渠道核对有效身份资料、人证或代理关系并留核验记录",
             "风险": "身份核验流于形式"
           },
           {
-            "为什么重要": "资料不全会导致开户无效或被退回",
+            "为什么重要": "缺失关键资料可能导致退回、延误或违规，不一概等于开户无效",
             "控制方式": "按清单逐项核对，缺失时暂缓并说明补充要求",
             "风险": "资料缺失仍继续办理"
           },
@@ -13962,13 +14052,13 @@
             "当前变化": "说明材料草稿可被辅助"
           },
           {
-            "人的控制点": "异常交易判断由本人负责",
+            "人的控制点": "一线按规则识别异常并升级，最终定性按机构授权链处理",
             "任务": "收取存款与费用、开具收据并转账",
             "工作方向": "柜面收付与转账",
             "当前变化": "标准化交易可由自助渠道完成"
           },
           {
-            "人的控制点": "更正决定由主管复核",
+            "人的控制点": "更正权限与是否需主管复核按机构制度核",
             "任务": "依客户与银行记录调查并更正差错",
             "工作方向": "差错调查与更正",
             "当前变化": "记录比对可被辅助"
@@ -14046,13 +14136,13 @@
             "stage": "骨干与质量协作阶段"
           }
         ],
-        "direct_answer": "进入本职业通常不需要法定执照：O*NET 将本职业列为 Job Zone 3（SVP 6.0 至 <7.0），教育调查显示 46% 为高中文凭、28% 为部分大学教育、15% 为大专后证书，BLS 指出金融文员多数岗位要求高中文凭并接受在职培训。实际门槛来自机构招聘条件与内部授权：需完成产品、系统与合规培训并通过考核后，才能在授权范围内独立办理开户与柜面业务。中国大陆个人银行结算账户须凭个人身份证件实名开立并核验身份，单位账户按类别实行核准或备案，具体操作以机构制度为准。",
+        "direct_answer": "先核工作辖区、机构招聘与授权。美国BLS43-4141典型高中和中期在职培训，O*NET教育调查46/28/15不是中国标准；认证搜索无结果不证明全部法域无执照。产品、系统与合规培训及放行由机构核。中国2019取消企业银行账户许可：境内企业法人、非法人企业和个体工商户的基本、临时存款账户由核准改备案；机关事业等其他单位按适用规则核，不称全部单位账户都取消。",
         "entry_heading": "从入职培训与带教到独立办理与质量协作",
         "heading": "新账户文员的入行、资格与职业发展路径",
         "locale_requirements": {
           "credential_boundary": "学历、机构内部授权、产品与合规培训、系统权限与监管要求是不同状态；完成培训不等于永久授权，也不代表可以跳过身份核验或自行放宽资料要求。中国账户核准或备案结果不由柜面决定，美国规则也不能替代中国的实名制与反洗钱要求。",
-          "jurisdiction": "本页职业事实采用美国 O*NET 43-4141.00 口径；美国开户合规参考 FinCEN 客户尽职调查规则；中国账户制度与反洗钱义务参考《人民币银行结算账户管理办法》、中国人民银行银发〔2015〕392 号通知与《中华人民共和国反洗钱法》。其他辖区与机构要求须另查现行法规与制度。",
-          "summary": "O*NET 将本职业列为 Job Zone 3（SVP 6.0 至 <7.0），教育调查显示 46% 高中、28% 部分大学教育、15% 大专后证书；BLS 指出金融文员多数岗位要求高中文凭并接受在职培训。美国该职业未列出国家级认证，操作权限来自机构内部授权与客户尽职调查程序；中国要求个人账户实名开立并核验身份，反洗钱义务由金融机构依法承担。"
+          "jurisdiction": "美国FinCEN CDD与FIN-2026-R001豁免仅受覆盖机构：首开户、信息可靠性存疑或风险程序需要时核受益所有人，非每次新账户都重核。中国2019企业许可改革、2024反洗钱法及2026生效尽调办法按主体与机构规则适用。",
+          "summary": "美国JobZone3准备组与教育调查46%高中、28%部分大学无学位、15%高中后证书，不推固定培训年限或中国学历。认证搜索无结果不等法律免许可；中国实名、代理、尽调与授权分开核。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
@@ -14079,6 +14169,18 @@
             "id": "cn",
             "label": "人民币银行结算账户管理办法",
             "scope": "中国账户开立与实名制要求"
+          },
+          {
+            "href": "https://www.pbc.gov.cn/zhengwugongkai/attachDir/2025/11/2025111914490534889.pdf",
+            "id": "cancel-2019",
+            "label": "人民银行2019企业许可改革",
+            "scope": "境内企业基本及临时账户改备案"
+          },
+          {
+            "href": "https://www.fincen.gov/system/files/2026-02/FinCEN-Order-CCDExceptiveRelief.pdf",
+            "id": "fincen-2026",
+            "label": "FinCEN2026-R001",
+            "scope": "受益所有人逐次开户核验豁免及触发条件"
           }
         ],
         "tracks": [
@@ -14396,7 +14498,7 @@
               "privacy"
             ],
             "id": "cost-change",
-            "mitigation": "核对证件原件、比对人证一致性与开户意愿，并保留核验记录",
+            "mitigation": "按渠道核身份资料、人证一致性或合法代理关系及意愿，并留痕",
             "scenario": "客户仅提供复印件或信息不一致，仍按常规继续办理",
             "title": "身份核验流于形式"
           },
@@ -14417,10 +14519,10 @@
             "consequence": "违反个人信息保护与机构保密要求，引发投诉与处罚",
             "evidence_refs": [
               "privacy",
-              "fincen"
+              "aml-current"
             ],
             "id": "personal-data",
-            "mitigation": "仅在授权系统内采集与留存，限定访问权限并按规则销毁",
+            "mitigation": "授权采集、限定访问，按法定期限保存后依法处置；中国身份/交易信息通常至少十年，非随意销毁",
             "scenario": "证件影像通过未授权渠道传输或超范围留存",
             "title": "客户信息与证件影像处理不当"
           },
@@ -14445,7 +14547,7 @@
             ],
             "id": "single-coverage",
             "mitigation": "明确升级阈值，按流程提交报告并保存留痕",
-            "scenario": "出现疑似代办、异常资金特征或客户回避询问时未上报",
+            "scenario": "代理关系无法核实、异常资金或回避合理询问仍未按流程上报",
             "title": "可疑情形未及时升级"
           },
           {
@@ -14492,6 +14594,12 @@
             "id": "privacy",
             "label": "中国人民银行银发〔2015〕392 号通知",
             "scope": "个人账户实名制与身份核验要求"
+          },
+          {
+            "href": "https://www.jsjrb.gov.cn/art/2025/4/22/art_33_40770.html",
+            "id": "aml-current",
+            "label": "反洗钱法2024修订官方转载",
+            "scope": "中国资料保存、报告保密、机构与业务部门责任"
           }
         ]
       },
@@ -14530,12 +14638,12 @@
             {
               "学历段": "高中或同等学历",
               "岗位方向": "进入网点柜面与客户服务岗位",
-              "说明": "多数岗位以高中文凭加在职培训为主。"
+              "说明": "中国目标岗位学历按机构招聘公告核；BLS高中典型门槛是美国参考，不能当中国多数岗位事实。"
             },
             {
-              "学历段": "部分大学教育或大专后证书",
+              "学历段": "具体岗位要求的相关学历",
               "岗位方向": "承担开户办理与产品解释等工作",
-              "说明": "学历不替代机构授权与合规培训。"
+              "说明": "中国学历、产品培训与授权各自核；美国post-secondary证书是高中后证书，不是大专毕业后的证书。"
             },
             {
               "学历段": "机构产品与合规培训",
@@ -14572,7 +14680,7 @@
           "china_open": "可用公开职责、监管要求与培训路径信息做职业探索，但不能据此推导中国大陆个人收入。",
           "china_open_note": "如需收入判断，应回到具体城市、机构类型、岗位级别与合同条件核对。",
           "china_ref": "国家统计局：2025 年城镇单位就业人员平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
-          "china_salary_note": "中国精确职业工资数据不可得；本页只展示金融业行业门类均值并标明其边界，不换算为本职业或个人薪资。",
+          "china_salary_note": "证据不足：本轮未取得中国同口径职业工资；金融行业均值为相关雇主参考，不推个人与职业分位。",
           "china_salary_table": [
             {
               "城市/区间": "职业精确工资",
@@ -14593,7 +14701,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "sources_note": "中国数据来自国家统计局 2025 年城镇单位工资统计的金融业行业门类均值，以及《人民币银行结算账户管理办法》、中国人民银行银发〔2015〕392 号通知与《中华人民共和国反洗钱法》；美国数据来自 O*NET 展示的 2025 BLS OEWS 与 2024—2034 预测（43-4141.00 精确职业口径）。",
+          "sources_note": "中国NBS2025金融业均值及账户/反洗钱规则限定主体；2019企业许可改革与2026生效尽调办法另核。美国OEWS2025精确职业工资，BLS2025—2035预测；不是中国学历或收入。",
           "ui": {
             "ai_heading": "工具与责任边界",
             "driver_heading": "影响实际待遇的因素",
@@ -14604,7 +14712,7 @@
             "scenario_role_label": "学历段",
             "scenario_value_label": "岗位方向"
           },
-          "us_growth": "下降（−13%，2024—2034，精确职业口径）",
+          "us_growth": "下降6.5%（2025—2035，BLS43-4141）",
           "us_median": "47,670 美元/年（2025，精确职业口径）"
         }
       },
@@ -14638,18 +14746,18 @@
           },
           {
             "指标": "就业人数",
-            "数值": "38,900 人（2024）",
-            "说明": "O*NET/BLS 2024 年美国 43-4141.00 精确职业就业规模，不是当前招聘数量｜https://www.onetonline.org/link/localtrends/43-4141.00"
+            "数值": "37,900人（2025）",
+            "说明": "BLS2025就业存量，不是当前招聘数｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
-            "指标": "就业变化 2024—2034",
-            "数值": "下降（−13%）",
-            "说明": "2024—2034 年就业预测（精确职业口径）｜https://www.onetonline.org/link/localtrends/43-4141.00"
+            "指标": "就业变化2025—2035",
+            "数值": "下降6.5%",
+            "说明": "BLS43-4141精确预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
-            "指标": "就业岗位空缺（2024—2034 年均）",
-            "数值": "2,300 个/年",
-            "说明": "O*NET 页面给出预测期年均空缺，含增长与替换需求；不等于个人录用概率｜https://www.onetonline.org/link/localtrends/43-4141.00"
+            "指标": "年均岗位空缺（2025—2035）",
+            "数值": "2,300个/年",
+            "说明": "增长与替换的年均空缺，非十年合计或录用保证｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           }
         ],
         "boundary": "美国数据只适用于 43-4141.00 精确职业口径与所列期间；OEWS 为机构工资薪金雇员调查，不含自雇与合伙收入，也不能换算为中国大陆个人收入。",
@@ -14680,15 +14788,15 @@
           }
         ],
         "factors_heading": "影响实际报价的因素",
-        "growth": "下降（−13%，2024—2034，精确职业口径）",
+        "growth": "下降6.5%（BLS43-4141，2025—2035）",
         "heading": "新账户文员的美国薪资与就业数据边界",
         "industry_heading": "行业与岗位差异",
-        "industry_period": "2024",
+        "industry_period": "2025（详情；独立子页无年度）",
         "industry_rows": [
           {
             "industry": "金融与保险业",
             "median": "需核对具体岗位",
-            "note": "O*NET 行业页面显示 97% 出现在该行业；机构类型与网点形态差异较大。"
+            "note": "独立子页97/3无年度，详情2025金融保险97%，非工资。"
           },
           {
             "industry": "商业银行网点",
@@ -14703,10 +14811,10 @@
           {
             "industry": "其他行业与后台中心",
             "median": "需核对具体岗位",
-            "note": "O*NET 行业页面显示 3% 分布于其他行业；集中作业与电话渠道岗位的排班与指标不同。"
+            "note": "独立子页其他3%无年度，不推全部为后台中心；具体渠道与排班另核。"
           }
         ],
-        "industry_value_label": "行业列举（O*NET 43-4141.00，2024；页面未提供工资占比）",
+        "industry_value_label": "行业背景（非行业工资）",
         "interpretation_heading": "如何解读",
         "interpretation_rows": [
           {
@@ -14727,7 +14835,7 @@
           {
             "answer": {
               "$join": [
-                "现有材料没有同范围、可解释的分位工资分布。",
+                "已核2025全国五分位，不能以低分位等同新人或跨地域比较",
                 {
                   "$item": "new-accounts-clerks.us-salary.career-snapshot-secondary-locale.6",
                   "block": "us-salary",
@@ -14737,20 +14845,20 @@
               ],
               "separator": "；"
             },
-            "question": "为什么不展示分位数？"
+            "question": "如何使用分位数？"
           },
           {
-            "answer": "它是 2024 年美国该精确职业的就业存量与 2024—2034 年预测；总量下降但仍有年均空缺，说明需求以替换为主。",
+            "answer": "BLS43-4141美国2025—2035：就业37,900→35,500人，下降6.5%，年均2,300空缺，主要为替换。非当前招聘、非中国需求或AI因果。",
             "question": "就业人数与变化代表什么？"
           },
           {
-            "answer": "不等同；页面未给出下降的原因分解，自助渠道、网点结构调整与工作重组都可能参与其中，需按机构与地区核对。",
+            "answer": "总量下降仍有替换空缺；当前原表不提供原因分解，不把变化归因生成式AI。",
             "question": "就业下降是否等同于岗位消失？"
           }
         ],
         "median": "$47,670",
         "outlook_heading": "就业前景",
-        "outlook_period": "2024—2034",
+        "outlook_period": "2025—2035",
         "wage_column_labels": [
           "工资层级",
           "年薪参考",
@@ -14780,7 +14888,7 @@
             "equivalent": "$21.12—$26.49/小时",
             "interpretation": {
               "$join": [
-                "没有同范围可解释的分位工资数据。",
+                "第25—75分位是同年同地域职业分布的中间50%，不是资历或起薪分级",
                 {
                   "$item": "new-accounts-clerks.us-salary.career-snapshot-secondary-locale.3",
                   "block": "us-salary",
@@ -14797,7 +14905,7 @@
             "equivalent": "$18.36—$29.29/小时",
             "interpretation": {
               "$join": [
-                "没有同范围可解释的分位工资数据。",
+                "第10—90分位描述分布两端，不是个人报价、起薪或税后值",
                 {
                   "$item": "new-accounts-clerks.us-salary.career-snapshot-secondary-locale.4",
                   "block": "us-salary",
@@ -14903,13 +15011,13 @@
             "metric": "美国就业变化",
             "occupation_scope": "43-4141.00 New Accounts Clerks 精确职业口径",
             "source_id": "ep",
-            "value": "下降（−13%，2024—2034）；预计年均职位空缺 2,300 个"
+            "value": "下降6.5%（2025—2035），年均2,300空缺"
           },
           {
             "geography": "美国全国（精确职业口径）",
             "horizon": "2025 年工资数据",
             "interpretation": "该页以 43-4141.00 精确职业口径给出中位与五分位工资。",
-            "limitation": "OEWS 不含自雇与合伙收入，也不反映销售提成与绩效奖金。",
+            "limitation": "OEWS包含销售提成、激励薪酬与生产奖金，排除全勤、非生产性奖金和加班溢价等；不能把绩效奖金笼统视为全部排除。雇员工资不含自雇和合伙所得，非到手工资。",
             "metric": "职业工资分布（美国）",
             "occupation_scope": "O*NET National Wages 43-4141.00（2025 BLS OEWS）",
             "source_id": "bls",
@@ -14935,10 +15043,10 @@
             "scope": "美国工资与分位"
           },
           {
-            "href": "https://www.onetonline.org/link/localtrends/43-4141.00",
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "ep",
-            "label": "O*NET 43-4141.00 就业与预测",
-            "scope": "美国就业规模与 2024—2034 预测"
+            "label": "BLS43-4141 2025—2035预测",
+            "scope": "美国精确职业就业预测"
           },
           {
             "href": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
@@ -14995,11 +15103,11 @@
             "transition_distance": "相邻"
           },
           {
-            "capability_gaps": "需补集中作业与批量处理规范",
+            "capability_gaps": "目标是含多个金融文员方向的宽类，不等于银行后台岗位；按具体职责补技能",
             "shared_capabilities": "流程执行与资料处理",
             "target_href": "/zh/career/jobs/financial-clerks",
             "target_slug": "financial-clerks",
-            "target_title": "银行后台运营岗位",
+            "target_title": "金融文员",
             "transition_distance": "相邻"
           },
           {
@@ -15011,11 +15119,11 @@
             "transition_distance": "较远（需资格与专业训练）"
           },
           {
-            "capability_gaps": "需补远程沟通与工单规范",
+            "capability_gaps": "电话坐席只是可能工作形态，具体渠道、工单和机构要求另核",
             "shared_capabilities": "标准化话术与系统录入",
             "target_href": "/zh/career/jobs/customer-service-representatives",
             "target_slug": "customer-service-representatives",
-            "target_title": "电话客服与坐席",
+            "target_title": "客户服务代表",
             "transition_distance": "相邻"
           }
         ]
@@ -15040,19 +15148,19 @@
             "alternate_value": null,
             "label": "准备层级",
             "secondary_value": null,
-            "value": "Job Zone 3：中等准备，SVP 6.0 至 <7.0；教育调查显示 46% 高中、28% 部分大学教育、15% 大专后证书"
+            "value": "JobZone3准备组，非固定个人年限；教育调查46%高中、28%部分大学无学位、15%高中后证书。BLS该职业典型高中及中期在职培训。"
           },
           {
             "alternate_value": null,
-            "label": "美国就业（2024）",
+            "label": "美国就业（2025）",
             "secondary_value": null,
-            "value": "38,900 人（精确职业口径）"
+            "value": "37,900人（43-4141）"
           },
           {
             "alternate_value": null,
-            "label": "美国就业变化（2024—2034）",
+            "label": "美国就业变化（2025—2035）",
             "secondary_value": null,
-            "value": "下降（−13%）；预计年均职位空缺 2,300 个（精确职业口径）"
+            "value": "下降6.5%，年均2,300空缺"
           }
         ],
         "schema_version": "career.onet_structured_fields.v1"
@@ -15067,7 +15175,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "新账户文员工作需围绕新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看 RIASEC 兴趣测评",
             "evidence_level": {
               "$item": "new-accounts-clerks.fit.personality-fit-block.8",
               "block": "fit",
@@ -15075,7 +15183,7 @@
               "type": "prose"
             },
             "id": "riasec",
-            "label": "新账户文员：新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则",
+            "label": "RIASEC兴趣类型",
             "question": "做新账户文员需要怎样的能力与工作方式？",
             "signals": {
               "$item": "new-accounts-clerks.fit.personality-fit-block.1",
@@ -15083,15 +15191,15 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "新账户文员工作需围绕新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。"
+            "watchout": "兴趣描述活动偏好，不预测开户胜任或录用。"
           },
           {
-            "answer": "新账户文员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "结合虚构资料核对、条款解释与带教反馈观察重复性任务、沟通和流程纪律，测验仅供反思。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "新账户文员工作需围绕新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "evidence_level": "新账户文员工作需围绕新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看 RIASEC 兴趣测评",
+            "evidence_level": "探索性编辑建议；本轮未取得该框架对开户岗位表现的预测效度证据。",
             "id": "big-five",
-            "label": "新账户文员：新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则",
+            "label": "大五人格五因素",
             "question": "做新账户文员需要怎样的能力与工作方式？",
             "signals": {
               "$item": "new-accounts-clerks.fit.personality-fit-block.2",
@@ -15099,15 +15207,15 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "新账户文员工作需围绕新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。"
+            "watchout": "人格反思不能替代重复核验与沟通表现。"
           },
           {
-            "answer": "新账户文员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "结合虚构资料核对、条款解释与带教反馈观察重复性任务、沟通和流程纪律，测验仅供反思。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "新账户文员工作需围绕新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "evidence_level": "新账户文员工作需围绕新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看 RIASEC 兴趣测评",
+            "evidence_level": "探索性编辑建议；本轮未取得该框架对开户岗位表现的预测效度证据。",
             "id": "mbti",
-            "label": "新账户文员：新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则",
+            "label": "MBTI人格类型",
             "question": "做新账户文员需要怎样的能力与工作方式？",
             "signals": {
               "$item": "new-accounts-clerks.fit.personality-fit-block.3",
@@ -15115,15 +15223,15 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "新账户文员工作需围绕新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。"
+            "watchout": "类型标签不能代替带教评价或权限证明。"
           },
           {
-            "answer": "新账户文员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "结合虚构资料核对、条款解释与带教反馈观察重复性任务、沟通和流程纪律，测验仅供反思。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "新账户文员工作需围绕新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "evidence_level": "新账户文员工作需围绕新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看 RIASEC 兴趣测评",
+            "evidence_level": "探索性编辑建议；本轮未取得该框架对开户岗位表现的预测效度证据。",
             "id": "enneagram",
-            "label": "新账户文员：新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则",
+            "label": "九型人格",
             "question": "做新账户文员需要怎样的能力与工作方式？",
             "signals": {
               "$item": "new-accounts-clerks.fit.personality-fit-block.4",
@@ -15131,15 +15239,15 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "新账户文员工作需围绕新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。"
+            "watchout": "类型标签不能证明合规纪律或服务表现。"
           },
           {
-            "answer": "新账户文员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "结合虚构资料核对、条款解释与带教反馈观察重复性任务、沟通和流程纪律，测验仅供反思。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "新账户文员工作需围绕新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "evidence_level": "新账户文员工作需围绕新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看 RIASEC 兴趣测评",
+            "evidence_level": "探索性编辑建议；本轮未取得该框架对开户岗位表现的预测效度证据。",
             "id": "iq",
-            "label": "新账户文员：新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则",
+            "label": "认知推理探索",
             "question": "做新账户文员需要怎样的能力与工作方式？",
             "signals": {
               "$item": "new-accounts-clerks.fit.personality-fit-block.5",
@@ -15147,15 +15255,15 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "新账户文员工作需围绕新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。"
+            "watchout": "一次推理结果不能证明资料核验能力或录用。"
           },
           {
-            "answer": "新账户文员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "结合虚构资料核对、条款解释与带教反馈观察重复性任务、沟通和流程纪律，测验仅供反思。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "新账户文员工作需围绕新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "evidence_level": "新账户文员工作需围绕新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看 RIASEC 兴趣测评",
+            "evidence_level": "探索性编辑建议；本轮未取得该框架对开户岗位表现的预测效度证据。",
             "id": "eq",
-            "label": "新账户文员：新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则",
+            "label": "情绪与协作探索",
             "question": "做新账户文员需要怎样的能力与工作方式？",
             "signals": {
               "$item": "new-accounts-clerks.fit.personality-fit-block.6",
@@ -15163,7 +15271,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "新账户文员工作需围绕新账户文员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。"
+            "watchout": "一次测验不能证明客户沟通与情绪应对表现。"
           }
         ],
         "boundary": "本页的适配信号与工具说明只用于自我探索，不构成能力测评、选拔标准、开户授权或录用承诺；兴趣与人格框架的证据定位见下方说明。",
@@ -15241,15 +15349,15 @@
             "question": "兴趣代码 CES 能决定我适不适合吗？"
           },
           {
-            "answer": "O*NET 列为 Job Zone 3，教育调查显示 46% 高中、28% 部分大学教育、15% 大专后证书；BLS 指出多数岗位要求高中文凭并接受在职培训。",
+            "answer": "美国O*NET46%高中、28%部分大学无学位、15%高中后证书；BLS43-4141典型高中与中期在职培训。中国及具体机构学历另查公告。",
             "question": "需要什么学历？"
           },
           {
-            "answer": "该职业未列出国家级认证；开户与合规权限来自机构内部授权与产品、合规培训，而不是执照。",
+            "answer": "O*NET本轮认证搜索无结果，不能据此证明所有法域免执照；开户、产品或其他受监管业务权限按机构与当地规定核。",
             "question": "需要哪些认证？"
           },
           {
-            "answer": "可以，多数岗位以高中或大专学历加在职培训为主；但需通过机构的产品与合规培训并取得授权才能独立办理业务。",
+            "answer": "非金融专业按目标机构招聘条件核，不以美国典型高中门槛承诺中国录用；独立办理前需相应培训、权限及机构放行。",
             "question": "非金融专业能转进来吗？"
           },
           {
@@ -15257,7 +15365,7 @@
             "question": "工作节奏和压力如何？"
           },
           {
-            "answer": "O*NET 转发的 BLS 预测显示 2024—2034 年就业下降 13%，但年均仍有 2,300 个空缺，需求以人员更替为主；公开预测不是个人录用保证。",
+            "answer": "BLS43-4141美国2025—2035：就业37,900→35,500人，下降6.5%，年均2,300空缺，主要为替换。非当前招聘、非中国需求或AI因果。",
             "question": "这个职业的前景如何？"
           },
           {
@@ -15373,8 +15481,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "本页职业事实来自 O*NET 43-4141.00 官方档案（定义、10 项核心任务、5 项补充任务、工作情境、兴趣代码 CES、Job Zone 3 与教育调查构成）及 O*NET 展示的 2025 BLS OEWS 工资与 2024—2034 年预测（BLS OOH 金融文员页面另作宽口径参照）；美国开户合规参考 FinCEN 客户尽职调查规则；中国账户制度参考《人民币银行结算账户管理办法》、中国人民银行银发〔2015〕392 号通知与《中华人民共和国反洗钱法》；中国工资使用国家统计局 2025 年金融业行业门类均值。",
-          "updated_at": "O*NET 档案更新 2026；BLS 工资为 2025 年数据；就业与预测为 2024—2034 年；FinCEN 规则以现行页面为准；中国监管文件以现行法律与人民银行规定为准；国家统计局为 2025 年数据（2026-05-15 发布）；本页查阅 2026-09-26。"
+          "source": "局部O*NET2026职责教育、OEWS2025全国五分位、BLS2025—2035下降6.5%及年均2,300已核；OEWS提成定义、中国2019企业许可改革与2026生效尽调、FinCEN2026豁免分开。NBS网页浏览工具失败但标准TLS直接读取官方HTML取得金融业211164/140451。快答FAQ共享旧预测、工资排除提成及历史账户规则未全页同步。",
+          "updated_at": "本轮2026-10-11查阅；局部工资行业2025、预测2025—2035；保护历史内容保留。"
         },
         "note": "证据只支持在标注市场、职业口径与期间内的范围性判断，不构成个人收入、录用或开户授权；开户核验、办理与可疑交易判断须由机构授权人员在制度范围内执行。",
         "secondary_links": [
@@ -15420,7 +15528,7 @@
           }
         ]
       },
-      "work_context_block": "工作情境：以网点柜台与客户等候区为主，几乎全部在室内完成；O*NET 工作情境显示 79% 每天在受控室内工作，90% 每天使用电话、87% 每天使用电子邮件、79% 每天需要面对面讨论，89% 与他人保持持续接触；67% 认为精确性或准确性极其重要、74% 认为重复相同任务极其重要，89% 每周工作 40 小时且 100% 为规律时间表。"
+      "work_context_block": "美国O*NET调查79%每天受控室内、90%电话、87%邮件、79%面对面、89%持续接触；67%精确性极重要、74%重复性极重要、89%每周40小时、100%规律排班。调查不能推所有岗位几乎全部室内或中国雇主排班。"
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
@@ -15737,7 +15845,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "开户面谈与身份核验",
@@ -15788,7 +15896,7 @@
       "text": "新账户文员"
     }
   },
-  "source_content_sha256": "0869b1a88de14ec4e6d8dea79a1c867f18f34417b68ceba49599fa1cba84b137",
+  "source_content_sha256": "8a994ab9bfd1deccf943637211ae38078e67e796d564ba1e9763a3faf1d5ba54",
   "subject": {
     "canonical_slug": "new-accounts-clerks",
     "name": "新账户文员",

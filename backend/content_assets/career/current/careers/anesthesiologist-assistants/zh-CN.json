@@ -23453,12 +23453,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 29-1071.01 麻醉医师助理（Anesthesiologist Assistants）：协助麻醉医师为外科及非外科手术实施麻醉，并在手术过程中监测患者状态与提供患者护理。常见职位名称包括认证麻醉医师助理（CAA, Certified Anesthesiologist Assistant）、麻醉助理（Anesthesia Assistant）、麻醉技术员（Anesthesia Technician）、麻醉学技术员（Anesthesiology Technician）、心胸麻醉技术员（Cardiothoracic Anesthesia Technician）与认证麻醉技术专家（Cer.ATT）等；其中认证麻醉医师助理（CAA）是取得 NCCAA 认证并持有州级执照的临床岗位。注意 O*NET 的工资与就业数据引用父职业“医师助理”（Physician Assistants，29-1071.00），未单列本详细职业。"
+              "O*NET 29-1071.01麻醉医师助理协助麻醉医师实施麻醉并监测患者。其reported job titles包含CAA、麻醉技术员等不同岗位名称；该清单不是资格等效认定，不能仅凭名称推断可给药或插管。佛州CAA须满足该州申请、执照和直接监督规则。O*NET工资与就业引用父职业医师助理29-1071，未单列CAA。"
             ]
           },
           "id": "anesthesiologist-assistants.profile.onet-structured-fields-block.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "fl-stat"
           ],
           "type": "prose"
         },
@@ -23554,7 +23555,7 @@
           },
           "id": "anesthesiologist-assistants.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23578,7 +23579,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国BLS OOH/EP父职业医师助理2025—2035预测：2025年168,900人，2035年204,600人，OOH增长21%（EP21.1%）、净增35,700、年均11,500空缺，含增长与替代。O*NET仍显示旧2024—2034资料；这些数字不专属CAA、不保证个人就业、不外推中国。中国本职业预测缺口见下方职业前景正文。"
+              "美国BLS OOH/EP父职业医师助理2025—2035预测：2025年168,900人，2035年204,600人，OOH增长21%（EP21.1%）、净增35,700、年均11,500空缺，含增长与替代。O*NET当前页亦列2025—2035父职业预测；这些数字不专属CAA、不保证个人就业、不外推中国。中国本职业预测缺口见下方职业前景正文。"
             ]
           },
           "id": "anesthesiologist-assistants.profile.onet-structured-fields-block.4",
@@ -23722,8 +23723,10 @@
           "id": "anesthesiologist-assistants.profile.definition-block.11",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "fl-stat",
+            "cnlaw",
+            "cnclass",
+            "cn-nurse-regulation"
           ],
           "type": "prose"
         },
@@ -24613,16 +24616,16 @@
                 "url": "https://www.bls.gov/ooh/healthcare/physician-assistants.htm"
               },
               {
-                "entity": "O*NET 29-1071.01 职业摘要（任务与职责）",
+                "entity": "佛州2026州法458.3475：CAA",
                 "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/29-1071.01"
+                "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0400-0499/0458/Sections/0458.3475.html"
               },
               {
-                "entity": "ONET美国任务对照；中国NBS另见登记",
+                "entity": "国家统计局2025年城镇单位工资",
                 "id": "link-12",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/29-1071.01"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET 展示的 BLS 工资分位（29-1071.01）",
@@ -24701,7 +24704,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先按院校与认证机构官方信息核对麻醉医师助理项目的学制与先修课程、NCCAA 认证考试与州级执照路径，打牢解剖、生理、药理与气道管理基础；不要相信非官方的包过或包就业渠道。"
+              "先按院校与认证机构官方信息核对麻醉医师助理项目的学制与先修课程、NCCAA 认证考试与目标法域许可或授权路径，打牢解剖、生理、药理与气道管理基础；不要相信非官方的包过或包就业渠道。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.11",
@@ -24902,7 +24905,8 @@
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.24",
           "source_refs": [
-            "onet"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25142,12 +25146,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ONET仍展示旧2024—2034就业预测；本页当前预测直接取BLS OOH/EP。"
+              "本页就业数字直接取BLS OOH/EP；本轮O*NET当前页亦列2025—2035父职业预测，均不单列CAA，也不能归因于AI。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.41",
           "source_refs": [
-            "onet"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25325,7 +25330,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "佛州CAA执照与书面协议；相邻ONET链接仅为美国任务对照"
+              "佛州2026州法458.3475（CAA监督与任务范围）"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.54",
@@ -25339,7 +25344,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国州级执照与监督要求（示例）"
+              "佛罗里达州执照与监督要求（示例）"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.55",
@@ -25353,12 +25358,11 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "佛州执照申请页及州法458.3475支持CAAHEP项目、NCCAA考试、ACLS、电子指纹与书面协议内现场直接监督。法律依据见本页佛州执照申请页及州法来源；相邻O*NET链接仅用于职业任务对照。"
+              "佛州458.3475要求备案协议及现场直接监督，并规定许可申请和任务边界；仅为佛州示例，不证明其他法域或AI临床有效性。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "flbom",
             "fl-stat"
           ],
           "type": "prose"
@@ -25368,7 +25372,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "中国行业工资不是CAA工资；相邻ONET链接只是美国对照，不支持NBS数值。"
+              "中国行业平均工资不是CAA工资；也不能证明本职业AI采用、替代或薪酬因果。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.57",
@@ -25382,7 +25386,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NBS中国行业工资登记来源；ONET链接仅美国对照"
+              "国家统计局2025年城镇单位就业人员年平均工资情况"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.58",
@@ -25454,13 +25458,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册预测父职业“医师助理”2025—2035 年增长 21%（远快于平均），年均约 11,500 个空缺且包含增长与替代需求。本页不把任务自动化程度等同于岗位数量变化，也不据技术名词推断岗位增减。"
+              "BLS 职业展望手册预测父职业“医师助理”2025—2035 年增长 21%（远快于平均），年均约 11,500 个空缺且包含增长与替代需求。本页不把任务自动化程度等同于岗位数量变化，也不据技术名词推断岗位增减。这是总体就业预测，非AI归因。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet",
-            "onet"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25534,8 +25538,9 @@
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet",
-            "onet"
+            "nccaa",
+            "asa-aa",
+            "fl-stat"
           ],
           "type": "prose"
         },
@@ -25563,8 +25568,8 @@
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnclass",
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -25622,8 +25627,9 @@
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "onet",
-            "onet"
+            "nccaa",
+            "asa-aa",
+            "fl-stat"
           ],
           "type": "prose"
         },
@@ -25692,7 +25698,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先确认州级执照与认证范围、监督协议与机构授权，明确哪些操作可由本人实施、哪些须由麻醉医师决定或处理。"
+              "先确认目标法域许可或授权与认证范围、监督协议与机构授权，明确哪些操作可由本人实施、哪些须由麻醉医师决定或处理。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.79",
@@ -25782,7 +25788,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按方案与操作规程实施气道管理，遇到困难气道立即按程序报告麻醉医师并启动预案。"
+              "编辑核对建议：确认困难气道预案与本人权限，及时报告监督医师；操作仅按机构已批准程序及直接监督执行。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.85",
@@ -25812,7 +25818,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按监护标准持续判读趋势，设定并遵守报警阈值，异常立即报告并处置。"
+              "编辑核对建议：确认机构监护、报警设置和报告要求；异常及时报告，调整与处置限已批准程序及本人权限。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.87",
@@ -25958,7 +25964,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结构化病史模板可辅助记录，但评估结论仍由人核对。"
+              "编辑候选用途：整理病史记录；采用与临床效果未核。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.97",
@@ -26015,7 +26021,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "设备自检与库存清单可自动化核对，但校准与判断仍由人负责。"
+              "编辑候选用途：汇总自检与库存记录；不证明校准正确。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.101",
@@ -26072,7 +26078,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "气道可视化与定位辅助可辅助，但操作与困难气道判断仍由人负责。"
+              "编辑候选用途：呈现可视化信息；气道辅助效果未核。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.105",
@@ -26129,7 +26135,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "监护报警与剂量核对可自动化提示，但判读与给药决定仍由人负责。"
+              "编辑候选用途：汇总报警和核对提示；采用与效果未核。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.109",
@@ -26186,7 +26192,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "除颤与监护设备可辅助，但应急判断与处置仍由人负责。"
+              "生命支持设备属于任务工具；不能据此证明AI辅助效果。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.113",
@@ -26243,7 +26249,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "恢复记录与培训资料可数字化管理，但判断与教学仍由人负责。"
+              "编辑候选用途：整理恢复记录与教学资料；效果未核。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.117",
@@ -26299,7 +26305,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "影像与定位提示可辅助，但穿刺操作与并发症判断仍由人负责。"
+              "编辑候选用途：呈现定位信息；不授予穿刺权限，效果未核。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.121",
@@ -26342,7 +26348,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26356,7 +26362,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26370,7 +26376,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26384,7 +26390,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26398,7 +26404,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26412,7 +26418,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26426,7 +26432,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26440,7 +26446,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26454,7 +26460,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26468,7 +26474,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26482,7 +26488,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26496,7 +26502,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26510,7 +26516,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26524,7 +26530,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26538,7 +26544,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26552,7 +26558,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26581,7 +26587,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26680,7 +26686,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "认证与州级执照"
+              "认证与目标法域许可或授权"
             ]
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.31",
@@ -26695,7 +26701,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NCCAA 认证（CAA）与州级执照"
+              "NCCAA 认证（CAA）与目标法域许可或授权"
             ]
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.32",
@@ -26716,7 +26722,6 @@
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
             "nccaa",
-            "flbom",
             "fl-stat"
           ],
           "type": "prose"
@@ -26920,12 +26925,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.47",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26939,8 +26944,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26968,7 +26972,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26996,7 +27000,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27024,7 +27028,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27038,8 +27042,7 @@
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27048,12 +27051,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27259,7 +27262,7 @@
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27273,8 +27276,7 @@
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet",
-            "onet"
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27288,7 +27290,7 @@
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27302,7 +27304,7 @@
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27316,7 +27318,7 @@
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27330,8 +27332,7 @@
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27880,7 +27881,7 @@
                 "entity": "《中华人民共和国医师法》（2022-03-01 施行）",
                 "id": "link-20",
                 "relation": "career.authority",
-                "url": "https://cpc.people.com.cn/n1/2021/0826/c64387-32208638.html"
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992842.html"
               }
             ]
           },
@@ -28034,7 +28035,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业匹配工具，也没有证据支持“某种类型最适合麻醉岗位”；适任职否由认证、执照与机构考核判定。"
+              "本站不将MBTI类型作为本职业匹配、录用或准入依据；本页未取得针对CAA工作表现的类型预测研究。应核实际教育、认证、法域许可及训练表现。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.10",
@@ -28134,7 +28135,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样属于自我探索工具，不能判断你是否适合这个职业；准入关注项目录取、认证考试与州级执照要求。"
+              "九型人格同样属于自我探索工具，不能判断你是否适合这个职业；准入关注项目录取、认证考试与目标法域许可或授权要求。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.14",
@@ -28191,7 +28192,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "逻辑与技术操作能力：判读监测数值、核对药物剂量与操作设备需要清晰逻辑与手眼协调，但没有统一的 IQ 门槛；准入以项目录取、认证考试与执照考核为准。"
+              "本站智力与推理测评不为本职业设置准入门槛。本页未核到可泛化至所有CAA雇主的IQ分数要求；目标院校或雇主是否采用认知考核，应查具体选拔规则。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.18",
@@ -28308,7 +28309,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本页的适配判断均属编辑建议，基于 O*NET 的兴趣剖面、工作情境与任务数据，不构成选拔标准、健康或心理诊断；项目录取、认证考试、州级执照（美国）与医师资格与规范化培训（中国大陆）要求以认证机构、各州医学委员会、卫生健康主管部门与用人单位官方信息为准。"
+              "适配信号为编辑按美国任务、兴趣和工作情境提出的观察建议，不是录用、健康或心理诊断。美国项目、NCCAA及目标法域许可分别核对；中国医师与护士按各自法律资格，不把医师路径强加给护理人员。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.26",
@@ -28655,7 +28656,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有。MBTI 不是职业匹配工具，也不是准入依据。"
+              "本站不按MBTI类型筛选CAA；本页未取得本职业类型与表现的预测证据，准入要求应核官方项目与法域规则。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.49",
@@ -28698,7 +28699,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "逻辑与手眼协调对判读监测与操作设备有帮助，但没有统一的 IQ 门槛；可通过解剖生理、药理学与模拟训练建立。"
+              "判读监测、剂量核对和设备学习涉及数理与协调能力，可按具体课程和训练要求补强；本站IQ测评不授予资格，目标院校或雇主的认知考核另核。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.52",
@@ -28945,16 +28946,16 @@
                 "url": "https://www.onetonline.org/link/details/29-1071.01"
               },
               {
-                "entity": "佛罗里达州行政法规 64B8-31.003 与州法 458.3475（执照与监督要求示例）",
+                "entity": "佛罗里达州法458.3475：麻醉医师助理（2026）",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://flboardofmedicine.gov/renewals/anesthesiologist-assistants/"
+                "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0400-0499/0458/Sections/0458.3475.html"
               },
               {
                 "entity": "《中华人民共和国医师法》（2022-03-01 施行）",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://cpc.people.com.cn/n1/2021/0826/c64387-32208638.html"
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992842.html"
               }
             ]
           },
@@ -29005,7 +29006,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：O*NET 29-1071.01 提供任务与工作情境（81% 认为精确或准确极其重要、93% 认为错误后果极其严重、96% 持续与他人接触、100% 每天有面对面讨论、67% 每天暴露于疾病或感染、52% 每天面对时间压力、41% 对他人的健康与安全承担非常高责任）；BLS 职业展望手册（父职业口径）提供工资与就业；佛罗里达州行政法规 64B8-31.003 与《中华人民共和国医师法》提供执照与执业框架。风险清单为编辑归纳，不含发生概率。"
+              "证据范围：O*NET美国任务和受访工作情境支持工作对象、精确性、错误后果与暴露；BLS仅支持美国父职业工资及总体就业预测。佛州州法458.3475支持备案协议、现场直接监督与授权边界；中国医师法只适用于医师。六卡场景、可能后果及核对动作为编辑归纳，不是事故概率或机构已批准程序。"
             ]
           },
           "id": "anesthesiologist-assistants.risk.career-risk-cards.10",
@@ -29052,7 +29053,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按方案与操作规程实施气道管理，遇到困难气道立即按程序报告麻醉医师并启动预案。"
+              "编辑核对建议：确认困难气道预案、报告对象与本人授权范围；遇到困难立即报告监督麻醉医师，后续操作按适用机构已批准程序和直接监督执行。"
             ]
           },
           "id": "anesthesiologist-assistants.risk.career-risk-cards.13",
@@ -29112,7 +29113,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按监护标准持续判读趋势，设定并遵守报警阈值，异常立即报告并处置。"
+              "编辑核对建议：确认机构批准的监护及报警设置要求、异常报告对象和本人权限；持续核对趋势，异常及时报告，设置调整或处置按已授权程序执行。"
             ]
           },
           "id": "anesthesiologist-assistants.risk.career-risk-cards.17",
@@ -29379,7 +29380,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 29-1071.01 任务与工作情境（美国，2026 年更新页面）。"
+              "O*NET美国29-1071.01任务资料；风险场景与核对建议由编辑归纳。"
             ]
           },
           "id": "anesthesiologist-assistants.risk.career-risk-cards.35",
@@ -29393,7 +29394,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册：医师助理（美国，父职业口径，2025—2035 年预测）。"
+              "BLS美国父职业医师助理工资与2025—2035总体就业预测；不支持临床风险概率。"
             ]
           },
           "id": "anesthesiologist-assistants.risk.career-risk-cards.36",
@@ -29407,7 +29408,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "佛罗里达州行政法规 64B8-31.003 与州法 458.3475（美国州级执照与监督要求示例）。"
+              "O*NET美国详细职业受访工作情境，包括精确性、错误后果和暴露；非个人发生概率。"
             ]
           },
           "id": "anesthesiologist-assistants.risk.career-risk-cards.37",
@@ -29421,7 +29422,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "《中华人民共和国医师法》（2022-03-01 施行）与《中华人民共和国职业分类大典（2022 年版）》临床和口腔医师（2-05-01）。"
+              "佛州2026州法458.3475：备案协议、现场直接监督与CAA权限边界；不外推其他法域。"
             ]
           },
           "id": "anesthesiologist-assistants.risk.career-risk-cards.38",
@@ -29435,7 +29436,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本页编辑归纳（条件性建议），不代表监管或医疗机构的强制流程。"
+              "中国医师法：医师注册、执业范围与病历义务；不替代护士或CAA资格。"
             ]
           },
           "id": "anesthesiologist-assistants.risk.career-risk-cards.39",
@@ -29527,7 +29528,7 @@
                 "values": [
                   "美国项目准备",
                   "美国项目的学历、先修课程与录取按院校核对；ASA2022声明描述项目硕士级24—28个月，当前学制另核。",
-                  "中国大陆侧：按《中华人民共和国医师法》，具有高等学校相关医学专业本科以上学历并在执业医师指导下参加医学专业工作实践满一年可参加执业医师资格考试；取得资格并注册后方可执业。",
+                  "中国大陆须先核真实岗位：医师按医师法考试并注册；护士按护士条例注册，不把美国CAA项目当作中国医护资格转换。",
                   "O*NET美国受访学历96%硕士、4%硕士后证书；不是中国或所有雇主招聘门槛。"
                 ]
               },
@@ -29535,9 +29536,9 @@
                 "id": "clearance",
                 "values": [
                   "佛州执照与监督",
-                  "美国侧：须通过 NCCAA 考试取得 CAA 认证并持州级执照；以佛罗里达州为例还须持有 ACLS 证书并完成电子指纹背景审查。",
+                  "美国侧：通过 NCCAA 考试取得 CAA 认证，并满足目标法域的许可或授权及监督要求；佛罗里达州示例须取得州执照、持有 ACLS 证书并完成电子指纹背景审查。",
                   "执业限于麻醉医师监督下（不得由执业资格被察看的医师监督）；认证须经继续教育与再认证维持。",
-                  "中国大陆侧：须取得医师资格并注册，在注册的执业地点、执业类别与执业范围内执业。"
+                  "中国医师与护士按各自资格及注册制度核对，机构授权不能代替法定资格；美国CAA认证不等效中国医护资格。"
                 ]
               },
               {
@@ -29562,12 +29563,12 @@
           },
           "id": "anesthesiologist-assistants.path.employer-evidence.1",
           "source_refs": [
-            "onet",
-            "nccaa",
-            "flbom",
-            "fl-stat",
             "asa-aa",
-            "cnlaw"
+            "nccaa",
+            "fl-stat",
+            "cnlaw",
+            "cn-nurse-regulation",
+            "onet"
           ],
           "title": "任务与资格支持的准备核对项（不是招聘样本）",
           "type": "cards"
@@ -29849,10 +29850,10 @@
                 "认证失效会影响执业资格"
               ],
               [
-                "州级执照与监督协议",
-                "全部执业者",
+                "佛州执照与监督协议（法域示例）",
+                "拟在佛罗里达州执业的CAA",
                 "决定能否合法执业及执业范围",
-                "必备门槛",
+                "佛州必备；其他法域另核",
                 "佛州示例：州执照、备案书面协议及现场直接监督；其他法域另核",
                 "按目标法域执照周期；佛州州法为两年续证",
                 "超出监督范围或授权执业会被追责"
@@ -29892,10 +29893,10 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "本职业的资格由认证、执照与监督关系管理：美国侧须完成 CAAHEP 认证项目、通过 NCCAA 考试取得 CAA 认证并持有州级执照，且在麻醉医师监督下执业。",
+              "本职业的资格由认证、目标法域许可或授权与监督关系管理：美国侧须完成 CAAHEP 认证项目、通过 NCCAA 考试取得 CAA 认证，并满足目标法域的许可或授权规则与监督要求，在麻醉医师监督下执业；佛州另须取得州级执照并遵守备案协议及现场直接监督要求。",
               "护理麻醉师、呼吸治疗师、注册护士与外科技术员的资格与职责体系不同，不可互相替代；取得认证与执照前的临床实践须在监督指导下进行。",
               "中国医师与护士按各自法律资格，不能凭美国CAA认证或“麻醉助理”名称转换。2022版大典原分类说明只用于理解不同职业，不授予操作权限。",
-              "有意入行者应核对官方信息中的项目录取、先修课程、认证考试、州级执照与监督要求，并通过官方渠道报名与训练；本页不构成医学建议。"
+              "有意入行者应核对官方信息中的项目录取、先修课程、认证考试、目标法域许可或授权与监督要求，并通过官方渠道报名与训练；本页不构成医学建议。"
             ]
           },
           "id": "anesthesiologist-assistants.path.credential-boundary.1",
@@ -29945,16 +29946,16 @@
                 "url": "https://www.bls.gov/ooh/healthcare/physician-assistants.htm"
               },
               {
-                "entity": "佛罗里达州行政法规 64B8-31.003 与州法 458.3475（执照与监督要求示例）",
+                "entity": "佛罗里达州法458.3475：麻醉医师助理（2026）",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://flboardofmedicine.gov/renewals/anesthesiologist-assistants/"
+                "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0400-0499/0458/Sections/0458.3475.html"
               },
               {
                 "entity": "《中华人民共和国医师法》（2022-03-01 施行）",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://cpc.people.com.cn/n1/2021/0826/c64387-32208638.html"
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992842.html"
               }
             ]
           },
@@ -30045,7 +30046,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通过 NCCAA 考试取得 CAA 认证，并申请州级执照（以佛罗里达州为例还须 ACLS 与背景审查）。"
+              "通过 NCCAA 考试取得 CAA 认证，并满足目标法域许可或授权要求；佛罗里达州示例须申请州执照，并满足 ACLS 与背景审查要求。"
             ]
           },
           "id": "anesthesiologist-assistants.path.career-path-block.16",
@@ -30060,7 +30061,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "认证考试与州级执照"
+              "认证考试与目标法域许可或授权"
             ]
           },
           "id": "anesthesiologist-assistants.path.career-path-block.17",
@@ -30109,7 +30110,10 @@
           "id": "anesthesiologist-assistants.path.career-path-block.20",
           "source_refs": [
             "onet",
-            "onet"
+            "fl-stat",
+            "nccaa",
+            "cnlaw",
+            "cn-nurse-regulation"
           ],
           "type": "prose"
         },
@@ -30124,9 +30128,8 @@
           "id": "anesthesiologist-assistants.path.career-path-block.21",
           "source_refs": [
             "fl-stat",
-            "flbom",
-            "nccaa",
-            "cnlaw"
+            "cnlaw",
+            "cn-nurse-regulation"
           ],
           "type": "prose"
         },
@@ -30194,7 +30197,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "佛罗里达州行政法规 64B8-31.003 与州法 458.3475（美国州级执照与监督要求示例）。"
+              "佛州2026州法458.3475：许可、协议与直接监督；其他法域另核。"
             ]
           },
           "id": "anesthesiologist-assistants.path.career-path-block.26",
@@ -30412,7 +30415,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通过 NCCAA 考试并取得州级执照，在现场直接监督与授权范围内承担手术室内麻醉实施。"
+              "通过 NCCAA 考试并满足目标法域许可或授权要求，在当地规定的麻醉医师监督与授权范围内承担手术室内麻醉实施；佛州示例要求现场直接监督及备案协议。"
             ]
           },
           "id": "anesthesiologist-assistants.path.career-path-block.41",
@@ -30427,7 +30430,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "认证与州级执照"
+              "认证与目标法域许可或授权"
             ]
           },
           "id": "anesthesiologist-assistants.path.career-path-block.42",
@@ -31134,13 +31137,13 @@
                 "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "《中华人民共和国医师法》（2022-03-01 施行）",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://cpc.people.com.cn/n1/2021/0826/c64387-32208638.html"
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992842.html"
               },
               {
                 "entity": "麻醉科医师",
@@ -31206,7 +31209,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得CAA专属及中国对应职业全国就业预测。美国父职业医师助理当前BLS OOH/EP：2025年168,900人，2035年204,600人，净35,700，OOH增长21%（EP21.1%）、年均11,500空缺，含增长与替代；O*NET仍展示旧2024—2034预测。父职业数据不保证CAA岗位，更不能外推中国。"
+              "证据不足：本页未取得CAA专属及中国对应职业全国就业预测。美国父职业医师助理当前BLS OOH/EP：2025年168,900人，2035年204,600人，净35,700，OOH增长21%（EP21.1%）、年均11,500空缺，含增长与替代；O*NET当前页亦列2025—2035父职业预测。父职业数据不保证CAA岗位，更不能外推中国。"
             ]
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.8",
@@ -31240,7 +31243,8 @@
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31254,7 +31258,8 @@
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31268,7 +31273,8 @@
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.12",
           "source_refs": [
-            "onet"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31310,7 +31316,8 @@
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31338,7 +31345,8 @@
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31352,7 +31360,8 @@
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31366,7 +31375,8 @@
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31408,7 +31418,8 @@
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31436,7 +31447,8 @@
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31450,7 +31462,8 @@
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31464,7 +31477,8 @@
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.26",
           "source_refs": [
-            "onet"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31506,7 +31520,8 @@
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31543,7 +31558,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "佛罗里达州行政法规 64B8-31.003 与州法 458.3475（美国州级执照与监督要求示例）。"
+              "国家统计局2025工资发布：相关中国行业/单位平均工资；不支持美国空缺、资格或CAA精确工资。"
             ]
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.32",
@@ -31557,7 +31572,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》（中国大陆民用口径，仅作参照）与《中华人民共和国医师法》。"
+              "中国医师法：注册、执业范围与医师义务；不支持中国行业工资或美国CAA资格。"
             ]
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.33",
@@ -31601,7 +31616,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻方向，需改换为医师资格序列。"
+              "编辑判断：需转换医师资格。"
             ]
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.36",
@@ -31646,7 +31661,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻方向，需补护理资格序列。"
+              "编辑判断：需补护理资格。"
             ]
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.39",
@@ -31691,7 +31706,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻方向，需按医师助理体系训练与授权。"
+              "编辑判断：需另核PA训练授权。"
             ]
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.42",
@@ -31736,7 +31751,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "邻近方向，需补呼吸治疗资格。"
+              "编辑判断：需补呼吸治疗资格。"
             ]
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.45",
@@ -31781,7 +31796,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "邻近方向，需补护理资格。"
+              "编辑判断：需补护理资格。"
             ]
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.48",
@@ -31825,7 +31840,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "邻近方向，需补外科技术训练。"
+              "编辑判断：需补外科技术训练。"
             ]
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.51",
@@ -31869,7 +31884,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远距离转向，需改换执业体系。"
+              "编辑判断：较远，需换执业体系。"
             ]
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.54",
@@ -31914,7 +31929,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远距离转向，需补管理训练。"
+              "编辑判断：较远，需补管理能力。"
             ]
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.57",
@@ -32030,7 +32045,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET 29-1071.01 麻醉医师助理职业摘要与详细资料；BLS 职业就业与工资统计（OEWS）：29-1071 与 BLS 职业展望手册：医师助理（均为父职业口径）；佛罗里达州行政法规 64B8-31.003 与州法 458.3475；《中华人民共和国医师法》（2022-03-01 施行）；《中华人民共和国职业分类大典（2022 年版）》临床和口腔医师（2-05-01）；国家统计局《2025 年城镇单位就业人员年平均工资情况》。"
+              "O*NET美国29-1071.01任务、兴趣与工作情境；BLS父职业医师助理工资与总体就业预测；佛州2026州法458.3475；中国医师法及护士条例；国家统计局2025城镇单位工资。本页保留2022职业大典分类说明，但本轮原PDF未成功取得，具体代码仍列待核。"
             ]
           },
           "id": "anesthesiologist-assistants.sources.source-card.2",
@@ -32046,7 +32061,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮相关事实与消费者核对日期：2026-10-02；未重新研究的登记资料仅保留原查阅日期。"
+              "本次九板块作者复核：2026-10-08。实际原文核读范围见本职业作者报告；未重新取得的资料保留原查阅日期，不宣称全页事实核实。"
             ]
           },
           "id": "anesthesiologist-assistants.sources.source-card.3",
@@ -32651,6 +32666,21 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "中国大陆护理资格；2026-10-08核读第2、7、17、21条"
+                ],
+                "evidence_type": "contextual",
+                "id": "cn-nurse-regulation",
+                "limitation": "护士执业注册和护理义务；不授予医师或美国CAA资格。",
+                "market": "中国大陆",
+                "name": "护士条例（2020修订）",
+                "period": "2008公布；2020修订",
+                "publisher": "国务院；北京市卫生健康委员会转载",
+                "scope": "contextual",
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230408_2993021.html"
               }
             ]
           },
@@ -34865,8 +34895,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
-              "flbom"
+              "onet",
+              "privacy"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -34897,8 +34927,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "hr",
-              "operations"
+              "facilities",
+              "onet"
             ],
             "id": "record-version",
             "mitigation": {
@@ -34929,8 +34959,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
-              "flbom"
+              "onet",
+              "privacy"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34961,8 +34991,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "flbom",
-              "cnlaw"
+              "privacy",
+              "employer"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -34993,8 +35023,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "hr",
-              "flbom"
+              "onet",
+              "employer"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -35025,8 +35055,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "hr",
-              "operations"
+              "facilities",
+              "onet"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35519,13 +35549,13 @@
           },
           "ui": {
             "ai_heading": "AI 会影响麻醉医师助理的工资吗？",
-            "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "公开招聘样本（历史公告，非官方统计）",
-            "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "麻醉医师助理在不同学历背景下通常从哪些岗位方向开始？",
+            "driver_heading": "围术期工作场景与岗位核对（编辑整理）",
+            "official_heading": "2025年中国城镇单位与相关行业平均工资（非本职业统计）",
+            "scenario_caption": "教育、认证与继续训练阶段（编辑整理；不是中国学历工资统计）",
+            "scenario_heading": "美国CAA教育与认证阶段如何核对？",
             "scenario_interpretation_label": "说明与核对建议",
-            "scenario_role_label": "学历背景",
-            "scenario_value_label": "常见岗位方向"
+            "scenario_role_label": "准备或资格阶段",
+            "scenario_value_label": "需核对的项目或资格"
           },
           "us_growth": {
             "$item": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.58",
@@ -35734,7 +35764,7 @@
             }
           }
         ],
-        "factors_heading": "哪些因素会影响美国麻醉医师助理工资？",
+        "factors_heading": "核对美国CAA薪酬条款时需确认哪些条件？",
         "growth": {
           "$item": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.33",
           "block": "us-salary",
@@ -35833,7 +35863,7 @@
             }
           }
         ],
-        "industry_value_label": "该行业内本职业工资中位数",
+        "industry_value_label": "父职业医师助理工资中位数或CAA资料缺口",
         "interpretation_heading": "这组美国工资数字应当怎么理解？",
         "interpretation_rows": [
           {
@@ -36115,7 +36145,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
             "value": {
               "$item": "anesthesiologist-assistants.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36160,7 +36190,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "ep",
             "value": {
               "$item": "anesthesiologist-assistants.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36549,7 +36579,7 @@
           },
           {
             "alternate_value": null,
-            "label": "佛罗里达州执照与监督要求（行政法规 64B8-31.003）",
+            "label": "佛罗里达州法458.3475与执照申请（法域示例）",
             "secondary_value": null,
             "value": {
               "$item": "anesthesiologist-assistants.profile.onet-structured-fields-block.5",
@@ -37998,7 +38028,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "手术室临床操作：气道管理与给药 · 术中监测与设备校准 · 应急生命支持与恢复记录",
@@ -38049,7 +38079,7 @@
       "text": "麻醉医师助理：任务、工资与就业前景（O*NET 29-1071.01）"
     }
   },
-  "source_content_sha256": "c427c152f390b48d6a6017122b00cd58640bea68ad952977a2faaca2966245b3",
+  "source_content_sha256": "634faf11f7131b360afd13101c23c1fce34c6e1602efa6353e9c80ed12baac65",
   "subject": {
     "canonical_slug": "anesthesiologist-assistants",
     "name": "麻醉医师助理",

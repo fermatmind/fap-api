@@ -25590,7 +25590,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数控操作涉及机床设备和工件加工。"
+              "所引O*NET51-9161数控工具操作档案的主要对象为金属或塑料工件；它支持数控设备任务与文字生成区别，不能直接当作石材数控工艺或设备资格依据。"
             ]
           },
           "id": "stone-cutters-and-carvers-manufacturing.display.ai_impact_table.evidence.3.conclusion",
@@ -31475,12 +31475,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：没有日期地区职责条件完整的招聘样本，不推断当前热度。"
+              "弥勒市2026年第七期公告中，云南砉红石材开发有限公司所列岗位为驾驶员、门卫，不能因企业经营石材就视为石材切割雕刻工招聘。精确本职完整样本仍未取得，不计算需求热度或录用率。"
             ]
           },
           "id": "stone-cutters-and-carvers-manufacturing.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls-ooh"
+            "mile-recruit-2026"
           ],
           "type": "prose"
         },
@@ -31828,7 +31828,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "数控设备操作及适用工艺训练"
+              "补目标岗位数控设备及金属或塑料工件的适用工艺训练；石材加工经验需重新核材料和设备差距。"
             ]
           },
           "id": "stone-cutters-and-carvers-manufacturing.display.market_signal_card.transitions.editing.gaps",
@@ -32111,7 +32111,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "细分51-9195.03任务与父SOC51-9195工资预测分开；本轮复核父组BLS预测，新增NBS2025制造业两单位税前年均背景，非石材单列工资。美国危害与中国规则沿原范围，暂无完整雇主样本，原创练习不外部证据。"
+              "本轮核细分51-9195.03任务、RAC兴趣及父SOC51-9195工资预测，二者分开；NBS2025制造业为宽行业税前年均背景。OSHA/CDC硅尘资料保美国范围；八转岗按实际材料工艺核，数控档案主要对象为金属或塑料。官方有界招聘检索未得三条可比石材切割雕刻报价，原创练习不作雇主证据。"
             ]
           },
           "id": "stone-cutters-and-carvers-manufacturing.display.source_card.source",
@@ -32127,7 +32127,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-09-30初读制作；2026-10-02复核BLS父职业预测及NBS制造业工资，其余来源沿原日期范围未重全文研究；来源期间分别列示。"
+              "2026-10-12仅核本次九模块及相关引用；共享登记与未选内容保各自原日期。工资、预测、规则和招聘检索期间分别核，不表示全页重新制作。"
             ]
           },
           "id": "stone-cutters-and-carvers-manufacturing.display.source_card.updated-at",
@@ -32921,6 +32921,21 @@
                 "publisher": "O*NET / U.S. DOL",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-9061.00"
+              },
+              {
+                "accessed_at": "2026-10-12",
+                "details": [
+                  "云南砉红石材开发有限公司列驾驶员、门卫岗位；企业名称含石材不等于加工职业。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "mile-recruit-2026",
+                "limitation": "此条没有石材切割雕刻任务，不采用其驾驶员门卫金额作本职工资或招聘热度。",
+                "market": "云南弥勒",
+                "name": "弥勒市2026年第七期招聘：砉红石材相关岗位",
+                "period": "2026年第七期历史公告",
+                "publisher": "弥勒市人民政府",
+                "scope": "contextual",
+                "url": "https://www.hhml.gov.cn/info/35871/908402.htm"
               }
             ]
           },
@@ -35381,8 +35396,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "osha",
-              "cdc"
+              "sag-moa",
+              "nist"
             ],
             "id": "image-use",
             "mitigation": {
@@ -35419,7 +35434,7 @@
             },
             "evidence_refs": [
               "onet",
-              "editorial"
+              "cnc"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -35456,7 +35471,7 @@
             },
             "evidence_refs": [
               "onet",
-              "editorial"
+              "cnc"
             ],
             "id": "project-income",
             "mitigation": {
@@ -35493,7 +35508,7 @@
             },
             "evidence_refs": [
               "onet",
-              "osha"
+              "sag-moa"
             ],
             "id": "identity-procedure",
             "mitigation": {
@@ -35529,8 +35544,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "editorial",
-              "onet"
+              "onet",
+              "nist-ai"
             ],
             "id": "project-data",
             "mitigation": {
@@ -35566,8 +35581,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "editorial",
-              "onet"
+              "onet",
+              "cnc"
             ],
             "id": "audition-feedback",
             "mitigation": {
@@ -35705,6 +35720,78 @@
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$source": "onet",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "stone-cutters-and-carvers-manufacturing.source-register.published.1"
+            },
+            "id": "onet",
+            "label": {
+              "$source": "onet",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "stone-cutters-and-carvers-manufacturing.source-register.published.1"
+            },
+            "scope": {
+              "$source": "onet",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "limitation",
+              "item": "stone-cutters-and-carvers-manufacturing.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "cnc",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "stone-cutters-and-carvers-manufacturing.source-register.published.1"
+            },
+            "id": "cnc",
+            "label": {
+              "$source": "cnc",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "stone-cutters-and-carvers-manufacturing.source-register.published.1"
+            },
+            "scope": {
+              "$source": "cnc",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "limitation",
+              "item": "stone-cutters-and-carvers-manufacturing.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "nist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "stone-cutters-and-carvers-manufacturing.source-register.published.1"
+            },
+            "id": "nist-ai",
+            "label": {
+              "$source": "nist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "stone-cutters-and-carvers-manufacturing.source-register.published.1"
+            },
+            "scope": {
+              "$source": "nist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "limitation",
+              "item": "stone-cutters-and-carvers-manufacturing.source-register.published.1"
             }
           }
         ]
@@ -35962,7 +36049,7 @@
         },
         "bls_table": [
           {
-            "fact_ref": "low",
+            "fact_ref": "us-p10-2025",
             "指标": "薪资 · 10 分位",
             "数值": {
               "$fact": "us-p10-2025",
@@ -35976,7 +36063,7 @@
             "说明": "父职业第25分位，2025年5月小时口径。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "us-median-2025",
             "指标": "薪资 · 中位数",
             "数值": {
               "$fact": "us-median-2025",
@@ -35990,7 +36077,7 @@
             "说明": "父职业第75分位，2025年5月小时口径。"
           },
           {
-            "fact_ref": "high",
+            "fact_ref": "us-p90-2025",
             "指标": "薪资 · 90 分位",
             "数值": {
               "$fact": "us-p90-2025",
@@ -35999,7 +36086,7 @@
             "说明": "父职业第90分位，非职级。"
           },
           {
-            "fact_ref": "employment",
+            "fact_ref": "us-employment-2024",
             "指标": "2025–2035 就业 · 基期人数",
             "数值": {
               "$fact": "us-employment-2024",
@@ -36008,7 +36095,7 @@
             "说明": "父职业2025就业43.0千人，非细分石材工人数。"
           },
           {
-            "fact_ref": "growth",
+            "fact_ref": "us-growth-2024-2034",
             "指标": "2025–2035 就业 · 增长预测",
             "数值": {
               "$fact": "us-growth-2024-2034",
@@ -36017,7 +36104,7 @@
             "说明": "父职业2025–2035预测，非个人录用率或AI因果。"
           },
           {
-            "fact_ref": "openings",
+            "fact_ref": "us-openings-2024-2034",
             "指标": "2025–2035 就业 · 年均空缺",
             "数值": {
               "$fact": "us-openings-2024-2034",
@@ -36103,7 +36190,7 @@
         "industry_period": "2025年5月",
         "industry_rows": [
           {
-            "fact_ref": "industry-theater",
+            "fact_ref": "industry-primary",
             "industry": "父职业主要行业表",
             "median": {
               "$fact": "industry-primary",
@@ -36117,7 +36204,7 @@
             }
           },
           {
-            "fact_ref": "industry-education",
+            "fact_ref": "industry-secondary",
             "industry": "石材制造细分行业",
             "median": {
               "$fact": "industry-secondary",
@@ -36131,7 +36218,7 @@
             }
           },
           {
-            "fact_ref": "industry-amusement",
+            "fact_ref": "industry-tertiary",
             "industry": "地区与企业待遇",
             "median": {
               "$fact": "industry-tertiary",
@@ -36455,7 +36542,7 @@
             },
             "metric": "职业危害背景",
             "occupation_scope": "石材台面制造修整安装",
-            "source_id": "osha",
+            "source_id": "ratify",
             "value": "公开危害控制资料"
           },
           {
@@ -36473,10 +36560,10 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "metric": "招聘样本缺口",
-            "occupation_scope": "石材加工具体岗位",
-            "source_id": "editorial",
-            "value": "未采用完整可核样本"
+            "metric": "相关招聘边界",
+            "occupation_scope": "云南砉红石材企业的驾驶员、门卫岗位，非石材切割雕刻",
+            "source_id": "mile-recruit-2026",
+            "value": "历史公告岗位与加工任务分开"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -36571,6 +36658,30 @@
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$source": "mile-recruit-2026",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "stone-cutters-and-carvers-manufacturing.source-register.published.1"
+            },
+            "id": "mile-recruit-2026",
+            "label": {
+              "$source": "mile-recruit-2026",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "stone-cutters-and-carvers-manufacturing.source-register.published.1"
+            },
+            "scope": {
+              "$source": "mile-recruit-2026",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "limitation",
+              "item": "stone-cutters-and-carvers-manufacturing.source-register.published.1"
             }
           }
         ],
@@ -38349,7 +38460,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "图样、尺寸与表面质量",
@@ -38400,7 +38511,7 @@
       "text": "石材切割与雕刻工（制造类）"
     }
   },
-  "source_content_sha256": "55f69974fd5d3aa9f8d30ef014c8a5b97634810753e891a6aa2fa1ac23fc56c2",
+  "source_content_sha256": "a388d53b718e12218c6f192d5190a7e282e9ef04846c3d21016bc2e7f525fee9",
   "subject": {
     "canonical_slug": "stone-cutters-and-carvers-manufacturing",
     "name": "石材切割与雕刻工（制造类）",

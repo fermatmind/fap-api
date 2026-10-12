@@ -12556,7 +12556,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更强证据是受监督工作样本、原始记录和反馈；兴趣测评不能证明患者识别、影像质量、给药及急症转诊的临床授权责任能力。"
+              "能力判断可观察受监督影像质控、检查交接及人员指导反馈；兴趣仅探索，不授检查给药权限。"
             ]
           },
           "id": "ophthalmic-medical-technologists.fit.riasec-fit-block.7",
@@ -13327,14 +13327,14 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "无数字时只支持不可用或窄口径边界。"
+                  "当前O*NET提供29-2099其他健康技术师和技员父类就业185600至196400、年均12400空缺；非29-2099.05独立数据。"
                 ],
                 "evidence_type": "official employment projection",
                 "id": "onet-trends",
                 "limitation": "无数字时只支持不可用或窄口径边界。",
                 "market": "US",
                 "name": "National employment trends for 29-2099.05",
-                "period": "BLS 2024-2034 projections via O*NET; retrieved 2026-08-31",
+                "period": "BLS 2025—2035父类预测经O*NET展示；2026-10-12读取",
                 "publisher": "O*NET OnLine / BLS",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/29-2099.05"
@@ -13735,7 +13735,7 @@
             "链接": "https://www.onetonline.org/link/details/29-2099.05"
           }
         ],
-        "difference_intro": "资料汇总可加快；患者识别、影像质量、给药及急症转诊的临床授权责任需要人的检查。",
+        "difference_intro": "影像整理、记录草稿和质控提示为编辑试用建议；患者识别、影像质量、医嘱及异常上报须人核，未取得单项AI效果实测。",
         "difference_rows": [
           {
             "AI主要改变": "辅助归纳记录与候选",
@@ -14022,10 +14022,10 @@
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "href": "https://www.onetonline.org/link/details/29-2099.05",
             "id": "bls",
-            "label": "教育与资格",
-            "scope": "O*NET 29-2099.05精确任务；BLS 29-2099仅上位职业代理"
+            "label": "O*NET精确职业Job Zone",
+            "scope": "29-2099.05为JobZone3；职业训练、经验或副学士为该准备级别常见路径，不是统一法定学历或临床权限。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-2099.05",
@@ -14345,16 +14345,28 @@
         "risks": [
           {
             "affected_roles": {
-              "$item": "ophthalmic-medical-technologists.risk.career-risk-cards.4",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "检查技术师、患者和使用影像的医生。标签背景：",
+                {
+                  "$item": "ophthalmic-medical-technologists.risk.career-risk-cards.4",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "consequence": {
-              "$item": "ophthalmic-medical-technologists.risk.career-risk-cards.5",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "可能导致对错误眼别作出临床判断。升级边界：",
+                {
+                  "$item": "ophthalmic-medical-technologists.risk.career-risk-cards.5",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "evidence_refs": [
               "onet",
@@ -14366,11 +14378,11 @@
             "title": "左右眼混淆"
           },
           {
-            "affected_roles": "医疗技术专家工作需围绕医疗技术专家围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "医疗技术专家工作需围绕医疗技术专家围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "接听分诊或接诊的技术师、患者及接收上报的医生。",
+            "consequence": "可能延误医生评估和处理。",
             "evidence_refs": [
               "onet",
-              "privacy"
+              "onet"
             ],
             "id": "record-version",
             "mitigation": "按机构规则立即升级。",
@@ -14378,11 +14390,11 @@
             "title": "急症漏报"
           },
           {
-            "affected_roles": "医疗技术专家工作需围绕医疗技术专家围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "医疗技术专家工作需围绕医疗技术专家围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "拍摄与质控人员、患者及使用影像的医生。",
+            "consequence": "可能使结果不可靠并误导判断。",
             "evidence_refs": [
-              "privacy",
-              "privacy"
+              "onet",
+              "onet"
             ],
             "id": "personal-data",
             "mitigation": "重拍并标质量。",
@@ -14390,8 +14402,8 @@
             "title": "影像伪影"
           },
           {
-            "affected_roles": "医疗技术专家工作需围绕医疗技术专家围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "医疗技术专家工作需围绕医疗技术专家围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "协助给药的技术师、监督医生及患者。",
+            "consequence": "可能引起药物相关伤害或超越批准范围。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14402,11 +14414,11 @@
             "title": "给药越权"
           },
           {
-            "affected_roles": "医疗技术专家工作需围绕医疗技术专家围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "医疗技术专家工作需围绕医疗技术专家围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "器械准备人员、技术师、医生及患者。",
+            "consequence": "可能增加感染风险。",
             "evidence_refs": [
-              "bls",
-              "bls"
+              "onet",
+              "onet"
             ],
             "id": "single-coverage",
             "mitigation": "严格清洁消毒。",
@@ -14414,8 +14426,8 @@
             "title": "无菌失守"
           },
           {
-            "affected_roles": "医疗技术专家工作需围绕医疗技术专家围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "医疗技术专家工作需围绕医疗技术专家围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "患者、技术师及病历管理人员。",
+            "consequence": "可能泄露病历或影像并违反适用资料规则。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14432,31 +14444,31 @@
             "href": "https://www.onetonline.org/link/details/29-2099.05",
             "id": "onet",
             "label": "任务",
-            "scope": "O*NET 29-2099.05精确任务；BLS 29-2099仅上位职业代理"
+            "scope": "O*NET支持29-2099.05眼科任务、分诊、器械及指导背景；BLS仅29-2099父类统计。风险为编辑提示，非临床阈值、事故率或法域给药许可。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
             "label": "资格",
-            "scope": "O*NET 29-2099.05精确任务；BLS 29-2099仅上位职业代理"
+            "scope": "O*NET支持29-2099.05眼科任务、分诊、器械及指导背景；BLS仅29-2099父类统计。风险为编辑提示，非临床阈值、事故率或法域给药许可。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-2099.05",
             "id": "facilities",
             "label": "工作环境",
-            "scope": "O*NET 29-2099.05精确任务；BLS 29-2099仅上位职业代理"
+            "scope": "O*NET支持29-2099.05眼科任务、分诊、器械及指导背景；BLS仅29-2099父类统计。风险为编辑提示，非临床阈值、事故率或法域给药许可。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "privacy",
             "label": "就业资料",
-            "scope": "O*NET 29-2099.05精确任务；BLS 29-2099仅上位职业代理"
+            "scope": "O*NET支持29-2099.05眼科任务、分诊、器械及指导背景；BLS仅29-2099父类统计。风险为编辑提示，非临床阈值、事故率或法域给药许可。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-2099.05",
             "id": "onet",
             "label": "职业活动",
-            "scope": "O*NET 29-2099.05精确任务；BLS 29-2099仅上位职业代理"
+            "scope": "O*NET支持29-2099.05眼科任务、分诊、器械及指导背景；BLS仅29-2099父类统计。风险为编辑提示，非临床阈值、事故率或法域给药许可。"
           }
         ]
       },
@@ -14681,7 +14693,7 @@
             "note": "精确职业行业分位在本页未单列。"
           }
         ],
-        "industry_value_label": "年薪中位数（美元）",
+        "industry_value_label": "细分类行业工资数据状态",
         "interpretation_heading": "如何解读",
         "interpretation_rows": [
           {
@@ -14851,30 +14863,39 @@
         "heading": "眼科医疗技术师精确就业未单列",
         "outlook_evidence": [
           {
-            "geography": {
-              "$item": "ophthalmic-medical-technologists.market-signals.market-signal-card.2",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "horizon": {
-              "$item": "ophthalmic-medical-technologists.market-signals.market-signal-card.3",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "geography": "美国",
+            "horizon": "2025工资；2025—2035预测",
             "interpretation": {
-              "$item": "ophthalmic-medical-technologists.market-signals.market-signal-card.4",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
+              "$join": [
+                "细分类缺口与父类背景分别解读：",
+                {
+                  "$item": "ophthalmic-medical-technologists.market-signals.market-signal-card.2",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "ophthalmic-medical-technologists.market-signals.market-signal-card.3",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "ophthalmic-medical-technologists.market-signals.market-signal-card.4",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "ophthalmic-medical-technologists.market-signals.market-signal-card.5",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
-            "limitation": {
-              "$item": "ophthalmic-medical-technologists.market-signals.market-signal-card.5",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "limitation": "29-2099.05独立工资就业未单列；当前O*NET工资和趋势均提供29-2099父类，不能分配本细分类。",
             "metric": "精确工资",
             "occupation_scope": "O*NET 29-2099.05",
             "source_id": "bls",
@@ -15019,7 +15040,7 @@
           },
           {
             "alternate_value": null,
-            "label": "知识",
+            "label": "任务相关知识（编辑归纳）",
             "secondary_value": null,
             "value": "眼部解剖、眼科影像、超声、临床检查和患者安全"
           },
@@ -15042,7 +15063,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
+            "cta_label": "查看霍兰德兴趣测评",
             "evidence_level": {
               "$item": "ophthalmic-medical-technologists.fit.riasec-fit-block.8",
               "block": "fit",
@@ -15061,10 +15082,10 @@
             "watchout": "兴趣测评不证明患者识别、影像质量、给药及急症转诊的临床授权责任能力或资格。"
           },
           {
-            "answer": "医疗技术专家可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "核影像眼别、双标识、时间、设备和质量状态，观察能否发现冲突。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "医疗技术专家工作需围绕医疗技术专家围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "big-five",
             "label": "细节能力",
             "question": "做医疗技术专家需要怎样的能力与工作方式？",
@@ -15077,10 +15098,10 @@
             "watchout": "兴趣测评不证明患者识别、影像质量、给药及急症转诊的临床授权责任能力或资格。"
           },
           {
-            "answer": "医疗技术专家可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "遇急症信息、影像质量异常或医嘱权限不明，练按机构程序及时升级。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "医疗技术专家工作需围绕医疗技术专家围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "mbti",
             "label": "风险处理",
             "question": "做医疗技术专家需要怎样的能力与工作方式？",
@@ -15093,10 +15114,10 @@
             "watchout": "兴趣测评不证明患者识别、影像质量、给药及急症转诊的临床授权责任能力或资格。"
           },
           {
-            "answer": "医疗技术专家可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较复杂检查、患者服务和指导同事是否符合工作价值。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "医疗技术专家工作需围绕医疗技术专家围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "enneagram",
             "label": "工作价值",
             "question": "做医疗技术专家需要怎样的能力与工作方式？",
@@ -15109,10 +15130,10 @@
             "watchout": "兴趣测评不证明患者识别、影像质量、给药及急症转诊的临床授权责任能力或资格。"
           },
           {
-            "answer": "医疗技术专家可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "核患者接触、影像质控、无菌准备和跨团队协作是否适合。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "医疗技术专家工作需围绕医疗技术专家围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "iq",
             "label": "场景偏好",
             "question": "做医疗技术专家需要怎样的能力与工作方式？",
@@ -15125,10 +15146,10 @@
             "watchout": "兴趣测评不证明患者识别、影像质量、给药及急症转诊的临床授权责任能力或资格。"
           },
           {
-            "answer": "医疗技术专家可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "沿既有虚构标签练两单异常和新人指导；纸面样本不授临床诊疗权限。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "医疗技术专家工作需围绕医疗技术专家围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "eq",
             "label": "虚构案例",
             "question": "做医疗技术专家需要怎样的能力与工作方式？",
@@ -15348,8 +15369,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "O*NET 29-2099.05精确任务；BLS 29-2099仅上位职业代理；中国同职业工资未单列。",
-          "updated_at": "2026-09-26核官方职业任务与当前统计。"
+          "source": "O*NET 29-2099.05精确任务；当前工资/趋势为29-2099父类，非细分类统计；NBS卫生社会工作宽行业背景。",
+          "updated_at": "2026-10-12"
         },
         "note": "证据只支持医疗技术专家在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -15361,7 +15382,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "职业任务"
+            "label": "MBTI测评（英文）"
           },
           {
             "href": {
@@ -15371,7 +15392,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "工资就业"
+            "label": "大五人格测评（英文）"
           },
           {
             "href": {
@@ -15381,7 +15402,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "资格或规则"
+            "label": "MBTI测评（中文）"
           },
           {
             "href": {
@@ -15391,7 +15412,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "统计边界"
+            "label": "大五人格测评（中文）"
           }
         ]
       },
@@ -15588,7 +15609,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "眼科医疗技术师 · O*NET 29-2099.05",
@@ -15639,7 +15660,7 @@
       "text": "眼科医疗技术师：工作、工资与入行路径"
     }
   },
-  "source_content_sha256": "1d83f5a389f9e8a8ddbb89ec3c2f940082d8e5e43c020c480ac231b6a29d31a1",
+  "source_content_sha256": "4dc9529f2aad4081432746b31b089e13ab140cbe3094fbb76d9be7b534d3a92b",
   "subject": {
     "canonical_slug": "ophthalmic-medical-technologists",
     "name": "眼科医疗技术师",

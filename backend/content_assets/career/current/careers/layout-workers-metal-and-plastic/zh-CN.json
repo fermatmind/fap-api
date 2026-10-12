@@ -7272,19 +7272,11 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "划线工的身份边界：本页只覆盖美国 O*NET-SOC 51-4192.00「Layout Workers, Metal and Plastic」；相邻职业、机构授权、执照、签字与最终责任不得由工具或代理口径替代。核心任务、对象与风险词：图纸尺寸解释、基准点定位与划线、尺寸标记复核、金属塑料工件、工程图纸和样板、量具划线工具、锐边和机械伤害、尺寸标记错误、加工设备能量隔离边界。"
+              "划线工对应美国51-4192.00：在金属或塑料板、管、结构件、铸件或机件上建立后续加工的基准点与尺寸，包含船体装配工。职责有计算布局、标曲线孔位和焊接符号、核中心线样板、装配对齐及定位工件；实际吊装、焊接和设备操作分别需雇主训练授权，不由职业标题授予。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-custom",
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
-            "source-pack-onet-industry",
-            "source-pack-onet-localcert",
-            "source-pack-onet-localtraining",
-            "source-pack-onet-localwages",
-            "source-pack-onet-summary",
             "onet-details"
           ],
           "type": "prose"
@@ -7336,12 +7328,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "关键判断：执行尺寸标记复核和规格检查。"
+              "关键判断｜按图纸修订号、单位、基准和公差核尺寸与样板位置，标记前确认加工面；计算与实物定位分别复核，发现矛盾不自行选版本放行。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.profile.work-context-block.5",
           "source_refs": [
-            "source-pack-onet-custom"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7350,12 +7342,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "环境与节奏：识别材料、方向和加工余量。"
+              "O*NET美国受访者：普通防护装备100%每天，准确性69%极其重要/31%很重要，污染物87%每天、干扰噪声65%每天；时间压力18%每天、37%每周但非每日、36%从不。不是中国事故率、统一班次或每岗PPE清单。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.profile.work-context-block.6",
           "source_refs": [
-            "source-pack-onet-custom"
+            "onet-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -7365,12 +7357,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "工具与材料：与图纸尺寸解释、基准点定位与划线、尺寸标记复核直接相关的设备、软件、标准、清单、原始记录和版本受控材料。"
+              "O*NET兴趣RC（R91/C48/A31/I31/E0/S0）为活动偏好而非能力。任务工具含划针、划线石、冲子、圆规、量角器、量块、高度规和百分表；CAD列AutoCAD，软件清单非熟练度。2025美国行业制造63%、政府18%、行政支持11%，余8%为差额。BLS51-4192典型高中或同等、无相关经验、中期在职训练；不外推中国统一门槛。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.profile.onet-structured-fields-block.7",
           "source_refs": [
-            "source-pack-onet-custom"
+            "onet-details",
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -7379,12 +7372,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "协作链：划线工的上下游责任人、质量或安全角色、客户/服务对象，以及需要接收异常升级的授权人员。"
+              "协作链｜按上游图纸及版本安排布局，向加工和装配人员交接标记、基准、尺寸依据和异常；O*NET列主管同事沟通，具体质量放行及吊装指挥关系须逐厂核。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.profile.career-quick-answers-block.8",
           "source_refs": [
-            "source-pack-onet-custom"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7531,12 +7524,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务能力：CAD和自动套料可减少部分手算与重复标记，但不等于现场图纸、工件方向或基准一定正确。这描述可辅助的任务，不是替代概率。"
+              "划线工AI与数字辅助：先区分CAD、可编程设备和生成式AI。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "nist-ai"
+            "nist-ai",
+            "onet-details",
+            "bls-factors",
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         },
@@ -7545,12 +7541,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采用条件：数字辅助：尺寸计算、套料建议、图纸叠加、检查提示。技术演示不等于组织已采用。"
+              "证据不足：本轮未取得职业生成AI采用率或提效实测。可在虚构图纸记录中试验整理，人工复核单位、基准和版本；CAD清单不证明生成AI。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "nist-ai"
+            "nist-ai",
+            "onet-details",
+            "bls-factors",
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         },
@@ -7559,12 +7558,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数据与系统门槛：采用前要核对与图纸尺寸解释、基准点定位与划线、尺寸标记复核直接相关的设备、软件、标准、清单、原始记录和版本受控材料中的数据、权限、版本与失败模式。"
+              "证据口径｜BLS三个行业因素涉及可编程流程/设备及资本替代，不是生成AI因果；O*NET2025热技术AutoCAD/Excel/Office/PPT/Word五项均Not available，不填0；NIST自愿风险框架不测职业效果。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "nist-ai"
+            "nist-ai",
+            "onet-details",
+            "bls-factors",
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         },
@@ -7573,12 +7575,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "人类控制（人的控制点与人工复核）：人工确认：版本、材料、基准、量具、工件定位和标记。"
+              "人的控制点｜核图纸版本、材料、量具、加工面、基准与标记，实际工件定位、吊装和质量放行由受训授权人员负责。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "nist-ai"
+            "nist-ai",
+            "onet-details",
+            "bls-factors",
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         },
@@ -7587,12 +7592,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "剩余责任：人的控制点：停工、异常隔离、授权、尺寸放行和加工交接。任何工具输出都不等于授权结论。"
+              "责任链｜保留图纸修订、尺寸计算、检查和交接记录；工具不能批准尺寸放行、授权吊装或替代设备安全控制。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "nist-ai"
+            "nist-ai",
+            "onet-details",
+            "bls-factors",
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         },
@@ -7601,12 +7609,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "失败风险：工具输出若未经复核，会直接破坏定位、吊装并稳定金属塑料工件。"
+              "行动建议｜纸面记录核单位基准与错项；真实工件和设备按雇主训练权限处理，不承诺效率提升。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "nist-ai"
+            "nist-ai",
+            "onet-details",
+            "bls-factors",
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         },
@@ -7615,12 +7626,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "就业证据边界：数字图纸导入前要核验单位、比例、修订号和坐标基准。任务暴露、采用、生产率和就业是不同测量对象。"
+              "就业证据｜BLS2025—2035精确预测下降3.4%、年均空缺500，含替换；不能据此称生成AI导致裁撤或给个人录用概率。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "nist-ai"
+            "nist-ai",
+            "onet-details",
+            "bls-factors",
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         },
@@ -7629,12 +7643,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "实践响应：先把工具放进可回滚、可审计的低风险步骤，再根据错误记录决定是否扩大使用。"
+              "试验范围｜仅整理虚构图纸的版本、尺寸和待核项，不自动产生真实加工参数或安全放行。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "nist-ai"
+            "nist-ai",
+            "onet-details",
+            "bls-factors",
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         }
@@ -7651,12 +7668,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照：本页中国侧对应美国 O*NET-SOC 51-4192.00「Layout Workers, Metal and Plastic」；中国公开统计没有与该精确职业对应的单职业工资，行业或岗位大类均值不能冒充该职业的全国中位数，也不构成中国等价职业或工资映射。"
+              "中文划线工用于描述本页任务；美国51-4192包含船体装配，不能凭中文同名建立中国严格统计互认。本轮未建立中国全国精确职业工资，不把缺口写成公开统计一定没有任何单职业数据。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-wages-2025"
+            "nbs-wages-2025",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7665,7 +7683,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业范围：本页中国侧结论只限中国大陆市场与当前统计口径；划线工的岗位设置与薪酬由雇主、行业与技能等级决定，不建立与美国体系的工资映射。"
+              "中国行业背景｜NBS2025制造业城镇非私营113,594、私营76,055元/年为税前年平均，行业含多职业且排个体和自由职业；两类型分别列示，不当划线工工资范围或起薪。目标工厂另核计薪、班次与职责。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.china-salary.career-snapshot-primary-locale.2",
@@ -7693,12 +7711,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与薪资判断边界：数字工具可能辅助该职业的部分计算与整理，但不改变薪酬由雇主、地区、行业与技能等级决定这一事实；本页不对该职业的 AI 暴露评分，也不据此推断薪资。"
+              "本轮未建立划线工AI采用、提效或薪资变化因果。CAD及可编程设备与生成AI分开；求职核实际职责、训练、计薪周期和班次，不断言AI不会改变薪酬因素。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "nbs-wages-2025"
+            "onet-details",
+            "nist-ai"
           ],
           "type": "prose"
         }
@@ -7715,7 +7734,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国薪资参考（BLS OOH/OEWS，2025；精确职业 51-4192.00）"
+              "美国工资参考｜51-4192精确职业，O*NET呈现BLS2025工资；父级金属塑料工或OOH其他岗位不得代填。"
             ]
           },
           "fact_refs": [
@@ -7732,7 +7751,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "官方职业页结论：以下为美国全国口径，不能外推为个人报价。"
+              "本轮O*NET details与BLS精确行核得2025年薪中位63,870美元、时薪中位30.71美元；原登记2025 P10=39,980/P90=93,860本轮未重新取得完整表，P25/P75未建立。旧2024加州页的美国行不能当2025分位。"
             ]
           },
           "fact_refs": [
@@ -7740,7 +7759,9 @@
           ],
           "id": "layout-workers-metal-and-plastic.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "onet-wages"
+            "onet-wages",
+            "onet-details",
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -7783,7 +7804,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "主要行业工资（BLS OOH，2025 年 5 月）"
+              "美国行业分布｜O*NET Top industries (2025)制造63%、政府18%、行政支持11%，其他8%为100减三项；未列这四行行业工资，不用职业中位代行业中位。"
             ]
           },
           "fact_refs": [
@@ -7791,7 +7812,7 @@
           ],
           "id": "layout-workers-metal-and-plastic.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "onet-wages"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7895,7 +7916,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎条件：交接时说明异常和待确认项；可优先比较相邻岗位或不同雇主场景。"
+              "RC兴趣仅指导观察读图、计算、复核与工件协同，不预测能力或授权。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.fit.riasec-fit-block.6",
@@ -7909,7 +7930,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎条件：工作不仅坐着计算，还可能搬运、定位和靠近大型工件；可优先比较相邻岗位或不同雇主场景。"
+              "本轮未建立人格对划线工绩效的预测效度；现场搬运定位成本应核雇主训练和支持，以记录与实际监督反馈验证。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.fit.riasec-fit-block.7",
@@ -7945,13 +7966,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景1：触发—后果—控制—边界：锐边和机械伤害：稳定工件、隔离危险区并使用适当PPE｜可能使定位、吊装并稳定金属塑料工件失效｜立即停止受影响步骤、核对原始输入并记录升级｜由划线工适用法域、机构和授权链确定最终处置。"
+              "锐边与运动机械｜触发：处理锐边工件或靠近夹点运动件；后果：割伤、夹伤或截肢；控制：先核工件稳定、防护和隔离区，按雇主风险评估选防护；未训者不进入运动件危险区。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.risk.career-risk-cards.1",
           "source_refs": [
-            "onet-details",
-            "osha-loto",
             "osha-guard"
           ],
           "type": "prose"
@@ -7961,12 +7980,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景2：触发—后果—控制—边界：尺寸标记错误：双重核对图纸版本、基准、单位和关键尺寸｜可能使定位、吊装并稳定金属塑料工件失效｜立即停止受影响步骤、核对原始输入并记录升级｜由划线工适用法域、机构和授权链确定最终处置。"
+              "尺寸与基准错误｜触发：单位、修订号或基准冲突仍标记放行；后果：返工报废或后续装配失配；控制：暂停受影响划线，双核原图和关键尺寸，保留异常交质量责任人。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.risk.career-risk-cards.2",
           "source_refs": [
-            "onet-details"
+            "osha-loto"
           ],
           "type": "prose"
         },
@@ -7975,7 +7994,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景3：触发—后果—控制—边界：加工设备能量隔离边界：进入危险区调整维护前执行适用LOTO｜可能使定位、吊装并稳定金属塑料工件失效｜立即停止受影响步骤、核对原始输入并记录升级｜由划线工适用法域、机构和授权链确定最终处置。"
+              "危险能量｜触发：进入维护危险区但只按停止键；后果：意外启动或残余能量伤害；控制：适用LOTO由受训授权人员隔离、控制储能并验证；停止键不等隔离，其他人员不得拆锁或重启。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.risk.career-risk-cards.3",
@@ -7989,7 +8008,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景4：触发—后果—控制—边界：吊装与定位：确认重量、支撑、吊具和指挥关系｜可能使定位、吊装并稳定金属塑料工件失效｜立即停止受影响步骤、核对原始输入并记录升级｜由划线工适用法域、机构和授权链确定最终处置。"
+              "工件定位与吊装｜触发：支撑不稳或未确认重量吊具指挥关系；后果：倾倒、挤压或碰撞；控制：暂停移位，交受训责任人核支撑、重量和批准方案；O*NET列搬运任务不授吊装资格。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.risk.career-risk-cards.4",
@@ -8003,7 +8022,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "共同升级规则：处理划线时一旦信息、设备、授权或安全条件不足，先停止划线工的相关步骤，并以定位、吊装并稳定金属塑料工件为交接标准把事实、影响和待决问题交给有权限的责任人。"
+              "污染物与噪声｜触发：任务暴露及防护需求未核；后果：可能影响健康和沟通；控制：雇主评估具体暴露并提供训练防护，不将O*NET受访频率当事故率或自选呼吸器依据。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.risk.career-risk-cards.5",
@@ -8068,12 +8087,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "面试与试用：展示如何发现错误、记录依据、沟通边界并完成定位、吊装并稳定金属塑料工件。"
+              "面试与试用｜说明图纸版本、单位、基准、关键尺寸复核和异常交接。实际工件定位、吊装和机械操作须完成雇主训练及授权，作品不授权限。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.path.career-path-block.4",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "osha-loto"
           ],
           "type": "prose"
         },
@@ -8146,12 +8166,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "官方与行业信号：美国2025年该职业就业约6,200人。"
+              "美国精确51-4192：2025就业6,200人→2035年5,900；表列净变化-200人、-3.4%、年均空缺500。端点和净变取表列取整，不另相减重造数。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls-factors",
             "bls-projections"
           ],
           "type": "prose"
@@ -8175,12 +8194,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "招聘样本只能说明采样时间、地区和岗位组合中的需求，不是全国需求率。"
+              "BLS2025—2035年均空缺500含增长与替换；本职业总体规模预计下降，空缺不等净新增或当前招聘。中国全国精确需求未建立。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls-factors"
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -8189,12 +8208,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "AI或技术研究说明任务改变，不等同于组织采用、更不等同于净岗位变化。"
+              "BLS在金属制品、航空航天及造船分别列可编程设备替代/生产率因素；这不是生成AI采用或职业AI效果实测。迁移可比较读图、尺寸、样板与质量记录。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls-factors"
+            "bls-factors",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8203,12 +8223,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "预测不等于个人录用概率；技术采用与任务变化也不等于执业机会消失。"
+              "相邻方向需补专项：铣刨补装夹刀具及机床训练，模型制作补成形装配，非金属塑料成形补目标材料工艺，金属塑料样板制作补样板制造证据；不授自动转岗或操作权限。"
             ]
           },
           "id": "layout-workers-metal-and-plastic.market-signals.market-signal-card.5",
           "source_refs": [
-            "bls-factors"
+            "onet-details"
           ],
           "type": "prose"
         }
@@ -8544,15 +8564,15 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "职业、工资、预测或工业安全边界。",
+                  "机械防护与截肢危险技术资料；指南明确不新增法规义务，非中国法规或划线工事故率。",
                   "行业或信号口径，不能冒充精确职业事实。"
                 ],
                 "evidence_type": "official source",
                 "id": "osha-guard",
                 "limitation": "行业或信号口径，不能冒充精确职业事实。",
                 "market": "美国",
-                "name": "OSHA Specific Machine Hazards and Safeguarding Methods",
-                "period": "current federal guidance; accessed 2026-08-31",
+                "name": "OSHA3170：Safeguarding Equipment and Protecting Employees from Amputations",
+                "period": "OSHA3170-02R，2007技术指南",
                 "publisher": "Occupational Safety and Health Administration",
                 "scope": "industry_proxy",
                 "url": "https://www.osha.gov/Publications/osha3170.pdf"
@@ -8888,12 +8908,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "信息整理",
+            "AI主要改变": "可试验整理或复盘，效果未测",
             "仍由人负责": "责任与授权",
             "方向": "本职业工作运行支持"
           },
           {
-            "AI主要改变": "检索与复盘",
+            "AI主要改变": "可试验整理或复盘，效果未测",
             "仍由人负责": "原始记录核对",
             "方向": "本职业记录管理"
           }
@@ -8906,7 +8926,7 @@
         },
         "evidence_rows": [
           {
-            "使用限制": "限所列市场和职业口径。",
+            "使用限制": "总体预测因素，非生成AI采用实测",
             "来源": {
               "$source": "bls-factors",
               "block": "source-register",
@@ -8914,8 +8934,8 @@
               "field": "name",
               "item": "layout-workers-metal-and-plastic.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "51-4192三个制造行业",
+            "结论": "可编程设备资本替代和生产率因素",
             "链接": {
               "$source": "bls-factors",
               "block": "source-register",
@@ -8925,7 +8945,7 @@
             }
           },
           {
-            "使用限制": "限所列市场和职业口径。",
+            "使用限制": "不是现招、净新增或AI因果",
             "来源": {
               "$source": "bls-projections",
               "block": "source-register",
@@ -8933,8 +8953,8 @@
               "field": "name",
               "item": "layout-workers-metal-and-plastic.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "2025—2035精确就业",
+            "结论": "下降3.4%、年均空缺500",
             "链接": {
               "$source": "bls-projections",
               "block": "source-register",
@@ -8944,7 +8964,7 @@
             }
           },
           {
-            "使用限制": "限所列市场和职业口径。",
+            "使用限制": "清单非采用、效果或安全权限",
             "来源": {
               "$source": "onet-details",
               "block": "source-register",
@@ -8952,8 +8972,8 @@
               "field": "name",
               "item": "layout-workers-metal-and-plastic.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "本职业任务与软件",
+            "结论": "基准计算/标记/定位及CAD清单",
             "链接": {
               "$source": "onet-details",
               "block": "source-register",
@@ -8985,7 +9005,7 @@
         ],
         "questions": [
           {
-            "回答": "不能从任务暴露推导岗位裁撤日期。",
+            "回答": "本轮无生成AI职业采用实测；BLS可编程设备因素不能改写为生成AI。",
             "来源": {
               "$source": "bls-factors",
               "block": "source-register",
@@ -9000,10 +9020,10 @@
               "field": "url",
               "item": "layout-workers-metal-and-plastic.source-register.published.1"
             },
-            "问题": "AI 会取代岗位吗？"
+            "问题": "生成AI已替代划线工吗？"
           },
           {
-            "回答": "不能从任务暴露推导岗位裁撤日期。",
+            "回答": "不是，空缺含替换；BLS表列净变化为-200人。",
             "来源": {
               "$source": "bls-projections",
               "block": "source-register",
@@ -9018,10 +9038,10 @@
               "field": "url",
               "item": "layout-workers-metal-and-plastic.source-register.published.1"
             },
-            "问题": "AI 会取代岗位吗？"
+            "问题": "年均空缺500是否新增500？"
           },
           {
-            "回答": "不能从任务暴露推导岗位裁撤日期。",
+            "回答": "不证明；须核组织系统、图纸流程与个人授权。",
             "来源": {
               "$source": "onet-details",
               "block": "source-register",
@@ -9036,7 +9056,7 @@
               "field": "url",
               "item": "layout-workers-metal-and-plastic.source-register.published.1"
             },
-            "问题": "AI 会取代岗位吗？"
+            "问题": "CAD清单证明熟练或已采用吗？"
           }
         ],
         "responsibility_intro": {
@@ -9287,13 +9307,8 @@
             "copy_key": "career.item.career-path-block",
             "type": "prose"
           },
-          "jurisdiction": "具体法域",
-          "summary": {
-            "$item": "layout-workers-metal-and-plastic.path.career-path-block.3",
-            "block": "path",
-            "copy_key": "career.item.career-path-block",
-            "type": "prose"
-          }
+          "jurisdiction": "中国大陆与美国，按雇主和适用设备规则分核",
+          "summary": "BLS美国典型高中/同等、中期OJT；中国具体岗位资格、吊装焊接与设备权限逐项核。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
@@ -9412,7 +9427,12 @@
                 "credentials": "按具体法域和雇主规则核验。",
                 "next_moves": "补足工具、资格和责任证据。",
                 "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
+                "responsibility": {
+                  "$item": "layout-workers-metal-and-plastic.path.career-path-block.3",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
                 "role": "入口与试验阶段 3"
               },
               {
@@ -9649,13 +9669,13 @@
         "risks": [
           {
             "affected_roles": "划线工",
-            "consequence": "可能造成错误决策或责任越界。",
+            "consequence": "割伤、夹伤或截肢",
             "evidence_refs": [
-              "bls-factors"
+              "layout-workers-metal-and-plastic.display.source.0"
             ],
             "id": "risk-1",
-            "mitigation": "停止受影响步骤、核对原始输入并按授权链升级。",
-            "scenario": "出现不确定性或关键输入异常时。",
+            "mitigation": "先核工件稳定、防护和隔离区，按雇主风险评估选防护；未训者不进入运动件危险区。",
+            "scenario": "处理锐边工件或靠近夹点运动件",
             "title": {
               "$item": "layout-workers-metal-and-plastic.risk.career-risk-cards.1",
               "block": "risk",
@@ -9665,13 +9685,13 @@
           },
           {
             "affected_roles": "划线工",
-            "consequence": "可能造成错误决策或责任越界。",
+            "consequence": "返工报废或后续装配失配",
             "evidence_refs": [
-              "bls-projections"
+              "layout-workers-metal-and-plastic.display.source.2"
             ],
             "id": "risk-2",
-            "mitigation": "停止受影响步骤、核对原始输入并按授权链升级。",
-            "scenario": "出现不确定性或关键输入异常时。",
+            "mitigation": "暂停受影响划线，双核原图和关键尺寸，保留异常交质量责任人。",
+            "scenario": "单位、修订号或基准冲突仍标记放行",
             "title": {
               "$item": "layout-workers-metal-and-plastic.risk.career-risk-cards.2",
               "block": "risk",
@@ -9681,13 +9701,13 @@
           },
           {
             "affected_roles": "划线工",
-            "consequence": "可能造成错误决策或责任越界。",
+            "consequence": "意外启动或残余能量伤害",
             "evidence_refs": [
-              "nbs-wages-2025"
+              "layout-workers-metal-and-plastic.display.source.1"
             ],
             "id": "risk-3",
-            "mitigation": "停止受影响步骤、核对原始输入并按授权链升级。",
-            "scenario": "出现不确定性或关键输入异常时。",
+            "mitigation": "适用LOTO由受训授权人员隔离、控制储能并验证；停止键不等隔离，其他人员不得拆锁或重启。",
+            "scenario": "进入维护危险区但只按停止键",
             "title": {
               "$item": "layout-workers-metal-and-plastic.risk.career-risk-cards.3",
               "block": "risk",
@@ -9697,13 +9717,13 @@
           },
           {
             "affected_roles": "划线工",
-            "consequence": "可能造成错误决策或责任越界。",
+            "consequence": "倾倒、挤压或碰撞",
             "evidence_refs": [
-              "onet-details"
+              "layout-workers-metal-and-plastic.display.source.2"
             ],
             "id": "risk-4",
-            "mitigation": "停止受影响步骤、核对原始输入并按授权链升级。",
-            "scenario": "出现不确定性或关键输入异常时。",
+            "mitigation": "暂停移位，交受训责任人核支撑、重量和批准方案；O*NET列搬运任务不授吊装资格。",
+            "scenario": "支撑不稳或未确认重量吊具指挥关系",
             "title": {
               "$item": "layout-workers-metal-and-plastic.risk.career-risk-cards.4",
               "block": "risk",
@@ -9713,13 +9733,13 @@
           },
           {
             "affected_roles": "划线工",
-            "consequence": "可能造成错误决策或责任越界。",
+            "consequence": "可能影响健康和沟通",
             "evidence_refs": [
-              "onet-wages"
+              "layout-workers-metal-and-plastic.display.source.2"
             ],
             "id": "risk-5",
-            "mitigation": "停止受影响步骤、核对原始输入并按授权链升级。",
-            "scenario": "出现不确定性或关键输入异常时。",
+            "mitigation": "雇主评估具体暴露并提供训练防护，不将O*NET受访频率当事故率或自选呼吸器依据。",
+            "scenario": "任务暴露及防护需求未核",
             "title": {
               "$item": "layout-workers-metal-and-plastic.risk.career-risk-cards.5",
               "block": "risk",
@@ -9729,13 +9749,13 @@
           },
           {
             "affected_roles": "划线工",
-            "consequence": "可能造成错误决策或责任越界。",
+            "consequence": "不合格流转及责任越界",
             "evidence_refs": [
-              "source-pack-onet-custom"
+              "layout-workers-metal-and-plastic.display.source.2"
             ],
             "id": "risk-6",
-            "mitigation": "停止受影响步骤、核对原始输入并按授权链升级。",
-            "scenario": "出现不确定性或关键输入异常时。",
+            "mitigation": "列明待核、影响范围及版本，按现场质量授权链交责任人决定。",
+            "scenario": "依据或权限不足仍交后续加工",
             "title": "授权与记录风险"
           }
         ],
@@ -9743,7 +9763,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls-factors",
+              "$source": "osha-guard",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9751,17 +9771,17 @@
             },
             "id": "layout-workers-metal-and-plastic.display.source.0",
             "label": {
-              "$source": "bls-factors",
+              "$source": "osha-guard",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "layout-workers-metal-and-plastic.source-register.published.1"
             },
-            "scope": "限所列市场和职业口径。"
+            "scope": "美国有界技术/任务资料；不外推中国法规或事故率"
           },
           {
             "href": {
-              "$source": "bls-projections",
+              "$source": "osha-loto",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9769,17 +9789,17 @@
             },
             "id": "layout-workers-metal-and-plastic.display.source.1",
             "label": {
-              "$source": "bls-projections",
+              "$source": "osha-loto",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "layout-workers-metal-and-plastic.source-register.published.1"
             },
-            "scope": "限所列市场和职业口径。"
+            "scope": "美国有界技术/任务资料；不外推中国法规或事故率"
           },
           {
             "href": {
-              "$source": "nbs-wages-2025",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9787,13 +9807,13 @@
             },
             "id": "layout-workers-metal-and-plastic.display.source.2",
             "label": {
-              "$source": "nbs-wages-2025",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "layout-workers-metal-and-plastic.source-register.published.1"
             },
-            "scope": "行业或信号口径，不能冒充精确职业事实。"
+            "scope": "美国有界技术/任务资料；不外推中国法规或事故率"
           },
           {
             "href": {
@@ -9811,7 +9831,7 @@
               "field": "name",
               "item": "layout-workers-metal-and-plastic.source-register.published.1"
             },
-            "scope": "限所列市场和职业口径。"
+            "scope": "美国有界技术/任务资料；不外推中国法规或事故率"
           }
         ]
       },
@@ -9819,19 +9839,19 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "中国大陆薪资口径",
-              "数值": "暂无安全数值",
-              "说明": "有界检索未建立安全映射。"
+              "指标": "2025制造业非私营均值",
+              "数值": "113,594元/年",
+              "说明": "税前年均、多职业行业、排个体自由职业"
             },
             {
-              "指标": "中国大陆薪资口径",
-              "数值": "暂无安全数值",
-              "说明": "有界检索未建立安全映射。"
+              "指标": "2025制造业私营均值",
+              "数值": "76,055元/年",
+              "说明": "分别列示，不拼划线工区间"
             },
             {
-              "指标": "中国大陆薪资口径",
-              "数值": "暂无安全数值",
-              "说明": "有界检索未建立安全映射。"
+              "指标": "全国精确划线工工资",
+              "数值": "证据不足",
+              "说明": "职业分位、起薪和城市学历分层未建立"
             }
           ],
           "china_ai_row": {
@@ -9912,7 +9932,7 @@
           "china_ref": {
             "$join": [
               {
-                "$source": "bls-factors",
+                "$source": "nbs-wages-2025",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -9920,7 +9940,7 @@
               },
               "｜",
               {
-                "$source": "bls-factors",
+                "$source": "nbs-wages-2025",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -9988,18 +10008,18 @@
         "authority_sources": {
           "$join": [
             {
-              "$source": "bls-factors",
+              "$source": "onet-wages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "layout-workers-metal-and-plastic.source-register.published.1"
             },
-            "｜",
+            "；",
             {
-              "$source": "bls-factors",
+              "$source": "bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
-              "field": "url",
+              "field": "name",
               "item": "layout-workers-metal-and-plastic.source-register.published.1"
             }
           ],
@@ -10008,141 +10028,94 @@
         "bls_table": [
           {
             "指标": "薪资 · 10 分位",
-            "数值": "暂无安全数值",
+            "数值": "39,980美元/年（2025原登记，本轮未重新取得）",
             "说明": {
-              "$join": [
-                {
-                  "$source": "bls-factors",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "layout-workers-metal-and-plastic.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-factors",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "layout-workers-metal-and-plastic.source-register.published.1"
-                }
-              ],
-              "separator": ""
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "layout-workers-metal-and-plastic.source-register.published.1"
             }
           },
           {
             "指标": "薪资 · 25 分位",
-            "数值": "暂无安全数值",
+            "数值": "证据不足：2025第25分位未取得",
             "说明": {
-              "$join": [
-                {
-                  "$source": "bls-projections",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "layout-workers-metal-and-plastic.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-projections",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "layout-workers-metal-and-plastic.source-register.published.1"
-                }
-              ],
-              "separator": ""
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "layout-workers-metal-and-plastic.source-register.published.1"
             }
           },
           {
             "指标": "薪资 · 中位数",
-            "数值": "暂无安全数值",
+            "数值": "63,870美元/年（2025中位）",
             "说明": {
-              "$join": [
-                {
-                  "$source": "bls-factors",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "layout-workers-metal-and-plastic.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-factors",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "layout-workers-metal-and-plastic.source-register.published.1"
-                }
-              ],
-              "separator": ""
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "layout-workers-metal-and-plastic.source-register.published.1"
             }
           },
           {
             "指标": "薪资 · 75 分位",
-            "数值": "暂无安全数值",
+            "数值": "证据不足：2025第75分位未取得",
             "说明": {
-              "$join": [
-                {
-                  "$source": "bls-projections",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "layout-workers-metal-and-plastic.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-projections",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "layout-workers-metal-and-plastic.source-register.published.1"
-                }
-              ],
-              "separator": ""
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "layout-workers-metal-and-plastic.source-register.published.1"
             }
           },
           {
             "指标": "薪资 · 90 分位",
-            "数值": "暂无安全数值",
+            "数值": "93,860美元/年（2025原登记，本轮未重新取得）",
             "说明": {
-              "$join": [
-                {
-                  "$source": "bls-factors",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "layout-workers-metal-and-plastic.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-factors",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "layout-workers-metal-and-plastic.source-register.published.1"
-                }
-              ],
-              "separator": ""
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "layout-workers-metal-and-plastic.source-register.published.1"
             }
           },
           {
             "指标": "就业 · 规模",
-            "数值": "暂无安全数值",
-            "说明": "不能从军种宽口径外推。"
+            "数值": "6,200人（2025）",
+            "说明": {
+              "$source": "bls-projections",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "layout-workers-metal-and-plastic.source-register.published.1"
+            }
           },
           {
             "指标": "就业 · 增长",
-            "数值": "暂无安全数值",
-            "说明": "不能从军种宽口径外推。"
+            "数值": "-3.4%（2025—2035）",
+            "说明": {
+              "$source": "bls-projections",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "layout-workers-metal-and-plastic.source-register.published.1"
+            }
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "暂无安全数值",
-            "说明": "不能从军种宽口径外推。"
+            "数值": "500个/年（2025—2035，含增长与替换）",
+            "说明": {
+              "$source": "bls-projections",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "layout-workers-metal-and-plastic.source-register.published.1"
+            }
           }
         ],
-        "boundary": "美国军种、职业大类和精确职业范围必须分开；暂无安全数值不等于零。",
+        "boundary": "美国51-4192精确职业与父级分别核；统计缺失不等于零，分位不是起薪、税后实发或个人报价。",
         "direct_answer": {
           "$item": "layout-workers-metal-and-plastic.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10169,7 +10142,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "暂无安全数值",
+        "growth": "-3.4%（2025—2035）",
         "heading": {
           "$item": "layout-workers-metal-and-plastic.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10182,27 +10155,27 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "accessed 2026-08-30",
+        "industry_period": "O*NET行业2025",
         "industry_rows": [
           {
-            "industry": "职业大类",
-            "median": "暂无安全数值",
-            "note": "范围需单独核验。"
+            "industry": "制造业（63%）",
+            "median": "未取得安全行业工资",
+            "note": "美国2025就业行业，非行业工资"
           },
           {
-            "industry": "职业大类",
-            "median": "暂无安全数值",
-            "note": "范围需单独核验。"
+            "industry": "政府（18%）",
+            "median": "未取得安全行业工资",
+            "note": "同口径，非中国占比"
           },
           {
-            "industry": "职业大类",
-            "median": "暂无安全数值",
-            "note": "范围需单独核验。"
+            "industry": "行政与支持服务（11%）",
+            "median": "未取得安全行业工资",
+            "note": "同口径，行业工资未列"
           },
           {
-            "industry": "职业大类",
-            "median": "暂无安全数值",
-            "note": "范围需单独核验。"
+            "industry": "其他未列行业（8%）",
+            "median": "未取得安全行业工资",
+            "note": "100−63−18−11差额，不猜行业"
           }
         ],
         "industry_value_label": "行业值",
@@ -10230,13 +10203,13 @@
             "question": "能否跨市场比较？"
           }
         ],
-        "median": "暂无安全数值",
+        "median": "63,870美元/年（2025，美国精确职业）",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "accessed 2026-08-30",
+        "outlook_period": "BLS2025—2035",
         "wage_column_labels": [
           "分位",
           "年度参考",
-          "月度等值",
+          "小时口径",
           "解释"
         ],
         "wage_heading": {
@@ -10247,22 +10220,22 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "—",
+            "equivalent": "不换算；已核职业时薪中位30.71美元",
             "interpretation": "不作个人报价。",
             "label": "低分位",
-            "value": "暂无安全数值"
+            "value": "39,980美元/年（2025原登记，本轮未重新取得）"
           },
           {
-            "equivalent": "—",
+            "equivalent": "不换算；已核职业时薪中位30.71美元",
             "interpretation": "不作个人报价。",
             "label": "中位数",
-            "value": "暂无安全数值"
+            "value": "63,870美元/年（2025中位）"
           },
           {
-            "equivalent": "—",
+            "equivalent": "不换算；已核职业时薪中位30.71美元",
             "interpretation": "不作个人报价。",
             "label": "高分位",
-            "value": "暂无安全数值"
+            "value": "93,860美元/年（2025原登记，本轮未重新取得）"
           }
         ]
       },
@@ -10342,12 +10315,12 @@
         },
         "outlook_evidence": [
           {
-            "geography": "来源覆盖范围",
-            "horizon": "当前来源时期",
+            "geography": "美国",
+            "horizon": "2025—2035",
             "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
             "limitation": "不能作为个人就业保证。",
-            "metric": "市场信号",
-            "occupation_scope": "划线工",
+            "metric": "总体就业预测",
+            "occupation_scope": "51-4192精确职业",
             "value": {
               "$item": "layout-workers-metal-and-plastic.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -10356,22 +10329,22 @@
             }
           },
           {
-            "geography": "来源覆盖范围",
-            "horizon": "当前来源时期",
+            "geography": "美国",
+            "horizon": "2025—2035",
             "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
             "limitation": "不能作为个人就业保证。",
-            "metric": "市场信号",
-            "occupation_scope": "划线工",
-            "value": "暂无安全数值"
+            "metric": "年均空缺",
+            "occupation_scope": "51-4192精确职业",
+            "value": "500个/年，含替换"
           },
           {
-            "geography": "来源覆盖范围",
-            "horizon": "当前来源时期",
+            "geography": "中国大陆",
+            "horizon": "本轮有界检索",
             "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
             "limitation": "不能作为个人就业保证。",
-            "metric": "市场信号",
-            "occupation_scope": "划线工",
-            "value": "暂无安全数值"
+            "metric": "全国需求缺口",
+            "occupation_scope": "严格对应划线工范围未建立",
+            "value": "未建立安全数值，不用相邻招聘代填"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -10469,40 +10442,40 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需核对新岗位工具与资格。",
-            "shared_capabilities": "需要补足相邻岗位证据。",
+            "capability_gaps": "模型材料成形、装配及质量验收",
+            "shared_capabilities": "读图、尺寸与公差核对、样板及质量记录可比较；目标设备工艺另举证。",
             "target_href": "/zh/career/jobs/model-makers-metal-and-plastic",
             "target_slug": "model-makers-metal-and-plastic",
             "target_title": "model-makers-metal-and-plastic",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需核对新岗位工具与资格。",
-            "shared_capabilities": "需要补足相邻岗位证据。",
+            "capability_gaps": "目标非金属/塑料材料与成形工艺，非本职业统计同口径",
+            "shared_capabilities": "读图、尺寸与公差核对、样板及质量记录可比较；目标设备工艺另举证。",
             "target_href": "/zh/career/jobs/molders-shapers-and-casters-except-metal-and-plastic",
             "target_slug": "molders-shapers-and-casters-except-metal-and-plastic",
             "target_title": "molders-shapers-and-casters-except-metal-and-plastic",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需核对新岗位工具与资格。",
-            "shared_capabilities": "需要补足相邻岗位证据。",
+            "capability_gaps": "样板设计制造、收缩及工艺要求",
+            "shared_capabilities": "读图、尺寸与公差核对、样板及质量记录可比较；目标设备工艺另举证。",
             "target_href": "/zh/career/jobs/patternmakers-metal-and-plastic",
             "target_slug": "patternmakers-metal-and-plastic",
             "target_title": "patternmakers-metal-and-plastic",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需核对新岗位工具与资格。",
-            "shared_capabilities": "需要补足相邻岗位证据。",
+            "capability_gaps": "与重复铣刨方向同核，非新增职业",
+            "shared_capabilities": "读图、尺寸与公差核对、样板及质量记录可比较；目标设备工艺另举证。",
             "target_href": "/zh/career/jobs/milling-and-planing-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "milling-and-planing-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "milling-and-planing-machine-setters-operators-and-tenders-metal-and-plastic",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需核对新岗位工具与资格。",
-            "shared_capabilities": "需要补足相邻岗位证据。",
+            "capability_gaps": "与重复模型制作同核，非新增职业",
+            "shared_capabilities": "读图、尺寸与公差核对、样板及质量记录可比较；目标设备工艺另举证。",
             "target_href": "/zh/career/jobs/model-makers-metal-and-plastic",
             "target_slug": "model-makers-metal-and-plastic",
             "target_title": "model-makers-metal-and-plastic",
@@ -10542,7 +10515,7 @@
             "evidence_level": "工作样本",
             "id": "riasec",
             "label": "RIASEC",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "愿意反复核图纸单位与基准吗？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10561,7 +10534,7 @@
             "evidence_level": "工作样本",
             "id": "big-five",
             "label": "大五人格",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "出错后是否留下修订依据？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10580,7 +10553,7 @@
             "evidence_level": "工作样本",
             "id": "mbti",
             "label": "MBTI",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "能否把类型偏好转成待核问题？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10594,7 +10567,7 @@
             "evidence_level": "工作样本",
             "id": "enneagram",
             "label": "九型人格",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "被催促放行时能否按流程报告？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10608,7 +10581,7 @@
             "evidence_level": "工作样本",
             "id": "iq",
             "label": "认知能力",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "能否解释计算与实物测量的区别？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10622,7 +10595,7 @@
             "evidence_level": "工作样本",
             "id": "eq",
             "label": "情绪能力",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "能否向下游明确说明待核与停工状态？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10639,34 +10612,34 @@
         },
         "directions": [
           {
-            "direction": "方向 1",
-            "fit_signals": "先核对任务、压力和交付。",
-            "watchouts": "需要补足新岗位的工具与资格证据。"
+            "direction": "图纸读解",
+            "fit_signals": "主动核修订号、比例与单位",
+            "watchouts": "版本矛盾不得猜选"
           },
           {
-            "direction": "方向 2",
-            "fit_signals": "先核对任务、压力和交付。",
-            "watchouts": "需要补足新岗位的工具与资格证据。"
+            "direction": "基准与布局",
+            "fit_signals": "能说明基准选择和尺寸计算",
+            "watchouts": "不能只凭外观推加工面"
           },
           {
-            "direction": "方向 3",
-            "fit_signals": "先核对任务、压力和交付。",
-            "watchouts": "需要补足新岗位的工具与资格证据。"
+            "direction": "量具复核",
+            "fit_signals": "愿意按批准方法检查关键尺寸",
+            "watchouts": "纸面正确不证明真实测量"
           },
           {
-            "direction": "方向 4",
-            "fit_signals": "先核对任务、压力和交付。",
-            "watchouts": "需要补足新岗位的工具与资格证据。"
+            "direction": "定位与协同",
+            "fit_signals": "愿意核支撑、危险区及交接",
+            "watchouts": "吊装须另训练授权"
           },
           {
-            "direction": "方向 5",
-            "fit_signals": "先核对任务、压力和交付。",
-            "watchouts": "需要补足新岗位的工具与资格证据。"
+            "direction": "质量记录",
+            "fit_signals": "保留标记、依据和异常",
+            "watchouts": "件数或标记存在不等合格"
           },
           {
-            "direction": "方向 6",
-            "fit_signals": "先核对任务、压力和交付。",
-            "watchouts": "需要补足新岗位的工具与资格证据。"
+            "direction": "数字资料核验",
+            "fit_signals": "愿意回原图核CAD记录",
+            "watchouts": "软件清单不证明能力"
           }
         ],
         "heading": {
@@ -10677,35 +10650,35 @@
         },
         "questions": [
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "记录更愿意读图、计算还是复核，不以RC代码推能力。",
             "question": "喜欢哪些任务？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "观察被催促时是否仍核版本和基准，纸面速度不代表现场产能。",
             "question": "能否承受工作节奏？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "每次尺寸修订注明原图、单位、基准与理由。",
             "question": "是否愿意记录过程？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "图纸矛盾或定位不稳先暂停，交质量或现场责任人。",
             "question": "能否在不确定时升级？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "纸板记录不授吊装、焊接、机床或质量放行权限。",
             "question": "是否理解授权边界？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "对漏单位、错基准等错项记录来源和第二次核对方法。",
             "question": "能否复盘失败？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "保留允许的既有纸面任务记录并请他人挑战，非真实加工证书。",
             "question": "是否有可观察交付？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "先核目标工厂第一年任务、量具和训练监督方式，再投入获准观察。",
             "question": "下一步试验是什么？"
           }
         ],
@@ -11076,7 +11049,7 @@
       "riasec_fit_block": {
         "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
         "interest": "先观察真实任务中的兴趣、压力与协作体验。",
-        "riasec": "待核验",
+        "riasec": "RC（现实型—常规型，O*NET51-4192）",
         "riasec_short": "不以单一代码决定职业。"
       },
       "source_card": {
@@ -11097,7 +11070,7 @@
             "item": "layout-workers-metal-and-plastic.source-register.published.1"
           }
         },
-        "note": "来源范围、限制和统计时期按原始证据分别核对。来源使用说明：BLS Factors Affecting Occupational Utilization：职业、工资、预测或工业安全边界；限所列市场和职业口径；BLS Occupational Projections and Characteristics：职业、工资、预测或工业安全边界；限所列市场和职业口径；2025年城镇单位就业人员年平均工资：职业、工资、预测或工业安全边界；行业或信号口径，不能冒充精确职业事实；NIST AI Risk Management Framework：职业、工资、预测或工业安全边界；行业或信号口径，不能冒充精确职业事实；O*NET 51-4192.00 Layout Workers, Metal and Plastic：职业、工资、预测或工业安全边界；限所列市场和职业口径；O*NET National Wages 51-4192.00：职业、工资、预测或工业安全边界；限所列市场和职业口径；OSHA Specific Machine Hazards and Safeguarding Methods：职业、工资、预测或工业安全边界；行业或信号口径，不能冒充精确职业事实；OSHA Control of Hazardous Energy Lockout/Tagout：职业、工资、预测或工业安全边界；行业或信号口径，不能冒充精确职业事实；51-4192.00 - Layout Workers, Metal and Plastic：Candidate only; Worker must reopen and bind reviewed claims for: tasks, skills, work context.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；51-4192.00 - Layout Workers, Metal and Plastic：Candidate only; Worker must reopen and bind reviewed claims for: identity, workflow, work context, fit, risk.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；Hot Technologies: 51-4192.00 - Layout Workers, Metal and Plastic：Candidate only; Worker must reopen and bind reviewed claims for: technology and AI task change.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；Industries: 51-4192.00 - Layout Workers, Metal and Plastic：Candidate only; Worker must reopen and bind reviewed claims for: work setting, market scope.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；National Certifications: 51-4192.00 - Layout Workers, Metal and Plastic：Candidate only; Worker must reopen and bind reviewed claims for: credential boundary.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；National Training: 51-4192.00 - Layout Workers, Metal and Plastic：Candidate only; Worker must reopen and bind reviewed claims for: entry education.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；National Wages: 51-4192.00 - Layout Workers, Metal and Plastic：Candidate only; Worker must reopen and bind reviewed claims for: US wage distribution.；O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.；51-4192.00 - Layout Workers, Metal and Plastic：Candidate only; Worker must reopen and bind reviewed claims for: identity, entry, outlook.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+        "note": "O*NET51-4192任务/RC/2025行业与BLS精确预测分别核；工资本轮核中位63870/时薪30.71，原2025两端分位未重获、25/75缺口不补。NBS制造业两类2025年均只是行业背景。BLS行业因素为可编程设备，NIST为风险框架，无生成AI职业采用实测。OSHA3170为2007技术指南、3120为能量控制资料，非中国现行法或职业事故率。共享保护源模板说明保留范围冲突，正文不继续展示其泛用宣称。"
       },
       "work_context_block": {
         "$item": "layout-workers-metal-and-plastic.profile.work-context-block.5",
@@ -11251,7 +11224,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [],
     "metrics": [
@@ -11298,7 +11271,7 @@
       "text": "划线工职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "8db9f317a344fd7d9fc88d109a67214deffa4762a77cbe5a971849b8ebf83ed9",
+  "source_content_sha256": "43bec86464b93b9a7887aef1b693adb9c9998ee85065cf640821ae8549c130c3",
   "subject": {
     "canonical_slug": "layout-workers-metal-and-plastic",
     "name": "划线工",

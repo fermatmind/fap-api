@@ -7543,7 +7543,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "维护管理系统（CMMS）、振动与温度监测、润滑计划与记录汇总等工具可辅助提示维护周期、监测设备状态并汇总数据，但现场润滑、拆解检查、更换与判断运行异常仍由人负责。"
+              "编辑任务假设：CMMS、振动温度监测与生成式AI分开；后者可能整理虚构润滑/保养记录草稿，未取得本职业采用率或岗位结果。设备状态、润滑用料、停机隔离和维护验收由受训人员核验，自动文本不能替代现场检查或机械维修授权。"
             ]
           },
           "id": "maintenance-workers-machinery.ai-impact.ai-impact-table.2",
@@ -7571,7 +7571,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不同环节受影响不同：润滑计划、状态监测与记录汇总更易自动化，但现场润滑、拆解检查、更换重装与运行异常判断仍由人负责。"
+              "编辑分析：润滑计划、监测提示与记录汇总可作试用候选；未取得本职业各环节AI自动化程度比较。传统状态监测和CMMS也不等于生成式AI，现场维护仍按规程与授权。"
             ]
           },
           "id": "maintenance-workers-machinery.ai-impact.ai-impact-table.4",
@@ -7613,7 +7613,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议：工具可辅助润滑计划、状态监测与记录汇总；当前资料不证明制造企业普遍采用这些系统。"
+              "编辑试用建议：仅虚构资料下的小样草稿；普通专用软件与生成式AI不同，未证明本职业机构普遍采用。"
             ]
           },
           "id": "maintenance-workers-machinery.ai-impact.ai-impact-table.7",
@@ -7649,7 +7649,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开职业工资：国家统计局按行业门类发布城镇单位就业人员年平均工资，机械维护工主要计入制造业等行业，行业平均不能替代本职业工资。"
+              "本轮未取得中国大陆与49-9043.00精确对应的职业工资中位数。国家统计局2025制造业城镇单位年平均工资可作制造企业雇主背景，不能证明本职业没有公开工资或把行业平均当职业中位数。"
             ]
           },
           "id": "maintenance-workers-machinery.china-salary.career-snapshot-primary-locale.1",
@@ -7727,7 +7727,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 该页显示 2025 年 BLS OEWS 年薪中位数为 60,850 美元（约 29.25 美元/小时）；就业方面 2024 年约 57,500 人、2024—2034 年预计下降（Decline，-1% 或更低）、期间职位空缺约 4,800 个。该页未展示分位工资。以上为美国全国口径且属本职业 49-9043.00，「下降」为统计预测，不等于个人就业结果。"
+              "2025美国全国49-9043.00工资年薪五分位P10/25/50/75/90为42,000／48,920／60,850／75,200／88,550美元，小时为20.19／23.52／29.25／36.16／42.57美元。分位不是资历等级、起薪或到手收入。就业仍保留2024—2034历史版本，与现行2025—2035有差异，不能视为最新全页。"
             ]
           },
           "id": "maintenance-workers-machinery.us-salary.career-snapshot-secondary-locale.2",
@@ -7741,7 +7741,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资统计位置：以上为美国全国口径且属本职业 49-9043.00；中位数不代表起薪或个人到手收入，且未披露分位。"
+              "O*NET全国工资表披露2025 BLS OEWS本职业五分位，年薪与小时分别取原表；中位数不是个人起薪或到手收入。"
             ]
           },
           "id": "maintenance-workers-machinery.us-salary.career-snapshot-secondary-locale.3",
@@ -7755,7 +7755,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "怎样理解这些位置：O*NET 该页只展示中位数，不展示分位；中位数不是新手或资深等级。就业规模与「下降」是职业统计，须与个人机会分开解释。"
+              "分位显示统计分布，不对应新手或资深等级；本职业中位数60,850美元/年，与BLS三职业合并中位数64,100须区分。"
             ]
           },
           "id": "maintenance-workers-machinery.us-salary.career-snapshot-secondary-locale.4",
@@ -7769,12 +7769,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布与局限：该页 2024 年主要行业为 Manufacturing；行业分布是雇主场景信号，不是需求预测。"
+              "行业工资参考取2025 BLS OOH机械维修、机械维护、机械装配三职业合并表；不是49-9043单职业行业工资，不能和本职业全国中位数混成收入范围。"
             ]
           },
           "id": "maintenance-workers-machinery.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "onet-industry"
+            "bls-ooh-machinery-maintenance"
           ],
           "type": "prose"
         },
@@ -8018,7 +8018,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国侧该职业属 Job Zone 3（中等准备）：多数岗位要求职业学校培训、相关在岗经验或副学士学位，并需一至两年培训（含学徒）；具体要求按雇主与行业核对。"
+              "美国O*NET Job Zone3是一组通用准备描述，不代表本职业多数须副学士或一至两年训练。本职业教育调查列54%高中后证书、41%高中、3%副学士；是受访要求分布，不是法定门槛。BLS具体准备通常高中及在岗训练；其训练期限段落不一致，不以固定期限承诺。"
             ]
           },
           "id": "maintenance-workers-machinery.path.career-path-block.2",
@@ -8032,7 +8032,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国：以职业学校培训加在岗训练或在监督下学习机械维护为常见路径，学徒计划常见。中国大陆：无与该 O*NET 精确对应的统一职业资格，岗位多按雇主与行业要求确定，涉及电气等专精作业须按法域取得相应资格，须分别核对。"
+              "美国BLS将机械维护的在岗学习与装配工学徒路径分开；不能借装配工学徒比例称本职业学徒常见。中国大陆未建立精确资格映射，按任务、设备、法域及雇主授权核验，电气等专精作业另核。"
             ]
           },
           "id": "maintenance-workers-machinery.path.career-path-block.3",
@@ -8139,7 +8139,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 引用 BLS 数据显示，该职业 2024 年就业约 57,500 人，2024—2034 年预计下降（Decline，-1% 或更低），期间职位空缺约 4,800 个；这是职业统计，不是个人录用概率，也不同于招聘样本。"
+              "保留历史版本：2024就业约57,500人，2024—2034下降，约4,800个/年空缺，不能写成十年合计。现行O*NET已换2025—2035，本页保护Hero和FAQ共享统计未同步，不是最新全页，也不推个人录用。"
             ]
           },
           "id": "maintenance-workers-machinery.market-signals.market-signal-card.2",
@@ -8181,7 +8181,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：目标雇主的机械类型与安全授权、电气等专精作业资格，或转向工业机械维修与状态监测所需的诊断经验与责任证据。"
+              "转向工业机械维修工须补复杂工业机械故障诊断、控制与液压基础、维修方案、测试验收及设备危险能量控制；常规润滑更换经验不等于深度诊断维修胜任。"
             ]
           },
           "id": "maintenance-workers-machinery.market-signals.market-signal-card.5",
@@ -8620,6 +8620,51 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "同一手册分列本职业中位60850，行业表为三职业合并；训练期限两段不同，不固定承诺。"
+                ],
+                "evidence_type": "official guidance",
+                "id": "bls-ooh-machinery-maintenance",
+                "limitation": "美国来源，不建立中国工资资格或授予个人作业权限；宽口径范围须明确。",
+                "market": "美国",
+                "name": "BLS：机械维修、维护和装配职业手册",
+                "period": "现行网页；查阅2026-10-11",
+                "publisher": "BLS",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/industrial-machinery-mechanics-and-maintenance-workers-and-millwrights.htm"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "意外启动和储能释放须由训练授权人员控制，不能以按停机键替代。"
+                ],
+                "evidence_type": "official guidance",
+                "id": "osha-energy-control",
+                "limitation": "美国来源，不建立中国工资资格或授予个人作业权限；宽口径范围须明确。",
+                "market": "美国",
+                "name": "OSHA：危险能量控制",
+                "period": "现行网页；查阅2026-10-11",
+                "publisher": "OSHA",
+                "scope": "industry_proxy",
+                "url": "https://www.osha.gov/control-hazardous-energy"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "化学品标签、安全数据表和训练用于核验危害与控制。"
+                ],
+                "evidence_type": "official guidance",
+                "id": "osha-hazcom",
+                "limitation": "美国来源，不建立中国工资资格或授予个人作业权限；宽口径范围须明确。",
+                "market": "美国",
+                "name": "OSHA：危害沟通",
+                "period": "现行网页；查阅2026-10-11",
+                "publisher": "OSHA",
+                "scope": "industry_proxy",
+                "url": "https://www.osha.gov/hazcom"
               }
             ]
           },
@@ -8727,7 +8772,7 @@
         "action_rows": [
           {
             "人群": "入行者",
-            "应对重点": "练习润滑、检查与工具使用。"
+            "应对重点": "先做虚构工单纸面维护顺序演练；真实润滑、拆解和工具操作须经训练授权，在监督下进行。"
           },
           {
             "人群": "在岗者",
@@ -8808,12 +8853,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "计划与数据汇总",
+            "AI主要改变": "可能整理保养草稿；CMMS/状态监测不等于生成式AI。",
             "仍由人负责": "周期核对与现场维护",
             "方向": "润滑与记录"
           },
           {
-            "AI主要改变": "有限监测",
+            "AI主要改变": "编辑假设：监测提示须核设备、数据和人工复核，不把传统监测直接当生成式AI。",
             "仍由人负责": "拆解检查与更换判断",
             "方向": "检查与更换"
           }
@@ -9171,7 +9216,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "维护管理系统（CMMS）、振动与温度监测、润滑计划与记录汇总等工具可辅助提示维护周期、监测设备状态并汇总数据，但现场润滑、拆解检查、更换与判断运行异常仍由人负责。"
+          "编辑任务假设：CMMS、振动温度监测与生成式AI分开；后者可能整理虚构润滑/保养记录草稿，未取得本职业采用率或岗位结果。设备状态、润滑用料、停机隔离和维护验收由受训人员核验，自动文本不能替代现场检查或机械维修授权。"
         ],
         "heading": "机械维护工的工作对象与 AI 边界"
       },
@@ -9313,6 +9358,12 @@
               "item": "maintenance-workers-machinery.source-register.published.1"
             },
             "scope": "中国行业工资口径；不等于本职业精确工资。"
+          },
+          {
+            "href": "https://www.bls.gov/ooh/installation-maintenance-and-repair/industrial-machinery-mechanics-and-maintenance-workers-and-millwrights.htm",
+            "id": "maintenance-workers-machinery.display.source.bls-ooh-machinery-maintenance",
+            "label": "BLS：机械维修、维护和装配职业手册",
+            "scope": "本职业准备与三职业合并行业参考分开，期限冲突不作承诺。"
           }
         ],
         "tracks": [
@@ -9422,7 +9473,7 @@
                 "role": "状态监测专员"
               },
               {
-                "credentials": "按雇主要求核验。",
+                "credentials": "可靠性工程岗位另核工程理论、分析经验、学历或雇主要求，不由维护经历自动获得。",
                 "next_moves": "补足工程与管理知识。",
                 "readiness_evidence": "保留方案与改进记录。",
                 "responsibility": "负责可靠性方案与改进。",
@@ -9596,10 +9647,10 @@
             "affected_roles": "维护作业岗位",
             "consequence": "可能造成机械伤害。",
             "evidence_refs": [
-              "onet-tasks"
+              "maintenance-workers-machinery.display.source.osha-energy-control"
             ],
             "id": "risk-1",
-            "mitigation": "执行停机与能源隔离并确认。",
+            "mitigation": "由受训授权人员按设备适用程序隔离危险能量、控制储能并确认安全状态；未确认不拆解，停机按钮不等于能源隔离。",
             "scenario": "未停机或未隔离能源即拆解。",
             "title": {
               "$item": "maintenance-workers-machinery.risk.career-risk-cards.1",
@@ -9612,7 +9663,7 @@
             "affected_roles": "维护作业岗位",
             "consequence": "可能造成砸伤或扭伤。",
             "evidence_refs": [
-              "onet-context"
+              "maintenance-workers-machinery.display.source.onet-context"
             ],
             "id": "risk-2",
             "mitigation": "使用起重设备并正确操作。",
@@ -9628,10 +9679,10 @@
             "affected_roles": "维护作业岗位",
             "consequence": "可能造成刺激或伤害。",
             "evidence_refs": [
-              "onet-tasks"
+              "maintenance-workers-machinery.display.source.osha-hazcom"
             ],
             "id": "risk-3",
-            "mitigation": "按规程使用并佩戴防护。",
+            "mitigation": "先核产品标签和安全数据表，按设备/化学品程序及训练使用合适防护和通风，未知成分或条件即停止并上报。",
             "scenario": "润滑剂或化学溶液接触皮肤或吸入。",
             "title": {
               "$item": "maintenance-workers-machinery.risk.career-risk-cards.3",
@@ -9644,7 +9695,7 @@
             "affected_roles": "运行观察岗位",
             "consequence": "可能造成设备损坏或停机。",
             "evidence_refs": [
-              "onet-tasks"
+              "maintenance-workers-machinery.display.source.onet-tasks"
             ],
             "id": "risk-4",
             "mitigation": "按程序检查测试并复核。",
@@ -9660,7 +9711,7 @@
             "affected_roles": "维护作业岗位",
             "consequence": "可能造成安全与合规风险。",
             "evidence_refs": [
-              "onet-summary"
+              "maintenance-workers-machinery.display.source.onet-summary"
             ],
             "id": "risk-5",
             "mitigation": "明确授权边界并及时转交。",
@@ -9676,10 +9727,10 @@
             "affected_roles": "维护作业岗位",
             "consequence": "可能造成伤害或环境污染。",
             "evidence_refs": [
-              "onet-context"
+              "maintenance-workers-machinery.display.source.osha-hazcom"
             ],
             "id": "risk-6",
-            "mitigation": "按规程清洁并佩戴防护与通风。",
+            "mitigation": "先核清洁溶剂标签、安全数据表及清洁工具程序，按授权落实通风、防护和废物处置；未知溶剂或气枪条件不操作。",
             "scenario": "使用溶剂或气枪清洁零件时。",
             "title": "清洁与去污作业未防护"
           }
@@ -9757,6 +9808,18 @@
               "item": "maintenance-workers-machinery.source-register.published.1"
             },
             "scope": "认证入口；不替代专精资格。"
+          },
+          {
+            "href": "https://www.osha.gov/control-hazardous-energy",
+            "id": "maintenance-workers-machinery.display.source.osha-energy-control",
+            "label": "OSHA：危险能量控制",
+            "scope": "美国安全参考，不替代中国规则和现场授权。"
+          },
+          {
+            "href": "https://www.osha.gov/hazcom",
+            "id": "maintenance-workers-machinery.display.source.osha-hazcom",
+            "label": "OSHA：危害沟通",
+            "scope": "美国安全参考，不替代中国规则和现场授权。"
           }
         ]
       },
@@ -9765,8 +9828,8 @@
           "bls_table": [
             {
               "指标": "中国大陆职业工资",
-              "数值": "证据不足：未单列",
-              "说明": "国家统计局按行业门类发布，未单列本职业工资。"
+              "数值": "证据不足：未取得精确对应",
+              "说明": "未建立本职业、统计期和中国职业分类的一对一映射，不断言无公开工资。"
             },
             {
               "指标": "中国大陆行业代理",
@@ -9853,7 +9916,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国大陆无本职业单列工资；下列为行业代理，不是起薪、中位数或到手收入。",
+          "china_open": "本轮未取得本职业精确中国工资；下列为制造业宽行业及全国背景，不是起薪、中位数或到手收入。",
           "china_ref": {
             "$join": [
               {
@@ -9874,7 +9937,7 @@
             ],
             "separator": ""
           },
-          "china_salary_note": "中国大陆行业口径与美国职业统计分开，不能跨市场拼接。",
+          "china_salary_note": "制造业适用于制造企业设备维护雇主场景；2025税前年平均、私营与非私营人群分列，全国非私营合计是不同背景，不拼本职业区间或折算月薪。",
           "china_salary_table": [
             {
               "城市/区间": "全国·制造业（非私营）",
@@ -9886,7 +9949,7 @@
             },
             {
               "城市/区间": "本职业精确工资",
-              "月薪参考": "证据不足：未单列"
+              "月薪参考": "证据不足：未取得精确对应"
             }
           ],
           "china_soc_row": {
@@ -9933,20 +9996,26 @@
         "authority_sources": {
           "$join": [
             {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "maintenance-workers-machinery.source-register.published.1"
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "maintenance-workers-machinery.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "maintenance-workers-machinery.source-register.published.1"
+                }
+              ],
+              "separator": ""
             },
-            "｜",
-            {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "maintenance-workers-machinery.source-register.published.1"
-            }
+            "｜宽行业参考：BLS OOH｜https://www.bls.gov/ooh/installation-maintenance-and-repair/industrial-machinery-mechanics-and-maintenance-workers-and-millwrights.htm"
           ],
           "separator": ""
         },
@@ -10000,8 +10069,8 @@
             }
           },
           {
-            "指标": "薪资 · 最低 10%",
-            "数值": "未披露",
+            "指标": "薪资 · 第10分位",
+            "数值": "$42,000/年（2025）",
             "说明": {
               "$join": [
                 {
@@ -10024,8 +10093,8 @@
             }
           },
           {
-            "指标": "薪资 · 最高 90%",
-            "数值": "未披露",
+            "指标": "薪资 · 第90分位",
+            "数值": "$88,550/年（2025）",
             "说明": {
               "$join": [
                 {
@@ -10121,7 +10190,7 @@
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "约 4,800 个（2024—2034 期合计）",
+            "数值": "约4,800个/年（保留2024—2034历史版本）",
             "说明": {
               "$join": [
                 {
@@ -10144,7 +10213,7 @@
             }
           }
         ],
-        "boundary": "美国全国口径：工资、就业与行业均为 O*NET 展示的本职业 49-9043.00 数据，工资为 2025 OEWS、就业展望为 2024—2034 预测；不含个人到手收入、起薪或录用结论。",
+        "boundary": "美国全国口径：工资、就业与行业均为 O*NET 展示的本职业 49-9043.00 数据，工资为 2025 OEWS、就业展望为 2024—2034 预测；不含个人到手收入、起薪或录用结论。 就业为保留历史版本；现行2025—2035已换期，Hero与FAQ共享统计受保护，未同步；行业工资另为明确三职业合并背景。",
         "direct_answer": {
           "$item": "maintenance-workers-machinery.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10153,11 +10222,11 @@
         },
         "factor_rows": [
           {
-            "answer": "多数岗位要求职业学校培训、相关经验或副学士学位并需一至两年培训；涉及电气等专精作业须按法域取得资格。",
+            "answer": "美国O*NET Job Zone3是一组通用准备描述，不代表本职业多数须副学士或一至两年训练。本职业教育调查列54%高中后证书、41%高中、3%副学士；是受访要求分布，不是法定门槛。BLS具体准备通常高中及在岗训练；其训练期限段落不一致，不以固定期限承诺。",
             "factor": "资格"
           },
           {
-            "answer": "多以学徒或在岗训练进入；润滑、检查与工具使用经验比证书名称更常被参考。",
+            "answer": "编辑建议：保留润滑、检查、工具使用和安全控制记录展示经验；没有本职业经验相对证书的招聘权重证据。",
             "factor": "经验"
           },
           {
@@ -10184,30 +10253,30 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024",
+        "industry_period": "2025年5月；三职业合并工资",
         "industry_rows": [
           {
-            "industry": "Manufacturing",
-            "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体中位数为准。"
+            "industry": "Manufacturing（三职业合并）",
+            "median": "$65,220/年（宽口径参考）",
+            "note": "2025 BLS OOH机械维修、机械维护、机械装配三职业合并年薪中位数；未取得49-9043单职业行业工资，不作其个人报价。"
           },
           {
-            "industry": "行业口径说明一",
-            "median": "见就业行",
-            "note": "行业口径为雇主场景信号，不跨职业外推。"
+            "industry": "Construction（三职业合并）",
+            "median": "$63,870/年（宽口径参考）",
+            "note": "2025 BLS OOH机械维修、机械维护、机械装配三职业合并年薪中位数；未取得49-9043单职业行业工资，不作其个人报价。"
           },
           {
-            "industry": "行业口径说明二",
-            "median": "见就业行",
-            "note": "地区与雇主差异大，不得跨地区外推。"
+            "industry": "Wholesale trade（三职业合并）",
+            "median": "$62,450/年（宽口径参考）",
+            "note": "2025 BLS OOH机械维修、机械维护、机械装配三职业合并年薪中位数；未取得49-9043单职业行业工资，不作其个人报价。"
           },
           {
-            "industry": "行业口径说明三",
-            "median": "见就业行",
-            "note": "分位工资未披露，不以推断值替代。"
+            "industry": "Commercial and industrial machinery and equipment repair and maintenance（三职业合并）",
+            "median": "$60,780/年（宽口径参考）",
+            "note": "2025 BLS OOH机械维修、机械维护、机械装配三职业合并年薪中位数；未取得49-9043单职业行业工资，不作其个人报价。"
           }
         ],
-        "industry_value_label": "行业值",
+        "industry_value_label": "年薪中位数（三职业宽口径）",
         "interpretation_heading": {
           "$item": "maintenance-workers-machinery.us-salary.career-snapshot-secondary-locale.4",
           "block": "us-salary",
@@ -10216,7 +10285,7 @@
         },
         "interpretation_rows": [
           {
-            "answer": "美元/年；为 BLS 2025 OEWS 全国中位数（本职业 49-9043.00 口径），未展示分位，不含个人到手收入。",
+            "answer": "2025美国全国49-9043.00工资表有五分位；此处P10/50/90不是资历等级、个人起薪或到手收入。",
             "question": "工资"
           },
           {
@@ -10228,7 +10297,7 @@
             "question": "展望"
           },
           {
-            "answer": "按 O*NET/BLS 行业口径列为制造业，不等于全部从业者收入。",
+            "answer": "所列行业工资为三职业合并中位数，仅作雇主行业背景；本职业精确分行业工资仍未取得。",
             "question": "行业"
           }
         ],
@@ -10249,10 +10318,10 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "—",
-            "interpretation": "O*NET 该页未展示分位工资；不以推断值替代。",
-            "label": "最低 10%",
-            "value": "未披露"
+            "equivalent": "$20.19/小时",
+            "interpretation": "2025美国全国49-9043.00本职业原表分位，不代表个人资历或报价。",
+            "label": "第10分位",
+            "value": "$42,000/年"
           },
           {
             "equivalent": "$29.25/小时",
@@ -10261,10 +10330,10 @@
             "value": "$60,850/年"
           },
           {
-            "equivalent": "—",
-            "interpretation": "O*NET 该页未展示分位工资；不以推断值替代。",
-            "label": "最高 90%",
-            "value": "未披露"
+            "equivalent": "$42.57/小时",
+            "interpretation": "2025美国全国49-9043.00本职业原表分位，不代表个人资历或报价。",
+            "label": "第90分位",
+            "value": "$88,550/年"
           }
         ]
       },
@@ -10347,7 +10416,7 @@
             "geography": "美国全国",
             "horizon": "2024—2034",
             "interpretation": "就业规模、变化与职位空缺必须分别解释。",
-            "limitation": "为职业统计，不能作为个人就业保证。",
+            "limitation": "2024—2034保留历史版本，现行源已换2025—2035；Hero/FAQ未同步，不代表最新全页或个人保证。",
             "metric": "就业规模与变化",
             "occupation_scope": "展示口径：Maintenance Workers, Machinery（49-9043.00）",
             "value": {
@@ -10360,17 +10429,17 @@
           {
             "geography": "美国全国",
             "horizon": "2024—2034",
-            "interpretation": "为 2024—2034 年期间合计，含增长与替代需求，不等于在招岗位数。",
+            "interpretation": "预测期年均空缺，含增长与替代需求；不是十年合计或实时在招数。",
             "limitation": "不能作为个人录用概率。",
-            "metric": "职位空缺（期合计）",
+            "metric": "年均职位空缺（历史版本）",
             "occupation_scope": "展示口径：Maintenance Workers, Machinery（49-9043.00）",
-            "value": "约 4,800 个"
+            "value": "约4,800个/年（2024—2034历史版本）"
           },
           {
             "geography": "美国全国",
             "horizon": "2025",
             "interpretation": "为 BLS 2025 OEWS 全国中位数，不代表起薪或到手收入。",
-            "limitation": "未披露分位；不含个人到手收入。",
+            "limitation": "2025本职业工资表披露五分位；全国工资统计不含个人录用或到手收入结论。",
             "metric": "年薪中位数",
             "occupation_scope": "展示口径：Maintenance Workers, Machinery（49-9043.00）",
             "value": "$60,850/年"
@@ -10541,7 +10610,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "riasec",
             "label": "RIASEC",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10560,7 +10629,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "big-five",
             "label": "大五人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10579,7 +10648,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "mbti",
             "label": "MBTI",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10593,7 +10662,7 @@
             "answer": "需要结合真实任务、安全边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "enneagram",
             "label": "九型人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10607,7 +10676,7 @@
             "answer": "需要结合真实任务、安全边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "iq",
             "label": "认知能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10621,7 +10690,7 @@
             "answer": "需要结合真实任务、安全边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "eq",
             "label": "情绪能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -11143,7 +11212,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "润滑与常规维护",
@@ -11194,7 +11263,7 @@
       "text": "机械维护工职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "be8ad7b81f0c91fbc337ad2ef54634674ca28be65d556bfcc2adb37747692724",
+  "source_content_sha256": "16b91171a593eaa2b1c253fb450aaac2c6074786017ad6786c7fbb1f4f3ef804",
   "subject": {
     "canonical_slug": "maintenance-workers-machinery",
     "name": "机械维护工",

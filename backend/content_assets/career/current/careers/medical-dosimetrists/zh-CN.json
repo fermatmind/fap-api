@@ -7376,7 +7376,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入：O*NET 29-2036.00 的官方描述、任务、技能、兴趣代码、工作活动与工作情境，以及 BLS 2025 年工资数据与 2024—2034 年就业预测（本职业口径）；研究结论不据此推定中国大陆的资格、工资或就业口径。"
+              "研究输入：O*NET29-2036.00的19任务、ICR、情境与新入职教育回答；本职业BLS2025工资及2025—2035预测，不推中国工资、资格或就业。"
             ]
           },
           "id": "medical-dosimetrists.profile.onet-structured-fields-block.7",
@@ -7728,7 +7728,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国医学剂量师薪资与就业口径（BLS 2025 年工资数据与 2024—2034 年预测；O*NET 29-2036.00 本职业口径）"
+              "美国29-2036.00本职业2025工资、2025—2035预测；全国分位、职业细行业工资、就业份额和空缺分别解释。"
             ]
           },
           "fact_refs": [
@@ -7779,7 +7779,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国五分位与行业工资分别解释。2025全国10/中位/90分位由当前BLS手册支持；25/75分位沿此前核验的2025全国表，本次完整表未取得。O*NET74/26为就业行业份额，不能填作行业工资。"
+              "当前完整全国工资表已取得，五档年薪及小时均核实；25/75分位读取缺口消除。当前O*NET本职业医疗保健社会援助89%、其他含教育11%是就业份额，不是行业工资。2025—2035本职业3500至3700、增长5%、净增200、年均空缺200；人数独立取整，不重算官方比例。"
             ]
           },
           "id": "medical-dosimetrists.us-salary.career-snapshot-secondary-locale.4",
@@ -7812,9 +7812,6 @@
               "工资影响因素与入行条件分开：地区、机构和职责不同可能影响收入，不能把全国分位当固定资历档或承诺。美国认可剂量学项目/CMD条件与中国实际任用另核。"
             ]
           },
-          "fact_refs": [
-            "us-p90"
-          ],
           "id": "medical-dosimetrists.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
             "onet-trends"
@@ -8153,7 +8150,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "官方与行业信号：美国 29-2036.00 本职业口径 2024 年就业约 4,800 人，2034 年预计约 4,900 人，2024—2034 年预计平均（约 4%），年均职位空缺约 200 个（含替换需求）。"
+              "本职业2025就业3,500至2035预计3,700，增长5%、净增200、年均空缺200（2025—2035）；公开人数独立取整，不以差商重算官方比例。空缺含增长与替换，非当前在招或录用率。"
             ]
           },
           "id": "medical-dosimetrists.market-signals.market-signal-card.1",
@@ -8182,7 +8179,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET2024—2034本职业4800→4900，官方增长4%、年均空缺200。BLS2025—2035本职业3500→3700、净增200、官方增长5%、年均空缺200。公开人数取整，不用取整差商替官方增长率；两期基线分开，不拼同比或猜人数变化原因，空缺含替换而非在招/录用概率。"
+              "本职业2025就业3,500至2035预计3,700，增长5%、净增200、年均空缺200（2025—2035）；公开人数独立取整，不以差商重算官方比例。空缺含增长与替换，非当前在招或录用率。"
             ]
           },
           "id": "medical-dosimetrists.market-signals.market-signal-card.3",
@@ -8560,16 +8557,16 @@
                 "url": "https://www.onetonline.org/link/details/29-2036.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-11",
                 "details": [
-                  "74/26是就业行业比例，不是工资；与BLS本职业三行业工资分开。"
+                  "当前本职业行业份额医疗保健社会援助89%、其他含教育11%；是就业份额，不代工资或需求预测。"
                 ],
                 "evidence_type": "official workforce data",
                 "id": "onet-industry",
                 "limitation": "行业比例不等于招聘概率。",
                 "market": "美国",
                 "name": "O*NET Industries 29-2036.00",
-                "period": "当前就业行业份额；查阅2026-10-03",
+                "period": "当前就业行业份额；查阅2026-10-11",
                 "publisher": "O*NET OnLine / Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/29-2036.00"
@@ -8665,16 +8662,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/29-2036.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-11",
                 "details": [
-                  "74/26是就业行业比例，不是工资；与BLS本职业三行业工资分开。"
+                  "当前本职业行业份额医疗保健社会援助89%、其他含教育11%；是就业份额，不代工资或需求预测。"
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
                 "limitation": "行业分布是雇主场景信号，不是需求预测。",
                 "market": "美国",
                 "name": "O*NET 29-2036.00 行业分布（Industries）",
-                "period": "当前就业行业份额；查阅2026-10-03",
+                "period": "当前就业行业份额；查阅2026-10-11",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/29-2036.00"
@@ -8710,16 +8707,16 @@
                 "url": "https://www.onetonline.org/link/localtraining/29-2036.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-11",
                 "details": [
-                  "原本人冻结报告核五分位；本轮BLS核10/中位/90，25/75保留历史正确值，不冒新读完整表。"
+                  "本轮完整全国五档年薪/小时表已取得并核实；25/75读取缺口消除。"
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "source-pack-onet-localwages",
                 "limitation": "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.",
                 "market": "美国",
                 "name": "National Wages: 29-2036.00 - Medical Dosimetrists",
-                "period": "BLS2025；完整O*NET页本轮失败",
+                "period": "BLS2025全国工资；查阅2026-10-11",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/29-2036.00"
@@ -9158,7 +9155,7 @@
             "概念": "任务能力"
           },
           {
-            "含义": "工具出现或厂商演示不等于机构已采用；需核对数据、权限、版本与质量保证要求。",
+            "含义": "未取得本职业GenAI性能、机构采用或岗位结果；Eclipse IDE17%、Epic6%为招聘原名提及，不确认某TPS产品或临床自动功能。虚构题仅编辑自查。",
             "概念": "采用条件"
           },
           {
@@ -9495,13 +9492,13 @@
         "locale_requirements": {
           "credential_boundary": "本页以29-2036.00计划设计、剂量计算核验与团队沟通为中心。O*NET报告岗位名含Medical Physicist，但名称不授合格医学物理师资格；官方任务也含监督或执行定位影像、放射性测量等，不能据分类断言所有剂量师绝不参与任何相关操作。AAMD职业概览中放射肿瘤医师决定治疗方式/剂量并复核批准计划，团队在实施前质保。任务重叠不等于处方、独立批准或跨岗位授权，按所在地与机构范围核。",
           "jurisdiction": "美国课程与CMD条件、中国机构授权分别核",
-          "summary": "美国O*NET Job Zone 4为职业群准备，通常四年制学士但有例外，相关经验描述不是本职业统一年限。BLS本职业通常学士并须完成认可医学剂量学项目，雇主通常要求/偏好CMD；课程含受监督临床经验。MDCB考试资格概览要求至少学士（任一学科）及至少12个月JRCERT认可医学剂量学项目毕业；本页未声称完整申请手册已读。中国任用、训练和授权另核，不能把美国条件当中国互认。"
+          "summary": "美国本职业BLS通常学士并完成认可医学剂量学项目，雇主通常要求认证；MDCB当前概览至少学士及至少12个月JRCERT认可项目毕业，未称完整申请手册已读。O*NET40%学士/35%学士后证书/15%硕士为新入职教育回答，非全部岗位或中国准入。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
             "href": {
-              "$source": "nbs-wage-method",
+              "$source": "mdcb-handbook",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9509,17 +9506,17 @@
             },
             "id": "medical-dosimetrists.display.source.0",
             "label": {
-              "$source": "nbs-wage-method",
+              "$source": "mdcb-handbook",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-dosimetrists.source-register.published.1"
             },
-            "scope": "中国行业平均工资，非职业工资/权限/AI采用"
+            "scope": "至少学士及至少12个月JRCERT认可剂量学项目毕业，考试资格非批准权"
           },
           {
             "href": {
-              "$source": "onet-details",
+              "$source": "bls-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9527,17 +9524,17 @@
             },
             "id": "medical-dosimetrists.display.source.1",
             "label": {
-              "$source": "onet-details",
+              "$source": "bls-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-dosimetrists.source-register.published.1"
             },
-            "scope": "美国职责主张本轮核summary，非中国职业映射"
+            "scope": "美国学士/认可项目与受监督临床经验"
           },
           {
             "href": {
-              "$source": "onet-industry",
+              "$source": "source-pack-onet-localtraining",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9545,17 +9542,17 @@
             },
             "id": "medical-dosimetrists.display.source.2",
             "label": {
-              "$source": "onet-industry",
+              "$source": "source-pack-onet-localtraining",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-dosimetrists.source-register.published.1"
             },
-            "scope": "美国74/26就业行业份额，非工资或招聘概率"
+            "scope": "267混合专业培训项目，非全为认可剂量学项目"
           },
           {
             "href": {
-              "$source": "onet-trends",
+              "$source": "source-pack-onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9563,13 +9560,13 @@
             },
             "id": "medical-dosimetrists.display.source.3",
             "label": {
-              "$source": "onet-trends",
+              "$source": "source-pack-onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-dosimetrists.source-register.published.1"
             },
-            "scope": "美国2024—2034预测，非工作情境或AI采用"
+            "scope": "美国JobZone4群准备与40/35/15新入职教育回答"
           }
         ],
         "tracks": [
@@ -9836,14 +9833,15 @@
           }
         ],
         "direct_answer": "风险必须按触发、后果、控制和升级边界处理，不以编辑归纳代替剂量核验规范与医疗标准。",
-        "evidence_scope": "依据 O*NET 29-2036.00 的任务与工作情境；剂量核验、质量保证与执业边界按雇主与适用规范核对，不跨范围外推。",
+        "evidence_scope": "O*NET支持任务与情境背景，风险后果/控制为编辑分析，非事故率；独立核验、校准、批准分工按机构规范，未建立完整指南或中国具体法条。原AAPM仅摘要登记不作完整临床标准。",
         "heading": "医学剂量师的工作风险与边界",
         "risks": [
           {
             "affected_roles": "计划与剂量岗位",
             "consequence": "可能影响治疗安全与效果。",
             "evidence_refs": [
-              "source-pack-onet-details"
+              "medical-dosimetrists.display.source.0",
+              "medical-dosimetrists.display.source.1"
             ],
             "id": "risk-1",
             "mitigation": "按独立核验与质量保证流程复核。",
@@ -9859,7 +9857,8 @@
             "affected_roles": "影像与勾画岗位",
             "consequence": "可能造成照射范围偏差。",
             "evidence_refs": [
-              "source-pack-onet-details"
+              "medical-dosimetrists.display.source.0",
+              "medical-dosimetrists.display.source.1"
             ],
             "id": "risk-2",
             "mitigation": "按影像与团队复核勾画。",
@@ -9875,7 +9874,8 @@
             "affected_roles": "质量保证岗位",
             "consequence": "可能造成系统性误差。",
             "evidence_refs": [
-              "source-pack-onet-details"
+              "medical-dosimetrists.display.source.0",
+              "medical-dosimetrists.display.source.1"
             ],
             "id": "risk-3",
             "mitigation": "按规程执行校准与记录。",
@@ -9891,7 +9891,8 @@
             "affected_roles": "计划交付岗位",
             "consequence": "可能放大差错。",
             "evidence_refs": [
-              "source-pack-onet-custom"
+              "medical-dosimetrists.display.source.0",
+              "medical-dosimetrists.display.source.1"
             ],
             "id": "risk-4",
             "mitigation": "按流程保留核验留痕并升级。",
@@ -9904,14 +9905,15 @@
             }
           },
           {
-            "affected_roles": "计划批准岗位",
+            "affected_roles": "计划、核验、质保与交付岗位",
             "consequence": "可能改变医疗与法律责任。",
             "evidence_refs": [
-              "source-pack-onet-summary"
+              "medical-dosimetrists.display.source.0",
+              "medical-dosimetrists.display.source.1"
             ],
             "id": "risk-5",
-            "mitigation": "按授权链交有权限者确认。",
-            "scenario": "在授权范围外批准计划或作出临床结论。",
+            "mitigation": "隔离相关未决环节，记录事实/影响/问题交有权限者按机构程序确认；不由网页决定暂停全部治疗。",
+            "scenario": "处方、勾画、剂量或系统状态有未决疑问，或要求越权批准。",
             "title": {
               "$item": "medical-dosimetrists.risk.career-risk-cards.5",
               "block": "risk",
@@ -9923,7 +9925,8 @@
             "affected_roles": "放疗与技术岗位",
             "consequence": "可能导致授权与责任错配。",
             "evidence_refs": [
-              "source-pack-onet-summary"
+              "medical-dosimetrists.display.source.0",
+              "medical-dosimetrists.display.source.1"
             ],
             "id": "risk-6",
             "mitigation": "按 O*NET 29-2036.00 的范围区分相邻岗位。",
@@ -9935,7 +9938,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "nbs-wage-method",
+              "$source": "source-pack-onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9943,13 +9946,13 @@
             },
             "id": "medical-dosimetrists.display.source.0",
             "label": {
-              "$source": "nbs-wage-method",
+              "$source": "source-pack-onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-dosimetrists.source-register.published.1"
             },
-            "scope": "中国行业平均工资，非职业工资/权限/AI采用"
+            "scope": "美国任务/情境，非事故率"
           },
           {
             "href": {
@@ -9967,11 +9970,11 @@
               "field": "name",
               "item": "medical-dosimetrists.source-register.published.1"
             },
-            "scope": "美国职责主张本轮核summary，非中国职业映射"
+            "scope": "计划设计、核验、质保任务，不授岗位权限"
           },
           {
             "href": {
-              "$source": "onet-industry",
+              "$source": "mdcb-handbook",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9979,17 +9982,17 @@
             },
             "id": "medical-dosimetrists.display.source.2",
             "label": {
-              "$source": "onet-industry",
+              "$source": "mdcb-handbook",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-dosimetrists.source-register.published.1"
             },
-            "scope": "美国74/26就业行业份额，非工资或招聘概率"
+            "scope": "CMD考试资格概览，不是临床批准权"
           },
           {
             "href": {
-              "$source": "onet-trends",
+              "$source": "bls-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9997,13 +10000,13 @@
             },
             "id": "medical-dosimetrists.display.source.3",
             "label": {
-              "$source": "onet-trends",
+              "$source": "bls-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-dosimetrists.source-register.published.1"
             },
-            "scope": "美国2024—2034预测，非工作情境或AI采用"
+            "scope": "美国计划/治疗团队，非中国法律"
           }
         ]
       },
@@ -10104,7 +10107,7 @@
           "china_ref": {
             "$join": [
               {
-                "$source": "source-pack-onet-summary",
+                "$source": "nbs-wage-method",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -10112,7 +10115,7 @@
               },
               "｜",
               {
-                "$source": "source-pack-onet-summary",
+                "$source": "nbs-wage-method",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10145,7 +10148,7 @@
           "sources_note": {
             "$join": [
               {
-                "$source": "source-pack-onet-summary",
+                "$source": "nbs-wage-method",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -10153,7 +10156,7 @@
               },
               "｜",
               {
-                "$source": "source-pack-onet-summary",
+                "$source": "nbs-wage-method",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10352,11 +10355,11 @@
           },
           {
             "指标": "就业 · 规模",
-            "数值": "4,800 人（2024）",
+            "数值": "3,500人（2025）；预计3,700（2035）",
             "说明": {
               "$join": [
                 {
-                  "$source": "onet-trends",
+                  "$source": "bls-ooh",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10364,7 +10367,7 @@
                 },
                 "｜",
                 {
-                  "$source": "onet-trends",
+                  "$source": "bls-ooh",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10376,11 +10379,11 @@
           },
           {
             "指标": "就业 · 增长",
-            "数值": "平均（约 4%）",
+            "数值": "增长5%；净增200（2025—2035）",
             "说明": {
               "$join": [
                 {
-                  "$source": "onet-trends",
+                  "$source": "bls-ooh",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10388,7 +10391,7 @@
                 },
                 "｜",
                 {
-                  "$source": "onet-trends",
+                  "$source": "bls-ooh",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10400,11 +10403,11 @@
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "约 200 个/年",
+            "数值": "200个/年（2025—2035）",
             "说明": {
               "$join": [
                 {
-                  "$source": "onet-trends",
+                  "$source": "bls-ooh",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10412,7 +10415,7 @@
                 },
                 "｜",
                 {
-                  "$source": "onet-trends",
+                  "$source": "bls-ooh",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10425,10 +10428,39 @@
         ],
         "boundary": "美国数据为 O*NET 展示的 Medical Dosimetrists（29-2036.00）本职业口径；分位为统计位置，不等于个人到手收入。",
         "direct_answer": {
-          "$item": "medical-dosimetrists.us-salary.career-snapshot-secondary-locale.2",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
+          "$join": [
+            {
+              "$item": "medical-dosimetrists.us-salary.career-snapshot-secondary-locale.2",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-dosimetrists.us-salary.career-snapshot-secondary-locale.3",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-dosimetrists.us-salary.career-snapshot-secondary-locale.4",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-dosimetrists.us-salary.career-snapshot-secondary-locale.5",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-dosimetrists.us-salary.career-snapshot-secondary-locale.6",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
         },
         "factor_rows": [
           {
@@ -10444,26 +10476,16 @@
             "factor": "地区"
           }
         ],
-        "factors_heading": {
-          "$item": "medical-dosimetrists.us-salary.career-snapshot-secondary-locale.6",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
-        "growth": "平均（约 4%，2024—2034）",
+        "factors_heading": "资格与岗位差异",
+        "growth": "增长5%（2025—2035）",
         "heading": {
           "$item": "medical-dosimetrists.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_heading": {
-          "$item": "medical-dosimetrists.us-salary.career-snapshot-secondary-locale.5",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
-        "industry_period": "BLS2025年5月本职业；查阅2026-10-03",
+        "industry_heading": "职业×行业工资",
+        "industry_period": "BLS2025本职业细行业工资；O*NET当前89/11份额",
         "industry_rows": [
           {
             "industry": "门诊护理中心",
@@ -10483,16 +10505,11 @@
           {
             "industry": "其他行业",
             "median": "未取得本职业行业值",
-            "note": "证据不足：本轮BLS本职业表仅列上述三行业，不编第四项；O*NET74/26为就业份额。"
+            "note": "BLS本职业表仅列三个细行业，第四项未取得；当前O*NET89/11是就业份额，不代填工资。"
           }
         ],
         "industry_value_label": "行业年薪中位数",
-        "interpretation_heading": {
-          "$item": "medical-dosimetrists.us-salary.career-snapshot-secondary-locale.4",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "interpretation_heading": "统计位置与使用限制",
         "interpretation_rows": [
           {
             "answer": "不是，分位为统计位置。",
@@ -10503,7 +10520,7 @@
             "question": "这是否覆盖精确职业？"
           },
           {
-            "answer": "工资为2025；就业预测分别列O*NET2024—2034与BLS2025—2035。",
+            "answer": "2025全国工资；2025—2035就业预测。",
             "question": "时期是什么？"
           },
           {
@@ -10513,19 +10530,14 @@
         ],
         "median": "147,470 美元/年",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "O*NET2024—2034；另列BLS2025—2035",
+        "outlook_period": "2025—2035",
         "wage_column_labels": [
           "分位",
           "年度参考",
           "时薪参考",
           "解释"
         ],
-        "wage_heading": {
-          "$item": "medical-dosimetrists.us-salary.career-snapshot-secondary-locale.3",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "wage_heading": "全国工资分位",
         "wage_tiers": [
           {
             "equivalent": "约 53.69 美元/小时",
@@ -10651,10 +10663,10 @@
         },
         "outlook_evidence": [
           {
-            "geography": "来源覆盖范围",
-            "horizon": "分别列2024—2034及2025—2035",
+            "geography": "美国全国",
+            "horizon": "2025—2035",
             "interpretation": "就业规模、变化与职位空缺必须分别解释。",
-            "limitation": "本职业两期预测，非个人保证；不以取整人数重算官方比例。",
+            "limitation": "本职业统计预测，不是录用保证；不以取整人数重算官方比例。",
             "metric": "就业规模与变化",
             "occupation_scope": "展示口径：Medical Dosimetrists（O*NET 29-2036.00）",
             "value": {
@@ -10665,16 +10677,16 @@
             }
           },
           {
-            "geography": "来源覆盖范围",
-            "horizon": "2024—2034",
-            "interpretation": "为 2024—2034 年十年平均，含增长与替换需求，不等于在招岗位数。",
+            "geography": "美国全国",
+            "horizon": "2025—2035",
+            "interpretation": "十年年均含增长与替换，非当前在招或净增。",
             "limitation": "不能作为个人录用概率。",
             "metric": "职位空缺（年均）",
             "occupation_scope": "展示口径：29-2036.00",
-            "value": "约 200 个/年"
+            "value": "200个/年（2025—2035）"
           },
           {
-            "geography": "来源覆盖范围",
+            "geography": "美国全国",
             "horizon": "2025",
             "interpretation": "为 BLS 2025 年工资数据中位数，不代表起薪或到手收入。",
             "limitation": "分位为统计位置。",
@@ -10723,7 +10735,7 @@
           },
           {
             "href": {
-              "$source": "onet-industry",
+              "$source": "aapm-qmp",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10731,17 +10743,17 @@
             },
             "id": "medical-dosimetrists.display.source.2",
             "label": {
-              "$source": "onet-industry",
+              "$source": "aapm-qmp",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-dosimetrists.source-register.published.1"
             },
-            "scope": "美国74/26就业行业份额，非工资或招聘概率"
+            "scope": "现行PS7-A：目标QMP相关硕士/博士、子领域认证及继续教育；非剂量师title等价。"
           },
           {
             "href": {
-              "$source": "onet-trends",
+              "$source": "bls-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10749,13 +10761,13 @@
             },
             "id": "medical-dosimetrists.display.source.3",
             "label": {
-              "$source": "onet-trends",
+              "$source": "bls-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-dosimetrists.source-register.published.1"
             },
-            "scope": "美国2024—2034预测，非工作情境或AI采用"
+            "scope": "当前2025—2035本职业3500至3700/5%/净增200/年均200。"
           }
         ],
         "transitions": [
@@ -10847,8 +10859,8 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "cta_label": "前往职业兴趣试验，设计观察",
+            "evidence_level": "编辑自查；非本职业效度证据",
             "id": "riasec",
             "label": "RIASEC",
             "question": "ICR 兴趣代码对应哪些可观察行为？",
@@ -10866,8 +10878,8 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "cta_label": "前往职业兴趣试验，设计观察",
+            "evidence_level": "编辑自查；非本职业效度证据",
             "id": "big-five",
             "label": "大五人格",
             "question": "注重精确与核验在哪些任务上体现？",
@@ -10885,8 +10897,8 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "cta_label": "前往职业兴趣试验，设计观察",
+            "evidence_level": "编辑自查；非本职业效度证据",
             "id": "mbti",
             "label": "MBTI",
             "question": "人格标签能否判断剂量岗位适配？",
@@ -10899,8 +10911,8 @@
           {
             "answer": "如实保留待定与确认对象，不推九型与临床表现关系。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "cta_label": "前往职业兴趣试验，设计观察",
+            "evidence_level": "编辑自查；非本职业效度证据",
             "id": "enneagram",
             "label": "九型人格",
             "question": "会为T3补写批准吗？",
@@ -10913,8 +10925,8 @@
           {
             "answer": "T2仍版本不匹配；重核三条件，不是IQ常模或剂量能力测试。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "cta_label": "前往职业兴趣试验，设计观察",
+            "evidence_level": "编辑自查；非本职业效度证据",
             "id": "iq",
             "label": "认知能力",
             "question": "总分600就一定符合题内条件吗？",
@@ -10927,8 +10939,8 @@
           {
             "answer": "指出V3/V4差异并交确认者，保留原记录；一次回应不推EQ分数。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "cta_label": "前往职业兴趣试验，设计观察",
+            "evidence_level": "编辑自查；非本职业效度证据",
             "id": "eq",
             "label": "情绪能力",
             "question": "同伴催流转T2时怎样说明？",
@@ -11057,88 +11069,20 @@
         "source_links": [
           {
             "href": {
-              "$source": "aamd-standards",
+              "$source": "source-pack-onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "medical-dosimetrists.source-register.published.1"
             },
             "label": {
-              "$source": "aamd-standards",
+              "$source": "source-pack-onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-dosimetrists.source-register.published.1"
             },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "aapm-mppg11",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "label": {
-              "$source": "aapm-mppg11",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "aapm-tg275",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "label": {
-              "$source": "aapm-tg275",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "mdcb-handbook",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "label": {
-              "$source": "mdcb-handbook",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "nbs-wage-method",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "label": {
-              "$source": "nbs-wage-method",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
+            "usage": "ICR/任务，非人格职业效度"
           },
           {
             "href": {
@@ -11155,211 +11099,41 @@
               "field": "name",
               "item": "medical-dosimetrists.source-register.published.1"
             },
-            "usage": "来源范围与限制"
+            "usage": "计划/计算/核验任务"
           },
           {
             "href": {
-              "$source": "onet-industry",
+              "$source": "mdcb-handbook",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "medical-dosimetrists.source-register.published.1"
             },
             "label": {
-              "$source": "onet-industry",
+              "$source": "mdcb-handbook",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-dosimetrists.source-register.published.1"
             },
-            "usage": "来源范围与限制"
+            "usage": "CMD考试资格概览，非批准权"
           },
           {
             "href": {
-              "$source": "onet-trends",
+              "$source": "bls-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "medical-dosimetrists.source-register.published.1"
             },
             "label": {
-              "$source": "onet-trends",
+              "$source": "bls-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-dosimetrists.source-register.published.1"
             },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-updates",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-updates",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-industry",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-industry",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localcert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localcert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localtraining",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localtraining",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localwages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localwages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-dosimetrists.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
+            "usage": "美国本职业教育与受监督训练"
           }
         ]
       },
@@ -11440,7 +11214,7 @@
             "item": "medical-dosimetrists.source-register.published.1"
           }
         },
-        "note": "本轮核O*NET摘要19任务、ICR、准备与情境，行业74/26、旧期预测和2025软件需求；软件名称保留Eclipse IDE，不推某TPS身份或GenAI采用。BLS核三个行业工资、入行及2025—2035预测；O*NET完整工资页失败，25/75沿本人冻结报告，10/中位/90本轮另核。AAMD为2024-11职业概览；AAPM11.a/TG275仅官方摘要，非完整指南。MDCB为考试资格概览，认证页无条目不等无认证；267培训目录混放射治疗课程，不全为认可剂量学项目。中国行业工资不代职业工资。目标定义与现行QMP政策分开，职业名称不授资格；纸面版本/分值题无临床剂量含义。"
+        "note": "19任务/ICR/九组情境、40/35/15新入职教育及2025全国五档年薪/小时当前核实；完整工资读取缺口消除，非共享同源记录更新，共享旧失败记录保持。BLS三细行业工资核实保留，行业份额更新89/11；就业统一2025—2035为3500至3700/5%/净增200/年均200，不重算取整比例。招聘Eclipse IDE17/Epic6/MEDITECH不可用原名保留，非GenAI/TPS产品确认。MDCB当前资格概览核实；认证目录无条目不等无CMD，267培训混放射治疗课程，非全为认可剂量学项目。AAPM PS7-A当前有效，QMP名称不授资格。AAMD职业概览重读超时，旧共享内容按历史登记保留；AAPM11.a/TG275未重读全文，具体中国法规及GenAI结果缺口。原T1/T2/T3题保持。"
       },
       "work_context_block": {
         "$item": "medical-dosimetrists.profile.work-context-block.6",
@@ -11574,7 +11348,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "治疗计划与剂量计算",
@@ -11625,7 +11399,7 @@
       "text": "医学剂量师：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "5ee4cc7f773c4400af6428cbbf94edc206c510c4048d48b09960bc426112dcf5",
+  "source_content_sha256": "6f5594aad807e5e86d0606f6005ad22577af9f9bb2efdfbd725debeeef6a60fd",
   "subject": {
     "canonical_slug": "medical-dosimetrists",
     "name": "医学剂量师",

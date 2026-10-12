@@ -8,6 +8,24 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:g04-employment-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:g04-growth-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:g04-industry-amusement-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:g04-industry-education-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:g04-industry-theater-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:g04-openings-2025": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -555,7 +573,7 @@
         "status": "mapped"
       },
       "item:actors.display.career_path_block.locale.summary": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.career_path_block.source.bls": {
         "status": "mapped"
@@ -759,7 +777,7 @@
         "status": "mapped"
       },
       "item:actors.display.career_quick_answers_block.comparison.answer": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.career_quick_answers_block.comparison.boundary.label": {
         "status": "mapped"
@@ -1005,7 +1023,7 @@
         "status": "mapped"
       },
       "item:actors.display.career_snapshot_primary_locale.quote-limits": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.career_snapshot_primary_locale.scenario.background": {
         "status": "mapped"
@@ -1020,7 +1038,7 @@
         "status": "mapped"
       },
       "item:actors.display.career_snapshot_secondary_locale.boundary.detail": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.career_snapshot_secondary_locale.factor.paid-work": {
         "status": "mapped"
@@ -1077,19 +1095,19 @@
         "status": "mapped"
       },
       "item:actors.display.fermat_decision_card.summary": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.fermat_decision_card.title": {
         "status": "mapped"
       },
       "item:actors.display.fit_decision_checklist.boundary-detail": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.fit_decision_checklist.how-detail": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.fit_decision_checklist.suit-detail": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.market_signal_card.heading": {
         "status": "mapped"
@@ -1329,7 +1347,7 @@
         "status": "mapped"
       },
       "item:actors.display.personality_fit_block.direct-answer": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.personality_fit_block.directions.agent.direction": {
         "status": "mapped"
@@ -1500,7 +1518,7 @@
         "status": "mapped"
       },
       "item:actors.display.source_card.note": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.source_card.source": {
         "status": "mapped"
@@ -1557,10 +1575,10 @@
         "status": "mapped"
       },
       "item:actors.fit.personality-fit-block.8": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.market-signals.market-signal-card.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.market-signals.market-signal-card.2": {
         "status": "mapped"
@@ -1572,7 +1590,7 @@
         "status": "mapped"
       },
       "item:actors.market-signals.market-signal-card.5": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.navigation.links.1": {
         "status": "pending_mapping"
@@ -1581,10 +1599,10 @@
         "status": "mapped"
       },
       "item:actors.path.career-path-block.2": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.career-path-block.3": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.credential-boundary.1": {
         "status": "mapped"
@@ -1617,7 +1635,7 @@
         "status": "mapped"
       },
       "item:actors.profile.work-context-block.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.profile.work-context-block.2": {
         "status": "mapped"
@@ -1641,16 +1659,16 @@
         "status": "mapped"
       },
       "item:actors.quick-decision.fit-decision-checklist.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.quick-decision.fit-decision-checklist.2": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.quick-decision.fit-decision-checklist.3": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.quick-decision.fit-decision-checklist.4": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.risk.career-risk-cards.1": {
         "status": "mapped"
@@ -1671,7 +1689,7 @@
         "status": "pending_mapping"
       },
       "item:actors.sources.boundary.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.sources.faq.1": {
         "status": "mapped"
@@ -1686,7 +1704,7 @@
         "status": "mapped"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.4": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.5": {
         "status": "mapped"
@@ -6815,16 +6833,8 @@
         "status": "mapped"
       },
       "career_path_block.locale_requirements.summary": {
-        "ref": {
-          "path": [
-            "components",
-            "career_path_block",
-            "locale_requirements",
-            "summary"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_path_block.schema_version": {
         "ref": {
@@ -7934,17 +7944,8 @@
         "status": "mapped"
       },
       "career_quick_answers_block.items.02.answer": {
-        "ref": {
-          "path": [
-            "components",
-            "career_quick_answers_block",
-            "items",
-            1,
-            "answer"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_quick_answers_block.items.02.question": {
         "ref": {
@@ -11424,15 +11425,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.boundary": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_secondary_locale",
-            "boundary"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.direct_answer": {
         "ref": {
@@ -14351,15 +14345,8 @@
         "status": "mapped"
       },
       "fermat_decision_card.summary": {
-        "ref": {
-          "path": [
-            "components",
-            "fermat_decision_card",
-            "summary"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "fermat_decision_card.title": {
         "ref": {
@@ -14374,37 +14361,16 @@
         "status": "mapped"
       },
       "fit_decision_checklist.boundary": {
-        "ref": {
-          "path": [
-            "components",
-            "fit_decision_checklist",
-            "boundary"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "fit_decision_checklist.how": {
-        "ref": {
-          "path": [
-            "components",
-            "fit_decision_checklist",
-            "how"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "fit_decision_checklist.suit": {
-        "ref": {
-          "path": [
-            "components",
-            "fit_decision_checklist",
-            "suit"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "hero.ai.derivation": {
         "ref": null,
@@ -16006,15 +15972,8 @@
         "status": "mapped"
       },
       "market_signal_card.direct_answer": {
-        "ref": {
-          "path": [
-            "components",
-            "market_signal_card",
-            "direct_answer"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "market_signal_card.heading": {
         "ref": {
@@ -17992,15 +17951,8 @@
         "status": "mapped"
       },
       "personality_fit_block.direct_answer": {
-        "ref": {
-          "path": [
-            "components",
-            "personality_fit_block",
-            "direct_answer"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "personality_fit_block.directions.01.direction": {
         "ref": {
@@ -19474,15 +19426,8 @@
         "status": "mapped"
       },
       "source_card.note": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "note"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.href": {
         "ref": {
@@ -22711,7 +22656,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "按档期与场次推进：先对接需求、研读资料并清点库存，确认可用物件与缺口，"
+              "编辑组织线索：对接剧本设计、盘点缺件，准备物件及换装清单，再按实际场次协作；次序按项目，不是统一档期程序。"
             ]
           },
           "id": "actors.profile.work-context-block.4",
@@ -22739,7 +22684,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "协作与汇报关系｜与服装设计、制作、演员、舞监与场务按流程协作，"
+              "与设计制作演员等协商，分配物件记状态、帮助换装，班组聘训排班和预算为Supplemental；汇报和审批按实际机构权限。"
             ]
           },
           "id": "actors.profile.work-context-block.6",
@@ -22781,7 +22726,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "服装服务员的工作可以分成三类相连但独立的工作面。第一类是需求对接与资料整理：与服装设计、制作与制作组对接设计细节，研读剧本或制作资料确定故事地点与年代、人物数量与所需服装，并查阅书籍与图片等历史服饰资料核对形制。第二类是库存、采购与养护：清点并保管服装、假发与化妆用品库存，采购、租赁或领用所需物品，养护非服装类物件（如旗帜、桌裙与帷幔），并处理清洗与整烫。第三类是试装、调度与现场支持：安排演员试装、按设计图制作纸样、在排练与演出中调度服装班、推荐并跟进供应商，以及分配更衣柜并维护更衣室、假发室与服装库房与洗衣区。三类工作面在同一档期内交替推进，但依据、责任与安全要求不同；剧场、影视、教育机构与活动租赁场景的侧重也不同。"
+              "编辑按需求、实物及现场归纳，三面不等所有岗位高频全部。美国O*NET23任务：15Core含换装检查工作单、帮助演员穿衣或分配换装员、按使用顺序排服装、设计制作或送裁缝大修修改、检查合身及修改记录、分配物件记状态、舞台灯光下查效果、清洗整烫小修、协作设计、库存与指定人员访问、采购租用、历史服饰研究、完工归还存储、研读剧本、盘点；6Supplemental为班组调度、修改工聘训排班督导、预算项目、储物更衣洗衣区、供应商、非服装物件；2New为按设计图纸样和安排试装。类别非每日频率，不排除本岗创作及修补。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.answer",
@@ -22851,7 +22796,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "清点库存与状态 → 采购租赁或领用 → 登记入库与编号 → 养护与清洗整烫 → 处理非服装物件 → 更新借还账目"
+              "清点状态 → 按授权采购租领 → 清洗整烫小修与分配记状态 → 完工归还与存储；非服装物件养护Supplemental"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.stage.steps",
@@ -22893,7 +22838,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "安排演员试装 → 按设计图制作纸样 → 记录尺寸与修改 → 排练演出中调度服装班 → 跟进供应商 → 维护更衣与库房区域"
+              "换装帮助、排序、合身和灯光效果检查为Core；服装班调度Supplemental；安排试装和纸样New，具体组合及权限按岗位。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.shared.value",
@@ -22921,7 +22866,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本表把服装服务员与相邻的舞台化妆师、布景与展陈设计师、时装设计师、裁缝与定制缝纫工、引座与检票岗位按核心目的、主要对象与依据、核心过程、主要产出、责任主体、协作与督导、结论边界七项逐一对照：相邻岗位都在演艺与活动场景中工作，但对象、是否直接创作、是否承担库存与借还责任不随岗位相邻而转移；比较时要以实际职责与所在流程逐项核对。"
+              "比较物件、创作与执行组合、库存及现场责任；CostumeAttendants Core含设计制作服装，不能把本岗概括为只有保管、直接创作全部属相邻。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.answer",
@@ -22963,7 +22908,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的核心目的：舞台化妆师设计与施加化妆造型；布景与展陈设计师设计布景与展陈；时装设计师设计服装款式；裁缝与定制缝纫工按尺寸制作与修改服装；引座与检票岗位引导观众与查验票证。"
+              "相邻化妆、布景、时装和裁缝以目标造型/设计/缝制为重点；本岗也可能设计制作或修补服装，不能用是否创作一刀划分。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.purpose.secondary",
@@ -23117,7 +23062,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "服装服务员对服装与用品的可用与安全、库存与账目的准确、借还与归位的可追溯、以及现场调度的及时负责；设计定案、预算审批与供应商合同不由其单独决定。"
+              "本岗可能设计制作、库存与换装；具体预算合同及设计批准由真实机构权限确定，不能因分类自动赋予或排除设计决策。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.responsibility.primary",
@@ -23215,7 +23160,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的准备层级与任职条件不适用于本职业，须按各职业官方资料与所在单位规定逐项核对。"
+              "本岗Core已有设计制作小修及合身检查，与设计裁缝有交叉；区分主对象、实际分工及责任，不因不同分类排除全部创作。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.boundary.secondary",
@@ -23257,7 +23202,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "要按设计与制作需求、剧本与制作资料确定年代、地点与人物所需服装，并查阅历史服饰资料核对形制；凭印象处理会造成返工与穿帮。"
+              "编辑风险分析：要按设计与制作需求、剧本与制作资料确定年代、地点与人物所需服装，并查阅历史服饰资料核对形制；凭印象处理可能造成返工与穿帮。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.01.question",
@@ -23271,7 +23216,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "要按编号清点服装、假发与化妆用品的类型与状态并更新台账；账实不符或状态不明，会让现场临时找不到或错用物件。"
+              "编辑风险分析：要按编号清点服装、假发与化妆用品的类型与状态并更新台账；账实不符或状态不明，可能使现场临时找不到或错用物件。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.02.question",
@@ -23285,7 +23230,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "试装与修改要核对尺寸、活动安全与材质；忽略活动、过敏或卫生要求，会影响演员安全与演出质量。"
+              "编辑风险分析：试装与修改要核对尺寸、活动安全与材质；忽略活动、过敏或卫生要求，可能影响演员安全与演出质量。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.03.question",
@@ -23299,7 +23244,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "借出、租赁与归还都要登记物件、去向、经手人与时间，演出结束按清单归位；缺失登记会让物件去向不明并造成损失。"
+              "编辑风险分析：借出、租赁与归还都要登记物件、去向、经手人与时间，演出结束按清单归位；缺失登记可能使物件去向不明并增加损失风险。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.04.question",
@@ -23327,7 +23272,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "排练与演出中要按场次与换装时间把正确物件送到正确位置，并准备好备用件；调度不及时会直接影响演出与拍摄进度。"
+              "编辑风险分析：排练与演出中要按场次与换装时间把正确物件送到正确位置，并准备好备用件；调度不及时可能影响演出与拍摄进度。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.05.question",
@@ -23355,12 +23300,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "遇到库存缺失、物件损坏、多组同时需求或超出授权采购的情形，要停止自行处置，向主管或制作部门核对后升级，把已处理与待确认事项写进记录。"
+              "库存缺件损坏或需求冲突按真实主管流程核；一般情况不统一停止全部处置。隐患及时报告，直接危及人身紧急情形依法停止或撤离；恢复与具体卫生处理按真实程序。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.06.question",
           "source_refs": [
-            "onet"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -23397,7 +23342,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "采购租赁与养护｜购置并养护物件｜采购、租赁或领用服装与耗材，养护非服装类物件（如旗帜、桌裙与帷幔），并处理清洗、整烫与简单修补。"
+              "采购与养护｜采购租领、清洗整烫和小修Core；设计制作或送裁缝大修修改也Core，非服装物件养护Supplemental。"
             ]
           },
           "id": "actors.display.responsibilities_block.03",
@@ -23411,7 +23356,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "试装与纸样｜安排试装并制作纸样｜安排演员试装、记录尺寸与修改，按设计图制作纸样并配合修改人员完成调整。"
+              "合身与效果｜检查演员合身记修改、舞台灯光下核效果为Core；制作纸样和安排试装为New，类别不代表每日频率。"
             ]
           },
           "id": "actors.display.responsibilities_block.04",
@@ -23425,7 +23370,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "现场调度｜调度服装班与换装｜在排练与演出中调度服装班、按场次与换装时间准备物件与备用件，并处理现场的临时需求。"
+              "换装与班组｜按使用顺序排序、帮助演员穿衣或分配换装员及编检查工作单为Core；服装班督导Supplemental。"
             ]
           },
           "id": "actors.display.responsibilities_block.05",
@@ -23467,7 +23412,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "服装服务员通常在环境可控的室内作业，以手工整理、养护与调度实物为主，需要长时间站立、走动与搬运，并在排练、演出与拍摄档期集中投入；"
+              "本岗涉及实物整理、养护、调度及设计制作；O*NET用手92%几乎一直，站立42%约半、21%超半、11%几乎一直、27%少半，走动61%少半、20%约半。实际搬运强度、场所和档期向目标岗位核，不推所有岗位长站或档期集中。"
             ]
           },
           "id": "actors.display.work_context_block.summary",
@@ -23481,7 +23426,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作场所｜O*NET 2026 年对服装服务员（39-3092.00）的调查：90% 表示每天在环境可控的室内作业，42% 表示约一半时间站立、35% 表示少于一半时间坐着，部分场景需在后台、化妆间与库房之间往返。"
+              "美国当前90%每日可控室内、站立42%约半/21%超半/11%几乎一直、坐35%少半/34%约半/26%超半；不能全部称长时间站立。页面2026更新非统一2026调查。"
             ]
           },
           "id": "actors.display.work_context_block.locations",
@@ -23523,7 +23468,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "节奏与强度｜O*NET 2026 年对服装服务员（39-3092.00）的调查：46% 表示每天面对时间压力，55% 认为准确与严谨至少「非常重要」，35% 认为重复同一任务至少「非常重要」，44% 表示典型工作周为 40 小时；排练与演出档期前后工作更集中。"
+              "时限46%每日35%每周但非每日；准确30%极重要55%很重要，重复18%极重要35%很重要，周44%40小时40%超40/16%少40；不把55或35当至少合计。"
             ]
           },
           "id": "actors.display.work_context_block.schedule",
@@ -23537,7 +23482,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "并向主管或制作部门汇报库存、试装与现场需求；O*NET 2026 年对服装服务员（39-3092.00）的调查：90% 认为在团队中共同工作至少「非常重要」，63% 表示与他人持续接触，79% 每天有面对面讨论，42% 认为协调或带领他人至少「非常重要」。"
+              "团队90%极重要非已取得至少等级合计，协调31%极重要42%很重要；持续接触63%、面对面79%每日。职位汇报责任按实际单位。"
             ]
           },
           "id": "actors.display.work_context_block.collaboration",
@@ -23551,7 +23496,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "复核与责任链条｜O*NET 2026 年对服装服务员（39-3092.00）的调查：31% 表示对他人工作结果承担高责任，54% 表示拥有一定决策自由、48% 表示在确定任务与优先级上有一定自由；库存、借还与现场调度按单位制度留痕，超授权采购与物件损坏须按程序升级并存档。"
+              "对他人结果27%很高/31%高/30%中责任；决定自由35%很多54%一些，任务优先35%很多48%一些13%有限；调查非机构权限授予。"
             ]
           },
           "id": "actors.display.work_context_block.review",
@@ -23565,12 +23510,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "质量与职业要求｜O*NET 2026 年对服装服务员（39-3092.00）的调查：92% 表示持续或几乎持续地用手操作物件，41% 表示持续或几乎持续地做重复动作，51% 表示与他人的身体距离接近触碰，37% 表示每天接触污染物，35% 表示一年以上才会遇到干扰性噪声；涉及清洗、化学品与卫生要求时以单位流程与安全规定为准，本页不构成作业授权。"
+              "用手92%几乎一直，重复41%几乎一直12%超半，接近触碰51%、污染物37%每日，噪声35%每年但非每月，不是一年以上才遇到。自动化22%中70%无，非AI采用。美国依法适用OSHA1910.1200危险化学品工作场景，雇主保留各危险化学品SDS且班次可即取、标识及初次/新危险训练，防护与应急由实际方案和具体产品确定；不是中国法律或自动给所有洗涤用品同一危险等级。清洗产品及材质说明、实际场所风险评估和主管流程未取得，不给混用配比或消毒效果承诺。"
             ]
           },
           "id": "actors.display.work_context_block.quality",
           "source_refs": [
-            "onet"
+            "onet",
+            "g04-osha-chem"
           ],
           "type": "prose"
         },
@@ -23593,7 +23539,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "服装服务员的任务、详细工作活动、工作情境百分比与兴趣代码 ACR"
+              "美国O*NET23任务：15Core含换装检查工作单、帮助演员穿衣或分配换装员、按使用顺序排服装、设计制作或送裁缝大修修改、检查合身及修改记录、分配物件记状态、舞台灯光下查效果、清洗整烫小修、协作设计、库存与指定人员访问、采购租用、历史服饰研究、完工归还存储、研读剧本、盘点；6Supplemental为班组调度、修改工聘训排班督导、预算项目、储物更衣洗衣区、供应商、非服装物件；2New为按设计图纸样和安排试装。类别非每日频率，不排除本岗创作及修补。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.onet",
@@ -23607,7 +23553,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2024 年就业约 6,700 人、预测标签 Faster than average（5% 至 6%）与 Job Zone 1–2（SVP 低于 6.0）"
+              "本岗39-3092：2025就业6,600、2035预测7,000、增长6%，2025—2035年均空缺1,700个含增长与替换，非累计或净增。两端相减约400为四舍五入就业差，未取未舍入净变；不按标签5–6%代实际6%，预测不是录用率或AI替代时点。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
@@ -23621,7 +23567,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2024 年行业分布（艺术娱乐与休闲 54%、信息 21%、教育服务 11%、其他 14%）与技术工具"
+              "美国JobZone1–2/SVP<6，层级一般高中及几天至一年训练是跨职业概述，不是本岗每人时长。实际教育响应32%高中、30%学士、15%部分大学无学位，其他未显示，不能称本岗多数高中；相关注册学徒WardrobeSupervisor示例非当前在招项目、补贴或中国门槛。美国O*NET2025艺术娱乐休闲59%、信息17%、教育12%；其他行业12%，原行业页列包含住宿餐饮，未给其单独份额，不推自雇比例；份额非行业工资或中国用人分布。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
@@ -23635,12 +23581,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆剧装与服装管理岗位的分类与用工语境，与中国职业级工资缺口"
+              "中国《安全生产法》2021修正第28/29/41/44/45/55/57–59条在适用的生产经营单位要求安全训练合格、风险隐患治理、如实告知危险和应急措施、提供合规劳动防护，员工正确使用并报告隐患；直接危及人身安全紧急情形可停止或撤离。不是服装专属资格、卫生消毒配方或所有情形停止处理的统一程序。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
           "source_refs": [
-            "onet"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -23649,12 +23595,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆行业均值代理与职业级工资缺口"
+              "NBS2025条件匹配背景：文化体育娱乐非私营129,447/私营64,015，教育133,539/63,908元税前年均；按用人法人主营与私营分类匹配，不以后台任务自动定行业。5人及以上城镇法人，不含个体自由职业，含奖金津补贴。非服装服务员职业工资、月到手或剧组日薪；中国职业分布、招聘样本和精确映射未取得。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23663,7 +23609,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "服装服务员在美国对应 O*NET-SOC 39-3092.00（Costume Attendants，O*NET 标注 Bright Outlook）。工作内容包括与服装设计与制作人员对接设计细节，维护并保管服装、假发与化妆用品库存，采购、租赁或领用服装与耗材，研读剧本与历史服饰资料确定形制，安排演员试装并按设计图制作纸样，在排练与演出中调度服装班，推荐并跟进供应商、提供相关预算建议，照管更衣室、假发室、库房与洗衣区并处理清洗与整烫。中国侧，剧装、服装与道具管理岗位分属不同院团、剧组与服务单位，中美两套分类不是一一对应：本页不把美国的准备层级、工资或资格套用到中国大陆，也不把舞台化妆师、布景与展陈设计师、时装设计师、裁缝或引座检票岗位的职责并入本职业。"
+              "美国39-3092 CostumeAttendants，当前BrightOutlook；美国O*NET23任务：15Core含换装检查工作单、帮助演员穿衣或分配换装员、按使用顺序排服装、设计制作或送裁缝大修修改、检查合身及修改记录、分配物件记状态、舞台灯光下查效果、清洗整烫小修、协作设计、库存与指定人员访问、采购租用、历史服饰研究、完工归还存储、研读剧本、盘点；6Supplemental为班组调度、修改工聘训排班督导、预算项目、储物更衣洗衣区、供应商、非服装物件；2New为按设计图纸样和安排试装。类别非每日频率，不排除本岗创作及修补。中国精确职业实体映射本轮未完成，不断言全国没有任何分类。"
             ]
           },
           "id": "actors.display.definition_block.definition",
@@ -24166,7 +24112,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "指机构是否真的把工具放进流程。采用取决于预算、场地与库房条件、卫生与安全要求以及人员培训，通常慢于技术能力本身。"
+              "采用按真实采购流程安全条件与训练核，本轮无采用速度实测，不保证慢于技术能力。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.3",
@@ -24181,7 +24127,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "引入工具时责任不能随系统一起转移；下面是本职业可执行的人工控制步骤。"
+              "以下为编辑控制核对建议，需在真实机构验证，非统一操作或事件处置程序。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.4",
@@ -24256,7 +24202,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "列出雇主招聘中提到的文字处理与库存、版型相关技术关键词。"
+              "2025全美Lightcast4热门软件：Office/Excel各5%、Outlook/Word各2%；本热门表未列库存或版型软件，技术目录和热门统计不同；岗位提及比例非采用率、AI效果或熟练度。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.9",
@@ -24286,7 +24232,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答：目前可核对的是任务层面的变化，而不是岗位替代的时间表。库存与借还系统、条码与标签、服装数据库与电子台账、版型与纸样的数字化工具、清洗与养护设备的自动化可减少登记、查找与部分加工；但实物清点与状态判断、试装与合身确认、现场调度与换装支持、物料养护与安全判断仍依赖人工，并受档期与单位流程约束。技术暴露不等于组织采用，更不等于岗位消失或收入变化。"
+              "编辑待验证工具机会：库存登记检索、换装表提示、数字纸样及养护设备；常规办公、条码或设备自动化不等生成式AI。真实物件状态、演员合身与灯光效果、设计制作、换装协作及化学品风险需核现场。无本岗部署节约量、采用率或工资因果，不称已有任务变化实测。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24361,7 +24307,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "研究不提供本职业单职业分数、采用率或替代日期。"
+              "ILO支持任务暴露方法，本轮未取精确匹配39-3092的分数，不能断言研究完全没有单职业分数；非采用率或替代时点。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.limit",
@@ -24391,7 +24337,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "列出需求对接、库存保管、采购领用、形制研究、试装纸样、现场调度与区域养护等任务及工作情境百分比。"
+              "美国O*NET23任务：15Core含换装检查工作单、帮助演员穿衣或分配换装员、按使用顺序排服装、设计制作或送裁缝大修修改、检查合身及修改记录、分配物件记状态、舞台灯光下查效果、清洗整烫小修、协作设计、库存与指定人员访问、采购租用、历史服饰研究、完工归还存储、研读剧本、盘点；6Supplemental为班组调度、修改工聘训排班督导、预算项目、储物更衣洗衣区、供应商、非服装物件；2New为按设计图纸样和安排试装。类别非每日频率，不排除本岗创作及修补。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
@@ -24421,7 +24367,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势（BLS 2024—2034 年预测）"
+              "O*NET转引BLS2025—2035本岗就业预测"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.object",
@@ -24436,7 +24382,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2024 年就业约 6,700 人，预测标签 Faster than average（5% 至 6%），累计约 1,800 个含增长与替换的空缺。"
+              "本岗39-3092：2025就业6,600、2035预测7,000、增长6%，2025—2035年均空缺1,700个含增长与替换，非累计或净增。两端相减约400为四舍五入就业差，未取未舍入净变；不按标签5–6%代实际6%，预测不是录用率或AI替代时点。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
@@ -24481,7 +24427,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "要求明确 AI 系统的角色、责任、记录与人工监督。"
+              "NIST自愿AI治理框架建议角色责任、记录及人工监督，非中国服装业务强制程序。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.conclusion",
@@ -24526,7 +24472,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 为服装服务员（39-3092.00）列出与设计制作人员对接设计细节、维护并保管服装假发与化妆用品库存、采购租赁或领用、研读剧本与历史服饰资料、安排演员试装并按设计图制作纸样、在排练演出中调度服装班、推荐并跟进供应商与提供预算建议、照管库房与更衣洗衣区域等任务。"
+              "美国O*NET23任务：15Core含换装检查工作单、帮助演员穿衣或分配换装员、按使用顺序排服装、设计制作或送裁缝大修修改、检查合身及修改记录、分配物件记状态、舞台灯光下查效果、清洗整烫小修、协作设计、库存与指定人员访问、采购租用、历史服饰研究、完工归还存储、研读剧本、盘点；6Supplemental为班组调度、修改工聘训排班督导、预算项目、储物更衣洗衣区、供应商、非服装物件；2New为按设计图纸样和安排试装。类别非每日频率，不排除本岗创作及修补。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.1.answer",
@@ -24556,7 +24502,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 技术档案列出雇主在该岗位招聘中提到的文字处理与库存、版型相关技术关键词；这属于招聘市场信号，不代表使用率或熟练度。"
+              "2025全美Lightcast4热门软件：Office/Excel各5%、Outlook/Word各2%；本热门表未列库存或版型软件，技术目录和热门统计不同；岗位提及比例非采用率、AI效果或熟练度。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
@@ -24631,7 +24577,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）显示该细分 2024 年约 6,700 人，预测标签为 Faster than average（5% 至 6%），累计约 1,800 个含增长与替换的空缺；该预测不含技术替代时点。"
+              "本岗39-3092：2025就业6,600、2035预测7,000、增长6%，2025—2035年均空缺1,700个含增长与替换，非累计或净增。两端相减约400为四舍五入就业差，未取未舍入净变；不按标签5–6%代实际6%，预测不是录用率或AI替代时点。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
@@ -24751,7 +24697,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供本职业岗位雇主提到的技术关键词，属招聘市场信号"
+              "2025全美Lightcast4热门软件：Office/Excel各5%、Outlook/Word各2%；本热门表未列库存或版型软件，技术目录和热门统计不同；岗位提及比例非采用率、AI效果或熟练度。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.scope",
@@ -24781,7 +24727,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按任务度量生成式 AI 与职业任务的接近程度，不提供单职业分数或自动化率"
+              "ILO暴露度量方法，本轮本岗分数未取得；非部署和工资因果。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
@@ -24871,7 +24817,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供该细分 2024—2034 年就业预测与职位空缺（O*NET 就业趋势页，基于 BLS 预测）"
+              "本岗39-3092：2025就业6,600、2035预测7,000、增长6%，2025—2035年均空缺1,700个含增长与替换，非累计或净增。两端相减约400为四舍五入就业差，未取未舍入净变；不按标签5–6%代实际6%，预测不是录用率或AI替代时点。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
@@ -24901,7 +24847,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供 AI 系统风险治理的角色、责任、记录与人工监督要求"
+              "NIST自愿治理建议，不代法定安全要求或机构真实业务流程。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.nist.scope",
@@ -24991,7 +24937,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "需求清单与设计资料可集中管理。"
+              "编辑待验证工具机会：需求清单与设计资料可集中管理。需核实际能力及误差，非岗位部署效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.1.change",
@@ -25051,7 +24997,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "库存系统与条码可自动登记与检索。"
+              "编辑待验证工具机会：库存系统与条码可自动登记与检索。需核实际能力及误差，非岗位部署效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.2.change",
@@ -25111,7 +25057,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "价格与供应商信息可辅助比价。"
+              "编辑待验证工具机会：价格与供应商信息可辅助比价。需核实际能力及误差，非岗位部署效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.change",
@@ -25171,7 +25117,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "图片与资料库可辅助查阅。"
+              "编辑待验证工具机会：图片与资料库可辅助查阅。需核实际能力及误差，非岗位部署效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.change",
@@ -25231,7 +25177,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数字化版型工具可辅助纸样生成。"
+              "编辑待验证工具机会：数字化版型工具可辅助纸样生成。需核实际能力及误差，非岗位部署效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.change",
@@ -25291,7 +25237,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "场次表与换装表可电子化提示。"
+              "编辑待验证工具机会：场次表与换装表可电子化提示。需核实际能力及误差，非岗位部署效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.change",
@@ -25351,7 +25297,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "设备自动化可减少手工工序。"
+              "编辑待验证工具机会：设备自动化可减少手工工序。需核实际能力及误差，非岗位部署效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.7.change",
@@ -25396,7 +25342,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "条码标签、服装数据库与借还系统可自动登记、检索与提示缺件。"
+              "编辑待验证：条码标签、服装数据库与借还系统可自动登记、检索与提示缺件。常规工具不自动是生成式AI，真实部署条件另核。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.1.change",
@@ -25441,7 +25387,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数字化版型与放码工具可辅助纸样生成与修改。"
+              "编辑待验证：数字化版型与放码工具可辅助纸样生成与修改。常规工具不自动是生成式AI，真实部署条件另核。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.2.change",
@@ -25486,7 +25432,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "清洗、整烫与养护设备的自动化可减少手工工序。"
+              "编辑待验证：清洗、整烫与养护设备的自动化可减少手工工序。常规工具不自动是生成式AI，真实部署条件另核。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.3.change",
@@ -25531,7 +25477,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核对物件编号、状态与去向，确认没有被错误合并、错配或漏记；账实不符会直接导致现场找不到物件。"
+              "编辑风险分析：核对物件编号、状态与去向，确认没有被错误合并、错配或漏记；账实不符可能导致现场找不到物件。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.1.description",
@@ -25621,13 +25567,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "发现库存缺失、物件损坏、卫生风险或多组冲突时停止自行处置并按程序升级。"
+              "库存缺件、损坏及需求冲突按真实主管流程核，非所有问题统一停止；危险隐患按适用法及时报告，直接危及人身紧急情形停止或撤离的法定权利另列。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.4.description",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -25681,7 +25626,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "系统记录不会对实物状态承担责任，账实不符会造成现场缺件、错用与损失。"
+              "编辑风险分析：系统记录不会对实物状态承担责任，账实不符可能造成现场缺件、错用与损失。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.1.consequence",
@@ -25726,7 +25671,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只看登记不看状态会漏掉破损、污损与尺寸变化，影响穿着安全与演出质量。"
+              "编辑风险分析：只看登记不看状态可能遗漏破损、污损与尺寸变化，影响穿着安全与演出质量。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.2.consequence",
@@ -25771,7 +25716,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "登记不全或演出后不归位会让物件去向不明，长期造成缺件与重复采购。"
+              "编辑风险分析：登记不全或演出后不归位可能使物件去向不明，可能长期造成缺件与重复采购。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.3.consequence",
@@ -25816,7 +25761,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "清洗与养护涉及化学品与污染物，处理不当会造成健康与卫生风险。"
+              "编辑风险分析：清洗与养护涉及化学品与污染物，处理不当可能造成健康与卫生风险。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.4.consequence",
@@ -25831,13 +25776,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按单位流程使用与存放化学品，做好通风与防护，异常立即上报。"
+              "美国依法适用OSHA1910.1200危险化学品工作场景，雇主保留各危险化学品SDS且班次可即取、标识及初次/新危险训练，防护与应急由实际方案和具体产品确定；不是中国法律或自动给所有洗涤用品同一危险等级。清洗产品及材质说明、实际场所风险评估和主管流程未取得，不给混用配比或消毒效果承诺。中国《安全生产法》2021修正第28/29/41/44/45/55/57–59条在适用的生产经营单位要求安全训练合格、风险隐患治理、如实告知危险和应急措施、提供合规劳动防护，员工正确使用并报告隐患；直接危及人身安全紧急情形可停止或撤离。不是服装专属资格、卫生消毒配方或所有情形停止处理的统一程序。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.4.control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "cn-rule",
+            "g04-osha-chem"
           ],
           "type": "prose"
         },
@@ -25861,7 +25806,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "过度依赖清单而不了解场次与换装节奏，会在关键时刻调不到正确物件。"
+              "编辑风险分析：过度依赖清单而不了解场次与换装节奏，可能在关键时刻调不到正确物件。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.5.consequence",
@@ -26033,7 +25978,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "主要用人场景：影视剧组与制作公司的服装与化妆组、剧院与演出团体的剧装与后台岗位、文化艺术与教育机构的相关岗位，以及演出与活动租赁与服务单位。"
+              "编辑待核场景：院团、剧组和教育机构后台；中国用人分布与用工形式全国比例未取得，不把美国份额作中国主要雇主证据。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
@@ -26047,7 +25992,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "常见场景：以服装与用品保管、清点与借还为主的库房岗位，以试装、修改与养护为主的操作岗位，以及以现场跟组、调度与换装支持为主的执行岗位。"
+              "编辑提供的任务观察方向（未取得中国招聘分布）：以服装与用品保管、清点与借还为主的库房岗位，以试装、修改与养护为主的操作岗位，以及以现场跟组、调度与换装支持为主的执行岗位。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.3",
@@ -26075,12 +26020,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "说明：未取得职业单列数值不等于官方从未发布；本页只登记实际查阅范围与结果，不用行业均值或美国数据代填。"
+              "NBS2025条件匹配背景：文化体育娱乐非私营129,447/私营64,015，教育133,539/63,908元税前年均；按用人法人主营与私营分类匹配，不以后台任务自动定行业。5人及以上城镇法人，不含个体自由职业，含奖金津补贴。非服装服务员职业工资、月到手或剧组日薪；中国职业分布、招聘样本和精确映射未取得。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26103,14 +26048,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "：中国大陆剧装、服装与道具管理岗位分属不同院团、剧组与服务单位，常见项目制、劳务与兼职等用工形式，没有与 O*NET-SOC 39-3092.00 对应的统一职业分类或计酬口径"
+              "本轮精确中美实体映射未完成，项目劳务兼职的普及率未取得，不能推全国无对应分类或统一计酬。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
             "sag-moa"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -26131,7 +26077,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：美国口径下该职业准备层级为 Job Zone 1–2（SVP 低于 6.0），通常要求高中文凭或同等学历，在职训练从几天到一年；O*NET 列出一个相关注册学徒示例职称（服装主管）。美国口径与中国大陆剧装岗位的学历与用工要求不可直接等同，具体以目标单位规定为准。"
+              "美国JobZone1–2/SVP<6，层级一般高中及几天至一年训练是跨职业概述，不是本岗每人时长。实际教育响应32%高中、30%学士、15%部分大学无学位，其他未显示，不能称本岗多数高中；相关注册学徒WardrobeSupervisor示例非当前在招项目、补贴或中国门槛。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -26145,7 +26091,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：中国大陆剧装与服装岗位常以项目制、劳务或兼职形式用工，部分院团与院校有相对稳定的岗位；学历、技能与用工形式是不同层级的条件，不能互相替代。"
+              "中国目标单位岗位公告未取样，项目制与正式岗位比例未取得，不按学历分配试装或保管。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -26159,12 +26105,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：演出与拍摄中的服装、假发与化妆用品处理受卫生与安全要求约束，岗位职责与可授权范围须按具体单位与现行规定核对；本页不构成用工授权或录用条件。"
+              "中国《安全生产法》2021修正第28/29/41/44/45/55/57–59条在适用的生产经营单位要求安全训练合格、风险隐患治理、如实告知危险和应急措施、提供合规劳动防护，员工正确使用并报告隐患；直接危及人身安全紧急情形可停止或撤离。不是服装专属资格、卫生消毒配方或所有情形停止处理的统一程序。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "sag-moa"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26173,7 +26119,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：服装与后台方向的组长或主管方向通常要求熟悉档期流程并具备库存与带训能力，任职条件由单位规定；本页不构成资格认定。"
+              "编辑管理准备线索：核实际库存、带训和预算职责；本轮无全国主管学历经验分布，不保证晋升。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -26187,7 +26133,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "常见场景：服装服务岗位多按排练、演出与拍摄档期安排工作，档期前后与夜间工作更集中；具体节奏须按目标单位与项目类型核对。"
+              "按具体演出拍摄档期核晚间周末及负荷；美国19%季节48%不规律33%规律响应不证明中国排班或每岗夜间集中。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
@@ -26201,7 +26147,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与工资的关系：库存系统、条码标签与版型工具可能改变服装岗位的分工与记录方式，但中国大陆公开工资统计按行业门类与人员类别聚合发布，工具变化不会产生可核对的职业级数值；本页因此不给出任何与 AI 相关的服装服务员工资影响数字。"
+              "本轮无中国本岗AI到工资因果；行业均值不测该关系，缺口不证明未来永远不会有职业统计。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
@@ -26215,12 +26161,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页中国大陆薪资板块只保留证据边界：不把行业均值当作职业工资、不用美国数据替代，也不陈述服装服务员的全国中位数、起薪或分位数。"
+              "NBS2025条件匹配背景：文化体育娱乐非私营129,447/私营64,015，教育133,539/63,908元税前年均；按用人法人主营与私营分类匹配，不以后台任务自动定行业。5人及以上城镇法人，不含个体自由职业，含奖金津补贴。非服装服务员职业工资、月到手或剧组日薪；中国职业分布、招聘样本和精确映射未取得。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         }
@@ -26237,7 +26183,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国统计口径：本页的工资与分位为 O*NET／OEWS 39-3092.00（Costume Attendants）单一职业口径；就业规模与就业预测取自 O*NET 就业趋势页（基于 BLS 2024—2034 年预测），该细分没有独立的职业展望手册页。"
+              "工资O*NET39-3092.00/BLS-SOC39-3092本岗2025，预测由O*NET转引BLS2025—2035单列；不把OEWS代码写成O*NET细分。OEWS税前常规有薪货币工资，不含自雇、直接家庭雇员及未付薪家人；官方年值可引用，2080标准折算不保证个人工时，不推每人实际年收入、月到手或加班奖金。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.1",
@@ -26267,7 +26213,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "按小时披露的工资不能在没有个人工时与加班安排时推算稳定年薪或月收入；档期性、项目制与加班安排也会影响实际收入。"
+              "OEWS税前常规有薪货币工资，不含自雇、直接家庭雇员及未付薪家人；官方年值可引用，2080标准折算不保证个人工时，不推每人实际年收入、月到手或加班奖金。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.3",
@@ -26297,7 +26243,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业表只说明该口径下的就业分布（以艺术娱乐与休闲为主），不代表所有雇主的工资；不同行业与地区的工资差异要看具体岗位与地区。"
+              "美国O*NET2025艺术娱乐休闲59%、信息17%、教育12%；其他行业12%，原行业页列包含住宿餐饮，未给其单独份额，不推自雇比例；份额非行业工资或中国用人分布。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.5",
@@ -26312,7 +26258,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资统计与档案的用途不同：OEWS 用于工资，O*NET 用于任务、工作情境与准备层级，就业预测限于 2024—2034 年预测期；引用时分别保留。"
+              "工资2025与就业2025—2035分别核，任务教育情境O*NET不同；不沿用2024—2034。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.6",
@@ -26432,7 +26378,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "艺术、娱乐与休闲是最主要的用人行业，占 2024 年该项就业分布的 54%。"
+              "美国O*NET2025艺术娱乐休闲59%、信息17%、教育12%；其他行业12%，原行业页列包含住宿餐饮，未给其单独份额，不推自雇比例；份额非行业工资或中国用人分布。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
@@ -26447,7 +26393,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "信息（含影视与广播）占 21%、教育服务占 11%；这些是就业分布，不是工资中位数。"
+              "2025信息17%、教育12%，非影视子行业或中国份额；剩余12%只是余量。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
@@ -26477,7 +26423,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业表只说明就业归类，本行按原口径保留，不推算雇主类型或收入差异。"
+              "其他行业12%包含住宿餐饮，未给其单独份额，不能据此推自雇分布或工资。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
@@ -26507,7 +26453,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "统计工资以有薪岗位为准：每周工时、档期性与项目制安排以及加班直接决定实际到手收入，因此时薪与年收入不能互相替代。"
+              "OEWS税前常规有薪货币工资，不含自雇、直接家庭雇员及未付薪家人；官方年值可引用，2080标准折算不保证个人工时，不推每人实际年收入、月到手或加班奖金。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.paid-work",
@@ -26522,7 +26468,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同一职业名下的职责差异不小：只负责库房与借还、负责试装与养护、或负责现场调度与换装支持的岗位，对应不同的计酬口径。"
+              "具体计酬核合同及岗位，未取得保管、试装和现场岗位独立固定全国计酬制度。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.scope",
@@ -26537,7 +26483,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工作场所与安排影响收入：行业（影视、剧场、教育、活动租赁）、所在地区与项目规模，以及是否为全职或项目制岗位。"
+              "行业地区档期和工时按具体合同核，未取各因素对个人工资的独立贡献比例。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.setting",
@@ -26590,7 +26536,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "喜欢动手整理与养护实物、记得清物件去向、愿意在档期里配合团队赶工的人，通常更容易适应。"
+              "编辑自问：是否愿意动手整理核物件及团队协作，未取偏好到适应率实测，不保证更容易适应。"
             ]
           },
           "id": "actors.fit.personality-fit-block.1",
@@ -26604,7 +26550,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "这类岗位每天都有大量重复的清点、整理与养护；能接受重复并把每次核对做实，才是现场不出错的前提。"
+              "重复18%极重要35%很重要，13%完全不重要；核目标任务而非所有岗位每天大量重复或绝不出错。"
             ]
           },
           "id": "actors.fit.personality-fit-block.2",
@@ -26618,7 +26564,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "试装、修改与现场调度常被即时反馈；能把返工当作核对流程而不是针对个人，才能持续改进。"
+              "编辑自问：收到试装、修改或调度反馈时，能否核对具体问题并尝试调整？这是任务观察思路，不是持续改进的必要条件或人格效度结论。"
             ]
           },
           "id": "actors.fit.personality-fit-block.3",
@@ -26632,7 +26578,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "演出与拍摄档期前后工作集中，临时需求也多；能有条理地先安顿关键物件、再处理次要需求，才更稳妥。"
+              "档期集中或临时换装需求可作编辑情境例，本页未取得中国发生频率；建议核对场次与关键物件，实际需求量向目标岗位确认。"
             ]
           },
           "id": "actors.fit.personality-fit-block.4",
@@ -26660,7 +26606,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "先核对长时间站立与搬运、清洗与化学品接触、档期与夜间工作的强度，以及是否愿意承担库存与借还的账目责任。"
+              "入职前核对目标岗位站立、走动、搬运和清洗产品接触的实际强度，询问班次与库存借还责任；不假定每岗都有长站、夜间作业。"
             ]
           },
           "id": "actors.fit.personality-fit-block.6",
@@ -26772,7 +26718,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适配不是人格判断，而是把日常工作的真实要求——长时间用手整理、养护与搬运实物、把服装与用品和借还账目管得清楚、在排练与演出档期前后配合团队赶工、并在现场随时能调到正确物件——"
+              "把设计制作、物件记录、合身效果、换装协作及现场条件与个人偏好核对，能力训练及安全要求分别核，不由人格结果预测。"
             ]
           },
           "id": "actors.display.personality_fit_block.direct-answer",
@@ -26940,7 +26886,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "尽责性与情绪稳定性与这类工作的关系最直接：前者对应清点、编号与账目管理，后者对应档期赶工与临时需求下的稳定应对。大五没有官方的职业匹配阈值，本页只把它当作自我观察工具。"
+              "可自问清点记录与临时需求沟通，未取本岗大五关联强度和阈值，不称关系最直接。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.big-five.answer",
@@ -27038,7 +26984,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "偏好稳定整理的人可能更适合库房与保管岗位。"
+              "体验库房整理再观察感受，不凭类型分岗。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.1",
@@ -27052,7 +26998,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "偏好即时响应与现场协作的人可能更适合跟组岗位。"
+              "体验现场协作再观察感受，不保证类型更适合跟组。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.2",
@@ -27318,7 +27264,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "这类岗位需要持续沟通：与设计制作、演员、舞监与场务对接；O*NET 调查显示 63% 表示与他人持续接触，79% 每天有面对面讨论，90% 认为在团队中共同工作至少「非常重要」。情绪类工具只提供自我观察角度，不是岗位门槛。"
+              "美国持续接触63%、面对面79%每日、团队90%极重要；不是至少等级合计，也不是沟通测评门槛。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.eq.answer",
@@ -27388,7 +27334,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "跟进拍摄档期，按场次与镜头准备、保养并调度服装与用品，处理连续拍摄的换装与备用；适合愿意在快节奏外景与棚内往返中保持条理的人。"
+              "跟进拍摄场次，准备养护调度服装、换装与备用是任务线索。编辑自问：是否愿意体验现场实物与记录协作？偏好不能证明胜任或录用。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.camera.signals",
@@ -27402,7 +27348,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "拍摄档期节奏快、时间压力大；需在多变场地中照管实物与账目。"
+              "时间压力与多变场地可作为编辑待核情境，实际拍摄节奏、场地和实物账目责任按目标岗位核，不推全国统一强度。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.camera.watchouts",
@@ -27430,7 +27376,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "为排练与演出准备、养护并管理剧装与用品，配合换装与后台流程；适合喜欢固定场地、按演出流程反复精细准备的人。"
+              "演出方向涉及剧装用品准备、养护和换装配合。编辑自问：是否愿意体验按场次反复核对？偏好不证明胜任或录用。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.stage.signals",
@@ -27444,7 +27390,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "演出期晚间与周末工作集中；需长时间站立与搬运。"
+              "演出方向实际晚间、周末班次和站立搬运强度须向目标岗位核对；O*NET不规律或季节性排班响应不提供夜间周末频率。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.stage.watchouts",
@@ -27486,7 +27432,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "已属相邻职业：从管理服装与用品转为直接创作造型，需另行核对其技术与训练要求。"
+              "相邻化妆职业需要核对化妆、假发与特效技术；本岗本身也可有服装设计制作，不用有无创作来绝对切分，目标技能深度按实际经历核。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.watchouts",
@@ -27505,7 +27451,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.teacher.direction",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27519,7 +27465,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.teacher.signals",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27528,12 +27474,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "从管理实物转为设计空间与视觉方案，通常要求相关专业背景，转入需补足设计训练。"
+              "目标空间设计、图纸模型预算及真实训练学历另核，不自动取得设计岗位准备。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.watchouts",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27547,7 +27493,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.direction",
           "source_refs": [
-            "onet"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -27561,7 +27507,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.signals",
           "source_refs": [
-            "onet"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -27570,12 +27516,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "从执行与管理转为款式创作，进入通常需要设计专业训练与作品积累。"
+              "目标系列、市场面料和样衣开发及真实作品训练条件另核，本岗已有设计制作不能全称无创作。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.watchouts",
           "source_refs": [
-            "onet"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -27612,7 +27558,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更偏缝制工艺与版型技术，转入需补足裁剪与缝制技能。"
+              "本岗也有Core设计制作小修与合身检查；转裁缝需核量体、系统裁剪缝制版型深度，不称原职业没有全部技能。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.watchouts",
@@ -27710,7 +27656,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "按 O*NET 调查，63% 表示与他人持续接触、79% 每天有面对面讨论、90% 认为团队共同工作至少非常重要；既要与演员和制作人员对接，也要与同组与主管沟通。"
+              "美国持续接触63%、面对面79%每日、团队90%极重要；实际协作及角色按单位核，不由单项作至少合计。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.outgoing.answer",
@@ -27766,7 +27712,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "服装服务岗位多按排练、演出与拍摄档期安排工作，档期前后与夜间工作更集中；具体按单位与项目核对。"
+              "美国19%季节48%不规律33%规律；具体晚间周末安排未量化，不把档期规律作所有岗夜间集中结论。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.schedule.answer",
@@ -27794,7 +27740,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "清点、养护、试装与现场调度靠反复练习与反馈；把练习量、返工次数和出错点记录下来，比测试分数更能说明适配。"
+              "编辑建议记录虚构样本清点准确、返工反馈，未有练习量优于测评的预测证据；后台体验先取得实际许可。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.practice.answer",
@@ -27822,7 +27768,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。测试描述偏好线索，不预测工作表现，也不构成录用、资格或适应性判断；真正的判断来自任务样本与训练反馈。"
+              "兴趣测评用于探索偏好，任务体验与训练反馈提供具体观察线索；本页未取得两者比较的预测效度证据，不替代能力、资格或录用评估。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.test.answer",
@@ -27999,13 +27945,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按单位流程使用与存放化学品、做好通风与个人防护，分类处理贴身与受污染物件，异常立即上报并按程序处置。"
+              "美国依法适用OSHA1910.1200危险化学品工作场景，雇主保留各危险化学品SDS且班次可即取、标识及初次/新危险训练，防护与应急由实际方案和具体产品确定；不是中国法律或自动给所有洗涤用品同一危险等级。清洗产品及材质说明、实际场所风险评估和主管流程未取得，不给混用配比或消毒效果承诺。中国《安全生产法》2021修正第28/29/41/44/45/55/57–59条在适用的生产经营单位要求安全训练合格、风险隐患治理、如实告知危险和应急措施、提供合规劳动防护，员工正确使用并报告隐患；直接危及人身安全紧急情形可停止或撤离。不是服装专属资格、卫生消毒配方或所有情形停止处理的统一程序。"
             ]
           },
           "id": "actors.risk.career-risk-cards.2",
           "source_refs": [
-            "sag",
-            "nist"
+            "cn-rule",
+            "g04-osha-chem"
           ],
           "type": "prose"
         },
@@ -28089,7 +28035,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险集中在三类：长时间站立、搬运与手工操作造成的身体负担，清洗与养护中化学品、污染物与卫生条件造成的健康风险，以及库存账实不符、借还失控与档期调度失误造成的服务与商业风险；演出与拍摄档期的夜间与赶工也会累积影响。"
+              "编辑风险场景：物件整理重复动作、清洗具体产品、近距换装、借还差错与现场协调；调查描述条件非疾病或损失发生率，夜间负荷按具体排班核。"
             ]
           },
           "id": "actors.display.career_risk_cards.direct-answer",
@@ -28104,7 +28050,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险场景来自 O*NET 任务档案与工作情境百分比（O*NET-SOC 39-3092.00）；中国大陆的岗位与用工语境来自公开信息；引入自动化或 AI 工具时的责任与记录要求参考 NIST AI 风险管理框架。"
+              "O*NET任务情境支持风险场景非疾病率；中国安全生产法支持适用单位训练告知防护，美国OSHA危险化学品规则分法域；NIST自愿AI治理，真实机构全流程未取得。"
             ]
           },
           "id": "actors.display.career_risk_cards.evidence-scope",
@@ -28179,7 +28125,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 调查显示 92% 表示持续或几乎持续地用手操作物件，42% 表示约一半时间站立、35% 表示少于一半时间坐着，51% 表示与他人的身体距离接近触碰；档期前后搬运与整理更集中。"
+              "O*NET用手92%几乎一直，站立42%约半、坐35%少半、近距触碰51%。这些是美国调查响应，不能推出中国档期前后搬运集中；目标强度另核。"
             ]
           },
           "id": "actors.display.career_risk_cards.image-use.scenario",
@@ -28194,7 +28140,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "长期站立、搬运与重复动作会造成肌肉骨骼疲劳与劳损，影响出勤与操作安全。"
+              "手部重复、站立搬运可提示工位和任务评估，本轮未取本岗劳损发生、缺勤或安全因果，不据此诊断。"
             ]
           },
           "id": "actors.display.career_risk_cards.image-use.consequence",
@@ -28254,13 +28200,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "接触不当会造成皮肤、呼吸道刺激与卫生事件，也可能在剧组内传播。"
+              "具体风险须核实际产品标签SDS及暴露；37%每日污染物不等病原体或证明剧组传播，不给疾病发生率。"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "cn-rule",
+            "g04-osha-chem"
           ],
           "type": "prose"
         },
@@ -28299,7 +28245,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "登记不全、状态不更新或演出后不归位，会让物件去向不明、重复采购或现场缺件；O*NET 显示 55% 认为准确与严谨至少「非常重要」。"
+              "编辑差错场景：记录与实物状态不一致可能缺件；准确30%极重要55%很重要，不把55当至少合计。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-income.scenario",
@@ -28314,7 +28260,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "账实不符会造成现场缺件、错用与经济损失，也让复核失去依据。"
+              "编辑风险分析：账实不符可能造成现场缺件、错用与经济损失，并可能增加复核难度。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-income.consequence",
@@ -28359,13 +28305,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国大陆剧装、服装与道具管理岗位分属不同院团、剧组与服务单位，常见项目制、劳务与兼职等用工形式，卫生与安全要求因单位与场景不同。"
+              "中国《安全生产法》2021修正第28/29/41/44/45/55/57–59条在适用的生产经营单位要求安全训练合格、风险隐患治理、如实告知危险和应急措施、提供合规劳动防护，员工正确使用并报告隐患；直接危及人身安全紧急情形可停止或撤离。不是服装专属资格、卫生消毒配方或所有情形停止处理的统一程序。"
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -28419,7 +28364,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按场次备件不足、换装时间估算不准或未准备备用件，会在关键节点造成服装缺失或穿帮；O*NET 显示 46% 表示每天面对时间压力。"
+              "编辑风险分析：按场次备件不足、换装时间估算不准或未准备备用件，可能在关键节点造成服装缺失或穿帮；O*NET 显示 46% 表示每天面对时间压力。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.scenario",
@@ -28434,7 +28379,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "调度失误会直接影响演出与拍摄进度，并可能造成返工与信誉损失。"
+              "编辑风险分析：调度失误可能影响演出与拍摄进度，并可能造成返工与信誉损失。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.consequence",
@@ -28449,7 +28394,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "档期夜间工作与体力负荷的长期影响"
+              "档期与体力负荷核对场景"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.title",
@@ -28479,7 +28424,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 调查显示 46% 表示每天面对时间压力，35% 认为重复同一任务至少「非常重要」，44% 表示典型工作周为 40 小时；演出与拍摄期间夜间与周末工作更集中。"
+              "时限46%每日、重复18%极重要35%很重要；周44%40/40%超40/16%少40，排班19%季节48%不规律33%规律，不证明全国夜间周末集中。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.scenario",
@@ -28494,7 +28439,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "长期夜间工作与体力负荷会累积影响健康与判断，进而影响现场安全与质量。"
+              "编辑风险假设：负荷可能影响准备与核对，观察实际疲劳反馈并寻求评估；本轮无本岗长期夜间健康判断因果。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.consequence",
@@ -28509,7 +28454,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于美国 2024—2034 年该细分就业预测与职位空缺（O*NET 就业趋势页，基于 BLS 预测）。"
+              "本岗39-3092：2025就业6,600、2035预测7,000、增长6%，2025—2035年均空缺1,700个含增长与替换，非累计或净增。两端相减约400为四舍五入就业差，未取未舍入净变；不按标签5–6%代实际6%，预测不是录用率或AI替代时点。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.bls",
@@ -28539,13 +28484,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于中国大陆剧装与服装岗位的用工与卫生边界的方向性核对。"
+              "中国安全生产法支持适用单位训练、危险告知、防护和员工权利义务，不支持岗位用工类型普及率或服装消毒配方。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.cn-rule",
           "source_refs": [
-            "sag",
-            "nist"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -28593,7 +28537,7 @@
           "data": {
             "paragraphs": [
               "本页不引用具体在招公告，也不把历史项目案例计为在招岗位；招聘与用工条件须按目标单位当年公告核对。",
-              "示例中的情景判断、清点核对与试用期观察方式为编辑设计，用于说明常见验证方式，不代表任何单位的统一流程。"
+              "情景判断、清点核对与观察方式为编辑设计的任务观察思路，不证明招聘常用验证流程；实际考核按目标单位核。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
@@ -28618,7 +28562,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "编辑建议核对的能力线索",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -28678,7 +28622,7 @@
                 "id": "employer-0",
                 "values": [
                   "学历与训练背景要求",
-                  "美国口径下该职业准备层级为 Job Zone 1–2，通常要求高中文凭或同等学历，在职训练从几天到一年；O*NET 列出一个相关注册学徒示例职称（服装主管）。",
+                  "美国JobZone1–2/SVP<6，层级一般高中及几天至一年训练是跨职业概述，不是本岗每人时长。实际教育响应32%高中、30%学士、15%部分大学无学位，其他未显示，不能称本岗多数高中；相关注册学徒WardrobeSupervisor示例非当前在招项目、补贴或中国门槛。",
                   "O*NET 摘要页显示准备层级为 Job Zone 1–2（SVP 低于 6.0）；美国口径与中国大陆剧装岗位的学历与用工要求不可直接等同。"
                 ]
               },
@@ -28695,15 +28639,15 @@
                 "values": [
                   "可观察的专业能力证据",
                   "能按清单清点并记录物件状态、能核对借还与归位、能按场次准备演出与拍摄物件（来自 O*NET 任务与工作情境数据）。",
-                  "以上是任务与情境观察点，不是人格标签或录用阈值；工作情境显示 55% 认为准确与严谨至少非常重要、46% 表示每天面对时间压力、92% 表示持续或几乎持续地用手操作物件。"
+                  "准确30%极重要55%很重要、时限46%每日、手操作92%几乎一直；非人格或录用阈值。"
                 ]
               },
               {
                 "id": "availability",
                 "values": [
                   "常见工具与系统范围",
-                  "库存与借还台账、标签与编号工具、缝纫与整烫设备、清洗与养护用品、库房与更衣区域设施；O*NET 列出的本职业技术关键词包含文字处理与库存、版型相关软件。",
-                  "工具熟练度是市场偏好与招聘信号，不等于核心能力或授权。"
+                  "2025全美Lightcast4热门软件：Office/Excel各5%、Outlook/Word各2%；本热门表未列库存或版型软件，技术目录和热门统计不同；岗位提及比例非采用率、AI效果或熟练度。",
+                  "软件关键词是所述美国招聘资料的提及，不能推定中国熟练度偏好、胜任或授权；实际要求另核。"
                 ]
               }
             ]
@@ -28841,55 +28785,55 @@
               [
                 "学历背景（高中及以上）",
                 "准备进入服装与后台岗位的人",
-                "满足多数入门岗位的录用条件",
-                "不是统一强制门槛，按目标单位公告核对",
+                "美国JobZone1–2/SVP<6，层级一般高中及几天至一年训练是跨职业概述，不是本岗每人时长。实际教育响应32%高中、30%学士、15%部分大学无学位，其他未显示，不能称本岗多数高中；相关注册学徒WardrobeSupervisor示例非当前在招项目、补贴或中国门槛。",
+                "按中国目标公告及实际任务核，未取全国岗位普及率",
                 "按目标单位公告的学历要求",
-                "低至中（在职或入职前完成）",
+                "实际费用与周期未取得",
                 "学历不代表岗位胜任或库存授权。"
               ],
               [
                 "服装或相关专业训练",
                 "希望承担试装、修改或制作岗位的人",
-                "通常是相关操作岗位的加分或前置条件",
-                "按岗位与单位而定",
+                "编辑准备线索：核对试装修改制作任务；训练是否为条件按目标公告核，未取得普遍加分效果。",
+                "按中国目标公告及实际任务核，未取全国岗位普及率",
                 "按目标单位要求或职业院校训练",
-                "中（专业训练周期）",
+                "实际费用与周期未取得",
                 "专业训练不等于库存管理或采购授权。"
               ],
               [
                 "库存与借还系统能力",
                 "从事库房保管与借还岗位的人",
-                "通常是库房岗位的常见要求",
-                "多数库房岗位普遍要求",
+                "库存记录能力为任务观察，热门只4办公软件，不保证全国系统门槛",
+                "按中国目标公告及实际任务核，未取全国岗位普及率",
                 "按目标单位要求或自行练习",
-                "低（可自行学习）",
+                "实际费用与周期未取得",
                 "系统熟练度不等于实物核对与养护能力。"
               ],
               [
                 "在职训练与跟组实践",
                 "已被录用并进入岗位的人员",
-                "通常决定能否独立承担保管与调度",
-                "属录用后必经环节",
+                "岗位技能训练与法定安全训练分开，适用单位安全训练合格是法律要求",
+                "按中国目标公告及实际任务核，未取全国岗位普及率",
                 "由单位或项目组织",
-                "中（数天至一年）",
-                "训练合格不等于永久授权，须按岗位与制度执行。"
+                "实际费用与周期未取得",
+                "中国《安全生产法》2021修正第28/29/41/44/45/55/57–59条在适用的生产经营单位要求安全训练合格、风险隐患治理、如实告知危险和应急措施、提供合规劳动防护，员工正确使用并报告隐患；直接危及人身安全紧急情形可停止或撤离。不是服装专属资格、卫生消毒配方或所有情形停止处理的统一程序。"
               ],
               [
                 "预算与采购授权",
                 "承担采购与预算执行的岗位",
                 "决定能否采购、租赁与签署相关事项",
-                "属制度授予，不是可选",
+                "按中国目标公告及实际任务核，未取全国岗位普及率",
                 "按单位制度与现行规定授予",
-                "不适用（由制度授予）",
+                "实际费用与周期未取得",
                 "授权不可跨单位通用，本页不构成授权意见。"
               ],
               [
                 "库房与班组管理能力",
                 "准备承担服装管理职责的人",
-                "影响管理岗位的竞争与准备度",
-                "不是入职门槛",
+                "编辑准备线索：核对库存标准、协调及带训任务；未取得管理竞争或训练收益证据。",
+                "按中国目标公告及实际任务核，未取全国岗位普及率",
                 "按单位制度与岗位要求",
-                "中（内部培训或带教）",
+                "实际费用与周期未取得",
                 "管理训练不等于采购或卫生责任岗位授权。"
               ]
             ]
@@ -28908,10 +28852,10 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "本页把学历背景、服装或相关专业训练、库存与借还系统能力、在职训练与跟组实践、预算与采购授权以及库房与班组管理能力分开：学历与专业训练是基础，在职训练与授权按单位制度与现行规定获得。",
-              "美国口径来自 O*NET 准备层级（Job Zone 1–2：通常要求高中文凭或同等学历；在职训练从几天到一年；SVP 低于 6.0），并列出相关注册学徒示例职称（服装主管）；这些不等于中国的任职条件。",
-              "中国大陆口径：剧装、服装与道具管理岗位分属不同院团、剧组与服务单位，常见项目制与劳务用工；本页未取得全国统一的强制资质公开条件，须按目标单位与主管部门现行规定核对，不能把美国准备层级当作中国门槛，也不能把岗位名称当作跨单位的采购或数据授权。",
-              "任何资格与任职要求都应以单位与主管部门的现行规定为准；本页不构成录用承诺、资格意见或授权建议。"
+              "美国JobZone1–2/SVP<6，层级一般高中及几天至一年训练是跨职业概述，不是本岗每人时长。实际教育响应32%高中、30%学士、15%部分大学无学位，其他未显示，不能称本岗多数高中；相关注册学徒WardrobeSupervisor示例非当前在招项目、补贴或中国门槛。",
+              "中国《安全生产法》2021修正第28/29/41/44/45/55/57–59条在适用的生产经营单位要求安全训练合格、风险隐患治理、如实告知危险和应急措施、提供合规劳动防护，员工正确使用并报告隐患；直接危及人身安全紧急情形可停止或撤离。不是服装专属资格、卫生消毒配方或所有情形停止处理的统一程序。",
+              "中国本岗统一资格及招聘条件未取得，不证明没有任何行业或单位要求；专业、安全训练、采购预算及系统权限分别核。",
+              "实际训练费用周期、学徒项目和机构完整权限未取得，不保证唯一入行路线。"
             ]
           },
           "id": "actors.path.credential-boundary.1",
@@ -28928,7 +28872,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入行通常不要求专门学历：美国多数岗位要求高中文凭并在职学习，再从库房整理、清点与养护做起；能否把服装与用品的名称、编号、去向和状态管得清楚、并在档期里按时交付正确物件，是比证书更可核对的准备证据。"
+              "美国准备层级与本岗教育响应分开，32%高中不等多数。编辑从清点样本观察能力，真实设计制作、修改和安全训练按任务；不比证书更能保证录用。"
             ]
           },
           "id": "actors.path.career-path-block.1",
@@ -28944,7 +28888,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国口径下，该职业准备层级为 Job Zone 1–2（SVP 低于 6.0），通常要求高中文凭或同等学历，在职训练从几天到一年；O*NET 列出一个相关注册学徒示例职称（服装主管）。入职多从库房整理、清点与养护做起，再承担试装与现场调度；"
+              "美国JobZone1–2/SVP<6，层级一般高中及几天至一年训练是跨职业概述，不是本岗每人时长。实际教育响应32%高中、30%学士、15%部分大学无学位，其他未显示，不能称本岗多数高中；相关注册学徒WardrobeSupervisor示例非当前在招项目、补贴或中国门槛。下列阶段为编辑准备线索，非官方唯一晋升路线。"
             ]
           },
           "id": "actors.path.career-path-block.2",
@@ -28960,7 +28904,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆没有与 O*NET-SOC 一一对应的职业细类，剧装与服装管理岗位分属不同院团、剧组与服务单位，常见项目制与劳务用工，录用与用工条件须按目标单位现行规定核对。"
+              "中国精确分类映射、用工形式比例及公告条件未取得；适用生产经营单位安全训练及权限依法核，不以美国层级推中国门槛。"
             ]
           },
           "id": "actors.path.career-path-block.3",
@@ -29321,7 +29265,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与预算建议、供应商与库存标准管理，承担审核与带训；该阶段通常要求先积累一线经验，任职条件由单位规定。"
+              "编辑发展方向：参与预算建议、供应商和库存标准管理、审核与带训；经验和任职条件按目标单位核，不设统一一线经验门槛。"
             ]
           },
           "id": "actors.display.career_path_block.ladder.develop.description",
@@ -29401,7 +29345,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求高中文凭；条件按单位与项目规定。"
+              "中国实际学历按目标公告，未取全国分布；美国层级高中概述不等本岗多数或中国门槛。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.credentials",
@@ -29641,7 +29585,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "管理方向通常要求一线经验，条件由单位规定。"
+              "管理方向经验和任职条件按目标岗位核，本页未取得中国统一经验要求。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.04.credentials",
@@ -29737,7 +29681,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求高中文凭；条件按院团规定。"
+              "中国实际学历按目标公告，未取全国分布；美国层级高中概述不等本岗多数或中国门槛。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.01.credentials",
@@ -29977,7 +29921,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "管理方向通常要求一线经验，条件由单位规定。"
+              "管理方向经验和任职条件按目标岗位核，本页未取得中国统一经验要求。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.04.credentials",
@@ -30073,7 +30017,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求高中文凭；条件按单位规定。"
+              "中国实际学历按目标公告，未取全国分布；美国层级高中概述不等本岗多数或中国门槛。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.01.credentials",
@@ -30345,7 +30289,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "该细分 2024—2034 年就业预测与职位空缺（O*NET 就业趋势页，基于 BLS 预测）。"
+              "本岗39-3092：2025就业6,600、2035预测7,000、增长6%，2025—2035年均空缺1,700个含增长与替换，非累计或净增。两端相减约400为四舍五入就业差，未取未舍入净变；不按标签5–6%代实际6%，预测不是录用率或AI替代时点。"
             ]
           },
           "id": "actors.display.career_path_block.source.bls",
@@ -30377,7 +30321,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于中国大陆剧装与服装岗位的用工与卫生边界的方向性核对。"
+              "安全生产法支持安全训练、防护及危急权利，不是招聘学历、用工比例或服装技能资格。"
             ]
           },
           "id": "actors.display.career_path_block.source.cn-rule",
@@ -30393,7 +30337,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明工资分位的统计位置与不可年化，不提供个人收入结论。"
+              "OEWS税前常规有薪货币工资，不含自雇、直接家庭雇员及未付薪家人；官方年值可引用，2080标准折算不保证个人工时，不推每人实际年收入、月到手或加班奖金。"
             ]
           },
           "id": "actors.display.career_path_block.source.r2-pay-3",
@@ -30417,7 +30361,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需求信号要分三层看：官方就业预测反映职业总量变化，影视与演出的制作产量与档期决定岗位分布，"
+              "区分美国本岗预测、真实档期单位需求及具体招聘样本；本轮未取中国制作数量到编制因果，不断言决定全部岗位。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
@@ -30432,7 +30376,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）显示该细分 2024 年约 6,700 人，预测标签为 Faster than average（5% 至 6%），累计约 1,800 个含增长与替换的空缺；该预测不含技术替代时点。"
+              "本岗39-3092：2025就业6,600、2035预测7,000、增长6%，2025—2035年均空缺1,700个含增长与替换，非累计或净增。两端相减约400为四舍五入就业差，未取未舍入净变；不按标签5–6%代实际6%，预测不是录用率或AI替代时点。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
@@ -30557,8 +30501,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.agent.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30572,8 +30515,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.agent.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30582,13 +30524,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从管理服装与用品转为直接创作造型，需补足化妆技术。"
+              "编辑距离判断：本岗已有服装设计制作与现场协作交叉，转化妆需核化妆、假发及特效技术深度，不假定从零创作。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30597,13 +30538,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共同能力：制作流程理解、档期与团队协作意识。"
+              "共同能力：舞台与制作流程理解、物料与色彩意识。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30612,13 +30552,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足：项目统筹、预算与创作决策能力。"
+              "需核空间、展陈图纸模型和预算适配等目标技能；具体学历训练条件另核。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30627,58 +30566,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从执行岗位转向项目统筹与决策，通常需积累多年制作经验。"
+              "编辑距离判断：在本岗已有设计制作与视觉协作基础上，核对空间方案、布景设计和目标项目要求；不是从完全无设计经验起步。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.distance",
           "source_refs": [
-            "bls",
-            "oews"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "共同能力：场所运营理解与现场协作。"
-            ]
-          },
-          "id": "actors.display.market_signal_card.transitions.enrichment.shared",
-          "source_refs": [
-            "bls",
-            "oews"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "需补足：游客接待、设施操作与秩序维护。"
-            ]
-          },
-          "id": "actors.display.market_signal_card.transitions.enrichment.gaps",
-          "source_refs": [
-            "bls",
-            "oews"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "距离说明：从服装与用品管理转向游客与设施服务。"
-            ]
-          },
-          "id": "actors.display.market_signal_card.transitions.enrichment.distance",
-          "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30690,10 +30583,9 @@
               "共同能力：面料与服装结构理解、量体与修改意识。"
             ]
           },
-          "id": "actors.display.market_signal_card.transitions.art.shared",
+          "id": "actors.display.market_signal_card.transitions.enrichment.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30702,13 +30594,54 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足：裁剪、缝制与版型工艺。"
+              "需核量体、版型裁剪与缝制工艺深度；本岗已经有Core设计制作和小修，不能全判为从零缺失。"
+            ]
+          },
+          "id": "actors.display.market_signal_card.transitions.enrichment.gaps",
+          "source_refs": [
+            "art"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "编辑距离判断：本岗可能已有小修、制作与纸样经验；转裁缝须核目标裁剪、缝制与成衣工艺深度，不将全部技能判为从零缺失。"
+            ]
+          },
+          "id": "actors.display.market_signal_card.transitions.enrichment.distance",
+          "source_refs": [
+            "art"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "共同能力：服装风格与面料意识、对穿着效果的判断。"
+            ]
+          },
+          "id": "actors.display.market_signal_card.transitions.art.shared",
+          "source_refs": [
+            "dancing"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "需核系列、市场定位、面料选用和样衣开发；实际训练作品条件按目标公告，不称统一设计专业门槛。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30717,13 +30650,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从服装管理转向缝制工艺，需补足裁剪与缝制技能。"
+              "本岗Core已有设计制作，时装方向再核系列开发、市场定位、样衣与面料选用，不按创作与非创作绝对切分。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30737,8 +30669,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.directing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30752,8 +30683,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.directing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30767,53 +30697,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.directing.distance",
           "source_refs": [
-            "bls",
-            "oews"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "共同能力：舞台与制作流程理解、物料与色彩意识。"
-            ]
-          },
-          "id": "actors.display.market_signal_card.transitions.announcing.shared",
-          "source_refs": [
-            "bls",
-            "oews"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "需补足：空间与展陈设计方法，通常要求相关专业训练。"
-            ]
-          },
-          "id": "actors.display.market_signal_card.transitions.announcing.gaps",
-          "source_refs": [
-            "bls",
-            "oews"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "距离说明：从实物管理转向空间与视觉方案设计。"
-            ]
-          },
-          "id": "actors.display.market_signal_card.transitions.announcing.distance",
-          "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30825,10 +30709,9 @@
               "共同能力：场馆现场协作与流程遵循。"
             ]
           },
-          "id": "actors.display.market_signal_card.transitions.editing.shared",
+          "id": "actors.display.market_signal_card.transitions.announcing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30840,10 +30723,9 @@
               "需补足：观众引导、票证查验与现场秩序处理。"
             ]
           },
-          "id": "actors.display.market_signal_card.transitions.editing.gaps",
+          "id": "actors.display.market_signal_card.transitions.announcing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30855,10 +30737,9 @@
               "距离说明：从后台实物管理转向前台观众服务。"
             ]
           },
-          "id": "actors.display.market_signal_card.transitions.editing.distance",
+          "id": "actors.display.market_signal_card.transitions.announcing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30867,13 +30748,54 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共同能力：服装风格与面料意识、对穿着效果的判断。"
+              "共同能力：场所运营理解与现场协作。"
+            ]
+          },
+          "id": "actors.display.market_signal_card.transitions.editing.shared",
+          "source_refs": [
+            "enrichment"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "需补足：游客接待、设施操作与秩序维护。"
+            ]
+          },
+          "id": "actors.display.market_signal_card.transitions.editing.gaps",
+          "source_refs": [
+            "enrichment"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "距离说明：从服装与用品管理转向游客与设施服务。"
+            ]
+          },
+          "id": "actors.display.market_signal_card.transitions.editing.distance",
+          "source_refs": [
+            "enrichment"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "共同能力：制作流程理解、档期与团队协作意识。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30882,13 +30804,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足：款式设计与系列开发，通常要求设计专业训练与作品积累。"
+              "需补足：项目统筹、预算与创作决策能力。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30897,13 +30818,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从执行与管理转向款式创作。"
+              "从服装具体任务扩到项目统筹和创作决策；需核真实制作经验、计划及预算能力，不把多年经验当本轮已核统一录用条件。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30912,7 +30832,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于该细分 2024—2034 年就业预测与职位空缺（O*NET 就业趋势页，基于 BLS 预测）。"
+              "本岗39-3092：2025就业6,600、2035预测7,000、增长6%，2025—2035年均空缺1,700个含增长与替换，非累计或净增。两端相减约400为四舍五入就业差，未取未舍入净变；不按标签5–6%代实际6%，预测不是录用率或AI替代时点。"
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
@@ -31099,7 +31019,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind 职业内容编辑团队（来源核查与练习设计）"
+              "FermatMind职业内容编辑（来源核查）"
             ]
           },
           "id": "actors.display.source_card.author",
@@ -31113,7 +31033,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源：O*NET OnLine 服装服务员（39-3092.00）职业档案、全国工资（OEWS 2025 年工资数据）与就业趋势（基于 BLS 2024—2034 年预测）、ILO 生成式 AI 与职业任务暴露研究、NIST AI 风险管理框架，以及国家统计局公开资料；各条目的口径与使用限制见下方来源登记。"
+              "O*NET23任务57情境、教育ACR、2025工资招聘行业及2025—2035趋势；NBS2025条件背景；中国安全生产法、美国OSHA化学品规则分法域；ILO方法及NIST自愿治理，工具机会和能力路线为编辑线索。"
             ]
           },
           "id": "actors.display.source_card.source",
@@ -31127,7 +31047,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "更新：2026-09-18（各来源检索日期见来源登记）"
+              "本轮九模块来源核对2026-10-09；复用方法保留同版时期。"
             ]
           },
           "id": "actors.display.source_card.updated-at",
@@ -31251,10 +31171,9 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于舞台与表演化妆师方向的造型职责对照（相邻职业）。",
-                  "不把造型职责并入本职业。"
+                  "相邻职业任务重点，原岗Core也有设计制作、合身小修，交叉技能不自动完成目标岗位准备。"
                 ],
                 "evidence_type": "official source",
                 "id": "agent",
@@ -31267,7 +31186,7 @@
                 "url": "https://www.onetonline.org/link/summary/39-5091.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于布景与展陈设计师方向的设计职责对照（相邻职业）。",
                   "不把设计职责并入本职业。"
@@ -31283,10 +31202,9 @@
                 "url": "https://www.onetonline.org/link/summary/27-1027.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于裁缝与定制缝纫工方向的缝制与版型对照（相邻职业）。",
-                  "不把缝制职责并入本职业。"
+                  "相邻职业任务重点，原岗Core也有设计制作、合身小修，交叉技能不自动完成目标岗位准备。"
                 ],
                 "evidence_type": "official source",
                 "id": "art",
@@ -31299,42 +31217,39 @@
                 "url": "https://www.onetonline.org/link/summary/51-6052.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持该细分的就业与预测口径。",
-                  "不含中国大陆信息，不能替代中国大陆数据。"
+                  "本岗39-3092：2025就业6,600、2035预测7,000、增长6%，2025—2035年均空缺1,700个含增长与替换，非累计或净增。两端相减约400为四舍五入就业差，未取未舍入净变；不按标签5–6%代实际6%，预测不是录用率或AI替代时点。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "支持该细分 2024 年就业约 6,700 人、预测标签 Faster than average（5% 至 6%）与累计约 1,800 个含增长与替换的空缺；该细分没有独立的 BLS 职业展望手册页，本页就业与预测以该 O*NET 就业趋势页为准。",
+                "limitation": "本岗39-3092：2025就业6,600、2035预测7,000、增长6%，2025—2035年均空缺1,700个含增长与替换，非累计或净增。两端相减约400为四舍五入就业差，未取未舍入净变；不按标签5–6%代实际6%，预测不是录用率或AI替代时点。",
                 "market": "美国",
-                "name": "O*NET OnLine：Costume Attendants 就业趋势（基于 BLS 2024—2034 年预测）",
-                "period": "2024—2034 年预测期；检索 2026-09-18",
+                "name": "O*NET转引BLS Costumes就业趋势2025—2035",
+                "period": "2025就业/2025—2035预测",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/39-3092.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持中国大陆剧装与服装岗位的分类与用工语境。",
-                  "不据此推定任职资格、授权或工资数值。"
+                  "中国《安全生产法》2021修正第28/29/41/44/45/55/57–59条在适用的生产经营单位要求安全训练合格、风险隐患治理、如实告知危险和应急措施、提供合规劳动防护，员工正确使用并报告隐患；直接危及人身安全紧急情形可停止或撤离。不是服装专属资格、卫生消毒配方或所有情形停止处理的统一程序。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official regulation",
                 "id": "cn-rule",
-                "limitation": "支持中国大陆剧装、服装与道具管理岗位分属不同院团、剧组与服务单位的分类语境：常见项目制、劳务与兼职等用工形式，卫生与安全要求因单位与场景不同；不证明全国统一的强制资质，也不能把该类岗位与美国职业代码一一对应。",
+                "limitation": "中国《安全生产法》2021修正第28/29/41/44/45/55/57–59条在适用的生产经营单位要求安全训练合格、风险隐患治理、如实告知危险和应急措施、提供合规劳动防护，员工正确使用并报告隐患；直接危及人身安全紧急情形可停止或撤离。不是服装专属资格、卫生消毒配方或所有情形停止处理的统一程序。",
                 "market": "中国内地",
-                "name": "中国大陆公开文化与演艺用工信息（剧装与服装管理岗位）",
-                "period": "现行规定；检索 2026-09-18",
-                "publisher": "公开文化与演艺用工信息",
+                "name": "中华人民共和国安全生产法（2021修正）",
+                "period": "2021修正，2021-09-01施行",
+                "publisher": "全国人大常委会法律；市场监管总局转载",
                 "scope": "contextual",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于时装设计师方向的款式创作对照（相邻职业）。",
-                  "不把设计职责并入本职业。"
+                  "相邻职业任务重点，原岗Core也有设计制作、合身小修，交叉技能不自动完成目标岗位准备。"
                 ],
                 "evidence_type": "official source",
                 "id": "dancing",
@@ -31347,7 +31262,7 @@
                 "url": "https://www.onetonline.org/link/summary/27-1022.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于商品陈列方向的陈列与布置职责对照（相邻职业）。",
                   "不把陈列职责并入本职业。"
@@ -31363,7 +31278,7 @@
                 "url": "https://www.onetonline.org/link/summary/27-1026.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于引座与检票方向的现场服务职责对照（相邻职业）。",
                   "不把现场服务职责并入本职业。"
@@ -31379,7 +31294,7 @@
                 "url": "https://www.onetonline.org/link/summary/39-3031.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于更衣与寄存方向的区域管理职责对照（相邻职业）。",
                   "不把区域看管职责并入本职业。"
@@ -31395,14 +31310,13 @@
                 "url": "https://www.onetonline.org/link/summary/39-3093.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持入行准备层级与教育需求的观察点。",
-                  "不构成具体雇主的录用条件或中国大陆的门槛。"
+                  "美国JobZone1–2/SVP<6，层级一般高中及几天至一年训练是跨职业概述，不是本岗每人时长。实际教育响应32%高中、30%学士、15%部分大学无学位，其他未显示，不能称本岗多数高中；相关注册学徒WardrobeSupervisor示例非当前在招项目、补贴或中国门槛。"
                 ],
                 "evidence_type": "official source",
                 "id": "employer",
-                "limitation": "支持本职业的准备层级（Job Zone 1–2，SVP 低于 6.0）与兴趣代码（ACR）；O*NET 标注 Bright Outlook；不代表具体雇主的招聘条件，也不等同于中国大陆的要求。",
+                "limitation": "美国JobZone1–2/SVP<6，层级一般高中及几天至一年训练是跨职业概述，不是本岗每人时长。实际教育响应32%高中、30%学士、15%部分大学无学位，其他未显示，不能称本岗多数高中；相关注册学徒WardrobeSupervisor示例非当前在招项目、补贴或中国门槛。",
                 "market": "美国",
                 "name": "O*NET OnLine：Costume Attendants 摘要（39-3092.00）",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31411,7 +31325,7 @@
                 "url": "https://www.onetonline.org/link/summary/39-3092.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于娱乐与休闲服务员方向的游客服务对照（相邻职业）。",
                   "不把游客服务职责并入本职业。"
@@ -31440,33 +31354,31 @@
                 "period": "当前工具；检索 2026-09-18",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/"
+                "url": "https://www.onetcenter.org/IP.html"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "登记中国大陆公开工资统计的细分层级。",
-                  "代理值不得写成本职业工资。"
+                  "NBS2025条件匹配背景：文化体育娱乐非私营129,447/私营64,015，教育133,539/63,908元税前年均；按用人法人主营与私营分类匹配，不以后台任务自动定行业。5人及以上城镇法人，不含个体自由职业，含奖金津补贴。非服装服务员职业工资、月到手或剧组日薪；中国职业分布、招聘样本和精确映射未取得。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "nbs",
-                "limitation": "公开工资统计按行业门类与人员类别发布，未建立与 39-3092.00 对应的职业细类；行业或人员类别均值不是本职业工资，也不能外推为全国职业收入。",
+                "limitation": "NBS2025条件匹配背景：文化体育娱乐非私营129,447/私营64,015，教育133,539/63,908元税前年均；按用人法人主营与私营分类匹配，不以后台任务自动定行业。5人及以上城镇法人，不含个体自由职业，含奖金津补贴。非服装服务员职业工资、月到手或剧组日薪；中国职业分布、招聘样本和精确映射未取得。",
                 "market": "中国内地",
-                "name": "国家统计局：公开统计与工资发布入口",
-                "period": "现行发布；检索 2026-09-18",
+                "name": "NBS2025城镇单位工资",
+                "period": "2025数据，2026-05-15发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "用于说明引入 AI 系统时的治理、记录与人工监督要求。",
-                  "框架不替代单位流程与安全要求的责任划分。"
+                  "NIST自愿AI风险治理，不代服装安全流程。"
                 ],
                 "evidence_type": "institutional framework",
                 "id": "nist",
-                "limitation": "提供 AI 系统风险治理的用语与流程要求（角色、责任、记录与人工监督）；不规定服装与用品管理流程、卫生要求或库房授权。",
+                "limitation": "NIST自愿AI风险治理，不代服装安全流程。",
                 "market": "美国",
                 "name": "NIST：Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
                 "period": "AI RMF 1.0；检索 2026-09-18",
@@ -31475,7 +31387,7 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于说明工资统计的覆盖与折算口径。",
                   "不提供个人收入结论，也不能用于推算个人到手工资。"
@@ -31488,65 +31400,61 @@
                 "period": "2025 年工资数据；检索 2026-09-18",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.onetonline.org/link/localwages/39-3092.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持本职业的任务、工作情境与准备层级。",
-                  "不含技术采用与岗位替代数据。"
+                  "美国O*NET23任务：15Core含换装检查工作单、帮助演员穿衣或分配换装员、按使用顺序排服装、设计制作或送裁缝大修修改、检查合身及修改记录、分配物件记状态、舞台灯光下查效果、清洗整烫小修、协作设计、库存与指定人员访问、采购租用、历史服饰研究、完工归还存储、研读剧本、盘点；6Supplemental为班组调度、修改工聘训排班督导、预算项目、储物更衣洗衣区、供应商、非服装物件；2New为按设计图纸样和安排试装。类别非每日频率，不排除本岗创作及修补。美国O*NET2025艺术娱乐休闲59%、信息17%、教育12%；其他12%由100减前三类，不推住宿餐饮或自雇细项；份额非行业工资或中国用人分布。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet",
-                "limitation": "支持本职业的任务、详细工作活动、工作情境百分比、准备层级、兴趣代码与 2024 年行业就业占比；O*NET 标注 Bright Outlook；为单一职业口径，不含技术采用或岗位替代数据。",
+                "limitation": "美国O*NET23任务：15Core含换装检查工作单、帮助演员穿衣或分配换装员、按使用顺序排服装、设计制作或送裁缝大修修改、检查合身及修改记录、分配物件记状态、舞台灯光下查效果、清洗整烫小修、协作设计、库存与指定人员访问、采购租用、历史服饰研究、完工归还存储、研读剧本、盘点；6Supplemental为班组调度、修改工聘训排班督导、预算项目、储物更衣洗衣区、供应商、非服装物件；2New为按设计图纸样和安排试装。类别非每日频率，不排除本岗创作及修补。美国O*NET2025艺术娱乐休闲59%、信息17%、教育12%；其他12%由100减前三类，不推住宿餐饮或自雇细项；份额非行业工资或中国用人分布。",
                 "market": "美国",
                 "name": "O*NET OnLine：Costume Attendants（39-3092.00）职业档案",
-                "period": "页面 2026 年更新；检索 2026-09-18",
+                "period": "页面更新2026；行业2025，调查非统一2026",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/39-3092.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持雇主技术关键词的市场信号说明。",
-                  "关键词不等于采用率或能力要求。"
+                  "2025全美Lightcast4热门软件：Office/Excel各5%、Outlook/Word各2%；本热门表未列库存或版型软件，技术目录和热门统计不同；岗位提及比例非采用率、AI效果或熟练度。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r2-ai",
-                "limitation": "列出雇主招聘中提到的文字处理与库存、版型相关技术关键词；招聘关键词是市场信号，不衡量使用率、熟练度或岗位替代。",
+                "limitation": "2025全美Lightcast4热门软件：Office/Excel各5%、Outlook/Word各2%；本热门表未列库存或版型软件，技术目录和热门统计不同；岗位提及比例非采用率、AI效果或熟练度。",
                 "market": "美国",
                 "name": "O*NET OnLine：Costume Attendants 热门技术（39-3092.00）",
-                "period": "页面 2026 年更新；检索 2026-09-18",
+                "period": "2025全美Lightcast招聘",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/39-3092.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "登记中国大陆公开工资统计的细分层级。",
-                  "未取得本职业单列数值，不使用代理数字。"
+                  "NBS2025条件匹配背景：文化体育娱乐非私营129,447/私营64,015，教育133,539/63,908元税前年均；按用人法人主营与私营分类匹配，不以后台任务自动定行业。5人及以上城镇法人，不含个体自由职业，含奖金津补贴。非服装服务员职业工资、月到手或剧组日薪；中国职业分布、招聘样本和精确映射未取得。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-1",
-                "limitation": "公开工资统计只按区域、行业门类与人员类别发布，未建立与本职业一一对应的职业细类；本页未取得本职业单列数值，缺口在页面可见位置标记。",
+                "limitation": "NBS2025条件匹配背景：文化体育娱乐非私营129,447/私营64,015，教育133,539/63,908元税前年均；按用人法人主营与私营分类匹配，不以后台任务自动定行业。5人及以上城镇法人，不含个体自由职业，含奖金津补贴。非服装服务员职业工资、月到手或剧组日薪；中国职业分布、招聘样本和精确映射未取得。",
                 "market": "中国内地",
-                "name": "国家统计局：公开工资统计发布入口",
-                "period": "现行发布；检索 2026-09-18",
+                "name": "NBS2025城镇单位工资",
+                "period": "2025数据，2026-05-15发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "说明时薪、月薪与年收入不可直接互换。",
-                  "不提供个人收入结论。"
+                  "OEWS税前常规有薪货币工资，不含自雇、直接家庭雇员及未付薪家人；官方年值可引用，2080标准折算不保证个人工时，不推每人实际年收入、月到手或加班奖金。"
                 ],
                 "evidence_type": "official methodology",
                 "id": "r2-pay-2",
-                "limitation": "说明 OEWS 的覆盖人群、工资构成与折算假设；不提供本职业具体数值，也不用于把时薪换算为个人月收入。",
+                "limitation": "OEWS税前常规有薪货币工资，不含自雇、直接家庭雇员及未付薪家人；官方年值可引用，2080标准折算不保证个人工时，不推每人实际年收入、月到手或加班奖金。",
                 "market": "美国",
                 "name": "BLS Handbook of Methods：OEWS 工资与折算口径",
                 "period": "现行方法说明；检索 2026-09-18",
@@ -31555,7 +31463,7 @@
                 "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于说明工资分位的统计位置。",
                   "不提供个人收入结论，也不能按固定工时年化。"
@@ -31589,12 +31497,11 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "用于说明任务级暴露度量的方法。",
-                  "任务暴露不等于自动化采用或岗位替代结果。"
+                  "ILO任务暴露方法，本轮本岗精确分数未取得，不断言研究没有单职业分数。"
                 ],
                 "evidence_type": "institutional research",
                 "id": "sag",
-                "limitation": "按任务级暴露度量生成式 AI 与职业任务的接近程度；不提供本职业单职业分数、采用率、自动化率或替代日期。",
+                "limitation": "ILO任务暴露方法，本轮本岗精确分数未取得，不断言研究没有单职业分数。",
                 "market": "全球",
                 "name": "ILO：Generative AI and Jobs — Refined Global Index of Occupational Exposure",
                 "period": "研究发表时点；检索 2026-09-18",
@@ -31605,12 +31512,11 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "支持任务、工作活动与工作情境百分比。",
-                  "不含技术采用、岗位数量或收入变化数据。"
+                  "美国O*NET23任务：15Core含换装检查工作单、帮助演员穿衣或分配换装员、按使用顺序排服装、设计制作或送裁缝大修修改、检查合身及修改记录、分配物件记状态、舞台灯光下查效果、清洗整烫小修、协作设计、库存与指定人员访问、采购租用、历史服饰研究、完工归还存储、研读剧本、盘点；6Supplemental为班组调度、修改工聘训排班督导、预算项目、储物更衣洗衣区、供应商、非服装物件；2New为按设计图纸样和安排试装。类别非每日频率，不排除本岗创作及修补。57工作情境，更新年非全部统一调查年。"
                 ],
                 "evidence_type": "official source",
                 "id": "sag-moa",
-                "limitation": "支持本职业（39-3092.00）的任务、详细工作活动与工作情境百分比；该页为单一职业口径，不含技术采用或岗位替代数据。",
+                "limitation": "美国O*NET23任务：15Core含换装检查工作单、帮助演员穿衣或分配换装员、按使用顺序排服装、设计制作或送裁缝大修修改、检查合身及修改记录、分配物件记状态、舞台灯光下查效果、清洗整烫小修、协作设计、库存与指定人员访问、采购租用、历史服饰研究、完工归还存储、研读剧本、盘点；6Supplemental为班组调度、修改工聘训排班督导、预算项目、储物更衣洗衣区、供应商、非服装物件；2New为按设计图纸样和安排试装。类别非每日频率，不排除本岗创作及修补。57工作情境，更新年非全部统一调查年。",
                 "market": "美国",
                 "name": "O*NET OnLine：Costume Attendants 详细资料（39-3092.00）",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31619,7 +31525,7 @@
                 "url": "https://www.onetonline.org/link/details/39-3092.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于制片人与导演方向的项目统筹职责对照（相邻职业）。",
                   "不把统筹职责并入本职业。"
@@ -31633,6 +31539,21 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/27-2012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国依法适用OSHA1910.1200危险化学品工作场景，雇主保留各危险化学品SDS且班次可即取、标识及初次/新危险训练，防护与应急由实际方案和具体产品确定；不是中国法律或自动给所有洗涤用品同一危险等级。清洗产品及材质说明、实际场所风险评估和主管流程未取得，不给混用配比或消毒效果承诺。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "g04-osha-chem",
+                "limitation": "美国依法适用OSHA1910.1200危险化学品工作场景，雇主保留各危险化学品SDS且班次可即取、标识及初次/新危险训练，防护与应急由实际方案和具体产品确定；不是中国法律或自动给所有洗涤用品同一危险等级。清洗产品及材质说明、实际场所风险评估和主管流程未取得，不给混用配比或消毒效果承诺。",
+                "market": "美国",
+                "name": "OSHA1910.1200 HazardCommunication",
+                "period": "当前正文，2024修订及分阶段日期须按适用情形核",
+                "publisher": "US OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.1200"
               }
             ]
           },
@@ -34129,7 +34050,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls"
+              "cn-rule",
+              "g04-osha-chem"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -34428,28 +34350,28 @@
           "bls_table": [
             {
               "指标": "数据与口径",
-              "数值": "本轮未取得与服装服务员（O*NET-SOC 39-3092.00）对应的中国大陆职业级工资数值，故不展示具体数字；缺口已在页面可见位置标记。",
-              "说明": "中国大陆公开工资统计最高细分到行业门类与人员类别，不发布该职业细类数值。"
+              "数值": "NBS2025条件匹配背景：文化体育娱乐非私营129,447/私营64,015，教育133,539/63,908元税前年均；按用人法人主营与私营分类匹配，不以后台任务自动定行业。5人及以上城镇法人，不含个体自由职业，含奖金津补贴。非服装服务员职业工资、月到手或剧组日薪；中国职业分布、招聘样本和精确映射未取得。",
+              "说明": "行业背景不代职业"
             },
             {
               "指标": "查阅范围",
-              "数值": "国家统计局工资与统计发布页面（检索 2026-09-18）",
-              "说明": "只用于说明实际查阅范围与时间，不作数值换算依据。"
+              "数值": "NBS2025，2026-05-15发布；本轮2026-10-09核读",
+              "说明": "实际范围"
             },
             {
               "指标": "职业分类",
-              "数值": "中国大陆剧装、服装与道具管理岗位分属不同院团、剧组与服务单位，常见项目制与劳务用工",
-              "说明": "用于中国语境说明；不能把该类岗位直接等同于美国职业代码的职责或工资，也不能据此推定任职资格。"
+              "数值": "中国精确实体映射与用工比例未取得",
+              "说明": "不推全国无分类"
             },
             {
               "指标": "卫生与安全",
-              "数值": "演出与拍摄中的服装、假发与化妆用品处理受卫生与安全要求约束",
-              "说明": "处理流程与防护要求须按具体单位与现行规定核对，本页不构成用工授权或作业建议。"
+              "数值": "中国《安全生产法》2021修正第28/29/41/44/45/55/57–59条在适用的生产经营单位要求安全训练合格、风险隐患治理、如实告知危险和应急措施、提供合规劳动防护，员工正确使用并报告隐患；直接危及人身安全紧急情形可停止或撤离。不是服装专属资格、卫生消毒配方或所有情形停止处理的统一程序。",
+              "说明": "中国规则，不代具体产品处置"
             },
             {
               "指标": "统计覆盖",
-              "数值": "国家统计局城镇单位工资统计覆盖城镇法人单位，不含个体工商户与自由职业者等",
-              "说明": "服装服务岗位大量以项目制与兼职形式存在，公开职业级数据未单列，行业均值不能代表该职业实际收入。"
+              "数值": "城镇5人及以上法人，不含个体自由职业",
+              "说明": "项目兼职比例未取得；工资含奖金津补贴"
             },
             {
               "指标": "市场对照",
@@ -34473,10 +34395,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_class_row": "中国大陆用工场景：影视剧组与制作公司的服装与化妆组、剧院与演出团体的剧装与后台岗位、文化艺术与教育机构的相关岗位，以及演出与活动租赁与服务单位；公开工资统计按行业门类与人员类别发布，未建立与 O*NET-SOC 39-3092.00 对应的职业细类，本页不据分类推定任职资格或收入。",
+          "china_class_row": "编辑待核院团剧组学校等岗位，具体用工与权限另核，未取全国形式比例。",
           "china_edu_table": [
             {
-              "学历段": "高中或中专＋相关实践",
+              "学历段": "美国准备与教育响应（非中国门槛）",
               "岗位方向": "库房与服装保管、清点与借还辅助岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -34486,7 +34408,7 @@
               }
             },
             {
-              "学历段": "大专及以上＋服装或相关专业背景",
+              "学历段": "中国目标招聘（未取样）",
               "岗位方向": "试装、修改与养护操作岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -34496,7 +34418,7 @@
               }
             },
             {
-              "学历段": "本科及以上＋相关专业背景",
+              "学历段": "法定安全训练（适用单位）",
               "岗位方向": "部分院团与机构的设计、制作或管理岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.theater",
@@ -34506,7 +34428,7 @@
               }
             },
             {
-              "学历段": "熟悉档期流程＋内部带训",
+              "学历段": "管理方向条件（待核）",
               "岗位方向": "服装与后台方向的组长或主管方向",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -34552,14 +34474,14 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国大陆公开信息检索入口：国家统计局工资与统计发布页面；本轮未取得该职业单列数值。",
+          "china_open": "本轮NBS2025所读表未取本岗精确数值，不断言全国没有发布。",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_ref": "国家统计局：公开统计与工资发布入口｜https://www.stats.gov.cn/",
+          "china_ref": "NBS2025城镇单位工资｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
           "china_salary_note": {
             "$item": "actors.display.career_snapshot_primary_locale.boundary",
             "block": "china-salary",
@@ -34577,22 +34499,8 @@
               }
             },
             {
-              "城市/区间": "中国大陆（行业均值代理口径）",
-              "月薪参考": {
-                "$join": [
-                  {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
-                    "field": "display_value"
-                  },
-                  {
-                    "$item": "actors.display.career_snapshot_primary_locale.quote-limits",
-                    "block": "china-salary",
-                    "copy_key": "career.item.career-snapshot-primary-locale",
-                    "type": "prose"
-                  }
-                ],
-                "separator": ""
-              }
+              "城市/区间": "行业背景（税前年均非月薪）",
+              "月薪参考": "NBS2025条件匹配背景：文化体育娱乐非私营129,447/私营64,015，教育133,539/63,908元税前年均；按用人法人主营与私营分类匹配，不以后台任务自动定行业。5人及以上城镇法人，不含个体自由职业，含奖金津补贴。非服装服务员职业工资、月到手或剧组日薪；中国职业分布、招聘样本和精确映射未取得。"
             },
             {
               "城市/区间": "中国大陆（招聘报价口径）",
@@ -34604,7 +34512,7 @@
               }
             }
           ],
-          "china_soc_row": "美国职业代码：O*NET-SOC 39-3092.00（Costume Attendants，O*NET 标注 Bright Outlook）；BLS 就业预测经 O*NET 就业趋势页发布；中国大陆未建立与之对应的职业级工资口径。",
+          "china_soc_row": "O*NET39-3092.00／BLS39-3092美国；中国精确实体映射未完成。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
             "china-jiaojiang-featured-daily-2026"
@@ -34620,12 +34528,12 @@
             "scenario_role_label": "学历与训练背景",
             "scenario_value_label": "岗位方向"
           },
-          "us_growth": "增长 5%—6%（2024—2034 年，快于平均）",
+          "us_growth": "增长6%（2025—2035）",
           "us_median": "50,400美元/年（中位数，2025 年工资数据）"
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "O*NET OnLine 全国工资：Costume Attendants 39-3092.00（2025 年工资数据）｜https://www.onetonline.org/link/localwages/39-3092.00；O*NET 就业趋势（BLS 2024—2034 年预测）｜https://www.onetonline.org/link/localtrends/39-3092.00",
+        "authority_sources": "O*NET本岗39-3092.00全国2025工资｜https://www.onetonline.org/link/localwages/39-3092.00；2025—2035就业趋势｜https://www.onetonline.org/link/localtrends/39-3092.00",
         "bls_table": [
           {
             "fact_ref": "low",
@@ -34665,31 +34573,31 @@
             "说明": "第 90 百分位是高分段位置，通常与行业、地区与工作安排差异相关，来源没有证明与经验的对应关系；O*NET 全国工资：39-3092.00（2025 年工资数据）｜https://www.onetonline.org/link/localwages/39-3092.00"
           },
           {
-            "fact_ref": "employment",
-            "指标": "2024 就业 · 基期人数",
+            "fact_ref": "g04-employment-2025",
+            "指标": "2025就业·基期人数",
             "数值": {
-              "$fact": "employment",
+              "$fact": "g04-employment-2025",
               "field": "display_value"
             },
-            "说明": "就业规模是存量统计，不是当年招聘数量或岗位空缺数；来源为 O*NET 就业趋势页（基于 BLS 2024—2034 年预测）。"
+            "说明": "本岗39-3092：2025就业6,600、2035预测7,000、增长6%，2025—2035年均空缺1,700个含增长与替换，非累计或净增。两端相减约400为四舍五入就业差，未取未舍入净变；不按标签5–6%代实际6%，预测不是录用率或AI替代时点。"
           },
           {
-            "fact_ref": "growth",
-            "指标": "2024—2034 就业 · 增长预测",
+            "fact_ref": "g04-growth-2025",
+            "指标": "2025—2035就业·增长",
             "数值": {
-              "$fact": "growth",
+              "$fact": "g04-growth-2025",
               "field": "display_value"
             },
-            "说明": "预测标签为「快于平均」，属于预测期的相对变化；该预测不含技术替代时点，也不代表个人录用概率。"
+            "说明": "本岗39-3092：2025就业6,600、2035预测7,000、增长6%，2025—2035年均空缺1,700个含增长与替换，非累计或净增。两端相减约400为四舍五入就业差，未取未舍入净变；不按标签5–6%代实际6%，预测不是录用率或AI替代时点。"
           },
           {
-            "fact_ref": "openings",
-            "指标": "2024—2034 就业 · 职位空缺",
+            "fact_ref": "g04-openings-2025",
+            "指标": "2025—2035就业·年均空缺",
             "数值": {
-              "$fact": "openings",
+              "$fact": "g04-openings-2025",
               "field": "display_value"
             },
-            "说明": "该口径空缺说明含因增长与替换产生的职位空缺，不是每年净增岗位数；预测期为 2024—2034 年。"
+            "说明": "本岗39-3092：2025就业6,600、2035预测7,000、增长6%，2025—2035年均空缺1,700个含增长与替换，非累计或净增。两端相减约400为四舍五入就业差，未取未舍入净变；不按标签5–6%代实际6%，预测不是录用率或AI替代时点。"
           }
         ],
         "boundary": {
@@ -34751,7 +34659,7 @@
           "type": "prose"
         },
         "growth": {
-          "$fact": "growth",
+          "$fact": "g04-growth-2025",
           "field": "display_value"
         },
         "heading": {
@@ -34766,13 +34674,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024 年（O*NET 行业分布，39-3092.00 口径）",
+        "industry_period": "2025年O*NET行业就业分布",
         "industry_rows": [
           {
-            "fact_ref": "median",
+            "fact_ref": "g04-industry-theater-2025",
             "industry": "艺术、娱乐与休闲",
             "median": {
-              "$fact": "industry-theater",
+              "$fact": "g04-industry-theater-2025",
               "field": "display_value"
             },
             "note": {
@@ -34783,10 +34691,10 @@
             }
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "g04-industry-education-2025",
             "industry": "信息",
             "median": {
-              "$fact": "industry-education",
+              "$fact": "g04-industry-education-2025",
               "field": "display_value"
             },
             "note": {
@@ -34797,10 +34705,10 @@
             }
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "g04-industry-amusement-2025",
             "industry": "教育服务",
             "median": {
-              "$fact": "industry-amusement",
+              "$fact": "g04-industry-amusement-2025",
               "field": "display_value"
             },
             "note": {
@@ -34812,7 +34720,7 @@
           },
           {
             "industry": "服装服务员所在行业（统计分类）",
-            "median": "分布合计｜100%（2024 年 O*NET 行业分布；艺术娱乐与休闲 54%、信息 21%、教育服务 11%、其他 14%）",
+            "median": "其他行业12%（含住宿餐饮，未给单独份额）",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -34877,7 +34785,7 @@
           "type": "prose"
         },
         "outlook_period": {
-          "$fact": "growth",
+          "$fact": "g04-growth-2025",
           "field": "period"
         },
         "wage_column_labels": [
@@ -34894,7 +34802,7 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "不可按固定工时年化",
+            "equivalent": "官方年值可引用，标准折算不保证个人工时",
             "interpretation": {
               "$item": "actors.us-salary.career-snapshot-secondary-locale.2",
               "block": "us-salary",
@@ -35084,7 +34992,7 @@
           {
             "geography": "美国",
             "horizon": {
-              "$fact": "growth",
+              "$fact": "g04-growth-2025",
               "field": "period"
             },
             "interpretation": {
@@ -35100,10 +35008,10 @@
               "type": "prose"
             },
             "metric": "就业总体变化",
-            "occupation_scope": "服装服务员（O*NET 就业趋势页，基于 BLS 2024—2034 年预测）",
+            "occupation_scope": "CostumeAttendants39-3092，BLS2025—2035经O*NET转引",
             "source_id": "bls",
             "value": {
-              "$fact": "growth",
+              "$fact": "g04-growth-2025",
               "field": "display_value"
             }
           },
@@ -35452,7 +35360,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET OnLine 就业趋势（BLS 2024—2034 年预测）",
+            "label": "O*NET转引BLS2025—2035就业趋势",
             "secondary_value": null,
             "value": {
               "$item": "actors.display.onet_structured_fields_block.bls",
@@ -36873,10 +36781,11 @@
         "fact_id": "median",
         "market": "美国",
         "measure": "中位工资（单一职业口径）",
-        "occupation_scope": "Costume Attendants（O*NET-SOC 39-3092.00）全国工资；OEWS 该细分平均值高于中位，本页用中位",
+        "occupation_scope": "美国CostumeAttendants39-3092本岗2025全国工资中位；本轮未取平均工资，不断言均值与中位比较。",
         "period": "2025 年工资数据；检索 2026-09-18",
         "source_refs": [
-          "oews"
+          "r2-pay-3",
+          "r2-pay-2"
         ]
       },
       {
@@ -36888,7 +36797,8 @@
         "occupation_scope": "Costume Attendants（39-3092.00）；分位是统计位置，不是入职起薪或职级等级",
         "period": "2025 年工资数据；检索 2026-09-18",
         "source_refs": [
-          "oews"
+          "r2-pay-3",
+          "r2-pay-2"
         ]
       },
       {
@@ -36900,7 +36810,8 @@
         "occupation_scope": "Costume Attendants（39-3092.00）；分位是统计位置，不是职级或资历等级",
         "period": "2025 年工资数据；检索 2026-09-18",
         "source_refs": [
-          "oews"
+          "r2-pay-3",
+          "r2-pay-2"
         ]
       },
       {
@@ -36986,6 +36897,78 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "6,600人（2025本岗）",
+        "fact_id": "g04-employment-2025",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "美国CostumeAttendants39-3092本岗，空缺年均非累计；行业份额非工资",
+        "period": "2025行业就业／2025—2035预测；核2026-10-09",
+        "source_refs": [
+          "bls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "增长6%（2025—2035）",
+        "fact_id": "g04-growth-2025",
+        "market": "美国",
+        "measure": "就业变化率",
+        "occupation_scope": "美国CostumeAttendants39-3092本岗，空缺年均非累计；行业份额非工资",
+        "period": "2025行业就业／2025—2035预测；核2026-10-09",
+        "source_refs": [
+          "bls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均1,700个（2025—2035，增长与替换）",
+        "fact_id": "g04-openings-2025",
+        "market": "美国",
+        "measure": "职位空缺",
+        "occupation_scope": "美国CostumeAttendants39-3092本岗，空缺年均非累计；行业份额非工资",
+        "period": "2025行业就业／2025—2035预测；核2026-10-09",
+        "source_refs": [
+          "bls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "艺术娱乐休闲59%（2025就业份额）",
+        "fact_id": "g04-industry-theater-2025",
+        "market": "美国",
+        "measure": "行业就业占比（非工资）",
+        "occupation_scope": "美国CostumeAttendants39-3092本岗，空缺年均非累计；行业份额非工资",
+        "period": "2025行业就业／2025—2035预测；核2026-10-09",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "信息17%（2025就业份额）",
+        "fact_id": "g04-industry-education-2025",
+        "market": "美国",
+        "measure": "行业就业占比（非工资）",
+        "occupation_scope": "美国CostumeAttendants39-3092本岗，空缺年均非累计；行业份额非工资",
+        "period": "2025行业就业／2025—2035预测；核2026-10-09",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "教育12%（2025就业份额）",
+        "fact_id": "g04-industry-amusement-2025",
+        "market": "美国",
+        "measure": "行业就业占比（非工资）",
+        "occupation_scope": "美国CostumeAttendants39-3092本岗，空缺年均非累计；行业份额非工资",
+        "period": "2025行业就业／2025—2035预测；核2026-10-09",
+        "source_refs": [
+          "onet"
+        ]
       }
     ]
   },
@@ -36994,7 +36977,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "娱乐与个人服务 · 服装与用品管理",
@@ -37045,7 +37028,7 @@
       "text": "服装服务员"
     }
   },
-  "source_content_sha256": "0a1534dae912da75b3283147df78d5d1533fad652cf3befdc6faaadf7ffd13d2",
+  "source_content_sha256": "1dae676c021ea75a1579c0fa1dec6ed312e49c6435bd3c29ef37584e4baf16b1",
   "subject": {
     "canonical_slug": "costume-attendants",
     "name": "服装服务员",

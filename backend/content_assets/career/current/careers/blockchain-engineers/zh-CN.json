@@ -1386,7 +1386,7 @@
         "status": "mapped"
       },
       "item:blockchain-engineers.path.credential-decision.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:blockchain-engineers.path.employer-evidence.1": {
         "status": "pending_mapping"
@@ -23900,10 +23900,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "区块链工程师以分布式账本与密码协议的技术实现为核心：信息安全分析师（15-1212.00）面向更广的信息系统安全防护与合规，不以账本协议为默认对象；计算机系统分析师（15-1211.00）关注业务系统的分析与改进，不必然处理密码学与共识；数据库管理员（15-1242.00）围绕数据存储与查询；计算机程序员（15-1251.00）以编写与测试代码为主，通常不承担协议与共识设计；渗透测试员（15-1299.04）以授权范围内的攻击模拟为核心。相近的岗位名称不代表责任可以互换。"
+              "区块链工程师以分布式账本与密码协议的技术实现为核心：信息安全分析师（15-1212.00）面向更广的信息系统安全防护与合规，不以账本协议为默认对象；计算机系统分析师（15-1211.00）关注业务系统的分析与改进，不必然处理密码学与共识；数据库管理员（15-1242.00）围绕数据存储与查询；计算机程序员（15-1251.00）以编写与测试代码为主，其官方定义不默认包含区块链协议与共识设计；渗透测试员（15-1299.04）以授权范围内的攻击模拟为核心。相近的岗位名称不代表责任可以互换。 数据库管理员15-1242.00与架构师分类不同，不把两者工资或职责合成一个精确职业。"
             ]
           },
           "id": "blockchain-engineers.profile.career-quick-answers-block.7",
+          "source_refs": [
+            "adj-security-current",
+            "adj-systems-current",
+            "adj-dba-current",
+            "adj-programmer-current",
+            "adj-pentest-current"
+          ],
           "type": "prose"
         },
         {
@@ -24087,14 +24094,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国大陆2022年版职业分类大典列有区块链工程技术人员（2-02-38-08），涵盖架构、底层技术、应用、测试、部署与运维；2020年发布时编码为2-02-10-15。职业分类不等于个人执业许可，也不证明同名招聘岗位与美国15-1299.07一一对应。"
+              "福州市人社局2026公示第86项实际列区块链工程技术人员（2-02-38-08）；2020国家网信办转载发布时编码2-02-10-15，描述架构、底层、应用、测试、部署与运维。2022大典原入口本轮返回无正文，未声称读到全文。分类不等个人许可，同名中国岗位不证明与美国15-1299.07一一对应。"
             ]
           },
           "id": "blockchain-engineers.profile.career-quick-answers-block.24",
           "source_refs": [
-            "cn-occupation-2022",
-            "cn-occupation-2020",
-            "onet-summary"
+            "cn-code-current",
+            "cn-occupation-2020"
           ],
           "type": "prose"
         },
@@ -24185,10 +24191,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "代码、合约、配置与部署脚本应纳入版本管理并可由他人复现；生产变更通常要求第二人评审、灰度或分阶段发布与可回滚记录，事后修改需要记录理由与影响范围。"
+              "编辑建议：将代码、合约、配置与部署脚本纳入版本管理，安排适合实际系统的复审、分阶段发布和故障处置。未核所有雇主均有双人评审制度；区分可撤销的代码/配置变更与已写入账本的交易，不能用发布记录承诺撤销链上结果。"
             ]
           },
           "id": "blockchain-engineers.profile.career-quick-answers-block.32",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -24229,10 +24239,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业身份与任务：O*NET-SOC 15-1299.07 Blockchain Engineers，Bright Outlook，2026 年更新，Job Zone Four（SVP 7.0 至 <8.0）。官方职责为「维护和支持分布式与去中心化的区块链网络或区块链应用……在跨地域分布式网络上设计并部署安全的区块链设计模式与方案」；共 18 项任务，高重要度任务包括与架构师、系统工程师或网络安全专家讨论并规划系统（92）、实现灾难性故障处理器以识别安全入侵（91）、测试区块链基础设施的安全性与性能（91）、评估未测试代码与未受保护密钥等威胁（88）、设计并部署使交易安全透明不可篡改的设计模式（85）。"
+              "O*NET 职业身份与任务：O*NET-SOC 15-1299.07 Blockchain Engineers，Bright Outlook，2026 年更新，Job Zone Four（SVP 7.0 至 <8.0）。官方职责为「维护和支持分布式与去中心化的区块链网络或区块链应用……在跨地域分布式网络上设计并部署安全的区块链设计模式与方案」；共18项任务，其中17项为Core并有重要度，新增API任务重要度未公布而非0，高重要度任务包括与架构师、系统工程师或网络安全专家讨论并规划系统（92）、实现灾难性故障处理器以识别安全入侵（91）、测试区块链基础设施的安全性与性能（91）、评估未测试代码与未受保护密钥等威胁（88）、设计并部署使交易安全透明不可篡改的设计模式（85）。"
             ]
           },
           "id": "blockchain-engineers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -24251,10 +24264,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：国家统计局《2025 年城镇单位就业人员年平均工资情况》（2026-05-15 发布）按行业门类与岗位大类公布平均工资，但没有单列「区块链工程师」这一职业；本页因此不提供中国大陆的该职业工资数值，只保留统计口径与缺口说明。"
+              "中国精确职业工资仍缺；授权薪资板块补充匹配NBS2025行业与人员大类税前年平均参照，不能代替本职业工资。"
             ]
           },
           "id": "blockchain-engineers.profile.onet-structured-fields-block.3",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -24276,14 +24292,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业分布：O*NET 2024年SOC15-1299父类为专业、科学与技术服务27%、政府23%、其他行业50%，非区块链细类比例。职业工具画像另由详细资料列21类软件、34个Hot Technology、20个In Demand标签；招聘技能百分比不是实际采用率。"
+              "O*NET2025美国SOC15-1299其他计算机职业父级行业分布：专业科学与技术服务26%、政府22%、信息业10%、其他42%（含金融保险、行政支持）；均为来源公布项，非区块链15-1299.07单列、中国分布或行业工资。详细页21软件类别、34Hot标签、20In-Demand标签；Hot单页34项中17有比例、17未公布，分母为2025美国唯一招聘广告，不是采用率。"
             ]
           },
           "id": "blockchain-engineers.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "onet-details",
-            "onet-hot-tech",
-            "onet-industry"
+            "industry-current",
+            "details-current",
+            "onet-hot-tech"
           ],
           "type": "prose"
         },
@@ -25044,10 +25060,10 @@
                 "url": "https://www.onetonline.org/link/hot_tech/15-1299.07"
               },
               {
-                "entity": "BLS《Computer and Information Technology Occupations》职业展望手册",
+                "entity": "BLS Table1.2：SOC15-1299父级2025—2035预测",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/computer-and-information-technology/home.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET-SOC 15-1299.07 职业摘要",
@@ -25088,10 +25104,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先在测试网或自建环境完成一次从需求与威胁清单到设计、实现、测试、部署与回滚的闭环，再谈工具与证书；同时核对目标岗位属于软件与信息技术服务、金融科技、互联网平台还是区块链信息服务，四者的数据权限、发布审批与合规要求不同。"
+              "编辑任务建议：先在测试网或自建环境完成一次从需求与威胁清单到设计、实现、测试、部署与回滚的闭环，再谈工具与证书；同时核对目标岗位属于软件与信息技术服务、金融科技、互联网平台还是区块链信息服务，四者的数据权限、发布审批与合规要求不同。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.11",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25110,10 +25130,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把生成式工具用在代码草稿与补全、单元测试初稿、日志与文档整理、合约注释与示例等可回滚环节；协议与设计模式选择、密钥与权限模型、部署与回滚方案以及安全结论仍须由人负责。"
+              "编辑任务建议：把生成式工具用在代码草稿与补全、单元测试初稿、日志与文档整理、合约注释与示例等可回滚环节；协议与设计模式选择、密钥与权限模型、部署与回滚方案以及安全结论仍须由人负责。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.13",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25132,10 +25156,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "引入工具前先明确可用环节、代码与合约的知悉范围与保密要求、生产环境与密钥的访问控制、生成内容的审查与来源核实流程、出错升级路径和人工复核责任人，保证任何输出都回到受版本管理的代码库。"
+              "编辑任务建议：引入工具前先明确可用环节、代码与合约的知悉范围与保密要求、生产环境与密钥的访问控制、生成内容的审查与来源核实流程、出错升级路径和人工复核责任人，保证任何输出都回到受版本管理的代码库。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.15",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25154,10 +25182,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把训练重点放在密码协议与共识、分布式系统、密钥与访问控制、代码审查与变更纪律、测试设计与故障注入上，同时训练对生成代码的漏洞识别、依赖风险核对与不确定性表达能力。"
+              "编辑任务建议：把训练重点放在密码协议与共识、分布式系统、密钥与访问控制、代码审查与变更纪律、测试设计与故障注入上，同时训练对生成代码的漏洞识别、依赖风险核对与不确定性表达能力。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.17",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25165,10 +25197,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：AI 与开发工具可以改变代码草稿、测试初稿、日志与文档整理、示例生成等环节，但没有官方证据表明它会取代协议与设计模式设计、密钥与权限模型决策、部署与回滚方案、安全评估结论与生产发布责任。任务暴露、工具采用率与就业数量是三个不同概念。"
+              "编辑按任务推演：工具可辅助代码/测试草稿、日志和文档整理；本轮已读资料未给本职业整体替代、采用或节时因果数据，不能推永不替代。协议、权限、安全和发布责任仍按实际法域及机构授权核，任务暴露、采用率与就业数量分开。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.18",
+          "source_refs": [
+            "editor-current",
+            "details-current",
+            "ilo-genai"
+          ],
           "type": "prose"
         },
         {
@@ -25275,10 +25312,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明SOC 15-1299父类2024年行业分布，不是区块链细类，也不能推导行业工资或就业规模。"
+              "O*NET2025美国SOC15-1299其他计算机职业父级行业分布：专业科学与技术服务26%、政府22%、信息业10%、其他42%（含金融保险、行政支持）；均为来源公布项，非区块链15-1299.07单列、中国分布或行业工资。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.28",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -25286,10 +25326,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET-SOC 15-1299.07 职业摘要（就业与预测字段）"
+              "BLS Table1.2：2025—2035 SOC15-1299父级预测"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.29",
+          "source_refs": [
+            "bls-ep"
+          ],
           "type": "prose"
         },
         {
@@ -25297,10 +25340,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET摘要保留SOC 15-1299父类2024—2034年预测，作为历史资料；本页当前预测采用BLS 2025—2035表。"
+              "实际链接BLS2025—2035预测表；当前O*NET也已展示该期父级471200→495300、约5%及年均27000，不再称仍为2024—2034。精确5.1%及表列净增24200以BLS为准，不用四舍五入总数相减替代表列。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.30",
+          "source_refs": [
+            "bls-ep",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -25330,10 +25377,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表比较三组工作方向在自动化影响上的差别：哪些环节可被辅助，哪些判断与责任仍由人承担。"
+              "编辑任务建议：下表比较三组工作方向在自动化影响上的差别：哪些环节可被辅助，哪些判断与责任仍由人承担。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.33",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25341,10 +25392,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "依赖与接口文档检索、代码草稿、测试样例与配置片段可辅助生成。"
+              "编辑任务建议：依赖与接口文档检索、代码草稿、测试样例与配置片段可辅助生成。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.34",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25352,10 +25407,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "决定协议与设计模式、密钥与权限模型、共识与部署取舍，并对系统安全与可用性负责。"
+              "编辑任务建议：决定协议与设计模式、密钥与权限模型、共识与部署取舍，并对系统安全与可用性负责。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.35",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25363,10 +25422,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "代码补全、语法转换、正则表达式与日志格式化可自动初筛。"
+              "编辑任务建议：代码补全、语法转换、正则表达式与日志格式化可自动初筛。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.36",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25374,10 +25437,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核对依赖与版本、确认权限与密钥配置是否越界、保留可复现的构建与部署记录，并承担结果可追溯责任。"
+              "编辑任务建议：核对依赖与版本、确认权限与密钥配置是否越界、保留可复现的构建与部署记录，并承担结果可追溯责任。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.37",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25385,10 +25452,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "文档草稿、注释、变更说明与运行手册初稿可由工具生成。"
+              "编辑任务建议：文档草稿、注释、变更说明与运行手册初稿可由工具生成。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.38",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25396,10 +25467,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不得把模型输出当作安全结论或合规陈述，须逐条对照实际代码与测试结果核对并由责任人署名。"
+              "编辑任务建议：不得把模型输出当作安全结论或合规陈述，须逐条对照实际代码与测试结果核对并由责任人署名。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.39",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25407,7 +25482,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、技术信号、行业分布与任务暴露研究，不是 AI 替代率或岗位数量预测。"
+              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、技术信号、BLS计算机与IT职业群体的一般就业预测与任务暴露研究，不是AI替代率或AI造成的岗位增减预测；IT群体空缺非区块链细分职业数量。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.40",
@@ -25539,14 +25614,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面按 21 个类别列出软件与工具，并标注 34 项 Hot Technology 与 20 项 In-Demand 技能，常见方向包括容器与编排（Docker、Kubernetes）、云与配置管理（AWS、Azure、Terraform、Ansible）、数据库与消息（MySQL、PostgreSQL、MongoDB、Kafka）与版本与协作（Git、JIRA、Confluence）。"
+              "实际Hot单页列34项：17有招聘比例、17未公布；Python24%、Go17%、Docker/AWS15%、Node.js/JavaScript13%、Java/Kubernetes12%、TypeScript/SQL11%。详细页另列21软件类别和20In-Demand标签，不混作同一个表；比例是2025美国唯一招聘广告份额，非采用率。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "onet-details",
             "onet-hot-tech",
-            "onet-industry"
+            "details-current"
           ],
           "type": "prose"
         },
@@ -25701,10 +25775,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "需要。O*NET 任务包含用面向对象设计原则编写可维护代码与自动化部署更新，技术清单覆盖 21 类工具与 34 项 Hot Technology；真正的门槛是能写出可审查、可复现并接受复审的代码，而不是会多少种语言或框架。"
+              "O*NET任务含面向对象编程及自动化部署，详细页列21软件类别、34Hot标签；编辑建议训练可审查、可复现代码，不把会几种语言、一个作品或清单设成全体雇主统一门槛。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.66",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25712,10 +25790,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 技术清单 / 详细资料"
+              "实际链接详细页支持编程、部署任务；招聘技术比例另见Hot单页。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.67",
+          "source_refs": [
+            "details-current",
+            "onet-hot-tech"
+          ],
           "type": "prose"
         },
         {
@@ -25734,10 +25816,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 详细资料 / 本页方法说明"
+              "实际链接Hot招聘信号；任务的AI辅助排序属编辑分析，无本职业实测替代排序。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.69",
+          "source_refs": [
+            "onet-hot-tech",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25806,10 +25892,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页方法说明"
+              "实际custom入口用于选择职业字段，不提供岗位消失年份。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.75",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25828,10 +25917,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 培训与教育信息 / 自定义职业档案"
+              "实际链接详细页支持任务、教育与技能；训练目录另见localtraining，不能混为实时招生。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.77",
+          "source_refs": [
+            "details-current",
+            "training-current"
+          ],
           "type": "prose"
         },
         {
@@ -25839,10 +25932,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具进入开发与部署流程时，人的控制点应按以下五步固定下来；任何一步缺失都不应扩大使用范围。"
+              "以下五步是编辑建议，具体采用/复核/发布规则由实际机构核定，非统一法定程序。代码配置可撤销性不代表能撤销已确认账本交易。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.78",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25850,10 +25946,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先确认本次任务的需求、威胁模型、环境边界（测试或生产）与机构规则。"
+              "编辑任务建议：先确认本次任务的需求、威胁模型、环境边界（测试或生产）与机构规则。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.79",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25861,10 +25961,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只把可回滚、可复核的辅助环节交给工具，例如代码草稿、测试初稿与文档整理。"
+              "编辑任务建议：只把可回滚、可复核的辅助环节交给工具，例如代码草稿、测试初稿与文档整理。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.80",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25872,10 +25976,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "逐条回看工具输出与代码库、依赖清单和测试结果，判断是否引入漏洞、越权或版本不一致。"
+              "编辑任务建议：逐条回看工具输出与代码库、依赖清单和测试结果，判断是否引入漏洞、越权或版本不一致。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.81",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25883,10 +25991,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "保留代码版本、配置、构建与部署日志与人工修改理由，使变更可追溯、可回滚。"
+              "编辑建议保留代码、配置、构建部署日志与人工修改理由；按实际机制核代码/配置恢复与业务补偿方案，不能由记录齐全推出链上交易可回滚。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.82",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25894,10 +26006,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "协议与权限设计、安全结论与生产发布由具备训练并获授权的人签署和承担。"
+              "编辑任务建议：协议与权限设计、安全结论与生产发布由具备训练并获授权的人签署和承担。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.83",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25916,10 +26032,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把工具输出标记为草稿，通过代码审查、静态检查与受控环境测试后再采纳。"
+              "编辑任务建议：把工具输出标记为草稿，通过代码审查、静态检查与受控环境测试后再采纳。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.85",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25938,10 +26058,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按最小知悉与最小权限处理；上传前确认处理者、存储位置、保留期限与删除可行性，密钥不进入外部提示。"
+              "编辑任务建议：按最小知悉与最小权限处理；上传前确认处理者、存储位置、保留期限与删除可行性，密钥不进入外部提示。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.87",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25949,10 +26073,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "无法复现或无法审查的构建与部署不能作为运行依据，也无法在事故核查时重现。"
+              "编辑风险分析：难复现或难审查的构建部署会增加排错与事故核查难度；是否可运行由实际环境及授权程序核，非这里统一否定。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.88",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25960,10 +26087,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录工具名称与版本、输入范围、依赖变更与人工修改理由与决定人。"
+              "编辑任务建议：记录工具名称与版本、输入范围、依赖变更与人工修改理由与决定人。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.89",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25971,10 +26102,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把测试环境结论直接当作生产环境结论，或把不同版本与配置的行为并列比较，会得出无效判断。"
+              "编辑风险分析：将测试环境结论直接外推生产，或不控制版本/配置差异，会削弱比较有效性；按实际对象核适用条件。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.90",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25982,10 +26116,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在方案中固定版本与配置基线；变更时记录理由与影响范围并重新做安全与性能测试。"
+              "编辑任务建议：在方案中固定版本与配置基线；变更时记录理由与影响范围并重新做安全与性能测试。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.91",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -26004,10 +26142,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在变更开始前确认审查人与升级链；超出本人训练与授权范围时停止并上报。"
+              "编辑任务建议：在变更开始前确认审查人与升级链；超出本人训练与授权范围时停止并上报。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.93",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -26048,10 +26190,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "依赖与接口文档检索、设计模式示例与配置片段可辅助生成。"
+              "编辑任务建议：依赖与接口文档检索、设计模式示例与配置片段可辅助生成。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.97",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -26092,10 +26238,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "代码补全、语法转换与样板代码可辅助生成。"
+              "编辑任务建议：代码补全、语法转换与样板代码可辅助生成。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.101",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -26136,10 +26286,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "异常模式筛查与日志聚类可自动化初筛。"
+              "编辑任务建议：异常模式筛查与日志聚类可自动化初筛。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.105",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -26180,10 +26334,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "测试用例与压测脚本初稿可辅助生成。"
+              "编辑任务建议：测试用例与压测脚本初稿可辅助生成。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.109",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -26224,10 +26382,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "流水线配置与模板复用可辅助。"
+              "编辑任务建议：流水线配置与模板复用可辅助。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.113",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -26268,10 +26430,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "资料检索与对比整理可辅助。"
+              "编辑任务建议：资料检索与对比整理可辅助。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.117",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -26279,10 +26445,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对团队产出质量、代码审查标准与新人培养负责。"
+              "编辑任务建议：对团队产出质量、代码审查标准与新人培养负责。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.118",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -26290,10 +26460,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "评审他人代码与合约，指导初级工程师，参与设计评审与事后复盘，并把经验沉淀为规范与文档。"
+              "编辑任务建议：评审他人代码与合约，指导初级工程师，参与设计评审与事后复盘，并把经验沉淀为规范与文档。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.119",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -26312,10 +26486,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "文档与清单初稿可辅助生成。"
+              "编辑任务建议：文档与清单初稿可辅助生成。"
             ]
           },
           "id": "blockchain-engineers.ai-impact.ai-impact-table.121",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -26443,10 +26621,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "截至 2026 年 9 月，有界检索未找到单列「区块链工程师」的全国职业工资统计；本页不把任何行业或岗位大类平均数写成该职业工资。"
+              "截至2026-10-09已查NBS等资料仍无本职业全国精确工资；以下列匹配宽口径年平均参照。"
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.8",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26454,10 +26635,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》按行业门类公布平均工资，但没有单列「区块链工程师」这一职业。"
+              "NBS2025 IT服务非私营248,752元/年；行业全体人员税前年平均。"
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.9",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26465,10 +26649,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业门类平均工资混合软件开发、信息技术服务、金融与研发等多类岗位，不能替代本职业职业工资；本模块因此不发布该数值。"
+              "NBS2025信息传输、软件和IT服务业：城镇非私营248,752、私营128,166元/年；规模以上该行业企业全部242,019、专业技术275,504、中层及以上管理472,496元/年。仅按实际单位行业/规模及本人职责匹配，是税前年平均，不是区块链职业中位、起薪或城市月薪。"
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.10",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26476,10 +26663,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "同一发布另有城镇私营单位口径，同样按行业门类汇总，也不单列本职业。"
+              "NBS2025 IT服务私营128,166元/年，非本职业工资。"
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.11",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26487,10 +26677,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "私营单位与非私营单位覆盖的机构类型不同，且都不提供本职业职业级数值，两者均不可作为本职业工资。"
+              "私营与非私营单位覆盖不同，均为行业年平均，不是职业中位。"
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.12",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26498,10 +26691,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "规模以上企业按《中华人民共和国职业分类大典（2022 年版）》五类岗位汇总，不区分具体职业。"
+              "NBS2025规模以上IT服务企业专业技术人员275,504元/年。"
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.13",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26509,10 +26705,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "岗位大类平均数把区块链工程与其他专业技术岗位合并，不能表示本职业工资水平。"
+              "同业规模企业全部242,019、管理472,496元/年；按实际单位与职责匹配，非所有工程师都有管理工资。"
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.14",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26531,10 +26730,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "项目制、顾问制或按服务合同结算的工程工作，其收入不在该统计覆盖范围内。"
+              "统计按在本单位工作并由单位支付劳动报酬的就业人员定义；不能仅凭项目制/服务合同排除受雇者。个体工商户和自由职业者不在调查对象内。"
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.16",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26564,10 +26766,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "元/年（税前工资总额口径；本模块不发布职业级数值）。"
+              "元/年，税前年平均，非职业中位/起薪/个人到手。"
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.19",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26575,10 +26780,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "工资总额为税前口径，包含单位代扣代缴的个人所得税、社会保险和住房公积金个人缴纳部分，不等于到手收入。"
+              "工资总额为税前口径，包含单位代扣代缴的个人所得税、社会保险和住房公积金个人缴纳部分，不等于到手收入。 不含股权激励兑现、入股分红及资本收益。"
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.20",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26586,10 +26794,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论：中国大陆无精确职业数据；本页只展示统计口径、范围与缺口。"
+              "结论：精确职业工资仍缺；匹配行业及人员大类年平均参照另列。"
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.21",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26608,10 +26819,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与开发工具会改变编码、测试与文档等辅助环节，但不改变中国大陆对该职业的统计口径：统计缺口与 AI 无关。"
+              "编辑按任务推演AI可能辅助编码、测试和文档；AI资料不填补本职业工资缺口。"
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.23",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26778,10 +26993,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "软件开发、信息技术服务与平台运营岗位可能归入该门类；该门类平均工资按行业汇总，不单列本职业，本模块不据此推算本职业工资。"
+              "NBS2025信息传输、软件和IT服务业：城镇非私营248,752、私营128,166元/年；规模以上该行业企业全部242,019、专业技术275,504、中层及以上管理472,496元/年。仅按实际单位行业/规模及本人职责匹配，是税前年平均，不是区块链职业中位、起薪或城市月薪。"
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.38",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26800,10 +27018,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "金融机构的科技与研发岗位可能归入该门类；同样只有行业平均数，不能表示本职业工资。"
+              "按实际金融机构行业匹配：NBS2025金融业非私营211,164、私营140,451元/年，是行业全体人员税前年平均，非区块链工程工资。"
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.40",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26822,10 +27043,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "研发、检验检测与技术服务机构的相关岗位可能归入该门类；同样只有行业平均数，不能表示本职业工资。"
+              "按实际技术服务机构匹配：NBS2025科技服务非私营182,064、私营83,560元/年，规模企业专业技术172,877元/年；不是区块链工资。"
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.42",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26855,10 +27079,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆目前没有单列区块链工程师的全国职业工资统计；本页只展示可核对的行业与岗位大类口径、统计范围与缺口。"
+              "精确职业工资仍缺；已补匹配宽口径税前年平均参照，不能据此设个人月薪档。"
             ]
           },
           "id": "blockchain-engineers.china-salary.career-snapshot-primary-locale.45",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -27164,7 +27391,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "对应时薪第 10 分位 26.89 美元，为分布下限，不是入门起薪的承诺；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/15-1299.00?st=NH"
+              "对应时薪第 10 分位 26.89 美元，是分布低端的百分位点，10%工人工资为该值或更低，不是最低工资，不是入门起薪的承诺；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/15-1299.00?st=NH"
             ]
           },
           "id": "blockchain-engineers.us-salary.career-snapshot-secondary-locale.10",
@@ -27252,7 +27479,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同口径时薪第 90 分位为 90.61 美元，高分段通常与资历、行业与职责范围相关；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/15-1299.00?st=NH"
+              "同口径时薪第 90 分位为 90.61 美元，编辑建议向实际雇主核资历、行业和职责要求及报酬；本轮未取得这些因素与本细分职业工资关系估计；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/15-1299.00?st=NH"
             ]
           },
           "id": "blockchain-engineers.us-salary.career-snapshot-secondary-locale.18",
@@ -27369,7 +27596,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "学历与训练通常影响起点：O*NET 列该职业为 Job Zone Four（SVP 7.0 至 <8.0），受访者中38% 认为需学士学历、19% 认为需部分大学教育、未获学位、13% 认为需硕士学历。"
+              "编辑岗位要求核对：O*NET 列该职业为 Job Zone Four（SVP 7.0 至 <8.0），受访者中38% 认为需学士学历、19% 认为需部分大学教育、未获学位、13% 认为需硕士学历。 这些是新入职教育要求回答，不证明学历或训练对起薪的影响；实际岗位与薪酬向雇主核对。"
             ]
           },
           "id": "blockchain-engineers.us-salary.career-snapshot-secondary-locale.27",
@@ -27391,10 +27618,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 2024年SOC 15-1299父类行业分布为专业、科学与技术服务27%、政府23%、其他行业50%；这些比例不单独描述区块链工程师，也不能推出行业工资。比较岗位时另核雇主的计酬方式与职责。"
+              "O*NET2025美国SOC15-1299其他计算机职业父级行业分布：专业科学与技术服务26%、政府22%、信息业10%、其他42%（含金融保险、行政支持）；均为来源公布项，非区块链15-1299.07单列、中国分布或行业工资。"
             ]
           },
           "id": "blockchain-engineers.us-salary.career-snapshot-secondary-locale.29",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -27413,10 +27643,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "职责范围影响报酬：是否负责协议与安全设计、是否承担生产发布与应急值班、是否带团队，通常比会使用哪款工具更影响报酬水平。"
+              "编辑建议比较实际合同中的协议/安全责任、发布权限、应急值班和管理职责及报酬；本轮未核其对同岗位工资的因果效应或相对工具能力的贡献排名。"
             ]
           },
           "id": "blockchain-engineers.us-salary.career-snapshot-secondary-locale.31",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27468,10 +27701,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 2024年SOC 15-1299父类行业分布中，专业、科学与技术服务占27%，并非区块链细类比例。"
+              "2025父级专业科学与技术服务26%，非区块链细分或行业工资。"
             ]
           },
           "id": "blockchain-engineers.us-salary.career-snapshot-secondary-locale.36",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -27501,10 +27737,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 2024年SOC 15-1299父类行业分布中，政府占23%，并非区块链细类比例。"
+              "2025父级政府22%，非区块链细分或行业工资。"
             ]
           },
           "id": "blockchain-engineers.us-salary.career-snapshot-secondary-locale.39",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -27512,10 +27751,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他行业（含信息业、金融与保险）"
+              "信息业"
             ]
           },
           "id": "blockchain-engineers.us-salary.career-snapshot-secondary-locale.40",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -27534,10 +27776,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 2024年SOC 15-1299父类行业分布中，其他行业占50%，包括信息业与金融保险，不能推出本职业各行业工资。"
+              "2025父级信息业10%，非区块链细分或行业工资。"
             ]
           },
           "id": "blockchain-engineers.us-salary.career-snapshot-secondary-locale.42",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -27545,10 +27790,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "计算机与信息技术职业群体（对照口径）"
+              "其他行业（含金融保险及行政支持）"
             ]
           },
           "id": "blockchain-engineers.us-salary.career-snapshot-secondary-locale.43",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -27567,10 +27815,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本页不引入未核实的行业工资估算或第三方推算。"
+              "2025父级其他42%，为来源公布项，仍无区块链细分行业工资。"
             ]
           },
           "id": "blockchain-engineers.us-salary.career-snapshot-secondary-locale.45",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -27611,10 +27862,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "实际收入还受教育与训练、行业与雇主类型、职责范围与责任层级、所在地区影响。"
+              "编辑建议向雇主比较教育、职责、行业和地区条件及实际计酬，本轮未核这些因素的职业专属因果效应。"
             ]
           },
           "id": "blockchain-engineers.us-salary.career-snapshot-secondary-locale.49",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27655,10 +27909,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位为年薪 188,470 美元；高端通常与资历、行业与职责范围相关，不代表普遍水平。"
+              "第90分位188,470美元/年，描述2025父级高端分布，不代表普遍水平或个人高薪保证。"
             ]
           },
           "id": "blockchain-engineers.us-salary.career-snapshot-secondary-locale.53",
+          "source_refs": [
+            "wages-current"
+          ],
           "type": "prose"
         }
       ]
@@ -27843,7 +28100,7 @@
                 "url": "/zh/career/jobs/computer-systems-analysts"
               },
               {
-                "entity": "数据库管理员与架构师",
+                "entity": "数据库管理员",
                 "id": "link-9",
                 "relation": "career.adjacent",
                 "url": "/zh/career/jobs/database-administrators"
@@ -28104,10 +28361,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业高度依赖逻辑推理与系统思维：O*NET 基本技能中批判性思维重要度为 69、阅读理解 75，数学 53；工作活动以使用计算机（98）与分析数据或信息（78）为主。数学成绩不是准入条件，但回避逻辑推理与调试会直接影响能否胜任协议与代码工作。"
+              "O*NET基本技能批判性思维69、阅读75、数学53；活动使用计算机98、分析78。它们描述职业群体，不能由数学成绩或单次调试直接推个人胜任；编辑建议核实际逻辑、系统分析与编程训练。"
             ]
           },
           "id": "blockchain-engineers.fit.personality-fit-block.18",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28149,10 +28410,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪能力有帮助：需要在故障或安全事件中保持沟通、承受发布压力、在证据不足时坚持不发布。但情绪能力不能用单一分数定义，也不能替代技术训练与变更纪律。"
+              "编辑观察建议：在故障或评审中核沟通、压力应对和求助行为；本轮未核情绪测验分数对区块链胜任/录用的专属预测效度，不以分数替代技术训练。"
             ]
           },
           "id": "blockchain-engineers.fit.personality-fit-block.22",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28171,11 +28436,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能在系统异常或评审质疑时保持沟通，比分数高低更重要。",
-              "愿意承认测试覆盖不足并求助，是专业能力的一部分。"
+              "编辑观察：在系统异常或评审质疑时能否保持沟通，并承认测试限制、及时求助。",
+              "未核行为与情绪测验分数的职业专属预测效度比较。"
             ]
           },
           "id": "blockchain-engineers.fit.personality-fit-block.24",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "list"
         },
         {
@@ -28194,10 +28462,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。真正有解释力的证据是受审查的工程实践表现。"
+              "人格、兴趣与单次测试不决定职业适配；工程样本可帮助提出自查问题，本轮未核其相对测验的预测效度排名。"
             ]
           },
           "id": "blockchain-engineers.fit.personality-fit-block.26",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28205,10 +28477,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：更有解释力的适配信号是能把需求与威胁转成可评审的设计与代码、愿意逐条核对依赖与权限、接受代码与变更被审查，并在证据不足时明确说出结论边界；对技术的好奇本身不足以证明胜任。"
+              "编辑自查信号：把需求/威胁转成可评审设计与代码，核依赖/权限并接受审查；只用于讨论训练差距，不证明录用或胜任。"
             ]
           },
           "id": "blockchain-engineers.fit.personality-fit-block.27",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28437,10 +28713,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合与否不取决于内外向。工作情境显示 94% 每天使用电子邮件、50% 每天通电话、71% 每周一次或以上但非每天进行面对面讨论，团队合作被 47% 评为极其重要；能否清楚解释设计与风险比外向程度更关键。"
+              "O*NET群体邮件94%、电话50%每日、面对面71%每周非每日、团队极其重要47%支持沟通需求；不据此认定表达相对外向分数的预测排名，或对内外向作准入结论。"
             ]
           },
           "id": "blockchain-engineers.fit.personality-fit-block.47",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28503,10 +28783,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪能力确实有帮助：需要在故障或安全事件中保持沟通、承受发布压力、在证据不足时坚持不发布。但情绪能力不能用单一分数定义，也不能替代技术训练与变更纪律。"
+              "编辑观察建议：在故障或评审中核沟通、压力应对和求助行为；本轮未核情绪测验分数对区块链胜任/录用的专属预测效度，不以分数替代技术训练。"
             ]
           },
           "id": "blockchain-engineers.fit.personality-fit-block.53",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28525,10 +28809,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用可复核的产出判断：一份含需求与威胁清单的设计说明、一份通过代码审查的合约或服务实现、一份含测试范围与限制的安全与性能测试记录。若你能写清依据与不确定性，说明你具备基本适配条件。"
+              "编辑建议用设计、代码审查和含限制的测试记录识别训练差距；能写清依据与不确定性不等于已达到基本胜任、生产权限或录用条件。"
             ]
           },
           "id": "blockchain-engineers.fit.personality-fit-block.55",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28580,10 +28868,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明生产环境、密钥与变更授权的责任边界。"
+              "实际链接《区块链信息服务管理规定》，支持适用公众信息服务的主体义务，不是所有内部工程师密钥/发布授权制度。"
             ]
           },
           "id": "blockchain-engineers.fit.personality-fit-block.60",
+          "source_refs": [
+            "faa-design-approvals"
+          ],
           "type": "prose"
         },
         {
@@ -28657,10 +28948,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "适配信号：更有解释力的信号是能把需求与威胁转成可评审的设计与代码、愿意逐条核对依赖与权限并接受审查；对技术的好奇本身不足以证明胜任。"
+              "编辑自查：需求/威胁表达、权限核对及审查反馈，不作为已验证的职业预测信号或个人胜任结论。"
             ]
           },
           "id": "blockchain-engineers.fit.riasec-fit-block.9",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28806,16 +29101,16 @@
                 "url": "#career-visual-group-ai-impact"
               },
               {
-                "entity": "O*NET-SOC 15-1299.07 职业摘要",
+                "entity": "O*NET完整任务与情境",
                 "id": "link-2",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/15-1299.07"
+                "url": "https://www.onetonline.org/link/details/15-1299.07"
               },
               {
-                "entity": "O*NET-SOC 15-1299.07 详细资料（任务与工作活动）",
+                "entity": "O*NET职业摘要",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/15-1299.07"
+                "url": "https://www.onetonline.org/link/summary/15-1299.07"
               },
               {
                 "entity": "NIST Cybersecurity Framework 2.0",
@@ -28867,10 +29162,17 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：风险与边界条目依据 O*NET 15-1299.07 的官方任务、工作活动与工作情境、O*NET 培训与教育信息，以及 NIST 网络安全框架与 AI 风险管理框架、中国大陆《区块链信息服务管理规定》等公开资料；不覆盖具体机构的内部制度。"
+              "证据范围：O*NET任务/情境支持工作对象，NIST CSF2.0和AI RMF1.0官方入口支持一般治理背景；中国规定实际条款支持特定公众信息服务义务。六类后果与控制为编辑风险分析，不是事故发生率、机构批准流程或培训目录提供的风险结论。"
             ]
           },
           "id": "blockchain-engineers.risk.career-risk-cards.10",
+          "source_refs": [
+            "details-current",
+            "nasa-seh",
+            "nist-ai-rmf",
+            "faa-design-approvals",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28900,10 +29202,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "采用最小权限、密钥托管与轮换规则、环境隔离与访问审计，并定期复核。"
+              "编辑控制建议，具体授权与制度另核：采用最小权限、密钥托管与轮换规则、环境隔离与访问审计，并定期复核。 区分代码/配置恢复与账本结果，不能保证撤销已确认交易。"
             ]
           },
           "id": "blockchain-engineers.risk.career-risk-cards.13",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28944,10 +29250,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "设计阶段做威胁建模与形式化评审，实现后进行代码审查与专门的安全测试。"
+              "编辑控制建议，具体授权与制度另核：设计阶段做威胁建模与形式化评审，实现后进行代码审查与专门的安全测试。 区分代码/配置恢复与账本结果，不能保证撤销已确认交易。"
             ]
           },
           "id": "blockchain-engineers.risk.career-risk-cards.17",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28988,10 +29298,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "固定版本与配置基线，使用依赖扫描与受控环境验证，并保留可回滚的发布记录。"
+              "编辑控制建议，具体授权与制度另核：固定版本与配置基线，使用依赖扫描与受控环境验证，并保留可回滚的发布记录。 区分代码/配置恢复与账本结果，不能保证撤销已确认交易。"
             ]
           },
           "id": "blockchain-engineers.risk.career-risk-cards.21",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -29032,10 +29346,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在测试网或灰度环境完成安全与性能测试，明确回滚条件与责任人。"
+              "编辑控制建议，具体授权与制度另核：在测试网或灰度环境完成安全与性能测试，明确回滚条件与责任人。 区分代码/配置恢复与账本结果，不能保证撤销已确认交易。"
             ]
           },
           "id": "blockchain-engineers.risk.career-risk-cards.25",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -29120,10 +29438,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在合同与流程中明确交付物、审查人、发布审批与升级链，保留版本与签署记录。"
+              "编辑控制建议，具体授权与制度另核：在合同与流程中明确交付物、审查人、发布审批与升级链，保留版本与签署记录。 区分代码/配置恢复与账本结果，不能保证撤销已确认交易。"
             ]
           },
           "id": "blockchain-engineers.risk.career-risk-cards.33",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -29142,10 +29464,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明美国职业身份与官方任务口径，不用于风险评估。"
+              "实际链接详细页支持任务、活动与情境，不提供事故率或通用恢复授权。"
             ]
           },
           "id": "blockchain-engineers.risk.career-risk-cards.35",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -29153,10 +29478,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明官方任务、工作活动与工作情境口径，不用于风险评估。"
+              "实际链接摘要支持职业职责，非健康或风险因果研究。"
             ]
           },
           "id": "blockchain-engineers.risk.career-risk-cards.36",
+          "source_refs": [
+            "onet-summary"
+          ],
           "type": "prose"
         },
         {
@@ -29164,10 +29492,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明 Computer Occupations, All Other（SOC 15-1299）口径 的就业与预测，不用于风险评估。"
+              "实际链接NIST CSF2.0一般网络安全风险框架，不是SOC15-1299就业预测或本系统合规证明。"
             ]
           },
           "id": "blockchain-engineers.risk.career-risk-cards.37",
+          "source_refs": [
+            "nasa-seh"
+          ],
           "type": "prose"
         },
         {
@@ -29175,10 +29506,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明网络安全风险治理的一般框架，不构成对具体系统的合规判定。"
+              "实际链接NIST AI RMF1.0，2023发布的自愿AI治理框架，2026正在修订；不是CSF2.0或中国法律。"
             ]
           },
           "id": "blockchain-engineers.risk.career-risk-cards.38",
+          "source_refs": [
+            "nist-ai-rmf"
+          ],
           "type": "prose"
         },
         {
@@ -29186,10 +29520,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明人工智能风险治理的一般框架与责任边界。"
+              "实际链接中国《区块链信息服务管理规定》，第2/5/8/9/11/17条支持适用主体、内容、实名、安全评估、备案与日志，非AI治理框架或工程师执照。"
             ]
           },
           "id": "blockchain-engineers.risk.career-risk-cards.39",
+          "source_refs": [
+            "faa-design-approvals"
+          ],
           "type": "prose"
         }
       ]
@@ -29374,10 +29711,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：本节描述的是可核对的资格与路径信息，不构成对任何机构、项目或个人的评价，也不提供录用或通过认证的建议。"
+              "以下层级、入门岗位和补课顺序是编辑路径建议，不是统一晋级制度；资格、招生与具体雇主要求分别核。"
             ]
           },
           "id": "blockchain-engineers.path.career-path-block.11",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29528,10 +29868,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 Job Zone、学历构成与训练入口。"
+              "此职业摘要用于核Job Zone Four/SVP7至低于8及新入职所需教育回答38%学士、19%部分大学无学位、13%硕士；不是现职学历构成或个人固定学制，不提供3,657项训练目录的出处/实时招生。训练数量及IPEDS来源应核培训页，具体项目费用/招生仍待核。"
             ]
           },
           "id": "blockchain-engineers.path.career-path-block.25",
+          "source_refs": [
+            "training-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -29572,10 +29916,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "不独立负责生产发布，须逐项复核。"
+              "编辑路径：具体机构分工/授权及要求另核，不独立负责生产发布，须逐项复核。"
             ]
           },
           "id": "blockchain-engineers.path.career-path-block.29",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29616,10 +29963,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "取得相关学位或完成同等训练。"
+              "编辑路径：具体机构分工/授权及要求另核，取得相关学位或完成同等训练。"
             ]
           },
           "id": "blockchain-engineers.path.career-path-block.33",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29682,10 +30032,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按授权范围承担责任，保留审查与发布记录。"
+              "编辑路径：具体机构分工/授权及要求另核，按授权范围承担责任，保留审查与发布记录。"
             ]
           },
           "id": "blockchain-engineers.path.career-path-block.39",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29726,10 +30079,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "具备评审与培养能力并获机构授权。"
+              "编辑路径：具体机构分工/授权及要求另核，具备评审与培养能力并获机构授权。"
             ]
           },
           "id": "blockchain-engineers.path.career-path-block.43",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29792,10 +30148,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "不承担独立安全结论责任。"
+              "编辑路径：具体机构分工/授权及要求另核，不承担独立安全结论责任。"
             ]
           },
           "id": "blockchain-engineers.path.career-path-block.49",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29847,10 +30206,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在方案授权范围内实现与测试，对外结论须复核。"
+              "编辑路径：具体机构分工/授权及要求另核，在方案授权范围内实现与测试，对外结论须复核。"
             ]
           },
           "id": "blockchain-engineers.path.career-path-block.54",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29946,10 +30308,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "具备评审与培养资质。"
+              "编辑路径：具体机构分工/授权及要求另核，具备评审与培养资质。"
             ]
           },
           "id": "blockchain-engineers.path.career-path-block.63",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30230,7 +30595,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "编辑建议核对的能力材料",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -30238,35 +30603,35 @@
               [
                 "软件与信息技术服务企业的后端或测试岗位",
                 "在带教下实现并测试模块、阅读日志与排查缺陷；先熟悉版本管理、代码审查与发布流程。",
-                "招聘方通常看计算机相关学历、编程能力与项目或实习经历。",
+                "编辑建议核对的能力材料（未核统一雇主要求）：计算机相关学历、编程能力与项目或实习经历。",
                 "提交一份可运行、可测试的小型服务或合约，附代码、测试与部署说明。",
                 "此路径不独立负责生产发布与密钥；须核对访问权限、审查安排与带教责任人。"
               ],
               [
                 "金融科技机构的工程与安全岗位",
                 "参与内部系统或账本相关模块的开发与测试，配合合规与风控要求做记录。",
-                "雇主更看重工程能力、对资金与数据安全的敏感度与沟通能力。",
+                "编辑建议核对的能力材料（未核统一雇主要求）：工程能力、对资金与数据安全的敏感度与沟通能力。",
                 "提交一份含权限模型与异常处理说明的设计文档，以及对应的测试记录。",
                 "资金与合规判断由机构相关角色负责；工程人员不得代替合规作出结论。"
               ],
               [
                 "互联网平台的基础设施或平台工程岗位",
                 "负责部署、监控与容量相关的工程任务，参与故障演练与复盘。",
-                "招聘方看分布式系统基础、脚本与自动化能力以及运维经验。",
+                "编辑建议核对的能力材料（未核统一雇主要求）：分布式系统基础、脚本与自动化能力以及运维经验。",
                 "提交一份含回滚方案与演练结果的部署说明。",
                 "平台稳定性责任与安全结论须由团队共同确认，不能仅凭个人测试下结论。"
               ],
               [
                 "区块链信息服务或协议团队的工程岗位",
                 "在测试网或自建环境实现协议相关模块，参与安全与性能测试。",
-                "招聘方看协议与密码学基础、代码质量与安全测试经验。",
+                "编辑建议核对的能力材料（未核统一雇主要求）：协议与密码学基础、代码质量与安全测试经验。",
                 "提交一份含威胁建模、测试范围与限制的评估记录。",
                 "对外提供信息服务须核对备案与安全评估要求，技术能力不替代合规义务。"
               ],
               [
                 "相邻岗位转入（后端开发、运维、安全运营）",
                 "承接编码、部署或安全监测任务，熟悉版本、配置与变更流程。",
-                "招聘方看相关背景与工程经验，并核对是否具备分布式与安全基础。",
+                "编辑建议核对的能力材料（未核统一雇主要求）：相关背景与工程经验，并核对是否具备分布式与安全基础。",
                 "提交一份从既有岗位任务中整理的可复核产出，并说明与协议和密码学的差距。",
                 "相邻岗位经验不等于协议与密钥责任；转岗须补足分布式系统与安全训练。"
               ]
@@ -30580,27 +30945,27 @@
               [
                 "计算机相关学士学位（美国）",
                 "计划进入美国工程岗位的人",
-                "通常是专业岗位的常见要求。",
+                "38%受访者选择学士；是群体描述，不证明所有雇主常见要求",
                 "38%受访者选择学士；不是全体雇主统一门槛。",
                 "核对学校实际课程、学历认可与岗位要求，建议包含编程、算法、操作系统和网络基础。",
-                "学制较长，含学费与项目时间。",
+                "具体学制、学费及认可条件以学校为准，本轮未核个人总成本",
                 "学位本身不等于机构授权或生产环境权限。"
               ],
               [
                 "硕士或更高学位（计算机、密码学或信息安全方向）",
                 "希望从事协议、密码学或安全研究的人",
                 "可作为研究能力证据；是否要求更高学位以具体岗位为准。",
-                "不是入门门槛。",
+                "是否要求更高学位按目标岗位核，非全部入门岗统一结论",
                 "须完成相关课程与研究经历。",
-                "学制与科研时间投入较大。",
+                "具体学制/科研时间/学费按项目核，未取得个人总成本",
                 "学位不替代机构授权、合规批准或发布权限。"
               ],
               [
                 "厂商或行业技术认证（云、容器、安全等）",
                 "希望证明特定工具链能力的人",
-                "在招聘中具有参考价值；O*NET 技术清单列出 34 项 Hot Technology。",
+                "编辑建议核目标雇主是否认可特定证书；Hot工具出现不证明证书招聘价值",
                 "不是普遍法律门槛。",
-                "通常以考试或项目方式取得。",
+                "具体发证机构的考试/项目与资格条件另核，未核统一条件",
                 "培训与考核成本因路径而异。",
                 "工具认证不等于分布式系统与密码协议能力，不构成发布与密钥权限。"
               ],
@@ -30608,8 +30973,8 @@
                 "代码与密钥访问授权（机构内部）",
                 "所有接触生产环境或密钥的人员",
                 "决定能否访问生产系统与密钥以及可访问的范围。",
-                "在多数机构是开展工作的前提。",
-                "须按机构安全制度签署并接受培训。",
+                "按实际机构与系统访问范围核，非多数机构比例调查",
+                "按实际内部制度核权限、培训与签署，不宣称统一流程",
                 "培训与审批时间。",
                 "授权不产生对外披露或代替合规判断的权力。"
               ],
@@ -30630,10 +30995,27 @@
                 "须依据《区块链信息服务管理规定》及相关法律法规核对适用条件。",
                 "合规与整改时间。",
                 "合规材料不是能力评价，也不替代工程与安全责任。"
+              ],
+              [
+                "EC-Council CBP（美国关联第三方认证）",
+                "希望补区块链技术知识且先核当前报考条件的人",
+                "相关知识证明，非已验证录用收益",
+                "非职业普遍许可或全体雇主统一门槛",
+                "O*NET关联目录列1项EC-Council Certified Blockchain Professional（CBP），需考试，目录问答为每3年通过CEU续证，非全体工程师入职许可。厂商现页同时介绍CBP与BDC/BFC/BBLC，BDC建议具面向对象、异步JavaScript及前后端开发基础；不能据此认定CBP报考分支。CBP具体资格、考试费、培训总成本、续证学时/费用与当前可报名状态仍证据不足，不混用其他同缩写证书。",
+                "O*NET关联目录列1项EC-Council Certified Blockchain Professional（CBP），需考试，目录问答为每3年通过CEU续证，非全体工程师入职许可。厂商现页同时介绍CBP与BDC/BFC/BBLC，BDC建议具面向对象、异步JavaScript及前后端开发基础；不能据此认定CBP报考分支。CBP具体资格、考试费、培训总成本、续证学时/费用与当前可报名状态仍证据不足，不混用其他同缩写证书。",
+                "3年CEU为目录信息；具体资格/费用/续证学时仍未核，不混作C4或BDC。"
               ]
             ]
           },
           "id": "blockchain-engineers.path.credential-decision.1",
+          "source_refs": [
+            "details-current",
+            "cert-current",
+            "cbp-directory",
+            "cbp-current",
+            "faa-design-approvals",
+            "editor-current"
+          ],
           "title": "资格选择",
           "type": "table"
         },
@@ -30644,15 +31026,20 @@
             "paragraphs": [
               "资格边界：学历、技能证明、机构授权、生产与密钥权限、发布责任是五种不同状态，任何一项都不能由另一项自动推出。",
               "美国侧：O*NET 把该职业列为 Job Zone Four（SVP 7.0 至 <8.0），受访者认为需学士学历者占 38%、部分大学教育、未获学位19%、硕士 13%；O*NET 的学历与训练信息不构成职业许可清单；须按目标法域、服务内容与雇主要求另核准入条件。",
-              "中国大陆侧：中国大陆2022年版职业分类大典列有区块链工程技术人员（2-02-38-08），涵盖架构、底层技术、应用、测试、部署与运维；2020年发布时编码为2-02-10-15。职业分类不等于个人执业许可，也不证明同名招聘岗位与美国15-1299.07一一对应。 《区块链信息服务管理规定》适用于向社会公众提供区块链信息服务的主体、节点及相关技术支持机构；提供服务之日起十个工作日内备案，开发上线新产品、新应用、新功能按规定报安全评估，落实实名认证、内容管理与不少于六个月的日志备份。备案不是个人职业许可，不能把所有内部账本开发一概视为公众信息服务。",
-              "申请与入职前应逐项核实教育认可、课程与训练内容、生产与密钥权限、审查与发布规则，并保留书面确认。"
+              "福州市人社局2026公示第86项实际列区块链工程技术人员（2-02-38-08）；2020国家网信办转载发布时编码2-02-10-15，描述架构、底层、应用、测试、部署与运维。2022大典原入口本轮返回无正文，未声称读到全文。分类不等个人许可，同名中国岗位不证明与美国15-1299.07一一对应。 编辑建议：在书面授权范围内访问生产系统与密钥，采用最小权限；《区块链信息服务管理规定》适用于向社会公众提供区块链信息服务的主体、节点及相关技术支持机构；提供服务之日起十个工作日内备案，开发上线新产品、新应用、新功能按规定报安全评估，落实实名认证、内容管理与不少于六个月的日志备份。备案不是个人职业许可，不能把所有内部账本开发一概视为公众信息服务。",
+              "申请与入职前应逐项核实教育认可、课程与训练内容、生产与密钥权限、审查与发布规则，并保留书面确认。 相关训练目录3,657项，依据IPEDS2025—26学校目录、2024—25授位与CIP映射，含计算机等相关项目，非3,657个区块链专项课程或实时招生；具体资格、学制、费用和在招学徒未核。 O*NET关联目录列1项EC-Council Certified Blockchain Professional（CBP），需考试，目录问答为每3年通过CEU续证，非全体工程师入职许可。厂商现页同时介绍CBP与BDC/BFC/BBLC，BDC建议具面向对象、异步JavaScript及前后端开发基础；不能据此认定CBP报考分支。CBP具体资格、考试费、培训总成本、续证学时/费用与当前可报名状态仍证据不足，不混用其他同缩写证书。"
             ]
           },
           "id": "blockchain-engineers.path.credential-boundary.1",
           "source_refs": [
-            "cn-occupation-2022",
+            "details-current",
+            "training-current",
+            "cbp-directory",
+            "cbp-current",
+            "cn-code-current",
             "cn-occupation-2020",
-            "faa-design-approvals"
+            "faa-design-approvals",
+            "editor-current"
           ],
           "title": "资格与练习边界",
           "type": "notice"
@@ -31080,10 +31467,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局按行业门类与岗位大类公布平均工资，但没有单列「区块链工程师」这一职业。"
+              "NBS2025信息传输、软件和IT服务业：城镇非私营248,752、私营128,166元/年；规模以上该行业企业全部242,019、专业技术275,504、中层及以上管理472,496元/年。仅按实际单位行业/规模及本人职责匹配，是税前年平均，不是区块链职业中位、起薪或城市月薪。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.25",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -31102,10 +31492,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业门类平均工资（对照口径，本页不发布数值）"
+              "匹配行业与人员大类税前年平均参照（非职业工资）"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.27",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -31124,10 +31517,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该职业的全国工资与就业分布"
+              "IT服务非私营248,752、私营128,166元/年；本职业精确工资/就业分布仍不足。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.29",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -31135,7 +31531,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明BLS 2025—2035年SOC 15-1299父类就业规模、增幅与年均空缺。"
+              "实际链接BLS Table1.2支持SOC15-1299父级2025—2035规模、5.1%增长与年均27000，非区块链细分。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.30",
@@ -31149,10 +31545,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明父类口径（Computer Occupations, All Other）的就业与预测字段，须与工资数据分开解读。"
+              "实际链接O*NET摘要，支持定义及父级2025就业471200、约5%类别及年均27000；精确5.1%由BLS表支持。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.31",
+          "source_refs": [
+            "onet-summary",
+            "bls-ep"
+          ],
           "type": "prose"
         },
         {
@@ -31160,10 +31560,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆的统计口径与缺口，不作为职业工资。"
+              "实际链接NBS2025表及附注，支持匹配行业/人员大类年平均，不提供本职业就业。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.32",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -31171,10 +31574,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明官方任务与工作活动口径。"
+              "实际链接BLS计算机IT群体OOH，支持2025群体中位109470、2025—2035年均280000空缺，非本职业任务或父级27000。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.33",
+          "source_refs": [
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -31182,10 +31588,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足安全运营与合规训练；安全运营不替代协议实现。"
+              "编辑补课分析：系统安全监测、漏洞评估与合规，按目标安全分析岗位核。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.34",
+          "source_refs": [
+            "adj-security-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31193,10 +31603,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是系统理解、日志与排查能力。"
+              "共有能力：系统理解、日志分析与风险评估。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.35",
+          "source_refs": [
+            "adj-security-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31204,10 +31618,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同为安全方向，但对象与责任不同。"
+              "编辑距离较近取决已有安全经验；对象不局限账本，非录用保证。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.36",
+          "source_refs": [
+            "adj-security-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31215,10 +31633,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足业务分析与需求管理训练。"
+              "编辑补课：业务流程、需求分析、系统改进与集成。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.37",
+          "source_refs": [
+            "adj-systems-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31226,10 +31648,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是系统设计与沟通能力。"
+              "共有能力：系统分析、技术沟通和方案比较。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.38",
+          "source_refs": [
+            "adj-systems-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31237,10 +31663,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：从协议实现转向业务系统分析。"
+              "编辑距离中等，需补具体业务与组织流程，非统一转换周期。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.39",
+          "source_refs": [
+            "adj-systems-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31248,10 +31678,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足数据库、备份恢复与数据治理训练。"
+              "编辑补课：数据库管理、性能/容量/扩展、安全与恢复。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.40",
+          "source_refs": [
+            "adj-dba-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31259,10 +31693,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是数据模型与访问控制意识。"
+              "共有能力：数据模型、完整性与访问控制。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.41",
+          "source_refs": [
+            "adj-dba-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31270,10 +31708,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同为数据链条上的岗位。"
+              "编辑距离取决数据库管理实践；15-1242.00为管理员，不与数据库架构师混作单列。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.42",
+          "source_refs": [
+            "adj-dba-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31281,10 +31723,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足渗透测试与授权边界训练。"
+              "编辑补课：目标语言、按规格编写修改测试脚本/应用代码。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.43",
+          "source_refs": [
+            "adj-programmer-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31292,10 +31738,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是对攻击面与漏洞的理解。"
+              "共有能力：编码、调试和测试；不能当渗透测试工作。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.44",
+          "source_refs": [
+            "adj-programmer-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31303,10 +31753,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：从构建者视角转向攻击者视角。"
+              "编辑距离较近取决语言和应用经验，不默认承担共识与密钥责任。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.45",
+          "source_refs": [
+            "adj-programmer-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31314,10 +31768,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足后端服务、并发与稳定性工程训练。"
+              "编辑补课：构建/升级安全技术、实施控制、监控响应与取证。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.46",
+          "source_refs": [
+            "adj-secengineer-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31325,10 +31783,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是编码、调试与部署能力。"
+              "共有能力：安全测试、权限设计与漏洞识别。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.47",
+          "source_refs": [
+            "adj-secengineer-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31336,10 +31798,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：工程基础相通，差异在协议与共识。"
+              "编辑距离取决工程防护经验，非一般后端服务的统一转岗结论。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.48",
+          "source_refs": [
+            "adj-secengineer-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31347,10 +31813,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足安全架构、合规与风险管理训练。"
+              "编辑补课：模拟内外攻击、对手工具、利用验证及授权报告。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.49",
+          "source_refs": [
+            "adj-pentest-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31358,10 +31828,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是安全测试与权限设计能力。"
+              "共有能力：攻击面、系统漏洞和测试分析。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.50",
+          "source_refs": [
+            "adj-pentest-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31369,10 +31843,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同为安全技术岗位。"
+              "编辑距离中等需补攻击模拟，不把安全架构治理当渗透测试全体任务。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.51",
+          "source_refs": [
+            "adj-pentest-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31380,10 +31858,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足需求分析与流程梳理训练。"
+              "编辑补课：复杂应用/管理/网络问题解决、系统管理与集成、架构适配。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.52",
+          "source_refs": [
+            "adj-arch-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31391,10 +31873,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是系统思维与文档能力。"
+              "共有能力：系统思维、组件评估和测试文档。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.53",
+          "source_refs": [
+            "adj-arch-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31402,10 +31888,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：从技术实现转向系统分析。"
+              "编辑距离依架构和集成经验，非仅业务流程分析。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.54",
+          "source_refs": [
+            "adj-arch-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31413,10 +31903,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足数据标准、查询优化与运维训练。"
+              "编辑补课：LAN/WAN等通信网络设计实施、容量建模、硬件与网络安全。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.55",
+          "source_refs": [
+            "adj-network-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31424,10 +31918,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是数据完整性与访问控制意识。"
+              "共有能力：分布式通信与可靠性分析，需补具体网络架构。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.56",
+          "source_refs": [
+            "adj-network-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31435,10 +31933,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：都处理数据一致性与权限问题。"
+              "编辑距离取决拓扑、容量和网络实施经验，不把数据库查询优化当目标核心。"
             ]
           },
           "id": "blockchain-engineers.market-signals.market-signal-card.57",
+          "source_refs": [
+            "adj-network-current",
+            "editor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -31553,7 +32055,7 @@
             "entries": [
               "边界一：本页把美国职业口径（O*NET-SOC 15-1299.07）与中国大陆口径分开标注，不跨法域直接套用；工资、就业与预测字段的口径为 Computer Occupations, All Other（SOC 15-1299）。",
               "边界二：编辑练习与作品建议均为虚构材料，读者不应据此连接真实主网、操作真实资金或对外提供服务，也不得把练习结果包装成生产环境的安全结论。",
-              "边界三：本页由 O*NET、BLS、国家统计局、NIST 网络安全框架与 AI 风险管理框架、《区块链信息服务管理规定》与 ILO 任务暴露研究等公开资料及编辑设计组成；每项资料的适用范围与缺口单独标记。"
+              "边界三：O*NET/BLS美国任务与父级统计、NBS中国匹配行业年平均、CAC公众信息服务条款及NIST一般治理入口分别限范围；AI辅助、适配信号、控制步骤与转岗距离是编辑分析；CBP为第三方认证。"
             ]
           },
           "id": "blockchain-engineers.sources.boundary.1",
@@ -31578,10 +32080,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "费马测试职业内容编辑组：依据 O*NET、BLS、国家统计局、NIST 网络安全框架与 AI 风险管理框架，以及《区块链信息服务管理规定》等公开资料整理，逐项标注口径与数据期。"
+              "编辑依据实际任务/父级工资预测、2025中国表与附注、中国服务条款及当前证书目录整理；区分原文、匹配代理、编辑建议及缺口，不将所有历史来源视为本轮全文核实。"
             ]
           },
           "id": "blockchain-engineers.sources.source-card.1",
+          "source_refs": [
+            "details-current",
+            "industry-current",
+            "trends-current",
+            "wages-current",
+            "nbs-current",
+            "cbp-directory",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31600,10 +32111,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：O*NET职业资料2026年更新；美国工资为2025年OEWS父类口径，BLS就业预测为2025—2035年；O*NET摘要所保留2024—2034预测作为历史资料；中国城镇单位工资为2025年；本轮检索2026-10-03。"
+              "本轮2026-10-09：O*NET2026更新，工资/行业基年2025、当前预测2025—2035，2025招聘广告，训练IPEDS2025—26/授位2024—25；BLS精确父级表另核。中国NBS2025、CAC2019服务条款/2020职业发布和福州2026编码行；2022大典入口无正文未称全文读到。保护区历史期保留为范围冲突。"
             ]
           },
           "id": "blockchain-engineers.sources.source-card.3",
+          "source_refs": [
+            "details-current",
+            "industry-current",
+            "trends-current",
+            "training-current",
+            "nbs-current",
+            "cn-code-current"
+          ],
           "type": "prose"
         },
         {
@@ -32088,6 +32607,310 @@
                 "name": "O*NET 15-1241.00 计算机网络架构师",
                 "period": "职业摘要；本轮查阅2026-10-03",
                 "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1241.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "完整任务、技能、情境与学历",
+                  "2026更新；行业/工资2025；预测2025—2035；训练目录2025—26与授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "details-current",
+                "limitation": "群体字段非个人门槛；父级非区块链细分值；训练目录不等实时招生，认证不等职业执照。",
+                "market": "美国",
+                "name": "完整任务、技能、情境与学历",
+                "period": "2026更新；行业/工资2025；预测2025—2035；训练目录2025—26与授位2024—25",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/15-1299.07"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025其他计算机职业父级行业分布",
+                  "2026更新；行业/工资2025；预测2025—2035；训练目录2025—26与授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "industry-current",
+                "limitation": "群体字段非个人门槛；父级非区块链细分值；训练目录不等实时招生，认证不等职业执照。",
+                "market": "美国",
+                "name": "2025其他计算机职业父级行业分布",
+                "period": "2026更新；行业/工资2025；预测2025—2035；训练目录2025—26与授位2024—25",
+                "publisher": "O*NET OnLine",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/industry/15-1299.07"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025—2035其他计算机职业父级预测",
+                  "2026更新；行业/工资2025；预测2025—2035；训练目录2025—26与授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "trends-current",
+                "limitation": "群体字段非个人门槛；父级非区块链细分值；训练目录不等实时招生，认证不等职业执照。",
+                "market": "美国",
+                "name": "2025—2035其他计算机职业父级预测",
+                "period": "2026更新；行业/工资2025；预测2025—2035；训练目录2025—26与授位2024—25",
+                "publisher": "O*NET OnLine",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/localtrends/15-1299.07"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025其他计算机职业父级工资全国分位",
+                  "2026更新；行业/工资2025；预测2025—2035；训练目录2025—26与授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "wages-current",
+                "limitation": "群体字段非个人门槛；父级非区块链细分值；训练目录不等实时招生，认证不等职业执照。",
+                "market": "美国",
+                "name": "2025其他计算机职业父级工资全国分位",
+                "period": "2026更新；行业/工资2025；预测2025—2035；训练目录2025—26与授位2024—25",
+                "publisher": "O*NET OnLine",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/localwages/15-1299.07"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相关训练目录",
+                  "2026更新；行业/工资2025；预测2025—2035；训练目录2025—26与授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "training-current",
+                "limitation": "群体字段非个人门槛；父级非区块链细分值；训练目录不等实时招生，认证不等职业执照。",
+                "market": "美国",
+                "name": "相关训练目录",
+                "period": "2026更新；行业/工资2025；预测2025—2035；训练目录2025—26与授位2024—25",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/localtraining/15-1299.07"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "第三方认证目录",
+                  "2026更新；行业/工资2025；预测2025—2035；训练目录2025—26与授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cert-current",
+                "limitation": "群体字段非个人门槛；父级非区块链细分值；训练目录不等实时招生，认证不等职业执照。",
+                "market": "美国",
+                "name": "第三方认证目录",
+                "period": "2026更新；行业/工资2025；预测2025—2035；训练目录2025—26与授位2024—25",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/localcert/15-1299.07"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025城镇单位工资及附注",
+                  "2025；2026-05-15发布"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbs-current",
+                "limitation": "按实际雇主行业、单位覆盖及本人职责匹配，税前年平均非职业中位、起薪或城市月薪。",
+                "market": "中国大陆",
+                "name": "2025城镇单位工资及附注",
+                "period": "2025；2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "CBP认证详情与三年CEU续证目录",
+                  "2026-10-09读取"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cbp-directory",
+                "limitation": "EC-Council CBP第三方认证，非职业许可；不与C4或BDC混用，精确报考/费/CEU学时未核。",
+                "market": "美国",
+                "name": "CBP认证详情与三年CEU续证目录",
+                "period": "2026-10-09读取",
+                "publisher": "O*NET / CareerOneStop",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/certinfo/13853-D"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "EC-Council现有区块链项目页面",
+                  "2026-10-09读取"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cbp-current",
+                "limitation": "当前同时含CBP文字与BDC/BFC/BBLC，不把BDC先修或三个月学习建议当CBP统一报考条件；推广就业主张非独立预测。",
+                "market": "美国",
+                "name": "EC-Council现有区块链项目页面",
+                "period": "2026-10-09读取",
+                "publisher": "EC-Council",
+                "scope": "contextual",
+                "url": "https://www.eccouncil.org/train-certify/blockchain/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "福州2026技能培训公示第86项职业编码",
+                  "2026-06-03公示"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-code-current",
+                "limitation": "可核区块链工程技术人员2-02-38-08；地方公示非2022大典全文、全国证书许可或实时空缺。",
+                "market": "中国大陆",
+                "name": "福州2026技能培训公示第86项职业编码",
+                "period": "2026-06-03公示",
+                "publisher": "福州市人力资源和社会保障局",
+                "scope": "contextual",
+                "url": "https://www.fuzhou.gov.cn/zgfzzt/srsj/fzrs/tzgg/202606/t20260603_5329961.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "区块链任务分析与自查建议",
+                  "2026-10-09"
+                ],
+                "evidence_type": "editorial_synthesis",
+                "id": "editor-current",
+                "limitation": "链接作职业背景；具体工具辅助、控制步骤、晋级、转岗距离和个人观察属编辑分析，非因果或雇主普遍制度。",
+                "market": "美国",
+                "name": "区块链任务分析与自查建议",
+                "period": "2026-10-09",
+                "publisher": "费马测试职业内容编辑组",
+                "scope": "editorial_synthesis",
+                "url": "https://www.onetonline.org/link/summary/15-1299.07"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "信息安全分析师真实职责定义",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-security-current",
+                "limitation": "职责支持对应目标，转岗距离及补课建议为编辑分析，无统一录用保证。",
+                "market": "美国",
+                "name": "信息安全分析师真实职责定义",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1212.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "计算机系统分析师真实职责定义",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-systems-current",
+                "limitation": "职责支持对应目标，转岗距离及补课建议为编辑分析，无统一录用保证。",
+                "market": "美国",
+                "name": "计算机系统分析师真实职责定义",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1211.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "数据库管理员真实职责定义",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-dba-current",
+                "limitation": "职责支持对应目标，转岗距离及补课建议为编辑分析，无统一录用保证。",
+                "market": "美国",
+                "name": "数据库管理员真实职责定义",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1242.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "计算机程序员真实职责定义",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-programmer-current",
+                "limitation": "职责支持对应目标，转岗距离及补课建议为编辑分析，无统一录用保证。",
+                "market": "美国",
+                "name": "计算机程序员真实职责定义",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1251.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "信息安全工程师真实职责定义",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-secengineer-current",
+                "limitation": "职责支持对应目标，转岗距离及补课建议为编辑分析，无统一录用保证。",
+                "market": "美国",
+                "name": "信息安全工程师真实职责定义",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1299.05"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "渗透测试员真实职责定义",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-pentest-current",
+                "limitation": "职责支持对应目标，转岗距离及补课建议为编辑分析，无统一录用保证。",
+                "market": "美国",
+                "name": "渗透测试员真实职责定义",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1299.04"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "计算机系统工程师与架构师真实职责定义",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-arch-current",
+                "limitation": "职责支持对应目标，转岗距离及补课建议为编辑分析，无统一录用保证。",
+                "market": "美国",
+                "name": "计算机系统工程师与架构师真实职责定义",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1299.08"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "计算机网络架构师真实职责定义",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-network-current",
+                "limitation": "职责支持对应目标，转岗距离及补课建议为编辑分析，无统一录用保证。",
+                "market": "美国",
+                "name": "计算机网络架构师真实职责定义",
+                "period": "2026更新",
+                "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-1241.00"
               }
@@ -34301,8 +35124,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.bls-outlook"
+              "onet-details",
+              "bls-outlook"
             ],
             "id": "key-and-credential-management",
             "mitigation": {
@@ -34333,8 +35156,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.faa-design-approvals"
+              "onet-details",
+              "bls-outlook"
             ],
             "id": "contract-protocol-defect",
             "mitigation": {
@@ -34365,8 +35188,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.faa-design-approvals"
+              "onet-details",
+              "bls-outlook"
             ],
             "id": "dependency-and-config-risk",
             "mitigation": {
@@ -34397,8 +35220,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.faa-design-approvals",
-              "career.source.nasa-seh"
+              "onet-details",
+              "bls-outlook"
             ],
             "id": "insufficient-testing-release",
             "mitigation": {
@@ -34429,8 +35252,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-summary",
-              "career.source.bls-outlook"
+              "onet-summary",
+              "faa-design-approvals"
             ],
             "id": "service-compliance-scope",
             "mitigation": {
@@ -34461,8 +35284,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-summary",
-              "career.source.onet-details"
+              "onet-details",
+              "bls-outlook"
             ],
             "id": "review-and-ownership-gap",
             "mitigation": {
@@ -35511,7 +36334,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls-ep",
+            "source_id": "onet-summary",
             "value": {
               "$item": "blockchain-engineers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35556,7 +36379,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls-ep",
+            "source_id": "onet-summary",
             "value": {
               "$item": "blockchain-engineers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -35785,7 +36608,7 @@
               "field": "url"
             },
             "target_slug": "database-administrators",
-            "target_title": "数据库管理员与架构师",
+            "target_title": "数据库管理员",
             "transition_distance": {
               "$item": "blockchain-engineers.market-signals.market-signal-card.42",
               "block": "market-signals",
@@ -36857,7 +37680,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "Big Five（英文）"
           },
           {
             "href": {
@@ -36867,7 +37690,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
+            "label": "MBTI（中文）"
           },
           {
             "href": {
@@ -36877,7 +37700,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (中文)"
+            "label": "九型人格（中文）"
           },
           {
             "href": {
@@ -36887,7 +37710,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (中文)"
+            "label": "智力与推理（中文）"
           }
         ]
       },
@@ -37270,7 +38093,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 15-1299.07 · Bright Outlook · 安全与发布责任",
@@ -37321,7 +38144,7 @@
       "text": "区块链工程师"
     }
   },
-  "source_content_sha256": "c8a2ae33cd4c148d19a9178ed429bda631ad3c8202cb3c0a1b6948e3d0ce3d56",
+  "source_content_sha256": "d0b9fe16038b95784feefbcbce30d491a620662c607029b87a0f760d74477ec4",
   "subject": {
     "canonical_slug": "blockchain-engineers",
     "name": "区块链工程师",

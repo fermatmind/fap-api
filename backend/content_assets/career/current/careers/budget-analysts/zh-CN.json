@@ -401,6 +401,9 @@
       "item:budget-analysts.ai-impact.ai-impact-table.9": {
         "status": "pending_mapping"
       },
+      "item:budget-analysts.ai-impact.ai-impact-table.9.unconsumed": {
+        "status": "pending_mapping"
+      },
       "item:budget-analysts.ai-impact.ai-impact-table.90": {
         "status": "mapped"
       },
@@ -4515,7 +4518,7 @@
       },
       "ai_impact_table.evidence_rows.05.link": {
         "ref": {
-          "id": "budget-analysts.ai-impact.ai-impact-table.9",
+          "id": "budget-analysts.ai-impact.ai-impact-table.9.unconsumed",
           "path": [
             "data",
             "entries",
@@ -5198,7 +5201,7 @@
       },
       "ai_impact_table.questions.05.link": {
         "ref": {
-          "id": "budget-analysts.ai-impact.ai-impact-table.9",
+          "id": "budget-analysts.ai-impact.ai-impact-table.9.unconsumed",
           "path": [
             "data",
             "entries",
@@ -24032,10 +24035,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "能否调整预算口径、能否变更假设、能否对外报送或承诺资金，由单位制度与授权决定；编制与审核权限来自岗位授权与培训记录，不由资历或熟练程度自行产生；涉及重大调整与对外报送的事项须按程序报批并留痕。"
+              "编制、复核、批准、报送与资金承诺分别核实际制度和岗位授权；培训记录证明学习经历，不自动授权。政府预算法67/69的法定预算调整由相应人大或常委会批准，72调剂依财政规定、73另有备案；企业预算核单位治理，不将全部调整和报送统一写为报批。"
             ]
           },
           "id": "budget-analysts.profile.career-quick-answers-block.19",
+          "source_refs": [
+            "budget-law-current",
+            "account-law-current"
+          ],
           "type": "prose"
         },
         {
@@ -24087,10 +24094,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "证据不足：中国职业细类与预算分析职责的一一映射本轮尚未核实，不断言没有对应细类。美国13-2031属商业财务运营，JobZone4；O*NET2024政府50%、教育16%、专业科技10%、其他24%，不是2025就业行业人数。"
+              "证据不足：中国职业细类与预算分析职责的一一映射本轮尚未核实，不断言无对应细类。美国13-2031属商业财务运营，JobZone4；O*NET2025本职业行业分布：政府51%、教育15%、其他34%（含专业科学技术服务和公司管理）；份额不推行业工资或个人录用。OOH另列政府子类26/13/11、教育15、专业科技9，分类呈现不同，不强行重算O*NET51%。"
             ]
           },
           "id": "budget-analysts.profile.career-quick-answers-block.24",
+          "source_refs": [
+            "industry-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -24109,10 +24120,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把该职业列为 Job Zone Four（SVP 7.0 至低于 8.0），受访者中 77% 认为需学士学位、13% 认为需高中或同等学历、8% 认为需硕士学位；实际入行多依靠会计、财务、经济或公共管理等相关专业学习，加上预算编制、成本分析与报表分析的实践积累。"
+              "O*NET新入职教育要求问答：77%学士、13%高中或同等、8%硕士；不是现有从业者学历构成。JobZone4/SVP7至不足8为准备概括；BLS典型学士/相关经验None/在岗培训None，不否定具体雇主训练。OOH部分经验可替代学历、部分雇主偏好硕士、职业认证可选。"
             ]
           },
           "id": "budget-analysts.profile.career-quick-answers-block.26",
+          "source_refs": [
+            "details-current",
+            "bls-entry",
+            "bls-ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -24219,10 +24235,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业身份与任务：O*NET-SOC 13-2031.00 Budget Analysts，2026 年更新页面，Job Zone Four（SVP 7.0 至低于 8.0），该职业未被标注 Bright Outlook。官方职责为「Examine budget estimates for completeness, accuracy, and conformance with procedures and regulations. Analyze budgeting and accounting reports.」；共 15 项任务，其中分析各部门月度预算与会计报告以维持支出控制重要性为 84、在成本分析与资金分配与预算编制方面提供建议与技术协助为 84、审查运营预算并分析影响预算需求的趋势为 79、汇总与分析会计记录以确定实施项目所需资源为 78、审查预算估计的完整性与准确性与合规性为 77。"
+              "O*NET13-2031.00 Budget Analysts档案2026更新、JobZone4/SVP7至不足8；15任务含12Core、1Supplemental和2New（沟通预算财务报告、提交及监控薪资增加，重要性NA非0）。原已列主要任务84/84/79/78/77正确；41一般、10详细工作活动与57情境分别读取，不是41任务。"
             ]
           },
           "id": "budget-analysts.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -24252,10 +24271,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "历史对照：O*NET仍显示2024就业50,400、2024—2034增长1%至2%、年均3,100空缺；当前2025—2035精确预测用BLS表1.2，不能混用。"
+              "O*NET已更新到2025就业50400人、2025—2035增长整数2%（Slower than average 1%—2%）、年均空缺2900；BLS表1.2精确1.9%、2035为51300、净增1000，各数独立取整，不用端点差900重算，非AI归因。"
             ]
           },
           "id": "budget-analysts.profile.onet-structured-fields-block.4",
+          "source_refs": [
+            "trends-current",
+            "bls-ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -24263,10 +24286,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET2024行业份额政府50%、教育16%、专业科技10%、其他24%；软件详细18类别与Hot11具体项/8 In Demand分开，份额不用于推工资或本职业2025行业人数。"
+              "O*NET2025本职业行业分布：政府51%、教育15%、其他34%（含专业科学技术服务和公司管理）；份额不推行业工资或个人录用。OOH另列政府子类26/13/11、教育15、专业科技9，分类呈现不同，不强行重算O*NET51%。 软件18类别/Hot11具体项和8InDemand是两种清单；2025招聘提及不等部署率。"
             ]
           },
           "id": "budget-analysts.profile.onet-structured-fields-block.5",
+          "source_refs": [
+            "industry-current",
+            "onet-hot-tech"
+          ],
           "type": "prose"
         },
         {
@@ -24942,12 +24969,6 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "O*NET-SOC 13-2031.00 行业分布",
-                "id": "link-12",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/13-2031.00"
-              },
-              {
                 "entity": "O*NET-SOC 13-2031.00 职业摘要",
                 "id": "link-13",
                 "relation": "career.source",
@@ -24970,12 +24991,6 @@
                 "id": "link-16",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/ooh/business-and-financial/budget-analysts.htm"
-              },
-              {
-                "entity": "O*NET-SOC 13-2031.00 职业摘要",
-                "id": "link-17",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/13-2031.00"
               },
               {
                 "entity": "O*NET-SOC 13-2031.00 自定义职业档案",
@@ -25010,10 +25025,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先在带教下完成一次从收集部门预算需求、核对估计与口径、汇总与调整、成本分析到编制报告的小型闭环，再谈证书与实习；同时核对目标岗位属于企业财务、公共部门预算还是绩效管理，其编制与审核权限、责任边界不同。"
+              "编辑建议：学习基础和申请实习、核资格可并行，用受监督的数据核对、差异分析与报告任务积累证据；不把先完成整个流程作为申请证书或实习的条件。企业、公共预算和绩效岗位分别核职责及权限。"
             ]
           },
           "id": "budget-analysts.ai-impact.ai-impact-table.11",
+          "source_refs": [
+            "editor-current",
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -25197,10 +25216,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明政府 50%、教育服务 16%、专业科学与技术服务 10%、其他 24%；不能推导行业工资或就业规模。"
+              "O*NET2025本职业行业分布：政府51%、教育15%、其他34%（含专业科学技术服务和公司管理）；份额不推行业工资或个人录用。OOH另列政府子类26/13/11、教育15、专业科技9，分类呈现不同，不强行重算O*NET51%。"
             ]
           },
           "id": "budget-analysts.ai-impact.ai-impact-table.28",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -25219,10 +25241,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明 Budget Analysts（SOC 13-2031）口径 的就业规模与 2024—2034 年预测。"
+              "O*NET已更新到2025就业50400人、2025—2035增长整数2%（Slower than average 1%—2%）、年均空缺2900；BLS表1.2精确1.9%、2035为51300、净增1000，各数独立取整，不用端点差900重算，非AI归因。"
             ]
           },
           "id": "budget-analysts.ai-impact.ai-impact-table.30",
+          "source_refs": [
+            "trends-current",
+            "bls-ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -25329,10 +25355,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、招聘技术信号、就业与工资数据以及任务暴露研究，不是 AI 替代率或岗位数量预测。"
+              "五张证据卡分读职责、任务、招聘软件、工资就业与任务暴露研究；BLS确实提供总体岗位数量预测，但不是因AI替代的预测、采用率或个人录用保证。"
             ]
           },
           "id": "budget-analysts.ai-impact.ai-impact-table.40",
+          "source_refs": [
+            "bls-ep-current",
+            "ilo-genai"
+          ],
           "type": "prose"
         },
         {
@@ -25505,10 +25535,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国SOC13-2031：2025就业50,400人，2035预测51,300人，净增1,000人、增长1.9%，年均空缺2,900；各数独立取整，不用端点差900重算净增，总体预测非AI归因。BLS OOH同职业将1.9%取整为2%；典型学历学士，O*NET旧2024—2034仅历史对照。"
+              "O*NET已更新到2025就业50400人、2025—2035增长整数2%（Slower than average 1%—2%）、年均空缺2900；BLS表1.2精确1.9%、2035为51300、净增1000，各数独立取整，不用端点差900重算，非AI归因。 BLS典型学士，认证可选。"
             ]
           },
           "id": "budget-analysts.ai-impact.ai-impact-table.56",
+          "source_refs": [
+            "trends-current",
+            "bls-ep-current",
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -25615,10 +25650,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不需要会写代码，但需要数据素养：会读预算与会计数据、看懂口径与单位、能做差异与趋势分析；会用电子表格与商业智能工具对效率有帮助，但会计与经济学基础、程序理解才是门槛。"
+              "招聘软件涉及SQL和Visual Basic，但不是所有岗位统一编程门槛；按真实岗位核电子表格、BI、数据库和分析要求，结合会计经济统计及预算制度学习，不宣称一律不需代码。"
             ]
           },
           "id": "budget-analysts.ai-impact.ai-impact-table.66",
+          "source_refs": [
+            "onet-hot-tech",
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -25659,10 +25698,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "当前BLS2025—2035本职业增长1.9%、年均空缺2,900，非AI归因或录用保证；O*NET旧期2024—2034另作历史对照。"
+              "O*NET已更新到2025就业50400人、2025—2035增长整数2%（Slower than average 1%—2%）、年均空缺2900；BLS表1.2精确1.9%、2035为51300、净增1000，各数独立取整，不用端点差900重算，非AI归因。"
             ]
           },
           "id": "budget-analysts.ai-impact.ai-impact-table.70",
+          "source_refs": [
+            "trends-current",
+            "bls-ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -25681,10 +25724,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。预算的批准与拨款由主管部门与单位按规定行使；口径与假设是否符合制度、资金建议能否被接受，也不能由工具承担，工具既不能承担责任，也不能取得相应授权。"
+              "工具可辅助检索制度、检查假设并形成资金建议；确认适用和批准仍由实际有权主体处理。中国政府预算及法定调整依法由相应人大或常委会审批，具体执行职责另核；企业核治理授权，不把批准权统称主管部门。"
             ]
           },
           "id": "budget-analysts.ai-impact.ai-impact-table.72",
+          "source_refs": [
+            "budget-law-current",
+            "account-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25725,10 +25773,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "优先学会计与经济学基础、预算编制与执行程序、成本与效益分析方法、数据分析与报表工具，并完成一次受监督的完整流程；把工具使用排在业务与程序理解之后。"
+              "编辑建议：按现有基础并行学习会计经济统计、预算制度和表格分析，用受监督的小任务检验理解，再逐步扩展流程；工具和业务互相帮助，不把完整闭环设成所有人第一步。"
             ]
           },
           "id": "budget-analysts.ai-impact.ai-impact-table.76",
+          "source_refs": [
+            "editor-current",
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -25769,10 +25821,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只把可复核的数据汇总、口径校验、差异初筛、报表与材料初稿交给工具。"
+              "编辑建议：按任务和数据权限判断能否辅助汇总、差异初筛、方案比较、代码查询及材料草拟；验证计算与适用规则，不能把所有辅助用途限定为文档初稿。"
             ]
           },
           "id": "budget-analysts.ai-impact.ai-impact-table.80",
+          "source_refs": [
+            "editor-current",
+            "nist-ai-rmf"
+          ],
           "type": "prose"
         },
         {
@@ -25824,10 +25880,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把工具输出标记为待复核，经与原始数据与预算制度核对后再作为依据。"
+              "编辑建议：对用于真实预算的数据、计算和工具建议保留可核来源及验证，依据适用内控确定复核责任；工具不自动批准，也不必把已经验证的所有输出永久叫草稿。"
             ]
           },
           "id": "budget-analysts.ai-impact.ai-impact-table.85",
+          "source_refs": [
+            "editor-current",
+            "account-law-current"
+          ],
           "type": "prose"
         },
         {
@@ -26187,10 +26247,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对班组分析纪律、复核执行与数据质量负责。"
+              "按实际授权承担预算分析团队的数据质量与复核安排；普通分析师不因职位名称取得所有团队管理责任。"
             ]
           },
           "id": "budget-analysts.ai-impact.ai-impact-table.118",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26236,6 +26299,29 @@
           },
           "id": "budget-analysts.ai-impact.ai-impact-table.122",
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "O*NET-SOC 13-2031.00 行业分布",
+                "id": "link-12",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/industry/13-2031.00"
+              },
+              {
+                "entity": "O*NET-SOC 13-2031.00 职业摘要",
+                "id": "link-17",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/summary/13-2031.00"
+              }
+            ]
+          },
+          "id": "budget-analysts.ai-impact.ai-impact-table.9.unconsumed",
+          "type": "links",
+          "visibility": "internal"
         }
       ]
     },
@@ -26516,7 +26602,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "数字化工具会改变数据汇总与差异初筛等环节，但不改变中国大陆对该职业的统计口径：统计缺口与工具无关。"
+              "证据不足：本轮未取得数字化工具对预算分析师中国大陆工资统计或分类口径影响的资料；现有行业均值仍不能填补本职业精确工资缺口。"
             ]
           },
           "id": "budget-analysts.china-salary.career-snapshot-primary-locale.23",
@@ -27783,7 +27869,7 @@
                 "url": "https://www.onetonline.org/link/summary/13-2031.00"
               },
               {
-                "entity": "O*NET-SOC 13-2031.00 职业摘要（入门学历构成）",
+                "entity": "O*NET新入职教育要求问答（非学历构成）",
                 "id": "link-19",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/13-2031.00"
@@ -27804,10 +27890,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "霍兰德兴趣代码为 CEI（常规型、企业型、研究型）：常规型对应按规程与既定程序处理数据与文件，具体领域为会计、办公室工作与金融；企业型对应通过沟通与推动影响资源与决策，具体领域为金融与管理；研究型对应通过分析与研究理解数据背后的规律。"
+              "O*NET六类兴趣分数C100/E65/I45/S21/A10/R0，摘要CEI是前三类，不是个人阈值。41具体兴趣领域中会计91、办公室78、金融74、管理53、数学统计36等分开读，不能把领域当某类型下的排他子类。"
             ]
           },
           "id": "budget-analysts.fit.personality-fit-block.2",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -27815,10 +27904,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：O*NET 明确给出兴趣代码，属于官方职业资料层面；它描述职业群体的兴趣特征，不是个人适配结论。"
+              "O*NET职业兴趣资料描述美国职业任务兴趣特征，不证明个人胜任或本页测试的职业预测效度。"
             ]
           },
           "id": "budget-analysts.fit.personality-fit-block.3",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -27871,11 +27963,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "尽责性有助于发现口径、单位与假设上的不一致，并按制度完成留痕。",
-              "注意细节与谨慎有助于识别数据缺口与异常，但仍须通过复核与制度确认才能处置。"
+              "编辑观察：是否逐项核数据来源、单位和假设并记录差异；不由尽责性分数推准确能力。",
+              "O*NET工作风格注意细节100、可靠88、诚信79、谨慎72为职业资料；不等大五量表效度或个人合格线。"
             ]
           },
           "id": "budget-analysts.fit.personality-fit-block.8",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "list"
         },
         {
@@ -28029,10 +28125,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力有帮助：需要在资源竞争、部门诉求与管理层质询中保持稳定，并在数据不足或口径不明时坚持按程序推进。但这类能力不能用单一分数定义，也不能替代预算与会计训练及制度理解。"
+              "编辑观察建议：在部门资源诉求和质询中，能否清楚解释假设、记录异议并依程序处理；本轮未取得情绪能力量表对本职业的专门预测效度，测试分数不替预算训练或授权。"
             ]
           },
           "id": "budget-analysts.fit.personality-fit-block.22",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28051,7 +28151,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能在发现差异或数据不足时先停下并请示，比情绪分数高低更重要。",
+              "编辑观察建议：记录发现差异或数据不足时是否暂停核对并向有权人员请示；不据此比较情绪分数的预测效度。",
               "愿意承认口径或估算偏差并立即更正与留痕，是专业能力的一部分。"
             ]
           },
@@ -28074,10 +28174,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。真正有解释力的证据是受监督的分析实践与可复核的产出。"
+              "编辑观察建议：核对数据与口径、解释差异、记录未知、接受复核并改进。用受监督实际交付了解任务要求；本轮未取得它与人格测试的比较预测效度，不作录用或个人胜任结论。"
             ]
           },
           "id": "budget-analysts.fit.personality-fit-block.26",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28085,10 +28188,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：更有解释力的适配信号是能按程序逐项核对数据并如实记录、在数据不足或口径不明时先停下请示、能接受复核意见并据此修改；对数字或财务的兴趣本身不足以证明胜任。"
+              "编辑观察建议：核对数据与口径、解释差异、记录未知、接受复核并改进。用受监督实际交付了解任务要求；本轮未取得它与人格测试的比较预测效度，不作录用或个人胜任结论。"
             ]
           },
           "id": "budget-analysts.fit.personality-fit-block.27",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28305,7 +28411,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合与否不取决于内外向。工作情境显示 100% 每天使用电子邮件、64% 每天通电话、64% 每天进行面对面讨论、59% 持续与他人接触；能否在多方沟通中把口径与口径差异确认清楚并推动闭环，比外向程度更关键。"
+              "美国工作情境问答显示100%每天使用电子邮件、64%每天通电话、64%每天面对面讨论、59%持续与他人接触。编辑观察建议：核对多方沟通中能否确认预算口径及差异并跟进处理；本页未取得外向性与该表现的比较效度研究。"
             ]
           },
           "id": "budget-analysts.fit.personality-fit-block.47",
@@ -28316,10 +28422,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能。外向有助于与部门和管理层沟通，但工作还要把注意力放在数据、口径与程序上；能否接受复核纠正并改进分析，比表达欲更关键。"
+              "可以将沟通兴趣作为尝试任务的线索；观察是否能解释差异并接受核对。本轮未取得外向性对本职业胜任的专门因果或比较效度证据，不按表达欲决定适配。"
             ]
           },
           "id": "budget-analysts.fit.personality-fit-block.48",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28338,10 +28447,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 把该职业的兴趣代码列为 CEI（常规型、企业型、研究型）：常规型对应按规程处理数据与文件（会计、办公室工作、金融），企业型对应通过沟通推动资源与决策（金融、管理），研究型对应通过分析理解数据规律。兴趣代码描述职业群体特征，不是个人适配结论。"
+              "O*NET六类兴趣分数C100/E65/I45/S21/A10/R0，摘要CEI是前三类，不是个人阈值。41具体兴趣领域中会计91、办公室78、金融74、管理53、数学统计36等分开读，不能把领域当某类型下的排他子类。"
             ]
           },
           "id": "budget-analysts.fit.personality-fit-block.50",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28371,10 +28483,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力确实有帮助：需要在资源竞争与质询时保持稳定、坚持按程序与口径处理。但这类能力不能用单一分数定义，也不能替代预算与会计训练及制度理解。"
+              "编辑观察建议：在部门资源诉求和质询中，能否清楚解释假设、记录异议并依程序处理；本轮未取得情绪能力量表对本职业的专门预测效度，测试分数不替预算训练或授权。"
             ]
           },
           "id": "budget-analysts.fit.personality-fit-block.53",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28437,10 +28553,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 Job Zone、学历构成与培训路径。"
+              "用于新入职教育要求问答及JobZone准备概括，不是从业者学历构成或统一培训时长。"
             ]
           },
           "id": "budget-analysts.fit.personality-fit-block.59",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28470,10 +28589,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于O*NET2024—2034历史预测对照，当前预测另用BLS表1.2。"
+              "O*NET当前2025—2035预测与BLS表1.2精确预测分别读取，不是2024—2034历史页面。"
             ]
           },
           "id": "budget-analysts.fit.personality-fit-block.62",
+          "source_refs": [
+            "trends-current",
+            "bls-ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -28525,10 +28648,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "适配信号：更有解释力的信号是能按程序逐项核对数据并如实记录、在数据不足或口径不明时先停下请示、能接受复核与管理层意见并据此修改；对数字或财务的兴趣本身不足以证明胜任。"
+              "编辑观察建议：核对数据与口径、解释差异、记录未知、接受复核并改进。用受监督实际交付了解任务要求；本轮未取得它与人格测试的比较预测效度，不作录用或个人胜任结论。"
             ]
           },
           "id": "budget-analysts.fit.riasec-fit-block.9",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28547,10 +28673,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 兴趣代码：CEI（常规型、企业型、研究型）。常规型下的具体领域为会计、办公室工作与金融；企业型下的具体领域为金融与管理。"
+              "O*NET六类兴趣分数C100/E65/I45/S21/A10/R0，摘要CEI是前三类，不是个人阈值。41具体兴趣领域中会计91、办公室78、金融74、管理53、数学统计36等分开读，不能把领域当某类型下的排他子类。"
             ]
           },
           "id": "budget-analysts.fit.riasec-fit-block.11",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28686,10 +28815,10 @@
                 "url": "https://www.onetonline.org/link/summary/13-2031.00"
               },
               {
-                "entity": "O*NET旧预测（仅历史背景）",
+                "entity": "BLS预算分析师工时与压力描述",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/13-2031.00"
+                "url": "https://www.bls.gov/ooh/business-and-financial/budget-analysts.htm"
               },
               {
                 "entity": "中华人民共和国预算法（政府预算）",
@@ -28698,10 +28827,16 @@
                 "url": "https://sjj.beijing.gov.cn/zwxx/flfg/202304/t20230424_3066813.html"
               },
               {
-                "entity": "中华人民共和国会计法（2024）",
+                "entity": "会计法2024有效全文（税务局转载）",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://kjs.mof.gov.cn/zt/kjfxcgc/kjfqw/202408/t20240814_3941788.htm"
+                "url": "https://jiangsu.chinatax.gov.cn/art/2024/6/28/art_23636_381.html"
+              },
+              {
+                "entity": "费马测试编辑核对建议（非法律或干预证据）",
+                "id": "link-7",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/details/13-2031.00"
               }
             ]
           },
@@ -28900,10 +29035,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在高峰时段安排轮换与分段复核，把易错环节固定为强制核对点。"
+              "编辑建议：按真实班次与人手安排复核，先核不同表的期间、单位及总分勾稽；额外核对点由单位内控确定，不能把轮换或强制分段说成已证明的风险干预。"
             ]
           },
           "id": "budget-analysts.risk.career-risk-cards.25",
+          "source_refs": [
+            "editor-current",
+            "account-law-current"
+          ],
           "type": "prose"
         },
         {
@@ -28911,7 +29050,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "长时间连续处理导致注意力下降，把未复核项留到报送之后再补。"
+              "编辑风险场景：连续处理报表时可能遗漏核对，把未复核项留到报送之后再补；未取得本职业注意力变化与差错的因果研究。"
             ]
           },
           "id": "budget-analysts.risk.career-risk-cards.26",
@@ -29032,10 +29171,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "仅历史就业预测背景，不作本职业风险统计或政府预算法规依据。"
+              "BLS描述预算节点加班与压力，未提供差错发生率或具体轮换干预效果。"
             ]
           },
           "id": "budget-analysts.risk.career-risk-cards.37",
+          "source_refs": [
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -29054,10 +29196,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "会计事务、资料真实完整与单位责任，具体岗位权限另核。"
+              "2024会计法4单位负责人责任、21财务会计报告签章、25职责分离及36专业能力；预算岗是否属于会计人员及其权限按实际职责核，不套旧条号或把所有预算报告都当财务会计报告。"
             ]
           },
           "id": "budget-analysts.risk.career-risk-cards.39",
+          "source_refs": [
+            "account-law-current"
+          ],
           "type": "prose"
         }
       ]
@@ -29374,10 +29519,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "路径概要：以会计、财务、经济或公共管理等相关专业学习为基础，通过预算编制、成本分析与报表分析实践积累能力，先取得编制与复核授权，再逐步承担统筹与对外报送职责。"
+              "编辑路径建议：按基础选择会计经济统计及预算课程，积累数据与成本分析经验；实际岗位另核学历或经验替代、招录条件、系统权限。编制复核和报送按职责逐步承担，不以专业名称或熟练自动授权。"
             ]
           },
           "id": "budget-analysts.path.career-path-block.23",
+          "source_refs": [
+            "editor-current",
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -29396,10 +29545,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 Job Zone、学历构成与培训入口。"
+              "新入职教育要求问答、JobZone准备概括和培训检索入口；问答不是学历构成，项目目录不提供通用入职时长。"
             ]
           },
           "id": "budget-analysts.path.career-path-block.25",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -29704,10 +29856,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：调整与报送须按程序报批。"
+              "政府预算法定调整依67/69向相应人大或常委会申请批准；71有专项转移支付例外、72调剂按财政规定、73另有备案。部门材料报送按具体制度核，不将全部报送和调剂说成法定报批。"
             ]
           },
           "id": "budget-analysts.path.career-path-block.53",
+          "source_refs": [
+            "budget-law-current"
+          ],
           "type": "prose"
         },
         {
@@ -29814,10 +29969,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：制度适用争议须提交法务与主管部门判断。"
+              "编辑建议：记录制度适用争议并提交本单位实际有权人员；需法务、财政或其他主管部门参与按事项职责核，预算人员不自行裁定或把所有争议交固定主体。"
             ]
           },
           "id": "budget-analysts.path.career-path-block.63",
+          "source_refs": [
+            "editor-current",
+            "budget-law-current"
+          ],
           "type": "prose"
         },
         {
@@ -30153,7 +30312,7 @@
                 "id": "education",
                 "values": [
                   "美国教育口径",
-                  "O*NET学历意见77%学士、13%高中或同等、8%硕士；JobZone4通用准备，不等于所有岗位要求或固定训练时长。",
+                  "O*NET新入职教育要求问答：77%学士、13%高中或同等、8%硕士；不是现有从业者学历构成。JobZone4/SVP7至不足8为准备概括；BLS典型学士/相关经验None/在岗培训None，不否定具体雇主训练。OOH部分经验可替代学历、部分雇主偏好硕士、职业认证可选。",
                   "BLS典型学士、部分经验可替代，职业认证可选；实际条件按目标雇主核。"
                 ]
               },
@@ -30169,7 +30328,7 @@
                 "id": "onet-traits",
                 "values": [
                   "任务与工作情境",
-                  "15任务、详细41工作活动；获取信息87、处理信息86，邮件100%每天、久坐83%持续，属于美国职业群体。",
+                  "15任务（12Core/1Supplemental/2New），41一般/10详细活动及57情境；获取信息87、处理信息86、邮件100%每日、久坐83%持续均美国群体，不作个人标准。",
                   "兴趣CEI不是个人阈值；BU01/02提供可核交付，不靠人格测试判胜任。"
                 ]
               },
@@ -30432,10 +30591,10 @@
               ],
               [
                 "高中或同等学历（美国）",
-                "以在岗培训入行的人",
-                "O*NET 受访者中 13% 认为需要，属于部分岗位的实际情况。",
-                "属于部分岗位的实际情况，通常需配合在岗培训。",
-                "须以培训与分析记录补足。",
+                "核目标岗位是否接受高中或同等学历/相关经验的人",
+                "O*NET13%回答新入职需高中或同等学历，非岗位或从业者占比。",
+                "非通用门槛；BLS典型学士，部分相关经验可替代正式教育。",
+                "具体经验、教育及岗位训练由目标雇主核，不从13%推统一在岗培训路径。",
                 "按实际教育与岗位训练核，不由13%推数周可入行",
                 "学历状态不影响对口径与保密要求的同等适用。"
               ],
@@ -30451,7 +30610,7 @@
               [
                 "单位培训与岗位实践",
                 "进入具体单位岗位的人",
-                "决定能否独立承担所在岗位的分析任务。",
+                "可帮助了解本单位制度与任务；独立承担仍需核实际能力、职责和授权。",
                 "须核具体机构安排，不称所有单位通行门槛",
                 "须完成机构规定的培训与考核。",
                 "证据不足：本轮未取得各机构统一培训时长与费用。",
@@ -30470,7 +30629,7 @@
                 "授权与责任约定（书面）",
                 "所有预算与分析岗位",
                 "决定可编制哪些内容、由谁复核、如何报送与留痕。",
-                "属于机构管理要求，是差错追责与职业保护的前提。",
+                "编辑建议核书面职责与复核流程，具体管理要求按单位制度；不是所有岗位的统一法定前提。",
                 "须与机构确认授权范围、复核层级与留痕方式并保留书面记录。",
                 "谈判与确认时间。",
                 "书面约定不替代机构对数据真实性与程序合规的义务。"
@@ -30758,10 +30917,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET2024份额与2025OOH雇主分组分期读取，不用于预测个人录用。"
+              "O*NET2025本职业行业分布：政府51%、教育15%、其他34%（含专业科学技术服务和公司管理）；份额不推行业工资或个人录用。OOH另列政府子类26/13/11、教育15、专业科技9，分类呈现不同，不强行重算O*NET51%。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.12",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -30956,10 +31118,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "当前BLS表1.2精确预测；旧O*NET2024—2034仅历史对照。"
+              "O*NET已更新到2025就业50400人、2025—2035增长整数2%（Slower than average 1%—2%）、年均空缺2900；BLS表1.2精确1.9%、2035为51300、净增1000，各数独立取整，不用端点差900重算，非AI归因。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.30",
+          "source_refs": [
+            "trends-current",
+            "bls-ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30967,10 +31133,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS表1.2本职业2025—2035增长及空缺；非AI归因、非工资，旧O*NET仅历史对照。"
+              "O*NET已更新到2025就业50400人、2025—2035增长整数2%（Slower than average 1%—2%）、年均空缺2900；BLS表1.2精确1.9%、2035为51300、净增1000，各数独立取整，不用端点差900重算，非AI归因。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.31",
+          "source_refs": [
+            "trends-current",
+            "bls-ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30978,10 +31148,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆的行业代理口径与统计范围，不作为职业工资。"
+              "O*NET已更新到2025就业50400人、2025—2035增长整数2%（Slower than average 1%—2%）、年均空缺2900；BLS表1.2精确1.9%、2035为51300、净增1000，各数独立取整，不用端点差900重算，非AI归因。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.32",
+          "source_refs": [
+            "trends-current",
+            "bls-ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -31000,10 +31174,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转入财务经理需核财务管理、资金安排及实际管理职责；不得把其训练写成仅会计审计。"
+              "编辑建议：补财务规划、资金管理和实际管理职责。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.34",
+          "source_refs": [
+            "onet-17-3021",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31011,10 +31189,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是预算与成本理解、数据核对能力。"
+              "可迁移任务线索：预算和成本理解、财务分析与沟通。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.35",
+          "source_refs": [
+            "onet-17-3021",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31022,10 +31204,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属财务职能，但职责从预算分析转为决策与管理。"
+              "编辑距离判断：同属财务职能，需扩展决策和管理责任。 无转岗成功率或通用资格保证。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.36",
+          "source_refs": [
+            "onet-17-3021",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31033,10 +31219,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足投资建模与行业分析能力。"
+              "编辑建议：补适用会计准则、财务报表和审计方法，目标资格另核。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.37",
+          "source_refs": [
+            "adjacent-13-2011.00",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31044,10 +31234,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是数据分析与报告能力。"
+              "可迁移任务线索：账务数据核对、预算与差异分析。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.38",
+          "source_refs": [
+            "adjacent-13-2011.00",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31055,10 +31249,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：都需要财务分析，但对象从内部预算转为投资标的。"
+              "编辑距离判断：对象扩至会计报表与审计判断，不因预算经验自动取得执业权限。 无转岗成功率或通用资格保证。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.39",
+          "source_refs": [
+            "adjacent-13-2011.00",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31066,10 +31264,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足流程诊断与管理咨询方法。"
+              "编辑建议：补投资标的研究、估值和目标领域数据。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.40",
+          "source_refs": [
+            "adjacent-13-2051.00",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31077,10 +31279,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是分析与沟通能力。"
+              "可迁移任务线索：数据分析、财务理解与报告。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.41",
+          "source_refs": [
+            "adjacent-13-2051.00",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31088,10 +31294,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：都做分析与建议，但对象从资金转为组织流程。"
+              "编辑距离判断：从内部预算转向投资决策研究，不是流程咨询。 无转岗成功率或通用资格保证。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.42",
+          "source_refs": [
+            "adjacent-13-2051.00",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31099,10 +31309,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足现金管理与柜台业务技能。"
+              "编辑建议：补组织研究、流程诊断与改进建议。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.43",
+          "source_refs": [
+            "adjacent-13-1111.00",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31110,10 +31324,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是准确性要求与客户沟通经验。"
+              "可迁移任务线索：分析业务数据、解释结论与沟通。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.44",
+          "source_refs": [
+            "adjacent-13-1111.00",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31121,10 +31339,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较远：风险类型与作业方式不同。"
+              "编辑距离判断：从预算资源分析扩至组织效率，不是银行现金柜台。 无转岗成功率或通用资格保证。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.45",
+          "source_refs": [
+            "adjacent-13-1111.00",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31132,10 +31354,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足一般账务与会计科目知识。"
+              "编辑建议：补金融机构现金及客户交易程序和柜台系统。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.46",
+          "source_refs": [
+            "adjacent-43-3071.00",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31143,10 +31369,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是录入、对账与归档能力。"
+              "可迁移任务线索：准确核数、记录和沟通。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.47",
+          "source_refs": [
+            "adjacent-43-3071.00",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31154,10 +31384,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属财务支持职能，业务深度不同。"
+              "编辑距离判断：对象转为金融机构交易，不等于所有企业出纳。 无转岗成功率或通用资格保证。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.48",
+          "source_refs": [
+            "adjacent-43-3071.00",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31165,10 +31399,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足造价方法与合同管理训练。"
+              "编辑建议：补账务记录、科目及具体记账软件。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.49",
+          "source_refs": [
+            "adjacent-43-3031.00",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31176,10 +31414,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是成本拆分与估算能力。"
+              "可迁移任务线索：录入、核数、归档与差异记录。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.50",
+          "source_refs": [
+            "adjacent-43-3031.00",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31187,10 +31429,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属成本环节，但范围更集中于工程项目。"
+              "编辑距离判断：同属财务支持，侧重记录与核对，不是工程造价。 无转岗成功率或通用资格保证。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.51",
+          "source_refs": [
+            "adjacent-43-3031.00",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31198,10 +31444,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足资金管理与财务报告能力。"
+              "编辑建议：按工程、生产或服务对象补成本估算方法与技术知识。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.52",
+          "source_refs": [
+            "adjacent-cost-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31209,10 +31459,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是财务理解与预算经验。"
+              "可迁移任务线索：成本拆分、数据分析和资源估计。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.53",
+          "source_refs": [
+            "adjacent-cost-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31220,10 +31474,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属财务职能，但承担资金与报告责任更重。"
+              "编辑距离判断：侧重估计产品、服务或项目成本，不限工程，不是资金管理。 无转岗成功率或通用资格保证。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.54",
+          "source_refs": [
+            "adjacent-cost-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31231,10 +31489,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足组织战略与治理能力。"
+              "编辑建议：补财务活动协调、资金调度及报表管理职责。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.55",
+          "source_refs": [
+            "adjacent-treasury-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31242,10 +31504,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是数据与汇报能力。"
+              "可迁移任务线索：财务理解、预算和报告经验。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.56",
+          "source_refs": [
+            "adjacent-treasury-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31253,10 +31519,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较远：职责层级与管理幅度不同。"
+              "编辑距离判断：需核实际管理范围与责任，不自动跳到机构战略治理。 无转岗成功率或通用资格保证。"
             ]
           },
           "id": "budget-analysts.market-signals.market-signal-card.57",
+          "source_refs": [
+            "adjacent-treasury-current",
+            "editor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -31369,7 +31639,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "美国13-2031采用2025工资及当前BLS2025—2035精确预测；旧O*NET2024—2034仅历史对照，不混期或相加。",
+              "美国13-2031采用2025工资及2025—2035预测；O*NET当前也已更新，不再将当前摘要称旧预测；原保护消费者共享旧来源登记仍留历史冲突。",
               "中国本职业精确全国工资尚未取得；商务服务、教育和公共管理仅按真实雇主归属参考，不能冒充职业统计。",
               "BU01/BU02为完全给定的虚构纸面输入、公式与参考交付，不用于真实预算审批或报送。",
               "O*NET/BLS/NBS及现行政府预算和会计法规各有边界，ILO/NIST一般依据不当职业AI因果证据。"
@@ -31408,10 +31678,23 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源：O*NET-SOC 13-2031.00 职业摘要、详细资料、自定义职业档案、技术清单、行业分布、培训与教育信息与全国工资分位页面；BLS《Occupational Outlook Handbook》Budget Analysts；国家统计局《2025 年城镇单位就业人员年平均工资情况》；ILO 工作论文 140。"
+              "主要来源：O*NET2026详细档案、2025招聘工资行业及2025—2035预测；BLS表1.2与OOH精确职业；统计局2025行业背景；2018预算法、2024会计法有效全文。ILO140/NIST为同版一般方法，编辑建议另分。"
             ]
           },
           "id": "budget-analysts.sources.source-card.2",
+          "source_refs": [
+            "details-current",
+            "industry-current",
+            "trends-current",
+            "bls-ep-current",
+            "bls-entry",
+            "nbs-wages",
+            "budget-law-current",
+            "account-law-current",
+            "ilo-genai",
+            "nist-ai-rmf",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31419,10 +31702,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：O*NET2026档案、2025招聘与工资、2024行业份额；当前BLS2025—2035预测；NBS2025年数据2026-05-16发布；预算法2018修正、会计法2024修正。本轮核查2026-10-03。"
+              "2026-10-09核：O*NET档案2026、工资招聘行业2025、预测2025—2035。NBS英文页实际标2026-05-16发布（URL路径May18不替页面日期）；2018预算法与2024会计法按现行版本条号。原共享历史来源和保护内容保留，不能称全页现行一致。"
             ]
           },
           "id": "budget-analysts.sources.source-card.3",
+          "source_refs": [
+            "details-current",
+            "industry-current",
+            "trends-current",
+            "nbs-wages",
+            "budget-law-current",
+            "account-law-current"
+          ],
           "type": "prose"
         },
         {
@@ -31870,6 +32161,134 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/43-3031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET预算分析师现行详细档案",
+                  "档案2026更新/本轮2026-10-09"
+                ],
+                "evidence_type": "primary_document",
+                "id": "details-current",
+                "limitation": "15任务：12Core/1Supplemental/2New（New重要性NA）；41一般/10详细活动/57情境；教育为新入职要求，非学历构成；CEI100/65/45，全部六型及41兴趣领域、20工作风格。",
+                "market": "美国",
+                "name": "O*NET预算分析师现行详细档案",
+                "period": "档案2026更新/本轮2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET预算分析师现行行业分布",
+                  "2025"
+                ],
+                "evidence_type": "primary_document",
+                "id": "industry-current",
+                "limitation": "政府51%、教育15%、其他34%；不把OOH列出的政府子类相加50%等同于本页51%，不从份额推工资。",
+                "market": "美国",
+                "name": "O*NET预算分析师现行行业分布",
+                "period": "2025",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/13-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET预算分析师现行预测",
+                  "2025—2035"
+                ],
+                "evidence_type": "primary_document",
+                "id": "trends-current",
+                "limitation": "50400→51300/整数2%/2900；BLS表1.2精确1.9%/净增1000独立取整，非AI归因。",
+                "market": "美国",
+                "name": "O*NET预算分析师现行预测",
+                "period": "2025—2035",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/13-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中华人民共和国预算法（2018修正）",
+                  "2018第二次修正/2026-10-09核"
+                ],
+                "evidence_type": "primary_document",
+                "id": "budget-law-current",
+                "limitation": "12原则、13批准约束、14法定公开；67/69调整范围与人大批准、71专项转移例外、72调剂按财政规定、73备案。仅政府预算。",
+                "market": "中国大陆",
+                "name": "中华人民共和国预算法（2018修正）",
+                "period": "2018第二次修正/2026-10-09核",
+                "publisher": "北京市审计局转载全国人大常委会",
+                "scope": "contextual",
+                "url": "https://sjj.beijing.gov.cn/zwxx/flfg/202304/t20230424_3066813.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中华人民共和国会计法（2024有效全文）",
+                  "2024-06-28第三次修正/全文有效"
+                ],
+                "evidence_type": "primary_document",
+                "id": "account-law-current",
+                "limitation": "4单位负责人责任、14凭证、21财务会计报告签章、25内控职责分离、27无权事项报告、36专业能力、37职业道德培训；条号按2024全文，不用旧条号。",
+                "market": "中国大陆",
+                "name": "中华人民共和国会计法（2024有效全文）",
+                "period": "2024-06-28第三次修正/全文有效",
+                "publisher": "国家税务总局江苏省税务局转载全国人大常委会",
+                "scope": "contextual",
+                "url": "https://jiangsu.chinatax.gov.cn/art/2024/6/28/art_23636_381.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "费马测试预算分析师编辑核对建议",
+                  "2026-10-09作者整理"
+                ],
+                "evidence_type": "editorial_synthesis",
+                "id": "editor-current",
+                "limitation": "任务尝试、路径递进、兴趣与人格观察、转岗距离及额外复核为编辑建议；非招聘频率、测评效度、法律许可或风险干预效果。",
+                "market": "跨市场",
+                "name": "费马测试预算分析师编辑核对建议",
+                "period": "2026-10-09作者整理",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": "https://www.onetonline.org/link/details/13-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET13-1051.00成本估算师定义",
+                  "2026档案"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adjacent-cost-current",
+                "limitation": "估算产品制造、工程或服务成本，非仅工程造价；只作目标定义，不提供转岗成功率。",
+                "market": "美国",
+                "name": "O*NET13-1051.00成本估算师定义",
+                "period": "2026档案",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-1051.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET11-3031.01财务主管与主计长定义",
+                  "2026档案"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adjacent-treasury-current",
+                "limitation": "指导组织全部或部分财务活动，如规划、采购和投资；只作目标职责，不自动授中国权限。",
+                "market": "美国",
+                "name": "O*NET11-3031.01财务主管与主计长定义",
+                "period": "2026档案",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-3031.01"
               }
             ]
           },
@@ -32429,7 +32848,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "方向": "成本与效益分析"
+            "方向": "预算报告编制"
           },
           {
             "AI主要改变": {
@@ -32582,7 +33001,7 @@
               "$link": "budget-analysts.ai-impact.ai-impact-table.9",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
-              "entry": "link-11",
+              "entry": "link-16",
               "field": "url"
             }
           },
@@ -32615,7 +33034,7 @@
               "$link": "budget-analysts.ai-impact.ai-impact-table.9",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
-              "entry": "link-12",
+              "entry": "link-11",
               "field": "url"
             }
           }
@@ -32730,13 +33149,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "链接": {
-              "$link": "budget-analysts.ai-impact.ai-impact-table.9",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "entry": "link-16",
-              "field": "url"
-            },
+            "链接": "https://www.bls.gov/ooh/business-and-financial/budget-analysts.htm",
             "问题": "到 2035 年这个职业会变少吗？"
           },
           {
@@ -32753,11 +33166,11 @@
               "type": "prose"
             },
             "链接": {
-              "$link": "budget-analysts.ai-impact.ai-impact-table.9",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "entry": "link-17",
-              "field": "url"
+              "$source": "budget-law-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "budget-analysts.source-register.published.1"
             },
             "问题": "工具能代替人做预算与报送结论吗？"
           },
@@ -32903,7 +33316,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "越权承诺与对外报送"
+            "风险": "分析追溯不全"
           },
           {
             "为什么重要": {
@@ -32918,7 +33331,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "周期负荷与核对遗漏"
+            "风险": "预算口径误用"
           },
           {
             "为什么重要": {
@@ -32933,7 +33346,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "制度更新与口径误用"
+            "风险": "越权承诺与报送"
           }
         ],
         "task_rows": [
@@ -34082,7 +34495,7 @@
             },
             "evidence_refs": [
               "onet-details",
-              "editorial"
+              "editor-current"
             ],
             "id": "assumption-error",
             "mitigation": {
@@ -34114,7 +34527,8 @@
             },
             "evidence_refs": [
               "onet-details",
-              "faa-design-approvals"
+              "faa-design-approvals",
+              "editor-current"
             ],
             "id": "confidential-data",
             "mitigation": {
@@ -34145,8 +34559,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details",
-              "nasa-seh"
+              "nasa-seh",
+              "faa-design-approvals",
+              "editor-current"
             ],
             "id": "overreach",
             "mitigation": {
@@ -34177,8 +34592,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls-entry",
-              "editorial"
+              "bls-outlook",
+              "editor-current"
             ],
             "id": "peak-workload",
             "mitigation": {
@@ -34209,8 +34624,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details",
-              "editorial"
+              "nasa-seh",
+              "faa-design-approvals",
+              "editor-current"
             ],
             "id": "policy-updates",
             "mitigation": {
@@ -34241,8 +34657,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details",
-              "faa-design-approvals"
+              "faa-design-approvals",
+              "editor-current"
             ],
             "id": "records-and-audit",
             "mitigation": {
@@ -34376,6 +34792,24 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$link": "budget-analysts.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "url"
+            },
+            "id": "editor-current",
+            "label": {
+              "$link": "budget-analysts.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "entity"
+            },
+            "scope": "编辑额外核对与任务观察，不是官方发生率、测评效度或干预效果。"
           }
         ]
       },
@@ -34743,10 +35177,10 @@
             "ai_heading": "AI 会影响预算分析师的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "中国大陆薪资参考：官方统计口径与缺口",
-            "scenario_caption": "学历背景、岗位方向与说明（编辑整理，不是薪资统计）",
+            "scenario_caption": "应核岗位条件、岗位方向与说明（编辑整理，不是薪资统计）",
             "scenario_heading": "不同岗位方向应核对哪些条件？",
             "scenario_interpretation_label": "说明与核对建议",
-            "scenario_role_label": "学历背景",
+            "scenario_role_label": "应核岗位条件",
             "scenario_value_label": "岗位方向"
           },
           "us_growth": {
@@ -35623,7 +36057,7 @@
               "field": "url"
             },
             "target_slug": "tellers",
-            "target_title": "出纳员",
+            "target_title": "银行柜员（美国Tellers）",
             "transition_distance": {
               "$item": "budget-analysts.market-signals.market-signal-card.48",
               "block": "market-signals",
@@ -35759,7 +36193,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 就业与预测字段（2024—2034 年）",
+            "label": "O*NET就业与预测字段（2025—2035）",
             "secondary_value": null,
             "value": {
               "$item": "budget-analysts.profile.onet-structured-fields-block.4",
@@ -37050,7 +37484,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 13-2031.00 · 预算估计审查 / 成本与效益分析 / 预算报告与执行跟踪",
@@ -37101,7 +37535,7 @@
       "text": "预算分析师"
     }
   },
-  "source_content_sha256": "c57b47d18b72c64e23014bc3696c101f5e0f9f8a67d026d2ca7a86fae72b359d",
+  "source_content_sha256": "d68ebc3cf0425e076c995fabe56897ffed518dff857ca4062e795cccadd89515",
   "subject": {
     "canonical_slug": "budget-analysts",
     "name": "预算分析师",

@@ -1708,6 +1708,9 @@
       },
       "item:advertising-sales-agents.us-salary.career-snapshot-secondary-locale.9": {
         "status": "mapped"
+      },
+      "item:advertising-sales-agents.us-salary.cross-review-period": {
+        "status": "pending_mapping"
       }
     },
     "module_order": [
@@ -12448,14 +12451,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.industry_period": {
-        "ref": {
-          "id": "us-wage-2025",
-          "path": [
-            "period"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.industry_rows.01.industry": {
         "ref": {
@@ -25311,7 +25308,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025 年 5 月中位年薪 $64,820（$31.16/小时）；2025 年在岗 99,300 人，预计 2025—2035 年下降 7%（净减约 7,100 人），年均约 7,800 个空缺。该预测为全国总量口径，未把变化归因于生成式 AI，空缺主要来自转岗与退出。"
+              "美国2025年5月中位年薪$64,820（$31.16/小时）；2025就业99,300人，2025—2035预计下降7%、净减约7,100人，年均空缺约7,800个。BLS说明空缺全部来自人员转岗或退出；该总体预测未单独量化生成式AI因果。"
             ]
           },
           "id": "advertising-sales-agents.ai-impact.ai-impact-table.56",
@@ -26286,7 +26283,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "代理覆盖对应行业门类城镇非私营单位就业人员，不能确认广告销售占比，也无法从均值拆分本职业底薪、佣金或城市差异。"
+              "广告服务雇主可与租赁和商务服务业、部分数字媒体雇主可与信息服务业有职责和行业交集，须先核实际单位分类；均值覆盖相应门类非私营单位全体就业人员，不能分出广告销售占比、底薪佣金或城市差异。"
             ]
           },
           "id": "advertising-sales-agents.china-salary.career-snapshot-primary-locale.9",
@@ -26939,7 +26936,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得按企业类型（广告代理机构、媒体与平台、企业市场部等）划分的广告销售代表工资数据。不同类型雇主的底薪与佣金比例差异较大，官方统计不区分雇主类型，本页不作推断，也不用海外数据代填。"
+              "证据不足：本页未取得按广告代理、媒体或平台等雇主类型划分的中国大陆广告销售代表工资数据。合同底薪、佣金和回款条件须逐项核对；本页未测差异幅度，不用海外数据代填。"
             ]
           },
           "id": "advertising-sales-agents.china-salary.career-snapshot-primary-locale.54",
@@ -27245,7 +27242,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "年均空缺包含转岗与退出形成的替代需求，不等于净新增岗位。；U.S. BLS 职业展望手册：广告销售代表｜https://www.bls.gov/ooh/sales/advertising-sales-agents.htm"
+              "BLS预计这些年均空缺全部来自转岗或退出形成的人员替代，不是净新增需求。；U.S. BLS职业展望手册｜https://www.bls.gov/ooh/sales/advertising-sales-agents.htm"
             ]
           },
           "id": "advertising-sales-agents.us-salary.career-snapshot-secondary-locale.24",
@@ -27318,7 +27315,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "底薪、佣金比例与配额规则由雇主合同决定，官方统计不含个人提成结构。"
+              "BLS工资口径包含销售佣金和达成生产目标的奖金，不含加班或轮班溢价；它不单列个人底薪、佣金比例或配额规则。具体合同结构仍须另核。"
             ]
           },
           "id": "advertising-sales-agents.us-salary.career-snapshot-secondary-locale.29",
@@ -27665,6 +27662,20 @@
           "source_refs": [
             "onet",
             "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "工资统计期：2025年5月；广告销售代表41-3011。"
+            ]
+          },
+          "id": "advertising-sales-agents.us-salary.cross-review-period",
+          "source_refs": [
+            "bls"
           ],
           "type": "prose"
         }
@@ -28526,7 +28537,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。外向者在陌生开发与客户沟通中常更自然，但需要注意核对价格与承诺，避免过早锁定方案。可用一次 30 分钟提案演练验证：刻意增加提问与等待，再记录对方（虚构角色）是否提出关键异议。这次观察只说明某次沟通的组织方式，不等于整体能力。"
+              "外向偏好不能证明陌生开发或客户沟通能力。编辑建议做一次模拟提案，记录是否问清约束、核对价格与承诺并处理异议；单次观察不代表整体能力或录用结果。"
             ]
           },
           "id": "advertising-sales-agents.fit.personality-fit-block.48",
@@ -28867,7 +28878,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "广告销售代表的主要压力来自配额与拒绝：需持续开发客户、在价格与库存约束下报价，并为承诺与回款负责。风险集中在效果承诺、报价越权、客户数据、记录版本与交付边界，多可通过审批、留痕与升级机制控制。"
+              "主要工作压力包括配额、客户拒绝、价格与库存约束，以及承诺和回款。报价审批、记录与异常升级可作为编辑建议的控制动作，但本页未核得控制效果或风险发生率，不能保证消除风险。"
             ]
           },
           "id": "advertising-sales-agents.risk.career-risk-cards.9",
@@ -31327,7 +31338,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业口径含全部就业人员，不能拆分岗位。"
+              "限国家统计局调查范围内城镇非私营法人单位就业人员；不含所有从业者或个体经营收入，不能拆成本职业精确工资。"
             ]
           },
           "id": "advertising-sales-agents.market-signals.market-signal-card.26",
@@ -31529,7 +31540,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "研究设计与统计方法需要专门训练"
+              "须补研究设计、抽样和统计分析训练，完成可复核的研究方案并核学历/雇主要求；客户沟通经验不能替代研究方法。"
             ]
           },
           "id": "advertising-sales-agents.market-signals.market-signal-card.40",
@@ -31559,7 +31570,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离近"
+              "距离中等"
             ]
           },
           "id": "advertising-sales-agents.market-signals.market-signal-card.42",
@@ -31679,13 +31690,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "客户带看与成交推进能力"
+              "客户开发、需求沟通与成交推进可作为编辑比较对象；房源带看、交易流程及目标法域许可须另核，不属广告销售原职业任务。"
             ]
           },
           "id": "advertising-sales-agents.market-signals.market-signal-card.50",
           "source_refs": [
             "onet",
-            "bls"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31916,7 +31927,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-09-14"
+              "2026-10-08（本轮限定九板块修订）"
             ]
           },
           "id": "advertising-sales-agents.sources.source-card.3",
@@ -35283,7 +35294,7 @@
           "ui": {
             "ai_heading": "AI 会影响广告销售代表的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "公开招聘样本（历史公告，非官方统计）",
+            "official_heading": "官方工资代理与统计口径（不是招聘样本）",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
             "scenario_heading": "广告销售代表在不同学历背景下通常从哪些岗位方向开始？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -35507,8 +35518,10 @@
         "heading": "美国广告销售代表工资多少？",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
-          "$fact": "us-wage-2025",
-          "field": "period"
+          "$item": "advertising-sales-agents.us-salary.cross-review-period",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
         },
         "industry_rows": [
           {
@@ -37724,7 +37737,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "客户开发 · 媒体方案 · 报价与合同",
@@ -37775,7 +37788,7 @@
       "text": "广告销售代表"
     }
   },
-  "source_content_sha256": "4b261eff0869ee506539472f23b6faae5b4f7db8d458911fb6973473473597bd",
+  "source_content_sha256": "9525f302026a939be704f4dace0ef6d3b60bfea68c54423fe2651716a9f0b2aa",
   "subject": {
     "canonical_slug": "advertising-sales-agents",
     "name": "广告销售代表",

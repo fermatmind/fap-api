@@ -35,11 +35,17 @@
       "fact:us-employment-2025": {
         "status": "mapped"
       },
+      "fact:us-employment-current-2026-10-09": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
         "status": "mapped"
+      },
+      "fact:us-growth-current-2026-10-09": {
+        "status": "pending_mapping"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
@@ -61,6 +67,9 @@
       },
       "fact:us-openings-2025-2035": {
         "status": "mapped"
+      },
+      "fact:us-openings-current-2026-10-09": {
+        "status": "pending_mapping"
       },
       "fact:us-openings-parent": {
         "status": "pending_mapping"
@@ -8945,18 +8954,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.02.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            1,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.02.mitigation": {
         "ref": {
@@ -9034,18 +9033,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.03.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            2,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.03.mitigation": {
         "ref": {
@@ -11097,28 +11086,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.authority_sources.sources.01.href": {
-        "ref": {
-          "id": "bartenders.us-salary.career-snapshot-secondary-locale.8",
-          "parts": [
-            [
-              "；",
-              0,
-              3
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.authority_sources.sources.01.label": {
         "ref": {
@@ -11145,28 +11114,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.authority_sources.sources.02.href": {
-        "ref": {
-          "id": "bartenders.us-salary.career-snapshot-secondary-locale.8",
-          "parts": [
-            [
-              "；",
-              1,
-              3
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.authority_sources.sources.02.label": {
         "ref": {
@@ -11193,52 +11142,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.authority_sources.sources.03.href": {
-        "ref": {
-          "id": "bartenders.us-salary.career-snapshot-secondary-locale.8",
-          "parts": [
-            [
-              "；",
-              2,
-              3
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.authority_sources.sources.03.label": {
-        "ref": {
-          "id": "bartenders.us-salary.career-snapshot-secondary-locale.8",
-          "parts": [
-            [
-              "；",
-              2,
-              3
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.notes.01": {
         "ref": {
@@ -11260,28 +11169,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.href": {
-        "ref": {
-          "id": "bartenders.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.label": {
         "ref": {
@@ -11522,28 +11411,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.03.explanation.sources.02.href": {
-        "ref": {
-          "id": "bartenders.us-salary.career-snapshot-secondary-locale.14",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.03.explanation.sources.02.label": {
         "ref": {
@@ -11915,52 +11784,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.href": {
-        "ref": {
-          "id": "bartenders.us-salary.career-snapshot-secondary-locale.20",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.label": {
-        "ref": {
-          "id": "bartenders.us-salary.career-snapshot-secondary-locale.20",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.headers.explanation": {
         "ref": {
@@ -12046,28 +11875,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.href": {
-        "ref": {
-          "id": "bartenders.us-salary.career-snapshot-secondary-locale.22",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.label": {
         "ref": {
@@ -12177,28 +11986,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.href": {
-        "ref": {
-          "id": "bartenders.us-salary.career-snapshot-secondary-locale.24",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.label": {
         "ref": {
@@ -23421,12 +23210,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业身份与任务：O*NET 35-3011.00 Bartenders（2026 年更新页面，Bright Outlook）。官方职责为直接或通过服务员为顾客调制并提供饮品；官方任务共 21 项（16 项核心、5 项补充，另有 1 项新增任务未给分数），核心任务的重要性分数从 95 至 61，补充任务为 85 与 78 与 66 与 53。工作活动按详细资料页列出 41 项并给出重要性分数，最高为直接面向公众服务或与公众打交道 77、建立与维持人际关系 75、估算产品或事件或信息的可量化特征 69、获取信息 69、培训与教导他人 67、处理与搬动物体 66、检查设备与结构或材料 66、判断物体或服务或人的质量 65、监控与控制资源 64、与主管与同事与下属沟通 62。详细工作活动 18 项（无分数）。任务清单描述群体工作，不代表每个岗位都承担全部任务。"
+              "O*NET 职业身份与任务：O*NET 35-3011.00 Bartenders（2026 年更新页面，Bright Outlook）。官方职责为直接或通过服务员为顾客调制并提供饮品；官方任务共 21 项（16项核心、4项补充、1项New新增任务未给分数），核心任务的重要性分数从 95 至 61，补充任务为 85 与 78 与 66 与 53。工作活动按详细资料页列出 41 项并给出重要性分数，最高为直接面向公众服务或与公众打交道 77、建立与维持人际关系 75、估算产品或事件或信息的可量化特征 69、获取信息 69、培训与教导他人 67、处理与搬动物体 66、检查设备与结构或材料 66、判断物体或服务或人的质量 65、监控与控制资源 64、与主管与同事与下属沟通 62。详细工作活动 18 项（无分数）。任务清单描述群体工作，不代表每个岗位都承担全部任务。"
             ]
           },
           "id": "bartenders.profile.onet-structured-fields-block.1",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -23455,13 +23244,18 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜92% 持续与他人接触，62% 每天面对面讨论，37% 与他人身体距离非常近（接近接触）另有 47% 为中等接近（一臂距离），39% 每天有电话交谈（51% 从不），11% 每天需要书面信函与备忘（34% 从不）、11% 每天用电子邮件（66% 从不）；79% 持续或几乎持续站立（另有 22% 约一半时间），44% 持续或几乎持续做重复动作（另有 19% 超过一半时间），41% 持续或几乎持续行走或跑动，60% 持续或几乎持续用手处理或控制或感觉物体与工具（28% 从不），29% 持续或几乎持续弯腰或扭转身体；73% 每天在环境受控的室内工作；31% 每天暴露于分散注意或不适的噪音，11% 每天暴露于轻微烧伤或割伤或咬伤（另有 22% 每周一次以上），19% 每天暴露于污染物（70% 从不），11% 每天暴露于极热或极冷温度（78% 从不），21% 每天在狭窄空间或别扭姿势作业（65% 从不）；89% 从不处于危险条件，96% 从不接触危险设备，86% 从不处于高处，92% 从不暴露于疾病或感染，100% 从不暴露于辐射与全身振动；78% 从不坐着，42% 从不跪蹲弯腰或爬行，71% 从不需保持平衡。\n主要装备与工具｜杯具与调酒器具（摇酒器与量酒器与搅拌与滤冰器）与吧台设备、制冰机与冷藏与生啤与酒水分配设备、啤酒与葡萄酒与烈酒与苏打水与糖水与苦精与装饰用水果等物料、清洁与消毒用品、收银与点单与库存与销售点（POS）系统、个人防护（按作业需要的手套与防滑鞋）。\n任务节奏｜80% 的典型工作周少于 40 小时（另有 20% 为 40 小时），98% 为固定作息；18% 每月一次以上面临时间压力（69% 从不）；41% 在决定上有很多自由、36% 有一些自由；63% 每天需要做决定（28% 从不）；21% 认为工作中等自动化、30% 稍微自动化、38% 完全非自动化；92% 认为节奏由设备速度决定完全不重要。\n协作对象｜与同班调酒师与服务员与吧台助手与后厨协作；34% 认为与工作组或团队合作极其重要（另有 56% 重要），30% 认为协调或带领他人完成工作活动极其重要（另有 29% 重要），56% 认为要与外部顾客或公众打交道极其重要（另有 33% 非常重要）；11% 对他人健康与安全承担很高责任（另有 31% 中等责任、44% 有限责任）。\n冲突与压力｜35% 认为精确或准确极其重要（另有 34% 非常重要），32% 认为重复相同任务极其重要（27% 认为完全不重要）；40% 每天与不好打交道或生气或不礼貌的人打交道（另有 28% 每周一次以上）；11% 每天处于冲突情境（另有 48% 每月一次以上）；21% 每周一次以上遇到有暴力行为或身体攻击性的人；80% 认为错误后果完全不严重；29% 认为竞争中等、37% 认为完全没有竞争。\n合规与安全｜调制与出品与器具清洗消毒与酒水与装饰用水果的贮存须符合适用食品安全与场所卫生要求；年龄核验与供酒与售卖时段受场所酒类许可与所在法域规定约束（美国 BLS 职业展望手册写明多数州要求供应酒精饮料的从业者至少 18 岁；联邦侧 TTB 对部分酒类经营主体实行许可与批准）；O*NET 列出 3 项国家认证（含酒类服务方向）。中国大陆侧须按适用的食品安全与公共场所卫生要求执行，《餐饮服务食品安全操作规范》要求餐饮服务提供者落实食品安全主体责任。\n记录与复盘｜订单与出品、酒类核验与停售与过量饮酒处置、现金核对与收款、器具清洗与消毒处理、顾客反馈与异常需要可追溯。\n技能与训练｜O*NET 把该职业列为 Job Zone 1–2（SVP 低于 6.0）；基本技能以积极倾听 69 与批判性思维 53 与口语表达 53 与主动学习 50 与监控 50 与阅读理解 50 为主；可迁移技能以服务导向 66、社会洞察力 56、协调 53、说服 53、复杂问题解决 50、指导 50、时间管理 50、判断与决策 47、谈判 47 为主；知识字段列出客户与个人服务、英语语言、教育与培训、销售与营销、行政与管理、公共安全与安保（本页未取得各知识领域分数，能力与工作风格字段未给分数）。\n准入与授权｜学历与认证不等于供酒与停售或收款与退款权限；BLS 指出通常无正式教育或经验要求、技能通过在岗学习获得，并写明多数州对供酒年龄的要求；O*NET 列出 3 项国家认证，均不等于录用门槛或雇主任命。\n行业与雇主｜O*NET 行业分布为住宿与餐饮服务 78%、其他行业（含艺术与娱乐与休闲与其他服务业）22%；常见雇主为酒吧与酒馆、餐厅、酒店与度假村、宴会与活动与夜店场所。"
+              "工作环境｜92% 持续与他人接触，62% 每天面对面讨论，37% 与他人身体距离非常近（接近接触）另有 47% 为中等接近（一臂距离），39% 每天有电话交谈（51% 从不），26%每天需要书面信函与备忘、11%每周一次以上（34% 从不）、11% 每天用电子邮件（66% 从不）；79% 持续或几乎持续站立（另有 22% 约一半时间），44% 持续或几乎持续做重复动作（另有 19% 超过一半时间），41% 持续或几乎持续行走或跑动，60% 持续或几乎持续用手处理或控制或感觉物体与工具（28% 从不），29% 持续或几乎持续弯腰或扭转身体；73% 每天在环境受控的室内工作；31% 每天暴露于分散注意或不适的噪音，11% 每天暴露于轻微烧伤或割伤或咬伤（另有 22% 每周一次以上），19% 每天暴露于污染物（70% 从不），11% 每天暴露于极热或极冷温度（78% 从不），21% 每天在狭窄空间或别扭姿势作业（65% 从不）；89% 从不处于危险条件，96% 从不接触危险设备，86% 从不处于高处，92% 从不暴露于疾病或感染，100% 从不暴露于辐射与全身振动；78% 从不坐着，42% 从不跪蹲弯腰或爬行，71% 从不需保持平衡。\n主要装备与工具｜杯具与调酒器具（摇酒器与量酒器与搅拌与滤冰器）与吧台设备、制冰机与冷藏与生啤与酒水分配设备、啤酒与葡萄酒与烈酒与苏打水与糖水与苦精与装饰用水果等物料、清洁与消毒用品、收银与点单与库存与销售点（POS）系统、个人防护（按作业需要的手套与防滑鞋）。\n任务节奏｜80% 的典型工作周少于 40 小时（另有 20% 为 40 小时），98% 为固定作息；18% 每月一次以上面临时间压力（69% 从不）；41% 在决定上有很多自由、36% 有一些自由；63% 每天需要做决定（28% 从不）；21% 认为工作中等自动化、30% 稍微自动化、38% 完全非自动化；92% 认为节奏由设备速度决定完全不重要。\n协作对象｜与同班调酒师与服务员与吧台助手与后厨协作；34% 认为与工作组或团队合作极其重要（另有 56% 重要），30% 认为协调或带领他人完成工作活动极其重要（另有 29% 重要），56% 认为要与外部顾客或公众打交道极其重要（另有 33% 非常重要）；11% 对他人健康与安全承担很高责任（另有 31% 中等责任、44% 有限责任）。\n冲突与压力｜35% 认为精确或准确极其重要（另有 34% 非常重要），32% 认为重复相同任务极其重要（27% 认为完全不重要）；40% 每天与不好打交道或生气或不礼貌的人打交道（另有 28% 每周一次以上）；11% 每天处于冲突情境（另有 48% 每月一次以上）；21% 每周一次以上遇到有暴力行为或身体攻击性的人；80% 认为错误后果完全不严重；29% 认为竞争中等、37% 认为完全没有竞争。\n合规与安全｜调制与出品与器具清洗消毒与酒水与装饰用水果的贮存须符合适用食品安全与场所卫生要求；年龄核验与供酒与售卖时段受场所酒类许可与所在法域规定约束（美国 BLS 职业展望手册写明多数州要求供应酒精饮料的从业者至少 18 岁；联邦侧 TTB 对部分酒类经营主体实行许可与批准）；O*NET 列出 3 项国家认证（含酒类服务方向）。中国食品安全法第44、45条支持企业食品安全培训、直接接触入口食品人员每年健康检查取得证明；器具清洁、食品贮存和经营主体责任按第33、54、56等条核。具体内部设备及退款权限另核雇主。中国未成年人保护法第58、59条：酒吧不得允许未成年人进入，禁止向未成年人售酒，并须设置相应标志、对年龄难辨者要求身份证件；第61条禁止酒吧招用已满16周岁的未成年人。场所授权不能放宽这些法定义务。\n记录与复盘｜订单与出品、酒类核验与停售与过量饮酒处置、现金核对与收款、器具清洗与消毒处理、顾客反馈与异常需要可追溯。\n技能与训练｜O*NET 把该职业列为 Job Zone 1–2（SVP 低于 6.0）；基本技能以积极倾听 69 与批判性思维 53 与口语表达 53 与主动学习 50 与监控 50 与阅读理解 50 为主；可迁移技能以服务导向 66、社会洞察力 56、协调 53、说服 53、复杂问题解决 50、指导 50、时间管理 50、判断与决策 47、谈判 47 为主；知识字段列出客户与个人服务、英语语言、教育与培训、销售与营销、行政与管理、公共安全与安保（现行详细页知识重要性：客户服务86、英语66、教育培训54、销售营销54、行政管理50、公共安全50；能力口头表达72、口头理解69、信息排序56；工作风格社交倾向79、可靠性71、自我控制67。均非个人准入阈值）。\n准入与授权｜学历与认证不等于供酒与停售或收款与退款权限；BLS 指出通常无正式教育或经验要求、技能通过在岗学习获得，并写明多数州对供酒年龄的要求；O*NET 列出 3 项国家认证，均不等于录用门槛或雇主任命。\n行业与雇主｜O*NET 行业分布为住宿与餐饮服务79%、其他行业（含艺术与娱乐与休闲与其他服务业）21%；常见雇主为酒吧与酒馆、餐厅、酒店与度假村、宴会与活动与夜店场所。"
             ]
           },
           "id": "bartenders.profile.work-context-block.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "nbs",
+            "census",
+            "health",
+            "ttb-retail",
+            "cn-food-law",
+            "cn-minors"
           ],
           "type": "prose"
         },
@@ -23514,12 +23308,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：按本页证据口径（暂无可安全使用的数据、尚未建立精确职业映射），未取得与 35-3011.00 精确对应的中国大陆公开职业条目与全国职业工资分布，故本页不陈述该职业的月薪、起薪、中位数或分位数。按证据口径允许的唯一代理是「以 2024 年住宿和餐饮业年平均工资作明示行业代理」：国家统计局《2024 年城镇单位就业人员年平均工资情况》显示住宿和餐饮业城镇非私营单位就业人员年平均工资为 60,240 元（名义增长 3.7%）、城镇私营单位为 54,042 元、规模以上企业为 57,911 元。这些是行业平均，不含本职业精确条目，且调酒师收入含小费与提成与自雇成分，不能替代本职业工资；需要比较时应按城市与场所类型与任职方式与班次与小费与提成结构逐项核对。"
+              "已核中国官方调酒师职业资料：OSTA原链接是2010修订版，定义为在酒吧或餐厅按配方或宾客要求配制并销售饮料；五等级和高中背景仅限该版。2025上海评价目录列4-03-02-09调酒师及当地5/4/3级；不能由地方目录推全国条件。证据不足：本次未取得取代旧版的新正式标准全文，2024征求意见稿不能当现行标准。精确全国调酒师工资仍缺。2025住宿餐饮城镇单位非私营62,461、私营55,123元/年税前均值；规模以上服务人员52,018，是行业/岗位大类背景，不能当调酒师中位数或小费/经营所得。"
             ]
           },
           "id": "bartenders.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "onet"
+            "msresearch",
+            "cn-evaluation",
+            "cn-wages-current"
           ],
           "type": "prose"
         },
@@ -23543,12 +23339,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "就业与前景（本职业单列口径）：O*NET 就业趋势页给出 2024 年在岗 756,700 人、2034 年约 801,500 人（2024—2034 年 +6%，标签为快于平均（5% 至 6%））、预测期年均职位空缺约 129,600（含增长与替换）。BLS 职业展望手册同名章节为另一轮资料期：2025 年在岗 762,600 人、2025—2035 年 +5%（快于平均）、变化 +37,900、年均空缺约 121,200（多来自替代需求）。两组数字年份与口径不同，不得混用，也不能合并解读为个人录用保证。"
+              "美国35-3011.00调酒师：2025年就业762,600人，2035年预计800,500人，2025—2035增长5%、净增37,900人、年均空缺121,200（含增长与替换）。现行O*NET与BLS OOH同职业同期间一致，总体预测非AI归因。"
             ]
           },
           "id": "bartenders.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23572,12 +23369,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业分布与工具信号：O*NET 行业分布给出住宿与餐饮服务 78%、其他行业（含艺术与娱乐与休闲与其他服务业）22%（2024 年）；该页对行业数据未标注取自其他职业。样本职位名称包括 Banquet Bartender、Bar Captain、Bartender、Mixologist。招聘技术信号方面，O*NET 列出 2 项技术技能并均标注为热门技术（Microsoft Outlook、Facebook），Outlook 公布比例低于 1%、Facebook 未公布比例；另有 5 类软件技能（数据库查询、电子邮件、浏览器、销售点 POS、网页创建与编辑）。这些来自招聘公告文本，不代表岗位采用率或自动化程度。"
+              "行业分布与工具信号：O*NET 行业分布给出住宿与餐饮服务 79%、其他行业（含艺术与娱乐与休闲与其他服务业）21%（现行页面未单列资料年）；该页对行业数据未标注取自其他职业。样本职位名称包括 Banquet Bartender、Bar Captain、Bartender、Mixologist。招聘技术信号方面，O*NET 列出 2 项技术技能并均标注为热门技术（Microsoft Outlook、Facebook），Outlook 公布比例低于 1%、Facebook 未公布比例；另有 5 类软件技能（数据库查询、电子邮件、浏览器、销售点 POS、网页创建与编辑）。这些来自招聘公告文本，不代表岗位采用率或自动化程度。"
             ]
           },
           "id": "bartenders.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "onet"
+            "r2-pay-2",
+            "hr"
           ],
           "type": "prose"
         },
@@ -23677,14 +23475,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "调酒师（美国侧 O*NET 35-3011.00，Bartenders）直接或通过服务员为顾客调制并提供饮品。官方职责原文为「Mix and serve drinks to patrons, directly or through waitstaff.」；O*NET 官方任务共 21 项（16 项核心、5 项补充，另有 1 项新增任务未给分数），核心任务包括清洁杯具与器具与吧台设备（重要性 95）、为所提供的饮品收款（95）、核对现金收入（94）、核验顾客身份证件以确认购买酒精饮料的年龄要求（94）、清洁吧台与工作区与桌面（92）、以劝阻继续饮酒或为醉酒顾客安排交通等方式限制与过量饮酒有关的责任（91）、向服务员或直接向顾客接饮品订单（90）、提供葡萄酒与瓶装或桶装啤酒（89）、计划与组织与控制鸡尾酒吧或吧台的运营（87）、上架啤酒与葡萄酒与烈酒与冰块与杯具与餐巾与吸管等物料（87）、为吧台座位顾客提供零食或食品（85）、混合酒类与苏打水与糖水与糖与苦精等配料调制鸡尾酒与其他饮品（83）、切片与去核水果用于装饰饮品（76）、请变得喧闹或滋事的顾客离开或按规程处置（71）、整理酒瓶与杯具以形成有吸引力的陈列（70）、创造饮品配方（61）；补充任务包括监督管理吧台员工与其他调酒师（85）、订购或请购酒水与物料（78）、规划吧台菜单（66）、准备泡菜与奶酪与冷肉等开胃小食（53），以及为顾客提供路线或问题答复（新增任务，未给分数）。该职业在美国属 Job Zone 1–2（SVP 低于 6.0），并在 O*NET 标注为 Bright Outlook；其工资、就业与行业数据均为本职业单列口径。本页不构成配方、酒谱参数或供酒判断指令。"
+              "调酒师（美国侧 O*NET 35-3011.00，Bartenders）直接或通过服务员为顾客调制并提供饮品。官方职责原文为「Mix and serve drinks to patrons, directly or through waitstaff.」；O*NET 官方任务共 21 项（16项核心、4项补充、1项New新增任务未给分数），核心任务包括清洁杯具与器具与吧台设备（重要性 95）、为所提供的饮品收款（95）、核对现金收入（94）、核验顾客身份证件以确认购买酒精饮料的年龄要求（94）、清洁吧台与工作区与桌面（92）、以劝阻继续饮酒或为醉酒顾客安排交通等方式限制与过量饮酒有关的责任（91）、向服务员或直接向顾客接饮品订单（90）、提供葡萄酒与瓶装或桶装啤酒（89）、计划与组织与控制鸡尾酒吧或吧台的运营（87）、上架啤酒与葡萄酒与烈酒与冰块与杯具与餐巾与吸管等物料（87）、为吧台座位顾客提供零食或食品（85）、混合酒类与苏打水与糖水与糖与苦精等配料调制鸡尾酒与其他饮品（83）、切片与去核水果用于装饰饮品（76）、请变得喧闹或滋事的顾客离开或按规程处置（71）、整理酒瓶与杯具以形成有吸引力的陈列（70）、创造饮品配方（61）；补充任务包括监督管理吧台员工与其他调酒师（85）、订购或请购酒水与物料（78）、规划吧台菜单（66）、准备泡菜与奶酪与冷肉等开胃小食（53），以及为顾客提供路线或问题答复（新增任务，未给分数）。该职业在美国属 Job Zone 1–2（SVP 低于 6.0），并在 O*NET 标注为 Bright Outlook；其工资、就业与行业数据均为本职业单列口径。本页不构成配方、酒谱参数或供酒判断指令。"
             ]
           },
           "id": "bartenders.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -23798,13 +23594,19 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把 35-3011.00（Bartenders）列为 Job Zone 1–2（SVP 低于 6.0），页面公布的学历构成中 43% 为要求高中文凭或同等学历、37% 为要求低于高中文凭、16% 为要求上过大学但无学位，并指出该区职业通常在岗训练从几天到一年。BLS 职业展望手册同名章节把典型入门教育列为「无正式学历凭证」、无相关工作经验要求、短期在岗训练，并指出作息常含深夜与周末与节假日、兼职常见；同时写明多数州要求供应酒精饮料的从业者至少 18 岁。O*NET 培训页面显示全国共 8 个相关培训项目（方向为 Bartending/Bartender），职业摘要另列出经美国劳工部批准的注册学徒岗位 Bartender；认证页面列出 3 项国家认证（含酒类服务方向）。中国大陆侧有《调酒师国家职业技能标准》，设五个等级、基本文化程度为高中毕业（或同等学力），并须符合适用的食品安全与场所卫生要求。"
+              "O*NET 把 35-3011.00（Bartenders）列为 Job Zone 1–2（SVP 低于 6.0），页面公布的学历构成中 43% 为要求高中文凭或同等学历、37% 为要求低于高中文凭、16% 为要求上过大学但无学位，并指出该区职业通常在岗训练从几天到一年。BLS 职业展望手册同名章节把典型入门教育列为「无正式学历凭证」、无相关工作经验要求、短期在岗训练，并指出作息常含深夜与周末与节假日、兼职常见；同时写明多数州要求供应酒精饮料的从业者至少 18 岁。O*NET 培训页面显示全国共 8 个相关培训项目（方向为 Bartending/Bartender），职业摘要另列出经美国劳工部批准的注册学徒岗位 Bartender；认证页面列出 3 项国家认证（含酒类服务方向）。已核中国官方调酒师职业资料：OSTA原链接是2010修订版，定义为在酒吧或餐厅按配方或宾客要求配制并销售饮料；五等级和高中背景仅限该版。2025上海评价目录列4-03-02-09调酒师及当地5/4/3级；不能由地方目录推全国条件。证据不足：本次未取得取代旧版的新正式标准全文，2024征求意见稿不能当现行标准。中国食品安全法第44、45条支持企业食品安全培训、直接接触入口食品人员每年健康检查取得证明；器具清洁、食品贮存和经营主体责任按第33、54、56等条核。具体内部设备及退款权限另核雇主。中国未成年人保护法第58、59条：酒吧不得允许未成年人进入，禁止向未成年人售酒，并须设置相应标志、对年龄难辨者要求身份证件；第61条禁止酒吧招用已满16周岁的未成年人。场所授权不能放宽这些法定义务。"
             ]
           },
           "id": "bartenders.profile.career-quick-answers-block.19",
           "source_refs": [
             "onet",
-            "onet"
+            "nbs",
+            "nist",
+            "census",
+            "msresearch",
+            "cn-evaluation",
+            "cn-food-law",
+            "cn-minors"
           ],
           "type": "prose"
         },
@@ -23828,13 +23630,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "学历、职业培训、行业认证、雇主任用、州酒类许可与场所作业授权是不同状态：学历与培训结业与认证不带来供酒与停售或收款与退款权限；须按雇主与岗位与法域逐项核验；本页的工资与就业为本职业单列口径，但 BLS 职业展望手册为 2025—2035 年另一轮资料期，不能与 O*NET 的2024—2034 年预测混用。"
+              "学历、训练、认证、雇主聘任、经营许可及内部权限分别核；培训不自动赋予供酒、停售或退款权限。美国35-3011.00调酒师：2025年就业762,600人，2035年预计800,500人，2025—2035增长5%、净增37,900人、年均空缺121,200（含增长与替换）。现行O*NET与BLS OOH同职业同期间一致，总体预测非AI归因。"
             ]
           },
           "id": "bartenders.profile.career-quick-answers-block.21",
           "source_refs": [
             "onet",
-            "onet"
+            "nbs",
+            "ttb-retail"
           ],
           "type": "prose"
         },
@@ -23872,13 +23675,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧为 O*NET 35-3011.00（Bartenders），并在 O*NET 标注为 Bright Outlook；其工资、就业与行业数据在 O*NET 页面上均为本职业单列口径，未标注取自其他职业。BLS 职业展望手册章节同为单列「Bartenders」，但资料期为 2025—2035 年（+5%、变化 +37,900、年均空缺约 121,200），与 O*NET 展示的 2024—2034 年预测（+6%、空缺约 129,600）不同轮次，不得混用。中国大陆侧本页未取得与该职业精确对应的公开职业条目与全国职业工资分布，只以 2024 年住宿和餐饮业年平均工资作明示行业代理；比较时应先辨认岗位属于酒吧与酒馆、餐厅、酒店与度假村、还是宴会与活动与夜店场所，以及任职方式与班次与小费结构。"
+              "美国职业35-3011.00的工资、就业、行业均单列；现行O*NET与BLS就业期间同为2025—2035。已核中国官方调酒师职业资料：OSTA原链接是2010修订版，定义为在酒吧或餐厅按配方或宾客要求配制并销售饮料；五等级和高中背景仅限该版。2025上海评价目录列4-03-02-09调酒师及当地5/4/3级；不能由地方目录推全国条件。证据不足：本次未取得取代旧版的新正式标准全文，2024征求意见稿不能当现行标准。中国全国职业工资仍缺，行业均值另作背景。"
             ]
           },
           "id": "bartenders.profile.career-quick-answers-block.24",
           "source_refs": [
             "onet",
-            "onet"
+            "ep-current",
+            "nbs",
+            "msresearch",
+            "cn-evaluation",
+            "cn-wages-current"
           ],
           "type": "prose"
         },
@@ -23901,13 +23708,19 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧 O*NET 学历构成为高中文凭或同等学历 43%、低于高中文凭 37%、上过大学但无学位 16%；BLS 职业展望手册把典型入门教育列为「无正式学历凭证」并指出技能通常在岗学习获得，且多数州要求供应酒精饮料的从业者至少 18 岁；O*NET 全国登记 8 个 Bartending/Bartender 培训项目，另有经劳工部批准的注册学徒岗位与 3 项国家认证。中国大陆侧有《调酒师国家职业技能标准》（设五个等级、基本文化程度高中毕业或同等学力），并须符合适用的食品安全与场所卫生要求，具体学历与经验要求由用人单位规定。"
+              "美国侧 O*NET 学历构成为高中文凭或同等学历 43%、低于高中文凭 37%、上过大学但无学位 16%；BLS 职业展望手册把典型入门教育列为「无正式学历凭证」并指出技能通常在岗学习获得，且多数州要求供应酒精饮料的从业者至少 18 岁；O*NET 全国登记 8 个 Bartending/Bartender 培训项目，另有经劳工部批准的注册学徒岗位与 3 项国家认证。已核中国官方调酒师职业资料：OSTA原链接是2010修订版，定义为在酒吧或餐厅按配方或宾客要求配制并销售饮料；五等级和高中背景仅限该版。2025上海评价目录列4-03-02-09调酒师及当地5/4/3级；不能由地方目录推全国条件。证据不足：本次未取得取代旧版的新正式标准全文，2024征求意见稿不能当现行标准。中国食品安全法第44、45条支持企业食品安全培训、直接接触入口食品人员每年健康检查取得证明；器具清洁、食品贮存和经营主体责任按第33、54、56等条核。具体内部设备及退款权限另核雇主。中国未成年人保护法第58、59条：酒吧不得允许未成年人进入，禁止向未成年人售酒，并须设置相应标志、对年龄难辨者要求身份证件；第61条禁止酒吧招用已满16周岁的未成年人。场所授权不能放宽这些法定义务。"
             ]
           },
           "id": "bartenders.profile.career-quick-answers-block.26",
           "source_refs": [
             "onet",
-            "onet"
+            "nbs",
+            "nist",
+            "census",
+            "msresearch",
+            "cn-evaluation",
+            "cn-food-law",
+            "cn-minors"
           ],
           "type": "prose"
         },
@@ -24019,13 +23832,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "酒单与场所规程与酒类法规要求更新较快；O*NET 列出 2 项软件技能并均标注为热门技术（Microsoft Outlook、Facebook，Outlook 公布比例低于 1%、Facebook 未公布比例）；基本技能以积极倾听 69 与批判性思维 53 与口语表达 53 与主动学习 50 与监控 50 与阅读理解 50 为主；可迁移技能以服务导向 66、社会洞察力 56、协调 53、说服 53、复杂问题解决 50、指导 50、时间管理 50 为主；知识字段公布客户与个人服务、英语语言、教育与培训、销售与营销、行政与管理、公共安全与安保（本页未取得各知识领域的重要性分数）。入职前确认培训安排、酒类服务与授权与复核机制。"
+              "O*NET热门软件页来自2025年美国Lightcast招聘广告：Microsoft Outlook提及低于1%，Facebook比例Not available；广告提及不是采用率或统一录用条件。基本技能积极倾听69、批判性思维53、口语表达53；知识重要性客户服务86、英语66、教育培训54、销售营销54、行政管理50、公共安全50。职业字段非个人门槛；目标酒单、培训及内部职责另核。"
             ]
           },
           "id": "bartenders.profile.career-quick-answers-block.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "hr",
+            "bls",
+            "editor"
           ],
           "type": "prose"
         }
@@ -24545,10 +24359,10 @@
                 "url": "https://www.onetonline.org/link/industry/35-3011.00"
               },
               {
-                "entity": "O*NET 35-3011.00 职业摘要（就业与预测字段）",
+                "entity": "O*NET调酒师2025—2035全国就业趋势",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/35-3011.00"
+                "url": "https://www.onetonline.org/link/localtrends/35-3011.00"
               },
               {
                 "entity": "O*NET 35-3011.00 全国工资分位",
@@ -24557,10 +24371,10 @@
                 "url": "https://www.onetonline.org/link/localwages/35-3011.00"
               },
               {
-                "entity": "O*NET 35-3011.00 培训与教育信息",
+                "entity": "O*NET 35-3011.00 职业摘要（调酒师）",
                 "id": "link-8",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/35-3011.00"
+                "url": "https://www.onetonline.org/link/summary/35-3011.00"
               },
               {
                 "entity": "O*NET 35-3011.00 详细资料（工作情境与工作活动）",
@@ -24569,16 +24383,16 @@
                 "url": "https://www.onetonline.org/link/details/35-3011.00"
               },
               {
-                "entity": "O*NET 35-3011.00 认证发现（国家认证口径）",
+                "entity": "O*NET 35-3011.00 技术清单（热门技术信号）",
                 "id": "link-10",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localcert/35-3011.00"
+                "url": "https://www.onetonline.org/link/hot_tech/35-3011.00"
               },
               {
-                "entity": "O*NET 35-3011.00 行业分布（行业与雇主类型口径）",
+                "entity": "O*NET调酒师2025—2035全国就业趋势",
                 "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/35-3011.00"
+                "url": "https://www.onetonline.org/link/localtrends/35-3011.00"
               },
               {
                 "entity": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
@@ -24593,40 +24407,40 @@
                 "url": "https://www.onetonline.org/link/summary/35-3011.00"
               },
               {
-                "entity": "O*NET 35-3011.00 详细资料",
+                "entity": "O*NET 35-3011.00 技术清单（热门技术信号）",
                 "id": "link-14",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/35-3011.00"
-              },
-              {
-                "entity": "O*NET 35-3011.00 技术清单",
-                "id": "link-15",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/hot_tech/35-3011.00"
               },
               {
-                "entity": "O*NET 35-3011.00 行业分布",
-                "id": "link-16",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/35-3011.00"
-              },
-              {
-                "entity": "O*NET 35-3011.00 职业摘要（就业与预测字段）",
-                "id": "link-17",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/35-3011.00"
-              },
-              {
-                "entity": "O*NET 35-3011.00 详细资料（工作情境）",
-                "id": "link-18",
+                "entity": "O*NET 35-3011.00 详细资料（任务与工作活动）",
+                "id": "link-15",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/35-3011.00"
               },
               {
-                "entity": "O*NET 35-3011.00 培训与教育信息",
+                "entity": "O*NET调酒师2025—2035全国就业趋势",
+                "id": "link-16",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/localtrends/35-3011.00"
+              },
+              {
+                "entity": "《中华人民共和国未成年人保护法》2024修正版",
+                "id": "link-17",
+                "relation": "career.source",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_54358c05e57642ab895176413f7cd4d7.html"
+              },
+              {
+                "entity": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
+                "id": "link-18",
+                "relation": "career.source",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "entity": "O*NET 35-3011.00 详细资料（任务与工作活动）",
                 "id": "link-19",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/35-3011.00"
+                "url": "https://www.onetonline.org/link/details/35-3011.00"
               }
             ]
           },
@@ -24693,13 +24507,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把订单转达与库存与订购摘要、排班与客流预测参考、收银与销售点系统提示的初步分类用于提高效率，但年龄核验与是否可供酒、疑似醉酒时的停售与安排交通、调制与出品质量判定、以及退款与免单与驱逐顾客处置仍由本人与有权限的人员按适用法域与用人单位制度承担，系统输出必须经现场核对与人工复核后才进入正式记录。"
+              "可试验把虚构订单和库存摘要交给工具整理，并比较漏项和人工复核成本；编辑建议，未取得本职业实际效率效果。供酒、调制质量、退款及异常处置由适用法规和场所职责决定。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.13",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls",
+            "cn-minors"
           ],
           "type": "prose"
         },
@@ -24770,15 +24585,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：AI 与自动化可以改变订单转达与库存与订购摘要、排班与客流预测参考、收银与销售点系统提示的初步分类，但没有官方证据表明它会整体取代年龄核验与供酒决定、疑似醉酒时的停售与安排交通、调制与出品质量判定、以及退款与免单与驱逐顾客处置决定；任务自动化程度不等于岗位数量变化。"
+              "本轮来源支持任务描述、招聘软件信号和总体就业预测，未提供本职业AI采用率、实际裁员或替代日期。订单摘要等是待验证辅助方向，现场核验、卫生和处置职责仍须明确。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "bls",
+            "hr",
+            "ep-current",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -24887,12 +24702,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明雇主招聘中出现的软件技能；页面仅公布一项低于 1% 的比例，不代表岗位采用率。"
+              "O*NET热门软件页来自2025年美国Lightcast招聘广告：Microsoft Outlook提及低于1%，Facebook比例Not available；广告提及不是采用率或统一录用条件。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.26",
           "source_refs": [
-            "onet"
+            "hr"
           ],
           "type": "prose"
         },
@@ -24943,12 +24758,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于该职业的就业与 2024—2034 年预测口径（本职业单列口径）。"
+              "美国35-3011.00调酒师：2025年就业762,600人，2035年预计800,500人，2025—2035增长5%、净增37,900人、年均空缺121,200（含增长与替换）。现行O*NET与BLS OOH同职业同期间一致，总体预测非AI归因。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.30",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -24985,13 +24801,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表比较三组环节在自动化影响上的差别：哪些可被辅助，哪些判断与责任仍由人承担。"
+              "下表为编辑按任务分析的辅助可能性与现场复核点，不是企业采用、生产率提升或替代率的实测结论。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25000,13 +24817,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "订单转达与库存与订购摘要、排班与客流预测参考可辅助完成。"
+              "订单和库存摘要、排班参考可作工具试验候选；需用虚构数据验证漏项、延误和复核成本。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -25030,13 +24847,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "订单与库存与收款与系统提示数据可借助系统整理。"
+              "工具可试验整理订单、库存及收款信息；是否可用须核访问权限、输入质量和人工核对成本。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -25060,13 +24877,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核验与收款与清洁与交接记录可自动生成与归档。"
+              "核验、收款及清洁记录可试验草稿整理；不能把自动生成、自动归档等同真实执行或合规，顾客证件及金融账户另核信息处理依据。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "cn-pipl"
           ],
           "type": "prose"
         },
@@ -25090,12 +24907,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、技术信号、就业预测与行业分布，不是自动化替代率或岗位数量预测。"
+              "五张卡对应美国职业身份、任务、招聘软件信号、总体就业预测及ILO任务暴露研究。各测量对象不同，不能据此给调酒师AI替代率。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.40",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls",
+            "hr",
+            "ep-current",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25146,7 +24967,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "「Mix and serve drinks to patrons, directly or through waitstaff.」"
+              "美国职业定义：调制并向顾客提供饮品，可直接提供或经服务员传递。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.44",
@@ -25202,12 +25023,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "官方任务共 21 项（16 项核心、5 项补充），包含清洁杯具与器具与吧台设备、为所提供的饮品收款、核对现金收入、核验顾客身份证件以确认购买酒精饮料的年龄要求、以劝阻继续饮酒或为醉酒顾客安排交通等方式限制与过量饮酒有关的责任、向服务员或直接向顾客接饮品订单、混合配料调制鸡尾酒与其他饮品、上架酒水与物料；工作活动按详细资料页列出 41 项并给出重要性分数。"
+              "官方任务共 21 项（16项核心、4项补充、1项New新增任务未给分数），包含清洁杯具与器具与吧台设备、为所提供的饮品收款、核对现金收入、核验顾客身份证件以确认购买酒精饮料的年龄要求、以劝阻继续饮酒或为醉酒顾客安排交通等方式限制与过量饮酒有关的责任、向服务员或直接向顾客接饮品订单、混合配料调制鸡尾酒与其他饮品、上架酒水与物料；工作活动按详细资料页列出 41 项并给出重要性分数。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.48",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25244,12 +25065,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "雇主招聘公告中出现的软件技能"
+              "2025美国招聘广告中的软件提及"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.51",
           "source_refs": [
-            "onet"
+            "hr"
           ],
           "type": "prose"
         },
@@ -25258,12 +25079,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面列出 2 项软件技能并均标注为热门技术：Microsoft Outlook、Facebook；Outlook 公布比例低于 1%，Facebook 未公布比例。"
+              "O*NET热门软件页来自2025年美国Lightcast招聘广告：Microsoft Outlook提及低于1%，Facebook比例Not available；广告提及不是采用率或统一录用条件。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "onet"
+            "hr"
           ],
           "type": "prose"
         },
@@ -25272,12 +25093,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "为本职业单列口径的就业与预测，不是个人录用或收入保证。"
+              "软件广告提及非岗位采用率、个人录用门槛或AI自动化程度。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.53",
           "source_refs": [
-            "onet"
+            "hr"
           ],
           "type": "prose"
         },
@@ -25286,12 +25107,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 35-3011.00 职业摘要（就业与预测字段）"
+              "O*NET调酒师2025—2035就业趋势"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25300,12 +25121,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "就业与 2024—2034 年预测"
+              "美国本职业2025—2035总体就业预测"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25314,12 +25135,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页按本职业口径给出 2024 年在岗 756,700 人、2034 年约 801,500 人（2024—2034 年 +6%，快于平均（5% 至 6%））、预测期年均职位空缺约 129,600；BLS 职业展望手册同名章节另按 2025—2035 年给出 +5% 与年均空缺约 121,200，两者年份不同，不得混用。"
+              "美国35-3011.00调酒师：2025年就业762,600人，2035年预计800,500人，2025—2035增长5%、净增37,900人、年均空缺121,200（含增长与替换）。现行O*NET与BLS OOH同职业同期间一致，总体预测非AI归因。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -25328,12 +25150,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业分布描述统计分类（本职业单列口径），不能用于推导行业工资、就业规模或个人岗位归属。"
+              "ILO研究测量潜在生成式AI任务暴露，不是调酒师采用率、裁员或岗位消失预测。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.57",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25342,12 +25164,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 35-3011.00 行业分布"
+              "ILO Working Paper 140（2025）"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.58",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25356,12 +25178,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业分布"
+              "全球职业任务的潜在生成式AI暴露"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.59",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25370,12 +25192,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面按 2024 年给出该职业的行业分布为住宿与餐饮服务 78%、其他行业（含艺术与娱乐与休闲与其他服务业）22%。"
+              "研究区分任务暴露与岗位转型；潜在技术影响不能当实际采用或净就业变化。本页未取得调酒师专项采用和生产率结果。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25384,13 +25206,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助的是订单转达与库存与订购摘要、排班与客流预测参考、收银与销售点系统提示的初步分类等可回滚环节；这些是辅助能力，输出仍需经现场核对与人工复核后才能使用。技术可行不等于已采用。"
+              "订单、库存摘要和记录草稿可作为工具试验方向；编辑推演，须用虚构数据检验错误及复核成本，未取得职业实测结果。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.61",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25399,13 +25222,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "取决于雇主的点单与库存与排班与销售点系统、场所酒类服务与食品安全管理规程、以及上岗与复核安排；本页不推测采用进度，也没有该职业的采用率统计。"
+              "实际采用需核场所系统、数据权限、法规和复核安排；本轮招聘软件提及不能回答AI采用率。证据不足：调酒师专项采用率。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.62",
           "source_refs": [
-            "onet",
-            "onet"
+            "hr",
+            "ilo",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25414,13 +25238,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露、实际采用、生产率与就业是不同测量对象；O*NET 展示的 BLS 数据仍给出本职业 2024—2034 年 +6%（快于平均（5% 至 6%）），本页不把任务自动化程度等同于岗位数量变化。"
+              "任务暴露、采用、生产率和就业分开测量。美国35-3011.00调酒师：2025年就业762,600人，2035年预计800,500人，2025—2035增长5%、净增37,900人、年均空缺121,200（含增长与替换）。现行O*NET与BLS OOH同职业同期间一致，总体预测非AI归因。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet",
-            "onet"
+            "ilo",
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25429,13 +25253,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有官方证据支持「被整体取代」。自动化可能辅助订单与库存与排班与提示分类，但年龄核验与供酒决定、疑似醉酒时的停售与安排交通、调制与出品质量判定与退款与免单决定仍由人承担。"
+              "本轮未取得整体替代的职业证据。可讨论辅助方向，但不据此给岗位消失时间；实际供酒、卫生和异常处置责任须按法域与场所核。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "onet",
-            "onet"
+            "ilo",
+            "bls",
+            "cn-minors",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -25459,13 +25285,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不需要入门即会编程，但会用收银与销售点与库存类软件与办公软件已成为部分场所的常见要求。核心能力来自标准酒谱与出品一致性、酒类服务法规与年龄核验与停售处置、器具清洗与消毒、顾客沟通与冲突处置；是否要求软件或系统能力取决于场所与雇主，具体要求以用人单位规定为准。"
+              "O*NET热门软件页来自2025年美国Lightcast招聘广告：Microsoft Outlook提及低于1%，Facebook比例Not available；广告提及不是采用率或统一录用条件。软件熟练度和是否需要编程须核实际职位，本轮来源不支持“部分场所常见要求”的比例判断。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.66",
           "source_refs": [
-            "onet",
-            "onet"
+            "hr",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25474,13 +25300,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 技术清单 / 培训与教育信息"
+              "O*NET 2025美国招聘软件信号"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet",
-            "onet"
+            "hr"
           ],
           "type": "prose"
         },
@@ -25489,13 +25314,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "订单转达与库存与订购摘要、排班与客流预测参考、收银与销售点系统提示初步分类；都是可回滚、可复核的辅助环节。"
+              "编辑建议先用虚构订单、库存或记录草稿比较工具的漏项和人工复核成本；未取得调酒师专项效率结果。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -25518,13 +25343,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 展示的 BLS 数据对本职业 2024—2034 年的口径为 +6%（快于平均（5% 至 6%））、预测期年均职位空缺约 129,600；该口径描述职业群体，不代表个人录用概率。"
+              "美国35-3011.00调酒师：2025年就业762,600人，2035年预计800,500人，2025—2035增长5%、净增37,900人、年均空缺121,200（含增长与替换）。现行O*NET与BLS OOH同职业同期间一致，总体预测非AI归因。不代表个人录用概率。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -25533,13 +25358,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业摘要（就业与预测字段）"
+              "O*NET本职业就业趋势（2025—2035）"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25548,13 +25372,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。年龄核验与是否可供酒、疑似醉酒时的停售与安排交通、调制与出品质量判定、以及退款与免单与驱逐顾客处置决定必须由本人与有权限的人员按适用法域与用人单位制度承担；系统可用于检索与记录整理，但不能替代判断与责任承担。"
+              "中国未成年人保护法第58、59条：酒吧不得允许未成年人进入，禁止向未成年人售酒，并须设置相应标志、对年龄难辨者要求身份证件；第61条禁止酒吧招用已满16周岁的未成年人。场所授权不能放宽这些法定义务。工具可辅助记录，但不能放宽法定禁入、禁售和用工边界。其他现场决定另核职责。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-minors",
+            "bls"
           ],
           "type": "prose"
         },
@@ -25563,12 +25387,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业摘要 / 详细资料"
+              "中国未成年人保护法（2024修正）与O*NET任务"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.73",
           "source_refs": [
-            "onet"
+            "cn-minors",
+            "bls"
           ],
           "type": "prose"
         },
@@ -25577,13 +25402,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有任何官方来源给出这样的年份。任务暴露、采用率与岗位数量是不同概念，本页不做岗位消失年份预测；官方预测只给出本职业 2024—2034 年 +6%并列出就业与空缺口径。"
+              "本轮未取得岗位消失年份；ILO潜在任务暴露不测这一结果。现行总体就业预测为2025—2035增长5%，不能解释成AI因果。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "onet",
-            "onet"
+            "ilo",
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25592,13 +25417,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页方法说明"
+              "ILO潜在任务暴露研究／本页证据缺口"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "onet",
-            "onet"
+            "ilo",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25622,13 +25447,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 培训与教育信息"
+              "O*NET任务与工作活动／编辑学习建议"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.77",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25637,13 +25462,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具进入点单与记录流程时，人的控制点应按以下五步固定下来；任何一步缺失都不应扩大使用范围。"
+              "以下是编辑提出的工具试用复核流程，不是所有场所统一标准；先用虚构数据，实际流程按法规和雇主核。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.78",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -25697,13 +25522,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "如实保存订单与出品、酒类核验与停售与过量饮酒处置、现金核对与收款、器具清洗与消毒处理与异常记录，使过程可复核、可追溯。"
+              "记录真实订单、收款和清洁执行及异常，注明操作人、时间和修正；身份查验不自动授权全量复制或外发证件。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.82",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "cn-pipl",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -25801,13 +25627,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "保存核验与停售与收款与清洁消毒与异常记录，注明时间、操作人、依据与人工修改痕迹。"
+              "保留必要的核验结果、停售、收款、清洁及异常说明；不默认留存完整证件或金融账户资料，另核合法依据、必要性和权限。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.89",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-pipl",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25816,13 +25642,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "器具消毒或酒水与装饰用水果的贮存或食品处理不当，可能造成食源性疾病与场所卫生违法风险；向已明显醉酒者继续供酒可能带来法律责任。"
+              "中国食品安全法第44、45条支持企业食品安全培训、直接接触入口食品人员每年健康检查取得证明；器具清洁、食品贮存和经营主体责任按第33、54、56等条核。具体内部设备及退款权限另核雇主。O*NET把限制过量饮酒相关责任列为任务；本页不据此断言各法域醉酒供酒的统一责任条款。"
             ]
           },
           "id": "bartenders.ai-impact.ai-impact-table.90",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-food-law",
+            "bls"
           ],
           "type": "prose"
         },
@@ -26297,12 +26123,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆未取得与 35-3011.00 对应的调酒师精确职业条目与全国职业工资分布；本页只发布住宿和餐饮业行业代理，不把中文页面语言当作中国等价职业映射。"
+              "已核中国官方调酒师职业资料：OSTA原链接是2010修订版，定义为在酒吧或餐厅按配方或宾客要求配制并销售饮料；五等级和高中背景仅限该版。2025上海评价目录列4-03-02-09调酒师及当地5/4/3级；不能由地方目录推全国条件。证据不足：本次未取得取代旧版的新正式标准全文，2024征求意见稿不能当现行标准。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26311,12 +26139,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "截至 2026 年 9 月，有界检索未找到单列调酒师（或与之精确对应的酒吧与酒水调制职业序列）的公开职业条目与全国收入统计；按本页证据口径（暂无可安全使用的数据、尚未建立精确职业映射），本页不陈述该职业的官方月薪、起薪、中位数或分位数，仅以 2024 年住宿和餐饮业年平均工资作明示行业代理。"
+              "证据不足：本次未取得调酒师全国职业月薪、起薪、中位数或分位；职业资料已取得，不能写没有公开职业条目。2025行业单位均值仅作背景。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26325,12 +26155,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "60,240 元/年（2024 年，住宿和餐饮业，城镇非私营单位；行业代理，非本职业工资）"
+              "62,461元/年（2025住宿餐饮城镇非私营税前均值，非职业工资）"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26339,12 +26171,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "这是行业门类的平均工资，不是调酒师的职业工资；2024 年该行业名义增长 3.7%，但行业平均增长不代表个人加薪。行业平均不能替代本职业中位数与起薪，也不能替代小费与提成与自雇收入。"
+              "行业均值不能替代调酒师中位数或起薪，也不能推个人加薪、场所利润或自雇经营所得。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26353,12 +26187,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "54,042 元/年（2024 年，住宿和餐饮业，城镇私营单位；行业代理）"
+              "55,123元/年（2025住宿餐饮城镇私营税前均值，非职业工资）"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26367,12 +26203,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "同一行业在私营单位的对照值，仍属行业代理。酒吧与酒水调制岗位中相当比例分布在私营与小微经营主体，但这不构成对本职业工资的判断。"
+              "私营与非私营人群分列，不拼成职业收入区间；个体经营者不在调查范围。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26381,12 +26219,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "49,997 元/年（2024 年，规模以上企业住宿和餐饮业社会生产服务和生活服务人员；岗位类别代理）"
+              "52,018元/年（2025规模以上住宿餐饮企业社会生产服务和生活服务人员均值，岗位大类背景）"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26395,12 +26235,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "岗位大类口径比本职业更宽，只作对照；《中华人民共和国职业分类大典（2022 年版）》以中类与细类划分职业，岗位大类不等于调酒师。"
+              "该列覆盖多种服务岗位，非调酒师；同表全岗位59,785元/年是另一列，不混用。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26423,12 +26265,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "酒吧与酒水调制岗位中相当比例分布在个体工商户与小微经营主体，并含小费与提成与自雇收入，进一步限制可比较性。"
+              "个体工商户、自由职业者及自雇经营所得不在单位调查内；本次没有本职业在小微或个体主体中占比数据。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26437,12 +26281,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "资料期：2024 年数据、2025-05-16 发布；本页不发布中国大陆职业工资数值。"
+              "2025年数据，2026-05-15发布；非精确职业工资。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26451,12 +26297,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国的工资资料为 2025 年（OEWS，本职业单列口径，中位时薪 16.51 美元、中位年薪 34,340 美元）与 2024—2034 年预测；两个市场的统计口径与资料期不同，不能直接换算。"
+              "美国的工资资料为 2025 年（OEWS，本职业单列口径，中位时薪 16.51 美元、中位年薪 34,340 美元）与 2025—2035 年预测；两个市场的统计口径与资料期不同，不能直接换算。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26479,12 +26326,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "该口径为税前工资总额，含单位代扣代缴的个人所得税与社会保险与住房公积金个人缴纳部分；不含小费与提成与经营性收益。若未来取得可核验的本职业来源，须同时标注是否为税前工资总额口径、是否含小费与提成与加班，以及统计覆盖范围；本页不推测数值。"
+              "统计为单位税前工资总额，含奖金、津贴补贴、加班等劳动报酬及个人代扣部分；不能称提成一概排除。小费按真实支付形式另核，自雇经营收益另属不同口径。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26493,12 +26342,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论：中国大陆未取得调酒师的精确职业工资数据；本页只以住宿和餐饮业行业代理（60,240 元/年，非私营单位）与同行业私营与岗位类别对照说明量级，并明确标注为行业代理、非本职业工资。"
+              "精确全国职业工资仍证据不足；上列分人群的行业与岗位大类均值只是背景。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26507,12 +26358,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本职业工资缺口在本页以「未取得精确职业条目」标记；这不是零收入，而是证据无法支持职业级精度。若需比较，请以书面任职条件（城市、场所类型、任职方式与班次、小费与提成结构、税前税后）为准。"
+              "工资缺口应写“未取得全国职业分布”，不能写“未取得职业条目”。具体报价核城市、雇主、工时、班次和计酬条件。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26521,13 +26374,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与自动化可能改变订单与库存与排班等辅助环节，但不改变中国大陆对该职业的统计口径：统计口径、覆盖人群与资料期必须与工资数值一起读。"
+              "本轮没有调酒师专项AI对工资的实测影响；订单和库存整理仅作编辑试验候选。国家统计局行业单位均值不测这一效果。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "ilo",
+            "cn-wages-current",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26536,12 +26390,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业分类：中国大陆有《调酒师国家职业技能标准》，职业定义为「在酒吧或餐厅等场所，根据传统配方或宾客的要求，专职从事配制并销售饮料的人员」，设五个等级（初级/中级/高级/技师/高级技师），基本文化程度为高中毕业（或同等学力）。职业标准不等于全国职业工资统计口径，本页未取得与该标准对应的全国职业工资分布。"
+              "已核中国官方调酒师职业资料：OSTA原链接是2010修订版，定义为在酒吧或餐厅按配方或宾客要求配制并销售饮料；五等级和高中背景仅限该版。2025上海评价目录列4-03-02-09调酒师及当地5/4/3级；不能由地方目录推全国条件。证据不足：本次未取得取代旧版的新正式标准全文，2024征求意见稿不能当现行标准。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26550,13 +26406,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "高中毕业（或同等学力）"
+              "中国标准版本与目标岗位条件"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26580,13 +26437,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "《调酒师国家职业技能标准》把基本文化程度列为高中毕业（或同等学力）；学历与职业技能等级与授权是不同路径，学历与培训结业不等于供酒与停售权限。"
+              "2010修订版列高中毕业或同等学力，仅作为该版历史字段；未核新正式版本，不推当下所有门店录用门槛。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26610,13 +26468,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按场所标准酒谱与规程作业，并可参加职业技能等级评价（五级至一级）。"
+              "场所训练及技能评价按实际版本与当地评价机构核条件，不预设全国五级至一级同一规则。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26670,13 +26529,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "调制与出品与器具清洗消毒与酒水与装饰用水果贮存须符合适用食品安全与场所卫生要求；《餐饮服务食品安全操作规范》（2018 年第 12 号公告，自 2018-10-01 起施行）要求餐饮服务提供者落实食品安全主体责任。美国侧 BLS 指出通常无正式教育或经验要求、技能通过在岗学习获得，并写明多数州要求供应酒精饮料的从业者至少 18 岁；O*NET 列出 3 项国家认证（含酒类服务方向），不等于录用门槛或雇主任命。入职前核对培训与场所许可与授权，不能从学历或经验直接推断。"
+              "中国食品安全法第44、45条支持企业食品安全培训、直接接触入口食品人员每年健康检查取得证明；器具清洁、食品贮存和经营主体责任按第33、54、56等条核。具体内部设备及退款权限另核雇主。中国未成年人保护法第58、59条：酒吧不得允许未成年人进入，禁止向未成年人售酒，并须设置相应标志、对年龄难辨者要求身份证件；第61条禁止酒吧招用已满16周岁的未成年人。场所授权不能放宽这些法定义务。美国BLS多数州供酒从业者至少18岁不可当中国或顾客购买年龄规则。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-food-law",
+            "cn-minors",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26745,13 +26605,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按 O*NET 行业分布（本职业单列口径），该职业在住宿与餐饮服务占 78%（2024 年，美国口径）；该门类与酒吧与餐饮场所高度相关，也是本页唯一使用的中国大陆行业代理门类（60,240 元/年，2024 年，城镇非私营单位，非本职业工资）。"
+              "美国行业页现79%住宿餐饮，未单列资料年；中国2025行业背景非私营62,461元/年另列，地域与人群不同。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26775,13 +26636,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按 O*NET 行业分布（本职业单列口径），该职业另有 22% 归入其他行业（含艺术与娱乐与休闲与其他服务业）（2024 年，美国口径）；中国大陆该范围的职业工资数字不在本页展示范围内。"
+              "按 O*NET 行业分布（本职业单列口径），该职业另有 21% 归入其他行业（含艺术与娱乐与休闲与其他服务业）（现行页面，美国口径）；中国大陆该范围的职业工资数字不在本页展示范围内。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
-            "onet",
-            "onet"
+            "r2-pay-2",
+            "hr",
+            "cn-wages-current"
           ],
           "type": "prose"
         },
@@ -26879,12 +26741,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2024 年城镇单位就业人员年平均工资情况》（住宿和餐饮业行业代理口径）｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202505/t20250516_1959826.html"
+              "国家统计局2025年城镇单位工资（行业背景）｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.47",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26893,13 +26757,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不提供中国大陆调酒师的精确月薪区间；行业代理（住宿和餐饮业 60,240 元/年，2024 年，城镇非私营单位）只说明所在行业的量级，且同名或近名岗位的场所类型与任职方式差异较大，比较时须把班次与小费与提成与职责与授权与责任范围纳入书面条件。"
+              "中国2025住宿餐饮行业单位均值仅作背景，不是调酒师月薪区间；个人报价另核工时、班次、小费提成及职责。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26922,12 +26787,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业代理：住宿和餐饮业城镇非私营单位年平均工资 60,240 元（2024 年）；本职业精确条目未取得。"
+              "行业背景：2025住宿餐饮非私营62,461元/年；精确职业工资分布未取得。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -26978,12 +26845,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未有官方或可核验来源支持其他城市的调酒师月薪区间。"
+              "证据不足：本轮未取得可核验的其他城市调酒师工资分布或月薪区间。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "editor",
+            "cn-wages-current"
           ],
           "type": "prose"
         },
@@ -26992,13 +26860,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业对照：美国 O*NET 35-3011.00（Bartenders，Bright Outlook），其工资与就业与行业数据均为本职业单列口径（页面未标注取自其他职业）；本页未取得中国大陆与 35-3011.00 精确对应的公开职业工资条目，中文页面语言不构成等价映射；《调酒师国家职业技能标准》提供职业身份与技能等级口径，但不含全国职业工资分布。"
+              "已核中国官方调酒师职业资料：OSTA原链接是2010修订版，定义为在酒吧或餐厅按配方或宾客要求配制并销售饮料；五等级和高中背景仅限该版。2025上海评价目录列4-03-02-09调酒师及当地5/4/3级；不能由地方目录推全国条件。证据不足：本次未取得取代旧版的新正式标准全文，2024征求意见稿不能当现行标准。美国35-3011.00工资、就业、行业均单列；两国任务对照不等于工资口径等价。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -27021,12 +26890,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "快于平均（5% 至 6%）"
+              "5%（2025—2035，美国本职业）"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -27057,14 +26926,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 35-3011.00 全国工资分位（页面首行为该职业本身，未标注取自其他职业）｜https://www.onetonline.org/link/localwages/35-3011.00；O*NET 35-3011.00 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/35-3011.00；BLS 职业展望手册《Bartenders》（2025—2035 年另一轮资料期）｜https://www.bls.gov/ooh/food-preparation-and-serving/bartenders.htm；O*NET 35-3011.00 行业分布｜https://www.onetonline.org/link/industry/35-3011.00"
+              "美国35-3011.00：O*NET全国工资为May2025 OEWS；就业趋势与BLS OOH均为2025—2035。分行业时薪中位数来自OOH Pay表，行业占比另来自O*NET行业页，不混成同一指标。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "onet-wages",
+            "ep-current",
+            "nbs",
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -27087,12 +26957,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为分布的下限，不是入门起薪的承诺，同口径时薪第 10 分位为 9.67 美元。；O*NET 展示的 BLS 2025 年工资分位（本职业单列口径）｜https://www.onetonline.org/link/localwages/35-3011.00"
+              "第10分位不是分布最低值或新人起薪；对应时薪9.67美元，年薪20,110美元。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27143,12 +27013,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为本职业单列口径的年薪中位数（2025 年 OEWS），对应中位时薪 16.51 美元；BLS 职业展望手册 2025 年 5 月单列中位时薪亦为 16.51 美元，可互相印证。中位数不等于入门工资，也不构成收入承诺，且小费与提成与自雇收入不在该口径内。；O*NET 展示的 BLS 2025 年工资分位（本职业单列口径）｜https://www.onetonline.org/link/localwages/35-3011.00"
+              "May2025职业年薪中位数34,340美元、时薪16.51美元。OEWS包含全职及兼职受雇者、小费、佣金等；排除自雇和加班溢价。中位数非新人起薪或个人实发。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews-methods",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27213,12 +27085,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "756,700 人（2024 年，本职业单列口径）"
+              "762,600人（2025，美国调酒师）"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -27227,13 +27099,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为 O*NET 就业趋势页按本职业给出的在岗人数；BLS 职业展望手册同名章节另给出 2025 年在岗 762,600 人，两者年份不同。；O*NET 35-3011.00 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/35-3011.00"
+              "O*NET与BLS现行同职业2025规模均为762,600，不再写成不同资料轮次。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27242,12 +27114,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "快于平均（5% 至 6%）（2024—2034 年，本职业单列口径）"
+              "5%（2025—2035，净增37,900人）"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27256,12 +27129,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 展示的 BLS 数据按本职业口径归为「快于平均（5% 至 6%）」；BLS 职业展望手册同名章节另按 2025—2035 年给出 +5%（快于平均）与变化 +37,900，两者年份不同，不能混用。；O*NET 35-3011.00 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/35-3011.00"
+              "2025—2035增长5%，净增37,900；O*NET分类标签5%至6%是范围标签，实际表值5%。总体就业预测非AI归因。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27270,12 +27144,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约 129,600（2024—2034 年，本职业单列口径，含增长与替换）"
+              "年均121,200空缺（2025—2035，含增长与替换）"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27284,13 +27159,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为 O*NET 就业趋势页所示的预测期职位空缺口径，含增长与替换（BLS 职业展望手册同名章节另给出年均空缺约 121,200，资料期为 2025—2035 年），不是净增岗位数，也不构成个人录用保证。；O*NET 35-3011.00 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/35-3011.00"
+              "2025—2035年均121,200空缺包含增长与替换，不是净增数；现行O*NET与OOH数据一致，不能当个人录用保证。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27299,13 +27174,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界（口径）：① 职业身份与任务与工作情境与技能为 O*NET 35-3011.00 本职业口径；② 工资、就业与行业数据在 O*NET 页面上亦为本职业单列口径，「未出现 Wage data for … 或 Employment data for … 等取自其他职业的标注」；③ BLS 职业展望手册同名章节同为单列「Bartenders」，但资料期为 2025—2035 年，与 O*NET 展示的 2024—2034 年不同。三处不得混用，也不得互相换算。"
+              "身份、任务、工资及就业为美国35-3011.00调酒师，工资May2025、就业2025—2035；O*NET与OOH同职业可对照，但均非中国工资口径。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27314,13 +27189,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：美国公开数据给出的是本职业的时薪与年薪分位与2024—2034 年就业与预测（另有 BLS 职业展望手册 2025—2035 年一轮）；可核对的是分位、中位数与预测数字，以及它们各自的口径与资料期。"
+              "美国2025工资给时薪和年薪分位，2025—2035预测给就业、增长及空缺。资料不同测量对象，分开读。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27329,12 +27204,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "场所类型通常影响收入：酒吧与酒馆、餐厅、酒店与度假村、宴会与活动与夜店场所的酒单结构与小费文化差别较大。"
+              "OOH公布旅客住宿、全服务餐厅、酒精饮料饮用场所及游乐博彩休闲等行业的时薪中位数，见下表；行业差异不能直接推出个人收入。具体报价另核工时和小费分配。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.27",
           "source_refs": [
-            "onet"
+            "nbs",
+            "oews-methods"
           ],
           "type": "prose"
         },
@@ -27357,12 +27233,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "资历与职责影响收入：能承担酒单设计或吧台管理或带训职责、或具备侍酒与调酒认证，通常对应更高区间。"
+              "核对岗位是否包含酒单设计、采购、带训或吧台管理，以及这些职责怎样计酬。编辑核对建议；本次未取得年限、认证或职级带来工资增幅的职业证据。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
-            "onet"
+            "editor",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27385,12 +27262,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工时与班次影响实际所得：80% 的典型工作周少于 40 小时，深夜与周末与节假日排班与小费可能带来额外收入。"
+              "O*NET工作周：80%受访者少于40小时、20%为40小时；OOH描述晚班、周末节假日和兼职常见。个人所得应核实际工时及小费分配，不能据此保证额外收入。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.31",
           "source_refs": [
-            "onet"
+            "bls",
+            "nbs",
+            "oews-methods"
           ],
           "type": "prose"
         },
@@ -27414,12 +27293,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "快于平均（5% 至 6%）"
+              "5%（2025—2035，美国本职业）"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -27428,12 +27307,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "住宿与餐饮服务"
+              "旅客住宿业（Traveler accommodation）"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.34",
           "source_refs": [
-            "onet"
+            "nbs",
+            "oews-methods"
           ],
           "type": "prose"
         },
@@ -27442,12 +27322,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "17.57美元/小时（May2025中位数）"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "onet"
+            "nbs",
+            "oews-methods"
           ],
           "type": "prose"
         },
@@ -27456,12 +27337,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布列出该职业在住宿与餐饮服务占 78%（2024 年，本职业单列口径）；行业分布不提供行业工资水平。"
+              "旅客住宿分类，非整个住宿餐饮行业。来源BLS OOH；含小费，非个人收入保证。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "onet"
+            "nbs",
+            "oews-methods"
           ],
           "type": "prose"
         },
@@ -27470,12 +27352,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他行业（含艺术与娱乐与休闲与其他服务业）"
+              "全服务餐厅（Full-service restaurants）"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.37",
           "source_refs": [
-            "onet"
+            "nbs",
+            "oews-methods"
           ],
           "type": "prose"
         },
@@ -27484,12 +27367,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "17.07美元/小时（May2025中位数）"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "onet"
+            "nbs",
+            "oews-methods"
           ],
           "type": "prose"
         },
@@ -27498,12 +27382,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布同时把 22% 归入「其他行业（含艺术与娱乐与休闲与其他服务业）」（2024 年），未单独公布这些行业的职业工资。"
+              "全服务餐厅分类，非所有餐饮企业。来源BLS OOH；含小费，非个人收入保证。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "onet"
+            "nbs",
+            "oews-methods"
           ],
           "type": "prose"
         },
@@ -27512,12 +27397,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "酒吧与酒馆与夜店（常见雇主类型）"
+              "酒精饮料饮用场所（Drinking places, alcoholic beverages）"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.40",
           "source_refs": [
-            "onet"
+            "nbs",
+            "oews-methods"
           ],
           "type": "prose"
         },
@@ -27526,12 +27412,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未按雇主类型公布该职业工资中位数。"
+              "16.01美元/小时（May2025中位数）"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "onet"
+            "nbs",
+            "oews-methods"
           ],
           "type": "prose"
         },
@@ -27540,12 +27427,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 样本职位名称（Banquet Bartender、Bar Captain、Bartender、Mixologist）说明工作场所主要是酒吧与宴会与餐饮服务场景；来源未按场所类型细分公布工资。"
+              "按统计分类，不外推所有夜店、活动或独立吧台。来源BLS OOH；含小费，非个人收入保证。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "onet"
+            "nbs",
+            "oews-methods"
           ],
           "type": "prose"
         },
@@ -27554,12 +27442,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "酒店与度假村与餐厅（常见雇主类型）"
+              "游乐、博彩和休闲业（Amusement, gambling, and recreation industries）"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.43",
           "source_refs": [
-            "onet"
+            "nbs",
+            "oews-methods"
           ],
           "type": "prose"
         },
@@ -27568,12 +27457,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未按任职形态公布该职业收入，本页不把小费与兼职收入年化，也不把自雇场所收入计入受雇口径。"
+              "15.05美元/小时（May2025中位数）"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "onet"
+            "nbs",
+            "oews-methods"
           ],
           "type": "prose"
         },
@@ -27582,12 +27472,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 与 BLS 的工资分位按受雇就业口径统计，自雇或合伙经营的收入结构与经营风险不在该口径内。"
+              "该行业调酒师受雇工资，非经营者收益。来源BLS OOH；含小费，非个人收入保证。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "onet"
+            "nbs",
+            "oews-methods"
           ],
           "type": "prose"
         },
@@ -27596,13 +27487,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位数不是入门工资：它表示一半从业者高于、一半低于该值；第 10 与第 25 分位更接近低端区间，但收入仍受场所类型与职级与班次与小费安排影响。"
+              "中位数是统计分布中点，不是入门工资；第10、第25分位也不按年限划分，不代表所有新人。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27611,12 +27501,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本职业同时公布时薪与年薪分位，两者同源；不能用「时薪 × 工时」推算个人年收入，因为 80% 的典型工作周少于 40 小时，且工时与小费办法因场所而异。"
+              "OEWS公布的年薪按每年2,080小时年化，非每名兼职者实际收入；该职业同时有时薪及年薪分位。个人收入按实际工时与计酬条件核算，受雇工资和自雇经营收益分列。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "onet"
+            "oews-methods",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27625,12 +27516,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "数字来自 BLS 职业就业与工资统计（OEWS，2025 年，本职业单列口径）与 O*NET 展示的 BLS 2024—2034 年就业预测；BLS 职业展望手册同名章节为 2025—2035 年另一轮口径。"
+              "工资来自BLSMay2025OEWS，经O*NET展示；就业预测为BLS2025—2035，经O*NET及OOH展示，当前期间一致。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27639,13 +27531,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "实际收入还受场所类型、职级与吧台职责、工时与班次与小费安排影响。"
+              "比较报价时分列工时、班次、小费分配、提成、额外职责及雇佣关系；编辑核对清单，不是各因素工资效果的统计结论。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "oews-methods"
           ],
           "type": "prose"
         },
@@ -27697,13 +27589,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位为年薪 73,770 美元；高端通常与年限、场所类型或酒单设计与管理职责相关，不代表普遍水平。"
+              "第90分位73,770美元/年、35.47美元/小时；统计未把该分位归因于年限、认证或管理职责，不是普遍水平或承诺。"
             ]
           },
           "id": "bartenders.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet",
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         }
@@ -27817,28 +27708,28 @@
                 "url": "https://www.onetonline.org/link/hot_tech/35-3011.00"
               },
               {
-                "entity": "O*NET 35-3011.00 认证发现",
-                "id": "link-17",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localcert/35-3011.00"
-              },
-              {
                 "entity": "O*NET 35-3011.00 培训与教育信息",
-                "id": "link-18",
+                "id": "link-17",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/localtraining/35-3011.00"
               },
               {
-                "entity": "O*NET 35-3011.00 行业分布",
-                "id": "link-19",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/industry/35-3011.00"
-              },
-              {
-                "entity": "O*NET 35-3011.00 职业摘要（就业与预测字段）",
-                "id": "link-20",
+                "entity": "O*NET 35-3011.00 职业摘要（调酒师）",
+                "id": "link-18",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/35-3011.00"
+              },
+              {
+                "entity": "国家统计局《2025年城镇单位就业人员年平均工资情况》",
+                "id": "link-19",
+                "relation": "career.authority",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "entity": "TTB Alcohol FAQs BU1、BU5",
+                "id": "link-20",
+                "relation": "career.authority",
+                "url": "https://www.ttb.gov/faqs/alcohol?tid=7"
               }
             ]
           },
@@ -27917,13 +27808,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格中与工作方式更相关的是尽责性（按标准酒谱与卫生与收款规程执行、核验与清洁与记录不漏项、按班次交付）、情绪稳定性（在夜班与顾客冲突与疑似醉酒与嘈杂环境中保持准确与克制）与宜人性（在顾客接待与冲突处置中保持分寸）。这些是群体层面的相关性，不能用于个人录用筛选。"
+              "编辑自查可观察行为：能否按酒谱、卫生和收款规程逐项完成，在顾客冲突时保持克制并请求支援。大五分数可作讨论起点，本轮没有本职业人格与表现关联研究。"
             ]
           },
           "id": "bartenders.fit.personality-fit-block.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27932,12 +27823,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：人格与工作表现的相关性证据属于一般性研究结论，强度低于现场出品与核验与收款与清洁记录与复核评价。"
+              "证据不足：调酒师专项大五与绩效研究。本页行为建议按O*NET任务和工作情境整理，不能当人格录用阈值。"
             ]
           },
           "id": "bartenders.fit.personality-fit-block.7",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27946,8 +27838,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "尽责性有助于按标准酒谱与规程完成出品并如实记录核验与停售与收款与清洁，在高峰期不漏项。",
-              "情绪稳定性有助于在顾客冲突或疑似醉酒时先按规程处理并请求支援，而不是为赶单跳过年龄核验与器具消毒。"
+              "编辑自查：能否按酒谱、核验、清洁和收款规程逐项执行并准确记录。",
+              "编辑自查：顾客冲突或疑似醉酒时能否保持克制、按程序请求支援。"
             ]
           },
           "id": "bartenders.fit.personality-fit-block.8",
@@ -27991,12 +27883,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业匹配或选拔工具，也没有官方资料支持「某种类型最适合调酒师」的说法。可用于整理与同班同事与顾客的沟通协作偏好，但不能据以判断适配或用于录用。"
+              "本轮O*NET/BLS资料不提供调酒师的MBTI类型排名或录用阈值。若用来描述沟通偏好，应回到有监督的出品、核验和协作记录核对。"
             ]
           },
           "id": "bartenders.fit.personality-fit-block.10",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28019,12 +27912,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：MBTI 的职业预测效度有限，且不被 O*NET 或 BLS 用作适配标准。"
+              "证据不足：本职业MBTI匹配或预测研究；不由官方职业字段缺少类型推出一般效度结论。"
             ]
           },
           "id": "bartenders.fit.personality-fit-block.11",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28091,12 +27985,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样不是职业适配工具，缺乏官方职业资料支持，也不用于录用或筛选判断。可用于自我反思，但不能据此下结论。"
+              "本轮来源未提供调酒师的九型人格匹配规则。可整理个人动机与压力反应，再用现场表现检验；本页不列类型门槛。"
             ]
           },
           "id": "bartenders.fit.personality-fit-block.14",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28105,12 +28000,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：无官方职业资料来源支持将九型人格用于职业适配判断。"
+              "证据不足：本职业九型人格与工作表现研究。"
             ]
           },
           "id": "bartenders.fit.personality-fit-block.15",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28221,12 +28117,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：O*NET 的知识字段列出客户与个人服务、英语语言、教育与培训、销售与营销、行政与管理、公共安全与安保六项；「本页未取得各知识领域的重要性分数」；基本技能以积极倾听 69 与批判性思维 53 与口语表达 53 为主；能力与工作风格字段未给分数，属于职业特征描述；测验不能替代现场实作与复核评价。"
+              "现行O*NET详细页知识重要性：客户服务86、英语66、教育培训54、销售营销54、行政管理50、公共安全50；能力口头表达72、口头理解69、信息排序56；工作风格社交倾向79、可靠性71、自我控制67。基本技能积极倾听69、批判性思维53、口语表达53。职业描述分数非个人录用阈值。"
             ]
           },
           "id": "bartenders.fit.personality-fit-block.23",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28612,12 +28509,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有官方结论，也不存在最适合的类型。MBTI 只能帮助整理偏好并提出核对问题，不能预测出品与核验记录质量或现场表现。"
+              "本轮来源没有调酒师MBTI类型排名；不能由类型预测个人出品或核验质量，回到有监督任务表现核对。"
             ]
           },
           "id": "bartenders.fit.personality-fit-block.49",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28641,12 +28539,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。人格与兴趣工具的效度有限，不能替代有监督下的出品一致性记录质量、核验与停售记录与收款与清洁记录；本页只用它们提出核对问题。"
+              "本页测试结果只用于提出核对问题；职业代码或人格标签不能单独代替有监督出品、核验、收款和卫生记录。未核本职业专项预测效度。"
             ]
           },
           "id": "bartenders.fit.personality-fit-block.51",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28685,12 +28584,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。九型人格不是职业适配工具，也不被官方职业资料用作选拔依据；可用于自我反思，但不能据此下结论。"
+              "本轮来源未提供九型人格与调酒师岗位的匹配规则；反思结论仍须回到真实任务表现。"
             ]
           },
           "id": "bartenders.fit.personality-fit-block.54",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28799,12 +28699,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明雇主招聘公告中的软件技能信号；页面仅公布一项低于 1% 的比例，不代表岗位采用率。"
+              "O*NET热门软件页来自2025年美国Lightcast招聘广告：Microsoft Outlook提及低于1%，Facebook比例Not available；广告提及不是采用率或统一录用条件。"
             ]
           },
           "id": "bartenders.fit.personality-fit-block.62",
           "source_refs": [
-            "onet"
+            "hr"
           ],
           "type": "prose"
         },
@@ -28841,12 +28741,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆行业代理口径与证据边界（本页未取得精确等价职业工资条目）。"
+              "中国已取得2010职业标准及上海2025评价目录；未取得全国精确职业工资分布，行业单位均值仅作背景。"
             ]
           },
           "id": "bartenders.fit.personality-fit-block.65",
           "source_refs": [
-            "onet"
+            "msresearch",
+            "cn-evaluation",
+            "cn-wages-current"
           ],
           "type": "prose"
         },
@@ -28855,12 +28757,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明美国酒类联邦与州分权的管理框架，不构成任何场所的许可结论。"
+              "美国TTB零售登记与州地方许可需分列，经营主体要求不等于员工内部权限。"
             ]
           },
           "id": "bartenders.fit.personality-fit-block.66",
           "source_refs": [
-            "onet"
+            "ttb-retail"
           ],
           "type": "prose"
         }
@@ -28896,22 +28798,28 @@
                 "url": "https://www.onetonline.org/link/details/35-3011.00"
               },
               {
-                "entity": "O*NET 35-3011.00 职业摘要（就业与预测字段）",
+                "entity": "《中华人民共和国未成年人保护法》2024修正版",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/35-3011.00"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_54358c05e57642ab895176413f7cd4d7.html"
               },
               {
-                "entity": "O*NET 35-3011.00 全国工资分位",
+                "entity": "《中华人民共和国个人信息保护法》",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/35-3011.00"
+                "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
               },
               {
-                "entity": "美国 TTB《Beverage Alcohol — TTB Regulated Industry》",
+                "entity": "《中华人民共和国食品安全法》2025修正版",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.ttb.gov/regulated-commodities/beverage-alcohol"
+                "url": "https://sjfg.samr.gov.cn/law/file/pdf/3238901/1763351546670.pdf"
+              },
+              {
+                "entity": "TTB Alcohol FAQs BU1、BU5",
+                "id": "link-7",
+                "relation": "career.source",
+                "url": "https://www.ttb.gov/faqs/alcohol?tid=7"
               }
             ]
           },
@@ -28930,14 +28838,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界：本节描述的是职业风险与边界管理，不是对个人或雇主的评价；具体的酒类许可与年龄核验与售卖时段要求、器具清洗消毒与酒水与装饰用水果贮存、顾客冲突与暴力处置、顾客信息与支付信息处理、以及停售与驱逐与退款与免单授权范围由适用法域、主管部门与用人单位流程决定。本页依据 O*NET 35-3011.00 的官方职责与工作情境字段、美国 BLS 职业展望手册《Bartenders》的公开口径，以及美国 TTB 关于联邦与州分权的酒类管理说明。"
+              "风险条目按美国O*NET任务/工作情境和中国法律整理；不预测个人事故概率。中国禁入、禁售和酒吧用工不得由雇主授权放宽；美国经营主体许可、员工年龄和内部职责另核。"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "bls",
+            "cn-minors",
+            "cn-food-law",
+            "cn-pipl",
+            "ttb-retail"
           ],
           "type": "prose"
         },
@@ -28962,15 +28872,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：风险与边界条目依据 O*NET 35-3011.00 的官方职责与任务与工作情境字段（79% 持续或几乎持续站立、44% 持续或几乎持续做重复动作、92% 持续与他人接触、37% 与他人身体距离非常近、11% 每天暴露于轻微烧伤或割伤或咬伤、19% 每天暴露于污染物、40% 每天与不好打交道或生气或不礼貌的人打交道、11% 每天处于冲突情境、21% 每周一次以上遇到有暴力行为或身体攻击性的人）、官方任务中关于核验顾客身份证件与限制与过量饮酒有关的责任，以及 BLS 职业展望手册关于入门准备与作息（深夜与周末与节假日、兼职常见）与多数州供酒年龄要求的公开说明；不能外推为个人执业风险预测。（另注：BLS 职业要求调查（ORS）调酒师情况说明 PDF 因该站点限制自动抓取，本机未能取得其正文，故本节不引用其具体百分比。）"
+              "证据范围：风险与边界条目依据 O*NET 35-3011.00 的官方职责与任务与工作情境字段（79% 持续或几乎持续站立、44% 持续或几乎持续做重复动作、92% 持续与他人接触、37% 与他人身体距离非常近、11% 每天暴露于轻微烧伤或割伤或咬伤、19% 每天暴露于污染物、40% 每天与不好打交道或生气或不礼貌的人打交道、11% 每天处于冲突情境、21% 每周一次以上遇到有暴力行为或身体攻击性的人）、官方任务中关于核验顾客身份证件与限制与过量饮酒有关的责任，以及 BLS 职业展望手册关于入门准备与作息（深夜与周末与节假日、兼职常见）与多数州供酒年龄要求的公开说明；不能外推为个人执业风险预测。"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.10",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "bls",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -28979,13 +28887,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "顾客与本人与雇主"
+              "调酒师、值班主管"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -28994,13 +28902,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "向未成年人供酒或向已明显醉酒者继续供酒，可能使从业人员与场所承担法律责任并危及顾客安全。"
+              "中国未成年人保护法第58、59条：酒吧不得允许未成年人进入，禁止向未成年人售酒，并须设置相应标志、对年龄难辨者要求身份证件；第61条禁止酒吧招用已满16周岁的未成年人。场所授权不能放宽这些法定义务。过量饮酒处置属于O*NET任务；各地醉酒供酒责任另核，不推统一法律结论。"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.12",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-minors",
+            "bls"
           ],
           "type": "prose"
         },
@@ -29009,13 +28917,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按场所规程核验顾客身份证件、对可疑证件按程序复核、对疑似醉酒顾客停止供酒并按规程安排交通或请求支援，如实记录核验与停售与处置过程。"
+              "中国酒吧遵守法定禁入、禁售酒标志及难辨年龄时证件查验要求；疑似醉酒按已核场所程序暂停供酒并请求支援，记录必要核验结果与处置，不默认复制证件。"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.13",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-minors",
+            "bls",
+            "cn-pipl"
           ],
           "type": "prose"
         },
@@ -29039,13 +28948,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本人与同事与顾客"
+              "调酒师、同班负责人和现场安保（按场所分工）"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.15",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -29054,13 +28963,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "夜班与酒精环境下的顾客冲突与身体攻击风险较高，可能造成人身伤害。"
+              "O*NET受访者21%每周一次以上遇到暴力或身体攻击性人员；这表明需核现场支援，不足以判断夜班酒精环境风险“较高”的比较幅度。"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.16",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -29069,13 +28977,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按场所规程处理喧闹或滋事顾客，避免单独处置，及时请求同事或主管或安保支援，必要时按规程报警并留档。"
+              "编辑建议入职前确认安保、主管支援及紧急联络程序；发生威胁时先保护人身安全并请求支援，不由吧台职责推出强制驱逐权限。"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.17",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -29099,12 +29007,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "顾客与雇主"
+              "调酒师及获授权收银岗位"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.19",
           "source_refs": [
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -29113,12 +29022,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "顾客信息与支付信息与消费记录若外发或不当处理，会构成隐私与支付安全风险。"
+              "中国金融账户属于敏感个人信息，须核合法依据、必要性及严格保护；其他顾客信息、证件和消费记录按适用法另核处理权限。"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.20",
           "source_refs": [
-            "onet"
+            "cn-pipl"
           ],
           "type": "prose"
         },
@@ -29127,12 +29036,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按适用的个人信息保护与支付安全要求与用人单位规定处理顾客信息，不向未授权渠道提供或传播。"
+              "按适用法核处理目的、必要范围和权限；中国敏感个人信息处理按第28—30条核要求。身份查验不等于全量复制或向外部工具上传许可。"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.21",
           "source_refs": [
-            "onet"
+            "cn-pipl",
+            "cn-minors"
           ],
           "type": "prose"
         },
@@ -29156,13 +29066,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本人与同事"
+              "调酒师、吧台助手"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -29216,13 +29126,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本人与主管与顾客"
+              "调酒师、交班接班人员"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.27",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -29246,13 +29156,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程记录酒类核验与停售与过量饮酒处置、订单与出品、现金核对与收款、器具清洗与消毒处理与异常，未决事项显式标记，保留人工修改痕迹。"
+              "记录必要核验结果、订单、收款、清洁执行及异常，标明时间、操作人和修正；不默认为追溯保存完整证件、账户或全部消费数据，另核合法依据与访问权限。"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-pipl",
+            "cn-food-law",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29276,13 +29187,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本人与同事与顾客"
+              "调酒师、吧台主管"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.31",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -29291,13 +29202,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "供酒与停售与驱逐与退款权限不明可能导致在无授权时继续供酒或擅自承诺赔偿。"
+              "法定供酒限制、经营主体许可和员工内部退款/异常升级职责需分别核；培训或雇主授权不能解除法定禁止。"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.32",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-minors",
+            "ttb-retail",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29306,13 +29218,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按场所授权执行停售与安排交通与驱逐与退款与免单；BLS 指出通常无正式教育或经验要求、技能通过在岗学习获得，因此上岗培训与供酒与处置授权边界尤其需要在入职时明确；保留复核与升级机制，异常与疑似醉酒或暴力情形按程序上报。"
+              "中国禁入、禁售及酒吧用工遵守法定边界；美国TTB不发零售供酒许可证，但零售经营主体须登记并留存记录，州地方许可另核。员工内部处置权限按岗位明确，不能由无正式学历要求推出权限。"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-minors",
+            "ttb-retail",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -29364,12 +29277,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明本职业单列口径的就业与 2024—2034 年预测，不用于个案判断。"
+              "中国未成年人保护法第58、59、61条：酒吧禁入、禁止售酒、年龄查验及用工边界。"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.37",
           "source_refs": [
-            "onet"
+            "cn-minors"
           ],
           "type": "prose"
         },
@@ -29378,12 +29291,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明本职业单列口径的全国工资分位，不用于个案判断。"
+              "个人信息保护法第28—30条敏感信息处理边界；核验不自动授权全量复制或外发。"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.38",
           "source_refs": [
-            "onet"
+            "cn-pipl"
           ],
           "type": "prose"
         },
@@ -29392,12 +29305,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆场所卫生与食品安全要求与行业代理边际（本页未取得精确等价职业工资条目）。"
+              "食品安全法经营卫生、培训及健康证明等要求；器具清洁与食品贮存按经营主体责任核。"
             ]
           },
           "id": "bartenders.risk.career-risk-cards.39",
           "source_refs": [
-            "onet"
+            "cn-food-law"
           ],
           "type": "prose"
         }
@@ -29431,35 +29344,35 @@
               [
                 "酒吧与酒馆吧台岗",
                 "在有监督下按场所标准酒谱完成点单与调制与出品，并按规程完成核验与停售与收款与器具清洗消毒与交班记录。",
-                "通常看出品一致性与标准酒谱执行、核验与停售与收款与清洁记录规范程度、深夜高峰与水吧节拍下的稳定性；上岗资格由雇主岗前培训与考核决定。",
+                "编辑核对建议：核对出品一致性与标准酒谱执行、核验与停售与收款与清洁记录规范程度、深夜高峰与水吧节拍下的稳定性；法定条件与雇主培训考核分列，雇主不能放宽法定禁止。",
                 "提交一份含虚构酒单与标准酒谱卡、订单与出品记录、证件核验与停售处置与现金核对说明的吧台记录，不使用真实顾客与交易数据。",
                 "吧台岗位不决定场所酒类许可与供酒制度；涉及停售与驱逐与退款须由有职责人员按场所规程处理。"
               ],
               [
                 "餐厅吧台与调酒岗",
                 "在餐厅场景同时承担吧台调制与出餐配合与桌边支援。",
-                "通常看酒谱理解与出品稳定性、与服务员与后厨的协作、顾客沟通与推荐销售能力。",
+                "编辑核对建议：核对酒谱理解与出品稳定性、与服务员与后厨的协作、顾客沟通与推荐销售能力。",
                 "提交一份含酒单与出品记录、与服务员的订单传递记录与顾客反馈的虚构记录。",
                 "供酒与停售须按场所许可与授权执行；本页不提供作业指令。"
               ],
               [
                 "酒店与宴会与夜店吧台岗",
                 "在宴会与活动与夜店场景按场所标准提供批量调制与服务，配合安保与其他岗位完成秩序与卫生与库存。",
-                "通常看批量出品一致性与速度、跨岗位协作、冲突与醉酒处置配合与记录能力。",
+                "编辑核对建议：核对批量出品一致性与速度、跨岗位协作、冲突与醉酒处置配合与记录能力。",
                 "提交一份含活动酒单、批量出品与库存与异常上报方案的虚构记录。",
                 "秩序与安保与停售须按主管部门与用人单位规定执行；本页不提供管理指令。"
               ],
               [
                 "酒水研发与采购支持岗",
                 "在授权范围内参与酒单设计、基酒与辅料选品与成本核算与库存管理，进行配方记录与感官描述。",
-                "通常看感官描述与记录、成本与批次管理能力。",
+                "编辑核对建议：核对感官描述与记录、成本与批次管理能力。",
                 "提交一份含目标、配方记录、感官描述与成本对照的虚构说明。",
                 "酒单与配方批准须按场所授权执行；支持岗不等于配方或采购批准。"
               ],
               [
                 "值班与班组协调岗",
                 "安排班次与分工、带训新人、检查核验与卫生与库存状态、处理顾客投诉与醉酒与冲突异常与交班。",
-                "通常看排班与带训与异常处置与记录复核能力。",
+                "编辑核对建议：核对排班与带训与异常处置与记录复核能力。",
                 "提交一份含排班与分工、核验与清洁检查、异常处置与改进建议的虚构方案。",
                 "停售与驱逐与退款决定须按场所规程与授权作出；本页不提供管理指令。"
               ]
@@ -29467,9 +29380,9 @@
           },
           "id": "bartenders.path.entry-role-comparison.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "bls",
+            "editor",
+            "cn-minors"
           ],
           "title": "岗位方向与起步任务比较",
           "type": "table"
@@ -29484,7 +29397,7 @@
                 "values": [
                   "美国侧：O*NET 把 35-3011.00（Bartenders）列为 Job Zone 1–2（SVP 低于 6.0），页面公布的学历构成中 43% 为要求高中文凭或同等学历、37% 为要求低于高中文凭、16% 为要求上过大学但无学位；BLS 职业展望手册同名章节把典型入门教育列为「无正式学历凭证」、无相关工作经验要求、短期在岗训练，并指出作息常含深夜与周末与节假日、兼职常见，且写明多数州要求供应酒精饮料的从业者至少 18 岁。",
                   "O*NET 培训页面显示全国共 8 个相关培训项目（方向为 Bartending/Bartender，多为一年以下证书）；职业摘要另列出经美国劳工部批准的注册学徒岗位 Bartender；认证页面列出 3 项国家认证（ServSafe Alcohol、Certified In Alcohol Service、Certified Beer Judge）。",
-                  "中国大陆侧有《调酒师国家职业技能标准》（设五个等级、基本文化程度为高中毕业或同等学力），并须符合适用的食品安全与场所卫生要求；本页不提供选拔标准。"
+                  "已核中国官方调酒师职业资料：OSTA原链接是2010修订版，定义为在酒吧或餐厅按配方或宾客要求配制并销售饮料；五等级和高中背景仅限该版。2025上海评价目录列4-03-02-09调酒师及当地5/4/3级；不能由地方目录推全国条件。证据不足：本次未取得取代旧版的新正式标准全文，2024征求意见稿不能当现行标准。中国食品安全法第44、45条支持企业食品安全培训、直接接触入口食品人员每年健康检查取得证明；器具清洁、食品贮存和经营主体责任按第33、54、56等条核。具体内部设备及退款权限另核雇主。中国未成年人保护法第58、59条：酒吧不得允许未成年人进入，禁止向未成年人售酒，并须设置相应标志、对年龄难辨者要求身份证件；第61条禁止酒吧招用已满16周岁的未成年人。场所授权不能放宽这些法定义务。"
                 ]
               },
               {
@@ -29498,7 +29411,7 @@
               {
                 "id": "onet-traits",
                 "values": [
-                  "官方任务共 21 项（16 项核心、5 项补充），包含清洁杯具与器具与吧台设备、为所提供的饮品收款、核对现金收入、核验顾客身份证件以确认购买酒精饮料的年龄要求、以劝阻继续饮酒或为醉酒顾客安排交通等方式限制与过量饮酒有关的责任、向服务员或直接向顾客接饮品订单、混合配料调制鸡尾酒与其他饮品、上架酒水与物料。",
+                  "官方任务共 21 项（16项核心、4项补充、1项New新增任务未给分数），包含清洁杯具与器具与吧台设备、为所提供的饮品收款、核对现金收入、核验顾客身份证件以确认购买酒精饮料的年龄要求、以劝阻继续饮酒或为醉酒顾客安排交通等方式限制与过量饮酒有关的责任、向服务员或直接向顾客接饮品订单、混合配料调制鸡尾酒与其他饮品、上架酒水与物料。",
                   "工作活动按详细资料页列出 41 项并给出重要性分数，最高为直接面向公众服务或与公众打交道 77、建立与维持人际关系 75、估算产品或事件或信息的可量化特征 69、获取信息 69、培训与教导他人 67。",
                   "工作情境：79% 持续或几乎持续站立、44% 持续或几乎持续做重复动作、92% 持续与他人接触、37% 与他人身体距离非常近、11% 每天暴露于轻微烧伤或割伤或咬伤、19% 每天暴露于污染物、80% 的典型工作周少于 40 小时。"
                 ]
@@ -29507,7 +29420,7 @@
                 "id": "tools",
                 "values": [
                   "杯具与调酒器具（摇酒器与量酒器与搅拌与滤冰器）与吧台设备、制冰机与冷藏与生啤与酒水分配设备、啤酒与葡萄酒与烈酒与苏打水与糖水与苦精与装饰用水果等物料、清洁与消毒用品、收银与点单与库存与销售点（POS）系统、个人防护（按作业需要的手套与防滑鞋）。",
-                  "O*NET 列出 2 项软件技能并均标注为热门技术（Microsoft Outlook、Facebook），Outlook 公布比例低于 1%、Facebook 未公布比例；另有 5 类软件技能（数据库查询、电子邮件、浏览器、销售点 POS、网页创建与编辑）。",
+                  "O*NET热门软件页来自2025年美国Lightcast招聘广告：Microsoft Outlook提及低于1%，Facebook比例Not available；广告提及不是采用率或统一录用条件。技术清单另列数据库查询、电子邮件、浏览器、销售点POS及网页编辑等类别；不代表统一录用或采用。",
                   "把点单与库存与销售点系统用于场所流程前，须确认顾客信息与支付信息保护、核验与收款与清洁记录与人工复核安排。"
                 ]
               }
@@ -29771,8 +29684,8 @@
               [
                 "高中文凭或同等学历",
                 "希望进入该职业的人",
-                "决定能否满足多数岗位的基本要求。",
-                "O*NET 页面公布的学历构成中 43% 为要求高中文凭或同等学历、37% 为要求低于高中文凭、16% 为要求上过大学但无学位；BLS 指出通常无正式教育要求；《调酒师国家职业技能标准》把基本文化程度列为高中毕业（或同等学力）。",
+                "核目标岗位学历要求；43%并非多数。",
+                "美国O*NET学历受访构成43%高中、37%低于高中、16%大学无学位；BLS典型无正式学历。中国高中字段仅限2010旧版，不推现行统一门槛。",
                 "按学制完成。",
                 "按学制年限。",
                 "学历不等于供酒与停售或收款与退款权限。"
@@ -29781,7 +29694,7 @@
                 "用人单位岗前培训与在岗带教",
                 "进入具体场所的人",
                 "决定能否按场所标准酒谱与酒类服务与卫生要求作业。",
-                "多数雇主作为上岗条件（BLS 指出技能通常通过在岗学习获得）。",
+                "BLS描述短期在岗训练；本轮没有“多数雇主岗前门槛”的招聘样本比例。具体培训和考核另核。",
                 "须完成场所安排的岗前培训与考核并按班次接受带训。",
                 "按场所安排。",
                 "岗前培训不等于场所酒类许可或停售与退款授权。"
@@ -29790,7 +29703,7 @@
                 "行业认证（酒类服务与啤酒与餐饮服务方向）",
                 "希望证明专项能力的人",
                 "作为专项能力的第三方证明。",
-                "不是普遍门槛，但对岗位层级与场所选择有一定作用。",
+                "O*NET目录列三项认证；不是普遍门槛，本轮未取得认证对职级、录用或收入效果证据。",
                 "O*NET 认证页面列出 3 项：ServSafe Alcohol（National Restaurant Association Educational Foundation）、Certified In Alcohol Service（Foodservice Institute）、Certified Beer Judge（Beer Judge Certification Program）。",
                 "按发证机构安排与证书有效期维护。",
                 "认证不等于录用门槛或雇主任命，也不等于场所酒类许可。"
@@ -29808,17 +29721,17 @@
                 "所在法域与场所的酒类许可与授权（场所内部）",
                 "承担供酒与停售与处置的人",
                 "决定能否供酒与执行停售与驱逐与退款。",
-                "属法定与场所要求：面向消费者的销售与供酒服务许可与售卖时段由州与地方主管机关规定（美国 BLS 职业展望手册写明多数州要求供应酒精饮料的从业者至少 18 岁；联邦侧 TTB 对部分酒类经营主体实行许可与批准）。",
-                "须完成场所安排的酒类服务与安全与收银培训并取得授权。",
+                "美国TTB不发零售供酒许可证；零售登记和记录、州地方许可分列。BLS多数州供酒员工至少18岁，非顾客购买年龄或中国规定。",
+                "经营主体许可、员工年龄及内部职责分别核；不把岗位培训视为联邦经营许可。",
                 "按主管部门与场所安排维护。",
                 "授权有场所与岗位范围限制，不等于可在任何场所或法域作业。"
               ],
               [
                 "中国大陆侧：职业标准与场所卫生要求",
                 "在中国大陆从事相关服务的人",
-                "决定能否在酒吧与餐饮场所从事酒水调制与服务。",
-                "《调酒师国家职业技能标准》设五个等级、基本文化程度为高中毕业（或同等学力）；《餐饮服务食品安全操作规范》要求餐饮服务提供者落实食品安全主体责任并规范从业人员健康管理与清洗消毒。",
-                "须完成用人单位安排的食品安全与卫生与酒类服务培训并按要求取得相应资格或证明。",
+                "提供历史职业技能资料及现行卫生、未成年人法律核对入口。",
+                "已核中国官方调酒师职业资料：OSTA原链接是2010修订版，定义为在酒吧或餐厅按配方或宾客要求配制并销售饮料；五等级和高中背景仅限该版。2025上海评价目录列4-03-02-09调酒师及当地5/4/3级；不能由地方目录推全国条件。证据不足：本次未取得取代旧版的新正式标准全文，2024征求意见稿不能当现行标准。中国食品安全法第44、45条支持企业食品安全培训、直接接触入口食品人员每年健康检查取得证明；器具清洁、食品贮存和经营主体责任按第33、54、56等条核。具体内部设备及退款权限另核雇主。中国未成年人保护法第58、59条：酒吧不得允许未成年人进入，禁止向未成年人售酒，并须设置相应标志、对年龄难辨者要求身份证件；第61条禁止酒吧招用已满16周岁的未成年人。场所授权不能放宽这些法定义务。",
+                "按实际场所核现行食品安全培训、健康证明和岗位要求，不以旧版技能等级推当前全国录用条件。",
                 "按主管部门与用人单位安排维护。",
                 "标准与培训证明不等于场所酒类许可与全部岗位授权，具体岗位授权仍由用人单位规定。"
               ]
@@ -29841,16 +29754,22 @@
           "data": {
             "paragraphs": [
               "资格边界：学历、职业培训、行业认证、雇主任用、所在法域与场所的酒类许可、以及吧台内部的供酒与停售与收款与退款授权是不同状态，任何一项都不能由另一项自动推出；场所卫生与器具清洗消毒与酒水与装饰用水果贮存受适用法域与主管部门与用人单位约束。",
-              "美国侧：O*NET 把 35-3011.00（Bartenders）列为 Job Zone 1–2（SVP 低于 6.0），页面公布的学历构成为高中文凭或同等学历 43%、低于高中文凭 37%、上过大学但无学位 16%；BLS 职业展望手册同名章节把典型入门教育列为「无正式学历凭证」、无相关工作经验要求、短期在岗训练，并写明多数州要求供应酒精饮料的从业者至少 18 岁；O*NET 全国登记 8 个 Bartending/Bartender 培训项目，职业摘要列出经美国劳工部批准的注册学徒岗位 Bartender，认证页面列出 3 项国家认证（含酒类服务方向）。联邦侧 TTB 依《Federal Alcohol Administration Act》对蒸馏酒与啤酒与葡萄酒等部分酒类经营主体实行许可与批准，面向消费者的销售与供酒服务许可与售卖时段由州与地方主管。",
-              "中国大陆侧：有《调酒师国家职业技能标准》（职业定义为在酒吧或餐厅等场所，根据传统配方或宾客的要求，专职从事配制并销售饮料的人员；设五个等级；基本文化程度为高中毕业或同等学力），并须符合《餐饮服务食品安全操作规范》等适用的食品安全与场所卫生要求；本页不提供具体法定年龄或售卖时段的结论，也不把中文页面语言当作中国等价职业工资映射。",
+              "美国O*NET Job Zone1–2，学历比例43%高中、37%低于高中、16%大学无学位；BLS典型无正式学历、无相关经验及短期在岗训练，多数州供酒员工至少18岁。培训目录8项（IPEDS2025—26目录、2024—25完成数据），职业摘要列Bartender学徒，认证目录三项，均不自动等于录用或许可。TTB零售登记及记录、州地方零售许可和员工内部职责分别核。",
+              "已核中国官方调酒师职业资料：OSTA原链接是2010修订版，定义为在酒吧或餐厅按配方或宾客要求配制并销售饮料；五等级和高中背景仅限该版。2025上海评价目录列4-03-02-09调酒师及当地5/4/3级；不能由地方目录推全国条件。证据不足：本次未取得取代旧版的新正式标准全文，2024征求意见稿不能当现行标准。中国食品安全法第44、45条支持企业食品安全培训、直接接触入口食品人员每年健康检查取得证明；器具清洁、食品贮存和经营主体责任按第33、54、56等条核。具体内部设备及退款权限另核雇主。中国未成年人保护法第58、59条：酒吧不得允许未成年人进入，禁止向未成年人售酒，并须设置相应标志、对年龄难辨者要求身份证件；第61条禁止酒吧招用已满16周岁的未成年人。场所授权不能放宽这些法定义务。",
               "操作建议：入职前把「学历／职业培训／行业认证／场所岗前培训／场所酒类许可与授权／供酒与停售授权／收款与退款授权／酒类服务与食品安全培训」分列成一张表，逐项写明来源与资料期与法域；无法核实的项留空并标记为证据不足，不用推测填补。"
             ]
           },
           "id": "bartenders.path.credential-boundary.1",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "nbs",
+            "nist",
+            "census",
+            "ttb-retail",
+            "msresearch",
+            "cn-evaluation",
+            "cn-food-law",
+            "cn-minors"
           ],
           "title": "资格边界",
           "type": "notice"
@@ -29860,7 +29779,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明：本节不引用具体雇主的招聘公告，只说明核对应关注的项目；公开渠道出现的岗位名称包括调酒师、吧台调酒师、酒吧服务员、酒水调制员、吧台主管、Mixologist 等。",
+              "证据不足：本轮未核具体雇主的有效招聘公告，以下为编辑比较场所、职责与报价的核对清单，不是市场岗位出现频率或录用门槛样本。",
               "核对清单：岗位属于酒吧与酒馆、餐厅、酒店与度假村，还是宴会与活动与夜店场所；任职方式为全职或兼职；是否需要供酒与停售与退款授权；班次（深夜与周末与节假日）与小费与提成与加班安排；以及酒类服务与食品安全与顾客信息保护培训要求。"
             ]
           },
@@ -29898,10 +29817,10 @@
                 "url": "https://www.onetonline.org/link/localtraining/35-3011.00"
               },
               {
-                "entity": "O*NET 35-3011.00 认证发现",
+                "entity": "《中华人民共和国未成年人保护法》2024修正版",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localcert/35-3011.00"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_54358c05e57642ab895176413f7cd4d7.html"
               }
             ]
           },
@@ -30050,13 +29969,18 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：O*NET 把 35-3011.00（Bartenders）列为 Job Zone 1–2（SVP 低于 6.0），页面公布的学历构成中 43% 为要求高中文凭或同等学历、37% 为要求低于高中文凭、16% 为要求上过大学但无学位；BLS 职业展望手册同名章节把典型入门教育列为「无正式学历凭证」、无相关工作经验要求、短期在岗训练，并指出作息常含深夜与周末与节假日、兼职常见，且多数州要求供应酒精饮料的从业者至少 18 岁。O*NET 培训页面显示全国共 8 个相关培训项目（Bartending/Bartender），职业摘要另列出经美国劳工部批准的注册学徒岗位 Bartender。中国大陆侧有《调酒师国家职业技能标准》（设五个等级、基本文化程度为高中毕业或同等学力），并须符合适用的食品安全与场所卫生要求。"
+              "美国Job Zone1–2；O*NET学历构成43%高中、37%低于高中、16%大学无学位，非统一门槛；BLS典型无正式学历、无相关经验及短期在岗训练，多数州供酒员工至少18岁。O*NET全国8个培训目录项目及Bartender学徒不是普遍录用要求。已核中国官方调酒师职业资料：OSTA原链接是2010修订版，定义为在酒吧或餐厅按配方或宾客要求配制并销售饮料；五等级和高中背景仅限该版。2025上海评价目录列4-03-02-09调酒师及当地5/4/3级；不能由地方目录推全国条件。证据不足：本次未取得取代旧版的新正式标准全文，2024征求意见稿不能当现行标准。中国食品安全法第44、45条支持企业食品安全培训、直接接触入口食品人员每年健康检查取得证明；器具清洁、食品贮存和经营主体责任按第33、54、56等条核。具体内部设备及退款权限另核雇主。中国未成年人保护法第58、59条：酒吧不得允许未成年人进入，禁止向未成年人售酒，并须设置相应标志、对年龄难辨者要求身份证件；第61条禁止酒吧招用已满16周岁的未成年人。场所授权不能放宽这些法定义务。"
             ]
           },
           "id": "bartenders.path.career-path-block.20",
           "source_refs": [
             "onet",
-            "onet"
+            "nbs",
+            "nist",
+            "msresearch",
+            "cn-evaluation",
+            "cn-food-law",
+            "cn-minors"
           ],
           "type": "prose"
         },
@@ -30065,14 +29989,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界：学历、职业培训、行业认证（如 ServSafe Alcohol 等 3 项国家认证）、雇主任用、所在法域与场所的酒类许可、以及吧台内部的供酒与停售与收款与退款授权是不同状态，任何一项都不能由另一项自动推出；BLS 职业展望手册还写明多数州对供应酒精饮料的从业者的最低年龄要求。同时注意：本页工资与就业为本职业单列口径，但 O*NET 展示的 2024—2034 年预测与 BLS 的 2025—2035 年为不同轮次。"
+              "学历、培训、认证、经营许可及内部权限分别核；BLS多数州供酒从业者至少18岁是美国背景，具体州条件另核。当前O*NET与OOH同职业同2025—2035期间。"
             ]
           },
           "id": "bartenders.path.career-path-block.21",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "nbs",
+            "ttb-retail"
           ],
           "type": "prose"
         },
@@ -30081,14 +30005,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域：美国（O*NET 35-3011.00 与雇主人事与场所酒类服务规程；BLS 职业展望手册指出通常无正式教育或经验要求、技能通过在岗学习获得，并写明多数州的供酒年龄要求；联邦侧 TTB 对部分酒类经营主体实行许可与批准，面向消费者的销售与供酒服务许可由州与地方主管）。中国大陆侧有《调酒师国家职业技能标准》与《餐饮服务食品安全操作规范》，不得饮酒与未成年人相关主张须按适用法规与主管部门规定执行，本页不提供具体法定年龄或售卖时段的结论。"
+              "美国员工年龄按具体州核；TTB零售登记和记录与州地方零售许可分列，经营主体义务非员工内部权限。中国：中国未成年人保护法第58、59条：酒吧不得允许未成年人进入，禁止向未成年人售酒，并须设置相应标志、对年龄难辨者要求身份证件；第61条禁止酒吧招用已满16周岁的未成年人。场所授权不能放宽这些法定义务。中国食品安全法第44、45条支持企业食品安全培训、直接接触入口食品人员每年健康检查取得证明；器具清洁、食品贮存和经营主体责任按第33、54、56等条核。具体内部设备及退款权限另核雇主。"
             ]
           },
           "id": "bartenders.path.career-path-block.22",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "nbs",
+            "ttb-retail",
+            "cn-minors",
+            "cn-food-law"
           ],
           "type": "prose"
         },
@@ -30097,13 +30022,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "路径概要：从在有监督下完成核验与调制与出品与收款与清洁，到独立完成常见饮品与收款与核验与清洁，再到带训、规程改进与班组协调；供酒与停售与退款权限由场所许可与岗位职责决定，转向饮品研发与运营与酒水采购与合规需补充相应训练与授权。"
+              "以下三条轨道是编辑按任务整理的成长比较，不是统一晋升体系、年限或资格保证。先在监督下完成常见任务，再核独立交付、带训或研发采购职责；每次转岗补训练和目标授权。"
             ]
           },
           "id": "bartenders.path.career-path-block.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -30140,12 +30065,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明培训与教育信息入口（含注册学徒岗位），不构成录用门槛或授权。"
+              "O*NET培训页八项目录信息；IPEDS2025—26目录、2024—25完成数据，是否招生与具体条件另核。"
             ]
           },
           "id": "bartenders.path.career-path-block.26",
           "source_refs": [
-            "onet"
+            "nist"
           ],
           "type": "prose"
         },
@@ -30154,12 +30079,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆职业标准与场所卫生要求与证据边界（本页未取得精确等价职业工资条目）。"
+              "中国未成年人保护法第58、59、61条；2010职业标准和上海2025目录仅作版本分明的其他背景。"
             ]
           },
           "id": "bartenders.path.career-path-block.27",
           "source_refs": [
-            "onet"
+            "cn-minors",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -31065,28 +30992,28 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 35-3011.00 职业摘要（就业与预测字段）",
+                "entity": "O*NET调酒师2025—2035全国就业趋势",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/35-3011.00"
+                "url": "https://www.onetonline.org/link/localtrends/35-3011.00"
               },
               {
-                "entity": "O*NET 35-3011.00 行业分布",
+                "entity": "O*NET调酒师2025—2035全国就业趋势",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/35-3011.00"
+                "url": "https://www.onetonline.org/link/localtrends/35-3011.00"
               },
               {
-                "entity": "BLS 职业展望手册《Bartenders》",
+                "entity": "国家统计局《2025年城镇单位就业人员年平均工资情况》",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/food-preparation-and-serving/bartenders.htm"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "entity": "O*NET 35-3011.00 全国工资分位",
+                "entity": "O*NET 35-3011.00 职业摘要（调酒师）",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/35-3011.00"
+                "url": "https://www.onetonline.org/link/summary/35-3011.00"
               },
               {
                 "entity": "服务员",
@@ -31152,14 +31079,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：O*NET 就业趋势页按本职业单列口径给出 2024 年在岗 756,700 人、2034 年约 801,500 人（+6%，快于平均（5% 至 6%））、预测期年均职位空缺约 129,600（含增长与替换）。BLS 职业展望手册同名章节为另一轮资料期：2025 年在岗 762,600 人、2025—2035 年 +5%、变化 +37,900、年均空缺约 121,200（多来自替代需求）。两者年份与口径不同，均不得混用。"
+              "美国35-3011.00调酒师：2025年就业762,600人，2035年预计800,500人，2025—2035增长5%、净增37,900人、年均空缺121,200（含增长与替换）。现行O*NET与BLS OOH同职业同期间一致，总体预测非AI归因。中国已取得职业技能资料，但全国职业工资和就业预测仍不足。"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "ep-current",
+            "nbs",
+            "msresearch",
+            "cn-evaluation"
           ],
           "type": "prose"
         },
@@ -31182,12 +31110,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024 年"
+              "2025年"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31196,12 +31124,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为 O*NET 就业趋势页按本职业给出的在岗人数；BLS 职业展望手册同名章节另给出 2025 年在岗 762,600 人，年份不同。"
+              "现行O*NET和BLS同职业就业762,600人，期间一致；非所有餐饮服务人员或中国规模。"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31210,12 +31139,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "口径与资料期不同，不能混用，也不能用于估计更宽职业群。"
+              "美国本职业总体就业预测，不是个人录用概率或中国预测。"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.12",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31252,12 +31181,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "756,700 人（本职业单列口径）"
+              "762,600人（2025，美国调酒师）"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31280,12 +31209,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年"
+              "2025—2035年"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31294,12 +31223,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 展示的 BLS 数据按本职业口径归为「快于平均（5% 至 6%）」，预测期年均职位空缺约 129,600（含增长与替换）；BLS 职业展望手册同名章节另按 2025—2035 年给出 +5%（快于平均）、变化 +37,900、年均空缺约 121,200。需求还受人口与消费与外出就餐与酒类消费趋势与场所租金与酒类法规与自雇比例影响；就业增长不能保证个人客源或场所利润。"
+              "美国本职业增长5%、净增37,900人，年均空缺121,200含增长与替换。现行O*NET与OOH同期间一致；不能由此预测个人客源、场所利润或AI因果。"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31308,12 +31238,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "预测不能合并解读为个人录用保证，也不能推导该职业的精确增幅。"
+              "职业精确预测增幅为5%；总体群体预测非个人保证，空缺不是净增，亦非AI影响预测。"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -31350,12 +31282,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "快于平均（年均职位空缺约 129,600，本职业单列口径）"
+              "增长5%；年均空缺121,200（2025—2035）"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31392,12 +31324,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆未取得调酒师的精确全国职业工资分布，本页不把中文页面语言当作中国等价职业映射，也不发布本职业的精确月薪或中位数；仅按证据口径以 2024 年住宿和餐饮业年平均工资作明示行业代理（城镇非私营单位 60,240 元/年，名义增长 3.7%），并明确该行业平均不等于本职业工资；需比较时应按城市与场所类型与任职方式与班次与小费与提成结构逐项核对。"
+              "已核中国官方调酒师职业资料：OSTA原链接是2010修订版，定义为在酒吧或餐厅按配方或宾客要求配制并销售饮料；五等级和高中背景仅限该版。2025上海评价目录列4-03-02-09调酒师及当地5/4/3级；不能由地方目录推全国条件。证据不足：本次未取得取代旧版的新正式标准全文，2024征求意见稿不能当现行标准。精确全国职业工资仍不足；2025住宿餐饮城镇非私营62,461、私营55,123元/年税前均值只作背景。"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet"
+            "msresearch",
+            "cn-evaluation",
+            "cn-wages-current"
           ],
           "type": "prose"
         },
@@ -31420,12 +31354,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆职业工资：未取得精确职业条目（仅行业代理）"
+              "中国全国职业工资分布未取得（已有职业资料）"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -31448,12 +31383,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业代理：住宿和餐饮业城镇非私营单位年平均工资 60,240 元（2024 年）；私营单位 54,042 元、规模以上企业 57,911 元；均非本职业工资"
+              "2025住宿餐饮非私营62,461、私营55,123元/年；规模以上服务人员52,018元/年，分人群行业/岗位大类背景，均非调酒师工资。"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "cn-wages-current"
           ],
           "type": "prose"
         },
@@ -31462,12 +31397,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明本职业单列口径的就业规模字段。"
+              "美国2025就业规模762,600；O*NET与OOH当前同期间。"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.30",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31476,12 +31412,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明本职业单列口径的就业与 2024—2034 年预测。"
+              "美国2025—2035总体就业预测；不代表AI因果或个人录用。"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.31",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31490,12 +31427,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆行业代理口径与证据边界，不提供本职业数值。"
+              "国家统计局2025行业和岗位大类均值，非职业工资。"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.32",
           "source_refs": [
-            "onet"
+            "cn-wages-current"
           ],
           "type": "prose"
         },
@@ -31548,13 +31485,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属餐饮服务，但交付从吧台调制与供酒合规转向桌边服务。"
+              "任务相邻（编辑比较）"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -31593,13 +31530,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离最近：同一吧台现场的分工关系，但通常不独立承担供酒与调制责任。"
+              "吧台支援相邻（编辑比较）"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.39",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -31608,13 +31545,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补咖啡与无酒精饮品与设备操作训练；酒水调制经验不等于咖啡设备操作能力。"
+              "编辑比较：补咖啡与无酒精饮品、设备操作和清洁训练；酒水调制经验不能代替目标门店实作。若目标同时经营酒类，另核酒类职责。"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.40",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -31638,13 +31575,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属饮品调制，但不涉及酒类许可与年龄核验。"
+              "饮品技能转换（编辑比较）"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.42",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -31683,13 +31620,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属餐饮场所，但从个人交付转向门店经营与人员管理。"
+              "转向门店管理（编辑比较）"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -31728,13 +31665,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属餐饮服务体系，但从个人服务转向一线督导职责。"
+              "转向班组督导（编辑比较）"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -31772,12 +31709,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属餐饮出品，但从酒水转向食品与厨房管理。"
+              "转向厨房管理（编辑比较）"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.51",
           "source_refs": [
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -31816,13 +31754,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属餐饮出品，但作业对象从酒水转向食品。"
+              "转向厨房出品（编辑比较）"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.54",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -31861,13 +31799,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属场所服务，但交付从吧台调制与收款转向接待与排位。"
+              "转向接待排位（编辑比较）"
             ]
           },
           "id": "bartenders.market-signals.market-signal-card.57",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         }
@@ -31963,12 +31901,23 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "费马测试职业内容编辑组：依据 O*NET 与美国 BLS 的公开职业资料、BLS 职业展望手册《Bartenders》与 2025 年 OEWS 工资、美国 TTB 关于联邦与州分权的酒类管理说明，以及中国大陆《调酒师国家职业技能标准》与市场监管总局《餐饮服务食品安全操作规范》与国家统计局《2024 年城镇单位就业人员年平均工资情况》；逐项标注口径、资料期与使用限制。"
+              "费马测试职业内容编辑组：本轮逐项核O*NET美国35-3011.00任务、工作情境、知识能力、工资、就业及目录；BLS工资方法与OOH行业时薪；中国国家统计局2025单位工资、2010调酒师旧版标准、上海2025评价目录、现行食品安全/未成年人/个人信息法律；TTB零售FAQ及ILO2025研究。编辑建议与统计、法规分列。"
             ]
           },
           "id": "bartenders.sources.source-card.1",
           "source_refs": [
-            "onet"
+            "bls",
+            "onet-wages",
+            "ep-current",
+            "nbs",
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation",
+            "cn-food-law",
+            "cn-minors",
+            "cn-pipl",
+            "ttb-retail",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -31977,14 +31926,29 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源：O*NET 35-3011.00 职业摘要、详细资料、自定义职业档案、技术清单、行业分布、认证发现、培训与教育信息、全国工资分位与就业趋势页面；BLS 职业展望手册《Bartenders》；美国 TTB 酒类管理页；中国大陆《调酒师国家职业技能标准》与市场监管总局《餐饮服务食品安全操作规范》与国家统计局 2024 年城镇单位工资。"
+              "主要来源：O*NET本职业摘要/详细页、工资和就业趋势、热门软件、行业、培训/认证目录；BLS OOH Bartenders及May2025OEWS技术说明；国家统计局2025单位工资；OSTA2010标准、上海2025评价目录；中国未成年人保护法、食品安全法与个人信息保护法；TTB Alcohol FAQs BU1/BU5；ILO Working Paper140。登记仍保留范围外历史引用，不等于本轮均已更新。"
             ]
           },
           "id": "bartenders.sources.source-card.2",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "bls",
+            "onet-wages",
+            "ep-current",
+            "nbs",
+            "oews-methods",
+            "hr",
+            "r2-pay-2",
+            "nist",
+            "census",
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation",
+            "cn-minors",
+            "cn-food-law",
+            "cn-pipl",
+            "ttb-retail",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -31993,12 +31957,23 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：O*NET 页面为 2026 年更新；工资分位为 2025 年 OEWS（本职业单列口径，时薪与年薪）；O*NET 就业与预测为 2024—2034 年；BLS 职业展望手册同名章节为 2025 年 5 月工资与 2025—2035 年预测；国家统计局数据为 2024 年、2025-05-16 发布。"
+              "本轮核读2026-10-09；美国工资May2025，O*NET与OOH就业均2025—2035，软件为2025美国招聘广告；行业页未单列资料年。中国单位工资2025、2026-05-15发布；调酒师标准原件2010修订，2024征求意见稿不是正式现行依据；上海目录2025。未成年人法2024修正、食品安全法2025修正、个人信息法2021施行；TTB FAQ2026-10-08更新，ILO2025。"
             ]
           },
           "id": "bartenders.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "onet-wages",
+            "hr",
+            "r2-pay-2",
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation",
+            "cn-minors",
+            "cn-food-law",
+            "cn-pipl",
+            "ttb-retail",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -32007,13 +31982,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "使用说明：① 职业身份与任务与工作情境与技能与知识为 O*NET 35-3011.00 本职业单列口径；② 工资、就业与行业数据在 O*NET 页面上亦为本职业单列口径，未标注取自其他职业；③ BLS 职业展望手册同名章节同为单列「Bartenders」，但资料期为 2025—2035 年，与 O*NET 展示的 2024—2034 年不同，不得混用。中国大陆未取得调酒师的精确职业工资条目，本页只以 2024 年住宿和餐饮业年平均工资作明示行业代理并标注非本职业工资；涉及酒类许可与年龄核验与场所卫生与设备安全的内容须以适用法规与主管部门与用人单位规定为准。"
+              "美国调酒师本职业工资含小费与兼职受雇者、排自雇，年化非个人收入。现行就业预测同期间一致；总体预测非AI因果。中国历史职业标准和地方评价目录已有，现行正式替代全文及全国职业工资仍不足；行业均值不是职业工资。法律保留法域，经营主体许可、员工年龄及内部职责分列；认证目录、人格测试和编辑转岗建议不是统一录用或晋升门槛。共享Hero及范围外历史内容本轮保持不变。"
             ]
           },
           "id": "bartenders.sources.source-card.4",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews-methods",
+            "ep-current",
+            "cn-wages-current",
+            "msresearch",
+            "cn-evaluation",
+            "cn-minors",
+            "ttb-retail",
+            "ilo"
           ],
           "type": "prose"
         }
@@ -32136,14 +32117,14 @@
                 "url": "https://www.onetonline.org/link/summary/35-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "official wage percentiles",
                   "May 2025（OEWS）；访问 2026-09-15"
                 ],
                 "evidence_type": "official wage percentiles",
                 "id": "oews",
-                "limitation": "中位数不是起薪，也不是收入承诺；小费与兼职收入不在该口径内。",
+                "limitation": "中位数非起薪或承诺；OEWS包含全职、兼职及小费、佣金等受雇工资，排自雇和加班溢价；年薪2,080小时年化非个人实际所得。",
                 "market": "美国",
                 "name": "O*NET 展示的 BLS 2025 年工资分位（35-3011.00）",
                 "period": "May 2025（OEWS）；访问 2026-09-15",
@@ -32216,33 +32197,33 @@
                 "url": "https://www.onetonline.org/link/details/35-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "official outlook",
-                  "2024—2034 年；访问 2026-09-15"
+                  "2025—2035年"
                 ],
                 "evidence_type": "official outlook",
                 "id": "operations",
-                "limitation": "为该职业单列口径的就业与预测，不是个人录用概率。",
+                "limitation": "美国35-3011.00调酒师：2025年就业762,600人，2035年预计800,500人，2025—2035增长5%、净增37,900人、年均空缺121,200（含增长与替换）。现行O*NET与BLS OOH同职业同期间一致，总体预测非AI归因。",
                 "market": "美国",
                 "name": "O*NET 35-3011.00 职业摘要（就业与预测字段）",
-                "period": "2024—2034 年；访问 2026-09-15",
+                "period": "2025—2035年",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/35-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "technology signals",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "2025美国招聘广告"
                 ],
                 "evidence_type": "technology signals",
                 "id": "hr",
-                "limitation": "页面列出 2 项软件技能并均标注为热门技术（Microsoft Outlook、Facebook）；Outlook 公布的出现比例低于 1%，Facebook 未公布比例；不代表岗位采用率或自动化程度。",
+                "limitation": "O*NET热门软件页来自2025年美国Lightcast招聘广告：Microsoft Outlook提及低于1%，Facebook比例Not available；广告提及不是采用率或统一录用条件。",
                 "market": "美国",
                 "name": "O*NET 35-3011.00 技术清单（热门技术信号）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2025年美国Lightcast招聘广告",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/35-3011.00"
@@ -32296,17 +32277,17 @@
                 "url": "https://www.onetonline.org/link/summary/35-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "training information",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "training directory",
+                  "IPEDS2025—26；2024—25完成数据"
                 ],
                 "evidence_type": "training information",
                 "id": "nist",
-                "limitation": "页面显示全国共 8 个相关培训项目（方向为 Bartending/Bartender，多为一年以下证书）；职业摘要另列出经美国劳工部批准的注册学徒岗位Bartender，并提供 Apprenticeship.gov 入口；培训项目与学徒名称不构成执业许可或雇主任命。",
+                "limitation": "全国八项目录，六项不足一年、一项不足12周、一项一至两年；招生状态和录用另核。学徒入口在职业摘要，非目录培训自动许可。",
                 "market": "美国",
                 "name": "O*NET 35-3011.00 培训与教育信息",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "IPEDS2025—26目录；2024—25完成数据",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtraining/35-3011.00"
@@ -32360,14 +32341,14 @@
                 "url": "https://www.onetonline.org/link/details/35-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "occupation profile",
                   "2026 年更新页面；访问 2026-09-15"
                 ],
                 "evidence_type": "occupation profile",
                 "id": "purchasing-managers",
-                "limitation": "任务清单描述群体工作；共 21 项（16 项核心、5 项补充，另 1 项 New 项未给重要性分数）。",
+                "limitation": "任务总数21：16Core、4Supplemental、1New（未给重要性分数）；New计入总数，不另加。",
                 "market": "美国",
                 "name": "O*NET 35-3011.00 职业摘要（任务清单）",
                 "period": "2026 年更新页面；访问 2026-09-15",
@@ -32392,33 +32373,33 @@
                 "url": "https://www.onetonline.org/link/localwages/35-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "industry distribution",
-                  "2024 年；访问 2026-09-15"
+                  "本轮现行页核读"
                 ],
                 "evidence_type": "industry distribution",
                 "id": "r2-pay-2",
-                "limitation": "住宿与餐饮服务 78%、其他行业（含艺术与娱乐与休闲与其他服务业）22%；行业分布描述统计分类，不提供行业工资水平。",
+                "limitation": "住宿餐饮79%、其他行业21%；行业分布不是工资水平，原2024及78/22已修。",
                 "market": "美国",
                 "name": "O*NET 35-3011.00 行业分布",
-                "period": "2024 年；访问 2026-09-15",
+                "period": "现行行业页未单列资料年",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/35-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "official employment trends",
-                  "2024—2034 年；访问 2026-09-15"
+                  "2025—2035年"
                 ],
                 "evidence_type": "official employment trends",
                 "id": "r2-pay-3",
-                "limitation": "2024 年在岗 756,700 人、2034 年约 801,500 人、2024—2034 年 +6%（快于平均）、预测期年均职位空缺约 129,600（含增长与替换）；预测不等于个人录用概率，空缺主要来自替代需求。",
+                "limitation": "美国35-3011.00调酒师：2025年就业762,600人，2035年预计800,500人，2025—2035增长5%、净增37,900人、年均空缺121,200（含增长与替换）。现行O*NET与BLS OOH同职业同期间一致，总体预测非AI归因。",
                 "market": "美国",
                 "name": "O*NET 35-3011.00 就业趋势页（就业与空缺）",
-                "period": "2024—2034 年；访问 2026-09-15",
+                "period": "2025—2035年",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/35-3011.00"
@@ -32440,17 +32421,17 @@
                 "url": "https://www.onetonline.org/link/localcert/35-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "official occupational skill standard",
-                  "职业标准现行版本；访问 2026-09-15"
+                  "historical occupational skill standard",
+                  "2010年修订"
                 ],
-                "evidence_type": "official occupational skill standard",
+                "evidence_type": "historical occupational skill standard",
                 "id": "msresearch",
-                "limitation": "职业定义为「在酒吧或餐厅等场所，根据传统配方或宾客的要求，专职从事配制并销售饮料的人员」；设五个等级（初级/中级/高级/技师/高级技师），基本文化程度为高中毕业（或同等学力）；职业能力特征要求色觉与味觉与嗅觉灵敏、手指与手臂灵活；晋级培训期限初级不少于 120 标准学时、中级与高级不少于 100、技师与高级技师不少于 60。该发布件为嵌入字体的 PDF，本机无 PDF 文本链，未能逐条提取条文号，故本页只引用其官方职业概况层面，不引用具体条文号。",
+                "limitation": "已核中国官方调酒师职业资料：OSTA原链接是2010修订版，定义为在酒吧或餐厅按配方或宾客要求配制并销售饮料；五等级和高中背景仅限该版。2025上海评价目录列4-03-02-09调酒师及当地5/4/3级；不能由地方目录推全国条件。证据不足：本次未取得取代旧版的新正式标准全文，2024征求意见稿不能当现行标准。本轮已实际提取全文，引用概况1.1—1.7；训练最低学时仅限该版，非现行所有岗位门槛。",
                 "market": "中国大陆",
-                "name": "《调酒师国家职业技能标准》（中华人民共和国人力资源和社会保障部组织制定，中国就业培训技术指导中心/职业技能鉴定中心发布）",
-                "period": "职业标准现行版本；访问 2026-09-15",
+                "name": "《调酒师国家职业标准》（2010年修订）",
+                "period": "2010年修订；本轮取得10页PDF",
                 "publisher": "中华人民共和国人力资源和社会保障部（职业技能鉴定中心发布渠道）",
                 "scope": "jurisdiction_specific",
                 "url": "https://www.osta.org.cn/api/sys/downloadFile/decrypt?fileName=4eNsZIOv3WFNDfbnldJHeA/2024/4/30/ea8cbe1c8d05422da396dfa3f6887a22.pdf"
@@ -32486,6 +32467,134 @@
                 "publisher": "国家市场监督管理总局",
                 "scope": "jurisdiction_specific",
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/zc/xzgfxwj/art/2023/art_2f6fadd3be844359be6a0e7fece23bcf.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official employment trends",
+                  "2025—2035"
+                ],
+                "evidence_type": "official employment trends",
+                "id": "ep-current",
+                "limitation": "美国35-3011.00调酒师：2025年就业762,600人，2035年预计800,500人，2025—2035增长5%、净增37,900人、年均空缺121,200（含增长与替换）。现行O*NET与BLS OOH同职业同期间一致，总体预测非AI归因。",
+                "market": "美国",
+                "name": "O*NET调酒师2025—2035全国就业趋势",
+                "period": "2025—2035",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/35-3011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official statistical methods",
+                  "May2025"
+                ],
+                "evidence_type": "official statistical methods",
+                "id": "oews-methods",
+                "limitation": "涵盖全职与兼职受雇人员，含小费、佣金与生产奖金，排自雇及加班溢价；年化2,080小时非个人实发。",
+                "market": "美国",
+                "name": "BLS May2025 OEWS技术说明",
+                "period": "May2025",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official wage statistics",
+                  "2025年；2026-05-15发布"
+                ],
+                "evidence_type": "official wage statistics",
+                "id": "cn-wages-current",
+                "limitation": "住宿餐饮非私营62,461、私营55,123元/年；表7规模以上社会生产服务和生活服务人员52,018；全岗位59,785。税前平均，非调酒师工资。",
+                "market": "中国大陆",
+                "name": "国家统计局《2025年城镇单位就业人员年平均工资情况》",
+                "period": "2025年；2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official vocational evaluation directory",
+                  "2025年目录；2025-01-02发布"
+                ],
+                "evidence_type": "official vocational evaluation directory",
+                "id": "cn-evaluation",
+                "limitation": "列4-03-02-09调酒师当地5/4/3级，不是全国统一录用门槛或标准全文。",
+                "market": "中国大陆（上海）",
+                "name": "上海市2025社会化职业技能评价目录",
+                "period": "2025年目录；2025-01-02发布",
+                "publisher": "上海市人力资源和社会保障局",
+                "scope": "partial_mapping",
+                "url": "https://rsj.sh.gov.cn/tjypx_17737/20250102/t0035_1429707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "law",
+                  "2024-04-26修正"
+                ],
+                "evidence_type": "law",
+                "id": "cn-minors",
+                "limitation": "第58/59/61条酒吧禁入、禁止售酒及酒吧招用未成年人边界；不可混同美国供酒从业者年龄。",
+                "market": "中国大陆",
+                "name": "《中华人民共和国未成年人保护法》2024修正版",
+                "period": "2024-04-26修正",
+                "publisher": "国家市场监督管理总局",
+                "scope": "jurisdiction_specific",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_54358c05e57642ab895176413f7cd4d7.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "law",
+                  "2025-09-12修正；2025-12-01施行"
+                ],
+                "evidence_type": "law",
+                "id": "cn-food-law",
+                "limitation": "经营卫生、培训、健康证明、贮存与器具清洁、问题食品经营主体责任；不赋予调酒师召回或恢复授权。",
+                "market": "中国大陆",
+                "name": "《中华人民共和国食品安全法》2025修正版",
+                "period": "2025-09-12修正；2025-12-01施行",
+                "publisher": "全国人大常委会公报／市场监管总局法规库",
+                "scope": "jurisdiction_specific",
+                "url": "https://sjfg.samr.gov.cn/law/file/pdf/3238901/1763351546670.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "law",
+                  "2021-11-01施行"
+                ],
+                "evidence_type": "law",
+                "id": "cn-pipl",
+                "limitation": "第28—30条金融账户等敏感个人信息处理边界；不以查验身份证推全量复制留存权限。",
+                "market": "中国大陆",
+                "name": "《中华人民共和国个人信息保护法》",
+                "period": "2021-11-01施行",
+                "publisher": "国家市场监督管理总局",
+                "scope": "jurisdiction_specific",
+                "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official regulatory guidance",
+                  "页面2026-10-08更新；本轮核读"
+                ],
+                "evidence_type": "official regulatory guidance",
+                "id": "ttb-retail",
+                "limitation": "TTB不发零售供酒许可证，零售仍须登记留存记录；州与地方许可另核，批发进口需TTB许可；经营主体义务非个人吧台授权。",
+                "market": "美国",
+                "name": "TTB Alcohol FAQs BU1、BU5",
+                "period": "页面2026-10-08更新；本轮核读",
+                "publisher": "Alcohol and Tobacco Tax and Trade Bureau",
+                "scope": "jurisdiction_specific",
+                "url": "https://www.ttb.gov/faqs/alcohol?tid=7"
               }
             ]
           },
@@ -33063,7 +33172,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "方向": "酒单与价目与说明文字"
+            "方向": "核验与收款记录草稿"
           }
         ],
         "evidence_intro": {
@@ -33537,7 +33646,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "收款与酒类核验与清洁记录出错"
+            "风险": "食品处理与过量饮酒处置边界"
           },
           {
             "为什么重要": {
@@ -34701,7 +34810,7 @@
             },
             "evidence_refs": [
               "onet",
-              "onet-context"
+              "onet-outlook"
             ],
             "id": "scope-referral",
             "mitigation": {
@@ -34732,7 +34841,6 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
               "onet-context"
             ],
             "id": "crisis-escalation",
@@ -34764,8 +34872,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-context"
+              "onet-wage"
             ],
             "id": "record-material-privacy",
             "mitigation": {
@@ -34796,8 +34903,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-context"
+              "onet-context",
+              "ttb"
             ],
             "id": "material-harm",
             "mitigation": {
@@ -34828,8 +34935,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-context"
+              "onet-wage",
+              "ttb"
             ],
             "id": "record-custody",
             "mitigation": {
@@ -34860,8 +34967,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-context"
+              "onet-outlook",
+              "ttb-retail"
             ],
             "id": "supervision-referral",
             "mitigation": {
@@ -34995,6 +35102,24 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$link": "bartenders.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "url"
+            },
+            "id": "ttb-retail",
+            "label": {
+              "$link": "bartenders.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "entity"
+            },
+            "scope": "美国零售经营主体登记/记录与州地方许可分列，非员工许可。"
           }
         ]
       },
@@ -35465,7 +35590,7 @@
             }
           },
           {
-            "fact_ref": "us-employment-2025",
+            "fact_ref": "us-employment-current-2026-10-09",
             "指标": "就业 · 就业规模",
             "数值": {
               "$item": "bartenders.us-salary.career-snapshot-secondary-locale.19",
@@ -35481,7 +35606,7 @@
             }
           },
           {
-            "fact_ref": "us-growth-2025-2035",
+            "fact_ref": "us-growth-current-2026-10-09",
             "指标": "就业 · 增长率",
             "数值": {
               "$item": "bartenders.us-salary.career-snapshot-secondary-locale.21",
@@ -35497,7 +35622,7 @@
             }
           },
           {
-            "fact_ref": "us-openings-2025-2035",
+            "fact_ref": "us-openings-current-2026-10-09",
             "指标": "就业 · 年均职位空缺",
             "数值": {
               "$item": "bartenders.us-salary.career-snapshot-secondary-locale.23",
@@ -35668,7 +35793,7 @@
             }
           }
         ],
-        "industry_value_label": "该行业内本职业工资中位数",
+        "industry_value_label": "该行业调酒师时薪中位数",
         "interpretation_heading": "这组美国工资数字应当怎么理解？",
         "interpretation_rows": [
           {
@@ -35716,7 +35841,7 @@
         },
         "outlook_heading": "美国就业前景",
         "outlook_period": {
-          "$fact": "us-growth-2025-2035",
+          "$fact": "us-growth-current-2026-10-09",
           "field": "period"
         },
         "wage_column_labels": [
@@ -37516,50 +37641,54 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "17.57美元/小时",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "调酒师",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业内调酒师小时工资中位数",
+        "occupation_scope": "调酒师／旅客住宿业（Traveler accommodation）",
+        "period": "May2025；本轮2026-10-09核读",
         "source_refs": [
-          "operations"
+          "nbs",
+          "oews-methods"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "17.07美元/小时",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "调酒师",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业内调酒师小时工资中位数",
+        "occupation_scope": "调酒师／全服务餐厅（Full-service restaurants）",
+        "period": "May2025；本轮2026-10-09核读",
         "source_refs": [
-          "operations"
+          "nbs",
+          "oews-methods"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "16.01美元/小时",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "调酒师",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业内调酒师小时工资中位数",
+        "occupation_scope": "调酒师／酒精饮料饮用场所（Drinking places, alcoholic beverages）",
+        "period": "May2025；本轮2026-10-09核读",
         "source_refs": [
-          "operations"
+          "nbs",
+          "oews-methods"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "15.05美元/小时",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "调酒师",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业内调酒师小时工资中位数",
+        "occupation_scope": "调酒师／游乐、博彩和休闲业（Amusement, gambling, and recreation industries）",
+        "period": "May2025；本轮2026-10-09核读",
         "source_refs": [
-          "operations"
+          "nbs",
+          "oews-methods"
         ]
       },
       {
@@ -37717,6 +37846,45 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "762,600人",
+        "fact_id": "us-employment-current-2026-10-09",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "35-3011.00 Bartenders",
+        "period": "2025年",
+        "source_refs": [
+          "ep-current",
+          "nbs"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "5%（净增37,900人）",
+        "fact_id": "us-growth-current-2026-10-09",
+        "market": "美国",
+        "measure": "预测就业增长率",
+        "occupation_scope": "35-3011.00 Bartenders",
+        "period": "2025—2035年",
+        "source_refs": [
+          "ep-current",
+          "nbs"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均121,200（含增长与替换）",
+        "fact_id": "us-openings-current-2026-10-09",
+        "market": "美国",
+        "measure": "预测年均职位空缺",
+        "occupation_scope": "35-3011.00 Bartenders",
+        "period": "2025—2035年",
+        "source_refs": [
+          "ep-current",
+          "nbs"
+        ]
       }
     ]
   },
@@ -37725,7 +37893,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 35-3011.00 · Job Zone 1–2 · 入门准备低 · Bright Outlook",
@@ -37776,7 +37944,7 @@
       "text": "调酒师"
     }
   },
-  "source_content_sha256": "8d611939843c9ed5333db6da3486464a09c863ba3b570c57229fd810f01a726b",
+  "source_content_sha256": "7f50e0b9939f86bb4fef5a87ad273e47f1c1ee900ffa2d95679c2116541c7614",
   "subject": {
     "canonical_slug": "bartenders",
     "name": "调酒师",

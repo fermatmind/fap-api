@@ -27753,7 +27753,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "；这是海大相邻研究助理岗的基本工资，绩效另计、税后未给，招聘已截止。"
+              "这是海大相邻研究助理岗的基本工资，绩效另计、税后未给，招聘已截止。"
             ]
           },
           "id": "survey-researchers.display.career_snapshot_primary_locale.quote-limits",
@@ -33988,7 +33988,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮复核BLS19-3022本职预测与NBS2025规上专业技术宽岗位税前年均，按实际科研专业任务和单位统计条件参照，非全部高校研究机构。本职及八邻职任务、工资行业、人大海大历史公告、AAPOR方法伦理与专业生成式AI讨论、ILO摘要NIST通用风险沿原实读范围，编辑练习不是官方课程全国样本或法律结论。"
+              "2026-10-12九模块作者核查：O*NET本职与八邻职任务、IC与Job Zone5、BLS工资行业及2025–2035本职预测、人大CGSS与海大历史公告、AAPOR2026伦理网页和Standard Definitions页面及2024生成式AI讨论、NIST AI600-1适用通用风险条款。NBS专业技术宽岗位和ILO摘要复用本批适用原文；编辑练习非官方课程、全国样本或法律结论。"
             ]
           },
           "id": "survey-researchers.display.source_card.source",
@@ -34002,7 +34002,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-01初读制作；2026-10-02复核BLS本职预测及NBS专业技术宽岗位工资，其余来源沿原日期范围未重全文，统计期公告身份分别说明。"
+              "2026-10-12作者核查；统计期、历史公告与专业规范版本分别保留。AAPOR完整方法手册及两项2025补充报告未全读，不列全公式；本次不含独立复核、HTML或发布。"
             ]
           },
           "id": "survey-researchers.display.source_card.updated-at",
@@ -37374,6 +37374,30 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://rsc.ouc.edu.cn/2025/0606/c31849a501362/page.htm",
+            "id": "r2-pay-1",
+            "label": "海大全球新质生产力研究中心研究助理招聘",
+            "scope": "海大2025相邻研究助理派遣基本工资8000元/月，绩效另计，招聘已截止，不代表全国。"
+          },
+          {
+            "href": "https://se-office.ruc.edu.cn/xwdt/ef844f5dd1b84b2cb3a21aca5cd42834.htm",
+            "id": "r2-pay-2",
+            "label": "人大 CGSS 2026 项目助理实习公告",
+            "scope": "人大2026 CGSS实习补助未列金额，出勤期已结束，当前开放未知。"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/19-3022.00",
+            "id": "onet",
+            "label": "O*NET 调查研究员 19-3022.00",
+            "scope": "O*NET本职任务背景，不验证编辑虚构六条记录或其计算结果。"
+          },
+          {
+            "href": "https://www.bls.gov/ooh/life-physical-and-social-science/survey-researchers.htm",
+            "id": "bls-ooh",
+            "label": "BLS OOH 调查研究员",
+            "scope": "BLS本职美国环境、典型准备及许可概述，不替代中国项目要求。"
           }
         ]
       },
@@ -37771,7 +37795,7 @@
         "industry_period": "2025年5月",
         "industry_rows": [
           {
-            "fact_ref": "industry-theater",
+            "fact_ref": "industry-primary",
             "industry": "研发服务",
             "median": {
               "$fact": "industry-primary",
@@ -37785,7 +37809,7 @@
             }
           },
           {
-            "fact_ref": "industry-education",
+            "fact_ref": "industry-secondary",
             "industry": "教育服务（公立与私立）",
             "median": {
               "$fact": "industry-secondary",
@@ -37799,7 +37823,7 @@
             }
           },
           {
-            "fact_ref": "industry-amusement",
+            "fact_ref": "industry-tertiary",
             "industry": "其他专业、科学与技术服务",
             "median": {
               "$fact": "industry-tertiary",
@@ -40008,7 +40032,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "O*NET-SOC 19-3022.00 精确职业口径",
@@ -40059,7 +40083,7 @@
       "text": "调查研究员"
     }
   },
-  "source_content_sha256": "d9d3814f38972ed4104aa43ecbb7901f4d174fbe2ef007f6bb8dcf4cb00f35cc",
+  "source_content_sha256": "f195f2b5059d47530081209c2b761bb5f0cae75fd160d0f1db451d51c9c1f73c",
   "subject": {
     "canonical_slug": "survey-researchers",
     "name": "调查研究员",

@@ -2,6 +2,12 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:cn-education-nonprivate-current": {
+        "status": "pending_mapping"
+      },
+      "fact:cn-education-private-current": {
+        "status": "pending_mapping"
+      },
       "fact:cn-industry-manufacturing-2024": {
         "status": "pending_mapping"
       },
@@ -18,6 +24,18 @@
         "status": "pending_mapping"
       },
       "fact:us-change-2025-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:us-cte-parent-industry-0-current": {
+        "status": "pending_mapping"
+      },
+      "fact:us-cte-parent-industry-1-current": {
+        "status": "pending_mapping"
+      },
+      "fact:us-cte-parent-industry-2-current": {
+        "status": "pending_mapping"
+      },
+      "fact:us-cte-parent-industry-3-current": {
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
@@ -399,6 +417,9 @@
         "status": "mapped"
       },
       "item:career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.9": {
+        "status": "pending_mapping"
+      },
+      "item:career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.9.deep-history-unconsumed": {
         "status": "pending_mapping"
       },
       "item:career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.90": {
@@ -5406,7 +5427,7 @@
       },
       "ai_impact_table.questions.07.link": {
         "ref": {
-          "id": "career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.9",
+          "id": "career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.9.deep-history-unconsumed",
           "path": [
             "data",
             "entries",
@@ -8197,99 +8218,24 @@
         "status": "mapped"
       },
       "career_quick_answers_block.items.01.table.rows.02.value.steps.02": {
-        "ref": {
-          "id": "career-technical-education-teachers-middle-school.profile.career-quick-answers-block.5",
-          "parts": [
-            [
-              "→",
-              1,
-              6
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_quick_answers_block.items.01.table.rows.02.value.steps.03": {
-        "ref": {
-          "id": "career-technical-education-teachers-middle-school.profile.career-quick-answers-block.5",
-          "parts": [
-            [
-              "→",
-              2,
-              6
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_quick_answers_block.items.01.table.rows.02.value.steps.04": {
-        "ref": {
-          "id": "career-technical-education-teachers-middle-school.profile.career-quick-answers-block.5",
-          "parts": [
-            [
-              "→",
-              3,
-              6
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_quick_answers_block.items.01.table.rows.02.value.steps.05": {
-        "ref": {
-          "id": "career-technical-education-teachers-middle-school.profile.career-quick-answers-block.5",
-          "parts": [
-            [
-              "→",
-              4,
-              6
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_quick_answers_block.items.01.table.rows.02.value.steps.06": {
-        "ref": {
-          "id": "career-technical-education-teachers-middle-school.profile.career-quick-answers-block.5",
-          "parts": [
-            [
-              "→",
-              5,
-              6
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_quick_answers_block.items.01.table.rows.03.alternate_value": {
         "ref": null,
@@ -9343,18 +9289,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.04.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            3,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.04.mitigation": {
         "ref": {
@@ -23878,10 +23814,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "课前检查工具与材料与场地并排除隐患 → 讲清禁止动作与个人防护与隔离要求 → 在学生操作时持续巡视并纠正不安全行为 → 发现隐患立即停止并隔离 → 记录设备与材料状态与异常处置 → 课后清点与整理并交接"
+              "编辑实训组织建议：核工具、材料和场地条件，示范并监督安全使用；中国学校安全办法18条要求存在隐患设施停止使用并维修、更换、防护或警示；具体设备维修和恢复由学校分工制度核，不能由页面授予。发生伤害及时救助，记录和报备不能延误。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.profile.career-quick-answers-block.5",
+          "source_refs": [
+            "details-current",
+            "safety-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24032,10 +23973,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "能否任教特定学段与科目、能否使用与指导学生使用特定工具与设备、能否开设特定技术课程或项目、能否出具成绩与升级建议，由教师资格与任教范围、学校聘用与岗位授权与课程审批制度、以及工具与场地与设备的安全条件与管理制度决定；权限来自资格与聘用与审批记录，不因个人行业经验自行产生；发现超出任教范围、场地或设备不具备条件、或涉及学生保护事项时须先停止并报告。"
+              "中国教师法11条初中及初级职业学校文化、专业课资格要求师范专科或其他大专及以上；资格条例4/5条区分教师类别，原则可任同级及以下、高中与中职资格互通、实习指导另有限制；实际学科、认定和聘用另核。 任教、聘用、课程和设施条件分别核；中国学校安全办法18条要求存在隐患设施停止使用并维修、更换、防护或警示；具体设备维修和恢复由学校分工制度核，不能由页面授予。发生伤害及时救助，记录和报备不能延误。 中国未成年人保护法11条要求密切接触单位及工作人员发现侵害、疑似侵害或其他危险时立即向公安、民政、教育等有关部门报告，校内报备不能替代或延误；学校保护规定48/49条要求本人职责内及时处理、必要时外部报告和及时救助，不能先等校内批准。美国义务另按州法核。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.profile.career-quick-answers-block.19",
+          "source_refs": [
+            "qualification-current",
+            "teacher-law-current",
+            "safety-current",
+            "minor-current",
+            "school-current"
+          ],
           "type": "prose"
         },
         {
@@ -24109,10 +24057,18 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把该职业列为 Job Zone Four（相当准备，SVP 7.0 至低于 8.0）：多数此类职业需要四年制学士学位，但部分岗位不要求；O*NET 教育调查显示 86% 的受访者认为需要学士学位、6% 认为高中文凭或同等学历即可、3% 认为需要学士后证书；摘要页提供Apprenticeship.gov探索入口，未列具体项目，列出 1 项认证。常见能力来自教育课程与教学实习与所在领域的实践经验：教学法与青少年发展、职业探索与技术入门任务设计、过程与成品评量、工具材料与场地安全、以及与家长与同事的协作。在中国大陆，任教须按教师资格制度取得相应学段与学科的教师资格，并具备所授专业的学历或行业经历与安全指导能力，具体按学校招聘与聘用条件核实。"
+              "O*NET Job Zone4是跨职业准备区；86%学士、6%高中、3%学士后证书为新入职所需学历问答，不是在岗学历构成或法定条件。摘要仅学徒探索入口，未列具体本职业项目；培训目录452学校项目，毕业人数不等于从业者学历。认证目录1项NBPTS CTE专业认证，不是统一准入。美国BLS概括常见学士与所教领域工作经验，公立学校州许可或认证依州路线核；专业认证与许可、学校聘用分别判断。 中国教师法11条初中及初级职业学校文化、专业课资格要求师范专科或其他大专及以上；资格条例4/5条区分教师类别，原则可任同级及以下、高中与中职资格互通、实习指导另有限制；实际学科、认定和聘用另核。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.profile.career-quick-answers-block.26",
+          "source_refs": [
+            "details-current",
+            "training-current",
+            "cert-current",
+            "ooh-current",
+            "qualification-current",
+            "teacher-law-current"
+          ],
           "type": "prose"
         },
         {
@@ -24153,7 +24109,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作以校内固定课表与坐班为主，同时承担备课与材料准备与批改与沟通等课后工作量；主要负荷来自长时间站立与讲说、持续的人际互动与情绪劳动、以及在使用工具与材料时同时照看多名学生的安全。O*NET 工作情境显示：97% 每天在环境受控的室内；69% 站立时间约占一半；67% 每天进行公开演讲；67% 每周至少一次但非每日面临时间压力；65% 每周工作超过 40 小时；60% 认为与团队共同工作极其重要；58% 持续与他人接触；55% 每天进行面对面讨论；51% 每月至少一次但非每周进行电话交谈；50% 与他人保持中等近距离（一臂之内）；47% 每天需要处理不愉快或愤怒或无礼的人；47% 表示决策有一定自由；46% 认为协调或领导他人极其重要；46% 每周至少一次但非每日接触干扰性或不适的噪声；45% 每天做决策；33% 对他人健康与安全承担极高责任。作业要求按课程标准与学校制度执行，使用工具与材料须按安全规程落实防护与巡视，发现学生安全异常先保护学生再报告。"
+              "工作以校内固定课表与坐班为主，同时承担备课与材料准备与批改与沟通等课后工作量；主要负荷来自长时间站立与讲说、持续的人际互动与情绪劳动、以及在使用工具与材料时同时照看多名学生的安全。O*NET 工作情境显示：97% 每天在环境受控的室内；69% 站立时间约占一半；67% 每天进行公开演讲；67% 每周至少一次但非每日面临时间压力；65% 每周工作超过 40 小时；60% 认为与团队共同工作极其重要；58% 持续与他人接触；55% 每天进行面对面讨论；51% 每月至少一次但非每周进行电话交谈；50% 与他人保持中等近距离（一臂之内）；47% 每天需要处理不愉快或愤怒或无礼的人；47% 表示决策有一定自由；46% 认为协调或领导他人极其重要；46% 每周至少一次但非每日接触干扰性或不适的噪声；45%每天作出影响他人、组织资源或声誉的决策；33%对其他工作人员健康安全承担极高责任。作业要求按课程标准与学校制度执行，使用工具与材料须按安全规程落实防护与巡视，发现学生安全异常先保护学生再报告。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.profile.career-quick-answers-block.30",
@@ -24197,10 +24153,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国2025全国年薪中位65,030美元，第10至90分位49,200至101,890美元。BLS 2025—2035预测：2025年与2035年就业均显示约16,600人；表1.2变化率-0.5%、净变化约-100人、年均空缺约1,000个。人数及净变化独立取整，不能用显示的两端人数相减。O*NET仍展示旧2024—2034预测，本页就业改用BLS当前表1.2；预测不是实际结果，也不是AI因果研究。 中国企业教学人员2025代理中位5.31万元/年，第10至90分位3.00至13.33万元/年，仅覆盖企业教育专业人员，不是本职业工资。课时、班额、职责及假期安排须按合同核对。"
+              "美国2025本职业年薪中位65,030美元，P10—P90为49,200—101,890美元，仅年薪。美国25-2023初中CTE教师BLS表1.2：2025和2035就业均显示16,600人，变化率-0.5%，净变化约-100人，年均空缺约1,000个（含替代需求，非净新增）。各数独立取整，两端显示人数不能相减推净变化。O*NET当前也已为2025—2035预测，变化率显示-1%；本页保留表1.2精度，预测不是AI因果证据。 中国2025企业教学人员代理中位5.31万元/年、P10—P90 3—13.33万元/年，非公办初中或精确本职业工资。NBS2025年教育行业城镇非私营133,539元、私营63,908元税前年均工资，均涵盖多职业，非本职业均值、中位数、起薪或月薪；与企业教学人员工资分位代理分别展示。 课时、工作量和假期另核。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.profile.career-quick-answers-block.34",
+          "source_refs": [
+            "wages-current",
+            "bls-current",
+            "trends-current",
+            "mhr-current",
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -24241,10 +24204,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：本条证据路由未建立与 O*NET-SOC 25-2023.00 精确对应的中国大陆职业级工资分布，可得的官方企业薪酬调查只到「企业教学人员」父级口径（企业教学人员宽代理，2025 年，工资价位中位数 5.31 万元/年，第 10 与第 90 分位 3.00 万元与 13.33 万元/年）；本页按父级代理发布该数值并逐处标注它是代理口径而不是本职业精确口径，不使用行业平均填补，也不把美国数字换算为人民币；同时说明初级中学教师资格与中等职业学校专业课与实习指导教师资格属于不同类别，不能直接用美国职业名称映射。"
+              "中国大陆侧：本条证据路由未建立与 O*NET-SOC 25-2023.00 精确对应的中国大陆职业级工资分布，可得的官方企业薪酬调查只到「企业教学人员」父级口径（企业教学人员宽代理，2025 年，工资价位中位数 5.31 万元/年，第 10 与第 90 分位 3.00 万元与 13.33 万元/年）；本页按父级代理发布该数值并逐处标注它是代理口径而不是本职业精确口径，不使用行业平均填补，也不把美国数字换算为人民币；同时说明初级中学教师资格与中等职业学校专业课与实习指导教师资格属于不同类别，不能直接用美国职业名称映射。 NBS2025年教育行业城镇非私营133,539元、私营63,908元税前年均工资，均涵盖多职业，非本职业均值、中位数、起薪或月薪；与企业教学人员工资分位代理分别展示。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.profile.onet-structured-fields-block.3",
+          "source_refs": [
+            "mhr-current",
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -24252,10 +24219,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET当前行业字段沿用2024口径，教育服务100%，不能推工资或当前行业占比。BLS 2025—2035预测：2025年与2035年就业均显示约16,600人；表1.2变化率-0.5%、净变化约-100人、年均空缺约1,000个。人数及净变化独立取整，不能用显示的两端人数相减。O*NET仍展示旧2024—2034预测，本页就业改用BLS当前表1.2；预测不是实际结果，也不是AI因果研究。"
+              "本轮O*NET行业页面教育服务100%，未明示数据基期，不能据此推分行业工资。美国25-2023初中CTE教师BLS表1.2：2025和2035就业均显示16,600人，变化率-0.5%，净变化约-100人，年均空缺约1,000个（含替代需求，非净新增）。各数独立取整，两端显示人数不能相减推净变化。O*NET当前也已为2025—2035预测，变化率显示-1%；本页保留表1.2精度，预测不是AI因果证据。 未标Bright Outlook不是无空缺。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.profile.onet-structured-fields-block.4",
+          "source_refs": [
+            "industry-current",
+            "bls-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -24290,7 +24262,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "协作与沟通｜58% 持续与他人接触；55% 每天进行面对面讨论；69% 每天使用电子邮件；60% 认为与团队共同工作极其重要；50% 与他人保持中等近距离（一臂之内）；38% 每周至少一次但非每日撰写信件与备忘录。\n工时与节奏｜65% 每周工作超过 40 小时；67% 每周至少一次但非每日面临时间压力；24% 认为重复性任务非常重要；备课与材料准备与批改多在教学时间之外。\n决策与自主｜45% 每天做决策；58% 表示对任务与优先级有一定自由；47% 表示决策有一定自由；课程目标与考核标准由课程标准与学校制度确定。\n责任与影响｜46% 认为协调或领导他人极其重要；41% 认为决策对同事或组织结果有重要影响；35% 对他人工作结果承担中等责任；33% 对他人健康与安全承担极高责任。\n环境与暴露｜97% 每天在环境受控的室内；46% 每周至少一次但非每日接触干扰性或不适的噪声；69% 站立时间约占一半；使用工具与材料时可能接触相关危害。\n人际与冲突｜47% 每天需要处理不愉快或愤怒或无礼的人；36% 每月至少一次但非每周遇到冲突情形；31% 认为与外部客户或公众打交道相当重要；44% 认为工作竞争程度中等。\n身体与作业空间｜69% 站立时间约占一半；67% 每天进行公开演讲；使用工具与材料时需要在教室与实验室与工作坊之间走动与示范与巡视。\n安全与合规｜作业要求按课程标准与学校制度执行，使用工具与材料须按安全规程落实防护与隔离与巡视；学生记录与隐私按制度维护，中国发现侵害、疑似侵害或危险时按未成年人保护法第11条立即向有关部门报告，内部上报不能替代；美国按州法核，不越权调查。\n记录与交接｜课程目标与任务设计、过程评量表与评分依据、学籍与出勤与沟通记录须完整可追溯，异常与上报留痕，班级与场地交接须说明未完成与待跟进事项。"
+              "协作与沟通｜58% 持续与他人接触；55% 每天进行面对面讨论；69% 每天使用电子邮件；60% 认为与团队共同工作极其重要；50% 与他人保持中等近距离（一臂之内）；38% 每周至少一次但非每日撰写信件与备忘录。\n工时与节奏｜65% 每周工作超过 40 小时；67% 每周至少一次但非每日面临时间压力；24% 认为重复性任务非常重要；备课与材料准备与批改多在教学时间之外。\n决策与自主｜45%每天作出影响他人、组织资源或声誉的决策；58% 表示对任务与优先级有一定自由；47% 表示决策有一定自由；课程目标与考核标准由课程标准与学校制度确定。\n责任与影响｜46% 认为协调或领导他人极其重要；41% 认为决策对同事或组织结果有重要影响；35% 对他人工作结果承担中等责任；33%对其他工作人员健康安全承担极高责任。\n环境与暴露｜97% 每天在环境受控的室内；46% 每周至少一次但非每日接触干扰性或不适的噪声；69% 站立时间约占一半；使用工具与材料时可能接触相关危害。\n人际与冲突｜47% 每天需要处理不愉快或愤怒或无礼的人；36% 每月至少一次但非每周遇到冲突情形；31% 认为与外部客户或公众打交道相当重要；44% 认为工作竞争程度中等。\n身体与作业空间｜69% 站立时间约占一半；67% 每天进行公开演讲；使用工具与材料时需要在教室与实验室与工作坊之间走动与示范与巡视。\n安全与合规｜作业要求按课程标准与学校制度执行，使用工具与材料须按安全规程落实防护与隔离与巡视；学生记录与隐私按制度维护，中国发现侵害、疑似侵害或危险时按未成年人保护法第11条立即向有关部门报告，内部上报不能替代；美国按州法核，不越权调查。\n记录与交接｜课程目标与任务设计、过程评量表与评分依据、学籍与出勤与沟通记录须完整可追溯，异常与上报留痕，班级与场地交接须说明未完成与待跟进事项。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.profile.work-context-block.1",
@@ -24936,16 +24908,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/25-2023.00"
               },
               {
-                "entity": "O*NET-SOC 25-2023.00 职业摘要（就业与预测字段）",
+                "entity": "O*NET全国工资分位（本职业2025年薪）",
                 "id": "link-11",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/localwages/25-2023.00"
               },
               {
-                "entity": "国际劳工组织（ILO）工作论文 140 与本职业任务暴露研究（与本行结论一致的可链接来源）",
+                "entity": "美国教育部2023教育AI报告",
                 "id": "link-12",
                 "relation": "career.source",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.govinfo.gov/content/pkg/GOVPUB-ED-PURL-gpo229415/pdf/GOVPUB-ED-PURL-gpo229415.pdf"
               },
               {
                 "entity": "O*NET-SOC 25-2023.00 职业摘要",
@@ -24954,7 +24926,7 @@
                 "url": "https://www.onetonline.org/link/summary/25-2023.00"
               },
               {
-                "entity": "O*NET-SOC 25-2023.00 培训与教育信息",
+                "entity": "O*NET新聘所需学历与Job Zone（非学校项目目录）",
                 "id": "link-14",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/25-2023.00"
@@ -24978,16 +24950,10 @@
                 "url": "https://www.onetonline.org/link/details/25-2023.00"
               },
               {
-                "entity": "ILO 工作论文 140《Generative AI and Jobs: A Refined Global Index of Occupational Exposure》",
+                "entity": "美国教育部2023教育AI报告",
                 "id": "link-18",
                 "relation": "career.source",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
-              },
-              {
-                "entity": "O*NET-SOC 25-2023.00 培训与教育信息",
-                "id": "link-19",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/25-2023.00"
+                "url": "https://www.govinfo.gov/content/pkg/GOVPUB-ED-PURL-gpo229415/pdf/GOVPUB-ED-PURL-gpo229415.pdf"
               }
             ]
           },
@@ -25054,10 +25020,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "引入自动出题、自动评分、学习分析或课堂监测工具前，先明确是否适龄与合规、是否符合学生数据与隐私要求、是否保留可复核的评分依据、算法结果由谁确认、由谁对评价结论负责，并保证在学生数据被用于任何决定前有教师的实质性复核与留痕。"
+              "编辑建议先核适龄、数据用途、评分依据、责任和人工复核方式；美国教育部2023报告建议教师在重大教学决定中保持控制，非所有数据操作的统一法律规则。中国个人信息保护法24条对重大权益自动化决定赋予说明和拒绝仅自动化决定的权利。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.15",
+          "source_refs": [
+            "editor-current",
+            "ed-ai-current",
+            "privacy-current"
+          ],
           "type": "prose"
         },
         {
@@ -25296,10 +25267,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断工具与材料与场地是否可用于学生操作，并对停止与恢复使用负责。"
+              "教师按实际分工核学生操作安全，学校与指定人员承担相应管理、维修和恢复职责；中国学校安全办法18条要求存在隐患设施停止使用并维修、更换、防护或警示；具体设备维修和恢复由学校分工制度核，不能由页面授予。发生伤害及时救助，记录和报备不能延误。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.37",
+          "source_refs": [
+            "safety-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25329,10 +25304,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明职业任务、招聘技术、工资分位和全球任务暴露研究；本页工具控制建议为编辑分析，不是教师AI能力框架或本职业效果测量。"
+              "五卡分别说明本职业职责、招聘软件信号、工资分位及教育AI报告；统计、政策建议与编辑分析分别解读。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.40",
+          "source_refs": [
+            "ed-ai-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25516,10 +25495,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "全球任务暴露研究不提供本职业实际采用率、失业率或效率增幅；本页适龄、安全和评价控制建议来自任务分析，不能把它当作教师能力框架原文。"
+              "美国教育部2023报告提出适应性教学及教师支持机会，也指出错误、偏差与隐私风险；不是本职业采用率、替代率或效果实证。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.57",
+          "source_refs": [
+            "ed-ai-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25527,10 +25510,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO工作论文140：生成式AI职业暴露指数"
+              "美国教育部：Artificial Intelligence and the Future of Teaching and Learning"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.58",
+          "source_refs": [
+            "ed-ai-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25538,10 +25525,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "全球职业任务暴露测量"
+              "教育AI政策与研究建议（2023报告）"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.59",
+          "source_refs": [
+            "ed-ai-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25549,10 +25540,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO研究区分潜在任务暴露与真实岗位替代，并认为转型可能性更高；本研究不能证明25-2023.00的学校采用率或具体效率增幅。"
+              "报告印刷页3、7、16—17建议教育者在重大教学决定中保持控制；不是约束性法律或对25-2023的效率/失业预测。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.60",
+          "source_refs": [
+            "ed-ai-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25582,7 +25577,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2025—2035预测：2025年与2035年就业均显示约16,600人；表1.2变化率-0.5%、净变化约-100人、年均空缺约1,000个。人数及净变化独立取整，不能用显示的两端人数相减。O*NET仍展示旧2024—2034预测，本页就业改用BLS当前表1.2；预测不是实际结果，也不是AI因果研究。"
+              "BLS 2025—2035预测：2025年与2035年就业均显示约16,600人；表1.2变化率-0.5%、净变化约-100人、年均空缺约1,000个。人数及净变化独立取整，不能用显示的两端人数相减。O*NET当前已展示2025—2035预测（变化率-1%显示精度），本页保留BLS表1.2的-0.5%；预测不是实际结果，也不是AI因果研究。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.63",
@@ -25659,7 +25654,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2025—2035预测：2025年与2035年就业均显示约16,600人；表1.2变化率-0.5%、净变化约-100人、年均空缺约1,000个。人数及净变化独立取整，不能用显示的两端人数相减。O*NET仍展示旧2024—2034预测，本页就业改用BLS当前表1.2；预测不是实际结果，也不是AI因果研究。"
+              "BLS 2025—2035预测：2025年与2035年就业均显示约16,600人；表1.2变化率-0.5%、净变化约-100人、年均空缺约1,000个。人数及净变化独立取整，不能用显示的两端人数相减。O*NET当前已展示2025—2035预测（变化率-1%显示精度），本页保留BLS表1.2的-0.5%；预测不是实际结果，也不是AI因果研究。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.70",
@@ -25681,10 +25676,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。任务适龄性与安全性判断、技能示范准确性与评价公平性、以及学生保护事项的报告须由持证教师按学校制度确认；系统既不能承担责任，也不能取得教师资格；工具只能提供可复核的检索、初稿、统计与台账支持。"
+              "编辑建议对适龄性、安全、评价和学生保护保留实质性人工判断。教育AI可支持适应性教学及反馈等多类任务，并非天然只能处理初稿；能力与效果须实测，重大教学决定控制建议不等于所有数据操作统一限制。中国未成年人保护法11条要求密切接触单位及工作人员发现侵害、疑似侵害或其他危险时立即向公安、民政、教育等有关部门报告，校内报备不能替代或延误；学校保护规定48/49条要求本人职责内及时处理、必要时外部报告和及时救助，不能先等校内批准。美国义务另按州法核。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.72",
+          "source_refs": [
+            "minor-current",
+            "school-current",
+            "ed-ai-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25802,10 +25803,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "评价结论与升级建议、任务适龄性与安全性判断、学生保护事项的报告由持证教师按学校制度确认并留痕。"
+              "评价及升级建议按真实学校分工核，学生保护报告不等待持证教师或校内批准；中国未成年人保护法11条要求密切接触单位及工作人员发现侵害、疑似侵害或其他危险时立即向公安、民政、教育等有关部门报告，校内报备不能替代或延误；学校保护规定48/49条要求本人职责内及时处理、必要时外部报告和及时救助，不能先等校内批准。美国义务另按州法核。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.83",
+          "source_refs": [
+            "minor-current",
+            "school-current",
+            "ed-ai-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25835,10 +25842,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "学生记录与家庭信息与行为数据等敏感信息处理不当会造成隐私与合规后果。"
+              "中国个人信息保护法28条明确不满14岁未成年人的个人信息属敏感个人信息；其余学生记录依内容与风险分类，不将全部成绩、出勤或家庭信息一概认定法定敏感信息。处理仍须合法目的、必要范围和权限保护；学校保护规定10条要求保密学生及家庭隐私并不公开成绩名次。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.86",
+          "source_refs": [
+            "privacy-current",
+            "school-current"
+          ],
           "type": "prose"
         },
         {
@@ -25967,10 +25978,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断工具与材料与场地是否可用于学生操作，并对停止与恢复使用负责。"
+              "教师按实际分工核学生操作安全，学校与指定人员承担相应管理、维修和恢复职责；中国学校安全办法18条要求存在隐患设施停止使用并维修、更换、防护或警示；具体设备维修和恢复由学校分工制度核，不能由页面授予。发生伤害及时救助，记录和报备不能延误。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.98",
+          "source_refs": [
+            "safety-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26236,6 +26251,23 @@
           },
           "id": "career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.122",
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "O*NET-SOC 25-2023.00 培训与教育信息",
+                "id": "link-19",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/localtraining/25-2023.00"
+              }
+            ]
+          },
+          "id": "career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.9.deep-history-unconsumed",
+          "type": "links",
+          "visibility": "internal"
         }
       ]
     },
@@ -26406,10 +26438,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业平均值（本页不代填职业工资）"
+              "行业宽口径参考（非精确职业工资）"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.china-salary.career-snapshot-primary-locale.13",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26417,10 +26452,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "可得的官方全国工资表按行业门类与单位类型汇总，其中教育门类混合了大量与本职业无关的岗位；本条路由不使用行业平均填充，故本页不发布其数值，只登记口径与覆盖范围。"
+              "NBS2025年教育行业城镇非私营133,539元、私营63,908元税前年均工资，均涵盖多职业，非本职业均值、中位数、起薪或月薪；与企业教学人员工资分位代理分别展示。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.china-salary.career-snapshot-primary-locale.14",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -27172,7 +27210,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS表1.2美国SOC25-2023人数单位千人。2024行业分布100%教育服务不能当2025就业细分。；BLS表1.2职业预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "BLS表1.2美国SOC25-2023人数单位千人。本轮O*NET行业分布100%教育服务不能当2025就业细分。；BLS表1.2职业预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.20",
@@ -27227,7 +27265,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 2025—2035预测：2025年与2035年就业均显示约16,600人；表1.2变化率-0.5%、净变化约-100人、年均空缺约1,000个。人数及净变化独立取整，不能用显示的两端人数相减。O*NET仍展示旧2024—2034预测，本页就业改用BLS当前表1.2；预测不是实际结果，也不是AI因果研究。"
+              "BLS 2025—2035预测：2025年与2035年就业均显示约16,600人；表1.2变化率-0.5%、净变化约-100人、年均空缺约1,000个。人数及净变化独立取整，不能用显示的两端人数相减。O*NET当前已展示2025—2035预测（变化率-1%显示精度），本页保留BLS表1.2的-0.5%；预测不是实际结果，也不是AI因果研究。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.25",
@@ -27238,7 +27276,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 2025—2035预测：2025年与2035年就业均显示约16,600人；表1.2变化率-0.5%、净变化约-100人、年均空缺约1,000个。人数及净变化独立取整，不能用显示的两端人数相减。O*NET仍展示旧2024—2034预测，本页就业改用BLS当前表1.2；预测不是实际结果，也不是AI因果研究。"
+              "BLS 2025—2035预测：2025年与2035年就业均显示约16,600人；表1.2变化率-0.5%、净变化约-100人、年均空缺约1,000个。人数及净变化独立取整，不能用显示的两端人数相减。O*NET当前已展示2025—2035预测（变化率-1%显示精度），本页保留BLS表1.2的-0.5%；预测不是实际结果，也不是AI因果研究。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.26",
@@ -27271,10 +27309,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "核行业与雇主：O*NET2024行业矩阵列教育服务100%，不能推分行业工资。OOH工资混合CTE学段；具体学校薪酬表、课时与假期按合同核。"
+              "本轮O*NET行业页面教育服务100%，页面未明示基期，不能推行业工资；OOH父级CTE的四项行业工资另列，非本精确职业。学校课时和薪酬条件另核。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.29",
+          "source_refs": [
+            "industry-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27326,10 +27368,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "教育服务（100%）"
+              "私立高等院校（CTE跨学段父职业）"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.34",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27337,10 +27382,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得SOC25-2023精确职业的分行业工资中位数；OOH列的是跨学段CTE合并口径，不代填为本职业值。"
+              "67,200美元/年"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.35",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27348,10 +27396,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET行业100%教育服务为2024口径；BLS OOΗ 2025所列行业工资混合初中、高中和高等教育CTE，不能直接放入本细分行。"
+              "BLS OOH2025初中、高中及高教CTE合并的行业年薪中位数；非25-2023精确分行业值。精确本职业行业工资仍缺。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.36",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27359,10 +27410,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "课程领域细分未公布"
+              "州及地方公立高等院校（CTE跨学段父职业）"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.37",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27370,10 +27424,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：来源未公布按课程领域（农业、商业、计算机、家政、工业技术等）细分的工资中位数。"
+              "66,760美元/年"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.38",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27381,10 +27438,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 未公布按课程领域细分的工资；本页不推测该部分构成或工资。"
+              "BLS OOH2025初中、高中及高教CTE合并的行业年薪中位数；非25-2023精确分行业值。精确本职业行业工资仍缺。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.39",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27392,10 +27452,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "地区与学区（未在本页汇总）"
+              "地方公立中小学（CTE跨学段父职业）"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.40",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27403,10 +27466,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未整理可比较的地区或学区工资表；O*NET提供州和邮编查询入口，不等于地区数据未公布。"
+              "66,020美元/年"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.41",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27414,10 +27480,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "查询目标州或地区时，另核年份、职业代码与年薪口径；不从未汇总推断不存在。"
+              "BLS OOH2025初中、高中及高教CTE合并的行业年薪中位数；非25-2023精确分行业值。精确本职业行业工资仍缺。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.42",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27425,10 +27494,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "职称与教研职责细分未公布"
+              "私立技术与职业学校（CTE跨学段父职业）"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.43",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27436,10 +27508,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：来源未公布按职称层级或教研管理职责细分的工资中位数。"
+              "60,380美元/年"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.44",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27447,10 +27522,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 未公布按职称与教研职责细分的工资；本页不推测该部分构成或工资。"
+              "BLS OOH2025初中、高中及高教CTE合并的行业年薪中位数；非25-2023精确分行业值。精确本职业行业工资仍缺。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.45",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27480,7 +27558,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资分位来自O*NET展示的2025 OEWS细分职业全国年薪；就业使用BLS最新2025—2035预测。行业100%教育服务为O*NET2024分类，不能作为工资差异证据。"
+              "工资分位来自O*NET展示的2025 OEWS细分职业全国年薪；就业使用BLS最新2025—2035预测。行业100%教育服务为O*NET本轮行业页面，不能作为工资差异证据。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.48",
@@ -27765,10 +27843,10 @@
                 "url": "https://www.onetonline.org/link/details/25-2023.00"
               },
               {
-                "entity": "O*NET-SOC 25-2023.00 职业摘要（就业与预测字段）",
+                "entity": "BLS表1.2本职业2025—2035预测",
                 "id": "link-16",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/25-2023.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 全国工资分位页面（25-2023.00）",
@@ -27826,11 +27904,16 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "三种兴趣的组合与岗位任务一致：既要面向青春前期学生长期讲解与陪伴，也要按课程标准与制度与记录要求执行，还要设计任务情境与材料与活动。",
+              "O*NET摘要兴趣代码为S；详细页社会100/常规47/艺术40/研究39/现实38/企业21分别是兴趣维度评分，前三分数不等于官方SCA代码或个人胜任阈值。教学、程序执行和任务设计可作编辑行为比较。",
               "若你既不愿把同一内容按不同基础讲好几遍，也不愿按制度如实记录与上报，兴趣代码不足以支持选择该职业。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.fit.personality-fit-block.4",
+          "source_refs": [
+            "details-current",
+            "summary-current",
+            "editor-current"
+          ],
           "type": "list"
         },
         {
@@ -28029,10 +28112,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力有帮助：需要在青春期学生的行为波动、家长质询与工作量压力下保持稳定并按制度沟通与上报。但这类能力不能用单一分数定义，也不能替代教师资格、课程标准与学校制度。"
+              "编辑观察建议关注学生行为波动、家长沟通和压力下的情绪调节，结合实际教学行为核；未取得本职业情绪测试预测绩效的效度证据，分数不替代资格、课程标准或学校制度。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.fit.personality-fit-block.22",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28051,7 +28138,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能在被指出教学或记录问题时按教研意见改进，比情绪分数高低更重要。",
+              "编辑观察建议：教学或记录问题被指出时，核是否按教研意见复查改进；未取得与情绪分数的比较效度。",
               "愿意承认判断不确定并求助于教研组与学校指定岗位，是专业能力的一部分。"
             ]
           },
@@ -28096,10 +28183,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "补学校运行、预算与管理；行政岗也可能授课。"
+              "教育行政管理者（幼儿园至中等教育）"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.fit.personality-fit-block.28",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28129,10 +28219,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "补个别咨询及转介能力；不把课程教学经验等同咨询资格。"
+              "教育指导与职业顾问"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.fit.personality-fit-block.31",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28162,10 +28255,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "补学科与高等教育教学能力；有纯教学或教研结合岗位，要求另核。"
+              "计算机科学教师（高等教育）"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.fit.personality-fit-block.34",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28195,10 +28291,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "补教育学专业与高等教育课程设计；不一概要求所有岗位科研。"
+              "教育学教师（高等教育）"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.fit.personality-fit-block.37",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28228,10 +28327,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "补对应学科及高等教育教学能力，按岗位核是否兼研究。"
+              "家庭与消费科学教师（高等教育）"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.fit.personality-fit-block.40",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28261,10 +28363,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "补目标学科与学业评量，核现有资格范围及招聘条件。"
+              "普通初中教师（不含特教与CTE）"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.fit.personality-fit-block.43",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28305,7 +28410,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合与否不取决于内外向。工作情境显示 58% 持续与他人接触、67% 每天进行公开演讲、55% 每天面对面讨论，同时 65% 每周工作超过 40 小时、47% 每天需要处理不愉快或愤怒或无礼的人、69% 站立时间约占一半；能否在青春前期学生面前把要求讲清并把记录填全，比外向程度更关键。"
+              "美国情境问答58%持续接触、67%每天演讲、55%每天面谈，65%周工时超过40小时、47%每天处理不愉快的人、69%站立约半时。编辑观察建议：核表达、记录与反馈接受；本轮未取得与外向性的比较效度。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.fit.personality-fit-block.47",
@@ -28371,10 +28476,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力确实有帮助：需要在青春期学生的行为波动、家长质询与工作量压力下保持稳定并按制度沟通与上报。但这类能力不能用单一分数定义，也不能替代教师资格、课程标准与学校制度。"
+              "编辑观察建议关注学生行为波动、家长沟通和压力下的情绪调节，结合实际教学行为核；未取得本职业情绪测试预测绩效的效度证据，分数不替代资格、课程标准或学校制度。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.fit.personality-fit-block.53",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28404,10 +28513,16 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "你能按课程标准完成任务设计与教学与评量并留下可追溯证据；你愿意在工具或场地不具备条件、超出任教范围或涉及学生保护事项时先停止并按程序报告，而不是自行处置。"
+              "编辑观察建议核教学设计、评量与记录行为；设施隐患按制度停用防护，学生伤害须及时救助及依法报告，不能笼统要求先停止或一概禁止本人职责内处理。中国未成年人保护法11条要求密切接触单位及工作人员发现侵害、疑似侵害或其他危险时立即向公安、民政、教育等有关部门报告，校内报备不能替代或延误；学校保护规定48/49条要求本人职责内及时处理、必要时外部报告和及时救助，不能先等校内批准。美国义务另按州法核。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.fit.personality-fit-block.56",
+          "source_refs": [
+            "editor-current",
+            "safety-current",
+            "school-current",
+            "minor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28680,16 +28795,16 @@
                 "url": "https://www.onetonline.org/link/summary/25-2023.00"
               },
               {
-                "entity": "中华人民共和国教育部（教师资格条例与教师资格制度公开信息入口）",
+                "entity": "中小学幼儿园安全管理办法",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.moe.gov.cn/s78/A10/moe_918/tnull_11555.html"
+                "url": "https://hudong.moe.gov.cn/srcsite/A02/s5911/moe_621/200606/t20060630_180470.html"
               },
               {
-                "entity": "教育部《未成年人学校保护规定》",
+                "entity": "未成年人学校保护规定",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.moe.gov.cn/srcsite/A02/s5911/moe_621/202106/t20210601_534640.html"
+                "url": "https://hudong.moe.gov.cn/srcsite/A02/s5911/moe_621/202106/t20210601_534640.html"
               },
               {
                 "entity": "O*NET-SOC 25-2023.00 详细资料（任务与工作活动）",
@@ -28698,10 +28813,10 @@
                 "url": "https://www.onetonline.org/link/details/25-2023.00"
               },
               {
-                "entity": "美国联邦职业教育与中间年级 CTE 政策信息（OCTAE）",
+                "entity": "中华人民共和国未成年人保护法（2024修正）",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://octae.ed.gov/resources/cte-middle-grades"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_54358c05e57642ab895176413f7cd4d7.html"
               }
             ]
           },
@@ -28768,10 +28883,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "课前做风险评估并按清单检查工具与材料与场地与用电与网络环境；讲清禁止动作与个人防护与隔离要求；学生操作时持续巡视并立即纠正不安全行为；发现隐患先停止使用并隔离记录，再报告与安排整改。"
+              "编辑建议课前核设备材料及场地并监督学生安全使用；中国学校安全办法18条要求存在隐患设施停止使用并维修、更换、防护或警示；具体设备维修和恢复由学校分工制度核，不能由页面授予。发生伤害及时救助，记录和报备不能延误。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.risk.career-risk-cards.13",
+          "source_refs": [
+            "editor-current",
+            "details-current",
+            "safety-current"
+          ],
           "type": "prose"
         },
         {
@@ -28801,10 +28921,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "学生成绩、出勤、行为与家庭信息以及课堂数据属敏感信息，处理或披露不当会造成隐私与合规后果。"
+              "中国个人信息保护法28条明确不满14岁未成年人的个人信息属敏感个人信息；其余学生记录依内容与风险分类，不将全部成绩、出勤或家庭信息一概认定法定敏感信息。处理仍须合法目的、必要范围和权限保护；学校保护规定10条要求保密学生及家庭隐私并不公开成绩名次。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.risk.career-risk-cards.16",
+          "source_refs": [
+            "privacy-current",
+            "school-current"
+          ],
           "type": "prose"
         },
         {
@@ -28812,10 +28936,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国学校保护规定要求不公开成绩、名次及个人家庭隐私；美国适用FERPA的记录披露原则需书面同意，也有合法教育利益等例外。按法域与授权最小化访问，编辑建议不输入未经批准的外部工具；不一概把所有个人设备都说成违法。"
+              "中国学校保护规定10条支持学生家庭隐私保密、不公开成绩名次。美国FERPA99.1适用于相应联邦资金学校；99.30记录个人身份信息披露一般须书面同意，99.31有合法教育利益等例外。编辑建议按法域核权限，不把一切个人设备使用一概认定违法。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.risk.career-risk-cards.17",
+          "source_refs": [
+            "school-current",
+            "ferpa-current",
+            "privacy-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28856,10 +28986,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按过程与成品两个维度评分并写明依据，保留过程证据；成绩改动须注明原因与时间，接受教研与复核。"
+              "编辑评量建议分别记录过程与成品依据、说明成绩改动、接受复核；学校保护规定11条要求公平评价，不规定每门课统一评分比例或记录程序。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.risk.career-risk-cards.21",
+          "source_refs": [
+            "school-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28900,10 +29034,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在职业探索与分流建议中说明依据与不确定性，避免按性别或家庭背景或成绩预设方向；对个别学生的建议以可观察证据为基础并留存记录，接受家长与同事质疑。"
+              "学校保护规定6条支持平等对待、不按性别家庭条件歧视；编辑建议职业探索说明证据和不确定性，不预设方向。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.risk.career-risk-cards.25",
+          "source_refs": [
+            "school-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28988,10 +29126,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按学校与行业更新安排再培训与教研，保留培训与授权记录；引入新工具或新设备前完成风险评估与试运行，只在授权范围内指导。"
+              "编辑建议依实际学校培训、设备制度和分工补能力；中国学校安全办法18条要求存在隐患设施停止使用并维修、更换、防护或警示；具体设备维修和恢复由学校分工制度核，不能由页面授予。发生伤害及时救助，记录和报备不能延误。 本轮没有统一试运行和授权手续证据，不能把建议写成全国门槛。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.risk.career-risk-cards.33",
+          "source_refs": [
+            "editor-current",
+            "safety-current"
+          ],
           "type": "prose"
         },
         {
@@ -29021,10 +29163,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆教师资格与任教范围的公开要求范围（含初级中学教师资格与中等职业学校专业课与实习指导教师资格属不同类别），不构成对具体机构或个人的合规定性。"
+              "学校安全办法16/18/22条支持校长负责、隐患停用及实验室制度；不由页面授予个人维修或恢复权限。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.risk.career-risk-cards.36",
+          "source_refs": [
+            "safety-current"
+          ],
           "type": "prose"
         },
         {
@@ -29032,10 +29177,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明官方任务、工作活动与工作情境口径，不用于风险评估。"
+              "学校保护规定6/10/11/41/47—49条支持公平、隐私、学校责任、报告和及时救助。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.risk.career-risk-cards.37",
+          "source_refs": [
+            "school-current"
+          ],
           "type": "prose"
         },
         {
@@ -29043,10 +29191,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国学校保护规定支持学生平等、公正评价、隐私和报告机制；不是全国职业分类，也不替代未成年人保护法立即外部报告义务。"
+              "O*NET本职业任务与工作情境，群体责任问答不是学生事故率。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.risk.career-risk-cards.38",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -29054,10 +29205,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明联邦职业教育拨款与州计划对课程设置的影响口径，不用于风险评估与个体就业判断。"
+              "未成年人保护法2024修正11条立即外部报告与62条单位查询，不能由内部报备替代。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.risk.career-risk-cards.39",
+          "source_refs": [
+            "minor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -29319,10 +29473,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能负责课程方案与教学质量监督与教师培训与工具材料与场地安全管理，并对课程体系运行负责。"
+              "编辑课程管理方向按实际分工和任命承担职责；学校安全16条、学校保护41条校长负责制不因教师晋升改变。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.path.career-path-block.18",
+          "source_refs": [
+            "editor-current",
+            "safety-current",
+            "school-current"
+          ],
           "type": "prose"
         },
         {
@@ -29627,10 +29786,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "对课程体系与教师发展整体负责。"
+              "编辑课程和教师发展职责按实际分工确定，不自动承担学校整体责任。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.path.career-path-block.46",
+          "source_refs": [
+            "editor-current",
+            "school-current"
+          ],
           "type": "prose"
         },
         {
@@ -29649,10 +29812,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本科相关专业或同等学历并具备相关实践经历，完成安全培训。"
+              "编辑实训方向核目标教师类别、学科、学历、实践与安全能力；中国教师法11条初中及初级职业学校文化、专业课资格要求师范专科或其他大专及以上；资格条例4/5条区分教师类别，原则可任同级及以下、高中与中职资格互通、实习指导另有限制；实际学科、认定和聘用另核。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.path.career-path-block.48",
+          "source_refs": [
+            "editor-current",
+            "teacher-law-current",
+            "qualification-current"
+          ],
           "type": "prose"
         },
         {
@@ -29847,10 +30015,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "对场地与设备条件合规与安全体系整体负责。"
+              "编辑设备管理方向按实际岗位分工承担相应管理职责，不自动取得所有设备修复或复用权。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.path.career-path-block.66",
+          "source_refs": [
+            "editor-current",
+            "safety-current"
+          ],
           "type": "prose"
         },
         {
@@ -29869,10 +30041,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本科相关专业或同等学历，完成学生沟通与职业信息相关培训。"
+              "编辑学生指导方向补沟通、职业信息和转介训练，核具体岗位资格聘用；中国未成年人保护法11条要求密切接触单位及工作人员发现侵害、疑似侵害或其他危险时立即向公安、民政、教育等有关部门报告，校内报备不能替代或延误；学校保护规定48/49条要求本人职责内及时处理、必要时外部报告和及时救助，不能先等校内批准。美国义务另按州法核。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.path.career-path-block.68",
+          "source_refs": [
+            "editor-current",
+            "school-current",
+            "minor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30067,10 +30244,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "对课程体系合规与学生权益整体负责。"
+              "编辑合作课程方向按分工承担相应事项，不自动取得所有课程审批或项目合规责任。中国未成年人保护法11条要求密切接触单位及工作人员发现侵害、疑似侵害或其他危险时立即向公安、民政、教育等有关部门报告，校内报备不能替代或延误；学校保护规定48/49条要求本人职责内及时处理、必要时外部报告和及时救助，不能先等校内批准。美国义务另按州法核。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.path.career-path-block.86",
+          "source_refs": [
+            "editor-current",
+            "school-current",
+            "minor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30106,41 +30288,44 @@
               [
                 "教学实习或助教岗位（带教为主）",
                 "在带教下完成听课与材料准备与作业批改与学生答疑，学习课程标准与记录要求。",
-                "用工方看重相关专业学历、教育实习经历、沟通能力与记录习惯。",
+                "编辑核对建议：核目标岗位是否要求相关专业学历、教育实习经历、沟通能力与记录习惯。",
                 "提交一份含任务设计初稿与课堂观察记录与批改说明的练习材料。",
                 "在带教和授权范围内开展教学评量；发现侵害、疑似侵害或危险仍须履行法定报告义务，不越权调查。"
               ],
               [
                 "课程教学岗位（按学段与科目授权）",
                 "按课程标准独立完成任务设计与授课与过程评量与记录，管理课堂秩序与材料安全。",
-                "用工方看重教师资格与任教学段与科目范围、课堂教学质量与记录完整度。",
+                "编辑核对建议：核目标岗位是否要求教师资格与任教学段与科目范围、课堂教学质量与记录完整度。",
                 "提交一份含任务情境与过程评量表与评分依据的样例。",
                 "可任教的学段与科目按教师资格与学校授权确定，不因学历自动扩大。"
               ],
               [
                 "课程负责人或场地与设备安全岗位",
                 "承担课程方案与教学标准或工具材料与场地安全审核与培训与带教职责。",
-                "用工方看重教学资历、课程设计或安全管理经验与团队协作。",
+                "编辑核对建议：核目标岗位是否要求教学资历、课程设计或安全管理经验与团队协作。",
                 "提交一份含课程方案或安全审核与培训安排的说明材料。",
                 "课程审批与项目开设仍由学校与主管部门负责；安全审核职责不含人事与处置权。"
               ],
               [
                 "学生指导与职业探索岗位",
                 "承担职业信息检索与探索活动组织与个别学生跟进与家校沟通。",
-                "用工方看重学生沟通与职业信息检索与个别化支持经验。",
+                "编辑核对建议：核目标岗位是否要求学生沟通与职业信息检索与个别化支持经验。",
                 "提交一份含探索活动设计与个别跟进与转介路径的方案样例。",
                 "分流建议须说明依据与不确定性，不替代学校与家长的决定权。"
               ],
               [
                 "相邻方向转入（教育行政、教育指导与职业顾问、高校学科教师、普通初中教师）",
                 "把原有经验映射到课程标准与任务设计与过程评量与安全与记录要求。",
-                "用工方看重可迁移的教学与沟通与内容设计经验。",
+                "编辑核对建议：核目标岗位是否要求可迁移的教学与沟通与内容设计经验。",
                 "提交一份把既有工作经验转写为教学与评量语言的说明。",
                 "转岗不自动带来教师资格或任教范围；须按目标法域制度取得并接受学校聘用。"
               ]
             ]
           },
           "id": "career-technical-education-teachers-middle-school.path.entry-role-comparison.1",
+          "source_refs": [
+            "editor-current"
+          ],
           "title": "入门方向比较",
           "type": "table"
         },
@@ -30154,15 +30339,15 @@
                 "values": [
                   "O*NET 把该职业列为 Job Zone Four（SVP 7.0 至低于 8.0），多数此类职业需要四年制学士学位但部分岗位不要求。",
                   "可核学校带教、听课及培训安排；BLS典型在岗培训None不排除具体学校安排。摘要提供学徒探索入口，不证明本职业项目已列出。",
-                  "该职业在 O*NET 页面未标注 Bright Outlook；在美国通常需要州教师资格或相应执照。"
+                  "未标Bright Outlook不代表无空缺；美国BLS概括常见学士与所教领域工作经验，公立学校州许可或认证依州路线核；专业认证与许可、学校聘用分别判断。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "入职通常需完成教师资格与背景与健康相关审查，并按学校要求完成学生保护与场地与材料安全培训。",
-                  "涉及学生记录与家庭信息与课堂数据的岗位须遵守隐私与记录管理要求。",
-                  "学生保护事项与成绩与升级决定按学校制度由相应岗位处理与签署，超出授权的操作须上报。"
+                  "中国未成年人保护法62条要求密切接触单位招聘及每年查询性侵害、虐待、拐卖、暴力伤害等犯罪记录；不是一概由个人无犯罪证明替代。",
+                  "中国个人信息保护法28条明确不满14岁未成年人的个人信息属敏感个人信息；其余学生记录依内容与风险分类，不将全部成绩、出勤或家庭信息一概认定法定敏感信息。处理仍须合法目的、必要范围和权限保护；学校保护规定10条要求保密学生及家庭隐私并不公开成绩名次。",
+                  "中国未成年人保护法11条要求密切接触单位及工作人员发现侵害、疑似侵害或其他危险时立即向公安、民政、教育等有关部门报告，校内报备不能替代或延误；学校保护规定48/49条要求本人职责内及时处理、必要时外部报告和及时救助，不能先等校内批准。美国义务另按州法核。"
                 ]
               },
               {
@@ -30184,6 +30369,12 @@
             ]
           },
           "id": "career-technical-education-teachers-middle-school.path.employer-evidence.1",
+          "source_refs": [
+            "ooh-current",
+            "minor-current",
+            "privacy-current",
+            "school-current"
+          ],
           "title": "雇主通常看什么证据",
           "type": "cards"
         },
@@ -30429,7 +30620,7 @@
               [
                 "在岗培训（按学校安排核）",
                 "所有新入职人员",
-                "决定能否独立承担本课程的日常教学与评量。",
+                "提供具体课程和制度学习支持，不能单独决定独立教学权限。",
                 "按学校和岗位核，不作为统一门槛；BLS表1.2的典型在岗培训为None，不等于每校都没有带教。",
                 "可询问教研带教、听课或内部考核安排；这些是核对示例，不是本轮招聘样本结论。",
                 "按在岗时间投入。",
@@ -30440,27 +30631,27 @@
                 "在中小学与中职任教的教师",
                 "决定能否合法任教特定学段与科目。",
                 "中国依法取得适用教师资格，存在本级及以下和高中/中职通用规则；美国公立学校按州证照核，私校要求不同。",
-                "通常要求教育课程与教学实习与考试或认定。",
-                "按培训与考试与认定与有效期维持费用投入。",
+                "按目标法域、教师类别及具体路线核；中国教师法11条初中及初级职业学校文化、专业课资格要求师范专科或其他大专及以上；资格条例4/5条区分教师类别，原则可任同级及以下、高中与中职资格互通、实习指导另有限制；实际学科、认定和聘用另核。 美国BLS概括常见学士与所教领域工作经验，公立学校州许可或认证依州路线核；专业认证与许可、学校聘用分别判断。",
+                "证据不足：本轮未核各州和中国具体认定路线的费用、投入或有效期。",
                 "教师资格不等于学校聘用或可任教全部科目，实操项目另需审批。"
               ],
               [
                 "专业认证（如 National Board Certification - Career & Technical Education）",
                 "希望提升专业认可度的在岗教师",
-                "影响专业认可与部分岗位竞争力。",
+                "提供专业认证查询线索，本轮未证认证对本职业录用或薪酬的效果。",
                 "属于行业或专业机构认证：O*NET 该职业页共列出 1 项认证。",
-                "NBPTS可未满3年教学先开始，取得前须候选第3年6月30日前达到3年教学。首个组件注册前须持有效州教学执照；CTE学士条件取决于州对现执照的要求。",
-                "按培训与考试与维持费用投入。",
+                "NBPTS可未满3年教学先开始，须第三候选年6月30日前达到3年；首组件注册购买前有效州教学许可或符合该州既定许可条件；CTE学士取决于州对现执照要求；三个教学年份各须有效执照。四组件首三年内尝试，完成可1—5年，不能误写所有人开始前须满3年。",
+                "证据不足：未核当前组件及维持费用，不据目录承诺统一投入。",
                 "认证不等于教师资格、任教范围或课程审批权。"
               ],
               [
                 "实操项目与场地设备审批",
                 "承担动手实操教学的教师",
                 "决定能否开展特定实操项目与使用特定工具设备。",
-                "属于学校与主管部门的制度要求，而非个人资格。",
+                "设施安全和实验室制度按学校安全办法18/22条；具体课程和项目批准手续另核。",
                 "常见依据为场地与设备条件、风险评估、防护与隔离设施与人员培训记录。",
                 "按设备与场地与培训投入。",
-                "未获审批不得开展对应实操项目；条件变化须重新评估。"
+                "中国学校安全办法18条要求存在隐患设施停止使用并维修、更换、防护或警示；具体设备维修和恢复由学校分工制度核，不能由页面授予。发生伤害及时救助，记录和报备不能延误。"
               ],
               [
                 "内部资格与教研晋升评估",
@@ -30474,6 +30665,14 @@
             ]
           },
           "id": "career-technical-education-teachers-middle-school.path.credential-decision.1",
+          "source_refs": [
+            "nbpts-current",
+            "qualification-current",
+            "teacher-law-current",
+            "ooh-current",
+            "safety-current",
+            "editor-current"
+          ],
           "title": "资格选择",
           "type": "table"
         },
@@ -30630,10 +30829,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "BLS表1.2：2025—2035职业预测",
+                "entity": "BLS表1.2本职业2025—2035预测",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/25-2023.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET-SOC 25-2023.00 行业分布",
@@ -30711,10 +30910,17 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国工资为2025 OEWS细分职业年薪：中位65,030美元，第10至90分位49,200至101,890美元。BLS 2025—2035预测：2025年与2035年就业均显示约16,600人；表1.2变化率-0.5%、净变化约-100人、年均空缺约1,000个。人数及净变化独立取整，不能用显示的两端人数相减。O*NET仍展示旧2024—2034预测，本页就业改用BLS当前表1.2；预测不是实际结果，也不是AI因果研究。 中国仅保留企业教学人员代理，不代表公办初中或本职业精确工资。"
+              "美国2025本职业年薪中位65,030美元，P10—P90为49,200—101,890美元。美国25-2023初中CTE教师BLS表1.2：2025和2035就业均显示16,600人，变化率-0.5%，净变化约-100人，年均空缺约1,000个（含替代需求，非净新增）。各数独立取整，两端显示人数不能相减推净变化。O*NET当前也已为2025—2035预测，变化率显示-1%；本页保留表1.2精度，预测不是AI因果证据。 中国企业教学人员分位是宽代理，非公办初中或精确职业工资；NBS2025年教育行业城镇非私营133,539元、私营63,908元税前年均工资，均涵盖多职业，非本职业均值、中位数、起薪或月薪；与企业教学人员工资分位代理分别展示。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.market-signals.market-signal-card.8",
+          "source_refs": [
+            "wages-current",
+            "bls-current",
+            "trends-current",
+            "mhr-current",
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30744,7 +30950,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "当前BLS表1.2细分职业预测；O*NET仍显示旧2024—2034口径，不能混在一行。"
+              "当前BLS表1.2与O*NET均为2025—2035本职业预测；BLS变化率-0.5%、O*NET显示-1%，精度不同，不混同或按舍入人数反算。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.market-signals.market-signal-card.11",
@@ -30953,10 +31159,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS表1.2细分SOC25-2023的2025—2035预测；端点人数和变化独立取整。"
+              "BLS表1.2本职业预测，人数与净变化独立取整，年均空缺含替代；不是AI因果或个人机会。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.market-signals.market-signal-card.30",
+          "source_refs": [
+            "bls-current"
+          ],
           "type": "prose"
         },
         {
@@ -31367,10 +31576,10 @@
           "data": {
             "entries": [
               "身份为O*NET-SOC25-2023.00，Job Zone Four/SVP7至低于8，摘要未标Bright Outlook；教授初中阶段职业技术科目。任教条件按所在地与学校核，学生保护处理和报告按职责与法定义务履行。",
-              "BLS 2025—2035预测：2025年与2035年就业均显示约16,600人；表1.2变化率-0.5%、净变化约-100人、年均空缺约1,000个。人数及净变化独立取整，不能用显示的两端人数相减。O*NET仍展示旧2024—2034预测，本页就业改用BLS当前表1.2；预测不是实际结果，也不是AI因果研究。 美国工资分位仍为2025OEWS细分职业全国年薪，不能把CTE合并行业工资代填。",
-              "边界三：本轮所核中国企业工资表未单列该职业分布；本条证据路由可得的官方数值为「企业教学人员」父级代理（企业教学人员宽代理，2025 年工资价位中位数 5.31 万元/年，第 10 与第 90 分位 3.00 万元与 13.33 万元/年）。本页按父级代理发布该数值并在事实登记、中国大陆薪资表与市场信号板块逐处标注它不是本职业精确口径；不使用行业平均填补，也不把美国数字换算为人民币；并说明初级中学教师资格与中等职业学校专业课与实习指导教师资格属于不同类别，不能直接用美国 25-2023 名称映射。",
+              "本职业2025年薪分位准确保留。美国25-2023初中CTE教师BLS表1.2：2025和2035就业均显示16,600人，变化率-0.5%，净变化约-100人，年均空缺约1,000个（含替代需求，非净新增）。各数独立取整，两端显示人数不能相减推净变化。O*NET当前也已为2025—2035预测，变化率显示-1%；本页保留表1.2精度，预测不是AI因果证据。 父级CTE三学段行业工资另列，不能替代25-2023精确工资。",
+              "中国2025企业教学人员208工资分位代理中位5.31万元/年，P10/25/50/75/90为3/3.9/5.31/8.2/13.33万元/年；仅企业各级各类教育专业人员，非本职业或公办初中。NBS2025年教育行业城镇非私营133,539元、私营63,908元税前年均工资，均涵盖多职业，非本职业均值、中位数、起薪或月薪；与企业教学人员工资分位代理分别展示。 中国教师法11条初中及初级职业学校文化、专业课资格要求师范专科或其他大专及以上；资格条例4/5条区分教师类别，原则可任同级及以下、高中与中职资格互通、实习指导另有限制；实际学科、认定和聘用另核。",
               "边界四：编辑练习与教学建议均为模拟材料，读者不应据此进行真实教学评量、成绩认定、学生保护事项处置或安全结论；练习结果不构成教师资格、任教授权或实操项目与场地设备审批资格。",
-              "来源范围：职业任务/教育/兴趣/技能与工资分位；BLS当前预测；中国企业教学人员宽代理；教师资格与学生保护、隐私和法定报告；美国FERPA；NBPTS专业认证及ILO全球任务暴露。编辑T1和工具建议不是真实课堂证据，不借未核全文框架背书。"
+              "实际依据O*NET九入口、BLS表1.2及CTE OOH、人社部企业工资表、NBS教育行业工资、中国教师法/资格条例/学校安全与保护/未成年人及个人信息保护法、FERPA、NBPTS政策及美国教育部2023教育AI报告；编辑模拟材料和建议不是真实课堂效果或资格证明。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.sources.boundary.1",
@@ -31385,7 +31594,14 @@
             "onet-details",
             "onet-hot-tech",
             "onet-industry",
-            "onet-training"
+            "onet-training",
+            "bls-current",
+            "ooh-current",
+            "mhr-current",
+            "nbs-current",
+            "ed-ai-current",
+            "privacy-current",
+            "school-current"
           ],
           "type": "list",
           "visibility": "internal"
@@ -31406,10 +31622,26 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要依据：O*NET任务、教育/兴趣/技能、工资分位与认证发现；BLS当前表1.2及CTE OOH；人社部2025企业薪酬调查；中国教师资格条例、教师法、学校保护规定与未成年人保护法；美国FERPA；NBPTS认证政策；ILO全球任务暴露研究。"
+              "主要实际依据：O*NET九入口、BLS表1.2及CTE OOH、人社部2025企业工资表、NBS2025教育行业工资、中国教师法/资格条例/学校安全与保护/未成年人及个人信息保护法、美国FERPA、NBPTS资格政策及美国教育部2023教育AI报告。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.sources.source-card.2",
+          "source_refs": [
+            "details-current",
+            "bls-current",
+            "ooh-current",
+            "mhr-current",
+            "nbs-current",
+            "teacher-law-current",
+            "qualification-current",
+            "safety-current",
+            "school-current",
+            "minor-current",
+            "privacy-current",
+            "ferpa-current",
+            "nbpts-current",
+            "ed-ai-current"
+          ],
           "type": "prose"
         },
         {
@@ -31417,10 +31649,21 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：O*NET2026页面；美国工资2025OEWS，行业分布2024；BLS预测2025—2035；招聘2025全年；企业工资2025/2026-07-08发布；资格与保护法规按当前公开文本；本轮核查2026-10-03。"
+              "检索2026-10-09；本职业O*NET2026页，工资2025、预测2025—2035；行业教育服务100%当前入口未明示基期；Lightcast2025全年；企业工资2025/2026-07-08、NBS2025；学校法规与NBPTS依实际条款；2023教育AI报告是建议非岗位效果。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.sources.source-card.3",
+          "source_refs": [
+            "summary-current",
+            "wages-current",
+            "trends-current",
+            "industry-current",
+            "hot-current",
+            "mhr-current",
+            "nbs-current",
+            "nbpts-current",
+            "ed-ai-current"
+          ],
           "type": "prose"
         },
         {
@@ -31428,10 +31671,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "美国工资为2025 OEWS细分职业年薪：中位65,030美元，第10至90分位49,200至101,890美元。BLS 2025—2035预测：2025年与2035年就业均显示约16,600人；表1.2变化率-0.5%、净变化约-100人、年均空缺约1,000个。人数及净变化独立取整，不能用显示的两端人数相减。O*NET仍展示旧2024—2034预测，本页就业改用BLS当前表1.2；预测不是实际结果，也不是AI因果研究。 中国仅保留企业教学人员代理，不代表公办初中或本职业精确工资。"
+              "美国25-2023初中CTE教师BLS表1.2：2025和2035就业均显示16,600人，变化率-0.5%，净变化约-100人，年均空缺约1,000个（含替代需求，非净新增）。各数独立取整，两端显示人数不能相减推净变化。O*NET当前也已为2025—2035预测，变化率显示-1%；本页保留表1.2精度，预测不是AI因果证据。 NBS2025年教育行业城镇非私营133,539元、私营63,908元税前年均工资，均涵盖多职业，非本职业均值、中位数、起薪或月薪；与企业教学人员工资分位代理分别展示。 精确中国职业工资/城市月薪/招聘样本、AI及人格效度、学校具体设备恢复规程、美国州法和逐州许可条件仍须核。"
             ]
           },
           "id": "career-technical-education-teachers-middle-school.sources.source-card.4",
+          "source_refs": [
+            "bls-current",
+            "trends-current",
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -31868,6 +32117,380 @@
                 "publisher": "中国政府网／全国人大法规库",
                 "scope": "contextual",
                 "url": "https://www.gov.cn/banshi/2005-05/25/content_937.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "31项核心任务；新聘所需86%学士6%高中3%学士后证书；兴趣代码S，详细S100/C47/A40/I39/R38/E21",
+                  "O*NET 完整职责、情境与新聘所需学历问答",
+                  "2026-10-09当前页；工资2025/预测2025—2035"
+                ],
+                "evidence_type": "primary_document",
+                "id": "details-current",
+                "limitation": "群体统计或目录不是个人录用、学校部署或法定资格。",
+                "market": "美国",
+                "name": "O*NET 完整职责、情境与新聘所需学历问答",
+                "period": "2026-10-09当前页；工资2025/预测2025—2035",
+                "publisher": "美国劳工部O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/25-2023.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "middle school25-2023",
+                  "O*NET 职业摘要",
+                  "2026-10-09当前页；工资2025/预测2025—2035"
+                ],
+                "evidence_type": "primary_document",
+                "id": "summary-current",
+                "limitation": "群体统计或目录不是个人录用、学校部署或法定资格。",
+                "market": "美国",
+                "name": "O*NET 职业摘要",
+                "period": "2026-10-09当前页；工资2025/预测2025—2035",
+                "publisher": "美国劳工部O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/25-2023.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025美元年薪49200/58690/65030/79990/101890，无时薪",
+                  "O*NET 全国工资分位",
+                  "2026-10-09当前页；工资2025/预测2025—2035"
+                ],
+                "evidence_type": "primary_document",
+                "id": "wages-current",
+                "limitation": "群体统计或目录不是个人录用、学校部署或法定资格。",
+                "market": "美国",
+                "name": "O*NET 全国工资分位",
+                "period": "2026-10-09当前页；工资2025/预测2025—2035",
+                "publisher": "美国劳工部O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/25-2023.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025和2035就业均16600；-1%显示精度；1000年均空缺",
+                  "O*NET 就业预测",
+                  "2026-10-09当前页；工资2025/预测2025—2035"
+                ],
+                "evidence_type": "primary_document",
+                "id": "trends-current",
+                "limitation": "群体统计或目录不是个人录用、学校部署或法定资格。",
+                "market": "美国",
+                "name": "O*NET 就业预测",
+                "period": "2026-10-09当前页；工资2025/预测2025—2035",
+                "publisher": "美国劳工部O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/25-2023.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "教育服务100%；当前页面未明示数据基期，不能把检索日期当统计年份",
+                  "O*NET 行业分布",
+                  "2026-10-09当前页；工资2025/预测2025—2035"
+                ],
+                "evidence_type": "primary_document",
+                "id": "industry-current",
+                "limitation": "群体统计或目录不是个人录用、学校部署或法定资格。",
+                "market": "美国",
+                "name": "O*NET 行业分布",
+                "period": "2026-10-09当前页；工资2025/预测2025—2035",
+                "publisher": "美国劳工部O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/25-2023.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "69项均未提供百分比，Lightcast2025全年，非采用率",
+                  "O*NET 招聘软件信号",
+                  "2026-10-09当前页；工资2025/预测2025—2035"
+                ],
+                "evidence_type": "primary_document",
+                "id": "hot-current",
+                "limitation": "群体统计或目录不是个人录用、学校部署或法定资格。",
+                "market": "美国",
+                "name": "O*NET 招聘软件信号",
+                "period": "2026-10-09当前页；工资2025/预测2025—2035",
+                "publisher": "美国劳工部O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/25-2023.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "452学校项目，毕业人数非在岗学历或准入",
+                  "O*NET 关联培训项目",
+                  "2026-10-09当前页；工资2025/预测2025—2035"
+                ],
+                "evidence_type": "primary_document",
+                "id": "training-current",
+                "limitation": "群体统计或目录不是个人录用、学校部署或法定资格。",
+                "market": "美国",
+                "name": "O*NET 关联培训项目",
+                "period": "2026-10-09当前页；工资2025/预测2025—2035",
+                "publisher": "美国劳工部O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtraining/25-2023.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "1项National Board CTE专业认证，不是州教师许可",
+                  "O*NET 关联认证目录",
+                  "2026-10-09当前页；工资2025/预测2025—2035"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cert-current",
+                "limitation": "群体统计或目录不是个人录用、学校部署或法定资格。",
+                "market": "美国",
+                "name": "O*NET 关联认证目录",
+                "period": "2026-10-09当前页；工资2025/预测2025—2035",
+                "publisher": "美国劳工部O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localcert/25-2023.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "25-2023 16.6→16.6千人；净-.1千人/-0.5%；年均空缺1.0千；65030美元；学士/相关经验少于5年/典型OJT None",
+                  "BLS表1.2职业预测与特征",
+                  "2025—2035"
+                ],
+                "evidence_type": "official_statistics",
+                "id": "bls-current",
+                "limitation": "仅按文档、法域和明确人群使用；不能外推精确职业、实际效果或统一准入。",
+                "market": "美国",
+                "name": "BLS表1.2职业预测与特征",
+                "period": "2025—2035",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "父级包含初中高中高教；父级工资65150与行业67200/66760/66020/60380不等于初中65030",
+                  "BLS职业与技术教育教师OOH",
+                  "2025工资/2025—2035预测"
+                ],
+                "evidence_type": "official_statistics",
+                "id": "ooh-current",
+                "limitation": "仅按文档、法域和明确人群使用；不能外推精确职业、实际效果或统一准入。",
+                "market": "美国",
+                "name": "BLS职业与技术教育教师OOH",
+                "period": "2025工资/2025—2035预测",
+                "publisher": "BLS",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/ooh/education-training-and-library/career-and-technical-education-teachers.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2/4/5/7条分类、同级及以下、高中中职互通及实习指导例外",
+                  "教师资格条例",
+                  "1995第188号"
+                ],
+                "evidence_type": "primary_document",
+                "id": "qualification-current",
+                "limitation": "仅按文档、法域和明确人群使用；不能外推精确职业、实际效果或统一准入。",
+                "market": "中国大陆",
+                "name": "教师资格条例",
+                "period": "1995第188号",
+                "publisher": "国务院",
+                "scope": "contextual",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/199512/t19951212_780558.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "11条初中及初级职业学校文化专业课师范专科或其他大专及以上",
+                  "中华人民共和国教师法",
+                  "1993通过/2009修正"
+                ],
+                "evidence_type": "primary_document",
+                "id": "teacher-law-current",
+                "limitation": "仅按文档、法域和明确人群使用；不能外推精确职业、实际效果或统一准入。",
+                "market": "中国大陆",
+                "name": "中华人民共和国教师法",
+                "period": "1993通过/2009修正",
+                "publisher": "教育部公布法律",
+                "scope": "contextual",
+                "url": "https://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/tnull_1314.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "11立即外部报告；62单位招聘与年度犯罪记录查询",
+                  "中华人民共和国未成年人保护法",
+                  "2024修正"
+                ],
+                "evidence_type": "primary_document",
+                "id": "minor-current",
+                "limitation": "仅按文档、法域和明确人群使用；不能外推精确职业、实际效果或统一准入。",
+                "market": "中国大陆",
+                "name": "中华人民共和国未成年人保护法",
+                "period": "2024修正",
+                "publisher": "国家市场监督管理总局公布法律",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_54358c05e57642ab895176413f7cd4d7.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "24重大权益自动化决定/28未满14岁信息敏感/31监护同意/51分类与权限",
+                  "中华人民共和国个人信息保护法",
+                  "2021法律"
+                ],
+                "evidence_type": "primary_document",
+                "id": "privacy-current",
+                "limitation": "仅按文档、法域和明确人群使用；不能外推精确职业、实际效果或统一准入。",
+                "market": "中国大陆",
+                "name": "中华人民共和国个人信息保护法",
+                "period": "2021法律",
+                "publisher": "国家网信办",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "16校长负责/18隐患停用防护/22实验室/56、57应急救助",
+                  "中小学幼儿园安全管理办法",
+                  "2006第23号"
+                ],
+                "evidence_type": "primary_document",
+                "id": "safety-current",
+                "limitation": "仅按文档、法域和明确人群使用；不能外推精确职业、实际效果或统一准入。",
+                "market": "中国大陆",
+                "name": "中小学幼儿园安全管理办法",
+                "period": "2006第23号",
+                "publisher": "教育部等十部门",
+                "scope": "contextual",
+                "url": "https://hudong.moe.gov.cn/srcsite/A02/s5911/moe_621/200606/t20060630_180470.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2含中职；6平等/10保密不公开成绩名次/11公正评量/41校长负责/47—49报告、本人职责及时处理及及时救助",
+                  "未成年人学校保护规定",
+                  "2021第50号"
+                ],
+                "evidence_type": "primary_document",
+                "id": "school-current",
+                "limitation": "仅按文档、法域和明确人群使用；不能外推精确职业、实际效果或统一准入。",
+                "market": "中国大陆",
+                "name": "未成年人学校保护规定",
+                "period": "2021第50号",
+                "publisher": "教育部",
+                "scope": "contextual",
+                "url": "https://hudong.moe.gov.cn/srcsite/A02/s5911/moe_621/202106/t20210601_534640.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "印刷3/7/16—17页教育AI机会、偏差隐私风险、教师在重大教学决定中保持控制建议",
+                  "Artificial Intelligence and the Future of Teaching and Learning",
+                  "2023报告"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ed-ai-current",
+                "limitation": "仅按文档、法域和明确人群使用；不能外推精确职业、实际效果或统一准入。",
+                "market": "美国",
+                "name": "Artificial Intelligence and the Future of Teaching and Learning",
+                "period": "2023报告",
+                "publisher": "美国教育部",
+                "scope": "contextual",
+                "url": "https://www.govinfo.gov/content/pkg/GOVPUB-ED-PURL-gpo229415/pdf/GOVPUB-ED-PURL-gpo229415.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "教育非私营133539元/私营63908元税前年均、多职业行业",
+                  "2025年城镇单位就业人员年平均工资情况",
+                  "2025数据/2026-05-15发布"
+                ],
+                "evidence_type": "official_statistics",
+                "id": "nbs-current",
+                "limitation": "仅按文档、法域和明确人群使用；不能外推精确职业、实际效果或统一准入。",
+                "market": "中国大陆",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025数据/2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "表1-1教学人员208企业各级各类教育专业人员，P10/25/50/75/90为3/3.9/5.31/8.2/13.33万元年；全国PPS；含基本工资奖金津补贴加班等",
+                  "企业薪酬调查信息（2025年）",
+                  "2025数据/2026-07-08发布"
+                ],
+                "evidence_type": "official_statistics",
+                "id": "mhr-current",
+                "limitation": "仅按文档、法域和明确人群使用；不能外推精确职业、实际效果或统一准入。",
+                "market": "中国大陆",
+                "name": "企业薪酬调查信息（2025年）",
+                "period": "2025数据/2026-07-08发布",
+                "publisher": "人力资源和社会保障部",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202607/t20260708_579822.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "99.1适用受联邦教育项目资金学校/99.30记录PII披露书面同意原则/99.31合法教育利益等例外",
+                  "FERPA法规34 CFR Part99",
+                  "2026-10-09当前公开文本"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ferpa-current",
+                "limitation": "仅按文档、法域和明确人群使用；不能外推精确职业、实际效果或统一准入。",
+                "market": "美国",
+                "name": "FERPA法规34 CFR Part99",
+                "period": "2026-10-09当前公开文本",
+                "publisher": "美国教育部学生隐私办公室",
+                "scope": "contextual",
+                "url": "https://studentprivacy.ed.gov/ferpa"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "可未满3年先开始，须第三年6月30日前达到3年；首组件注册购买前有效州执照或符合州许可条件；CTE学士依州许可要求；3年教学各年有效执照",
+                  "National Board资格政策变更",
+                  "2026-10-09现行公开政策"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbpts-current",
+                "limitation": "仅按文档、法域和明确人群使用；不能外推精确职业、实际效果或统一准入。",
+                "market": "美国",
+                "name": "National Board资格政策变更",
+                "period": "2026-10-09现行公开政策",
+                "publisher": "NBPTS",
+                "scope": "contextual",
+                "url": "https://www.nbpts.org/certification/policy-change-for-certification-requirements/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "教学、安全、学习及转岗核对建议",
+                  "费马测试本职业编辑建议",
+                  "2026-10-09"
+                ],
+                "evidence_type": "editorial_synthesis",
+                "id": "editor-current",
+                "limitation": "非实证效果、统一招聘条件或实际操作权限。",
+                "market": "跨法域",
+                "name": "费马测试本职业编辑建议",
+                "period": "2026-10-09",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": "https://www.onetonline.org/link/summary/25-2023.00"
               }
             ]
           },
@@ -32795,11 +33418,11 @@
               "type": "prose"
             },
             "链接": {
-              "$link": "career-technical-education-teachers-middle-school.ai-impact.ai-impact-table.9",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "entry": "link-19",
-              "field": "url"
+              "$source": "details-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "career-technical-education-teachers-middle-school.source-register.published.1"
             },
             "问题": "现在应该优先学什么？"
           }
@@ -34079,8 +34702,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.onet-summary"
+              "faa-design-approvals",
+              "nasa-seh"
             ],
             "id": "materials-and-shop-safety",
             "mitigation": {
@@ -34111,8 +34734,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.moe-school-protection",
-              "career.source.us-ferpa"
+              "faa-design-approvals",
+              "privacy-current",
+              "ferpa-current"
             ],
             "id": "student-records-privacy",
             "mitigation": {
@@ -34143,8 +34767,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.moe-school-protection"
+              "onet-details",
+              "faa-design-approvals"
             ],
             "id": "assessment-fairness",
             "mitigation": {
@@ -34175,8 +34799,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.moe-school-protection",
-              "career.source.editorial"
+              "faa-design-approvals"
             ],
             "id": "stereotyping-and-tracking",
             "mitigation": {
@@ -34207,8 +34830,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.cn-minors-protection",
-              "career.source.moe-school-protection"
+              "onet-17-3021",
+              "onet-details"
             ],
             "id": "safeguarding-reporting",
             "mitigation": {
@@ -34239,8 +34862,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.onet-17-3021"
+              "faa-design-approvals",
+              "nasa-seh"
             ],
             "id": "authorization-and-currency",
             "mitigation": {
@@ -34374,6 +34997,30 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "privacy-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "career-technical-education-teachers-middle-school.source-register.published.1"
+            },
+            "id": "privacy-current",
+            "label": "中华人民共和国个人信息保护法",
+            "scope": "中国个人信息分类与处理保护，实际内容和法域另核"
+          },
+          {
+            "href": {
+              "$source": "ferpa-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "career-technical-education-teachers-middle-school.source-register.published.1"
+            },
+            "id": "ferpa-current",
+            "label": "美国FERPA 34 CFR Part99",
+            "scope": "美国相应联邦资金机构记录披露及例外，非所有学校通用"
           }
         ]
       },
@@ -34426,7 +35073,7 @@
               }
             },
             {
-              "指标": "行业平均口径（本条路由不采用）",
+              "指标": "行业参考（教育，多职业）",
               "数值": {
                 "$item": "career-technical-education-teachers-middle-school.china-salary.career-snapshot-primary-locale.13",
                 "block": "china-salary",
@@ -34729,7 +35376,9 @@
             "cn-industry-science-tech-2024",
             "cn-industry-manufacturing-2024",
             "cn-professional-technical-2024",
-            "cn-urban-nonprivate-2024"
+            "cn-urban-nonprivate-2024",
+            "cn-education-nonprivate-current",
+            "cn-education-private-current"
           ],
           "sources_note": {
             "$item": "career-technical-education-teachers-middle-school.china-salary.career-snapshot-primary-locale.57",
@@ -34741,10 +35390,10 @@
             "ai_heading": "AI 会影响初中职业技术教育教师的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "中国大陆薪资参考：官方统计口径与父级代理",
-            "scenario_caption": "学历背景、岗位方向与说明（编辑整理，不是薪资统计）",
-            "scenario_heading": "不同学历背景对应哪些岗位方向？",
+            "scenario_caption": "教育、教师资格、教研经验与职称核对示例（编辑整理，不是学历或工资分布）",
+            "scenario_heading": "不同教育、经验与资格背景可核对哪些岗位方向？",
             "scenario_interpretation_label": "说明与核对建议",
-            "scenario_role_label": "学历背景",
+            "scenario_role_label": "教育、经验与资格背景",
             "scenario_value_label": "岗位方向"
           },
           "us_growth": {
@@ -34961,14 +35610,14 @@
           "type": "prose"
         },
         "heading": "美国初中职业技术教育教师工资与就业数据？",
-        "industry_heading": "不同行业的美国工资差多少？",
+        "industry_heading": "CTE跨学段父职业行业工资参考",
         "industry_period": {
-          "$fact": "us-wage-2025",
+          "$fact": "us-cte-parent-industry-0-current",
           "field": "period"
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "us-cte-parent-industry-0-current",
             "industry": {
               "$item": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -34989,7 +35638,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "us-cte-parent-industry-1-current",
             "industry": {
               "$item": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -35010,7 +35659,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "us-cte-parent-industry-2-current",
             "industry": {
               "$item": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -35031,7 +35680,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "us-cte-parent-industry-3-current",
             "industry": {
               "$item": "career-technical-education-teachers-middle-school.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -35052,7 +35701,7 @@
             }
           }
         ],
-        "industry_value_label": "该行业内本职业工资中位数",
+        "industry_value_label": "父职业行业年薪中位数",
         "interpretation_heading": "美国初中职业技术教育教师工资怎么理解？",
         "interpretation_rows": [
           {
@@ -35295,7 +35944,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls-outlook",
+            "source_id": "onet-summary",
             "value": {
               "$item": "career-technical-education-teachers-middle-school.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35340,7 +35989,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls-pay",
+            "source_id": "onet-localwages",
             "value": {
               "$item": "career-technical-education-teachers-middle-school.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -35763,7 +36412,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET2024行业分布与BLS2025—2035预测",
+            "label": "O*NET本轮行业分布（基期未明示）与BLS2025—2035预测",
             "secondary_value": null,
             "value": {
               "$item": "career-technical-education-teachers-middle-school.profile.onet-structured-fields-block.4",
@@ -37046,6 +37695,78 @@
         "source_refs": [
           "bls-pay"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "67,200美元/年",
+        "fact_id": "us-cte-parent-industry-0-current",
+        "market": "美国",
+        "measure": "父职业行业年薪中位数",
+        "occupation_scope": "CTE初中高中高教合并：私立高等院校",
+        "period": "2025",
+        "source_refs": [
+          "ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "66,760美元/年",
+        "fact_id": "us-cte-parent-industry-1-current",
+        "market": "美国",
+        "measure": "父职业行业年薪中位数",
+        "occupation_scope": "CTE初中高中高教合并：州及地方公立高等院校",
+        "period": "2025",
+        "source_refs": [
+          "ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "66,020美元/年",
+        "fact_id": "us-cte-parent-industry-2-current",
+        "market": "美国",
+        "measure": "父职业行业年薪中位数",
+        "occupation_scope": "CTE初中高中高教合并：地方公立中小学",
+        "period": "2025",
+        "source_refs": [
+          "ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "60,380美元/年",
+        "fact_id": "us-cte-parent-industry-3-current",
+        "market": "美国",
+        "measure": "父职业行业年薪中位数",
+        "occupation_scope": "CTE初中高中高教合并：私立技术与职业学校",
+        "period": "2025",
+        "source_refs": [
+          "ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "133,539元/年",
+        "fact_id": "cn-education-nonprivate-current",
+        "market": "中国大陆",
+        "measure": "行业税前年平均工资",
+        "occupation_scope": "教育行业城镇非私营单位，多职业",
+        "period": "2025",
+        "source_refs": [
+          "nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "63,908元/年",
+        "fact_id": "cn-education-private-current",
+        "market": "中国大陆",
+        "measure": "行业税前年平均工资",
+        "occupation_scope": "教育行业城镇私营单位，多职业",
+        "period": "2025",
+        "source_refs": [
+          "nbs-current"
+        ]
       }
     ]
   },
@@ -37054,7 +37775,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 25-2023.00 · 职业与技术课程教学 / 材料设备与课堂安全 / 评量与记录",
@@ -37105,7 +37826,7 @@
       "text": "初中职业技术教育教师"
     }
   },
-  "source_content_sha256": "066d5e238f1ebd4d3f9c84d93455f720fe5584891d9338195ad9e52632beba51",
+  "source_content_sha256": "c9096276f464b42b4ea18e477a37d36e8c42de10b33e5a7e569324433d3f820a",
   "subject": {
     "canonical_slug": "career-technical-education-teachers-middle-school",
     "name": "初中职业技术教育教师",

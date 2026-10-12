@@ -13750,7 +13750,7 @@
             "链接": "https://www.onetonline.org/link/details/43-9071.00"
           }
         ],
-        "difference_intro": "分清可辅助的信息整理与必须现场完成的设备操作、成品抽检。",
+        "difference_intro": "以下为依据工单、机器和质检任务的编辑试用建议，未取得本职业机构采用率或效果实测；现场操作和成品仍需核对。",
         "difference_rows": [
           {
             "AI主要改变": "整理规格。",
@@ -13810,7 +13810,7 @@
         "heading": "AI辅助工单，成品和设备仍须现场核",
         "method_cards": [
           {
-            "含义": "工单和清单草稿可提速，不替代机器操作。",
+            "含义": "工单和清单可作候选草稿；是否节省时间须结合机型与质量要求验证，不替代机器操作。",
             "概念": "任务辅助"
           },
           {
@@ -14360,16 +14360,28 @@
         "risks": [
           {
             "affected_roles": {
-              "$item": "office-machine-operators-except-computer.risk.career-risk-cards.4",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "准备原件、试印与抽检的操作员及委托人。生产背景：",
+                {
+                  "$item": "office-machine-operators-except-computer.risk.career-risk-cards.4",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "consequence": {
-              "$item": "office-machine-operators-except-computer.risk.career-risk-cards.5",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "可能使成品不完整、误解内容或需要返工。异常处置：",
+                {
+                  "$item": "office-machine-operators-except-computer.risk.career-risk-cards.5",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "evidence_refs": [
               "onet",
@@ -14381,11 +14393,11 @@
             "title": "漏页错序"
           },
           {
-            "affected_roles": "按工单核原件、机器设置、页序、成品质量和交付权限。",
-            "consequence": "按工单核原件、机器设置、页序、成品质量和交付权限。",
+            "affected_roles": "操作机器、清障的人员及附近协作者。",
+            "consequence": "可能造成手部夹伤或其他机械伤害。",
             "evidence_refs": [
               "onet",
-              "privacy"
+              "onet"
             ],
             "id": "record-version",
             "mitigation": "按程序停机。",
@@ -14393,11 +14405,11 @@
             "title": "卡纸夹伤"
           },
           {
-            "affected_roles": "按工单核原件、机器设置、页序、成品质量和交付权限。",
-            "consequence": "按工单核原件、机器设置、页序、成品质量和交付权限。",
+            "affected_roles": "处理保密原件、成品及交付的人员和资料主体。",
+            "consequence": "可能使敏感信息落入未授权人员手中。",
             "evidence_refs": [
-              "privacy",
-              "privacy"
+              "onet",
+              "onet"
             ],
             "id": "personal-data",
             "mitigation": "清场和签收。",
@@ -14405,8 +14417,8 @@
             "title": "保密泄露"
           },
           {
-            "affected_roles": "按工单核原件、机器设置、页序、成品质量和交付权限。",
-            "consequence": "按工单核原件、机器设置、页序、成品质量和交付权限。",
+            "affected_roles": "备料、批量生产与排程人员。",
+            "consequence": "可能中断批次、增加积压并延误交付。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14417,11 +14429,11 @@
             "title": "耗材中断"
           },
           {
-            "affected_roles": "按工单核原件、机器设置、页序、成品质量和交付权限。",
-            "consequence": "按工单核原件、机器设置、页序、成品质量和交付权限。",
+            "affected_roles": "操作员、维修人员及使用同一设备的人。",
+            "consequence": "可能扩大故障或带来电气、机械伤害。",
             "evidence_refs": [
-              "bls",
-              "bls"
+              "onet",
+              "onet"
             ],
             "id": "single-coverage",
             "mitigation": "交专业维修。",
@@ -14429,8 +14441,8 @@
             "title": "越权维修"
           },
           {
-            "affected_roles": "按工单核原件、机器设置、页序、成品质量和交付权限。",
-            "consequence": "按工单核原件、机器设置、页序、成品质量和交付权限。",
+            "affected_roles": "核工单、包装交付的人员与委托人。",
+            "consequence": "可能交错成品、数量不足或发生返工及信息外泄。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14447,31 +14459,31 @@
             "href": "https://www.onetonline.org/link/details/43-9071.00",
             "id": "onet",
             "label": "O*NET任务",
-            "scope": "办公设备任务与安全"
+            "scope": "O*NET链接仅美国43-9071职责与环境；BLS表1.2仅工资、就业及典型入门。风险情境为编辑提示，非事故频率或机型操作规程。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
             "label": "BLS职业",
-            "scope": "办公设备任务与安全"
+            "scope": "O*NET链接仅美国43-9071职责与环境；BLS表1.2仅工资、就业及典型入门。风险情境为编辑提示，非事故频率或机型操作规程。"
           },
           {
             "href": "https://www.onetonline.org/link/details/43-9071.00",
             "id": "facilities",
             "label": "O*NET环境",
-            "scope": "办公设备任务与安全"
+            "scope": "O*NET链接仅美国43-9071职责与环境；BLS表1.2仅工资、就业及典型入门。风险情境为编辑提示，非事故频率或机型操作规程。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "privacy",
             "label": "BLS入行",
-            "scope": "办公设备任务与安全"
+            "scope": "O*NET链接仅美国43-9071职责与环境；BLS表1.2仅工资、就业及典型入门。风险情境为编辑提示，非事故频率或机型操作规程。"
           },
           {
             "href": "https://www.onetonline.org/link/details/43-9071.00",
             "id": "onet",
             "label": "O*NET设备",
-            "scope": "办公设备任务与安全"
+            "scope": "O*NET链接仅美国43-9071职责与环境；BLS表1.2仅工资、就业及典型入门。风险情境为编辑提示，非事故频率或机型操作规程。"
           }
         ]
       },
@@ -14637,7 +14649,7 @@
             "说明": "年均2100含替补，非净新增或当前招聘。"
           }
         ],
-        "boundary": "美国43-9071精确职业；BLS当前2025—2035预测与O*NET页面仍显示的2024—2034预测不要混用。",
+        "boundary": "美国43-9071精确职业；BLS当前2025—2035预测与O*NET当前同期预测一致，O*NET整数-15%与BLS-14.9%精度不同。",
         "direct_answer": {
           "$join": [
             "美国43-9071在2025年薪中位40,960美元；2025—2035总体下降14.9%，年均2100空缺含替补，非AI归因或个人失业概率。",
@@ -14691,7 +14703,7 @@
             "note": "本页无精确行业分项工资，勿代填。"
           }
         ],
-        "industry_value_label": "年薪中位数（美元）",
+        "industry_value_label": "行业工资数据状态",
         "interpretation_heading": "如何解读",
         "interpretation_rows": [
           {
@@ -14725,8 +14737,8 @@
             "question": "负增长就没有岗位吗？"
           },
           {
-            "answer": "旧页面为2024—2034；当前用BLS 2025—2035。",
-            "question": "可用O*NET旧预测吗？"
+            "answer": "当前均为2025—2035；O*NET显示整数-15%，BLS表1.2为-14.9%，按各自精度标注，不反算舍入存量端点。",
+            "question": "O*NET与BLS增速为什么不同？"
           },
           {
             "answer": "不能，分类和市场不同。",
@@ -14861,30 +14873,39 @@
         "heading": "美国43-9071就业展望",
         "outlook_evidence": [
           {
-            "geography": {
-              "$item": "office-machine-operators-except-computer.market-signals.market-signal-card.2",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "horizon": {
-              "$item": "office-machine-operators-except-computer.market-signals.market-signal-card.3",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "geography": "美国",
+            "horizon": "2025基期",
             "interpretation": {
-              "$item": "office-machine-operators-except-computer.market-signals.market-signal-card.4",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
+              "$join": [
+                "存量、替补空缺、需求条件与转向分别解释：",
+                {
+                  "$item": "office-machine-operators-except-computer.market-signals.market-signal-card.2",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "office-machine-operators-except-computer.market-signals.market-signal-card.3",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "office-machine-operators-except-computer.market-signals.market-signal-card.4",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "office-machine-operators-except-computer.market-signals.market-signal-card.5",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
-            "limitation": {
-              "$item": "office-machine-operators-except-computer.market-signals.market-signal-card.5",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "limitation": "就业存量非当前招聘，不外推中国或AI单独影响。",
             "metric": "2025在岗",
             "occupation_scope": "美国43-9071",
             "source_id": "bls",
@@ -15029,7 +15050,7 @@
           },
           {
             "alternate_value": null,
-            "label": "知识",
+            "label": "任务相关知识（编辑归纳）",
             "secondary_value": null,
             "value": "材料、设备和保密流程。"
           },
@@ -15052,7 +15073,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
+            "cta_label": "查看霍兰德兴趣测评",
             "evidence_level": {
               "$item": "office-machine-operators-except-computer.fit.riasec-fit-block.8",
               "block": "fit",
@@ -15071,10 +15092,10 @@
             "watchout": "量表不授设备权限。"
           },
           {
-            "answer": "办公设备操作员（计算机除外）可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "逐页比较页序、清晰度、双面方向和装订，记录发现的问题。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "按工单核原件、机器设置、页序、成品质量和交付权限。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "依据O*NET任务的编辑探索建议；本页自评预测机器安全、绩效或录用的效度未取得。",
             "id": "big-five",
             "label": "观察细节",
             "question": "做办公设备操作员（计算机除外）需要怎样的能力与工作方式？",
@@ -15087,10 +15108,10 @@
             "watchout": "量表不授设备权限。"
           },
           {
-            "answer": "办公设备操作员（计算机除外）可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "观察能否按工单节奏重复设机、抽检和记耗材；异常按程序停机。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "按工单核原件、机器设置、页序、成品质量和交付权限。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "依据O*NET任务的编辑探索建议；本页自评预测机器安全、绩效或录用的效度未取得。",
             "id": "mbti",
             "label": "操作节奏",
             "question": "做办公设备操作员（计算机除外）需要怎样的能力与工作方式？",
@@ -15103,10 +15124,10 @@
             "watchout": "量表不授设备权限。"
           },
           {
-            "answer": "办公设备操作员（计算机除外）可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较可见成品、准确交付与保密纪律对自己的吸引力。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "按工单核原件、机器设置、页序、成品质量和交付权限。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "依据O*NET任务的编辑探索建议；本页自评预测机器安全、绩效或录用的效度未取得。",
             "id": "enneagram",
             "label": "工作价值",
             "question": "做办公设备操作员（计算机除外）需要怎样的能力与工作方式？",
@@ -15119,10 +15140,10 @@
             "watchout": "量表不授设备权限。"
           },
           {
-            "answer": "办公设备操作员（计算机除外）可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较文印中心、企业内部和学校的设备、文件量与保密要求。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "按工单核原件、机器设置、页序、成品质量和交付权限。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "依据O*NET任务的编辑探索建议；本页自评预测机器安全、绩效或录用的效度未取得。",
             "id": "iq",
             "label": "场景偏好",
             "question": "做办公设备操作员（计算机除外）需要怎样的能力与工作方式？",
@@ -15135,10 +15156,10 @@
             "watchout": "量表不授设备权限。"
           },
           {
-            "answer": "办公设备操作员（计算机除外）可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "用虚构工单写数量材料、试印检查及升级条件；未培训不擅自上机。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "按工单核原件、机器设置、页序、成品质量和交付权限。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "依据O*NET任务的编辑探索建议；本页自评预测机器安全、绩效或录用的效度未取得。",
             "id": "eq",
             "label": "虚构案例",
             "question": "做办公设备操作员（计算机除外）需要怎样的能力与工作方式？",
@@ -15347,8 +15368,8 @@
       "riasec_fit_block": {
         "fit_interest": "能按工单稳定设定机器、抽检质量、记录异常。",
         "interest": "喜欢实体设备、重复精细操作和可见成品。",
-        "riasec": "现实型R与常规型C兴趣可探索，量表不证明设备安全。",
-        "riasec_short": "R/C：设备实践与流程。"
+        "riasec": "O*NET当前职业兴趣以常规型C、现实型R为主；可据此探索流程与设备偏好，不以职业画像推断个人安全或胜任。",
+        "riasec_short": "C/R：程序组织与设备实践。"
       },
       "source_card": {
         "eeat_signals": {
@@ -15358,8 +15379,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "按工单核原件、机器设置、页序、成品质量和交付权限。",
-          "updated_at": "按工单核原件、机器设置、页序、成品质量和交付权限。"
+          "source": "O*NET 43-9071；BLS表1.2；国家统计局2025服务宽岗位统计。",
+          "updated_at": "2026-10-12"
         },
         "note": "证据只支持办公设备操作员（计算机除外）在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -15371,7 +15392,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "办公设备操作与质检"
+            "label": "MBTI测评（英文）"
           },
           {
             "href": {
@@ -15381,7 +15402,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "办公设备操作与质检"
+            "label": "大五人格测评（英文）"
           },
           {
             "href": {
@@ -15391,7 +15412,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "办公设备操作与质检"
+            "label": "MBTI测评（中文）"
           },
           {
             "href": {
@@ -15401,7 +15422,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "办公设备操作与质检"
+            "label": "大五人格测评（中文）"
           }
         ]
       },
@@ -15550,7 +15571,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "办公设备操作 · O*NET 43-9071.00",
@@ -15601,7 +15622,7 @@
       "text": "非计算机办公设备操作员：职责、工资与前景"
     }
   },
-  "source_content_sha256": "89f7190880f7987882a5f03554eb3ef4663cca8bd98efe012d13373bef368ab9",
+  "source_content_sha256": "3faed792e06f6bd2974f4d40cfa16700419c2fffead148534f080f341fef7732",
   "subject": {
     "canonical_slug": "office-machine-operators-except-computer",
     "name": "办公设备操作员（计算机除外）",

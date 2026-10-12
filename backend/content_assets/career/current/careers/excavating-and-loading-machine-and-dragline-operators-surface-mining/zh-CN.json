@@ -23278,7 +23278,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS表1.2：SOC 47-5022在2025—2035年增长1.0%，净增约400人，年均空缺约2,400个。O*NET主要行业仍标2024年采矿、采石及油气开采与建筑；不得同步改成2025行业分布。"
+              "BLS表1.2：SOC 47-5022在2025—2035年增长1.0%，净增约400人，年均空缺约2,400个。本轮O*NET摘要亦显示2025—2035预测；主要行业题项现标2025年采矿、采石及油气开采与建筑。"
             ]
           },
           "id": "excavating-and-loading-machine-and-dragline-operators-surface-mining.profile.onet-structured-fields-block.4",
@@ -27294,7 +27294,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位工资由O*NET呈现2025 BLS数据；低/高端本轮直接核My Next Move。职业级OEWS页访问失败；当前就业、增长与年均空缺直接核BLS表1.2（2025—2035），不将O*NET旧2024—2034摘要冒充当前预测。"
+              "本轮O*NET核2025中位工资与就业/2025—2035摘要，My Next Move核低/高端；BLS表1.2核精确增长、净增与年均空缺。职业级OEWS历史访问失败记录不代表当前官方发布状态；25/75及分行业工资本轮未取得。"
             ]
           },
           "id": "excavating-and-loading-machine-and-dragline-operators-surface-mining.us-salary.career-snapshot-secondary-locale.48",
@@ -28973,7 +28973,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明 AI 对任务的影响边界"
+              "O*NET美国本职业任务范围，不是AI效果或法规实测；重复onet稳定ID保留，卡片用唯一详细任务入口。"
             ]
           },
           "id": "excavating-and-loading-machine-and-dragline-operators-surface-mining.risk.career-risk-cards.35",
@@ -31415,7 +31415,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补爆破设计与警戒管理知识"
+              "需按目标法域、矿种与岗位核爆破训练、资格和授权；挖掘装载经验不授予爆破权限。"
             ]
           },
           "id": "excavating-and-loading-machine-and-dragline-operators-surface-mining.market-signals.market-signal-card.52",
@@ -31658,7 +31658,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-03"
+              "2026-10-11（本轮九模块作者核对）"
             ]
           },
           "id": "excavating-and-loading-machine-and-dragline-operators-surface-mining.sources.source-card.3",
@@ -31672,7 +31672,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国本职业职业级工资、代表性当前招聘薪酬和资格样本；美国职业OEWS页访问失败，25/75分位及分行业工资保留缺口。2025中位由O*NET呈现，低/高端直接核My Next Move，就业直接核BLS2025—2035表1.2；国家统计局采矿业值仅行业代理。未全面核中国安全规则，不提供现场判定。"
+              "中国本职业精确工资、代表性招聘及统一资格缺证；采矿业2025均值143,361/79,169元仅行业代理。美国2025中位57,430美元、10/90端值41,600/82,400由O*NET/My Next Move核，25/75及分行业工资本轮未取得。BLS表1.2核34,700人、2025—2035增长1.0%、净增约400、年均2,400空缺；O*NET当前摘要/主要行业已更新到2025周期。MSHA官方设备缺陷说明核美国适用范围内报告、记录、检查与停用提醒，未全面核中国规则。职业AI实测/因果效果缺证。共享FAQ旧周期和重复源ID保护保留，练习等未审未改。"
             ]
           },
           "id": "excavating-and-loading-machine-and-dragline-operators-surface-mining.sources.source-card.4",
@@ -34316,8 +34316,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet"
+              "bls",
+              "bls"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -34348,8 +34348,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "privacy"
+              "bls",
+              "bls"
             ],
             "id": "record-version",
             "mitigation": {
@@ -34412,8 +34412,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet"
+              "bls",
+              "bls"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -34476,8 +34476,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet"
+              "bls",
+              "bls"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -37288,7 +37288,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（不评分）"
     },
     "badges": [
       "机器操作员 · 露天采矿挖掘与装载机械 · 官方职业范围",
@@ -37339,7 +37339,7 @@
       "text": "机器操作员"
     }
   },
-  "source_content_sha256": "80ef3fafe60cfea5c82b64012cd94728cee216ab93ea84a193f60f265e19b673",
+  "source_content_sha256": "6d3168eb90d8198bdb3c9ba7b22463b45ca890f9d785e65f4e9004356f0d807b",
   "subject": {
     "canonical_slug": "excavating-and-loading-machine-and-dragline-operators-surface-mining",
     "name": "机器操作员",

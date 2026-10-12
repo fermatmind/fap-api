@@ -11434,7 +11434,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "作业治疗辅助员对应{fact:occupation-identity}；在治疗师或助理指导下准备治疗区、迎送患者、清洁器材并处理预约表单。"
+              "作业治疗辅助员对应美国O*NET-SOC 31-2012.00；在治疗师或助理指导下准备治疗区、迎送患者、清洁器材并处理预约表单。"
             ]
           },
           "id": "occupational-therapy-aides.profile.definition-block.1",
@@ -12098,7 +12098,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "身份错配会影响预约、照护与隐私；需按双重身份核验。"
+              "身份错配会影响预约、照护与隐私；按机构流程使用规定身份标识核验，冲突时交接团队。"
             ]
           },
           "id": "occupational-therapy-aides.risk.career-risk-cards.5",
@@ -12497,7 +12497,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国无同口径全国预测；不同职业、年份和市场不能混用。"
+              "证据不足：本次所核来源未取得中国辅助员同口径全国预测；美国分类与中国岗位不能直接等价。"
             ]
           },
           "id": "occupational-therapy-aides.market-signals.market-signal-card.5",
@@ -13078,7 +13078,7 @@
             "链接": "https://www.bls.gov/ooh/healthcare/occupational-therapy-assistants-and-aides.htm"
           }
         ],
-        "difference_intro": "预约和物资记录可用工具候选，现场清洁、患者接送、异常识别与授权仍需人员执行。",
+        "difference_intro": "以下是从预约、库存和表单任务提出的编辑试用建议，未验证本职业AI采用或效果；现场清洁、患者迎送和异常升级须按机构训练与授权执行。",
         "difference_rows": [
           {
             "AI主要改变": "整理候选清单和提醒。",
@@ -13669,8 +13669,8 @@
             "title": "患者身份错配"
           },
           {
-            "affected_roles": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
-            "consequence": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
+            "affected_roles": "患者、辅助员及监督人员",
+            "consequence": "未核转移条件可能导致患者跌倒或工作人员拉伤。",
             "evidence_refs": [
               "onet",
               "privacy"
@@ -13681,8 +13681,8 @@
             "title": "转移跌倒"
           },
           {
-            "affected_roles": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
-            "consequence": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
+            "affected_roles": "患者、治疗师/助理和器材准备人员",
+            "consequence": "缺件或设备状态不明可能延误治疗并引入现场安全问题。",
             "evidence_refs": [
               "privacy",
               "privacy"
@@ -13693,8 +13693,8 @@
             "title": "器材缺件"
           },
           {
-            "affected_roles": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
-            "consequence": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
+            "affected_roles": "患者、辅助员和感染控制团队",
+            "consequence": "清洁或消毒遗漏可能增加交叉感染风险。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -13705,8 +13705,8 @@
             "title": "院感遗漏"
           },
           {
-            "affected_roles": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
-            "consequence": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
+            "affected_roles": "患者、表单处理人员和机构数据负责人",
+            "consequence": "未获准处理预约和病历可能泄露个人健康信息。",
             "evidence_refs": [
               "bls",
               "bls"
@@ -13717,8 +13717,8 @@
             "title": "病历隐私"
           },
           {
-            "affected_roles": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
-            "consequence": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
+            "affected_roles": "患者、辅助员、治疗师/助理及机构",
+            "consequence": "未经训练或授权指导治疗可能造成错误活动安排和伤害。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14195,7 +14195,7 @@
             "value": "约4,400"
           },
           {
-            "geography": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
+            "geography": "美国",
             "horizon": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
             "interpretation": "31-2012总体预测非AI因果，净增约200与年均含替补空缺分清。",
             "limitation": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
@@ -14205,7 +14205,7 @@
             "value": "3.6%"
           },
           {
-            "geography": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
+            "geography": "美国",
             "horizon": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
             "interpretation": "含新增与替补，不由组合8600拆分，非净增200或中国需求。",
             "limitation": "非AI采用、替代或个人失业概率。",
@@ -14327,7 +14327,7 @@
           },
           {
             "alternate_value": null,
-            "label": "知识",
+            "label": "任务相关知识与入职训练（编辑归纳）",
             "secondary_value": null,
             "value": "客户服务、感染控制、基础文书和团队流程。"
           },
@@ -14356,7 +14356,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
+            "cta_label": "查看RIASEC兴趣测评",
             "evidence_level": {
               "$item": "occupational-therapy-aides.fit.personality-fit-block.8",
               "block": "fit",
@@ -14375,10 +14375,10 @@
             "watchout": "结果不证明录用或临床权限。"
           },
           {
-            "answer": "作业治疗辅助员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "观察能否礼貌确认患者需求，并将不适、预约冲突交给团队，不自行解释治疗方案。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
+            "cta_label": "查看RIASEC兴趣测评",
+            "evidence_level": "编辑职业探索建议；没有本页个体适配预测验证",
             "id": "big-five",
             "label": "沟通倾向",
             "question": "做作业治疗辅助员需要怎样的能力与工作方式？",
@@ -14391,10 +14391,10 @@
             "watchout": "结果不证明录用或临床权限。"
           },
           {
-            "answer": "作业治疗辅助员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "观察是否愿按清单逐项核器材、清洁状态和预约，发现缺件时记录并升级。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
+            "cta_label": "查看RIASEC兴趣测评",
+            "evidence_level": "编辑职业探索建议；没有本页个体适配预测验证",
             "id": "mbti",
             "label": "细节习惯",
             "question": "做作业治疗辅助员需要怎样的能力与工作方式？",
@@ -14407,10 +14407,10 @@
             "watchout": "结果不证明录用或临床权限。"
           },
           {
-            "answer": "作业治疗辅助员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "反思是否愿意长期承担准备、清洁和接待的支持任务，而非期待独立治疗。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
+            "cta_label": "查看RIASEC兴趣测评",
+            "evidence_level": "编辑职业探索建议；没有本页个体适配预测验证",
             "id": "enneagram",
             "label": "工作价值",
             "question": "做作业治疗辅助员需要怎样的能力与工作方式？",
@@ -14423,10 +14423,10 @@
             "watchout": "结果不证明录用或临床权限。"
           },
           {
-            "answer": "作业治疗辅助员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "核目标机构的久站、弯腰、班次、患者接送和院感训练，结合实际条件安排合规体验。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
+            "cta_label": "查看RIASEC兴趣测评",
+            "evidence_level": "编辑职业探索建议；没有本页个体适配预测验证",
             "id": "iq",
             "label": "场景偏好",
             "question": "做作业治疗辅助员需要怎样的能力与工作方式？",
@@ -14439,10 +14439,10 @@
             "watchout": "结果不证明录用或临床权限。"
           },
           {
-            "answer": "作业治疗辅助员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "只用虚构清单观察自己是否愿意点验、记录和修订；真实现场学习须有机构安排和监督。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "在治疗团队指导下准备器材、保持治疗区域清洁、迎送患者并完成准确交接。",
+            "cta_label": "查看RIASEC兴趣测评",
+            "evidence_level": "编辑职业探索建议；没有本页个体适配预测验证",
             "id": "eq",
             "label": "纸面试作",
             "question": "做作业治疗辅助员需要怎样的能力与工作方式？",
@@ -14651,8 +14651,8 @@
       "riasec_fit_block": {
         "fit_interest": "能遵指示、耐心核对物品和预约，愿意处理清洁、体力与交接工作。",
         "interest": "喜欢有序准备现场、与患者礼貌沟通并支持治疗团队。",
-        "riasec": "社会型S和常规型C兴趣可作为探索线索；不证明临床胜任或授予治疗权限。",
-        "riasec_short": "S/C：服务与流程细节。"
+        "riasec": "O*NET职业兴趣环境以社会型S、现实型R、常规型C为任务线索；仅供探索，不证明个体胜任或授予治疗权限。",
+        "riasec_short": "S/R/C：服务、现场操作与流程细节。"
       },
       "source_card": {
         "eeat_signals": {
@@ -14663,7 +14663,7 @@
             "type": "prose"
           },
           "source": "BLS与O*NET分别提供美国辅助员职责、工资和就业；国家统计局未单列中国同职业工资。",
-          "updated_at": "2026-09-26核BLS现行2025工资和2025—2035预测。"
+          "updated_at": "2026-10-12 本次九模块作者核对，保留各统计期。"
         },
         "note": "证据只支持作业治疗辅助员在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -14675,7 +14675,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "作业治疗辅助员的现场支持与安全边界"
+            "label": "了解MBTI测评（英文）"
           },
           {
             "href": {
@@ -14685,7 +14685,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "作业治疗辅助员的现场支持与安全边界"
+            "label": "了解大五测评（英文）"
           },
           {
             "href": {
@@ -14695,7 +14695,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "作业治疗辅助员的现场支持与安全边界"
+            "label": "了解MBTI测评（中文）"
           },
           {
             "href": {
@@ -14705,7 +14705,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "作业治疗辅助员的现场支持与安全边界"
+            "label": "了解大五测评（中文）"
           }
         ]
       },
@@ -14901,7 +14901,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "作业治疗辅助员 · O*NET 31-2012.00",
@@ -14952,7 +14952,7 @@
       "text": "作业治疗辅助员：职责、工资与入行边界"
     }
   },
-  "source_content_sha256": "96a7127b80936a98f03a070c6b10f9545f4224f4096e3739413c1537ecf6f881",
+  "source_content_sha256": "63ef994ad5092febbd9e3f199c11cefed99eb67644938e938c1b422532acac06",
   "subject": {
     "canonical_slug": "occupational-therapy-aides",
     "name": "作业治疗辅助员",

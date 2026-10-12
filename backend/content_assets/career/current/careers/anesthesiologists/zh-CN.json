@@ -8898,18 +8898,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.01.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            0,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.01.mitigation": {
         "ref": {
@@ -8987,18 +8977,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.02.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            1,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.02.mitigation": {
         "ref": {
@@ -9076,18 +9056,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.03.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            2,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.03.mitigation": {
         "ref": {
@@ -9254,18 +9224,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.05.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            4,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.05.mitigation": {
         "ref": {
@@ -9343,18 +9303,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.06.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            5,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.06.mitigation": {
         "ref": {
@@ -22920,28 +22870,8 @@
         "status": "unfilled"
       },
       "work_context_block.01.description": {
-        "ref": {
-          "id": "anesthesiologists.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              0,
-              9
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "work_context_block.01.label": {
         "ref": {
@@ -23490,8 +23420,7 @@
           },
           "id": "anesthesiologists.profile.responsibilities-block.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "list"
         },
@@ -23500,13 +23429,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜99% 工作周超过 40 小时，94% 为规律固定班表（O*NET 29-1211.00 受访比例）。\n感染与暴露｜94% 每天暴露于疾病或感染；52% 每天暴露于污染物、13% 每周至少一次、15% 从不；14% 每天暴露于辐射、72% 每周至少一次；68% 每天穿戴普通防护或安全装备。\n精确性要求｜84% 认为精确或准确极其重要、14% 认为重要；给药剂量、气道管理与监测判读直接影响患者安全。\n错误后果｜83% 认为错误后果极其严重。\n沟通与协作｜98% 持续与他人接触，99% 每天有面对面讨论；65% 认为应对外部客户或公众极其重要；35% 认为协调或领导他人极其重要、43% 认为非常重要。\n决策与责任｜97% 每天作决定，67% 拥有很大决策自由度；92% 认为决策对同事或机构结果非常重要；74% 对其他工作人员的工作成果与结果承担极高责任；35% 对他人的健康与安全承担极高责任。\n时间压力｜81% 每天面对时间压力，18% 每周至少一次。\n身体姿势｜97% 的身体接近程度为非常接近（近乎接触）；15% 持续或几乎持续站立；69% 少于一半时间坐着。\n冲突与团队｜17% 每天遇到冲突情境、64% 每周至少一次；工作小组内 14% 认为团队合作非常重要、13% 认为相当重要。"
+              "美国O*NET 29-1211.00受访工作情境，描述群体回答而非中国岗位或每个人的排班与风险：\n工作时间｜99%工作周超过40小时，94%规律固定班表。\n暴露｜94%每天接触疾病或感染；52%每天接触污染物，13%每周至少一次但非每日，15%从不。辐射暴露14%每天，72%每周至少一次但非每日。68%每天穿戴普通防护或安全装备。\n精确与错误｜84%认为精确性极其重要，14%重要；83%认为不易纠正的错误后果极其严重。\n沟通｜98%持续接触他人，99%每天面对面讨论；65%认为应对外部客户或公众极其重要。\n决策与责任｜97%每天作决定，67%决策自由很大；92%认为决定对同事或机构结果非常重要，74%对其他工作人员结果承担极高责任，35%对他人健康安全承担极高责任。\n时间压力｜81%每天，18%每周至少一次但非每日。\n身体姿势｜97%非常接近他人；15%持续或几乎持续站立，69%少于一半时间坐着。\n冲突与协作｜17%每天遇到冲突，64%每周至少一次但非每日；协调领导他人35%极其重要、43%非常重要；小组合作14%非常重要、13%相当重要。"
             ]
           },
           "id": "anesthesiologists.profile.work-context-block.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "privacy",
+            "hr"
           ],
           "type": "prose"
         },
@@ -23566,7 +23495,7 @@
           },
           "id": "anesthesiologists.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23590,7 +23519,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS EP麻醉医师29-1211明细：2025年41,500人，2035年43,000人，净增1,500；2025—2035增长3.6%（OOH四舍五入为4%），年均1,100个空缺，包含增长与替代需求。当前预测直接来自EP，ONET仍显示旧2024—2034。OOH既列麻醉医师明细，也列较大的医师组合，两者范围不同；均不保证个人就业、不外推中国。"
+              "BLS EP麻醉医师29-1211明细：2025年41,500人，2035年43,000人，净增1,500；2025—2035增长3.6%（OOH四舍五入为4%），年均1,100个空缺，包含增长与替代需求。本页当前预测直接来自EP；本轮O*NET亦显示2025—2035预测，整数4%与EP3.6%的精度不同。OOH既列麻醉医师明细，也列较大的医师组合，两者范围不同；均不保证个人就业、不外推中国。"
             ]
           },
           "id": "anesthesiologists.profile.onet-structured-fields-block.4",
@@ -23727,14 +23656,15 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "麻醉医师29-1211在围术期评估、制定并实施麻醉方案、监测并处理不良反应，判断恢复、协调团队及开展教学研究。中国依法取得医师资格并注册；美国MD/DO学位、住院医师训练与州执照分开核。美国2025年5月工资中位391,490美元；当前就业见本页BLS EP 2025—2035明细，不引用ONET旧预测冒充当前。"
+              "麻醉医师29-1211在围术期评估、制定并实施麻醉方案、监测并处理不良反应，判断恢复、协调团队及开展教学研究。中国依法取得医师资格并注册；美国MD/DO学位、住院医师训练与州执照分开核。美国2025年5月工资中位391,490美元；当前就业见本页BLS EP 2025—2035明细，O*NET当前亦展示2025—2035预测；本页保留EP明细精度。"
             ]
           },
           "id": "anesthesiologists.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "oews",
+            "ep"
           ],
           "type": "prose"
         },
@@ -24608,16 +24538,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/29-1211.00"
               },
               {
-                "entity": "O*NET 29-1211.00 行业分布",
+                "entity": "O*NET 29-1211.00 职业说明与任务",
                 "id": "link-8",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/29-1211.00"
+                "url": "https://www.onetonline.org/link/details/29-1211.00"
               },
               {
-                "entity": "O*NET 29-1211.00 自定义职业档案",
+                "entity": "O*NET展示BLS 2025年5月麻醉医师工资分位",
                 "id": "link-9",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/custom/29-1211.00"
+                "url": "https://www.onetonline.org/link/localwages/29-1211.00"
               },
               {
                 "entity": "O*NET 29-1211.00 职业说明（任务清单）",
@@ -24626,16 +24556,16 @@
                 "url": "https://www.onetonline.org/link/details/29-1211.00"
               },
               {
-                "entity": "O*NET 29-1211.00 职业摘要（任务与职责）",
+                "entity": "BLS EP 2025—2035麻醉医师详细职业预测",
                 "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/29-1211.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "BLS 就业预测表（按详细职业）",
+                "entity": "国家统计局2025年城镇单位年平均工资",
                 "id": "link-12",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET 展示的 BLS 工资分位（29-1211.00）",
@@ -24719,8 +24649,9 @@
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -24749,8 +24680,9 @@
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.13",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -24779,8 +24711,9 @@
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.15",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -24810,9 +24743,9 @@
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.17",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -24826,10 +24759,9 @@
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -24901,7 +24833,7 @@
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.23",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -24915,7 +24847,7 @@
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.24",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -24999,7 +24931,9 @@
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.30",
           "source_refs": [
-            "onet"
+            "operations",
+            "cnlaw",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -25155,7 +25089,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET旧就业预测未用作当前数字；工资见ONET工资页，当前就业直接取BLS EP。"
+              "本轮核读的O*NET页面已列2025就业、2025—2035预测和2025年5月工资；本页精确增长率与空缺仍直接核BLS EP，工资分位核O*NET展示BLS表。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.41",
@@ -25216,7 +25150,7 @@
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.45",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25230,7 +25164,7 @@
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.46",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25244,7 +25178,7 @@
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.47",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25258,7 +25192,7 @@
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.48",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25267,7 +25201,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以下链接是O*NET任务资料，不支持就业统计；当前就业见本页ep登记。"
+              "美国职业任务资料，不是AI采用率、效果或替代率研究。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.49",
@@ -25323,12 +25257,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "相邻链接为美国职业摘要；当前BLS详细预测另见ep，数字不等于个人保证或中国预测。"
+              "美国29-1211详细预测；包含增长与替代需求，不保证个人就业，不外推中国，也不估计AI因果。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.53",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25337,12 +25271,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET职业摘要与当前BLS EP另行登记"
+              "BLS EP职业就业预测与特征表（29-1211）"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25351,12 +25285,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国职业身份与任务对照；当前预测为EP明细"
+              "美国麻醉医师详细职业就业预测，2025—2035年"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25365,13 +25299,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP麻醉医师29-1211明细：2025年41,500人，2035年43,000人，净增1,500；2025—2035增长3.6%（OOH四舍五入为4%），年均1,100个空缺，包含增长与替代需求。当前数字直接取登记ep，不由相邻ONET摘要支持。OOH含明细，组合只作对照。"
+              "BLS EP 29-1211：就业从2025年41,500人到2035年43,000人，净增1,500人；增长3.6%，年均1,100个职位空缺。空缺包含增长与替代需求；不是AI导致的岗位变化。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25380,12 +25313,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "相邻链接是BLS EP而不是NBS；下列中国数字实际由登记nbs支持，不外推本职业工资。"
+              "中国城镇单位年平均工资，行业及单位类型宽口径参照；不是麻醉医师职业工资或AI效果数据。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.57",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -25394,12 +25327,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "国家统计局中国行业工资（登记nbs；相邻链接为美国EP）"
+              "国家统计局2025年城镇单位就业人员年平均工资情况"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.58",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -25413,7 +25346,7 @@
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.59",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -25471,9 +25404,7 @@
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "ep",
-            "ooh",
-            "oews"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25573,7 +25504,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "监护设备报警与趋势提示、监测数据整合、麻醉记录书写辅助、药物剂量核对与设备自检数据等辅助环节；受影响程度取决于机构设备与信息系统、报警可靠性、数据质量与隐私合规以及临床验证结论。"
+              "编辑提出的辅助候选为监护记录与趋势汇总、麻醉记录整理、用药信息核对清单；本页没有比较研究证明哪个环节最容易受影响，也未核实际部署、临床效果或批准用途。目标机构须核具体系统、数据质量、验证与授权。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.70",
@@ -25623,7 +25554,9 @@
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.73",
           "source_refs": [
-            "onet"
+            "operations",
+            "cnlaw",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -25798,13 +25731,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按指南完成术前评估与检查，必要时会诊或推迟手术。"
+              "核对目标机构适用的术前评估程序、资料缺口及会诊流程；方案、是否延期及其他处置由有相应资格和权限的医师依现行规范决定。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.85",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -25828,13 +25762,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按循证证据与指南制定方案，核对药物与剂量并记录依据。"
+              "在本人合法执业范围和机构授权内核对方案、药物资料及适用规范；工具提示与人工判断分开记录，缺失或矛盾信息按机构程序报告确认。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.87",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -25857,13 +25792,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按方案与操作规程实施，做好困难气道预案与生命支持准备。"
+              "先核机构已批准的气道管理与生命支持程序、设备及团队分工；仅在本人训练和权限内执行，本页不提供操作步骤或处置阈值。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.89",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -25887,13 +25823,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按监护标准持续判读趋势，异常立即处置与上报并记录。"
+              "按机构适用监护程序核对记录与异常信息；发现异常按既定报告和处置流程联系授权人员，不依据本页自设临床阈值。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.91",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -25974,7 +25911,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结构化病史与检查模板可辅助，但风险评估结论仍由人作出。"
+              "编辑可能用途：结构化病史与检查资料整理；本轮未核临床效果或采用。风险评估仍须由有相应资格与授权的医师结合患者情况完成。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.97",
@@ -26031,7 +25968,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "置管与监测设备可辅助定位与记录，但操作与判断仍由人负责。"
+              "编辑可能用途：整理置管与监测记录；本轮未核辅助定位技术的批准用途与临床效果，不由软件条目证明操作资格。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.101",
@@ -26145,7 +26082,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "设备可辅助，但困难气道处置与生命支持决策仍由人负责。"
+              "编辑可能用途：汇总既有监测与事件记录；实际气道处置与生命支持决策须按授权和现行临床程序，本轮未核工具效果。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.109",
@@ -26202,7 +26139,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "恢复评分工具可辅助，但离室标准判断仍由人负责。"
+              "编辑可能用途：整理恢复观察记录；评分工具适用性、效果和离室程序本轮未核，转归决定按合法授权及机构程序。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.113",
@@ -26259,7 +26196,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "文献与数据工具可辅助检索与分析，但协调、教学与研究结论仍由人负责。"
+              "编辑可能用途：检索公开文献、整理教学与研究资料；本轮未核工具效果，引用、数据和结论需人工核查。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.117",
@@ -26315,7 +26252,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "检查建议与开单清单可辅助，但适应证判断仍由人负责。"
+              "编辑可能用途：整理已有检查项目与资料缺口；不自行生成适应证或开单，实际诊疗决定按医师资格与授权。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.121",
@@ -26358,7 +26295,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26372,7 +26309,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26386,7 +26323,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26400,7 +26337,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26414,7 +26351,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26428,7 +26365,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26442,7 +26379,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26456,7 +26393,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26470,7 +26407,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26484,7 +26421,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26498,7 +26435,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26512,7 +26449,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26526,7 +26463,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26540,7 +26477,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26554,7 +26491,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26568,7 +26505,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26592,12 +26529,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页中国侧采用行业门类与单位类型的宽口径代理（卫生和社会工作、公共管理等），不是本职业的全国工资分布；卫生行业门类覆盖大量非麻醉岗位，不得把行业数字当作本职业中位数。麻醉科医师薪酬按机构制度、职级与绩效确定，与行业门类统计口径不同。"
+              "中国侧为行业门类、单位类型及规模以上企业岗位类别的年平均工资参照，不是麻醉医师全国分布。卫生门类包含多职业，不能当作本职业中位数。核个人报酬须看目标机构的岗位、职级、绩效与书面条款；这些是编辑核对项，本页未估计其工资因果。"
             ]
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26611,8 +26548,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -26626,8 +26562,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -26641,8 +26576,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -26656,8 +26590,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -26671,8 +26604,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -26686,8 +26618,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -26701,8 +26632,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.31",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -26716,8 +26646,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.32",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -26731,8 +26660,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -26746,8 +26674,8 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -26761,8 +26689,8 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.35",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -26776,8 +26704,8 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -26791,8 +26719,8 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.37",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -26801,13 +26729,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "手术室内麻醉与围术期管理、产科与儿科麻醉、重症与疼痛；对专科能力、科研与教学要求高。"
+              "编辑方向示例：核目标岗位是否包含手术麻醉、围术期评估、特殊人群、重症或疼痛任务，以及教学科研职责；本页没有三级医院岗位样本证明所有岗位均要求高科研水平。"
             ]
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -26821,8 +26749,8 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.39",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -26831,13 +26759,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "以择期手术与短程麻醉为主；对流程效率、恢复管理与交接要求高。"
+              "编辑核对项：核目标机构手术与患者类型、实际服务范围、恢复观察和交接职责；本页没有样本支持“以择期与短程麻醉为主”的普遍结论。"
             ]
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -26851,8 +26779,8 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.41",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -26866,8 +26794,8 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.42",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -26881,7 +26809,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.43",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26910,8 +26838,8 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -26925,8 +26853,8 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "asa-career"
           ],
           "type": "prose"
         },
@@ -26935,12 +26863,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              "国家统计局《2025年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.47",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26949,13 +26877,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局数据覆盖城镇 5 人及以上法人单位，不含个体工商户与自由职业者；工资为税前工资总额，含个人缴纳的社保、公积金与个税。行业门类数字不等于本职业工资。麻醉科医师薪酬按机构制度、职级与绩效确定，与行业门类统计口径不同。"
+              "国家统计局城镇单位工资统计覆盖城镇地区5人及以上法人单位，不含个体工商户与自由职业者；工资含个人缴纳社保、公积金与个税。规模以上企业岗位类别表有其单独统计范围，不能套用全部医院。行业与岗位大类均值不等于本职业工资；机构报酬规则须核书面条件。"
             ]
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26969,7 +26896,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26983,7 +26910,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26997,7 +26924,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27011,7 +26938,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27025,7 +26952,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27039,7 +26966,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27053,8 +26980,8 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -27063,12 +26990,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              "国家统计局《2025年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27097,7 +27024,7 @@
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.59",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         }
@@ -27119,9 +27046,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27135,7 +27060,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27149,7 +27074,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27163,7 +27088,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27177,7 +27102,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27191,7 +27116,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27205,7 +27130,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27219,7 +27144,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27233,7 +27158,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27247,7 +27172,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27261,7 +27186,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27365,8 +27290,9 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews",
+            "ep",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27380,8 +27306,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27495,7 +27420,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.34",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27519,13 +27444,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 2024行业信息为医疗保健与社会援助约93%，不等于该行业内职业工资。BLS有行业表入口，不能概括为未发布。"
+              "当前O*NET详细页列Top industries (2025)：92%就业位于医疗保健与社会援助。它是就业行业分布，不是该行业职业工资。已读BLS 2025行业目录及查询入口，本轮查询页面未返回对应29-1211中位数。"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "bls",
-            "census"
+            "census",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27612,8 +27537,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "bls",
-            "census"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27641,7 +27565,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27655,7 +27579,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27669,8 +27593,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27699,7 +27622,9 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "onet"
+            "oews",
+            "ep",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27728,7 +27653,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27742,8 +27667,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27757,7 +27681,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27771,8 +27695,7 @@
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         }
@@ -27932,8 +27855,8 @@
           },
           "id": "anesthesiologists.fit.personality-fit-block.2",
           "source_refs": [
-            "onet",
-            "onet"
+            "ilo",
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -27947,7 +27870,7 @@
           },
           "id": "anesthesiologists.fit.personality-fit-block.3",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -28080,7 +28003,7 @@
           },
           "id": "anesthesiologists.fit.riasec-fit-block.10",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -28916,7 +28839,7 @@
           },
           "id": "anesthesiologists.fit.personality-fit-block.65",
           "source_refs": [
-            "onet"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -28925,12 +28848,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "《中华人民共和国医师法》，用于中国大陆医师资格、执业注册与规范化培训框架；国家统计局数字用于行业门类宽口径参考。"
+              "《中华人民共和国医师法》用于中国大陆报考、资格、注册、执业范围及规范化培训框架；不由人格分数或美国受访教育类别推出中国资格。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.66",
           "source_refs": [
-            "onet"
+            "cnlaw"
           ],
           "type": "prose"
         }
@@ -29005,9 +28928,9 @@
           },
           "id": "anesthesiologists.risk.career-risk-cards.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "operations",
+            "privacy",
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -29016,14 +28939,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "感染、污染物和辐射暴露因岗位而异：ONET美国受访者94%每天感染暴露、14%每天辐射暴露、72%每周至少一次辐射暴露；不是每个人每日两类暴露。"
+              "需重点核术前资料与风险评估、麻醉方案与用药信息、气道与生命支持权限、监测异常报告、知情同意和病历，以及岗位暴露与工时。前三类与监测由职业任务识别，法规义务按中国医师法核；下列情景与核对项为编辑示例，不估计事故概率。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "operations",
+            "privacy",
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -29032,13 +28955,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS EP麻醉医师29-1211明细：2025年41,500人，2035年43,000人，净增1,500；2025—2035增长3.6%（OOH四舍五入为4%），年均1,100个空缺，包含增长与替代需求。就业预测不表示个人就业或AI因果。"
+              "O*NET美国职业任务与受访工作情境支持职责、工时和暴露描述；中国医师法支持本法域注册范围、病历、同意及紧急例外。编辑情景不等于事故调查或临床指南；就业预测和工资不能证明临床风险。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.10",
           "source_refs": [
-            "ep",
-            "ooh"
+            "operations",
+            "privacy",
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -29052,8 +28976,7 @@
           },
           "id": "anesthesiologists.risk.career-risk-cards.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29067,8 +28990,7 @@
           },
           "id": "anesthesiologists.risk.career-risk-cards.12",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29077,13 +28999,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按指南完成术前评估与检查，必要时会诊、调整方案或推迟手术。"
+              "核机构术前评估和会诊程序、资料缺口及授权；方案调整或延期由有相应权限的医师按现行规范决定。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.13",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29092,13 +29013,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未完成关键气道评估或未核对抗凝用药即实施麻醉。"
+              "编辑情景：患者资料或关键信息存在缺失与矛盾，尚未按机构流程确认却继续下一环节；不是临床操作步骤。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.14",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29112,8 +29032,7 @@
           },
           "id": "anesthesiologists.risk.career-risk-cards.15",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29122,13 +29041,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "麻醉方式或剂量选择不当会改变麻醉深度并影响患者安全。"
+              "编辑风险识别：方案与药物信息不一致或未核清可能影响诊疗安全；本页没有剂量效果、事故概率或因果估计。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.16",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29137,13 +29055,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按循证证据与指南制定方案，核对药物与剂量并记录依据。"
+              "按本人合法资格、注册范围及机构授权核方案和药物资料；记录人工判断，疑点按机构既定流程确认。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.17",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29152,13 +29069,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未按体重与合并症调整剂量即给药。"
+              "编辑情景：方案、药物信息与记录不一致，未完成规定核对就执行；具体用药与剂量由临床规范及授权医师决定。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.18",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29172,7 +29088,7 @@
           },
           "id": "anesthesiologists.risk.career-risk-cards.19",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29181,12 +29097,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "困难气道或通气支持不当会直接危及患者生命。"
+              "O*NET列气道与生命支持职责；编辑风险识别为准备、沟通或授权不清。本页不提供气道操作方法、失败概率或处置阈值。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.20",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29195,12 +29111,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按方案与操作规程实施，做好困难气道预案与生命支持准备。"
+              "核机构已批准的气道与生命支持程序、设备和团队分工；只在本人训练与权限内执行，需支援时按既定流程报告。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.21",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29209,13 +29125,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未按困难气道预案处置即反复尝试插管。"
+              "编辑情景：所需设备、支援分工或权限尚未确认，仍继续相关操作；具体临床行动按机构程序。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.22",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29229,8 +29144,7 @@
           },
           "id": "anesthesiologists.risk.career-risk-cards.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29239,13 +29153,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "漏判监护数值异常或延迟处置会导致不良事件。"
+              "编辑风险识别：监测信息漏读、异常报告或交接不完整可能影响协作与患者安全；本页不估计事件概率。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29254,13 +29167,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按监护标准持续判读趋势，异常立即处置与上报并记录。"
+              "核适用监护程序、异常联系对象与交接要求；由有权限人员按程序处置，不依据本页设定临床阈值。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.25",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29269,13 +29181,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "报警反复出现却未按程序处置或上报。"
+              "编辑情景：监护报警重复出现，未按机构既定程序报告、确认和记录；不是要求读者独立处置的指令。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29289,8 +29200,9 @@
           },
           "id": "anesthesiologists.risk.career-risk-cards.27",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy",
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -29304,8 +29216,9 @@
           },
           "id": "anesthesiologists.risk.career-risk-cards.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy",
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -29314,13 +29227,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按法律与制度说明并取得明确同意，如实及时记录，在注册与授权范围内执业。"
+              "中国医师法第14条规定注册范围，第24条规定如实填写病历，第25条规定手术、特殊检查或治疗说明并取得明确同意；第27条的紧急例外须符合条件并经机构负责人或授权负责人批准。具体制度另核。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy",
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -29329,13 +29243,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "实施特殊检查或治疗前未取得明确同意或未记录。"
+              "编辑情景：中国手术、特殊检查或治疗未完成法律要求的说明和同意，也不符合第27条紧急例外；同意与记录按适用法律、制度核。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy",
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -29349,8 +29264,8 @@
           },
           "id": "anesthesiologists.risk.career-risk-cards.31",
           "source_refs": [
-            "onet",
-            "onet"
+            "hr",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29364,8 +29279,8 @@
           },
           "id": "anesthesiologists.risk.career-risk-cards.32",
           "source_refs": [
-            "onet",
-            "onet"
+            "hr",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29374,13 +29289,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规定使用防护用品、落实职业防护与免疫接种，做好压力管理与轮班安排。"
+              "核目标岗位暴露、机构职业防护要求、可用防护装备和轮班安排；免疫等具体安排依适用职业健康规定，不由美国受访比例直接推出。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "hr",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29389,13 +29304,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未使用规定防护用品即长时间处于感染与辐射暴露环境。"
+              "编辑情景：已明确需要的防护用品未落实，或暴露和排班问题未按机构流程报告；不是每个岗位都有同样暴露。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "hr",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29438,7 +29353,8 @@
           },
           "id": "anesthesiologists.risk.career-risk-cards.37",
           "source_refs": [
-            "onet"
+            "hr",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29452,7 +29368,9 @@
           },
           "id": "anesthesiologists.risk.career-risk-cards.38",
           "source_refs": [
-            "onet"
+            "operations",
+            "privacy",
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -29536,9 +29454,9 @@
           },
           "id": "anesthesiologists.path.entry-role-comparison.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "title": "麻醉医师的入门岗位与初期任务怎么比较？",
           "type": "table"
@@ -29588,8 +29506,9 @@
           },
           "id": "anesthesiologists.path.employer-evidence.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "title": "任务与资格支持的准备核对项（不是招聘样本）",
           "type": "cards"
@@ -29730,8 +29649,9 @@
           },
           "id": "anesthesiologists.path.interview-probation.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "title": "面试与试用期可能考察什么，哪些结论不能推断？",
           "type": "table"
@@ -29901,11 +29821,9 @@
           },
           "id": "anesthesiologists.path.credential-decision.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -29923,9 +29841,9 @@
           },
           "id": "anesthesiologists.path.credential-boundary.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -29942,10 +29860,9 @@
           },
           "id": "anesthesiologists.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -30041,7 +29958,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成住院医师规范化培训并结业考核，掌握基础临床能力与围术期基本技能。"
+              "按目标岗位适用规则完成规范化培训与考核，在合法指导或授权范围内学习基础临床和围术期任务；实际条件向主管部门、院校和机构核。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.14",
@@ -30133,10 +30050,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.20",
           "source_refs": [
-            "asa-career",
-            "ooh",
             "cnlaw",
-            "cnclass"
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30150,9 +30066,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.21",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30166,9 +30082,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.22",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30177,13 +30093,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "发展路径按医学教育、规范化培训与职称体系：从医学教育与执业资格、住院医师规范化培训，到麻醉专科培训与亚专科方向，再到亚专科带头、教学科研或麻醉服务管理方向。晋升通常与职称、专科资质、临床能力与科研教学业绩相关；跨法域执业需要另行取得目标地区的执业资格与训练认可。"
+              "下列三方向、四阶段为编辑发展分组，用于核医学教育、资格注册、适用训练、目标任务和岗位条件，不是全国统一晋升路线。晋升与教学科研条件须核目标机构当前书面要求；跨法域执业另核当地认可、训练及执照。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30225,7 +30142,7 @@
           },
           "id": "anesthesiologists.path.career-path-block.26",
           "source_refs": [
-            "onet"
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -30239,7 +30156,7 @@
           },
           "id": "anesthesiologists.path.career-path-block.27",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -30253,8 +30170,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30282,8 +30200,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30292,13 +30211,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成医学专业教育并通过执业医师资格考试，取得资格并注册。"
+              "学习病史与检查资料整理、医学文书和临床协作；资格前的临床实践须受执业医师监督指导，不得独立行医。学历、报考、资格和注册另按法定路径核。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.31",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30326,8 +30246,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30350,13 +30271,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能独立完成常见评估与规范记录。"
+              "在适用合法指导或实际授权范围内完成相应资料核对与规范记录，由训练和机构真实考核确认；纸面材料不证明独立诊疗能力。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.35",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30365,13 +30287,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成规范化培训并结业考核，掌握基础临床与围术期能力。"
+              "按适用训练项目学习术前资料核对、监测记录和围术期协作；实际操作须在合法指导或已获授权范围内，培训及考核条件分别核。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30394,13 +30317,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "取得专科资质与处方与操作授权；按机构制度。"
+              "核目标专科方向适用的训练、考核、注册范围及机构授权；不假设所有岗位有统一额外专科证书，培训完成也不自动取得全部操作权限。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30428,8 +30352,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.40",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30443,8 +30368,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.41",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30472,8 +30398,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.43",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30501,8 +30428,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30516,8 +30444,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30545,8 +30474,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30574,8 +30504,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.50",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30584,13 +30515,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成医学专业教育并取得医师资格与执业注册。"
+              "学习病史与检查资料整理、医学文书和临床协作；资格前的临床实践须受执业医师监督指导，不得独立行医。学历、报考、资格和注册另按法定路径核。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.51",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30618,8 +30550,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.53",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30642,13 +30575,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能按方案完成基础操作并规范记录。"
+              "在适用合法指导或实际授权范围内完成相应资料核对与规范记录，由训练和机构真实考核确认；纸面材料不证明独立诊疗能力。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.55",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30657,13 +30591,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成规范化培训并掌握基础麻醉与监测。"
+              "按适用训练项目学习术前资料核对、监测记录和围术期协作；实际操作须在合法指导或已获授权范围内，培训及考核条件分别核。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.56",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30686,13 +30621,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "取得亚专科资质与授权；按机构制度。"
+              "核目标专科方向适用的训练、考核、注册范围及机构授权；不假设所有岗位有统一额外专科证书，培训完成也不自动取得全部操作权限。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.58",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30720,8 +30656,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.60",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30735,8 +30672,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.61",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30764,8 +30702,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.63",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30793,8 +30732,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.65",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30808,8 +30748,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.66",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30837,8 +30778,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.68",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30866,8 +30808,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.70",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30876,13 +30819,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成医学专业教育并取得医师资格与执业注册。"
+              "学习病史与检查资料整理、医学文书和临床协作；资格前的临床实践须受执业医师监督指导，不得独立行医。学历、报考、资格和注册另按法定路径核。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.71",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30910,8 +30854,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.73",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30934,13 +30879,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能按方案完成基础诊疗并规范记录。"
+              "在适用合法指导或实际授权范围内完成相应资料核对与规范记录，由训练和机构真实考核确认；纸面材料不证明独立诊疗能力。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.75",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30949,13 +30895,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成规范化培训并掌握生命支持与镇痛用药。"
+              "按适用训练项目学习术前资料核对、监测记录和围术期协作；实际操作须在合法指导或已获授权范围内，培训及考核条件分别核。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.76",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -30978,13 +30925,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "取得亚专科资质与授权；按机构制度。"
+              "核目标专科方向适用的训练、考核、注册范围及机构授权；不假设所有岗位有统一额外专科证书，培训完成也不自动取得全部操作权限。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.78",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -31012,8 +30960,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.80",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -31027,8 +30976,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.81",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -31056,8 +31006,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.83",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -31085,8 +31036,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.85",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -31100,8 +31052,9 @@
           },
           "id": "anesthesiologists.path.career-path-block.86",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "asa-career",
+            "operations"
           ],
           "type": "prose"
         },
@@ -31151,16 +31104,16 @@
                 "url": "https://www.onetonline.org/link/summary/29-1211.00"
               },
               {
-                "entity": "O*NET展示的BLS 2025年5月麻醉医师工资分位",
+                "entity": "BLS EP 2025—2035详细职业预测（29-1211）",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/29-1211.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
+                "entity": "国家统计局2025年城镇单位年平均工资",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "《中华人民共和国医师法》（2022-03-01 施行）",
@@ -31232,7 +31185,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得中国大陆麻醉医师全国就业预测。BLS EP麻醉医师29-1211明细：2025年41,500人，2035年43,000人，净增1,500；2025—2035增长3.6%（OOH四舍五入为4%），年均1,100个空缺，包含增长与替代需求。O*NET仍展示旧2024—2034，当前直接取EP。OOH含麻醉医师明细及医师组合；组合862,800人、增长4%、年均22,100空缺、工资中位275,930仅作范围对照，不能替代本职业或保证个人就业。"
+              "证据不足：本页未取得中国大陆麻醉医师全国就业预测。BLS EP麻醉医师29-1211明细：2025年41,500人，2035年43,000人，净增1,500；2025—2035增长3.6%（OOH四舍五入为4%），年均1,100个空缺，包含增长与替代需求。本页当前数字直接取EP；本轮O*NET亦展示2025—2035预测。OOH含麻醉医师明细及医师组合；组合862,800人、增长4%、年均22,100空缺、工资中位275,930仅作范围对照，不能替代本职业或保证个人就业。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.8",
@@ -31252,7 +31205,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31266,7 +31219,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31280,8 +31233,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.11",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31295,7 +31247,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.12",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31309,7 +31261,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31323,7 +31275,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31337,8 +31289,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.15",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31352,7 +31303,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31366,7 +31317,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31380,8 +31331,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.18",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31395,7 +31345,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31409,7 +31359,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31423,7 +31373,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31437,8 +31387,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.22",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31452,7 +31401,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31466,7 +31415,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31480,8 +31429,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.25",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31495,7 +31443,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.26",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31509,7 +31457,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31523,7 +31471,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31537,8 +31485,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.29",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31561,13 +31508,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "当前链接支持2025年5月工资分位；就业直接取BLS EP登记，不能由工资页推出预测。"
+              "BLS EP 29-1211详细职业行支持2025与2035就业、3.6%增长及年均1,100空缺；人数列单位为千人，空缺含增长和替代需求，非AI因果或个人就业保证。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.31",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31581,7 +31527,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.32",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31590,12 +31536,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国医师法支持資格、注册与执业范围；职业分类另见其登记来源。"
+              "中国医师法支持报考、资格、注册与执业范围；职业分类定位不授予执业许可，分类原PDF本轮未重新核得。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.33",
           "source_refs": [
-            "onet"
+            "cnlaw",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -31609,7 +31556,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.34",
           "source_refs": [
-            "onet",
+            "asa-career",
             "onet"
           ],
           "type": "prose"
@@ -31624,7 +31571,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.35",
           "source_refs": [
-            "onet",
+            "asa-career",
             "onet"
           ],
           "type": "prose"
@@ -31634,12 +31581,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻方向，需改换为认证与执照体系。"
+              "编辑判断：相邻方向，需改换为认证与执照体系。 只作能力与路径核对，不表示可直接转岗或预测成功率。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.36",
           "source_refs": [
-            "onet",
+            "asa-career",
             "onet"
           ],
           "type": "prose"
@@ -31654,7 +31601,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.37",
           "source_refs": [
-            "onet",
+            "asa-career",
             "onet"
           ],
           "type": "prose"
@@ -31669,7 +31616,7 @@
           },
           "id": "anesthesiologists.market-signals.market-signal-card.38",
           "source_refs": [
-            "onet",
+            "asa-career",
             "onet"
           ],
           "type": "prose"
@@ -31679,12 +31626,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻方向，需补护理资格序列。"
+              "编辑判断：相邻方向，需补护理资格序列。 只作能力与路径核对，不表示可直接转岗或预测成功率。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.39",
           "source_refs": [
-            "onet",
+            "asa-career",
             "onet"
           ],
           "type": "prose"
@@ -31724,7 +31671,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻方向，需按医师助理体系训练与授权。"
+              "编辑判断：相邻方向，需按医师助理体系训练与授权。 只作能力与路径核对，不表示可直接转岗或预测成功率。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.42",
@@ -31769,7 +31716,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "邻近方向，需补护理资格。"
+              "编辑判断：邻近方向，需补护理资格。 只作能力与路径核对，不表示可直接转岗或预测成功率。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.45",
@@ -31814,7 +31761,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "邻近方向，需补呼吸治疗资格。"
+              "编辑判断：邻近方向，需补呼吸治疗资格。 只作能力与路径核对，不表示可直接转岗或预测成功率。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.48",
@@ -31858,7 +31805,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻方向，需补急诊专科训练。"
+              "编辑判断：相邻方向，需补急诊专科训练。 只作能力与路径核对，不表示可直接转岗或预测成功率。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.51",
@@ -31902,7 +31849,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "邻近方向，需补重症护理资格。"
+              "编辑判断：邻近方向，需补重症护理资格。 只作能力与路径核对，不表示可直接转岗或预测成功率。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.54",
@@ -31947,7 +31894,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远距离转向，需补管理训练。"
+              "编辑判断：较远距离转向，需补管理训练。 只作能力与路径核对，不表示可直接转岗或预测成功率。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.57",
@@ -32079,7 +32026,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核对与更新日期：2026-10-02；未重新取得的旧来源保留原访问日期，来源登记分别标资料期。"
+              "本轮核对日期：2026-10-08。已核O*NET当前职业、工资与行业页面、BLS EP/OOH与行业目录、ASA、中国医师法和NBS同版原文；未重新取得的来源保留原访问日期并标明限制。"
             ]
           },
           "id": "anesthesiologists.sources.source-card.3",
@@ -32093,7 +32040,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得中国大陆麻醉医师全国工资分布、全国职业预测及所列美国行业内本职业中位数。已核工资为ONET展示BLS OEWS 2025年5月29-1211；就业为EP 2025—2035，OOH含详细和组合，两者分开。BLS有行业表入口，未取得不表示未发布。中国行业工资不能冒充职业工资，资格、注册、训练、授权按法域分别核。"
+              "证据不足：未取得中国麻醉医师全国或分城市职业工资和就业预测、所列美国行业内29-1211工资中位数，以及本职业AI采用率、替代率或工资因果估计。BLS行业目录可访问，但本轮对应链接返回查询界面，未获得中位数；不是未发布。2022职业大典原PDF本轮未核得，具体代码保留待核。相邻职业完整法域资格细则未全核；转岗分组为编辑判断。"
             ]
           },
           "id": "anesthesiologists.sources.source-card.4",
@@ -32174,26 +32121,26 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "exact",
-                  "访问 2026-09-15"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "exact",
                 "id": "onet",
                 "limitation": "用于职业身份、任务（20 项）与兴趣剖面（ISR）；美国详细职业口径，工资与就业亦为该职业专属口径。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 麻醉科医师职业摘要",
-                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
+                "period": "当前页面更新2026；工资2025年5月；就业2025—2035；行业2025年",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-1211.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "exact",
-                  "访问2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "exact",
                 "id": "bls",
@@ -32206,10 +32153,10 @@
                 "url": "https://www.bls.gov/oes/2025/may/oessrci.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "ooh",
@@ -32222,10 +32169,10 @@
                 "url": "https://www.bls.gov/ooh/healthcare/physicians-and-surgeons.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "exact",
-                  "访问2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "exact",
                 "id": "ep",
@@ -32238,10 +32185,10 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "exact",
-                  "访问2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "exact",
                 "id": "oews",
@@ -32254,10 +32201,10 @@
                 "url": "https://www.onetonline.org/link/localwages/29-1211.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "industry_proxy",
-                  "访问2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "industry_proxy",
                 "id": "nbs",
@@ -32270,10 +32217,10 @@
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "cnlaw",
@@ -32293,7 +32240,7 @@
                 ],
                 "evidence_type": "contextual",
                 "id": "cnclass",
-                "limitation": "用于中国大陆对应职业（麻醉科医师 2-05-01-13）与卫生专业技术人员（2-05）定位说明。",
+                "limitation": "历史登记用于麻醉科医师2-05-01-13分类定位；本轮原PDF未核得，具体代码待独立核实，不授予执业许可。",
                 "market": "中国大陆",
                 "name": "《中华人民共和国职业分类大典（2022 年版）》临床和口腔医师（2-05-01）麻醉科医师（2-05-01-13）",
                 "period": "2022年版",
@@ -32302,17 +32249,17 @@
                 "url": "https://hrss.sz.gov.cn/attachment/0/731/731778/8340671.pdf"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "privacy",
                 "limitation": "用于工作情境比例（精确性、错误后果、决策、沟通协作与暴露）。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 详细资料（工作情境）",
-                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
+                "period": "当前页面更新2026；工资2025年5月；就业2025—2035；行业2025年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1211.00"
@@ -32334,33 +32281,33 @@
                 "url": "https://www.onetonline.org/link/hot_tech/29-1211.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "operations",
                 "limitation": "用于任务清单与工作活动（术前评估、麻醉实施、术中监测、气道与生命支持、转归判断、教学研究）。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 详细资料（任务与工作活动）",
-                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
+                "period": "当前页面更新2026；工资2025年5月；就业2025—2035；行业2025年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1211.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "hr",
                 "limitation": "用于工作周时长、日程规律性与感染、污染物与辐射暴露等比例。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 详细资料（工作时间与环境）",
-                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
+                "period": "当前页面更新2026；工资2025年5月；就业2025—2035；行业2025年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1211.00"
@@ -32392,7 +32339,7 @@
                 "limitation": "用于兴趣代码 ISR（研究型、社会型、现实型）说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 职业摘要（兴趣剖面 ISR）",
-                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
+                "period": "历史登记资料期：就业2024—2034、工资2025年5月、行业2024年；本轮未重核此登记文档，不代表当前页面版本",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/29-1211.00"
@@ -32408,7 +32355,7 @@
                 "limitation": "认证检索入口，不代表所有州执照或普遍必需证书；资格边界由OOH/ASA及当地法规另核。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 执照与认证要求",
-                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
+                "period": "历史登记资料期：就业2024—2034、工资2025年5月、行业2024年；本轮未重核此登记文档，不代表当前页面版本",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localcert/29-1211.00"
@@ -32424,7 +32371,7 @@
                 "limitation": "用于职业概述与相关职业入口。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 自定义职业档案",
-                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
+                "period": "历史登记资料期：就业2024—2034、工资2025年5月、行业2024年；本轮未重核此登记文档，不代表当前页面版本",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/custom/29-1211.00"
@@ -32440,7 +32387,7 @@
                 "limitation": "用于任务与职责参考。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 职业摘要（任务与职责）",
-                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
+                "period": "历史登记资料期：就业2024—2034、工资2025年5月、行业2024年；本轮未重核此登记文档，不代表当前页面版本",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/29-1211.00"
@@ -32456,7 +32403,7 @@
                 "limitation": "用于任务与麻醉程序说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 详细资料（任务清单）",
-                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
+                "period": "历史登记资料期：就业2024—2034、工资2025年5月、行业2024年；本轮未重核此登记文档，不代表当前页面版本",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1211.00"
@@ -32472,7 +32419,7 @@
                 "limitation": "用于麻醉记录、监护数据与交接要求说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 详细资料（记录与交接要求）",
-                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
+                "period": "历史登记资料期：就业2024—2034、工资2025年5月、行业2024年；本轮未重核此登记文档，不代表当前页面版本",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1211.00"
@@ -32488,7 +32435,7 @@
                 "limitation": "用于任务清单参考。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 职业摘要（任务清单）",
-                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
+                "period": "历史登记资料期：就业2024—2034、工资2025年5月、行业2024年；本轮未重核此登记文档，不代表当前页面版本",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/29-1211.00"
@@ -32504,7 +32451,7 @@
                 "limitation": "用于任务描述与职责边界。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 任务描述",
-                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
+                "period": "历史登记资料期：就业2024—2034、工资2025年5月、行业2024年；本轮未重核此登记文档，不代表当前页面版本",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1211.00"
@@ -32520,7 +32467,7 @@
                 "limitation": "用于职业属性说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 职业摘要（职业属性）",
-                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
+                "period": "历史登记资料期：就业2024—2034、工资2025年5月、行业2024年；本轮未重核此登记文档，不代表当前页面版本",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/29-1211.00"
@@ -32536,23 +32483,23 @@
                 "limitation": "ONET任务与工作情境资料，不支持当前EP人数或详细/组合统计比较。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 详细资料（数据说明）",
-                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
+                "period": "历史登记资料期：就业2024—2034、工资2025年5月、行业2024年；本轮未重核此登记文档，不代表当前页面版本",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1211.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "census",
-                "limitation": "用于主要行业（医疗保健与社会援助）说明。",
+                "limitation": "2025年医疗保健与社会援助占92%就业，不是行业内职业工资。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 行业分布",
-                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
+                "period": "2025年行业就业分布；当前页面",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/industry/29-1211.00"
@@ -32568,16 +32515,16 @@
                 "limitation": "用于培训路径与教育要求说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 培训与教育信息",
-                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
+                "period": "历史登记资料期：就业2024—2034、工资2025年5月、行业2024年；本轮未重核此登记文档，不代表当前页面版本",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localtraining/29-1211.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "exact",
-                  "访问2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "exact",
                 "id": "onet-wages",
@@ -32600,16 +32547,16 @@
                 "limitation": "用于记录、报告与教学科研过程说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 详细资料（记录与质量管理要求）",
-                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
+                "period": "历史登记资料期：就业2024—2034、工资2025年5月、行业2024年；本轮未重核此登记文档，不代表当前页面版本",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1211.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "asa-career",
@@ -32622,10 +32569,10 @@
                 "url": "https://www.asahq.org/education-and-career/career-resources/anesthesia-as-a-career"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "oews-method",
@@ -34850,8 +34797,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
-              "ep"
+              "onet"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -34882,8 +34828,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
-              "ep"
+              "onet"
             ],
             "id": "record-version",
             "mitigation": {
@@ -34914,8 +34859,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
-              "hr"
+              "onet"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34946,8 +34890,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "hr",
-              "operations"
+              "onet",
+              "facilities"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -34978,8 +34922,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "ep",
-              "employer"
+              "privacy"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -35010,8 +34953,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "hr",
-              "ep"
+              "facilities"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35507,7 +35449,7 @@
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "职业工资缺口与行业参考",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "麻醉医师在不同学历背景下通常从哪些岗位方向开始？",
+            "scenario_heading": "不同医学教育背景需要核哪些入行条件？",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "学历背景",
             "scenario_value_label": "常见岗位方向"
@@ -35719,7 +35661,7 @@
             }
           }
         ],
-        "factors_heading": "哪些因素会影响美国麻醉医师工资？",
+        "factors_heading": "核实际美国报酬时需比较哪些条件？",
         "growth": {
           "$item": "anesthesiologists.us-salary.career-snapshot-secondary-locale.33",
           "block": "us-salary",
@@ -35818,7 +35760,7 @@
             }
           }
         ],
-        "industry_value_label": "该行业内本职业工资中位数",
+        "industry_value_label": "行业内本职业中位数／全国参照（分别标明）",
         "interpretation_heading": "这组美国工资数字应当怎么理解？",
         "interpretation_rows": [
           {
@@ -36100,7 +36042,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
             "value": {
               "$item": "anesthesiologists.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36145,7 +36087,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "ep",
             "value": {
               "$item": "anesthesiologists.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36512,7 +36454,7 @@
           },
           {
             "alternate_value": null,
-            "label": "国家统计局 2025 年城镇单位工资（民用口径）",
+            "label": "国家统计局2025年城镇单位年平均工资（行业及单位类型参照）",
             "secondary_value": null,
             "value": {
               "$item": "anesthesiologists.profile.onet-structured-fields-block.3",
@@ -38051,7 +37993,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "围术期诊疗：麻醉方案与风险管理 · 气道与生命体征管理 · 异常处置与复苏交接",
@@ -38102,7 +38044,7 @@
       "text": "麻醉科医师：任务、工资与就业前景（O*NET 29-1211.00）"
     }
   },
-  "source_content_sha256": "a3d88d888016adeaa28895c063ca86d8481005dfce124f259ee600d629f80c89",
+  "source_content_sha256": "684346ee87f96e1e9ec91c016cd8e1fcb5f61abbba9e6ca5ae0e07ab6c50bc1a",
   "subject": {
     "canonical_slug": "anesthesiologists",
     "name": "麻醉医师",

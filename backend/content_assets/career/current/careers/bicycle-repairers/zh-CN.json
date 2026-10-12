@@ -29,6 +29,15 @@
       "fact:identity": {
         "status": "pending_mapping"
       },
+      "fact:revision-us-employment-current": {
+        "status": "pending_mapping"
+      },
+      "fact:revision-us-growth-current": {
+        "status": "pending_mapping"
+      },
+      "fact:revision-us-openings-current": {
+        "status": "pending_mapping"
+      },
       "fact:us-annual-median-parent": {
         "status": "pending_mapping"
       },
@@ -8945,18 +8954,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.02.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            1,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.02.mitigation": {
         "ref": {
@@ -9034,18 +9033,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.03.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            2,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.03.mitigation": {
         "ref": {
@@ -9123,18 +9112,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.04.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            3,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.04.mitigation": {
         "ref": {
@@ -11260,52 +11239,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.href": {
-        "ref": {
-          "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.label": {
-        "ref": {
-          "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.headers.explanation": {
         "ref": {
@@ -11522,28 +11461,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.03.explanation.sources.02.href": {
-        "ref": {
-          "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.14",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.03.explanation.sources.02.label": {
         "ref": {
@@ -12046,28 +11965,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.href": {
-        "ref": {
-          "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.22",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.label": {
         "ref": {
@@ -23421,12 +23320,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业身份与任务：O*NET 49-3091.00 Bicycle Repairers（2026 年更新页面，未标注 Bright Outlook）。官方职责为修理和保养自行车；官方任务共 20 项（15 项核心、3 项补充，另有 2 项新增任务未给分数），核心任务的重要性分数从 93 至 60，补充任务为 65 与 41 与 26。工作活动按详细资料页列出 41 项并给出重要性分数，最高为决策和解决问题 87、识别物体与动作与事件 86、获取信息 83、处理与搬动物体 82、检查设备与结构或材料 82、影响他人或销售 80、与组织外部的人沟通 78、更新与使用相关知识 77、解决冲突与谈判 76、估算产品或事件或信息的可量化特征 75、直接面向公众服务或与公众打交道 75、维修与保养机械设备 73。详细工作活动 21 项（无分数）。任务清单描述群体工作，不代表每个岗位都承担全部任务。"
+              "O*NET 职业身份与任务：O*NET 49-3091.00 Bicycle Repairers（2026 年更新页面，未标注 Bright Outlook）。官方职责为修理和保养自行车；官方任务共 20 项（15项核心、3项补充、2项New新增任务（均包含在20项总数内，New无分数）），核心任务的重要性分数从 93 至 60，补充任务为 65 与 41 与 26。工作活动按详细资料页列出 41 项并给出重要性分数，最高为决策和解决问题 87、识别物体与动作与事件 86、获取信息 83、处理与搬动物体 82、检查设备与结构或材料 82、影响他人或销售 80、与组织外部的人沟通 78、更新与使用相关知识 77、解决冲突与谈判 76、估算产品或事件或信息的可量化特征 75、直接面向公众服务或与公众打交道 75、维修与保养机械设备 73。详细工作活动 21 项（无分数）。任务清单描述群体工作，不代表每个岗位都承担全部任务。"
             ]
           },
           "id": "bicycle-repairers.profile.onet-structured-fields-block.1",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -23455,13 +23354,17 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜98% 每天面对面讨论，92% 每天有电话交谈，41% 持续与他人接触（另有 59% 多数时间接触），36% 与他人身体距离为中等接近（一臂距离），11% 认为与外部顾客或公众打交道非常重要；78% 持续或几乎持续站立（另有 17% 超过一半时间），91% 少于一半时间坐着，24% 持续或几乎持续需要保持平衡（另有 56% 少于一半时间、17% 从不），11% 约一半时间弯腰或扭转身体，89% 从不攀爬梯子或脚手架；11% 每天在无环境控制的室内工作（另有 76% 每周一次以上），26% 每天在户外承受各种天气，24% 每天暴露于污染物，11% 每周一次以上暴露于分散注意或不适的噪音，14% 每年一次以上遇到轻微烧伤或割伤或咬伤，12% 几乎从不接触危险设备；91% 认为工作完全不自动化，98% 认为节奏由设备速度决定完全不重要；该页另有约 29 项情境（含是否佩戴常规或专门防护装备、时间压力、频率与精确性要求等）未公布百分比分布，本页不代填数值。\n主要装备与工具｜手工具（内六角与套筒与扳手与辐条扳手与链条工具）、专用量具（辐条张力计与卡尺与规格量具）与校正设备、举升与固定架与工作台、清洁与润滑与溶剂与油脂、砂轮机与焊接与喷漆设备（按岗位范围）、轮胎与内胎与无内胎系统工具、维修管理软件与销售点系统、个人防护（按作业需要的护目与手套与通风条件）。\n任务节奏｜11% 的典型工作周少于 40 小时（其余分布未公布）；65% 在决定上有很多自由、32% 有一些自由；62% 在确定任务与优先级上有很多自由、28% 有一些自由；80% 认为竞争程度中等；23% 认为重复相同任务非常重要；13% 每月一次以上处于冲突情境；24% 认为错误后果极其严重。\n协作对象｜与同店技师与销售与库管协作；12% 认为与工作组或团队合作非常重要；32% 对他人工作成果与结果承担很高责任；11% 对他人健康与安全承担中等责任。\n合规与安全｜维修与调校与装配须按具体车型与零件的原厂手册与规格执行；涉及电助力与锂离子电池与充电器时，须使用厂商提供或推荐的充电器与经确认适配的电池，不处理被非合格人员改装或重新加工过的电池组，并在有人在场时充电（美国 CPSC 微出行产品安全指引）；中国大陆侧电动自行车受强制性国家标准 GB 17761-2024《电动自行车安全技术规范》约束（2024-12-31 发布、2025-09-01 实施，全部代替 GB 17761-2018），并要求开展强制性产品认证；O*NET 列出 1 项国家认证（Certified Bicycle Technician）。\n记录与复盘｜工单与车型与零件版本、故障与定位过程、所执行的调整与规格、制动与轮组与紧固复检结果、零件与工时与费用、顾客反馈与异常需要可追溯。\n技能与训练｜O*NET 把该职业列为 Job Zone 1–2（SVP 低于 6.0）；基本技能以积极倾听 66 与批判性思维 63 与阅读理解 50 与口语表达 50 与监控 44 与写作 44 为主；可迁移技能以维修 72、故障排查 60、服务导向 56、时间管理 53、设备维护 50、质量控制分析 50、社会洞察力 50、复杂问题解决 47、设备选择 47、安装 47 为主；知识以机械 92、客户与个人服务 86、销售与营销 69、公共安全与安保 65、生产与加工 60、工程与技术 58 为主（共 33 项并给出分数）；能力共 52 项并给出分数（近视力 72、手指灵巧性 69、空间想象 69、手臂稳定 66 等）；工作风格字段本页未取得。\n准入与授权｜学历与认证不等于检验与放行或改装判定权限；O*NET 学历构成只列三档且未公布占比，该区职业经验要求从很少到数月、在岗训练从几天到一年；O*NET 列出 1 项国家认证，不等于录用门槛或雇主任命。\n行业与雇主｜O*NET 行业分布为零售贸易 80%、其他行业（含房地产与租赁与其他服务业）20%；常见雇主为品牌门店与独立车店与体育用品零售维修岗位与共享出行运维团队。"
+              "工作环境｜98% 每天面对面讨论，92% 每天有电话交谈，41% 持续与他人接触（另有 59% 多数时间接触），36% 与他人身体距离为中等接近（一臂距离），11% 认为与外部顾客或公众打交道非常重要；78% 持续或几乎持续站立（另有 17% 超过一半时间），91% 少于一半时间坐着，24% 持续或几乎持续需要保持平衡（另有 56% 少于一半时间、17% 从不），11% 约一半时间弯腰或扭转身体，89% 从不攀爬梯子或脚手架；无环境控制室内：76%每周一次以上、12%从不；本轮页面未显示每天比例，26% 每天在户外承受各种天气，24% 每天暴露于污染物，11% 每周一次以上暴露于分散注意或不适的噪音，14% 每年一次以上遇到轻微烧伤或割伤或咬伤，12%从不接触危险设备；91% 认为工作完全不自动化，98% 认为节奏由设备速度决定完全不重要；该页另有约 29 项情境（含是否佩戴常规或专门防护装备、时间压力、频率与精确性要求等）未公布百分比分布，本页不代填数值。\n主要装备与工具｜手工具（内六角与套筒与扳手与辐条扳手与链条工具）、专用量具（辐条张力计与卡尺与规格量具）与校正设备、举升与固定架与工作台、清洁与润滑与溶剂与油脂、砂轮机与焊接与喷漆设备（按岗位范围）、轮胎与内胎与无内胎系统工具、维修管理软件与销售点系统、个人防护（按作业需要的护目与手套与通风条件）。\n任务节奏｜11% 的典型工作周少于 40 小时（其余分布未公布）；65% 在决定上有很多自由、32% 有一些自由；62% 在确定任务与优先级上有很多自由、28% 有一些自由；80% 认为竞争程度中等；23% 认为重复相同任务非常重要；13% 每月一次以上处于冲突情境；24% 认为错误后果极其严重。\n协作对象｜与同店技师与销售与库管协作；12% 认为与工作组或团队合作非常重要；32% 对他人工作成果与结果承担很高责任；11% 对他人健康与安全承担中等责任。\n合规与安全｜维修与调校与装配须按具体车型与零件的原厂手册与规格执行；涉及电助力与锂离子电池与充电器时，须使用厂商提供或推荐的充电器与经确认适配的电池，不使用由非合格人员改装或重新加工过的电池组；此指引不提供拆修授权，并在有人在场时充电（美国 CPSC 微出行产品安全指引）；中国大陆侧电动自行车受强制性国家标准 GB 17761-2024《电动自行车安全技术规范》约束（2024-12-31 发布、2025-09-01 实施，全部代替 GB 17761-2018），相关生产/认证/销售落实CCC产品认证，非维修员工证照；O*NET 列出 1 项国家认证（Certified Bicycle Technician）。\n记录与复盘｜工单与车型与零件版本、故障与定位过程、所执行的调整与规格、制动与轮组与紧固复检结果、零件与工时与费用、顾客反馈与异常需要可追溯。\n技能与训练｜O*NET 把该职业列为 Job Zone 1–2（SVP 低于 6.0）；基本技能以积极倾听 66 与批判性思维 63 与阅读理解 50 与口语表达 50 与监控 44 与写作 44 为主；可迁移技能以维修 72、故障排查 60、服务导向 56、时间管理 53、设备维护 50、质量控制分析 50、社会洞察力 50、复杂问题解决 47、设备选择 47、安装 47 为主；知识以机械 92、客户与个人服务 86、销售与营销 69、公共安全与安保 65、生产与加工 60、工程与技术 58 为主（共 33 项并给出分数）；能力共 52 项并给出分数（近视力 72、手指灵巧性 69、空间想象 69、手臂稳定 66 等）；工作风格19项，注意细节75、可靠性71、谨慎50；为职业特征分数，非个人阈值。\n准入与授权｜学历与认证不等于检验与放行或改装判定权限；O*NET 学历构成只列三档且未公布占比，该区职业经验要求从很少到数月、在岗训练从几天到一年；O*NET 列出 1 项国家认证，不等于录用门槛或雇主任命。\n行业与雇主｜O*NET 行业分布为零售贸易 80%、其他行业（含房地产与租赁与其他服务业）20%；编辑列作求职核对场景：品牌门店、独立车店、体育用品零售维修及共享出行运维；本轮没有各类雇主的职业占比样本。"
             ]
           },
           "id": "bicycle-repairers.profile.work-context-block.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "health",
+            "msresearch",
+            "cn-product-policy",
+            "census",
+            "editor"
           ],
           "type": "prose"
         },
@@ -23514,12 +23417,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：按本页证据口径（暂无可安全使用的数据、尚未建立精确职业映射），未取得与 49-3091.00 精确对应的中国大陆公开职业工资条目，故本页不陈述该职业的月薪、起薪或分位数。按证据口径允许的三个官方代理各自标注人群与行业范围：① 国家统计局《2024 年城镇单位就业人员年平均工资情况》显示居民服务、修理和其他服务业城镇非私营单位就业人员年平均工资 68,159 元、城镇私营单位 52,139 元；② 国家统计局《2024 年农民工监测调查报告》显示从事居民服务修理和其他服务业的农民工占 12.3%、月均收入 4,023 元（增长 1.5%）。三者分别是行业门类平均与人群月均收入，都不是自行车修理工的岗位工资，不能用于估算个人报价；需要比较时应按城市与门店类型与任职方式与提成结构逐项核对。"
+              "中国官方岗位类别编码表（2022版大典分类，PDF第44页／印刷77页）列4-12-04-01自行车与电动自行车维修工，属于日用产品修理服务人员。该中国名称包含电动自行车，范围较美国49-3091.00宽，不能直接等同。职业名称与代码已有依据，全国精确职业工资分布仍未取得。国家统计局2025居民服务、修理和其他服务业：城镇非私营单位70,226元/年、私营单位52,059元/年；从事该行业的农民工月均收入4,130元、增长2.7%，行业就业占农民工12.5%。前两项是行业税前均值，第三项是特定人群从业收入／从业月数，均非自行车修理工工资。济宁人社局公开2022年度工资价位附件第9页第186行，职业为自行车与电动自行车维修工，单位元/年：低位29,873、下四分位31,084、中位36,294、上四分位38,973、高位42,083。只作地方历史、较宽职业范围参考；本轮未取得该行样本量、税费及提成细项，不能当全国、当前报价或美国职业等价值。"
             ]
           },
           "id": "bicycle-repairers.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -23543,12 +23449,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "就业与前景（本职业单列口径）：O*NET 就业趋势页给出 2024 年在岗 13,200 人、2034 年约 12,900 人（2024—2034 年 -2%，标签为下降（-1% 或更低））、预测期年均职位空缺约 1,600（含增长与替换）。负增长与仍存在空缺并不矛盾：空缺主要来自替代需求（从业者转岗或退出劳动力市场），而不是岗位扩张。该口径描述职业群体，不代表个人录用保证，也不能外推更宽职业群。"
+              "美国49-3091.00自行车修理工：2025年就业12,200人，2035年预计11,500人；2025—2035变化-6%，年均空缺1,200（含增长与替换）。下降与替换性空缺可同时存在；总体预测不测AI因果或个人录用概率。"
             ]
           },
           "id": "bicycle-repairers.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -23572,12 +23478,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业分布与工具信号：O*NET 行业分布给出零售贸易 80%、其他行业（含房地产与租赁与其他服务业）20%（2024 年）；该页对行业数据未标注取自其他职业。样本职位名称包括 Bicycle Fitter、Bicycle Mechanic、Bicycle Repair Technician、Bicycle Repairman、Bicycle Service Technician、Bicycle Technician、Bike Mechanic。招聘技术信号方面，O*NET 列出 3 项技术技能并均标注为热门技术（Microsoft Excel、Microsoft Outlook、Microsoft Word），页面未公布出现比例；另有维修管理类软件（如 RepairTRAX 与 Repair Traq 与 Bicycle Repair Man）与销售点类软件（LightSpeed Cloud）等共 6 类。这些来自招聘公告文本，不代表岗位采用率或自动化程度。"
+              "行业页现列零售贸易80%、其他行业20%，未单列资料年，行业比例不测工资。样本职位名称含Bicycle Fitter、Bicycle Mechanic、Bicycle Repair Technician等，名称不能证明具体雇主分布。O*NET2025美国Lightcast招聘广告列Excel、Outlook、Word，三项比例均Not available；广告提及不等于采用率、AI效果或全国统一录用要求。详细页另列维修管理、销售点等软件示例，示例不等于招聘广告实测普及。"
             ]
           },
           "id": "bicycle-repairers.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "onet"
+            "r2-pay-2",
+            "hr",
+            "bls"
           ],
           "type": "prose"
         },
@@ -23677,14 +23585,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "自行车修理工（美国侧 O*NET 49-3091.00，Bicycle Repairers）修理和保养自行车。官方职责原文为「Repair and service bicycles.」；O*NET 官方任务共 20 项（15 项核心、3 项补充，另有 2 项新增任务未给分数），核心任务包括安装与调整变速与齿轮机构（重要性 93）、安装与调整制动与刹车块（91）、安装新轮胎与内胎（91）、组装新车（91）、估算维修费用并写维修工单（91）、安装与维修与更换车把与车梯与车灯与车座等装备与附件（90）、清洁与润滑自行车零件（90）、订购零件（86）、销售自行车与配件（85）、校正轮组（83）、按提升贴合度与骑行姿势进行调整（82）、用手工具拆装轮轴以维修或调整或更换缺陷零件（79）、帮助顾客按体形与用途选择车辆（77）、通过切断与攻丝新辐条编轮（62）、用台式砂轮修整替换件（60）；补充任务包括用刮刀与补片修补内胎破孔（65）、用喷枪或刷子给车架喷漆（41）、用氧乙炔焊枪与焊条焊接断裂或开裂车架（26），以及检查与维修无内胎轮胎系统与附件、安装无内胎轮胎系统与附件（新增，未给分数）。该职业在美国属 Job Zone 1–2（SVP 低于 6.0），O*NET 未标注 Bright Outlook；其工资、就业与行业数据均为本职业单列口径。本页不构成扭矩数值、装配顺序或改装与解除限速的方法。"
+              "自行车修理工（美国侧 O*NET 49-3091.00，Bicycle Repairers）修理和保养自行车。官方职责原文为「Repair and service bicycles.」；O*NET 官方任务共 20 项（15项核心、3项补充、2项New新增任务（均包含在20项总数内，New无分数）），核心任务包括安装与调整变速与齿轮机构（重要性 93）、安装与调整制动与刹车块（91）、安装新轮胎与内胎（91）、组装新车（91）、估算维修费用并写维修工单（91）、安装与维修与更换车把与车梯与车灯与车座等装备与附件（90）、清洁与润滑自行车零件（90）、订购零件（86）、销售自行车与配件（85）、校正轮组（83）、按提升贴合度与骑行姿势进行调整（82）、用手工具拆装轮轴以维修或调整或更换缺陷零件（79）、帮助顾客按体形与用途选择车辆（77）、通过切断与攻丝新辐条编轮（62）、用台式砂轮修整替换件（60）；补充任务包括用刮刀与补片修补内胎破孔（65）、用喷枪或刷子给车架喷漆（41）、用氧乙炔焊枪与焊条焊接断裂或开裂车架（26），以及检查与维修无内胎轮胎系统与附件、安装无内胎轮胎系统与附件（新增，未给分数）。该职业在美国属 Job Zone 1–2（SVP 低于 6.0），O*NET 未标注 Bright Outlook；其工资、就业与行业数据均为本职业单列口径。本页不构成扭矩数值、装配顺序或改装与解除限速的方法。"
             ]
           },
           "id": "bicycle-repairers.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -23798,13 +23704,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把 49-3091.00（Bicycle Repairers）列为 Job Zone 1–2（SVP 低于 6.0），页面只列出三个学历档次（部分岗位要求高中文凭或同等学历、部分要求上过大学但无学位、部分要求低于高中文凭），未公布各级占比；该区职业通常在岗训练从几天到一年，相关经验要求从很少到数月不等。O*NET 培训页面显示全国共 2 个相关培训项目（Bicycle Mechanics and Repair Technology/Technician），职业摘要另列出注册学徒岗位 Bicycle Repair Technician，并提供 Apprenticeship.gov 入口；认证页面列出 1 项国家认证（Certified Bicycle Technician，United Bicycle Institute）。中国大陆侧以用人单位岗前培训与在岗带教与厂商培训为主，并须符合适用的电动自行车与电池与产品安全要求。"
+              "O*NET 把 49-3091.00（Bicycle Repairers）列为 Job Zone 1–2（SVP 低于 6.0），页面只列出三个学历档次（部分岗位要求高中文凭或同等学历、部分要求上过大学但无学位、部分要求低于高中文凭），未公布各级占比；该区职业通常在岗训练从几天到一年，相关经验要求从很少到数月不等。O*NET 培训页面显示全国共3个相关培训项目（Bicycle Mechanics and Repair Technology/Technician），职业摘要另列出注册学徒岗位 Bicycle Repair Technician，并提供 Apprenticeship.gov 入口；认证页面列出 1 项国家认证（Certified Bicycle Technician，United Bicycle Institute）。中国大陆具体录用与培训要求另核用人单位，并须符合适用的电动自行车与电池与产品安全要求。"
             ]
           },
           "id": "bicycle-repairers.profile.career-quick-answers-block.19",
           "source_refs": [
             "onet",
-            "onet"
+            "nist",
+            "census",
+            "cn-career-code"
           ],
           "type": "prose"
         },
@@ -23828,13 +23736,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "学历、职业培训、行业认证、雇主任用与门店作业授权、以及涉及电助力与电池与改装与解除限速的法域要求是不同状态：学历与培训结业与认证不带来检验与放行或改装判定权限；须按雇主与岗位与法域逐项核验；本页的工资与就业为本职业单列口径，且预测为下降（就业趋势页 -2%，13,200 → 12,900），与仍存在替代性空缺并不矛盾。"
+              "学历、培训、认证、雇主任用、门店内部权限及法定产品要求分别核验，不互相自动替代。美国49-3091.00自行车修理工：2025年就业12,200人，2035年预计11,500人；2025—2035变化-6%，年均空缺1,200（含增长与替换）。下降与替换性空缺可同时存在；总体预测不测AI因果或个人录用概率。"
             ]
           },
           "id": "bicycle-repairers.profile.career-quick-answers-block.21",
           "source_refs": [
             "onet",
-            "onet"
+            "census",
+            "ep-current",
+            "cn-product-policy"
           ],
           "type": "prose"
         },
@@ -23872,13 +23782,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧为 O*NET 49-3091.00（Bicycle Repairers），其工资、就业与行业数据在 O*NET 页面上均为本职业单列口径，未标注取自其他职业；该页也未为该职业标注 Bright Outlook，就业预测为下降（2024 年 13,200 人 → 2034 年约 12,900 人，-2%）。中国大陆侧本页未取得与该职业精确对应的公开职业工资条目，只展示三个明确标注人群与行业范围的官方代理（居民服务、修理和其他服务业城镇非私营单位 68,159 元/年、城镇私营单位 52,139 元/年；从事该行业的农民工月均收入 4,023 元/月），三者均不能用于估算自行车修理工的个人报价；比较时应先辨认岗位属于品牌门店、独立车店、共享单车运维、还是体育用品零售维修岗位，以及任职方式与提成结构。"
+              "美国49-3091.00自行车修理工：2025年就业12,200人，2035年预计11,500人；2025—2035变化-6%，年均空缺1,200（含增长与替换）。下降与替换性空缺可同时存在；总体预测不测AI因果或个人录用概率。中国官方岗位类别编码表（2022版大典分类，PDF第44页／印刷77页）列4-12-04-01自行车与电动自行车维修工，属于日用产品修理服务人员。该中国名称包含电动自行车，范围较美国49-3091.00宽，不能直接等同。职业名称与代码已有依据，全国精确职业工资分布仍未取得。国家统计局2025居民服务、修理和其他服务业：城镇非私营单位70,226元/年、私营单位52,059元/年；从事该行业的农民工月均收入4,130元、增长2.7%，行业就业占农民工12.5%。前两项是行业税前均值，第三项是特定人群从业收入／从业月数，均非自行车修理工工资。地方历史资料另列，不作个人报价。"
             ]
           },
           "id": "bicycle-repairers.profile.career-quick-answers-block.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current",
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -23901,13 +23814,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧 O*NET 只列出三个学历档次且未公布占比；该区职业经验要求从很少到数月、在岗训练从几天到一年；O*NET 全国登记 2 个 Bicycle Mechanics and Repair Technology/Technician 培训项目，另有注册学徒岗位 Bicycle Repair Technician，认证页面列出 1 项国家认证（Certified Bicycle Technician）。中国大陆侧以用人单位岗前培训与在岗带教与厂商培训为主，并须符合适用的电动自行车与电池与产品安全要求，具体学历与经验要求由用人单位规定。"
+              "O*NET当前美国目录有3个相关院校项目：Minneapolis Community and Technical College（不足1年，5名完成者）、Northwest Arkansas Community College（1—2年，4名）、Andrews University（1—2年，0名）。院校目录IPEDS2025—26，完成者为2024—25年度；不代表当前招生、个人所需训练年限或录用门槛。摘要列注册学徒Bicycle Repair Technician；认证页有Certified Bicycle Technician（United Bicycle Institute）1项，非强制准入。中国官方岗位类别编码表（2022版大典分类，PDF第44页／印刷77页）列4-12-04-01自行车与电动自行车维修工，属于日用产品修理服务人员。该中国名称包含电动自行车，范围较美国49-3091.00宽，不能直接等同。职业名称与代码已有依据，全国精确职业工资分布仍未取得。具体录用条件核雇主。"
             ]
           },
           "id": "bicycle-repairers.profile.career-quick-answers-block.26",
           "source_refs": [
             "onet",
-            "onet"
+            "nist",
+            "census",
+            "cn-career-code"
           ],
           "type": "prose"
         },
@@ -23930,13 +23845,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "维修与调校与装配与清洁润滑须按具体车型与零件的原厂手册与规格执行；涉及制动与紧固与轮组张力是否达到可放行状态、电助力与电池与充电器是否适配、是否涉及改装或解除限速、以及车架或轮圈是否结构性损伤时，须按原厂手册与适用法域与门店授权执行。美国侧 O*NET 列出 1 项国家认证（不等于录用门槛或雇主任命）；中国大陆侧电动自行车受强制性国家标准 GB 17761-2024《电动自行车安全技术规范》约束（2024-12-31 发布、2025-09-01 实施，全部代替 GB 17761-2018，并要求开展强制性产品认证）。入职前核对岗前培训与授权与厂商培训流程，不能从学历或经验直接推断。"
+              "维修与调校与装配与清洁润滑须按具体车型与零件的原厂手册与规格执行；涉及制动与紧固与轮组张力是否达到可放行状态、电助力与电池与充电器是否适配、是否涉及改装或解除限速、以及车架或轮圈是否结构性损伤时，须按原厂手册与适用法域与门店授权执行。美国侧 O*NET 列出 1 项国家认证（不等于录用门槛或雇主任命）；中国大陆侧电动自行车受强制性国家标准 GB 17761-2024《电动自行车安全技术规范》约束（2024-12-31 发布、2025-09-01 实施，全部代替 GB 17761-2018，CCC属于产品认证，不是维修员个人许可）。入职前核对岗前培训与授权与厂商培训流程，不能从学历或经验直接推断。"
             ]
           },
           "id": "bicycle-repairers.profile.career-quick-answers-block.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "msresearch",
+            "cn-product-policy",
+            "census",
+            "editor"
           ],
           "type": "prose"
         },
@@ -23959,13 +23876,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "作业环境与工具与化学品与零件须符合适用的安全要求（工具与举升与固定方式、油脂与清洁剂与溶剂的使用与通风、护目与手部防护、碎屑与尖锐零件处理、工位与地面整洁）；涉及电助力与锂离子电池与充电器时，须按厂商要求使用匹配的充电器与经确认适配的电池，不处理被非合格人员改装或重新加工过的电池组，并在有人在场时充电。O*NET 工作情境显示 78% 持续或几乎持续站立（另有 17% 超过一半时间）、24% 持续或几乎持续需要保持平衡（另有 56% 少于一半时间）、98% 每天面对面讨论、92% 每天有电话交谈、41% 持续与他人接触（另有 59% 多数时间接触）、24% 每天暴露于污染物、26% 每天在户外承受各种天气、14% 每年一次以上遇到轻微烧伤或割伤或咬伤、11% 每周一次以上暴露于分散注意或不适的噪音、11% 每天在无环境控制的室内工作（76% 每周一次以上）；91% 认为工作完全不自动化，98% 认为节奏由设备速度决定完全不重要。本页不构成扭矩数值、装配顺序或改装与解除限速的方法。"
+              "作业环境与工具与化学品与零件须符合适用的安全要求（工具与举升与固定方式、油脂与清洁剂与溶剂的使用与通风、护目与手部防护、碎屑与尖锐零件处理、工位与地面整洁）；涉及电助力与锂离子电池与充电器时，须按厂商要求使用匹配的充电器与经确认适配的电池，不使用由非合格人员改装或重新加工过的电池组；CPSC使用指引不提供电池拆修权限，并在有人在场时充电。O*NET 工作情境显示 78% 持续或几乎持续站立（另有 17% 超过一半时间）、24% 持续或几乎持续需要保持平衡（另有 56% 少于一半时间）、98% 每天面对面讨论、92% 每天有电话交谈、41% 持续与他人接触（另有 59% 多数时间接触）、24% 每天暴露于污染物、26% 每天在户外承受各种天气、14% 每年一次以上遇到轻微烧伤或割伤或咬伤、11% 每周一次以上暴露于分散注意或不适的噪音、无环境控制室内76%每周一次以上、12%从不；每天比例本轮未显示；91% 认为工作完全不自动化，98% 认为节奏由设备速度决定完全不重要。本页不构成扭矩数值、装配顺序或改装与解除限速的方法。"
             ]
           },
           "id": "bicycle-repairers.profile.career-quick-answers-block.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "health",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24545,10 +24463,10 @@
                 "url": "https://www.onetonline.org/link/industry/49-3091.00"
               },
               {
-                "entity": "O*NET 49-3091.00 职业摘要（就业与预测字段）",
+                "entity": "O*NET自行车修理工2025—2035全国就业趋势",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/49-3091.00"
+                "url": "https://www.onetonline.org/link/localtrends/49-3091.00"
               },
               {
                 "entity": "O*NET 49-3091.00 全国工资分位",
@@ -24557,10 +24475,10 @@
                 "url": "https://www.onetonline.org/link/localwages/49-3091.00"
               },
               {
-                "entity": "O*NET 49-3091.00 培训与教育信息",
+                "entity": "O*NET 49-3091.00 职业摘要（自行车修理工）",
                 "id": "link-8",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/49-3091.00"
+                "url": "https://www.onetonline.org/link/summary/49-3091.00"
               },
               {
                 "entity": "O*NET 49-3091.00 详细资料（工作情境与工作活动）",
@@ -24569,16 +24487,16 @@
                 "url": "https://www.onetonline.org/link/details/49-3091.00"
               },
               {
-                "entity": "O*NET 49-3091.00 认证发现（国家认证口径）",
+                "entity": "O*NET 49-3091.00 技术清单（热门技术信号）",
                 "id": "link-10",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localcert/49-3091.00"
+                "url": "https://www.onetonline.org/link/hot_tech/49-3091.00"
               },
               {
-                "entity": "O*NET 49-3091.00 行业分布（行业与雇主类型口径）",
+                "entity": "O*NET自行车修理工2025—2035全国就业趋势",
                 "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/49-3091.00"
+                "url": "https://www.onetonline.org/link/localtrends/49-3091.00"
               },
               {
                 "entity": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
@@ -24593,40 +24511,40 @@
                 "url": "https://www.onetonline.org/link/summary/49-3091.00"
               },
               {
-                "entity": "O*NET 49-3091.00 详细资料",
+                "entity": "O*NET 49-3091.00 技术清单（热门技术信号）",
                 "id": "link-14",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/49-3091.00"
-              },
-              {
-                "entity": "O*NET 49-3091.00 技术清单",
-                "id": "link-15",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/hot_tech/49-3091.00"
               },
               {
-                "entity": "O*NET 49-3091.00 行业分布",
-                "id": "link-16",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/49-3091.00"
-              },
-              {
-                "entity": "O*NET 49-3091.00 职业摘要（就业与预测字段）",
-                "id": "link-17",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/49-3091.00"
-              },
-              {
-                "entity": "O*NET 49-3091.00 详细资料（工作情境）",
-                "id": "link-18",
+                "entity": "O*NET 49-3091.00 详细资料（任务与工作活动）",
+                "id": "link-15",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/49-3091.00"
               },
               {
-                "entity": "O*NET 49-3091.00 培训与教育信息",
+                "entity": "O*NET自行车修理工2025—2035全国就业趋势",
+                "id": "link-16",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/localtrends/49-3091.00"
+              },
+              {
+                "entity": "Park Tool《Wheel Truing (Lateral & Radial)》（厂商轮组校正技术指南）",
+                "id": "link-17",
+                "relation": "career.source",
+                "url": "https://www.parktool.com/en-us/blog/repair-help/wheel-and-rim-truing"
+              },
+              {
+                "entity": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
+                "id": "link-18",
+                "relation": "career.source",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "entity": "O*NET 49-3091.00 详细资料（任务与工作活动）",
                 "id": "link-19",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/49-3091.00"
+                "url": "https://www.onetonline.org/link/details/49-3091.00"
               }
             ]
           },
@@ -24693,13 +24611,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把故障问询与维修资料检索、工单摘要、零件匹配初筛、库存与订购摘要、预约与排程用于提高效率，但拆装与测量与调校、以及在真实载荷下判断异响与手感与制动与轮组状态仍由本人按原厂手册与规格承担，系统输出必须经实物检查与功能测试复核后才进入正式记录。"
+              "编辑建议：在获准的虚构或必要范围材料上试验问询提纲、资料检索、工单摘要、零件初筛、库存及预约草稿，并测遗漏与返工。本轮没有本职业实测采用率或效率增益；零件规格、实物检查和放行仍核原厂及雇主规程。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.13",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -24770,15 +24689,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：AI 与自动化可以改变故障问询与维修资料检索、工单摘要、零件匹配初筛、库存与订购摘要与预约排程，但没有官方证据表明它会整体取代拆装与测量与调校、真实载荷下的异响与手感判断、制动与轮组与紧固的复检与放行决定；任务自动化程度不等于岗位数量变化。"
+              "本轮所读职业资料与ILO研究未给自行车修理工整体替代率或消失年份。可先试验文本整理，具体机械检验、维修和交付由承担岗位职责者复核；任务暴露不等于采用、效率或就业结果。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "ilo",
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24943,12 +24861,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于该职业的就业与 2024—2034 年预测口径（本职业单列口径，变化为负）。"
+              "美国49-3091.00自行车修理工：2025年就业12,200人，2035年预计11,500人；2025—2035变化-6%，年均空缺1,200（含增长与替换）。下降与替换性空缺可同时存在；总体预测不测AI因果或个人录用概率。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.30",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -24985,13 +24903,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表比较三组环节在自动化影响上的差别：哪些可被辅助，哪些判断与责任仍由人承担。"
+              "下表是编辑提出的三类辅助试验，不是已采用技术或已测自动化比例。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25000,13 +24918,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "故障问询与维修资料检索、工单摘要、零件匹配初筛、库存与订购摘要可辅助完成。"
+              "编辑试验候选：问询提纲、资料检索和工单摘要；零件匹配只作初筛，型号、版本及适配由人工逐一核验。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25030,13 +24948,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "故障描述与零件与库存数据可借助系统整理。"
+              "编辑候选：整理经授权的故障描述、零件和库存草稿；先核输入范围、字段遗漏及版本一致性。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor",
+            "cn-pipl"
           ],
           "type": "prose"
         },
@@ -25060,13 +24979,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工单与零件与复检记录可自动生成与归档。"
+              "编辑候选：生成工单及零件记录草稿；不能自动写入未经确认的实测值、复检结论或放行状态。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -25090,7 +25009,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、技术信号、就业预测与行业分布，不是自动化替代率或岗位数量预测。"
+              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、技术信号、就业预测与任务暴露研究，不是自动化替代率或岗位数量预测。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.40",
@@ -25202,12 +25121,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "官方任务共 20 项（15 项核心、3 项补充，另有 2 项新增任务未给分数），包含安装与调整变速与齿轮机构、安装与调整制动与刹车块、安装新轮胎与内胎、组装新车、估算维修费用并写维修工单、清洁与润滑零件、校正轮组、拆装轮轴以维修或调整或更换缺陷零件、帮助顾客按体形与用途选择车辆；工作活动按详细资料页列出 41 项并给出重要性分数。"
+              "官方任务共 20 项（15项核心、3项补充、2项New新增任务（均包含在20项总数内，New无分数）），包含安装与调整变速与齿轮机构、安装与调整制动与刹车块、安装新轮胎与内胎、组装新车、估算维修费用并写维修工单、清洁与润滑零件、校正轮组、拆装轮轴以维修或调整或更换缺陷零件、帮助顾客按体形与用途选择车辆；工作活动按详细资料页列出 41 项并给出重要性分数。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.48",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25216,12 +25135,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工作活动描述职业群体特征，不代表雇主已部署自动化或岗位已被替代。"
+              "美国招聘广告的软件提及，非机械任务自动化、实际采用或效率效果。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.49",
           "source_refs": [
-            "onet"
+            "hr"
           ],
           "type": "prose"
         },
@@ -25258,12 +25177,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面列出 3 项软件技能并均标注为热门技术：Microsoft Excel、Microsoft Outlook、Microsoft Word；页面未公布出现比例。"
+              "O*NET2025美国Lightcast招聘广告列Excel、Outlook、Word，三项比例均Not available；广告提及不等于采用率、AI效果或全国统一录用要求。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "onet"
+            "hr"
           ],
           "type": "prose"
         },
@@ -25286,12 +25205,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 49-3091.00 职业摘要（就业与预测字段）"
+              "O*NET49-3091.00全国就业趋势2025—2035"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25300,12 +25219,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "就业与 2024—2034 年预测"
+              "就业预测：2025—2035"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25314,12 +25233,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页按本职业口径给出 2024 年在岗 13,200 人、2034 年约 12,900 人（2024—2034 年 -2%，下降）、预测期年均职位空缺约 1,600（含增长与替换）；负增长与仍存在空缺并不矛盾，空缺主要来自替代需求。"
+              "美国49-3091.00自行车修理工：2025年就业12,200人，2035年预计11,500人；2025—2035变化-6%，年均空缺1,200（含增长与替换）。下降与替换性空缺可同时存在；总体预测不测AI因果或个人录用概率。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25328,12 +25247,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业分布描述统计分类（本职业单列口径），不能用于推导行业工资、就业规模或个人岗位归属。"
+              "研究对象为较宽职业任务暴露，不是本职业采用率、替代率或工资实测。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.57",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25342,12 +25261,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 49-3091.00 行业分布"
+              "ILO工作论文140：生成式AI职业任务暴露指数"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.58",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25356,12 +25275,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业分布"
+              "全球较宽职业分类的任务暴露研究"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.59",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25370,12 +25289,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面按 2024 年给出该职业的行业分布为零售贸易 80%、其他行业（含房地产与租赁与其他服务业）20%。"
+              "ILO2025论文结合任务数据、专家判断与模型预测评估生成式AI暴露，讨论职业任务转变；不能由此推出自行车修理工整体替代率、实际门店采用或岗位消失年份。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25384,13 +25303,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助的是故障问询与维修资料检索、工单摘要、零件匹配初筛、库存与订购摘要与预约排程等可回滚环节；这些是辅助能力，输出仍需经实物检查与功能测试复核后才能使用。技术可行不等于已采用。"
+              "本页提出问询提纲、检索及工单摘要等编辑候选，并未实测本职业AI效果。先在虚构材料核错漏、来源与可回滚性；不能把机械验收或规格判断交给生成文本。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.61",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25399,13 +25319,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "取决于雇主的诊断与工单与零件与库存系统、车型与规格资料的获取方式、以及上岗与复核安排；本页不推测采用进度，也没有该职业的采用率统计。"
+              "O*NET2025美国Lightcast招聘广告列Excel、Outlook、Word，三项比例均Not available；广告提及不等于采用率、AI效果或全国统一录用要求。具体系统、数据权限、复核和采用条件另核目标雇主。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.62",
           "source_refs": [
-            "onet",
-            "onet"
+            "hr",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25414,13 +25334,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露、实际采用、生产率与就业是不同测量对象；O*NET 展示的 BLS 数据对本职业 2024—2034 年给出 -2%（下降）与年均空缺约 1,600，本页不把任务自动化程度等同于岗位数量变化。"
+              "任务暴露、采用、效率、工资及就业分别衡量。美国49-3091.00自行车修理工：2025年就业12,200人，2035年预计11,500人；2025—2035变化-6%，年均空缺1,200（含增长与替换）。下降与替换性空缺可同时存在；总体预测不测AI因果或个人录用概率。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet",
-            "onet"
+            "ilo",
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25429,13 +25349,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有官方证据支持「被整体取代」。自动化可能辅助问询与检索与工单与零件匹配，但拆装与测量与调校、异响与手感判断、制动与轮组与紧固的复检与放行决定仍由人承担。"
+              "本轮没有整体替代率实测；O*NET列机械维修任务，ILO提供较宽的任务暴露研究。将文本辅助与实物维修、复检及岗位责任分开核，不能由任务清单推永不替代。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "ilo",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25444,13 +25365,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业摘要 / 详细资料"
+              "O*NET任务与ILO2025任务暴露研究（非职业替代率）"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "onet",
-            "onet"
+            "ilo",
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25459,13 +25381,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不需要入门即会编程，但会用维修管理类软件与办公软件已成为部分门店的常见要求。核心能力来自按原厂手册与规格的拆装与调校、量测与复检、故障排查与顾客解释；是否要求软件或系统能力取决于门店与雇主，具体要求以用人单位规定为准。"
+              "本次资料未把编程列为统一入门门槛。O*NET2025美国Lightcast招聘广告列Excel、Outlook、Word，三项比例均Not available；广告提及不等于采用率、AI效果或全国统一录用要求。优先对照实际岗位的机械维修、故障排查、量测和顾客解释要求；是否要软件训练另核雇主。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.66",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "hr",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25474,13 +25397,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 技术清单 / 培训与教育信息"
+              "O*NET2025美国招聘软件信号"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet",
-            "onet"
+            "hr"
           ],
           "type": "prose"
         },
@@ -25489,13 +25411,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "故障问询与资料检索、工单摘要、零件匹配初筛、库存与订购摘要；都是可回滚、可复核的辅助环节。"
+              "编辑候选为问询提纲、检索与工单摘要、库存草稿；本轮没有职业任务级AI暴露排序，不能称它们已经“最容易被替代”。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "ilo",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25504,12 +25427,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 详细资料"
+              "O*NET本职业机械任务；候选用途为编辑建议"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.69",
           "source_refs": [
-            "onet"
+            "ilo",
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25518,13 +25443,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 展示的 BLS 数据对本职业 2024—2034 年的口径为 -2%（下降）、预测期年均职位空缺约 1,600；该口径描述职业群体，不代表个人录用概率。"
+              "美国49-3091.00自行车修理工：2025年就业12,200人，2035年预计11,500人；2025—2035变化-6%，年均空缺1,200（含增长与替换）。下降与替换性空缺可同时存在；总体预测不测AI因果或个人录用概率。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25533,13 +25457,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业摘要（就业与预测字段）"
+              "O*NET2025—2035就业趋势"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25548,13 +25471,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。车型与零件版本与规格依据的确认、拆装与调校与异响与手感判断、以及制动与轮组与紧固是否可放行的决定必须由本人与有权限的人员按原厂手册与适用法域与用人单位制度承担；系统可用于检索与记录整理，但不能替代判断与责任承担。"
+              "AI文本不能充当已做实物检验或可放行的证据。型号、实测、制动与轮组状态须由承担相应职责者按原厂与门店规程核；Park Tool指南给轮组四项校正维度，不提供每种车型放行阈值。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet",
-            "onet"
+            "archivists",
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25563,12 +25487,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业摘要 / 详细资料"
+              "Park Tool轮组四项校正指南（厂商资料）"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.73",
           "source_refs": [
-            "onet"
+            "archivists"
           ],
           "type": "prose"
         },
@@ -25577,13 +25501,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有任何官方来源给出这样的年份。任务暴露、采用率与岗位数量是不同概念，本页不做岗位消失年份预测；官方预测只给出本职业 2024—2034 年 -2%并列出就业与空缺口径。"
+              "本轮所读资料没有职业消失年份；这里只列BLS2025—2035总体预测，不作AI因果或消失时间预测。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "onet",
-            "onet"
+            "ilo",
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25592,13 +25516,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页方法说明"
+              "ILO任务暴露研究与本页编辑边界"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "onet",
-            "onet"
+            "ilo",
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25607,13 +25532,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "优先掌握按原厂手册与规格的拆装与调校、扭矩与间隙与辐条张力的核对、制动与轮组与紧固的复检流程、电助力与电池与充电器的适配与防篡改要求、以及故障排查与顾客解释；系统与工具能力排在规格与复检之后。具体要求以用人单位规定为准。"
+              "编辑建议：优先对照机械维修72、故障排查60、客户服务知识86及原厂型号资料，训练实物检查、规格核对和顾客解释；电助力与电池权限另核法域、产品要求和厂商，非培训目录统一门槛。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.76",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "cn-product-policy",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25622,13 +25548,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 培训与教育信息"
+              "O*NET机械维修及知识/技能字段"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.77",
           "source_refs": [
-            "onet",
-            "onet"
+            "ilo",
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25637,13 +25564,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具进入接车与工单与零件流程时，人的控制点应按以下五步固定下来；任何一步缺失都不应扩大使用范围。"
+              "以下五步是编辑提出的工具试验核对框架，非已取得的门店制度或法定恢复程序。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.78",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "cn-pipl"
           ],
           "type": "prose"
         },
@@ -25772,13 +25699,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按适用个人信息保护要求与用人单位规定处理顾客与车辆信息，不向未授权渠道提供或传播。"
+              "中国涉及可识别顾客的信息处理须核合法基础、目的/最小范围、告知与保存期限（个人信息法第4—6、13、17、19条）；车辆技术参数本身不必然全属个人信息。编辑建议先核批准的输入与外发渠道；美国要求另核具体机构及法域。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.87",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-pipl",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26274,13 +26201,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以上内容区分自动化能力、实际部署与就业结果；进入下一节可以查看中国大陆行业与人群代理口径的证据边界与缺口说明。"
+              "本节区分编辑辅助候选、招聘软件信号与总体就业预测；下节中国薪资另列2025行业/人群背景及2022济宁较宽职业历史价位，全国精确分布仍缺。"
             ]
           },
           "id": "bicycle-repairers.ai-impact.ai-impact-table.122",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "cn-local-wages",
+            "cn-wages-current",
+            "cn-farmers-current"
           ],
           "type": "prose"
         }
@@ -26297,12 +26226,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆未取得与 49-3091.00 对应的自行车修理工精确职业工资条目；本页只展示三个明确标注人群与行业范围的官方代理，不把中文页面语言当作中国等价职业映射。"
+              "中国官方岗位类别编码表（2022版大典分类，PDF第44页／印刷77页）列4-12-04-01自行车与电动自行车维修工，属于日用产品修理服务人员。该中国名称包含电动自行车，范围较美国49-3091.00宽，不能直接等同。职业名称与代码已有依据，全国精确职业工资分布仍未取得。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26311,12 +26243,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "截至 2026 年 9 月，有界检索未找到单列自行车修理工（或与之精确对应的自行车维修职业序列）的公开职业工资条目；按本页证据口径（暂无可安全使用的数据、尚未建立精确职业映射），本页不陈述该职业的月薪、起薪或分位数，仅展示三个官方代理并逐一标注人群与行业范围。"
+              "证据不足：本轮未取得全国自行车修理工月薪、起薪、中位数或分位；已取得中国较宽职业代码及2022济宁历史工资价位，不能再称没有任何职业条目。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26325,12 +26260,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "68,159 元/年（2024 年，居民服务、修理和其他服务业，城镇非私营单位；行业代理，非本职业工资）"
+              "70,226元/年（2025居民服务、修理和其他服务业城镇非私营税前均值，非职业工资）"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26353,12 +26291,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "52,139 元/年（2024 年，居民服务、修理和其他服务业，城镇私营单位；行业代理）"
+              "52,059元/年（2025同业城镇私营税前均值，非职业工资）"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26367,7 +26308,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "同一行业在私营单位的对照值，仍属行业代理。自行车维修岗位中相当比例分布在私营与小微门店与自雇经营，但这不构成对本职业工资的判断。"
+              "同一行业在私营单位的对照值，仍属行业代理。本轮未取得中国自行车维修岗位私营、小微门店或自雇占比；个体及自雇收入不由该单位工资均值代表。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.12",
@@ -26381,12 +26322,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "4,023 元/月（2024 年，从事居民服务修理和其他服务业的农民工；人群口径代理，非本职业工资）"
+              "4,130元/月（2025从事居民服务修理和其他服务业农民工人群均值，非职业工资）"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26395,12 +26339,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "该数值是「农民工中从事居民服务修理和其他服务业者」的月均收入，属人群口径而不是岗位类别工资；2024 年该人群占全部农民工的 12.3%、收入增长 1.5%。它与上面两行的人群与行业范围不同，三者都不能用于估算自行车修理工的个人报价。"
+              "农民工行业人群从业收入／从业月数，2025同比增长2.7%；不是全体维修工或单位税前工资。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26423,12 +26370,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "自行车维修岗位中相当比例分布在个体工商户与小微门店与自雇经营，并可能含季节波动与零件提成，进一步限制可比较性。"
+              "单位工资调查不含个体工商户及自由职业者；本轮没有本职业在个体、小微及自雇中的占比，不能写“相当比例”。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26437,12 +26387,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "资料期：城镇单位工资为 2024 年、2025-05-16 发布；农民工监测为 2024 年、2025-04-30 发布；本页不发布本职业工资数值。"
+              "单位工资与农民工数据均2025年，分别2026-05-15、2026-04-30发布；地方职业价位为2022年历史附件。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26451,12 +26404,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国的工资资料为 2025 年（OEWS，本职业单列口径，中位时薪 20.57 美元、中位年薪 42,780 美元）与 2024—2034 年预测；两个市场的统计口径与资料期不同，不能直接换算。"
+              "美国工资May2025、预测2025—2035；中国2025行业/人群均值与2022地方历史条目分别列，不作换汇或个人工资推算。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26479,12 +26435,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "城镇单位口径为税前工资总额，含单位代扣代缴的个人所得税与社会保险与住房公积金个人缴纳部分；农民工月均收入为从业收入与从业时间的比值。两个口径不含零件提成与自雇经营收益。若未来取得可核验的本职业来源，须同时标注税前税后与是否含提成与统计覆盖范围；本页不推测数值。"
+              "单位口径为税前工资总额，含奖金、津贴补贴和加班等报酬及个人代扣部分，不能声称一概不含零件提成；农民工收入按从业收入／从业月数，不等同单位口径。具体计酬细项、自雇利润与税费另核。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26493,12 +26452,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论：中国大陆未取得自行车修理工的精确职业工资数据；本页只展示三个官方代理（居民服务、修理和其他服务业城镇非私营单位68,159 元/年、城镇私营单位 52,139 元/年；从事该行业的农民工月均收入 4,023 元），并明确标注为行业与人群代理、非本职业工资。"
+              "全国精确职业分布仍证据不足。国家统计局2025居民服务、修理和其他服务业：城镇非私营单位70,226元/年、私营单位52,059元/年；从事该行业的农民工月均收入4,130元、增长2.7%，行业就业占农民工12.5%。前两项是行业税前均值，第三项是特定人群从业收入／从业月数，均非自行车修理工工资。济宁人社局公开2022年度工资价位附件第9页第186行，职业为自行车与电动自行车维修工，单位元/年：低位29,873、下四分位31,084、中位36,294、上四分位38,973、高位42,083。只作地方历史、较宽职业范围参考；本轮未取得该行样本量、税费及提成细项，不能当全国、当前报价或美国职业等价值。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26507,12 +26469,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本职业工资缺口在本页以「未取得精确职业条目」标记；这不是零收入，而是证据无法支持职业级精度。若需比较，请以书面任职条件（城市、门店类型、任职方式、零件提成与季节波动、税前税后）为准。"
+              "工资缺口为全国精确职业分布，不是职业代码或所有地方条目不存在；书面报价核城市、雇主、任职方式、工时和提成。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26521,13 +26486,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与自动化可能改变问询与检索与工单等辅助环节，但不改变中国大陆对该职业的统计口径：统计口径、覆盖人群与资料期必须与工资数值一起读。"
+              "本轮没有本职业中国AI采用或工资影响实测；问询、检索及工单整理只是编辑候选，不由行业收入推效率或涨薪。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -26536,12 +26501,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业分类：本页未取得与 49-3091.00 精确对应的中国大陆公开职业工资条目；《中华人民共和国职业分类大典（2022 年版）》以中类与细类划分职业，自行车维修与装配类作业分散在居民服务与社会生产服务等序列中，须按用人单位类型与岗位职责辨认。"
+              "中国官方岗位类别编码表（2022版大典分类，PDF第44页／印刷77页）列4-12-04-01自行车与电动自行车维修工，属于日用产品修理服务人员。该中国名称包含电动自行车，范围较美国49-3091.00宽，不能直接等同。职业名称与代码已有依据，全国精确职业工资分布仍未取得。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26670,13 +26638,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "维修与调校与装配须按具体车型与零件的原厂手册与规格执行。美国侧 O*NET 列出 1 项国家认证（Certified Bicycle Technician），不等于录用门槛或雇主任命；该职业在 O*NET 属 Job Zone 1–2、未标注 Bright Outlook，就业预测为下降。中国大陆侧电动自行车受强制性国家标准 GB 17761-2024《电动自行车安全技术规范》约束（2024-12-31 发布、2025-09-01 实施，全部代替 GB 17761-2018），并按该规范开展强制性产品认证，涉及防篡改与制动性能等要求。入职前核对培训与授权与厂商手册获取方式，不能从学历或经验直接推断。"
+              "中国政府网关于GB17761-2024的发布解读：2024-12-31发布、2025-09-01实施；2025-12-01起销售新车应符合新标准，已购旧车不因此强制淘汰。工信部联消费〔2025〕144号要求相关生产、认证和销售环节落实新版标准及CCC；CCC是产品认证，不能解释为维修员工证照。美国Certified Bicycle Technician目录不是中国证照或门店放行授权。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "msresearch",
+            "cn-product-policy",
+            "census"
           ],
           "type": "prose"
         },
@@ -26715,13 +26684,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "作业环境与工具与化学品与零件须符合适用的安全要求（工具与举升方式、油脂与溶剂的使用与通风、护目与手部防护、碎屑与尖锐零件处理、工位整洁）；电助力作业须使用厂商提供或推荐的充电器与经确认适配的电池，不处理被非合格人员改装或重新加工过的电池组，并在有人在场时充电（美国 CPSC 微出行产品安全指引）。O*NET 工作情境显示 78% 持续或几乎持续站立、24% 持续或几乎持续需要保持平衡、24% 每天暴露于污染物、26% 每天在户外承受各种天气、14% 每年一次以上遇到轻微烧伤或割伤或咬伤、91% 认为工作完全不自动化；本页不构成扭矩数值或装配顺序或改装方法。"
+              "编辑安全核对建议：先取得具体工具、固定方式、产品SDS和工位防护要求；本轮未取得这些文件，不提供统一PPE选择。美国CPSC微出行安全指引建议使用厂商提供或推荐的充电器及经测试、厂商确认适配的替换电池；不使用由非合格人员改装或重新加工的电池组；充电时有人在场，不在睡觉或离开家时充电。这是美国产品使用指引，不是所有维修作业禁令，也不提供拆修电池授权。O*NET站立、污染物等工作情境是职业群体频率，不是个体伤病预测或具体维修授权。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "health",
+            "bls"
           ],
           "type": "prose"
         },
@@ -26745,13 +26715,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按 O*NET 行业分布（本职业单列口径），该职业在零售贸易占 80%（2024 年，美国口径）；中国大陆与骑行相关的维修作业同样大量依附于零售与门店场景，但该门类的职业工资数字不在本页展示范围内。"
+              "O*NET行业页现列美国零售贸易80%，未单列资料年；不能推中国门店职业人数或工资。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26775,13 +26747,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按 O*NET 行业分布（本职业单列口径），该职业另有 20% 归入其他行业（含房地产与租赁与其他服务业）（2024 年，美国口径）；中国大陆该范围的职业工资数字不在本页展示范围内。"
+              "O*NET行业页现列其他行业20%，未单列资料年；中国工资背景另注明行业及调查人群。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26805,13 +26779,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布只区分零售贸易与其他行业，未按门店类型细分；样本职位名称包括 Bicycle Mechanic 与 Bicycle Repair Technician 与 Bicycle Fitter 与 Bike Mechanic，说明工作场所主要是门店与维修车间场景，但行业分布不能推导工资或就业规模。"
+              "O*NET样本职位名称不是雇主类型样本，不能由名称断言主要场所或共享出行占比。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.42",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26879,12 +26855,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2024 年农民工监测调查报告》（人群口径代理）｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202504/t20250430_1959523.html"
+              "国家统计局2025农民工监测调查报告｜https://www.stats.gov.cn/sj/zxfb/202604/t20260430_1963472.html"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.47",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26893,13 +26872,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不提供中国大陆自行车修理工的精确月薪区间；三个代理（居民服务、修理和其他服务业 68,159 元/年与 52,139 元/年；从事该行业的农民工月均 4,023 元）分别属行业门类平均与人群月均收入，且同名或近名岗位的门店类型与任职方式差异较大，比较时须把提成与季节波动与职责与授权范围纳入书面条件。"
+              "全国精确职业月薪区间未取得。行业与农民工背景单列；另有2022济宁较宽职业历史价位，不能拼成当下个人报价。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26922,12 +26903,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业代理：居民服务、修理和其他服务业城镇非私营单位 68,159 元/年、城镇私营单位 52,139 元/年（2024 年）；本职业精确条目未取得。"
+              "2025行业背景：非私营70,226、私营52,059元/年；均非职业工资。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26950,12 +26934,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "人群代理：2024 年从事居民服务修理和其他服务业的农民工月均收入 4,023 元（增长 1.5%）；属人群口径，非本职业工资。"
+              "2025从事该行业的农民工月均4,130元、增长2.7%，是人群背景。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26964,12 +26951,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "其他城市"
+              "地方历史职业价位（2022济宁附件）"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26978,12 +26968,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未有官方或可核验来源支持城市级的自行车修理工月薪区间。"
+              "济宁人社局公开2022年度工资价位附件第9页第186行，职业为自行车与电动自行车维修工，单位元/年：低位29,873、下四分位31,084、中位36,294、上四分位38,973、高位42,083。只作地方历史、较宽职业范围参考；本轮未取得该行样本量、税费及提成细项，不能当全国、当前报价或美国职业等价值。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -26992,13 +26985,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业对照：美国 O*NET 49-3091.00（Bicycle Repairers，未标注 Bright Outlook，就业预测为下降），其工资与就业与行业数据均为本职业单列口径（页面未标注取自其他职业）；本页未取得中国大陆与 49-3091.00 精确对应的公开职业工资条目，中文页面语言不构成等价映射；三个代理的人群与行业范围各不相同，均不能用于估算个人报价。"
+              "中国官方岗位类别编码表（2022版大典分类，PDF第44页／印刷77页）列4-12-04-01自行车与电动自行车维修工，属于日用产品修理服务人员。该中国名称包含电动自行车，范围较美国49-3091.00宽，不能直接等同。职业名称与代码已有依据，全国精确职业工资分布仍未取得。美国工资、就业与行业均为49-3091.00本职业；中国较宽职业、行业和人群不可直接等同。"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -27021,12 +27016,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "下降（-1% 或更低）"
+              "-6%（2025—2035，美国本职业）"
             ]
           },
           "id": "bicycle-repairers.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -27087,12 +27082,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为分布的下限，不是入门起薪的承诺，同口径时薪第 10 分位为 15.01 美元。；O*NET 展示的 BLS 2025 年工资分位（本职业单列口径）｜https://www.onetonline.org/link/localwages/49-3091.00"
+              "第10分位不是分布最低值或新人起薪，对应时薪15.01美元。"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews-methods",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27143,12 +27140,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为本职业单列口径的年薪中位数（2025 年 OEWS），对应中位时薪 20.57 美元；中位数不等于入门工资，也不构成收入承诺；该职业存在兼职与季节性波动，年薪数字不能解释为所有从业者都能获得的全年收入，零件提成与自雇经营收入也不在该口径内。；O*NET 展示的 BLS 2025 年工资分位（本职业单列口径）｜https://www.onetonline.org/link/localwages/49-3091.00"
+              "May2025职业年薪中位数42,780美元、时薪20.57美元。OEWS含全职兼职受雇人员及佣金、生产奖金等，排自雇与加班溢价；不能称零件提成一概排除，年化也不等于个人实发。"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews-methods",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27213,12 +27212,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "13,200 人（2024 年，本职业单列口径）"
+              "12,200人（2025，美国49-3091.00）"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -27242,12 +27241,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "下降（-1% 或更低）（2024—2034 年，本职业单列口径）"
+              "-6%（2025—2035，下降）"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -27256,12 +27255,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页按本职业口径给出 2024—2034 年变化 -2%（下降）；负增长与仍存在空缺并不矛盾：预测期年均仍有约 1,600 个空缺，主要来自替代需求。；O*NET 49-3091.00 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/49-3091.00"
+              "美国49-3091.00自行车修理工：2025年就业12,200人，2035年预计11,500人；2025—2035变化-6%，年均空缺1,200（含增长与替换）。下降与替换性空缺可同时存在；总体预测不测AI因果或个人录用概率。"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -27270,12 +27269,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约 1,600（2024—2034 年，本职业单列口径，含增长与替换）"
+              "年均1,200空缺（2025—2035，含增长与替换）"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -27299,13 +27298,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界（口径）：① 职业身份与任务与工作情境与技能与知识为 O*NET 49-3091.00 本职业单列口径；② 工资、就业与行业数据在 O*NET 页面上亦为本职业单列口径，「未出现 Wage data for … 或 Employment data for … 等取自其他职业的标注」；③ O*NET 未为该职业标注 Bright Outlook，就业预测为下降（-1% 或更低，就业趋势页 -2%），与仍存在替代性空缺并不矛盾。该职业存在兼职与季节波动，年薪数字不能当作全年收入保证。"
+              "职业身份、工资、就业和行业在本页为美国49-3091.00单列；工资May2025、预测2025—2035，未标Bright Outlook。受雇年化工资不是自雇门店利润或全年实发。"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "onet",
-            "onet"
+            "onet-wages",
+            "oews-methods",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27314,13 +27314,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：美国公开数据给出的是本职业的时薪与年薪分位与2024—2034 年就业与预测（总体为下降）；可核对的是分位、中位数与预测数字，以及它们各自的口径与资料期。"
+              "美国本职业工资为May2025时薪及年薪分位，2025—2035就业预测为下降；不同指标分别读。"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "onet-wages",
+            "oews-methods",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27329,12 +27330,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "门店类型通常影响收入：品牌门店、独立车店、体育用品零售维修与共享出行运维团队的计酬与提成结构差别较大。"
+              "比较书面报价时核门店类型、职级、计酬与提成条件；本轮没有这些因素的本职业工资差异实测。"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.27",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews-methods",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27357,12 +27360,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "资历与职责影响收入：能承担轮组编校与电助力系统诊断或带训职责、或具备厂商认证，通常对应更高区间。"
+              "编辑建议：核是否承担轮组、电助力诊断、带训职责及厂商训练要求，再核书面薪酬；不能由专精或认证推必然更高工资。"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews-methods",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27385,12 +27390,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工时与季节影响实际所得：11% 的典型工作周少于 40 小时（其余分布未公布），骑行旺季与节假日排班可能带来额外工时与提成。"
+              "O*NET工作周仅显示11%少于40小时、其余分布未提供；季节、工时和提成按实际聘约核，不推旺季必有额外收入。"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.31",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews-methods",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27414,12 +27421,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "下降（-1% 或更低）"
+              "-6%（2025—2035）"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -27442,12 +27449,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "证据不足：本轮未取得本职业分行业工资中位数；BLS职业工资页访问403，不能称BLS从不公布。"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews-methods",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27456,12 +27465,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布列出该职业在零售贸易占 80%（2024 年，本职业单列口径）；行业分布不提供行业工资水平。"
+              "行业页现列零售贸易80%，未单列资料年；人数占比不提供行业工资。"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews-methods",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27484,12 +27495,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "证据不足：本轮未取得本职业该行业工资中位数，不由人数占比推工资。"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews-methods",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27498,12 +27511,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布同时把 20% 归入「其他行业（含房地产与租赁与其他服务业）」（2024 年），未单独公布这些行业的职业工资。"
+              "行业页现列其他行业20%，未单列资料年；人数占比不测行业工资。"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews-methods",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27526,12 +27541,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未按雇主类型公布该职业工资中位数。"
+              "证据不足：本轮未取得本职业按品牌或独立门店的工资分布。"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews-methods",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27540,12 +27557,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 样本职位名称（Bicycle Mechanic、Bicycle Repair Technician、Bicycle Fitter、Bike Mechanic）说明工作场所主要是门店与维修车间场景；来源未按门店类型细分公布工资。"
+              "样本职位名称不是雇主调查，不能据此认定主要雇主类型或其工资。"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews-methods",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27596,13 +27615,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位数不是入门工资：它表示一半从业者高于、一半低于该值；第 10 与第 25 分位更接近低端区间，但收入仍受门店类型与专精方向与季节与提成安排影响。"
+              "中位数为工资分布中点，非新人起薪；低分位不是最低值或经验组标签。具体报酬按实际工时和聘约。"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "onet-wages",
+            "oews-methods",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27611,12 +27631,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本职业同时公布时薪与年薪分位，两者同源；不能用「时薪 × 工时」推算个人年收入，因为存在兼职与季节波动，且工时与提成办法因门店而异。"
+              "OEWS通常将时薪按2,080小时年化；这是统计展示方法。个人年收入需实际工时、计酬及税费，不能直接套年化数。"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews-methods",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27625,12 +27647,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "数字来自 BLS 职业就业与工资统计（OEWS，2025 年，本职业单列口径）与 O*NET 展示的 BLS 2024—2034 年就业预测（总体为下降）。"
+              "工资为BLSMay2025OEWS，经O*NET展示；就业为BLS2025—2035预测，经O*NET展示；总体预测非AI因果。"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews-methods",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27697,13 +27721,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位为年薪 55,000 美元；高端通常与年限、专精方向或带训与管理职责相关，不代表普遍水平。"
+              "第90分位55,000美元/年，不代表普遍高收入，也不能仅凭该分位推年限、专精或管理职责的因果。"
             ]
           },
           "id": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet",
-            "onet"
+            "onet-wages",
+            "oews-methods",
+            "editor"
           ],
           "type": "prose"
         }
@@ -27817,28 +27842,28 @@
                 "url": "https://www.onetonline.org/link/hot_tech/49-3091.00"
               },
               {
-                "entity": "O*NET 49-3091.00 认证发现",
-                "id": "link-17",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localcert/49-3091.00"
-              },
-              {
                 "entity": "O*NET 49-3091.00 培训与教育信息",
-                "id": "link-18",
+                "id": "link-17",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/localtraining/49-3091.00"
               },
               {
-                "entity": "O*NET 49-3091.00 行业分布",
-                "id": "link-19",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/industry/49-3091.00"
-              },
-              {
-                "entity": "O*NET 49-3091.00 职业摘要（就业与预测字段）",
-                "id": "link-20",
+                "entity": "O*NET 49-3091.00 职业摘要（自行车修理工）",
+                "id": "link-18",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/49-3091.00"
+              },
+              {
+                "entity": "国家统计局2025年城镇单位就业人员年平均工资情况",
+                "id": "link-19",
+                "relation": "career.authority",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "entity": "关于强化电动自行车强制性国家标准实施 加快新产品供应的意见",
+                "id": "link-20",
+                "relation": "career.authority",
+                "url": "https://www.miit.gov.cn/jgsj/xfpgys/wjfb/art/2025/art_346cbdc6d642418998c2be5baa56c17b.html"
               }
             ]
           },
@@ -27917,13 +27942,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格中与工作方式更相关的是尽责性（按原厂规格与顺序执行、复检与工单记录不漏项、按交车时间交付）、情绪稳定性（在反复返修与顾客催促与费用争议中保持准确与克制）与宜人性（在向顾客解释技术取舍与拒绝不安全作业时保持分寸）。这些是群体层面的相关性，不能用于个人录用筛选。"
+              "编辑核对建议：观察是否逐项按规格复检、完整记录、在返修和费用争议中保持沟通。可借大五概念整理自我问题；本轮未取得本职业大五与绩效研究，不能写已证实群体相关性。"
             ]
           },
           "id": "bicycle-repairers.fit.personality-fit-block.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27932,12 +27957,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：人格与工作表现的相关性证据属于一般性研究结论，强度低于现场拆装与调校与复检与工单记录与复核评价。"
+              "证据不足：本轮没有自行车维修职业的大五预测效度数据；O*NET工作风格是职业描述，不能当个人人格量表或录用分数。"
             ]
           },
           "id": "bicycle-repairers.fit.personality-fit-block.7",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27991,12 +28017,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业匹配或选拔工具，也没有官方资料支持「某种类型最适合自行车修理工」的说法。可用于整理与同店同事与顾客的沟通协作偏好，但不能据以判断适配或用于录用。"
+              "本轮O*NET资料未给MBTI与该职业的匹配类型或录用阈值；本页仅用其整理沟通偏好，不据以判胜任。"
             ]
           },
           "id": "bicycle-repairers.fit.personality-fit-block.10",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28019,12 +28046,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：MBTI 的职业预测效度有限，且不被 O*NET 或 BLS 用作适配标准。"
+              "本轮未取得本职业MBTI预测效度研究；不能从O*NET未列该量表推全世界不存在研究。"
             ]
           },
           "id": "bicycle-repairers.fit.personality-fit-block.11",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28091,12 +28119,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样不是职业适配工具，缺乏官方职业资料支持，也不用于录用或筛选判断。可用于自我反思，但不能据此下结论。"
+              "九型仅作自我反思问题；本轮未取得本职业九型与胜任效度资料，不列职业类型或录用条件。"
             ]
           },
           "id": "bicycle-repairers.fit.personality-fit-block.14",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28105,12 +28134,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：无官方职业资料来源支持将九型人格用于职业适配判断。"
+              "证据不足：本轮没有本职业九型适配效度研究。"
             ]
           },
           "id": "bicycle-repairers.fit.personality-fit-block.15",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28221,12 +28251,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：O*NET 的知识字段共 33 项并给出分数（机械 92、客户与个人服务 86、销售与营销 69、公共安全与安保 65、生产与加工 60、工程与技术 58 等）；基本技能以积极倾听 66 与批判性思维 63 与阅读理解 50 为主；能力共 52 项并给出分数（近视力 72、手指灵巧性 69、空间想象 69 等）；「工作风格字段本页未取得」，属于职业特征描述；测验不能替代现场实作与复核评价。"
+              "O*NET知识33项、能力52项及技能字段保留；工作风格19项，注意细节75、可靠性71、谨慎50。它们描述职业要求，不能换成大五/MBTI/IQ/EQ阈值。"
             ]
           },
           "id": "bicycle-repairers.fit.personality-fit-block.23",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28265,12 +28296,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。真正有解释力的是有监督下的调校规格执行记录、复检与放行记录与工单与零件记录的质量。"
+              "本页采用编辑核对建议：在监督下看规格执行、复检、工单与顾客解释的真实记录；本轮没有证明单一人格测验优于或劣于这些记录的职业研究。"
             ]
           },
           "id": "bicycle-repairers.fit.personality-fit-block.26",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28612,12 +28644,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有官方结论，也不存在最适合的类型。MBTI 只能帮助整理偏好并提出核对问题，不能预测调校与复检记录质量或现场表现。"
+              "本轮未取得最适合本职业的MBTI类型证据；仅作沟通偏好问题，不据此预测现场记录或录用。"
             ]
           },
           "id": "bicycle-repairers.fit.personality-fit-block.49",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28641,12 +28674,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。人格与兴趣工具的效度有限，不能替代有监督下的调校规格执行记录质量、复检与放行记录与工单与零件记录；本页只用它们提出核对问题。"
+              "本轮未取得人格分数预测本职业绩效的效度数据；本页不据分数判断录用，建议核具体维修与复检记录。"
             ]
           },
           "id": "bicycle-repairers.fit.personality-fit-block.51",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28685,12 +28719,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。九型人格不是职业适配工具，也不被官方职业资料用作选拔依据；可用于自我反思，但不能据此下结论。"
+              "本輪未取得本职业九型适配证据；自我反思不构成本页职业匹配或选拔结论。"
             ]
           },
           "id": "bicycle-repairers.fit.personality-fit-block.54",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28799,12 +28834,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明雇主招聘公告中的软件技能信号；页面未公布比例，不代表岗位采用率。"
+              "O*NET2025美国Lightcast招聘广告列Excel、Outlook、Word，三项比例均Not available；广告提及不等于采用率、AI效果或全国统一录用要求。"
             ]
           },
           "id": "bicycle-repairers.fit.personality-fit-block.62",
           "source_refs": [
-            "onet"
+            "hr"
           ],
           "type": "prose"
         },
@@ -28813,12 +28848,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明培训与教育信息入口（含注册学徒岗位），不构成录用门槛或授权。"
+              "O*NET当前美国目录有3个相关院校项目：Minneapolis Community and Technical College（不足1年，5名完成者）、Northwest Arkansas Community College（1—2年，4名）、Andrews University（1—2年，0名）。院校目录IPEDS2025—26，完成者为2024—25年度；不代表当前招生、个人所需训练年限或录用门槛。摘要列注册学徒Bicycle Repair Technician；认证页有Certified Bicycle Technician（United Bicycle Institute）1项，非强制准入。"
             ]
           },
           "id": "bicycle-repairers.fit.personality-fit-block.63",
           "source_refs": [
-            "onet"
+            "nist",
+            "onet",
+            "census"
           ],
           "type": "prose"
         },
@@ -28841,12 +28878,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆行业与人群代理口径与证据边界（本页未取得精确等价职业工资条目）。"
+              "中国官方岗位类别编码表（2022版大典分类，PDF第44页／印刷77页）列4-12-04-01自行车与电动自行车维修工，属于日用产品修理服务人员。该中国名称包含电动自行车，范围较美国49-3091.00宽，不能直接等同。职业名称与代码已有依据，全国精确职业工资分布仍未取得。国家统计局2025居民服务、修理和其他服务业：城镇非私营单位70,226元/年、私营单位52,059元/年；从事该行业的农民工月均收入4,130元、增长2.7%，行业就业占农民工12.5%。前两项是行业税前均值，第三项是特定人群从业收入／从业月数，均非自行车修理工工资。"
             ]
           },
           "id": "bicycle-repairers.fit.personality-fit-block.65",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current"
           ],
           "type": "prose"
         },
@@ -28855,12 +28894,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明电动自行车强制性国家标准与产品安全的适用范围，不构成任何车型的维修规格或放行结论。"
+              "中国政府网关于GB17761-2024的发布解读：2024-12-31发布、2025-09-01实施；2025-12-01起销售新车应符合新标准，已购旧车不因此强制淘汰。工信部联消费〔2025〕144号要求相关生产、认证和销售环节落实新版标准及CCC；CCC是产品认证，不能解释为维修员工证照。产品认证不等于员工作业授权。"
             ]
           },
           "id": "bicycle-repairers.fit.personality-fit-block.66",
           "source_refs": [
-            "onet"
+            "msresearch",
+            "cn-product-policy"
           ],
           "type": "prose"
         }
@@ -28896,10 +28936,10 @@
                 "url": "https://www.onetonline.org/link/details/49-3091.00"
               },
               {
-                "entity": "O*NET 49-3091.00 职业摘要（就业与预测字段）",
+                "entity": "O*NET自行车修理工2025—2035全国就业趋势",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/49-3091.00"
+                "url": "https://www.onetonline.org/link/localtrends/49-3091.00"
               },
               {
                 "entity": "O*NET 49-3091.00 全国工资分位",
@@ -28912,6 +28952,18 @@
                 "id": "link-6",
                 "relation": "career.source",
                 "url": "https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Micromobility-Information-Center"
+              },
+              {
+                "entity": "Park Tool《Wheel Truing (Lateral & Radial)》（厂商轮组校正技术指南）",
+                "id": "link-7",
+                "relation": "career.source",
+                "url": "https://www.parktool.com/en-us/blog/repair-help/wheel-and-rim-truing"
+              },
+              {
+                "entity": "关于强化电动自行车强制性国家标准实施 加快新产品供应的意见",
+                "id": "link-8",
+                "relation": "career.source",
+                "url": "https://www.miit.gov.cn/jgsj/xfpgys/wjfb/art/2025/art_346cbdc6d642418998c2be5baa56c17b.html"
               }
             ]
           },
@@ -28979,13 +29031,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "骑行者与顾客与本人"
+              "自行车维修技师、复检负责人"
             ]
           },
           "id": "bicycle-repairers.risk.career-risk-cards.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29039,13 +29091,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "顾客与本人与门店"
+              "电助力维修技师、门店安全负责人"
             ]
           },
           "id": "bicycle-repairers.risk.career-risk-cards.15",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29054,13 +29106,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "锂离子电池在充电时可能引发火灾；使用不匹配的充电器或不匹配或改装的电池组会显著提高风险。"
+              "CPSC列充电起火危险，要求充电器及替换电池由厂商确认适配，并避免非合格改装电池；本轮没有适配错误的职业风险倍率。"
             ]
           },
           "id": "bicycle-repairers.risk.career-risk-cards.16",
           "source_refs": [
-            "onet",
-            "onet"
+            "health"
           ],
           "type": "prose"
         },
@@ -29069,13 +29120,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "只使用厂商提供或推荐的充电器与经测试并获厂商确认适配的替换电池；不处理被非合格人员改装或重新加工过的电池组；在有人在场时充电，并按厂商说明存放与处置电池。"
+              "美国CPSC微出行安全指引建议使用厂商提供或推荐的充电器及经测试、厂商确认适配的替换电池；不使用由非合格人员改装或重新加工的电池组；充电时有人在场，不在睡觉或离开家时充电。这是美国产品使用指引，不是所有维修作业禁令，也不提供拆修电池授权。"
             ]
           },
           "id": "bicycle-repairers.risk.career-risk-cards.17",
           "source_refs": [
-            "onet",
-            "onet"
+            "health"
           ],
           "type": "prose"
         },
@@ -29084,13 +29134,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "使用通用或来历不明的充电器、混用不同规格的电池与充电器，或在无人看管与夜间充电。"
+              "CPSC提醒避免不适配充电器/电池，以及睡觉或离开家时充电；不能改写成有人在场的所有夜间充电均禁。"
             ]
           },
           "id": "bicycle-repairers.risk.career-risk-cards.18",
           "source_refs": [
-            "onet",
-            "onet"
+            "health"
           ],
           "type": "prose"
         },
@@ -29099,12 +29148,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "顾客与本人"
+              "自行车维修技师、工位安全负责人"
             ]
           },
           "id": "bicycle-repairers.risk.career-risk-cards.19",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29113,12 +29163,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "油脂或润滑剂污染刹车面与轮圈会削弱制动性能；油脂与清洁剂与溶剂的使用还可能造成皮肤与眼部伤害与通风不良风险。"
+              "Park Tool轮组指南要求清除轮圈及制动面的残留润滑剂，以免影响制动；化学品危害需具体产品安全数据表，本轮未取得，不用轮组指南证明全部皮肤/眼部毒理。"
             ]
           },
           "id": "bicycle-repairers.risk.career-risk-cards.20",
           "source_refs": [
-            "onet"
+            "archivists",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29127,12 +29178,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按厂商说明使用油脂与清洁剂与溶剂，保持通风并佩戴护目与手套，在调整后擦净刹车面与轮圈上的残留润滑剂，妥善存放化学品。"
+              "核原厂轮组及制动说明、具体清洁产品SDS与工位要求。编辑建议确认防护、通风和清洁检查安排；本轮没有车型及产品SDS，不能提供统一手套或溶剂选择。"
             ]
           },
           "id": "bicycle-repairers.risk.career-risk-cards.21",
           "source_refs": [
-            "onet"
+            "archivists",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29156,13 +29208,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本人"
+              "维修技师、工位负责人"
             ]
           },
           "id": "bicycle-repairers.risk.career-risk-cards.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29171,13 +29223,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "长时间站立与反复弯腰与保持平衡与手工工具作业，可能造成腰背与手腕与肩颈劳损；碎屑与尖锐零件与工具可能造成割伤与擦伤。"
+              "O*NET显示78%持续站立、24%每日污染物、14%每年一次以上轻微割烧等暴露；是工作情境频率，不是腰背/手腕损伤发生率。本轮未取得该职业劳损风险研究。"
             ]
           },
           "id": "bicycle-repairers.risk.career-risk-cards.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -29186,13 +29237,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "使用合适的工作台与固定与举升方式，轮换姿势与安排间歇，正确使用工具与护目与手套，及时清理碎屑与尖锐零件，及早报告不适。"
+              "编辑建议：向工位负责人核工作台、固定工具、防护、休息与不适报告安排；实际PPE及复工条件按具体作业/SDS/机构制度，未取得制度不能当已授权。"
             ]
           },
           "id": "bicycle-repairers.risk.career-risk-cards.25",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -29216,13 +29267,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本人与主管与顾客"
+              "维修技师、零件库管、复检负责人"
             ]
           },
           "id": "bicycle-repairers.risk.career-risk-cards.27",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29276,13 +29327,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本人与同事与顾客"
+              "维修技师、门店主管、获授权复检人员"
             ]
           },
           "id": "bicycle-repairers.risk.career-risk-cards.31",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29306,13 +29357,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按门店授权执行复检与放行与拒收与停工作业；该职业在 O*NET 属 Job Zone 1–2 且相关经验要求从很少到数月，因此上岗培训与放行与停工授权边界尤其需要在入职时明确；涉及电助力与电池与改装或解除限速的要求须按适用法域与厂商要求处理，保留复核与升级机制并按程序上报隐患。"
+              "编辑核对建议：入职确认谁可检验、放行、拒收、停工与处理收费争议。本轮未取得门店恢复程序，不能凭Job Zone或培训结业推授权。中国产品实施政策禁止相关销售非法改装，不等于允许员工改装；电池拆修另核厂商与法域。"
             ]
           },
           "id": "bicycle-repairers.risk.career-risk-cards.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "cn-product-policy",
+            "health"
           ],
           "type": "prose"
         },
@@ -29364,12 +29416,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明本职业单列口径的就业与 2024—2034 年预测（下降），不用于个案判断。"
+              "用于本职业2025—2035总体就业预测，非安全作业或个案风险判断。"
             ]
           },
           "id": "bicycle-repairers.risk.career-risk-cards.37",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -29431,35 +29483,35 @@
               [
                 "品牌门店维修岗",
                 "在有监督下按品牌与原厂规格完成接车与调校与复检，并按规程开单与记录零件与工时。",
-                "通常看规格执行与复检规范程度、工单与零件记录质量、旺季客流下的稳定性；上岗资格由门店岗前培训与考核决定。",
+                "编辑列作雇主核对问题，未取得对应招聘样本：核对规格执行与复检规范程度、工单与零件记录质量、旺季客流下的稳定性；产品合规、员工聘任与内部分工分别核，不由培训自动推出。",
                 "提交一份含虚构车型与零件清单、症状与检查记录、调整与复检结果说明的维修工单，不使用真实顾客与车辆信息。",
                 "门店岗位不决定车型规格或产品合规判定；涉及电助力与电池与改装须由有职责人员按法域与厂商要求处理。"
               ],
               [
                 "独立车店技师岗",
                 "在较小团队中独立完成接车与维修与调校，并兼顾库存与零件订购与顾客沟通。",
-                "通常看故障定位与调校稳定性、轮组校正与装配能力、顾客沟通与费用解释能力。",
+                "编辑列作雇主核对问题，未取得对应招聘样本：核对故障定位与调校稳定性、轮组校正与装配能力、顾客沟通与费用解释能力。",
                 "提交一份含故障定位记录、调校与复检记录与顾客沟通说明的虚构工单。",
                 "检验与放行须按门店授权执行；本页不提供作业指令或扭矩数值。"
               ],
               [
                 "体育用品零售维修岗",
                 "在零售场景按连锁标准完成装配与调校与保养，配合销售完成选车与配件适配。",
-                "通常看标准化装配一致性与速度、销售配合、工单与库存与安全记录能力。",
+                "编辑列作雇主核对问题，未取得对应招聘样本：核对标准化装配一致性与速度、销售配合、工单与库存与安全记录能力。",
                 "提交一份含装配与调校记录与配件适配说明与异常上报方案的虚构记录。",
                 "装配标准与安全要求须按主管部门与用人单位规定执行；本页不提供管理指令。"
               ],
               [
                 "共享出行运维岗",
                 "按批量作业规程完成车辆检查与更换与调校，并处理集中报修与部件回收。",
-                "通常看批量作业一致性与效率、异常与安全隐患识别与上报能力。",
+                "编辑列作雇主核对问题，未取得对应招聘样本：核对批量作业一致性与效率、异常与安全隐患识别与上报能力。",
                 "提交一份含批量检查与更换记录与隐患排查与上报方案的虚构记录。",
                 "涉及电助力与电池的作业须按厂商与法域要求执行；运维岗不等于有放行与改装判定权。"
               ],
               [
                 "轮组与装配专精岗",
                 "在授权范围内编校轮组与完成高端装配与调试，并进行张力与规格记录。",
-                "通常看轮组编校与张力控制与规格记录能力。",
+                "编辑列作雇主核对问题，未取得对应招聘样本：核对轮组编校与张力控制与规格记录能力。",
                 "提交一份含目标、辐条与张力记录、装配与复检说明的虚构说明。",
                 "专业规格须按厂商手册执行；专精岗不等于整车合规判定权。"
               ]
@@ -29482,9 +29534,9 @@
               {
                 "id": "education",
                 "values": [
-                  "美国侧：O*NET 把 49-3091.00（Bicycle Repairers）列为 Job Zone 1–2（SVP 低于 6.0），学历只列出三个档次（部分岗位要求高中文凭或同等学历、部分要求上过大学但无学位、部分要求低于高中文凭），未公布各级占比；该区职业经验要求从很少到数月、在岗训练从几天到一年。该职业在 O*NET 未标注 Bright Outlook，就业预测为下降（就业趋势页 2024—2034 年 -2%，13,200 → 12,900）。",
-                  "O*NET 培训页面显示全国共 2 个相关培训项目（Bicycle Mechanics and Repair Technology/Technician）；职业摘要另列出注册学徒岗位 Bicycle Repair Technician；认证页面列出 1 项国家认证（Certified Bicycle Technician，United Bicycle Institute）。",
-                  "中国大陆侧以用人单位岗前培训与在岗带教与厂商培训为主，并须符合适用的电动自行车与电池与产品安全要求；本页不提供选拔标准。"
+                  "美国侧：O*NET 把 49-3091.00（Bicycle Repairers）列为 Job Zone 1–2（SVP 低于 6.0），学历只列出三个档次（部分岗位要求高中文凭或同等学历、部分要求上过大学但无学位、部分要求低于高中文凭），未公布各级占比；该区职业经验要求从很少到数月、在岗训练从几天到一年。该职业在 O*NET 未标注 Bright Outlook，就业预测为下降（就业趋势页 2025—2035年-6%，12,200→11,500）。",
+                  "O*NET当前美国目录有3个相关院校项目：Minneapolis Community and Technical College（不足1年，5名完成者）、Northwest Arkansas Community College（1—2年，4名）、Andrews University（1—2年，0名）。院校目录IPEDS2025—26，完成者为2024—25年度；不代表当前招生、个人所需训练年限或录用门槛。摘要列注册学徒Bicycle Repair Technician；认证页有Certified Bicycle Technician（United Bicycle Institute）1项，非强制准入。",
+                  "中国官方岗位类别编码表（2022版大典分类，PDF第44页／印刷77页）列4-12-04-01自行车与电动自行车维修工，属于日用产品修理服务人员。该中国名称包含电动自行车，范围较美国49-3091.00宽，不能直接等同。职业名称与代码已有依据，全国精确职业工资分布仍未取得。实际学历及培训条件核雇主，本轮无招聘样本证明普遍要求。"
                 ]
               },
               {
@@ -29498,7 +29550,7 @@
               {
                 "id": "onet-traits",
                 "values": [
-                  "官方任务共 20 项（15 项核心、3 项补充，另有 2 项新增任务未给分数），包含安装与调整变速与齿轮机构、安装与调整制动与刹车块、安装新轮胎与内胎、组装新车、估算维修费用并写维修工单、清洁与润滑零件、校正轮组、拆装轮轴以维修或调整或更换缺陷零件、帮助顾客按体形与用途选择车辆。",
+                  "官方任务共 20 项（15项核心、3项补充、2项New（包含在20总数内，无分数）），包含安装与调整变速与齿轮机构、安装与调整制动与刹车块、安装新轮胎与内胎、组装新车、估算维修费用并写维修工单、清洁与润滑零件、校正轮组、拆装轮轴以维修或调整或更换缺陷零件、帮助顾客按体形与用途选择车辆。",
                   "工作活动按详细资料页列出 41 项并给出重要性分数，最高为决策和解决问题 87、识别物体与动作与事件 86、获取信息 83、处理与搬动物体 82、检查设备与结构或材料 82、影响他人或销售 80、与组织外部的人沟通 78、更新与使用相关知识 77。",
                   "工作情境：78% 持续或几乎持续站立（另有 17% 超过一半时间）、24% 持续或几乎持续需要保持平衡、98% 每天面对面讨论、92% 每天有电话交谈、41% 持续与他人接触、24% 每天暴露于污染物、26% 每天在户外承受各种天气、91% 认为工作完全不自动化；另有约 29 项情境未公布百分比。"
                 ]
@@ -29507,7 +29559,7 @@
                 "id": "tools",
                 "values": [
                   "手工具（内六角与套筒与扳手与辐条扳手与链条工具）、专用量具（辐条张力计与卡尺与规格量具）与轮组校正设备、举升与固定架与工作台、清洁与润滑与溶剂与油脂、砂轮机与焊接与喷漆设备（按岗位范围）、轮胎与内胎与无内胎系统工具、维修管理软件与销售点系统、个人防护（按作业需要的护目与手套与通风条件）。",
-                  "O*NET 列出 3 项软件技能并均标注为热门技术（Microsoft Excel、Microsoft Outlook、Microsoft Word），页面未公布出现比例；另有维修管理类软件（RepairTRAX、Repair Traq、Bicycle Repair Man）与销售点类软件（LightSpeed Cloud）等共 6 类。",
+                  "O*NET2025美国Lightcast招聘广告列Excel、Outlook、Word，三项比例均Not available；广告提及不等于采用率、AI效果或全国统一录用要求。详细页软件举例不等于统一门槛。",
                   "把诊断或工单或零件匹配或库存工具用于门店流程前，须确认顾客与车辆信息保护、规格与复检记录与人工复核安排；扭矩与规格仍需按原厂手册核对，不能依赖工具输出。"
                 ]
               }
@@ -29516,7 +29568,15 @@
           "id": "bicycle-repairers.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "nist",
+            "census",
+            "hr",
+            "ep-current",
+            "cn-career-code",
+            "cn-product-policy",
+            "cn-pipl",
+            "editor"
           ],
           "title": "雇主看重的准备证据",
           "type": "cards"
@@ -29781,7 +29841,7 @@
                 "用人单位的岗前培训与在岗带教",
                 "进入具体门店的人",
                 "决定能否按门店与原厂规格作业。",
-                "多数雇主要求（该区职业在岗训练从几天到一年）。",
+                "O*NET职业区通常在岗训练从几天到一年，不证明多数雇主要求；具体门店培训、考核及任用条件须按目标岗位核对。",
                 "须完成门店安排的岗前培训与考核并按班次接受带训。",
                 "按门店安排。",
                 "岗前培训不等于门店的检验与放行授权。"
@@ -29790,7 +29850,7 @@
                 "行业认证（自行车技师方向）",
                 "希望证明专项能力的人",
                 "作为专项能力的第三方证明。",
-                "不是普遍门槛，但对岗位层级与门店选择有一定作用。",
+                "是否要求该认证及其岗位作用须核目标门店；本轮未取得普遍录用或晋升收益证据。",
                 "O*NET 认证页面列出 1 项：Certified Bicycle Technician（United Bicycle Institute）。",
                 "按发证机构安排与证书有效期维护。",
                 "认证不等于录用门槛或雇主任命，也不等于门店的放行授权。"
@@ -29841,7 +29901,7 @@
           "data": {
             "paragraphs": [
               "资格边界：学历、职业培训、行业认证、雇主任用、门店内部的检验与放行与停工与收费授权、以及涉及电助力与电池与改装与解除限速的法域要求是不同状态，任何一项都不能由另一项自动推出；原厂规格与专用工具与量具的校准也属于作业前提，不能由学历替代。",
-              "美国侧：O*NET 把 49-3091.00（Bicycle Repairers）列为 Job Zone 1–2（SVP 低于 6.0），学历只列三个档次且未公布占比，该区职业经验要求从很少到数月、在岗训练从几天到一年；O*NET 全国登记 2 个 Bicycle Mechanics and Repair Technology/Technician 培训项目，职业摘要列出注册学徒岗位 Bicycle Repair Technician，认证页面列出 1 项国家认证（Certified Bicycle Technician）；该职业在 O*NET 未标注 Bright Outlook，就业预测为下降（就业趋势页 2024—2034 年 -2%，13,200 → 12,900，同时预测期年均仍有约 1,600 个空缺）。其工资与就业与行业数据在 O*NET 页面上均为本职业单列口径。",
+              "美国侧：O*NET 把 49-3091.00（Bicycle Repairers）列为 Job Zone 1–2（SVP 低于 6.0），学历只列三个档次且未公布占比，该区职业经验要求从很少到数月、在岗训练从几天到一年；O*NET 全国登记 3 个 Bicycle Mechanics and Repair Technology/Technician 培训项目，职业摘要列出注册学徒岗位 Bicycle Repair Technician，认证页面列出 1 项国家认证（Certified Bicycle Technician）；该职业在 O*NET 未标注 Bright Outlook，就业预测为下降（就业趋势页 2025—2035 年 -6%，12,200 → 11,500，同时预测期年均仍有约 1,200 个空缺）。其工资与就业与行业数据在 O*NET 页面上均为本职业单列口径。",
               "中国大陆侧：电动自行车受强制性国家标准 GB 17761-2024《电动自行车安全技术规范》约束（2024-12-31 发布、2025-09-01 实施，全部代替 GB 17761-2018），并按该规范开展强制性产品认证；该规范强化非金属材料防火阻燃与制动性能要求、完善电池组与控制器与限速器的防篡改要求；本页未取得与 49-3091.00 精确对应的中国大陆公开职业工资条目，只展示三个明确标注人群与行业范围的官方代理。",
               "操作建议：入职前把「学历／职业培训／行业认证／门店岗前培训／厂商培训与授权／检验与放行与停工授权／收费裁定授权／电池与改装相关法域要求」分列成一张表，逐项写明来源与资料期与法域；无法核实的项留空并标记为证据不足，不用推测填补。"
             ]
@@ -29898,10 +29958,10 @@
                 "url": "https://www.onetonline.org/link/localtraining/49-3091.00"
               },
               {
-                "entity": "O*NET 49-3091.00 认证发现",
+                "entity": "关于强化电动自行车强制性国家标准实施 加快新产品供应的意见",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localcert/49-3091.00"
+                "url": "https://www.miit.gov.cn/jgsj/xfpgys/wjfb/art/2025/art_346cbdc6d642418998c2be5baa56c17b.html"
               }
             ]
           },
@@ -30021,13 +30081,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "转向轮组编校与装配与专业车型方向、门店运营与库存管理方向、电助力系统与厂商技术支持方向，或体育用品与骑行装备的技术支持与培训方向（需相应训练与厂商授权）。"
+              "编辑列作发展核对方向：轮组编校、装配、门店库存运营、电助力技术支持或骑行装备培训；分别核目标岗位、训练及厂商要求，本轮无普遍晋升路线或统一授权证据。"
             ]
           },
           "id": "bicycle-repairers.path.career-path-block.18",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current",
+            "editor",
+            "cn-product-policy",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -30050,13 +30112,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：O*NET 把 49-3091.00（Bicycle Repairers）列为 Job Zone 1–2（SVP 低于 6.0），页面只列出三个学历档次（部分岗位要求高中文凭或同等学历、部分要求上过大学但无学位、部分要求低于高中文凭），未公布各级占比；该区职业经验要求从很少到数月、在岗训练从几天到一年。O*NET 培训页面显示全国共 2 个相关培训项目（Bicycle Mechanics and Repair Technology/Technician），职业摘要另列出注册学徒岗位 Bicycle Repair Technician。中国大陆侧以用人单位岗前培训与在岗带教与厂商培训为主，并须符合适用的电动自行车与电池与产品安全要求（强制性国家标准 GB 17761-2024 自 2025-09-01 实施）。"
+              "O*NET为Job Zone1–2、SVP低于6.0，学历三档未给占比；是职业描述，非所有雇主统一门槛。O*NET当前美国目录有3个相关院校项目：Minneapolis Community and Technical College（不足1年，5名完成者）、Northwest Arkansas Community College（1—2年，4名）、Andrews University（1—2年，0名）。院校目录IPEDS2025—26，完成者为2024—25年度；不代表当前招生、个人所需训练年限或录用门槛。摘要列注册学徒Bicycle Repair Technician；认证页有Certified Bicycle Technician（United Bicycle Institute）1项，非强制准入。中国官方岗位类别编码表（2022版大典分类，PDF第44页／印刷77页）列4-12-04-01自行车与电动自行车维修工，属于日用产品修理服务人员。该中国名称包含电动自行车，范围较美国49-3091.00宽，不能直接等同。职业名称与代码已有依据，全国精确职业工资分布仍未取得。"
             ]
           },
           "id": "bicycle-repairers.path.career-path-block.20",
           "source_refs": [
+            "nist",
             "onet",
-            "onet"
+            "census",
+            "cn-career-code"
           ],
           "type": "prose"
         },
@@ -30065,14 +30129,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界：学历、职业培训、行业认证（如 Certified Bicycle Technician）、雇主任用、门店内部的检验与放行与停工与收费授权、以及涉及电助力与电池与改装与解除限速的法域要求是不同状态，任何一项都不能由另一项自动推出；O*NET 认证页面只列出 1 项国家认证，学历页面只列三档且未公布占比。同时注意：本页工资与就业为本职业单列口径，且就业预测为下降（就业趋势页 -2%，13,200 → 12,900），与仍存在替代性空缺并不矛盾。"
+              "学历、训练、Certified Bicycle Technician目录、雇主任用、内部分工及产品认证分别核。美国49-3091.00自行车修理工：2025年就业12,200人，2035年预计11,500人；2025—2035变化-6%，年均空缺1,200（含增长与替换）。下降与替换性空缺可同时存在；总体预测不测AI因果或个人录用概率。"
             ]
           },
           "id": "bicycle-repairers.path.career-path-block.21",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "ep-current",
+            "editor",
+            "cn-product-policy",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -30081,14 +30146,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域：美国（O*NET 49-3091.00 与雇主人事与门店维修规程；美国 CPSC 对微出行产品的电池充电与制动与操纵失效提出安全指引；O*NET 该职业属 Job Zone 1–2、未标注 Bright Outlook）。中国大陆侧电动自行车受强制性国家标准 GB 17761-2024《电动自行车安全技术规范》约束（2024-12-31 发布、2025-09-01 实施，全部代替 GB 17761-2018），并按该规范开展强制性产品认证；本页不提供任何具体扭矩数值或装配顺序或改装与解除限速的方法。"
+              "美国CPSC为产品安全使用指引；中国中国政府网关于GB17761-2024的发布解读：2024-12-31发布、2025-09-01实施；2025-12-01起销售新车应符合新标准，已购旧车不因此强制淘汰。工信部联消费〔2025〕144号要求相关生产、认证和销售环节落实新版标准及CCC；CCC是产品认证，不能解释为维修员工证照。具体车型维修/改装权限及地方执行另核，不能由CCC推员工许可。"
             ]
           },
           "id": "bicycle-repairers.path.career-path-block.22",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "ep-current",
+            "editor",
+            "cn-product-policy",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -30097,13 +30163,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "路径概要：从在有监督下完成接车与检查与调整与复检，到独立完成常见车型的维修与调校与复检，再到带训、规程改进与班组复核；检验与放行与停工权限由门店与岗位职责决定，转向轮组编校与电助力技术支持与门店运营需补充相应训练与厂商授权。"
+              "编辑提出监督下起步、独立维修、带训或相邻转向的核对路线；实际职级、晋升和放行权限另核雇主，不是官方统一层级。"
             ]
           },
           "id": "bicycle-repairers.path.career-path-block.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current",
+            "editor",
+            "cn-product-policy",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -30140,12 +30208,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明培训与教育信息入口（含注册学徒岗位），不构成录用门槛或授权。"
+              "O*NET当前美国目录有3个相关院校项目：Minneapolis Community and Technical College（不足1年，5名完成者）、Northwest Arkansas Community College（1—2年，4名）、Andrews University（1—2年，0名）。院校目录IPEDS2025—26，完成者为2024—25年度；不代表当前招生、个人所需训练年限或录用门槛。摘要列注册学徒Bicycle Repair Technician；认证页有Certified Bicycle Technician（United Bicycle Institute）1项，非强制准入。"
             ]
           },
           "id": "bicycle-repairers.path.career-path-block.26",
           "source_refs": [
-            "onet"
+            "nist",
+            "onet",
+            "census"
           ],
           "type": "prose"
         },
@@ -30154,12 +30224,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆电动自行车强制性国家标准与产品安全的适用范围与证据边界。"
+              "中国新版电动自行车标准实施政策，含产品CCC及非法改装治理；不等于维修员工证照或具体车型手册。"
             ]
           },
           "id": "bicycle-repairers.path.career-path-block.27",
           "source_refs": [
-            "onet"
+            "cn-product-policy",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -30971,13 +31042,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成目标方向的资质与岗位授权与独立作业。"
+              "按目标岗位核适用的资质、训练、雇主任用和内部作业范围；并非所有相邻职业都存在同一种强制证照。"
             ]
           },
           "id": "bicycle-repairers.path.career-path-block.83",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31065,28 +31135,28 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 49-3091.00 职业摘要（就业与预测字段）",
+                "entity": "O*NET自行车修理工2025—2035全国就业趋势",
                 "id": "link-3",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/49-3091.00"
-              },
-              {
-                "entity": "O*NET 49-3091.00 行业分布",
-                "id": "link-4",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/49-3091.00"
-              },
-              {
-                "entity": "O*NET 49-3091.00 就业趋势页",
-                "id": "link-5",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/localtrends/49-3091.00"
               },
               {
-                "entity": "O*NET 49-3091.00 全国工资分位",
+                "entity": "O*NET自行车修理工2025—2035全国就业趋势",
+                "id": "link-4",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/localtrends/49-3091.00"
+              },
+              {
+                "entity": "国家统计局2025年城镇单位就业人员年平均工资情况",
+                "id": "link-5",
+                "relation": "career.source",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "entity": "O*NET 49-3091.00 职业摘要（自行车修理工）",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/49-3091.00"
+                "url": "https://www.onetonline.org/link/summary/49-3091.00"
               },
               {
                 "entity": "汽车维修技师与机械师",
@@ -31152,14 +31222,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：O*NET 就业趋势页按本职业单列口径给出 2024 年在岗 13,200 人、2034 年约 12,900 人（2024—2034 年 -2%，下降（-1% 或更低））、预测期年均职位空缺约 1,600（含增长与替换）。负增长与仍存在空缺并不矛盾：空缺主要来自替代需求（从业者转岗或退出劳动力市场），而不是岗位扩张。"
+              "美国49-3091.00自行车修理工：2025年就业12,200人，2035年预计11,500人；2025—2035变化-6%，年均空缺1,200（含增长与替换）。下降与替换性空缺可同时存在；总体预测不测AI因果或个人录用概率。"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31182,12 +31250,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024 年"
+              "2025年"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31196,12 +31264,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为 O*NET 就业趋势页按本职业给出的在岗人数；该职业就业规模较小（约 1.3 万人），个别门店或区域的招聘需求与全国口径差异可能很大。"
+              "美国本职业2025就业12,200人；全国规模不等于某门店招聘需求。"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31252,12 +31320,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "13,200 人（本职业单列口径）"
+              "12,200人（美国本职业2025）"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31280,12 +31348,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年"
+              "2025—2035"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31294,12 +31362,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页按本职业口径给出 2024—2034 年 -2%（下降）；预测期年均职位空缺约 1,600（含增长与替换）。需求还受骑行通勤与休闲消费趋势、电助力渗透、共享出行运维模式、维修外包与门店密度与零件供应与进口关税影响；总体负增长意味着新进入者更需要靠技术专精与门店类型选择。"
+              "美国49-3091.00自行车修理工：2025年就业12,200人，2035年预计11,500人；2025—2035变化-6%，年均空缺1,200（含增长与替换）。下降与替换性空缺可同时存在；总体预测不测AI因果或个人录用概率。编辑核对建议：比较实际城市需求、岗位职责、供应与计酬条件；本轮无数据证明电助力、关税或外包对本职业预测的具体因果。"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31350,12 +31418,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "下降（年均职位空缺约 1,600，本职业单列口径）"
+              "-6%；年均空缺1,200（美国本职业2025—2035）"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31378,12 +31446,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业与人群代理（非本职业工资）"
+              "2025行业/人群背景；2022地方职业历史价位"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -31392,12 +31462,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆未取得自行车修理工的精确职业工资条目，本页不把中文页面语言当作中国等价职业映射，也不发布本职业的精确月薪；仅展示三个明确标注人群与行业范围的官方代理：居民服务、修理和其他服务业城镇非私营单位 68,159 元/年、城镇私营单位 52,139 元/年（2024 年），以及从事该行业的农民工月均收入 4,023 元（2024 年）；三者分别是行业门类平均与人群月均收入，都不能用于估算个人报价。"
+              "中国官方岗位类别编码表（2022版大典分类，PDF第44页／印刷77页）列4-12-04-01自行车与电动自行车维修工，属于日用产品修理服务人员。该中国名称包含电动自行车，范围较美国49-3091.00宽，不能直接等同。职业名称与代码已有依据，全国精确职业工资分布仍未取得。国家统计局2025居民服务、修理和其他服务业：城镇非私营单位70,226元/年、私营单位52,059元/年；从事该行业的农民工月均收入4,130元、增长2.7%，行业就业占农民工12.5%。前两项是行业税前均值，第三项是特定人群从业收入／从业月数，均非自行车修理工工资。济宁人社局公开2022年度工资价位附件第9页第186行，职业为自行车与电动自行车维修工，单位元/年：低位29,873、下四分位31,084、中位36,294、上四分位38,973、高位42,083。只作地方历史、较宽职业范围参考；本轮未取得该行样本量、税费及提成细项，不能当全国、当前报价或美国职业等价值。"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -31406,12 +31479,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆只展示行业与人群代理数值并标注非本职业工资；不补数。"
+              "全国精确职业工资与需求预测仍不足；地方历史较宽职业条目不能替代，行业均值也不能推职业工资。"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.26",
           "source_refs": [
-            "onet"
+            "cn-local-wages",
+            "cn-wages-current"
           ],
           "type": "prose"
         },
@@ -31434,12 +31508,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "industry_proxy"
+              "行业/人群背景与地方历史部分映射，分列不可等同"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "cn-local-wages",
+            "cn-wages-current",
+            "cn-farmers-current"
           ],
           "type": "prose"
         },
@@ -31448,12 +31524,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业代理：居民服务、修理和其他服务业城镇非私营单位 68,159 元/年、城镇私营单位 52,139 元/年；人群代理：从事该行业的农民工月均 4,023 元（均为 2024 年；均非本职业工资）"
+              "中国2025行业非私营70,226、私营52,059元/年及农民工4,130元/月均为背景；2022济宁较宽职业中位36,294元/年为地方历史值。"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -31476,12 +31555,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明本职业单列口径的就业与 2024—2034 年预测（下降）。"
+              "美国本职业2025—2035总体就业趋势，不测AI因果。"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.31",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31490,12 +31569,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆行业与人群代理口径与证据边界，不提供本职业数值。"
+              "中国2025行业/人群背景及2022地方历史工资价位，非全国需求预测。"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.32",
           "source_refs": [
-            "onet"
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages"
           ],
           "type": "prose"
         },
@@ -31504,12 +31586,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于职业身份与官方职责描述。"
+              "美国本职业身份与任务，不等于中国职业分类或职业工资。"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.33",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31786,13 +31869,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补门店运营与库存与成本训练；维修专精不等于运营管理能力。"
+              "编辑差距核对：汽车车身与玻璃维修需补车体材料、损伤评估、玻璃安装及目标岗位工艺/安全训练；自行车轮组经验不能替代。"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.52",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31801,13 +31884,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是门店流程与顾客沟通与库存基础。"
+              "可迁移核对项：机械拆装、量测、损伤观察、工单及顾客解释；不推车身修复或玻璃作业资格。"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.53",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31816,13 +31899,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属门店环境，但从个人交付转向运营与人员管理。"
+              "编辑判断：作业对象由自行车转汽车车身/玻璃，技能差距较大；本轮没有职业转岗率或录用概率。"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.54",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31831,13 +31914,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补排班与带训与安全与复检检查训练；资深维修能力不等于带训与管理能力。"
+              "编辑差距核对：农场设备维修需补发动机、液压、传动及设备现场安全训练，依目标岗位核；自行车维修不等于农机胜任。"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.55",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31846,13 +31929,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是维修标准与安全规程与顾客沟通基础。"
+              "可迁移核对项：机械故障排查、拆装、量测、零件记录；不能推出发动机、液压能力。"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.56",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31861,13 +31944,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属门店服务体系，但从个人服务转向一线督导职责。"
+              "编辑判断：大型农机及现场作业与自行车门店差别大，需重新核目标训练与权限；没有转岗率数据。"
             ]
           },
           "id": "bicycle-repairers.market-signals.market-signal-card.57",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         }
@@ -31963,12 +32046,26 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "费马测试职业内容编辑组：依据 O*NET 与美国 BLS 的公开职业资料、美国 CPSC 微出行产品安全指引、Park Tool 厂商轮组校正技术指南，以及中国大陆国家统计局《2024 年农民工监测调查报告》与《2024 年城镇单位就业人员年平均工资情况》、强制性国家标准 GB 17761-2024《电动自行车安全技术规范》；逐项标注口径、资料期与使用限制。"
+              "本轮作者核美国49-3091.00身份、任务/活动/情境、知识能力/风格、工资/就业、软件/行业与训练认证；中国代码、2025行业/农民工背景、2022济宁历史价位；CPSC、Park Tool、中国产品实施政策和个人信息法。编辑试验/职业路线与统计、法律分列。"
             ]
           },
           "id": "bicycle-repairers.sources.source-card.1",
           "source_refs": [
-            "onet"
+            "bls",
+            "ep-current",
+            "onet-wages",
+            "hr",
+            "nist",
+            "census",
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages",
+            "health",
+            "archivists",
+            "cn-product-policy",
+            "cn-pipl",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -31977,14 +32074,30 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源：O*NET 49-3091.00 职业摘要、详细资料、自定义职业档案、技术清单、行业分布、认证发现、培训与教育信息、全国工资分位与就业趋势页面；美国 CPSC 微出行产品安全信息中心；Park Tool 轮组校正技术指南；国家统计局 2024 年农民工监测与城镇单位工资；强制性国家标准 GB 17761-2024（中国政府网发布）。"
+              "主要原文：O*NET本职业摘要/详细页、工资/趋势、行业/热门技术及训练/认证；BLSMay2025OEWS技术说明；国家统计局2025单位工资及农民工报告；政府岗位类别编码表、济宁2022工资价位；GB17761-2024发布解读及2025实施意见；CPSC微出行、Park Tool轮组指南、个人信息法及ILO工作论文140。保留范围外历史来源并不表示已同步改其正文。"
             ]
           },
           "id": "bicycle-repairers.sources.source-card.2",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "bls",
+            "onet-wages",
+            "ep-current",
+            "oews-methods",
+            "hr",
+            "r2-pay-2",
+            "nist",
+            "census",
+            "cn-career-code",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages",
+            "msresearch",
+            "cn-product-policy",
+            "health",
+            "archivists",
+            "cn-pipl",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -31993,12 +32106,25 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：O*NET 页面为 2026 年更新；工资分位为 2025 年 OEWS（本职业单列口径，时薪与年薪）；O*NET 就业与预测为 2024—2034 年（下降（-1% 或更低），就业趋势页 -2%）；国家统计局城镇单位工资为 2024 年、2025-05-16 发布；农民工监测为 2024 年、2025-04-30 发布；GB 17761-2024 于 2024-12-31 发布、2025-09-01 实施。"
+              "本轮核读2026-10-09；美国工资May2025、就业2025—2035、软件2025美国广告、行业页未单列资料年；训练目录2025—26与完成者2024—25。中国全国背景2025、地方工资2022历史、职业分类2022版分类表；产品标准2025-09-01实施、销售新标准2025-12-01，实施意见2025年；个人信息法2021施行、Park Tool2021页面、ILO2025。"
             ]
           },
           "id": "bicycle-repairers.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "onet-wages",
+            "hr",
+            "nist",
+            "r2-pay-2",
+            "cn-wages-current",
+            "cn-farmers-current",
+            "cn-local-wages",
+            "cn-career-code",
+            "msresearch",
+            "cn-product-policy",
+            "archivists",
+            "cn-pipl",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -32007,13 +32133,21 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "使用说明：① 职业身份与任务与工作情境与技能与知识为 O*NET 49-3091.00 本职业单列口径；② 工资、就业与行业数据在 O*NET 页面上亦为本职业单列口径，未标注取自其他职业；该职业在 O*NET 未标注 Bright Outlook，就业预测为下降，与仍存在替代性空缺并不矛盾；③ 中国大陆未取得本职业精确职业工资条目，本页只展示三个明确标注人群与行业范围的官方代理（行业门类平均与农民工人群月均收入），并说明不能用于估算个人报价。涉及扭矩与装配顺序与电助力与电池与改装与解除限速的内容须以适用法规与原厂手册与主管部门与用人单位规定为准，本页不提供任何作业指令。"
+              "美国工资和就业为本职业；全国职业工资缺口与中国分类代码已有须分开，济宁历史条目覆盖自行车及电动自行车，不等于美国职业或当前全国报价。CPSC是使用指南，CCC是产品认证，厂商轮组文献不是通用法规或车型维修手册。无本职业AI采用/效率、人格效度、雇主偏好及转岗率实测；编辑建议分别标注。共享Hero/七日与其他范围外历史值保持，相关冲突记录作者报告。"
             ]
           },
           "id": "bicycle-repairers.sources.source-card.4",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews-methods",
+            "ep-current",
+            "cn-career-code",
+            "cn-local-wages",
+            "cn-wages-current",
+            "health",
+            "archivists",
+            "cn-product-policy",
+            "editor",
+            "ilo"
           ],
           "type": "prose"
         }
@@ -32088,7 +32222,7 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "official occupation profile",
                   "2026 年更新页面；访问 2026-09-15"
@@ -32104,7 +32238,7 @@
                 "url": "https://www.onetonline.org/link/summary/49-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "official occupation details",
                   "2026 年更新页面；访问 2026-09-15"
@@ -32136,14 +32270,14 @@
                 "url": "https://www.onetonline.org/link/summary/49-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "official wage percentiles",
                   "May 2025（OEWS）；访问 2026-09-15"
                 ],
                 "evidence_type": "official wage percentiles",
                 "id": "oews",
-                "limitation": "中位数不是起薪，也不是收入承诺；该职业存在兼职与季节波动，年薪数字不能解释为所有从业者都能获得的全年收入。",
+                "limitation": "May2025本职业受雇工资分位，含全兼职及佣金，排自雇和加班溢价；年化非实发、分位非最低值或经验组。",
                 "market": "美国",
                 "name": "O*NET 展示的 BLS 2025 年工资分位（49-3091.00）",
                 "period": "May 2025（OEWS）；访问 2026-09-15",
@@ -32184,7 +32318,7 @@
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202505/t20250516_1959826.html"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "occupation profile",
                   "2026 年更新页面；访问 2026-09-15"
@@ -32200,7 +32334,7 @@
                 "url": "https://www.onetonline.org/link/summary/49-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "occupation details",
                   "2026 年更新页面；访问 2026-09-15"
@@ -32232,23 +32366,23 @@
                 "url": "https://www.onetonline.org/link/summary/49-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "technology signals",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "2025美国招聘广告"
                 ],
                 "evidence_type": "technology signals",
                 "id": "hr",
-                "limitation": "页面列出 3 项软件技能并均标注为热门技术（Microsoft Excel、Microsoft Outlook、Microsoft Word），页面未公布出现比例；该职业共列出 6 类软件技能（含维修管理类与销售点类）。不代表岗位采用率或自动化程度。",
+                "limitation": "O*NET2025美国Lightcast招聘广告列Excel、Outlook、Word，三项比例均Not available；广告提及不等于采用率、AI效果或全国统一录用要求。",
                 "market": "美国",
                 "name": "O*NET 49-3091.00 技术清单（热门技术信号）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2025美国招聘广告；2026-10-09核读",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/49-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "official product safety guidance",
                   "页面现行版本；访问 2026-09-15"
@@ -32296,14 +32430,14 @@
                 "url": "https://www.onetonline.org/link/summary/49-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "training information",
                   "2026 年更新页面；访问 2026-09-15"
                 ],
                 "evidence_type": "training information",
                 "id": "nist",
-                "limitation": "页面显示全国共 2 个相关培训项目（方向为 Bicycle Mechanics and Repair Technology/Technician）；职业摘要另列出注册学徒岗位 Bicycle Repair Technician，并提供 Apprenticeship.gov 入口；培训项目与学徒名称不构成执业许可或雇主任命。",
+                "limitation": "O*NET当前美国目录有3个相关院校项目：Minneapolis Community and Technical College（不足1年，5名完成者）、Northwest Arkansas Community College（1—2年，4名）、Andrews University（1—2年，0名）。院校目录IPEDS2025—26，完成者为2024—25年度；不代表当前招生、个人所需训练年限或录用门槛。摘要列注册学徒Bicycle Repair Technician；认证页有Certified Bicycle Technician（United Bicycle Institute）1项，非强制准入。",
                 "market": "美国",
                 "name": "O*NET 49-3091.00 培训与教育信息",
                 "period": "2026 年更新页面；访问 2026-09-15",
@@ -32312,7 +32446,7 @@
                 "url": "https://www.onetonline.org/link/localtraining/49-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "occupation profile",
                   "2026 年更新页面；访问 2026-09-15"
@@ -32328,7 +32462,7 @@
                 "url": "https://www.onetonline.org/link/custom/49-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "occupation profile",
                   "2026 年更新页面；访问 2026-09-15"
@@ -32344,14 +32478,14 @@
                 "url": "https://www.onetonline.org/link/summary/49-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "occupation details",
                   "2026 年更新页面；访问 2026-09-15"
                 ],
                 "evidence_type": "occupation details",
                 "id": "employer",
-                "limitation": "用于工作活动与技能口径；知识领域共 33 项并给出分数（机械 92、客户与个人服务 86 等），能力 52 项并给出分数；工作风格字段本页未取得。",
+                "limitation": "美国本职业任务、41工作活动、57情境、33知识、52能力及19工作风格；工作风格注意细节75、可靠性71、谨慎50；职业特征非雇主招聘样本或人格阈值。",
                 "market": "美国",
                 "name": "O*NET 49-3091.00 详细资料（工作活动与技能）",
                 "period": "2026 年更新页面；访问 2026-09-15",
@@ -32360,7 +32494,7 @@
                 "url": "https://www.onetonline.org/link/details/49-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "occupation profile",
                   "2026 年更新页面；访问 2026-09-15"
@@ -32376,7 +32510,7 @@
                 "url": "https://www.onetonline.org/link/summary/49-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "official wage percentiles",
                   "May 2025（OEWS）；访问 2026-09-15"
@@ -32392,39 +32526,39 @@
                 "url": "https://www.onetonline.org/link/localwages/49-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "industry distribution",
-                  "2024 年；访问 2026-09-15"
+                  "现行行业页未单列资料年"
                 ],
                 "evidence_type": "industry distribution",
                 "id": "r2-pay-2",
                 "limitation": "零售贸易 80%、其他行业（含房地产与租赁与其他服务业）20%；行业分布描述统计分类，不提供行业工资水平。",
                 "market": "美国",
                 "name": "O*NET 49-3091.00 行业分布",
-                "period": "2024 年；访问 2026-09-15",
+                "period": "现行行业页未单列资料年；本轮2026-10-09读取",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/49-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "official employment trends",
-                  "2024—2034 年；访问 2026-09-15"
+                  "2025—2035"
                 ],
                 "evidence_type": "official employment trends",
                 "id": "r2-pay-3",
-                "limitation": "2024 年在岗 13,200 人、2034 年约 12,900 人、2024—2034 年 -2%（下降）、预测期年均职位空缺约 1,600（含增长与替换）；预测不等于个人录用概率，负增长与仍存在空缺并不矛盾（空缺主要来自替代需求）。",
+                "limitation": "美国49-3091.00自行车修理工：2025年就业12,200人，2035年预计11,500人；2025—2035变化-6%，年均空缺1,200（含增长与替换）。下降与替换性空缺可同时存在；总体预测不测AI因果或个人录用概率。",
                 "market": "美国",
                 "name": "O*NET 49-3091.00 就业趋势页（就业与空缺）",
-                "period": "2024—2034 年；访问 2026-09-15",
+                "period": "2025—2035；2026-10-09核读",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/49-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "certification information",
                   "2026 年更新页面；访问 2026-09-15"
@@ -32440,14 +32574,14 @@
                 "url": "https://www.onetonline.org/link/localcert/49-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "official mandatory standard release",
-                  "2024-12-31 发布、2025-09-01 实施，全部代替 GB 17761-2018；访问 2026-09-15"
+                  "official standard release interpretation",
+                  "2024-12-31发布；2025-09-01实施"
                 ],
-                "evidence_type": "official mandatory standard release",
+                "evidence_type": "official standard release interpretation",
                 "id": "msresearch",
-                "limitation": "该强制性国家标准强化非金属材料防火阻燃要求、明确塑料总质量上限、完善电池组与控制器与限速器的防篡改要求并增加检查方法示例、提升制动性能要求并减小最大制动距离、新增企业质量保证能力与产品一致性要求、要求具备北斗定位与通信与动态安全监测功能（经营性用途以外可由消费者选择）、并明确建议使用年限；四部门《关于强化电动自行车强制性国家标准实施 加快新产品供应的意见》（工信部联消费〔2025〕144 号）要求按该规范开展电动自行车强制性产品认证（CCC 认证）并严把发证质量关。本页只引用其适用范围与安全框架，不逐条引用条款，也不提供任何维修规格或改装与解除限速的方法；电动自行车用蓄电池与充电器另有配套强制性标准，本页不展开。",
+                "limitation": "中国政府网关于GB17761-2024的发布解读：2024-12-31发布、2025-09-01实施；2025-12-01起销售新车应符合新标准，已购旧车不因此强制淘汰。工信部联消费〔2025〕144号要求相关生产、认证和销售环节落实新版标准及CCC；CCC是产品认证，不能解释为维修员工证照。该页面为发布解读，未取得标准全文及具体车型厂商维修手册。",
                 "market": "中国大陆",
                 "name": "强制性国家标准 GB 17761-2024《电动自行车安全技术规范》（工业和信息化部、市场监管总局会同公安部、应急管理部、国家消防救援局组织修订）",
                 "period": "2024-12-31 发布、2025-09-01 实施，全部代替 GB 17761-2018；访问 2026-09-15",
@@ -32456,7 +32590,7 @@
                 "url": "https://www.gov.cn/lianbo/bumen/202501/content_6998230.htm"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "official wage percentiles",
                   "May 2025（OEWS）；访问 2026-09-15"
@@ -32472,20 +32606,148 @@
                 "url": "https://www.onetonline.org/link/localwages/49-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "manufacturer technical guide",
                   "页面版本 2021-03-31；访问 2026-09-15"
                 ],
                 "evidence_type": "manufacturer technical guide",
                 "id": "archivists",
-                "limitation": "说明轮组校正的四个方面（横向直线度、径向圆度、偏摆居中、辐条张力）与定位—隔离—校正规程，给出可接受的偏差量级（横向约 ≤ 0.5 毫米、径向约 ≤ 1 毫米，属于经验量级而非统一强制标准）、辐条张力差异过大与整体过紧或过松都会带来问题、轮圈金属变形超出张力可修复范围时应更换轮圈、辐条帽螺纹腐蚀会导致轮组无法校正、轮圈残留润滑剂会影响刹车面等要点。该页是厂商维修指南，不替代具体车型与部件的原厂手册与规格，本页不把它当作强制标准或放行依据。",
+                "limitation": "轮组侧向、径向、碟形及张力四维；轮圈超出辐条可调整范围需要更换，残留润滑剂影响制动；厂商文献非各车型扭矩/放行值、化学品SDS或通用法规。",
                 "market": "美国",
                 "name": "Park Tool《Wheel Truing (Lateral & Radial)》（厂商轮组校正技术指南）",
                 "period": "页面版本 2021-03-31；访问 2026-09-15",
                 "publisher": "Park Tool（自行车维修工具制造商）",
-                "scope": "jurisdiction_specific",
+                "scope": "manufacturer_reference",
                 "url": "https://www.parktool.com/en-us/blog/repair-help/wheel-and-rim-truing"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official employment trends",
+                  "2025—2035"
+                ],
+                "evidence_type": "official employment trends",
+                "id": "ep-current",
+                "limitation": "美国49-3091.00自行车修理工：2025年就业12,200人，2035年预计11,500人；2025—2035变化-6%，年均空缺1,200（含增长与替换）。下降与替换性空缺可同时存在；总体预测不测AI因果或个人录用概率。",
+                "market": "美国",
+                "name": "O*NET自行车修理工2025—2035全国就业趋势",
+                "period": "2025—2035",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/49-3091.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official wage statistics",
+                  "2025年；2026-05-15发布"
+                ],
+                "evidence_type": "official wage statistics",
+                "id": "cn-wages-current",
+                "limitation": "居民服务、修理和其他服务业非私营70,226、私营52,059元/年，行业税前均值；非自行车维修职业工资。",
+                "market": "中国大陆",
+                "name": "国家统计局2025年城镇单位就业人员年平均工资情况",
+                "period": "2025年；2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official survey report",
+                  "2025年；2026-04-30发布"
+                ],
+                "evidence_type": "official survey report",
+                "id": "cn-farmers-current",
+                "limitation": "从事居民服务修理和其他服务业农民工月均4,130元、同比2.7%、人群占12.5%；不是职业工资或同一税前单位工资口径。",
+                "market": "中国大陆",
+                "name": "国家统计局2025年农民工监测调查报告",
+                "period": "2025年；2026-04-30发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202604/t20260430_1963472.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official occupational classification table",
+                  "2022版分类；2023附件"
+                ],
+                "evidence_type": "official occupational classification table",
+                "id": "cn-career-code",
+                "limitation": "中国官方岗位类别编码表（2022版大典分类，PDF第44页／印刷77页）列4-12-04-01自行车与电动自行车维修工，属于日用产品修理服务人员。该中国名称包含电动自行车，范围较美国49-3091.00宽，不能直接等同。职业名称与代码已有依据，全国精确职业工资分布仍未取得。该附件不是职业技能标准全文。",
+                "market": "中国大陆",
+                "name": "政府公开岗位类别编码表（2022版职业分类大典分类）",
+                "period": "2022版分类；2023附件",
+                "publisher": "广元市人力资源和社会保障局",
+                "scope": "partial_mapping",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2023/03/28/33236d995ac3404a99de2429f1e92f52.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official local wage price table",
+                  "2022年度"
+                ],
+                "evidence_type": "official local wage price table",
+                "id": "cn-local-wages",
+                "limitation": "济宁人社局公开2022年度工资价位附件第9页第186行，职业为自行车与电动自行车维修工，单位元/年：低位29,873、下四分位31,084、中位36,294、上四分位38,973、高位42,083。只作地方历史、较宽职业范围参考；本轮未取得该行样本量、税费及提成细项，不能当全国、当前报价或美国职业等价值。",
+                "market": "中国大陆（地方历史附件）",
+                "name": "济宁2022年度部分职位（工种）人力资源市场工资价位附件1",
+                "period": "2022年度",
+                "publisher": "济宁市人力资源和社会保障局",
+                "scope": "partial_mapping",
+                "url": "https://hrss.jining.gov.cn/attach/0/7b30cc10a29c4d8caff0881efdcbcaf2.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official implementation policy",
+                  "工信部联消费〔2025〕144号；2025-06-04文件，2025-07-24网页发布"
+                ],
+                "evidence_type": "official implementation policy",
+                "id": "cn-product-policy",
+                "limitation": "生产/CCC/销售环节实施政策；非法改装禁止不能解释为一切正常维修禁止或员工个人CCC。",
+                "market": "中国大陆",
+                "name": "加强电动自行车强制性国家标准实施促进产品质量安全提升的意见",
+                "period": "工信部联消费〔2025〕144号；2025-06-04文件，2025-07-24网页发布",
+                "publisher": "工业和信息化部等",
+                "scope": "jurisdiction_specific",
+                "url": "https://www.miit.gov.cn/jgsj/xfpgys/wjfb/art/2025/art_346cbdc6d642418998c2be5baa56c17b.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official statistical methods",
+                  "May2025；2026-05-15更新"
+                ],
+                "evidence_type": "official statistical methods",
+                "id": "oews-methods",
+                "limitation": "含全职兼职受雇者、佣金和生产奖金与小费，排自雇及加班溢价；通常按2,080小时年化，非个人实际年收入。",
+                "market": "美国",
+                "name": "BLS May2025OEWS技术说明",
+                "period": "May2025；2026-05-15更新",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "law",
+                  "2021-11-01施行"
+                ],
+                "evidence_type": "law",
+                "id": "cn-pipl",
+                "limitation": "第4—6、13、17、19条：可识别自然人信息、目的/最小必要、合法处理基础、告知与期限；车辆技术参数本身不必然全属个人信息。",
+                "market": "中国大陆",
+                "name": "中华人民共和国个人信息保护法",
+                "period": "2021-11-01施行",
+                "publisher": "国家市场监督管理总局法规转载",
+                "scope": "jurisdiction_specific",
+                "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
               }
             ]
           },
@@ -34701,7 +34963,8 @@
             },
             "evidence_refs": [
               "onet",
-              "onet-context"
+              "onet-context",
+              "park"
             ],
             "id": "scope-referral",
             "mitigation": {
@@ -34732,8 +34995,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-context"
+              "cpsc"
             ],
             "id": "crisis-escalation",
             "mitigation": {
@@ -34764,8 +35026,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-context"
+              "park"
             ],
             "id": "record-material-privacy",
             "mitigation": {
@@ -34780,7 +35041,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "油脂污染刹车面与化学品伤害"
+            "title": "制动面润滑剂残留与化学品资料缺口"
           },
           {
             "affected_roles": {
@@ -34796,7 +35057,6 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
               "onet-context"
             ],
             "id": "material-harm",
@@ -34812,7 +35072,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "长时间站立与反复拆装劳损"
+            "title": "站立、污染物与轻微伤害暴露"
           },
           {
             "affected_roles": {
@@ -34861,7 +35121,7 @@
             },
             "evidence_refs": [
               "onet",
-              "onet-context"
+              "cn-product"
             ],
             "id": "supervision-referral",
             "mitigation": {
@@ -34995,6 +35255,42 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$link": "bicycle-repairers.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "url"
+            },
+            "id": "park",
+            "label": {
+              "$link": "bicycle-repairers.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "entity"
+            },
+            "scope": "厂商轮组说明，非所有车型放行阈值。"
+          },
+          {
+            "href": {
+              "$link": "bicycle-repairers.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-8",
+              "field": "url"
+            },
+            "id": "cn-product",
+            "label": {
+              "$link": "bicycle-repairers.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-8",
+              "field": "entity"
+            },
+            "scope": "中国产品实施政策，非维修员工CCC许可。"
           }
         ]
       },
@@ -35355,7 +35651,7 @@
           "ui": {
             "ai_heading": "AI 会影响自行车修理工的工资吗？",
             "driver_heading": "哪些行业与岗位可能涉及这个职业？",
-            "official_heading": "中国大陆薪资参考（行业代理口径，非本职业工资）",
+            "official_heading": "中国薪资参考（行业/人群背景与地方历史价位）",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
             "scenario_heading": "自行车修理工在中国大陆通常从哪里起步？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -35465,7 +35761,7 @@
             }
           },
           {
-            "fact_ref": "us-employment-2025",
+            "fact_ref": "revision-us-employment-current",
             "指标": "就业 · 就业规模",
             "数值": {
               "$item": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.19",
@@ -35481,7 +35777,7 @@
             }
           },
           {
-            "fact_ref": "us-growth-2025-2035",
+            "fact_ref": "revision-us-growth-current",
             "指标": "就业 · 增长率",
             "数值": {
               "$item": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.21",
@@ -35497,7 +35793,7 @@
             }
           },
           {
-            "fact_ref": "us-openings-2025-2035",
+            "fact_ref": "revision-us-openings-current",
             "指标": "就业 · 年均职位空缺",
             "数值": {
               "$item": "bicycle-repairers.us-salary.career-snapshot-secondary-locale.23",
@@ -35716,7 +36012,7 @@
         },
         "outlook_heading": "美国就业前景",
         "outlook_period": {
-          "$fact": "us-growth-2025-2035",
+          "$fact": "revision-us-growth-current",
           "field": "period"
         },
         "wage_column_labels": [
@@ -36362,7 +36658,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中国大陆行业与人群口径代理（非本职业工资）",
+            "label": "中国分类、地方历史工资及行业/人群背景",
             "secondary_value": null,
             "value": {
               "$item": "bicycle-repairers.profile.onet-structured-fields-block.3",
@@ -37516,74 +37812,78 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "证据不足：本轮未取得该职业对应行业工资中位数",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
+        "measure": "分行业工资中位数（未取得）",
         "occupation_scope": "自行车修理工",
-        "period": "不适用：来源未公布该字段",
+        "period": "本轮未取得；访问2026-10-09",
         "source_refs": [
-          "operations"
+          "onet-wages",
+          "oews-methods"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "证据不足：本轮未取得该职业对应行业工资中位数",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
+        "measure": "分行业工资中位数（未取得）",
         "occupation_scope": "自行车修理工",
-        "period": "不适用：来源未公布该字段",
+        "period": "本轮未取得；访问2026-10-09",
         "source_refs": [
-          "operations"
+          "onet-wages",
+          "oews-methods"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "证据不足：本轮未取得该职业对应行业工资中位数",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
+        "measure": "分行业工资中位数（未取得）",
         "occupation_scope": "自行车修理工",
-        "period": "不适用：来源未公布该字段",
+        "period": "本轮未取得；访问2026-10-09",
         "source_refs": [
-          "operations"
+          "onet-wages",
+          "oews-methods"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "证据不足：本轮未取得该职业对应行业工资中位数",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
+        "measure": "分行业工资中位数（未取得）",
         "occupation_scope": "自行车修理工",
-        "period": "不适用：来源未公布该字段",
+        "period": "本轮未取得；访问2026-10-09",
         "source_refs": [
-          "operations"
+          "onet-wages",
+          "oews-methods"
         ]
       },
       {
         "derivation": null,
-        "display_value": "68,159元/年（居民服务、修理和其他服务业，2024 年，城镇非私营单位；行业代理，非本职业工资）",
+        "display_value": "70,226元/年（2025居民服务、修理和其他服务业城镇非私营税前均值；非职业工资）",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "行业门类平均工资（行业代理）",
         "occupation_scope": "自行车修理工",
-        "period": "2024 年数据、2025-05-16 发布；访问 2026-09-15",
+        "period": "2025年；2026-05-15发布",
         "source_refs": [
-          "cnclass"
+          "cn-wages-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "52,139元/年（居民服务、修理和其他服务业，2024 年，城镇私营单位；行业代理）",
+        "display_value": "52,059元/年（2025同业城镇私营税前均值；非职业工资）",
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "行业门类平均工资（行业代理，私营对照）",
         "occupation_scope": "自行车修理工",
-        "period": "2024 年数据、2025-05-16 发布；访问 2026-09-15",
+        "period": "2025年；2026-05-15发布",
         "source_refs": [
-          "cnclass"
+          "cn-wages-current"
         ]
       },
       {
@@ -37612,14 +37912,14 @@
       },
       {
         "derivation": null,
-        "display_value": "4,023元/月（2024 年，从事居民服务修理和其他服务业的农民工；人群口径代理，非本职业工资）",
+        "display_value": "4,130元/月（2025从事居民服务修理和其他服务业农民工人群均值；非职业工资）",
         "fact_id": "cn-industry-rental-business-2025",
         "market": "中国大陆",
         "measure": "人群月均收入（人群口径代理）",
         "occupation_scope": "自行车修理工",
-        "period": "2024 年数据、2025-04-30 发布；访问 2026-09-15",
+        "period": "2025年；2026-04-30发布",
         "source_refs": [
-          "nbs"
+          "cn-farmers-current"
         ]
       },
       {
@@ -37717,6 +38017,42 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "12,200人",
+        "fact_id": "revision-us-employment-current",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "自行车修理工",
+        "period": "2025年",
+        "source_refs": [
+          "ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "-6%",
+        "fact_id": "revision-us-growth-current",
+        "market": "美国",
+        "measure": "就业增长率",
+        "occupation_scope": "自行车修理工",
+        "period": "2025—2035",
+        "source_refs": [
+          "ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均1,200（含增长与替换）",
+        "fact_id": "revision-us-openings-current",
+        "market": "美国",
+        "measure": "年均职位空缺",
+        "occupation_scope": "自行车修理工",
+        "period": "2025—2035",
+        "source_refs": [
+          "ep-current"
+        ]
       }
     ]
   },
@@ -37725,7 +38061,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 49-3091.00 · Job Zone 1–2 · 入门准备低",
@@ -37776,7 +38112,7 @@
       "text": "自行车修理工"
     }
   },
-  "source_content_sha256": "3fa17ed0436fa869439d3b5a570569fe6e8c10f72fad9165f5dc44767de87d84",
+  "source_content_sha256": "31cfda0b1036990d6147d6178cfb6b5716d268ede2858f7dd93b58fe025bef07",
   "subject": {
     "canonical_slug": "bicycle-repairers",
     "name": "自行车修理工",

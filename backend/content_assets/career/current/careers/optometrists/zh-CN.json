@@ -12816,7 +12816,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更强证据是受监督工作样本、原始记录和反馈；兴趣测评不能证明检查诊断、镜片处方、用药与转诊的执业责任能力。"
+              "能力判断可观察受监督检查记录、处方核对及转诊反馈；兴趣仅探索，不授执照、药物或手术权限。"
             ]
           },
           "id": "optometrists.fit.riasec-fit-block.7",
@@ -13635,7 +13635,7 @@
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "29-1041.00 - Optometrists",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "O*NET 2026 occupational profile; checked 2026-10-12",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/29-1041.00"
@@ -14006,7 +14006,7 @@
             "链接": "https://www.onetonline.org/link/details/29-1041.00"
           }
         ],
-        "difference_intro": "资料汇总可加快；检查诊断、镜片处方、用药与转诊的执业责任需要人的检查。",
+        "difference_intro": "影像提示、摘要与视功能趋势整理为编辑试用建议；临床判断、处方、用药和转诊须人核，未取得单项提效实测。",
         "difference_rows": [
           {
             "AI主要改变": "辅助归纳记录与候选",
@@ -14262,7 +14262,7 @@
             "href": "https://www.bls.gov/ooh/healthcare/optometrists.htm",
             "id": "bls",
             "label": "教育与资格",
-            "scope": "美国29-1041.00精确职业"
+            "scope": "美国OD教育和州执照概述；药物种类、手术及其他操作许可因州不同，board certification可选；中国资格和机构权限另核。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
@@ -14577,16 +14577,28 @@
         "risks": [
           {
             "affected_roles": {
-              "$item": "optometrists.risk.career-risk-cards.4",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "患者、接诊验光师和会诊团队。检查背景：",
+                {
+                  "$item": "optometrists.risk.career-risk-cards.4",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "consequence": {
-              "$item": "optometrists.risk.career-risk-cards.5",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "可能延误眼病识别和治疗。升级边界：",
+                {
+                  "$item": "optometrists.risk.career-risk-cards.5",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "evidence_refs": [
               "onet",
@@ -14598,11 +14610,11 @@
             "title": "严重眼病漏诊"
           },
           {
-            "affected_roles": "验光师工作需围绕验光师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "验光师工作需围绕验光师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "验光师、患者及处方交付或配镜人员。",
+            "consequence": "可能导致矫正错误与使用不适。",
             "evidence_refs": [
               "onet",
-              "privacy"
+              "onet"
             ],
             "id": "record-version",
             "mitigation": "复核检查与处方。",
@@ -14610,11 +14622,11 @@
             "title": "处方错误"
           },
           {
-            "affected_roles": "验光师工作需围绕验光师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "验光师工作需围绕验光师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "患者、处方验光师及药学协作人员。",
+            "consequence": "可能造成药物伤害或违反适用许可规则。",
             "evidence_refs": [
-              "privacy",
-              "privacy"
+              "onet",
+              "onet"
             ],
             "id": "personal-data",
             "mitigation": "核法定范围与禁忌。",
@@ -14622,8 +14634,8 @@
             "title": "越权用药"
           },
           {
-            "affected_roles": "验光师工作需围绕验光师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "验光师工作需围绕验光师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "接触镜使用者、验光师及随访人员。",
+            "consequence": "可能发生眼部损伤或感染。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14634,11 +14646,11 @@
             "title": "接触镜损伤"
           },
           {
-            "affected_roles": "验光师工作需围绕验光师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "验光师工作需围绕验光师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "患者、验光师及接收转诊的眼科团队。",
+            "consequence": "可能延误急症处理并损伤视力。",
             "evidence_refs": [
-              "bls",
-              "bls"
+              "onet",
+              "onet"
             ],
             "id": "single-coverage",
             "mitigation": "按急症流程转诊。",
@@ -14646,8 +14658,8 @@
             "title": "急症漏转"
           },
           {
-            "affected_roles": "验光师工作需围绕验光师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "验光师工作需围绕验光师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "患者、验光师及病历影像管理人员。",
+            "consequence": "可能泄露病历或影像资料。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14664,31 +14676,31 @@
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "id": "onet",
             "label": "任务",
-            "scope": "美国29-1041.00精确职业"
+            "scope": "O*NET支持29-1041.00检查、处方、护理教育及转诊背景；风险为编辑提示，非临床阈值、事故率或具体州权限规则。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
             "label": "资格",
-            "scope": "美国29-1041.00精确职业"
+            "scope": "O*NET支持29-1041.00检查、处方、护理教育及转诊背景；风险为编辑提示，非临床阈值、事故率或具体州权限规则。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "id": "facilities",
             "label": "工作环境",
-            "scope": "美国29-1041.00精确职业"
+            "scope": "O*NET支持29-1041.00检查、处方、护理教育及转诊背景；风险为编辑提示，非临床阈值、事故率或具体州权限规则。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "privacy",
             "label": "就业资料",
-            "scope": "美国29-1041.00精确职业"
+            "scope": "O*NET支持29-1041.00检查、处方、护理教育及转诊背景；风险为编辑提示，非临床阈值、事故率或具体州权限规则。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1041.00",
             "id": "onet",
             "label": "职业活动",
-            "scope": "美国29-1041.00精确职业"
+            "scope": "O*NET支持29-1041.00检查、处方、护理教育及转诊背景；风险为编辑提示，非临床阈值、事故率或具体州权限规则。"
           }
         ]
       },
@@ -14827,7 +14839,7 @@
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "BLS精确职业统计｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET职业任务｜https://www.onetonline.org/link/details/29-1041.00",
+        "authority_sources": "BLS精确职业统计｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS行业工资及执照概述｜https://www.bls.gov/ooh/healthcare/optometrists.htm；O*NET工资分位｜https://www.onetonline.org/link/localwages/29-1041.00",
         "bls_table": [
           {
             "指标": "薪资第10百分位",
@@ -14904,24 +14916,24 @@
         "industry_period": "2025年5月",
         "industry_rows": [
           {
-            "industry": "视光诊所",
-            "median": "按地区核",
-            "note": "精确职业行业分位在本页未单列。"
+            "industry": "验光师诊所",
+            "median": "$129,250",
+            "note": "BLS OOH2025美国29-1041行业中位年薪；非起薪、个人报价或自营利润。"
           },
           {
-            "industry": "眼科门诊",
-            "median": "按地区核",
-            "note": "精确职业行业分位在本页未单列。"
+            "industry": "医师诊所",
+            "median": "$145,630",
+            "note": "BLS OOH2025美国29-1041行业中位年薪；非起薪、个人报价或自营利润。"
           },
           {
-            "industry": "眼镜零售配套",
-            "median": "按地区核",
-            "note": "精确职业行业分位在本页未单列。"
+            "industry": "零售业",
+            "median": "$159,250",
+            "note": "BLS OOH2025美国29-1041行业中位年薪；非起薪、个人报价或自营利润。"
           },
           {
-            "industry": "综合医疗机构",
-            "median": "按地区核",
-            "note": "精确职业行业分位在本页未单列。"
+            "industry": "门诊护理中心",
+            "median": "$207,030",
+            "note": "BLS OOH2025美国29-1041行业中位年薪；非起薪、个人报价或自营利润。"
           }
         ],
         "industry_value_label": "年薪中位数（美元）",
@@ -15094,30 +15106,39 @@
         "heading": "美国29-1041.00就业展望",
         "outlook_evidence": [
           {
-            "geography": {
-              "$item": "optometrists.market-signals.market-signal-card.2",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "horizon": {
-              "$item": "optometrists.market-signals.market-signal-card.3",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "geography": "美国",
+            "horizon": "2025基期",
             "interpretation": {
-              "$item": "optometrists.market-signals.market-signal-card.4",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
+              "$join": [
+                "就业及其他背景分开解读：",
+                {
+                  "$item": "optometrists.market-signals.market-signal-card.2",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "optometrists.market-signals.market-signal-card.3",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "optometrists.market-signals.market-signal-card.4",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "optometrists.market-signals.market-signal-card.5",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
-            "limitation": {
-              "$item": "optometrists.market-signals.market-signal-card.5",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "limitation": "29-1041验光师单项规模；非当前招聘、AI归因或中国需求。",
             "metric": "2025在岗",
             "occupation_scope": "美国29-1041.00",
             "source_id": "bls",
@@ -15262,7 +15283,7 @@
           },
           {
             "alternate_value": null,
-            "label": "知识",
+            "label": "任务相关知识（编辑归纳）",
             "secondary_value": null,
             "value": "视觉系统、屈光、眼病、药物范围、执业法律和患者安全"
           },
@@ -15285,7 +15306,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
+            "cta_label": "查看霍兰德兴趣测评",
             "evidence_level": {
               "$item": "optometrists.fit.personality-fit-block.8",
               "block": "fit",
@@ -15304,10 +15325,10 @@
             "watchout": "兴趣测评不证明检查诊断、镜片处方、用药与转诊的执业责任能力或资格。"
           },
           {
-            "answer": "验光师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "核病史、检查眼别、原结果与处方记录，观察是否发现冲突与过度推断。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "验光师工作需围绕验光师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "big-five",
             "label": "细节能力",
             "question": "做验光师需要怎样的能力与工作方式？",
@@ -15320,10 +15341,10 @@
             "watchout": "兴趣测评不证明检查诊断、镜片处方、用药与转诊的执业责任能力或资格。"
           },
           {
-            "answer": "验光师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "面对眼痛、骤降视力或权限不明，练保留未决问题并按机构流程升级。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "验光师工作需围绕验光师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "mbti",
             "label": "风险处理",
             "question": "做验光师需要怎样的能力与工作方式？",
@@ -15336,10 +15357,10 @@
             "watchout": "兴趣测评不证明检查诊断、镜片处方、用药与转诊的执业责任能力或资格。"
           },
           {
-            "answer": "验光师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较临床判断、患者教育、长期随访和转诊是否符合工作价值。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "验光师工作需围绕验光师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "enneagram",
             "label": "工作价值",
             "question": "做验光师需要怎样的能力与工作方式？",
@@ -15352,10 +15373,10 @@
             "watchout": "兴趣测评不证明检查诊断、镜片处方、用药与转诊的执业责任能力或资格。"
           },
           {
-            "answer": "验光师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "核患者接触、精细检查、反复记录核对和协作班次是否适合。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "验光师工作需围绕验光师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "iq",
             "label": "场景偏好",
             "question": "做验光师需要怎样的能力与工作方式？",
@@ -15368,10 +15389,10 @@
             "watchout": "兴趣测评不证明检查诊断、镜片处方、用药与转诊的执业责任能力或资格。"
           },
           {
-            "answer": "验光师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "沿既有I/J题核眼别推理及权限缺项，不诊断、不编填或代签处方。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "验光师工作需围绕验光师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "eq",
             "label": "虚构案例",
             "question": "做验光师需要怎样的能力与工作方式？",
@@ -15591,8 +15612,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "BLS 29-1041.00 2025—2035精确职业统计；O*NET任务；国家统计局中国工资缺口。",
-          "updated_at": "2026-09-26核官方职业任务与当前统计。"
+          "source": "O*NET精确任务及BLS2025工资分位；BLS行业工资、OD与州执照概述及2025—2035单项预测；NBS卫生社会工作宽行业背景。",
+          "updated_at": "2026-10-12"
         },
         "note": "证据只支持验光师在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -15604,7 +15625,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "职业任务"
+            "label": "MBTI测评（英文）"
           },
           {
             "href": {
@@ -15614,7 +15635,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "工资就业"
+            "label": "大五人格测评（英文）"
           },
           {
             "href": {
@@ -15624,7 +15645,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "资格或规则"
+            "label": "MBTI测评（中文）"
           },
           {
             "href": {
@@ -15634,7 +15655,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "统计边界"
+            "label": "大五人格测评（中文）"
           }
         ]
       },
@@ -15842,7 +15863,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "验光师 · O*NET 29-1041.00",
@@ -15893,7 +15914,7 @@
       "text": "验光师：工作、工资与入行路径"
     }
   },
-  "source_content_sha256": "38090651c5bd11d459cb1e90a1fc44dabd1c9e934293187230af7e7fc3b22b9b",
+  "source_content_sha256": "5d0c19ecb69e51520d9f72a336933b9ea314e3bf88f3e140f13fd7d7b0a70f54",
   "subject": {
     "canonical_slug": "optometrists",
     "name": "验光师",

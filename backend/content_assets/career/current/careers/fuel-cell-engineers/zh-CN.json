@@ -25604,12 +25604,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于理解技术对任务的影响机制；研究对象以职业大组为主，不预测本职业个人岗位变化。"
+              "原ILO专题为入口；2025WP140基于任务调查专家模型估计全球ISCO08潜在暴露，非以职业大组为主的本专项采用或岗位结果。"
             ]
           },
           "id": "fuel-cell-engineers.ai-impact.ai-impact-table.26",
           "source_refs": [
-            "onet"
+            "ilo-2025-study"
           ],
           "type": "prose"
         },
@@ -25943,12 +25943,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 未来工作与生成式 AI 研究"
+              "ILO2025生成式AI任务潜在暴露研究"
             ]
           },
           "id": "fuel-cell-engineers.ai-impact.ai-impact-table.50",
           "source_refs": [
-            "onet"
+            "ilo-2025-study"
           ],
           "type": "prose"
         },
@@ -25957,12 +25957,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露研究，以职业大组为主"
+              "全球ISCO08任务潜在暴露，非本专项采用、效率或就业因果。"
             ]
           },
           "id": "fuel-cell-engineers.ai-impact.ai-impact-table.51",
           "source_refs": [
-            "onet"
+            "ilo-2025-study"
           ],
           "type": "prose"
         },
@@ -26957,12 +26957,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "小结｜一句话：检索与数据处理与初稿变快，设计与判断与责任不变。工具可以帮你查文献与专利更快、仿真前处理与数据整理更省时、报告与图纸草稿更清楚、参数对比更省力，但设计基线与指标是否合理、模型与数据是否可信、失效与安全如何判断、何时升级与是否放行，仍然是工程人员与主管与具备资质的人员的责任。"
+              "辅助候选包括检索、计算代码、数据整理与初稿，提效须实际验证；模型实测边界、失效分析和放行依据由有效责任方核，工具不直接取得权限。"
             ]
           },
           "id": "fuel-cell-engineers.ai-impact.ai-impact-table.122",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         }
@@ -27995,14 +27996,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本专项及分行业工资就业独立统计本轮未取得；BLS父类17-2141 Mechanical Engineers：2025就业298.5千人，2035为332.0千人，2025—2035增长11.2%、净增33.5千人、年均职位空缺17.8千人、自雇0.5%。EP含自雇，空缺含增长与替换，不等实际招聘或净新增；均非17-2141.01专项统计，O*NET旧2024—2034仅历史对照。 OEWS为领取工资的全兼职雇员正常工时税前工资，排自雇；含基本、计件、佣金、生产奖金、生活费用及危险工作报酬，排加班溢价、班次差额、非生产奖金及福利成本，不统一排奖金津贴。年工资通常按时薪×2080折算，非个人实际工时或实收。"
+              "正常May2025Profiles父类17-2141雇员296810/RSE1.3%、均年113610/时54.62、中位104110/50.05及分位73990/84130/132590/164340；EP298500为另一项目。专项独立全国及行业工资仍未取，不以父类行业工资代专项。"
             ]
           },
           "id": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "ep",
-            "hr",
-            "oews"
+            "oews-profile-2025",
+            "ep"
           ],
           "type": "prose"
         },
@@ -29250,12 +29250,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合什么性格的人？本职业更看重定量分析能力、工程严谨与安全意识、耐心与抗压与协作能力，而不是某一性格类型；O*NET 兴趣代码为 RIC（现实型—研究型—常规型），可作为探索起点。"
+              "适配探索｜RIC76/73/51为职业任务兴趣，可核定量验证、设备及记录偏好；专项性格与测评预测效度未核，不给更看重排序。"
             ]
           },
           "id": "fuel-cell-engineers.fit.personality-fit-block.46",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -30433,7 +30434,7 @@
               [
                 "建模与仿真工具能力",
                 "设计与分析岗位",
-                "满足建模与仿真与数据分析的日常要求",
+                "编辑准备探索，具体岗位作用与有效条件须核，不保证满足资质或降低事故处罚。",
                 "证据不足：具体必需条件未核",
                 "按目标岗位有效条件核",
                 "证据不足：具体投入未核，不估天周月年",
@@ -30442,7 +30443,7 @@
               [
                 "实验与数据处理能力",
                 "测试与研发岗位",
-                "满足台架试验与数据采集与处理要求",
+                "编辑准备探索，具体岗位作用与有效条件须核，不保证满足资质或降低事故处罚。",
                 "证据不足：具体必需条件未核",
                 "按目标岗位有效条件核",
                 "证据不足：具体投入未核，不估天周月年",
@@ -30451,7 +30452,7 @@
               [
                 "涉氢与高压与电气与危险化学品安全培训",
                 "涉安全与试验岗位",
-                "降低事故与违规与处罚风险",
+                "编辑准备探索，具体岗位作用与有效条件须核，不保证满足资质或降低事故处罚。",
                 "证据不足：具体必需条件未核",
                 "按目标岗位有效条件核",
                 "证据不足：具体投入未核，不估天周月年",
@@ -30460,7 +30461,7 @@
               [
                 "压力容器与特种设备相关资质（如涉及）",
                 "涉压力容器与特种设备岗位",
-                "满足法定资质与作业许可要求",
+                "编辑准备探索，具体岗位作用与有效条件须核，不保证满足资质或降低事故处罚。",
                 "证据不足：具体必需条件未核",
                 "按目标岗位有效条件核",
                 "证据不足：具体投入未核，不估天周月年",
@@ -30786,12 +30787,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于了解该职业通常需要的准备与培训层级（O*NET 训练资料口径）。"
+              "localtraining是课程目录；Zone4及新聘所需学历问卷从专项核，不从目录推统一准备期限或许可。"
             ]
           },
           "id": "fuel-cell-engineers.path.career-path-block.27",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -32569,15 +32570,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜2026-10-02重访专项summary/details、localwages国家父类工资、BLS当前17-2141就业预测及NBS制造业发布；实际scope逐项分开，不用专项代码冒独立工资统计。"
+              "2026-10-11核O*NET17-2141.01全26任务含生产放行、电驱与非氢方案、情境教育兴趣软件；正常May2025父类全国工资、当前2025—2035父类预测及父类机械工程师OOH边界；NBS2025制造英文表与ILO2025研究本窗已读复用。"
             ]
           },
           "id": "fuel-cell-engineers.sources.source-card.1",
           "source_refs": [
             "onet",
-            "hr",
             "ep",
-            "nbs"
+            "nbs",
+            "oews-profile-2025",
+            "ilo-2025-study"
           ],
           "type": "prose"
         },
@@ -32600,7 +32602,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜本轮资料访问2026-10-02，O*NET职业更新2026、工资2025、当前EP2025—2035；未重访目录保原访问日期。"
+              "当前访问2026-10-11，专项O*NET2026、父类工资May2025及预测2025—2035、NBS2025；共享历史登记未改。"
             ]
           },
           "id": "fuel-cell-engineers.sources.source-card.3",
@@ -32617,7 +32619,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "证据不足：专项独立与分行业工资就业、中国精确工资就业招聘、AI量化与法域资格权限未核，保已核父类与行业背景。不以缺口豁免作者练习答案四作品和完整自审。"
+              "父类全国工资与预测已核；专项独立全国行业工资就业、中国职业城市工资招聘、具体涉氢设备试验法域权限、AI采用因果与测评效度未取，不以父类代专项。保护共享冲突列报告。"
             ]
           },
           "id": "fuel-cell-engineers.sources.source-card.4",
@@ -33095,6 +33097,38 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "national projections",
                 "url": "https://www.bls.gov/emp/"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "SOC17-2141父类工资非17-2141.01专项",
+                  "专项精确数据另核"
+                ],
+                "evidence_type": "official primary source",
+                "id": "oews-profile-2025",
+                "limitation": "不推专项采用或个人结果",
+                "market": "美国",
+                "name": "BLS May2025机械工程师父类工资Profiles",
+                "period": "2025",
+                "publisher": "BLS",
+                "scope": "SOC17-2141父类工资非17-2141.01专项",
+                "url": "https://data.bls.gov/oesprofile/?year=2025&major_group=170000&occupation=172141&measure=13&areas=INDUSTRY,STATE,MSA"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "全球ISCO08潜在任务暴露",
+                  "专项精确数据另核"
+                ],
+                "evidence_type": "official primary source",
+                "id": "ilo-2025-study",
+                "limitation": "不推专项采用或个人结果",
+                "market": "全球",
+                "name": "ILO2025生成式AI任务暴露研究",
+                "period": "2025",
+                "publisher": "ILO",
+                "scope": "全球ISCO08潜在任务暴露",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               }
             ]
           },
@@ -34098,7 +34132,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "初稿内容被当成已确认事实"
+            "风险": "未经验证的设计与安全结论"
           },
           {
             "为什么重要": {
@@ -34113,7 +34147,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "本职业设计与测试数据被不当外发"
+            "风险": "试验安全措施缺失"
           },
           {
             "为什么重要": {
@@ -34128,7 +34162,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "工具版本与输出不可追溯"
+            "风险": "资料越权外发"
           },
           {
             "为什么重要": {
@@ -34143,7 +34177,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "数值、单位与工况条件错误"
+            "风险": "测量数据及记录失真"
           },
           {
             "为什么重要": {
@@ -34158,7 +34192,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "复核缺失导致责任不清"
+            "风险": "复核与放行责任不明"
           }
         ],
         "task_rows": [
@@ -34176,13 +34210,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.96",
+              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.97",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.97",
+              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.96",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34202,13 +34236,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.100",
+              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.101",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.101",
+              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.100",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34228,13 +34262,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.104",
+              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.105",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.105",
+              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.104",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34254,13 +34288,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.108",
+              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.109",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.109",
+              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.108",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34280,13 +34314,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.112",
+              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.113",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.113",
+              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.112",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34306,13 +34340,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.116",
+              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.117",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.117",
+              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.116",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34332,13 +34366,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.120",
+              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.121",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.121",
+              "$item": "fuel-cell-engineers.ai-impact.ai-impact-table.120",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -36007,7 +36041,6 @@
             }
           },
           {
-            "fact_ref": "us-wage-q25-2025",
             "指标": "薪资 · 25 分位",
             "数值": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.13",
@@ -36039,7 +36072,6 @@
             }
           },
           {
-            "fact_ref": "us-wage-q75-2025",
             "指标": "薪资 · 75 分位",
             "数值": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.15",
@@ -36190,7 +36222,6 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
             "industry": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -36211,7 +36242,6 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
             "industry": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -36232,7 +36262,6 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
             "industry": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -36253,7 +36282,6 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
             "industry": {
               "$item": "fuel-cell-engineers.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -38170,7 +38198,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "燃料电池工程师 · 任务、交付与责任边界",
@@ -38221,7 +38249,7 @@
       "text": "燃料电池工程师"
     }
   },
-  "source_content_sha256": "847ba2d211c2c74ba199552038c81618cdc7c5adc017b1315cd365ee136aff4b",
+  "source_content_sha256": "80f056a5c377c3115131dec9223e3702d1079360ac361fcfe01cd43ae37cdd7e",
   "subject": {
     "canonical_slug": "fuel-cell-engineers",
     "name": "燃料电池工程师",

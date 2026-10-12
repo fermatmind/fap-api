@@ -1705,6 +1705,12 @@
       },
       "item:agricultural-equipment-operators.us-salary.career-snapshot-secondary-locale.9": {
         "status": "mapped"
+      },
+      "item:agricultural-equipment-operators.us-salary.cross-review-industry_period": {
+        "status": "pending_mapping"
+      },
+      "item:agricultural-equipment-operators.us-salary.cross-review-outlook_period": {
+        "status": "pending_mapping"
       }
     },
     "module_order": [
@@ -12445,14 +12451,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.industry_period": {
-        "ref": {
-          "id": "us-wage-2025",
-          "path": [
-            "period"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.industry_rows.01.industry": {
         "ref": {
@@ -12733,14 +12733,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.outlook_period": {
-        "ref": {
-          "id": "us-growth-2025-2035",
-          "path": [
-            "period"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.wage_heading": {
         "ref": {
@@ -23585,14 +23579,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS表1.2最新45-2091：2025年66,900人、2035年72,600人，净增5,700人，增长8.6%（OOH取整9%），年均10,100空缺。O*NET旧期2024—2034另为65,200→70,300人、8%、年均10,500。空缺不是净新增或十年合计，两期不拼接。"
+              "BLS表1.2本职业45-2091：2025年66,900人、2035年72,600人，净增5,700人，增长8.6%（OOH及O*NET全国趋势页取整9%），年均10,100空缺。当前O*NET已使用同一2025—2035期；空缺包含增长与替代需求，不是净新增或十年合计。"
             ]
           },
           "id": "agricultural-equipment-operators.profile.onet-structured-fields-block.4",
           "source_refs": [
             "nist",
             "bls",
-            "r2-pay-2"
+            "operator-trends-2025-2035"
           ],
           "type": "prose"
         },
@@ -24728,16 +24722,16 @@
                 "url": "https://www.onetonline.org/link/details/45-2091.00"
               },
               {
-                "entity": "O*NET 45-2091.00 技术清单（Hot Technologies）",
+                "entity": "O*NET任务及工作活动",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/hot_tech/45-2091.00"
+                "url": "https://www.onetonline.org/link/details/45-2091.00"
               },
               {
-                "entity": "O*NET 45-2091.00 工作情境（Work Context）",
+                "entity": "O*NET Hot Technologies：三项占比N/A",
                 "id": "link-7",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/45-2091.00"
+                "url": "https://www.onetonline.org/link/hot_tech/45-2091.00"
               },
               {
                 "entity": "BLS 职业展望手册：农业工人（2025 年版）",
@@ -25561,7 +25555,7 @@
           },
           "id": "agricultural-equipment-operators.ai-impact.ai-impact-table.57",
           "source_refs": [
-            "arxiv"
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -25575,7 +25569,7 @@
           },
           "id": "agricultural-equipment-operators.ai-impact.ai-impact-table.58",
           "source_refs": [
-            "arxiv"
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -25589,7 +25583,7 @@
           },
           "id": "agricultural-equipment-operators.ai-impact.ai-impact-table.59",
           "source_refs": [
-            "arxiv"
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -25598,12 +25592,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET2024行业就业份额：农业林业渔业与狩猎70%、批发贸易15%；剩余15%=100%−70%−15%为编辑算术归并，不是招聘增长率。"
+              "O*NET当前2025行业就业份额：农林渔猎72%、批发贸易13%、其他行业15%；不是招聘增长或AI采用率。"
             ]
           },
           "id": "agricultural-equipment-operators.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "arxiv"
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -25644,14 +25638,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 45-2091本职业2025—2035增长9%；O*NET旧期2024—2034增长8%、年均10,500空缺。预测不分离AI贡献，也不能据其断言AI已增减岗位。"
+              "BLS 45-2091本职业2025—2035增长9%；当前O*NET全国趋势页同为9%、年均10,100空缺。预测不分离AI贡献，也不能据其断言AI已增减岗位。"
             ]
           },
           "id": "agricultural-equipment-operators.ai-impact.ai-impact-table.63",
           "source_refs": [
             "ep",
             "bls",
-            "facilities"
+            "facilities",
+            "operator-trends-2025-2035"
           ],
           "type": "prose"
         },
@@ -25754,14 +25749,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职业BLS新期增长9%，旧期O*NET增长8%；两期分开引用，均不预测AI单独造成的就业变化。"
+              "本职业BLS与当前O*NET全国趋势页均使用2025—2035预测；增长9%不表示AI单独造成的就业变化。"
             ]
           },
           "id": "agricultural-equipment-operators.ai-impact.ai-impact-table.70",
           "source_refs": [
             "ep",
             "bls",
-            "facilities"
+            "facilities",
+            "operator-trends-2025-2035"
           ],
           "type": "prose"
         },
@@ -27405,15 +27401,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET所载BLS OEWS：2025年5月45-2091全国工资分位（取United States行）｜https://www.onetonline.org/link/localwages/45-2091.00?st=NE；O*NET旧期2024—2034全国就业预测｜https://www.onetonline.org/link/localtrends/45-2091.00；BLS OOH农业设备操作员子行：2025—2035预测及2025年工资｜https://www.bls.gov/ooh/farming-fishing-and-forestry/agricultural-workers.htm"
+              "O*NET所载BLS OEWS：2025年5月45-2091全国工资分位（取United States行）｜https://www.onetonline.org/link/localwages/45-2091.00?st=NE；O*NET当前2025—2035全国就业预测｜https://www.onetonline.org/link/localtrends/45-2091.00；BLS OOH农业设备操作员子行：2025—2035预测及2025年工资｜https://www.bls.gov/ooh/farming-fishing-and-forestry/agricultural-workers.htm"
             ]
           },
           "id": "agricultural-equipment-operators.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "arxiv-cross-repair",
+            "operator-trends-2025-2035"
           ],
           "type": "prose"
         },
@@ -27429,8 +27425,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27446,8 +27442,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27463,8 +27459,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27480,8 +27476,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27497,8 +27493,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27514,8 +27510,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27531,8 +27527,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27548,8 +27544,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27565,8 +27561,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27582,8 +27578,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27599,8 +27595,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27616,8 +27612,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27633,8 +27629,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27643,15 +27639,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH 45-2091：2025—2035增长9%；旧期O*NET 2024—2034为8%，不可拼接。；BLS OOH 2025—2035职业子行｜https://www.bls.gov/ooh/farming-fishing-and-forestry/agricultural-workers.htm"
+              "BLS OOH 45-2091与当前O*NET全国趋势页：2025—2035增长9%；O*NET摘要以7%或以上区间列示，并非不同趋势。BLS OOH职业子行｜https://www.bls.gov/ooh/farming-fishing-and-forestry/agricultural-workers.htm"
             ]
           },
           "id": "agricultural-equipment-operators.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "arxiv-cross-repair",
+            "operator-trends-2025-2035"
           ],
           "type": "prose"
         },
@@ -27667,7 +27663,7 @@
           "source_refs": [
             "nist",
             "bls",
-            "r2-pay-2"
+            "r2-pay-2-cross-repair"
           ],
           "type": "prose"
         },
@@ -27676,14 +27672,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS表1.2：2025—2035年均空缺10.1千=10,100个，包含增长与替代需求，不是净新增；O*NET旧期年均10,500另属2024—2034。；BLS表1.2本职业45-2091｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "BLS表1.2：2025—2035年均空缺10.1千=10,100个，包含增长与替代需求，不是净新增；当前O*NET同为10,100个。BLS表1.2本职业45-2091｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "agricultural-equipment-operators.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
             "nist",
             "bls",
-            "r2-pay-2"
+            "operator-trends-2025-2035"
           ],
           "type": "prose"
         },
@@ -27699,8 +27695,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27716,8 +27712,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27733,8 +27729,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27750,8 +27746,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27767,8 +27763,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27784,8 +27780,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27794,14 +27790,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS表1.2本职业2025—2035增长8.6%（OOH取整9%）、净增5,700人、年均10,100空缺。O*NET旧期2024—2034为8%、年均10,500；两期不拼接，农业工人合并组数据不能替代。"
+              "BLS表1.2本职业2025—2035增长8.6%（OOH及O*NET全国趋势页取整9%）、净增5,700人、年均10,100空缺。当前O*NET已使用同一期；农业工人合并组数据不能替代设备操作员子行。"
             ]
           },
           "id": "agricultural-equipment-operators.us-salary.career-snapshot-secondary-locale.31",
           "source_refs": [
             "nist",
             "bls",
-            "r2-pay-2"
+            "operator-trends-2025-2035"
           ],
           "type": "prose"
         },
@@ -27817,8 +27813,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27834,8 +27830,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27851,8 +27847,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27861,15 +27857,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该行业本职业工资中位数；该行业占该职业就业约 70%（O*NET 行业分布 2024）。"
+              "证据不足：未取得该行业本职业工资中位数；O*NET2025本职业就业行业份额为72%。"
             ]
           },
           "id": "agricultural-equipment-operators.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "oews",
-            "bls",
-            "r2-pay-2",
-            "arxiv"
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27885,8 +27878,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27902,8 +27895,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27912,15 +27905,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该行业本职业工资中位数；该行业占该职业就业约 15%（O*NET 行业分布 2024）。"
+              "证据不足：未取得该行业本职业工资中位数；O*NET2025批发贸易份额13%。"
             ]
           },
           "id": "agricultural-equipment-operators.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "oews",
-            "bls",
-            "r2-pay-2",
-            "arxiv"
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27936,8 +27926,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27953,8 +27943,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27963,15 +27953,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得其余行业本职业工资中位数；2024就业剩余比例为100%−70%−15%=15%，属按已显示行业份额计算，不是单一行业。"
+              "证据不足：未取得其余行业本职业工资中位数；O*NET2025其他行业合计15%，不是单一行业。"
             ]
           },
           "id": "agricultural-equipment-operators.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "oews",
-            "bls",
-            "r2-pay-2",
-            "arxiv"
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -27987,8 +27974,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -28004,8 +27991,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -28021,8 +28008,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -28038,8 +28025,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -28055,8 +28042,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -28072,8 +28059,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -28082,14 +28069,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025年工资分位来自O*NET所载OEWS 45-2091全国行；2025—2035就业及年均空缺来自BLS OOH职业子行及表1.2。年均10.1千换算10,100个；O*NET旧期预测另标，不测AI贡献。"
+              "2025年工资分位来自O*NET所载OEWS 45-2091全国行；2025—2035就业及年均空缺来自BLS OOH职业子行及表1.2，当前O*NET全国趋势页一致。年均10.1千换算10,100个；这些预测不测AI贡献。"
             ]
           },
           "id": "agricultural-equipment-operators.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
             "nist",
             "bls",
-            "r2-pay-2"
+            "operator-trends-2025-2035"
           ],
           "type": "prose"
         },
@@ -28105,8 +28092,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -28122,8 +28109,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -28139,8 +28126,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -28156,8 +28143,8 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -28173,8 +28160,36 @@
           "source_refs": [
             "oews",
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "2025年5月"
+            ]
+          },
+          "id": "agricultural-equipment-operators.us-salary.cross-review-industry_period",
+          "source_refs": [
+            "bls"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "2025—2035年"
+            ]
+          },
+          "id": "agricultural-equipment-operators.us-salary.cross-review-outlook_period",
+          "source_refs": [
+            "bls"
           ],
           "type": "prose"
         }
@@ -29388,14 +29403,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 45-2091.00 详细工作活动，用于设计入行练习任务。"
+              "O*NET45-2091行业就业分布，用于行业背景；任务观察依据另查Tasks与详细工作活动。"
             ]
           },
           "id": "agricultural-equipment-operators.fit.personality-fit-block.64",
           "source_refs": [
-            "ep",
-            "privacy",
-            "census"
+            "arxiv-cross-repair",
+            "ep"
           ],
           "type": "prose"
         },
@@ -29457,7 +29471,7 @@
                 "url": "https://www.onetonline.org/link/details/45-2091.00"
               },
               {
-                "entity": "O*NET 45-2091.00 任务与工作活动",
+                "entity": "O*NET任务及工作活动",
                 "id": "link-3",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/45-2091.00"
@@ -29469,13 +29483,13 @@
                 "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html"
               },
               {
-                "entity": "BLS 职业展望手册：农业工人（2025 年版）",
+                "entity": "BLS OOH农业工人：本职业子行与合并组",
                 "id": "link-5",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/ooh/farming-fishing-and-forestry/agricultural-workers.htm"
               },
               {
-                "entity": "O*NET 45-2091.00 详细工作活动",
+                "entity": "O*NET详细工作活动",
                 "id": "link-6",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/45-2091.00"
@@ -29983,16 +29997,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 45-2091.00 任务与工作情境（美国，单一职业受访资料）。"
+              "O*NET45-2091工作情境，单职业受访资料，非中国安全资格。"
             ]
           },
           "id": "agricultural-equipment-operators.risk.career-risk-cards.35",
           "source_refs": [
-            "ep",
-            "privacy",
-            "bls",
-            "editor",
-            "r2-pay-1"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -30001,10 +30011,24 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "《中华人民共和国安全生产法》（2021 年修正）与中国大陆安全生产要求。"
+              "O*NET45-2091操作、检查、调整与维护任务背景。"
             ]
           },
           "id": "agricultural-equipment-operators.risk.career-risk-cards.36",
+          "source_refs": [
+            "ep"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "中国大陆安全生产法2021修正；安全职责、培训及适用特种作业要求分别核对。"
+            ]
+          },
+          "id": "agricultural-equipment-operators.risk.career-risk-cards.37",
           "source_refs": [
             "editor"
           ],
@@ -30015,10 +30039,10 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册（2025 年版），用于说明合并组就业背景，不用于风险概率。"
+              "BLS农业工人合并组与设备操作员子行背景，不测风险概率。"
             ]
           },
-          "id": "agricultural-equipment-operators.risk.career-risk-cards.37",
+          "id": "agricultural-equipment-operators.risk.career-risk-cards.38",
           "source_refs": [
             "bls"
           ],
@@ -30029,34 +30053,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 45-2091.00 详细工作活动（美国，单一职业口径）。"
-            ]
-          },
-          "id": "agricultural-equipment-operators.risk.career-risk-cards.38",
-          "source_refs": [
-            "ep",
-            "privacy",
-            "bls",
-            "editor",
-            "r2-pay-1"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-risk-cards",
-          "data": {
-            "paragraphs": [
-              "本页编辑归纳（条件性建议），不代表行业统一流程或法定要求。"
+              "O*NET45-2091详细工作活动；控制措施仍为编辑建议，非统一法定流程。"
             ]
           },
           "id": "agricultural-equipment-operators.risk.career-risk-cards.39",
           "source_refs": [
-            "ep",
-            "privacy",
-            "bls",
-            "editor",
-            "r2-pay-1"
+            "employer"
           ],
           "type": "prose"
         }
@@ -32090,8 +32092,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.7",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "links"
         },
@@ -32100,14 +32102,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS本职业2025—2035：66,900→72,600人、净增5,700，表1.2增长8.6%（OOH取整9%）、年均10,100空缺。O*NET旧期2024—2034为65,200→70,300人、8%、年均10,500；分别标期，不用合并组替代，也不保证个人就业。 八个转向距离为编辑任务比较，非准备周期、资格互认或录用概率。"
+              "BLS本职业2025—2035：66,900→72,600人、净增5,700，表1.2增长8.6%（OOH及O*NET全国趋势页取整9%）、年均10,100空缺。当前O*NET同一期数据一致，不用合并组替代，也不保证个人就业。八个转向距离为编辑任务比较，非准备周期、资格互认或录用概率。"
             ]
           },
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.8",
           "source_refs": [
             "nist",
             "bls",
-            "r2-pay-2"
+            "operator-trends-2025-2035"
           ],
           "type": "prose"
         },
@@ -32122,8 +32124,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.9",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32138,8 +32140,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.10",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32148,14 +32150,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS OOH本职业45-2091在岗66,900人；行业份额另为O*NET 2024期农业林业渔业与狩猎70%、批发贸易15%，不是2025份额。"
+              "BLS OOH本职业2025就业66,900人；O*NET2025行业份额为农林渔猎72%、批发13%、其他15%，不作中国或招聘结构。"
             ]
           },
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.11",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32170,8 +32171,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.12",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32186,8 +32187,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.13",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32202,8 +32203,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.14",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32218,8 +32219,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.15",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32234,8 +32235,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.16",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32250,8 +32251,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.17",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32267,7 +32268,7 @@
           "source_refs": [
             "nist",
             "bls",
-            "r2-pay-2"
+            "r2-pay-2-cross-repair"
           ],
           "type": "prose"
         },
@@ -32282,8 +32283,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.19",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32298,8 +32299,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.20",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32314,8 +32315,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.21",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32330,8 +32331,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.22",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32346,8 +32347,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.23",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32362,8 +32363,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.24",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32379,7 +32380,7 @@
           "source_refs": [
             "nist",
             "bls",
-            "r2-pay-2"
+            "r2-pay-2-cross-repair"
           ],
           "type": "prose"
         },
@@ -32388,14 +32389,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本职业子行明确，不能以农业工人合并组111,500替代；O*NET旧期2024—2034年均10,500只作另期对照。"
+              "本职业子行明确，不能以农业工人合并组111,500替代；当前O*NET全国趋势页2025—2035同为年均10,100空缺。"
             ]
           },
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.26",
           "source_refs": [
             "nist",
             "bls",
-            "r2-pay-2"
+            "operator-trends-2025-2035"
           ],
           "type": "prose"
         },
@@ -32410,8 +32411,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.27",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32426,8 +32427,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.28",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32443,7 +32444,7 @@
           "source_refs": [
             "nist",
             "bls",
-            "r2-pay-2"
+            "r2-pay-2-cross-repair"
           ],
           "type": "prose"
         },
@@ -32452,14 +32453,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 45-2091.00 职业摘要，美国单一职业口径。"
+              "BLS OOH农业工人页面：设备操作员45-2091子行与合并组分别核对。"
             ]
           },
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.30",
           "source_refs": [
-            "bls",
-            "r2-pay-2",
-            "arxiv"
+            "bls"
           ],
           "type": "prose"
         },
@@ -32468,14 +32467,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS OOH农业工人页面：本职业子行与合并组分别核对。"
+              "O*NET45-2091职业摘要；单一职业身份、任务和职业档案。"
             ]
           },
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.31",
           "source_refs": [
-            "bls",
-            "r2-pay-2",
-            "arxiv"
+            "onet"
           ],
           "type": "prose"
         },
@@ -32490,8 +32487,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.32",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32500,14 +32497,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 45-2091.00 行业分布，用于说明就业集中行业。"
+              "O*NET45-2091任务与工作活动；就业行业分布须另查行业表。"
             ]
           },
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.33",
           "source_refs": [
-            "bls",
-            "r2-pay-2",
-            "arxiv"
+            "ep"
           ],
           "type": "prose"
         },
@@ -32522,8 +32517,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.34",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32538,8 +32533,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.35",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32554,8 +32549,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.36",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32570,8 +32565,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.37",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32586,8 +32581,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.38",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32602,8 +32597,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.39",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32618,8 +32613,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.40",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32634,8 +32629,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.41",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32650,8 +32645,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.42",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32666,8 +32661,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.43",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32682,8 +32677,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.44",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32698,8 +32693,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.45",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32714,8 +32709,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.46",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32730,8 +32725,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.47",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32746,8 +32741,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.48",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32762,8 +32757,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.49",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32778,8 +32773,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.50",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32794,8 +32789,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.51",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32810,8 +32805,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.52",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32826,8 +32821,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.53",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32842,8 +32837,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.54",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32858,8 +32853,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.55",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32874,8 +32869,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.56",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         },
@@ -32890,8 +32885,8 @@
           "id": "agricultural-equipment-operators.market-signals.market-signal-card.57",
           "source_refs": [
             "bls",
-            "r2-pay-2",
-            "arxiv"
+            "r2-pay-2-cross-repair",
+            "arxiv-cross-repair"
           ],
           "type": "prose"
         }
@@ -33005,7 +33000,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET45-2091.00任务、情境及2025全年热技术；OEWS2025年5月全国工资；BLS OOH子行及表1.2本职业2025—2035就业与年均空缺；O*NET旧期2024—2034对照；NBS2025宽类别工资；中国农机驾驶规定与农药管理条例。"
+              "本轮核对O*NET45-2091.00职业摘要及全国趋势页、BLS OOH职业子行与表1.2：当前就业预测均为2025—2035期。原OEWS2025工资分位、O*NET任务与情境、2025全年热技术、2025行业份额、NBS2025宽类别工资和中国农机及农药规则保留各自原期次与限制；不表示本轮逐条重核全部来源。"
             ]
           },
           "id": "agricultural-equipment-operators.sources.source-card.2",
@@ -33015,7 +33010,8 @@
             "oews",
             "nbs",
             "cnclass",
-            "r2-pay-1"
+            "r2-pay-1",
+            "operator-trends-2025-2035"
           ],
           "type": "prose"
         },
@@ -33024,7 +33020,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核对与更新日期：2026-10-02。"
+              "2026-10-08（本轮限定九板块修订）"
             ]
           },
           "id": "agricultural-equipment-operators.sources.source-card.3",
@@ -33526,6 +33522,69 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "BLS农场主牧场主及农业经理任务｜相邻职业经营、生产与人员职责，可能兼机械维护，不证明所有操作员不能管理。",
                 "url": "https://www.bls.gov/ooh/management/farmers-ranchers-and-other-agricultural-managers.htm"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "45-2091.00：2025年66,900人，2035年72,600人，增长9%，年均10,100职位空缺。",
+                  "年均职位空缺包含增长与替代需求，不是净新增或十年合计。"
+                ],
+                "evidence_type": "官方职业就业预测",
+                "id": "operator-trends-2025-2035",
+                "limitation": "全国职业预测，不保证个人就业，也不分离AI贡献；O*NET摘要用7%或以上区间标签。",
+                "market": "美国全国",
+                "name": "O*NET全国就业趋势：农业设备操作员2025—2035",
+                "period": "2025基年；2025—2035预测",
+                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/45-2091.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "农业林业渔业狩猎72%；批发贸易13%；其他15%。"
+                ],
+                "evidence_type": "官方职业行业分布",
+                "id": "arxiv-cross-repair",
+                "limitation": "美国设备操作员行业就业结构；非工资、招聘增长或中国结构。",
+                "market": "美国",
+                "name": "O*NET行业就业分布",
+                "period": "2025年行业就业分布",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/45-2091.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "45-2091：66,900→72,600人、增长9%、年均10,100空缺。",
+                  "年均空缺含增长与替代需求；本次当前页不能替代旧期冻结原表。"
+                ],
+                "evidence_type": "官方职业就业预测",
+                "id": "r2-pay-2-cross-repair",
+                "limitation": "美国全国本职业预测；非个人保证或AI因果。",
+                "market": "美国",
+                "name": "O*NET所载BLS全国就业预测2025—2035",
+                "period": "2025基年；2025—2035预测",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/45-2091.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "BLS OOH本职业工资与就业子行",
+                  "工资2025年5月；就业2025—2035；只用45-2091子行数字；合并组111,500年均空缺不作本职业空缺。"
+                ],
+                "evidence_type": "官方职业工资与就业子行",
+                "id": "onet-wages-cross-repair",
+                "limitation": "仅设备操作员45-2091子行直接数据；不把合并组数值替代本职业。",
+                "market": "美国",
+                "name": "BLS OOH本职业工资与就业子行",
+                "period": "工资2025年5月；就业2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/farming-fishing-and-forestry/agricultural-workers.htm"
               }
             ]
           },
@@ -34396,7 +34455,7 @@
               "entry": "link-16",
               "field": "url"
             },
-            "问题": "到 2034 年这个职业会变少吗？"
+            "问题": "到 2035 年这个职业会变少吗？"
           },
           {
             "回答": {
@@ -35837,8 +35896,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "purchasing-managers",
-              "cnclass"
+              "ep",
+              "cnclass",
+              "editor"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -36036,6 +36096,30 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.onetonline.org/link/details/45-2091.00",
+            "id": "ep",
+            "label": "O*NET任务及工作活动",
+            "scope": "机具操作、观察、调整及维修；不排除全部维修交叉任务。"
+          },
+          {
+            "href": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html",
+            "id": "editor",
+            "label": "中华人民共和国安全生产法（2021修正）",
+            "scope": "第28条安全培训；职责、防护及特种作业另分，不把所有农机操作当法定特种作业。"
+          },
+          {
+            "href": "https://fgs.moa.gov.cn/flfg/202312/t20231205_6442161.htm",
+            "id": "r2-pay-1",
+            "label": "农药管理条例（2022修订文本）",
+            "scope": "第33—36条防护、标签禁限和指定主体记录义务；不是所有使用者统一个人许可。"
+          },
+          {
+            "href": "https://www.moa.gov.cn/gk/nyncbgzk/gzk/202112/P020211207608798136009.pdf",
+            "id": "cnclass",
+            "label": "农业农村部拖拉机和联合收割机驾驶证管理规定",
+            "scope": "第7条须取得驾驶证、第8条准驾机型；替代未核实中国分类大典链接，不承担职业编码或工资。"
           }
         ]
       },
@@ -36620,8 +36704,10 @@
         "heading": "美国农业操作员工资多少？",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
-          "$fact": "us-wage-2025",
-          "field": "period"
+          "$item": "agricultural-equipment-operators.us-salary.cross-review-industry_period",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
         },
         "industry_rows": [
           {
@@ -36757,8 +36843,10 @@
         },
         "outlook_heading": "美国就业前景",
         "outlook_period": {
-          "$fact": "us-growth-2025-2035",
-          "field": "period"
+          "$item": "agricultural-equipment-operators.us-salary.cross-review-outlook_period",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
         },
         "wage_column_labels": [
           "工资统计位置",
@@ -37138,6 +37226,12 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "id": "nist",
+            "label": "BLS表1.2职业预测及特征：45-2091",
+            "scope": "45-2091本职业2025—2035年均空缺10.1千=10,100，包含增长与替代，非净增。"
           }
         ],
         "transitions": [
@@ -38829,7 +38923,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "任务：班前检查 · 田间作业 · 异常停机与记录",
@@ -38880,7 +38974,7 @@
       "text": "农业操作员：职业内容、薪资与就业前景"
     }
   },
-  "source_content_sha256": "b085ee72a3a368a96cc8ef87c3456c18bed1250f41c15ac02e4c3f7a366370e8",
+  "source_content_sha256": "ad3eb64d1c2aa1fc61dd753615b98c157fa6af41a4b951f7eed2d0c43551cbc5",
   "subject": {
     "canonical_slug": "agricultural-equipment-operators",
     "name": "农业操作员",

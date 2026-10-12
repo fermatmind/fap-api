@@ -2,6 +2,48 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:chw-review-cn-industry-manufacturing-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:chw-review-cn-industry-science-tech-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:chw-review-cn-professional-technical-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:chw-review-cn-urban-nonprivate-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:chw-review-us-change-2025-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:chw-review-us-employment-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:chw-review-us-employment-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:chw-review-us-growth-2025-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:chw-review-us-industry-wage-aerospace-mfg-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:chw-review-us-industry-wage-engineering-services-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:chw-review-us-industry-wage-federal-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:chw-review-us-industry-wage-rd-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:chw-review-us-openings-2025-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:chw-review-us-wage-2025": {
+        "status": "pending_mapping"
+      },
       "fact:cn-industry-manufacturing-2024": {
         "status": "pending_mapping"
       },
@@ -9521,18 +9563,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.06.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            5,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.06.mitigation": {
         "ref": {
@@ -11742,28 +11774,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.03.explanation.sources.02.href": {
-        "ref": {
-          "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.14",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.03.explanation.sources.02.label": {
         "ref": {
@@ -12135,28 +12147,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.href": {
-        "ref": {
-          "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.20",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.label": {
         "ref": {
@@ -12266,28 +12258,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.href": {
-        "ref": {
-          "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.22",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.label": {
         "ref": {
@@ -12397,52 +12369,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.href": {
-        "ref": {
-          "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.24",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.label": {
-        "ref": {
-          "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.24",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.08.headers.explanation": {
         "ref": {
@@ -23689,7 +23621,7 @@
           ],
           "id": "community-health-workers.profile.definition-block.1",
           "source_refs": [
-            "onet-details"
+            "chw-review-onet-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23704,7 +23636,7 @@
           },
           "id": "community-health-workers.profile.definition-block.2",
           "source_refs": [
-            "onet-details"
+            "chw-review-onet-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23719,7 +23651,7 @@
           },
           "id": "community-health-workers.profile.definition-block.3",
           "source_refs": [
-            "onet-details"
+            "chw-review-onet-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23734,7 +23666,7 @@
           },
           "id": "community-health-workers.profile.definition-block.4",
           "source_refs": [
-            "onet-details"
+            "chw-review-onet-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23749,7 +23681,7 @@
           },
           "id": "community-health-workers.profile.definition-block.5",
           "source_refs": [
-            "nasa-seh"
+            "editorial"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23764,7 +23696,7 @@
           },
           "id": "community-health-workers.profile.definition-block.6",
           "source_refs": [
-            "bls-entry"
+            "chw-review-bls-entry"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23779,7 +23711,7 @@
           },
           "id": "community-health-workers.profile.definition-block.7",
           "source_refs": [
-            "onet-hot-tech"
+            "chw-review-onet-hot-tech"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23809,7 +23741,7 @@
           },
           "id": "community-health-workers.profile.definition-block.9",
           "source_refs": [
-            "nasa-seh"
+            "editorial"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23834,7 +23766,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "社区健康工作者的工作可以分成三类相连但独立的工作面。第一类是健康教育与行为支持：就自我照护（如糖尿病管理）向客户或社区团体提供建议；就改善总体健康（如饮食或运动）提供建议；就风险或预防（如铅中毒、人类免疫缺陷病毒、孕期物质滥用或家庭暴力）提供建议；就卫生或清洁（如使用牙线或洗手）提供建议；就诊断性筛查（如乳腺癌筛查、宫颈涂片、青光眼检查或糖尿病筛查）提供建议；就社会或智力发展（如教育、儿童照护或问题解决）提供建议；向个人或家庭教授适当的育儿行为；并按照与文化规范一致的方式，向学校团体、社区团体或特定家庭或个人讲授医学或口腔健康信息。第二类是需求识别、转介与倡导：识别社区或目标区域中个人的特定健康照护需求；把社区成员转介到所需的健康服务；识别或联系高风险或特定目标群体（如少数族裔、低收入群体或孕妇）；为个人、家庭或社区团体制定改善整体健康的计划或正式契约；就个人或社区健康需求向政府机构或健康服务提供者进行倡导；向健康服务提供者反馈如何改善服务的可及性或可接受性；协助家庭申请社会服务（包括医疗补助或妇女、婴儿与儿童营养项目）；并围绕健康服务或信息为社区成员提供口译、翻译或文化调解。第三类是筛查、家访与记录与社区联络：开展血压筛查、乳腺癌筛查或传染病筛查等基础诊断程序；实施免疫接种或其他基础预防处置；提供急救等基础健康服务；对孕妇、新生儿或其他高风险个人进行家访以监测进展或评估需求；通过当面、电话或书面方式联系客户，确认其已完成所需或建议的行动；监测儿童、老年人或其他高风险群体的营养状况；维护包含计划、记录与相关表单的客户档案；从个人处收集信息以编制社区成员总体健康的生命统计；参加社区会议或健康博览会以了解社区议题或建立关系；向目标社区成员分发传单、手册或其他信息与教育材料；按需要向主管部门报告儿童或老人受虐待、忽视或伤害威胁的情形；并陪同或运送客户前往预约的健康服务或转介地点。"
+              "社区健康工作者的工作可以分成三类相连但独立的工作面。第一类是健康教育与行为支持：就自我照护（如糖尿病管理）向客户或社区团体提供建议；就改善总体健康（如饮食或运动）提供建议；就风险或预防（如铅中毒、人类免疫缺陷病毒、孕期物质滥用或家庭暴力）提供建议；就卫生或清洁（如使用牙线或洗手）提供建议；就诊断性筛查（如乳腺癌筛查、宫颈涂片、青光眼检查或糖尿病筛查）提供建议；就社会或智力发展（如教育、儿童照护或问题解决）提供建议；向个人或家庭教授适当的育儿行为；并按照与文化规范一致的方式，向学校团体、社区团体或特定家庭或个人讲授医学或口腔健康信息。第二类是需求识别、转介与倡导：识别社区或目标区域中个人的特定健康照护需求；把社区成员转介到所需的健康服务；识别或联系高风险或特定目标群体（如少数族裔、低收入群体或孕妇）；为个人、家庭或社区团体制定改善整体健康的计划或正式契约；就个人或社区健康需求向政府机构或健康服务提供者进行倡导；向健康服务提供者反馈如何改善服务的可及性或可接受性；协助家庭申请社会服务（包括医疗补助或妇女、婴儿与儿童营养项目）；并围绕健康服务或信息为社区成员提供口译、翻译或文化调解。第三类是筛查、家访与记录与社区联络：开展血压筛查、乳腺癌筛查或传染病筛查等基础诊断程序；实施免疫接种或其他基础预防处置；提供急救等基础健康服务；对孕妇、新生儿或其他高风险个人进行家访以监测进展或评估需求；通过当面、电话或书面方式联系客户，确认其已完成所需或建议的行动；监测儿童、老年人或其他高风险群体的营养状况；维护包含计划、记录与相关表单的客户档案；从个人处收集信息以编制社区成员总体健康的生命统计；参加社区会议或健康博览会以了解社区议题或建立关系；向目标社区成员分发传单、手册或其他信息与教育材料；按需要向主管部门报告儿童或老人受虐待、忽视或伤害威胁的情形；并陪同或运送客户前往预约的健康服务或转介地点。 O*NET29任务14Core/15Supplemental为职业任务池，非每岗全部必须；筛查、免疫、急救任务不自动赋临床许可，职业名或境外认证不授独立诊断治疗权；具体操作按本人实际资质、法域及机构授权核。"
             ]
           },
           "id": "community-health-workers.profile.career-quick-answers-block.1",
@@ -23900,10 +23832,22 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "常见相邻岗位包括社会与社区服务经理、健身与健康协调员、物质滥用行为障碍咨询师、教育指导与职业顾问、心理健康咨询师、社会与人类服务助理，以及康复咨询师与医疗社会工作者等。边界上：社会与社区服务经理负责项目与人员与经费的管理，通常不承担一线教育与随访；健身与健康协调员以体能活动与健康项目组织为主，不承担个案需求评估与转介；物质滥用行为障碍咨询师与心理健康咨询师提供成瘾或心理治疗性服务，通常需要相应的执业资格与督导；教育指导与职业顾问以学业与职业发展指导为主；社会与人类服务助理在督导下提供一线支持性服务；康复咨询师以残障与康复服务的评估与个案管理为主；医疗社会工作者以医疗场景中的社会心理支持与出院与资源衔接为主。本职业以社区场景中的健康教育、需求识别、转介与倡导、以及记录与随访为核心，不提供临床诊断或治疗。"
+              "相邻方向主要对象：社会社区经理统筹项目、预算和政策；健身健康协调员管理健康项目及培训人员，也可需求评估、个体健康支持及组织筛查，不排除这些交叠；成瘾/心理健康咨询师咨询和预防；教育职业顾问学生学业/职业；社会人类服务助理协助服务者及福利资源；康复咨询师独立生活与就业及康复项目；医疗社工疾病相关社会心理支持、转介与照护管理。不是互斥任务或统一资格对照。O*NET29任务14Core/15Supplemental为职业任务池，非每岗全部必须；筛查、免疫、急救任务不自动赋临床许可，职业名或境外认证不授独立诊断治疗权；具体操作按本人实际资质、法域及机构授权核。"
             ]
           },
           "id": "community-health-workers.profile.career-quick-answers-block.7",
+          "source_refs": [
+            "chw-review-neighbor-0",
+            "chw-review-neighbor-1",
+            "chw-review-neighbor-2",
+            "chw-review-neighbor-3",
+            "chw-review-neighbor-4",
+            "chw-review-neighbor-5",
+            "chw-review-neighbor-6",
+            "chw-review-neighbor-7",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -23966,7 +23910,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "健身与健康协调员以体能活动与健康项目组织为主，不承担个案需求评估与转介与随访；本职业以社区个体的健康需求识别与资源衔接为核心"
+              "健身与健康协调员主要管理健康项目/服务及人员，可开展需求调查、个体一般健康支持和组织筛查；不能称完全不做需求评估与转介。社区健康工作者侧重社区健康行为、资源联系和倡导，实际任务可交叠。"
             ]
           },
           "id": "community-health-workers.profile.career-quick-answers-block.13",
@@ -23988,7 +23932,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "物质滥用行为障碍咨询师与心理健康咨询师提供成瘾或心理治疗性服务，通常需要相应执业资格与督导；本职业不提供临床诊断或治疗，也不替代医疗或心理专业判断"
+              "成瘾/心理健康咨询师主要咨询、预防及相应服务；所需学历、许可、督导依具体岗位/法域另核，任务相近不自动互授资格。O*NET29任务14Core/15Supplemental为职业任务池，非每岗全部必须；筛查、免疫、急救任务不自动赋临床许可，职业名或境外认证不授独立诊断治疗权；具体操作按本人实际资质、法域及机构授权核。"
             ]
           },
           "id": "community-health-workers.profile.career-quick-answers-block.15",
@@ -24021,10 +23965,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国该职业准备层级为 Job Zone Four（相当准备），该页面教育分布显示 56% 的受访者回答需要学士学位、18% 回答需要副学士或其他两年制学位、13% 回答需要学士后证书（页面仅显示这三档比例）；常见路径为公共卫生、健康教育、社会工作、心理学或相关专业的学习，配合社区组织与卫生机构的一线实践与在职培训，再按雇主与项目要求取得认证与授权"
+              "O*NET当前JobZone4，56%受访者回答新入职需学士、18%副学士/两年制、13%学士后证书，三档回答不是全体人员学历分布或统一准入。BLS本职业典型入行高中/同等学历、无需相关工作经验、短期在岗培训；OOH说至少高中/同等，部分雇主要求或偏好高等教育，部分州要求批准培训/认证。方法不同，须核目标岗位，不能以56%推全体须学士或认证均可选。"
             ]
           },
           "id": "community-health-workers.profile.career-quick-answers-block.18",
+          "source_refs": [
+            "chw-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24032,7 +23980,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国大陆：本条证据路由未建立与 O*NET-SOC 21-1094.00 一一对应的职业细类，相关职责可能分布在基层医疗卫生机构、公共卫生机构与社区与社工服务岗位；本条证据路由把中国大陆的工资登记为模块级不可得（数据状态：暂无可安全使用的数据），处理说明 明确「保留模块级不可得，不以行业平均、美国数据或不透明招聘样本填补」，本页因此不发布中国大陆任何工资数值"
+              "NBS2025（2026-05-15发布）卫生和社会工作行业非私营146,266元/人/年、私营75,631元/人/年，表2及表5，单位就业人员税前年平均工资。仅雇主实际归该行业时作宽背景，不是社区健康工作者中位数、分位、起薪或月薪。本轮未建立中国精确职业及工资映射，不等于中国没有细类或官方从未发布。"
             ]
           },
           "id": "community-health-workers.profile.career-quick-answers-block.19",
@@ -24043,7 +23991,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "结论只适用于本页标注的 O*NET 与 BLS 口径与期间（美国工资为 2025 年；就业为 2024 至 2034 年预测；中国大陆为已登记的模块级工资不可得）"
+              "本轮美国工资OEWS2025，预测BLS2025—2035，中国NBS2025行业背景及精确职业缺口；职业与行业均值、受访分布、编辑建议分开。"
             ]
           },
           "id": "community-health-workers.profile.career-quick-answers-block.20",
@@ -24109,10 +24057,18 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "在收集个人信息与服务前说明目的、范围与可能的转介与报告义务，取得知情同意并记录；服务对象拒绝时按其意愿调整或终止，并把过程记录在案。"
+              "服务和收集/披露信息按适用同意、授权及例外核；说明用途与界限，依法有独立报告或其他合法处理基础时，不能把拒绝同意一律写成停止履行义务。美国HIPAA先核是否为covered entity或business associate及是否PHI，不能把所有社区机构/家庭信息一律等同HIPAA。45CFR164.502允许符合条件的治疗/支付/运营及其他法定使用披露，不是所有处理都须个人授权；(b)最小必要有治疗提供者间披露/请求、向本人、有效授权、依法必须等例外。机构权限、安全和合法渠道仍须核，脱敏或受控系统本身不授处理权；其他法域另核。"
             ]
           },
           "id": "community-health-workers.profile.career-quick-answers-block.26",
+          "source_refs": [
+            "chw-review-hipaa",
+            "chw-review-hhs-entities",
+            "chw-review-hhs-min",
+            "chw-review-ca-report",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24131,10 +24087,18 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "遇到儿童或老人受虐待、忽视或伤害威胁的情形，按适用法域与雇主的强制报告要求向主管部门报告；对保密例外的适用条件先与督导或主管确认，不自行扩大也不擅自隐瞒。"
+              "报告义务依法域、人员身份、服务对象和触发条件核。加州CDSS现行老人/依赖成人报告页说明15630所列承担照护/监护等身份及直接法定报告；不能仅凭职业名套给所有CHW。不得把主管同意或AI核定设为履行已适用法定义务的前置条件；及时向依法指定渠道报告并留依据，督导支持不能延误应履行的报告。儿童报告现期完整法条本轮未取得，不在此规定统一时限或渠道。"
             ]
           },
           "id": "community-health-workers.profile.career-quick-answers-block.28",
+          "source_refs": [
+            "chw-review-hipaa",
+            "chw-review-hhs-entities",
+            "chw-review-hhs-min",
+            "chw-review-ca-report",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24175,10 +24139,18 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "档案与计划与随访记录按雇主制度与适用法规管理，在受控系统内保存、按岗位权限访问、对外提供时按最小必要原则；不在无授权渠道讨论可识别的个案信息。"
+              "美国HIPAA先核是否为covered entity或business associate及是否PHI，不能把所有社区机构/家庭信息一律等同HIPAA。45CFR164.502允许符合条件的治疗/支付/运营及其他法定使用披露，不是所有处理都须个人授权；(b)最小必要有治疗提供者间披露/请求、向本人、有效授权、依法必须等例外。机构权限、安全和合法渠道仍须核，脱敏或受控系统本身不授处理权；其他法域另核。"
             ]
           },
           "id": "community-health-workers.profile.career-quick-answers-block.32",
+          "source_refs": [
+            "chw-review-hipaa",
+            "chw-review-hhs-entities",
+            "chw-review-hhs-min",
+            "chw-review-ca-report",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24197,7 +24169,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "长期面对困境与资源不足会带来情绪负荷；按雇主制度使用督导与团队支持与员工帮助资源，对超出自身能力或情绪的个案按程序移交，不独自承担也不把个人立场带入服务。"
+              "长期面对困境可能带来情绪负荷；下列为编辑自查：核团队支持、个案交接和休息安排，不独立承担超出能力的任务。本轮无本职业情绪耗竭/流失因果量化证据。"
             ]
           },
           "id": "community-health-workers.profile.career-quick-answers-block.34",
@@ -24219,10 +24191,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "本页按 O*NET-SOC 21-1094.00（Community Health Workers，社区健康工作者；2026 年更新页面）的精确职业口径：该职业通过协助个人采取健康行为来促进社区健康，为个人的健康需求担任倡导者，并实施促进与维持与改善个人与整体社区健康的项目；可提供血压、青光眼与听力筛查等健康相关预防服务；可收集数据以帮助识别社区健康需求。该职业页面的兴趣代码为 S（社会型）（页面公示分数为社会型 93、企业型 42、研究型 42、常规型 40、艺术型 20、现实型 17），准备层级为 Job Zone Four（相当准备）；该页面教育分布显示 56% 的受访者回答需要学士学位、18% 回答需要副学士或其他两年制学位、13% 回答需要学士后证书（页面仅显示这三档比例）；该职业页面为该代码标注了 Bright Outlook。"
+              "O*NET21-1094.00当前Updated2026，BrightOutlook；协助社区健康行为、倡导联络、项目和预防服务，任务池非操作许可。兴趣S93/E42/I42/C40/A20/R17，职业层面特征非个人分布。O*NET当前JobZone4，56%受访者回答新入职需学士、18%副学士/两年制、13%学士后证书，三档回答不是全体人员学历分布或统一准入。BLS本职业典型入行高中/同等学历、无需相关工作经验、短期在岗培训；OOH说至少高中/同等，部分雇主要求或偏好高等教育，部分州要求批准培训/认证。方法不同，须核目标岗位，不能以56%推全体须学士或认证均可选。"
             ]
           },
           "id": "community-health-workers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "chw-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24230,7 +24206,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国工资按 O*NET 该职业页面显示的 BLS OEWS 2025 年工资数据（精确职业口径）：年薪 10/25/50/75/90 分位为 38,810 与 45,640 与 51,850 与 62,540 与 77,180 美元；时薪 10/25/50/75/90 分位为 18.66 与 21.94 与 24.93 与 30.07 与 37.11 美元；该页面同时显示「Workers on average earn $51,850」与「$24.93 hourly」，即平均值与中位数在该页面上相同。分位描述受雇工资薪金岗位的分布位置，不是入门起薪；该职业的实际收入受雇主类型（医疗与社会救助与政府与其它）、岗位层级、兼任与项目制任职与地区影响，单一全国中位数不能代表具体报价。"
+              "OEWS2025全国年工资10/25/50/75/90分位38,810/45,640/51,850/62,540/77,180美元，时薪18.66/21.94/24.93/30.07/37.11美元。工资页FullDetails明确50分位为Median，摘要on average earn不能证明算术均值相同。不是起薪或个人报价。"
             ]
           },
           "id": "community-health-workers.profile.onet-structured-fields-block.2",
@@ -24241,7 +24217,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆：本条证据路由把该职业的中国大陆工资登记为模块级不可得（数据状态：暂无可安全使用的数据），使用限制 明确「中国薪资板块不能陈述精确中位数、分位数、起薪或稳定月薪」，处理说明 明确「保留模块级不可得，不以行业平均、美国数据或不透明招聘样本填补」。因此本页在中国大陆薪资模块不发布任何数值，只登记缺口与统计口径说明；本条证据路由也未提供可用于本页的行业均值代理，本页不以行业平均、美国数值或招聘样本替代中国大陆数值。"
+              "NBS2025（2026-05-15发布）卫生和社会工作行业非私营146,266元/人/年、私营75,631元/人/年，表2及表5，单位就业人员税前年平均工资。仅雇主实际归该行业时作宽背景，不是社区健康工作者中位数、分位、起薪或月薪。本轮未建立中国精确职业及工资映射，不等于中国没有细类或官方从未发布。"
             ]
           },
           "id": "community-health-workers.profile.onet-structured-fields-block.3",
@@ -24252,7 +24228,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业与就业：按 O*NET 该职业页面显示的 BLS 就业预测（2024 至 2034 年，精确职业口径）：2024 年就业约 65,100 人，2034 年预计约 72,500 人，预计增长 11%（Much faster than average，远快于平均），年均职位空缺约 7,800 个；该职业页面的行业分布为医疗与社会救助 54%、政府 21%、其他行业 25%（含其他服务（公共管理除外）与金融与保险）。需注意：预测含假设与误差，不等于逐年实际值；该职业的岗位受公共卫生经费、医保与补助政策与社区项目周期影响较大，职业存在不等于稳定招聘或个人录用。"
+              "BLS表1.2（21-1094，2025—2035）就业约64,700→72,900人，净增约8,200人，增长12.7%（OOH舍入13%），年均空缺约7,000个，2025自雇0.3%。O*NET为Much faster than average（7%或更高）；预测不是实际招聘或个人录用，年均空缺含增长及转职、退休等更替，不等于净增，也不是AI因果结论。 O*NET当前行业构成医疗与社会救助56%、政府21%、其他23%（包括其他服务及教育服务），是就业构成。OOH提健康信息需求及慢性病/心理与成瘾管理、公卫举措，非经费影响幅度实证。"
             ]
           },
           "id": "community-health-workers.profile.onet-structured-fields-block.4",
@@ -24263,7 +24239,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "技术与工作情境：该职业工作情境显示 98% 与他人保持持续接触、100% 每天使用电子邮件、100% 每天进行电话沟通、69% 认为需要与外部客户或公众打交道极其重要（31% 非常重要）、65% 每天在环境受控的室内工作（30% 每周一次以上）、55% 拥有很大的任务自主度（34% 有一定自主度、11% 有限自主度）、27% 拥有很大的决策自由度（11% 有限、11% 极为有限）、40% 每天在封闭车辆或封闭设备中作业（31% 每月一次以上、18% 从不）、29% 每天需要作出影响他人或组织资源或声誉的决定（44% 每周一次以上、22% 每年一次以上）、29% 每天面临严格截止期限（25% 每周一次以上）、27% 每天暴露于干扰性或不适的噪音、21% 对其他员工的工作结果负有很高责任（40% 中等、11% 有限）、15% 对他人健康与安全负有很高责任（14% 高、41% 中等）、30% 认为工作误差后果相当严重（28% 完全不严重）、90% 的工作作息为规律作息、63% 每周工作正好 40 小时（26% 少于 40 小时、11% 超过 40 小时）、63% 的工作完全不自动化（17% 轻度自动化）、90% 从不暴露于危险条件、100% 从不接触辐射、82% 行走或奔跑时间少于一半、61% 站立时间少于一半。"
+              "技术与工作情境：该职业工作情境显示 98% 与他人保持持续接触、100% 每天使用电子邮件、100% 每天进行电话沟通、69% 认为需要与外部客户或公众打交道极其重要（31% 非常重要）、65% 每天在环境受控的室内工作（30% 每周一次以上但非每天）、55% 拥有很大的任务自主度（34% 有一定自主度、11% 有限自主度）、27% 拥有很大的决策自由度（11% 有限、11% 极为有限）、40% 每天在封闭车辆或封闭设备中作业（31% 每月一次以上但非每周、18% 从不）、29% 每天需要作出影响他人或组织资源或声誉的决定（44% 每周一次以上但非每天、22% 每年一次以上但非每月）、29% 每天面临严格截止期限（25% 每周一次以上但非每天）、27% 每天暴露于干扰性或不适的噪音、21% 对其他员工的工作结果负有很高责任（40% 中等、11% 有限）、15% 对他人健康与安全负有很高责任（14% 高、41% 中等）、30% 认为工作误差后果相当严重（28% 完全不严重）、90% 的工作作息为规律作息、63% 每周工作正好 40 小时（26% 少于 40 小时、11% 超过 40 小时）、63% 的工作完全不自动化（17% 轻度自动化）、90% 从不暴露于危险条件、100% 从不接触辐射、82% 行走或奔跑时间少于一半、61% 站立时间少于一半。 受访分布不等于每岗统一排班、外勤频率或权限。"
             ]
           },
           "id": "community-health-workers.profile.onet-structured-fields-block.5",
@@ -24274,10 +24250,10 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "健康教育与行为支持｜就自我照护与总体健康与风险预防与卫生与筛查向客户与社区团体提供建议｜就自我照护（如糖尿病管理）、总体健康（如饮食或运动）、风险或预防（如铅中毒、人类免疫缺陷病毒、孕期物质滥用或家庭暴力）、卫生或清洁（如使用牙线或洗手）、诊断性筛查（如乳腺癌筛查、宫颈涂片、青光眼检查或糖尿病筛查）与社会或智力发展向客户或社区团体提供建议；并向个人或家庭教授适当的育儿行为（对应 O*NET 任务第五与第七与第十一与补充任务第十七与第十八与第十九与第二十项）。",
+              "健康教育与行为支持｜就自我照护与总体健康与风险预防与卫生与筛查向客户与社区团体提供建议｜就自我照护（如糖尿病管理）、总体健康（如饮食或运动）、风险或预防（如铅中毒、人类免疫缺陷病毒、孕期物质滥用或家庭暴力）、卫生或清洁（如使用牙线或洗手）、诊断性筛查（如乳腺癌筛查、宫颈涂片、青光眼检查或糖尿病筛查）与社会或智力发展向客户或社区团体提供建议；并向个人或家庭教授适当的育儿行为（对应 O*NET 任务第五与第七与第十一与补充任务第十七与第十八与第十九与第二十一项）。",
               "需求识别与计划制定｜识别社区与个人健康需求并制定改善计划或契约｜识别社区或目标区域中个人的特定健康照护需求；为个人、家庭或社区团体制定改善整体健康的计划或正式契约；从个人处收集信息以编制社区成员总体健康的生命统计（对应 O*NET 任务第十与第八与补充任务第二十七项）。",
               "转介与资源衔接｜把社区成员转介到所需服务并协助申请社会服务｜把社区成员转介到所需的健康服务；识别或联系高风险或特定目标群体（如少数族裔、低收入群体或孕妇）；协助家庭申请社会服务（包括医疗补助或妇女、婴儿与儿童营养项目）；为社区成员提供与健康服务或信息相关的口译、翻译或文化调解；并陪同或运送客户前往预约的健康服务或转介地点（对应 O*NET 任务第六与补充任务第十六与第二十二与第二十八与第二十九项）。",
-              "筛查与基础预防服务｜开展基础诊断与免疫与急救并监测高风险群体营养｜开展血压筛查、乳腺癌筛查或传染病筛查等基础诊断程序；实施免疫接种或其他基础预防处置；提供急救等基础健康服务；监测儿童、老年人或其他高风险群体的营养状况；并对孕妇、新生儿或其他高风险个人进行家访以监测进展或评估需求（对应 O*NET 任务第二与补充任务第十五与第二十一与第二十四与第二十六项）。",
+              "筛查与基础预防服务｜开展基础诊断与免疫与急救并监测高风险群体营养｜开展血压筛查、乳腺癌筛查或传染病筛查等基础诊断程序；实施免疫接种或其他基础预防处置；提供急救等基础健康服务；监测儿童、老年人或其他高风险群体的营养状况；并对孕妇、新生儿或其他高风险个人进行家访以监测进展或评估需求（对应 O*NET 任务第二与补充任务第十五与第二十与第二十五与第二十六项）。 O*NET29任务14Core/15Supplemental为职业任务池，非每岗全部必须；筛查、免疫、急救任务不自动赋临床许可，职业名或境外认证不授独立诊断治疗权；具体操作按本人实际资质、法域及机构授权核。",
               "记录与随访与确认行动｜维护客户档案并通过多种方式联系客户确认行动完成｜维护包含计划、记录与相关表单的客户档案；通过当面、电话或书面方式联系客户，确认其已完成所需或建议的行动（对应 O*NET 任务第三与第四项）。",
               "社区联络与倡导与报告｜参加会议与分发材料并向服务提供者反馈与按需报告｜就个人或社区健康需求向政府机构或健康服务提供者进行倡导；向健康服务提供者反馈如何改善服务的可及性或可接受性；参加社区会议或健康博览会以了解社区议题或建立关系；向目标社区成员分发传单、手册或其他信息与教育材料；向学校团体与社区团体讲授医学或口腔健康信息；并按需要向主管部门报告儿童或老人受虐待、忽视或伤害威胁的情形（对应 O*NET 任务第九与第十三与第十二与第十四与补充任务第二十三与第一项）。"
             ]
@@ -24290,10 +24266,18 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作场所｜65% 每天在环境受控的室内工作（30% 每周一次以上）；40% 每天在封闭车辆或封闭设备中作业（31% 每月一次以上、18% 从不）；15% 每月一次以上在户外全天气条件下工作、18% 每年一次以上、26% 从不；90% 从不暴露于危险条件、100% 从不接触辐射、99% 从不接触危险设备。\n防护与安全装备｜89% 从不穿戴专业防护或安全装备（呼吸装置、安全带、全防护服或辐射防护）；本职业的职业风险主要在情绪负荷与家访与社区外勤的人身安全，而非机械与化学危害。\n沟通与协作｜98% 与他人保持持续接触；100% 每天使用电子邮件；100% 每天进行电话沟通；69% 认为需要与外部客户或公众打交道极其重要（31% 非常重要）；17% 每周一次以上需要公开演讲；21% 认为协调或带领他人极其重要、22% 重要。\n自主与决策｜55% 拥有很大的任务自主度、34% 有一定自主度、11% 有限自主度；27% 拥有很大的决策自由度、11% 有限、11% 极为有限；29% 每天需要作出影响他人或组织资源或声誉的决定（44% 每周一次以上、22% 每年一次以上）；22% 认为其决定对同事或组织结果影响轻微。\n责任与影响｜21% 对其他员工的工作结果负有很高责任、40% 中等、11% 有限；15% 对他人健康与安全负有很高责任、14% 高、41% 中等；30% 认为工作误差后果相当严重、28% 完全不严重。\n精确与节奏｜90% 的工作作息为规律作息；63% 每周工作正好 40 小时、26% 少于 40 小时、11% 超过 40 小时；29% 每天面临严格截止期限（25% 每周一次以上）；14% 每天撰写正式信件与备忘（74% 每周一次以上）；31% 认为重复性任务重要、18% 比较重要。\n体位与体力｜19% 持续或几乎持续坐着、58% 超过一半时间坐着、23% 约一半时间；61% 站立时间少于一半、22% 约一半；82% 行走或奔跑时间少于一半；42% 从不使用双手搬运或操作物件与工具。\n情绪与人际情境｜17% 每月一次以上面对冲突情境、42% 每年一次以上；31% 每年一次以上需要应对不愉快或愤怒或不礼貌的人；11% 每月一次以上需要应对有暴力或肢体攻击倾向的人；27% 每天暴露于干扰性或不适的噪音。\n边界与授权｜筛查与免疫与用药等操作、强制报告与保密例外、个案管理与随访边界须按适用法域与执业规范与雇主制度由具备相应资质与授权的人员执行；服务对象的知情同意与隐私按制度管理；发现儿童或老人受虐待、忽视或伤害威胁时按法定报告义务处理；本职业不提供临床诊断或治疗。"
+              "工作场所｜65% 每天在环境受控的室内工作（30% 每周一次以上但非每天）；40% 每天在封闭车辆或封闭设备中作业（31% 每月一次以上但非每周、18% 从不）；15% 每月一次以上但非每周在户外全天气条件下工作、18% 每年一次以上但非每月、26% 从不；90% 从不暴露于危险条件、100% 从不接触辐射、99% 从不接触危险设备。\n防护与安全装备｜89% 从不穿戴专业防护或安全装备（呼吸装置、安全带、全防护服或辐射防护）；频率分布不等于危害严重度或风险排名。\n沟通与协作｜98% 与他人保持持续接触；100% 每天使用电子邮件；100% 每天进行电话沟通；69% 认为需要与外部客户或公众打交道极其重要（31% 非常重要）；17% 每周一次以上但非每天需要公开演讲；21% 认为协调或带领他人极其重要、22% 重要。\n自主与决策｜55% 拥有很大的任务自主度、34% 有一定自主度、11% 有限自主度；27% 拥有很大的决策自由度、11% 有限、11% 极为有限；29% 每天需要作出影响他人或组织资源或声誉的决定（44% 每周一次以上但非每天、22% 每年一次以上但非每月）；22% 认为其决定对同事或组织结果影响轻微。\n责任与影响｜21% 对其他员工的工作结果负有很高责任、40% 中等、11% 有限；15% 对他人健康与安全负有很高责任、14% 高、41% 中等；30% 认为工作误差后果相当严重、28% 完全不严重。\n精确与节奏｜90% 的工作作息为规律作息；63% 每周工作正好 40 小时、26% 少于 40 小时、11% 超过 40 小时；29% 每天面临严格截止期限（25% 每周一次以上但非每天）；14% 每天撰写正式信件与备忘（74% 每周一次以上但非每天）；31% 认为重复性任务重要、18% 比较重要。\n体位与体力｜19% 持续或几乎持续坐着、58% 超过一半时间坐着、23% 约一半时间；61% 站立时间少于一半、22% 约一半；82% 行走或奔跑时间少于一半；42% 从不使用双手搬运或操作物件与工具。\n情绪与人际情境｜17% 每月一次以上但非每周面对冲突情境、42% 每年一次以上但非每月；31% 每年一次以上但非每月需要应对不愉快或愤怒或不礼貌的人；11% 每月一次以上但非每周需要应对有暴力或肢体攻击倾向的人；27% 每天暴露于干扰性或不适的噪音。\n边界与授权｜筛查与免疫与用药等操作、强制报告与保密例外、个案管理与随访边界须按适用法域与执业规范与雇主制度由具备相应资质与授权的人员执行；服务对象的知情同意与隐私按制度管理；发现儿童或老人受虐待、忽视或伤害威胁时按法定报告义务处理；本职业名称不授独立临床诊断治疗权；实际兼具资质和操作范围另核。 受访分布不等于每岗统一排班、外勤频率或权限。美国HIPAA先核是否为covered entity或business associate及是否PHI，不能把所有社区机构/家庭信息一律等同HIPAA。45CFR164.502允许符合条件的治疗/支付/运营及其他法定使用披露，不是所有处理都须个人授权；(b)最小必要有治疗提供者间披露/请求、向本人、有效授权、依法必须等例外。机构权限、安全和合法渠道仍须核，脱敏或受控系统本身不授处理权；其他法域另核。 报告义务依法域、人员身份、服务对象和触发条件核。加州CDSS现行老人/依赖成人报告页说明15630所列承担照护/监护等身份及直接法定报告；不能仅凭职业名套给所有CHW。不得把主管同意或AI核定设为履行已适用法定义务的前置条件；及时向依法指定渠道报告并留依据，督导支持不能延误应履行的报告。儿童报告现期完整法条本轮未取得，不在此规定统一时限或渠道。"
             ]
           },
           "id": "community-health-workers.profile.work-context-block.1",
+          "source_refs": [
+            "chw-review-hipaa",
+            "chw-review-hhs-entities",
+            "chw-review-hhs-min",
+            "chw-review-ca-report",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         }
       ]
@@ -24760,7 +24744,7 @@
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "ilo-genai"
+            "chw-review-ilo-genai"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -24888,10 +24872,10 @@
                 "url": "https://www.onetonline.org/link/localwages/21-1094.00"
               },
               {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "entity": "ILO2026研究简报：AI暴露指标及限制",
                 "id": "link-3",
                 "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.ilo.org/publications/workers%E2%80%99-exposure-ai-what-indicators-tell-us-%E2%80%93-and-what-they-don%E2%80%99t"
               },
               {
                 "entity": "NIST AI Risk Management Framework 1.0",
@@ -24930,10 +24914,10 @@
                 "url": "https://www.onetonline.org/link/localwages/21-1094.00"
               },
               {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "entity": "ILO2026研究简报：AI暴露指标及限制",
                 "id": "link-10",
                 "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.ilo.org/publications/workers%E2%80%99-exposure-ai-what-indicators-tell-us-%E2%80%93-and-what-they-don%E2%80%99t"
               },
               {
                 "entity": "NIST AI Risk Management Framework 1.0",
@@ -24972,10 +24956,10 @@
                 "url": "https://www.onetonline.org/link/localtrends/21-1094.00"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
+                "entity": "加州CDSS老人法定报告身份与义务",
                 "id": "link-17",
                 "relation": "related-evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://www.cdss.ca.gov/inforesources/cdss-programs/adult-protective-services/information-for-mandated-reporters"
               },
               {
                 "entity": "O*NET-SOC 21-1094.00 职业摘要",
@@ -25054,10 +25038,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用工具整理资源目录与转介记录与随访提醒，但把需求评估、资源是否真实可及与优先级的判断保留在人，并保留转介与跟进的可追溯记录。"
+              "编辑试用：以虚构资源清单整理转介目录和随访提醒，人工核资格、费用、交通及联系方式，记录衔接障碍；本轮无AI采用或提效实证。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.15",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25076,10 +25065,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用工具提高档案与统计与材料归档的一致性，但把强制报告与保密例外与知情同意的判断与处置留给人，按适用法域与雇主制度执行，不让未经核对的信息进入正式报告。"
+              "编辑试用：以虚构档案整理统计及归档草稿，核字段、来源和版本；不称工具已提高一致性。依法应报告时不能为等待草稿复核延误。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.17",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25087,10 +25081,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把技术能力、实际采用与岗位结果分开看：公开资料能支持的是「材料翻译与阅读难度调整、常见问题整理、资源目录与转介与随访记录整理、统计与归档类辅助可被工具完成」，以及「公共卫生与社区服务在信息系统与数据上报工具上持续投入」；不能据此推断岗位数量或收入变化。"
+              "技术候选、真实采用、工资和就业结果分别看。本轮未取得该职业AI可靠性、采用率、持续信息系统投入或收入影响实证，招聘软件关键词和BLS预测不能补这些缺口。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.18",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25142,7 +25141,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 工作论文《Generative AI and Jobs: A Refined Global Index of Occupational Exposure》"
+              "ILO研究简报《Workers’ exposure to AI: What indicators tell us – and what they don’t》（2026-04-17）"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.23",
@@ -25241,7 +25240,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024 至 2034 年的就业预测与年均空缺"
+              "用于核对该职业 2025 至 2035 年的就业预测与年均空缺"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.32",
@@ -25252,10 +25251,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表按三条真实工作方向比较：AI 与数字工具主要改变什么，以及哪些责任仍然留在人这一侧。三条方向来自该职业的任务结构（健康教育与行为支持、需求识别与转介与倡导、筛查与记录与家访与社区联络）。"
+              "三方向来自29任务的编辑整理；以下AI处理方式为待评估候选，不是已测采用、能力或改变幅度。编辑试用候选：仅用虚构或确获合法处理权限的材料，试教育材料草稿、阅读难度调整、资源目录及记录整理；对照原文核健康事实、文化语境、遗漏、资源时效和总复核耗时。本轮未取得本职业生成式AI可靠性、采用率、提效幅度或替代时间实证。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.33",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25384,7 +25388,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该页面展示的是本职业 21-1094.00 的精确工资口径；分位描述受雇工资薪金岗位的统计位置，不是起薪；该职业规模较大且岗位受公共卫生经费与补助政策与项目周期影响"
+              "工资为本职业OEWS2025全国分位；就业预测独立于工资/AI采用，不能由职业规模或公卫项目描述推具体工资或AI成效。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.45",
@@ -25439,7 +25443,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO《Generative AI and Jobs: A Refined Global Index of Occupational Exposure》"
+              "ILO研究简报《Workers’ exposure to AI: What indicators tell us – and what they don’t》（2026-04-17）"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.50",
@@ -25450,7 +25454,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "跨经济体的职业级生成式 AI 暴露指数"
+              "AI暴露指标测量与解释方法，非本职业单独采用调查"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.51",
@@ -25461,7 +25465,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该研究给出的是暴露排序与度量方法，不能转写为某一职业的替代时间表"
+              "ILO2026-04-17研究简报实际公开页面：暴露指标不是采用、岗位增减或生产率预测，定义/任务测量及经济机构约束均有限制；未读PDF全本或本职业细表。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.52",
@@ -25505,7 +25509,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "框架要求把用途与限制与监测与责任写清，可直接用于本页的复核与留痕建议"
+              "NIST1.0是自愿治理框架，编辑借鉴用途、记录、监测和责任分工；不是本职业法定强制步骤或有效性实证。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.56",
@@ -25549,7 +25553,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该页面列出 9 项软件技能（Microsoft Office 14%、Excel 12%、Outlook 8%、Word 5%、PowerPoint 4%、Google Workspace 2%、Access 1%、Zoom 1%，Apple macOS 未提供百分比；来源为 2025 年全年美国全国招聘信息统计）；该口径为招聘信息提及比例，不等于熟练度或使用率"
+              "HotTechnology9项为2025全年美国招聘关键词：Office14%、Excel12%、Outlook8%、Word5%、PowerPoint4%、GoogleWorkspace2%、Access1%、Zoom1%，macOS比例未提供；InDemand另标4项。详细页软件类别与招聘关键词清单不同，比例非使用率、熟练度或生成式AI采用率。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.60",
@@ -25560,10 +25564,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术能力回答「模型在原则上能做什么」。对本职业而言，较可靠的部分是材料翻译与阅读难度调整、常见问题整理、资源目录与转介与随访记录整理、统计与归档；不可靠的部分是需求与风险判断、资源可及性判断、强制报告与保密例外的适用判断。"
+              "材料翻译、阅读难度调整及目录/记录整理可作待测候选；每次须核原文、健康事实、文化语境、遗漏及资源时效。本轮无职业可靠性对比，不划较可靠/不可靠任务等级。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.61",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25571,10 +25580,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采用证据回答「机构实际在用什么」。公开资料能支持的是公共卫生与社区服务在信息系统与数据上报工具上持续投入；具体机构与项目差异很大，本页不从关键词推断采用率。"
+              "实际采用须机构和项目证据；本轮未取得本职业生成式AI采用率及连续信息系统投资统计。软件关键词只显示招聘提及，不证明工具已投入使用。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.62",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25582,7 +25596,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "岗位结果回答「就业规模有没有变」。该页面显示 2024 年约 65,100 人、2034 年预计约 72,500 人、预计增长 11%（Much faster than average，远快于平均）、年均空缺约 7,800 个；预测含假设与误差，本页不把变化归因于或归罪于 AI。"
+              "BLS表1.2（21-1094，2025—2035）就业约64,700→72,900人，净增约8,200人，增长12.7%（OOH舍入13%），年均空缺约7,000个，2025自雇0.3%。O*NET为Much faster than average（7%或更高）；预测不是实际招聘或个人录用，年均空缺含增长及转职、退休等更替，不等于净增，也不是AI因果结论。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.63",
@@ -25604,7 +25618,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 21-1094.00 任务与工作活动；ILO 暴露指数"
+              "O*NET21-1094.00任务与工作活动（当前按钮）；ILO暴露边界另见本模块资料入口"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.65",
@@ -25615,10 +25629,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不把编程当作入行门槛，但信息与数据工具与材料本地化能力越来越有用。该页面教育分布显示 56% 的受访者回答需要学士学位、18% 回答需要副学士或其他两年制学位、13% 回答需要学士后证书（页面仅显示这三档比例）；真正决定机会的是沟通与倾听能力、社区实践经验与记录与合规能力。"
+              "O*NET当前JobZone4，56%受访者回答新入职需学士、18%副学士/两年制、13%学士后证书，三档回答不是全体人员学历分布或统一准入。BLS本职业典型入行高中/同等学历、无需相关工作经验、短期在岗培训；OOH说至少高中/同等，部分雇主要求或偏好高等教育，部分州要求批准培训/认证。方法不同，须核目标岗位，不能以56%推全体须学士或认证均可选。 9项软件招聘关键词不证明编程统一门槛、工具能力越来越有用或什么真正决定录用。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.66",
+          "source_refs": [
+            "chw-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25626,7 +25644,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 21-1094.00 任务与工作活动；O*NET 技术清单 21-1094.00"
+              "O*NET21-1094.00招聘技术关键词（当前按钮）；任务和NIST框架另见本模块资料入口"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.67",
@@ -25637,10 +25655,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "从任务结构看，受影响较早的是可结构化与可数字化的环节：材料翻译与阅读难度调整、常见问题整理、资源目录维护、转介与随访记录整理、统计与归档与上报材料汇总。受影响较晚的是需要判断与关系的环节：需求与风险判断、面谈与家访与建立信任、资源可及性判断、强制报告与保密例外与知情同意的适用。"
+              "编辑试用候选：仅用虚构或确获合法处理权限的材料，试教育材料草稿、阅读难度调整、资源目录及记录整理；对照原文核健康事实、文化语境、遗漏、资源时效和总复核耗时。本轮未取得本职业生成式AI可靠性、采用率、提效幅度或替代时间实证。 不排列已经发生或未来受影响先后。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.68",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25648,7 +25671,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 21-1094.00 任务与工作活动；ILO 暴露指数"
+              "O*NET21-1094.00任务与工作活动（当前按钮）；ILO暴露边界另见本模块资料入口"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.69",
@@ -25659,7 +25682,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能据此判断。该页面显示 2024 至 2034 年预计增长 11%（Much faster than average），就业规模由约 65,100 人变为预计约 72,500 人、年均空缺约 7,800 个；预测含假设与误差，不等于逐年实际值；该职业的岗位还受公共卫生经费与医保与补助政策与社区项目周期影响。"
+              "BLS表1.2（21-1094，2025—2035）就业约64,700→72,900人，净增约8,200人，增长12.7%（OOH舍入13%），年均空缺约7,000个，2025自雇0.3%。O*NET为Much faster than average（7%或更高）；预测不是实际招聘或个人录用，年均空缺含增长及转职、退休等更替，不等于净增，也不是AI因果结论。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.70",
@@ -25681,10 +25704,18 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。筛查与免疫与用药等操作、强制报告与保密例外、以及个案管理与转介与报告的决定须由具备相应资质与授权的岗位按适用法域与执业规范与雇主制度作出；工具不承担该责任，也不免除服务对象的隐私与安全义务。"
+              "使用工具不转移执行者、机构及供应方各自已适用的法律/合同责任；不能把提供者的隐私安全义务写到服务对象身上，也不一概免除工具供应方责任。报告义务依法域、人员身份、服务对象和触发条件核。加州CDSS现行老人/依赖成人报告页说明15630所列承担照护/监护等身份及直接法定报告；不能仅凭职业名套给所有CHW。不得把主管同意或AI核定设为履行已适用法定义务的前置条件；及时向依法指定渠道报告并留依据，督导支持不能延误应履行的报告。儿童报告现期完整法条本轮未取得，不在此规定统一时限或渠道。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.72",
+          "source_refs": [
+            "chw-review-hipaa",
+            "chw-review-hhs-entities",
+            "chw-review-hhs-min",
+            "chw-review-ca-report",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25692,7 +25723,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 21-1094.00 任务与工作活动；执业规范与雇主制度"
+              "CDSS加州老人报告义务说明（按身份及情境适用，不等儿童或全球规则）"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.73",
@@ -25736,7 +25767,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 技术清单 21-1094.00（技术关键词）；NIST AI RMF 1.0"
+              "O*NET21-1094.00招聘技术关键词（当前按钮）；任务和NIST框架另见本模块资料入口"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.77",
@@ -25773,6 +25804,11 @@
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.80",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25780,10 +25816,18 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "由本人与督导或主管复核：信息是否准确与符合文化规范、是否超出本人执业与授权范围、资源是否真实可及、报告与保密例外的适用是否正确。"
+              "编辑复核：核健康信息、文化语境、资源与权限；按实际角色取得必要支持。报告义务依法域、人员身份、服务对象和触发条件核。加州CDSS现行老人/依赖成人报告页说明15630所列承担照护/监护等身份及直接法定报告；不能仅凭职业名套给所有CHW。不得把主管同意或AI核定设为履行已适用法定义务的前置条件；及时向依法指定渠道报告并留依据，督导支持不能延误应履行的报告。儿童报告现期完整法条本轮未取得，不在此规定统一时限或渠道。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.81",
+          "source_refs": [
+            "chw-review-hipaa",
+            "chw-review-hhs-entities",
+            "chw-review-hhs-min",
+            "chw-review-ca-report",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25791,10 +25835,18 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把接触与服务内容与转介与随访与报告留痕；对可识别的个案与健康信息按最小必要与权限要求在受控系统内保存。"
+              "服务、转介、随访及报告按实际适用规则留痕，系统权限依岗位核。美国HIPAA先核是否为covered entity或business associate及是否PHI，不能把所有社区机构/家庭信息一律等同HIPAA。45CFR164.502允许符合条件的治疗/支付/运营及其他法定使用披露，不是所有处理都须个人授权；(b)最小必要有治疗提供者间披露/请求、向本人、有效授权、依法必须等例外。机构权限、安全和合法渠道仍须核，脱敏或受控系统本身不授处理权；其他法域另核。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.82",
+          "source_refs": [
+            "chw-review-hipaa",
+            "chw-review-hhs-entities",
+            "chw-review-hhs-min",
+            "chw-review-ca-report",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25802,10 +25854,18 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "由具备相应资质与授权的岗位确认筛查与免疫与用药等操作、强制报告与保密例外与个案处置；工具不承担该责任，也不免除服务对象的隐私与安全义务。"
+              "使用工具不转移执行者、机构及供应方各自已适用的法律/合同责任；不能把提供者的隐私安全义务写到服务对象身上，也不一概免除工具供应方责任。报告义务依法域、人员身份、服务对象和触发条件核。加州CDSS现行老人/依赖成人报告页说明15630所列承担照护/监护等身份及直接法定报告；不能仅凭职业名套给所有CHW。不得把主管同意或AI核定设为履行已适用法定义务的前置条件；及时向依法指定渠道报告并留依据，督导支持不能延误应履行的报告。儿童报告现期完整法条本轮未取得，不在此规定统一时限或渠道。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.83",
+          "source_refs": [
+            "chw-review-hipaa",
+            "chw-review-hhs-entities",
+            "chw-review-hhs-min",
+            "chw-review-ca-report",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25835,10 +25895,18 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "服务对象的健康与身份与家庭信息属于受保护信息，上传到外部服务可能造成泄露与合规风险。"
+              "美国HIPAA先核是否为covered entity或business associate及是否PHI，不能把所有社区机构/家庭信息一律等同HIPAA。45CFR164.502允许符合条件的治疗/支付/运营及其他法定使用披露，不是所有处理都须个人授权；(b)最小必要有治疗提供者间披露/请求、向本人、有效授权、依法必须等例外。机构权限、安全和合法渠道仍须核，脱敏或受控系统本身不授处理权；其他法域另核。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.86",
+          "source_refs": [
+            "chw-review-hipaa",
+            "chw-review-hhs-entities",
+            "chw-review-hhs-min",
+            "chw-review-ca-report",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25846,10 +25914,18 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按信息分级与权限选择可用工具与部署方式，对可识别信息脱敏或使用受控系统，并保留访问与导出记录。"
+              "工具选择先核合法处理基础、合同和部署权限；只有达到适用脱敏标准才按其例外处理，简单删名不等于获准。美国HIPAA先核是否为covered entity或business associate及是否PHI，不能把所有社区机构/家庭信息一律等同HIPAA。45CFR164.502允许符合条件的治疗/支付/运营及其他法定使用披露，不是所有处理都须个人授权；(b)最小必要有治疗提供者间披露/请求、向本人、有效授权、依法必须等例外。机构权限、安全和合法渠道仍须核，脱敏或受控系统本身不授处理权；其他法域另核。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.87",
+          "source_refs": [
+            "chw-review-hipaa",
+            "chw-review-hhs-entities",
+            "chw-review-hhs-min",
+            "chw-review-ca-report",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25857,7 +25933,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把工具生成的需求排序或资源建议直接当作结论，会让优先次序与资源真实可及性失去可复核的依据。"
+              "编辑版本情境：未记录工具或模型及资料版本时，可能难以复现资源目录或需求整理草稿；这不是采用效果证据。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.88",
@@ -25868,7 +25944,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把需求与风险判断与资源核对固定为人工前置条件，工具只用于整理与草稿并保留可追溯记录。"
+              "记录工具或模型标识、版本、时间及输入资料版本，复核资源时效与适用对象；服务与资源判断交相应授权人员，不由版本记录自动授权。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.89",
@@ -26055,10 +26131,18 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "确认报告义务与保密例外的适用条件已与督导确认。"
+              "报告义务依法域、人员身份、服务对象和触发条件核。加州CDSS现行老人/依赖成人报告页说明15630所列承担照护/监护等身份及直接法定报告；不能仅凭职业名套给所有CHW。不得把主管同意或AI核定设为履行已适用法定义务的前置条件；及时向依法指定渠道报告并留依据，督导支持不能延误应履行的报告。儿童报告现期完整法条本轮未取得，不在此规定统一时限或渠道。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.106",
+          "source_refs": [
+            "chw-review-hipaa",
+            "chw-review-hhs-entities",
+            "chw-review-hhs-min",
+            "chw-review-ca-report",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26099,7 +26183,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "确认家访与外勤的人身安全安排与单人作业限制已落实。"
+              "编辑外勤核对：先核实际机构安全预案、联系方式与同行/报到安排，不把本页清单当作已核所有岗位单人作业禁令。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.110",
@@ -26231,10 +26315,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "如果要用一句话概括：AI 与数字工具会显著改变材料翻译与整理、资源目录与记录与统计汇总的方式，但不会改变「谁对需求与风险判断、资源落地、报告与保密义务与服务对象隐私负责」；需要长期积累的仍然是沟通与倾听与社区经验与制度意识。"
+              "材料、目录和记录可作编辑AI试用候选，实际效果须原文核对和总耗时评估；沟通、需求识别、资源衔接和适用报告/隐私责任仍需相应人员履行，不能据任务可数字化称必然显著改变。"
             ]
           },
           "id": "community-health-workers.ai-impact.ai-impact-table.122",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         }
       ]
@@ -26255,7 +26344,7 @@
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-wages"
+            "chw-review-nbs-wages"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26270,7 +26359,7 @@
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wages"
+            "chw-review-nbs-wages"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26340,7 +26429,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与社区健康工作者精确对应的中国大陆全国职业工资口径；本条证据路由把该口径登记为模块级不可得（暂无可安全使用的数据），本页不发布任何数值"
+              "证据不足：本轮未取得与社区健康工作者精确对应的中国全国职业工资；可查看匹配雇主的卫生和社会工作行业宽背景，不能代填职业分位或起薪。"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.7",
@@ -26351,10 +26440,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮查阅范围为：本条证据路由登记的中国大陆工资来源（国家统计局）与本职业的 O*NET 精确职业来源；国家统计局按行业门类与登记注册类型公布城镇单位就业人员年平均工资，未单列本职业。路由对该缺口的 severity 为 material，consequence 为「中国薪资板块不能陈述精确中位数、分位数、起薪或稳定月薪」，resolution 为「保留模块级不可得，不以行业平均、美国数据或不透明招聘样本填补」；本条证据路由也未提供可用于本页的行业均值代理，因此本页在中国大陆薪资模块不发布任何数值。"
+              "本轮实际核NBS2025发布表2/5卫生和社会工作行业、税前年均及单位覆盖；未取得精确职业统计或代表性招聘样本。行业背景须先核雇主分类，非全国社区健康工作者工资。"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.8",
+          "source_refs": [
+            "chw-review-nbs-wages",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26373,10 +26466,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "该口径覆盖城镇法人单位，不含社区社会组织与项目制与兼职等用工形态；本页不把行业口径写成本职业数值。"
+              "NBS覆盖城镇5人及以上法人单位就业人员。社区组织、项目制、兼职或民办名称本身不自动排除；须看单位及人员是否符合覆盖定义。该行业均值不代职业工资。"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.10",
+          "source_refs": [
+            "chw-review-nbs-wages",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26384,10 +26481,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "较宽职业口径：公开统计与职业分类未单列与 O*NET-SOC 21-1094.00 一一对应的职业细类"
+              "本轮未建立中国与21-1094.00精确职业映射，不能据此声称全部公开统计或分类未设细类。"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.11",
+          "source_refs": [
+            "chw-review-nbs-wages",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26417,10 +26518,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "使用边界：本条证据路由明确不以不透明招聘样本填补缺口，本页不把招聘样本或美国数值写成中国大陆的月薪、分位或起薪，也不做跨市场换算。"
+              "招聘或项目公告仅为具体岗位报价；本轮无可代表全国职业的样本，不能填全国分位、起薪或稳定月薪。"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.14",
+          "source_refs": [
+            "chw-review-nbs-wages",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26432,6 +26537,10 @@
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.15",
+          "source_refs": [
+            "chw-review-nbs-wages",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26450,7 +26559,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "资料期：本轮查阅以 2025 年及以前已发布的公开资料为范围"
+              "资料期：NBS2025数据（2026-05-15发布），本轮2026-10-09核原文。"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.17",
@@ -26472,7 +26581,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论与缺口边界：本页对中国大陆登记模块级不可得与统计口径与岗位映射边界，并说明不发布任何数值"
+              "精确职业工资、分位、起薪和城市比较本轮仍缺；已补充匹配行业年均宽背景，未把缺口称为整个工资模块无任何参考。"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.19",
@@ -26516,7 +26625,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "信息与随访工具会改变材料与记录与统计的方式，但不改变中国大陆对本职业的统计口径：职业级统计缺口与工具无关。"
+              "编辑试用候选：仅用虚构或确获合法处理权限的材料，试教育材料草稿、阅读难度调整、资源目录及记录整理；对照原文核健康事实、文化语境、遗漏、资源时效和总复核耗时。本轮未取得本职业生成式AI可靠性、采用率、提效幅度或替代时间实证。 不由工具使用推中国工资统计变化或收入影响。"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.23",
@@ -26560,7 +26669,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理，不是薪资统计：相关专业学习与社区实践经验是进入相应序列的常见条件，岗位方向由机构类型与项目类型决定，不能据此推断收入。"
+              "编辑可核候选：目标岗位专业学习、社区实践、培训和授权要求；本轮无中国代表性招聘样本，不称统一常见条件或学历决定序列。"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.27",
@@ -26593,7 +26702,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：社区组织与项目常按项目周期与经费安排岗位；本页不把学历直接对应到收入区间。"
+              "编辑比较候选：核具体项目周期、经费、用工合同和职责；未取得项目制普遍程度样本，不能据此推收入。"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.30",
@@ -26736,10 +26845,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《城镇单位就业人员年平均工资情况》检索入口｜https://www.stats.gov.cn/"
+              "国家统计局2025城镇单位年平均工资｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.43",
+          "source_refs": [
+            "chw-review-nbs-wages",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26747,7 +26860,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆薪资参考：模块级不可得与统计口径边界"
+              "中国薪资：精确职业缺口与卫生和社会工作行业背景"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.44",
@@ -26758,10 +26871,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆目前没有单列该岗位的全国职业工资统计可供本页引用；本条证据路由把该口径登记为模块级不可得（数据状态：暂无可安全使用的数据），处理说明 明确保留模块级不可得且不以行业平均、美国数据或不透明招聘样本填补，因此本页不提供月薪区间、分位或起薪。"
+              "NBS2025（2026-05-15发布）卫生和社会工作行业非私营146,266元/人/年、私营75,631元/人/年，表2及表5，单位就业人员税前年平均工资。仅雇主实际归该行业时作宽背景，不是社区健康工作者中位数、分位、起薪或月薪。本轮未建立中国精确职业及工资映射，不等于中国没有细类或官方从未发布。"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.45",
+          "source_refs": [
+            "chw-review-nbs-wages",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26769,7 +26886,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "比较不同机会时应确认机构类型（基层医疗与公共卫生与社区与社会工作服务）与用工形式与经费来源与项目周期，并明确本页在中国大陆未提供任何工资数值。"
+              "比较具体合同与职责时核行业分类、单位覆盖、地区及工时；卫生和社会工作行业均值仅宽背景，非职业收入。"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.46",
@@ -26780,7 +26897,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中华人民共和国职业分类大典（2022 年版）公布信息｜https://www.mohrss.gov.cn/"
+              "职业分类大典2022版公布信息（原登记入口）｜https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.47",
@@ -26791,7 +26908,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不提供中国大陆该岗位的月薪区间或城市排名；机构类型与用工形式与地区差异很大，比较时应把岗位授权与保密与报告要求纳入书面确认。"
+              "本页不提供中国大陆该岗位的月薪区间或城市排名；机构类型与用工形式与地区须逐岗位比较，比较时应把岗位授权与保密与报告要求纳入书面确认。"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.48",
@@ -26813,10 +26930,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与社区健康工作者精确对应的中国大陆全国职业工资口径；本条证据路由未提供行业均值代理，severity=material，本页不发布数值。"
+              "证据不足：本轮未取得中国精确全国社区健康工作者工资或与21-1094.00的职业细类映射；卫生和社会工作行业均值不补职业分位。"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.50",
+          "source_refs": [
+            "chw-review-nbs-wages",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26824,7 +26945,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业口径（不可用于本职业）"
+              "行业口径：仅作匹配雇主的宽背景"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.51",
@@ -26835,10 +26956,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局按行业门类与登记注册类型公布年平均工资，该口径不含本职业单列数值；本页不把它换算成本职业月薪或分位。"
+              "NBS2025（2026-05-15发布）卫生和社会工作行业非私营146,266元/人/年、私营75,631元/人/年，表2及表5，单位就业人员税前年平均工资。仅雇主实际归该行业时作宽背景，不是社区健康工作者中位数、分位、起薪或月薪。本轮未建立中国精确职业及工资映射，不等于中国没有细类或官方从未发布。"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.52",
+          "source_refs": [
+            "chw-review-nbs-wages",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26846,7 +26971,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "招聘与项目公告口径（不可用于本职业）"
+              "招聘/项目公告：具体报价，非全国职业统计"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.53",
@@ -26857,7 +26982,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "招聘平台与项目公告给出的是特定岗位与特定时期与特定用工形式的报价；本条证据路由明确不以不透明招聘样本填补缺口，本页不据此推算收入。"
+              "本轮无代表性招聘样本；单条岗位可用于具体机会比较，须保留时期、地区、单位、职责和用工条件。"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.54",
@@ -26891,7 +27016,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《城镇单位就业人员年平均工资情况》检索入口｜https://www.stats.gov.cn/；中华人民共和国职业分类大典（2022 年版）公布信息｜https://www.mohrss.gov.cn/"
+              "NBS2025表2/5卫生和社会工作行业及覆盖定义｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html；中国精确职业及工资映射本轮未建立。"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.57",
@@ -26902,7 +27027,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 11%（2024—2034 年）"
+              "增长12.7%（OOH舍入13%）（2025—2035 年）"
             ]
           },
           "id": "community-health-workers.china-salary.career-snapshot-primary-locale.58",
@@ -26936,11 +27061,11 @@
             ]
           },
           "fact_refs": [
-            "us-wage-2025"
+            "chw-review-us-wage-2025"
           ],
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "bls-pay"
+            "chw-review-bls-pay"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26955,7 +27080,7 @@
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "bls-pay"
+            "chw-review-bls-pay"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26985,7 +27110,7 @@
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "bls-entry"
+            "chw-review-bls-entry"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27000,7 +27125,7 @@
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "bls-pay"
+            "chw-review-bls-pay"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27030,7 +27155,7 @@
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.7",
           "source_refs": [
-            "bls-pay"
+            "chw-review-bls-pay"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27106,7 +27231,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位数（该页面同时显示时薪中位数 24.93 美元）。该页面同时显示「Workers on average earn $51,850」与「$24.93 hourly」，即平均值与中位数在该页面上相同；与入职薪酬不是同一概念；该统计不含自雇主与业主收入。；O*NET 全国工资分位页面（21-1094.00）｜https://www.onetonline.org/link/localwages/21-1094.00"
+              "全国50分位为中位数51,850美元/年、24.93美元/小时；on average earn摘要不证明算术均值与中位数相同。"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.14",
@@ -27161,7 +27286,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "65,100人（2024 年）"
+              "约64,700人（2025）"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.19",
@@ -27172,7 +27297,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "按 O*NET 该职业页面显示的 BLS 就业预测（2024 至 2034 年，精确职业口径）：2024 年就业约 65,100 人、2034 年预计约 72,500 人、预计增长 11%（Much faster than average，远快于平均）、年均空缺约 7,800 个；该职业岗位受公共卫生经费与医保与补助政策与社区项目周期影响较大。；O*NET 全国就业趋势页面（21-1094.00）｜https://www.onetonline.org/link/localtrends/21-1094.00"
+              "BLS表1.2（21-1094，2025—2035）就业约64,700→72,900人，净增约8,200人，增长12.7%（OOH舍入13%），年均空缺约7,000个，2025自雇0.3%。O*NET为Much faster than average（7%或更高）；预测不是实际招聘或个人录用，年均空缺含增长及转职、退休等更替，不等于净增，也不是AI因果结论。"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.20",
@@ -27183,7 +27308,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 11%（2024—2034 年）"
+              "增长12.7%（OOH舍入13%）（2025—2035 年）"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.21",
@@ -27194,7 +27319,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024 至 2034 年预测期，增长评级为 Much faster than average（远快于平均）。预测含假设与误差，不等于逐年实际值，也不预测某一机构或某一项目的岗位数量。；O*NET 全国就业趋势页面（21-1094.00）｜https://www.onetonline.org/link/localtrends/21-1094.00"
+              "BLS表1.2（21-1094，2025—2035）就业约64,700→72,900人，净增约8,200人，增长12.7%（OOH舍入13%），年均空缺约7,000个，2025自雇0.3%。O*NET为Much faster than average（7%或更高）；预测不是实际招聘或个人录用，年均空缺含增长及转职、退休等更替，不等于净增，也不是AI因果结论。"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.22",
@@ -27205,7 +27330,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约 7,800 个/年"
+              "约 7,000 个/年"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.23",
@@ -27216,7 +27341,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024 至 2034 年年均空缺，含增长与替补需求；空缺数不等于净新增岗位。；O*NET 全国就业趋势页面（21-1094.00）｜https://www.onetonline.org/link/localtrends/21-1094.00"
+              "2025—2035年均空缺约7,000个，含增长和转职/退休更替，不是净增。"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.24",
@@ -27227,7 +27352,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界：以上数值为 O*NET 该职业页面显示的 BLS OEWS 2025 年工资数据与该职业的 BLS 就业预测（2024 至 2034 年，21-1094.00 精确职业口径）；该页面同时显示「Workers on average earn $51,850」与「$24.93 hourly」，与表中中位数一致。该统计面向受雇工资薪金岗位，不含自雇主与业主收入；该职业的收入受雇主类型（医疗与社会救助与政府与其它）、岗位层级、兼任与项目制任职与地区影响，单一全国中位数不能代表具体报价；该职业页面只提供行业就业占比（医疗与社会救助 54%、政府 21%、其他 25%），未提供行业或地区细分工资中位数，本页已登记对应缺口。"
+              "工资OEWS2025；受雇全兼职覆盖，排除自雇与未法人化业主/合伙人，法人受薪高管可覆盖；不解释个人收入。BLS OOH已取得本职业五行业中位数，另地区、资历/形态细分本轮未核。BLS表1.2（21-1094，2025—2035）就业约64,700→72,900人，净增约8,200人，增长12.7%（OOH舍入13%），年均空缺约7,000个，2025自雇0.3%。O*NET为Much faster than average（7%或更高）；预测不是实际招聘或个人录用，年均空缺含增长及转职、退休等更替，不等于净增，也不是AI因果结论。"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.25",
@@ -27238,7 +27363,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：O*NET 该职业页面显示 2025 年年薪中位数为 51,850 美元、时薪中位数为 24.93 美元，第 10 与第 90 百分位分别为 38,810 与 77,180 美元（时薪 18.66 与 37.11 美元）；按该页面的 BLS 就业预测（2024 至 2034 年），2024 年约 65,100 人、2034 年预计约 72,500 人、预计增长 11%、年均空缺约 7,800 个。限制：该统计不含自雇主与业主收入；中位数不代表个人实际收入。"
+              "2025全国年工资中位51,850美元、时薪24.93美元，分位不是起薪或个人承诺。BLS表1.2（21-1094，2025—2035）就业约64,700→72,900人，净增约8,200人，增长12.7%（OOH舍入13%），年均空缺约7,000个，2025自雇0.3%。O*NET为Much faster than average（7%或更高）；预测不是实际招聘或个人录用，年均空缺含增长及转职、退休等更替，不等于净增，也不是AI因果结论。"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.26",
@@ -27271,7 +27396,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 工作情境显示 90% 的工作作息为规律作息、63% 每周工作正好 40 小时、29% 每天面临严格截止期限（25% 每周一次以上），但 40% 每天需要在封闭车辆中出行并承担家访与社区外勤工作。"
+              "O*NET90%规律排期、63%40小时/26%少于40/11%大于40，29%每天严格期限、25%每周以上但非每天；40%每天封闭车辆/设备不等于40%每天家访。OOH说部分时间办公、较多外勤，多数全职，晚上/周末可能有服务任务。"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.29",
@@ -27293,7 +27418,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工作场景以医疗与社会救助为主（该职业行业分布 54%）、政府 21%、其他行业 25%（含其他服务（公共管理除外）与金融与保险）；不同地区的公共卫生经费与社区项目密度会影响机会与收入水平，本页不逐州列出，也不以最高值或州示例当作普遍水平。"
+              "当前O*NET医疗与社会救助56%、政府21%、其他23%（其他服务及教育服务），就业构成非工资。比较具体地区、合同和职责；本轮未取得经费或项目密度对收入影响幅度。"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.31",
@@ -27315,7 +27440,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 11%（2024—2034 年）"
+              "增长12.7%（OOH舍入13%）（2025—2035 年）"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.33",
@@ -27326,10 +27451,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "医疗与社会救助"
+              "医院（州/地方/私营）"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.34",
+          "source_refs": [
+            "chw-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27337,10 +27466,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行业就业占比 54%（O*NET 行业分布）"
+              "58,290美元/年（2025本职业该行业中位数）"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.35",
+          "source_refs": [
+            "chw-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27348,10 +27481,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行为就业占比而非行业工资；O*NET 该职业页面未提供行业工资中位数。"
+              "BLS本职业OOH行业工资，非整个行业均值；差异不证明个人收入或行业因果。"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.36",
+          "source_refs": [
+            "chw-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27359,10 +27496,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "政府"
+              "地方政府（不含学校/医院）"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.37",
+          "source_refs": [
+            "chw-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27370,10 +27511,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行业就业占比 21%（O*NET 行业分布）"
+              "56,390美元/年（2025本职业该行业中位数）"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.38",
+          "source_refs": [
+            "chw-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27381,10 +27526,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行为就业占比而非行业工资；其余行业合计 25%（含其他服务（公共管理除外）与金融与保险）未进一步拆分。"
+              "BLS本职业OOH行业工资，非整个行业均值；差异不证明个人收入或行业因果。"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.39",
+          "source_refs": [
+            "chw-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27392,10 +27541,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与地区工资细分"
+              "社会救助"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.40",
+          "source_refs": [
+            "chw-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27403,10 +27556,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该职业按行业或地区细分的工资中位数"
+              "50,730美元/年（2025本职业该行业中位数）"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.41",
+          "source_refs": [
+            "chw-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27414,10 +27571,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "缺少细分数值时不使用行业均值或相邻职业数据替代；如需比较可查阅 OEWS 的行业与地区查询入口。"
+              "BLS本职业OOH行业工资，非整个行业均值；差异不证明个人收入或行业因果。"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.42",
+          "source_refs": [
+            "chw-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27425,10 +27586,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "任职形态与岗位层级差异"
+              "宗教、资助、公民、专业及类似组织"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.43",
+          "source_refs": [
+            "chw-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27436,10 +27601,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得按任职形态（全职与项目制与兼任）或岗位层级细分的工资中位数"
+              "50,020美元/年（2025本职业该行业中位数）"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.44",
+          "source_refs": [
+            "chw-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27447,10 +27616,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该页面的分位数据来自受雇工资薪金岗位统计，不能用于推断某一任职形态或某一岗位层级的个人收入。"
+              "BLS本职业OOH行业工资，非整个行业均值；差异不证明个人收入或行业因果。第五行业门诊医疗服务49,540美元/年同口径；地区/资历/形态细分本轮未核。"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.45",
+          "source_refs": [
+            "chw-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27469,7 +27642,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不能。该页面的年度工资按统计方法折算，并非每个人实际有薪时数；该页另提供时薪中位数 24.93 美元，但同样是统计口径；该职业项目制与兼任任职较常见，没有个人工时与任职安排时，不能推算个人年薪、月收入或税后所得。"
+              "不能由全国统计时薪承诺个人全年收入；须具体有薪工时、合同和奖金税费。OOH说多数全职，不能称项目制/兼任普遍；年度统计非个人实发。"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.47",
@@ -27491,7 +27664,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "雇主类型（医疗与社会救助与政府与社区组织）、机构规模与地区、岗位层级与资历、以及任职形态（全职与项目制与兼任）都会影响实际收入；本页不预测个人收入。"
+              "雇主类型（医疗与社会救助与政府与社区组织）、机构规模与地区、岗位层级与资历、以及任职形态（全职与项目制与兼任）须据具体合同及分组证据核对，不推普遍影响；本页不预测个人收入。"
             ]
           },
           "id": "community-health-workers.us-salary.career-snapshot-secondary-locale.49",
@@ -27604,7 +27777,7 @@
           },
           "id": "community-health-workers.fit.riasec-fit-block.4",
           "source_refs": [
-            "bls-entry"
+            "chw-review-bls-entry"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27664,7 +27837,7 @@
           },
           "id": "community-health-workers.fit.riasec-fit-block.8",
           "source_refs": [
-            "nasa-seh"
+            "editorial"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27771,16 +27944,16 @@
                 "url": "https://www.onetonline.org/link/details/21-1094.00#WorkContext"
               },
               {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "entity": "ILO2026研究简报：AI暴露指标及限制",
                 "id": "link-17",
                 "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.ilo.org/publications/workers%E2%80%99-exposure-ai-what-indicators-tell-us-%E2%80%93-and-what-they-don%E2%80%99t"
               },
               {
-                "entity": "O*NET-SOC 21-1094.00 教育与培训信息入口",
+                "entity": "O*NET新入职者教育需求（非培训目录）",
                 "id": "link-18",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtraining/21-1094.00"
+                "url": "https://www.onetonline.org/link/details/21-1094.00#Education"
               },
               {
                 "entity": "O*NET 技术清单（21-1094.00 招聘技术关键词）",
@@ -27804,7 +27977,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 该职业页面的兴趣代码为 S（社会型）：该职业页面公示的兴趣分数为社会型 93、企业型 42、研究型 42、常规型 40、艺术型 20、现实型 17。社会型对应帮助他人与教学与提供照护，是该职业最突出的取向；企业型与研究型同分居次，分别对应推动资源与倡导与理解健康信息；该职业的工作活动以记录与记录信息、获取信息、直接面向公众工作、作出决策与解决问题、使用计算机为前几位；兴趣代码描述的是职业群体的取向分布，不是个人适配结论。"
+              "O*NET 该职业页面的兴趣代码为 S（社会型）：该职业页面公示的兴趣分数为社会型 93、企业型 42、研究型 42、常规型 40、艺术型 20、现实型 17。社会型对应帮助他人与教学与提供照护，是该职业最突出的取向；企业型与研究型同分居次，分别对应推动资源与倡导与理解健康信息；该职业的工作活动以记录与记录信息、获取信息、直接面向公众工作、作出决策与解决问题、使用计算机为前几位；兴趣代码描述的是职业层面的兴趣特征，不是个人适配结论。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.2",
@@ -27815,7 +27988,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 兴趣代码与工作活动为官方职业测评数据，描述的是职业群体的取向分布，不是个人适配结论，也不是录用标准。"
+              "证据等级：O*NET 兴趣代码与工作活动为官方职业测评数据，描述的是职业层面的兴趣特征，不是个人适配结论，也不是录用标准。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.3",
@@ -27838,7 +28011,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：该职业页面列出 21 项工作风格（含同理心、合作、可靠、乐观、社会取向、真诚、诚信、自控、毅力等），但不提供分数；从任务与工作情境看，若你把「帮到对方」置于「守住执业与报告与隐私边界」之前，这项工作会在合规与信任两方面同时出现风险。"
+              "当前O*NET21项WorkStyles有Impact：同理100、合作87、可靠83、乐观83、社会取向82、真诚81、诚信70等，为职业层面指标，不是个人最低考分或人格预测效度。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.5",
@@ -27849,10 +28022,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格在本页只用于描述工作方式，不作为录用依据。与该职业任务更相关的是宜人性维度下的倾听与共情、尽责性维度下的记录与随访与制度遵守、以及情绪稳定性维度下的长期困境陪伴与边界维护；这些特质影响你如何执行社区服务，而不是你能不能学会沟通与转介方法。"
+              "本轮未取得大五特质对本职业表现的可靠预测效度；倾听、记录、随访和边界可作编辑行为自查，不由职业风格推个人人格因果或学不会。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.6",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27860,7 +28038,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 该职业页面提供 21 项工作风格清单（不含分数）；大五人格量表本身不是职业选拔工具。"
+              "当前O*NET21项WorkStyles有Impact：同理100、合作87、可靠83、乐观83、社会取向82、真诚81、诚信70等，为职业层面指标，不是个人最低考分或人格预测效度。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.7",
@@ -27883,10 +28061,18 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：把「先安慰」放在「先确认边界与报告义务」之前，会在强制报告与隐私与安全环节直接放大风险。"
+              "编辑情境自查：安慰服务对象与履行适用报告义务可并行，不作谁先谁后的统一风险推断。报告义务依法域、人员身份、服务对象和触发条件核。加州CDSS现行老人/依赖成人报告页说明15630所列承担照护/监护等身份及直接法定报告；不能仅凭职业名套给所有CHW。不得把主管同意或AI核定设为履行已适用法定义务的前置条件；及时向依法指定渠道报告并留依据，督导支持不能延误应履行的报告。儿童报告现期完整法条本轮未取得，不在此规定统一时限或渠道。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.9",
+          "source_refs": [
+            "chw-review-hipaa",
+            "chw-review-hhs-entities",
+            "chw-review-hhs-min",
+            "chw-review-ca-report",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27905,10 +28091,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 等类型学工具与本职业适配没有官方证据支持。本页不使用「哪种类型最适合社区健康工作者」的表述：类型学描述的是偏好，不预测工作表现，也不对应岗位准入。"
+              "本轮未取得可靠MBTI本职业适配证据，不按类型排序；未取得不等于全部研究不存在。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.11",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27916,7 +28107,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "适配信号：如果你享受陪伴一个人把一件健康相关的事情真正推动到位，这份工作会让你有成就感。",
+              "编辑自查：若你喜欢陪伴他人推进健康事项，可记录具体任务是否带来成就感；不是兴趣分数对个体感受的预测。",
               "适配信号：如果你更关注资源与制度与社区层面的改变，社区倡导与项目协调方向同样可长期精进。"
             ]
           },
@@ -27939,10 +28130,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样不是职业测评工具，没有官方职业证据支持。可替代的做法是用具体行为验证兴趣：能否就一份虚构的社区需求材料写出需求识别与健康教育要点，能否为一位虚构服务对象写出一页含转介与资源衔接与随访的行动方案，能否写出含知情同意与保密与强制报告边界的一页说明。"
+              "本轮未取得九型本职业适配效度；原虚构需求、转介与边界说明可作编辑兴趣尝试，非人格诊断或真实临床能力考核。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.14",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27984,7 +28180,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业对沟通与照护知识的实质要求明确：O*NET 知识清单以客户与个人服务、英语语言、医学与牙科、心理学、治疗与咨询、计算机与电子、教育与培训为主；能力清单以口语理解、口语表达、问题敏感度、语音清晰度、语音识别、书面理解、书面表达、演绎推理为主，共 33 项。"
+              "该职业对沟通与照护知识的实质要求明确：O*NET 知识清单以客户与个人服务、英语语言、医学与牙科、心理学、治疗与咨询、计算机与电子、教育与培训为主；能力清单以口语理解、口语表达、问题敏感度、语音清晰度、语音识别、书面理解、书面表达、演绎推理为主，能力当前全表52项，知识33项。 指标非个人合格线。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.18",
@@ -27995,7 +28191,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 技能与知识清单为官方职业数据；IQ 分数不是职业准入条件。"
+              "O*NET技能知识为职业层面数据；本轮未取得本职业统一IQ准入阈值，本页不据IQ判雇主条件。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.19",
@@ -28063,10 +28259,18 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：为尽快推进个案而省略知情同意或保密与报告判断，会同时带来合规与信任风险。"
+              "不得跳过实际适用的隐私/报告及必要同意要求；同意与最小必要存在具体例外，不能以拒绝一律停止法定义务。美国HIPAA先核是否为covered entity或business associate及是否PHI，不能把所有社区机构/家庭信息一律等同HIPAA。45CFR164.502允许符合条件的治疗/支付/运营及其他法定使用披露，不是所有处理都须个人授权；(b)最小必要有治疗提供者间披露/请求、向本人、有效授权、依法必须等例外。机构权限、安全和合法渠道仍须核，脱敏或受控系统本身不授处理权；其他法域另核。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.25",
+          "source_refs": [
+            "chw-review-hipaa",
+            "chw-review-hhs-entities",
+            "chw-review-hhs-min",
+            "chw-review-ca-report",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28085,7 +28289,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：与该职业任务最贴合的信号是「愿意长期倾听并跟进到底」与「能在边界与制度内工作而不越界」；兴趣代码为 S，但代码只描述群体分布，不决定个人是否适合。"
+              "直接回答：与该职业任务最贴合的信号是「愿意长期倾听并跟进到底」与「能在边界与制度内工作而不越界」；兴趣代码为 S，但代码只描述职业层面的兴趣特征，不决定个人是否适合。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.27",
@@ -28118,10 +28322,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向以管理与预算与合规为主，通常不承担一线教育与随访。"
+              "该方向主要统筹项目、预算和政策；不排除所有一线教育与随访，实际任务和权限须目标岗位核。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.30",
+          "source_refs": [
+            "chw-review-neighbor-0",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28151,10 +28359,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向以活动组织与推广为主，不做个案需求评估与转介。"
+              "该方向管理健康项目及人员，也可需求调查、个体支持和组织筛查，不能排除所有个案需求评估/转介。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.33",
+          "source_refs": [
+            "chw-review-neighbor-1",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28184,10 +28396,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向提供治疗性服务并需要执业资格与督导，超出本职业范围。"
+              "咨询/预防及相应治疗任务需目标法域、岗位教育和许可/督导核；不能由相邻任务直接取得权限。O*NET29任务14Core/15Supplemental为职业任务池，非每岗全部必须；筛查、免疫、急救任务不自动赋临床许可，职业名或境外认证不授独立诊断治疗权；具体操作按本人实际资质、法域及机构授权核。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.36",
+          "source_refs": [
+            "chw-review-neighbor-2",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28221,6 +28437,10 @@
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.39",
+          "source_refs": [
+            "chw-review-neighbor-3",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28250,10 +28470,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向提供治疗性服务并需要执业资格与督导，本职业只做识别与转介。"
+              "咨询/预防及相应治疗任务需目标法域、岗位教育和许可/督导核；不能由相邻任务直接取得权限。O*NET29任务14Core/15Supplemental为职业任务池，非每岗全部必须；筛查、免疫、急救任务不自动赋临床许可，职业名或境外认证不授独立诊断治疗权；具体操作按本人实际资质、法域及机构授权核。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.42",
+          "source_refs": [
+            "chw-review-neighbor-4",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28283,10 +28507,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向职责范围更窄且更依赖督导，独立判断空间较小。"
+              "社会人类服务助理主要协助服务者并帮助福利与社区资源获取；不据定义推全部岗位职责更窄或独立判断空间统一更小。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.45",
+          "source_refs": [
+            "chw-review-neighbor-5",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28305,10 +28533,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。该职业以沟通与记录与跟进为主，O*NET 工作情境显示 65% 每天在环境受控的室内工作、90% 为规律作息、42% 从不使用双手搬运或操作物件与工具；内向者可以通过结构化面谈提纲与书面材料与异步沟通建立可靠的工作方式，但与服务对象与家属与服务机构的大量电话与面对面沟通是硬性要求。"
+              "本轮未取得内外向与本职业表现比较实证；结构化面谈和书面记录可作编辑自查，不保证内向适配；98%持续接触及电话/邮件日用为职业受访分布，不是每岗统一面对面要求。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.47",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28316,10 +28549,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。外向本身不是优势或劣势，关键是能否在制度与边界内把每一步做准确；如果更偏好协作与外部沟通，可以侧重社区组织与倡导与项目协调类任务。"
+              "外向本身不证明社区组织、倡导或记录能力；依据目标任务作行为自查，不按人格偏好分配岗位。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.48",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28327,10 +28565,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有官方证据支持某种 MBTI 类型更适合该职业；本页不提供这种排序。"
+              "本轮未取得可靠MBTI适配排序，不按类型筛选。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.49",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28338,7 +28581,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 该职业页面的兴趣代码为 S（社会型）。这表示职业群体最集中在帮助他人与教学与照护取向，但代码不是个人适配结论，仍需用实际任务验证。"
+              "O*NET 该职业页面的兴趣代码为 S（社会型）。这表示职业兴趣最高项为帮助他人与教学与照护取向，但代码不是个人适配结论，仍需用实际任务验证。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.50",
@@ -28349,10 +28592,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。人格特质分数与工作表现的关联在不同研究中强弱不一，且受机构与项目与督导条件影响；本页不用它作为录用或适配判断依据。"
+              "本轮未取得人格分数对本职业表现的可靠效度，不以工作风格推个人录用或适配。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.51",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28360,7 +28608,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业对数量推理的要求有限但并非为零：O*NET 知识清单以客户与个人服务与医学与牙科与心理学为主，能力清单以口语与书面理解与表达与问题敏感度为主；收集社区数据与统计与阅读项目指标需要基本的数量理解。"
+              "O*NET数学知识35、数学推理28、数字运算25为职业Importance，不能当个人合格线。收集社区数据、统计和阅读项目指标的数量要求须按实际任务与岗位核。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.52",
@@ -28371,7 +28619,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业对情绪负荷与边界的要求突出：O*NET 工作情境显示 17% 每月一次以上面对冲突情境（42% 每年一次以上）、31% 每年一次以上需要应对不愉快或愤怒或不礼貌的人、11% 每月一次以上需要应对有暴力或肢体攻击倾向的人、29% 每天面临严格截止期限（25% 每周一次以上）、30% 认为工作误差后果相当严重；把记录与随访与升级与督导固定为习惯，是可练习的技术。"
+              "受访冲突、攻击、期限与错误后果分布可提醒情境自查，不证明情绪负荷排序、人格效度或耗竭率。编辑建议核记录、随访、团队支持及报告安排。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.53",
@@ -28382,10 +28630,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不建议。九型人格不是职业测评工具，也没有官方职业适配证据。"
+              "本轮未取得九型适配效度，不用其决定职业选择。"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.54",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28459,7 +28712,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024 至 2034 年就业预测与年均空缺"
+              "用于核对该职业 2025 至 2035 年就业预测与年均空缺"
             ]
           },
           "id": "community-health-workers.fit.personality-fit-block.61",
@@ -28582,7 +28835,7 @@
           },
           "id": "community-health-workers.risk.career-risk-cards.1",
           "source_refs": [
-            "nasa-seh"
+            "editorial"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28612,7 +28865,7 @@
           },
           "id": "community-health-workers.risk.career-risk-cards.3",
           "source_refs": [
-            "nasa-seh"
+            "editorial"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28627,7 +28880,7 @@
           },
           "id": "community-health-workers.risk.career-risk-cards.4",
           "source_refs": [
-            "nasa-seh"
+            "editorial"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28686,22 +28939,22 @@
                 "url": "https://www.onetonline.org/link/details/21-1094.00#WorkContext"
               },
               {
-                "entity": "My Next Move 职业档案（美国劳工部）",
+                "entity": "美国HIPAA 45CFR164.502（限定实体/PHI及具体例外）",
                 "id": "link-4",
                 "relation": "related-evidence",
-                "url": "https://www.mynextmove.org/profile/summary/21-1094.00"
+                "url": "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-C/part-164/subpart-E/section-164.502"
               },
               {
-                "entity": "O*NET-SOC 21-1094.00 全国认证信息入口",
+                "entity": "加州CDSS老人/依赖成人报告（当地身份条件）",
                 "id": "link-5",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localcert/21-1094.00"
+                "url": "https://www.cdss.ca.gov/inforesources/cdss-programs/adult-protective-services/information-for-mandated-reporters"
               },
               {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "entity": "NIOSH家庭医疗暴力预防（相似家访场景参考）",
                 "id": "link-6",
                 "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.cdc.gov/niosh/bulletin/2021/hhc-violence.html"
               }
             ]
           },
@@ -28724,10 +28977,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答：该职业最需要提前判断的风险来自三处——家访与社区外勤的人身安全、强制报告与保密与知情同意的边界，以及健康建议与筛查操作超出资质范围；转介与资源衔接断点、记录与隐私管理不当，以及长期情绪负荷与边界耗竭会放大以上三类风险。"
+              "编辑风险清单涵盖家访安全、报告/保密、操作范围、转介断点、记录隐私及情绪负荷；本轮无六类发生率或相互放大效应证据，不作风险排名。"
             ]
           },
           "id": "community-health-workers.risk.career-risk-cards.9",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28735,10 +28993,18 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：任务与工作情境来自 O*NET 21-1094.00（美国口径）；工资数值来自 O*NET 该职业页面显示的 BLS 数据（2025 年，精确职业口径）；就业数值来自该页面的 BLS 预测（2024 至 2034 年）；筛查与报告与保密与执业范围边界按公开执业规范与雇主制度的一般框架表述，不替代适用法规原文与机构制度。"
+              "O*NET支持任务/情境；工资OEWS2025、预测BLS2025—2035。HIPAA仅适用实体/PHI和具体披露条件；加州CDSS老人报告仅当地身份条件；NIOSH家庭医疗暴力资料仅相似家访场景参考。控制清单是编辑建议，非全国统一操作授权。"
             ]
           },
           "id": "community-health-workers.risk.career-risk-cards.10",
+          "source_refs": [
+            "chw-review-hipaa",
+            "chw-review-hhs-entities",
+            "chw-review-hhs-min",
+            "chw-review-ca-report",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28757,10 +29023,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "家访与社区外勤存在人身安全与突发状况风险，单人作业或信息不足时风险显著上升。"
+              "NIOSH家庭医疗暴力资料提示孤立、环境信息与支持不足等场景风险，不能推CHW全职业发生率或单人显著增加幅度。"
             ]
           },
           "id": "community-health-workers.risk.career-risk-cards.12",
+          "source_refs": [
+            "chw-review-niosh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28768,10 +29038,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按雇主制度执行外勤安全安排：登记行程与联系人、按约定时间报到、必要时两人同行或安排在受控场所会面；遇到威胁或暴力迹象立即离开并按程序报告。"
+              "按真实外勤预案核行程报到、通信、必要同行/陪同、退出路径与报警资源。遇迫近暴力优先自保并依训练/安全预案寻求紧急支持；不把所有威胁一律立即离开写成统一程序。NIOSH家庭医疗预防建议为类似场景参考。"
             ]
           },
           "id": "community-health-workers.risk.career-risk-cards.13",
+          "source_refs": [
+            "chw-review-niosh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28801,10 +29075,18 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "强制报告与保密例外的判断错误会同时造成服务对象安全受损与法律与职业责任风险。"
+              "不当报告或披露可能损害安全/隐私并产生法律责任；须具体事实和适用条件核，不称两者必然同时发生。"
             ]
           },
           "id": "community-health-workers.risk.career-risk-cards.16",
+          "source_refs": [
+            "chw-review-hipaa",
+            "chw-review-hhs-entities",
+            "chw-review-hhs-min",
+            "chw-review-ca-report",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28812,10 +29094,18 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "遇到儿童或老人受虐待、忽视或伤害威胁的情形，按适用法域与雇主的强制报告要求向主管部门报告；对保密例外的适用条件先与督导或主管确认，并在记录中写明依据。"
+              "报告义务依法域、人员身份、服务对象和触发条件核。加州CDSS现行老人/依赖成人报告页说明15630所列承担照护/监护等身份及直接法定报告；不能仅凭职业名套给所有CHW。不得把主管同意或AI核定设为履行已适用法定义务的前置条件；及时向依法指定渠道报告并留依据，督导支持不能延误应履行的报告。儿童报告现期完整法条本轮未取得，不在此规定统一时限或渠道。"
             ]
           },
           "id": "community-health-workers.risk.career-risk-cards.17",
+          "source_refs": [
+            "chw-review-hipaa",
+            "chw-review-hhs-entities",
+            "chw-review-hhs-min",
+            "chw-review-ca-report",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28889,10 +29179,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "只开出一张转介单而不跟进，会让服务对象在资源体系之间反复落空，并使需求判断失去验证机会。"
+              "转介不跟进可能遗漏资源障碍；根据实际职责核可及性和随访，不能断言所有只发转介单均反复落空。"
             ]
           },
           "id": "community-health-workers.risk.career-risk-cards.24",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28933,10 +29228,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "记录缺失或隐私管理不当会让个案交接与合规检查无法追溯，并可能造成服务对象信息泄露。"
+              "缺失记录可能妨碍个案交接和复核，未授权披露可能造成隐私损害；不等所有检查必然无法追溯。"
             ]
           },
           "id": "community-health-workers.risk.career-risk-cards.28",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28944,10 +29244,18 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "把接触与服务内容与转介与随访与报告写清并对应到人与时间；在受控系统内按岗位权限保存与访问，对外提供时按最小必要原则。"
+              "美国HIPAA先核是否为covered entity或business associate及是否PHI，不能把所有社区机构/家庭信息一律等同HIPAA。45CFR164.502允许符合条件的治疗/支付/运营及其他法定使用披露，不是所有处理都须个人授权；(b)最小必要有治疗提供者间披露/请求、向本人、有效授权、依法必须等例外。机构权限、安全和合法渠道仍须核，脱敏或受控系统本身不授处理权；其他法域另核。"
             ]
           },
           "id": "community-health-workers.risk.career-risk-cards.29",
+          "source_refs": [
+            "chw-review-hipaa",
+            "chw-review-hhs-entities",
+            "chw-review-hhs-min",
+            "chw-review-ca-report",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28977,10 +29285,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "长期面对困境与资源不足会累积情绪负荷，可能导致判断失准、边界模糊与人员流失。"
+              "编辑情境提示：长期支持困境人群时观察自身负荷及边界，核团队支持；本轮无本职业情绪负荷造成判断失准或人员流失的因果量化证据。"
             ]
           },
           "id": "community-health-workers.risk.career-risk-cards.32",
+          "source_refs": [
+            "chw-review-onet-details",
+            "chw-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29032,7 +29345,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对知识、能力与兴趣代码 S 与工作风格清单"
+              "美国HIPAA先核是否为covered entity或business associate及是否PHI，不能把所有社区机构/家庭信息一律等同HIPAA。45CFR164.502允许符合条件的治疗/支付/运营及其他法定使用披露，不是所有处理都须个人授权；(b)最小必要有治疗提供者间披露/请求、向本人、有效授权、依法必须等例外。机构权限、安全和合法渠道仍须核，脱敏或受控系统本身不授处理权；其他法域另核。"
             ]
           },
           "id": "community-health-workers.risk.career-risk-cards.37",
@@ -29043,7 +29356,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对行业分布与就业结构"
+              "报告义务依法域、人员身份、服务对象和触发条件核。加州CDSS现行老人/依赖成人报告页说明15630所列承担照护/监护等身份及直接法定报告；不能仅凭职业名套给所有CHW。不得把主管同意或AI核定设为履行已适用法定义务的前置条件；及时向依法指定渠道报告并留依据，督导支持不能延误应履行的报告。儿童报告现期完整法条本轮未取得，不在此规定统一时限或渠道。"
             ]
           },
           "id": "community-health-workers.risk.career-risk-cards.38",
@@ -29054,7 +29367,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明任务暴露的度量思路与其指标限制"
+              "NIOSH家庭医疗相似场景预防建议，非CHW发生率"
             ]
           },
           "id": "community-health-workers.risk.career-risk-cards.39",
@@ -29078,7 +29391,7 @@
           },
           "id": "community-health-workers.path.career-path-block.1",
           "source_refs": [
-            "onet-training"
+            "chw-review-onet-training"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -29231,6 +29544,12 @@
                 "id": "link-4",
                 "relation": "related-evidence",
                 "url": "https://www.onetonline.org/link/summary/21-1094.00"
+              },
+              {
+                "entity": "BLS社区健康工作者典型入行",
+                "id": "repair-ooh",
+                "relation": "related-evidence",
+                "url": "https://www.bls.gov/ooh/community-and-social-service/community-health-workers.htm"
               }
             ]
           },
@@ -29341,10 +29660,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：进入该职业最常见的路径是完成公共卫生或健康教育或社会工作或心理学或相关专业的学习（该页面教育分布显示 56% 的受访者回答需要学士学位、18% 回答需要副学士或其他两年制学位、13% 回答需要学士后证书，页面仅显示这三档比例；准备层级为 Job Zone Four，相当准备），并配合社区组织与卫生机构的一线实践与在职培训；入行后先承担信息提供与记录与随访辅助，再逐步承担独立需求识别与个案管理与项目与倡导职责；筛查与免疫与用药等操作与报告与保密权限须按适用法域与机构制度取得。"
+              "O*NET当前JobZone4，56%受访者回答新入职需学士、18%副学士/两年制、13%学士后证书，三档回答不是全体人员学历分布或统一准入。BLS本职业典型入行高中/同等学历、无需相关工作经验、短期在岗培训；OOH说至少高中/同等，部分雇主要求或偏好高等教育，部分州要求批准培训/认证。方法不同，须核目标岗位，不能以56%推全体须学士或认证均可选。 三方向四阶段为编辑能力结构，非最常见统一学历路线或必然晋升顺序。"
             ]
           },
           "id": "community-health-workers.path.career-path-block.20",
+          "source_refs": [
+            "chw-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29352,10 +29675,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界：学历、岗位培训、专业认证、执照与岗位授权必须分别核对。该页面提供 3 项全国认证（Certified Healthcare Technology Manager、Certified Peer Specialist、Certified Instructional Trainer），但认证不等于从业许可、雇主任命、签字权或所在地授权；筛查与免疫与用药等操作、强制报告与保密例外、个案管理与随访边界须按适用法域与执业规范与雇主制度执行；本页不把学历或认证写成执业资质。"
+              "当前关联认证目录3项：AAMI医疗技术管理、Institute for Recovery and Community Integration同伴支持、BCSP培训者。用途各异，不等于CHW统一州认证，目录不证明对所有岗位适用；本轮未完整核各机构报考条件/费用。O*NET29任务14Core/15Supplemental为职业任务池，非每岗全部必须；筛查、免疫、急救任务不自动赋临床许可，职业名或境外认证不授独立诊断治疗权；具体操作按本人实际资质、法域及机构授权核。"
             ]
           },
           "id": "community-health-workers.path.career-path-block.21",
+          "source_refs": [
+            "chw-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29374,10 +29701,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本页关于入行与培养采用 O*NET 口径：准备层级为 Job Zone Four（相当准备），该页面教育分布显示 56% 的受访者回答需要学士学位、18% 回答需要副学士或其他两年制学位、13% 回答需要学士后证书（页面仅显示这三档比例）。中国大陆未建立与 O*NET-SOC 21-1094.00 一一对应的职业细类，相关职责通常分布在基层医疗卫生机构与公共卫生机构与社区与社会工作服务机构。"
+              "O*NET当前JobZone4，56%受访者回答新入职需学士、18%副学士/两年制、13%学士后证书，三档回答不是全体人员学历分布或统一准入。BLS本职业典型入行高中/同等学历、无需相关工作经验、短期在岗培训；OOH说至少高中/同等，部分雇主要求或偏好高等教育，部分州要求批准培训/认证。方法不同，须核目标岗位，不能以56%推全体须学士或认证均可选。 中国精确职业映射本轮未建立，不等于中国没有细类。"
             ]
           },
           "id": "community-health-workers.path.career-path-block.23",
+          "source_refs": [
+            "chw-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29385,7 +29716,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024 至 2034 年就业预测与年均空缺"
+              "用于核对该职业 2025 至 2035 年就业预测与年均空缺"
             ]
           },
           "id": "community-health-workers.path.career-path-block.24",
@@ -29429,7 +29760,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求相关专业背景与基础培训。"
+              "编辑阶段核对候选：可核相关专业背景与基础培训。 按目标岗位核，非统一招聘门槛。"
             ]
           },
           "id": "community-health-workers.path.career-path-block.28",
@@ -29484,7 +29815,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "须具备沟通与内容适配与执业范围判断能力。"
+              "编辑阶段核对候选：可核沟通与内容适配与执业范围判断能力。 按目标岗位核，非统一招聘门槛。"
             ]
           },
           "id": "community-health-workers.path.career-path-block.33",
@@ -29539,7 +29870,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求培训经验与材料开发经验。"
+              "编辑阶段核对候选：可核培训经验与材料开发经验。 按目标岗位核，非统一招聘门槛。"
             ]
           },
           "id": "community-health-workers.path.career-path-block.38",
@@ -29594,7 +29925,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求组织内职责与长期经验。"
+              "编辑阶段核对候选：可核组织内职责与长期经验。 按目标岗位核，非统一招聘门槛。"
             ]
           },
           "id": "community-health-workers.path.career-path-block.43",
@@ -29649,7 +29980,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求基础培训与沟通能力。"
+              "编辑阶段核对候选：可核基础培训与沟通能力。 按目标岗位核，非统一招聘门槛。"
             ]
           },
           "id": "community-health-workers.path.career-path-block.48",
@@ -29704,7 +30035,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "须具备资源体系理解与沟通与记录能力。"
+              "编辑阶段核对候选：可核资源体系理解与沟通与记录能力。 按目标岗位核，非统一招聘门槛。"
             ]
           },
           "id": "community-health-workers.path.career-path-block.53",
@@ -29759,7 +30090,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求多方协作与倡导经验。"
+              "编辑阶段核对候选：可核多方协作与倡导经验。 按目标岗位核，非统一招聘门槛。"
             ]
           },
           "id": "community-health-workers.path.career-path-block.58",
@@ -29814,7 +30145,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求组织内职责与长期经验。"
+              "编辑阶段核对候选：可核组织内职责与长期经验。 按目标岗位核，非统一招聘门槛。"
             ]
           },
           "id": "community-health-workers.path.career-path-block.63",
@@ -29869,7 +30200,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求基础培训与操作授权。"
+              "编辑阶段核对候选：可核基础培训与操作授权。 按目标岗位核，非统一招聘门槛。"
             ]
           },
           "id": "community-health-workers.path.career-path-block.68",
@@ -29924,7 +30255,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "须具备面谈与记录与安全判断能力。"
+              "编辑阶段核对候选：可核面谈与记录与安全判断能力。 按目标岗位核，非统一招聘门槛。"
             ]
           },
           "id": "community-health-workers.path.career-path-block.73",
@@ -29979,7 +30310,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求报告与保密与合规经验。"
+              "编辑阶段核对候选：可核报告与保密与合规经验。 按目标岗位核，非统一招聘门槛。"
             ]
           },
           "id": "community-health-workers.path.career-path-block.78",
@@ -30034,7 +30365,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求组织内职责与长期经验。"
+              "编辑阶段核对候选：可核组织内职责与长期经验。 按目标岗位核，非统一招聘门槛。"
             ]
           },
           "id": "community-health-workers.path.career-path-block.83",
@@ -30098,7 +30429,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "编辑可能考察",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -30106,37 +30437,37 @@
               [
                 "社区健康服务辅助（在督导下）",
                 "在督导下完成材料准备与信息提供与记录与随访辅助并执行制度要求。",
-                "记录是否完整、转介与随访是否登记、异常是否及时上报。",
+                "编辑可能考察：记录是否完整、转介与随访是否登记、异常是否及时上报。",
                 "用脱敏后的服务与记录与督导意见证明。",
-                "与独立服务岗相比不承担需求评估与报告与个案决定责任。"
+                "编辑主要任务比较；实际个案、项目、管理与法定报告责任依岗位/适用法规核，职责可能交叠。"
               ],
               [
                 "社区健康工作者（独立服务）",
                 "独立完成常规需求识别与健康教育与转介与随访并完整记录。",
-                "需求识别完整性、转介落地与随访、记录与隐私与报告合规。",
+                "编辑可能考察：需求识别完整性、转介落地与随访、记录与隐私与报告合规。",
                 "用服务与转介与随访记录与督导评价证明。",
-                "与项目与督导岗相比不承担项目设计与合规审核与督导责任。"
+                "编辑主要任务比较；实际个案、项目、管理与法定报告责任依岗位/适用法规核，职责可能交叠。"
               ],
               [
                 "项目与社区组织岗（含团体教育）",
                 "承担社区项目与团体教育与倡导并带教新同事。",
-                "项目目标达成、社区参与、材料与培训质量、合规执行情况。",
+                "编辑可能考察：项目目标达成、社区参与、材料与培训质量、合规执行情况。",
                 "用项目记录与活动与培训与评估材料证明。",
-                "与机构管理岗相比不负责经费与人事与对外承诺的统筹决定。"
+                "编辑主要任务比较；实际个案、项目、管理与法定报告责任依岗位/适用法规核，职责可能交叠。"
               ],
               [
                 "服务标准与合规岗",
                 "参与服务标准与隐私与报告与记录制度与培训制度建设。",
-                "制度文件与执行情况、检查与培训覆盖、事件复核记录。",
+                "编辑可能考察：制度文件与执行情况、检查与培训覆盖、事件复核记录。",
                 "用制度文件与检查与培训与复核记录证明。",
-                "与一线服务岗相比侧重制度与合规而非单个个案。"
+                "编辑主要任务比较；实际个案、项目、管理与法定报告责任依岗位/适用法规核，职责可能交叠。"
               ],
               [
                 "机构与项目管理岗",
                 "负责项目设计、预算、人员、督导与对外合作与绩效的统筹。",
-                "项目与经费与人员指标、合规与审计、合作与绩效结果。",
+                "编辑可能考察：项目与经费与人员指标、合规与审计、合作与绩效结果。",
                 "用项目方案与预算与督导与绩效记录证明。",
-                "与一线岗相比增加人员与经费与对外承诺责任。"
+                "编辑主要任务比较；实际个案、项目、管理与法定报告责任依岗位/适用法规核，职责可能交叠。"
               ]
             ]
           },
@@ -30152,23 +30483,23 @@
               {
                 "id": "education",
                 "values": [
-                  "该页面教育分布显示 56% 的受访者回答需要学士学位、18% 回答需要副学士或其他两年制学位、13% 回答需要学士后证书（页面仅显示这三档比例）；",
+                  "O*NET当前JobZone4，56%受访者回答新入职需学士、18%副学士/两年制、13%学士后证书，三档回答不是全体人员学历分布或统一准入。BLS本职业典型入行高中/同等学历、无需相关工作经验、短期在岗培训；OOH说至少高中/同等，部分雇主要求或偏好高等教育，部分州要求批准培训/认证。方法不同，须核目标岗位，不能以56%推全体须学士或认证均可选。",
                   "准备层级为 Job Zone Four（相当准备）；",
-                  "多数岗位还要求社区服务或健康促进实践经历与语言与文化能力与在职培训。"
+                  "目标岗位核社区、语言文化、在岗培训；本轮无多数岗位统一要求的招聘样本。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "机构通常要求遵守隐私与知情同意与强制报告与记录制度并接受检查；",
-                  "筛查与免疫与用药等操作与个案与报告权限须按机构制度与授权执行；",
-                  "多数岗位要求背景与资格核查与相关培训记录。"
+                  "美国HIPAA先核是否为covered entity或business associate及是否PHI，不能把所有社区机构/家庭信息一律等同HIPAA。45CFR164.502允许符合条件的治疗/支付/运营及其他法定使用披露，不是所有处理都须个人授权；(b)最小必要有治疗提供者间披露/请求、向本人、有效授权、依法必须等例外。机构权限、安全和合法渠道仍须核，脱敏或受控系统本身不授处理权；其他法域另核。",
+                  "报告义务依法域、人员身份、服务对象和触发条件核。加州CDSS现行老人/依赖成人报告页说明15630所列承担照护/监护等身份及直接法定报告；不能仅凭职业名套给所有CHW。不得把主管同意或AI核定设为履行已适用法定义务的前置条件；及时向依法指定渠道报告并留依据，督导支持不能延误应履行的报告。儿童报告现期完整法条本轮未取得，不在此规定统一时限或渠道。 O*NET29任务14Core/15Supplemental为职业任务池，非每岗全部必须；筛查、免疫、急救任务不自动赋临床许可，职业名或境外认证不授独立诊断治疗权；具体操作按本人实际资质、法域及机构授权核。",
+                  "背景与资格核查须按真实岗位和适用法规核，不称全部/多数统一。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "该职业页面提供 21 项工作风格（含同理心、合作、可靠、乐观、社会取向、真诚、诚信）且不提供分数；",
+                  "当前O*NET21项WorkStyles有Impact：同理100、合作87、可靠83、乐观83、社会取向82、真诚81、诚信70等，为职业层面指标，不是个人最低考分或人格预测效度。",
                   "知识以客户与个人服务、英语语言、医学与牙科、心理学、治疗与咨询为主；",
                   "工作活动以记录与记录信息、获取信息、直接面向公众工作、作出决策与解决问题、使用计算机为前几位。"
                 ]
@@ -30178,12 +30509,16 @@
                 "values": [
                   "健康教育与宣传材料与阅读难度调整工具；",
                   "客户档案与个案管理与随访与转介记录系统；",
-                  "基础筛查与健康监测设备（如血压计）；该职业页面列出 9 项软件技能（Microsoft Office 14%、Excel 12%、Outlook 8%、Word 5%、PowerPoint 4%、Google Workspace 2%、Access 1%、Zoom 1%，Apple macOS 未提供百分比）。"
+                  "HotTechnology9项为2025全年美国招聘关键词：Office14%、Excel12%、Outlook8%、Word5%、PowerPoint4%、GoogleWorkspace2%、Access1%、Zoom1%，macOS比例未提供；InDemand另标4项。详细页软件类别与招聘关键词清单不同，比例非使用率、熟练度或生成式AI采用率。"
                 ]
               }
             ]
           },
           "id": "community-health-workers.path.employer-evidence.1",
+          "source_refs": [
+            "chw-review-ooh",
+            "editorial"
+          ],
           "title": "雇主通常看什么证据",
           "type": "cards"
         },
@@ -30297,8 +30632,8 @@
               [
                 "面试与情境问答",
                 "对给定家访安全风险或强制报告或资源不足情境的处置思路、发现需求超出能力范围时如何处理。",
-                "是否知道先确认边界与升级再推进、是否区分服务资源问题与个人能力问题。",
-                "面试问答不等同于实际服务能力，机构通常另有督导与实操观察。"
+                "编辑可考察需求、资源及安全判断，识别实际法定报告义务，不以先等主管批准为正确答案。",
+                "问答非实际能力；带岗/督导依具体机构核，独立法定义务不可被内部审批延误。"
               ],
               [
                 "案例与书面考核",
@@ -30421,61 +30756,70 @@
             "rows": [
               [
                 "公共卫生或健康教育或社会工作或心理学等相关专业学习",
-                "多数入行者",
-                "是进入相应序列的常见条件",
-                "否（部分岗位以在职培训与实践经验补充）",
-                "完成相关课程与实习并通过考核",
-                "中",
-                "该页面教育分布显示 56% 的受访者回答需要学士学位、18% 回答需要副学士或其他两年制学位、13% 回答需要学士后证书（页面仅显示这三档比例），本页不把学历直接对应到收入。"
+                "核目标岗位教育要求者",
+                "依雇主及州规定核教育和培训",
+                "BLS典型高中/同等；部分雇主要求或偏好高等教育",
+                "课程、实习及考核按目标教育项目核，非全部CHW统一必修",
+                "证据不足：本轮未核具体时间/费用",
+                "O*NET当前JobZone4，56%受访者回答新入职需学士、18%副学士/两年制、13%学士后证书，三档回答不是全体人员学历分布或统一准入。BLS本职业典型入行高中/同等学历、无需相关工作经验、短期在岗培训；OOH说至少高中/同等，部分雇主要求或偏好高等教育，部分州要求批准培训/认证。方法不同，须核目标岗位，不能以56%推全体须学士或认证均可选。"
               ],
               [
                 "社区服务与健康促进实践经验",
                 "承担一线服务的人",
-                "影响可承担的服务类型与个案复杂度",
+                "任务相关经历可作能力证据，不能由经历自动取得服务/报告权限",
                 "否（为能力条件）",
                 "通过社区组织与卫生机构实践与督导积累",
-                "中",
-                "实践经验是承担一线服务的基础，但不等于岗位授权与报告权限。"
+                "证据不足：本轮未核具体时间/费用",
+                "BLS典型不需相关工作经验；训练和社区经验依岗位核，非全部入行基础"
               ],
               [
                 "专业认证（如 Certified Peer Specialist 等 3 项）",
                 "希望证明特定领域能力的人",
-                "作为专业能力证明",
-                "否（认证不等于从业许可或雇主任命）",
-                "通过培训与考核与经验积累",
-                "中",
-                "该页面提供 3 项全国认证；认证不等于从业许可、雇主任命、签字权或所在地授权。"
+                "目录关联证明，目标岗位是否认可另核",
+                "部分州另要求CHW培训/认证；不可将目录三项等同州要求",
+                "证据不足：未完整核三个发证机构当前条件",
+                "证据不足：本轮未核具体时间/费用",
+                "当前关联认证目录3项：AAMI医疗技术管理、Institute for Recovery and Community Integration同伴支持、BCSP培训者。用途各异，不等于CHW统一州认证，目录不证明对所有岗位适用；本轮未完整核各机构报考条件/费用。O*NET29任务14Core/15Supplemental为职业任务池，非每岗全部必须；筛查、免疫、急救任务不自动赋临床许可，职业名或境外认证不授独立诊断治疗权；具体操作按本人实际资质、法域及机构授权核。"
               ],
               [
-                "机构制度与岗位授权（含筛查与报告权限）",
+                "机构制度与岗位操作权限（法定报告义务另列）",
                 "所有参与服务与筛查的人员",
-                "决定可提供的服务与操作范围与报告职责",
-                "是（机构内必备）",
+                "核机构可提供的服务和操作范围；法定报告依法律，非机构创设",
+                "操作权限按岗位；直接法定报告不由机构授权创设或免除",
                 "按机构制度完成培训与授权与考核",
-                "低中",
-                "授权范围与机构制度绑定，筛查与报告与个案权限须按程序确认。"
+                "证据不足：本轮未核具体时间/费用",
+                "报告义务依法域、人员身份、服务对象和触发条件核。加州CDSS现行老人/依赖成人报告页说明15630所列承担照护/监护等身份及直接法定报告；不能仅凭职业名套给所有CHW。不得把主管同意或AI核定设为履行已适用法定义务的前置条件；及时向依法指定渠道报告并留依据，督导支持不能延误应履行的报告。儿童报告现期完整法条本轮未取得，不在此规定统一时限或渠道。 O*NET29任务14Core/15Supplemental为职业任务池，非每岗全部必须；筛查、免疫、急救任务不自动赋临床许可，职业名或境外认证不授独立诊断治疗权；具体操作按本人实际资质、法域及机构授权核。"
               ],
               [
                 "执业范围与保密与强制报告要求",
                 "承担健康教育与个案服务的人员",
                 "决定内容提供与信息处理的合法边界",
-                "是（按适用法域与执业规范）",
-                "按适用要求完成培训与备案",
-                "高",
-                "执业范围与报告与保密要求是硬性条件，具体标准须按主管部门与机构要求确认。"
+                "依适用法域、身份和任务核，不统一全体一项执照",
+                "培训/备案按实际适用规定核",
+                "证据不足：本轮未核具体时间/费用",
+                "美国HIPAA先核是否为covered entity或business associate及是否PHI，不能把所有社区机构/家庭信息一律等同HIPAA。45CFR164.502允许符合条件的治疗/支付/运营及其他法定使用披露，不是所有处理都须个人授权；(b)最小必要有治疗提供者间披露/请求、向本人、有效授权、依法必须等例外。机构权限、安全和合法渠道仍须核，脱敏或受控系统本身不授处理权；其他法域另核。"
               ],
               [
                 "督导与临床转介要求",
                 "承担个案服务的人员",
                 "决定哪些个案必须转交或需督导介入",
-                "是（按机构与执业规范）",
-                "按机构要求接受督导与使用转介流程",
-                "低中",
+                "依实际能力边界、岗位和制度核",
+                "不把所有个案统一为先获督导批准",
+                "证据不足：本轮未核具体时间/费用",
                 "超出本职业范围的服务须按程序转交具备相应资质的人员，本页不代替临床判断。"
               ]
             ]
           },
           "id": "community-health-workers.path.credential-decision.1",
+          "source_refs": [
+            "chw-review-hipaa",
+            "chw-review-hhs-entities",
+            "chw-review-hhs-min",
+            "chw-review-ca-report",
+            "chw-review-onet-details",
+            "editorial",
+            "chw-review-ooh"
+          ],
           "title": "资格选择",
           "type": "table"
         },
@@ -30484,13 +30828,22 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "本页把「相关专业学习与学历」「社区服务与健康促进实践」「专业认证」与「机构制度与岗位授权」「执业范围与保密与报告要求」「督导与转介要求」分列：学历决定可进入的序列，实践经历决定可承担的服务类型与个案复杂度，专业认证提升特定领域能力的可信度，机构授权决定可执行的服务与操作与报告职责，执业范围与保密与报告要求由相应规范与制度决定，督导与转介要求决定哪些个案必须移交，六者不能互相替代。",
-              "美国：该职业的准备层级为 Job Zone Four（相当准备），该页面教育分布显示 56% 的受访者回答需要学士学位、18% 回答需要副学士或其他两年制学位、13% 回答需要学士后证书（页面仅显示这三档比例）；该页面提供 3 项全国认证，但认证不等于从业许可、雇主任命、签字权或所在地授权；筛查与免疫与用药等操作与报告与保密权限须按适用法域与机构制度执行。",
+              "学历与专业、实践与培训、专业关联认证、州要求、机构操作权限、保密和独立报告义务分别核；学历不单独决定序列，经验不自动授权限，内部授权不创设或免除法定义务。",
+              "O*NET当前JobZone4，56%受访者回答新入职需学士、18%副学士/两年制、13%学士后证书，三档回答不是全体人员学历分布或统一准入。BLS本职业典型入行高中/同等学历、无需相关工作经验、短期在岗培训；OOH说至少高中/同等，部分雇主要求或偏好高等教育，部分州要求批准培训/认证。方法不同，须核目标岗位，不能以56%推全体须学士或认证均可选。 当前关联认证目录3项：AAMI医疗技术管理、Institute for Recovery and Community Integration同伴支持、BCSP培训者。用途各异，不等于CHW统一州认证，目录不证明对所有岗位适用；本轮未完整核各机构报考条件/费用。O*NET29任务14Core/15Supplemental为职业任务池，非每岗全部必须；筛查、免疫、急救任务不自动赋临床许可，职业名或境外认证不授独立诊断治疗权；具体操作按本人实际资质、法域及机构授权核。",
               "中国大陆：本条证据路由未建立与 O*NET-SOC 21-1094.00 一一对应的职业细类，相关职责可能分布在基层医疗卫生机构、公共卫生机构与社区与社会工作服务机构；筛查与报告与保密与个案管理的授权要求须按主管部门与机构规定执行。",
-              "本页不保证任何培训或认证被特定机构承认，也不代替执业范围与报告与保密与个案管理的具体判断与授权条件核对。"
+              "报告义务依法域、人员身份、服务对象和触发条件核。加州CDSS现行老人/依赖成人报告页说明15630所列承担照护/监护等身份及直接法定报告；不能仅凭职业名套给所有CHW。不得把主管同意或AI核定设为履行已适用法定义务的前置条件；及时向依法指定渠道报告并留依据，督导支持不能延误应履行的报告。儿童报告现期完整法条本轮未取得，不在此规定统一时限或渠道。 美国HIPAA先核是否为covered entity或business associate及是否PHI，不能把所有社区机构/家庭信息一律等同HIPAA。45CFR164.502允许符合条件的治疗/支付/运营及其他法定使用披露，不是所有处理都须个人授权；(b)最小必要有治疗提供者间披露/请求、向本人、有效授权、依法必须等例外。机构权限、安全和合法渠道仍须核，脱敏或受控系统本身不授处理权；其他法域另核。"
             ]
           },
           "id": "community-health-workers.path.credential-boundary.1",
+          "source_refs": [
+            "chw-review-hipaa",
+            "chw-review-hhs-entities",
+            "chw-review-hhs-min",
+            "chw-review-ca-report",
+            "chw-review-onet-details",
+            "editorial",
+            "chw-review-ooh"
+          ],
           "title": "资格与练习边界",
           "type": "notice"
         },
@@ -30524,11 +30877,11 @@
             ]
           },
           "fact_refs": [
-            "us-employment-2025"
+            "chw-review-us-employment-2025"
           ],
           "id": "community-health-workers.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls-outlook"
+            "chw-review-bls-outlook"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30542,11 +30895,11 @@
             ]
           },
           "fact_refs": [
-            "us-growth-2025-2035"
+            "chw-review-us-growth-2025-2035"
           ],
           "id": "community-health-workers.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls-outlook"
+            "chw-review-bls-outlook"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30561,7 +30914,7 @@
           },
           "id": "community-health-workers.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls-outlook"
+            "chw-review-bls-outlook"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30575,11 +30928,11 @@
             ]
           },
           "fact_refs": [
-            "us-openings-2025-2035"
+            "chw-review-us-openings-2025-2035"
           ],
           "id": "community-health-workers.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls-outlook"
+            "chw-review-bls-outlook"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30594,7 +30947,7 @@
           },
           "id": "community-health-workers.market-signals.market-signal-card.5",
           "source_refs": [
-            "onet-industry"
+            "chw-review-onet-industry"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30609,7 +30962,7 @@
           },
           "id": "community-health-workers.market-signals.market-signal-card.6",
           "source_refs": [
-            "bls-outlook"
+            "chw-review-bls-outlook"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30632,22 +30985,22 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（21-1094.00）",
+                "entity": "BLS表1.2就业预测（SOC21-1094）",
                 "id": "link-3",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/21-1094.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "entity": "ILO2026研究简报：AI暴露指标及限制",
                 "id": "link-4",
                 "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.ilo.org/publications/workers%E2%80%99-exposure-ai-what-indicators-tell-us-%E2%80%93-and-what-they-don%E2%80%99t"
               },
               {
-                "entity": "国家统计局《城镇单位就业人员年平均工资情况》检索入口",
+                "entity": "国家统计局2025城镇单位年平均工资（行业背景）",
                 "id": "link-5",
                 "relation": "related-evidence",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET-SOC 21-1094.00 职业详细资料",
@@ -30713,7 +31066,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：按 O*NET 该职业页面显示的 BLS 就业预测（2024 至 2034 年，21-1094.00 精确职业口径）：2024 年就业约 65,100 人、2034 年预计约 72,500 人、预计增长 11%（Much faster than average，远快于平均）、年均空缺约 7,800 个；预测含假设与误差，不等于逐年实际值；该职业的岗位还受公共卫生经费与医保与补助政策与社区项目周期影响。"
+              "BLS表1.2（21-1094，2025—2035）就业约64,700→72,900人，净增约8,200人，增长12.7%（OOH舍入13%），年均空缺约7,000个，2025自雇0.3%。O*NET为Much faster than average（7%或更高）；预测不是实际招聘或个人录用，年均空缺含增长及转职、退休等更替，不等于净增，也不是AI因果结论。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.8",
@@ -30735,7 +31088,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024 至 2034 年（预测，21-1094.00 精确职业口径）"
+              "2025 至 2035 年（预测，21-1094.00 精确职业口径）"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.10",
@@ -30746,7 +31099,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该职业预计增长 11%，评级为 Much faster than average（远快于平均）；预测以现有产业结构与公共卫生经费环境为假设，含误差，不等于逐年的实际岗位数。"
+              "BLS表1.2（21-1094，2025—2035）就业约64,700→72,900人，净增约8,200人，增长12.7%（OOH舍入13%），年均空缺约7,000个，2025自雇0.3%。O*NET为Much faster than average（7%或更高）；预测不是实际招聘或个人录用，年均空缺含增长及转职、退休等更替，不等于净增，也不是AI因果结论。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.11",
@@ -30779,7 +31132,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精确职业口径（21-1094.00，O*NET 页面显示）"
+              "BLS表1.2 SOC21-1094增长12.7%；OOH整数13%为舍入，不归作O*NET精确小数"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.14",
@@ -30790,7 +31143,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增长 11%（2024—2034 年）"
+              "增长12.7%（2025—2035；OOH舍入13%）"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.15",
@@ -30812,7 +31165,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "研究发布时点（2025 年公开版本）"
+              "研究简报发布时点（2026-04-17）"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.17",
@@ -30823,7 +31176,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该研究提供职业级的生成式 AI 暴露指数，用于比较不同职业的任务暴露程度，不提供岗位增减预测。"
+              "ILO2026-04-17研究简报实际公开页面：暴露指标不是采用、岗位增减或生产率预测，定义/任务测量及经济机构约束均有限制；未读PDF全本或本职业细表。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.18",
@@ -30845,7 +31198,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "生成式 AI 职业暴露指数"
+              "AI暴露指标的解释与限制"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.20",
@@ -30856,7 +31209,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "跨经济体职业级（非单一国家官方统计）"
+              "跨指标/经济体研究参考，非本职业精确采用率"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.21",
@@ -30900,7 +31253,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本条证据路由把中国大陆工资登记为模块级不可得（数据状态：暂无可安全使用的数据）；使用限制 为「中国薪资板块不能陈述精确中位数、分位数、起薪或稳定月薪」，处理说明 为「保留模块级不可得，不以行业平均、美国数据或不透明招聘样本填补」。"
+              "NBS2025（2026-05-15发布）卫生和社会工作行业非私营146,266元/人/年、私营75,631元/人/年，表2及表5，单位就业人员税前年平均工资。仅雇主实际归该行业时作宽背景，不是社区健康工作者中位数、分位、起薪或月薪。本轮未建立中国精确职业及工资映射，不等于中国没有细类或官方从未发布。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.25",
@@ -30911,7 +31264,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本条证据路由未提供可用于本页的行业均值代理；本页在中国大陆薪资模块不发布任何数值，也不以行业平均、美国数值或招聘样本替代。"
+              "匹配雇主行业均值仅宽背景；精确职业工资及地区/岗位细分、本轮代表性招聘样本仍未取得。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.26",
@@ -30922,7 +31275,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "模块级不可得（不发布数值）"
+              "卫生和社会工作行业全员税前年均，非职业分位"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.27",
@@ -30944,7 +31297,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得全国职业工资口径，本页不发布数值"
+              "证据不足：本轮未取得中国精确职业全国工资；行业背景不代填"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.29",
@@ -30955,7 +31308,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024 至 2034 年就业预测与年均空缺"
+              "用于核对该职业 2025 至 2035 年就业预测与年均空缺"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.30",
@@ -30999,10 +31352,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少项目设计、预算、人员管理与合规审计经验。"
+              "逐人核已有与待补的项目设计、预算、人员管理与合规审计经验。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.34",
+          "source_refs": [
+            "chw-review-neighbor-0",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31014,6 +31372,11 @@
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.35",
+          "source_refs": [
+            "chw-review-neighbor-0",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31021,10 +31384,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。管理方向需要从一线服务转向资源与人员与经费统筹。"
+              "编辑转岗核对：管理方向需要从一线服务转向资源与人员与经费统筹。 距离和能力差距为编辑核对候选，不是人员转岗测量、统一互认或培训成本结论。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.36",
+          "source_refs": [
+            "chw-review-neighbor-0",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31032,10 +31400,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少运动与健康项目设计与团体活动组织经验。"
+              "逐人核已有与待补的运动与健康项目设计与团体活动组织经验。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.37",
+          "source_refs": [
+            "chw-review-neighbor-1",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31047,6 +31420,11 @@
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.38",
+          "source_refs": [
+            "chw-review-neighbor-1",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31054,10 +31432,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。健身与健康协调方向以活动与项目组织为主，不做个案转介。"
+              "编辑转岗核对：健身与健康协调方向以活动与项目组织为主，主要项目/人员管理，可与个案支持交叠。 距离和能力差距为编辑核对候选，不是人员转岗测量、统一互认或培训成本结论。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.39",
+          "source_refs": [
+            "chw-review-neighbor-1",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31065,10 +31448,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少成瘾评估与咨询与治疗性服务的临床训练与执业资格与督导。"
+              "逐人核已有与待补的成瘾评估与咨询与治疗性服务的临床训练与执业资格与督导。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.40",
+          "source_refs": [
+            "chw-review-neighbor-2",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31080,6 +31468,11 @@
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.41",
+          "source_refs": [
+            "chw-review-neighbor-2",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31087,10 +31480,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较大。成瘾咨询方向需要临床资格与督导体系，不能由本职业直接转换。"
+              "编辑转岗核对：成瘾咨询方向所需资格/督导依目标法域和具体岗位核，本职业经历不自动授许可。 距离和能力差距为编辑核对候选，不是人员转岗测量、统一互认或培训成本结论。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.42",
+          "source_refs": [
+            "chw-review-neighbor-2",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31098,10 +31496,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少咨询理论与工具与升学与就业资源体系经验。"
+              "逐人核已有与待补的咨询理论与工具与升学与就业资源体系经验。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.43",
+          "source_refs": [
+            "chw-review-neighbor-3",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31113,6 +31516,11 @@
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.44",
+          "source_refs": [
+            "chw-review-neighbor-3",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31120,10 +31528,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较大。教育指导与职业顾问方向需要咨询训练与相应资格与资源体系。"
+              "编辑转岗核对：教育指导与职业顾问方向可核咨询训练、目标资格及资源体系。 距离和能力差距为编辑核对候选，不是人员转岗测量、统一互认或培训成本结论。 具体教育、许可及互认依实际岗位/法域，不设统一全体门槛。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.45",
+          "source_refs": [
+            "chw-review-neighbor-3",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31131,10 +31544,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少心理评估与咨询与治疗性服务的临床训练与执业资格与督导。"
+              "逐人核已有与待补的心理评估与咨询与治疗性服务的临床训练与执业资格与督导。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.46",
+          "source_refs": [
+            "chw-review-neighbor-4",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31146,6 +31564,11 @@
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.47",
+          "source_refs": [
+            "chw-review-neighbor-4",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31153,10 +31576,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较大。心理健康咨询方向需要临床资格与督导，本职业只做识别与转介。"
+              "编辑转岗核对：心理健康咨询方向目标咨询资格/督导须另核，职业名不授治疗权。 距离和能力差距为编辑核对候选，不是人员转岗测量、统一互认或培训成本结论。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.48",
+          "source_refs": [
+            "chw-review-neighbor-4",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31164,10 +31592,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少在督导体系下承担支持性服务与转介的经验。"
+              "逐人核已有与待补的在督导体系下承担支持性服务与转介的经验。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.49",
+          "source_refs": [
+            "chw-review-neighbor-5",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31179,6 +31612,11 @@
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.50",
+          "source_refs": [
+            "chw-review-neighbor-5",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31186,10 +31624,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较小。社会与人类服务助理方向与本职业一线服务高度相关，但独立判断空间更小。"
+              "编辑转岗核对：社会与人类服务助理方向与本职业一线服务高度相关，实际职责和权限依岗位核，不能统一比较自主空间。 距离和能力差距为编辑核对候选，不是人员转岗测量、统一互认或培训成本结论。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.51",
+          "source_refs": [
+            "chw-review-neighbor-5",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31197,10 +31640,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少康复评估与残障服务与个案管理经验。"
+              "逐人核已有与待补的康复评估与残障服务与个案管理经验。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.52",
+          "source_refs": [
+            "chw-review-neighbor-6",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31212,6 +31660,11 @@
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.53",
+          "source_refs": [
+            "chw-review-neighbor-6",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31219,10 +31672,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。康复咨询方向需要康复与残障服务的专门训练与资格。"
+              "编辑转岗核对：康复咨询方向可核康复/残障服务训练及目标资格。 距离和能力差距为编辑核对候选，不是人员转岗测量、统一互认或培训成本结论。 具体教育、许可及互认依实际岗位/法域，不设统一全体门槛。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.54",
+          "source_refs": [
+            "chw-review-neighbor-6",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31230,10 +31688,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少医疗场景中的社会心理评估与出院与医疗资源衔接经验。"
+              "逐人核已有与待补的医疗场景中的社会心理评估与出院与医疗资源衔接经验。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.55",
+          "source_refs": [
+            "chw-review-neighbor-7",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31245,6 +31708,11 @@
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.56",
+          "source_refs": [
+            "chw-review-neighbor-7",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31252,10 +31720,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。医疗社会工作方向需要社会工作资格与医疗场景经验。"
+              "编辑转岗核对：医疗社会工作方向可核目标社会工作资格及医疗场景经验。 距离和能力差距为编辑核对候选，不是人员转岗测量、统一互认或培训成本结论。 具体教育、许可及互认依实际岗位/法域，不设统一全体门槛。"
             ]
           },
           "id": "community-health-workers.market-signals.market-signal-card.57",
+          "source_refs": [
+            "chw-review-neighbor-7",
+            "chw-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         }
       ]
@@ -31395,7 +31868,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容由费马测试职业内容编辑组按公开官方来源整理，职业身份与任务与工作情境采用 O*NET-SOC 21-1094.00（Community Health Workers，社区健康工作者），美国工资与就业采用 O*NET 该职业页面显示的 BLS 数据（21-1094.00 精确职业口径，工资为 2025 年、就业为 2024 至 2034 年预测）；中国大陆按本条证据路由登记模块级工资不可得并不发布数值；编辑归纳与虚构练习单独标注。"
+              "本轮九模块按当前O*NET/BLS/NBS、HIPAA适用条文、CDSS老人报告及NIOSH相似家访安全资料核定；任务、统计、法律条件和编辑建议分开，未完成全部法域法规及整页审查。"
             ]
           },
           "id": "community-health-workers.sources.source-card.1",
@@ -31406,7 +31879,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源为美国 O*NET OnLine 公开页面（含职业详细资料与摘要与行业分布与技术与工资与就业趋势与认证信息）、U.S. Bureau of Labor Statistics 的公开统计与预测口径、U.S. Department of Labor 的 My Next Move 职业档案、ILO 关于生成式 AI 职业暴露的研究、以及中国大陆统计与职业分类信息入口；所有数值均保留其职业与地域与期间与单位与统计口径；来源清单见页面「资料来源」。"
+              "资料为O*NET职业与招聘/认证目录、OEWS2025、BLS2025—2035、NBS2025、ILO暴露研究及NIST自愿框架、HIPAA/HHS、加州CDSS老人报告、NIOSH家庭医疗暴力资料；目录关联、场景参考与精确职业统计分开。"
             ]
           },
           "id": "community-health-workers.sources.source-card.2",
@@ -31417,7 +31890,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容检索与更新于 2026 年 9 月。"
+              "本轮九模块检索与修订：2026-10-09。"
             ]
           },
           "id": "community-health-workers.sources.source-card.3",
@@ -31428,7 +31901,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "使用提示：本页是职业信息服务，不构成医疗、临床、公共卫生、法律、财税或报告义务建议；涉及筛查与免疫与用药等操作、强制报告与保密例外、个案管理与随访与隐私处理与执业范围的决定，须以适用法规与执业规范与机构制度及具备相应资质人员的意见为准。"
+              "精确中国职业工资/资格映射、美国地区/任职形态工资、认证费用、AI职业实证与人格效度仍有缺口；加州儿童现期法条全文未取得，未设统一时限/渠道。共享范围外旧事实及来源保留，未称整页一致或正式验收。"
             ]
           },
           "id": "community-health-workers.sources.source-card.4",
@@ -31804,6 +32277,458 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/21-1094.00#WorkContext"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "29任务14Core/15Supplemental；知识33能力52；57情境为受访分布，21风格有Impact，S93E42I42C40A20R17"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "chw-review-onet-details",
+                "limitation": "O*NET29任务14Core/15Supplemental为职业任务池，非每岗全部必须；筛查、免疫、急救任务不自动赋临床许可，职业名或境外认证不授独立诊断治疗权；具体操作按本人实际资质、法域及机构授权核。 O*NET当前JobZone4，56%受访者回答新入职需学士、18%副学士/两年制、13%学士后证书，三档回答不是全体人员学历分布或统一准入。BLS本职业典型入行高中/同等学历、无需相关工作经验、短期在岗培训；OOH说至少高中/同等，部分雇主要求或偏好高等教育，部分州要求批准培训/认证。方法不同，须核目标岗位，不能以56%推全体须学士或认证均可选。 当前O*NET21项WorkStyles有Impact：同理100、合作87、可靠83、乐观83、社会取向82、真诚81、诚信70等，为职业层面指标，不是个人最低考分或人格预测效度。",
+                "market": "美国",
+                "name": "O*NET-SOC 21-1094.00 职业详细资料（任务与工作活动）",
+                "period": "当前公开原文；2026-10-09核",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/21-1094.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "29任务14Core/15Supplemental；知识33能力52；57情境为受访分布，21风格有Impact，S93E42I42C40A20R17"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "chw-review-onet-summary",
+                "limitation": "O*NET29任务14Core/15Supplemental为职业任务池，非每岗全部必须；筛查、免疫、急救任务不自动赋临床许可，职业名或境外认证不授独立诊断治疗权；具体操作按本人实际资质、法域及机构授权核。 O*NET当前JobZone4，56%受访者回答新入职需学士、18%副学士/两年制、13%学士后证书，三档回答不是全体人员学历分布或统一准入。BLS本职业典型入行高中/同等学历、无需相关工作经验、短期在岗培训；OOH说至少高中/同等，部分雇主要求或偏好高等教育，部分州要求批准培训/认证。方法不同，须核目标岗位，不能以56%推全体须学士或认证均可选。 当前O*NET21项WorkStyles有Impact：同理100、合作87、可靠83、乐观83、社会取向82、真诚81、诚信70等，为职业层面指标，不是个人最低考分或人格预测效度。",
+                "market": "美国",
+                "name": "O*NET-SOC 21-1094.00 职业摘要（知识、能力、兴趣代码与工作风格）",
+                "period": "当前公开原文；2026-10-09核",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/21-1094.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "当前行业就业构成"
+                ],
+                "evidence_type": "occupational industry employment distribution",
+                "id": "chw-review-onet-industry",
+                "limitation": "当前医疗与社会救助56%、政府21%、其他23%（其他服务及教育）；就业构成非工资",
+                "market": "美国",
+                "name": "O*NET-SOC 21-1094.00 行业分布",
+                "period": "当前公开原文；2026-10-09核",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/21-1094.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "9项HotTechnology招聘关键词和InDemand4，非采用率"
+                ],
+                "evidence_type": "job-posting software keyword statistics",
+                "id": "chw-review-onet-hot-tech",
+                "limitation": "HotTechnology9项为2025全年美国招聘关键词：Office14%、Excel12%、Outlook8%、Word5%、PowerPoint4%、GoogleWorkspace2%、Access1%、Zoom1%，macOS比例未提供；InDemand另标4项。详细页软件类别与招聘关键词清单不同，比例非使用率、熟练度或生成式AI采用率。",
+                "market": "美国",
+                "name": "O*NET 技术清单（21-1094.00 雇主招聘技术关键词与提及比例）",
+                "period": "当前公开原文；2026-10-09核",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/21-1094.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "29任务14Core/15Supplemental；知识33能力52；57情境为受访分布，21风格有Impact，S93E42I42C40A20R17"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "chw-review-onet-training",
+                "limitation": "O*NET29任务14Core/15Supplemental为职业任务池，非每岗全部必须；筛查、免疫、急救任务不自动赋临床许可，职业名或境外认证不授独立诊断治疗权；具体操作按本人实际资质、法域及机构授权核。 O*NET当前JobZone4，56%受访者回答新入职需学士、18%副学士/两年制、13%学士后证书，三档回答不是全体人员学历分布或统一准入。BLS本职业典型入行高中/同等学历、无需相关工作经验、短期在岗培训；OOH说至少高中/同等，部分雇主要求或偏好高等教育，部分州要求批准培训/认证。方法不同，须核目标岗位，不能以56%推全体须学士或认证均可选。 当前O*NET21项WorkStyles有Impact：同理100、合作87、可靠83、乐观83、社会取向82、真诚81、诚信70等，为职业层面指标，不是个人最低考分或人格预测效度。",
+                "market": "美国",
+                "name": "O*NET-SOC 21-1094.00 准备层级与教育分布",
+                "period": "当前公开原文；2026-10-09核",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/21-1094.00#JobZone"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "3项关联认证及发证机构；非统一州CHW许可目录"
+                ],
+                "evidence_type": "occupation-related credential directory",
+                "id": "chw-review-bls-entry",
+                "limitation": "当前关联认证目录3项：AAMI医疗技术管理、Institute for Recovery and Community Integration同伴支持、BCSP培训者。用途各异，不等于CHW统一州认证，目录不证明对所有岗位适用；本轮未完整核各机构报考条件/费用。O*NET29任务14Core/15Supplemental为职业任务池，非每岗全部必须；筛查、免疫、急救任务不自动赋临床许可，职业名或境外认证不授独立诊断治疗权；具体操作按本人实际资质、法域及机构授权核。",
+                "market": "美国",
+                "name": "O*NET-SOC 21-1094.00 全国认证信息入口",
+                "period": "当前公开原文；2026-10-09核",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localcert/21-1094.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "FullDetails明确Median及五分位，不把on average earn摘要解释为算术均值"
+                ],
+                "evidence_type": "official occupational wage statistics",
+                "id": "chw-review-bls-pay",
+                "limitation": "OEWS2025全国年工资10/25/50/75/90分位38,810/45,640/51,850/62,540/77,180美元，时薪18.66/21.94/24.93/30.07/37.11美元。工资页FullDetails明确50分位为Median，摘要on average earn不能证明算术均值相同。不是起薪或个人报价。",
+                "market": "美国",
+                "name": "O*NET 全国工资分位页面（21-1094.00，精确职业口径）",
+                "period": "2025工资",
+                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/21-1094.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "表1.2，21-1094行；规模单位千人"
+                ],
+                "evidence_type": "official employment projections",
+                "id": "chw-review-bls-outlook",
+                "limitation": "BLS表1.2（21-1094，2025—2035）就业约64,700→72,900人，净增约8,200人，增长12.7%（OOH舍入13%），年均空缺约7,000个，2025自雇0.3%。O*NET为Much faster than average（7%或更高）；预测不是实际招聘或个人录用，年均空缺含增长及转职、退休等更替，不等于净增，也不是AI因果结论。",
+                "market": "美国",
+                "name": "O*NET 全国就业趋势页面（21-1094.00）",
+                "period": "2025—2035",
+                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "表2/5卫生和社会工作2025列；非相邻2024列，税前年均、单位覆盖定义"
+                ],
+                "evidence_type": "official statistical release",
+                "id": "chw-review-nbs-wages",
+                "limitation": "NBS2025（2026-05-15发布）卫生和社会工作行业非私营146,266元/人/年、私营75,631元/人/年，表2及表5，单位就业人员税前年平均工资。仅雇主实际归该行业时作宽背景，不是社区健康工作者中位数、分位、起薪或月薪。本轮未建立中国精确职业及工资映射，不等于中国没有细类或官方从未发布。",
+                "market": "中国大陆",
+                "name": "国家统计局2025城镇单位就业人员年平均工资",
+                "period": "2025数据，2026-05-15发布",
+                "publisher": "国家统计局（中华人民共和国）",
+                "scope": "industry_only",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "当前公开简报正文关键结论；未读PDF全本"
+                ],
+                "evidence_type": "research brief",
+                "id": "chw-review-ilo-genai",
+                "limitation": "ILO2026-04-17研究简报实际公开页面：暴露指标不是采用、岗位增减或生产率预测，定义/任务测量及经济机构约束均有限制；未读PDF全本或本职业细表。",
+                "market": "全球",
+                "name": "ILO Workers’ exposure to AI: What indicators tell us – and what they don’t",
+                "period": "2026-04-17",
+                "publisher": "International Labour Organization",
+                "scope": "market_signal",
+                "url": "https://www.ilo.org/publications/workers%E2%80%99-exposure-ai-what-indicators-tell-us-%E2%80%93-and-what-they-don%E2%80%99t"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "治理框架",
+                  "AI 风险治理与管理流程"
+                ],
+                "evidence_type": "voluntary AI risk management framework",
+                "id": "chw-review-nist-ai-rmf",
+                "limitation": "NIST1.0自愿治理框架，非职业法定步骤或采用/成效实证。",
+                "market": "美国",
+                "name": "Artificial Intelligence Risk Management Framework 1.0（NIST AI 100-1）",
+                "period": "当前公开原文；2026-10-09核",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "FullDetails明确Median及五分位，不把on average earn摘要解释为算术均值"
+                ],
+                "evidence_type": "official occupational wage statistics",
+                "id": "chw-review-onet-localwages",
+                "limitation": "OEWS2025全国年工资10/25/50/75/90分位38,810/45,640/51,850/62,540/77,180美元，时薪18.66/21.94/24.93/30.07/37.11美元。工资页FullDetails明确50分位为Median，摘要on average earn不能证明算术均值相同。不是起薪或个人报价。",
+                "market": "美国",
+                "name": "O*NET 全国工资分位页面（21-1094.00，年薪与时薪分位，精确职业口径）",
+                "period": "2025工资",
+                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/21-1094.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "29任务14Core/15Supplemental；知识33能力52；57情境为受访分布，21风格有Impact，S93E42I42C40A20R17"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "chw-review-onet-17-3021",
+                "limitation": "O*NET29任务14Core/15Supplemental为职业任务池，非每岗全部必须；筛查、免疫、急救任务不自动赋临床许可，职业名或境外认证不授独立诊断治疗权；具体操作按本人实际资质、法域及机构授权核。 O*NET当前JobZone4，56%受访者回答新入职需学士、18%副学士/两年制、13%学士后证书，三档回答不是全体人员学历分布或统一准入。BLS本职业典型入行高中/同等学历、无需相关工作经验、短期在岗培训；OOH说至少高中/同等，部分雇主要求或偏好高等教育，部分州要求批准培训/认证。方法不同，须核目标岗位，不能以56%推全体须学士或认证均可选。 当前O*NET21项WorkStyles有Impact：同理100、合作87、可靠83、乐观83、社会取向82、真诚81、诚信70等，为职业层面指标，不是个人最低考分或人格预测效度。",
+                "market": "美国",
+                "name": "O*NET-SOC 21-1094.00 工作情境（Work Context 字段）",
+                "period": "当前公开原文；2026-10-09核",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/21-1094.00#WorkContext"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方方法说明",
+                  "工资统计覆盖范围与折算口径"
+                ],
+                "evidence_type": "official source",
+                "id": "chw-review-bls-oews-methods",
+                "limitation": "受雇全兼职覆盖；自雇/未法人化业主及合伙人排除，法人受薪高管可覆盖；统计非个人到手收入。",
+                "market": "美国",
+                "name": "BLS Occupational Employment and Wage Statistics 方法说明（Handbook of Methods）",
+                "period": "当前公开原文；2026-10-09核",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "表1.2，21-1094行；规模单位千人"
+                ],
+                "evidence_type": "official employment projections",
+                "id": "chw-review-bls-projections",
+                "limitation": "BLS表1.2（21-1094，2025—2035）就业约64,700→72,900人，净增约8,200人，增长12.7%（OOH舍入13%），年均空缺约7,000个，2025自雇0.3%。O*NET为Much faster than average（7%或更高）；预测不是实际招聘或个人录用，年均空缺含增长及转职、退休等更替，不等于净增，也不是AI因果结论。",
+                "market": "美国",
+                "name": "BLS Occupational Projections and Characteristics",
+                "period": "2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "29任务14Core/15Supplemental；知识33能力52；57情境为受访分布，21风格有Impact，S93E42I42C40A20R17"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "chw-review-onet-context",
+                "limitation": "O*NET29任务14Core/15Supplemental为职业任务池，非每岗全部必须；筛查、免疫、急救任务不自动赋临床许可，职业名或境外认证不授独立诊断治疗权；具体操作按本人实际资质、法域及机构授权核。 O*NET当前JobZone4，56%受访者回答新入职需学士、18%副学士/两年制、13%学士后证书，三档回答不是全体人员学历分布或统一准入。BLS本职业典型入行高中/同等学历、无需相关工作经验、短期在岗培训；OOH说至少高中/同等，部分雇主要求或偏好高等教育，部分州要求批准培训/认证。方法不同，须核目标岗位，不能以56%推全体须学士或认证均可选。 当前O*NET21项WorkStyles有Impact：同理100、合作87、可靠83、乐观83、社会取向82、真诚81、诚信70等，为职业层面指标，不是个人最低考分或人格预测效度。",
+                "market": "美国",
+                "name": "O*NET-SOC 21-1094.00 工作情境（Work Context 字段）",
+                "period": "当前公开原文；2026-10-09核",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/21-1094.00#WorkContext"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取适用正文；用途及限制见limitation"
+                ],
+                "evidence_type": "official occupational outlook",
+                "id": "chw-review-ooh",
+                "limitation": "O*NET当前JobZone4，56%受访者回答新入职需学士、18%副学士/两年制、13%学士后证书，三档回答不是全体人员学历分布或统一准入。BLS本职业典型入行高中/同等学历、无需相关工作经验、短期在岗培训；OOH说至少高中/同等，部分雇主要求或偏好高等教育，部分州要求批准培训/认证。方法不同，须核目标岗位，不能以56%推全体须学士或认证均可选。 2025五行业年工资中位58290/56390/50730/50020/49540，行业非全行业均值。",
+                "market": "美国",
+                "name": "BLS Community Health Workers",
+                "period": "当前公开原文",
+                "publisher": "BLS",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/community-and-social-service/community-health-workers.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取适用正文；用途及限制见limitation"
+                ],
+                "evidence_type": "official regulation",
+                "id": "chw-review-hipaa",
+                "limitation": "美国HIPAA先核是否为covered entity或business associate及是否PHI，不能把所有社区机构/家庭信息一律等同HIPAA。45CFR164.502允许符合条件的治疗/支付/运营及其他法定使用披露，不是所有处理都须个人授权；(b)最小必要有治疗提供者间披露/请求、向本人、有效授权、依法必须等例外。机构权限、安全和合法渠道仍须核，脱敏或受控系统本身不授处理权；其他法域另核。",
+                "market": "美国",
+                "name": "45CFR164.502及HHS实体/最小必要说明",
+                "period": "当前公开原文",
+                "publisher": "HHS / eCFR",
+                "scope": "contextual",
+                "url": "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-C/part-164/subpart-E/section-164.502"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取适用正文；用途及限制见limitation"
+                ],
+                "evidence_type": "official regulatory guidance",
+                "id": "chw-review-hhs-entities",
+                "limitation": "美国HIPAA先核是否为covered entity或business associate及是否PHI，不能把所有社区机构/家庭信息一律等同HIPAA。45CFR164.502允许符合条件的治疗/支付/运营及其他法定使用披露，不是所有处理都须个人授权；(b)最小必要有治疗提供者间披露/请求、向本人、有效授权、依法必须等例外。机构权限、安全和合法渠道仍须核，脱敏或受控系统本身不授处理权；其他法域另核。",
+                "market": "美国",
+                "name": "HHS Covered Entities and Business Associates",
+                "period": "当前公开原文",
+                "publisher": "HHS / eCFR",
+                "scope": "contextual",
+                "url": "https://www.hhs.gov/hipaa/for-professionals/covered-entities/index.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取适用正文；用途及限制见limitation"
+                ],
+                "evidence_type": "official regulatory guidance",
+                "id": "chw-review-hhs-min",
+                "limitation": "美国HIPAA先核是否为covered entity或business associate及是否PHI，不能把所有社区机构/家庭信息一律等同HIPAA。45CFR164.502允许符合条件的治疗/支付/运营及其他法定使用披露，不是所有处理都须个人授权；(b)最小必要有治疗提供者间披露/请求、向本人、有效授权、依法必须等例外。机构权限、安全和合法渠道仍须核，脱敏或受控系统本身不授处理权；其他法域另核。",
+                "market": "美国",
+                "name": "HHS Minimum Necessary Requirement",
+                "period": "当前公开原文",
+                "publisher": "HHS / eCFR",
+                "scope": "contextual",
+                "url": "https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/minimum-necessary-requirement/index.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取适用正文；用途及限制见limitation"
+                ],
+                "evidence_type": "official state reporting guidance",
+                "id": "chw-review-ca-report",
+                "limitation": "报告义务依法域、人员身份、服务对象和触发条件核。加州CDSS现行老人/依赖成人报告页说明15630所列承担照护/监护等身份及直接法定报告；不能仅凭职业名套给所有CHW。不得把主管同意或AI核定设为履行已适用法定义务的前置条件；及时向依法指定渠道报告并留依据，督导支持不能延误应履行的报告。儿童报告现期完整法条本轮未取得，不在此规定统一时限或渠道。 法条站403；未核儿童现期全文，不把2005表单当现期全文。",
+                "market": "美国",
+                "name": "California CDSS Information for Mandated Reporters",
+                "period": "当前公开原文",
+                "publisher": "California CDSS",
+                "scope": "contextual",
+                "url": "https://www.cdss.ca.gov/inforesources/cdss-programs/adult-protective-services/information-for-mandated-reporters"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取适用正文；用途及限制见limitation"
+                ],
+                "evidence_type": "occupational safety research bulletin",
+                "id": "chw-review-niosh",
+                "limitation": "实际读家访相似场景预防/通信同行/训练/退出路径及雇主责任；非CHW单独发生率或全部岗位程序。",
+                "market": "美国",
+                "name": "NIOSH2021家庭医疗工作场所暴力资料",
+                "period": "2021-09-02",
+                "publisher": "CDC/NIOSH",
+                "scope": "contextual",
+                "url": "https://www.cdc.gov/niosh/bulletin/2021/hhc-violence.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取职业主要定义；健身协调员另核需求调查/个体支持/组织筛查任务"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "chw-review-neighbor-0",
+                "limitation": "支持主要对象比较，不证明任务完全排除、统一转岗成本/资格互认。",
+                "market": "美国",
+                "name": "O*NET邻岗定义 11-9151.00",
+                "period": "Updated2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/11-9151.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取职业主要定义；健身协调员另核需求调查/个体支持/组织筛查任务"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "chw-review-neighbor-1",
+                "limitation": "支持主要对象比较，不证明任务完全排除、统一转岗成本/资格互认。",
+                "market": "美国",
+                "name": "O*NET邻岗定义 11-9179.01",
+                "period": "Updated2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/11-9179.01"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取职业主要定义；健身协调员另核需求调查/个体支持/组织筛查任务"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "chw-review-neighbor-2",
+                "limitation": "支持主要对象比较，不证明任务完全排除、统一转岗成本/资格互认。",
+                "market": "美国",
+                "name": "O*NET邻岗定义 21-1011.00",
+                "period": "Updated2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/21-1011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取职业主要定义；健身协调员另核需求调查/个体支持/组织筛查任务"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "chw-review-neighbor-3",
+                "limitation": "支持主要对象比较，不证明任务完全排除、统一转岗成本/资格互认。",
+                "market": "美国",
+                "name": "O*NET邻岗定义 21-1012.00",
+                "period": "Updated2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/21-1012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取职业主要定义；健身协调员另核需求调查/个体支持/组织筛查任务"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "chw-review-neighbor-4",
+                "limitation": "支持主要对象比较，不证明任务完全排除、统一转岗成本/资格互认。",
+                "market": "美国",
+                "name": "O*NET邻岗定义 21-1014.00",
+                "period": "Updated2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/21-1014.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取职业主要定义；健身协调员另核需求调查/个体支持/组织筛查任务"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "chw-review-neighbor-5",
+                "limitation": "支持主要对象比较，不证明任务完全排除、统一转岗成本/资格互认。",
+                "market": "美国",
+                "name": "O*NET邻岗定义 21-1093.00",
+                "period": "Updated2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/21-1093.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取职业主要定义；健身协调员另核需求调查/个体支持/组织筛查任务"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "chw-review-neighbor-6",
+                "limitation": "支持主要对象比较，不证明任务完全排除、统一转岗成本/资格互认。",
+                "market": "美国",
+                "name": "O*NET邻岗定义 21-1015.00",
+                "period": "Updated2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/21-1015.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取职业主要定义；健身协调员另核需求调查/个体支持/组织筛查任务"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "chw-review-neighbor-7",
+                "limitation": "支持主要对象比较，不证明任务完全排除、统一转岗成本/资格互认。",
+                "market": "美国",
+                "name": "O*NET邻岗定义 21-1022.00",
+                "period": "Updated2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/21-1022.00"
               }
             ]
           },
@@ -32224,7 +33149,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "任务暴露研究",
+            "类型": "AI暴露指标方法与限制（研究简报）",
             "适用范围": {
               "$item": "community-health-workers.ai-impact.ai-impact-table.24",
               "block": "ai-impact",
@@ -32671,7 +33596,7 @@
               "entry": "link-16",
               "field": "url"
             },
-            "问题": "到 2034 年这个职业会变少吗？"
+            "问题": "到2035年这个职业会变少吗？"
           },
           {
             "回答": {
@@ -33255,6 +34180,18 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$link": "community-health-workers.path.career-path-block.10",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "repair-ooh",
+              "field": "url"
+            },
+            "id": "repair-ooh",
+            "label": "BLS社区健康工作者典型入行",
+            "scope": "典型高中/同等学历及短期在岗训练；部分州要求认证，非统一资格"
           }
         ],
         "tracks": [
@@ -34015,8 +34952,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details",
-              "mynextmove"
+              "chw-review-niosh",
+              "editorial"
             ],
             "id": "fieldwork-safety",
             "mitigation": {
@@ -34047,8 +34984,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details",
-              "mynextmove"
+              "chw-review-ca-report",
+              "chw-review-hipaa",
+              "editorial"
             ],
             "id": "mandated-reporting-confidentiality",
             "mitigation": {
@@ -34079,8 +35017,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-context",
-              "mynextmove"
+              "chw-review-onet-details",
+              "chw-review-ooh",
+              "editorial"
             ],
             "id": "scope-of-practice",
             "mitigation": {
@@ -34111,8 +35050,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-context",
-              "onet-details"
+              "chw-review-onet-details",
+              "editorial"
             ],
             "id": "referral-breakdown",
             "mitigation": {
@@ -34143,8 +35082,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details",
-              "onet-context"
+              "chw-review-hipaa",
+              "chw-review-hhs-entities",
+              "editorial"
             ],
             "id": "record-and-privacy",
             "mitigation": {
@@ -34175,8 +35115,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details",
-              "mynextmove"
+              "editorial"
             ],
             "id": "emotional-load-and-boundary",
             "mitigation": {
@@ -34662,10 +35601,10 @@
             "type": "prose"
           },
           "fact_refs": [
-            "cn-industry-science-tech-2024",
-            "cn-industry-manufacturing-2024",
-            "cn-professional-technical-2024",
-            "cn-urban-nonprivate-2024"
+            "chw-review-cn-industry-science-tech-2024",
+            "chw-review-cn-industry-manufacturing-2024",
+            "chw-review-cn-professional-technical-2024",
+            "chw-review-cn-urban-nonprivate-2024"
           ],
           "sources_note": {
             "$item": "community-health-workers.china-salary.career-snapshot-primary-locale.57",
@@ -34738,7 +35677,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-2025",
+            "fact_ref": "chw-review-us-wage-2025",
             "指标": "薪资 · 中位数",
             "数值": {
               "$item": "community-health-workers.us-salary.career-snapshot-secondary-locale.13",
@@ -34801,7 +35740,7 @@
             }
           },
           {
-            "fact_ref": "us-growth-2025-2035",
+            "fact_ref": "chw-review-us-growth-2025-2035",
             "指标": "就业 · 增长率",
             "数值": {
               "$item": "community-health-workers.us-salary.career-snapshot-secondary-locale.21",
@@ -34817,7 +35756,7 @@
             }
           },
           {
-            "fact_ref": "us-openings-2025-2035",
+            "fact_ref": "chw-review-us-openings-2025-2035",
             "指标": "就业 · 年均职位空缺",
             "数值": {
               "$item": "community-health-workers.us-salary.career-snapshot-secondary-locale.23",
@@ -34899,12 +35838,12 @@
         "heading": "美国社区健康工作者工资与就业数据？",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
-          "$fact": "us-wage-2025",
+          "$fact": "chw-review-us-wage-2025",
           "field": "period"
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "chw-review-us-industry-wage-aerospace-mfg-2025",
             "industry": {
               "$item": "community-health-workers.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -34925,7 +35864,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "chw-review-us-industry-wage-engineering-services-2025",
             "industry": {
               "$item": "community-health-workers.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -34946,7 +35885,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "chw-review-us-industry-wage-federal-2025",
             "industry": {
               "$item": "community-health-workers.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -34967,7 +35906,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "chw-review-us-industry-wage-rd-2025",
             "industry": {
               "$item": "community-health-workers.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -35036,7 +35975,7 @@
         },
         "outlook_heading": "美国就业前景",
         "outlook_period": {
-          "$fact": "us-growth-2025-2035",
+          "$fact": "chw-review-us-growth-2025-2035",
           "field": "period"
         },
         "wage_column_labels": [
@@ -35048,7 +35987,7 @@
         "wage_heading": "美国工资分布",
         "wage_tiers": [
           {
-            "equivalent": "官方折算，非个人月收入",
+            "equivalent": "全国统计分位，非个人月收入",
             "interpretation": {
               "$item": "community-health-workers.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
@@ -35062,7 +36001,7 @@
             }
           },
           {
-            "equivalent": "非个人月收入",
+            "equivalent": "全国统计分位，非个人月收入",
             "interpretation": {
               "$item": "community-health-workers.us-salary.career-snapshot-secondary-locale.52",
               "block": "us-salary",
@@ -35071,12 +36010,12 @@
             },
             "label": "第 50 百分位",
             "value": {
-              "$fact": "us-wage-2025",
+              "$fact": "chw-review-us-wage-2025",
               "field": "display_value"
             }
           },
           {
-            "equivalent": "官方折算，非个人实发工资",
+            "equivalent": "全国统计分位，非个人月收入",
             "interpretation": {
               "$item": "community-health-workers.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
@@ -35677,7 +36616,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 页面显示的 BLS 工资（2025 年）与就业预测（2024—2034 年，21-1094.00 精确职业口径）",
+            "label": "O*NET 页面显示的 BLS 工资（2025 年）与就业预测（2025—2035 年，21-1094.00 精确职业口径）",
             "secondary_value": null,
             "value": {
               "$item": "community-health-workers.profile.onet-structured-fields-block.2",
@@ -35688,7 +36627,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中国大陆模块级工资不可得与统计口径边界",
+            "label": "中国精确职业工资缺口及匹配行业宽背景",
             "secondary_value": null,
             "value": {
               "$item": "community-health-workers.profile.onet-structured-fields-block.3",
@@ -36988,6 +37927,174 @@
         "source_refs": [
           "onet-localwages"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "51,850美元/年（2025中位数）",
+        "fact_id": "chw-review-us-wage-2025",
+        "market": "美国",
+        "measure": "全国工资50分位，非算术均值",
+        "occupation_scope": "社区健康工作者",
+        "period": "2025",
+        "source_refs": [
+          "chw-review-bls-pay"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约64,700人（2025）",
+        "fact_id": "chw-review-us-employment-2025",
+        "market": "美国",
+        "measure": "BLS精确职业全国预测",
+        "occupation_scope": "社区健康工作者",
+        "period": "2025—2035",
+        "source_refs": [
+          "chw-review-bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约72,900人（2035预测）",
+        "fact_id": "chw-review-us-employment-2035",
+        "market": "美国",
+        "measure": "BLS精确职业全国预测",
+        "occupation_scope": "社区健康工作者",
+        "period": "2025—2035",
+        "source_refs": [
+          "chw-review-bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "增长12.7%（2025—2035；OOH舍入13%）",
+        "fact_id": "chw-review-us-growth-2025-2035",
+        "market": "美国",
+        "measure": "BLS精确职业全国预测",
+        "occupation_scope": "社区健康工作者",
+        "period": "2025—2035",
+        "source_refs": [
+          "chw-review-bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "净增约8,200人（2025—2035）",
+        "fact_id": "chw-review-us-change-2025-2035",
+        "market": "美国",
+        "measure": "BLS精确职业全国预测",
+        "occupation_scope": "社区健康工作者",
+        "period": "2025—2035",
+        "source_refs": [
+          "chw-review-bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均约7,000个空缺（2025—2035）",
+        "fact_id": "chw-review-us-openings-2025-2035",
+        "market": "美国",
+        "measure": "BLS精确职业全国预测",
+        "occupation_scope": "社区健康工作者",
+        "period": "2025—2035",
+        "source_refs": [
+          "chw-review-bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "146,266元/人/年（2025非私营卫生和社会工作行业税前年均）",
+        "fact_id": "chw-review-cn-industry-science-tech-2024",
+        "market": "中国大陆",
+        "measure": "行业背景/覆盖/职业缺口，非精确职业工资",
+        "occupation_scope": "社区健康工作者",
+        "period": "2025数据（2026-05-15发布）",
+        "source_refs": [
+          "chw-review-nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：本轮未建立中国精确职业工资映射",
+        "fact_id": "chw-review-cn-industry-manufacturing-2024",
+        "market": "中国大陆",
+        "measure": "行业背景/覆盖/职业缺口，非精确职业工资",
+        "occupation_scope": "社区健康工作者",
+        "period": "2025数据（2026-05-15发布）",
+        "source_refs": [
+          "chw-review-nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "城镇5人及以上法人单位就业人员；兼职/项目制/民办名称不自动排除",
+        "fact_id": "chw-review-cn-professional-technical-2024",
+        "market": "中国大陆",
+        "measure": "行业背景/覆盖/职业缺口，非精确职业工资",
+        "occupation_scope": "社区健康工作者",
+        "period": "2025数据（2026-05-15发布）",
+        "source_refs": [
+          "chw-review-nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "75,631元/人/年（2025私营卫生和社会工作行业税前年均）",
+        "fact_id": "chw-review-cn-urban-nonprivate-2024",
+        "market": "中国大陆",
+        "measure": "行业背景/覆盖/职业缺口，非精确职业工资",
+        "occupation_scope": "社区健康工作者",
+        "period": "2025数据（2026-05-15发布）",
+        "source_refs": [
+          "chw-review-nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "58,290美元/年（2025医院（州/地方/私营）内本职业中位数）",
+        "fact_id": "chw-review-us-industry-wage-aerospace-mfg-2025",
+        "market": "美国",
+        "measure": "本职业行业年工资中位数，非全行业均值",
+        "occupation_scope": "社区健康工作者",
+        "period": "2025",
+        "source_refs": [
+          "chw-review-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "56,390美元/年（2025地方政府（不含学校/医院）内本职业中位数）",
+        "fact_id": "chw-review-us-industry-wage-engineering-services-2025",
+        "market": "美国",
+        "measure": "本职业行业年工资中位数，非全行业均值",
+        "occupation_scope": "社区健康工作者",
+        "period": "2025",
+        "source_refs": [
+          "chw-review-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "50,730美元/年（2025社会救助内本职业中位数）",
+        "fact_id": "chw-review-us-industry-wage-federal-2025",
+        "market": "美国",
+        "measure": "本职业行业年工资中位数，非全行业均值",
+        "occupation_scope": "社区健康工作者",
+        "period": "2025",
+        "source_refs": [
+          "chw-review-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "50,020美元/年（2025宗教、资助、公民、专业及类似组织内本职业中位数）",
+        "fact_id": "chw-review-us-industry-wage-rd-2025",
+        "market": "美国",
+        "measure": "本职业行业年工资中位数，非全行业均值",
+        "occupation_scope": "社区健康工作者",
+        "period": "2025",
+        "source_refs": [
+          "chw-review-ooh"
+        ]
       }
     ]
   },
@@ -36996,7 +38103,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "RIASEC · S",
@@ -37047,7 +38154,7 @@
       "text": "社区健康工作者"
     }
   },
-  "source_content_sha256": "7cf54cb6955c063aad34e321a1eb2ac23bb57ea96a0f92f1580e53d4d6e1b713",
+  "source_content_sha256": "77cc0fed96ec48c2fb3813d2a9dd06f9f66569254e1a586aac1488153186916b",
   "subject": {
     "canonical_slug": "community-health-workers",
     "name": "社区健康工作者",

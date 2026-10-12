@@ -35,6 +35,39 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:r5-current-china-jiaojiang-featured-daily-2026": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-employment": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-high": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-identity": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-amusement": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-education": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-theater": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-low": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-median": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-openings": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -22767,12 +22800,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "环境与节奏：以室内受控环境与屏幕与电话为主并与多方持续接触；每天电话交谈 100%、每天面对面讨论 98%、与他人持续接触 92%；团队协作「极其重要」69%，决策自由度「很大」62%，精确或准确「极其重要」67%，每天面对严格期限 76%，每天作出影响他人的决定 91%，每天使用电子邮件 83%，持续坐着 59%，工作时间「规律（固定班次）」61%，与外部客户或公众打交道「极其重要」34%。"
+              "O*NET57情境：电话每天100%、面对面每天98%、持续接触92%、每天决策91%、协调81极重要/17非常、团队69极重要/31非常、准确67极重要/23非常、邮件每天83%、时间压力每天76%、不友好人每天69%、持续坐59%、每周超过40小时75%、规律61%、室内受控每天56%、他人安全非常高责任66%。不是每人固定班次、纯室内或一律夜班；决定错误54%回答完全不严重、19%极严重，不能一律灾难性。自动化38中等/24略有/25没有不等GenAI采用率。调查不是个体能力门槛或事故概率。"
             ]
           },
           "id": "actors.profile.work-context-block.8",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -22781,12 +22815,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "调度员的工作可分成三类相连但独立的工作面。第一类是受理与准备：接收与准备工作单，核对客户要求与规格与时间与地点与优先级，确认所需设备与车辆与材料与人员的类型或数量，并与客户或主管人员商议问题与请求。第二类是排班与派工与跟进：按可用资源编制日常与运行与工作日程，用电话或无线电把工作单与任务与变更转达给班组与司机与现场人员并确认接收，监控人员与设备的位置与使用情况以协调服务与日程，并就施工与事故与拥堵与天气等交通问题向人员提供建议，必要时安排维修以恢复服务与日程。第三类是记录与统计与交接：记录并维护客户请求与已完成工作或服务与费用与开支与库存或其他调度信息，订购与发放供应品或设备，编制有关工作进度的统计与报告，并把待办与异常交接给下一班。三类工作面都在客户要求、承运人与雇主制度与法规与安全要求内推进。"
+              "调度员的工作可分成三类相连但独立的工作面。第一类是受理与准备：接收与准备工作单，核对客户要求与规格与时间与地点与优先级，确认所需设备与车辆与材料与人员的类型或数量，并与客户或主管人员商议问题与请求。第二类是排班与派工与跟进：按可用资源编制日常与运行与工作日程，用电话或无线电把工作单与任务与变更转达给班组与司机与现场人员并确认接收，监控人员与设备的位置与使用情况以协调服务与日程，并就施工与事故与拥堵与天气等交通问题向人员提供建议，必要时安排维修以恢复服务与日程。第三类是记录与统计与交接：记录并维护客户请求与已完成工作或服务与费用与开支与库存或其他调度信息，部分岗位还可能在授权下订购与发放供应品或设备（补充任务，非全部岗位），编制有关工作进度的统计与报告，并把待办与异常交接给下一班。三类工作面都在客户要求、承运人与雇主制度与法规与安全要求内推进。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.answer",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -22893,12 +22927,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "记录并维护客户请求与已完成工作与费用与开支与库存等调度信息 → 订购与发放供应品或设备 → 编制工作进度统计与报告 → 把待办与异常交接给下一班"
+              "主要记录/统计/交接；订购发放供应品为补充任务，不是所有岗位必做。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.shared.value",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -22921,12 +22956,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本表把本页职业与相邻岗位按核心目的、主要对象与依据、核心过程、主要产出、责任主体、协作与督导、结论边界七项逐一对照：本页职业（O*NET-SOC 43-5032.00）是运营调度岗位，负责受理与准备工作单、按资源排班与派工与转达、监控位置与使用、记录与维护与安排维修；公共安全通信调度员（43-5031.00）负责受理报警与派警与派消防与派急救，属紧急通信与应急指挥范畴并另有训练与纪律要求；客户服务代表以受理咨询与投诉与工单登记为主；重型与半挂卡车司机承担驾驶与车辆与货物安全责任；运输仓储与配送经理负责经营与网络与成本与合规。比较时要以岗位职责、承运人与雇主授权与所在法域法规逐项核对，不能按岗位名称互换，也不能把运营调度职责读成紧急调度权或经营与安全主体责任或驾驶职责。"
+              "O*NET43-5032为运输材料/货物/乘客，或营业地点外安装、服务及紧急维修安排调度人员、班组、设备或服务车辆。12任务中10Core/2Supplemental；订购发放用品/设备、监督指定辖区通信为补充，不当所有岗位普遍必做。受理工作单、资源日程、转达信息、位置监控、记录费用库存和安排维修为主要任务；安排维修不等执行维修，协调人员不等经理。不同岗位可有任务交叉，名称不自动授驾驶、经营、安全管理或紧急调度权。 客服主 routine/basic inquiry和投诉；紧急调度、驾驶和管理须补对应目标任务/资格，不自动互认。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "agent",
+            "dancing",
+            "enrichment",
+            "art"
           ],
           "type": "prose"
         },
@@ -23313,12 +23353,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按承运人与雇主制度与法规要求执行：驾驶与值守与工时与从业资格须符合法规与承运人规定，涉及航空运行控制的岗位须由持有飞行签派员执照并由运营人指定的人员履行；事故与故障与安全异常须按规定上报，不得隐瞒或延迟。具体合规要求以所在法域法规与承运人制度为准。"
+              "依法行使中国飞行签派执照权利的人员须核执照、运营人指定及适用公共航空运行规章条件；涉及航空辅助协调不一律等持证签派。其他驾驶、工时和异常报告按具体角色法规及真实单位制度核，本轮未实采全部事故上报制度。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.04.answer",
           "source_refs": [
-            "onet"
+            "r5-ccar-current",
+            "r5-road-current"
           ],
           "type": "prose"
         },
@@ -23439,12 +23480,13 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "责任边界：本职业承担派工与排班与转达与记录与调整的执行责任；不凭印象派单或跳过记录、不超出授权承诺时间与价格或服务结果、不安排在不符合从业资格与工时与安全要求的人员或车辆上派工、不隐瞒或延迟上报安全异常，事故与越权事项立即上报。"
+              "O*NET43-5032为运输材料/货物/乘客，或营业地点外安装、服务及紧急维修安排调度人员、班组、设备或服务车辆。12任务中10Core/2Supplemental；订购发放用品/设备、监督指定辖区通信为补充，不当所有岗位普遍必做。受理工作单、资源日程、转达信息、位置监控、记录费用库存和安排维修为主要任务；安排维修不等执行维修，协调人员不等经理。不同岗位可有任务交叉，名称不自动授驾驶、经营、安全管理或紧急调度权。 资格和异常处置按真实岗位授权与制度核。"
             ]
           },
           "id": "actors.display.responsibilities_block.06",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23467,12 +23509,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "以室内受控环境与屏幕与电话为主并与多方持续接触：每天电话交谈 100%，每天面对面讨论 98%，与他人持续接触 92%；团队协作「极其重要」69%（另 31% 非常重要），决策自由度「很大」62%，精确或准确「极其重要」67%，每天面对严格期限 76%，每天作出影响他人或资源或组织声誉的决定 91%，每天使用电子邮件 83%，持续坐着 59%，工作时间「规律（固定班次）」61%，与外部客户或公众打交道「极其重要」34%。"
+              "O*NET57情境：电话每天100%、面对面每天98%、持续接触92%、每天决策91%、协调81极重要/17非常、团队69极重要/31非常、准确67极重要/23非常、邮件每天83%、时间压力每天76%、不友好人每天69%、持续坐59%、每周超过40小时75%、规律61%、室内受控每天56%、他人安全非常高责任66%。不是每人固定班次、纯室内或一律夜班；决定错误54%回答完全不严重、19%极严重，不能一律灾难性。自动化38中等/24略有/25没有不等GenAI采用率。调查不是个体能力门槛或事故概率。"
             ]
           },
           "id": "actors.display.work_context_block.summary",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23523,12 +23566,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作时间「规律（固定班次）」61%，但常见轮班与周末节假日值守与旺季加班；节奏由当日工单量与服务时限与现场变化决定。"
+              "O*NET57情境：电话每天100%、面对面每天98%、持续接触92%、每天决策91%、协调81极重要/17非常、团队69极重要/31非常、准确67极重要/23非常、邮件每天83%、时间压力每天76%、不友好人每天69%、持续坐59%、每周超过40小时75%、规律61%、室内受控每天56%、他人安全非常高责任66%。不是每人固定班次、纯室内或一律夜班；决定错误54%回答完全不严重、19%极严重，不能一律灾难性。自动化38中等/24略有/25没有不等GenAI采用率。调查不是个体能力门槛或事故概率。"
             ]
           },
           "id": "actors.display.work_context_block.schedule",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23551,12 +23595,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "复核方式含班前交接与资源核对、班中派工与确认接收抽查、异常与维修跟踪、班末记录与费用与库存核对与交接；事故与安全异常按规定上报。"
+              "编辑建议核班前资源/授权、确认接收、异常上报和交接；实际机构规程未采，不当具体企业制度。"
             ]
           },
           "id": "actors.display.work_context_block.review",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23593,12 +23638,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 43-5032.00：2024 年就业约 218,700 人，2024—2034 年预测为「下降（-1% 或更低）」，预计空缺 18,500；准备层级 Job Zone 1-2（SVP 低于 6.0），兴趣代码 CR。"
+              "BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。 BLS典型入门高中/同等学历、相关经验None、中期在岗训练；不是所有岗位统一门槛/学制。O*NET JZ1—2/SVP<6和几天到一年是准备组说明，非本职业全部培训时长。47%高中/同等、26%部分大学无学位、8%副学士是新入职所需学历受访反馈，不是47%岗位/雇主或员工学历。美国航空等具体专业路线及各州资格未逐核，不称全国免照。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.onet",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -23607,12 +23654,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "工资为 BLS 2025 年工资数据口径：中位 50,340 美元/年（24.20 美元/时）；年度分位 36,030／42,750／50,340／62,450／78,140 美元；小时分位 17.32／20.56／24.20／30.02／37.57 美元。"
+              "美国43-5032.00，2025全国10/25/50/75/90分位：年36,030/42,750/50,340/62,450/78,140美元；时17.32/20.56/24.20/30.02/37.57美元。OEWS为直时税前受雇工资，含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不笼统排除所有补贴、绩效或合同雇员。分位非起薪、年限、上限或到手收入，官方年度工资不以个人固定工时另造。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
           "source_refs": [
-            "onet"
+            "bls",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -23621,12 +23669,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "主要行业为运输与仓储与物流与航空与铁路与矿山与公共事业与网约车平台等运营场景；常见岗位含飞机签派员、城市调度员、矿山调度员、辅助交通调度员、校车调度员、出租车调度员、列车调度员、卡车调度员等，多为按小时计酬的班次岗位。"
+              "O*NET2025主要行业：运输仓储41%、行政支持服务10%，为本职业就业行业份额非工资份额。未实采全国多数按小时计酬/轮班/补贴结构，具体需核公告合同。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23635,12 +23684,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆相关要求按行业区分：航空运行控制须由持有飞行签派员执照并由运营人指定的人员履行，依据《民用航空飞行签派员执照和训练机构管理规则》（CCAR-65 部，2022 年）；道路运输经营与从业人员从业资格与网约车平台经营与驾驶员条件分别按《中华人民共和国道路运输条例》《道路运输从业人员管理规定》《网络预约出租汽车经营服务管理暂行办法》执行；安全生产按《中华人民共和国安全生产法》。本条按法规名称与一般要求引用，未逐条核对条文编号。"
+              "中国2022交通运输部23号CCAR-65FS-R3（2022-10-01施行）：65.7申请含21周岁、健康、国家承认本科及以上学历、中文能力与培训考试条件；65.13至少1000课时，满足指定既有航空执照/相应经历等分支可至少500课时，不是200或800。65.17理论/实践80分，理论36日历月有效；初次实践考前6个月内在合格签派员监视下大型公共运输航空单位实习至少90工作日。65.23持证人可被运营人指定飞行运行控制监督，公共航空运输另核其运行规章；不能据此把所有航空运行控制辅助岗位一律作签派持证岗位。65.25不符合指定/训练/健康等不得行使权利；65.29持续有效不等免检查，65.31取得执照后36日历月内至少一次定期检查并合格。原12个月30天工作条件本轮未核其他运行规章，不作为65部条款。 2026交通运输部4号令修订道路运输从业人员管理规定，2026-03-20施行。第2/6条资格考试对应经营性道路客货驾驶员、危险货物驾驶/装卸管理/押运等特定人员，不能给普通调度员统一套驾驶员证；52条4500千克及以下普通货运车辆驾驶人员不适用。经营主体许可、网约车平台/驾驶员和一般安全生产其他法规条款本轮未逐核，不当已核个人调度资格。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
           "source_refs": [
-            "onet"
+            "r5-ccar-current",
+            "r5-road-current"
           ],
           "type": "prose"
         },
@@ -23649,12 +23699,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "本页不使用演员工会或影视行业口径；来源与使用边界见来源登记。"
+              "O*NET自身20软件类含排班、GPS、计算机辅助调度路由、铁路系统及航空飞行计划等，不等生成式AI部署。Hot2025关联本职业全部唯一美国招聘帖：Office17%、Excel12%、Outlook10%、Word5%、PowerPoint3%、SAP1%、Access/Windows各<1%，Kronos比例Not available非0；不证明岗位工具采用率或AI效益。未核本职业GenAI功能、采用、节时/减错、替代、工资/就业因果；ILO2025任务暴露研究未核本细类ISCO映射/分数，NIST AI RMF1.0自愿框架不授调度/法律权限。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
           "source_refs": [
-            "onet"
+            "r2-ai",
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -23663,12 +23715,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页精确对应美国 O*NET 43-5032.00 Dispatchers, Except Police, Fire, and Ambulance：为材料与货物与乘客的运输，或为营业场所外进行的正常安装与服务与紧急维修，安排和调度工人与工作班组与设备或服务车辆；使用无线电或电话或计算机传送任务分配，编制日常工作与运行日程，接收与准备工作单，转达工作单与消息与信息，监控人员与设备的位置与使用，记录并维护客户请求与已完成工作与费用与开支与库存等调度信息，安排必要的维修，并就交通与施工与天气等问题向人员提供建议；属运营调度岗位，不含警察与消防与救护车的紧急报警受理与应急指挥调度，也不承担运输经营许可与安全主体责任与驾驶与维修作业。"
+              "O*NET43-5032为运输材料/货物/乘客，或营业地点外安装、服务及紧急维修安排调度人员、班组、设备或服务车辆。12任务中10Core/2Supplemental；订购发放用品/设备、监督指定辖区通信为补充，不当所有岗位普遍必做。受理工作单、资源日程、转达信息、位置监控、记录费用库存和安排维修为主要任务；安排维修不等执行维修，协调人员不等经理。不同岗位可有任务交叉，名称不自动授驾驶、经营、安全管理或紧急调度权。"
             ]
           },
           "id": "actors.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         }
@@ -24136,13 +24189,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以下为基于职业任务与工作情境的有限编辑推演，并非该职业的实际部署证据：AI 与信息系统在运营调度里主要辅助排班与派工建议、路线与到达时间预估、工单信息整理与识别、监控告警与记录与统计整理。"
+              "O*NET自身20软件类含排班、GPS、计算机辅助调度路由、铁路系统及航空飞行计划等，不等生成式AI部署。Hot2025关联本职业全部唯一美国招聘帖：Office17%、Excel12%、Outlook10%、Word5%、PowerPoint3%、SAP1%、Access/Windows各<1%，Kronos比例Not available非0；不证明岗位工具采用率或AI效益。未核本职业GenAI功能、采用、节时/减错、替代、工资/就业因果；ILO2025任务暴露研究未核本细类ISCO映射/分数，NIST AI RMF1.0自愿框架不授调度/法律权限。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24151,13 +24203,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采用取决于承运人与雇主的系统集成与授权规则、数据准确性与时效、以及是否完成培训与验证，尤其在涉及安全与合规环节时。"
+              "编辑采用核查：真实系统兼容、授权规则、数据及时可靠及用途训练验证是否满足？本轮没有代表性采用机制调查，不称这些因素已决定采用。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current",
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24166,13 +24218,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "派工与路径建议可提高效率，但优先级与例外与现场约束仍须由调度员与主管判断。"
+              "编辑拟试排班建议，是否提高效率须实测；优先级/资格/例外由授权人员复核。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.3",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24181,13 +24234,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "到达时间与资源预估可辅助沟通，但对外承诺时间与价格仍须在授权范围内由人确认。"
+              "条件试用：若获准系统确有验证过的到达时间或资源预估功能，可研究沟通用途；本轮未核逐产品能力。报价与承诺依实际授权，模型输出不自带权限。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24196,28 +24249,30 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工单信息整理与识别可减少录入与分派差错，但事故与故障与安全异常的上报与处置不能交给系统。"
+              "编辑拟试工单整理，减录入差错未实证；安全异常按真实制度升级，模型不能自动放行。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.5",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "突发与临时变更（车辆故障、道路封闭、天气与客户临时改单）需要现场判断与人际协调，难以完全交给系统。"
+              "编辑异常情景：故障、道路封闭、天气或改单需按真实流程处理；系统能否辅助及替代程度未核，合法责任按人员和系统授权分工，不以人责推技术不可替代。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24226,13 +24281,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "客户与司机与承运人与定位数据属于敏感信息，只能在批准的系统内按最小必要原则处理并留痕。"
+              "个人信息保护法适用于可识别自然人信息；个人行踪轨迹等可属敏感个人信息，客户/司机/承运人、位置及费用数据不能不分主体与内容一律称敏感。按合法依据、明确目的、最小必要、告知和安全处理；敏感信息另核充分必要、严格保护及适用单独同意/影响评估。机构批准账号不等允许上传外部AI，去标识非匿名化。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -24256,13 +24310,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "国际劳工组织等研究把「任务暴露」与「实际采用、岗位增减」分开；本页没有本职业的采用率、裁员率或因果就业证据，这些数字保持未知，须以具体承运人与岗位验证。"
+              "O*NET自身20软件类含排班、GPS、计算机辅助调度路由、铁路系统及航空飞行计划等，不等生成式AI部署。Hot2025关联本职业全部唯一美国招聘帖：Office17%、Excel12%、Outlook10%、Word5%、PowerPoint3%、SAP1%、Access/Windows各<1%，Kronos比例Not available非0；不证明岗位工具采用率或AI效益。未核本职业GenAI功能、采用、节时/减错、替代、工资/就业因果；ILO2025任务暴露研究未核本细类ISCO映射/分数，NIST AI RMF1.0自愿框架不授调度/法律权限。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.9",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24286,13 +24339,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 可辅助排班与派工建议、路线与到达时间预估、工单信息整理与监控告警，但不能替代优先级与例外判断、授权内的承诺、安全异常上报与处置以及调度责任。"
+              "编辑试用方向：非操作性工单整理/交接草稿；派工路由、ETA、告警能力要核具体系统，普通算法与GenAI分开。O*NET自身20软件类含排班、GPS、计算机辅助调度路由、铁路系统及航空飞行计划等，不等生成式AI部署。Hot2025关联本职业全部唯一美国招聘帖：Office17%、Excel12%、Outlook10%、Word5%、PowerPoint3%、SAP1%、Access/Windows各<1%，Kronos比例Not available非0；不证明岗位工具采用率或AI效益。未核本职业GenAI功能、采用、节时/减错、替代、工资/就业因果；ILO2025任务暴露研究未核本细类ISCO映射/分数，NIST AI RMF1.0自愿框架不授调度/法律权限。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24316,13 +24372,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业档案（任务与工作情境）"
+              "2025招聘软件关键词"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.1.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24331,13 +24386,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅适用于美国 43-5032.00 的任务与情境描述，不映射中国岗位或承运人制度。"
+              "只支持所述文档范围；无雇主部署与本职业GenAI效果实采。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.1.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24346,13 +24400,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS OEWS 工资与就业统计"
+              "ILO2025任务暴露"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24361,13 +24414,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅适用于所列职业、地区与期间，不提供自动化或替代结论。"
+              "只支持所述文档范围；无雇主部署与本职业GenAI效果实采。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24376,13 +24428,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 治理与风险管理来源"
+              "O*NET任务情境"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24391,13 +24443,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "治理原则供参考：透明、隐私、人工监督与留痕。"
+              "O*NET43-5032为运输材料/货物/乘客，或营业地点外安装、服务及紧急维修安排调度人员、班组、设备或服务车辆。12任务中10Core/2Supplemental；订购发放用品/设备、监督指定辖区通信为补充，不当所有岗位普遍必做。受理工作单、资源日程、转达信息、位置监控、记录费用库存和安排维修为主要任务；安排维修不等执行维修，协调人员不等经理。不同岗位可有任务交叉，名称不自动授驾驶、经营、安全管理或紧急调度权。 O*NET57情境：电话每天100%、面对面每天98%、持续接触92%、每天决策91%、协调81极重要/17非常、团队69极重要/31非常、准确67极重要/23非常、邮件每天83%、时间压力每天76%、不友好人每天69%、持续坐59%、每周超过40小时75%、规律61%、室内受控每天56%、他人安全非常高责任66%。不是每人固定班次、纯室内或一律夜班；决定错误54%回答完全不严重、19%极严重，不能一律灾难性。自动化38中等/24略有/25没有不等GenAI采用率。调查不是个体能力门槛或事故概率。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24406,13 +24458,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不提供本职业采用率、替代概率或时间表。"
+              "只支持所述文档范围；无雇主部署与本职业GenAI效果实采。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24421,13 +24473,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业与用工结构来源"
+              "OEWS2025职业工资"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24436,13 +24488,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "说明本职业岗位分布在运输与仓储与物流与航空与铁路与公共事业与平台等运营场景。"
+              "美国43-5032.00，2025全国10/25/50/75/90分位：年36,030/42,750/50,340/62,450/78,140美元；时17.32/20.56/24.20/30.02/37.57美元。OEWS为直时税前受雇工资，含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不笼统排除所有补贴、绩效或合同雇员。分位非起薪、年限、上限或到手收入，官方年度工资不以个人固定工时另造。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24451,13 +24503,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用工结构不等于个人录用或收入保证。"
+              "只支持所述文档范围；无雇主部署与本职业GenAI效果实采。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24466,13 +24518,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合（本页说明与练习设计）"
+              "NIST AI RMF1.0"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24481,13 +24532,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅用于整理本页的说明与练习边界。"
+              "O*NET自身20软件类含排班、GPS、计算机辅助调度路由、铁路系统及航空飞行计划等，不等生成式AI部署。Hot2025关联本职业全部唯一美国招聘帖：Office17%、Excel12%、Outlook10%、Word5%、PowerPoint3%、SAP1%、Access/Windows各<1%，Kronos比例Not available非0；不证明岗位工具采用率或AI效益。未核本职业GenAI功能、采用、节时/减错、替代、工资/就业因果；ILO2025任务暴露研究未核本细类ISCO映射/分数，NIST AI RMF1.0自愿框架不授调度/法律权限。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24496,13 +24546,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合不是外部事实、资格、法规或工资证据。"
+              "只支持所述文档范围；无雇主部署与本职业GenAI效果实采。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24556,13 +24605,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先限定在排班与派工建议、路线与到达时间预估、工单信息整理与监控告警等可复核环节。"
+              "先试非操作性文稿/交接整理，核真实系统功能和数据权限；路由优化/ETA预测不直接称GenAI。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24631,13 +24681,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能；派工与报价由授权规则与承运人与雇主制度与现场条件决定。"
+              "模型本身不获得派工报价权；经验证并获真实制度授权的自动化能否承担具体功能须另核。不得把本页解释成一律禁止合法自动派工或报价。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24661,13 +24710,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只在批准的系统内按最小必要处理，不用于工作以外用途，并按制度留痕。"
+              "个人信息保护法适用于可识别自然人信息；个人行踪轨迹等可属敏感个人信息，客户/司机/承运人、位置及费用数据不能不分主体与内容一律称敏感。按合法依据、明确目的、最小必要、告知和安全处理；敏感信息另核充分必要、严格保护及适用单独同意/影响评估。机构批准账号不等允许上传外部AI，去标识非匿名化。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.6.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -24691,13 +24739,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用可比班次的分派准确率、到达时间偏差与返工与投诉量做前后对照，并保留人工复核记录。"
+              "编辑评估建议：可比班次核错派/ETA误差/返工/投诉，先定口径并核工单、人手、天气等变化；前后差异不单独证明AI因果。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.7.answer",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24736,13 +24785,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合"
+              "官方招聘技术关键词"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24751,13 +24799,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅用于本页 AI 边界的说明，不代表采用率或替代结论。"
+              "O*NET自身20软件类含排班、GPS、计算机辅助调度路由、铁路系统及航空飞行计划等，不等生成式AI部署。Hot2025关联本职业全部唯一美国招聘帖：Office17%、Excel12%、Outlook10%、Word5%、PowerPoint3%、SAP1%、Access/Windows各<1%，Kronos比例Not available非0；不证明岗位工具采用率或AI效益。未核本职业GenAI功能、采用、节时/减错、替代、工资/就业因果；ILO2025任务暴露研究未核本细类ISCO映射/分数，NIST AI RMF1.0自愿框架不授调度/法律权限。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24766,13 +24813,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "北美行业口径（不适用于本职业）"
+              "ILO任务暴露研究"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24781,13 +24827,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用演员工会或影视行业口径，仅登记其不适用。"
+              "实际全球ILO2025研究，不是演员工会；未核本细类ISCO映射/评分。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24796,13 +24841,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "北美行业口径（不适用于本职业）"
+              "美国精确职业档案"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24811,13 +24856,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用该口径，仅登记其不适用。"
+              "O*NET43-5032为运输材料/货物/乘客，或营业地点外安装、服务及紧急维修安排调度人员、班组、设备或服务车辆。12任务中10Core/2Supplemental；订购发放用品/设备、监督指定辖区通信为补充，不当所有岗位普遍必做。受理工作单、资源日程、转达信息、位置监控、记录费用库存和安排维修为主要任务；安排维修不等执行维修，协调人员不等经理。不同岗位可有任务交叉，名称不自动授驾驶、经营、安全管理或紧急调度权。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24826,13 +24871,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业发布口径（不适用于本职业）"
+              "职业认证查询入口"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "ratify"
           ],
           "type": "prose"
         },
@@ -24841,13 +24885,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用该口径，仅登记其不适用。"
+              "不支持采用率、行业就业、强制资格缺失或免照。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "ratify"
           ],
           "type": "prose"
         },
@@ -24856,13 +24899,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "官方统计"
+              "官方受雇工资与就业预测"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -24871,13 +24915,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅按 BLS/OEWS 2025 年工资与 O*NET 2024—2034 年预测口径使用。"
+              "美国43-5032.00，2025全国10/25/50/75/90分位：年36,030/42,750/50,340/62,450/78,140美元；时17.32/20.56/24.20/30.02/37.57美元。OEWS为直时税前受雇工资，含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不笼统排除所有补贴、绩效或合同雇员。分位非起薪、年限、上限或到手收入，官方年度工资不以个人固定工时另造。 BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -24966,8 +25011,8 @@
           },
           "id": "actors.display.ai_impact_table.tasks.1.direction",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24981,8 +25026,7 @@
           },
           "id": "actors.display.ai_impact_table.tasks.1.task",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24991,13 +25035,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助提取与整理工单要点"
+              "编辑待验证场景：工单字段提取整理；实际功能、数据可靠与效果须核具体获准系统，普通优化不当然是GenAI。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.1.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25011,8 +25055,8 @@
           },
           "id": "actors.display.ai_impact_table.tasks.1.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25026,8 +25070,8 @@
           },
           "id": "actors.display.ai_impact_table.tasks.2.direction",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25041,8 +25085,7 @@
           },
           "id": "actors.display.ai_impact_table.tasks.2.task",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25051,13 +25094,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助排班与资源匹配建议"
+              "编辑待验证场景：资源匹配与排班草稿；实际功能、数据可靠与效果须核具体获准系统，普通优化不当然是GenAI。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.2.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25071,8 +25114,8 @@
           },
           "id": "actors.display.ai_impact_table.tasks.2.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25086,8 +25129,8 @@
           },
           "id": "actors.display.ai_impact_table.tasks.3.direction",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25101,8 +25144,7 @@
           },
           "id": "actors.display.ai_impact_table.tasks.3.task",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25111,13 +25153,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助消息模板与送达与确认记录"
+              "编辑待验证场景：消息草稿及确认记录；实际功能、数据可靠与效果须核具体获准系统，普通优化不当然是GenAI。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25131,8 +25173,8 @@
           },
           "id": "actors.display.ai_impact_table.tasks.3.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25146,8 +25188,8 @@
           },
           "id": "actors.display.ai_impact_table.tasks.4.direction",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25161,8 +25203,7 @@
           },
           "id": "actors.display.ai_impact_table.tasks.4.task",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25171,13 +25212,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "监控告警与预计到达可辅助决策"
+              "编辑待验证场景：告警与预计到达提示；实际功能、数据可靠与效果须核具体获准系统，普通优化不当然是GenAI。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25191,8 +25232,8 @@
           },
           "id": "actors.display.ai_impact_table.tasks.4.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25206,8 +25247,8 @@
           },
           "id": "actors.display.ai_impact_table.tasks.5.direction",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25221,8 +25262,7 @@
           },
           "id": "actors.display.ai_impact_table.tasks.5.task",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25231,13 +25271,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助录入与汇总与报表生成"
+              "编辑待验证场景：记录汇总报表；实际功能、数据可靠与效果须核具体获准系统，普通优化不当然是GenAI。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25251,8 +25291,8 @@
           },
           "id": "actors.display.ai_impact_table.tasks.5.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25266,8 +25306,8 @@
           },
           "id": "actors.display.ai_impact_table.tasks.6.direction",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25276,13 +25316,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "安排维修并订购与发放供应品或设备"
+              "安排必要维修为核心任务；订购及发放供应品为部分岗位补充任务，按目标职责与权限核。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.task",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25291,13 +25330,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助工单与库存与供应商提醒"
+              "编辑待验证场景：维修工单或部分岗位库存提醒；实际功能、数据可靠与效果须核具体获准系统，普通优化不当然是GenAI。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25311,8 +25350,8 @@
           },
           "id": "actors.display.ai_impact_table.tasks.6.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25326,8 +25365,8 @@
           },
           "id": "actors.display.ai_impact_table.tasks.7.direction",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25341,8 +25380,7 @@
           },
           "id": "actors.display.ai_impact_table.tasks.7.task",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25351,13 +25389,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助信息汇总与提醒"
+              "编辑待验证场景：交通异常信息汇总；实际功能、数据可靠与效果须核具体获准系统，普通优化不当然是GenAI。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.7.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25371,8 +25409,8 @@
           },
           "id": "actors.display.ai_impact_table.tasks.7.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25681,13 +25719,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "会导致时间与地点与规格错配与客户投诉。"
+              "编辑可能情景：可能导致时间与地点与规格错配与客户投诉。本轮未核发生率或工具因果效果，具体责任按适用规则核。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.1.consequence",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25726,13 +25764,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可能导致无人无车可派或违反从业资格与工时规定。"
+              "编辑可能情景：可能导致无人无车可派或违反从业资格与工时规定。本轮未核发生率或工具因果效果，具体责任按适用规则核。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.2.consequence",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25771,13 +25809,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "会造成对外承诺失当与合同与费用纠纷。"
+              "编辑可能情景：可能造成对外承诺失当与合同与费用纠纷。本轮未核发生率或工具因果效果，具体责任按适用规则核。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.3.consequence",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25816,13 +25854,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可能造成客户与司机信息泄露与通信失误。"
+              "编辑可能情景：可能造成客户与司机信息泄露与通信失误。本轮未核发生率或工具因果效果，具体责任按适用规则核。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.4.consequence",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -25861,13 +25898,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "会延误处置并放大事故风险。"
+              "编辑可能情景：可能延误处置并放大事故风险。本轮未核发生率或工具因果效果，具体责任按适用规则核。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.5.consequence",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -26019,12 +26056,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与中国大陆「调度员（非警察、消防与救护车）」精确对应的全国单职业工资口径。中国大陆公开工资资料按行业与单位类型统计，且本职业相关岗位分散在道路运输与民航与铁路与矿山与物流与网约车平台等不同行业，未建立与美国 O*NET 43-5032.00 一一对应的全国职业工资分布。"
+              "国家统计局2025交通运输仓储邮政业城镇非私营133,981/私营73,133元税前年平均，仅行业内多职业背景，非调度员中位、起薪、分位或月薪。城镇5人以上法人调查，排除个体/自由职业等；不能笼统排除所有外包公司受雇人员，平台结算不自动等法人受雇工资。调度岗位跨行业，不能全套交通行业。本轮未取得中国精确全国职业工资/代表性招聘薪资。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26075,12 +26112,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "计酬口径常见差异：有的按小时或按月定额，有的含绩效或提成或班次与夜班补贴，有的按平台接单量结算；比较时必须先确认统计量与工时，再作比较。"
+              "编辑核小时/月计酬、绩效、适用补贴、加班、福利和扣费；未实采全国常见组合。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26131,12 +26168,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本职业相关报酬通常由「基本工资＋班次或夜班补贴＋绩效或提成（如适用）＋值班与加班安排」构成，民航与铁路与道路运输与平台调度差别较大。"
+              "未取得代表性招聘/合同，不称通常基本工资+夜班+提成；逐项核工时、计酬、福利扣费。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26145,12 +26182,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业门类平均工资覆盖的是行业就业人员，不等于本职业的岗位工资，也不覆盖平台结算与个体与外包用工。"
+              "国家统计局2025交通运输仓储邮政业城镇非私营133,981/私营73,133元税前年平均，仅行业内多职业背景，非调度员中位、起薪、分位或月薪。城镇5人以上法人调查，排除个体/自由职业等；不能笼统排除所有外包公司受雇人员，平台结算不自动等法人受雇工资。调度岗位跨行业，不能全套交通行业。本轮未取得中国精确全国职业工资/代表性招聘薪资。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26159,12 +26196,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "旺季与节假日与突发天气时期工单量与值守强度上升，计酬与加班安排会随业务波动变化。"
+              "编辑核真实旺季/节假日班次、工时和计酬，未采样证明统一业务/工资变化。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26173,12 +26210,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆未发布与美国 43-5032.00 一一对应的全国职业工资分布，因此不给出中位数或分位数。"
+              "证据不足：本轮未取得精确全国职业工资分布，不断言所有公开数据均未发布。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26187,12 +26224,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "影响计酬的因素主要是城市与行业、承运人或平台类型、班次与值守安排、是否含绩效或提成与补贴、以及岗位是否含带班或执照要求。"
+              "编辑合同核查：单位行业、班次工时、绩效提成补贴和职责资格怎样约定？本轮未取中国职业工资因素主次或影响大小的代表样本，不由行业均值推主要驱动。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26237,13 +26274,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国统计口径：O*NET-SOC 43-5032.00 为精确职业口径（exact）。BLS 2025 年工资数据中位为 50,340 美元/年（24.20 美元/时）。"
+              "美国43-5032.00，2025全国10/25/50/75/90分位：年36,030/42,750/50,340/62,450/78,140美元；时17.32/20.56/24.20/30.02/37.57美元。OEWS为直时税前受雇工资，含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不笼统排除所有补贴、绩效或合同雇员。分位非起薪、年限、上限或到手收入，官方年度工资不以个人固定工时另造。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26402,13 +26439,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024 年就业约 218,700 人；2024—2034 年预测为「下降（-1% 或更低）」，预计空缺 18,500；该来源对预测只给出类别而未给出具体百分比，本页按口径原文表述而不自行换算百分数；空缺同时包含增长与更替，不是净增岗位。"
+              "BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.project",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -26432,13 +26468,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "相关岗位分布在道路运输与物流与航空与铁路与矿山与公共事业与网约车平台等运营场景；多数岗位按小时计酬并按班次或轮班排班。"
+              "O*NET2025主要行业：运输仓储41%、行政支持服务10%，为本职业就业行业份额非工资份额。未实采全国多数按小时计酬/轮班/补贴结构，具体需核公告合同。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26447,13 +26483,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "教育反馈：47% 要求高中或同等学历、26% 要求部分大学无学位、8% 要求副学士或两年制学位；在职培训通常为在职学习与带教（该页未展示其余教育选项及百分比）。"
+              "BLS典型入门高中/同等学历、相关经验None、中期在岗训练；不是所有岗位统一门槛/学制。O*NET JZ1—2/SVP<6和几天到一年是准备组说明，非本职业全部培训时长。47%高中/同等、26%部分大学无学位、8%副学士是新入职所需学历受访反馈，不是47%岗位/雇主或员工学历。美国航空等具体专业路线及各州资格未逐核，不称全国免照。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -26462,13 +26499,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工作场景为调度中心与办公室与场站值班室；不同行业与承运人的班次与值守与系统工具差别较大。"
+              "O*NET57情境：电话每天100%、面对面每天98%、持续接触92%、每天决策91%、协调81极重要/17非常、团队69极重要/31非常、准确67极重要/23非常、邮件每天83%、时间压力每天76%、不友好人每天69%、持续坐59%、每周超过40小时75%、规律61%、室内受控每天56%、他人安全非常高责任66%。不是每人固定班次、纯室内或一律夜班；决定错误54%回答完全不严重、19%极严重，不能一律灾难性。自动化38中等/24略有/25没有不等GenAI采用率。调查不是个体能力门槛或事故概率。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.amusement",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26477,13 +26514,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本职业以受雇岗位为主，自营比例很低；外包与平台结算岗位的收入口径与受雇工资不可直接比较。"
+              "BLS2025自雇1.1%，OEWS不含自雇；合同雇员不笼统排除。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
           "source_refs": [
+            "r5-bls-current",
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26507,13 +26545,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "城市与行业、承运人或平台类型、班次与轮班与夜班安排、是否含绩效或提成与补贴、以及是否含带班或执照要求都会影响实际收入。"
+              "编辑比较地区、职责、计酬、工时和适用待遇；分位本身不证明经验/执照薪资溢价。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.paid-work",
           "source_refs": [
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26567,13 +26605,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国统计不代表中国大陆职业工资或就业结果；本页未引用 BLS 职业展望本职业页数值。"
+              "BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。 不替代中国精确工资。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.boundary.detail",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current"
           ],
           "type": "prose"
         }
@@ -26660,12 +26697,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "工作负荷包括每天电话 100% 与面对面 98% 与持续接触他人 92% 的信息负荷、持续坐着 59%、每天面对严格期限 76%、以及轮班与节假日值守与突发高峰。"
+              "O*NET57情境：电话每天100%、面对面每天98%、持续接触92%、每天决策91%、协调81极重要/17非常、团队69极重要/31非常、准确67极重要/23非常、邮件每天83%、时间压力每天76%、不友好人每天69%、持续坐59%、每周超过40小时75%、规律61%、室内受控每天56%、他人安全非常高责任66%。不是每人固定班次、纯室内或一律夜班；决定错误54%回答完全不严重、19%极严重，不能一律灾难性。自动化38中等/24略有/25没有不等GenAI采用率。调查不是个体能力门槛或事故概率。"
             ]
           },
           "id": "actors.fit.personality-fit-block.6",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27458,12 +27496,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "监控与调整"
+              "公共安全通信调度员"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.direction",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "agent"
           ],
           "type": "prose"
         },
@@ -27472,12 +27512,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否持续跟进位置与使用并按交通与天气与故障调整"
+              "编辑探索：受理记录和沟通能否转到应急通信"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.signals",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "agent"
           ],
           "type": "prose"
         },
@@ -27486,12 +27528,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "超出授权的承诺须先确认。"
+              "补9-1-1报警与应急信息、目标程序/认证，不由运营经验授权"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.watchouts",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "agent"
           ],
           "type": "prose"
         },
@@ -27500,12 +27544,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "记录与统计"
+              "客户服务代表"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.direction",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "dancing"
           ],
           "type": "prose"
         },
@@ -27514,12 +27560,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否按班次记录并维护调度与费用与库存与统计"
+              "编辑探索：能否以基础/脚本答询和一般投诉为主要工作"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.signals",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "dancing"
           ],
           "type": "prose"
         },
@@ -27528,12 +27576,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "记录口径须与工作单与费用单据一致。"
+              "补产品服务信息和投诉解决，不反向补运营派工"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.watchouts",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "dancing"
           ],
           "type": "prose"
         },
@@ -27542,12 +27592,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "授权与安全与上报"
+              "重型和半挂卡车司机"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.direction",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -27556,12 +27608,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否在授权范围内处理并按规定上报事故与安全异常"
+              "编辑探索：能否从调度转到实际驾驶"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.signals",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -27570,12 +27624,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不得隐瞒或延迟上报。"
+              "补商业驾驶执照及车辆/货物安全，协调经验不代驾驶资格"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.watchouts",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -27584,12 +27640,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "长期适应"
+              "运输仓储配送经理"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.direction",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "art"
           ],
           "type": "prose"
         },
@@ -27598,12 +27656,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否长期适应持续久坐用屏与多路信息与轮班值守"
+              "编辑探索：能否从派工执行转到组织管理"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.signals",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "art"
           ],
           "type": "prose"
         },
@@ -27612,12 +27672,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "注意用眼与颈椎与听力与作息安排。"
+              "补运输仓储配送政策、人员资源和经营管理责任"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.watchouts",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "art"
           ],
           "type": "prose"
         },
@@ -27710,12 +27772,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要：每天电话交谈 100%、每天面对面讨论 98%、与他人持续接触 92%、与外部客户或公众打交道「极其重要」34%；但沟通以工作单与派工与协调为主。"
+              "任务需要客户、司机、班组和同事间沟通协调；O*NET电话每天100%、面对面98%、持续接触92%包含同事，不是陌生人调查。对象和交流方式随实际岗位，不用外向标签判合格。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.outgoing.answer",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27738,12 +27800,16 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "美国反馈显示 47% 要求高中或同等学历、26% 要求部分大学无学位、8% 要求副学士或两年制学位。中国大陆按行业区分：航空运行控制须持有飞行签派员执照并由运营人指定；道路运输与网约车按从业资格与经营许可要求执行，实际以承运人与雇主与法域要求为准。"
+              "BLS典型入门高中/同等学历、相关经验None、中期在岗训练；不是所有岗位统一门槛/学制。O*NET JZ1—2/SVP<6和几天到一年是准备组说明，非本职业全部培训时长。47%高中/同等、26%部分大学无学位、8%副学士是新入职所需学历受访反馈，不是47%岗位/雇主或员工学历。美国航空等具体专业路线及各州资格未逐核，不称全国免照。 中国2022交通运输部23号CCAR-65FS-R3（2022-10-01施行）：65.7申请含21周岁、健康、国家承认本科及以上学历、中文能力与培训考试条件；65.13至少1000课时，满足指定既有航空执照/相应经历等分支可至少500课时，不是200或800。65.17理论/实践80分，理论36日历月有效；初次实践考前6个月内在合格签派员监视下大型公共运输航空单位实习至少90工作日。65.23持证人可被运营人指定飞行运行控制监督，公共航空运输另核其运行规章；不能据此把所有航空运行控制辅助岗位一律作签派持证岗位。65.25不符合指定/训练/健康等不得行使权利；65.29持续有效不等免检查，65.31取得执照后36日历月内至少一次定期检查并合格。原12个月30天工作条件本轮未核其他运行规章，不作为65部条款。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.appearance.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "r5-bls-current",
+            "r5-ccar-current",
+            "r5-road-current"
           ],
           "type": "prose"
         },
@@ -27766,12 +27832,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本职业持续坐着 59%、工作时间「规律（固定班次）」61%，但常见轮班与节假日值守与旺季加班；用眼与颈椎与听力保护与作息安排按机构制度与所在法域规定执行。"
+              "O*NET持续坐59%、规律安排61%，不证明普遍轮班、节假日或旺季加班。向目标单位查实际安排；身体负荷可作编辑体验核对，不从调查推听力或颈椎医疗因果。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.schedule.answer",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27878,12 +27944,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "BLS/OEWS：用于说明工资与就业口径与统计位置。"
+              "实际链接是本职业工资页，支持工资分位；就业及典型训练分类另见BLS表1.2，不用工资页证明就业或资格。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.bls",
           "source_refs": [
-            "onet"
+            "bls",
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -27892,12 +27959,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "承运人与雇主制度与授权规则：用于说明派工、承诺与例外处理与数据与通信管理边界。"
+              "未实采具体雇主公告/安全制度，编辑观察不当机构规定。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.employer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -27920,12 +27989,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻岗位对照（公共安全通信调度员）：用于说明紧急通信与应急调度授权的差异。"
+              "对应实际目标职业定义，用于任务差距对照，不证明个人转岗结果。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.agent",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27934,12 +28003,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻岗位对照（客户服务与驾驶与经营管理）：用于说明服务、驾驶与经营责任的差异。"
+              "对应实际目标职业定义，用于任务差距对照，不证明个人转岗结果。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.teacher",
           "source_refs": [
-            "onet"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -27948,12 +28017,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "民航与道路运输与安全生产法规（CCAR-65 部与道路运输与网约车与安全生产法）：用于说明执照与从业资格与经营与安全要求（按名称与一般要求引用）。"
+              "对应实际目标职业定义，用于任务差距对照，不证明个人转岗结果。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.enrichment",
           "source_refs": [
-            "onet"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -27962,12 +28031,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑综合：用于本页练习与边界设计，不构成外部事实或资格证据。"
+              "对应实际目标职业定义，用于任务差距对照，不证明个人转岗结果。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.art",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         }
@@ -27989,8 +28058,7 @@
           },
           "id": "actors.risk.career-risk-cards.1",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27999,13 +28067,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "健康与工作负荷风险：持续久坐与多屏用眼与长时间通话与轮班与夜班带来的用眼与颈椎与听力与作息与情绪负荷。"
+              "编辑负荷核查：实际岗位的久坐、屏幕、通话及是否夜班需具体观察；本轮未取听力、颈椎或其他健康发生率及因果证据，不把调查当个人健康门槛。"
             ]
           },
           "id": "actors.risk.career-risk-cards.2",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28019,8 +28086,7 @@
           },
           "id": "actors.risk.career-risk-cards.3",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28034,8 +28100,7 @@
           },
           "id": "actors.risk.career-risk-cards.4",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28049,8 +28114,7 @@
           },
           "id": "actors.risk.career-risk-cards.5",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -28064,8 +28128,7 @@
           },
           "id": "actors.display.career_risk_cards.audition-feedback.mitigation",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28079,8 +28142,7 @@
           },
           "id": "actors.display.career_risk_cards.heading",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28094,8 +28156,7 @@
           },
           "id": "actors.display.career_risk_cards.direct-answer",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28109,8 +28170,7 @@
           },
           "id": "actors.display.career_risk_cards.evidence-scope",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28124,8 +28184,7 @@
           },
           "id": "actors.display.career_risk_cards.boundary",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28139,8 +28198,7 @@
           },
           "id": "actors.display.career_risk_cards.context-label",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28154,8 +28212,7 @@
           },
           "id": "actors.display.career_risk_cards.image-use.title",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28169,8 +28226,7 @@
           },
           "id": "actors.display.career_risk_cards.image-use.roles",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28184,8 +28240,7 @@
           },
           "id": "actors.display.career_risk_cards.image-use.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28194,13 +28249,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "造成服务失误与客户投诉与成本损失。"
+              "编辑可能情景：可能造成服务失误与客户投诉与成本损失。本轮未核发生率或工具因果效果，具体责任按适用规则核。"
             ]
           },
           "id": "actors.display.career_risk_cards.image-use.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -28214,8 +28269,7 @@
           },
           "id": "actors.display.career_risk_cards.physical-boundary.title",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28229,8 +28283,7 @@
           },
           "id": "actors.display.career_risk_cards.physical-boundary.roles",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28239,13 +28292,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "持续久坐与多屏用眼与长时间通话与轮班与夜班带来的用眼与颈椎与听力与作息与情绪负荷。"
+              "编辑负荷核查：实际岗位的久坐、屏幕、通话及是否夜班需具体观察；本轮未取听力、颈椎或其他健康发生率及因果证据，不把调查当个人健康门槛。"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28254,13 +28306,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "影响健康与工作稳定性与服务质量。"
+              "可能产生需要调整的工作体验或负荷；本轮未核健康损害及服务稳定性因果，具体健康判断需另有证据。"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28274,8 +28325,7 @@
           },
           "id": "actors.display.career_risk_cards.project-income.title",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28289,8 +28339,7 @@
           },
           "id": "actors.display.career_risk_cards.project-income.roles",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28304,8 +28353,7 @@
           },
           "id": "actors.display.career_risk_cards.project-income.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28314,13 +28362,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "影响实际收入与工时合规。"
+              "编辑可能情景：影响实际收入与工时合规。本轮未核发生率或工具因果效果，具体责任按适用规则核。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-income.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -28334,8 +28382,7 @@
           },
           "id": "actors.display.career_risk_cards.identity-procedure.title",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28344,13 +28391,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "涉及运行控制与运输作业的调度岗位"
+              "须核专业资格/驾驶/经营/安全管理的具体角色，不将普通派工一律等航空专业签派。"
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.roles",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-ccar-current",
+            "r5-road-current"
           ],
           "type": "prose"
         },
@@ -28359,13 +28406,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "安排未取得相应从业资格或执照的人员承担运行控制或驾驶或运输作业，或未按经营许可与安全制度执行。"
+              "编辑风险：不核目标职责对应资格/运营指定/训练及授权而执行；法定主体与个人角色分别判断。"
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-ccar-current",
+            "r5-road-current"
           ],
           "type": "prose"
         },
@@ -28374,13 +28421,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "造成合规风险与安全风险，可能被处罚或停业。"
+              "可能造成合规/安全风险，具体法律责任需按实际行为和适用条款核，不一律推停业。"
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-ccar-current",
+            "r5-road-current"
           ],
           "type": "prose"
         },
@@ -28394,8 +28441,7 @@
           },
           "id": "actors.display.career_risk_cards.project-data.title",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -28409,8 +28455,7 @@
           },
           "id": "actors.display.career_risk_cards.project-data.roles",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -28419,13 +28464,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "客户与司机与承运人与定位与费用数据被不当记录、共享或对外提供；通信记录不规范导致争议无法追溯。"
+              "个人信息保护法适用于可识别自然人信息；个人行踪轨迹等可属敏感个人信息，客户/司机/承运人、位置及费用数据不能不分主体与内容一律称敏感。按合法依据、明确目的、最小必要、告知和安全处理；敏感信息另核充分必要、严格保护及适用单独同意/影响评估。机构批准账号不等允许上传外部AI，去标识非匿名化。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -28434,13 +28478,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "造成信息泄露与合规与合同争议风险。"
+              "编辑可能情景：可能造成信息泄露与合规与合同争议风险。本轮未核发生率或工具因果效果，具体责任按适用规则核。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -28454,8 +28497,7 @@
           },
           "id": "actors.display.career_risk_cards.audition-feedback.title",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28469,8 +28511,7 @@
           },
           "id": "actors.display.career_risk_cards.audition-feedback.roles",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28484,8 +28525,7 @@
           },
           "id": "actors.display.career_risk_cards.audition-feedback.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28494,13 +28534,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "造成服务中断与声誉与费用损失。"
+              "编辑可能情景：可能造成服务中断与声誉与费用损失。本轮未核发生率或工具因果效果，具体责任按适用规则核。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -28514,8 +28554,7 @@
           },
           "id": "actors.display.career_risk_cards.source.bls",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28524,13 +28563,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "承运人与雇主制度与授权规则：用于派工、承诺、例外与数据与通信管理边界。"
+              "未实采机构安全/通信/授权制度，以下为编辑场景与核对建议。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.employer",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28539,13 +28578,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "《民用航空飞行签派员执照和训练机构管理规则》（CCAR-65 部）与道路运输与网约车与安全生产法规：用于执照与从业资格与经营与安全要求（按名称与一般要求引用）。"
+              "中国2022交通运输部23号CCAR-65FS-R3（2022-10-01施行）：65.7申请含21周岁、健康、国家承认本科及以上学历、中文能力与培训考试条件；65.13至少1000课时，满足指定既有航空执照/相应经历等分支可至少500课时，不是200或800。65.17理论/实践80分，理论36日历月有效；初次实践考前6个月内在合格签派员监视下大型公共运输航空单位实习至少90工作日。65.23持证人可被运营人指定飞行运行控制监督，公共航空运输另核其运行规章；不能据此把所有航空运行控制辅助岗位一律作签派持证岗位。65.25不符合指定/训练/健康等不得行使权利；65.29持续有效不等免检查，65.31取得执照后36日历月内至少一次定期检查并合格。原12个月30天工作条件本轮未核其他运行规章，不作为65部条款。 2026交通运输部4号令修订道路运输从业人员管理规定，2026-03-20施行。第2/6条资格考试对应经营性道路客货驾驶员、危险货物驾驶/装卸管理/押运等特定人员，不能给普通调度员统一套驾驶员证；52条4500千克及以下普通货运车辆驾驶人员不适用。经营主体许可、网约车平台/驾驶员和一般安全生产其他法规条款本轮未逐核，不当已核个人调度资格。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.cn-rule",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-ccar-current",
+            "r5-road-current"
           ],
           "type": "prose"
         },
@@ -28554,13 +28593,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "不使用影视或演员工会口径；仅登记其不适用。"
+              "这里实际职业档案支持任务情境；ILO任务暴露不证明运输合规。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.sag",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28569,13 +28608,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "AI 风险管理框架：用于说明系统辅助的治理边界，不构成本职业合规清单。"
+              "个人信息保护法适用于可识别自然人信息；个人行踪轨迹等可属敏感个人信息，客户/司机/承运人、位置及费用数据不能不分主体与内容一律称敏感。按合法依据、明确目的、最小必要、告知和安全处理；敏感信息另核充分必要、严格保护及适用单独同意/影响评估。机构批准账号不等允许上传外部AI，去标识非匿名化。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.nist",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         }
@@ -28592,14 +28630,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘公告中的学历、专业、经验与放宽关系必须逐条读取；本职业多数岗位以在职培训与带教上手，一项可放宽不代表执照、从业资格、工时与安全或授权与数据管理要求可以替代。"
+              "BLS典型入门高中/同等学历、相关经验None、中期在岗训练；不是所有岗位统一门槛/学制。O*NET JZ1—2/SVP<6和几天到一年是准备组说明，非本职业全部培训时长。47%高中/同等、26%部分大学无学位、8%副学士是新入职所需学历受访反馈，不是47%岗位/雇主或员工学历。美国航空等具体专业路线及各州资格未逐核，不称全国免照。 未实采多数雇主公告，逐条核具体岗位。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current"
           ],
           "type": "notice"
         },
@@ -28625,35 +28663,35 @@
               [
                 "受理与工单准备（入门）",
                 "接收与准备工作单，核对客户要求与规格与时间与地点与优先级并标注例外。",
-                "能按工作单与优先级准确准备并标注例外。",
+                "编辑观察建议；未实采雇主公告，资格/培训/授权以实际岗位核。",
                 "纸面工单与优先级练习、受监督班次的带班评语。",
                 "偏受理与准备执行，不承担承诺与授权判断。"
               ],
               [
                 "排班与派工助理",
                 "按可用人员与车辆与设备排出日程并协助派工与确认接收。",
-                "能按资源与资格与工时排出可执行日程并确认接收。",
+                "编辑观察建议；未实采雇主公告，资格/培训/授权以实际岗位核。",
                 "排班与派工与确认接收记录。",
                 "偏排班与派工执行，例外与授权由带班确认。"
               ],
               [
                 "跟进与监控助理",
                 "协助监控位置与使用并按交通与天气与故障记录与反馈。",
-                "能持续跟进并按预案记录与反馈。",
+                "编辑观察建议；未实采雇主公告，资格/培训/授权以实际岗位核。",
                 "监控与调整与异常记录。",
                 "偏跟进与监控执行，不承担安全事件判定。"
               ],
               [
                 "记录与统计助理",
                 "协助记录并维护调度与费用与库存信息并编制工作进度统计。",
-                "能按口径记录并核对费用与库存。",
+                "编辑观察建议；未实采雇主公告，资格/培训/授权以实际岗位核。",
                 "记录与统计与交接单。",
                 "偏记录与统计执行，不承担费用审批。"
               ],
               [
                 "通信与客户联络助理",
                 "协助电话与无线电与系统消息的受理与转达与回复。",
-                "能规范沟通并按制度留痕。",
+                "编辑观察建议；未实采雇主公告，资格/培训/授权以实际岗位核。",
                 "通信记录与客户反馈。",
                 "偏通信与联络执行，不决定承诺与价格。"
               ]
@@ -28662,8 +28700,8 @@
           "id": "actors.path.entry-role-comparison.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current"
           ],
           "title": "常见入门方向与初期任务",
           "type": "table"
@@ -28676,38 +28714,37 @@
               {
                 "id": "employer-0",
                 "values": [
-                  "排班与值守记录",
-                  "能提供可参与的班次与值守与轮班时段与出勤记录。"
+                  "排班值守",
+                  "编辑建议核真实可参与班次及出勤要求。"
                 ]
               },
               {
                 "id": "employer-1",
                 "values": [
-                  "执照与资格与培训记录",
-                  "能提供与目标岗位相适应的从业资格或执照或培训与考核记录（如航空运行控制岗位的飞行签派员执照）。"
+                  "目标资格培训",
+                  "按具体岗位核；中国专业签派路线按65部本科/培训考试/指定等要求，普通辅助运行岗位不统一套签派执照。"
                 ]
               },
               {
                 "id": "employer-2",
                 "values": [
-                  "受监督岗位的带班评语",
-                  "能提供带班或主管对工单核对与派工转达与记录与协作的具体评语。"
+                  "受监督岗位反馈",
+                  "编辑建议取得真实带班对工单、转达、记录的反馈；未实采公告。"
                 ]
               },
               {
                 "id": "availability",
                 "values": [
-                  "记录与核对习惯",
-                  "能提供工作单与派工确认接收与费用与库存记录的示例。"
+                  "记录核对",
+                  "编辑建议使用合法脱敏材料展示核对，不传播真实客户/轨迹。"
                 ]
               }
             ]
           },
           "id": "actors.path.employer-evidence.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-ccar-current",
+            "r5-road-current"
           ],
           "title": "雇主会核对什么",
           "type": "cards"
@@ -28832,37 +28869,37 @@
             ],
             "rows": [
               [
-                "飞行签派员执照（中国大陆，航空运行控制岗位）",
-                "拟从事航空运行控制与签派放行的人员",
-                "岗位硬条件：由运营人指定从事飞行运行控制和监督工作，且须持有飞行签派员执照。",
-                "是（针对航空运行控制岗位）：航空承运人不得指定未取得执照的人员履行运行控制职责。",
-                "年满 21 周岁、身心健康，通过理论考试与实践考试（均百分制 80 分），初次实践考试前在合格飞行签派员监视下实习不少于 90 个工作日。",
-                "培训与实习时间（课程不少于 200 或 800 小时，视经历而定）。",
-                "执照长期有效但须满足训练与检查要求（如前 36 个日历月内至少一次执照认证检查、连续 12 个日历月内在签派放行岗位至少工作 30 天）。"
+                "中国飞行签派员执照（专业签派路线）",
+                "拟申请执照并承担对应飞行运行控制监督者",
+                "65.23可由运营人指定；公共航空运行另核适用运行规章",
+                "不是普通运营调度员统一门槛；按目标专业角色核",
+                "中国2022交通运输部23号CCAR-65FS-R3（2022-10-01施行）：65.7申请含21周岁、健康、国家承认本科及以上学历、中文能力与培训考试条件；65.13至少1000课时，满足指定既有航空执照/相应经历等分支可至少500课时，不是200或800。65.17理论/实践80分，理论36日历月有效；初次实践考前6个月内在合格签派员监视下大型公共运输航空单位实习至少90工作日。65.23持证人可被运营人指定飞行运行控制监督，公共航空运输另核其运行规章；不能据此把所有航空运行控制辅助岗位一律作签派持证岗位。65.25不符合指定/训练/健康等不得行使权利；65.29持续有效不等免检查，65.31取得执照后36日历月内至少一次定期检查并合格。原12个月30天工作条件本轮未核其他运行规章，不作为65部条款。",
+                "至少1000课时；指定条件分支至少500课时；另含实习/考试投入",
+                "持续有效不等免检查；取得后36日历月内至少一次定期检查并合格；未核其他规则中的工作经历条件"
               ],
               [
-                "道路运输从业人员从业资格（中国大陆，道路运输岗位）",
-                "从事道路运输经营活动相关岗位的人员",
-                "合规要求：按《道路运输从业人员管理规定》对相应岗位规定从业资格。",
-                "视岗位与法域要求：按法规与地方规定执行。",
-                "按交通运输主管部门规定参加培训与考试并取得从业资格。",
-                "培训与考试时间与费用。",
-                "本条按法规名称与一般要求引用，本轮未逐条核对条文编号；具体以主管部门规定为准。"
+                "中国道路运输特定从业资格",
+                "驾驶员及危险货物驾驶/装卸管理/押运等具体人员",
+                "2026规定2/6条对应资格考试",
+                "不是所有普通调度员统一驾驶员证",
+                "2026交通运输部4号令修订道路运输从业人员管理规定，2026-03-20施行。第2/6条资格考试对应经营性道路客货驾驶员、危险货物驾驶/装卸管理/押运等特定人员，不能给普通调度员统一套驾驶员证；52条4500千克及以下普通货运车辆驾驶人员不适用。经营主体许可、网约车平台/驾驶员和一般安全生产其他法规条款本轮未逐核，不当已核个人调度资格。",
+                "实际培训考试条件/费用按对应角色核",
+                "4500千克及以下普通货运驾驶人员不适用该规定；不等其他安全义务豁免"
               ],
               [
                 "运输经营许可（中国大陆，承运人与平台）",
                 "道路运输经营者与网约车平台等经营主体",
-                "经营许可：按《中华人民共和国道路运输条例》与《网络预约出租汽车经营服务管理暂行办法》等对经营许可作出规定。",
-                "是（针对经营主体）：须依法取得相应经营许可。",
-                "向相应主管部门申请并按条件与流程办理。",
+                "经营主体许可与个人派工岗位资格分开；本轮未逐核道路运输条例和网约车经营许可条款。",
+                "未核具体经营许可条款，不以普通调度名称推个人办理义务。",
+                "向对应主管部门核真实经营主体/业务条件；本页不列未核统一办理方案。",
                 "申请材料与合规成本。",
                 "本条按法规名称与一般要求引用，本轮未逐条核对条文编号；经营主体资质不等同个人岗位资格。"
               ],
               [
-                "在岗培训与带教（数周到数月）",
+                "中期在岗训练（美国典型类别）",
                 "零基础入行者",
-                "现实入口：多数岗位通过在职培训与带教上手。",
-                "是：O*NET 指出本职业准备层级为 Job Zone 1-2。",
+                "BLS典型入门高中/同等学历、相关经验None、中期在岗训练；不是所有岗位统一门槛/学制。O*NET JZ1—2/SVP<6和几天到一年是准备组说明，非本职业全部培训时长。47%高中/同等、26%部分大学无学位、8%副学士是新入职所需学历受访反馈，不是47%岗位/雇主或员工学历。美国航空等具体专业路线及各州资格未逐核，不称全国免照。",
+                "BLS典型分类，非全部雇主统一学制。",
                 "按承运人与雇主培训计划完成并接受考核。",
                 "时间投入与学习节奏。",
                 "完成培训不等于取得执照或从业资格或管理授权。"
@@ -28890,8 +28927,10 @@
           "id": "actors.path.credential-decision.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current",
+            "r5-ccar-current",
+            "r5-road-current"
           ],
           "title": "训练、执照与资格怎么选择",
           "type": "table"
@@ -28901,17 +28940,19 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "学历与经验要求必须逐条读取：本职业多数岗位要求高中或同等学历并接受在职培训；一项可放宽不代表执照、从业资格、工时与安全或授权与数据管理要求可以替代。",
-              "本页建议的作品与七天体验只用于职业探索，不构成岗位培训、执照、从业资格或授权。",
-              "进入本职业不是只报一个课程：先核对目标岗位的职责与班次与值守安排、是否需要执照或从业资格、以及承运人或雇主的授权与数据管理规则。",
-              "涉及运行控制与运输作业与费用与安全上报的工作，须先确认法规与承运人制度并取得授权；不得在无资格与无授权条件下独立承担相应职责。"
+              "BLS典型入门高中/同等学历、相关经验None、中期在岗训练；不是所有岗位统一门槛/学制。O*NET JZ1—2/SVP<6和几天到一年是准备组说明，非本职业全部培训时长。47%高中/同等、26%部分大学无学位、8%副学士是新入职所需学历受访反馈，不是47%岗位/雇主或员工学历。美国航空等具体专业路线及各州资格未逐核，不称全国免照。",
+              "中国2022交通运输部23号CCAR-65FS-R3（2022-10-01施行）：65.7申请含21周岁、健康、国家承认本科及以上学历、中文能力与培训考试条件；65.13至少1000课时，满足指定既有航空执照/相应经历等分支可至少500课时，不是200或800。65.17理论/实践80分，理论36日历月有效；初次实践考前6个月内在合格签派员监视下大型公共运输航空单位实习至少90工作日。65.23持证人可被运营人指定飞行运行控制监督，公共航空运输另核其运行规章；不能据此把所有航空运行控制辅助岗位一律作签派持证岗位。65.25不符合指定/训练/健康等不得行使权利；65.29持续有效不等免检查，65.31取得执照后36日历月内至少一次定期检查并合格。原12个月30天工作条件本轮未核其他运行规章，不作为65部条款。",
+              "2026交通运输部4号令修订道路运输从业人员管理规定，2026-03-20施行。第2/6条资格考试对应经营性道路客货驾驶员、危险货物驾驶/装卸管理/押运等特定人员，不能给普通调度员统一套驾驶员证；52条4500千克及以下普通货运车辆驾驶人员不适用。经营主体许可、网约车平台/驾驶员和一般安全生产其他法规条款本轮未逐核，不当已核个人调度资格。",
+              "编辑建议先选具体岗位职责/班次/法域，再核资格和授权；探索练习不代专业训练。"
             ]
           },
           "id": "actors.path.credential-boundary.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current",
+            "r5-ccar-current",
+            "r5-road-current"
           ],
           "title": "训练、执照与经营与安全边界",
           "type": "notice"
@@ -29152,14 +29193,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国由承运人与雇主规定并须遵守驾照与工时等相关要求；中国大陆航空运行控制须持有飞行签派员执照并由运营人指定，道路运输与网约车按经营许可与从业资格要求执行。"
+              "BLS典型入门高中/同等学历、相关经验None、中期在岗训练；不是所有岗位统一门槛/学制。O*NET JZ1—2/SVP<6和几天到一年是准备组说明，非本职业全部培训时长。47%高中/同等、26%部分大学无学位、8%副学士是新入职所需学历受访反馈，不是47%岗位/雇主或员工学历。美国航空等具体专业路线及各州资格未逐核，不称全国免照。 中国2022交通运输部23号CCAR-65FS-R3（2022-10-01施行）：65.7申请含21周岁、健康、国家承认本科及以上学历、中文能力与培训考试条件；65.13至少1000课时，满足指定既有航空执照/相应经历等分支可至少500课时，不是200或800。65.17理论/实践80分，理论36日历月有效；初次实践考前6个月内在合格签派员监视下大型公共运输航空单位实习至少90工作日。65.23持证人可被运营人指定飞行运行控制监督，公共航空运输另核其运行规章；不能据此把所有航空运行控制辅助岗位一律作签派持证岗位。65.25不符合指定/训练/健康等不得行使权利；65.29持续有效不等免检查，65.31取得执照后36日历月内至少一次定期检查并合格。原12个月30天工作条件本轮未核其他运行规章，不作为65部条款。 2026交通运输部4号令修订道路运输从业人员管理规定，2026-03-20施行。第2/6条资格考试对应经营性道路客货驾驶员、危险货物驾驶/装卸管理/押运等特定人员，不能给普通调度员统一套驾驶员证；52条4500千克及以下普通货运车辆驾驶人员不适用。经营主体许可、网约车平台/驾驶员和一般安全生产其他法规条款本轮未逐核，不当已核个人调度资格。"
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current",
+            "r5-ccar-current",
+            "r5-road-current"
           ],
           "type": "prose"
         },
@@ -29168,14 +29211,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆相关依据按行业区分：航空运行控制适用《民用航空飞行签派员执照和训练机构管理规则》（CCAR-65 部，2022 年）——执照由民航局颁发与管理，民航地区管理局受理申请与组织考试与定期检查，申请条件含年满 21 周岁与身心健康，理论考试与实践考试合格成绩均为百分制 80 分且实践考试须在理论考试成绩有效期 36 个日历月内完成并先实习不少于 90 个工作日，航空承运人不得指定未取得执照的人员履行运行控制职责；道路运输与网约车与安全生产按《中华人民共和国道路运输条例》《道路运输从业人员管理规定》《网络预约出租汽车经营服务管理暂行办法》与《中华人民共和国安全生产法》的名称与一般要求执行（本轮未逐条核对条文编号）。"
+              "中国2022交通运输部23号CCAR-65FS-R3（2022-10-01施行）：65.7申请含21周岁、健康、国家承认本科及以上学历、中文能力与培训考试条件；65.13至少1000课时，满足指定既有航空执照/相应经历等分支可至少500课时，不是200或800。65.17理论/实践80分，理论36日历月有效；初次实践考前6个月内在合格签派员监视下大型公共运输航空单位实习至少90工作日。65.23持证人可被运营人指定飞行运行控制监督，公共航空运输另核其运行规章；不能据此把所有航空运行控制辅助岗位一律作签派持证岗位。65.25不符合指定/训练/健康等不得行使权利；65.29持续有效不等免检查，65.31取得执照后36日历月内至少一次定期检查并合格。原12个月30天工作条件本轮未核其他运行规章，不作为65部条款。 2026交通运输部4号令修订道路运输从业人员管理规定，2026-03-20施行。第2/6条资格考试对应经营性道路客货驾驶员、危险货物驾驶/装卸管理/押运等特定人员，不能给普通调度员统一套驾驶员证；52条4500千克及以下普通货运车辆驾驶人员不适用。经营主体许可、网约车平台/驾驶员和一般安全生产其他法规条款本轮未逐核，不当已核个人调度资格。"
             ]
           },
           "id": "actors.display.career_path_block.locale.summary",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current",
+            "r5-ccar-current",
+            "r5-road-current"
           ],
           "type": "prose"
         },
@@ -29184,14 +29229,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国本职业准备层级为 Job Zone 1-2，以在职培训与带教为主，47% 岗位要求高中或同等学历；中国大陆按行业要求差异较大，航空签派与部分运输岗位需专门执照或从业资格，实际以承运人与雇主与法域要求为准。"
+              "BLS典型入门高中/同等学历、相关经验None、中期在岗训练；不是所有岗位统一门槛/学制。O*NET JZ1—2/SVP<6和几天到一年是准备组说明，非本职业全部培训时长。47%高中/同等、26%部分大学无学位、8%副学士是新入职所需学历受访反馈，不是47%岗位/雇主或员工学历。美国航空等具体专业路线及各州资格未逐核，不称全国免照。 中国航空专业签派另核本科及其他条件。"
             ]
           },
           "id": "actors.display.career_path_block.locale.credentials",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current",
+            "r5-ccar-current",
+            "r5-road-current"
           ],
           "type": "prose"
         },
@@ -29312,14 +29359,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "安排必要的维修与订购与发放供应品，做好交接并带教新的调度人员。"
+              "编辑学习方向：练维修安排和交接；若岗位确有采购发放任务与带教权限再探索对应技能，不作统一阶段或晋级要求。"
             ]
           },
           "id": "actors.display.career_path_block.ladder.develop.description",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29936,14 +29981,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "安排维修并订购与发放供应品或设备。"
+              "按岗位权限安排必要维修；采购发放为补充任务，仅部分岗位涉及，不把学习阶段作全部职位要求。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.04.responsibility",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30336,14 +30379,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS/OEWS 与 O*NET：用于工资、就业与工作情境与准备层级口径。"
+              "BLS典型入门高中/同等学历、相关经验None、中期在岗训练；不是所有岗位统一门槛/学制。O*NET JZ1—2/SVP<6和几天到一年是准备组说明，非本职业全部培训时长。47%高中/同等、26%部分大学无学位、8%副学士是新入职所需学历受访反馈，不是47%岗位/雇主或员工学历。美国航空等具体专业路线及各州资格未逐核，不称全国免照。"
             ]
           },
           "id": "actors.display.career_path_block.source.bls",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -30352,14 +30393,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承运人与雇主制度与授权规则：用于入口要求与派工与承诺与数据管理边界。"
+              "未实采具体雇主培训/公告，不把编辑阶段当真实晋升保证。"
             ]
           },
           "id": "actors.display.career_path_block.source.employer",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30368,14 +30408,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "《民用航空飞行签派员执照和训练机构管理规则》与道路运输与网约车与安全生产法规：用于执照与从业资格与经营与安全口径（按名称与一般要求引用）。"
+              "中国2022交通运输部23号CCAR-65FS-R3（2022-10-01施行）：65.7申请含21周岁、健康、国家承认本科及以上学历、中文能力与培训考试条件；65.13至少1000课时，满足指定既有航空执照/相应经历等分支可至少500课时，不是200或800。65.17理论/实践80分，理论36日历月有效；初次实践考前6个月内在合格签派员监视下大型公共运输航空单位实习至少90工作日。65.23持证人可被运营人指定飞行运行控制监督，公共航空运输另核其运行规章；不能据此把所有航空运行控制辅助岗位一律作签派持证岗位。65.25不符合指定/训练/健康等不得行使权利；65.29持续有效不等免检查，65.31取得执照后36日历月内至少一次定期检查并合格。原12个月30天工作条件本轮未核其他运行规章，不作为65部条款。 2026交通运输部4号令修订道路运输从业人员管理规定，2026-03-20施行。第2/6条资格考试对应经营性道路客货驾驶员、危险货物驾驶/装卸管理/押运等特定人员，不能给普通调度员统一套驾驶员证；52条4500千克及以下普通货运车辆驾驶人员不适用。经营主体许可、网约车平台/驾驶员和一般安全生产其他法规条款本轮未逐核，不当已核个人调度资格。"
             ]
           },
           "id": "actors.display.career_path_block.source.cn-rule",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-ccar-current",
+            "r5-road-current"
           ],
           "type": "prose"
         },
@@ -30384,14 +30423,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "薪资与环境口径：本页不使用影视或演员工会口径；工资引用 OEWS，环境引用 O*NET。"
+              "工资页不支持资格，典型训练用表1.2、专业中国路线用具体规章。"
             ]
           },
           "id": "actors.display.career_path_block.source.r2-pay-3",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-bls-current",
+            "r5-ccar-current",
+            "r5-road-current"
           ],
           "type": "prose"
         }
@@ -30408,13 +30447,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 43-5032.00 精确职业数据：2024 年就业约 218,700 人。"
+              "BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -30423,13 +30461,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年预测为「下降（-1% 或更低）」，预计空缺 18,500；该来源对预测只给出类别而未给出具体百分比，本页按口径原文表述；空缺同时包含增长与更替，不是净增岗位。"
+              "BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -30453,15 +30490,16 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本职业相关岗位分布在道路运输与物流与航空与铁路与矿山与公共事业与网约车平台等运营场景，多数按小时计酬并按班次或轮班排班。"
+              "O*NET2025主要行业：运输仓储41%、行政支持服务10%，为本职业就业行业份额非工资份额。未实采全国多数按小时计酬/轮班/补贴结构，具体需核公告合同。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -30543,13 +30581,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：受理与记录与多方沟通与按规程处置的经验。"
+              "编辑对照：信息受理记录；非个人能力已证"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "agent"
           ],
           "type": "prose"
         },
@@ -30558,13 +30597,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：紧急通信与应急指挥规程与训练与纪律要求。"
+              "目标需核：9-1-1应急请求/事件通信、目标培训认证"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "agent"
           ],
           "type": "prose"
         },
@@ -30573,13 +30613,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，授权不同"
+              "编辑探索差距，未量化转岗距离/成功率/固定时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "agent"
           ],
           "type": "prose"
         },
@@ -30588,13 +30629,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：受理与回复与工单登记与客户沟通经验。"
+              "编辑对照：客户沟通和记录；非个人能力已证"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30603,13 +30645,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：人员与车辆与设备的排班与派工与位置监控与维修安排。"
+              "目标需核：基础/脚本产品答询及一般投诉处理"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30618,13 +30661,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，范围不同"
+              "编辑探索差距，未量化转岗距离/成功率/固定时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30633,13 +30677,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：运输流程与路线与时效与现场沟通理解。"
+              "编辑对照：运输流程协调；非个人能力已证"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30648,13 +30693,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：驾驶执照与行车与车辆与货物安全责任与工时要求。"
+              "目标需核：重型/半挂卡车驾驶、商业驾照和车货安全"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30663,13 +30709,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，需驾驶资格"
+              "编辑探索差距，未量化转岗距离/成功率/固定时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30678,13 +30725,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：调度执行与协作与记录与应急协调经验。"
+              "编辑对照：现场协作记录；非个人能力已证"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "art"
           ],
           "type": "prose"
         },
@@ -30693,13 +30741,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：网络与成本与承运与合规与安全体系与人员管理。"
+              "目标需核：组织政策法规下运输仓储配送管理责任"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "art"
           ],
           "type": "prose"
         },
@@ -30708,13 +30757,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，需管理能力"
+              "编辑探索差距，未量化转岗距离/成功率/固定时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "art"
           ],
           "type": "prose"
         },
@@ -30723,13 +30773,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：时刻与线路与现场协调理解。"
+              "编辑对照：时刻线路协调；非个人能力已证"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30738,13 +30789,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：客运服务与驾驶安全与乘客与票务与投诉处理。"
+              "目标需核：公交客运驾驶、乘客/行李/票务，驾驶资格另核"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30753,13 +30805,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，场景不同"
+              "编辑探索差距，未量化转岗距离/成功率/固定时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30768,13 +30821,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：对时刻与信号与线路与运行参数的关注。"
+              "编辑对照：线路运行信息；非个人能力已证"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "directing"
           ],
           "type": "prose"
         },
@@ -30783,13 +30837,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：机车驾驶与铁路规章与信号与运行规程。"
+              "目标需核：机车实际驾驶、列车命令信号和铁路规则"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "directing"
           ],
           "type": "prose"
         },
@@ -30798,13 +30853,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，需铁路训练"
+              "编辑探索差距，未量化转岗距离/成功率/固定时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "directing"
           ],
           "type": "prose"
         },
@@ -30813,13 +30869,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：对合规与标准与记录与判定的理解。"
+              "编辑对照：运输状态记录；非个人能力已证"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "editing"
           ],
           "type": "prose"
         },
@@ -30828,13 +30885,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：运输设备与货物检查与合规判定与执法或技术判定要求。"
+              "目标需核：检查货物或设备保障安全运输，具体技术/资格另核，不统一称执法"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "editing"
           ],
           "type": "prose"
         },
@@ -30843,13 +30901,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，职能不同"
+              "编辑探索差距，未量化转岗距离/成功率/固定时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "editing"
           ],
           "type": "prose"
         },
@@ -30858,13 +30917,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：监控与调度与设备状态与协调经验。"
+              "编辑对照：监控协调；非个人能力已证"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "r5-power"
           ],
           "type": "prose"
         },
@@ -30873,13 +30933,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：电力系统运行与调度规程与安全与电气专业要求。"
+              "目标需核：电力或蒸汽分配、负荷/切换和专业安全授权"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "r5-power"
           ],
           "type": "prose"
         },
@@ -30888,13 +30949,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，需专业训练"
+              "编辑探索差距，未量化转岗距离/成功率/固定时长"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "r5-power"
           ],
           "type": "prose"
         },
@@ -30903,13 +30965,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS/OEWS 与 O*NET：用于工资、就业与工作情境口径。"
+              "BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。"
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -30918,13 +30979,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "承运人与雇主制度与授权规则：用于派工、承诺与例外与数据管理边界。"
+              "认证查询不支持就业存量，现按BLS预测表。"
             ]
           },
           "id": "actors.display.market_signal_card.source.ratify",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -30933,13 +30993,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "执照与从业资格与经营与安全法规：用于航空运行控制与道路运输与网约车与安全生产要求。"
+              "实际链接是BLS表1.2，用于美国职业预测及典型学历、经验、训练分类；不是中国航空道路法或实采雇主制度，专业路线另见路径具体法规。"
             ]
           },
           "id": "actors.display.market_signal_card.source.employer",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -30948,13 +31007,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 43-5032.00：用于任务与工作情境与准备层级。"
+              "O*NET43-5032为运输材料/货物/乘客，或营业地点外安装、服务及紧急维修安排调度人员、班组、设备或服务车辆。12任务中10Core/2Supplemental；订购发放用品/设备、监督指定辖区通信为补充，不当所有岗位普遍必做。受理工作单、资源日程、转达信息、位置监控、记录费用库存和安排维修为主要任务；安排维修不等执行维修，协调人员不等经理。不同岗位可有任务交叉，名称不自动授驾驶、经营、安全管理或紧急调度权。 O*NET57情境：电话每天100%、面对面每天98%、持续接触92%、每天决策91%、协调81极重要/17非常、团队69极重要/31非常、准确67极重要/23非常、邮件每天83%、时间压力每天76%、不友好人每天69%、持续坐59%、每周超过40小时75%、规律61%、室内受控每天56%、他人安全非常高责任66%。不是每人固定班次、纯室内或一律夜班；决定错误54%回答完全不严重、19%极严重，不能一律灾难性。自动化38中等/24略有/25没有不等GenAI采用率。调查不是个体能力门槛或事故概率。"
             ]
           },
           "id": "actors.display.market_signal_card.source.onet",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         }
@@ -31111,12 +31170,20 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET 43-5032.00、BLS/OEWS、《民用航空飞行签派员执照和训练机构管理规则》（CCAR-65 部）"
+              "O*NET43-5032任务/情境/技术，OEWS2025工资，BLS2025—2035预测/训练，国家统计局2025交通行业背景，中国2022航空签派/2026道路特定资格与个人信息保护法。"
             ]
           },
           "id": "actors.display.source_card.source",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-current",
+            "r5-ccar-current",
+            "r5-road-current",
+            "r5-nbs-current",
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -31125,12 +31192,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-09-19"
+              "2026-10-09：九模块作者修订自审；独立审阅待后续阶段。"
             ]
           },
           "id": "actors.display.source_card.updated-at",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -31139,12 +31207,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源范围、限制与统计时期按原始证据分别核对；未取得的数据在相应位置可见标记。"
+              "受雇工资/就业/年均空缺/行业背景/具体角色资格分别解释；11旧facts及范围外Hero/FAQ/练习保护，作者不签全页一致。"
             ]
           },
           "id": "actors.display.source_card.note",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-current",
+            "r5-ccar-current",
+            "r5-road-current",
+            "r5-nbs-current"
           ],
           "type": "prose"
         }
@@ -31297,14 +31372,13 @@
                 "url": "https://www.onetonline.org/link/summary/11-3071.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "核验 2025 年工资数据中位与分位（36,030／42,750／50,340／62,450／78,140 美元/年；17.32／20.56／24.20／30.02／37.57 美元/时）。",
-                  "全国统计位置不是个人起薪或地区报价。"
+                  "美国43-5032.00，2025全国10/25/50/75/90分位：年36,030/42,750/50,340/62,450/78,140美元；时17.32/20.56/24.20/30.02/37.57美元。OEWS为直时税前受雇工资，含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不笼统排除所有补贴、绩效或合同雇员。分位非起薪、年限、上限或到手收入，官方年度工资不以个人固定工时另造。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official wage statistics",
                 "id": "bls",
-                "limitation": "全国统计位置不是个人起薪或地区报价。",
+                "limitation": "美国43-5032.00，2025全国10/25/50/75/90分位：年36,030/42,750/50,340/62,450/78,140美元；时17.32/20.56/24.20/30.02/37.57美元。OEWS为直时税前受雇工资，含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不笼统排除所有补贴、绩效或合同雇员。分位非起薪、年限、上限或到手收入，官方年度工资不以个人固定工时另造。",
                 "market": "美国",
                 "name": "O*NET OnLine（转引 U.S. Bureau of Labor Statistics）：43-5032.00 全国工资",
                 "period": "2025 年工资数据; accessed 2026-09-19",
@@ -31313,14 +31387,13 @@
                 "url": "https://www.onetonline.org/link/localwages/43-5032.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "第 65.5 条（民航局负责全国执照颁发与管理，民航地区管理局受理与组织考试与定期检查）与第 65.7 条（申请条件含年满 21 周岁与身心健康）与第 65.15 条（知识与能力要求）与第 65.17 条（理论考试与实践考试合格成绩均为百分制 80 分，实践考试须在理论成绩有效期 36 个日历月内完成，初次实践考试前实习不少于 90 个工作日）与第 65.31 条（航空承运人不得指定未取得执照的人员履行运行控制职责）。",
-                  "为航空运行控制的执照与训练管理要求，不规定工资水平，也不等同于美国州或雇主要求。"
+                  "中国2022交通运输部23号CCAR-65FS-R3（2022-10-01施行）：65.7申请含21周岁、健康、国家承认本科及以上学历、中文能力与培训考试条件；65.13至少1000课时，满足指定既有航空执照/相应经历等分支可至少500课时，不是200或800。65.17理论/实践80分，理论36日历月有效；初次实践考前6个月内在合格签派员监视下大型公共运输航空单位实习至少90工作日。65.23持证人可被运营人指定飞行运行控制监督，公共航空运输另核其运行规章；不能据此把所有航空运行控制辅助岗位一律作签派持证岗位。65.25不符合指定/训练/健康等不得行使权利；65.29持续有效不等免检查，65.31取得执照后36日历月内至少一次定期检查并合格。原12个月30天工作条件本轮未核其他运行规章，不作为65部条款。 原旧source条65.31解读有误，现新增完整交通部原文核对。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official regulation",
                 "id": "cn-rule",
-                "limitation": "为航空运行控制的执照与训练管理要求，不规定工资水平，也不等同于美国州或雇主要求。",
+                "limitation": "中国2022交通运输部23号CCAR-65FS-R3（2022-10-01施行）：65.7申请含21周岁、健康、国家承认本科及以上学历、中文能力与培训考试条件；65.13至少1000课时，满足指定既有航空执照/相应经历等分支可至少500课时，不是200或800。65.17理论/实践80分，理论36日历月有效；初次实践考前6个月内在合格签派员监视下大型公共运输航空单位实习至少90工作日。65.23持证人可被运营人指定飞行运行控制监督，公共航空运输另核其运行规章；不能据此把所有航空运行控制辅助岗位一律作签派持证岗位。65.25不符合指定/训练/健康等不得行使权利；65.29持续有效不等免检查，65.31取得执照后36日历月内至少一次定期检查并合格。原12个月30天工作条件本轮未核其他运行规章，不作为65部条款。 原旧source条65.31解读有误，现新增完整交通部原文核对。",
                 "market": "中国大陆",
                 "name": "《民用航空飞行签派员执照和训练机构管理规则》（CCAR-65 部，2022 年发布）",
                 "period": "2022 年发布；accessed 2026-09-19",
@@ -31393,14 +31466,13 @@
                 "url": "https://www.caac.gov.cn/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "为 BLS 职业展望检索入口，本职业页本轮未取得。",
-                  "本轮未取得本职业页一手口径，未引用其数值；就业与预测改用 O*NET 摘要页。"
+                  "BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。 检索入口不是雇主公告。"
                 ],
-                "evidence_type": "official employment projections",
+                "evidence_type": "official outlook search portal",
                 "id": "employer",
-                "limitation": "本轮未取得本职业页一手口径，未引用其数值；州与雇主要求仍需逐项核验。",
+                "limitation": "BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。 检索入口不是雇主公告。",
                 "market": "美国",
                 "name": "BLS Occupational Outlook Handbook：Dispatchers（本轮未取得本职业页一手口径）",
                 "period": "本轮未取得本职业页一手口径；accessed 2026-09-19",
@@ -31441,14 +31513,13 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明分行业与单位类型工资统计的发布口径。",
-                  "公开统计未建立与本职业对应的职业级工资分布。"
+                  "国家统计局2025交通运输仓储邮政业城镇非私营133,981/私营73,133元税前年平均，仅行业内多职业背景，非调度员中位、起薪、分位或月薪。城镇5人以上法人调查，排除个体/自由职业等；不能笼统排除所有外包公司受雇人员，平台结算不自动等法人受雇工资。调度岗位跨行业，不能全套交通行业。本轮未取得中国精确全国职业工资/代表性招聘薪资。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official industry wage statistics",
                 "id": "nbs",
-                "limitation": "公开统计未建立与本职业对应的职业级工资分布。",
+                "limitation": "国家统计局2025交通运输仓储邮政业城镇非私营133,981/私营73,133元税前年平均，仅行业内多职业背景，非调度员中位、起薪、分位或月薪。城镇5人以上法人调查，排除个体/自由职业等；不能笼统排除所有外包公司受雇人员，平台结算不自动等法人受雇工资。调度岗位跨行业，不能全套交通行业。本轮未取得中国精确全国职业工资/代表性招聘薪资。",
                 "market": "中国大陆",
                 "name": "国家统计局公开渠道（分行业与单位类型的工资统计口径）",
                 "period": "accessed 2026-09-19",
@@ -31469,18 +31540,17 @@
                 "name": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
                 "period": "NIST AI 100-1, 2023; accessed 2026-09-19",
                 "publisher": "U.S. National Institute of Standards and Technology",
-                "scope": "industry_proxy",
+                "scope": "contextual",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明本职业工资统计的来源与方法。",
-                  "全国统计位置不是个人起薪或地区报价。"
+                  "美国43-5032.00，2025全国10/25/50/75/90分位：年36,030/42,750/50,340/62,450/78,140美元；时17.32/20.56/24.20/30.02/37.57美元。OEWS为直时税前受雇工资，含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不笼统排除所有补贴、绩效或合同雇员。分位非起薪、年限、上限或到手收入，官方年度工资不以个人固定工时另造。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official wage statistics",
                 "id": "oews",
-                "limitation": "全国统计位置不是个人起薪或地区报价。",
+                "limitation": "美国43-5032.00，2025全国10/25/50/75/90分位：年36,030/42,750/50,340/62,450/78,140美元；时17.32/20.56/24.20/30.02/37.57美元。OEWS为直时税前受雇工资，含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不笼统排除所有补贴、绩效或合同雇员。分位非起薪、年限、上限或到手收入，官方年度工资不以个人固定工时另造。",
                 "market": "美国",
                 "name": "BLS Occupational Employment and Wage Statistics（OEWS）",
                 "period": "2025 年工资数据口径; accessed 2026-09-19",
@@ -31489,14 +31559,13 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "核验职业定义、任务（12 项）、工作情境、准备层级（Job Zone 1-2，SVP 低于 6.0）与 2024 年就业 218,700 与 2024—2034 年预测。",
-                  "美国精确职业数据；不定义中国资格、工资或岗位授权。"
+                  "O*NET43-5032为运输材料/货物/乘客，或营业地点外安装、服务及紧急维修安排调度人员、班组、设备或服务车辆。12任务中10Core/2Supplemental；订购发放用品/设备、监督指定辖区通信为补充，不当所有岗位普遍必做。受理工作单、资源日程、转达信息、位置监控、记录费用库存和安排维修为主要任务；安排维修不等执行维修，协调人员不等经理。不同岗位可有任务交叉，名称不自动授驾驶、经营、安全管理或紧急调度权。 O*NET57情境：电话每天100%、面对面每天98%、持续接触92%、每天决策91%、协调81极重要/17非常、团队69极重要/31非常、准确67极重要/23非常、邮件每天83%、时间压力每天76%、不友好人每天69%、持续坐59%、每周超过40小时75%、规律61%、室内受控每天56%、他人安全非常高责任66%。不是每人固定班次、纯室内或一律夜班；决定错误54%回答完全不严重、19%极严重，不能一律灾难性。自动化38中等/24略有/25没有不等GenAI采用率。调查不是个体能力门槛或事故概率。 BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet",
-                "limitation": "美国精确职业数据；不定义中国资格、工资或岗位授权。",
+                "limitation": "O*NET43-5032为运输材料/货物/乘客，或营业地点外安装、服务及紧急维修安排调度人员、班组、设备或服务车辆。12任务中10Core/2Supplemental；订购发放用品/设备、监督指定辖区通信为补充，不当所有岗位普遍必做。受理工作单、资源日程、转达信息、位置监控、记录费用库存和安排维修为主要任务；安排维修不等执行维修，协调人员不等经理。不同岗位可有任务交叉，名称不自动授驾驶、经营、安全管理或紧急调度权。 O*NET57情境：电话每天100%、面对面每天98%、持续接触92%、每天决策91%、协调81极重要/17非常、团队69极重要/31非常、准确67极重要/23非常、邮件每天83%、时间压力每天76%、不友好人每天69%、持续坐59%、每周超过40小时75%、规律61%、室内受控每天56%、他人安全非常高责任66%。不是每人固定班次、纯室内或一律夜班；决定错误54%回答完全不严重、19%极严重，不能一律灾难性。自动化38中等/24略有/25没有不等GenAI采用率。调查不是个体能力门槛或事故概率。 BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。",
                 "market": "美国",
                 "name": "O*NET OnLine：Dispatchers, Except Police, Fire, and Ambulance（43-5032.00）职业档案",
                 "period": "updated 2026; accessed 2026-09-19",
@@ -31505,14 +31574,13 @@
                 "url": "https://www.onetonline.org/link/summary/43-5032.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明本职业常见的调度与办公与通信工具。",
-                  "工具清单不等于自动化程度或替代结论。"
+                  "O*NET自身20软件类含排班、GPS、计算机辅助调度路由、铁路系统及航空飞行计划等，不等生成式AI部署。Hot2025关联本职业全部唯一美国招聘帖：Office17%、Excel12%、Outlook10%、Word5%、PowerPoint3%、SAP1%、Access/Windows各<1%，Kronos比例Not available非0；不证明岗位工具采用率或AI效益。未核本职业GenAI功能、采用、节时/减错、替代、工资/就业因果；ILO2025任务暴露研究未核本细类ISCO映射/分数，NIST AI RMF1.0自愿框架不授调度/法律权限。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "official technology keywords",
                 "id": "r2-ai",
-                "limitation": "工具清单不等于自动化程度或替代结论。",
+                "limitation": "O*NET自身20软件类含排班、GPS、计算机辅助调度路由、铁路系统及航空飞行计划等，不等生成式AI部署。Hot2025关联本职业全部唯一美国招聘帖：Office17%、Excel12%、Outlook10%、Word5%、PowerPoint3%、SAP1%、Access/Windows各<1%，Kronos比例Not available非0；不证明岗位工具采用率或AI效益。未核本职业GenAI功能、采用、节时/减错、替代、工资/就业因果；ILO2025任务暴露研究未核本细类ISCO映射/分数，NIST AI RMF1.0自愿框架不授调度/法律权限。",
                 "market": "美国",
                 "name": "O*NET OnLine：43-5032.00 Hot Technologies（工具与技术）",
                 "period": "updated 2026; accessed 2026-09-19",
@@ -31521,14 +31589,13 @@
                 "url": "https://www.onetonline.org/link/hot_tech/43-5032.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "为行业与单位类型层级口径，未提供与 43-5032.00 一一对应的全国职业工资分布。",
-                  "行业平均工资不是本职业岗位工资，也不覆盖平台结算与外包与个体用工。"
+                  "国家统计局2025交通运输仓储邮政业城镇非私营133,981/私营73,133元税前年平均，仅行业内多职业背景，非调度员中位、起薪、分位或月薪。城镇5人以上法人调查，排除个体/自由职业等；不能笼统排除所有外包公司受雇人员，平台结算不自动等法人受雇工资。调度岗位跨行业，不能全套交通行业。本轮未取得中国精确全国职业工资/代表性招聘薪资。 旧URL首页，全文另列r5-nbs-current。"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "r2-pay-1",
-                "limitation": "行业平均工资不是本职业岗位工资，也不覆盖平台结算与外包与个体用工。",
+                "limitation": "国家统计局2025交通运输仓储邮政业城镇非私营133,981/私营73,133元税前年平均，仅行业内多职业背景，非调度员中位、起薪、分位或月薪。城镇5人以上法人调查，排除个体/自由职业等；不能笼统排除所有外包公司受雇人员，平台结算不自动等法人受雇工资。调度岗位跨行业，不能全套交通行业。本轮未取得中国精确全国职业工资/代表性招聘薪资。 旧URL首页，全文另列r5-nbs-current。",
                 "market": "中国大陆",
                 "name": "2025年城镇单位就业人员年平均工资情况",
                 "period": "2025; accessed 2026-09-19",
@@ -31537,30 +31604,28 @@
                 "url": "https://www.stats.gov.cn/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明 OEWS 抽样、计酬口径与公布方法。",
-                  "方法说明不是本职业具体工资结论。"
+                  "旧URL为OOH检索入口，不是OEWS方法全文；精确方法另列r5-oews-concepts。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official outlook search portal",
                 "id": "r2-pay-2",
-                "limitation": "方法说明不是本职业具体工资结论。",
+                "limitation": "旧URL为OOH检索入口，不是OEWS方法全文；精确方法另列r5-oews-concepts。",
                 "market": "美国",
                 "name": "BLS Handbook of Methods：Occupational Employment and Wage Statistics",
                 "period": "accessed 2026-09-19",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "industry_proxy",
+                "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/occupation-finder.htm"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于核验 25 分位（42,750 美元/年；20.56 美元/时）与 75 分位（62,450 美元/年；30.02 美元/时）等分位值。",
-                  "分位是统计位置，不是起薪或上限承诺。"
+                  "美国43-5032.00，2025全国10/25/50/75/90分位：年36,030/42,750/50,340/62,450/78,140美元；时17.32/20.56/24.20/30.02/37.57美元。OEWS为直时税前受雇工资，含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不笼统排除所有补贴、绩效或合同雇员。分位非起薪、年限、上限或到手收入，官方年度工资不以个人固定工时另造。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official wage statistics",
                 "id": "r2-pay-3",
-                "limitation": "分位是统计位置，不是起薪或上限承诺。",
+                "limitation": "美国43-5032.00，2025全国10/25/50/75/90分位：年36,030/42,750/50,340/62,450/78,140美元；时17.32/20.56/24.20/30.02/37.57美元。OEWS为直时税前受雇工资，含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不笼统排除所有补贴、绩效或合同雇员。分位非起薪、年限、上限或到手收入，官方年度工资不以个人固定工时另造。",
                 "market": "美国",
                 "name": "O*NET OnLine（转引 U.S. Bureau of Labor Statistics）：43-5032.00 工资分位",
                 "period": "2025 年工资数据; accessed 2026-09-19",
@@ -31569,14 +31634,13 @@
                 "url": "https://www.onetonline.org/link/localwages/43-5032.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于核对本职业的执照与认证查询入口。",
-                  "该页不列出本职业的强制证书；上岗与授权要求以承运人与雇主与法域为准。"
+                  "认证查询入口不证明全国免照/就业规模或雇主制度。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official certification search portal",
                 "id": "ratify",
-                "limitation": "该页不列出本职业的强制证书；上岗与授权要求以承运人与雇主与法域为准。",
+                "limitation": "认证查询入口不证明全国免照/就业规模或雇主制度。",
                 "market": "美国",
                 "name": "O*NET OnLine：43-5032.00 执照与认证入口",
                 "period": "accessed 2026-09-19",
@@ -31617,20 +31681,154 @@
                 "url": "https://www.onetonline.org/link/details/43-5032.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于检索《中华人民共和国道路运输条例》与《道路运输从业人员管理规定》与《网络预约出租汽车经营服务管理暂行办法》等公开文件与解读（本页按法规名称与一般要求引用，未逐条核对条文编号）。",
-                  "主管部门入口不代替具体法规原文与所在地要求。"
+                  "2026交通运输部4号令修订道路运输从业人员管理规定，2026-03-20施行。第2/6条资格考试对应经营性道路客货驾驶员、危险货物驾驶/装卸管理/押运等特定人员，不能给普通调度员统一套驾驶员证；52条4500千克及以下普通货运车辆驾驶人员不适用。经营主体许可、网约车平台/驾驶员和一般安全生产其他法规条款本轮未逐核，不当已核个人调度资格。 旧URL主管部门首页不支持客服职业档案。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official portal",
                 "id": "teacher",
-                "limitation": "主管部门入口不代替具体法规原文与所在地要求。",
+                "limitation": "2026交通运输部4号令修订道路运输从业人员管理规定，2026-03-20施行。第2/6条资格考试对应经营性道路客货驾驶员、危险货物驾驶/装卸管理/押运等特定人员，不能给普通调度员统一套驾驶员证；52条4500千克及以下普通货运车辆驾驶人员不适用。经营主体许可、网约车平台/驾驶员和一般安全生产其他法规条款本轮未逐核，不当已核个人调度资格。 旧URL主管部门首页不支持客服职业档案。",
                 "market": "中国大陆",
                 "name": "中华人民共和国交通运输部（道路运输与网约车经营与从业资格公开入口）",
                 "period": "accessed 2026-09-19",
                 "publisher": "中华人民共和国交通运输部",
                 "scope": "official_portal",
                 "url": "https://www.mot.gov.cn/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-oews-concepts",
+                "limitation": "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。",
+                "market": "美国",
+                "name": "BLS OEWS工资人群与组成",
+                "period": "现行方法；本批检索2026-10-09",
+                "publisher": "Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "按适用合法依据、明确目的、最小必要及安全责任处理；敏感信息另核必要保护、适用单独同意与影响评估。"
+                ],
+                "evidence_type": "official law",
+                "id": "r5-cn-pipl",
+                "limitation": "适用于可识别司机、客户等自然人资料；个人行踪轨迹等敏感信息按具体内容及合法依据核，不把全部单位费用或位置记录一律敏感。去标识非匿名化，单位账号不自动授权外传。",
+                "market": "中国内地",
+                "name": "个人信息保护法患者与健康资料边界",
+                "period": "2021法；本批实际读；检索2026-10-09",
+                "publisher": "全国人大/中央网信办",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "具体系统能力、授权及实际采用需另核；治理框架不授签派资格或禁止全部合法自动化。"
+                ],
+                "evidence_type": "official framework",
+                "id": "r5-nist-current",
+                "limitation": "自愿跨职业AI治理建议，非派工报价授权、运输安全法规或调度工具效果实测。",
+                "market": "跨市场",
+                "name": "NIST AI RMF官方框架说明",
+                "period": "自愿框架1.0；本批实际读；检索2026-10-09",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本批实际读ILO2025摘要，本职业未核SOC43-5032与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。"
+                ],
+                "evidence_type": "official research summary",
+                "id": "r5-ilo-current",
+                "limitation": "本批实际读ILO2025摘要，本职业未核SOC43-5032与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。",
+                "market": "跨市场",
+                "name": "ILO2025 GenAI暴露研究官方摘要",
+                "period": "2025研究摘要；本批实际读；检索2026-10-09",
+                "publisher": "ILO",
+                "scope": "contextual",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "国家统计局2025交通运输仓储邮政业城镇非私营133,981/私营73,133元税前年平均，仅行业内多职业背景，非调度员中位、起薪、分位或月薪。城镇5人以上法人调查，排除个体/自由职业等；不能笼统排除所有外包公司受雇人员，平台结算不自动等法人受雇工资。调度岗位跨行业，不能全套交通行业。本轮未取得中国精确全国职业工资/代表性招聘薪资。"
+                ],
+                "evidence_type": "official industry wage statistics",
+                "id": "r5-nbs-current",
+                "limitation": "国家统计局2025交通运输仓储邮政业城镇非私营133,981/私营73,133元税前年平均，仅行业内多职业背景，非调度员中位、起薪、分位或月薪。城镇5人以上法人调查，排除个体/自由职业等；不能笼统排除所有外包公司受雇人员，平台结算不自动等法人受雇工资。调度岗位跨行业，不能全套交通行业。本轮未取得中国精确全国职业工资/代表性招聘薪资。",
+                "market": "中国大陆",
+                "name": "国家统计局2025城镇单位工资：交通运输、仓储和邮政业",
+                "period": "2025年",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。 BLS典型入门高中/同等学历、相关经验None、中期在岗训练；不是所有岗位统一门槛/学制。O*NET JZ1—2/SVP<6和几天到一年是准备组说明，非本职业全部培训时长。47%高中/同等、26%部分大学无学位、8%副学士是新入职所需学历受访反馈，不是47%岗位/雇主或员工学历。美国航空等具体专业路线及各州资格未逐核，不称全国免照。"
+                ],
+                "evidence_type": "official projections",
+                "id": "r5-bls-current",
+                "limitation": "BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。 BLS典型入门高中/同等学历、相关经验None、中期在岗训练；不是所有岗位统一门槛/学制。O*NET JZ1—2/SVP<6和几天到一年是准备组说明，非本职业全部培训时长。47%高中/同等、26%部分大学无学位、8%副学士是新入职所需学历受访反馈，不是47%岗位/雇主或员工学历。美国航空等具体专业路线及各州资格未逐核，不称全国免照。",
+                "market": "美国",
+                "name": "BLS表1.2调度员就业预测与典型训练",
+                "period": "2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国2022交通运输部23号CCAR-65FS-R3（2022-10-01施行）：65.7申请含21周岁、健康、国家承认本科及以上学历、中文能力与培训考试条件；65.13至少1000课时，满足指定既有航空执照/相应经历等分支可至少500课时，不是200或800。65.17理论/实践80分，理论36日历月有效；初次实践考前6个月内在合格签派员监视下大型公共运输航空单位实习至少90工作日。65.23持证人可被运营人指定飞行运行控制监督，公共航空运输另核其运行规章；不能据此把所有航空运行控制辅助岗位一律作签派持证岗位。65.25不符合指定/训练/健康等不得行使权利；65.29持续有效不等免检查，65.31取得执照后36日历月内至少一次定期检查并合格。原12个月30天工作条件本轮未核其他运行规章，不作为65部条款。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "r5-ccar-current",
+                "limitation": "中国2022交通运输部23号CCAR-65FS-R3（2022-10-01施行）：65.7申请含21周岁、健康、国家承认本科及以上学历、中文能力与培训考试条件；65.13至少1000课时，满足指定既有航空执照/相应经历等分支可至少500课时，不是200或800。65.17理论/实践80分，理论36日历月有效；初次实践考前6个月内在合格签派员监视下大型公共运输航空单位实习至少90工作日。65.23持证人可被运营人指定飞行运行控制监督，公共航空运输另核其运行规章；不能据此把所有航空运行控制辅助岗位一律作签派持证岗位。65.25不符合指定/训练/健康等不得行使权利；65.29持续有效不等免检查，65.31取得执照后36日历月内至少一次定期检查并合格。原12个月30天工作条件本轮未核其他运行规章，不作为65部条款。",
+                "market": "中国大陆",
+                "name": "2022民用航空飞行签派员执照和训练机构管理规则",
+                "period": "2022-10-01施行",
+                "publisher": "交通运输部",
+                "scope": "industry_proxy",
+                "url": "https://xxgk.mot.gov.cn/2020/jigou/fgs/202209/t20220906_3676411.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2026交通运输部4号令修订道路运输从业人员管理规定，2026-03-20施行。第2/6条资格考试对应经营性道路客货驾驶员、危险货物驾驶/装卸管理/押运等特定人员，不能给普通调度员统一套驾驶员证；52条4500千克及以下普通货运车辆驾驶人员不适用。经营主体许可、网约车平台/驾驶员和一般安全生产其他法规条款本轮未逐核，不当已核个人调度资格。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "r5-road-current",
+                "limitation": "2026交通运输部4号令修订道路运输从业人员管理规定，2026-03-20施行。第2/6条资格考试对应经营性道路客货驾驶员、危险货物驾驶/装卸管理/押运等特定人员，不能给普通调度员统一套驾驶员证；52条4500千克及以下普通货运车辆驾驶人员不适用。经营主体许可、网约车平台/驾驶员和一般安全生产其他法规条款本轮未逐核，不当已核个人调度资格。",
+                "market": "中国大陆",
+                "name": "道路运输从业人员管理规定2026第四次修正",
+                "period": "2026-03-20施行",
+                "publisher": "交通运输部",
+                "scope": "industry_proxy",
+                "url": "https://xxgk.mot.gov.cn/jigou/fgs/202602/t20260213_4200283.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "协调调节分配电力或蒸汽。目标专业运行、安全和切换权限需另核，不是客服。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "r5-power",
+                "limitation": "协调调节分配电力或蒸汽。目标专业运行、安全和切换权限需另核，不是客服。",
+                "market": "美国",
+                "name": "O*NET51-8012电力调度与分配人员",
+                "period": "检索2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-8012.00"
               }
             ]
           },
@@ -32243,7 +32441,7 @@
               "type": "prose"
             },
             "结论": {
-              "$item": "actors.ai-impact.ai-impact-table.9",
+              "$item": "actors.ai-impact.ai-impact-table.1",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -32257,7 +32455,7 @@
             }
           },
           {
-            "source_ref": "sag",
+            "source_ref": "r5-ilo-current",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.2.limit",
               "block": "ai-impact",
@@ -32265,7 +32463,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32278,13 +32476,13 @@
               "type": "prose"
             },
             "结论": {
-              "$item": "actors.ai-impact.ai-impact-table.5",
+              "$item": "actors.ai-impact.ai-impact-table.9",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "链接": {
-              "$source": "sag",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32362,7 +32560,7 @@
             }
           },
           {
-            "source_ref": "nist",
+            "source_ref": "r5-nist-current",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.5.limit",
               "block": "ai-impact",
@@ -32370,7 +32568,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "nist",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32389,7 +32587,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "nist",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32405,12 +32603,7 @@
         },
         "method_cards": [
           {
-            "含义": {
-              "$item": "actors.ai-impact.ai-impact-table.1",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "type": "prose"
-            },
+            "含义": "O*NET自身20软件类含排班、GPS、计算机辅助调度路由、铁路系统及航空飞行计划等，不等生成式AI部署。Hot2025关联本职业全部唯一美国招聘帖：Office17%、Excel12%、Outlook10%、Word5%、PowerPoint3%、SAP1%、Access/Windows各<1%，Kronos比例Not available非0；不证明岗位工具采用率或AI效益。未核本职业GenAI功能、采用、节时/减错、替代、工资/就业因果；ILO2025任务暴露研究未核本细类ISCO映射/分数，NIST AI RMF1.0自愿框架不授调度/法律权限。",
             "概念": {
               "$item": "actors.display.ai_impact_table.method.1.concept",
               "block": "ai-impact",
@@ -32594,7 +32787,7 @@
             }
           },
           {
-            "source_ref": "sag",
+            "source_ref": "r5-cn-pipl",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.6.answer",
               "block": "ai-impact",
@@ -33158,7 +33351,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33166,7 +33359,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33181,7 +33374,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33189,7 +33382,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33204,7 +33397,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "r5-ccar-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33212,7 +33405,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "r5-ccar-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33227,7 +33420,7 @@
           },
           {
             "href": {
-              "$source": "r2-pay-3",
+              "$source": "r5-road-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33235,7 +33428,7 @@
             },
             "id": "r2-pay-3",
             "label": {
-              "$source": "r2-pay-3",
+              "$source": "r5-road-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34091,7 +34284,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "sag-moa"
             ],
             "id": "image-use",
             "mitigation": {
@@ -34127,7 +34320,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "sag-moa"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -34272,7 +34465,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
+              "sag-moa",
               "employer"
             ],
             "id": "audition-feedback",
@@ -34300,7 +34493,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "sag-moa",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34308,7 +34501,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "sag-moa",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34346,7 +34539,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "r5-ccar-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34354,7 +34547,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "r5-ccar-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34392,7 +34585,7 @@
           },
           {
             "href": {
-              "$source": "nist",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34400,7 +34593,7 @@
             },
             "id": "nist",
             "label": {
-              "$source": "nist",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34426,33 +34619,33 @@
           "bls_table": [
             {
               "指标": "数据类型",
-              "数值": "执照与资格与授权要求为主",
-              "说明": "中国大陆公开工资统计按行业门类与单位类型发布，且本职业岗位分散在道路运输与民航与铁路与矿山与物流与平台等不同行业，未建立与本职业对应的职业级口径；本页因此保留缺口，不以行业均值替代。"
+              "数值": "职业工资缺口；行业背景",
+              "说明": "国家统计局2025交通运输仓储邮政业城镇非私营133,981/私营73,133元税前年平均，仅行业内多职业背景，非调度员中位、起薪、分位或月薪。城镇5人以上法人调查，排除个体/自由职业等；不能笼统排除所有外包公司受雇人员，平台结算不自动等法人受雇工资。调度岗位跨行业，不能全套交通行业。本轮未取得中国精确全国职业工资/代表性招聘薪资。"
             },
             {
-              "指标": "航空运行控制",
-              "数值": "须持有飞行签派员执照",
-              "说明": "按《民用航空飞行签派员执照和训练机构管理规则》（CCAR-65 部，2022 年），飞行签派员执照由民航局颁发与管理，航空承运人不得指定未取得执照的人员履行运行控制职责。"
+              "指标": "中国航空专业签派路线",
+              "数值": "按目标职责核执照和指定",
+              "说明": "中国2022交通运输部23号CCAR-65FS-R3（2022-10-01施行）：65.7申请含21周岁、健康、国家承认本科及以上学历、中文能力与培训考试条件；65.13至少1000课时，满足指定既有航空执照/相应经历等分支可至少500课时，不是200或800。65.17理论/实践80分，理论36日历月有效；初次实践考前6个月内在合格签派员监视下大型公共运输航空单位实习至少90工作日。65.23持证人可被运营人指定飞行运行控制监督，公共航空运输另核其运行规章；不能据此把所有航空运行控制辅助岗位一律作签派持证岗位。65.25不符合指定/训练/健康等不得行使权利；65.29持续有效不等免检查，65.31取得执照后36日历月内至少一次定期检查并合格。原12个月30天工作条件本轮未核其他运行规章，不作为65部条款。"
             },
             {
               "指标": "道路运输与网约车",
-              "数值": "经营许可与从业资格",
-              "说明": "按《中华人民共和国道路运输条例》《道路运输从业人员管理规定》《网络预约出租汽车经营服务管理暂行办法》对经营许可与从业人员从业资格与驾驶员条件作出规定（本页按法规名称与一般要求引用，未逐条核对条文编号）。"
+              "数值": "按具体人员/主体核",
+              "说明": "2026交通运输部4号令修订道路运输从业人员管理规定，2026-03-20施行。第2/6条资格考试对应经营性道路客货驾驶员、危险货物驾驶/装卸管理/押运等特定人员，不能给普通调度员统一套驾驶员证；52条4500千克及以下普通货运车辆驾驶人员不适用。经营主体许可、网约车平台/驾驶员和一般安全生产其他法规条款本轮未逐核，不当已核个人调度资格。"
             },
             {
               "指标": "安全生产",
               "数值": "安全生产法与承运人制度",
-              "说明": "按《中华人民共和国安全生产法》与承运人与雇主的安全生产与调度制度执行，事故与安全异常须按规定上报。"
+              "说明": "编辑核安全角色与真实承运人制度，未逐核安全生产法及事故处理条款，不以名称当具体法律证明。"
             },
             {
               "指标": "计酬方式",
               "数值": "按小时或按月，可能含补贴与绩效",
-              "说明": "相关岗位计酬结构差别较大，常见基本工资加班次或夜班补贴与绩效或提成与值班与加班安排。"
+              "说明": "编辑核小时/月计酬、绩效及适用补贴/工时；未实采全国常见结构。"
             },
             {
               "指标": "工时与值守",
               "数值": "轮班与节假日值守",
-              "说明": "美国反馈工作时间「规律（固定班次）」61%，但常见轮班与夜间与节假日值守；工时与休息安排按承运人制度与所在法域法规执行。"
+              "说明": "61%规律为美国情境调查，不证明中国普遍轮班/值守安排。"
             },
             {
               "指标": "样本边界",
@@ -34462,7 +34655,7 @@
             {
               "指标": "地区比较",
               "数值": "中美证据分别解释",
-              "说明": "美国分位为受雇税前工资统计口径（不含加班与补贴与绩效与外包与平台结算收入）；中国大陆按行业与单位或平台制度确定，两者应分别解释，不能直接换算或合并。"
+              "说明": "美国43-5032.00，2025全国10/25/50/75/90分位：年36,030/42,750/50,340/62,450/78,140美元；时17.32/20.56/24.20/30.02/37.57美元。OEWS为直时税前受雇工资，含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不笼统排除所有补贴、绩效或合同雇员。分位非起薪、年限、上限或到手收入，官方年度工资不以个人固定工时另造。"
             }
           ],
           "china_ai_row": {
@@ -34474,8 +34667,8 @@
           "china_class_row": "中国大陆官方与制度性材料",
           "china_edu_table": [
             {
-              "学历段": "航空运行控制岗位",
-              "岗位方向": "飞行签派员执照由民航局颁发与管理，民航地区管理局受理申请与组织考试与定期检查；申请条件含年满 21 周岁与身心健康，理论考试与实践考试合格成绩均为百分制 80 分，且航空承运人不得指定未取得执照的人员履行运行控制职责。",
+              "学历段": "中国航空签派专业路线",
+              "岗位方向": "中国2022交通运输部23号CCAR-65FS-R3（2022-10-01施行）：65.7申请含21周岁、健康、国家承认本科及以上学历、中文能力与培训考试条件；65.13至少1000课时，满足指定既有航空执照/相应经历等分支可至少500课时，不是200或800。65.17理论/实践80分，理论36日历月有效；初次实践考前6个月内在合格签派员监视下大型公共运输航空单位实习至少90工作日。65.23持证人可被运营人指定飞行运行控制监督，公共航空运输另核其运行规章；不能据此把所有航空运行控制辅助岗位一律作签派持证岗位。65.25不符合指定/训练/健康等不得行使权利；65.29持续有效不等免检查，65.31取得执照后36日历月内至少一次定期检查并合格。原12个月30天工作条件本轮未核其他运行规章，不作为65部条款。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
                 "block": "china-salary",
@@ -34485,7 +34678,7 @@
             },
             {
               "学历段": "道路运输与网约车岗位",
-              "岗位方向": "道路运输经营与从业人员从业资格与网约车平台与驾驶员条件按相应法规执行；具体条件与流程以交通运输主管部门与所在地规定为准。",
+              "岗位方向": "2026交通运输部4号令修订道路运输从业人员管理规定，2026-03-20施行。第2/6条资格考试对应经营性道路客货驾驶员、危险货物驾驶/装卸管理/押运等特定人员，不能给普通调度员统一套驾驶员证；52条4500千克及以下普通货运车辆驾驶人员不适用。经营主体许可、网约车平台/驾驶员和一般安全生产其他法规条款本轮未逐核，不当已核个人调度资格。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
                 "block": "china-salary",
@@ -34495,7 +34688,7 @@
             },
             {
               "学历段": "安全生产与数据管理",
-              "岗位方向": "按《中华人民共和国安全生产法》与承运人与雇主制度执行安全生产与事故上报；客户与司机与承运人与定位与费用数据按最小必要原则处理并留痕。",
+              "岗位方向": "安全职责与授权须核实际岗位/制度；个人信息保护法适用于可识别自然人信息；个人行踪轨迹等可属敏感个人信息，客户/司机/承运人、位置及费用数据不能不分主体与内容一律称敏感。按合法依据、明确目的、最小必要、告知和安全处理；敏感信息另核充分必要、严格保护及适用单独同意/影响评估。机构批准账号不等允许上传外部AI，去标识非匿名化。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.theater",
                 "block": "china-salary",
@@ -34578,14 +34771,14 @@
           "china_ref": {
             "$join": [
               {
-                "$source": "r2-pay-1",
+                "$source": "r5-nbs-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
                 "item": "actors.source-register.published.1"
               },
               {
-                "$source": "r2-pay-1",
+                "$source": "r5-nbs-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -34615,7 +34808,7 @@
               "月薪参考": {
                 "$join": [
                   {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
+                    "$fact": "r5-current-china-jiaojiang-featured-daily-2026",
                     "field": "display_value"
                   },
                   {
@@ -34641,7 +34834,7 @@
           "china_soc_row": "中国大陆薪资口径",
           "edu": "训练与执照与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "r5-current-china-jiaojiang-featured-daily-2026"
           ],
           "sources_note": "来源链接按各自适用范围使用。",
           "ui": {
@@ -34704,10 +34897,10 @@
         },
         "bls_table": [
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-low",
             "指标": "薪资 · 10 分位",
             "数值": {
-              "$fact": "low",
+              "$fact": "r5-current-low",
               "field": "display_value"
             },
             "说明": "本职业 2025 年工资数据的分布低端，是统计位置而不是入职起薪。"
@@ -34718,10 +34911,10 @@
             "说明": "本职业 2025 年工资数据的下四分位；小时口径为 20.56 美元。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-median",
             "指标": "薪资 · 中位数",
             "数值": {
-              "$fact": "median",
+              "$fact": "r5-current-median",
               "field": "display_value"
             },
             "说明": "本职业 2025 年工资数据的中间位置：一半从业者低于、一半高于该值（中位时薪 24.20 美元）。"
@@ -34732,40 +34925,40 @@
             "说明": "本职业 2025 年工资数据的上四分位；小时口径为 30.02 美元。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-high",
             "指标": "薪资 · 90 分位",
             "数值": {
-              "$fact": "high",
+              "$fact": "r5-current-high",
               "field": "display_value"
             },
-            "说明": "本职业 2025 年工资数据的分布高端，通常与行业与承运人类型、地区与是否含带班或专业领域职责相关。"
+            "说明": "2025第90分位，非收入上限/带班或专业资格溢价证明。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024 就业 · 本职业人数",
+            "fact_ref": "r5-current-employment",
+            "指标": "2025就业 · 本职业人数",
             "数值": {
-              "$fact": "employment",
+              "$fact": "r5-current-employment",
               "field": "display_value"
             },
-            "说明": "2024 年本职业就业规模（O*NET 摘要页口径约 218,700 人）；全国总量不说明某行业与某承运人的具体机会。"
+            "说明": "BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 增长预测",
+            "fact_ref": "r5-current-growth",
+            "指标": "2025—2035就业 · 净变化预测",
             "数值": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "display_value"
             },
-            "说明": "O*NET 摘要页标注为「下降（-1% 或更低）」，该页未给出具体百分比，本页按口径原文表述；未取得 BLS 职业展望本职业页一手口径。"
+            "说明": "BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 预计空缺",
+            "fact_ref": "r5-current-openings",
+            "指标": "2025—2035就业 · 年均空缺",
             "数值": {
-              "$fact": "openings",
+              "$fact": "r5-current-openings",
               "field": "display_value"
             },
-            "说明": "约 18,500 个，为预测期内因增长与更替等形成的合计空缺，不是每年净增。"
+            "说明": "BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。"
           }
         ],
         "boundary": {
@@ -34827,7 +35020,7 @@
           "type": "prose"
         },
         "growth": {
-          "$fact": "growth",
+          "$fact": "r5-current-growth",
           "field": "display_value"
         },
         "heading": {
@@ -34842,13 +35035,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024 年基期（O*NET 摘要页与详细资料页）",
+        "industry_period": "2025就业行业份额/自雇及2026情境，非行业工资",
         "industry_rows": [
           {
-            "fact_ref": "median",
-            "industry": "道路运输与物流与航空与铁路与矿山与公共事业与网约车平台等运营场景（O*NET 摘要页与任务描述，未附行业门类占比与人数）",
+            "fact_ref": "r5-current-industry-theater",
+            "industry": "2025就业行业份额（非行业工资）",
             "median": {
-              "$fact": "industry-theater",
+              "$fact": "r5-current-industry-theater",
               "field": "display_value"
             },
             "note": {
@@ -34859,10 +35052,10 @@
             }
           },
           {
-            "fact_ref": "median",
-            "industry": "调度中心与办公室与场站值班室，按班次或轮班排班",
+            "fact_ref": "r5-current-industry-education",
+            "industry": "新入职学历受访反馈与典型训练",
             "median": {
-              "$fact": "industry-education",
+              "$fact": "r5-current-industry-education",
               "field": "display_value"
             },
             "note": {
@@ -34873,10 +35066,10 @@
             }
           },
           {
-            "fact_ref": "median",
-            "industry": "工作情境：每天电话交谈 100%、每天面对面讨论 98%、与他人持续接触 92%、每天面对严格期限 76%、持续坐着 59%、每天使用电子邮件 83%",
+            "fact_ref": "r5-current-industry-amusement",
+            "industry": "工作情境（非行业工资）",
             "median": {
-              "$fact": "industry-amusement",
+              "$fact": "r5-current-industry-amusement",
               "field": "display_value"
             },
             "note": {
@@ -34887,7 +35080,7 @@
             }
           },
           {
-            "industry": "O*NET 未提供更细的行业分布与行业工资",
+            "industry": "自雇比例1.1%；细行业工资缺口",
             "median": "统计不含自雇",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
@@ -34943,7 +35136,7 @@
           }
         ],
         "median": {
-          "$fact": "median",
+          "$fact": "r5-current-median",
           "field": "display_value"
         },
         "outlook_heading": {
@@ -34953,7 +35146,7 @@
           "type": "prose"
         },
         "outlook_period": {
-          "$fact": "growth",
+          "$fact": "r5-current-growth",
           "field": "period"
         },
         "wage_column_labels": [
@@ -34979,7 +35172,7 @@
             },
             "label": "较低工资位置",
             "value": {
-              "$fact": "low",
+              "$fact": "r5-current-low",
               "field": "display_value"
             }
           },
@@ -34993,7 +35186,7 @@
             },
             "label": "全国中位工资",
             "value": {
-              "$fact": "median",
+              "$fact": "r5-current-median",
               "field": "display_value"
             }
           },
@@ -35007,7 +35200,7 @@
             },
             "label": "较高工资位置",
             "value": {
-              "$fact": "high",
+              "$fact": "r5-current-high",
               "field": "display_value"
             }
           }
@@ -35160,7 +35353,7 @@
           {
             "geography": "美国",
             "horizon": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "period"
             },
             "interpretation": {
@@ -35177,15 +35370,15 @@
             },
             "metric": "就业总体变化",
             "occupation_scope": "调度员（O*NET-SOC 43-5032.00）",
-            "source_id": "bls",
+            "source_id": "r5-bls-current",
             "value": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "display_value"
             }
           },
           {
             "geography": "美国",
-            "horizon": "2024 年基期",
+            "horizon": "2025基期",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -35200,16 +35393,16 @@
             },
             "metric": "本职业就业规模",
             "occupation_scope": "调度员（O*NET-SOC 43-5032.00）",
-            "source_id": "ratify",
-            "value": "2024 年约 218,700 人（O*NET 摘要页口径）；实际招聘受运输与物流与平台调度需求与调度自动化程度影响"
+            "source_id": "r5-bls-current",
+            "value": "本职业203,500人，全国存量非实际招聘量"
           },
           {
-            "geography": "美国与中国大陆",
+            "geography": "美国",
             "horizon": "现行口径",
             "interpretation": {
-              "$item": "actors.market-signals.market-signal-card.4",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
+              "$item": "actors.display.onet_structured_fields_block.onet",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
               "type": "prose"
             },
             "limitation": {
@@ -35220,15 +35413,15 @@
             },
             "metric": "训练与执照与资格路径",
             "occupation_scope": "调度员（O*NET-SOC 43-5032.00）",
-            "source_id": "employer",
-            "value": "美国以在职培训与带教为主（Job Zone 1-2），无统一执照但须遵守驾驶与工时等适用要求；中国大陆按行业区分，航空运行控制须持有飞行签派员执照并由运营人指定，道路运输与网约车按经营许可与从业资格要求执行"
+            "source_id": "r5-bls-current",
+            "value": "BLS典型入门高中/同等学历、相关经验None、中期在岗训练；不是所有岗位统一门槛/学制。O*NET JZ1—2/SVP<6和几天到一年是准备组说明，非本职业全部培训时长。47%高中/同等、26%部分大学无学位、8%副学士是新入职所需学历受访反馈，不是47%岗位/雇主或员工学历。美国航空等具体专业路线及各州资格未逐核，不称全国免照。"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35236,7 +35429,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35251,7 +35444,7 @@
           },
           {
             "href": {
-              "$source": "ratify",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35259,7 +35452,7 @@
             },
             "id": "ratify",
             "label": {
-              "$source": "ratify",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35274,7 +35467,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35282,7 +35475,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35519,12 +35712,7 @@
             "alternate_value": null,
             "label": "O*NET（43-5032.00：任务、兴趣代码 CR 与工作情境）",
             "secondary_value": null,
-            "value": {
-              "$item": "actors.display.onet_structured_fields_block.onet",
-              "block": "profile",
-              "copy_key": "career.item.onet-structured-fields-block",
-              "type": "prose"
-            }
+            "value": "BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。 BLS典型入门高中/同等学历、相关经验None、中期在岗训练；不是所有岗位统一门槛/学制。O*NET JZ1—2/SVP<6和几天到一年是准备组说明，非本职业全部培训时长。47%高中/同等、26%部分大学无学位、8%副学士是新入职所需学历受访反馈，不是47%岗位/雇主或员工学历。美国航空等具体专业路线及各州资格未逐核，不称全国免照。"
           },
           {
             "alternate_value": null,
@@ -36314,14 +36502,14 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "employer",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36380,14 +36568,14 @@
           },
           {
             "href": {
-              "$source": "teacher",
+              "$source": "dancing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "teacher",
+              "$source": "dancing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -37062,6 +37250,146 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "50,340美元/年；24.20美元/时（2025中位）",
+        "fact_id": "r5-current-median",
+        "market": "美国",
+        "measure": "全国受雇工资分位",
+        "occupation_scope": "美国43-5032.00，2025全国10/25/50/75/90分位：年36,030/42,750/50,340/62,450/78,140美元；时17.32/20.56/24.20/30.02/37.57美元。OEWS为直时税前受雇工资，含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不笼统排除所有补贴、绩效或合同雇员。分位非起薪、年限、上限或到手收入，官方年度工资不以个人固定工时另造。",
+        "period": "2025",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "36,030美元/年；17.32美元/时（2025第10分位）",
+        "fact_id": "r5-current-low",
+        "market": "美国",
+        "measure": "全国受雇工资分位",
+        "occupation_scope": "美国43-5032.00，2025全国10/25/50/75/90分位：年36,030/42,750/50,340/62,450/78,140美元；时17.32/20.56/24.20/30.02/37.57美元。OEWS为直时税前受雇工资，含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不笼统排除所有补贴、绩效或合同雇员。分位非起薪、年限、上限或到手收入，官方年度工资不以个人固定工时另造。",
+        "period": "2025",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "78,140美元/年；37.57美元/时（2025第90分位）",
+        "fact_id": "r5-current-high",
+        "market": "美国",
+        "measure": "全国受雇工资分位",
+        "occupation_scope": "美国43-5032.00，2025全国10/25/50/75/90分位：年36,030/42,750/50,340/62,450/78,140美元；时17.32/20.56/24.20/30.02/37.57美元。OEWS为直时税前受雇工资，含基本工资、小费、规定津贴、佣金和生产奖金等，排除加班溢价、轮班差额、非生产奖金及自雇等；不笼统排除所有补贴、绩效或合同雇员。分位非起薪、年限、上限或到手收入，官方年度工资不以个人固定工时另造。",
+        "period": "2025",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025就业203,500人",
+        "fact_id": "r5-current-employment",
+        "market": "美国",
+        "measure": "职业就业存量",
+        "occupation_scope": "BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025—2035减少0.7%；官方净减1,500人",
+        "fact_id": "r5-current-growth",
+        "market": "美国",
+        "measure": "预测净变化",
+        "occupation_scope": "BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025—2035年均空缺16,000个，含更替",
+        "fact_id": "r5-current-openings",
+        "market": "美国",
+        "measure": "年均空缺",
+        "occupation_scope": "BLS43-5032：2025就业203,500→2035预计202,100，官方净变化-1,500、-0.7%；两端已取整人数相减-1,400不替代官方净变化。2025—2035年均空缺16,000，含增长与更替，非十年合计或每年净增。2025自雇1.1%。表1.2本细类OOH列为破折号，用精确预测表，不套其他组合OOH。全国预测非个人录用概率、地方招聘量或AI因果。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET43-5032为运输材料/货物/乘客，或营业地点外安装、服务及紧急维修安排调度人员、班组、设备或服务车辆。12任务中10Core/2Supplemental；订购发放用品/设备、监督指定辖区通信为补充，不当所有岗位普遍必做。受理工作单、资源日程、转达信息、位置监控、记录费用库存和安排维修为主要任务；安排维修不等执行维修，协调人员不等经理。不同岗位可有任务交叉，名称不自动授驾驶、经营、安全管理或紧急调度权。",
+        "fact_id": "r5-current-identity",
+        "market": "美国",
+        "measure": "职业定义任务边界",
+        "occupation_scope": "O*NET43-5032为运输材料/货物/乘客，或营业地点外安装、服务及紧急维修安排调度人员、班组、设备或服务车辆。12任务中10Core/2Supplemental；订购发放用品/设备、监督指定辖区通信为补充，不当所有岗位普遍必做。受理工作单、资源日程、转达信息、位置监控、记录费用库存和安排维修为主要任务；安排维修不等执行维修，协调人员不等经理。不同岗位可有任务交叉，名称不自动授驾驶、经营、安全管理或紧急调度权。",
+        "period": "2026页面",
+        "source_refs": [
+          "onet",
+          "sag-moa"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET2025主要行业：运输仓储41%、行政支持服务10%，为本职业就业行业份额非工资份额。未实采全国多数按小时计酬/轮班/补贴结构，具体需核公告合同。",
+        "fact_id": "r5-current-industry-theater",
+        "market": "美国",
+        "measure": "就业行业份额非工资",
+        "occupation_scope": "O*NET2025主要行业：运输仓储41%、行政支持服务10%，为本职业就业行业份额非工资份额。未实采全国多数按小时计酬/轮班/补贴结构，具体需核公告合同。",
+        "period": "2025",
+        "source_refs": [
+          "onet",
+          "sag-moa"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "BLS典型入门高中/同等学历、相关经验None、中期在岗训练；不是所有岗位统一门槛/学制。O*NET JZ1—2/SVP<6和几天到一年是准备组说明，非本职业全部培训时长。47%高中/同等、26%部分大学无学位、8%副学士是新入职所需学历受访反馈，不是47%岗位/雇主或员工学历。美国航空等具体专业路线及各州资格未逐核，不称全国免照。",
+        "fact_id": "r5-current-industry-education",
+        "market": "美国",
+        "measure": "入职所需学历反馈与典型训练非行业工资",
+        "occupation_scope": "BLS典型入门高中/同等学历、相关经验None、中期在岗训练；不是所有岗位统一门槛/学制。O*NET JZ1—2/SVP<6和几天到一年是准备组说明，非本职业全部培训时长。47%高中/同等、26%部分大学无学位、8%副学士是新入职所需学历受访反馈，不是47%岗位/雇主或员工学历。美国航空等具体专业路线及各州资格未逐核，不称全国免照。",
+        "period": "2026页面与2025—2035",
+        "source_refs": [
+          "onet",
+          "sag-moa",
+          "r5-bls-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET57情境：电话每天100%、面对面每天98%、持续接触92%、每天决策91%、协调81极重要/17非常、团队69极重要/31非常、准确67极重要/23非常、邮件每天83%、时间压力每天76%、不友好人每天69%、持续坐59%、每周超过40小时75%、规律61%、室内受控每天56%、他人安全非常高责任66%。不是每人固定班次、纯室内或一律夜班；决定错误54%回答完全不严重、19%极严重，不能一律灾难性。自动化38中等/24略有/25没有不等GenAI采用率。调查不是个体能力门槛或事故概率。",
+        "fact_id": "r5-current-industry-amusement",
+        "market": "美国",
+        "measure": "工作情境非行业工资",
+        "occupation_scope": "O*NET57情境：电话每天100%、面对面每天98%、持续接触92%、每天决策91%、协调81极重要/17非常、团队69极重要/31非常、准确67极重要/23非常、邮件每天83%、时间压力每天76%、不友好人每天69%、持续坐59%、每周超过40小时75%、规律61%、室内受控每天56%、他人安全非常高责任66%。不是每人固定班次、纯室内或一律夜班；决定错误54%回答完全不严重、19%极严重，不能一律灾难性。自动化38中等/24略有/25没有不等GenAI采用率。调查不是个体能力门槛或事故概率。",
+        "period": "2026页面",
+        "source_refs": [
+          "onet",
+          "sag-moa"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "中国精确全国调度员工资缺口；2025交通仓储邮政非私营133981/私营73133元税前年平均仅行业背景",
+        "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
+        "market": "中国大陆",
+        "measure": "职业工资缺口与行业背景",
+        "occupation_scope": "国家统计局2025交通运输仓储邮政业城镇非私营133,981/私营73,133元税前年平均，仅行业内多职业背景，非调度员中位、起薪、分位或月薪。城镇5人以上法人调查，排除个体/自由职业等；不能笼统排除所有外包公司受雇人员，平台结算不自动等法人受雇工资。调度岗位跨行业，不能全套交通行业。本轮未取得中国精确全国职业工资/代表性招聘薪资。",
+        "period": "2025",
+        "source_refs": [
+          "r5-nbs-current"
+        ]
       }
     ]
   },
@@ -37070,7 +37398,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "运营派工与排班 · 工作单与优先级 · 记录与交接",
@@ -37121,7 +37449,7 @@
       "text": "调度员"
     }
   },
-  "source_content_sha256": "c66ca08d1d4ef4c4ab955da2de1dc4826331aeefbde6732135292af42fd4429b",
+  "source_content_sha256": "8452b21e8cb6e91145d664694e714dd7db87a6aa1ee51c61405b090fdbcd5d05",
   "subject": {
     "canonical_slug": "dispatchers-except-police-fire-and-ambulance",
     "name": "调度员",

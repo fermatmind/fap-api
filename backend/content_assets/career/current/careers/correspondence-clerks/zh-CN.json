@@ -8,6 +8,15 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:g04-employment-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:g04-growth-2025-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:g04-openings-2025-2035": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -555,7 +564,7 @@
         "status": "mapped"
       },
       "item:actors.display.career_path_block.locale.summary": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.career_path_block.source.bls": {
         "status": "mapped"
@@ -759,7 +768,7 @@
         "status": "mapped"
       },
       "item:actors.display.career_quick_answers_block.comparison.answer": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.career_quick_answers_block.comparison.boundary.label": {
         "status": "mapped"
@@ -1005,7 +1014,7 @@
         "status": "mapped"
       },
       "item:actors.display.career_snapshot_primary_locale.quote-limits": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.career_snapshot_primary_locale.scenario.background": {
         "status": "mapped"
@@ -1020,7 +1029,7 @@
         "status": "mapped"
       },
       "item:actors.display.career_snapshot_secondary_locale.boundary.detail": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.career_snapshot_secondary_locale.factor.paid-work": {
         "status": "mapped"
@@ -1077,19 +1086,19 @@
         "status": "mapped"
       },
       "item:actors.display.fermat_decision_card.summary": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.fermat_decision_card.title": {
         "status": "mapped"
       },
       "item:actors.display.fit_decision_checklist.boundary-detail": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.fit_decision_checklist.how-detail": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.fit_decision_checklist.suit-detail": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.market_signal_card.heading": {
         "status": "mapped"
@@ -1329,7 +1338,7 @@
         "status": "mapped"
       },
       "item:actors.display.personality_fit_block.direct-answer": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.personality_fit_block.directions.agent.direction": {
         "status": "mapped"
@@ -1500,7 +1509,7 @@
         "status": "mapped"
       },
       "item:actors.display.source_card.note": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.source_card.source": {
         "status": "mapped"
@@ -1557,10 +1566,10 @@
         "status": "mapped"
       },
       "item:actors.fit.personality-fit-block.8": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.market-signals.market-signal-card.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.market-signals.market-signal-card.2": {
         "status": "mapped"
@@ -1572,7 +1581,7 @@
         "status": "mapped"
       },
       "item:actors.market-signals.market-signal-card.5": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.navigation.links.1": {
         "status": "pending_mapping"
@@ -1581,10 +1590,10 @@
         "status": "mapped"
       },
       "item:actors.path.career-path-block.2": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.career-path-block.3": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.credential-boundary.1": {
         "status": "mapped"
@@ -1617,7 +1626,7 @@
         "status": "mapped"
       },
       "item:actors.profile.work-context-block.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.profile.work-context-block.2": {
         "status": "mapped"
@@ -1641,16 +1650,16 @@
         "status": "mapped"
       },
       "item:actors.quick-decision.fit-decision-checklist.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.quick-decision.fit-decision-checklist.2": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.quick-decision.fit-decision-checklist.3": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.quick-decision.fit-decision-checklist.4": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.risk.career-risk-cards.1": {
         "status": "mapped"
@@ -1671,7 +1680,7 @@
         "status": "pending_mapping"
       },
       "item:actors.sources.boundary.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.sources.faq.1": {
         "status": "mapped"
@@ -1686,7 +1695,7 @@
         "status": "mapped"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.4": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.5": {
         "status": "mapped"
@@ -6815,16 +6824,8 @@
         "status": "mapped"
       },
       "career_path_block.locale_requirements.summary": {
-        "ref": {
-          "path": [
-            "components",
-            "career_path_block",
-            "locale_requirements",
-            "summary"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_path_block.schema_version": {
         "ref": {
@@ -7934,17 +7935,8 @@
         "status": "mapped"
       },
       "career_quick_answers_block.items.02.answer": {
-        "ref": {
-          "path": [
-            "components",
-            "career_quick_answers_block",
-            "items",
-            1,
-            "answer"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_quick_answers_block.items.02.question": {
         "ref": {
@@ -11424,15 +11416,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.boundary": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_secondary_locale",
-            "boundary"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.direct_answer": {
         "ref": {
@@ -14351,15 +14336,8 @@
         "status": "mapped"
       },
       "fermat_decision_card.summary": {
-        "ref": {
-          "path": [
-            "components",
-            "fermat_decision_card",
-            "summary"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "fermat_decision_card.title": {
         "ref": {
@@ -14374,37 +14352,16 @@
         "status": "mapped"
       },
       "fit_decision_checklist.boundary": {
-        "ref": {
-          "path": [
-            "components",
-            "fit_decision_checklist",
-            "boundary"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "fit_decision_checklist.how": {
-        "ref": {
-          "path": [
-            "components",
-            "fit_decision_checklist",
-            "how"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "fit_decision_checklist.suit": {
-        "ref": {
-          "path": [
-            "components",
-            "fit_decision_checklist",
-            "suit"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "hero.ai.derivation": {
         "ref": null,
@@ -16006,15 +15963,8 @@
         "status": "mapped"
       },
       "market_signal_card.direct_answer": {
-        "ref": {
-          "path": [
-            "components",
-            "market_signal_card",
-            "direct_answer"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "market_signal_card.heading": {
         "ref": {
@@ -17992,15 +17942,8 @@
         "status": "mapped"
       },
       "personality_fit_block.direct_answer": {
-        "ref": {
-          "path": [
-            "components",
-            "personality_fit_block",
-            "direct_answer"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "personality_fit_block.directions.01.direction": {
         "ref": {
@@ -19474,15 +19417,8 @@
         "status": "mapped"
       },
       "source_card.note": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "note"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.href": {
         "ref": {
@@ -22711,7 +22647,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "按来信量与账单周期推进：先分类来信、调取相关记录并判断处置方式，"
+              "编辑组织线索：分类来函、核记录再起草分派与留痕，具体次序按实际业务流程，不是唯一班次指令。"
             ]
           },
           "id": "actors.profile.work-context-block.4",
@@ -22739,7 +22675,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "协作与汇报关系｜与同组同事、主管以及业务、财务与档案岗位按流程协作，"
+              "与主管及业务财务档案人员核材料和待办，真实签署、退款或答复权限按机构及法律核。"
             ]
           },
           "id": "actors.profile.work-context-block.6",
@@ -22781,7 +22717,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "函件文员的工作可以分成三类相连但独立的工作面。第一类是来信阅读与处置判断：阅读来信、邮件与表单，判断来意属于商品请求、损坏索赔、信用查询、欠款、账单错误还是服务投诉，再决定由谁回复、用什么模板。第二类是函件起草与核对：汇集相关订单、账单与账户记录，核对完整性与准确性，起草标准回复与确认函，按统一格式与份数整理后送有权签署人签字。第三类是记录维护与分派催收：维护控制记录与往来台账，把来函分派到相应部门，计算应缴费用并发出催款函，记录已收款项，必要时编制周期性报告。三类工作面在一天内高频交替，但判断依据、留痕要求与可授权范围不同；金融保险、房地产租赁、专业服务与政府场景的函件类型与合规重点也不同。"
+              "编辑按来函判断、函件记录及补充事务归纳，非所有岗位一天高频承担全部。O*NET17任务中7Core为往来控制记录、阅读判断、汇集核完整准确、备索赔信用账单发票投诉材料、周期报告、起草回复及部门分派；10Supplemental含收款记录保管、商品订单、解释规则、校对份数送签、计算提供记录费用及求付款、特殊产品资料、确认函、套用表函、核请求可行性及挂号寄送。类别非频率；费用催款不等于所有债务催收。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.answer",
@@ -22893,7 +22829,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "维护往来台账与控制记录 → 分派来函到相关部门 → 计算应缴费用 → 发出催款函 → 记录已收款项与安全保管 → 编制报告"
+              "维护往来记录与分派是Core；提供记录费用计算、付款函和收款保管是Supplemental，具体按岗位，不泛化为所有债务催收。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.shared.value",
@@ -23117,7 +23053,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "函件文员对来函判断的准确性、金额与记录核对、回复与格式的规范性、以及分派与留痕的可追溯性负责；对外承诺与金额让步、拒赔与合同变更不由其单独决定。"
+              "函件文员处理来函判断、金额与记录核对、回复格式、分派与留痕；对外承诺、金额让步、拒赔与合同变更能否由本人决定，须按机构实际授权及业务流程核对，不越权处理。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.responsibility.primary",
@@ -23215,7 +23151,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的准备层级与任职条件不适用于本职业，须按各职业官方资料与所在机构规定逐项核对。"
+              "本岗已有订单、收费、收款及归档任务交叉；相邻职业按目标任务重点及任职要求核，不因分类不同排除全部交叉。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.boundary.secondary",
@@ -23271,7 +23207,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "要调取并核对订单、账单与账户记录，确认金额、编号与状态一致；凭记忆或只看来信就回复，是金额差错与重复催收最常见的来源。"
+              "核金额、编号与状态；本轮未取得差错原因排序，不能称只看来信是最常见来源。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.02.question",
@@ -23285,7 +23221,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "标准回复要写明事实、引用的规则或模板编号与下一步；把推测当结论、引用过期规则或口头承诺，会让回复失去依据并引发争议。"
+              "编辑风险分析：标准回复要写明事实、引用的规则或模板编号与下一步；把推测当结论、引用过期规则或口头承诺，可能使回复失去依据并引发争议。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.03.question",
@@ -23299,7 +23235,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按统一格式与正确份数整理，并校对拼写与编号；格式或份数错误会导致返工或延误，拼写与编号错误会降低文件可信度。"
+              "编辑风险分析：按统一格式与正确份数整理，并校对拼写与编号；格式或份数错误可能导致返工或延误，拼写与编号错误可能降低文件可信度。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.04.question",
@@ -23327,7 +23263,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "来函分派与催款要写清收件方、金额、期限与依据，已收款项要如实记录并安全保管；分派不清或收款不留痕会让责任断开并造成账实不符。"
+              "编辑风险分析：来函分派与催款要写清收件方、金额、期限与依据，已收款项要如实记录并安全保管；分派不清或收款不留痕可能使责任断开并增加账实不符的风险。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.05.question",
@@ -23355,7 +23291,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "遇到金额争议、疑似欺诈、拒赔、合同变更或超出模板与授权的情形，要停止直接答复，向主管或相应部门核对后升级，并把已处理与待确认事项写进记录。"
+              "编辑建议：遇到金额争议、疑似欺诈、拒赔或合同变更，先核实际权限与业务流程；超出授权或依据不明的部分向主管或相应部门求证升级，有权且依据明确的答复按流程处理，并记录已处理与待确认事项。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.06.question",
@@ -23425,7 +23361,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "分派催收与收款｜催款并记录款项｜把来函分派到相应部门，计算应缴费用并发出催款函，记录已收款项并按规定安全保管，处理账款与开票信息。"
+              "分派及补充收费事务｜分派来函是Core；提供记录费用与付款函、收款记录保管是Supplemental，不直接推全国岗位负责全部账款。"
             ]
           },
           "id": "actors.display.responsibilities_block.05",
@@ -23467,7 +23403,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "函件文员通常在环境可控的室内办公场所作业，按常规工作日或班次安排，持续面对大量阅读、核对与书写任务，并需要与客户、同事和外部机构沟通；"
+              "美国当前档案以办公记录与函件判断为重点，调查响应非中国必然条件；具体业务量及分工另核。"
             ]
           },
           "id": "actors.display.work_context_block.summary",
@@ -23481,7 +23417,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作场所｜O*NET 2026 年对函件文员（43-4021.00）的调查：78% 表示每天在环境可控的室内作业，63% 表示持续或几乎持续地坐着工作，28% 表示每天处于干扰性或不舒适的声级环境。"
+              "当前美国78%每日可控室内、63%几乎一直坐及37%超半坐、28%每日不适噪声。页面更新年不等调查统一2026，响应不是疾病发生率。"
             ]
           },
           "id": "actors.display.work_context_block.locations",
@@ -23509,7 +23445,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "再起草与校对回复、按流程送签并分派；遇到金额争议、疑似欺诈或超出标准回复的事项时停止直接答复、向主管或相应部门核对并升级；当日结束前更新台账、记录已收款项并交接待办。"
+              "编辑核对线索：起草校对、送实际有权签署者、分派记录待办；疑难按真实机构流程核，不保证每封函件统一必须签批。"
             ]
           },
           "id": "actors.display.work_context_block.organization",
@@ -23523,7 +23459,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "节奏与强度｜O*NET 2026 年对函件文员（43-4021.00）的调查：40% 表示每周一次以上面对时间压力，48% 表示每天都需要作出决定，65% 认为准确与严谨至少「非常重要」，66% 认为重复同一任务至少「非常重要」，60% 表示典型工作周为 40 小时。"
+              "当前美国时限26%每日、40%每周但非每日；决定48%每日。准确65%极重要+22%很重要，重复66%极重要+27%很重要；60%周40小时、29%超40、11%少于40；不把40%每周响应写成含每日合计。"
             ]
           },
           "id": "actors.display.work_context_block.schedule",
@@ -23537,7 +23473,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "并向主管汇报疑难来函、争议与待办；O*NET 2026 年对函件文员（43-4021.00）的调查：79% 表示与他人持续接触，87% 每天有面对面讨论，79% 每天有电话沟通，100% 每天使用电子邮件，50% 认为在团队中共同工作至少「非常重要」，34% 认为协调或带领他人至少「比较重要」。"
+              "持续接触79%、面对面每日87%、电话每日79%、邮件每日100%；团队50%极重要及41%很重要；协调17%极重要、33%很重要、16%重要、34%较重要，不把34%当以上合计。"
             ]
           },
           "id": "actors.display.work_context_block.collaboration",
@@ -23551,7 +23487,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "复核与责任链条｜O*NET 2026 年对函件文员（43-4021.00）的调查：39% 认为对同事或机构结果的影响至少「非常重要」，27% 表示对他人工作结果承担中等责任，53% 表示拥有一定决策自由、59% 表示在确定任务与优先级上有较大自由；函件与金额处理按机构制度留痕，争议与退款须按程序升级并存档。"
+              "对机构结果39%很重要，其他结果等级分别核不补未显示；对他人结果27%中等责任。决定自由32%很多/53%一些/15%有限；任务优先级59%很多/41%一些，流程约束不等人人自由有限。"
             ]
           },
           "id": "actors.display.work_context_block.review",
@@ -23565,12 +23501,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "质量与职业要求｜O*NET 2026 年对函件文员（43-4021.00）的调查：涉及大量重复动作（34% 表示超过一半时间做重复动作），需要长时间保持选择性注意；38% 表示一年以上才会遇到冲突情形，40% 表示一年以上才会遇到不愉快、愤怒或无礼的人，33% 认为工作高度自动化；涉及客户数据与金额时的隐私与合规要求以适用法律和机构规定为准，本页不构成作业授权。"
+              "重复动作31%几乎一直+34%超半；冲突38%、无礼愤怒40%均是每年但非每月，不是一年以上才遇到。自动化33%高、28%中、29%轻，非AI采用。中国《个人信息保护法》第4/6/13/28/51/57条分别说明个人信息、最小必要与处理基础、金融账户等敏感个人信息、安全措施操作权限训练及泄露补救通知。含可识别个人的来函可能是个人信息，不能把所有来信都断言敏感；匿名化或纯企业材料另判。单位权限不替代法定处理基础；具体保留期限、委托及事件程序按适用要求核。"
             ]
           },
           "id": "actors.display.work_context_block.quality",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -23593,7 +23530,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "函件文员的任务、详细工作活动、工作情境百分比与兴趣代码 CE"
+              "O*NET17任务中7Core为往来控制记录、阅读判断、汇集核完整准确、备索赔信用账单发票投诉材料、周期报告、起草回复及部门分派；10Supplemental含收款记录保管、商品订单、解释规则、校对份数送签、计算提供记录费用及求付款、特殊产品资料、确认函、套用表函、核请求可行性及挂号寄送。类别非频率；费用催款不等于所有债务催收。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.onet",
@@ -23607,7 +23544,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2024 年就业约 6,900 人、2024—2034 年预测标签 Decline（-1% 或更低）与 Job Zone 1–2"
+              "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
@@ -23621,7 +23558,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2024 年行业分布（金融保险 20%、房地产租赁 14%、专业与技术服务 13%、其他 53%）、教育需求受访比例与技术工具"
+              "美国O*NET JobZone1–2、SVP低于6；层级概述几天至一年训练非本岗每人时长。教育响应43%高中、28%两年制学位、17%部分大学无学位，其他未显示，不称高中及以下占多数。BLS组合通常高中、短期在职训练（通常数周，政府可能数月），非中国统一门槛。当前O*NET行业页金融保险19%、专业科学技术13%、行政支持12%、其他56%（含医疗社会救助和零售），未明统计年度；不是行业工资或中国分布。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
@@ -23635,12 +23572,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆同类事务性文员岗位的分类语境，与中国职业级工资缺口"
+              "中国《个人信息保护法》第4/6/13/28/51/57条分别说明个人信息、最小必要与处理基础、金融账户等敏感个人信息、安全措施操作权限训练及泄露补救通知。含可识别个人的来函可能是个人信息，不能把所有来信都断言敏感；匿名化或纯企业材料另判。单位权限不替代法定处理基础；具体保留期限、委托及事件程序按适用要求核。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
           "source_refs": [
-            "onet"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -23649,12 +23586,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆行业均值代理与职业级工资缺口"
+              "NBS2025条件匹配背景：金融非私营211,164／私营140,451，租赁商务服务110,162／68,919元税前年均。单位主营分类匹配才引用；规模以上企业办事及有关人员94,936元年均是宽岗位另一覆盖，非本岗职业分位。城镇5人以上法人、不含个体自由职业、含奖金津补贴；中国本岗工资及招聘分布未取得，不换月到手。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23663,7 +23600,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "函件文员在美国对应 O*NET-SOC 43-4021.00（Correspondence Clerks）；BLS 职业展望手册把该类岗位归入 Information Clerks（信息文员，43-4000 组合口径）并明确列出。工作内容包括阅读来信并判断诉求与处置方式、汇集并核对订单账单与账户记录、起草与校对标准回复与确认函件、把来函分派到相应部门、计算应缴费用并发出催款函、记录已收款项、向客户解释规则与流程、从记录中汇总并编制周期性报告。中国侧，同类事务性文员岗位散落在不同单位与外包场景，中美两套分类不是一一对应：本页不把美国的准备层级、工资或资格套用到中国大陆，也不把客户服务代表、订单文员、档案文员或账单过账文员的职责并入本职业。"
+              "美国43-4021函件文员，BLS信息文员组合含本岗并有单岗表。O*NET17任务中7Core为往来控制记录、阅读判断、汇集核完整准确、备索赔信用账单发票投诉材料、周期报告、起草回复及部门分派；10Supplemental含收款记录保管、商品订单、解释规则、校对份数送签、计算提供记录费用及求付款、特殊产品资料、确认函、套用表函、核请求可行性及挂号寄送。类别非频率；费用催款不等于所有债务催收。中国同类岗位实体及统计映射本轮未完成，不断言全国没有任何对应分类。"
             ]
           },
           "id": "actors.display.definition_block.definition",
@@ -24166,7 +24103,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "指机构是否真的把工具放进流程。采用取决于预算、采购与合规审查、系统集成、数据与隐私要求以及人员培训，通常慢于技术能力本身。"
+              "采用取决实际流程、预算和训练，本轮无本岗采用速度实测，不保证慢于技术能力。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.3",
@@ -24181,7 +24118,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "引入工具时责任不能随系统一起转移；下面是本职业可执行的人工控制步骤。"
+              "以下为编辑控制核对建议，具体机构需验证并纳入流程，不是可直接执行的统一程序。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.4",
@@ -24256,7 +24193,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "列出雇主招聘中提到的文字处理、办公与记录管理相关技术关键词。"
+              "2025美国Lightcast10热门软件：Office16%、Excel9%、Epic/Outlook各7%、Word5%；Access/PPT/SharePoint/Windows/SAP比例未提供。关键词不是使用率、AI采用率或个人熟练度；Epic不授予诊療权限。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.9",
@@ -24286,7 +24223,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答：目前可核对的是任务层面的变化，而不是岗位替代的时间表。文字处理与模板库、邮件分类与工单系统、记录与台账管理、账单与账户的数据汇总工具可减少抄录与初步分派；但读来信判断诉求、核对金额与记录、处理争议与例外、按格式起草与校对、以及向客户解释规则仍依赖人工判断，并受机构流程与合规要求约束。技术暴露不等于组织采用，更不等于岗位消失或收入变化。"
+              "编辑待验证工具机会：分类提示、草稿、记录汇总及差异提示；常规模板系统不自动是生成式AI，须核真实性能、数据权限和复核。无本岗采用率、节约量或用工工资因果，不称已有任务变化实测。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24361,7 +24298,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "研究不提供本职业单职业分数、采用率或替代日期。"
+              "本轮未取得直接匹配43-4021的单职业分数或部署因果；不判断研究绝无单职业分数。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.limit",
@@ -24436,7 +24373,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025 年职位数 1,287,600 人，2025—2035 年下降 2%（-30,100），年均约 125,600 个替换性空缺；O*NET 单一职业口径 43-4021.00 为 2024 年约 6,900 人、2024—2034 年预测下降。"
+              "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
@@ -24481,7 +24418,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "要求明确 AI 系统的角色、责任、记录与人工监督。"
+              "NIST自愿框架建议明确角色责任及人工监督，非中国强制业务流程。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.conclusion",
@@ -24526,7 +24463,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 为函件文员（43-4021.00）列出阅读来信并判断诉求与处置方式、汇集并核对订单账单与账户记录、起草与校对回复与确认函、按格式与份数整理并送签、分派来函并发出催款函、记录已收款项、汇总数据编制报告、按挂号或快递准备邮寄材料等任务。"
+              "O*NET17任务中7Core为往来控制记录、阅读判断、汇集核完整准确、备索赔信用账单发票投诉材料、周期报告、起草回复及部门分派；10Supplemental含收款记录保管、商品订单、解释规则、校对份数送签、计算提供记录费用及求付款、特殊产品资料、确认函、套用表函、核请求可行性及挂号寄送。类别非频率；费用催款不等于所有债务催收。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.1.answer",
@@ -24556,7 +24493,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 技术档案列出雇主在函件文员岗位招聘中提到的文字处理与办公套件类技术关键词（如文字处理软件与办公套件）；这属于招聘市场信号，不代表使用率或熟练度。"
+              "2025美国Lightcast10热门软件：Office16%、Excel9%、Epic/Outlook各7%、Word5%；Access/PPT/SharePoint/Windows/SAP比例未提供。关键词不是使用率、AI采用率或个人熟练度；Epic不授予诊療权限。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
@@ -24631,7 +24568,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册信息文员组合口径显示 2025—2035 年下降 2%（-30,100），年均约 125,600 个空缺且全部来自替换需求；O*NET 单一职业口径 43-4021.00 为 2024 年约 6,900 人、2024—2034 年预测下降、累计约 700 个空缺；该预测不含技术替代时点。"
+              "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
@@ -24661,7 +24598,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。任务暴露度量说明任务与技术的接近程度，不给出替代日期或单职业预测。"
+              "暴露不能直接决定岗位消失时点；本轮无本岗部署到用工变化因果。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.6.answer",
@@ -24751,7 +24688,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供本职业岗位雇主提到的技术关键词，属招聘市场信号"
+              "2025美国Lightcast10热门软件：Office16%、Excel9%、Epic/Outlook各7%、Word5%；Access/PPT/SharePoint/Windows/SAP比例未提供。关键词不是使用率、AI采用率或个人熟练度；Epic不授予诊療权限。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.scope",
@@ -24781,7 +24718,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按任务度量生成式 AI 与职业任务的接近程度，不提供单职业分数或自动化率"
+              "ILO支持任务暴露方法，非本岗采用率、自动化率或替代时点；本轮精确分数未取得。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
@@ -24901,7 +24838,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供 AI 系统风险治理的角色、责任、记录与人工监督要求"
+              "NIST自愿AI风险治理建议，非法定函件处理规程。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.nist.scope",
@@ -24991,7 +24928,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "邮件与来函的分类与关键词识别可辅助初判。"
+              "编辑待验证机会（非采用实测）：邮件与来函的分类与关键词识别可辅助初判。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.1.change",
@@ -25051,7 +24988,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数据汇总与对账工具可提示差异与缺失。"
+              "编辑待验证机会（非采用实测）：数据汇总与对账工具可提示差异与缺失。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.2.change",
@@ -25111,7 +25048,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "模板库与写作助手可生成草稿并作拼写与格式校验。"
+              "编辑待验证机会（非采用实测）：模板库与写作助手可生成草稿并作拼写与格式校验。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.change",
@@ -25171,7 +25108,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "格式与份数校验可由系统辅助。"
+              "编辑待验证机会（非采用实测）：格式与份数校验可由系统辅助。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.change",
@@ -25231,7 +25168,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工单分派与催款提醒可由系统编排。"
+              "编辑待验证机会（非采用实测）：工单分派与催款提醒可由系统编排。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.change",
@@ -25291,7 +25228,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "收款与台账系统可自动登记流水。"
+              "编辑待验证机会（非采用实测）：收款与台账系统可自动登记流水。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.change",
@@ -25351,7 +25288,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "报表模板与统计工具可自动生成汇总。"
+              "编辑待验证机会（非采用实测）：报表模板与统计工具可自动生成汇总。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.7.change",
@@ -25396,7 +25333,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "邮件与来函的分类、关键词识别与工单分发可由系统自动完成并生成草稿。"
+              "编辑待验证方向：邮件与来函的分类、关键词识别与工单分发可由系统自动完成并生成草稿。性能、数据及权限按机构核，不保证自动完成。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.1.change",
@@ -25441,7 +25378,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "订单、账单与台账的数据汇总、周期性报告与模板生成可自动完成。"
+              "编辑待验证方向：订单、账单与台账的数据汇总、周期性报告与模板生成可自动完成。性能、数据及权限按机构核，不保证自动完成。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.2.change",
@@ -25486,7 +25423,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "标准回复可由模板库与写作助手生成，拼写与格式可自动校验。"
+              "编辑待验证方向：标准回复可由模板库与写作助手生成，拼写与格式可自动校验。性能、数据及权限按机构核，不保证自动完成。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.3.change",
@@ -25531,7 +25468,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核对来信诉求、订单与账户记录的来源，确认没有被错误合并、覆盖或错配；输入错误会直接进入回复与金额。"
+              "编辑风险分析：核对来信诉求、订单与账户记录的来源，确认没有被错误合并、覆盖或错配；输入错误可能进入回复与金额。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.1.description",
@@ -25621,13 +25558,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "发现金额争议、疑似欺诈、拒赔、数据泄露或超出模板与授权的情形时停止直接答复并升级。"
+              "编辑核对建议：异常金额、疑似欺诈或越权限回复按单位流程求证升级；泄露按适用法定补救与通知要求处理，不把停止回复当完整事件程序。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.4.description",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "nist",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -25681,7 +25618,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "系统不会对回复结果与金额承担责任，误分类或错配会直接造成回复错误与客户争议。"
+              "编辑风险分析：系统不会对回复结果与金额承担责任，误分类或错配可能造成回复错误与客户争议。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.1.consequence",
@@ -25726,7 +25663,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "台账不实或缺失会让复核与对账失去依据，也无法还原处理过程。"
+              "编辑风险分析：台账不实或缺失可能使复核与对账失去依据，可能增加还原处理过程的难度。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.2.consequence",
@@ -25771,7 +25708,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "过度依赖汇总工具会削弱对金额、编号与状态的核对习惯，导致账实不符。"
+              "编辑风险假设：依赖汇总可能遗漏核对，本轮无本岗技能退化因果量。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.3.consequence",
@@ -25816,13 +25753,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "来信与账户信息属敏感数据，越权访问或不当共享会造成合规与信任后果。"
+              "中国《个人信息保护法》第4/6/13/28/51/57条分别说明个人信息、最小必要与处理基础、金融账户等敏感个人信息、安全措施操作权限训练及泄露补救通知。含可识别个人的来函可能是个人信息，不能把所有来信都断言敏感；匿名化或纯企业材料另判。单位权限不替代法定处理基础；具体保留期限、委托及事件程序按适用要求核。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.4.consequence",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -25861,7 +25797,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把生成文本直接发出会让机构在措辞、承诺与合规上失去控制。"
+              "编辑风险分析：把生成文本直接发出可能使机构在措辞、承诺与合规上失去控制。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.5.consequence",
@@ -25876,7 +25812,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对外函件须经授权与签批后发出，保留校对稿与依据，写明责任人与时间。"
+              "编辑控制建议：对外函件按实际授权与业务流程校对；需要签批时送有权者签批后发出，并按适用流程保留校对稿、依据、责任人与时间。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.5.control",
@@ -26033,7 +25969,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "主要用人场景：金融机构与保险公司的函件与客服后台、房地产与租赁机构的合同与账单事务、专业服务与咨询机构的客户函件处理，以及政府与公共机构的来信与档案事务岗位。"
+              "编辑待核场景：金融保险、外包支持服务、专业服务等函件后台；行业匹配按实际单位主营分类，不以美国份额证明中国主要雇主。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
@@ -26047,7 +25983,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "常见场景：以收信、分类与分派为主的往来处理岗位，以核对账单与账户记录为主的账务文员岗位，以及以档案整理、录入与报告汇总为主的内勤岗位。"
+              "编辑提供的岗位观察线索：来信分类与分派、账单账户记录核对、档案录入与报告汇总。实际中国岗位组合与频率须按目标单位核对，本页未取得招聘样本分布。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.3",
@@ -26075,12 +26011,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "说明：未取得职业单列数值不等于官方从未发布；本页只登记实际查阅范围与结果，不用行业均值或美国数据代填。"
+              "NBS2025条件匹配背景：金融非私营211,164／私营140,451，租赁商务服务110,162／68,919元税前年均。单位主营分类匹配才引用；规模以上企业办事及有关人员94,936元年均是宽岗位另一覆盖，非本岗职业分位。城镇5人以上法人、不含个体自由职业、含奖金津补贴；中国本岗工资及招聘分布未取得，不换月到手。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26103,14 +26039,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "：中国大陆同类岗位多称文员、内勤或客服后台，分属不同单位与外包场景，没有与 O*NET-SOC 43-4021.00 对应的统一职业分类或计酬口径"
+              "本轮未完成中美精确职业映射，不按名称认定全国没有分类或统一计酬；用人岗位按实际公告。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
             "sag-moa"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -26131,7 +26068,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：美国口径下该职业通常要求高中文凭或同等学历，准备层级为 Job Zone 1–2（SVP 低于 6.0），在职训练从几天到一年；O*NET 摘要页的教育需求受访比例显示以高中及以下为主。美国口径与中国大陆同类岗位的录用与学历要求不可直接等同，具体以目标单位规定为准。"
+              "美国O*NET JobZone1–2、SVP低于6；层级概述几天至一年训练非本岗每人时长。教育响应43%高中、28%两年制学位、17%部分大学无学位，其他未显示，不称高中及以下占多数。BLS组合通常高中、短期在职训练（通常数周，政府可能数月），非中国统一门槛。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -26145,7 +26082,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：中国大陆同类岗位通常经过招聘或内部转岗后上岗，部分单位要求相关专业背景或办公软件能力；学历、软件熟练度与岗位授权是不同层级的条件，不能互相替代。"
+              "目标招聘学历、专业及软件要求本轮未取样，不声称全国岗位通常接受某种背景；训练与实际数据权限分开。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -26159,12 +26096,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：涉及客户数据、金额与合规处理的岗位受隐私与业务规则约束，岗位职责与可授权范围须按具体单位与现行规定核对；本页不构成作业授权或录用条件。"
+              "中国《个人信息保护法》第4/6/13/28/51/57条分别说明个人信息、最小必要与处理基础、金融账户等敏感个人信息、安全措施操作权限训练及泄露补救通知。含可识别个人的来函可能是个人信息，不能把所有来信都断言敏感；匿名化或纯企业材料另判。单位权限不替代法定处理基础；具体保留期限、委托及事件程序按适用要求核。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "sag-moa"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26173,7 +26110,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：函件与账务方向的组长或主管方向通常要求熟悉流程并具备核对与带训能力，任职条件由单位规定；本页不构成资格认定。"
+              "编辑管理方向线索：核目标流程、带训及质量职责，不保证一线经验或学历即可竞聘；目标任职条件未取得。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -26187,7 +26124,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "常见场景：函件与账务岗位多按常规工作日或班次安排，月末与账单周期前后工作更集中；具体节奏须按目标单位与本行业务周期核对。"
+              "实际函件量、账期及排班按单位核，本轮无中国月末集中或班制的全国分布；美国100%规律排班响应不等统一上下班时段。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
@@ -26201,7 +26138,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与工资的关系：邮件分类、模板库与台账系统可能改变函件与后台岗位的分工与记录方式，但中国大陆公开工资统计按行业门类与人员类别聚合发布，工具变化不会产生可核对的职业级数值；本页因此不给出任何与 AI 相关的函件文员工资影响数字。"
+              "本轮无中国本岗AI到工资因果；行业均值不测该关系，资料缺口不证明未来永远无法统计。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
@@ -26215,12 +26152,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页中国大陆薪资板块只保留证据边界：不把行业均值当作职业工资、不用美国数据替代，也不陈述函件文员的全国中位数、起薪或分位数。"
+              "NBS2025条件匹配背景：金融非私营211,164／私营140,451，租赁商务服务110,162／68,919元税前年均。单位主营分类匹配才引用；规模以上企业办事及有关人员94,936元年均是宽岗位另一覆盖，非本岗职业分位。城镇5人以上法人、不含个体自由职业、含奖金津补贴；中国本岗工资及招聘分布未取得，不换月到手。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         }
@@ -26237,7 +26174,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国统计需先确认口径：本页的工资与分位为 O*NET／OEWS 43-4021.00（Correspondence Clerks）单一职业口径；就业规模与就业预测同样取自该单一职业口径（O*NET 就业趋势，2024—2034 年）；BLS 职业展望手册的 Information Clerks 组合口径（含函件文员）仅作对照。"
+              "2025全国工资与2025—2035预测分别保留本岗口径，组合仅对照。本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。OEWS有薪岗位税前常规货币工资，排除自雇、直接家庭雇员和未付薪家庭人员；官方年值可引用，2080标准折算不保证个人工时，不推到手或加班奖金。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.1",
@@ -26267,7 +26204,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "按小时披露的工资不能在没有个人工时与加班安排时推算稳定年薪或月收入；兼职、季节性工作量与加班安排也会影响实际收入。"
+              "OEWS有薪岗位税前常规货币工资，排除自雇、直接家庭雇员和未付薪家庭人员；官方年值可引用，2080标准折算不保证个人工时，不推到手或加班奖金。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.3",
@@ -26297,7 +26234,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业表只说明该口径下的就业分布（以金融保险、房地产租赁与专业服务为主），不代表所有雇主的工资；不同行业与地区的工资差异要看具体岗位与地区。"
+              "当前O*NET行业页金融保险19%、专业科学技术13%、行政支持12%、其他56%（含医疗社会救助和零售），未明统计年度；不是行业工资或中国分布。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.5",
@@ -26387,7 +26324,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "分位对应分布位置而不是资历：第 10 分位与第 90 分位之间的差异同时来自行业、地区、岗位职责与工时安排；来源没有证明与经验年限的对应关系。"
+              "分位为统计位置非资历，未证明行业工时经验各自贡献比例。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.percentile",
@@ -26432,7 +26369,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "金融与保险是最主要的用人行业之一，占 2024 年该项就业分布的 20%。"
+              "当前O*NET行业页金融保险19%、专业科学技术13%、行政支持12%、其他56%（含医疗社会救助和零售），未明统计年度；不是行业工资或中国分布。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
@@ -26447,7 +26384,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "房地产与租赁占 14%、专业、科学与技术服务占 13%；这些是就业分布，不是工资中位数。"
+              "当前O*NET行业页金融保险19%、专业科学技术13%、行政支持12%、其他56%（含医疗社会救助和零售），未明统计年度；不是行业工资或中国分布。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
@@ -26462,7 +26399,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布按 O*NET 原口径保留，本页不推算未披露的细分雇主类型。"
+              "当前O*NET行业页金融保险19%、专业科学技术13%、行政支持12%、其他56%（含医疗社会救助和零售），未明统计年度；不是行业工资或中国分布。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.amusement",
@@ -26477,7 +26414,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业表只说明就业归类，本行按原口径保留，不推算雇主类型或收入差异。"
+              "当前O*NET行业页金融保险19%、专业科学技术13%、行政支持12%、其他56%（含医疗社会救助和零售），未明统计年度；不是行业工资或中国分布。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
@@ -26507,7 +26444,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "统计工资以有薪岗位为准：每周工时、兼职或季节性安排以及加班直接决定实际到手收入，因此时薪与年收入不能互相替代。"
+              "OEWS有薪岗位税前常规货币工资，排除自雇、直接家庭雇员和未付薪家庭人员；官方年值可引用，2080标准折算不保证个人工时，不推到手或加班奖金。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.paid-work",
@@ -26522,7 +26459,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同一职业名下的职责差异不小：只负责来信分类与分派、负责账单与账户核对、或负责报告汇总与数据质量的岗位，对应不同的计酬口径。"
+              "按实际单位岗位核计酬；本轮无来信分类、账单核对及汇总职责独立计酬的全国制度证据。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.scope",
@@ -26537,7 +26474,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工作场所与安排影响收入：行业（金融保险、房地产租赁、专业服务、政府）、所在地区与城市规模，以及是否为全职或兼职岗位。"
+              "地区行业及工时合同按具体岗位核，本轮未取得各因素的个人收入独立因果量。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.setting",
@@ -26590,7 +26527,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能长时间专注阅读与核对、在重复任务中保持细致并愿意按格式反复校对的人，通常更容易适应。"
+              "编辑自问：是否愿意持续阅读核对及校对；本轮无偏好到胜任率实测，不保证更易适应。"
             ]
           },
           "id": "actors.fit.personality-fit-block.1",
@@ -26604,7 +26541,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "这类岗位每天都有大量重复的阅读、核对与校对；能接受重复并把每次核对做实，才是准确的前提。"
+              "本岗任务包含阅读、核对与校对，O*NET重复任务重要性不能推定每天工作量。编辑自问：如何检查重复处理中的遗漏？实际频率与数量向目标岗位核对。"
             ]
           },
           "id": "actors.fit.personality-fit-block.2",
@@ -26618,7 +26555,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "函件与金额处理会被主管与后续对账复核；能把返工当作核对流程而不是针对个人，才能持续改进。"
+              "函件与金额处理涉及记录核对和复核。编辑自问：收到返工意见时，能否核对具体差异并尝试调整流程？这是体验建议，不是持续改进的必要条件或人格效度结论。"
             ]
           },
           "id": "actors.fit.personality-fit-block.3",
@@ -26632,7 +26569,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "催款、拒赔与账单争议是这类岗位会遇到的常态；能按流程先核对事实、保持克制并升级，比凭情绪回应更稳妥。"
+              "本岗任务可涉及催款、账单或服务争议，实际频率依岗位而异。编辑建议：核对事实与权限、保持沟通克制，需要时按流程求证升级；不把这些场景写成每个岗位的常态。"
             ]
           },
           "id": "actors.fit.personality-fit-block.4",
@@ -26772,7 +26709,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适配不是人格判断，而是把日常工作的真实要求——长时间坐着读信与核对、按固定格式反复起草与校对、在重复任务中保持准确、面对催款与拒赔等情形时保持克制与规范——"
+              "把阅读判断、核对、沟通、记录及实际工作形态与个人偏好逐项对照；训练能力与资格另核，不由问卷保证。"
             ]
           },
           "id": "actors.display.personality_fit_block.direct-answer",
@@ -26940,7 +26877,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "尽责性与情绪稳定性与这类工作的关系最直接：前者对应按流程核对与细致校对，后者对应面对催款、拒赔与客户不满时的稳定应对。大五没有官方的职业匹配阈值，本页只把它当作自我观察工具。"
+              "可观察核对完整及抱怨时沟通，本轮无本岗大五关联强度和阈值，不能称关系最直接。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.big-five.answer",
@@ -27038,7 +26975,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "偏好独立完成书面任务的人可能更适合函件处理岗位。"
+              "编辑自问：体验书面任务的感受，不凭类型分配函件岗。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.1",
@@ -27052,7 +26989,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "偏好即时互动的人可能更适合直接接待与客服岗位。"
+              "编辑自问：体验实时沟通再判断偏好，不保证更适合客服。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.2",
@@ -27318,7 +27255,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "这类岗位需要持续沟通：与客户、同事与主管对接；O*NET 调查显示 79% 表示与他人持续接触，87% 每天有面对面讨论，79% 每天有电话沟通，40% 表示一年以上才会遇到不愉快、愤怒或无礼的人。情绪类工具只提供自我观察角度，不是岗位门槛。"
+              "当前美国持续接触79%、每日面对面87%、电话79%；无礼愤怒40%每年但非每月，另有26%每日。响应非中国暴露或情绪能力阈值。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.eq.answer",
@@ -27388,7 +27325,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "阅读来信并判断诉求，起草与校对回复，与客户沟通解释规则并推动待办；适合愿意以书面往来为主、在重复核对中保持准确的人。"
+              "阅读来信判断诉求、起草校对回复、解释规则与推动待办是任务线索。编辑自问：是否愿意体验书面往来和重复核对？这种偏好不证明胜任、资格或录用适配。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.camera.signals",
@@ -27430,7 +27367,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "汇集并核对订单、账单与账户记录，维护台账并编制周期性报告；适合偏好整理、对数字与档案完整性有耐心的人。"
+              "汇集核对订单、账单与账户记录、维护台账和编制报告是任务线索。编辑自问：是否愿意体验数字核对与档案整理？偏好和耐心不构成工作表现或录用判断。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.stage.signals",
@@ -27505,7 +27442,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.teacher.direction",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27519,7 +27456,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.teacher.signals",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27533,7 +27470,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.teacher.watchouts",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27547,7 +27484,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.direction",
           "source_refs": [
-            "onet"
+            "editing"
           ],
           "type": "prose"
         },
@@ -27561,7 +27498,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.signals",
           "source_refs": [
-            "onet"
+            "editing"
           ],
           "type": "prose"
         },
@@ -27575,7 +27512,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.watchouts",
           "source_refs": [
-            "onet"
+            "editing"
           ],
           "type": "prose"
         },
@@ -27682,7 +27619,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "函件与金额处理受机构流程与合规要求约束：自由度有限，先看清目标单位的流程与模板再决定。"
+              "机构流程与决策自由分开；美国32%很多决定自由、53%一些、15%有限，任务优先级59%很多，不从遵流程推人人自由有限。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.interest.answer",
@@ -27766,7 +27703,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "函件与账务岗位多按常规工作日或班次安排，月末与账单周期前后更集中；具体按行业与单位业务周期核对。"
+              "当前美国100%规律排班，不等某个业务周期必集中；本轮无中国月末高峰全国数据，核目标单位。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.schedule.answer",
@@ -27794,7 +27731,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "阅读判断、记录核对与函件写作靠反复练习与反馈；把练习量、返工次数和准确率记录下来，比测试分数更能说明适配。"
+              "编辑观察：记录虚构样本准确、返工和反馈，不保证练习量比测评更能预测适配；真实参观跟班须取得实际许可。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.practice.answer",
@@ -27822,7 +27759,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。测试描述偏好线索，不预测工作表现，也不构成录用、资格或适应性判断；真正的判断来自任务样本与训练反馈。"
+              "兴趣测试用于探索偏好，不替代能力、资格或录用评估。任务体验与训练反馈可提供具体观察线索，本页未取得它们与测评比较的预测效度证据，不能保证适应或表现。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.test.answer",
@@ -28014,7 +27951,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "严格按流程与模板在授权范围内答复，超出标准回复时停止并请示；对外函件须经授权与签批后发出，保留校对稿与依据。"
+              "编辑建议：在实际授权内按适用流程答复；超出权限或依据不明的部分请示求证。需要签批的函件按机构流程送签，保留校对稿与依据，不假定每封函件都须签批。"
             ]
           },
           "id": "actors.risk.career-risk-cards.3",
@@ -28089,7 +28026,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险集中在三类：长时间阅读、核对与久坐造成的用眼与肌肉劳损，金额、编号与记录差错造成的返工、对账不符与客户争议，以及客户数据泄露、越权答复与情绪压力造成的合规与责任风险；重复任务与业务高峰也会累积影响。"
+              "按真实工位核久坐、重复动作与不适，按具体流程核金额记录差错、越权回复和数据保护风险；调查响应不能证明本岗疾病发生或长期疲劳因果。"
             ]
           },
           "id": "actors.display.career_risk_cards.direct-answer",
@@ -28104,7 +28041,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险场景来自 O*NET 任务档案与工作情境百分比（O*NET-SOC 43-4021.00）与 BLS 职业展望手册的工作环境说明；中国大陆的岗位与合规语境来自公开信息；引入自动化或 AI 工具时的责任与记录要求参考 NIST AI 风险管理框架。"
+              "O*NET任务情境支持风险场景，非疾病或差错发生率；中国个人信息保护法支持处理基础与安全责任，NIST自愿AI治理建议；实际单位完整处置程序未取得。"
             ]
           },
           "id": "actors.display.career_risk_cards.evidence-scope",
@@ -28179,7 +28116,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 调查显示 63% 表示持续或几乎持续地坐着工作，34% 表示超过一半时间在做重复动作，28% 每天处于干扰性或不舒适的声级环境；密集阅读与录入时段用眼与颈肩负荷更集中。"
+              "美国63%几乎一直坐、37%超半；重复动作31%几乎一直及34%超半、28%每日不适噪声。响应提示工位评估，不证明密集阅读致颈肩负荷的发生率。"
             ]
           },
           "id": "actors.display.career_risk_cards.image-use.scenario",
@@ -28194,7 +28131,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "长期久坐与重复动作用眼会造成疲劳与劳损，影响持续出勤与准确性。"
+              "久坐和重复动作提示工位评估需要，非本岗劳损发生率；本轮未取得疾病、缺勤或准确性因果，不据此诊断。"
             ]
           },
           "id": "actors.display.career_risk_cards.image-use.consequence",
@@ -28239,7 +28176,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在来信量大或业务高峰时凭记忆回复、跳步核对或直接采用系统草稿，会把金额、编号或状态错误带入回复与台账；O*NET 显示 65% 认为准确与严谨至少「非常重要」。"
+              "编辑差错场景：不核来源可能错配金额编号；准确65%极重要+22%很重要，不把65%当至少很重要合计。"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.scenario",
@@ -28254,7 +28191,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "差错会造成返工、对账不符、重复催收或客户争议，严重时影响机构信誉。"
+              "编辑风险分析：差错可能造成返工、对账不符、重复催收或客户争议，严重时影响机构信誉。"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.consequence",
@@ -28299,7 +28236,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在压力下用口头或书面方式作出超出授权或模板的让步、承诺或解释，或引用过期规则与错误模板，会让机构承担不必要的责任。"
+              "编辑风险分析：在压力下用口头或书面方式作出超出授权或模板的让步、承诺或解释，或引用过期规则与错误模板，可能使机构承担不必要的责任。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-income.scenario",
@@ -28314,7 +28251,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "越权答复会引发争议、投诉或合规后果，并使后续处理失去依据。"
+              "编辑风险分析：越权答复可能引发争议、投诉或合规后果，并可能增加后续核对依据的难度。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-income.consequence",
@@ -28364,8 +28301,7 @@
           },
           "id": "actors.display.career_risk_cards.identity-procedure.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -28419,13 +28355,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "客户来信与账户信息属敏感数据；越权访问、随手转发或在不安全渠道传输，都可能造成数据泄露与信任损失。"
+              "中国《个人信息保护法》第4/6/13/28/51/57条分别说明个人信息、最小必要与处理基础、金融账户等敏感个人信息、安全措施操作权限训练及泄露补救通知。含可识别个人的来函可能是个人信息，不能把所有来信都断言敏感；匿名化或纯企业材料另判。单位权限不替代法定处理基础；具体保留期限、委托及事件程序按适用要求核。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -28434,7 +28369,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "数据泄露会带来合规后果、客户信任损失与机构声誉风险。"
+              "编辑风险分析：数据泄露可能带来合规后果、客户信任损失与机构声誉风险。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.consequence",
@@ -28479,7 +28414,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 调查显示 66% 认为重复同一任务至少「非常重要」，40% 表示一年以上才会遇到不愉快、愤怒或无礼的人，38% 表示一年以上才会遇到冲突情形；业务高峰与催办压力会累积。"
+              "美国重复66%极重要+27%很重要；无礼愤怒40%、冲突38%为每年但非每月，不是多年才发生；个人业务高峰另核。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.scenario",
@@ -28494,7 +28429,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "长期重复任务与情绪压力会累积影响注意力与判断，进而影响准确性与留痕质量。"
+              "编辑观察线索：核压力下的反馈及休息支持，本轮无本岗长期压力到注意力、健康或差错的独立因果量。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.consequence",
@@ -28509,7 +28444,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于美国 2024—2034 年单一职业口径与信息文员组合口径的就业预测公开统计。"
+              "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.bls",
@@ -28539,13 +28474,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于中国大陆同类岗位的分类与数据处理边界的方向性核对。"
+              "中国《个人信息保护法》第4/6/13/28/51/57条分别说明个人信息、最小必要与处理基础、金融账户等敏感个人信息、安全措施操作权限训练及泄露补救通知。含可识别个人的来函可能是个人信息，不能把所有来信都断言敏感；匿名化或纯企业材料另判。单位权限不替代法定处理基础；具体保留期限、委托及事件程序按适用要求核。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.cn-rule",
           "source_refs": [
-            "sag",
-            "nist"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -28569,7 +28503,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于引入自动化或 AI 系统时的责任、记录与人工监督要求。"
+              "NIST自愿治理建议非法定业务规程。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.nist",
@@ -28593,7 +28527,7 @@
           "data": {
             "paragraphs": [
               "本页不引用具体在招公告，也不把历史招聘案例计为在招岗位；招聘与外包条件须按目标单位当年公告核对。",
-              "示例中的情景判断、记录核对与试用期观察方式为编辑设计，用于说明常见验证方式，不代表任何单位的统一流程。"
+              "示例中的情景判断、记录核对与观察方式为编辑设计，用于提供任务观察思路；本页未取得招聘样本，不能称为雇主常用验证流程。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
@@ -28618,7 +28552,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "编辑建议核对的能力线索",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -28656,7 +28590,7 @@
                 "接听电话、接待来访者并对外提供机构信息，处理登记与转接。",
                 "即时响应、接待规范与信息准确性。",
                 "一份虚构的接待与转接记录样本。",
-                "属相邻职业，节奏更即时、面对面接触更多。"
+                "属相邻职业，任务侧重接待来访、电话响应与即时转接；不据此比较两职业面对面接触强度。"
               ]
             ]
           },
@@ -28666,7 +28600,7 @@
             "bls",
             "cn-rule"
           ],
-          "title": "常见入门岗位与工作方向",
+          "title": "编辑提供的入门任务与相邻方向观察",
           "type": "table"
         },
         {
@@ -28678,15 +28612,15 @@
                 "id": "employer-0",
                 "values": [
                   "学历与专业背景要求",
-                  "美国口径下该职业通常要求高中文凭或同等学历，准备层级为 Job Zone 1–2，在职训练从几天到一年；部分雇主要求办公软件与文字处理能力。",
-                  "O*NET 摘要页教育需求受访比例显示以高中及以下为主；美国口径与中国大陆同类岗位的录用与学历要求不可直接等同。"
+                  "美国O*NET准备层级和BLS组合典型教育是背景，不是每位雇主要求；具体学历、工具和训练条件须按目标公告核对。",
+                  "美国O*NET JobZone1–2、SVP低于6；层级概述几天至一年训练非本岗每人时长。教育响应43%高中、28%两年制学位、17%部分大学无学位，其他未显示，不称高中及以下占多数。BLS组合通常高中、短期在职训练（通常数周，政府可能数月），非中国统一门槛。"
                 ]
               },
               {
                 "id": "employer-1",
                 "values": [
                   "办公软件与系统能力",
-                  "通常需要熟练使用文字处理与表格软件、邮件与工单系统，并能在记录与台账系统中准确录入与检索；具体工具由单位规定。",
+                  "编辑准备建议：体验文字处理、表格、邮件和记录系统的准确录入与检索；本页未取得中国招聘样本，具体系统和熟练度要求由目标岗位核实。",
                   "本页未取得中国大陆全国统一的资格公开条件，须按目标单位当年招聘要求核对；本页不构成资格认定或授权建议。"
                 ]
               },
@@ -28695,15 +28629,15 @@
                 "values": [
                   "可观察的专业能力证据",
                   "能在重复任务中保持准确、能核对金额与编号并发现差异、能按格式产出规范函件并如实留痕（来自 O*NET 任务与工作情境数据）。",
-                  "以上是任务与情境观察点，不是人格标签或录用阈值；工作情境显示 65% 认为准确与严谨至少非常重要、66% 认为重复同一任务至少非常重要、66% 表示持续或几乎持续地坐着工作。"
+                  "美国准确65%极重要及22%很重要、重复66%及27%，久坐63%几乎一直及37%超半；响应非录用阈值。"
                 ]
               },
               {
                 "id": "availability",
                 "values": [
                   "常见工具与系统范围",
-                  "文字处理与表格软件、邮件与工单系统、记录与台账系统、档案与文档管理工具、复印与打印设备、电话与在线沟通工具；O*NET 列出的本职业技术关键词包含文字处理与办公套件类软件。",
-                  "工具熟练度是市场偏好与招聘信号，不等于核心能力或授权。"
+                  "2025美国Lightcast10热门软件：Office16%、Excel9%、Epic/Outlook各7%、Word5%；Access/PPT/SharePoint/Windows/SAP比例未提供。关键词不是使用率、AI采用率或个人熟练度；Epic不授予诊療权限。",
+                  "关键词反映所述美国招聘资料中的提及，不能推定中国雇主熟练度偏好或个人胜任；实际要求按目标公告核。"
                 ]
               }
             ]
@@ -28714,7 +28648,7 @@
             "bls",
             "cn-rule"
           ],
-          "title": "雇主通常会核对什么",
+          "title": "岗位条件与编辑能力观察线索",
           "type": "cards"
         },
         {
@@ -28841,55 +28775,55 @@
               [
                 "学历背景（高中及以上）",
                 "准备进入事务性文员与后台岗位的人",
-                "满足多数入门岗位的招录条件",
-                "不是统一强制门槛，按目标单位公告核对",
+                "美国典型学历与中国公告分开",
+                "按目标岗位条件核，未取得中国岗位普及分布",
                 "按目标单位公告的学历要求",
-                "低至中（在职或入职前完成）",
+                "费用与实际周期未取得",
                 "学历不代表岗位胜任或数据权限。"
               ],
               [
                 "办公软件与文字处理能力",
                 "准备从事函件与后台事务的人",
-                "通常是入门岗位的常见要求",
-                "多数岗位普遍要求",
+                "实际办公任务与软件要求见来源，不保证全国多数",
+                "按目标岗位条件核，未取得中国岗位普及分布",
                 "按目标单位要求或自行练习",
-                "低（可自行学习与练习）",
+                "费用与实际周期未取得",
                 "软件熟练度不等于业务规则与合规能力。"
               ],
               [
                 "招聘或内部转岗条件",
                 "报考或转入相关岗位的人",
                 "通常是进入岗位的前置条件",
-                "按单位与岗位而定",
+                "按目标岗位条件核，未取得中国岗位普及分布",
                 "按招聘公告或内部流程",
-                "中（备考或流程准备）",
+                "费用与实际周期未取得",
                 "通过筛选不等于获得数据或答复授权。"
               ],
               [
                 "岗前与在职训练",
                 "已被录用并进入岗位的人员",
-                "通常决定能否独立处理事务",
-                "属录用后必经环节",
+                "目标单位训练与授权分别核，不保证每人同一路径",
+                "按目标岗位条件核，未取得中国岗位普及分布",
                 "由单位组织",
-                "中（数天至数月）",
+                "费用与实际周期未取得",
                 "训练合格不等于永久授权，须按岗位与制度执行。"
               ],
               [
                 "数据与合规授权",
                 "处理客户数据、金额与合规事项的人员",
                 "决定能否访问数据与对外答复",
-                "属制度授予，不是可选",
+                "按目标岗位条件核，未取得中国岗位普及分布",
                 "按现行规定与单位制度授予",
-                "不适用（由制度授予）",
-                "权限不可跨单位通用，本页不构成授权意见。"
+                "费用与实际周期未取得",
+                "中国《个人信息保护法》第4/6/13/28/51/57条分别说明个人信息、最小必要与处理基础、金融账户等敏感个人信息、安全措施操作权限训练及泄露补救通知。含可识别个人的来函可能是个人信息，不能把所有来信都断言敏感；匿名化或纯企业材料另判。单位权限不替代法定处理基础；具体保留期限、委托及事件程序按适用要求核。"
               ],
               [
                 "流程与带训能力",
                 "准备承担组长或主管职责的人",
-                "影响管理岗位的竞争与准备度",
-                "不是入职门槛",
+                "编辑准备线索：核对流程维护、协调与带训任务；本页未取得管理招聘或训练效果证据。",
+                "按目标岗位条件核，未取得中国岗位普及分布",
                 "按单位制度与岗位要求",
-                "中（内部培训或带教）",
+                "费用与实际周期未取得",
                 "管理训练不等于数据或合规责任岗位授权。"
               ]
             ]
@@ -28908,16 +28842,14 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "本页把学历背景、办公软件能力、招聘或内部转岗条件、岗前与在职训练、数据与合规授权以及流程与带训能力分开：学历与软件能力是基础背景，招聘或转岗条件是进入相关岗位的前置条件，训练与数据授权按单位制度与现行规定授予。",
-              "美国口径来自 O*NET 准备层级（Job Zone 1–2：通常要求高中文凭或同等学历；在职训练从几天到一年；SVP 低于 6.0）与摘要页教育需求受访比例，以及 BLS 关于在职训练的说明；这些不等于中国的任职条件。",
-              "中国大陆口径：同类岗位多称文员、内勤或客服后台，分属不同单位与外包场景，录用、任职与数据权限按目标单位现行规定；本页未取得全国统一的强制资质公开条件，不能把美国准备层级当作中国门槛，也不能把岗位名称当作跨单位的数据或答复授权。",
-              "任何资格与任职要求都应以单位现行规定为准；本页不构成录用承诺、资格意见或授权建议。"
+              "美国O*NET JobZone1–2、SVP低于6；层级概述几天至一年训练非本岗每人时长。教育响应43%高中、28%两年制学位、17%部分大学无学位，其他未显示，不称高中及以下占多数。BLS组合通常高中、短期在职训练（通常数周，政府可能数月），非中国统一门槛。",
+              "中国《个人信息保护法》第4/6/13/28/51/57条分别说明个人信息、最小必要与处理基础、金融账户等敏感个人信息、安全措施操作权限训练及泄露补救通知。含可识别个人的来函可能是个人信息，不能把所有来信都断言敏感；匿名化或纯企业材料另判。单位权限不替代法定处理基础；具体保留期限、委托及事件程序按适用要求核。",
+              "目标岗位学历、训练及数据权限分别核，实际费用周期与中国统一资格未取得。",
+              "本页能力路径为编辑线索，不构成录用或权限。"
             ]
           },
           "id": "actors.path.credential-boundary.1",
           "source_refs": [
-            "onet",
-            "bls",
             "cn-rule"
           ],
           "title": "训练、资格与作业边界",
@@ -28928,7 +28860,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入行通常不要求先读专门专业：美国多数岗位要求高中文凭并在职学习，再从来信处理、录入与记录核对做起；能否在重复任务中保持准确、按格式产出可核对的函件并如实留痕，是比证书更可核对的准备证据。"
+              "编辑能力路径：在实际训练下补来函阅读、记录及回复，再按目标岗位条件发展，非必经入行路线或比证书更有效的效度结论。美国O*NET JobZone1–2、SVP低于6；层级概述几天至一年训练非本岗每人时长。教育响应43%高中、28%两年制学位、17%部分大学无学位，其他未显示，不称高中及以下占多数。BLS组合通常高中、短期在职训练（通常数周，政府可能数月），非中国统一门槛。"
             ]
           },
           "id": "actors.path.career-path-block.1",
@@ -28944,7 +28876,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国口径下，该职业准备层级为 Job Zone 1–2（SVP 低于 6.0），通常要求高中文凭或同等学历，在职训练从几天到一年；入职多从来信处理、录入或前台事务做起，再按流程承担更复杂的核对与对外答复；"
+              "美国O*NET JobZone1–2、SVP低于6；层级概述几天至一年训练非本岗每人时长。教育响应43%高中、28%两年制学位、17%部分大学无学位，其他未显示，不称高中及以下占多数。BLS组合通常高中、短期在职训练（通常数周，政府可能数月），非中国统一门槛。"
             ]
           },
           "id": "actors.path.career-path-block.2",
@@ -28960,7 +28892,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆没有与 O*NET-SOC 一一对应的职业细类，同类岗位多称文员、内勤或客服后台，分属不同单位与外包场景，录用与任职条件须按目标单位现行规定核对。"
+              "本轮未完成中国对应职业分类及招录样本，不断言全国没有实体；目标任职条件与数据权限分别核。中国《个人信息保护法》第4/6/13/28/51/57条分别说明个人信息、最小必要与处理基础、金融账户等敏感个人信息、安全措施操作权限训练及泄露补救通知。含可识别个人的来函可能是个人信息，不能把所有来信都断言敏感；匿名化或纯企业材料另判。单位权限不替代法定处理基础；具体保留期限、委托及事件程序按适用要求核。"
             ]
           },
           "id": "actors.path.career-path-block.3",
@@ -29321,7 +29253,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与流程标准、模板维护与质量抽查，承担班组协调与带训；该阶段通常要求先具备一线经验，任职条件由单位规定。"
+              "编辑发展方向：参与流程标准、模板维护、质量抽查、班组协调与带训。经验及任职条件按目标单位岗位核对，不假定中国管理岗位有统一一线经验门槛。"
             ]
           },
           "id": "actors.display.career_path_block.ladder.develop.description",
@@ -29401,7 +29333,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入职通常要求高中文凭；条件按单位规定。"
+              "美国O*NET JobZone1–2、SVP低于6；层级概述几天至一年训练非本岗每人时长。教育响应43%高中、28%两年制学位、17%部分大学无学位，其他未显示，不称高中及以下占多数。BLS组合通常高中、短期在职训练（通常数周，政府可能数月），非中国统一门槛。中国目标公告另核。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.credentials",
@@ -29641,7 +29573,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "管理方向通常要求一线经验，条件由单位规定。"
+              "管理方向的经验、学历与其他任职条件按目标单位岗位核对；本页未取得中国统一经验门槛。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.04.credentials",
@@ -29737,7 +29669,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入职通常要求高中文凭；条件按单位规定。"
+              "美国O*NET JobZone1–2、SVP低于6；层级概述几天至一年训练非本岗每人时长。教育响应43%高中、28%两年制学位、17%部分大学无学位，其他未显示，不称高中及以下占多数。BLS组合通常高中、短期在职训练（通常数周，政府可能数月），非中国统一门槛。中国目标公告另核。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.01.credentials",
@@ -30073,7 +30005,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入职通常要求高中文凭；条件按单位规定。"
+              "美国O*NET JobZone1–2、SVP低于6；层级概述几天至一年训练非本岗每人时长。教育响应43%高中、28%两年制学位、17%部分大学无学位，其他未显示，不称高中及以下占多数。BLS组合通常高中、短期在职训练（通常数周，政府可能数月），非中国统一门槛。中国目标公告另核。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.01.credentials",
@@ -30377,7 +30309,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于中国大陆同类岗位的分类与数据处理边界的方向性核对。"
+              "中国《个人信息保护法》第4/6/13/28/51/57条分别说明个人信息、最小必要与处理基础、金融账户等敏感个人信息、安全措施操作权限训练及泄露补救通知。含可识别个人的来函可能是个人信息，不能把所有来信都断言敏感；匿名化或纯企业材料另判。单位权限不替代法定处理基础；具体保留期限、委托及事件程序按适用要求核。"
             ]
           },
           "id": "actors.display.career_path_block.source.cn-rule",
@@ -30393,7 +30325,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明工资分位的统计位置与不可年化，不提供个人收入结论。"
+              "OEWS有薪岗位税前常规货币工资，排除自雇、直接家庭雇员和未付薪家庭人员；官方年值可引用，2080标准折算不保证个人工时，不推到手或加班奖金。"
             ]
           },
           "id": "actors.display.career_path_block.source.r2-pay-3",
@@ -30417,7 +30349,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需求信号要分三层看：美国官方就业预测反映职业总量变化，机构预算与外包与自动化决策决定编制分布，"
+              "需求分层：美国职业预测、真实单位招聘与组织分工分别核；本轮无中国外包自动化到编制分布的因果量。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
@@ -30432,7 +30364,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 单一职业口径（43-4021.00）显示 2024 年就业约 6,900 人、2024—2034 年预测下降、累计约 700 个空缺；BLS 信息文员组合口径 2025—2035 年下降 2%（-30,100），年均约 125,600 个空缺且全部来自替换需求；该预测不含技术替代时点。"
+              "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
@@ -30597,13 +30529,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共同能力：记录核对、准确性意识与流程遵循。"
+              "记录核对、订单资料与流程。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30612,13 +30543,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足：财务规则、账目登记与对账方法，通常要求部分大学课程。"
+              "补目标库存发运、商品及订单系统；本岗已含订单Supplemental，不把所有订单经验判缺失。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30627,13 +30557,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从函件与后台事务转向账目与凭证处理，需补足财务知识。"
+              "订单为主要对象，岗位资格另核。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30642,13 +30571,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共同能力：记录维护、流程执行与沟通。"
+              "准确核对与记录。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30657,13 +30585,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足：人事流程、招聘与员工记录、隐私与合规。"
+              "补批量输入校验及目标系统，速度与录用阈值未取得。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30672,13 +30599,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从客户函件转向人事事务，需补足人事流程知识。"
+              "数据录入重录入纠错，本岗已有记录交叉。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30687,13 +30613,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共同能力：细致录入、格式核对与准确性意识。"
+              "金额与记录核对。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30702,13 +30627,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足：批量录入速度与字段校验、对不同系统的操作。"
+              "补目标账款核算、过账及账单规则。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30717,13 +30641,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从判断与回复为主转向批量录入与字段校验。"
+              "账单过账与本岗提供记录收费有交叉，非完全无经验。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30777,13 +30700,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共同能力：记录核对、数据录入与流程执行。"
+              "整理、检索与保密。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30792,13 +30714,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足：订单与付款处理、库存与发运跟踪。"
+              "补目标档案分类、保管借阅与销毁规则。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30807,13 +30728,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：工作对象从来函与台账转为订单与付款信息。"
+              "档案文员亦处理邮件财务Supplemental，不能排除交叉。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30822,13 +30742,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共同能力：记录整理、检索与完整性维护。"
+              "流程记录和沟通。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30837,13 +30756,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足：档案分类体系、借阅与保管规则。"
+              "补员工招聘福利及人事记录规则。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30852,13 +30770,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从函件与台账转向档案归档与检索。"
+              "目标为人事事务，实际学历及权限另核。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30867,13 +30784,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共同能力：金额核对、记录维护与准确性。"
+              "金额编号与资料。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30882,13 +30798,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足：账款核算与过账、对账与财务口径。"
+              "补账簿、财务软件、借贷登记、对账及财务规则；BLS典型部分大学无学位不代目标公告。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30897,13 +30812,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从函件处理转向账款核算与过账，需补足财务规则。"
+              "簿记会计审计文员涉及完整财务记录，不自动是执业审计资格。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30912,7 +30826,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于美国单一职业口径与信息文员组合口径的就业预测与职位空缺公开统计。"
+              "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
@@ -31099,7 +31013,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind 职业内容编辑团队（来源核查与练习设计）"
+              "FermatMind职业内容编辑"
             ]
           },
           "id": "actors.display.source_card.author",
@@ -31113,7 +31027,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源：O*NET OnLine 函件文员（43-4021.00）职业档案与全国工资（BLS OEWS 2025 年数据）、BLS 职业展望手册 Information Clerks（信息文员组合口径，含函件文员）、ILO 生成式 AI 与职业任务暴露研究、NIST AI 风险管理框架，以及国家统计局公开资料；各条目的口径与使用限制见下方来源登记。"
+              "资料分层：O*NET17任务57情境、教育CE、2025工资与2025—2035本岗趋势；BLS单岗与组合另列；NBS2025匹配背景；中国个人信息保护法；ILO方法及NIST自愿框架。工具机会与能力路径为编辑线索，非实测。"
             ]
           },
           "id": "actors.display.source_card.source",
@@ -31127,7 +31041,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "更新：2026-09-18（各来源检索日期见来源登记）"
+              "九模块资料更新2026-10-09；统计时期另列。"
             ]
           },
           "id": "actors.display.source_card.updated-at",
@@ -31299,14 +31213,14 @@
                 "url": "https://www.onetonline.org/link/summary/43-9021.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持组合口径的就业预测与中位工资，用于对照。",
-                  "组合口径不能写成 43-4021.00 单一职业口径的替代。"
+                  "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。",
+                  "美国O*NET JobZone1–2、SVP低于6；层级概述几天至一年训练非本岗每人时长。教育响应43%高中、28%两年制学位、17%部分大学无学位，其他未显示，不称高中及以下占多数。BLS组合通常高中、短期在职训练（通常数周，政府可能数月），非中国统一门槛。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "信息文员组合口径明确列出函件文员，支持组合口径 2025 年职位数 1,287,600 人、2025—2035 年下降 2%（-30,100）、年均约 125,600 个替换性空缺、中位 45,430 美元/年；该页为组合口径，函件文员的中位工资与就业以 43-4021.00 单一职业口径为准。",
+                "limitation": "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。美国O*NET JobZone1–2、SVP低于6；层级概述几天至一年训练非本岗每人时长。教育响应43%高中、28%两年制学位、17%部分大学无学位，其他未显示，不称高中及以下占多数。BLS组合通常高中、短期在职训练（通常数周，政府可能数月），非中国统一门槛。",
                 "market": "美国",
                 "name": "BLS 职业展望手册：Information Clerks（信息文员，含函件文员）",
                 "period": "2025 年中位工资与 2025—2035 年预测；检索 2026-09-18",
@@ -31315,20 +31229,19 @@
                 "url": "https://www.bls.gov/ooh/office-and-administrative-support/information-clerks.htm"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持中国大陆同类岗位的分类与合规语境。",
-                  "不据此推定任职资格、授权或工资数值。"
+                  "中国《个人信息保护法》第4/6/13/28/51/57条分别说明个人信息、最小必要与处理基础、金融账户等敏感个人信息、安全措施操作权限训练及泄露补救通知。含可识别个人的来函可能是个人信息，不能把所有来信都断言敏感；匿名化或纯企业材料另判。单位权限不替代法定处理基础；具体保留期限、委托及事件程序按适用要求核。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official regulation",
                 "id": "cn-rule",
-                "limitation": "支持中国大陆同类事务性文员岗位分散在不同单位与外包场景的分类语境：数据权限、处理流程与合规要求因单位与业务不同；不证明全国统一的强制资质，也不能把该类岗位与美国职业代码一一对应。",
+                "limitation": "中国《个人信息保护法》第4/6/13/28/51/57条分别说明个人信息、最小必要与处理基础、金融账户等敏感个人信息、安全措施操作权限训练及泄露补救通知。含可识别个人的来函可能是个人信息，不能把所有来信都断言敏感；匿名化或纯企业材料另判。单位权限不替代法定处理基础；具体保留期限、委托及事件程序按适用要求核。",
                 "market": "中国内地",
-                "name": "中国大陆公开人事与统计信息（文员与后台事务岗位）",
-                "period": "现行规定；检索 2026-09-18",
-                "publisher": "公开人事与统计信息",
+                "name": "中华人民共和国个人信息保护法",
+                "period": "2021-11-01施行",
+                "publisher": "国家网信办转载中国人大网法律文本",
                 "scope": "contextual",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               },
               {
                 "accessed_at": "2026-09-18",
@@ -31338,7 +31251,7 @@
                 ],
                 "evidence_type": "official source",
                 "id": "dancing",
-                "limitation": "只支持账单过账文员（相邻职业）的账款核算与过账任务；同口径中位年薪 48,500 美元（O*NET 全国工资，2025 年工资数据）。",
+                "limitation": "本链接支持账单核算、过账、费用及对账任务，本轮未核此相邻职业2025精确工资，旧48,500不作为已核值。",
                 "market": "美国",
                 "name": "O*NET OnLine：Billing and Posting Clerks（43-3021.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31386,7 +31299,7 @@
                 ],
                 "evidence_type": "official source",
                 "id": "editor",
-                "limitation": "支持前台接待员与信息文员（相邻职业）的接待、接听与信息提供任务；BLS 2025 年中位年薪 38,010 美元；工作节奏更即时、面对面接触更多。",
+                "limitation": "接待、接听、记录、投诉及支付任务对照；BLS同版对照中位38,010；未比较两职业面对面响应，不称接触必定更多。",
                 "market": "美国",
                 "name": "O*NET OnLine：Receptionists and Information Clerks（43-4171.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31395,14 +31308,13 @@
                 "url": "https://www.onetonline.org/link/summary/43-4171.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持入行准备层级与教育需求的观察点。",
-                  "不构成具体雇主的录用条件或中国大陆的门槛。"
+                  "美国O*NET JobZone1–2、SVP低于6；层级概述几天至一年训练非本岗每人时长。教育响应43%高中、28%两年制学位、17%部分大学无学位，其他未显示，不称高中及以下占多数。BLS组合通常高中、短期在职训练（通常数周，政府可能数月），非中国统一门槛。"
                 ],
                 "evidence_type": "official source",
                 "id": "employer",
-                "limitation": "支持本职业的准备层级（Job Zone 1–2，SVP 低于 6.0）、教育需求受访比例（以高中及以下为主）与兴趣代码（CE）；不代表具体雇主的招聘条件，也不等同于中国大陆的要求。",
+                "limitation": "美国O*NET JobZone1–2、SVP低于6；层级概述几天至一年训练非本岗每人时长。教育响应43%高中、28%两年制学位、17%部分大学无学位，其他未显示，不称高中及以下占多数。BLS组合通常高中、短期在职训练（通常数周，政府可能数月），非中国统一门槛。",
                 "market": "美国",
                 "name": "O*NET OnLine：Correspondence Clerks 摘要（43-4021.00）",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31440,23 +31352,22 @@
                 "period": "当前工具；检索 2026-09-18",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/"
+                "url": "https://www.onetcenter.org/IP.html"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "登记中国大陆公开工资统计的细分层级。",
-                  "代理值不得写成本职业工资。"
+                  "NBS2025条件匹配背景：金融非私营211,164／私营140,451，租赁商务服务110,162／68,919元税前年均。单位主营分类匹配才引用；规模以上企业办事及有关人员94,936元年均是宽岗位另一覆盖，非本岗职业分位。城镇5人以上法人、不含个体自由职业、含奖金津补贴；中国本岗工资及招聘分布未取得，不换月到手。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "nbs",
-                "limitation": "公开工资统计按行业门类与人员类别发布，未建立与 43-4021.00 对应的职业细类；行业或人员类别均值不是本职业工资，也不能外推为全国职业收入。",
+                "limitation": "NBS2025条件匹配背景：金融非私营211,164／私营140,451，租赁商务服务110,162／68,919元税前年均。单位主营分类匹配才引用；规模以上企业办事及有关人员94,936元年均是宽岗位另一覆盖，非本岗职业分位。城镇5人以上法人、不含个体自由职业、含奖金津补贴；中国本岗工资及招聘分布未取得，不换月到手。",
                 "market": "中国内地",
-                "name": "国家统计局：公开统计与工资发布入口",
-                "period": "现行发布；检索 2026-09-18",
+                "name": "NBS2025城镇单位工资",
+                "period": "2025数据，2026-05-15发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-18",
@@ -31466,7 +31377,7 @@
                 ],
                 "evidence_type": "institutional framework",
                 "id": "nist",
-                "limitation": "提供 AI 系统风险治理的用语与流程要求（角色、责任、记录与人工监督）；不规定办公与函件处理流程、数据权限或岗位授权。",
+                "limitation": "NIST自愿AI治理建议，不是中国强制业务流程。",
                 "market": "美国",
                 "name": "NIST：Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
                 "period": "AI RMF 1.0；检索 2026-09-18",
@@ -31475,30 +31386,30 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于说明工资统计的覆盖与折算口径。",
                   "不提供个人收入结论，也不能用于推算个人到手工资。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "oews",
-                "limitation": "提供按职业代码发布的工资统计入口与覆盖说明；本页分位数值经 O*NET 全国工资页（43-4021.00）公示，不能把行业平均工资当作本职业工资。",
+                "limitation": "本岗2025全国工资，方法另核r2-pay-2。OEWS有薪岗位税前常规货币工资，排除自雇、直接家庭雇员和未付薪家庭人员；官方年值可引用，2080标准折算不保证个人工时，不推到手或加班奖金。",
                 "market": "美国",
                 "name": "BLS Occupational Employment and Wage Statistics（OEWS）",
                 "period": "2025 年工资数据；检索 2026-09-18",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.onetonline.org/link/localwages/43-4021.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本职业的任务、工作情境与准备层级。",
                   "不含技术采用与岗位替代数据。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet",
-                "limitation": "支持本职业的任务、详细工作活动、工作情境百分比、准备层级、兴趣代码与 2024 年行业就业占比；为单一职业口径，不含技术采用、岗位替代或收入变化数据。",
+                "limitation": "O*NET17任务中7Core为往来控制记录、阅读判断、汇集核完整准确、备索赔信用账单发票投诉材料、周期报告、起草回复及部门分派；10Supplemental含收款记录保管、商品订单、解释规则、校对份数送签、计算提供记录费用及求付款、特殊产品资料、确认函、套用表函、核请求可行性及挂号寄送。类别非频率；费用催款不等于所有债务催收。当前O*NET行业页金融保险19%、专业科学技术13%、行政支持12%、其他56%（含医疗社会救助和零售），未明统计年度；不是行业工资或中国分布。",
                 "market": "美国",
                 "name": "O*NET OnLine：Correspondence Clerks（43-4021.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31507,36 +31418,34 @@
                 "url": "https://www.onetonline.org/link/summary/43-4021.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持雇主技术关键词的市场信号说明。",
-                  "关键词不等于采用率或能力要求。"
+                  "2025美国Lightcast10热门软件：Office16%、Excel9%、Epic/Outlook各7%、Word5%；Access/PPT/SharePoint/Windows/SAP比例未提供。关键词不是使用率、AI采用率或个人熟练度；Epic不授予诊療权限。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r2-ai",
-                "limitation": "列出雇主招聘中提到的文字处理与办公套件类技术关键词；招聘关键词是市场信号，不衡量使用率、熟练度或岗位替代。",
+                "limitation": "2025美国Lightcast10热门软件：Office16%、Excel9%、Epic/Outlook各7%、Word5%；Access/PPT/SharePoint/Windows/SAP比例未提供。关键词不是使用率、AI采用率或个人熟练度；Epic不授予诊療权限。",
                 "market": "美国",
                 "name": "O*NET OnLine：Correspondence Clerks 热门技术（43-4021.00）",
-                "period": "页面 2026 年更新；检索 2026-09-18",
+                "period": "2025美国招聘",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/43-4021.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "登记中国大陆公开工资统计的细分层级。",
-                  "未取得本职业单列数值，不使用代理数字。"
+                  "NBS2025条件匹配背景：金融非私营211,164／私营140,451，租赁商务服务110,162／68,919元税前年均。单位主营分类匹配才引用；规模以上企业办事及有关人员94,936元年均是宽岗位另一覆盖，非本岗职业分位。城镇5人以上法人、不含个体自由职业、含奖金津补贴；中国本岗工资及招聘分布未取得，不换月到手。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-1",
-                "limitation": "公开工资统计只按区域、行业门类与人员类别发布，未建立与本职业一一对应的职业细类；本页未取得本职业单列数值，缺口在页面可见位置标记。",
+                "limitation": "NBS2025条件匹配背景：金融非私营211,164／私营140,451，租赁商务服务110,162／68,919元税前年均。单位主营分类匹配才引用；规模以上企业办事及有关人员94,936元年均是宽岗位另一覆盖，非本岗职业分位。城镇5人以上法人、不含个体自由职业、含奖金津补贴；中国本岗工资及招聘分布未取得，不换月到手。",
                 "market": "中国内地",
-                "name": "国家统计局：公开工资统计发布入口",
-                "period": "现行发布；检索 2026-09-18",
+                "name": "NBS2025城镇单位工资",
+                "period": "2025数据，2026-05-15发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-18",
@@ -31546,7 +31455,7 @@
                 ],
                 "evidence_type": "official methodology",
                 "id": "r2-pay-2",
-                "limitation": "说明 OEWS 的覆盖人群、工资构成与折算假设；不提供本职业具体数值，也不用于把时薪换算为个人月收入。",
+                "limitation": "OEWS有薪岗位税前常规货币工资，排除自雇、直接家庭雇员和未付薪家庭人员；官方年值可引用，2080标准折算不保证个人工时，不推到手或加班奖金。",
                 "market": "美国",
                 "name": "BLS Handbook of Methods：OEWS 工资与折算口径",
                 "period": "现行方法说明；检索 2026-09-18",
@@ -31555,10 +31464,9 @@
                 "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明工资分位的统计位置。",
-                  "不提供个人收入结论，也不能按固定工时年化。"
+                  "本岗2025工资分位，官方年值可引用，不推个人到手。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-3",
@@ -31594,7 +31502,7 @@
                 ],
                 "evidence_type": "institutional research",
                 "id": "sag",
-                "limitation": "按任务级暴露度量生成式 AI 与职业任务的接近程度；不提供本职业单职业分数、采用率、自动化率或替代日期。",
+                "limitation": "本轮未取得直接匹配本岗的单职业分数或部署因果，不断言研究从无单职业分数。",
                 "market": "全球",
                 "name": "ILO：Generative AI and Jobs — Refined Global Index of Occupational Exposure",
                 "period": "研究发表时点；检索 2026-09-18",
@@ -31633,6 +31541,21 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/43-3031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
+                ],
+                "evidence_type": "official statistics",
+                "id": "g04-trends",
+                "limitation": "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。",
+                "market": "美国",
+                "name": "O*NET本岗就业趋势43-4021",
+                "period": "2025—2035预测",
+                "publisher": "O*NET转引BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/43-4021.00"
               }
             ]
           },
@@ -34238,7 +34161,8 @@
             },
             "evidence_refs": [
               "nist",
-              "sag-moa"
+              "sag-moa",
+              "cn-rule"
             ],
             "id": "project-data",
             "mitigation": {
@@ -34429,11 +34353,11 @@
             {
               "指标": "数据与口径",
               "数值": "本轮未取得与函件文员（O*NET-SOC 43-4021.00）对应的中国大陆职业级工资数值，故不展示具体数字；缺口已在页面可见位置标记。",
-              "说明": "中国大陆公开工资统计最高细分到行业门类与人员类别，不发布该职业细类数值。"
+              "说明": "本轮所读NBS2025未列精确职业，不断言全国从未发布或最高只到行业。"
             },
             {
               "指标": "查阅范围",
-              "数值": "国家统计局工资与统计发布页面（检索 2026-09-18）",
+              "数值": "NBS2025工资，2026-05-15发布；本轮核对2026-10-09",
               "说明": "只用于说明实际查阅范围与时间，不作数值换算依据。"
             },
             {
@@ -34444,12 +34368,12 @@
             {
               "指标": "数据与合规",
               "数值": "涉及客户数据、金额与合规处理的岗位受隐私与业务规则约束",
-              "说明": "数据权限与处理流程须按具体单位与现行规定核对，本页不构成授权或作业建议。"
+              "说明": "中国《个人信息保护法》第4/6/13/28/51/57条分别说明个人信息、最小必要与处理基础、金融账户等敏感个人信息、安全措施操作权限训练及泄露补救通知。含可识别个人的来函可能是个人信息，不能把所有来信都断言敏感；匿名化或纯企业材料另判。单位权限不替代法定处理基础；具体保留期限、委托及事件程序按适用要求核。"
             },
             {
               "指标": "统计覆盖",
               "数值": "国家统计局城镇单位工资统计覆盖城镇法人单位，不含个体工商户与自由职业者等",
-              "说明": "函件与后台岗位分布在不同行业门类，公开职业级数据未单列，行业均值不能代表该职业实际收入。"
+              "说明": "NBS2025条件匹配背景：金融非私营211,164／私营140,451，租赁商务服务110,162／68,919元税前年均。单位主营分类匹配才引用；规模以上企业办事及有关人员94,936元年均是宽岗位另一覆盖，非本岗职业分位。城镇5人以上法人、不含个体自由职业、含奖金津补贴；中国本岗工资及招聘分布未取得，不换月到手。"
             },
             {
               "指标": "市场对照",
@@ -34473,10 +34397,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_class_row": "中国大陆用工场景：金融机构与保险公司的函件与客服后台、房地产与租赁机构的账单事务、专业服务机构的客户函件处理，以及政府与公共机构的来信与档案岗位；公开工资统计按行业门类与人员类别发布，未建立与 O*NET-SOC 43-4021.00 对应的职业细类，本页不据分类推定任职资格或收入。",
+          "china_class_row": "本轮未完成中美职业实体一一映射，中国岗位职责及雇主主营行业按实际材料核，不从未取得推全国不存在。",
           "china_edu_table": [
             {
-              "学历段": "高中或中专＋办公软件基础",
+              "学历段": "美国准备口径（非中国门槛）",
               "岗位方向": "函件收发、分类与基础录入岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -34486,7 +34410,7 @@
               }
             },
             {
-              "学历段": "大专及以上＋相关专业背景",
+              "学历段": "中国目标招聘条件（待核）",
               "岗位方向": "账单核对、账户与客服后台事务岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -34496,7 +34420,7 @@
               }
             },
             {
-              "学历段": "本科及以上＋相关专业背景",
+              "学历段": "数据与答复权限（分别核）",
               "岗位方向": "在部分单位从事合规、数据质量或客户关系岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.theater",
@@ -34506,7 +34430,7 @@
               }
             },
             {
-              "学历段": "熟悉流程＋内部考核与带训",
+              "学历段": "管理方向实际条件（待核）",
               "岗位方向": "函件与账务方向的组长或主管方向",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -34559,7 +34483,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_ref": "国家统计局：公开统计与工资发布入口｜https://www.stats.gov.cn/",
+          "china_ref": "NBS2025城镇单位工资｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
           "china_salary_note": {
             "$item": "actors.display.career_snapshot_primary_locale.boundary",
             "block": "china-salary",
@@ -34577,22 +34501,8 @@
               }
             },
             {
-              "城市/区间": "中国大陆（行业均值代理口径）",
-              "月薪参考": {
-                "$join": [
-                  {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
-                    "field": "display_value"
-                  },
-                  {
-                    "$item": "actors.display.career_snapshot_primary_locale.quote-limits",
-                    "block": "china-salary",
-                    "copy_key": "career.item.career-snapshot-primary-locale",
-                    "type": "prose"
-                  }
-                ],
-                "separator": ""
-              }
+              "城市/区间": "背景统计（税前年均非月薪）",
+              "月薪参考": "NBS2025条件匹配背景：金融非私营211,164／私营140,451，租赁商务服务110,162／68,919元税前年均。单位主营分类匹配才引用；规模以上企业办事及有关人员94,936元年均是宽岗位另一覆盖，非本岗职业分位。城镇5人以上法人、不含个体自由职业、含奖金津补贴；中国本岗工资及招聘分布未取得，不换月到手。"
             },
             {
               "城市/区间": "中国大陆（招聘报价口径）",
@@ -34604,7 +34514,7 @@
               }
             }
           ],
-          "china_soc_row": "美国职业代码：O*NET-SOC 43-4021.00（Correspondence Clerks）；BLS 职业展望手册将该类岗位归入 Information Clerks（信息文员）组合口径发布；中国大陆未建立与之对应的职业级工资口径。",
+          "china_soc_row": "本轮43-4021美国职业级工资及预测已取得；中国同类岗位未建立本轮可核精确统计映射，不断言全国不存在分类或数据。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
             "china-jiaojiang-featured-daily-2026"
@@ -34620,7 +34530,7 @@
             "scenario_role_label": "学历背景",
             "scenario_value_label": "岗位方向"
           },
-          "us_growth": "下降（2024—2034 年，单一职业口径）",
+          "us_growth": "下降6%（2025—2035本岗）",
           "us_median": "46,800美元/年（中位数，2025 年工资数据）"
         }
       },
@@ -34665,31 +34575,31 @@
             "说明": "第 90 百分位是高分段位置，通常与行业、地区与工时差异相关，来源没有证明与经验的对应关系；O*NET 全国工资：43-4021.00（2025 年工资数据）｜https://www.onetonline.org/link/localwages/43-4021.00"
           },
           {
-            "fact_ref": "employment",
-            "指标": "2024 就业 · 基期人数",
+            "fact_ref": "g04-employment-2025",
+            "指标": "2025就业·基期人数",
             "数值": {
-              "$fact": "employment",
+              "$fact": "g04-employment-2025",
               "field": "display_value"
             },
-            "说明": "就业规模是存量统计，不是当年招聘数量或岗位空缺数；来源为 O*NET／BLS 单一职业口径（43-4021.00）；BLS 信息文员组合口径 2025 年约 1,287,600 人，属另一口径。"
+            "说明": "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
           },
           {
-            "fact_ref": "growth",
-            "指标": "2024—2034 就业 · 增长预测",
+            "fact_ref": "g04-growth-2025-2035",
+            "指标": "2025—2035就业·增长预测",
             "数值": {
-              "$fact": "growth",
+              "$fact": "g04-growth-2025-2035",
               "field": "display_value"
             },
-            "说明": "增速是预测期的相对变化；BLS 信息文员组合口径 2025—2035 年为下降 2%（-30,100），属另一口径；该预测不含技术替代时点。"
+            "说明": "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
           },
           {
-            "fact_ref": "openings",
-            "指标": "2024—2034 就业 · 职位空缺",
+            "fact_ref": "g04-openings-2025-2035",
+            "指标": "2025—2035就业·年均空缺",
             "数值": {
-              "$fact": "openings",
+              "$fact": "g04-openings-2025-2035",
               "field": "display_value"
             },
-            "说明": "职位空缺是预测期累计数，主要来自替换需求（转岗或退休）；该指标不是每年净增岗位数。"
+            "说明": "本岗43-4021：2025就业4,800人、2035预测4,500人、下降6%、净减300人；2025—2035年均空缺500个，不是十年累计或净增。BLS信息文员组合1,287,600人、下降2%、净变-30,100、年均125,600另列，不代本岗；预测非AI替代或个人录用率。"
           }
         ],
         "boundary": {
@@ -34751,7 +34661,7 @@
           "type": "prose"
         },
         "growth": {
-          "$fact": "growth",
+          "$fact": "g04-growth-2025-2035",
           "field": "display_value"
         },
         "heading": {
@@ -34766,15 +34676,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024 年（O*NET 行业分布，43-4021.00 口径）",
+        "industry_period": "当前O*NET行业页，未明年度",
         "industry_rows": [
           {
-            "fact_ref": "median",
             "industry": "金融与保险",
-            "median": {
-              "$fact": "industry-theater",
-              "field": "display_value"
-            },
+            "median": "19%（就业占比非工资）",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.theater",
               "block": "us-salary",
@@ -34783,12 +34689,8 @@
             }
           },
           {
-            "fact_ref": "median",
-            "industry": "房地产与租赁",
-            "median": {
-              "$fact": "industry-education",
-              "field": "display_value"
-            },
+            "industry": "专业科学技术服务",
+            "median": "13%（就业占比非工资）",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.education",
               "block": "us-salary",
@@ -34797,12 +34699,8 @@
             }
           },
           {
-            "fact_ref": "median",
-            "industry": "专业、科学与技术服务",
-            "median": {
-              "$fact": "industry-amusement",
-              "field": "display_value"
-            },
+            "industry": "行政与支持服务",
+            "median": "12%（就业占比非工资）",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.amusement",
               "block": "us-salary",
@@ -34811,8 +34709,8 @@
             }
           },
           {
-            "industry": "函件文员所在行业（统计分类）",
-            "median": "分布合计｜100%（2024 年 O*NET 行业分布；金融与保险 20%、房地产与租赁 14%、专业与技术服务 13%、其他行业 53%）",
+            "industry": "其他行业",
+            "median": "56%（包括医疗社会救助和零售）",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -34877,7 +34775,7 @@
           "type": "prose"
         },
         "outlook_period": {
-          "$fact": "growth",
+          "$fact": "g04-growth-2025-2035",
           "field": "period"
         },
         "wage_column_labels": [
@@ -34894,7 +34792,7 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "不可按固定工时年化",
+            "equivalent": "官方年值可引用；标准折算不保证个人工时",
             "interpretation": {
               "$item": "actors.us-salary.career-snapshot-secondary-locale.2",
               "block": "us-salary",
@@ -35084,7 +34982,7 @@
           {
             "geography": "美国",
             "horizon": {
-              "$fact": "growth",
+              "$fact": "g04-growth-2025-2035",
               "field": "period"
             },
             "interpretation": {
@@ -35103,7 +35001,7 @@
             "occupation_scope": "函件文员（O*NET-SOC 43-4021.00 单一职业口径；BLS 信息文员组合口径对照）",
             "source_id": "bls",
             "value": {
-              "$fact": "growth",
+              "$fact": "g04-growth-2025-2035",
               "field": "display_value"
             }
           },
@@ -36876,7 +36774,8 @@
         "occupation_scope": "Correspondence Clerks（O*NET-SOC 43-4021.00）全国工资；BLS 信息文员组合口径 2025 年中位为 45,430 美元/年、21.84 美元/时",
         "period": "2025 年工资数据；检索 2026-09-18",
         "source_refs": [
-          "oews"
+          "r2-pay-3",
+          "r2-pay-2"
         ]
       },
       {
@@ -36888,7 +36787,8 @@
         "occupation_scope": "Correspondence Clerks（43-4021.00）；分位是统计位置，不是入职起薪或职级等级",
         "period": "2025 年工资数据；检索 2026-09-18",
         "source_refs": [
-          "oews"
+          "r2-pay-3",
+          "r2-pay-2"
         ]
       },
       {
@@ -36900,7 +36800,8 @@
         "occupation_scope": "Correspondence Clerks（43-4021.00）；分位是统计位置，不是职级或资历等级",
         "period": "2025 年工资数据；检索 2026-09-18",
         "source_refs": [
-          "oews"
+          "r2-pay-3",
+          "r2-pay-2"
         ]
       },
       {
@@ -36986,6 +36887,45 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "4,800人（2025本岗）",
+        "fact_id": "g04-employment-2025",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "43-4021本岗，非信息文员组合",
+        "period": "2025就业／2025—2035预测；检索2026-10-09",
+        "source_refs": [
+          "bls",
+          "g04-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "下降6%（2025—2035；净变-300）",
+        "fact_id": "g04-growth-2025-2035",
+        "market": "美国",
+        "measure": "就业变化率",
+        "occupation_scope": "43-4021本岗，非信息文员组合",
+        "period": "2025就业／2025—2035预测；检索2026-10-09",
+        "source_refs": [
+          "bls",
+          "g04-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均500个（2025—2035，非累计）",
+        "fact_id": "g04-openings-2025-2035",
+        "market": "美国",
+        "measure": "职位空缺",
+        "occupation_scope": "43-4021本岗，非信息文员组合",
+        "period": "2025就业／2025—2035预测；检索2026-10-09",
+        "source_refs": [
+          "bls",
+          "g04-trends"
+        ]
       }
     ]
   },
@@ -36994,7 +36934,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "办公与行政支持 · 函件与记录处理",
@@ -37045,7 +36985,7 @@
       "text": "函件文员"
     }
   },
-  "source_content_sha256": "0a28858eb7c5ef9ea82fedafafe073568fcb0f300a8cf1afd27c518ed5434bbc",
+  "source_content_sha256": "2bab58aaa6b07f07c68274ff7fcf1c840e73e99e6edcfb5a6fa60fc983f8708b",
   "subject": {
     "canonical_slug": "correspondence-clerks",
     "name": "函件文员",

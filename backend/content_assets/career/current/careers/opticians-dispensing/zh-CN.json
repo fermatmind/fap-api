@@ -12627,7 +12627,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更强证据是受监督工作样本、原始记录和反馈；兴趣测评不能证明处方核对、配镜尺寸、成镜放行和异常转诊责任能力。"
+              "能力判断可观察受监督处方核对、测量记录及顾客交接反馈；兴趣仅探索，不证明临床诊断、开方或法域许可。"
             ]
           },
           "id": "opticians-dispensing.fit.personality-fit-block.7",
@@ -13452,7 +13452,7 @@
                 "limitation": "美国统计不能外推中国；中位数不是起薪。",
                 "market": "US",
                 "name": "Opticians, Dispensing wages and trends",
-                "period": "2025 wages and 2024-2034 projections; accessed 2026-08-31",
+                "period": "2025 wages and 2025–2035 projections; checked 2026-10-12",
                 "publisher": "U.S. Department of Labor, O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/29-2081.00#WagesEmployment"
@@ -13823,7 +13823,7 @@
             "链接": "https://www.onetonline.org/link/details/29-2081.00"
           }
         ],
-        "difference_intro": "资料汇总可加快；处方核对、配镜尺寸、成镜放行和异常转诊责任需要人的检查。",
+        "difference_intro": "款式候选、录单校验与库存查询为编辑试用建议；须人工核处方、尺寸、成镜放行和异常，未取得单项提效实测。",
         "difference_rows": [
           {
             "AI主要改变": "辅助归纳记录与候选",
@@ -14082,8 +14082,8 @@
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
-            "label": "教育与资格",
-            "scope": "美国29-2081.00精确职业"
+            "label": "BLS典型教育与在岗训练",
+            "scope": "美国29-2081典型高中同等与长期在岗训练；部分州执照须查州规则，学历训练不自动授诊断开方权限。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-2081.00",
@@ -14388,16 +14388,28 @@
         "risks": [
           {
             "affected_roles": {
-              "$item": "opticians-dispensing.risk.career-risk-cards.4",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "录单与成镜复核人员及顾客。任务背景：",
+                {
+                  "$item": "opticians-dispensing.risk.career-risk-cards.4",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "consequence": {
-              "$item": "opticians-dispensing.risk.career-risk-cards.5",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "可能导致佩戴不适或视力问题。升级边界：",
+                {
+                  "$item": "opticians-dispensing.risk.career-risk-cards.5",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "evidence_refs": [
               "onet",
@@ -14409,11 +14421,11 @@
             "title": "处方错配"
           },
           {
-            "affected_roles": "配镜师工作需围绕配镜师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "配镜师工作需围绕配镜师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "测量与成镜检验的配镜师及顾客。",
+            "consequence": "可能发生视觉疲劳或佩戴问题。",
             "evidence_refs": [
               "onet",
-              "privacy"
+              "onet"
             ],
             "id": "record-version",
             "mitigation": "复测并核成镜。",
@@ -14421,11 +14433,11 @@
             "title": "瞳距偏差"
           },
           {
-            "affected_roles": "配镜师工作需围绕配镜师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "配镜师工作需围绕配镜师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "配镜师、顾客及售后人员。",
+            "consequence": "可能出现压迫与佩戴不适。",
             "evidence_refs": [
-              "privacy",
-              "privacy"
+              "onet",
+              "onet"
             ],
             "id": "personal-data",
             "mitigation": "试戴调整和回访。",
@@ -14433,8 +14445,8 @@
             "title": "镜架不合"
           },
           {
-            "affected_roles": "配镜师工作需围绕配镜师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "配镜师工作需围绕配镜师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "顾客、配镜师和销售管理人员。",
+            "consequence": "可能造成不合需求的购买及经济损失。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14445,11 +14457,11 @@
             "title": "过度销售"
           },
           {
-            "affected_roles": "配镜师工作需围绕配镜师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "配镜师工作需围绕配镜师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "顾客、接待配镜师和接收转诊的临床人员。",
+            "consequence": "可能延误医疗评估。",
             "evidence_refs": [
-              "bls",
-              "bls"
+              "onet",
+              "onet"
             ],
             "id": "single-coverage",
             "mitigation": "停止配镜建议并转眼科。",
@@ -14457,8 +14469,8 @@
             "title": "异常漏转"
           },
           {
-            "affected_roles": "配镜师工作需围绕配镜师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "配镜师工作需围绕配镜师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "顾客、配镜师及订单资料管理人员。",
+            "consequence": "可能泄露处方和个人资料。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14475,31 +14487,31 @@
             "href": "https://www.onetonline.org/link/details/29-2081.00",
             "id": "onet",
             "label": "任务",
-            "scope": "美国29-2081.00精确职业"
+            "scope": "O*NET支持处方、测量、成镜检验与顾客服务背景；风险为编辑提示，非光学公差、临床阈值、发生率或当地许可规则。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
             "label": "资格",
-            "scope": "美国29-2081.00精确职业"
+            "scope": "O*NET支持处方、测量、成镜检验与顾客服务背景；风险为编辑提示，非光学公差、临床阈值、发生率或当地许可规则。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-2081.00",
             "id": "facilities",
             "label": "工作环境",
-            "scope": "美国29-2081.00精确职业"
+            "scope": "O*NET支持处方、测量、成镜检验与顾客服务背景；风险为编辑提示，非光学公差、临床阈值、发生率或当地许可规则。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "privacy",
             "label": "就业资料",
-            "scope": "美国29-2081.00精确职业"
+            "scope": "O*NET支持处方、测量、成镜检验与顾客服务背景；风险为编辑提示，非光学公差、临床阈值、发生率或当地许可规则。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-2081.00",
             "id": "onet",
             "label": "职业活动",
-            "scope": "美国29-2081.00精确职业"
+            "scope": "O*NET支持处方、测量、成镜检验与顾客服务背景；风险为编辑提示，非光学公差、临床阈值、发生率或当地许可规则。"
           }
         ]
       },
@@ -14585,7 +14597,7 @@
           "china_open": "中国岗位与美国29-2081.00不一一映射。",
           "china_open_note": "核地区、雇主、资格、工时与福利。",
           "china_ref": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html",
-          "china_salary_note": "证据不足：全国同职业中位分位起薪未取得；2025批零非私营135749/私营69622年税前年均仅眼镜零售雇主宽行业，含其他岗非本職工资个人区间，不含个体店主自由职业或利润，诊所制造另核。",
+          "china_salary_note": "证据不足：全国同职业中位分位起薪未取得；2025批零非私营135749/私营69622年税前年均仅眼镜零售雇主宽行业，含其他岗非本职工资个人区间，不含个体店主自由职业或利润，诊所制造另核。",
           "china_salary_table": [
             {
               "城市/区间": "中国数据状态",
@@ -14627,7 +14639,7 @@
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "BLS精确职业统计｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET职业任务｜https://www.onetonline.org/link/details/29-2081.00",
+        "authority_sources": "BLS精确职业统计｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS行业中位年薪及州许可概述｜https://www.bls.gov/ooh/healthcare/opticians-dispensing.htm；O*NET工资分位｜https://www.onetonline.org/link/localwages/29-2081.00",
         "bls_table": [
           {
             "指标": "薪资第10百分位",
@@ -14704,24 +14716,24 @@
         "industry_period": "2025年5月",
         "industry_rows": [
           {
-            "industry": "眼镜零售店",
-            "median": "按地区核",
-            "note": "精确职业行业分位在本页未单列。"
+            "industry": "健康与个人护理零售商",
+            "median": "$47,460",
+            "note": "BLS OOH2025美国29-2081行业中位年薪；非起薪、个人报价或店铺利润。"
           },
           {
-            "industry": "视光诊所",
-            "median": "按地区核",
-            "note": "精确职业行业分位在本页未单列。"
+            "industry": "验光师诊所",
+            "median": "$45,320",
+            "note": "BLS OOH2025美国29-2081行业中位年薪；非起薪、个人报价或店铺利润。"
           },
           {
-            "industry": "眼科门诊",
-            "median": "按地区核",
-            "note": "精确职业行业分位在本页未单列。"
+            "industry": "医师诊所",
+            "median": "$48,590",
+            "note": "BLS OOH2025美国29-2081行业中位年薪；非起薪、个人报价或店铺利润。"
           },
           {
-            "industry": "配镜连锁中心",
-            "median": "按地区核",
-            "note": "精确职业行业分位在本页未单列。"
+            "industry": "综合商品零售商",
+            "median": "$60,000",
+            "note": "BLS OOH2025美国29-2081行业中位年薪；非起薪、个人报价或店铺利润。"
           }
         ],
         "industry_value_label": "年薪中位数（美元）",
@@ -14894,30 +14906,39 @@
         "heading": "美国29-2081.00就业展望",
         "outlook_evidence": [
           {
-            "geography": {
-              "$item": "opticians-dispensing.market-signals.market-signal-card.2",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "horizon": {
-              "$item": "opticians-dispensing.market-signals.market-signal-card.3",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "geography": "美国",
+            "horizon": "2025基期",
             "interpretation": {
-              "$item": "opticians-dispensing.market-signals.market-signal-card.4",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
+              "$join": [
+                "就业及其他背景分开解读：",
+                {
+                  "$item": "opticians-dispensing.market-signals.market-signal-card.2",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "opticians-dispensing.market-signals.market-signal-card.3",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "opticians-dispensing.market-signals.market-signal-card.4",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "opticians-dispensing.market-signals.market-signal-card.5",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
-            "limitation": {
-              "$item": "opticians-dispensing.market-signals.market-signal-card.5",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "limitation": "29-2081配镜师单项规模；非当前招聘、AI归因或中国需求。",
             "metric": "2025在岗",
             "occupation_scope": "美国29-2081.00",
             "source_id": "bls",
@@ -15062,7 +15083,7 @@
           },
           {
             "alternate_value": null,
-            "label": "知识",
+            "label": "任务相关知识（编辑归纳）",
             "secondary_value": null,
             "value": "镜片光学、镜架结构、面部测量、隐形眼镜护理与零售服务"
           },
@@ -15085,7 +15106,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
+            "cta_label": "查看霍兰德兴趣测评",
             "evidence_level": {
               "$item": "opticians-dispensing.fit.personality-fit-block.8",
               "block": "fit",
@@ -15104,10 +15125,10 @@
             "watchout": "兴趣测评不证明处方核对、配镜尺寸、成镜放行和异常转诊责任能力或资格。"
           },
           {
-            "answer": "配镜师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "对照原处方核左右眼、镜片标签和瞳距完整性，观察能否发现矛盾。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "配镜师工作需围绕配镜师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "big-five",
             "label": "细节能力",
             "question": "做配镜师需要怎样的能力与工作方式？",
@@ -15120,10 +15141,10 @@
             "watchout": "兴趣测评不证明处方核对、配镜尺寸、成镜放行和异常转诊责任能力或资格。"
           },
           {
-            "answer": "配镜师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "遇测量缺项、成镜不符或顾客急性视力变化，练暂停并交授权人员。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "配镜师工作需围绕配镜师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "mbti",
             "label": "风险处理",
             "question": "做配镜师需要怎样的能力与工作方式？",
@@ -15136,10 +15157,10 @@
             "watchout": "兴趣测评不证明处方核对、配镜尺寸、成镜放行和异常转诊责任能力或资格。"
           },
           {
-            "answer": "配镜师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较精密测量、顾客解释、售后与销售目标是否符合工作价值。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "配镜师工作需围绕配镜师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "enneagram",
             "label": "工作价值",
             "question": "做配镜师需要怎样的能力与工作方式？",
@@ -15152,10 +15173,10 @@
             "watchout": "兴趣测评不证明处方核对、配镜尺寸、成镜放行和异常转诊责任能力或资格。"
           },
           {
-            "answer": "配镜师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "核面对顾客、重复精细核对、镜架调整与零售班次是否适合。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "配镜师工作需围绕配镜师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "iq",
             "label": "场景偏好",
             "question": "做配镜师需要怎样的能力与工作方式？",
@@ -15168,10 +15189,10 @@
             "watchout": "兴趣测评不证明处方核对、配镜尺寸、成镜放行和异常转诊责任能力或资格。"
           },
           {
-            "answer": "配镜师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "沿既有G/H纸面题核错配及缺测量，不猜填尺寸，不放行真实成镜。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "配镜师工作需围绕配镜师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "eq",
             "label": "虚构案例",
             "question": "做配镜师需要怎样的能力与工作方式？",
@@ -15391,8 +15412,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "BLS 29-2081.00 2025—2035精确职业统计；O*NET任务；国家统计局中国工资缺口。",
-          "updated_at": "2026-09-26核官方职业任务与当前统计。"
+          "source": "O*NET精确任务及BLS2025单项工资分位；BLS行业工资与2025—2035单项预测；NBS批零宽行业背景。",
+          "updated_at": "2026-10-12"
         },
         "note": "证据只支持配镜师在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -15404,7 +15425,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "职业任务"
+            "label": "MBTI测评（英文）"
           },
           {
             "href": {
@@ -15414,7 +15435,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "工资就业"
+            "label": "大五人格测评（英文）"
           },
           {
             "href": {
@@ -15424,7 +15445,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "资格或规则"
+            "label": "MBTI测评（中文）"
           },
           {
             "href": {
@@ -15434,7 +15455,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "统计边界"
+            "label": "大五人格测评（中文）"
           }
         ]
       },
@@ -15656,7 +15677,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "配镜师 · O*NET 29-2081.00",
@@ -15707,7 +15728,7 @@
       "text": "配镜师：工作、工资与入行路径"
     }
   },
-  "source_content_sha256": "a76d096f75a88c8f60d2f6dc48dc45f62951e4b1c31cb2f53bd91c8c0e6dfd7f",
+  "source_content_sha256": "887142ab8e63ae8e4a01f5fd8f974c247d657264b4dca2a7e5e19f0644b52742",
   "subject": {
     "canonical_slug": "opticians-dispensing",
     "name": "配镜师",

@@ -23428,7 +23428,7 @@
               "受控验证｜在范围内寻找和复现弱点｜记录版本、条件和证据。",
               "影响判断｜区分真实风险、推断和误报｜不扩大收集敏感资料。",
               "报告交付｜写发现、影响、修复建议与优先级｜由所有者决定变更。",
-              "修复复测｜获得再次授权后核修复效果｜记录残余风险和结论。"
+              "修复复测｜先核有效授权是否覆盖复测范围｜未覆盖或失效时补充授权，记录残余风险。"
             ]
           },
           "id": "penetration-testers.profile.responsibilities-block.1",
@@ -25067,7 +25067,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "人须获得复测许可并确认残余风险。"
+              "人须确认有效授权是否覆盖复测的目标、方法和时段，并核残余风险；未覆盖或已失效时先补充确认。"
             ]
           },
           "id": "penetration-testers.ai-impact.ai-impact-table.39",
@@ -25590,7 +25590,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有可核的消失年份。任务暴露、工具采用与职业就业是不同概念；当前精确职业也缺独立就业预测。"
+              "本页未取得可信的职业消失年份。任务暴露、工具采用与就业是不同概念；现有BLS发布为父类，本职独立预测未取得。"
             ]
           },
           "id": "penetration-testers.ai-impact.ai-impact-table.74",
@@ -25725,7 +25725,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "修复后取得新的复测授权，记录结果与未决风险。"
+              "修复后先核现有授权和规则是否覆盖复测，未覆盖或已失效时补充授权；记录结果与未决风险。"
             ]
           },
           "id": "penetration-testers.ai-impact.ai-impact-table.83",
@@ -26190,7 +26190,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "重新授权后由人员核修复，所有者决定接受。"
+              "在有效授权覆盖范围内由人员复测，所有者决定是否接受残余风险。"
             ]
           },
           "id": "penetration-testers.ai-impact.ai-impact-table.114",
@@ -27206,7 +27206,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "父类第10分位年薪55,940、时薪26.89美元，非初级渗透测试員工资。；O*NET本职工资页（BLS15-1299合并组）｜https://www.onetonline.org/link/localwages/15-1299.04；BLS合并组2025—2035预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "父类第10分位年薪55,940、时薪26.89美元，非初级渗透测试员工资。；O*NET本职工资页（BLS15-1299合并组）｜https://www.onetonline.org/link/localwages/15-1299.04；BLS合并组2025—2035预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "penetration-testers.us-salary.career-snapshot-secondary-locale.10",
@@ -29504,7 +29504,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "取得新授权并核版本、目标和停止规则后再复测。"
+              "核有效授权是否覆盖复测的版本、目标、方法和时段；未覆盖或已失效时先确认授权及停止规则。"
             ]
           },
           "id": "penetration-testers.risk.career-risk-cards.33",
@@ -29568,7 +29568,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "修复闭环｜建议需能指向责任人、版本和复测条件；未经再次授权不对生产环境复测。"
+              "修复闭环｜建议应指向责任人、版本和复测条件；复测须受有效授权覆盖，不能自动沿用已失效或不含该动作的规则。"
             ]
           },
           "id": "penetration-testers.risk.career-risk-cards.37",
@@ -30146,7 +30146,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "以下阶段是可观察的能力层次，不是统一晋升年限；每次真实测试仍需独立授权与规则。"
+              "以下为可观察能力层次，非统一晋升年限；真实测试须始终处于有效授权和规则范围内，变更或未覆盖的动作应先补充确认。"
             ]
           },
           "id": "penetration-testers.path.career-path-block.11",
@@ -31575,7 +31575,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "父类15-1299预计增长5.1%；渗透测试员15-1299.04独立增长率未公布。"
+              "父类15-1299预计增长5.1%；本页未取得渗透测试员15-1299.04的独立增长率。"
             ]
           },
           "id": "penetration-testers.market-signals.market-signal-card.18",
@@ -32280,7 +32280,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮资料核读2026-10-03；保留2026-09-26编辑的A1—A5离线虚构练习。来源统计期和适用范围另列，招聘原文未取得的搜索摘要金额不采纳。"
+              "本轮2026-10-12核读O*NET精确任务和父类工资、BLS15-1299预测、NIST测试指南与ROE、网信办现行网络安全法；保留原A1—A5离线虚构练习。中国完整报价和本职独立统计、AI实测效果仍缺；NBS分类PDF本轮原文未取得，来源历史期不冒充本轮核读。"
             ]
           },
           "id": "penetration-testers.sources.source-card.3",
@@ -35980,7 +35980,7 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "us-industry-wage-finance-2025",
             "industry": {
               "$item": "penetration-testers.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -36001,7 +36001,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "us-industry-wage-professional-2025",
             "industry": {
               "$item": "penetration-testers.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -36022,7 +36022,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "us-industry-wage-localgov-2025",
             "industry": {
               "$item": "penetration-testers.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -36043,7 +36043,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "us-industry-wage-education-2025",
             "industry": {
               "$item": "penetration-testers.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -37920,8 +37920,8 @@
         "display_value": "证据不足：未核得渗透测试员该行业独立工资",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
-        "measure": "本职业该行业独立工资待核",
-        "occupation_scope": "美国渗透测试员15-1299.04，行业细分工资证据缺口",
+        "measure": "本职业在安全服务机构的独立工资待核",
+        "occupation_scope": "美国渗透测试员15-1299.04；安全服务机构独立工资未核得，非15-1299父类值",
         "period": "2026-09-26核读；2025年5月工资／2025—2035就业预测",
         "source_refs": [
           "ep"
@@ -37932,8 +37932,8 @@
         "display_value": "证据不足：未核得渗透测试员该行业独立工资",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
-        "measure": "本职业该行业独立工资待核",
-        "occupation_scope": "美国渗透测试员15-1299.04，行业细分工资证据缺口",
+        "measure": "本职业在企业内部安全团队的独立工资待核",
+        "occupation_scope": "美国渗透测试员15-1299.04；企业内部安全团队独立工资未核得，非15-1299父类值",
         "period": "2026-09-26核读；2025年5月工资／2025—2035就业预测",
         "source_refs": [
           "ep"
@@ -37944,8 +37944,8 @@
         "display_value": "证据不足：未核得渗透测试员该行业独立工资",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
-        "measure": "本职业该行业独立工资待核",
-        "occupation_scope": "美国渗透测试员15-1299.04，行业细分工资证据缺口",
+        "measure": "本职业在软件与互联网企业的独立工资待核",
+        "occupation_scope": "美国渗透测试员15-1299.04；软件与互联网企业独立工资未核得，非15-1299父类值",
         "period": "2026-09-26核读；2025年5月工资／2025—2035就业预测",
         "source_refs": [
           "ep"
@@ -37956,8 +37956,8 @@
         "display_value": "证据不足：未核得渗透测试员该行业独立工资",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
-        "measure": "本职业该行业独立工资待核",
-        "occupation_scope": "美国渗透测试员15-1299.04，行业细分工资证据缺口",
+        "measure": "本职业在公共与教育机构的独立工资待核",
+        "occupation_scope": "美国渗透测试员15-1299.04；公共与教育机构独立工资未核得，非15-1299父类值",
         "period": "2026-09-26核读；2025年5月工资／2025—2035就业预测",
         "source_refs": [
           "ep"
@@ -38066,7 +38066,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "书面授权·范围控制",
@@ -38117,7 +38117,7 @@
       "text": "渗透测试员"
     }
   },
-  "source_content_sha256": "e6c174a30aeec8b9e4353bb311e95e40058b9d85486cc3b3d22b0eb645f5a411",
+  "source_content_sha256": "09de1c00f43a6b8255d7ff88f79c5065e542c498b5f76d7d1e681efd67df729a",
   "subject": {
     "canonical_slug": "penetration-testers",
     "name": "渗透测试员",

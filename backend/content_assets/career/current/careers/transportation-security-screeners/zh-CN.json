@@ -27474,7 +27474,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "当前O*NET转引美国精确SOC33-9093运输安检员2025中位32.10美元/小时、66770美元/年。官方小时与年度指标不是个人保证收入。证据不足：本轮未取得完整同年分位与行业表。"
+              "美国精确SOC33-9093运输安检员2025中位32.10美元/小时、66,770美元/年。本轮全国Annual五分位为44,700／57,050／66,770／72,820／78,350美元/年；均为职业统计，非个人到手或Bangor岗位报价。行业工资仍未取得。"
             ]
           },
           "fact_refs": [
@@ -27483,7 +27483,8 @@
           "id": "transportation-security-screeners.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
             "onet",
-            "editorial"
+            "editorial",
+            "us-wage-percentiles-2025"
           ],
           "type": "prose"
         },
@@ -27492,7 +27493,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得2025精确职业第10分位工资，不用中位数或旧年估算；分位不是新人等级。"
+              "2025精确职业全国年工资P10为44,700美元；直接采用官方Annual值，不用中位数推算，也不代表新人起薪。"
             ]
           },
           "fact_refs": [
@@ -27501,7 +27502,8 @@
           "id": "transportation-security-screeners.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
             "bls-oews",
-            "editorial"
+            "editorial",
+            "us-wage-percentiles-2025"
           ],
           "type": "prose"
         },
@@ -27510,7 +27512,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得2025精确职业第90分位工资，不用其他职业或旧年补齐；分位非资深固定待遇。"
+              "2025精确职业全国年工资P90为78,350美元；直接采用官方Annual值，不自行年化，不代表资深固定待遇。"
             ]
           },
           "fact_refs": [
@@ -27519,7 +27521,8 @@
           "id": "transportation-security-screeners.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
             "bls-oews",
-            "editorial"
+            "editorial",
+            "us-wage-percentiles-2025"
           ],
           "type": "prose"
         },
@@ -27592,7 +27595,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025工资中位数与分位缺口"
+              "2025精确职业工资中位数与全国五分位"
             ]
           },
           "id": "transportation-security-screeners.display.career_snapshot_secondary_locale.wage-heading",
@@ -27637,13 +27640,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不能。分位描述统计人群位置，非年限等级；本页高分位未取得，更不能承诺资深固定工资。"
+              "全国Annual五分位为44,700／57,050／66,770／72,820／78,350美元/年。分位描述人群位置，不是经验等级或个人承诺；本职业行业工资仍未取得。"
             ]
           },
           "id": "transportation-security-screeners.display.career_snapshot_secondary_locale.interpretation.percentile",
           "source_refs": [
             "onet",
-            "editorial"
+            "editorial",
+            "us-wage-percentiles-2025"
           ],
           "type": "prose"
         },
@@ -27816,14 +27820,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025中位32.10美元/小时、66770美元/年与最新BLS2025—2035预测分别引用。典型高中同等学历、相关经验None、短期在岗训练是美国职业分类，不替代Bangor具体条件、中国民航资格或机构授权。缺失分位行业不拼旧年，不外推个人录用、中国待遇或AI因果。"
+              "2025精确职业全国Annual五分位已取得；中位小时32.10美元与年度66,770美元分别记录。BLS2025—2035预测另作就业背景。典型学历、经验与短期训练是美国统计分类，不能替代Bangor具体条件、中国民航资格或机构授权；行业工资仍缺。"
             ]
           },
           "id": "transportation-security-screeners.display.career_snapshot_secondary_locale.boundary.detail",
           "source_refs": [
             "onet",
             "bls-ep-2025",
-            "editorial"
+            "editorial",
+            "us-wage-percentiles-2025"
           ],
           "type": "prose"
         }
@@ -31622,7 +31627,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补制度规划、人员协调和管理责任，形成管理产出。"
+              "需补制度规划、人员协调和管理责任，形成管理产出。 责任范围扩展明显，现场经验不等于管理任职条件。"
             ]
           },
           "id": "transportation-security-screeners.display.market_signal_card.transitions.agent.gaps",
@@ -31637,7 +31642,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "责任范围扩展明显，现场经验不等于管理任职条件。"
+              "编辑判断：制度与组织管理"
             ]
           },
           "id": "transportation-security-screeners.display.market_signal_card.transitions.agent.distance",
@@ -31667,7 +31672,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补法规解释、符合性评价和证据意见，不以检查经历替代。"
+              "需补法规解释、符合性评价和证据意见，不以检查经历替代。 目标是合规评价，另核知识与岗位要求。"
             ]
           },
           "id": "transportation-security-screeners.display.market_signal_card.transitions.teacher.gaps",
@@ -31682,7 +31687,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "目标是合规评价，另核知识与岗位要求。"
+              "编辑判断：法规与符合性评价"
             ]
           },
           "id": "transportation-security-screeners.display.market_signal_card.transitions.teacher.distance",
@@ -31712,7 +31717,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补安全分析、系统方案和相应技术，形成评估产出。"
+              "需补安全分析、系统方案和相应技术，形成评估产出。 任务有联系，但评估与系统设计需独立能力。"
             ]
           },
           "id": "transportation-security-screeners.display.market_signal_card.transitions.enrichment.gaps",
@@ -31727,7 +31732,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "任务有联系，但评估与系统设计需独立能力。"
+              "编辑判断：安全评估与系统方案"
             ]
           },
           "id": "transportation-security-screeners.display.market_signal_card.transitions.enrichment.distance",
@@ -31757,7 +31762,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补指导、排班协调、绩效与组织责任，依实际授权。"
+              "需补指导、排班协调、绩效与组织责任，依实际授权。 监督人员是新责任，不按工作年限自动取得。"
             ]
           },
           "id": "transportation-security-screeners.display.market_signal_card.transitions.art.gaps",
@@ -31772,7 +31777,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "监督人员是新责任，不按工作年限自动取得。"
+              "编辑判断：人员监督责任"
             ]
           },
           "id": "transportation-security-screeners.display.market_signal_card.transitions.art.distance",
@@ -31802,7 +31807,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "保安以场所守护和巡逻等为任务，须核相应训练与权限。"
+              "保安以场所守护和巡逻等为任务，须核相应训练与权限。 安检与场所守护不同，不能互换授权。"
             ]
           },
           "id": "transportation-security-screeners.display.market_signal_card.transitions.directing.gaps",
@@ -31817,7 +31822,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "安检与场所守护不同，不能互换授权。"
+              "编辑判断：场所守护与巡逻"
             ]
           },
           "id": "transportation-security-screeners.display.market_signal_card.transitions.directing.distance",
@@ -31847,7 +31852,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "机场运行涉及起降协调、设施和运行任务，需要新的知识与产出。"
+              "机场运行涉及起降协调、设施和运行任务，需要新的知识与产出。 同在机场不等于具备运行岗位能力。"
             ]
           },
           "id": "transportation-security-screeners.display.market_signal_card.transitions.announcing.gaps",
@@ -31862,7 +31867,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "同在机场不等于具备运行岗位能力。"
+              "编辑判断：机场运行任务"
             ]
           },
           "id": "transportation-security-screeners.display.market_signal_card.transitions.announcing.distance",
@@ -31892,7 +31897,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "票务预订涉及行程、票务系统与服务任务，补对应能力。"
+              "票务预订涉及行程、票务系统与服务任务，补对应能力。 服务记录不是检查权限，按目标岗位评价。"
             ]
           },
           "id": "transportation-security-screeners.display.market_signal_card.transitions.editing.gaps",
@@ -31907,7 +31912,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "服务记录不是检查权限，按目标岗位评价。"
+              "编辑判断：票务预订与服务"
             ]
           },
           "id": "transportation-security-screeners.display.market_signal_card.transitions.editing.distance",
@@ -31937,7 +31942,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "航空货物装卸主管涉及地面装卸组织与人员责任，需另核技能与条件。"
+              "航空货物装卸主管涉及地面装卸组织与人员责任，需另核技能与条件。 装卸协调与安全检查不同，经验不能自动转换。"
             ]
           },
           "id": "transportation-security-screeners.display.market_signal_card.transitions.dancing.gaps",
@@ -31952,7 +31957,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "装卸协调与安全检查不同，经验不能自动转换。"
+              "编辑判断：航空装卸组织"
             ]
           },
           "id": "transportation-security-screeners.display.market_signal_card.transitions.dancing.distance",
@@ -32201,7 +32206,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "精确职业任务与统计、中国现行民航法规、美国特定公告和八个相邻任务档案分别使用；编辑练习不作为外部数据。原链接与限制见来源登记。"
+              "精确美国任务与统计、中国民航法律和规则、美国Bangor及郑州地铁特定公告分别适用。全国Annual五分位本轮已取得；行业及中国精确分布仍缺。共享onet/bls-ooh来源说明保留旧预测期，当前模块以BLS2025—2035为准，未将保护消费者暗改同步。"
             ]
           },
           "id": "transportation-security-screeners.display.source_card.source",
@@ -32215,7 +32220,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-09-30 本地整理；数据年份和法规生效日期见各来源"
+              "2026-10-12核O*NET任务/CR、全国Annual分位、BLS预测、Bangor条件、郑州4月17日班次报价。普通原链接读民航法，确认2026年7月1日起施行及第166/169条；安检规则核第2/14/15/17条民航范围。工资统计期、公告日期与查阅日分别标明。"
             ]
           },
           "id": "transportation-security-screeners.display.source_card.updated-at",
@@ -32369,17 +32374,17 @@
                 "url": "https://www.onetonline.org/link/summary/33-1091.00"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-10-12",
                 "details": [
-                  "旅客、行李或货物安检相关任务，26项任务；CR兴趣，Job Zone1—2。",
-                  "2025中位32.10美元/小时、66770美元/年；2024就业50100，2024—2034下降(-1%或低)、年均空缺4700。"
+                  "精确SOC33-9093旅客、行李与货物任务，CR兴趣与Job Zone1—2；非中国统一操作规则。",
+                  "2025中位32.10美元/小时、66770美元/年；BLS2025—2035精确预测53.5→51.2千，公布净−2.2千、−4.2%、年均空缺4.5千；原自雇破折号保未知。"
                 ],
                 "evidence_type": "official primary source",
                 "id": "bls",
                 "limitation": "精确美国职业，不提供中国资格、普遍操作程序或个人录用判断。",
                 "market": "美国",
                 "name": "O*NET：运输安检员33-9093.00",
-                "period": "2026档案；2025工资；2024—2034预测",
+                "period": "2026档案；2025工资；2025—2035预测",
                 "publisher": "U.S. Department of Labor, O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/33-9093.00"
@@ -32540,17 +32545,17 @@
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-10-12",
                 "details": [
-                  "旅客、行李或货物安检相关任务，26项任务；CR兴趣，Job Zone1—2。",
-                  "2025中位32.10美元/小时、66770美元/年；2024就业50100，2024—2034下降(-1%或低)、年均空缺4700。"
+                  "精确SOC33-9093旅客、行李与货物任务，CR兴趣与Job Zone1—2；非中国统一操作规则。",
+                  "2025中位32.10美元/小时、66770美元/年；BLS2025—2035精确预测53.5→51.2千，公布净−2.2千、−4.2%、年均空缺4.5千；原自雇破折号保未知。"
                 ],
                 "evidence_type": "official primary source",
                 "id": "r2-pay-2",
                 "limitation": "精确美国职业，不提供中国资格、普遍操作程序或个人录用判断。",
                 "market": "美国",
                 "name": "O*NET：运输安检员33-9093.00",
-                "period": "2026档案；2025工资；2024—2034预测",
+                "period": "2026档案；2025工资；2025—2035预测",
                 "publisher": "U.S. Department of Labor, O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/33-9093.00"
@@ -32633,17 +32638,17 @@
                 "url": "https://www.onetonline.org/link/summary/13-1041.00"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-10-12",
                 "details": [
-                  "旅客、行李或货物安检相关任务，26项任务；CR兴趣，Job Zone1—2。",
-                  "2025中位32.10美元/小时、66770美元/年；2024就业50100，2024—2034下降(-1%或低)、年均空缺4700。"
+                  "精确SOC33-9093旅客、行李与货物任务，CR兴趣与Job Zone1—2；非中国统一操作规则。",
+                  "2025中位32.10美元/小时、66770美元/年；BLS2025—2035精确预测53.5→51.2千，公布净−2.2千、−4.2%、年均空缺4.5千；原自雇破折号保未知。"
                 ],
                 "evidence_type": "official primary source",
                 "id": "interest-profiler",
                 "limitation": "精确美国职业，不提供中国资格、普遍操作程序或个人录用判断。",
                 "market": "美国",
                 "name": "O*NET：运输安检员33-9093.00",
-                "period": "2026档案；2025工资；2024—2034预测",
+                "period": "2026档案；2025工资；2025—2035预测",
                 "publisher": "U.S. Department of Labor, O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/33-9093.00"
@@ -32819,6 +32824,22 @@
                 "publisher": "郑州市个体私营经济发展促进中心／郑州市市场监管局公开企业招聘",
                 "scope": "recruitment_proxy",
                 "url": "https://amr.zhengzhou.gov.cn/jycyzl/10005194.jhtml"
+              },
+              {
+                "accessed_at": "2026-10-12",
+                "details": [
+                  "United States Annual行P10/25/50/75/90：44700/57050/66770/72820/78350美元/年。",
+                  "2026-10-12普通urllib读取原URL全国Annual表；未采用California或城市行。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-wage-percentiles-2025",
+                "limitation": "分位非经验等级、起薪或个人合同收入；本职业行业工资仍未取得。",
+                "market": "美国",
+                "name": "O*NET/BLS：2025运输安检员全国年工资五分位",
+                "period": "2025年5月",
+                "publisher": "O*NET OnLine；原始BLS OEWS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/33-9093.00?p=annual&st=CA"
               }
             ]
           },
@@ -35854,6 +35875,25 @@
                 }
               ],
               "separator": "｜"
+            },
+            {
+              "$join": [
+                {
+                  "$source": "us-wage-percentiles-2025",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "transportation-security-screeners.source-register.published.1"
+                },
+                {
+                  "$source": "us-wage-percentiles-2025",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "transportation-security-screeners.source-register.published.1"
+                }
+              ],
+              "separator": "｜"
             }
           ],
           "separator": "；"
@@ -35866,12 +35906,12 @@
               "$fact": "us-p10-2025",
               "field": "display_value"
             },
-            "说明": "2025精确职业分位未取得，不代表新人等级。"
+            "说明": "2025精确职业全国年工资分位，非资历等级或个人待遇。"
           },
           {
             "指标": "2025薪资·第25分位",
-            "数值": "证据不足：本轮未取得2025精确职业该分位工资",
-            "说明": "完整2025分位表未取得，不插值补齐。"
+            "数值": "57,050美元/年",
+            "说明": "2025精确职业全国年工资分位，非资历等级或个人待遇。"
           },
           {
             "fact_ref": "us-median-2025",
@@ -35884,8 +35924,8 @@
           },
           {
             "指标": "2025薪资·第75分位",
-            "数值": "证据不足：本轮未取得2025精确职业该分位工资",
-            "说明": "完整2025分位表未取得，不从其他分位推算。"
+            "数值": "72,820美元/年",
+            "说明": "2025精确职业全国年工资分位，非资历等级或个人待遇。"
           },
           {
             "fact_ref": "us-p90-2025",
@@ -35894,7 +35934,7 @@
               "$fact": "us-p90-2025",
               "field": "display_value"
             },
-            "说明": "2025精确职业分位未取得，不代表资深固定待遇。"
+            "说明": "2025精确职业全国年工资分位，非资历等级或个人待遇。"
           },
           {
             "fact_ref": "us-employment-2024",
@@ -36126,7 +36166,7 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "不可按固定工时年化",
+            "equivalent": "直接采用官方年值，非固定合同收入",
             "interpretation": {
               "$item": "transportation-security-screeners.us-salary.career-snapshot-secondary-locale.2",
               "block": "us-salary",
@@ -36154,7 +36194,7 @@
             }
           },
           {
-            "equivalent": "不代表全年持续高收入",
+            "equivalent": "直接采用官方年值，非固定合同收入",
             "interpretation": {
               "$item": "transportation-security-screeners.us-salary.career-snapshot-secondary-locale.3",
               "block": "us-salary",
@@ -38112,27 +38152,27 @@
         ]
       },
       {
-        "derivation": "当前O*NET官方转引区分2025工资与2024—2034预测；年均空缺含替补，不是净新增。未取得完整分位行业表，不插值或换算个人报酬。",
-        "display_value": "证据不足：本轮未取得2025精确职业第10分位工资",
+        "derivation": "采用2025 United States Annual原值；非资历等级，不自行年化或从中位数推算。",
+        "display_value": "44,700美元/年",
         "fact_id": "us-p10-2025",
         "market": "美国",
-        "measure": "第10分位工资",
+        "measure": "全国年工资第10分位",
         "occupation_scope": "精确美国职业SOC33-9093运输安检员",
         "period": "2025",
         "source_refs": [
-          "bls-oews"
+          "us-wage-percentiles-2025"
         ]
       },
       {
-        "derivation": "当前O*NET官方转引区分2025工资与2024—2034预测；年均空缺含替补，不是净新增。未取得完整分位行业表，不插值或换算个人报酬。",
-        "display_value": "证据不足：本轮未取得2025精确职业第90分位工资",
+        "derivation": "采用2025 United States Annual原值；非资历等级，不自行年化或从中位数推算。",
+        "display_value": "78,350美元/年",
         "fact_id": "us-p90-2025",
         "market": "美国",
-        "measure": "第90分位工资",
+        "measure": "全国年工资第90分位",
         "occupation_scope": "精确美国职业SOC33-9093运输安检员",
         "period": "2025",
         "source_refs": [
-          "bls-oews"
+          "us-wage-percentiles-2025"
         ]
       },
       {
@@ -38226,7 +38266,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "O*NET-SOC 33-9093.00 精确职业口径",
@@ -38277,7 +38317,7 @@
       "text": "运输安检员"
     }
   },
-  "source_content_sha256": "abbcbef2baeda82862032535308ccbdcad079020906e856824d4b326fefe7a44",
+  "source_content_sha256": "bc762b6fd68ef60860fd3aad8b0bf27e7ea6e7c04f4151d66a2a3efdf98a051e",
   "subject": {
     "canonical_slug": "transportation-security-screeners",
     "name": "运输安检员",

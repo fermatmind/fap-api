@@ -38,13 +38,31 @@
       "fact:us-employment-parent": {
         "status": "pending_mapping"
       },
+      "fact:us-employment-revision-2025": {
+        "status": "pending_mapping"
+      },
       "fact:us-growth-2025-2035": {
         "status": "mapped"
       },
       "fact:us-growth-parent": {
         "status": "pending_mapping"
       },
+      "fact:us-growth-revision-2025-2035": {
+        "status": "pending_mapping"
+      },
       "fact:us-hourly-median-parent": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-business-support-revision-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-credit-intermediation-revision-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-healthcare-revision-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-professional-revision-2025": {
         "status": "pending_mapping"
       },
       "fact:us-industry-wage-education-2025": {
@@ -63,6 +81,9 @@
         "status": "mapped"
       },
       "fact:us-openings-parent": {
+        "status": "pending_mapping"
+      },
+      "fact:us-openings-revision-2025-2035": {
         "status": "pending_mapping"
       },
       "fact:us-wage-2025": {
@@ -390,6 +411,12 @@
         "status": "mapped"
       },
       "item:bill-and-account-collectors.ai-impact.ai-impact-table.9": {
+        "status": "pending_mapping"
+      },
+      "item:bill-and-account-collectors.ai-impact.ai-impact-table.9.historical-unconsumed": {
+        "status": "pending_mapping"
+      },
+      "item:bill-and-account-collectors.ai-impact.ai-impact-table.9.unconsumed": {
         "status": "pending_mapping"
       },
       "item:bill-and-account-collectors.ai-impact.ai-impact-table.90": {
@@ -3799,7 +3826,7 @@
       },
       "ai_impact_table.evidence_rows.01.link": {
         "ref": {
-          "id": "bill-and-account-collectors.ai-impact.ai-impact-table.9",
+          "id": "bill-and-account-collectors.ai-impact.ai-impact-table.9.unconsumed",
           "path": [
             "data",
             "entries",
@@ -4055,7 +4082,7 @@
       },
       "ai_impact_table.evidence_rows.03.link": {
         "ref": {
-          "id": "bill-and-account-collectors.ai-impact.ai-impact-table.9",
+          "id": "bill-and-account-collectors.ai-impact.ai-impact-table.9.historical-unconsumed",
           "path": [
             "data",
             "entries",
@@ -4311,7 +4338,7 @@
       },
       "ai_impact_table.evidence_rows.05.link": {
         "ref": {
-          "id": "bill-and-account-collectors.ai-impact.ai-impact-table.9",
+          "id": "bill-and-account-collectors.ai-impact.ai-impact-table.9.historical-unconsumed",
           "path": [
             "data",
             "entries",
@@ -9034,18 +9061,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.03.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            2,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.03.mitigation": {
         "ref": {
@@ -11260,52 +11277,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.href": {
-        "ref": {
-          "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.label": {
-        "ref": {
-          "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.headers.explanation": {
         "ref": {
@@ -11522,28 +11499,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.03.explanation.sources.02.href": {
-        "ref": {
-          "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.14",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.03.explanation.sources.02.label": {
         "ref": {
@@ -11915,52 +11872,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.href": {
-        "ref": {
-          "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.20",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.label": {
-        "ref": {
-          "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.20",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.headers.explanation": {
         "ref": {
@@ -12046,28 +11963,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.href": {
-        "ref": {
-          "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.22",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.label": {
         "ref": {
@@ -12177,28 +12074,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.href": {
-        "ref": {
-          "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.24",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.label": {
         "ref": {
@@ -23455,13 +23332,21 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜94% 持续或几乎持续与他人接触，80% 每天有电话交谈，62% 每天使用电子邮件，46% 每天有面对面讨论，35% 每天撰写信函与备忘录；78% 每天需要面对不愉快或愤怒或不礼貌的人（另有 15% 每周一次以上），40% 每天处于冲突情境（另有 12% 每周一次以上、18% 每月一次以上），26% 每年一次以上遇到有暴力行为或身体攻击性的人（68% 从不）；96% 每天在有环境控制的室内工作，64% 持续或几乎持续坐着（另有 36% 超过一半时间），17% 约一半时间站立（43% 少于一半时间、40% 从不）；41% 每天暴露于分散注意或不适的噪音（44% 从不），88% 从不接触疾病或感染，100% 从不接触危险条件与辐射与全身振动。\n主要装备与工具｜账户与催收管理系统、通话与录音与质检工具、对账与报表与办公软件（Microsoft Excel 与 Office 与 Outlook 与 Word 与 PowerPoint，SAP，Intuit QuickBooks，MEDITECH software）、信函与短信与语音等联系渠道与模板、个人信息与权限管理工具与记录留档设施。O*NET 技术清单列出 8 项软件技能并标注热门技术（Excel 27%、Office 21%、Outlook 12%、SAP 5%、Word 5%、PowerPoint 4%、QuickBooks 1%，MEDITECH 未公布比例）。\n任务节奏｜93% 的典型工作周为 40 小时，100% 为固定作息（既定常规与固定排班）；48% 在决定上有一些自由、21% 自由有限，61% 在确定任务与优先级上有一些自由、21% 自由有限；25% 认为竞争极其激烈、24% 高度、28% 中等、22% 轻微；23% 认为错误后果极其严重、41% 严重、20% 较轻；51% 认为精确或准确极其重要、17% 非常重要、18% 重要；23% 持续或几乎持续做重复动作（另有 39% 从不）。\n协作对象｜与同组催收员与主管与质检与合规与信贷或风控或法务与客服协作；58% 认为与工作组或团队合作极其重要，39% 认为协调或领导他人完成工作极其重要，12% 认为对他人工作成果与结果承担很高责任、22% 认为对他人健康与安全承担很高责任。\n合规与安全｜联系与沟通须符合适用法域与机构对联系对象与联系时间与频次与身份表明与信息告知的要求，并全程留有可复核记录；债务人个人信息与支付信息须遵循合法与正当与必要原则处理，不得泄露或出售或非法提供；美国侧受《公平催收实务法》（FDCPA，15 U.S.C. §§1692-1692p）与 CFPB 条例 F（12 CFR Part 1006）约束；中国大陆侧受消费者权益保护规则与贷后催收规范约束，《中华人民共和国刑法》第二百九十三条之一对催收非法债务的行为规定了刑事责任。本页不提供任何催收话术或施压方法。\n记录与复盘｜账户与欠款依据、联系对象与时间与方式与频次、沟通与协商结果、收款与减免与展期登记与入账、争议与投诉与异常需要可追溯；机构要求保存完整催收记录并定期自查与留档。\n技能与训练｜O*NET 把该职业列为 Job Zone 1–2（SVP 低于 6.0）；基本技能以积极倾听 72 与口语表达 72 与写作 56 与批判性思维 53 与阅读理解 53 为主；可迁移技能以说服 60 与社会洞察力 60 与谈判 50 与服务导向 50 与时间管理 50 为主；知识以英语语言 77 与客户与个人服务 69 与数学 58 与经济与会计 57 与法律与政府 56 为主（知识字段共 33 项，列出其中 17 项并给出分数；「工作风格与能力字段本页未取得」）。\n准入与授权｜学历与认证不等于联系与减免与停催与征信与移送的处置授权；O*NET 学历构成为高中文凭或同等学历 48%、上过大学但无学位 27%、学士学位 21%；该区职业经验要求从几乎无需到一年、在岗训练从几天到一年；O*NET 列出 7 项国家认证（6 项由 ACA International 管理、1 项 Certified Professional Biller 由 AAPC 管理），不等于执业许可证或雇主任命。\n行业与雇主｜O*NET 行业分布为行政与支持服务 30%、金融与保险 22%、医疗保健与社会援助 11%、其他行业（含专业科学与技术服务与企业与企业管理）37%；常见雇主为金融机构自有催收团队、专业催收与账款管理服务商、医疗机构账单部门与其他债权机构。"
+              "工作环境｜94% 持续或几乎持续与他人接触，80% 每天有电话交谈，62% 每天使用电子邮件，46% 每天有面对面讨论，35% 每天撰写信函与备忘录；78% 每天需要面对不愉快或愤怒或不礼貌的人（另有 15% 每周一次以上），40% 每天处于冲突情境（另有 12% 每周一次以上、18% 每月一次以上），26% 每年一次以上遇到有暴力行为或身体攻击性的人（68% 从不）；96% 每天在有环境控制的室内工作，64% 持续或几乎持续坐着（另有 36% 超过一半时间），17% 约一半时间站立（43% 少于一半时间、40% 从不）；41% 每天暴露于分散注意或不适的噪音（44% 从不），88% 从不接触疾病或感染，100% 从不接触危险条件与辐射与全身振动。\n主要装备与工具｜账户与催收管理系统、通话与录音与质检工具、对账与报表与办公软件（Microsoft Excel 与 Office 与 Outlook 与 Word 与 PowerPoint，SAP，Intuit QuickBooks，MEDITECH software）、信函与短信与语音等联系渠道与模板、个人信息与权限管理工具与记录留档设施。O*NET 技术清单列出 8 项软件技能并标注热门技术（Excel 27%、Office 21%、Outlook 12%、SAP 5%、Word 5%、PowerPoint 4%、QuickBooks 1%，MEDITECH 未公布比例）。\n任务节奏｜93% 的典型工作周为 40 小时，100% 为固定作息（既定常规与固定排班）；48% 在决定上有一些自由、21% 自由有限，61%在确定任务与优先级上有一些自由；页面未列该题21%自由有限；25% 认为竞争极其激烈、24% 高度、28% 中等、22% 轻微；23% 认为错误后果极其严重、41% 严重、20%相当严重；51% 认为精确或准确极其重要、17% 非常重要、18% 重要；23% 持续或几乎持续做重复动作（另有 39% 从不）。\n协作对象｜与同组催收员与主管与质检与合规与信贷或风控或法务与客服协作；58% 认为与工作组或团队合作极其重要，39% 认为协调或领导他人完成工作极其重要，12%认为对他人工作成果与结果承担高责任（17%很高）、22%认为对他人健康与安全承担高责任。\n合规与安全｜联系与沟通须符合适用法域与机构对联系对象与联系时间与频次与身份表明与信息告知的要求，并全程留有可复核记录；债务人个人信息与支付信息须遵循合法与正当与必要原则处理，不得泄露或出售或非法提供；美国Regulation F §§1006.1—2适用于符合定义的debt collector及主要为个人、家庭或家居用途产生的消费者债务；原债权人以自己名义收款的员工等有排除情形，不能覆盖所有商业账款或催收员。具体业务还须核州法及其他适用规则。；中国大陆侧受消费者权益保护规则与贷后催收规范约束，《中华人民共和国刑法》第二百九十三条之一对催收非法债务的行为规定了刑事责任。本页不提供任何催收话术或施压方法。\n记录与复盘｜账户与欠款依据、联系对象与时间与方式与频次、沟通与协商结果、收款与减免与展期登记与入账、争议与投诉与异常需要可追溯；机构要求保存完整催收记录并定期自查与留档。\n技能与训练｜O*NET 把该职业列为 Job Zone 1–2（SVP 低于 6.0）；基本技能以积极倾听 72 与口语表达 72 与写作 56 与批判性思维 53 与阅读理解 53 为主；可迁移技能以说服 60 与社会洞察力 60 与谈判 50 与服务导向 50 与时间管理 50 为主；知识以英语语言 77 与客户与个人服务 69 与数学 58 与经济与会计 57 与法律与政府 56 为主（知识字段33项均有分数；详细页实际有18项工作风格：可靠性82、注意细节76、自我控制75、诚信72、坚持71、压力耐受70；52项能力中口头理解/表达69、清晰发音/言语识别/书面理解66、书面表达63、数字运算44、数学推理41；兴趣C100、E56、S38、R18、A0、I0。分数描述美国职业特征，不是个人录用阈值、测试成绩或发生百分比。）。\n准入与授权｜学历与认证不等于联系与减免与停催与征信与移送的处置授权；O*NET 学历构成为高中文凭或同等学历 48%、上过大学但无学位 27%、学士学位 21%；该区职业经验要求从几乎无需到一年、在岗训练从几天到一年；O*NET 列出 7 项国家认证（6 项由 ACA International 管理、1 项 Certified Professional Biller 由 AAPC 管理），不等于执业许可证或雇主任命。\n行业与雇主（美国行业页未单列数据年）｜O*NET 行业分布为行政与支持服务 30%、金融与保险23%、医疗保健与社会援助 11%、其他行业（含专业科学与技术服务与企业与企业管理）36%；常见雇主为金融机构自有催收团队、专业催收与账款管理服务商、医疗机构账单部门与其他债权机构。"
             ]
           },
           "id": "bill-and-account-collectors.profile.work-context-block.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "hr",
+            "census",
+            "regf-coverage",
+            "regf-contact",
+            "regf-records",
+            "cn-bank-full",
+            "archivists",
+            "arxiv",
+            "editor"
           ],
           "type": "prose"
         },
@@ -23485,12 +23370,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国工资分布（本职业单列口径，非父职业代理）：O*NET 展示的 2025 年 BLS 职业就业与工资统计（OEWS）页面「未出现取自其他职业的标注」，即数据属 43-3011.00 本身；按该口径给出年薪第 10 分位 34,400 美元、第 25 分位 39,010 美元、中位数 47,030 美元、第 75 分位 56,740 美元、第 90 分位 65,580 美元；时薪第 10 分位 16.54 美元、第 25 分位 18.76 美元、中位数 22.61 美元、第 75 分位 27.28 美元、第 90 分位 31.53 美元。中位数不等于入门工资，也不构成收入承诺；该口径不含绩效奖金与提成结构，个人的实际所得还受雇主类型与岗位职责与考核办法影响。"
+              "美国2025年本职业年工资10/25/50/75/90分位为34,400/39,010/47,030/56,740/65,580美元，时薪16.54/18.76/22.61/27.28/31.53美元。OEWS统计受雇者税前直时工资，纳入佣金、激励工资和生产奖金等，排除加班及非生产奖金等；没有公布本职业各项薪酬构成，不能写成排除所有绩效或提成。外包公司的受雇员工可在其雇主统计中，自雇经营收入与公司服务结算额不等于员工工资。"
             ]
           },
           "id": "bill-and-account-collectors.profile.onet-structured-fields-block.2",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews-pay-definition"
           ],
           "type": "prose"
         },
@@ -23543,12 +23429,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "就业与前景（本职业单列口径）：O*NET 就业趋势页给出2024 年在岗 166,900 人、2034 年约 149,400 人（2024—2034 年 -11%，标签为下降（-1% 或更低））、预测期年均职位空缺约 13,700（含增长与替换）。负增长与仍存在空缺并不矛盾：空缺主要来自替代需求（从业者转岗或退出劳动力市场），而不是岗位扩张。该口径描述职业群体，不代表个人录用保证，也不能外推更宽职业群；公开数据还提示这类岗位存在外包与业务周期与自动化影响，因此更应核对目标雇主与岗位的实际职责与授权范围。"
+              "美国43-3011.00：2025年就业160,200人，2035年预计143,400人；2025—2035年变化-10%，年均空缺11,200。BLS解释空缺来自转岗或退出劳动力市场的替换需求；总体预测不等于个人录用概率或生成式AI因果实测。"
             ]
           },
           "id": "bill-and-account-collectors.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -23572,12 +23459,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业分布与工具信号：O*NET 行业分布给出行政与支持服务 30%、金融与保险 22%、医疗保健与社会援助 11%、其他行业（含专业科学与技术服务与企业与企业管理）37%（2024 年）；该页对行业数据未标注取自其他职业。样本职位名称包括 Account Representative、Accounts Receivable Specialist、Collection Agent、Collection Specialist、Collector、Debt Collector、Patient Access Specialist、Patient Account Representative、Telephone Collector，说明工作场所主要是金融与专业服务与医疗账单场景。招聘技术信号方面，O*NET 列出 8 项技术技能并均标注为热门技术（Microsoft Excel 27%、Microsoft Office 21%、Microsoft Outlook 12%、SAP 5%、Microsoft Word 5%、Microsoft PowerPoint 4%、Intuit QuickBooks 1%、MEDITECH software 未公布比例），并另有 5 项技能标注为紧缺技能；出现比例来自雇主招聘公告，不代表所有岗位必需，也不是自动化率。"
+              "行业页当前列行政与支持服务30%、金融与保险23%、医疗与社会援助11%、其他36%；页内未单列数据年。样本职位名称仅说明职业称谓，实际雇主分布另见BLS2025行业：商业支持服务25%、信贷中介21%、医疗社会援助11%、专业科技8%、企业管理7%。O*NET2025全年美国Lightcast招聘广告：Excel27%、Office21%、Outlook12%、SAP5%、Word5%、PowerPoint4%、QuickBooks1%、MEDITECH未给比例；前5项标In Demand，表示广告提及而非劳动市场短缺、AI采用率或每个岗位必需。"
             ]
           },
           "id": "bill-and-account-collectors.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "onet"
+            "r2-pay-2",
+            "bls-ooh-current",
+            "hr"
           ],
           "type": "prose"
         },
@@ -23586,13 +23475,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "与同组催收员与主管与信贷或风控或法务与客服协作；涉及可联系对象与联系时间与联系频次、债务人个人信息与支付信息处理、减免与停催与展期、征信报送与账户移交与司法移送、以及是否涉及非法债务或暴力与恐吓与骚扰等情形时，按适用法域与主管部门与用人单位制度执行，不自行决定；发现欠款事实或债务人身份存疑、出现争议或投诉、或对方明确拒绝联系或要求停止联系时停止并报告。"
+              "编辑核对建议：身份、金额、争议、投诉或拒绝联系出现疑问时，先暂停有疑问的当前操作并交合规人员核定，不自行承诺永久停催或恢复。美国适用Regulation F时，§1006.6(c)收到书面拒付/停止联系通知后禁止后续沟通，但有终止努力、通知特定救济等例外；§1006.14(h)限制已被要求停用的沟通媒介并设例外；§1006.38对验证期内书面争议暂停债务或争议部分的催收，直至履行规定响应。不能把所有投诉、口头拒付一概写成法定永久停催。"
             ]
           },
           "id": "bill-and-account-collectors.profile.career-quick-answers-block.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "regf-contact",
+            "regf-harassment",
+            "regf-disputes",
+            "cn-bank-full",
+            "editor"
           ],
           "type": "prose"
         },
@@ -23768,13 +23660,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "常规账户核对与联系与协商与登记结论由本人按岗位职责承担；涉及可联系对象是否超出范围、联系时间与频次是否合规、债务人个人信息与支付信息如何提供与保存、减免与停催与展期与征信报送与账户移交与司法移送是否可行、以及是否涉及非法债务或暴力与恐吓与骚扰等情形时，由具备相应职责与授权的人员按适用法域与主管部门与用人单位制度作出，发现事实或身份存疑、出现争议或投诉或对方明确拒绝联系时必须停止并报告。"
+              "编辑核对建议：身份、金额、争议、投诉或拒绝联系出现疑问时，先暂停有疑问的当前操作并交合规人员核定，不自行承诺永久停催或恢复。美国适用Regulation F时，§1006.6(c)收到书面拒付/停止联系通知后禁止后续沟通，但有终止努力、通知特定救济等例外；§1006.14(h)限制已被要求停用的沟通媒介并设例外；§1006.38对验证期内书面争议暂停债务或争议部分的催收，直至履行规定响应。不能把所有投诉、口头拒付一概写成法定永久停催。"
             ]
           },
           "id": "bill-and-account-collectors.profile.career-quick-answers-block.17",
           "source_refs": [
-            "onet",
-            "onet"
+            "regf-contact",
+            "regf-harassment",
+            "regf-disputes",
+            "cn-bank-full",
+            "editor"
           ],
           "type": "prose"
         },
@@ -23828,13 +23723,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "学历、职业培训、行业认证、雇主任用与岗位授权、以及涉及可联系对象与联系时间与频次与个人信息处理与减免与停催与征信报送的法域与机构要求是不同状态：学历与培训结业与认证不带来催收行为的合规空间，也不带来减免与停催与司法移送的决定权；须按雇主与岗位与法域逐项核验；本页的工资与就业为本职业单列口径，且预测为下降（就业趋势页 -11%，166,900 → 149,400），与仍存在替代性空缺并不矛盾。"
+              "学历、培训、认证、雇主任用和岗位授权分别核，证书不带来减免、停催或司法处置权。美国43-3011.00：2025年就业160,200人，2035年预计143,400人；2025—2035年变化-10%，年均空缺11,200。BLS解释空缺来自转岗或退出劳动力市场的替换需求；总体预测不等于个人录用概率或生成式AI因果实测。"
             ]
           },
           "id": "bill-and-account-collectors.profile.career-quick-answers-block.21",
           "source_refs": [
             "onet",
-            "onet"
+            "census",
+            "ep-current",
+            "editor"
           ],
           "type": "prose"
         },
@@ -23872,13 +23769,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧为 O*NET 43-3011.00（Bill and Account Collectors），其工资、就业与行业数据在 O*NET 页面上均为本职业单列口径，未标注取自其他职业；该页也未为该职业标注 Bright Outlook，就业预测为下降（2024 年 166,900 人 → 2034 年约 149,400 人，-11%）。中国大陆侧本页未取得与该职业精确对应的公开职业工资条目，只展示明确标注行业与岗位类别范围的官方代理（2025 年租赁和商务服务业城镇非私营单位 110,162 元/年、城镇私营单位 68,919 元/年），两者均为行业门类平均、不能用于估算账单与账款催收员的个人报价；比较时应先辨认岗位属于金融机构自有催收团队、专业催收与账款管理服务商、医疗机构账单部门还是其他债权机构，再核对岗位授权与计酬结构。"
+              "美国43-3011.00：2025年就业160,200人，2035年预计143,400人；2025—2035年变化-10%，年均空缺11,200。BLS解释空缺来自转岗或退出劳动力市场的替换需求；总体预测不等于个人录用概率或生成式AI因果实测。中国本轮未取得精确职业工资及等价分类映射；2025租赁商务非私营110,162、私营68,919元/年保留作行业均值，不作个人报价。具体雇主、职责、权限与报酬另核。"
             ]
           },
           "id": "bill-and-account-collectors.profile.career-quick-answers-block.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current",
+            "nbs",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24019,7 +23917,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "法规与监管指引与机构规程更新较快；O*NET 技术清单列出 8 项软件技能并标注热门技术（Microsoft Excel 27%、Microsoft Office 21%、Microsoft Outlook 12%、SAP 5%、Microsoft Word 5%、Microsoft PowerPoint 4%、Intuit QuickBooks 1%、MEDITECH software 未公布比例）；基本技能以积极倾听 72 与口语表达 72 与写作 56 与批判性思维 53 为主；可迁移技能以说服 60 与社会洞察力 60 与谈判 50 与服务导向 50 与时间管理 50 为主；知识以英语语言 77 与客户与个人服务 69 与数学 58 与经济与会计 57 与法律与政府 56 为主（该页知识字段共 33 项，列出其中 17 项并给出分数；「工作风格与能力字段本页未取得」）。入职前确认法规与监管更新与系统权限与记录留存的培训与复核机制。"
+              "法规与监管指引与机构规程更新较快；O*NET 技术清单列出 8 项软件技能并标注热门技术（Microsoft Excel 27%、Microsoft Office 21%、Microsoft Outlook 12%、SAP 5%、Microsoft Word 5%、Microsoft PowerPoint 4%、Intuit QuickBooks 1%、MEDITECH software 未公布比例）；基本技能以积极倾听 72 与口语表达 72 与写作 56 与批判性思维 53 为主；可迁移技能以说服 60 与社会洞察力 60 与谈判 50 与服务导向 50 与时间管理 50 为主；知识以英语语言 77 与客户与个人服务 69 与数学 58 与经济与会计 57 与法律与政府 56 为主（该页知识字段共 33 项，全部列出并给出分数；详细页实际有18项工作风格：可靠性82、注意细节76、自我控制75、诚信72、坚持71、压力耐受70；52项能力中口头理解/表达69、清晰发音/言语识别/书面理解66、书面表达63、数字运算44、数学推理41；兴趣C100、E56、S38、R18、A0、I0。分数描述美国职业特征，不是个人录用阈值、测试成绩或发生百分比。）。入职前确认法规与监管更新与系统权限与记录留存的培训与复核机制。"
             ]
           },
           "id": "bill-and-account-collectors.profile.career-quick-answers-block.34",
@@ -24557,22 +24455,10 @@
                 "url": "https://www.onetonline.org/link/localwages/43-3011.00"
               },
               {
-                "entity": "O*NET 43-3011.00 培训与教育信息",
-                "id": "link-8",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/43-3011.00"
-              },
-              {
                 "entity": "O*NET 43-3011.00 详细资料（工作情境与工作活动）",
                 "id": "link-9",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/43-3011.00"
-              },
-              {
-                "entity": "O*NET 43-3011.00 认证发现（国家认证口径）",
-                "id": "link-10",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localcert/43-3011.00"
               },
               {
                 "entity": "O*NET 43-3011.00 行业分布（行业与雇主类型口径）",
@@ -24581,46 +24467,40 @@
                 "url": "https://www.onetonline.org/link/industry/43-3011.00"
               },
               {
-                "entity": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
-                "id": "link-12",
-                "relation": "career.source",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
-              },
-              {
-                "entity": "O*NET 43-3011.00 职业摘要",
+                "entity": "BLS职业展望手册：Bill and Account Collectors",
                 "id": "link-13",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/43-3011.00"
+                "url": "https://www.bls.gov/ooh/office-and-administrative-support/bill-and-account-collectors.htm"
               },
               {
-                "entity": "O*NET 43-3011.00 详细资料",
+                "entity": "O*NET 43-3011.00 技术清单（热门技术信号）",
                 "id": "link-14",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/43-3011.00"
-              },
-              {
-                "entity": "O*NET 43-3011.00 技术清单",
-                "id": "link-15",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/hot_tech/43-3011.00"
               },
               {
-                "entity": "O*NET 43-3011.00 行业分布（行业与雇主类型口径）",
-                "id": "link-16",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/43-3011.00"
-              },
-              {
-                "entity": "O*NET 43-3011.00 职业摘要（就业与预测字段）",
-                "id": "link-17",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/43-3011.00"
-              },
-              {
-                "entity": "O*NET 43-3011.00 详细资料（工作情境）",
-                "id": "link-18",
+                "entity": "O*NET 43-3011.00 详细资料（任务与工作活动）",
+                "id": "link-15",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/43-3011.00"
+              },
+              {
+                "entity": "O*NET账单与账款催收员2025—2035就业趋势",
+                "id": "link-16",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/localtrends/43-3011.00"
+              },
+              {
+                "entity": "Regulation F §§1006.1—2适用范围及定义",
+                "id": "link-17",
+                "relation": "career.source",
+                "url": "https://www.consumerfinance.gov/rules-policy/regulations/1006/2/"
+              },
+              {
+                "entity": "O*NET账单与账款催收员2025—2035就业趋势",
+                "id": "link-18",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/localtrends/43-3011.00"
               },
               {
                 "entity": "O*NET 43-3011.00 培训与教育信息",
@@ -24633,13 +24513,11 @@
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.9",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "bls-ooh-current",
+            "hr",
+            "bls",
+            "ep-current",
+            "regf-coverage"
           ],
           "type": "links"
         },
@@ -24693,13 +24571,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把账户检索与欠款明细汇总、通话与工单摘要、还款方案初稿与排程提醒、对账与报表整理用于提高效率，但欠款事实与合同依据的确认、可联系对象与联系时间与频次的合规判断、以及与债务人的实际沟通与协商、以及收款与减免与停催与司法移送权限相关的处置仍由本人与有权限的人员按适用法域与机构规程承担，系统输出必须经人工复核后才进入正式记录。"
+              "编辑候选：在合规授权的数据范围内试验检索、欠款汇总、通话/工单摘要、还款方案草稿与对账；测错漏与返工再决定使用。本轮没有本职业生成式AI效果或采用率实测。金额、合同、沟通对象与处置权限仍核原始材料。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.13",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor",
+            "cn-bank-full"
           ],
           "type": "prose"
         },
@@ -24770,15 +24649,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：AI 与自动化可以改变账户检索与明细汇总、通话与工单摘要、还款方案初稿与排程与对账整理，但没有官方证据表明它会整体取代欠款事实与合同依据的确认、联系合规判断、与债务人的实际沟通与协商、以及减免与停催与司法移送的处置决定；任务自动化程度不等于岗位数量变化。"
+              "BLS预计增强软件与自动呼叫系统提高生产率、以较少员工处理更多账户；这不是生成式AI整体替代率实测。本页检索、摘要和对账为编辑试验候选，实际部署、效果和责任另核。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "bls-ooh-current",
+            "ilo",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24943,12 +24821,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于该职业的就业与 2024—2034 年预测口径（本职业单列口径，变化为负）。"
+              "美国43-3011.00：2025年就业160,200人，2035年预计143,400人；2025—2035年变化-10%，年均空缺11,200。BLS解释空缺来自转岗或退出劳动力市场的替换需求；总体预测不等于个人录用概率或生成式AI因果实测。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.30",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -24971,12 +24849,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于本职业单列口径的时薪与年薪分位；不是收入承诺，也不含绩效与提成结构。"
+              "OEWS统计受雇者税前直时工资，纳入佣金、激励工资和生产奖金等，排除加班及非生产奖金等；没有公布本职业各项薪酬构成，不能写成排除所有绩效或提成。外包公司的受雇员工可在其雇主统计中，自雇经营收入与公司服务结算额不等于员工工资。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.32",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -24985,13 +24864,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表比较三组环节在自动化影响上的差别：哪些可被辅助，哪些判断与责任仍由人承担。"
+              "下表是编辑提出的辅助试验及人工核对项目，未实测任务替代率。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -25000,13 +24879,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "账户检索与欠款明细汇总、通话与工单摘要、对账与报表整理可辅助完成。"
+              "编辑候选：检索、明细摘要、通话工单草稿、对账报表整理；金额与身份须回查原始凭证。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25030,13 +24909,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "账户与还款与联系数据可借助系统整理与比对。"
+              "编辑候选：在获准数据范围内整理与比对账户、还款、联系字段，先测遗漏、误配与版本一致。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "cn-bank-full"
           ],
           "type": "prose"
         },
@@ -25060,13 +24939,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "通话与联系与登记记录可自动生成与归档。"
+              "编辑候选：生成记录与归档草稿；录音、原始凭证及已核验事实不得由生成内容替代。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "regf-records"
           ],
           "type": "prose"
         },
@@ -25075,13 +24954,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断联系与还款与争议记录是否可复核，并在出现争议或投诉或对方明确拒绝联系时停止并报告。"
+              "编辑核对建议：身份、金额、争议、投诉或拒绝联系出现疑问时，先暂停有疑问的当前操作并交合规人员核定，不自行承诺永久停催或恢复。美国适用Regulation F时，§1006.6(c)收到书面拒付/停止联系通知后禁止后续沟通，但有终止努力、通知特定救济等例外；§1006.14(h)限制已被要求停用的沟通媒介并设例外；§1006.38对验证期内书面争议暂停债务或争议部分的催收，直至履行规定响应。不能把所有投诉、口头拒付一概写成法定永久停催。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.39",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "regf-contact",
+            "regf-harassment",
+            "regf-disputes"
           ],
           "type": "prose"
         },
@@ -25090,12 +24971,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、技术信号、就业预测与行业分布，不是自动化替代率或岗位数量预测。"
+              "五张证据卡分别列职业职责、任务、招聘技术、就业预测和行业分布；都不提供生成式AI替代率实测。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.40",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls",
+            "hr",
+            "ep-current",
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -25258,12 +25143,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面列出 8 项软件技能并均标注为热门技术：Microsoft Excel 27%、Microsoft Office 21%、Microsoft Outlook 12%、SAP 5%、Microsoft Word 5%、Microsoft PowerPoint 4%、Intuit QuickBooks 1%、MEDITECH software 未公布比例；另有 5 项技能标注为紧缺技能。"
+              "O*NET2025全年美国Lightcast招聘广告：Excel27%、Office21%、Outlook12%、SAP5%、Word5%、PowerPoint4%、QuickBooks1%、MEDITECH未给比例；前5项标In Demand，表示广告提及而非劳动市场短缺、AI采用率或每个岗位必需。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "onet"
+            "hr"
           ],
           "type": "prose"
         },
@@ -25286,12 +25171,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 43-3011.00 职业摘要（就业与预测字段）"
+              "O*NET本职业2025—2035就业趋势"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25300,12 +25185,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "就业与 2024—2034 年预测"
+              "2025—2035就业与替换性空缺"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25314,12 +25199,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页按本职业口径给出 2024 年在岗 166,900 人、2034 年约 149,400 人（2024—2034 年 -11%，标签为下降（-1% 或更低））、预测期年均职位空缺约 13,700（含增长与替换）；负增长与仍存在空缺并不矛盾，空缺主要来自替代需求。"
+              "美国43-3011.00：2025年就业160,200人，2035年预计143,400人；2025—2035年变化-10%，年均空缺11,200。BLS解释空缺来自转岗或退出劳动力市场的替换需求；总体预测不等于个人录用概率或生成式AI因果实测。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -25370,12 +25256,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面按 2024 年给出该职业的行业分布为行政与支持服务 30%、金融与保险 22%、医疗保健与社会援助 11%、其他行业（含专业科学与技术服务与企业与企业管理）37%。"
+              "行业页当前列行政支持30%、金融保险23%、医疗社会援助11%、其他36%，未单列资料年。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "onet"
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -25384,13 +25270,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助的是账户检索与欠款明细汇总、通话与工单摘要、还款方案初稿与排程提醒与对账与报表整理等可回滚环节；这些是辅助能力，输出仍需经人工复核与原始凭证核对后才能使用。技术可行不等于已采用。"
+              "本页检索、摘要、对账和方案草稿均为编辑试验候选。先测准确率、遗漏和返工，本轮没有本职业生成式AI效果实测；职业任务和软件广告不能证明工具有效。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.61",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "bls",
+            "hr"
           ],
           "type": "prose"
         },
@@ -25414,13 +25301,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露、实际采用、生产率与就业是不同测量对象；O*NET 展示的 BLS 数据对本职业 2024—2034 年给出 -11%（下降）与年均空缺约 13,700 的口径，两者不能互相替代。"
+              "美国43-3011.00：2025年就业160,200人，2035年预计143,400人；2025—2035年变化-10%，年均空缺11,200。BLS解释空缺来自转岗或退出劳动力市场的替换需求；总体预测不等于个人录用概率或生成式AI因果实测。BLS解释软件及自动呼叫系统可能提高生产率；不能将总体预测当生成式AI净效应。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current",
+            "bls-ooh-current",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25429,13 +25317,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有官方证据支持「被整体取代」。自动化可能辅助检索与摘要与对账与排程，但欠款事实与合同依据的确认、联系合规判断、与债务人的实际沟通与协商、以及减免与停催与司法移送的处置决定仍由人承担。"
+              "本轮所读职业资料与ILO研究未给本职业整体生成式AI替代率；BLS另预测软件与自动呼叫减少所需员工。辅助候选与实际采用、效果、法规和责任分别核。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls-ooh-current",
+            "ilo",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25444,13 +25333,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业摘要 / 详细资料"
+              "BLS职业手册（主链接）；ILO任务暴露方法为辅助来源，不给本职业整体替代率。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls-ooh-current",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25459,13 +25348,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不需要入门即会编程，但会用催收与账户管理类系统与办公软件已成为多数岗位的常见要求。核心能力来自按规程核对事实、合规沟通与协商、登记与对账与记录；是否要求特定系统或数据分析能力取决于雇主与岗位，具体要求以用人单位规定为准。"
+              "O*NET2025全年美国Lightcast招聘广告：Excel27%、Office21%、Outlook12%、SAP5%、Word5%、PowerPoint4%、QuickBooks1%、MEDITECH未给比例；前5项标In Demand，表示广告提及而非劳动市场短缺、AI采用率或每个岗位必需。资料没有把编程列为统一入门门槛；具体系统要求另核雇主，不能称所有或多数岗位都要求同一系统。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.66",
           "source_refs": [
+            "hr",
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -25474,13 +25364,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 技术清单 / 培训与教育信息"
+              "O*NET热门技术：美国招聘广告提及信号，不是统一准入要求。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet",
-            "onet"
+            "hr"
           ],
           "type": "prose"
         },
@@ -25489,13 +25378,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "账户检索与欠款明细汇总、通话与工单摘要、还款方案初稿与排程提醒、对账与报表整理；都是可回滚、可复核的辅助环节。"
+              "编辑候选：检索、欠款汇总、通话工单摘要、方案草稿和对账；本轮没有职业任务级生成式AI暴露排序，不能称已知最易替代。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "ilo",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25504,12 +25394,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 详细资料"
+              "O*NET详细任务（主链接）；候选排序为编辑判断，ILO任务暴露方法不证明职业替代率。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.69",
           "source_refs": [
-            "onet"
+            "bls",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25518,13 +25409,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 展示的 BLS 数据对本职业 2024—2034 年的口径为 -11%（下降）、预测期年均职位空缺约 13,700；该口径描述职业群体，不代表个人录用概率。"
+              "美国43-3011.00：2025年就业160,200人，2035年预计143,400人；2025—2035年变化-10%，年均空缺11,200。BLS解释空缺来自转岗或退出劳动力市场的替换需求；总体预测不等于个人录用概率或生成式AI因果实测。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25533,13 +25423,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业摘要（就业与预测字段）"
+              "O*NET当前美国就业趋势：职业或父级范围按回答说明。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -25548,13 +25437,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。欠款事实与合同依据与债务人身份的确认、联系对象与时间与频次的合规判断、以及减免与停催与征信报送与账户移交与司法移送的处置决定必须由本人与有权限的人员按适用法域与机构规程承担；系统可用于检索与摘要与排程，但不能替代判断与责任承担。"
+              "AI输出不提供减免、停催或司法移送权限。适用规则与岗位授权须由承担职责者核定，不能将内部人员的评估当司法或监管最终判断。美国Regulation F §§1006.1—2适用于符合定义的debt collector及主要为个人、家庭或家居用途产生的消费者债务；原债权人以自己名义收款的员工等有排除情形，不能覆盖所有商业账款或催收员。具体业务还须核州法及其他适用规则。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet",
-            "onet"
+            "regf-coverage",
+            "cn-bank-full",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25563,12 +25453,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业摘要 / 详细资料"
+              "适用法规原文（主链接）；业务授权及其他法域另核。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.73",
           "source_refs": [
-            "onet"
+            "regf-coverage"
           ],
           "type": "prose"
         },
@@ -25577,13 +25467,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有任何官方来源给出这样的年份。任务暴露、采用率与岗位数量是不同概念，本页不做岗位消失年份预测；官方预测只给出本职业 2024—2034 年 -11% 并列出就业与空缺口径。"
+              "本轮所读来源未提供职业消失年份。美国43-3011.00：2025年就业160,200人，2035年预计143,400人；2025—2035年变化-10%，年均空缺11,200。BLS解释空缺来自转岗或退出劳动力市场的替换需求；总体预测不等于个人录用概率或生成式AI因果实测。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25592,13 +25482,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页方法说明"
+              "O*NET当前美国就业趋势（主链接）；ILO任务暴露方法不提供职业消失年份，编辑方法边界见回答。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25637,13 +25527,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具进入账户核对与联系与登记流程时，人的控制点应按以下五步固定下来；任何一步缺失都不应扩大使用范围。"
+              "以下五步为编辑提出的试验核对建议，不是已取得的机构制度或法定恢复程序。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.78",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "cn-bank-full"
           ],
           "type": "prose"
         },
@@ -25712,13 +25602,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "涉及可联系对象是否超出范围、联系时间与频次是否合规、债务人个人信息与支付信息如何提供与保存、减免与停催与展期与征信报送与账户移交与司法移送是否可行、以及是否涉及非法债务或暴力与恐吓与骚扰等情形的判断，由有权限的人员按适用法域与机构制度承担，发现事实或身份存疑或对方明确拒绝联系时停止并报告。"
+              "编辑核对建议：身份、金额、争议、投诉或拒绝联系出现疑问时，先暂停有疑问的当前操作并交合规人员核定，不自行承诺永久停催或恢复。美国适用Regulation F时，§1006.6(c)收到书面拒付/停止联系通知后禁止后续沟通，但有终止努力、通知特定救济等例外；§1006.14(h)限制已被要求停用的沟通媒介并设例外；§1006.38对验证期内书面争议暂停债务或争议部分的催收，直至履行规定响应。不能把所有投诉、口头拒付一概写成法定永久停催。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.83",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "regf-contact",
+            "regf-harassment",
+            "regf-disputes",
+            "cn-bank-full"
           ],
           "type": "prose"
         },
@@ -25727,7 +25620,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把系统输出当作已确认的欠款或还款事实，会导致错误主张、错误减免与错误登记。"
+              "编辑核对建议：把系统输出当作已确认的欠款或还款事实，会导致错误主张、错误减免与错误登记。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.84",
@@ -25742,7 +25635,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把工具输出标记为参考，对照原始账单与合同与入账凭证与征信与理赔信息后再采纳。"
+              "编辑核对建议：把工具输出标记为参考，对照原始账单与合同与入账凭证与征信与理赔信息后再采纳。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.85",
@@ -25757,7 +25650,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "债务人个人信息与支付信息与账户历史可能涉及隐私与数据安全，外发或不当处理会造成合规与信任风险。"
+              "编辑核对建议：债务人个人信息与支付信息与账户历史可能涉及隐私与数据安全，外发或不当处理会造成合规与信任风险。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.86",
@@ -25772,7 +25665,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按适用法域与机构要求处理债务人信息，遵循合法与正当与必要原则，不向未授权渠道提供或传播。"
+              "编辑核对建议：按适用法域与机构要求处理债务人信息，遵循合法与正当与必要原则，不向未授权渠道提供或传播。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.87",
@@ -25787,7 +25680,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "联系与还款与减免与争议记录需要可追溯，输出若无时间与人员与依据说明将难以复核。"
+              "编辑核对建议：联系与还款与减免与争议记录需要可追溯，输出若无时间与人员与依据说明将难以复核。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.88",
@@ -25801,7 +25694,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "保存联系与登记与减免与争议记录，注明时间、操作人、依据与人工修改痕迹。"
+              "编辑核对建议：保存联系与登记与减免与争议记录，注明时间、操作人、依据与人工修改痕迹。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.89",
@@ -25816,7 +25709,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不按适用法域与机构规程约束联系对象与时间与频次，或不当处理债务人信息，可能构成违法催收与侵害个人信息权益。"
+              "编辑核对建议：不按适用法域与机构规程约束联系对象与时间与频次，或不当处理债务人信息，可能构成违法催收与侵害个人信息权益。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.90",
@@ -25831,7 +25724,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对照适用法域与机构规程逐项核对，发现不一致立即停止并复核，记录更正与上报内容。"
+              "编辑核对建议：对照适用法域与机构规程逐项核对，发现不一致立即停止并复核，记录更正与上报内容。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.91",
@@ -25846,7 +25739,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "催收行为与还款登记与减免处置必须可归属、可追溯。"
+              "编辑核对建议：催收行为与还款登记与减免处置必须可归属、可追溯。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.92",
@@ -25861,7 +25754,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在记录中写明异常与处置与后续安排，涉及可能的违法催收或信息泄露风险的按程序立即上报。"
+              "编辑核对建议：在记录中写明异常与处置与后续安排，涉及可能的违法催收或信息泄露风险的按程序立即上报。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.93",
@@ -25876,7 +25769,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断本次账户的欠款事实与合同依据是否已经核对确认。"
+              "编辑核对建议：判断本次账户的欠款事实与合同依据是否已经核对确认。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.94",
@@ -25890,7 +25783,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "调取账户与账单与还款与减免明细，对照合同条款与外部信息核对，把有疑问的项标出并复述确认。"
+              "编辑核对建议：调取账户与账单与还款与减免明细，对照合同条款与外部信息核对，把有疑问的项标出并复述确认。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.95",
@@ -25918,7 +25811,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "明细汇总可借助工具，但事实确认与错漏责任仍由本人承担。"
+              "编辑核对建议：明细汇总可借助工具，但事实确认与错漏责任仍由本人承担。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.97",
@@ -25933,7 +25826,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断本次联系是否符合适用法域与机构对联系对象与时间的限制。"
+              "编辑核对建议：判断本次联系是否符合适用法域与机构对联系对象与时间的限制。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.98",
@@ -25947,7 +25840,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按机构规程确认可联系对象与联系时间与频次，表明所代表的机构与身份，如实说明事由与金额与违约后果。"
+              "编辑核对建议：按机构规程确认可联系对象与联系时间与频次，表明所代表的机构与身份，如实说明事由与金额与违约后果。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.99",
@@ -25975,7 +25868,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "联系提醒与话术资料可辅助，但联系合规与告知内容的责任仍由本人承担。"
+              "编辑核对建议：联系提醒与话术资料可辅助，但联系合规与告知内容的责任仍由本人承担。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.101",
@@ -25990,7 +25883,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断拟提出的还款或减免或展期方案是否在本人授权范围内。"
+              "编辑核对建议：判断拟提出的还款或减免或展期方案是否在本人授权范围内。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.102",
@@ -26004,7 +25897,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "听取逾期原因，按客户财务状况与机构授权范围协商还款或展期或减免方案，说明必要行动与后续节点，超出授权时提交审批。"
+              "编辑核对建议：听取逾期原因，按客户财务状况与机构授权范围协商还款或展期或减免方案，说明必要行动与后续节点，超出授权时提交审批。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.103",
@@ -26032,7 +25925,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "方案初稿与测算可辅助，但协商决定与承诺边界仍由本人与有权限人员承担。"
+              "编辑核对建议：方案初稿与测算可辅助，但协商决定与承诺边界仍由本人与有权限人员承担。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.105",
@@ -26047,7 +25940,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断收款与减免与展期是否已准确登记并入账。"
+              "编辑核对建议：判断收款与减免与展期是否已准确登记并入账。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.106",
@@ -26061,7 +25954,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "收取款项并把已付金额登记到客户账户，核对账单与入账与减免与展期记录，发现差异先挂起再核对。"
+              "编辑核对建议：收取款项并把已付金额登记到客户账户，核对账单与入账与减免与展期记录，发现差异先挂起再核对。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.107",
@@ -26089,7 +25982,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对账数据可借助系统，但核验与差异处理责任仍由本人承担。"
+              "编辑核对建议：对账数据可借助系统，但核验与差异处理责任仍由本人承担。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.109",
@@ -26104,7 +25997,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断联系与还款与争议与投诉记录是否完整准确、是否可复核。"
+              "编辑核对建议：判断联系与还款与争议与投诉记录是否完整准确、是否可复核。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.110",
@@ -26118,7 +26011,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "保存联系过程与账户状态记录与地址变更与往来函件，按期自查记录完整性并留档。"
+              "编辑核对建议：保存联系过程与账户状态记录与地址变更与往来函件，按期自查记录完整性并留档。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.111",
@@ -26146,7 +26039,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录归档可借助系统，但完整性与合规性责任仍由本人承担。"
+              "编辑核对建议：记录归档可借助系统，但完整性与合规性责任仍由本人承担。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.113",
@@ -26161,7 +26054,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断客户未回应或出现争议与投诉时是否已按授权链处置。"
+              "编辑核对建议：判断客户未回应或出现争议与投诉时是否已按授权链处置。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.114",
@@ -26175,7 +26068,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "客户未回应或出现争议与投诉时按机构授权链移交并如实记录，涉及征信与账户移交与司法移送时不得自行决定。"
+              "编辑核对建议：客户未回应或出现争议与投诉时按机构授权链移交并如实记录，涉及征信与账户移交与司法移送时不得自行决定。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.115",
@@ -26203,7 +26096,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "流程与模板资料可辅助，但升级决定与承诺边界仍由本人与有权限人员承担。"
+              "编辑核对建议：流程与模板资料可辅助，但升级决定与承诺边界仍由本人与有权限人员承担。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.117",
@@ -26217,7 +26110,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断是否存在非法债务或暴力与恐吓与骚扰等需要立即报告的情形。"
+              "编辑核对建议：判断是否存在非法债务或暴力与恐吓与骚扰等需要立即报告的情形。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.118",
@@ -26231,7 +26124,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "发现涉及非法债务或暴力与恐吓与骚扰等情形，立即停止相关作业并按机构程序报告，不参与也不协助。"
+              "编辑核对建议：发现涉及非法债务或暴力与恐吓与骚扰等情形，立即停止相关作业并按机构程序报告，不参与也不协助。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.119",
@@ -26259,10 +26152,26 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "资料与判定标准可辅助，但违法性判断与停止作业与报告的决定仍由本人与有权限人员承担。"
+              "工具不提供违法性裁决或作业授权。编辑建议发现涉嫌违法或安全风险先停止相关操作并报告，由相应职责者核定；内部法务意见不等于司法或监管决定。"
             ]
           },
           "id": "bill-and-account-collectors.ai-impact.ai-impact-table.121",
+          "source_refs": [
+            "editor",
+            "arxiv",
+            "cn-bank-full"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "以上区分职业描述、软件招聘信号、编辑试验候选与就业预测。中国大陆薪资部分保留官方宽行业参考，并注明职业级数据缺口。"
+            ]
+          },
+          "id": "bill-and-account-collectors.ai-impact.ai-impact-table.122",
           "source_refs": [
             "onet",
             "onet"
@@ -26273,16 +26182,57 @@
           "availability": "available",
           "copy_key": "career.item.ai-impact-table",
           "data": {
-            "paragraphs": [
-              "以上内容区分自动化能力、实际部署与就业结果；进入下一节可以查看中国大陆行业与岗位类别代理口径的证据边界与缺口说明。"
+            "entries": [
+              {
+                "entity": "O*NET 43-3011.00 培训与教育信息",
+                "id": "link-8",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/localtraining/43-3011.00"
+              }
             ]
           },
-          "id": "bill-and-account-collectors.ai-impact.ai-impact-table.122",
+          "id": "bill-and-account-collectors.ai-impact.ai-impact-table.9.unconsumed",
           "source_refs": [
             "onet",
-            "onet"
+            "bls-ooh-current",
+            "hr",
+            "bls",
+            "ep-current",
+            "regf-coverage"
           ],
-          "type": "prose"
+          "type": "links",
+          "visibility": "internal"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "O*NET 43-3011.00 认证发现（国家认证口径）",
+                "id": "link-10",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/localcert/43-3011.00"
+              },
+              {
+                "entity": "国际劳工组织《生成式 AI 与就业：职业暴露的精细化全球指数》（ILO Working Paper 140）",
+                "id": "link-12",
+                "relation": "career.source",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              }
+            ]
+          },
+          "id": "bill-and-account-collectors.ai-impact.ai-impact-table.9.historical-unconsumed",
+          "source_refs": [
+            "onet",
+            "bls-ooh-current",
+            "hr",
+            "bls",
+            "ep-current",
+            "regf-coverage"
+          ],
+          "type": "links",
+          "visibility": "internal"
         }
       ]
     },
@@ -26367,12 +26317,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "同一行业在私营单位的对照值，仍属行业代理。账款催收与催收服务岗位中相当比例分布在私营与外包服务商，但这不构成对本职业工资的判断。"
+              "私营行业均值68,919元/年可保留；本轮没有中国催收员在私营、外包或小微机构中的占比统计，不能由行业数据称相当比例。"
             ]
           },
           "id": "bill-and-account-collectors.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "nbs",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26409,12 +26360,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "统计覆盖：城镇单位工资统计以城镇地域内就业人数 5 人及以上的法人单位为范围、调查对象不含个体工商户和自由职业者；规模以上企业口径覆盖 16 个行业门类的企业法人单位。催收岗位还可能以劳务派遣或外包或计件绩效方式用工，这类用工形态与统计范围存在差异。"
+              "2025城镇单位统计为城镇地域就业5人及以上法人单位，不含个体工商户和自由职业者；规模以上企业覆盖16行业门类。外包公司受雇人员不因外包名义一概排除，应核实际雇主、人数与报表归属。"
             ]
           },
           "id": "bill-and-account-collectors.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26423,12 +26374,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "账款催收与账单服务岗位中相当比例分布在外包服务商与小微机构，并可能含绩效与提成结构，进一步限制可比较性。"
+              "本轮未取得中国本职业的用工形态分布、雇主规模占比与绩效/提成拆分。核个人待遇时索取实际劳动或服务合同，不把可能存在的外包形式写成已测占比。"
             ]
           },
           "id": "bill-and-account-collectors.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "editor",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26451,7 +26403,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国的工资资料为 2025 年（OEWS，本职业单列口径，中位时薪 22.61 美元、中位年薪 47,030 美元）与 2024—2034 年预测（-11%，下降）；两个市场的统计口径与资料期不同，不能直接换算。"
+              "美国的工资资料为 2025 年（OEWS，本职业单列口径，中位时薪 22.61 美元、中位年薪 47,030 美元）与 2025—2035 年预测（-10%，下降）；两个市场的统计口径与资料期不同，不能直接换算。"
             ]
           },
           "id": "bill-and-account-collectors.china-salary.career-snapshot-primary-locale.18",
@@ -26479,12 +26431,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "城镇单位口径为税前工资总额，含单位代扣代缴的个人所得税与社会保险与住房公积金个人缴纳部分，不含绩效奖金与提成的结构性差异。若未来取得可核验的本职业来源，须同时标注税前税后与是否含绩效与提成与用工形态与统计覆盖范围；本页不推测数值。"
+              "国家统计局单位工资是税前工资总额的人均水平，含奖金及计件等劳动报酬和代扣个税、社保、公积金个人部分；不含股息与资本性收益等。该行业表没有本职业绩效/提成构成拆分，不能解释成不含全部奖金或提成。"
             ]
           },
           "id": "bill-and-account-collectors.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cn-pay-definition"
           ],
           "type": "prose"
         },
@@ -26670,13 +26623,17 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "催收与账户处理须按具体机构规程与适用法域执行。美国侧 O*NET 列出 7 项国家认证（6 项由 ACA International 管理、1 项 Certified Professional Biller 由 AAPC 管理），不等于录用门槛或雇主任命；该职业在 O*NET 属 Job Zone 1–2、未标注 Bright Outlook，就业预测为下降。中国大陆侧催收行为受《中华人民共和国消费者权益保护法》等消费者保护规则、贷后催收国家标准与中国银行业协会《金融机构个人消费类贷款催收工作指引（试行）》（2026-01-30 发布，七章五十四条）约束，并且《中华人民共和国刑法》第二百九十三条之一对催收非法债务的行为规定了刑事责任。"
+              "O*NET当前培训目录显示139个相关Banking and Financial Support Services项目，含不足一年证书、副学士、学士等，不止原稿两类层级；IPEDS院校目录2025—26、完成者2024—25，不代表当前招生或本职业统一门槛。认证页显示7条记录，6条为Association of Credit and Collection Professionals、1条AAPC的Certified Professional Biller，其中Compliance/Complaince近名条目并存；不能当7种独立法定执业许可。美国Regulation F §§1006.1—2适用于符合定义的debt collector及主要为个人、家庭或家居用途产生的消费者债务；原债权人以自己名义收款的员工等有排除情形，不能覆盖所有商业账款或催收员。具体业务还须核州法及其他适用规则。中国银行业协会指引为行业自律：第3—4条适用于会员单位的信用卡与个人消费贷款，外部机构要求应写入委托协议，其他个人贷款可参考；1月30日发布消息与4月8日全文网页日期须区分。第13条未经同意禁22:00至次日8:00电话、外访及其他催收；第14条未接通时同一联系方式当日尝试不宜超过6次，另有约定除外；第17条严禁对无关第三人催收，联系获取信息另有失联条件、信息边界和明确拒绝后的限制。官方平台显示GB/T45251-2025《互联网金融 个人网络消费信贷 贷后催收风控指引》为现行推荐性国家标准，2025-02-28发布并实施，主管/归口为中国人民银行。本轮仅读到官方元数据，未取得全文，不能据此声称全国所有催收都必须执行其量化条款。法院公开法条载刑法293条之一针对高利放贷等产生的非法债务，且相关暴力、胁迫、限制自由、入侵住宅、恐吓跟踪骚扰等达到情节严重条件；不能把它当全部合法债务催收的同一罪名，也不能把合法债权当作暴力或侵权免责。"
             ]
           },
           "id": "bill-and-account-collectors.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "nist",
+            "census",
+            "regf-coverage",
+            "cn-bank-full",
+            "cn-standard-current",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -26715,13 +26672,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "债务人个人信息与支付信息的处理须遵循合法与正当与必要原则并严格保密，不得泄露或出售或非法提供（《中华人民共和国消费者权益保护法》第十四条与第二十九条）；经营者不得对消费者进行侮辱或诽谤，不得侵犯消费者的人身自由（第二十七条）；催收作业须符合适用法域与行业规范对联系对象与时间与频次与记录留存的要求（中国银行业协会指引要求电话催收全程录音、外访不少于两人且出示证件并全程录音录像、未经同意不得进入住宅或办公区域）。O*NET 工作情境显示 94% 持续或几乎持续与他人接触、80% 每天有电话交谈、78% 每天需要面对不愉快或愤怒或不礼貌的人、40% 每天处于冲突情境、26% 每年一次以上遇到有暴力行为或身体攻击性的人、64% 持续或几乎持续坐着、41% 每天暴露于分散注意或不适的噪音；长期伏案与电话作业与情绪劳动需要相应的工位与降噪与心理支持安排。"
+              "中国消费者保护法14/27/29条规定人格、自由及个人信息保护；29条拒绝商业信息的规定不能直接推出所有欠款通知同样永久停发。在该协会指引适用范围内，第18条只用会员单位指定还款渠道；第20条电话全程录音；第22条外访不少于两人、出示证明并全程录音或录像；第25(六)项禁止外部机构未经会员同意用私人手机/社交软件发送催收信息，第25(七)项禁止未经同意进入住宅等私人场所或相关办公区域；不能省略适用主体、同意条件或把录音或录像写成两者同时必备。O*NET的坐姿、电话、冲突、噪音比例是工作情境，不能证明劳损、听力损伤或情绪耗竭发生率；工位和支持安排列为编辑核对建议。"
             ]
           },
           "id": "bill-and-account-collectors.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "archivists",
+            "bls",
+            "cn-bank-full",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26745,13 +26704,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按 O*NET 行业分布（本职业单列口径），该职业在行政与支持服务占 30%（2024 年，美国口径）；该门类含大量账款管理与催收服务岗位，但该门类的职业工资数字不在本页展示范围内。"
+              "美国行业页行政支持服务30%，未单列资料年；BLS2025商业支持服务25%。两种行业层级不同，不外推中国职业雇主分布。"
             ]
           },
           "id": "bill-and-account-collectors.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "r2-pay-2",
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -26775,13 +26734,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按 O*NET 行业分布（本职业单列口径），该职业另有 22% 归入金融与保险（2024 年，美国口径）；中国大陆金融机构自有催收团队同样属于这一场景，但该范围的职业工资数字不在本页展示范围内。"
+              "美国行业页金融保险23%，未单列资料年；BLS2025信贷中介及相关活动21%。中国机构分布本轮未实测，两者不能互换。"
             ]
           },
           "id": "bill-and-account-collectors.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
-            "onet",
-            "onet"
+            "r2-pay-2",
+            "bls-ooh-current",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26805,13 +26765,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布还给出医疗保健与社会援助 11%（2024 年）；样本职位名称中的 Patient Access Specialist 与 Patient Account Representative 说明医疗机构账单部门也是常见场景，但行业分布不能推导工资或就业规模。"
+              "美国行业页医疗社会援助11%，BLS2025同类11%。这是美国职业雇主分布，不证明中国占比或个体工资。"
             ]
           },
           "id": "bill-and-account-collectors.china-salary.career-snapshot-primary-locale.42",
           "source_refs": [
-            "onet",
-            "onet"
+            "r2-pay-2",
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -27087,12 +27047,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为分布的下限，不是入门起薪的承诺，同口径时薪第 10 分位为 16.54 美元。；O*NET 展示的 BLS 2025 年工资分位（本职业单列口径）｜https://www.onetonline.org/link/localwages/43-3011.00"
+              "34,400美元/年为第10分位，约10%收入位于该值以下，是分位点而不是整个分布的最低值或新人保底。时薪第10分位16.54美元。"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27143,12 +27103,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为本职业单列口径的年薪中位数（2025 年 OEWS），对应中位时薪 22.61 美元；中位数不等于入门工资，也不构成收入承诺；该口径不含绩效奖金与提成结构，实际所得还受雇主类型与岗位职责与考核办法影响。；O*NET 展示的 BLS 2025 年工资分位（本职业单列口径）｜https://www.onetonline.org/link/localwages/43-3011.00"
+              "2025本职业年工资中位数47,030美元、时薪22.61美元。OEWS统计受雇者税前直时工资，纳入佣金、激励工资和生产奖金等，排除加班及非生产奖金等；没有公布本职业各项薪酬构成，不能写成排除所有绩效或提成。外包公司的受雇员工可在其雇主统计中，自雇经营收入与公司服务结算额不等于员工工资。"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "oews-pay-definition"
           ],
           "type": "prose"
         },
@@ -27213,12 +27174,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "166,900 人（2024 年，本职业单列口径）"
+              "160,200人（2025年，美国本职业）"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -27227,13 +27188,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为 O*NET 就业趋势页按本职业给出的在岗人数；该职业的就业受机构外包与业务周期影响，个别机构或区域的招聘需求与全国口径差异可能很大。；O*NET 43-3011.00 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/43-3011.00"
+              "就业规模按美国本职业统计，不能外推中国人数或个人招聘机会。"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -27242,12 +27202,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "下降（-1% 或更低）（2024—2034 年，本职业单列口径）"
+              "-10%（2025—2035，美国本职业）"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -27256,12 +27216,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页按本职业口径给出 2024—2034 年变化 -11%（下降）；负增长与仍存在空缺并不矛盾：预测期年均仍有约 13,700 个空缺，主要来自替代需求。；O*NET 43-3011.00 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/43-3011.00"
+              "美国43-3011.00：2025年就业160,200人，2035年预计143,400人；2025—2035年变化-10%，年均空缺11,200。BLS解释空缺来自转岗或退出劳动力市场的替换需求；总体预测不等于个人录用概率或生成式AI因果实测。"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -27270,12 +27231,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约 13,700（2024—2034 年，本职业单列口径，含增长与替换）"
+              "11,200个/年（2025—2035，美国本职业预测空缺）"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -27284,13 +27245,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为 O*NET 就业趋势页所示的预测期职位空缺口径，含增长与替换；不是净增岗位数，也不构成个人录用保证。；O*NET 43-3011.00 职业摘要（就业与预测字段）｜https://www.onetonline.org/link/summary/43-3011.00"
+              "BLS解释全部预计空缺来自替换需求；不是净增岗位、实际当年招聘量或个人录用保证。"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -27299,13 +27259,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界（口径）：① 职业身份与任务与工作情境与技能与知识为 O*NET 43-3011.00 本职业单列口径；② 工资、就业与行业数据在 O*NET 页面上亦为本职业单列口径，「未出现 Wage data for … 或 Employment data for … 等取自其他职业的标注」；③ O*NET 未为该职业标注 Bright Outlook，就业预测为下降（-1% 或更低，就业趋势页 -11%），与仍存在替代性空缺并不矛盾；④ 催收行为在美国受《Fair Debt Collection Practices Act》（FDCPA）与 CFPB 条例 F（12 CFR Part 1006）约束，本页不提供任何催收方法或话术。"
+              "美国Regulation F §§1006.1—2适用于符合定义的debt collector及主要为个人、家庭或家居用途产生的消费者债务；原债权人以自己名义收款的员工等有排除情形，不能覆盖所有商业账款或催收员。具体业务还须核州法及其他适用规则。美国43-3011.00：2025年就业160,200人，2035年预计143,400人；2025—2035年变化-10%，年均空缺11,200。BLS解释空缺来自转岗或退出劳动力市场的替换需求；总体预测不等于个人录用概率或生成式AI因果实测。"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "onet",
-            "onet"
+            "regf-coverage",
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -27314,7 +27274,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：美国公开数据给出的是本职业的时薪与年薪分位与2024—2034 年就业与预测（总体为下降）；可核对的是分位、中位数与预测数字，以及它们各自的口径与资料期。"
+              "直接回答：美国公开数据给出的是本职业的时薪与年薪分位与2025—2035 年就业与预测（总体为下降）；可核对的是分位、中位数与预测数字，以及它们各自的口径与资料期。"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.26",
@@ -27329,12 +27289,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "雇主类型通常影响收入：金融机构自有催收团队、专业催收与账款管理服务商与医疗机构账单部门的薪酬结构与绩效与提成办法差别较大。"
+              "BLS2025各行业内本职业工资中位数不同：企业管理50,340、信贷中介48,730、医疗社会援助48,600、专业科技46,650、商业支持38,020美元/年；行业差异不证明个体换岗涨薪或提成构成。"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.27",
           "source_refs": [
-            "onet"
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -27357,12 +27317,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "资历与职责影响收入：能承担复杂账户的处理与谈判、投诉与质检或带训职责、或具备 ACA International 的行业认证，通常对应更高区间。"
+              "本轮没有ACA认证的职业工资回报或职位级别因果研究；复杂账户、投诉、质检、带训等职责是否加薪，核目标雇主书面岗位与薪酬条件。"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
-            "onet"
+            "census",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27428,12 +27389,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行政与支持服务"
+              "商业支持服务（BLS较细行业）"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.34",
           "source_refs": [
-            "onet"
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -27442,12 +27403,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "38,020美元/年（2025本行业内本职业中位数）"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "onet"
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -27456,12 +27417,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布列出该职业在行政与支持服务占 30%（2024 年，本职业单列口径）；行业分布不提供行业工资水平。"
+              "商业支持服务就业占25%；不是O*NET行政支持30%这个较宽门类的同一分组。"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "onet"
+            "bls-ooh-current",
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -27470,12 +27432,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "金融与保险"
+              "信贷中介及相关活动（BLS）"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.37",
           "source_refs": [
-            "onet"
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -27484,12 +27446,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "48,730美元/年（2025本行业内本职业中位数）"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "onet"
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -27498,12 +27460,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布把 22% 归入金融与保险、11% 归入医疗保健与社会援助（2024 年），未单独公布这些行业的职业工资。"
+              "信贷中介及相关活动就业占21%；不能等同金融保险整个门类或某个银行自有团队工资。"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "onet"
+            "bls-ooh-current",
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -27512,12 +27475,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "金融机构自有催收团队（常见雇主类型）"
+              "医疗保健与社会援助（BLS）"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.40",
           "source_refs": [
-            "onet"
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -27526,12 +27489,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未按雇主类型公布该职业工资中位数。"
+              "48,600美元/年（2025本行业内本职业中位数）"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "onet"
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -27540,12 +27503,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 样本职位名称（Collection Agent、Collection Specialist、Collector、Debt Collector、Telephone Collector 等）说明工作场所主要是账款管理与催收服务与金融与医疗账单场景；来源未按雇主类型细分公布工资。"
+              "该行业本职业就业占11%，不等同任一医疗账单岗位或独立机构的工资。"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "onet"
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -27554,12 +27517,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "专业催收与账款管理服务商与医疗账单部门（常见雇主类型）"
+              "专业、科学与技术服务（BLS）"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.43",
           "source_refs": [
-            "onet"
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -27568,12 +27531,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未按用工形态公布该职业收入，本页不把外包与劳务派遣或绩效收入年化，也不把自雇收入计入受雇口径。"
+              "46,650美元/年（2025本行业内本职业中位数）"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "onet"
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -27582,12 +27545,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 与 BLS 的工资分位按受雇就业口径统计，自雇或合伙经营以及外包结算的收入结构不在该口径内。"
+              "OEWS统计受雇者税前直时工资，纳入佣金、激励工资和生产奖金等，排除加班及非生产奖金等；没有公布本职业各项薪酬构成，不能写成排除所有绩效或提成。外包公司的受雇员工可在其雇主统计中，自雇经营收入与公司服务结算额不等于员工工资。"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "onet"
+            "oews-pay-definition",
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -27625,12 +27589,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "数字来自 BLS 职业就业与工资统计（OEWS，2025 年，本职业单列口径）与 O*NET 展示的 BLS 2024—2034 年就业预测（总体为下降）。"
+              "工资为2025年OEWS，本职业工资分位；就业预测为2025—2035年。两类统计衡量对象不同。"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -27697,13 +27662,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位为年薪 65,580 美元；高端通常与年限、专精方向或带训与质检与管理职责相关，不代表普遍水平。"
+              "65,580美元/年为第90分位，约10%位于该值以上；没有把此分位直接对应资历、认证或管理职责的数据，本页不作这种因果解释。"
             ]
           },
           "id": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet",
-            "onet"
+            "onet-wages",
+            "editor"
           ],
           "type": "prose"
         }
@@ -27858,7 +27823,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "霍兰德兴趣代码为 CES（常规型 + 企业型 + 社会型）：常规型对应按机构规程与账户顺序组织信息与记录与逐项核对；企业型对应与债务人沟通并说服付款与协商还款安排；社会型对应理解对方处境并提供还款安排的协助与建议。该页未公布兴趣类型分数。"
+              "霍兰德兴趣代码为 CES（常规型 + 企业型 + 社会型）：常规型对应按机构规程与账户顺序组织信息与记录与逐项核对；企业型对应与债务人沟通并说服付款与协商还款安排；社会型对应理解对方处境并提供还款安排的协助与建议。兴趣数值为C100、E56、S38、R18、A0、I0，非个人门槛。"
             ]
           },
           "id": "bill-and-account-collectors.fit.personality-fit-block.2",
@@ -27917,13 +27882,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格中与工作方式更相关的是尽责性（按规程逐项核对事实与记录、不漏项、按节点跟进）、情绪稳定性（在被拒绝与被指责与冲突场景中保持克制与准确）与宜人性（在坚持债权主张的同时不使用侮辱或施压语言）。这些是群体层面的相关性，不能用于个人录用筛选。"
+              "编辑工作方式核对建议：对照可靠性、注意细节、自我控制与压力耐受，观察事实核对和沟通记录表现。详细页实际有18项工作风格：可靠性82、注意细节76、自我控制75、诚信72、坚持71、压力耐受70；52项能力中口头理解/表达69、清晰发音/言语识别/书面理解66、书面表达63、数字运算44、数学推理41；兴趣C100、E56、S38、R18、A0、I0。分数描述美国职业特征，不是个人录用阈值、测试成绩或发生百分比。不能直接转换成大五人格得分或职业表现因果关系。"
             ]
           },
           "id": "bill-and-account-collectors.fit.personality-fit-block.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27932,12 +27897,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：人格与工作表现的相关性证据属于一般性研究结论，强度低于现场账户核对与合规沟通与记录质量评价。"
+              "证据不足：本轮未取得大五人格对本职业的预测效度或筛选阈值研究。O*NET工作风格可支持岗位核对，不替代人格测验效度。"
             ]
           },
           "id": "bill-and-account-collectors.fit.personality-fit-block.7",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27991,12 +27957,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业匹配或选拔工具，也没有官方资料支持「某种类型最适合账单与账款催收员」的说法。可用于整理与同组同事与债务人的沟通协作偏好，但不能据以判断适配或用于录用。"
+              "本轮所读O*NET/BLS资料未提供MBTI类型匹配标准。编辑建议只用偏好提出沟通核对问题，不据此断定某一类型最佳或作录用结论。"
             ]
           },
           "id": "bill-and-account-collectors.fit.personality-fit-block.10",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28005,7 +27972,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣画像：O*NET 把该职业的兴趣代码列为 CES（常规型 + 企业型 + 社会型），该页未公布兴趣类型分数；这些字段描述职业群体，不构成个人胜任阈值。"
+              "兴趣画像：O*NET 把该职业的兴趣代码列为 CES（常规型 + 企业型 + 社会型），兴趣数值为C100、E56、S38、R18、A0、I0，非个人门槛；这些字段描述职业群体，不构成个人胜任阈值。"
             ]
           },
           "id": "bill-and-account-collectors.fit.riasec-fit-block.10",
@@ -28019,12 +27986,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：MBTI 的职业预测效度有限，且不被 O*NET 或 BLS 用作适配标准。"
+              "证据不足：本轮未取得MBTI在本职业的预测效度研究；不能凭O*NET未列类型就推断所有场景的效度结论。"
             ]
           },
           "id": "bill-and-account-collectors.fit.personality-fit-block.11",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -28091,12 +28058,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样不是职业适配工具，缺乏官方职业资料支持，也不用于录用或筛选判断。可用于自我反思，但不能据此下结论。"
+              "本轮所读职业资料未给九型人格与本职业能力或录用的对应标准；编辑仅建议用作反思问题，不作岗位匹配证明。"
             ]
           },
           "id": "bill-and-account-collectors.fit.personality-fit-block.14",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28105,12 +28073,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：无官方职业资料来源支持将九型人格用于职业适配判断。"
+              "证据不足：本轮未取得九型人格在本职业的预测效度和录用标准研究。"
             ]
           },
           "id": "bill-and-account-collectors.fit.personality-fit-block.15",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -28178,12 +28146,15 @@
           "data": {
             "entries": [
               "能按机构规程逐笔核对欠款事实与合同依据并留下可追溯记录，是完成该职业任务的直接前提。",
-              "能在联系与告知环节遵守适用法域与机构对联系对象与时间与频次的限制，并在出现争议或对方明确拒绝联系时停止并升级。"
+              "编辑观察建议：在合法且获准的模拟或带训任务中核联系对象、时段、频次及报告能力；争议和拒绝联系如何处理须核具体法域及机构，不能自行承诺永久停催或恢复。"
             ]
           },
           "id": "bill-and-account-collectors.fit.personality-fit-block.20",
           "source_refs": [
-            "onet"
+            "bls",
+            "editor",
+            "regf-contact",
+            "regf-disputes"
           ],
           "type": "list"
         },
@@ -28221,12 +28192,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：O*NET 的基本技能以积极倾听 72 与口语表达 72 与写作 56 与批判性思维 53 与阅读理解 53 为主；可迁移技能以说服 60 与社会洞察力 60 与谈判 50 与服务导向 50 与时间管理 50 与复杂问题解决 47 为主；知识字段共 33 项、列出其中 17 项并给出分数（英语语言 77、客户与个人服务 69、数学 58、经济与会计 57、法律与政府 56、计算机与电子 53、行政与管理 52）；「工作风格与能力字段本页未取得」，属于职业特征描述；测验不能替代现场实作与复核评价。"
+              "详细页实际有18项工作风格：可靠性82、注意细节76、自我控制75、诚信72、坚持71、压力耐受70；52项能力中口头理解/表达69、清晰发音/言语识别/书面理解66、书面表达63、数字运算44、数学推理41；兴趣C100、E56、S38、R18、A0、I0。分数描述美国职业特征，不是个人录用阈值、测试成绩或发生百分比。知识33项中英语77、客户服务69、数学58、经济会计57、法律政府56、计算机53。全部知识条目有分数，原稿只取得17项的说法不成立。"
             ]
           },
           "id": "bill-and-account-collectors.fit.personality-fit-block.23",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28582,13 +28553,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合与否不取决于内外向。该职业既需要独立完成账户核对与记录，也需要与债务人直接沟通并与同组同事与合规人员协作；能否在被拒绝与冲突压力下保持合规与准确比性格类型更关键。"
+              "编辑建议分别观察独立账户核对、沟通和压力场景表现；本轮资料没有把内外向列为统一录用条件，也未测其对本职业表现的独立预测效果。"
             ]
           },
           "id": "bill-and-account-collectors.fit.personality-fit-block.47",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28597,13 +28569,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能。长时间伏案与电话沟通需要专注与耐受，与情绪化或失约的债务人反复沟通也需要与不同类型的人交流；性格内向或外向不是官方口径中的条件。"
+              "外向本身不提供胜任证明。O*NET列社交导向64、自我控制75；这是工作风格特征，不能推断任一外向者能否做好。"
             ]
           },
           "id": "bill-and-account-collectors.fit.personality-fit-block.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28612,12 +28584,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有官方结论，也不存在最适合的类型。MBTI 只能帮助整理偏好并提出核对问题，不能预测账户核对与记录质量或现场表现。"
+              "本轮未取得最适合本职业的MBTI类型或职业预测效度研究；编辑仅建议用偏好提出待验证问题。"
             ]
           },
           "id": "bill-and-account-collectors.fit.personality-fit-block.49",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -28641,11 +28613,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。人格与兴趣工具的效度有限，不能替代有监督下的账户核对记录质量与合规联系与记录与争议处置结果；本页只用它们提出核对问题。"
+              "本轮没有本职业人格/兴趣工具预测效度研究，不能说完全不能预测或已经能预测。编辑建议以具体核对和沟通记录提出观察问题，不设录用阈值。"
             ]
           },
           "id": "bill-and-account-collectors.fit.personality-fit-block.51",
           "source_refs": [
+            "editor",
             "onet"
           ],
           "type": "prose"
@@ -28655,13 +28628,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不是必需，但基本的数字与比例与账期计算影响核对准确性与效率。该职业需要能读懂账单与还款与减免明细并进行金额与账期核对；完全不具备这些基础会明显限制可承担的工作范围。"
+              "O*NET能力数字运算44、数学推理41，知识数学58；需要的任务涉及金额、账款与登记。编辑建议用虚构数据核对数字和账期，资料未给数学考试或IQ统一门槛。"
             ]
           },
           "id": "bill-and-account-collectors.fit.personality-fit-block.52",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28670,13 +28643,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "确实有帮助：需要在被拒绝与被指责与冲突场景中保持克制，并在发现事实或身份存疑或对方明确拒绝联系时先停止再报告。但情绪能力不能用单一分数定义，也不能替代适用法域与机构规程与记录规范。"
+              "O*NET自我控制75、压力耐受70，情境每天面对不愉快等人员78%。它们不等于情商测试得分；本轮未取得职业情商阈值。编辑核对建议：身份、金额、争议、投诉或拒绝联系出现疑问时，先暂停有疑问的当前操作并交合规人员核定，不自行承诺永久停催或恢复。美国适用Regulation F时，§1006.6(c)收到书面拒付/停止联系通知后禁止后续沟通，但有终止努力、通知特定救济等例外；§1006.14(h)限制已被要求停用的沟通媒介并设例外；§1006.38对验证期内书面争议暂停债务或争议部分的催收，直至履行规定响应。不能把所有投诉、口头拒付一概写成法定永久停催。"
             ]
           },
           "id": "bill-and-account-collectors.fit.personality-fit-block.53",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "editor",
+            "regf-contact",
+            "regf-disputes"
           ],
           "type": "prose"
         },
@@ -28685,12 +28660,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。九型人格不是职业适配工具，也不被官方职业资料用作选拔依据；可用于自我反思，但不能据此下结论。"
+              "本轮未取得九型人格职业匹配效度研究，所读职业资料未设对应标准；不能作个人录用结论。"
             ]
           },
           "id": "bill-and-account-collectors.fit.personality-fit-block.54",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28757,12 +28733,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的兴趣代码与技能与知识字段（工作风格与能力字段本页未取得），不提供工资或就业数字。"
+              "官方详细页实际有6类兴趣数值、18项工作风格、52项能力；描述美国职业特征，不作个人胜任分数线。"
             ]
           },
           "id": "bill-and-account-collectors.fit.personality-fit-block.59",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28841,7 +28817,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆行业与岗位类别代理口径与证据边界（本页未取得精确等价职业工资条目）。"
+              "美国职业相关行业分布；按实际职业或父级范围阅读，不是中国工资、分类或法律依据。"
             ]
           },
           "id": "bill-and-account-collectors.fit.personality-fit-block.65",
@@ -28855,7 +28831,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明美国《公平催收实务法》与 CFPB 条例 F 的适用范围，不构成任何具体联系行为的合法性结论。"
+              "美国职业摘要及就业预测字段；职业或父级范围按页面说明，不是中国法规或工资来源。"
             ]
           },
           "id": "bill-and-account-collectors.fit.personality-fit-block.66",
@@ -28912,6 +28888,30 @@
                 "id": "link-6",
                 "relation": "career.source",
                 "url": "https://www.ftc.gov/legal-library/browse/statutes/fair-debt-collection-practices-act"
+              },
+              {
+                "entity": "中国银行业协会催收指引全文",
+                "id": "revision-cn-bank-full",
+                "relation": "career.source",
+                "url": "https://www.china-cba.net/Index/showw/catid/136/id/46479"
+              },
+              {
+                "entity": "Regulation F §1006.6",
+                "id": "revision-regf-contact",
+                "relation": "career.source",
+                "url": "https://www.consumerfinance.gov/rules-policy/regulations/1006/6/"
+              },
+              {
+                "entity": "Regulation F §1006.38",
+                "id": "revision-regf-disputes",
+                "relation": "career.source",
+                "url": "https://www.consumerfinance.gov/rules-policy/regulations/1006/38/"
+              },
+              {
+                "entity": "Regulation F §1006.100",
+                "id": "revision-regf-records",
+                "relation": "career.source",
+                "url": "https://www.consumerfinance.gov/rules-policy/regulations/1006/100/"
               }
             ]
           },
@@ -28930,14 +28930,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界：本节描述的是职业风险与边界管理，不是对个人或雇主的评价；联系对象与联系时间与联系频次、债务人个人信息与支付信息的处理、减免与停催与展期与征信报送与账户移交与司法移送的授权范围、以及是否涉及非法债务与暴力与恐吓与骚扰的判定，由适用法域与主管部门与用人单位制度决定。本页依据 O*NET 43-3011.00 的官方职责与任务与工作情境字段，以及美国《公平催收实务法》（FDCPA）与美国 CFPB 条例 F（12 CFR Part 1006）、中国银行业协会《金融机构个人消费类贷款催收工作指引（试行）》、《中华人民共和国消费者权益保护法》与《中华人民共和国刑法》第二百九十三条之一整理；只引用适用范围与行为边界，不提供任何催收方法。"
+              "美国Regulation F §§1006.1—2适用于符合定义的debt collector及主要为个人、家庭或家居用途产生的消费者债务；原债权人以自己名义收款的员工等有排除情形，不能覆盖所有商业账款或催收员。具体业务还须核州法及其他适用规则。中国银行业协会指引为行业自律：第3—4条适用于会员单位的信用卡与个人消费贷款，外部机构要求应写入委托协议，其他个人贷款可参考；1月30日发布消息与4月8日全文网页日期须区分。第13条未经同意禁22:00至次日8:00电话、外访及其他催收；第14条未接通时同一联系方式当日尝试不宜超过6次，另有约定除外；第17条严禁对无关第三人催收，联系获取信息另有失联条件、信息边界和明确拒绝后的限制。法院公开法条载刑法293条之一针对高利放贷等产生的非法债务，且相关暴力、胁迫、限制自由、入侵住宅、恐吓跟踪骚扰等达到情节严重条件；不能把它当全部合法债务催收的同一罪名，也不能把合法债权当作暴力或侵权免责。"
             ]
           },
           "id": "bill-and-account-collectors.risk.career-risk-cards.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "regf-coverage",
+            "cn-bank-full",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -28946,14 +28946,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答：关键风险包括不当催收与骚扰的法律责任、债务人个人信息泄露与滥用、长期伏案与电话作业带来的身体与情绪耗竭、还款与减免与手续费记录出错、催收与争议与投诉记录失控，以及催收权限与停催与司法移送授权不明；控制方式是先核对事实、按适用法域与机构规程约束联系对象与时间与频次、按最小必要原则处理个人信息、逐笔核对登记与入账、如实留档，并在超出授权时停止并升级。"
+              "风险包括骚扰/不当沟通、个人信息不当处理、工作情境中的冲突和长时间坐姿、登记差异、记录缺失及越权处置。法律要求与编辑核对建议分别列示；本轮无职业伤病发生率。"
             ]
           },
           "id": "bill-and-account-collectors.risk.career-risk-cards.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "bls",
+            "regf-harassment",
+            "cn-bank-full",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28979,13 +28980,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "债务人与其相关第三人，以及本人与雇主"
+              "本人及催收团队、主管与合规负责人；涉及债务人与第三人权益。"
             ]
           },
           "id": "bill-and-account-collectors.risk.career-risk-cards.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "cn-bank-full"
           ],
           "type": "prose"
         },
@@ -29009,13 +29010,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按适用法域与机构规程确认可联系对象与联系时间与频次，首次联系即表明所代表的机构与身份，如实告知事由与金额与违约后果，不夸大也不编造事实；对方明确拒绝联系时不再联系并如实记录；发现涉及非法债务或暴力与恐吓与骚扰等情形立即停止并报告；按机构要求留存可复核的通话与联系记录。"
+              "编辑核对建议：身份、金额、争议、投诉或拒绝联系出现疑问时，先暂停有疑问的当前操作并交合规人员核定，不自行承诺永久停催或恢复。美国适用Regulation F时，§1006.6(c)收到书面拒付/停止联系通知后禁止后续沟通，但有终止努力、通知特定救济等例外；§1006.14(h)限制已被要求停用的沟通媒介并设例外；§1006.38对验证期内书面争议暂停债务或争议部分的催收，直至履行规定响应。不能把所有投诉、口头拒付一概写成法定永久停催。在该协会指引适用范围内，第18条只用会员单位指定还款渠道；第20条电话全程录音；第22条外访不少于两人、出示证明并全程录音或录像；第25(六)项禁止外部机构未经会员同意用私人手机/社交软件发送催收信息，第25(七)项禁止未经同意进入住宅等私人场所或相关办公区域；不能省略适用主体、同意条件或把录音或录像写成两者同时必备。"
             ]
           },
           "id": "bill-and-account-collectors.risk.career-risk-cards.13",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "regf-contact",
+            "regf-harassment",
+            "regf-disputes",
+            "cn-bank-full"
           ],
           "type": "prose"
         },
@@ -29039,13 +29043,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "债务人与本人与雇主"
+              "本人及资料处理、系统权限管理和合规人员。"
             ]
           },
           "id": "bill-and-account-collectors.risk.career-risk-cards.15",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "cn-bank-full",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29069,13 +29074,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按合法与正当与必要原则处理债务人信息，只使用机构授权的渠道与工具，不在私人设备或社交软件上传输与保存债务人信息，不向未授权渠道提供，作业终止或个人信息销毁后继续承担保密责任，并保存完整可追溯的作业记录。"
+              "中国消费者法29条要求信息合法、正当、必要及保密。在该协会指引适用范围内，第18条只用会员单位指定还款渠道；第20条电话全程录音；第22条外访不少于两人、出示证明并全程录音或录像；第25(六)项禁止外部机构未经会员同意用私人手机/社交软件发送催收信息，第25(七)项禁止未经同意进入住宅等私人场所或相关办公区域；不能省略适用主体、同意条件或把录音或录像写成两者同时必备。第30条终止委托后按协议销毁资料并继续保密；记录保存另核监管和协议，不能用全删或全部永久保存替代。"
             ]
           },
           "id": "bill-and-account-collectors.risk.career-risk-cards.17",
           "source_refs": [
-            "onet",
-            "onet"
+            "archivists",
+            "cn-bank-full"
           ],
           "type": "prose"
         },
@@ -29113,12 +29118,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "长时间伏案与高强度电话作业与情绪劳动，可能造成颈肩与腰背与手腕劳损与听力与情绪耗竭；频繁面对情绪化或失约的债务人会带来持续心理压力。"
+              "O*NET列64%持续坐姿、80%每天电话、78%每天面对不愉快等人员；BLS描述工作可能有压力。未提供颈腰腕劳损、听力损伤或情绪耗竭的职业发生率或因果研究。"
             ]
           },
           "id": "bill-and-account-collectors.risk.career-risk-cards.20",
           "source_refs": [
-            "onet"
+            "bls",
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -29127,12 +29133,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "安排符合人体工学的工位与座席与耳麦与降噪安排，轮换姿势并安排间歇与离席活动，控制连续通话时长并按机构安排轮岗或心理支持，及早报告持续不适。"
+              "编辑核对建议：向目标机构了解工位、耳麦、连续通话安排、休息及支持渠道；本轮没有本职业经验证的人体工学干预或临床处置方案。持续不适时按机构既有健康支持流程求助。"
             ]
           },
           "id": "bill-and-account-collectors.risk.career-risk-cards.21",
           "source_refs": [
-            "onet"
+            "editor",
+            "bls"
           ],
           "type": "prose"
         },
@@ -29246,13 +29253,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按机构要求保存联系过程与账户状态记录与地址变更与往来函件与申诉材料，如实记录联系对象与时间与方式与频次与结果，按期自查记录完整性并留档，保留人工修改痕迹与复核签字。"
+              "中国协会第19—20条要求真实完整记录、电话全程录音，保存年限参照相关监管；美国适用§1006.100时合规证据保留到最后催收活动后三年，若录音则通话日起三年，该条不强制所有电话录音。编辑建议核组织实际留存、访问与更正方式，不伪造复核签字。"
             ]
           },
           "id": "bill-and-account-collectors.risk.career-risk-cards.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-bank-full",
+            "regf-records",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29306,13 +29314,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按机构授权链执行联系与登记与处置；该职业在 O*NET 属 Job Zone 1–2 且相关经验要求从很少到一年，因此上岗培训与减免与停催与移送授权边界尤其需要在入职时明确；涉及征信报送与账户移交与司法移送以及涉及非法债务的判定须由有权限的人员与法务按适用法域与机构制度处理，保留复核与升级机制并按程序上报隐患。"
+              "编辑建议入职时核具体联系、减免、停催、征信与移送权限及报告渠道。机构合规/法务可评估适用规则；其内部意见不等于司法或监管裁决，也不免除个人责任。法院公开法条载刑法293条之一针对高利放贷等产生的非法债务，且相关暴力、胁迫、限制自由、入侵住宅、恐吓跟踪骚扰等达到情节严重条件；不能把它当全部合法债务催收的同一罪名，也不能把合法债权当作暴力或侵权免责。"
             ]
           },
           "id": "bill-and-account-collectors.risk.career-risk-cards.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "arxiv",
+            "cn-bank-full"
           ],
           "type": "prose"
         },
@@ -29364,12 +29373,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明本职业单列口径的就业与 2024—2034 年预测（下降），不用于个案判断。"
+              "美国本职业2025—2035预测；不用于个案违法判断。"
             ]
           },
           "id": "bill-and-account-collectors.risk.career-risk-cards.37",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -29392,12 +29401,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明美国联邦催收合规框架（FDCPA 与 CFPB 条例 F）的适用范围，不构成任何具体联系行为的合法性结论，也不构成中国大陆的合规结论。"
+              "美国Regulation F §§1006.1—2适用于符合定义的debt collector及主要为个人、家庭或家居用途产生的消费者债务；原债权人以自己名义收款的员工等有排除情形，不能覆盖所有商业账款或催收员。具体业务还须核州法及其他适用规则。"
             ]
           },
           "id": "bill-and-account-collectors.risk.career-risk-cards.39",
           "source_refs": [
-            "onet"
+            "regf-coverage"
           ],
           "type": "prose"
         }
@@ -29423,7 +29432,7 @@
             "column_labels": [
               "岗位方向",
               "起步任务",
-              "雇主依据",
+              "雇主条件核对（编辑建议）",
               "零经验可提交的证据",
               "需要区分的边界"
             ],
@@ -29431,35 +29440,35 @@
               [
                 "金融机构自有催收团队岗",
                 "在有监督下按机构规程核对账户与联系债务人并登记还款，并按规程记录联系与协商与争议。",
-                "通常看事实核对与记录质量、合规沟通与协商能力、在考核压力下的稳定性；上岗授权由机构岗前培训与考核决定。",
+                "编辑核对项目：事实核对与记录、合规沟通、考核安排；本轮未取得该类具体雇主招聘样本。",
                 "提交一份含虚构账户与账单与还款明细、联系记录与还款方案表、收款与减免登记与异常说明的账户处理记录，不使用真实债务人与账户信息。",
                 "岗位职责不决定可联系对象与时间与频次的合规边界；减免与停催与征信与移送须由有职责人员按法域与机构制度处理。"
               ],
               [
                 "专业催收与账款管理服务商岗",
                 "在受托范围内按委托机构的标准与规程完成联系与协商与登记，并按合同与规程接受检查。",
-                "通常看受托业务规程执行、记录完整性与可追溯、投诉处理与合规表现。",
+                "编辑核对项目：受托范围、记录完整性、投诉与合规要求；本轮未取得该类雇主的统一录用标准。",
                 "提交一份含受托范围与联系规范与记录留存与升级路径说明的虚构作业记录。",
-                "受托作业须在委托范围内进行，禁止转包或变相转包；本页不提供任何催收方法或话术。"
+                "受托范围与实际委托协议分别核。中国银行业协会第34条在会员单位合作外部催收范围内禁止转包或变相转包；不能扩为所有商业账款法律通则。"
               ],
               [
                 "医疗机构账单部门岗",
                 "在医疗账单场景核对诊疗与保险理赔与患者应付，按规程联系患者并登记还款与减免。",
-                "通常看医疗账单与理赔知识、核对准确性、与患者沟通的分寸与记录能力。",
+                "编辑核对项目：医疗账单与理赔知识、核对及患者沟通要求；本轮无具体招聘样本。",
                 "提交一份含账单与理赔核对记录与患者沟通说明与异常上报方案的虚构记录。",
-                "医疗信息与患者信息属敏感个人信息，处理须按适用法域与机构规定执行；本页不提供任何催收话术。"
+                "医疗账单可能含个人及诊疗信息，具体处理范围须按实际法域与机构核；本轮未读美国医疗隐私制度全文，不能凭职业描述授权处理全部病历或对外披露。"
               ],
               [
                 "账户管理与对账岗",
                 "按机构规程维护账户状态与还款与减免与展期记录，处理地址与联系方式变更与账目差异。",
-                "通常看账目核对准确性与差异处理、记录完整性与系统操作规范。",
+                "编辑核对项目：账目差异、记录与系统操作；本轮无具体雇主录用样本。",
                 "提交一份含账户状态与还款与减免记录与差异处理说明的虚构记录。",
                 "对账岗不等于具有对外联系与减免与移送的处置权。"
               ],
               [
                 "质检与投诉处理岗",
                 "按机构规程抽检联系与记录与话术合规性，受理并调查客户投诉与争议并跟踪处置。",
-                "通常看规程理解与判定尺度一致性、投诉调查与记录能力、沟通分寸。",
+                "编辑核对项目：抽检依据、投诉调查和权限；本轮无具体招聘样本。",
                 "提交一份含抽检标准与判定依据与投诉调查与处置建议的虚构说明。",
                 "质检判定不等于法务或监管的违法性结论；本页不提供任何话术或规避监管的方法。"
               ]
@@ -29482,16 +29491,16 @@
               {
                 "id": "education",
                 "values": [
-                  "美国侧：O*NET 把 43-3011.00（Bill and Account Collectors）列为 Job Zone 1–2（SVP 低于 6.0），学历构成为要求高中文凭或同等学历 48%、要求上过大学但无学位 27%、要求学士学位 21%；该区职业的部分岗位几乎无需先前经验，其他岗位需要数月到一年经验，在岗训练从几天到一年。该职业在 O*NET 未标注 Bright Outlook，就业预测为下降（就业趋势页 2024—2034 年 -11%，166,900 → 149,400）。",
-                  "O*NET 培训页面显示该职业的培训项目学科方向为 Banking and Financial Support Services（含不足一年证书与副学士两类结业层级）；认证页面列出 7 项国家认证，其中 6 项由 Association of Credit and Collection Professionals（ACA International）管理，1 项 Certified Professional Biller 由 American Academy of Professional Coders 管理。",
-                  "中国大陆侧以用人单位岗前培训与在岗带教为主，并须符合适用的消费者权益保护与贷后催收规范与个人信息处理要求；本页不提供选拔标准。"
+                  "美国O*NET新聘学历要求调查为高中48%、上过大学无学位27%、学士21%；BLS描述典型至少高中及岗后培训。Job Zone说明不能当单个雇主承诺。美国43-3011.00：2025年就业160,200人，2035年预计143,400人；2025—2035年变化-10%，年均空缺11,200。BLS解释空缺来自转岗或退出劳动力市场的替换需求；总体预测不等于个人录用概率或生成式AI因果实测。",
+                  "O*NET当前培训目录显示139个相关Banking and Financial Support Services项目，含不足一年证书、副学士、学士等，不止原稿两类层级；IPEDS院校目录2025—26、完成者2024—25，不代表当前招生或本职业统一门槛。认证页显示7条记录，6条为Association of Credit and Collection Professionals、1条AAPC的Certified Professional Biller，其中Compliance/Complaince近名条目并存；不能当7种独立法定执业许可。",
+                  "中国本轮没有具体雇主培训及招聘样本；协会第29条要求合作外部机构定期培训考核，不证明所有中国雇主以同一方式任用。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
                   "账户核对与联系与协商与登记须按适用法域与机构规程执行；涉及可联系对象与联系时间与频次、债务人个人信息与支付信息的处理、减免与停催与展期与征信报送与账户移交与司法移送，须在法律与监管要求与机构授权范围内进行。",
-                  "美国侧催收行为受《公平催收实务法》（FDCPA，15 U.S.C. §§1692-1692p）与 CFPB 条例 F（12 CFR Part 1006）约束；O*NET 列出 7 项国家认证（不等于执业许可证或雇主任命）；该职业属 Job Zone 1–2 且经验要求从几乎无需到一年，因此上岗培训与减免与移送授权边界尤其需要在入职时明确。",
+                  "美国Regulation F §§1006.1—2适用于符合定义的debt collector及主要为个人、家庭或家居用途产生的消费者债务；原债权人以自己名义收款的员工等有排除情形，不能覆盖所有商业账款或催收员。具体业务还须核州法及其他适用规则。行业认证目录不等于法定许可。具体岗位处置与内部培训要求另核机构。",
                   "债务人个人信息与支付信息与账户历史可能涉及隐私与数据安全，信息保护要求因法域与机构而异，须在入职前确认访问范围与合规义务；中国大陆侧还须遵守消费者权益保护与贷后催收规范对联系第三人与记录留存的要求。本页不提供任何催收方法。"
                 ]
               },
@@ -29506,9 +29515,9 @@
               {
                 "id": "tools",
                 "values": [
-                  "账户与催收管理系统、通话与录音与质检工具、对账与报表与办公软件（Microsoft Excel 与 Office 与 Outlook 与 Word 与 PowerPoint，SAP，Intuit QuickBooks，MEDITECH software）、信函与短信与语音等联系渠道与模板、个人信息与权限管理工具与记录留档设施。O*NET 技术清单列出 8 项软件技能并标注热门技术：Microsoft Excel 27%、Microsoft Office 21%、Microsoft Outlook 12%、SAP 5%、Microsoft Word 5%、Microsoft PowerPoint 4%、Intuit QuickBooks 1%、MEDITECH software 未公布比例；另有 5 项技能标注为紧缺技能。",
-                  "联系渠道与催收作业工具须为机构授权或已向机构备案的渠道，不得使用私人手机或社交软件发送催收信息；不得使用机构未授权的方式收取还款。",
-                  "把智能外呼或话术辅助或还款方案推荐或对账工具用于催收流程前，须确认债务人信息保护、联系时间与频次控制、记录留存与人工复核安排；合规判断与减免与移送决定仍需由有权限的人员承担，不能依赖工具输出。"
+                  "账户与催收管理系统、通话与录音与质检工具、对账与报表与办公软件（Microsoft Excel 与 Office 与 Outlook 与 Word 与 PowerPoint，SAP，Intuit QuickBooks，MEDITECH software）、信函与短信与语音等联系渠道与模板、个人信息与权限管理工具与记录留档设施。O*NET 技术清单列出 8 项软件技能并标注热门技术：Microsoft Excel 27%、Microsoft Office 21%、Microsoft Outlook 12%、SAP 5%、Microsoft Word 5%、Microsoft PowerPoint 4%、Intuit QuickBooks 1%、MEDITECH software 未公布比例；另有5项标In Demand（招聘提及，不是人员短缺）。",
+                  "在该协会指引适用范围内，第18条只用会员单位指定还款渠道；第20条电话全程录音；第22条外访不少于两人、出示证明并全程录音或录像；第25(六)项禁止外部机构未经会员同意用私人手机/社交软件发送催收信息，第25(七)项禁止未经同意进入住宅等私人场所或相关办公区域；不能省略适用主体、同意条件或把录音或录像写成两者同时必备。",
+                  "编辑核对建议：工具试验前核数据、联系时段、频次、记录与复核；协会26条规范会员AI风险，47条鼓励系统化，不证明具体机构已采用或效率提升。"
                 ]
               }
             ]
@@ -29516,7 +29525,13 @@
           "id": "bill-and-account-collectors.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "bls-ooh-current",
+            "nist",
+            "census",
+            "regf-coverage",
+            "cn-bank-full",
+            "editor"
           ],
           "title": "雇主看重的准备证据",
           "type": "cards"
@@ -29771,7 +29786,7 @@
               [
                 "高中文凭或同等学历",
                 "希望进入该职业的人",
-                "决定能否满足多数岗位的基本要求。",
+                "BLS描述典型至少高中；是否满足某雇主条件另核其招聘要求。",
                 "O*NET 该职业的学历构成为要求高中文凭或同等学历 48%、要求上过大学但无学位 27%、要求学士学位 21%；该区职业经验要求从几乎无需到一年。",
                 "按学制完成。",
                 "按学制年限。",
@@ -29781,25 +29796,25 @@
                 "用人单位的岗前培训与在岗带教",
                 "进入具体机构的人",
                 "决定能否按机构规程作业。",
-                "多数雇主要求（该区职业在岗训练从几天到一年）。",
-                "须完成机构安排的岗前培训与考核并按班次接受带训。",
+                "BLS本职业通常岗后培训；具体课程、时长和考核另核雇主，不能只用Job Zone证明多数雇主规定。",
+                "具体培训、考核与监督安排须核雇主，本轮没有统一班次或带训制度。",
                 "按机构安排。",
                 "岗前培训不等于机构的减免与移送处置授权。"
               ],
               [
                 "行业认证（账款催收方向）",
                 "希望证明专项能力的人",
-                "作为专项能力的第三方证明。",
-                "不是普遍门槛，但对岗位层级与机构选择有一定作用。",
+                "目录列相关认证，可作进一步核发证机构的线索，不证明持证者胜任。",
+                "本轮未取得认证的统一录用门槛、岗位层级或薪资回报证据。",
                 "O*NET 认证页面列出 7 项：其中 6 项由 Association of Credit and Collection Professionals（ACA International）管理（Credit and Collection Compliance Officer、Professional Collection Specialist、Health Care Collection Management、Credit and Collection Complaince Officer、Collection Industry Professional、Professional Collection Manager），1 项 Certified Professional Biller 由 American Academy of Professional Coders 管理。",
-                "按发证机构安排与证书有效期维护。",
+                "本轮未核各发证机构现行费用、准入、有效期或继续教育；另核官方条件。",
                 "认证不等于执业许可证或雇主任命，也不带来合规空间。"
               ],
               [
                 "培训项目（Banking and Financial Support Services 方向）",
                 "希望通过系统学习进入该职业的人",
                 "提供学科基础与就业衔接路径。",
-                "不是普遍门槛；O*NET 培训页面列出该职业的培训项目，学科方向为 Banking and Financial Support Services（含不足一年证书与副学士两类结业层级）。",
+                "O*NET当前培训目录显示139个相关Banking and Financial Support Services项目，含不足一年证书、副学士、学士等，不止原稿两类层级；IPEDS院校目录2025—26、完成者2024—25，不代表当前招生或本职业统一门槛。认证页显示7条记录，6条为Association of Credit and Collection Professionals、1条AAPC的Certified Professional Biller，其中Compliance/Complaince近名条目并存；不能当7种独立法定执业许可。",
                 "按院校与项目安排。",
                 "按项目学制。",
                 "培训结业不等于岗位授权或法域豁免。"
@@ -29808,8 +29823,8 @@
                 "机构内部的联系与减免与停催与移送授权",
                 "承担账户处置的人",
                 "决定能否作出减免与停催与征信与移送决定。",
-                "由机构岗位职责与授权链决定（多数机构要求逐级审批）。",
-                "须完成机构培训并取得书面授权与系统权限。",
+                "编辑建议核具体机构职责与授权；本轮没有多数机构逐级审批统计。",
+                "编辑建议核实际制度与书面/系统权限依据；没有统一先培训才可取得所有权限的法定顺序。",
                 "按机构安排维护。",
                 "授权有机构与岗位范围限制，超出范围须升级。"
               ],
@@ -29817,8 +29832,8 @@
                 "中国大陆侧：催收行为规范与信息保护要求",
                 "在中国大陆从事催收相关工作的人",
                 "决定联系行为与信息处理是否合规。",
-                "属适用法律与规范要求：《中华人民共和国消费者权益保护法》第十四条与第二十七条与第二十九条要求尊重人格尊严与保护个人信息并禁止侮辱诽谤与侵犯人身自由；贷后催收国家标准与中国银行业协会《金融机构个人消费类贷款催收工作指引（试行）》（2026-01-30 发布，七章五十四条）对催收时间与合理频次与联系信息获取与联系第三人作出量化规定；《中华人民共和国刑法》第二百九十三条之一对催收非法债务的行为规定了刑事责任。",
-                "须完成用人单位培训并按要求取得相应资格或授权。",
+                "中国银行业协会指引为行业自律：第3—4条适用于会员单位的信用卡与个人消费贷款，外部机构要求应写入委托协议，其他个人贷款可参考；1月30日发布消息与4月8日全文网页日期须区分。第13条未经同意禁22:00至次日8:00电话、外访及其他催收；第14条未接通时同一联系方式当日尝试不宜超过6次，另有约定除外；第17条严禁对无关第三人催收，联系获取信息另有失联条件、信息边界和明确拒绝后的限制。官方平台显示GB/T45251-2025《互联网金融 个人网络消费信贷 贷后催收风控指引》为现行推荐性国家标准，2025-02-28发布并实施，主管/归口为中国人民银行。本轮仅读到官方元数据，未取得全文，不能据此声称全国所有催收都必须执行其量化条款。法院公开法条载刑法293条之一针对高利放贷等产生的非法债务，且相关暴力、胁迫、限制自由、入侵住宅、恐吓跟踪骚扰等达到情节严重条件；不能把它当全部合法债务催收的同一罪名，也不能把合法债权当作暴力或侵权免责。",
+                "岗位培训、个人资格与处置权限分别核；本轮未取得中国催收员统一必持个人证书依据。",
                 "按主管部门与机构安排维护。",
                 "培训与授权不能免除法律责任；本页不提供任何催收方法或话术。"
               ]
@@ -29827,10 +29842,13 @@
           "id": "bill-and-account-collectors.path.credential-decision.1",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "bls-ooh-current",
+            "nist",
+            "census",
+            "cn-bank-full",
+            "cn-standard-current",
+            "arxiv",
+            "editor"
           ],
           "title": "资格与授权决策",
           "type": "table"
@@ -29841,16 +29859,22 @@
           "data": {
             "paragraphs": [
               "资格边界：学历、职业培训、行业认证、雇主任用、机构内部的联系与减免与停催与征信报送与账户移交与司法移送授权、以及适用法域对联系对象与时间与频次与个人信息处理的要求是不同状态，任何一项都不能由另一项自动推出；系统与渠道权限与记录留存要求也属于作业前提，不能由学历替代。",
-              "美国侧：O*NET 把 43-3011.00（Bill and Account Collectors）列为 Job Zone 1–2（SVP 低于 6.0），学历构成为高中文凭或同等学历 48%、上过大学但无学位 27%、学士学位 21%；该区职业经验要求从几乎无需到一年、在岗训练从几天到一年；培训项目学科方向为 Banking and Financial Support Services，认证页面列出 7 项国家认证；该职业在 O*NET 未标注 Bright Outlook，就业预测为下降（就业趋势页 2024—2034 年 -11%，166,900 → 149,400，同时预测期年均仍有约 13,700 个空缺）。其工资与就业与行业数据在 O*NET 页面上均为本职业单列口径。催收行为受《公平催收实务法》（FDCPA，15 U.S.C. §§1692-1692p）与 CFPB 条例 F（12 CFR Part 1006）约束。",
-              "中国大陆侧：《中华人民共和国消费者权益保护法》要求尊重消费者人格尊严并保护其个人信息，禁止侮辱诽谤与侵犯人身自由；贷后催收国家标准与中国银行业协会《金融机构个人消费类贷款催收工作指引（试行）》（2026-01-30 发布，七章五十四条）对催收时间（未经债务人同意严禁 22:00 至次日 8:00 催收）、合理频次（未接通时同一联系方式当日尝试拨打不宜超过 6 次）、联系信息获取渠道与联系第三人作出量化规定，并要求电话催收全程录音与外访不少于两人且出示证件与全程录音录像、未经同意不得进入住宅或办公区域；《中华人民共和国刑法》第二百九十三条之一对催收非法债务的行为规定了刑事责任。本页未取得与 43-3011.00 精确对应的中国大陆公开职业工资条目，只展示明确标注行业与岗位类别范围的官方代理。",
+              "美国学历要求调查与典型岗位培训见O*NET/BLS；O*NET当前培训目录显示139个相关Banking and Financial Support Services项目，含不足一年证书、副学士、学士等，不止原稿两类层级；IPEDS院校目录2025—26、完成者2024—25，不代表当前招生或本职业统一门槛。认证页显示7条记录，6条为Association of Credit and Collection Professionals、1条AAPC的Certified Professional Biller，其中Compliance/Complaince近名条目并存；不能当7种独立法定执业许可。美国43-3011.00：2025年就业160,200人，2035年预计143,400人；2025—2035年变化-10%，年均空缺11,200。BLS解释空缺来自转岗或退出劳动力市场的替换需求；总体预测不等于个人录用概率或生成式AI因果实测。美国Regulation F §§1006.1—2适用于符合定义的debt collector及主要为个人、家庭或家居用途产生的消费者债务；原债权人以自己名义收款的员工等有排除情形，不能覆盖所有商业账款或催收员。具体业务还须核州法及其他适用规则。",
+              "中国银行业协会指引为行业自律：第3—4条适用于会员单位的信用卡与个人消费贷款，外部机构要求应写入委托协议，其他个人贷款可参考；1月30日发布消息与4月8日全文网页日期须区分。第13条未经同意禁22:00至次日8:00电话、外访及其他催收；第14条未接通时同一联系方式当日尝试不宜超过6次，另有约定除外；第17条严禁对无关第三人催收，联系获取信息另有失联条件、信息边界和明确拒绝后的限制。在该协会指引适用范围内，第18条只用会员单位指定还款渠道；第20条电话全程录音；第22条外访不少于两人、出示证明并全程录音或录像；第25(六)项禁止外部机构未经会员同意用私人手机/社交软件发送催收信息，第25(七)项禁止未经同意进入住宅等私人场所或相关办公区域；不能省略适用主体、同意条件或把录音或录像写成两者同时必备。官方平台显示GB/T45251-2025《互联网金融 个人网络消费信贷 贷后催收风控指引》为现行推荐性国家标准，2025-02-28发布并实施，主管/归口为中国人民银行。本轮仅读到官方元数据，未取得全文，不能据此声称全国所有催收都必须执行其量化条款。法院公开法条载刑法293条之一针对高利放贷等产生的非法债务，且相关暴力、胁迫、限制自由、入侵住宅、恐吓跟踪骚扰等达到情节严重条件；不能把它当全部合法债务催收的同一罪名，也不能把合法债权当作暴力或侵权免责。中国职业工资精确条目仍未取得，行业均值不作个人报价。",
               "操作建议：入职前把「学历／职业培训／行业认证／机构岗前培训／系统与渠道权限／联系与减免与停催与征信与移送授权／个人信息与记录留存要求」分列成一张表，逐项写明来源与资料期与法域；无法核实的项留空并标记为证据不足，不用推测填补。"
             ]
           },
           "id": "bill-and-account-collectors.path.credential-boundary.1",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "bls-ooh-current",
+            "nist",
+            "census",
+            "cn-bank-full",
+            "cn-standard-current",
+            "regf-coverage",
+            "arxiv",
+            "editor"
           ],
           "title": "资格边界",
           "type": "notice"
@@ -30050,13 +30074,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：O*NET 把 43-3011.00（Bill and Account Collectors）列为 Job Zone 1–2（SVP 低于 6.0），学历构成为要求高中文凭或同等学历 48%、要求上过大学但无学位 27%、要求学士学位 21%；该区职业的部分岗位几乎无需先前经验，其他岗位需要数月到一年经验，在岗训练从几天到一年。O*NET 培训页面显示该职业的培训项目学科方向为 Banking and Financial Support Services（含不足一年证书与副学士两类结业层级）；认证页面列出 7 项国家认证（6 项由 ACA International 管理，1 项 Certified Professional Biller 由 AAPC 管理）。美国侧催收行为受《公平催收实务法》（FDCPA，15 U.S.C. §§1692-1692p）与 CFPB 条例 F（12 CFR Part 1006）约束，行业侧还有 ACA International 的行业准则与认证；任何一项都不构成免于法域约束的空间。"
+              "美国O*NET教育48%高中、27%上过大学无学位、21%学士，是新聘人员要求的调查回复，不是全体从业者学历分布。BLS另描述通常至少高中、入职后培训，含软件、联邦及州催收法规和谈判。Job Zone1—2的几天至一年训练是分区说明，不是本职业每个雇主培训承诺。O*NET当前培训目录显示139个相关Banking and Financial Support Services项目，含不足一年证书、副学士、学士等，不止原稿两类层级；IPEDS院校目录2025—26、完成者2024—25，不代表当前招生或本职业统一门槛。认证页显示7条记录，6条为Association of Credit and Collection Professionals、1条AAPC的Certified Professional Biller，其中Compliance/Complaince近名条目并存；不能当7种独立法定执业许可。"
             ]
           },
           "id": "bill-and-account-collectors.path.career-path-block.20",
           "source_refs": [
             "onet",
-            "onet"
+            "bls-ooh-current",
+            "nist",
+            "census"
           ],
           "type": "prose"
         },
@@ -30065,14 +30091,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界：学历、职业培训、行业认证（如 ACA International 的 Professional Collection Specialist 与 Credit and Collection Compliance Officer）、雇主任用、岗位内部的联系与减免与停催与征信报送与账户移交授权、以及适用法域对联系对象与时间与频次与个人信息处理的要求是不同状态，任何一项都不能由另一项自动推出；O*NET 认证页面只列出 7 项国家认证且明确不等于执业许可证或雇主任命。同时注意：本页工资与就业为本职业单列口径，且就业预测为下降（就业趋势页 -11%，166,900 → 149,400），与仍存在替代性空缺并不矛盾。中国大陆侧催收行为还受贷后催收国家标准与行业自律指引约束，并且《中华人民共和国刑法》第二百九十三条之一对催收非法债务的行为规定了刑事责任。"
+              "学历、培训、认证、雇主任用、系统权限及机构处置授权分别核，不能互相自动推出。美国43-3011.00：2025年就业160,200人，2035年预计143,400人；2025—2035年变化-10%，年均空缺11,200。BLS解释空缺来自转岗或退出劳动力市场的替换需求；总体预测不等于个人录用概率或生成式AI因果实测。中国银行业协会指引为行业自律：第3—4条适用于会员单位的信用卡与个人消费贷款，外部机构要求应写入委托协议，其他个人贷款可参考；1月30日发布消息与4月8日全文网页日期须区分。第13条未经同意禁22:00至次日8:00电话、外访及其他催收；第14条未接通时同一联系方式当日尝试不宜超过6次，另有约定除外；第17条严禁对无关第三人催收，联系获取信息另有失联条件、信息边界和明确拒绝后的限制。官方平台显示GB/T45251-2025《互联网金融 个人网络消费信贷 贷后催收风控指引》为现行推荐性国家标准，2025-02-28发布并实施，主管/归口为中国人民银行。本轮仅读到官方元数据，未取得全文，不能据此声称全国所有催收都必须执行其量化条款。法院公开法条载刑法293条之一针对高利放贷等产生的非法债务，且相关暴力、胁迫、限制自由、入侵住宅、恐吓跟踪骚扰等达到情节严重条件；不能把它当全部合法债务催收的同一罪名，也不能把合法债权当作暴力或侵权免责。"
             ]
           },
           "id": "bill-and-account-collectors.path.career-path-block.21",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "editor",
+            "ep-current",
+            "cn-bank-full",
+            "cn-standard-current",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -30081,14 +30109,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域：美国（O*NET 43-3011.00 与雇主人事与机构催收规程；《公平催收实务法》FDCPA 与 CFPB 条例 F 规定与债务催收有关的沟通、对特定行为的禁止、核验信息、超过诉讼时效的债务、债务争议与记录保存；O*NET 该职业属 Job Zone 1–2、未标注 Bright Outlook）；中国大陆侧为《中华人民共和国消费者权益保护法》等消费者保护规则、贷后催收国家标准与中国银行业协会《金融机构个人消费类贷款催收工作指引（试行）》（2026-01-30 发布，七章五十四条），以及《中华人民共和国刑法》第二百九十三条之一；本页不提供任何催收方法或合规判定的替代结论。"
+              "美国Regulation F §§1006.1—2适用于符合定义的debt collector及主要为个人、家庭或家居用途产生的消费者债务；原债权人以自己名义收款的员工等有排除情形，不能覆盖所有商业账款或催收员。具体业务还须核州法及其他适用规则。中国银行业协会指引为行业自律：第3—4条适用于会员单位的信用卡与个人消费贷款，外部机构要求应写入委托协议，其他个人贷款可参考；1月30日发布消息与4月8日全文网页日期须区分。第13条未经同意禁22:00至次日8:00电话、外访及其他催收；第14条未接通时同一联系方式当日尝试不宜超过6次，另有约定除外；第17条严禁对无关第三人催收，联系获取信息另有失联条件、信息边界和明确拒绝后的限制。官方平台显示GB/T45251-2025《互联网金融 个人网络消费信贷 贷后催收风控指引》为现行推荐性国家标准，2025-02-28发布并实施，主管/归口为中国人民银行。本轮仅读到官方元数据，未取得全文，不能据此声称全国所有催收都必须执行其量化条款。法院公开法条载刑法293条之一针对高利放贷等产生的非法债务，且相关暴力、胁迫、限制自由、入侵住宅、恐吓跟踪骚扰等达到情节严重条件；不能把它当全部合法债务催收的同一罪名，也不能把合法债权当作暴力或侵权免责。"
             ]
           },
           "id": "bill-and-account-collectors.path.career-path-block.22",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "regf-coverage",
+            "cn-bank-full",
+            "cn-standard-current",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -30126,12 +30155,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的学历构成与经验与培训安排。"
+              "O*NET给新聘学历要求调查与Job Zone分区说明；BLS另给本职业典型高中学历与岗后培训，不把分区年限当某雇主承诺。"
             ]
           },
           "id": "bill-and-account-collectors.path.career-path-block.25",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -30140,12 +30170,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明培训与教育信息入口（学科方向为 Banking and Financial Support Services），不构成录用门槛或授权。"
+              "O*NET当前培训目录显示139个相关Banking and Financial Support Services项目，含不足一年证书、副学士、学士等，不止原稿两类层级；IPEDS院校目录2025—26、完成者2024—25，不代表当前招生或本职业统一门槛。认证页显示7条记录，6条为Association of Credit and Collection Professionals、1条AAPC的Certified Professional Biller，其中Compliance/Complaince近名条目并存；不能当7种独立法定执业许可。"
             ]
           },
           "id": "bill-and-account-collectors.path.career-path-block.26",
           "source_refs": [
-            "onet"
+            "nist",
+            "census"
           ],
           "type": "prose"
         },
@@ -30154,7 +30185,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆贷后催收规范与消费者保护的适用范围与证据边界。"
+              "美国职业认证检索目录；目录记录不证明中国许可、普遍准入、晋升或薪资收益，完整条件与费用另核。"
             ]
           },
           "id": "bill-and-account-collectors.path.career-path-block.27",
@@ -31152,14 +31183,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：O*NET 就业趋势页按本职业单列口径给出2024 年在岗 166,900 人、2034 年约 149,400 人（2024—2034 年 -11%，标签为下降（-1% 或更低））、预测期年均职位空缺约 13,700（含增长与替换）。负增长与仍存在空缺并不矛盾：空缺主要来自替代需求（从业者转岗或退出劳动力市场），而不是岗位扩张。"
+              "美国43-3011.00：2025年就业160,200人，2035年预计143,400人；2025—2035年变化-10%，年均空缺11,200。BLS解释空缺来自转岗或退出劳动力市场的替换需求；总体预测不等于个人录用概率或生成式AI因果实测。"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "ep-current",
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -31182,12 +31212,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024 年"
+              "2025年"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31196,12 +31226,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为 O*NET 就业趋势页按本职业给出的在岗人数；该职业的就业受机构外包与业务周期影响，个别机构或区域的招聘需求与全国口径差异可能很大。"
+              "美国本职业就业规模，不外推中国或个人招聘。"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31252,12 +31282,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "166,900 人（本职业单列口径）"
+              "160,200人（2025，美国本职业）"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31280,12 +31310,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年"
+              "2025—2035年"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31294,12 +31324,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页按本职业口径给出 2024—2034 年 -11%（下降）；预测期年均职位空缺约 13,700（含增长与替换）。需求还受信贷与消费规模、机构外包与集中化、自动化外呼与自助还款与自助对账的采用、监管合规成本与投诉治理要求影响；总体负增长意味着新进入者更需要靠合规能力与专精方向选择岗位。"
+              "美国43-3011.00：2025年就业160,200人，2035年预计143,400人；2025—2035年变化-10%，年均空缺11,200。BLS解释空缺来自转岗或退出劳动力市场的替换需求；总体预测不等于个人录用概率或生成式AI因果实测。BLS预计增强软件与自动呼叫提升生产率、减少所需员工，同时各类债务仍带来需求。这是预测解释；本轮没有生成式AI净因果、外包/监管成本独立影响量。"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "bls-ooh-current"
           ],
           "type": "prose"
         },
@@ -31308,12 +31339,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "预测不能合并解读为个人录用保证，也不能推导该职业的精确增幅。"
+              "可报告总体预测-10%，不能用于某雇主或个人招聘概率，也不等于生成式AI净效应。"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31350,12 +31381,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "下降（年均职位空缺约 13,700，本职业单列口径）"
+              "-10%；年均空缺11,200（2025—2035，美国本职业）"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31462,7 +31493,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明本职业单列口径的就业规模字段。"
+              "美国职业摘要支持身份、职责与相应统计字段；工资、就业、行业的精确或父职业边界分别保留，不证明中国资格或个人权限。"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.30",
@@ -31476,12 +31507,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明本职业单列口径的就业与 2024—2034 年预测（下降）。"
+              "行业页当前列行政支持30%、金融保险23%、医疗社会援助11%、其他36%，未单列资料年。行业份额不代表行业工资或个人岗位归属。"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.31",
           "source_refs": [
-            "onet"
+            "ep-current"
           ],
           "type": "prose"
         },
@@ -31490,7 +31521,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆行业与岗位类别代理口径与证据边界，不提供本职业数值。"
+              "美国43-3011.00：2025年就业160,200人，2035年预计143,400人；2025—2035年变化-10%，年均空缺11,200。BLS解释空缺来自转岗或退出劳动力市场的替换需求；总体预测不等于个人录用概率或生成式AI因果实测。不是中国趋势、个人录用率或当前广告量。"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.32",
@@ -31504,7 +31535,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于职业身份与官方职责描述。"
+              "工资页支持本页所列美国职业或父职业工资分位与资料期；非个人实发、起薪或中国职业工资。"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.33",
@@ -31548,13 +31579,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离最近：同属账户与账务处理，但从对外催收联系转向内部录入与对账。"
+              "编辑比较：账单过账同涉账户与账务，但转向录入及对账；未取得转岗距离、成功率或用时数据。"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls-ooh-current",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31593,13 +31624,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属客户沟通，但债权主张与合规边界不同。"
+              "编辑比较：客户服务同涉沟通，但产品/服务处理与债权催收的对象及权限不同；未取得转岗距离或成功率。"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.39",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls-ooh-current",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31638,13 +31669,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属账务工作，但对象从催收账户转向账簿与凭证与报表。"
+              "编辑比较：簿记会计审计文员转向账簿、凭证及报表；未取得转岗距离或成功率。"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.42",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls-ooh-current",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31683,13 +31714,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属信用环节，但从放款后转向放款前。"
+              "编辑比较：信贷核查转向放款前，须再核目标岗位信用资料及审批流程；未取得距离或成功率数据。"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.45",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31728,13 +31759,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属金融场景，但作业方式从电话与函件转向柜面交易。"
+              "编辑比较：柜员转向柜面交易，须核现金、凭证及岗位权限；未取得距离或成功率数据。"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.48",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31772,12 +31803,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属债务议题，但立场与授权从债权人一侧转向债务人一侧。"
+              "编辑比较：信贷咨询偏债务管理建议，与代表债权机构催收职责不同；未取得距离或成功率数据。"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.51",
           "source_refs": [
-            "onet"
+            "bls-ooh-current",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31816,13 +31848,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属单据与账户处理，但法律依据与流程不同。"
+              "编辑比较：保险理赔处理涉及保险条款与理赔流程，不因有催收经验就具备这些能力；未取得距离或成功率数据。"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.54",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31861,13 +31893,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属征收与追缴场景，但法律依据与主体从商业债权转向税收征管。"
+              "编辑比较：税务征收依据税法及政府职权，不等同商业债权催收；未取得距离或成功率数据。"
             ]
           },
           "id": "bill-and-account-collectors.market-signals.market-signal-card.57",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls-ooh-current",
+            "editor"
           ],
           "type": "prose"
         }
@@ -31977,14 +32009,26 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源：O*NET 43-3011.00 职业摘要、详细资料、自定义职业档案、技术清单、行业分布、认证发现、培训与教育信息、全国工资分位与就业趋势页面；美国联邦贸易委员会（FTC）的《公平催收实务法》条文页面；美国消费者金融保护局（CFPB）条例 F（12 CFR Part 1006）页面；国家统计局《2025 年城镇单位就业人员年平均工资情况》；中国银行业协会《金融机构个人消费类贷款催收工作指引（试行）》；《中华人民共和国消费者权益保护法》（国家市场监督管理总局网站公开文本）；《中华人民共和国刑法》第二百九十三条之一（法院公开栏目的法条链接与法官说法）。"
+              "主要来源为O*NET本职业详情、工资/趋势/行业/招聘广告/培训认证目录，BLS职业展望手册及OEWS填报工资定义；FTC法律介绍页是摘要，不是法规全文。法律细项读CFPB Regulation F对应条文。中国读统计局2025工资表和工资总额定义、银行业协会54条全文、消费者法公开文本及法院所附293条之一；GB/T45251只取得官方元数据。"
             ]
           },
           "id": "bill-and-account-collectors.sources.source-card.2",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "bls-ooh-current",
+            "oews-pay-definition",
+            "nbs",
+            "cn-pay-definition",
+            "health",
+            "regf-coverage",
+            "regf-contact",
+            "regf-harassment",
+            "regf-disputes",
+            "regf-records",
+            "cn-bank-full",
+            "cn-standard-current",
+            "archivists",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -31993,12 +32037,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：O*NET 页面为 2026 年更新；工资分位为 2025 年 OEWS（本职业单列口径，时薪与年薪）；O*NET 就业与预测为 2024—2034 年（下降（-1% 或更低），就业趋势页 -11%）；国家统计局城镇单位工资为 2025 年、2026-05-15 发布；中国银行业协会催收工作指引为 2026-01-30 发布并施行；CFPB 条例 F 最近修订于 2023-04-19；《中华人民共和国刑法》第二百九十三条之一由《刑法修正案（十一）》（2020-12-26 通过、2021-03-01 施行）第三十四条增设。"
+              "工资2025OEWS；美国就业2025—2035；O*NET页脚2026-10-06更新、当前访问2026-10-09。行业页未单列数据年；招聘技术来自2025全年美国广告；培训IPEDS2025—26目录/2024—25完成者。协会1月30日发布消息及4月8日全文网页日期区分；第54条规定自发布日起施行。Regulation F引用当前条文，不据目录单个修订日期宣称所有条文统一最近修订。GB/T45251-2025发布/实施均2025-02-28，仅元数据。"
             ]
           },
           "id": "bill-and-account-collectors.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "ep-current",
+            "hr",
+            "nist",
+            "cn-bank-full",
+            "cn-standard-current",
+            "regf-coverage"
           ],
           "type": "prose"
         },
@@ -32007,13 +32056,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "使用说明：① 职业身份与任务与工作情境与技能与知识为 O*NET 43-3011.00 本职业单列口径；② 工资、就业与行业数据在 O*NET 页面上亦为本职业单列口径，未标注取自其他职业；该职业在 O*NET 未标注 Bright Outlook，就业预测为下降，与仍存在替代性空缺并不矛盾；③ 中国大陆未取得本职业精确职业工资条目，本页只展示明确标注行业与岗位类别范围的官方代理（行业门类平均与行业内的岗位类别平均），并说明不能用于估算个人报价；④ 催收行为在美国受 FDCPA 与 CFPB 条例 F 约束，在中国大陆受消费者权益保护规则与贷后催收规范约束，本页不构成任何具体联系行为的合法性结论，也不提供任何催收方法或话术。"
+              "美国职业数据与中国行业均值不同；中国精确职业工资及具体招聘、人格效度、AI采用效果仍有缺口。美国Regulation F §§1006.1—2适用于符合定义的debt collector及主要为个人、家庭或家居用途产生的消费者债务；原债权人以自己名义收款的员工等有排除情形，不能覆盖所有商业账款或催收员。具体业务还须核州法及其他适用规则。中国银行业协会指引为行业自律：第3—4条适用于会员单位的信用卡与个人消费贷款，外部机构要求应写入委托协议，其他个人贷款可参考；1月30日发布消息与4月8日全文网页日期须区分。第13条未经同意禁22:00至次日8:00电话、外访及其他催收；第14条未接通时同一联系方式当日尝试不宜超过6次，另有约定除外；第17条严禁对无关第三人催收，联系获取信息另有失联条件、信息边界和明确拒绝后的限制。官方平台显示GB/T45251-2025《互联网金融 个人网络消费信贷 贷后催收风控指引》为现行推荐性国家标准，2025-02-28发布并实施，主管/归口为中国人民银行。本轮仅读到官方元数据，未取得全文，不能据此声称全国所有催收都必须执行其量化条款。法规条文不提供个人处置授权，编辑试验与岗位核对建议不冒充现行机构制度。"
             ]
           },
           "id": "bill-and-account-collectors.sources.source-card.4",
           "source_refs": [
-            "onet",
-            "onet"
+            "regf-coverage",
+            "cn-bank-full",
+            "cn-standard-current",
+            "nbs",
+            "editor"
           ],
           "type": "prose"
         }
@@ -32136,14 +32188,14 @@
                 "url": "https://www.onetonline.org/link/summary/43-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "official wage percentiles",
                   "May 2025（OEWS）；访问 2026-09-15"
                 ],
-                "evidence_type": "official wage percentiles",
+                "evidence_type": "official wage statistics",
                 "id": "oews",
-                "limitation": "页面首行为该职业本身，未标注取自其他职业；中位数不是起薪，也不是收入承诺，绩效奖金与佣金结构不在该口径内。",
+                "limitation": "OEWS统计受雇者税前直时工资，纳入佣金、激励工资和生产奖金等，排除加班及非生产奖金等；没有公布本职业各项薪酬构成，不能写成排除所有绩效或提成。外包公司的受雇员工可在其雇主统计中，自雇经营收入与公司服务结算额不等于员工工资。",
                 "market": "美国",
                 "name": "O*NET 展示的 BLS 2025 年工资分位（43-3011.00）",
                 "period": "May 2025（OEWS）；访问 2026-09-15",
@@ -32175,7 +32227,7 @@
                 ],
                 "evidence_type": "official industry self-regulation",
                 "id": "cnclass",
-                "limitation": "共七章五十四条，适用于会员单位对信用卡与个人消费贷款的催收以及其委托的外部催收机构：明确未经债务人同意严禁在每日 22:00 至次日 8:00 进行电话与外访及其他催收；债务人电话未接通时对同一联系方式当日尝试拨打次数不宜超过 6 次；对催收时间与合理频次与联系信息获取渠道与规范联系第三人作出量化规定；列明催收禁止行为；对外部催收机构实行白名单管理与公示并禁止转包；要求电话催收全程录音与外访不少于两人且出示证件与全程录音录像；对人工智能技术应用作出规范；《中国银行业协会信用卡催收工作指引（试行）》同步废止。本页只引用其适用范围与行为边界，不引用具体话术，也不提供任何规避监管或向第三人施压的方法。",
+                "limitation": "共七章五十四条，适用于会员单位对信用卡与个人消费贷款的催收以及其委托的外部催收机构：明确未经债务人同意严禁在每日 22:00 至次日 8:00 进行电话与外访及其他催收；债务人电话未接通时对同一联系方式当日尝试拨打次数不宜超过 6 次；对催收时间与合理频次与联系信息获取渠道与规范联系第三人作出量化规定；列明催收禁止行为；对外部催收机构实行白名单管理与公示并禁止转包；要求电话催收全程录音与外访不少于两人且出示证件与全程录音或录像；对人工智能技术应用作出规范；《中国银行业协会信用卡催收工作指引（试行）》同步废止。本页只引用其适用范围与行为边界，不引用具体话术，也不提供任何规避监管或向第三人施压的方法。",
                 "market": "中国大陆",
                 "name": "中国银行业协会《金融机构个人消费类贷款催收工作指引（试行）》（2026-01-30 发布）",
                 "period": "2026-01-30 发布并施行；访问 2026-09-15",
@@ -32200,14 +32252,14 @@
                 "url": "https://www.onetonline.org/link/summary/43-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "occupation details",
                   "2026 年更新页面；访问 2026-09-15"
                 ],
-                "evidence_type": "occupation details",
+                "evidence_type": "official work context data",
                 "id": "facilities",
-                "limitation": "工作情境字段为受访比例，不能推导个人岗位条件；该页 57 项工作情境均给出百分比或频率，其中多项为「从不」或低频率。",
+                "limitation": "57项工作情境包含百分比及回复等级，不是工作伤病发生率。",
                 "market": "美国",
                 "name": "O*NET 43-3011.00 详细资料（工作情境与工作活动）",
                 "period": "2026 年更新页面；访问 2026-09-15",
@@ -32232,30 +32284,30 @@
                 "url": "https://www.onetonline.org/link/summary/43-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "technology signals",
                   "2026 年更新页面；访问 2026-09-15"
                 ],
-                "evidence_type": "technology signals",
+                "evidence_type": "official job advertisement software signal",
                 "id": "hr",
-                "limitation": "页面列出 8 项软件技能并标注热门技术：Microsoft Excel 27%、Microsoft Office 21%、Microsoft Outlook 12%、SAP 5%、Microsoft Word 5%、Microsoft PowerPoint 4%、Intuit QuickBooks 1%、MEDITECH software 未公布比例；出现比例来自招聘公告，不代表岗位采用率或自动化程度。",
+                "limitation": "O*NET2025全年美国Lightcast招聘广告：Excel27%、Office21%、Outlook12%、SAP5%、Word5%、PowerPoint4%、QuickBooks1%、MEDITECH未给比例；前5项标In Demand，表示广告提及而非劳动市场短缺、AI采用率或每个岗位必需。",
                 "market": "美国",
                 "name": "O*NET 43-3011.00 技术清单（热门技术信号）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2025年美国招聘广告；2026-10-09访问",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/43-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "official federal statute summary",
                   "页面现行版本；访问 2026-09-15"
                 ],
-                "evidence_type": "official federal statute summary",
+                "evidence_type": "official statute overview",
                 "id": "health",
-                "limitation": "说明第三方催收机构在为个人与家庭与家用目的产生的消费债务催收时，不得使用欺骗性或滥用的手段：不得在不当时间联系债务人、不得反复拨打电话骚扰、不得威胁并不打算采取的法律行动、不得向他人透露债务的存在。该页为美国联邦法口径，不构成任何具体行为的合法性结论，也不给予个人执业授权。",
+                "limitation": "FTC概述第三方消费者债务催收限制，不是FDCPA全文或所有催收活动通则。",
                 "market": "美国",
                 "name": "美国《Fair Debt Collection Practices Act》（FDCPA，15 U.S.C. §§1692-1692p，Title VIII of the Consumer Credit Protection Act）",
                 "period": "页面现行版本；访问 2026-09-15",
@@ -32296,30 +32348,30 @@
                 "url": "https://www.onetonline.org/link/summary/43-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "training information",
                   "2026 年更新页面；访问 2026-09-15"
                 ],
-                "evidence_type": "training information",
+                "evidence_type": "official training directory",
                 "id": "nist",
-                "limitation": "页面列出该职业的培训项目，学科方向为 Banking and Financial Support Services（含不足一年证书与副学士两类结业层级）；培训项目不构成执业许可或雇主任命。",
+                "limitation": "O*NET当前培训目录显示139个相关Banking and Financial Support Services项目，含不足一年证书、副学士、学士等，不止原稿两类层级；IPEDS院校目录2025—26、完成者2024—25，不代表当前招生或本职业统一门槛。认证页显示7条记录，6条为Association of Credit and Collection Professionals、1条AAPC的Certified Professional Biller，其中Compliance/Complaince近名条目并存；不能当7种独立法定执业许可。",
                 "market": "美国",
                 "name": "O*NET 43-3011.00 培训与教育信息",
                 "period": "2026 年更新页面；访问 2026-09-15",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "related_programs",
                 "url": "https://www.onetonline.org/link/localtraining/43-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "official criminal provision reference",
                   "《刑法修正案（十一）》（2020-12-26 通过、2021-03-01 施行）第三十四条增设；访问 2026-09-15"
                 ],
-                "evidence_type": "official criminal provision reference",
+                "evidence_type": "official court case and quoted criminal provision",
                 "id": "arxiv",
-                "limitation": "条文为：有下列情形之一，催收高利放贷等产生的非法债务，情节严重的，处三年以下有期徒刑、拘役或者管制，并处或者单处罚金：（一）使用暴力、胁迫方法的；（二）限制他人人身自由或者侵入他人住宅的；（三）恐吓、跟踪、骚扰他人的。该条针对非法债务的催收行为，本页只引用条文与适用范围，不提供任何催收方法，也不把条文结论套用到合法债务的合规催收上。",
+                "limitation": "法院公开法条载刑法293条之一针对高利放贷等产生的非法债务，且相关暴力、胁迫、限制自由、入侵住宅、恐吓跟踪骚扰等达到情节严重条件；不能把它当全部合法债务催收的同一罪名，也不能把合法债权当作暴力或侵权免责。",
                 "market": "中国大陆",
                 "name": "《中华人民共和国刑法》第二百九十三条之一（催收非法债务罪）—— 法院法条链接与法官说法",
                 "period": "《刑法修正案（十一）》（2020-12-26 通过、2021-03-01 施行）第三十四条增设；访问 2026-09-15",
@@ -32344,14 +32396,14 @@
                 "url": "https://www.onetonline.org/link/summary/43-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "occupation details",
                   "2026 年更新页面；访问 2026-09-15"
                 ],
-                "evidence_type": "occupation details",
+                "evidence_type": "official worker requirements data",
                 "id": "employer",
-                "limitation": "用于基本技能与可迁移技能与知识口径；该页知识字段列出 33 项中的 17 项并给出分数，「工作风格与能力字段本页未取得」。",
+                "limitation": "详细页实际有18项工作风格：可靠性82、注意细节76、自我控制75、诚信72、坚持71、压力耐受70；52项能力中口头理解/表达69、清晰发音/言语识别/书面理解66、书面表达63、数字运算44、数学推理41；兴趣C100、E56、S38、R18、A0、I0。分数描述美国职业特征，不是个人录用阈值、测试成绩或发生百分比。知识33项均有分数。",
                 "market": "美国",
                 "name": "O*NET 43-3011.00 详细资料（技能与知识）",
                 "period": "2026 年更新页面；访问 2026-09-15",
@@ -32392,17 +32444,17 @@
                 "url": "https://www.onetonline.org/link/localwages/43-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "industry distribution",
-                  "2024 年；访问 2026-09-15"
+                  "当前行业页未单列数据年；2026-10-09访问"
                 ],
-                "evidence_type": "industry distribution",
+                "evidence_type": "official industry distribution",
                 "id": "r2-pay-2",
-                "limitation": "行政与支持服务 30%、金融与保险 22%、医疗保健与社会援助 11%、其他行业（含专业科学与技术服务与企业与企业管理）37%；行业分布描述统计分类，不提供行业工资水平。",
+                "limitation": "行业页行政支持30%、金融保险23%、医疗社会援助11%、其他36%，未单列数据年，不提供行业工资。",
                 "market": "美国",
                 "name": "O*NET 43-3011.00 行业分布",
-                "period": "2024 年；访问 2026-09-15",
+                "period": "当前行业页未单列数据年；2026-10-09访问",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/43-3011.00"
@@ -32424,19 +32476,19 @@
                 "url": "https://www.onetonline.org/link/localtrends/43-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "certification information",
                   "2026 年更新页面；访问 2026-09-15"
                 ],
-                "evidence_type": "certification information",
+                "evidence_type": "official certification directory",
                 "id": "census",
-                "limitation": "页面列出 7 项国家认证，其中 6 项由 Association of Credit and Collection Professionals（ACA International）管理（Credit and Collection Compliance Officer、Professional Collection Specialist、Health Care Collection Management、Credit and Collection Complaince Officer、Collection Industry Professional、Professional Collection Manager），1 项由 American Academy of Professional Coders 管理（Certified Professional Biller）；认证是能力证明，不等于执业许可证或雇主任命。",
+                "limitation": "O*NET当前培训目录显示139个相关Banking and Financial Support Services项目，含不足一年证书、副学士、学士等，不止原稿两类层级；IPEDS院校目录2025—26、完成者2024—25，不代表当前招生或本职业统一门槛。认证页显示7条记录，6条为Association of Credit and Collection Professionals、1条AAPC的Certified Professional Biller，其中Compliance/Complaince近名条目并存；不能当7种独立法定执业许可。",
                 "market": "美国",
                 "name": "O*NET 43-3011.00 认证发现（国家认证）",
                 "period": "2026 年更新页面；访问 2026-09-15",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "related_credentials",
                 "url": "https://www.onetonline.org/link/localcert/43-3011.00"
               },
               {
@@ -32486,6 +32538,182 @@
                 "publisher": "中华人民共和国全国人民代表大会常务委员会（国家市场监督管理总局网站公开文本）",
                 "scope": "jurisdiction_specific",
                 "url": "https://www.samr.gov.cn/zfjcj/tzgg/art/2023/art_615af9ed6bcd4974bf853dd2e02bc663.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official employment trends",
+                  "2025—2035"
+                ],
+                "evidence_type": "official employment trends",
+                "id": "ep-current",
+                "limitation": "美国43-3011.00：2025年就业160,200人，2035年预计143,400人；2025—2035年变化-10%，年均空缺11,200。BLS解释空缺来自转岗或退出劳动力市场的替换需求；总体预测不等于个人录用概率或生成式AI因果实测。",
+                "market": "美国",
+                "name": "O*NET账单与账款催收员2025—2035就业趋势",
+                "period": "2025—2035",
+                "publisher": "O*NET / BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/43-3011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official occupation handbook",
+                  "2025工资/2025—2035预测；2026-08-27更新"
+                ],
+                "evidence_type": "official occupation handbook",
+                "id": "bls-ooh-current",
+                "limitation": "列美国雇主行业、各行业职业工资中位数、典型高中学历及岗后培训。预测软件与自动呼叫提升生产率，不是生成式AI的因果实测。",
+                "market": "美国",
+                "name": "BLS职业展望手册：Bill and Account Collectors",
+                "period": "2025工资/2025—2035预测；2026-08-27更新",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/office-and-administrative-support/bill-and-account-collectors.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "industry self-regulation full text",
+                  "2026-01-30发布消息；全文网页2026-04-08"
+                ],
+                "evidence_type": "industry self-regulation full text",
+                "id": "cn-bank-full",
+                "limitation": "中国银行业协会指引为行业自律：第3—4条适用于会员单位的信用卡与个人消费贷款，外部机构要求应写入委托协议，其他个人贷款可参考；1月30日发布消息与4月8日全文网页日期须区分。第13条未经同意禁22:00至次日8:00电话、外访及其他催收；第14条未接通时同一联系方式当日尝试不宜超过6次，另有约定除外；第17条严禁对无关第三人催收，联系获取信息另有失联条件、信息边界和明确拒绝后的限制。在该协会指引适用范围内，第18条只用会员单位指定还款渠道；第20条电话全程录音；第22条外访不少于两人、出示证明并全程录音或录像；第25(六)项禁止外部机构未经会员同意用私人手机/社交软件发送催收信息，第25(七)项禁止未经同意进入住宅等私人场所或相关办公区域；不能省略适用主体、同意条件或把录音或录像写成两者同时必备。",
+                "market": "中国大陆",
+                "name": "金融机构个人消费类贷款催收工作指引（试行）全文",
+                "period": "2026-01-30发布消息；全文网页2026-04-08",
+                "publisher": "中国银行业协会",
+                "scope": "institution_product_specific",
+                "url": "https://www.china-cba.net/Index/showw/catid/136/id/46479"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official recommended standard metadata",
+                  "2025-02-28发布及实施"
+                ],
+                "evidence_type": "official recommended standard metadata",
+                "id": "cn-standard-current",
+                "limitation": "官方平台显示GB/T45251-2025《互联网金融 个人网络消费信贷 贷后催收风控指引》为现行推荐性国家标准，2025-02-28发布并实施，主管/归口为中国人民银行。本轮仅读到官方元数据，未取得全文，不能据此声称全国所有催收都必须执行其量化条款。",
+                "market": "中国大陆",
+                "name": "GB/T45251-2025官方标准元数据",
+                "period": "2025-02-28发布及实施",
+                "publisher": "国家标准信息公共服务平台",
+                "scope": "product_specific",
+                "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=948DFC9B6663213A1FDD6B5C9F895B92"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official regulation full text",
+                  "当前法规页；2026-10-09访问"
+                ],
+                "evidence_type": "official regulation full text",
+                "id": "regf-coverage",
+                "limitation": "美国Regulation F §§1006.1—2适用于符合定义的debt collector及主要为个人、家庭或家居用途产生的消费者债务；原债权人以自己名义收款的员工等有排除情形，不能覆盖所有商业账款或催收员。具体业务还须核州法及其他适用规则。",
+                "market": "美国",
+                "name": "Regulation F §§1006.1—2适用范围及定义",
+                "period": "当前法规页；2026-10-09访问",
+                "publisher": "Consumer Financial Protection Bureau",
+                "scope": "jurisdiction_specific",
+                "url": "https://www.consumerfinance.gov/rules-policy/regulations/1006/2/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official regulation full text",
+                  "当前法规页；2026-10-09访问"
+                ],
+                "evidence_type": "official regulation full text",
+                "id": "regf-contact",
+                "limitation": "书面停联/拒付、第三人、时间地点、电子退出均有具体条件及例外；不是所有投诉永久停催。",
+                "market": "美国",
+                "name": "Regulation F §1006.6沟通规则",
+                "period": "当前法规页；2026-10-09访问",
+                "publisher": "Consumer Financial Protection Bureau",
+                "scope": "jurisdiction_specific",
+                "url": "https://www.consumerfinance.gov/rules-policy/regulations/1006/6/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official regulation full text",
+                  "当前法规页；2026-10-09访问"
+                ],
+                "evidence_type": "official regulation full text",
+                "id": "regf-harassment",
+                "limitation": "7日拨打及谈话后7日规则为针对特定人、特定债务的合规/违规推定，有排除及可反驳条件；低于次数仍可能整体骚扰。",
+                "market": "美国",
+                "name": "Regulation F §1006.14骚扰及沟通媒介",
+                "period": "当前法规页；2026-10-09访问",
+                "publisher": "Consumer Financial Protection Bureau",
+                "scope": "jurisdiction_specific",
+                "url": "https://www.consumerfinance.gov/rules-policy/regulations/1006/14/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official regulation full text",
+                  "当前法规页；2026-10-09访问"
+                ],
+                "evidence_type": "official regulation full text",
+                "id": "regf-disputes",
+                "limitation": "验证期内书面争议暂停该债务或争议部分催收至规定核验/重复争议通知；所有投诉不自动同等。",
+                "market": "美国",
+                "name": "Regulation F §1006.38债务争议响应",
+                "period": "当前法规页；2026-10-09访问",
+                "publisher": "Consumer Financial Protection Bureau",
+                "scope": "jurisdiction_specific",
+                "url": "https://www.consumerfinance.gov/rules-policy/regulations/1006/38/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official regulation full text",
+                  "当前法规页；2026-10-09访问"
+                ],
+                "evidence_type": "official regulation full text",
+                "id": "regf-records",
+                "limitation": "合规证据从开始催收到最后催收活动后三年；若录电话须存通话日起三年，本条不强制所有通话录音。",
+                "market": "美国",
+                "name": "Regulation F §1006.100记录留存",
+                "period": "当前法规页；2026-10-09访问",
+                "publisher": "Consumer Financial Protection Bureau",
+                "scope": "jurisdiction_specific",
+                "url": "https://www.consumerfinance.gov/rules-policy/regulations/1006/100/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official statistical wage definition",
+                  "2026-10-09访问"
+                ],
+                "evidence_type": "official statistical wage definition",
+                "id": "oews-pay-definition",
+                "limitation": "OEWS统计受雇者税前直时工资，纳入佣金、激励工资和生产奖金等，排除加班及非生产奖金等；没有公布本职业各项薪酬构成，不能写成排除所有绩效或提成。外包公司的受雇员工可在其雇主统计中，自雇经营收入与公司服务结算额不等于员工工资。",
+                "market": "美国",
+                "name": "OEWS雇主填报工资FAQ",
+                "period": "当前官方文本；2026-10-09访问",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "broad_statistical_definition",
+                "url": "https://www.bls.gov/respondents/oes/faqs.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "official statistical wage definition",
+                  "2026-10-09访问"
+                ],
+                "evidence_type": "official statistical wage definition",
+                "id": "cn-pay-definition",
+                "limitation": "国家统计局单位工资是税前工资总额的人均水平，含奖金及计件等劳动报酬和代扣个税、社保、公积金个人部分；不含股息与资本性收益等。该行业表没有本职业绩效/提成构成拆分，不能解释成不含全部奖金或提成。",
+                "market": "中国大陆",
+                "name": "关于工资总额组成的规定",
+                "period": "当前官方文本；2026-10-09访问",
+                "publisher": "国家统计局",
+                "scope": "broad_statistical_definition",
+                "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
               }
             ]
           },
@@ -33098,13 +33326,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "链接": {
-              "$link": "bill-and-account-collectors.ai-impact.ai-impact-table.9",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "entry": "link-8",
-              "field": "url"
-            }
+            "链接": "https://www.onetonline.org/link/summary/43-3011.00"
           },
           {
             "使用限制": {
@@ -33168,7 +33390,7 @@
               "$link": "bill-and-account-collectors.ai-impact.ai-impact-table.9",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
-              "entry": "link-10",
+              "entry": "link-14",
               "field": "url"
             }
           },
@@ -33197,13 +33419,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "链接": {
-              "$link": "bill-and-account-collectors.ai-impact.ai-impact-table.9",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "entry": "link-11",
-              "field": "url"
-            }
+            "链接": "https://www.onetonline.org/link/summary/43-3011.00"
           },
           {
             "使用限制": {
@@ -33234,7 +33450,7 @@
               "$link": "bill-and-account-collectors.ai-impact.ai-impact-table.9",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
-              "entry": "link-12",
+              "entry": "link-11",
               "field": "url"
             }
           }
@@ -33305,13 +33521,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "链接": {
-              "$link": "bill-and-account-collectors.ai-impact.ai-impact-table.9",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "entry": "link-14",
-              "field": "url"
-            },
+            "链接": "https://www.onetonline.org/link/hot_tech/43-3011.00",
             "问题": "现在入行需要会写代码吗？"
           },
           {
@@ -33826,7 +34036,7 @@
           "type": "prose"
         },
         "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为账单与账款催收员？教育、资格与职业发展路径",
+        "heading": "怎样成为账单与账款催收员？教育、资格与路径核对（含编辑建议）",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "bill-and-account-collectors.path.career-path-block.21",
@@ -34701,7 +34911,11 @@
             },
             "evidence_refs": [
               "onet",
-              "onet-context"
+              "onet-context",
+              "fdcpa",
+              "cn-bank-full",
+              "regf-contact",
+              "regf-disputes"
             ],
             "id": "scope-referral",
             "mitigation": {
@@ -34733,7 +34947,7 @@
             },
             "evidence_refs": [
               "onet",
-              "onet-context"
+              "cn-bank-full"
             ],
             "id": "crisis-escalation",
             "mitigation": {
@@ -34764,7 +34978,6 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
               "onet-context"
             ],
             "id": "record-material-privacy",
@@ -34780,7 +34993,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "长期伏案与电话作业与情绪耗竭"
+            "title": "坐姿、电话与冲突工作情境"
           },
           {
             "affected_roles": {
@@ -34797,7 +35010,7 @@
             },
             "evidence_refs": [
               "onet",
-              "onet-context"
+              "cn-bank-full"
             ],
             "id": "material-harm",
             "mitigation": {
@@ -34829,7 +35042,8 @@
             },
             "evidence_refs": [
               "onet",
-              "onet-context"
+              "cn-bank-full",
+              "regf-records"
             ],
             "id": "record-custody",
             "mitigation": {
@@ -34861,7 +35075,7 @@
             },
             "evidence_refs": [
               "onet",
-              "onet-context"
+              "cn-bank-full"
             ],
             "id": "supervision-referral",
             "mitigation": {
@@ -34995,6 +35209,54 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$link": "bill-and-account-collectors.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "revision-cn-bank-full",
+              "field": "url"
+            },
+            "id": "cn-bank-full",
+            "label": "中国银行业协会催收指引全文",
+            "scope": "对应指引或Regulation F条文，须核适用主体与条件。"
+          },
+          {
+            "href": {
+              "$link": "bill-and-account-collectors.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "revision-regf-contact",
+              "field": "url"
+            },
+            "id": "regf-contact",
+            "label": "Regulation F §1006.6",
+            "scope": "对应指引或Regulation F条文，须核适用主体与条件。"
+          },
+          {
+            "href": {
+              "$link": "bill-and-account-collectors.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "revision-regf-disputes",
+              "field": "url"
+            },
+            "id": "regf-disputes",
+            "label": "Regulation F §1006.38",
+            "scope": "对应指引或Regulation F条文，须核适用主体与条件。"
+          },
+          {
+            "href": {
+              "$link": "bill-and-account-collectors.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "revision-regf-records",
+              "field": "url"
+            },
+            "id": "regf-records",
+            "label": "Regulation F §1006.100",
+            "scope": "对应指引或Regulation F条文，须核适用主体与条件。"
           }
         ]
       },
@@ -35360,7 +35622,7 @@
             "scenario_heading": "账单与账款催收员在中国大陆通常从哪里起步？",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "学历背景",
-            "scenario_value_label": "常见岗位方向"
+            "scenario_value_label": "待核岗位方向（编辑建议）"
           },
           "us_growth": {
             "$item": "bill-and-account-collectors.china-salary.career-snapshot-primary-locale.58",
@@ -35465,7 +35727,7 @@
             }
           },
           {
-            "fact_ref": "us-employment-2025",
+            "fact_ref": "us-employment-revision-2025",
             "指标": "就业 · 就业规模",
             "数值": {
               "$item": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.19",
@@ -35481,7 +35743,7 @@
             }
           },
           {
-            "fact_ref": "us-growth-2025-2035",
+            "fact_ref": "us-growth-revision-2025-2035",
             "指标": "就业 · 增长率",
             "数值": {
               "$item": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.21",
@@ -35497,7 +35759,7 @@
             }
           },
           {
-            "fact_ref": "us-openings-2025-2035",
+            "fact_ref": "us-openings-revision-2025-2035",
             "指标": "就业 · 年均职位空缺",
             "数值": {
               "$item": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.23",
@@ -35584,7 +35846,7 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-finance-2025",
+            "fact_ref": "us-industry-business-support-revision-2025",
             "industry": {
               "$item": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -35605,7 +35867,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-professional-2025",
+            "fact_ref": "us-industry-credit-intermediation-revision-2025",
             "industry": {
               "$item": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -35626,7 +35888,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-localgov-2025",
+            "fact_ref": "us-industry-healthcare-revision-2025",
             "industry": {
               "$item": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -35647,7 +35909,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-education-2025",
+            "fact_ref": "us-industry-professional-revision-2025",
             "industry": {
               "$item": "bill-and-account-collectors.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -35716,7 +35978,7 @@
         },
         "outlook_heading": "美国就业前景",
         "outlook_period": {
-          "$fact": "us-growth-2025-2035",
+          "$fact": "us-growth-revision-2025-2035",
           "field": "period"
         },
         "wage_column_labels": [
@@ -37516,50 +37778,52 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "48,730美元/年（信贷中介及相关活动，2025本职业中位数）",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "账单与账款催收员",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业内本职业年工资中位数",
+        "occupation_scope": "美国43-3011；信贷中介及相关活动，不等同整个金融保险门类",
+        "period": "2025年；2026-10-09访问",
         "source_refs": [
-          "operations"
+          "bls-ooh-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "46,650美元/年（专业科学与技术服务，2025本职业中位数）",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
-        "occupation_scope": "账单与账款催收员",
-        "period": "不适用：来源未公布该字段",
+        "measure": "行业内本职业年工资中位数",
+        "occupation_scope": "美国43-3011；专业、科学与技术服务",
+        "period": "2025年；2026-10-09访问",
         "source_refs": [
-          "operations"
+          "bls-ooh-current"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "证据不足：本轮所读资料未取得地方政府行业内本职业工资；BLS已提供其他行业中位数",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
+        "measure": "行业内本职业工资缺口",
         "occupation_scope": "账单与账款催收员",
-        "period": "不适用：来源未公布该字段",
+        "period": "本轮未取得该行业数据",
         "source_refs": [
-          "operations"
+          "bls-ooh-current",
+          "editor"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足（O*NET 与 BLS 未公布该职业分行业工资中位数）",
+        "display_value": "证据不足：本轮所读资料未取得教育行业内本职业工资；BLS已提供其他行业中位数",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
-        "measure": "不适用：来源未公布该字段",
+        "measure": "行业内本职业工资缺口",
         "occupation_scope": "账单与账款催收员",
-        "period": "不适用：来源未公布该字段",
+        "period": "本轮未取得该行业数据",
         "source_refs": [
-          "operations"
+          "bls-ooh-current",
+          "editor"
         ]
       },
       {
@@ -37717,6 +37981,90 @@
         "source_refs": [
           "ep"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "160,200人",
+        "fact_id": "us-employment-revision-2025",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "账单与账款催收员（美国43-3011.00）",
+        "period": "2025年；访问2026-10-09",
+        "source_refs": [
+          "ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "-10%",
+        "fact_id": "us-growth-revision-2025-2035",
+        "market": "美国",
+        "measure": "就业变化率",
+        "occupation_scope": "账单与账款催收员（美国43-3011.00）",
+        "period": "2025—2035年；访问2026-10-09",
+        "source_refs": [
+          "ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "11,200个/年",
+        "fact_id": "us-openings-revision-2025-2035",
+        "market": "美国",
+        "measure": "预测年均职位空缺",
+        "occupation_scope": "账单与账款催收员（美国43-3011.00）",
+        "period": "2025—2035年；访问2026-10-09",
+        "source_refs": [
+          "ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "38,020美元/年",
+        "fact_id": "us-industry-business-support-revision-2025",
+        "market": "美国",
+        "measure": "行业内本职业年工资中位数",
+        "occupation_scope": "美国43-3011；商业支持服务",
+        "period": "2025年；访问2026-10-09",
+        "source_refs": [
+          "bls-ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "48,730美元/年",
+        "fact_id": "us-industry-credit-intermediation-revision-2025",
+        "market": "美国",
+        "measure": "行业内本职业年工资中位数",
+        "occupation_scope": "美国43-3011；信贷中介及相关活动",
+        "period": "2025年；访问2026-10-09",
+        "source_refs": [
+          "bls-ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "48,600美元/年",
+        "fact_id": "us-industry-healthcare-revision-2025",
+        "market": "美国",
+        "measure": "行业内本职业年工资中位数",
+        "occupation_scope": "美国43-3011；医疗保健与社会援助",
+        "period": "2025年；访问2026-10-09",
+        "source_refs": [
+          "bls-ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "46,650美元/年",
+        "fact_id": "us-industry-professional-revision-2025",
+        "market": "美国",
+        "measure": "行业内本职业年工资中位数",
+        "occupation_scope": "美国43-3011；专业、科学与技术服务",
+        "period": "2025年；访问2026-10-09",
+        "source_refs": [
+          "bls-ooh-current"
+        ]
       }
     ]
   },
@@ -37725,7 +38073,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 43-3011.00 · Job Zone 1–2 · 入门准备低",
@@ -37776,7 +38124,7 @@
       "text": "账单与账款催收员"
     }
   },
-  "source_content_sha256": "ed6406e2bb13a3ba9996f4fbb743af9380898730bf4a8187ac50d549e415b933",
+  "source_content_sha256": "a86b6f3f4414984536150058e3da5c9267e45f4faf511d6de0f6e7884f1ff3a9",
   "subject": {
     "canonical_slug": "bill-and-account-collectors",
     "name": "账单与账款催收员",

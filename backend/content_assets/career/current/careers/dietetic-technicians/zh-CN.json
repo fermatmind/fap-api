@@ -35,6 +35,39 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:r5-current-china-jiaojiang-featured-daily-2026": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-employment": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-high": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-identity": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-amusement": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-education": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-theater": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-low": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-median": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-openings": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -8971,20 +9004,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.05.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            {
-              "id": "project-data"
-            },
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.05.mitigation": {
         "ref": {
@@ -22781,12 +22802,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "膳食技术员的工作可分成三类相连但独立的工作面。第一类是观察、记录与筛查协助：按餐次观察并记录患者的进食量与进食方式，按规程测量并登记体重与相关指标，把变化、进展与饮食问题报告营养师；采集并评估个人饮食史，协助开展营养筛查与评估，整理出可供营养师判断的材料。第二类是膳食配置与食品安全执行：按食谱制作主餐并核算团体份量，按营养需求与既定指南协助计划菜单与膳食，按医嘱类别核对治疗饮食与特殊膳食的配置与份量，规范管理医疗膳食业务，落实食品原料档案、餐具消毒、温度核对与食品留样等要求并记录。第三类是宣教、协作与支持：按营养师确定的方案向患者与家属说明食物选择与准备与菜单规划要点，参加与其他医疗专业人员的跨学科会议，向其他相关服务转介患者以保持照护连续性，协助营养师研究食品与营养与食品服务系统，并参与入职与在职教育。三类工作面都在营养师监督与机构制度下推进，节奏由用餐时间、配餐班次与会议安排决定。"
+              "工作面包括监测报告、饮食史和营养评估、按指南菜单及膳食、食品生产/服务监督、职位描述及排班、配方分析、研究教育和跨学科协作。O*NET13任务10核心、3补充；成本核算、转介、演讲是补充而非每岗必须。中国临床职责另按人员资格与机构分工核。中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.answer",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -22921,12 +22943,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本表把本页职业与相邻岗位按核心目的、主要对象与依据、核心过程、主要产出、责任主体、协作与督导、结论边界七项逐一对照：本页职业（O*NET-SOC 29-2051.00）在注册营养师监督下协助食品服务与营养项目，负责执行与记录；膳食与营养师负责营养诊断、营养治疗与医学营养治疗的建议与处方；餐饮服务经理负责经营、人员与成本管理；厨师与配餐人员负责批量制作与出餐；护理助理负责患者日常照护与部分进食协助。比较时要以岗位职责、机构授权与所在地法规逐项核对，不能按岗位名称互换，也不能把执行职责读成诊断或处方权限。"
+              "本职业在营养师监督下协助营养与食品服务，任务还包括营养评估、食品生产监督及制定职位描述/排班，不只是配餐记录。相邻岗位按具体定义及法域比较，不能以名称推断所有人可诊断开处方或厨师从不作营养记录。中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.answer",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -22963,12 +22986,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的核心目的：膳食与营养师确定营养诊断与治疗方案；餐饮服务经理保证供餐体系运转与成本可控；厨师与配餐人员完成批量制作与出餐；护理助理完成患者日常照护与进食协助。"
+              "按美国相邻定义区分：膳食与营养师规划及开展食品服务/营养项目、促进健康及控制疾病；餐饮服务经理计划/指挥/协调食品饮料服务；厨师制作餐食；护理助理在现场持证护理人员监督下提供基本照护，包括喂食。定义不授予中国处方权，菜单和记录任务可能交叉，按实际岗位核。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.purpose.secondary",
           "source_refs": [
-            "onet"
+            "agent",
+            "enrichment",
+            "teacher",
+            "art",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -23005,12 +23032,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的对象与依据：营养诊断与治疗方案（临床营养指南与诊疗规范）；经营指标与人员排班（管理与成本制度）；菜品制作工艺与出餐节拍（食谱与卫生规范）；患者日常照护与进食协助（护理规范）。"
+              "按美国相邻定义区分：膳食与营养师规划及开展食品服务/营养项目、促进健康及控制疾病；餐饮服务经理计划/指挥/协调食品饮料服务；厨师制作餐食；护理助理在现场持证护理人员监督下提供基本照护，包括喂食。定义不授予中国处方权，菜单和记录任务可能交叉，按实际岗位核。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.inputs.secondary",
           "source_refs": [
-            "onet"
+            "agent",
+            "enrichment",
+            "teacher",
+            "art",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -23047,12 +23078,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的过程：评估与诊断并制定方案（营养师）；计划经营与排班与控本（餐饮服务经理）；备料与制作与出餐（厨师与配餐人员）；协助进食与日常照护（护理助理）。"
+              "按美国相邻定义区分：膳食与营养师规划及开展食品服务/营养项目、促进健康及控制疾病；餐饮服务经理计划/指挥/协调食品饮料服务；厨师制作餐食；护理助理在现场持证护理人员监督下提供基本照护，包括喂食。定义不授予中国处方权，菜单和记录任务可能交叉，按实际岗位核。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.process.secondary",
           "source_refs": [
-            "onet"
+            "agent",
+            "enrichment",
+            "teacher",
+            "art",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -23089,12 +23124,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的产出：营养诊断与治疗方案与营养处方（营养师）；经营与成本报表（餐饮服务经理）；出品菜品与出餐记录（厨师与配餐人员）；照护记录（护理助理）。"
+              "按美国相邻定义区分：膳食与营养师规划及开展食品服务/营养项目、促进健康及控制疾病；餐饮服务经理计划/指挥/协调食品饮料服务；厨师制作餐食；护理助理在现场持证护理人员监督下提供基本照护，包括喂食。定义不授予中国处方权，菜单和记录任务可能交叉，按实际岗位核。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.outputs.secondary",
           "source_refs": [
-            "onet"
+            "agent",
+            "enrichment",
+            "teacher",
+            "art",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -23117,12 +23156,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业人员对记录的真实完整、配置与核发环节的准确、以及食品安全与留样与消毒要求的落实负责，并在营养师监督与机构授权范围内工作；营养诊断与治疗方案由营养师或经培训的医师负责，不因执行岗位的名称而转移。"
+              "美国O*NET定义在营养师监督下协助食品服务及营养项目，任务包含营养评估，不统一缩为只记录；美国目标州及单位实际执业范围另核。中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.responsibility.primary",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -23131,12 +23171,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的责任主体：营养师对营养诊断与治疗方案负责；餐饮服务经理对经营与成本与人员管理负责；厨师与配餐人员对出品与卫生负责；护理助理对患者日常照护负责。"
+              "美国O*NET定义在营养师监督下协助食品服务及营养项目，任务包含营养评估，不统一缩为只记录；美国目标州及单位实际执业范围另核。中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.responsibility.secondary",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -23159,12 +23200,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "接受注册营养师的督导，与护理、临床科室、配餐与食品服务人员协作，参加跨学科会议并按机构流程转介患者；遇到超出授权或能力范围的操作（如肠内营养配制）先请示并接受培训后再执行。"
+              "美国定义在营养师监督下工作；培训、资格与实际职责一并核，不是仅请示并受训即可扩大医疗操作范围。中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.cooperation.primary",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -23201,12 +23243,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本页是美国 O*NET-SOC 29-2051.00 口径：准备层级为 Job Zone Three（中等准备，SVP 6.0 到低于 7.0），通常需要 1—2 年培训；从新入职者反馈看 35% 认为需要副学士或其他两年制学位、27% 认为需要中学后证书；雇主可能要求或优先考虑行业认证与注册，州层面的许可与认证要求因州而异。这些是美国口径，不等于中国大陆的营养专业技术人员工作范围与公共营养师职业技能等级认定，也不构成任何执业资质。"
+              "美国29-2051：O*NET Job Zone3、SVP6到低于7，组级1—2年准备描述非每个项目固定学制；学历35%副学士、27%高中后证书、15%部分大学未学位是受访者对新入职所需学历的意见，非新入职者或现有员工学历分布。BLS表1.2典型副学士、相关工作经验None、在岗训练None；不免教育内受监督实践或雇主培训。未核本职业实际注册学徒项目和全部州许可。 美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.boundary.primary",
           "source_refs": [
-            "onet"
+            "r5-bls-current",
+            "sag-moa",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -23215,12 +23259,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的资格、授权与训练要求不能互相替代；本页职业的执行范围也不能延伸到营养诊断、营养治疗、处方开具或肠内肠外营养方案的制定，具体以目标法域法规、机构制度与岗位授权为准。"
+              "美国O*NET定义在营养师监督下协助食品服务及营养项目，任务包含营养评估，不统一缩为只记录；美国目标州及单位实际执业范围另核。中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.boundary.secondary",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -23243,12 +23288,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "常见误解是把「懂营养知识」当成可以直接给患者建议、把「会做饭」当成可以独立配餐、把「监测记录」当成简单的体力活，或把职业技能等级证书当成执业资质。本页按任务、来源与边界逐项说明：营养诊断与治疗方案由营养师或经培训的医师负责，执行岗位按方案与指南工作；菜单与膳食配置要依既定指南与医嘱类别并留痕；监测与记录是营养照护的证据基础；公共营养师证书不具备医师执业资质，不得开展疾病诊疗或处方干预。"
+              "会做饭或会软件不等岗位能力，技能证书不代医疗资质；O*NET本职业任务含营养评估和生产监督，不只是材料整理。美国29-2051：O*NET Job Zone3、SVP6到低于7，组级1—2年准备描述非每个项目固定学制；学历35%副学士、27%高中后证书、15%部分大学未学位是受访者对新入职所需学历的意见，非新入职者或现有员工学历分布。BLS表1.2典型副学士、相关工作经验None、在岗训练None；不免教育内受监督实践或雇主培训。未核本职业实际注册学徒项目和全部州许可。 中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.answer",
           "source_refs": [
-            "onet"
+            "r5-bls-current",
+            "sag-moa",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -23313,12 +23360,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国口径下，营养师（本页对应的相邻岗位为 29-1031.00 膳食与营养师）负责营养评估与诊断、营养治疗方案与医学营养治疗的建议；膳食技术员在其监督下执行：监测进食与体重、采集饮食史、按既定指南协助筛查与评估、按医嘱类别配置与核对治疗饮食、开展宣教与会议协作。中国大陆口径下，《临床营养科建设与管理指南（试行）》第六条明确经临床营养专业教育或培训的营养专业技术人员可开展营养咨询、营养筛查及评估、肠内营养配制、医疗膳食配置与营养宣教，而营养诊断与营养治疗由经临床营养专业培训的医师承担。两者都把执行与诊断分开，不因岗位名称而转移。"
+              "美国O*NET定义在营养师监督下协助食品服务及营养项目，任务包含营养评估，不统一缩为只记录；美国目标州及单位实际执业范围另核。中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.04.answer",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -23341,12 +23389,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "现有可核对的信息不足以支持「取代」这一结论。O*NET 记载本职业使用营养分析软件与医疗信息系统，这些工具影响的是配方计算、菜单核对与记录方式；但本职业大量任务发生在实物与人的环节——按餐次观察与记录、按 Allergy 与吞咽限制核对膳食、留样与消毒与温度核对、面向患者与家属的说明与沟通，这些环节仍需由人执行并签字负责。技术变化更可能改变记录与核算工具，而不是取消现场执行责任。"
+              "O*NET详细页列营养科学软件Nutritionist Pro/The Food Processor等、配餐数据库、ERP、Computrition NCM/MEDITECH及病历软件，证明职业技术示例而非逐产品功能或采用率；另2025美国招聘关键词Office4%、Excel2%、Outlook2%、Word1%、PowerPoint低于1%、MEDITECH/Access Not available非0，分母为关联本职业全部唯一招聘帖，不是软件采用者或含技术帖。 本轮未取得29-2051可复核生成式AI采用率、节时效果、营养建议准确性或岗位工资因果。现有软件清单、招聘词、任务情境与就业预测不能证明已经提速、多数机构采用或永不替代；软件计算、设备自动化与生成式AI分别核。ILO2025摘要复用同批已读版本，未核该细类与ISCO映射和暴露评分；NIST AI RMF1.0为自愿治理框架，不规定中国膳食操作权限。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.05.answer",
           "source_refs": [
-            "onet"
+            "r2-ai",
+            "sag-moa",
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -23383,12 +23434,13 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "筛查与评估协助：采集并评估个人饮食史，协助开展营养筛查与评估，整理出可供营养师判断的材料，并按规则把变化与问题报告。"
+              "营养评估与饮食史：O*NET明确Conduct nutritional assessments，不能统一写成只整理；中国临床人员按指南及附件条件执行。中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.display.responsibilities_block.02",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -23439,12 +23491,12 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "宣教与协作：按营养师确定的方案向患者与家属说明食物选择与准备与菜单规划要点，参加跨学科会议，向其他相关服务转介患者并做好交接记录。"
+              "教育协作及管理：跨学科会议、研究、入职和在职教育、职位描述及排班为核心；转介与演讲为补充。具体岗位可有取舍，不由13项清单确定个人全部权限。"
             ]
           },
           "id": "actors.display.responsibilities_block.06",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23509,12 +23561,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作按用餐时间与配餐班次组织，通常隶属营养科或食品服务部门，接受注册营养师的业务督导与部门负责人的行政管理；治疗饮食与特殊膳食的配置与分发须按医嘱与营养师要求核对。"
+              "美国定义营养师监督，任务可含食品生产监督及职位描述和排班，具体汇报关系由单位核。中国医疗单位按指南第9明确分工，不将所有场景同一督导层级。"
             ]
           },
           "id": "actors.display.work_context_block.organization",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -23523,12 +23576,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "以常规班次为主，需配合早班备餐与用餐高峰，部分机构有轮班与周末值班；时间压力 61% 每天，精确或准确的重要性 57% 极其重要。"
+              "O*NET调查情境：持续接触78%、面对面79%每天、受控室内91%每天、疾病或感染暴露82%每天、普通PPE65%每天、噪声66%每天、时间压力61%每天；团队72%极重要、准确57%极重要、他人员工安全责任71%很高。频率非感染或差错率，PPE不是所有人每天。周工时31%超过40/37%等于40/33%少于40（报告取整），99%规律安排非无早晚或周末。 具体供餐时点及班次向单位核，不能推门诊一定更规律。"
             ]
           },
           "id": "actors.display.work_context_block.schedule",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23537,12 +23590,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "与注册营养师、护理人员、临床科室、配餐与食品服务人员、库房与采购以及患者与家属协作；持续与他人接触 78%，每天面对面讨论 79%，电话交谈 58% 每天，工作团队协作 72% 极其重要。"
+              "美国定义营养师监督并参与跨专业会议，具体部门协作按单位；78%持续接触/79%面对面每天/58%电话每天/团队72%极重要。中国人员分工见指南，不能从美国定义推中国所有营养师均可医师诊疗。"
             ]
           },
           "id": "actors.display.work_context_block.collaboration",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -23551,12 +23605,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "复核方式包括营养师对记录与报告的复核、护理与配餐环节对所核对结果的复核、食品安全与留样与消毒记录的检查，以及跨学科会议上的信息核对。"
+              "编辑核对：原记录、配置和交接按实际质量流程复查；中国指南要求临床质量管理和附件筛查评估记录纳入病历。逐餐/双人核对是否统一适用本轮未取得原规程，不凭NIST设法定义务。"
             ]
           },
           "id": "actors.display.work_context_block.review",
           "source_refs": [
-            "onet"
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -23593,12 +23647,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 摘要页与详细资料页：本职业 13 项任务（含监测进食与体重并向营养师报告、做营养评估与采集饮食史、按食谱制作主餐并核算团体份量、按指南计划菜单并指导个人与家庭、监督食品生产或服务、分析并标准化食谱、核算食品成本、参加跨学科会议、转介患者与营养宣教）、兴趣代码 SCR、工作情境比例与 Job Zone Three（SVP 6.0 到低于 7.0）。"
+              "29-2051完整13任务10Core/3Supplemental，监测/营养评估/餐食菜单/监督/职位描述排班/会议研究教育及配方等；成本、转介和演讲为补充。六兴趣S68/C47/R47/I41/A26/E26，SCR保留但C与R并列；工作风格Impact细节87/可靠82/合作74/同理69/社交60/诚信55/谨慎51/自控50/抗压41，非人群百分比、大五分数或个人门槛。口头理解及表达69、演绎63、归纳56、近视力56为实际读到的能力评分，不能换算IQ。 美国29-2051：O*NET Job Zone3、SVP6到低于7，组级1—2年准备描述非每个项目固定学制；学历35%副学士、27%高中后证书、15%部分大学未学位是受访者对新入职所需学历的意见，非新入职者或现有员工学历分布。BLS表1.2典型副学士、相关工作经验None、在岗训练None；不免教育内受监督实践或雇主培训。未核本职业实际注册学徒项目和全部州许可。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.onet",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "r5-bls-current",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23607,12 +23663,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "OEWS 2025 年 5 月工资数据：中位 37,640 美元/年（18.09 美元/时），年度分位 29,720／33,880／37,640／45,750／54,020 美元，小时分位 14.29／16.29／18.09／22.00／25.97 美元；该数值为受雇税前工资统计口径，不含加班费与轮班津贴与自营收入。"
+              "2025全国工资10/25/50/75/90分位：年29720/33880/37640/45750/54020美元，时14.29/16.29/18.09/22.00/25.97美元。OEWS直时税前含基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金与自雇；不一概排除所有津贴或所有合同雇员。分位不是起薪、年限、认证效果或到手收入。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
           "source_refs": [
-            "onet"
+            "bls",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -23621,12 +23678,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 摘要页：2024 年就业约 30,900 人、2024—2034 年增长 3% 至 4%（与平均相当）、预计职位空缺约 4,000 个、主要行业为医疗保健与社会援助；新入职者反馈中 35% 认为需要副学士或其他两年制学位、27% 认为需要中学后证书、15% 为部分大学经历无学位；通常需要 1—2 年培训并存在学徒机会。本页未取得 BLS 职业展望页的第一手口径，故不并列第二个预测数值。"
+              "美国29-2051：O*NET Job Zone3、SVP6到低于7，组级1—2年准备描述非每个项目固定学制；学历35%副学士、27%高中后证书、15%部分大学未学位是受访者对新入职所需学历的意见，非新入职者或现有员工学历分布。BLS表1.2典型副学士、相关工作经验None、在岗训练None；不免教育内受监督实践或雇主培训。未核本职业实际注册学徒项目和全部州许可。 美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
           "source_refs": [
-            "onet"
+            "r5-bls-current",
+            "sag-moa",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -23635,12 +23694,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆：经临床营养专业教育或培训的营养专业技术人员，按《临床营养科建设与管理指南（试行）》第六条可开展营养咨询、营养筛查及评估、肠内营养配制、医疗膳食配置与营养宣教；营养诊断与营养治疗由经临床营养专业培训的医师承担；制备部门须落实健康档案、食品原料档案、餐具消毒、食品留样与卫生检查制度；公共营养师已转为职业技能等级认定（四级/中级工至一级/高级技师），证书不具备医师执业资质。"
+              "美国O*NET定义在营养师监督下协助食品服务及营养项目，任务包含营养评估，不统一缩为只记录；美国目标州及单位实际执业范围另核。中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -23649,12 +23709,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "AI 与任务数据边界：本页 AI 影响以 O*NET 任务与工作情境、ILO 职业暴露研究与 NIST 人工智能风险管理框架为限，区分「技术能力」「实际采用」与「岗位结果」，说明营养分析软件与医疗信息系统影响的是核算与记录环节而非现场执行责任，不以本页推断个人就业或收入结果。"
+              "O*NET详细页列营养科学软件Nutritionist Pro/The Food Processor等、配餐数据库、ERP、Computrition NCM/MEDITECH及病历软件，证明职业技术示例而非逐产品功能或采用率；另2025美国招聘关键词Office4%、Excel2%、Outlook2%、Word1%、PowerPoint低于1%、MEDITECH/Access Not available非0，分母为关联本职业全部唯一招聘帖，不是软件采用者或含技术帖。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
           "source_refs": [
-            "onet"
+            "r2-ai",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23663,12 +23724,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "膳食技术员（美国 O*NET-SOC 29-2051.00 Dietetic Technicians）：在注册营养师监督下协助提供食品服务与营养项目，可按既定指南计划与制作膳食、教授食品与营养原则，或对个人进行咨询。典型工作包括观察并监测患者的食物摄入量与体重，把变化、进展与饮食问题报告营养师；采集并评估个人饮食史以开展营养评估、协助制定营养计划；按食谱制作主餐并确定团体食物数量；监督食品生产或服务，或协助营养师开展食品服务监督与规划；按营养需求与既定指南计划菜单或膳食，并指导个人与家庭进行食物选择、准备与菜单规划；分析菜单与食谱并标准化、测试新产品；确定食品与饮料成本并协助成本控制；参加与其他医疗专业人员的跨学科会议；协助营养师研究食品、营养或食品服务系统；选择并组织入职与在职教育；把患者转介到其他相关服务以提供连续性照护；以及就饮食、营养与健康开展宣讲。工作以环境受控的室内场所为主，需要按机构制度执行卫生、留样、消毒与感染控制要求，并清楚区分执行职责与营养诊断与处方权限。"
+              "膳食技术员29-2051.00在营养师监督下协助食品服务和营养项目，可按既定指南安排制作餐食、教授营养原则或咨询。13任务10核心，包括监测、营养评估、餐食菜单、生产监督、职位描述排班、会议研究教育和配方；成本、转介和演讲3补充。不能以职业清单授予中国诊疗权。中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         }
@@ -24151,13 +24213,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "差异说明：同一项任务在三个层面上的结论往往不同。以食谱与份量核算为例，技术上软件已能按配方与人数算出份量与营养素估算、并生成采购与配置清单；实际采用中，机构通常把软件结果作为复核参考，因为治疗饮食的类别与限制仍需人工核对，且分发对象与留样记录必须可追溯；岗位结果上，采用更多体现为核算工具与记录方式变化，而不是取消配置与核对环节。"
+              "O*NET详细页列营养科学软件Nutritionist Pro/The Food Processor等、配餐数据库、ERP、Computrition NCM/MEDITECH及病历软件，证明职业技术示例而非逐产品功能或采用率；另2025美国招聘关键词Office4%、Excel2%、Outlook2%、Word1%、PowerPoint低于1%、MEDITECH/Access Not available非0，分母为关联本职业全部唯一招聘帖，不是软件采用者或含技术帖。 本轮未取得29-2051可复核生成式AI采用率、节时效果、营养建议准确性或岗位工资因果。现有软件清单、招聘词、任务情境与就业预测不能证明已经提速、多数机构采用或永不替代；软件计算、设备自动化与生成式AI分别核。ILO2025摘要复用同批已读版本，未核该细类与ISCO映射和暴露评分；NIST AI RMF1.0为自愿治理框架，不规定中国膳食操作权限。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.2",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24181,13 +24245,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "人工责任说明：营养筛查与评估的结论、治疗饮食类别的确认、特殊医学用途配方食品的使用要求、以及配置与分发与留样记录的签署，仍必须由在授权范围内工作的人员承担。营养诊断与治疗方案由营养师或经临床营养专业培训的医师负责；工具可以提供核算、提醒与记录支持，但不承担营养照护与食品安全责任，也不能替代现场核对与患者沟通。"
+              "中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。 工具功能或名称不授予个人诊疗权限。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -24196,13 +24259,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "风险与治理：主要风险是把软件的估算结果直接当作配置依据、忽略个体过敏与吞咽与医嘱限制、以及患者营养与进食数据在系统流转中的权属与隐私问题。可控做法包括：把工具输出当作待核对结果、对治疗饮食与特殊膳食坚持人工复核、对涉及过敏与吞咽风险的配置设置双人核对、并对患者数据的访问范围与留存期限作明确约定。"
+              "编辑风险核对：软件估算不可不经验证就作为已核实临床结果；双人复核按实际规程而非本页设全国统一规则。中国医疗健康属于敏感个人信息，按个人信息保护法核合法依据、特定目的及充分必要、严格保护、适用告知和事前影响评估；基于同意处理须符合单独同意等要求，其他法定依据另核，不能一律限为照护或仅同意。去标识不等匿名化，机构账户不自动允许外部AI上传；访问、记录及受托处理按实际责任核。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24211,13 +24274,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对不同人群的建议：对正在考虑入行的人，优先建立进食与体重记录的规范操作、治疗饮食类别的核对习惯与食品安全与留样意识，把软件当作核算与记录的辅助；对已在岗的人，把精力放在工具不擅长的部分——个体限制的核对、与患者与家属的沟通、以及异常与拒食与剩食的识别与上报；对机构，明确工具输出的复核责任与记录要求，避免把估算值直接写进配置与照护记录。"
+              "编辑建议学习真实记录、合法营养职责和工具验证，不能由软件清单宣称个体沟通是工具已证明的薄弱处。按具体岗位培训、资格及质量流程核。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.6",
           "source_refs": [
+            "r5-cn-guideline",
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24241,13 +24305,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论与不宜推断的内容：就现有公开证据而言，可以说明的是核算与记录环节的技术能力与采用方向，以及在营养与食品安全环节必须保留人工核对与责任签署；不宜推断的是个人收入变化、某个城市的岗位数量变化，或某家机构是否因此裁员。本页不提供这些推断。"
+              "O*NET详细页列营养科学软件Nutritionist Pro/The Food Processor等、配餐数据库、ERP、Computrition NCM/MEDITECH及病历软件，证明职业技术示例而非逐产品功能或采用率；另2025美国招聘关键词Office4%、Excel2%、Outlook2%、Word1%、PowerPoint低于1%、MEDITECH/Access Not available非0，分母为关联本职业全部唯一招聘帖，不是软件采用者或含技术帖。 本轮未取得29-2051可复核生成式AI采用率、节时效果、营养建议准确性或岗位工资因果。现有软件清单、招聘词、任务情境与就业预测不能证明已经提速、多数机构采用或永不替代；软件计算、设备自动化与生成式AI分别核。ILO2025摘要复用同批已读版本，未核该细类与ISCO映射和暴露评分；NIST AI RMF1.0为自愿治理框架，不规定中国膳食操作权限。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.8",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24286,13 +24352,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答：AI 与自动化正在改变本职业的核算、菜单管理与记录方式，但尚未改变其以现场执行、人工核对与照护沟通为核心的任务结构。O*NET 记载本职业使用的软件技能集中在营养分析软件（如配方与营养估算工具）、医疗信息系统与常用办公软件，属于核算与记录支持；ILO 的职业暴露研究把这类职业界定为受生成式人工智能影响有限的一类；NIST 的风险管理框架要求把工具输出视为需验证的输入。因此合理的判断是「核算更快、记录更规范、现场核对与沟通仍由人负责」，而不是「被取代」或「无影响」。"
+              "O*NET详细页列营养科学软件Nutritionist Pro/The Food Processor等、配餐数据库、ERP、Computrition NCM/MEDITECH及病历软件，证明职业技术示例而非逐产品功能或采用率；另2025美国招聘关键词Office4%、Excel2%、Outlook2%、Word1%、PowerPoint低于1%、MEDITECH/Access Not available非0，分母为关联本职业全部唯一招聘帖，不是软件采用者或含技术帖。 本轮未取得29-2051可复核生成式AI采用率、节时效果、营养建议准确性或岗位工资因果。现有软件清单、招聘词、任务情境与就业预测不能证明已经提速、多数机构采用或永不替代；软件计算、设备自动化与生成式AI分别核。ILO2025摘要复用同批已读版本，未核该细类与ISCO映射和暴露评分；NIST AI RMF1.0为自愿治理框架，不规定中国膳食操作权限。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24316,13 +24384,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 记载的软件技能条目（营养分析软件、医疗信息系统与办公软件），说明本职业已在核算与记录环节使用信息化工具。"
+              "O*NET详细页列营养科学软件Nutritionist Pro/The Food Processor等、配餐数据库、ERP、Computrition NCM/MEDITECH及病历软件，证明职业技术示例而非逐产品功能或采用率；另2025美国招聘关键词Office4%、Excel2%、Outlook2%、Word1%、PowerPoint低于1%、MEDITECH/Access Not available非0，分母为关联本职业全部唯一招聘帖，不是软件采用者或含技术帖。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.1.object",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24346,13 +24414,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 关于生成式人工智能与职业暴露的研究，用于判断本职业在「暴露程度」分类中的位置。"
+              "ILO2025研究衡量任务暴露，不是替代率；本轮未核29-2051的ISCO映射及分组评分，不称本职业有限暴露或全球没有职业数据。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24361,13 +24428,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "限制：该研究衡量的是任务与技术的重叠程度，不是实际替代率，也未按国家或机构规模细分。"
+              "ILO2025研究衡量任务暴露，不是替代率；本轮未核29-2051的ISCO映射及分组评分，不称本职业有限暴露或全球没有职业数据。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24376,13 +24442,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 的任务与工作情境数据，说明本职业任务以现场观察与记录、配置与核对、以及面向患者与团队的沟通为主。"
+              "O*NET详细档案提供营养评估、菜单、食品生产监督、观察记录及团队沟通等任务与职业调查情境，不仅现场记录；不是中国临床法规或AI效果调查。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24391,13 +24456,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：任务结构决定工具只能改变核算与记录入口，不能替代现场执行与责任签署。"
+              "任务及情境提示要核评估、实物和沟通责任，不能由这些条目证明工具只能改变入口或永不替代。中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -24421,13 +24486,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "OEWS 与 O*NET 的工资与就业统计口径，用于说明本职业的岗位规模与工资分位。"
+              "2025全国工资10/25/50/75/90分位：年29720/33880/37640/45750/54020美元，时14.29/16.29/18.09/22.00/25.97美元。OEWS直时税前含基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金与自雇；不一概排除所有津贴或所有合同雇员。分位不是起薪、年限、认证效果或到手收入。 美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -24436,13 +24503,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：本职业规模较小（2024 年约 30,900 人），中位 37,640 美元/年，地方性机会差异明显。"
+              "美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -24451,13 +24518,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "限制：统计数值为受雇口径并用于描述分布，不能用于推断个人录用概率或收入变化。"
+              "OEWS受雇工资与就业预测覆盖不同，自雇0.4%属就业身份；均非个人机会或AI效应。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-bls-current",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24481,13 +24548,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：工具输出应作为待核对输入，并对涉及过敏、吞咽与治疗饮食类别的配置设置人工复核。"
+              "编辑建议按实际工具验证和职责设置复核；NIST自愿框架不具体规定过敏/吞咽双人核对。中国临床责任另核指南及规程。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -24526,13 +24593,17 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能由现有证据得出这一结论。O*NET 摘要页给出的 2024—2034 年预测为增长 3% 至 4%（与平均相当），属职业总量变化；核算与记录工具影响的更可能是任务入口与记录方式。岗位数量还取决于当地医疗机构密度、长期照护与集体供餐规模等与本页结论无关的因素，且本职业规模较小，地方差异大于全国结论。"
+              "美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。 本轮未取得29-2051可复核生成式AI采用率、节时效果、营养建议准确性或岗位工资因果。现有软件清单、招聘词、任务情境与就业预测不能证明已经提速、多数机构采用或永不替代；软件计算、设备自动化与生成式AI分别核。ILO2025摘要复用同批已读版本，未核该细类与ISCO映射和暴露评分；NIST AI RMF1.0为自愿治理框架，不规定中国膳食操作权限。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.1.answer",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -24556,13 +24627,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "最清楚的是食谱与份量核算、菜单与营养素估算、采购与配置清单生成这类核算环节，以及进食与体重等数据的记录与查询；这些在 O*NET 的软件技能条目与任务描述中有对应。技术条目只说明技术使用情况，不说明机构采用比例，也不说明替代。"
+              "O*NET详细页列营养科学软件Nutritionist Pro/The Food Processor等、配餐数据库、ERP、Computrition NCM/MEDITECH及病历软件，证明职业技术示例而非逐产品功能或采用率；另2025美国招聘关键词Office4%、Excel2%、Outlook2%、Word1%、PowerPoint低于1%、MEDITECH/Access Not available非0，分母为关联本职业全部唯一招聘帖，不是软件采用者或含技术帖。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24586,13 +24657,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不可以。按 NIST 风险管理框架的思路，工具输出应作为待核对输入：治疗饮食与特殊膳食的类别与限制需按医嘱与营养师要求人工核对，涉及过敏与吞咽风险的配置应设置复核，留样与分发记录必须与实物一致。营养师负责营养评估与治疗方案，执行岗位不得以工具结果替代该职责。"
+              "编辑建议先核软件适用用途、输入和验证，再按实际临床要求入记录，不将NIST等同全部工具输出不得使用的法律。中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.3.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-guideline",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24631,13 +24702,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "需要注意三点：一是进食、体重与饮食史属个人健康信息，只能在照护目的与授权范围内使用与传递；二是营养分析与医疗信息系统的数据访问权限应按岗位设置并留痕，不擅自导出或转用；三是把工具输出写入照护记录时，应注明来源与核对状态，避免把估算值写成已核实结论。"
+              "中国医疗健康属于敏感个人信息，按个人信息保护法核合法依据、特定目的及充分必要、严格保护、适用告知和事前影响评估；基于同意处理须符合单独同意等要求，其他法定依据另核，不能一律限为照护或仅同意。去标识不等匿名化，机构账户不自动允许外部AI上传；访问、记录及受托处理按实际责任核。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -24661,13 +24731,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现有证据不支持这一判断。自动化设备可能改变份量分配与配送环节，但本职业的多数任务仍发生在需要判断与沟通的场景：个体过敏与吞咽限制的核对、治疗饮食类别的确认、异常与拒食与剩食的识别与上报、以及面向患者与家属的说明。这些环节需要有人按制度核对并签字负责，工具与设备改变的是手段而不是责任归属。"
+              "本轮未取得29-2051可复核生成式AI采用率、节时效果、营养建议准确性或岗位工资因果。现有软件清单、招聘词、任务情境与就业预测不能证明已经提速、多数机构采用或永不替代；软件计算、设备自动化与生成式AI分别核。ILO2025摘要复用同批已读版本，未核该细类与ISCO映射和暴露评分；NIST AI RMF1.0为自愿治理框架，不规定中国膳食操作权限。 任务清单含实物、评估和沟通，但不能据此证明多数任务永远人工。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.6.answer",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24751,13 +24823,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET OnLine 本职业相关技术与软件技能条目：用于说明营养分析软件与医疗信息系统的使用情况，不说明采用比例。"
+              "O*NET详细页列营养科学软件Nutritionist Pro/The Food Processor等、配餐数据库、ERP、Computrition NCM/MEDITECH及病历软件，证明职业技术示例而非逐产品功能或采用率；另2025美国招聘关键词Office4%、Excel2%、Outlook2%、Word1%、PowerPoint低于1%、MEDITECH/Access Not available非0，分母为关联本职业全部唯一招聘帖，不是软件采用者或含技术帖。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.scope",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24781,13 +24853,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 生成式人工智能与职业暴露研究：用于判断本职业的暴露类别，不构成替代率或岗位结论。"
+              "ILO2025研究衡量任务暴露，不是替代率；本轮未核29-2051的ISCO映射及分组评分，不称本职业有限暴露或全球没有职业数据。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24811,13 +24882,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET OnLine 本职业详细资料页：用于核对技能、知识与工作活动条目及其限量说明。"
+              "O*NET本职业详细资料用于美国任务、活动与调查情境描述，不作为中国操作权限或食品制度依据。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24856,13 +24926,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工资与就业统计"
+              "全国工资分位"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24871,13 +24941,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "OEWS 2025 年 5 月工资统计：用于说明本职业工资分位与受雇口径限制，不含加班与津贴与自营收入。"
+              "2025全国工资10/25/50/75/90分位：年29720/33880/37640/45750/54020美元，时14.29/16.29/18.09/22.00/25.97美元。OEWS直时税前含基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金与自雇；不一概排除所有津贴或所有合同雇员。分位不是起薪、年限、认证效果或到手收入。 就业及准备另见BLS表1.2。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -24931,13 +25002,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "实际采用：医院营养科与长期照护与集体供餐单位在成本、卫生与责任约束下真正使用的程度，通常限于核算与记录支持，不替代人工核对与责任签署。"
+              "实际采用需机构样本、使用范围及比例。本轮仅取得职业软件示例和招聘关键词，不能写多数机构、通常限于记录或不采用自动核对。"
             ]
           },
           "id": "actors.display.ai_impact_table.method.2.concept",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24946,13 +25017,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "岗位结果：采用之后任务结构、技能要求与用工安排的实际变化；与前两层不同，它需要长期观察才能判断，且本职业规模较小、地方差异明显。"
+              "岗位结果需跟踪真实任务、技能与用工变化；当前就业预测是全职业模型而非AI净效应。美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。"
             ]
           },
           "id": "actors.display.ai_impact_table.method.3.concept",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -24961,13 +25032,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术增强"
+              "条件情景，效果待核"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.1.direction",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24991,13 +25062,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录方式更多转向信息系统录入与查询，异常提醒更及时"
+              "条件情景：若单位系统具备经验证的记录/查询及提醒功能，可辅助处理；本轮未核已提高及时性。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.1.change",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25021,13 +25092,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术增强"
+              "条件情景，效果待核"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.2.direction",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25051,13 +25122,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "评估表格与计算工具可辅助整理与比对"
+              "条件情景：适用评估表格或计算软件可辅助整理，非已核产品效能。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.2.change",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25066,13 +25137,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "营养评估与诊断结论由营养师或经培训的医师作出，执行岗位只提供材料"
+              "中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.2.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -25081,13 +25151,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "部分改变"
+              "条件情景，效果待核"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.direction",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25111,13 +25181,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "配方与份量核算可由软件辅助并自动生成清单"
+              "条件情景：核具体软件营养估算、份量及清单功能，本轮未读逐产品技术说明。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.change",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25141,13 +25211,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "基本不变"
+              "条件情景，效果待核"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.direction",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25171,13 +25241,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "配置清单可电子化，核对与分发仍为实物操作"
+              "条件情景：单位可采用电子清单，但实物核对是否自动化须核实际设备。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.change",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25186,13 +25256,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "类别与限制的最终核对、分发对象确认与记录签署由人完成"
+              "按实际合法分工、医嘱和质量流程核对对象、配置及记录；本轮未证明这些环节全部必须纯人工。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -25201,13 +25270,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "基本不变"
+              "条件情景，效果待核"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.direction",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25231,13 +25300,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录可电子化与提醒化"
+              "条件情景：记录系统可能提供电子记录/提醒，具体应用效果未核。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.change",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25246,13 +25315,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现场取样、温度测量与消毒执行必须由人按制度完成并留痕"
+              "编辑核对实际取样、消毒、温度记录责任及设备验证，不写这些操作一律不能自动完成。指南第8条要求临床营养科医疗膳食及肠内营养制备部门建立工作人员健康档案、原料档案、餐具消毒、食品留样和卫生检查制度，不将其直接解释为所有学校食堂或每位厨师同一临床职责；具体温度、双人复核和停工恢复按适用规程核，本轮未取得统一参数。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -25261,13 +25329,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "部分改变"
+              "条件情景，效果待核"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.direction",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25291,13 +25359,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "成本核算与采购比对可由系统自动汇总"
+              "条件情景：按实际成本系统口径汇总及复核，不证明本职业已自动采购比对。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.change",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25306,13 +25374,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "成本口径与执行方案的选择由管理者与营养师确定，执行结果须核对"
+              "成本计算属于补充任务，按实际财务口径和职责复核；不统一指定全部机构由管理者及营养师联合决定。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25321,13 +25388,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "辅助沟通"
+              "条件情景，效果待核"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.7.direction",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25351,13 +25418,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可调取标准化宣教材料与既往记录"
+              "条件情景：单位可使用获准材料及记录，效果与使用比例未核。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.7.change",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25396,13 +25463,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具已能在给定配方与人数的条件下完成营养素估算、份量核算与清单生成，并支持记录查询与提醒。"
+              "O*NET详细页列营养科学软件Nutritionist Pro/The Food Processor等、配餐数据库、ERP、Computrition NCM/MEDITECH及病历软件，证明职业技术示例而非逐产品功能或采用率；另2025美国招聘关键词Office4%、Excel2%、Outlook2%、Word1%、PowerPoint低于1%、MEDITECH/Access Not available非0，分母为关联本职业全部唯一招聘帖，不是软件采用者或含技术帖。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.1.change",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25411,13 +25478,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "估算与清单仍需按医嘱与营养师要求核对；过敏与吞咽与治疗饮食类别不可由工具判定。"
+              "编辑建议核具体工具适用范围及验证，涉及治疗饮食按合法职责处理；本轮未取得证明工具永不能判断限制的依据。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.1.human-responsibility",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-guideline",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25441,13 +25508,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "多数机构把软件用于核算与记录支持，不用于替代治疗饮食核对与现场执行。"
+              "证据不足：本轮未取得机构实际采用比例及用途调查；招聘词不是采用率。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.2.change",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25456,13 +25523,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "是否采用取决于成本、卫生与责任约束，采用程度在不同机构与地区差异明显。"
+              "实际采用程度及机构、地区差异本轮未取得代表性调查；成本、卫生与责任约束可作编辑调查问题，不能据软件示例推已采用差异。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.2.human-responsibility",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25486,13 +25553,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "尚无公开证据显示本职业因工具采用出现岗位总量下降；O*NET 摘要页预测为增长 3% 至 4%。"
+              "美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.3.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -25696,13 +25763,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对治疗饮食与特殊膳食坚持人工核对与复核；工具输出只作为待核对结果。"
+              "编辑建议：使用前核机构批准、适用用途验证与操作者资格；治疗饮食、过敏及吞咽限制的核对和人工复核依患者方案、真实机构规程与合法职责实施，不把全部工具输出一律仅待核或所有环节纯人工设为全国规则。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.1.control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-guideline",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25741,13 +25808,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现场取样与测量即记录；交接时核对记录与实物，异常立即上报。"
+              "编辑建议：对照获授权的原始记录、配置与分发对象、实物及留样信息，发现时间、批次或对象不一致按适用食品与临床制度核实、留真实更正记录并上报责任人员；具体温度、留样和异常处置参数由适用规程确定，不以生成记录代现场核对。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.2.control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-cn-guideline",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25936,13 +26004,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把学习重点放在工具薄弱处：个体限制的核对与沟通、异常与拒食与剩食的识别与上报、以及跨学科会议上的信息整理与交接。"
+              "编辑学习建议：练习个体限制核对、沟通、异常观察与按权限上报，以及跨学科信息交接；这是可观察任务准备，未核具体工具弱项或人机能力比较，不能称已经证明工具做不好。"
             ]
           },
           "id": "actors.display.ai_impact_table.actions.2.action",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -25966,13 +26034,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "明确软件输出的复核责任与记录要求，对涉及过敏与吞咽的配置设置双人核对，并为培训与防护与留样耗材留出预算与时间。"
+              "编辑建议明确工具验证、复核责任、记录与异常升级，在适用规程要求下实施双人核对及培训；本页未取得全国统一双人复核条文。"
             ]
           },
           "id": "actors.display.ai_impact_table.actions.3.action",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-guideline",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -26019,12 +26087,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与膳食技术员（美国 O*NET 29-2051.00）对应的中国大陆全国单职业工资分布。中国大陆的营养与膳食执行岗位主要分布在医院临床营养科与配餐部门、长期照护与康复机构、学校与机关与企事业单位食堂以及餐饮与健康管理机构，报酬按事业单位或企业薪酬制度确定，公开统计未建立与该职业一一对应的职业级口径，本页不以行业均值或招聘报价替代。"
+              "证据不足：本轮未取得中国膳食技术员等价单职业工资分布及代表性招聘样本。NBS2025卫生和社会工作城镇非私营146266/私营75631元税前年平均，用于实际医疗单位多职业背景，不是膳食技术员中位、起薪或招聘报价；覆盖城镇5人以上法人，非私营含事业机关及外资等、不只国企，排除个体和自由职业。不套全部食堂、学校或自营机构。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26033,12 +26101,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "统计口径：国家统计局发布的城镇单位就业人员平均工资按行业门类与单位类型发布，卫生和社会工作等行业均值包含大量与本职业无关的岗位，住宿和餐饮业与教育等行业同样无法拆分到本职业，因此不能当作本职业工资；本页在该板块保留可见缺口标记，并说明缺口的具体位置。"
+              "NBS2025卫生和社会工作城镇非私营146266/私营75631元税前年平均，用于实际医疗单位多职业背景，不是膳食技术员中位、起薪或招聘报价；覆盖城镇5人以上法人，非私营含事业机关及外资等、不只国企，排除个体和自由职业。不套全部食堂、学校或自营机构。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26047,12 +26115,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "计酬与披露：医院与事业单位多按岗位与职称与绩效结构确定报酬，集体供餐与餐饮企业多按岗位薪酬加绩效或加班补贴，健康管理与月子服务等市场化机构差异更大；上述形式彼此差别较大，无法折算成一个全国中位数，也不适合与美国的受雇工资统计直接比较。"
+              "按实际合同核基本工资、绩效、班次及费用，不由机构类别推统一计算方式或私营更高。2024国卫办医政函333要求落实营养筛查评估、人员培训与学科建设，鼓励有条件医院提高临床营养人员待遇并吸引人才；这是政策方向，不是已提高的工资、招聘数量或普遍补贴。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "sag-moa"
+            "editor"
           ],
           "type": "prose"
         },
@@ -26061,12 +26129,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "用工与训练费用：用工形式包括医院营养科与配餐部门、学校与机关食堂、养老与康复机构、餐饮企业与健康管理机构；训练与取证费用按单位制度与地方政策执行，部分地区对取得职业技能等级证书的人员有技能提升补贴政策，具体条件以当地人力资源社会保障部门公布为准。"
+              "本轮未取得代表性单位培训费用、职业资格工资收益及当地补贴有效条件；按当前机构及属地公告核，不预设取得证书有补贴。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "sag-moa"
+            "r5-cn-standard"
           ],
           "type": "prose"
         },
@@ -26075,12 +26143,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "比较与边界：美国分位是受雇税前工资统计口径，不含加班费与津贴与自营收入；中国大陆的岗位薪酬制度与事业单位与企业的计酬方式与美国统计不同，应分别解释而不是直接换算；本页不据网络流传报价推算任何数值。"
+              "2025全国工资10/25/50/75/90分位：年29720/33880/37640/45750/54020美元，时14.29/16.29/18.09/22.00/25.97美元。OEWS直时税前含基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金与自雇；不一概排除所有津贴或所有合同雇员。分位不是起薪、年限、认证效果或到手收入。 中国实际工资另核，不能汇率换算职业水平。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "bls",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26103,12 +26172,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "引用范围：本板块只说明中国大陆的统计口径、计酬方式与可核对的制度性要求；凡未取得职业级数据的数值，均以可见缺口标记保留，不以任何代理值填充。"
+              "NBS2025卫生和社会工作城镇非私营146266/私营75631元税前年平均，用于实际医疗单位多职业背景，不是膳食技术员中位、起薪或招聘报价；覆盖城镇5人以上法人，非私营含事业机关及外资等、不只国企，排除个体和自由职业。不套全部食堂、学校或自营机构。 职业精确缺口保留，不称所有公开统计最高只能到行业。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26117,12 +26186,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与膳食技术员（美国 O*NET 29-2051.00）对应的中国大陆全国单职业工资分布；公开工资统计最高细分到行业门类与人员类别，行业均值与网络招聘报价均不可替代本职业工资。"
+              "证据不足：本轮未取得中国膳食技术员等价单职业工资分布及代表性招聘样本。NBS2025卫生和社会工作城镇非私营146266/私营75631元税前年平均，用于实际医疗单位多职业背景，不是膳食技术员中位、起薪或招聘报价；覆盖城镇5人以上法人，非私营含事业机关及外资等、不只国企，排除个体和自由职业。不套全部食堂、学校或自营机构。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26131,12 +26200,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "医院临床营养科与配餐部门：由经临床营养专业教育或培训的营养专业技术人员开展营养咨询、营养筛查及评估、肠内营养配制、医疗膳食配置与营养宣教，报酬按事业单位岗位与职称与绩效制度确定。"
+              "中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。 2024国卫办医政函333要求落实营养筛查评估、人员培训与学科建设，鼓励有条件医院提高临床营养人员待遇并吸引人才；这是政策方向，不是已提高的工资、招聘数量或普遍补贴。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "sag-moa"
+            "r5-cn-guideline",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26145,12 +26215,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "长期照护与康复机构、学校与机关食堂：按集体供餐制度与用餐时间组织工作，报酬按企业或单位岗位薪酬加绩效与班次补贴确定，工作节拍受供餐时段约束。"
+              "集体供餐按实际单位职责、供餐时段、食品安全和薪酬合同核；未核企业普遍加绩效或班次补贴，医院临床指南不直接覆盖所有学校食堂。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "sag-moa"
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -26173,12 +26243,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "制度与资质口径：公共营养师已退出国家职业资格目录，转为职业技能等级认定（四级/中级工至一级/高级技师），证书不具备医师执业资质；营养诊断与营养治疗由经临床营养专业培训的医师承担，这些制度说明的是工作范围而非工资水平。"
+              "公共营养师2021技能标准4-14-02-01为营养评价指导、知识传播及促进公众健康，四级/三级/二级/一级，普通高中或同等文化；四级可按相关证书后经验与培训、累计工作6年或规定相关学校等不同分支，三级另有相关大学专业、非相关专业加经验或培训等分支。参考学时200/150/150/100不是所有路径强制课时或日历时长；理论、技能和适用综合评审各60，技师/高技综合评审。实际按机构现行申报公告核，不把2021旧文本或付费培训当自动获得资格、诊疗许可或补贴。 中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
           "source_refs": [
-            "sag-moa"
+            "r5-cn-standard",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -26187,12 +26258,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "连续性说明：岗位需求受医疗机构床位数与人口结构、集体供餐规模与食品安全监管强度影响，不同地区与年份差异明显；本页不把某一年的单点报价写成稳定水平。"
+              "2024国卫办医政函333要求落实营养筛查评估、人员培训与学科建设，鼓励有条件医院提高临床营养人员待遇并吸引人才；这是政策方向，不是已提高的工资、招聘数量或普遍补贴。 未取得供餐规模/老龄化与本职业岗位变化的因果及地区量化资料。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
           "source_refs": [
-            "sag-moa"
+            "editor"
           ],
           "type": "prose"
         },
@@ -26252,13 +26323,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "分位怎么读：第 10 分位表示约有一成从业者低于该水平，第 90 分位表示约有一成从业者高于该水平；工资差异通常与雇主类型（医院、长期照护与康复机构、学校与集体供餐、门诊与透析中心）、是否持有行业认证与注册、是否承担食品服务监督或成本控制职责、地区生活成本与班次安排相关，来源未证明分位与经验年限的对应关系。"
+              "10/90分位为分布位置，本轮未取得认证、职责、班次和生活成本对分位的量化贡献；不要把相关情境写成明显工资溢价。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26267,13 +26338,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业与预测：O*NET 摘要页以 2024 年为基期给出约 30,900 人的就业规模、2024—2034 年增长 3% 至 4%（与平均相当）与约 4,000 个预计职位空缺，主要行业为医疗保健与社会援助。本页未取得 BLS 职业展望页的第一手口径（该页本次抓取不可用），因此不并列第二个预测数值，避免引用未经核对的转述。"
+              "美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -26282,13 +26353,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "空缺从哪里来：空缺以更替需求为主，即在职人员转岗、退休或退出劳动力市场形成的岗位补充，不等于每年净增岗位；本职业规模较小（2024 年约 30,900 人），地方性空缺比全国总量更能说明个人机会，实际机会还取决于当地医疗机构密度与集体供餐规模。"
+              "美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -26297,13 +26368,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与工作情境：O*NET 以 2024 年为基期给出的主要行业是医疗保健与社会援助，未附占比与人数，也未提供行业工资数值；工作情境显示每天处于环境受控的室内 91%、每天暴露于疾病或感染 82%、每天穿戴常见防护或安全装备 65%、时间压力 61% 每天，这些条件在判断长期适配时同样重要。"
+              "本轮取得当前全国职业工资及预测，未取得自身细行业工资和人数占比，不将旧2024摘要归类当当前统计。职业情境另读：O*NET调查情境：持续接触78%、面对面79%每天、受控室内91%每天、疾病或感染暴露82%每天、普通PPE65%每天、噪声66%每天、时间压力61%每天；团队72%极重要、准确57%极重要、他人员工安全责任71%很高。频率非感染或差错率，PPE不是所有人每天。周工时31%超过40/37%等于40/33%少于40（报告取整），99%规律安排非无早晚或周末。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "bls",
-            "oews"
+            "sag-moa",
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -26312,13 +26383,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "比较边界：本职业的受雇工资统计不含加班费、轮班津贴与非生产性奖金，也不含自营与承包收入；与其他职业比较时应先确认职业代码、统计期、单位（年或小时）与是否包含津贴，缺一不可比较，也不要把相邻的营养师岗位数值套用到本职业。"
+              "2025全国工资10/25/50/75/90分位：年29720/33880/37640/45750/54020美元，时14.29/16.29/18.09/22.00/25.97美元。OEWS直时税前含基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金与自雇；不一概排除所有津贴或所有合同雇员。分位不是起薪、年限、认证效果或到手收入。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26387,13 +26458,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "分位是统计位置：低分位不代表入职起薪，高分位也不代表个人可主张的报价；雇主类型、认证与注册状态、是否承担监督或成本控制职责与地区差异会明显影响实际水平。"
+              "分位不是起薪或个人报价；本轮没有认证/管理职责与工资分位的因果研究，具体岗位另核合同。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.percentile",
           "source_refs": [
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26402,13 +26473,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "预测是职业总量变化：O*NET 摘要页 2024—2034 年为增长 3% 至 4%（与平均相当）；本页未取得 BLS 职业展望页第一手口径，故不再并列第二个预测数值。"
+              "美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.project",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -26432,13 +26503,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "医疗保健与社会援助（O*NET 2024 年基期给出的主要行业门类，未附占比与人数）。"
+              "本轮取得当前全国职业工资及预测，未取得自身细行业工资和人数占比，不将旧2024摘要归类当当前统计。职业情境另读：O*NET调查情境：持续接触78%、面对面79%每天、受控室内91%每天、疾病或感染暴露82%每天、普通PPE65%每天、噪声66%每天、时间压力61%每天；团队72%极重要、准确57%极重要、他人员工安全责任71%很高。频率非感染或差错率，PPE不是所有人每天。周工时31%超过40/37%等于40/33%少于40（报告取整），99%规律安排非无早晚或周末。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
-            "bls",
-            "oews"
+            "sag-moa",
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -26452,8 +26523,7 @@
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
-            "bls",
-            "oews"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26467,8 +26537,7 @@
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.amusement",
           "source_refs": [
-            "bls",
-            "oews"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26477,13 +26546,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "自营与承包：O*NET 该页未公布本职业自营比例与自营收入；本页不据行业归类推断个人收入。"
+              "BLS2025本职业自雇0.4%，包含于就业预测而非OEWS工资；本轮未取自营收入及具体合同雇员分类，不把承包一概排除。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26507,13 +26576,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "有薪岗位的可得性：当地医疗机构密度与集体供餐规模决定岗位数量，本职业规模较小，地方差异明显。"
+              "编辑工资比较：核地区、单位、职责、认证和班次的实际合同；本轮未取相关溢价或岗位密度决定数量的职业因果证据。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.paid-work",
           "source_refs": [
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26522,13 +26591,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "认证与职责范围：是否持有行业认证与注册、是否承担食品服务监督或成本控制职责，通常与工资分位高低相关。"
+              "编辑工资比较：核地区、单位、职责、认证和班次的实际合同；本轮未取相关溢价或岗位密度决定数量的职业因果证据。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.scope",
           "source_refs": [
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26537,13 +26606,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "雇主类型与班次：医院、长期照护与康复机构、学校与集体供餐单位、门诊与透析中心的薪酬结构与班次安排不同。"
+              "编辑工资比较：核地区、单位、职责、认证和班次的实际合同；本轮未取相关溢价或岗位密度决定数量的职业因果证据。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.setting",
           "source_refs": [
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26567,13 +26636,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界：本板块为美国官方统计口径，不含津贴、加班与自营收入，也不等同于中国大陆的事业单位与企业岗位薪酬制度；两个市场的计酬方式与覆盖人群不同，应分别解释而不是直接换算，也不要把相邻的营养师岗位数值套用到本职业。"
+              "2025全国工资10/25/50/75/90分位：年29720/33880/37640/45750/54020美元，时14.29/16.29/18.09/22.00/25.97美元。OEWS直时税前含基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金与自雇；不一概排除所有津贴或所有合同雇员。分位不是起薪、年限、认证效果或到手收入。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.boundary.detail",
           "source_refs": [
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         }
@@ -26730,12 +26799,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 给出的本职业兴趣代码为 SCR：社会型（Social）居首，工作涉及帮助、教学、建议、协助或为他人提供服务，其子领域包括健康照护服务、社会服务与个人服务；常规型（Conventional）次之，工作涉及遵循程序与法规来组织信息或数据；现实型（Realistic）再次，工作涉及设计、建造或修理设备与材料、进行体力活动或户外工作。"
+              "六兴趣S68/C47/R47/I41/A26/E26，SCR保留但C与R并列；工作风格Impact细节87/可靠82/合作74/同理69/社交60/诚信55/谨慎51/自控50/抗压41，非人群百分比、大五分数或个人门槛。口头理解及表达69、演绎63、归纳56、近视力56为实际读到的能力评分，不能换算IQ。"
             ]
           },
           "id": "actors.display.riasec_fit_block.interest",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26772,12 +26841,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：适合与否主要取决于三件事——是否愿意按规程逐项记录与核对而不是凭印象判断，是否愿意在营养师督导下执行而不越权作出营养判断，以及能否接受每天暴露于疾病或感染并严格执行卫生与留样要求。性格测评可以作为自我了解的参考，但不能替代在这三件事上的实际体验。"
+              "编辑自我观察记录、沟通、实物核对与工作条件接受度；合法职责包括有条件开展评估，不能把任何营养判断都禁给技术人员。中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.display.personality_fit_block.direct-answer",
           "source_refs": [
-            "onet"
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -26842,12 +26911,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 兴趣代码为 SCR：社会型居首，常规型与现实型紧随。若你既愿意帮助与沟通，也能接受制度与本记录要求，方向吻合度较高。"
+              "六兴趣S68/C47/R47/I41/A26/E26，SCR保留但C与R并列；工作风格Impact细节87/可靠82/合作74/同理69/社交60/诚信55/谨慎51/自控50/抗压41，非人群百分比、大五分数或个人门槛。口头理解及表达69、演绎63、归纳56、近视力56为实际读到的能力评分，不能换算IQ。 编辑比较服务、规程记录与动手任务的接受度，不从SCR计算个人吻合率。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.riasec.answer",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26884,12 +26953,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：中。依据 O*NET 兴趣条目（从业者与分析师评定的职业特征），用于职业层面的自我了解。"
+              "六兴趣评分和SCR已核；不是个人适配预测的中等级证据。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26940,12 +27009,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本职业需要较高的尽责性（逐项记录不省略、按制度核对与留样）与一定宜人性（在照护与沟通中保持耐心）。大五模型在职业行为研究中使用较广，但个体预测力有限。"
+              "六兴趣S68/C47/R47/I41/A26/E26，SCR保留但C与R并列；工作风格Impact细节87/可靠82/合作74/同理69/社交60/诚信55/谨慎51/自控50/抗压41，非人群百分比、大五分数或个人门槛。口头理解及表达69、演绎63、归纳56、近视力56为实际读到的能力评分，不能换算IQ。 编辑观察完整记录及反馈核对，不能从工作风格推出必须高尽责性/宜人性。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.big-five.answer",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26982,12 +27051,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：中。大五模型有较丰富的实证研究支撑，但对个体岗位表现的预测力有限，且受情境影响。"
+              "本轮未取得该量表对膳食技术员岗位表现或录用的效度研究，不给职业证据中/低评级。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27066,12 +27135,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：低。类型划分的稳定性与预测效度受到质疑，不应用于招录、晋升或淘汰。"
+              "本轮未取得该量表对膳食技术员岗位表现或录用的效度研究，不给职业证据中/低评级。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27164,12 +27233,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：低。缺少可靠的预测效度证据。"
+              "本轮未取得该量表对膳食技术员岗位表现或录用的效度研究，不给职业证据中/低评级。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27220,12 +27289,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "认知能力与学习食谱与营养基础、理解制度与流程、核对份量与类别确有关系，但单一分数不能决定职业适配，也无法反映沟通耐心、卫生执行与职责边界意识；本职业准备层级为 Job Zone Three，从新入职者反馈看 35% 认为需要副学士或其他两年制学位、27% 认为需要中学后证书。"
+              "美国29-2051：O*NET Job Zone3、SVP6到低于7，组级1—2年准备描述非每个项目固定学制；学历35%副学士、27%高中后证书、15%部分大学未学位是受访者对新入职所需学历的意见，非新入职者或现有员工学历分布。BLS表1.2典型副学士、相关工作经验None、在岗训练None；不免教育内受监督实践或雇主培训。未核本职业实际注册学徒项目和全部州许可。 O*NET能力评分不是IQ分数；岗位资格、训练及实际任务分别核。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.answer",
           "source_refs": [
-            "onet"
+            "r5-bls-current",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27262,12 +27332,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：中。认知能力与工作学习有相关，但对具体岗位的预测不应被夸大，且测量结果受练习与情境影响。"
+              "本轮未取得该量表对膳食技术员岗位表现或录用的效度研究，不给职业证据中/低评级。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.evidence-level",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27318,12 +27388,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本职业需要与患者、家属、护理与临床与配餐同事沟通，也需要在患者拒食、家属焦虑或时间压力下保持克制；沟通与情绪调节能力有帮助，但「情绪智力」缺乏统一测量标准，不宜作为准入判断。"
+              "编辑观察患者沟通和冲突反馈处理；工作风格同理69、自控50不等高EQ门槛。本轮未核情绪智力测验的本职业效度。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.eq.answer",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27360,12 +27430,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：低到中。概念与测量方法尚不统一，用于自我反思更合适。"
+              "本轮未取得该量表对膳食技术员岗位表现或录用的效度研究，不给职业证据中/低评级。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.eq.evidence-level",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27374,12 +27444,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "临床营养执行方向：在医院临床营养科或病区，按营养师确定的方案开展营养咨询、营养筛查及评估材料整理、医疗膳食配置与营养宣教，并持续记录进食与体重与饮食史。"
+              "编辑方向：临床营养执行与照护协作；具体咨询、筛查、评估和配制任务按相关资质、培训及机构分工核，不由方向名称授诊疗权限。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.camera.direction",
           "source_refs": [
-            "onet"
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -27458,12 +27528,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻职业：膳食与营养师：开展营养评估与诊断、制定营养治疗方案与医学营养治疗建议，可对肠内肠外营养与特殊医学用途配方食品提出建议或处方，并对执行环节进行督导。"
+              "美国29-1031规划及开展食品服务和营养项目，可监督、咨询和研究，不由职业定义推出中国诊疗/处方许可。中国医疗诊疗与技术人员分别按指南条件核。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.direction",
           "source_refs": [
-            "onet"
+            "agent",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -27472,12 +27543,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合愿意继续深造、承担诊断与方案责任的人。"
+              "编辑观察：愿意学习营养计划、咨询与研究并接受监督反馈，可探索目标方向；是否能够诊断或制定临床方案须核法域、岗位和本人相应资质，不由职业名称或学习意愿推授权。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.signals",
           "source_refs": [
-            "onet"
+            "agent",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -27528,12 +27600,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要重新学习厨房工艺与出品标准；治疗饮食的类别核对与记录不属厨师职责。"
+              "向机构厨师方向核大批量烹饪、出品及设备安全；任务可交叉，不称厨师从不作治疗饮食核对或记录。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.watchouts",
           "source_refs": [
-            "onet"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -27612,12 +27684,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "照护规范与记录内容不同，营养与膳食执行的核对与留样责任不由护理助理承担。"
+              "护理助理现场持证护理人员监督下基本照护，含喂食；实际营养记录责任可能交叉，目标训练许可与单位分工另核。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.watchouts",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         },
@@ -27682,12 +27754,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "两种兴趣都可能支持入行，但走向不同：来自与人打交道的人更容易适应监测与宣教与协作；来自流程与标准的人更容易适应治疗饮食核对与食品安全环节。可以先在受监督的实习中分别体验两类任务。"
+              "编辑分别体验监测、沟通、配餐及规范记录，兴趣来源不能证明走向哪种专精或较易适应。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.interest.answer",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27710,12 +27782,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以，但需要一定的沟通耐受度：持续与他人接触 78%、每天面对面讨论 79%、电话交谈 58% 每天。沟通对象相对固定（患者与家属、护理、营养师与配餐同事），关键是能把记录与方案说明白并在情绪场景中保持克制，而不是需要高强度社交。"
+              "O*NET调查情境：持续接触78%、面对面79%每天、受控室内91%每天、疾病或感染暴露82%每天、普通PPE65%每天、噪声66%每天、时间压力61%每天；团队72%极重要、准确57%极重要、他人员工安全责任71%很高。频率非感染或差错率，PPE不是所有人每天。周工时31%超过40/37%等于40/33%少于40（报告取整），99%规律安排非无早晚或周末。 沟通需求不等外向门槛，也不能据频率说无需高强度社交。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.outgoing.answer",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27738,12 +27810,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有外形门槛，但有明确的卫生与防护要求：需要按制度穿戴工作服与防护装备、执行手卫生与消毒流程，配餐与制备环节另有食品卫生与健康档案要求；不同机构对工作服与饰物有具体规定。这些要求出于照护与食品安全需要，不构成对外形的评价。"
+              "本轮未取全部雇主外形条件，不能称全国无门槛；PPE及食品卫生按真实岗位核。指南第8条要求临床营养科医疗膳食及肠内营养制备部门建立工作人员健康档案、原料档案、餐具消毒、食品留样和卫生检查制度，不将其直接解释为所有学校食堂或每位厨师同一临床职责；具体温度、双人复核和停工恢复按适用规程核，本轮未取得统一参数。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.appearance.answer",
           "source_refs": [
-            "onet"
+            "r5-cn-guideline",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27766,12 +27839,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "工作按用餐时间与配餐班次组织，需配合早班备餐与用餐高峰，部分机构有轮班与周末值班；时间压力 61% 每天。若无法接受这样的节奏，可优先考虑以门诊或宣教为主的岗位。"
+              "O*NET调查情境：持续接触78%、面对面79%每天、受控室内91%每天、疾病或感染暴露82%每天、普通PPE65%每天、噪声66%每天、时间压力61%每天；团队72%极重要、准确57%极重要、他人员工安全责任71%很高。频率非感染或差错率，PPE不是所有人每天。周工时31%超过40/37%等于40/33%少于40（报告取整），99%规律安排非无早晚或周末。 先问单位班次，不由门诊/宣教名称推更规律。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.schedule.answer",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27822,12 +27895,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以做为自我了解的起点，但不要用它决定是否入行。测评工具的证据强度不一（兴趣代码与大五相关证据相对多一些，类型学工具与情绪智力测量的证据较弱），且都不预测个体岗位表现。判断适配更可靠的方式是完成本页的低风险练习并做一次受监督的实际体验。"
+              "测评可作反思，不能以本轮未核的量表证据等级定录用/晋升；编辑通过合法、低风险记录与沟通体验核任务接受度。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.test.answer",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27892,12 +27965,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "雇主实际岗位要求：不同机构对学历、认证与班次的要求不同，应以招聘信息与岗位说明为准。"
+              "原链接是未取得正文的旧OOH地址，非实采雇主制度；本轮无代表性招聘样本。典型教育改用BLS表1.2。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.employer",
           "source_refs": [
-            "onet"
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -27920,12 +27993,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻职业要求（膳食与营养师）：用于说明该岗位层级对学历与实习与考试的额外要求，不构成转岗建议。"
+              "美国目标29-1031的项目规划、咨询研究定义支持任务比较；未取该目标完整资格招生资料，不作认证要求已全部核实。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.agent",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27934,12 +28007,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻职业工作内容（机构与食堂厨师）：用于说明后厨出品与营养膳食执行的分工差别。"
+              "机构与食堂厨师以大批量烹饪为定义；可有治疗膳食或记录交叉，不能统一排除，作为编辑对象比较。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.teacher",
           "source_refs": [
-            "onet"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -27948,12 +28021,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻职业职责（餐饮服务经理）：用于说明经营与人员管理与营养执行的职责层次差别。"
+              "餐饮服务经理定义侧重食品饮料组织的计划协调管理；作为任务比较，不证直接升任或资格互认。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.enrichment",
           "source_refs": [
-            "onet"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -27962,12 +28035,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻职业照护范围（护理助理）：用于说明日常照护与营养膳食执行在记录内容上的差别。"
+              "护理助理在现场持证护理人员指导下基本照护，包括喂食；作为对象与监督体系比较，不授中国临床权限。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.art",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         }
@@ -27984,13 +28057,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险一：治疗饮食与特殊膳食配置错误。过敏原、吞咽与咀嚼限制、医嘱饮食类别与份量任一环节核对不到位，都可能造成错误配置与分发，轻则影响营养摄入，重则引发过敏或误吸。控制方式是按医嘱与营养师要求逐项核对、涉及过敏与吞咽风险时设置双人复核、分发前再次确认对象与餐次并留痕。"
+              "编辑风险情景：过敏、吞咽/咀嚼限制和饮食类别核对不清可能导致配置错误；按真实医嘱和规程确认对象、记录及异常上报，双人复核是否适用须核单位要求，本轮不定误吸/过敏发生率。"
             ]
           },
           "id": "actors.risk.career-risk-cards.1",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -28029,13 +28101,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险四：越权给出营养建议或承诺结果。向患者或家属承诺治疗结果、代替营养师调整方案或讲解超出授权的治疗内容，可能误导患者并影响照护与责任归属。控制方式是只说明营养师确定的方案与一般饮食原则、遇到方案性问题转介营养师、不在公开或社交场合使用患者信息。"
+              "编辑风险情景：超出资格与能力调整医疗营养方案或承诺疗效；由有权限人员处理并明确转介，不能一律说专业技术人员不开展评估或咨询。中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.risk.career-risk-cards.4",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -28044,13 +28115,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险五：患者信息与工作节奏带来的双重压力。饮食史、体重与进食记录属个人健康信息，超范围使用会引发隐私问题；同时配餐高峰与时间压力（61% 每天）容易让人跳过核对。控制方式是按岗位权限访问与使用信息、把核对清单化并在高峰期坚持按清单执行、必要时向上反映人力与排班问题。"
+              "编辑注意高峰核对和交接；61%每日时间压力是情境而非已经跳过核对的发生率。中国医疗健康属于敏感个人信息，按个人信息保护法核合法依据、特定目的及充分必要、严格保护、适用告知和事前影响评估；基于同意处理须符合单独同意等要求，其他法定依据另核，不能一律限为照护或仅同意。去标识不等匿名化，机构账户不自动允许外部AI上传；访问、记录及受托处理按实际责任核。"
             ]
           },
           "id": "actors.risk.career-risk-cards.5",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa",
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -28104,13 +28175,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：以下风险条目依据 O*NET 的工作情境数据（每天暴露于疾病或感染 82%、每天处于环境受控的室内 91%、穿戴常见防护或安全装备 65% 每天、时间压力 61% 每天、精确或准确的重要性 57% 极其重要、对其他员工健康与安全负很高责任 71%），以及中国大陆《临床营养科建设与管理指南（试行）》关于营养专业技术人员工作范围与制备部门健康档案、食品原料档案、餐具消毒、食品留样与卫生检查制度的要求整理。"
+              "O*NET调查情境：持续接触78%、面对面79%每天、受控室内91%每天、疾病或感染暴露82%每天、普通PPE65%每天、噪声66%每天、时间压力61%每天；团队72%极重要、准确57%极重要、他人员工安全责任71%很高。频率非感染或差错率，PPE不是所有人每天。周工时31%超过40/37%等于40/33%少于40（报告取整），99%规律安排非无早晚或周末。 中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。 指南第8条要求临床营养科医疗膳食及肠内营养制备部门建立工作人员健康档案、原料档案、餐具消毒、食品留样和卫生检查制度，不将其直接解释为所有学校食堂或每位厨师同一临床职责；具体温度、双人复核和停工恢复按适用规程核，本轮未取得统一参数。"
             ]
           },
           "id": "actors.display.career_risk_cards.evidence-scope",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -28119,13 +28190,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界：本板块说明常见风险与控制方式，不构成医疗、食品安全合规或法律意见；实际的营养筛查与评估、肠内营养配制、医疗膳食配置与治疗饮食调整，须由经培训并获授权的营养专业技术人员按机构制度与所在地规定执行。"
+              "中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。 本页不给真实配制、停止/恢复流程或临床参数。"
             ]
           },
           "id": "actors.display.career_risk_cards.boundary",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -28509,13 +28579,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "OEWS 工资与 O*NET 工作情境：用于说明作业条件与责任程度（每天暴露于疾病或感染 82%、穿戴防护装备 65% 每天、时间压力 61% 每天）。"
+              "原工资链接不能支持感染/防护情境，本卡改引O*NET详细档案；频率不当风险事件率。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.bls",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28524,13 +28593,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "雇主与机构制度：实际的防护要求、留样与消毒规范、排班与交接要求以机构制度为准。"
+              "旧OOH链接非雇主制度实采；编辑核当前单位职责、培训与操作规程，BLS典型准备不代机构制度。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.employer",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -28539,13 +28607,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国大陆口径：《临床营养科建设与管理指南（试行）》第六条与第八条对营养专业技术人员工作范围与制备部门制度的要求；公共营养师职业技能等级证书不具备医师执业资质。"
+              "中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。 指南第8条要求临床营养科医疗膳食及肠内营养制备部门建立工作人员健康档案、原料档案、餐具消毒、食品留样和卫生检查制度，不将其直接解释为所有学校食堂或每位厨师同一临床职责；具体温度、双人复核和停工恢复按适用规程核，本轮未取得统一参数。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.cn-rule",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -28554,13 +28621,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "ILO 职业暴露研究：用于说明技术变化对任务的影响范围，不作为照护风险或食品安全风险的依据。"
+              "当前链接实际O*NET详细档案，用于任务与情境，不是ILO研究。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.sag",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28592,14 +28658,12 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本页的入门说明针对「膳食技术员」这一岗位族：医院临床营养科与配餐部门的营养照护执行岗位、长期照护与康复机构的营养与膳食岗位、学校与机关与企事业单位食堂的配餐与营养岗位，以及健康管理与月子服务等机构的营养服务岗位。岗位名称在不同机构差别较大（如营养技师、营养科助理、配餐营养员、膳食管理员），对照时应以实际职责与授权为准，而不是以名称判断。"
+              "编辑岗位阅读：按真实医院临床营养/食品服务/集体供餐的职责核学历、排班、训练和权限，本轮未采代表性招聘样本，示例方向不是已核全国分布。中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-cn-guideline"
           ],
           "type": "notice"
         },
@@ -28625,35 +28689,35 @@
               [
                 "病区营养照护执行岗",
                 "在营养师与带教人员指导下，按餐次记录患者进食量与进食方式、按规程测量体重，并把变化与饮食问题整理后上报",
-                "是否按制度如实记录、是否按规则识别需上报的变化、是否清楚哪些判断须交给营养师",
+                "编辑核对该单位岗位公告、资质、培训和质量规程；没有真实雇主样本，所列行为仅观察建议。",
                 "用虚构患者的进食与体重记录做一次「标出需上报变化＋写交接记录」的练习材料",
-                "以床边观察与记录为主，不涉及治疗饮食的方案确定，是进入本职业最常见的起点"
+                "编辑入门方向示例，未核最常见起点；真实临床筛查需相关执业资质及培训。"
               ],
               [
                 "集体供餐配餐岗",
                 "按菜单与份量核算备餐，完成治疗饮食与普通餐的配置与分发，核对餐次与对象并做好记录",
-                "是否按医嘱类别与过敏与吞咽限制核对、是否在高峰时段仍完成记录与留样",
+                "编辑核对该单位岗位公告、资质、培训和质量规程；没有真实雇主样本，所列行为仅观察建议。",
                 "用一份治疗饮食核对清单与分发记录模板说明自己理解核对与留痕要求",
                 "作业节奏由供餐时段决定，考验高峰期的流程执行与细致度"
               ],
               [
                 "治疗饮食核对与分发岗",
                 "按医嘱饮食类别核对配置份量与分发对象，涉及过敏与吞咽风险时按制度设置复核",
-                "是否理解治疗饮食类别与限制、是否执行双人复核、是否把异常及时上报",
+                "编辑核对该单位岗位公告、资质、培训和质量规程；没有真实雇主样本，所列行为仅观察建议。",
                 "用一份虚构医嘱类别与餐次对照表完成核对并写出需复核与需请示事项",
                 "更强调医嘱理解与风险识别，对流程与责任意识要求更高"
               ],
               [
                 "营养宣教与咨询辅助岗",
                 "按营养师确定的方案向患者与家属说明食物选择与准备与菜单规划要点，协助组织宣教活动",
-                "是否只说明已确定方案、是否不越权给出治疗建议、是否能把要点讲清楚",
+                "编辑核对该单位岗位公告、资质、培训和质量规程；没有真实雇主样本，所列行为仅观察建议。",
                 "用一段虚构宣教材料与三个常见问题，写出在授权范围内的答复要点",
                 "以沟通与材料整理为主，需要清楚区分宣教与咨询与治疗的边界"
               ],
               [
                 "食品安全与质量记录岗",
                 "落实食品原料档案、餐具消毒、温度核对与留样要求并记录，协助检查制度执行情况",
-                "是否按制度取样留样与记录、是否理解追溯要求、是否敢于报告不符合项",
+                "编辑核对该单位岗位公告、资质、培训和质量规程；没有真实雇主样本，所列行为仅观察建议。",
                 "用一份留样与消毒与温度检查表说明自己理解取样时点与记录要求",
                 "以制度执行与记录为主，是集体供餐与临床膳食岗位的共同基础"
               ]
@@ -28661,9 +28725,7 @@
           },
           "id": "actors.path.entry-role-comparison.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-cn-guideline"
           ],
           "title": "常见入门方向与初期任务",
           "type": "table"
@@ -28834,8 +28896,8 @@
               [
                 "高中或同等学历",
                 "所有希望进入本职业的人",
-                "部分配餐与食品服务岗位的基础要求；若希望进入营养照护执行岗位，通常还需后续课程或训练",
-                "并非所有岗位的硬性门槛，但仅有高中历会明显限制可选岗位",
+                "高中不是BLS本职业典型入口；具体食品服务岗位条件另核。",
+                "未取所有雇主学历条件，不以高中断言可选岗位多少。",
                 "按当地学制完成学业",
                 "时间为数年，主要投入是学业本身",
                 "学历不说明记录习惯与卫生执行能力，也不替代机构培训"
@@ -28843,55 +28905,58 @@
               [
                 "副学士或两年制学位（营养与膳食相关）",
                 "希望从事营养照护执行岗位的人",
-                "本职业常见的入门准备；从新入职者反馈看 35% 认为需要副学士或其他两年制学位",
-                "不是唯一路径（27% 反馈需要中学后证书），但会影响可进入的机构与岗位层级",
-                "社区学院或职业院校相关专业的入学条件；课程通常混合课堂与实操",
+                "美国29-2051：O*NET Job Zone3、SVP6到低于7，组级1—2年准备描述非每个项目固定学制；学历35%副学士、27%高中后证书、15%部分大学未学位是受访者对新入职所需学历的意见，非新入职者或现有员工学历分布。BLS表1.2典型副学士、相关工作经验None、在岗训练None；不免教育内受监督实践或雇主培训。未核本职业实际注册学徒项目和全部州许可。",
+                "典型统计分类非全部雇主法定统一门槛。",
+                "CDR DTR/NDTR报考两分支：USDE认可院校副学士或外国等同学历加ACEND营养技师项目（至少450小时受监督实践）；或认可院校学士或外国等同学历加ACEND DPD。满足条件并由CDR确认后才可参加注册考试，不把450小时套第二分支；普通证书课程不自动满足。费用、续证及目标州和岗位要求本轮未逐核。",
                 "时间约两年，费用按院校标准",
-                "课程完成不等于取得注册或认证，仍须在职训练与机构授权"
+                "课程完成不自动认证，BLS在岗None不免课程内实践。"
               ],
               [
                 "中学后证书课程（营养与膳食方向）",
                 "希望较快进入岗位或作为副学士路径替代方案的人",
-                "从新入职者反馈看 27% 认为需要此类证书；部分雇主以其作为入门条件",
+                "O*NET27%是所需学历意见，不是已核27%雇主或新入职者。",
                 "并非普遍强制，具体以机构招聘要求为准",
-                "按院校或培训机构的入学与结业条件完成课程",
-                "时间从数月到一年不等，费用按机构标准",
+                "普通课程按学校条件；若目标NDTR，另须满足CDR明确分支。",
+                "未取具体课程学制费用，不填通用数月至一年。",
                 "结业证书不等同营养师资格，也不授予营养诊断或处方权限"
               ],
               [
                 "行业认证与注册（如注册营养技师方向）",
                 "希望建立可核对专业证据并提高岗位竞争力的在岗人员",
-                "部分机构将其作为优先录用或岗位分级依据，也可能与工资分位相关",
-                "通常不是法定门槛，但州与雇主要求不同",
-                "一般需完成经认可的教育与实习并通过考试，具体条件按认证机构公布",
+                "CDR资格报考按两条明确分支；未核认证工资溢价或普遍优先录用。",
+                "目标州及单位要求另核，未核全国一律非门槛。",
+                "CDR DTR/NDTR报考两分支：USDE认可院校副学士或外国等同学历加ACEND营养技师项目（至少450小时受监督实践）；或认可院校学士或外国等同学历加ACEND DPD。满足条件并由CDR确认后才可参加注册考试，不把450小时套第二分支；普通证书课程不自动满足。费用、续证及目标州和岗位要求本轮未逐核。",
                 "教育与实习时间、考试费用与维持认证的持续要求",
                 "认证与注册证明专业能力方向，不等于营养师资格或执业授权，也不可替代机构授权"
               ],
               [
                 "中国大陆：公共营养师职业技能等级",
                 "在中国大陆从事营养与膳食执行希望建立技能等级证据的人",
-                "用于说明技能水平，部分地区与岗位聘任与技能提升补贴相关",
-                "该职业已退出国家职业资格目录，转为职业技能等级认定；是否作为招聘硬性条件由用人单位决定",
-                "按《公共营养师国家职业技能标准（2021 年版）》申报条件报名，由经人力资源社会保障部门备案的第三方评价机构组织理论知识与技能考核",
-                "培训与认定费用、时间；部分地区对取得证书人员有技能提升补贴",
-                "证书不具备医师执业资质，不得开展疾病诊疗或处方干预，也不等于营养师或临床营养医师资格"
+                "技能证书可作训练证据，未核普遍聘任工资或补贴收益。",
+                "技能等级与医疗工作资质分开；未核每个岗位证书要求。",
+                "公共营养师2021技能标准4-14-02-01为营养评价指导、知识传播及促进公众健康，四级/三级/二级/一级，普通高中或同等文化；四级可按相关证书后经验与培训、累计工作6年或规定相关学校等不同分支，三级另有相关大学专业、非相关专业加经验或培训等分支。参考学时200/150/150/100不是所有路径强制课时或日历时长；理论、技能和适用综合评审各60，技师/高技综合评审。实际按机构现行申报公告核，不把2021旧文本或付费培训当自动获得资格、诊疗许可或补贴。",
+                "机构现行费用及补贴资格本轮未核。",
+                "中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
               ],
               [
                 "中国大陆：机构岗位训练与营养科工作规范培训",
                 "在医院营养科或集体供餐单位任职并需要按制度上岗的人",
                 "用于满足机构对食品卫生、留样、消毒与营养照护流程的上岗要求",
-                "由用人单位与机构制度决定，是实际执行岗位的前置条件",
+                "培训、真实资格和单位职责分别满足，不只完成培训就可临床筛查。",
                 "按机构岗前培训与考核安排完成，部分岗位要求健康证明与食品安全相关培训",
                 "培训时间与体检与健康证明费用按机构安排",
-                "机构训练不等于职业技能等级证书，也不扩大工作范围到营养诊断与治疗"
+                "中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
               ]
             ]
           },
           "id": "actors.path.credential-decision.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-cn-guideline",
+            "r5-cdr-eligibility",
+            "r5-cdr-registration",
+            "r5-cn-standard",
+            "r5-bls-current",
+            "sag-moa"
           ],
           "title": "训练、资格与材料怎么选择",
           "type": "table"
@@ -28901,17 +28966,18 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "训练、资格与边界的第一条：招聘公告中的学历、专业、经验与认证要求必须逐条读取；一项可放宽不代表其他条件可被替代，也不代表训练完成即可独立执行治疗饮食核对或营养筛查。",
-              "第二条：本页的纸面练习与七天体验只用于职业探索，不构成训练合格、执业资质、机构授权或食品安全与医疗操作许可；任何真实的营养筛查与评估、肠内营养配制、医疗膳食配置与治疗饮食调整，都须由经培训并获授权的人员按机构制度执行。",
-              "第三条：不同证明的是不同的事情——课程与学位证明学习经历，行业认证与注册证明特定专业能力，公共营养师职业技能等级证书说明技能水平，机构岗前培训与健康证明满足上岗要求；它们之间不能互相替代，也都不等于营养师资格或医师执业资格。",
-              "第四条：进入本职业应先核对目标机构的岗位说明、入门学历与训练要求、认证与注册要求以及排班与卫生规范，再决定训练投入；不要把「懂营养常识」当作可以自行给患者建议的依据。"
+              "中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。",
+              "CDR DTR/NDTR报考两分支：USDE认可院校副学士或外国等同学历加ACEND营养技师项目（至少450小时受监督实践）；或认可院校学士或外国等同学历加ACEND DPD。满足条件并由CDR确认后才可参加注册考试，不把450小时套第二分支；普通证书课程不自动满足。费用、续证及目标州和岗位要求本轮未逐核。",
+              "公共营养师2021技能标准4-14-02-01为营养评价指导、知识传播及促进公众健康，四级/三级/二级/一级，普通高中或同等文化；四级可按相关证书后经验与培训、累计工作6年或规定相关学校等不同分支，三级另有相关大学专业、非相关专业加经验或培训等分支。参考学时200/150/150/100不是所有路径强制课时或日历时长；理论、技能和适用综合评审各60，技师/高技综合评审。实际按机构现行申报公告核，不把2021旧文本或付费培训当自动获得资格、诊疗许可或补贴。",
+              "编辑报名前核目标机构学历、专业、经验、认证与合法工作范围；课程、技能证书和机构培训彼此不等同，不以纸面练习代合格。"
             ]
           },
           "id": "actors.path.credential-boundary.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-cn-guideline",
+            "r5-cdr-eligibility",
+            "r5-cdr-registration",
+            "r5-cn-standard"
           ],
           "title": "训练、资格与工作范围边界",
           "type": "notice"
@@ -28921,14 +28987,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本页的入行路径以可核对的准备层级与岗位要求为基础，分为三段：先建立记录与卫生与核对的基本功，再进入治疗饮食执行与营养照护协助，最后形成方向专精或质量与带教能力。每段都以「在被督导的条件下做出可核对的结果」为晋级依据，而不是以年限自动晋级。"
+              "编辑学习框架：先练记录、卫生与核对，再在相应资质与授权下学习临床营养执行和照护，最后探索质量、训练或专精方向。监督下可核对结果是学习反馈建议，不是全国统一晋级制度；实际任职、升职与授权按目标机构要求核。"
             ]
           },
           "id": "actors.path.career-path-block.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-cn-guideline",
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -28937,14 +29003,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国口径：本职业准备层级为 Job Zone Three（中等准备，SVP 6.0 到低于 7.0），通常需要 1—2 年培训并存在学徒机会；从新入职者反馈看 35% 认为需要副学士或其他两年制学位、27% 认为需要中学后证书、15% 为部分大学经历无学位；雇主可能要求或优先考虑行业认证与注册，州层面的许可与认证要求因州而异；本页未取得 BLS 职业展望页的第一手口径，故不并列其准备层级表述。"
+              "美国29-2051：O*NET Job Zone3、SVP6到低于7，组级1—2年准备描述非每个项目固定学制；学历35%副学士、27%高中后证书、15%部分大学未学位是受访者对新入职所需学历的意见，非新入职者或现有员工学历分布。BLS表1.2典型副学士、相关工作经验None、在岗训练None；不免教育内受监督实践或雇主培训。未核本职业实际注册学徒项目和全部州许可。 美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。"
             ]
           },
           "id": "actors.path.career-path-block.2",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-bls-current",
+            "sag-moa",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -28953,14 +29019,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆口径：经临床营养专业教育或培训的营养专业技术人员，按《临床营养科建设与管理指南（试行）》第六条可开展营养咨询、营养筛查及评估、肠内营养配制、医疗膳食配置与营养宣教；营养诊断与营养治疗由经临床营养专业培训的医师承担；第八条要求医疗膳食及肠内营养制备部门建立岗位工作人员健康档案、食品原料档案、餐具消毒制度、食品留样制度和卫生检查制度；公共营养师已转为职业技能等级认定，证书不具备医师执业资质。"
+              "美国O*NET定义在营养师监督下协助食品服务及营养项目，任务包含营养评估，不统一缩为只记录；美国目标州及单位实际执业范围另核。中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.path.career-path-block.3",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -29152,14 +29217,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国与中国的管理方式不同：美国以学历与课程与行业认证与州许可为主；中国大陆以机构岗位训练与工作范围制度（《临床营养科建设与管理指南（试行）》）与公共营养师职业技能等级认定为主。"
+              "中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。 CDR DTR/NDTR报考两分支：USDE认可院校副学士或外国等同学历加ACEND营养技师项目（至少450小时受监督实践）；或认可院校学士或外国等同学历加ACEND DPD。满足条件并由CDR确认后才可参加注册考试，不把450小时套第二分支；普通证书课程不自动满足。费用、续证及目标州和岗位要求本轮未逐核。"
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-cn-guideline",
+            "r5-cdr-eligibility",
+            "r5-cdr-registration"
           ],
           "type": "prose"
         },
@@ -29168,14 +29233,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本职业在美国的常见准备为副学士或其他两年制学位或中学后证书，通常需 1—2 年培训，并可能存在学徒项目；在中国大陆不设该职业的统一准入许可，实际条件由用人单位岗位要求与机构制度与相关主管部门规定共同决定。"
+              "美国29-2051：O*NET Job Zone3、SVP6到低于7，组级1—2年准备描述非每个项目固定学制；学历35%副学士、27%高中后证书、15%部分大学未学位是受访者对新入职所需学历的意见，非新入职者或现有员工学历分布。BLS表1.2典型副学士、相关工作经验None、在岗训练None；不免教育内受监督实践或雇主培训。未核本职业实际注册学徒项目和全部州许可。 美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。"
             ]
           },
           "id": "actors.display.career_path_block.locale.summary",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-bls-current",
+            "sag-moa",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -29216,14 +29281,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成高中或同等学历教育，修读营养与膳食相关课程或中学后证书课程，掌握记录规范、食品卫生与留样与消毒要求以及基础营养知识。"
+              "先核目标国家与岗位。美国BLS该细类典型副学士、相关经验及在岗训练None，不免课程实践或单位培训；CDR注册分副学士加ACEND技师项目至少450监督小时，或学士加ACEND DPD，普通证书不自动代替。中国按目标岗位教育、相关执业资质与训练核，不以公共营养师证直接获得临床权限。"
             ]
           },
           "id": "actors.display.career_path_block.ladder.prepare.description",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-bls-current",
+            "r5-cdr-eligibility",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -29392,14 +29457,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入门阶段通常无专门证照要求；需完成机构岗前培训与健康证明要求"
+              "按目标食品服务岗位条件核，本轮未取全部入门证照/健康证明要求；开展临床筛查另需指南附件的相关执业资质与培训。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.credentials",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -29520,14 +29583,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按医嘱类别与过敏与吞咽限制核对配置与分发对象，执行双人复核并记录。"
+              "在获授权范围按患者医嘱类别、过敏和吞咽限制核配置与分发对象，记录与上报异常；双人复核是否适用依真实机构规程，本轮未核全国一律双人制度。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.03.responsibility",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-cn-guideline",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29696,14 +29758,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "采集并评估个人饮食史，协助整理营养筛查与评估材料，按规则向营养师报告异常。"
+              "编辑学习目标：饮食史及临床资料记录与异常报告；满足相应资格、培训和机构分工才承担临床筛查/评估，不由入门职称自动授权。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.01.responsibility",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -29728,14 +29788,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入门阶段无强制证照；需完成机构培训与卫生要求"
+              "材料整理岗位按实际聘用条件核；若开展中国临床营养筛查，须相关执业资质加培训，不写入门一律无证照。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.01.credentials",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -29808,14 +29866,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国内地可在机构培训与备案评价机构取得职业技能等级证书"
+              "公共营养师2021技能标准4-14-02-01为营养评价指导、知识传播及促进公众健康，四级/三级/二级/一级，普通高中或同等文化；四级可按相关证书后经验与培训、累计工作6年或规定相关学校等不同分支，三级另有相关大学专业、非相关专业加经验或培训等分支。参考学时200/150/150/100不是所有路径强制课时或日历时长；理论、技能和适用综合评审各60，技师/高技综合评审。实际按机构现行申报公告核，不把2021旧文本或付费培训当自动获得资格、诊疗许可或补贴。 中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.02.credentials",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-cn-standard",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -30192,14 +30249,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "转向膳食与营养师，承担营养评估与诊断与治疗方案与医学营养治疗建议。"
+              "目标美国29-1031规划及开展营养项目，可咨询监督研究；实际临床诊疗与处方须相应法域资格，不能由职业名称推中国所有营养师可诊疗。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.03.responsibility",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "agent",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -30352,14 +30408,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "雇主岗位说明与机构制度：实际的岗前培训、认证与注册偏好、健康证明与排班要求以机构制度与招聘公告为准。"
+              "旧链接为403的OOH而非真实雇主公告；典型教育改用BLS表1.2，具体岗位证书及费用另核。"
             ]
           },
           "id": "actors.display.career_path_block.source.employer",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-bls-current",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30368,14 +30423,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆口径：《临床营养科建设与管理指南（试行）》第六条与第八条对营养专业技术人员工作范围与制备部门制度的要求，以及公共营养师国家职业技能标准（2021 年版）与技能等级认定。"
+              "中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。 技能等级标准为另外的2021原文，不由临床指南支持全部评价条件。"
             ]
           },
           "id": "actors.display.career_path_block.source.cn-rule",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-cn-guideline",
+            "r5-cn-standard"
           ],
           "type": "prose"
         },
@@ -30408,13 +30462,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "前景要看两件事：总量与更替。O*NET 摘要页给出 2024 年约 30,900 人的就业规模与 2024—2034 年增长 3% 至 4%（与平均相当），并给出约 4,000 个预计职位空缺；空缺以更替需求为主，即在职人员转岗、退休或退出劳动力市场形成的岗位补充。本页未取得 BLS 职业展望页的第一手口径（该页本次抓取不可用），因此不并列第二个预测数值。"
+              "美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -30423,13 +30477,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "影响需求的因素：当地医疗机构密度与床位数、长期照护与康复服务规模、学校与机关与企事业单位集体供餐覆盖、以及人口老龄化与慢性病管理与营养筛查制度推行程度。营养筛查与评估要求在医疗机构落实得越明确，营养与膳食执行岗位的工作内容越规范，对记录与核对能力的需求也越高。"
+              "2024国卫办医政函333要求落实营养筛查评估、人员培训与学科建设，鼓励有条件医院提高临床营养人员待遇并吸引人才；这是政策方向，不是已提高的工资、招聘数量或普遍补贴。 需求路径是政策信号，本轮无执行率/新增岗位量化，不套美国个人机会。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls",
-            "oews"
+            "editor"
           ],
           "type": "prose"
         },
@@ -30453,13 +30506,18 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转型方向：横向可转向膳食与营养师（需补齐学历与实习与考试条件）、机构与食堂厨师、餐饮服务经理、护理助理与医疗助理等相邻方向；纵向可在临床营养执行、集体供餐与食品安全、营养宣教与咨询辅助或质量与培训方向专精。转岗时真正的门槛是对象知识、依据与授权范围，而不是既有操作熟练度。"
+              "编辑比较方向：营养项目与咨询、机构烹饪、餐饮管理、基本照护及医疗助理各有不同任务与资质体系。先核目标法域教育、实践、考试、监督与授权，不保证直接转岗；临床营养执行、供餐质量及宣教辅助是待核岗位方向。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent",
+            "teacher",
+            "enrichment",
+            "art",
+            "directing",
+            "r5-cdr-eligibility",
+            "r5-cn-guideline"
           ],
           "type": "prose"
         },
@@ -30468,13 +30526,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "风险提示：本职业规模较小，区域性差异明显——医疗机构与长期照护机构集中的地区岗位更多，偏远地区岗位少但竞争也小；集体供餐岗位受外包与餐饮企业承接方式影响；把某一年的招聘热度或个别机构的情况当作长期趋势，容易高估或低估机会。"
+              "未取得地区招聘/竞争、外包与本职业净岗位因果资料，不称偏远地区竞争必较小。全国预测不代地方当前需求。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.5",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -30498,13 +30555,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "限制：本行是美国官方统计口径的就业与预测（O*NET 摘要页 2024 年基期与 2024—2034 年预测期），不能用于推断个人录用概率或某机构的岗位数量。"
+              "美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。"
             ]
           },
           "id": "actors.display.market_signal_card.outlook.us.limit",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -30543,13 +30600,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "膳食与营养师：都以营养与膳食为工作对象、都需要与患者与临床团队沟通、都依赖准确的记录与数据。"
+              "29-1031规划及开展食品服务和营养项目，可监督、咨询和研究；目标专业及法域权限另核，不能由膳食技师经验自动取得诊疗或处方许可。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30558,13 +30614,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补齐学历与实习与考试条件以满足该岗位层级的评估与诊断与方案要求；执行岗位经验不能直接替代。"
+              "29-1031规划及开展食品服务和营养项目，可监督、咨询和研究；目标专业及法域权限另核，不能由膳食技师经验自动取得诊疗或处方许可。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30573,13 +30628,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：对象相同但授权层级不同，需要额外的教育与实习投入。"
+              "29-1031规划及开展食品服务和营养项目，可监督、咨询和研究；目标专业及法域权限另核，不能由膳食技师经验自动取得诊疗或处方许可。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30588,13 +30642,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "机构与食堂厨师：都熟悉批量供餐流程、都重视卫生与操作规范、都按供餐节拍工作。"
+              "35-2012在学校医院自助食堂大量烹制，转入核大批量烹饪、出品及设备；不反向要求再向营养执行专精，也不排除目标有治疗膳食记录。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30603,13 +30656,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需重新学习菜品工艺与出品标准；治疗饮食类别核对与营养记录不属厨师职责。"
+              "35-2012在学校医院自助食堂大量烹制，转入核大批量烹饪、出品及设备；不反向要求再向营养执行专精，也不排除目标有治疗膳食记录。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30618,13 +30670,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近但内容不同：可从配餐环节进入，再向营养执行方向专精。"
+              "35-2012在学校医院自助食堂大量烹制，转入核大批量烹饪、出品及设备；不反向要求再向营养执行专精，也不排除目标有治疗膳食记录。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30633,13 +30684,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "餐饮服务经理：都参与菜单与份量核算与成本控制、都了解供餐体系运行。"
+              "11-9051计划指挥协调食品饮料服务，转入核组织经营、人员和成本等管理职责；现有成本任务不等全部经营能力。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30648,13 +30698,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补齐经营计划、采购与库存、人员排班与成本管理的整体管理能力。"
+              "11-9051计划指挥协调食品饮料服务，转入核组织经营、人员和成本等管理职责；现有成本任务不等全部经营能力。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30663,13 +30712,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：从执行转为管理，职责与考核方式变化较大。"
+              "11-9051计划指挥协调食品饮料服务，转入核组织经营、人员和成本等管理职责；现有成本任务不等全部经营能力。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30678,13 +30726,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "护理助理：都在床边或病区工作、都需要与患者与家属沟通、都承担照护记录。"
+              "31-1131在现场持证护理人员监督下基本照护，包括喂食、洗浴如厕移动及健康观察，某些医疗任务须按合法范围；核护理训练及单位职责。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30693,13 +30740,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需重新学习日常照护与体位与转移与基础生命体征观察等护理规范。"
+              "31-1131在现场持证护理人员监督下基本照护，包括喂食、洗浴如厕移动及健康观察，某些医疗任务须按合法范围；核护理训练及单位职责。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30708,13 +30754,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：场景接近但照护内容与记录要求不同。"
+              "31-1131在现场持证护理人员监督下基本照护，包括喂食、洗浴如厕移动及健康观察，某些医疗任务须按合法范围；核护理训练及单位职责。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30723,13 +30768,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "医疗助理：都以流程与记录为核心、都需要与患者沟通并处理信息系统。"
+              "31-9092在医师指导下行政及某些临床支持，含预约病历收费保险编码、生命体征、备检及按指导采血/给药；不缩为接待文书，目标范围按法域核。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30738,13 +30782,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需重新学习门诊流程、预约与录入与协助检查等行政与临床支持内容。"
+              "31-9092在医师指导下行政及某些临床支持，含预约病历收费保险编码、生命体征、备检及按指导采血/给药；不缩为接待文书，目标范围按法域核。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30753,13 +30796,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：都以流程与记录为共同基础，内容与服务对象不同。"
+              "31-9092在医师指导下行政及某些临床支持，含预约病历收费保险编码、生命体征、备检及按指导采血/给药；不缩为接待文书，目标范围按法域核。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30768,13 +30810,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "食品制备工人：都熟悉食品清洗切配与分装的操作规范与卫生要求。"
+              "35-2021做非烹饪食品准备，如冷食、贝类肉类及饮料；转入核食品准备流程和设备安全，不反向要求补营养判断才能做该目标。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30783,13 +30824,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补齐营养与膳食类别判断、记录与上报等需要判断与留痕的能力。"
+              "35-2021做非烹饪食品准备，如冷食、贝类肉类及饮料；转入核食品准备流程和设备安全，不反向要求补营养判断才能做该目标。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30798,13 +30838,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：可从操作性岗位起步，再向营养执行岗位过渡。"
+              "35-2021做非烹饪食品准备，如冷食、贝类肉类及饮料；转入核食品准备流程和设备安全，不反向要求补营养判断才能做该目标。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30813,13 +30852,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "儿童家庭与学校社会工作者：都面向人群开展服务与沟通、都需要记录与转介与多机构协作。"
+              "21-1021服务儿童家庭社会心理与学校功能，包括收养寄养及学校妊娠、行为和旷课等问题；核目标社会工作方法及法域资格，沟通经验不代专业。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30828,13 +30866,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需重新学习教育与家庭与社区服务的方法与专业规范。"
+              "21-1021服务儿童家庭社会心理与学校功能，包括收养寄养及学校妊娠、行为和旷课等问题；核目标社会工作方法及法域资格，沟通经验不代专业。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30843,13 +30880,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较远：服务对象与专业方法不同，但沟通与协作能力可迁移。"
+              "21-1021服务儿童家庭社会心理与学校功能，包括收养寄养及学校妊娠、行为和旷课等问题；核目标社会工作方法及法域资格，沟通经验不代专业。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30858,13 +30894,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "餐厅厨师：都熟悉食材与基础烹饪与厨房卫生要求。"
+              "35-2014餐厅菜肴烹饪，可计划菜单、订料记录与定价；转入核餐厅工艺出品，不反向要求拓展临床营养或断言菜单非厨师职责。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30873,13 +30908,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需拓宽至菜单与份量核算与治疗饮食配置等集体供餐与营养执行环节。"
+              "35-2014餐厅菜肴烹饪，可计划菜单、订料记录与定价；转入核餐厅工艺出品，不反向要求拓展临床营养或断言菜单非厨师职责。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30888,13 +30922,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：基础烹饪技能可迁移，但工作目的与规范不同。"
+              "35-2014餐厅菜肴烹饪，可计划菜单、订料记录与定价；转入核餐厅工艺出品，不反向要求拓展临床营养或断言菜单非厨师职责。 仅编辑任务对照，无近中远量化或固定转岗成功/培训时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30903,13 +30936,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "OEWS 与 O*NET 摘要页：用于本页的工资分位与就业与预测数值（2024 年基期与 2024—2034 年预测期），均为美国受雇统计口径。"
+              "工资页只支持工资分位；当前就业/训练改引BLS表1.2，就业包含自雇不统称受雇覆盖。"
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "bls"
           ],
           "type": "prose"
         },
@@ -30918,13 +30951,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 执照与认证入口：用于核对该职业代码下的认证与学徒信息入口，不等于行业认证或执业授权本身。"
+              "O*NET认证入口供后续查找；CDR实际注册考试教育条件见独立资格页，不把入口作全部州许可比较或学徒项目证据。"
             ]
           },
           "id": "actors.display.market_signal_card.source.ratify",
           "source_refs": [
-            "bls",
-            "oews"
+            "ratify",
+            "r5-cdr-eligibility"
           ],
           "type": "prose"
         },
@@ -30933,13 +30966,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "雇主与机构岗位说明：用于说明实际的职责范围、班次与训练与健康证明要求，不代表任何机构当前的招聘状态或薪酬水平。"
+              "旧链接不是雇主岗位实采；本轮无代表性招聘样本，2024政策及CDR资格不代当前聘用承诺。"
             ]
           },
           "id": "actors.display.market_signal_card.source.employer",
           "source_refs": [
-            "bls",
-            "oews"
+            "editor",
+            "r5-cdr-eligibility",
+            "r5-cdr-registration"
           ],
           "type": "prose"
         },
@@ -30948,13 +30982,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET OnLine 本职业档案：用于任务、兴趣代码 SCR、工作情境比例与准备层级，属于职业特征描述而非个人能力判断。"
+              "O*NET自身职业档案用于任务、SCR兴趣、情境及准备层级，不是个人能力判断或临床权限依据。"
             ]
           },
           "id": "actors.display.market_signal_card.source.onet",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         }
@@ -31074,14 +31108,31 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "中国与美国数据分栏：美国使用 OEWS 工资与 O*NET 的任务与工作情境与就业预测；中国大陆使用《临床营养科建设与管理指南（试行）》与公共营养师国家职业技能标准与技能等级认定的制度性说明，未取得职业级工资口径处保留可见缺口标记。",
-              "口径不互换：精确职业、组合职业、父职业与行业代理各有其适用范围；本页不以行业均值替代职业工资，也不把相邻的营养师岗位数值套用到本职业，不以某一机构的招聘报价替代统计口径。",
-              "边界不越界：本页的纸面练习与七天体验只用于职业探索；真实的营养筛查与评估、肠内营养配制、医疗膳食配置与治疗饮食调整须由经培训并获授权的人员按机构制度执行，营养诊断与治疗由营养师或经临床营养专业培训的医师承担，本页不构成医疗、食品安全合规或法律意见。"
+              "2025全国工资10/25/50/75/90分位：年29720/33880/37640/45750/54020美元，时14.29/16.29/18.09/22.00/25.97美元。OEWS直时税前含基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金与自雇；不一概排除所有津贴或所有合同雇员。分位不是起薪、年限、认证效果或到手收入。",
+              "美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。",
+              "NBS2025卫生和社会工作城镇非私营146266/私营75631元税前年平均，用于实际医疗单位多职业背景，不是膳食技术员中位、起薪或招聘报价；覆盖城镇5人以上法人，非私营含事业机关及外资等、不只国企，排除个体和自由职业。不套全部食堂、学校或自营机构。",
+              "美国29-2051：O*NET Job Zone3、SVP6到低于7，组级1—2年准备描述非每个项目固定学制；学历35%副学士、27%高中后证书、15%部分大学未学位是受访者对新入职所需学历的意见，非新入职者或现有员工学历分布。BLS表1.2典型副学士、相关工作经验None、在岗训练None；不免教育内受监督实践或雇主培训。未核本职业实际注册学徒项目和全部州许可。",
+              "CDR DTR/NDTR报考两分支：USDE认可院校副学士或外国等同学历加ACEND营养技师项目（至少450小时受监督实践）；或认可院校学士或外国等同学历加ACEND DPD。满足条件并由CDR确认后才可参加注册考试，不把450小时套第二分支；普通证书课程不自动满足。费用、续证及目标州和岗位要求本轮未逐核。",
+              "公共营养师2021技能标准4-14-02-01为营养评价指导、知识传播及促进公众健康，四级/三级/二级/一级，普通高中或同等文化；四级可按相关证书后经验与培训、累计工作6年或规定相关学校等不同分支，三级另有相关大学专业、非相关专业加经验或培训等分支。参考学时200/150/150/100不是所有路径强制课时或日历时长；理论、技能和适用综合评审各60，技师/高技综合评审。实际按机构现行申报公告核，不把2021旧文本或付费培训当自动获得资格、诊疗许可或补贴。",
+              "中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。",
+              "指南第8条要求临床营养科医疗膳食及肠内营养制备部门建立工作人员健康档案、原料档案、餐具消毒、食品留样和卫生检查制度，不将其直接解释为所有学校食堂或每位厨师同一临床职责；具体温度、双人复核和停工恢复按适用规程核，本轮未取得统一参数。",
+              "O*NET详细页列营养科学软件Nutritionist Pro/The Food Processor等、配餐数据库、ERP、Computrition NCM/MEDITECH及病历软件，证明职业技术示例而非逐产品功能或采用率；另2025美国招聘关键词Office4%、Excel2%、Outlook2%、Word1%、PowerPoint低于1%、MEDITECH/Access Not available非0，分母为关联本职业全部唯一招聘帖，不是软件采用者或含技术帖。",
+              "本轮未取得29-2051可复核生成式AI采用率、节时效果、营养建议准确性或岗位工资因果。现有软件清单、招聘词、任务情境与就业预测不能证明已经提速、多数机构采用或永不替代；软件计算、设备自动化与生成式AI分别核。ILO2025摘要复用同批已读版本，未核该细类与ISCO映射和暴露评分；NIST AI RMF1.0为自愿治理框架，不规定中国膳食操作权限。",
+              "中国医疗健康属于敏感个人信息，按个人信息保护法核合法依据、特定目的及充分必要、严格保护、适用告知和事前影响评估；基于同意处理须符合单独同意等要求，其他法定依据另核，不能一律限为照护或仅同意。去标识不等匿名化，机构账户不自动允许外部AI上传；访问、记录及受托处理按实际责任核。"
             ]
           },
           "id": "actors.sources.boundary.1",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "bls",
+            "r5-oews-concepts",
+            "r5-cn-guideline",
+            "r5-cdr-eligibility",
+            "r5-cdr-registration",
+            "r5-cn-standard",
+            "r5-nbs-current",
+            "r5-bls-current",
+            "r5-cn-pipl"
           ],
           "type": "list"
         },
@@ -31104,12 +31155,20 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源使用范围：来源链接按各自适用范围使用——美国工资来自 OEWS，任务与工作情境与就业预测来自 O*NET，中国大陆来自国家卫生健康委发布的临床营养工作文件与人力资源社会保障部的职业技能标准与等级认定安排；来源名称与适用范围不互换。"
+              "O*NET自身任务/情境/技术示例和八相邻定义、2025工资招聘词、BLS表1.2及OEWS concepts、NBS2025、CDR资格、2021标准正式PDF和2022指南附件为本轮依据。ILO/NIST同批已读版本复用，细类AI映射、采用效果未核；旧首页/403OOH不代正文。"
             ]
           },
           "id": "actors.display.source_card.source",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "bls",
+            "r5-oews-concepts",
+            "r5-cn-guideline",
+            "r5-cdr-eligibility",
+            "r5-cdr-registration",
+            "r5-cn-standard",
+            "r5-nbs-current",
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -31118,12 +31177,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "更新与检索说明：本页核对日期为 2026-09-19；O*NET 页面标注 2026 年更新，工资数据为 2025 年 5 月，就业与预测基期为 2024 年、预测期为 2024—2034 年，各期间不同，引用时应分别说明；BLS 职业展望页本轮抓取返回 403，未取得其一手口径，本页未引用其数值。"
+              "本轮2026-10-09核对；美国2025工资与2025—2035预测，中国2025行业工资、2021技能标准、2022临床指南及2024建设通知分别标期间。"
             ]
           },
           "id": "actors.display.source_card.updated-at",
           "source_refs": [
-            "onet"
+            "r5-bls-current",
+            "r5-nbs-current",
+            "r5-cn-standard",
+            "r5-cn-guideline",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31132,12 +31195,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "练习与边界提示：本页练习全部使用虚构材料，只用于职业探索；涉及真实患者的营养筛查与评估、肠内营养配制、医疗膳食配置与治疗饮食调整须由经培训并获授权的人员执行，不得越权给出营养诊断或膳食处方。"
+              "中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。 原五练习本轮按授权保留，不签其内容质量。"
             ]
           },
           "id": "actors.display.source_card.note",
           "source_refs": [
-            "onet"
+            "r5-cn-guideline"
           ],
           "type": "prose"
         }
@@ -31242,14 +31305,15 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页相邻职业对照中的授权层级差异说明。",
-                  "不用于推断本职业的工资或岗位数量。"
+                  "不用于推断本职业的工资或岗位数量。",
+                  "本轮实际核查：美国29-1031食品服务及营养项目/咨询/研究定义，非中国医师权限或处方统一许可。"
                 ],
                 "evidence_type": "official occupational profile",
                 "id": "agent",
-                "limitation": "相邻职业档案，用于对照难度与授权层级。该职业负责营养评估与诊断并制定营养治疗方案，其教育与实习与考试要求高于本职业，不能由执行岗位经验替代。",
+                "limitation": "美国29-1031食品服务及营养项目/咨询/研究定义，非中国医师权限或处方统一许可。",
                 "market": "美国",
                 "name": "O*NET OnLine：Dietitians and Nutritionists（29-1031.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-19",
@@ -31290,14 +31354,15 @@
                 "url": "https://www.onetonline.org/link/summary/31-1131.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页工资中位与分位数值。",
-                  "不代表任何个人的到手收入或入职起薪。"
+                  "不代表任何个人的到手收入或入职起薪。",
+                  "本轮实际核查：2025全国工资10/25/50/75/90分位：年29720/33880/37640/45750/54020美元，时14.29/16.29/18.09/22.00/25.97美元。OEWS直时税前含基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金与自雇；不一概排除所有津贴或所有合同雇员。分位不是起薪、年限、认证效果或到手收入。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "提供本职业全国工资的分位数值：年度 29,720／33,880／37,640／45,750／54,020 美元，小时 14.29／16.29／18.09／22.00／25.97 美元；属受雇税前工资统计口径，不含加班费、轮班津贴与非生产性奖金，也不含自营收入。",
+                "limitation": "2025全国工资10/25/50/75/90分位：年29720/33880/37640/45750/54020美元，时14.29/16.29/18.09/22.00/25.97美元。OEWS直时税前含基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金与自雇；不一概排除所有津贴或所有合同雇员。分位不是起薪、年限、认证效果或到手收入。",
                 "market": "美国",
                 "name": "O*NET OnLine：Dietetic Technicians 全国工资（2025 年 5 月工资数据，29-2051.00）",
                 "period": "2025 年 5 月工资数据；检索 2026-09-19",
@@ -31306,14 +31371,15 @@
                 "url": "https://www.onetonline.org/link/localwages/29-2051.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页对中国大陆营养专业技术人员工作范围与制备部门制度的说明。",
-                  "指南规定的是机构与人员工作范围，不等同职业准入许可或工资水平。"
+                  "指南规定的是机构与人员工作范围，不等同职业准入许可或工资水平。",
+                  "本轮实际核查：旧首页不是全文证据；已取得湖南政府转载2022正文与附件另列。中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。"
                 ],
                 "evidence_type": "official guidance",
                 "id": "cn-rule",
-                "limitation": "规定二级以上综合医院及肿瘤、儿童、精神等专科医院设置临床营养科并按其建设管理；第六条明确经临床营养专业教育或培训的营养专业技术人员可开展营养咨询、营养筛查及评估、肠内营养配制、医疗膳食配置与营养宣教等工作，营养诊断与营养治疗由经临床营养专业培训的医师承担；第八条要求医疗膳食及肠内营养制备部门建立岗位工作人员健康档案、食品原料档案、餐具消毒制度、食品留样制度和卫生检查制度。",
+                "limitation": "旧首页不是全文证据；已取得湖南政府转载2022正文与附件另列。中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。",
                 "market": "中国内地",
                 "name": "临床营养科建设与管理指南（试行）",
                 "period": "现行有效；检索 2026-09-19",
@@ -31322,14 +31388,15 @@
                 "url": "https://www.nhc.gov.cn/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页相邻职业对照中的工作目的差异说明。",
-                  "不构成转岗建议。"
+                  "不构成转岗建议。",
+                  "本轮实际核查：35-2014餐厅烹饪可菜单订料记录定价，不能反向补营养执行或排除菜单。"
                 ],
                 "evidence_type": "official occupational profile",
                 "id": "dancing",
-                "limitation": "相邻职业档案，用于说明餐饮后厨的烹饪与卫生要求；基础烹饪技能可迁移，但菜单与份量核算与治疗饮食配置属本职业方向。",
+                "limitation": "35-2014餐厅烹饪可菜单订料记录定价，不能反向补营养执行或排除菜单。",
                 "market": "美国",
                 "name": "O*NET OnLine：Cooks, Restaurant（35-2014.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-19",
@@ -31338,14 +31405,15 @@
                 "url": "https://www.onetonline.org/link/summary/35-2014.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页相邻职业对照中的工作场景差异说明。",
-                  "不构成转岗建议。"
+                  "不构成转岗建议。",
+                  "本轮实际核查：31-9092医师指导下行政及某些临床支持，含病历收费/生命体征/按指导采血给药，非只接待。"
                 ],
                 "evidence_type": "official occupational profile",
                 "id": "directing",
-                "limitation": "相邻职业档案，用于说明门诊流程与文书与患者接待类工作的内容；两者都以流程与记录为核心，但服务对象与规范归属不同。",
+                "limitation": "31-9092医师指导下行政及某些临床支持，含病历收费/生命体征/按指导采血给药，非只接待。",
                 "market": "美国",
                 "name": "O*NET OnLine：Medical Assistants（31-9092.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-19",
@@ -31370,14 +31438,15 @@
                 "url": "https://www.onetonline.org/link/summary/21-1021.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页对中国大陆临床营养工作要求与发展方向的说明。",
-                  "不提供职业级工资数值或个人录用条件。"
+                  "不提供职业级工资数值或个人录用条件。",
+                  "本轮实际核查：2024国卫办医政函333要求落实营养筛查评估、人员培训与学科建设，鼓励有条件医院提高临床营养人员待遇并吸引人才；这是政策方向，不是已提高的工资、招聘数量或普遍补贴。 临床建设通知非工资调查，不能只写完全不涉及待遇。"
                 ],
                 "evidence_type": "official notice",
                 "id": "editor",
-                "limitation": "要求医疗机构按《营养筛查及评估工作规范（试行）》规范开展营养筛查与评估，重点关注老年、儿童、孕产妇、肿瘤及手术患者等群体；鼓励临床营养科参与多学科诊疗、设置孕期营养门诊与慢性病营养门诊等；要求加强人员培训与能力建设。该通知说明工作方向与制度要求，不规定工资水平。",
+                "limitation": "2024国卫办医政函333要求落实营养筛查评估、人员培训与学科建设，鼓励有条件医院提高临床营养人员待遇并吸引人才；这是政策方向，不是已提高的工资、招聘数量或普遍补贴。 临床建设通知非工资调查，不能只写完全不涉及待遇。",
                 "market": "中国内地",
                 "name": "国家卫生健康委办公厅关于进一步推进临床营养工作的通知（国卫办医政函〔2024〕333 号）",
                 "period": "2024 年 9 月 10 日发布；检索 2026-09-19",
@@ -31386,14 +31455,15 @@
                 "url": "https://www.gov.cn/zhengce/zhengceku/202409/content_6975727.htm"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "说明本页未使用该来源的一手数值，并保留可核对入口。",
-                  "不得据此引用未核对的岗位或工资数值。"
+                  "不得据此引用未核对的岗位或工资数值。",
+                  "本轮实际核查：旧OOH URL本轮403；不是雇主制度实采，BLS表1.2已取本职业就业训练，OOH栏横线，不能声称全部BLS数据不可得。"
                 ],
                 "evidence_type": "official outlook",
                 "id": "employer",
-                "limitation": "本页在检索当日尝试访问该页但返回 403，未能取得其岗位数量、预测与准备层级的一手口径；因此本页的就业与预测数值与准备层级均取自 O*NET 摘要页，不引用该页数值。此处保留链接以便读者自行核对。",
+                "limitation": "旧OOH URL本轮403；不是雇主制度实采，BLS表1.2已取本职业就业训练，OOH栏横线，不能声称全部BLS数据不可得。",
                 "market": "美国",
                 "name": "BLS Occupational Outlook Handbook：Dietetic Technicians（本轮抓取不可用）",
                 "period": "本轮抓取返回 403，未取得内容；检索 2026-09-19",
@@ -31402,14 +31472,15 @@
                 "url": "https://www.bls.gov/ooh/healthcare/dietetic-technicians.htm"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页相邻职业对照中的职责层次差异说明。",
-                  "不用于推断工资或岗位数量。"
+                  "不用于推断工资或岗位数量。",
+                  "本轮实际核查：11-9051食品饮料组织/部门管理，不能由分类断言不涉及任何营养记录。"
                 ],
                 "evidence_type": "official occupational profile",
                 "id": "enrichment",
-                "limitation": "相邻职业档案，用于说明经营与人员管理与成本控制的职责层次；管理岗位对经营与人员负责，但不承担营养照护的记录与执行责任。",
+                "limitation": "11-9051食品饮料组织/部门管理，不能由分类断言不涉及任何营养记录。",
                 "market": "美国",
                 "name": "O*NET OnLine：Food Service Managers（11-9051.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-19",
@@ -31434,14 +31505,15 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页对中国大陆营养相关技能等级路径的说明。",
-                  "标准与证书不规定工资水平，也不构成个人执业授权。"
+                  "标准与证书不规定工资水平，也不构成个人执业授权。",
+                  "本轮实际核查：旧人社首页不是标准全文；本轮取2021正式PDF另列。公共营养师2021技能标准4-14-02-01为营养评价指导、知识传播及促进公众健康，四级/三级/二级/一级，普通高中或同等文化；四级可按相关证书后经验与培训、累计工作6年或规定相关学校等不同分支，三级另有相关大学专业、非相关专业加经验或培训等分支。参考学时200/150/150/100不是所有路径强制课时或日历时长；理论、技能和适用综合评审各60，技师/高技综合评审。实际按机构现行申报公告核，不把2021旧文本或付费培训当自动获得资格、诊疗许可或补贴。"
                 ],
                 "evidence_type": "official occupational standard",
                 "id": "nbs",
-                "limitation": "公共营养师已退出国家职业资格目录，转为职业技能等级认定，由经人力资源社会保障部门备案的第三方评价机构组织实施；标准设四级/中级工、三级/高级工、二级/技师、一级/高级技师，考核含理论知识与技能操作；该类证书不具备医师执业资质，不得开展疾病诊疗或处方干预。",
+                "limitation": "旧人社首页不是标准全文；本轮取2021正式PDF另列。公共营养师2021技能标准4-14-02-01为营养评价指导、知识传播及促进公众健康，四级/三级/二级/一级，普通高中或同等文化；四级可按相关证书后经验与培训、累计工作6年或规定相关学校等不同分支，三级另有相关大学专业、非相关专业加经验或培训等分支。参考学时200/150/150/100不是所有路径强制课时或日历时长；理论、技能和适用综合评审各60，技师/高技综合评审。实际按机构现行申报公告核，不把2021旧文本或付费培训当自动获得资格、诊疗许可或补贴。",
                 "market": "中国内地",
                 "name": "公共营养师国家职业技能标准（2021 年版）与职业技能等级认定安排",
                 "period": "现行标准与认定安排；检索 2026-09-19",
@@ -31450,14 +31522,15 @@
                 "url": "https://www.mohrss.gov.cn/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页 AI 影响模块中关于人工控制点与治理的说明。",
-                  "不提供本职业的岗位或工资结论。"
+                  "不提供本职业的岗位或工资结论。",
+                  "本轮实际核查：同批已读2023AI RMF1.0自愿框架，不具体要求过敏吞咽双人或临床参数。"
                 ],
                 "evidence_type": "framework",
                 "id": "nist",
-                "limitation": "提供人工智能风险管理的原则与流程框架，用于说明把工具输出作为待核对输入、并对涉及过敏与吞咽与治疗饮食类别的环节设置人工复核的方法；框架是自愿性风险管理指引，不构成对本职业的合规要求清单。",
+                "limitation": "同批已读2023AI RMF1.0自愿框架，不具体要求过敏吞咽双人或临床参数。",
                 "market": "美国",
                 "name": "NIST：Artificial Intelligence Risk Management Framework（AI RMF 1.0）",
                 "period": "2023 年 1 月发布；检索 2026-09-19",
@@ -31466,14 +31539,15 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页对美国工资统计口径的说明。",
-                  "不用于替代具体职业的分位数值。"
+                  "不用于替代具体职业的分位数值。",
+                  "本轮实际核查：2025全国工资10/25/50/75/90分位：年29720/33880/37640/45750/54020美元，时14.29/16.29/18.09/22.00/25.97美元。OEWS直时税前含基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金与自雇；不一概排除所有津贴或所有合同雇员。分位不是起薪、年限、认证效果或到手收入。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "oews",
-                "limitation": "提供美国职业工资统计的调查口径与方法说明；本职业具体分位数值经 O*NET 全国工资页转引，使用时应同时核对统计期与单位。",
+                "limitation": "2025全国工资10/25/50/75/90分位：年29720/33880/37640/45750/54020美元，时14.29/16.29/18.09/22.00/25.97美元。OEWS直时税前含基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金与自雇；不一概排除所有津贴或所有合同雇员。分位不是起薪、年限、认证效果或到手收入。",
                 "market": "美国",
                 "name": "BLS Occupational Employment and Wage Statistics（OEWS）：工资统计入口",
                 "period": "现行发布口径；检索 2026-09-19",
@@ -31482,14 +31556,15 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页的任务、兴趣代码、工作情境与就业与预测描述。",
-                  "不提供岗位数量承诺或中国大陆的对应分类。"
+                  "不提供岗位数量承诺或中国大陆的对应分类。",
+                  "本轮实际核查：O*NET调查情境：持续接触78%、面对面79%每天、受控室内91%每天、疾病或感染暴露82%每天、普通PPE65%每天、噪声66%每天、时间压力61%每天；团队72%极重要、准确57%极重要、他人员工安全责任71%很高。频率非感染或差错率，PPE不是所有人每天。周工时31%超过40/37%等于40/33%少于40（报告取整），99%规律安排非无早晚或周末。 六兴趣S68/C47/R47/I41/A26/E26，SCR保留但C与R并列；工作风格Impact细节87/可靠82/合作74/同理69/社交60/诚信55/谨慎51/自控50/抗压41，非人群百分比、大五分数或个人门槛。口头理解及表达69、演绎63、归纳56、近视力56为实际读到的能力评分，不能换算IQ。 美国29-2051：O*NET Job Zone3、SVP6到低于7，组级1—2年准备描述非每个项目固定学制；学历35%副学士、27%高中后证书、15%部分大学未学位是受访者对新入职所需学历的意见，非新入职者或现有员工学历分布。BLS表1.2典型副学士、相关工作经验None、在岗训练None；不免教育内受监督实践或雇主培训。未核本职业实际注册学徒项目和全部州许可。 美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。"
                 ],
                 "evidence_type": "official occupational profile",
                 "id": "onet",
-                "limitation": "提供本职业定义（在注册营养师监督下协助提供食品服务与营养项目）、13 项任务、兴趣代码 SCR、工作情境比例、教育反馈（35% 副学士或两年制学位、27% 中学后证书、15% 部分大学经历无学位）、Job Zone Three 与就业与预测与职位空缺（2024 年约 30,900 人、2024—2034 年增长 3% 至 4%、预计空缺约 4,000 个）；该页未提供行业就业人数占比与行业工资数值，也未提供 AI 任务暴露量表。",
+                "limitation": "O*NET调查情境：持续接触78%、面对面79%每天、受控室内91%每天、疾病或感染暴露82%每天、普通PPE65%每天、噪声66%每天、时间压力61%每天；团队72%极重要、准确57%极重要、他人员工安全责任71%很高。频率非感染或差错率，PPE不是所有人每天。周工时31%超过40/37%等于40/33%少于40（报告取整），99%规律安排非无早晚或周末。 六兴趣S68/C47/R47/I41/A26/E26，SCR保留但C与R并列；工作风格Impact细节87/可靠82/合作74/同理69/社交60/诚信55/谨慎51/自控50/抗压41，非人群百分比、大五分数或个人门槛。口头理解及表达69、演绎63、归纳56、近视力56为实际读到的能力评分，不能换算IQ。 美国29-2051：O*NET Job Zone3、SVP6到低于7，组级1—2年准备描述非每个项目固定学制；学历35%副学士、27%高中后证书、15%部分大学未学位是受访者对新入职所需学历的意见，非新入职者或现有员工学历分布。BLS表1.2典型副学士、相关工作经验None、在岗训练None；不免教育内受监督实践或雇主培训。未核本职业实际注册学徒项目和全部州许可。 美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。",
                 "market": "美国",
                 "name": "O*NET OnLine：Dietetic Technicians（29-2051.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-19",
@@ -31498,14 +31573,15 @@
                 "url": "https://www.onetonline.org/link/summary/29-2051.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页 AI 影响模块中关于技术能力层的说明。",
-                  "不说明实际采用比例，也不预测岗位数量。"
+                  "不说明实际采用比例，也不预测岗位数量。",
+                  "本轮实际核查：O*NET详细页列营养科学软件Nutritionist Pro/The Food Processor等、配餐数据库、ERP、Computrition NCM/MEDITECH及病历软件，证明职业技术示例而非逐产品功能或采用率；另2025美国招聘关键词Office4%、Excel2%、Outlook2%、Word1%、PowerPoint低于1%、MEDITECH/Access Not available非0，分母为关联本职业全部唯一招聘帖，不是软件采用者或含技术帖。"
                 ],
                 "evidence_type": "official technology listing",
                 "id": "r2-ai",
-                "limitation": "列出本职业使用的软件与技术类条目，含营养分析或科学软件（如配方与营养估算工具）、医疗信息系统与电子病历、以及常用办公软件；该页说明的是技术使用情况，不代表机构采用比例，也不构成岗位替代结论。",
+                "limitation": "O*NET详细页列营养科学软件Nutritionist Pro/The Food Processor等、配餐数据库、ERP、Computrition NCM/MEDITECH及病历软件，证明职业技术示例而非逐产品功能或采用率；另2025美国招聘关键词Office4%、Excel2%、Outlook2%、Word1%、PowerPoint低于1%、MEDITECH/Access Not available非0，分母为关联本职业全部唯一招聘帖，不是软件采用者或含技术帖。",
                 "market": "美国",
                 "name": "O*NET OnLine：Dietetic Technicians 相关技术与软件技能（29-2051.00）",
                 "period": "页面 2026 年更新；检索 2026-09-19",
@@ -31514,14 +31590,15 @@
                 "url": "https://www.onetonline.org/link/hot_tech/29-2051.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页对中国大陆统计口径与缺口的说明。",
-                  "不提供本职业的职业级工资数值。"
+                  "不提供本职业的职业级工资数值。",
+                  "本轮实际核查：旧首页不代工资表；2025行业背景另列，不说所有公开统计最大细分。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-1",
-                "limitation": "国家统计局按行业门类与单位类型发布城镇单位就业人员平均工资，未建立与美国 O*NET 职业代码一一对应的职业级口径；卫生和社会工作等行业均值包含大量与本职业无关的岗位，不能替代本职业工资。",
+                "limitation": "旧首页不代工资表；2025行业背景另列，不说所有公开统计最大细分。",
                 "market": "中国内地",
                 "name": "国家统计局：城镇单位就业人员平均工资情况",
                 "period": "现行发布口径；检索 2026-09-19",
@@ -31530,14 +31607,15 @@
                 "url": "https://www.stats.gov.cn/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页对分位数与统计口径的说明。",
-                  "不提供具体职业数值。"
+                  "不提供具体职业数值。",
+                  "本轮实际核查：旧方法入口不代本轮实际读的OEWS concepts工资构成；2025全国工资10/25/50/75/90分位：年29720/33880/37640/45750/54020美元，时14.29/16.29/18.09/22.00/25.97美元。OEWS直时税前含基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金与自雇；不一概排除所有津贴或所有合同雇员。分位不是起薪、年限、认证效果或到手收入。"
                 ],
                 "evidence_type": "official methodology",
                 "id": "r2-pay-2",
-                "limitation": "说明 OEWS 的调查范围、抽样与发布口径，包括分位数的含义与自营人员是否纳入；用于解释本页工资数值的统计含义。",
+                "limitation": "旧方法入口不代本轮实际读的OEWS concepts工资构成；2025全国工资10/25/50/75/90分位：年29720/33880/37640/45750/54020美元，时14.29/16.29/18.09/22.00/25.97美元。OEWS直时税前含基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金与自雇；不一概排除所有津贴或所有合同雇员。分位不是起薪、年限、认证效果或到手收入。",
                 "market": "美国",
                 "name": "BLS Handbook of Methods：Occupational Employment and Wage Statistics",
                 "period": "现行方法说明；检索 2026-09-19",
@@ -31546,14 +31624,15 @@
                 "url": "https://www.bls.gov/opub/hom/oews/home.htm"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页的工资口径说明。",
-                  "不能用于推导个人收入。"
+                  "不能用于推导个人收入。",
+                  "本轮实际核查：2025全国工资10/25/50/75/90分位：年29720/33880/37640/45750/54020美元，时14.29/16.29/18.09/22.00/25.97美元。OEWS直时税前含基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金与自雇；不一概排除所有津贴或所有合同雇员。分位不是起薪、年限、认证效果或到手收入。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-3",
-                "limitation": "同一全国工资页的年与小时双口径数值；用于说明分位与单位换算的边界，以及受雇口径不含加班与津贴与自营收入的限制。",
+                "limitation": "2025全国工资10/25/50/75/90分位：年29720/33880/37640/45750/54020美元，时14.29/16.29/18.09/22.00/25.97美元。OEWS直时税前含基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金与自雇；不一概排除所有津贴或所有合同雇员。分位不是起薪、年限、认证效果或到手收入。",
                 "market": "美国",
                 "name": "O*NET OnLine：Dietetic Technicians 全国工资（29-2051.00）",
                 "period": "2025 年 5 月工资数据；检索 2026-09-19",
@@ -31562,14 +31641,15 @@
                 "url": "https://www.onetonline.org/link/localwages/29-2051.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页对认证与学徒路径入口的说明。",
-                  "不构成认证要求或授权结论。"
+                  "不构成认证要求或授权结论。",
+                  "本轮实际核查：旧认证入口不等全部州许可/真实注册学徒证明；本轮取得CDR明确报考分支另列。"
                 ],
                 "evidence_type": "official guidance",
                 "id": "ratify",
-                "limitation": "提供该职业代码下的认证与执照查询入口与学徒信息（示例学徒头衔为 Certified Dietary Manager）；入口不预测岗位数量或工资水平，行业认证与注册也不等于执业许可或营养师资格。",
+                "limitation": "旧认证入口不等全部州许可/真实注册学徒证明；本轮取得CDR明确报考分支另列。",
                 "market": "美国",
                 "name": "O*NET OnLine：Dietetic Technicians 认证与执照入口（29-2051.00）",
                 "period": "页面 2026 年更新；检索 2026-09-19",
@@ -31578,14 +31658,15 @@
                 "url": "https://www.onetonline.org/link/localcert/29-2051.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页对技术影响范围与限制的说明。",
-                  "不能用于推断岗位数量或工资变化。"
+                  "不能用于推断岗位数量或工资变化。",
+                  "本轮实际核查：同批已读2025摘要，未核29-2051/ISCO匹配评分和有限暴露分组；不提供采用或替代效果。"
                 ],
                 "evidence_type": "research report",
                 "id": "sag",
-                "limitation": "提供生成式人工智能对不同职业的暴露程度指数，用于判断本职业在暴露分类中的位置；暴露指数衡量任务与技术的重叠程度，不是实际替代率，也未按国家或机构规模细分。",
+                "limitation": "同批已读2025摘要，未核29-2051/ISCO匹配评分和有限暴露分组；不提供采用或替代效果。",
                 "market": "全球",
                 "name": "ILO：Generative AI and Jobs — A Refined Global Index of Occupational Exposure",
                 "period": "2025 年发布；检索 2026-09-19",
@@ -31594,14 +31675,15 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页对技能与工作活动的说明。",
-                  "条目为职业层面特征，不用于个人测评或录用。"
+                  "条目为职业层面特征，不用于个人测评或录用。",
+                  "本轮实际核查：实际读13任务/57情境/学历/兴趣/21风格及技术示例；O*NET详细页列营养科学软件Nutritionist Pro/The Food Processor等、配餐数据库、ERP、Computrition NCM/MEDITECH及病历软件，证明职业技术示例而非逐产品功能或采用率；另2025美国招聘关键词Office4%、Excel2%、Outlook2%、Word1%、PowerPoint低于1%、MEDITECH/Access Not available非0，分母为关联本职业全部唯一招聘帖，不是软件采用者或含技术帖。"
                 ],
                 "evidence_type": "official occupational profile",
                 "id": "sag-moa",
-                "limitation": "提供本职业技能、知识与工作活动条目：必要技能含口头表达、主动倾听、主动学习、批判性思维与学习策略；可迁移技能含复杂问题解决、指导、判断与决策、服务导向与社交洞察；工作活动含获取信息、评估信息以判定是否符合标准、识别对象与事件、协助与照护他人、检查设备与材料；知识领域含客户与个人服务、英语语言、教育与培训、数学、公共安全与安保、行政管理、食品生产。",
+                "limitation": "实际读13任务/57情境/学历/兴趣/21风格及技术示例；O*NET详细页列营养科学软件Nutritionist Pro/The Food Processor等、配餐数据库、ERP、Computrition NCM/MEDITECH及病历软件，证明职业技术示例而非逐产品功能或采用率；另2025美国招聘关键词Office4%、Excel2%、Outlook2%、Word1%、PowerPoint低于1%、MEDITECH/Access Not available非0，分母为关联本职业全部唯一招聘帖，不是软件采用者或含技术帖。",
                 "market": "美国",
                 "name": "O*NET OnLine：Dietetic Technicians 详细资料（29-2051.00）",
                 "period": "页面 2026 年更新；检索 2026-09-19",
@@ -31610,20 +31692,186 @@
                 "url": "https://www.onetonline.org/link/details/29-2051.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "支持本页相邻职业对照中的工作内容差异说明。",
-                  "不构成转岗建议。"
+                  "不构成转岗建议。",
+                  "本轮实际核查：35-2012大量烹饪，定义不排除治疗饮食/记录的具体岗位交叉。"
                 ],
                 "evidence_type": "official occupational profile",
                 "id": "teacher",
-                "limitation": "相邻职业档案，用于说明机构与食堂供餐的出品与卫生要求；治疗饮食类别核对与营养记录不属厨师职责，两者在供餐环节需密切交接。",
+                "limitation": "35-2012大量烹饪，定义不排除治疗饮食/记录的具体岗位交叉。",
                 "market": "美国",
                 "name": "O*NET OnLine：Cooks, Institution and Cafeteria（35-2012.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-19",
                 "publisher": "O*NET OnLine",
                 "scope": "related",
                 "url": "https://www.onetonline.org/link/summary/35-2012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-oews-concepts",
+                "limitation": "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。",
+                "market": "美国",
+                "name": "BLS OEWS工资人群与组成",
+                "period": "现行方法；本批检索2026-10-09",
+                "publisher": "Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "6/13/21/28—30/51/55/73：可识别医疗健康敏感、特定目的充分必要严格保护及适用告知/事前影响评估；同意依据单独同意但13有其他合法依据。普通联系方式不天然全属敏感，医疗语境具体核。去标识非匿名化，账号不自动授权外部AI上传；跨境配套未全核。"
+                ],
+                "evidence_type": "official law",
+                "id": "r5-cn-pipl",
+                "limitation": "6/13/21/28—30/51/55/73：可识别医疗健康敏感、特定目的充分必要严格保护及适用告知/事前影响评估；同意依据单独同意但13有其他合法依据。普通联系方式不天然全属敏感，医疗语境具体核。去标识非匿名化，账号不自动授权外部AI上传；跨境配套未全核。",
+                "market": "中国内地",
+                "name": "个人信息保护法患者与健康资料边界",
+                "period": "2021法；本批实际读；检索2026-10-09",
+                "publisher": "全国人大/中央网信办",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "自愿AI治理建议非医疗法规、灭菌标准或执业授权，也非工具采用/提效实测。"
+                ],
+                "evidence_type": "official framework",
+                "id": "r5-nist-current",
+                "limitation": "自愿AI治理建议非医疗法规、灭菌标准或执业授权，也非工具采用/提效实测。",
+                "market": "跨市场",
+                "name": "NIST AI RMF官方框架说明",
+                "period": "自愿框架1.0；本批实际读；检索2026-10-09",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本批实际读ILO2025摘要，本职业未核SOC29-2051与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。"
+                ],
+                "evidence_type": "official research summary",
+                "id": "r5-ilo-current",
+                "limitation": "本批实际读ILO2025摘要，本职业未核SOC29-2051与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。",
+                "market": "跨市场",
+                "name": "ILO2025 GenAI暴露研究官方摘要",
+                "period": "2025研究摘要；本批实际读；检索2026-10-09",
+                "publisher": "ILO",
+                "scope": "contextual",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。"
+                ],
+                "evidence_type": "official projections",
+                "id": "r5-trends-current",
+                "limitation": "美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。",
+                "market": "美国",
+                "name": "O*NET膳食技术员2025—2035全国就业趋势",
+                "period": "2025—2035",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/29-2051.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。 美国29-2051：O*NET Job Zone3、SVP6到低于7，组级1—2年准备描述非每个项目固定学制；学历35%副学士、27%高中后证书、15%部分大学未学位是受访者对新入职所需学历的意见，非新入职者或现有员工学历分布。BLS表1.2典型副学士、相关工作经验None、在岗训练None；不免教育内受监督实践或雇主培训。未核本职业实际注册学徒项目和全部州许可。 表中OOH栏为横线，旧OOH URL本轮403不据其推断全国无数据。"
+                ],
+                "evidence_type": "official projections",
+                "id": "r5-bls-current",
+                "limitation": "美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。 美国29-2051：O*NET Job Zone3、SVP6到低于7，组级1—2年准备描述非每个项目固定学制；学历35%副学士、27%高中后证书、15%部分大学未学位是受访者对新入职所需学历的意见，非新入职者或现有员工学历分布。BLS表1.2典型副学士、相关工作经验None、在岗训练None；不免教育内受监督实践或雇主培训。未核本职业实际注册学徒项目和全部州许可。 表中OOH栏为横线，旧OOH URL本轮403不据其推断全国无数据。",
+                "market": "美国",
+                "name": "BLS表1.2膳食技术员就业及训练分类",
+                "period": "2025—2035及2025工资",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。 指南第8条要求临床营养科医疗膳食及肠内营养制备部门建立工作人员健康档案、原料档案、餐具消毒、食品留样和卫生检查制度，不将其直接解释为所有学校食堂或每位厨师同一临床职责；具体温度、双人复核和停工恢复按适用规程核，本轮未取得统一参数。"
+                ],
+                "evidence_type": "official guidance",
+                "id": "r5-cn-guideline",
+                "limitation": "中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。 指南第8条要求临床营养科医疗膳食及肠内营养制备部门建立工作人员健康档案、原料档案、餐具消毒、食品留样和卫生检查制度，不将其直接解释为所有学校食堂或每位厨师同一临床职责；具体温度、双人复核和停工恢复按适用规程核，本轮未取得统一参数。",
+                "market": "中国大陆",
+                "name": "临床营养科建设与管理指南及筛查评估附件（湖南政府转载全文）",
+                "period": "2022-03-18发布；2022-04-13转载",
+                "publisher": "国家卫生健康委办公厅；湖南政府转载",
+                "scope": "exact",
+                "url": "https://www.hunan.gov.cn/zqt/zcsd/202204/t20220413_22735524.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "公共营养师2021技能标准4-14-02-01为营养评价指导、知识传播及促进公众健康，四级/三级/二级/一级，普通高中或同等文化；四级可按相关证书后经验与培训、累计工作6年或规定相关学校等不同分支，三级另有相关大学专业、非相关专业加经验或培训等分支。参考学时200/150/150/100不是所有路径强制课时或日历时长；理论、技能和适用综合评审各60，技师/高技综合评审。实际按机构现行申报公告核，不把2021旧文本或付费培训当自动获得资格、诊疗许可或补贴。 18页实际读发布页及p1—8相关定义/等级/条件/方法，目视PDF p4，不声称所有工作表已审。"
+                ],
+                "evidence_type": "official occupational standard",
+                "id": "r5-cn-standard",
+                "limitation": "公共营养师2021技能标准4-14-02-01为营养评价指导、知识传播及促进公众健康，四级/三级/二级/一级，普通高中或同等文化；四级可按相关证书后经验与培训、累计工作6年或规定相关学校等不同分支，三级另有相关大学专业、非相关专业加经验或培训等分支。参考学时200/150/150/100不是所有路径强制课时或日历时长；理论、技能和适用综合评审各60，技师/高技综合评审。实际按机构现行申报公告核，不把2021旧文本或付费培训当自动获得资格、诊疗许可或补贴。 18页实际读发布页及p1—8相关定义/等级/条件/方法，目视PDF p4，不声称所有工作表已审。",
+                "market": "中国大陆",
+                "name": "公共营养师2021国家职业技能标准原文PDF",
+                "period": "2021年版；2021-12-02公布",
+                "publisher": "人力资源和社会保障部",
+                "scope": "exact",
+                "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/qt/fzcwjxx/202112/W020211227599132291203.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "CDR DTR/NDTR报考两分支：USDE认可院校副学士或外国等同学历加ACEND营养技师项目（至少450小时受监督实践）；或认可院校学士或外国等同学历加ACEND DPD。满足条件并由CDR确认后才可参加注册考试，不把450小时套第二分支；普通证书课程不自动满足。费用、续证及目标州和岗位要求本轮未逐核。"
+                ],
+                "evidence_type": "credential requirements",
+                "id": "r5-cdr-eligibility",
+                "limitation": "CDR DTR/NDTR报考两分支：USDE认可院校副学士或外国等同学历加ACEND营养技师项目（至少450小时受监督实践）；或认可院校学士或外国等同学历加ACEND DPD。满足条件并由CDR确认后才可参加注册考试，不把450小时套第二分支；普通证书课程不自动满足。费用、续证及目标州和岗位要求本轮未逐核。",
+                "market": "美国",
+                "name": "CDR DTR/NDTR注册考试资格",
+                "period": "检索2026-10-09",
+                "publisher": "Commission on Dietetic Registration",
+                "scope": "exact",
+                "url": "https://www.cdrnet.org/NDTReligibility"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "CDR DTR/NDTR报考两分支：USDE认可院校副学士或外国等同学历加ACEND营养技师项目（至少450小时受监督实践）；或认可院校学士或外国等同学历加ACEND DPD。满足条件并由CDR确认后才可参加注册考试，不把450小时套第二分支；普通证书课程不自动满足。费用、续证及目标州和岗位要求本轮未逐核。 当前角色可连接食品服务及临床营养照护，不当全国执业许可。"
+                ],
+                "evidence_type": "credential guidance",
+                "id": "r5-cdr-registration",
+                "limitation": "CDR DTR/NDTR报考两分支：USDE认可院校副学士或外国等同学历加ACEND营养技师项目（至少450小时受监督实践）；或认可院校学士或外国等同学历加ACEND DPD。满足条件并由CDR确认后才可参加注册考试，不把450小时套第二分支；普通证书课程不自动满足。费用、续证及目标州和岗位要求本轮未逐核。 当前角色可连接食品服务及临床营养照护，不当全国执业许可。",
+                "market": "美国",
+                "name": "CDR DTR/NDTR认证及报考确认",
+                "period": "检索2026-10-09",
+                "publisher": "Commission on Dietetic Registration",
+                "scope": "exact",
+                "url": "https://www.cdrnet.org/NDTR"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "NBS2025卫生和社会工作城镇非私营146266/私营75631元税前年平均，用于实际医疗单位多职业背景，不是膳食技术员中位、起薪或招聘报价；覆盖城镇5人以上法人，非私营含事业机关及外资等、不只国企，排除个体和自由职业。不套全部食堂、学校或自营机构。"
+                ],
+                "evidence_type": "official statistics",
+                "id": "r5-nbs-current",
+                "limitation": "NBS2025卫生和社会工作城镇非私营146266/私营75631元税前年平均，用于实际医疗单位多职业背景，不是膳食技术员中位、起薪或招聘报价；覆盖城镇5人以上法人，非私营含事业机关及外资等、不只国企，排除个体和自由职业。不套全部食堂、学校或自营机构。",
+                "market": "中国大陆",
+                "name": "国家统计局2025城镇单位工资：卫生和社会工作",
+                "period": "2025年",
+                "publisher": "国家统计局",
+                "scope": "context",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               }
             ]
           },
@@ -33174,7 +33422,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33182,7 +33430,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33197,7 +33445,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "r5-cn-guideline",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33205,7 +33453,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "r5-cn-guideline",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34084,7 +34332,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "sag-moa"
             ],
             "id": "image-use",
             "mitigation": {
@@ -34120,7 +34368,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "sag-moa"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -34228,7 +34476,6 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "nist",
               "nist"
             ],
             "id": "project-data",
@@ -34265,7 +34512,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
+              "sag-moa",
               "employer"
             ],
             "id": "audition-feedback",
@@ -34293,7 +34540,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "sag-moa",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34301,7 +34548,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "sag-moa",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34316,7 +34563,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34324,7 +34571,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34339,7 +34586,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "r5-cn-guideline",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34347,7 +34594,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "r5-cn-guideline",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34420,42 +34667,42 @@
             {
               "指标": "数据类型",
               "数值": "工作范围与制度为主",
-              "说明": "中国大陆公开工资统计按行业门类与单位类型发布，未建立与本职业对应的职业级口径；本页因此保留缺口，不以行业均值替代。"
+              "说明": "行业背景非职业工资，岗位计薪与补贴本轮未取代表性资料"
             },
             {
               "指标": "工作范围",
               "数值": "营养专业技术人员",
-              "说明": "按《临床营养科建设与管理指南（试行）》第六条，经临床营养专业教育或培训的营养专业技术人员可开展营养咨询、营养筛查及评估、肠内营养配制、医疗膳食配置与营养宣教；营养诊断与营养治疗由经临床营养专业培训的医师承担。"
+              "说明": "行业背景非职业工资，岗位计薪与补贴本轮未取代表性资料"
             },
             {
               "指标": "制备部门制度",
               "数值": "健康档案与留样与消毒",
-              "说明": "第八条要求医疗膳食及肠内营养制备部门建立岗位工作人员健康档案、食品原料档案、餐具消毒制度、食品留样制度和卫生检查制度。"
+              "说明": "行业背景非职业工资，岗位计薪与补贴本轮未取代表性资料"
             },
             {
               "指标": "技能等级",
               "数值": "公共营养师（四级至一级）",
-              "说明": "公共营养师已退出国家职业资格目录，转为职业技能等级认定，按《公共营养师国家职业技能标准（2021 年版）》设四级/中级工至一级/高级技师；证书不具备医师执业资质。"
+              "说明": "行业背景非职业工资，岗位计薪与补贴本轮未取代表性资料"
             },
             {
               "指标": "计酬方式",
-              "数值": "岗位与职称与绩效或岗位薪酬加绩效",
-              "说明": "医院与事业单位多按岗位与职称与绩效结构确定报酬，集体供餐与餐饮企业多按岗位薪酬加绩效或加班补贴，市场化机构差异更大。"
+              "数值": "按具体合同与单位制度核工资及绩效项目；本轮未取得全国普遍计薪资料。",
+              "说明": "行业背景非职业工资，岗位计薪与补贴本轮未取代表性资料"
             },
             {
               "指标": "用工形式",
-              "数值": "医疗机构与集体供餐与机构照护为主",
-              "说明": "以医院临床营养科与配餐部门、长期照护与康复机构、学校与机关与企事业单位食堂以及健康管理机构为主要载体。"
+              "数值": "医疗机构、集体供餐及照护可作岗位场景例；本轮未核中国全国用工构成。",
+              "说明": "行业背景非职业工资，岗位计薪与补贴本轮未取代表性资料"
             },
             {
               "指标": "样本边界",
               "数值": "职业级缺口",
-              "说明": "网络招聘报价、行业门类均值与个体机构薪酬都不能折算为全国中位数，也不能与美国受雇工资统计直接比较。"
+              "说明": "行业背景非职业工资，岗位计薪与补贴本轮未取代表性资料"
             },
             {
               "指标": "地区比较",
               "数值": "中美证据分别解释",
-              "说明": "美国分位为受雇税前工资统计口径（不含加班与津贴与自营收入）；中国大陆为事业单位与企业岗位薪酬制度，两者应分别解释。"
+              "说明": "行业背景非职业工资，岗位计薪与补贴本轮未取代表性资料"
             }
           ],
           "china_ai_row": {
@@ -34464,11 +34711,11 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_class_row": "中国大陆官方与制度性材料",
+          "china_class_row": "公共营养师4-14-02-01技能标准；不代中国临床执业资质",
           "china_edu_table": [
             {
               "学历段": "工作范围与授权",
-              "岗位方向": "经临床营养专业教育或培训的营养专业技术人员可开展营养咨询、营养筛查及评估、肠内营养配制、医疗膳食配置与营养宣教；营养诊断与营养治疗由经临床营养专业培训的医师承担，执行岗位不得越权开展诊疗或处方干预。",
+              "岗位方向": "美国典型教育与中国技能、临床资格分开核；不由所需学历意见推个人可选岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
                 "block": "china-salary",
@@ -34478,7 +34725,7 @@
             },
             {
               "学历段": "制度与留痕要求",
-              "岗位方向": "医疗膳食及肠内营养制备部门须建立岗位工作人员健康档案、食品原料档案、餐具消毒制度、食品留样制度和卫生检查制度；实际操作中需按制度完成取样、温度核对与记录。",
+              "岗位方向": "美国典型教育与中国技能、临床资格分开核；不由所需学历意见推个人可选岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
                 "block": "china-salary",
@@ -34488,7 +34735,7 @@
             },
             {
               "学历段": "发展方向",
-              "岗位方向": "《国家卫生健康委办公厅关于进一步推进临床营养工作的通知》要求规范开展营养筛查与评估，重点关注老年、儿童、孕产妇、肿瘤及手术患者，并鼓励临床营养科参与多学科诊疗与设置营养门诊。",
+              "岗位方向": "美国典型教育与中国技能、临床资格分开核；不由所需学历意见推个人可选岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.theater",
                 "block": "china-salary",
@@ -34498,7 +34745,7 @@
             },
             {
               "学历段": "全国职业级工资分布",
-              "岗位方向": "本轮未取得可核对的职业级工资统计；不以行业均值或招聘报价替代。",
+              "岗位方向": "证据不足：本轮未取得膳食技术员中国全国职业工资分布或代表性招聘样本；行业均值不能替代。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.national",
                 "block": "china-salary",
@@ -34561,7 +34808,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "统计口径状态",
+          "china_open": "中国职业工资缺口；2025卫生和社会工作背景非单岗",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34608,7 +34855,7 @@
               "月薪参考": {
                 "$join": [
                   {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
+                    "$fact": "r5-current-china-jiaojiang-featured-daily-2026",
                     "field": "display_value"
                   },
                   {
@@ -34631,10 +34878,10 @@
               }
             }
           ],
-          "china_soc_row": "中国大陆薪资口径",
+          "china_soc_row": "美国29-2051与中国职责分别核，非一一映射",
           "edu": "训练与技能等级见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "r5-current-china-jiaojiang-featured-daily-2026"
           ],
           "sources_note": "来源链接按各自适用范围使用。",
           "ui": {
@@ -34697,10 +34944,10 @@
         },
         "bls_table": [
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-median",
             "指标": "薪资 · 10 分位",
             "数值": {
-              "$fact": "low",
+              "$fact": "r5-current-low",
               "field": "display_value"
             },
             "说明": "本职业 2025 年 5 月工资数据的分布低端，是统计位置而不是入职起薪。"
@@ -34711,10 +34958,10 @@
             "说明": "本职业 2025 年 5 月工资数据的下四分位；小时口径为 16.29 美元。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-median",
             "指标": "薪资 · 中位数",
             "数值": {
-              "$fact": "median",
+              "$fact": "r5-current-median",
               "field": "display_value"
             },
             "说明": "本职业 2025 年 5 月工资数据的中间位置：一半从业者低于、一半高于该值（中位时薪 18.09 美元）。"
@@ -34725,40 +34972,40 @@
             "说明": "本职业 2025 年 5 月工资数据的上四分位；小时口径为 22.00 美元。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-median",
             "指标": "薪资 · 90 分位",
             "数值": {
-              "$fact": "high",
+              "$fact": "r5-current-high",
               "field": "display_value"
             },
-            "说明": "本职业 2025 年 5 月工资数据的分布高端，通常与雇主类型、认证与注册状态与是否承担监督职责相关。"
+            "说明": "第90分位非认证、管理职责或生活成本工资溢价证据"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024 就业 · 本职业人数",
+            "fact_ref": "r5-current-median",
+            "指标": "2025就业规模",
             "数值": {
-              "$fact": "employment",
+              "$fact": "r5-current-employment",
               "field": "display_value"
             },
-            "说明": "2024 年本职业就业规模（O*NET 摘要页口径约 30,900 人）；本职业规模较小，地方性差异明显。"
+            "说明": "美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 增长预测",
+            "fact_ref": "r5-current-median",
+            "指标": "2025—2035增长预测",
             "数值": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "display_value"
             },
-            "说明": "O*NET 摘要页标注为增长 3% 至 4%（与平均相当）；本页未取得 BLS 职业展望页第一手口径，故不并列第二个数值。"
+            "说明": "美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 预计空缺",
+            "fact_ref": "r5-current-median",
+            "指标": "2025—2035年均空缺",
             "数值": {
-              "$fact": "openings",
+              "$fact": "r5-current-openings",
               "field": "display_value"
             },
-            "说明": "约 4,000 个，为预测期内因更替等形成的合计空缺，不是每年净增。"
+            "说明": "美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。"
           }
         ],
         "boundary": {
@@ -34820,7 +35067,7 @@
           "type": "prose"
         },
         "growth": {
-          "$fact": "growth",
+          "$fact": "r5-current-growth",
           "field": "display_value"
         },
         "heading": {
@@ -34835,13 +35082,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024年基期（O*NET 摘要页与详细资料页）",
+        "industry_period": "行业工资未取得；情境另列，不作工资",
         "industry_rows": [
           {
-            "fact_ref": "median",
-            "industry": "医疗保健与社会援助（O*NET 2024 年基期给出的主要行业门类，未附占比与人数）",
+            "fact_ref": "r5-current-industry-theater",
+            "industry": "本轮行业工资缺口／职业情境另读",
             "median": {
-              "$fact": "industry-theater",
+              "$fact": "r5-current-industry-theater",
               "field": "display_value"
             },
             "note": {
@@ -34852,10 +35099,10 @@
             }
           },
           {
-            "fact_ref": "median",
-            "industry": "医院病区与营养科、配餐与膳食制备间、长期照护与康复机构、学校与集体供餐单位",
+            "fact_ref": "r5-current-industry-education",
+            "industry": "本轮行业工资缺口／职业情境另读",
             "median": {
-              "$fact": "industry-education",
+              "$fact": "r5-current-industry-education",
               "field": "display_value"
             },
             "note": {
@@ -34866,10 +35113,10 @@
             }
           },
           {
-            "fact_ref": "median",
-            "industry": "工作情境：每天处于环境受控的室内 91%、持续与他人接触 78%、每天面对面讨论 79%、每天暴露于疾病或感染 82%、时间压力 61% 每天",
+            "fact_ref": "r5-current-industry-amusement",
+            "industry": "本轮行业工资缺口／职业情境另读",
             "median": {
-              "$fact": "industry-amusement",
+              "$fact": "r5-current-industry-amusement",
               "field": "display_value"
             },
             "note": {
@@ -34936,7 +35183,7 @@
           }
         ],
         "median": {
-          "$fact": "median",
+          "$fact": "r5-current-median",
           "field": "display_value"
         },
         "outlook_heading": {
@@ -34946,7 +35193,7 @@
           "type": "prose"
         },
         "outlook_period": {
-          "$fact": "growth",
+          "$fact": "r5-current-growth",
           "field": "period"
         },
         "wage_column_labels": [
@@ -34972,7 +35219,7 @@
             },
             "label": "较低工资位置",
             "value": {
-              "$fact": "low",
+              "$fact": "r5-current-low",
               "field": "display_value"
             }
           },
@@ -34986,7 +35233,7 @@
             },
             "label": "全国中位工资",
             "value": {
-              "$fact": "median",
+              "$fact": "r5-current-median",
               "field": "display_value"
             }
           },
@@ -35000,7 +35247,7 @@
             },
             "label": "较高工资位置",
             "value": {
-              "$fact": "high",
+              "$fact": "r5-current-high",
               "field": "display_value"
             }
           }
@@ -35153,7 +35400,7 @@
           {
             "geography": "美国",
             "horizon": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "period"
             },
             "interpretation": {
@@ -35172,13 +35419,13 @@
             "occupation_scope": "膳食技术员（O*NET-SOC 29-2051.00）",
             "source_id": "bls",
             "value": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "display_value"
             }
           },
           {
             "geography": "美国",
-            "horizon": "2024 年基期",
+            "horizon": "2025年基期（BLS表1.2）",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -35193,8 +35440,8 @@
             },
             "metric": "本职业就业规模",
             "occupation_scope": "膳食技术员（O*NET-SOC 29-2051.00）",
-            "source_id": "ratify",
-            "value": "2024 年约 30,900 人（O*NET 摘要页口径）；实际招聘受当地医疗机构密度与集体供餐规模影响"
+            "source_id": "bls",
+            "value": "BLS表1.2：2025年该职业约32100个岗位；这是美国职业就业规模，不证明地方机构密度或供餐规模的招聘因果。"
           },
           {
             "geography": "美国与中国大陆",
@@ -35214,14 +35461,14 @@
             "metric": "训练与资格路径",
             "occupation_scope": "膳食技术员（O*NET-SOC 29-2051.00）",
             "source_id": "employer",
-            "value": "美国以副学士或中学后证书与在职培训为主，认证与州许可因州而异；中国大陆按机构岗位训练与工作范围制度上岗，并可经职业技能等级认定取得营养相关技能等级证书（不具备医师执业资质）"
+            "value": "美国BLS典型副学士、经验None、在岗训练None；CDR注册的两教育项目分支另核，学校实践不等在岗统计分类。本轮未逐核所有州许可。中国临床岗位按相关执业资质、教育培训和职责制度核，技能等级证不自动授诊疗权。"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35229,7 +35476,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35267,7 +35514,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35275,7 +35522,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36307,14 +36554,14 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "employer",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -37055,6 +37302,145 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "37640美元/年；18.09美元/时（2025中位）",
+        "fact_id": "r5-current-median",
+        "market": "美国",
+        "measure": "全国工资分位",
+        "occupation_scope": "2025全国工资10/25/50/75/90分位：年29720/33880/37640/45750/54020美元，时14.29/16.29/18.09/22.00/25.97美元。OEWS直时税前含基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金与自雇；不一概排除所有津贴或所有合同雇员。分位不是起薪、年限、认证效果或到手收入。",
+        "period": "2025",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "29720美元/年；14.29美元/时（2025第10分位）",
+        "fact_id": "r5-current-low",
+        "market": "美国",
+        "measure": "全国工资分位",
+        "occupation_scope": "2025全国工资10/25/50/75/90分位：年29720/33880/37640/45750/54020美元，时14.29/16.29/18.09/22.00/25.97美元。OEWS直时税前含基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金与自雇；不一概排除所有津贴或所有合同雇员。分位不是起薪、年限、认证效果或到手收入。",
+        "period": "2025",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "54020美元/年；25.97美元/时（2025第90分位）",
+        "fact_id": "r5-current-high",
+        "market": "美国",
+        "measure": "全国工资分位",
+        "occupation_scope": "2025全国工资10/25/50/75/90分位：年29720/33880/37640/45750/54020美元，时14.29/16.29/18.09/22.00/25.97美元。OEWS直时税前含基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金与自雇；不一概排除所有津贴或所有合同雇员。分位不是起薪、年限、认证效果或到手收入。",
+        "period": "2025",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约32100岗位（2025）",
+        "fact_id": "r5-current-employment",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-current",
+          "r5-trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "增长2.7%（BLS）；O*NET取整3%，摘要分组3—4%",
+        "fact_id": "r5-current-growth",
+        "market": "美国",
+        "measure": "十年就业变化",
+        "occupation_scope": "美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-current",
+          "r5-trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均4200空缺（2025—2035，含增长更替）",
+        "fact_id": "r5-current-openings",
+        "market": "美国",
+        "measure": "年均空缺",
+        "occupation_scope": "美国29-2051当前2025—2035：2025就业32100→2035预计32900；BLS表1.2增长2.7%、官方净变0.9千人、年均空缺4200含增长及更替、自雇0.4%。O*NET全国趋势取整3%，摘要分组Average3—4%。保留各来源精度，不由已取整存量相减改官方净变；空缺非十年合计、净增或个人录用率，预测不证明AI因果。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-current",
+          "r5-trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "膳食技术员29-2051.00：在营养师监督下协助食品服务和营养项目，可按指南安排制作膳食、教授或咨询；任务含营养评估与生产监督。",
+        "fact_id": "r5-current-identity",
+        "market": "美国",
+        "measure": "职业定义及权限边界",
+        "occupation_scope": "中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。",
+        "period": "2026页面",
+        "source_refs": [
+          "sag-moa",
+          "r5-cn-guideline"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "行业工资缺口：本轮未取得29-2051自身行业工资分位，不以医疗行业平均代填",
+        "fact_id": "r5-current-industry-theater",
+        "market": "美国",
+        "measure": "行业工资可得性",
+        "occupation_scope": "非断言官方不存在行业数据",
+        "period": "检索2026-10-09",
+        "source_refs": [
+          "sag-moa"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET调查情境：持续接触78%、面对面79%每天、受控室内91%每天、疾病或感染暴露82%每天、普通PPE65%每天、噪声66%每天、时间压力61%每天；团队72%极重要、准确57%极重要、他人员工安全责任71%很高。频率非感染或差错率，PPE不是所有人每天。周工时31%超过40/37%等于40/33%少于40（报告取整），99%规律安排非无早晚或周末。",
+        "fact_id": "r5-current-industry-education",
+        "market": "美国",
+        "measure": "调查情境，非行业工资",
+        "occupation_scope": "调查频率非风险事件率/行业工资",
+        "period": "2026页面",
+        "source_refs": [
+          "sag-moa"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "情境不等行业工资；本轮未核本职业细行业工资和人数份额",
+        "fact_id": "r5-current-industry-amusement",
+        "market": "美国",
+        "measure": "行业及工资缺口",
+        "occupation_scope": "限定本轮实际取得资料，不称所有O*NET无更细行业",
+        "period": "检索2026-10-09",
+        "source_refs": [
+          "sag-moa"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：本轮未取得中国职业工资；NBS2025卫生和社会工作城镇非私营146266/私营75631元税前年平均，用于实际医疗单位多职业背景，不是膳食技术员中位、起薪或招聘报价；覆盖城镇5人以上法人，非私营含事业机关及外资等、不只国企，排除个体和自由职业。不套全部食堂、学校或自营机构。",
+        "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
+        "market": "中国大陆",
+        "measure": "职业缺口及匹配行业背景",
+        "occupation_scope": "中国医疗机构：2022指南第5条规定经临床营养培训医师按规定开展诊疗，第6条规定经专业教育或培训的营养专业技术人员按规定开展咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教，不统一缩为只整理材料。附件第5条要求营养筛查由具有相关执业资质且经培训的医务人员完成，首诊医师为第一责任人；第10条评估由临床营养专业技术人员收集临床资料开展，第14条记录纳入病历。岗前培训或公共营养师证书本身不代相关执业资质。",
+        "period": "2025行业/检索2026-10-09",
+        "source_refs": [
+          "r5-nbs-current"
+        ]
       }
     ]
   },
@@ -37063,7 +37449,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "进食与体重监测 · 营养评估协助 · 膳食配置与宣教",
@@ -37114,7 +37500,7 @@
       "text": "膳食技术员"
     }
   },
-  "source_content_sha256": "ef4b37347156b87dd5b4ed89715b3dbd9c7919c80c11399d5a5ea82cdad40261",
+  "source_content_sha256": "de9e35842461ca7419b3e3df332b722e923965dd966592c89c53cf351b9aedc4",
   "subject": {
     "canonical_slug": "dietetic-technicians",
     "name": "膳食技术员",

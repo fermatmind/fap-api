@@ -12829,7 +12829,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更强证据是受监督工作样本、原始记录和反馈；兴趣测评不能证明目标与约束设定、数据质量判断和方案采纳责任能力。"
+              "能力判断可观察受监督建模、数据核验及决策说明反馈；兴趣只作探索，不证明模型质量或批准权。"
             ]
           },
           "id": "operations-research-analysts.fit.personality-fit-block.7",
@@ -14024,7 +14024,7 @@
             "链接": "https://www.onetonline.org/link/details/15-2031.00"
           }
         ],
-        "difference_intro": "资料汇总可加快；目标与约束设定、数据质量判断和方案采纳责任需要人的检查。",
+        "difference_intro": "代码、数据清理和摘要辅助为编辑试用建议；目标、约束、数据质量和方案采纳须人核，未取得单项AI效果实测。",
         "difference_rows": [
           {
             "AI主要改变": "辅助归纳记录与候选",
@@ -14283,8 +14283,8 @@
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
-            "label": "教育与资格",
-            "scope": "美国15-2031.00精确职业"
+            "label": "典型教育与训练统计",
+            "scope": "美国15-2031典型本科学历；部分职位研究生偏好见BLS OOH，组织数据访问和方案采纳权另核。"
           },
           {
             "href": "https://www.onetonline.org/link/details/15-2031.00",
@@ -14604,16 +14604,28 @@
         "risks": [
           {
             "affected_roles": {
-              "$item": "operations-research-analysts.risk.career-risk-cards.4",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "分析师、目标设定者及受资源配置影响的团队。目标背景：",
+                {
+                  "$item": "operations-research-analysts.risk.career-risk-cards.4",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "consequence": {
-              "$item": "operations-research-analysts.risk.career-risk-cards.5",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "可能牺牲服务或公平目标，使方案不可接受。升级边界：",
+                {
+                  "$item": "operations-research-analysts.risk.career-risk-cards.5",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "evidence_refs": [
               "onet",
@@ -14625,11 +14637,11 @@
             "title": "目标错设"
           },
           {
-            "affected_roles": "运筹学分析师工作需围绕运筹学分析师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "运筹学分析师工作需围绕运筹学分析师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "分析师、数据提供者及使用模型的决策者。",
+            "consequence": "可能让估计与方案偏离真实需求。",
             "evidence_refs": [
               "onet",
-              "privacy"
+              "onet"
             ],
             "id": "record-version",
             "mitigation": "做质量检查和敏感性分析。",
@@ -14637,11 +14649,11 @@
             "title": "数据偏差"
           },
           {
-            "affected_roles": "运筹学分析师工作需围绕运筹学分析师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "运筹学分析师工作需围绕运筹学分析师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "分析师、业务执行方及决策者。",
+            "consequence": "可能得到违反产能或业务条件的不可执行方案。",
             "evidence_refs": [
-              "privacy",
-              "privacy"
+              "onet",
+              "onet"
             ],
             "id": "personal-data",
             "mitigation": "让执行方审模型。",
@@ -14649,8 +14661,8 @@
             "title": "约束遗漏"
           },
           {
-            "affected_roles": "运筹学分析师工作需围绕运筹学分析师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "运筹学分析师工作需围绕运筹学分析师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "模型开发者、运营团队及方案使用者。",
+            "consequence": "可能在需求变化时失效并导致错配资源。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14661,11 +14673,11 @@
             "title": "求解过拟合"
           },
           {
-            "affected_roles": "运筹学分析师工作需围绕运筹学分析师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "运筹学分析师工作需围绕运筹学分析师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "分析师、管理者及执行方案的团队。",
+            "consequence": "可能误解模型条件或将结果用于超范围决策。",
             "evidence_refs": [
-              "bls",
-              "bls"
+              "onet",
+              "onet"
             ],
             "id": "single-coverage",
             "mitigation": "记录假设和边际影响。",
@@ -14673,8 +14685,8 @@
             "title": "黑箱解释"
           },
           {
-            "affected_roles": "运筹学分析师工作需围绕运筹学分析师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "运筹学分析师工作需围绕运筹学分析师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "分析师、客户、数据主体和数据管理员。",
+            "consequence": "可能暴露受限明细并违反适用合同或数据规则。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14691,31 +14703,31 @@
             "href": "https://www.onetonline.org/link/details/15-2031.00",
             "id": "onet",
             "label": "任务",
-            "scope": "美国15-2031.00精确职业"
+            "scope": "O*NET支持15-2031任务、模型验证与沟通背景；BLS仅工资、预测与典型学历。风险为编辑提示，非数据法条或发生频率。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
             "label": "资格",
-            "scope": "美国15-2031.00精确职业"
+            "scope": "O*NET支持15-2031任务、模型验证与沟通背景；BLS仅工资、预测与典型学历。风险为编辑提示，非数据法条或发生频率。"
           },
           {
             "href": "https://www.onetonline.org/link/details/15-2031.00",
             "id": "facilities",
             "label": "工作环境",
-            "scope": "美国15-2031.00精确职业"
+            "scope": "O*NET支持15-2031任务、模型验证与沟通背景；BLS仅工资、预测与典型学历。风险为编辑提示，非数据法条或发生频率。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "privacy",
             "label": "就业资料",
-            "scope": "美国15-2031.00精确职业"
+            "scope": "O*NET支持15-2031任务、模型验证与沟通背景；BLS仅工资、预测与典型学历。风险为编辑提示，非数据法条或发生频率。"
           },
           {
             "href": "https://www.onetonline.org/link/details/15-2031.00",
             "id": "onet",
             "label": "职业活动",
-            "scope": "美国15-2031.00精确职业"
+            "scope": "O*NET支持15-2031任务、模型验证与沟通背景；BLS仅工资、预测与典型学历。风险为编辑提示，非数据法条或发生频率。"
           }
         ]
       },
@@ -14843,7 +14855,7 @@
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "BLS精确职业统计｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET职业任务｜https://www.onetonline.org/link/details/15-2031.00",
+        "authority_sources": "BLS单项统计与行业工资｜https://www.bls.gov/ooh/math/operations-research-analysts.htm；O*NET五分位｜https://www.onetonline.org/link/localwages/15-2031.00",
         "bls_table": [
           {
             "指标": "薪资第10百分位",
@@ -14920,24 +14932,24 @@
         "industry_period": "2025年5月",
         "industry_rows": [
           {
-            "industry": "专业技术服务",
-            "median": "按地区核",
-            "note": "精确职业行业分位在本页未单列。"
+            "industry": "专业、科学和技术服务",
+            "median": "$94,990",
+            "note": "BLS OOH：2025年5月美国15-2031该行业年薪中位数；非行业分位、起薪或中国工资。"
           },
           {
-            "industry": "政府与公共部门",
-            "median": "按地区核",
-            "note": "精确职业行业分位在本页未单列。"
+            "industry": "联邦政府",
+            "median": "$139,980",
+            "note": "BLS OOH：2025年5月美国15-2031该行业年薪中位数；非行业分位、起薪或中国工资。"
           },
           {
             "industry": "金融与保险",
-            "median": "按地区核",
-            "note": "精确职业行业分位在本页未单列。"
+            "median": "$80,870",
+            "note": "BLS OOH：2025年5月美国15-2031该行业年薪中位数；非行业分位、起薪或中国工资。"
           },
           {
-            "industry": "制造和物流",
-            "median": "按地区核",
-            "note": "精确职业行业分位在本页未单列。"
+            "industry": "制造业",
+            "median": "$108,120",
+            "note": "BLS OOH：2025年5月美国15-2031该行业年薪中位数；非行业分位、起薪或中国工资。"
           }
         ],
         "industry_value_label": "年薪中位数（美元）",
@@ -15110,30 +15122,39 @@
         "heading": "美国15-2031.00就业展望",
         "outlook_evidence": [
           {
-            "geography": {
-              "$item": "operations-research-analysts.market-signals.market-signal-card.2",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "horizon": {
-              "$item": "operations-research-analysts.market-signals.market-signal-card.3",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "geography": "美国",
+            "horizon": "2025基期",
             "interpretation": {
-              "$item": "operations-research-analysts.market-signals.market-signal-card.4",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
+              "$join": [
+                "就业及其他背景分开解读：",
+                {
+                  "$item": "operations-research-analysts.market-signals.market-signal-card.2",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "operations-research-analysts.market-signals.market-signal-card.3",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "operations-research-analysts.market-signals.market-signal-card.4",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "operations-research-analysts.market-signals.market-signal-card.5",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
-            "limitation": {
-              "$item": "operations-research-analysts.market-signals.market-signal-card.5",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "limitation": "15-2031精确职业就业存量；非当前招聘、AI归因或中国需求。",
             "metric": "2025在岗",
             "occupation_scope": "美国15-2031.00",
             "source_id": "bls",
@@ -15278,7 +15299,7 @@
           },
           {
             "alternate_value": null,
-            "label": "知识",
+            "label": "任务相关知识（编辑归纳）",
             "secondary_value": null,
             "value": "线性规划、优化、概率、仿真、运营流程和决策分析"
           },
@@ -15301,7 +15322,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
+            "cta_label": "查看霍兰德兴趣测评",
             "evidence_level": {
               "$item": "operations-research-analysts.fit.personality-fit-block.8",
               "block": "fit",
@@ -15320,10 +15341,10 @@
             "watchout": "兴趣测评不证明目标与约束设定、数据质量判断和方案采纳责任能力或资格。"
           },
           {
-            "answer": "运筹学分析师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "核数据字典、单位、缺失值、时间窗及模型可复现性，记录发现的错误。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "运筹学分析师工作需围绕运筹学分析师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "big-five",
             "label": "细节能力",
             "question": "做运筹学分析师需要怎样的能力与工作方式？",
@@ -15336,10 +15357,10 @@
             "watchout": "兴趣测评不证明目标与约束设定、数据质量判断和方案采纳责任能力或资格。"
           },
           {
-            "answer": "运筹学分析师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "练识别样本偏差、不可行约束与情景失效，说明暂停和升级条件。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "运筹学分析师工作需围绕运筹学分析师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "mbti",
             "label": "风险处理",
             "question": "做运筹学分析师需要怎样的能力与工作方式？",
@@ -15352,10 +15373,10 @@
             "watchout": "兴趣测评不证明目标与约束设定、数据质量判断和方案采纳责任能力或资格。"
           },
           {
-            "answer": "运筹学分析师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较定量求解、业务协作和解释取舍是否符合自己的工作价值。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "运筹学分析师工作需围绕运筹学分析师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "enneagram",
             "label": "工作价值",
             "question": "做运筹学分析师需要怎样的能力与工作方式？",
@@ -15368,10 +15389,10 @@
             "watchout": "兴趣测评不证明目标与约束设定、数据质量判断和方案采纳责任能力或资格。"
           },
           {
-            "answer": "运筹学分析师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "核办公室建模、业务访谈、跨团队协作和截止期是否适合。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "运筹学分析师工作需围绕运筹学分析师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "iq",
             "label": "场景偏好",
             "question": "做运筹学分析师需要怎样的能力与工作方式？",
@@ -15384,10 +15405,10 @@
             "watchout": "兴趣测评不证明目标与约束设定、数据质量判断和方案采纳责任能力或资格。"
           },
           {
-            "answer": "运筹学分析师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "用既有虚构配送练习说明目标、约束和敏感性；样本不授真实调度权。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "运筹学分析师工作需围绕运筹学分析师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "eq",
             "label": "虚构案例",
             "question": "做运筹学分析师需要怎样的能力与工作方式？",
@@ -15607,8 +15628,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "BLS 15-2031.00 2025—2035精确职业统计；O*NET任务；国家统计局中国工资缺口。",
-          "updated_at": "2026-09-26核官方职业任务与当前统计。"
+          "source": "BLS美国15-2031工资与就业；O*NET任务与工资分位；NBS2025专业技术宽岗位与科研技术服务企业子组。",
+          "updated_at": "2026-10-12"
         },
         "note": "证据只支持运筹学分析师在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -15620,7 +15641,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "职业任务"
+            "label": "MBTI测评（英文）"
           },
           {
             "href": {
@@ -15630,7 +15651,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "工资就业"
+            "label": "大五人格测评（英文）"
           },
           {
             "href": {
@@ -15640,7 +15661,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "资格或规则"
+            "label": "MBTI测评（中文）"
           },
           {
             "href": {
@@ -15650,7 +15671,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "统计边界"
+            "label": "大五人格测评（中文）"
           }
         ]
       },
@@ -15846,7 +15867,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "运筹分析师 · O*NET 15-2031.00",
@@ -15897,7 +15918,7 @@
       "text": "运筹分析师：工作、工资与入行路径"
     }
   },
-  "source_content_sha256": "0ec67b005779ebd6a07550e6e99e7610c17d074401e781a5f94747e9349d781a",
+  "source_content_sha256": "2c3c8545b26ac2129e1e8f52c5b8aa368aa0fae0ecc0a2b30a06b8532c992f29",
   "subject": {
     "canonical_slug": "operations-research-analysts",
     "name": "运筹分析师",

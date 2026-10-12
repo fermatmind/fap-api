@@ -24727,7 +24727,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有证据支持AI会在某一年取代美国53-7072职业。文本生成可辅助记录整理；现场物料确认、设备监测、异常处置和授权责任仍须由人员与组织承担。"
+              "证据不足：53-7072的生成式AI实际采用率、记录质量收益、事故影响和净岗位效应。文本工具可辅助获准记录的整理与交接草稿；传感器报警、过程控制和生成式AI不是同一种技术，不能用任务暴露研究推断自动启停权限或替代年份。"
             ]
           },
           "id": "pump-operators-except-wellhead-pumpers.ai-impact.ai-impact-table.18",
@@ -28911,7 +28911,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET支持该职业的任务和工作环境描述；OSHA危险能源资料支持适用检修场景的隔离边界，均不替代具体设备规程。"
+              "六个场景是编辑构造的纸面风险分析，不是事故率统计。O*NET支持泵运行任务，OSHA支持美国适用检修中的危险能源控制；中国岗位须另核行业、设备和当地要求，不能把美国指引当作中国准入法规。"
             ]
           },
           "id": "pump-operators-except-wellhead-pumpers.risk.career-risk-cards.10",
@@ -29371,7 +29371,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "准备与核对建议（编辑整理）",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -29464,7 +29464,7 @@
             "bls",
             "onet"
           ],
-          "title": "雇主在招聘中通常看什么？",
+          "title": "招聘公告与岗位训练应核对什么？",
           "type": "cards"
         },
         {
@@ -31104,7 +31104,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "全国预测不保证具体地区或个人就业。"
+              "BLS表的增长率为4.3%，此处约4%是取整展示；年均空缺包含替换需求，不能等同约400人的十年净增，也不预测中国岗位。"
             ]
           },
           "id": "pump-operators-except-wellhead-pumpers.market-signals.market-signal-card.12",
@@ -34720,7 +34720,7 @@
             },
             "evidence_refs": [
               "onet",
-              "editor"
+              "ep"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -34752,7 +34752,7 @@
             },
             "evidence_refs": [
               "onet",
-              "editor"
+              "ep"
             ],
             "id": "record-version",
             "mitigation": {
@@ -34784,7 +34784,7 @@
             },
             "evidence_refs": [
               "onet",
-              "editor"
+              "ep"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34848,7 +34848,7 @@
             },
             "evidence_refs": [
               "onet",
-              "editor"
+              "ep"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -34880,7 +34880,7 @@
             },
             "evidence_refs": [
               "onet",
-              "editor"
+              "ep"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35596,7 +35596,7 @@
           "type": "prose"
         },
         "heading": "美国泵操作员（井口泵除外）工资多少？",
-        "industry_heading": "不同行业的美国工资差多少？",
+        "industry_heading": "2023年各行业年平均工资（与2025全国中位数不同期）",
         "industry_period": "2023年5月（BLS OEWS）",
         "industry_rows": [
           {
@@ -37688,7 +37688,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "泵操作员（井口泵除外） · 任务核对",
@@ -37739,7 +37739,7 @@
       "text": "泵操作员（井口泵除外）"
     }
   },
-  "source_content_sha256": "411196275fb150660da2c174c7cb0b4b11c26b4ead3768232b7dd18145692506",
+  "source_content_sha256": "986382e31cb9e3b4cfb5d60c810907dfe4736b2524b797286158c88e2e9b0f4e",
   "subject": {
     "canonical_slug": "pump-operators-except-wellhead-pumpers",
     "name": "泵操作员（井口泵除外）",

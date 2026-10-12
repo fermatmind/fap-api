@@ -7364,7 +7364,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入｜RC，兴趣R90/C54/E9/S6/A3/I0，兴趣强度非能力；页面标Bright。O*NET Job Zone1—2通用描述通常高中/GED但部分不要求，经验很少至数月一年、OJT数日至一年、SVP<6；BLS本职业典型无正式学历要求、短期在职训练。统计描述非每个雇主门槛或独立操作承诺。Top industries明确2024其他服务除公共管理49%、住宿餐饮20%、医疗社会援助16%，余15%由100减三项，只作剩余，未列行业不猜。美国2025年薪10/25/50/75/90分位27,440、30,360、34,890、37,560、43,190美元；官方时薪13.19、14.60、16.78、18.06、20.77美元。BLS精确51-6011新期2025就业204,900→2035年213,700、增长4.3%；表列净增8,700，年均空缺28,200，含增长与替换，不等净新增或当前招聘。端点和净变化均按表列取整，不另用端点差改写。O*NET旧期2024就业202,600→2034年213,500、增长5%（details类别5%—6%）、年均空缺31,900；与新期分列，不相加。"
+              "研究输入｜RC，兴趣R90/C54/E9/S6/A3/I0，兴趣强度非能力；页面标Bright。O*NET Job Zone1—2通用描述通常高中/GED但部分不要求，经验很少至数月一年、OJT数日至一年、SVP<6；BLS本职业典型无正式学历要求、短期在职训练。统计描述非每个雇主门槛或独立操作承诺。Top industries明确2025其他服务除公共管理48%、住宿餐饮21%、医疗社会援助17%，余14%由100减三项，只作剩余，未列行业不猜。美国2025年薪10/25/50/75/90分位27,440、30,360、34,890、37,560、43,190美元；官方时薪13.19、14.60、16.78、18.06、20.77美元。BLS精确51-6011新期2025就业204,900→2035年213,700、增长4.3%；表列净增8,700，年均空缺28,200，含增长与替换，不等净新增或当前招聘。端点和净变化均按表列取整，不另用端点差改写。O*NET旧期2024就业202,600→2034年213,500、增长5%（details类别5%—6%）、年均空缺31,900；与新期分列，不相加。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.profile.onet-structured-fields-block.7",
@@ -7825,7 +7825,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业口径｜O*NET明确2024其他服务除公共管理49%、住宿餐饮20%、医疗社会援助16%；余15%只是100减已列三项，未列具体行业与工资。行业占比、预测空缺和当前招聘不同。"
+              "行业口径｜O*NET Top industries (2025)：其他服务除公共管理48%、住宿餐饮21%、医疗社会援助17%；余14%为100减已列三项，未列具体行业及工资。行业占比、预测空缺和当前招聘分别核。"
             ]
           },
           "fact_refs": [
@@ -7896,7 +7896,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "积极信号｜能按标签与材质完成分拣与工序选择；能正确配比化学品并设置设备程序；能发现面料损伤、串色或污渍未除并记录返洗。"
+              "积极信号｜能按标签与材质完成分拣与工序选择；愿意先完成培训并遵守批准工艺及设备权限，不自行拟定配方或参数；能发现面料损伤、串色或污渍未除并记录返洗。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.fit.riasec-fit-block.3",
@@ -8181,7 +8181,10 @@
           },
           "id": "laundry-and-dry-cleaning-workers.path.career-path-block.8",
           "source_refs": [
-            "authority"
+            "profile",
+            "adj-presser",
+            "adj-sewing",
+            "osha-perc"
           ],
           "type": "prose"
         }
@@ -8265,7 +8268,10 @@
           },
           "id": "laundry-and-dry-cleaning-workers.market-signals.market-signal-card.5",
           "source_refs": [
-            "outlook"
+            "profile",
+            "adj-presser",
+            "adj-sewing",
+            "adj-dish"
           ],
           "type": "prose"
         }
@@ -8701,9 +8707,9 @@
                 "url": "https://www.onetonline.org/link/hot_tech/51-6011.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-10-11",
                 "details": [
-                  "用于核对本职业的主要行业分布（其他服务（除公共管理）约 49%）。",
+                  "其他服务除公共管理48%、住宿餐饮21%、医疗社会援助17%；剩余14%为差额，未列具体行业。",
                   "行业分布不建立中国映射。"
                 ],
                 "evidence_type": "official industry distribution",
@@ -8711,7 +8717,7 @@
                 "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或资质结论。",
                 "market": "美国",
                 "name": "Industries: 51-6011.00 - Laundry and Dry-Cleaning Workers",
-                "period": "本轮details明确Top industries (2024)",
+                "period": "2025美国职业行业分布；2026-10-11核对",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/51-6011.00"
@@ -9298,7 +9304,7 @@
             "方向": "工序与追踪辅助"
           },
           {
-            "AI主要改变": "检索与复盘",
+            "AI主要改变": "可试验检索与复盘，效果须回核原件记录",
             "仍由人负责": "原始记录核对",
             "方向": "材质与安全判断"
           }
@@ -10760,27 +10766,27 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "O*NET Top industries (2024)，非访问年",
+        "industry_period": "O*NET Top industries (2025)，美国职业分布",
         "industry_rows": [
           {
-            "industry": "其他服务（除公共管理）",
+            "industry": "其他服务（除公共管理，48%）",
             "median": "暂无安全数值",
-            "note": "O*NET2024分布49%，未列该行业工资。"
+            "note": "2025行业分布，未列该行业工资。"
           },
           {
-            "industry": "住宿与餐饮服务（约 20%）",
+            "industry": "住宿与餐饮服务（21%）",
             "median": "暂无安全数值",
-            "note": "未单列行业工资，不使用代理数字。"
+            "note": "2025行业分布，未列该行业工资。"
           },
           {
-            "industry": "医疗与社会援助（约 16%）",
+            "industry": "医疗与社会援助（17%）",
             "median": "暂无安全数值",
-            "note": "未单列行业工资，不使用代理数字。"
+            "note": "2025行业分布，未列该行业工资。"
           },
           {
-            "industry": "其余行业（15%仅剩余计算）",
+            "industry": "其他未列行业（余14%）",
             "median": "暂无安全数值",
-            "note": "100%−49%−20%−16%=15%；未列具体行业，不断言行政支持业占比。"
+            "note": "100%−48%−21%−17%=14%，仅剩余量，不猜行业。"
           }
         ],
         "industry_value_label": "行业值",
@@ -11120,7 +11126,7 @@
             "evidence_level": "编辑建议：纸面任务记录非绩效预测",
             "id": "riasec",
             "label": "RIASEC",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "你是否愿意逐件核订单与标签，而不是凭熟悉程度跳过？",
             "signals": [
               "件数核对",
               "待核记录"
@@ -11139,7 +11145,7 @@
             "evidence_level": "编辑建议：纸面任务记录非绩效预测",
             "id": "big-five",
             "label": "大五人格",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "发生件数不符时，能否暂停交付并留记录？",
             "signals": [
               "件数核对",
               "待核记录"
@@ -11158,7 +11164,7 @@
             "evidence_level": "编辑建议：纸面任务记录非绩效预测",
             "id": "mbti",
             "label": "MBTI",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "你是否把测试结果当成提问线索，而不是作业许可？",
             "signals": [
               "件数核对",
               "待核记录"
@@ -11166,13 +11172,13 @@
             "watchout": "模拟作品不证明实际洗干或化学品设备操作能力。"
           },
           {
-            "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
+            "answer": "观察你能否在草稿多一件时坚持回核六件原卡；九型标签不预测安全行为。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "编辑建议：纸面任务记录非绩效预测",
             "id": "enneagram",
             "label": "九型人格",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "被催促时，能否说明缺失信息并交责任人核？",
             "signals": [
               "件数核对",
               "待核记录"
@@ -11180,13 +11186,13 @@
             "watchout": "模拟作品不证明实际洗干或化学品设备操作能力。"
           },
           {
-            "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
+            "answer": "记录漏项、重复计数和修订依据，不能据认知测验分数推设备或化学品权限。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "编辑建议：纸面任务记录非绩效预测",
             "id": "iq",
             "label": "认知能力",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "能否把数字核对、分类判断与真实加工状态分开？",
             "signals": [
               "件数核对",
               "待核记录"
@@ -11194,13 +11200,13 @@
             "watchout": "模拟作品不证明实际洗干或化学品设备操作能力。"
           },
           {
-            "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
+            "answer": "用未发送询问记录缺标签和未加工状态，观察沟通反馈；情绪工具不替代雇主安全训练。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "编辑建议：纸面任务记录非绩效预测",
             "id": "eq",
             "label": "情绪能力",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "能否清楚向客户说明待核状态，避免承诺已完成？",
             "signals": [
               "件数核对",
               "待核记录"
@@ -11255,35 +11261,35 @@
         },
         "questions": [
           {
-            "answer": "AC核六件及草稿多一、C1待核，全部实际未加工未交付；记录反馈，实际岗位另核培训授权。",
+            "answer": "观察最愿意做的环节是核件、分类还是记录；甲乙仅模拟代号。",
             "question": "喜欢哪些任务？"
           },
           {
-            "answer": "AC核六件及草稿多一、C1待核，全部实际未加工未交付；记录反馈，实际岗位另核培训授权。",
+            "answer": "记录被催促时是否仍核六件和C1待核，纸面耗时不代表真实产能。",
             "question": "能否承受工作节奏？"
           },
           {
-            "answer": "AC核六件及草稿多一、C1待核，全部实际未加工未交付；记录反馈，实际岗位另核培训授权。",
+            "answer": "核对每次修改是否能追溯到件ID、原卡和版本。",
             "question": "是否愿意记录过程？"
           },
           {
-            "answer": "AC核六件及草稿多一、C1待核，全部实际未加工未交付；记录反馈，实际岗位另核培训授权。",
+            "answer": "C1标签缺失时停止推断归组，列问题交责任人。",
             "question": "能否在不确定时升级？"
           },
           {
-            "answer": "AC核六件及草稿多一、C1待核，全部实际未加工未交付；记录反馈，实际岗位另核培训授权。",
+            "answer": "说明纸面练习无洗干权限；真实工艺另需培训和授权。",
             "question": "是否理解授权边界？"
           },
           {
-            "answer": "AC核六件及草稿多一、C1待核，全部实际未加工未交付；记录反馈，实际岗位另核培训授权。",
+            "answer": "对草稿多一件写出错误来源、修订依据及防重复方法。",
             "question": "能否复盘失败？"
           },
           {
-            "answer": "AC核六件及草稿多一、C1待核，全部实际未加工未交付；记录反馈，实际岗位另核培训授权。",
+            "answer": "交由同伴逐项核记录并记录反馈，数目正确不等实际衣物合格。",
             "question": "是否有可观察交付？"
           },
           {
-            "answer": "AC核六件及草稿多一、C1待核，全部实际未加工未交付；记录反馈，实际岗位另核培训授权。",
+            "answer": "先核目标雇主设备、工序、培训与班次，再安排获准观察任务。",
             "question": "下一步试验是什么？"
           }
         ],
@@ -11471,7 +11477,7 @@
             "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
           }
         },
-        "note": "来源说明｜O*NET51-6011身份RC/JobZone/Bright、2024行业49/20/16、2025五工资保；BLS2025—2035新期增长4.3/annual28200与旧期5/31900分列。OEWS激励生产奖金含，非生产及加班福利自雇排。湖南2023洗衣师企业样本五分位2.81/3.19/3.40/3.93/5.02万元年、NBS相关行业2025非私70226/私52059年均及北京公告原文4-6K各保范围，非全国或个人报价。旧技能标准与当前雇主权限分开。OSHA2005/NIOSH1997/CCOHS酒店案例为有界技术资料非中国现行法规全表；ILO/NIST通用非职业采用效果。AC仅纸面六件分组、缺标签待核，不洗干配药设参或交付。"
+        "note": "来源说明｜O*NET51-6011身份RC/JobZone/Bright、本轮2025行业48/21/17、2025五工资保；BLS2025—2035新期增长4.3/annual28200；旧期5/31900仅作历史记录。OEWS激励生产奖金含，非生产及加班福利自雇排。湖南2023洗衣师企业样本五分位2.81/3.19/3.40/3.93/5.02万元年、NBS相关行业2025非私70226/私52059年均及北京公告原文4-6K各保范围，非全国或个人报价。旧技能标准与当前雇主权限分开。OSHA2005/NIOSH1997/CCOHS酒店案例为有界技术资料非中国现行法规全表；ILO/NIST通用非职业采用效果。AC仅纸面六件分组、缺标签待核，不洗干配药设参或交付。"
       },
       "work_context_block": {
         "$item": "laundry-and-dry-cleaning-workers.profile.work-context-block.5",
@@ -11617,7 +11623,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "洗衣师 · 洗涤工序、化学品与作业安全",
@@ -11668,7 +11674,7 @@
       "text": "洗衣师职业判断：洗涤工序、化学品与作业安全"
     }
   },
-  "source_content_sha256": "7d15d58bd6ef995ec5283c80bcf7f1bf672a0035579b019759ff214b2e6f2874",
+  "source_content_sha256": "2b200e5a78173cacc0a35c6a67c9ecd574ff955bc60e2e3cf5f314b221c261d6",
   "subject": {
     "canonical_slug": "laundry-and-dry-cleaning-workers",
     "name": "洗衣师",

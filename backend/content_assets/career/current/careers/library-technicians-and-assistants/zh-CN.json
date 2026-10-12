@@ -7565,7 +7565,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 可辅助检索词扩展、书目信息整理、记录初稿与常见问题分类，但读者身份与借阅权限核对、分类排序判断、设备故障排查与读者隐私边界仍由人负责。"
+              "编辑建议：可测试检索、书目与记录草稿整理；尚无合并职业采用率、节时或岗位结果。身份权限、排架与设备处置须由授权责任人核对。"
             ]
           },
           "id": "library-technicians-and-assistants.ai-impact.ai-impact-table.2",
@@ -7678,7 +7678,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开工资统计：国家统计局按行业门类发布城镇单位就业人员年平均工资，图书馆技术员与助理多分布在教育、文化体育和娱乐、公共管理等行业，行业平均不能替代本职业工资。"
+              "本轮NBS行业表未单列图书馆技术员与助理合并职业工资；教育、文化体育娱乐与公共管理仅作机构背景，未取得本职业中国行业份额。"
             ]
           },
           "id": "library-technicians-and-assistants.china-salary.career-snapshot-primary-locale.1",
@@ -7720,7 +7720,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国大陆图书馆技术员与助理对应的全国职业工资中位数、统计期与口径，本页仅展示行业代理并标明其为行业口径，不使用代理数字。"
+              "证据不足：未建立中国合并职业全国工资分布；行业年平均值仅作背景，不能代作职业起薪或中位数。"
             ]
           },
           "id": "library-technicians-and-assistants.china-salary.career-snapshot-primary-locale.4",
@@ -8090,13 +8090,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国侧图书馆技术员通常要求大专学历或相关职业培训，图书馆文书助理通常要求高中文凭加短期在职训练；中国大陆的岗位多按学校、公共图书馆或事业单位的用工规定确定，须分别核对。"
+              "BLS分别说明：技术员通常需高中之后的图书馆技术证书，文书助理通常高中或同等学历加短期在职训练；不能把证书换写为统一大专。中国机构岗位条件另核。"
             ]
           },
           "id": "library-technicians-and-assistants.path.career-path-block.2",
           "source_refs": [
-            "onet-summary-lt",
-            "onet-summary-la"
+            "bls-ooh-lta"
           ],
           "type": "prose"
         },
@@ -8105,13 +8104,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国：图书馆技术员多为大专学历或职业培训，图书馆文书助理多为高中文凭加短期在职训练，实际条件以招聘公告为准。中国大陆：公共与学校图书馆的岗位多按事业单位或机构用工与招录规定管理，学历与培训要求由单位与当地规定确定。"
+              "BLS分别说明：技术员通常需高中之后的图书馆技术证书，文书助理通常高中或同等学历加短期在职训练；不能把证书换写为统一大专。中国机构岗位条件另核。"
             ]
           },
           "id": "library-technicians-and-assistants.path.career-path-block.3",
           "source_refs": [
-            "onet-summary-lt",
-            "onet-summary-la"
+            "bls-ooh-lta"
           ],
           "type": "prose"
         },
@@ -8233,13 +8231,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册合并口径：图书馆技术员与助理 2025 年约 162,300 人，2025—2035 年预计下降约 6%；分职业可参考 25-4031（2024 年约 78,600 人）与 43-4121（2024 年约 84,500 人）。"
+              "BLS合并组2025年162,300人至2035年151,900人，下降6%、净减10,400；同期精确技术员72,800人、文书助理89,500人。分职业人数不再混入2024旧基数。"
             ]
           },
           "id": "library-technicians-and-assistants.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls-ooh-lta",
-            "onet-summary-lt"
+            "bls-ooh-lta"
           ],
           "type": "prose"
         },
@@ -8670,6 +8667,21 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "隐私、知识产权、公平服务与私人利益；概括伦理框架，不能决定具体法律后果。"
+                ],
+                "evidence_type": "official primary guidance or statistics",
+                "id": "ala-ethics",
+                "limitation": "按所述职业与法域使用，不能设定中国资格。",
+                "market": "美国",
+                "name": "ALA职业伦理准则",
+                "period": "2026-10-11核对当前原页",
+                "publisher": "American Library Association",
+                "scope": "美国图书馆职业伦理",
+                "url": "https://www.ala.org/tools/ethics"
               }
             ]
           },
@@ -8896,7 +8908,7 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "可能减少检索与登记整理时间，不证明岗位结果",
+            "AI主要改变": "可测试检索和登记整理草稿；节时未核实",
             "仍由人负责": "读者身份核对、借阅权限与登记责任",
             "方向": "流通与检索"
           },
@@ -9090,7 +9102,12 @@
         ],
         "task_rows": [
           {
-            "人的控制点": "核对读者身份与借阅权限。",
+            "人的控制点": {
+              "$item": "library-technicians-and-assistants.ai-impact.ai-impact-table.8",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
             "任务": "办理借还并登记读者",
             "工作方向": "流通与借还",
             "当前变化": {
@@ -9101,12 +9118,7 @@
             }
           },
           {
-            "人的控制点": {
-              "$item": "library-technicians-and-assistants.ai-impact.ai-impact-table.8",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "type": "prose"
-            },
+            "人的控制点": "核对实体资料分类号、排架顺序与检索答复，复杂咨询转馆员。",
             "任务": "按分类排序上架并协助检索",
             "工作方向": "检索与上架",
             "当前变化": "可能辅助生成排架与检索提示"
@@ -9264,7 +9276,7 @@
         "heading": "图书馆技术员与助理的工作对象与 AI 边界"
       },
       "career_path_block": {
-        "boundary": "入口学历、用工形式、编制与系统权限由具体机构与当地规定核验。",
+        "boundary": "路径为准备建议；转馆员通常需图书馆科学硕士，经验不自动授予专业岗位或系统权限。",
         "competence_ladder": [
           {
             "description": "确认馆藏资料、读者信息、权限与馆内规则。",
@@ -9390,7 +9402,7 @@
             "id": "track-0",
             "stages": [
               {
-                "credentials": "无统一资格；按机构要求。",
+                "credentials": "分别核对技术员与助理的聘任及培训条件；系统、设备与驾驶权限另核。",
                 "next_moves": {
                   "$item": "library-technicians-and-assistants.path.career-path-block.7",
                   "block": "path",
@@ -9659,7 +9671,7 @@
           }
         ],
         "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
-        "evidence_scope": "依据 BLS 职业展望手册合并口径与 O*NET 25-4031.00、43-4121.00 的任务与工作情境，以及图书馆流通与隐私通行要求；具体规则按机构与当地规定核对，不跨范围外推。",
+        "evidence_scope": "BLS合并组与O*NET两精确职业支持任务；ALA支持隐私伦理。设备维护不是对所有助理统一授权。",
         "heading": "图书馆技术员与助理的工作风险与边界",
         "risks": [
           {
@@ -9698,7 +9710,7 @@
             "affected_roles": "流通与检索服务岗位",
             "consequence": "不当披露会侵犯隐私并损害读者信任。",
             "evidence_refs": [
-              "library-technicians-and-assistants.display.source.1"
+              "library-technicians-and-assistants.display.source.3"
             ],
             "id": "risk-3",
             "mitigation": "按馆内隐私政策最小化收集、限制访问并保留处理记录。",
@@ -9714,7 +9726,7 @@
             "affected_roles": "设备与技术服务岗位",
             "consequence": "检索与借阅服务中断，或不当处置扩大损坏。",
             "evidence_refs": [
-              "library-technicians-and-assistants.display.source.2"
+              "library-technicians-and-assistants.display.source.1"
             ],
             "id": "risk-4",
             "mitigation": "按设备规程排查，超出范围时联系信息技术支持。",
@@ -9746,7 +9758,7 @@
             "affected_roles": "流通与登记岗位",
             "consequence": "错误记录进入流通系统，难以追溯与更正。",
             "evidence_refs": [
-              "library-technicians-and-assistants.display.source.3"
+              "library-technicians-and-assistants.display.source.1"
             ],
             "id": "risk-6",
             "mitigation": "回看原始资料与读者信息，保留人工复核记录。",
@@ -9812,7 +9824,7 @@
           },
           {
             "href": {
-              "$source": "onet-summary-la",
+              "$source": "ala-ethics",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9820,13 +9832,13 @@
             },
             "id": "library-technicians-and-assistants.display.source.3",
             "label": {
-              "$source": "onet-summary-la",
+              "$source": "ala-ethics",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "library-technicians-and-assistants.source-register.published.1"
             },
-            "scope": "43-4121 身份与入行教育；不替代馆内流通与设备规则。"
+            "scope": "ALA读者隐私伦理框架；不替代法域法规。"
           }
         ]
       },
@@ -9923,7 +9935,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国大陆无本职业单列工资；下列为行业代理，不是起薪、中位数或到手收入。",
+          "china_open": "本轮NBS行业表未单列本职业；行业年平均不是起薪、中位数或到手收入。",
           "china_ref": {
             "$join": [
               {
@@ -10070,12 +10082,12 @@
             }
           },
           {
-            "指标": "薪资 · 中位数（合并职业）",
-            "数值": "$38,760/年",
+            "指标": "薪资 · 中位数（技术员25-4031）",
+            "数值": "$44,580/年",
             "说明": {
               "$join": [
                 {
-                  "$source": "bls-ooh-lta",
+                  "$source": "onet-wages-lt",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10083,7 +10095,7 @@
                 },
                 "｜",
                 {
-                  "$source": "bls-ooh-lta",
+                  "$source": "onet-wages-lt",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10223,11 +10235,11 @@
         },
         "factor_rows": [
           {
-            "answer": "按机构与岗位要求核验；技术员多为大专或职业培训，助理多为高中文凭加短期训练。",
+            "answer": "技术员通常需高中后的图书馆技术证书；文书助理通常高中或同等学历加短期在职训练。",
             "factor": "资格"
           },
           {
-            "answer": "多数岗位以在职训练为主，实际条件以招聘公告为准。",
+            "answer": "BLS分别说明两职业准备方式，不推出合并职业统一训练年限。",
             "factor": "经验"
           },
           {
@@ -10257,24 +10269,29 @@
         "industry_period": "2025",
         "industry_rows": [
           {
-            "industry": "教育服务",
-            "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体分位为准。"
+            "industry": "技术员·私立大专及大学",
+            "median": "$23.54/小时",
+            "note": "2025年5月行业时薪中位数；按职业分列，不合成合并工资。"
           },
           {
-            "industry": "公共部门（含公共图书馆）",
-            "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体分位为准。"
+            "industry": "技术员·公立大专及大学",
+            "median": "$22.82/小时",
+            "note": "2025年5月行业时薪中位数；按职业分列，不合成合并工资。"
           },
           {
-            "industry": "其他行业（含信息与文化服务）",
-            "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体分位为准。"
+            "industry": "技术员·地方政府（除教育医院）",
+            "median": "$19.36/小时",
+            "note": "2025年5月行业时薪中位数；按职业分列，不合成合并工资。"
           },
           {
-            "industry": "行业口径说明",
-            "median": "见就业行",
-            "note": "以 BLS 行业口径为准，不跨职业外推。"
+            "industry": "文书助理·教育服务",
+            "median": "$18.40/小时",
+            "note": "2025年5月行业时薪中位数；按职业分列，不合成合并工资。"
+          },
+          {
+            "industry": "文书助理·地方政府（除教育医院）",
+            "median": "$17.60/小时",
+            "note": "2025年5月行业时薪中位数；按职业分列，不合成合并工资。"
           }
         ],
         "industry_value_label": "行业与口径说明",
@@ -10286,7 +10303,7 @@
         },
         "interpretation_rows": [
           {
-            "answer": "美元/年；合并中位数为 BLS 2025 全国口径，分位按 25-4031 单列，均不含个人到手收入。",
+            "answer": "五个分位行均为技术员25-4031；合并中位数38,760与助理中位数36,910另列，不构成同一合并分布。",
             "question": "工资"
           },
           {
@@ -10430,7 +10447,7 @@
           {
             "geography": "美国全国",
             "horizon": "2025—2035",
-            "interpretation": "含替代与新增需求，不等于在招岗位数。",
+            "interpretation": "本轮BLS说明这些空缺均来自转职业或退出劳动力的替代需求，不是在招或新增长。",
             "limitation": "不能作为个人录用概率。",
             "metric": "预计年均空缺",
             "occupation_scope": "Library Technicians and Assistants（合并）",
@@ -10611,7 +10628,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "两个精确职业活动资料与编辑试验建议",
             "id": "riasec",
             "label": "RIASEC",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10630,7 +10647,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "两个精确职业活动资料与编辑试验建议",
             "id": "big-five",
             "label": "大五人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10638,7 +10655,7 @@
               "可观察任务",
               "过程记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "O*NET工作风格不是大五测量，也不是合并职业测评结果。"
           },
           {
             "answer": {
@@ -10649,7 +10666,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "两个精确职业活动资料与编辑试验建议",
             "id": "mbti",
             "label": "MBTI",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10663,7 +10680,7 @@
             "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "两个精确职业活动资料与编辑试验建议",
             "id": "enneagram",
             "label": "九型人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10677,7 +10694,7 @@
             "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "两个精确职业活动资料与编辑试验建议",
             "id": "iq",
             "label": "认知能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10691,7 +10708,7 @@
             "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "两个精确职业活动资料与编辑试验建议",
             "id": "eq",
             "label": "情绪能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10965,7 +10982,7 @@
             "item": "library-technicians-and-assistants.source-register.published.1"
           }
         },
-        "note": "来源范围、限制和统计时期按原始证据分别核对。来源使用说明：BLS OOH：Library Technicians and Assistants（合并 25-4031 与 43-4121）：提供合并职业的中位工资、2025 年就业规模、2025—2035 展望与年度空缺。；合并职业口径，覆盖 25-4031 图书馆技术员与 43-4121 图书馆文书助理；不拆分单一职业，不建立中国映射、中国工资或法律授权。；O*NET 25-4031.00 Library Technicians（摘要）：提供 25-4031.00 的身份、官方范围与相关职业。；美国精确职业证据；不建立中国映射或法律授权。；O*NET 25-4031.00 Library Technicians（详细档案）：提供 25-4031.00 的任务、工作情境、技能与工作风格。；雇主任务与所在地授权存在差异。；O*NET 25-4031.00 全国工资（BLS OEWS 展示）：2025 BLS OEWS 分位与中位工资（美国全国）。；分位不是起薪；保留所示时期、人群与单位。；O*NET 25-4031.00 全国就业趋势：25-4031.00 的就业规模与预测。；预测不是录用保证。；O*NET 43-4121.00 Library Assistants, Clerical（摘要）：提供 43-4121.00 的身份、官方范围与入行教育。；美国精确职业证据；不建立中国映射或法律授权。；O*NET 43-4121.00 Library Assistants, Clerical（详细档案）：提供 43-4121.00 的任务与工作情境。；雇主任务与所在地授权存在差异。；O*NET 43-4121.00 全国工资（BLS OEWS 展示）：2025 BLS OEWS 分位与中位工资（美国全国）。；分位不是起薪；保留所示时期、人群与单位。；2025年城镇单位就业人员年平均工资情况：提供城镇非私营单位分行业门类年平均工资，用于核对中国工资公开口径。；行业平均不是职业中位数，且不含自雇人员；未建立与精确职业对应的全国工资分布。；FermatMind 图书馆技术员与助理任务影响量表：整理可辅助任务与人工控制点，用于任务级 AI 与适配讨论。；编辑量表不等于采用率、裁员、法规或授权证据。；"
+        "note": "2026-10-11核对：BLS合并就业、空缺及中位工资；五个工资分位统一为25-4031，43-4121及合并中位数另列；行业时薪按职业分列。两职业入门准备分别说明，NBS只作行业背景，ALA支持读者隐私伦理。保护区与共享来源未越范围改写。"
       },
       "work_context_block": {
         "$item": "library-technicians-and-assistants.profile.work-context-block.5",
@@ -11147,7 +11164,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "借还与上架",
@@ -11198,7 +11215,7 @@
       "text": "图书馆技术员与助理职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "f3e1c11adb07998763b53fa3ef343b278d271351f8b4f1ab471461c91b8d5df5",
+  "source_content_sha256": "246e593ac485490889017260e47aacaf1762371c6e3deddc518d9441bba569cf",
   "subject": {
     "canonical_slug": "library-technicians-and-assistants",
     "name": "图书馆技术员与助理",

@@ -23528,8 +23528,7 @@
           },
           "id": "artillery-and-missile-officers.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "nbs",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23553,12 +23552,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "就业预测：O*NET 该军队职业页面未提供 2024—2034 年或任何期间的就业预测与年均职位空缺；本页不把其他职业或职业组合的预测当作本职业数字，也不据此推测岗位增减。证据不足：O*NET 未发布该军队职业的工资、就业与增长数据。"
+              "O*NET不收集军职数据，未提供本职业精确预测；BLS预测仅覆盖民用劳动力，本页不填55-1014.00增长、净变化或年均空缺，不从广义军人总数推需求。"
             ]
           },
           "id": "artillery-and-missile-officers.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "onet",
+            "military-ooh"
           ],
           "type": "prose"
         },
@@ -23586,8 +23586,7 @@
           },
           "id": "artillery-and-missile-officers.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "nbs",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -24619,10 +24618,10 @@
                 "url": "https://www.onetonline.org/link/summary/55-1014.00"
               },
               {
-                "entity": "O*NET 55-1014 职业摘要（重复引用，仅职责与数据缺口）",
+                "entity": "BLS Military Careers：一般军职背景",
                 "id": "link-9",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/55-1014.00"
+                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
                 "entity": "O*NET 55-1014 职业摘要（重复引用，仅职责与数据缺口）",
@@ -24749,13 +24748,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把工具或推演生成的态势与方案与实际情况核对，任何指挥与武力使用决定须按指挥链与交战规则确认，不把推演结果当作作战依据。"
+              "编辑边界：本页仅以虚构文书核原输入和差异，文本或模拟结果不产生真实岗位权限；具体任职、授权和程序需核正式制度。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.13",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -24779,13 +24778,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "引入推演与指挥辅助工具时明确人机分工、涉密信息处理规则与复核责任，保证计划与行动记录可追溯，并保留指挥链对指挥与武力使用授权的决定权。"
+              "编辑核对建议：仅用虚构文书试验整理和版本比对，核误述、漏项和人工更正；记录不保证完整追溯，本轮未核真实部署或完整信息处理制度。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.15",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -24810,7 +24809,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把训练重点放在分队指挥与作战计划、炮组与火控系统运用指导、兵种协同与程序执行上，并强化对自动生成内容与推演结果的批判性使用意识。"
+              "编辑学习建议：先读职责、一般军官准入及分支发展，核适用条件；虚构文书整理不等真实指挥训练或考核合格。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.17",
@@ -24826,12 +24825,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务分析：公开、非敏感文书的草拟、表格整理和虚构训练记录复盘可能得到工具辅助；本轮没有核实 55-1014 的 AI 采用率、实际部署效果或就业影响研究，不能据此断言会取代或一定不会取代某类岗位。实际岗位技术条件和决策权限应向所属机构核对。"
+              "编辑任务分析：公开、非敏感文书的草拟、表格整理和虚构训练记录复盘可能得到工具辅助；本轮没有核实 55-1014 的 AI 采用率、实际部署效果或就业影响研究，不能据此断言会取代或一定不会取代某类岗位。实际岗位技术条件和决策权限应向所属机构核对。 宽参考为ILO跨职业暴露方法介绍及扩展摘要、NIST跨行业自愿风险简介，未读完整论文/PDF或本军职映射；不能补采用及因果缺口。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet"
+            "onet",
+            "military-ooh",
+            "genai-ilo",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -24966,7 +24968,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "同一摘要不提供专属认证清单，不能据空字段判断资格不存在。"
+              "本摘要不是认证清单，不能由未展示资格推定正式条件不存在。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.28",
@@ -25050,13 +25052,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "计划文书与命令初稿、情报与态势信息整理可辅助完成。"
+              "编辑试验候选：虚构清单和文字草稿，先核工具误述与漏项；未取得真实产品能力或部署效果。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.34",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25065,13 +25067,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核对内容与实际态势一致，判断行动前提是否成立并决定是否采用。"
+              "编辑建议：回查虚构原输入、来源与待核项，不由草稿判断真实任务或任职权限。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.35",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25080,13 +25082,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "火力系统与炮组战备数据、训练成绩汇总可自动汇总与比对。"
+              "编辑试验候选：两版虚构记录的差异和状态整理，未验证自动比对正确率或真实战备监测。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.36",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25095,13 +25097,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按技术规定与训练标准复核战备状态，处理异常并承担责任。"
+              "编辑建议：保留虚构原值和未确认项；真实岗位职责与技术要求另核。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.37",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25110,13 +25112,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "通信与导航数据、地图标绘与态势图可辅助整理。"
+              "编辑试验候选：虚构通信资料的标识和版本整理，不处理真实态势、地图或行动方案。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.38",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25125,13 +25127,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "态势判断、目标识别、火力协调与武力使用授权的责任仍由人与指挥链承担。"
+              "编辑边界：文本输出不授予指挥、行动或其他正式权限，具体责任制度须核所属军种。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.39",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25252,7 +25254,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "一般军人训练、工作环境与按军衔及服役年限计酬；就业预测项目限文职岗位。"
+              "BLS为美国军职整体环境、训练与薪酬机制背景，预测范围仅民用劳动力；不是本职业调查。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.48",
@@ -25434,12 +25436,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑假设：通用工具可帮助整理公开或虚构文书、训练记录和表格；这一能力不证明军队岗位已经采用，不验证真实态势，也不授予任何指挥或武力使用权限。"
+              "编辑试验候选：虚构文书、表格与记录整理，先核实际工具误差；未取得本职业产品能力、部署效果或采用率，不验证真实态势或授权限。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.61",
           "source_refs": [
-            "onet"
+            "onet",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25448,13 +25451,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "是否采用取决于所属军队的装备与作战规程、涉密与信息安全要求、系统条件与人员能力；本页不推测采用进度，也没有该职业的采用率统计。"
+              "编辑核对建议：实际采用需查正式允许用途、系统和资料条件；本轮未核本职业实际部署与进度，不由通用工具设想推。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.62",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25463,13 +25466,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 未发布该军队职业的就业预测，本页不把任务自动化程度等同于岗位数量变化，也不据技术名词推断岗位增减。"
+              "BLS就业预测仅覆盖民用劳动力，O*NET不收集军职数据；任务试验不等岗位数量变化，本页不推本军职AI就业结果。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.63",
           "source_refs": [
             "onet",
-            "onet"
+            "military-ooh"
           ],
           "type": "prose"
         },
@@ -25551,7 +25554,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 55-1014.00 任务与工作活动（编辑说明）"
+              "O*NET职业摘要，无本职业任务调查"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.69",
@@ -25593,12 +25596,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页工具分析不授予作战或岗位决定权限。本轮未能重新访问美国国防部 2023 指令原文，故不据此列出当前强制控制要求；本页只给公开／虚构资料整理的编辑建议。"
+              "编辑边界：虚构文书或工具分析不授予真实岗位权限；本轮没有将DoD历史指令作为当前强制规则依据，具体制度须核正式渠道。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet"
+            "onet",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25607,12 +25611,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议与本轮访问限制，不是当前武器控制制度结论。"
+              "编辑权限核对建议，非当前强制控制制度"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.73",
           "source_refs": [
-            "onet"
+            "onet",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25650,7 +25655,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "优先掌握分队指挥与作战计划、情况判断与决策、兵种协同与指挥链沟通、程序执行与应急处置；推演与记录类工具会用即可。具体要求以所属军队的委任与任职制度为准。"
+              "编辑学习核对建议：按具体分支职责核对指挥计划、情况判断、协同沟通及实际工具要求；完整训练、程序和考核以当期正式制度为准。本页未核统一工具水平，不以「会用」判合格。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.76",
@@ -25694,13 +25699,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先确认任务与授权范围、作战规程与涉密信息处理要求，明确哪些判断必须由指挥员或上级指挥链承担。"
+              "编辑建议：确认虚构文书的学习目的与允许输入，只核来源和记录，不使用真实任务信息。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.79",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25709,13 +25714,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "限定工具只处理允许的环节，如计划文书与命令初稿、情报与态势信息整理、训练推演材料，不直接产出作战决心或武力使用决定。"
+              "编辑建议：限定虚构文字草稿与版本整理，不生成行动、指挥或武力使用方案。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.80",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25724,13 +25729,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "由指挥员结合实际情况与作战要求复核工具产出，确认可用并记录人工判断与修改理由。"
+              "编辑建议：对照虚构原输入核文字与差异，保留未确认项；不能据其判断真实任职或训练合格。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.81",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25739,13 +25744,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按所属军队要求如实保存作战计划、命令与行动记录、战备与训练记录，使过程可复核、可追溯。"
+              "编辑建议：保留虚构原值、版本、差异和更正理由，核是否可回查；实际岗位保存要求另核。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.82",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25754,13 +25759,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "指挥与武力使用授权、目标处置、涉密信息处理按指挥与保密规定执行；作战决心与人员安全责任由指挥员在职责内承担。"
+              "编辑边界：虚构学习不产生岗位许可；正式责任、授权与资料处理要求另核真实制度。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.83",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25784,13 +25789,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行动前由指挥员核对信息来源与实际态势，并说明适用范围与不确定性。"
+              "编辑建议：核虚构文书的来源、版本和适用范围；本轮未取得真实行动前核查或调整程序。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.85",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25799,13 +25804,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "部队位置、任务与作战计划属受保护信息，外发会造成安全风险。"
+              "编辑风险情景：真实资料如含受保护信息，未获允许外发可能造成安全后果；分类和处理规定需另核，摘要不能判断所有资料同一限制。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.86",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25814,13 +25819,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按保密规定处理，不向未授权渠道提供可识别部队、任务或计划的信息。"
+              "编辑建议：仅用虚构材料学习；真实资料访问、处理与传输按正式制度核。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.87",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25829,12 +25834,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "计划与行动记录需要可复核，输出若无版本与来源说明将难以追溯。"
+              "缺少原值、版本或来源可能妨碍记录复核，本轮不保证完整追溯或真实系统正确。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.88",
           "source_refs": [
-            "onet"
+            "onet",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25843,13 +25849,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "保存原始计划与命令文本与版本，注明日期与人工修改痕迹。"
+              "编辑记录建议：保留虚构原值、版本和人工更正理由，核是否可回查。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.89",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25858,13 +25864,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "坐标、火力与保障数据错误会直接影响任务执行与人员安全。"
+              "编辑风险情景：虚构记录的标识、版本和数量差异可能误导核对结果；不引入真实行动数据。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.90",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25873,13 +25879,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对照原始情报与实地报告逐项核对，发现不一致立即复核并记录更正。"
+              "编辑建议：对照虚构题面两版材料核差异，保留原值与未确认状态，不据此调整真实行动。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.91",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25903,13 +25909,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在记录中写明指挥层级与决定依据，涉及武力使用或安全异常的按指挥链上报。"
+              "编辑建议：核虚构记录整理与复核分工，真实岗位责任及报告流程另核；本页不制定指挥链步骤。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.93",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25918,12 +25924,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断行动前提与方案是否成立并承担指挥责任。"
+              "正式部署管理和责任依具体岗位制度核，摘要不提供操作许可或决策步骤。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.94",
           "source_refs": [
-            "onet"
+            "onet",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25932,7 +25939,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "指挥火力分队作战并制定与实施作战计划（含炮兵部队的战术运用）。"
+              "O*NET摘要包括人员和武器操作管理、部署协调；这里只概述职业范围，不提供方案或参数。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.95",
@@ -25960,13 +25967,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "推演与兵棋工具可辅助方案比较与训练，但作战决心与指挥判断仍须指挥员承担（编辑建议，缺少岗位级采用研究）。"
+              "编辑试验候选：虚构文书和来源整理，未验证推演、兵棋或方案比较能力及效果。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.97",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25975,12 +25982,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断系统状态是否可用、指导是否准确并承担指导责任。"
+              "真实系统状态、指导与维护管理职责须核正式岗位制度；虚构资料不判装备可用。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.98",
           "source_refs": [
-            "onet"
+            "onet",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25989,7 +25997,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "指导炮组成员使用火控与发射系统，协调先进火控通信系统运行。"
+              "O*NET列入指导火控通信系统建立与运行及武器系统维护管理，具体分工另核。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.99",
@@ -26017,13 +26025,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "状态监测与维护提醒可辅助，但系统运用指导与故障处置仍须按技术规定人工完成（技术能力说明，非采用证据）。"
+              "编辑试验候选：虚构维护目录和文字整理；没有真实状态监测、故障处置或产品效果证据。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.101",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -26032,12 +26040,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断协同要求是否被满足并按程序处置冲突。"
+              "职责范围与协作分工须核具体岗位，摘要不规定统一冲突处置程序。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.102",
           "source_refs": [
-            "onet"
+            "onet",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -26046,12 +26055,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "与机动部队、友邻炮兵和空中支援协调火力与机动。"
+              "O*NET涵盖部署协调与火控通信；陆军野战炮兵分支文件可作有限发展背景，不外推全部岗位统一兵种协同清单。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.103",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews"
           ],
           "type": "prose"
         },
@@ -26074,13 +26084,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "协同信息可数字化与可视化，但跨兵种协调与冲突处置仍由指挥员承担（编辑建议）。"
+              "编辑试验候选：虚构协作记录整理，未验证真实跨兵种协调工具效果，不产生岗位权限。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.105",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -26145,12 +26155,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断授权是否成立、异常是否需要上报。"
+              "编辑建议：核具体岗位权限与异常处理制度，本轮未取得统一规则。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.110",
           "source_refs": [
-            "onet"
+            "onet",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -26159,12 +26170,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按所属军队作战与作业规程执行，遵守武力使用与保密规定。"
+              "正式安全、授权及作业要求须核具体军种制度，本页不制定操作流程。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.111",
           "source_refs": [
-            "onet"
+            "onet",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -26187,13 +26199,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "规则提示与检查工具可辅助，但授权判断与安全责任仍在人（编辑建议）。"
+              "编辑试验候选：虚构清单提醒，核工具误差；不提供真实授权或安全判断。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.113",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -26202,12 +26214,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断训练是否达到标准并决定是否补训。"
+              "正式训练考核和补训条件须核对应制度，摘要未给统一评定权限。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.114",
           "source_refs": [
-            "onet"
+            "onet",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -26216,12 +26229,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "参加训练与考核、保持专业能力并完成课目。"
+              "BLS提供一般军职训练背景，野战炮兵发展文件为分支例子；具体岗位当期课目及考核另核。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.115",
           "source_refs": [
-            "onet"
+            "military-ooh",
+            "oews"
           ],
           "type": "prose"
         },
@@ -26244,12 +26258,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "模拟训练与成绩汇总可辅助，但考核标准与是否合格仍由训练体系判定（编辑建议）。"
+              "编辑试验候选：虚构学习记录汇总，未验证模拟训练效果；正式考核条件另核。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.117",
           "source_refs": [
-            "onet"
+            "onet",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -26258,12 +26273,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断记录是否与实际一致并保证保密合规。"
+              "编辑建议：核虚构记录与原输入是否一致，真实信息处理制度本轮未核完整。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.118",
           "source_refs": [
-            "onet"
+            "onet",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -26272,12 +26288,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "保存作战计划、命令与行动记录、战备与训练记录并按部队要求归档。"
+              "编辑记录建议：虚构文书保留原值、差异与待核问题；真实岗位记录和归档制度另核。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.119",
           "source_refs": [
-            "onet"
+            "onet",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -26300,13 +26317,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录汇总与归档可数字化，但内容真实性与保密合规仍须人工核对（编辑建议）。"
+              "编辑试验候选：虚构目录及摘要，核误述和遗漏；未验证自动归档或真实军职部署。"
             ]
           },
           "id": "artillery-and-missile-officers.ai-impact.ai-impact-table.121",
           "source_refs": [
             "onet",
-            "onet"
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -26385,7 +26402,7 @@
           },
           "id": "artillery-and-missile-officers.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26413,7 +26430,7 @@
           },
           "id": "artillery-and-missile-officers.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26623,7 +26640,8 @@
           },
           "id": "artillery-and-missile-officers.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "army-entry"
+            "army-entry",
+            "army-officers"
           ],
           "type": "prose"
         },
@@ -26920,7 +26938,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局数据覆盖城镇 5 人及以上法人单位，不含个体工商户与自由职业者；工资为税前工资总额。该口径不能直接映射为本职业专属口径，本页不以行业或岗位类别数字冒充本职业工资，也不把美国数字换算成人民币预期。"
+              "国家统计局城镇5人及以上法人统计不含个体工商户和自由职业者；年平均工资为税前工资总额÷平均就业人数，非总额本身。宽岗位行业口径不直接对应本军职，不代填职业工资或个人收入。"
             ]
           },
           "id": "artillery-and-missile-officers.china-salary.career-snapshot-primary-locale.48",
@@ -27329,8 +27347,8 @@
           },
           "id": "artillery-and-missile-officers.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "military-ooh",
-            "onet"
+            "onet",
+            "military-ooh"
           ],
           "type": "prose"
         },
@@ -27359,8 +27377,8 @@
           },
           "id": "artillery-and-missile-officers.us-salary.career-snapshot-secondary-locale.27",
           "source_refs": [
-            "military-ooh",
-            "onet"
+            "onet",
+            "military-ooh"
           ],
           "type": "prose"
         },
@@ -27384,13 +27402,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "军衔与职级、服役年限、岗位与专业方向、地区与任务条件会影响津贴与补助；本页不提供任何分项数字。"
+              "BLS说明岗位或资格可能适用额外报酬；具体项目条件及数额须核实际工资表，本轮未核所有津贴或地区规则。"
             ]
           },
           "id": "artillery-and-missile-officers.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
-            "military-ooh",
-            "onet"
+            "onet",
+            "military-ooh"
           ],
           "type": "prose"
         },
@@ -27612,7 +27630,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不同国家军队的岗位设置与薪酬制度不同，缺少可比的公开统计。"
+              "本轮未取得其他国家同职业的可比公开薪酬统计，不推所有官方资料均不存在。"
             ]
           },
           "id": "artillery-and-missile-officers.us-salary.career-snapshot-secondary-locale.45",
@@ -27646,7 +27664,8 @@
           },
           "id": "artillery-and-missile-officers.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "onet"
+            "onet",
+            "military-ooh"
           ],
           "type": "prose"
         },
@@ -27670,13 +27689,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "军衔与职级、服役年限、岗位与专业方向、地区与任务条件及各类津贴都会影响实际收入；本页不提供分项数字。"
+              "编辑建议：核适用工资表、军衔和服役年限及额外报酬/住房条件；未核全部津贴，不声称每一条件必影响所有人收入。"
             ]
           },
           "id": "artillery-and-missile-officers.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "military-ooh",
-            "onet"
+            "onet",
+            "military-ooh"
           ],
           "type": "prose"
         },
@@ -27978,7 +27997,7 @@
           "data": {
             "entries": [
               "能在长时间高强度指挥与待命节律中保持判断力。",
-              "能在压力下按交战规则与程序处置并按指挥链上报。",
+              "编辑观察建议：核压力下如何提出清楚问题和保留未确认项；实际任职及报告程序另核，不由人格观察授权限。",
               "愿意如实记录计划与行动情况并接受复核。"
             ]
           },
@@ -28180,7 +28199,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "官方职责描述未规定数学门槛；需要的是作战计划、情况判断、兵种协同、程序执行与指挥沟通能力，具体训练与考核要求由所属军队规定。"
+              "O*NET职责摘要没有数学准入分数，未取得本军职统一能力阈值；正式准入和专业考核按具体军种核，不以本页测评结果证明任职合格。"
             ]
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.18",
@@ -28195,7 +28214,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "官方未发布该军队职业的能力门槛。"
+              "本轮已核军职摘要未给具体能力阈值；不能据此认定所有官方未发布条件，真实选拔与训练标准另核。"
             ]
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.19",
@@ -28238,13 +28257,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "官方口径未提出情商要求；需要的是指挥决策、兵种协同与在压力下按交战规则处置的能力。"
+              "本轮未取得本军职情绪智力测验阈值或效度；BLS一般军职说明沟通、团队及心理准备，不等55-1014.00个人筛选线。"
             ]
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.22",
           "source_refs": [
-            "onet",
-            "onet"
+            "military-ooh"
           ],
           "type": "prose"
         },
@@ -28253,7 +28271,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "官方未发布该军队职业的情绪能力要求。"
+              "本轮所核资料没有本职业EI测验分数阈值，不能推定所有军种无心理或情绪相关条件。"
             ]
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.23",
@@ -28283,7 +28301,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "把情绪能力当作委任或训练合格标准。"
+              "仅凭本页未经本职业效度验证的EI分数判断委任或训练合格；实际情绪能力、心理准备与任务条件核正式标准。"
             ]
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.25",
@@ -28330,8 +28348,7 @@
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-air"
           ],
           "type": "prose"
         },
@@ -28345,8 +28362,7 @@
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-air"
           ],
           "type": "prose"
         },
@@ -28360,8 +28376,7 @@
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-air"
           ],
           "type": "prose"
         },
@@ -28375,8 +28390,7 @@
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.31",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-launch"
           ],
           "type": "prose"
         },
@@ -28390,8 +28404,7 @@
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.32",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-launch"
           ],
           "type": "prose"
         },
@@ -28405,8 +28418,7 @@
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-launch"
           ],
           "type": "prose"
         },
@@ -28420,8 +28432,7 @@
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-armor"
           ],
           "type": "prose"
         },
@@ -28435,8 +28446,7 @@
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.35",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-armor"
           ],
           "type": "prose"
         },
@@ -28450,8 +28460,7 @@
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-armor"
           ],
           "type": "prose"
         },
@@ -28465,8 +28474,7 @@
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.37",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-control"
           ],
           "type": "prose"
         },
@@ -28480,8 +28488,7 @@
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-control"
           ],
           "type": "prose"
         },
@@ -28495,7 +28502,7 @@
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.39",
           "source_refs": [
-            "onet"
+            "neighbor-control"
           ],
           "type": "prose"
         },
@@ -28509,9 +28516,7 @@
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.40",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "neighbor-infantry"
           ],
           "type": "prose"
         },
@@ -28525,9 +28530,7 @@
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.41",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "neighbor-infantry"
           ],
           "type": "prose"
         },
@@ -28541,9 +28544,7 @@
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.42",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "neighbor-infantry"
           ],
           "type": "prose"
         },
@@ -28557,8 +28558,7 @@
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.43",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-crew"
           ],
           "type": "prose"
         },
@@ -28572,8 +28572,7 @@
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.44",
           "source_refs": [
-            "onet",
-            "onet"
+            "neighbor-crew"
           ],
           "type": "prose"
         },
@@ -28582,13 +28581,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该方向以操作执行为主，不承担分队指挥与作战计划责任，任职路径不同。"
+              "成员摘要以系统操作等执行职责为主，军官摘要管理人员与系统；具体岗位可有职责交集，不能断言任何成员都不承担计划或带教责任。"
             ]
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.45",
           "source_refs": [
             "onet",
-            "onet"
+            "neighbor-crew",
+            "military-ooh"
           ],
           "type": "prose"
         },
@@ -28668,7 +28668,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能据此预测。人格量表分数不是委任或任职合格标准；委任与任职是否合格由所属军队的制度判定。"
+              "本页未取得人格量表预测委任或任职合格的专属效度，不据分数判合格；所属制度的具体评估条件另核。"
             ]
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.51",
@@ -28682,7 +28682,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "官方职责描述未规定数学门槛；需要的是作战计划、情况判断、兵种协同、程序执行与指挥沟通能力，具体训练与考核要求由所属军队规定。"
+              "O*NET职责摘要没有数学准入分数，未取得本军职统一能力阈值；正式准入和专业考核按具体军种核，不以本页测评结果证明任职合格。"
             ]
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.52",
@@ -28697,13 +28697,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "官方口径未提出情商要求；需要的是指挥决策、兵种协同与在压力下按交战规则处置的能力。"
+              "本轮未取得本军职情绪智力测验阈值或效度；BLS一般军职说明沟通、团队及心理准备，不等55-1014.00个人筛选线。"
             ]
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.53",
           "source_refs": [
-            "onet",
-            "onet"
+            "military-ooh"
           ],
           "type": "prose"
         },
@@ -28712,7 +28711,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能作为判断依据。九型人格不是任职或训练标准，本页不据此给出适配结论。"
+              "本页未取得九型人格预测本职业适配的专属效度，不据标签下结论；完整选拔训练标准仍待核。"
             ]
           },
           "id": "artillery-and-missile-officers.fit.personality-fit-block.54",
@@ -28971,7 +28970,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "最需要提前判断的是四类风险：一是判断与计划风险（行动前提与敌情态势判断错误、核实步骤被跳过），二是信息与保密风险（部队位置、任务与作战计划外发），三是记录与授权风险（计划与行动记录不实、指挥或武力使用超出授权），四是人员安全与健康风险（战斗环境与高强度指挥的持续负荷）。风险随岗位与任务条件不同：作战指挥岗位更贴近武力使用与授权风险，参谋与训练岗位更贴近记录与程序风险。"
+              "以下风险场景和核对点为编辑归纳：记录准确、权限分工、信息处理和不同任务环境；没有取得本职业风险排序或不同岗位风险强弱统计，具体条件须另核。"
             ]
           },
           "id": "artillery-and-missile-officers.risk.career-risk-cards.9",
@@ -29017,7 +29016,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "行动前提或敌情态势判断错误会使任务与人员安全承担不可控风险。"
+              "编辑风险情景：未经核实的判断可能带来安全后果；本轮没有取得职业事故率或完整作业规则。"
             ]
           },
           "id": "artillery-and-missile-officers.risk.career-risk-cards.12",
@@ -29032,7 +29031,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "对照多源报告与实际态势核实前提，发现不一致立即复核并按指挥链调整或报告，不跳过核实步骤。"
+              "编辑核对建议：确认具体岗位的正式检查、安全与报告制度；摘要不提供多源态势处理、行动调整或授权步骤。"
             ]
           },
           "id": "artillery-and-missile-officers.risk.career-risk-cards.13",
@@ -29077,7 +29076,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "记录不实会使指挥过程与任务结果无法追溯。"
+              "编辑风险情景：不实或缺失记录可能妨碍回查，不断言所有过程均无法追溯。"
             ]
           },
           "id": "artillery-and-missile-officers.risk.career-risk-cards.16",
@@ -29092,7 +29091,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "如实记录作战计划、命令与行动情况，注明时间与人员，保留原始记录与更正痕迹。"
+              "编辑记录建议：虚构资料保留原值、版本和更正；真实记录要求须核实际制度。"
             ]
           },
           "id": "artillery-and-missile-officers.risk.career-risk-cards.17",
@@ -29107,7 +29106,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "记录漏记、代填或与实际不符，导致问题无法复盘与追责。"
+              "记录漏记、代填或与实际不符，可能妨碍回查并增加责任认定难度；实际须按制度和完整证据核对。"
             ]
           },
           "id": "artillery-and-missile-officers.risk.career-risk-cards.18",
@@ -29152,7 +29151,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按保密规定处理，不向未授权渠道提供可识别部队、任务或计划的信息。"
+              "编辑建议：仅用虚构材料学习；真实资料分类、访问和传输须核正式制度，本轮未读完整要求。"
             ]
           },
           "id": "artillery-and-missile-officers.risk.career-risk-cards.21",
@@ -29196,7 +29195,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "指挥与武力使用超出授权会破坏指挥链与责任归属。"
+              "编辑风险情景：未确认的权限与分工可能造成责任不清，具体制度须核正式渠道。"
             ]
           },
           "id": "artillery-and-missile-officers.risk.career-risk-cards.24",
@@ -29256,13 +29255,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "战斗岗位与高强度指挥的持续负荷会影响判断质量与人员状态。"
+              "BLS一般军职背景提示危险任务和长期离家；本轮未取得本职业持续负荷与判断质量的因果研究。"
             ]
           },
           "id": "artillery-and-missile-officers.risk.career-risk-cards.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "military-ooh"
           ],
           "type": "prose"
         },
@@ -29331,7 +29329,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在记录中写明指挥层级与决定依据；涉及武力使用或安全异常的按指挥链上报。"
+              "编辑建议：核虚构记录整理与复核分工；真实报告和指挥链制度另核，本页不规定处置步骤。"
             ]
           },
           "id": "artillery-and-missile-officers.risk.career-risk-cards.33",
@@ -29346,7 +29344,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "职责边界不清、复核缺失，导致出现问题时无法确定责任归属。"
+              "职责边界不清或复核缺失，可能增加责任归属认定难度；具体认定依实际制度与完整证据。"
             ]
           },
           "id": "artillery-and-missile-officers.risk.career-risk-cards.34",
@@ -29946,9 +29944,9 @@
           "id": "artillery-and-missile-officers.path.career-path-block.10",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet"
+            "army-entry",
+            "oews",
+            "nbs"
           ],
           "type": "links"
         },
@@ -31182,7 +31180,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本职业就业数量、增长与空缺没有可引用的 O*NET 调查数据；BLS 的就业预测限文职岗位。本页不据一般军人总数推算需求。下列相邻方向仅作编辑比较，不表示可以直接转任或保证分配；正式准入、专业训练和实际岗位空缺分别核对。"
+              "本职业就业数量、增长与空缺没有可引用的 O*NET 调查数据；BLS 的就业预测仅覆盖民用劳动力。本页不据一般军人总数推算需求。下列相邻方向仅作编辑比较，不表示可以直接转任或保证分配；正式准入、专业训练和实际岗位空缺分别核对。"
             ]
           },
           "id": "artillery-and-missile-officers.market-signals.market-signal-card.8",
@@ -31552,7 +31550,7 @@
           },
           "id": "artillery-and-missile-officers.market-signals.market-signal-card.34",
           "source_refs": [
-            "onet"
+            "neighbor-air"
           ],
           "type": "prose"
         },
@@ -31561,13 +31559,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "指挥决策、协同与程序执行可迁移。"
+              "编辑准备比较：指挥决策、协同与程序执行可用来讨论准备差别。 未核资格互认或转岗成效，不能承诺直接转任。"
             ]
           },
           "id": "artillery-and-missile-officers.market-signals.market-signal-card.35",
           "source_refs": [
             "onet",
-            "onet"
+            "neighbor-air"
           ],
           "type": "prose"
         },
@@ -31595,7 +31593,7 @@
           },
           "id": "artillery-and-missile-officers.market-signals.market-signal-card.37",
           "source_refs": [
-            "onet"
+            "neighbor-launch"
           ],
           "type": "prose"
         },
@@ -31604,13 +31602,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "程序执行与安全作业指挥意识可迁移。"
+              "编辑准备比较：程序执行与安全作业指挥意识可用来讨论准备差别。 未核资格互认或转岗成效，不能承诺直接转任。"
             ]
           },
           "id": "artillery-and-missile-officers.market-signals.market-signal-card.38",
           "source_refs": [
             "onet",
-            "onet"
+            "neighbor-launch"
           ],
           "type": "prose"
         },
@@ -31638,7 +31636,7 @@
           },
           "id": "artillery-and-missile-officers.market-signals.market-signal-card.40",
           "source_refs": [
-            "onet"
+            "neighbor-armor"
           ],
           "type": "prose"
         },
@@ -31647,13 +31645,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "分队指挥与协同经验、车组指挥意识可迁移。"
+              "编辑准备比较：分队指挥与协同经验、车组指挥意识可用来讨论准备差别。 未核资格互认或转岗成效，不能承诺直接转任。"
             ]
           },
           "id": "artillery-and-missile-officers.market-signals.market-signal-card.41",
           "source_refs": [
             "onet",
-            "onet"
+            "neighbor-armor"
           ],
           "type": "prose"
         },
@@ -31681,7 +31679,7 @@
           },
           "id": "artillery-and-missile-officers.market-signals.market-signal-card.43",
           "source_refs": [
-            "onet"
+            "neighbor-control"
           ],
           "type": "prose"
         },
@@ -31690,13 +31688,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "火控通信协调、态势判断与指令传达可迁移。"
+              "编辑准备比较：火控通信协调、态势判断与指令传达可用来讨论准备差别。 未核资格互认或转岗成效，不能承诺直接转任。"
             ]
           },
           "id": "artillery-and-missile-officers.market-signals.market-signal-card.44",
           "source_refs": [
             "onet",
-            "onet"
+            "neighbor-control"
           ],
           "type": "prose"
         },
@@ -31724,7 +31722,7 @@
           },
           "id": "artillery-and-missile-officers.market-signals.market-signal-card.46",
           "source_refs": [
-            "onet"
+            "neighbor-infantry"
           ],
           "type": "prose"
         },
@@ -31733,13 +31731,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "指挥决策、纪律与程序执行可迁移。"
+              "编辑准备比较：指挥决策、纪律与程序执行可用来讨论准备差别。 未核资格互认或转岗成效，不能承诺直接转任。"
             ]
           },
           "id": "artillery-and-missile-officers.market-signals.market-signal-card.47",
           "source_refs": [
             "onet",
-            "onet"
+            "neighbor-infantry"
           ],
           "type": "prose"
         },
@@ -31767,7 +31765,7 @@
           },
           "id": "artillery-and-missile-officers.market-signals.market-signal-card.49",
           "source_refs": [
-            "onet"
+            "neighbor-crew"
           ],
           "type": "prose"
         },
@@ -31776,12 +31774,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "分队与系统知识与指挥经验可迁移为理解与指导能力。"
+              "编辑准备比较：分队与系统知识、指挥经验可用于讨论理解与指导方面的准备差别。未核资格互认或转岗成效，不能承诺直接转任。"
             ]
           },
           "id": "artillery-and-missile-officers.market-signals.market-signal-card.50",
           "source_refs": [
-            "onet"
+            "onet",
+            "neighbor-crew"
           ],
           "type": "prose"
         },
@@ -31809,7 +31808,7 @@
           },
           "id": "artillery-and-missile-officers.market-signals.market-signal-card.52",
           "source_refs": [
-            "onet"
+            "neighbor-armor-crew"
           ],
           "type": "prose"
         },
@@ -31818,13 +31817,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "指挥与系统知识可迁移。"
+              "编辑准备比较：指挥与系统知识可用来讨论准备差别。 未核资格互认或转岗成效，不能承诺直接转任。"
             ]
           },
           "id": "artillery-and-missile-officers.market-signals.market-signal-card.53",
           "source_refs": [
             "onet",
-            "onet"
+            "neighbor-armor-crew"
           ],
           "type": "prose"
         },
@@ -31852,7 +31851,7 @@
           },
           "id": "artillery-and-missile-officers.market-signals.market-signal-card.55",
           "source_refs": [
-            "onet"
+            "neighbor-infantry-crew"
           ],
           "type": "prose"
         },
@@ -31861,13 +31860,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "纪律、程序与团队协同可迁移。"
+              "编辑准备比较：纪律、程序与团队协同可用来讨论准备差别。 未核资格互认或转岗成效，不能承诺直接转任。"
             ]
           },
           "id": "artillery-and-missile-officers.market-signals.market-signal-card.56",
           "source_refs": [
             "onet",
-            "onet"
+            "neighbor-infantry-crew"
           ],
           "type": "prose"
         },
@@ -31988,7 +31987,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要证据：O*NET 本职业及相邻职业摘要；BLS 美国军人整体训练、环境、计酬背景；GoArmy 一般军官条件和委任路径；2024-04-03 美国陆军野战炮兵发展例子；国家统计局 2025 年宽口径工资公告。DoD 与中国军官制度等历史链接本轮未作为可核实的当前强制条件依据。"
+              "主要证据：O*NET 本职业及相邻职业摘要；BLS 美国军人整体训练、环境、计酬背景；GoArmy 一般军官条件和委任路径；2024-04-03 美国陆军野战炮兵发展例子；国家统计局 2025 年宽口径工资公告。DoD 与中国军官制度等历史链接本轮未作为可核实的当前强制条件依据。 本轮新增两份实际相邻成员摘要及ILO介绍/NIST简介宽背景，未读完整AI论文/PDF或本军职映射；发展文件终端连接关闭但web第10—15页教育任职可读。"
             ]
           },
           "id": "artillery-and-missile-officers.sources.source-card.2",
@@ -31998,7 +31997,9 @@
             "army-entry",
             "army-officers",
             "oews",
-            "nbs"
+            "nbs",
+            "genai-ilo",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -32007,7 +32008,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核对日期：2026-10-03。来源访问日期、文件日期和统计数据年分别标注。"
+              "本窗口本轮核对2026-10-09；O*NET未标职业数据年，发展文件2024-04-03，BLS修改2026-08-27、广义人数2024-02；一般GoArmy和委任路径当前页面，NBS资料2025，日期不互替。历史未作依据来源保留原访问记录，不假称本轮已访问。"
             ]
           },
           "id": "artillery-and-missile-officers.sources.source-card.3",
@@ -32021,7 +32022,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET 不收集美国军职调查数据，工资、就业、兴趣与工作情境等缺口不代填；BLS 全军背景不是职业专属统计。证据不足：本资产尚未核实中国大陆对应职业编码、资格条件和职业专属工资。国家统计局 2025 年城镇单位工资公告按单位、行业及宽岗位类别统计，不能把这些平均数当作本职业中位数；本地映射记录也不是官方不存在对应职业的证据。 美国陆军一般准入与野战炮兵发展例子的范围不同；练习为编辑虚构，AI 与人格分析不冒充实证或录取标准。"
+              "O*NET 不收集美国军职调查数据，工资、就业、兴趣与工作情境等缺口不代填；BLS 全军背景不是职业专属统计。证据不足：本资产尚未核实中国大陆对应职业编码、资格条件和职业专属工资。国家统计局 2025 年城镇单位工资公告按单位、行业及宽岗位类别统计，不能把这些平均数当作本职业中位数；本地映射记录也不是官方不存在对应职业的证据。 美国陆军一般准入与野战炮兵发展例子的范围不同；练习为编辑虚构，AI 与人格分析不冒充实证或录取标准。 本轮仍未核真实工具能力、采用及因果、人格职业效度、全部军事权限安全保密程序、DFAS金额及相邻互认；范围外定义facts和练习原值冻结，不签整页验收。"
             ]
           },
           "id": "artillery-and-missile-officers.sources.source-card.4",
@@ -32105,74 +32106,74 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "同一官方职业摘要；重复引用不增加独立证据",
-                  "访问 2026-10-03"
+                  "访问 2026-10-09"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "onet",
                 "limitation": "同一职业摘要的重复引用，不是独立研究。只支持美国职业身份、职责及不收集軍职数据的声明，不支持 AI 采用、人格、培训或中国映射。",
                 "market": "美国",
                 "name": "O*NET 55-1014.00 职业摘要（onet 引用）",
-                "period": "页面年份未注明；访问 2026-10-03",
+                "period": "页面年份未注明；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1014.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "同一官方职业摘要；重复引用不增加独立证据",
-                  "访问 2026-10-03"
+                  "访问 2026-10-09"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "bls",
                 "limitation": "同一职业摘要的重复引用，不是独立研究。只支持美国职业身份、职责及不收集軍职数据的声明，不支持 AI 采用、人格、培训或中国映射。",
                 "market": "美国",
                 "name": "O*NET 55-1014.00 职业摘要（bls 引用）",
-                "period": "页面年份未注明；访问 2026-10-03",
+                "period": "页面年份未注明；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1014.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "同一官方职业摘要；重复引用不增加独立证据",
-                  "访问 2026-10-03"
+                  "访问 2026-10-09"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "ep",
                 "limitation": "同一职业摘要的重复引用，不是独立研究。只支持美国职业身份、职责及不收集軍职数据的声明，不支持 AI 采用、人格、培训或中国映射。",
                 "market": "美国",
                 "name": "O*NET 55-1014.00 职业摘要（ep 引用）",
-                "period": "页面年份未注明；访问 2026-10-03",
+                "period": "页面年份未注明；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1014.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "Field Artillery DA Pam 600-3，第 10—15 页",
-                  "2024-04-03；访问 2026-10-03"
+                  "终端连接被关闭，web当前22页PDF可读",
+                  "实际读第10—15页教育任职及第1页范围"
                 ],
                 "evidence_type": "官方分支职业发展文件",
                 "id": "oews",
-                "limitation": "仅野战炮兵分支例子，不是 OEWS 工资数据；本页使用初级军官、上尉、少校发展段，不把准尉路径套入。",
+                "limitation": "2024野战炮兵分支例子，非OEWS数据；初级/上尉/少校教育任职正确，不套准尉或外推全部军职，不提供操作参数。",
                 "market": "美国",
                 "name": "美国陆军野战炮兵军官发展文件",
-                "period": "2024-04-03；访问 2026-10-03",
+                "period": "2024-04-03；访问 2026-10-09",
                 "publisher": "U.S. Army",
                 "scope": "contextual",
                 "url": "https://api.army.mil/e2/c/downloads/2024/04/03/1cf69906/field-artillery-da-pam-600-3.pdf"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "2025 年数据；2026-05-15 公告",
-                  "附注统计范围、调查方法；访问 2026-10-03"
+                  "附注统计范围、调查方法；访问 2026-10-09"
                 ],
                 "evidence_type": "官方宽口径工资公告",
                 "id": "nbs",
@@ -32185,65 +32186,65 @@
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "同一官方职业摘要；重复引用不增加独立证据",
-                  "访问 2026-10-03"
+                  "访问 2026-10-09"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "cnclass",
                 "limitation": "同一职业摘要的重复引用，不是独立研究。只支持美国职业身份、职责及不收集軍职数据的声明，不支持 AI 采用、人格、培训或中国映射。",
                 "market": "美国",
                 "name": "O*NET 55-1014.00 职业摘要（cnclass 引用）",
-                "period": "页面年份未注明；访问 2026-10-03",
+                "period": "页面年份未注明；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1014.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "同一官方职业摘要；重复引用不增加独立证据",
-                  "访问 2026-10-03"
+                  "访问 2026-10-09"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "privacy",
                 "limitation": "同一职业摘要的重复引用，不是独立研究。只支持美国职业身份、职责及不收集軍职数据的声明，不支持 AI 采用、人格、培训或中国映射。",
                 "market": "美国",
                 "name": "O*NET 55-1014.00 职业摘要（privacy 引用）",
-                "period": "页面年份未注明；访问 2026-10-03",
+                "period": "页面年份未注明；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1014.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "同一官方职业摘要；重复引用不增加独立证据",
-                  "访问 2026-10-03"
+                  "访问 2026-10-09"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "facilities",
                 "limitation": "同一职业摘要的重复引用，不是独立研究。只支持美国职业身份、职责及不收集軍职数据的声明，不支持 AI 采用、人格、培训或中国映射。",
                 "market": "美国",
                 "name": "O*NET 55-1014.00 职业摘要（facilities 引用）",
-                "period": "页面年份未注明；访问 2026-10-03",
+                "period": "页面年份未注明；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1014.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "同一官方职业摘要；重复引用不增加独立证据",
-                  "访问 2026-10-03"
+                  "访问 2026-10-09"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "operations",
                 "limitation": "同一职业摘要的重复引用，不是独立研究。只支持美国职业身份、职责及不收集軍职数据的声明，不支持 AI 采用、人格、培训或中国映射。",
                 "market": "美国",
                 "name": "O*NET 55-1014.00 职业摘要（operations 引用）",
-                "period": "页面年份未注明；访问 2026-10-03",
+                "period": "页面年份未注明；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1014.00"
@@ -32297,17 +32298,17 @@
                 "url": "https://www.mod.gov.cn/gfbw/qwfb/yw_214049/16065672.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "同一官方职业摘要；重复引用不增加独立证据",
-                  "访问 2026-10-03"
+                  "访问 2026-10-09"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "editor",
                 "limitation": "同一职业摘要的重复引用，不是独立研究。只支持美国职业身份、职责及不收集軍职数据的声明，不支持 AI 采用、人格、培训或中国映射。",
                 "market": "美国",
                 "name": "O*NET 55-1014.00 职业摘要（editor 引用）",
-                "period": "页面年份未注明；访问 2026-10-03",
+                "period": "页面年份未注明；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1014.00"
@@ -32345,106 +32346,106 @@
                 "url": "https://militarypay.defense.gov/Pay/Basic-Pay/Charts/"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "同一官方职业摘要；重复引用不增加独立证据",
-                  "访问 2026-10-03"
+                  "访问 2026-10-09"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "weforum",
                 "limitation": "同一职业摘要的重复引用，不是独立研究。只支持美国职业身份、职责及不收集軍职数据的声明，不支持 AI 采用、人格、培训或中国映射。",
                 "market": "美国",
                 "name": "O*NET 55-1014.00 职业摘要（weforum 引用）",
-                "period": "页面年份未注明；访问 2026-10-03",
+                "period": "页面年份未注明；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1014.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "同一官方职业摘要；重复引用不增加独立证据",
-                  "访问 2026-10-03"
+                  "访问 2026-10-09"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "employer",
                 "limitation": "同一职业摘要的重复引用，不是独立研究。只支持美国职业身份、职责及不收集軍职数据的声明，不支持 AI 采用、人格、培训或中国映射。",
                 "market": "美国",
                 "name": "O*NET 55-1014.00 职业摘要（employer 引用）",
-                "period": "页面年份未注明；访问 2026-10-03",
+                "period": "页面年份未注明；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1014.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "同一官方职业摘要；重复引用不增加独立证据",
-                  "访问 2026-10-03"
+                  "访问 2026-10-09"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "purchasing-managers",
                 "limitation": "同一职业摘要的重复引用，不是独立研究。只支持美国职业身份、职责及不收集軍职数据的声明，不支持 AI 采用、人格、培训或中国映射。",
                 "market": "美国",
                 "name": "O*NET 55-1014.00 职业摘要（purchasing-managers 引用）",
-                "period": "页面年份未注明；访问 2026-10-03",
+                "period": "页面年份未注明；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1014.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "同一官方职业摘要；重复引用不增加独立证据",
-                  "访问 2026-10-03"
+                  "访问 2026-10-09"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "r2-pay-1",
                 "limitation": "同一职业摘要的重复引用，不是独立研究。只支持美国职业身份、职责及不收集軍职数据的声明，不支持 AI 采用、人格、培训或中国映射。",
                 "market": "美国",
                 "name": "O*NET 55-1014.00 职业摘要（r2-pay-1 引用）",
-                "period": "页面年份未注明；访问 2026-10-03",
+                "period": "页面年份未注明；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1014.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "同一官方职业摘要；重复引用不增加独立证据",
-                  "访问 2026-10-03"
+                  "访问 2026-10-09"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "r2-pay-2",
                 "limitation": "同一职业摘要的重复引用，不是独立研究。只支持美国职业身份、职责及不收集軍职数据的声明，不支持 AI 采用、人格、培训或中国映射。",
                 "market": "美国",
                 "name": "O*NET 55-1014.00 职业摘要（r2-pay-2 引用）",
-                "period": "页面年份未注明；访问 2026-10-03",
+                "period": "页面年份未注明；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1014.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "同一官方职业摘要；重复引用不增加独立证据",
-                  "访问 2026-10-03"
+                  "访问 2026-10-09"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "r2-pay-3",
                 "limitation": "同一职业摘要的重复引用，不是独立研究。只支持美国职业身份、职责及不收集軍职数据的声明，不支持 AI 采用、人格、培训或中国映射。",
                 "market": "美国",
                 "name": "O*NET 55-1014.00 职业摘要（r2-pay-3 引用）",
-                "period": "页面年份未注明；访问 2026-10-03",
+                "period": "页面年份未注明；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1014.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "2025 年数据；2026-05-15 公告",
-                  "附注统计范围、调查方法；访问 2026-10-03"
+                  "附注统计范围、调查方法；访问 2026-10-09"
                 ],
                 "evidence_type": "官方宽口径工资公告",
                 "id": "census",
@@ -32457,62 +32458,62 @@
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "同一官方职业摘要；重复引用不增加独立证据",
-                  "访问 2026-10-03"
+                  "访问 2026-10-09"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "msresearch",
                 "limitation": "同一职业摘要的重复引用，不是独立研究。只支持美国职业身份、职责及不收集軍职数据的声明，不支持 AI 采用、人格、培训或中国映射。",
                 "market": "美国",
                 "name": "O*NET 55-1014.00 职业摘要（msresearch 引用）",
-                "period": "页面年份未注明；访问 2026-10-03",
+                "period": "页面年份未注明；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1014.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "同一官方职业摘要；重复引用不增加独立证据",
-                  "访问 2026-10-03"
+                  "访问 2026-10-09"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "onet-wages",
                 "limitation": "同一职业摘要的重复引用，不是独立研究。只支持美国职业身份、职责及不收集軍职数据的声明，不支持 AI 采用、人格、培训或中国映射。",
                 "market": "美国",
                 "name": "O*NET 55-1014.00 职业摘要（onet-wages 引用）",
-                "period": "页面年份未注明；访问 2026-10-03",
+                "period": "页面年份未注明；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1014.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "同一官方职业摘要；重复引用不增加独立证据",
-                  "访问 2026-10-03"
+                  "访问 2026-10-09"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "archivists",
                 "limitation": "同一职业摘要的重复引用，不是独立研究。只支持美国职业身份、职责及不收集軍职数据的声明，不支持 AI 采用、人格、培训或中国映射。",
                 "market": "美国",
                 "name": "O*NET 55-1014.00 职业摘要（archivists 引用）",
-                "period": "页面年份未注明；访问 2026-10-03",
+                "period": "页面年份未注明；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1014.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "页面修改 2026-08-27",
-                  "访问 2026-10-03"
+                  "本窗口同轮0070实际读对应环境训练Pay及JobOutlook",
+                  "页面修改2026-08-27，广义人数2024-02"
                 ],
                 "evidence_type": "官方职业资料",
                 "id": "military-ooh",
-                "limitation": "美国军人整体训练、环境与计酬背景，不是 55-1014 专属就业工资统计。",
+                "limitation": "美国一般军职背景，非精确职业工资就业；预测范围民用劳动力，不仅政府文职，未读DFAS金额及完整岗位制度。",
                 "market": "美国",
                 "name": "BLS Military Careers",
                 "period": "页面修改 2026-08-27",
@@ -32521,10 +32522,10 @@
                 "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "页面年份未注明",
-                  "访问 2026-10-03"
+                  "访问 2026-10-09"
                 ],
                 "evidence_type": "官方职业资料",
                 "id": "army-entry",
@@ -32537,10 +32538,10 @@
                 "url": "https://www.goarmy.com/how-to-join/requirements"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "页面年份未注明",
-                  "访问 2026-10-03"
+                  "本轮web177—210三个委任路径实际读",
+                  "未核各项目完整当期条件"
                 ],
                 "evidence_type": "官方职业资料",
                 "id": "army-officers",
@@ -32553,106 +32554,106 @@
                 "url": "https://www.goarmy.com/careers-and-jobs/find-your-path/army-officers"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "页面年份未注明",
-                  "访问 2026-10-03"
+                  "本窗口同日同版对应职业定义实际回读",
+                  "未核完整课程许可或招聘"
                 ],
                 "evidence_type": "官方职业资料",
                 "id": "neighbor-air",
-                "limitation": "仅支持本职业与该相邻职业工作对象的编辑比较，不支持资格互认或转岗距离。",
+                "limitation": "职责比较，不证明互认、转岗距离成效或需求，具体训练和准入另核。",
                 "market": "美国",
                 "name": "O*NET 55-1011.00 空勤官",
                 "period": "页面年份未注明",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/55-1011.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "页面年份未注明",
-                  "访问 2026-10-03"
+                  "本窗口同日同版对应职业定义实际回读",
+                  "未核完整课程许可或招聘"
                 ],
                 "evidence_type": "官方职业资料",
                 "id": "neighbor-launch",
-                "limitation": "仅支持本职业与该相邻职业工作对象的编辑比较，不支持资格互认或转岗距离。",
+                "limitation": "职责比较，不证明互认、转岗距离成效或需求，具体训练和准入另核。",
                 "market": "美国",
                 "name": "O*NET 55-1012.00 飞机弹射与回收官",
                 "period": "页面年份未注明",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/55-1012.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "页面年份未注明",
-                  "访问 2026-10-03"
+                  "本窗口同日同版对应职业定义实际回读",
+                  "未核完整课程许可或招聘"
                 ],
                 "evidence_type": "官方职业资料",
                 "id": "neighbor-armor",
-                "limitation": "仅支持本职业与该相邻职业工作对象的编辑比较，不支持资格互认或转岗距离。",
+                "limitation": "职责比较，不证明互认、转岗距离成效或需求，具体训练和准入另核。",
                 "market": "美国",
                 "name": "O*NET 55-1013.00 装甲突击车辆官",
                 "period": "页面年份未注明",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/55-1013.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "页面年份未注明",
-                  "访问 2026-10-03"
+                  "本窗口同日同版对应职业定义实际回读",
+                  "未核完整课程许可或招聘"
                 ],
                 "evidence_type": "官方职业资料",
                 "id": "neighbor-control",
-                "limitation": "仅支持本职业与该相邻职业工作对象的编辑比较，不支持资格互认或转岗距离。",
+                "limitation": "职责比较，不证明互认、转岗距离成效或需求，具体训练和准入另核。",
                 "market": "美国",
                 "name": "O*NET 55-1015.00 指挥与控制中心官",
                 "period": "页面年份未注明",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/55-1015.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "页面年份未注明",
-                  "访问 2026-10-03"
+                  "本窗口同日同版对应职业定义实际回读",
+                  "未核完整课程许可或招聘"
                 ],
                 "evidence_type": "官方职业资料",
                 "id": "neighbor-infantry",
-                "limitation": "仅支持本职业与该相邻职业工作对象的编辑比较，不支持资格互认或转岗距离。",
+                "limitation": "职责比较，不证明互认、转岗距离成效或需求，具体训练和准入另核。",
                 "market": "美国",
                 "name": "O*NET 55-1016.00 步兵军官",
                 "period": "页面年份未注明",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/55-1016.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "页面年份未注明",
-                  "访问 2026-10-03"
+                  "本窗口同日同版对应职业定义实际回读",
+                  "未核完整课程许可或招聘"
                 ],
                 "evidence_type": "官方职业资料",
                 "id": "neighbor-crew",
-                "limitation": "仅支持本职业与该相邻职业工作对象的编辑比较，不支持资格互认或转岗距离。",
+                "limitation": "职责比较，不证明互认、转岗距离成效或需求，具体训练和准入另核。",
                 "market": "美国",
                 "name": "O*NET 55-3014.00 火炮导弹成员",
                 "period": "页面年份未注明",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/55-3014.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "同一职业摘要的详细视图，不是独立研究",
-                  "访问 2026-10-03"
+                  "访问 2026-10-09"
                 ],
                 "evidence_type": "官方职业资料",
                 "id": "onet-details",
@@ -32663,6 +32664,70 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/55-1014.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本窗口同日同版原文定义回读",
+                  "非全部资格程序"
+                ],
+                "evidence_type": "官方职业摘要",
+                "id": "neighbor-armor-crew",
+                "limitation": "仅相邻职责比较，不证明资格互认或转岗结果。",
+                "market": "美国",
+                "name": "O*NET55-3013.00装甲车辆成员职业摘要",
+                "period": "未标职业数据年份，访问2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/55-3013.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本窗口同日同版原文定义回读",
+                  "非全部资格程序"
+                ],
+                "evidence_type": "官方职业摘要",
+                "id": "neighbor-infantry-crew",
+                "limitation": "仅相邻职责比较，不证明资格互认或转岗结果。",
+                "market": "美国",
+                "name": "O*NET55-3016.00步兵职业摘要",
+                "period": "未标职业数据年份，访问2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/55-3016.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本轮官方介绍及扩展摘要实际读",
+                  "未读完整论文或本军职映射"
+                ],
+                "evidence_type": "国际组织研究介绍与扩展摘要",
+                "id": "genai-ilo",
+                "limitation": "仅跨职业任务暴露方法背景，不是本军职采用、工资就业因果或个人权限研究。",
+                "market": "全球",
+                "name": "ILO生成式AI职业暴露研究官方介绍",
+                "period": "2025-05-20，访问2026-10-09",
+                "publisher": "International Labour Organization",
+                "scope": "contextual",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本轮124—125简介摘要实际读",
+                  "未读完整PDF"
+                ],
+                "evidence_type": "官方自愿风险参考简介与摘要",
+                "id": "genai-nist",
+                "limitation": "跨行业组织风险参考，不提供本军职授权、技术能力、实际采用或因果效果。",
+                "market": "美国",
+                "name": "NIST生成式AI风险Profile官方简介",
+                "period": "2024-07-26发布，网页2026-04-08更新，访问2026-10-09",
+                "publisher": "National Institute of Standards and Technology",
+                "scope": "contextual",
+                "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
               }
             ]
           },
@@ -33042,7 +33107,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方职业描述",
+            "类型": "官方职业摘要",
             "适用范围": {
               "$item": "artillery-and-missile-officers.ai-impact.ai-impact-table.20",
               "block": "ai-impact",
@@ -33064,7 +33129,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方任务与工作活动",
+            "类型": "BLS一般军职资料",
             "适用范围": {
               "$item": "artillery-and-missile-officers.ai-impact.ai-impact-table.22",
               "block": "ai-impact",
@@ -33086,7 +33151,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方自定义职业档案",
+            "类型": "同一摘要（非完整字段调查）",
             "适用范围": {
               "$item": "artillery-and-missile-officers.ai-impact.ai-impact-table.24",
               "block": "ai-impact",
@@ -33108,7 +33173,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方技术信号",
+            "类型": "同一摘要（非技术信号）",
             "适用范围": {
               "$item": "artillery-and-missile-officers.ai-impact.ai-impact-table.26",
               "block": "ai-impact",
@@ -33130,7 +33195,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方认证发现",
+            "类型": "同一摘要（非认证清单）",
             "适用范围": {
               "$item": "artillery-and-missile-officers.ai-impact.ai-impact-table.28",
               "block": "ai-impact",
@@ -33152,7 +33217,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方培训发现",
+            "类型": "同一摘要（非培训调查）",
             "适用范围": {
               "$item": "artillery-and-missile-officers.ai-impact.ai-impact-table.30",
               "block": "ai-impact",
@@ -33225,7 +33290,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "方向": "战备与训练数据"
+            "方向": "虚构学习记录"
           },
           {
             "AI主要改变": {
@@ -33240,7 +33305,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "方向": "态势信息与协同"
+            "方向": "虚构通信文书"
           }
         ],
         "evidence_intro": {
@@ -33714,7 +33779,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "坐标与火力与保障数据错误"
+            "风险": "虚构记录标识、版本或数量差异"
           },
           {
             "为什么重要": {
@@ -35533,11 +35598,11 @@
             "ai_heading": "AI 会影响火炮导弹官的工资吗？",
             "driver_heading": "哪些机构与场景会用到这个职业？",
             "official_heading": "中国大陆薪资参考（证据不足，非官方职业统计）",
-            "scenario_caption": "任职与分支分配背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "火炮导弹官在不同任职与分支分配背景下通常从哪些岗位方向开始？",
+            "scenario_caption": "美国一般准入示例及中国资料缺口（非任职分布或薪资统计）",
+            "scenario_heading": "美国一般准入示例与中国待核方向如何区分？",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "任职与分支分配背景",
-            "scenario_value_label": "常见岗位方向"
+            "scenario_value_label": "示例与待核方向"
           },
           "us_growth": {
             "$item": "artillery-and-missile-officers.china-salary.career-snapshot-primary-locale.58",
@@ -36561,7 +36626,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中国大陆侧对应职业口径（未建立）",
+            "label": "中国大陆侧对应职业口径（本资产未核实）",
             "secondary_value": null,
             "value": {
               "$item": "artillery-and-missile-officers.profile.onet-structured-fields-block.5",
@@ -37945,7 +38010,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "官方职责：野战／防空部署 · 战略导弹 · 核弹药及设施 · 系统维护",
@@ -37996,7 +38061,7 @@
       "text": "火炮导弹官"
     }
   },
-  "source_content_sha256": "01dd07864ac8b93a1be1452283e9b6afc37018ed95193b404c256a4db8b82f12",
+  "source_content_sha256": "09b65882e25a2097289bb0b3d64067d1b1b5d2aa98df342416a4fe9d3cad7ab2",
   "subject": {
     "canonical_slug": "artillery-and-missile-officers",
     "name": "火炮导弹官",

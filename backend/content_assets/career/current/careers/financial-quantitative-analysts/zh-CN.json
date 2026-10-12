@@ -8841,18 +8841,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.01.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            0,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.01.mitigation": {
         "ref": {
@@ -8930,18 +8920,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.02.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            1,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.02.mitigation": {
         "ref": {
@@ -9019,18 +8999,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.03.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            2,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.03.mitigation": {
         "ref": {
@@ -9108,18 +9078,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.04.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            3,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.04.mitigation": {
         "ref": {
@@ -23219,7 +23179,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 13-2099.01 的职业身份与工作情境来自该细分标题；其工资与就业数据在 O*NET 页面上明确标注为「母职业 Financial Specialists, All Other 口径」：中位时薪 38.99 美元；中位年薪 81,100 美元（2025，BLS OEWS，经 O*NET 呈现）；2024 年就业约 137,100 人；2024—2034 年预计平均增长（3% 至 4%），预计年均岗位空缺约 10,300 个。"
+              "O*NET 13-2099.01 为金融量化分析师；工资与就业统计属于母职业 Financial Specialists, All Other（13-2099）。当前页面：2025中位时薪38.99美元、年薪81,100美元；2025就业137,800人，2025—2035预计增长3%至4%、年均空缺9,400个。下方原事实表仍保留2024—2034历史预测，不能混作同一期，也不是细分职业专属统计。"
             ]
           },
           "id": "financial-quantitative-analysts.profile.onet-structured-fields-block.2",
@@ -23410,7 +23370,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "职业边界：本页按美国 O*NET-SOC 13-2099.01「Financial Quantitative Analysts」编写，指以量化方法与模型支持投资定价、配置与风险管理的岗位；不含组合投资决策（由投资基金经理承担）、组织流程诊断（由管理分析师承担）、市场与消费者研究（由市场研究分析师与营销专员承担）、借款人信用评估（由信贷分析师承担）以及财务与市场数据的估值结论（由金融与投资分析师承担）；不提供投资、财务、法律或合规意见。与上述相邻职业在职责落点上不同。"
+              "职业边界：本页按 O*NET-SOC 13-2099.01 金融量化分析师编写，核心产出是定价、风险、优化或相对价值模型及其分析说明。与基金经理、金融与投资分析师、风险专家等岗位可以有任务交叉，区分应看岗位的主要产出和决策授权，不能把估值或投资组合工作一概排除。具体投资决策、验证独立性及上线权限须核目标机构制度。"
             ]
           },
           "id": "financial-quantitative-analysts.profile.definition-block.11",
@@ -24238,40 +24198,40 @@
                 "url": "https://www.onetonline.org/link/summary/13-2099.01"
               },
               {
-                "entity": "O*NET 金融量化分析师任务与工作活动资料",
+                "entity": "BLS 职业投影与特征表",
                 "id": "link-2",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/13-2099.01"
-              },
-              {
-                "entity": "BLS 职业投影资料",
-                "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "BLS OEWS 工资统计",
-                "id": "link-4",
+                "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "ILO 工作论文 96：Generative AI and Jobs（2023）",
-                "id": "link-5",
+                "entity": "ILO 工作论文96",
+                "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.ilo.org/global/publications/working-papers/WCMS_890761/lang--en/index.htm"
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-global-analysis-potential-effects-job-quantity-and"
               },
               {
-                "entity": "NIST 人工智能风险管理框架（AI RMF 1.0）",
-                "id": "link-6",
+                "entity": "NIST AI RMF 1.0",
+                "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "entity": "O*NET 金融量化分析师职业档案（模型治理与准备层级）",
-                "id": "link-7",
+                "entity": "O*NET 金融量化分析师职业档案",
+                "id": "link-6",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/13-2099.01"
+              },
+              {
+                "entity": "O*NET 金融量化分析师详细资料",
+                "id": "link-7",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/details/13-2099.01"
               },
               {
                 "entity": "ILO 工作论文 96：Generative AI and Jobs（2023）",
@@ -24472,7 +24432,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "建模环节受辅助工具影响明显：数据准备与特征工程、代码与公式草拟、模型初稿与可视化生成都已较为成熟，生成式工具还能草拟方法说明与文档；已有研究显示任务暴露在职业间差异很大，管理和专业类职业中高度暴露的任务比例相对较低。技术可处理性不等于机构已经采用，也不等于岗位减少。本页不给出 FermatMind 任务级评分，因为缺少可复核的评分量表与任务依据。"
+              "编辑分析：可在获准的数据环境中试用AI辅助数据清理、代码草拟、图表和文档，并核对误差与复现结果。O*NET提供任务依据，ILO 2023研究提供跨职业任务暴露背景；两者不能证明量化岗位工具已成熟、机构普遍采用或岗位净变化。证据不足：本细分职业的AI采用率、生产率效果、就业因果与可复核评分。"
             ]
           },
           "id": "financial-quantitative-analysts.ai-impact.ai-impact-table.18",
@@ -24968,7 +24928,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工资统计为母职业口径，不含奖金与股权激励"
+              "工资统计为母职业口径，不含非生产性奖金及雇主福利成本；不能据此概括为排除所有奖金"
             ]
           },
           "id": "financial-quantitative-analysts.ai-impact.ai-impact-table.53",
@@ -25010,7 +24970,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "母职业口径下 2025 年中位时薪 38.99 美元、中位年薪 81,100 美元；第 10 与第 90 百分位分别约 48,460 与 151,490 美元/年（May 2025 OEWS，经 O*NET 呈现）。用于理解量级与口径；该数值并非本细分职业 13-2099.01 的专属统计，OEWS 通常也不含奖金与股权激励。"
+              "母职业口径下 2025 年中位时薪 38.99 美元、中位年薪 81,100 美元；第 10 与第 90 百分位分别约 48,460 与 151,490 美元/年（May 2025 OEWS，经 O*NET 呈现）。用于理解量级与口径；该数值并非本细分职业 13-2099.01 的专属统计，OEWS 通常也不含非生产性奖金及雇主福利成本；不能据此概括为排除所有奖金。"
             ]
           },
           "id": "financial-quantitative-analysts.ai-impact.ai-impact-table.56",
@@ -25038,7 +24998,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST 人工智能风险管理框架（AI RMF 1.0 及生成式 AI 概览）"
+              "NIST AI RMF 1.0（自愿AI风险管理框架）"
             ]
           },
           "id": "financial-quantitative-analysts.ai-impact.ai-impact-table.58",
@@ -25094,7 +25054,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采用取决于方法与治理责任：方法选择、假设设定、独立验证与失效条件判断出错会直接影响定价、风险与合规，代价高且需要专业判断与信任。因此即便技术上可行，多数机构只在数据准备、代码草拟、可视化与文档等环节使用工具，把方法选择、验证与治理留给受训分析师与验证岗。"
+              "证据不足：未取得量化分析机构按任务分解的AI采用率或代表性调查。编辑建议：先评估数据权限、方法错误代价与独立验证安排，再决定是否试用数据、代码或文档辅助；不能由技术能力推断多数机构的实际流程。"
             ]
           },
           "id": "financial-quantitative-analysts.ai-impact.ai-impact-table.62",
@@ -25123,7 +25083,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "更准确的判断是：数据准备、代码草拟、可视化与文档类工序会被工具接手，职业整体以增强与职责重心上移为主。ILO 的研究显示任务暴露在职业间差异很大，技术可行不等于机构已经采用；结论是工作方式变化，而不是整体被取代。"
+              "无法据此断定职业整体会被替代或必然增强。ILO 2023提供跨职业潜在暴露分析；量化岗位可先对数据、代码和文档子任务做受控试用。具体效果、实际采用和岗位变化仍缺本职业实证，应分别核查。"
             ]
           },
           "id": "financial-quantitative-analysts.ai-impact.ai-impact-table.64",
@@ -25268,7 +25228,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "无法给出年份，也不应给出。公开来源没有支持「某年消失」的证据；比较可靠的表述是任务结构与职责重心会变化、部分工序被工具接手，而岗位数量取决于机构研究投入与治理要求，属于不确定量。"
+              "证据不足：未取得本职业岗位消失年份或AI净就业因果证据。总体就业预测也不能回答这个问题；建议核对目标机构任务、治理要求及实际招聘情况，不把潜在辅助写成必然接手。"
             ]
           },
           "id": "financial-quantitative-analysts.ai-impact.ai-impact-table.74",
@@ -26005,7 +25965,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业代理口径与非私营不同，不可混用，也不能替代本职业工资。"
+              "同为城镇非私营单位行业平均工资，覆盖多个职业；行业不同，不能替代本职业工资。"
             ]
           },
           "id": "financial-quantitative-analysts.china-salary.career-snapshot-primary-locale.10",
@@ -26019,7 +25979,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆未单列「金融量化分析师」，没有精确对应的职业工资统计"
+              "本轮未取得中国大陆精确对应本职业的代表性全国工资分布；不推断官方未建立或未发布。"
             ]
           },
           "id": "financial-quantitative-analysts.china-salary.career-snapshot-primary-locale.11",
@@ -26187,7 +26147,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "建模与代码辅助工具会压缩数据准备与初稿环节，但公开来源不足以给出中国大陆本职业的工资或需求变化幅度。"
+              "代码与数据工具可作为编辑建议试验；本轮未核中国大陆本职业采用率、实际增效、工资或需求变化幅度。"
             ]
           },
           "id": "financial-quantitative-analysts.china-salary.career-snapshot-primary-locale.23",
@@ -26201,7 +26161,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径提示：行业平均工资与岗位类别平均工资覆盖多个职业，不能替代本职业工资分布，也不含奖金与股权激励。"
+              "NBS平均工资含定义内奖金、津贴补贴和加班工资等，为税前统计；个别激励是否计入按官方定义核对。行业与岗位类别均值覆盖多个职业，不能替代本职业工资分布。"
             ]
           },
           "id": "financial-quantitative-analysts.china-salary.career-snapshot-primary-locale.24",
@@ -26290,7 +26250,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "可独立完成建模、验证与说明"
+              "编辑方向例示；硕士学位不证明独立建模或验证能力，核目标要求与实际项目。"
             ]
           },
           "id": "financial-quantitative-analysts.china-salary.career-snapshot-primary-locale.30",
@@ -26333,7 +26293,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "承担方法创新与模型治理职责"
+              "编辑方向例示；博士学位不证明方法创新或治理能力，核目标要求与实际研究。"
             ]
           },
           "id": "financial-quantitative-analysts.china-salary.career-snapshot-primary-locale.33",
@@ -26510,7 +26470,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆未建立与「金融量化分析师」精确对应的全国单职业工资统计值；下列数值为行业与岗位类别背景代理。"
+              "本轮未取得中国大陆精确对应金融量化分析岗位的代表性全国工资统计；以下行业与岗位类别数字只作背景代理。"
             ]
           },
           "id": "financial-quantitative-analysts.china-salary.career-snapshot-primary-locale.45",
@@ -26539,7 +26499,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局：2025 年城镇单位就业人员平均工资（行业门类与岗位类别）｜https://www.stats.gov.cn/sj/zxfb/202605/t20260516_1960136.html"
+              "国家统计局：2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "financial-quantitative-analysts.china-salary.career-snapshot-primary-locale.47",
@@ -26581,7 +26541,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆没有与本职业精确对应的全国单职业月薪或年薪统计值；本页只能给出行业平均工资（租赁和商务服务业非私营 110,162、私营 68,919 元/年；科学研究和技术服务业非私营 182,064、私营 83,560 元/年，2025）与岗位类别均值作为背景，无法换算成具体岗位月薪。"
+              "证据不足：本轮未取得中国大陆本职业代表性全国工资分布。2025行业年均值与岗位类别均值只作背景代理，不能换算为本职业月薪。"
             ]
           },
           "id": "financial-quantitative-analysts.china-salary.career-snapshot-primary-locale.50",
@@ -26986,7 +26946,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位数是同一统计期内工资分布的中点，不等于起薪；O*NET 工作情境显示本职业以固定排班为主（80%），75% 每周超过 40 小时、25% 为 40 小时，以计算机与坐姿作业为主（持续或几乎持续坐着 70%），95% 每天使用电子邮件，20% 每天面临严格时间压力。「该中位数是母职业口径，不是本细分职业的专属统计」，OEWS 通常也不含奖金与股权激励。"
+              "中位数是同一统计期内工资分布的中点，不等于起薪；O*NET 工作情境显示本职业以固定排班为主（80%），75% 每周超过 40 小时、25% 为 40 小时，以计算机与坐姿作业为主（持续或几乎持续坐着 70%），95% 每天使用电子邮件，20% 每天面临严格时间压力。「该中位数是母职业口径，不是本细分职业的专属统计」，OEWS 通常也不含非生产性奖金及雇主福利成本；不能据此概括为排除所有奖金。"
             ]
           },
           "id": "financial-quantitative-analysts.us-salary.career-snapshot-secondary-locale.27",
@@ -27571,7 +27531,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格与工作表现的相关性有限，本页只把它当作自我观察工具：开放性与尽责性在既要方法创新又要严格复现的岗位上较常用到，但人格特质不是录用标准，也不能替代建模经验与真实项目验证。"
+              "编辑建议：观察自己是否愿意尝试方法、核对细节、独立复现并接受质疑。大五人格结果可用于整理自我观察问题；本页未核验它对量化岗位的预测效度或与工作样本的相对效果，不作录用或能力判断。"
             ]
           },
           "id": "financial-quantitative-analysts.fit.personality-fit-block.6",
@@ -27645,7 +27605,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业测评，也没有证明能预测在本职业的表现。可以用它整理自己的研究与协作偏好，但职业判断仍要回到真实任务：能否把问题写成模型、能否独立复现结果、能否说明模型的失效条件。"
+              "MBTI可用于整理个人偏好；本轮未取得其预测本职业表现的效度证据，不据类型作能力或录用结论。真实任务的分析、复核、说明与交接表现另行观察。"
             ]
           },
           "id": "financial-quantitative-analysts.fit.personality-fit-block.10",
@@ -27745,7 +27705,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格属于自我反思工具。对这份工作更实用的问题是：你能否在结果被质疑时保持方法一致、能否在时间压力下仍完成独立验证与留痕；这些问题可以在真实建模项目中直接验证。"
+              "九型可用于自我反思；本轮未核其预测本职业表现的效度。编辑建议观察受到质疑时是否核数据和假设、是否保持复核与留痕，不把观察清单当量表结论。"
             ]
           },
           "id": "financial-quantitative-analysts.fit.personality-fit-block.14",
@@ -27860,7 +27820,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪智力在这里主要体现为方法一致与沟通韧性：在结果被质疑时回到数据与方法、在时限压力下保持验证标准、与研究、交易与风控团队清楚交接。它可以在建模实践中观察，但情绪智力量表不预测本职业表现。"
+              "编辑建议：在被质疑或赶时限时，观察自己是否回到数据和假设、坚持复核并清楚交接。上述行为来自任务情境；本页未取得情绪智力量表对量化岗位绩效的验证研究，不据量表分数预测职业表现。"
             ]
           },
           "id": "financial-quantitative-analysts.fit.personality-fit-block.22",
@@ -28206,7 +28166,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。兴趣测试只描述偏好，不测能力，也不预测录用或绩效。它可以用来说明你对研究、数据与规范流程的倾向，但适不适合要靠在真实任务中验证：能否把问题写成模型、能否独立复现、能否说明失效条件。"
+              "性格标签不能代替任务表现；编辑建议观察是否愿意核对数据、解释假设、记录依据并接受复核，不据此作录用判断。"
             ]
           },
           "id": "financial-quantitative-analysts.fit.personality-fit-block.46",
@@ -28221,7 +28181,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "通常需要编程与数据能力：统计与计量软件、编程语言与脚本、数据库与查询语言、商业智能工具与金融数据服务是常见工具；入门阶段至少要能独立复现一个模型并完成版本管理。"
+              "内向不决定适配；观察能否听取业务需求、主动报告不确定项并清楚交接。"
             ]
           },
           "id": "financial-quantitative-analysts.fit.personality-fit-block.47",
@@ -28236,7 +28196,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更准确的说法是需要方法一致与沟通韧性：结果被质疑时回到数据与方法、在时限压力下保持验证标准、与研究、交易与风控清楚交接。这些能力可以通过建模实践观察和训练，不是人格门槛。"
+              "外向不保证胜任；数据核对、方法判断、复现与沟通能力分别观察。"
             ]
           },
           "id": "financial-quantitative-analysts.fit.personality-fit-block.48",
@@ -28251,7 +28211,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合与否取决于任务与工作方式而非性格标签。这份工作以计算机与坐姿作业为主（O*NET 工作情境显示持续或几乎持续坐着 70%），80% 为固定排班、75% 每周超过 40 小时，95% 每天使用电子邮件，20% 每天面临严格时间压力。内向或外向都不妨碍，但如果完全不接受独立验证、模型治理与反复调试，工作体验会受影响。"
+              "本轮未取得最适MBTI类型的有效证据，不以类型预测本职业表现。"
             ]
           },
           "id": "financial-quantitative-analysts.fit.personality-fit-block.49",
@@ -28265,7 +28225,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 将 Financial Quantitative Analysts（13-2099.01）列为 Job Zone Five（需要大量准备，SVP 8.0 及以上）；学历调查中约 60% 回答需要硕士学位、35% 回答需要学士学位、5% 回答需要博士学位。BLS 未单独发布本职业的入门学历与培训要求。中国大陆多以数学、统计、计算机或金融工程相关学历加编程与建模能力为常见要求，并强调模型治理与数据合规；具体以招聘公告与所在地规定为准。"
+              "美国O*NET兴趣代码为IC（研究型、常规型），描述工作活动偏好，不代表个人能力、资格或中国岗位门槛。"
             ]
           },
           "id": "financial-quantitative-analysts.fit.personality-fit-block.50",
@@ -28280,7 +28240,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以，但需要投入时间。常见工具包括统计与计量软件（如 MATLAB、SAS、Stata、SPSS）、编程语言与脚本（如 R、Python、C#/Java、JavaScript）、数据库与查询语言、商业智能与可视化工具、金融终端与数据服务；入门阶段至少在带教下完成一个模型从问题到验证与说明的全过程。"
+              "本轮未取得人格分数预测本职业表现的效度证据，不据分数作能力或录用结论。"
             ]
           },
           "id": "financial-quantitative-analysts.fit.personality-fit-block.51",
@@ -28294,7 +28254,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "两条路都可行：有金融或经济背景要补编程、统计方法与模型治理；无金融背景（数学、物理、计算机）要补金融市场与产品知识，再补模型治理与披露要求。关键是在作品或项目中体现从问题到验证的完整过程与版本记录。"
+              "单次数学成绩不能决定适配；本职业涉及定量方法，可在公开虚构数据上观察统计理解、计算复核和假设解释，再核目标岗位考核。"
             ]
           },
           "id": "financial-quantitative-analysts.fit.personality-fit-block.52",
@@ -28309,7 +28269,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "重要。在券商、基金或风险管理团队完整参与一个模型从需求到上线的过程，能让你接触真实的行情与持仓数据、方法争议、验证流程与治理要求，并形成可展示的模型与验证材料；这些经历比单纯做题更能说明你能否承担本职业的日常工作。"
+              "不设情商分数门槛；可观察压力下的听取、问题澄清、反馈和协作，本轮未核情绪智力量表的职业预测效度。"
             ]
           },
           "id": "financial-quantitative-analysts.fit.personality-fit-block.53",
@@ -28324,7 +28284,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 工作情境显示本职业以固定排班为主（80%）、20% 为不规则；75% 每周超过 40 小时、25% 为 40 小时；以计算机与坐姿作业为主（持续或几乎持续坐着 70%、超过一半时间 30%）；对精确与准确的要求高（极其重要 55%、非常重要 25%）；每天有严格时间压力 20%、每周一次以上但非每天 40%、每月一次以上但非每周 35%；与他人持续接触 30%、大部分时间接触 20%、约一半时间接触 35%、偶尔接触 15%；95% 每天使用电子邮件。具体市场时段、波动期加班与计酬方式需向雇主核实。"
+              "九型可作自我反思，本轮未核其职业预测效度，不按类型推能力、资格或表现。"
             ]
           },
           "id": "financial-quantitative-analysts.fit.personality-fit-block.54",
@@ -28338,7 +28298,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。测试只能提示兴趣方向，职业选择还需要核对真实任务、模型治理与验证要求、计酬与激励安排以及本页练习的表现；建议用一次真实建模项目的参与和一次独立复现演练来验证。"
+              "可用公开虚构数据整理分析目标、假设、计算过程、复核差异和未知事项，请有经验者反馈；纸面材料不替代真实训练、任职条件或业务授权。"
             ]
           },
           "id": "financial-quantitative-analysts.fit.personality-fit-block.55",
@@ -28382,7 +28342,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "接受以计算机与坐姿作业为主、需要独立验证且节奏随市场波动的工作方式，成果多为可复现的模型与清晰的版本与验证记录"
+              "用公开虚构数据整理分析过程、复核差异与未知事项；实际作息、任职条件和授权核目标雇主。"
             ]
           },
           "id": "financial-quantitative-analysts.fit.personality-fit-block.58",
@@ -28598,7 +28558,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "以下风险按公开的官方职业资料、量化建模作业常识与通用治理框架归纳，只用于提示检查方向，不构成投资、财务、法律或安全操作指导。"
+              "职业任务与工作情境支持风险场景；NIST仅作自愿AI治理参考。应对为编辑建议，不证明风险降低比例或具体机构强制规则。"
             ]
           },
           "id": "financial-quantitative-analysts.risk.career-risk-cards.10",
@@ -28614,7 +28574,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "模型与假设风险"
+              "定价、风险或配置模型开发者"
             ]
           },
           "id": "financial-quantitative-analysts.risk.career-risk-cards.11",
@@ -28670,7 +28630,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "数据与敏感信息保密风险"
+              "接触持仓、行情或客户数据的岗位"
             ]
           },
           "id": "financial-quantitative-analysts.risk.career-risk-cards.15",
@@ -28730,7 +28690,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "市场波动期与上线期强度风险"
+              "市场波动期或上线期的研究与验证人员"
             ]
           },
           "id": "financial-quantitative-analysts.risk.career-risk-cards.19",
@@ -28787,7 +28747,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "模型越用与适用边界风险"
+              "复用模型或负责监控的分析师"
             ]
           },
           "id": "financial-quantitative-analysts.risk.career-risk-cards.23",
@@ -28843,7 +28803,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "版本与复现风险"
+              "维护模型库及复现结果的岗位"
             ]
           },
           "id": "financial-quantitative-analysts.risk.career-risk-cards.27",
@@ -28903,7 +28863,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "验证与上线责任风险"
+              "模型开发、独立验证及上线审批人员"
             ]
           },
           "id": "financial-quantitative-analysts.risk.career-risk-cards.31",
@@ -29124,7 +29084,7 @@
                 "values": [
                   "O*NET 准备层级与学历调查",
                   "Job Zone Five（需要大量准备），SVP 8.0 及以上；学历调查中约 60% 回答需要硕士学位、35% 回答需要学士学位、5% 回答需要博士学位；该职业未被标记为 Bright Outlook。",
-                  "准备层级描述职业整体，不代表具体机构或岗位的任职与持牌条件；BLS 未单独发布本职业的入门学历与培训要求。"
+                  "准备层级与学历比例来自美国O*NET，不推具体机构任职或持牌条件；本轮未取得本子职业独立BLS入门培训统计，不推官方未发布。"
                 ]
               },
               {
@@ -29401,38 +29361,38 @@
             "rows": [
               [
                 "硕士学位（金融工程、统计、数学或计算机相关）",
-                "多数量化分析岗位",
-                "满足基本入门条件",
-                "O*NET 学历调查中约占 60%",
+                "按目标岗位公告核学历与专业，不推中国普遍门槛",
+                "美国O*NET调查60%回答硕士；这是美国新进人员教育调查，非中国基本门槛",
+                "具体以目标岗位公告为准，中国普遍必需性未核",
                 "按院校与专业要求",
-                "两到三年",
+                "按目标院校、培训或机构安排核实；统一周期未核",
                 "学历不等于能把问题写成可检验模型"
               ],
               [
                 "学士学位（数学、统计、计算机或金融相关）",
-                "数据与量化支持岗位",
-                "O*NET 学历调查中约占 35%",
-                "不是普遍必需",
+                "按目标岗位公告核学历与专业，不推中国普遍门槛",
+                "美国O*NET调查35%回答学士；学位只证明教育经历，岗位要求另核",
+                "具体以目标岗位公告为准，中国普遍必需性未核",
                 "按院校与专业要求",
-                "四年左右",
+                "按目标院校、培训或机构安排核实；统一周期未核",
                 "学历不等于可独立承担模型验证"
               ],
               [
                 "博士学位（统计、数学、物理或金融相关）",
-                "模型方法研究岗位",
-                "O*NET 学历调查中约占 5%",
-                "不是普遍必需",
+                "按目标岗位公告核学历与专业，不推中国普遍门槛",
+                "美国O*NET调查5%回答博士；不推中国普遍门槛或独立研究能力",
+                "具体以目标岗位公告为准，中国普遍必需性未核",
                 "按方向与导师要求",
-                "数年至多年",
+                "按目标院校、培训或机构安排核实；统一周期未核",
                 "学位不等于具备生产化与治理经验"
               ],
               [
                 "编程与数据能力",
-                "几乎所有量化岗位",
-                "决定能否进入面试与承担建模",
-                "普遍被雇主重点考察",
+                "涉及编程、数据或模型工作的目标岗位",
+                "可准备计算、复现与数据核对能力，是否进入面试由雇主决定",
+                "核实际公告和任务要求，普遍门槛未核",
                 "按项目与课程积累",
-                "数月至数年",
+                "按目标院校、培训或机构安排核实；统一周期未核",
                 "工具能力不替代方法选择与验证"
               ],
               [
@@ -29441,7 +29401,7 @@
                 "满足治理、验证与留痕要求",
                 "按机构与业务线要求而定",
                 "机构培训或课程",
-                "数周至数月",
+                "按目标院校、培训或机构安排核实；统一周期未核",
                 "培训不等于可免除治理与披露义务"
               ],
               [
@@ -29450,7 +29410,7 @@
                 "满足保密与信息保护要求",
                 "按机构与岗位要求而定",
                 "机构培训",
-                "数小时至数天",
+                "按目标院校、培训或机构安排核实；统一周期未核",
                 "培训不等于可免除保密义务"
               ]
             ]
@@ -29675,7 +29635,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET 将本职业列为 Job Zone Five（需要大量准备，SVP 8.0 及以上）；学历调查中约 60% 回答需要硕士学位、35% 回答需要学士学位、5% 回答需要博士学位；该职业未被标记为 Bright Outlook。BLS 未单独发布本职业的入门学历与培训要求。中国大陆多以数学、统计、计算机或金融工程相关学历加编程与建模能力为常见要求，并强调模型治理与数据合规；具体以招聘公告与所在地规定为准。"
+              "美国O*NET准备层级为Job Zone Five，学历调查60%硕士、35%学士、5%博士；这是美国受访者对新进人员教育的回答，并非中国雇主普遍门槛。中国大陆岗位应逐条核学历、统计与编程要求、业务资格和模型治理制度。证据不足：本页未取得代表性的中国招聘样本。三条路径为能力准备的编辑归纳，非统一晋升阶梯。"
             ]
           },
           "id": "financial-quantitative-analysts.path.career-path-block.20",
@@ -29721,7 +29681,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国：O*NET 13-2099.01 属 Job Zone Five（SVP 8.0 及以上），以固定排班为主（80%），75% 每周超过 40 小时，以计算机与坐姿作业为主（持续坐着 70%），95% 每天使用电子邮件；其工资、就业与行业数据在 O*NET 页面上明确标注为母职业 Financial Specialists, All Other 口径。中国大陆：未建立与本职业精确对应的职业分类，多以数学、统计、计算机或金融工程相关学历加编程与建模能力为门槛，具体以招聘公告与所在地规定为准。"
+              "美国任务与工作情境按O*NET 13-2099.01理解；中国大陆应按目标岗位核数学统计基础、编程、金融产品知识和治理要求。美国职业分类不直接证明中国没有对应分类，也不证明具体任职门槛；本页未取得逐项对应中国分类及雇主要求的证据。"
             ]
           },
           "id": "financial-quantitative-analysts.path.career-path-block.23",
@@ -29764,7 +29724,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对数学、统计与金融方向的训练与教育入口"
+              "用于核母职业统计背景；不能当13-2099.01精确职业的教育或培训要求"
             ]
           },
           "id": "financial-quantitative-analysts.path.career-path-block.26",
@@ -30776,7 +30736,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国口径（O*NET 13-2099.01 与 BLS，工资与就业为母职业 Financial Specialists, All Other 口径）：2024 年就业约 137,100 人、2024—2034 年预计平均增长（3% 至 4%）、年均岗位空缺约 10,300 个；2025 年中位时薪 38.99 美元、中位年薪 81,100 美元。官方未单独公布本细分职业 13-2099.01 的工资、就业与行业数据，也未提供第二个职业组口径。中国大陆未单列本职业，只能用行业与岗位类别平均工资作代理。"
+              "当前O*NET页面列母职业 Financial Specialists, All Other：2025就业137,800人，2025—2035预计增长3%至4%、年均空缺9,400个；2025中位年薪81,100美元。下方原事实条目为2024—2034历史参考，来源登记被FAQ共享而保持原值。总体预测非AI归因；均非13-2099.01细分职业专属统计。中国薪资仍缺精确职业值，行业均值仅作背景。"
             ]
           },
           "id": "financial-quantitative-analysts.market-signals.market-signal-card.8",
@@ -31029,7 +30989,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为行业门类与岗位类别口径，不含奖金与股权激励"
+              "行业与岗位类别平均工资为税前劳动报酬口径，包含奖金及津补贴；不等于该职业薪资、到手收入或完整股权总包。"
             ]
           },
           "id": "financial-quantitative-analysts.market-signals.market-signal-card.26",
@@ -31657,7 +31617,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "证据不足：①本职业（13-2099.01）的工资、就业与行业数据未单独发布——O*NET 页面明确标注其数值为「母职业 Financial Specialists, All Other（13-2099）口径」，本页据此在事实、表格与来源说明中统一标注「母职业口径」，不把母职业数值当作本细分职业的专属统计；②官方未公布本职业或其母职业的「分行业工资中位数」，4 行行业工资按缺口登记、不代填；③中国大陆未建立与本职业精确对应的全国单职业工资统计值，本页以行业平均工资（租赁和商务服务业 2025 年非私营 110,162、私营 68,919 元/年；科学研究和技术服务业非私营 182,064、私营 83,560 元/年）与规模以上企业岗位类别平均工资（中层及以上管理人员 210,016 元/年、办事人员和有关人员 94,936 元/年）作背景，不使用行业均值、岗位类别均值或单条招聘报价替代。另需说明：固定索引给本资产的中文名为「金融量化分析师」，与编号 0370 的冻结名相同，但两者对应不同 O*NET 职业（本页为 13-2099.01 量化分析，0370 为 13-2051.00 金融与投资分析）；本页正文一律按量化分析职责展开，并在来源说明中登记这一对应关系。口径说明：本页就业与空缺只有单一（母职业）官方口径，未发现第二个职业组口径，故不做两口径并列。来源范围与统计时期按原始证据分别核对：中位工资与各分位为母职业 13-2099 的 May 2025 OEWS 估算（经 O*NET 呈现）；就业与增长来自 O*NET 呈现的 BLS 2024—2034 投影（母职业口径）；国家统计局数据为行业门类与岗位类别口径。执业与法域边界：本页不提供投资、财务、法律或合规意见；模型治理、数据与信息保护、披露与利益冲突要求须由机构与主管部门按制度与法规确认。"
+              "证据不足：本细分职业专属工资、就业、分行业中位工资及中国精确职业薪资未取得；现有父职业/行业均值不能代填。当前O*NET就业预测为2025—2035；本页共享事实及FAQ保留2024—2034历史内容，未执行全页一致性修订。国家统计局行业均值含奖金等税前劳动报酬。共享来源登记涉及FAQ，旧期间、用途与奖金说明冲突保持并交后续对应范围处理。"
             ]
           },
           "id": "financial-quantitative-analysts.sources.source-card.4",
@@ -32271,7 +32231,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方工资与展望",
+            "类型": "官方就业预测",
             "适用范围": {
               "$item": "financial-quantitative-analysts.ai-impact.ai-impact-table.22",
               "block": "ai-impact",
@@ -32293,7 +32253,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "国际组织暴露度研究",
+            "类型": "官方工资统计",
             "适用范围": {
               "$item": "financial-quantitative-analysts.ai-impact.ai-impact-table.24",
               "block": "ai-impact",
@@ -32315,7 +32275,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "学术研究",
+            "类型": "国际组织任务暴露研究",
             "适用范围": {
               "$item": "financial-quantitative-analysts.ai-impact.ai-impact-table.26",
               "block": "ai-impact",
@@ -32337,7 +32297,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "雇主预期调查",
+            "类型": "自愿风险管理框架",
             "适用范围": {
               "$item": "financial-quantitative-analysts.ai-impact.ai-impact-table.28",
               "block": "ai-impact",
@@ -32359,7 +32319,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "人工智能风险框架",
+            "类型": "官方准备层级资料",
             "适用范围": {
               "$item": "financial-quantitative-analysts.ai-impact.ai-impact-table.30",
               "block": "ai-impact",
@@ -34084,8 +34044,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet"
+              "bls"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -34116,7 +34075,6 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
               "privacy"
             ],
             "id": "record-version",
@@ -34148,8 +34106,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "privacy",
-              "privacy"
+              "bls"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34180,8 +34137,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet"
+              "bls"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -34213,7 +34169,7 @@
             },
             "evidence_refs": [
               "bls",
-              "bls"
+              "privacy"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -34244,8 +34200,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet"
+              "bls",
+              "privacy"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -37055,7 +37011,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（不评分）"
     },
     "badges": [
       "金融量化分析师 · 官方职业范围（13-2099.01）",
@@ -37106,7 +37062,7 @@
       "text": "金融量化分析师"
     }
   },
-  "source_content_sha256": "3baaa83971c6762df00035c709e66870deab5607f532cd5b4bc23216373c7533",
+  "source_content_sha256": "bd7b1c08939676a8d3e6fc4957fac1e889b4e10b5a5c9c2b14a056228be4ff07",
   "subject": {
     "canonical_slug": "financial-quantitative-analysts",
     "name": "金融量化分析师",

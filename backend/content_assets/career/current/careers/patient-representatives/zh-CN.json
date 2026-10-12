@@ -25505,7 +25505,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数据与系统门槛：采用前要核对与诊疗照护直接相关的设备、软件、标准、清单、原始记录和版本受控材料中的数据、权限、版本与失败模式。"
+              "采用前核目标机构的资源目录、政策版本、服务系统与原始诉求记录，明确资料范围、访问权限和失败处理；涉及设备教学或照护方案时另核专业资格与监督。"
             ]
           },
           "id": "patient-representatives.ai-impact.ai-impact-table.67",
@@ -27583,7 +27583,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "未取得本職同口径医院行业工资"
+              "未取得本职同口径医院行业工资"
             ]
           },
           "id": "patient-representatives.us-salary.career-snapshot-secondary-locale.35",
@@ -28181,7 +28181,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "未取得本职MBTI职业成功率，不能指定最佳型号。"
+              "未取得本职MBTI职业成功率，不能指定最佳人格类型。"
             ]
           },
           "id": "patient-representatives.fit.personality-fit-block.11",
@@ -28241,7 +28241,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "型号不能替代机构训练、资料权限或专业资格。"
+              "人格类型不能替代机构训练、资料权限或专业资格。"
             ]
           },
           "id": "patient-representatives.fit.personality-fit-block.13",
@@ -28271,7 +28271,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "自省素材，不给九型职业匹配率或最佳型号。"
+              "自省素材，不给九型职业匹配率或最佳人格类型。"
             ]
           },
           "id": "patient-representatives.fit.personality-fit-block.15",
@@ -28301,7 +28301,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不把型号当培训条件或临床授权。"
+              "不把人格类型当培训条件或临床授权。"
             ]
           },
           "id": "patient-representatives.fit.personality-fit-block.17",
@@ -28782,7 +28782,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据不足：未取得最佳MBTI型号证据；用虚构服务样本观察，不选最佳人格。"
+              "证据不足：未取得最佳MBTI人格类型证据；用虚构服务样本观察，不选最佳人格。"
             ]
           },
           "id": "patient-representatives.fit.personality-fit-block.49",
@@ -28962,7 +28962,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "官方任务背景，不验证MBTI型号匹配。"
+              "官方任务背景，不验证MBTI人格类型匹配。"
             ]
           },
           "id": "patient-representatives.fit.personality-fit-block.61",
@@ -36017,7 +36017,7 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "us-industry-wage-finance-2025",
             "industry": {
               "$item": "patient-representatives.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -36038,7 +36038,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "us-industry-wage-professional-2025",
             "industry": {
               "$item": "patient-representatives.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -36059,7 +36059,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "us-industry-wage-localgov-2025",
             "industry": {
               "$item": "patient-representatives.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -36080,7 +36080,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "us-industry-wage-education-2025",
             "industry": {
               "$item": "patient-representatives.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -37958,8 +37958,8 @@
         "display_value": "未取得患者代表精确职业行业工资",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
-        "measure": "qualification boundary",
-        "occupation_scope": "所属大类数据不推算患者代表细分行业工资",
+        "measure": "患者代表精确职业行业工资未取得",
+        "occupation_scope": "美国Patient Representatives / O*NET29-2099.08；医院。未取得同口径行业工资，不能用所属29-2099组代填。",
         "period": "截至 2026-09-26",
         "source_refs": [
           "onet"
@@ -37970,8 +37970,8 @@
         "display_value": "未取得患者代表精确职业行业工资",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
-        "measure": "qualification boundary",
-        "occupation_scope": "所属大类数据不推算患者代表细分行业工资",
+        "measure": "患者代表精确职业行业工资未取得",
+        "occupation_scope": "美国Patient Representatives / O*NET29-2099.08；门诊。未取得同口径行业工资，不能用所属29-2099组代填。",
         "period": "截至 2026-09-26",
         "source_refs": [
           "onet"
@@ -37982,8 +37982,8 @@
         "display_value": "未取得患者代表精确职业行业工资",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
-        "measure": "qualification boundary",
-        "occupation_scope": "所属大类数据不推算患者代表细分行业工资",
+        "measure": "患者代表精确职业行业工资未取得",
+        "occupation_scope": "美国Patient Representatives / O*NET29-2099.08；社会服务。未取得同口径行业工资，不能用所属29-2099组代填。",
         "period": "截至 2026-09-26",
         "source_refs": [
           "onet"
@@ -37994,8 +37994,8 @@
         "display_value": "未取得患者代表精确职业行业工资",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
-        "measure": "qualification boundary",
-        "occupation_scope": "所属大类数据不推算患者代表细分行业工资",
+        "measure": "患者代表精确职业行业工资未取得",
+        "occupation_scope": "美国Patient Representatives / O*NET29-2099.08；其他雇主。未取得同口径行业工资，不能用所属29-2099组代填。",
         "period": "截至 2026-09-26",
         "source_refs": [
           "onet"
@@ -38174,7 +38174,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 29-2099.08 · 患者代表",
@@ -38225,7 +38225,7 @@
       "text": "患者代表：工作内容、工资口径与服务协调"
     }
   },
-  "source_content_sha256": "48234c6026cf91b2aab38553207d9218b74ccfc6dae9e916420b612aa07bff3f",
+  "source_content_sha256": "a21c77848a4a824cec1ae29142230195cab65cbb7a84d79b969356f6caf5d62a",
   "subject": {
     "canonical_slug": "patient-representatives",
     "name": "患者代表",

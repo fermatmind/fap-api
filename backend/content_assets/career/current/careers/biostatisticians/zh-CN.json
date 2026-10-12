@@ -1386,7 +1386,7 @@
         "status": "mapped"
       },
       "item:biostatisticians.path.credential-decision.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:biostatisticians.path.employer-evidence.1": {
         "status": "pending_mapping"
@@ -23900,10 +23900,18 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "生物统计学家以生命科学中的研究与推断方法为核心：统计学家（15-2041.00）覆盖更广的统计方法领域但不以生命科学问题为默认对象；数据科学家更偏通用数据产品与预测建模；临床研究协调员负责试验现场执行与受试者管理；生物信息学家围绕组学数据的算法与流程；数学家以数学理论本身为产出。相近的岗位名称不代表责任可以互换。"
+              "相邻方向按真实对象及任务核：统计师父级可含生物统计、农业、经济等；数据科学家亦可研究分析而非只做预测产品；临床协调员计划/管理/协调试验，也可能评估分析数据；生物信息研究涉及组学、算法和统计；数学家包含基础及应用数学研究，非只做纯理论。转向差距为编辑分析，不自动互换责任。"
             ]
           },
           "id": "biostatisticians.profile.career-quick-answers-block.7",
+          "source_refs": [
+            "adj-stats-current",
+            "onet-data-scientists",
+            "onet-clinical-coordinators",
+            "onet-bioinformatics",
+            "adj-math-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24160,10 +24168,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "临床与遗传数据通常含可识别信息；核对伦理批准范围、数据使用协议、访问控制、去标识化程度与留存期限，并确认云端或第三方工具是否被允许处理这些数据。"
+              "临床/遗传数据可能含个人信息，不能一概认定可识别。个人信息处理先核识别性、目的、权限与第13条合法基础；医疗健康属敏感个人信息，基于同意时核单独同意等条件；匿名化信息不等于仍可识别的去标识化信息。人遗按2024条例材料/信息定义及具体活动核，主管为卫生健康部门，不把所有统计/动物/匿名化数据当同一类人遗许可。"
             ]
           },
           "id": "biostatisticians.profile.career-quick-answers-block.30",
+          "source_refs": [
+            "pipl-current",
+            "hgr-current"
+          ],
           "type": "prose"
         },
         {
@@ -24252,10 +24264,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：国家统计局《2025 年城镇单位就业人员年平均工资情况》（2026-05-15 发布）按行业门类与岗位大类公布平均工资，但没有单列「生物统计学家」这一职业；本页因此不提供中国大陆的该职业工资数值，只保留统计口径与缺口说明。"
+              "中国职业精确工资仍缺；授权薪资模块另列匹配NBS2025行业及人员大类年平均参照，不能替代职业工资。"
             ]
           },
           "id": "biostatisticians.profile.onet-structured-fields-block.3",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -24277,12 +24292,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET仍展示统计师父级2024行业分布：专业科技服务31%、政府25%、教育15%；其余29%为本页100−31−25−15的算术余项，不是细分职业单列。Lightcast2025美国唯一招聘启事的软件技能共29项，SAS66%、R61%、Python17%、SAP11%、SQL9%；不是采用率。"
+              "2025美国统计师SOC15-2041父级行业分布：专业科学与技术服务30%、政府26%、教育15%、其他29%（含医疗社会援助与金融保险）；其他为来源实际公布项，不是本页新算余项。不能当生物统计15-2041.01单列、中国雇主分布或行业工资。2025美国唯一招聘广告29项软件技能：SAS66%、R61%、Python17%、SAP11%、SQL9%；非在岗采用率。"
             ]
           },
           "id": "biostatisticians.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "onet-details",
+            "industry-current",
             "onet-hot-tech"
           ],
           "type": "prose"
@@ -24308,12 +24323,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "沟通方式｜92%受访者每天使用电子邮件；42%每天面对面讨论，46%每周一次以上但非每天。\n团队协作｜54%认为团队合作极其重要、29%非常重要；25%持续与人接触，25%多数时间，46%约一半时间。\n准确与细节｜58%认为精确极其重要、21%非常重要。\n坐姿与场所｜54%持续或几乎持续久坐、42%超过一半时间；71%每天在室内受控环境工作。\n决策自由度｜35%有很大自由、57%有一些自由；79%对任务优先级有一些自由。\n工作时间｜83%班次规律；67%每周40小时、33%超过40小时。\n时间压力｜50%每周一次以上但非每天赶严格截止日期；35%高度竞争、43%中度竞争。\n结果责任｜46%对他人工作结果负高责任；54%认为决定产生重要影响。\n物理暴露｜噪音项目33%从不、33%每月一次以上但非每周、21%每年一次以上但非每月；79%站立少于一半时间。以上是美国受访者分布，不是个体承诺。"
+              "沟通方式｜92%受访者每天使用电子邮件；42%每天面对面讨论，46%每周一次以上但非每天。\n团队协作｜54%认为团队合作极其重要、29%非常重要；25%持续与人接触，25%多数时间，46%约一半时间。\n准确与细节｜58%认为精确极其重要、21%非常重要。\n坐姿与场所｜54%持续或几乎持续久坐、42%超过一半时间；71%每天在室内受控环境工作。\n决策自由度｜35%有很大自由、57%有一些自由；79%对任务优先级有一些自由。\n工作时间｜83%日程规律（有固定安排），不等于白班或无轮班；67%每周40小时、33%超过40小时。\n时间压力｜50%每周一次以上但非每天赶严格截止日期；35%高度竞争、43%中度竞争。\n结果责任｜46%对他人工作结果负高责任；54%认为决定产生重要影响。\n物理暴露｜噪音项目33%从不、33%每月一次以上但非每周、21%每年一次以上但非每月；79%站立少于一半时间。以上是美国受访者分布，不是个体承诺。"
             ]
           },
           "id": "biostatisticians.profile.work-context-block.1",
           "source_refs": [
-            "onet-details"
+            "details-current"
           ],
           "type": "prose"
         }
@@ -25061,10 +25076,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把生成式工具用在文献检索、代码草稿、数据字典整理与文档结构等可回滚环节；研究设计、分析计划、缺失数据处理、结论口径与签署责任仍须由人负责。"
+              "编辑任务建议（具体机构规则另核）：把生成式工具用在文献检索、代码草稿、数据字典整理与文档结构等可回滚环节；研究设计、分析计划、缺失数据处理、结论口径与签署责任仍须由人负责。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.13",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -25083,10 +25102,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "引入工具前先明确可用环节、数据权限与伦理批准范围、访问控制、留存与销毁规则、出错升级路径和人工复核责任人，保证任何输出都回到可追溯的分析记录。"
+              "编辑任务建议（具体机构规则另核）：引入工具前先明确可用环节、数据权限与伦理批准范围、访问控制、留存与销毁规则、出错升级路径和人工复核责任人，保证任何输出都回到可追溯的分析记录。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.15",
+          "source_refs": [
+            "editor-current",
+            "onet-details",
+            "cn-gcp-2026"
+          ],
           "type": "prose"
         },
         {
@@ -25105,10 +25129,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把训练重点放在概率与推断、研究设计、可复现计算、数据伦理与记录质量上，同时训练对生成内容的来源核实、偏差识别与不确定性表达能力。"
+              "编辑任务建议（具体机构规则另核）：把训练重点放在概率与推断、研究设计、可复现计算、数据伦理与记录质量上，同时训练对生成内容的来源核实、偏差识别与不确定性表达能力。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.17",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -25116,10 +25144,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：AI 与统计软件可以改变文献检索、代码草稿、数据清洗辅助、文档结构整理与图表初稿等环节，但没有官方证据表明它会取代研究设计与样本量确定、缺失数据处理决策、效应解释与结果签署责任。任务暴露、工具采用率与就业数量是三个不同概念。"
+              "编辑按任务推演：工具可辅助检索、代码、数据字典与图表草稿；当前未核本职业整体替代、采用或节时因果数据，不能断言永不会替代。研究设计、缺失处理和签署责任按适用法规与机构授权核。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.18",
+          "source_refs": [
+            "editor-current",
+            "onet-details",
+            "ilo-genai"
+          ],
           "type": "prose"
         },
         {
@@ -25226,10 +25259,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明该职业的行业分布；不能推导行业工资或就业规模。"
+              "2025美国统计师SOC15-2041父级行业分布：专业科学与技术服务30%、政府26%、教育15%、其他29%（含医疗社会援助与金融保险）；其他为来源实际公布项，不是本页新算余项。不能当生物统计15-2041.01单列、中国雇主分布或行业工资。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.28",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -25237,10 +25273,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET-SOC 15-2041.01 职业摘要（就业与预测字段）"
+              "BLS Table1.2统计师父级2025—2035预测"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.29",
+          "source_refs": [
+            "bls-ep"
+          ],
           "type": "prose"
         },
         {
@@ -25248,12 +25287,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于BLS Table1.2统计师父级2025—2035就业预测；O*NET仍展示2024—2034历史期，不混合两期。"
+              "实际链接BLS Table1.2支持父级31300→34700、11.0%、年均1900；当前O*NET也已展示2025—2035，不再称仍为2024—2034。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.30",
           "source_refs": [
-            "bls-ep"
+            "bls-ep",
+            "trends-current"
           ],
           "type": "prose"
         },
@@ -25284,10 +25324,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表比较三组工作方向在自动化影响上的差别：哪些环节可被辅助，哪些判断与责任仍由人承担。"
+              "编辑任务建议（具体机构规则另核）：下表比较三组工作方向在自动化影响上的差别：哪些环节可被辅助，哪些判断与责任仍由人承担。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.33",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -25295,10 +25339,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "文献与既往方案检索、方法选项梳理与代码草稿可辅助生成。"
+              "编辑任务建议（具体机构规则另核）：文献与既往方案检索、方法选项梳理与代码草稿可辅助生成。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.34",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -25306,10 +25354,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "决定终点与比较、确认样本量假设、预设缺失数据与敏感性分析的处理方式，并对结论能支持到什么程度负责。"
+              "编辑任务建议（具体机构规则另核）：决定终点与比较、确认样本量假设、预设缺失数据与敏感性分析的处理方式，并对结论能支持到什么程度负责。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.35",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -25317,10 +25369,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "代码补全、语法转换、正则表达式与数据字典整理可自动初筛。"
+              "编辑任务建议（具体机构规则另核）：代码补全、语法转换、正则表达式与数据字典整理可自动初筛。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.36",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -25328,10 +25384,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核对原始数据与缺失机制、确认模型假设是否成立、保留可复现的版本与日志，并承担结果可追溯责任。"
+              "编辑任务建议（具体机构规则另核）：核对原始数据与缺失机制、确认模型假设是否成立、保留可复现的版本与日志，并承担结果可追溯责任。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.37",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -25339,10 +25399,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "摘要草稿、格式统一与图表说明初稿可由工具生成。"
+              "编辑任务建议（具体机构规则另核）：摘要草稿、格式统一与图表说明初稿可由工具生成。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.38",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -25350,10 +25414,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不得把模型输出当作统计结论或监管陈述，须逐条对照原始分析核对并由责任人署名。"
+              "编辑任务建议（具体机构规则另核）：不得把模型输出当作统计结论或监管陈述，须逐条对照原始分析核对并由责任人署名。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.39",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -25361,7 +25429,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、招聘技术信号、就业预测与任务暴露研究，不是 AI 替代率或岗位数量预测。"
+              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、招聘技术信号、就业预测与任务暴露研究，不是AI替代率或AI造成的岗位增减预测；其中BLS总体就业预测非AI归因，须保留数学家与统计师合计口径。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.40",
@@ -25662,10 +25730,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "需要。O*NET 任务包含用统计软件编写分析代码，雇主招聘技术信号以 SAS 66% 与 R 61% 为主，Python 17%、SQL 9%；真正的门槛是能用代码复现分析并接受复核，而不是会多少种语言。"
+              "O*NET任务含统计软件编程，2025招聘SAS66%、R61%、Python17%、SQL9%；编辑建议练习可重跑代码与复核，不将一个作品或语言清单当所有雇主统一门槛。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.66",
+          "source_refs": [
+            "onet-details",
+            "onet-hot-tech",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25673,10 +25746,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 技术清单 / 详细资料"
+              "实际链接O*NET详细页支持编程任务；SAS/R等招聘比例另见hot_tech，不是所有雇主统一门槛。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.67",
+          "source_refs": [
+            "onet-details",
+            "onet-hot-tech"
+          ],
           "type": "prose"
         },
         {
@@ -25684,10 +25761,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "文献与既往资料检索、代码草稿与语法转换、数据字典与正则整理、图表与文档初稿等；这些环节可回滚、可复核。"
+              "编辑任务建议（具体机构规则另核）：文献与既往资料检索、代码草稿与语法转换、数据字典与正则整理、图表与文档初稿等；这些环节可回滚、可复核。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.68",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -25695,10 +25776,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 详细资料 / 本页方法说明"
+              "实际链接招聘软件信号，任务易受AI影响的排序是编辑推演，没有本职业实测替代排序。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.69",
+          "source_refs": [
+            "onet-hot-tech",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25750,10 +25835,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有任何官方来源给出这样的年份。任务暴露、采用率与就业数量是不同概念，本页不做岗位消失年份预测。"
+              "当前查阅职业资料未给岗位消失年份，不据此宣称全球所有官方资料均未提供。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.74",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25761,10 +25849,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页方法说明"
+              "实际链接custom是字段选择入口，不提供消失年份。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.75",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25783,10 +25874,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 培训与教育信息 / 自定义职业档案"
+              "实际链接详细页支持教育、技能和任务；训练目录另见localtraining。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.77",
+          "source_refs": [
+            "details-current",
+            "training-current"
+          ],
           "type": "prose"
         },
         {
@@ -25794,10 +25889,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具进入分析流程时，人的控制点应按以下五步固定下来；任何一步缺失都不应扩大使用范围。"
+              "编辑任务建议（具体机构规则另核）：工具进入分析流程时，人的控制点应按以下五步固定下来；任何一步缺失都不应扩大使用范围。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.78",
+          "source_refs": [
+            "editor-current",
+            "onet-details",
+            "cn-gcp-2026"
+          ],
           "type": "prose"
         },
         {
@@ -25805,10 +25905,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先确认本次研究的统计问题、分析人群、数据访问授权与机构规则。"
+              "编辑任务建议（具体机构规则另核）：先确认本次研究的统计问题、分析人群、数据访问授权与机构规则。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.79",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -25816,10 +25920,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只把可回滚、可复核的辅助环节交给工具，例如文献检索、代码草稿与文档结构整理。"
+              "编辑任务建议（具体机构规则另核）：只把可回滚、可复核的辅助环节交给工具，例如文献检索、代码草稿与文档结构整理。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.80",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -25827,10 +25935,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "逐条回看工具输出与原始数据和分析计划，判断是否偏离预设口径或遗漏缺失机制。"
+              "编辑任务建议（具体机构规则另核）：逐条回看工具输出与原始数据和分析计划，判断是否偏离预设口径或遗漏缺失机制。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.81",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -25838,10 +25950,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "保留数据版本、代码、分析日志与人工修改理由，使结论可追溯。"
+              "编辑任务建议（具体机构规则另核）：保留数据版本、代码、分析日志与人工修改理由，使结论可追溯。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.82",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -25849,10 +25965,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "分析计划、结果解释与对外提交材料由具备训练并获授权的人签署和承担。"
+              "编辑任务建议（具体机构规则另核）：分析计划、结果解释与对外提交材料由具备训练并获授权的人签署和承担。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.83",
+          "source_refs": [
+            "editor-current",
+            "onet-details",
+            "cn-gcp-2026"
+          ],
           "type": "prose"
         },
         {
@@ -25871,10 +25992,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把工具输出标记为草稿，逐条对照原始数据与分析计划后再采纳。"
+              "编辑任务建议（具体机构规则另核）：把工具输出标记为草稿，逐条对照原始数据与分析计划后再采纳。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.85",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -25893,10 +26018,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按伦理批准与数据使用协议处理；上传前确认处理者、存储位置、保留期限与删除可行性。"
+              "编辑任务建议（具体机构规则另核）：按伦理批准与数据使用协议处理；上传前确认处理者、存储位置、保留期限与删除可行性。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.87",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -25915,10 +26044,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录工具名称与版本、输入数据范围、人工修改理由与决定人。"
+              "编辑任务建议（具体机构规则另核）：记录工具名称与版本、输入数据范围、人工修改理由与决定人。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.89",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -25937,10 +26070,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在分析计划中固定口径与人群定义；变更时记录理由与影响范围并重新核对既有结论。"
+              "编辑任务建议（具体机构规则另核）：在分析计划中固定口径与人群定义；变更时记录理由与影响范围并重新核对既有结论。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.91",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -25959,10 +26096,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在分析开始前确认复核人与升级链；超出本人训练与授权范围时停止并上报。"
+              "编辑任务建议（具体机构规则另核）：在分析开始前确认复核人与升级链；超出本人训练与授权范围时停止并上报。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.93",
+          "source_refs": [
+            "editor-current",
+            "onet-details",
+            "cn-gcp-2026"
+          ],
           "type": "prose"
         },
         {
@@ -26003,10 +26145,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "文献与既往方案检索、样本量公式与代码草稿可辅助生成。"
+              "编辑任务建议（具体机构规则另核）：文献与既往方案检索、样本量公式与代码草稿可辅助生成。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.97",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -26047,10 +26193,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "建模代码补全、正则表达式与数据字典整理等可辅助。"
+              "编辑任务建议（具体机构规则另核）：建模代码补全、正则表达式与数据字典整理等可辅助。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.101",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -26091,10 +26241,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "异常值筛查与一致性检查可自动化初筛。"
+              "编辑任务建议（具体机构规则另核）：异常值筛查与一致性检查可自动化初筛。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.105",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -26135,10 +26289,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "图表初稿、格式统一与摘要草稿可辅助生成。"
+              "编辑任务建议（具体机构规则另核）：图表初稿、格式统一与摘要草稿可辅助生成。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.109",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -26179,10 +26337,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "材料结构整理与模板复用可辅助。"
+              "编辑任务建议（具体机构规则另核）：材料结构整理与模板复用可辅助。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.113",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -26223,10 +26385,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "方法选项梳理与资料检索可辅助。"
+              "编辑任务建议（具体机构规则另核）：方法选项梳理与资料检索可辅助。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.117",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -26267,10 +26433,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "课程材料与讲稿初稿可辅助生成。"
+              "编辑任务建议（具体机构规则另核）：课程材料与讲稿初稿可辅助生成。"
             ]
           },
           "id": "biostatisticians.ai-impact.ai-impact-table.121",
+          "source_refs": [
+            "editor-current",
+            "onet-details"
+          ],
           "type": "prose"
         },
         {
@@ -26398,10 +26568,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "截至 2026 年 9 月，有界检索未找到单列「生物统计学家」的全国职业工资统计；本页保留缺口，不用行业平均工资或其他职业数据替代。"
+              "精确职业数据仍缺；以下另列匹配宽口径参照，非职业代填。"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.8",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26409,10 +26582,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》按行业门类公布平均工资，但没有单列「生物统计学家」这一职业。"
+              "科学研究和技术服务业非私营182,064元/年（2025）。"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.9",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26420,10 +26596,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业门类平均工资混合研发、软件、医疗机构与公共卫生等多类岗位，不能替代本职业职业工资；本模块因此不发布该数值。"
+              "NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业全部173,855、专业技术172,877、管理324,177元/年。按实际雇主行业和本人职责选择宽口径参照，不作为生物统计职业中位、起薪或月薪。"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.10",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26431,10 +26610,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "同一发布另有城镇私营单位口径，同样按行业门类汇总，也不单列本职业。"
+              "同业城镇私营83,560元/年（2025）。"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.11",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26442,10 +26624,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "私营单位与非私营单位覆盖的机构类型不同，且都不提供本职业职业级数值，两者均不可作为本职业工资。"
+              "两种单位覆盖不同，都是行业税前年平均，非本职业工资。"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.12",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26453,10 +26638,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "规模以上企业按《中华人民共和国职业分类大典（2022 年版）》五类岗位汇总，不区分具体职业。"
+              "规模以上科技服务企业专业技术172,877元/年（2025）。"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.13",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26464,10 +26652,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "岗位大类平均数把生物统计与其他专业技术岗位合并，不能表示本职业工资水平。"
+              "同业全部173,855、管理324,177；仅适用匹配规模企业，不含事业医院/高校，不设所有生物统计岗位管理薪酬。"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.14",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26528,10 +26719,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "元/年（税前工资总额口径；本模块不发布职业级数值）。"
+              "元/年，税前年平均；不是个人到手或城市月薪。"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.19",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26539,10 +26733,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "工资总额为税前口径，包含单位代扣代缴的个人所得税、社会保险和住房公积金个人缴纳部分，不等于到手收入。"
+              "工资总额为税前口径，包含单位代扣代缴的个人所得税、社会保险和住房公积金个人缴纳部分，不等于到手收入。 不含股权激励兑现、入股分红和资本收益。"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.20",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26550,10 +26747,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论：中国大陆无精确职业数据；本页只展示统计口径、范围与缺口。"
+              "中国本职业精确收入仍缺，匹配行业年平均参照已分开列示。"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.21",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26753,10 +26953,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "医药研发外包、生命科学研发与试验检测岗位可能归入该门类；该门类平均工资按行业汇总，不单列本职业，本模块不据此推算本职业工资。"
+              "NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业全部173,855、专业技术172,877、管理324,177元/年。按实际雇主行业和本人职责选择宽口径参照，不作为生物统计职业中位、起薪或月薪。"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.38",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26775,10 +26978,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "医院临床研究、疾病预防控制与公共卫生机构的统计岗位可能归入该门类；同样只有行业平均数，不能表示本职业工资。"
+              "医院/公共卫生按实际行业核：NBS2025卫生和社会工作城镇非私营146,266、私营75,631元/年，行业全体人员税前年平均非生物统计职业值。"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.40",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26797,10 +27003,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "医疗健康数据、医学信息与软件类机构中的数据科学岗位可能归入该门类；同样只有行业平均数，不能表示本职业工资。"
+              "软件/健康数据机构按实际行业核：NBS2025信息传输软件和IT服务非私营248,752、私营128,166元/年；行业人员年平均非本职业值。"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.42",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26830,10 +27039,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆目前没有单列生物统计学家的全国职业工资统计；本页只展示可核对的行业与岗位大类口径、统计范围与缺口。"
+              "中国精确职业工资仍缺；本模块提供匹配行业/人员大类参照及边界。"
             ]
           },
           "id": "biostatisticians.china-salary.career-snapshot-primary-locale.45",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -27380,10 +27592,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与雇主类型影响报酬：O*NET 2024 年行业分布为专业、科学与技术服务 31%、政府 25%、教育服务 15%，不同雇主的薪酬结构与数据条件不同。"
+              "2025美国统计师SOC15-2041父级行业分布：专业科学与技术服务30%、政府26%、教育15%、其他29%（含医疗社会援助与金融保险）；其他为来源实际公布项，不是本页新算余项。不能当生物统计15-2041.01单列、中国雇主分布或行业工资。编辑建议比较实际合同报酬，行业分布本身不证明工资因果。"
             ]
           },
           "id": "biostatisticians.us-salary.career-snapshot-secondary-locale.29",
+          "source_refs": [
+            "industry-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27640,10 +27856,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "实际收入还受教育与训练、行业与雇主类型、职责范围与责任层级、所在地区影响。"
+              "编辑建议向雇主比较实际教育/职责/行业/地区条件与报酬；本轮未核各因素对相同岗位工资的因果效应。"
             ]
           },
           "id": "biostatisticians.us-salary.career-snapshot-secondary-locale.49",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27908,7 +28127,7 @@
                 "entity": "《中华人民共和国个人信息保护法》",
                 "id": "link-14",
                 "relation": "career.authority",
-                "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               },
               {
                 "entity": "O*NET-SOC 15-2041.01 详细资料（任务与工作活动）",
@@ -28054,10 +28273,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业适配或统计胜任的评估工具，也没有官方资料支持「某种类型最适合生物统计学家」的说法。可用于自我反思与沟通偏好理解，但不能用于培训投入或录用筛选。"
+              "本轮资料未验证MBTI对本职业胜任的预测能力；若用于反思沟通偏好，回到真实训练与受复核实践，不设类型门槛。"
             ]
           },
           "id": "biostatisticians.fit.personality-fit-block.10",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28147,10 +28370,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业高度依赖数学与统计推断能力：O*NET 基本技能中数学重要度为 91，为基本技能中最高，工作活动也以分析数据或信息（92）为主。数学成绩不是准入条件，但回避定量推理会直接影响能否胜任分析方法与代码工作。"
+              "O*NET基本技能数学重要性91最高、活动分析数据92；是群体职业描述。编辑建议核概率推断与代码训练，不能据数学成绩推个人胜任或统一准入。"
             ]
           },
           "id": "biostatisticians.fit.personality-fit-block.18",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28192,10 +28419,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪能力有帮助：需要向临床团队解释不确定性、承受方案变更与评审压力、在数据不足时坚持不下结论。但情绪能力不能用单一分数定义，也不能替代方法训练与记录纪律。"
+              "编辑建议练习解释不确定性、回应评审和承认资料不足；当前未核情绪智力分数预测本职业表现的效度。"
             ]
           },
           "id": "biostatisticians.fit.personality-fit-block.22",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28218,11 +28449,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能在结果不利或评审质疑时保持沟通，比分数高低更重要。",
-              "愿意承认方法局限并求助，是专业能力的一部分。"
+              "编辑观察：能否回应质疑、说明方法限制并在需要时求助。",
+              "本轮未核行为与情绪测验分数的职业专属预测效度比较。"
             ]
           },
           "id": "biostatisticians.fit.personality-fit-block.24",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "list"
         },
         {
@@ -28241,10 +28476,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。真正有解释力的证据是受复核的分析实践表现。"
+              "编辑建议以受复核分析记录提出适配问题；没有核到各种工具与实践的预测效度排序，不由一次测试判定胜任。"
             ]
           },
           "id": "biostatisticians.fit.personality-fit-block.26",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28252,10 +28491,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：更有解释力的适配信号是能把研究问题转成可检验的分析计划、愿意逐条核对数据与假设、接受结论被复核与修改，并在数据不足时明确说出结论的边界；对数学或编程的兴趣本身不足以证明胜任。"
+              "编辑自查：能否明确终点与假设、核数据、接受复核及表达限制；这是探索建议，非本职业验证过的优劣排序。"
             ]
           },
           "id": "biostatisticians.fit.personality-fit-block.27",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28351,10 +28594,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "学制与训练要求更高；须补足学位与研究经历路径。"
+              "编辑建议按目标统计师实际应用领域核训练；父级含生物统计，不证明必比本职业学制更长。"
             ]
           },
           "id": "biostatisticians.fit.personality-fit-block.36",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28482,10 +28729,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合与否不取决于内外向。工作情境显示 92% 每天使用电子邮件、42% 每天有面对面讨论、46% 每周一次以上，团队合作被 54% 评为极其重要；能否清楚解释方法与限制比外向程度更关键。"
+              "工作情境邮件92%每天、面对面42%每天46%每周非每天，团队54%极重要；描述沟通任务，不能推内外向或沟通能力的相对预测效度。"
             ]
           },
           "id": "biostatisticians.fit.personality-fit-block.47",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28493,10 +28744,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能。外向有助于向团队解释统计问题，但分析工作要求把注意力放在数据、假设与证据上；能否接受复核并修正判断，比表达欲更关键。"
+              "本轮未核外向对本职业绩效的因果帮助；编辑建议练习解释统计问题并记录复核反馈，不设内外向门槛。"
             ]
           },
           "id": "biostatisticians.fit.personality-fit-block.48",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28551,10 +28806,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪能力确实有帮助：需要向临床团队解释不确定性、承受评审压力、在数据不足时坚持不下结论。但情绪能力不能用单一分数定义，也不能替代方法训练与记录纪律。"
+              "编辑建议练习回应评审和解释限制；未核本职业情绪智力绩效效度，不将确实有帮助当已证事实。"
             ]
           },
           "id": "biostatisticians.fit.personality-fit-block.53",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28623,10 +28882,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明美国该职业通常以研究生层级统计与生物统计训练为基础。"
+              "实际链接为3,948相关训练目录，不提供新入职58/29/13学历比例；该比例另见summary/details。"
             ]
           },
           "id": "biostatisticians.fit.personality-fit-block.59",
+          "source_refs": [
+            "training-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28634,10 +28897,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明受试者信息与健康数据的处理边界与授权要求。"
+              "个人信息处理先核识别性、目的、权限与第13条合法基础；医疗健康属敏感个人信息，基于同意时核单独同意等条件；匿名化信息不等于仍可识别的去标识化信息。人遗按2024条例材料/信息定义及具体活动核，主管为卫生健康部门，不把所有统计/动物/匿名化数据当同一类人遗许可。"
             ]
           },
           "id": "biostatisticians.fit.personality-fit-block.60",
+          "source_refs": [
+            "pipl-current",
+            "hgr-current"
+          ],
           "type": "prose"
         },
         {
@@ -28711,10 +28978,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "适配信号：更有解释力的信号是能把研究问题转成可检验的分析计划、愿意逐条核对数据与假设并接受复核；对数学或编程的兴趣本身不足以证明胜任。"
+              "编辑自查分析计划、数据核查、代码重跑与复核反馈；本轮未核比兴趣或编程兴趣更有解释力的职业专属比较。"
             ]
           },
           "id": "biostatisticians.fit.riasec-fit-block.9",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28860,16 +29131,16 @@
                 "url": "#career-visual-group-ai-impact"
               },
               {
-                "entity": "O*NET-SOC 15-2041.01 职业摘要",
+                "entity": "O*NET完整任务与情境",
                 "id": "link-2",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/15-2041.01"
+                "url": "https://www.onetonline.org/link/details/15-2041.01"
               },
               {
-                "entity": "O*NET-SOC 15-2041.01 详细资料（任务与工作活动）",
+                "entity": "O*NET职业摘要",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/15-2041.01"
+                "url": "https://www.onetonline.org/link/summary/15-2041.01"
               },
               {
                 "entity": "BLS《Mathematicians and Statisticians》职业展望手册",
@@ -28881,13 +29152,19 @@
                 "entity": "《中华人民共和国人类遗传资源管理条例》",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=99902"
+                "url": "https://www.wnd.gov.cn/doc/2024/05/10/4348442.shtml"
               },
               {
                 "entity": "《中华人民共和国个人信息保护法》",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "entity": "2026药物临床试验质量管理规范",
+                "id": "gcp-current",
+                "relation": "career.source",
+                "url": "https://sft.xinjiang.gov.cn/xjsft/flfggz/202608/751ed8e1ce404794a7d1c03c1629b777.shtml"
               }
             ]
           },
@@ -28954,10 +29231,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在研究开始前固定终点、人群与样本量假设，记录任何变更的理由与影响。"
+              "编辑建议，结合适用试验方案、机构职责和GCP核：在研究开始前固定终点、人群与样本量假设，记录任何变更的理由与影响。"
             ]
           },
           "id": "biostatisticians.risk.career-risk-cards.13",
+          "source_refs": [
+            "editor-current",
+            "cn-gcp-2026"
+          ],
           "type": "prose"
         },
         {
@@ -28998,10 +29279,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "预先设定主要分析与敏感性分析；事后修改须记录理由、时间与影响并重新复核。"
+              "编辑建议，结合适用试验方案、机构职责和GCP核：预先设定主要分析与敏感性分析；事后修改须记录理由、时间与影响并重新复核。"
             ]
           },
           "id": "biostatisticians.risk.career-risk-cards.17",
+          "source_refs": [
+            "editor-current",
+            "cn-gcp-2026"
+          ],
           "type": "prose"
         },
         {
@@ -29042,10 +29327,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "建立数据核查流程与缺失机制说明，保留数据版本与可重跑的分析脚本。"
+              "编辑建议，结合适用试验方案、机构职责和GCP核：建立数据核查流程与缺失机制说明，保留数据版本与可重跑的分析脚本。"
             ]
           },
           "id": "biostatisticians.risk.career-risk-cards.21",
+          "source_refs": [
+            "editor-current",
+            "cn-gcp-2026"
+          ],
           "type": "prose"
         },
         {
@@ -29086,10 +29375,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按伦理批准与数据使用协议处理，最小化收集、去标识化、限制访问并留存记录。"
+              "个人信息处理先核识别性、目的、权限与第13条合法基础；医疗健康属敏感个人信息，基于同意时核单独同意等条件；匿名化信息不等于仍可识别的去标识化信息。人遗按2024条例材料/信息定义及具体活动核，主管为卫生健康部门，不把所有统计/动物/匿名化数据当同一类人遗许可。按实际数据协议/伦理批准核权限和记录，不一律先靠同意获得合法性。"
             ]
           },
           "id": "biostatisticians.risk.career-risk-cards.25",
+          "source_refs": [
+            "pipl-current",
+            "hgr-current",
+            "cn-gcp-2026"
+          ],
           "type": "prose"
         },
         {
@@ -29130,10 +29424,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在合同与方案中明确交付物、复核人与升级链，保留版本与签署记录。"
+              "编辑建议，结合适用试验方案、机构职责和GCP核：在合同与方案中明确交付物、复核人与升级链，保留版本与签署记录。"
             ]
           },
           "id": "biostatisticians.risk.career-risk-cards.29",
+          "source_refs": [
+            "editor-current",
+            "cn-gcp-2026"
+          ],
           "type": "prose"
         },
         {
@@ -29174,10 +29472,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "明确区分统计结论与医学判断；对外表述由获授权人签署并保留依据。"
+              "编辑建议，结合适用试验方案、机构职责和GCP核：明确区分统计结论与医学判断；对外表述由获授权人签署并保留依据。"
             ]
           },
           "id": "biostatisticians.risk.career-risk-cards.33",
+          "source_refs": [
+            "editor-current",
+            "cn-gcp-2026"
+          ],
           "type": "prose"
         },
         {
@@ -29196,10 +29498,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明美国职业身份与官方任务口径，不用于风险评估。"
+              "实际链接详细页支持统计任务及群体情境，不提供独立健康或因果风险率。"
             ]
           },
           "id": "biostatisticians.risk.career-risk-cards.35",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -29207,10 +29512,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明官方职业摘要与工作情境口径，不用于风险评估。"
+              "实际链接摘要支持职业职责，不是本职业疾病/心理风险研究。"
             ]
           },
           "id": "biostatisticians.risk.career-risk-cards.36",
+          "source_refs": [
+            "summary-current"
+          ],
           "type": "prose"
         },
         {
@@ -29229,10 +29537,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明人类遗传资源的采集、保藏、利用与对外提供要求。"
+              "旧链接条例版本须另核；本轮人遗按2024修订版及活动适用条件，非全体数据相同许可。"
             ]
           },
           "id": "biostatisticians.risk.career-risk-cards.38",
+          "source_refs": [
+            "hgr-current"
+          ],
           "type": "prose"
         },
         {
@@ -29416,7 +29727,7 @@
                 "entity": "《中华人民共和国人类遗传资源管理条例》",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=99902"
+                "url": "https://www.wnd.gov.cn/doc/2024/05/10/4348442.shtml"
               }
             ]
           },
@@ -29591,10 +29902,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 Job Zone、学历构成与训练入口。"
+              "3,948项相关训练目录依据IPEDS2025—26学校目录、2024—25授予学位及CIP映射，涵盖统计等相关项目；不等于专属生物统计课程、实时招生或Job Zone学历调查。具体项目资格、学制、费用与在招学徒未核。"
             ]
           },
           "id": "biostatisticians.path.career-path-block.25",
+          "source_refs": [
+            "training-current"
+          ],
           "type": "prose"
         },
         {
@@ -29635,10 +29949,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "不独立签署分析计划，须逐项复核。"
+              "编辑路径：按实际雇主分工和资质核，不独立签署分析计划，须逐项复核。"
             ]
           },
           "id": "biostatisticians.path.career-path-block.29",
+          "source_refs": [
+            "editor-current",
+            "cn-gcp-2026"
+          ],
           "type": "prose"
         },
         {
@@ -29855,10 +30173,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "不承担独立结论责任。"
+              "编辑路径：按实际雇主分工和资质核，不承担独立结论责任。"
             ]
           },
           "id": "biostatisticians.path.career-path-block.49",
+          "source_refs": [
+            "editor-current",
+            "cn-gcp-2026"
+          ],
           "type": "prose"
         },
         {
@@ -29910,10 +30232,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在方案授权范围内独立分析，公开结论须复核。"
+              "编辑路径：按实际雇主分工和资质核，在方案授权范围内独立分析，公开结论须复核。"
             ]
           },
           "id": "biostatisticians.path.career-path-block.54",
+          "source_refs": [
+            "editor-current",
+            "cn-gcp-2026"
+          ],
           "type": "prose"
         },
         {
@@ -30009,10 +30335,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "具备方法评审与培养资质。"
+              "编辑路径：按实际雇主分工和资质核，具备方法评审与培养资质。"
             ]
           },
           "id": "biostatisticians.path.career-path-block.63",
+          "source_refs": [
+            "editor-current",
+            "cn-gcp-2026"
+          ],
           "type": "prose"
         },
         {
@@ -30617,16 +30947,16 @@
                 "通常是专业岗位的常见要求。",
                 "不是所有雇主的硬性门槛，但为专业路径基础。",
                 "编辑建议核概率、推断、回归、设计及计算课程；实际学位课程以院校项目为准。",
-                "学制较长，含学费与实习时间。",
+                "具体学制/学费/训练机会按院校和雇主核，未核个人总成本",
                 "学位本身不等于机构授权或数据访问权限。"
               ],
               [
                 "博士学位（生物统计或统计方向）",
-                "希望从事方法学研究或独立主持统计分析的人",
+                "希望从事相应方法研究的人，实际雇主条件另核",
                 "用于承担方法研究与更高层级的设计责任。",
-                "不是入门门槛。",
+                "是否要求博士按项目和机构核，不统一认定全部入门岗",
                 "须完成博士训练与研究经历。",
-                "学制与科研时间投入最大。",
+                "具体学制、学费及科研时间以项目为准，未核统一最大投入",
                 "学位不替代机构授权、伦理批准或申报资格。"
               ],
               [
@@ -30664,10 +30994,27 @@
                 "须依据《中华人民共和国人类遗传资源管理条例》与《中华人民共和国个人信息保护法》核对适用条件。",
                 "审批与合规材料准备时间。",
                 "合规材料不是能力评价，也不替代统计方法与责任判断。"
+              ],
+              [
+                "CCDM（美国关联第三方认证）",
+                "已有临床数据管理经验者",
+                "临床数据管理专项知识证明",
+                "非生物统计全体普遍入职门槛",
+                "美国关联目录列1项CCDM，面向临床数据管理专项，非全体生物统计入职门槛。SCDM当前条件：学士及以上加2年全职CDM，副学士加3年，或4年全职CDM；兼职按等效全职。考试3.5小时，证书3年有效。按国家收入组和会员/非会员，初试高收入250/325、上中200/250、低及下中125/200美元；重考225/300、175/225、100/175；续证95/150、80/95、60/90。个人组别/总成本须核，续证详细学时手册403且web超时未读，不填推测。",
+                "美国关联目录列1项CCDM，面向临床数据管理专项，非全体生物统计入职门槛。SCDM当前条件：学士及以上加2年全职CDM，副学士加3年，或4年全职CDM；兼职按等效全职。考试3.5小时，证书3年有效。按国家收入组和会员/非会员，初试高收入250/325、上中200/250、低及下中125/200美元；重考225/300、175/225、100/175；续证95/150、80/95、60/90。个人组别/总成本须核，续证详细学时手册403且web超时未读，不填推测。",
+                "不产生统计结论签署、中国数据权限或执业许可。"
               ]
             ]
           },
           "id": "biostatisticians.path.credential-decision.1",
+          "source_refs": [
+            "editor-current",
+            "ccdm-current",
+            "ccdm-directory",
+            "cn-gcp-2026",
+            "pipl-current",
+            "hgr-current"
+          ],
           "title": "资格选择",
           "type": "table"
         },
@@ -30676,13 +31023,22 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界：学历、技能证明、机构授权、数据权限与签署责任是五种不同状态，任何一项都不能由另一项自动推出。",
+              "资格边界：学历、技能证明、机构授权、数据权限与签署责任是五种不同状态，任何一项都不能由另一项自动推出。 3,948项相关训练目录依据IPEDS2025—26学校目录、2024—25授予学位及CIP映射，涵盖统计等相关项目；不等于专属生物统计课程、实时招生或Job Zone学历调查。具体项目资格、学制、费用与在招学徒未核。 美国关联目录列1项CCDM，面向临床数据管理专项，非全体生物统计入职门槛。SCDM当前条件：学士及以上加2年全职CDM，副学士加3年，或4年全职CDM；兼职按等效全职。考试3.5小时，证书3年有效。按国家收入组和会员/非会员，初试高收入250/325、上中200/250、低及下中125/200美元；重考225/300、175/225、100/175；续证95/150、80/95、60/90。个人组别/总成本须核，续证详细学时手册403且web超时未读，不填推测。",
               "美国侧：O*NET 把该职业列为 Job Zone Five，受访者认为需硕士学历者占 58%、博士 29%、学士 13%；BLS 把数学家与统计师序列的典型入门学历列为硕士。",
               "中国大陆须按实际岗位核分类与授权；药物临床试验适用2026修订GCP，人类遗传资源按2024修订条例，个人信息按合法处理基础与敏感信息保护要求核对。",
               "申请与入职前应逐项核实教育认可、课程与训练内容、数据权限、复核与签署规则，并保留书面确认。"
             ]
           },
           "id": "biostatisticians.path.credential-boundary.1",
+          "source_refs": [
+            "details-current",
+            "training-current",
+            "ccdm-current",
+            "ccdm-directory",
+            "cn-gcp-2026",
+            "pipl-current",
+            "hgr-current"
+          ],
           "title": "资格与练习边界",
           "type": "notice"
         },
@@ -30833,10 +31189,10 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET-SOC 15-2041.01 职业摘要",
+                "entity": "BLS数学家与统计師：父级及合计数据",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/15-2041.01"
+                "url": "https://www.bls.gov/ooh/math/mathematicians-and-statisticians.htm"
               },
               {
                 "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
@@ -31108,10 +31464,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局按行业门类与岗位大类公布平均工资，但没有单列「生物统计学家」这一职业。"
+              "NBS2025科学研究和技术服务业：城镇非私营182,064、私营83,560元/年；规模以上该行业企业全部173,855、专业技术172,877、管理324,177元/年。按实际雇主行业和本人职责选择宽口径参照，不作为生物统计职业中位、起薪或月薪。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.25",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -31130,10 +31489,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业门类平均工资（对照口径，本页不发布数值）"
+              "匹配行业税前年平均工资参照（非本职业工资）"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.27",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -31152,10 +31514,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该职业的全国工资与就业分布"
+              "科学技术服务非私营182,064、私营83,560元/年；本职业精确工资与就业仍缺。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.29",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -31177,10 +31542,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明数学家与统计师合计口径的 2025—2035 年预测，须与工资数据分开解读。"
+              "实际链接BLS OOH支持数学家统计师合计及统计师父级单列，须区分，非生物统计细分预测。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.31",
+          "source_refs": [
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -31188,10 +31556,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆的统计口径与缺口，不作为职业工资。"
+              "实际链接NBS2025工资表，支持匹配行业/人员大类参照，不提供本职业就业。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.32",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -31199,10 +31570,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明官方任务与工作活动口径。"
+              "实际链接BLS OOH，支持数学家统计师合计及统计师单列工资/就业；非O*NET任务清单。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.33",
+          "source_refs": [
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -31210,10 +31584,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足工程化数据处理与预测建模训练；预测性能不替代统计推断。"
+              "编辑转向分析：需要补足工程化数据处理与预测建模训练；预测性能不替代统计推断。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.34",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31221,10 +31598,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是数据处理、编程与评估设计能力。"
+              "编辑转向分析：可迁移的是数据处理、编程与评估设计能力。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.35",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31232,10 +31612,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：目标从效应估计转向预测与产品化。"
+              "编辑转向分析：距离中等：目标从效应估计转向预测与产品化。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.36",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31243,10 +31626,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足更广的统计方法领域与应用场景。"
+              "编辑转向分析：需要补足更广的统计方法领域与应用场景。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.37",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31254,10 +31640,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是推断方法与建模能力。"
+              "编辑转向分析：可迁移的是推断方法与建模能力。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.38",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31265,10 +31654,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：方法基础相近，差异在应用领域。"
+              "编辑转向分析：距离较近：方法基础相近，差异在应用领域。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.39",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31276,10 +31668,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足现场执行、知情同意与监查配合经验。"
+              "编辑转向分析：需要补足现场执行、知情同意与监查配合经验。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.40",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31287,10 +31682,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是对临床试验流程与数据的理解。"
+              "编辑转向分析：可迁移的是对临床试验流程与数据的理解。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.41",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31298,10 +31696,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：责任从设计与推断转向现场执行。"
+              "编辑转向分析：距离中等：责任从设计与推断转向现场执行。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.42",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31309,10 +31710,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足算法、组学数据流程与数据工程训练。"
+              "编辑转向分析：需要补足算法、组学数据流程与数据工程训练。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.43",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31320,10 +31724,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是编程与数据分析能力。"
+              "编辑转向分析：可迁移的是编程与数据分析能力。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.44",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31331,10 +31738,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：问题类型从统计推断转向算法与数据流程。"
+              "编辑转向分析：距离中等：问题类型从统计推断转向算法与数据流程。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.45",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31342,10 +31752,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足高等数学与理论方法训练。"
+              "编辑转向分析：需要补足高等数学与理论方法训练。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.46",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31353,10 +31766,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是数学建模与抽象能力。"
+              "编辑转向分析：可迁移的是数学建模与抽象能力。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.47",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31364,10 +31780,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较远：产出从应用结论转向理论贡献。"
+              "编辑转向分析：编辑距离分析：数学家含基础及应用数学研究，不仅纯理论；具体应用与专业差距按目标岗位核。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.48",
+          "source_refs": [
+            "editor-current",
+            "adj-math-current"
+          ],
           "type": "prose"
         },
         {
@@ -31375,10 +31795,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足数据标准、数据库与数据治理训练。"
+              "编辑转向分析：需要补足数据标准、数据库与数据治理训练。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.49",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31386,10 +31809,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是数据质量核查与记录能力。"
+              "编辑转向分析：可迁移的是数据质量核查与记录能力。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.50",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31397,10 +31823,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同为临床数据链条上的岗位。"
+              "编辑转向分析：距离较近：同为临床数据链条上的岗位。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.51",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31408,10 +31837,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足流行病学研究设计与现场调查经验。"
+              "编辑转向分析：需要补足流行病学研究设计与现场调查经验。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.52",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31419,10 +31851,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是统计分析与研究设计基础。"
+              "编辑转向分析：可迁移的是统计分析与研究设计基础。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.53",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31430,10 +31865,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：从方法推断扩展到人群研究设计。"
+              "编辑转向分析：距离中等：从方法推断扩展到人群研究设计。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.54",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31441,10 +31879,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足信息系统、数据标准与流程设计训练。"
+              "编辑转向分析：需要补足信息系统、数据标准与流程设计训练。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.55",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31452,10 +31893,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是数据口径与质量意识。"
+              "编辑转向分析：可迁移的是数据口径与质量意识。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.56",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31463,10 +31907,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：从分析转向系统与流程设计。"
+              "编辑转向分析：编辑距离分析：15-1211.01结合护理和信息学设计/开发/修改健康信息系统，须另核护理知识及实际岗位条件，不从统计经验自动推护理资格。"
             ]
           },
           "id": "biostatisticians.market-signals.market-signal-card.57",
+          "source_refs": [
+            "editor-current",
+            "adj-health-current"
+          ],
           "type": "prose"
         }
       ]
@@ -31581,7 +32029,7 @@
             "entries": [
               "边界一：本页把美国职业口径（O*NET-SOC 15-2041.01）与中国大陆口径分开标注，不跨法域直接套用；工资、就业与预测字段的口径为 Statisticians（SOC 15-2041）。",
               "边界二：编辑练习与作品建议均为虚构材料，读者不应据此实施临床、数据处理或监管操作，也不得把练习结果包装成研究证据。",
-              "边界三：本页由 O*NET、BLS、国家统计局、《中华人民共和国人类遗传资源管理条例》《中华人民共和国个人信息保护法》与 ILO 任务暴露研究等公开资料及编辑设计组成；每项资料的适用范围与缺口单独标记。"
+              "边界三：美国任务、招聘软件与父级统计，中国NBS宽口径、2026GCP/2024人遗/PIPL与ILO公开摘要分别限定；CCDM是临床数据管理专项第三方认证，非职业执照。"
             ]
           },
           "id": "biostatisticians.sources.boundary.1",
@@ -31606,10 +32054,21 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "费马测试职业内容编辑组：依据 O*NET、BLS、国家统计局、《中华人民共和国人类遗传资源管理条例》与《中华人民共和国个人信息保护法》的公开资料整理，逐项标注口径与数据期。"
+              "本轮按O*NET当前原文、BLS统计师父级及合计表、NBS2025附注、2026GCP/2024人遗/PIPL及SCDM条件核对；编辑建议不作法规或因果证据。"
             ]
           },
           "id": "biostatisticians.sources.source-card.1",
+          "source_refs": [
+            "details-current",
+            "industry-current",
+            "trends-current",
+            "nbs-current",
+            "ccdm-current",
+            "cn-gcp-2026",
+            "pipl-current",
+            "hgr-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31628,18 +32087,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：O*NET职业资料2026更新，历史行业分布2024；技术信号为Lightcast美国全国2025招聘启事。工资为2025 OEWS统计师父级分位；就业为BLS Table1.2基年2025及2025—2035预测，不能与O*NET2024—2034展示混合。中国统计2025年，GCP2026-09-01施行，遗传资源条例2024修订；本轮查阅2026-10-03。"
+              "查阅2026-10-09：O*NET2026任务/教育，2025父级行业30/26/15/29、2025工资及2025—2035预测；2025唯一招聘广告；训练IPEDS2025—26及2024—25。中国NBS2025，GCP2026-09-01现行，人遗2024；ILO只读公开摘要。保护区旧来源标签保留为范围冲突。"
             ]
           },
           "id": "biostatisticians.sources.source-card.3",
           "source_refs": [
-            "onet-details",
-            "onet-hot-tech",
-            "bls-ep",
-            "bls-pay",
-            "nbs-wages",
+            "details-current",
+            "industry-current",
+            "trends-current",
+            "nbs-current",
             "cn-gcp-2026",
-            "nasa-seh"
+            "training-current"
           ],
           "type": "prose"
         },
@@ -32096,6 +32554,262 @@
                 "name": "O*NET 15-2021.00 数学家职业摘要",
                 "period": "2026更新；查阅2026-10-03",
                 "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "完整任务及群体字段",
+                  "2026更新；行业/预测基年2025；训练目录2025—26、毕业记录2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "details-current",
+                "limitation": "群体数据不作个人门槛；父级统计不作本细分精确值；目录不等实时招生或法定许可。",
+                "market": "美国",
+                "name": "完整任务及群体字段",
+                "period": "2026更新；行业/预测基年2025；训练目录2025—26、毕业记录2024—25",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/15-2041.01"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "职业定义及摘要字段",
+                  "2026更新；行业/预测基年2025；训练目录2025—26、毕业记录2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "summary-current",
+                "limitation": "群体数据不作个人门槛；父级统计不作本细分精确值；目录不等实时招生或法定许可。",
+                "market": "美国",
+                "name": "职业定义及摘要字段",
+                "period": "2026更新；行业/预测基年2025；训练目录2025—26、毕业记录2024—25",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-2041.01"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025统计师父级行业分布",
+                  "2026更新；行业/预测基年2025；训练目录2025—26、毕业记录2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "industry-current",
+                "limitation": "群体数据不作个人门槛；父级统计不作本细分精确值；目录不等实时招生或法定许可。",
+                "market": "美国",
+                "name": "2025统计师父级行业分布",
+                "period": "2026更新；行业/预测基年2025；训练目录2025—26、毕业记录2024—25",
+                "publisher": "O*NET OnLine",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/industry/15-2041.01"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025—2035统计师父级预测",
+                  "2026更新；行业/预测基年2025；训练目录2025—26、毕业记录2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "trends-current",
+                "limitation": "群体数据不作个人门槛；父级统计不作本细分精确值；目录不等实时招生或法定许可。",
+                "market": "美国",
+                "name": "2025—2035统计师父级预测",
+                "period": "2026更新；行业/预测基年2025；训练目录2025—26、毕业记录2024—25",
+                "publisher": "O*NET OnLine",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/localtrends/15-2041.01"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相关训练目录",
+                  "2026更新；行业/预测基年2025；训练目录2025—26、毕业记录2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "training-current",
+                "limitation": "群体数据不作个人门槛；父级统计不作本细分精确值；目录不等实时招生或法定许可。",
+                "market": "美国",
+                "name": "相关训练目录",
+                "period": "2026更新；行业/预测基年2025；训练目录2025—26、毕业记录2024—25",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/localtraining/15-2041.01"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相关第三方认证目录",
+                  "2026更新；行业/预测基年2025；训练目录2025—26、毕业记录2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cert-current",
+                "limitation": "群体数据不作个人门槛；父级统计不作本细分精确值；目录不等实时招生或法定许可。",
+                "market": "美国",
+                "name": "相关第三方认证目录",
+                "period": "2026更新；行业/预测基年2025；训练目录2025—26、毕业记录2024—25",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/localcert/15-2041.01"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025城镇单位工资及统计附注",
+                  "2025；2026-05-15发布"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbs-current",
+                "limitation": "行业及人员大类税前年平均，不是生物统计职业中位或月薪。",
+                "market": "中国大陆",
+                "name": "2025城镇单位工资及统计附注",
+                "period": "2025；2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "CCDM当前资格、费用与三年周期",
+                  "2026-10-09读取"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ccdm-current",
+                "limitation": "临床数据管理专项第三方认证，不是全体生物统计师执照；续证精确学时手册未读，个人总成本未核。",
+                "market": "美国",
+                "name": "CCDM当前资格、费用与三年周期",
+                "period": "2026-10-09读取",
+                "publisher": "SCDM",
+                "scope": "contextual",
+                "url": "https://scdm.org/ccdm-certification/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "CCDM目录问答",
+                  "2026-10-09读取"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ccdm-directory",
+                "limitation": "目录3年CEU续证，不提供精确学时、费用；资格分支以发证方为准。",
+                "market": "美国",
+                "name": "CCDM目录问答",
+                "period": "2026-10-09读取",
+                "publisher": "O*NET / CareerOneStop",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/certinfo/6758-B"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "个人信息保护法",
+                  "2021-11-01施行"
+                ],
+                "evidence_type": "primary_document",
+                "id": "pipl-current",
+                "limitation": "按个人信息识别性、处理目的和合法基础核；匿名化与去标识化不同。",
+                "market": "中国大陆",
+                "name": "个人信息保护法",
+                "period": "2021-11-01施行",
+                "publisher": "全国人大常委会；国家网信办转载",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "人类遗传资源管理条例2024修订版",
+                  "2024-05-01修订施行"
+                ],
+                "evidence_type": "primary_document",
+                "id": "hgr-current",
+                "limitation": "按材料/信息定义及采集保藏国际合作对外提供等具体活动核，不统一全部审批。",
+                "market": "中国大陆",
+                "name": "人类遗传资源管理条例2024修订版",
+                "period": "2024-05-01修订施行",
+                "publisher": "国务院；无锡官方转载",
+                "scope": "contextual",
+                "url": "https://www.wnd.gov.cn/doc/2024/05/10/4348442.shtml"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本轮职业任务分析与自查建议",
+                  "2026-10-09"
+                ],
+                "evidence_type": "editorial_synthesis",
+                "id": "editor-current",
+                "limitation": "引用URL是职业背景，不将编辑建议当因果、胜任效度或雇主统一制度。",
+                "market": "美国",
+                "name": "本轮职业任务分析与自查建议",
+                "period": "2026-10-09",
+                "publisher": "费马测试职业内容编辑组",
+                "scope": "editorial_synthesis",
+                "url": "https://www.onetonline.org/link/summary/15-2041.01"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "统计师实际定义",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-stats-current",
+                "limitation": "仅支持职责，转岗距离为编辑分析，无统一补课/录用保证。",
+                "market": "美国",
+                "name": "统计师实际定义",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-2041.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "流行病学家实际定义",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-epi-current",
+                "limitation": "仅支持职责，转岗距离为编辑分析，无统一补课/录用保证。",
+                "market": "美国",
+                "name": "流行病学家实际定义",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/19-1041.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "健康信息学专员实际定义",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-health-current",
+                "limitation": "仅支持职责，转岗距离为编辑分析，无统一补课/录用保证。",
+                "market": "美国",
+                "name": "健康信息学专员实际定义",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/15-1211.01"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "数学家实际定义",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-math-current",
+                "limitation": "仅支持职责，转岗距离为编辑分析，无统一补课/录用保证。",
+                "market": "美国",
+                "name": "数学家实际定义",
+                "period": "2026更新",
+                "publisher": "O*NET",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/15-2021.00"
               }
@@ -34309,8 +35023,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.bls-outlook"
+              "onet-details",
+              "cn-gcp-2026"
             ],
             "id": "study-design-sample-size",
             "mitigation": {
@@ -34341,8 +35055,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.faa-design-approvals"
+              "onet-details",
+              "cn-gcp-2026"
             ],
             "id": "analysis-plan-deviation",
             "mitigation": {
@@ -34373,8 +35087,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.faa-design-approvals"
+              "onet-details",
+              "cn-gcp-2026"
             ],
             "id": "data-quality-missing",
             "mitigation": {
@@ -34405,8 +35119,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.faa-design-approvals",
-              "career.source.nasa-seh"
+              "faa-design-approvals",
+              "nasa-seh",
+              "cn-gcp-2026"
             ],
             "id": "participant-data-privacy",
             "mitigation": {
@@ -34437,8 +35152,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-summary",
-              "career.source.bls-outlook"
+              "onet-summary",
+              "cn-gcp-2026"
             ],
             "id": "vendor-review-gap",
             "mitigation": {
@@ -34469,8 +35184,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-summary",
-              "career.source.onet-details"
+              "onet-details",
+              "cn-gcp-2026"
             ],
             "id": "conclusion-scope",
             "mitigation": {
@@ -34604,6 +35319,18 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$link": "biostatisticians.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "gcp-current",
+              "field": "url"
+            },
+            "id": "cn-gcp-2026",
+            "label": "2026GCP：药物研制临床试验适用",
+            "scope": "第2/7/8/9条与方案/数据记录及角色责任，非全体统计活动统一制度。"
           }
         ]
       },
@@ -36865,7 +37592,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI (English)"
+            "label": "Big Five（英文）"
           },
           {
             "href": {
@@ -36875,7 +37602,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five (English)"
+            "label": "MBTI（中文）"
           },
           {
             "href": {
@@ -36885,7 +37612,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI (中文)"
+            "label": "九型人格（中文）"
           },
           {
             "href": {
@@ -36895,7 +37622,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five (中文)"
+            "label": "智力与推理（中文）"
           }
         ]
       },
@@ -37278,7 +38005,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 15-2041.01 · Bright Outlook · 研究与推断责任",
@@ -37329,7 +38056,7 @@
       "text": "生物统计学家"
     }
   },
-  "source_content_sha256": "546673b4b8034baee3866f3708a2876779653d2fa74cd536a4cd32029965eeae",
+  "source_content_sha256": "26597b8484250ebe79ce75d9af15dfcc56cc3ee2d28b7035b52fa417675aea0f",
   "subject": {
     "canonical_slug": "biostatisticians",
     "name": "生物统计学家",

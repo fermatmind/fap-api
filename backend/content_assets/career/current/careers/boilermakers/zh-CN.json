@@ -1386,7 +1386,7 @@
         "status": "mapped"
       },
       "item:boilermakers.path.credential-decision.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:boilermakers.path.employer-evidence.1": {
         "status": "pending_mapping"
@@ -9254,18 +9254,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.03.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            2,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.03.mitigation": {
         "ref": {
@@ -9343,18 +9333,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.04.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            3,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.04.mitigation": {
         "ref": {
@@ -9521,18 +9501,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.06.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            5,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.06.mitigation": {
         "ref": {
@@ -11480,28 +11450,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.href": {
-        "ref": {
-          "id": "boilermakers.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.label": {
         "ref": {
@@ -24059,10 +24009,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "作业质量说明的是「该部件在本工序与本次检查中符合要求」；它不等于整台设备合格，也不替代监督检验结论，且受材料、工艺、环境与检测覆盖度影响。发现缺陷或不安全因素时应报告并停止，而不是以经验判断放行。"
+              "作业检查只说明本部件在所核工序与覆盖范围中的结果，不替代整机合格或监督检验结论。《特种设备安全法》第41条要求作业人员发现隐患或不安全因素立即报告；安全管理人员发现紧急情况有权决定停止使用并报告。具体作业停工、恢复与放行须依适用程序及授权核，不把每项缺陷自动推成个人法定整机停用权。"
             ]
           },
           "id": "boilermakers.profile.career-quick-answers-block.21",
+          "source_refs": [
+            "faa-design-approvals"
+          ],
           "type": "prose"
         },
         {
@@ -24141,10 +24094,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 技术清单列出 8 类软件与工具，其中 AutoCAD、Microsoft Office（含 Excel、Word）、Windows、SAP 等标注为 Hot Technology；现场工具以手工具与电动工具、卷板与折弯设备、切割与焊接设备、铅锤与水平仪、楔块夹具与吊装索具为主。工具只是实现手段，装配与连接质量仍需由人负责。"
+              "详细页列8类软件，另一个Hot单页列7种产品：AutoCAD、Outlook、SAP、Office、Windows、Excel、Word；招聘比例见AI板块。第8类为计算机辅助培训软件，未据页面确认健康安全产品名称。机械工具与现场操作不能与软件类别混称；软件标签不证明自动化、个人必修或质量授权。"
             ]
           },
           "id": "boilermakers.profile.career-quick-answers-block.28",
+          "source_refs": [
+            "details-current",
+            "onet-hot-tech"
+          ],
           "type": "prose"
         },
         {
@@ -24218,10 +24175,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "锅炉制造与安装工（美国侧 O*NET-SOC 47-2011.00，Boilermakers）按图纸制造、组装、维护和修理固定式蒸汽锅炉与锅炉房辅助设备；对齐结构件或板件以组装锅炉框架、罐体或槽体；使用手工具与电动工具、铅锤、水平仪、楔块、夹具或松紧螺套；协助测试已组装的容器；指导锅炉与炉膛的清理；检查并修理安全阀、调节器、自动控制机构、水位计和辅助机械等锅炉附件。它既不是纯体力搬运岗位，也不承担设计或检验签署责任。"
+              "锅炉制造与安装工（美国侧 O*NET-SOC 47-2011.00，Boilermakers）按图纸制造、组装、维护和修理固定式蒸汽锅炉与锅炉房辅助设备；对齐结构件或板件以组装锅炉框架、罐体或槽体；使用手工具与电动工具、铅锤、水平仪、楔块、夹具或松紧螺套；协助测试已组装的容器；指导锅炉与炉膛的清理；检查并修理安全阀、调节器、自动控制机构、水位计和辅助机械等锅炉附件。它既不是纯体力搬运岗位，官方任务定义不自动授予设计或检验签署资格；另兼此类岗位须独立核资格与授权。"
             ]
           },
           "id": "boilermakers.profile.definition-block.11",
+          "source_refs": [
+            "details-current",
+            "faa-design-approvals"
+          ],
           "type": "prose"
         },
         {
@@ -24262,10 +24223,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS现行Boilermakers（SOC 47-2011）预测表列2025年就业10,200人、2035年10,100人，2025—2035年下降2%、净减少200人，年均空缺约700个且全部来自转岗或退出劳动力市场的替代需求。端点和净变化分别取整，不能用两个人数相减替代官方净变化。 O*NET摘要目前仍保留2024年10,400人、2024—2034年Decline（-1%或更低）与年均800个空缺，作为不同期间的历史口径，不混入当前指标。"
+              "当前O*NET和BLS均为2025—2035：2025就业10,200、2035就业10,100，下降2%、年均空缺700个；BLS表列净变化-200，端点与变化各自取整，不能直接相减替代表列。BLS解释空缺均来自转岗或退出的替代需求，不等700个净新增岗位。"
             ]
           },
           "id": "boilermakers.profile.onet-structured-fields-block.4",
+          "source_refs": [
+            "bls-outlook",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -24273,10 +24238,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业分布与工具信号：O*NET 2024 年行业分布为建筑业 69%、其他行业（含制造业与其他服务）31%；技术清单共 8 类，其中 AutoCAD、Microsoft Office、Windows、SAP 等标注为 Hot Technology。行业分布描述统计分类，不能推导行业工资或个人岗位归属。"
+              "O*NET2025美国Boilermakers行业分布：建筑业60%、制造业14%、其他26%（含其他服务及采矿、采石、油气开采）。是职业所在行业分布，非行业工资、中国分布或个人雇主归属。"
             ]
           },
           "id": "boilermakers.profile.onet-structured-fields-block.5",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -25042,10 +25010,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把数字化工具用在图纸与工艺文件阅读、下料与放样计算、焊材与工时统计、报验记录整理等可复核环节；装配公差判断、连接工艺选择、安全防护与异常处置仍须由人负责。"
+              "编辑任务分析：把数字化工具用在图纸与工艺文件阅读、下料与放样计算、焊材与工时统计、报验记录整理等可复核环节；装配公差判断、连接工艺选择、安全防护与异常处置仍须由人负责。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.13",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25064,10 +25036,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "引入工具前先明确可用环节、工艺数据与技术文件的管理权限、作业许可与安全交底流程、记录填写与复核责任人，保证任何输出都回到可追溯的图纸、工艺与检验记录。"
+              "编辑任务分析：引入工具前先明确可用环节、工艺数据与技术文件的管理权限、作业许可与安全交底流程、记录填写与复核责任人，保证任何输出都回到可追溯的图纸、工艺与检验记录。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.15",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25086,10 +25062,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把训练重点放在图纸识读与公差、金属材料与连接工艺、压力试验与缺陷识别、高处与受限空间安全、以及作业记录与规程执行上，同时训练对数字化输出与自动测量结果的核对意识。"
+              "编辑任务分析：把训练重点放在图纸识读与公差、金属材料与连接工艺、压力试验与缺陷识别、高处与受限空间安全、以及作业记录与规程执行上，同时训练对数字化输出与自动测量结果的核对意识。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.17",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25097,10 +25077,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：数字化工具与自动化设备可以改变读图与放样、下料计算、焊接参数记录、检测数据整理等环节，但没有官方证据表明它会取代装配公差判断、现场就位与连接作业、异常处置与安全责任。任务暴露、设备自动化程度与就业数量是三个不同概念。"
+              "编辑按任务推演：数字工具及自动化设备可能辅助读图、放样、数据记录与文档整理；BLS描述部分自动制造/焊接与仍需人工的装配维护。本轮已读资料没有本职业AI整体替代、采用率或节时因果统计，不推永不替代；实物检查与责任依真实岗位和授权核。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.18",
+          "source_refs": [
+            "editor-current",
+            "bls-entry",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25185,10 +25170,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 8 类软件与工具及 Hot Technology 标注；不代表设备自动化程度或岗位替代。"
+              "实际链接Hot单页列7项招聘技术产品，不是详细页8类软件；分母为2025美国唯一招聘广告，不是设备自动化或采用率。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.26",
+          "source_refs": [
+            "onet-hot-tech",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25218,10 +25207,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET-SOC 47-2011.00 职业摘要（就业与预测字段）"
+              "BLS Boilermakers职业展望手册：2025—2035预测与替代需求"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.29",
+          "source_refs": [
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -25229,10 +25221,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET摘要仍显示2024—2034年历史预测；本页当前就业指标采用BLS2025—2035年Boilermakers精确职业口径。"
+              "当前O*NET和BLS均为2025—2035：2025就业10,200、2035就业10,100，下降2%、年均空缺700个；BLS表列净变化-200，端点与变化各自取整，不能直接相减替代表列。BLS解释空缺均来自转岗或退出的替代需求，不等700个净新增岗位。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.30",
+          "source_refs": [
+            "bls-outlook",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -25262,10 +25258,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表比较三组工作方向在自动化影响上的差别：哪些环节可被辅助，哪些判断与责任仍由人承担。"
+              "编辑任务分析：下表比较三组工作方向在自动化影响上的差别：哪些环节可被辅助，哪些判断与责任仍由人承担。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.33",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25273,10 +25273,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "图纸与工艺文件检索、下料尺寸与材料用量计算、报验表单整理可辅助完成。"
+              "编辑任务分析：图纸与工艺文件检索、下料尺寸与材料用量计算、报验表单整理可辅助完成。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.34",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25284,10 +25288,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "决定装配顺序与公差、连接工艺与参数、是否具备安全作业条件，并对实物质量与安全负责。"
+              "编辑任务分析：决定装配顺序与公差、连接工艺与参数、是否具备安全作业条件，并对实物质量与安全负责。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.35",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25295,10 +25303,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "切割与坡口尺寸计算、焊材用量与工时统计可自动初算。"
+              "编辑任务分析：切割与坡口尺寸计算、焊材用量与工时统计可自动初算。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.36",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25306,10 +25318,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核对材料与坡口实际状态、确认装配间隙与错边是否在允许范围、记录变更加工情况，并承担作业质量责任。"
+              "编辑任务分析：核对材料与坡口实际状态、确认装配间隙与错边是否在允许范围、记录变更加工情况，并承担作业质量责任。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.37",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25317,10 +25333,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "检测数据整理、缺陷台账与作业记录初稿可由工具生成。"
+              "编辑任务分析：检测数据整理、缺陷台账与作业记录初稿可由工具生成。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.38",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25328,10 +25348,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不得把工具输出当作检验结论或放行依据，须逐条对照实际检查结果并由责任人签署记录。"
+              "编辑任务分析：不得把工具输出当作检验结论或放行依据，须逐条对照实际检查结果并由责任人签署记录。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.39",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25339,7 +25363,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、行业分布、就业与工资数据以及任务暴露研究，不是 AI 替代率或岗位数量预测。"
+              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、就业与工资数据以及任务暴露研究，不提供 AI 替代率，也不能分离 AI 导致的岗位数量变化；BLS一般就业预测仍按原职业与期间使用。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.40",
@@ -25471,10 +25495,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面列出 8 类软件与工具：AutoCAD、Microsoft Outlook、SAP、Microsoft Office、Microsoft Windows、Microsoft Excel、Microsoft Word（均标注 Hot Technology）以及健康与安全培训软件。"
+              "Hot单页7项：Excel4%、Office2%、Word2%；AutoCAD、Outlook、SAP、Windows比例未公布，不填0。比例为2025美国唯一招聘广告份额。详细页另有8类软件，包括计算机辅助培训，不能把类别数当产品数、采用率或替代率。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.52",
+          "source_refs": [
+            "onet-hot-tech",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25625,10 +25653,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不需要会写代码。O*NET 技术清单只列出 8 类工具（含 AutoCAD、Office、SAP 等），现场能力（图纸识读、装配、焊接与安全作业）才是门槛；数字化工具有助于读图与记录，但不替代工艺与安全训练。"
+              "O*NET编程技能重要度为3，现场机械操作、工艺与安全能力更直接；低重要度及软件清单不能推出所有岗位都不需要写代码。编辑建议按实际岗位核数字化职责，不把AI使用熟练度设成资格替代。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.66",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25636,10 +25668,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 技术清单 / 详细资料"
+              "实际链接详细页；Hot产品招聘比例另见技术单页。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.67",
+          "source_refs": [
+            "details-current",
+            "onet-hot-tech"
+          ],
           "type": "prose"
         },
         {
@@ -25658,10 +25694,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 详细资料 / 本页方法说明"
+              "实际链接Hot单页，只支持招聘技术信号；任务辅助判断属编辑分析。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.69",
+          "source_refs": [
+            "onet-hot-tech",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25694,10 +25734,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI生成的检验或放行文本只能作为待核草稿，不能自行产生人员资格、签署授权或承担责任。NIST AI RMF的GOVERN要求明确人类角色、职责与责任；具体中国法定检验资格见本页资格和风险板块，不由通用AI框架决定。"
+              "AI检验或放行文字只是待核草稿，不能产生资格、签署权或法律责任转移。NIST AI RMF1.0自愿框架GOVERN2.1—2.3、3.2建议明确角色、培训、决策责任与人类监督；中国法定检验和作业资格须另依法律及具体规则核。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.72",
+          "source_refs": [
+            "nist-pdf-current",
+            "faa-design-approvals"
+          ],
           "type": "prose"
         },
         {
@@ -25727,10 +25771,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页方法说明"
+              "实际custom入口可选择职业字段，不提供岗位消失年份或本职业AI预测。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.75",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25749,10 +25796,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 培训与教育信息 / 自定义职业档案"
+              "实际链接详细页支持教育、Job Zone与学徒示例；localtraining是另一个相关项目目录，非实时招生。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.77",
+          "source_refs": [
+            "details-current",
+            "training-current"
+          ],
           "type": "prose"
         },
         {
@@ -25760,10 +25811,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数字化工具进入作业流程时，人的控制点应按以下五步固定下来；任何一步缺失都不应扩大使用范围。"
+              "编辑建议：引入数字工具时用下列五项核对权限、资料、输出复核和责任。它是本页控制清单，非已核全体雇主固定程序；实际允许使用范围由单位程序与适用规定决定。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.78",
+          "source_refs": [
+            "editor-current",
+            "nist-pdf-current"
+          ],
           "type": "prose"
         },
         {
@@ -26167,10 +26222,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "与工长、焊工、检验与安全人员讨论作业方案，参与安全交底与作业前检查。"
+              "编辑场景：与工长、焊工、检验及安全人员沟通作业方案与检查问题；O*NET有同事沟通活动，不把本例安全交底会议称18项核心任务之一。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.115",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -26211,10 +26270,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "带教新入行的学徒与作业人员，示范规范操作并纠正不安全行为。"
+              "O*NET一般工作活动有培训他人（重要度39），但非18项具体任务之一；带教与安全纠正的具体安排为编辑场景，须有单位授权。"
             ]
           },
           "id": "boilermakers.ai-impact.ai-impact-table.119",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26386,10 +26449,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业门类平均工资混合制造、建筑、电力与检修等多类岗位，不能替代本职业职业工资；本模块因此不发布该数值。"
+              "NBS2025税前年平均参照（元/年）：制造业城镇非私营113,594、私营76,055；建筑业92,036、66,275；电力热力燃气及水生产供应业160,897、66,451。规模以上各行业全部人员/生产制造及有关人员依次100,572/79,182、79,161/69,081、164,371/149,114。按实际雇主行业、统计覆盖及职责匹配，不把三行业合并成锅炉工工资；生产制造大类含设备制造、施工、输配等，也非精确本职业。 精确全国职业中位、分位、城市起薪及当前招聘分布仍证据不足。"
             ]
           },
           "id": "boilermakers.china-salary.career-snapshot-primary-locale.10",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26507,10 +26573,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论：中国大陆无精确职业数据；本页只展示统计口径、范围与缺口。"
+              "NBS2025税前年平均参照（元/年）：制造业城镇非私营113,594、私营76,055；建筑业92,036、66,275；电力热力燃气及水生产供应业160,897、66,451。规模以上各行业全部人员/生产制造及有关人员依次100,572/79,182、79,161/69,081、164,371/149,114。按实际雇主行业、统计覆盖及职责匹配，不把三行业合并成锅炉工工资；生产制造大类含设备制造、施工、输配等，也非精确本职业。 精确全国职业中位、分位、城市起薪及当前招聘分布仍证据不足。"
             ]
           },
           "id": "boilermakers.china-salary.career-snapshot-primary-locale.21",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26771,10 +26840,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆目前没有单列该职业的全国职业工资统计；本页只展示可核对的行业与岗位大类口径、统计范围与缺口。"
+              "NBS2025税前年平均参照（元/年）：制造业城镇非私营113,594、私营76,055；建筑业92,036、66,275；电力热力燃气及水生产供应业160,897、66,451。规模以上各行业全部人员/生产制造及有关人员依次100,572/79,182、79,161/69,081、164,371/149,114。按实际雇主行业、统计覆盖及职责匹配，不把三行业合并成锅炉工工资；生产制造大类含设备制造、施工、输配等，也非精确本职业。 精确全国职业中位、分位、城市起薪及当前招聘分布仍证据不足。"
             ]
           },
           "id": "boilermakers.china-salary.career-snapshot-primary-locale.45",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -27075,10 +27147,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "对应时薪第 10 分位 24.28 美元，为分布下限，不是入门起薪的承诺。；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/47-2011.00?st=NH"
+              "全国时薪第10分位24.28美元是较低分位，仍有收入低于该值；不是分布最低值或入门起薪承诺。2025 OEWS全国行，所链接页面须选全国而非NH地方值。"
             ]
           },
           "id": "boilermakers.us-salary.career-snapshot-secondary-locale.10",
+          "source_refs": [
+            "onet-localwages"
+          ],
           "type": "prose"
         },
         {
@@ -27240,10 +27315,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国工资为2025年OEWS，当前就业预测为BLS2025—2035年，均为Boilermakers（SOC 47-2011）精确职业。O*NET摘要还保留2024—2034年旧预测，分开列示；不把旧字段混入当前Hero。"
+              "2025 OEWS全国工资与2025—2035就业预测属于不同统计指标；当前O*NET已更新同一预测期，不再作为2024—2034旧口径对照。"
             ]
           },
           "id": "boilermakers.us-salary.career-snapshot-secondary-locale.25",
+          "source_refs": [
+            "onet-localwages",
+            "trends-current",
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -27493,10 +27573,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资分位来自O*NET所展示2025年BLS全国行；当前就业预测取BLS2025—2035年，O*NET2024—2034预测仅作历史对照。"
+              "当前O*NET和BLS均为2025—2035：2025就业10,200、2035就业10,100，下降2%、年均空缺700个；BLS表列净变化-200，端点与变化各自取整，不能直接相减替代表列。BLS解释空缺均来自转岗或退出的替代需求，不等700个净新增岗位。 工资分位为2025全国工资，不是预测收入。"
             ]
           },
           "id": "boilermakers.us-salary.career-snapshot-secondary-locale.48",
+          "source_refs": [
+            "trends-current",
+            "bls-outlook",
+            "onet-localwages"
+          ],
           "type": "prose"
         },
         {
@@ -27504,10 +27589,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "实际收入还受教育与训练、行业与雇主类型、职责范围与责任层级、所在地区与作业条件影响。"
+              "编辑比较建议：逐项核地区、雇主行业、工时加班、差旅及合同间歇。BLS记载停工窗口加班、异地施工和合同间失业可能，未给本职业教育或责任层级对收入的因果增幅。"
             ]
           },
           "id": "boilermakers.us-salary.career-snapshot-secondary-locale.49",
+          "source_refs": [
+            "bls-pay",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28042,10 +28131,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力有帮助：需要在高处、噪音与高温附近保持专注，在工期压力下坚持按规程作业。但这类能力不能用单一分数定义，也不能替代安全训练与作业纪律。"
+              "编辑观察建议：检查在工期压力下能否保持注意、按规程报告与接受复核；O*NET风格与情境不是情绪智力测验的本职业预测效度证据，未核专属效度，不用分数替代安全训练。"
             ]
           },
           "id": "boilermakers.fit.personality-fit-block.22",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28087,10 +28180,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。真正有解释力的证据是在监督下的实际操作表现。"
+              "边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。编辑建议实际观察在监督下的实际操作表现。"
             ]
           },
           "id": "boilermakers.fit.personality-fit-block.26",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28098,10 +28195,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：更有解释力的适配信号是能读懂图纸并按公差完成装配与连接、愿意遵守安全规程并如实报告问题、接受质量检查与返修；对机械或工具的兴趣本身不足以证明胜任。"
+              "直接回答：编辑建议观察的表现是能读懂图纸并按公差完成装配与连接、愿意遵守安全规程并如实报告问题、接受质量检查与返修；对机械或工具的兴趣本身不足以证明胜任。"
             ]
           },
           "id": "boilermakers.fit.personality-fit-block.27",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28230,10 +28331,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足结构安装与高空作业训练；建筑结构不适用承压设备规范。"
+              "编辑比较：结构钢铁工实际定义也含金属储罐安装，不能一概排除容器对象。转岗核实际结构、承压设备及工序适用规范，补结构安装和高处作业训练；跨职业经验不自动取得承压作业资格。"
             ]
           },
           "id": "boilermakers.fit.personality-fit-block.39",
+          "source_refs": [
+            "adj-struct",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28318,10 +28423,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合与否不取决于内外向。工作情境显示 96% 每天使用电话、92% 每天进行面对面讨论、73% 与他人持续接触，55% 表示团队合作极其重要；能否在团队中清楚交接与报告隐患比外向程度更关键。"
+              "适合与否不取决于内外向。工作情境显示 96% 每天使用电话、92% 每天进行面对面讨论、73% 与他人持续接触，55% 表示团队合作极其重要；编辑建议实际观察团队交接与隐患报告，未核其与外向分数的预测效力排序。"
             ]
           },
           "id": "boilermakers.fit.personality-fit-block.47",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28384,10 +28493,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力确实有帮助：需要在工期压力与不安全环境附近保持专注、坚持按规程作业。但这类能力不能用单一分数定义，也不能替代安全训练与作业纪律。"
+              "编辑观察建议：检查在工期压力下能否保持注意、按规程报告与接受复核；O*NET风格与情境不是情绪智力测验的本职业预测效度证据，未核专属效度，不用分数替代安全训练。"
             ]
           },
           "id": "boilermakers.fit.personality-fit-block.53",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28461,10 +28574,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本链接为OSHA1926.1203，支持美国建筑业受限空间识别、许可与隔离要求；不覆盖全部高处防护，也不替代中国规则。"
+              "实际链接《特种设备安全法》，支持中国单位许可、施工告知、监督检验和人员资格；不是OSHA受限空间规则。"
             ]
           },
           "id": "boilermakers.fit.personality-fit-block.60",
+          "source_refs": [
+            "faa-design-approvals"
+          ],
           "type": "prose"
         },
         {
@@ -28483,10 +28599,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明BLS2025—2035年精确职业就业预测及O*NET旧口径对照。"
+              "实际链接O*NET摘要，当前2025—2035预测；BLS同期间及取整边界见前景板块。"
             ]
           },
           "id": "boilermakers.fit.personality-fit-block.62",
+          "source_refs": [
+            "trends-current",
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -28538,10 +28658,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "适配信号：更有解释力的信号是能读懂图纸并按公差完成装配与连接、愿意遵守安全规程并如实报告问题、接受质量检查与返修；对机械或工具的兴趣本身不足以证明胜任。"
+              "适配信号：编辑建议观察的表现是能读懂图纸并按公差完成装配与连接、愿意遵守安全规程并如实报告问题、接受质量检查与返修；对机械或工具的兴趣本身不足以证明胜任。"
             ]
           },
           "id": "boilermakers.fit.riasec-fit-block.9",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28687,16 +28811,16 @@
                 "url": "#career-visual-group-ai-impact"
               },
               {
-                "entity": "O*NET-SOC 47-2011.00 职业摘要",
+                "entity": "O*NET Boilermakers details",
                 "id": "link-2",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/47-2011.00"
+                "url": "https://www.onetonline.org/link/details/47-2011.00"
               },
               {
-                "entity": "O*NET-SOC 47-2011.00 详细资料（任务与工作活动）",
+                "entity": "O*NET Boilermakers summary",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/47-2011.00"
+                "url": "https://www.onetonline.org/link/summary/47-2011.00"
               },
               {
                 "entity": "《中华人民共和国特种设备安全法》",
@@ -28858,10 +28982,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未经许可或监督检验不合格的设备被交付使用，属法定禁止情形。"
+              "中国适用设备生产应由获许可单位承担；法定监督检验范围未经检验或不合格不得出厂或交付。单位生产许可与设备检验结果是两项义务，不能称设备本身未经生产许可。"
             ]
           },
           "id": "boilermakers.risk.career-risk-cards.20",
+          "source_refs": [
+            "faa-design-approvals"
+          ],
           "type": "prose"
         },
         {
@@ -28919,7 +29046,8 @@
           "id": "boilermakers.risk.career-risk-cards.25",
           "source_refs": [
             "cn-special-work-2026",
-            "cn-welding-2026"
+            "cn-welding-2026",
+            "faa-design-approvals"
           ],
           "type": "prose"
         },
@@ -28961,10 +29089,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在合同与交底记录中明确作业范围、检查点、移交资料与升级链，保留版本与签署记录。"
+              "编辑建议：合同与交底中核作业范围、检查点、移交资料和升级链，留版本及签署记录；具体程序与权责依真实合同和法定单位义务核。"
             ]
           },
           "id": "boilermakers.risk.career-risk-cards.29",
+          "source_refs": [
+            "editor-current",
+            "faa-design-approvals"
+          ],
           "type": "prose"
         },
         {
@@ -29027,10 +29159,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明美国职业身份与官方任务口径，不用于风险评估。"
+              "实际链接O*NET详细页：任务、工作活动与情境，不给事故率或现场许可。"
             ]
           },
           "id": "boilermakers.risk.career-risk-cards.35",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -29038,10 +29173,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明官方任务、工作活动与工作情境口径，不用于风险评估。"
+              "实际链接O*NET摘要：职业定义、兴趣与2025—2035就业字段，不给风险概率或程序授权。"
             ]
           },
           "id": "boilermakers.risk.career-risk-cards.36",
+          "source_refs": [
+            "onet-summary"
+          ],
           "type": "prose"
         },
         {
@@ -29049,10 +29187,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明 Boilermakers（SOC 47-2011）口径 的就业与预测，不用于风险评估。"
+              "实际链接中国《特种设备安全法》：单位许可、施工告知、监督检验及人员资格，按设备与工序适用。"
             ]
           },
           "id": "boilermakers.risk.career-risk-cards.37",
+          "source_refs": [
+            "faa-design-approvals"
+          ],
           "type": "prose"
         },
         {
@@ -29060,10 +29201,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明锅炉与压力容器相关作业的单位许可、施工告知、监督检验与人员资格要求。"
+              "实际链接OSHA1926.1203：美国建筑业受限空间识别、许可及替代程序条件；不覆盖所有高处或中国规则。"
             ]
           },
           "id": "boilermakers.risk.career-risk-cards.38",
+          "source_refs": [
+            "nasa-seh"
+          ],
           "type": "prose"
         },
         {
@@ -29071,10 +29215,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "OSHA1926.1203用于美国建筑业受限空间识别、许可程序与隔离等要求；不替代中国法规或具体现场安全方案。"
+              "实际链接NIST自愿AI风险管理框架：一般责任和监督建议，非锅炉资格、OSHA许可或操作程序。"
             ]
           },
           "id": "boilermakers.risk.career-risk-cards.39",
+          "source_refs": [
+            "nist-pdf-current"
+          ],
           "type": "prose"
         }
       ]
@@ -29259,10 +29406,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：本节描述的是可核对的资格与路径信息，不构成对任何机构、项目或个人的评价，也不提供录用或通过考核的建议。"
+              "本节区分官方学历、学徒、资格条件与编辑阶段建议；晋级顺序及训练安排非全体雇主制度，证书不自动产生录用、工序授权或中国许可。"
             ]
           },
           "id": "boilermakers.path.career-path-block.11",
+          "source_refs": [
+            "editor-current",
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -29413,10 +29564,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 Job Zone、学历构成与培训入口。"
+              "实际详细页列Job Zone1—2、无百分比的三种教育类别及4个批准学徒职业标题示例。通用Job Zone训练时长不能替代BLS本工种典型4年学徒。相关localtraining目录4项基于IPEDS2025—26/授位2024—25映射，非实时招生。"
             ]
           },
           "id": "boilermakers.path.career-path-block.25",
+          "source_refs": [
+            "details-current",
+            "training-current",
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -29457,10 +29613,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "不独立从事承压部件连接，须逐项复核。"
+              "编辑阶段建议：不独立从事承压部件连接，须逐项复核。 实际可承担范围依资格项目、单位授权及带教程序核，非所有人员统一晋级规则。"
             ]
           },
           "id": "boilermakers.path.career-path-block.29",
+          "source_refs": [
+            "editor-current",
+            "faa-design-approvals"
+          ],
           "type": "prose"
         },
         {
@@ -29677,10 +29837,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "不独立承担吊装与高处作业指挥。"
+              "编辑阶段建议：不独立承担吊装与高处作业指挥。 实际可承担范围依资格项目、单位授权及带教程序核，非所有人员统一晋级规则。"
             ]
           },
           "id": "boilermakers.path.career-path-block.49",
+          "source_refs": [
+            "editor-current",
+            "faa-design-approvals"
+          ],
           "type": "prose"
         },
         {
@@ -29897,10 +30061,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "不独立承接承压部件焊接。"
+              "编辑阶段建议：不独立承接承压部件焊接。 实际可承担范围依资格项目、单位授权及带教程序核，非所有人员统一晋级规则。"
             ]
           },
           "id": "boilermakers.path.career-path-block.69",
+          "source_refs": [
+            "editor-current",
+            "faa-design-approvals"
+          ],
           "type": "prose"
         },
         {
@@ -30500,15 +30668,44 @@
                 "特种设备安全法第18/20/23—25条按设备与工序核对。",
                 "材料、检验与资料移交成本。",
                 "监督检验包括所列制造和安装改造重大修理；第20条设计鉴定不能泛化所有容器。"
+              ],
+              [
+                "NCCER三项相关评估（美国）",
+                "拟证明压力容器、维护或换热器技能者",
+                "第三方知识评估及可选配套实操验证",
+                "非全体制造工法定许可；按雇主核",
+                "2024-11规格：均2小时闭卷、最低75；Pressure Vessel93题，Maintenance71题，Exchanger25题。换热器资格须同时通过维护及换热器评估。",
+                "目录问答三项每5年复考续证；具体报考门槛、费用及现行续证向中心核，证据不足。",
+                "知识通过不等所有实际工序授权，实操验证另列，不与National Board检验员混同。"
+              ],
+              [
+                "National Board检验员委任（美国）",
+                "另计划进入授权或在役检验岗位者",
+                "IS用于安装/在役检验；AI用于ASME规范授权检验",
+                "检验职业路径，不是制造工统一入职证书",
+                "发证方要求教育、经验、雇佣及考试条件；卡每年更新。O*NET旧New Construction名称需与现行AI对应核。",
+                "目录列需超过两年高中后教育/训练及经验、考试，续证涉及CEU/CPD；具体资格信用分支、费用和学时未核。",
+                "不能把目录问答所有条件当每条资格分支定式，更不能转成中国检验资格。"
               ]
             ]
           },
           "id": "boilermakers.path.credential-decision.1",
           "source_refs": [
             "bls-entry",
-            "faa-design-approvals",
             "cn-special-work-2026",
-            "cn-welding-2026"
+            "cn-welding-2026",
+            "faa-design-approvals",
+            "cert-current",
+            "nccer-current",
+            "nccer-pv",
+            "nccer-exchanger",
+            "nccer-maintenance",
+            "nb-current",
+            "cert-7873-b",
+            "cert-7872-b",
+            "cert-14724-a",
+            "cert-14744-a",
+            "cert-14745-a"
           ],
           "title": "资格选择",
           "type": "table"
@@ -30942,10 +31139,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局按行业门类与岗位大类公布平均工资，但没有单列「锅炉制造与安装工」这一职业。"
+              "NBS2025税前年平均参照（元/年）：制造业城镇非私营113,594、私营76,055；建筑业92,036、66,275；电力热力燃气及水生产供应业160,897、66,451。规模以上各行业全部人员/生产制造及有关人员依次100,572/79,182、79,161/69,081、164,371/149,114。按实际雇主行业、统计覆盖及职责匹配，不把三行业合并成锅炉工工资；生产制造大类含设备制造、施工、输配等，也非精确本职业。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.25",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30964,10 +31164,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业门类平均工资（对照口径，本页不发布数值）"
+              "行业与人员大类均值仅供匹配参照；全国精确职业工资和就业分布仍缺，不把参考填入精确职业数值。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.27",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30986,10 +31189,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该职业的全国工资与就业分布"
+              "证据不足：全国精确职业工资、就业及当前招聘分布；参考按实际行业、单位覆盖与职责选择。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.29",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30997,10 +31203,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明BLS现行2025—2035年精确职业预测；O*NET旧字段只作期间对照。"
+              "实际链接BLS职业展望手册支持2025—2035预测、空缺替代需求及分项取整。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.30",
+          "source_refs": [
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -31008,10 +31217,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明该精确职业的就业与预测字段，须与工资数据分开解读。"
+              "实际链接O*NET摘要，当前2025—2035预测；工资为2025 OEWS另一指标。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.31",
+          "source_refs": [
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -31019,10 +31231,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆的统计口径与缺口，不作为职业工资。"
+              "实际链接NBS2025：行业与人员大类税前年平均参照，非本职业统计。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.32",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -31030,10 +31245,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明官方任务与工作活动口径。"
+              "实际链接BLS职业展望手册，支持职责、学徒路径、工资和就业；不是O*NET41项工作活动清单。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.33",
+          "source_refs": [
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -31041,10 +31259,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足管道系统与工艺训练；管道作业另有资格要求。"
+              "编辑转岗比较：需要补足管道系统与工艺训练；管道作业另有资格要求。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.34",
+          "source_refs": [
+            "adj-pipe",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31052,10 +31274,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是连接工艺与现场作业经验。"
+              "编辑转岗比较：可迁移的是连接工艺与现场作业经验。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.35",
+          "source_refs": [
+            "adj-pipe",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31063,10 +31289,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属现场金属安装链条。"
+              "编辑转岗比较：距离较近：同属现场金属安装链条。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.36",
+          "source_refs": [
+            "adj-pipe",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31074,10 +31304,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足焊接方法与质量控制的系统训练。"
+              "编辑转岗比较：需要补足焊接方法与质量控制的系统训练。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.37",
+          "source_refs": [
+            "adj-weld",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31085,10 +31319,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是图纸识读与连接手艺。"
+              "编辑转岗比较：可迁移的是图纸识读与连接手艺。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.38",
+          "source_refs": [
+            "adj-weld",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31096,10 +31334,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：连接工艺可迁移，责任范围不同。"
+              "编辑转岗比较：距离较近：连接工艺可迁移，责任范围不同。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.39",
+          "source_refs": [
+            "adj-weld",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31107,10 +31349,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足薄板成形与建筑安装训练。"
+              "编辑转岗比较：需要补足薄板成形与建筑安装训练。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.40",
+          "source_refs": [
+            "adj-sheet",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31118,10 +31364,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是金属加工与安装基础。"
+              "编辑转岗比较：可迁移的是金属加工与安装基础。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.41",
+          "source_refs": [
+            "adj-sheet",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31129,10 +31379,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：材料与工序不同。"
+              "编辑转岗比较：距离中等：材料与工序不同。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.42",
+          "source_refs": [
+            "adj-sheet",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31140,10 +31394,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足结构安装与高空作业训练。"
+              "编辑转岗比较：需要补足结构安装与高空作业训练。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.43",
+          "source_refs": [
+            "adj-struct",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31151,10 +31409,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是吊装与现场协作经验。"
+              "编辑转岗比较：可迁移的是吊装与现场协作经验。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.44",
+          "source_refs": [
+            "adj-struct",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31162,10 +31424,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：对象从承压设备转为建筑结构。"
+              "编辑转岗比较：目标对象包括建筑结构及金属储罐；实际是否承压、规范与作业资格须逐项核，不以职业名称推一律排除容器。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.45",
+          "source_refs": [
+            "adj-struct",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31173,10 +31439,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足机械传动、校准与测量训练。"
+              "编辑转岗比较：需要补足机械传动、校准与测量训练。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.46",
+          "source_refs": [
+            "adj-mill",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31184,10 +31454,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是拆装与现场检修能力。"
+              "编辑转岗比较：可迁移的是拆装与现场检修能力。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.47",
+          "source_refs": [
+            "adj-mill",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31195,10 +31469,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：都涉及设备检修与就位。"
+              "编辑转岗比较：距离较近：都涉及设备检修与就位。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.48",
+          "source_refs": [
+            "adj-mill",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31206,10 +31484,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足在用设备运行与隔离作业知识。"
+              "编辑转岗比较：需要补足在用设备运行与隔离作业知识。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.49",
+          "source_refs": [
+            "adj-operator",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31217,10 +31499,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是锅炉本体与附件的检修经验。"
+              "编辑转岗比较：可迁移的是锅炉本体与附件的检修经验。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.50",
+          "source_refs": [
+            "adj-operator",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31228,10 +31514,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属锅炉相关岗位。"
+              "编辑转岗比较：距离较近：同属锅炉相关岗位。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.51",
+          "source_refs": [
+            "adj-operator",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31239,10 +31529,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补综合设施、机电或建筑维护技能，核对需专项许可的工序。"
+              "编辑转岗比较：需要补综合设施、机电或建筑维护技能，核对需专项许可的工序。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.52",
+          "source_refs": [
+            "onet-maintenance-general",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31250,10 +31544,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是设备检查、故障记录、工具与拆装经验。"
+              "编辑转岗比较：可迁移的是设备检查、故障记录、工具与拆装经验。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.53",
+          "source_refs": [
+            "onet-maintenance-general",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31272,10 +31570,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补管道施工基础与现场辅助流程，按带教要求工作。"
+              "编辑转岗比较：需要补管道施工基础与现场辅助流程，按带教要求工作。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.55",
+          "source_refs": [
+            "onet-pipe-helper",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31283,10 +31585,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是工具准备、材料搬运与施工协作经验。"
+              "编辑转岗比较：可迁移的是工具准备、材料搬运与施工协作经验。"
             ]
           },
           "id": "boilermakers.market-signals.market-signal-card.56",
+          "source_refs": [
+            "onet-pipe-helper",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31410,7 +31716,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "边界一：本页把美国职业口径（O*NET-SOC 47-2011.00）与中国大陆口径分开标注，不跨法域直接套用；工资、就业与预测为该精确职业口径，并分别标注 O*NET 与 BLS 职业展望手册的期间。",
+              "边界一：美国47-2011.00职业工资与预测分指标和期间；中国NBS参考为行业及人员大类税前年平均，非本职业工资。两国法域、证书及施工授权分开核。",
               "边界二：编辑练习与作品建议均为虚构材料，读者不应据此对真实锅炉或压力容器施焊、试压或交付，也不得把练习结果包装成检验结论或放行依据。",
               "边界三：本页由 O*NET、BLS、国家统计局、《中华人民共和国特种设备安全法》、美国职业安全与健康管理局、NIST AI 风险管理框架与 ILO 任务暴露研究等公开资料及编辑设计组成；每项资料的适用范围与缺口单独标记。"
             ]
@@ -31448,10 +31754,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源：O*NET-SOC 47-2011.00 职业摘要、详细资料、自定义职业档案、技术清单、行业分布、培训与教育信息与全国工资分位页面；BLS《Occupational Outlook Handbook》Boilermakers；国家统计局《2025 年城镇单位就业人员年平均工资情况》；ILO 工作论文 140。"
+              "主要资料：O*NET47-2011.00详细页、2025行业、2025—2035预测、2025全国工资及相关训练/五项认证目录；BLS职业展望手册；NBS2025表2/5/7与附注；特种设备安全法、第19号令及TSG2026实施通知；OSHA1926.1203；NIST AI RMF1.0指定GOVERN章节；NCCER三项评估规格与National Board委任介绍。ILO140提供通用任务暴露背景，不给本职业替代率。"
             ]
           },
           "id": "boilermakers.sources.source-card.2",
+          "source_refs": [
+            "details-current",
+            "industry-current",
+            "trends-current",
+            "nbs-current",
+            "nccer-current",
+            "nb-current",
+            "nist-pdf-current"
+          ],
           "type": "prose"
         },
         {
@@ -31459,10 +31774,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：O*NET职业资料2026年更新，工资2025年OEWS；当前就业预测BLS2025—2035，O*NET旧2024—2034仅作对照；中国城镇单位工资2025年。中国特种作业第19号令2026-06-01、特种设备焊接细则2026-08-01施行；本轮核查2026-10-03。"
+              "数据期：职业资料2026更新；行业/全国OEWS工资2025；O*NET与BLS预测2025—2035；中国单位工资2025。第19号令2026-06-01、TSG2026-08-01施行；NCCER规格2024-11，课程第二版2010；本轮2026-10-09核原文。未声称全文核过TSG细则、完整检验员资格规则或实时招生。"
             ]
           },
           "id": "boilermakers.sources.source-card.3",
+          "source_refs": [
+            "industry-current",
+            "trends-current",
+            "nbs-current",
+            "cn-special-work-2026",
+            "cn-welding-2026",
+            "nccer-current",
+            "nb-current"
+          ],
           "type": "prose"
         },
         {
@@ -31889,6 +32213,390 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/47-3015.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "当前完整任务、技能与情境",
+                  "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "details-current",
+                "limitation": "职业群体信息非个人门槛；目录非实时招生或全体工人必备许可。",
+                "market": "美国",
+                "name": "当前完整任务、技能与情境",
+                "period": "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025行业分布",
+                  "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "industry-current",
+                "limitation": "职业群体信息非个人门槛；目录非实时招生或全体工人必备许可。",
+                "market": "美国",
+                "name": "2025行业分布",
+                "period": "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/47-2011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025—2035就业预测",
+                  "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "trends-current",
+                "limitation": "职业群体信息非个人门槛；目录非实时招生或全体工人必备许可。",
+                "market": "美国",
+                "name": "2025—2035就业预测",
+                "period": "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/47-2011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相关训练目录",
+                  "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "training-current",
+                "limitation": "职业群体信息非个人门槛；目录非实时招生或全体工人必备许可。",
+                "market": "美国",
+                "name": "相关训练目录",
+                "period": "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/localtraining/47-2011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "五项相关认证目录",
+                  "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cert-current",
+                "limitation": "职业群体信息非个人门槛；目录非实时招生或全体工人必备许可。",
+                "market": "美国",
+                "name": "五项相关认证目录",
+                "period": "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/localcert/47-2011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025城镇单位工资表2/5/7及附注",
+                  "2025；2026-05-15发布"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbs-current",
+                "limitation": "实际行业、单位覆盖和人员类别须匹配；税前年平均非职业中位、起薪、城市月薪，不含个体工商户/自由职业者。",
+                "market": "中国大陆",
+                "name": "2025城镇单位工资表2/5/7及附注",
+                "period": "2025；2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "锅炉任务辅助、适配、控制与转岗建议",
+                  "2026-10-09"
+                ],
+                "evidence_type": "editorial_synthesis",
+                "id": "editor-current",
+                "limitation": "背景链接非建议因果证据；无实测替代排序、节时、测验预测效度、普遍晋级制度或录用保证。",
+                "market": "美国",
+                "name": "锅炉任务辅助、适配、控制与转岗建议",
+                "period": "2026-10-09",
+                "publisher": "费马测试职业内容编辑组",
+                "scope": "editorial_synthesis",
+                "url": "https://www.onetonline.org/link/summary/47-2011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "NIST AI RMF1.0 GOVERN2.1—2.3及3.2",
+                  "2023 AI100-1"
+                ],
+                "evidence_type": "framework",
+                "id": "nist-pdf-current",
+                "limitation": "自愿风险框架的人类责任与监督建议，非锅炉检验资格、法定许可或现场操作授权。",
+                "market": "美国",
+                "name": "NIST AI RMF1.0 GOVERN2.1—2.3及3.2",
+                "period": "2023 AI100-1",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "NCCER Boilermaking课程与评估入口",
+                  "第二版2010；2026-10-09读取"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nccer-current",
+                "limitation": "四级课程建议700小时含Core，不替代BLS典型四年学徒；三类评估非普遍法定许可。",
+                "market": "美国",
+                "name": "NCCER Boilermaking课程与评估入口",
+                "period": "第二版2010；2026-10-09读取",
+                "publisher": "NCCER",
+                "scope": "contextual",
+                "url": "https://www.nccer.org/craft-catalog/boilermaking/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "Pressure Vessel评估规格",
+                  "2024-11更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nccer-pv",
+                "limitation": "知识评估与实操验证区分；费用与报考完整分支仍需向认证中心核对。",
+                "market": "美国",
+                "name": "Pressure Vessel评估规格",
+                "period": "2024-11更新",
+                "publisher": "NCCER",
+                "scope": "contextual",
+                "url": "https://www.nccer.org/media/2023/03/Boilermaker-Pressure-Vessel-Assessment.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "Exchanger评估规格",
+                  "2024-11更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nccer-exchanger",
+                "limitation": "知识评估与实操验证区分；费用与报考完整分支仍需向认证中心核对。",
+                "market": "美国",
+                "name": "Exchanger评估规格",
+                "period": "2024-11更新",
+                "publisher": "NCCER",
+                "scope": "contextual",
+                "url": "https://www.nccer.org/media/2023/03/Industrial-Boilermaker-Exchanger-Assessment.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "Maintenance评估规格",
+                  "2024-11更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nccer-maintenance",
+                "limitation": "知识评估与实操验证区分；费用与报考完整分支仍需向认证中心核对。",
+                "market": "美国",
+                "name": "Maintenance评估规格",
+                "period": "2024-11更新",
+                "publisher": "NCCER",
+                "scope": "contextual",
+                "url": "https://www.nccer.org/media/2023/03/Industrial-Boilermaker-Maintenance-Assessment.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "National Board当前检验员委任介绍",
+                  "2026-10-09读取"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nb-current",
+                "limitation": "IS/AI检验员另有教育、经验、雇佣与考试条件；不是制造工统一证书，具体信用分支和费用未核。",
+                "market": "美国",
+                "name": "National Board当前检验员委任介绍",
+                "period": "2026-10-09读取",
+                "publisher": "National Board",
+                "scope": "contextual",
+                "url": "https://www.nationalboard.org/Index.aspx?ID=392&pageID=390"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET认证详情 7873-B",
+                  "2026-10-09读取"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cert-7873-b",
+                "limitation": "目录问答须与现行发证规则核对，非法律依据或统一入职门槛。",
+                "market": "美国",
+                "name": "O*NET认证详情 7873-B",
+                "period": "2026-10-09读取",
+                "publisher": "O*NET / CareerOneStop",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/certinfo/7873-B"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET认证详情 7872-B",
+                  "2026-10-09读取"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cert-7872-b",
+                "limitation": "目录问答须与现行发证规则核对，非法律依据或统一入职门槛。",
+                "market": "美国",
+                "name": "O*NET认证详情 7872-B",
+                "period": "2026-10-09读取",
+                "publisher": "O*NET / CareerOneStop",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/certinfo/7872-B"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET认证详情 14724-A",
+                  "2026-10-09读取"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cert-14724-a",
+                "limitation": "目录问答须与现行发证规则核对，非法律依据或统一入职门槛。",
+                "market": "美国",
+                "name": "O*NET认证详情 14724-A",
+                "period": "2026-10-09读取",
+                "publisher": "O*NET / CareerOneStop",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/certinfo/14724-A"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET认证详情 14744-A",
+                  "2026-10-09读取"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cert-14744-a",
+                "limitation": "目录问答须与现行发证规则核对，非法律依据或统一入职门槛。",
+                "market": "美国",
+                "name": "O*NET认证详情 14744-A",
+                "period": "2026-10-09读取",
+                "publisher": "O*NET / CareerOneStop",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/certinfo/14744-A"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET认证详情 14745-A",
+                  "2026-10-09读取"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cert-14745-a",
+                "limitation": "目录问答须与现行发证规则核对，非法律依据或统一入职门槛。",
+                "market": "美国",
+                "name": "O*NET认证详情 14745-A",
+                "period": "2026-10-09读取",
+                "publisher": "O*NET / CareerOneStop",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/certinfo/14745-A"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "管道工职责定义",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-pipe",
+                "limitation": "仅支持目标对象；距离、补课与能力迁移为编辑比较。",
+                "market": "美国",
+                "name": "管道工职责定义",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/47-2152.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "焊工职责定义",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-weld",
+                "limitation": "仅支持目标对象；距离、补课与能力迁移为编辑比较。",
+                "market": "美国",
+                "name": "焊工职责定义",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/51-4121.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "金属板工职责定义",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-sheet",
+                "limitation": "仅支持目标对象；距离、补课与能力迁移为编辑比较。",
+                "market": "美国",
+                "name": "金属板工职责定义",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/47-2211.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "结构钢铁工职责定义",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-struct",
+                "limitation": "仅支持目标对象；距离、补课与能力迁移为编辑比较。",
+                "market": "美国",
+                "name": "结构钢铁工职责定义",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/47-2221.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "工业机械装配工职责定义",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-mill",
+                "limitation": "仅支持目标对象；距离、补课与能力迁移为编辑比较。",
+                "market": "美国",
+                "name": "工业机械装配工职责定义",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/49-9044.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "固定式锅炉操作员职责定义",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-operator",
+                "limitation": "仅支持目标对象；距离、补课与能力迁移为编辑比较。",
+                "market": "美国",
+                "name": "固定式锅炉操作员职责定义",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/51-8021.00"
               }
             ]
           },
@@ -34100,8 +34808,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.nasa-seh"
+              "onet-details",
+              "faa-design-approvals"
             ],
             "id": "height-confined-space",
             "mitigation": {
@@ -34132,8 +34840,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.faa-design-approvals"
+              "onet-details",
+              "bls-outlook"
             ],
             "id": "pressure-part-connection",
             "mitigation": {
@@ -34164,8 +34872,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.faa-design-approvals",
-              "career.source.bls-outlook"
+              "bls-outlook"
             ],
             "id": "permit-surveillance",
             "mitigation": {
@@ -34196,8 +34903,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.faa-design-approvals",
-              "career.source.nasa-seh"
+              "bls-outlook"
             ],
             "id": "qualification-scope",
             "mitigation": {
@@ -34228,8 +34934,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-summary",
-              "career.source.bls-outlook"
+              "onet-summary",
+              "bls-outlook"
             ],
             "id": "responsibility-division",
             "mitigation": {
@@ -34260,8 +34966,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.nasa-seh"
+              "onet-details"
             ],
             "id": "chronic-exposure",
             "mitigation": {
@@ -35310,7 +36015,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls-outlook",
+            "source_id": "onet-summary",
             "value": {
               "$item": "boilermakers.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35355,7 +36060,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls-outlook",
+            "source_id": "onet-summary",
             "value": {
               "$item": "boilermakers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -37069,7 +37774,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 47-2011.00 · 压力容器制造与安装 · 现场安全责任",
@@ -37120,7 +37825,7 @@
       "text": "锅炉制造与安装工"
     }
   },
-  "source_content_sha256": "102a335bd04352cc79817b450f5b9aff67fce0ede820c513f67994add62d6163",
+  "source_content_sha256": "12486e72d933dfb825338a80c495cec09607d9e20b7730c621687693dff7cd02",
   "subject": {
     "canonical_slug": "boilermakers",
     "name": "锅炉制造与安装工",

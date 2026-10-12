@@ -23420,12 +23420,12 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "需求与系统架构｜把应用场景、性能和安全约束写成可测试规格。｜输出接口、失效条件和验证计划。",
-              "机电与控制安装｜安装传感器、执行器、控制程序与末端工具的组合。｜说明版本、限制和权衡。",
-              "原型构建与集成｜连接硬件、软件和通信接口，管理配置。｜记录可复现的原型状态。",
-              "程序调试｜处理传感器信号并定位控制或通信故障。｜提交修订、回归测试与残余问题。",
-              "测试与验证｜用台架、仿真及授权实机环境检验性能和边界。｜异常时停测并记录证据。",
-              "技术支持与交接｜向技术员和使用团队说明限制、维护点与未解决风险。｜不以演示代替部署批准。"
+              "工单与准备｜核设备状态、权限和维修要求。｜记录未知条件与停工边界。",
+              "机电与控制安装｜按授权安装传感器、控制器、接线和末端工具。｜核图纸、版本和测试条件。",
+              "故障诊断｜结合报警、电路、机械与反馈系统定位故障。｜提交可复现记录和残余问题。",
+              "程序维护｜按工单安装、编程或修理控制器。｜保留变更与回归测试记录。",
+              "受控测试｜在批准范围测试组件与整机性能。｜异常时停测并升级。",
+              "维修交接｜维护服务记录并说明未解决故障。｜复机与重大设计变更交授权人员。"
             ]
           },
           "id": "robotics-technicians.profile.responsibilities-block.1",
@@ -23446,7 +23446,7 @@
           "id": "robotics-technicians.profile.work-context-block.1",
           "source_refs": [
             "onet",
-            "bls"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23562,7 +23562,8 @@
           },
           "id": "robotics-technicians.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "privacy"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -23577,7 +23578,7 @@
           "id": "robotics-technicians.profile.career-quick-answers-block.6",
           "source_refs": [
             "onet",
-            "privacy"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23622,7 +23623,7 @@
           },
           "id": "robotics-technicians.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet",
+            "privacy",
             "editor"
           ],
           "type": "prose"
@@ -23652,7 +23653,7 @@
           },
           "id": "robotics-technicians.profile.career-quick-answers-block.11",
           "source_refs": [
-            "onet",
+            "privacy",
             "editor"
           ],
           "type": "prose"
@@ -23668,7 +23669,6 @@
           "id": "robotics-technicians.profile.definition-block.11",
           "source_refs": [
             "onet",
-            "bls",
             "editor"
           ],
           "type": "prose"
@@ -23698,7 +23698,7 @@
           },
           "id": "robotics-technicians.profile.career-quick-answers-block.13",
           "source_refs": [
-            "onet",
+            "privacy",
             "editor"
           ],
           "type": "prose"
@@ -23728,7 +23728,7 @@
           },
           "id": "robotics-technicians.profile.career-quick-answers-block.15",
           "source_refs": [
-            "onet",
+            "privacy",
             "editor"
           ],
           "type": "prose"
@@ -23758,7 +23758,7 @@
           },
           "id": "robotics-technicians.profile.career-quick-answers-block.17",
           "source_refs": [
-            "onet",
+            "privacy",
             "editor"
           ],
           "type": "prose"
@@ -23964,7 +23964,7 @@
           },
           "id": "robotics-technicians.profile.career-quick-answers-block.31",
           "source_refs": [
-            "privacy",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -23979,8 +23979,8 @@
           },
           "id": "robotics-technicians.profile.career-quick-answers-block.32",
           "source_refs": [
-            "privacy",
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24618,13 +24618,11 @@
           "id": "robotics-technicians.ai-impact.ai-impact-table.9",
           "source_refs": [
             "onet",
-            "bls",
             "ep",
-            "editor",
-            "editor",
-            "editor",
-            "editor",
-            "privacy"
+            "ilo",
+            "arxiv",
+            "nist",
+            "editor"
           ],
           "type": "links"
         },
@@ -24728,9 +24726,8 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.16",
           "source_refs": [
-            "editor",
-            "editor",
-            "privacy"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24744,9 +24741,8 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.17",
           "source_refs": [
-            "editor",
-            "editor",
-            "privacy"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24760,10 +24756,10 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "editor",
-            "editor",
             "onet",
-            "bls"
+            "ilo",
+            "ep",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24835,7 +24831,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.23",
           "source_refs": [
-            "editor"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -24849,7 +24845,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.24",
           "source_refs": [
-            "editor"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -24863,7 +24859,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.25",
           "source_refs": [
-            "editor"
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -24877,7 +24873,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.26",
           "source_refs": [
-            "editor"
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -24891,7 +24887,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.27",
           "source_refs": [
-            "editor"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24905,7 +24901,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.28",
           "source_refs": [
-            "editor"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24919,7 +24915,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.29",
           "source_refs": [
-            "editor"
+            "nist"
           ],
           "type": "prose"
         },
@@ -24933,7 +24929,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.30",
           "source_refs": [
-            "editor"
+            "nist"
           ],
           "type": "prose"
         },
@@ -25035,7 +25031,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.37",
           "source_refs": [
-            "privacy",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -25094,7 +25090,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.41",
           "source_refs": [
-            "editor"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25108,7 +25104,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.42",
           "source_refs": [
-            "editor"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25122,7 +25118,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.43",
           "source_refs": [
-            "editor"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25136,7 +25132,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.44",
           "source_refs": [
-            "editor"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25150,7 +25146,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.45",
           "source_refs": [
-            "editor"
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -25164,7 +25160,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.46",
           "source_refs": [
-            "editor"
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -25178,7 +25174,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.47",
           "source_refs": [
-            "editor"
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -25192,7 +25188,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.48",
           "source_refs": [
-            "editor"
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -25206,7 +25202,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.49",
           "source_refs": [
-            "editor"
+            "onet"
           ],
           "type": "prose"
         },
@@ -25220,7 +25216,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.50",
           "source_refs": [
-            "editor"
+            "onet"
           ],
           "type": "prose"
         },
@@ -25234,7 +25230,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.51",
           "source_refs": [
-            "editor"
+            "onet"
           ],
           "type": "prose"
         },
@@ -25248,7 +25244,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "editor"
+            "onet"
           ],
           "type": "prose"
         },
@@ -25262,7 +25258,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.53",
           "source_refs": [
-            "editor"
+            "nist"
           ],
           "type": "prose"
         },
@@ -25276,7 +25272,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "editor"
+            "nist"
           ],
           "type": "prose"
         },
@@ -25290,7 +25286,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "editor"
+            "nist"
           ],
           "type": "prose"
         },
@@ -25304,7 +25300,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "editor"
+            "nist"
           ],
           "type": "prose"
         },
@@ -25313,7 +25309,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "框架不是机器人设备准入证书。"
+              "O*NET职业任务资料不测AI现场效果，也不提供设备、产品或作业准入认证。"
             ]
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.57",
@@ -25404,8 +25400,8 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "editor",
-            "onet"
+            "ep",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25419,8 +25415,10 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "editor",
-            "onet"
+            "onet",
+            "ilo",
+            "ep",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25434,8 +25432,10 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "editor",
-            "onet"
+            "onet",
+            "ilo",
+            "ep",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25464,8 +25464,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "editor",
-            "editor"
+            "onet"
           ],
           "type": "prose"
         },
@@ -25494,6 +25493,8 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.69",
           "source_refs": [
+            "onet",
+            "nist",
             "editor"
           ],
           "type": "prose"
@@ -25536,8 +25537,8 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "editor",
-            "privacy"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25551,7 +25552,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.73",
           "source_refs": [
-            "editor"
+            "onet"
           ],
           "type": "prose"
         },
@@ -25580,8 +25581,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "editor",
-            "editor"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25610,7 +25610,8 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.77",
           "source_refs": [
-            "editor",
+            "onet",
+            "nist",
             "editor"
           ],
           "type": "prose"
@@ -25640,8 +25641,8 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.79",
           "source_refs": [
-            "editor",
-            "privacy"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25700,8 +25701,8 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.83",
           "source_refs": [
-            "editor",
-            "privacy"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25745,7 +25746,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.86",
           "source_refs": [
-            "privacy",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -25760,7 +25761,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.87",
           "source_refs": [
-            "privacy",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -25978,7 +25979,8 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.102",
           "source_refs": [
-            "privacy"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26020,7 +26022,7 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.105",
           "source_refs": [
-            "privacy",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -26149,7 +26151,8 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.114",
           "source_refs": [
-            "privacy"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26191,7 +26194,8 @@
           },
           "id": "robotics-technicians.ai-impact.ai-impact-table.117",
           "source_refs": [
-            "privacy"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26568,8 +26572,9 @@
           },
           "id": "robotics-technicians.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "editor",
-            "onet"
+            "bls",
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26583,7 +26588,7 @@
           },
           "id": "robotics-technicians.china-salary.career-snapshot-primary-locale.28",
           "source_refs": [
-            "bls",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -26598,7 +26603,7 @@
           },
           "id": "robotics-technicians.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "bls",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -26613,7 +26618,7 @@
           },
           "id": "robotics-technicians.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "bls",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -26673,7 +26678,7 @@
           },
           "id": "robotics-technicians.china-salary.career-snapshot-primary-locale.34",
           "source_refs": [
-            "bls",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -26688,7 +26693,7 @@
           },
           "id": "robotics-technicians.china-salary.career-snapshot-primary-locale.35",
           "source_refs": [
-            "bls",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -26703,7 +26708,7 @@
           },
           "id": "robotics-technicians.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
-            "bls",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -26808,7 +26813,7 @@
           },
           "id": "robotics-technicians.china-salary.career-snapshot-primary-locale.43",
           "source_refs": [
-            "bls"
+            "onet"
           ],
           "type": "prose"
         },
@@ -27045,9 +27050,10 @@
           },
           "id": "robotics-technicians.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "bls",
+            "onet",
+            "oews",
             "ep",
-            "oews"
+            "editor"
           ],
           "type": "prose"
         },
@@ -27061,7 +27067,7 @@
           },
           "id": "robotics-technicians.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27075,7 +27081,7 @@
           },
           "id": "robotics-technicians.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27131,7 +27137,7 @@
           },
           "id": "robotics-technicians.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27173,7 +27179,7 @@
           },
           "id": "robotics-technicians.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27187,7 +27193,7 @@
           },
           "id": "robotics-technicians.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27287,8 +27293,10 @@
           },
           "id": "robotics-technicians.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "editor",
-            "bls"
+            "onet",
+            "oews",
+            "ep",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27373,7 +27381,7 @@
           },
           "id": "robotics-technicians.us-salary.career-snapshot-secondary-locale.31",
           "source_refs": [
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27613,7 +27621,10 @@
           },
           "id": "robotics-technicians.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "oews-method"
+            "onet",
+            "oews",
+            "ep",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27828,11 +27839,11 @@
           "id": "robotics-technicians.fit.personality-fit-block.1",
           "source_refs": [
             "onet",
-            "bls",
-            "onet",
-            "editor",
-            "editor",
-            "privacy"
+            "oews",
+            "ep",
+            "nist",
+            "ilo",
+            "editor"
           ],
           "type": "links"
         },
@@ -27856,7 +27867,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET任务说明系统安装与测试，不提供兴趣量表预测绩效的证据。"
+              "O*NET职业兴趣前三为RCI：现实型99、常规型61、研究型48；这是职业描述，不是个人绩效或安全预测。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.3",
@@ -27900,7 +27911,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "外向与内向均非职业门槛；关键是能与技术员和安全负责人共享可复现证据。"
+              "可反思是否愿意记录故障并与跨专业同事沟通；本页未核得大五人格对本岗录用或维修质量的效标。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.6",
@@ -27915,7 +27926,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "职业任务资料，不提供大五人格与工程质量的个人对应。"
+              "证据缺口：未核得大五量表与机器人技术员维修质量、录用或事故结果的独立效标。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.7",
@@ -27959,7 +27970,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "人际偏好不决定系统安装能力。"
+              "人际偏好仅作自我探索，不据此推断安装能力。"
             ]
           },
           "id": "robotics-technicians.fit.riasec-fit-block.9",
@@ -27974,7 +27985,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI不能预测机器人系统调试和部署安全。"
+              "本页未核得MBTI对本岗调试质量或安全的效标，不作类型推荐或录用门槛。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.10",
@@ -27988,7 +27999,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET职业任务不支持MBTI录用门槛。"
+              "证据缺口：未核得MBTI与本岗录用、绩效或事故结果的独立效标。"
             ]
           },
           "id": "robotics-technicians.fit.riasec-fit-block.10",
@@ -28088,7 +28099,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有九型人格与机器人项目表现的可靠对应证据。"
+              "证据缺口：本页未核得九型人格与机器人维护表现的独立效标。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.15",
@@ -28131,7 +28142,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要读图、单位换算、控制与概率基础；能力由项目证据体现，不设IQ分数阈值。"
+              "任务涉及读图、接线、故障诊断和控制程序；工单记录可展示处理过程，本页不设IQ阈值或预测绩效。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.18",
@@ -28146,7 +28157,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有统一智商测试入门分数。"
+              "证据缺口：未核得IQ与本岗录用或维护质量的独立效标。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.19",
@@ -28204,7 +28215,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪量表不取代工程审查。"
+              "证据缺口：未核得情绪智力量表与本岗录用、事故或维护质量的独立效标。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.23",
@@ -28262,7 +28273,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "判断适合度看能否安装、调试、测试、记录和升级真实系统问题，而非人格分数。"
+              "可用受监督的安装、排障与测试任务探索偏好；本页未验证项目证据和人格分数的相对预测效度。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.27",
@@ -28277,12 +28288,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "工业机器人系统集成"
+              "机器人系统设计"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.28",
           "source_refs": [
-            "editor",
+            "privacy",
             "editor"
           ],
           "type": "prose"
@@ -28292,12 +28303,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意处理机械臂、末端工具、产线接口与安全围护。"
+              "可探索从设备排障转向系统需求、接口和设计验证。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.29",
           "source_refs": [
-            "editor",
+            "privacy",
             "editor"
           ],
           "type": "prose"
@@ -28307,12 +28318,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "节拍演示不能替代完整失效与人员接近测试。"
+              "须补系统设计知识和相应职责，维护经验不授设计放行权。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.30",
           "source_refs": [
-            "editor",
+            "privacy",
             "editor"
           ],
           "type": "prose"
@@ -28322,12 +28333,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "自主移动机器人"
+              "电气与电子工程技术"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.31",
           "source_refs": [
-            "editor",
+            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -28337,12 +28348,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意处理感知、定位、导航与动态环境。"
+              "可探索电路、仪表与控制器的测试和技术支持。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.32",
           "source_refs": [
-            "editor",
+            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -28352,12 +28363,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "仿真地图性能不保证真实场地安全。"
+              "须补目标设备与工程技术要求，不把机器人维护当全部电气电子职责。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.33",
           "source_refs": [
-            "editor",
+            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -28367,12 +28378,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "机器人控制与软件"
+              "工业机械维护"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.34",
           "source_refs": [
-            "editor",
+            "operations",
             "editor"
           ],
           "type": "prose"
@@ -28382,12 +28393,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意调试控制循环、通信和异常恢复。"
+              "可探索更广工业机械的传动、装配与故障定位。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.35",
           "source_refs": [
-            "editor",
+            "operations",
             "editor"
           ],
           "type": "prose"
@@ -28397,12 +28408,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "只会实现正常路径而忽视停止条件须补验证。"
+              "需补具体机械类型、检修流程和现场授权。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.36",
           "source_refs": [
-            "editor",
+            "operations",
             "editor"
           ],
           "type": "prose"
@@ -28412,12 +28423,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "传感器与机电安装"
+              "机电系统维护"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.37",
           "source_refs": [
-            "onet",
+            "hr",
             "editor"
           ],
           "type": "prose"
@@ -28427,12 +28438,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意核标定、驱动、结构和电气接口。"
+              "可探索多类机电与自动化设备的安装、测试和维护。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.38",
           "source_refs": [
-            "onet",
+            "hr",
             "editor"
           ],
           "type": "prose"
@@ -28442,12 +28453,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "单个组件达标不代表整机可用。"
+              "设备对象不同，须另核培训与操作权限。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.39",
           "source_refs": [
-            "onet",
+            "hr",
             "editor"
           ],
           "type": "prose"
@@ -28457,13 +28468,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "系统测试与验证"
+              "制造工程"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.40",
           "source_refs": [
-            "editor",
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -28473,13 +28482,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意复现故障、管理测试版本和边界场景。"
+              "可探索维修问题与产线工艺、节拍和质量之间的关系。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.41",
           "source_refs": [
-            "editor",
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -28489,13 +28496,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "测试结论须写清平台与覆盖范围。"
+              "需补制造系统设计职责，不把工单测试当工艺放行。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.42",
           "source_refs": [
-            "editor",
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -28505,12 +28510,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "应用与现场集成"
+              "工业电气设备维修"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.43",
           "source_refs": [
-            "editor",
             "editor"
           ],
           "type": "prose"
@@ -28520,12 +28524,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意与客户场景、技术员和安全人员协作。"
+              "可探索接线、控制器与工业电气设备的故障记录。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.44",
           "source_refs": [
-            "editor",
             "editor"
           ],
           "type": "prose"
@@ -28535,12 +28538,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "现场部署权限与产品安全责任另核。"
+              "电气作业资格、设备范围和现场授权另核。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.45",
           "source_refs": [
-            "editor",
             "editor"
           ],
           "type": "prose"
@@ -28550,7 +28552,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "内向者可以做机器人工程；需清楚记录接口与测试结果。"
+              "内向偏好仅作探索；机器人技术员仍需记录和交接设备状态，本页未核得人格效标。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.46",
@@ -28580,7 +28582,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有某种MBTI类型更适合本职业的可靠证据。"
+              "本页未核得MBTI类型对本岗适配的独立效标，不作排名。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.48",
@@ -28595,11 +28597,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "霍兰德兴趣可用于探索动手和研究任务。"
+              "O*NET兴趣前三为RCI（现实型、常规型、研究型），仅作职业探索，不代表资格。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.49",
           "source_refs": [
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -28624,7 +28627,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格分数不能预测个人工程成果或事故。"
+              "本页未核得人格分数对维护成果或事故的独立效标，不用于预测这些结果。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.51",
@@ -28740,7 +28743,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET用于核机器人工程职业任务。"
+              "O*NET用于核机器人技术员的安装、维修、排障和测试任务。"
             ]
           },
           "id": "robotics-technicians.fit.personality-fit-block.59",
@@ -28759,7 +28762,7 @@
           },
           "id": "robotics-technicians.fit.personality-fit-block.60",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28787,7 +28790,7 @@
           },
           "id": "robotics-technicians.fit.personality-fit-block.62",
           "source_refs": [
-            "bls"
+            "nist"
           ],
           "type": "prose"
         },
@@ -28801,7 +28804,7 @@
           },
           "id": "robotics-technicians.fit.personality-fit-block.63",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -28843,7 +28846,7 @@
           },
           "id": "robotics-technicians.fit.personality-fit-block.66",
           "source_refs": [
-            "privacy"
+            "editor"
           ],
           "type": "prose"
         }
@@ -28901,10 +28904,10 @@
           "id": "robotics-technicians.risk.career-risk-cards.7",
           "source_refs": [
             "onet",
+            "nist",
             "bls",
-            "onet",
-            "privacy",
-            "onet"
+            "ilo",
+            "editor"
           ],
           "type": "links"
         },
@@ -28918,9 +28921,8 @@
           },
           "id": "robotics-technicians.risk.career-risk-cards.8",
           "source_refs": [
-            "editor",
-            "privacy",
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28935,7 +28937,6 @@
           "id": "robotics-technicians.risk.career-risk-cards.9",
           "source_refs": [
             "onet",
-            "bls",
             "editor"
           ],
           "type": "prose"
@@ -28945,15 +28946,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET给出职业任务；风险场景为编辑安装，不代表事故发生率或统一法规。"
+              "O*NET给出职业任务；风险场景为编辑归纳，不代表事故发生率或统一法规。"
             ]
           },
           "id": "robotics-technicians.risk.career-risk-cards.10",
           "source_refs": [
             "onet",
-            "bls",
-            "privacy",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29028,7 +29027,7 @@
           "id": "robotics-technicians.risk.career-risk-cards.15",
           "source_refs": [
             "onet",
-            "privacy"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29043,7 +29042,7 @@
           "id": "robotics-technicians.risk.career-risk-cards.16",
           "source_refs": [
             "onet",
-            "privacy"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29057,8 +29056,8 @@
           },
           "id": "robotics-technicians.risk.career-risk-cards.17",
           "source_refs": [
-            "privacy",
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29072,8 +29071,8 @@
           },
           "id": "robotics-technicians.risk.career-risk-cards.18",
           "source_refs": [
-            "privacy",
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29087,7 +29086,8 @@
           },
           "id": "robotics-technicians.risk.career-risk-cards.19",
           "source_refs": [
-            "privacy"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29101,7 +29101,8 @@
           },
           "id": "robotics-technicians.risk.career-risk-cards.20",
           "source_refs": [
-            "privacy"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29115,7 +29116,8 @@
           },
           "id": "robotics-technicians.risk.career-risk-cards.21",
           "source_refs": [
-            "privacy"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29129,8 +29131,8 @@
           },
           "id": "robotics-technicians.risk.career-risk-cards.22",
           "source_refs": [
-            "privacy",
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29204,8 +29206,9 @@
           },
           "id": "robotics-technicians.risk.career-risk-cards.27",
           "source_refs": [
-            "bls",
-            "onet"
+            "onet",
+            "nist",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29219,8 +29222,9 @@
           },
           "id": "robotics-technicians.risk.career-risk-cards.28",
           "source_refs": [
-            "bls",
-            "onet"
+            "onet",
+            "nist",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29235,7 +29239,8 @@
           "id": "robotics-technicians.risk.career-risk-cards.29",
           "source_refs": [
             "onet",
-            "bls"
+            "nist",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29250,7 +29255,8 @@
           "id": "robotics-technicians.risk.career-risk-cards.30",
           "source_refs": [
             "onet",
-            "bls"
+            "nist",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29338,7 +29344,7 @@
           },
           "id": "robotics-technicians.risk.career-risk-cards.36",
           "source_refs": [
-            "bls"
+            "nist"
           ],
           "type": "prose"
         },
@@ -29352,7 +29358,7 @@
           },
           "id": "robotics-technicians.risk.career-risk-cards.37",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -29366,7 +29372,7 @@
           },
           "id": "robotics-technicians.risk.career-risk-cards.38",
           "source_refs": [
-            "privacy"
+            "onet"
           ],
           "type": "prose",
           "visibility": "public"
@@ -29381,7 +29387,7 @@
           },
           "id": "robotics-technicians.risk.career-risk-cards.39",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         }
@@ -29483,7 +29489,7 @@
                 "id": "onet-traits",
                 "values": [
                   "任务证据",
-                  "能解释需求到验证的闭环，比只列工具名更有用。",
+                  "可用记录说明需求、接口、测试条件和失败路径；本页未验证其相对录用预测效度。",
                   "用虚构材料展示接口、版本和异常。"
                 ]
               },
@@ -29499,6 +29505,7 @@
           },
           "id": "robotics-technicians.path.employer-evidence.1",
           "source_refs": [
+            "bls",
             "onet",
             "editor"
           ],
@@ -29818,10 +29825,8 @@
           "id": "robotics-technicians.path.credential-decision.1",
           "source_refs": [
             "bls",
-            "editor",
-            "editor",
             "onet",
-            "privacy"
+            "editor"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -29839,9 +29844,8 @@
           },
           "id": "robotics-technicians.path.credential-boundary.1",
           "source_refs": [
-            "bls",
-            "editor",
-            "privacy"
+            "onet",
+            "editor"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -29851,7 +29855,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "O*NET认证目录是检索入口；学历、证书、岗位录用与设备操作授权要分别核实。",
+              "学历、证书、岗位录用和设备操作授权分别核实；中国本岗可比招聘样本、资格主体与厂商规则尚未取得，不能给出统一证书或起薪门槛。",
               "证书目录只能作为检索入口；正式资格、雇主授权和设备权限需分别核。"
             ]
           },
@@ -29898,10 +29902,10 @@
           },
           "id": "robotics-technicians.path.career-path-block.10",
           "source_refs": [
-            "bls",
             "onet",
+            "bls",
             "nbs",
-            "onet"
+            "nist"
           ],
           "type": "links"
         },
@@ -30027,7 +30031,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "架构与带教"
+              "技术带教与程序维护"
             ]
           },
           "id": "robotics-technicians.path.career-path-block.19",
@@ -30061,9 +30065,8 @@
           },
           "id": "robotics-technicians.path.career-path-block.21",
           "source_refs": [
-            "bls",
-            "editor",
-            "privacy"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -30077,9 +30080,8 @@
           },
           "id": "robotics-technicians.path.career-path-block.22",
           "source_refs": [
-            "nbs",
-            "bls",
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -30150,7 +30152,7 @@
           },
           "id": "robotics-technicians.path.career-path-block.27",
           "source_refs": [
-            "onet"
+            "nist"
           ],
           "type": "prose"
         },
@@ -30164,7 +30166,7 @@
           },
           "id": "robotics-technicians.path.career-path-block.28",
           "source_refs": [
-            "bls",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -30237,7 +30239,7 @@
           },
           "id": "robotics-technicians.path.career-path-block.33",
           "source_refs": [
-            "bls",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -30310,7 +30312,7 @@
           },
           "id": "robotics-technicians.path.career-path-block.38",
           "source_refs": [
-            "bls",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -30383,7 +30385,7 @@
           },
           "id": "robotics-technicians.path.career-path-block.43",
           "source_refs": [
-            "bls",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -30422,7 +30424,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "制定架构与验证策略，指导团队"
+              "维护技术程序与验证记录，指导排障和交接"
             ]
           },
           "id": "robotics-technicians.path.career-path-block.46",
@@ -30437,7 +30439,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "机器人架构与带教"
+              "机器人维护与带教负责人"
             ]
           },
           "id": "robotics-technicians.path.career-path-block.47",
@@ -30456,7 +30458,7 @@
           },
           "id": "robotics-technicians.path.career-path-block.48",
           "source_refs": [
-            "bls",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -30529,7 +30531,7 @@
           },
           "id": "robotics-technicians.path.career-path-block.53",
           "source_refs": [
-            "bls",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -30602,7 +30604,7 @@
           },
           "id": "robotics-technicians.path.career-path-block.58",
           "source_refs": [
-            "bls",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -30675,7 +30677,7 @@
           },
           "id": "robotics-technicians.path.career-path-block.63",
           "source_refs": [
-            "bls",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -30748,7 +30750,7 @@
           },
           "id": "robotics-technicians.path.career-path-block.68",
           "source_refs": [
-            "bls",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -30821,7 +30823,7 @@
           },
           "id": "robotics-technicians.path.career-path-block.73",
           "source_refs": [
-            "bls",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -30894,7 +30896,7 @@
           },
           "id": "robotics-technicians.path.career-path-block.78",
           "source_refs": [
-            "bls",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -30967,7 +30969,7 @@
           },
           "id": "robotics-technicians.path.career-path-block.83",
           "source_refs": [
-            "bls",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -31262,7 +31264,7 @@
           },
           "id": "robotics-technicians.market-signals.market-signal-card.16",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31276,7 +31278,7 @@
           },
           "id": "robotics-technicians.market-signals.market-signal-card.17",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31290,7 +31292,7 @@
           },
           "id": "robotics-technicians.market-signals.market-signal-card.18",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31304,7 +31306,7 @@
           },
           "id": "robotics-technicians.market-signals.market-signal-card.19",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31318,7 +31320,7 @@
           },
           "id": "robotics-technicians.market-signals.market-signal-card.20",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31332,7 +31334,7 @@
           },
           "id": "robotics-technicians.market-signals.market-signal-card.21",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31346,7 +31348,7 @@
           },
           "id": "robotics-technicians.market-signals.market-signal-card.22",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31472,7 +31474,7 @@
           },
           "id": "robotics-technicians.market-signals.market-signal-card.31",
           "source_refs": [
-            "bls"
+            "onet"
           ],
           "type": "prose"
         },
@@ -31500,7 +31502,7 @@
           },
           "id": "robotics-technicians.market-signals.market-signal-card.33",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31994,8 +31996,10 @@
           "id": "robotics-technicians.sources.source-card.2",
           "source_refs": [
             "onet",
-            "bls",
-            "nbs"
+            "oews",
+            "ep",
+            "nbs",
+            "editor"
           ],
           "type": "prose"
         },
@@ -32023,8 +32027,7 @@
           },
           "id": "robotics-technicians.sources.source-card.4",
           "source_refs": [
-            "editor",
-            "privacy"
+            "editor"
           ],
           "type": "prose"
         }
@@ -32211,8 +32214,8 @@
               {
                 "accessed_at": "2026-09-28",
                 "details": [
-                  "O*NET机器人技术员17-3024.01职业档案：仅用于上述适用范围。",
-                  "职业任务，不提供中国资格互认。"
+                  "电气与电子工程技术员17-3023.00任务；仅支持相关任务背景，不证明资格互认。",
+                  "机器人技术员与该职业职责不同，按目标岗位核要求。"
                 ],
                 "evidence_type": "官方职业档案",
                 "id": "facilities",
@@ -32227,8 +32230,8 @@
               {
                 "accessed_at": "2026-09-28",
                 "details": [
-                  "O*NET机器人技术员17-3024.01职业档案：仅用于上述适用范围。",
-                  "职业任务，不提供中国资格互认。"
+                  "工业机械维修工49-9041.00任务；仅支持相关任务背景，不证明资格互认。",
+                  "机器人技术员与该职业职责不同，按目标岗位核要求。"
                 ],
                 "evidence_type": "官方职业档案",
                 "id": "operations",
@@ -32243,8 +32246,8 @@
               {
                 "accessed_at": "2026-09-28",
                 "details": [
-                  "O*NET机器人技术员17-3024.01职业档案：仅用于上述适用范围。",
-                  "职业任务，不提供中国资格互认。"
+                  "机电与机电一体化技术员17-3024.00任务；仅支持相关任务背景，不证明资格互认。",
+                  "机器人技术员与该职业职责不同，按目标岗位核要求。"
                 ],
                 "evidence_type": "官方职业档案",
                 "id": "hr",
@@ -32324,18 +32327,18 @@
               {
                 "accessed_at": "2026-09-28",
                 "details": [
-                  "ILO生成式AI与工作更新：仅用于上述适用范围。",
-                  "跨职业任务分析，非机器人岗位替代率。"
+                  "以美国任务和模型能力估计潜在影响，不是机器人实机试验。",
+                  "不能换算本岗裁员、净效率或设备放行。"
                 ],
-                "evidence_type": "研究或框架",
+                "evidence_type": "research paper",
                 "id": "arxiv",
-                "limitation": "跨职业任务分析，非机器人岗位替代率。",
-                "market": "全球",
-                "name": "ILO生成式AI与工作更新",
-                "period": "2025年",
-                "publisher": "ILO",
-                "scope": "contextual",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-2025-update"
+                "limitation": "潜在任务影响，不提供机器人技术员实际采用率、事故率或替代率。",
+                "market": "美国劳动市场模型研究",
+                "name": "GPTs are GPTs：大模型任务暴露研究",
+                "period": "2023年",
+                "publisher": "Eloundou等研究者",
+                "scope": "task_exposure",
+                "url": "https://arxiv.org/abs/2303.10130"
               },
               {
                 "accessed_at": "2026-09-28",
@@ -37458,9 +37461,7 @@
         "occupation_scope": "BLS 17-3024统计母类",
         "period": "2025年",
         "source_refs": [
-          "oews",
-          "onet",
-          "nbs"
+          "oews"
         ]
       },
       {
@@ -37472,9 +37473,7 @@
         "occupation_scope": "BLS 17-3024统计母类",
         "period": "2025年",
         "source_refs": [
-          "oews",
-          "onet",
-          "nbs"
+          "oews"
         ]
       },
       {
@@ -37500,9 +37499,7 @@
         "occupation_scope": "BLS 17-3024统计母类",
         "period": "2025年",
         "source_refs": [
-          "oews",
-          "onet",
-          "nbs"
+          "oews"
         ]
       },
       {
@@ -37514,9 +37511,7 @@
         "occupation_scope": "BLS 17-3024统计母类",
         "period": "2025年",
         "source_refs": [
-          "oews",
-          "onet",
-          "nbs"
+          "oews"
         ]
       },
       {
@@ -37570,9 +37565,9 @@
         "occupation_scope": "17-3024.01子职业不单列",
         "period": "2025年",
         "source_refs": [
+          "oews",
           "bls",
-          "onet",
-          "nbs"
+          "editor"
         ]
       },
       {
@@ -37584,9 +37579,9 @@
         "occupation_scope": "17-3024.01子职业不单列",
         "period": "2025年",
         "source_refs": [
+          "oews",
           "bls",
-          "onet",
-          "nbs"
+          "editor"
         ]
       },
       {
@@ -37598,9 +37593,9 @@
         "occupation_scope": "17-3024.01子职业不单列",
         "period": "2025年",
         "source_refs": [
+          "oews",
           "bls",
-          "onet",
-          "nbs"
+          "editor"
         ]
       },
       {
@@ -37612,9 +37607,9 @@
         "occupation_scope": "17-3024.01子职业不单列",
         "period": "2025年",
         "source_refs": [
+          "oews",
           "bls",
-          "onet",
-          "nbs"
+          "editor"
         ]
       },
       {
@@ -37720,7 +37715,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "机器人系统 · 传感器 · 控制程序",
@@ -37771,7 +37766,7 @@
       "text": "机器人技术员"
     }
   },
-  "source_content_sha256": "b946622df3afae64fdb875330515c6c48e85e23ef57b8522be80523692cabeef",
+  "source_content_sha256": "cd260e29eebdc241ea1784b6d353d3b95ac97d7e3a922162bd1c0ba6f184f132",
   "subject": {
     "canonical_slug": "robotics-technicians",
     "name": "机器人技术员",

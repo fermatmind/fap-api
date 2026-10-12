@@ -2,6 +2,12 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:r5-submedian-1": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-submedian-2": {
+        "status": "pending_mapping"
+      },
       "fact:repair-us-1": {
         "status": "pending_mapping"
       },
@@ -7359,12 +7365,14 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "常用工具包括卷尺、T 形尺、刀具、螺钉枪、板材提升设备、脚手或梯具和嵌缝打磨工具。"
+              "BLS OOH明确列卷尺、直尺、工具刀与电锯，并说明可用机械举升设备、梯具或脚手架，使用抹子及机械贴带涂抹器；O*NET任务支持打磨等操作。具体设备选型和安全使用须按项目核，不将软件招聘技能当实体工具证据。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.profile.work-context-block.5",
           "source_refs": [
-            "onet-hot"
+            "r5-ooh",
+            "onet-details",
+            "onet-tapers"
           ],
           "type": "prose"
         },
@@ -7387,12 +7395,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "质量标准是尺寸、紧固间距、板缝与转角处理、表面等级和缺陷修补满足图纸与项目要求。"
+              "尺寸、固定/板缝、表面与缺陷处理按适用设计和系统核；不是本页统一验收参数。中国吊顶GB50210-2018第7章核设计、材料/质量、隐蔽验收与施工记录；封板前隐蔽项含吊杆/龙骨、内部管线设备等。吊杆长>1500mm设反支撑，上部网架/钢屋架或吊杆>2500mm设钢转换层，均须按实际设计核，不能混成同一阈值。GB55032-2022自2023-03-01实施且全强制，冲突以新规范为准；GB50210的7.1.12等列举强制条文已废止，非全标准废止。设计变更由设计单位出文件并按规定审批，不是项目负责人单独改图。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.profile.work-context-block.7",
           "source_refs": [
-            "repair-current-us"
+            "r5-gb50210",
+            "r5-quality-current",
+            "onet-details",
+            "onet-tapers"
           ],
           "type": "prose"
         },
@@ -7401,12 +7412,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "责任边界：真实从业者会搬运、切割、高处安装和打磨；这些动作必须受现场培训、防坠、粉尘和设备规则约束。"
+              "美国OOH组合工作体力要求高、室内、多数全职；O*NET两子职业情境比例须分开。中国实际培训/PPE由真实工作内容核。中国装修施工适用安全条例：单位书面交底/提供防护用品，人员正确使用；年度至少一次教育培训，新岗/新现场培训考核后上岗。遇危及人身安全紧急情况，可立即停作业或必要应急后撤离，不须先报负责人再避险；隐患及时报告。具体防护选型、普通质量问题的中止/恢复和验收授权须核项目制度，本轮未取得。GB55034-2022自2023-06-01实施全强制，本轮核公告未核完整正文，不据公告编造具体防坠方案。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.profile.work-context-block.8",
           "source_refs": [
-            "repair-current-us"
+            "r5-construction-safety",
+            "onet-details",
+            "onet-tapers",
+            "r5-ooh"
           ],
           "type": "prose"
         }
@@ -7557,12 +7571,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "失败模式包括漏洞口和异形节点、混淆单位、采用错误损耗率，或把示意图当成施工图。"
+              "编辑候选失败场景：遗漏洞口/异形节点、单位混用、错误损耗率或把示意当批准施工图；本轮未取得职业事故/AI错误发生率。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "g04-editor"
+            "g04-editor",
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -7571,12 +7587,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采用前要确认图纸版本、现场联网、数据责任、主管复核和变更记录；本页没有部署率证据。"
+              "编辑候选：试验尺寸/材料清单与记录起草，须批准设计、现场实测和人工复核；未取得该组合部署、提效、替代或净就业结果。传统算量/OCR与机械工具不当然是生成式AI。ILO暴露非采用或裁员，NIST是治理框架非施工许可。 含可识别个人资料时另核PIPL及上传权限；图纸不当然是个人或敏感信息，商业权属按合同核。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "g04-editor"
+            "g04-editor",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -7585,11 +7604,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "人工控制是现场复测、对图纸和材料批次、检查基层与节点，再由现场责任人验收。"
+              "现场尺寸/基层/材料须实测；验收按真实组织和程序，设计变更须设计单位文件/审批。中国吊顶GB50210-2018第7章核设计、材料/质量、隐蔽验收与施工记录；封板前隐蔽项含吊杆/龙骨、内部管线设备等。吊杆长>1500mm设反支撑，上部网架/钢屋架或吊杆>2500mm设钢转换层，均须按实际设计核，不能混成同一阈值。GB55032-2022自2023-03-01实施且全强制，冲突以新规范为准；GB50210的7.1.12等列举强制条文已废止，非全标准废止。设计变更由设计单位出文件并按规定审批，不是项目负责人单独改图。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.ai-impact.ai-impact-table.5",
           "source_refs": [
+            "r5-gb50210",
+            "r5-quality-current",
             "g04-editor"
           ],
           "type": "prose"
@@ -7620,7 +7641,8 @@
           "source_refs": [
             "g04-editor"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -7634,7 +7656,8 @@
           "source_refs": [
             "g04-editor"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         }
       ]
     },
@@ -7649,7 +7672,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与石膏板与吊顶板安装工及接缝处理工精确对应的中国大陆全国职业工资分布；现有官方来源为行业与单位类型聚合口径。"
+              "中国全国本组合精确职业工资仍缺。NBS2025建筑业城镇非私营92036、私营66275元/年，为税前年均行业代理，不是本职业中位/起薪/月薪；5人及以上城镇法人单位，排除个体与自由职业者，不把单位里的计件或兼职人员一概排除。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.china-salary.career-snapshot-primary-locale.1",
@@ -7781,12 +7804,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本轮只核对上述 BLS 组合职业范围；该来源报告中位工资，未取得可解释为各子职业统一起薪的同范围数据。这些数字必须保留年份与职业范围；中位数不是起薪，就业人数不是招聘数。"
+              "合并与精确分项工资分别核；中位非起薪、就业非招聘、空缺非净增。美国47-2080组合2025就业118000→2035为120300，净增2300；BLS精确增长1.9%，OOH取整2%，年均7600空缺主要含转岗/退出替代，非7600净新增或当前招聘。47-2081精确2.5%、年均6600，47-2082精确-1.6%、年均900；OOH分别取整2%/-2%，不要把组合增长分给两个职业。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "repair-current-us"
+            "r5-ooh",
+            "r5-bls-projections",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -7937,12 +7962,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "板材需要在高处定位或人工搬运而设备与分工未确认时，安装人员和附近工种可能跌落或被材料碰伤；施工人员应暂停、按项目安全计划确认搬运方式与作业设备，由现场负责人决定复工。"
+              "板材需要在高处定位或人工搬运而设备与分工未确认时，安装人员和附近工种可能跌落或被材料碰伤；编辑安全检查建议：依真实项目制度向有权人员核搬运方式、设备和具体中止/恢复安排；不预设普通问题由现场负责人一概决定复工。 中国装修施工适用安全条例：单位书面交底/提供防护用品，人员正确使用；年度至少一次教育培训，新岗/新现场培训考核后上岗。遇危及人身安全紧急情况，可立即停作业或必要应急后撤离，不须先报负责人再避险；隐患及时报告。具体防护选型、普通质量问题的中止/恢复和验收授权须核项目制度，本轮未取得。GB55034-2022自2023-06-01实施全强制，本轮核公告未核完整正文，不据公告编造具体防坠方案。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.risk.career-risk-cards.1",
           "source_refs": [
-            "repair-current-us"
+            "onet-details",
+            "onet-tapers",
+            "r5-construction-safety",
+            "g04-editor"
           ],
           "type": "prose"
         },
@@ -7951,12 +7979,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "切割或打磨产生粉尘和飞散物而控制措施未确认时，施工人员与同场人员可能暴露；执行者应按项目材料和安全要求使用适用控制，条件不明则交现场安全负责人。"
+              "切割或打磨产生粉尘和飞散物而控制措施未确认时，施工人员与同场人员可能暴露；执行者应按项目材料和安全要求使用适用控制，条件不明则交现场安全负责人。 按实际材料/设备与单位风险告知核控制，PPE由单位提供且人员正确使用；未取得粉尘限值/具体口罩型号，不编造通用选型。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.risk.career-risk-cards.2",
           "source_refs": [
-            "repair-current-us"
+            "onet-details",
+            "onet-tapers",
+            "r5-construction-safety",
+            "g04-editor"
           ],
           "type": "prose"
         },
@@ -7965,12 +7996,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "尺寸、放线或图纸版本不一致时，安装团队和后续工种可能面对错位与返工；安装人员应先核对版本、复测并记录差异，由项目负责人确认变更。"
+              "尺寸、放线或图纸版本不一致时，安装团队和后续工种可能面对错位与返工；安装人员应先核对版本、复测并记录差异，设计变更须由设计单位出具文件，并经建设单位同意和规定审批程序，不能由项目负责人单独改图。 中国吊顶GB50210-2018第7章核设计、材料/质量、隐蔽验收与施工记录；封板前隐蔽项含吊杆/龙骨、内部管线设备等。吊杆长>1500mm设反支撑，上部网架/钢屋架或吊杆>2500mm设钢转换层，均须按实际设计核，不能混成同一阈值。GB55032-2022自2023-03-01实施且全强制，冲突以新规范为准；GB50210的7.1.12等列举强制条文已废止，非全标准废止。设计变更由设计单位出文件并按规定审批，不是项目负责人单独改图。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.risk.career-risk-cards.3",
           "source_refs": [
-            "repair-current-us"
+            "onet-details",
+            "onet-tapers",
+            "r5-gb50210",
+            "r5-quality-current",
+            "g04-editor"
           ],
           "type": "prose"
         },
@@ -7979,12 +8014,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "机电、防火或潮湿节点与板材方案冲突时，相关系统可能被遮挡或失效；安装人员应保留开口、停止覆盖并交对应专业负责人确认。"
+              "机电、防火或潮湿节点与板材方案冲突时，相关系统可能被遮挡或失效；安装人员应保留开口、停止覆盖并交对应专业负责人确认。 编辑建议：发现管线/防火/湿度冲突及时报告，隐蔽项目按设计与现行规范检查记录；是否暂停覆盖和恢复由实际制度核，不凭本页授予专业签字权。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.risk.career-risk-cards.4",
           "source_refs": [
-            "repair-current-us"
+            "onet-details",
+            "onet-tapers",
+            "r5-gb50210",
+            "r5-quality-current",
+            "g04-editor"
           ],
           "type": "prose"
         },
@@ -7993,12 +8032,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "基层或接缝缺陷只有在后续饰面下才显现时，业主与饰面工会承受返修；安装或接缝处理人员应分层检查、记录修补，由验收责任人确认再进入下一工序。"
+              "基层或接缝缺陷只有在后续饰面下才显现时，业主与饰面工会承受返修；安装或接缝处理人员应分层检查、记录修补，由验收责任人确认再进入下一工序。 按实际设计和材料工序检查、留缺陷修补记录；中国吊顶隐蔽验收依适用规范，具体检查频次/验收组织本轮未取得。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.risk.career-risk-cards.5",
           "source_refs": [
-            "repair-current-us"
+            "onet-details",
+            "onet-tapers",
+            "r5-gb50210",
+            "r5-quality-current",
+            "g04-editor"
           ],
           "type": "prose"
         }
@@ -8037,13 +8080,20 @@
               "evidence",
               "next_step"
             ],
+            "column_labels": [
+              "角色",
+              "初始任务",
+              "责任边界",
+              "可核证据",
+              "下一步"
+            ],
             "rows": [
               [
                 "安装助手/学徒",
                 "搬运材料、测量标记并在监督下准备安装",
                 "不得独立承担高处、用电或未授权工具作业",
                 "跟岗记录与带教评语；能回到图纸复核尺寸",
-                "在带教下独立完成基础安装工序"
+                "在实际带教与权限范围逐步承担基础工序"
               ],
               [
                 "石膏板与吊顶板安装工（47-2081.00）",
@@ -8055,7 +8105,7 @@
               [
                 "接缝处理工（Taper，47-2082.00）",
                 "贴带、分层嵌缝、打磨并修补表面缺陷",
-                "接缝职责属 47-2082.00，不并入 47-2081.00",
+                "统计精确代码分开；OOH说明部分实际人员兼做安装/嵌缝，不把代码当法律排他授权",
                 "分层嵌缝与打磨记录、表面等级检查结果",
                 "提升表面等级控制与缺陷修补能力"
               ],
@@ -8077,9 +8127,14 @@
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.path.entry-role-comparison.1",
           "source_refs": [
-            "g04-editor",
             "onet-details",
-            "onet-tapers"
+            "onet-tapers",
+            "r5-ooh",
+            "r5-gb50210",
+            "r5-quality-current",
+            "r5-construction-safety",
+            "r5-special",
+            "g04-editor"
           ],
           "type": "table"
         },
@@ -8206,13 +8261,22 @@
               "next_step",
               "review"
             ],
+            "column_labels": [
+              "资格/训练",
+              "条件",
+              "责任边界",
+              "材料",
+              "法域",
+              "下一步",
+              "核验对象"
+            ],
             "rows": [
               [
                 "高中或同等学历",
-                "无正式学历门槛，多数通过在职培训入行",
+                "美国OOH组合通常不要求正式学历凭证，部分雇主偏好高中；学徒通常需高中/同等学历，少数学徒2—4年，多数在岗训练通常至12个月。O*NET47-2082新雇教育反馈高中59%、不足高中25%、中等后证书16%；47-2081为不足高中42%、高中24%、中等后证书19%，两职业不合并反馈、也非法律学历门槛。",
                 "学历本身不授予现场作业授权",
                 "学历材料与录用条件",
-                "按雇主与项目核验",
+                "美国OOH；中国雇主学历要求另核",
                 "核对目标岗位的教育与经验要求",
                 "由雇主确认"
               ],
@@ -8228,7 +8292,7 @@
               [
                 "在职培训或学徒（47-2082.00）",
                 "单独练习贴带、嵌缝、打磨与缺陷修补",
-                "接缝训练不并入 47-2081.00 的授权",
+                "子职业任务/统计分开，实际兼做需分别具备技能与权限；代码不是执业许可证",
                 "培训记录与表面等级检查结果",
                 "按雇主与项目核验",
                 "核对目标项目的训练要求",
@@ -8236,7 +8300,7 @@
               ],
               [
                 "安全培训",
-                "按项目要求参加高处、用电与粉尘防护培训",
+                "中国装修施工适用安全条例：单位书面交底/提供防护用品，人员正确使用；年度至少一次教育培训，新岗/新现场培训考核后上岗。遇危及人身安全紧急情况，可立即停作业或必要应急后撤离，不须先报负责人再避险；隐患及时报告。具体防护选型、普通质量问题的中止/恢复和验收授权须核项目制度，本轮未取得。GB55034-2022自2023-06-01实施全强制，本轮核公告未核完整正文，不据公告编造具体防坠方案。 住建部令60自2026-06-01实施，房屋/市政施工规定范围特种作业须相应训练考核取证；不能凭“吊顶”名称判人人持证或人人免证，另行范围与属地程序未取得。首次证者至少6个月监督实习，由同工种6年以上者指导且不得独立作业；连续作业不超4小时、休至少1小时只用于该规定特种人员，不外推全部安装/嵌缝工。",
                 "培训不替代现场安全交底与作业许可",
                 "安全培训记录与考核结果",
                 "按项目与工作地核验",
@@ -8265,9 +8329,14 @@
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.path.credential-decision.1",
           "source_refs": [
-            "g04-editor",
             "onet-details",
-            "onet-tapers"
+            "onet-tapers",
+            "r5-ooh",
+            "r5-gb50210",
+            "r5-quality-current",
+            "r5-construction-safety",
+            "r5-special",
+            "g04-editor"
           ],
           "type": "table"
         },
@@ -8290,14 +8359,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "组合内成长按角色分别推进：47-2081.00 从受监督测量、切割和固定走向复杂布局或吊顶系统，47-2082.00 从贴带嵌缝走向表面等级控制与缺陷修补；转向木工时再按新职业核对训练。"
+              "美国OOH组合通常不要求正式学历凭证，部分雇主偏好高中；学徒通常需高中/同等学历，少数学徒2—4年，多数在岗训练通常至12个月。O*NET47-2082新雇教育反馈高中59%、不足高中25%、中等后证书16%；47-2081为不足高中42%、高中24%、中等后证书19%，两职业不合并反馈、也非法律学历门槛。 住建部令60自2026-06-01实施，房屋/市政施工规定范围特种作业须相应训练考核取证；不能凭“吊顶”名称判人人持证或人人免证，另行范围与属地程序未取得。首次证者至少6个月监督实习，由同工种6年以上者指导且不得独立作业；连续作业不超4小时、休至少1小时只用于该规定特种人员，不外推全部安装/嵌缝工。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.path.career-path-block.1",
           "source_refs": [
-            "g04-editor",
             "onet-details",
-            "onet-tapers"
+            "onet-tapers",
+            "r5-ooh",
+            "r5-special"
           ],
           "type": "prose"
         },
@@ -8547,12 +8617,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025 年组合职业在岗约 118,000 人。"
+              "美国47-2080组合2025就业118000→2035为120300，净增2300；BLS精确增长1.9%，OOH取整2%，年均7600空缺主要含转岗/退出替代，非7600净新增或当前招聘。47-2081精确2.5%、年均6600，47-2082精确-1.6%、年均900；OOH分别取整2%/-2%，不要把组合增长分给两个职业。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.market-signals.market-signal-card.3",
           "source_refs": [
-            "g04-editor"
+            "r5-ooh",
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -8921,30 +8992,29 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "证明当前公开统计是行业聚合口径，未建立与 canonical occupation 精确对应的全国职业工资分布。",
-                  "中文页面语言不证明该美国职业分类在中国大陆存在精确等价映射；不使用行业均值或美国数据填补。"
+                  "中国全国本组合精确职业工资仍缺。NBS2025建筑业城镇非私营92036、私营66275元/年，为税前年均行业代理，不是本职业中位/起薪/月薪；5人及以上城镇法人单位，排除个体与自由职业者，不把单位里的计件或兼职人员一概排除。"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wages",
-                "limitation": "中文页面语言不证明该美国职业分类在中国大陆存在精确等价映射；不使用行业均值或美国数据填补。",
+                "limitation": "中国全国本组合精确职业工资仍缺。NBS2025建筑业城镇非私营92036、私营66275元/年，为税前年均行业代理，不是本职业中位/起薪/月薪；5人及以上城镇法人单位，排除个体与自由职业者，不把单位里的计件或兼职人员一概排除。",
                 "market": "中国大陆全国口径",
                 "name": "2025年城镇单位就业人员年平均工资情况",
-                "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
+                "period": "2025年；英文页显示2026-05-16发布；检索2026-10-09",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "Detailed tasks, work context, skills and work styles.",
-                  "Employer tasks and local authorization vary."
+                  "47-2081安装墙板/吸声吊顶板等；rockboard非岩棉，acoustical tile非全部陶瓷砖。美国精确职业任务和情境，不证明中国施工标准。",
+                  "美国OOH组合通常不要求正式学历凭证，部分雇主偏好高中；学徒通常需高中/同等学历，少数学徒2—4年，多数在岗训练通常至12个月。O*NET47-2082新雇教育反馈高中59%、不足高中25%、中等后证书16%；47-2081为不足高中42%、高中24%、中等后证书19%，两职业不合并反馈、也非法律学历门槛。"
                 ],
                 "evidence_type": "official occupation detail",
                 "id": "onet-details",
-                "limitation": "Employer tasks and local authorization vary.",
+                "limitation": "按实际文档市场、分项、指标与时期使用，不能支持中国资格或GenAI部署。",
                 "market": "美国",
                 "name": "Drywall And Ceiling Tile Installers detailed occupation profile",
                 "period": "O*NET 2026 occupational profile; accessed 2026-08-31",
@@ -8953,14 +9023,13 @@
                 "url": "https://www.onetonline.org/link/details/47-2081.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "Technology mentions linked to the occupation.",
-                  "Posting mentions do not prove proficiency, adoption or automation rate."
+                  "47-2081 2025招聘全部唯一职业广告分母：Office<1%，Windows/Word未给比例；传统软件非GenAI。"
                 ],
                 "evidence_type": "official job-posting technology summary",
                 "id": "onet-hot",
-                "limitation": "Posting mentions do not prove proficiency, adoption or automation rate.",
+                "limitation": "按实际文档市场、分项、指标与时期使用，不能支持中国资格或GenAI部署。",
                 "market": "美国",
                 "name": "Hot Technologies 47-2081.00 Drywall And Ceiling Tile Installers",
                 "period": "O*NET technology data current 2026; accessed 2026-08-31",
@@ -8985,14 +9054,15 @@
                 "url": "https://www.onetonline.org/link/summary/47-2081.00"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持封接板缝、贴带、涂抹嵌缝料、打磨和修补的精确职业身份与任务。",
-                  "这是组合页面中的一个精确子职业，只支持该代码的身份与职责，不能单独代表组合页全部范围。"
+                  "47-2082全部16Core任务包括贴带、嵌缝、涂抹平整、打磨、修补；可用机械涂抹器，非GenAI采用。",
+                  "美国OOH组合通常不要求正式学历凭证，部分雇主偏好高中；学徒通常需高中/同等学历，少数学徒2—4年，多数在岗训练通常至12个月。O*NET47-2082新雇教育反馈高中59%、不足高中25%、中等后证书16%；47-2081为不足高中42%、高中24%、中等后证书19%，两职业不合并反馈、也非法律学历门槛。",
+                  "兴趣R92/C41/A12/I11/S8/E1；工作风格细节75/可靠66；情境手操作持续81%、站立78%、粉尘每日48%每周非每日36%、高处每日14%每周非每日46%每月非每周35%，不能合并成安装工比例。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-tapers",
-                "limitation": "这是组合页面中的一个精确子职业，只支持该代码的身份与职责，不能单独代表组合页全部范围。",
+                "limitation": "按实际文档市场、分项、指标与时期使用，不能支持中国资格或GenAI部署。",
                 "market": "美国",
                 "name": "47-2082.00 Tapers",
                 "period": "updated 2026; accessed 2026-09-06",
@@ -9017,20 +9087,278 @@
                 "url": "https://www.onetonline.org/link/localtrends/47-2081.00"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "2026-09-06 打开官方页面，按页面显示的精确、组合或父职业口径转录。",
-                  "中位数不是起薪；就业规模不是招聘量；预测不是个人录用保证；父职业数据不得改写为精确职业数据。"
+                  "美国47-2080合并职业2025工资中位59780美元/年、28.74美元/时；分项47-2081为58930/28.33，47-2082为68270/32.82。合并2025就业118000，2035为120300，净增2300；精确增长1.9%、OOH取整2%；年均空缺7600含替代。",
+                  "OOH分别显示行业就业份额和工资：安装工干墙/保温承包61%、自雇19%、非住宅7%；嵌缝工63%、19%、8%、油漆墙饰5%。行业中位工资不得当份额。",
+                  "多数在岗训练通常至12个月；部分学徒2—4年，通常需高中或同等学历；入职业通常无正式学历凭证，但部分雇主偏好高中。具体雇主/中国另核。"
                 ],
                 "evidence_type": "official occupation wage and outlook",
                 "id": "repair-current-us",
-                "limitation": "中位数不是起薪；就业规模不是招聘量；预测不是个人录用保证；父职业数据不得改写为精确职业数据。",
+                "limitation": "按实际文档市场、分项、指标与时期使用，不能支持中国资格或GenAI部署。",
                 "market": "美国",
                 "name": "Drywall Installers, Ceiling Tile Installers, and Tapers（47-2081.00 与 47-2082.00 组合）",
                 "period": "2025 wages and latest displayed outlook; accessed 2026-09-06",
                 "publisher": "U.S. Bureau of Labor Statistics / O*NET OnLine",
-                "scope": "exact",
+                "scope": "combined_with_exact_subrows",
                 "url": "https://www.bls.gov/ooh/construction-and-extraction/drywall-and-ceiling-tile-installers-and-tapers.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-oews-concepts",
+                "limitation": "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。",
+                "market": "美国",
+                "name": "BLS OEWS工资人群与组成",
+                "period": "现行方法；本批检索2026-10-09",
+                "publisher": "Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。"
+                ],
+                "evidence_type": "official law",
+                "id": "r5-cn-pipl",
+                "limitation": "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。",
+                "market": "中国内地",
+                "name": "个人信息保护法：安装与嵌缝项目资料中的可识别个人信息边界",
+                "period": "2021法；本批实际读；检索2026-10-09",
+                "publisher": "全国人大/中央网信办",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "自愿AI治理建议非安装与嵌缝项目资料的行业技术规范或岗位授权，也非工具采用/提效实测。"
+                ],
+                "evidence_type": "official framework",
+                "id": "r5-nist-current",
+                "limitation": "自愿AI治理建议非安装与嵌缝项目资料的行业技术规范或岗位授权，也非工具采用/提效实测。",
+                "market": "跨市场",
+                "name": "NIST AI RMF官方框架说明",
+                "period": "自愿框架1.0；本批实际读；检索2026-10-09",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本批实际读ILO2025摘要，本职业未核SOC47-2081和47-2082与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。"
+                ],
+                "evidence_type": "official research summary",
+                "id": "r5-ilo-current",
+                "limitation": "本批实际读ILO2025摘要，本职业未核SOC47-2081和47-2082与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。",
+                "market": "跨市场",
+                "name": "ILO2025 GenAI暴露研究官方摘要",
+                "period": "2025研究摘要；本批实际读；检索2026-10-09",
+                "publisher": "ILO",
+                "scope": "contextual",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "GB55032-2022自2023-03-01实施、全文强制，不一致以此为准；公告废止GB50210-2018第3.1.4/6.1.11/6.1.12/7.1.12/11.1.12，不等废止全标准。GB50210-2018吊顶7.1.2验设计和材料/隐蔽/施工记录，7.1.3人造木板甲醛复验；7.1.4隐蔽项含管设备/水管试压风管严密、木龙骨防火防腐、埋件/吊杆/龙骨/填充/反支撑转换层；7.1.7装龙骨前净高洞口及吊顶管设备支架标高交接；7.1.8木龙骨木面板防火；7.1.11端部距<=300mm、吊杆>1500mm反支撑、遇设备调整吊杆或型钢支架；7.1.13连接安全可靠，7.1.14上部网架钢屋架或吊杆>2500mm设钢结构转换层；7.1.15大面积或狭长伸缩/分格缝符合设计。原7.1.12重型及振动设备禁装龙骨条款已废止，不能单作现行强制依据，须按现行规范和设计核荷载固定。GB55032本轮实际另读2.0.1—2.0.11：责任/质量体系、不得擅改设计、资料真实完整可追溯、培训考核及记录；未读其余全部条文，不宣称全文施工结论。"
+                ],
+                "evidence_type": "official standard",
+                "id": "r5-gb50210",
+                "limitation": "GB55032-2022自2023-03-01实施、全文强制，不一致以此为准；公告废止GB50210-2018第3.1.4/6.1.11/6.1.12/7.1.12/11.1.12，不等废止全标准。GB50210-2018吊顶7.1.2验设计和材料/隐蔽/施工记录，7.1.3人造木板甲醛复验；7.1.4隐蔽项含管设备/水管试压风管严密、木龙骨防火防腐、埋件/吊杆/龙骨/填充/反支撑转换层；7.1.7装龙骨前净高洞口及吊顶管设备支架标高交接；7.1.8木龙骨木面板防火；7.1.11端部距<=300mm、吊杆>1500mm反支撑、遇设备调整吊杆或型钢支架；7.1.13连接安全可靠，7.1.14上部网架钢屋架或吊杆>2500mm设钢结构转换层；7.1.15大面积或狭长伸缩/分格缝符合设计。原7.1.12重型及振动设备禁装龙骨条款已废止，不能单作现行强制依据，须按现行规范和设计核荷载固定。GB55032本轮实际另读2.0.1—2.0.11：责任/质量体系、不得擅改设计、资料真实完整可追溯、培训考核及记录；未读其余全部条文，不宣称全文施工结论。",
+                "market": "中国大陆",
+                "name": "GB50210-2018标准正文：吊顶7.1.2—7.1.15",
+                "period": "2018正文；部分强制条文2023废止",
+                "publisher": "住房城乡建设部 / 济南住建公开正文",
+                "scope": "industry_proxy",
+                "url": "https://jncc.jinan.gov.cn/cms_files/jcms1/web19/site/attach/0/9d0c7e1be25747879ba1fe1771616ebc.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "GB55032-2022自2023-03-01实施、全文强制，不一致以此为准；公告废止GB50210-2018第3.1.4/6.1.11/6.1.12/7.1.12/11.1.12，不等废止全标准。GB50210-2018吊顶7.1.2验设计和材料/隐蔽/施工记录，7.1.3人造木板甲醛复验；7.1.4隐蔽项含管设备/水管试压风管严密、木龙骨防火防腐、埋件/吊杆/龙骨/填充/反支撑转换层；7.1.7装龙骨前净高洞口及吊顶管设备支架标高交接；7.1.8木龙骨木面板防火；7.1.11端部距<=300mm、吊杆>1500mm反支撑、遇设备调整吊杆或型钢支架；7.1.13连接安全可靠，7.1.14上部网架钢屋架或吊杆>2500mm设钢结构转换层；7.1.15大面积或狭长伸缩/分格缝符合设计。原7.1.12重型及振动设备禁装龙骨条款已废止，不能单作现行强制依据，须按现行规范和设计核荷载固定。GB55032本轮实际另读2.0.1—2.0.11：责任/质量体系、不得擅改设计、资料真实完整可追溯、培训考核及记录；未读其余全部条文，不宣称全文施工结论。"
+                ],
+                "evidence_type": "official standard announcement",
+                "id": "r5-quality-current",
+                "limitation": "GB55032-2022自2023-03-01实施、全文强制，不一致以此为准；公告废止GB50210-2018第3.1.4/6.1.11/6.1.12/7.1.12/11.1.12，不等废止全标准。GB50210-2018吊顶7.1.2验设计和材料/隐蔽/施工记录，7.1.3人造木板甲醛复验；7.1.4隐蔽项含管设备/水管试压风管严密、木龙骨防火防腐、埋件/吊杆/龙骨/填充/反支撑转换层；7.1.7装龙骨前净高洞口及吊顶管设备支架标高交接；7.1.8木龙骨木面板防火；7.1.11端部距<=300mm、吊杆>1500mm反支撑、遇设备调整吊杆或型钢支架；7.1.13连接安全可靠，7.1.14上部网架钢屋架或吊杆>2500mm设钢结构转换层；7.1.15大面积或狭长伸缩/分格缝符合设计。原7.1.12重型及振动设备禁装龙骨条款已废止，不能单作现行强制依据，须按现行规范和设计核荷载固定。GB55032本轮实际另读2.0.1—2.0.11：责任/质量体系、不得擅改设计、资料真实完整可追溯、培训考核及记录；未读其余全部条文，不宣称全文施工结论。",
+                "market": "中国大陆",
+                "name": "住建部GB55032-2022公告（湖南省政府转载）",
+                "period": "2022公告；2023-03-01实施",
+                "publisher": "住房城乡建设部 / 湖南省政府",
+                "scope": "industry_proxy",
+                "url": "https://www.hunan.gov.cn/zqt/zcsd/202208/t20220825_27756285.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "GB55034-2022自2023-06-01实施、全部强制，冲突以其为准；公告废止JGJ80-2016第4.1.1/4.2.1/5.2.3/6.4.1/8.1.2，非全部JGJ80废止。本轮核公告，GB55034及JGJ80其余具体技术条款未核；不由标准名推任何高度一律同安全带/平台方案。建设工程安全生产管理条例2条含装修；27施工技术交底双方签字、31施工单位用火用电消防制度、32提供防护用品并告知危险操作、33正确使用，36每年至少一次培训考核、37换岗/新现场/新工艺等教育考核。32危及人身紧急时有权立即停止或必要应急措施后撤离，不等一般质量异常统一停工、等待领导许可或自签恢复；现场具体防护和复工方案未取得。"
+                ],
+                "evidence_type": "official standard announcement",
+                "id": "r5-safety-current",
+                "limitation": "GB55034-2022自2023-06-01实施、全部强制，冲突以其为准；公告废止JGJ80-2016第4.1.1/4.2.1/5.2.3/6.4.1/8.1.2，非全部JGJ80废止。本轮核公告，GB55034及JGJ80其余具体技术条款未核；不由标准名推任何高度一律同安全带/平台方案。建设工程安全生产管理条例2条含装修；27施工技术交底双方签字、31施工单位用火用电消防制度、32提供防护用品并告知危险操作、33正确使用，36每年至少一次培训考核、37换岗/新现场/新工艺等教育考核。32危及人身紧急时有权立即停止或必要应急措施后撤离，不等一般质量异常统一停工、等待领导许可或自签恢复；现场具体防护和复工方案未取得。",
+                "market": "中国大陆",
+                "name": "GB55034-2022公告（深圳市建筑工务署转载）",
+                "period": "2023-06-01实施",
+                "publisher": "住房城乡建设部 / 深圳市建筑工务署",
+                "scope": "industry_proxy",
+                "url": "https://szwb.sz.gov.cn/gwszwfw/zsk/hybz/content/post_10358827.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "GB55034-2022自2023-06-01实施、全部强制，冲突以其为准；公告废止JGJ80-2016第4.1.1/4.2.1/5.2.3/6.4.1/8.1.2，非全部JGJ80废止。本轮核公告，GB55034及JGJ80其余具体技术条款未核；不由标准名推任何高度一律同安全带/平台方案。建设工程安全生产管理条例2条含装修；27施工技术交底双方签字、31施工单位用火用电消防制度、32提供防护用品并告知危险操作、33正确使用，36每年至少一次培训考核、37换岗/新现场/新工艺等教育考核。32危及人身紧急时有权立即停止或必要应急措施后撤离，不等一般质量异常统一停工、等待领导许可或自签恢复；现场具体防护和复工方案未取得。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "r5-construction-safety",
+                "limitation": "GB55034-2022自2023-06-01实施、全部强制，冲突以其为准；公告废止JGJ80-2016第4.1.1/4.2.1/5.2.3/6.4.1/8.1.2，非全部JGJ80废止。本轮核公告，GB55034及JGJ80其余具体技术条款未核；不由标准名推任何高度一律同安全带/平台方案。建设工程安全生产管理条例2条含装修；27施工技术交底双方签字、31施工单位用火用电消防制度、32提供防护用品并告知危险操作、33正确使用，36每年至少一次培训考核、37换岗/新现场/新工艺等教育考核。32危及人身紧急时有权立即停止或必要应急措施后撤离，不等一般质量异常统一停工、等待领导许可或自签恢复；现场具体防护和复工方案未取得。",
+                "market": "中国大陆",
+                "name": "建设工程安全生产管理条例现行公开正文",
+                "period": "2004-02-01实施；现行公开正文",
+                "publisher": "国务院 / 北京市政府",
+                "scope": "industry_proxy",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/202307/t20230719_3165890.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "住建部令60号2025-12-17公布、2026-06-01施行，并废止2008建质75；2条房屋市政危险特种工种范围另定，3条专门培训考核持对应证上岗，不按“吊顶安装”名称判全员免证或全员同证。7条>=18/初中或以上及健康等条件，9理论/操作均合格；14证有效3年，17届满30工作日前延续、超过60周岁延续须年度健康检查，不简单60一律禁止。22初次取证至少6个月实习、相应工种6年以上人员指导且不得独立；23用人单位职责含防护/交底/合理安排且连续作业<=4小时、间隔休息>=1小时，只针对适用特种作业不外推全体普通安装工。28危及人身紧急停或必要措施后撤离、29事故隐患即时报告安全管理/单位负责人，重大隐患可直接向县以上住建报告。本轮未取得另行工种目录/全属地办理和具体岗位认定，需据实际作业核。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "r5-special",
+                "limitation": "住建部令60号2025-12-17公布、2026-06-01施行，并废止2008建质75；2条房屋市政危险特种工种范围另定，3条专门培训考核持对应证上岗，不按“吊顶安装”名称判全员免证或全员同证。7条>=18/初中或以上及健康等条件，9理论/操作均合格；14证有效3年，17届满30工作日前延续、超过60周岁延续须年度健康检查，不简单60一律禁止。22初次取证至少6个月实习、相应工种6年以上人员指导且不得独立；23用人单位职责含防护/交底/合理安排且连续作业<=4小时、间隔休息>=1小时，只针对适用特种作业不外推全体普通安装工。28危及人身紧急停或必要措施后撤离、29事故隐患即时报告安全管理/单位负责人，重大隐患可直接向县以上住建报告。本轮未取得另行工种目录/全属地办理和具体岗位认定，需据实际作业核。",
+                "market": "中国大陆",
+                "name": "建筑施工特种作业人员管理规定：住建部令60号",
+                "period": "2026-06-01实施",
+                "publisher": "住房城乡建设部 / 北京市住建委",
+                "scope": "industry_proxy",
+                "url": "https://zjw.beijing.gov.cn/bjjs/xxgk/543346069/543346064/743905392/index.shtml"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国47-2080合并职业2025工资中位59780美元/年、28.74美元/时；分项47-2081为58930/28.33，47-2082为68270/32.82。合并2025就业118000，2035为120300，净增2300；精确增长1.9%、OOH取整2%；年均空缺7600含替代。",
+                  "OOH分别显示行业就业份额和工资：安装工干墙/保温承包61%、自雇19%、非住宅7%；嵌缝工63%、19%、8%、油漆墙饰5%。行业中位工资不得当份额。",
+                  "多数在岗训练通常至12个月；部分学徒2—4年，通常需高中或同等学历；入职业通常无正式学历凭证，但部分雇主偏好高中。具体雇主/中国另核。"
+                ],
+                "evidence_type": "official occupation outlook",
+                "id": "r5-ooh",
+                "limitation": "合并及精确子行分别引用；OEWS工资排除自雇，EP就业含自雇；不代表中国工资、个人招聘或AI因果。",
+                "market": "美国",
+                "name": "BLS OOH石膏板/吊顶安装与嵌缝职业（含精确分项）",
+                "period": "2025/2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "combined_with_exact_subrows",
+                "url": "https://www.bls.gov/ooh/construction-and-extraction/drywall-and-ceiling-tile-installers-and-tapers.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "同版表分别核47-2081：102.2→104.7千人、净增2.5千、2.5%、年均6.6千；47-2082：15.8→15.5千、净减0.3千、-1.6%、年均0.9千；合并47-2080：118.0→120.3千、1.9%、年均7.6千。OOH整数百分比另列，非此表原精确率。"
+                ],
+                "evidence_type": "official employment projections",
+                "id": "r5-bls-projections",
+                "limitation": "BLS47-2081精确行：2025就业102.2千人→2035预计104.7千人，净增2.5千人，增长2.5%；2025—2035年均空缺6.6千人约6,600，含增长与更替，非十年合计或每年净增。OOH精确行取整2%，O*NET类别平均3%—4%与精细数不同，保留各自来源、精确结论以BLS行2.5%为准。OOH47-2080安装+嵌缝合并118000/取整2%/年均7600对应本页组合；不可当作任一单独子职业，合并精确增长率1.9%。自雇19.4%，就业含自雇、OEWS工资排自雇；不代表中国需求、个人录用或AI因果。 O*NET新入职教育反馈42%低于高中、24%高中或同等、19%中学后证书，展示三项合计85%不补剩余。JZ1—2/SVP<6是准备组，训练数天至一年，不是各岗位数周即上手。BLS47-2081典型无正式学历、相关经验None、中期在岗训练；OOH安装/嵌缝合并叙述通常OJT最长12个月，部分学徒2—4年且进入学徒通常高中，不全职业强制同课程或免许可；具体美国州/当地执照未穷尽核。",
+                "market": "美国",
+                "name": "BLS职业预测及特征表：47-2080合并及47-2081/47-2082分项",
+                "period": "2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact_subrows",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "编辑候选：可小范围验证图纸信息提取、下料清单/材料估算、检查记录整理；必须用现场尺寸、批准设计和人工复核验证，未取得本职业部署、提效/减漏/替代数据，不把传统算量、OCR或机械举升等同生成式AI。O*NET7软件类含成本、数据库/商务、Office、Windows、OCR扫描、估算项目管理、Word；Hot3技能2025美国职业全部唯一招聘分母Office<1%，Windows/Word未给比例，不填0，不代表实际采用率。ILO暴露非裁员或采用，NIST治理非施工验收法规。"
+                ],
+                "evidence_type": "job posting skill statistics",
+                "id": "r5-hot",
+                "limitation": "编辑候选：可小范围验证图纸信息提取、下料清单/材料估算、检查记录整理；必须用现场尺寸、批准设计和人工复核验证，未取得本职业部署、提效/减漏/替代数据，不把传统算量、OCR或机械举升等同生成式AI。O*NET7软件类含成本、数据库/商务、Office、Windows、OCR扫描、估算项目管理、Word；Hot3技能2025美国职业全部唯一招聘分母Office<1%，Windows/Word未给比例，不填0，不代表实际采用率。ILO暴露非裁员或采用，NIST治理非施工验收法规。",
+                "market": "美国",
+                "name": "O*NET Hot Technologies：47-2081",
+                "period": "2025招聘",
+                "publisher": "O*NET / Lightcast",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/47-2081.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025美国该职业全部唯一招聘为分母：QuickBooks和Office均Not available，不填0，不说明采用或生成式AI。"
+                ],
+                "evidence_type": "job posting skill statistics",
+                "id": "r5-taper-hot",
+                "limitation": "2025美国该职业全部唯一招聘为分母：QuickBooks和Office均Not available，不填0，不说明采用或生成式AI。",
+                "market": "美国",
+                "name": "O*NET 47-2082 Hot Technologies",
+                "period": "2025招聘",
+                "publisher": "O*NET / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/47-2082.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "铺设地面弹性、隔音或装饰性覆盖材料；排除地毯、木材、硬砖；比较不等资格互认。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "r5-floor-detail",
+                "limitation": "铺设地面弹性、隔音或装饰性覆盖材料；排除地毯、木材、硬砖；比较不等资格互认。",
+                "market": "美国",
+                "name": "O*NET 47-2042地面铺装职责",
+                "period": "2026页面；检索2026-10-09",
+                "publisher": "O*NET / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2042.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "硬砖/石材铺到地墙顶等；编辑比较需补材料切割、铺贴和相关设计，不由吸声吊顶板经验推出胜任。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "r5-tile",
+                "limitation": "硬砖/石材铺到地墙顶等；编辑比较需补材料切割、铺贴和相关设计，不由吸声吊顶板经验推出胜任。",
+                "market": "美国",
+                "name": "O*NET相邻职业 47-2044.00",
+                "period": "2026页面；检索2026-10-09",
+                "publisher": "O*NET / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2044.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "砖砌块/石材砌筑等，需补砂浆和砌筑工艺；本组合任务不证明已有砌筑能力。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "r5-brick",
+                "limitation": "砖砌块/石材砌筑等，需补砂浆和砌筑工艺；本组合任务不证明已有砌筑能力。",
+                "market": "美国",
+                "name": "O*NET相邻职业 47-2021.00",
+                "period": "2026页面；检索2026-10-09",
+                "publisher": "O*NET / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "墙地顶等安装隔热/隔音材料；需补材料、系统和施工风险，非自动转岗。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "r5-insulation",
+                "limitation": "墙地顶等安装隔热/隔音材料；需补材料、系统和施工风险，非自动转岗。",
+                "market": "美国",
+                "name": "O*NET相邻职业 47-2131.00",
+                "period": "2026页面；检索2026-10-09",
+                "publisher": "O*NET / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2131.00"
               }
             ]
           },
@@ -9197,16 +9525,16 @@
         "authority_links": [
           {
             "来源": {
-              "$source": "dir-carpenter",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "类型": "官方或研究来源",
-            "适用范围": "仅按来源原始口径使用",
+            "类型": "国际组织研究",
+            "适用范围": "通用暴露边界，不估本组合结果",
             "链接": {
-              "$source": "dir-carpenter",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9215,16 +9543,16 @@
           },
           {
             "来源": {
-              "$source": "dir-floor-layer",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "类型": "官方或研究来源",
-            "适用范围": "仅按来源原始口径使用",
+            "类型": "官方治理框架",
+            "适用范围": "治理参考，不等施工验收法规",
             "链接": {
-              "$source": "dir-floor-layer",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9233,16 +9561,16 @@
           },
           {
             "来源": {
-              "$source": "dir-painter",
+              "$source": "r5-construction-safety",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "类型": "官方或研究来源",
-            "适用范围": "仅按来源原始口径使用",
+            "类型": "现行法规正文",
+            "适用范围": "中国装修施工适用安全义务",
             "链接": {
-              "$source": "dir-painter",
+              "$source": "r5-construction-safety",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9258,12 +9586,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "尺寸与材料清单整理",
+            "AI主要改变": "编辑候选，未核采用：尺寸与材料清单整理",
             "仍由人负责": "现场复测、手艺与安全判断",
             "方向": "本职业任务"
           },
           {
-            "AI主要改变": "排板与交接记录起草",
+            "AI主要改变": "编辑候选，未核采用：排板与交接记录起草",
             "仍由人负责": "原始记录核对与责任留痕",
             "方向": "工作流程"
           }
@@ -9276,18 +9604,18 @@
         },
         "evidence_rows": [
           {
-            "使用限制": "仅适用于所列职业、市场与时期；不外推到中国或所有项目与雇主。",
+            "使用限制": "非本组合部署或净就业结果",
             "来源": {
-              "$source": "dir-carpenter",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "职业任务暴露研究",
+            "结论": "暴露非采用/裁员",
             "链接": {
-              "$source": "dir-carpenter",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9295,18 +9623,18 @@
             }
           },
           {
-            "使用限制": "仅适用于所列职业、市场与时期；不外推到中国或所有项目与雇主。",
+            "使用限制": "非具体雇主流程",
             "来源": {
-              "$source": "dir-floor-layer",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "AI风险治理",
+            "结论": "治理非施工许可",
             "链接": {
-              "$source": "dir-floor-layer",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9314,18 +9642,18 @@
             }
           },
           {
-            "使用限制": "仅适用于所列职业、市场与时期；不外推到中国或所有项目与雇主。",
+            "使用限制": "资格、防护选型及恢复权限须具体核",
             "来源": {
-              "$source": "dir-painter",
+              "$source": "r5-construction-safety",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "中国施工安全法规",
+            "结论": "依法保护现场人员",
             "链接": {
-              "$source": "dir-painter",
+              "$source": "r5-construction-safety",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9357,14 +9685,14 @@
           {
             "回答": "不能从任务暴露推导替代日期；现场复测、手艺与安全判断仍需人负责。",
             "来源": {
-              "$source": "dir-carpenter",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
             "链接": {
-              "$source": "dir-carpenter",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9373,16 +9701,16 @@
             "问题": "AI 会取代这个职业吗？"
           },
           {
-            "回答": "先限定在尺寸整理、材料清单与记录起草。",
+            "回答": "编辑候选：试验尺寸/材料清单与记录起草，须批准设计、现场实测和人工复核；未取得该组合部署、提效、替代或净就业结果。传统算量/OCR与机械工具不当然是生成式AI。ILO暴露非采用或裁员，NIST是治理框架非施工许可。",
             "来源": {
-              "$source": "dir-floor-layer",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
             "链接": {
-              "$source": "dir-floor-layer",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9391,16 +9719,16 @@
             "问题": "AI 应先辅助什么？"
           },
           {
-            "回答": "高处作业、动力切割、脚手架与防坠、粉尘控制与结构或防火变更。",
+            "回答": "中国装修施工适用安全条例：单位书面交底/提供防护用品，人员正确使用；年度至少一次教育培训，新岗/新现场培训考核后上岗。遇危及人身安全紧急情况，可立即停作业或必要应急后撤离，不须先报负责人再避险；隐患及时报告。具体防护选型、普通质量问题的中止/恢复和验收授权须核项目制度，本轮未取得。GB55034-2022自2023-06-01实施全强制，本轮核公告未核完整正文，不据公告编造具体防坠方案。 住建部令60自2026-06-01实施，房屋/市政施工规定范围特种作业须相应训练考核取证；不能凭“吊顶”名称判人人持证或人人免证，另行范围与属地程序未取得。首次证者至少6个月监督实习，由同工种6年以上者指导且不得独立作业；连续作业不超4小时、休至少1小时只用于该规定特种人员，不外推全部安装/嵌缝工。",
             "来源": {
-              "$source": "dir-painter",
+              "$source": "r5-construction-safety",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
             "链接": {
-              "$source": "dir-painter",
+              "$source": "r5-construction-safety",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9430,7 +9758,7 @@
           },
           {
             "步骤": "记录升级",
-            "说明": "发现节点冲突或安全隐患立即停止并上报。"
+            "说明": "中国装修施工适用安全条例：单位书面交底/提供防护用品，人员正确使用；年度至少一次教育培训，新岗/新现场培训考核后上岗。遇危及人身安全紧急情况，可立即停作业或必要应急后撤离，不须先报负责人再避险；隐患及时报告。具体防护选型、普通质量问题的中止/恢复和验收授权须核项目制度，本轮未取得。GB55034-2022自2023-06-01实施全强制，本轮核公告未核完整正文，不据公告编造具体防坠方案。"
           }
         ],
         "risk_rows": [
@@ -9455,23 +9783,13 @@
             "人的控制点": "回到图纸与现场复核原始数值。",
             "任务": "整理房间尺寸与材料清单",
             "工作方向": "记录与信息管理",
-            "当前变化": {
-              "$item": "drywall-and-ceiling-tile-installers-and-tapers.ai-impact.ai-impact-table.7",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "type": "prose"
-            }
+            "当前变化": "编辑候选：尺寸与材料清单整理，未核采用/提效。"
           },
           {
             "人的控制点": "手艺、表面判断与现场协调由人负责。",
             "任务": "执行安装与嵌缝核心任务",
             "工作方向": "执行与协同",
-            "当前变化": {
-              "$item": "drywall-and-ceiling-tile-installers-and-tapers.ai-impact.ai-impact-table.8",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "type": "prose"
-            }
+            "当前变化": "职业任务含人工与机械施工，不证明生成式AI部署或就业结果。"
           },
           {
             "人的控制点": "按现场安全与授权链升级。",
@@ -9483,7 +9801,7 @@
             "人的控制点": "由现场责任人确认结论。",
             "任务": "形成检查与交接记录",
             "工作方向": "复盘与改进",
-            "当前变化": "可能辅助整理"
+            "当前变化": "编辑候选：记录起草，未核提效。"
           },
           {
             "人的控制点": "回到图纸与现场复测原始数值。",
@@ -9492,7 +9810,7 @@
             "当前变化": "编辑推演：工具可协助整理房间表、材料清单与纸面算量；这不证明工地已采用生成式 AI。"
           },
           {
-            "人的控制点": "发现越界或隐患即停止并升级。",
+            "人的控制点": "人身危险紧急时依法停或必要措施后撤离；质量冲突按真实项目报告处置，恢复权限另核。",
             "任务": "识别节点冲突与缺失信息",
             "工作方向": "边界与异常",
             "当前变化": "编辑推演：可起草排板或交接检查单，但不能确认现场尺寸、节点、防火体系或可施工性。"
@@ -9601,12 +9919,12 @@
       },
       "career_ai_description_block": {
         "body": [
-          "AI 与数字化工具可辅助整理房间尺寸表、材料清单与纸面算量、起草排板与交接检查单；但现场复测、节点处理、高处与用电安全、防火与结构变更的判断与最终责任仍由现场责任人承担。"
+          "编辑候选：试验尺寸/材料清单与记录起草，须批准设计、现场实测和人工复核；未取得该组合部署、提效、替代或净就业结果。传统算量/OCR与机械工具不当然是生成式AI。ILO暴露非采用或裁员，NIST是治理框架非施工许可。"
         ],
         "heading": "石膏板与吊顶板安装工及接缝处理工的工作对象与 AI 边界"
       },
       "career_path_block": {
-        "boundary": "入口要求、训练、安全授权与最终责任由具体工作地、项目或雇主核验。",
+        "boundary": "编辑成长路线非强制阶梯或已采雇主胜任标准；美国OOH实际可升主管/项目管理/估算或创业，中国资格/工种与授权分别核。",
         "competence_ladder": [
           {
             "description": "核对图纸版本、尺寸来源与材料批次。",
@@ -9633,15 +9951,15 @@
           "type": "prose"
         },
         "locale_requirements": {
-          "credential_boundary": "证书与培训不等于现场高处或设备作业授权，也不等于雇主录用。",
-          "jurisdiction": "训练、安全授权与雇主规则按工作地、项目与雇主分别核验。",
-          "summary": "美国这个组合职业通常无正式学历门槛，通过在职培训或学徒入行；训练与安全要求按工作地与雇主核验。"
+          "credential_boundary": "住建部令60自2026-06-01实施，房屋/市政施工规定范围特种作业须相应训练考核取证；不能凭“吊顶”名称判人人持证或人人免证，另行范围与属地程序未取得。首次证者至少6个月监督实习，由同工种6年以上者指导且不得独立作业；连续作业不超4小时、休至少1小时只用于该规定特种人员，不外推全部安装/嵌缝工。",
+          "jurisdiction": "中国装修施工适用安全条例：单位书面交底/提供防护用品，人员正确使用；年度至少一次教育培训，新岗/新现场培训考核后上岗。遇危及人身安全紧急情况，可立即停作业或必要应急后撤离，不须先报负责人再避险；隐患及时报告。具体防护选型、普通质量问题的中止/恢复和验收授权须核项目制度，本轮未取得。GB55034-2022自2023-06-01实施全强制，本轮核公告未核完整正文，不据公告编造具体防坠方案。",
+          "summary": "美国OOH组合通常不要求正式学历凭证，部分雇主偏好高中；学徒通常需高中/同等学历，少数学徒2—4年，多数在岗训练通常至12个月。O*NET47-2082新雇教育反馈高中59%、不足高中25%、中等后证书16%；47-2081为不足高中42%、高中24%、中等后证书19%，两职业不合并反馈、也非法律学历门槛。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
             "href": {
-              "$source": "dir-carpenter",
+              "$source": "r5-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9649,17 +9967,17 @@
             },
             "id": "dir-carpenter",
             "label": {
-              "$source": "dir-carpenter",
+              "$source": "r5-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "合并及精确子行分别引用；OEWS工资排除自雇，EP就业含自雇；不代表中国工资、个人招聘或AI因果。"
           },
           {
             "href": {
-              "$source": "dir-floor-layer",
+              "$source": "r5-special",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9667,17 +9985,17 @@
             },
             "id": "dir-floor-layer",
             "label": {
-              "$source": "dir-floor-layer",
+              "$source": "r5-special",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "住建部令60号2025-12-17公布、2026-06-01施行，并废止2008建质75；2条房屋市政危险特种工种范围另定，3条专门培训考核持对应证上岗，不按“吊顶安装”名称判全员免证或全员同证。7条>=18/初中或以上及健康等条件，9理论/操作均合格；14证有效3年，17届满30工作日前延续、超过60周岁延续须年度健康检查，不简单60一律禁止。22初次取证至少6个月实习、相应工种6年以上人员指导且不得独立；23用人单位职责含防护/交底/合理安排且连续作业<=4小时、间隔休息>=1小时，只针对适用特种作业不外推全体普通安装工。28危及人身紧急停或必要措施后撤离、29事故隐患即时报告安全管理/单位负责人，重大隐患可直接向县以上住建报告。本轮未取得另行工种目录/全属地办理和具体岗位认定，需据实际作业核。"
           },
           {
             "href": {
-              "$source": "dir-painter",
+              "$source": "r5-construction-safety",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9685,17 +10003,17 @@
             },
             "id": "dir-painter",
             "label": {
-              "$source": "dir-painter",
+              "$source": "r5-construction-safety",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "GB55034-2022自2023-06-01实施、全部强制，冲突以其为准；公告废止JGJ80-2016第4.1.1/4.2.1/5.2.3/6.4.1/8.1.2，非全部JGJ80废止。本轮核公告，GB55034及JGJ80其余具体技术条款未核；不由标准名推任何高度一律同安全带/平台方案。建设工程安全生产管理条例2条含装修；27施工技术交底双方签字、31施工单位用火用电消防制度、32提供防护用品并告知危险操作、33正确使用，36每年至少一次培训考核、37换岗/新现场/新工艺等教育考核。32危及人身紧急时有权立即停止或必要应急措施后撤离，不等一般质量异常统一停工、等待领导许可或自签恢复；现场具体防护和复工方案未取得。"
           },
           {
             "href": {
-              "$source": "nbs-wages",
+              "$source": "r5-quality-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9703,13 +10021,13 @@
             },
             "id": "nbs-wages",
             "label": {
-              "$source": "nbs-wages",
+              "$source": "r5-quality-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "GB55032-2022自2023-03-01实施、全文强制，不一致以此为准；公告废止GB50210-2018第3.1.4/6.1.11/6.1.12/7.1.12/11.1.12，不等废止全标准。GB50210-2018吊顶7.1.2验设计和材料/隐蔽/施工记录，7.1.3人造木板甲醛复验；7.1.4隐蔽项含管设备/水管试压风管严密、木龙骨防火防腐、埋件/吊杆/龙骨/填充/反支撑转换层；7.1.7装龙骨前净高洞口及吊顶管设备支架标高交接；7.1.8木龙骨木面板防火；7.1.11端部距<=300mm、吊杆>1500mm反支撑、遇设备调整吊杆或型钢支架；7.1.13连接安全可靠，7.1.14上部网架钢屋架或吊杆>2500mm设钢结构转换层；7.1.15大面积或狭长伸缩/分格缝符合设计。原7.1.12重型及振动设备禁装龙骨条款已废止，不能单作现行强制依据，须按现行规范和设计核荷载固定。GB55032本轮实际另读2.0.1—2.0.11：责任/质量体系、不得擅改设计、资料真实完整可追溯、培训考核及记录；未读其余全部条文，不宣称全文施工结论。"
           }
         ],
         "tracks": [
@@ -9718,7 +10036,7 @@
             "stages": [
               {
                 "credentials": "按雇主与项目要求参加安全培训。",
-                "next_moves": "独立完成基础安装或嵌缝工序。",
+                "next_moves": "带教与实际资格允许时逐步承担基础工序，非从学徒自动取得独立高风险作业权。",
                 "readiness_evidence": "跟岗记录与带教评语。",
                 "responsibility": "在带教下搬运材料、测量标记并准备安装。",
                 "role": "受监督学徒"
@@ -9768,7 +10086,7 @@
                 "credentials": "按工作地核验。",
                 "next_moves": "按授权链处理并留痕。",
                 "readiness_evidence": "有升级与处理记录。",
-                "responsibility": "识别基层、节点与湿度异常并停止。",
+                "responsibility": "识别基层/节点/湿度异常并报告，具体中止/恢复依真实项目；人身危险紧急时依法避险。",
                 "role": "异常处理"
               },
               {
@@ -9961,17 +10279,18 @@
           }
         ],
         "direct_answer": "先识别高处与搬运、粉尘与飞散物、图纸与尺寸、节点与防火冲突、基层与接缝隐蔽缺陷五类风险。",
-        "evidence_scope": "风险项按本职业内容与所列来源（O*NET 工作情境与官方职业资料）边界解释。",
+        "evidence_scope": "美国两子职业O*NET/OOH支持任务及情境；中国条例与规范仅支持各自义务，后果为编辑风险分析，未核发生率、具体复工/验收流程。",
         "heading": "石膏板与吊顶板安装工及接缝处理工的风险与控制点",
         "risks": [
           {
             "affected_roles": "石膏板与吊顶板安装工及接缝处理工",
             "consequence": "可能造成跌落或材料碰伤，后果严重且不可逆。",
             "evidence_refs": [
-              "dir-carpenter"
+              "dir-carpenter",
+              "dir-floor-layer"
             ],
             "id": "risk-1",
-            "mitigation": "暂停作业、按项目安全计划确认搬运方式与作业设备，由现场负责人决定复工。",
+            "mitigation": "中国装修施工适用安全条例：单位书面交底/提供防护用品，人员正确使用；年度至少一次教育培训，新岗/新现场培训考核后上岗。遇危及人身安全紧急情况，可立即停作业或必要应急后撤离，不须先报负责人再避险；隐患及时报告。具体防护选型、普通质量问题的中止/恢复和验收授权须核项目制度，本轮未取得。GB55034-2022自2023-06-01实施全强制，本轮核公告未核完整正文，不据公告编造具体防坠方案。",
             "scenario": "板材需在高处定位或人工搬运而设备与分工未确认。",
             "title": {
               "$item": "drywall-and-ceiling-tile-installers-and-tapers.risk.career-risk-cards.1",
@@ -9984,10 +10303,11 @@
             "affected_roles": "石膏板与吊顶板安装工及接缝处理工",
             "consequence": "可能造成施工人员与同场人员的粉尘暴露。",
             "evidence_refs": [
-              "dir-carpenter"
+              "dir-carpenter",
+              "dir-floor-layer"
             ],
             "id": "risk-2",
-            "mitigation": "按项目材料与安全要求使用适用控制，条件不明则交现场安全负责人。",
+            "mitigation": "按实际材料/设备与单位风险告知核控制，PPE由单位提供且人员正确使用；未取得粉尘限值/具体口罩型号，不编造通用选型。",
             "scenario": "切割或打磨产生粉尘与飞散物而控制措施未确认。",
             "title": {
               "$item": "drywall-and-ceiling-tile-installers-and-tapers.risk.career-risk-cards.2",
@@ -10000,10 +10320,11 @@
             "affected_roles": "石膏板与吊顶板安装工及接缝处理工",
             "consequence": "可能造成错位与返工，影响后续工种进度。",
             "evidence_refs": [
-              "dir-carpenter"
+              "dir-painter",
+              "nbs-wages"
             ],
             "id": "risk-3",
-            "mitigation": "先核对版本、复测并记录差异，由项目负责人确认变更。",
+            "mitigation": "中国吊顶GB50210-2018第7章核设计、材料/质量、隐蔽验收与施工记录；封板前隐蔽项含吊杆/龙骨、内部管线设备等。吊杆长>1500mm设反支撑，上部网架/钢屋架或吊杆>2500mm设钢转换层，均须按实际设计核，不能混成同一阈值。GB55032-2022自2023-03-01实施且全强制，冲突以新规范为准；GB50210的7.1.12等列举强制条文已废止，非全标准废止。设计变更由设计单位出文件并按规定审批，不是项目负责人单独改图。",
             "scenario": "尺寸、放线或图纸版本不一致。",
             "title": {
               "$item": "drywall-and-ceiling-tile-installers-and-tapers.risk.career-risk-cards.3",
@@ -10016,10 +10337,11 @@
             "affected_roles": "石膏板与吊顶板安装工及接缝处理工",
             "consequence": "相关系统可能被遮挡或失效，涉及安全与验收。",
             "evidence_refs": [
-              "dir-carpenter"
+              "dir-painter",
+              "nbs-wages"
             ],
             "id": "risk-4",
-            "mitigation": "保留开口、停止覆盖并交对应专业负责人确认。",
+            "mitigation": "编辑建议：发现管线/防火/湿度冲突及时报告，隐蔽项目按设计与现行规范检查记录；是否暂停覆盖和恢复由实际制度核，不凭本页授予专业签字权。",
             "scenario": "机电、防火或潮湿节点与板材方案冲突。",
             "title": {
               "$item": "drywall-and-ceiling-tile-installers-and-tapers.risk.career-risk-cards.4",
@@ -10032,10 +10354,11 @@
             "affected_roles": "石膏板与吊顶板安装工及接缝处理工",
             "consequence": "业主与饰面工会承受返修与工期损失。",
             "evidence_refs": [
-              "dir-carpenter"
+              "dir-painter",
+              "nbs-wages"
             ],
             "id": "risk-5",
-            "mitigation": "分层检查、记录修补，由验收责任人确认再进入下一工序。",
+            "mitigation": "按实际设计和材料工序检查、留缺陷修补记录；中国吊顶隐蔽验收依适用规范，具体检查频次/验收组织本轮未取得。",
             "scenario": "基层或接缝缺陷只有在后续饰面下才显现。",
             "title": {
               "$item": "drywall-and-ceiling-tile-installers-and-tapers.risk.career-risk-cards.5",
@@ -10048,10 +10371,11 @@
             "affected_roles": "石膏板与吊顶板安装工及接缝处理工",
             "consequence": "可能产生不可逆的安全后果。",
             "evidence_refs": [
-              "dir-carpenter"
+              "dir-carpenter",
+              "dir-floor-layer"
             ],
             "id": "risk-boundary",
-            "mitigation": "停止并按现场安全与授权链升级。",
+            "mitigation": "中国装修施工适用安全条例：单位书面交底/提供防护用品，人员正确使用；年度至少一次教育培训，新岗/新现场培训考核后上岗。遇危及人身安全紧急情况，可立即停作业或必要应急后撤离，不须先报负责人再避险；隐患及时报告。具体防护选型、普通质量问题的中止/恢复和验收授权须核项目制度，本轮未取得。GB55034-2022自2023-06-01实施全强制，本轮核公告未核完整正文，不据公告编造具体防坠方案。",
             "scenario": "遇到超出授权范围的高风险任务。",
             "title": "责任边界"
           }
@@ -10060,7 +10384,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "dir-carpenter",
+              "$source": "r5-construction-safety",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10068,17 +10392,17 @@
             },
             "id": "dir-carpenter",
             "label": {
-              "$source": "dir-carpenter",
+              "$source": "r5-construction-safety",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "GB55034-2022自2023-06-01实施、全部强制，冲突以其为准；公告废止JGJ80-2016第4.1.1/4.2.1/5.2.3/6.4.1/8.1.2，非全部JGJ80废止。本轮核公告，GB55034及JGJ80其余具体技术条款未核；不由标准名推任何高度一律同安全带/平台方案。建设工程安全生产管理条例2条含装修；27施工技术交底双方签字、31施工单位用火用电消防制度、32提供防护用品并告知危险操作、33正确使用，36每年至少一次培训考核、37换岗/新现场/新工艺等教育考核。32危及人身紧急时有权立即停止或必要应急措施后撤离，不等一般质量异常统一停工、等待领导许可或自签恢复；现场具体防护和复工方案未取得。"
           },
           {
             "href": {
-              "$source": "dir-floor-layer",
+              "$source": "onet-tapers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10086,17 +10410,17 @@
             },
             "id": "dir-floor-layer",
             "label": {
-              "$source": "dir-floor-layer",
+              "$source": "onet-tapers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "按实际文档市场、分项、指标与时期使用，不能支持中国资格或GenAI部署。"
           },
           {
             "href": {
-              "$source": "dir-painter",
+              "$source": "r5-quality-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10104,17 +10428,17 @@
             },
             "id": "dir-painter",
             "label": {
-              "$source": "dir-painter",
+              "$source": "r5-quality-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "GB55032-2022自2023-03-01实施、全文强制，不一致以此为准；公告废止GB50210-2018第3.1.4/6.1.11/6.1.12/7.1.12/11.1.12，不等废止全标准。GB50210-2018吊顶7.1.2验设计和材料/隐蔽/施工记录，7.1.3人造木板甲醛复验；7.1.4隐蔽项含管设备/水管试压风管严密、木龙骨防火防腐、埋件/吊杆/龙骨/填充/反支撑转换层；7.1.7装龙骨前净高洞口及吊顶管设备支架标高交接；7.1.8木龙骨木面板防火；7.1.11端部距<=300mm、吊杆>1500mm反支撑、遇设备调整吊杆或型钢支架；7.1.13连接安全可靠，7.1.14上部网架钢屋架或吊杆>2500mm设钢结构转换层；7.1.15大面积或狭长伸缩/分格缝符合设计。原7.1.12重型及振动设备禁装龙骨条款已废止，不能单作现行强制依据，须按现行规范和设计核荷载固定。GB55032本轮实际另读2.0.1—2.0.11：责任/质量体系、不得擅改设计、资料真实完整可追溯、培训考核及记录；未读其余全部条文，不宣称全文施工结论。"
           },
           {
             "href": {
-              "$source": "nbs-wages",
+              "$source": "r5-gb50210",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10122,13 +10446,13 @@
             },
             "id": "nbs-wages",
             "label": {
-              "$source": "nbs-wages",
+              "$source": "r5-gb50210",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "GB55032-2022自2023-03-01实施、全文强制，不一致以此为准；公告废止GB50210-2018第3.1.4/6.1.11/6.1.12/7.1.12/11.1.12，不等废止全标准。GB50210-2018吊顶7.1.2验设计和材料/隐蔽/施工记录，7.1.3人造木板甲醛复验；7.1.4隐蔽项含管设备/水管试压风管严密、木龙骨防火防腐、埋件/吊杆/龙骨/填充/反支撑转换层；7.1.7装龙骨前净高洞口及吊顶管设备支架标高交接；7.1.8木龙骨木面板防火；7.1.11端部距<=300mm、吊杆>1500mm反支撑、遇设备调整吊杆或型钢支架；7.1.13连接安全可靠，7.1.14上部网架钢屋架或吊杆>2500mm设钢结构转换层；7.1.15大面积或狭长伸缩/分格缝符合设计。原7.1.12重型及振动设备禁装龙骨条款已废止，不能单作现行强制依据，须按现行规范和设计核荷载固定。GB55032本轮实际另读2.0.1—2.0.11：责任/质量体系、不得擅改设计、资料真实完整可追溯、培训考核及记录；未读其余全部条文，不宣称全文施工结论。"
           }
         ]
       },
@@ -10138,7 +10462,7 @@
             {
               "指标": "中国大陆职业工资口径",
               "数值": "证据不足：未取得全国单职业口径",
-              "说明": "现有官方来源为行业与单位类型聚合，未建立与本职业精确对应的全国职业工资分布。"
+              "说明": "中国全国本组合精确职业工资仍缺。NBS2025建筑业城镇非私营92036、私营66275元/年，为税前年均行业代理，不是本职业中位/起薪/月薪；5人及以上城镇法人单位，排除个体与自由职业者，不把单位里的计件或兼职人员一概排除。"
             }
           ],
           "china_ai_row": {
@@ -10155,19 +10479,19 @@
           },
           "china_edu_table": [
             {
-              "学历段": "无正式学历门槛",
-              "岗位方向": "板材安装与吊顶",
-              "说明": "多数通过在职培训或学徒入行。"
+              "学历段": "中国岗位学历",
+              "岗位方向": "按实际雇主岗位核",
+              "说明": "中国装修施工适用安全条例：单位书面交底/提供防护用品，人员正确使用；年度至少一次教育培训，新岗/新现场培训考核后上岗。遇危及人身安全紧急情况，可立即停作业或必要应急后撤离，不须先报负责人再避险；隐患及时报告。具体防护选型、普通质量问题的中止/恢复和验收授权须核项目制度，本轮未取得。GB55034-2022自2023-06-01实施全强制，本轮核公告未核完整正文，不据公告编造具体防坠方案。"
             },
             {
-              "学历段": "在职培训/学徒",
-              "岗位方向": "接缝贴带与嵌缝",
-              "说明": "技能随工序与表面等级要求提升。"
+              "学历段": "作业训练与交底",
+              "岗位方向": "板材安装/嵌缝/吊顶按工作内容核",
+              "说明": "中国装修施工适用安全条例：单位书面交底/提供防护用品，人员正确使用；年度至少一次教育培训，新岗/新现场培训考核后上岗。遇危及人身安全紧急情况，可立即停作业或必要应急后撤离，不须先报负责人再避险；隐患及时报告。具体防护选型、普通质量问题的中止/恢复和验收授权须核项目制度，本轮未取得。GB55034-2022自2023-06-01实施全强制，本轮核公告未核完整正文，不据公告编造具体防坠方案。"
             },
             {
-              "学历段": "安全培训",
-              "岗位方向": "高处、用电与粉尘防护",
-              "说明": "按雇主与项目要求核验。"
+              "学历段": "规定范围特种作业",
+              "岗位方向": "按实际工种、工作地核",
+              "说明": "住建部令60自2026-06-01实施，房屋/市政施工规定范围特种作业须相应训练考核取证；不能凭“吊顶”名称判人人持证或人人免证，另行范围与属地程序未取得。首次证者至少6个月监督实习，由同工种6年以上者指导且不得独立作业；连续作业不超4小时、休至少1小时只用于该规定特种人员，不外推全部安装/嵌缝工。"
             },
             {
               "学历段": "职业级工资口径",
@@ -10182,7 +10506,7 @@
               "需求": "证据不足：未取得全国单职业口径"
             },
             {
-              "备注": "岗位与地区差异明显。",
+              "备注": "建筑装饰可能相关，未取得本职业需求/工资样本，不估全国差异。",
               "行业": "建筑装饰装修",
               "需求": "证据不足：未取得全国单职业口径"
             },
@@ -10203,7 +10527,7 @@
           "china_ref": {
             "$join": [
               {
-                "$source": "dir-carpenter",
+                "$source": "nbs-wages",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -10211,7 +10535,7 @@
               },
               "｜",
               {
-                "$source": "dir-carpenter",
+                "$source": "nbs-wages",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10244,7 +10568,7 @@
           "sources_note": {
             "$join": [
               {
-                "$source": "dir-floor-layer",
+                "$source": "nbs-wages",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -10252,7 +10576,7 @@
               },
               "｜",
               {
-                "$source": "dir-floor-layer",
+                "$source": "nbs-wages",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10279,7 +10603,7 @@
         "authority_sources": {
           "$join": [
             {
-              "$source": "dir-floor-layer",
+              "$source": "repair-current-us",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10287,7 +10611,7 @@
             },
             "｜",
             {
-              "$source": "dir-floor-layer",
+              "$source": "repair-current-us",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10303,7 +10627,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "dir-carpenter",
+                  "$source": "repair-current-us",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10311,7 +10635,7 @@
                 },
                 "｜",
                 {
-                  "$source": "dir-carpenter",
+                  "$source": "repair-current-us",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10322,12 +10646,15 @@
             }
           },
           {
-            "指标": "美国薪资低位",
-            "数值": "58,930 美元/年（28.33 美元/时，石膏板与吊顶板安装工中位）",
+            "指标": "安装子职业中位数",
+            "数值": {
+              "$fact": "r5-submedian-1",
+              "field": "display_value"
+            },
             "说明": {
               "$join": [
                 {
-                  "$source": "dir-carpenter",
+                  "$source": "repair-current-us",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10335,7 +10662,7 @@
                 },
                 "｜",
                 {
-                  "$source": "dir-carpenter",
+                  "$source": "repair-current-us",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10346,12 +10673,15 @@
             }
           },
           {
-            "指标": "美国薪资高位",
-            "数值": "68,270 美元/年（32.82 美元/时，接缝处理工中位）",
+            "指标": "嵌缝子职业中位数",
+            "数值": {
+              "$fact": "r5-submedian-2",
+              "field": "display_value"
+            },
             "说明": {
               "$join": [
                 {
-                  "$source": "dir-carpenter",
+                  "$source": "repair-current-us",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10359,7 +10689,7 @@
                 },
                 "｜",
                 {
-                  "$source": "dir-carpenter",
+                  "$source": "repair-current-us",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10375,7 +10705,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "dir-carpenter",
+                  "$source": "repair-current-us",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10383,7 +10713,7 @@
                 },
                 "｜",
                 {
-                  "$source": "dir-carpenter",
+                  "$source": "repair-current-us",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10399,7 +10729,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "dir-carpenter",
+                  "$source": "repair-current-us",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10407,7 +10737,7 @@
                 },
                 "｜",
                 {
-                  "$source": "dir-carpenter",
+                  "$source": "repair-current-us",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10423,7 +10753,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "dir-floor-layer",
+                  "$source": "repair-current-us",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10431,7 +10761,7 @@
                 },
                 "｜",
                 {
-                  "$source": "dir-floor-layer",
+                  "$source": "repair-current-us",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10447,7 +10777,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "dir-floor-layer",
+                  "$source": "repair-current-us",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10455,7 +10785,7 @@
                 },
                 "｜",
                 {
-                  "$source": "dir-floor-layer",
+                  "$source": "repair-current-us",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10471,7 +10801,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "dir-floor-layer",
+                  "$source": "repair-current-us",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10479,7 +10809,7 @@
                 },
                 "｜",
                 {
-                  "$source": "dir-floor-layer",
+                  "$source": "repair-current-us",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10490,7 +10820,7 @@
             }
           }
         ],
-        "boundary": "美国统计不代表中国职业工资或就业结果。",
+        "boundary": "美国2025工资为受雇直时税前工资，排除自雇，含佣金/生产奖金、不含加班溢价；EP就业纳入自雇。组合与子职业中位、行业中位、就业/空缺分别用。",
         "direct_answer": {
           "$item": "drywall-and-ceiling-tile-installers-and-tapers.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10533,24 +10863,24 @@
         "industry_period": "2025 年 5 月工资数据",
         "industry_rows": [
           {
-            "industry": "建筑业（来源覆盖范围）",
-            "median": "按来源",
-            "note": "组合职业以建筑业为主要行业。"
+            "industry": "安装子职业2025雇主结构",
+            "median": "干墙/保温承包61%、自雇19%、非住宅7%",
+            "note": "OOH2025精确分项；份额不是工资，行业工资不含自雇，不作个人收入或中国推算。"
           },
           {
-            "industry": "机构/雇主",
-            "median": "需核对",
-            "note": "培训与安全要求可能不同。"
+            "industry": "嵌缝子职业2025雇主结构",
+            "median": "干墙/保温承包63%、自雇19%、非住宅8%、油漆墙饰5%",
+            "note": "OOH2025精确分项；份额不是工资，行业工资不含自雇，不作个人收入或中国推算。"
           },
           {
-            "industry": "地区",
-            "median": "需核对",
-            "note": "地区工资差异明显。"
+            "industry": "安装子职业行业年薪中位",
+            "median": "非住宅67180、干墙/保温承包58850美元/年",
+            "note": "OOH2025精确分项；份额不是工资，行业工资不含自雇，不作个人收入或中国推算。"
           },
           {
-            "industry": "时期",
-            "median": "2025 年 5 月工资数据",
-            "note": "不得忽略时间口径。"
+            "industry": "嵌缝子职业行业年薪中位",
+            "median": "干墙/保温承包70830、非住宅68140、油漆墙饰58370美元/年",
+            "note": "OOH2025精确分项；份额不是工资，行业工资不含自雇，不作个人收入或中国推算。"
           }
         ],
         "industry_value_label": "来源原始值",
@@ -10597,19 +10927,19 @@
           {
             "equivalent": "安装工中位",
             "interpretation": "石膏板与吊顶板安装工的中位年薪；不是入职起薪。",
-            "label": "低位",
+            "label": "安装子职业中位",
             "value": "58,930 美元/年"
           },
           {
             "equivalent": "组合职业中位",
-            "interpretation": "组合职业一半从业者低于、一半高于该值。",
-            "label": "中位",
+            "interpretation": "OEWS受雇人员工资中位，非个人起薪或两个子职业中位的算术平均；自雇不在工资调查。",
+            "label": "组合中位",
             "value": "59,780 美元/年"
           },
           {
             "equivalent": "接缝处理工中位",
-            "interpretation": "接缝处理工的中位年薪；与工序与地区相关。",
-            "label": "高位",
+            "interpretation": "接缝处理子职业中位，非组合上分位或工序/地区导致涨薪的估计。",
+            "label": "嵌缝子职业中位",
             "value": "68,270 美元/年"
           }
         ]
@@ -10726,7 +11056,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "dir-carpenter",
+              "$source": "r5-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10734,17 +11064,17 @@
             },
             "id": "dir-carpenter",
             "label": {
-              "$source": "dir-carpenter",
+              "$source": "r5-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "合并及精确子行分别引用；OEWS工资排除自雇，EP就业含自雇；不代表中国工资、个人招聘或AI因果。"
           },
           {
             "href": {
-              "$source": "dir-floor-layer",
+              "$source": "r5-bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10752,17 +11082,17 @@
             },
             "id": "dir-floor-layer",
             "label": {
-              "$source": "dir-floor-layer",
+              "$source": "r5-bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "BLS47-2081精确行：2025就业102.2千人→2035预计104.7千人，净增2.5千人，增长2.5%；2025—2035年均空缺6.6千人约6,600，含增长与更替，非十年合计或每年净增。OOH精确行取整2%，O*NET类别平均3%—4%与精细数不同，保留各自来源、精确结论以BLS行2.5%为准。OOH47-2080安装+嵌缝合并118000/取整2%/年均7600对应本页组合；不可当作任一单独子职业，合并精确增长率1.9%。自雇19.4%，就业含自雇、OEWS工资排自雇；不代表中国需求、个人录用或AI因果。 O*NET新入职教育反馈42%低于高中、24%高中或同等、19%中学后证书，展示三项合计85%不补剩余。JZ1—2/SVP<6是准备组，训练数天至一年，不是各岗位数周即上手。BLS47-2081典型无正式学历、相关经验None、中期在岗训练；OOH安装/嵌缝合并叙述通常OJT最长12个月，部分学徒2—4年且进入学徒通常高中，不全职业强制同课程或免许可；具体美国州/当地执照未穷尽核。"
           },
           {
             "href": {
-              "$source": "dir-painter",
+              "$source": "r5-floor-detail",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10770,17 +11100,17 @@
             },
             "id": "dir-painter",
             "label": {
-              "$source": "dir-painter",
+              "$source": "r5-floor-detail",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "铺设地面弹性、隔音或装饰性覆盖材料；排除地毯、木材、硬砖；比较不等资格互认。"
           },
           {
             "href": {
-              "$source": "nbs-wages",
+              "$source": "r5-brick",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10788,13 +11118,13 @@
             },
             "id": "nbs-wages",
             "label": {
-              "$source": "nbs-wages",
+              "$source": "r5-brick",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "砖砌块/石材砌筑等，需补砂浆和砌筑工艺；本组合任务不证明已有砌筑能力。"
           }
         ],
         "transitions": [
@@ -10814,7 +11144,7 @@
             "target_href": "/zh/career/jobs/carpenters",
             "target_slug": "carpenters",
             "target_title": "木工：与本职业在材料与结构上的差异",
-            "transition_distance": "近，材料工具有交集"
+            "transition_distance": "编辑任务比较，未验证个人距离或成功率；近，材料工具有交集"
           },
           {
             "capability_gaps": "需要补足：涂装工艺、材料与饰面标准。",
@@ -10822,7 +11152,7 @@
             "target_href": "/zh/career/jobs/painters-construction-and-maintenance",
             "target_slug": "painters-construction-and-maintenance",
             "target_title": "建筑与维护油漆工：与本职业在饰面工序上的差异",
-            "transition_distance": "中，需补涂装工艺"
+            "transition_distance": "编辑任务比较，未验证个人距离或成功率；中，需补涂装工艺"
           },
           {
             "capability_gaps": "需要补足：地面材料与铺装工艺。",
@@ -10830,7 +11160,7 @@
             "target_href": "/zh/career/jobs/floor-layers-except-carpet-wood-and-hard-tiles",
             "target_slug": "floor-layers-except-carpet-wood-and-hard-tiles",
             "target_title": "地面铺装工：与本职业在铺装对象上的差异",
-            "transition_distance": "中，需补铺装工艺"
+            "transition_distance": "编辑任务比较，未验证个人距离或成功率；中，需补铺装工艺"
           },
           {
             "capability_gaps": "需要补足：瓷砖石材铺贴与防水。",
@@ -10838,15 +11168,15 @@
             "target_href": "/zh/career/jobs/tile-and-stone-setters",
             "target_slug": "tile-and-stone-setters",
             "target_title": "瓷砖与石材铺设工：与本职业在材料与工序上的差异",
-            "transition_distance": "中，需补铺贴与防水"
+            "transition_distance": "编辑任务比较，未验证个人距离或成功率；中，需补铺贴与防水"
           },
           {
             "capability_gaps": "需要补足：砌筑工艺与砂浆配比。",
-            "shared_capabilities": "可转移能力：放线与砌筑基础常识。",
+            "shared_capabilities": "编辑比较可核放线、尺寸检查和现场协作；本组合任务不能证明已有砌筑基础能力。",
             "target_href": "/zh/career/jobs/brickmasons-and-blockmasons",
             "target_slug": "brickmasons-and-blockmasons",
             "target_title": "砖石与砌块工：与本职业在基层与材料上的差异",
-            "transition_distance": "远，需补砌筑工艺"
+            "transition_distance": "编辑任务比较，未验证个人距离或成功率；远，需补砌筑工艺"
           },
           {
             "capability_gaps": "需要补足：保温材料、防潮与热工要求。",
@@ -10854,7 +11184,7 @@
             "target_href": "/zh/career/jobs/insulation-workers-floor-ceiling-and-wall",
             "target_slug": "insulation-workers-floor-ceiling-and-wall",
             "target_title": "保温工：与本职业在系统与安全要求上的差异",
-            "transition_distance": "中，需补保温与热工"
+            "transition_distance": "编辑任务比较，未验证个人距离或成功率；中，需补保温与热工"
           }
         ]
       },
@@ -10909,7 +11239,7 @@
             "evidence_level": "工作样本",
             "id": "big-five",
             "label": "稳定执行",
-            "question": "能否长期在高处、粉尘与噪声环境中保持专注？",
+            "question": "在已培训并具备安全条件的真实岗位中，能否按规则保持专注？",
             "signals": [
               "任务",
               "记录"
@@ -10942,7 +11272,7 @@
             "evidence_level": "工作样本",
             "id": "enneagram",
             "label": "动机观察",
-            "question": "能否接受项目节奏、早班与工地变化？",
+            "question": "能否接受目标岗位实际班次、项目节奏和工地变化？（未取得普遍早班证据）",
             "signals": [
               "任务",
               "记录"
@@ -10950,7 +11280,7 @@
             "watchout": "不作录用依据。"
           },
           {
-            "answer": "用模拟或现场场景观察其判断与转交方式。",
+            "answer": "编辑观察纸面冲突判断和报告方式；实际人身危险紧急时依法停或必要措施后撤离，不等负责人预先批准。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣测试",
             "evidence_level": "工作样本",
@@ -10978,7 +11308,7 @@
             "watchout": "不作录用结论。"
           }
         ],
-        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "boundary": "下列是编辑观察问题，非人格量表结果、健康适岗鉴定或录用保证；高处/PPE等须真实安全环境与训练，不以危险试做验证。",
         "direct_answer": {
           "$item": "drywall-and-ceiling-tile-installers-and-tapers.fit.personality-fit-block.2",
           "block": "fit",
@@ -11096,71 +11426,71 @@
         "source_links": [
           {
             "href": {
-              "$source": "dir-carpenter",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
             "label": {
-              "$source": "dir-carpenter",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+            "usage": "支持职业事实/法域边界；测评与观察问题仍为编辑建议。"
           },
           {
             "href": {
-              "$source": "dir-floor-layer",
+              "$source": "onet-tapers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
             "label": {
-              "$source": "dir-floor-layer",
+              "$source": "onet-tapers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+            "usage": "支持职业事实/法域边界；测评与观察问题仍为编辑建议。"
           },
           {
             "href": {
-              "$source": "dir-painter",
+              "$source": "r5-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
             "label": {
-              "$source": "dir-painter",
+              "$source": "r5-ooh",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+            "usage": "支持职业事实/法域边界；测评与观察问题仍为编辑建议。"
           },
           {
             "href": {
-              "$source": "nbs-wages",
+              "$source": "r5-construction-safety",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
             "label": {
-              "$source": "nbs-wages",
+              "$source": "r5-construction-safety",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
             },
-            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+            "usage": "支持职业事实/法域边界；测评与观察问题仍为编辑建议。"
           }
         ]
       },
@@ -11198,29 +11528,29 @@
       ],
       "riasec_fit_block": {
         "fit_interest": "兴趣只提示探索方向；实际适配以跟岗观察与训练反馈核验。",
-        "interest": "官方兴趣代码 RC（现实型、常规型）：以手工操作、结构安装、按规程与标准施工为主。",
-        "riasec": "RC",
-        "riasec_short": "官方兴趣代码 RC；不作人格诊断或录用依据。"
+        "interest": "美国O*NET分开反馈：安装R100/C36；嵌缝R92/C41。组合未取得官方合并兴趣分数，RC仅作编辑探索概括。",
+        "riasec": "RC（编辑概括）",
+        "riasec_short": "两个子职业的现实/常规兴趣较突出，不是官方组合代码或个人诊断。"
       },
       "source_card": {
         "eeat_signals": {
           "author": "FermatMind research workflow",
           "source": {
-            "$source": "dir-carpenter",
+            "$source": "repair-current-us",
             "block": "source-register",
             "copy_key": "career.item.published-sources",
             "field": "name",
             "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
           },
           "updated_at": {
-            "$source": "dir-carpenter",
+            "$source": "repair-current-us",
             "block": "source-register",
             "copy_key": "career.item.published-sources",
             "field": "period",
             "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
           }
         },
-        "note": "来源范围、限制与统计时期按原始证据分别核对；未取得的数据在相应位置可见标记。"
+        "note": "资料卡支持内容/口径，不证明现场采用或独立验收。标准按实际读取章节/公告使用；合理缺口和范围外练习/界面冲突详见本轮作者报告。"
       },
       "work_context_block": {
         "$join": [
@@ -11438,6 +11768,32 @@
         "source_refs": [
           "repair-current-us"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "美国 2025 年 5 月中位年薪：石膏板与吊顶板安装工 58,930 美元（28.33 美元/时）。",
+        "fact_id": "r5-submedian-1",
+        "market": "美国",
+        "measure": "installer median annual wage",
+        "occupation_scope": "美国SOC 47-2081 精确子职业",
+        "period": "2025年5月",
+        "source_refs": [
+          "repair-current-us",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "美国 2025 年 5 月中位年薪：接缝处理工 68,270 美元（32.82 美元/时）。",
+        "fact_id": "r5-submedian-2",
+        "market": "美国",
+        "measure": "taper median annual wage",
+        "occupation_scope": "美国SOC 47-2082 精确子职业",
+        "period": "2025年5月",
+        "source_refs": [
+          "repair-current-us",
+          "r5-oews-concepts"
+        ]
       }
     ]
   },
@@ -11446,7 +11802,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "石膏板与吊顶板安装 · 接缝贴带与嵌缝 · 吊顶网格与高处作业",
@@ -11497,7 +11853,7 @@
       "text": "石膏板与吊顶板安装工及接缝处理工"
     }
   },
-  "source_content_sha256": "36d1ff86c8cde9f2c3f653ff3a2b4c12d03bcc479fea896a480f1ef242f8bd8d",
+  "source_content_sha256": "15be23f3fd0bab1c4a5fcd98982a107de1f24b747cfc85366869d21553b13ac4",
   "subject": {
     "canonical_slug": "drywall-and-ceiling-tile-installers-and-tapers",
     "name": "石膏板与吊顶板安装工及接缝处理工",

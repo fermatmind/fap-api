@@ -7537,7 +7537,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数据分析、流程挖掘、文档生成与知识检索等工具可辅助分析数据、识别流程瓶颈并起草文档，但问题界定、访谈判断、方案取舍、利益相关方沟通与责任判断仍由人负责。"
+              "编辑任务假设：传统统计、流程挖掘和知识检索与生成式AI分开；后者可能起草虚构资料下的咨询文档。现有BCG/GPT-4实验支持特定任务试验，不证明所有模型或客户项目效果；原数据、问题前提、因果及方案取舍须核验，未获批准不上传客户机密。"
             ]
           },
           "id": "management-analysts.ai-impact.ai-impact-table.2",
@@ -7565,12 +7565,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不同环节受影响不同：数据处理、文档生成与检索汇总更易自动化，但问题界定、访谈判断、方案取舍与沟通推动仍由人负责。"
+              "Dell’Acqua等2026管理咨询实验（BCG，758人，GPT-4）发现，模型能力范围内任务表现可改善，范围外复杂任务正确性可变差。它支持任务级试验与复核，不证明中国采用率、所有模型效果或裁员。"
             ]
           },
           "id": "management-analysts.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "internal-rubric"
+            "hbs-consulting-ai-experiment"
           ],
           "type": "prose"
         },
@@ -7607,7 +7607,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议：工具可辅助数据分析、流程识别与文档生成；当前资料不证明机构普遍采用这些系统。"
+              "编辑试用建议：仅虚构资料下的小样草稿；普通专用软件与生成式AI不同，未证明本职业机构普遍采用。"
             ]
           },
           "id": "management-analysts.ai-impact.ai-impact-table.7",
@@ -7643,7 +7643,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开职业工资：国家统计局按行业门类发布城镇单位就业人员年平均工资，管理咨询分析师主要计入租赁和商务服务业等行业，行业平均不能替代本职业工资。"
+              "本轮未取得中国大陆与13-1111.00精确对应的职业工资中位数；2025租赁和商务服务业年平均工资可作对应咨询雇主的宽行业背景，不证明无公开职业工资，也不覆盖政府内设分析岗和所有咨询从业者。"
             ]
           },
           "id": "management-analysts.china-salary.career-snapshot-primary-locale.1",
@@ -7724,7 +7724,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 该页显示 2025 年 BLS OEWS 年薪中位数为 101,860 美元（约 48.97 美元/小时）；就业方面 2024 年约 1,075,100 人、2024—2034 年预计远快于平均（Much faster than average，7% 或更高）、期间职位空缺约 98,100 个。该页未展示分位工资。以上为美国全国口径且属本职业 13-1111.00，「远快于平均」为统计预测，不等于个人就业结果。"
+              "2025美国全国13-1111.00工资年薪P10/25/50/75/90为60,640／77,950／101,860／133,370／171,640美元；小时为29.15／37.48／48.97／64.12／82.52美元，各取原表。分位不是资历、起薪或到手收入；就业仍保留2024—2034历史版本，现行源已换期，非最新全页。"
             ]
           },
           "fact_refs": [
@@ -7744,7 +7744,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资统计位置：以上为美国全国口径且属本职业 13-1111.00；中位数不代表起薪或个人到手收入，且未披露分位。"
+              "2025 O*NET全国工资表有本职业五分位，年薪与小时分别来自官方表；不等于个人起薪、到手收入或咨询项目收费。"
             ]
           },
           "fact_refs": [
@@ -7761,7 +7761,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "怎样理解这些位置：O*NET 该页只展示中位数，不展示分位；中位数不是新手或资深等级。就业规模与「远快于平均」是职业统计，须与个人机会分开解释。"
+              "分位是工资分布，不是新手或资深等级；与就业规模、预测变化和个人机会分别解释。"
             ]
           },
           "fact_refs": [
@@ -7778,15 +7778,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布与局限：该页 2024 年主要行业为 Professional, Scientific, and Technical Services 与 Government；行业分布是雇主场景信号，不是需求预测。"
+              "2025年5月BLS OOH Pay表给本职业在专业科学技术服务、政府、公司企业管理及金融保险的年薪中位数，行业覆盖按原表，非需求预测或个人咨询项目收费。"
             ]
           },
           "fact_refs": [
-            "us-employment-2024"
+            "us-wage-median"
           ],
           "id": "management-analysts.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "onet-industry"
+            "bls-ooh-management-analysts"
           ],
           "type": "prose"
         },
@@ -8034,7 +8034,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国侧该职业属 Job Zone 4（需要相当充分的准备）：多数岗位要求四年制学士学位（约 57%），部分岗位要求硕士学位（约 24%），通常还需数年相关工作或职业培训；具体要求按雇主与行业核对。"
+              "O*NET本职业受访学历要求为57%学士、24%硕士、10%部分大学无学位，并非对全部岗位的法律要求。Job Zone4是组通用准备描述；BLS本职业通常本科学历，部分雇主偏好MBA，另看相关经历，不把组培训期作统一门槛。"
             ]
           },
           "id": "management-analysts.path.career-path-block.2",
@@ -8048,7 +8048,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国：以商科、管理或相关专业本科加实习与项目实践为常见路径，部分岗位要求或偏好硕士。中国大陆：无与该 O*NET 精确对应的统一职业资格，岗位多按用人单位与行业要求确定，涉及专业资质（如会计、法律）的结论须由相应持证人员出具，须分别核对。"
+              "美国BLS列本科为典型入行学历，适合背景包括商业、社会科学与工程，部分雇主偏好MBA；不是商科唯一通道。中国大陆未建立13-1111.00一对一资格映射，按行业活动及雇主要求核验；会计、法律等需专业授权的工作另交适格人员。"
             ]
           },
           "id": "management-analysts.path.career-path-block.3",
@@ -8155,7 +8155,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 引用 BLS 数据显示，该职业 2024 年就业约 1,075,100 人，2024—2034 年预计远快于平均（7% 或更高），期间职位空缺约 98,100 个；这是职业统计，不是个人录用概率，也不同于招聘样本。"
+              "历史版本2024就业1,075,100人、2024—2034增长7%或更高、约98,100个/年空缺；空缺是年均非十年合计。现行源已换2025—2035，本窗保护Hero/FAQ共享统计未同步，不称最新全页或个人录用概率。"
             ]
           },
           "id": "management-analysts.market-signals.market-signal-card.2",
@@ -8197,7 +8197,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：目标行业的业务知识、数据分析与合规要求，或转向内部战略、产品运营与管理岗位所需的经验与责任证据。"
+              "转向财务与投资分析师须补财务报表、估值、证券投资分析方法和目标业务合规授权；组织流程改进经验不等于投资研究胜任或证券业务资格。"
             ]
           },
           "id": "management-analysts.market-signals.market-signal-card.5",
@@ -8636,6 +8636,36 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "2025年5月同职业分行业工资，具体职业本科准备及相关经历；统计与个人机会分开。"
+                ],
+                "evidence_type": "official occupation guidance",
+                "id": "bls-ooh-management-analysts",
+                "limitation": "美国特定职业/样本来源；不建立中国资格工资、全行业采用率或个人结果。",
+                "market": "美国",
+                "name": "BLS：管理分析师职业手册",
+                "period": "2025工资/现行OOH",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/business-and-financial/management-analysts.htm"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "BCG758人随机GPT-4实验；任务范围内改善、范围外复杂任务正确性可变差。"
+                ],
+                "evidence_type": "primary research experiment",
+                "id": "hbs-consulting-ai-experiment",
+                "limitation": "美国特定职业/样本来源；不建立中国资格工资、全行业采用率或个人结果。",
+                "market": "美国",
+                "name": "Navigating the Jagged Technological Frontier（2026）",
+                "period": "2026论文，发表于2026-03-11",
+                "publisher": "Dell’Acqua et al.; Organization Science / Harvard Business School",
+                "scope": "market_signal",
+                "url": "https://www.hbs.edu/ris/Publication%20Files/dell-acqua-et-al-2026-navigating-the-jagged-technological-frontier_5c589c8c-fbb5-458f-b285-c944746cd717.pdf"
               }
             ]
           },
@@ -8747,7 +8777,7 @@
           },
           {
             "人群": "在岗者",
-            "应对重点": "保留研究与结论依据。"
+            "应对重点": "保留可复核研究依据；客户数据先核授权与保密范围，未获授权不用外部AI处理，练习用虚构资料。"
           },
           {
             "人群": "管理者",
@@ -8814,6 +8844,12 @@
               "field": "url",
               "item": "management-analysts.source-register.published.1"
             }
+          },
+          {
+            "来源": "管理咨询AI随机实验（2026）",
+            "类型": "一手研究论文",
+            "适用范围": "BCG/GPT-4特定任务，非全行业采用率",
+            "链接": "https://www.hbs.edu/ris/Publication%20Files/dell-acqua-et-al-2026-navigating-the-jagged-technological-frontier_5c589c8c-fbb5-458f-b285-c944746cd717.pdf"
           }
         ],
         "difference_intro": {
@@ -8824,12 +8860,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "数据处理与模式识别",
+            "AI主要改变": "可能起草咨询文档；统计/流程挖掘与生成式AI分开验证。",
             "仍由人负责": "问题界定与结论判断",
             "方向": "研究与分析"
           },
           {
-            "AI主要改变": "起草辅助",
+            "AI主要改变": "起草为编辑试用候选；复杂结论可能被误导，仍须验证证据、取舍和责任。",
             "仍由人负责": "取舍与责任",
             "方向": "方案与文档"
           }
@@ -8897,6 +8933,13 @@
               "field": "url",
               "item": "management-analysts.source-register.published.1"
             }
+          },
+          {
+            "使用限制": "特定样本、模型及任务，非全职业采用率、裁员或个人表现保证。",
+            "来源": "Dell’Acqua等（2026），Organization Science",
+            "研究对象": "BCG 758名知识工作者、GPT-4及管理咨询任务",
+            "结论": "任务能力范围内可改善，范围外任务正确性可变差。",
+            "链接": "https://www.hbs.edu/ris/Publication%20Files/dell-acqua-et-al-2026-navigating-the-jagged-technological-frontier_5c589c8c-fbb5-458f-b285-c944746cd717.pdf"
           }
         ],
         "heading": {
@@ -9180,7 +9223,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "数据分析、流程挖掘、文档生成与知识检索等工具可辅助分析数据、识别流程瓶颈并起草文档，但问题界定、访谈判断、方案取舍、利益相关方沟通与责任判断仍由人负责。"
+          "编辑任务假设：传统统计、流程挖掘和知识检索与生成式AI分开；后者可能起草虚构资料下的咨询文档。现有BCG/GPT-4实验支持特定任务试验，不证明所有模型或客户项目效果；原数据、问题前提、因果及方案取舍须核验，未获批准不上传客户机密。"
         ],
         "heading": "管理咨询分析师的工作对象与 AI 边界"
       },
@@ -9590,7 +9633,7 @@
         "schema_version": "career.quick_answers.v1"
       },
       "career_risk_cards": {
-        "boundary": "最终专业结论与合规责任由具备相应资格的机构或人员承担；本页不替代专业意见或法律要求。",
+        "boundary": "普通管理咨询建议不当然属于持证业务；专业资质、客户授权及最终决策责任按实际活动法域区分，本页不替代专业意见。",
         "context_links": [
           {
             "href": "#career-visual-group-risk",
@@ -9605,7 +9648,7 @@
             "affected_roles": "研究与分析岗位",
             "consequence": "可能导致错误决策与损失。",
             "evidence_refs": [
-              "onet-tasks"
+              "management-analysts.display.source.onet-tasks"
             ],
             "id": "risk-1",
             "mitigation": "区分事实与假设并标注证据强度。",
@@ -9621,7 +9664,7 @@
             "affected_roles": "研究与分析岗位",
             "consequence": "可能得出误导性结论。",
             "evidence_refs": [
-              "onet-tasks"
+              "management-analysts.display.source.onet-tasks"
             ],
             "id": "risk-2",
             "mitigation": "核对来源、口径与时效并复核。",
@@ -9637,7 +9680,7 @@
             "affected_roles": "方案与推动岗位",
             "consequence": "可能导致方案无法落地。",
             "evidence_refs": [
-              "onet-context"
+              "management-analysts.display.source.onet-context"
             ],
             "id": "risk-3",
             "mitigation": "评估相关方与风险并制定实施计划。",
@@ -9653,10 +9696,10 @@
             "affected_roles": "研究与建议岗位",
             "consequence": "可能违反专业与合规要求。",
             "evidence_refs": [
-              "onet-summary"
+              "management-analysts.display.source.onet-summary"
             ],
             "id": "risk-4",
-            "mitigation": "明确边界并在越界时转交持证人员。",
+            "mitigation": "核专业及客户授权；涉及需专业资格的判断即交适格人员，普通管理建议也由咨询者和决策者按各自职责负责，不能转交后免责。",
             "scenario": "超出专业或授权边界出具结论。",
             "title": {
               "$item": "management-analysts.risk.career-risk-cards.4",
@@ -9669,7 +9712,7 @@
             "affected_roles": "项目管理岗位",
             "consequence": "可能影响交付质量与信誉。",
             "evidence_refs": [
-              "onet-context"
+              "management-analysts.display.source.onet-context"
             ],
             "id": "risk-5",
             "mitigation": "明确范围与优先级并管理期望。",
@@ -9685,7 +9728,7 @@
             "affected_roles": "咨询与建议岗位",
             "consequence": "可能损害独立性与公信力。",
             "evidence_refs": [
-              "onet-summary"
+              "management-analysts.display.source.onet-summary"
             ],
             "id": "risk-6",
             "mitigation": "披露冲突并回避相关决策。",
@@ -9774,8 +9817,8 @@
           "bls_table": [
             {
               "指标": "中国大陆职业工资",
-              "数值": "证据不足：未单列",
-              "说明": "国家统计局按行业门类发布，未单列本职业工资。"
+              "数值": "证据不足：未取得精确对应",
+              "说明": "未建立中国职业分类、统计期和13-1111.00的一对一映射，不断言未发布。"
             },
             {
               "指标": "中国大陆行业代理",
@@ -9862,7 +9905,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国大陆无本职业单列工资；下列为行业代理，不是起薪、中位数或到手收入。",
+          "china_open": "未取得本职业精确中国工资；下列为对应商务服务雇主宽行业及全国背景，不是咨询项目收费、中位数或到手收入。",
           "china_ref": {
             "$join": [
               {
@@ -9883,7 +9926,7 @@
             ],
             "separator": ""
           },
-          "china_salary_note": "中国大陆行业口径与美国职业统计分开，不能跨市场拼接。",
+          "china_salary_note": "2025租赁商务服务业仅作对应雇主背景；税前年均、私营与非私营及全国人群分列，不拼个人工资区间，不折月薪或咨询项目收费。",
           "china_salary_table": [
             {
               "城市/区间": "全国·租赁和商务服务业（非私营）",
@@ -9895,7 +9938,7 @@
             },
             {
               "城市/区间": "本职业精确工资",
-              "月薪参考": "证据不足：未单列"
+              "月薪参考": "证据不足：未取得精确对应"
             }
           ],
           "china_soc_row": {
@@ -9942,20 +9985,26 @@
         "authority_sources": {
           "$join": [
             {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "management-analysts.source-register.published.1"
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "management-analysts.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "management-analysts.source-register.published.1"
+                }
+              ],
+              "separator": ""
             },
-            "｜",
-            {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "management-analysts.source-register.published.1"
-            }
+            "｜行业工资：BLS OOH Pay｜https://www.bls.gov/ooh/business-and-financial/management-analysts.htm"
           ],
           "separator": ""
         },
@@ -10009,8 +10058,8 @@
             }
           },
           {
-            "指标": "薪资 · 最低 10%",
-            "数值": "未披露",
+            "指标": "薪资 · 第10分位",
+            "数值": "$60,640/年（2025）",
             "说明": {
               "$join": [
                 {
@@ -10033,8 +10082,8 @@
             }
           },
           {
-            "指标": "薪资 · 最高 90%",
-            "数值": "未披露",
+            "指标": "薪资 · 第90分位",
+            "数值": "$171,640/年（2025）",
             "说明": {
               "$join": [
                 {
@@ -10130,7 +10179,7 @@
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "约 98,100 个（2024—2034 期合计）",
+            "数值": "约98,100个/年（2024—2034历史版本）",
             "说明": {
               "$join": [
                 {
@@ -10153,7 +10202,7 @@
             }
           }
         ],
-        "boundary": "美国全国口径：工资、就业与行业均为 O*NET 展示的本职业 13-1111.00 数据，工资为 2025 OEWS、就业展望为 2024—2034 预测；不含个人到手收入、起薪或录用结论。",
+        "boundary": "美国全国口径：工资、就业与行业均为 O*NET 展示的本职业 13-1111.00 数据，工资为 2025 OEWS、就业展望为 2024—2034 预测；不含个人到手收入、起薪或录用结论。 就业保留历史期，现行源已换2025—2035，保护Hero/FAQ未同步；分行业工资另直接核2025 OOH。",
         "direct_answer": {
           "$item": "management-analysts.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10162,11 +10211,11 @@
         },
         "factor_rows": [
           {
-            "answer": "多数岗位要求四年制学士学位、部分要求硕士学位并通常需数年相关经验；咨询认证不等于会计、法律等专业执业资格。",
+            "answer": "O*NET本职业受访学历要求为57%学士、24%硕士、10%部分大学无学位，并非对全部岗位的法律要求。Job Zone4是组通用准备描述；BLS本职业通常本科学历，部分雇主偏好MBA，另看相关经历，不把组培训期作统一门槛。 咨询认证不授予其他专业执业资格。",
             "factor": "资格"
           },
           {
-            "answer": "以分析、行业与项目经验为主；结构化分析、数据与沟通能力比证书名称更常被参考。",
+            "answer": "编辑建议：以研究、行业及项目交付记录展示经验；未取得结构化分析、数据与沟通相对证书名称的招聘权重研究。",
             "factor": "经验"
           },
           {
@@ -10193,30 +10242,30 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024",
+        "industry_period": "2025年5月",
         "industry_rows": [
           {
-            "industry": "Professional, Scientific, and Technical Services",
-            "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体中位数为准。"
+            "industry": "Professional, scientific, and technical services",
+            "median": "$107,330/年",
+            "note": "2025年5月BLS OOH本职业13-1111分行业中位数；不是就业行业占比或个人项目收费。"
           },
           {
-            "industry": "Government",
-            "median": "见就业行",
-            "note": "行业口径为雇主场景信号，不跨职业外推。"
+            "industry": "Government, excluding state and local education and hospitals",
+            "median": "$97,300/年",
+            "note": "2025年5月BLS OOH本职业13-1111分行业中位数；不是就业行业占比或个人项目收费。"
           },
           {
-            "industry": "行业口径说明二",
-            "median": "见就业行",
-            "note": "地区与行业差异大，不得跨地区外推。"
+            "industry": "Management of companies and enterprises",
+            "median": "$101,030/年",
+            "note": "2025年5月BLS OOH本职业13-1111分行业中位数；不是就业行业占比或个人项目收费。"
           },
           {
-            "industry": "行业口径说明三",
-            "median": "见就业行",
-            "note": "分位工资未披露，不以推断值替代。"
+            "industry": "Finance and insurance",
+            "median": "$100,300/年",
+            "note": "2025年5月BLS OOH本职业13-1111分行业中位数；不是就业行业占比或个人项目收费。"
           }
         ],
-        "industry_value_label": "行业值",
+        "industry_value_label": "年薪中位数（美元/年）",
         "interpretation_heading": {
           "$item": "management-analysts.us-salary.career-snapshot-secondary-locale.4",
           "block": "us-salary",
@@ -10225,7 +10274,7 @@
         },
         "interpretation_rows": [
           {
-            "answer": "美元/年；为 BLS 2025 OEWS 全国中位数（本职业 13-1111.00 口径），未展示分位，不含个人到手收入。",
+            "answer": "2025全国本职业五分位；年度与小时各取原表，不代表个人资历、起薪、到手收入或项目收费。",
             "question": "工资"
           },
           {
@@ -10237,7 +10286,7 @@
             "question": "展望"
           },
           {
-            "answer": "按 O*NET/BLS 行业口径列为专业科学技术服务与政府，不等于全部从业者收入。",
+            "answer": "2025年5月同职业分行业工资中位数，政府不含州/地方教育医院；不是就业行业占比或全国工资资历等级。",
             "question": "行业"
           }
         ],
@@ -10258,10 +10307,10 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "—",
-            "interpretation": "O*NET 该页未展示分位工资；不以推断值替代。",
-            "label": "最低 10%",
-            "value": "未披露"
+            "equivalent": "$29.15/小时",
+            "interpretation": "2025美国全国13-1111.00本职业分位；非个人资历或报价。",
+            "label": "第10分位",
+            "value": "$60,640/年"
           },
           {
             "equivalent": "$48.97/小时",
@@ -10270,10 +10319,10 @@
             "value": "$101,860/年"
           },
           {
-            "equivalent": "—",
-            "interpretation": "O*NET 该页未展示分位工资；不以推断值替代。",
-            "label": "最高 90%",
-            "value": "未披露"
+            "equivalent": "$82.52/小时",
+            "interpretation": "2025美国全国13-1111.00本职业分位；非个人资历或报价。",
+            "label": "第90分位",
+            "value": "$171,640/年"
           }
         ]
       },
@@ -10356,7 +10405,7 @@
             "geography": "美国全国",
             "horizon": "2024—2034",
             "interpretation": "就业规模、变化与职位空缺必须分别解释。",
-            "limitation": "为职业统计，不能作为个人就业保证。",
+            "limitation": "2024—2034保留历史版本，当前源已换期，Hero/FAQ未同步；非最新全页或个人保证。",
             "metric": "就业规模与变化",
             "occupation_scope": "展示口径：Management Analysts（13-1111.00）",
             "value": {
@@ -10369,17 +10418,17 @@
           {
             "geography": "美国全国",
             "horizon": "2024—2034",
-            "interpretation": "为 2024—2034 年期间合计，含增长与替代需求，不等于在招岗位数。",
+            "interpretation": "预测期年均空缺，包括增长和替代，非十年合计、实时在招数或个人录用概率。",
             "limitation": "不能作为个人录用概率。",
-            "metric": "职位空缺（期合计）",
+            "metric": "年均职位空缺（历史版本）",
             "occupation_scope": "展示口径：Management Analysts（13-1111.00）",
-            "value": "约 98,100 个"
+            "value": "约98,100个/年（2024—2034历史版本）"
           },
           {
             "geography": "美国全国",
             "horizon": "2025",
             "interpretation": "为 BLS 2025 OEWS 全国中位数，不代表起薪或到手收入。",
-            "limitation": "未披露分位；不含个人到手收入。",
+            "limitation": "2025本职业工资有五分位，不含个人到手收入或项目收费。",
             "metric": "年薪中位数",
             "occupation_scope": "展示口径：Management Analysts（13-1111.00）",
             "value": "$101,860/年"
@@ -10504,8 +10553,8 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补足系统架构与团队管理知识。",
-            "shared_capabilities": "技术与流程基础。",
+            "capability_gaps": "须补信息系统技术、架构/交付治理、预算和技术团队管理经历，咨询项目经验不自动授予IT经理胜任。",
+            "shared_capabilities": "业务需求、流程与跨团队协作，不能假定已具备技术架构能力。",
             "target_href": "/zh/career/jobs/computer-and-information-systems-managers",
             "target_slug": "computer-and-information-systems-managers",
             "target_title": "计算机与信息系统经理",
@@ -10550,7 +10599,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "riasec",
             "label": "RIASEC",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10569,7 +10618,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "big-five",
             "label": "大五人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10588,7 +10637,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "mbti",
             "label": "MBTI",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10602,7 +10651,7 @@
             "answer": "需要结合真实任务、边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "enneagram",
             "label": "九型人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10616,7 +10665,7 @@
             "answer": "需要结合真实任务、边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "iq",
             "label": "认知能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10630,7 +10679,7 @@
             "answer": "需要结合真实任务、边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "eq",
             "label": "情绪能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -11152,7 +11201,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "组织研究与评估",
@@ -11203,7 +11252,7 @@
       "text": "管理咨询分析师职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "164e85929e665ef0890d732954c40a2b840c845a915e504bebf5fa5e03877ffe",
+  "source_content_sha256": "6b59ff5461c9e9417b9478c0bec9f99737f4d2dc6cfc834d5e6aa50303c14049",
   "subject": {
     "canonical_slug": "management-analysts",
     "name": "管理咨询分析师",

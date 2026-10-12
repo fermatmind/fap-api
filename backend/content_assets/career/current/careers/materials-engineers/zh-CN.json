@@ -7543,7 +7543,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "材料性能建模与仿真、试验数据处理与失效模式识别、文献与标准检索、报告生成等工具可辅助分析数据、预测性能并起草材料；但设计要求界定、试验条件判断、选型取舍、安全合规结论与责任仍由工程师负责。"
+              "编辑任务假设：材料仿真、性能预测的机器学习与生成式AI分开；后者可能协助整理虚构试验记录、文献摘要或报告草稿，未取得本职业采用率/岗位结果。模型输出不是实测性能，原始条件、数据、标准适用性与引用须人员核验，未获批准不上传配方或客户机密，不凭生成文本放行材料。"
             ]
           },
           "id": "materials-engineers.ai-impact.ai-impact-table.2",
@@ -7571,7 +7571,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不同环节受影响不同：数据处理、建模与文献检索、报告生成更易被工具辅助，但设计要求界定、选型取舍、试验判断与安全责任仍由人负责。"
+              "编辑比较：草稿可能被辅助，未取得采用先后研究；传统仿真/机器学习不证明生成式AI采用或产品安全，选型/失效因果需试验验证。"
             ]
           },
           "id": "materials-engineers.ai-impact.ai-impact-table.4",
@@ -7613,7 +7613,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议：数据处理、建模与报告生成可由工具辅助；当前资料不证明机构普遍采用这些系统。"
+              "编辑假设：可能辅助文档，专用计算与生成式文本能力不同，未证明采用或替代。"
             ]
           },
           "id": "materials-engineers.ai-impact.ai-impact-table.7",
@@ -7627,7 +7627,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以设计要求、试验条件与安全合规为准，保留人工判断与记录。"
+              "保留试样/批次、试验条件和原始结果，核模型适用域与引用；未验证性能或超出签字权限时不放行并转交。"
             ]
           },
           "id": "materials-engineers.ai-impact.ai-impact-table.8",
@@ -7649,7 +7649,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开职业工资：国家统计局按行业门类发布城镇单位就业人员年平均工资，材料工程师主要计入制造业等行业，行业平均不能替代本职业工资。"
+              "证据不足：本次未取得与17-2131.00安全对应的中国职业工资分布。原制造业单位均值仅对应制造雇主背景，研发/工程服务等雇主另核，不当本职业中位数或推断公开数据不存在。"
             ]
           },
           "fact_refs": [
@@ -7744,7 +7744,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 该页显示 2025 年 BLS OEWS 年薪中位数为 112,860 美元（约 54.26 美元/小时）；就业方面 2024 年约 23,000 人、2024—2034 年预计高于平均（Faster than average，5% 至 6%）、期间职位空缺约 1,500 个。该页未展示分位工资。以上为美国全国口径且属本职业 17-2131.00，「高于平均」为统计预测，不等于个人就业结果。"
+              "2025美国17-2131年薪中位112,860、时薪54.26美元，完整分位见表；旧2024年23,000人、2024—2034年均1,500空缺另列。最新2025年23,800人、2025—2035增长8%、年均1,300；净增与替补空缺不同，不是个人录用概率。"
             ]
           },
           "fact_refs": [
@@ -7764,7 +7764,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资统计位置：以上为美国全国口径且属本职业 17-2131.00；中位数不代表起薪或个人到手收入，且未披露分位。"
+              "2025美国全国17-2131本职业工资，年薪与时薪分位按原表分别录入，非个人工时换算或到手收入。"
             ]
           },
           "fact_refs": [
@@ -7781,7 +7781,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "怎样理解这些位置：O*NET 该页只展示中位数，不展示分位；中位数不是新手或资深等级。就业规模与「高于平均」是职业统计，须与个人机会分开解释。"
+              "P10/25/50/75/90是工资分布位置，不是新手/资深等级；就业规模、空缺与个人机会分开。"
             ]
           },
           "fact_refs": [
@@ -7798,15 +7798,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布与局限：该页 2024 年主要行业为 Manufacturing 与 Professional, Scientific, and Technical Services；行业分布是雇主场景信号，不是需求预测。"
+              "BLS本职业2025年5月行业年薪中位：政府（不含州地方教育医院）137,610、自然/工程/生命科学研发132,070、运输设备制造125,190、工程服务124,950美元；这是职业在各行业的工资，不是行业所有人员均值或就业占比。"
             ]
           },
           "fact_refs": [
-            "us-employment-2024"
+            "us-wage-median"
           ],
           "id": "materials-engineers.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "onet-industry"
+            "bls-ooh-materials"
           ],
           "type": "prose"
         },
@@ -7815,7 +7815,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "规模与口径提示：该职业 2024 年就业约 23,000 人、预计高于平均；引用时须标明年份、覆盖范围与本职业口径，且中位数与增长描述不能跨市场拼接。"
+              "旧1,500为2024—2034年均空缺，非期合计；新2025—2035年均1,300包含替补，不与约1,800净增或当前招聘数混用。"
             ]
           },
           "fact_refs": [
@@ -8054,12 +8054,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国侧该职业属 Job Zone 4（需要大量准备）：多数岗位要求四年制学士学位（约 80%），部分要求博士学位（约 8%）或两年制学位（约 4%），通常需要数年相关工作或培训；具体学历与经验要求按雇主与行业核对。"
+              "ONet新聘学历调查80%本科、8%博士、4%两年制/大专，非统一门槛；JobZone4数年准备是组描述。BLS本职业入门通常材料或相关工程本科，部分研发岗位硕博；入门不要求先有多年相关工作或PE。"
             ]
           },
           "id": "materials-engineers.path.career-path-block.2",
           "source_refs": [
-            "onet-education"
+            "onet-education",
+            "bls-ooh-materials"
           ],
           "type": "prose"
         },
@@ -8068,12 +8069,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国：以材料、冶金、化工或相关工程本科加实验室与项目实践为常见路径，部分岗位要求或偏好硕博。中国大陆：无与该 O*NET 精确对应的统一职业资格，岗位多按用人单位与行业要求确定，涉及特种设备、焊接与安全类结论须由具备相应资格的人员出具，须分别核对。"
+              "美国材料/相关工程本科配实验室和项目实践；部分研发岗位硕博，PE非入门必需，公共服务/项目签认等按州法和具体授权核。中国精确统一资格对应本次未建立；若实际涉及焊接、无损检测或特种设备作业，另核适用监管项目与资格，不能由材料工程学位自动取得。"
             ]
           },
           "id": "materials-engineers.path.career-path-block.3",
           "source_refs": [
-            "onet-education"
+            "bls-ooh-materials",
+            "onet-cert"
           ],
           "type": "prose"
         },
@@ -8175,7 +8177,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 引用 BLS 数据显示，该职业 2024 年就业约 23,000 人，2024—2034 年预计高于平均（5% 至 6%），期间职位空缺约 1,500 个；该职业规模较小，就业与空缺数字波动敏感，这是职业统计而非个人录用概率，也不同于招聘样本。"
+              "旧2024年23,000人、2024—2034年均1,500保留；最新2025年23,800人、2025—2035增长8%、年均1,300，包含替补，不是十年总数、净增或个人录用概率。"
             ]
           },
           "id": "materials-engineers.market-signals.market-signal-card.2",
@@ -8217,7 +8219,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：目标行业的材料体系与标准、特定检测与工艺方法，或转向化学工程、生物医学工程与研发管理方向所需的专业与资格证据。"
+              "第一目标建筑与工程经理：须补研发/项目计划、人员设备配置、预算、招聘带队与质量进度协调；材料试验的技术胜任不自动证明管理责任或跨工程专业授权，按目标岗位积累真实资源与团队交付。"
             ]
           },
           "id": "materials-engineers.market-signals.market-signal-card.5",
@@ -8656,6 +8658,36 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "17-2131工资、行业、就业及入门本科/部分研发硕博，PE非入门必需。"
+                ],
+                "evidence_type": "primary source",
+                "id": "bls-ooh-materials",
+                "limitation": "美国本职业，州签认要求和中国对应另核。",
+                "market": "美国",
+                "name": "BLS材料工程师手册",
+                "period": "现行页面；查阅2026-10-11",
+                "publisher": "BLS",
+                "scope": "exact occupation",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/materials-engineers.htm"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "1910.1450适用实验室化学品使用，要求书面化学卫生计划、控制设备、培训等。"
+                ],
+                "evidence_type": "primary source",
+                "id": "osha-lab",
+                "limitation": "不覆盖不符合实验室使用定义的工业生产；非中国法或职业事故率。",
+                "market": "美国",
+                "name": "OSHA实验室危险化学品规范",
+                "period": "现行页面；查阅2026-10-11",
+                "publisher": "OSHA",
+                "scope": "jurisdiction-specific safety",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.1450"
               }
             ]
           },
@@ -8844,12 +8876,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "数据处理与建模",
+            "AI主要改变": "可能辅助文献/报告草稿；仿真、机器学习与生成式AI分开。",
             "仍由人负责": "条件判断与结论",
             "方向": "试验与数据"
           },
           {
-            "AI主要改变": "材料草拟",
+            "AI主要改变": "可能整理试验说明；失效因果和安全性能须实际验证。",
             "仍由人负责": "取舍与责任",
             "方向": "选型与报告"
           }
@@ -8959,7 +8991,7 @@
             "问题": "AI 会取代材料工程师吗？"
           },
           {
-            "回答": "目前只写到可辅助的数据处理、建模与报告起草，要求界定、选型取舍与安全责任仍由人承担。",
+            "回答": "仅列任务假设，未取得采用先后或岗位结果研究；真实任务与授权需人员核验。",
             "来源": {
               "$source": "onet-tasks",
               "block": "source-register",
@@ -9207,7 +9239,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "材料性能建模与仿真、试验数据处理与失效模式识别、文献与标准检索、报告生成等工具可辅助分析数据、预测性能并起草材料；但设计要求界定、试验条件判断、选型取舍、安全合规结论与责任仍由工程师负责。"
+          "编辑任务假设：材料仿真、性能预测的机器学习与生成式AI分开；后者可能协助整理虚构试验记录、文献摘要或报告草稿，未取得本职业采用率/岗位结果。模型输出不是实测性能，原始条件、数据、标准适用性与引用须人员核验，未获批准不上传配方或客户机密，不凭生成文本放行材料。"
         ],
         "heading": "材料工程师的工作对象与 AI 边界"
       },
@@ -9349,6 +9381,12 @@
               "item": "materials-engineers.source-register.published.1"
             },
             "scope": "中国行业工资口径；不等于本职业精确工资。"
+          },
+          {
+            "href": "https://www.bls.gov/ooh/architecture-and-engineering/materials-engineers.htm",
+            "id": "materials-engineers.display.source.bls-ooh-materials",
+            "label": "BLS材料工程师路径",
+            "scope": "本科/研发硕博/PE分别核。"
           }
         ],
         "tracks": [
@@ -9632,10 +9670,10 @@
             "affected_roles": "试验与分析岗位",
             "consequence": "可能得出错误结论。",
             "evidence_refs": [
-              "onet-tasks"
+              "materials-engineers.display.source.onet-tasks"
             ],
             "id": "risk-1",
-            "mitigation": "明确试验条件并复核数据。",
+            "mitigation": "核试样/批次、试验条件、设备状态、单位与原始数据，条件不明不下结论；这是编辑复核动作，非指定标准条文。",
             "scenario": "试验条件或数据不可靠导致误判。",
             "title": {
               "$item": "materials-engineers.risk.career-risk-cards.1",
@@ -9648,7 +9686,7 @@
             "affected_roles": "选型与研发岗位",
             "consequence": "可能影响产品可靠性。",
             "evidence_refs": [
-              "onet-tasks"
+              "materials-engineers.display.source.onet-tasks"
             ],
             "id": "risk-2",
             "mitigation": "按标准试验并评估性能余量。",
@@ -9664,7 +9702,7 @@
             "affected_roles": "工艺与制造岗位",
             "consequence": "可能导致返工或失效。",
             "evidence_refs": [
-              "onet-context"
+              "materials-engineers.display.source.onet-tasks"
             ],
             "id": "risk-3",
             "mitigation": "评估工艺可行性与验证。",
@@ -9680,10 +9718,10 @@
             "affected_roles": "实验室与工厂岗位",
             "consequence": "可能影响人员安全。",
             "evidence_refs": [
-              "onet-context"
+              "materials-engineers.display.source.osha-lab"
             ],
             "id": "risk-4",
-            "mitigation": "落实防护与安全规程。",
+            "mitigation": "美国适用实验室危险化学品使用按书面化学卫生计划、工程控制、有效防护设备与培训；工厂生产另核适用规范，不把实验室条文当全部作业授权。",
             "scenario": "接触污染物、危险条件与设备。",
             "title": {
               "$item": "materials-engineers.risk.career-risk-cards.4",
@@ -9696,10 +9734,10 @@
             "affected_roles": "工程判断岗位",
             "consequence": "可能违反工程规范与责任要求。",
             "evidence_refs": [
-              "onet-cert"
+              "materials-engineers.display.source.bls-ooh-materials"
             ],
             "id": "risk-5",
-            "mitigation": "明确边界并在越界时转交具备资格人员。",
+            "mitigation": "PE非美国入门必需；对公众服务/项目签认及中国具体作业项目须核实际法域授权，材料报告或学位不能自动授全部资格。",
             "scenario": "超出工程或授权边界出具结论。",
             "title": {
               "$item": "materials-engineers.risk.career-risk-cards.5",
@@ -9712,7 +9750,7 @@
             "affected_roles": "分析与改进岗位",
             "consequence": "可能误导改进方向。",
             "evidence_refs": [
-              "onet-tasks"
+              "materials-engineers.display.source.onet-tasks"
             ],
             "id": "risk-6",
             "mitigation": "补充试验并标注证据强度。",
@@ -9793,6 +9831,18 @@
               "item": "materials-engineers.source-register.published.1"
             },
             "scope": "执照与认证入口；不替代执业授权。"
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.1450",
+            "id": "materials-engineers.display.source.osha-lab",
+            "label": "OSHA实验室化学品",
+            "scope": "美国适用实验室化学品控制。"
+          },
+          {
+            "href": "https://www.bls.gov/ooh/architecture-and-engineering/materials-engineers.htm",
+            "id": "materials-engineers.display.source.bls-ooh-materials",
+            "label": "BLS材料工程师执业边界",
+            "scope": "PE非入门必需，州签认另核。"
           }
         ]
       },
@@ -9802,7 +9852,7 @@
             {
               "指标": "中国大陆职业工资",
               "数值": "证据不足：未单列",
-              "说明": "国家统计局按行业门类发布，未单列本职业工资。"
+              "说明": "未建立安全职业映射与工资分布，不推断公开数据不存在。"
             },
             {
               "指标": "中国大陆行业代理",
@@ -9889,7 +9939,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国大陆无本职业单列工资；下列为行业代理，不是起薪、中位数或到手收入。",
+          "china_open": "本次未取得精确职业工资；制造业单位均值仅对应制造雇主背景，非职业中位数或个体经营收入。",
           "china_ref": {
             "$join": [
               {
@@ -9969,20 +10019,26 @@
         "authority_sources": {
           "$join": [
             {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "materials-engineers.source-register.published.1"
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "materials-engineers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "materials-engineers.source-register.published.1"
+                }
+              ],
+              "separator": ""
             },
-            "｜",
-            {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "materials-engineers.source-register.published.1"
-            }
+            "；BLS职业手册｜https://www.bls.gov/ooh/architecture-and-engineering/materials-engineers.htm"
           ],
           "separator": ""
         },
@@ -10037,7 +10093,7 @@
           },
           {
             "指标": "薪资 · 最低 10%",
-            "数值": "未披露",
+            "数值": "$72,300/年（P10，2025）",
             "说明": {
               "$join": [
                 {
@@ -10060,8 +10116,8 @@
             }
           },
           {
-            "指标": "薪资 · 最高 90%",
-            "数值": "未披露",
+            "指标": "薪资 · P90分位",
+            "数值": "$175,720/年（P90，2025）",
             "说明": {
               "$join": [
                 {
@@ -10157,7 +10213,7 @@
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "约 1,500 个（2024—2034 期合计）",
+            "数值": "约1,500个/年（旧2024—2034）",
             "说明": {
               "$join": [
                 {
@@ -10180,7 +10236,7 @@
             }
           }
         ],
-        "boundary": "美国全国口径：工资、就业与行业均为 O*NET 展示的本职业 17-2131.00 数据，工资为 2025 OEWS、就业展望为 2024—2034 预测；不含个人到手收入、起薪或录用结论。",
+        "boundary": "2025全国17-2131工资和同职业行业工资；旧2024—2034与新2025—2035预测分开，不代中国市场、起薪或录用。",
         "direct_answer": {
           "$item": "materials-engineers.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10189,11 +10245,11 @@
         },
         "factor_rows": [
           {
-            "answer": "多数岗位要求四年制学士学位、部分要求博士并通常需数年相关经验；焊接与特种设备类结论须由具备资格的人员出具。",
+            "answer": "美国入门通常相关工程本科、部分研发硕博；PE非入门必需，州执业与具体作业资格另核。",
             "factor": "资格"
           },
           {
-            "answer": "以材料、试验与工艺经验为主；试验结果与选型质量比证书名称更常被参考。",
+            "answer": "核试验/选型/失效分析过程实证与岗位条件；未取得作品与证书录用权重比较，纸面不授签认或设备作业权。",
             "factor": "经验"
           },
           {
@@ -10220,30 +10276,30 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024",
+        "industry_period": "2025年5月",
         "industry_rows": [
           {
-            "industry": "Manufacturing",
-            "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体中位数为准。"
+            "industry": "政府（不含州地方教育医院）",
+            "median": "$137,610/年",
+            "note": "2025年5月美国17-2131本职业；非个人收入承诺。"
           },
           {
-            "industry": "Professional, Scientific, and Technical Services",
-            "median": "见就业行",
-            "note": "行业口径为雇主场景信号，不跨职业外推。"
+            "industry": "自然/工程/生命科学研发",
+            "median": "$132,070/年",
+            "note": "2025年5月美国17-2131本职业；非个人收入承诺。"
           },
           {
-            "industry": "行业口径说明二",
-            "median": "见就业行",
-            "note": "地区与行业差异大，不得跨地区外推。"
+            "industry": "运输设备制造",
+            "median": "$125,190/年",
+            "note": "2025年5月美国17-2131本职业；非个人收入承诺。"
           },
           {
-            "industry": "行业口径说明三",
-            "median": "见就业行",
-            "note": "分位工资未披露，不以推断值替代。"
+            "industry": "工程服务",
+            "median": "$124,950/年",
+            "note": "2025年5月美国17-2131本职业；非个人收入承诺。"
           }
         ],
-        "industry_value_label": "行业值",
+        "industry_value_label": "年薪中位数（美元/年）",
         "interpretation_heading": {
           "$item": "materials-engineers.us-salary.career-snapshot-secondary-locale.4",
           "block": "us-salary",
@@ -10252,7 +10308,7 @@
         },
         "interpretation_rows": [
           {
-            "answer": "美元/年；为 BLS 2025 OEWS 全国中位数（本职业 17-2131.00 口径），未展示分位，不含个人到手收入。",
+            "answer": "2025完整年薪/时薪分位，17-2131本职业，非资历、起薪或到手收入。",
             "question": "工资"
           },
           {
@@ -10260,11 +10316,11 @@
             "question": "就业"
           },
           {
-            "answer": "2024—2034 预测高于平均（5% 至 6%），是职业统计，不是个人录用结果。",
+            "answer": "最新2025—2035增长8%、年均1,300；旧版另列，不是个人机会或净增。",
             "question": "展望"
           },
           {
-            "answer": "按 O*NET/BLS 行业口径列为制造业与专业科学技术服务，不等于全部从业者收入。",
+            "answer": "行业表为2025本职业各行业年薪中位，非行业所有人员均值或就业占比。",
             "question": "行业"
           }
         ],
@@ -10285,22 +10341,34 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "—",
-            "interpretation": "O*NET 该页未展示分位工资；不以推断值替代。",
-            "label": "最低 10%",
-            "value": "未披露"
+            "equivalent": "$34.76/小时",
+            "interpretation": "2025美国全国17-2131本职业分位，非资历、起薪或个人工时换算。",
+            "label": "P10",
+            "value": "$72,300/年"
+          },
+          {
+            "equivalent": "$42.35/小时",
+            "interpretation": "2025美国全国17-2131本职业分位，非资历、起薪或个人工时换算。",
+            "label": "P25",
+            "value": "$88,080/年"
           },
           {
             "equivalent": "$54.26/小时",
-            "interpretation": "2025 美国全国年薪中位数（本职业 17-2131.00 口径）。",
-            "label": "中位数（50%）",
+            "interpretation": "2025美国全国17-2131本职业分位，非资历、起薪或个人工时换算。",
+            "label": "P50（中位数）",
             "value": "$112,860/年"
           },
           {
-            "equivalent": "—",
-            "interpretation": "O*NET 该页未展示分位工资；不以推断值替代。",
-            "label": "最高 90%",
-            "value": "未披露"
+            "equivalent": "$68.61/小时",
+            "interpretation": "2025美国全国17-2131本职业分位，非资历、起薪或个人工时换算。",
+            "label": "P75",
+            "value": "$142,720/年"
+          },
+          {
+            "equivalent": "$84.48/小时",
+            "interpretation": "2025美国全国17-2131本职业分位，非资历、起薪或个人工时换算。",
+            "label": "P90",
+            "value": "$175,720/年"
           }
         ]
       },
@@ -10396,17 +10464,17 @@
           {
             "geography": "美国全国",
             "horizon": "2024—2034",
-            "interpretation": "为 2024—2034 年期间合计，含增长与替代需求，不等于在招岗位数。",
+            "interpretation": "旧2024—2034年均；新2025—2035年均1,300另列，非期合计/净增。",
             "limitation": "不能作为个人录用概率。",
-            "metric": "职位空缺（期合计）",
+            "metric": "预测年均职位空缺",
             "occupation_scope": "展示口径：Materials Engineers（17-2131.00）",
-            "value": "约 1,500 个"
+            "value": "约1,500个/年（旧版）"
           },
           {
             "geography": "美国全国",
             "horizon": "2025",
             "interpretation": "为 BLS 2025 OEWS 全国中位数，不代表起薪或到手收入。",
-            "limitation": "未披露分位；不含个人到手收入。",
+            "limitation": "2025完整工资分位已取得；17-2131本职业，不代个人收入或资历。",
             "metric": "年薪中位数",
             "occupation_scope": "展示口径：Materials Engineers（17-2131.00）",
             "value": "$112,860/年"
@@ -10485,6 +10553,12 @@
               "item": "materials-engineers.source-register.published.1"
             },
             "scope": "任务与工作情境；仅用于提出转型假设。"
+          },
+          {
+            "href": "https://www.bls.gov/ooh/management/architectural-and-engineering-managers.htm",
+            "id": "materials-engineers.display.source.bls-target-engineering",
+            "label": "BLS建筑与工程经理",
+            "scope": "第一目标实际管理任务。"
           }
         ],
         "transitions": [
@@ -10577,7 +10651,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "riasec",
             "label": "RIASEC",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10596,7 +10670,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "big-five",
             "label": "大五人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10615,7 +10689,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "mbti",
             "label": "MBTI",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10629,7 +10703,7 @@
             "answer": "需要结合真实任务、边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "enneagram",
             "label": "九型人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10643,7 +10717,7 @@
             "answer": "需要结合真实任务、边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "iq",
             "label": "认知能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10657,7 +10731,7 @@
             "answer": "需要结合真实任务、边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "eq",
             "label": "情绪能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -11179,7 +11253,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "材料评估与选型",
@@ -11230,7 +11304,7 @@
       "text": "材料工程师职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "5bc99d748e332f53c17cfc168a440af47e247f8f0c49aed5b86b742d3a6e65d6",
+  "source_content_sha256": "3a8d874ff3b0a85e32fe0d1756b8eccd77d88c73d34b386c1ffdb43e7c6fe095",
   "subject": {
     "canonical_slug": "materials-engineers",
     "name": "材料工程师",

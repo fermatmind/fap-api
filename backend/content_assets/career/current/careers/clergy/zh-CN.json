@@ -14,6 +14,21 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:nine-cn-industry-manufacturing-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:nine-cn-industry-science-tech-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:nine-cn-professional-technical-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:nine-cn-urban-nonprivate-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:nine-us-industry-wage-aerospace-mfg-2025": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -12004,28 +12019,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.href": {
-        "ref": {
-          "id": "clergy.us-salary.career-snapshot-secondary-locale.18",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.label": {
         "ref": {
@@ -12397,28 +12392,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.href": {
-        "ref": {
-          "id": "clergy.us-salary.career-snapshot-secondary-locale.24",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.label": {
         "ref": {
@@ -23689,7 +23664,7 @@
           ],
           "id": "clergy.profile.definition-block.1",
           "source_refs": [
-            "onet-details"
+            "nine-onet-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23704,7 +23679,7 @@
           },
           "id": "clergy.profile.definition-block.2",
           "source_refs": [
-            "onet-details"
+            "nine-onet-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23719,7 +23694,7 @@
           },
           "id": "clergy.profile.definition-block.3",
           "source_refs": [
-            "onet-details"
+            "nine-onet-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23734,7 +23709,7 @@
           },
           "id": "clergy.profile.definition-block.4",
           "source_refs": [
-            "onet-details"
+            "nine-onet-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23779,7 +23754,7 @@
           },
           "id": "clergy.profile.definition-block.7",
           "source_refs": [
-            "onet-hot-tech"
+            "nine-hot-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -24153,7 +24128,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "涉及未成年人与自伤或他伤风险与虐待线索时按机构与所在地规定立即报告与转介，不自行处置也不承诺保密。"
+              "编辑危机建议：发现急迫自伤、他伤或虐待危险时，按实际预案及时保护人员并联系适当紧急或专业服务，不等待完成内部报告再求援；报告义务与保密例外按适用法规、实际主体和职责核，不自行开展超出训练与权限的诊疗。"
             ]
           },
           "id": "clergy.profile.career-quick-answers-block.30",
@@ -24252,7 +24227,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS表1.2：美国神职人员2025年就业242,000人（含自雇，2025年自雇占5.7%），2035年预计247,800人，增长2.4%，官方净增5,700人、年均空缺19,200个；舍入后的规模相减不能替代官方净增。 O*NET行业页另列其他服务业82%、其他18%，未标资料年，不拼成2025就业结构。"
+              "BLS表1.2：美国神职人员2025年就业242,000人（含自雇，2025年自雇占5.7%），2035年预计247,800人，增长2.4%，官方净增5,700人、年均空缺19,200个；舍入后的规模相减不能替代官方净增。 O*NET详情页2025行业结构：其他服务业（公共管理除外）81%、医疗保健与社会援助10%；行业细分页另列其他行业9%。就业占比不是工资。"
             ]
           },
           "id": "clergy.profile.onet-structured-fields-block.4",
@@ -24263,7 +24238,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "技术与工作情境：O*NET 该职业的软件技能清单为 10 项（含 Outlook 与 Office 与 PowerPoint 与 Excel 与 Word 与 Facebook 与数据库与日程软件，其中 6 项标注为热门技术）；工作情境显示 83% 每天使用电子邮件、75% 每天电话交谈、73% 每天面对面讨论、67% 持续与他人接触、72% 对决策有很大自由度、62% 每周至少一次、但非每日公开演讲、67% 的典型工作周超过 40 小时、54% 认为协调或带领他人极其重要。"
+              "完整软件表10类别；其中6项标Hot Technology，不是只列6软件。2025美国Lightcast招聘词Office4%、Excel2%、Outlook/PowerPoint/Word各1%，Facebook比例Not available不填0；不是机构采用率。情境回答：83%每天邮件、75%每天电话、73%每天面对面讨论、67%持续接触他人、72%决策很大自由、62%每周非每天公开演讲、67%典型周超40小时、54%认为协调他人极其重要。"
             ]
           },
           "id": "clergy.profile.onet-structured-fields-block.5",
@@ -24290,7 +24265,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "沟通与协作｜83% 每天使用电子邮件；75% 每天进行电话交谈；73% 每天进行面对面讨论；67% 持续与他人接触；39% 认为与工作组或团队协作极其重要。\n演讲与公开露面｜62% 每周至少一次、但非每日进行公开演讲；52% 认为需要与外部客户或公众打交道且非常重要。\n决策与自主｜72% 对决策有很大自由度；58% 对确定任务与优先级与目标有很大自由度；22% 每月至少一次、但非每周做决策。\n领导与影响｜54% 认为协调或带领他人完成工作极其重要；42% 对其他人的工作结果负有高责任；22% 认为决策对同事或机构结果的影响重要。\n时间与压力｜67% 的典型工作周超过 40 小时；48% 每周至少一次、但非每日遇到严格截止时间；31% 认为精确或准确非常重要。\n情绪与冲突｜60% 每月至少一次、但非每周遇到冲突情境；需要在丧亲与危机与教义分歧中保持稳定并守住保密与转介边界。\n工作场所与体位｜73% 每天在环境受控的室内工作；51% 超过一半时间坐着；44% 与他人共事但不密切（如独立办公室）。\n工作性质｜以主持仪式与讲道教导与陪伴辅导与教务管理为主；输出包括讲道与教导材料与仪式执行与辅导记录与教务文件。\n安全与授权｜涉及未成年人保护与心理咨询与医疗与法律事项时按机构与所在地规定转介与报告；婚姻与丧礼等仪式的法定效力须按所在地规定与相应授权核对。"
+              "沟通与协作｜83% 每天使用电子邮件；75% 每天进行电话交谈；73% 每天进行面对面讨论；67% 持续与他人接触；39% 认为与工作组或团队协作极其重要。\n演讲与公开露面｜62% 每周至少一次、但非每日进行公开演讲；52% 认为需要与外部客户或公众打交道且非常重要。\n决策与自主｜72% 对决策有很大自由度；58% 对确定任务与优先级与目标有很大自由度；22% 每月至少一次、但非每周做决策。\n领导与影响｜54% 认为协调或带领他人完成工作极其重要；42% 对其他人的工作结果负有高责任；22% 认为决策对同事或机构结果的影响重要。\n时间与压力｜67% 的典型工作周超过 40 小时；48% 每周至少一次、但非每日遇到严格截止时间；31% 认为精确或准确非常重要。\n情绪与冲突｜60% 每月至少一次、但非每周遇到冲突情境；需要在丧亲与危机与教义分歧中保持稳定并守住保密与转介边界。\n工作场所与体位｜73% 每天在环境受控的室内工作；51% 超过一半时间坐着；44% 与他人共事但不密切（如独立办公室）。\n工作性质｜以主持仪式与讲道教导与陪伴辅导与教务管理为主；输出包括讲道与教导材料与仪式执行与辅导记录与教务文件。\n安全与授权｜涉及未成年人保护与心理咨询与医疗与法律事项时按机构与所在地规定转介与报告；婚姻与丧礼等仪式的法定效力须按所在地规定与相应授权核对。 上述为受访回答桶，不是所有岗位承诺或工时占比；任务描述不授予临床或法定仪式权限。"
             ]
           },
           "id": "clergy.profile.work-context-block.1",
@@ -24918,28 +24893,28 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
-                "id": "link-8",
-                "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
-              },
-              {
                 "entity": "O*NET-SOC 21-2011.00 职业详细资料",
-                "id": "link-9",
+                "id": "link-8",
                 "relation": "related-evidence",
                 "url": "https://www.onetonline.org/link/details/21-2011.00"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
-                "id": "link-10",
+                "entity": "O*NET 全国工资分位页面（21-2011.00）",
+                "id": "link-9",
                 "relation": "related-evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://www.onetonline.org/link/localwages/21-2011.00"
               },
               {
-                "entity": "BLS表1.2神职人员21-2011就业预测",
+                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "id": "link-10",
+                "relation": "related-evidence",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "entity": "NIST AI Risk Management Framework 1.0",
                 "id": "link-11",
                 "relation": "related-evidence",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
                 "entity": "O*NET 技术清单（21-2011.00 招聘技术关键词）",
@@ -24948,22 +24923,22 @@
                 "url": "https://www.onetonline.org/link/hot_tech/21-2011.00"
               },
               {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "entity": "O*NET-SOC 21-2011.00 职业详细资料",
                 "id": "link-13",
                 "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
-              },
-              {
-                "entity": "O*NET 技术清单（21-2011.00 招聘技术关键词）",
-                "id": "link-14",
-                "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/hot_tech/21-2011.00"
+                "url": "https://www.onetonline.org/link/details/21-2011.00"
               },
               {
                 "entity": "O*NET-SOC 21-2011.00 职业详细资料",
-                "id": "link-15",
+                "id": "link-14",
                 "relation": "related-evidence",
                 "url": "https://www.onetonline.org/link/details/21-2011.00"
+              },
+              {
+                "entity": "宗教教职人员网络行为规范（第16条；其他网络服务边界另见本页互联网办法）",
+                "id": "link-15",
+                "relation": "related-evidence",
+                "url": "https://www.sara.gov.cn/static/content/xxgk/gfxwj/2025-09-16/1417173278783471616.html"
               },
               {
                 "entity": "BLS表1.2神职人员21-2011就业预测",
@@ -24972,22 +24947,22 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
+                "entity": "宗教事务条例（法定职责；临床专业资格另见本页BLS来源）",
                 "id": "link-17",
                 "relation": "related-evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://xzfy.moj.gov.cn/c/2021-01-17/488814.shtml"
               },
               {
-                "entity": "O*NET 全国工资分位页面（21-2011.00）",
+                "entity": "BLS表1.2神职人员21-2011就业预测",
                 "id": "link-18",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localwages/21-2011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET-SOC 21-2011.00 职业摘要",
+                "entity": "O*NET 技术清单（21-2011.00 招聘技术关键词）",
                 "id": "link-19",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/summary/21-2011.00"
+                "url": "https://www.onetonline.org/link/hot_tech/21-2011.00"
               }
             ]
           },
@@ -25054,7 +25029,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用记录与提醒工具提高跟进一致性，但把保密边界、危机识别与转介决定写清，不让自动提示替代对人的判断与到场。"
+              "编辑试测记录和提醒的一致性、漏项与总复核成本；本轮无本职业提效试验。保密、危机识别与转介由具备相应职责和训练者承担，危险时及时求援。"
             ]
           },
           "id": "clergy.ai-impact.ai-impact-table.15",
@@ -25604,7 +25579,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 21-2011.00 任务与工作活动；BLS表1.2本职业就业预测"
+              "O*NET21-2011.00任务；编辑任务分析，不是替代率预测"
             ]
           },
           "id": "clergy.ai-impact.ai-impact-table.65",
@@ -25626,7 +25601,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS表1.2神职人员21-2011就业预测；O*NET Hot Technologies 21-2011.00"
+              "O*NET21-2011.00详细资料Education；BLS典型学历培训另见本页未详列Clergy精确项与EP"
             ]
           },
           "id": "clergy.ai-impact.ai-impact-table.67",
@@ -25648,7 +25623,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 21-2011.00 任务清单；ILO 暴露指数方法说明"
+              "中国宗教教职人员网络行为规范第16条及互联网宗教信息服务管理办法相关渠道规定；编辑试测不能使禁止用途合法"
             ]
           },
           "id": "clergy.ai-impact.ai-impact-table.69",
@@ -25692,7 +25667,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST AI RMF 1.0 责任与记录要求；O*NET 21-2011.00 任务描述"
+              "中国宗教事务条例/教职人员管理办法的具体责任；临床专业学历许可另见本页BLS心理学家及婚姻家庭治疗师来源；NIST非中国法源"
             ]
           },
           "id": "clergy.ai-impact.ai-impact-table.73",
@@ -25736,7 +25711,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET Hot Technologies 21-2011.00（技术关键词）；NIST AI RMF 1.0"
+              "O*NET Hot Technologies21-2011.00技术关键词；中国网络用途必须符合本页宗教规范；NIST通用框架另见模块入口"
             ]
           },
           "id": "clergy.ai-impact.ai-impact-table.77",
@@ -25813,7 +25788,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "自动生成的讲稿或答复可能看似通顺却与所依据的经典与教义或信众处境不符；在未核对原文与处境时直接使用会造成误导与信任损害。"
+              "工具可能生成错误教义或不适合处境的表述，未经核对采用可能误导；本轮无本职业错误率。中国大陆不得利用AI传教，人工改稿或核原文不消除该限制。"
             ]
           },
           "id": "clergy.ai-impact.ai-impact-table.84",
@@ -25824,7 +25799,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅以经典原文与教务传统与信众陈述为依据；对不确定处先确认再表达，并保留确认过程与结论。"
+              "先核用途是否允许；允许处理的非宗教传播内部行政材料也须核事实与权限。经典整理、教导及传播依实际法规和职责处理，不能以核原文为由利用AI传教。"
             ]
           },
           "id": "clergy.ai-impact.ai-impact-table.85",
@@ -25835,7 +25810,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "信众的信仰实践与家庭与心理与健康信息属于高度敏感信息，上传到外部服务可能造成泄露与信任与合规风险。"
+              "信仰、医疗健康及不满14周岁未成年人信息属于法定敏感个人信息；家庭资料按具体内容与风险核，不能一概给同一法律分类。外部上传可能带来泄露与合规风险。"
             ]
           },
           "id": "clergy.ai-impact.ai-impact-table.86",
@@ -25857,7 +25832,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "同一批材料在不同版本工具下可能被改写为不同表述；缺少版本与时间记录会使发布内容的复核与追溯无法进行。"
+              "不同工具版本可能改写表述，缺少版本与时间记录会增加复核和追溯困难，不断言必然无法追溯。"
             ]
           },
           "id": "clergy.ai-impact.ai-impact-table.88",
@@ -25879,7 +25854,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把自动生成的内容直接作为教义表述或对个案的判断依据，会让机构在信任危机与合规检查阶段承担举证不足的风险。"
+              "把生成内容直接作教义或个案依据可能产生误导、信任与合规风险；本轮无发生率，获准内部行政用途仍须核事实，禁止用途不得采用。"
             ]
           },
           "id": "clergy.ai-impact.ai-impact-table.90",
@@ -25901,7 +25876,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "当流程被拆成「工具出内容、人工点发布」时，容易出现没有人对诠释与关怀质量负责的空档。"
+              "编辑流程风险提示：只有工具生成与人工点发布而无实际职责复核，可能遗漏诠释、关怀与合规问题；本轮无该风险发生率。"
             ]
           },
           "id": "clergy.ai-impact.ai-impact-table.92",
@@ -25967,7 +25942,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "确认危机与未成年人保护线索已按规程报告，并保留报告与转介记录。"
+              "危急时及时求援与保护人员，按适用法规履行报告与转介；保留必要记录，不以记录完毕作为救援前提。"
             ]
           },
           "id": "clergy.ai-impact.ai-impact-table.98",
@@ -26000,7 +25975,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "资源线索可辅助；识别判断与到场陪伴仍由人负责"
+              "编辑可试测获准的公共资源线索检索；紧急求援与转介不等待工具确认。"
             ]
           },
           "id": "clergy.ai-impact.ai-impact-table.101",
@@ -26044,7 +26019,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "流程与提醒可数字化；主持与临场应对仍由人负责"
+              "编辑试测获准内部行政排程与提醒的正确性、复核成本；宗教主持与临场应对按实际身份和职责。"
             ]
           },
           "id": "clergy.ai-impact.ai-impact-table.105",
@@ -26088,7 +26063,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记账与排班可自动化；共同决策与监督责任仍由人承担"
+              "编辑可试测获准内部记账核对与排班草稿，不承诺已自动化或提效；财务审批、共同决策与监督按实际制度。"
             ]
           },
           "id": "clergy.ai-impact.ai-impact-table.109",
@@ -26220,7 +26195,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "探访安排可优化；在场陪伴与保密判断仍由人负责"
+              "编辑试测获准的匿名内部行政排程，核漏项和复核成本；本轮无探访安排优化效果证据，陪伴与保密仍按实际职责。"
             ]
           },
           "id": "clergy.ai-impact.ai-impact-table.121",
@@ -26255,7 +26230,7 @@
           },
           "id": "clergy.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-wages"
+            "nine-nbs-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26270,7 +26245,7 @@
           },
           "id": "clergy.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wages"
+            "nine-nbs-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26351,7 +26326,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮查阅范围为：国家统计局与人力资源和社会保障部公开的工资与职业分类资料入口，以及本职业的 O*NET 精确职业来源；后者其市场与辖区明确为美国，不支持中国精确工资口径。因此本页不给出职业级中位数、分位数、起薪或稳定月薪。"
+              "本轮核国家统计局2025工资表2/5及调查说明、行业分类954/8399；未取得中国大陆宗教教职人员全国职业工资分布或与美国21-2011一一对应的职业代码，不以首页证明精确映射。"
             ]
           },
           "id": "clergy.china-salary.career-snapshot-primary-locale.8",
@@ -26428,7 +26403,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "统计覆盖范围：中国大陆公开工资统计以城镇法人单位为对象，宗教团体与宗教院校与宗教活动场所的用工与供养形式覆盖不同"
+              "NBS工资调查覆盖城镇地域内5人及以上法人单位，不含个体工商户和自由职业者；非私营不等于政府，宗教用工或供养是否进入工资调查按实际单位与报酬性质核。"
             ]
           },
           "id": "clergy.china-salary.career-snapshot-primary-locale.15",
@@ -26450,7 +26425,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "工资资料期2025年，2026年5月15日发布；检索日期2026年10月3日。"
+              "2025年工资数据，2026-05-15发布；本轮2026-10-09查阅，数据期、发布日与检索日分别列。"
             ]
           },
           "id": "clergy.china-salary.career-snapshot-primary-locale.17",
@@ -26505,7 +26480,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "仅供宗教院校教学雇主的宽行业背景；不能用于全部宗教组织。本页未取得中国大陆全国职业工资分布。"
+              "仅供主营活动归入教育门类的宗教院校教学单位背景；行业分类8399含经批准的宗教院校教育，不能套全部宗教组织或所有教师个人。中国精确职业分布仍未取得。"
             ]
           },
           "id": "clergy.china-salary.career-snapshot-primary-locale.22",
@@ -26593,7 +26568,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：教学与研究岗位通常要求更高学历与研究能力，本页不把学历直接对应到收入区间。"
+              "编辑建议核教学研究岗位的学历、研究训练与实际职责；本轮无目标样本证明统一更高学历要求，不由学历推收入区间。"
             ]
           },
           "id": "clergy.china-salary.career-snapshot-primary-locale.30",
@@ -26736,7 +26711,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局2025年城镇单位工资｜https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
+              "国家统计局2025年城镇单位工资｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "clergy.china-salary.career-snapshot-primary-locale.43",
@@ -26891,7 +26866,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局2025年城镇单位工资｜https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html；国民经济行业分类注释（宗教组织954）｜https://www.stats.gov.cn/xxgk/tjbz/gjtjbz/202008/P020200811608157848094.pdf"
+              "国家统计局2025年城镇单位工资｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html；国民经济行业分类注释（宗教组织954）｜https://www.stats.gov.cn/xxgk/tjbz/gjtjbz/202008/P020200811608157848094.pdf"
             ]
           },
           "id": "clergy.china-salary.career-snapshot-primary-locale.57",
@@ -27150,7 +27125,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位。该分位不包含住房与交通等实物性待遇的个体差异，也不含自雇主收入。；O*NET 全国工资分位页面（21-2011.00）｜https://www.onetonline.org/link/localwages/21-2011.00"
+              "第90分位为受雇工资分布位置，非个人全报酬；OEWS排加班、福利及自雇收入，住房交通等报酬按方法定义核，不由分位推个人待遇。"
             ]
           },
           "id": "clergy.us-salary.career-snapshot-secondary-locale.18",
@@ -27216,7 +27191,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 至 2035 年年均空缺，含替补（离职与转岗）需求；空缺数远大于净增长，说明大部分机会来自替补需求。；O*NET-SOC 21-2011.00 职业详细资料｜https://www.onetonline.org/link/details/21-2011.00"
+              "2025—2035年均空缺19,200含增长与替补，不是十年累计或净增；不把年均空缺与十年净增5,700直接当同一期间比较。"
             ]
           },
           "id": "clergy.us-salary.career-snapshot-secondary-locale.24",
@@ -27271,7 +27246,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 工作情境显示 67% 的典型工作周超过 40 小时、48% 每周至少一次、但非每日遇到严格截止时间，节期与婚丧安排会影响加班与休息安排。"
+              "O*NET受访回答：67%典型周超40小时、48%每周至少一次但非每天遇到严格期限；不是所有岗位排班承诺。编辑比较建议核有薪工时、节期安排与休息，未取得其收入因果影响。"
             ]
           },
           "id": "clergy.us-salary.career-snapshot-secondary-locale.29",
@@ -27293,7 +27268,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工作场景以其他服务业（公共管理除外）为主；不同地区的宗教组织规模与机构结构会影响收入水平，本页不逐州列出，也不以最高值当作普遍水平。"
+              "O*NET详情页2025行业结构：其他服务业（公共管理除外）81%、医疗保健与社会援助10%；行业细分页另列其他行业9%。就业占比不是工资。 编辑比较实际报价时另核地区、机构、用工形式、工时和报酬组成，不由行业占比推收入。"
             ]
           },
           "id": "clergy.us-salary.career-snapshot-secondary-locale.31",
@@ -27348,7 +27323,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国2025年5月该宽行业内神职人员受雇税前年中位数；同时年均值66,420美元，不能混用；不等于仅宗教组织8131。"
+              "来源表标2025年，该NAICS813宽行业内Clergy年中位58,660美元、年均66,420美元；行业页未在此表注明月份，本轮不附加月份。非仅宗教组织8131，非全体宗教雇员均值。"
             ]
           },
           "id": "clergy.us-salary.career-snapshot-secondary-locale.36",
@@ -27381,7 +27356,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "查阅BLS医院行业页未列本职业工资，不能断言官方没有该数据。"
+              "证据不足：本轮未取得医院行业内神职人员工资中位数，不能断言官方没有该数据。"
             ]
           },
           "id": "clergy.us-salary.career-snapshot-secondary-locale.39",
@@ -27491,7 +27466,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "机构类型（宗教组织与相关机构）、教派与职责范围、是否有教导与管理职责、以及是否包含住房与交通等安排都会影响实际待遇；本页不预测个人收入。"
+              "编辑建议比较报价时核机构、教派、职责、地区、工时、住宿交通与报酬组成；本轮未取得各因素待遇差异或因果估计，不预测个人收入。"
             ]
           },
           "id": "clergy.us-salary.career-snapshot-secondary-locale.49",
@@ -27777,10 +27752,10 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "O*NET-SOC 21-2011.00 教育与培训信息入口",
+                "entity": "O*NET21-2011.00新入职教育要求与JobZone",
                 "id": "link-18",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtraining/21-2011.00"
+                "url": "https://www.onetonline.org/link/details/21-2011.00#Education"
               },
               {
                 "entity": "O*NET 技术清单（21-2011.00 招聘技术关键词）",
@@ -27849,7 +27824,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格在本页只用于描述工作方式，不作为录用或按立依据。与该职业任务更相关的是尽责性维度下的「坚持」与「自控」、以及宜人性与情绪稳定性在陪伴与冲突中的作用；这些特质影响你如何陪伴与表达，而不是你能不能学会教义与仪式。"
+              "编辑自查建议：观察是否按约跟进、冲突时控制表达、倾听并守住权限。大五人格仅作工作方式讨论，本轮无本职业选拔效度或因果验证，不由特质推能否胜任或按立。"
             ]
           },
           "id": "clergy.fit.personality-fit-block.6",
@@ -27872,7 +27847,7 @@
           "data": {
             "entries": [
               "适配信号：你习惯把探访与转介与危机处置记成适当记录，让别人能在保护隐私的前提下接手。",
-              "适配信号：你能接受 67% 持续与他人接触、67% 的典型工作周超过 40 小时的工作形态。"
+              "编辑自查：核目标岗位沟通与工时是否可接受。67%持续接触他人及67%典型周超40小时是受访回答，不是每个岗位的工作比例。"
             ]
           },
           "id": "clergy.fit.personality-fit-block.8",
@@ -27883,7 +27858,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：把「回应所有人」放在「守住能力与职责边界」之前，会造成越界与倦怠。"
+              "编辑谨慎信号：为回应所有求助而越过训练、职责或休息边界，可能增加越界与耗竭风险；本轮无发生率。"
             ]
           },
           "id": "clergy.fit.personality-fit-block.9",
@@ -27894,7 +27869,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣取向：该职业群体的兴趣代码为 SE（社会型、企业型），日常任务以主持仪式与讲道教导、探访与辅导与转介、教务与人员与财务管理为主。"
+              "兴趣代码SE描述职业工作内容，社会型、企业型较突出；主持仪式、教导、探访转介及教务管理是任务描述，不是从业者兴趣人格分布。"
             ]
           },
           "id": "clergy.fit.personality-fit-block.10",
@@ -27928,7 +27903,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：MBTI 类型不是招聘或按立条件，本页不提供按类型筛选岗位的建议。"
+              "本轮未核具体机构招聘或按立规则，本页不据MBTI作录用/按立判断。"
             ]
           },
           "id": "clergy.fit.personality-fit-block.13",
@@ -28151,10 +28126,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向受执业监管并要求实习与执照，门槛与责任高于心灵关怀。"
+              "美国临床与咨询心理学家各州有执照监管，通常须研究生学位、受督导经验及适用考试；具体条件向目标州核。神职训练不替代其专业资格，不把门槛作统一高低排名。"
             ]
           },
           "id": "clergy.fit.personality-fit-block.33",
+          "source_refs": [
+            "nine-psych-path",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28217,10 +28196,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向需要临床训练与执照，本职业遇到临床问题时须转介。"
+              "美国婚姻与家庭治疗师各州要求执照，通常须相关硕士、毕业后受督导临床经验及考试；目标州细节另核，神职训练不代替治疗资格。"
             ]
           },
           "id": "clergy.fit.personality-fit-block.39",
+          "source_refs": [
+            "nine-family-path",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28283,7 +28266,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向以组织与项目管理为主，教导与陪伴的一线比例更低。"
+              "宗教活动与教育主管协调或设计教育活动项目，也可能提供相关辅导；本轮无两职业一线教导陪伴工时比较，不断言比例更低。"
             ]
           },
           "id": "clergy.fit.personality-fit-block.45",
@@ -28305,7 +28288,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。该职业以讲道与教导与一对一关怀为主，O*NET 工作情境显示 51% 超过一半时间坐着、44% 与他人共事但不密切；内向者可以通过充分的文本准备与结构化探访建立可靠的工作方式。"
+              "本轮未取得内外向对本职业胜任的验证。编辑建议用表达、倾听、准备与转介记录观察实际任务表现；51%坐姿和44%非密切共事回答不能推内向者表现。"
             ]
           },
           "id": "clergy.fit.personality-fit-block.47",
@@ -28316,7 +28299,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。外向本身不是优势或劣势，关键是能否把教义讲清楚并按规程报告与转介；如果更偏好个人陪伴，可以侧重探访与辅导与小组带领。"
+              "本轮无内外向表现比较证据，不评价外向优势或劣势；编辑建议用表达、倾听、准备与转介记录观察具体任务。"
             ]
           },
           "id": "clergy.fit.personality-fit-block.48",
@@ -28349,7 +28332,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。人格特质分数与工作表现的关联在不同研究中强弱不一，且受机构与岗位影响；本页不用它作为录用或适配判断依据。"
+              "本轮未取得本职业人格分数预测表现的验证；不用它作录用、按立或适配结论，改核实际任务与训练反馈。"
             ]
           },
           "id": "clergy.fit.personality-fit-block.51",
@@ -28702,6 +28685,18 @@
                 "id": "link-6",
                 "relation": "related-evidence",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "entity": "宗教事务条例第58条财务管理",
+                "id": "law-religion-58",
+                "relation": "related-evidence",
+                "url": "https://xzfy.moj.gov.cn/c/2021-01-17/488814.shtml"
+              },
+              {
+                "entity": "个人信息保护法（适用保密/敏感资料处理）",
+                "id": "law-pipl",
+                "relation": "related-evidence",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               }
             ]
           },
@@ -28724,7 +28719,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答：该职业最需要提前判断的风险来自四处——把他人交付的隐私与脆弱信息泄露或不当使用、在未成年人保护与自伤他伤与虐待线索上未按规程报告与转介、以宗教身份越界介入医疗与法律与财务并滥用信任、以及教义分歧与教务与财务不透明引发的冲突；长期高投入带来的倦怠也是常见问题。"
+              "编辑风险归纳：隐私不当使用、急迫危险未及时求援及适用报告遗漏、超训练权限介入专业事项、教义与财务治理冲突，以及长期投入下的情绪耗竭。任务与情境可提示场景，本轮无各风险发生率，不称倦怠普遍。"
             ]
           },
           "id": "clergy.risk.career-risk-cards.9",
@@ -28757,7 +28752,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "把信众与家庭的信仰与心理与健康信息在非受控场合透露或写入公开材料，会造成信任崩塌与法律责任。"
+              "不当透露信仰、家庭、心理或健康信息可能损害信任并产生法律风险；具体责任须核适用法规、处理依据、披露对象与事实，不断言每次均构成违法。"
             ]
           },
           "id": "clergy.risk.career-risk-cards.12",
@@ -28812,10 +28807,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按机构与所在地规定立即报告与转介，明确告知保密的例外，并保留报告时间与对象与处置结果。"
+              "编辑危机建议：发现急迫自伤、他伤或虐待危险时，按实际预案及时保护人员并联系适当紧急或专业服务，不等待完成内部报告再求援；报告义务与保密例外按适用法规、实际主体和职责核，不自行开展超出训练与权限的诊疗。 留存必要的时间、求援或报告对象与移交结果，说明适用保密边界。"
             ]
           },
           "id": "clergy.risk.career-risk-cards.17",
+          "source_refs": [
+            "onet-details",
+            "cn-religion-reg",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28845,7 +28845,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "以宗教权威越界介入医疗决定或法律争议或财务安排，会造成人身与财产损害并损害机构公信。"
+              "以宗教身份超出训练与权限介入医疗、法律或财务，可能造成伤害、财产或信任风险；具体责任与后果核事实和适用规则。"
             ]
           },
           "id": "clergy.risk.career-risk-cards.20",
@@ -28889,7 +28889,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "教义与程序分歧处理不当会分裂社群并造成长期对抗与流失。"
+              "教义或程序分歧处理不当可能引发社群冲突与信任损害；本轮无分裂或流失概率，不断言必然结果。"
             ]
           },
           "id": "clergy.risk.career-risk-cards.24",
@@ -28933,7 +28933,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "财务与采购与筹款与人员安排不透明会造成挪用质疑与监管风险。"
+              "财务、采购、筹款和人员安排缺少必要透明度可能引发质疑或监管风险；本轮无其发生率，职责及公开要求按适用制度核。"
             ]
           },
           "id": "clergy.risk.career-risk-cards.28",
@@ -28944,10 +28944,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "与委员会或信众代表共同决策，账目与合同与采购记录可核对，按机构与所在地规定履行公开与审计程序。"
+              "中国《宗教事务条例》58条规定财务报告、向信教公民适当公布及财务管理制度；教职人员按实际财务职责履职。委员会协作是美国O*NET任务，具体共同决策、采购和审计按所在地及机构制度核。"
             ]
           },
           "id": "clergy.risk.career-risk-cards.29",
+          "source_refs": [
+            "cn-religion-reg",
+            "faa-design-approvals",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29221,16 +29226,16 @@
                 "url": "https://www.onetonline.org/link/details/21-2011.00#JobZone"
               },
               {
-                "entity": "O*NET-SOC 21-2011.00 教育与培训信息入口",
+                "entity": "O*NET21-2011.00身份任务、Education及JobZone",
                 "id": "link-3",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtraining/21-2011.00"
+                "url": "https://www.onetonline.org/link/details/21-2011.00"
               },
               {
-                "entity": "O*NET-SOC 21-2011.00 技能与能力入口",
+                "entity": "BLS未详列Clergy精确条目：典型教育与培训",
                 "id": "link-4",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/details/21-2011.00#Skills"
+                "url": "https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm"
               }
             ]
           },
@@ -29429,7 +29434,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求基础培养与带岗安排。"
+              "编辑准备建议：核基础培养与带岗安排。"
             ]
           },
           "id": "clergy.path.career-path-block.28",
@@ -29539,7 +29544,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求事奉经验与教派认可。"
+              "编辑建议核具体宗教传统、事奉经历与团体认可要求；中国依法认定备案义务仍适用，不设普遍经验门槛。"
             ]
           },
           "id": "clergy.path.career-path-block.38",
@@ -29594,7 +29599,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求机构内职责与长期事奉经验。"
+              "编辑准备建议：核机构内职责与长期事奉经验。"
             ]
           },
           "id": "clergy.path.career-path-block.43",
@@ -29649,7 +29654,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求基础培养与保密与报告培训。"
+              "编辑准备建议：核基础培养与保密与报告培训。"
             ]
           },
           "id": "clergy.path.career-path-block.48",
@@ -29759,7 +29764,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求督导经验与机构授权。"
+              "编辑准备建议：核督导经验与机构授权。"
             ]
           },
           "id": "clergy.path.career-path-block.58",
@@ -29814,7 +29819,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求机构内职责与跨机构经验。"
+              "编辑准备建议：核机构内职责与跨机构经验。"
             ]
           },
           "id": "clergy.path.career-path-block.63",
@@ -29869,7 +29874,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求社群参与经验。"
+              "编辑准备建议：核社群参与经验。"
             ]
           },
           "id": "clergy.path.career-path-block.68",
@@ -29979,7 +29984,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求机构章程下的明确授权。"
+              "编辑建议核机构章程、职责与实际授权，法定手续另核，不把特定制度作全部岗位统一条件。"
             ]
           },
           "id": "clergy.path.career-path-block.78",
@@ -30034,7 +30039,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求长期事奉与机构内职责。"
+              "编辑准备建议：核长期事奉与机构内职责。"
             ]
           },
           "id": "clergy.path.career-path-block.83",
@@ -30098,7 +30103,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "编辑建议核对的机构条件",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -30115,7 +30120,7 @@
                 "独立准备并主持常规仪式与讲道教导并完成探访与转介。",
                 "教导内容依据、仪式执行、探访与转介质量、记录规范。",
                 "用一段时间的仪式与教导与探访记录证明。",
-                "与资深岗相比不处理危机与分歧与治理决策。"
+                "危机时仍须及时求援、保护与适用报告；复杂治疗、治理或争议事项按实际训练及授权移交，不能以初级岗免除全部责任。"
               ],
               [
                 "危机陪伴与分歧处理岗",
@@ -30168,7 +30173,7 @@
               {
                 "id": "onet-traits",
                 "values": [
-                  "O*NET 工作风格列出谦逊、真诚、乐观、领导取向、坚持、同理心、自控、社会取向、合作与诚信十项；",
+                  "完整工作风格21项：合作、同理心100，可靠、诚信98，真诚96、谦逊87等；不是仅有十项，也不是人员比例。",
                   "基本技能以口语表达、主动倾听、阅读理解与写作为主；",
                   "工作活动以建立并维护人际关系、帮助与照顾他人、获取信息与建立团队为前几位。"
                 ]
@@ -30178,7 +30183,7 @@
                 "values": [
                   "日程与排期与教务与信众管理数据库；",
                   "办公与演示与表格工具（Outlook 与 Office 与 PowerPoint 与 Excel 与 Word，均为热门技术）；",
-                  "社交与传播平台（如 Facebook）与活动与通知工具。"
+                  "美国软件表含Facebook等；招聘词不授予中国网络宗教传播许可。中国发布须核主体、许可和渠道，且不得利用AI传教。"
                 ]
               }
             ]
@@ -30306,8 +30311,8 @@
               [
                 "面谈与教义与动机问答",
                 "对经典与教务传统的理解、遇到危机与保密冲突时如何处理。",
-                "是否知道先报告与转介再陪伴、是否理解保密范围与例外。",
-                "面谈不等同于实际陪伴能力，机构通常另有带岗与督导与考核。"
+                "是否能在急迫危险中及时求援并按训练保护人员，履行适用报告与转介；不以先完成内部报告作为陪伴或救援前提。",
+                "面试问答不等于实际能力；编辑建议核目标机构带岗、督导及考核安排。"
               ],
               [
                 "讲道或教导演练",
@@ -30431,10 +30436,10 @@
               [
                 "本科学历（宗教学或相关专业）",
                 "希望进入事奉或宗教教育方向的人",
-                "作为进入培养序列的常见条件",
+                "BLS典型入行学士；具体培养项目条件另核，不证明所有岗位要求宗教学本科",
                 "非各岗位统一门槛；BLS典型入行学历为学士",
-                "完成相关专业学习并具备基本的经典阅读与表达能力",
-                "中",
+                "按实际学校与培养项目核专业、课程、学历及录取条件",
+                "本轮未核具体学制、费用及资助，另向项目核",
                 "学历不能替代宗教认定或按立；可能是具体培养条件。"
               ],
               [
@@ -30469,8 +30474,8 @@
                 "需要处理相应专业事项的人",
                 "决定能否提供相应专业服务",
                 "非所有神职人员门槛；实际开展相应服务另核",
-                "按相应专业教育与实习与执照路径取得",
-                "高",
+                "按目标地区与具体专业分别核教育、受督导经验、考试及许可，不把心理、医疗、法律视为同一执照路径。",
+                "本轮未核具体专业学制、费用与资助，另向项目核",
                 "宗教训练不授予临床诊断治疗权限；超范围转介。"
               ],
               [
@@ -30480,7 +30485,7 @@
                 "按实际岗位章程与授权核",
                 "按机构章程与制度完成授权与考核",
                 "本轮未核投入，不统一分级",
-                "授权范围与机构制度绑定，重要事项须共同决策与留痕。"
+                "授权范围与机构制度绑定，重大事项按实际共同决策与留痕要求执行。"
               ]
             ]
           },
@@ -30603,7 +30608,7 @@
           },
           "id": "clergy.market-signals.market-signal-card.5",
           "source_refs": [
-            "onet-industry"
+            "nine-industry-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30656,7 +30661,7 @@
                 "entity": "国家统计局《城镇单位就业人员年平均工资情况》检索入口",
                 "id": "link-5",
                 "relation": "related-evidence",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET-SOC 21-2011.00 职业详细资料",
@@ -30898,7 +30903,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025 年及以前已发布资料"
+              "2025年工资数据，2026年发布；本轮2026-10-09查阅。"
             ]
           },
           "id": "clergy.market-signals.market-signal-card.24",
@@ -31008,7 +31013,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少服务项目设计与预算与绩效管理与团队带领经验。"
+              "编辑建议自查：需核是否具备服务项目设计与预算与绩效管理与团队带领经验。如尚无相应训练或经历再补足，不断言每位读者缺少。"
             ]
           },
           "id": "clergy.market-signals.market-signal-card.34",
@@ -31030,7 +31035,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。该方向需要项目管理与预算与绩效能力。"
+              "编辑任务比较：社区服务管理需核项目、预算与绩效能力；不是实测转岗难度或成功率，法定资格按目标法域逐项核，非每一目标均有统一执照。"
             ]
           },
           "id": "clergy.market-signals.market-signal-card.36",
@@ -31041,7 +31046,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少临床评估与诊断与治疗训练与执业资格。"
+              "编辑建议自查：需核是否具备临床评估与诊断与治疗训练与执业资格。如尚无相应训练或经历再补足，不断言每位读者缺少。"
             ]
           },
           "id": "clergy.market-signals.market-signal-card.37",
@@ -31063,10 +31068,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较大。临床方向需要受监管的学位与实习与执照。"
+              "编辑转向距离判断：较大。美国临床与咨询心理学家须核目标州学位、受督导经验与执照，不代表转岗成功概率。"
             ]
           },
           "id": "clergy.market-signals.market-signal-card.39",
+          "source_refs": [
+            "nine-psych-path",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31074,7 +31083,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少学业与职业信息与生涯规划方法与学校或机构职责经验。"
+              "编辑建议自查：需核是否具备学业与职业信息与生涯规划方法与学校或机构职责经验。如尚无相应训练或经历再补足，不断言每位读者缺少。"
             ]
           },
           "id": "clergy.market-signals.market-signal-card.40",
@@ -31096,7 +31105,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。顾问方向需要辅导理论与实务训练。"
+              "编辑任务比较：教育/职业顾问需核辅导理论、实务及目标岗位资格；不是实测转岗难度或成功率，法定资格按目标法域逐项核，非每一目标均有统一执照。"
             ]
           },
           "id": "clergy.market-signals.market-signal-card.42",
@@ -31107,7 +31116,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少家庭系统与关系治疗的临床训练与执照。"
+              "编辑建议自查：需核是否具备家庭系统与关系治疗的临床训练与执照。如尚无相应训练或经历再补足，不断言每位读者缺少。"
             ]
           },
           "id": "clergy.market-signals.market-signal-card.43",
@@ -31129,10 +31138,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较大。治疗方向需要临床项目与执照。"
+              "编辑转向距离判断：较大。美国婚姻家庭治疗师须核相关硕士、毕业后受督导经验与州执照，不代表各地同一条件。"
             ]
           },
           "id": "clergy.market-signals.market-signal-card.45",
+          "source_refs": [
+            "nine-family-path",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31140,7 +31153,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少医疗场景的社会心理评估与资源衔接与出院安排经验。"
+              "编辑建议自查：需核是否具备医疗场景的社会心理评估与资源衔接与出院安排经验。如尚无相应训练或经历再补足，不断言每位读者缺少。"
             ]
           },
           "id": "clergy.market-signals.market-signal-card.46",
@@ -31162,7 +31175,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。医疗社工方向需要社会工作训练与机构职责。"
+              "编辑任务比较：医疗社工需核社会工作训练、机构职责及适用资格；不是实测转岗难度或成功率，法定资格按目标法域逐项核，非每一目标均有统一执照。"
             ]
           },
           "id": "clergy.market-signals.market-signal-card.48",
@@ -31173,7 +31186,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少宗教教育项目与活动与人员与预算的组织管理经验。"
+              "编辑建议自查：需核是否具备宗教教育项目与活动与人员与预算的组织管理经验。如尚无相应训练或经历再补足，不断言每位读者缺少。"
             ]
           },
           "id": "clergy.market-signals.market-signal-card.49",
@@ -31195,7 +31208,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较小。该方向与本职业的教导与活动组织能力相通。"
+              "编辑任务比较：宗教活动教育管理可利用教导组织经验，仍核管理、课程与实际职责；不是实测转岗难度或成功率，法定资格按目标法域逐项核，非每一目标均有统一执照。"
             ]
           },
           "id": "clergy.market-signals.market-signal-card.51",
@@ -31206,7 +31219,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少社会服务个案管理与福利资源流程知识。"
+              "编辑建议自查：需核是否具备社会服务个案管理与福利资源流程知识。如尚无相应训练或经历再补足，不断言每位读者缺少。"
             ]
           },
           "id": "clergy.market-signals.market-signal-card.52",
@@ -31228,7 +31241,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较小。社会与人类服务助理方向与本职业的关怀能力相通。"
+              "编辑任务比较：服务助理可利用关怀经验，仍核服务流程、记录与目标职责；不是实测转岗难度或成功率，法定资格按目标法域逐项核，非每一目标均有统一执照。"
             ]
           },
           "id": "clergy.market-signals.market-signal-card.54",
@@ -31239,7 +31252,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少公共卫生与社区健康项目与健康教育经验。"
+              "编辑建议自查：需核是否具备公共卫生与社区健康项目与健康教育经验。如尚无相应训练或经历再补足，不断言每位读者缺少。"
             ]
           },
           "id": "clergy.market-signals.market-signal-card.55",
@@ -31250,7 +31263,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共享能力：社区关系、健康教育、活动组织与记录。"
+              "编辑能力连接：社区关系、活动组织、倾听与记录可能有用；神职任务不证明具备专业健康教育或筛查训练，须补目标岗位的健康知识与项目流程。"
             ]
           },
           "id": "clergy.market-signals.market-signal-card.56",
@@ -31261,7 +31274,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。社区健康方向需要公共卫生项目能力。"
+              "编辑任务比较：社区健康需补公共卫生与健康项目训练，关怀经验不证明专业健康能力；不是实测转岗难度或成功率，法定资格按目标法域逐项核，非每一目标均有统一执照。"
             ]
           },
           "id": "clergy.market-signals.market-signal-card.57",
@@ -31404,7 +31417,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页按O*NET-SOC21-2011.00核任务、兴趣及情境；工资采用2025年5月OEWS，预测采用BLS2025—2035表1.2，含自雇。中国提供S行业与教育行业宽行业背景，非职业工资；资格及网络边界引用具体现行宗教规则，练习为非宗教虚构纸面材料。"
+              "本轮仅审九板块中文原文件。任务与情境核O*NET21-2011.00；全国工资为2025年5月OEWS，预测为2025—2035BLS表1.2。中国S与教育均值为单位行业背景；资格与网络边界按具体中国规则，行业工资与个人职业工资分开。"
             ]
           },
           "id": "clergy.sources.source-card.1",
@@ -31415,7 +31428,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源为美国 O*NET OnLine 公开页面（含职业详细资料与摘要与行业分布与技术清单与认证与培训与工资分位）与 U.S. Bureau of Labor Statistics 的公开统计口径，以及国家统计局与人力资源和社会保障部的公开信息入口。所有数值均保留其职业与地域与期间与单位与统计口径；来源清单见页面「资料来源」。"
+              "本轮九板块直接核O*NET详情、行业、招聘词、工资与认证发现；BLS精确预测、未详列职业、NAICS813行业及相邻临床入行说明；NBS2025工资与行业分类及具体宗教法规。首页不证明精确职业映射；未取得资料继续列具体缺口。"
             ]
           },
           "id": "clergy.sources.source-card.2",
@@ -31426,7 +31439,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容检索与更新于2026年10月3日。"
+              "本轮九板块检索与修订日期2026-10-09；其余内容保留原版，非整页更新或正式验收。"
             ]
           },
           "id": "clergy.sources.source-card.3",
@@ -32021,6 +32034,126 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent",
                 "url": "https://www.onetonline.org/link/summary/21-1094.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "21核心任务、完整技能知识能力风格与情境、10软件类别；任务和比例不授许可"
+                ],
+                "evidence_type": "official source",
+                "id": "nine-onet-current",
+                "limitation": "21核心任务、完整技能知识能力风格与情境、10软件类别；任务和比例不授许可",
+                "market": "美国",
+                "name": "O*NET-SOC 21-2011.00 职业详细资料（任务与工作活动）",
+                "period": "2026更新；行业2025",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/21-2011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "其他服务81%、医疗社会援助10%、其他9%；非工资"
+                ],
+                "evidence_type": "official source",
+                "id": "nine-industry-current",
+                "limitation": "其他服务81%、医疗社会援助10%、其他9%；非工资",
+                "market": "美国",
+                "name": "O*NET-SOC 21-2011.00 行业分布",
+                "period": "详情页行业标2025；2026-10-09读取",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/21-2011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "6关键词比例：Office4%、Excel2%、Outlook/PowerPoint/Word1%、Facebook不可用；非采用率"
+                ],
+                "evidence_type": "official source",
+                "id": "nine-hot-current",
+                "limitation": "6关键词比例：Office4%、Excel2%、Outlook/PowerPoint/Word1%、Facebook不可用；非采用率",
+                "market": "美国",
+                "name": "O*NET-SOC 21-2011.00 技术清单（雇主招聘技术关键词）",
+                "period": "2025美国Lightcast招聘",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/21-2011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "表2/5与调查说明：S非私营119465、教育非私营133539/私营63908元年平均；仅匹配单位背景"
+                ],
+                "evidence_type": "official source",
+                "id": "nine-nbs-current",
+                "limitation": "表2/5与调查说明：S非私营119465、教育非私营133539/私营63908元年平均；仅匹配单位背景",
+                "market": "中国大陆",
+                "name": "国家统计局2025年城镇单位就业人员年平均工资",
+                "period": "2025工资；2026-05-15发布",
+                "publisher": "国家统计局（中华人民共和国）",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "PDF90/92页S与9541/9542；86页8399经批准宗教院校教育；行业非职业"
+                ],
+                "evidence_type": "official source",
+                "id": "nine-class-current",
+                "limitation": "PDF90/92页S与9541/9542；86页8399经批准宗教院校教育；行业非职业",
+                "market": "中国大陆",
+                "name": "国民经济行业分类注释",
+                "period": "GB/T4754—2017（按第1号修改单修订）",
+                "publisher": "国家统计局",
+                "scope": "context",
+                "url": "https://www.stats.gov.cn/sj/tjbz/gmjjhyfl/202501/P020250116506795831658.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "NAICS813内Clergy年中位58660、均值66420美元；非仅8131，非全行业员工均值"
+                ],
+                "evidence_type": "official source",
+                "id": "nine-iag-current",
+                "limitation": "NAICS813内Clergy年中位58660、均值66420美元；非仅8131，非全行业员工均值",
+                "market": "美国",
+                "name": "BLS NAICS813行业内神职人员工资",
+                "period": "来源工资表2025，未在表注明月份",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/IAG/TGS/iag813.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国临床与咨询心理学家各州许可；研究生、受督导经验及考试依州核；非神职许可"
+                ],
+                "evidence_type": "official source",
+                "id": "nine-psych-path",
+                "limitation": "美国临床与咨询心理学家各州许可；研究生、受督导经验及考试依州核；非神职许可",
+                "market": "美国",
+                "name": "BLS OOH：Psychologists（美国心理学家入行与许可）",
+                "period": "当前How to Become One章节",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "adjacent",
+                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/psychologists.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国各州执照，相关硕士、毕业后受督导临床经验和考试；非全球统一条件"
+                ],
+                "evidence_type": "official source",
+                "id": "nine-family-path",
+                "limitation": "美国各州执照，相关硕士、毕业后受督导临床经验和考试；非全球统一条件",
+                "market": "美国",
+                "name": "BLS OOH：Marriage and Family Therapists（美国婚姻家庭治疗师入行与许可）",
+                "period": "当前How to Become One章节",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "adjacent",
+                "url": "https://www.bls.gov/ooh/community-and-social-service/marriage-and-family-therapists.htm"
               }
             ]
           },
@@ -32910,7 +33043,7 @@
               "entry": "link-17",
               "field": "url"
             },
-            "问题": "AI 能签署设计或放行文件吗？"
+            "问题": "AI能替代宗教身份、危机转介或财务授权吗？"
           },
           {
             "回答": {
@@ -33001,7 +33134,7 @@
             }
           },
           {
-            "步骤": "专业签字／责任",
+            "步骤": "身份、权限与岗位责任",
             "说明": {
               "$item": "clergy.ai-impact.ai-impact-table.83",
               "block": "ai-impact",
@@ -33069,7 +33202,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "单位、量纲与边界错误"
+            "风险": "用途、法域与传播边界错误"
           },
           {
             "为什么重要": {
@@ -34527,6 +34660,30 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$link": "clergy.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "law-religion-58",
+              "field": "url"
+            },
+            "id": "religion-law",
+            "label": "宗教事务条例第58条",
+            "scope": "中国大陆法定责任，按实际主体与事项适用"
+          },
+          {
+            "href": {
+              "$link": "clergy.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "law-pipl",
+              "field": "url"
+            },
+            "id": "pipl",
+            "label": "个人信息保护法",
+            "scope": "中国大陆法定责任，按实际主体与事项适用"
           }
         ]
       },
@@ -34879,10 +35036,10 @@
             "type": "prose"
           },
           "fact_refs": [
-            "cn-industry-science-tech-2024",
-            "cn-industry-manufacturing-2024",
-            "cn-professional-technical-2024",
-            "cn-urban-nonprivate-2024"
+            "nine-cn-industry-science-tech-2024",
+            "nine-cn-industry-manufacturing-2024",
+            "nine-cn-professional-technical-2024",
+            "nine-cn-urban-nonprivate-2024"
           ],
           "sources_note": {
             "$item": "clergy.china-salary.career-snapshot-primary-locale.57",
@@ -35115,13 +35272,10 @@
         },
         "heading": "美国神职人员工资与就业数据？",
         "industry_heading": "不同行业的美国工资差多少？",
-        "industry_period": {
-          "$fact": "us-wage-2025",
-          "field": "period"
-        },
+        "industry_period": "NAICS813工资：2025年（来源表未注明月份）；全国工资另为2025年5月",
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "nine-us-industry-wage-aerospace-mfg-2025",
             "industry": {
               "$item": "clergy.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -37200,6 +37354,66 @@
         "source_refs": [
           "onet-localwages"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：本轮未取得中国大陆宗教教职人员全国职业工资分布；宽行业均值不代填职业中位数、起薪或月薪。",
+        "fact_id": "nine-cn-industry-science-tech-2024",
+        "market": "中国大陆",
+        "measure": "公开数据缺口（不代填）",
+        "occupation_scope": "神职人员",
+        "period": "2025工资；2026-05-15发布；职业缺口2026-10-09本轮检索",
+        "source_refs": [
+          "nine-nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025年中国教育行业税前年均工资：城镇非私营133,539元、私营63,908元，仅院校教学雇主背景参考",
+        "fact_id": "nine-cn-industry-manufacturing-2024",
+        "market": "中国大陆",
+        "measure": "行业门类均值代理（industry_proxy）",
+        "occupation_scope": "神职人员",
+        "period": "2025工资；2026-05-15发布；职业缺口2026-10-09本轮检索",
+        "source_refs": [
+          "nine-nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：本轮未取得中国大陆宗教教职人员城市与机构类型职业工资分布。",
+        "fact_id": "nine-cn-professional-technical-2024",
+        "market": "中国大陆",
+        "measure": "公开数据缺口（不代填）",
+        "occupation_scope": "神职人员",
+        "period": "2025工资；2026-05-15发布；职业缺口2026-10-09本轮检索",
+        "source_refs": [
+          "nine-nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025年中国城镇非私营S公共管理、社会保障和社会组织行业税前年均工资119,465元（宽行业，非本职业工资）",
+        "fact_id": "nine-cn-urban-nonprivate-2024",
+        "market": "中国大陆",
+        "measure": "行业门类均值代理（industry_proxy）",
+        "occupation_scope": "神职人员",
+        "period": "2025工资；2026-05-15发布；职业缺口2026-10-09本轮检索",
+        "source_refs": [
+          "nine-nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "美国2025年NAICS813行业内神职人员年工资中位数58,660美元",
+        "fact_id": "nine-us-industry-wage-aerospace-mfg-2025",
+        "market": "美国",
+        "measure": "NAICS813行业内本职业受雇年工资中位数",
+        "occupation_scope": "神职人员",
+        "period": "2025年（来源表未注明月份）",
+        "source_refs": [
+          "nine-iag-current"
+        ]
       }
     ]
   },
@@ -37208,7 +37422,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "RIASEC · SE",
@@ -37259,7 +37473,7 @@
       "text": "神职人员"
     }
   },
-  "source_content_sha256": "805a7f9cdee0c5e74025fde089ba7d115f42f20403aaf11111419d7c96224f18",
+  "source_content_sha256": "35a758f368cca0202c6a2bb91008b1dd8e14a5d214b145cf73e05e4551692738",
   "subject": {
     "canonical_slug": "clergy",
     "name": "神职人员",

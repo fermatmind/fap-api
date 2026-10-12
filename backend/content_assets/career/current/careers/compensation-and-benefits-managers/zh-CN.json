@@ -2,6 +2,24 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:cb-review-cn-professional-technical-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:cb-review-us-industry-wage-aerospace-mfg-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:cb-review-us-industry-wage-aerospace-mfg-2025-industry-wage": {
+        "status": "pending_mapping"
+      },
+      "fact:cb-review-us-industry-wage-engineering-services-2025-industry-wage": {
+        "status": "pending_mapping"
+      },
+      "fact:cb-review-us-industry-wage-federal-2025-industry-wage": {
+        "status": "pending_mapping"
+      },
+      "fact:cb-review-us-industry-wage-rd-2025-industry-wage": {
+        "status": "pending_mapping"
+      },
       "fact:cn-industry-manufacturing-2024": {
         "status": "pending_mapping"
       },
@@ -12004,28 +12022,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.href": {
-        "ref": {
-          "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.18",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.label": {
         "ref": {
@@ -23689,7 +23687,7 @@
           ],
           "id": "compensation-and-benefits-managers.profile.definition-block.1",
           "source_refs": [
-            "onet-details"
+            "cb-review-onet-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23704,7 +23702,7 @@
           },
           "id": "compensation-and-benefits-managers.profile.definition-block.2",
           "source_refs": [
-            "onet-details"
+            "cb-review-onet-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23719,7 +23717,7 @@
           },
           "id": "compensation-and-benefits-managers.profile.definition-block.3",
           "source_refs": [
-            "onet-details"
+            "cb-review-onet-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23734,7 +23732,7 @@
           },
           "id": "compensation-and-benefits-managers.profile.definition-block.4",
           "source_refs": [
-            "onet-details"
+            "cb-review-onet-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23749,7 +23747,7 @@
           },
           "id": "compensation-and-benefits-managers.profile.definition-block.5",
           "source_refs": [
-            "nasa-seh"
+            "cb-review-ebsa-fiduciary-functions"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23764,7 +23762,7 @@
           },
           "id": "compensation-and-benefits-managers.profile.definition-block.6",
           "source_refs": [
-            "bls-entry"
+            "cb-review-bls-entry"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23779,7 +23777,7 @@
           },
           "id": "compensation-and-benefits-managers.profile.definition-block.7",
           "source_refs": [
-            "onet-hot-tech"
+            "cb-review-onet-hot-tech"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23809,7 +23807,7 @@
           },
           "id": "compensation-and-benefits-managers.profile.definition-block.9",
           "source_refs": [
-            "nasa-seh"
+            "cb-review-ebsa-fiduciary-functions"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23834,7 +23832,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "薪酬与福利经理的工作可以分成三类相连但独立的工作面。第一类是薪酬体系设计与市场对标：分析薪酬政策、政府法规与市场通行工资率以制定有竞争力的薪酬方案；与人事经理协作编制详细的职位说明与职位分类体系并界定职位层级与序列；研究立法、仲裁裁决与集体谈判合同以评估行业趋势；制定改善雇佣政策、流程与做法的办法并向管理层提出修改建议；并编制人事运营预算与人力预测以预估用工需求。第二类是福利项目设计与合规：设计、评估并修改福利政策，确保项目当前有效、有竞争力并符合法律要求；履行所有相关政府规则与法规的报告义务，包括《雇员退休收入保障法》（ERISA）；管理、指导并审查员工福利项目，包括并购后的福利项目整合；与经纪机构合作并研究福利议题，以识别并实施能提升员工生活质量的福利；管理福利选择工具的设计与开发，并指导管理者完成薪酬决策；在福利供应商与员工之间进行协调，如协助处理员工福利相关问题或采纳建议；并就可用的员工服务（如餐饮、交通或搬迁服务）与供应商签约。第三类是沟通、预算与人事治理：指导编制并分发书面与口头信息，向员工说明福利、薪酬与人事政策；规划、指导、监督并协调下属与员工在雇佣、薪酬、劳动关系与员工关系方面的工作活动；为招聘、测试、安置、分类、入职引导、福利与薪酬以及劳动与产业关系制定政策、程序与项目；规划并开展新员工入职引导以培养对组织目标的积极态度；维护记录并编制关于招聘、调动、绩效考评与缺勤率等人事数据的统计报告；分析统计数据与报告以识别并确定人事问题的成因并提出改进建议；就平等就业机会、性骚扰与歧视等事项向管理层提出建议；并代表组织出席与人事实务相关的听证与调查。另有谈判并协商集体协议等补充任务，责任范围按实际岗位核对。美国ERISA私营福利计划语境下，EBSA按实际管理裁量、计划资产控制等功能判断受托责任，而非仅看经理职称；设立计划等经营决策与实施管理须区分。不将该框架当中国统一资格或备案规定。"
+              "薪酬与福利经理的工作可以分成三类相连但独立的工作面。第一类是薪酬体系设计与市场对标：分析薪酬政策、政府法规与市场通行工资率以制定有竞争力的薪酬方案；与人事经理协作编制详细的职位说明与职位分类体系并界定职位层级与序列；研究立法、仲裁裁决与集体谈判合同以评估行业趋势；制定改善雇佣政策、流程与做法的办法并向管理层提出修改建议；并编制人事运营预算与人力预测以预估用工需求。第二类是福利项目设计与合规：设计、评估并修改福利政策，确保项目当前有效、有竞争力并符合法律要求；履行所有相关政府规则与法规的报告义务，包括《雇员退休收入保障法》（ERISA）；管理、指导并审查员工福利项目，包括并购后的福利项目整合；与经纪机构合作并研究福利议题，以识别并实施能提升员工生活质量的福利；管理福利选择工具的设计与开发，并指导管理者完成薪酬决策；在福利供应商与员工之间进行协调，如协助处理员工福利相关问题或采纳建议；并就可用的员工服务（如餐饮、交通或搬迁服务）与供应商签约。第三类是沟通、预算与人事治理：指导编制并分发书面与口头信息，向员工说明福利、薪酬与人事政策；规划、指导、监督并协调下属与员工在雇佣、薪酬、劳动关系与员工关系方面的工作活动；为招聘、测试、安置、分类、入职引导、福利与薪酬以及劳动与产业关系制定政策、程序与项目；规划并开展新员工入职引导以培养对组织目标的积极态度；维护记录并编制关于招聘、调动、绩效考评与缺勤率等人事数据的统计报告；分析统计数据与报告以识别并确定人事问题的成因并提出改进建议；就平等就业机会、性骚扰与歧视等事项向管理层提出建议；并代表组织出席与人事实务相关的听证与调查。另有谈判并协商集体协议等补充任务，责任范围按实际岗位核对。美国ERISA私营福利计划语境下，EBSA按实际管理裁量、计划资产控制等功能判断受托责任，而非仅看经理职称；设立计划等经营决策与实施管理须区分。不将该框架当中国统一资格或备案规定。 22项任务（13Core/9Supplemental）是职业任务池，不要求每岗全部承担；薪酬与福利可合岗或分岗，经理职称不自动授予所有终审、签字或受托权限。"
             ]
           },
           "id": "compensation-and-benefits-managers.profile.career-quick-answers-block.1",
@@ -23900,10 +23898,20 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "常见相邻岗位包括首席执行官、行政服务经理、财务经理、司库与财务控制员、人力资源经理，以及薪酬、福利与岗位分析专员，另有人力资源专员与管理咨询分析师等。边界上：首席执行官负责组织整体战略与经营结果，薪酬与福利只是其议题之一；行政服务经理负责行政与后勤与设施与采购等支持性职能；财务经理与司库与财务控制员负责资金、会计、报表与内部控制与融资，薪酬与福利方案须纳入其预算与会计口径但不由其设计；人力资源经理统筹招聘、绩效、员工关系与人事政策，本职业在其中专注于薪酬与福利这一专业领域；薪酬、福利与岗位分析专员承担数据分析与岗位评估与方案执行，通常不承担跨部门的方案决策与合规终审；人力资源专员负责人事实务执行；管理咨询分析师以对外咨询项目为主。本职业以组织内薪酬与福利方案的设计、合规与沟通与预算为核心。"
+              "八邻岗主要对象：首席执行官按治理框架制定政策和最高层运营；行政服务经理协调记录信息、邮件及办公支持；财务经理协调会计、投资、银行保险证券等；司库与控制员指导财务规划、筹措及投资；人力资源经理统筹人事活动与团队；薪酬福利岗位分析专员开展薪酬福利及岗位分析、可专注分类或养老金；人事专员招募筛选面试安置并可承担其他人事工作；管理分析师研究组织、设计系统流程及操作手册，含项目分析师和顾问。主要对象不同，不证明邻岗绝不设计薪酬、所有专员无决策权或顾问只能外部任职。"
             ]
           },
           "id": "compensation-and-benefits-managers.profile.career-quick-answers-block.7",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7"
+          ],
           "type": "prose"
         },
         {
@@ -23922,7 +23930,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "以受控室内办公环境为主，81% 每天在环境受控的室内工作（14% 从不），90% 持续或几乎持续坐着，90% 的工作作息为规律作息，67% 每周工作时间超过 40 小时"
+              "以受控室内办公环境为主，81% 每天在环境受控的室内工作（14% 从不），90% 持续或几乎持续坐着，90% 的工作作息为规律作息，67% 每周工作时间超过 40 小时 以上为受访回答，非每岗保证；规律排期不等工作周40小时。"
             ]
           },
           "id": "compensation-and-benefits-managers.profile.career-quick-answers-block.9",
@@ -24021,10 +24029,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国该职业准备层级为 Job Zone Four（相当准备），该页面教育分布显示 76% 的受访者回答需要学士学位、14% 回答需要硕士学位、10% 回答需要学士后证书（页面仅显示这三档比例）；常见路径为人力资源、商科、财务、统计或相关专业的学习，配合薪酬或福利专员与人力资源实务经历，再按雇主与岗位要求取得专业认证与授权"
+              "美国O*NET JobZone4，新入职教育需求回答76%学士/14%硕士/10%学士后证书，不是全员学历分布或统一门槛。BLS典型入行学士、相关工作经验5年或以上，OOH说明商科、人力资源或相关领域，常由薪酬福利岗位分析专员起步；人事、财务或管理经历也有帮助。具体公告另核，不把5年设为全球法律要求或让应届生直接保证经理任职。 认证须核目标公告；培养阶段是编辑建议。"
             ]
           },
           "id": "compensation-and-benefits-managers.profile.career-quick-answers-block.18",
+          "source_refs": [
+            "cb-review-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -24153,10 +24164,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "薪酬与个人数据按最小必要与岗位权限管理，对外提供或用于分析时先脱敏并记录用途与范围；不在无授权渠道传播可识别的个人薪酬信息。"
+              "这里指因岗位取得的可识别员工档案：先核法域、处理目的、访问及导出权限、服务合同和工具批准，再按实际要求最小化或脱敏；脱敏不自动授予外部上传权限，也不是所有合法处理必经。不得把档案权限要求解释为员工一概不得讨论本人薪资；美国NLRA覆盖员工相关权利另核，NLRB总法律顾问说明页列薪资讨论保护，但非委员会审定或所有人员通用规则。"
             ]
           },
           "id": "compensation-and-benefits-managers.profile.career-quick-answers-block.30",
+          "source_refs": [
+            "cb-review-nlrb",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24208,7 +24223,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "薪酬与福利经理规划、指导或协调组织的薪酬与福利活动。典型闭环是分析薪酬政策、政府法规与市场工资率并设计薪酬结构与职位分类，设计、评估并修改福利政策并履行相关报告义务，核算成本并纳入预算，向员工与管理层传达福利与薪酬与人事政策信息，维护记录并编制人事数据统计报告，按反馈与审计结果修订方案；退休与福利计划的受托责任与报告义务、薪酬公平与反歧视要求、以及员工薪酬与个人数据的隐私与访问权限须由具备相应权限与资格的岗位按适用法域与监管要求与雇主制度执行。"
+              "薪酬与福利经理规划、指导或协调组织的薪酬与福利活动。典型闭环是分析薪酬政策、政府法规与市场工资率并设计薪酬结构与职位分类，设计、评估并修改福利政策并履行相关报告义务，核算成本并纳入预算，向员工与管理层传达福利与薪酬与人事政策信息，维护记录并编制人事数据统计报告，按反馈与审计结果修订方案；退休与福利计划的受托责任与报告义务、薪酬公平与反歧视要求、以及员工薪酬与个人数据的隐私与访问权限须由具备相应权限与资格的岗位按适用法域与监管要求与雇主制度执行。 22项任务（13Core/9Supplemental）是职业任务池，不要求每岗全部承担；薪酬与福利可合岗或分岗，经理职称不自动授予所有终审、签字或受托权限。 所列闭环为编辑整理，实际审批流程依组织。"
             ]
           },
           "id": "compensation-and-benefits-managers.profile.definition-block.11",
@@ -24219,7 +24234,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "本页按 O*NET-SOC 11-3111.00（Compensation and Benefits Managers，薪酬与福利经理；2026 年更新页面）的精确职业口径：该职业规划、指导或协调组织的薪酬与福利活动。该职业页面的兴趣代码为 ECS（企业型、常规型、社会型）（页面公示分数为企业型 100、常规型 78、社会型 47、研究型 20、艺术型 7、现实型 0），准备层级为 Job Zone Four（相当准备）；该页面教育分布显示 76% 的受访者回答需要学士学位、14% 回答需要硕士学位、10% 回答需要学士后证书（页面仅显示这三档比例）。"
+              "本页按 O*NET-SOC 11-3111.00（Compensation and Benefits Managers，薪酬与福利经理；2026 年更新页面）的精确职业口径：该职业规划、指导或协调组织的薪酬与福利活动。该职业页面的兴趣代码为 ECS（企业型、常规型、社会型）（页面公示分数为企业型 100、常规型 78、社会型 47、研究型 20、艺术型 7、现实型 0），准备层级为 Job Zone Four（相当准备）；该页面教育分布显示 76% 的受访者回答需要学士学位、14% 回答需要硕士学位、10% 回答需要学士后证书（页面仅显示这三档比例）。 兴趣是职业活动指标，教育是新入职需求调查；不构成人格或录用判断。"
             ]
           },
           "id": "compensation-and-benefits-managers.profile.onet-structured-fields-block.1",
@@ -24241,7 +24256,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "NBS2025规模以上企业中层及以上管理人员年均210,016元，是跨职业宽岗位类别参考；租赁和商务服务业同岗位类别269,264元，仅适用于归属该行业的规模以上雇主背景。两者均非薪酬与福利经理中位数、起薪、月薪或到手收入。2026-05-15发布；工资为税前含个人代扣缴。城镇单位调查为5人及以上法人单位，两个管理层参考还限规模以上企业；不含个体经营与自由职业者。项目制是否覆盖看被调查单位人员身份，不能按薪酬名称一概排除股权或项目收入。证据不足：本轮未取得中国全国薪酬与福利经理精确职业工资分布；宽管理层及行业参考不能代填。"
+              "NBS2025规模以上企业中层及以上管理人员年均210,016元、租赁商务行业同宽岗位269,264元；前者跨职业、后者仅匹配该行业规模以上雇主，均非本职业中位数、起薪、月薪或到手。NBS2025、2026-05-15发布：工资税前含个人代扣缴；城镇5人及以上法人单位，管理层两个参考还限规模以上企业。排除个体工商户和自由职业者，以及入股分红、股权激励兑现收益等资本性收益；项目制须核实际人员及工资覆盖，不将项目名称直接判排除或覆盖。 证据不足：本轮未取得中国全国本职业精确工资分布及一一等价职业映射，不等官方从未发布。"
             ]
           },
           "id": "compensation-and-benefits-managers.profile.onet-structured-fields-block.3",
@@ -24252,7 +24267,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS表1.2（SOC11-3111，2025—2035）预测：就业约23,700→24,000人，变化+1.1%，年均空缺约1,600个。原表千人换算为人；净增约300人与年均空缺不同。预测包含自雇及假设误差，不是逐年实际值、招聘保证或AI因果。O*NET行业结构金融保险20%、公司企业管理20%、专业科技服务13%、其他47%，不是行业工资。"
+              "BLS表1.2（SOC11-3111，2025—2035）就业23.7→24.0千人、发布净增0.3千人、增长1.1%、年均空缺1.6千个；约23,700→24,000人、净增300人与年均1,600空缺不同。OOH整数增长1%及O*NET Slower than average（1%—2%）为显示口径。自雇比例为破折号（不可用），不填0；预测非逐年实际、招聘保证或AI因果。 当前O*NET行业就业构成：公司与企业管理22%、金融保险19%、专业科学技术服务13%、其他46%（包括行政支持服务及教育服务）；是行业就业占比，不是工资或个人机会概率。"
             ]
           },
           "id": "compensation-and-benefits-managers.profile.onet-structured-fields-block.4",
@@ -24263,7 +24278,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "技术与工作情境：该职业工作情境显示 100% 每天使用电子邮件、95% 每天进行电话沟通、90% 持续或几乎持续坐着、74% 每天进行面对面讨论（26% 每周一次以上）、81% 每天在环境受控的室内工作（14% 从不）、67% 每周工作时间超过 40 小时（33% 为 40 小时）、52% 拥有很大的任务自主度（43% 有一定自主度）、33% 拥有很大的决策自由度（67% 有一定自由度）、38% 认为与工作组或团队协作极其重要（48% 非常重要）、35% 认为非常精确或高度准确极其重要（45% 非常重要、15% 重要）、38% 每天需要作出影响他人或财务资源或组织声誉的决定（24% 每周一次以上、24% 每月一次以上、14% 每年一次以上）、33% 认为其决定对同事或公司结果非常重要（29% 重要、29% 中等）、28% 每天撰写正式信件与备忘（50% 每周一次以上、22% 每月一次以上）、24% 认为重复性任务极其重要（48% 非常重要、14% 比较重要）、38% 每周一次以上需要面对不愉快或愤怒或不礼貌的人、29% 每周一次以上面对冲突情境（38% 每月一次以上、29% 每年一次以上）、43% 每周一次以上面临严格截止期限（48% 每月一次以上）、14% 认为竞争极其激烈（24% 很激烈、48% 中等）、43% 对其他员工的工作结果负有很高责任（19% 中等、19% 有限）、24% 认为工作误差后果非常严重（19% 严重、33% 比较严重、19% 完全不严重）、90% 的工作作息为规律作息、29% 的工作高度自动化（33% 中度、19% 轻度、19% 完全不自动化）、95% 从不暴露于户外全天气条件、100% 从不接触危险设备与危险条件与辐射。"
+              "技术与工作情境：该职业工作情境显示 100% 每天使用电子邮件、95% 每天进行电话沟通、90% 持续或几乎持续坐着、74% 每天进行面对面讨论（26% 每周一次以上但非每天）、81% 每天在环境受控的室内工作（14% 从不）、67% 每周工作时间超过 40 小时（33% 为 40 小时）、52% 拥有很大的任务自主度（43% 有一定自主度）、33% 拥有很大的决策自由度（67% 有一定自由度）、38% 认为与工作组或团队协作极其重要（48% 非常重要）、35% 认为非常精确或高度准确极其重要（45% 非常重要、15% 重要）、38% 每天需要作出影响他人或财务资源或组织声誉的决定（24% 每周一次以上但非每天、24% 每月一次以上但非每周、14% 每年一次以上但非每月）、33% 认为其决定对同事或公司结果非常重要（29% 重要、29% 中等）、28% 每天撰写正式信件与备忘（50% 每周一次以上但非每天、22% 每月一次以上但非每周）、24% 认为重复性任务极其重要（48% 非常重要、14% 比较重要）、38% 每周一次以上但非每天需要面对不愉快或愤怒或不礼貌的人、29% 每周一次以上但非每天面对冲突情境（38% 每月一次以上但非每周、29% 每年一次以上但非每月）、43% 每周一次以上但非每天面临严格截止期限（48% 每月一次以上但非每周）、14% 认为竞争极其激烈（24% 很激烈、48% 中等）、43% 对其他员工的工作结果负有高责任（High responsibility）（19% 中等、19% 有限）、24% 认为工作误差后果非常严重（19% 严重、33% 比较严重、19% 完全不严重）、90% 的工作作息为规律作息、29% 的工作高度自动化（33% 中度、19% 轻度、19% 完全不自动化）、95% 从不暴露于户外全天气条件、100% 从不接触危险设备与危险条件与辐射。 以上为受访回答，非每岗保证；规律排期不等工作周40小时。"
             ]
           },
           "id": "compensation-and-benefits-managers.profile.onet-structured-fields-block.5",
@@ -24290,7 +24305,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作场所｜81% 每天在环境受控的室内工作（14% 从不）；95% 从不处于非受控室内环境；95% 从不暴露于户外全天气条件；100% 从不接触危险设备与危险条件与辐射；99% 从不穿戴专业防护装备。\n防护与环境暴露｜100% 从不接触危险设备与危险条件与辐射；99% 从不穿戴专业防护装备；95% 从不暴露于户外全天气条件；95% 从不处于非受控室内环境；本职业的职业风险主要在久坐与用眼与沟通压力与合规责任。\n沟通与协作｜100% 每天使用电子邮件；95% 每天进行电话沟通；74% 每天进行面对面讨论（26% 每周一次以上）；48% 与他人保持持续接触（48% 大部分时间有接触）；38% 认为与工作组或团队协作极其重要（48% 非常重要）；19% 认为协调或带领他人极其重要（52% 非常重要、14% 重要）；33% 认为需要与外部客户或公众打交道非常重要（33% 重要、24% 比较重要）。\n自主与决策｜52% 拥有很大的任务自主度（43% 有一定自主度）；33% 拥有很大的决策自由度（67% 有一定自由度）；38% 每天需要作出影响他人或财务资源或组织声誉的决定（24% 每周一次以上、24% 每月一次以上、14% 每年一次以上）；33% 认为其决定对同事或公司结果非常重要（29% 重要、29% 中等）。\n精确与节奏｜35% 认为非常精确或高度准确极其重要（45% 非常重要、15% 重要）；28% 每天撰写正式信件与备忘（50% 每周一次以上、22% 每月一次以上）；24% 认为重复性任务极其重要（48% 非常重要、14% 比较重要）；43% 每周一次以上面临严格截止期限（48% 每月一次以上）；67% 每周工作时间超过 40 小时（33% 为 40 小时）；90% 的工作作息为规律作息。\n责任与影响｜43% 对其他员工的工作结果负有很高责任（19% 中等、19% 有限）；19% 对他人健康与安全负有很高责任（38% 中等、24% 有限、14% 无责任）；24% 认为工作误差后果非常严重（19% 严重、33% 比较严重、19% 完全不严重）。\n人际情境｜38% 每周一次以上需要面对不愉快或愤怒或不礼貌的人（38% 每月一次以上）、29% 每周一次以上面对冲突情境（38% 每月一次以上、29% 每年一次以上）；14% 认为竞争极其激烈（24% 很激烈、48% 中等）；75% 表示与他人一起工作但并不紧密（如独立办公室）。\n体位与自动化｜90% 持续或几乎持续坐着；81% 站立时间少于一半；25% 持续或几乎持续用手操作物件与工具、65% 从不；20% 持续或几乎持续做重复性动作；29% 的工作高度自动化（33% 中度、19% 轻度、19% 完全不自动化）。\n边界与授权｜退休与福利计划的受托责任与报告义务、薪酬公平与反歧视要求、员工薪酬与个人数据的隐私与访问权限须按适用法域与监管要求与雇主制度由具备相应权限与资格的岗位执行；方案与测算与决策须留痕并可复核；本页不代替法律、税务或精算意见。"
+              "工作场所｜81% 每天在环境受控的室内工作（14% 从不）；95% 从不处于非受控室内环境；95% 从不暴露于户外全天气条件；100% 从不接触危险设备与危险条件与辐射；100% 从不穿戴专业防护装备。\n防护与环境暴露｜100% 从不接触危险设备与危险条件与辐射；100% 从不穿戴专业防护装备；95% 从不暴露于户外全天气条件；95% 从不处于非受控室内环境；这些回答不量化久坐疾病、伤害或法律风险的排序。\n沟通与协作｜100% 每天使用电子邮件；95% 每天进行电话沟通；74% 每天进行面对面讨论（26% 每周一次以上但非每天）；48% 与他人保持持续接触（48% 大部分时间有接触）；38% 认为与工作组或团队协作极其重要（48% 非常重要）；19% 认为协调或带领他人极其重要（52% 非常重要、14% 重要）；33% 认为需要与外部客户或公众打交道非常重要（33% 重要、24% 比较重要）。\n自主与决策｜52% 拥有很大的任务自主度（43% 有一定自主度）；33% 拥有很大的决策自由度（67% 有一定自由度）；38% 每天需要作出影响他人或财务资源或组织声誉的决定（24% 每周一次以上但非每天、24% 每月一次以上但非每周、14% 每年一次以上但非每月）；33% 认为其决定对同事或公司结果非常重要（29% 重要、29% 中等）。\n精确与节奏｜35% 认为非常精确或高度准确极其重要（45% 非常重要、15% 重要）；28% 每天撰写正式信件与备忘（50% 每周一次以上但非每天、22% 每月一次以上但非每周）；24% 认为重复性任务极其重要（48% 非常重要、14% 比较重要）；43% 每周一次以上但非每天面临严格截止期限（48% 每月一次以上但非每周）；67% 每周工作时间超过 40 小时（33% 为 40 小时）；90% 的工作作息为规律作息。\n责任与影响｜43% 对其他员工的工作结果负有高责任（High responsibility）（19% 中等、19% 有限）；19% 对他人健康与安全负有高责任（High responsibility）（38% 中等、24% 有限、14% 无责任）；24% 认为工作误差后果非常严重（19% 严重、33% 比较严重、19% 完全不严重）。\n人际情境｜38% 每周一次以上但非每天需要面对不愉快或愤怒或不礼貌的人（38% 每月一次以上但非每周）、29% 每周一次以上但非每天面对冲突情境（38% 每月一次以上但非每周、29% 每年一次以上但非每月）；14% 认为竞争极其激烈（24% 很激烈、48% 中等）；75% 表示与他人一起工作但并不紧密（如独立办公室）。\n体位与自动化｜90% 持续或几乎持续坐着；81% 站立时间少于一半；25% 持续或几乎持续用手操作物件与工具、65% 从不；20% 持续或几乎持续做重复性动作；29% 的工作高度自动化（33% 中度、19% 轻度、19% 完全不自动化）。\n边界与授权｜退休与福利计划的受托责任与报告义务、薪酬公平与反歧视要求、员工薪酬与个人数据的隐私与访问权限须按适用法域与监管要求与雇主制度由具备相应权限与资格的岗位执行；方案与测算与决策须留痕并可复核；本页不代替法律、税务或精算意见。 以上为受访回答，非每岗保证；规律排期不等工作周40小时。"
             ]
           },
           "id": "compensation-and-benefits-managers.profile.work-context-block.1",
@@ -25054,7 +25069,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用工具提高方案比价与费用测算与报告材料整理效率，但把受托责任相关的决策与报告口径与披露内容保留在本人与法务与专业机构，并保留完整留痕。"
+              "编辑试用候选：福利方案条款比价、费用复算及报告材料草稿；逐项核合同例外、计划范围与披露依据，实质受托决定留实际责任岗位。本轮无本职业提效实证。"
             ]
           },
           "id": "compensation-and-benefits-managers.ai-impact.ai-impact-table.15",
@@ -25076,7 +25091,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用工具提高员工沟通材料与答疑库与人事统计的一致性，但把薪酬与个人数据的访问权限与脱敏与对外提供留给人，按隐私与最小必要原则执行。"
+              "编辑试用候选：员工政策说明、答疑库与人事统计草稿；核版本、适用员工及实际权限，不让草稿作待遇承诺。本轮无本职业一致性提升实证。"
             ]
           },
           "id": "compensation-and-benefits-managers.ai-impact.ai-impact-table.17",
@@ -25252,7 +25267,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表按三条真实工作方向比较：AI 与数字工具主要改变什么，以及哪些责任仍然留在人这一侧。三条方向来自该职业的任务结构（薪酬体系设计与市场对标、福利项目设计与合规、沟通与预算与人事治理）。"
+              "三方向依任务结构作编辑比较；下表为试用候选及须复核的职责，不宣称已有AI改变或替代先后。"
             ]
           },
           "id": "compensation-and-benefits-managers.ai-impact.ai-impact-table.33",
@@ -25263,7 +25278,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "清洗与匹配薪酬调查数据、生成带宽与结构测算与方案草稿、整理职位分类对照。"
+              "编辑试用候选：清洗与匹配薪酬调查数据、生成带宽与结构测算与方案草稿、整理职位分类对照。"
             ]
           },
           "id": "compensation-and-benefits-managers.ai-impact.ai-impact-table.34",
@@ -25285,7 +25300,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "整理福利方案比价与费用测算与报告材料与供应商条款对照。"
+              "编辑试用候选：整理福利方案比价与费用测算与报告材料与供应商条款对照。"
             ]
           },
           "id": "compensation-and-benefits-managers.ai-impact.ai-impact-table.36",
@@ -25307,7 +25322,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "整理员工沟通材料与答疑库、汇总人事统计与预算与效果数据。"
+              "编辑试用候选：整理员工沟通材料与答疑库、汇总人事统计与预算与效果数据。"
             ]
           },
           "id": "compensation-and-benefits-managers.ai-impact.ai-impact-table.38",
@@ -25318,7 +25333,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断数据权限与脱敏与对外提供范围、在沟通中作出解释与承诺，并对隐私与员工信任负责。"
+              "判断数据权限与脱敏与对外提供范围、在沟通中作出解释与承诺，并对隐私与员工信任负责。 数据范围按实际角色权限核。"
             ]
           },
           "id": "compensation-and-benefits-managers.ai-impact.ai-impact-table.39",
@@ -25384,7 +25399,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该页面展示的是本职业 11-3111.00 的精确工资口径；分位描述受雇工资薪金岗位的统计位置，不是起薪；该职业收入受行业与组织规模与层级与是否含长期激励影响"
+              "本页提供11-3111.00全国受雇工资分位，描述统计位置而非起薪。行业、组织规模、层级与长期激励是具体岗位合同核对项；无相应分组证据，不推收入因果或幅度。"
             ]
           },
           "id": "compensation-and-benefits-managers.ai-impact.ai-impact-table.45",
@@ -25560,7 +25575,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术能力回答「模型在原则上能做什么」。对本职业而言，较可靠的部分是数据清洗与匹配、方案与费用测算、报告与沟通材料整理、人事统计与图表；不可靠的部分是口径可比性判断、合规与受托责任与披露内容的确定、以及薪酬公平与员工沟通中的实质判断。"
+              "编辑试用候选：用虚构或获准资料试数据清洗、成本测算、条款及沟通草稿，对照原始数据复算、核遗漏、记录复核总耗时；本轮未取得本职业AI可靠性、采用率、提效或岗位因果实证。"
             ]
           },
           "id": "compensation-and-benefits-managers.ai-impact.ai-impact-table.61",
@@ -25615,10 +25630,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不把编程当作入行门槛，但表格与人力系统与数据查询能力是日常工作基础。该页面教育分布显示 76% 的受访者回答需要学士学位、14% 回答需要硕士学位、10% 回答需要学士后证书（页面仅显示这三档比例）；真正决定机会的是法规与合规理解、数据与预算能力与跨部门沟通与专业认证。"
+              "美国O*NET JobZone4，新入职教育需求回答76%学士/14%硕士/10%学士后证书，不是全员学历分布或统一门槛。BLS典型入行学士、相关工作经验5年或以上，OOH说明商科、人力资源或相关领域，常由薪酬福利岗位分析专员起步；人事、财务或管理经历也有帮助。具体公告另核，不把5年设为全球法律要求或让应届生直接保证经理任职。 招聘技术关键词不等统一编程门槛；认证有些雇主偏好或岗位要求，不称它决定所有机会。"
             ]
           },
           "id": "compensation-and-benefits-managers.ai-impact.ai-impact-table.66",
+          "source_refs": [
+            "cb-review-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -25681,10 +25699,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。退休与福利计划的受托责任与报告义务、薪酬公平与反歧视要求、以及员工薪酬与个人数据的隐私与访问权限须由具备相应权限与资格的岗位按适用法域与监管要求与雇主制度作出；工具不承担该责任，也不免除合规与披露义务。"
+              "工具不赋予受托、报告、签字或薪酬决策权限；实际人员及服务方义务按法域、计划、功能及合同分别核。这里指因岗位取得的可识别员工档案：先核法域、处理目的、访问及导出权限、服务合同和工具批准，再按实际要求最小化或脱敏；脱敏不自动授予外部上传权限，也不是所有合法处理必经。不得把档案权限要求解释为员工一概不得讨论本人薪资；美国NLRA覆盖员工相关权利另核，NLRB总法律顾问说明页列薪资讨论保护，但非委员会审定或所有人员通用规则。"
             ]
           },
           "id": "compensation-and-benefits-managers.ai-impact.ai-impact-table.72",
+          "source_refs": [
+            "cb-review-nlrb",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25703,7 +25725,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有可靠公开来源支持给该职业设定消失年份；本页不提供这类预测。更有用的是跟踪薪酬透明与员工数据保护与福利计划监管的变化，而不是等待一个日期。"
+              "本轮未取得支持本职业消失年份的可靠研究，不提供日期；可核实际岗位的技术、法规及职责变化。"
             ]
           },
           "id": "compensation-and-benefits-managers.ai-impact.ai-impact-table.74",
@@ -25769,7 +25791,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "由工具完成数据清洗与匹配与测算与报告与沟通材料草稿，并记录所用工具与版本与数据来源与时间。"
+              "编辑试用步骤：在获准数据范围内生成清洗、匹配、测算或沟通草稿；保留输入、公式及版本并交复算，不假定工具已正确完成或必然提效。"
             ]
           },
           "id": "compensation-and-benefits-managers.ai-impact.ai-impact-table.80",
@@ -25791,7 +25813,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把数据来源与测算过程与决策依据与批准与沟通与答疑留痕；对员工薪酬与个人数据按最小必要与权限要求在受控系统内保存。"
+              "编辑建议按实际用途和制度保留数据来源、测算、批准及沟通版本；存储期限与访问记录要求另核，不称统一法定清单。"
             ]
           },
           "id": "compensation-and-benefits-managers.ai-impact.ai-impact-table.82",
@@ -25835,10 +25857,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "员工薪酬与个人数据属于受保护信息，上传到外部服务可能造成泄露与合规风险。"
+              "未经核权限向外部工具提供因岗位取得的员工档案，可能形成泄露或合规风险。这里指因岗位取得的可识别员工档案：先核法域、处理目的、访问及导出权限、服务合同和工具批准，再按实际要求最小化或脱敏；脱敏不自动授予外部上传权限，也不是所有合法处理必经。不得把档案权限要求解释为员工一概不得讨论本人薪资；美国NLRA覆盖员工相关权利另核，NLRB总法律顾问说明页列薪资讨论保护，但非委员会审定或所有人员通用规则。"
             ]
           },
           "id": "compensation-and-benefits-managers.ai-impact.ai-impact-table.86",
+          "source_refs": [
+            "cb-review-nlrb",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25846,10 +25872,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按信息分级与权限选择可用工具与部署方式，对可识别信息脱敏或使用受控系统，并保留访问与导出记录。"
+              "先核实际用途和数据范围、工具许可及服务合同，再选择受控系统或按要求脱敏；保留适用记录，不把脱敏当全部合法性条件。"
             ]
           },
           "id": "compensation-and-benefits-managers.ai-impact.ai-impact-table.87",
+          "source_refs": [
+            "cb-review-nlrb",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26231,7 +26261,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议在权限受控范围试验数据与草稿工具，逐项核原始数据、版本、计算和披露；没有采用研究不能称显著改变全行业。"
+              "编辑试用候选：用虚构或获准资料试数据清洗、成本测算、条款及沟通草稿，对照原始数据复算、核遗漏、记录复核总耗时；本轮未取得本职业AI可靠性、采用率、提效或岗位因果实证。"
             ]
           },
           "id": "compensation-and-benefits-managers.ai-impact.ai-impact-table.122",
@@ -26255,7 +26285,7 @@
           },
           "id": "compensation-and-benefits-managers.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-wages-2025"
+            "cb-review-nbs-wages-2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26270,7 +26300,7 @@
           },
           "id": "compensation-and-benefits-managers.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wages-2025"
+            "cb-review-nbs-wages-2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26373,7 +26403,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2026-05-15发布；工资为税前含个人代扣缴。城镇单位调查为5人及以上法人单位，两个管理层参考还限规模以上企业；不含个体经营与自由职业者。项目制是否覆盖看被调查单位人员身份，不能按薪酬名称一概排除股权或项目收入。"
+              "NBS2025、2026-05-15发布：工资税前含个人代扣缴；城镇5人及以上法人单位，管理层两个参考还限规模以上企业。排除个体工商户和自由职业者，以及入股分红、股权激励兑现收益等资本性收益；项目制须核实际人员及工资覆盖，不将项目名称直接判排除或覆盖。"
             ]
           },
           "id": "compensation-and-benefits-managers.china-salary.career-snapshot-primary-locale.10",
@@ -26560,7 +26590,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理，不是薪资统计：相关专业学历与实务经历是进入相应序列的常见条件，岗位方向由组织类型与业务范围决定，不能据此推断收入。"
+              "编辑准备候选：核目标岗位专业、实务经历及任务，相关专业学习可作准备；本轮无中国代表性雇主样本证明全国常见条件，不据学历推收入。"
             ]
           },
           "id": "compensation-and-benefits-managers.china-salary.career-snapshot-primary-locale.27",
@@ -26593,7 +26623,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：方案设计与共享服务方向更看重数据与系统与合规能力；本页不把学历直接对应到收入区间。"
+              "编辑比较候选：对照实际方案或共享服务任务核数据、系统及合规能力；不称全国更看重某条件，不把学历对应收入。"
             ]
           },
           "id": "compensation-and-benefits-managers.china-salary.career-snapshot-primary-locale.30",
@@ -26626,7 +26656,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：认证与合规培训是岗位要求的组成部分，实际认定以主管部门与用人单位要求为准，本页不代替报考与授权条件。"
+              "编辑核对：查目标岗位是否要求认证或合规培训，逐提供机构核当期条件；本轮无代表性雇主样本证明全国统一要求。"
             ]
           },
           "id": "compensation-and-benefits-managers.china-salary.career-snapshot-primary-locale.33",
@@ -26659,7 +26689,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：薪酬与员工数据的处理须按适用法规与用人单位制度执行，本页不把任何培训或境外认证写成法定资质。"
+              "薪酬员工数据按实际适用法规、任务及权限处理；培训或境外认证不自动授中国法定资质或数据使用权限。"
             ]
           },
           "id": "compensation-and-benefits-managers.china-salary.career-snapshot-primary-locale.36",
@@ -26780,7 +26810,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中华人民共和国职业分类大典（2022 年版）公布信息｜https://www.mohrss.gov.cn/"
+              "职业分类大典2022版公布信息（原登记入口）｜https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
             ]
           },
           "id": "compensation-and-benefits-managers.china-salary.career-snapshot-primary-locale.47",
@@ -26791,7 +26821,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不提供中国大陆该岗位的月薪区间或城市排名；组织类型与规模与行业与地区与薪酬结构差异很大，比较时应把合规与受托责任与数据保护要求纳入书面确认。"
+              "本页不提供中国本职业月薪区间或城市排名；核雇主行业、规模、岗位层级和固定/浮动/长期激励构成，涉及退休计划职责须先核法域，不默认所有中国岗位都适用美国ERISA。"
             ]
           },
           "id": "compensation-and-benefits-managers.china-salary.career-snapshot-primary-locale.48",
@@ -26940,7 +26970,7 @@
           ],
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "bls-pay"
+            "cb-review-bls-pay"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26955,7 +26985,7 @@
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "bls-pay"
+            "cb-review-bls-pay"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26985,7 +27015,7 @@
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "bls-entry"
+            "cb-review-bls-entry"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27000,7 +27030,7 @@
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "bls-pay"
+            "cb-review-bls-pay"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27030,7 +27060,7 @@
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.7",
           "source_refs": [
-            "bls-pay"
+            "cb-review-bls-pay"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27150,7 +27180,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位。该分位不包含行业与组织规模与地区差异的个体分布。；O*NET 全国工资分位页面（11-3111.00）｜https://www.onetonline.org/link/localwages/11-3111.00"
+              "90分位是全国分布上端位置，已综合覆盖人群中的行业与地区等差异，但不提供各细分组独立分布；非最高值或个人保证。"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.18",
@@ -27205,7 +27235,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约 1,500 个/年"
+              "约1,600个/年（2025—2035年均预测）"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.23",
@@ -27227,10 +27257,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS2025年薪10/25/50/75/90分位89,160/113,170/149,230/200,610/256,570美元，时薪42.86/54.41/71.75/96.45/123.35美元。50分位为中位数，on average简写不证明算术均值相等；统计受雇工资薪金、不含自雇业主，分位不是起薪。BLS表1.2（SOC11-3111，2025—2035）预测：就业约23,700→24,000人，变化+1.1%，年均空缺约1,600个。原表千人换算为人；净增约300人与年均空缺不同。预测包含自雇及假设误差，不是逐年实际值、招聘保证或AI因果。证据不足：本轮未取得薪酬与福利经理行业及薪酬结构、组织规模、层级细分工资中位数；地区可另按州或邮编查询。"
+              "OEWS2025年薪10/25/50/75/90分位89,160/113,170/149,230/200,610/256,570美元，时薪42.86/54.41/71.75/96.45/123.35美元。50分位为中位数，on average简写不证明算术均值相等；统计受雇工资薪金、不含自雇业主，分位不是起薪。BLS表1.2（SOC11-3111，2025—2035）预测：就业约23,700→24,000人，变化+1.1%，年均空缺约1,600个。原表千人换算为人；净增约300人与年均空缺不同。预测包含自雇及假设误差，不是逐年实际值、招聘保证或AI因果。 OOH已提供若干行业内本职业2025年工资中位数，见下表；证据不足：本轮未取得固定/浮动/长期激励、组织规模、层级细分工资。地区可按官方入口查询。"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.25",
+          "source_refs": [
+            "cb-review-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27249,7 +27282,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该职业的行业与组织规模与薪酬结构差异很大（金融与保险、公司与企业管理部门、专业与科学与技术服务等，固定与浮动与长期激励占比不同），因此公开分位主要反映受雇工资薪金岗位；行业与组织规模与地区会影响收入水平，但需按精确职业与地区数据比较。"
+              "OEWS工资覆盖按调查定义：受薪全兼职员工，排除自雇及未法人化业主合伙人。行业、规模、固定浮动和长期激励结构须按目标岗位合同及对应资料核；不由差异解释统计覆盖，不作统一收入因果。"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.27",
@@ -27271,7 +27304,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 工作情境显示 67% 每周工作超过 40 小时、43% 每周一次以上面临严格截止期限（48% 每月一次以上）、38% 每周一次以上需要面对不愉快或愤怒或不礼貌的人，年度预算与福利续保与审计周期会显著影响阶段性节奏。"
+              "O*NET 工作情境显示 67% 每周工作超过 40 小时、43% 每周一次以上但非每天面临严格截止期限（48% 每月一次以上但非每周）、38% 每周一次以上但非每天需要面对不愉快或愤怒或不礼貌的人，OOH说明福利登记等高峰可能需更多工时，具体预算、续保及审计排期向目标雇主核。 以上为受访回答，非每岗保证；规律排期不等工作周40小时。"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.29",
@@ -27293,7 +27326,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工作场景以金融与保险 20%、公司与企业管理部门 20%、专业与科学与技术服务 13% 为主，其他行业合计 47%（含教育服务与政府）；不同地区的行业结构与组织密度会影响机会与收入水平，本页不逐州列出，也不以最高值或州示例当作普遍水平。"
+              "当前O*NET行业就业构成：公司与企业管理22%、金融保险19%、专业科学技术服务13%、其他46%（包括行政支持服务及教育服务）；是行业就业占比，不是工资或个人机会概率。 具体地区及雇主机会另核，不据全国占比分配个人收入。"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.31",
@@ -27326,10 +27359,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "金融与保险"
+              "专业、科学与技术服务"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.34",
+          "source_refs": [
+            "cb-review-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27337,10 +27373,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行业就业占比 20%（O*NET 行业分布）"
+              "167,950美元/年（行业内本职业中位数，2025）"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.35",
+          "source_refs": [
+            "cb-review-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27348,10 +27387,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET行业结构20/20/13/其他47%不是行业工资。"
+              "OOH本职业2025年5月该行业年工资中位数；非全行业所有职业平均。"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.36",
+          "source_refs": [
+            "cb-review-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27359,10 +27401,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "公司与企业管理部门"
+              "公司与企业管理"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.37",
+          "source_refs": [
+            "cb-review-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27370,10 +27415,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行业就业占比 20%（O*NET 行业分布）"
+              "161,580美元/年（行业内本职业中位数，2025）"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.38",
+          "source_refs": [
+            "cb-review-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27381,10 +27429,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行为就业占比而非行业工资；其余行业合计 60%（专业与科学与技术服务 13% 与其他行业 47%）未进一步拆分。"
+              "OOH本职业2025年5月该行业年工资中位数；非组织规模或层级分位。"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.39",
+          "source_refs": [
+            "cb-review-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27392,10 +27443,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与地区工资细分"
+              "保险承保及相关活动"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.40",
+          "source_refs": [
+            "cb-review-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27403,10 +27457,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得薪酬与福利经理行业及薪酬结构、组织规模、层级细分工资中位数；地区可另按州或邮编查询。"
+              "151,270美元/年（行业内本职业中位数，2025）"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.41",
+          "source_refs": [
+            "cb-review-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27414,10 +27471,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "缺少细分数值时不使用行业均值或相邻职业数据替代；如需比较可查阅 OEWS 的行业与地区查询入口。"
+              "OOH本职业2025年5月该行业年工资中位数；该行业比金融保险总类窄。"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.42",
+          "source_refs": [
+            "cb-review-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27425,10 +27485,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "薪酬结构与任职形态差异"
+              "医疗保健与社会援助"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.43",
+          "source_refs": [
+            "cb-review-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27436,10 +27499,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得按固定/浮动/长期激励、组织规模或层级细分的工资中位数。"
+              "133,360美元/年（行业内本职业中位数，2025）"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.44",
+          "source_refs": [
+            "cb-review-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27447,10 +27513,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该页面的分位数据来自受雇工资薪金岗位统计，不能用于推断某一薪酬结构或某一组织规模的个人收入。"
+              "OOH本职业2025年5月该行业年工资中位数；同页另列政府（不含州地方教育及医院）118,320美元。"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.45",
+          "source_refs": [
+            "cb-review-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27469,7 +27538,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不能。该页面的年度工资按统计方法折算，并非每个人实际有薪时数；该页另提供时薪中位数 71.75 美元，但同样是统计口径；该职业的收入常包含浮动与长期激励，没有个人薪酬结构信息时，不能推算个人年薪、月收入或税后所得。"
+              "OEWS按统计方法折算年/时薪，2,080小时为标准工作年而非每个人有薪时数；本页另有官方时薪中位71.75美元。不能据全国统计推个人年薪、月收入、奖金股权或税后所得。"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.47",
@@ -27491,7 +27560,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与组织规模与地区与岗位层级、以及薪酬结构中固定与浮动与长期激励的占比都会影响实际收入；本页不预测个人收入。"
+              "行业与组织规模与地区与岗位层级、以及薪酬结构中固定与浮动与长期激励的占比应据具体合同及分组证据核对，不推统一收入效应；本页不预测个人收入。"
             ]
           },
           "id": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.49",
@@ -27604,7 +27673,7 @@
           },
           "id": "compensation-and-benefits-managers.fit.riasec-fit-block.4",
           "source_refs": [
-            "bls-entry"
+            "cb-review-bls-entry"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27664,7 +27733,7 @@
           },
           "id": "compensation-and-benefits-managers.fit.riasec-fit-block.8",
           "source_refs": [
-            "nasa-seh"
+            "cb-review-ebsa-fiduciary-functions"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27777,10 +27846,10 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "O*NET-SOC 11-3111.00 教育与培训信息入口",
+                "entity": "O*NET新入职者教育需求（非培训目录）",
                 "id": "link-18",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtraining/11-3111.00"
+                "url": "https://www.onetonline.org/link/details/11-3111.00#Education"
               },
               {
                 "entity": "O*NET 技术清单（11-3111.00 招聘技术关键词）",
@@ -27849,7 +27918,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格在本页只用于描述工作方式，不作为录用依据。与该职业任务更相关的是尽责性维度下的数据与合规与报告管理、外向性维度下的跨部门沟通与解释、以及情绪稳定性维度下的争议与冲突情境处理；这些特质影响你如何执行薪酬与福利工作，而不是你能不能学会对标与分析技能。"
+              "编辑自我观察可用尽责性描述复算记录、外向性描述主动协调、情绪稳定性描述争议下处理方式；本轮无本职业大五量表预测效度或录用阈值，不断言这些特质造成方案质量或能否学会技能。"
             ]
           },
           "id": "compensation-and-benefits-managers.fit.personality-fit-block.6",
@@ -27872,7 +27941,7 @@
           "data": {
             "entries": [
               "适配信号：你习惯把数据来源、测算过程、决策依据与沟通口径记下来，让别人能复核。",
-              "适配信号：你能接受 100% 每天使用电子邮件、95% 每天电话沟通、90% 持续坐着、67% 每周工作超过 40 小时、38% 每周一次以上面对不愉快或愤怒的人的工作形态。"
+              "适配信号：你能接受 100% 每天使用电子邮件、95% 每天电话沟通、90% 持续坐着、67% 每周工作超过 40 小时、38% 每周一次以上但非每天面对不愉快或愤怒的人的工作形态。"
             ]
           },
           "id": "compensation-and-benefits-managers.fit.personality-fit-block.8",
@@ -27905,7 +27974,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 等类型学工具与本职业适配没有官方证据支持。本页不使用「哪种类型最适合薪酬与福利经理」的表述：类型学描述的是偏好，不预测工作表现，也不对应岗位准入。"
+              "本轮未取得MBTI对本职业表现或适配的预测效度研究，不以类型作准入、最佳类型排序或职业命运判断；偏好描述不能代替真实任务。"
             ]
           },
           "id": "compensation-and-benefits-managers.fit.personality-fit-block.11",
@@ -27916,7 +27985,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "适配信号：如果你享受把一个复杂规则体系对齐到具体方案并让它经得起检查，这份工作会让你有成就感。",
+              "适配信号：如果你享受把一个复杂规则体系对齐到具体方案并让它经得起检查，可在试做后观察自己是否有成就感。",
               "适配信号：如果你更关注员工体验与沟通，福利方案与员工沟通方向同样可长期精进。"
             ]
           },
@@ -27939,7 +28008,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样不是职业测评工具，没有官方职业证据支持。可替代的做法是用具体行为验证兴趣：能否就一份虚构市场薪酬数据写出对标口径与结构建议，能否为一项虚构福利方案写出比价与成本与沟通要点，能否写出一页含合规与报告与数据权限边界的方案说明。"
+              "本轮无九型对本职业的预测效度证据，不据类型判断入行；编辑观察可用虚构市场数据写口径及结构建议、福利方案写比价成本和沟通要点，并核实际权限。"
             ]
           },
           "id": "compensation-and-benefits-managers.fit.personality-fit-block.14",
@@ -27995,7 +28064,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 技能与知识清单为官方职业数据；IQ 分数不是职业准入条件。"
+              "O*NET技能知识为职业层面数据；本轮未取得本职业统一IQ阈值，本页不据IQ判准入或录用。"
             ]
           },
           "id": "compensation-and-benefits-managers.fit.personality-fit-block.19",
@@ -28029,7 +28098,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业沟通与协同要求高：O*NET 工作情境显示 100% 每天使用电子邮件、95% 每天进行电话沟通、74% 每天进行面对面讨论（26% 每周一次以上）、48% 与他人保持持续接触（48% 大部分时间有接触）、38% 认为与工作组或团队协作极其重要（48% 非常重要）、19% 认为协调或带领他人极其重要（52% 非常重要、14% 重要）、33% 认为需要与外部客户或公众打交道非常重要（33% 重要、24% 比较重要）；方案落地依赖与财务与法务与业务部门与供应商的多方对齐。"
+              "该职业沟通与协同要求高：O*NET 工作情境显示 100% 每天使用电子邮件、95% 每天进行电话沟通、74% 每天进行面对面讨论（26% 每周一次以上但非每天）、48% 与他人保持持续接触（48% 大部分时间有接触）、38% 认为与工作组或团队协作极其重要（48% 非常重要）、19% 认为协调或带领他人极其重要（52% 非常重要、14% 重要）、33% 认为需要与外部客户或公众打交道非常重要（33% 重要、24% 比较重要）；方案落地依赖与财务与法务与业务部门与供应商的多方对齐。 以上为受访回答，非每岗保证；规律排期不等工作周40小时。"
             ]
           },
           "id": "compensation-and-benefits-managers.fit.personality-fit-block.22",
@@ -28085,7 +28154,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：与该职业任务最贴合的信号是「愿意用可追溯的数据与法规依据做方案」与「能在争议与期限压力下守住合规与留痕」；兴趣代码为 ECS，但代码只描述群体分布，不决定个人是否适合。"
+              "编辑观察信号是核数据口径、复算、守实际权限及沟通记录；ECS描述职业活动兴趣而非员工人格群体分布，不能定个人适配。"
             ]
           },
           "id": "compensation-and-benefits-managers.fit.personality-fit-block.27",
@@ -28140,7 +28209,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：愿意统筹行政与后勤与设施与采购等支持性职能。"
+              "编辑适合信号：愿意协调记录与信息、邮件及办公支持服务；实际设施或采购职责另核目标岗位。"
             ]
           },
           "id": "compensation-and-benefits-managers.fit.personality-fit-block.32",
@@ -28151,10 +28220,16 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向以行政保障与预算执行为主，不负责薪酬与福利方案设计。"
+              "行政服务主要协调办公支持、记录信息和邮件等；不据定义排除其兼任薪酬福利，设施管理另有职业口径。"
             ]
           },
           "id": "compensation-and-benefits-managers.fit.personality-fit-block.33",
+          "source_refs": [
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-5",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28184,10 +28259,16 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向以财务与资金与内控为主，薪酬方案只在其预算与会计口径内衔接。"
+              "财务经理主要协调会计投资等财务活动；薪酬预算或方案协作范围看组织，不能只限会计预算或断言绝不参与设计。"
             ]
           },
           "id": "compensation-and-benefits-managers.fit.personality-fit-block.36",
+          "source_refs": [
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-5",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28283,10 +28364,16 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向通常不承担跨部门方案决策与合规终审与预算责任。"
+              "专员可在分类、养老金等领域工作；主要对象不等全部无决策或终审权，实际职责分别核。"
             ]
           },
           "id": "compensation-and-benefits-managers.fit.personality-fit-block.45",
+          "source_refs": [
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-5",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28327,7 +28414,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有官方证据支持某种 MBTI 类型更适合该职业；本页不提供这种排序。"
+              "本轮未取得MBTI类型对本职业适配的研究证据，不提供最佳类型排序。"
             ]
           },
           "id": "compensation-and-benefits-managers.fit.personality-fit-block.49",
@@ -28338,7 +28425,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 该职业页面的兴趣代码为 ECS（企业型、常规型、社会型）。这表示职业群体集中在这三类取向，但代码不是个人适配结论，仍需用实际任务验证。"
+              "当前职业活动兴趣前三项ECS：企业100、常规78、社会47；非职业员工人格比例或录用阈值。"
             ]
           },
           "id": "compensation-and-benefits-managers.fit.personality-fit-block.50",
@@ -28349,7 +28436,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。人格特质分数与工作表现的关联在不同研究中强弱不一，且受组织与行业与团队条件影响；本页不用它作为录用或适配判断依据。"
+              "本轮未取得本职业人格量表与工作表现关联及录用阈值研究；不用个人测评分数预测录用，不能把工作风格Impact当个人效度结果。"
             ]
           },
           "id": "compensation-and-benefits-managers.fit.personality-fit-block.51",
@@ -28371,7 +28458,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业对压力下精确与沟通的要求突出：O*NET 工作情境显示 43% 每周一次以上面临严格截止期限（48% 每月一次以上）、38% 每周一次以上需要面对不愉快或愤怒或不礼貌的人（38% 每月一次以上）、29% 每周一次以上面对冲突情境、35% 认为非常精确或高度准确极其重要（45% 非常重要）、24% 认为工作误差后果非常严重（19% 严重、33% 比较严重）；把口径核对与合规审阅与沟通留痕固定为习惯，是可练习的技术。"
+              "该职业对压力下精确与沟通的要求突出：O*NET 工作情境显示 43% 每周一次以上但非每天面临严格截止期限（48% 每月一次以上但非每周）、38% 每周一次以上但非每天需要面对不愉快或愤怒或不礼貌的人（38% 每月一次以上但非每周）、29% 每周一次以上但非每天面对冲突情境、35% 认为非常精确或高度准确极其重要（45% 非常重要）、24% 认为工作误差后果非常严重（19% 严重、33% 比较严重）；把口径核对与合规审阅与沟通留痕固定为习惯，是可练习的技术。 以上为受访回答，非每岗保证；规律排期不等工作周40小时。"
             ]
           },
           "id": "compensation-and-benefits-managers.fit.personality-fit-block.53",
@@ -28382,7 +28469,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不建议。九型人格不是职业测评工具，也没有官方职业适配证据。"
+              "不建议据九型作入行决定；本轮无本职业预测效度证据，需用实际任务和目标岗位条件核。"
             ]
           },
           "id": "compensation-and-benefits-managers.fit.personality-fit-block.54",
@@ -28582,7 +28669,7 @@
           },
           "id": "compensation-and-benefits-managers.risk.career-risk-cards.1",
           "source_refs": [
-            "nasa-seh"
+            "cb-review-ebsa-fiduciary-functions"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28612,7 +28699,7 @@
           },
           "id": "compensation-and-benefits-managers.risk.career-risk-cards.3",
           "source_refs": [
-            "nasa-seh"
+            "cb-review-ebsa-fiduciary-functions"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28627,7 +28714,7 @@
           },
           "id": "compensation-and-benefits-managers.risk.career-risk-cards.4",
           "source_refs": [
-            "nasa-seh"
+            "cb-review-ebsa-fiduciary-functions"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28713,7 +28800,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界：以下六张风险卡按本职业的任务与工作情境归纳，用于说明「会遇到什么、可以怎么控制」，不写发生率或事故概率；每条措施的适用范围须按适用法域与监管要求与雇主制度单独确认。"
+              "边界：以下六张风险卡按本职业的任务与工作情境归纳，用于说明「会遇到什么、可以怎么控制」，不写发生率或事故概率；每条措施的适用范围须按适用法域与监管要求与雇主制度单独确认。 后果与措施为任务相关编辑风险推演，不等已核全国法定程序。"
             ]
           },
           "id": "compensation-and-benefits-managers.risk.career-risk-cards.8",
@@ -28724,7 +28811,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答：该职业最需要提前判断的风险来自三处——退休与福利计划的报告与受托责任履行不到位、薪酬结构决策中的内部公平与反歧视争议、以及员工薪酬与个人数据的隐私与访问权限管理不当；供应商与经纪机构的利益冲突、并购整合期的政策衔接、以及沟通不清导致的员工信任损失会放大以上三类风险。"
+              "编辑归纳须提前核计划报告及受托功能、薪酬公平、员工档案权限；另留意供应商利益冲突、并购衔接和沟通版本。未取得风险发生率或排名，不称前三项统计上最大。"
             ]
           },
           "id": "compensation-and-benefits-managers.risk.career-risk-cards.9",
@@ -28757,7 +28844,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "报告与披露义务未按期完成或受托相关决策缺少记录，会带来合规责任与罚则与计划参与者权益受损风险。"
+              "编辑风险推演：在确有报告、披露或受托义务的计划及职责内，漏报或决策依据缺失可能影响合规和参与者利益；具体期限、罚则及责任须核适用规定，本页未核统一数额。"
             ]
           },
           "id": "compensation-and-benefits-managers.risk.career-risk-cards.12",
@@ -28856,10 +28943,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按最小必要与岗位权限管理薪酬与个人数据；对外提供或用于分析时先脱敏并记录用途与范围；在受控系统内保存并保留访问与导出记录。"
+              "编辑控制建议：管理因岗位取得的员工档案前核处理目的和实际权限，向外部服务提供前核批准及合同，按要求脱敏或最小化。这里指因岗位取得的可识别员工档案：先核法域、处理目的、访问及导出权限、服务合同和工具批准，再按实际要求最小化或脱敏；脱敏不自动授予外部上传权限，也不是所有合法处理必经。不得把档案权限要求解释为员工一概不得讨论本人薪资；美国NLRA覆盖员工相关权利另核，NLRB总法律顾问说明页列薪资讨论保护，但非委员会审定或所有人员通用规则。"
             ]
           },
           "id": "compensation-and-benefits-managers.risk.career-risk-cards.21",
+          "source_refs": [
+            "cb-review-nlrb",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28867,10 +28958,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在非受控渠道讨论个人薪酬；把完整薪酬表用于与目的无关的用途；不做脱敏即提供给外部服务。"
+              "风险示例：未经批准导出因岗位取得的完整他人薪酬表，或用作无关用途；不是把员工依法讨论本人待遇一概列为违规。"
             ]
           },
           "id": "compensation-and-benefits-managers.risk.career-risk-cards.22",
+          "source_refs": [
+            "cb-review-nlrb",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28889,7 +28984,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "供应商或经纪机构的佣金与返点安排未披露，会影响建议的客观性并带来利益冲突风险。"
+              "编辑风险推演：供应商佣金返点等安排未核实及按适用要求披露，可能影响选择客观性；并非所有福利供应商佣金均违法或披露即可合法。"
             ]
           },
           "id": "compensation-and-benefits-managers.risk.career-risk-cards.24",
@@ -28977,7 +29072,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "沟通不清或答疑口径不一致会导致员工不信任与重复申诉，并放大合规问题的感知风险。"
+              "编辑风险推演：不同材料版本或越权待遇承诺可能增加申诉或削弱信任；本轮无发生率或因果量化。"
             ]
           },
           "id": "compensation-and-benefits-managers.risk.career-risk-cards.32",
@@ -29032,7 +29127,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对知识、能力与兴趣代码 ECS 与工作风格清单"
+              "EBSA美国ERISA受托功能说明：管理裁量、资产控制及经营决策与实施管理的区别，不是薪酬公平或个人数据保护完整法规。"
             ]
           },
           "id": "compensation-and-benefits-managers.risk.career-risk-cards.37",
@@ -29043,7 +29138,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对行业分布与就业结构"
+              "O*NET相关认证候选目录：19项，不是执照、计划受托身份或所有雇主共同门槛。"
             ]
           },
           "id": "compensation-and-benefits-managers.risk.career-risk-cards.38",
@@ -29078,7 +29173,7 @@
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.1",
           "source_refs": [
-            "onet-training"
+            "cb-review-onet-training"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -29231,6 +29326,12 @@
                 "id": "link-4",
                 "relation": "related-evidence",
                 "url": "https://www.onetonline.org/link/summary/11-3111.00"
+              },
+              {
+                "entity": "BLS薪酬福利经理典型入行",
+                "id": "repair-ooh",
+                "relation": "related-evidence",
+                "url": "https://www.bls.gov/ooh/management/compensation-and-benefits-managers.htm"
               }
             ]
           },
@@ -29341,10 +29442,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：进入该职业最常见的路径是完成人力资源、商科、财务、统计或相关专业的学习（该页面教育分布显示 76% 的受访者回答需要学士学位、14% 回答需要硕士学位、10% 回答需要学士后证书，页面仅显示这三档比例；准备层级为 Job Zone Four，相当准备），并配合薪酬或福利或人力资源实务经历；入行后先承担数据与文档与答疑辅助，再逐步承担方案设计与合规报告与跨部门项目；专业认证可以提升专业可信度，但不等于岗位授权或计划受托人资格。"
+              "美国O*NET JobZone4，新入职教育需求回答76%学士/14%硕士/10%学士后证书，不是全员学历分布或统一门槛。BLS典型入行学士、相关工作经验5年或以上，OOH说明商科、人力资源或相关领域，常由薪酬福利岗位分析专员起步；人事、财务或管理经历也有帮助。具体公告另核，不把5年设为全球法律要求或让应届生直接保证经理任职。 下列辅助→方案→项目→治理是编辑能力结构，不是经理岗零经验保证。专业认证不自动授岗位或受托权限。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.20",
+          "source_refs": [
+            "cb-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29352,10 +29457,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界：学历、岗位培训、专业认证、执照与岗位授权必须分别核对。该页面提供 19 项全国认证（多为薪酬与福利与人力资源领域专业认证，如 Certified Compensation Professional、Certified Sales Compensation Professional、Retirement Plans Associate、Qualified 401(k) Administrator、Certified Employee Benefit Specialist、Global Professional in Human Resources 等），但认证不等于执业许可、雇主任命、计划受托人资格或签字权；受托责任与报告义务、薪酬公平与反歧视、员工数据保护须按适用法域与监管要求与雇主制度执行；本页不把学历或认证写成法定资质或受托人资格。"
+              "资格边界：学历、岗位培训、专业认证、执照与岗位授权必须分别核对。该页面提供 19 项全国认证（多为薪酬与福利与人力资源领域专业认证，如 Certified Compensation Professional、Certified Sales Compensation Professional、Retirement Plans Associate、Qualified 401(k) Administrator、Certified Employee Benefit Specialist、Global Professional in Human Resources 等），但认证不等于执业许可、雇主任命、计划受托人资格或签字权；受托责任与报告义务、薪酬公平与反歧视、员工数据保护须按适用法域与监管要求与雇主制度执行；本页不把学历或认证写成法定资质或受托人资格。 OOH说明认证非全职业统一强制，但部分雇主偏好或岗位要求；19项为相关认证候选目录，不证明全部认可或有统一报考条件。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.21",
+          "source_refs": [
+            "cb-review-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29429,7 +29538,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求相关专业背景与表格与数据基础。"
+              "编辑准备建议：核目标岗位是否要求相关专业背景与表格与数据基础。 本轮无代表性雇主样本证明统一条件。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.28",
@@ -29451,7 +29560,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示一份可复核的对标数据与岗位整理记录。"
+              "能出示一份可复核的对标数据与岗位整理记录。 用虚构、脱敏且获准展示材料；不得为求职擅自导出雇主或员工档案。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.30",
@@ -29506,7 +29615,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示对标与结构建议与测算与审批记录。"
+              "能出示对标与结构建议与测算与审批记录。 用虚构、脱敏且获准展示材料；不得为求职擅自导出雇主或员工档案。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.35",
@@ -29539,7 +29648,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求多行业对标经验与项目管理经验。"
+              "编辑准备建议：核目标岗位是否要求多行业对标经验与项目管理经验。 本轮无代表性雇主样本证明统一条件。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.38",
@@ -29561,7 +29670,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示方案与决策与效果评估记录。"
+              "能出示方案与决策与效果评估记录。 用虚构、脱敏且获准展示材料；不得为求职擅自导出雇主或员工档案。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.40",
@@ -29594,7 +29703,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求组织内职责与长期经验。"
+              "编辑准备建议：核目标岗位是否要求组织内职责与长期经验。 本轮无代表性雇主样本证明统一条件。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.43",
@@ -29616,7 +29725,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示制度文件与审计与检查记录。"
+              "能出示制度文件与审计与检查记录。 用虚构、脱敏且获准展示材料；不得为求职擅自导出雇主或员工档案。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.45",
@@ -29649,7 +29758,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求相关专业背景与合规基础培训。"
+              "编辑准备建议：核目标岗位是否要求相关专业背景与合规基础培训。 本轮无代表性雇主样本证明统一条件。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.48",
@@ -29671,7 +29780,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示资料整理与答疑与记录。"
+              "能出示资料整理与答疑与记录。 用虚构、脱敏且获准展示材料；不得为求职擅自导出雇主或员工档案。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.50",
@@ -29726,7 +29835,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示比价与测算与报告与审批记录。"
+              "能出示比价与测算与报告与审批记录。 用虚构、脱敏且获准展示材料；不得为求职擅自导出雇主或员工档案。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.55",
@@ -29759,7 +29868,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求受托与披露经验与多方案整合经验。"
+              "编辑准备建议：核目标岗位是否要求受托与披露经验与多方案整合经验。 本轮无代表性雇主样本证明统一条件。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.58",
@@ -29781,7 +29890,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示整合与决策与披露记录。"
+              "能出示整合与决策与披露记录。 用虚构、脱敏且获准展示材料；不得为求职擅自导出雇主或员工档案。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.60",
@@ -29814,7 +29923,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求组织内职责与长期经验。"
+              "编辑准备建议：核目标岗位是否要求组织内职责与长期经验。 本轮无代表性雇主样本证明统一条件。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.63",
@@ -29836,7 +29945,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示机制文件与审计与培训记录。"
+              "能出示机制文件与审计与培训记录。 用虚构、脱敏且获准展示材料；不得为求职擅自导出雇主或员工档案。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.65",
@@ -29869,7 +29978,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求统计或信息系统基础与表格能力。"
+              "编辑准备建议：核目标岗位是否要求统计或信息系统基础与表格能力。 本轮无代表性雇主样本证明统一条件。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.68",
@@ -29891,7 +30000,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示统计与报表与核对记录。"
+              "能出示统计与报表与核对记录。 用虚构、脱敏且获准展示材料；不得为求职擅自导出雇主或员工档案。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.70",
@@ -29946,7 +30055,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示分析报告与预算与建议记录。"
+              "能出示分析报告与预算与建议记录。 用虚构、脱敏且获准展示材料；不得为求职擅自导出雇主或员工档案。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.75",
@@ -29979,7 +30088,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求流程设计与系统实施经验。"
+              "编辑准备建议：核目标岗位是否要求流程设计与系统实施经验。 本轮无代表性雇主样本证明统一条件。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.78",
@@ -30001,7 +30110,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示项目与系统与流程与培训记录。"
+              "能出示项目与系统与流程与培训记录。 用虚构、脱敏且获准展示材料；不得为求职擅自导出雇主或员工档案。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.80",
@@ -30034,7 +30143,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求组织内职责与长期经验。"
+              "编辑准备建议：核目标岗位是否要求组织内职责与长期经验。 本轮无代表性雇主样本证明统一条件。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.83",
@@ -30056,7 +30165,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能出示指标文件与检查与培训记录。"
+              "能出示指标文件与检查与培训记录。 用虚构、脱敏且获准展示材料；不得为求职擅自导出雇主或员工档案。"
             ]
           },
           "id": "compensation-and-benefits-managers.path.career-path-block.85",
@@ -30098,7 +30207,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "编辑建议观察什么",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -30108,7 +30217,7 @@
                 "在指导下完成市场数据清洗与岗位信息整理与员工答疑转接并执行数据权限要求。",
                 "数据处理是否准确、记录是否完整、异常是否及时上报。",
                 "用脱敏后的对标与岗位与记录与带教意见证明。",
-                "与经理岗相比不承担方案决策与合规终审责任。"
+                "专员与经理主要任务层级不同；具体决策、签字或终审权限看实际职责，不按名称一概排除。"
               ],
               [
                 "按授权承担方案的经理",
@@ -30153,7 +30262,7 @@
                 "id": "education",
                 "values": [
                   "学历与经历",
-                  "美国教育需求76%学士/14%硕士/10%学士后证书，JobZone4为准备指标。",
+                  "美国O*NET JobZone4，新入职教育需求回答76%学士/14%硕士/10%学士后证书，不是全员学历分布或统一门槛。BLS典型入行学士、相关工作经验5年或以上，OOH说明商科、人力资源或相关领域，常由薪酬福利岗位分析专员起步；人事、财务或管理经历也有帮助。具体公告另核，不把5年设为全球法律要求或让应届生直接保证经理任职。",
                   "具体经验、专业和认证按目标公告核；本轮未取得中国全国多数招聘条件样本。"
                 ]
               },
@@ -30296,7 +30405,7 @@
                 "简历与初筛",
                 "专业背景与薪酬或福利实务经历、市场对标与数据分析经历、合规与报告经历。",
                 "经历是否与岗位职责匹配、对数据口径与合规与数据权限的理解。",
-                "初筛只能看到书面信息；专业认证与受托与披露要求须按雇主要求核对。"
+                "初筛只见书面信息；所列环节是编辑面试准备候选，不是统一雇主招聘程序；认证及职责逐公告核。"
               ],
               [
                 "面试与情境问答",
@@ -30419,7 +30528,7 @@
               "求职现实作用",
               "是否普遍入职门槛",
               "报考／注册条件",
-              "投入等级",
+              "费用与耗时核对",
               "重要限制"
             ],
             "rows": [
@@ -30427,27 +30536,27 @@
                 "人力资源或商科或财务或统计等相关专业学历",
                 "核目标公告的申请者",
                 "教育需求调查为美国职业描述，不决定中国可进序列。",
-                "否（部分岗位以实务经历与认证补充）",
-                "完成相关课程与实习并通过考核",
-                "中",
+                "BLS美国典型入行学士；具体公告核，不将教育需求调查设全球法律门槛",
+                "学历条件逐目标岗位及院校核；不假定所有学位统一要求实习或同一考核",
+                "证据不足：本轮未核具体费用及耗时，按目标机构或岗位核",
                 "该页面教育分布显示 76% 的受访者回答需要学士学位、14% 回答需要硕士学位、10% 回答需要学士后证书（页面仅显示这三档比例），本页不把学历直接对应到收入。"
               ],
               [
                 "薪酬或福利或人力资源实务经历",
                 "承担薪酬与福利工作的人",
                 "影响可承担的对标与方案与合规模块范围",
-                "否（为能力条件）",
+                "美国BLS典型相关经验5年或以上；非全球统一年限",
                 "通过实务岗位与项目经历与带教积累",
-                "中",
+                "证据不足：本轮未核具体费用及耗时，按目标机构或岗位核",
                 "实务经历是承担方案工作的基础，但不等于岗位授权与披露权限。"
               ],
               [
                 "专业认证（如 Certified Compensation Professional 与 Retirement Plans Associate 等 19 项）",
                 "希望证明专业能力的人",
                 "作为专业能力证明",
-                "否（认证不等于执业许可或受托人资格）",
+                "非全职业统一；部分雇主偏好或岗位要求",
                 "逐认证核提供机构当期报考/考试/维持条件，不假定19项统一要求培训及经验。",
-                "中",
+                "证据不足：本轮未核具体费用及耗时，按目标机构或岗位核",
                 "该页面提供 19 项全国认证；认证不等于执业许可、雇主任命、计划受托人资格或签字权。"
               ],
               [
@@ -30455,8 +30564,8 @@
                 "所有承担薪酬与福利职责的人员",
                 "决定可执行的方案与报告与披露范围",
                 "是（组织内必备）",
-                "按雇主制度完成培训与授权与考核",
-                "低中",
+                "按实际制度核授权；不假定每岗统一培训考试",
+                "证据不足：本轮未核具体费用及耗时，按目标机构或岗位核",
                 "授权范围与雇主制度绑定，报告与披露与受托相关决策权限须按程序确认。"
               ],
               [
@@ -30465,7 +30574,7 @@
                 "决定计划管理的合法边界与责任",
                 "是（按适用法域与监管要求）",
                 "先核法域、计划范围及实际裁量/资产控制等职能，再确认适用义务；无统一经理备案培训条件。",
-                "高",
+                "证据不足：本轮未核具体费用及耗时，按目标机构或岗位核",
                 "美国ERISA私营福利计划语境下，EBSA按实际管理裁量、计划资产控制等功能判断受托责任，而非仅看经理职称；设立计划等经营决策与实施管理须区分。不将该框架当中国统一资格或备案规定。"
               ],
               [
@@ -30473,13 +30582,17 @@
                 "承担薪酬决策与数据管理的人员",
                 "决定薪酬决策与数据处理与对外提供的合法边界",
                 "是（按适用法域与监管要求）",
-                "按适用要求完成培训与合规审查",
-                "低中",
+                "核实际法域、任务、处理目的与权限；培训及审查安排另按目标组织核",
+                "证据不足：本轮未核具体费用及耗时，按目标机构或岗位核",
                 "相关要求须按适用法规与雇主制度执行，本页不代替具体合规判断。"
               ]
             ]
           },
           "id": "compensation-and-benefits-managers.path.credential-decision.1",
+          "source_refs": [
+            "cb-review-ooh",
+            "editorial"
+          ],
           "title": "资格选择",
           "type": "table"
         },
@@ -30532,7 +30645,7 @@
           ],
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls-projections-2025-2035"
+            "cb-review-bls-projections-2025-2035"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30550,7 +30663,7 @@
           ],
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls-projections-2025-2035"
+            "cb-review-bls-projections-2025-2035"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30565,7 +30678,7 @@
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls-projections-2025-2035"
+            "cb-review-bls-projections-2025-2035"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30583,7 +30696,7 @@
           ],
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls-projections-2025-2035"
+            "cb-review-bls-projections-2025-2035"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30598,7 +30711,7 @@
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.5",
           "source_refs": [
-            "onet-industry"
+            "cb-review-onet-industry"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30613,7 +30726,7 @@
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.6",
           "source_refs": [
-            "bls-projections-2025-2035"
+            "cb-review-bls-projections-2025-2035"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30750,7 +30863,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该职业预计增长 0%，评级为 Little or no change（基本不变）；预测以现有产业结构与薪酬与福利监管环境为假设，含误差，不等于逐年的实际岗位数。"
+              "BLS2025—2035增长1.1%，OOH整数1%；O*NET Slower than average（1%—2%）。预测含假设误差，非逐年实际或AI因果。"
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.11",
@@ -30783,7 +30896,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精确职业口径（11-3111.00，O*NET 页面显示）"
+              "美国SOC11-3111；BLS表1.2现期预测，O*NET现期摘要评级"
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.14",
@@ -31003,10 +31116,21 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少组织整体战略与经营结果与对外关系责任的经验。"
+              "编辑差距核对候选：若尚未承担，需验证组织整体战略与经营结果与对外关系责任的经验。 不由职业名称推定每个人必然缺少。"
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.34",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31018,6 +31142,17 @@
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.35",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31025,10 +31160,21 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较大。首席执行官方向需要覆盖全部职能与经营结果责任。"
+              "转向距离：较大。首席执行官方向需要覆盖全部职能与经营结果责任。 距离为编辑比较，不是转岗成功率；按目标公告核任务、权限及可展示案例。"
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.36",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31036,10 +31182,21 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少行政与后勤与设施与采购与供应商管理的统筹经验。"
+              "编辑差距核对候选：按目标行政岗位验证记录信息、邮件及办公支持流程经验；具体设施采购职责另核，不从本职业名称推定个人缺项。"
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.37",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31051,6 +31208,17 @@
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.38",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31058,10 +31226,21 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。行政服务方向以行政保障与预算执行为主。"
+              "转向距离：中等。行政服务方向以行政保障与预算执行为主。 距离为编辑比较，不是转岗成功率；按目标公告核任务、权限及可展示案例。"
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.39",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31069,10 +31248,21 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少财务规划与报表与资金与内部控制的完整训练与经验。"
+              "编辑差距核对候选：若尚未承担，需验证财务规划与报表与资金与内部控制的完整训练与经验。 不由职业名称推定每个人必然缺少。"
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.40",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31084,6 +31274,17 @@
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.41",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31091,10 +31292,21 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较大。财务经理方向需要财务与会计的系统训练与经验。"
+              "转向距离：较大。财务经理方向需要财务与会计的系统训练与经验。 距离为编辑比较，不是转岗成功率；按目标公告核任务、权限及可展示案例。"
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.42",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31102,10 +31314,21 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少资金运作与会计政策与对外财报与披露合规的经验。"
+              "编辑差距核对候选：若尚未承担，需验证资金运作与会计政策与对外财报与披露合规的经验。 不由职业名称推定每个人必然缺少。"
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.43",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31117,6 +31340,17 @@
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.44",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31124,10 +31358,21 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较大。司库与财务控制方向承担对外财报与披露责任。"
+              "转向距离：较大。司库与财务控制方向承担对外财报与披露责任。 距离为编辑比较，不是转岗成功率；按目标公告核任务、权限及可展示案例。"
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.45",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31135,10 +31380,21 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少招聘与绩效与员工关系与团队管理的全模块经验。"
+              "编辑差距核对候选：若尚未承担，需验证招聘与绩效与员工关系与团队管理的全模块经验。 不由职业名称推定每个人必然缺少。"
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.46",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31150,6 +31406,17 @@
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.47",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31157,10 +31424,21 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较小。人力资源经理方向与本职业在人事政策与数据上高度相通。"
+              "转向距离：较小。人力资源经理方向与本职业在人事政策与数据上高度相通。 距离为编辑比较，不是转岗成功率；按目标公告核任务、权限及可展示案例。"
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.48",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31168,10 +31446,21 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少岗位评估与市场调查与数据建模的手工实操深度。"
+              "编辑差距核对候选：若尚未承担，需验证岗位评估与市场调查与数据建模的手工实操深度。 不由职业名称推定每个人必然缺少。"
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.49",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31183,6 +31472,17 @@
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.50",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31190,10 +31490,21 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较小。专员方向与本职业在数据与岗位评估上相通，但决策与合规终审责任不同。"
+              "转向距离：较小（编辑比较）。薪酬福利岗位分析专员与本职业的专业任务相通；实际决策、签字和终审职责逐岗核，不按专员称谓自动排除。"
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.51",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31201,10 +31512,21 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少人力资源全模块实务与员工关系个案处理经验。"
+              "编辑差距核对候选：若尚未承担，需验证人力资源全模块实务与员工关系个案处理经验。 不由职业名称推定每个人必然缺少。"
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.52",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31216,6 +31538,17 @@
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.53",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31223,10 +31556,21 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。人力资源专员方向更偏事务执行，方案决策空间较小。"
+              "转向距离：中等（编辑比较）。人事专员包含招募筛选安置并可能其他模块；不按专员名称一概限制决策空间。"
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.54",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31234,10 +31578,21 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少面向多家客户的组织诊断与方案设计与项目交付经验。"
+              "编辑差距核对候选：验证组织研究、系统流程设计、工作测量及操作手册能力；目标是内部项目或外部客户另核，不假定全体咨询多客户。"
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.55",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31249,6 +31604,17 @@
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.56",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31256,10 +31622,21 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较大。管理咨询方向以对外项目交付为主，需补足咨询方法与客户管理经验。"
+              "转向距离：较大（编辑比较）。管理分析包含组织研究、系统流程与手册；可内部任职或咨询，按目标岗位核诊断、项目及客户职责。"
             ]
           },
           "id": "compensation-and-benefits-managers.market-signals.market-signal-card.57",
+          "source_refs": [
+            "cb-review-neighbor-0",
+            "cb-review-neighbor-1",
+            "cb-review-neighbor-2",
+            "cb-review-neighbor-3",
+            "cb-review-neighbor-4",
+            "cb-review-neighbor-5",
+            "cb-review-neighbor-6",
+            "cb-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         }
       ]
@@ -31427,7 +31804,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本批补充核查于2026-10-03，原资料日期各自保留。"
+              "本轮九模块原文及来源核查于2026-10-09；旧来源日期保留，新增资料独立登记，不重写范围外共享版本。"
             ]
           },
           "id": "compensation-and-benefits-managers.sources.source-card.3",
@@ -31862,6 +32239,358 @@
                 "publisher": "U.S. Department of Labor",
                 "scope": "contextual",
                 "url": "https://webapps.dol.gov/elaws/ebsa/fiduciary/q4a.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方职业详细资料",
+                  "任务、工作活动与工作情境"
+                ],
+                "evidence_type": "official occupational description",
+                "id": "cb-review-onet-details",
+                "limitation": "支持精确职业身份、22 项任务、工作活动与工作情境；不含具体法域对受托责任与报告与薪酬公平与员工数据保护的规定。",
+                "market": "美国",
+                "name": "O*NET-SOC 11-3111.00 职业详细资料（任务与工作活动）",
+                "period": "2026 年更新页面；检索 2026-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/11-3111.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方职业摘要",
+                  "知识、能力、兴趣代码 ECS 与工作风格"
+                ],
+                "evidence_type": "official occupational description",
+                "id": "cb-review-onet-summary",
+                "limitation": "支持知识33项、能力52项、ECS兴趣与21工作风格Impact；职业指标非个人录用阈值。",
+                "market": "美国",
+                "name": "O*NET11-3111.00详细资料：知识、能力、兴趣与工作风格",
+                "period": "2026 年更新页面；检索 2026-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/11-3111.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方行业分布",
+                  "美国就业行业结构"
+                ],
+                "evidence_type": "official statistics",
+                "id": "cb-review-onet-industry",
+                "limitation": "当前O*NET行业就业构成：公司与企业管理22%、金融保险19%、专业科学技术服务13%、其他46%（包括行政支持服务及教育服务）；是行业就业占比，不是工资或个人机会概率。",
+                "market": "美国",
+                "name": "O*NET-SOC 11-3111.00 行业分布",
+                "period": "当前页面；检索 2026-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/11-3111.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方技术清单",
+                  "17 项软件技能与提及比例"
+                ],
+                "evidence_type": "recruiting keyword statistics",
+                "id": "cb-review-onet-hot-tech",
+                "limitation": "该页面列出 17 项软件技能与提及比例（Excel 18%、Microsoft Office 14%、PowerPoint 13%、Workday 7%、Outlook 4%、Word 3%、Access 1%、SQL 1% 等）；提及比例不等于熟练度或使用率。",
+                "market": "美国",
+                "name": "O*NET 技术清单（11-3111.00 雇主招聘技术关键词与提及比例）",
+                "period": "2025 年全年美国全国招聘信息统计；检索 2026-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/11-3111.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方准备层级与教育分布",
+                  "Job Zone 与教育分布三档"
+                ],
+                "evidence_type": "official occupational description",
+                "id": "cb-review-onet-training",
+                "limitation": "美国O*NET JobZone4，新入职教育需求回答76%学士/14%硕士/10%学士后证书，不是全员学历分布或统一门槛。BLS典型入行学士、相关工作经验5年或以上，OOH说明商科、人力资源或相关领域，常由薪酬福利岗位分析专员起步；人事、财务或管理经历也有帮助。具体公告另核，不把5年设为全球法律要求或让应届生直接保证经理任职。",
+                "market": "美国",
+                "name": "O*NET-SOC 11-3111.00 准备层级与教育分布",
+                "period": "当前页面；检索 2026-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/11-3111.00#JobZone"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方认证信息入口",
+                  "19 项全国认证（认证不等于许可或受托人资格）"
+                ],
+                "evidence_type": "official certification directory",
+                "id": "cb-review-bls-entry",
+                "limitation": "该页面列出 19 项全国认证（Certified Compensation Professional、Certified Sales Compensation Professional、Retirement Plans Associate、Qualified 401(k) Administrator、Certified Employee Benefit Specialist、Global Professional in Human Resources 等）；认证不等于执业许可、雇主任命、计划受托人资格或签字权。",
+                "market": "美国",
+                "name": "O*NET-SOC 11-3111.00 全国认证信息入口",
+                "period": "当前页面；检索 2026-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localcert/11-3111.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方工资分位（精确职业口径）",
+                  "2025 年年薪与时薪分位"
+                ],
+                "evidence_type": "official statistics",
+                "id": "cb-review-bls-pay",
+                "limitation": "OEWS2025年薪10/25/50/75/90分位89,160/113,170/149,230/200,610/256,570美元，时薪42.86/54.41/71.75/96.45/123.35美元。50分位为中位数，on average简写不证明算术均值相等；统计受雇工资薪金、不含自雇业主，分位不是起薪。",
+                "market": "美国",
+                "name": "O*NET 全国工资分位页面（11-3111.00，精确职业口径）",
+                "period": "2025 年工资数据",
+                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/11-3111.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方工作情境字段",
+                  "工作情境百分比分布"
+                ],
+                "evidence_type": "official occupational description",
+                "id": "cb-review-onet-17-3021",
+                "limitation": "支持工作情境的百分比分布（沟通与协作、自主与决策、精确与节奏、责任与影响、人际情境与自动化）；为受访分布，不是个人岗位保证。",
+                "market": "美国",
+                "name": "O*NET-SOC 11-3111.00 工作情境（Work Context 字段）",
+                "period": "当前页面；检索 2026-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/11-3111.00#WorkContext"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方方法说明",
+                  "工资统计覆盖范围与折算口径"
+                ],
+                "evidence_type": "official statistics",
+                "id": "cb-review-bls-oews-methods",
+                "limitation": "支持工资统计的覆盖范围与包含与排除项与标准工作年折算口径；不用于推断个人收入。",
+                "market": "美国",
+                "name": "BLS Occupational Employment and Wage Statistics 方法说明（Handbook of Methods）",
+                "period": "方法说明（非数据期）",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "具体一手资料",
+                  "BLS表1.2职业就业预测（2025—2035）"
+                ],
+                "evidence_type": "official statistics",
+                "id": "cb-review-bls-projections-2025-2035",
+                "limitation": "BLS表1.2（SOC11-3111，2025—2035）就业23.7→24.0千人、发布净增0.3千人、增长1.1%、年均空缺1.6千个；约23,700→24,000人、净增300人与年均1,600空缺不同。OOH整数增长1%及O*NET Slower than average（1%—2%）为显示口径。自雇比例为破折号（不可用），不填0；预测非逐年实际、招聘保证或AI因果。",
+                "market": "美国",
+                "name": "BLS表1.2职业就业预测（2025—2035）",
+                "period": "2025—2035年",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "具体一手资料",
+                  "国家统计局2025年城镇单位工资（表6/7）"
+                ],
+                "evidence_type": "official statistics",
+                "id": "cb-review-nbs-wages-2025",
+                "limitation": "NBS2025规模以上企业中层及以上管理人员年均210,016元、租赁商务行业同宽岗位269,264元；前者跨职业、后者仅匹配该行业规模以上雇主，均非本职业中位数、起薪、月薪或到手。NBS2025、2026-05-15发布：工资税前含个人代扣缴；城镇5人及以上法人单位，管理层两个参考还限规模以上企业。排除个体工商户和自由职业者，以及入股分红、股权激励兑现收益等资本性收益；项目制须核实际人员及工资覆盖，不将项目名称直接判排除或覆盖。 证据不足：本轮未取得中国全国本职业精确工资分布及一一等价职业映射，不等官方从未发布。",
+                "market": "中国大陆",
+                "name": "国家统计局2025年城镇单位工资（表6/7）",
+                "period": "2025年；2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "具体一手资料",
+                  "EBSA受托责任按实际职能判断"
+                ],
+                "evidence_type": "official regulatory guidance",
+                "id": "cb-review-ebsa-fiduciary-functions",
+                "limitation": "美国ERISA私营福利计划语境下，EBSA按实际管理裁量、计划资产控制等功能判断受托责任，而非仅看经理职称；设立计划等经营决策与实施管理须区分。不将该框架当中国统一资格或备案规定。",
+                "market": "美国",
+                "name": "EBSA受托责任按实际职能判断",
+                "period": "本轮2026-10-03核对",
+                "publisher": "U.S. Department of Labor",
+                "scope": "contextual",
+                "url": "https://webapps.dol.gov/elaws/ebsa/fiduciary/q4a.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际原文核查",
+                  "美国本职业教育、经验、认证条件、工时及2025若干行业内工资中位数；行业结构不同层级不可混加。"
+                ],
+                "evidence_type": "official occupational outlook",
+                "id": "cb-review-ooh",
+                "limitation": "美国本职业教育、经验、认证条件、工时及2025若干行业内工资中位数；行业结构不同层级不可混加。",
+                "market": "美国",
+                "name": "BLS Compensation and Benefits Managers",
+                "period": "2025工资及2025—2035预测；2026-08-27更新",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/management/compensation-and-benefits-managers.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际原文核查",
+                  "NLRA覆盖员工的薪资及工作条件讨论权提示；为总法律顾问立场非委员会审定，不以此认定任何具体人员或活动均覆盖。"
+                ],
+                "evidence_type": "official agency guidance",
+                "id": "cb-review-nlrb",
+                "limitation": "NLRA覆盖员工的薪资及工作条件讨论权提示；为总法律顾问立场非委员会审定，不以此认定任何具体人员或活动均覆盖。",
+                "market": "美国",
+                "name": "NLRB总法律顾问：Interference with Employee Rights",
+                "period": "2026-10-09核当前说明页",
+                "publisher": "National Labor Relations Board, Office of the General Counsel",
+                "scope": "contextual",
+                "url": "https://www.nlrb.gov/about-nlrb/rights-we-protect/your-rights/interference-with-employee-rights"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相邻职业定义",
+                  "任务对象比较"
+                ],
+                "evidence_type": "official occupational description",
+                "id": "cb-review-neighbor-0",
+                "limitation": "实际核定义及主要工作对象；不证明统一权限、自动互认或转岗成功率。",
+                "market": "美国",
+                "name": "O*NET邻岗 11-1011.00",
+                "period": "Updated2026当前页",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/11-1011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相邻职业定义",
+                  "任务对象比较"
+                ],
+                "evidence_type": "official occupational description",
+                "id": "cb-review-neighbor-1",
+                "limitation": "实际核定义及主要工作对象；不证明统一权限、自动互认或转岗成功率。",
+                "market": "美国",
+                "name": "O*NET邻岗 11-3012.00",
+                "period": "Updated2026当前页",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/11-3012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相邻职业定义",
+                  "任务对象比较"
+                ],
+                "evidence_type": "official occupational description",
+                "id": "cb-review-neighbor-2",
+                "limitation": "实际核定义及主要工作对象；不证明统一权限、自动互认或转岗成功率。",
+                "market": "美国",
+                "name": "O*NET邻岗 11-3031.00",
+                "period": "Updated2026当前页",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/11-3031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相邻职业定义",
+                  "任务对象比较"
+                ],
+                "evidence_type": "official occupational description",
+                "id": "cb-review-neighbor-3",
+                "limitation": "实际核定义及主要工作对象；不证明统一权限、自动互认或转岗成功率。",
+                "market": "美国",
+                "name": "O*NET邻岗 11-3031.01",
+                "period": "Updated2026当前页",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/11-3031.01"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相邻职业定义",
+                  "任务对象比较"
+                ],
+                "evidence_type": "official occupational description",
+                "id": "cb-review-neighbor-4",
+                "limitation": "实际核定义及主要工作对象；不证明统一权限、自动互认或转岗成功率。",
+                "market": "美国",
+                "name": "O*NET邻岗 11-3121.00",
+                "period": "Updated2026当前页",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/11-3121.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相邻职业定义",
+                  "任务对象比较"
+                ],
+                "evidence_type": "official occupational description",
+                "id": "cb-review-neighbor-5",
+                "limitation": "实际核定义及主要工作对象；不证明统一权限、自动互认或转岗成功率。",
+                "market": "美国",
+                "name": "O*NET邻岗 13-1141.00",
+                "period": "Updated2026当前页",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/13-1141.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相邻职业定义",
+                  "任务对象比较"
+                ],
+                "evidence_type": "official occupational description",
+                "id": "cb-review-neighbor-6",
+                "limitation": "实际核定义及主要工作对象；不证明统一权限、自动互认或转岗成功率。",
+                "market": "美国",
+                "name": "O*NET邻岗 13-1071.00",
+                "period": "Updated2026当前页",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/13-1071.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相邻职业定义",
+                  "任务对象比较"
+                ],
+                "evidence_type": "official occupational description",
+                "id": "cb-review-neighbor-7",
+                "limitation": "实际核定义及主要工作对象；不证明统一权限、自动互认或转岗成功率。",
+                "market": "美国",
+                "name": "O*NET邻岗 13-1111.00",
+                "period": "Updated2026当前页",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/13-1111.00"
               }
             ]
           },
@@ -33198,7 +33927,7 @@
           "copy_key": "career.item.career-path-block",
           "type": "prose"
         },
-        "entry_heading": "应届生／转行者如何验证并入门",
+        "entry_heading": "先验证专员任务，再核经理岗经验与权限",
         "heading": "怎样成为薪酬与福利经理？教育、资格与职业发展路径",
         "locale_requirements": {
           "credential_boundary": {
@@ -33313,6 +34042,18 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$link": "compensation-and-benefits-managers.path.career-path-block.10",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "repair-ooh",
+              "field": "url"
+            },
+            "id": "repair-ooh",
+            "label": "BLS薪酬福利经理典型入行",
+            "scope": "美国典型学士及相关经验；部分岗位认证，非全体雇主统一条件"
           }
         ],
         "tracks": [
@@ -34073,8 +34814,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details",
-              "dol-erisa"
+              "cb-review-onet-details",
+              "cb-review-ebsa-fiduciary-functions",
+              "editorial"
             ],
             "id": "benefits-reporting-fiduciary",
             "mitigation": {
@@ -34105,8 +34847,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details",
-              "dol-erisa"
+              "cb-review-onet-details",
+              "editorial"
             ],
             "id": "pay-equity-structure",
             "mitigation": {
@@ -34137,8 +34879,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "dol-erisa",
-              "onet-context"
+              "cb-review-nlrb",
+              "editorial"
             ],
             "id": "employee-data-privacy",
             "mitigation": {
@@ -34169,8 +34911,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details",
-              "dol-erisa"
+              "cb-review-onet-details",
+              "cb-review-ebsa-fiduciary-functions",
+              "editorial"
             ],
             "id": "vendor-conflict-of-interest",
             "mitigation": {
@@ -34201,8 +34944,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-context",
-              "dol-erisa"
+              "cb-review-onet-details",
+              "editorial"
             ],
             "id": "integration-handover",
             "mitigation": {
@@ -34233,8 +34976,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details",
-              "onet-context"
+              "cb-review-onet-details",
+              "editorial"
             ],
             "id": "communication-trust",
             "mitigation": {
@@ -34722,7 +35465,7 @@
           "fact_refs": [
             "cn-industry-science-tech-2024",
             "cn-industry-manufacturing-2024",
-            "cn-professional-technical-2024",
+            "cb-review-cn-professional-technical-2024",
             "cn-urban-nonprivate-2024"
           ],
           "sources_note": {
@@ -34735,10 +35478,10 @@
             "ai_heading": "AI 会影响薪酬与福利经理的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "官方统计口径与缺失说明",
-            "scenario_caption": "学历背景、岗位方向与说明（编辑整理，不是薪资统计）",
-            "scenario_heading": "不同学历背景对应哪些岗位方向？",
+            "scenario_caption": "准备背景与岗位核对建议（编辑整理，非工资或录用研究）",
+            "scenario_heading": "不同准备背景可核哪些岗位方向？",
             "scenario_interpretation_label": "说明与核对建议",
-            "scenario_role_label": "学历背景",
+            "scenario_role_label": "准备背景",
             "scenario_value_label": "岗位方向"
           },
           "us_growth": {
@@ -34962,7 +35705,7 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "cb-review-us-industry-wage-aerospace-mfg-2025-industry-wage",
             "industry": {
               "$item": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -34983,7 +35726,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "cb-review-us-industry-wage-engineering-services-2025-industry-wage",
             "industry": {
               "$item": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -35004,7 +35747,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "cb-review-us-industry-wage-federal-2025-industry-wage",
             "industry": {
               "$item": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -35025,7 +35768,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "cb-review-us-industry-wage-rd-2025-industry-wage",
             "industry": {
               "$item": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -35046,7 +35789,7 @@
             }
           }
         ],
-        "industry_value_label": "该行业内本职业工资中位数",
+        "industry_value_label": "该行业内本职业2025年工资中位数",
         "interpretation_heading": "美国薪酬与福利经理工资怎么理解？",
         "interpretation_rows": [
           {
@@ -35106,7 +35849,7 @@
         "wage_heading": "美国工资分布",
         "wage_tiers": [
           {
-            "equivalent": "官方折算，非个人月收入",
+            "equivalent": "全国统计分位，非个人月收入或实发待遇",
             "interpretation": {
               "$item": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
@@ -35120,7 +35863,7 @@
             }
           },
           {
-            "equivalent": "非个人月收入",
+            "equivalent": "全国统计分位，非个人月收入或实发待遇",
             "interpretation": {
               "$item": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.52",
               "block": "us-salary",
@@ -35134,7 +35877,7 @@
             }
           },
           {
-            "equivalent": "官方折算，非个人实发工资",
+            "equivalent": "全国统计分位，非个人月收入或实发待遇",
             "interpretation": {
               "$item": "compensation-and-benefits-managers.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
@@ -37042,6 +37785,78 @@
         "source_refs": [
           "onet-localwages"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "NBS2025、2026-05-15发布：工资税前含个人代扣缴；城镇5人及以上法人单位，管理层两个参考还限规模以上企业。排除个体工商户和自由职业者，以及入股分红、股权激励兑现收益等资本性收益；项目制须核实际人员及工资覆盖，不将项目名称直接判排除或覆盖。",
+        "fact_id": "cb-review-cn-professional-technical-2024",
+        "market": "中国大陆",
+        "measure": "NBS2025覆盖及工资排除说明",
+        "occupation_scope": "薪酬与福利经理",
+        "period": "2025年",
+        "source_refs": [
+          "cb-review-nbs-wages-2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "当前O*NET行业就业构成：公司与企业管理22%、金融保险19%、专业科学技术服务13%、其他46%（包括行政支持服务及教育服务）；是行业就业占比，不是工资或个人机会概率。",
+        "fact_id": "cb-review-us-industry-wage-aerospace-mfg-2025",
+        "market": "美国",
+        "measure": "美国行业就业构成，非工资",
+        "occupation_scope": "薪酬与福利经理",
+        "period": "2026-10-09当前页",
+        "source_refs": [
+          "cb-review-onet-industry"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "167,950美元/年（2025，专业、科学与技术服务行业内薪酬与福利经理工资中位数）",
+        "fact_id": "cb-review-us-industry-wage-aerospace-mfg-2025-industry-wage",
+        "market": "美国",
+        "measure": "2025年5月行业内本职业年工资中位数",
+        "occupation_scope": "薪酬与福利经理",
+        "period": "2025年",
+        "source_refs": [
+          "cb-review-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "161,580美元/年（2025，公司与企业管理行业内薪酬与福利经理工资中位数）",
+        "fact_id": "cb-review-us-industry-wage-engineering-services-2025-industry-wage",
+        "market": "美国",
+        "measure": "2025年5月行业内本职业年工资中位数",
+        "occupation_scope": "薪酬与福利经理",
+        "period": "2025年",
+        "source_refs": [
+          "cb-review-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "151,270美元/年（2025，保险承保及相关活动行业内薪酬与福利经理工资中位数）",
+        "fact_id": "cb-review-us-industry-wage-federal-2025-industry-wage",
+        "market": "美国",
+        "measure": "2025年5月行业内本职业年工资中位数",
+        "occupation_scope": "薪酬与福利经理",
+        "period": "2025年",
+        "source_refs": [
+          "cb-review-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "133,360美元/年（2025，医疗保健与社会援助行业内薪酬与福利经理工资中位数）",
+        "fact_id": "cb-review-us-industry-wage-rd-2025-industry-wage",
+        "market": "美国",
+        "measure": "2025年5月行业内本职业年工资中位数",
+        "occupation_scope": "薪酬与福利经理",
+        "period": "2025年",
+        "source_refs": [
+          "cb-review-ooh"
+        ]
       }
     ]
   },
@@ -37050,7 +37865,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "RIASEC · ECS",
@@ -37101,7 +37916,7 @@
       "text": "薪酬与福利经理"
     }
   },
-  "source_content_sha256": "557b41788e2f835b1ea4567f3616b1edf508c94ff8ffc0a505d028e1137a255a",
+  "source_content_sha256": "cefeccf400e7b4987fabffe12a0bed480d4ca0b43b9a45a6692eafd54ea9fd41",
   "subject": {
     "canonical_slug": "compensation-and-benefits-managers",
     "name": "薪酬与福利经理",

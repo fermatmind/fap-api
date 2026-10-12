@@ -7409,7 +7409,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "相邻职责边界：本页只覆盖住宿经理；总经理与运营经理负责机构整体战略与多部门、行政服务经理负责行政支持、餐饮服务经理负责餐饮运营，权限与最终责任不得与本页互换。"
+              "职业范围按住宿机构运营功能界定，而非仅看职称。酒店总经理可能执行本页住宿管理任务；跨行业General and Operations Managers、行政支持或餐饮管理不能整体套入本页。预算、用工和多部门责任由具体机构任用决定。"
             ]
           },
           "id": "lodging-managers.profile.definition-block.10",
@@ -7554,7 +7554,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "物业与收益管理系统可辅助房态管理、价格建议、排班与营收统计，但现场服务协调、投诉处置、团队管理与经营判断仍由住宿经理与员工承担。"
+              "编辑试验候选：以虚构房态、账务与班次资料测试统计整理、排班比较和价格方案草稿；物业或收益系统存在不证明生成式AI采用或收益提升。房态、价格政策、投诉与人员安排由责任人核验。"
             ]
           },
           "id": "lodging-managers.ai-impact.ai-impact-table.2",
@@ -7582,7 +7582,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不同环节受影响不同：房态与价格建议、排班与营收统计更易自动化，但现场服务判断、投诉处置与团队管理仍由人负责。"
+              "编辑任务拆分：上述辅助步骤是待验证候选。本轮未取得各环节自动化难度排序或实际采用效果，现场判断和授权责任由岗位责任人确认。"
             ]
           },
           "id": "lodging-managers.ai-impact.ai-impact-table.4",
@@ -7660,7 +7660,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开职业工资：国家统计局按行业门类发布城镇单位就业人员年平均工资，住宿管理岗位主要计入住宿和餐饮业，行业平均不能替代本职业工资。"
+              "中国大陆工资边界：本轮国家统计局行业资料未建立住宿经理单列对应。住宿餐饮业年平均为相关住宿企业的宽行业代理，不能代表管理岗位中位数。"
             ]
           },
           "fact_refs": [
@@ -7753,7 +7753,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国全国口径下，该职业 2025 年年薪中位数为 69,250 美元（约 33.29 美元/小时），经 O*NET 展示的 2025 年 BLS OEWS 分位为第 10 至第 90 分位 40,070—128,880 美元；O*NET 引用 BLS 数据显示 2024 年就业约 52,000 人、2024—2034 年预计增长约 3%（平均）、2034 年约 53,800 人、年均职位空缺约 5,400 个。"
+              "美国全国2025 OEWS工资分位见下表；工资中位数与小时值按原职业来源分别使用。就业预测另为2025年54,800人、2035年56,900人，2025—2035增长4%，年均空缺5,500个（增长与替补）。"
             ]
           },
           "fact_refs": [
@@ -7773,7 +7773,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资统计位置：以上为美国全国职业工资口径；该职业常按年薪并含奖金或绩效，分位不代表起薪或个人到手收入。"
+              "2025 OEWS美国职业工资分位不是个人到手收入或经营所得；本轮未核实所有岗位按年薪含奖金的说法，薪酬组成按目标合同核验。"
             ]
           },
           "fact_refs": [
@@ -7790,7 +7790,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "怎样理解这些位置：第 10 分位约 40,070 美元、第 90 分位约 128,880 美元，说明同职业内部差异与场所档次、规模与业绩相关；分位不是新手或资深等级。"
+              "第10与90百分位是美国全国该职业工资分布边界，不对应新手或资深等级；分位表不能分解学历、经验、地区或雇主等因素的作用。"
             ]
           },
           "fact_refs": [
@@ -7808,7 +7808,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布与局限：O*NET 显示本职业主要集中于住宿和餐饮服务业（约 73%）；行业分布是雇主场景信号，不是需求预测。"
+              "O*NET2025本职业住宿餐饮行业就业份额70%；这是雇主场景，非工资或未来招聘需求。BLS OOH细行业中位工资另列，不和行业份额拼接。"
             ]
           },
           "fact_refs": [
@@ -7816,7 +7816,8 @@
           ],
           "id": "lodging-managers.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "onet-industry"
+            "onet-industry",
+            "bls-ooh-lodging"
           ],
           "type": "prose"
         },
@@ -7825,7 +7826,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "规模与口径提示：本职业就业规模较小（约 52,000 人）且预计平稳增长，引用时须标明年份、地域与覆盖范围，且分位与增长率不能跨市场拼接。"
+              "2025就业54,800人、2025—2035增长4%。年均空缺5,500包含替补，并非当前在招岗位或每年新增人数；不推导个人机会或AI因果。"
             ]
           },
           "fact_refs": [
@@ -7935,7 +7936,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "大五等通用人格量表不提供本职业的岗位证据，只能用于自我反思；应结合真实排班、营收处理与投诉处置体验继续核对。"
+              "证据不足：本轮未取得住宿经理人格预测效度或量表比较研究。通过虚构超订、账务与排班样本观察沟通、权衡与留记录行为，人格工具只作反思。"
             ]
           },
           "id": "lodging-managers.fit.riasec-fit-block.7",
@@ -8064,7 +8065,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国侧该职业通常属 Job Zone 4（相当准备），多数受访者（约 72%）具备学士学位，并常需数年相关经验与在职训练；具体学历与经验要求按雇主与场所档次核对。"
+              "O*NET教育问题中72%受访者认为新入职者需要学士学位，不是72%在岗人员已经取得学士。JobZone4为准备组别，不构成本职业固定经验年限或统一雇主要求。具体学历、住宿服务经验和管理任用逐岗核验。"
             ]
           },
           "id": "lodging-managers.path.career-path-block.2",
@@ -8078,7 +8079,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国：以学历加前厅或客房等岗位经验晋升为常见路径，相关培训不等于管理授权。中国大陆：无与该 O*NET 精确对应的统一职业资格，岗位多按雇主与住宿机构要求确定，须分别核对。"
+              "美国与中国大陆分别核验住宿机构经营条件、岗位入职要求，以及预算、签约、用工与定价的机构授权。证据不足：本轮未建立本职业与两地完整个人准入要求的对应，不能从职业代码断言中国无统一资格；培训或学历不自动授予管理权限。"
             ]
           },
           "id": "lodging-managers.path.career-path-block.3",
@@ -8148,7 +8149,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "向更高责任过渡：积累经验后可负责更大规模场所或连锁运营、带教新人，或转向区域运营、收益管理与其他服务行业管理方向。"
+              "编辑目标示例：更大场所、区域运营或收益管理须补多部门预算、渠道分析及目标管理任用；餐饮路线另补食品卫生与后厨协同，不是住宿资历自动覆盖。"
             ]
           },
           "id": "lodging-managers.path.career-path-block.8",
@@ -8184,7 +8185,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 O*NET 引用 BLS 数据：该职业 2024 年就业约 52,000 人，2024—2034 年预计增长约 3%（平均），2034 年约 53,800 人，年均职位空缺约 5,400 个；这是职业统计，不是个人录用概率，也不同于招聘样本。"
+              "美国O*NET/BLS：2025就业54,800、2035预计56,900，2025—2035增长4%，年均空缺5,500（增长与替补）。职业预测非当前招聘样本或个人录用概率。"
             ]
           },
           "id": "lodging-managers.market-signals.market-signal-card.2",
@@ -8198,7 +8199,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 显示本职业主要集中于住宿和餐饮服务业（约 73%）；就业与空缺为统计预测，须与个人机会分开解释。"
+              "O*NET2025本职业住宿餐饮行业就业份额70%；这是雇主场景，非工资或未来招聘需求。BLS OOH细行业中位工资另列，不和行业份额拼接。"
             ]
           },
           "id": "lodging-managers.market-signals.market-signal-card.3",
@@ -8226,7 +8227,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：目标雇主的预算与用工权限、收益管理与运营分析能力，或转向区域运营与其他服务行业管理所需的经验与责任证据。"
+              "转跨行业总经理/运营经理需补目标业务模型、多部门预算、人员与绩效责任，以及机构任用授权；住宿营收经验不能自动覆盖其他行业。"
             ]
           },
           "id": "lodging-managers.market-signals.market-signal-card.5",
@@ -8648,6 +8649,21 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "2025住宿经理×细行业中位工资；就业与工作时间边界"
+                ],
+                "evidence_type": "official occupation handbook",
+                "id": "bls-ooh-lodging",
+                "limitation": "不含自雇所得，不建立中国资格对应",
+                "market": "美国",
+                "name": "BLS OOH Lodging Managers",
+                "period": "2025工资、2025—2035预测，2026-10-11查阅",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "美国住宿经理",
+                "url": "https://www.bls.gov/ooh/management/lodging-managers.htm"
               }
             ]
           },
@@ -8836,12 +8852,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "价格建议与统计",
+            "AI主要改变": "编辑待验证候选：价格建议与统计",
             "仍由人负责": "政策执行与账务核对",
             "方向": "房态与营收"
           },
           {
-            "AI主要改变": "排班与记录整理",
+            "AI主要改变": "编辑待验证候选：排班与记录整理",
             "仍由人负责": "投诉处置与团队管理",
             "方向": "服务与团队"
           }
@@ -8875,7 +8891,7 @@
           {
             "使用限制": "不替代所在地授权与机构规程。",
             "来源": {
-              "$source": "onet-context",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -8884,7 +8900,7 @@
             "研究对象": "11-9081.00 的任务与工作情境",
             "结论": "支持任务拆分，不支持 AI 采用率",
             "链接": {
-              "$source": "onet-context",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8901,7 +8917,7 @@
               "item": "lodging-managers.source-register.published.1"
             },
             "研究对象": "美国精确职业就业预测",
-            "结论": "支持规模与增长判断",
+            "结论": "支持2025—2035职业就业预测，不证明AI因果",
             "链接": {
               "$source": "onet-trends",
               "block": "source-register",
@@ -8951,7 +8967,7 @@
             "问题": "AI 会取代住宿经理吗？"
           },
           {
-            "回答": "目前只写到可辅助的房态管理、价格建议与排班统计，现场服务与团队管理仍由人承担。",
+            "回答": "编辑试验候选：以虚构房态、账务与班次资料测试统计整理、排班比较和价格方案草稿；物业或收益系统存在不证明生成式AI采用或收益提升。房态、价格政策、投诉与人员安排由责任人核验。",
             "来源": {
               "$source": "onet-details",
               "block": "source-register",
@@ -8966,10 +8982,10 @@
               "field": "url",
               "item": "lodging-managers.source-register.published.1"
             },
-            "问题": "数字化工具会先影响哪个环节？"
+            "问题": "数字化工具可在哪些步骤做受控试验？"
           },
           {
-            "回答": "没有职业级采用率来源，本页不提供这类数字。",
+            "回答": "证据不足：本轮未取得该职业AI采用率、节省工时或因果就业研究。",
             "来源": {
               "$source": "onet-details",
               "block": "source-register",
@@ -9199,12 +9215,12 @@
       },
       "career_ai_description_block": {
         "body": [
-          "物业与收益管理系统可辅助房态管理、价格建议、排班与营收统计，但现场服务协调、投诉处置、团队管理与经营判断仍由住宿经理与员工承担。"
+          "编辑试验候选：以虚构房态、账务与班次资料测试统计整理、排班比较和价格方案草稿；物业或收益系统存在不证明生成式AI采用或收益提升。房态、价格政策、投诉与人员安排由责任人核验。"
         ],
         "heading": "住宿经理的工作对象与 AI 边界"
       },
       "career_path_block": {
-        "boundary": "资质、培训与管理授权由具体法域、住宿机构与雇主核验；培训完成不等于授权。",
+        "boundary": "三路线为编辑目标比较，非固定晋升序列；预算、用工、签约与经营条件分别核验，培训不等于任用授权。",
         "competence_ladder": [
           {
             "description": "确认房态、账务与政策。",
@@ -9418,35 +9434,35 @@
             "id": "track-2",
             "stages": [
               {
-                "credentials": "按雇主要求核验。",
-                "next_moves": "补足服务标准与培训知识。",
-                "readiness_evidence": "保留排班与质量记录。",
-                "responsibility": "负责一线服务排班与质量。",
-                "role": "服务主管"
+                "credentials": "核目标餐饮卫生培训与雇主任用要求。",
+                "next_moves": "补餐饮成本、菜单与后厨协同知识。",
+                "readiness_evidence": "以班次分工、交付差错与整改记录展示协作。",
+                "responsibility": "协调前厅班次、餐品交付与投诉转接。",
+                "role": "餐饮班次主管"
               },
               {
-                "credentials": "按岗位与雇主要求核验。",
-                "next_moves": "补足预算与团队管理知识。",
-                "readiness_evidence": "保留运营与客户记录。",
-                "responsibility": "负责场所服务运营与客户关系。",
-                "role": "服务经理"
+                "credentials": "核场所经营条件及个人培训、预算和用工权限。",
+                "next_moves": "补库存损耗、供应商与经营分析。",
+                "readiness_evidence": "提供食品卫生检查、采购与人员安排记录。",
+                "responsibility": "在授权内负责服务、排班、采购与餐品流程。",
+                "role": "餐饮服务经理"
               },
               {
-                "credentials": "按机构要求核验。",
-                "next_moves": "补足运营分析与改进知识。",
-                "readiness_evidence": "保留改进与成本记录。",
-                "responsibility": "负责流程改进与成本控制。",
-                "role": "运营骨干"
+                "credentials": "核目标餐饮运营岗位职责及跨店数据权限。",
+                "next_moves": "补跨店标准、供应链和团队协调。",
+                "readiness_evidence": "记录数据口径、成本差异与整改结果。",
+                "responsibility": "比较班次服务、成本与库存损耗并跟踪改进。",
+                "role": "餐饮运营骨干"
               },
               {
-                "credentials": "按机构要求核验。",
-                "next_moves": "补足管理责任证据。",
-                "readiness_evidence": "保留运营与团队记录。",
-                "responsibility": "负责多部门运营管理。",
-                "role": "运营主管"
+                "credentials": "核任用、签约和经营管理范围，不以资历代授权。",
+                "next_moves": "按目标机构需要评估跨店管理，非必经晋升。",
+                "readiness_evidence": "保留预算执行、培训、检查及问题闭环记录。",
+                "responsibility": "在机构授权内管理餐饮团队、成本与服务标准。",
+                "role": "餐饮运营主管"
               }
             ],
-            "title": "转向其他服务行业管理"
+            "title": "转向餐饮服务管理"
           }
         ]
       },
@@ -9599,14 +9615,14 @@
           }
         ],
         "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
-        "evidence_scope": "依据 O*NET 11-9081.00 的任务与工作情境，以及房态与账务、员工排班、设施检查与住客投诉处置中的准确性与服务要求；具体规则按雇主、住宿机构与所在地核对，用工与签约按适用法域确认，不跨范围外推。",
+        "evidence_scope": "基于房态账务、员工排班、设施检查与投诉任务的编辑风险情境；不是事故率、法律义务清单或完整经营规程。具体用工、卫生与设施标准按所在地与机构政策核验。",
         "heading": "住宿经理的工作风险与边界",
         "risks": [
           {
             "affected_roles": "前台与营收管理岗位",
             "consequence": "可能影响经营与合规。",
             "evidence_refs": [
-              "onet-tasks"
+              "lodging-managers.display.source.onet-tasks"
             ],
             "id": "risk-1",
             "mitigation": "按政策核对账务并保留记录，差异未澄清前不结账。",
@@ -9622,7 +9638,7 @@
             "affected_roles": "前台与客房协调岗位",
             "consequence": "可能影响客户体验与收入。",
             "evidence_refs": [
-              "onet-tasks"
+              "lodging-managers.display.source.onet-tasks"
             ],
             "id": "risk-2",
             "mitigation": "按政策协调房态并在授权范围内补偿或升级。",
@@ -9638,7 +9654,7 @@
             "affected_roles": "客户关系与前厅岗位",
             "consequence": "可能升级为冲突并影响口碑。",
             "evidence_refs": [
-              "onet-context"
+              "lodging-managers.display.source.onet-context"
             ],
             "id": "risk-3",
             "mitigation": "保持专业沟通并按政策处置，越界事项及时上报。",
@@ -9654,7 +9670,7 @@
             "affected_roles": "客房与设施检查岗位",
             "consequence": "可能影响住客健康与评价。",
             "evidence_refs": [
-              "onet-context"
+              "lodging-managers.display.source.onet-context"
             ],
             "id": "risk-4",
             "mitigation": "按标准检查并跟踪整改，隐患及时上报。",
@@ -9670,7 +9686,7 @@
             "affected_roles": "团队排班与用工岗位",
             "consequence": "可能引发劳动争议。",
             "evidence_refs": [
-              "onet-details"
+              "lodging-managers.display.source.onet-details"
             ],
             "id": "risk-5",
             "mitigation": "按用工规定排班并保留记录，异常咨询上级。",
@@ -9686,7 +9702,7 @@
             "affected_roles": "营收与前台管理岗位",
             "consequence": "可能导致房价或房态与政策不符。",
             "evidence_refs": [
-              "onet-details"
+              "lodging-managers.display.source.onet-details"
             ],
             "id": "risk-6",
             "mitigation": "以政策、房态与账务核对为准，保留人工判断与记录。",
@@ -9776,7 +9792,7 @@
             {
               "指标": "中国大陆职业工资",
               "数值": "证据不足：未单列",
-              "说明": "国家统计局按行业门类发布，未单列本职业工资。"
+              "说明": "本轮国家统计局行业资料未建立本职业单列对应；不表示所有公开渠道均无数据。"
             },
             {
               "指标": "中国大陆行业代理",
@@ -9863,7 +9879,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国大陆无本职业单列工资；下列为行业代理，不是起薪、中位数或到手收入。",
+          "china_open": "证据不足：本轮未建立本职业单列工资对应；下列行业平均仅作宽口径代理，非职业中位数、起薪或到手收入。",
           "china_ref": {
             "$join": [
               {
@@ -10083,7 +10099,7 @@
           },
           {
             "指标": "就业 · 规模",
-            "数值": "52,000 人（2024）",
+            "数值": "54,800人（2025）",
             "说明": {
               "$join": [
                 {
@@ -10107,7 +10123,7 @@
           },
           {
             "指标": "就业 · 增长",
-            "数值": "约 +3%（2024—2034）",
+            "数值": "4%（2025—2035）",
             "说明": {
               "$join": [
                 {
@@ -10131,7 +10147,7 @@
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "约 5,400 个/年（2024—2034 年均）",
+            "数值": "5,500个/年（2025—2035增长与替补）",
             "说明": {
               "$join": [
                 {
@@ -10154,7 +10170,7 @@
             }
           }
         ],
-        "boundary": "美国全国口径：工资为 BLS 2025 年 OEWS 数据，就业与展望为 2024—2034 年预测；不含个人到手收入、起薪或授权结论。",
+        "boundary": "美国全国：2025 OEWS工资与2025—2035就业预测分别解释，不跨职业/法域拼接，不作为个人报价。",
         "direct_answer": {
           "$item": "lodging-managers.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10163,15 +10179,15 @@
         },
         "factor_rows": [
           {
-            "answer": "多数受访者具备学士学位并需数年经验；相关培训不等于管理授权。",
+            "answer": "72%选择学士是新入职教育需要调查，不能认作在岗学历或所有雇主要求；管理授权另核。",
             "factor": "资格"
           },
           {
-            "answer": "常从前厅或客房岗位晋升；服务与营收管理经验比课程名称更常被参考。",
+            "answer": "编辑建议：展示班次运行、账务复核、投诉与员工协调记录；不比较这些经验与课程的录用效度，具体管理任用另核。",
             "factor": "经验"
           },
           {
-            "answer": "受旅游与商务客流、场所档次影响大，不得跨地区外推。",
+            "answer": "客流、场所和薪酬制度须逐岗核，全国分位未估计各因素收入效应。",
             "factor": "地区"
           }
         ],
@@ -10181,7 +10197,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "约 +3%（平均，2024—2034）",
+        "growth": "4%（2025—2035）",
         "heading": {
           "$item": "lodging-managers.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10194,27 +10210,27 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024",
+        "industry_period": "2025",
         "industry_rows": [
           {
-            "industry": "住宿和餐饮服务业",
-            "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体分位为准。"
+            "industry": "旅行住宿业",
+            "median": "$67,550/年",
+            "note": "BLS OOH2025住宿经理×行业中位工资。"
           },
           {
-            "industry": "其他行业",
-            "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体分位为准。"
+            "industry": "房车公园与休闲营地",
+            "median": "$59,330/年",
+            "note": "BLS OOH2025住宿经理×行业中位工资。"
           },
           {
-            "industry": "行业口径说明一",
-            "median": "见就业行",
-            "note": "以 O*NET/BLS 行业口径为准，不跨职业外推。"
+            "industry": "其他未列细行业",
+            "median": "证据不足",
+            "note": "本轮未取得其他职业×行业工资，整体分位不能代填。"
           },
           {
-            "industry": "行业口径说明二",
-            "median": "见就业行",
-            "note": "受场所档次与规模影响，不得跨地区外推。"
+            "industry": "经营所得边界",
+            "median": "不适用",
+            "note": "OEWS不含自雇经营所得，不用职业工资表示业主利润。"
           }
         ],
         "industry_value_label": "行业值",
@@ -10230,11 +10246,11 @@
             "question": "工资"
           },
           {
-            "answer": "2024 年在岗人数，不是招聘职位数。",
+            "answer": "2025就业人数，不是当前在招职位。",
             "question": "就业"
           },
           {
-            "answer": "2024—2034 预测增长约 3%（平均），不是个人录用概率。",
+            "answer": "2025—2035增长4%；不推导个人录用概率或AI因果。",
             "question": "展望"
           },
           {
@@ -10244,7 +10260,7 @@
         ],
         "median": "$69,250/年（2025）",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "2024—2034",
+        "outlook_period": "2025—2035",
         "wage_column_labels": [
           "分位",
           "年度参考",
@@ -10261,7 +10277,7 @@
           {
             "equivalent": "$19.27/小时",
             "interpretation": "第 10 分位边界，不是个人报价。",
-            "label": "最低 10%",
+            "label": "第10百分位",
             "value": "$40,070/年"
           },
           {
@@ -10273,7 +10289,7 @@
           {
             "equivalent": "$61.96/小时",
             "interpretation": "第 90 分位边界，不是个人报价。",
-            "label": "最高 90%",
+            "label": "第90百分位",
             "value": "$128,880/年"
           }
         ]
@@ -10355,7 +10371,7 @@
         "outlook_evidence": [
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
+            "horizon": "2025—2035",
             "interpretation": "就业规模、增长率与职位空缺必须分别解释。",
             "limitation": "不能作为个人就业保证。",
             "metric": "就业规模与增长",
@@ -10369,12 +10385,12 @@
           },
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
+            "horizon": "2025—2035",
             "interpretation": "含替代与新增需求，不等于在招岗位数。",
             "limitation": "不能作为个人录用概率。",
             "metric": "年均职位空缺",
             "occupation_scope": "O*NET 11-9081.00（美国全国）",
-            "value": "约 5,400 个/年"
+            "value": "5,500个/年（增长与替补）"
           },
           {
             "geography": "美国全国",
@@ -10513,7 +10529,7 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补足管理与营收责任。",
+            "capability_gaps": "补前台预订、住客登记、支付与退款核对、具体PMS系统操作；经理经验不等于已熟悉每家前台流程。",
             "shared_capabilities": "前台与客户服务基础。",
             "target_href": "/zh/career/jobs/hotel-motel-and-resort-desk-clerks",
             "target_slug": "hotel-motel-and-resort-desk-clerks",
@@ -11007,7 +11023,7 @@
             "item": "lodging-managers.source-register.published.1"
           }
         },
-        "note": "来源范围、限制和统计时期按原始证据分别核对。来源使用说明：O*NET 11-9081.00 住宿经理（摘要）：提供 11-9081.00 的职业身份、描述、任务、兴趣代码、教育与相关职业。；摘要与详细档案需合并解释。；O*NET 11-9081.00（详细档案）：提供 11-9081.00 的任务、工作活动、工作情境、技能与工具技术细节。；任务与机构规程存在差异。；O*NET 11-9081.00 任务（Tasks）：提供前台协调、营收与预算、员工排班培训、采购与检查、会议协调与营销等任务清单。；任务样本不代表每个岗位执行全部任务。；O*NET 11-9081.00 工作情境（Work Context）：描述与客户及员工接触、决策频率、时间压力与在岗时长等情境。；美国工作情境不替代中国法规与机构规程。；O*NET 11-9081.00 全国工资（BLS OEWS 展示）：2025 BLS OEWS 分位与中位工资（美国全国）。；分位不是起薪；保留所示时期、人群与单位。；O*NET 11-9081.00 全国就业趋势：11-9081.00 的就业规模与 2024—2034 年预测与年均职位空缺。；预测不是录用保证。；Industries: 11-9081.00：11-9081.00 的行业分布（住宿和餐饮服务业约 73%）。；行业分布是雇主场景信号，不是增长或需求预测。；O*NET 11-9081.00 教育与职业准备：受访者教育水平分布与 Job Zone 4（相当准备）。；教育分布不等于每个雇主的硬性要求。；2025年城镇单位就业人员年平均工资情况：提供城镇非私营与私营单位分行业门类年平均工资，用于核对中国工资公开口径。；行业平均不是职业中位数，且不含个体工商户与自由职业者。；企业薪酬调查信息（2024年）：人力资源和社会保障部企业薪酬调查信息，按职业/岗位分类的薪酬查询入口。；覆盖城镇企业，不含机关事业单位；本页未取得与 11-9081.00 精确对应的条目。；FermatMind 住宿经理任务影响量表：整理可辅助任务与人工控制点，用于任务级 AI 与适配讨论。；编辑量表不等于采用率、裁员、法规或证照证据。；"
+        "note": "当前O*NET11-9081.00工资2025五分位40070/49530/69250/94030/128880；2025—2035就业54800→56900、4%、空缺5500；2025住宿餐饮就业70%。72%学士为新入职教育需要调查，非在岗学位。NBS2025住宿餐饮62461/55123、全国非私营129441为宽行业代理。BLS OOH2025职业细行业工资旅行住宿67550、房车营地休闲营地59330。AI、人格及中国精确职业工资和完整个人准入未取得。原共享source/fact被保护FAQ/hero消费，旧预测行业学历解释未改，冲突留待独立复核。"
       },
       "work_context_block": {
         "$item": "lodging-managers.profile.work-context-block.5",
@@ -11197,7 +11213,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "前台与客房协调",
@@ -11248,7 +11264,7 @@
       "text": "住宿经理职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "a4ebf76376b3d4ba3309284fbb16c9a70820c40bfb4ea30952bd21be45ee6b9a",
+  "source_content_sha256": "c4bdf97c733a4980d043a6e0f601f50843e83cebce9cdb9d1377e0937690efcf",
   "subject": {
     "canonical_slug": "lodging-managers",
     "name": "住宿经理",

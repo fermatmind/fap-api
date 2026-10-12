@@ -13232,7 +13232,8 @@
           },
           "id": "medical-transcriptionists.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-trends"
+            "onet-wages",
+            "bls-current"
           ],
           "type": "prose"
         },
@@ -14081,8 +14082,8 @@
         "authority_links": [
           {
             "来源": "ILO2025职业暴露指数",
-            "类型": "职业任务、招聘软件或官方研究统计",
-            "适用范围": "按31-9094与标注年份使用；非生成式AI采用/裁员实测",
+            "类型": "国际组织任务暴露研究",
+            "适用范围": "全球职业任务暴露背景；本页未提供31-9094专属暴露比例，不代表采用率或裁员率",
             "链接": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
           },
           {
@@ -14140,7 +14141,7 @@
             "方向": "记录交接"
           }
         ],
-        "evidence_intro": "职责、招聘软件提及、总体就业预测分开；未提供生成式AI采用率或因果裁员率。",
+        "evidence_intro": "职责、招聘软件提及、总体就业预测分开。证据不足：未取得本职业生成式AI机构采用率或因果裁员率。",
         "evidence_rows": [
           {
             "使用限制": "本轮沿用已读摘要概览，未给本职业百分比",
@@ -15911,7 +15912,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "医学转录与编辑",
@@ -15962,7 +15963,7 @@
       "text": "医疗文书转录员：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "2ad564d3907cff1420717a3e784e29095496f5222ea07924a05b7fdba0e90236",
+  "source_content_sha256": "68856d8bacc5440695139ffb8438eeb6678a43a1348b38ac522c9149391e87e5",
   "subject": {
     "canonical_slug": "medical-transcriptionists",
     "name": "医疗文书转录员",

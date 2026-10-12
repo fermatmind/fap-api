@@ -12805,7 +12805,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更强证据是受监督工作样本、原始记录和反馈；兴趣测评不能证明诊断、处方、手术、知情同意和并发症处置责任能力。"
+              "能力判断可观察受监督的诊疗记录、临床交接及随访反馈；兴趣仅探索，不替代医师执照、培训与机构授权。"
             ]
           },
           "id": "ophthalmologists-except-pediatric.fit.riasec-fit-block.7",
@@ -13625,7 +13625,7 @@
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "29-1241.00 - Ophthalmologists, Except Pediatric",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "O*NET 2026 occupational profile; checked 2026-10-12",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/29-1241.00"
@@ -13966,7 +13966,7 @@
             "链接": "https://www.onetonline.org/link/details/29-1241.00"
           }
         ],
-        "difference_intro": "资料汇总可加快；诊断、处方、手术、知情同意和并发症处置责任需要人的检查。",
+        "difference_intro": "影像提示、记录整理与排程为编辑试用建议；医生核适应证、眼别、用药、手术与异常，未取得单项提效或替代实测。",
         "difference_rows": [
           {
             "AI主要改变": "辅助归纳记录与候选",
@@ -14220,8 +14220,8 @@
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
-            "label": "教育与资格",
-            "scope": "美国29-1241.00精确职业"
+            "label": "BLS美国典型教育与住院训练",
+            "scope": "美国29-1241为博士或专业学位及住院训练；医师州执照须另核。专科认证与执照不同，机构手术权限不能由该统计表授予。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1241.00",
@@ -14536,16 +14536,28 @@
         "risks": [
           {
             "affected_roles": {
-              "$item": "ophthalmologists-except-pediatric.risk.career-risk-cards.4",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "接诊医师、患者和参与会诊的团队。诊疗背景：",
+                {
+                  "$item": "ophthalmologists-except-pediatric.risk.career-risk-cards.4",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "consequence": {
-              "$item": "ophthalmologists-except-pediatric.risk.career-risk-cards.5",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "可能延误眼病识别和处理。升级边界：",
+                {
+                  "$item": "ophthalmologists-except-pediatric.risk.career-risk-cards.5",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "evidence_refs": [
               "onet",
@@ -14557,11 +14569,11 @@
             "title": "诊断延误"
           },
           {
-            "affected_roles": "眼科医师工作需围绕眼科医师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "眼科医师工作需围绕眼科医师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "眼科医师、患者及手术团队。",
+            "consequence": "可能出现手术相关伤害或并发症。",
             "evidence_refs": [
               "onet",
-              "privacy"
+              "onet"
             ],
             "id": "record-version",
             "mitigation": "知情同意与团队核查。",
@@ -14569,11 +14581,11 @@
             "title": "手术并发症"
           },
           {
-            "affected_roles": "眼科医师工作需围绕眼科医师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "眼科医师工作需围绕眼科医师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "眼科医师、患者和参与核对的团队。",
+            "consequence": "可能对错误眼别实施治疗或手术。",
             "evidence_refs": [
-              "privacy",
-              "privacy"
+              "onet",
+              "onet"
             ],
             "id": "personal-data",
             "mitigation": "身份眼别手术部位多重核对。",
@@ -14581,8 +14593,8 @@
             "title": "左右眼错误"
           },
           {
-            "affected_roles": "眼科医师工作需围绕眼科医师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "眼科医师工作需围绕眼科医师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "处方医师、患者及药学协作人员。",
+            "consequence": "可能发生眼部或全身药物不良事件。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14593,11 +14605,11 @@
             "title": "用药不当"
           },
           {
-            "affected_roles": "眼科医师工作需围绕眼科医师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "眼科医师工作需围绕眼科医师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "医师、患者及器械感染管理团队。",
+            "consequence": "可能增加治疗或术后感染风险。",
             "evidence_refs": [
-              "bls",
-              "bls"
+              "onet",
+              "onet"
             ],
             "id": "single-coverage",
             "mitigation": "执行无菌流程。",
@@ -14605,8 +14617,8 @@
             "title": "感染控制"
           },
           {
-            "affected_roles": "眼科医师工作需围绕眼科医师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "眼科医师工作需围绕眼科医师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "患者、眼科医师及随访协作团队。",
+            "consequence": "可能延误发现病情变化或术后异常。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14623,31 +14635,31 @@
             "href": "https://www.onetonline.org/link/details/29-1241.00",
             "id": "onet",
             "label": "任务",
-            "scope": "美国29-1241.00精确职业"
+            "scope": "O*NET支持29-1241.00诊疗、手术和随访任务；风险为编辑提示，非临床指南、阈值、发生率或具体法域授权。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
             "label": "资格",
-            "scope": "美国29-1241.00精确职业"
+            "scope": "O*NET支持29-1241.00诊疗、手术和随访任务；风险为编辑提示，非临床指南、阈值、发生率或具体法域授权。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1241.00",
             "id": "facilities",
             "label": "工作环境",
-            "scope": "美国29-1241.00精确职业"
+            "scope": "O*NET支持29-1241.00诊疗、手术和随访任务；风险为编辑提示，非临床指南、阈值、发生率或具体法域授权。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "privacy",
             "label": "就业资料",
-            "scope": "美国29-1241.00精确职业"
+            "scope": "O*NET支持29-1241.00诊疗、手术和随访任务；风险为编辑提示，非临床指南、阈值、发生率或具体法域授权。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-1241.00",
             "id": "onet",
             "label": "职业活动",
-            "scope": "美国29-1241.00精确职业"
+            "scope": "O*NET支持29-1241.00诊疗、手术和随访任务；风险为编辑提示，非临床指南、阈值、发生率或具体法域授权。"
           }
         ]
       },
@@ -14786,32 +14798,32 @@
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "BLS精确职业统计｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET职业任务｜https://www.onetonline.org/link/details/29-1241.00",
+        "authority_sources": "BLS精确职业统计｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET转载BLS2025工资分位｜https://www.onetonline.org/link/localwages/29-1241.00；O*NET职业任务｜https://www.onetonline.org/link/details/29-1241.00",
         "bls_table": [
           {
             "指标": "薪资第10百分位",
-            "数值": "未单列",
-            "说明": "无精确分位则保持缺口。"
+            "数值": "$100,180",
+            "说明": "O*NET转载BLS2025美国29-1241工资分布；非起薪、个人合同或自营诊所利润。"
           },
           {
             "指标": "薪资第25百分位",
-            "数值": "未单列",
-            "说明": "无精确分位则保持缺口。"
+            "数值": "$173,650",
+            "说明": "O*NET转载BLS2025美国29-1241工资分布；非起薪、个人合同或自营诊所利润。"
           },
           {
             "指标": "薪资中位数",
             "数值": "$300,080",
-            "说明": "2025美国29-1241精确中位年薪，非起薪个人合同。"
+            "说明": "O*NET转载BLS2025美国29-1241工资分布；非起薪、个人合同或自营诊所利润。"
           },
           {
             "指标": "薪资第75百分位",
-            "数值": "未单列",
-            "说明": "无精确分位则保持缺口。"
+            "数值": "$421,530",
+            "说明": "O*NET转载BLS2025美国29-1241工资分布；非起薪、个人合同或自营诊所利润。"
           },
           {
             "指标": "薪资第90百分位",
-            "数值": "未单列",
-            "说明": "无精确分位则保持缺口。"
+            "数值": "$489,710",
+            "说明": "O*NET转载BLS2025美国29-1241工资分布；非起薪、个人合同或自营诊所利润。"
           },
           {
             "指标": "就业人数",
@@ -14883,7 +14895,7 @@
             "note": "精确职业行业分位在本页未单列。"
           }
         ],
-        "industry_value_label": "年薪中位数（美元）",
+        "industry_value_label": "单项行业工资数据状态",
         "interpretation_heading": "如何解读",
         "interpretation_rows": [
           {
@@ -14950,8 +14962,8 @@
               ],
               "separator": "；"
             },
-            "label": "低工资分位",
-            "value": "未单列"
+            "label": "第10百分位",
+            "value": "$100,180"
           },
           {
             "equivalent": "不换算中国月薪",
@@ -14984,8 +14996,8 @@
               ],
               "separator": "；"
             },
-            "label": "高工资分位",
-            "value": "未单列"
+            "label": "第90百分位",
+            "value": "$489,710"
           }
         ]
       },
@@ -15053,30 +15065,39 @@
         "heading": "美国29-1241.00就业展望",
         "outlook_evidence": [
           {
-            "geography": {
-              "$item": "ophthalmologists-except-pediatric.market-signals.market-signal-card.2",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "horizon": {
-              "$item": "ophthalmologists-except-pediatric.market-signals.market-signal-card.3",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "geography": "美国",
+            "horizon": "2025基期",
             "interpretation": {
-              "$item": "ophthalmologists-except-pediatric.market-signals.market-signal-card.4",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
+              "$join": [
+                "就业及其他背景分开解读：",
+                {
+                  "$item": "ophthalmologists-except-pediatric.market-signals.market-signal-card.2",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "ophthalmologists-except-pediatric.market-signals.market-signal-card.3",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "ophthalmologists-except-pediatric.market-signals.market-signal-card.4",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "ophthalmologists-except-pediatric.market-signals.market-signal-card.5",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
-            "limitation": {
-              "$item": "ophthalmologists-except-pediatric.market-signals.market-signal-card.5",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "limitation": "29-1241非儿科眼科医师单项在岗规模；非当前招聘、AI归因或中国需求。",
             "metric": "2025在岗",
             "occupation_scope": "美国29-1241.00",
             "source_id": "bls",
@@ -15221,7 +15242,7 @@
           },
           {
             "alternate_value": null,
-            "label": "知识",
+            "label": "任务相关知识（编辑归纳）",
             "secondary_value": null,
             "value": "眼病病理、药物、手术、视觉系统、医学伦理与患者安全"
           },
@@ -15244,7 +15265,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
+            "cta_label": "查看霍兰德兴趣测评",
             "evidence_level": {
               "$item": "ophthalmologists-except-pediatric.fit.personality-fit-block.8",
               "block": "fit",
@@ -15263,10 +15284,10 @@
             "watchout": "兴趣测评不证明诊断、处方、手术、知情同意和并发症处置责任能力或资格。"
           },
           {
-            "answer": "眼科医师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "核检查、病史、眼别与治疗计划，观察是否发现冲突并向合格导师升级。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "眼科医师工作需围绕眼科医师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "big-five",
             "label": "细节能力",
             "question": "做眼科医师需要怎样的能力与工作方式？",
@@ -15279,10 +15300,10 @@
             "watchout": "兴趣测评不证明诊断、处方、手术、知情同意和并发症处置责任能力或资格。"
           },
           {
-            "answer": "眼科医师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "面对急症、手术和不确定性，观察能否核证据、沟通风险并及时会诊。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "眼科医师工作需围绕眼科医师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "mbti",
             "label": "风险处理",
             "question": "做眼科医师需要怎样的能力与工作方式？",
@@ -15295,10 +15316,10 @@
             "watchout": "兴趣测评不证明诊断、处方、手术、知情同意和并发症处置责任能力或资格。"
           },
           {
-            "answer": "眼科医师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较诊疗、手术、长期随访与教学是否符合工作价值。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "眼科医师工作需围绕眼科医师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "enneagram",
             "label": "工作价值",
             "question": "做眼科医师需要怎样的能力与工作方式？",
@@ -15311,10 +15332,10 @@
             "watchout": "兴趣测评不证明诊断、处方、手术、知情同意和并发症处置责任能力或资格。"
           },
           {
-            "answer": "眼科医师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "核精细操作、临床判断、患者沟通和轮班是否适合。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "眼科医师工作需围绕眼科医师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "iq",
             "label": "场景偏好",
             "question": "做眼科医师需要怎样的能力与工作方式？",
@@ -15327,10 +15348,10 @@
             "watchout": "兴趣测评不证明诊断、处方、手术、知情同意和并发症处置责任能力或资格。"
           },
           {
-            "answer": "眼科医师可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "按既有虚构病例练记录与交接；练习不授诊断处方手术权限。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "眼科医师工作需围绕眼科医师围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "eq",
             "label": "虚构案例",
             "question": "做眼科医师需要怎样的能力与工作方式？",
@@ -15550,8 +15571,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "BLS 29-1241.00 2025—2035精确职业统计；O*NET任务；国家统计局中国工资缺口。",
-          "updated_at": "2026-09-26核官方职业任务与当前统计。"
+          "source": "O*NET精确任务及BLS2025单项工资分位；BLS2025—2035单项预测；NBS卫生社会工作宽行业背景。",
+          "updated_at": "2026-10-12"
         },
         "note": "证据只支持眼科医师在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -15563,7 +15584,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "职业任务"
+            "label": "MBTI测评（英文）"
           },
           {
             "href": {
@@ -15573,7 +15594,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "工资就业"
+            "label": "大五人格测评（英文）"
           },
           {
             "href": {
@@ -15583,7 +15604,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "资格或规则"
+            "label": "MBTI测评（中文）"
           },
           {
             "href": {
@@ -15593,7 +15614,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "统计边界"
+            "label": "大五人格测评（中文）"
           }
         ]
       },
@@ -15801,7 +15822,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "非儿科眼科医生 · O*NET 29-1241.00",
@@ -15852,7 +15873,7 @@
       "text": "非儿科眼科医生：工作、工资与入行路径"
     }
   },
-  "source_content_sha256": "413d9204112b941d684bf7415a6e7dba80f30610f1169bba8ed4db5d1144287e",
+  "source_content_sha256": "8338872ebe81bb93f76df7e2fa207652cca7b39047261a35e1e5062d33b6ddc8",
   "subject": {
     "canonical_slug": "ophthalmologists-except-pediatric",
     "name": "非儿科眼科医生",

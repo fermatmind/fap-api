@@ -9052,18 +9052,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.03.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            2,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.03.mitigation": {
         "ref": {
@@ -11163,28 +11153,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.authority_sources.sources.02.href": {
-        "ref": {
-          "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.8",
-          "parts": [
-            [
-              "；",
-              1,
-              3
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.authority_sources.sources.02.label": {
         "ref": {
@@ -11211,28 +11181,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.authority_sources.sources.03.href": {
-        "ref": {
-          "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.8",
-          "parts": [
-            [
-              "；",
-              2,
-              3
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.authority_sources.sources.03.label": {
         "ref": {
@@ -22896,28 +22846,8 @@
         "status": "unfilled"
       },
       "work_context_block.01.description": {
-        "ref": {
-          "id": "animal-breeders.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              0,
-              9
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "work_context_block.01.label": {
         "ref": {
@@ -23467,8 +23397,7 @@
           },
           "id": "animal-breeders.profile.responsibilities-block.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "list"
         },
@@ -23477,13 +23406,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜70% 每天在户外暴露于各种天气，14% 每周至少一次，13% 从不（O*NET 45-2021.00 受访比例）。\n工作周与日程｜47% 工作周超过 40 小时、52% 少于 40 小时；72% 为规律固定日程、14% 季节性、14% 不规律。\n体力与姿势｜38% 超过一半时间站立、22% 约一半时间；17% 持续或几乎持续行走、32% 约一半时间；69% 少于一半时间坐着；35% 持续或几乎持续重复动作、31% 少于一半时间；14% 持续弯腰扭转、32% 约一半时间。\n暴露与防护｜34% 每天暴露于污染物、20% 每周至少一次、33% 从不；30% 每天暴露于轻微烧伤、割伤、咬伤或蜇伤、31% 从不；13% 每天暴露于疾病或感染、27% 每年至少一次、46% 从不；73% 从不暴露于危险设备；35% 每天穿戴普通防护或安全装备、25% 从不；99% 从不穿戴专业防护装备。\n精确性与错误后果｜19% 认为精确或准确极其重要、26% 认为非常重要、32% 认为重要；58% 认为错误后果极其严重、13% 认为严重、22% 认为完全不严重。\n决策与自主｜94% 拥有很大决策自由度；80% 对决定任务与优先级有较大自由；31% 从不作决定（页面仅显示该选项）。\n沟通与协作｜29% 持续与他人接触、13% 大部分时间、20% 约一半时间、38% 偶尔；27% 每天有面对面讨论、37% 每年至少一次但非每月；18% 认为团队合作极其重要、28% 认为非常重要、35% 认为完全不重要；67% 认为协调或领导他人完全不重要。\n时间压力与节奏｜15% 每天面对时间压力、24% 每周至少一次、48% 从不；82% 认为节奏由设备速度决定完全不重要。\n身体接近与重复任务｜50% 不与他人近距离工作（超过 100 英尺）、33% 为中等接近（一臂距离）；13% 认为重复相同任务非常重要、37% 认为重要、35% 认为完全不重要。"
+              "美国O*NET受访工作情境；群体回答不能外推中国、个人排班或事故概率。\n工作环境｜70% 每天在户外暴露于各种天气，14% 每周至少一次但非每日，13% 从不（O*NET 45-2021.00 受访比例）。\n工作周与日程｜47% 工作周超过 40 小时、52% 少于 40 小时；72% 为规律固定日程、14% 季节性、14% 不规律。\n体力与姿势｜38% 超过一半时间站立、22% 约一半时间；17% 持续或几乎持续行走、32% 约一半时间；69% 少于一半时间坐着；35% 持续或几乎持续重复动作、31% 少于一半时间；14% 持续弯腰扭转、32% 约一半时间。\n暴露与防护｜34% 每天暴露于污染物、20% 每周至少一次但非每日、33% 从不；30% 每天暴露于轻微烧伤、割伤、咬伤或蜇伤、31% 从不；13% 每天暴露于疾病或感染、27% 每年至少一次但非每月、46% 从不；73% 从不暴露于危险设备；35% 每天穿戴普通防护或安全装备、25% 从不；99% 从不穿戴专业防护装备。\n精确性与错误后果｜19% 认为精确或准确极其重要、26% 认为非常重要、32% 认为重要；58% 认为错误后果极其严重、13% 认为严重、22% 认为完全不严重。\n决策与自主｜94% 拥有很大决策自由度；80% 对决定任务与优先级有较大自由；31%在“作出影响他人、资源或机构形象的决定频率”题选择从不（页面仅显示该选项），不等于从不作任何繁育判断。\n沟通与协作｜29% 持续与他人接触、13% 大部分时间、20% 约一半时间、38% 偶尔；27% 每天有面对面讨论、37% 每年至少一次但非每月；18% 认为团队合作极其重要、28% 认为非常重要、35% 认为完全不重要；67% 认为协调或领导他人完全不重要。\n时间压力与节奏｜15% 每天面对时间压力、24% 每周至少一次但非每日、48% 从不；82% 认为节奏由设备速度决定完全不重要。\n身体接近与重复任务｜50% 不与他人近距离工作（超过 100 英尺）、33% 为中等接近（一臂距离）；13% 认为重复相同任务非常重要、37% 认为重要、35% 认为完全不重要。"
             ]
           },
           "id": "animal-breeders.profile.work-context-block.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -23507,13 +23435,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET显示BLS May2025本职业工资中位51,130美元、时薪24.58；10/25/75/90分位38,480/44,320/62,080/90,550。当前就业预测另见BLS EP 2025—2035明细，不用ONET旧2024口径。86%受访者报高中文凭/同等学历、6%高中后证书、4%部分大学无学位，非中国统一学历门槛。"
+              "O*NET当前页列2025工资中位51,130美元、时薪24.58；本轮同职业官方姊妹站全国表核10/25/75/90分位38,480/44,320/62,080/90,550。当前就业为2025、预测2025—2035，精确值直接核BLS EP。受访学历86%高中/同等、6%高中后证书、4%部分大学无学位，不是中国统一学历门槛。"
             ]
           },
           "id": "animal-breeders.profile.onet-structured-fields-block.2",
           "source_refs": [
             "onet",
-            "oews",
+            "mynextmove-wages",
             "ep"
           ],
           "type": "prose"
@@ -23543,7 +23471,7 @@
           },
           "id": "animal-breeders.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23566,7 +23494,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS EP动物繁育员45-2021明细：2025年6,900人，2035年7,100人，官方净增200；2025—2035增长3.0%（OOH取整3%），年均1,000个空缺含增长与替代需求。ONET展示旧2024—2034；中国全国本职业预测见前景区证据不足标记，美国数字不外推中国、不保证个人就业，增长也不能归因AI或未经测量的产业变化。"
+              "BLS EP动物繁育员45-2021：2025年6,900人、2035年7,100人，净增200；2025—2035增长3.0%（OOH取整3%）、年均1,000个空缺。当前O*NET也列2025—2035；空缺含增长与替代需求，不保证个人就业、不外推中国、不估计AI因果。中国全国预测缺口见前景区。"
             ]
           },
           "id": "animal-breeders.profile.onet-structured-fields-block.4",
@@ -23711,8 +23639,9 @@
           },
           "id": "animal-breeders.profile.definition-block.11",
           "source_refs": [
-            "onet",
+            "operations",
             "cnlaw",
+            "cnlicense",
             "cnvet"
           ],
           "type": "prose"
@@ -24557,10 +24486,10 @@
                 "url": "https://www.onetonline.org/link/details/45-2021.00"
               },
               {
-                "entity": "O*NET 展示的 BLS 2025 年 5 月工资分位（45-2021.00，动物繁育员专属）",
+                "entity": "O*NET姊妹站展示BLS 2025年动物繁育员全国工资分位（取United States行）",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/45-2021.00"
+                "url": "https://www.mynextmove.org/vets/profile/wages/45-2021.00?p=hourly&s=KY"
               },
               {
                 "entity": "BLS 职业就业与工资统计（OEWS）：45-2021",
@@ -24593,10 +24522,10 @@
                 "url": "https://www.onetonline.org/link/details/45-2021.00"
               },
               {
-                "entity": "O*NET展示BLS May2025工资分位",
+                "entity": "O*NET姊妹站展示BLS 2025年动物繁育员全国工资分位（取United States行）",
                 "id": "link-9",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/45-2021.00"
+                "url": "https://www.mynextmove.org/vets/profile/wages/45-2021.00?p=hourly&s=KY"
               },
               {
                 "entity": "O*NET 45-2021.00 职业说明（任务清单）",
@@ -24623,10 +24552,10 @@
                 "url": "https://www.onetonline.org/link/localwages/45-2021.00"
               },
               {
-                "entity": "O*NET 45-2021.00 工作情境与任务数据",
+                "entity": "O*NET姊妹站展示BLS 2025年动物繁育员全国工资分位（取United States行）",
                 "id": "link-14",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/45-2021.00"
+                "url": "https://www.mynextmove.org/vets/profile/wages/45-2021.00?p=hourly&s=KY"
               },
               {
                 "entity": "BLS OOH本职业教育、训练与部分州许可",
@@ -24641,16 +24570,16 @@
                 "url": "https://www.onetonline.org/link/summary/45-2021.00"
               },
               {
-                "entity": "O*NET任务（中国兽医权限另见cnvet）",
+                "entity": "执业兽医和乡村兽医管理办法：权限、备案与监督",
                 "id": "link-17",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/45-2021.00"
+                "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408942.htm"
               },
               {
-                "entity": "BLS行业表入口（就业另见ep）",
+                "entity": "BLS EP 2025—2035动物繁育员详细职业预测",
                 "id": "link-18",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/oes/2025/may/oessrci.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 45-2021.00 职业摘要（概况）",
@@ -24753,13 +24682,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在引入繁育管理与监测系统时，明确人机分工、记录与档案责任，确保生产经营档案与繁育记录连续、完整、真实并可追溯（依法至少保存两年），并保留繁育员对现场判断与操作的主导地位。"
+              "编辑流程建议：引入记录或监测系统前核机构授权、人机分工和复核责任。适用2025种畜禽许可办法的主体须建立连续、完整、真实、可追溯的生产经营档案并至少保存两年；其他动物及档案期限另核。现场操作与诊疗分别按本人训练、合法权限及机构程序确认。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.15",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "cnlicense"
           ],
           "type": "prose"
         },
@@ -24876,7 +24805,7 @@
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.23",
           "source_refs": [
-            "oews"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -24890,7 +24819,7 @@
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.24",
           "source_refs": [
-            "oews"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -25002,7 +24931,7 @@
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.32",
           "source_refs": [
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -25016,7 +24945,7 @@
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "editor"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -25025,13 +24954,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "个体识别、生产性能数据采集与档案管理可自动化处理。"
+              "编辑可能用途：整理个体识别与生产性能记录；本轮未核自动采集设备、AI采用率或效果，不据软件条目证明自动化部署。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25055,13 +24983,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "系谱与健康记录管理可自动化处理。"
+              "编辑可能用途：整理系谱及既有健康记录；本轮未核自动化效果，记录缺口与真实性仍需人工核查。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25085,13 +25012,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "精液质量检测数据记录与稀释计算可辅助。"
+              "编辑可能用途：整理既有精液检测数据；本轮未核检测或稀释计算工具的效果与批准用途，实际操作须按岗位训练和适用规程。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25191,7 +25117,7 @@
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.45",
           "source_refs": [
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -25205,7 +25131,7 @@
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.46",
           "source_refs": [
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -25219,7 +25145,7 @@
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.47",
           "source_refs": [
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -25331,7 +25257,7 @@
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25345,8 +25271,7 @@
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25402,10 +25327,7 @@
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "ep",
-            "cnlaw",
-            "cnlicense",
-            "cnvet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25414,13 +25336,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术层面，个体识别与耳标或传感器数据采集、繁育与生产档案管理、精液质量检测数据整理与选配方案辅助计算、饲喂与环控设备的部分自动化可被采用，输出可用于辅助记录与提示。这些结果仍需结合现场动物观察与操作确认后才能用于繁育决定。"
+              "编辑可能用途包括个体与繁育记录整理、既有检测数据汇总和候选资料比较。O*NET支持相应任务及软件条目，本页未核具体设备或AI系统的部署、效果和批准用途；这些建议不能代替现场观察、合法授权或技术规程。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.61",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25494,8 +25415,7 @@
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.66",
           "source_refs": [
-            "oews",
-            "nbs"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -25509,8 +25429,7 @@
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet",
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -25585,7 +25504,7 @@
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet",
+            "operations",
             "cnvet",
             "cnclinic"
           ],
@@ -25596,12 +25515,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET美国任务；中国实际诊疗权限另见cnvet/cnclinic登记"
+              "《执业兽医和乡村兽医管理办法》用于中国兽医角色、备案、诊疗及监督边界；美国任务另见O*NET。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.73",
           "source_refs": [
-            "onet",
+            "operations",
             "cnvet",
             "cnclinic"
           ],
@@ -25617,8 +25536,7 @@
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25691,10 +25609,9 @@
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.79",
           "source_refs": [
-            "editor",
-            "cnlaw",
-            "cnlicense",
-            "cnvet"
+            "operations",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -25753,8 +25670,8 @@
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.83",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "cnlicense"
           ],
           "type": "prose"
         },
@@ -25763,13 +25680,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "被动物咬伤、踢伤或蜇伤以及疫病传播会造成人身伤害与群体损失。"
+              "编辑风险识别：接触动物、污染物及疾病或感染需要核作业安全与报告程序；O*NET受访暴露描述不估计伤害、疫病或群体损失概率。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.84",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25778,13 +25694,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按生物安全要求操作并使用防护用品，发现疫病征兆立即隔离、报告并联系兽医。"
+              "先核机构适用的生物安全、防护与异常报告程序；发现疑似染疫动物按适用法规及时报告并采取相应控制措施，具体处置由具备权限者依既定程序执行。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.85",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -25793,13 +25710,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "圈舍消毒、隔离与免疫不到位会导致疫病暴发并影响整个群体。"
+              "编辑风险识别：清洁、防疫与异常报告程序需核查；本页没有疫病暴发概率或防疫效果估计，不用美国任务表证明中国免疫权限。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.86",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25808,13 +25724,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按规程执行清洁消毒、隔离与免疫并按档案要求记录。"
+              "核岗位已批准的清洁、防疫、免疫及记录程序，区分本人训练、兽医权限和机构条件；本页不提供操作方法、药品用法或处置阈值。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.87",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -25823,12 +25740,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "操作不规范会影响受胎率与精液质量并造成繁殖损失。"
+              "编辑风险识别：繁育与精液资料、操作和记录需核岗位质量要求；本页没有受胎率、精液质量或操作失误的因果估计。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.88",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25837,13 +25754,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按技术规程采集与处理精液、判读质量并按标准实施配种与记录。"
+              "核适用繁育技术规程、监督训练、质量检查与岗位授权；实际采集、处理、检测和配种仅在本人能力与合法授权内执行，本页不提供操作步骤。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.89",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25867,13 +25783,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "如实及时记录并按规定保存（生产经营档案至少两年），保证连续、完整、真实。"
+              "适用2025种畜禽许可办法的主体须按第17条建立连续、完整、真实、可追溯的生产经营档案并至少保存两年；不将该期限套用所有动物或个人岗位记录。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.91",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "cnlicense"
           ],
           "type": "prose"
         },
@@ -25954,13 +25870,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "饲喂与环境控制设备可自动化，但巡检与执行仍由人负责。"
+              "编辑可能用途：整理饲喂与环境记录；未核设备自动化或AI效果。实际巡检和执行按岗位授权及适用规程。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.97",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -26011,13 +25926,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "监测与记录工具可辅助，但观察与配种判断仍由人负责。"
+              "编辑可能用途：汇总观察与繁育记录；未核监测效果，不以系统提示代替具备训练者的现场核对。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.101",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -26068,13 +25982,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "检测仪器可辅助判读，但操作与质量结论仍由人负责。"
+              "编辑可能用途：汇总既有检测记录；未核仪器或AI判读效果，实际检测与质量结论按适用规程和授权。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.105",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -26125,13 +26038,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "健康监测可辅助，但伤病判断与诊疗归属仍按程序交由兽医。"
+              "编辑可能用途：整理既有观察与健康记录；未核诊断效果。异常报告及诊疗须分别核兽医角色、备案和机构条件。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.109",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -26182,13 +26096,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "个体识别与档案系统可自动化管理，但数据准确与真实性仍由人负责。"
+              "编辑可能用途：整理个体与档案资料；未核自动识别效果，原始记录、真实性及缺失值需人工复核。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.113",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -26239,12 +26152,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采购与销售系统可辅助管理，但交易与合规责任由生产经营主体承担。"
+              "编辑可能用途：整理采购销售资料；未核工具效果，经营主体仍须核对象、适用许可例外及销售证明义务。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.117",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -26295,13 +26208,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结构方案与材料清单可辅助，但选址、承重与防疫布局仍由人负责。"
+              "编辑可能用途：整理已有设施资料及待核事项；未核设计工具效果，不由本页生成承重、选址或防疫布局方案，实际建设须核适用规范与专业权限。"
             ]
           },
           "id": "animal-breeders.ai-impact.ai-impact-table.121",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -26338,7 +26250,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26352,7 +26264,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26366,7 +26278,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26380,7 +26292,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26394,7 +26306,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26408,7 +26320,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26422,7 +26334,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26431,12 +26343,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按岗位类别统计，用于对照行政事务类岗位的收入水平。"
+              "规模以上企业“办事人员和有关人员”岗位大类年平均，用作统计定义参照，不能等同本职业或仅行政事务岗位；该岗位类别统计范围不含农业。"
             ]
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26450,7 +26362,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26478,7 +26390,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26506,7 +26418,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26520,7 +26432,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26534,7 +26446,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26548,7 +26460,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26572,12 +26484,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页中国侧采用行业门类与单位类型的宽口径代理（农、林、牧、渔业等），不是本职业的全国工资分布；该门类覆盖种植、养殖与渔业等大量岗位，不得把行业数字当作本职业中位数。繁育员薪酬按单位制度、岗位职责与技能等级确定，与行业门类统计口径不同。"
+              "中国侧为行业门类与单位类型宽口径年平均（农林牧渔等），不是本职业全国工资分布；门类含种植、养殖和渔业等岗位，不能代职业中位数。核实际薪酬须比较目标单位的书面职责、工时、技能评价及薪酬构成；本页未估计这些条件的工资因果。"
             ]
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26591,8 +26503,10 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26606,8 +26520,10 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26621,7 +26537,10 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26635,8 +26554,10 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26650,8 +26571,10 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26665,7 +26588,10 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "editor"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26679,8 +26605,10 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.31",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26694,8 +26622,10 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.32",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26709,7 +26639,9 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "editor",
+            "operations",
+            "cnlaw",
+            "cnlicense",
             "cnvet"
           ],
           "type": "prose"
@@ -26724,8 +26656,10 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26739,8 +26673,10 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.35",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26749,13 +26685,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "可通过农业与畜牧兽医领域职业技能等级认定与专项培训提升技能等级，向繁育主管、场长或繁育技术服务方向发展；涉及种畜禽生产经营的岗位还应了解许可与档案要求。"
+              "编辑准备选项：核农业与畜牧兽医领域现行技能评价、课程、监督实训及目标单位认可条件；本页未核统一强制等级，不保证晋升、涨薪或转向主管岗位。涉及种畜禽经营主体须分别核许可、例外和档案义务。"
             ]
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26769,8 +26707,10 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.37",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26779,13 +26719,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "开展选择与配种、人工授精与精液处理及生产性能记录；对操作规程、生物安全与档案可追溯要求高。"
+              "编辑岗位方向示例：选择与繁育、人工授精或精液记录、生产性能资料；实际任务、训练、质量与生物安全要求核目标岗位，不估计中国岗位普遍要求。"
             ]
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26799,8 +26741,10 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.39",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26809,13 +26753,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "以犬猫等伴侣动物选配与幼体照护为主；对个体观察、遗传健康与动物福利要求高。"
+              "编辑岗位方向示例：犬猫等伴侣动物选配、幼体观察和健康记录；实际任务、福利规范、诊疗边界及法域条件另核，不把畜禽许可直接套用伴侣动物。"
             ]
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26829,8 +26775,10 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.41",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26839,13 +26787,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "为不同养殖场提供精液采集与检测、稀释保存与配种服务；对到场服务与设备使用要求高。"
+              "编辑岗位方向示例：精液及配种服务相关资料与现场任务；实际服务范围、监督训练、设备规程和合法权限核目标机构，本页没有招聘样本支持普遍任务比例。"
             ]
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.42",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26859,7 +26809,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.43",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -26888,8 +26838,10 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26903,8 +26855,10 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26913,12 +26867,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              "国家统计局《2025年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.47",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26927,7 +26881,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS城镇5人及以上法人单位、税前年平均工资，排除个体与自由职业者；私营法人单位属于统计范围。行业/岗位大类不同于本职业，不估计多数养殖岗位是否纳入；实际工资核书面条件。"
+              "NBS城镇单位工资统计覆盖城镇地区5人及以上法人单位，不含个体工商户和自由职业者；工资包含个人缴纳社保、公积金及个税。规模以上企业岗位类别表范围为规定的16个行业，不含农业，其专业技术或办事人员大类不能代养殖繁育员工资。实际薪酬核书面条件。"
             ]
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.48",
@@ -26946,7 +26900,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26960,7 +26914,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26974,7 +26928,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26988,7 +26942,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27002,7 +26956,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27016,7 +26970,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27040,12 +26994,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              "国家统计局《2025年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27073,7 +27027,7 @@
           },
           "id": "animal-breeders.china-salary.career-snapshot-primary-locale.59",
           "source_refs": [
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         }
@@ -27090,14 +27044,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 展示的 BLS 2025 年 5 月工资分位（45-2021.00，动物繁育员专属）｜https://www.onetonline.org/link/localwages/45-2021.00；BLS 职业就业与工资统计（OEWS）：45-2021｜https://www.bls.gov/oes/2025/may/oessrci.htm；O*NET 45-2021.00 动物繁育员职业摘要｜https://www.onetonline.org/link/summary/45-2021.00"
+              "本轮全国工资分位核My Next Move for Veterans的United States行｜https://www.mynextmove.org/vets/profile/wages/45-2021.00?p=hourly&s=KY；原O*NET localwages入口本轮访问失败；行业工资检索与全国分位分别核。"
             ]
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -27111,7 +27063,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -27125,7 +27077,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -27139,7 +27091,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -27153,7 +27105,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -27167,7 +27119,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -27181,7 +27133,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -27195,7 +27147,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -27209,7 +27161,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -27223,7 +27175,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -27237,7 +27189,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "oews"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -27330,14 +27282,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资为ONET展示BLS OEWS May2025 45-2021分位；就业为EP2025—2035，OOH也有明细。OEWS受雇与EP含自雇范围不同，ONET旧预测不作当前，两地统计不可互相外推。"
+              "工资为O*NET体系展示BLS 2025工资数据，本轮在My Next Move同职业United States全国表核分位；原O*NET工资入口访问失败。就业核EP 2025—2035，OOH也有明细。OEWS受雇与EP含自雇范围不同，两地统计不能互相外推。"
             ]
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "oews",
+            "mynextmove-wages",
             "ep",
-            "ooh"
+            "ooh",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27351,7 +27304,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "oews"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -27487,12 +27440,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET2024行业信息农林牧渔85%，不等该行业内职业工资；BLS有行业表入口，本轮动态页未取得中位数。"
+              "O*NET当前详细页列2025年88%就业位于农林牧渔，属于就业行业分布，不是行业内职业工资。本轮核BLS 2025行业目录并进入Sector 11及动物生产支持活动查询页，未取得45-2021对应中位数；未取得不表示未发布，不用全国分位代填。"
             ]
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "onet",
+            "operations",
             "bls"
           ],
           "type": "prose"
@@ -27605,7 +27558,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -27619,7 +27572,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -27633,8 +27586,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -27648,7 +27600,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "oews",
+            "mynextmove-wages",
             "oews-method"
           ],
           "type": "prose"
@@ -27663,7 +27615,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "oews",
+            "mynextmove-wages",
             "ep"
           ],
           "type": "prose"
@@ -27678,8 +27630,8 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs",
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -27693,7 +27645,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -27707,8 +27659,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet",
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -27722,7 +27673,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "mynextmove-wages"
           ],
           "type": "prose"
         },
@@ -27736,7 +27687,7 @@
           },
           "id": "animal-breeders.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "oews"
+            "mynextmove-wages"
           ],
           "type": "prose"
         }
@@ -27896,8 +27847,7 @@
           },
           "id": "animal-breeders.fit.personality-fit-block.2",
           "source_refs": [
-            "onet",
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -27911,7 +27861,7 @@
           },
           "id": "animal-breeders.fit.personality-fit-block.3",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -28043,7 +27993,7 @@
           },
           "id": "animal-breeders.fit.riasec-fit-block.10",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -28682,13 +28632,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "观察与动手能力对判断发情与实施人工授精有帮助，但没有统一分数门槛；可通过繁殖技术与实训建立。"
+              "编辑准备建议：核目标岗位的观察、发情资料识别与动手训练要求；本页未取得统一能力分数门槛证据，实训、考核及独立操作权限按实际岗位确认。"
             ]
           },
           "id": "animal-breeders.fit.personality-fit-block.52",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -28918,10 +28867,10 @@
                 "url": "https://www.onetonline.org/link/details/45-2021.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）：45-2021",
+                "entity": "执业兽医和乡村兽医管理办法：诊疗、备案和报告权限",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/oes/2025/may/oessrci.htm"
+                "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408942.htm"
               },
               {
                 "entity": "O*NET 45-2021.00 工作情境（Work Context）",
@@ -28936,20 +28885,19 @@
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_a0ccfd3dfa904c05833fbf9733c0f62d.html"
               },
               {
-                "entity": "《种畜禽生产经营许可管理办法》（农业农村部令 2025 年第 1 号）",
+                "entity": "种畜禽生产经营许可管理办法（2025）：北京市政府官方同文",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://zys.moa.gov.cn/flfg/202503/t20250324_6472163.htm"
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/202508/t20250815_4174259.html"
               }
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "links"
         },
@@ -28963,9 +28911,11 @@
           },
           "id": "animal-breeders.risk.career-risk-cards.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -28974,14 +28924,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "最需要提前判断的是四类风险：一是动物与人身安全风险（被咬伤踢伤或蜇伤、接触污染物与化学品），二是生物安全与疫病风险（消毒隔离免疫不到位导致疫病传播），三是操作与技术风险（繁育与精液处理操作失误影响受胎率与质量），四是记录与合规风险（系谱与生产性能记录不完整或不真实、无证或超许可范围生产经营）。风险随方向不同：畜禽繁育更贴近生物安全与规模生产风险，伴侣动物繁育更贴近个体健康与福利风险，人工授精技术服务更贴近操作规范与到场服务风险。"
+              "编辑风险识别分为动物接触与作业暴露、生物安全与异常报告、繁育技术质量、档案及经营合规。O*NET支持任务和受访工作情境，中国适用法规支持许可、例外、档案与兽医权限。不同方向的核对重点是编辑建议，本页未取得风险发生率或方向间高低比较。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -29012,8 +28963,7 @@
           },
           "id": "animal-breeders.risk.career-risk-cards.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29022,13 +28972,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "被动物咬伤、踢伤或蜇伤，以及接触污染物与化学品会造成人身伤害。"
+              "编辑风险识别：动物接触、污染物及化学品相关暴露需核作业安全程序；本页没有事故概率或伤害因果估计。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.12",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29037,13 +28986,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按生物安全要求操作并使用防护用品，掌握动物保定与应急处置方法。"
+              "核机构已批准的动物接触、防护、监督与应急程序；仅在本人训练和授权内执行，本页不提供动物保定操作步骤。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.13",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29052,13 +29000,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未使用防护用品即单人处置大型或受惊动物。"
+              "编辑情景：面对大型或受惊动物时缺少机构所需的训练、监督或防护确认；不是操作指南。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.14",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29072,8 +29019,8 @@
           },
           "id": "animal-breeders.risk.career-risk-cards.15",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -29082,13 +29029,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "圈舍消毒、隔离与免疫不到位会导致疫病暴发并影响整个群体。"
+              "编辑风险识别：清洁、防疫、隔离与免疫任务需要核适用程序和权限；不以任务描述估计疫病暴发或损失概率。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.16",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -29097,13 +29044,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程执行清洁消毒、隔离与免疫，发现疫病征兆立即报告并联系兽医。"
+              "核机构适用生物安全与异常报告程序；疑似染疫动物按适用法规及时报告，诊疗和具体防疫措施由具备对应权限者依既定程序执行。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.17",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -29112,13 +29059,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "新进动物未隔离观察即混群。"
+              "编辑情景：新进动物的适用检查、隔离或交接要求尚未核清；本页不规定隔离期限或处置方法。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.18",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -29132,7 +29079,7 @@
           },
           "id": "animal-breeders.risk.career-risk-cards.19",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29141,12 +29088,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "操作不规范会影响受胎率与精液质量并造成繁殖损失。"
+              "编辑风险识别：繁育及精液质量、记录需核岗位规范；本页未取得受胎率或操作失误导致损失的因果估计。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.20",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29155,12 +29102,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按技术规程采集与处理精液、判读质量并按标准实施配种与记录。"
+              "核适用繁育技术规程、监督训练、岗位考核与合法授权；实际操作按机构程序，不依据本页自行设定稀释、温度或配种参数。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.21",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29169,13 +29116,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未按规程控温或稀释即使用精液配种。"
+              "编辑情景：精液处理资料或规定的质量复核缺失却进入下一环节；不是操作步骤或阈值。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.22",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29189,8 +29135,8 @@
           },
           "id": "animal-breeders.risk.career-risk-cards.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "cnlicense"
           ],
           "type": "prose"
         },
@@ -29199,13 +29145,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "系谱与生产性能记录不完整或不真实会影响选育结论、交易合规与追溯。"
+              "编辑风险识别：不完整或不真实的记录妨碍核查；适用种畜禽主体档案真实性及可追溯义务按许可办法确认，不估计生产结果影响。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "cnlicense"
           ],
           "type": "prose"
         },
@@ -29214,13 +29160,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "如实及时记录并按规定保存（生产经营档案至少两年），保证连续、完整、真实。"
+              "适用2025种畜禽许可办法的主体须按第17条建立连续、完整、真实、可追溯档案并至少保存两年；不套用所有动物、员工或记录。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.25",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "cnlicense"
           ],
           "type": "prose"
         },
@@ -29234,8 +29180,8 @@
           },
           "id": "animal-breeders.risk.career-risk-cards.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "cnlicense"
           ],
           "type": "prose"
         },
@@ -29249,8 +29195,8 @@
           },
           "id": "animal-breeders.risk.career-risk-cards.27",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "cnlicense"
           ],
           "type": "prose"
         },
@@ -29259,13 +29205,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "无证或超许可范围生产经营、销售未附合格证明与检疫证明会造成法律与交易风险。"
+              "依法需许可的种畜禽主体须核许可范围及销售证明；畜牧法第28条的农户自繁自养、少量剩余销售和种公畜互助配种例外分别核，不能概括所有销售无证违法。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "cnlicense"
           ],
           "type": "prose"
         },
@@ -29274,13 +29220,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按《畜牧法》与许可办法办理许可与档案，销售按规定附具合格证明、检疫证明与家畜系谱。"
+              "按对象及法定例外核主体许可、范围和档案。销售种畜禽按畜牧法第30条附合格与检疫证明，种畜另附家畜系谱；不要把经营主体许可证当员工个人诊疗权限。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "cnlicense"
           ],
           "type": "prose"
         },
@@ -29289,13 +29235,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未取得许可或未附检疫证明即销售种畜禽。"
+              "编辑情景：未确认销售对象、适用许可例外及应附证明即交易；是否需许可须按实际对象和法规核。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "cnlicense"
           ],
           "type": "prose"
         },
@@ -29309,8 +29255,7 @@
           },
           "id": "animal-breeders.risk.career-risk-cards.31",
           "source_refs": [
-            "onet",
-            "onet"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29319,13 +29264,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "70% 每天户外暴露于各种天气，叠加重复动作、弯腰与污染物暴露。"
+              "美国O*NET受访70%每日户外各种天气、35%持续或几乎持续重复动作；是群体情境，不是所有现场岗位的暴露或健康结果。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.32",
           "source_refs": [
-            "onet",
-            "onet"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29334,13 +29278,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按天气与作业安排轮换、使用防护用品并做好职业健康与体力管理。"
+              "核机构针对天气、负荷、防护和异常报告的现行作业安排；由有权限者按适用程序确定，不根据本页自行设计健康或轮换标准。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29349,13 +29292,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "极端天气下未安排轮换即长时间连续作业。"
+              "编辑情景：天气或身体状态出现变化，岗位所需的报告与安排尚未确认；不估计个人健康结果。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29369,7 +29311,7 @@
           },
           "id": "animal-breeders.risk.career-risk-cards.35",
           "source_refs": [
-            "onet"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29378,13 +29320,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS行业表只供工资检索；实际行业职业工资缺口见美国薪资正文，当前就业另见EP。"
+              "该局部链接为中国兽医管理办法，用于角色、备案、诊疗和疑似染疫报告范围；不用于工资或就业。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.36",
           "source_refs": [
-            "bls",
-            "ep"
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -29393,12 +29334,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 45-2021.00 职业摘要（任务与职责）。"
+              "O*NET美国工作情境用于群体暴露、工时与工作要求描述，不证明中国事故概率。"
             ]
           },
           "id": "animal-breeders.risk.career-risk-cards.37",
           "source_refs": [
-            "onet"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29497,9 +29438,12 @@
           },
           "id": "animal-breeders.path.entry-role-comparison.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnlaw",
+            "cnlicense",
+            "cnvet",
+            "cnclinic"
           ],
           "title": "动物饲养员的入门岗位与初期任务怎么比较？",
           "type": "table"
@@ -29522,7 +29466,7 @@
                 "values": [
                   "岗位与经营许可",
                   "从事种畜禽与商品代仔畜、雏禽生产经营须依《中华人民共和国畜牧法》取得种畜禽生产经营许可证并建立档案；农户自养自繁与少量剩余销售以及种公畜互助配种不需办证。",
-                  "销售种畜禽须附具合格证明与检疫证明，销售种畜还须附具家畜系谱；档案按规定至少保存两年。"
+                  "销售种畜禽按规定附合格与检疫证明，种畜另附系谱；适用2025许可办法的主体生产经营档案至少保存两年，不套用所有动物。"
                 ]
               },
               {
@@ -29545,8 +29489,12 @@
           },
           "id": "animal-breeders.path.employer-evidence.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnlaw",
+            "cnlicense",
+            "cnvet",
+            "cnclinic"
           ],
           "title": "入门准备：哪些资料与岗位条件需要核对？",
           "type": "cards"
@@ -29679,16 +29627,20 @@
               ],
               [
                 "许可与档案（涉种畜禽经营）",
-                "是否依法取得种畜禽生产经营许可证并建立档案。",
+                "按畜禽目录、生产经营对象及农户法定例外核是否须取得主体许可证。",
                 "许可证与档案齐备，销售附具合格证明、检疫证明与家畜系谱。",
-                "无证或超许可范围生产经营会被依法处理。"
+                "依法需许可者不得无证或超范围经营；自繁自养少量剩余销售及种公畜互助配种例外另核，不套所有动物。"
               ]
             ]
           },
           "id": "animal-breeders.path.interview-probation.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnlaw",
+            "cnlicense",
+            "cnvet",
+            "cnclinic"
           ],
           "title": "面试与试用期可能考察什么，哪些结论不能推断？",
           "type": "table"
@@ -29833,7 +29785,7 @@
                 "核主体许可与销售档案义务",
                 "农户自繁自养/少量剩余及互助例外另核",
                 "对象按畜禽目录及2025办法核",
-                "有效五年，期满六个月前重新申请；档案至少两年",
+                "新办法许可证有效五年、期满六个月前重新申请；旧证按原有效期，后续申请适用新办法；适用主体档案至少两年。",
                 "不授予每名员工或所有动物个人许可"
               ],
               [
@@ -29858,11 +29810,12 @@
           },
           "id": "animal-breeders.path.credential-decision.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnlaw",
+            "cnlicense",
+            "cnvet",
+            "cnclinic"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -29872,7 +29825,7 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "种畜禽许可针对经营主体并有农户自繁自养少量剩余销售、种公畜互助配种的法定例外；对象按畜禽目录核，不直接套犬猫。2025办法规定家畜遗传材料与祖代以上省级核发，父母代与商品代仔畜/雏禽由县级以上按省级公布权限核发。许可证有效五年，期满六个月前重新申请；档案至少两年、每年1月31日前填报。销售须有合格与检疫证明，种畜另附系谱。",
+              "种畜禽许可针对经营主体并有农户自繁自养少量剩余销售、种公畜互助配种的法定例外；对象按畜禽目录核，不直接套犬猫。2025办法规定家畜遗传材料与祖代以上省级核发，父母代与商品代仔畜/雏禽由县级以上按省级公布权限核发。新办法许可证有效五年；原已取得许可证有效期不变，原证期满后的申请按新办法，期满六个月前重新申请；档案至少两年、每年1月31日前填报。销售须有合格与检疫证明，种畜另附系谱。",
               "繁育任务与实际诊疗权限分别核：执业兽医、助理兽医和乡村兽医权限及备案范围不同；繁育员岗位名不授予诊疗许可。",
               "2022大典家畜/家禽繁殖员只作畜禽方向参考；学习训练与实际岗位考核另核，纸面作品不能证明实操资格。",
               "入行前核目标岗位官方训练、动物种类和法域要求；以实际考核及合法授权为准。"
@@ -29901,10 +29854,12 @@
           },
           "id": "animal-breeders.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnlaw",
+            "cnlicense",
+            "cnvet",
+            "cnclinic"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -30001,13 +29956,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "掌握发情鉴定、人工授精与精液处理等专项技能并取得技能等级或培训证明。"
+              "核专项课程、监督实训、实际考核与目标岗位认可；培训或技能评价证明不能单独证明独立操作权限。"
             ]
           },
           "id": "animal-breeders.path.career-path-block.14",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -30207,13 +30164,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按院校与用人单位规定；从事种畜禽经营须依《畜牧法》办证。"
+              "按目标院校、单位及动物种类核；依法需许可的种畜禽经营主体办证，畜牧法农户自繁自养少量剩余销售及互助配种例外另核。"
             ]
           },
           "id": "animal-breeders.path.career-path-block.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -30309,13 +30268,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能独立完成配种操作且记录完整可追溯。"
+              "在本人训练、考核与合法岗位授权内承担相应繁育操作，记录完整可追溯；不由学历或培训证明直接推出独立操作能力。"
             ]
           },
           "id": "animal-breeders.path.career-path-block.35",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -30324,13 +30285,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "掌握发情鉴定、人工授精与精液处理并取得技能等级或培训证明。"
+              "核发情观察、人工授精及精液相关专项训练、监督和岗位考核；技能评价或培训证明的认可条件按目标单位确认。"
             ]
           },
           "id": "animal-breeders.path.career-path-block.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -30382,13 +30345,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "配种成功率与产仔表现稳定、档案完整。"
+              "能核对既有繁育记录、质量复核和本人授权职责；不以稳定受胎率或产仔表现保证个人能力或生产结果。"
             ]
           },
           "id": "animal-breeders.path.career-path-block.40",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -30426,13 +30391,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长经验与管理能力；按单位规定。"
+              "编辑进阶核对项：核目标主管岗位的经验、管理职责与选拔条件；本页未取得统一年限或中国岗位样本。"
             ]
           },
           "id": "animal-breeders.path.career-path-block.43",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -30645,13 +30612,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按机构制度；涉及诊疗须由执业兽医负责。"
+              "按实际兽医角色核诊疗资格、备案、区域、机构和监督要求；执业助理、乡村兽医及监督下学习人员有各自条件，繁育岗位名不授予诊疗权限。"
             ]
           },
           "id": "animal-breeders.path.career-path-block.58",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -30689,13 +30658,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "制定繁育计划并处理常见繁殖与遗传健康问题。"
+              "在授权内整理繁育计划与观察记录；遗传健康或伤病疑点转交具备相应权限者确认，不自行诊疗。"
             ]
           },
           "id": "animal-breeders.path.career-path-block.61",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -30718,13 +30689,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长经验；按机构规定。"
+              "编辑进阶核对项：核目标机构的实际经验、训练与选拔条件；本页没有统一年限证据。"
             ]
           },
           "id": "animal-breeders.path.career-path-block.63",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -30966,13 +30939,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能对受胎率与技术方案负责。"
+              "能核既有受胎和技术资料、记录与质量复核职责；实际方案须按本人训练、岗位授权与适用规范确认，不保证受胎率。"
             ]
           },
           "id": "animal-breeders.path.career-path-block.80",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -30981,13 +30956,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "制定精液使用与配种建议并处理常见繁殖问题。"
+              "在授权内整理精液使用与配种资料，疑点按机构程序反馈；异常观察和实际诊疗分开，不把繁育建议视作诊疗权限。"
             ]
           },
           "id": "animal-breeders.path.career-path-block.81",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -31010,13 +30987,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长经验；按单位规定。"
+              "编辑进阶核对项：核目标单位实际经验、训练与选拔条件；本页不设普遍经验年限。"
             ]
           },
           "id": "animal-breeders.path.career-path-block.83",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnlaw",
+            "cnlicense",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -31110,16 +31089,16 @@
                 "url": "https://www.onetonline.org/link/summary/45-2021.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）：45-2021",
+                "entity": "BLS EP 2025—2035动物繁育员详细职业预测",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/oes/2025/may/oessrci.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
+                "entity": "国家统计局2025年城镇单位年平均工资",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "《中华人民共和国畜牧法》（2023-03-01 施行）",
@@ -31191,7 +31170,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得中国大陆本职业全国就业预测。BLS EP动物繁育员45-2021明细：2025年6,900人，2035年7,100人，官方净增200；2025—2035增长3.0%（OOH取整3%），年均1,000个空缺含增长与替代需求。ONET旧2024统计不冒充当前。OOH农业工人组合831,900人与-2%不是本职业；美国数据不能外推中国或归因AI，也不保证个人就业。"
+              "证据不足：本页未取得中国大陆本职业全国就业预测。BLS EP动物繁育员45-2021为2025年6,900人、2035年7,100人，净增200；2025—2035增长3.0%（OOH取整3%）、年均1,000个空缺含增长与替代需求。当前O*NET也列2025—2035。OOH农业工人组合831,900人及-2%不是本职业；美国数据不外推中国、不归因AI、不保证个人就业。"
             ]
           },
           "id": "animal-breeders.market-signals.market-signal-card.8",
@@ -31211,7 +31190,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31253,7 +31232,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.12",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31267,7 +31246,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31281,7 +31260,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31309,7 +31288,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31365,7 +31344,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31379,7 +31358,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31407,7 +31386,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31449,7 +31428,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.26",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31463,7 +31442,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31477,7 +31456,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31514,12 +31493,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS行业工资表入口，非EP当前就业明细；当前预测另见EP。"
+              "BLS EP 45-2021详细职业预测与特征表，支持就业人数、增长、净变化及年均空缺；不是行业工资。"
             ]
           },
           "id": "animal-breeders.market-signals.market-signal-card.31",
           "source_refs": [
-            "bls",
             "ep"
           ],
           "type": "prose"
@@ -31529,12 +31507,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》（中国大陆民用口径，仅作参照）。"
+              "国家统计局2025年城镇单位年平均工资，只是中国宽行业及单位类型工资参照，不是就业预测。"
             ]
           },
           "id": "animal-breeders.market-signals.market-signal-card.32",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31564,7 +31542,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.34",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31578,8 +31556,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.35",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31588,13 +31565,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻方向，需补科研训练与学历。"
+              "编辑转向建议：相邻方向，需补科研训练与学历。 按目标法域和岗位书面教育、训练与授权要求确认；本页未核完整准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-breeders.market-signals.market-signal-card.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31608,8 +31584,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.37",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31623,8 +31598,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31633,13 +31607,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻方向，需补经营与管理能力。"
+              "编辑转向建议：相邻方向，需补经营与管理能力。 按目标法域和岗位书面教育、训练与授权要求确认；本页未核完整准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-breeders.market-signals.market-signal-card.39",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31653,8 +31626,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.40",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31668,8 +31640,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.41",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31678,13 +31649,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "邻近方向，需补贸易与商务能力。"
+              "编辑转向建议：邻近方向，需补贸易与商务能力。 按目标法域和岗位书面教育、训练与授权要求确认；本页未核完整准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-breeders.market-signals.market-signal-card.42",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31698,8 +31668,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.43",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31713,8 +31682,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.44",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31723,13 +31691,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远距离转向，需改换专业领域。"
+              "编辑转向建议：较远距离转向，需改换专业领域。 按目标法域和岗位书面教育、训练与授权要求确认；本页未核完整准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-breeders.market-signals.market-signal-card.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31743,8 +31710,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31758,8 +31724,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.47",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31768,13 +31733,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远距离转向，需改换专业领域。"
+              "编辑转向建议：较远距离转向，需改换专业领域。 按目标法域和岗位书面教育、训练与授权要求确认；本页未核完整准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-breeders.market-signals.market-signal-card.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31788,7 +31752,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.49",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31802,7 +31766,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.50",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31811,12 +31775,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑转向建议：补目标领域知识、研究技术与岗位训练，不保证直接转岗。"
+              "编辑转向建议：补目标领域知识、研究技术与岗位训练，不保证直接转岗。 按目标法域和岗位书面教育、训练与授权要求确认；本页未核完整准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-breeders.market-signals.market-signal-card.51",
           "source_refs": [
-            "editor"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31830,8 +31794,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.52",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31845,8 +31808,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.53",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31855,13 +31817,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "邻近方向，需补检查与法规知识。"
+              "编辑转向建议：邻近方向，需补检查与法规知识。 按目标法域和岗位书面教育、训练与授权要求确认；本页未核完整准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-breeders.market-signals.market-signal-card.54",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31875,8 +31836,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.55",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31890,8 +31850,7 @@
           },
           "id": "animal-breeders.market-signals.market-signal-card.56",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -31900,13 +31859,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远距离转向，需改换职责体系。"
+              "编辑转向建议：较远距离转向，需改换职责体系。 按目标法域和岗位书面教育、训练与授权要求确认；本页未核完整准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-breeders.market-signals.market-signal-card.57",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         }
@@ -32006,9 +31964,6 @@
             ]
           },
           "id": "animal-breeders.sources.source-card.1",
-          "source_refs": [
-            "onet"
-          ],
           "type": "prose"
         },
         {
@@ -32021,12 +31976,14 @@
           },
           "id": "animal-breeders.sources.source-card.2",
           "source_refs": [
-            "onet",
-            "oews",
+            "operations",
+            "mynextmove-wages",
             "ep",
             "ooh",
             "cnlaw",
             "cnlicense",
+            "cnvet",
+            "cnclinic",
             "nbs"
           ],
           "type": "prose"
@@ -32036,13 +31993,10 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮相关事实核对：2026-10-02；未重新研究的旧资料保留原访问日期。"
+              "本轮相关事实核对：2026-10-08；工资分位核官方姊妹站全国表，原工资入口读取失败；许可办法经北京市政府官方同文核读；未重读入口保留原访问日期。"
             ]
           },
           "id": "animal-breeders.sources.source-card.3",
-          "source_refs": [
-            "editor"
-          ],
           "type": "prose"
         },
         {
@@ -32055,13 +32009,14 @@
           },
           "id": "animal-breeders.sources.source-card.4",
           "source_refs": [
-            "oews",
+            "mynextmove-wages",
             "ep",
             "bls",
             "nbs",
             "cnlaw",
             "cnlicense",
-            "cnvet"
+            "cnvet",
+            "cnclass"
           ],
           "type": "prose"
         }
@@ -32136,26 +32091,26 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "exact",
-                  "访问 2026-09-15"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "exact",
                 "id": "onet",
                 "limitation": "用于职业身份、任务（21 项）与兴趣剖面（RCI）；美国详细职业口径，工资与就业亦为该职业专属口径。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2021.00 动物繁育员职业摘要",
-                "period": "O*NET相关职业资料；就业仍展示旧2024—2034，非中国制度资料",
+                "period": "O*NET2026职业资料；工资2025、就业2025—2035",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/45-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "exact",
-                  "访问 2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "exact",
                 "id": "bls",
@@ -32168,10 +32123,10 @@
                 "url": "https://www.bls.gov/oes/2025/may/oessrci.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "exact",
-                  "访问 2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "exact",
                 "id": "ep",
@@ -32200,14 +32155,14 @@
                 "url": "https://www.onetonline.org/link/localwages/45-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "industry_proxy",
-                  "访问 2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "industry_proxy",
                 "id": "nbs",
-                "limitation": "用于中国大陆民用行业门类与单位类型年平均工资（含农、林、牧、渔业）；不含本职业单列工资。",
+                "limitation": "城镇单位宽行业年平均，非繁育员职业工资；本轮同时核NBS中文现行发布地址及官方英文同版表。",
                 "market": "中国大陆",
                 "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
                 "period": "2025年；2026-05-15发布",
@@ -32216,10 +32171,10 @@
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "exact",
-                  "访问 2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "exact",
                 "id": "cnlaw",
@@ -32232,14 +32187,14 @@
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_a0ccfd3dfa904c05833fbf9733c0f62d.html"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "exact",
-                  "访问 2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "exact",
                 "id": "cnlicense",
-                "limitation": "遗传材料和祖代以上省级、父母代/商品代县级以上按公布权限；许可五年、期满六个月前重新申请、档案至少两年、每年1月31日前填报；有农户例外。",
+                "limitation": "本轮经北京市政府官方同文核读；适用种畜禽主体许可、农户例外、档案和填报；原农业农村部入口后续读取失败。",
                 "market": "中国大陆",
                 "name": "《种畜禽生产经营许可管理办法》（农业农村部令 2025 年第 1 号，2025-07-01 施行）",
                 "period": "2025-07-01施行",
@@ -32264,17 +32219,17 @@
                 "url": "https://hrss.sz.gov.cn/attachment/0/731/731778/8340671.pdf"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问 2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "privacy",
                 "limitation": "用于工作情境比例（户外暴露、污染物暴露、体力姿势、精确性与沟通协作）。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2021.00 详细资料（工作情境）",
-                "period": "O*NET2026详细职业资料；工资2025May、就业仍旧2024—2034",
+                "period": "O*NET2026职业资料；工资2025、就业2025—2035",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/45-2021.00"
@@ -32290,39 +32245,39 @@
                 "limitation": "相关软件/认证或培训检索入口，不证明所有设备已部署、个人执照门槛或学制。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2021.00 技术清单",
-                "period": "O*NET相关职业资料；就业仍展示旧2024—2034，非中国制度资料",
+                "period": "相关检索入口；本轮未重新核该入口内容，不作为当前就业预测来源",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/hot_tech/45-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问 2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "operations",
                 "limitation": "用于任务清单与工作活动（饲喂清洁、发情鉴定、配种与精液处理、健康与免疫、标识与记录）。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2021.00 详细资料（任务与工作活动）",
-                "period": "O*NET2026详细职业资料；工资2025May、就业仍旧2024—2034",
+                "period": "O*NET2026职业资料；工资2025、就业2025—2035",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/45-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问 2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "hr",
                 "limitation": "用于工作周时长、日程规律性与户外、污染物与伤病暴露等比例。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2021.00 详细资料（工作时间与环境）",
-                "period": "O*NET2026详细职业资料；工资2025May、就业仍旧2024—2034",
+                "period": "O*NET2026职业资料；工资2025、就业2025—2035",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/45-2021.00"
@@ -32344,17 +32299,17 @@
                 "url": "https://www.stats.gov.cn/xxgk/zcfggz/txzfg2020/202605/t20260511_1963662.html"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "ilo",
                 "limitation": "用于兴趣代码 RCI（现实型、常规型、研究型）说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2021.00 职业摘要（兴趣剖面 RCI）",
-                "period": "O*NET相关职业资料；就业仍展示旧2024—2034，非中国制度资料",
+                "period": "O*NET2026职业资料；工资2025、就业2025—2035",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/45-2021.00"
@@ -32370,7 +32325,7 @@
                 "limitation": "相关软件/认证或培训检索入口，不证明所有设备已部署、个人执照门槛或学制。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2021.00 执照与认证要求",
-                "period": "O*NET相关职业资料；就业仍展示旧2024—2034，非中国制度资料",
+                "period": "相关检索入口；本轮未重新核该入口内容，不作为当前就业预测来源",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localcert/45-2021.00"
@@ -32386,119 +32341,119 @@
                 "limitation": "用于职业概述与相关职业入口。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2021.00 自定义职业档案",
-                "period": "O*NET相关职业资料；就业仍展示旧2024—2034，非中国制度资料",
+                "period": "相关检索入口；本轮未重新核该入口内容，不作为当前就业预测来源",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/custom/45-2021.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "arxiv",
                 "limitation": "用于任务与职责参考。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2021.00 职业摘要（任务与职责）",
-                "period": "O*NET相关职业资料；就业仍展示旧2024—2034，非中国制度资料",
+                "period": "O*NET2026职业资料；工资2025、就业2025—2035",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/45-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问 2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "weforum",
                 "limitation": "用于任务与繁育程序说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2021.00 详细资料（任务清单）",
-                "period": "O*NET2026详细职业资料；工资2025May、就业仍旧2024—2034",
+                "period": "O*NET2026职业资料；工资2025、就业2025—2035",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/45-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问 2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "employer",
                 "limitation": "O*NET支持个体、配种与生产记录任务；中国档案时限及销售证明另见cnlaw/cnlicense，不由美国任务页证明。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2021.00 详细资料（记录与档案要求）",
-                "period": "O*NET2026详细职业资料；工资2025May、就业仍旧2024—2034",
+                "period": "O*NET2026职业资料；工资2025、就业2025—2035",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/45-2021.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "purchasing-managers",
                 "limitation": "用于任务清单参考。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2021.00 职业摘要（任务清单）",
-                "period": "O*NET相关职业资料；就业仍展示旧2024—2034，非中国制度资料",
+                "period": "O*NET2026职业资料；工资2025、就业2025—2035",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/45-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问 2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-1",
                 "limitation": "用于任务描述与职责边界。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2021.00 任务描述",
-                "period": "O*NET2026详细职业资料；工资2025May、就业仍旧2024—2034",
+                "period": "O*NET2026职业资料；工资2025、就业2025—2035",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/45-2021.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-2",
                 "limitation": "用于职业属性说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2021.00 职业摘要（职业属性）",
-                "period": "O*NET相关职业资料；就业仍展示旧2024—2034，非中国制度资料",
+                "period": "O*NET2026职业资料；工资2025、就业2025—2035",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/45-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问 2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-3",
                 "limitation": "用于数据口径说明（专属口径）。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2021.00 详细资料（数据说明）",
-                "period": "O*NET2026详细职业资料；工资2025May、就业仍旧2024—2034",
+                "period": "O*NET2026职业资料；工资2025、就业2025—2035",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/45-2021.00"
@@ -32514,7 +32469,7 @@
                 "limitation": "用于主要行业（农、林、牧、渔业）说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2021.00 行业分布",
-                "period": "O*NET相关职业资料；就业仍展示旧2024—2034，非中国制度资料",
+                "period": "相关检索入口；本轮未重新核该入口内容，不作为当前就业预测来源",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/industry/45-2021.00"
@@ -32530,7 +32485,7 @@
                 "limitation": "相关软件/认证或培训检索入口，不证明所有设备已部署、个人执照门槛或学制。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2021.00 培训与教育信息",
-                "period": "O*NET相关职业资料；就业仍展示旧2024—2034，非中国制度资料",
+                "period": "相关检索入口；本轮未重新核该入口内容，不作为当前就业预测来源",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localtraining/45-2021.00"
@@ -32552,26 +32507,26 @@
                 "url": "https://www.onetonline.org/link/localwages/45-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问 2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "archivists",
                 "limitation": "O*NET支持个体、配种与生产记录任务；中国档案时限及销售证明另见cnlaw/cnlicense，不由美国任务页证明。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2021.00 详细资料（记录与档案管理要求）",
-                "period": "O*NET2026详细职业资料；工资2025May、就业仍旧2024—2034",
+                "period": "O*NET2026职业资料；工资2025、就业2025—2035",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/45-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "ooh",
@@ -32584,10 +32539,10 @@
                 "url": "https://www.bls.gov/ooh/farming-fishing-and-forestry/agricultural-workers.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "cnvet",
@@ -32600,10 +32555,10 @@
                 "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408942.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "访问2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "cnclinic",
@@ -32630,6 +32585,22 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "exact",
+                  "访问2026-10-08；取United States行"
+                ],
+                "evidence_type": "exact",
+                "id": "mynextmove-wages",
+                "limitation": "取美国全国表，页面Kentucky为无数据；不能以全国行代州或行业工资。",
+                "market": "美国",
+                "name": "My Next Move for Veterans：Animal Breeders美国全国工资分位",
+                "period": "2025年工资数据",
+                "publisher": "O*NET My Next Move（BLS 2025工资数据）",
+                "scope": "exact",
+                "url": "https://www.mynextmove.org/vets/profile/wages/45-2021.00?p=hourly&s=KY"
               }
             ]
           },
@@ -34844,8 +34815,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "hr",
-              "operations"
+              "facilities",
+              "onet"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -34876,9 +34847,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
-              "cnlicense",
-              "cnvet"
+              "onet",
+              "bls"
             ],
             "id": "record-version",
             "mitigation": {
@@ -34909,8 +34879,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
-              "hr"
+              "onet"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34941,8 +34910,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "cnlaw",
-              "cnlicense",
+              "privacy",
               "employer"
             ],
             "id": "technical-boundary",
@@ -34974,8 +34942,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "cnlaw",
-              "cnlicense"
+              "privacy",
+              "employer"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -35006,8 +34974,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "hr",
-              "operations"
+              "facilities",
+              "onet"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35503,7 +35471,7 @@
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "中国职业工资缺口与行业参照",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "动物饲养员在不同学历背景下通常从哪些岗位方向开始？",
+            "scenario_heading": "不同学习背景需核哪些准备与岗位条件？",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "学历背景",
             "scenario_value_label": "常见岗位方向"
@@ -35715,7 +35683,7 @@
             }
           }
         ],
-        "factors_heading": "哪些因素会影响美国动物饲养员工资？",
+        "factors_heading": "核实际美国报酬需比较哪些条件？",
         "growth": {
           "$item": "animal-breeders.us-salary.career-snapshot-secondary-locale.33",
           "block": "us-salary",
@@ -35814,7 +35782,7 @@
             }
           }
         ],
-        "industry_value_label": "该行业内本职业工资中位数",
+        "industry_value_label": "行业内本职业中位数／全国参照（分别标明）",
         "interpretation_heading": "这组美国工资数字应当怎么理解？",
         "interpretation_rows": [
           {
@@ -36096,7 +36064,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
             "value": {
               "$item": "animal-breeders.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36141,7 +36109,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "ep",
             "value": {
               "$item": "animal-breeders.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36519,7 +36487,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 展示的 BLS 工资分位（2025 年 5 月）",
+            "label": "BLS EP 2025—2035动物繁育员就业预测",
             "secondary_value": null,
             "value": {
               "$item": "animal-breeders.profile.onet-structured-fields-block.4",
@@ -37945,7 +37913,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "动物繁育：选择与配种 · 人工授精与精液处理 · 系谱与生产记录",
@@ -37996,7 +37964,7 @@
       "text": "动物繁育员：任务、工资与就业前景（O*NET 45-2021.00）"
     }
   },
-  "source_content_sha256": "eef51e7e4cf83ca643d1144b21a032ba9d447caad2490afd5ec96be79567bfc5",
+  "source_content_sha256": "a2ea1d662a832d211d1d297c71562e470e16fc3a7e0c1706a3932966928a4b27",
   "subject": {
     "canonical_slug": "animal-breeders",
     "name": "动物饲养员",

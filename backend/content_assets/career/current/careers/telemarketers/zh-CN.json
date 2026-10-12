@@ -28324,7 +28324,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "把结果转成核版本、按要求记录、收到纠错反馈愿意更新等行为问题；本页没有某维度电话销售合格阈值，观察实际表现与条件更有用。"
+              "把结果转成核版本、按要求记录、收到纠错反馈愿意更新等行为问题；本页没有某维度电话销售合格阈值。建议分别观察实际表现与岗位条件，不作量表相对效度判断。"
             ]
           },
           "id": "telemarketers.display.personality_fit_block.assessments.big-five.answer",
@@ -32300,7 +32300,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET电话营销与四邻职独立任务档案。"
+              "O*NET41-9041支持电话营销任务；客户服务、服务销售、订单文员和广告销售各按对应独立档案核，不由本职业链接代证。"
             ]
           },
           "id": "telemarketers.display.market_signal_card.source.onet",
@@ -37734,14 +37734,14 @@
           },
           {
             "href": {
-              "$source": "bls-ooh",
+              "$source": "employer",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "telemarketers.source-register.published.1"
             },
             "label": {
-              "$source": "bls-ooh",
+              "$source": "employer",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -37778,14 +37778,14 @@
           },
           {
             "href": {
-              "$source": "onet",
+              "$source": "agent",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "telemarketers.source-register.published.1"
             },
             "label": {
-              "$source": "onet",
+              "$source": "agent",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -37800,14 +37800,14 @@
           },
           {
             "href": {
-              "$source": "bls-ooh",
+              "$source": "teacher",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "telemarketers.source-register.published.1"
             },
             "label": {
-              "$source": "bls-ooh",
+              "$source": "teacher",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -37822,14 +37822,14 @@
           },
           {
             "href": {
-              "$source": "onet",
+              "$source": "enrichment",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "telemarketers.source-register.published.1"
             },
             "label": {
-              "$source": "onet",
+              "$source": "enrichment",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -37844,14 +37844,14 @@
           },
           {
             "href": {
-              "$source": "onet",
+              "$source": "art",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "telemarketers.source-register.published.1"
             },
             "label": {
-              "$source": "onet",
+              "$source": "art",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -38502,7 +38502,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "O*NET41-9041电话营销",
@@ -38553,7 +38553,7 @@
       "text": "电话销售员"
     }
   },
-  "source_content_sha256": "5b050d1438d31809859a850a86bb2cab13a348b3038828399400c84260e8cf47",
+  "source_content_sha256": "bbde410d532fff0d1d7f47e4239aa07ba66a0890294dd051cc096de3d34d9f82",
   "subject": {
     "canonical_slug": "telemarketers",
     "name": "电话销售员",

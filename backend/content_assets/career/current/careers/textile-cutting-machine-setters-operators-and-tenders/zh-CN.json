@@ -27497,7 +27497,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：2025美国51-6062第10百分位工资未取得可读取明细。已查当期OEWS职业入口和O*NET官方工资跳转；未以2023历史分位冒充当期。"
+              "美国May2025 SOC51-6062第10百分位为28,650美元/年、13.78美元/小时，直接取National Wages United States行；不是起薪或最低保证收入。"
             ]
           },
           "fact_refs": [
@@ -27515,7 +27515,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：2025美国51-6062第90百分位工资未取得可读取明细。第25及75百分位同样留缺口，不插值或由中位数推算，更不标为职级。"
+              "美国May2025本职业第90百分位为49,420美元/年、23.76美元/小时；同表P25/P75为34,230/45,220美元/年。分位不是职级，不由中位数推算或自行年化。"
             ]
           },
           "fact_refs": [
@@ -27596,7 +27596,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025工资位置与分位缺口"
+              "2025美国全国工资分位"
             ]
           },
           "id": "textile-cutting-machine-setters-operators-and-tenders.display.career_snapshot_secondary_locale.wage-heading",
@@ -27839,7 +27839,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本模块2025工资中位数与2023历史行业年均值分列。最新分位未取得可读明细；就业预测采用2025—2035正式表，不继承O*NET尚列的2024—2034就业数字，也不外推中国或归因AI。"
+              "本模块2025美国精确职业工资分位与2023历史行业年均值分列。就业采用BLS2025—2035正式表；O*NET本轮也已更新同一期，不外推中国或归因AI。"
             ]
           },
           "id": "textile-cutting-machine-setters-operators-and-tenders.display.career_snapshot_secondary_locale.boundary.detail",
@@ -32060,7 +32060,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET本职业及相邻档案用于任务比较，迁移建议为编辑归纳。"
+              "本链接支持O*NET纺织裁剪任务；相邻档案分别支持各自产出，迁移建议为编辑归纳。"
             ]
           },
           "id": "textile-cutting-machine-setters-operators-and-tenders.display.market_signal_card.source.onet",
@@ -32204,7 +32204,7 @@
             "entries": [
               "中美职业、统计、训练和安全资料分别适用。",
               "2025工资中位数与2023历史行业年均值分列，不能保证个人实收。",
-              "招聘、最新分位及AI因果缺口明示；编辑练习不当在招或设备资格。"
+              "招聘及AI因果缺口明示；本轮官方全国分位已读取，编辑练习不当在招或设备资格。"
             ]
           },
           "id": "textile-cutting-machine-setters-operators-and-tenders.sources.boundary.1",
@@ -32441,7 +32441,7 @@
                 "accessed_at": "2026-09-30",
                 "details": [
                   "职业定义、18项任务、工作情境、RC兴趣和准备区间。",
-                  "2025工资18.64美元/小时、38,760美元/年；就业页仍为2024—2034，最新预测另用BLS。"
+                  "原2026-09-30工资读取为18.64美元/小时、38,760美元/年；本轮O*NET已显示2025—2035就业。精确预测仍以BLS表1.2为依据，不批量刷新历史访问日期。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "editor",
@@ -32457,7 +32457,7 @@
                 "accessed_at": "2026-09-30",
                 "details": [
                   "职业定义、18项任务、工作情境、RC兴趣和准备区间。",
-                  "2025工资18.64美元/小时、38,760美元/年；就业页仍为2024—2034，最新预测另用BLS。"
+                  "原2026-09-30工资读取为18.64美元/小时、38,760美元/年；本轮O*NET已显示2025—2035就业。精确预测仍以BLS表1.2为依据，不批量刷新历史访问日期。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "employer",
@@ -32566,20 +32566,20 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "accessed_at": "2026-09-30",
+                "accessed_at": "2026-10-12",
                 "details": [
-                  "职业定义、18项任务、工作情境、RC兴趣和准备区间。",
-                  "2025工资18.64美元/小时、38,760美元/年；就业页仍为2024—2034，最新预测另用BLS。"
+                  "United States年工资P10/P25/P50/P75/P90：28650/34230/38760/45220/49420美元。",
+                  "小时13.78/16.46/18.64/21.74/23.76，直接年度值，不自行年化。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "official wage statistics",
                 "id": "r2-pay-1",
-                "limitation": "美国群体描述，不替代中国岗位条件或个人能力判断",
-                "market": "美国",
-                "name": "O*NET 51-6062.00：纺织裁剪设备设定、操作与看护",
-                "period": "2026职业档案；工资2025",
-                "publisher": "U.S. Department of Labor, O*NET",
+                "limitation": "工资分位不是职级、起薪或个人实收；不套中国，OEWS不含自雇。",
+                "market": "美国全国",
+                "name": "O*NET National Wages：51-6062 May2025全国分位",
+                "period": "May2025",
+                "publisher": "U.S. Department of Labor / O*NET；BLS OEWS",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/51-6062.00"
+                "url": "https://www.onetonline.org/link/localwages/51-6062.00"
               },
               {
                 "accessed_at": "2026-09-30",
@@ -32681,7 +32681,7 @@
                 "accessed_at": "2026-09-30",
                 "details": [
                   "职业定义、18项任务、工作情境、RC兴趣和准备区间。",
-                  "2025工资18.64美元/小时、38,760美元/年；就业页仍为2024—2034，最新预测另用BLS。"
+                  "原2026-09-30工资读取为18.64美元/小时、38,760美元/年；本轮O*NET已显示2025—2035就业。精确预测仍以BLS表1.2为依据，不批量刷新历史访问日期。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "interest-profiler",
@@ -38120,27 +38120,27 @@
         ]
       },
       {
-        "derivation": "已查2025职业入口和O*NET工资跳转，未读取对应明细；不以历史值代填",
-        "display_value": "证据不足：2025年第10百分位未取得可读明细",
+        "derivation": "直接读取May2025 National Wages United States行，分位不当职级，不自行年化。",
+        "display_value": "28,650美元/年；13.78美元/小时",
         "fact_id": "us-p10-2025",
         "market": "美国",
         "measure": "第10百分位工资",
         "occupation_scope": "SOC 51-6062纺织裁剪设备设定、操作与看护，美国精确职业",
         "period": "2025",
         "source_refs": [
-          "oews"
+          "r2-pay-1"
         ]
       },
       {
-        "derivation": "不由中位数推算，不当职级或保证",
-        "display_value": "证据不足：2025年第90百分位未取得可读明细",
+        "derivation": "直接读取May2025 National Wages United States行，分位不当职级，不自行年化。",
+        "display_value": "49,420美元/年；23.76美元/小时",
         "fact_id": "us-p90-2025",
         "market": "美国",
         "measure": "第90百分位工资",
         "occupation_scope": "SOC 51-6062纺织裁剪设备设定、操作与看护，美国精确职业",
         "period": "2025",
         "source_refs": [
-          "oews"
+          "r2-pay-1"
         ]
       },
       {
@@ -38246,7 +38246,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "O*NET-SOC 51-6062.00 精确职业口径",
@@ -38297,7 +38297,7 @@
       "text": "纺织裁剪设备设定员、操作员与看护员"
     }
   },
-  "source_content_sha256": "30f621b8d829b3668039aa6daea65142433b52e370bb0bb9278932352f6de00d",
+  "source_content_sha256": "9eec408b97363c497cc530be36dbb608b9b78709b46eeb5367f7f540de2ffa22",
   "subject": {
     "canonical_slug": "textile-cutting-machine-setters-operators-and-tenders",
     "name": "纺织裁剪设备设定员、操作员与看护员",

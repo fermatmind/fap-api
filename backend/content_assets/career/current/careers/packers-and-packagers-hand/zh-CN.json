@@ -12827,7 +12827,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用虚构订单和十件样品模拟分拣、装箱和异常记录。"
+              "探索实物整理、计量和完成件任务兴趣，不证明包装准确率。"
             ]
           },
           "id": "packers-and-packagers-hand.fit.riasec-fit-block.7",
@@ -12841,7 +12841,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣测评不能替代现场训练、体力评估或雇主安全要求。"
+              "编辑探索建议；未验证本测评对该职业的预测或比较效度。"
             ]
           },
           "id": "packers-and-packagers-hand.fit.personality-fit-block.8",
@@ -12863,7 +12863,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "错品、漏件或混批：订单和实物双重核对，异常件隔离，保留数量记录。"
+              "包装、工具、输送和搬取任务依现场训练与授权；美国通用防护和工效资料不授中国权限。"
             ]
           },
           "id": "packers-and-packagers-hand.risk.career-risk-cards.1",
@@ -12877,7 +12877,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "破损或封口不牢：检查容器与材料适配，避免运输中损坏。"
+              "分别核订单错漏、包材封口、搬取、刀具、设备夹点和目的地标签。"
             ]
           },
           "id": "packers-and-packagers-hand.risk.career-risk-cards.2",
@@ -12891,7 +12891,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "搬运与工效：重复弯腰、扭转和举升可增加伤害风险；使用工作站调整与辅助工具。"
+              "O*NET支持人工检查称重标签与工具任务；OSHA提供美国机械防护背景，NIOSH通用工效背景；具体后果与控制为编辑归纳，无本职发生率。"
             ]
           },
           "id": "packers-and-packagers-hand.risk.career-risk-cards.3",
@@ -12905,7 +12905,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "切割工具与传送设备：遵守护罩和工具规程，异常时停用并升级。"
+              "包装者与订单接收方"
             ]
           },
           "id": "packers-and-packagers-hand.risk.career-risk-cards.4",
@@ -12920,7 +12920,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "标签和数据错误：核对目的地、批次及敏感订单信息，防止错发。"
+              "可能错发、短少或需要返工。"
             ]
           },
           "id": "packers-and-packagers-hand.risk.career-risk-cards.5",
@@ -14186,28 +14186,28 @@
         ],
         "risk_rows": [
           {
-            "为什么重要": "可能导致退货、损坏或人员伤害。",
-            "控制方式": "核订单与实物、复秤、隔离异常并记录升级。",
+            "为什么重要": "系统匹配不能排除错品漏件。",
+            "控制方式": "核实物SKU与数量。",
             "风险": "错品漏件"
           },
           {
-            "为什么重要": "可能导致退货、损坏或人员伤害。",
-            "控制方式": "核订单与实物、复秤、隔离异常并记录升级。",
+            "为什么重要": "漂移或单位错误可能造成重量误判。",
+            "控制方式": "核秤校准、单位与原值。",
             "风险": "秤漂移"
           },
           {
-            "为什么重要": "可能导致退货、损坏或人员伤害。",
-            "控制方式": "核订单与实物、复秤、隔离异常并记录升级。",
+            "为什么重要": "模板错配可能错发。",
+            "控制方式": "核订单目的地与包裹标签。",
             "风险": "错标错发"
           },
           {
-            "为什么重要": "可能导致退货、损坏或人员伤害。",
-            "控制方式": "核订单与实物、复秤、隔离异常并记录升级。",
+            "为什么重要": "箱型建议不证明人工搬取适宜。",
+            "控制方式": "核重量、工位和辅助安排。",
             "风险": "超重搬取"
           },
           {
-            "为什么重要": "可能导致退货、损坏或人员伤害。",
-            "控制方式": "核订单与实物、复秤、隔离异常并记录升级。",
+            "为什么重要": "汇总记录可能与真实完成件不一致。",
+            "控制方式": "对照实物件数和接收人留痕。",
             "风险": "错误交接"
           }
         ],
@@ -14222,7 +14222,7 @@
             "人的控制点": "检查相似商品",
             "任务": "选择正确产品并计数",
             "工作方向": "分拣计数",
-            "当前变化": "扫码减少错拿"
+            "当前变化": "扫码可作为错品提示的候选辅助；是否减少错拿须按实物样本和流程验证。"
           },
           {
             "人的控制点": "验证单位与校准",
@@ -14328,29 +14328,29 @@
               {
                 "credentials": "核对岗位训练和工具许可。",
                 "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "订单、包装件、重量与异常记录。",
-                "responsibility": "按当前训练与雇主授权处理产品。",
+                "readiness_evidence": "观察笔记、输入清单与未知项。",
+                "responsibility": "在获准观察或模拟中学习基础学习的输入、交付与责任，不独立处理真实对象。",
                 "role": "职业探索者"
               },
               {
                 "credentials": "核对岗位训练和工具许可。",
                 "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "订单、包装件、重量与异常记录。",
-                "responsibility": "按当前训练与雇主授权处理产品。",
+                "readiness_evidence": "监督反馈、核对表与更正记录。",
+                "responsibility": "在岗位训练及监督中练习基础学习，核原始输入、记录反馈和异常。",
                 "role": "培训学员"
               },
               {
                 "credentials": "核对岗位训练和工具许可。",
                 "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "订单、包装件、重量与异常记录。",
-                "responsibility": "按当前训练与雇主授权处理产品。",
+                "readiness_evidence": "对应训练权限、任务记录与接收人。",
+                "responsibility": "完成训练并取得相应权限后承担基础学习职责，保留执行与交接记录；设备、叉车、危险品及质量放行权限另核。",
                 "role": "在岗包装工"
               },
               {
                 "credentials": "核对岗位训练和工具许可。",
                 "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "订单、包装件、重量与异常记录。",
-                "responsibility": "按当前训练与雇主授权处理产品。",
+                "readiness_evidence": "异常复盘与修订反馈；不自动扩大权限。",
+                "responsibility": "在相应职责内复盘基础学习的复杂异常并改进交接；承担新任务前另核能力和权限。",
                 "role": "在岗包装工"
               }
             ],
@@ -14362,29 +14362,29 @@
               {
                 "credentials": "核对岗位训练和工具许可。",
                 "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "订单、包装件、重量与异常记录。",
-                "responsibility": "按当前训练与雇主授权处理产品。",
+                "readiness_evidence": "观察笔记、输入清单与未知项。",
+                "responsibility": "在获准观察或模拟中学习监督下包装的输入、交付与责任，不独立处理真实对象。",
                 "role": "职业探索者"
               },
               {
                 "credentials": "核对岗位训练和工具许可。",
                 "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "订单、包装件、重量与异常记录。",
-                "responsibility": "按当前训练与雇主授权处理产品。",
+                "readiness_evidence": "监督反馈、核对表与更正记录。",
+                "responsibility": "在岗位训练及监督中练习监督下包装，核原始输入、记录反馈和异常。",
                 "role": "培训学员"
               },
               {
                 "credentials": "核对岗位训练和工具许可。",
                 "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "订单、包装件、重量与异常记录。",
-                "responsibility": "按当前训练与雇主授权处理产品。",
+                "readiness_evidence": "对应训练权限、任务记录与接收人。",
+                "responsibility": "完成训练并取得相应权限后承担监督下包装职责，保留执行与交接记录；设备、叉车、危险品及质量放行权限另核。",
                 "role": "在岗包装工"
               },
               {
                 "credentials": "核对岗位训练和工具许可。",
                 "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "订单、包装件、重量与异常记录。",
-                "responsibility": "按当前训练与雇主授权处理产品。",
+                "readiness_evidence": "异常复盘与修订反馈；不自动扩大权限。",
+                "responsibility": "在相应职责内复盘监督下包装的复杂异常并改进交接；承担新任务前另核能力和权限。",
                 "role": "在岗包装工"
               }
             ],
@@ -14396,29 +14396,29 @@
               {
                 "credentials": "核对岗位训练和工具许可。",
                 "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "订单、包装件、重量与异常记录。",
-                "responsibility": "按当前训练与雇主授权处理产品。",
+                "readiness_evidence": "观察笔记、输入清单与未知项。",
+                "responsibility": "在获准观察或模拟中学习独立工作与发展的输入、交付与责任，不独立处理真实对象。",
                 "role": "职业探索者"
               },
               {
                 "credentials": "核对岗位训练和工具许可。",
                 "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "订单、包装件、重量与异常记录。",
-                "responsibility": "按当前训练与雇主授权处理产品。",
+                "readiness_evidence": "监督反馈、核对表与更正记录。",
+                "responsibility": "在岗位训练及监督中练习独立工作与发展，核原始输入、记录反馈和异常。",
                 "role": "培训学员"
               },
               {
                 "credentials": "核对岗位训练和工具许可。",
                 "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "订单、包装件、重量与异常记录。",
-                "responsibility": "按当前训练与雇主授权处理产品。",
+                "readiness_evidence": "对应训练权限、任务记录与接收人。",
+                "responsibility": "完成训练并取得相应权限后承担独立工作与发展职责，保留执行与交接记录；设备、叉车、危险品及质量放行权限另核。",
                 "role": "在岗包装工"
               },
               {
                 "credentials": "核对岗位训练和工具许可。",
                 "next_moves": "补足设备和质量技能。",
-                "readiness_evidence": "订单、包装件、重量与异常记录。",
-                "responsibility": "按当前训练与雇主授权处理产品。",
+                "readiness_evidence": "异常复盘与修订反馈；不自动扩大权限。",
+                "responsibility": "在相应职责内复盘独立工作与发展的复杂异常并改进交接；承担新任务前另核能力和权限。",
                 "role": "在岗包装工"
               }
             ],
@@ -14631,68 +14631,68 @@
               "onet"
             ],
             "id": "cost-change",
-            "mitigation": "核对实物、选择合适包材、使用辅助工具并按流程升级。",
-            "scenario": "订单和实物不符。",
+            "mitigation": "对照订单实物计数，隔离异常并记录。",
+            "scenario": "实物SKU或数量与订单不一致仍封箱。",
             "title": "错品漏件"
           },
           {
-            "affected_roles": "包装工、同事和包裹接收方。",
-            "consequence": "可能导致退货、损失或人员伤害。",
+            "affected_roles": "包裹接收者与质量人员",
+            "consequence": "可能运输破损或保护失效。",
             "evidence_refs": [
               "onet",
               "onet"
             ],
             "id": "record-version",
-            "mitigation": "核对实物、选择合适包材、使用辅助工具并按流程升级。",
-            "scenario": "包材不适配或封口松脱。",
+            "mitigation": "核材料适配和封口，异常交质量复核。",
+            "scenario": "不适配的包材或松脱封口被当成完成件。",
             "title": "封口破损"
           },
           {
-            "affected_roles": "包装工、同事和包裹接收方。",
-            "consequence": "可能导致退货、损失或人员伤害。",
+            "affected_roles": "搬取人员",
+            "consequence": "可能增加肌肉骨骼负担。",
             "evidence_refs": [
               "privacy",
               "privacy"
             ],
             "id": "personal-data",
-            "mitigation": "核对实物、选择合适包材、使用辅助工具并按流程升级。",
-            "scenario": "重复举升和扭转。",
+            "mitigation": "核重量限制、工位和辅助安排，超范围求援。",
+            "scenario": "反复举搬扭转且重量和辅助安排未核。",
             "title": "搬运负担"
           },
           {
-            "affected_roles": "包装工、同事和包裹接收方。",
-            "consequence": "可能导致退货、损失或人员伤害。",
+            "affected_roles": "工具使用者",
+            "consequence": "可能造成割伤。",
             "evidence_refs": [
               "facilities",
               "facilities"
             ],
             "id": "technical-boundary",
-            "mitigation": "核对实物、选择合适包材、使用辅助工具并按流程升级。",
-            "scenario": "使用切割工具开箱。",
+            "mitigation": "按工具规程和岗位训练使用，异常停用升级。",
+            "scenario": "用未训练的切割方法开箱。",
             "title": "刀具伤害"
           },
           {
-            "affected_roles": "包装工、同事和包裹接收方。",
-            "consequence": "可能导致退货、损失或人员伤害。",
+            "affected_roles": "设备附近人员",
+            "consequence": "可能造成夹伤或卷入。",
             "evidence_refs": [
               "bls",
               "bls"
             ],
             "id": "single-coverage",
-            "mitigation": "核对实物、选择合适包材、使用辅助工具并按流程升级。",
-            "scenario": "靠近输送运动部件。",
+            "mitigation": "按机械防护程序处理，不越危险区取件。",
+            "scenario": "在输送运动件附近越防护取件。",
             "title": "设备夹点"
           },
           {
-            "affected_roles": "包装工、同事和包裹接收方。",
-            "consequence": "可能导致退货、损失或人员伤害。",
+            "affected_roles": "订单客户与交接人员",
+            "consequence": "可能错发并损害订单追溯。",
             "evidence_refs": [
               "onet",
               "onet"
             ],
             "id": "delivery-acceptance",
-            "mitigation": "核对实物、选择合适包材、使用辅助工具并按流程升级。",
-            "scenario": "目的地或批次标签错误。",
+            "mitigation": "核订单、目的地和受影响数量，未决不交付。",
+            "scenario": "包裹目的地或批次与标签不一致。",
             "title": "错标错发"
           }
         ],
@@ -14701,8 +14701,8 @@
           {
             "href": "https://www.onetonline.org/link/summary/53-7064.00",
             "id": "onet",
-            "label": "O*NET 手工包装任务",
-            "scope": "检查封口标签记录任务；风险处理是编辑建议"
+            "label": "O*NET任务背景；控制为编辑建议",
+            "scope": "不证明风险概率、隐私法律或机构授权"
           },
           {
             "href": "https://www.osha.gov/etools/machine-guarding/introduction/general-requirements",
@@ -14713,8 +14713,8 @@
           {
             "href": "https://www.onetonline.org/link/details/53-7064.00",
             "id": "facilities",
-            "label": "O*NET 手工工具任务",
-            "scope": "美国职业工作情境；具体刀具规范依现场要求"
+            "label": "O*NET任务背景；控制为编辑建议",
+            "scope": "不证明风险概率、隐私法律或机构授权"
           },
           {
             "href": "https://www.cdc.gov/niosh/ergonomics/about/index.html",
@@ -14725,8 +14725,8 @@
           {
             "href": "https://www.onetonline.org/link/summary/53-7064.00",
             "id": "onet",
-            "label": "O*NET 手工包装任务",
-            "scope": "检查封口标签记录背景，不提供安全授权"
+            "label": "O*NET任务背景；控制为编辑建议",
+            "scope": "不证明风险概率、隐私法律或机构授权"
           }
         ]
       },
@@ -14822,7 +14822,7 @@
               "需求": "核对拣选与装箱职责。"
             }
           ],
-          "china_intl": "National Certifications 53-7064.00 Packers And Packagers, Hand｜https://www.onetonline.org/link/localcert/53-7064.00",
+          "china_intl": "O*NET手工包装任务与中国映射边界｜https://www.onetonline.org/link/details/53-7064.00；美国认证目录不证明中国职业工资。",
           "china_name_row": "中国工资：按实际雇主区分宽参考",
           "china_open": "可用公开职责与技能信息做职业探索，但不能据此推导中国市场工资。",
           "china_open_note": "如需薪资判断，应回到具体城市、雇主、岗位级别和公开招聘条件核对。",
@@ -14954,7 +14954,7 @@
         "growth": "-5.0%",
         "heading": "美国手工包装工资与就业",
         "industry_heading": "行业与岗位差异",
-        "industry_period": "2025",
+        "industry_period": "雇主条件核对；无行业工资统计",
         "industry_rows": [
           {
             "industry": "零售贸易",
@@ -14977,7 +14977,7 @@
             "note": "全国中位数不是个人报价。"
           }
         ],
-        "industry_value_label": "美国精确职业口径",
+        "industry_value_label": "数据状态",
         "interpretation_heading": "如何解读",
         "interpretation_rows": [
           {
@@ -15023,9 +15023,9 @@
         "outlook_heading": "就业前景",
         "outlook_period": "2025—2035",
         "wage_column_labels": [
-          "工资层级",
+          "工资统计范围",
           "年薪参考",
-          "月度等值",
+          "计酬边界",
           "解释"
         ],
         "wage_heading": "工资数据",
@@ -15226,68 +15226,68 @@
         ],
         "transitions": [
           {
-            "capability_gaps": "目标设备、检验或物流技能需补足",
-            "shared_capabilities": "订单核对、产品处理与异常记录",
+            "capability_gaps": "补设备供料、首件、报警及参数安全授权。",
+            "shared_capabilities": "标签数量和包装缺陷记录。",
             "target_href": "/zh/career/jobs/packaging-and-filling-machine-operators-and-tenders",
             "target_slug": "packaging-and-filling-machine-operators-and-tenders",
             "target_title": "包装与灌装机操作员",
-            "transition_distance": "需核对具体岗位"
+            "transition_distance": "编辑判断：需补目标任务与资格"
           },
           {
-            "capability_gaps": "目标设备、检验或物流技能需补足",
-            "shared_capabilities": "订单核对、产品处理与异常记录",
+            "capability_gaps": "补检验标准、抽样、量具和质量判定权限。",
+            "shared_capabilities": "产品检查、称重和缺陷记录。",
             "target_href": "/zh/career/jobs/inspectors-testers-sorters-samplers-and-weighers",
             "target_slug": "inspectors-testers-sorters-samplers-and-weighers",
             "target_title": "质量检验员",
-            "transition_distance": "需核对具体岗位"
+            "transition_distance": "编辑判断：需补目标任务与资格"
           },
           {
-            "capability_gaps": "目标设备、检验或物流技能需补足",
-            "shared_capabilities": "订单核对、产品处理与异常记录",
+            "capability_gaps": "补目标生产辅助工艺和防护。",
+            "shared_capabilities": "材料整理、供料和协作。",
             "target_href": "/zh/career/jobs/helpers-production-workers",
             "target_slug": "helpers-production-workers",
             "target_title": "生产辅助工",
-            "transition_distance": "需核对具体岗位"
+            "transition_distance": "编辑判断：需补目标任务与资格"
           },
           {
-            "capability_gaps": "目标设备、检验或物流技能需补足",
-            "shared_capabilities": "订单核对、产品处理与异常记录",
+            "capability_gaps": "补物料运输、路线和工效训练；搬运岗位与包装工职责不同。",
+            "shared_capabilities": "产品搬取、数量及交接。",
             "target_href": "/zh/career/jobs/laborers-and-freight-stock-and-material-movers-hand",
             "target_slug": "laborers-and-freight-stock-and-material-movers-hand",
             "target_title": "手工物料搬运员",
-            "transition_distance": "需核对具体岗位"
+            "transition_distance": "编辑判断：需补目标任务与资格"
           },
           {
-            "capability_gaps": "目标设备、检验或物流技能需补足",
-            "shared_capabilities": "订单核对、产品处理与异常记录",
+            "capability_gaps": "补配方混合、食品卫生和配料设备训练。",
+            "shared_capabilities": "称量、批号与清洁意识。",
             "target_href": "/zh/career/jobs/food-batchmakers",
             "target_slug": "food-batchmakers",
             "target_title": "食品配料工",
-            "transition_distance": "需核对具体岗位"
+            "transition_distance": "编辑判断：需补目标任务与资格"
           },
           {
-            "capability_gaps": "目标设备、检验或物流技能需补足",
-            "shared_capabilities": "订单核对、产品处理与异常记录",
+            "capability_gaps": "补胶黏剂固化、设备控制和材料防护工艺。",
+            "shared_capabilities": "封合质量和异常记录。",
             "target_href": "/zh/career/jobs/adhesive-bonding-machine-operators-and-tenders",
             "target_slug": "adhesive-bonding-machine-operators-and-tenders",
             "target_title": "胶粘设备操作工",
-            "transition_distance": "需核对具体岗位"
+            "transition_distance": "编辑判断：需补目标任务与资格"
           },
           {
-            "capability_gaps": "目标设备、检验或物流技能需补足",
-            "shared_capabilities": "订单核对、产品处理与异常记录",
+            "capability_gaps": "补纸材模切成形、刀具张力和换型工艺。",
+            "shared_capabilities": "纸箱材料、尺寸及质量核对。",
             "target_href": "/zh/career/jobs/paper-goods-machine-setters-operators-and-tenders",
             "target_slug": "paper-goods-machine-setters-operators-and-tenders",
             "target_title": "纸制品设备操作工",
-            "transition_distance": "需核对具体岗位"
+            "transition_distance": "编辑判断：需补目标任务与资格"
           },
           {
-            "capability_gaps": "目标设备、检验或物流技能需补足",
-            "shared_capabilities": "订单核对、产品处理与异常记录",
+            "capability_gaps": "补机械诊断拆修、危险能源训练及维修权限。",
+            "shared_capabilities": "设备异常观察和交接。",
             "target_href": "/zh/career/jobs/industrial-machinery-mechanics",
             "target_slug": "industrial-machinery-mechanics",
             "target_title": "工业机械维修技师",
-            "transition_distance": "需核对具体岗位"
+            "transition_distance": "编辑判断：需补目标任务与资格"
           }
         ]
       },
@@ -15346,8 +15346,8 @@
               "type": "prose"
             },
             "id": "riasec",
-            "label": "动手兴趣线索",
-            "question": "测评能证明包装准确率吗？",
+            "label": "霍兰德职业兴趣",
+            "question": "如何用霍兰德职业兴趣探索手工包装工作？",
             "signals": {
               "$item": "packers-and-packagers-hand.fit.riasec-fit-block.1",
               "block": "fit",
@@ -15357,13 +15357,13 @@
             "watchout": "不能替代工作样本或雇主训练。"
           },
           {
-            "answer": "手工包装工可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "反思重复任务下的核对和异常记录习惯，带教反馈另核。",
+            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
             "cta_label": "了解人格特质",
-            "evidence_level": "职业探索线索，不是岗位授权。",
+            "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "big-five",
-            "label": "流程偏好",
-            "question": "测评能证明包装准确率吗？",
+            "label": "大五人格",
+            "question": "如何用大五人格探索手工包装工作？",
             "signals": {
               "$item": "packers-and-packagers-hand.fit.personality-fit-block.2",
               "block": "fit",
@@ -15373,13 +15373,13 @@
             "watchout": "不能替代工作样本或雇主训练。"
           },
           {
-            "answer": "手工包装工可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "记录动手、规则与协作偏好，不据类型决定体力或能力。",
+            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
             "cta_label": "探索职业兴趣",
-            "evidence_level": "职业探索线索，不是岗位授权。",
+            "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "mbti",
-            "label": "安全习惯",
-            "question": "测评能证明包装准确率吗？",
+            "label": "MBTI 偏好",
+            "question": "如何用MBTI 偏好探索手工包装工作？",
             "signals": {
               "$item": "packers-and-packagers-hand.fit.personality-fit-block.3",
               "block": "fit",
@@ -15389,13 +15389,13 @@
             "watchout": "不能替代工作样本或雇主训练。"
           },
           {
-            "answer": "手工包装工可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "可反思返工和节拍压力；类型未验证职业效度。",
+            "cta_href": "/zh/tests/enneagram-personality-test-nine-types",
             "cta_label": "了解人格特质",
-            "evidence_level": "职业探索线索，不是岗位授权。",
+            "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "enneagram",
-            "label": "动手兴趣线索",
-            "question": "测评能证明包装准确率吗？",
+            "label": "九型人格",
+            "question": "如何用九型人格探索手工包装工作？",
             "signals": {
               "$item": "packers-and-packagers-hand.fit.riasec-fit-block.4",
               "block": "fit",
@@ -15405,13 +15405,13 @@
             "watchout": "不能替代工作样本或雇主训练。"
           },
           {
-            "answer": "手工包装工可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "观察数量单位和订单规则理解，不代替称重工具训练。",
+            "cta_href": "/zh/tests/iq-test-intelligence-quotient-assessment",
             "cta_label": "探索职业兴趣",
-            "evidence_level": "职业探索线索，不是岗位授权。",
+            "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "iq",
-            "label": "流程偏好",
-            "question": "测评能证明包装准确率吗？",
+            "label": "认知能力测评",
+            "question": "如何用认知能力测评探索手工包装工作？",
             "signals": {
               "$item": "packers-and-packagers-hand.fit.personality-fit-block.5",
               "block": "fit",
@@ -15421,13 +15421,13 @@
             "watchout": "不能替代工作样本或雇主训练。"
           },
           {
-            "answer": "手工包装工可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "关注准确说明错品、短少和交接未决项，不以自评替代工作反馈。",
+            "cta_href": "/zh/tests/eq-test-emotional-intelligence-assessment",
             "cta_label": "了解人格特质",
-            "evidence_level": "职业探索线索，不是岗位授权。",
+            "evidence_level": "编辑探索建议；未验证本测评对该职业的预测或比较效度。",
             "id": "eq",
-            "label": "安全习惯",
-            "question": "测评能证明包装准确率吗？",
+            "label": "情绪与沟通自评",
+            "question": "如何用情绪与沟通自评探索手工包装工作？",
             "signals": {
               "$item": "packers-and-packagers-hand.fit.personality-fit-block.6",
               "block": "fit",
@@ -15442,63 +15442,63 @@
         "directions": [
           {
             "direction": "包装与灌装机操作员方向",
-            "fit_signals": "可迁移订单核对、手工操作或质量记录。",
+            "fit_signals": "若偏好该方向的具体任务，可进一步观察：标签数量和包装缺陷记录。",
             "target": {
               "href": "/zh/career/jobs/packaging-and-filling-machine-operators-and-tenders",
               "slug": "packaging-and-filling-machine-operators-and-tenders",
               "title": "包装与灌装机操作员"
             },
-            "watchouts": "目标设备与安全训练另核。"
+            "watchouts": "补设备供料、首件、报警及参数安全授权。"
           },
           {
             "direction": "质量检验员方向",
-            "fit_signals": "可迁移订单核对、手工操作或质量记录。",
+            "fit_signals": "若偏好该方向的具体任务，可进一步观察：产品检查、称重和缺陷记录。",
             "target": {
               "href": "/zh/career/jobs/inspectors-testers-sorters-samplers-and-weighers",
               "slug": "inspectors-testers-sorters-samplers-and-weighers",
               "title": "质量检验员"
             },
-            "watchouts": "目标设备与安全训练另核。"
+            "watchouts": "补检验标准、抽样、量具和质量判定权限。"
           },
           {
             "direction": "生产辅助工方向",
-            "fit_signals": "可迁移订单核对、手工操作或质量记录。",
+            "fit_signals": "若偏好该方向的具体任务，可进一步观察：材料整理、供料和协作。",
             "target": {
               "href": "/zh/career/jobs/helpers-production-workers",
               "slug": "helpers-production-workers",
               "title": "生产辅助工"
             },
-            "watchouts": "目标设备与安全训练另核。"
+            "watchouts": "补目标生产辅助工艺和防护。"
           },
           {
             "direction": "手工物料搬运员方向",
-            "fit_signals": "可迁移订单核对、手工操作或质量记录。",
+            "fit_signals": "若偏好该方向的具体任务，可进一步观察：产品搬取、数量及交接。",
             "target": {
               "href": "/zh/career/jobs/laborers-and-freight-stock-and-material-movers-hand",
               "slug": "laborers-and-freight-stock-and-material-movers-hand",
               "title": "手工物料搬运员"
             },
-            "watchouts": "目标设备与安全训练另核。"
+            "watchouts": "补物料运输、路线和工效训练；搬运岗位与包装工职责不同。"
           },
           {
             "direction": "食品配料工方向",
-            "fit_signals": "可迁移订单核对、手工操作或质量记录。",
+            "fit_signals": "若偏好该方向的具体任务，可进一步观察：称量、批号与清洁意识。",
             "target": {
               "href": "/zh/career/jobs/food-batchmakers",
               "slug": "food-batchmakers",
               "title": "食品配料工"
             },
-            "watchouts": "目标设备与安全训练另核。"
+            "watchouts": "补配方混合、食品卫生和配料设备训练。"
           },
           {
             "direction": "胶粘设备操作工方向",
-            "fit_signals": "可迁移订单核对、手工操作或质量记录。",
+            "fit_signals": "若偏好该方向的具体任务，可进一步观察：封合质量和异常记录。",
             "target": {
               "href": "/zh/career/jobs/adhesive-bonding-machine-operators-and-tenders",
               "slug": "adhesive-bonding-machine-operators-and-tenders",
               "title": "胶粘设备操作工"
             },
-            "watchouts": "目标设备与安全训练另核。"
+            "watchouts": "补胶黏剂固化、设备控制和材料防护工艺。"
           }
         ],
         "heading": "手工包装适配与安全习惯",
@@ -15524,24 +15524,24 @@
             "question": "能准确贴标吗？"
           },
           {
-            "answer": "用模拟订单验证。",
-            "question": "能持续核对 SKU 吗？"
+            "answer": "手工任务经验可参考，设备监控与调参另需训练授权。",
+            "question": "设备包装与手工包装相同吗？"
           },
           {
-            "answer": "保留复秤记录。",
-            "question": "能准确计数称重吗？"
+            "answer": "仍核真实品类、数量、破损与标签，不据系统匹配放行。",
+            "question": "扫码一致就不必检查实物吗？"
           },
           {
-            "answer": "隔离异常件。",
-            "question": "能识别破损吗？"
+            "answer": "按雇主程序由获授权者决定，保留数量和未决事项。",
+            "question": "质量隔离能自行解除吗？"
           },
           {
-            "answer": "核对重量与姿势。",
-            "question": "能安全搬取吗？"
+            "answer": "目标设备或危险物品职责有独立训练和资格要求，普通包装培训不能覆盖。",
+            "question": "可直接转叉车或危险品岗位吗？"
           },
           {
-            "answer": "对照订单目的地。",
-            "question": "能准确贴标吗？"
+            "answer": "核班次、返工扣计、加班、重量、福利和实际合同单位。",
+            "question": "如何比较计件岗位？"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -15553,13 +15553,13 @@
             "tone": "positive"
           },
           {
-            "body": "按规格装箱封口。",
+            "body": "若不愿核SKU、标签或重量，或疲劳时仍超范围搬取，应先观察岗位和工效安排。",
             "id": "caution",
             "label": "手工操作",
             "tone": "caution"
           },
           {
-            "body": "记录短少、破损和错标。",
+            "body": "用虚构订单、安全样品模拟分拣计数与差异记录；不使用真实客户数据或设备。",
             "id": "experiment",
             "label": "异常记录",
             "tone": "action"
@@ -15645,7 +15645,7 @@
             "type": "prose"
           },
           "source": "O*NET 53-7064.00 精确职业资料。",
-          "updated_at": "资料核查：2026-09-26"
+          "updated_at": "资料核查：2026-10-12"
         },
         "note": "证据只支持手工包装工在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -15943,7 +15943,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "手工分拣 · 计量装箱 · 封口贴标",
@@ -15994,7 +15994,7 @@
       "text": "手工包装工：工作内容、工资与入行路径"
     }
   },
-  "source_content_sha256": "69bc507daa85d5b537dfa47a65fce8338609ee18673ff8153b37c1c018c28147",
+  "source_content_sha256": "9c1860a97dec7f612ad13fc467fccb33208cd66875e375d6edb16f405dc04038",
   "subject": {
     "canonical_slug": "packers-and-packagers-hand",
     "name": "手工包装工",

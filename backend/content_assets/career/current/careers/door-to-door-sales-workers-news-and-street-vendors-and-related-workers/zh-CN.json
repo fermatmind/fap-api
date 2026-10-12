@@ -35,6 +35,39 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:r5-current-china-jiaojiang-featured-daily-2026": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-employment": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-high": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-identity": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-amusement": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-education": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-theater": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-low": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-median": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-openings": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -8971,20 +9004,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.05.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            {
-              "id": "project-data"
-            },
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.05.mitigation": {
         "ref": {
@@ -9063,20 +9084,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.06.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            {
-              "id": "audition-feedback"
-            },
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.06.mitigation": {
         "ref": {
@@ -22669,12 +22678,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的工作对象是面对面销售现场：目标客户与人流地点、随身携带的商品与样品与说明材料与货款与零钱、客户的真实需求与异议与预算、报价与条件与交付与退换与取消权安排、摊位或经营地点与时段，以及订单与收款与凭证与跟进记录。产出是让销售能完成并事后可核对的销售结果：写清商品与价格与条件的说明、当面完成并记录的订单或当场交货收款、可核对的收款与找零与凭证与退换与取消权说明、补货与摊位整理记录，以及满意度跟进与新人培训。判断依据是商品的真实信息与明码标价、消费者保护与取消权与退款要求、本地经营与城市管理与食品安全（如涉及食品）要求与安全安排，而不是个人习惯或岗位名称。"
+              "本职业的工作对象是面对面销售现场：目标客户与人流地点、随身携带的商品与样品与说明材料与货款与零钱、客户的真实需求与异议与预算、报价与条件与交付与退换与取消权安排、摊位或经营地点与时段，以及订单与收款与凭证与跟进记录。产出是让销售能完成并事后可核对的销售结果：写清商品与价格与条件的说明、当面完成并记录的订单或当场交货收款、可核对的收款与找零与凭证与退换与取消权说明、部分岗位的补货与摊位整理记录，以及按实际职责可能承担的满意度跟进与新人培训。判断依据是商品的真实信息与明码标价、消费者保护与取消权与退款要求、本地经营与城市管理与食品安全（如涉及食品）要求与安全安排，而不是个人习惯或岗位名称。"
             ]
           },
           "id": "actors.profile.work-context-block.1",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -22753,12 +22762,14 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "判断六：现金与人身与信息安全是否守住——是否按现金控制与结伴与通信与退出安排作业，是否保护客户个人信息，是否在异常与冲突时按规定止损与上报。"
+              "编辑安全核对：现金保管、通信、结伴及退出安排按具体地点风险和真实制度核，未实采统一程序；紧急人身事件先保障安全并求助，消费权益按适用法律保护，不以内部顺序替代法定义务。"
             ]
           },
           "id": "actors.profile.work-context-block.7",
           "source_refs": [
-            "onet"
+            "teacher",
+            "r5-consumer-current",
+            "r5-ftc-current"
           ],
           "type": "prose"
         },
@@ -22767,12 +22778,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "环境与节奏：以面对面与现场环境为主并与公众高频接触；与他人持续接触 52%、每天电话交谈 55%、每天面对面讨论 36%；与外部客户或公众打交道「极其重要」70%，决策自由度「很大」88%，精确或准确「极其重要」17%，每天面对时间压力 17%，工作时间「不规律」67%，站立「约一半时间」46%，身体接近「中等接近」58%，应对不愉快或愤怒或粗鲁的人「每月以上」38%，冲突情境「每年以上」50%，竞争程度「极度竞争」13%，每天使用电子邮件 70%，确定任务与优先级「很大」79%。"
+              "O*NET57情境：接触52持续/43大部分；电话55每天/45每周但非每天；面对面36每天/50每周但非每天；公众70极重要30非常、邮件70每天；自由88很大、准确17极重要；日严格期限17；站46约半时/13持续/13超过半；坐33超过半时/33约半时；不规律67/规律33、周少于40小时92。愤怒人38每月但非每周/50每年但非每月；冲突50每年但非每月。不是“每月以上38/每年以上50”的累计比例，更不是全部人员长走、全天站、夜班或户外。行走50从不，全天候户外63从不；暴力人83从不、错误后果75完全不严重不证明事故概率。自动化25中等/25略有/46没有非GenAI。"
             ]
           },
           "id": "actors.profile.work-context-block.8",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -22921,12 +22933,19 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本表把本页职业与相邻岗位按核心目的、主要对象与依据、核心过程、主要产出、责任主体、协作与督导、结论边界七项逐一对照：本页职业（O*NET-SOC 41-9091.00）是非门店的面对面直接销售岗位，负责找人并演示与报价与成交与交付收款与留痕与跟进；零售销售工人一线主管（41-1011.00）管理门店人员与排班与业绩；司机兼销售员（53-3031.00）把固定线路的配送与销售结合并对车辆与货物负责；零售销售员（41-2031.00）在门店内服务到店顾客；广告销售代表（41-3011.00）向客户销售媒体或广告资源；服务销售代表（41-3091.00）向机构销售服务；演示员与产品推广员（41-9011.00）以现场演示与推广为主。比较时要以岗位职责、用工形态与所在法域法规逐项核对，不能按岗位名称互换，也不能把面对面直接销售职责读成门店管理权、车辆与货物责任、机构销售合同责任或法律与税务与消费权益结论。"
+              "O*NET41-9091定义为上门或街头销售商品/服务。14任务中11Core/1Supplemental/2New：补摊车货为补充；满意度联系和新人培训是新增、重要性未提供，不当所有岗位必做或由标题推管理权。说明演示、潜客名单、交货收款、订单、购买会、答疑、样品、流动销售、说服、样品展示、订购供应品为核心。邻职任务可能交叉，零售不必仅门店、服务销售不限机构、推广也可销售，按主要对象产出区分。 零售一线主管直接监督协调零售员工；司机兼销售按线路/区域可销售或配送，非每个都兼做；广告销售卖空间/时段/媒体，服务销售面向个人或企业而非仅机构；推广可销售所演示商品。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "agent",
+            "announcing",
+            "art",
+            "dancing",
+            "directing",
+            "editing"
           ],
           "type": "prose"
         },
@@ -22963,12 +22982,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的核心目的：零售一线主管保证门店人员与排班与业绩；司机兼销售保证固定线路的配送与销售；零售销售员保证门店到店顾客的成交与体验；广告销售代表保证媒体或广告资源的销售；服务销售代表保证机构服务合同的达成；演示员与产品推广员保证现场演示与推广效果。"
+              "相邻目的：监督零售员工；按线路/区域销售或配送；向消费者卖商品；卖广告空间/时段/媒体；向个人或企业销售服务；演示促进购买且可销售。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.purpose.secondary",
           "source_refs": [
-            "onet"
+            "agent",
+            "announcing",
+            "art",
+            "dancing",
+            "directing",
+            "editing"
           ],
           "type": "prose"
         },
@@ -23005,12 +23029,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的对象与依据：门店人员与排班与业绩（零售管理制度）；固定线路与车辆与货物（配送与运输制度与驾驶要求）；到店顾客与门店陈列（零售与门店制度）；媒体或广告资源与客户投放预算（广告销售制度）；机构服务需求与合同（服务销售制度）；现场演示与推广物料（推广与营销制度）。"
+              "相邻对象依零售员工、线路货物、消费者商品、广告空间时段媒体、个人或企业服务需求、产品演示划分，实际合同和权限另核。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.inputs.secondary",
           "source_refs": [
-            "onet"
+            "agent",
+            "announcing",
+            "art",
+            "dancing",
+            "directing",
+            "editing"
           ],
           "type": "prose"
         },
@@ -23047,12 +23076,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的过程：门店排班与业绩跟踪与督导（零售一线主管）；装车与配送与线路销售与回款（司机兼销售）；迎客与推荐与成交与结账（零售销售员）；客户开发与提案与签约（广告销售代表）；需求识别与方案与合同（服务销售代表）；现场演示与样品分发与线索收集（演示员与产品推广员）。"
+              "按目标定义区分监督协调、线路销售或配送、商品销售、广告资源销售、个人/企业服务销售、演示促进购买；不是相互完全排除的任务。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.process.secondary",
           "source_refs": [
-            "onet"
+            "agent",
+            "announcing",
+            "art",
+            "dancing",
+            "directing",
+            "editing"
           ],
           "type": "prose"
         },
@@ -23075,12 +23109,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "写清商品与价格与条件的说明、已记录或已录入的订单、可核对的收款与找零与凭证与发票、退换与取消权说明与处理记录、陈列与补货记录，以及满意度跟进与新人培训记录。"
+              "写清商品与价格与条件的说明、已记录或已录入的订单、可核对的收款与找零与凭证与发票、退换与取消权说明与处理记录、陈列记录；补货为部分岗位补充任务，满意度跟进及新人培训为新增且重要性未提供的任务，是否承担按具体职责核。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.outputs.primary",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23089,12 +23123,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的产出：门店排班与业绩与督导记录；配送与销售与回款记录；门店成交与会员与体验记录；广告投放合同与结案；服务合同与交付记录；演示与推广与线索记录。"
+              "目标产出为监督协调与可能采购预算人事、配送或销售交付、商品销售、广告空间时间媒介成交、个人或企业服务成交、产品演示及可选销售；具体会员/结案/合同文本未实采。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.outputs.secondary",
           "source_refs": [
-            "onet"
+            "agent",
+            "announcing",
+            "art",
+            "dancing",
+            "directing",
+            "editing"
           ],
           "type": "prose"
         },
@@ -23201,12 +23240,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "不夸大或虚假说明商品与价格、不隐瞒总价与附加费用或交付与退换条件、不给凭证或拒绝按取消权与退款要求处理、不在禁止区域或禁用时段经营、不携带超额现金或独自在隔离地点长时间停留而不做安全安排、不把客户名单与联系方式与支付信息用于工作以外用途、不超出授权对外承诺价格或作出法律或税务结论。"
+              "不得虚假宣传或隐瞒价格条件，不得拒绝依法出具凭证、处理法定退换/取消；具体经营地点时段、现金安全与个人信息按适用法规和授权核。中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。 美国16 CFR429：住宅交易至少25美元、其他适用地点至少130美元，须个人招揽/消费者主要个人家庭用途并核排除/豁免，非所有街头交易。取消至交易后第三business day午夜，该日排周日和联邦假日、含周六，不是通常周一至五工作日；销售方成交时口头告知及同语言凭证/两份取消表等，依429.1有效取消后10business days退款等，州地方法另核。 中国无证无照经营查处办法684号3条：指定场所时段销售农副产品/日用品或依法免许可便民技能劳务及其他法定免许可登记活动有例外，不是所有摊贩必办同一证。食品安全法2025修正35/36条：食用农产品免许可、仅预包装免许可但备案；食品摊贩按规模条件安全要求、省级具体办法及指定区域时段核，不套全国统一食品许可证。未实采每地摊位/城管规则、具体经营人资质与受雇/独立经营边界。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.boundary.primary",
           "source_refs": [
-            "onet"
+            "r5-consumer-current",
+            "r5-consumer-reg",
+            "r5-ftc-current",
+            "r5-registration",
+            "r5-food-current"
           ],
           "type": "prose"
         },
@@ -23243,12 +23286,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "常见错误集中在四类：一是商品与报价没说清就成交，导致总价与附加费用与交付与退换争议；二是需求与异议没处理就强推，导致投诉与退货与口碑受损；三是订单与收款与凭证没留痕，导致账目对不上与无法追溯；四是消费者权益与现金与人身安全没守住，导致违法经营与安全事件。核对办法是每项都有一个可回看的依据：商品信息与明码标价与总价清单、订单与收款与找零与凭证与发票记录、退换与取消权说明与处理记录、陈列与补货与拜访记录、现金与安全与结伴安排，而不是靠记忆或口头默契。"
+              "编辑风险核对建议：常见错误集中在四类：一是商品与报价没说清就成交，导致总价与附加费用与交付与退换争议；二是需求与异议没处理就强推，导致投诉与退货与口碑受损；三是订单与收款与凭证没留痕，导致账目对不上与无法追溯；四是消费者权益与现金与人身安全没守住，导致违法经营与安全事件。核对办法是每项都有一个可回看的依据：商品信息与明码标价与总价清单、订单与收款与找零与凭证与发票记录、退换与取消权说明与处理记录、陈列与补货与拜访记录、按实际工作地点核定的现金及安全安排（结伴是否适用需另核），而不是靠记忆或口头默契。未实采普遍机构处置顺序；紧急事件先安全求助，法定权益不得由内部程序排除。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.answer",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "teacher",
+            "r5-consumer-current"
           ],
           "type": "prose"
         },
@@ -23313,12 +23358,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按所在法域法规与交易条件执行：适用情形下应如实告知取消权或退货与退款条件并据此处理，不得以现场成交回避；在中国经营活动中应真实全面说明、明码标价、提供凭证、保护个人信息并处理投诉；食品经营还应符合食品安全要求。具体适用取决于金额、地点、商品服务与例外，本页按法规与制度名称与一般要求引用而未逐条核对条文编号。"
+              "中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。 美国16 CFR429：住宅交易至少25美元、其他适用地点至少130美元，须个人招揽/消费者主要个人家庭用途并核排除/豁免，非所有街头交易。取消至交易后第三business day午夜，该日排周日和联邦假日、含周六，不是通常周一至五工作日；销售方成交时口头告知及同语言凭证/两份取消表等，依429.1有效取消后10business days退款等，州地方法另核。 中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.04.answer",
           "source_refs": [
-            "onet"
+            "r5-consumer-current",
+            "r5-consumer-reg",
+            "r5-ftc-current",
+            "r5-direct-current"
           ],
           "type": "prose"
         },
@@ -23327,12 +23375,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "服务记录与满意度跟进是否按班次或按日完成，现金与货物与陈列是否可核对？"
+              "编辑核对：实际岗位是否承担满意度跟进、补货或培训，频率怎样约定？不把新增或补充任务规定为全部岗位每日或每班必做。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.05.question",
           "source_refs": [
-            "onet"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23341,12 +23389,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按本组织或经营安排保存客户与订单与服务记录并跟进满意度，记录应与订单与收款与凭证一致，便于复核与交接；客户名单与联系方式与支付信息应按最小必要保存并保护。"
+              "中国客户名单/联系方式等按可识别个人信息处理，不全称敏感个人信息；金融账户/行踪等另核敏感范围、合法依据/特定目的充分必要、适用单独同意和影响评估。消保法29条及2024实施条例23/24条限制过度收集/概括默认授权与商业信息电话，拒绝或取消即停止；批准系统账号不自动准许外部AI上传，去标识非匿名化。具体保管/导出/机构规程未采。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.05.answer",
           "source_refs": [
-            "onet"
+            "r5-cn-pipl",
+            "r5-consumer-current",
+            "r5-consumer-reg"
           ],
           "type": "prose"
         },
@@ -23355,12 +23405,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "客户投诉与消费权益争议或现金与人身安全异常出现时，是否按「先止损并保全凭证、按制度记录与处理或退款、必要时请主管或相关部门介入」的顺序处理？"
+              "编辑安全核对：现金保管、通信、结伴及退出安排按具体地点风险和真实制度核，未实采统一程序；紧急人身事件先保障安全并求助，消费权益按适用法律保护，不以内部顺序替代法定义务。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.06.question",
           "source_refs": [
-            "onet"
+            "teacher",
+            "r5-consumer-current",
+            "r5-ftc-current"
           ],
           "type": "prose"
         },
@@ -23439,12 +23491,17 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "责任边界：本职业承担说明与演示与报价与成交与交付与收款与留痕与跟进的执行责任；不夸大或虚假说明商品与价格、不隐瞒总价与附加费用或交付与退换条件、不给凭证或拒绝按取消权与退款要求处理、不在禁止区域或禁用时段经营、不把客户信息用于工作以外用途，投诉与安全异常立即上报。"
+              "中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。 中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。 中国客户名单/联系方式等按可识别个人信息处理，不全称敏感个人信息；金融账户/行踪等另核敏感范围、合法依据/特定目的充分必要、适用单独同意和影响评估。消保法29条及2024实施条例23/24条限制过度收集/概括默认授权与商业信息电话，拒绝或取消即停止；批准系统账号不自动准许外部AI上传，去标识非匿名化。具体保管/导出/机构规程未采。"
             ]
           },
           "id": "actors.display.responsibilities_block.06",
           "source_refs": [
-            "onet"
+            "r5-consumer-current",
+            "r5-consumer-reg",
+            "r5-direct-current",
+            "r5-cn-pipl",
+            "r5-consumer-current",
+            "r5-consumer-reg"
           ],
           "type": "prose"
         },
@@ -23467,12 +23524,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "以面对面与现场环境为主并与公众高频接触：与他人持续接触 52%（另 43% 大部分时间接触），每天电话交谈 55%，每天面对面讨论 36%（另 50% 每周以上）；与外部客户或公众打交道「极其重要」70%（另 30% 非常重要），决策自由度「很大」88%，精确或准确「极其重要」17%，每天面对时间压力 17%，工作时间「不规律」67%，站立「约一半时间」46%，身体接近「中等接近（一臂之内）」58%，应对不愉快或愤怒或粗鲁的人「每月以上」38%，冲突情境「每年以上」50%，竞争程度「极度竞争」13%（另 29% 高度、33% 中度），每天使用电子邮件 70%，确定任务与优先级「很大」79%（另 17% 一些）。"
+              "O*NET57情境：接触52持续/43大部分；电话55每天/45每周但非每天；面对面36每天/50每周但非每天；公众70极重要30非常、邮件70每天；自由88很大、准确17极重要；日严格期限17；站46约半时/13持续/13超过半；坐33超过半时/33约半时；不规律67/规律33、周少于40小时92。愤怒人38每月但非每周/50每年但非每月；冲突50每年但非每月。不是“每月以上38/每年以上50”的累计比例，更不是全部人员长走、全天站、夜班或户外。行走50从不，全天候户外63从不；暴力人83从不、错误后果75完全不严重不证明事故概率。自动化25中等/25略有/46没有非GenAI。"
             ]
           },
           "id": "actors.display.work_context_block.summary",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23509,12 +23567,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "按区域或线路或摊位或产品线分工：准备与找人、销售与成交、交付与收款与跟进；由带教或小组负责人统筹。"
+              "编辑可能按区域/品类/时段安排；自营与雇员监督不同，未实采统一小组负责人。"
             ]
           },
           "id": "actors.display.work_context_block.organization",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23523,12 +23582,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作时间「不规律」67%（随天气或需求或合同变化）；常见早晚与周末节假日与旺季的现场作业，节奏由人流量与天气与季节与业绩目标决定。"
+              "O*NET57情境：接触52持续/43大部分；电话55每天/45每周但非每天；面对面36每天/50每周但非每天；公众70极重要30非常、邮件70每天；自由88很大、准确17极重要；日严格期限17；站46约半时/13持续/13超过半；坐33超过半时/33约半时；不规律67/规律33、周少于40小时92。愤怒人38每月但非每周/50每年但非每月；冲突50每年但非每月。不是“每月以上38/每年以上50”的累计比例，更不是全部人员长走、全天站、夜班或户外。行走50从不，全天候户外63从不；暴力人83从不、错误后果75完全不严重不证明事故概率。自动化25中等/25略有/46没有非GenAI。 未实采全国周末旺季排班。"
             ]
           },
           "id": "actors.display.work_context_block.schedule",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23551,12 +23611,14 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "复核方式含交接与货款核对、订单与收款与凭证抽查、退换与取消权处理记录检查、陈列与补货与拜访记录核对、现金与安全安排检查；投诉与安全异常按规定上报。"
+              "编辑核报价订单/收款凭证/退换/现金与信息记录；机构具体抽查程序未采。"
             ]
           },
           "id": "actors.display.work_context_block.review",
           "source_refs": [
-            "onet"
+            "r5-consumer-current",
+            "r5-consumer-reg",
+            "teacher"
           ],
           "type": "prose"
         },
@@ -23593,12 +23655,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 41-9091.00：2024 年就业约 25,300 人，2024—2034 年预测为「下降（-1% 或更低）」，预计空缺 2,700；准备层级 Job Zone 1-2（SVP 低于 6.0），兴趣代码 ECR；任务共 14 项。"
+              "O*NET41-9091定义为上门或街头销售商品/服务。14任务中11Core/1Supplemental/2New：补摊车货为补充；满意度联系和新人培训是新增、重要性未提供，不当所有岗位必做或由标题推管理权。说明演示、潜客名单、交货收款、订单、购买会、答疑、样品、流动销售、说服、样品展示、订购供应品为核心。邻职任务可能交叉，零售不必仅门店、服务销售不限机构、推广也可销售，按主要对象产出区分。 O*NET新入职所需学历受访反馈57%低于高中/43%高中同等，不是57%岗位/雇主或在岗学历；JZ1—2/SVP<6准备组训练几天至一年、部分职业需数月一年经验，不是本职业统一数天数周或强制资格。BLS典型短期OJT非每岗培训法定期限。中国准入目录/美国全部州许可未逐核，不能宣称全国免照。 BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.onet",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -23607,12 +23671,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "工资为 BLS 2025 年工资数据口径：中位 41,380 美元/年（19.89 美元/时）；年度分位 32,010／36,470／41,380／47,390／51,470 美元；小时分位 15.39／17.54／19.89／22.78／24.74 美元。该口径为受雇工资统计，OEWS 不覆盖自雇者，佣金与费用报销与不规则经营收入未必进入同一口径。"
+              "美国41-9091精确职业，OEWS2025全国10/25/50/75/90分位年32,010/36,470/41,380/47,390/51,470美元、时15.39/17.54/19.89/22.78/24.74美元。受雇直时税前工资含佣金/生产奖金/规定津贴等；排自雇、加班溢价、轮班差额和非生产奖金等，不是“不含佣金”。自营流水/经营净额/费用报销不当受雇工资，分位不等起薪、销冠级别、毛利原因或个人收入上限。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
           "source_refs": [
-            "onet"
+            "bls",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -23621,12 +23686,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "主要行业为上门直销与零售与流动零售与食品与饮料零售等面对面销售场景；常见岗位含独立分销商与独立销售代表与上门销售培训与街头摊贩等，从业形态可能是雇员或佣金制或自营，多为按小时或按量或按业绩计酬。"
+              "O*NET当前页面未展示本职业更细行业分布/工资；BLS2025自雇94.6%为精确职业就业矩阵份额非OEWS工资覆盖，不能将面对面销售场景当统计行业份额或收入保证。 用工/委托/自营按合同核，不把佣金当与受雇互斥类别。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -23635,12 +23702,17 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆相关要求按制度与法规区分：经营活动中应真实全面说明、明码标价、提供凭证、保护个人信息并处理投诉（依《中华人民共和国消费者权益保护法》）；从事经营活动（个体工商户与摊贩与流动经营）应符合所在地市场监督与城市管理要求；如涉及食品还应符合食品安全要求。本条按法规与制度名称与一般要求引用，未逐条核对条文编号。美国侧在联邦规则适用的上门交易中，销售方须向消费者披露三工作日取消权（16 CFR Part 429，FTC 冷静期规则），是否适用取决于金额与地点与商品服务与例外。"
+              "中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。 中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。 中国无证无照经营查处办法684号3条：指定场所时段销售农副产品/日用品或依法免许可便民技能劳务及其他法定免许可登记活动有例外，不是所有摊贩必办同一证。食品安全法2025修正35/36条：食用农产品免许可、仅预包装免许可但备案；食品摊贩按规模条件安全要求、省级具体办法及指定区域时段核，不套全国统一食品许可证。未实采每地摊位/城管规则、具体经营人资质与受雇/独立经营边界。 美国16 CFR429：住宅交易至少25美元、其他适用地点至少130美元，须个人招揽/消费者主要个人家庭用途并核排除/豁免，非所有街头交易。取消至交易后第三business day午夜，该日排周日和联邦假日、含周六，不是通常周一至五工作日；销售方成交时口头告知及同语言凭证/两份取消表等，依429.1有效取消后10business days退款等，州地方法另核。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
           "source_refs": [
-            "onet"
+            "r5-consumer-current",
+            "r5-consumer-reg",
+            "r5-direct-current",
+            "r5-registration",
+            "r5-food-current",
+            "r5-ftc-current"
           ],
           "type": "prose"
         },
@@ -23649,12 +23721,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "本页不使用演员工会或影视行业口径；来源与使用边界见来源登记。"
+              "O*NET5软件类为浏览器、Office、路线映射、Excel、Facebook；Hot2025美国细类关联全部唯一招聘帖仅3关键词：Office/Excel各<1%，Facebook比例未提供非0，非实际使用率或AI效果。普通订单/库存/移动支付/路线系统不等GenAI；可编辑试用说明稿/公开商品FAQ，具体功能和效率减错须实测，无本细类部署替代/工资就业因果。ILO2025同批实际全文任务暴露研究无细类ISCO评分；NIST AI RMF1.0同批已核自愿框架不授法律/价格/退款权。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
           "source_refs": [
-            "onet"
+            "r5-ilo-current",
+            "r5-nist-current",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23663,12 +23738,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页精确对应美国 O*NET 41-9091.00 Door-to-Door Sales Workers, News and Street Vendors, and Related Workers（上门销售员与街头摊贩及相关人员）：上门或沿街销售商品或服务；说明商品或服务与价格并演示用法，开发潜在客户名单，交付商品并收取货款，书写或录入订单，组织购买会并争取赞助，回答商品功能与利益问题，分发样品或说明资料，步行或乘车在潜在客户间流动以交付或销售商品或服务，说服客户购买，在购买会或摊位上布置与展示样品，订购或采购供应品，补货或整理货架与摊位，联系客户确认满意度，并培训新招募人员或其他雇员；属非门店的面对面直接销售岗位，不含门店零售销售与零售一线管理、固定线路的司机兼销售、媒体与广告销售、机构服务销售、收银与电话营销；不提供法律、税务、消费权益或安全执业意见。"
+              "O*NET41-9091定义为上门或街头销售商品/服务。14任务中11Core/1Supplemental/2New：补摊车货为补充；满意度联系和新人培训是新增、重要性未提供，不当所有岗位必做或由标题推管理权。说明演示、潜客名单、交货收款、订单、购买会、答疑、样品、流动销售、说服、样品展示、订购供应品为核心。邻职任务可能交叉，零售不必仅门店、服务销售不限机构、推广也可销售，按主要对象产出区分。"
             ]
           },
           "id": "actors.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         }
@@ -24136,13 +24212,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以下为基于职业任务与工作情境的有限编辑推演，并非该职业的实际部署证据：AI 与信息系统在面对面销售里主要辅助客户与拜访信息整理、订单录入与对账、库存与补货提醒、路线与摆摊地点与时段建议、收款与凭证与移动支付以及客户满意度回访提醒。"
+              "O*NET5软件类为浏览器、Office、路线映射、Excel、Facebook；Hot2025美国细类关联全部唯一招聘帖仅3关键词：Office/Excel各<1%，Facebook比例未提供非0，非实际使用率或AI效果。普通订单/库存/移动支付/路线系统不等GenAI；可编辑试用说明稿/公开商品FAQ，具体功能和效率减错须实测，无本细类部署替代/工资就业因果。本轮实际读ILO2025官方摘要，未核SOC41-9091与ISCO映射及评分，不断言全文不存在细类评分；NIST AI RMF1.0同批已核自愿框架不授法律/价格/退款权。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.1",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24166,13 +24242,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "订单录入与对账与库存提醒可提高效率，但商品与价格与条件的说明与总价与附加费用仍须由销售员如实确认。"
+              "编辑试用订单格式核对，效率须具体系统实测；不能据任务证明已提效。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24196,15 +24272,18 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "收款与移动支付与凭证工具可减少差错，但找零与发票与退换与取消权处理不能只交给系统。"
+              "移动支付和凭证软件非GenAI；减错须实测，按法定权益/真实价格与授权核。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-consumer-current",
+            "r5-consumer-reg"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -24226,13 +24305,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "客户名单与联系方式与支付信息属于敏感信息，只能在批准的系统内按最小必要原则处理并留痕。"
+              "中国客户名单/联系方式等按可识别个人信息处理，不全称敏感个人信息；金融账户/行踪等另核敏感范围、合法依据/特定目的充分必要、适用单独同意和影响评估。消保法29条及2024实施条例23/24条限制过度收集/概括默认授权与商业信息电话，拒绝或取消即停止；批准系统账号不自动准许外部AI上传，去标识非匿名化。具体保管/导出/机构规程未采。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl",
+            "r5-consumer-current",
+            "r5-consumer-reg"
           ],
           "type": "prose"
         },
@@ -24256,13 +24336,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "国际劳工组织与世界论坛等研究把「任务暴露」与「实际采用、岗位增减」分开；本页没有本职业的采用率、裁员率或因果就业证据，这些数字保持未知，须以具体经营者与岗位验证。"
+              "O*NET5软件类为浏览器、Office、路线映射、Excel、Facebook；Hot2025美国细类关联全部唯一招聘帖仅3关键词：Office/Excel各<1%，Facebook比例未提供非0，非实际使用率或AI效果。普通订单/库存/移动支付/路线系统不等GenAI；可编辑试用说明稿/公开商品FAQ，具体功能和效率减错须实测，无本细类部署替代/工资就业因果。本轮实际读ILO2025官方摘要，未核SOC41-9091与ISCO映射及评分，不断言全文不存在细类评分；NIST AI RMF1.0同批已核自愿框架不授法律/价格/退款权。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.9",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24286,13 +24366,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 可辅助客户与拜访信息整理、订单录入与对账、库存与补货提醒、路线与地点与时段建议与收款工具，但不能替代如实说明与报价、消费者权益与退换与取消权处理、现场异议与安全异常处置以及销售与经营责任。"
+              "编辑可试公开商品说明/FAQ和非个人数据表；普通订单库存路线收款工具与GenAI分开。O*NET5软件类为浏览器、Office、路线映射、Excel、Facebook；Hot2025美国细类关联全部唯一招聘帖仅3关键词：Office/Excel各<1%，Facebook比例未提供非0，非实际使用率或AI效果。普通订单/库存/移动支付/路线系统不等GenAI；可编辑试用说明稿/公开商品FAQ，具体功能和效率减错须实测，无本细类部署替代/工资就业因果。本轮实际读ILO2025官方摘要，未核SOC41-9091与ISCO映射及评分，不断言全文不存在细类评分；NIST AI RMF1.0同批已核自愿框架不授法律/价格/退款权。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24316,13 +24396,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业档案（任务与工作情境）"
+              "2025招聘软件关键词"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.1.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24331,13 +24410,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅适用于美国 41-9091.00 的任务与情境描述，不映射中国岗位或经营制度。"
+              "只支持该文档范围；无本职业实际GenAI部署/效果证据。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.1.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24346,13 +24424,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS OEWS 工资与就业统计"
+              "ILO2025任务暴露"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24361,13 +24439,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅适用于所列职业与期间，不提供自动化或替代结论，且不覆盖自雇者。"
+              "只支持该文档范围；无本职业实际GenAI部署/效果证据。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24376,13 +24454,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 治理与风险管理来源"
+              "O*NET任务情境"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24391,13 +24469,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "治理原则供参考：透明、隐私、人工监督与留痕。"
+              "O*NET41-9091定义为上门或街头销售商品/服务。14任务中11Core/1Supplemental/2New：补摊车货为补充；满意度联系和新人培训是新增、重要性未提供，不当所有岗位必做或由标题推管理权。说明演示、潜客名单、交货收款、订单、购买会、答疑、样品、流动销售、说服、样品展示、订购供应品为核心。邻职任务可能交叉，零售不必仅门店、服务销售不限机构、推广也可销售，按主要对象产出区分。 O*NET57情境：接触52持续/43大部分；电话55每天/45每周但非每天；面对面36每天/50每周但非每天；公众70极重要30非常、邮件70每天；自由88很大、准确17极重要；日严格期限17；站46约半时/13持续/13超过半；坐33超过半时/33约半时；不规律67/规律33、周少于40小时92。愤怒人38每月但非每周/50每年但非每月；冲突50每年但非每月。不是“每月以上38/每年以上50”的累计比例，更不是全部人员长走、全天站、夜班或户外。行走50从不，全天候户外63从不；暴力人83从不、错误后果75完全不严重不证明事故概率。自动化25中等/25略有/46没有非GenAI。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24406,13 +24484,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不提供本职业采用率、替代概率或时间表。"
+              "只支持该文档范围；无本职业实际GenAI部署/效果证据。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24421,13 +24499,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业与用工结构来源"
+              "OEWS2025工资"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24436,13 +24514,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "说明本职业岗位分布在上门直销与零售与流动零售与食品与饮料零售等面对面销售场景。"
+              "美国41-9091精确职业，OEWS2025全国10/25/50/75/90分位年32,010/36,470/41,380/47,390/51,470美元、时15.39/17.54/19.89/22.78/24.74美元。受雇直时税前工资含佣金/生产奖金/规定津贴等；排自雇、加班溢价、轮班差额和非生产奖金等，不是“不含佣金”。自营流水/经营净额/费用报销不当受雇工资，分位不等起薪、销冠级别、毛利原因或个人收入上限。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24451,13 +24529,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用工结构不等于个人录用或收入保证。"
+              "只支持该文档范围；无本职业实际GenAI部署/效果证据。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24466,13 +24544,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合（本页说明与练习设计）"
+              "NIST AI RMF1.0"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24481,13 +24558,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅用于整理本页的说明与练习边界。"
+              "O*NET5软件类为浏览器、Office、路线映射、Excel、Facebook；Hot2025美国细类关联全部唯一招聘帖仅3关键词：Office/Excel各<1%，Facebook比例未提供非0，非实际使用率或AI效果。普通订单/库存/移动支付/路线系统不等GenAI；可编辑试用说明稿/公开商品FAQ，具体功能和效率减错须实测，无本细类部署替代/工资就业因果。本轮实际读ILO2025官方摘要，未核SOC41-9091与ISCO映射及评分，不断言全文不存在细类评分；NIST AI RMF1.0同批已核自愿框架不授法律/价格/退款权。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current",
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24496,13 +24573,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合不是外部事实、资格、法规或工资证据。"
+              "只支持该文档范围；无本职业实际GenAI部署/效果证据。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24556,13 +24632,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先限定在客户与拜访信息整理、订单录入与对账、库存与补货提醒、路线与地点与时段建议与收款工具等可复核环节。"
+              "编辑先试公开商品说明稿和无个人信息的模拟订单；收款和路由一般自动化不称GenAI，具体功能实测。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24631,13 +24707,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能；价格与条件与退款由明码标价与交易条件与消费者保护要求与经营者授权决定。"
+              "模型输出不自行授交易权限；依法标价、交易条件、有效授权和审计要求下能否自动执行具体价格退款功能须核真实系统，不作全面自动执行禁令。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-consumer-current",
+            "r5-ftc-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24661,13 +24738,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只在批准的系统内按最小必要处理，不用于工作以外用途，并按制度留痕并接受审计。"
+              "中国客户名单/联系方式等按可识别个人信息处理，不全称敏感个人信息；金融账户/行踪等另核敏感范围、合法依据/特定目的充分必要、适用单独同意和影响评估。消保法29条及2024实施条例23/24条限制过度收集/概括默认授权与商业信息电话，拒绝或取消即停止；批准系统账号不自动准许外部AI上传，去标识非匿名化。具体保管/导出/机构规程未采。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.6.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl",
+            "r5-consumer-current",
+            "r5-consumer-reg"
           ],
           "type": "prose"
         },
@@ -24691,13 +24769,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用可比班次或时段的订单准确率、对账差错与退换与投诉量与回访完成率做前后对照，并保留人工复核记录。"
+              "编辑先定样本口径/客流商品退款类型和人工审核，比较准确率/返工；前后差异不独立证明因果。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.7.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24736,13 +24814,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合"
+              "官方招聘软件关键词"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24751,13 +24828,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅用于本页 AI 边界的说明，不代表采用率或替代结论。"
+              "O*NET5软件类为浏览器、Office、路线映射、Excel、Facebook；Hot2025美国细类关联全部唯一招聘帖仅3关键词：Office/Excel各<1%，Facebook比例未提供非0，非实际使用率或AI效果。普通订单/库存/移动支付/路线系统不等GenAI；可编辑试用说明稿/公开商品FAQ，具体功能和效率减错须实测，无本细类部署替代/工资就业因果。本轮实际读ILO2025官方摘要，未核SOC41-9091与ISCO映射及评分，不断言全文不存在细类评分；NIST AI RMF1.0同批已核自愿框架不授法律/价格/退款权。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.scope",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24766,13 +24843,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "北美行业口径（不适用于本职业）"
+              "ILO官方研究摘要"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24781,13 +24857,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用演员工会或影视行业口径，仅登记其不适用。"
+              "实际链接改本轮所读ILO摘要；暴露非采用及效果，本职业SOC41-9091映射评分未核，不称全文无评分。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24796,13 +24871,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "北美行业口径（不适用于本职业）"
+              "美国精确职业档案"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24811,13 +24886,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用该口径，仅登记其不适用。"
+              "O*NET41-9091定义为上门或街头销售商品/服务。14任务中11Core/1Supplemental/2New：补摊车货为补充；满意度联系和新人培训是新增、重要性未提供，不当所有岗位必做或由标题推管理权。说明演示、潜客名单、交货收款、订单、购买会、答疑、样品、流动销售、说服、样品展示、订购供应品为核心。邻职任务可能交叉，零售不必仅门店、服务销售不限机构、推广也可销售，按主要对象产出区分。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24826,13 +24901,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业发布口径（不适用于本职业）"
+              "官方认证查询入口"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "ratify"
           ],
           "type": "prose"
         },
@@ -24841,13 +24915,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用该口径，仅登记其不适用。"
+              "不能证明所有州免照/中国资格或就业。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "ratify"
           ],
           "type": "prose"
         },
@@ -24856,13 +24929,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "官方统计"
+              "官方工资统计"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -24871,13 +24945,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅按 BLS/OEWS 2025 年工资与 O*NET 2024—2034 年预测口径使用。"
+              "实际工资链接支持本职业美国受雇工资分位，不包含自雇经营净额；就业预测人口及期间另见BLS表1.2，不用工资源证明。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -25816,13 +25890,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在禁止区域或禁用时段经营会被处罚或清理。"
+              "未经依法要求许可登记或违反具体区域时段规则可能承担对应责任；先核例外和主体，不一律停业清理。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.4.consequence",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-registration",
+            "r5-food-current"
           ],
           "type": "prose"
         },
@@ -25861,13 +25935,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "独自或在隔离地点携带现金与货物会提高暴力与盗抢风险。"
+              "OSHA跨行业危害指导：现金交易、独自或隔离、时段地点可能增加暴力风险，非所有摊位有同风险，不直接证明携带货物独立因果或盗抢发生率。应评估场所并选择工程/管理控制及培训；结伴/通信/退出/现金阈值是编辑措施须机构实证，不假称本站原文强制程序，官网称无专门工作场所暴力标准。非中国资格法定条件。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.5.consequence",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -25996,13 +26069,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "公开消费者权益与经营与安全与数据要求并接受监督。"
+              "明确商品交易和数据使用规则，披露对象内容按法律和机构授权核；安全与秘密资料不无限公开。"
             ]
           },
           "id": "actors.display.ai_impact_table.actions.4.action",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-consumer-current",
+            "r5-consumer-reg"
           ],
           "type": "prose"
         }
@@ -26019,12 +26092,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与中国大陆「上门销售员与街头摊贩及相关人员」精确对应的全国单职业工资口径。中国大陆公开工资资料按行业与单位类型统计，且本职业相关岗位可能采用雇员或佣金或自营模式，未建立与美国 O*NET 41-9091.00 一一对应的全国职业工资分布。"
+              "国家统计局2025批发零售城镇非私营135,749/私营69,622元税前年平均，只行业多职业背景非本职业中位/起薪/月薪。5人以上法人，不含个体/自由职业但不排全部按佣金计酬受雇者或外包法人雇员；自营账目另核净额/税费成本，不混工资。未取得中国精确职业全国分布或代表性招聘样本，不断言公开统计最高只有行业。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current",
+            "r5-direct-current"
           ],
           "type": "prose"
         },
@@ -26075,12 +26149,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "计酬口径常见差异：受雇岗位可能按小时或底薪加提成，佣金制可能按销售额比例结算，自营则表现为经营收入减去进货与摊位与交通等成本后的净额；比较时必须先确认统计量与成本口径，再作比较。"
+              "编辑比较受雇计酬合同、委托佣金、自营营收成本税费，不称已取得普遍薪酬样本。中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current",
+            "r5-direct-current"
           ],
           "type": "prose"
         },
@@ -26131,12 +26206,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本职业相关报酬形态差别很大：受雇上门销售常见「底薪＋提成＋交通与差旅补贴」，佣金制按销售额或订单结算，街头摊贩与个体经营则以经营收入减去进货与摊位与交通成本后的净额体现。"
+              "未实采代表性工资/合同；受雇佣金与自营形态分别核。中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current",
+            "r5-direct-current"
           ],
           "type": "prose"
         },
@@ -26145,12 +26221,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "批发和零售业行业门类平均工资覆盖的是行业就业人员，不等于本职业的岗位工资，也不覆盖个体经营与佣金制与自营收入。"
+              "国家统计局2025批发零售城镇非私营135,749/私营69,622元税前年平均，只行业多职业背景非本职业中位/起薪/月薪。5人以上法人，不含个体/自由职业但不排全部按佣金计酬受雇者或外包法人雇员；自营账目另核净额/税费成本，不混工资。未取得中国精确职业全国分布或代表性招聘样本，不断言公开统计最高只有行业。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current",
+            "r5-direct-current"
           ],
           "type": "prose"
         },
@@ -26159,12 +26236,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "旺季与节假日与人流高峰与天气良好时期销量与工作强度上升，计酬与营业安排会随季节与地点波动变化。"
+              "未实采全国天气/旺季对销量和工资的影响；按具体经营账目和工时核。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current",
+            "r5-direct-current"
           ],
           "type": "prose"
         },
@@ -26173,12 +26251,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆未发布与美国 41-9091.00 一一对应的全国职业工资分布，因此不给出中位数或分位数。"
+              "证据不足：本轮未取得精确全国职业工资分布，不断言所有统计未发布。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current",
+            "r5-direct-current"
           ],
           "type": "prose"
         },
@@ -26187,12 +26266,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "影响计酬的因素主要是城市与商圈或社区、受雇或佣金或自营形态、商品品类与毛利、摊位或地点的客流与租金、以及是否含提成与补贴与费用报销。"
+              "编辑合同及账目核查：城市社区、商品、客流租金、奖金提成补贴报销和进货税费怎样记录？佣金可以是受雇计酬，自营另核流水成本及净额。本轮未取职业报酬主次或因果排序样本。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26201,12 +26280,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与信息系统可辅助客户管理与订单与库存与移动支付与路线整理，但工资与经营收入结论不由此产生；本页只说明口径与边界。"
+              "O*NET5软件类为浏览器、Office、路线映射、Excel、Facebook；Hot2025美国细类关联全部唯一招聘帖仅3关键词：Office/Excel各<1%，Facebook比例未提供非0，非实际使用率或AI效果。普通订单/库存/移动支付/路线系统不等GenAI；可编辑试用说明稿/公开商品FAQ，具体功能和效率减错须实测，无本细类部署替代/工资就业因果。本轮实际读ILO2025官方摘要，未核SOC41-9091与ISCO映射及评分，不断言全文不存在细类评分；NIST AI RMF1.0同批已核自愿框架不授法律/价格/退款权。 工资因果未核。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current",
+            "r5-direct-current",
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -26237,13 +26318,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国统计口径：O*NET-SOC 41-9091.00 为精确职业口径。BLS 2025 年工资数据中位为 41,380 美元/年（19.89 美元/时）。该口径为受雇工资统计，OEWS 不覆盖自雇者，佣金、费用报销与不规则的经营收入未必进入同一口径。"
+              "美国41-9091精确职业，OEWS2025全国10/25/50/75/90分位年32,010/36,470/41,380/47,390/51,470美元、时15.39/17.54/19.89/22.78/24.74美元。受雇直时税前工资含佣金/生产奖金/规定津贴等；排自雇、加班溢价、轮班差额和非生产奖金等，不是“不含佣金”。自营流水/经营净额/费用报销不当受雇工资，分位不等起薪、销冠级别、毛利原因或个人收入上限。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26282,13 +26363,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业规模、预测变化与预计空缺分别回答不同问题，不能混成个人录用概率；本职业从业形态多样，官方统计主要覆盖受雇者。"
+              "BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -26402,13 +26482,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024 年就业约 25,300 人；2024—2034 年预测为「下降（-1% 或更低）」，预计空缺 2,700；该来源只给出类别而未给出具体百分比，本页按口径原文表述而不自行换算百分数；空缺同时包含增长与更替，不是净增岗位。"
+              "BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.project",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -26432,13 +26511,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "相关岗位分布在上门直销与零售与流动零售与食品与饮料零售等面对面销售场景；既有受雇岗位，也有佣金制与自营形态。"
+              "O*NET当前页面未展示本职业更细行业分布/工资；BLS2025自雇94.6%为精确职业就业矩阵份额非OEWS工资覆盖，不能将面对面销售场景当统计行业份额或收入保证。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -26447,13 +26527,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "教育反馈：57% 要求低于高中学历、43% 要求高中或同等学历；在职通常通过短期带教上手（该页未展示更高学历选项及百分比）。"
+              "O*NET新入职所需学历受访反馈57%低于高中/43%高中同等，不是57%岗位/雇主或在岗学历；JZ1—2/SVP<6准备组训练几天至一年、部分职业需数月一年经验，不是本职业统一数天数周或强制资格。BLS典型短期OJT非每岗培训法定期限。中国准入目录/美国全部州许可未逐核，不能宣称全国免照。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -26462,13 +26543,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工作场景为社区与街区与摊位与临时销售现场；不同地区与经营模式的合规与安全安排差别较大。"
+              "O*NET57情境：接触52持续/43大部分；电话55每天/45每周但非每天；面对面36每天/50每周但非每天；公众70极重要30非常、邮件70每天；自由88很大、准确17极重要；日严格期限17；站46约半时/13持续/13超过半；坐33超过半时/33约半时；不规律67/规律33、周少于40小时92。愤怒人38每月但非每周/50每年但非每月；冲突50每年但非每月。不是“每月以上38/每年以上50”的累计比例，更不是全部人员长走、全天站、夜班或户外。行走50从不，全天候户外63从不；暴力人83从不、错误后果75完全不严重不证明事故概率。自动化25中等/25略有/46没有非GenAI。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.amusement",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26477,13 +26558,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS 不覆盖自雇者；佣金制与自营收入与受雇工资不可直接比较。"
+              "O*NET当前页面未展示本职业更细行业分布/工资；BLS2025自雇94.6%为精确职业就业矩阵份额非OEWS工资覆盖，不能将面对面销售场景当统计行业份额或收入保证。 美国41-9091精确职业，OEWS2025全国10/25/50/75/90分位年32,010/36,470/41,380/47,390/51,470美元、时15.39/17.54/19.89/22.78/24.74美元。受雇直时税前工资含佣金/生产奖金/规定津贴等；排自雇、加班溢价、轮班差额和非生产奖金等，不是“不含佣金”。自营流水/经营净额/费用报销不当受雇工资，分位不等起薪、销冠级别、毛利原因或个人收入上限。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
           "source_refs": [
+            "r5-bls-projections",
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26507,13 +26589,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "城市与商圈或社区、受雇或佣金或自营形态、商品品类与毛利、是否含提成与交通与差旅补贴、以及是否含摊位或地点成本都会影响实际收入。"
+              "编辑按地区/合同/受雇计酬/经营成本核，未实采商品毛利对工资分位的影响。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.paid-work",
           "source_refs": [
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26567,13 +26649,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国统计不代表中国大陆职业工资或就业结果；本页未引用 BLS 职业展望本职业页数值。"
+              "BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.boundary.detail",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-projections"
           ],
           "type": "prose"
         }
@@ -26632,12 +26713,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "观察信号四：能长时间站立与走动并携带货物，接受不规律的工作时间与天气与季节波动，也接受按业绩或按量计酬。"
+              "编辑核实际站立/坐姿/搬货和作息收入合同；不能全部长走、全天站或按量计酬。O*NET57情境：接触52持续/43大部分；电话55每天/45每周但非每天；面对面36每天/50每周但非每天；公众70极重要30非常、邮件70每天；自由88很大、准确17极重要；日严格期限17；站46约半时/13持续/13超过半；坐33超过半时/33约半时；不规律67/规律33、周少于40小时92。愤怒人38每月但非每周/50每年但非每月；冲突50每年但非每月。不是“每月以上38/每年以上50”的累计比例，更不是全部人员长走、全天站、夜班或户外。行走50从不，全天候户外63从不；暴力人83从不、错误后果75完全不严重不证明事故概率。自动化25中等/25略有/46没有非GenAI。"
             ]
           },
           "id": "actors.fit.personality-fit-block.4",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26660,12 +26742,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "工作负荷包括与他人持续接触 52% 与每天面对面 36% 与每天电话 55% 的沟通负荷、站立约一半时间 46%、工作时间不规律 67%、应对不愉快或愤怒或粗鲁的人每月以上 38%、冲突每年以上 50%、竞争极度 13%。"
+              "O*NET57情境：接触52持续/43大部分；电话55每天/45每周但非每天；面对面36每天/50每周但非每天；公众70极重要30非常、邮件70每天；自由88很大、准确17极重要；日严格期限17；站46约半时/13持续/13超过半；坐33超过半时/33约半时；不规律67/规律33、周少于40小时92。愤怒人38每月但非每周/50每年但非每月；冲突50每年但非每月。不是“每月以上38/每年以上50”的累计比例，更不是全部人员长走、全天站、夜班或户外。行走50从不，全天候户外63从不；暴力人83从不、错误后果75完全不严重不证明事故概率。自动化25中等/25略有/46没有非GenAI。"
             ]
           },
           "id": "actors.fit.personality-fit-block.6",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26772,12 +26855,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合愿意主动与陌生人搭话并把商品如实说明、能按明码标价与凭证与退换与取消权办事、能在被拒绝时保持克制、并能长时间站立走动与携带货物并接受不规律工时与按业绩计酬的人。"
+              "编辑观察如实说明/面对拒绝与记录能力；实际身体负荷/作息与计酬依岗位核，不作统一身体门槛。O*NET57情境：接触52持续/43大部分；电话55每天/45每周但非每天；面对面36每天/50每周但非每天；公众70极重要30非常、邮件70每天；自由88很大、准确17极重要；日严格期限17；站46约半时/13持续/13超过半；坐33超过半时/33约半时；不规律67/规律33、周少于40小时92。愤怒人38每月但非每周/50每年但非每月；冲突50每年但非每月。不是“每月以上38/每年以上50”的累计比例，更不是全部人员长走、全天站、夜班或户外。行走50从不，全天候户外63从不；暴力人83从不、错误后果75完全不严重不证明事故概率。自动化25中等/25略有/46没有非GenAI。"
             ]
           },
           "id": "actors.display.personality_fit_block.direct-answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27458,12 +27542,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "成交与订单"
+              "零售销售工人一线主管"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.direction",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27472,12 +27556,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否准确记录或录入订单并核对价格与条件"
+              "编辑探索：能否从销售执行扩展监督协调人员"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.signals",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27486,12 +27570,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "订单内容与价格须经确认并留痕。"
+              "补门店/部门监督与协调及实际采购预算人事范围"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.watchouts",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27500,12 +27584,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "交付与收款"
+              "司机兼销售员"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.direction",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27514,12 +27598,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否完成交付或当场交货收款并找零与出具凭证"
+              "编辑探索：能否结合线路/区域销售或配送"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.signals",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27528,12 +27612,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "凭证与发票与退款须按经营者制度处理。"
+              "补目标车辆驾驶要求、货物装交和实际回款范围"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.watchouts",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27542,12 +27626,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "消费者权益与安全"
+              "零售销售员"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.direction",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         },
@@ -27556,12 +27640,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否按适用情形告知取消权与退换与退款条件并守好现金与人身安全"
+              "编辑探索：能否服务消费者销售商品"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.signals",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         },
@@ -27570,12 +27654,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不得以现场成交回避权益或忽视安全安排。"
+              "补具体品类陈列和成交流程，不仅限门店"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.watchouts",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         },
@@ -27584,12 +27668,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "长期适应"
+              "广告销售代表"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.direction",
           "source_refs": [
-            "onet"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -27598,12 +27682,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否长期适应站立走动与不规律工时与收入波动"
+              "编辑探索：能否从商品说明转为媒体资源销售"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.signals",
           "source_refs": [
-            "onet"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -27612,12 +27696,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "注意身体负荷与收支与安全安排。"
+              "补广告空间/时段/媒介知识和客户方案"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.watchouts",
           "source_refs": [
-            "onet"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -27710,12 +27794,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要：与他人持续接触 52%、每天面对面讨论 36%、每天电话交谈 55%、与外部客户或公众打交道「极其重要」70%；沟通以当面说明与异议处理与跟进为主。"
+              "O*NET57情境：接触52持续/43大部分；电话55每天/45每周但非每天；面对面36每天/50每周但非每天；公众70极重要30非常、邮件70每天；自由88很大、准确17极重要；日严格期限17；站46约半时/13持续/13超过半；坐33超过半时/33约半时；不规律67/规律33、周少于40小时92。愤怒人38每月但非每周/50每年但非每月；冲突50每年但非每月。不是“每月以上38/每年以上50”的累计比例，更不是全部人员长走、全天站、夜班或户外。行走50从不，全天候户外63从不；暴力人83从不、错误后果75完全不严重不证明事故概率。自动化25中等/25略有/46没有非GenAI。 接触不限陌生人，具体陌生人频率未采。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.outgoing.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27738,12 +27823,17 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "美国反馈显示 57% 要求低于高中学历、43% 要求高中或同等学历，以短期带教上手。中国大陆本职业不设统一准入类职业资格，但从事经营活动应符合所在地市场监督与城市管理要求，涉及食品还应符合食品安全要求，实际以本地规定为准。"
+              "O*NET新入职所需学历受访反馈57%低于高中/43%高中同等，不是57%岗位/雇主或在岗学历；JZ1—2/SVP<6准备组训练几天至一年、部分职业需数月一年经验，不是本职业统一数天数周或强制资格。BLS典型短期OJT非每岗培训法定期限。中国准入目录/美国全部州许可未逐核，不能宣称全国免照。 中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。 中国无证无照经营查处办法684号3条：指定场所时段销售农副产品/日用品或依法免许可便民技能劳务及其他法定免许可登记活动有例外，不是所有摊贩必办同一证。食品安全法2025修正35/36条：食用农产品免许可、仅预包装免许可但备案；食品摊贩按规模条件安全要求、省级具体办法及指定区域时段核，不套全国统一食品许可证。未实采每地摊位/城管规则、具体经营人资质与受雇/独立经营边界。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.appearance.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "r5-bls-projections",
+            "r5-direct-current",
+            "r5-registration",
+            "r5-food-current"
           ],
           "type": "prose"
         },
@@ -27766,12 +27856,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本职业站立「约一半时间」46%、工作时间「不规律」67%，且受天气与季节与人流影响；身体负荷与作息安排与安全防护按经营者制度与本地规定执行。"
+              "O*NET57情境：接触52持续/43大部分；电话55每天/45每周但非每天；面对面36每天/50每周但非每天；公众70极重要30非常、邮件70每天；自由88很大、准确17极重要；日严格期限17；站46约半时/13持续/13超过半；坐33超过半时/33约半时；不规律67/规律33、周少于40小时92。愤怒人38每月但非每周/50每年但非每月；冲突50每年但非每月。不是“每月以上38/每年以上50”的累计比例，更不是全部人员长走、全天站、夜班或户外。行走50从不，全天候户外63从不；暴力人83从不、错误后果75完全不严重不证明事故概率。自动化25中等/25略有/46没有非GenAI。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.schedule.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27878,12 +27969,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "BLS/OEWS：用于说明工资与就业口径与统计位置（不覆盖自雇者）。"
+              "美国41-9091精确职业，OEWS2025全国10/25/50/75/90分位年32,010/36,470/41,380/47,390/51,470美元、时15.39/17.54/19.89/22.78/24.74美元。受雇直时税前工资含佣金/生产奖金/规定津贴等；排自雇、加班溢价、轮班差额和非生产奖金等，不是“不含佣金”。自营流水/经营净额/费用报销不当受雇工资，分位不等起薪、销冠级别、毛利原因或个人收入上限。 BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.bls",
           "source_refs": [
-            "onet"
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -27892,12 +27985,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "经营者与雇主制度与授权规则：用于说明价格与条件、退款与凭证、地点与时段与安全与数据管理边界。"
+              "机构制度未采，编辑核实际授权不能用FTC规则页面冒具体经营者制度。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.employer",
           "source_refs": [
-            "onet"
+            "r5-consumer-current",
+            "r5-consumer-reg"
           ],
           "type": "prose"
         },
@@ -27920,12 +28014,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻岗位对照（零售一线主管与司机兼销售）：用于说明门店管理权与配送与车辆与货物责任的差异。"
+              "目标档案定义支持差距，不保证录用/许可互认。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.agent",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27934,12 +28028,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻岗位对照（零售销售与广告销售与服务销售与推广）：用于说明门店场景与机构合同与现场推广的差异。"
+              "目标档案定义支持差距，不保证录用/许可互认。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.teacher",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27948,12 +28042,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "消费者保护与经营与安全法规（FTC 冷静期规则 16 CFR Part 429 与《中华人民共和国消费者权益保护法》与 OSHA 工作场所暴力危害指导）：用于说明取消权与经营者义务与安全要求（按名称与一般要求引用）。"
+              "目标档案定义支持差距，不保证录用/许可互认。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.enrichment",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         },
@@ -27962,12 +28056,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑综合：用于本页练习与边界设计，不构成外部事实或资格证据。"
+              "目标档案定义支持差距，不保证录用/许可互认。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.art",
           "source_refs": [
-            "onet"
+            "dancing"
           ],
           "type": "prose"
         }
@@ -28014,13 +28108,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "消费者权益处置不当风险：未按适用情形告知取消权或退换与退款条件并据此处理，导致违法经营与投诉。"
+              "中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。 美国16 CFR429：住宅交易至少25美元、其他适用地点至少130美元，须个人招揽/消费者主要个人家庭用途并核排除/豁免，非所有街头交易。取消至交易后第三business day午夜，该日排周日和联邦假日、含周六，不是通常周一至五工作日；销售方成交时口头告知及同语言凭证/两份取消表等，依429.1有效取消后10business days退款等，州地方法另核。 中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。"
             ]
           },
           "id": "actors.risk.career-risk-cards.3",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-consumer-current",
+            "r5-consumer-reg",
+            "r5-ftc-current",
+            "r5-direct-current"
           ],
           "type": "prose"
         },
@@ -28029,13 +28125,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "经营地点与时段的合规风险：在禁止区域或禁用时段经营，或未按本地登记与城市管理与食品安全（如涉食品）要求经营。"
+              "中国无证无照经营查处办法684号3条：指定场所时段销售农副产品/日用品或依法免许可便民技能劳务及其他法定免许可登记活动有例外，不是所有摊贩必办同一证。食品安全法2025修正35/36条：食用农产品免许可、仅预包装免许可但备案；食品摊贩按规模条件安全要求、省级具体办法及指定区域时段核，不套全国统一食品许可证。未实采每地摊位/城管规则、具体经营人资质与受雇/独立经营边界。"
             ]
           },
           "id": "actors.risk.career-risk-cards.4",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-registration",
+            "r5-food-current"
           ],
           "type": "prose"
         },
@@ -28044,13 +28140,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "现金与人身安全风险：收取现金与携带货物与独自或在不隔离但难求助的地点工作，提高暴力与盗抢风险。"
+              "OSHA跨行业危害指导：现金交易、独自或隔离、时段地点可能增加暴力风险，非所有摊位有同风险，不直接证明携带货物独立因果或盗抢发生率。应评估场所并选择工程/管理控制及培训；结伴/通信/退出/现金阈值是编辑措施须机构实证，不假称本站原文强制程序，官网称无专门工作场所暴力标准。非中国资格法定条件。"
             ]
           },
           "id": "actors.risk.career-risk-cards.5",
           "source_refs": [
-            "sag",
-            "nist"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -28104,13 +28199,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险项按本职业内容与所列来源（O*NET 工作情境、经营者与雇主制度、FTC 冷静期规则与《消费者权益保护法》与 OSHA 危害指导）边界解释。"
+              "风险编辑场景结合实际法定主体：中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。 美国16 CFR429：住宅交易至少25美元、其他适用地点至少130美元，须个人招揽/消费者主要个人家庭用途并核排除/豁免，非所有街头交易。取消至交易后第三business day午夜，该日排周日和联邦假日、含周六，不是通常周一至五工作日；销售方成交时口头告知及同语言凭证/两份取消表等，依429.1有效取消后10business days退款等，州地方法另核。 中国无证无照经营查处办法684号3条：指定场所时段销售农副产品/日用品或依法免许可便民技能劳务及其他法定免许可登记活动有例外，不是所有摊贩必办同一证。食品安全法2025修正35/36条：食用农产品免许可、仅预包装免许可但备案；食品摊贩按规模条件安全要求、省级具体办法及指定区域时段核，不套全国统一食品许可证。未实采每地摊位/城管规则、具体经营人资质与受雇/独立经营边界。"
             ]
           },
           "id": "actors.display.career_risk_cards.evidence-scope",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-consumer-current",
+            "r5-consumer-reg",
+            "r5-ftc-current",
+            "r5-registration",
+            "r5-food-current"
           ],
           "type": "prose"
         },
@@ -28299,13 +28397,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未按适用情形告知取消权或退换与退款条件并据此处理，导致违法经营与投诉。"
+              "中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。 美国16 CFR429：住宅交易至少25美元、其他适用地点至少130美元，须个人招揽/消费者主要个人家庭用途并核排除/豁免，非所有街头交易。取消至交易后第三business day午夜，该日排周日和联邦假日、含周六，不是通常周一至五工作日；销售方成交时口头告知及同语言凭证/两份取消表等，依429.1有效取消后10business days退款等，州地方法另核。 中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-income.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-consumer-current",
+            "r5-consumer-reg",
+            "r5-ftc-current",
+            "r5-direct-current"
           ],
           "type": "prose"
         },
@@ -28359,13 +28459,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在禁止区域或禁用时段经营，或未按本地登记与城市管理与食品安全要求经营。"
+              "中国无证无照经营查处办法684号3条：指定场所时段销售农副产品/日用品或依法免许可便民技能劳务及其他法定免许可登记活动有例外，不是所有摊贩必办同一证。食品安全法2025修正35/36条：食用农产品免许可、仅预包装免许可但备案；食品摊贩按规模条件安全要求、省级具体办法及指定区域时段核，不套全国统一食品许可证。未实采每地摊位/城管规则、具体经营人资质与受雇/独立经营边界。"
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-registration",
+            "r5-food-current"
           ],
           "type": "prose"
         },
@@ -28374,13 +28474,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "造成被处罚或清理与停业风险。"
+              "具体责任由适用法规、违法事实和主管机关确定；先核3条例外和食品省级制度，不一律清理/停业。"
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-registration",
+            "r5-food-current"
           ],
           "type": "prose"
         },
@@ -28419,13 +28519,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "收取现金与携带货物与独自或在不隔离但难求助的地点工作，提高暴力与盗抢风险。"
+              "OSHA跨行业危害指导：现金交易、独自或隔离、时段地点可能增加暴力风险，非所有摊位有同风险，不直接证明携带货物独立因果或盗抢发生率。应评估场所并选择工程/管理控制及培训；结伴/通信/退出/现金阈值是编辑措施须机构实证，不假称本站原文强制程序，官网称无专门工作场所暴力标准。非中国资格法定条件。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -28479,13 +28578,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "客户名单与联系方式与支付信息被不当保存或共享或用于工作以外用途。"
+              "中国客户名单/联系方式等按可识别个人信息处理，不全称敏感个人信息；金融账户/行踪等另核敏感范围、合法依据/特定目的充分必要、适用单独同意和影响评估。消保法29条及2024实施条例23/24条限制过度收集/概括默认授权与商业信息电话，拒绝或取消即停止；批准系统账号不自动准许外部AI上传，去标识非匿名化。具体保管/导出/机构规程未采。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-pipl",
+            "r5-consumer-current",
+            "r5-consumer-reg"
           ],
           "type": "prose"
         },
@@ -28509,13 +28609,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS/OEWS 与 O*NET：用于工资、就业与工作情境与准备层级口径（BLS 不覆盖自雇者）。"
+              "O*NET41-9091定义为上门或街头销售商品/服务。14任务中11Core/1Supplemental/2New：补摊车货为补充；满意度联系和新人培训是新增、重要性未提供，不当所有岗位必做或由标题推管理权。说明演示、潜客名单、交货收款、订单、购买会、答疑、样品、流动销售、说服、样品展示、订购供应品为核心。邻职任务可能交叉，零售不必仅门店、服务销售不限机构、推广也可销售，按主要对象产出区分。 BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.bls",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "sag-moa",
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -28524,13 +28625,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "经营者与雇主制度与授权规则：用于价格、条件、退款、凭证、地点与时段、安全与数据管理边界。"
+              "未实采具体机构制度，按真实合同与授权核，不让退款制度排除法定权益。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.employer",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-consumer-current",
+            "r5-consumer-reg"
           ],
           "type": "prose"
         },
@@ -28539,13 +28640,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "FTC 冷静期规则（16 CFR Part 429）与《中华人民共和国消费者权益保护法》与 OSHA 工作场所暴力危害指导：用于取消权与经营者义务与安全口径（按名称与一般要求引用）。"
+              "中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。 美国16 CFR429：住宅交易至少25美元、其他适用地点至少130美元，须个人招揽/消费者主要个人家庭用途并核排除/豁免，非所有街头交易。取消至交易后第三business day午夜，该日排周日和联邦假日、含周六，不是通常周一至五工作日；销售方成交时口头告知及同语言凭证/两份取消表等，依429.1有效取消后10business days退款等，州地方法另核。 中国无证无照经营查处办法684号3条：指定场所时段销售农副产品/日用品或依法免许可便民技能劳务及其他法定免许可登记活动有例外，不是所有摊贩必办同一证。食品安全法2025修正35/36条：食用农产品免许可、仅预包装免许可但备案；食品摊贩按规模条件安全要求、省级具体办法及指定区域时段核，不套全国统一食品许可证。未实采每地摊位/城管规则、具体经营人资质与受雇/独立经营边界。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.cn-rule",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-consumer-current",
+            "r5-consumer-reg",
+            "r5-ftc-current",
+            "r5-registration",
+            "r5-food-current"
           ],
           "type": "prose"
         },
@@ -28554,13 +28658,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "不使用影视或演员工会口径；仅登记其不适用。"
+              "OSHA跨行业危害指导：现金交易、独自或隔离、时段地点可能增加暴力风险，非所有摊位有同风险，不直接证明携带货物独立因果或盗抢发生率。应评估场所并选择工程/管理控制及培训；结伴/通信/退出/现金阈值是编辑措施须机构实证，不假称本站原文强制程序，官网称无专门工作场所暴力标准。非中国资格法定条件。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.sag",
           "source_refs": [
-            "sag",
-            "nist"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -28569,13 +28672,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "AI 风险管理框架：用于说明系统辅助的治理边界，不构成本职业合规清单。"
+              "中国客户名单/联系方式等按可识别个人信息处理，不全称敏感个人信息；金融账户/行踪等另核敏感范围、合法依据/特定目的充分必要、适用单独同意和影响评估。消保法29条及2024实施条例23/24条限制过度收集/概括默认授权与商业信息电话，拒绝或取消即停止；批准系统账号不自动准许外部AI上传，去标识非匿名化。具体保管/导出/机构规程未采。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.nist",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-pipl",
+            "r5-consumer-current",
+            "r5-consumer-reg"
           ],
           "type": "prose"
         }
@@ -28592,14 +28696,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘公告与经营说明中的学历、经验与提成与费用报销关系必须逐条读取；本职业多数岗位以短期带教上手，一项可放宽不代表消费者权益、经营登记、食品安全（如涉及食品）、收款凭证与安全要求可以替代。"
+              "O*NET新入职所需学历受访反馈57%低于高中/43%高中同等，不是57%岗位/雇主或在岗学历；JZ1—2/SVP<6准备组训练几天至一年、部分职业需数月一年经验，不是本职业统一数天数周或强制资格。BLS典型短期OJT非每岗培训法定期限。中国准入目录/美国全部州许可未逐核，不能宣称全国免照。 未实采多数招聘培训；先核具体合同/经营条件。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-direct-current",
+            "r5-registration",
+            "r5-food-current"
           ],
           "type": "notice"
         },
@@ -28625,35 +28731,35 @@
               [
                 "受雇上门销售",
                 "在带教下准备商品与材料与报价并上门或街头向客户说明与成交并记录订单。",
-                "报价与订单准确率、说明如实与异议处理评语、收款与凭证记录。",
+                "编辑观察建议（非已采雇主公告）：报价与订单准确率、说明如实与异议处理评语、收款与凭证记录。",
                 "纸面说明与报价与订单练习、受监督带教的评语。",
                 "偏受雇销售执行，价格与条件与退款由经营者制度确定。"
               ],
               [
                 "佣金制销售",
-                "按销售额或订单结算，自行安排拜访与客户开发并完成成交与收款。",
-                "订单与回款与客户跟进记录，独立性与自驱表现。",
+                "计酬与劳动/委托关系依真实合同核；可参与拜访成交与回款，不因佣金自动独立经营。",
+                "编辑观察建议（非已采雇主公告）：订单与回款与客户跟进记录，独立性与自驱表现。",
                 "拜访计划与订单与回款记录。",
-                "偏自驱销售，收入随业绩波动且需自行管理时间。"
+                "佣金是计酬方式，可能与受雇同时存在，合同分担和收入波动另核。"
               ],
               [
                 "街头摊贩或流动经营",
                 "自行选择地点与时段并布置摊位与备货与补货与当场收款。",
-                "地点与时段合规记录、陈列与补货与货款核对记录。",
+                "编辑观察建议（非已采雇主公告）：地点与时段合规记录、陈列与补货与货款核对记录。",
                 "陈列与补货与收款与凭证练习。",
                 "偏自营经营，须符合本地经营与城市管理与食品安全要求。"
               ],
               [
                 "演示与推广协助",
                 "在门店或活动现场演示产品并分发样品与收集线索以支持销售。",
-                "演示与样品与线索记录与主办方反馈。",
+                "编辑观察建议（非已采雇主公告）：演示与样品与线索记录与主办方反馈。",
                 "演示脚本与样品与线索练习。",
-                "偏推广执行，通常不直接收款。"
+                "推广以演示促进购买，可销售所演示商品；是否收款按具体岗位核。"
               ],
               [
                 "订单与收款与跟进助理",
                 "协助录入订单与核对价格与收款找零与凭证并回访满意度。",
-                "订单与收款与凭证准确率、回访完成与记录。",
+                "编辑观察建议（非已采雇主公告）：订单与收款与凭证准确率、回访完成与记录。",
                 "订单与收款与凭证与回访练习。",
                 "偏记录与支持执行，不决定价格与退款。"
               ]
@@ -28662,8 +28768,11 @@
           "id": "actors.path.entry-role-comparison.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "editing",
+            "r5-direct-current",
+            "r5-registration",
+            "r5-food-current"
           ],
           "title": "常见入门方向与初期任务",
           "type": "table"
@@ -28832,49 +28941,49 @@
             ],
             "rows": [
               [
-                "上门交易的取消权（美国，联邦规则适用情形）",
-                "在美国联邦规则适用的上门或其他场所交易中的销售方",
-                "合规要求：须向消费者披露三工作日取消权。",
-                "是（在适用情形下）：依据 16 CFR Part 429（FTC 冷静期规则）。",
-                "按该规则与交易条件核对金额与地点与商品服务与例外是否适用。",
-                "条款与流程的落实时间。",
-                "是否适用取决于金额、地点、商品服务与例外；不是个案法律意见。"
+                "美国FTC适用交易规则",
+                "适用销售方",
+                "依法告知及凭证/取消表、有效取消处理",
+                "交易义务，不是通用入职证书",
+                "美国16 CFR429：住宅交易至少25美元、其他适用地点至少130美元，须个人招揽/消费者主要个人家庭用途并核排除/豁免，非所有街头交易。取消至交易后第三business day午夜，该日排周日和联邦假日、含周六，不是通常周一至五工作日；销售方成交时口头告知及同语言凭证/两份取消表等，依429.1有效取消后10business days退款等，州地方法另核。",
+                "制度与流程实施；成本未采",
+                "州地方及个案另核，非全部街头交易"
               ],
               [
-                "经营者义务（中国大陆）",
-                "在中国从事经营活动的经营者与个体经营者",
-                "合规要求：真实全面说明、明码标价、提供凭证、保护个人信息并处理投诉。",
-                "是（针对经营活动）：依据《中华人民共和国消费者权益保护法》。",
-                "按该法与本地市场监督要求落实商品信息与价格与凭证与投诉处理。",
-                "制度与流程的落实时间。",
-                "本条按法规名称与一般要求引用，本轮未逐条核对条文编号；具体以法规与本地规定为准。"
+                "中国消费者交易与直销适用条件",
+                "经营者、消费者交易及特定直销员",
+                "如实报价凭证/退货/信息保护；特定直销另有证合同",
+                "经营义务与特定主体资格分开",
+                "中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。 中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。",
+                "特定企业培训考试不收费；其他投入未采",
+                "不把所有销售等同直销、也不能一概免证"
               ],
               [
-                "经营登记与城市管理与食品安全（中国大陆）",
-                "从事个体工商户与摊贩与流动经营者",
-                "合规要求：按所在地市场监督与城市管理要求经营；涉及食品还应符合食品安全要求。",
-                "视经营者与所在地规定：按本地规定执行。",
-                "按所在地主管部门要求办理登记与遵守经营区域与时段规定。",
-                "办理与合规成本与时间。",
-                "本条按制度名称与一般要求引用，本轮未逐条核对条文编号；具体以所在地规定为准。"
+                "中国经营登记/食品摊贩条件",
+                "独立经营人及具体食品经营",
+                "按制度/所在地核，含法定例外",
+                "视主体、商品、区域而定",
+                "中国无证无照经营查处办法684号3条：指定场所时段销售农副产品/日用品或依法免许可便民技能劳务及其他法定免许可登记活动有例外，不是所有摊贩必办同一证。食品安全法2025修正35/36条：食用农产品免许可、仅预包装免许可但备案；食品摊贩按规模条件安全要求、省级具体办法及指定区域时段核，不套全国统一食品许可证。未实采每地摊位/城管规则、具体经营人资质与受雇/独立经营边界。",
+                "地方办理投入未采",
+                "免登记不自动免食品或指定地点时段要求"
               ],
               [
                 "工作场所暴力与盗抢防范（美国）",
                 "收取现金与携带货物或独自与上门作业的人员与雇主",
-                "危害指导：雇主应评估地点、时段、通信、现金控制、结伴与退出程序。",
+                "OSHA跨行业危害指导：现金交易、独自或隔离、时段地点可能增加暴力风险，非所有摊位有同风险，不直接证明携带货物独立因果或盗抢发生率。应评估场所并选择工程/管理控制及培训；结伴/通信/退出/现金阈值是编辑措施须机构实证，不假称本站原文强制程序，官网称无专门工作场所暴力标准。非中国资格法定条件。",
                 "否：属危害防范指导而非强制资格。",
-                "按 OSHA 指南与经营者制度落实现金控制与结伴与通信与退出安排。",
+                "按实际场所风险评估选措施；未取得具体机构通信结伴退出原文。",
                 "流程与培训时间。",
                 "为跨行业危害指导，不证明每个上门销售或街头摊位都会遭遇暴力。"
               ],
               [
-                "销售与收款与合规与数据培训（数天到数周）",
-                "零基础入行者与处理客户与支付信息的人员",
-                "现实入口：多数岗位通过商品与报价与收款与合规与数据保护短期带教上手。",
-                "是：O*NET 指出本职业准备层级为 Job Zone 1-2。",
-                "按经营者与雇主培训计划完成并接受考核，数据保护另按《中华人民共和国个人信息保护法》等要求。",
-                "时间投入与学习节奏。",
-                "完成培训不等于取得经营许可或消费权益与法律授权。"
+                "岗位准备与培训（期限按具体岗位）",
+                "入行探索者及相应数据处理人",
+                "商品报价订单收款与合规知识",
+                "JZ准备组不证明统一强制培训证",
+                "O*NET新入职所需学历受访反馈57%低于高中/43%高中同等，不是57%岗位/雇主或在岗学历；JZ1—2/SVP<6准备组训练几天至一年、部分职业需数月一年经验，不是本职业统一数天数周或强制资格。BLS典型短期OJT非每岗培训法定期限。中国准入目录/美国全部州许可未逐核，不能宣称全国免照。 中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。",
+                "具体非直销课程费用未采；直销企业培训考试依法免费",
+                "训练不授经营/法务权限，不能按数天数周保证上岗"
               ],
               [
                 "相邻方向技能（零售或配送或推广）",
@@ -28890,8 +28999,14 @@
           "id": "actors.path.credential-decision.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-ftc-current",
+            "r5-consumer-current",
+            "r5-consumer-reg",
+            "r5-direct-current",
+            "r5-registration",
+            "r5-food-current",
+            "teacher"
           ],
           "title": "训练、经营与合规怎么选择",
           "type": "table"
@@ -28901,17 +29016,22 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "学历与经验要求必须逐条读取：本职业多数岗位要求低于高中或高中或同等学历并接受短期带教；一项可放宽不代表消费者权益、经营登记、食品安全（如涉及食品）、收款凭证与安全要求可以替代。",
-              "本页建议的作品与七天体验只用于职业探索，不构成岗位培训、经营许可或消费权益与法律与安全授权。",
-              "进入本职业不是只报一个课程：先核对目标岗位或经营形态（受雇或佣金或自营）的职责与工时与地点与季节安排、是否需要经营登记或食品安全条件、以及经营者与雇主的授权与安全与数据规则。",
-              "涉及上门交易取消权、经营登记、食品安全与现金与人身安全的工作，须先确认法规与本地规定并取得授权；不得在无资格与无授权条件下独立承担相应职责。"
+              "O*NET新入职所需学历受访反馈57%低于高中/43%高中同等，不是57%岗位/雇主或在岗学历；JZ1—2/SVP<6准备组训练几天至一年、部分职业需数月一年经验，不是本职业统一数天数周或强制资格。BLS典型短期OJT非每岗培训法定期限。中国准入目录/美国全部州许可未逐核，不能宣称全国免照。",
+              "中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。 美国16 CFR429：住宅交易至少25美元、其他适用地点至少130美元，须个人招揽/消费者主要个人家庭用途并核排除/豁免，非所有街头交易。取消至交易后第三business day午夜，该日排周日和联邦假日、含周六，不是通常周一至五工作日；销售方成交时口头告知及同语言凭证/两份取消表等，依429.1有效取消后10business days退款等，州地方法另核。",
+              "中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。 中国无证无照经营查处办法684号3条：指定场所时段销售农副产品/日用品或依法免许可便民技能劳务及其他法定免许可登记活动有例外，不是所有摊贩必办同一证。食品安全法2025修正35/36条：食用农产品免许可、仅预包装免许可但备案；食品摊贩按规模条件安全要求、省级具体办法及指定区域时段核，不套全国统一食品许可证。未实采每地摊位/城管规则、具体经营人资质与受雇/独立经营边界。",
+              "作品/七日体验只探索，不给经营或法律授权。"
             ]
           },
           "id": "actors.path.credential-boundary.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-consumer-current",
+            "r5-consumer-reg",
+            "r5-ftc-current",
+            "r5-direct-current",
+            "r5-registration",
+            "r5-food-current"
           ],
           "title": "训练、消费者权益与经营边界",
           "type": "notice"
@@ -29168,14 +29288,18 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆相关依据：《中华人民共和国消费者权益保护法》要求经营者真实全面说明、明码标价、提供凭证、保护个人信息并处理投诉；从事个体工商户与摊贩与流动经营应符合所在地市场监督与城市管理要求，涉及食品还应符合食品安全要求（本条按法规与制度名称与一般要求引用，本轮未逐条核对条文编号）。美国侧在联邦规则适用的上门或其他场所交易中，销售方须依 16 CFR Part 429（FTC 冷静期规则）向消费者披露三工作日取消权，是否适用取决于金额、地点、商品服务与例外；雇主还应参照 OSHA 工作场所暴力指南评估地点、时段、通信、现金控制、结伴与退出程序。"
+              "中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。 美国16 CFR429：住宅交易至少25美元、其他适用地点至少130美元，须个人招揽/消费者主要个人家庭用途并核排除/豁免，非所有街头交易。取消至交易后第三business day午夜，该日排周日和联邦假日、含周六，不是通常周一至五工作日；销售方成交时口头告知及同语言凭证/两份取消表等，依429.1有效取消后10business days退款等，州地方法另核。 中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。 中国无证无照经营查处办法684号3条：指定场所时段销售农副产品/日用品或依法免许可便民技能劳务及其他法定免许可登记活动有例外，不是所有摊贩必办同一证。食品安全法2025修正35/36条：食用农产品免许可、仅预包装免许可但备案；食品摊贩按规模条件安全要求、省级具体办法及指定区域时段核，不套全国统一食品许可证。未实采每地摊位/城管规则、具体经营人资质与受雇/独立经营边界。 OSHA跨行业危害指导：现金交易、独自或隔离、时段地点可能增加暴力风险，非所有摊位有同风险，不直接证明携带货物独立因果或盗抢发生率。应评估场所并选择工程/管理控制及培训；结伴/通信/退出/现金阈值是编辑措施须机构实证，不假称本站原文强制程序，官网称无专门工作场所暴力标准。非中国资格法定条件。"
             ]
           },
           "id": "actors.display.career_path_block.locale.summary",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-consumer-current",
+            "r5-consumer-reg",
+            "r5-ftc-current",
+            "r5-direct-current",
+            "r5-registration",
+            "r5-food-current",
+            "teacher"
           ],
           "type": "prose"
         },
@@ -29184,14 +29308,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国本职业准备层级为 Job Zone 1-2，以短期带教为主，57% 岗位要求低于高中学历；中国大陆不设统一准入类职业资格，从事经营活动的合规要求按所在地规定，实际以本地要求为准。"
+              "O*NET新入职所需学历受访反馈57%低于高中/43%高中同等，不是57%岗位/雇主或在岗学历；JZ1—2/SVP<6准备组训练几天至一年、部分职业需数月一年经验，不是本职业统一数天数周或强制资格。BLS典型短期OJT非每岗培训法定期限。中国准入目录/美国全部州许可未逐核，不能宣称全国免照。 中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。 中国无证无照经营查处办法684号3条：指定场所时段销售农副产品/日用品或依法免许可便民技能劳务及其他法定免许可登记活动有例外，不是所有摊贩必办同一证。食品安全法2025修正35/36条：食用农产品免许可、仅预包装免许可但备案；食品摊贩按规模条件安全要求、省级具体办法及指定区域时段核，不套全国统一食品许可证。未实采每地摊位/城管规则、具体经营人资质与受雇/独立经营边界。"
             ]
           },
           "id": "actors.display.career_path_block.locale.credentials",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-direct-current",
+            "r5-registration",
+            "r5-food-current"
           ],
           "type": "prose"
         },
@@ -29280,14 +29406,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按适用情形告知取消权或退换与退款条件并据此处理，按现金与安全安排作业，保存记录并跟进满意度并带教新人。"
+              "编辑学习方向：按适用权益要求处理退换与取消，核真实现金与安全安排；满意度跟进及带教仅按具体任务和授权探索，不保证统一晋级。"
             ]
           },
           "id": "actors.display.career_path_block.ladder.maintain.description",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-consumer-current",
+            "r5-ftc-current"
           ],
           "type": "prose"
         },
@@ -29328,14 +29454,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "准备与找人"
+              "编辑任务探索：准备与找人"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.title",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29344,14 +29468,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入门协助"
+              "编辑任务探索：入门协助"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.role",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29360,14 +29482,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在带教下准备商品与材料与报价并安排拜访或摊位并标注待确认项。"
+              "编辑按任务熟练程度探索：在带教下准备商品与材料与报价并安排拜访或摊位并标注待确认项。补货属部分岗位补充任务，回访及培训属新增任务且重要性未提供，管理责任另核授权。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.responsibility",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29376,14 +29496,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能按商品与目标客户整理材料并标注不确定项。"
+              "编辑观察材料示例：能按商品与目标客户整理材料并标注不确定项。是否采用和谁评阅待核真实岗位，不虚构普遍主管或带教程序。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.readiness_evidence",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29392,14 +29510,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按经营者与雇主要求参加培训并取得必要授权。"
+              "编辑待核：是否需要岗位培训、复训或具体许可，按真实职责及适用规定，不假称已采统一制度。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.credentials",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29408,14 +29524,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "熟练后扩展到更多品类与区域。"
+              "编辑探索后续任务，补充/新增任务及管理角色需真实授权和岗位要求，不保证升任。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.next_moves",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29424,14 +29538,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "稳定执行"
+              "编辑任务探索：稳定执行"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.02.role",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29440,14 +29552,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立完成准备与拜访或摆摊并保持高峰时段效率。"
+              "编辑按任务熟练程度探索：独立完成准备与拜访或摆摊并保持高峰时段效率。补货属部分岗位补充任务，回访及培训属新增任务且重要性未提供，管理责任另核授权。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.02.responsibility",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29456,14 +29566,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "拜访与陈列与补货记录与带教评语。"
+              "编辑观察材料示例：拜访与陈列与补货记录与带教评语。是否采用和谁评阅待核真实岗位，不虚构普遍主管或带教程序。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.02.readiness_evidence",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29472,14 +29580,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按制度参加复训。"
+              "编辑待核：是否需要岗位培训、复训或具体许可，按真实职责及适用规定，不假称已采统一制度。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.02.credentials",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29488,14 +29594,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学习地点与时段与合规核对。"
+              "编辑探索后续任务，补充/新增任务及管理角色需真实授权和岗位要求，不保证升任。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.02.next_moves",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29504,14 +29608,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "复杂协作"
+              "编辑任务探索：复杂协作"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.03.role",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29520,14 +29622,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在不同区域或品类或多摊位之间协作并处理备货与人力协调。"
+              "编辑按任务熟练程度探索：在不同区域或品类或多摊位之间协作并处理备货与人力协调。补货属部分岗位补充任务，回访及培训属新增任务且重要性未提供，管理责任另核授权。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.03.responsibility",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29536,14 +29636,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "多区域或品类协作与备货记录与主管评语。"
+              "编辑观察材料示例：多区域或品类协作与备货记录与主管评语。是否采用和谁评阅待核真实岗位，不虚构普遍主管或带教程序。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.03.readiness_evidence",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29552,14 +29650,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按制度参加经营与安全培训。"
+              "编辑待核：是否需要岗位培训、复训或具体许可，按真实职责及适用规定，不假称已采统一制度。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.03.credentials",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29568,14 +29664,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与流程与陈列改进。"
+              "编辑探索后续任务，补充/新增任务及管理角色需真实授权和岗位要求，不保证升任。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.03.next_moves",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29584,14 +29678,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "带教与负责"
+              "编辑任务探索：带教与负责"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.04.role",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29600,14 +29692,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "带教并负责一个区域或品类或摊位的销售与账目质量。"
+              "编辑按任务熟练程度探索：带教并负责一个区域或品类或摊位的销售与账目质量。补货属部分岗位补充任务，回访及培训属新增任务且重要性未提供，管理责任另核授权。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.04.responsibility",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29616,14 +29706,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "带教记录与账目抽检与投诉处理记录。"
+              "编辑观察材料示例：带教记录与账目抽检与投诉处理记录。是否采用和谁评阅待核真实岗位，不虚构普遍主管或带教程序。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.04.readiness_evidence",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29632,14 +29720,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按制度参加带教与管理培训。"
+              "编辑待核：是否需要岗位培训、复训或具体许可，按真实职责及适用规定，不假称已采统一制度。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.04.credentials",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29648,14 +29734,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "向小组负责人或经营者方向发展。"
+              "编辑探索后续任务，补充/新增任务及管理角色需真实授权和岗位要求，不保证升任。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.04.next_moves",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29920,14 +30004,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "跟进与回访"
+              "编辑任务探索：跟进与回访"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.04.role",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29936,14 +30018,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "联系客户确认满意度并处理一般性问题与转派。"
+              "编辑按任务熟练程度探索：联系客户确认满意度并处理一般性问题与转派。补货属部分岗位补充任务，回访及培训属新增任务且重要性未提供，管理责任另核授权。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.04.responsibility",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29952,14 +30032,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "回访与满意度与问题转派记录。"
+              "编辑观察材料示例：回访与满意度与问题转派记录。是否采用和谁评阅待核真实岗位，不虚构普遍主管或带教程序。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.04.readiness_evidence",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29968,14 +30046,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按制度参加沟通与数据培训。"
+              "编辑待核：是否需要岗位培训、复训或具体许可，按真实职责及适用规定，不假称已采统一制度。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.04.credentials",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -29984,14 +30060,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "向小组负责人或经营者方向发展。"
+              "编辑探索后续任务，补充/新增任务及管理角色需真实授权和岗位要求，不保证升任。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.04.next_moves",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30112,14 +30186,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按现金控制与结伴与通信与退出安排作业并上报异常。"
+              "编辑安全核对：现金保管、通信、结伴及退出安排按具体地点风险和真实制度核，未实采统一程序；紧急人身事件先保障安全并求助，消费权益按适用法律保护，不以内部顺序替代法定义务。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.02.responsibility",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "teacher",
+            "r5-consumer-current",
+            "r5-ftc-current"
           ],
           "type": "prose"
         },
@@ -30336,14 +30410,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS/OEWS 与 O*NET：用于工资、就业与工作情境与准备层级口径（BLS 不覆盖自雇者）。"
+              "实际链接支持美国本职业受雇工资口径；就业与典型训练另见BLS表1.2，不由工资页证明统一资格或训练期。"
             ]
           },
           "id": "actors.display.career_path_block.source.bls",
           "source_refs": [
-            "onet",
             "bls",
-            "cn-rule"
+            "r5-oews-concepts",
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -30352,14 +30426,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "经营者与雇主制度与授权规则：用于价格、条件、退款、凭证、地点与时段、安全与数据边界。"
+              "未实采经营者规程，编辑按合同与制度核，法定权益不得由制度排除。"
             ]
           },
           "id": "actors.display.career_path_block.source.employer",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-consumer-current",
+            "r5-consumer-reg"
           ],
           "type": "prose"
         },
@@ -30368,14 +30441,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "FTC 冷静期规则（16 CFR Part 429）与《中华人民共和国消费者权益保护法》与 OSHA 工作场所暴力危害指导：用于取消权与经营者义务与安全口径（按名称与一般要求引用）。"
+              "本链接用于中国消费者权益保护法的真实宣传、凭证、适用退换及信息处理规则；不以这一法页证明美国取消权、特定直销资格、登记或食品地方要求，详见相应正文各自来源。"
             ]
           },
           "id": "actors.display.career_path_block.source.cn-rule",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-consumer-current"
           ],
           "type": "prose"
         },
@@ -30408,13 +30479,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 41-9091.00 精确职业数据：2024 年就业约 25,300 人。"
+              "BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -30423,13 +30493,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年预测为「下降（-1% 或更低）」，预计空缺 2,700；该来源只给出类别而未给出具体百分比，本页按口径原文表述；空缺同时包含增长与更替，不是净增岗位。"
+              "BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -30453,13 +30522,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本职业相关岗位分布在上门直销与零售与流动零售与食品与饮料零售等面对面销售场景，既有受雇岗位也有佣金制与自营形态。"
+              "O*NET当前页面未展示本职业更细行业分布/工资；BLS2025自雇94.6%为精确职业就业矩阵份额非OEWS工资覆盖，不能将面对面销售场景当统计行业份额或收入保证。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-projections",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30548,8 +30618,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.agent.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30558,13 +30627,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：门店人员与排班与业绩与督导管理。"
+              "编辑探索：补零售员工直接监督协调及可能采购预算人事"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30573,13 +30641,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，层次不同"
+              "编辑任务差距，无量化转岗时长或录用概率。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30593,8 +30660,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.teacher.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30603,13 +30669,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：驾驶执照与车辆与货物安全与配送与运输要求。"
+              "编辑探索：补适合车辆的驾驶与线路/区域交付，销售配送可只含一项，不一律商业驾驶证"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30618,13 +30683,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，需驾驶资格"
+              "编辑任务差距，无量化转岗时长或录用概率。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30638,8 +30702,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30648,13 +30711,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：门店场景与陈列与收银与门店制度。"
+              "编辑探索：补具体消费者商品知识和销售流程，定义不限定门店"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30663,13 +30725,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，场景不同"
+              "编辑任务差距，无量化转岗时长或录用概率。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30683,8 +30744,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.art.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30693,13 +30753,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：媒体或广告资源与投放方案与机构合同。"
+              "编辑探索：补广告空间/时段/媒介与对应客户方案"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30708,13 +30767,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，对象不同"
+              "编辑任务差距，无量化转岗时长或录用概率。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30728,8 +30786,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.directing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30738,13 +30795,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：机构服务销售与合同与专业交付与合规。"
+              "编辑探索：补服务选项和客户问题处理，面向个人或企业而非仅机构合同"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30753,13 +30809,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，需合同能力"
+              "编辑任务差距，无量化转岗时长或录用概率。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30773,8 +30828,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.announcing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30783,13 +30837,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：品牌推广与现场演示与线索转化与主办方协作。"
+              "编辑探索：补演示促购买与具体产品知识，可销售产品，不一概不收款"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30798,13 +30851,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，不直接收款"
+              "编辑任务差距，无量化转岗时长或录用概率。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30818,8 +30870,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.editing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30828,13 +30879,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：门店收银与结账与现金与票据与门店制度。"
+              "编辑探索：补收银电子扫描/信用借记交易/支票核验及实际岗位流程"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30843,13 +30893,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，职责不同"
+              "编辑任务差距，无量化转岗时长或录用概率。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30863,8 +30912,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.dancing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-counter"
           ],
           "type": "prose"
         },
@@ -30873,13 +30921,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：柜台租赁与合同与归还与押金与柜台制度。"
+              "编辑探索：补维修/租赁/服务订单、费用及支付，押金归还是否职责具体核"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-counter"
           ],
           "type": "prose"
         },
@@ -30888,13 +30935,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，流程不同"
+              "编辑任务差距，无量化转岗时长或录用概率。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-counter"
           ],
           "type": "prose"
         },
@@ -30903,13 +30949,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS/OEWS 与 O*NET：用于工资、就业与工作情境与准备层级口径（BLS 不覆盖自雇者）。"
+              "实际链接是BLS表1.2，支持本职业2025—2035就业预测、空缺、自雇和典型准备分类，非工资分位页。"
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -30918,13 +30963,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "经营者与雇主制度与授权规则：用于价格、条件、退款、凭证、地点与时段、安全与数据边界。"
+              "BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。"
             ]
           },
           "id": "actors.display.market_signal_card.source.ratify",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -30933,13 +30977,17 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "消费者保护与经营与安全法规：用于取消权与经营者义务与安全要求（按名称与一般要求引用）。"
+              "中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。 美国16 CFR429：住宅交易至少25美元、其他适用地点至少130美元，须个人招揽/消费者主要个人家庭用途并核排除/豁免，非所有街头交易。取消至交易后第三business day午夜，该日排周日和联邦假日、含周六，不是通常周一至五工作日；销售方成交时口头告知及同语言凭证/两份取消表等，依429.1有效取消后10business days退款等，州地方法另核。 中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。 中国无证无照经营查处办法684号3条：指定场所时段销售农副产品/日用品或依法免许可便民技能劳务及其他法定免许可登记活动有例外，不是所有摊贩必办同一证。食品安全法2025修正35/36条：食用农产品免许可、仅预包装免许可但备案；食品摊贩按规模条件安全要求、省级具体办法及指定区域时段核，不套全国统一食品许可证。未实采每地摊位/城管规则、具体经营人资质与受雇/独立经营边界。"
             ]
           },
           "id": "actors.display.market_signal_card.source.employer",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-consumer-current",
+            "r5-consumer-reg",
+            "r5-ftc-current",
+            "r5-direct-current",
+            "r5-registration",
+            "r5-food-current"
           ],
           "type": "prose"
         },
@@ -31111,12 +31159,24 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET 41-9091.00、BLS/OEWS、FTC 冷静期规则（16 CFR Part 429）与《中华人民共和国消费者权益保护法》"
+              "O*NET41-9091任务情境/软件与学历，OEWS2025受雇工资，BLS2025—2035就业含自雇，FTC429、中国消费者规则/特定直销/经营与食品摊贩规则、OSHA危害指导及NBS2025行业背景。"
             ]
           },
           "id": "actors.display.source_card.source",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-projections",
+            "r5-consumer-current",
+            "r5-consumer-reg",
+            "r5-ftc-current",
+            "r5-direct-current",
+            "r5-registration",
+            "r5-food-current",
+            "teacher",
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -31125,12 +31185,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-09-19"
+              "2026-10-09：九模块作者自审，独立审阅待阶段2。"
             ]
           },
           "id": "actors.display.source_card.updated-at",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -31139,12 +31200,22 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源范围、限制与统计时期按原始证据分别核对；未取得的数据在相应位置可见标记。"
+              "消费者交易法域和主体分开，佣金可属受雇工资，法律资格与准备组分开；24旧来源名URL、11旧facts和保护区域不变，不签全页一致。"
             ]
           },
           "id": "actors.display.source_card.note",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-projections",
+            "r5-consumer-current",
+            "r5-consumer-reg",
+            "r5-ftc-current",
+            "r5-direct-current",
+            "r5-registration",
+            "r5-food-current"
           ],
           "type": "prose"
         }
@@ -31297,14 +31368,13 @@
                 "url": "https://www.onetonline.org/link/summary/41-2031.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "核验 2025 年工资数据中位与分位（32,010／36,470／41,380／47,390／51,470 美元/年；15.39／17.54／19.89／22.78／24.74 美元/时）。",
-                  "OEWS 不覆盖自雇者；佣金与费用报销与不规则经营收入未必进入同一口径；全国统计位置不是个人起薪或地区报价。"
+                  "美国41-9091精确职业，OEWS2025全国10/25/50/75/90分位年32,010/36,470/41,380/47,390/51,470美元、时15.39/17.54/19.89/22.78/24.74美元。受雇直时税前工资含佣金/生产奖金/规定津贴等；排自雇、加班溢价、轮班差额和非生产奖金等，不是“不含佣金”。自营流水/经营净额/费用报销不当受雇工资，分位不等起薪、销冠级别、毛利原因或个人收入上限。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official wage statistics",
                 "id": "bls",
-                "limitation": "OEWS 不覆盖自雇者；佣金与费用报销与不规则经营收入未必进入同一口径；全国统计位置不是个人起薪或地区报价。",
+                "limitation": "美国41-9091精确职业，OEWS2025全国10/25/50/75/90分位年32,010/36,470/41,380/47,390/51,470美元、时15.39/17.54/19.89/22.78/24.74美元。受雇直时税前工资含佣金/生产奖金/规定津贴等；排自雇、加班溢价、轮班差额和非生产奖金等，不是“不含佣金”。自营流水/经营净额/费用报销不当受雇工资，分位不等起薪、销冠级别、毛利原因或个人收入上限。",
                 "market": "美国",
                 "name": "O*NET OnLine（转引 U.S. Bureau of Labor Statistics）：41-9091.00 全国工资",
                 "period": "2025 年工资数据; accessed 2026-09-19",
@@ -31313,14 +31383,13 @@
                 "url": "https://www.onetonline.org/link/localwages/41-9091.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "经营者应真实全面说明、明码标价、提供凭证、保护个人信息并处理投诉；这些义务不能被销售压力或现场成交替代。",
-                  "规范中国经营活动，不建立与美国 41-9091 同名的职业身份或全国工资；本条按法规名称与一般要求引用，未逐条核对条文编号。"
+                  "旧页本轮未实际核正文，具体20—29条改新增成功政府转载。中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official legislation reference",
                 "id": "cn-rule",
-                "limitation": "规范中国经营活动，不建立与美国 41-9091 同名的职业身份或全国工资；本条按法规名称与一般要求引用，未逐条核对条文编号。",
+                "limitation": "旧页本轮未实际核正文，具体20—29条改新增成功政府转载。中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。",
                 "market": "中国大陆",
                 "name": "《中华人民共和国消费者权益保护法》（市场监管总局公开页）",
                 "period": "现行口径；accessed 2026-09-19",
@@ -31377,14 +31446,13 @@
                 "url": "https://www.onetonline.org/link/summary/41-9011.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "在联邦规则适用的上门或其他场所交易中，销售方须向消费者披露三工作日取消权。",
-                  "具体交易是否适用取决于金额、地点、商品服务与例外；不是个案法律意见。"
+                  "美国16 CFR429：住宅交易至少25美元、其他适用地点至少130美元，须个人招揽/消费者主要个人家庭用途并核排除/豁免，非所有街头交易。取消至交易后第三business day午夜，该日排周日和联邦假日、含周六，不是通常周一至五工作日；销售方成交时口头告知及同语言凭证/两份取消表等，依429.1有效取消后10business days退款等，州地方法另核。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official regulation overview",
                 "id": "editor",
-                "limitation": "具体交易是否适用取决于金额、地点、商品服务与例外；不是个案法律意见。",
+                "limitation": "美国16 CFR429：住宅交易至少25美元、其他适用地点至少130美元，须个人招揽/消费者主要个人家庭用途并核排除/豁免，非所有街头交易。取消至交易后第三business day午夜，该日排周日和联邦假日、含周六，不是通常周一至五工作日；销售方成交时口头告知及同语言凭证/两份取消表等，依429.1有效取消后10business days退款等，州地方法另核。",
                 "market": "美国",
                 "name": "Cooling-Off Period for Sales Made at Home or Other Locations（16 CFR Part 429）",
                 "period": "现行规则；accessed 2026-09-19",
@@ -31393,14 +31461,13 @@
                 "url": "https://www.ftc.gov/legal-library/browse/rules/cooling-period-sales-made-home-or-other-locations"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明价格与条件、退款与凭证、经营地点与时段、安全与数据管理边界由经营者与雇主制度与授权规则确定。",
-                  "不是招聘规模或录用与收入保证，也不代替经营者与雇主制度原文。"
+                  "编辑综合；FTC规则URL非具体机构制度，机构条款未采，不授价格退款经营权限。"
                 ],
                 "evidence_type": "editorial synthesis",
                 "id": "employer",
-                "limitation": "不是招聘规模或录用与收入保证，也不代替经营者与雇主制度原文。",
+                "limitation": "编辑综合；FTC规则URL非具体机构制度，机构条款未采，不授价格退款经营权限。",
                 "market": "雇主与任职辖区",
                 "name": "经营者与雇主制度与授权规则（编辑综合）",
                 "period": "current employer context; reviewed 2026-09-19",
@@ -31441,14 +31508,13 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明分行业与单位类型工资统计的发布口径。",
-                  "公开统计未建立与本职业对应的职业级工资分布。"
+                  "国家统计局2025批发零售城镇非私营135,749/私营69,622元税前年平均，只行业多职业背景非本职业中位/起薪/月薪。5人以上法人，不含个体/自由职业但不排全部按佣金计酬受雇者或外包法人雇员；自营账目另核净额/税费成本，不混工资。未取得中国精确职业全国分布或代表性招聘样本，不断言公开统计最高只有行业。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official industry wage statistics",
                 "id": "nbs",
-                "limitation": "公开统计未建立与本职业对应的职业级工资分布。",
+                "limitation": "国家统计局2025批发零售城镇非私营135,749/私营69,622元税前年平均，只行业多职业背景非本职业中位/起薪/月薪。5人以上法人，不含个体/自由职业但不排全部按佣金计酬受雇者或外包法人雇员；自营账目另核净额/税费成本，不混工资。未取得中国精确职业全国分布或代表性招聘样本，不断言公开统计最高只有行业。",
                 "market": "中国大陆",
                 "name": "国家统计局公开渠道（分行业与单位类型的工资统计口径）",
                 "period": "accessed 2026-09-19",
@@ -31473,14 +31539,13 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明本职业工资统计的来源与方法。",
-                  "全国统计位置不是个人起薪或地区报价；OEWS 不覆盖自雇者。"
+                  "美国41-9091精确职业，OEWS2025全国10/25/50/75/90分位年32,010/36,470/41,380/47,390/51,470美元、时15.39/17.54/19.89/22.78/24.74美元。受雇直时税前工资含佣金/生产奖金/规定津贴等；排自雇、加班溢价、轮班差额和非生产奖金等，不是“不含佣金”。自营流水/经营净额/费用报销不当受雇工资，分位不等起薪、销冠级别、毛利原因或个人收入上限。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official wage statistics",
                 "id": "oews",
-                "limitation": "全国统计位置不是个人起薪或地区报价；OEWS 不覆盖自雇者。",
+                "limitation": "美国41-9091精确职业，OEWS2025全国10/25/50/75/90分位年32,010/36,470/41,380/47,390/51,470美元、时15.39/17.54/19.89/22.78/24.74美元。受雇直时税前工资含佣金/生产奖金/规定津贴等；排自雇、加班溢价、轮班差额和非生产奖金等，不是“不含佣金”。自营流水/经营净额/费用报销不当受雇工资，分位不等起薪、销冠级别、毛利原因或个人收入上限。",
                 "market": "美国",
                 "name": "BLS Occupational Employment and Wage Statistics（OEWS）",
                 "period": "2025 年工资数据口径; accessed 2026-09-19",
@@ -31489,14 +31554,13 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "核验职业定义、任务（14 项）、工作情境与准备层级（Job Zone 1-2，SVP 低于 6.0）与兴趣代码 ECR 与 2024 年就业 25,300 与 2024—2034 年预测。",
-                  "美国精确职业数据；不定义中国资格、工资或经营授权。"
+                  "O*NET41-9091定义为上门或街头销售商品/服务。14任务中11Core/1Supplemental/2New：补摊车货为补充；满意度联系和新人培训是新增、重要性未提供，不当所有岗位必做或由标题推管理权。说明演示、潜客名单、交货收款、订单、购买会、答疑、样品、流动销售、说服、样品展示、订购供应品为核心。邻职任务可能交叉，零售不必仅门店、服务销售不限机构、推广也可销售，按主要对象产出区分。 O*NET57情境：接触52持续/43大部分；电话55每天/45每周但非每天；面对面36每天/50每周但非每天；公众70极重要30非常、邮件70每天；自由88很大、准确17极重要；日严格期限17；站46约半时/13持续/13超过半；坐33超过半时/33约半时；不规律67/规律33、周少于40小时92。愤怒人38每月但非每周/50每年但非每月；冲突50每年但非每月。不是“每月以上38/每年以上50”的累计比例，更不是全部人员长走、全天站、夜班或户外。行走50从不，全天候户外63从不；暴力人83从不、错误后果75完全不严重不证明事故概率。自动化25中等/25略有/46没有非GenAI。 BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet",
-                "limitation": "美国精确职业数据；不定义中国资格、工资或经营授权。",
+                "limitation": "O*NET41-9091定义为上门或街头销售商品/服务。14任务中11Core/1Supplemental/2New：补摊车货为补充；满意度联系和新人培训是新增、重要性未提供，不当所有岗位必做或由标题推管理权。说明演示、潜客名单、交货收款、订单、购买会、答疑、样品、流动销售、说服、样品展示、订购供应品为核心。邻职任务可能交叉，零售不必仅门店、服务销售不限机构、推广也可销售，按主要对象产出区分。 O*NET57情境：接触52持续/43大部分；电话55每天/45每周但非每天；面对面36每天/50每周但非每天；公众70极重要30非常、邮件70每天；自由88很大、准确17极重要；日严格期限17；站46约半时/13持续/13超过半；坐33超过半时/33约半时；不规律67/规律33、周少于40小时92。愤怒人38每月但非每周/50每年但非每月；冲突50每年但非每月。不是“每月以上38/每年以上50”的累计比例，更不是全部人员长走、全天站、夜班或户外。行走50从不，全天候户外63从不；暴力人83从不、错误后果75完全不严重不证明事故概率。自动化25中等/25略有/46没有非GenAI。 BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。",
                 "market": "美国",
                 "name": "O*NET OnLine：Door-to-Door Sales Workers, News and Street Vendors, and Related Workers（41-9091.00）职业档案",
                 "period": "updated 2026; accessed 2026-09-19",
@@ -31505,14 +31569,13 @@
                 "url": "https://www.onetonline.org/link/summary/41-9091.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明本职业常见的销售与客户管理与收款与办公工具。",
-                  "工具清单不等于自动化程度或替代结论。"
+                  "O*NET5软件类为浏览器、Office、路线映射、Excel、Facebook；Hot2025美国细类关联全部唯一招聘帖仅3关键词：Office/Excel各<1%，Facebook比例未提供非0，非实际使用率或AI效果。普通订单/库存/移动支付/路线系统不等GenAI；可编辑试用说明稿/公开商品FAQ，具体功能和效率减错须实测，无本细类部署替代/工资就业因果。ILO2025同批实际全文任务暴露研究无细类ISCO评分；NIST AI RMF1.0同批已核自愿框架不授法律/价格/退款权。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "official technology keywords",
                 "id": "r2-ai",
-                "limitation": "工具清单不等于自动化程度或替代结论。",
+                "limitation": "O*NET5软件类为浏览器、Office、路线映射、Excel、Facebook；Hot2025美国细类关联全部唯一招聘帖仅3关键词：Office/Excel各<1%，Facebook比例未提供非0，非实际使用率或AI效果。普通订单/库存/移动支付/路线系统不等GenAI；可编辑试用说明稿/公开商品FAQ，具体功能和效率减错须实测，无本细类部署替代/工资就业因果。ILO2025同批实际全文任务暴露研究无细类ISCO评分；NIST AI RMF1.0同批已核自愿框架不授法律/价格/退款权。",
                 "market": "美国",
                 "name": "O*NET OnLine：41-9091.00 Hot Technologies（工具与技术）",
                 "period": "updated 2026; accessed 2026-09-19",
@@ -31521,14 +31584,13 @@
                 "url": "https://www.onetonline.org/link/hot_tech/41-9091.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "为上级职业类别的代理口径，未发布上门销售员与街头摊贩精确的全国工资。",
-                  "不能转写为中位数或起薪；本页保留中国职业级工资缺口标记。"
+                  "企业薪酬调查不同于行业工资统计，旧URL本轮未核正文，不据标题声称仅行业代理/未发布；职业工资本轮缺口，另新增NBS背景。"
                 ],
-                "evidence_type": "official industry wage statistics",
+                "evidence_type": "official compensation survey reference",
                 "id": "r2-pay-1",
-                "limitation": "不能转写为中位数或起薪；本页保留中国职业级工资缺口标记。",
+                "limitation": "企业薪酬调查不同于行业工资统计，旧URL本轮未核正文，不据标题声称仅行业代理/未发布；职业工资本轮缺口，另新增NBS背景。",
                 "market": "中国大陆",
                 "name": "企业薪酬调查信息（2025年）",
                 "period": "2025; accessed 2026-09-19",
@@ -31537,14 +31599,13 @@
                 "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202607/t20260708_579822.html"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明 OEWS 抽样、计酬口径与公布方法。",
-                  "方法说明不是本职业具体工资结论。"
+                  "旧URL实际OOH职业检索非OEWS方法，方法新增r5-oews-concepts。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official outlook search portal",
                 "id": "r2-pay-2",
-                "limitation": "方法说明不是本职业具体工资结论。",
+                "limitation": "旧URL实际OOH职业检索非OEWS方法，方法新增r5-oews-concepts。",
                 "market": "美国",
                 "name": "BLS Handbook of Methods：Occupational Employment and Wage Statistics",
                 "period": "accessed 2026-09-19",
@@ -31553,14 +31614,13 @@
                 "url": "https://www.bls.gov/ooh/occupation-finder.htm"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于核验 25 分位（36,470 美元/年；17.54 美元/时）与 75 分位（47,390 美元/年；22.78 美元/时）等分位值。",
-                  "分位是统计位置，不是起薪或上限承诺；OEWS 不覆盖自雇者。"
+                  "美国41-9091精确职业，OEWS2025全国10/25/50/75/90分位年32,010/36,470/41,380/47,390/51,470美元、时15.39/17.54/19.89/22.78/24.74美元。受雇直时税前工资含佣金/生产奖金/规定津贴等；排自雇、加班溢价、轮班差额和非生产奖金等，不是“不含佣金”。自营流水/经营净额/费用报销不当受雇工资，分位不等起薪、销冠级别、毛利原因或个人收入上限。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official wage statistics",
                 "id": "r2-pay-3",
-                "limitation": "分位是统计位置，不是起薪或上限承诺；OEWS 不覆盖自雇者。",
+                "limitation": "美国41-9091精确职业，OEWS2025全国10/25/50/75/90分位年32,010/36,470/41,380/47,390/51,470美元、时15.39/17.54/19.89/22.78/24.74美元。受雇直时税前工资含佣金/生产奖金/规定津贴等；排自雇、加班溢价、轮班差额和非生产奖金等，不是“不含佣金”。自营流水/经营净额/费用报销不当受雇工资，分位不等起薪、销冠级别、毛利原因或个人收入上限。",
                 "market": "美国",
                 "name": "O*NET OnLine（转引 U.S. Bureau of Labor Statistics）：41-9091.00 工资分位",
                 "period": "2025 年工资数据; accessed 2026-09-19",
@@ -31569,14 +31629,13 @@
                 "url": "https://www.onetonline.org/link/localwages/41-9091.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于核对本职业的执照与认证与培训查询入口。",
-                  "该页不列出本职业的强制证书；上岗与经营要求以经营者与雇主与法域为准。"
+                  "认证查询不能证明各州免照或中国无资格/就业。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official certification search portal",
                 "id": "ratify",
-                "limitation": "该页不列出本职业的强制证书；上岗与经营要求以经营者与雇主与法域为准。",
+                "limitation": "认证查询不能证明各州免照或中国无资格/就业。",
                 "market": "美国",
                 "name": "O*NET OnLine：41-9091.00 执照与培训入口",
                 "period": "accessed 2026-09-19",
@@ -31585,14 +31644,13 @@
                 "url": "https://www.onetonline.org/link/localcert/41-9091.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "把全球雇主调查的岗位展望与「实际采用、岗位增减」区分开。",
-                  "不提供本职业采用率、裁员率或因果就业证据。"
+                  "WEF全球雇主展望，不是影视工会；本轮未逐读该报告，不签细类结论，AI用已核ILO。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "international employer survey",
                 "id": "sag",
-                "limitation": "不提供本职业采用率、裁员率或因果就业证据。",
+                "limitation": "WEF全球雇主展望，不是影视工会；本轮未逐读该报告，不签细类结论，AI用已核ILO。",
                 "market": "全球",
                 "name": "Future of Jobs Report 2025: Jobs Outlook",
                 "period": "WEF 2025; accessed 2026-09-19",
@@ -31617,20 +31675,214 @@
                 "url": "https://www.onetonline.org/link/details/41-9091.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "收取现金、携带货物、独自或在难求助地点工作会提高暴力与盗抢风险；雇主应评估地点、时段、通信、现金控制、结伴与退出程序。",
-                  "为跨行业危害指导，不证明每个上门销售或街头摊位都会遭遇暴力。"
+                  "OSHA跨行业危害指导：现金交易、独自或隔离、时段地点可能增加暴力风险，非所有摊位有同风险，不直接证明携带货物独立因果或盗抢发生率。应评估场所并选择工程/管理控制及培训；结伴/通信/退出/现金阈值是编辑措施须机构实证，不假称本站原文强制程序，官网称无专门工作场所暴力标准。非中国资格法定条件。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official hazard guidance",
                 "id": "teacher",
-                "limitation": "为跨行业危害指导，不证明每个上门销售或街头摊位都会遭遇暴力。",
+                "limitation": "OSHA跨行业危害指导：现金交易、独自或隔离、时段地点可能增加暴力风险，非所有摊位有同风险，不直接证明携带货物独立因果或盗抢发生率。应评估场所并选择工程/管理控制及培训；结伴/通信/退出/现金阈值是编辑措施须机构实证，不假称本站原文强制程序，官网称无专门工作场所暴力标准。非中国资格法定条件。",
                 "market": "美国",
                 "name": "Workplace Violence Overview",
                 "period": "accessed 2026-09-19",
                 "publisher": "U.S. Occupational Safety and Health Administration",
                 "scope": "industry_proxy",
                 "url": "https://www.osha.gov/workplace-violence"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-oews-concepts",
+                "limitation": "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。",
+                "market": "美国",
+                "name": "BLS OEWS工资人群与组成",
+                "period": "现行方法；本批检索2026-10-09",
+                "publisher": "Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "结合适用消费者信息规则核；不把经营成本或商品信息一律当个人信息。"
+                ],
+                "evidence_type": "official law",
+                "id": "r5-cn-pipl",
+                "limitation": "客户名单与联系方式按可识别自然人信息核合法依据、目的必要及安全责任，非一律敏感；金融账户或行踪等具体敏感内容另核适用保护程序。去标识非匿名化，账号不自动准许外传。",
+                "market": "中国内地",
+                "name": "个人信息保护法：客户名单与交易资料边界",
+                "period": "2021法；本批实际读；检索2026-10-09",
+                "publisher": "全国人大/中央网信办",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "交易权限和消费者权益按真实适用法律及授权核，模型不自行授交易权。"
+                ],
+                "evidence_type": "official framework",
+                "id": "r5-nist-current",
+                "limitation": "跨职业自愿AI治理建议，非销售标价、退款、直销资格法规或工具能力效果实测。",
+                "market": "跨市场",
+                "name": "NIST AI RMF官方框架说明",
+                "period": "自愿框架1.0；本批实际读；检索2026-10-09",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本批实际读ILO2025摘要，本职业未核SOC41-9091与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。"
+                ],
+                "evidence_type": "official research summary",
+                "id": "r5-ilo-current",
+                "limitation": "本批实际读ILO2025摘要，本职业未核SOC41-9091与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。",
+                "market": "跨市场",
+                "name": "ILO2025 GenAI暴露研究官方摘要",
+                "period": "2025研究摘要；本批实际读；检索2026-10-09",
+                "publisher": "ILO",
+                "scope": "contextual",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "国家统计局2025批发零售城镇非私营135,749/私营69,622元税前年平均，只行业多职业背景非本职业中位/起薪/月薪。5人以上法人，不含个体/自由职业但不排全部按佣金计酬受雇者或外包法人雇员；自营账目另核净额/税费成本，不混工资。未取得中国精确职业全国分布或代表性招聘样本，不断言公开统计最高只有行业。"
+                ],
+                "evidence_type": "official industry wage statistics",
+                "id": "r5-nbs-current",
+                "limitation": "国家统计局2025批发零售城镇非私营135,749/私营69,622元税前年平均，只行业多职业背景非本职业中位/起薪/月薪。5人以上法人，不含个体/自由职业但不排全部按佣金计酬受雇者或外包法人雇员；自营账目另核净额/税费成本，不混工资。未取得中国精确职业全国分布或代表性招聘样本，不断言公开统计最高只有行业。",
+                "market": "中国大陆",
+                "name": "国家统计局2025城镇单位工资：批发和零售业",
+                "period": "2025年",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。"
+                ],
+                "evidence_type": "official employment projections",
+                "id": "r5-bls-projections",
+                "limitation": "BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。",
+                "market": "美国",
+                "name": "BLS表1.2：41-9091就业和特征2025—2035",
+                "period": "2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。 页头发布日早于所载2013-10-25修正日，不以页头日作法定日期。"
+                ],
+                "evidence_type": "official legislation",
+                "id": "r5-consumer-current",
+                "limitation": "中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。 页头发布日早于所载2013-10-25修正日，不以页头日作法定日期。",
+                "market": "中国大陆",
+                "name": "消费者权益保护法2013修正政府转载全文",
+                "period": "2013修正/2014-03-15施行",
+                "publisher": "全国人大常委会；生态环境部站转载",
+                "scope": "exact",
+                "url": "https://jjjcz.mee.gov.cn/djfg/gjflfg/fl/201310/t20131001_444478.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。 中国客户名单/联系方式等按可识别个人信息处理，不全称敏感个人信息；金融账户/行踪等另核敏感范围、合法依据/特定目的充分必要、适用单独同意和影响评估。消保法29条及2024实施条例23/24条限制过度收集/概括默认授权与商业信息电话，拒绝或取消即停止；批准系统账号不自动准许外部AI上传，去标识非匿名化。具体保管/导出/机构规程未采。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "r5-consumer-reg",
+                "limitation": "中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。 中国客户名单/联系方式等按可识别个人信息处理，不全称敏感个人信息；金融账户/行踪等另核敏感范围、合法依据/特定目的充分必要、适用单独同意和影响评估。消保法29条及2024实施条例23/24条限制过度收集/概括默认授权与商业信息电话，拒绝或取消即停止；批准系统账号不自动准许外部AI上传，去标识非匿名化。具体保管/导出/机构规程未采。",
+                "market": "中国大陆",
+                "name": "消费者权益保护法实施条例2024",
+                "period": "2024-07-01施行",
+                "publisher": "国务院/中国政府网",
+                "scope": "exact",
+                "url": "https://app.www.gov.cn/govdata/gov/202403/19/513111/article.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国16 CFR429：住宅交易至少25美元、其他适用地点至少130美元，须个人招揽/消费者主要个人家庭用途并核排除/豁免，非所有街头交易。取消至交易后第三business day午夜，该日排周日和联邦假日、含周六，不是通常周一至五工作日；销售方成交时口头告知及同语言凭证/两份取消表等，依429.1有效取消后10business days退款等，州地方法另核。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "r5-ftc-current",
+                "limitation": "美国16 CFR429：住宅交易至少25美元、其他适用地点至少130美元，须个人招揽/消费者主要个人家庭用途并核排除/豁免，非所有街头交易。取消至交易后第三business day午夜，该日排周日和联邦假日、含周六，不是通常周一至五工作日；销售方成交时口头告知及同语言凭证/两份取消表等，依429.1有效取消后10business days退款等，州地方法另核。",
+                "market": "美国",
+                "name": "eCFR16 CFR429当前正文",
+                "period": "2026-10-07显示当前",
+                "publisher": "FTC；eCFR持续编纂（非官方法律印刷版）",
+                "scope": "exact",
+                "url": "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-D/part-429"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "r5-direct-current",
+                "limitation": "中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。",
+                "market": "中国大陆",
+                "name": "直销管理条例2017修订",
+                "period": "2017修订",
+                "publisher": "国务院/市场监管总局",
+                "scope": "exact",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2023/art_a426aa76f4ba46e3b22acc246c33c2c4.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国无证无照经营查处办法684号3条：指定场所时段销售农副产品/日用品或依法免许可便民技能劳务及其他法定免许可登记活动有例外，不是所有摊贩必办同一证。食品安全法2025修正35/36条：食用农产品免许可、仅预包装免许可但备案；食品摊贩按规模条件安全要求、省级具体办法及指定区域时段核，不套全国统一食品许可证。未实采每地摊位/城管规则、具体经营人资质与受雇/独立经营边界。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "r5-registration",
+                "limitation": "中国无证无照经营查处办法684号3条：指定场所时段销售农副产品/日用品或依法免许可便民技能劳务及其他法定免许可登记活动有例外，不是所有摊贩必办同一证。食品安全法2025修正35/36条：食用农产品免许可、仅预包装免许可但备案；食品摊贩按规模条件安全要求、省级具体办法及指定区域时段核，不套全国统一食品许可证。未实采每地摊位/城管规则、具体经营人资质与受雇/独立经营边界。",
+                "market": "中国大陆",
+                "name": "无证无照经营查处办法684号",
+                "period": "2017-10-01施行",
+                "publisher": "国务院/司法部行政法规库",
+                "scope": "exact",
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=429"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国无证无照经营查处办法684号3条：指定场所时段销售农副产品/日用品或依法免许可便民技能劳务及其他法定免许可登记活动有例外，不是所有摊贩必办同一证。食品安全法2025修正35/36条：食用农产品免许可、仅预包装免许可但备案；食品摊贩按规模条件安全要求、省级具体办法及指定区域时段核，不套全国统一食品许可证。未实采每地摊位/城管规则、具体经营人资质与受雇/独立经营边界。 本轮实际核35/36相关正文，非全法审签。"
+                ],
+                "evidence_type": "official legislation",
+                "id": "r5-food-current",
+                "limitation": "中国无证无照经营查处办法684号3条：指定场所时段销售农副产品/日用品或依法免许可便民技能劳务及其他法定免许可登记活动有例外，不是所有摊贩必办同一证。食品安全法2025修正35/36条：食用农产品免许可、仅预包装免许可但备案；食品摊贩按规模条件安全要求、省级具体办法及指定区域时段核，不套全国统一食品许可证。未实采每地摊位/城管规则、具体经营人资质与受雇/独立经营边界。 本轮实际核35/36相关正文，非全法审签。",
+                "market": "中国大陆",
+                "name": "食品安全法2025修正政府转载",
+                "period": "2025修正",
+                "publisher": "全国人大常委会；平凉市政府站转载",
+                "scope": "exact",
+                "url": "https://gxs.pingliang.gov.cn/zfxxgk/fdzdgknr/zcjd/sjzcjd/art/2025/art_c7c32dfcb9c14ca9acce3ed581b209b7.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "接维修/租赁/服务订单，可说明选项/算费用/收款，非仅租赁；定义支持差距不保录用。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "r5-counter",
+                "limitation": "接维修/租赁/服务订单，可说明选项/算费用/收款，非仅租赁；定义支持差距不保录用。",
+                "market": "美国",
+                "name": "O*NET41-2021柜台租赁文员定义",
+                "period": "2026页面",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/41-2021.00"
               }
             ]
           },
@@ -32007,7 +32259,7 @@
           },
           {
             "来源": {
-              "$source": "sag",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32026,7 +32278,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "sag",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32243,7 +32495,7 @@
               "type": "prose"
             },
             "结论": {
-              "$item": "actors.ai-impact.ai-impact-table.9",
+              "$item": "actors.ai-impact.ai-impact-table.1",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -32257,7 +32509,7 @@
             }
           },
           {
-            "source_ref": "sag",
+            "source_ref": "r5-ilo-current",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.2.limit",
               "block": "ai-impact",
@@ -32265,7 +32517,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32278,13 +32530,13 @@
               "type": "prose"
             },
             "结论": {
-              "$item": "actors.ai-impact.ai-impact-table.5",
+              "$item": "actors.ai-impact.ai-impact-table.9",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "链接": {
-              "$source": "sag",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32362,7 +32614,7 @@
             }
           },
           {
-            "source_ref": "nist",
+            "source_ref": "r5-nist-current",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.5.limit",
               "block": "ai-impact",
@@ -32370,7 +32622,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "nist",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32389,7 +32641,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "nist",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32405,12 +32657,7 @@
         },
         "method_cards": [
           {
-            "含义": {
-              "$item": "actors.ai-impact.ai-impact-table.1",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "type": "prose"
-            },
+            "含义": "O*NET5软件类为浏览器、Office、路线映射、Excel、Facebook；Hot2025美国细类关联全部唯一招聘帖仅3关键词：Office/Excel各<1%，Facebook比例未提供非0，非实际使用率或AI效果。普通订单/库存/移动支付/路线系统不等GenAI；可编辑试用说明稿/公开商品FAQ，具体功能和效率减错须实测，无本细类部署替代/工资就业因果。本轮实际读ILO2025官方摘要，未核SOC41-9091与ISCO映射及评分，不断言全文不存在细类评分；NIST AI RMF1.0同批已核自愿框架不授法律/价格/退款权。",
             "概念": {
               "$item": "actors.display.ai_impact_table.method.1.concept",
               "block": "ai-impact",
@@ -32594,7 +32841,7 @@
             }
           },
           {
-            "source_ref": "sag",
+            "source_ref": "r5-cn-pipl",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.6.answer",
               "block": "ai-impact",
@@ -32602,14 +32849,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "sag",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33204,7 +33451,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "r5-consumer-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33212,7 +33459,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "r5-consumer-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34091,7 +34338,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "cn-rule"
             ],
             "id": "image-use",
             "mitigation": {
@@ -34127,7 +34374,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "cn-rule"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -34235,7 +34482,6 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "nist",
               "sag-moa"
             ],
             "id": "project-data",
@@ -34272,8 +34518,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "employer"
+              "nist"
             ],
             "id": "audition-feedback",
             "mitigation": {
@@ -34300,7 +34545,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "sag-moa",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34308,7 +34553,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "sag-moa",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34346,7 +34591,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "r5-consumer-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34354,7 +34599,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "r5-consumer-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34369,7 +34614,7 @@
           },
           {
             "href": {
-              "$source": "sag-moa",
+              "$source": "teacher",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34377,7 +34622,7 @@
             },
             "id": "sag-moa",
             "label": {
-              "$source": "sag-moa",
+              "$source": "teacher",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34392,7 +34637,7 @@
           },
           {
             "href": {
-              "$source": "nist",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34400,7 +34645,7 @@
             },
             "id": "nist",
             "label": {
-              "$source": "nist",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34426,33 +34671,33 @@
           "bls_table": [
             {
               "指标": "数据类型",
-              "数值": "消费者权益与经营与安全要求为主",
-              "说明": "中国大陆公开工资统计按行业门类与单位类型发布，且本职业相关岗位可能采用雇员或佣金或自营模式，未建立与本职业对应的职业级口径；本页因此保留缺口，不以行业均值替代。"
+              "数值": "职业工资缺口与行业背景",
+              "说明": "国家统计局2025批发零售城镇非私营135,749/私营69,622元税前年平均，只行业多职业背景非本职业中位/起薪/月薪。5人以上法人，不含个体/自由职业但不排全部按佣金计酬受雇者或外包法人雇员；自营账目另核净额/税费成本，不混工资。未取得中国精确职业全国分布或代表性招聘样本，不断言公开统计最高只有行业。"
             },
             {
               "指标": "经营者义务",
               "数值": "真实全面说明与明码标价与凭证与投诉",
-              "说明": "按《中华人民共和国消费者权益保护法》，经营者应真实全面说明、明码标价、提供凭证、保护个人信息并处理投诉；这些义务不能被销售压力或现场成交替代。"
+              "说明": "中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。 中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。"
             },
             {
-              "指标": "上门交易取消权",
+              "指标": "美国对照：交易取消权",
               "数值": "适用情形下的三工作日取消权",
-              "说明": "在联邦规则适用的上门或其他场所交易中，销售方须依 16 CFR Part 429（FTC 冷静期规则）向消费者披露三工作日取消权；是否适用取决于金额、地点、商品服务与例外。"
+              "说明": "美国16 CFR429：住宅交易至少25美元、其他适用地点至少130美元，须个人招揽/消费者主要个人家庭用途并核排除/豁免，非所有街头交易。取消至交易后第三business day午夜，该日排周日和联邦假日、含周六，不是通常周一至五工作日；销售方成交时口头告知及同语言凭证/两份取消表等，依429.1有效取消后10business days退款等，州地方法另核。"
             },
             {
               "指标": "经营登记与城市管理",
               "数值": "本地经营与摊位与时段要求",
-              "说明": "从事个体工商户与摊贩与流动经营应符合所在地市场监督与城市管理要求，涉及食品还应符合食品安全要求（本页按制度名称与一般要求引用，未逐条核对条文编号）。"
+              "说明": "中国无证无照经营查处办法684号3条：指定场所时段销售农副产品/日用品或依法免许可便民技能劳务及其他法定免许可登记活动有例外，不是所有摊贩必办同一证。食品安全法2025修正35/36条：食用农产品免许可、仅预包装免许可但备案；食品摊贩按规模条件安全要求、省级具体办法及指定区域时段核，不套全国统一食品许可证。未实采每地摊位/城管规则、具体经营人资质与受雇/独立经营边界。"
             },
             {
               "指标": "计酬方式",
-              "数值": "按小时或底薪加提成或佣金或自营净额",
-              "说明": "相关岗位计酬形态差别较大：受雇常见底薪加提成与交通与差旅补贴，佣金制按销售额或订单结算，自营则表现为经营收入减去进货与摊位与交通成本后的净额。"
+              "数值": "合同与账目实采缺口",
+              "说明": "中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。 不作全部销售行业报酬比例。"
             },
             {
               "指标": "工时与身体负荷",
-              "数值": "不规律工时与站立走动",
-              "说明": "美国反馈工作时间「不规律」67%、站立「约一半时间」46%；工时与安全安排按经营者制度与本地规定执行。"
+              "数值": "中国具体工时待核",
+              "说明": "O*NET57情境：接触52持续/43大部分；电话55每天/45每周但非每天；面对面36每天/50每周但非每天；公众70极重要30非常、邮件70每天；自由88很大、准确17极重要；日严格期限17；站46约半时/13持续/13超过半；坐33超过半时/33约半时；不规律67/规律33、周少于40小时92。愤怒人38每月但非每周/50每年但非每月；冲突50每年但非每月。不是“每月以上38/每年以上50”的累计比例，更不是全部人员长走、全天站、夜班或户外。行走50从不，全天候户外63从不；暴力人83从不、错误后果75完全不严重不证明事故概率。自动化25中等/25略有/46没有非GenAI。 美国调查不作中国固定条件。"
             },
             {
               "指标": "样本边界",
@@ -34462,7 +34707,7 @@
             {
               "指标": "地区比较",
               "数值": "中美证据分别解释",
-              "说明": "美国分位为受雇税前工资统计口径（OEWS 不覆盖自雇者，且不含佣金与费用报销与不规则经营收入）；中国大陆按受雇或佣金或自营与单位制度确定，两者应分别解释，不能直接换算或合并。"
+              "说明": "美国41-9091精确职业，OEWS2025全国10/25/50/75/90分位年32,010/36,470/41,380/47,390/51,470美元、时15.39/17.54/19.89/22.78/24.74美元。受雇直时税前工资含佣金/生产奖金/规定津贴等；排自雇、加班溢价、轮班差额和非生产奖金等，不是“不含佣金”。自营流水/经营净额/费用报销不当受雇工资，分位不等起薪、销冠级别、毛利原因或个人收入上限。"
             }
           ],
           "china_ai_row": {
@@ -34475,7 +34720,7 @@
           "china_edu_table": [
             {
               "学历段": "经营活动义务",
-              "岗位方向": "按《中华人民共和国消费者权益保护法》经营者应真实全面说明、明码标价、提供凭证、保护个人信息并处理投诉；义务不能被销售压力或现场成交替代。",
+              "岗位方向": "中国消保法20/21/22条真实全面明确答复/明码标价/真实名称/按规定或惯例出具凭证且索要必须出具；24条质量不符退换修、25条网络电视电话邮购等七日无理由及例外，不把面对面销售一律套七日无理由。2024实施条例9—13/17—19补真实宣传报价、兑现承诺/格式条款和退货，经营者制度不能排除法定消费者权利。 中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
                 "block": "china-salary",
@@ -34485,7 +34730,7 @@
             },
             {
               "学历段": "经营登记与地点与时段",
-              "岗位方向": "从事个体工商户与摊贩与流动经营应符合所在地市场监督与城市管理要求；涉及食品还应符合食品安全要求；具体以所在地规定为准。",
+              "岗位方向": "中国无证无照经营查处办法684号3条：指定场所时段销售农副产品/日用品或依法免许可便民技能劳务及其他法定免许可登记活动有例外，不是所有摊贩必办同一证。食品安全法2025修正35/36条：食用农产品免许可、仅预包装免许可但备案；食品摊贩按规模条件安全要求、省级具体办法及指定区域时段核，不套全国统一食品许可证。未实采每地摊位/城管规则、具体经营人资质与受雇/独立经营边界。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
                 "block": "china-salary",
@@ -34495,7 +34740,7 @@
             },
             {
               "学历段": "现金与人身安全",
-              "岗位方向": "按 OSHA 工作场所暴力指南与国际通行做法，雇主应评估地点、时段、通信、现金控制、结伴与退出程序；收取现金与携带货物与独自作业会提高风险。",
+              "岗位方向": "OSHA跨行业危害指导：现金交易、独自或隔离、时段地点可能增加暴力风险，非所有摊位有同风险，不直接证明携带货物独立因果或盗抢发生率。应评估场所并选择工程/管理控制及培训；结伴/通信/退出/现金阈值是编辑措施须机构实证，不假称本站原文强制程序，官网称无专门工作场所暴力标准。非中国资格法定条件。 编辑风险参考非中国强制资格。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.theater",
                 "block": "china-salary",
@@ -34578,14 +34823,14 @@
           "china_ref": {
             "$join": [
               {
-                "$source": "r2-pay-1",
+                "$source": "r5-nbs-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
                 "item": "actors.source-register.published.1"
               },
               {
-                "$source": "r2-pay-1",
+                "$source": "r5-nbs-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -34615,7 +34860,7 @@
               "月薪参考": {
                 "$join": [
                   {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
+                    "$fact": "r5-current-china-jiaojiang-featured-daily-2026",
                     "field": "display_value"
                   },
                   {
@@ -34641,7 +34886,7 @@
           "china_soc_row": "中国大陆薪资口径",
           "edu": "训练与经营与合规见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "r5-current-china-jiaojiang-featured-daily-2026"
           ],
           "sources_note": "来源链接按各自适用范围使用。",
           "ui": {
@@ -34704,10 +34949,10 @@
         },
         "bls_table": [
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-low",
             "指标": "薪资 · 10 分位",
             "数值": {
-              "$fact": "low",
+              "$fact": "r5-current-low",
               "field": "display_value"
             },
             "说明": "本职业 2025 年工资数据的分布低端，是统计位置而不是入职起薪。"
@@ -34718,10 +34963,10 @@
             "说明": "本职业 2025 年工资数据的下四分位；小时口径为 17.54 美元。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-median",
             "指标": "薪资 · 中位数",
             "数值": {
-              "$fact": "median",
+              "$fact": "r5-current-median",
               "field": "display_value"
             },
             "说明": "本职业 2025 年工资数据的中间位置：一半从业者低于、一半高于该值（中位时薪 19.89 美元）；该口径不覆盖自雇者。"
@@ -34732,40 +34977,40 @@
             "说明": "本职业 2025 年工资数据的上四分位；小时口径为 22.78 美元。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-high",
             "指标": "薪资 · 90 分位",
             "数值": {
-              "$fact": "high",
+              "$fact": "r5-current-high",
               "field": "display_value"
             },
-            "说明": "本职业 2025 年工资数据的分布高端，通常与行业与地区与商品毛利与销售能力相关。"
+            "说明": "2025全国90分位，非销冠级别/商品毛利影响的因果证明。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024 就业 · 本职业人数",
+            "fact_ref": "r5-current-employment",
+            "指标": "2025就业 · 人数（含自雇）",
             "数值": {
-              "$fact": "employment",
+              "$fact": "r5-current-employment",
               "field": "display_value"
             },
-            "说明": "2024 年本职业就业规模（O*NET 摘要页口径约 25,300 人）；官方统计主要覆盖受雇者，佣金制与自营形态可能未被完整体现。"
+            "说明": "BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 增长预测",
+            "fact_ref": "r5-current-growth",
+            "指标": "2025—2035就业 · 净变化",
             "数值": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "display_value"
             },
-            "说明": "O*NET 摘要页标注为「下降（-1% 或更低）」，该页未给出具体百分比，本页按口径原文表述；未取得 BLS 职业展望本职业页一手口径。"
+            "说明": "BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 预计空缺",
+            "fact_ref": "r5-current-openings",
+            "指标": "2025—2035就业 · 年均空缺",
             "数值": {
-              "$fact": "openings",
+              "$fact": "r5-current-openings",
               "field": "display_value"
             },
-            "说明": "约 2,700 个，为预测期内因增长与更替等形成的合计空缺，不是每年净增。"
+            "说明": "BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。"
           }
         ],
         "boundary": {
@@ -34827,7 +35072,7 @@
           "type": "prose"
         },
         "growth": {
-          "$fact": "growth",
+          "$fact": "r5-current-growth",
           "field": "display_value"
         },
         "heading": {
@@ -34842,13 +35087,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024 年基期（O*NET 摘要页与详细资料页）",
+        "industry_period": "2025就业自雇与2026任务情境（非行业工资）",
         "industry_rows": [
           {
-            "fact_ref": "median",
-            "industry": "上门直销与零售与流动零售与食品与饮料零售等面对面销售场景（O*NET 摘要页与任务描述，未附行业门类占比与人数）",
+            "fact_ref": "r5-current-industry-theater",
+            "industry": "就业矩阵自雇份额（非工资覆盖）",
             "median": {
-              "$fact": "industry-theater",
+              "$fact": "r5-current-industry-theater",
               "field": "display_value"
             },
             "note": {
@@ -34859,10 +35104,10 @@
             }
           },
           {
-            "fact_ref": "median",
-            "industry": "社区与街区与摊位与临时销售现场，按季节与天气与客流安排",
+            "fact_ref": "r5-current-industry-education",
+            "industry": "新入职学历受访反馈与准备组",
             "median": {
-              "$fact": "industry-education",
+              "$fact": "r5-current-industry-education",
               "field": "display_value"
             },
             "note": {
@@ -34873,10 +35118,10 @@
             }
           },
           {
-            "fact_ref": "median",
-            "industry": "工作情境：与他人持续接触 52%、每天电话交谈 55%、每天面对面讨论 36%、工作时间「不规律」67%、站立「约一半时间」46%、应对不愉快或愤怒或粗鲁的人「每月以上」38%",
+            "fact_ref": "r5-current-industry-amusement",
+            "industry": "美国工作情境（非行业工资）",
             "median": {
-              "$fact": "industry-amusement",
+              "$fact": "r5-current-industry-amusement",
               "field": "display_value"
             },
             "note": {
@@ -34887,8 +35132,8 @@
             }
           },
           {
-            "industry": "O*NET 未提供更细的行业分布与行业工资",
-            "median": "统计不含自雇",
+            "industry": "细行业工资资料缺口",
+            "median": "工资不含自雇；就业含自雇",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -34943,7 +35188,7 @@
           }
         ],
         "median": {
-          "$fact": "median",
+          "$fact": "r5-current-median",
           "field": "display_value"
         },
         "outlook_heading": {
@@ -34953,7 +35198,7 @@
           "type": "prose"
         },
         "outlook_period": {
-          "$fact": "growth",
+          "$fact": "r5-current-growth",
           "field": "period"
         },
         "wage_column_labels": [
@@ -34979,7 +35224,7 @@
             },
             "label": "较低工资位置",
             "value": {
-              "$fact": "low",
+              "$fact": "r5-current-low",
               "field": "display_value"
             }
           },
@@ -34993,7 +35238,7 @@
             },
             "label": "全国中位工资",
             "value": {
-              "$fact": "median",
+              "$fact": "r5-current-median",
               "field": "display_value"
             }
           },
@@ -35007,7 +35252,7 @@
             },
             "label": "较高工资位置",
             "value": {
-              "$fact": "high",
+              "$fact": "r5-current-high",
               "field": "display_value"
             }
           }
@@ -35160,7 +35405,7 @@
           {
             "geography": "美国",
             "horizon": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "period"
             },
             "interpretation": {
@@ -35179,13 +35424,13 @@
             "occupation_scope": "上门销售员与街头摊贩及相关人员（O*NET-SOC 41-9091.00）",
             "source_id": "bls",
             "value": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "display_value"
             }
           },
           {
             "geography": "美国",
-            "horizon": "2024 年基期",
+            "horizon": "2025基期",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -35200,8 +35445,8 @@
             },
             "metric": "本职业就业规模",
             "occupation_scope": "上门销售员与街头摊贩及相关人员（O*NET-SOC 41-9091.00）",
-            "source_id": "ratify",
-            "value": "2024 年约 25,300 人（O*NET 摘要页口径）；官方统计主要覆盖受雇者，佣金制与自营形态可能未被完整体现"
+            "source_id": "r5-bls-projections",
+            "value": "BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。"
           },
           {
             "geography": "美国与中国大陆",
@@ -35220,15 +35465,15 @@
             },
             "metric": "训练与经营与合规路径",
             "occupation_scope": "上门销售员与街头摊贩及相关人员（O*NET-SOC 41-9091.00）",
-            "source_id": "employer",
-            "value": "美国以短期带教为主（Job Zone 1-2），无统一执照，但适用情形下须披露三工作日取消权（16 CFR Part 429）；中国大陆不设统一准入类职业资格，经营活动应真实全面说明与明码标价与提供凭证与保护个人信息与处理投诉，经营登记与城市管理与食品安全（如涉食品）按所在地规定执行"
+            "source_id": "r5-consumer-current",
+            "value": "O*NET新入职所需学历受访反馈57%低于高中/43%高中同等，不是57%岗位/雇主或在岗学历；JZ1—2/SVP<6准备组训练几天至一年、部分职业需数月一年经验，不是本职业统一数天数周或强制资格。BLS典型短期OJT非每岗培训法定期限。中国准入目录/美国全部州许可未逐核，不能宣称全国免照。 中国《直销管理条例》2017修订：3/9条经批准直销企业招募的场所外产品推销才属该制度，不把所有摊贩/上门服务等同直销员。15/16/18条招募排除对象、推销合同及允许地域、企业免费培训考试合格发直销员证；无证不得从事对应直销。22/23要求证合同/消费者拒绝即离开/退货告知和凭证/按标价；24按本人直接销售收入核报酬、总额≤30%且至少月付，仅此制度非所有销售行业；25购买30日内未开封凭票据退换、提出后7日办理，其他情形依法或合同。 中国无证无照经营查处办法684号3条：指定场所时段销售农副产品/日用品或依法免许可便民技能劳务及其他法定免许可登记活动有例外，不是所有摊贩必办同一证。食品安全法2025修正35/36条：食用农产品免许可、仅预包装免许可但备案；食品摊贩按规模条件安全要求、省级具体办法及指定区域时段核，不套全国统一食品许可证。未实采每地摊位/城管规则、具体经营人资质与受雇/独立经营边界。 美国16 CFR429：住宅交易至少25美元、其他适用地点至少130美元，须个人招揽/消费者主要个人家庭用途并核排除/豁免，非所有街头交易。取消至交易后第三business day午夜，该日排周日和联邦假日、含周六，不是通常周一至五工作日；销售方成交时口头告知及同语言凭证/两份取消表等，依429.1有效取消后10business days退款等，州地方法另核。"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "r5-bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35236,7 +35481,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "r5-bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35251,7 +35496,7 @@
           },
           {
             "href": {
-              "$source": "ratify",
+              "$source": "r5-bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35259,7 +35504,7 @@
             },
             "id": "ratify",
             "label": {
-              "$source": "ratify",
+              "$source": "r5-bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35274,7 +35519,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-consumer-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35282,7 +35527,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-consumer-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35381,7 +35626,7 @@
             },
             "target_href": "/zh/career/jobs/retail-salespersons",
             "target_slug": "retail-salespersons",
-            "target_title": "零售销售员：与本职业在门店场景上的差异",
+            "target_title": "零售销售员：面向消费者销售商品，任务可交叉",
             "transition_distance": {
               "$item": "actors.display.market_signal_card.transitions.enrichment.distance",
               "block": "market-signals",
@@ -35427,7 +35672,7 @@
             },
             "target_href": "/zh/career/jobs/sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel",
             "target_slug": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel",
-            "target_title": "服务销售代表（广告、保险、金融、旅游除外）：与本职业在机构合同上的差异",
+            "target_title": "服务销售代表：面向个人或企业销售服务，任务可交叉",
             "transition_distance": {
               "$item": "actors.display.market_signal_card.transitions.directing.distance",
               "block": "market-signals",
@@ -36380,14 +36625,14 @@
           },
           {
             "href": {
-              "$source": "teacher",
+              "$source": "announcing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "teacher",
+              "$source": "announcing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36402,14 +36647,14 @@
           },
           {
             "href": {
-              "$source": "enrichment",
+              "$source": "art",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "enrichment",
+              "$source": "art",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36424,14 +36669,14 @@
           },
           {
             "href": {
-              "$source": "art",
+              "$source": "dancing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "art",
+              "$source": "dancing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -37062,6 +37307,144 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "41,380美元/年；19.89美元/时（2025中位）",
+        "fact_id": "r5-current-median",
+        "market": "美国",
+        "measure": "全国受雇工资分位",
+        "occupation_scope": "美国41-9091精确职业，OEWS2025全国10/25/50/75/90分位年32,010/36,470/41,380/47,390/51,470美元、时15.39/17.54/19.89/22.78/24.74美元。受雇直时税前工资含佣金/生产奖金/规定津贴等；排自雇、加班溢价、轮班差额和非生产奖金等，不是“不含佣金”。自营流水/经营净额/费用报销不当受雇工资，分位不等起薪、销冠级别、毛利原因或个人收入上限。",
+        "period": "2025",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "32,010美元/年；15.39美元/时（2025第10分位）",
+        "fact_id": "r5-current-low",
+        "market": "美国",
+        "measure": "全国受雇工资分位",
+        "occupation_scope": "美国41-9091精确职业，OEWS2025全国10/25/50/75/90分位年32,010/36,470/41,380/47,390/51,470美元、时15.39/17.54/19.89/22.78/24.74美元。受雇直时税前工资含佣金/生产奖金/规定津贴等；排自雇、加班溢价、轮班差额和非生产奖金等，不是“不含佣金”。自营流水/经营净额/费用报销不当受雇工资，分位不等起薪、销冠级别、毛利原因或个人收入上限。",
+        "period": "2025",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "51,470美元/年；24.74美元/时（2025第90分位）",
+        "fact_id": "r5-current-high",
+        "market": "美国",
+        "measure": "全国受雇工资分位",
+        "occupation_scope": "美国41-9091精确职业，OEWS2025全国10/25/50/75/90分位年32,010/36,470/41,380/47,390/51,470美元、时15.39/17.54/19.89/22.78/24.74美元。受雇直时税前工资含佣金/生产奖金/规定津贴等；排自雇、加班溢价、轮班差额和非生产奖金等，不是“不含佣金”。自营流水/经营净额/费用报销不当受雇工资，分位不等起薪、销冠级别、毛利原因或个人收入上限。",
+        "period": "2025",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025就业50,900人（含自雇）",
+        "fact_id": "r5-current-employment",
+        "market": "美国",
+        "measure": "就业存量",
+        "occupation_scope": "BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025—2035官方净减5,300人/−10.4%",
+        "fact_id": "r5-current-growth",
+        "market": "美国",
+        "measure": "预测净变化",
+        "occupation_scope": "BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025—2035年均空缺4,800含更替",
+        "fact_id": "r5-current-openings",
+        "market": "美国",
+        "measure": "年均空缺",
+        "occupation_scope": "BLS41-9091：2025就业50,900→2035预计45,600，官方净减5,300/−10.4%；2025—2035年均空缺4,800含更替，非十年合计/每年净增。就业矩阵含自雇，2025自雇94.6%，不能称就业主要覆盖受雇者；OEWS工资不含自雇，两统计人口不同。典型无正式学历证书要求/相关经验None/短期在岗训练，OOH本行破折号。非中国就业/个人机会或AI因果。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET41-9091定义为上门或街头销售商品/服务。14任务中11Core/1Supplemental/2New：补摊车货为补充；满意度联系和新人培训是新增、重要性未提供，不当所有岗位必做或由标题推管理权。说明演示、潜客名单、交货收款、订单、购买会、答疑、样品、流动销售、说服、样品展示、订购供应品为核心。邻职任务可能交叉，零售不必仅门店、服务销售不限机构、推广也可销售，按主要对象产出区分。",
+        "fact_id": "r5-current-identity",
+        "market": "美国",
+        "measure": "职业任务边界",
+        "occupation_scope": "O*NET41-9091定义为上门或街头销售商品/服务。14任务中11Core/1Supplemental/2New：补摊车货为补充；满意度联系和新人培训是新增、重要性未提供，不当所有岗位必做或由标题推管理权。说明演示、潜客名单、交货收款、订单、购买会、答疑、样品、流动销售、说服、样品展示、订购供应品为核心。邻职任务可能交叉，零售不必仅门店、服务销售不限机构、推广也可销售，按主要对象产出区分。",
+        "period": "2026页面",
+        "source_refs": [
+          "onet",
+          "sag-moa"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET当前页面未展示本职业更细行业分布/工资；BLS2025自雇94.6%为精确职业就业矩阵份额非OEWS工资覆盖，不能将面对面销售场景当统计行业份额或收入保证。",
+        "fact_id": "r5-current-industry-theater",
+        "market": "美国",
+        "measure": "自雇份额及细行业资料边界",
+        "occupation_scope": "O*NET当前页面未展示本职业更细行业分布/工资；BLS2025自雇94.6%为精确职业就业矩阵份额非OEWS工资覆盖，不能将面对面销售场景当统计行业份额或收入保证。",
+        "period": "2025",
+        "source_refs": [
+          "r5-bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET新入职所需学历受访反馈57%低于高中/43%高中同等，不是57%岗位/雇主或在岗学历；JZ1—2/SVP<6准备组训练几天至一年、部分职业需数月一年经验，不是本职业统一数天数周或强制资格。BLS典型短期OJT非每岗培训法定期限。中国准入目录/美国全部州许可未逐核，不能宣称全国免照。",
+        "fact_id": "r5-current-industry-education",
+        "market": "美国",
+        "measure": "受访学历及准备组非行业工资",
+        "occupation_scope": "O*NET新入职所需学历受访反馈57%低于高中/43%高中同等，不是57%岗位/雇主或在岗学历；JZ1—2/SVP<6准备组训练几天至一年、部分职业需数月一年经验，不是本职业统一数天数周或强制资格。BLS典型短期OJT非每岗培训法定期限。中国准入目录/美国全部州许可未逐核，不能宣称全国免照。",
+        "period": "2026页面",
+        "source_refs": [
+          "onet",
+          "sag-moa"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET57情境：接触52持续/43大部分；电话55每天/45每周但非每天；面对面36每天/50每周但非每天；公众70极重要30非常、邮件70每天；自由88很大、准确17极重要；日严格期限17；站46约半时/13持续/13超过半；坐33超过半时/33约半时；不规律67/规律33、周少于40小时92。愤怒人38每月但非每周/50每年但非每月；冲突50每年但非每月。不是“每月以上38/每年以上50”的累计比例，更不是全部人员长走、全天站、夜班或户外。行走50从不，全天候户外63从不；暴力人83从不、错误后果75完全不严重不证明事故概率。自动化25中等/25略有/46没有非GenAI。",
+        "fact_id": "r5-current-industry-amusement",
+        "market": "美国",
+        "measure": "工作情境非行业工资",
+        "occupation_scope": "O*NET57情境：接触52持续/43大部分；电话55每天/45每周但非每天；面对面36每天/50每周但非每天；公众70极重要30非常、邮件70每天；自由88很大、准确17极重要；日严格期限17；站46约半时/13持续/13超过半；坐33超过半时/33约半时；不规律67/规律33、周少于40小时92。愤怒人38每月但非每周/50每年但非每月；冲突50每年但非每月。不是“每月以上38/每年以上50”的累计比例，更不是全部人员长走、全天站、夜班或户外。行走50从不，全天候户外63从不；暴力人83从不、错误后果75完全不严重不证明事故概率。自动化25中等/25略有/46没有非GenAI。",
+        "period": "2026页面",
+        "source_refs": [
+          "onet",
+          "sag-moa"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "精确中国全国职业工资缺口；2025批发零售非私营135749/私营69622元税前年平均，仅行业背景",
+        "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
+        "market": "中国大陆",
+        "measure": "工资缺口与行业背景",
+        "occupation_scope": "国家统计局2025批发零售城镇非私营135,749/私营69,622元税前年平均，只行业多职业背景非本职业中位/起薪/月薪。5人以上法人，不含个体/自由职业但不排全部按佣金计酬受雇者或外包法人雇员；自营账目另核净额/税费成本，不混工资。未取得中国精确职业全国分布或代表性招聘样本，不断言公开统计最高只有行业。",
+        "period": "2025",
+        "source_refs": [
+          "r5-nbs-current"
+        ]
       }
     ]
   },
@@ -37070,7 +37453,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "面对面直接销售 · 报价与订单 · 收款与消费者权益",
@@ -37121,7 +37504,7 @@
       "text": "上门销售员与街头摊贩及相关人员"
     }
   },
-  "source_content_sha256": "725f14d8ca918b6f1ba8f4f3b7b8753f592dac24c98cfd380df561391b08c04e",
+  "source_content_sha256": "740c5da2ac7a9f2db451293f001ce2f70b15a3cb40893be8e55cebf6ea3591a5",
   "subject": {
     "canonical_slug": "door-to-door-sales-workers-news-and-street-vendors-and-related-workers",
     "name": "上门销售员与街头摊贩及相关人员",

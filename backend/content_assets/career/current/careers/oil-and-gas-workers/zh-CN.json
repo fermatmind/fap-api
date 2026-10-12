@@ -12791,7 +12791,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "比兴趣量表更强的证据是受监督的设备训练、异常停工演练和交接记录。"
+              "能力判断需受监督的设备训练、异常停工演练与交接反馈；兴趣量表只作探索提示，不授权井场操作。"
             ]
           },
           "id": "oil-and-gas-workers.fit.riasec-fit-block.7",
@@ -13190,7 +13190,7 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "BLS列通常无需统一学历证书，但需相关经验和中期在岗培训；实际井控、特种作业和设备授权按项目及所在地核。"
+              "BLS典型入门教育为“无正式学历要求”，相关经验为少于5年、中期在岗培训；这是统计典型项，不表示无需安全资格，井控与机型授权按项目和所在地核。"
             ]
           },
           "id": "oil-and-gas-workers.path.credential-boundary.8",
@@ -13907,7 +13907,7 @@
             }
           }
         ],
-        "answer": "传感器与自动钻进可提示压力和钻速趋势；现场停工、井控、井队指挥和程序内调整由受训人员负责。",
+        "answer": "BLS油气组合就业讨论提及自动钻进与远程监测；对本单项，趋势和记录辅助仅作编辑建议，未取得采用或效果实测。现场井控、停工、井队指挥及程序内调整由受训且获授权人员负责。",
         "authority_links": [
           {
             "来源": "职业任务",
@@ -13952,7 +13952,7 @@
             "链接": "https://www.onetonline.org/link/details/47-5012.00"
           }
         ],
-        "difference_intro": "数据归纳可辅助，真实仪表和现场状态必须由人核。",
+        "difference_intro": "以下为基于任务的编辑试用建议；O*NET不测AI采用或效果，真实仪表和现场状态仍须人工核验。",
         "difference_rows": [
           {
             "AI主要改变": "汇总记录",
@@ -13997,7 +13997,7 @@
             "使用限制": "具体授权按所在地和雇主。",
             "来源": "教育与资格",
             "研究对象": "油气旋转钻机操作员",
-            "结论": "BLS列无统一学历证书，通常需相关经验和中期在岗训练；项目井控要求另核。",
+            "结论": "BLS典型入门教育为“无正式学历要求”，相关经验为少于5年、中期在岗培训；这是统计典型项，不表示无需安全资格，井控与机型授权按项目和所在地核。",
             "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
@@ -14193,21 +14193,21 @@
             "stage": "带班"
           }
         ],
-        "direct_answer": "BLS列无统一学历证书，通常需相关工作经验及中期在岗训练；井控和机型授权按项目与所在地核。",
+        "direct_answer": "BLS典型入门教育为“无正式学历要求”，相关经验为少于5年、中期在岗培训；这是统计典型项，不表示无需安全资格，井控与机型授权按项目和所在地核。",
         "entry_heading": "先学安全与设备，再进受监督操作",
         "heading": "井队训练、井控与授权",
         "locale_requirements": {
           "credential_boundary": "培训证书不自动授予独立井控或任何机型权限。",
           "jurisdiction": "美国47-5012与中国井队资格分别核。",
-          "summary": "BLS列无统一学历证书，通常需相关工作经验及中期在岗训练；井控和机型授权按项目与所在地核。"
+          "summary": "BLS典型入门教育为“无正式学历要求”，相关经验为少于5年、中期在岗培训；这是统计典型项，不表示无需安全资格，井控与机型授权按项目和所在地核。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
-            "label": "教育与资格",
-            "scope": "美国47-5012精确职业"
+            "label": "BLS典型教育、经验与在岗培训",
+            "scope": "美国47-5012典型教育、经验和训练分类，非项目井控资格与机型操作许可。"
           },
           {
             "href": "https://www.onetonline.org/link/details/47-5012.00",
@@ -14233,28 +14233,28 @@
             "id": "office-support",
             "stages": [
               {
-                "credentials": "BLS列无统一学历证书，通常需相关工作经验及中期在岗训练；井控和机型授权按项目与所在地核。",
+                "credentials": "核具体岗位经验、在岗培训、井控及机型授权；BLS教育分类不证明无安全资格要求。",
                 "next_moves": "先核质量和权限，再扩大任务范围。",
                 "readiness_evidence": "虚构井况、受训反馈和合规演练。",
                 "responsibility": "压力、钻速和设备操作；按岗位授权。",
                 "role": "观察学习"
               },
               {
-                "credentials": "BLS列无统一学历证书，通常需相关工作经验及中期在岗训练；井控和机型授权按项目与所在地核。",
+                "credentials": "核具体岗位经验、在岗培训、井控及机型授权；BLS教育分类不证明无安全资格要求。",
                 "next_moves": "先核质量和权限，再扩大任务范围。",
                 "readiness_evidence": "虚构井况、受训反馈和合规演练。",
                 "responsibility": "压力、钻速和设备操作；按岗位授权。",
                 "role": "受训执行"
               },
               {
-                "credentials": "BLS列无统一学历证书，通常需相关工作经验及中期在岗训练；井控和机型授权按项目与所在地核。",
+                "credentials": "核具体岗位经验、在岗培训、井控及机型授权；BLS教育分类不证明无安全资格要求。",
                 "next_moves": "先核质量和权限，再扩大任务范围。",
                 "readiness_evidence": "虚构井况、受训反馈和合规演练。",
                 "responsibility": "压力、钻速和设备操作；按岗位授权。",
                 "role": "独立交接"
               },
               {
-                "credentials": "BLS列无统一学历证书，通常需相关工作经验及中期在岗训练；井控和机型授权按项目与所在地核。",
+                "credentials": "核具体岗位经验、在岗培训、井控及机型授权；BLS教育分类不证明无安全资格要求。",
                 "next_moves": "先核质量和权限，再扩大任务范围。",
                 "readiness_evidence": "虚构井况、受训反馈和合规演练。",
                 "responsibility": "压力、钻速和设备操作；按岗位授权。",
@@ -14267,28 +14267,28 @@
             "id": "supplier-cost",
             "stages": [
               {
-                "credentials": "BLS列无统一学历证书，通常需相关工作经验及中期在岗训练；井控和机型授权按项目与所在地核。",
+                "credentials": "核具体岗位经验、在岗培训、井控及机型授权；BLS教育分类不证明无安全资格要求。",
                 "next_moves": "先核质量和权限，再扩大任务范围。",
                 "readiness_evidence": "虚构井况、受训反馈和合规演练。",
                 "responsibility": "异常识别与停工升级；按岗位授权。",
                 "role": "观察学习"
               },
               {
-                "credentials": "BLS列无统一学历证书，通常需相关工作经验及中期在岗训练；井控和机型授权按项目与所在地核。",
+                "credentials": "核具体岗位经验、在岗培训、井控及机型授权；BLS教育分类不证明无安全资格要求。",
                 "next_moves": "先核质量和权限，再扩大任务范围。",
                 "readiness_evidence": "虚构井况、受训反馈和合规演练。",
                 "responsibility": "异常识别与停工升级；按岗位授权。",
                 "role": "受训执行"
               },
               {
-                "credentials": "BLS列无统一学历证书，通常需相关工作经验及中期在岗训练；井控和机型授权按项目与所在地核。",
+                "credentials": "核具体岗位经验、在岗培训、井控及机型授权；BLS教育分类不证明无安全资格要求。",
                 "next_moves": "先核质量和权限，再扩大任务范围。",
                 "readiness_evidence": "虚构井况、受训反馈和合规演练。",
                 "responsibility": "异常识别与停工升级；按岗位授权。",
                 "role": "独立交接"
               },
               {
-                "credentials": "BLS列无统一学历证书，通常需相关工作经验及中期在岗训练；井控和机型授权按项目与所在地核。",
+                "credentials": "核具体岗位经验、在岗培训、井控及机型授权；BLS教育分类不证明无安全资格要求。",
                 "next_moves": "先核质量和权限，再扩大任务范围。",
                 "readiness_evidence": "虚构井况、受训反馈和合规演练。",
                 "responsibility": "异常识别与停工升级；按岗位授权。",
@@ -14301,28 +14301,28 @@
             "id": "records-information",
             "stages": [
               {
-                "credentials": "BLS列无统一学历证书，通常需相关工作经验及中期在岗训练；井控和机型授权按项目与所在地核。",
+                "credentials": "核具体岗位经验、在岗培训、井控及机型授权；BLS教育分类不证明无安全资格要求。",
                 "next_moves": "先核质量和权限，再扩大任务范围。",
                 "readiness_evidence": "虚构井况、受训反馈和合规演练。",
                 "responsibility": "井队交接和复盘；按岗位授权。",
                 "role": "观察学习"
               },
               {
-                "credentials": "BLS列无统一学历证书，通常需相关工作经验及中期在岗训练；井控和机型授权按项目与所在地核。",
+                "credentials": "核具体岗位经验、在岗培训、井控及机型授权；BLS教育分类不证明无安全资格要求。",
                 "next_moves": "先核质量和权限，再扩大任务范围。",
                 "readiness_evidence": "虚构井况、受训反馈和合规演练。",
                 "responsibility": "井队交接和复盘；按岗位授权。",
                 "role": "受训执行"
               },
               {
-                "credentials": "BLS列无统一学历证书，通常需相关工作经验及中期在岗训练；井控和机型授权按项目与所在地核。",
+                "credentials": "核具体岗位经验、在岗培训、井控及机型授权；BLS教育分类不证明无安全资格要求。",
                 "next_moves": "先核质量和权限，再扩大任务范围。",
                 "readiness_evidence": "虚构井况、受训反馈和合规演练。",
                 "responsibility": "井队交接和复盘；按岗位授权。",
                 "role": "独立交接"
               },
               {
-                "credentials": "BLS列无统一学历证书，通常需相关工作经验及中期在岗训练；井控和机型授权按项目与所在地核。",
+                "credentials": "核具体岗位经验、在岗培训、井控及机型授权；BLS教育分类不证明无安全资格要求。",
                 "next_moves": "先核质量和权限，再扩大任务范围。",
                 "readiness_evidence": "虚构井况、受训反馈和合规演练。",
                 "responsibility": "井队交接和复盘；按岗位授权。",
@@ -14522,16 +14522,28 @@
         "risks": [
           {
             "affected_roles": {
-              "$item": "oil-and-gas-workers.risk.career-risk-cards.4",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "钻机操作员、井台作业成员及监督人员。监测交接背景：",
+                {
+                  "$item": "oil-and-gas-workers.risk.career-risk-cards.4",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "consequence": {
-              "$item": "oil-and-gas-workers.risk.career-risk-cards.5",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "可能扩大为井喷、设备损坏或人员伤害。异常升级边界：",
+                {
+                  "$item": "oil-and-gas-workers.risk.career-risk-cards.5",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "evidence_refs": [
               "onet",
@@ -14543,11 +14555,11 @@
             "title": "井控异常"
           },
           {
-            "affected_roles": "按井控程序核压力、钻速、设备状态和井队交接。",
-            "consequence": "按井控程序核压力、钻速、设备状态和井队交接。",
+            "affected_roles": "钻杆、提升设备操作人员及井台附近井队成员。",
+            "consequence": "可能发生夹卷、撞击或坠物伤害。",
             "evidence_refs": [
               "onet",
-              "privacy"
+              "onet"
             ],
             "id": "record-version",
             "mitigation": "隔离区域并核指挥信号。",
@@ -14555,11 +14567,11 @@
             "title": "旋转设备"
           },
           {
-            "affected_roles": "按井控程序核压力、钻速、设备状态和井队交接。",
-            "consequence": "按井控程序核压力、钻速、设备状态和井队交接。",
+            "affected_roles": "监控泵循环、配制钻井液的人员与井队。",
+            "consequence": "可能影响井况控制、引起化学暴露或泄漏。",
             "evidence_refs": [
-              "privacy",
-              "privacy"
+              "onet",
+              "onet"
             ],
             "id": "personal-data",
             "mitigation": "停工并核循环记录。",
@@ -14567,8 +14579,8 @@
             "title": "泥浆中断"
           },
           {
-            "affected_roles": "按井控程序核压力、钻速、设备状态和井队交接。",
-            "consequence": "按井控程序核压力、钻速、设备状态和井队交接。",
+            "affected_roles": "读取压力仪表的操作员及据此判断的井队。",
+            "consequence": "可能错误理解井况并延迟识别异常。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14579,11 +14591,11 @@
             "title": "仪表失准"
           },
           {
-            "affected_roles": "按井控程序核压力、钻速、设备状态和井队交接。",
-            "consequence": "按井控程序核压力、钻速、设备状态和井队交接。",
+            "affected_roles": "记录和交接的操作员、下一班及主管。",
+            "consequence": "可能让下一班缺少井深、设备状态和限制信息。",
             "evidence_refs": [
-              "bls",
-              "bls"
+              "onet",
+              "onet"
             ],
             "id": "single-coverage",
             "mitigation": "使用标准交接表。",
@@ -14591,8 +14603,8 @@
             "title": "交接漏项"
           },
           {
-            "affected_roles": "按井控程序核压力、钻速、设备状态和井队交接。",
-            "consequence": "按井控程序核压力、钻速、设备状态和井队交接。",
+            "affected_roles": "执行井控操作的人员及井队主管。",
+            "consequence": "可能偏离批准程序，扩大设备或井控风险。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14609,31 +14621,31 @@
             "href": "https://www.onetonline.org/link/details/47-5012.00",
             "id": "onet",
             "label": "任务",
-            "scope": "美国47-5012精确职业"
+            "scope": "O*NET仅美国47-5012职责与环境；BLS表1.2仅工资、就业及典型教育训练。风险为编辑提示，非井控规程、事故频率或当地许可。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
             "label": "资格",
-            "scope": "美国47-5012精确职业"
+            "scope": "O*NET仅美国47-5012职责与环境；BLS表1.2仅工资、就业及典型教育训练。风险为编辑提示，非井控规程、事故频率或当地许可。"
           },
           {
             "href": "https://www.onetonline.org/link/details/47-5012.00",
             "id": "facilities",
             "label": "工作环境",
-            "scope": "美国47-5012精确职业"
+            "scope": "O*NET仅美国47-5012职责与环境；BLS表1.2仅工资、就业及典型教育训练。风险为编辑提示，非井控规程、事故频率或当地许可。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "privacy",
             "label": "就业资料",
-            "scope": "美国47-5012精确职业"
+            "scope": "O*NET仅美国47-5012职责与环境；BLS表1.2仅工资、就业及典型教育训练。风险为编辑提示，非井控规程、事故频率或当地许可。"
           },
           {
             "href": "https://www.onetonline.org/link/details/47-5012.00",
             "id": "onet",
             "label": "职业活动",
-            "scope": "美国47-5012精确职业"
+            "scope": "O*NET仅美国47-5012职责与环境；BLS表1.2仅工资、就业及典型教育训练。风险为编辑提示，非井控规程、事故频率或当地许可。"
           }
         ]
       },
@@ -14853,7 +14865,7 @@
             "note": "本页不将组合行业中位数代给47-5012。"
           }
         ],
-        "industry_value_label": "年薪中位数（美元）",
+        "industry_value_label": "分项行业工资数据状态",
         "interpretation_heading": "如何解读",
         "interpretation_rows": [
           {
@@ -15023,30 +15035,39 @@
         "heading": "美国47-5012单项就业展望",
         "outlook_evidence": [
           {
-            "geography": {
-              "$item": "oil-and-gas-workers.market-signals.market-signal-card.2",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "horizon": {
-              "$item": "oil-and-gas-workers.market-signals.market-signal-card.3",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "geography": "美国",
+            "horizon": "2025基期",
             "interpretation": {
-              "$item": "oil-and-gas-workers.market-signals.market-signal-card.4",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
+              "$join": [
+                "单项就业背景；空缺、项目条件、技术与转岗分别解读：",
+                {
+                  "$item": "oil-and-gas-workers.market-signals.market-signal-card.2",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "oil-and-gas-workers.market-signals.market-signal-card.3",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "oil-and-gas-workers.market-signals.market-signal-card.4",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "oil-and-gas-workers.market-signals.market-signal-card.5",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
-            "limitation": {
-              "$item": "oil-and-gas-workers.market-signals.market-signal-card.5",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "limitation": "47-5012单项就业存量，非组合、当前招聘或AI归因。",
             "metric": "2025在岗",
             "occupation_scope": "美国47-5012",
             "source_id": "bls",
@@ -15191,7 +15212,7 @@
           },
           {
             "alternate_value": null,
-            "label": "知识",
+            "label": "任务相关知识（编辑归纳）",
             "secondary_value": null,
             "value": "钻机、提升系统、泥浆循环、地层和井控程序。"
           },
@@ -15214,7 +15235,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
+            "cta_label": "查看霍兰德兴趣测评",
             "evidence_level": {
               "$item": "oil-and-gas-workers.fit.personality-fit-block.8",
               "block": "fit",
@@ -15233,10 +15254,10 @@
             "watchout": "兴趣测评不证明井控能力；真实岗位需受训、资格和项目授权。"
           },
           {
-            "answer": "油气旋转钻机操作员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "观察训练中能否复述异常、停止条件与升级链；压力下不绕过程序。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "按井控程序核压力、钻速、设备状态和井队交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据O*NET任务的编辑探索建议；本页自评预测井控安全或绩效的效度未取得。",
             "id": "big-five",
             "label": "压力处理",
             "question": "做油气旋转钻机操作员需要怎样的能力与工作方式？",
@@ -15249,10 +15270,10 @@
             "watchout": "兴趣测评不证明井控能力；真实岗位需受训、资格和项目授权。"
           },
           {
-            "answer": "油气旋转钻机操作员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "练清楚说明人员位置、作业信号、井况与未结风险，并请对方复述。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "按井控程序核压力、钻速、设备状态和井队交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据O*NET任务的编辑探索建议；本页自评预测井控安全或绩效的效度未取得。",
             "id": "mbti",
             "label": "团队沟通",
             "question": "做油气旋转钻机操作员需要怎样的能力与工作方式？",
@@ -15265,10 +15286,10 @@
             "watchout": "兴趣测评不证明井控能力；真实岗位需受训、资格和项目授权。"
           },
           {
-            "answer": "油气旋转钻机操作员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较设备控制、现场协作和守安全纪律是否符合自己的工作价值。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "按井控程序核压力、钻速、设备状态和井队交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据O*NET任务的编辑探索建议；本页自评预测井控安全或绩效的效度未取得。",
             "id": "enneagram",
             "label": "工作价值",
             "question": "做油气旋转钻机操作员需要怎样的能力与工作方式？",
@@ -15281,10 +15302,10 @@
             "watchout": "兴趣测评不证明井控能力；真实岗位需受训、资格和项目授权。"
           },
           {
-            "answer": "油气旋转钻机操作员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "核陆上或海上、偏远驻地、长班与天气条件是否可接受。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "按井控程序核压力、钻速、设备状态和井队交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据O*NET任务的编辑探索建议；本页自评预测井控安全或绩效的效度未取得。",
             "id": "iq",
             "label": "场景偏好",
             "question": "做油气旋转钻机操作员需要怎样的能力与工作方式？",
@@ -15297,10 +15318,10 @@
             "watchout": "兴趣测评不证明井控能力；真实岗位需受训、资格和项目授权。"
           },
           {
-            "answer": "油气旋转钻机操作员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "用虚构井深、压力和泥浆记录练交接；样本不能证明真实井控能力。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "按井控程序核压力、钻速、设备状态和井队交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据O*NET任务的编辑探索建议；本页自评预测井控安全或绩效的效度未取得。",
             "id": "eq",
             "label": "虚构案例",
             "question": "做油气旋转钻机操作员需要怎样的能力与工作方式？",
@@ -15509,8 +15530,8 @@
       "riasec_fit_block": {
         "fit_interest": "能守程序、识别异常并在压力下清楚交接。",
         "interest": "喜欢机械操作、现场问题判断与团队协作。",
-        "riasec": "现实型R与研究型I兴趣可探索；量表不能证明井控能力。",
-        "riasec_short": "R/I：设备与分析。"
+        "riasec": "O*NET当前职业兴趣以现实型R为主，随后常规型C、研究型I；用于探索设备、程序和分析偏好，不推个人井控能力。",
+        "riasec_short": "R/C/I：设备、程序与分析。"
       },
       "source_card": {
         "eeat_signals": {
@@ -15520,8 +15541,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "BLS 2025—2035美国47-5012单项；O*NET任务；国家统计局中国工资缺口。",
-          "updated_at": "2026-09-26核官方职业任务与当前统计。"
+          "source": "BLS美国47-5012单项；O*NET任务与2025工资；NBS2025生产制造宽岗位统计。",
+          "updated_at": "2026-10-12"
         },
         "note": "证据只支持油气旋转钻机操作员在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -15533,7 +15554,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "职业任务"
+            "label": "MBTI测评（英文）"
           },
           {
             "href": {
@@ -15543,7 +15564,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "工资就业"
+            "label": "大五人格测评（英文）"
           },
           {
             "href": {
@@ -15553,7 +15574,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "资格或规则"
+            "label": "MBTI测评（中文）"
           },
           {
             "href": {
@@ -15563,7 +15584,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "统计边界"
+            "label": "大五人格测评（中文）"
           }
         ]
       },
@@ -15783,7 +15804,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "油气旋转钻机操作员 · O*NET 47-5012.00",
@@ -15834,7 +15855,7 @@
       "text": "油气旋转钻机操作员：任务、工资与安全路径"
     }
   },
-  "source_content_sha256": "876afa7d726d0525d9016cca81e47701b03b7ca8aaed7bee000ef5d6fa0b6943",
+  "source_content_sha256": "92269dc3e90e0a4ffd61038879a3ce83e752f718ab0c17a2f9ace2b010870a10",
   "subject": {
     "canonical_slug": "oil-and-gas-workers",
     "name": "油气旋转钻机操作员",

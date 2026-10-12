@@ -8862,18 +8862,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.01.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            0,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.01.mitigation": {
         "ref": {
@@ -8951,18 +8941,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.02.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            1,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.02.mitigation": {
         "ref": {
@@ -9129,18 +9109,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.04.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            3,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.04.mitigation": {
         "ref": {
@@ -9307,18 +9277,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.06.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            5,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.06.mitigation": {
         "ref": {
@@ -23439,7 +23399,8 @@
           },
           "id": "animal-trainers.profile.onet-structured-fields-block.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -23448,18 +23409,17 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "行为评估与训练计划｜读懂动物再定方案｜评估动物的性格、能力与训练适宜性，了解其年龄、健康与既往训练史，据此设定目标行为、指令、奖励方式与安全条件。",
+              "行为评估与训练计划｜读懂动物再定方案｜评估动物的性格、能力与训练适宜性，了解其年龄、健康与既往训练史，具体目标和训练方法依本人实际训练、职责及机构程序，本页仅描述任务。",
               "基础与进阶训练执行｜用信号分步塑造行为｜用口令、手势、缰绳、马刺等指令引导动物逐步完成目标行为，按表演或比赛的既定标准训练，并纠正踢人、脱缰、抗拒装鞍等不良习惯。",
               "专项训练｜按用途分野｜训练马匹用于骑乘、挽具、表演或赛马；训练犬只执行助人（含导盲犬与服务犬）或财产保护任务；训练动物驮运货物或作为驮队的一部分工作。",
               "动物照料与健康观察｜保障动物状态｜饲喂、运动、清洁与维护训练和饲养场地，观察动物身体状况以发现需要医疗的问题，并按处方给药。",
-              "记录与交接｜让训练可追溯｜记录动物的健康、饮食、行为与训练进度，向动物主人或机构交接训练结果与后续安排，出现健康或行为异常时按程序转介。",
-              "客户沟通与教学｜把方法教出去｜向动物主人说明训练原理与家庭作业，教主人自己训练犬只，教视障人士与导盲犬配合，组织或举办动物表演并向公众说明动物福利边界。"
+              "记录与交接｜让训练可追溯｜记录动物的健康、饮食、行为与训练进度，交接及异常转介为编辑岗位核问，具体程序另核。",
+              "客户沟通与教学｜把方法教出去｜向动物主人说明训练原理与家庭作业，教主人自己训练犬只，教视障人士与导盲犬配合，组织或举办动物表演；动物福利说明与现场方法另按实际岗位核。"
             ]
           },
           "id": "animal-trainers.profile.responsibilities-block.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "list"
         },
@@ -23468,13 +23428,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜64% 每天在户外暴露于各种天气，37% 每天在户外有遮蔽处，40% 从不呆在不受环境控制的室内；34% 每天暴露于轻微烧伤、割伤、咬伤或蜇伤（31% 每年至少一次），30% 每天暴露于干扰性噪音（30% 从不），22% 每天暴露于污染物（45% 从不），24% 每天穿戴普通防护或安全装备（53% 从不）（O*NET 39-2011.00 受访比例）。\n工作周与日程｜31% 工作周超过 40 小时、22% 为 40 小时、47% 少于 40 小时；63% 为规律固定日程、29% 为不规律日程。\n精确性与错误后果｜18% 认为精确或准确极其重要、27% 认为非常重要、36% 认为重要；22% 认为错误后果极其严重、19% 严重、26% 较严重、26% 不严重。\n决策与责任｜49% 每天作决定、19% 从不作决定；80% 拥有很大决策自由度、19% 有一些；35% 对他人的健康与安全承担极高责任、31% 高责任；50% 认为决策对同事或机构的结果非常重要。\n时间压力与冲突｜19% 每天面对时间压力、25% 每周至少一次、31% 从不；13% 每周至少一次需要应对不愉快或愤怒的人。\n沟通与协作｜57% 持续与他人接触、23% 大部分时间；74% 每天有面对面讨论；47% 每天有电话交谈；40% 每天使用电子邮件；42% 认为与团队合作极其重要、38% 认为协调或领导他人极其重要。\n暴露与防护｜34% 每天暴露于轻微烧伤、割伤、咬伤或蜇伤，31% 每年至少一次、13% 从不；24% 每天穿戴普通防护或安全装备，18% 每月至少一次、53% 从不。\n姿势与动作｜57% 持续或几乎持续站立、46% 超过一半时间走动或跑动、31% 持续做重复动作、27% 持续用手操作工具或动物。\n自动化程度与外部沟通｜77% 认为工作完全未自动化、14% 略微自动化；46% 认为与外部客户或公众打交道极其重要、24% 认为非常重要、14% 认为重要；71% 对决定任务与优先级有较大自由。\n以上均为美国ONET受访情境，非中国班表、工时均值、兼职率或事故率；错误后果是难以纠正错误的后果判断，自动化比例不是AI采用率。"
+              "工作环境｜64% 每天在户外暴露于各种天气，37% 每天在户外有遮蔽处，40% 从不呆在不受环境控制的室内；34% 每天暴露于轻微烧伤、割伤、咬伤或蜇伤（31% 每年至少一次但非每月），30% 每天暴露于干扰性噪音（30% 从不），22% 每天暴露于污染物（45% 从不），24% 每天穿戴普通防护或安全装备（53% 从不）（O*NET 39-2011.00 受访比例）。\n工作周与日程｜31% 工作周超过 40 小时、22% 为 40 小时、47% 少于 40 小时；63% 为规律固定日程、29% 为不规律日程。\n精确性与错误后果｜18% 认为精确或准确极其重要、27% 认为非常重要、36% 认为重要；22% 认为错误后果极其严重、19% 严重、26% 较严重、26% 不严重。\n决策与责任｜49% 每天作出影响他人、机构资源或形象的决定、19% 在该问题回答从不；80% 拥有很大决策自由度、19% 有一些；35% 对他人的健康与安全承担极高责任、31% 高责任；50% 认为决策对同事或机构的结果非常重要。\n时间压力与冲突｜19% 每天面对时间压力、25% 每周至少一次但非每日、31% 从不；13% 每周至少一次但非每日需要应对不愉快或愤怒的人。\n沟通与协作｜57% 持续与他人接触、23% 大部分时间；74% 每天有面对面讨论；47% 每天有电话交谈；40% 每天使用电子邮件；42% 认为与团队合作极其重要、38% 认为协调或领导他人极其重要。\n暴露与防护｜34% 每天暴露于轻微烧伤、割伤、咬伤或蜇伤，31% 每年至少一次但非每月、13% 从不；24% 每天穿戴普通防护或安全装备，18% 每月至少一次但非每周、53% 从不。\n姿势与动作｜57% 持续或几乎持续站立、46% 超过一半时间走动或跑动、31% 持续做重复动作、27% 持续用手操作工具或动物。\n自动化程度与外部沟通｜77% 认为工作完全未自动化、14% 略微自动化；46% 认为与外部客户或公众打交道极其重要、24% 认为非常重要、14% 认为重要；71% 对决定任务与优先级有较大自由。\n以上均为美国ONET受访情境，非中国班表、工时均值、兼职率或事故率；错误后果是难以纠正错误的后果判断，自动化比例不是AI采用率。"
             ]
           },
           "id": "animal-trainers.profile.work-context-block.1",
           "source_refs": [
-            "operations",
-            "hr"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -23498,12 +23457,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "ONET新聘教育要求问题回答：44%高中或同等、23%低于高中、17%部分大学无学位，不是现有从业者学历分布。Job Zone1—2/SVP低于6.0是美国职业准备参照。ONET仍展示2024年47,300人、2024—2034年5—6%/年空缺7,100的旧期；本页当前预测采用BLS EP2025—2035。"
+              "ONET新聘教育要求问题回答：44%高中或同等、23%低于高中、17%部分大学无学位，不是现有从业者学历分布。Job Zone1—2/SVP低于6.0是美国职业准备参照。ONET当前已列2025就业47,800人、2025—2035增长3%—4%分类及年均6,500空缺；精确4.2%和官方净增2,000直接核EP，不混分类与精确变化。"
             ]
           },
           "id": "animal-trainers.profile.onet-structured-fields-block.2",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -23556,7 +23516,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS EP 39-2011：2025年47,800人，2035年49,700人，2025—2035年增长4.2%，官方净增2,000人，年均6,500个职位空缺；自雇38.7%。人数已取整，净增按官方列值，不以两个取整人数相减替代。空缺含增长与替代，不等于净新增或个人机会。 ONET旧期另标：2024年47,300人、2024—2034年5—6%/7,100年空缺；OOH39-2010组合不能代填本职业或中国预测。"
+              "BLS EP 39-2011：2025年47,800人，2035年49,700人，2025—2035年增长4.2%，官方净增2,000人，年均6,500个职位空缺；自雇38.7%。人数已取整，净增按官方列值，不以两个取整人数相减替代。空缺含增长与替代，不等于净新增或个人机会。 ONET当前列2025就业47,800人、2025—2035增长3%—4%分类及年均6,500空缺；OOH39-2000组合不能代填本职业或中国预测。"
             ]
           },
           "id": "animal-trainers.profile.onet-structured-fields-block.4",
@@ -23701,7 +23661,9 @@
           "id": "animal-trainers.profile.definition-block.11",
           "source_refs": [
             "onet",
-            "vet-rules"
+            "cnclass",
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -24564,10 +24526,10 @@
                 "url": "https://www.onetonline.org/link/summary/39-2011.00"
               },
               {
-                "entity": "ONET39-2011旧期行业分布",
+                "entity": "ONET39-2011当前2025就业行业结构",
                 "id": "link-7",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/39-2011.00"
+                "url": "https://www.onetonline.org/link/details/39-2011.00"
               },
               {
                 "entity": "O*NET 39-2011.00 职业摘要（任务清单）",
@@ -24645,13 +24607,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -24666,7 +24621,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24681,7 +24635,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24696,7 +24649,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24711,7 +24663,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24726,7 +24677,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24736,12 +24686,11 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在引入记录与排班工具时明确人机分工、客户信息处理与记录复核责任，保证训练与用药记录可追溯，并保留训练师对安全与交付判断的主导权。"
+              "编辑引入核问：确认允许的资料、排班和草稿范围、客户信息条件与复核责任；保留原值、来源及更正轨迹便于追溯，不保证工具效果或全部记录可追溯。"
             ]
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24756,8 +24705,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.16",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24772,8 +24719,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.17",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24789,9 +24734,7 @@
           "id": "animal-trainers.ai-impact.ai-impact-table.18",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -24833,8 +24776,7 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.21",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -24848,8 +24790,7 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.22",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -24872,7 +24813,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "分开39-2011训练师单列人数/工资/部分行业与39-2010组合，不能拿照护员数据移植。"
+              "分开39-2011训练师单列人数/工资/部分行业与39-2000组合，不能拿照护员数据移植。"
             ]
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.24",
@@ -24984,7 +24925,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "22%农林渔猎/21%其他服务为旧期行业结构，不是工资分位、AI影响或当前细行业份额。"
+              "ONET当前2025农林渔猎25%、其他服务20%为本职业就业行业结构，不是工资、AI影响、细行业中位或中国份额。"
             ]
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.32",
@@ -25003,7 +24944,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25018,7 +24958,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25033,7 +24972,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25048,7 +24986,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25063,7 +25000,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25078,7 +25014,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25093,7 +25028,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25108,7 +25042,11 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.40",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls",
+            "ep",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -25164,7 +25102,8 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.44",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -25192,7 +25131,7 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.46",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25206,7 +25145,7 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.47",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25257,7 +25196,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国39-2011训练师及39-2010组合"
+              "美国39-2011训练师及39-2000组合"
             ]
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.51",
@@ -25346,7 +25285,7 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.57",
           "source_refs": [
-            "operations"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -25360,7 +25299,7 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.58",
           "source_refs": [
-            "operations"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -25374,7 +25313,7 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.59",
           "source_refs": [
-            "operations"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -25388,7 +25327,7 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "operations"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -25402,7 +25341,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.61",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25417,7 +25355,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.62",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25432,6 +25369,7 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.63",
           "source_refs": [
+            "onet",
             "ep"
           ],
           "type": "prose"
@@ -25476,7 +25414,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.66",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25491,7 +25428,7 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "operations"
+            "onet"
           ],
           "type": "prose"
         },
@@ -25505,7 +25442,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25564,7 +25500,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25637,7 +25572,7 @@
           "id": "animal-trainers.ai-impact.ai-impact-table.77",
           "source_refs": [
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25651,7 +25586,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.78",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25677,12 +25611,11 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "限定工具只处理允许的环节，例如训练视频与日志整理、客户说明与家庭作业草稿，不直接产出训练判断或健康结论。"
+              "编辑可能用途：整理已合法取得且允许处理的日志或影像、客户说明草稿；本轮未取得视频识别准确性和AI效果，不能据文本提示确定动物安全或健康。"
             ]
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.80",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25697,7 +25630,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.81",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25707,12 +25639,11 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按机构或客户要求如实记录训练方案、每次训练结果、健康与用药信息与转介情况，使过程可复核、可追溯。"
+              "编辑记录建议：按真实机构要求如实说明训练、健康观察和既有执行信息，保留原值、缺失与更正轨迹便于复核；具体保存期和全面追溯要求未核。"
             ]
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.82",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25738,12 +25669,11 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把工具生成的训练说明或客户报告草稿直接交付，会让未经核对的判断被当作训练结论。"
+              "编辑风险识别：核工具草稿与现场记录、来源和限制，未核内容不得称已观察或有效；本页未取得误导客户的发生率或因果估计。"
             ]
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.84",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25758,7 +25688,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.85",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25768,12 +25697,11 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "客户住址、联系方式与动物健康信息属个人与经营信息，外发会造成隐私与信任风险。"
+              "编辑信息核问：确认住址、联系方式等识别信息及动物资料的实际授权、用途和接收方；本页未核全部适用资料规范或泄露对信任的因果大小。"
             ]
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.86",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25788,7 +25716,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.87",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25798,7 +25725,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "训练记录与评估结果需要可复核，工具输出若无版本与来源说明将难以追溯。"
+              "编辑追溯核问：核原始记录、版本、来源和更正信息；缺失如实说明，不将工具输出当实际训练观察或完整证据链。"
             ]
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.88",
@@ -25817,7 +25744,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.89",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25827,13 +25753,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "训练次数、用药剂量与免疫信息填写错误会直接影响动物健康与责任认定。"
+              "编辑核既有训练次数、处方与执行记录是否一致；动物诊疗须按实际法定角色及范围，不把记录错误直接等效健康后果或责任认定。"
             ]
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.90",
           "source_refs": [
             "onet",
-            "onet"
+            "vet-rules"
           ],
           "type": "prose"
         },
@@ -25848,7 +25774,7 @@
           "id": "animal-trainers.ai-impact.ai-impact-table.91",
           "source_refs": [
             "onet",
-            "onet"
+            "vet-rules"
           ],
           "type": "prose"
         },
@@ -25862,7 +25788,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.92",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25877,7 +25802,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.93",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25934,7 +25858,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.97",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25991,7 +25914,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.101",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26007,7 +25929,8 @@
           "id": "animal-trainers.ai-impact.ai-impact-table.102",
           "source_refs": [
             "onet",
-            "vet-rules"
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -26022,7 +25945,8 @@
           "id": "animal-trainers.ai-impact.ai-impact-table.103",
           "source_refs": [
             "onet",
-            "vet-rules"
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -26116,7 +26040,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "确认主人理解并能在监督下复现，判断是否需要追加课程。"
+              "编辑教学核问：确认本人合法训练和教学职责，核实际对象理解、监督及评估程序；本页不保证主人能复现训练或设追加课程规则。"
             ]
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.110",
@@ -26172,12 +26096,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按评估标准判断是否合格、是否延长训练或淘汰转岗。"
+              "核真实犬只用途、适用专项标准、评估职责和机构程序；正式全文尚未取得，不从本页确定合格、延长或淘汰阈值。"
             ]
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.114",
           "source_refs": [
-            "onet"
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -26191,7 +26115,8 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.115",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -26219,7 +26144,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.117",
           "source_refs": [
-            "onet",
             "cnlaw"
           ],
           "type": "prose"
@@ -26290,7 +26214,6 @@
           },
           "id": "animal-trainers.ai-impact.ai-impact-table.122",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26537,8 +26460,7 @@
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26580,7 +26502,6 @@
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26610,7 +26531,6 @@
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26625,7 +26545,6 @@
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26654,7 +26573,6 @@
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26669,7 +26587,6 @@
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26713,7 +26630,6 @@
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26728,6 +26644,8 @@
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
+            "onet",
+            "cnclass",
             "cnlaw"
           ],
           "type": "prose"
@@ -26742,7 +26660,6 @@
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26757,7 +26674,6 @@
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26786,7 +26702,6 @@
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26815,7 +26730,6 @@
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.42",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26844,8 +26758,7 @@
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26859,8 +26772,7 @@
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26874,8 +26786,7 @@
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26884,7 +26795,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              "国家统计局《2025年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.47",
@@ -26945,7 +26856,7 @@
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26973,7 +26884,7 @@
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27001,7 +26912,8 @@
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -27010,7 +26922,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              "国家统计局《2025年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "animal-trainers.china-salary.career-snapshot-primary-locale.57",
@@ -27065,9 +26977,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27081,7 +26991,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27095,7 +27005,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27109,7 +27019,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27123,7 +27033,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27137,7 +27047,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27151,7 +27061,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27165,7 +27075,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27179,7 +27089,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27193,7 +27103,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27207,7 +27117,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27263,8 +27173,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27292,8 +27201,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "ep",
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27302,14 +27210,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资为May2025职业受雇分布；EP2025就业含自雇、2025—2035预测。ONET仍展示旧2024就业/2024—2034预测，另期不混合。OOH同页分别列训练师、照护员与组合。自雇营收、利润与工资不是同统计，不能外推中国。"
+              "工资为May2025职业受雇分布；EP2025就业含自雇、2025—2035预测。ONET当前已更新2025就业和2025—2035预测分类，精确增长与净增直接核EP。OOH同页分别列训练师、照护员与组合。自雇营收、利润与工资不是同统计，不能外推中国。"
             ]
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
             "oews",
             "ep",
-            "bls"
+            "bls",
+            "onet"
           ],
           "type": "prose"
         },
@@ -27323,8 +27232,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27339,7 +27247,7 @@
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.27",
           "source_refs": [
             "bls",
-            "hr"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -27362,7 +27270,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "训练与寄养、比赛与表演、临时加课等安排会影响计酬范围；本页不提供分方向或分机构的工资数字。"
+              "编辑核合同是否覆盖寄养、比赛、表演或加课等实际任务及计酬条款；本页未取得任务对报酬的因果估计或分方向工资。"
             ]
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.29",
@@ -27395,7 +27303,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.31",
           "source_refs": [
-            "hr"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -27409,7 +27317,6 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27438,7 +27345,8 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.34",
           "source_refs": [
-            "onet"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27462,12 +27370,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "ONET旧期行业农林渔猎22%；本轮查阅的OOH单列行业工资表未列该门类，不断言BLS从不公布。"
+              "ONET当前2025本职业农林渔猎25%就业份额，不是工资；OOH单列行业工资表未列该门类，不断言BLS从不公布。"
             ]
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "census",
+            "onet",
             "bls"
           ],
           "type": "prose"
@@ -27482,7 +27390,8 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.37",
           "source_refs": [
-            "bls"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27496,7 +27405,8 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "bls"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27505,13 +27415,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OOH明确May2025训练师在其他个人服务行业中位；是细行业，不等于ONET其他服务大类21%或自雇收入。"
+              "OOH明确May2025训练师其他个人服务细行业年中位39,990；不能等效ONET2025其他服务大类20%或自雇收入。"
             ]
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
             "bls",
-            "census"
+            "onet"
           ],
           "type": "prose"
         },
@@ -27525,7 +27435,8 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.40",
           "source_refs": [
-            "onet"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27539,7 +27450,8 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "bls"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27553,7 +27465,8 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "bls"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27567,7 +27480,8 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.43",
           "source_refs": [
-            "onet"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27591,13 +27505,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "ONET旧期其他行业合计57%含零售/艺术娱乐休闲，未单列这两门类份额；OOH37,460属于动物照护员，非训练师。"
+              "ONET当前公开两个主要门类25%和20%，未在此处给艺术娱乐休闲份额；本轮未取得该行业训练师中位，OOH37,460属于照护员，不能代填。"
             ]
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "bls",
-            "census"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27611,8 +27525,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27626,8 +27539,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "oews",
-            "bls"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27636,11 +27548,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资：ONET展示BLS May2025受雇统计；就业及预测：BLS EP2025基期/2025—2035，含自雇。OOH单列行业与组合另标；ONET旧2024期不当当前。"
+              "工资：ONET展示BLS May2025受雇统计；就业及预测：BLS EP2025基期/2025—2035，含自雇。OOH单列行业与组合另标；ONET当前亦列2025就业及2025—2035分类，精确增长按EP核。"
             ]
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
+            "oews",
+            "ep",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -27655,8 +27570,9 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews",
+            "ep",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27670,7 +27586,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27684,8 +27600,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27699,7 +27614,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27713,8 +27628,7 @@
           },
           "id": "animal-trainers.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         }
@@ -27855,11 +27769,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -27874,7 +27783,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.2",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27905,7 +27813,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.4",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -27934,7 +27841,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.6",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27965,7 +27871,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.8",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -28051,7 +27956,6 @@
           },
           "id": "animal-trainers.fit.riasec-fit-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28147,7 +28051,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用类型标签解释训练受挫，会减少改进机会。"
+              "编辑自查：把训练困难分成记录、条件、具体技能与监督需求，不由类型标签判能力；未核标签对改进机会的因果作用。"
             ]
           },
           "id": "animal-trainers.fit.personality-fit-block.17",
@@ -28166,7 +28070,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28205,7 +28108,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "把「数学不好」当固定标签，会忽略可训练性。"
+              "编辑自查：核具体记录、单位和计算困难及培训需求；未核固定标签或训练的个体提升效果。"
             ]
           },
           "id": "animal-trainers.fit.personality-fit-block.21",
@@ -28224,7 +28127,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.22",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28254,7 +28156,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -28312,7 +28213,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28322,12 +28222,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合愿意做日常照护与场所卫生的人。"
+              "编辑探索方向：适合愿意做日常照护与场所卫生的人。 不能由意愿推适任、录用或资格。"
             ]
           },
           "id": "animal-trainers.fit.personality-fit-block.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28342,7 +28241,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28357,7 +28255,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28367,12 +28264,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合愿意做繁育与饲养管理的人。"
+              "编辑探索方向：适合愿意做繁育与饲养管理的人。 不能由意愿推适任、录用或资格。"
             ]
           },
           "id": "animal-trainers.fit.personality-fit-block.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28387,7 +28283,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28402,7 +28297,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28412,12 +28306,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合愿意在公共安全与执法框架内工作的人。"
+              "编辑探索方向：适合愿意在公共安全与执法框架内工作的人。 不能由意愿推适任、录用或资格。"
             ]
           },
           "id": "animal-trainers.fit.personality-fit-block.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28432,7 +28325,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28447,7 +28339,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28457,12 +28348,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合更愿意与人打交道并带领课程的人。"
+              "编辑探索方向：适合更愿意与人打交道并带领课程的人。 不能由意愿推适任、录用或资格。"
             ]
           },
           "id": "animal-trainers.fit.personality-fit-block.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28477,7 +28367,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28492,8 +28381,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.40",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28503,13 +28390,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合愿意做面向公众的教学与课程设计的人。"
+              "编辑探索方向：适合愿意做面向公众的教学与课程设计的人。 不能由意愿推适任、录用或资格。"
             ]
           },
           "id": "animal-trainers.fit.personality-fit-block.41",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28538,7 +28423,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28548,12 +28432,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合愿意在医疗与动物照护流程中配合专业人员的人。"
+              "编辑探索方向：适合愿意在医疗与动物照护流程中配合专业人员的人。 不能由意愿推适任、录用或资格。"
             ]
           },
           "id": "animal-trainers.fit.personality-fit-block.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28568,7 +28451,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28578,12 +28460,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有某种「适合」的性格。可靠性来自可观察行为：能否按安全与福利规范靠近与处理动物、能否在动物不配合时保持耐心并按步骤重来、能否如实记录并接受复核。"
+              "本页未核人格筛选效度。编辑可核真实训练、记录、安全与福利条件，但自述或纸面表现不构成可靠性测验、动物技能或录用依据。"
             ]
           },
           "id": "animal-trainers.fit.personality-fit-block.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28598,7 +28479,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.47",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28613,7 +28493,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28642,7 +28521,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.50",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28671,7 +28549,6 @@
           },
           "id": "animal-trainers.fit.personality-fit-block.52",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28681,12 +28558,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "沟通与抗压有帮助但不是硬指标；更重要的是在动物不配合或客户期待过高时仍按规范作业并如实说明。"
+              "编辑核准确说明记录、限制及未知的具体行为；未核EI、抗压分数或这些行为对本职业表现的预测效度，岗位评价另核。"
             ]
           },
           "id": "animal-trainers.fit.personality-fit-block.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28809,12 +28685,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 39-2011.00 行业分布，用于主要行业（农业、林业、渔业与狩猎 22%，其他服务 21%）说明。"
+              "ONET当前2025主要行业农林渔猎25%、其他服务20%为本职业就业结构；不是行业工资或个人兴趣、适任效度。"
             ]
           },
           "id": "animal-trainers.fit.personality-fit-block.62",
           "source_refs": [
-            "onet"
+            "census"
           ],
           "type": "prose"
         },
@@ -28928,10 +28804,10 @@
           "id": "animal-trainers.risk.career-risk-cards.7",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "bls",
+            "cnlaw",
+            "vet-rules",
+            "employer"
           ],
           "type": "links"
         },
@@ -28961,8 +28837,6 @@
           },
           "id": "animal-trainers.risk.career-risk-cards.9",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28972,12 +28846,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "美国ONET受访：34%每日、13%每周、31%每年暴露于轻微烧伤/割伤/咬伤/蜇伤情境，非受伤率或每天被咬；64%每日露天、57%持续站立；错误后果22%极严重/19%严重/26%较严重为难以纠正错误的后果判断，不是错误率。风险场景与应对是编辑建议。证据不足：本轮已核2023宠物驯导师标准颁布信息及GB/T 36186-2018现行状态，未取得两份正式标准全文。具体申报条件、培训参考学时、导盲犬培训时长与评估阈值须查正式全文和机构要求；不以2022征求意见稿、他职标准或培训广告代填。"
+              "美国ONET受访：34%每日、13%每周至少一次但非每日、31%每年至少一次但非每月暴露于轻微烧伤/割伤/咬伤/蜇伤情境，非受伤率或每天被咬；64%每日露天、57%持续站立；错误后果22%极严重/19%严重/26%较严重为难以纠正错误的后果判断，不是错误率。风险场景与应对是编辑建议。证据不足：本轮已核2023宠物驯导师标准颁布信息及GB/T 36186-2018现行状态，未取得两份正式标准全文。具体申报条件、培训参考学时、导盲犬培训时长与评估阈值须查正式全文和机构要求；不以2022征求意见稿、他职标准或培训广告代填。"
             ]
           },
           "id": "animal-trainers.risk.career-risk-cards.10",
           "source_refs": [
-            "operations",
+            "privacy",
             "cnclass",
             "cnlaw"
           ],
@@ -28993,7 +28867,6 @@
           },
           "id": "animal-trainers.risk.career-risk-cards.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29008,7 +28881,6 @@
           },
           "id": "animal-trainers.risk.career-risk-cards.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29023,7 +28895,6 @@
           },
           "id": "animal-trainers.risk.career-risk-cards.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29033,12 +28904,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在动物受惊、护食或护幼时靠近或操作，且防护不到位或距离过近。"
+              "编辑情景：在动物受惊、护食或护幼时靠近或操作，且防护不到位或距离过近。"
             ]
           },
           "id": "animal-trainers.risk.career-risk-cards.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29053,7 +28923,6 @@
           },
           "id": "animal-trainers.risk.career-risk-cards.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29063,12 +28932,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "训练效果难以达到承诺会引发纠纷、退款与口碑损失。"
+              "编辑合同核问：实际目标、已观察记录、允许的说明与未知是否讲清；本页未取得效果落差导致退款、纠纷或口碑损失的因果估计。"
             ]
           },
           "id": "animal-trainers.risk.career-risk-cards.16",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29083,7 +28951,6 @@
           },
           "id": "animal-trainers.risk.career-risk-cards.17",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29093,12 +28960,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "客户期待短期解决长期形成的行为问题，或训练师为签单承诺确定性结果。"
+              "编辑情景：客户期待短期解决长期形成的行为问题，或训练师为签单承诺确定性结果。"
             ]
           },
           "id": "animal-trainers.risk.career-risk-cards.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29122,12 +28988,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "延误诊疗或用药错误会加重动物健康风险并涉及责任。"
+              "健康观察、既有处方记录与诊疗分工分别核实际角色；本页未核用药错误或延误的职业发生率，不从训练身份授诊断、开药或更改处方权。"
             ]
           },
           "id": "animal-trainers.risk.career-risk-cards.20",
           "source_refs": [
-            "onet"
+            "onet",
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -29151,13 +29019,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "动物在训练中出现健康异常或需按处方给药，训练师自行判断处置。"
+              "编辑情景：动物在训练中出现健康异常或需按处方给药，训练师自行判断处置。"
             ]
           },
           "id": "animal-trainers.risk.career-risk-cards.22",
           "source_refs": [
-            "onet",
-            "onet"
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -29171,7 +29039,6 @@
           },
           "id": "animal-trainers.risk.career-risk-cards.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29181,12 +29048,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "损害动物福利、引发公众与监管风险并影响训练效果。"
+              "编辑福利与安全核问：核真实任务、对象、休息和训练规程；本页未取得公众、监管或训练效果的发生率与因果估计，导盲犬元数据不支持所有动物福利细则。"
             ]
           },
           "id": "animal-trainers.risk.career-risk-cards.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29201,8 +29067,7 @@
           },
           "id": "animal-trainers.risk.career-risk-cards.25",
           "source_refs": [
-            "operations",
-            "cnlaw"
+            "onet"
           ],
           "type": "prose"
         },
@@ -29211,12 +29076,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "为赶演出或比赛进度延长训练时间或使用惩罚性手段。"
+              "编辑情景：为赶演出或比赛进度延长训练时间或使用惩罚性手段。"
             ]
           },
           "id": "animal-trainers.risk.career-risk-cards.26",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29231,7 +29095,6 @@
           },
           "id": "animal-trainers.risk.career-risk-cards.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29246,7 +29109,6 @@
           },
           "id": "animal-trainers.risk.career-risk-cards.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29262,7 +29124,8 @@
           "id": "animal-trainers.risk.career-risk-cards.29",
           "source_refs": [
             "cnclass",
-            "cnlaw"
+            "cnlaw",
+            "bls"
           ],
           "type": "prose"
         },
@@ -29271,13 +29134,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在未取得要求资质或未按机构规定的情况下承接导盲犬、工作犬或展示动物业务。"
+              "编辑情景：在未取得要求资质或未按机构规定的情况下承接导盲犬、工作犬或展示动物业务。"
             ]
           },
           "id": "animal-trainers.risk.career-risk-cards.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnclass",
+            "cnlaw",
+            "bls"
           ],
           "type": "prose"
         },
@@ -29291,7 +29155,6 @@
           },
           "id": "animal-trainers.risk.career-risk-cards.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29301,13 +29164,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "出现问题无法追溯，客户隐私与信任受损。"
+              "编辑追溯和资料核问：原值、更正、实际接收方及授权是否完整；未核信息缺失或外发对信任的因果大小，不称已有事故。"
             ]
           },
           "id": "animal-trainers.risk.career-risk-cards.32",
           "source_refs": [
-            "onet",
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -29321,8 +29183,7 @@
           },
           "id": "animal-trainers.risk.career-risk-cards.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -29331,13 +29192,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "训练与免疫记录、客户信息填写不全，或含客户身份的资料被外发。"
+              "编辑情景：训练与免疫记录、客户信息填写不全，或含客户身份的资料被外发。"
             ]
           },
           "id": "animal-trainers.risk.career-risk-cards.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -29480,8 +29340,6 @@
           },
           "id": "animal-trainers.path.entry-role-comparison.1",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "title": "动物训练师的入门岗位与初期任务怎么比较？",
@@ -29937,9 +29795,8 @@
           "id": "animal-trainers.path.career-path-block.10",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet"
+            "bls",
+            "cnlaw"
           ],
           "type": "links"
         },
@@ -29965,13 +29822,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能在指导下完成基础照料与安全接近，按示范重复简单指令训练，并如实记录训练与动物反应。"
+              "核实际岗位基础照料、记录与简单训练的培训、考核、监督和合法职责；本页不证明新手能安全接近动物。"
             ]
           },
           "id": "animal-trainers.path.career-path-block.12",
           "source_refs": [
             "onet",
-            "onet"
+            "cnclass",
+            "cnlaw",
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -29994,13 +29854,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能独立完成基础服从与常见行为问题矫正训练，向主人说明方法与家庭作业，遇到健康或攻击性问题会按程序转介。"
+              "核基础服从、行为问题及主人教学的真实训练和考核；独立任务按本人职责及机构程序，不由阶段名授能力，健康异常另按程序转介。"
             ]
           },
           "id": "animal-trainers.path.career-path-block.14",
           "source_refs": [
             "onet",
-            "onet"
+            "cnclass",
+            "cnlaw",
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -30023,13 +29886,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能在某一专项方向（如工作犬、导盲犬、马术）承担完整训练与评估，按标准交付并处理复杂行为问题。"
+              "工作犬、导盲犬或马匹专项按用途核标准、训练、评估职责和机构条件；完整交付能力需真实考核，本页不授复杂个案能力。"
             ]
           },
           "id": "animal-trainers.path.career-path-block.16",
           "source_refs": [
             "onet",
-            "onet"
+            "cnclass",
+            "cnlaw",
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -30052,13 +29918,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能设计课程与训练标准、带教新人并承接机构培训项目，或开设训练机构并对客户交付质量负责。"
+              "核课程设计、带教、项目管理及经营条件；已有训练经历不保证具备开办机构或所有交付权限。"
             ]
           },
           "id": "animal-trainers.path.career-path-block.18",
           "source_refs": [
             "onet",
-            "onet"
+            "cnclass",
+            "cnlaw",
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -30149,7 +30018,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET 39-2011.00 任务与职责（美国，2026 年更新页面，前景光明职业）。"
+              "O*NET39-2011任务与职责，美国2026更新页面；现期增长类别3%—4%，精确4.2%按EP。"
             ]
           },
           "id": "animal-trainers.path.career-path-block.24",
@@ -30248,13 +30117,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在训练师指导下完成犬只的日常照料、安全接近与简单指令训练，并记录训练过程与动物反应。"
+              "在本人实际训练、考核、监督及岗位范围内协助犬只照料、记录与基础训练；具体方法依机构合法程序。"
             ]
           },
           "id": "animal-trainers.path.career-path-block.31",
           "source_refs": [
             "onet",
-            "onet"
+            "cnclass",
+            "cnlaw",
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -30320,13 +30192,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立完成基础服从与常见行为问题矫正训练，向主人说明方法并布置家庭作业。"
+              "基础服从、行为问题和主人教学按真实训练、考核及职责核，不从页面推独立矫正能力或提供家庭操作方法。"
             ]
           },
           "id": "animal-trainers.path.career-path-block.36",
           "source_refs": [
             "onet",
-            "onet"
+            "cnclass",
+            "cnlaw",
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -30392,13 +30267,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "处理复杂行为问题、带教新人并参与课程设计，对客户交付质量负责。"
+              "复杂个案、带教和课程设计职责分别核，健康异常依实际角色转介；年资或阶段名不证明全部能力。"
             ]
           },
           "id": "animal-trainers.path.career-path-block.41",
           "source_refs": [
             "onet",
-            "onet"
+            "cnclass",
+            "cnlaw",
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -30470,7 +30348,6 @@
           },
           "id": "animal-trainers.path.career-path-block.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30538,13 +30415,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在马房完成饲喂、清洁与安全接近，并在教练指导下参与基础马匹调教与骑乘训练。"
+              "核马房照料、骑乘和调教实际训练、监督及考核条件；不凭本页自行接近或控制马匹。"
             ]
           },
           "id": "animal-trainers.path.career-path-block.51",
           "source_refs": [
             "onet",
-            "onet"
+            "cnclass",
+            "cnlaw",
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -30572,7 +30452,6 @@
           },
           "id": "animal-trainers.path.career-path-block.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30611,13 +30490,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "训练马匹骑乘、挽具、表演或赛马，用口令与缰绳等指令塑造行为并纠正不良习惯。"
+              "美国任务包括马匹骑乘、挽具、表演和赛马训练；中国具体信号、训练方法和安全条件依本人合法训练、考核与机构程序。"
             ]
           },
           "id": "animal-trainers.path.career-path-block.56",
           "source_refs": [
             "onet",
-            "onet"
+            "cnclass",
+            "cnlaw",
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -30684,13 +30566,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "针对特定马匹与赛事目标制定训练方案并执行，与兽医、钉掌师等专业人员协作。"
+              "特定马匹和赛事任务、兽医及其他专业协作依各自角色训练和授权，不从本页给实际方案。"
             ]
           },
           "id": "animal-trainers.path.career-path-block.61",
           "source_refs": [
             "onet",
-            "onet"
+            "cnclass",
+            "cnlaw",
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -30718,7 +30603,6 @@
           },
           "id": "animal-trainers.path.career-path-block.63",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30757,13 +30641,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "管理马匹训练与饲养安排、组织教学与赛事参与，并对马匹福利与人员安全负责。"
+              "马房管理、教学、赛事、福利和人员安全的职责按真实岗位和考核核；训练资历不保证全部管理能力。"
             ]
           },
           "id": "animal-trainers.path.career-path-block.66",
           "source_refs": [
             "onet",
-            "onet"
+            "cnclass",
+            "cnlaw",
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -30830,13 +30717,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在训导员指导下完成犬只照料、社会化训练与基础指令训练，并记录行为数据。"
+              "实际犬舍照料、社会化与指令训练须按本人训练、监督及职责，页面不授新手现场能力。"
             ]
           },
           "id": "animal-trainers.path.career-path-block.71",
           "source_refs": [
             "onet",
-            "onet"
+            "cnclass",
+            "cnlaw",
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -30902,13 +30792,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按用途训练犬只完成助人（含导盲犬与服务犬）或财产保护任务，并记录训练与评估数据。"
+              "按具体犬只用途核合法训练、专项标准、评估职责与机构程序，不把宠物凭证等效全部工作犬资格。"
             ]
           },
           "id": "animal-trainers.path.career-path-block.76",
           "source_refs": [
             "onet",
-            "onet"
+            "cnclass",
+            "cnlaw",
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -30975,13 +30868,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按标准完成候选犬评估、训练调整与交付前的共同训练，并向使用者或机构交接。"
+              "候选犬评估、交付及使用者共同训练按真实用途和程序核；正式标准全文未取得，不自设合格、延长或淘汰规则。"
             ]
           },
           "id": "animal-trainers.path.career-path-block.81",
           "source_refs": [
             "onet",
-            "onet"
+            "cnclass",
+            "cnlaw",
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -31048,13 +30944,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "负责选犬、训练、评估与交付全流程的标准与质量，管理团队并对外部合作负责。"
+              "选犬、训练、评估、交付、团队及合作责任分别核真实岗位；本页发展场景不证明已具全流程负责人能力。"
             ]
           },
           "id": "animal-trainers.path.career-path-block.86",
           "source_refs": [
             "onet",
-            "onet"
+            "cnclass",
+            "cnlaw",
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -31098,10 +30997,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 39-2011.00 动物训练师职业摘要",
+                "entity": "BLS OOH训练师与照护服务组合（分别标明）",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/39-2011.00"
+                "url": "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm"
               },
               {
                 "entity": "BLS EP2025—2035：39-2011",
@@ -31110,10 +31009,10 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
+                "entity": "NBS2025城镇单位工资宽参照",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET 39-2011.00 培训与教育信息（Job Zone 1—2）",
@@ -31173,9 +31072,9 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
+            "bls",
+            "ep",
+            "nbs",
             "onet"
           ],
           "type": "links"
@@ -31206,7 +31105,7 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31304,7 +31203,7 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31318,7 +31217,7 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31341,13 +31240,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "组合39-2010含照护员和训练师；与本职业39-2011为同2025基期而对象不同，不以组合11%替代4.2%。"
+              "组合39-2000含照护员和训练师；与本职业39-2011为同2025基期而对象不同，不以组合11%替代4.2%。"
             ]
           },
           "id": "animal-trainers.market-signals.market-signal-card.19",
           "source_refs": [
-            "bls",
-            "ep"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31361,7 +31259,7 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31375,7 +31273,7 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31389,7 +31287,7 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31403,7 +31301,8 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -31417,7 +31316,8 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -31446,7 +31346,8 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.26",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -31460,7 +31361,8 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -31474,7 +31376,8 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -31488,7 +31391,8 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.29",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -31497,13 +31401,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "ONET工资、任务与美国职业背景；不作为中国需求或个人机会。"
+              "BLS OOH分别列训练师、照护员与组合工资/预测；组合11%及69,400空缺不当训练师4.2%和6,500。"
             ]
           },
           "id": "animal-trainers.market-signals.market-signal-card.30",
           "source_refs": [
-            "onet",
-            "oews"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31560,7 +31463,6 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31575,7 +31477,6 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31590,7 +31491,6 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31600,12 +31500,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足繁育、遗传与饲养管理知识及相应资质要求。"
+              "编辑转向核问：需补足繁育、遗传与饲养管理知识及相应资质要求。 目标法域、训练、学历和权限另核；未取得完整相邻准入细则，不保证转岗。"
             ]
           },
           "id": "animal-trainers.market-signals.market-signal-card.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31615,12 +31514,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "动物行为观察、健康观察与记录能力可迁移。"
+              "编辑迁移核问：动物行为观察、健康观察与记录能力可迁移。 实际目标任务和考核另核，未取得直接迁移或转岗表现的效度数据。"
             ]
           },
           "id": "animal-trainers.market-signals.market-signal-card.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31630,12 +31528,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等：都直接与动物打交道，但目标从行为塑造转为繁育与生产。"
+              "编辑转向核问：中等：都直接与动物打交道，但目标从行为塑造转为繁育与生产。 目标法域、训练、学历和权限另核；未取得完整相邻准入细则，不保证转岗。"
             ]
           },
           "id": "animal-trainers.market-signals.market-signal-card.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31650,7 +31547,6 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.40",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31660,12 +31556,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "对动物行为的判断与安全接近经验有帮助。"
+              "编辑迁移核问：对动物行为的判断与安全接近经验有帮助。 实际目标任务和考核另核，未取得直接迁移或转岗表现的效度数据。"
             ]
           },
           "id": "animal-trainers.market-signals.market-signal-card.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31675,12 +31570,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等：都需要处理动物与公众，但权力来源与处置方式不同。"
+              "编辑转向核问：中等：都需要处理动物与公众，但权力来源与处置方式不同。 目标法域、训练、学历和权限另核；未取得完整相邻准入细则，不保证转岗。"
             ]
           },
           "id": "animal-trainers.market-signals.market-signal-card.42",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31695,7 +31589,6 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31705,12 +31598,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "训练计划设计、进度分解与沟通教学能力可迁移。"
+              "编辑迁移核问：训练计划设计、进度分解与沟通教学能力可迁移。 实际目标任务和考核另核，未取得直接迁移或转岗表现的效度数据。"
             ]
           },
           "id": "animal-trainers.market-signals.market-signal-card.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31720,12 +31612,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等：训练方法思路相通，但对象从动物变为人群。"
+              "编辑转向核问：中等：训练方法思路相通，但对象从动物变为人群。 目标法域、训练、学历和权限另核；未取得完整相邻准入细则，不保证转岗。"
             ]
           },
           "id": "animal-trainers.market-signals.market-signal-card.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31740,7 +31631,6 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31750,12 +31640,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "向学员或客户讲解方法与布置练习的能力可迁移。"
+              "编辑迁移核问：向学员或客户讲解方法与布置练习的能力可迁移。 实际目标任务和考核另核，未取得直接迁移或转岗表现的效度数据。"
             ]
           },
           "id": "animal-trainers.market-signals.market-signal-card.47",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31765,12 +31654,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等：都以传授方法为核心，但对象与机构不同。"
+              "编辑转向核问：中等：都以传授方法为核心，但对象与机构不同。 目标法域、训练、学历和权限另核；未取得完整相邻准入细则，不保证转岗。"
             ]
           },
           "id": "animal-trainers.market-signals.market-signal-card.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31780,12 +31668,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足临床协助、护理操作与医疗流程知识。"
+              "编辑转向核问：需补足临床协助、护理操作与医疗流程知识。 目标法域、训练、学历和权限另核；未取得完整相邻准入细则，不保证转岗。"
             ]
           },
           "id": "animal-trainers.market-signals.market-signal-card.49",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31814,7 +31701,8 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.51",
           "source_refs": [
-            "onet"
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -31823,12 +31711,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足检验、影像与临床技术操作及相关专业教育背景。"
+              "编辑转向核问：需补足检验、影像与临床技术操作及相关专业教育背景。 目标法域、训练、学历和权限另核；未取得完整相邻准入细则，不保证转岗。"
             ]
           },
           "id": "animal-trainers.market-signals.market-signal-card.52",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31838,12 +31725,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "动物处理与安全操作经验有帮助。"
+              "编辑迁移核问：动物处理与安全操作经验有帮助。 实际目标任务和考核另核，未取得直接迁移或转岗表现的效度数据。"
             ]
           },
           "id": "animal-trainers.market-signals.market-signal-card.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31853,12 +31739,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远：需要专业技术教育背景与执业序列内的分工。"
+              "编辑转向核问：较远：需要专业技术教育背景与执业序列内的分工。 目标法域、训练、学历和权限另核；未取得完整相邻准入细则，不保证转岗。"
             ]
           },
           "id": "animal-trainers.market-signals.market-signal-card.54",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31873,8 +31758,8 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.55",
           "source_refs": [
-            "onet",
-            "onet"
+            "vet-rules",
+            "clinic-rules"
           ],
           "type": "prose"
         },
@@ -31883,12 +31768,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "对动物行为与健康的观察经验有帮助。"
+              "编辑迁移核问：对动物行为与健康的观察经验有帮助。 实际目标任务和考核另核，未取得直接迁移或转岗表现的效度数据。"
             ]
           },
           "id": "animal-trainers.market-signals.market-signal-card.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31903,7 +31787,6 @@
           },
           "id": "animal-trainers.market-signals.market-signal-card.57",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -32006,9 +31889,6 @@
             ]
           },
           "id": "animal-trainers.sources.source-card.1",
-          "source_refs": [
-            "onet"
-          ],
           "type": "prose"
         },
         {
@@ -32039,13 +31919,10 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核对与更新：2026-10-02。"
+              "本窗口2026-10-09核ONET39-2011详细原文、同官方全国工资、BLS EP/OOH、GB/T36186-2018现行元数据及无障碍法46条；协会搜索正文核颁布，正式全文仍缺。NBS与兽医同文复用10月8日已核，机构办法复用10月9日已核。"
             ]
           },
           "id": "animal-trainers.sources.source-card.3",
-          "source_refs": [
-            "onet"
-          ],
           "type": "prose"
         },
         {
@@ -32053,7 +31930,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "美国工资受雇、EP就业含自雇，2025基期/2025—2035预测；ONET旧预测另期。OOH已公布本职业其他个人服务39,990和零售36,240年中位，不宣称所有行业未公布。中国NBS宽参照不当职业工资。证据不足：本轮已核2023宠物驯导师标准颁布信息及GB/T 36186-2018现行状态，未取得两份正式标准全文。具体申报条件、培训参考学时、导盲犬培训时长与评估阈值须查正式全文和机构要求；不以2022征求意见稿、他职标准或培训广告代填。 训练身份不授予动物诊疗权限。中国实际诊疗须分别核执业兽医师、执业助理兽医师、乡村兽医等资格、备案和法定范围，以及机构许可；不是只有一个合法角色。ONET按处方给药为美国任务描述，不授权中国人员自行诊断、开药或变更处方。"
+              "美国工资受雇、EP就业含自雇，2025基期/2025—2035预测；ONET已更新2025就业及25—35预测分类，精确增长按EP核。OOH已公布本职业其他个人服务39,990和零售36,240年中位，不宣称所有行业未公布。中国NBS宽参照不当职业工资。证据不足：本轮已核2023宠物驯导师标准颁布信息及GB/T 36186-2018现行状态，未取得两份正式标准全文。具体申报条件、培训参考学时、导盲犬培训时长与评估阈值须查正式全文和机构要求；不以2022征求意见稿、他职标准或培训广告代填。 训练身份不授予动物诊疗权限。中国实际诊疗须分别核执业兽医师、执业助理兽医师、乡村兽医等资格、备案和法定范围，以及机构许可；不是只有一个合法角色。ONET按处方给药为美国任务描述，不授权中国人员自行诊断、开药或变更处方。 证据不足：中国职业工资/预测与自营占比、美国农林渔猎及艺术娱乐行业内职业中位、AI效果/替代/采用及工资因果、人格效度、完整相邻准入和具体动物操作条件仍缺，不以宽参照代填。"
             ]
           },
           "id": "animal-trainers.sources.source-card.4",
@@ -32140,74 +32017,74 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "onet",
-                "limitation": "用于职业身份、17任务（10核心/5补充/2新增未评分）、RS和Bright Outlook；旧预测明确另期。",
+                "limitation": "17任务10核心/5补充/2新增未评分及RS；现列2025就业47800、25—35增长3%—4%分类与年空缺6500；精确4.2%和净2000直接核EP。不授中国诊疗或全部专项操作权限。",
                 "market": "美国",
                 "name": "O*NET OnLine 39-2011.00 动物训练师职业摘要",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/39-2011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "oews",
                 "limitation": "May2025全国受雇年/时五分位，不是起薪或自营收入；不据此断言兼职导致工资波动。",
                 "market": "美国",
                 "name": "O*NET 展示的 BLS 2025 年 5 月工资分位（39-2011.00）",
-                "period": "2025年5月；访问 2026-09-15",
-                "publisher": "O*NET OnLine",
+                "period": "2025年5月；访问 2026-10-09",
+                "publisher": "O*NET OnLine（BLS OEWS数据）",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/39-2011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "parent_occupation_proxy",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "parent_occupation_proxy",
                 "id": "bls",
-                "limitation": "同页单列训练师、照护员及组合，单列两个行业工资；39-2010组合另标，资格/经营许可另核州。",
+                "limitation": "同页单列训练师、照护员及组合，单列两个行业工资；39-2000组合另标，资格/经营许可另核州。",
                 "market": "美国",
                 "name": "BLS 职业展望手册《动物照护与服务人员》",
-                "period": "2025年（就业与工资）／2025—2035年（预测）；访问 2026-09-15",
+                "period": "2025年（就业与工资）／2025—2035年（预测）；访问 2026-10-09",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "ep",
                 "limitation": "39-2011行与表头单位千人：47.8→49.7、官方净增2.0、4.2%、自雇38.7%、年空缺6.5；典型高中、无相关经验、中期在职训练。",
                 "market": "美国",
                 "name": "BLS 就业预测表（按详细职业）",
-                "period": "2025年就业／2025—2035预测；本轮核2026-10-02",
+                "period": "2025年就业／2025—2035预测；本窗口核或同文复用2026-10-09",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "industry_proxy",
-                  "访问 2026-09-15"
+                  "本窗口实际读取或同页/同文复用2026-10-08"
                 ],
                 "evidence_type": "industry_proxy",
                 "id": "nbs",
@@ -32217,148 +32094,148 @@
                 "period": "2025年；2026-05-15 发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮适用复核2026-10-02"
+                  "组织修订者搜索正文摘要核颁布信息，原页正文提取未成功，非正式标准全文2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "cnclass",
-                "limitation": "组织修订者发布消息确认2023-08-31颁布含4-10-07-02。部通知与协会附件正文读取受限，正式标准全文本轮未取得，不凭草案代填详细条件。",
+                "limitation": "协会作为组织修订者发布消息，搜索正文核2023-08-31颁布及4-10-07-02；原页正文提取和正式附件仍未成功，不代填申报条件、学时或评分。",
                 "market": "中国大陆",
-                "name": "人力资源社会保障部办公厅《关于颁布劳动保障协理员等 25 个国家职业标准的通知》（人社厅发〔2023〕32 号）",
-                "period": "2023-08-31 颁布；访问 2026-09-15",
+                "name": "组织修订协会：2023宠物驯导师国家职业标准颁布信息（非标准全文）",
+                "period": "2023-08-31 颁布；访问 2026-10-09",
                 "publisher": "中国礼仪休闲用品工业协会（组织修订者）",
                 "scope": "contextual",
                 "url": "https://www.chinaga.org/newsinfo/6585251.html"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "cnlaw",
                 "limitation": "证据不足：本轮官方元数据核现行、2018-05-14发布/12-01实施；GB/T推荐性国家标准。正式全文本轮未取得，不断言培训月数或评分阈值。",
                 "market": "中国大陆",
                 "name": "国家标准《导盲犬》（GB/T 36186-2018）",
-                "period": "2018-05-14 发布，2018-12-01 实施；访问 2026-09-15",
+                "period": "2018-05-14 发布，2018-12-01 实施；访问 2026-10-09",
                 "publisher": "国家市场监督管理总局、国家标准化管理委员会",
                 "scope": "exact",
                 "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=EEB8EE136859994D8E8E82C2E5DCA613"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "operations",
                 "limitation": "用于任务、工作活动与工作情境（含户外暴露、体力负荷与伤害暴露比例）。",
                 "market": "美国",
                 "name": "O*NET 39-2011.00 详细资料（任务与工作活动）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/39-2011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "hr",
                 "limitation": "用于工作周时长、日程规律性、防护与暴露比例。",
                 "market": "美国",
                 "name": "O*NET 39-2011.00 详细资料（工作时间与环境）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/39-2011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "privacy",
                 "limitation": "用于工作情境受访比例与安全责任说明。",
                 "market": "美国",
                 "name": "O*NET 39-2011.00 详细资料（工作情境）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/39-2011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "ilo",
-                "limitation": "用于兴趣代码 RS（现实型、社会型）与前景光明标注。",
+                "limitation": "用于RS兴趣剖面，非个人适任、表现或录用预测；本轮最新详细页头无Bright Outlook标记，历史或缓存标记不作现期前景保证。",
                 "market": "美国",
                 "name": "O*NET 39-2011.00 职业摘要（兴趣剖面 RS）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/39-2011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "census",
-                "limitation": "用于主要行业（农业、林业、渔业与狩猎 22%，其他服务 21%）说明。",
+                "limitation": "当前2025农林渔猎25%、其他服务20%为本职业就业结构，不是行业工资或细行业份额。",
                 "market": "美国",
                 "name": "O*NET 39-2011.00 行业分布",
-                "period": "ONET行业结构2024年；本轮核2026-10-02",
+                "period": "2025就业行业结构；2026-10-09核详细页",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/link/industry/39-2011.00"
+                "url": "https://www.onetonline.org/link/details/39-2011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "facilities",
                 "limitation": "ONET详情列13类软件技能，示例含排班、数据库、Excel等；不是AI效果或统一软件门槛。",
                 "market": "美国",
                 "name": "ONET39-2011详情（13类软件技能示例）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/39-2011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "editor",
                 "limitation": "OOH认证非必需但可有帮助，很多州自营照护服务需经营许可；本轮未逐州核许可，不由目录空项断言全国无要求。",
                 "market": "美国",
                 "name": "BLS OOH教育、认证与经营许可",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm"
@@ -32380,34 +32257,34 @@
                 "url": "https://www.onetonline.org/link/custom/39-2011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "msresearch",
                 "limitation": "用于 Job Zone 1—2、在职训练与注册学徒（动物训练师、马匹训练师）说明。",
                 "market": "美国",
                 "name": "O*NET 39-2011.00 培训与教育信息（Job Zone 1—2）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/link/localtraining/39-2011.00"
+                "url": "https://www.onetonline.org/link/details/39-2011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "onet-wages",
                 "limitation": "用于工资分位的官方展示页面（含分州与按邮编查询入口）。",
                 "market": "美国",
                 "name": "O*NET 39-2011.00 全国工资分位页面",
-                "period": "2025年5月；访问 2026-09-15",
-                "publisher": "O*NET OnLine",
+                "period": "2025年5月；访问 2026-10-09",
+                "publisher": "O*NET OnLine（BLS OEWS数据）",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/39-2011.00"
               },
@@ -32428,177 +32305,177 @@
                 "url": "https://www.stats.gov.cn/xxgk/zcfggz/txzfg2020/202605/t20260511_1963662.html"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "employer",
                 "limitation": "用于记录与数据要求的说明。",
                 "market": "美国",
                 "name": "O*NET 39-2011.00 详细资料（记录与数据要求）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/39-2011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "weforum",
                 "limitation": "用于任务清单核对。",
                 "market": "美国",
                 "name": "O*NET 39-2011.00 详细资料（任务清单）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/39-2011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-1",
                 "limitation": "用于任务描述核对。",
                 "market": "美国",
                 "name": "O*NET 39-2011.00 职业摘要（任务描述）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/39-2011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-2",
                 "limitation": "用于职业属性核对。",
                 "market": "美国",
                 "name": "O*NET 39-2011.00 职业摘要（职业属性）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/39-2011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-3",
                 "limitation": "用于数据说明核对。",
                 "market": "美国",
                 "name": "O*NET 39-2011.00 详细资料（数据说明）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/39-2011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "arxiv",
                 "limitation": "用于任务与职责边界。",
                 "market": "美国",
                 "name": "O*NET 39-2011.00 职业摘要（任务与职责）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/39-2011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "purchasing-managers",
                 "limitation": "相邻职业名称/任务参照；animal-breeders为动物繁育员，不能当中国一一对应或操作授权。",
                 "market": "美国",
                 "name": "O*NET 39-2011.00 职业摘要（相关职业）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/39-2011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "archivists",
                 "limitation": "用于记录与成果要求说明。",
                 "market": "美国",
                 "name": "O*NET 39-2011.00 详细资料（记录与成果要求）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "2026 年更新页面；访问 2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/39-2011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "vet-rules",
                 "limitation": "本批此前实际核读2022管理办法，本职业有限适用复核：执业兽医师、助理、乡村角色及备案/范围，不由训练身份授诊疗。",
                 "market": "中国大陆",
                 "name": "执业兽医和乡村兽医管理办法（2022）",
-                "period": "2022管理办法；本轮有限适用复核2026-10-02",
+                "period": "2022管理办法；本窗口同文复用2026-10-08",
                 "publisher": "农业农村部",
                 "scope": "contextual",
                 "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408942.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "clinic-rules",
                 "limitation": "本批此前实际核读2022动物诊疗机构管理办法，机构许可与个人资格不同。",
                 "market": "中国大陆",
                 "name": "动物诊疗机构管理办法（2022）",
-                "period": "2022管理办法；本轮有限适用复核2026-10-02",
+                "period": "2022管理办法；本窗口同文复用2026-10-09",
                 "publisher": "农业农村部",
                 "scope": "contextual",
                 "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408940.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "本轮适用复核2026-10-02"
+                  "本窗口实际读取或同页/同文复用2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "access-law",
                 "limitation": "无障碍环境建设法46条服务犬便利及识别/防护义务，72条2023-09-01生效；不是任意宠物或训练师通行证。",
                 "market": "中国大陆",
                 "name": "中华人民共和国无障碍环境建设法（46/72条）",
-                "period": "2023法律；2023-09-01生效；本轮核2026-10-02",
+                "period": "2023法律；2023-09-01生效；本窗口核或同文复用2026-10-09",
                 "publisher": "黑龙江省通信管理局官方转载",
                 "scope": "exact",
                 "url": "https://hljca.miit.gov.cn/gzcy/zjdc/art/2023/art_41a6f2089a524beebf4895c01ac240d7.html"
@@ -33113,7 +32990,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "旧期行业结构",
+            "类型": "2025就业行业结构",
             "适用范围": {
               "$item": "animal-trainers.ai-impact.ai-impact-table.32",
               "block": "ai-impact",
@@ -34816,7 +34693,6 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
               "onet"
             ],
             "id": "cost-change",
@@ -34848,7 +34724,6 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "employer",
               "onet"
             ],
             "id": "record-version",
@@ -34880,8 +34755,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "vet-rules",
-              "clinic-rules"
+              "privacy",
+              "onet"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34912,8 +34787,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
-              "cnlaw"
+              "onet"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -34944,8 +34818,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "cnclass",
-              "cnlaw"
+              "facilities",
+              "bls"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -34976,8 +34850,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "employer",
-              "operations"
+              "employer"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35472,11 +35345,11 @@
             "ai_heading": "AI 会影响动物训练师的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "公开招聘样本（历史公告，非官方统计）",
-            "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "动物训练师在不同学历背景下通常从哪些岗位方向开始？",
+            "scenario_caption": "以下为编辑准备建议；具体学历、训练与岗位条件须核对目标单位公告，本页未取得中国常见入行路径样本。",
+            "scenario_heading": "不同学历背景可核对哪些候选准备方向？",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "学历背景",
-            "scenario_value_label": "常见岗位方向"
+            "scenario_value_label": "候选准备方向（编辑建议）"
           },
           "us_growth": {
             "$item": "animal-trainers.china-salary.career-snapshot-primary-locale.58",
@@ -36467,7 +36340,7 @@
           },
           {
             "alternate_value": null,
-            "label": "ONET新聘教育与旧期数据",
+            "label": "ONET新聘教育与现期就业/预测分类",
             "secondary_value": null,
             "value": {
               "$item": "animal-trainers.profile.onet-structured-fields-block.2",
@@ -37868,7 +37741,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "工作动物训练：行为评估与方案设计 · 训练执行与安全控制 · 客户交付与记录",
@@ -37919,7 +37792,7 @@
       "text": "动物训练师"
     }
   },
-  "source_content_sha256": "115c19e93f1445cee9952ec955a11259a88019c9054becba5417edd62df4ab06",
+  "source_content_sha256": "430f0f32838e2ff6f3ac78e92ea2efe81f11470d9789690a5a2d120c2bbff2dc",
   "subject": {
     "canonical_slug": "animal-trainers",
     "name": "动物训练师",

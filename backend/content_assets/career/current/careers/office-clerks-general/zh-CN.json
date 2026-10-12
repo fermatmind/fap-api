@@ -12759,7 +12759,7 @@
           "data": {
             "entries": [
               "喜欢让团队信息可查、截止时间清晰。",
-              "看工作样本比看人格标签更可靠。"
+              "用工作样本观察核错与交接表现；人格标签仅作探索提示。"
             ]
           },
           "id": "office-clerks-general.fit.personality-fit-block.3",
@@ -13996,10 +13996,10 @@
             "链接": "https://www.bls.gov/ooh/office-and-administrative-support/general-office-clerks.htm"
           }
         ],
-        "difference_intro": "把可辅助的草稿与必须核验的记录、通知和隐私决策分开。",
+        "difference_intro": "以下为基于办公任务的编辑试用建议；未取得本职业采用率或效率提升实测，草稿、档案和外发仍需核验。",
         "difference_rows": [
           {
-            "AI主要改变": "减少格式和初稿时间。",
+            "AI主要改变": "辅助格式整理和初稿制作，节省时间须在具体流程验证。",
             "仍由人负责": "核条款、收件人和版本。",
             "方向": "文档草稿"
           },
@@ -14056,7 +14056,7 @@
         "heading": "AI辅助文档和排程，关键字段仍须核对",
         "method_cards": [
           {
-            "含义": "文档草稿和分类可提速，但不保证正确。",
+            "含义": "草稿和分类可作为候选辅助；准确性与用时须结合具体流程验证。",
             "概念": "任务辅助"
           },
           {
@@ -14566,16 +14566,28 @@
         "risks": [
           {
             "affected_roles": {
-              "$item": "office-clerks-general.risk.career-risk-cards.4",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "外发文件的文员、授权主管与资料主体。相关职责边界：",
+                {
+                  "$item": "office-clerks-general.risk.career-risk-cards.4",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "consequence": {
-              "$item": "office-clerks-general.risk.career-risk-cards.5",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "可能使附件内容被错误收件人获取；错误草稿还可能扩大影响。复核背景：",
+                {
+                  "$item": "office-clerks-general.risk.career-risk-cards.5",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "evidence_refs": [
               "onet",
@@ -14587,8 +14599,8 @@
             "title": "误投文件"
           },
           {
-            "affected_roles": "核电话、文件、记录与日程的来源、版本、权限和交接。",
-            "consequence": "核电话、文件、记录与日程的来源、版本、权限和交接。",
+            "affected_roles": "安排会议的文员、参与者与场地管理者。",
+            "consequence": "可能造成会议无法按计划举行或重复协调。",
             "evidence_refs": [
               "onet",
               "privacy"
@@ -14599,8 +14611,8 @@
             "title": "日期冲突"
           },
           {
-            "affected_roles": "核电话、文件、记录与日程的来源、版本、权限和交接。",
-            "consequence": "核电话、文件、记录与日程的来源、版本、权限和交接。",
+            "affected_roles": "录入归档的文员和后续检索、处理人员。",
+            "consequence": "可能丢失责任、截止期或版本线索，增加返工。",
             "evidence_refs": [
               "privacy",
               "privacy"
@@ -14611,8 +14623,8 @@
             "title": "档案缺项"
           },
           {
-            "affected_roles": "核电话、文件、记录与日程的来源、版本、权限和交接。",
-            "consequence": "核电话、文件、记录与日程的来源、版本、权限和交接。",
+            "affected_roles": "接电话、回复来访的文员及授权负责人。",
+            "consequence": "可能使客户误解费用或政策并引起后续争议。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14623,8 +14635,8 @@
             "title": "越权承诺"
           },
           {
-            "affected_roles": "核电话、文件、记录与日程的来源、版本、权限和交接。",
-            "consequence": "核电话、文件、记录与日程的来源、版本、权限和交接。",
+            "affected_roles": "使用生成草稿的文员、审批和接收人员。",
+            "consequence": "可能传播错误姓名、金额或日期并影响业务处理。",
             "evidence_refs": [
               "bls",
               "bls"
@@ -14635,8 +14647,8 @@
             "title": "AI编造"
           },
           {
-            "affected_roles": "核电话、文件、记录与日程的来源、版本、权限和交接。",
-            "consequence": "核电话、文件、记录与日程的来源、版本、权限和交接。",
+            "affected_roles": "接触敏感资料的文员与机构资料负责人。",
+            "consequence": "可能导致未经授权的披露或访问。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14653,31 +14665,31 @@
             "href": "https://www.bls.gov/ooh/office-and-administrative-support/general-office-clerks.htm",
             "id": "onet",
             "label": "BLS职责",
-            "scope": "办公室文员任务与风险"
+            "scope": "美国43-9061职责与工作环境；风险情境及处置为编辑提示，非事故频率、隐私法律或AI效果证据。"
           },
           {
             "href": "https://www.onetonline.org/link/details/43-9061.00",
             "id": "bls",
             "label": "O*NET任务",
-            "scope": "办公室文员任务与风险"
+            "scope": "美国43-9061职责与工作环境；风险情境及处置为编辑提示，非事故频率、隐私法律或AI效果证据。"
           },
           {
             "href": "https://www.bls.gov/ooh/office-and-administrative-support/general-office-clerks.htm",
             "id": "facilities",
             "label": "BLS环境",
-            "scope": "办公室文员任务与风险"
+            "scope": "美国43-9061职责与工作环境；风险情境及处置为编辑提示，非事故频率、隐私法律或AI效果证据。"
           },
           {
             "href": "https://www.onetonline.org/link/details/43-9061.00",
             "id": "privacy",
             "label": "O*NET工作活动",
-            "scope": "办公室文员任务与风险"
+            "scope": "美国43-9061职责与工作环境；风险情境及处置为编辑提示，非事故频率、隐私法律或AI效果证据。"
           },
           {
             "href": "https://www.bls.gov/ooh/office-and-administrative-support/general-office-clerks.htm",
             "id": "onet",
             "label": "BLS入行",
-            "scope": "办公室文员任务与风险"
+            "scope": "美国43-9061职责与工作环境；风险情境及处置为编辑提示，非事故频率、隐私法律或AI效果证据。"
           }
         ]
       },
@@ -15078,30 +15090,39 @@
         "heading": "美国就业下降与替补型空缺",
         "outlook_evidence": [
           {
-            "geography": {
-              "$item": "office-clerks-general.market-signals.market-signal-card.2",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "horizon": {
-              "$item": "office-clerks-general.market-signals.market-signal-card.3",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "geography": "美国",
+            "horizon": "2025基期",
             "interpretation": {
-              "$item": "office-clerks-general.market-signals.market-signal-card.4",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
+              "$join": [
+                "组合展示就业背景；存量、空缺、技术与转向分别理解：",
+                {
+                  "$item": "office-clerks-general.market-signals.market-signal-card.2",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "office-clerks-general.market-signals.market-signal-card.3",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "office-clerks-general.market-signals.market-signal-card.4",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "office-clerks-general.market-signals.market-signal-card.5",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
-            "limitation": {
-              "$item": "office-clerks-general.market-signals.market-signal-card.5",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "limitation": "就业存量不是当前招聘或录用保证；不外推中国岗位。",
             "metric": "2025在岗",
             "occupation_scope": "美国43-9061精确职业",
             "source_id": "ep",
@@ -15269,7 +15290,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
+            "cta_label": "查看霍兰德兴趣测评",
             "evidence_level": {
               "$item": "office-clerks-general.fit.personality-fit-block.8",
               "block": "fit",
@@ -15288,10 +15309,10 @@
             "watchout": "量表不替代工作样本或录用要求。"
           },
           {
-            "answer": "办公室文员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "观察自己能否把来电主题、责任人与截止期讲清，遇未知先追问。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "核电话、文件、记录与日程的来源、版本、权限和交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "基于BLS/O*NET任务的编辑探索建议；未取得本页自评预测绩效或录用的效度数据。",
             "id": "big-five",
             "label": "沟通方式",
             "question": "做办公室文员需要怎样的能力与工作方式？",
@@ -15304,10 +15325,10 @@
             "watchout": "量表不替代工作样本或录用要求。"
           },
           {
-            "answer": "办公室文员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "从姓名、日期、附件和版本核对中找持续准确的证据。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "核电话、文件、记录与日程的来源、版本、权限和交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "基于BLS/O*NET任务的编辑探索建议；未取得本页自评预测绩效或录用的效度数据。",
             "id": "mbti",
             "label": "细节观察",
             "question": "做办公室文员需要怎样的能力与工作方式？",
@@ -15320,10 +15341,10 @@
             "watchout": "量表不替代工作样本或录用要求。"
           },
           {
-            "answer": "办公室文员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较组织信息、帮助同事和守权限是否带来工作价值感。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "核电话、文件、记录与日程的来源、版本、权限和交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "基于BLS/O*NET任务的编辑探索建议；未取得本页自评预测绩效或录用的效度数据。",
             "id": "enneagram",
             "label": "工作价值",
             "question": "做办公室文员需要怎样的能力与工作方式？",
@@ -15336,10 +15357,10 @@
             "watchout": "量表不替代工作样本或录用要求。"
           },
           {
-            "answer": "办公室文员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较学校、医疗、政府与企业的来访量和资料权限，核具体雇主。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "核电话、文件、记录与日程的来源、版本、权限和交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "基于BLS/O*NET任务的编辑探索建议；未取得本页自评预测绩效或录用的效度数据。",
             "id": "iq",
             "label": "场景偏好",
             "question": "做办公室文员需要怎样的能力与工作方式？",
@@ -15352,10 +15373,10 @@
             "watchout": "量表不替代工作样本或录用要求。"
           },
           {
-            "answer": "办公室文员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "用虚构电话、文件与日程做台账，记录遗漏、返工和交接反馈。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "核电话、文件、记录与日程的来源、版本、权限和交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "基于BLS/O*NET任务的编辑探索建议；未取得本页自评预测绩效或录用的效度数据。",
             "id": "eq",
             "label": "虚构试作",
             "question": "做办公室文员需要怎样的能力与工作方式？",
@@ -15564,8 +15585,8 @@
       "riasec_fit_block": {
         "fit_interest": "可从虚构文件台账、来电和日程样本观察耐心与准确性。",
         "interest": "喜欢组织信息、帮助同事和持续核对细节。",
-        "riasec": "常规型C、社会型S与企业型E兴趣可探索，测评不证明岗位胜任。",
-        "riasec_short": "C/S/E：组织、服务与协调。"
+        "riasec": "O*NET当前职业兴趣以常规型C为主，随后为企业型E、社会型S；只作职业兴趣背景，不代表每位文员的人格或胜任力。",
+        "riasec_short": "C/E/S：组织信息、协调与服务。"
       },
       "source_card": {
         "eeat_signals": {
@@ -15575,8 +15596,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "核电话、文件、记录与日程的来源、版本、权限和交接。",
-          "updated_at": "核电话、文件、记录与日程的来源、版本、权限和交接。"
+          "source": "BLS一般办公室文员；O*NET 43-9061；国家统计局2025宽岗位统计。",
+          "updated_at": "2026-10-12"
         },
         "note": "证据只支持办公室文员在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -15588,7 +15609,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "办公室文员的任务与核对"
+            "label": "MBTI测评（英文）"
           },
           {
             "href": {
@@ -15598,7 +15619,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "办公室文员的任务与核对"
+            "label": "大五人格测评（英文）"
           },
           {
             "href": {
@@ -15608,7 +15629,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "办公室文员的任务与核对"
+            "label": "MBTI测评（中文）"
           },
           {
             "href": {
@@ -15618,7 +15639,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "办公室文员的任务与核对"
+            "label": "大五人格测评（中文）"
           }
         ]
       },
@@ -15838,7 +15859,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "一般办公室文员 · O*NET 43-9061.00",
@@ -15889,7 +15910,7 @@
       "text": "一般办公室文员：职责、工资与入行路径"
     }
   },
-  "source_content_sha256": "aa30819d409acbd1e99490d07c6c6d5ec69a920d5fca5b3c1ad9a943f9ffe86c",
+  "source_content_sha256": "d8e4916270bed42bcc3cd12e798c4c83a60d20b1e9eebeed7c4309bda0a73c89",
   "subject": {
     "canonical_slug": "office-clerks-general",
     "name": "办公室文员",

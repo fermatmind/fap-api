@@ -7269,7 +7269,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页工业卡车与牵引车操作员指 O*NET 53-7051.00：操作配备用于在仓库、堆场、工厂、建筑工地或类似地点搬运物料的工业卡车或拖拉机，含叉车操作员、工业卡车司机等职称。工作包括操作升降装置装卸与堆垛、驾驶工业卡车或拖拉机转运物料、人工或机械装卸、定位并固定货物、检查货物准确性、称重与记录、日常保养并操作自动堆垛与包装设备。工作以仓库、堆场、工厂与工地为主。本页不含农业设备操作员、摊铺与压实设备操作员、打桩机操作员、施工设备操作员、露天采矿挖掘装载机操作员等相邻岗位。"
+              "本页固定slug为material-moving-machine-operators，实际职业对应ONet53-7051.00工业卡车与牵引车操作员，含仓库/堆场/工厂/工地叉车等物料搬运任务；不是全部物料搬运机械组。载荷堆垛、货物核对与记录、设备日常检查/维护按岗位和授权执行，不与道路货运、农机、施工/采矿机械资格互换。"
             ]
           },
           "id": "material-moving-machine-operators.profile.definition-block.1",
@@ -7543,7 +7543,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "调度与路径分配、库存与货位记录、称重与标签数据处理、设备状态与保养提醒等工具可辅助安排任务与记录数据；但设备操作、载荷与通道安全判断、异常处置与现场责任仍由受训并获授权的操作员负责，工具不能替代安全操作。"
+              "编辑任务假设：库存/调度系统、专用自动搬运控制与生成式AI分开；后者可能整理虚构工单草稿，未取得本职业采用率或岗位结果。实时载荷、设备与人员安全由受训获授权者核验，文本建议不能直接控制叉车或替代现场安全评估。"
             ]
           },
           "id": "material-moving-machine-operators.ai-impact.ai-impact-table.2",
@@ -7571,7 +7571,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不同环节受影响不同：调度分配、库存记录与数据整理更易被工具辅助，但设备操作、安全判断与异常处置仍由人负责。"
+              "编辑比较：工单/记录整理可能被辅助，未取得采用先后研究；自动设备的安全验证与生成式文案不同，载荷/通道异常按实际规程停止或升级。"
             ]
           },
           "id": "material-moving-machine-operators.ai-impact.ai-impact-table.4",
@@ -7613,7 +7613,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议：调度分配、库存记录与数据整理可由工具辅助；当前资料不证明机构普遍采用这些系统。"
+              "编辑假设：可能辅助整理记录，系统能力不证明AI采用或安全授权。"
             ]
           },
           "id": "material-moving-machine-operators.ai-impact.ai-impact-table.7",
@@ -7627,7 +7627,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以安全规程、载荷与通道条件为准，保留人工判断与记录。"
+              "核培训/评估和设备现场条件；未经批准不执行自动文本指令，载荷或设备不安全先停用并上报。"
             ]
           },
           "id": "material-moving-machine-operators.ai-impact.ai-impact-table.8",
@@ -7649,7 +7649,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开职业工资：国家统计局按行业门类发布城镇单位就业人员年平均工资，工业卡车与牵引车操作员主要计入交通运输、仓储和邮政业等行业，行业平均不能替代本职业工资。"
+              "证据不足：本次未取得安全对应53-7051.00的中国职业工资分布。运输仓储邮政单位均值只作对应雇主背景，不覆盖全部制造/工地岗位或个体经营，也不证明公开数据不存在。"
             ]
           },
           "id": "material-moving-machine-operators.china-salary.career-snapshot-primary-locale.1",
@@ -7730,7 +7730,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 该页显示 2025 年 BLS OEWS 年薪中位数为 46,420 美元（约 22.32 美元/小时）；就业方面 2024 年约 792,500 人、2024—2034 年预计低于平均（Slower than average，1% 至 2%）、期间职位空缺约 76,400 个。该页未展示分位工资。以上为美国全国口径且属本职业 53-7051.00，「低于平均」为统计预测，不等于个人就业结果。"
+              "2025美国全国53-7051年薪中位46,420、时薪22.32美元，完整分位见表。旧2024年792,500人、2024—2034年均76,400空缺保留；最新2025年765,200人、2025—2035增长2%、年均64,700分开，不代整个机械组或个人录用。"
             ]
           },
           "fact_refs": [
@@ -7750,7 +7750,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资统计位置：以上为美国全国口径且属本职业 53-7051.00；中位数不代表起薪或个人到手收入，且未披露分位。"
+              "2025美国全国53-7051本职业工资，年薪与时薪分位按原表分别录入，非个人工时换算或到手收入。"
             ]
           },
           "fact_refs": [
@@ -7767,7 +7767,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "怎样理解这些位置：O*NET 该页只展示中位数，不展示分位；中位数不是新手或资深等级。就业规模与「低于平均」是职业统计，须与个人机会分开解释；增长低于平均不等于不存在岗位机会。"
+              "P10/25/50/75/90是工资分布位置，不是新手/资深等级；就业规模、空缺与个人机会分开。"
             ]
           },
           "fact_refs": [
@@ -7784,15 +7784,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布与局限：该页 2024 年主要行业为 Transportation and Warehousing 与 Manufacturing；行业分布是雇主场景信号，不是需求预测。"
+              "证据不足：未取得本细分职业分行业工资。BLS物料搬运机械多职业组2025年5月年薪中位作宽口径参考：建筑71,070、仓储48,170、批发45,950、食品制造45,630美元；含起重机/输送机等其他职业，不能当叉车职业行业工资、个人报价或行业就业占比。"
             ]
           },
           "fact_refs": [
-            "us-employment-2024"
+            "us-wage-median"
           ],
           "id": "material-moving-machine-operators.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "onet-industry"
+            "bls-ooh-moving"
           ],
           "type": "prose"
         },
@@ -7801,7 +7801,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "规模与口径提示：该职业 2024 年就业约 792,500 人、预计低于平均；引用时须标明年份、覆盖范围与本职业口径，且中位数与增长描述不能跨市场拼接。"
+              "旧76,400为2024—2034年均空缺，非合计或净增；新2025—2035年均64,700含替补，不能由增长较慢推断无机会。"
             ]
           },
           "fact_refs": [
@@ -8040,12 +8040,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国侧该职业属 Job Zone 1-2（所需准备很少至一些）：通常需要高中文凭或 GED，在职培训从数天到一年；雇主须确保动力工业卡车操作员受训并经过评估（OSHA 1910.178(l)），且至少每三年评估一次；具体要求按雇主与现场规定核对。"
+              "ONet本职业列高中、低于高中和部分大学为部分岗位新聘学历，当前未给比例；JobZone1—2培训数天至一年是组说明。美国OSHA动力工业卡车须正式教学、实操与工作场所评估，至少每三年评估，事故/不安全操作/车型或场景变化等按规定触发再培训评估，不能只等三年。"
             ]
           },
           "id": "material-moving-machine-operators.path.career-path-block.2",
           "source_refs": [
-            "onet-education"
+            "onet-education",
+            "osha-pit"
           ],
           "type": "prose"
         },
@@ -8054,12 +8055,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国：以在职培训、现场带教与雇主组织的动力工业卡车操作培训与评估为常见路径，部分岗位提供学徒机会。中国大陆：无与该 O*NET 精确对应的统一职业资格，叉车与场内机动车作业多按用人单位与所在地特种作业与安全规定要求持证，须分别核对。"
+              "美国动力工业卡车按雇主OSHA培训/实操/评估与具体车型现场条件授权；学徒岗位须另查真实项目。中国场（厂）内专用机动车辆叉车司机为市场监管特种设备资格N1，须核设备是否入目录、证书项目/有效状态及现场培训；不是把全部工业卡车等同叉车或应急管理特种作业证。"
             ]
           },
           "id": "material-moving-machine-operators.path.career-path-block.3",
           "source_refs": [
-            "onet-education"
+            "osha-pit",
+            "samr-n1"
           ],
           "type": "prose"
         },
@@ -8161,7 +8163,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 引用 BLS 数据显示，该职业 2024 年就业约 792,500 人，2024—2034 年预计低于平均（1% 至 2%），期间职位空缺约 76,400 个；该职业规模大但增长放缓，空缺主要来自替代需求；这是职业统计，不是个人录用概率，也不同于招聘样本。"
+              "旧2024年792,500人、2024—2034年均76,400保留；最新本职业2025年765,200人、2025—2035增长2%、年均64,700，非净增11,100或录用；增长慢仍有替补需求。"
             ]
           },
           "id": "material-moving-machine-operators.market-signals.market-signal-card.2",
@@ -8203,7 +8205,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：目标雇主的设备类型与授权要求、特定仓储与厂区安全规定，或转向施工设备、仓储主管与安全管理方向所需资格与经验。"
+              "第一目标农业设备操作员：须补耕种/收获/灌溉等农艺工序、农具连接调整、田地/天气条件；若涉及喷药另核化学品和施药权限。仓储叉车训练不覆盖农机或道路驾驶。"
             ]
           },
           "id": "material-moving-machine-operators.market-signals.market-signal-card.5",
@@ -8659,6 +8661,36 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "本职业2025工资/就业小节与机械多职业组行业工资分别列示。"
+                ],
+                "evidence_type": "primary source",
+                "id": "bls-ooh-moving",
+                "limitation": "行业工资含不同机械职业，不是53-7051细分行业值。",
+                "market": "美国",
+                "name": "BLS物料搬运机械操作员手册",
+                "period": "现行页面；查阅2026-10-11",
+                "publisher": "BLS",
+                "scope": "broad occupational group",
+                "url": "https://www.bls.gov/ooh/transportation-and-material-moving/material-moving-machine-operators.htm"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "2021年第41号公告2022-06实施附件2场（厂）内专用机动车辆叉车司机N1。"
+                ],
+                "evidence_type": "primary source",
+                "id": "samr-n1",
+                "limitation": "中国目录内叉车作业，不覆盖全部工业卡车或其他设备。",
+                "market": "中国大陆",
+                "name": "市场监管特种设备作业资格分类公告",
+                "period": "现行页面；查阅2026-10-11",
+                "publisher": "国家市场监管总局",
+                "scope": "jurisdiction-specific qualification",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/tzsbs/art/2023/art_6608605c3b334954ac72e19851c38a35.html"
               }
             ]
           },
@@ -8847,12 +8879,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "分配与记录整理",
+            "AI主要改变": "可能辅助工单/记录；仓储系统或自动控制不等于生成式AI。",
             "仍由人负责": "货位与数据核对",
             "方向": "调度与记录"
           },
           {
-            "AI主要改变": "数据汇总",
+            "AI主要改变": "可能整理草稿；不替代现场载荷/人员安全评估。",
             "仍由人负责": "标签与重量确认",
             "方向": "数据与标签"
           }
@@ -8962,7 +8994,7 @@
             "问题": "AI 会取代工业卡车与牵引车操作员吗？"
           },
           {
-            "回答": "目前只写到可辅助的调度分配、数据整理与保养提醒，设备操作、载荷判断与异常处置仍由人承担。",
+            "回答": "仅列任务假设，未取得采用先后或岗位结果研究；真实任务与授权需人员核验。",
             "来源": {
               "$source": "onet-tasks",
               "block": "source-register",
@@ -9210,7 +9242,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "调度与路径分配、库存与货位记录、称重与标签数据处理、设备状态与保养提醒等工具可辅助安排任务与记录数据；但设备操作、载荷与通道安全判断、异常处置与现场责任仍由受训并获授权的操作员负责，工具不能替代安全操作。"
+          "编辑任务假设：库存/调度系统、专用自动搬运控制与生成式AI分开；后者可能整理虚构工单草稿，未取得本职业采用率或岗位结果。实时载荷、设备与人员安全由受训获授权者核验，文本建议不能直接控制叉车或替代现场安全评估。"
         ],
         "heading": "工业卡车与牵引车操作员的工作对象与 AI 边界"
       },
@@ -9352,6 +9384,12 @@
               "item": "material-moving-machine-operators.source-register.published.1"
             },
             "scope": "中国行业工资口径；不等于本职业精确工资。"
+          },
+          {
+            "href": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/tzsbs/art/2023/art_6608605c3b334954ac72e19851c38a35.html",
+            "id": "material-moving-machine-operators.display.source.samr-n1",
+            "label": "市场监管叉车N1",
+            "scope": "特种设备作业项目，非全部工业车。"
           }
         ],
         "tracks": [
@@ -9635,7 +9673,7 @@
             "affected_roles": "设备操作岗位",
             "consequence": "可能造成货物损坏或人员伤害。",
             "evidence_refs": [
-              "onet-tasks"
+              "material-moving-machine-operators.display.source.osha-pit"
             ],
             "id": "risk-1",
             "mitigation": "按规程控制载荷、限重与堆垛稳定。",
@@ -9651,10 +9689,11 @@
             "affected_roles": "设备操作岗位",
             "consequence": "可能引发事故。",
             "evidence_refs": [
-              "onet-cert"
+              "material-moving-machine-operators.display.source.osha-pit",
+              "material-moving-machine-operators.display.source.samr-n1"
             ],
             "id": "risk-2",
-            "mitigation": "作业前检查设备并仅在授权范围内使用。",
+            "mitigation": "美国按OSHA使用前检查，至少每日；连续多班使用每班后检查，发现影响安全故障停用上报，修理由授权者执行。车型/现场训练评估和中国目录内N1另核。",
             "scenario": "设备存在故障或未经授权使用。",
             "title": {
               "$item": "material-moving-machine-operators.risk.career-risk-cards.2",
@@ -9667,7 +9706,7 @@
             "affected_roles": "设备操作岗位",
             "consequence": "可能造成人员伤害。",
             "evidence_refs": [
-              "onet-context"
+              "material-moving-machine-operators.display.source.osha-pit"
             ],
             "id": "risk-3",
             "mitigation": "控制通道、避让行人并设置警示。",
@@ -9683,7 +9722,7 @@
             "affected_roles": "设备操作岗位",
             "consequence": "可能显著提高事故风险。",
             "evidence_refs": [
-              "onet-context"
+              "material-moving-machine-operators.display.source.osha-pit"
             ],
             "id": "risk-4",
             "mitigation": "坚持安全流程并管理作业节奏。",
@@ -9699,10 +9738,10 @@
             "affected_roles": "设备与安全岗位",
             "consequence": "可能影响设备与人员安全。",
             "evidence_refs": [
-              "onet-tasks"
+              "material-moving-machine-operators.display.source.osha-pit"
             ],
             "id": "risk-5",
-            "mitigation": "落实保养、充电与防护要求。",
+            "mitigation": "按车型规定核充电/燃料、通风与火源控制；保养修理只由授权者执行，不以普通驾驶培训授维修权限。",
             "scenario": "保养或防护缺失。",
             "title": {
               "$item": "material-moving-machine-operators.risk.career-risk-cards.5",
@@ -9715,7 +9754,7 @@
             "affected_roles": "作业与记录岗位",
             "consequence": "可能导致错运或返工。",
             "evidence_refs": [
-              "onet-tasks"
+              "material-moving-machine-operators.display.source.onet-tasks"
             ],
             "id": "risk-6",
             "mitigation": "先核对并记录差异，再决定继续或上报。",
@@ -9796,6 +9835,18 @@
               "item": "material-moving-machine-operators.source-register.published.1"
             },
             "scope": "执照与认证入口；不替代作业授权。"
+          },
+          {
+            "href": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/tzsbs/art/2023/art_6608605c3b334954ac72e19851c38a35.html",
+            "id": "material-moving-machine-operators.display.source.samr-n1",
+            "label": "市场监管叉车N1",
+            "scope": "中国目录内叉车资格。"
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.178",
+            "id": "material-moving-machine-operators.display.source.osha-pit",
+            "label": "OSHA动力工业卡车1910.178",
+            "scope": "美国动力工业卡车培训、操作与检查。"
           }
         ]
       },
@@ -9805,7 +9856,7 @@
             {
               "指标": "中国大陆职业工资",
               "数值": "证据不足：未单列",
-              "说明": "国家统计局按行业门类发布，未单列本职业工资。"
+              "说明": "未建立安全职业映射与分布，不推断公开数据不存在。"
             },
             {
               "指标": "中国大陆行业代理",
@@ -9892,7 +9943,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国大陆无本职业单列工资；下列为行业代理，不是起薪、中位数或到手收入。",
+          "china_open": "本次未取得精确职业工资；运输仓储邮政单位均值只适用对应雇主，非职业中位数或个体经营收入。",
           "china_ref": {
             "$join": [
               {
@@ -9972,20 +10023,26 @@
         "authority_sources": {
           "$join": [
             {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "material-moving-machine-operators.source-register.published.1"
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "material-moving-machine-operators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "material-moving-machine-operators.source-register.published.1"
+                }
+              ],
+              "separator": ""
             },
-            "｜",
-            {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "material-moving-machine-operators.source-register.published.1"
-            }
+            "；BLS职业手册｜https://www.bls.gov/ooh/transportation-and-material-moving/material-moving-machine-operators.htm"
           ],
           "separator": ""
         },
@@ -10040,7 +10097,7 @@
           },
           {
             "指标": "薪资 · 最低 10%",
-            "数值": "未披露",
+            "数值": "$36,840/年（P10，2025）",
             "说明": {
               "$join": [
                 {
@@ -10063,8 +10120,8 @@
             }
           },
           {
-            "指标": "薪资 · 最高 90%",
-            "数值": "未披露",
+            "指标": "薪资 · P90分位",
+            "数值": "$62,520/年（P90，2025）",
             "说明": {
               "$join": [
                 {
@@ -10160,7 +10217,7 @@
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "约 76,400 个（2024—2034 期合计）",
+            "数值": "约76,400个/年（旧2024—2034预测）",
             "说明": {
               "$join": [
                 {
@@ -10183,7 +10240,7 @@
             }
           }
         ],
-        "boundary": "美国全国口径：工资、就业与行业均为 O*NET 展示的本职业 53-7051.00 数据，工资为 2025 OEWS、就业展望为 2024—2034 预测；操作授权要求见 OSHA 1910.178(l)；不含个人到手收入、起薪或录用结论。",
+        "boundary": "2025全国53-7051工资；行业表是物料搬运机械多职业组代理，细分行业工资仍缺。旧2024—2034和新2025—2035就业分开，不代个人收入/录用。",
         "direct_answer": {
           "$item": "material-moving-machine-operators.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10192,11 +10249,11 @@
         },
         "factor_rows": [
           {
-            "answer": "通常需要高中文凭并在职培训；雇主须确保动力工业卡车操作员受训并经过评估（OSHA 1910.178(l)）。",
+            "answer": "ONet部分岗位高中/以下/部分大学，非统一门槛；OSHA车型和现场实操评估，三年评估及触发再培训分别核。",
             "factor": "资格"
           },
           {
-            "answer": "以设备操作、安全检查与仓储经验为主；操作熟练度与安全记录比证书名称更常被参考。",
+            "answer": "核真实设备/现场培训评估及记录，不以纸面作品代操作能力；未取得成果/证书录用权重比较。",
             "factor": "经验"
           },
           {
@@ -10223,30 +10280,30 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024",
+        "industry_period": "2025年5月",
         "industry_rows": [
           {
-            "industry": "Transportation and Warehousing",
-            "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体中位数为准。"
+            "industry": "物料搬运机械组：建筑业",
+            "median": "$71,070/年",
+            "note": "2025年5月美国物料搬运机械多职业组代理（非本细分职业）；非个人收入承诺。"
           },
           {
-            "industry": "Manufacturing",
-            "median": "见就业行",
-            "note": "行业口径为雇主场景信号，不跨职业外推。"
+            "industry": "物料搬运机械组：仓储存储",
+            "median": "$48,170/年",
+            "note": "2025年5月美国物料搬运机械多职业组代理（非本细分职业）；非个人收入承诺。"
           },
           {
-            "industry": "行业口径说明二",
-            "median": "见就业行",
-            "note": "地区与行业差异大，不得跨地区外推。"
+            "industry": "物料搬运机械组：批发贸易",
+            "median": "$45,950/年",
+            "note": "2025年5月美国物料搬运机械多职业组代理（非本细分职业）；非个人收入承诺。"
           },
           {
-            "industry": "行业口径说明三",
-            "median": "见就业行",
-            "note": "分位工资未披露，不以推断值替代。"
+            "industry": "物料搬运机械组：食品制造",
+            "median": "$45,630/年",
+            "note": "2025年5月美国物料搬运机械多职业组代理（非本细分职业）；非个人收入承诺。"
           }
         ],
-        "industry_value_label": "行业值",
+        "industry_value_label": "年薪中位数（美元/年）",
         "interpretation_heading": {
           "$item": "material-moving-machine-operators.us-salary.career-snapshot-secondary-locale.4",
           "block": "us-salary",
@@ -10255,7 +10312,7 @@
         },
         "interpretation_rows": [
           {
-            "answer": "美元/年；为 BLS 2025 OEWS 全国中位数（本职业 53-7051.00 口径），未展示分位，不含个人到手收入。",
+            "answer": "2025完整年薪/时薪分位，53-7051本职业，非资历、起薪或到手收入。",
             "question": "工资"
           },
           {
@@ -10263,11 +10320,11 @@
             "question": "就业"
           },
           {
-            "answer": "2024—2034 预测低于平均（1% 至 2%），是职业统计，不是个人录用结果；增长放缓不等于没有岗位机会。",
+            "answer": "最新本职业2025—2035增长2%、年均64,700；非整个机械组或个人录用。",
             "question": "展望"
           },
           {
-            "answer": "按 O*NET/BLS 行业口径列为运输与仓储及制造业，不等于全部从业者收入。",
+            "answer": "行业表为物料搬运机械多职业组代理，含其他机械职业，不当本细分行业工资。",
             "question": "行业"
           }
         ],
@@ -10288,22 +10345,34 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "—",
-            "interpretation": "O*NET 该页未展示分位工资；不以推断值替代。",
-            "label": "最低 10%",
-            "value": "未披露"
+            "equivalent": "$17.71/小时",
+            "interpretation": "2025美国全国53-7051本职业分位，非资历、起薪或个人工时换算。",
+            "label": "P10",
+            "value": "$36,840/年"
+          },
+          {
+            "equivalent": "$19.24/小时",
+            "interpretation": "2025美国全国53-7051本职业分位，非资历、起薪或个人工时换算。",
+            "label": "P25",
+            "value": "$40,030/年"
           },
           {
             "equivalent": "$22.32/小时",
-            "interpretation": "2025 美国全国年薪中位数（本职业 53-7051.00 口径）。",
-            "label": "中位数（50%）",
+            "interpretation": "2025美国全国53-7051本职业分位，非资历、起薪或个人工时换算。",
+            "label": "P50（中位数）",
             "value": "$46,420/年"
           },
           {
-            "equivalent": "—",
-            "interpretation": "O*NET 该页未展示分位工资；不以推断值替代。",
-            "label": "最高 90%",
-            "value": "未披露"
+            "equivalent": "$26.33/小时",
+            "interpretation": "2025美国全国53-7051本职业分位，非资历、起薪或个人工时换算。",
+            "label": "P75",
+            "value": "$54,770/年"
+          },
+          {
+            "equivalent": "$30.06/小时",
+            "interpretation": "2025美国全国53-7051本职业分位，非资历、起薪或个人工时换算。",
+            "label": "P90",
+            "value": "$62,520/年"
           }
         ]
       },
@@ -10399,17 +10468,17 @@
           {
             "geography": "美国全国",
             "horizon": "2024—2034",
-            "interpretation": "为 2024—2034 年期间合计，含增长与替代需求，不等于在招岗位数。",
+            "interpretation": "旧2024—2034年均，非期合计；新2025—2035本职业年均64,700另列。",
             "limitation": "不能作为个人录用概率。",
-            "metric": "职位空缺（期合计）",
+            "metric": "预测年均职位空缺",
             "occupation_scope": "展示口径：Industrial Truck and Tractor Operators（53-7051.00）",
-            "value": "约 76,400 个"
+            "value": "约76,400个/年（旧版）"
           },
           {
             "geography": "美国全国",
             "horizon": "2025",
             "interpretation": "为 BLS 2025 OEWS 全国中位数，不代表起薪或到手收入。",
-            "limitation": "未披露分位；不含个人到手收入。",
+            "limitation": "2025完整工资分位已取得；53-7051本职业，不代个人收入或资历。",
             "metric": "年薪中位数",
             "occupation_scope": "展示口径：Industrial Truck and Tractor Operators（53-7051.00）",
             "value": "$46,420/年"
@@ -10488,6 +10557,12 @@
               "item": "material-moving-machine-operators.source-register.published.1"
             },
             "scope": "任务与工作情境；仅用于提出转型假设。"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/45-2091.00",
+            "id": "material-moving-machine-operators.display.source.onet-target-farm",
+            "label": "ONet农业设备操作员",
+            "scope": "第一目标农业设备任务。"
           }
         ],
         "transitions": [
@@ -10580,7 +10655,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "riasec",
             "label": "RIASEC",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10599,7 +10674,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "big-five",
             "label": "大五人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10618,7 +10693,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "mbti",
             "label": "MBTI",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10632,7 +10707,7 @@
             "answer": "需要结合真实任务、边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "enneagram",
             "label": "九型人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10646,7 +10721,7 @@
             "answer": "需要结合真实任务、边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "iq",
             "label": "认知能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10660,7 +10735,7 @@
             "answer": "需要结合真实任务、边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "eq",
             "label": "情绪能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -11182,7 +11257,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "物料搬运与堆垛",
@@ -11233,7 +11308,7 @@
       "text": "工业卡车与牵引车操作员职业判断：工作、入行与安全边界"
     }
   },
-  "source_content_sha256": "1399ca2848a34db985b4b3d57cc6dbd374739428c4277885c49857878e93d054",
+  "source_content_sha256": "f49065539d248d9386c1b7c718a18a6db6b52b4d05efca71696e2cc56cd85faa",
   "subject": {
     "canonical_slug": "material-moving-machine-operators",
     "name": "工业卡车与牵引车操作员",

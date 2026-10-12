@@ -26390,7 +26390,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未核得中国本職五分位、城市工资、内设或外包薪资岗、系统权限员工规模差异的可比工资及同条件当前报价。"
+              "证据不足：未核得中国本职五分位、城市工资、内设或外包薪资岗、系统权限员工规模差异的可比工资及同条件当前报价。"
             ]
           },
           "id": "payroll-and-timekeeping-clerks.china-salary.career-snapshot-primary-locale.20",
@@ -27570,7 +27570,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未核得地区、雇主、系统职责、班次和支付周期对本職工资的可比量化作用；全国分位不能推因果或个人报价。"
+              "证据不足：未核得地区、雇主、系统职责、班次和支付周期对本职工资的可比量化作用；全国分位不能推因果或个人报价。"
             ]
           },
           "id": "payroll-and-timekeeping-clerks.us-salary.career-snapshot-secondary-locale.49",
@@ -28840,7 +28840,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "最需提前问清三条边界：谁确认工时和费率、谁批准工资调整与付款、谁可查看和更正员工敏感资料。原始依据不足时暂停受影响记录，保留差异和接收人，交授权人员处理。"
+              "最需提前问清三条边界：谁确认工时和费率、谁批准工资调整与付款、谁可查看和更正员工资料。原始依据不足时暂停受影响的核算或变更步骤，保留差异和接收人并立即升级；工资支付时限及争议处理按适用规则和授权人员决定，不能从本页示例推断可自行延迟全部发薪。"
             ]
           },
           "id": "payroll-and-timekeeping-clerks.risk.career-risk-cards.9",
@@ -29760,7 +29760,7 @@
             "paragraphs": [
               "学历、课程、薪资系统访问权限、工资政策解释和支付批准是不同事项；任何单项证明都不能自动替代其他要求。",
               "BLS描述美国金融文员基础教育和薪资考勤职业在岗培训；中国具体学历、税费、社保、隐私和工资制度以当地规则及雇主文件为准。",
-              "工资考勤记录含敏感个人信息；虚构纸面练习不能替代真实薪资系统带教、数据权限或专业复核。",
+              "工资考勤记录含个人信息，其中金融账户等可能属于敏感个人信息；虚构纸面练习不能替代真实薪资系统带教、数据权限或专业复核。",
               "若涉及税费申报、劳动争议、银行放款或工资制度制定，须另行确认法域、人员资格与组织授权。"
             ]
           },
@@ -31843,7 +31843,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核读2026-10-02，正确历史材料和日期保留。中国当前薪资考勤岗位雇主、地区、日期、职责、系统权限与计薪单位齐全的报价仍未核得；虚构三人题面不当招聘样本。"
+              "2026-10-12核读O*NET本职任务、兴趣与2025全国工资，BLS精确预测/金融文员OOH、NBS2025宽岗位定义及工资、个人信息保护法相关条款；原来源日期保为历史。中国本职当前雇主职责、权限与计薪单位齐全的公告未取得，虚构题面不当招聘样本。"
             ]
           },
           "id": "payroll-and-timekeeping-clerks.sources.source-card.3",
@@ -35428,7 +35428,7 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "us-industry-wage-finance-2025",
             "industry": {
               "$item": "payroll-and-timekeeping-clerks.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -35449,7 +35449,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "us-industry-wage-professional-2025",
             "industry": {
               "$item": "payroll-and-timekeeping-clerks.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -35470,7 +35470,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "us-industry-wage-localgov-2025",
             "industry": {
               "$item": "payroll-and-timekeeping-clerks.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -35491,7 +35491,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "us-industry-wage-education-2025",
             "industry": {
               "$item": "payroll-and-timekeeping-clerks.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -37369,7 +37369,7 @@
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
         "measure": "该行业本职业2025年工资待核",
-        "occupation_scope": "美国薪资与考勤文员，SOC 43-3051 / O*NET 43-3051.00",
+        "occupation_scope": "美国薪资与考勤文员，SOC43-3051 / O*NET43-3051.00在专业、科学与技术服务中的行业交叉工资，未核得同口径值",
         "period": "2025年5月工资；2025就业及2025—2035预测",
         "source_refs": [
           "bls"
@@ -37381,7 +37381,7 @@
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
         "measure": "该行业本职业2025年工资待核",
-        "occupation_scope": "美国薪资与考勤文员，SOC 43-3051 / O*NET 43-3051.00",
+        "occupation_scope": "美国薪资与考勤文员，SOC43-3051 / O*NET43-3051.00在行政与支持服务中的行业交叉工资，未核得同口径值",
         "period": "2025年5月工资；2025就业及2025—2035预测",
         "source_refs": [
           "bls"
@@ -37393,7 +37393,7 @@
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
         "measure": "该行业本职业2025年工资待核",
-        "occupation_scope": "美国薪资与考勤文员，SOC 43-3051 / O*NET 43-3051.00",
+        "occupation_scope": "美国薪资与考勤文员，SOC43-3051 / O*NET43-3051.00在医疗保健与社会援助中的行业交叉工资，未核得同口径值",
         "period": "2025年5月工资；2025就业及2025—2035预测",
         "source_refs": [
           "bls"
@@ -37405,7 +37405,7 @@
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
         "measure": "该行业本职业2025年工资待核",
-        "occupation_scope": "美国薪资与考勤文员，SOC 43-3051 / O*NET 43-3051.00",
+        "occupation_scope": "美国薪资与考勤文员，SOC43-3051 / O*NET43-3051.00在公共与教育部门中的行业交叉工资，未核得同口径值",
         "period": "2025年5月工资；2025就业及2025—2035预测",
         "source_refs": [
           "bls"
@@ -37514,7 +37514,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "薪资与考勤 · 数据核对",
@@ -37565,7 +37565,7 @@
       "text": "薪资与考勤文员"
     }
   },
-  "source_content_sha256": "e49e9cae5159d17b382e096e58abc63e37a4bf84f1b6a5aa72e6c1dbf828673a",
+  "source_content_sha256": "d2bc943bac49991ca281838492530067329f42e85197b7523589f3a1c326c32d",
   "subject": {
     "canonical_slug": "payroll-and-timekeeping-clerks",
     "name": "薪资与考勤文员",

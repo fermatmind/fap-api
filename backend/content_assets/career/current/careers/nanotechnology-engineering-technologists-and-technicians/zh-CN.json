@@ -11565,7 +11565,7 @@
           },
           "id": "nanotechnology-engineering-technologists-and-technicians.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -11579,7 +11579,7 @@
           },
           "id": "nanotechnology-engineering-technologists-and-technicians.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -11593,7 +11593,7 @@
           },
           "id": "nanotechnology-engineering-technologists-and-technicians.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -11607,7 +11607,7 @@
           },
           "id": "nanotechnology-engineering-technologists-and-technicians.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -11621,7 +11621,7 @@
           },
           "id": "nanotechnology-engineering-technologists-and-technicians.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -11635,7 +11635,7 @@
           },
           "id": "nanotechnology-engineering-technologists-and-technicians.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -11649,7 +11649,7 @@
           },
           "id": "nanotechnology-engineering-technologists-and-technicians.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -11663,7 +11663,8 @@
           },
           "id": "nanotechnology-engineering-technologists-and-technicians.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "onet-trends",
+            "source-pack-onet-details"
           ],
           "type": "prose"
         }
@@ -11680,7 +11681,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有与 O*NET 17-3026.01 完全同口径的全国职业中位数；国家统计局按行业门类公布的平均工资只能作代理，不能当作本职业的个人工资。"
+              "证据不足：本轮未取得中国大陆与 O*NET 17-3026.01 同口径的全国职业工资中位数；已核国家统计局行业年平均工资，只能作为行业参考，不能断言所有官方渠道均不存在精确数据。"
             ]
           },
           "id": "nanotechnology-engineering-technologists-and-technicians.china-salary.career-snapshot-primary-locale.1",
@@ -11942,7 +11943,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "一周内能否按说明书完成一次模拟操作，并写出记录字段、安全前置条件与异常停机条件，是比兴趣分数更实用的试验。"
+              "编辑建议：用公开说明书和模拟数据核对记录字段、安全前置条件与异常停机条件，并请现场人员反馈；这类观察不证明其预测效度高于兴趣测评。"
             ]
           },
           "id": "nanotechnology-engineering-technologists-and-technicians.fit.riasec-fit-block.8",
@@ -12832,6 +12833,36 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/17-3026.01"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "2025—2035职业预测表17-3026行：就业76.7与79.0千人，变化3.1%，年均空缺6.6千个。"
+                ],
+                "evidence_type": "official employment projections",
+                "id": "bls-ep-2025-2035",
+                "limitation": "父职业Industrial Engineering Technologists and Technicians，非纳米细分单列；总体预测不作AI因果归因。",
+                "market": "US",
+                "name": "BLS Occupational projections and worker characteristics, 2025—2035",
+                "period": "2025—2035 projection; accessed 2026-10-11",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "纳米材料职业暴露可经吸入、摄入或皮肤接触；评估须结合材料与工序流、暴露量与持续频次、现有工程控制。"
+                ],
+                "evidence_type": "official occupational health guidance",
+                "id": "niosh-nano-faq",
+                "limitation": "美国职业卫生指导；不提供本职业暴露率或中国设备操作许可。",
+                "market": "US",
+                "name": "NIOSH Nanotechnology Frequently Asked Questions",
+                "period": "updated 2026-03-03; accessed 2026-10-11",
+                "publisher": "CDC/NIOSH",
+                "scope": "industry_proxy",
+                "url": "https://www.cdc.gov/niosh/nano/faqs/index.html"
               }
             ]
           },
@@ -13036,7 +13067,7 @@
           {
             "来源": "O*NET 雇主技术信号（Hot Technologies）",
             "类型": "雇主技术信号",
-            "适用范围": "软件技能清单，不含采用率",
+            "适用范围": "2025年美国招聘软件技能清单；6项，提及比例未提供；非生成式AI采用率",
             "链接": "https://www.onetonline.org/link/hot_tech/17-3026.01"
           },
           {
@@ -13082,7 +13113,7 @@
             "方向": "数据与文档"
           }
         ],
-        "evidence_intro": "以下证据分别说明技术能力、实际采用与岗位结果，样本、指标与限制随条目写明。",
+        "evidence_intro": "职业任务与软件招聘信号支持下列背景说明；工具辅助内容属于条件化编辑分析，未取得本职业生成式 AI 采用率、效果或就业因果实测。",
         "evidence_rows": [
           {
             "使用限制": "为美国职业档案，不含中国岗位结论",
@@ -13095,7 +13126,7 @@
             "使用限制": "招聘提及不证明熟练度、生成式 AI 采用率或自动化程度",
             "来源": "O*NET OnLine",
             "研究对象": "O*NET 雇主技术信号（Hot Technologies）",
-            "结论": "列出 8 项软件技能，其中 6 项热门技术，含分析或科学软件、数据库查询、图像处理与办公软件",
+            "结论": "Hot Technologies 子页列出6项办公与数据库软件技能，2025年美国招聘数据的提及比例均显示Not available；8项是详情页软件类别数量，不能混用。",
             "链接": "https://www.onetonline.org/link/hot_tech/17-3026.01"
           },
           {
@@ -13127,7 +13158,7 @@
             "概念": "技术能力：工具能处理什么"
           },
           {
-            "含义": "O*NET 雇主技术信号为本职业列出 8 项软件技能、其中 6 项热门技术，集中在分析或科学软件、数据库查询、图像处理与办公软件，没有生成式 AI 的采用率或自动化数据。",
+            "含义": "证据不足：未取得本职业生成式AI采用率或自动化数据。Hot Technologies列6项软件技能，招聘提及比例未提供；详情页8项软件类别是另一张表。",
             "概念": "采用证据：雇主是否在用"
           },
           {
@@ -13143,9 +13174,9 @@
             "问题": "AI 会取代这个职业吗？"
           },
           {
-            "回答": "作业指导书与故障库检索、工艺参数整理、测量数据统计、图像初步处理与报表草拟。",
+            "回答": "编辑分析：在数据授权、人工核对与设备规程允许下，可尝试辅助资料检索、参数整理、测量数据统计、图像初步处理与报表草拟；不是本职业已普遍采用的事实。",
             "来源": "O*NET OnLine",
-            "链接": "https://www.onetonline.org/link/hot_tech/17-3026.01",
+            "链接": "https://www.onetonline.org/link/details/17-3026.01#Tasks",
             "问题": "哪些环节更可能被工具辅助？"
           },
           {
@@ -13155,7 +13186,7 @@
             "问题": "哪些环节必须由人负责？"
           },
           {
-            "回答": "O*NET 列出 8 项软件技能、其中 6 项热门技术，只说明雇主的技术偏好，不证明自动化程度或个人熟练度。",
+            "回答": "Hot Technologies列6项软件技能，数据期为2025年美国招聘信息，提及比例未提供；只能说明所列软件要求，不证明AI采用、熟练度或自动化效果。",
             "来源": "O*NET OnLine（Hot Technologies）",
             "链接": "https://www.onetonline.org/link/hot_tech/17-3026.01",
             "问题": "招聘里的软件要求说明什么？"
@@ -13167,16 +13198,16 @@
             "问题": "如何正确使用本页的任务影响说明？"
           },
           {
-            "回答": "确认工具条款与数据授权、不把未公开工艺参数或客户样品数据输入未授权服务，并保留人工修改与复核记录。",
+            "回答": "编辑建议：先核工具条款、数据授权与机构保密规程，保留人工修改与复核记录；Hot Technologies 不提供这些法律或雇主要求的证据。",
             "来源": "O*NET OnLine",
             "链接": "https://www.onetonline.org/link/hot_tech/17-3026.01",
             "问题": "采用生成式工具需要哪些条件？"
           },
           {
-            "回答": "测量可重复性、污染与偏差率、设备停机与维护记录、异常上报及时性，而不是处理速度。",
+            "回答": "编辑建议：结合现场标准观察测量可重复性、污染与偏差、维护记录及异常上报；这些是任务相关观察项，不是已经验证的统一绩效指标或相对效度排序。",
             "来源": "O*NET OnLine",
             "链接": "https://www.onetonline.org/link/details/17-3026.01",
-            "问题": "质量指标应当关注哪些方面？"
+            "问题": "试用工具时可观察哪些质量项？"
           }
         ],
         "responsibility_intro": "AI 进入设备与检验流程后，责任链不能断：依次核对输入、使用条件、输出复核、记录留痕与异常上报。",
@@ -13187,7 +13218,7 @@
           },
           {
             "步骤": "使用条件",
-            "说明": "仅在授权渠道处理未公开工艺参数与客户样品数据，遵守保密与出口管制要求。"
+            "说明": "仅在机构允许的渠道处理未公开工艺与客户数据；先核合同与适用法律，不凭职业名称认定具体出口管制义务。"
           },
           {
             "步骤": "输出复核",
@@ -13345,7 +13376,7 @@
         "locale_requirements": {
           "credential_boundary": "学历、职业培训、认证、设备操作授权与安全资质不是同一状态；O*NET 该职业页面未列出统一认证，洁净室准入与化学品、辐射相关要求以雇主规程与所在地法规为准。",
           "jurisdiction": "本页采用美国 O*NET/BLS 口径说明职业事实；中国大陆的学历、职业资格、安全与化学品管理要求以当地法规与合同为准。",
-          "summary": "O*NET 将本职业列为 Job Zone 4（SVP 7.0 至低于 8.0），需要大量与工作相关的技能、知识与经验，通常需要数年的相关经验、在职或职业培训；该页面未发布培训项目数量与认证清单。"
+          "summary": "O*NET 将本职业列为 Job Zone 4（SVP 7.0 至低于 8.0）；“数年经验或训练”是该职业组通用说明，不是本职业实测入行期限。认证页当前显示未找到认证；培训页是按地点查询入口，不能据此判断项目不存在。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
@@ -13664,10 +13695,16 @@
           "type": "prose"
         },
         "evidence_scope": {
-          "$item": "nanotechnology-engineering-technologists-and-technicians.risk.career-risk-cards.3",
-          "block": "risk",
-          "copy_key": "career.item.career-risk-cards",
-          "type": "prose"
+          "$join": [
+            {
+              "$item": "nanotechnology-engineering-technologists-and-technicians.risk.career-risk-cards.3",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "NIOSH 2026纳米技术FAQ另支持纳米材料吸入、摄入与皮肤接触路径及任务级暴露评估；这是美国职业卫生建议，不替代中国法定要求或特定现场审批。"
+          ],
+          "separator": "；"
         },
         "heading": "纳米技术工程技师与技术人员的工作压力、风险与职业边界",
         "risks": [
@@ -13689,7 +13726,7 @@
               "onet-context"
             ],
             "id": "cost-change",
-            "mitigation": "按规程佩戴防护装备、执行上锁挂牌与停机流程，异常时停止操作并上报",
+            "mitigation": "编辑建议：先核目标现场的风险评估与已批准操作规程，确认防护装备、设备隔离与停机流程；异常时停止并上报，不能仅凭O*NET任务表确定法定控制要求。",
             "scenario": "操作纳米加工、镀膜或高压设备时的操作风险，O*NET 显示 35% 每天接触危险条件、60% 每天佩戴常规防护装备、15% 认为错误后果极其严重",
             "title": "设备操作与人身安全"
           },
@@ -13697,12 +13734,12 @@
             "affected_roles": "负责样品制备、洁净操作与测量的技术员",
             "consequence": "可能使测量数据失去可比性并影响整批结果判定",
             "evidence_refs": [
-              "onet-details",
-              "onet-tasks"
+              "onet-tasks",
+              "niosh-nano-faq"
             ],
             "id": "sample-contamination",
-            "mitigation": "按洁净要求操作、隔离可疑样品并完整记录环境与设备状态",
-            "scenario": "洁净度不足、耗材污染或参数漂移导致样品或读数异常",
+            "mitigation": "按洁净要求隔离可疑样品并记录条件；编辑建议由职业卫生人员评估材料、工序、暴露时长与现有工程控制，再确定现场防护，不能把洁净操作等同健康暴露控制。",
+            "scenario": "样品污染会影响测量；涉及纳米材料的工序还可能产生经吸入、摄入或皮肤接触的职业暴露，具体路径随材料与操作而异。",
             "title": "样品污染与数据失真风险"
           },
           {
@@ -13713,7 +13750,7 @@
               "onet-hot"
             ],
             "id": "process-confidentiality",
-            "mitigation": "仅在授权渠道处理数据并留存记录，遵守保密协议与出口管制要求",
+            "mitigation": "编辑建议：仅在授权渠道处理未公开工艺与客户数据并留存记录，核对合同保密义务及适用法律；是否涉及出口管制需按具体技术、主体与法域判断。",
             "scenario": "把未公开工艺参数、配方或客户数据输入未授权的外部工具或服务",
             "title": "工艺参数外泄风险"
           },
@@ -13791,6 +13828,12 @@
             "id": "onet-industry",
             "label": "O*NET Industries 17-3026.01",
             "scope": "行业分布与雇主场景"
+          },
+          {
+            "href": "https://www.cdc.gov/niosh/nano/faqs/index.html",
+            "id": "niosh-nano-faq",
+            "label": "NIOSH 纳米技术与职业健康FAQ（2026-03-03）",
+            "scope": "暴露途径、任务级暴露评估与控制选择；职业卫生建议"
           }
         ]
       },
@@ -13800,7 +13843,7 @@
             {
               "指标": "中国职业工资数据",
               "数值": "未提供精确职业值",
-              "说明": "未取得与 O*NET 17-3026.01 精确对应的全国职业工资中位数。"
+              "说明": "证据不足：本轮查阅国家统计局行业表，未取得与 O*NET 17-3026.01 同口径的全国职业工资中位数。"
             },
             {
               "指标": "行业门类（科学研究和技术服务业，非私营单位）",
@@ -13871,11 +13914,11 @@
           "china_open": "可用公开职责与技能信息做职业探索，但不能据此推导中国大陆个人收入。",
           "china_open_note": "如需收入判断，应回到具体城市、雇主类型与合同条件核对。",
           "china_ref": "国家统计局：2025 年城镇单位就业人员平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
-          "china_salary_note": "中国精确职业工资数据不可得；本页只展示行业门类均值并标明其边界，不换算为本职业或个人薪资。",
+          "china_salary_note": "证据不足：本轮未取得中国大陆本职业全国工资中位数；下列科学研究和技术服务业均值仅供相关科研、检测雇主场景参考，制造岗位不能直接套用。",
           "china_salary_table": [
             {
               "城市/区间": "职业精确工资",
-              "月薪参考": "未取得，不代填"
+              "月薪参考": "证据不足：未取得本职业同口径数据，不代填"
             },
             {
               "城市/区间": "行业门类（科学研究和技术服务业，非私营单位均值）",
@@ -13982,7 +14025,7 @@
         "growth": "增长 2%（2024—2034，父职业口径）",
         "heading": "纳米技术工程技师与技术人员的美国薪资与就业数据边界",
         "industry_heading": "行业与岗位差异",
-        "industry_period": "2025",
+        "industry_period": "独立Industries子页口径；页面未标表期，与详情Top industries(2025)版本不同",
         "industry_rows": [
           {
             "industry": "制造",
@@ -14188,16 +14231,28 @@
               "type": "prose"
             },
             "interpretation": {
-              "$item": "nanotechnology-engineering-technologists-and-technicians.market-signals.market-signal-card.4",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
+              "$join": [
+                {
+                  "$item": "nanotechnology-engineering-technologists-and-technicians.market-signals.market-signal-card.4",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                "上列为 O*NET 趋势子页仍可核的历史2024—2034表；最新 BLS 2025—2035父职业表为2025年76,700人、2035年79,000人，增长3.1%，年均6,600个空缺。两表期别不同，总体就业预测均非AI归因。"
+              ],
+              "separator": "；"
             },
             "limitation": {
-              "$item": "nanotechnology-engineering-technologists-and-technicians.market-signals.market-signal-card.5",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
+              "$join": [
+                {
+                  "$item": "nanotechnology-engineering-technologists-and-technicians.market-signals.market-signal-card.5",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                "最新BLS仍是17-3026父职业，不能视为纳米细分职业单列预测。"
+              ],
+              "separator": "；"
             },
             "metric": "美国就业变化",
             "occupation_scope": "BLS/O*NET Industrial Engineering Technologists and Technicians 父职业口径（页面标明）",
@@ -14250,11 +14305,17 @@
             "id": "onet",
             "label": "O*NET 17-3026.01 Nanotechnology Engineering Technologists and Technicians",
             "scope": "职业任务、兴趣代码与准备要求"
+          },
+          {
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "id": "bls-ep-2025-2035",
+            "label": "BLS 职业预测表：2025—2035",
+            "scope": "17-3026父职业总体就业预测，非AI归因；就业与空缺原表单位为千人"
           }
         ],
         "transitions": [
           {
-            "capability_gaps": "需补研究生层次的纳米物理、器件设计与研究方法",
+            "capability_gaps": "补纳米物理、器件设计与研究方法，并核目标雇主的学历及研发经验要求；不是统一研究生门槛。",
             "shared_capabilities": "纳米设备与表征经验、数据记录能力",
             "target_href": "/zh/career/jobs/nanosystems-engineers",
             "target_slug": "nanosystems-engineers",
@@ -14476,7 +14537,7 @@
               "slug": "nanosystems-engineers",
               "title": "纳米系统工程师"
             },
-            "watchouts": "需补研究生层次的纳米物理、器件设计与研究方法"
+            "watchouts": "核对目标设计研发岗位的专业与学历条件，并补纳米物理、器件设计与研究方法；不把研究生学历概括为统一门槛。"
           },
           {
             "direction": "半导体加工技术员",
@@ -14540,15 +14601,15 @@
             "question": "RIC 兴趣代码能决定我适不适合吗？"
           },
           {
-            "answer": "O*NET 将本职业列为 Job Zone 4（SVP 7.0 至低于 8.0），通常需要数年相关经验、在职或职业培训；部分岗位接受大专学历，实际以雇主要求为准。",
+            "answer": "O*NET 把本职业列为 Job Zone 4，表示大量准备；该职业组的通用本科与训练说明不是本职业的统一学历或年限门槛。请核对目标雇主的专业、经验与设备培训要求。",
             "question": "没有本科文凭可以入行吗？"
           },
           {
-            "answer": "与内外向关系不大；关键是能否稳定执行规程、如实记录并在安全问题上清楚沟通。",
+            "answer": "编辑建议：观察能否稳定执行规程、如实记录并清楚沟通安全问题；没有本职业研究支持以外向或内向标签排序适配。",
             "question": "性格外向还是内向更适合？"
           },
           {
-            "answer": "需要与工作相关的技能、知识与经验，通常通过职业培训、在职培训或数年现场经验积累；设备授权与安全资质由雇主认定。",
+            "answer": "需核对目标岗位的专业基础、设备培训、现场经验与安全要求；Job Zone 4 的通用准备说明不提供本职业统一入行期限，学历与设备操作授权须分别核验。",
             "question": "入行通常需要什么学历、训练和资格条件？"
           },
           {
@@ -14672,8 +14733,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "本页职业事实来自 O*NET 17-3026.01 官方档案与 O*NET 展示的 2025 BLS OEWS 工资、2024—2034 就业预测（工资与就业为 Industrial Engineering Technologists and Technicians 父职业口径，页面已标明）；中国工资使用国家统计局 2025 年城镇单位就业人员平均工资的科学研究和技术服务业行业门类均值并标明边界。",
-          "updated_at": "O*NET 档案更新 2026；BLS 工资 2025 年数据；国家统计局 2025 年数据（2026-05-15 发布）；本页查阅 2026-09-26。"
+          "source": "本页职业事实来自 O*NET 17-3026.01 官方档案与 O*NET 展示的 2025 BLS OEWS 工资、2024—2034 就业预测（工资与就业为 Industrial Engineering Technologists and Technicians 父职业口径，页面已标明）；中国工资使用国家统计局 2025 年城镇单位就业人员平均工资的科学研究和技术服务业行业门类均值并标明边界。 本轮另核 BLS 2025—2035 父职业预测，在前景卡中并列说明；历史共享记录因FAQ与快答保护保持原版本。",
+          "updated_at": "本轮查阅2026-10-11；工资2025，行业均值2025；就业保留历史2024—2034并在前景卡并列最新2025—2035；共享来源原查阅日期保留。"
         },
         "note": "证据只支持纳米技术工程技师与技术人员在标注市场、职业口径与期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -14719,7 +14780,7 @@
           }
         ]
       },
-      "work_context_block": "工作情境（O*NET 工作情境调查，美国受访者比例）：90% 每天在受控室内环境工作，100% 每天使用电子邮件，65% 每天进行面对面讨论；60% 认为精确或高度准确极其重要；65% 的工作周为 40 小时、35% 超过 40 小时，80% 工作日程规律；约 80% 表示在任务与决策上有很大或一些自由；15% 认为错误后果极其严重、30% 承担他人健康与安全的非常高责任；60% 每天佩戴常规防护装备，35% 每天接触危险条件，50% 认为工作仅轻微自动化。"
+      "work_context_block": "工作情境（O*NET 工作情境调查，美国受访者比例）：90% 每天在受控室内环境工作，100% 每天使用电子邮件，65% 每天进行面对面讨论；60% 认为精确或高度准确极其重要；65% 的工作周为 40 小时、35% 超过 40 小时，80% 工作日程规律；约 80% 表示在任务与决策上有很大或一些自由；15% 认为错误后果极其严重、30% 承担他人健康与安全的非常高责任；60% 每天佩戴常规防护装备，35% 每天接触危险条件，50% 认为工作仅轻微自动化。 Job Zone 4 属职业组准备层级，不能把其通用训练期当成本职业统一期限；行业占比需另核当前表期与父职业口径。"
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
@@ -14996,7 +15057,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "纳米设备操作与制程执行",
@@ -15047,7 +15108,7 @@
       "text": "纳米技术工程技师与技术人员"
     }
   },
-  "source_content_sha256": "5ceff2c51db8c5be087173227782e8ef741feae40655514ef3c7e981027ff7a9",
+  "source_content_sha256": "b86fce37754999be25ffc513e3ee8ca0c615e8f5e0b1d07eb4ab35c33c32b44d",
   "subject": {
     "canonical_slug": "nanotechnology-engineering-technologists-and-technicians",
     "name": "纳米技术工程技师与技术人员",

@@ -7362,7 +7362,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入｜官方RC保留，detail R84/C66/E17为强度，不重造RCE；Bright Outlook是官方标注，不作就业保证。美国BLS本职业通常无正式学历要求，短期在职训练通常不超过1个月；O*NET Job Zone1—2通用说明为通常高中/同等但部分不要求、经验很少至数月或一年、训练数天至一年，不写成每岗统一学历或工龄。2024行业运输仓储33%、行政支持17%、制造/批发各14%、零售11%保留。2025美国年薪10/25/50/75/90分位为31,270、36,090、40,240、46,920、55,140美元；官方时薪依次15.03、17.35、19.35、22.56、26.51美元。O*NET旧期2024就业2,988,900人→2034年3,033,100人，2024—2034增长2%，年均空缺384,300含增长与替换。"
+              "研究输入｜官方RC保留，detail R84/C66/E17为强度，不重造RCE；Bright Outlook是官方标注，不作就业保证。美国BLS本职业通常无正式学历要求，短期在职训练通常不超过1个月；O*NET Job Zone1—2通用说明为通常高中/同等但部分不要求、经验很少至数月或一年、训练数天至一年，不写成每岗统一学历或工龄。2025年精确职业行业分布：运输仓储32%、行政支持17%、制造与批发各14%、零售12%；不是行业工资或中国分布。2025美国年薪10/25/50/75/90分位为31,270、36,090、40,240、46,920、55,140美元；官方时薪依次15.03、17.35、19.35、22.56、26.51美元。2025年美国53-7062精确职业就业2,940,300人，2035年预测2,991,900人；2025—2035增长2%，年均空缺340,500个（增长与替换），净增51,600人不是年均空缺。"
             ]
           },
           "id": "laborers-and-freight-stock-and-material-movers-hand.profile.onet-structured-fields-block.7",
@@ -7613,7 +7613,9 @@
           },
           "id": "laborers-and-freight-stock-and-material-movers-hand.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details",
+            "cn-work-safety",
+            "osha-powered-trucks"
           ],
           "type": "prose"
         },
@@ -7663,7 +7665,9 @@
           },
           "id": "laborers-and-freight-stock-and-material-movers-hand.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details",
+            "cn-work-safety",
+            "osha-powered-trucks"
           ],
           "type": "prose"
         }
@@ -7762,7 +7766,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答｜按 O*NET 呈现的 BLS 精确职业口径：2025 年年薪第 10 分位 31,270 美元、第 25 分位 36,090 美元、中位 40,240 美元、第 75 分位 46,920 美元、第 90 分位 55,140 美元（小时中位 19.35 美元）；2024 年就业 2,988,900 人、2024—2034 预测 2%（slower than average）、预计年均空缺 384,300 个、2034 年预测就业 3,033,100 人；主要行业为运输与仓储（约 33%）。"
+              "直接回答｜2025美国53-7062五年薪分位31,270/36,090/40,240/46,920/55,140美元，官方小时中位19.35美元。2025年美国53-7062精确职业就业2,940,300人，2035年预测2,991,900人；2025—2035增长2%，年均空缺340,500个（增长与替换），净增51,600人不是年均空缺。2025年精确职业行业分布：运输仓储32%、行政支持17%、制造与批发各14%、零售12%；不是行业工资或中国分布。"
             ]
           },
           "id": "laborers-and-freight-stock-and-material-movers-hand.us-salary.career-snapshot-secondary-locale.2",
@@ -7805,7 +7809,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业口径｜O*NET 行业页显示该职业分布较广：运输与仓储约 33%、行政与支持服务约 17%、制造业约 14%、批发贸易约 14%、零售贸易约 11%；行业分布、招聘需求与年度空缺是不同指标，不能混写为单一增长率。上述为2024行业分布；BLS组合页行业工资不套53-7062。"
+              "行业口径｜2025年精确职业行业分布：运输仓储32%、行政支持17%、制造与批发各14%、零售12%；不是行业工资或中国分布。本轮未取得精确职业按行业工资；BLS组合页行业工资涵盖多种手工劳动者与物料搬运工，不套用53-7062。"
             ]
           },
           "id": "laborers-and-freight-stock-and-material-movers-hand.us-salary.career-snapshot-secondary-locale.5",
@@ -8194,7 +8198,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET旧期2024就业2,988,900人→2034年3,033,100人，2024—2034增长2%，年均空缺384,300含增长与替换。BLS新期53-7062组件2025就业2,940,300人→2035年2,991,900人，增长2%，净增51,600不是年均空缺；组合904,200年均空缺不套此职业。不同期不可混用；中国全国精确职业需求未建立，历史单岗另看。弥勒人社局2026-02-12第五期公告：云南大重九控股集团有限公司装卸工数名，报价3,600—4,000元/月、接送车及供餐；未列本岗具体学历、班次、任务或截止日。本轮未核当前在招，不写已结束或全国门槛；报价不是实发收入或全国分位，其他岗位条件不混入。"
+              "2025年美国53-7062精确职业就业2,940,300人，2035年预测2,991,900人；2025—2035增长2%，年均空缺340,500个（增长与替换），净增51,600人不是年均空缺。组合年均空缺904,200不套此职业。中国全国精确职业需求未建立，历史单岗另看。弥勒人社局2026-02-12第五期公告：云南大重九控股集团有限公司装卸工数名，报价3,600—4,000元/月、接送车及供餐；未列本岗具体学历、班次、任务或截止日。本轮未核当前在招，不写已结束或全国门槛；报价不是实发收入或全国分位，其他岗位条件不混入。"
             ]
           },
           "id": "laborers-and-freight-stock-and-material-movers-hand.market-signals.market-signal-card.2",
@@ -8210,7 +8214,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业展望（O*NET 呈现的 BLS 口径，2024—2034）：预测 2%（slower than average）、预计年均空缺 384,300 个；空缺含增长与替换需求，不等于净新增岗位，也不构成个人就业保证。"
+              "就业展望｜2025年美国53-7062精确职业就业2,940,300人，2035年预测2,991,900人；2025—2035增长2%，年均空缺340,500个（增长与替换），净增51,600人不是年均空缺。空缺不是当前招聘或个人录用保证。"
             ]
           },
           "id": "laborers-and-freight-stock-and-material-movers-hand.market-signals.market-signal-card.3",
@@ -8557,9 +8561,9 @@
                 "url": "https://www.onetonline.org/link/hot_tech/53-7062.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-11",
                 "details": [
-                  "用于核对本职业的主要行业分布（运输与仓储约 33% 等）。",
+                  "2025年精确职业行业分布：运输仓储32%、行政支持17%、制造与批发各14%、零售12%；不是行业工资或中国分布。",
                   "行业分布不建立中国映射。"
                 ],
                 "evidence_type": "official industry distribution",
@@ -8567,7 +8571,7 @@
                 "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或资质结论。",
                 "market": "美国",
                 "name": "Industries: 53-7062.00 - Laborers and Freight, Stock, and Material Movers, Hand",
-                "period": "2024行业分布，经本轮details核；非行业工资",
+                "period": "2025行业分布；2026-10-11核当前details，非行业工资",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/53-7062.00"
@@ -9165,12 +9169,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "信息整理",
+            "AI主要改变": "可辅助整理获准输入，需逐字段核对；本职业提效未测",
             "仍由人负责": "责任与授权",
             "方向": "分派与核对辅助"
           },
           {
-            "AI主要改变": "检索与复盘",
+            "AI主要改变": "可辅助检索与复盘草稿，需原记录复核；采用率未核",
             "仍由人负责": "原始记录核对",
             "方向": "现场安全与操作"
           }
@@ -10598,123 +10602,18 @@
           },
           {
             "指标": "就业 · 规模",
-            "数值": "2,988,900 人（2024 年）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "laborers-and-freight-stock-and-material-movers-hand.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "laborers-and-freight-stock-and-material-movers-hand.source-register.published.1"
-                },
-                "；",
-                {
-                  "$source": "bls-hand-laborers",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "laborers-and-freight-stock-and-material-movers-hand.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-hand-laborers",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "laborers-and-freight-stock-and-material-movers-hand.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "2,940,300 人（2025 年）",
+            "说明": "O*NET当前53-7062精确职业2025—2035预测；https://www.onetonline.org/link/localtrends/53-7062.00；空缺含增长与替换。原共享登记保留旧期，本行以当前原页为准。"
           },
           {
             "指标": "就业 · 增长",
-            "数值": "2%（2024—2034）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "laborers-and-freight-stock-and-material-movers-hand.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "laborers-and-freight-stock-and-material-movers-hand.source-register.published.1"
-                },
-                "；",
-                {
-                  "$source": "bls-hand-laborers",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "laborers-and-freight-stock-and-material-movers-hand.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-hand-laborers",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "laborers-and-freight-stock-and-material-movers-hand.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "2%（2025—2035）",
+            "说明": "O*NET当前53-7062精确职业2025—2035预测；https://www.onetonline.org/link/localtrends/53-7062.00；空缺含增长与替换。原共享登记保留旧期，本行以当前原页为准。"
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "384,300 个/年（2024—2034）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "laborers-and-freight-stock-and-material-movers-hand.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "laborers-and-freight-stock-and-material-movers-hand.source-register.published.1"
-                },
-                "；",
-                {
-                  "$source": "bls-hand-laborers",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "laborers-and-freight-stock-and-material-movers-hand.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "bls-hand-laborers",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "laborers-and-freight-stock-and-material-movers-hand.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "340,500 个/年（2025—2035）",
+            "说明": "O*NET当前53-7062精确职业2025—2035预测；https://www.onetonline.org/link/localtrends/53-7062.00；空缺含增长与替换。原共享登记保留旧期，本行以当前原页为准。"
           }
         ],
         "boundary": "美国精确职业与父级或代理口径必须分开；具体统计范围以来源标注为准，未取得的分位不等于零。",
@@ -10744,7 +10643,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "2%（2024—2034，slower than average）",
+        "growth": "2%（2025—2035，slower than average）",
         "heading": {
           "$item": "laborers-and-freight-stock-and-material-movers-hand.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10757,12 +10656,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024行业分布，非行业工资",
+        "industry_period": "2025行业分布，非行业工资",
         "industry_rows": [
           {
             "industry": "运输与仓储",
             "median": "暂无安全数值",
-            "note": "O*NET 行业页显示约占 33%；未提供行业工资数值。"
+            "note": "2025精确职业32%在运输仓储；本轮未取得精确职业行业工资。"
           },
           {
             "industry": "行政与支持服务（约 17%）",
@@ -10775,7 +10674,7 @@
             "note": "未单列行业工资，不使用代理数字。"
           },
           {
-            "industry": "零售贸易（约 11%）及其他",
+            "industry": "零售贸易（12%）及其他",
             "median": "暂无安全数值",
             "note": "未单列，不使用代理数字。"
           }
@@ -10797,7 +10696,7 @@
             "question": "这是否覆盖精确职业？"
           },
           {
-            "answer": "2025工资，旧2024—2034与新2025—2035预测分开。",
+            "answer": "工资2025；预测2025—2035。行业分布2025，与工资分开。",
             "question": "时期是什么？"
           },
           {
@@ -10807,7 +10706,7 @@
         ],
         "median": "40,240 美元/年（2025 年，精确职业口径）",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "O*NET2024—2034保留；BLS2025—2035组件另列",
+        "outlook_period": "2025—2035美国53-7062精确职业预测",
         "wage_column_labels": [
           "分位",
           "年度参考",
@@ -10918,8 +10817,8 @@
         "outlook_evidence": [
           {
             "geography": "美国",
-            "horizon": "2024—2034",
-            "interpretation": "O*NET旧期2024就业2,988,900人→2034年3,033,100人，2024—2034增长2%，年均空缺384,300含增长与替换。",
+            "horizon": "2025—2035",
+            "interpretation": "2025年美国53-7062精确职业就业2,940,300人，2035年预测2,991,900人；2025—2035增长2%，年均空缺340,500个（增长与替换），净增51,600人不是年均空缺。",
             "limitation": "时期和组合范围不混用，非当前空岗或个人录用概率。",
             "metric": "就业/增长/年均空缺",
             "occupation_scope": "53-7062精确职业",
@@ -10967,7 +10866,7 @@
               "field": "name",
               "item": "laborers-and-freight-stock-and-material-movers-hand.source-register.published.1"
             },
-            "scope": "旧期精确预测"
+            "scope": "共享登记旧期；本页当前局部值以原页2025—2035为准"
           },
           {
             "href": {
@@ -11021,7 +10920,7 @@
               "field": "name",
               "item": "laborers-and-freight-stock-and-material-movers-hand.source-register.published.1"
             },
-            "scope": "2024行业分布与职责"
+            "scope": "2025精确职业行业分布及职责"
           }
         ],
         "transitions": [
@@ -11468,7 +11367,7 @@
             "item": "laborers-and-freight-stock-and-material-movers-hand.source-register.published.1"
           }
         },
-        "note": "来源说明｜官方RC/Bright、2025五年薪与官方时薪、2024行业分布和旧期就业保留。BLS新期只取53-7062组件就业，组合904200空缺/行业工资不套入。OSHA美国具体车辆训练、中国安全生产及特种设备资格分开，手工作业不统一机械证。弥勒历史单岗报价非当前在招或全国分位；人社入口超时不是中国无统计。Y是20卡纸面任务，18待交/2暂停、43及三趟20/20/3，R禁行/渗漏不接触、未发出草稿、四作品七日；不测体力或授操作权。ILO/NIST为通用研究与风险框架，软件提及/机械自动化不同于生成AI提效实测。"
+        "note": "来源说明｜2025工资五分位和官方时薪保留；行业分布及就业预测更新到2025/2025—2035。共享旧预测被FAQ和事实登记保护，未同步，局部当前值链接原页；NIST共享司法措辞仍为保护冲突。BLS组合数据不套精确职业；中国历史报价不是全国工资或当前招聘。OSHA雇主培训评估、中国岗位培训及适用设备资格分开。纸面Y成果保留，不作真实体力或操作授权证明。生成AI辅助方案未实测。"
       },
       "work_context_block": {
         "$item": "laborers-and-freight-stock-and-material-movers-hand.profile.work-context-block.5",
@@ -11638,7 +11537,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "劳工与货运、物料搬运工、手工 · 搬运、数量核对与作业安全",
@@ -11689,7 +11588,7 @@
       "text": "劳工与货运、物料搬运工、手工职业判断：搬运、数量核对与作业安全"
     }
   },
-  "source_content_sha256": "8e13f3e30daf5ad9ca31f3c9a6739a84cb61ccf2e3f5fa9c4573f420e0c9828a",
+  "source_content_sha256": "22459100049080352e008e38efc73d33fccb711c8660bfb776c16cb6e042e6dd",
   "subject": {
     "canonical_slug": "laborers-and-freight-stock-and-material-movers-hand",
     "name": "劳工与货运、物料搬运工、手工",

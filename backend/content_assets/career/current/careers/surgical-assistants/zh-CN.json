@@ -30226,7 +30226,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "美国职业背景、中国现行法律、三个近邻招聘与虚构练习用途分别标明，不推个人事故概率。"
+              "美国职业背景、中国现行法律、三个近邻招聘用途分别标明；记录和反馈卡中的F1/F2/F3是本页原创虚构编辑题，外部职业资料只作任务背景，不验证题给状态或个人事故概率。"
             ]
           },
           "id": "surgical-assistants.display.career_risk_cards.evidence-scope",
@@ -33458,7 +33458,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮复核BLS29-9093手术助理单列预测，新增NBS2025卫生社会工作两单位全就业税前年均背景，按实际医院卫生雇主行业条件参照，非临床身份权限。O*NET本职八邻职、工资OOH、中国医师法护士条例、NBSTSA/Texas与三医院公告沿原实读范围；ILO摘要NIST复用旧通用范围，临床效果本职AI比例不补。"
+              "2026-10-12读取O*NET本职全部任务及八邻职、2025本职工资分位、BLS单列行业就业与合并页环境，读取中国医师法、护士条例、NBSTSA资格页、Texas州许可说明及三医院完整公告。NBS卫生行业、ILO摘要及NIST通用框架按本批已读范围复用；CSFA完整现行手册和个人完整申请条件仍未核齐，不补本职AI比例。"
             ]
           },
           "id": "surgical-assistants.display.source_card.source",
@@ -33472,7 +33472,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-01初读制作；2026-10-02复核BLS本职预测及NBS卫生行业工资，其余来源沿原日期范围未重全文；统计期法域读取范围分别列示。"
+              "2026-10-12九模块作者修订；职业、统计期、法域和实际读取范围分别标明，待独立内容复核。"
             ]
           },
           "id": "surgical-assistants.display.source_card.updated-at",
@@ -36670,7 +36670,7 @@
             },
             "evidence_refs": [
               "onet",
-              "editor"
+              "nist"
             ],
             "id": "project-data",
             "mitigation": {
@@ -36706,7 +36706,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "editor",
+              "nist",
               "onet"
             ],
             "id": "audition-feedback",
@@ -36846,6 +36846,96 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "ratify",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "surgical-assistants.source-register.published.1"
+            },
+            "id": "ratify",
+            "label": {
+              "$source": "ratify",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "surgical-assistants.source-register.published.1"
+            },
+            "scope": "护士条例注册、实习指导和隐私责任；不同于医师或美国CSFA。"
+          },
+          {
+            "href": {
+              "$source": "r2-pay-1",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "surgical-assistants.source-register.published.1"
+            },
+            "id": "r2-pay-1",
+            "label": {
+              "$source": "r2-pay-1",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "surgical-assistants.source-register.published.1"
+            },
+            "scope": "广州编外医师助理税前报价；近邻科室辅助，非全国或临床首助。"
+          },
+          {
+            "href": {
+              "$source": "r2-pay-2",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "surgical-assistants.source-register.published.1"
+            },
+            "id": "r2-pay-2",
+            "label": {
+              "$source": "r2-pay-2",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "surgical-assistants.source-register.published.1"
+            },
+            "scope": "华西非全日制行政支持；2026-01-26已截止，无工资金额。"
+          },
+          {
+            "href": {
+              "$source": "sag-moa",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "surgical-assistants.source-register.published.1"
+            },
+            "id": "sag-moa",
+            "label": {
+              "$source": "sag-moa",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "surgical-assistants.source-register.published.1"
+            },
+            "scope": "Texas医师监督与州许可、机构政策区别，只该州。"
+          },
+          {
+            "href": {
+              "$source": "onet",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "surgical-assistants.source-register.published.1"
+            },
+            "id": "onet",
+            "label": {
+              "$source": "onet",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "surgical-assistants.source-register.published.1"
+            },
+            "scope": "O*NET29-9093人的任务与准确协作；本页虚构核查及反馈为编辑题，不由此档案验证。"
           }
         ]
       },
@@ -39494,7 +39584,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "美国29-9093.00单列",
@@ -39545,7 +39635,7 @@
       "text": "手术助理"
     }
   },
-  "source_content_sha256": "771b2d5b0dd87818d26b2db027eaf85039b582935a7acf3afa222b0a1509828e",
+  "source_content_sha256": "de36b92e36b1f4b4151ffe95f9e6bf0b645bee2f25e68ef3c6ec25aa25790372",
   "subject": {
     "canonical_slug": "surgical-assistants",
     "name": "手术助理",

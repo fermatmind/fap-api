@@ -35,6 +35,39 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:r5-current-china-jiaojiang-featured-daily-2026": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-employment": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-high": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-identity": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-amusement": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-education": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-theater": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-low": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-median": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-openings": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -1560,7 +1593,7 @@
         "status": "mapped"
       },
       "item:actors.market-signals.market-signal-card.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.market-signals.market-signal-card.2": {
         "status": "mapped"
@@ -8971,20 +9004,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.05.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            {
-              "id": "project-data"
-            },
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.05.mitigation": {
         "ref": {
@@ -9063,20 +9084,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.06.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            {
-              "id": "audition-feedback"
-            },
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.06.mitigation": {
         "ref": {
@@ -9336,18 +9345,8 @@
         "status": "mapped"
       },
       "career_snapshot_primary_locale.salary.bls_table.01.explanation": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_primary_locale",
-            "salary",
-            "bls_table",
-            0,
-            "说明"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_primary_locale.salary.bls_table.01.headers.explanation": {
         "ref": {
@@ -22669,12 +22668,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的工作对象是餐厅与食堂等场所的前厅服务现场：餐桌与座椅、餐具与布草与调味品、当餐菜单与订单、顾客的落座与用餐动线、自助餐台与饮料与冰的分配器、服务吧台，以及清洁用品与消毒剂与收银设备。产出是把顾客从落座到离席这一段服务链条做干净、做及时：摆好的餐桌与补充到位的餐具与调味品、按订单完成的上菜上饮与撤餐、随时可用的清洁桌面与地面、准确补齐的库存与缺货交接记录，以及配合收银的结账协助。判断依据是机构的标准摆台图与服务流程、当餐菜单与订单、食品安全与个人卫生要求（如健康证明、每日晨检、洗手消毒与穿戴工作衣帽），以及值班主管的现场指令，而不是个人习惯或岗位名称。"
+              "工作对象包括餐桌、餐具布草、吧台供应、传菜/撤餐通道、清洁和收银设备；核心产出为可用服务区、及时补给及餐饮协助。本职业以清桌、撤餐、换布草、摆台、补充餐具及服务吧台物资、提供水/咖啡/调味品等餐饮协助为定义。24项任务为16核心、7补充和1新任务；操作收银机为核心（重要性88），不是一律只能协助收银。混合准备调饮配料、切水果配饰等列补充任务；三明治准备为新任务且重要性未提供，不填0。任务可能与其他餐饮岗位交叉，实际菜单/酒水操作、点单、收款退款和服务承诺仍按岗位授权及当地规则核。 中国卫生按实际直接入口任务与区域核，不按中文名称统一套健康/口罩要求。"
             ]
           },
           "id": "actors.profile.work-context-block.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "r5-cn-food"
           ],
           "type": "prose"
         },
@@ -22725,12 +22726,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "判断四：卫生与安全底线是否守住——洗手消毒、工作衣帽与口罩要求、清洁剂与消毒剂的使用与存放、通道无绊倒风险与地面无积水，是否每班都按标准执行并留痕。"
+              "编辑观察：按岗位适用要求核手卫生、衣帽/口罩、清洁药剂和通道安全；需记录的内容按单位类别、法规和规程核，不一律每班全部动作留痕。第14.3—14.5章按区域和任务区分卫生：食品处理区工作帽覆盖头发；专间和明确列举专用操作任务佩戴清洁口罩，其他相应直接入口操作为宜戴，不写所有前厅人员均须口罩。洗手/消毒按是否直接入口及接触污物、钱、手机等具体情形；手套不替代洗手。第10章食品接触餐具洗后使用前消毒，设备/药剂按适用说明；第8.2章顾客在场避免扬尘。工作衣服受污染及时更换，直接入口岗位每天更换为宜；不把建议统一写强制。"
             ]
           },
           "id": "actors.profile.work-context-block.5",
           "source_refs": [
-            "onet"
+            "r5-cn-food"
           ],
           "type": "prose"
         },
@@ -22767,12 +22768,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "环境与节奏：以室内受控环境为主（每天 67%），工作场所含餐厅、食堂、宴会与自助餐区、酒店餐饮部与咖啡馆；持续行走或跑动 88%、持续站立 84%、持续与他人接触 80%、持续用手操作 80%；每天面对面讨论 69%，身体距离非常近 53%，每天穿戴常见防护装备 57%；每周以上面对不愉快或愤怒或无礼的顾客 54%；团队协作极其重要 71%，与外部顾客或公众打交道极其重要 61%；决策自由度为「一些」42%，确定任务与优先级的自由度「有限」45%。"
+              "O*NET工作情境调查：持续行走/跑动88%、持续站立84%、持续用手操作80%、持续接触他人80%；每天面对面69%、室内受控67%、常见PPE57%；身体距离接近触碰53%，团队71%极重要、公众服务61%极重要。愤怒/无礼人员接触14%每天、54%每周但非每天、19%每月；54%不写成每周及以上。周工时71%恰40小时、23%少于40；55%规律、30%不规律、15%季节安排。调查比例非所有雇主要求、个人健康门槛或事故率。"
             ]
           },
           "id": "actors.profile.work-context-block.8",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -22921,12 +22923,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本表把本页职业与相邻岗位按核心目的、主要对象与依据、核心过程、主要产出、责任主体、协作与督导、结论边界七项逐一对照：本页职业（O*NET-SOC 35-9011.00）是前厅协助与执行层级，负责摆台、上菜上饮配合、撤餐、清洁、补货与收银协助；服务员负责点单与席间服务并对订单负责；调酒师负责酒水配方与调制；厨师与厨房帮工负责菜品制作与出餐；餐饮服务经理负责经营与人员与成本管理。比较时要以岗位职责、机构授权与所在地法规逐项核对，不能按岗位名称互换，也不能把执行职责读成点单或配方或管理权限。"
+              "本职业以清桌、撤餐、换布草、摆台、补充餐具及服务吧台物资、提供水/咖啡/调味品等餐饮协助为定义。24项任务为16核心、7补充和1新任务；操作收银机为核心（重要性88），不是一律只能协助收银。混合准备调饮配料、切水果配饰等列补充任务；三明治准备为新任务且重要性未提供，不填0。任务可能与其他餐饮岗位交叉，实际菜单/酒水操作、点单、收款退款和服务承诺仍按岗位授权及当地规则核。 服务员核心取单席间服务；调酒师混调和供应饮品；厨师烹制，经理计划指挥协调餐饮运营，任务交叉不代表资格互认。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "agent",
+            "directing",
+            "art",
+            "teacher"
           ],
           "type": "prose"
         },
@@ -23033,12 +23040,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "开餐前按标准摆台与补货 → 迎宾并安排就座 → 按订单上菜上饮与协助服务员 → 及时撤餐与清洁 → 补充库存与清理场地 → 登记缺货并交接未完成事项。"
+              "清桌撤餐、摆台补货、供应饮料调味品、协助服务；实际任务也可含收银机操作、饮品配料等。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.process.primary",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23201,12 +23209,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "不得自行更改菜品或酒水配方、不得代替点单人员承诺菜品内容与等待时间、不得在无授权时操作收银与退款、不得省略卫生与清洁要求。"
+              "按实际岗位与当地规则核收款退款、点单、菜单及饮品权限；不得以职业名称排除O*NET已列核心/补充任务。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.boundary.primary",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23313,12 +23322,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按《餐饮服务食品安全操作规范》要求执行：接触直接入口食品的操作人员上岗前应取得健康证明，食品安全管理人员每天上岗前检查健康状况；操作前洗净手部、需要时洗手并消毒，穿戴清洁的工作衣帽、头发不外露、不留长指甲与不涂指甲油；清洁剂与消毒剂按规定浓度与用途使用、分开存放并标识清楚。"
+              "编辑核对具体卫生程序。中国2018《餐饮服务食品安全操作规范》相关要求在第14章，不是第11/12章。14.1.1接触直接入口食品者（含相应加工、传菜、洗消及新/临时人员）先取得健康证明、每年健康检查，必要时临时检查；14.1.2食品安全管理人员每天上岗前检查从业人员健康，发热/腹泻/咽部炎症/皮肤伤口感染等先报告并暂停接触直接入口食品工作，查明原因并治愈相关疾病后才重新上岗，不一律停止全部非接触岗位。14.2培训考核合格方可上岗，企业每年、特定餐饮提供者每半年培训考核。 第14.3—14.5章按区域和任务区分卫生：食品处理区工作帽覆盖头发；专间和明确列举专用操作任务佩戴清洁口罩，其他相应直接入口操作为宜戴，不写所有前厅人员均须口罩。洗手/消毒按是否直接入口及接触污物、钱、手机等具体情形；手套不替代洗手。第10章食品接触餐具洗后使用前消毒，设备/药剂按适用说明；第8.2章顾客在场避免扬尘。工作衣服受污染及时更换，直接入口岗位每天更换为宜；不把建议统一写强制。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.04.answer",
           "source_refs": [
-            "onet"
+            "r5-cn-food"
           ],
           "type": "prose"
         },
@@ -23523,12 +23532,14 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "就餐高峰集中在午市与晚市，常见轮班、周末与节假日上班；节奏由翻台速度与宴会安排决定。"
+              "O*NET工作情境调查：持续行走/跑动88%、持续站立84%、持续用手操作80%、持续接触他人80%；每天面对面69%、室内受控67%、常见PPE57%；身体距离接近触碰53%，团队71%极重要、公众服务61%极重要。愤怒/无礼人员接触14%每天、54%每周但非每天、19%每月；54%不写成每周及以上。周工时71%恰40小时、23%少于40；55%规律、30%不规律、15%季节安排。调查比例非所有雇主要求、个人健康门槛或事故率。 BLS组合档案另有早晚、周末节假日、兼职与季节安排背景，不断言本职业全部同一午晚班。"
             ]
           },
           "id": "actors.display.work_context_block.schedule",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "r5-ooh-parent"
           ],
           "type": "prose"
         },
@@ -23551,12 +23562,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "复核方式含开餐前检查、班中巡检与班末盘点与交接；缺货与破损与设备异常登记后报值班主管。"
+              "编辑建议由主管核开餐检查、异常与交接；法定记录按第15章单位类别/事项核，不称全部动作法定留痕。第7.9章食品留样适用于学校/幼儿园/养老/医疗食堂、中央厨房、集体配送、超过100人建筑工地食堂以及超过100人聚餐或重大活动供餐等指定情形，其他提供者为宜按条件留样；由专人管理记录，不强加所有前厅帮工。第15章记录按单位类别和适用事项建立，不把每次擦桌或每个人都留样写成法定统一要求。电子记录为宜，不证明已采用生成式AI。"
             ]
           },
           "id": "actors.display.work_context_block.review",
           "source_refs": [
-            "onet"
+            "r5-cn-food"
           ],
           "type": "prose"
         },
@@ -23593,12 +23604,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 35-9011.00：2024 年就业约 527,400 人，2024—2034 年增长 5%～6%（快于平均），预计空缺 99,600；准备层级 Job Zone 1-2（SVP 低于 6.0），兴趣代码 RCS。"
+              "美国35-9011当前2025—2035：2025就业546,600→2035预计575,500，净增28,900；BLS表1.2增长5.3%，O*NET全国趋势取整5%，摘要分组5—6%，保留各来源精度。年均95,300空缺含增长与更替，不是十年合计或每年净增；自雇0.1%。全国预测非个人录用概率，也不证明AI就业因果。 美国BLS表1.2典型入门为无正式教育凭证、相关工作经验None、短期在岗训练。O*NET Job Zone1—2、SVP低于6；几天到一年是该准备组说明，不是本职业每位雇主固定培训期。74%高中/同等、22%高中以下、2%高中后证书是对新入职所需学历的受访意见，非雇主占比、员工学历或中国门槛。未逐核各州酒精服务年龄、培训、许可及雇主条件。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.onet",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -23607,12 +23621,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "工资为 OEWS 2025 年 5 月口径：中位 33,980 美元/年（16.34 美元/时）；年度分位 21,300／28,330／33,980／37,250／46,570 美元。BLS 职业展望本职业页本轮不可用，未引用其数值。"
+              "美国35-9011.00，2025年5月全国工资10/25/50/75/90分位：年21,300/28,330/33,980/37,250/46,570美元；时10.24/13.62/16.34/17.91/22.39美元。OEWS直时税前工资包含小费、基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金及自雇；不笼统排除全部津贴或全部合同雇员。分位非起薪、年限、到手收入或待遇保证。 当前BLS组合OOH含本职业明细，组合总量和行业时薪不当本职业。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
           "source_refs": [
-            "onet"
+            "bls",
+            "r5-oews-concepts",
+            "r5-ooh-parent"
           ],
           "type": "prose"
         },
@@ -23621,12 +23637,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "主要行业为住宿与食品服务业；常见岗位含 Barback、Busser、Dining Room Attendant、Food Service Aide 等，多为按小时计酬的班次岗位。"
+              "O*NET2025主要行业住宿与食品服务83%，职业就业行业份额非薪酬或雇主调查。岗位名Barback/Busser等为示例，不等所有餐厅同一权限。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -23635,12 +23652,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆相关口径为《餐厅服务员国家职业技能标准（2020 年版）》（职业编码 4-03-02-05，五级—一级）与《餐饮服务食品安全操作规范》；该标准面向餐厅服务员，与本页前厅协助层级相关但不完全等同。"
+              "餐厅服务员2020标准4-03-02-05，初中/相当文化、五级至一级；定义含排座点菜配菜、宴会设计布置等，比美国协助细类更宽，非一一互认。五级可按规定培训结业或累计相关工作1年分支申报；四级有五级后4年、累计6年或规定学校等分支，三级有四级后5年、相关学校/专业或相关专科加四级后2年等分支，二/一级再按相应经验与学校条件。260/240/200/100/100为各等级参考学时，不套所有分支或日历时长；理论/技能及适用综合评审各60，技师/高技含综合评审。目标评价机构当前申报、费用、补贴和岗位是否要求证书未逐核，证书不自动带来工资/录用或酒精服务权限。 中国2018《餐饮服务食品安全操作规范》相关要求在第14章，不是第11/12章。14.1.1接触直接入口食品者（含相应加工、传菜、洗消及新/临时人员）先取得健康证明、每年健康检查，必要时临时检查；14.1.2食品安全管理人员每天上岗前检查从业人员健康，发热/腹泻/咽部炎症/皮肤伤口感染等先报告并暂停接触直接入口食品工作，查明原因并治愈相关疾病后才重新上岗，不一律停止全部非接触岗位。14.2培训考核合格方可上岗，企业每年、特定餐饮提供者每半年培训考核。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
           "source_refs": [
-            "onet"
+            "r5-cn-standard",
+            "r5-cn-food"
           ],
           "type": "prose"
         },
@@ -23649,12 +23667,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "本页不使用演员工会或影视行业口径；来源与使用边界见来源登记。"
+              "未取得本职业生成式AI采用率、节时/差错效果、替代率或工资因果。O*NET软件示例有POS、Windows、Excel、Facebook，2025美国关联本职业全部唯一招聘帖中Excel关键词1%，Windows/Facebook Not available不是0；工具清单或关键词非普遍采用/GenAI证据。机器清洗、POS与生成式AI分开核。ILO2025为任务暴露研究，未核该细类与ISCO精确映射及评分；NIST AI RMF1.0是自愿风险框架，不授予食品、收银或退款操作权限。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
           "source_refs": [
-            "onet"
+            "r5-nist-current",
+            "r5-ilo-current",
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -23663,12 +23683,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页精确对应美国 O*NET 35-9011.00 Dining Room and Cafeteria Attendants and Bartender Helpers：协助餐饮服务——清洁餐桌、撤走脏餐具、更换脏布草、摆台、补充干净布草与银器与玻璃器皿与餐盘、为服务吧台补充食物，并向顾客提供冰水与咖啡与调味品等；属前厅执行与协助层级，不承担点单、酒水配方与门店管理责任。"
+              "本职业以清桌、撤餐、换布草、摆台、补充餐具及服务吧台物资、提供水/咖啡/调味品等餐饮协助为定义。24项任务为16核心、7补充和1新任务；操作收银机为核心（重要性88），不是一律只能协助收银。混合准备调饮配料、切水果配饰等列补充任务；三明治准备为新任务且重要性未提供，不填0。任务可能与其他餐饮岗位交叉，实际菜单/酒水操作、点单、收款退款和服务承诺仍按岗位授权及当地规则核。"
             ]
           },
           "id": "actors.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         }
@@ -24136,13 +24157,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以下为基于职业任务与工作情境的有限编辑推演，并非该职业的实际部署证据：AI 与信息系统在前厅服务里主要辅助排班、库存与点单信息的传递与整理。"
+              "未取得本职业生成式AI采用率、节时/差错效果、替代率或工资因果。O*NET软件示例有POS、Windows、Excel、Facebook，2025美国关联本职业全部唯一招聘帖中Excel关键词1%，Windows/Facebook Not available不是0；工具清单或关键词非普遍采用/GenAI证据。机器清洗、POS与生成式AI分开核。ILO2025为任务暴露研究，未核该细类与ISCO精确映射及评分；NIST AI RMF1.0是自愿风险框架，不授予食品、收银或退款操作权限。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.1",
           "source_refs": [
+            "r5-nist-current",
+            "r5-ilo-current",
             "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24151,13 +24175,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采用取决于设备与系统集成、门店规模、数据准确性、隐私与顾客体验，以及机构是否完成培训与验证。"
+              "编辑采用核查问题：设备与系统兼容、数据可靠性、隐私、顾客体验、成本和操作者训练是否满足实际用途？本轮未取代表性采用调查，这些不是已经证明的采用决定因素。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current",
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24166,13 +24190,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "自动排班与库存提醒可辅助安排，但翻台节奏、临时缺货与顾客现场需求仍须由带班与主管现场判断。"
+              "条件情景：若获准系统确实提供经验证的排班或库存提醒，可研究辅助用途；本轮未核逐产品功能与效果。实际翻台、缺货与顾客需求的处理责任仍按单位分工，不把普通自动化等同生成式AI。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24181,13 +24205,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "点单与结账系统可减少手工差错，但订单确认、过敏原信息的传达与收银授权的责任仍在人与机构制度。"
+              "POS是已列软件示例，但未取得本职业差错减少幅度；核实际系统与人员的订单确认、过敏原传达及收款权限。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24196,28 +24220,27 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "清洁与设备的自动化（如洗碗机与消毒设备）提高效率，但个人卫生、洗手消毒与清洗消毒与留样等要求不能被系统替代。"
+              "设备洗涤与生成式AI分别核；食品要求依实际任务/区域执行，留样和记录按单位类别/专人职责核，不推导已节时效果。第7.9章食品留样适用于学校/幼儿园/养老/医疗食堂、中央厨房、集体配送、超过100人建筑工地食堂以及超过100人聚餐或重大活动供餐等指定情形，其他提供者为宜按条件留样；由专人管理记录，不强加所有前厅帮工。第15章记录按单位类别和适用事项建立，不把每次擦桌或每个人都留样写成法定统一要求。电子记录为宜，不证明已采用生成式AI。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-food"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "顾客沟通、安抚与突发状况（洒落、投诉与拥挤）需要现场人际判断，难以完全交给系统。"
+              "编辑风险判断：现场顾客沟通、投诉和突发情况需核实际处理分工；未核所有场景必由人或全部不能自动化，不能由模型草稿授权退款/食品操作。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24226,13 +24249,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "排班与考勤与销售数据涉及个人信息，只能在机构批准的系统内按最小必要原则处理并留痕。"
+              "中国个人信息保护法按合法依据、明确合理目的、最小必要、告知及安全责任处理顾客/员工数据；健康等敏感信息另核充分必要、严格保护及适用单独同意/影响评估，其他法定依据另核。机构批准账户不自动允许外部AI上传；去标识非匿名化。订单是否个人信息看可识别性，不一律禁止所有业务以外合法处理。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -24241,13 +24263,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "最终的服务质量与食品安全责任、以及异常与越权的处置，由带班、主管与机构承担并留痕。"
+              "组织应按实际法域和岗位明确责任、异常上报与适用记录；未核所有责任只归主管，风险框架不替代食品法规或单位规程。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-food",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24256,13 +24278,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "国际劳工组织等研究把「任务暴露」与「实际采用、岗位增减」分开；本页没有本职业的采用率、裁员率或因果就业证据，这些数字保持未知，须以具体机构与岗位验证。"
+              "本职业以清桌、撤餐、换布草、摆台、补充餐具及服务吧台物资、提供水/咖啡/调味品等餐饮协助为定义。24项任务为16核心、7补充和1新任务；操作收银机为核心（重要性88），不是一律只能协助收银。混合准备调饮配料、切水果配饰等列补充任务；三明治准备为新任务且重要性未提供，不填0。任务可能与其他餐饮岗位交叉，实际菜单/酒水操作、点单、收款退款和服务承诺仍按岗位授权及当地规则核。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.9",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24286,13 +24308,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 可辅助排班、库存与点单信息与清洁设备调度，但不能替代现场判断、个人卫生与食品安全责任、以及顾客沟通与服务交付。"
+              "编辑可测试文本整理等辅助功能，但未取得本职业部署效果或替代结论；实际流程、卫生和服务权限分别核。未取得本职业生成式AI采用率、节时/差错效果、替代率或工资因果。O*NET软件示例有POS、Windows、Excel、Facebook，2025美国关联本职业全部唯一招聘帖中Excel关键词1%，Windows/Facebook Not available不是0；工具清单或关键词非普遍采用/GenAI证据。机器清洗、POS与生成式AI分开核。ILO2025为任务暴露研究，未核该细类与ISCO精确映射及评分；NIST AI RMF1.0是自愿风险框架，不授予食品、收银或退款操作权限。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current",
+            "r5-ilo-current",
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24321,8 +24344,7 @@
           },
           "id": "actors.display.ai_impact_table.evidence.1.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24346,13 +24368,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS OEWS 工资与就业预测"
+              "BLS本职业就业预测与典型训练"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -24376,13 +24398,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 治理与风险管理来源"
+              "NIST AI风险管理框架"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24391,13 +24412,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "治理原则供参考：透明、隐私、人工监督与留痕。"
+              "NIST AI RMF1.0自愿治理框架用于限定用途和复核，不规定中国食品作业或人事权限。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24421,13 +24441,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业与用工结构来源"
+              "O*NET本职业主要就业行业"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24436,13 +24456,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "说明本职业以住宿与食品服务业为主、按小时与班次计酬。"
+              "2025住宿食品服务占本职业就业83%；行业份额不表示AI采用或个人收入。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24466,13 +24486,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合（本页说明与练习设计）"
+              "O*NET招聘技术关键词"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24481,13 +24500,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅用于整理本页的说明与练习边界。"
+              "O*NET2025关联本职业全部唯一招聘帖Excel1%；其余Not available非0，无生成式AI采用结论。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24496,13 +24514,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合不是外部事实、资格、法规或工资证据。"
+              "关键词分母是本职业全部唯一招聘帖，非软件使用者/含技术帖；缺失非0，未证明已采用生成式AI。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24526,13 +24543,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能从任务暴露推导替代日期；现场服务、卫生与安全与顾客沟通仍由人负责。"
+              "未取得本职业生成式AI采用率、节时/差错效果、替代率或工资因果。O*NET软件示例有POS、Windows、Excel、Facebook，2025美国关联本职业全部唯一招聘帖中Excel关键词1%，Windows/Facebook Not available不是0；工具清单或关键词非普遍采用/GenAI证据。机器清洗、POS与生成式AI分开核。ILO2025为任务暴露研究，未核该细类与ISCO精确映射及评分；NIST AI RMF1.0是自愿风险框架，不授予食品、收银或退款操作权限。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.1.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current",
+            "r5-ilo-current",
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24556,13 +24574,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先限定在排班、库存与点单信息与清洁设备调度等可复核环节。"
+              "编辑试用建议：可从虚构补货/交接文本开始，核工具是否支持任务；未核真实排班优化、设备调度或节時功能。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24631,13 +24650,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能；工资与排班由机构制度与用工安排与当地法规决定。"
+              "工资、排班应按合法依据和真实用工安排核，不能从AI草稿自动推出授权；涉及对个人权益重大影响的自动化决策另核适用法，不一概禁止所有辅助计算。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24661,13 +24680,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只在机构批准的系统内按最小必要处理，不用于服务以外用途。"
+              "中国个人信息保护法按合法依据、明确合理目的、最小必要、告知及安全责任处理顾客/员工数据；健康等敏感信息另核充分必要、严格保护及适用单独同意/影响评估，其他法定依据另核。机构批准账户不自动允许外部AI上传；去标识非匿名化。订单是否个人信息看可识别性，不一律禁止所有业务以外合法处理。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.6.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -24691,13 +24709,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用可比班次的服务时效、错漏率与库存差异做前后对照，并保留人工复核记录。"
+              "编辑试用建议：在获准范围记录可比班次的时效、错漏与库存差异作初筛，并核客流、任务、班次与人员变化等混杂因素。简单前后变化不能单独证明AI造成效果，也不签食品安全效果；实际复核依适用规程。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.7.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24726,8 +24743,7 @@
           },
           "id": "actors.display.ai_impact_table.authority.onet.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24736,13 +24752,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合"
+              "官方招聘技术关键词"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24751,13 +24766,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅用于本页 AI 边界的说明，不代表采用率或替代结论。"
+              "未取得本职业生成式AI采用率、节时/差错效果、替代率或工资因果。O*NET软件示例有POS、Windows、Excel、Facebook，2025美国关联本职业全部唯一招聘帖中Excel关键词1%，Windows/Facebook Not available不是0；工具清单或关键词非普遍采用/GenAI证据。机器清洗、POS与生成式AI分开核。ILO2025为任务暴露研究，未核该细类与ISCO精确映射及评分；NIST AI RMF1.0是自愿风险框架，不授予食品、收银或退款操作权限。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -24766,13 +24780,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "北美行业口径（不适用于本职业）"
+              "国际劳工组织任务暴露研究"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag"
           ],
           "type": "prose"
         },
@@ -24781,13 +24794,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用演员工会或影视行业口径，仅登记其不适用。"
+              "ILO2025研究，不是演员工会；本轮未核本职业精确映射/评分，不推导采用、裁员或替代日期。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag"
           ],
           "type": "prose"
         },
@@ -24796,13 +24808,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "北美行业口径（不适用于本职业）"
+              "官方职业详细档案"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24811,13 +24822,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用该口径，仅登记其不适用。"
+              "本职业以清桌、撤餐、换布草、摆台、补充餐具及服务吧台物资、提供水/咖啡/调味品等餐饮协助为定义。24项任务为16核心、7补充和1新任务；操作收银机为核心（重要性88），不是一律只能协助收银。混合准备调饮配料、切水果配饰等列补充任务；三明治准备为新任务且重要性未提供，不填0。任务可能与其他餐饮岗位交叉，实际菜单/酒水操作、点单、收款退款和服务承诺仍按岗位授权及当地规则核。 O*NET工作情境调查：持续行走/跑动88%、持续站立84%、持续用手操作80%、持续接触他人80%；每天面对面69%、室内受控67%、常见PPE57%；身体距离接近触碰53%，团队71%极重要、公众服务61%极重要。愤怒/无礼人员接触14%每天、54%每周但非每天、19%每月；54%不写成每周及以上。周工时71%恰40小时、23%少于40；55%规律、30%不规律、15%季节安排。调查比例非所有雇主要求、个人健康门槛或事故率。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -24826,13 +24837,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业发布口径（不适用于本职业）"
+              "职业认证查询入口"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "ratify"
           ],
           "type": "prose"
         },
@@ -24841,13 +24851,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用该口径，仅登记其不适用。"
+              "查询入口不代目标州酒精年龄/许可、雇主训练或中国卫生要求；本轮未逐核所有州。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "ratify"
           ],
           "type": "prose"
         },
@@ -24871,13 +24880,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅按 BLS/OEWS 2025 年工资与 2024—2034 年预测口径使用。"
+              "美国35-9011.00，2025年5月全国工资10/25/50/75/90分位：年21,300/28,330/33,980/37,250/46,570美元；时10.24/13.62/16.34/17.91/22.39美元。OEWS直时税前工资包含小费、基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金及自雇；不笼统排除全部津贴或全部合同雇员。分位非起薪、年限、到手收入或待遇保证。 就业预测另用BLS表1.2，工资页不同时提供就业预测。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -25111,13 +25122,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "设备可提升清洗与消毒效率"
+              "洗涤设备支持任务执行；未取得本职业节时/安全效果或生成式AI应用证据。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25186,13 +25197,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "健康证明、晨检与个人卫生要求不能交给系统。"
+              "食品安全管理人员按适用规范履行上岗前健康检查责任；系统可否辅助记录须核真实功能与规程，不能由管理责任推出绝对禁止辅助，也不能让系统记录替实际检查。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-food"
           ],
           "type": "prose"
         },
@@ -25201,13 +25211,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "收银协助"
+              "收银操作与协助"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.direction",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25231,13 +25241,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "POS 可减少手工差错"
+              "POS列职业软件示例；未核本职业差错减少效果，不当生成式AI采用证据。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25441,13 +25451,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "清洗消毒与收银效率"
+              "机器洗涤与POS辅助分别核功能和实际效果，非生成式AI效果证明。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.2.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -25786,13 +25796,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按操作规范执行并保留清洗消毒与留样记录。"
+              "按第10、15章与具体单位规程核清洗消毒及适用记录；食品留样按第7.9章指定场景/专人管理，不要求所有帮工都留样。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.3.control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-food"
           ],
           "type": "prose"
         },
@@ -25831,13 +25840,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只在批准的系统内按最小必要处理。"
+              "中国个人信息保护法按合法依据、明确合理目的、最小必要、告知及安全责任处理顾客/员工数据；健康等敏感信息另核充分必要、严格保护及适用单独同意/影响评估，其他法定依据另核。机构批准账户不自动允许外部AI上传；去标识非匿名化。订单是否个人信息看可识别性，不一律禁止所有业务以外合法处理。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.4.control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -26019,12 +26027,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与中国大陆「餐厅与食堂服务员帮工」精确对应的全国单职业工资口径。中国大陆公开工资资料按行业与单位类型统计，未建立与美国 O*NET 35-9011.00 一一对应的全国职业工资分布。"
+              "证据不足：本轮未取得与35-9011.00精确对应的中国大陆全国职业工资分布；不据一份行业表断言全部公开资料最高只到行业。国家统计局2025住宿和餐饮业城镇非私营62,461/私营55,123元税前年平均；覆盖行业内多职业，为相关单位背景，不是本职业中位、起薪或岗位月薪。调查城镇5人以上法人，非私营不只国企，排除个体/自由职业等；学校/医院自身食堂未必属于住宿餐饮单位，不套全部场景。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26075,12 +26083,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "计酬口径常见差异：有的按小时、有的按月，有的含全勤与提成，有的把工作餐与住宿折算成福利；比较时必须先确认统计量与工时，再作比较。"
+              "编辑核对真实合同基本工资、补贴、绩效、小费/服务费分配是否适用，以及工作餐住宿属于福利还是收费/扣款；未采代表性中国招聘样本，不称普遍按某一组合计酬。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26131,26 +26139,27 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "真实岗位的计酬常由「基本工资＋班次补贴＋全勤或绩效＋小费或提成（如适用）＋工作餐或住宿折算」构成，不同餐厅与食堂差别较大。"
+              "编辑逐项核真实工资、工时、补贴绩效及福利/扣费，未核中国小费/提成普遍存在；餐住宿不直接折成现金工资。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业平均工资覆盖的是行业就业人员，不等于本职业的岗位工资，也不覆盖个体经营与零星用工。"
+              "国家统计局2025住宿和餐饮业城镇非私营62,461/私营55,123元税前年平均；覆盖行业内多职业，为相关单位背景，不是本职业中位、起薪或岗位月薪。调查城镇5人以上法人，非私营不只国企，排除个体/自由职业等；学校/医院自身食堂未必属于住宿餐饮单位，不套全部场景。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -26159,28 +26168,30 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "宴会与自助餐场景存在明显的旺季与淡季，计酬会随排班与加班安排变化。"
+              "编辑核宴会/自助餐岗位当前排班、工时和计酬，本轮无中国场景代表性样本或季节工资量化。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆未发布与美国 35-9011.00 一一对应的全国职业工资分布，因此不给出中位数或分位数。"
+              "证据不足：本轮未取得全国精确职业分布；不是断言国家未发布任何细分类资料。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
           "source_refs": [
-            "sag-moa"
+            "r5-nbs-current"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -26201,12 +26212,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与信息系统可辅助排班、库存与点单，但工资与录用结论不由此产生；本页只说明口径与边界。"
+              "没有本职业中国AI工资因果证据；系统或设备辅助建议不能推出涨薪或录用。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
           "source_refs": [
-            "sag-moa"
+            "r5-nist-current",
+            "r5-ilo-current",
+            "r2-ai"
           ],
           "type": "prose"
         },
@@ -26402,13 +26415,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024 年就业约 527,400 人，2024—2034 年预计增长 5%～6%（快于平均），预计空缺 99,600；空缺同时包含增长与更替，不是净增岗位。"
+              "美国35-9011当前2025—2035：2025就业546,600→2035预计575,500，净增28,900；BLS表1.2增长5.3%，O*NET全国趋势取整5%，摘要分组5—6%，保留各来源精度。年均95,300空缺含增长与更替，不是十年合计或每年净增；自雇0.1%。全国预测非个人录用概率，也不证明AI就业因果。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.project",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -26432,13 +26445,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "主要行业为住宿与食品服务业；多数岗位按小时计酬并按班次排班，部分含小费或服务费分配。"
+              "O*NET2025住宿与食品服务行业占本职业就业83%，非行业工资。美国35-9011当前2025—2035：2025就业546,600→2035预计575,500，净增28,900；BLS表1.2增长5.3%，O*NET全国趋势取整5%，摘要分组5—6%，保留各来源精度。年均95,300空缺含增长与更替，不是十年合计或每年净增；自雇0.1%。全国预测非个人录用概率，也不证明AI就业因果。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -26447,13 +26462,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "教育反馈：74% 要求高中或同等学历，22% 高中以下即可，2% 要求中学后证书；在职培训通常从几天到一年。"
+              "美国BLS表1.2典型入门为无正式教育凭证、相关工作经验None、短期在岗训练。O*NET Job Zone1—2、SVP低于6；几天到一年是该准备组说明，不是本职业每位雇主固定培训期。74%高中/同等、22%高中以下、2%高中后证书是对新入职所需学历的受访意见，非雇主占比、员工学历或中国门槛。未逐核各州酒精服务年龄、培训、许可及雇主条件。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa",
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -26477,13 +26494,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本职业以受雇岗位为主，自营比例很低；自营或承包岗位的收入口径与受雇工资不可直接比较。"
+              "BLS表1.2本职业2025自雇0.1%；就业预测与OEWS受雇工资覆盖不同，不拿自营净收入和工资直接比。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
           "source_refs": [
+            "r5-bls-current",
+            "r5-trends-current",
             "bls",
-            "oews"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26567,13 +26586,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国统计不代表中国职业工资或就业结果；BLS 职业展望本职业页本轮不可用，本页未引用其数值。"
+              "美国35-9011.00，2025年5月全国工资10/25/50/75/90分位：年21,300/28,330/33,980/37,250/46,570美元；时10.24/13.62/16.34/17.91/22.39美元。OEWS直时税前工资包含小费、基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金及自雇；不笼统排除全部津贴或全部合同雇员。分位非起薪、年限、到手收入或待遇保证。 美国35-9011当前2025—2035：2025就业546,600→2035预计575,500，净增28,900；BLS表1.2增长5.3%，O*NET全国趋势取整5%，摘要分组5—6%，保留各来源精度。年均95,300空缺含增长与更替，不是十年合计或每年净增；自雇0.1%。全国预测非个人录用概率，也不证明AI就业因果。 BLS组合档案明确含本职业，但其组合总量/行业时薪不套本职业。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.boundary.detail",
           "source_refs": [
             "bls",
-            "oews"
+            "r5-oews-concepts",
+            "r5-bls-current",
+            "r5-trends-current",
+            "r5-ooh-parent"
           ],
           "type": "prose"
         }
@@ -26730,12 +26752,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "官方兴趣代码 RCS（现实型、常规型、社会型）：以体力与手工劳动、按流程核对、以及直接为顾客提供个人服务为主。"
+              "O*NET兴趣R77/C60/S44/E21/A0/I0，RCS保留；是职业兴趣维度评分，非从业人群比例、能力或个人录用门槛。"
             ]
           },
           "id": "actors.display.riasec_fit_block.interest",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -26786,12 +26809,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "这是工作样本与现场观察核对，不是人格诊断或录用结论。"
+              "兴趣和人格测试仅探索线索；站立耐受、排班适应及操作准确用真实条件/反馈核，不由测试或纸面作品认定身体能力、岗位资格或录用。O*NET工作风格合作71/可靠69/社交49/细节43/自控36/抗压34为Impact评分，非大五/IQ/EQ量表或人群比例。"
             ]
           },
           "id": "actors.display.personality_fit_block.boundary",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -27458,12 +27482,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "清洁与卫生"
+              "服务员：订单与席间服务"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.direction",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27472,12 +27496,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否按规范洗手消毒与使用消毒剂"
+              "编辑任务对照：核菜单沟通、取单及完整席间服务责任"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.signals",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27486,12 +27510,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不可跳过安全与清洁步骤。"
+              "原链接目标是服务员，不是独立清洁岗位。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.agent.watchouts",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27500,12 +27524,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "库存与补货"
+              "调酒师：配方与饮品服务"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.direction",
           "source_refs": [
-            "onet"
+            "directing"
           ],
           "type": "prose"
         },
@@ -27514,12 +27538,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否按班次盘点并登记缺货与破损"
+              "编辑任务对照：核饮品调制供应及实际酒精服务规则"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.signals",
           "source_refs": [
-            "onet"
+            "directing"
           ],
           "type": "prose"
         },
@@ -27528,12 +27552,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "保留盘点与交接记录。"
+              "吧台补货经验可衔接，不自动符合目标法域资格。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.watchouts",
           "source_refs": [
-            "onet"
+            "directing"
           ],
           "type": "prose"
         },
@@ -27542,12 +27566,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "收银协助"
+              "餐厅厨师：烹制与出品"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.direction",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         },
@@ -27556,12 +27580,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否在授权范围内配合结账"
+              "编辑任务对照：核备料调味烹制及设备和出品节奏"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.signals",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         },
@@ -27570,12 +27594,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不得无授权操作退款与折扣。"
+              "目标厨师而非收银，现有交接经验不代烹饪能力。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.watchouts",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         },
@@ -27584,12 +27608,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "长期适应"
+              "餐饮经理：组织与经营"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.direction",
           "source_refs": [
-            "onet"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -27598,12 +27622,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能否长期适应站立与轮班与高峰节奏"
+              "编辑任务对照：核人员、成本、质量和运营协调"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.signals",
           "source_refs": [
-            "onet"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -27612,12 +27636,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "注意自身健康与作息安排。"
+              "目标经理而非长期身体耐受；未核固定晋升时长或录用。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.watchouts",
           "source_refs": [
-            "onet"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -27738,12 +27762,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "有：需穿戴清洁的工作衣帽、头发不外露、不留长指甲与不涂指甲油、饰物不外露；接触直接入口食品的岗位须持健康证明并通过每日晨检。"
+              "中国规范一般要求清洁工作服、不得披散头发及指甲饰物卫生；食品处理区还要求工作帽遮全部头发。健康证明按接触直接入口任务适用，每日上岗前健康检查由食品安全管理人员履行；不把所有前厅岗位统一成同一衣帽或证照条件。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.appearance.answer",
           "source_refs": [
-            "onet"
+            "r5-cn-food"
           ],
           "type": "prose"
         },
@@ -27878,12 +27902,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "BLS/OEWS：用于说明工资与就业口径与统计位置。"
+              "本来源是O*NET展示的全国工资统计；就业预测须另查BLS表1.2，不把工资页面证明任务或资格。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.bls",
           "source_refs": [
-            "onet"
+            "bls",
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -27920,12 +27945,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻岗位对照（服务员）：用于说明点单与订单责任的差异。"
+              "相邻服务员档案用于点单与席间服务任务比较，不作全部法域权限或直接转岗证据。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.agent",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27934,12 +27959,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻岗位对照（调酒师与厨师）：用于说明配方与出品责任的差异。"
+              "实际链接为餐饮服务经理档案，用于组织协调管理任务比较，不是调酒师或厨师任务原文。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.teacher",
           "source_refs": [
-            "onet"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -27948,12 +27973,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "食品安全与卫生规范（如《餐饮服务食品安全操作规范》）：用于说明健康证明、晨检与个人卫生要求。"
+              "餐饮食品规范按任务和区域支持健康与卫生要求；不由本岗美国档案推中国统一条件。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.enrichment",
           "source_refs": [
-            "onet"
+            "r5-cn-food"
           ],
           "type": "prose"
         },
@@ -27984,13 +28009,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "食品与个人卫生风险：接触直接入口食品的岗位未取得健康证明、未通过每日晨检，或简化洗手消毒与工作衣帽要求。"
+              "中国餐饮场景的食品与个人卫生风险：实际接触直接入口食品的岗位未满足相应健康管理条件，或忽略适用区域的衣帽、手卫生要求；具体适用按规范和任务核，ILO/NIST不代食品法规。"
             ]
           },
           "id": "actors.risk.career-risk-cards.1",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-food"
           ],
           "type": "prose"
         },
@@ -28104,13 +28128,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险项按本职业内容与所列来源（O*NET 工作情境、《餐饮服务食品安全操作规范》与机构制度）边界解释。"
+              "O*NET工作情境调查：持续行走/跑动88%、持续站立84%、持续用手操作80%、持续接触他人80%；每天面对面69%、室内受控67%、常见PPE57%；身体距离接近触碰53%，团队71%极重要、公众服务61%极重要。愤怒/无礼人员接触14%每天、54%每周但非每天、19%每月；54%不写成每周及以上。周工时71%恰40小时、23%少于40；55%规律、30%不规律、15%季节安排。调查比例非所有雇主要求、个人健康门槛或事故率。 中国2018《餐饮服务食品安全操作规范》相关要求在第14章，不是第11/12章。14.1.1接触直接入口食品者（含相应加工、传菜、洗消及新/临时人员）先取得健康证明、每年健康检查，必要时临时检查；14.1.2食品安全管理人员每天上岗前检查从业人员健康，发热/腹泻/咽部炎症/皮肤伤口感染等先报告并暂停接触直接入口食品工作，查明原因并治愈相关疾病后才重新上岗，不一律停止全部非接触岗位。14.2培训考核合格方可上岗，企业每年、特定餐饮提供者每半年培训考核。 第7.9章食品留样适用于学校/幼儿园/养老/医疗食堂、中央厨房、集体配送、超过100人建筑工地食堂以及超过100人聚餐或重大活动供餐等指定情形，其他提供者为宜按条件留样；由专人管理记录，不强加所有前厅帮工。第15章记录按单位类别和适用事项建立，不把每次擦桌或每个人都留样写成法定统一要求。电子记录为宜，不证明已采用生成式AI。"
             ]
           },
           "id": "actors.display.career_risk_cards.evidence-scope",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "sag-moa",
+            "r5-cn-food"
           ],
           "type": "prose"
         },
@@ -28299,13 +28324,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "班次临时取消、加班与工时记录不清、或小费与提成分配口径不透明。"
+              "编辑核班次取消、实际工时与工资/小费规则，不从食品规范推劳动报酬法律结论；本轮未核各地工时、最低工资和小费制度。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-income.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -28419,13 +28444,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "顾客个人信息与订单与库存数据被不当记录或对外提供。"
+              "编辑风险情景：可识别顾客/员工数据未经合法依据或超目的提供给外部工具；库存商业信息与个人信息分开识别。中国个人信息保护法按合法依据、明确合理目的、最小必要、告知及安全责任处理顾客/员工数据；健康等敏感信息另核充分必要、严格保护及适用单独同意/影响评估，其他法定依据另核。机构批准账户不自动允许外部AI上传；去标识非匿名化。订单是否个人信息看可识别性，不一律禁止所有业务以外合法处理。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -28509,13 +28533,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS/OEWS 与 O*NET：用于工资、就业与工作情境口径。"
+              "卡片环境风险用O*NET任务/情境；工资页不证明风险发生率。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.bls",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28524,13 +28548,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "机构岗位说明与排班与安全制度：用于职责边界、班次与现场安全。"
+              "本轮未采雇主规程；BLS组合OOH仅组级站立、搬运、排班及伤害风险背景，不冒充雇主制度。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.employer",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-ooh-parent"
           ],
           "type": "prose"
         },
@@ -28539,13 +28562,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "《餐饮服务食品安全操作规范》：用于健康证明、每日晨检、个人卫生与清洗消毒等要求。"
+              "中国2018《餐饮服务食品安全操作规范》相关要求在第14章，不是第11/12章。14.1.1接触直接入口食品者（含相应加工、传菜、洗消及新/临时人员）先取得健康证明、每年健康检查，必要时临时检查；14.1.2食品安全管理人员每天上岗前检查从业人员健康，发热/腹泻/咽部炎症/皮肤伤口感染等先报告并暂停接触直接入口食品工作，查明原因并治愈相关疾病后才重新上岗，不一律停止全部非接触岗位。14.2培训考核合格方可上岗，企业每年、特定餐饮提供者每半年培训考核。 第14.3—14.5章按区域和任务区分卫生：食品处理区工作帽覆盖头发；专间和明确列举专用操作任务佩戴清洁口罩，其他相应直接入口操作为宜戴，不写所有前厅人员均须口罩。洗手/消毒按是否直接入口及接触污物、钱、手机等具体情形；手套不替代洗手。第10章食品接触餐具洗后使用前消毒，设备/药剂按适用说明；第8.2章顾客在场避免扬尘。工作衣服受污染及时更换，直接入口岗位每天更换为宜；不把建议统一写强制。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.cn-rule",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-food"
           ],
           "type": "prose"
         },
@@ -28554,13 +28576,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "不使用影视或演员工会口径；仅登记其不适用。"
+              "链接实际O*NET35-9011详细档案，支持任务与情境，不是影视或演员工会。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.sag",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -28569,13 +28591,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "AI 风险管理框架：用于说明系统辅助的治理边界，不构成本职业合规清单。"
+              "本位置链接改为中国个人信息保护法，支持合法依据、目的及安全责任；AI框架不能替代实际数据法要求。中国个人信息保护法按合法依据、明确合理目的、最小必要、告知及安全责任处理顾客/员工数据；健康等敏感信息另核充分必要、严格保护及适用单独同意/影响评估，其他法定依据另核。机构批准账户不自动允许外部AI上传；去标识非匿名化。订单是否个人信息看可识别性，不一律禁止所有业务以外合法处理。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.nist",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         }
@@ -28592,14 +28613,16 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘公告中的学历、专业、经验与放宽关系必须逐条读取；本职业多数岗位以在职培训与带教上手，一项可放宽不代表其他条件（如健康证明或卫生要求）可替代。"
+              "美国BLS表1.2典型入门为无正式教育凭证、相关工作经验None、短期在岗训练。O*NET Job Zone1—2、SVP低于6；几天到一年是该准备组说明，不是本职业每位雇主固定培训期。74%高中/同等、22%高中以下、2%高中后证书是对新入职所需学历的受访意见，非雇主占比、员工学历或中国门槛。未逐核各州酒精服务年龄、培训、许可及雇主条件。 编辑核实际岗位职责、班次、卫生健康和雇主条件；本轮无代表性招聘样本，典型分类不代岗位公告。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current",
+            "r5-trends-current",
+            "r5-cn-food"
           ],
           "type": "notice"
         },
@@ -28625,35 +28648,35 @@
               [
                 "前厅服务员（入门）",
                 "按标准摆台与补充餐具与调味品、迎宾与安排就座、上菜上饮与撤餐、清洁与补货。",
-                "能按标准图与清单完成摆台与补货，能在高峰时段保持卫生与安全。",
+                "编辑观察建议，未采雇主样本；按目标岗位培训、健康、酒精服务及安全条件核。",
                 "纸面摆台与上菜练习、受监督班次的带教评语。",
-                "面向顾客的前厅执行与协助，不承担点单与订单责任。"
+                "编辑入门协助示例；真实任务可含收银/服务，根据岗位授权核，不一概排除订单相关职责。"
               ],
               [
                 "传菜与出餐协助",
                 "从出餐口按订单与桌号传菜、核对菜品与数量、保持传菜通道通畅。",
-                "能按订单与桌号准确送达并处理漏单与错单。",
+                "编辑观察建议，未采雇主样本；按目标岗位培训、健康、酒精服务及安全条件核。",
                 "传菜记录与错漏率反馈。",
                 "更侧重订单核对与前后场衔接，与服务员分工协作。"
               ],
               [
                 "吧台协助（barback）",
                 "补充冰块与饮料与酒水库存、清洗玻璃杯与服务设备、维持吧台整洁。",
-                "能按规范清洗玻璃器皿并保持吧台库存不断档。",
+                "编辑观察建议，未采雇主样本；按目标岗位培训、健康、酒精服务及安全条件核。",
                 "吧台补货与清洗记录。",
-                "服务吧台支持，不参与酒水配方决定与出品。"
+                "吧台供应支持；O*NET亦列饮品配料等补充任务，实际酒水操作按授权与法域规则核。"
               ],
               [
                 "自助餐与宴会服务",
                 "布置与补充自助餐台、补充餐盘与餐具、维持取餐动线与清洁。",
-                "能维持自助餐台供应与清洁并处理洒落与短缺。",
+                "编辑观察建议，未采雇主样本；按目标岗位培训、健康、酒精服务及安全条件核。",
                 "自助餐台布置与补货记录。",
                 "面向批量与宴会场景，节奏更集中。"
               ],
               [
                 "清洁与后勤协助",
                 "清洁与抛光柜台与设备、拖地吸尘、运送布草、维护洗涤与库房区域。",
-                "能按清洁与消毒规范完成区域与设备清洁并留痕。",
+                "编辑观察建议，未采雇主样本；按目标岗位培训、健康、酒精服务及安全条件核。",
                 "清洁与消毒记录与检查结果。",
                 "偏后场与后勤，与洗碗与保洁岗位相邻。"
               ]
@@ -28662,8 +28685,8 @@
           "id": "actors.path.entry-role-comparison.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-cn-food"
           ],
           "title": "常见入门方向与初期任务",
           "type": "table"
@@ -28684,7 +28707,7 @@
                 "id": "employer-1",
                 "values": [
                   "健康证明与培训记录",
-                  "能提供有效的健康证明与食品安全培训考核记录。"
+                  "按目标法域与实际任务核：接触直接入口食品工作须满足适用健康证明条件，食品安全培训考核按规范及单位制度；额外企业要求另核，不当所有前厅统一证明。"
                 ]
               },
               {
@@ -28705,9 +28728,8 @@
           },
           "id": "actors.path.employer-evidence.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-cn-food"
           ],
           "title": "雇主与机构会核对什么",
           "type": "cards"
@@ -28836,9 +28858,9 @@
                 "接触直接入口食品的前厅与传菜与洗消岗位",
                 "上岗硬条件：未取得健康证明不得从事接触直接入口食品的工作。",
                 "是：如从事接触直接入口食品工作须取得健康证明。",
-                "按当地要求进行健康检查并取得证明；每年检查一次，必要时临时检查。",
+                "中国2018《餐饮服务食品安全操作规范》相关要求在第14章，不是第11/12章。14.1.1接触直接入口食品者（含相应加工、传菜、洗消及新/临时人员）先取得健康证明、每年健康检查，必要时临时检查；14.1.2食品安全管理人员每天上岗前检查从业人员健康，发热/腹泻/咽部炎症/皮肤伤口感染等先报告并暂停接触直接入口食品工作，查明原因并治愈相关疾病后才重新上岗，不一律停止全部非接触岗位。14.2培训考核合格方可上岗，企业每年、特定餐饮提供者每半年培训考核。",
                 "体检与办证的时间与费用。",
-                "健康证明只反映当时的健康状况，日常仍须每日晨检与个人卫生管理。"
+                "健康证明不免日常检查；有症状先按第14.1.2章报告和调整直接入口工作，不由个人自行授权恢复。"
               ],
               [
                 "食品安全培训考核合格",
@@ -28852,18 +28874,18 @@
               [
                 "餐厅服务员职业技能等级证书（中国大陆，五级—一级）",
                 "希望系统学习前厅服务并获得技能等级凭证的人",
-                "求职加分：有助于证明服务技能，但不是准入类资格。",
-                "否：该职业不在准入类职业资格目录之列。",
-                "按《餐厅服务员国家职业技能标准（2020 年版）》分级申报，由备案的评价机构考核。",
-                "培训学时（五级不少于 260 标准学时等）与考核费用。",
+                "编辑可作技能证据，未核普遍加分、工资或优先录用效果。",
+                "本轮未逐核现行准入目录与每个岗位要求，不据标准推导全国强制/免证结论。",
+                "餐厅服务员2020标准4-03-02-05，初中/相当文化、五级至一级；定义含排座点菜配菜、宴会设计布置等，比美国协助细类更宽，非一一互认。五级可按规定培训结业或累计相关工作1年分支申报；四级有五级后4年、累计6年或规定学校等分支，三级有四级后5年、相关学校/专业或相关专科加四级后2年等分支，二/一级再按相应经验与学校条件。260/240/200/100/100为各等级参考学时，不套所有分支或日历时长；理论/技能及适用综合评审各60，技师/高技含综合评审。目标评价机构当前申报、费用、补贴和岗位是否要求证书未逐核，证书不自动带来工资/录用或酒精服务权限。",
+                "参考学时260/240/200/100/100；具体分支、培训、费用和补贴按机构现行公告核。",
                 "该标准面向餐厅服务员，与本页前厅协助层级相关但不完全等同；证书不等于美国执照或工资水平。"
               ],
               [
                 "咖啡师／调酒师／茶艺师等相邻技能证书",
                 "希望转向饮品与吧台方向的人",
                 "方向相关：为吧台与饮品岗位做准备，但不改变本职业的职责边界。",
-                "否：属相邻方向的技能凭证。",
-                "按各自国家职业技能标准分级申报。",
+                "相邻证书不代目标岗位和法域要求，本轮未逐核全部标准及许可。",
+                "需另核具体目标专业标准、申报分支及机构公告。",
                 "培训与考核时间与费用。",
                 "持有相邻证书不等于可承担酒水配方决定或出品责任，须按机构授权。"
               ],
@@ -28877,11 +28899,11 @@
                 "急救培训不等于取得执业或管理授权。"
               ],
               [
-                "在职培训与带教（几天到一年）",
+                "短期在岗训练（美国典型分类）",
                 "零基础入行者",
-                "现实入口：多数岗位通过在职培训与带教上手。",
-                "是：O*NET 指出在职培训通常从几天到一年。",
-                "按机构培训计划完成并接受考核。",
+                "美国BLS表1.2典型入门为无正式教育凭证、相关工作经验None、短期在岗训练。O*NET Job Zone1—2、SVP低于6；几天到一年是该准备组说明，不是本职业每位雇主固定培训期。74%高中/同等、22%高中以下、2%高中后证书是对新入职所需学历的受访意见，非雇主占比、员工学历或中国门槛。未逐核各州酒精服务年龄、培训、许可及雇主条件。",
+                "BLS典型训练类别非全国所有雇主统一学制。",
+                "按真实岗位培训计划，酒精服务/食品安全等适用条件另核。",
                 "时间投入与学习节奏。",
                 "完成培训不等于取得职业资格或更高职级。"
               ]
@@ -28890,8 +28912,11 @@
           "id": "actors.path.credential-decision.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current",
+            "r5-trends-current",
+            "r5-cn-food",
+            "r5-cn-standard"
           ],
           "title": "训练、资格与材料怎么选择",
           "type": "table"
@@ -28901,17 +28926,20 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "学历与经验要求必须逐条读取：本职业多数岗位不要求高等教育学历，但要求能长时间站立与走动并按标准流程执行；一项可放宽不代表健康证明或卫生要求可以替代。",
-              "本页建议的作品与七天体验只用于职业探索，不构成食品安全培训、职业资格或岗位授权。",
-              "进入本职业不是只报一个课程：先核对目标岗位的职责、班次、健康证明与食品安全培训要求，以及雇主的排班与用工安排。",
-              "涉及接触直接入口食品的工作，须先取得健康证明并通过每日晨检；不得在无培训与无防护条件下进行真实操作。"
+              "美国BLS表1.2典型入门为无正式教育凭证、相关工作经验None、短期在岗训练。O*NET Job Zone1—2、SVP低于6；几天到一年是该准备组说明，不是本职业每位雇主固定培训期。74%高中/同等、22%高中以下、2%高中后证书是对新入职所需学历的受访意见，非雇主占比、员工学历或中国门槛。未逐核各州酒精服务年龄、培训、许可及雇主条件。",
+              "中国2018《餐饮服务食品安全操作规范》相关要求在第14章，不是第11/12章。14.1.1接触直接入口食品者（含相应加工、传菜、洗消及新/临时人员）先取得健康证明、每年健康检查，必要时临时检查；14.1.2食品安全管理人员每天上岗前检查从业人员健康，发热/腹泻/咽部炎症/皮肤伤口感染等先报告并暂停接触直接入口食品工作，查明原因并治愈相关疾病后才重新上岗，不一律停止全部非接触岗位。14.2培训考核合格方可上岗，企业每年、特定餐饮提供者每半年培训考核。",
+              "餐厅服务员2020标准4-03-02-05，初中/相当文化、五级至一级；定义含排座点菜配菜、宴会设计布置等，比美国协助细类更宽，非一一互认。五级可按规定培训结业或累计相关工作1年分支申报；四级有五级后4年、累计6年或规定学校等分支，三级有四级后5年、相关学校/专业或相关专科加四级后2年等分支，二/一级再按相应经验与学校条件。260/240/200/100/100为各等级参考学时，不套所有分支或日历时长；理论/技能及适用综合评审各60，技师/高技含综合评审。目标评价机构当前申报、费用、补贴和岗位是否要求证书未逐核，证书不自动带来工资/录用或酒精服务权限。",
+              "编辑先核目标岗位法域、学历、经验、培训、健康和酒精服务条件；课程/技能证书不等岗位授权，练习不代上岗。"
             ]
           },
           "id": "actors.path.credential-boundary.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current",
+            "r5-trends-current",
+            "r5-cn-food",
+            "r5-cn-standard"
           ],
           "title": "训练、健康证明与职责边界",
           "type": "notice"
@@ -29152,14 +29180,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国由各州与雇主规定；中国大陆接触直接入口食品岗位须按《餐饮服务食品安全操作规范》取得健康证明并通过每日晨检。"
+              "中国2018《餐饮服务食品安全操作规范》相关要求在第14章，不是第11/12章。14.1.1接触直接入口食品者（含相应加工、传菜、洗消及新/临时人员）先取得健康证明、每年健康检查，必要时临时检查；14.1.2食品安全管理人员每天上岗前检查从业人员健康，发热/腹泻/咽部炎症/皮肤伤口感染等先报告并暂停接触直接入口食品工作，查明原因并治愈相关疾病后才重新上岗，不一律停止全部非接触岗位。14.2培训考核合格方可上岗，企业每年、特定餐饮提供者每半年培训考核。 美国目标州酒精服务年龄与培训/许可未逐核，不能据认证入口无结果断言全国免许可。"
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-cn-food",
+            "r5-ooh-parent"
           ],
           "type": "prose"
         },
@@ -29168,14 +29195,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆相关标准为《餐厅服务员国家职业技能标准（2020 年版）》（职业编码 4-03-02-05，五级—一级，普通受教育程度为初中毕业或相当文化程度）；该标准面向餐厅服务员，与本页前厅协助层级相关但不完全等同。"
+              "餐厅服务员2020标准4-03-02-05，初中/相当文化、五级至一级；定义含排座点菜配菜、宴会设计布置等，比美国协助细类更宽，非一一互认。五级可按规定培训结业或累计相关工作1年分支申报；四级有五级后4年、累计6年或规定学校等分支，三级有四级后5年、相关学校/专业或相关专科加四级后2年等分支，二/一级再按相应经验与学校条件。260/240/200/100/100为各等级参考学时，不套所有分支或日历时长；理论/技能及适用综合评审各60，技师/高技含综合评审。目标评价机构当前申报、费用、补贴和岗位是否要求证书未逐核，证书不自动带来工资/录用或酒精服务权限。"
             ]
           },
           "id": "actors.display.career_path_block.locale.summary",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-cn-standard"
           ],
           "type": "prose"
         },
@@ -29184,14 +29209,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国多数岗位通过在职培训与带教上手（几天到一年），无需统一执照；中国大陆常见要求为健康证明与食品安全培训考核合格，餐厅服务员技能等级为可选凭证。"
+              "美国BLS表1.2典型入门为无正式教育凭证、相关工作经验None、短期在岗训练。O*NET Job Zone1—2、SVP低于6；几天到一年是该准备组说明，不是本职业每位雇主固定培训期。74%高中/同等、22%高中以下、2%高中后证书是对新入职所需学历的受访意见，非雇主占比、员工学历或中国门槛。未逐核各州酒精服务年龄、培训、许可及雇主条件。 中国2018《餐饮服务食品安全操作规范》相关要求在第14章，不是第11/12章。14.1.1接触直接入口食品者（含相应加工、传菜、洗消及新/临时人员）先取得健康证明、每年健康检查，必要时临时检查；14.1.2食品安全管理人员每天上岗前检查从业人员健康，发热/腹泻/咽部炎症/皮肤伤口感染等先报告并暂停接触直接入口食品工作，查明原因并治愈相关疾病后才重新上岗，不一律停止全部非接触岗位。14.2培训考核合格方可上岗，企业每年、特定餐饮提供者每半年培训考核。"
             ]
           },
           "id": "actors.display.career_path_block.locale.credentials",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "sag-moa",
+            "r5-bls-current",
+            "r5-trends-current",
+            "r5-cn-food"
           ],
           "type": "prose"
         },
@@ -30336,14 +30363,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS/OEWS 与 O*NET：用于工资、就业与工作情境与准备层级口径。"
+              "美国BLS表1.2典型入门为无正式教育凭证、相关工作经验None、短期在岗训练。O*NET Job Zone1—2、SVP低于6；几天到一年是该准备组说明，不是本职业每位雇主固定培训期。74%高中/同等、22%高中以下、2%高中后证书是对新入职所需学历的受访意见，非雇主占比、员工学历或中国门槛。未逐核各州酒精服务年龄、培训、许可及雇主条件。 工资页不证明入口要求，改用BLS表1.2。"
             ]
           },
           "id": "actors.display.career_path_block.source.bls",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -30352,14 +30378,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "机构岗位说明与排班与培训制度：用于入口要求与职责边界。"
+              "本轮无真实雇主样本，BLS组合OOH提供典型训练背景，非机构具体排班/权限制度。"
             ]
           },
           "id": "actors.display.career_path_block.source.employer",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-ooh-parent"
           ],
           "type": "prose"
         },
@@ -30368,14 +30392,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "《餐厅服务员国家职业技能标准（2020 年版）》与《餐饮服务食品安全操作规范》：用于中国大陆技能等级与健康管理口径。"
+              "中国2018《餐饮服务食品安全操作规范》相关要求在第14章，不是第11/12章。14.1.1接触直接入口食品者（含相应加工、传菜、洗消及新/临时人员）先取得健康证明、每年健康检查，必要时临时检查；14.1.2食品安全管理人员每天上岗前检查从业人员健康，发热/腹泻/咽部炎症/皮肤伤口感染等先报告并暂停接触直接入口食品工作，查明原因并治愈相关疾病后才重新上岗，不一律停止全部非接触岗位。14.2培训考核合格方可上岗，企业每年、特定餐饮提供者每半年培训考核。 技能标准另见原文PDF。"
             ]
           },
           "id": "actors.display.career_path_block.source.cn-rule",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-cn-food",
+            "r5-cn-standard"
           ],
           "type": "prose"
         },
@@ -30384,14 +30407,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "薪资与环境口径：本页不使用影视或演员工会口径；工资引用 OEWS，环境引用 O*NET。"
+              "餐厅服务员2020标准4-03-02-05，初中/相当文化、五级至一级；定义含排座点菜配菜、宴会设计布置等，比美国协助细类更宽，非一一互认。五级可按规定培训结业或累计相关工作1年分支申报；四级有五级后4年、累计6年或规定学校等分支，三级有四级后5年、相关学校/专业或相关专科加四级后2年等分支，二/一级再按相应经验与学校条件。260/240/200/100/100为各等级参考学时，不套所有分支或日历时长；理论/技能及适用综合评审各60，技师/高技含综合评审。目标评价机构当前申报、费用、补贴和岗位是否要求证书未逐核，证书不自动带来工资/录用或酒精服务权限。"
             ]
           },
           "id": "actors.display.career_path_block.source.r2-pay-3",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-cn-standard"
           ],
           "type": "prose"
         }
@@ -30408,13 +30429,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 35-9011.00 精确职业数据：2024 年就业约 527,400 人。"
+              "美国35-9011当前2025—2035：2025就业546,600→2035预计575,500，净增28,900；BLS表1.2增长5.3%，O*NET全国趋势取整5%，摘要分组5—6%，保留各来源精度。年均95,300空缺含增长与更替，不是十年合计或每年净增；自雇0.1%。全国预测非个人录用概率，也不证明AI就业因果。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -30423,13 +30444,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年预计增长 5%～6%（快于平均），预计空缺 99,600；空缺同时包含增长与更替，不是净增岗位。"
+              "年均空缺含增长、更换职业和退出劳动力需求，与净增分别解释。美国35-9011当前2025—2035：2025就业546,600→2035预计575,500，净增28,900；BLS表1.2增长5.3%，O*NET全国趋势取整5%，摘要分组5—6%，保留各来源精度。年均95,300空缺含增长与更替，不是十年合计或每年净增；自雇0.1%。全国预测非个人录用概率，也不证明AI就业因果。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -30453,13 +30474,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本职业以住宿与食品服务业为主要行业，多数岗位按小时计酬并按班次排班，部分含小费或服务费分配。"
+              "美国BLS餐饮服务组合职业描述小时工资与可能小费池，这是多细类背景，不证明本岗多数计薪或服务费比例。具体工资、小费池及扣费按岗位合同核；中国全国本职业计薪与用工构成本轮未取得代表性样本。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-ooh-parent"
           ],
           "type": "prose"
         },
@@ -30498,13 +30518,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国统计仅适用于 35-9011.00 与所列期间，不外推到中国岗位或某个城市。"
+              "美国35-9011当前2025—2035：2025就业546,600→2035预计575,500，净增28,900；BLS表1.2增长5.3%，O*NET全国趋势取整5%，摘要分组5—6%，保留各来源精度。年均95,300空缺含增长与更替，不是十年合计或每年净增；自雇0.1%。全国预测非个人录用概率，也不证明AI就业因果。"
             ]
           },
           "id": "actors.display.market_signal_card.outlook.us.limit",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -30543,13 +30563,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：顾客沟通、现场协作与基本服务流程。"
+              "编辑任务对照：顾客沟通、现场协作与服务流程；职业任务交叉不等个人已经具备。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30558,13 +30579,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：点单与订单责任、菜品知识与席间服务与结账。"
+              "转入目标核：取单、菜单沟通及完整席间服务责任；目标机构条件/法域资格另核。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30573,13 +30593,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，责任不同"
+              "编辑方向比较，未核转岗距离、成功率或固定学习时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30588,13 +30607,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：吧台支持、清洗与服务设备操作。"
+              "编辑任务对照：吧台补货、器皿和饮品配料准备可能交叉；职业任务交叉不等个人已经具备。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30603,13 +30623,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：酒水配方与调制、酒精服务法规与年龄核验。"
+              "转入目标核：混调及供应饮品、酒精服务适用规则；目标机构条件/法域资格另核。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30618,13 +30637,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，需专项技能"
+              "编辑方向比较，未核转岗距离、成功率或固定学习时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30633,13 +30651,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：后厨与出餐口协作、卫生规范意识。"
+              "编辑任务对照：后厨交接、卫生和有限食品准备可能交叉；职业任务交叉不等个人已经具备。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "art",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30648,13 +30667,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：备料与烹制工艺与出品质量与出餐节拍。"
+              "转入目标核：烹制调味工艺、餐厅设备和出品节奏；目标机构条件/法域资格另核。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30663,13 +30681,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，方向不同"
+              "编辑方向比较，未核转岗距离、成功率或固定学习时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30678,13 +30695,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：按规范完成操作性任务与卫生要求。"
+              "编辑任务对照：卫生、搬运及有限食品准备可能交叉；职业任务交叉不等个人已经具备。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30693,13 +30711,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：顾客服务与现场沟通与前厅动线。"
+              "转入目标核：目标非烹饪食品准备，如冷食、切肉及咖啡茶制作；目标机构条件/法域资格另核。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30708,13 +30725,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，场景不同"
+              "编辑方向比较，未核转岗距离、成功率或固定学习时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30723,13 +30739,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：点单收银与出餐与清洁的一线经验。"
+              "编辑任务对照：顾客服务、收银和补给可交叉；职业任务交叉不等个人已经具备。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30738,13 +30755,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：席间服务与摆台与撤收与翻台节奏。"
+              "转入目标核：柜台/蒸汽餐台取单供餐以及可能付款/食品饮料准备的职责整合；目标机构条件/法域资格另核。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30753,13 +30769,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，职责合并"
+              "编辑方向比较，未核转岗距离、成功率或固定学习时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30768,13 +30783,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：清洗与消毒与后勤流程。"
+              "编辑任务对照：餐具清洗与清洁可能交叉；职业任务交叉不等个人已经具备。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30783,13 +30799,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：前厅服务与顾客沟通与摆台与补货。"
+              "转入目标核：更集中餐具、厨房及食品准备设备/用具清洗，不反向要求前厅服务；目标机构条件/法域资格另核。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30798,13 +30813,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，范围不同"
+              "编辑方向比较，未核转岗距离、成功率或固定学习时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30813,13 +30827,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：大批量布置与补货与团队协作。"
+              "编辑任务对照：交接、现场协作及带教可衔接；职业任务交叉不等个人已经具备。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30828,13 +30843,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：宴会流程与时间管理与团队调度。"
+              "转入目标核：目标11-9051计划指挥协调餐饮运营、人员和成本等，不只宴会流程；目标机构条件/法域资格另核。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30843,13 +30857,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，场景不同"
+              "编辑方向比较，未核转岗距离、成功率或固定学习时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30858,13 +30871,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：现场执行与协作与交接经验。"
+              "编辑任务对照：送餐、顾客沟通及交接可衔接；职业任务交叉不等个人已经具备。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment",
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -30873,13 +30887,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：排班与人员协调与质量与安全管理。"
+              "转入目标核：目标35-3041酒店客房、医院/照护机构或车辆等非餐厅场景服务，非转管理；目标机构条件/法域资格另核。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30888,13 +30901,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，需管理能力"
+              "编辑方向比较，未核转岗距离、成功率或固定学习时长。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30903,13 +30915,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS/OEWS 与 O*NET：用于工资、就业与工作情境口径。"
+              "当前就业增长/空缺用BLS表1.2；旧工资页仅支持工资。"
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -30918,13 +30930,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "机构制度与合同：用于班次、工时与职责边界。"
+              "本位置改引O*NET本职业趋势，原认证入口不支持就业规模。"
             ]
           },
           "id": "actors.display.market_signal_card.source.ratify",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-current",
+            "r5-trends-current"
           ],
           "type": "prose"
         },
@@ -30933,13 +30945,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "招聘与用工公告：用于理解岗位需求，不代表个人录用。"
+              "改用BLS组合OOH典型训练背景；无招聘实采，不能冒充招聘公告。"
             ]
           },
           "id": "actors.display.market_signal_card.source.employer",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-ooh-parent"
           ],
           "type": "prose"
         },
@@ -30953,8 +30964,7 @@
           },
           "id": "actors.display.market_signal_card.source.onet",
           "source_refs": [
-            "bls",
-            "oews"
+            "sag-moa"
           ],
           "type": "prose"
         }
@@ -31111,12 +31121,20 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET 35-9011.00、BLS/OEWS、《餐厅服务员国家职业技能标准（2020 年版）》与《餐饮服务食品安全操作规范》"
+              "O*NET35-9011任务、情境、兴趣及技术；OEWS2025工资；BLS2025—2035表1.2；中国2018食品规范、2020相关服务员技能标准与2025住宿餐饮行业工资。"
             ]
           },
           "id": "actors.display.source_card.source",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-current",
+            "r5-trends-current",
+            "r5-cn-food",
+            "r5-cn-standard",
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -31125,12 +31143,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-09-19"
+              "2026-10-09：本轮九模块作者修订与自审，独立审阅待后续阶段。"
             ]
           },
           "id": "actors.display.source_card.updated-at",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         },
@@ -31139,12 +31158,20 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源范围、限制与统计时期按原始证据分别核对；未取得的数据在相应位置可见标记。"
+              "不同资料分别支持任务/调查、受雇工资、就业预测和相关中国行业/技能/卫生要求；美国细类与中国相关服务员标准非一一等价。行业工资非职业工资，入口查询非许可证结论，纸面作品非合格或授权。"
             ]
           },
           "id": "actors.display.source_card.note",
           "source_refs": [
-            "onet"
+            "onet",
+            "sag-moa",
+            "bls",
+            "r5-oews-concepts",
+            "r5-bls-current",
+            "r5-trends-current",
+            "r5-cn-food",
+            "r5-cn-standard",
+            "r5-nbs-current"
           ],
           "type": "prose"
         }
@@ -31297,14 +31324,13 @@
                 "url": "https://www.onetonline.org/link/summary/35-2014.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "核验 2025 年 5 月工资中位与分位（21,300／28,330／33,980／37,250／46,570 美元/年）。",
-                  "全国统计位置不是个人起薪或地区报价。"
+                  "美国35-9011.00，2025年5月全国工资10/25/50/75/90分位：年21,300/28,330/33,980/37,250/46,570美元；时10.24/13.62/16.34/17.91/22.39美元。OEWS直时税前工资包含小费、基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金及自雇；不笼统排除全部津贴或全部合同雇员。分位非起薪、年限、到手收入或待遇保证。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official wage statistics",
                 "id": "bls",
-                "limitation": "全国统计位置不是个人起薪或地区报价。",
+                "limitation": "美国35-9011.00，2025年5月全国工资10/25/50/75/90分位：年21,300/28,330/33,980/37,250/46,570美元；时10.24/13.62/16.34/17.91/22.39美元。OEWS直时税前工资包含小费、基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金及自雇；不笼统排除全部津贴或全部合同雇员。分位非起薪、年限、到手收入或待遇保证。",
                 "market": "美国",
                 "name": "O*NET OnLine（转引 U.S. Bureau of Labor Statistics）：35-9011.00 全国工资",
                 "period": "2025 年 5 月工资数据; accessed 2026-09-19",
@@ -31313,14 +31339,13 @@
                 "url": "https://www.onetonline.org/link/localwages/35-9011.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "第十一条从业健康管理（健康证明、每年健康检查、每日晨检、患病者暂停接触直接入口食品工作）与第十二条个人卫生与洗手消毒要求。",
-                  "为餐饮服务食品安全要求，不规定工资水平，也不等同于美国州或雇主要求。"
+                  "中国2018《餐饮服务食品安全操作规范》相关要求在第14章，不是第11/12章。14.1.1接触直接入口食品者（含相应加工、传菜、洗消及新/临时人员）先取得健康证明、每年健康检查，必要时临时检查；14.1.2食品安全管理人员每天上岗前检查从业人员健康，发热/腹泻/咽部炎症/皮肤伤口感染等先报告并暂停接触直接入口食品工作，查明原因并治愈相关疾病后才重新上岗，不一律停止全部非接触岗位。14.2培训考核合格方可上岗，企业每年、特定餐饮提供者每半年培训考核。 旧URL为总局首页；相关全文另列r5-cn-food。"
                 ],
                 "evidence_type": "official guidance",
                 "id": "cn-rule",
-                "limitation": "为餐饮服务食品安全要求，不规定工资水平，也不等同于美国州或雇主要求。",
+                "limitation": "中国2018《餐饮服务食品安全操作规范》相关要求在第14章，不是第11/12章。14.1.1接触直接入口食品者（含相应加工、传菜、洗消及新/临时人员）先取得健康证明、每年健康检查，必要时临时检查；14.1.2食品安全管理人员每天上岗前检查从业人员健康，发热/腹泻/咽部炎症/皮肤伤口感染等先报告并暂停接触直接入口食品工作，查明原因并治愈相关疾病后才重新上岗，不一律停止全部非接触岗位。14.2培训考核合格方可上岗，企业每年、特定餐饮提供者每半年培训考核。 旧URL为总局首页；相关全文另列r5-cn-food。",
                 "market": "中国大陆",
                 "name": "《餐饮服务食品安全操作规范》（市场监管总局公告 2018 年第 12 号）",
                 "period": "2018-06-22 发布、2018-10-01 施行；accessed 2026-09-19",
@@ -31393,14 +31418,13 @@
                 "url": "https://www.gov.cn/zhengce/zhengceku/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "为本职业对应的 BLS 职业展望页。",
-                  "本轮抓取不可用，未引用其数值；就业与预测改用 O*NET 摘要页。"
+                  "旧单独OOH地址本轮未取得正文；当前实际组合OOH含本职业明细，另列r5-ooh-parent；不是雇主制度。"
                 ],
-                "evidence_type": "official employment projections",
+                "evidence_type": "official occupation outlook",
                 "id": "employer",
-                "limitation": "本轮抓取不可用，未引用其数值；州与雇主要求仍需逐项核验。",
+                "limitation": "旧单独OOH地址本轮未取得正文；当前实际组合OOH含本职业明细，另列r5-ooh-parent；不是雇主制度。",
                 "market": "美国",
                 "name": "BLS Occupational Outlook Handbook：Dining Room and Cafeteria Attendants and Bartender Helpers（本轮抓取 403，未取得一手口径）",
                 "period": "本轮抓取不可用；accessed 2026-09-19",
@@ -31441,14 +31465,13 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明《餐厅服务员国家职业技能标准（2020 年版）》（人社厅发〔2020〕102 号）与技能等级认定的主管口径。",
-                  "标准面向餐厅服务员，与本页前厅协助层级相关但不完全等同。"
+                  "餐厅服务员2020标准4-03-02-05，初中/相当文化、五级至一级；定义含排座点菜配菜、宴会设计布置等，比美国协助细类更宽，非一一互认。五级可按规定培训结业或累计相关工作1年分支申报；四级有五级后4年、累计6年或规定学校等分支，三级有四级后5年、相关学校/专业或相关专科加四级后2年等分支，二/一级再按相应经验与学校条件。260/240/200/100/100为各等级参考学时，不套所有分支或日历时长；理论/技能及适用综合评审各60，技师/高技含综合评审。目标评价机构当前申报、费用、补贴和岗位是否要求证书未逐核，证书不自动带来工资/录用或酒精服务权限。 旧URL为人社首页；原文另列r5-cn-standard。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official occupational standard",
                 "id": "nbs",
-                "limitation": "标准面向餐厅服务员，与本页前厅协助层级相关但不完全等同。",
+                "limitation": "餐厅服务员2020标准4-03-02-05，初中/相当文化、五级至一级；定义含排座点菜配菜、宴会设计布置等，比美国协助细类更宽，非一一互认。五级可按规定培训结业或累计相关工作1年分支申报；四级有五级后4年、累计6年或规定学校等分支，三级有四级后5年、相关学校/专业或相关专科加四级后2年等分支，二/一级再按相应经验与学校条件。260/240/200/100/100为各等级参考学时，不套所有分支或日历时长；理论/技能及适用综合评审各60，技师/高技含综合评审。目标评价机构当前申报、费用、补贴和岗位是否要求证书未逐核，证书不自动带来工资/录用或酒精服务权限。 旧URL为人社首页；原文另列r5-cn-standard。",
                 "market": "中国大陆",
                 "name": "人力资源和社会保障部公开渠道（餐厅服务员国家职业技能标准发布与备案评价机构口径）",
                 "period": "accessed 2026-09-19",
@@ -31469,7 +31492,7 @@
                 "name": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
                 "period": "NIST AI 100-1, 2023; accessed 2026-09-19",
                 "publisher": "U.S. National Institute of Standards and Technology",
-                "scope": "industry_proxy",
+                "scope": "contextual",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
@@ -31489,14 +31512,13 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "核验职业定义、任务（24 项）、工作情境、准备层级（Job Zone 1-2）与 2024 年就业 527,400 与 2024—2034 年预测。",
-                  "美国精确职业数据；不定义中国资格、工资或岗位授权。"
+                  "本职业以清桌、撤餐、换布草、摆台、补充餐具及服务吧台物资、提供水/咖啡/调味品等餐饮协助为定义。24项任务为16核心、7补充和1新任务；操作收银机为核心（重要性88），不是一律只能协助收银。混合准备调饮配料、切水果配饰等列补充任务；三明治准备为新任务且重要性未提供，不填0。任务可能与其他餐饮岗位交叉，实际菜单/酒水操作、点单、收款退款和服务承诺仍按岗位授权及当地规则核。 美国35-9011当前2025—2035：2025就业546,600→2035预计575,500，净增28,900；BLS表1.2增长5.3%，O*NET全国趋势取整5%，摘要分组5—6%，保留各来源精度。年均95,300空缺含增长与更替，不是十年合计或每年净增；自雇0.1%。全国预测非个人录用概率，也不证明AI就业因果。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet",
-                "limitation": "美国精确职业数据；不定义中国资格、工资或岗位授权。",
+                "limitation": "本职业以清桌、撤餐、换布草、摆台、补充餐具及服务吧台物资、提供水/咖啡/调味品等餐饮协助为定义。24项任务为16核心、7补充和1新任务；操作收银机为核心（重要性88），不是一律只能协助收银。混合准备调饮配料、切水果配饰等列补充任务；三明治准备为新任务且重要性未提供，不填0。任务可能与其他餐饮岗位交叉，实际菜单/酒水操作、点单、收款退款和服务承诺仍按岗位授权及当地规则核。 美国35-9011当前2025—2035：2025就业546,600→2035预计575,500，净增28,900；BLS表1.2增长5.3%，O*NET全国趋势取整5%，摘要分组5—6%，保留各来源精度。年均95,300空缺含增长与更替，不是十年合计或每年净增；自雇0.1%。全国预测非个人录用概率，也不证明AI就业因果。",
                 "market": "美国",
                 "name": "O*NET OnLine：Dining Room and Cafeteria Attendants and Bartender Helpers（35-9011.00）职业档案",
                 "period": "updated 2026; accessed 2026-09-19",
@@ -31505,14 +31527,13 @@
                 "url": "https://www.onetonline.org/link/summary/35-9011.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明本职业常见的系统与软件工具。",
-                  "工具清单不等于自动化程度或替代结论。"
+                  "未取得本职业生成式AI采用率、节时/差错效果、替代率或工资因果。O*NET软件示例有POS、Windows、Excel、Facebook，2025美国关联本职业全部唯一招聘帖中Excel关键词1%，Windows/Facebook Not available不是0；工具清单或关键词非普遍采用/GenAI证据。机器清洗、POS与生成式AI分开核。ILO2025为任务暴露研究，未核该细类与ISCO精确映射及评分；NIST AI RMF1.0是自愿风险框架，不授予食品、收银或退款操作权限。"
                 ],
-                "evidence_type": "official occupation profile",
+                "evidence_type": "official technology keywords",
                 "id": "r2-ai",
-                "limitation": "工具清单不等于自动化程度或替代结论。",
+                "limitation": "未取得本职业生成式AI采用率、节时/差错效果、替代率或工资因果。O*NET软件示例有POS、Windows、Excel、Facebook，2025美国关联本职业全部唯一招聘帖中Excel关键词1%，Windows/Facebook Not available不是0；工具清单或关键词非普遍采用/GenAI证据。机器清洗、POS与生成式AI分开核。ILO2025为任务暴露研究，未核该细类与ISCO精确映射及评分；NIST AI RMF1.0是自愿风险框架，不授予食品、收银或退款操作权限。",
                 "market": "美国",
                 "name": "O*NET OnLine：35-9011.00 Hot Technologies（工具与技术）",
                 "period": "updated 2026; accessed 2026-09-19",
@@ -31521,14 +31542,13 @@
                 "url": "https://www.onetonline.org/link/hot_tech/35-9011.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "为行业与单位类型层级口径，未提供与 35-9011.00 一一对应的全国职业工资分布。",
-                  "行业平均工资不是本职业岗位工资，也不覆盖个体经营与零星用工。"
+                  "国家统计局2025住宿和餐饮业城镇非私营62,461/私营55,123元税前年平均；覆盖行业内多职业，为相关单位背景，不是本职业中位、起薪或岗位月薪。调查城镇5人以上法人，非私营不只国企，排除个体/自由职业等；学校/医院自身食堂未必属于住宿餐饮单位，不套全部场景。 旧URL是统计局首页；实际统计另列r5-nbs-current。"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "r2-pay-1",
-                "limitation": "行业平均工资不是本职业岗位工资，也不覆盖个体经营与零星用工。",
+                "limitation": "国家统计局2025住宿和餐饮业城镇非私营62,461/私营55,123元税前年平均；覆盖行业内多职业，为相关单位背景，不是本职业中位、起薪或岗位月薪。调查城镇5人以上法人，非私营不只国企，排除个体/自由职业等；学校/医院自身食堂未必属于住宿餐饮单位，不套全部场景。 旧URL是统计局首页；实际统计另列r5-nbs-current。",
                 "market": "中国大陆",
                 "name": "2025年城镇单位就业人员年平均工资情况",
                 "period": "2025; accessed 2026-09-19",
@@ -31553,14 +31573,13 @@
                 "url": "https://www.bls.gov/opub/hom/oews/home.htm"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于核验 25 分位（28,330 美元/年）与 75 分位（37,250 美元/年）等分位值。",
-                  "分位是统计位置，不是起薪或上限承诺。"
+                  "美国35-9011.00，2025年5月全国工资10/25/50/75/90分位：年21,300/28,330/33,980/37,250/46,570美元；时10.24/13.62/16.34/17.91/22.39美元。OEWS直时税前工资包含小费、基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金及自雇；不笼统排除全部津贴或全部合同雇员。分位非起薪、年限、到手收入或待遇保证。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official wage statistics",
                 "id": "r2-pay-3",
-                "limitation": "分位是统计位置，不是起薪或上限承诺。",
+                "limitation": "美国35-9011.00，2025年5月全国工资10/25/50/75/90分位：年21,300/28,330/33,980/37,250/46,570美元；时10.24/13.62/16.34/17.91/22.39美元。OEWS直时税前工资包含小费、基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金及自雇；不笼统排除全部津贴或全部合同雇员。分位非起薪、年限、到手收入或待遇保证。",
                 "market": "美国",
                 "name": "O*NET OnLine（转引 U.S. Bureau of Labor Statistics）：35-9011.00 工资分位",
                 "period": "2025 年 5 月工资数据; accessed 2026-09-19",
@@ -31631,6 +31650,156 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/11-9051.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-oews-concepts",
+                "limitation": "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。",
+                "market": "美国",
+                "name": "BLS OEWS工资人群与组成",
+                "period": "现行方法；本批检索2026-10-09",
+                "publisher": "Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "6/13/21/28—30/51/55/73：可识别医疗健康敏感、特定目的充分必要严格保护及适用告知/事前影响评估；同意依据单独同意但13有其他合法依据。普通联系方式不天然全属敏感，医疗语境具体核。去标识非匿名化，账号不自动授权外部AI上传；跨境配套未全核。"
+                ],
+                "evidence_type": "official law",
+                "id": "r5-cn-pipl",
+                "limitation": "6/13/21/28—30/51/55/73：可识别医疗健康敏感、特定目的充分必要严格保护及适用告知/事前影响评估；同意依据单独同意但13有其他合法依据。普通联系方式不天然全属敏感，医疗语境具体核。去标识非匿名化，账号不自动授权外部AI上传；跨境配套未全核。",
+                "market": "中国内地",
+                "name": "个人信息保护法患者与健康资料边界",
+                "period": "2021法；本批实际读；检索2026-10-09",
+                "publisher": "全国人大/中央网信办",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "自愿AI治理建议非医疗法规、灭菌标准或执业授权，也非工具采用/提效实测。"
+                ],
+                "evidence_type": "official framework",
+                "id": "r5-nist-current",
+                "limitation": "自愿AI治理建议非医疗法规、灭菌标准或执业授权，也非工具采用/提效实测。",
+                "market": "跨市场",
+                "name": "NIST AI RMF官方框架说明",
+                "period": "自愿框架1.0；本批实际读；检索2026-10-09",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本批实际读ILO2025摘要，本职业未核SOC35-9011与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。"
+                ],
+                "evidence_type": "official research summary",
+                "id": "r5-ilo-current",
+                "limitation": "本批实际读ILO2025摘要，本职业未核SOC35-9011与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。",
+                "market": "跨市场",
+                "name": "ILO2025 GenAI暴露研究官方摘要",
+                "period": "2025研究摘要；本批实际读；检索2026-10-09",
+                "publisher": "ILO",
+                "scope": "contextual",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国35-9011当前2025—2035：2025就业546,600→2035预计575,500，净增28,900；BLS表1.2增长5.3%，O*NET全国趋势取整5%，摘要分组5—6%，保留各来源精度。年均95,300空缺含增长与更替，不是十年合计或每年净增；自雇0.1%。全国预测非个人录用概率，也不证明AI就业因果。"
+                ],
+                "evidence_type": "official projections",
+                "id": "r5-trends-current",
+                "limitation": "美国35-9011当前2025—2035：2025就业546,600→2035预计575,500，净增28,900；BLS表1.2增长5.3%，O*NET全国趋势取整5%，摘要分组5—6%，保留各来源精度。年均95,300空缺含增长与更替，不是十年合计或每年净增；自雇0.1%。全国预测非个人录用概率，也不证明AI就业因果。",
+                "market": "美国",
+                "name": "O*NET35-9011全国就业趋势2025—2035",
+                "period": "2025—2035",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/35-9011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国35-9011当前2025—2035：2025就业546,600→2035预计575,500，净增28,900；BLS表1.2增长5.3%，O*NET全国趋势取整5%，摘要分组5—6%，保留各来源精度。年均95,300空缺含增长与更替，不是十年合计或每年净增；自雇0.1%。全国预测非个人录用概率，也不证明AI就业因果。 美国BLS表1.2典型入门为无正式教育凭证、相关工作经验None、短期在岗训练。O*NET Job Zone1—2、SVP低于6；几天到一年是该准备组说明，不是本职业每位雇主固定培训期。74%高中/同等、22%高中以下、2%高中后证书是对新入职所需学历的受访意见，非雇主占比、员工学历或中国门槛。未逐核各州酒精服务年龄、培训、许可及雇主条件。"
+                ],
+                "evidence_type": "official projections",
+                "id": "r5-bls-current",
+                "limitation": "美国35-9011当前2025—2035：2025就业546,600→2035预计575,500，净增28,900；BLS表1.2增长5.3%，O*NET全国趋势取整5%，摘要分组5—6%，保留各来源精度。年均95,300空缺含增长与更替，不是十年合计或每年净增；自雇0.1%。全国预测非个人录用概率，也不证明AI就业因果。 美国BLS表1.2典型入门为无正式教育凭证、相关工作经验None、短期在岗训练。O*NET Job Zone1—2、SVP低于6；几天到一年是该准备组说明，不是本职业每位雇主固定培训期。74%高中/同等、22%高中以下、2%高中后证书是对新入职所需学历的受访意见，非雇主占比、员工学历或中国门槛。未逐核各州酒精服务年龄、培训、许可及雇主条件。",
+                "market": "美国",
+                "name": "BLS表1.2餐厅食堂帮工就业预测与典型训练",
+                "period": "2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "组合含快餐柜台、35-9011帮工、迎宾及非餐厅食品服务；组合就业5143000、年均空缺1078500不得套本职业。正文用于组级站立、搬运、排班、短期在岗培训和可能酒精法规培训背景；明细35-9011为546600→575500。组级行业时薪不填本职业行业工资，小费可能通过小费池分配给符合条件人员，仍须按实际规则核。"
+                ],
+                "evidence_type": "official occupation outlook",
+                "id": "r5-ooh-parent",
+                "limitation": "组合含快餐柜台、35-9011帮工、迎宾及非餐厅食品服务；组合就业5143000、年均空缺1078500不得套本职业。正文用于组级站立、搬运、排班、短期在岗培训和可能酒精法规培训背景；明细35-9011为546600→575500。组级行业时薪不填本职业行业工资，小费可能通过小费池分配给符合条件人员，仍须按实际规则核。",
+                "market": "美国",
+                "name": "BLS食品饮料服务及相关人员OOH组合档案",
+                "period": "2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_proxy",
+                "url": "https://www.bls.gov/ooh/food-preparation-and-serving/food-and-beverage-serving-and-related-workers.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国2018《餐饮服务食品安全操作规范》相关要求在第14章，不是第11/12章。14.1.1接触直接入口食品者（含相应加工、传菜、洗消及新/临时人员）先取得健康证明、每年健康检查，必要时临时检查；14.1.2食品安全管理人员每天上岗前检查从业人员健康，发热/腹泻/咽部炎症/皮肤伤口感染等先报告并暂停接触直接入口食品工作，查明原因并治愈相关疾病后才重新上岗，不一律停止全部非接触岗位。14.2培训考核合格方可上岗，企业每年、特定餐饮提供者每半年培训考核。 第14.3—14.5章按区域和任务区分卫生：食品处理区工作帽覆盖头发；专间和明确列举专用操作任务佩戴清洁口罩，其他相应直接入口操作为宜戴，不写所有前厅人员均须口罩。洗手/消毒按是否直接入口及接触污物、钱、手机等具体情形；手套不替代洗手。第10章食品接触餐具洗后使用前消毒，设备/药剂按适用说明；第8.2章顾客在场避免扬尘。工作衣服受污染及时更换，直接入口岗位每天更换为宜；不把建议统一写强制。 第7.9章食品留样适用于学校/幼儿园/养老/医疗食堂、中央厨房、集体配送、超过100人建筑工地食堂以及超过100人聚餐或重大活动供餐等指定情形，其他提供者为宜按条件留样；由专人管理记录，不强加所有前厅帮工。第15章记录按单位类别和适用事项建立，不把每次擦桌或每个人都留样写成法定统一要求。电子记录为宜，不证明已采用生成式AI。"
+                ],
+                "evidence_type": "official guidance",
+                "id": "r5-cn-food",
+                "limitation": "中国2018《餐饮服务食品安全操作规范》相关要求在第14章，不是第11/12章。14.1.1接触直接入口食品者（含相应加工、传菜、洗消及新/临时人员）先取得健康证明、每年健康检查，必要时临时检查；14.1.2食品安全管理人员每天上岗前检查从业人员健康，发热/腹泻/咽部炎症/皮肤伤口感染等先报告并暂停接触直接入口食品工作，查明原因并治愈相关疾病后才重新上岗，不一律停止全部非接触岗位。14.2培训考核合格方可上岗，企业每年、特定餐饮提供者每半年培训考核。 第14.3—14.5章按区域和任务区分卫生：食品处理区工作帽覆盖头发；专间和明确列举专用操作任务佩戴清洁口罩，其他相应直接入口操作为宜戴，不写所有前厅人员均须口罩。洗手/消毒按是否直接入口及接触污物、钱、手机等具体情形；手套不替代洗手。第10章食品接触餐具洗后使用前消毒，设备/药剂按适用说明；第8.2章顾客在场避免扬尘。工作衣服受污染及时更换，直接入口岗位每天更换为宜；不把建议统一写强制。 第7.9章食品留样适用于学校/幼儿园/养老/医疗食堂、中央厨房、集体配送、超过100人建筑工地食堂以及超过100人聚餐或重大活动供餐等指定情形，其他提供者为宜按条件留样；由专人管理记录，不强加所有前厅帮工。第15章记录按单位类别和适用事项建立，不把每次擦桌或每个人都留样写成法定统一要求。电子记录为宜，不证明已采用生成式AI。",
+                "market": "中国大陆",
+                "name": "2018餐饮服务食品安全操作规范全文（石城县政府转载）",
+                "period": "2018规范；2021-10-14转载",
+                "publisher": "市场监管总局；石城县政府转载",
+                "scope": "industry_proxy",
+                "url": "https://www.shicheng.gov.cn/scxxxgk/sc91519/202110/e6c96ca9040f46e7bd7205188ca099c7.shtml"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "餐厅服务员2020标准4-03-02-05，初中/相当文化、五级至一级；定义含排座点菜配菜、宴会设计布置等，比美国协助细类更宽，非一一互认。五级可按规定培训结业或累计相关工作1年分支申报；四级有五级后4年、累计6年或规定学校等分支，三级有四级后5年、相关学校/专业或相关专科加四级后2年等分支，二/一级再按相应经验与学校条件。260/240/200/100/100为各等级参考学时，不套所有分支或日历时长；理论/技能及适用综合评审各60，技师/高技含综合评审。目标评价机构当前申报、费用、补贴和岗位是否要求证书未逐核，证书不自动带来工资/录用或酒精服务权限。 本轮读取PDF相关文本p0—5；直接下载403，未取得可显示截图，不声称PDF目视验收或其余技能表均已审。"
+                ],
+                "evidence_type": "official occupational standard",
+                "id": "r5-cn-standard",
+                "limitation": "餐厅服务员2020标准4-03-02-05，初中/相当文化、五级至一级；定义含排座点菜配菜、宴会设计布置等，比美国协助细类更宽，非一一互认。五级可按规定培训结业或累计相关工作1年分支申报；四级有五级后4年、累计6年或规定学校等分支，三级有四级后5年、相关学校/专业或相关专科加四级后2年等分支，二/一级再按相应经验与学校条件。260/240/200/100/100为各等级参考学时，不套所有分支或日历时长；理论/技能及适用综合评审各60，技师/高技含综合评审。目标评价机构当前申报、费用、补贴和岗位是否要求证书未逐核，证书不自动带来工资/录用或酒精服务权限。 本轮读取PDF相关文本p0—5；直接下载403，未取得可显示截图，不声称PDF目视验收或其余技能表均已审。",
+                "market": "中国大陆",
+                "name": "餐厅服务员2020国家职业技能标准原文PDF（上海人社）",
+                "period": "2020年版",
+                "publisher": "人力资源和社会保障部；上海人社公开",
+                "scope": "related_occupation",
+                "url": "https://rsj.sh.gov.cn/cmsres/b8/b84ff2051e0c4e4f96fe081be8e76d1e/fba306671ab74a4f81eca3d9665c71bf.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "国家统计局2025住宿和餐饮业城镇非私营62,461/私营55,123元税前年平均；覆盖行业内多职业，为相关单位背景，不是本职业中位、起薪或岗位月薪。调查城镇5人以上法人，非私营不只国企，排除个体/自由职业等；学校/医院自身食堂未必属于住宿餐饮单位，不套全部场景。"
+                ],
+                "evidence_type": "official industry wage statistics",
+                "id": "r5-nbs-current",
+                "limitation": "国家统计局2025住宿和餐饮业城镇非私营62,461/私营55,123元税前年平均；覆盖行业内多职业，为相关单位背景，不是本职业中位、起薪或岗位月薪。调查城镇5人以上法人，非私营不只国企，排除个体/自由职业等；学校/医院自身食堂未必属于住宿餐饮单位，不套全部场景。",
+                "market": "中国大陆",
+                "name": "国家统计局2025城镇单位工资：住宿和餐饮业",
+                "period": "2025年",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               }
             ]
           },
@@ -32222,7 +32391,7 @@
         },
         "evidence_rows": [
           {
-            "source_ref": "r2-ai",
+            "source_ref": "sag-moa",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.1.limit",
               "block": "ai-impact",
@@ -32230,7 +32399,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "r2-ai",
+              "$source": "sag-moa",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32249,7 +32418,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "r2-ai",
+              "$source": "sag-moa",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32257,7 +32426,7 @@
             }
           },
           {
-            "source_ref": "sag",
+            "source_ref": "r5-bls-current",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.2.limit",
               "block": "ai-impact",
@@ -32265,7 +32434,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32278,13 +32447,13 @@
               "type": "prose"
             },
             "结论": {
-              "$item": "actors.ai-impact.ai-impact-table.5",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
+              "$item": "actors.market-signals.market-signal-card.1",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
             "链接": {
-              "$source": "sag",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32292,7 +32461,7 @@
             }
           },
           {
-            "source_ref": "sag-moa",
+            "source_ref": "r5-nist-current",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.3.limit",
               "block": "ai-impact",
@@ -32300,7 +32469,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag-moa",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32319,7 +32488,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "sag-moa",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32327,7 +32496,7 @@
             }
           },
           {
-            "source_ref": "bls",
+            "source_ref": "onet",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.4.limit",
               "block": "ai-impact",
@@ -32335,7 +32504,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "bls",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32354,7 +32523,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32362,7 +32531,7 @@
             }
           },
           {
-            "source_ref": "nist",
+            "source_ref": "r2-ai",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.5.limit",
               "block": "ai-impact",
@@ -32370,7 +32539,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "nist",
+              "$source": "r2-ai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32389,7 +32558,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "nist",
+              "$source": "r2-ai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32449,7 +32618,7 @@
         ],
         "questions": [
           {
-            "source_ref": "bls",
+            "source_ref": "r5-ilo-current",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.1.answer",
               "block": "ai-impact",
@@ -32457,14 +32626,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "onet",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "onet",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32478,7 +32647,7 @@
             }
           },
           {
-            "source_ref": "r2-ai",
+            "source_ref": "r5-nist-current",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.2.answer",
               "block": "ai-impact",
@@ -32486,14 +32655,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "r2-ai",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "r2-ai",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32507,7 +32676,7 @@
             }
           },
           {
-            "source_ref": "nist",
+            "source_ref": "r5-nist-current",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.3.answer",
               "block": "ai-impact",
@@ -32515,14 +32684,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag-moa",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "sag-moa",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32536,7 +32705,7 @@
             }
           },
           {
-            "source_ref": "onet",
+            "source_ref": "r5-nist-current",
             "回答": {
               "$item": "actors.ai-impact.ai-impact-table.6",
               "block": "ai-impact",
@@ -32544,14 +32713,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag-moa",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "sag-moa",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32565,7 +32734,7 @@
             }
           },
           {
-            "source_ref": "nist",
+            "source_ref": "r5-cn-pipl",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.5.answer",
               "block": "ai-impact",
@@ -32573,14 +32742,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "bls",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32594,7 +32763,7 @@
             }
           },
           {
-            "source_ref": "sag",
+            "source_ref": "r5-cn-pipl",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.6.answer",
               "block": "ai-impact",
@@ -32602,14 +32771,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "sag",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32623,7 +32792,7 @@
             }
           },
           {
-            "source_ref": "onet",
+            "source_ref": "r5-nist-current",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.7.answer",
               "block": "ai-impact",
@@ -32631,14 +32800,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "nist",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "nist",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33158,7 +33327,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33166,7 +33335,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33181,7 +33350,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-ooh-parent",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33189,7 +33358,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-ooh-parent",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33204,7 +33373,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "r5-cn-food",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33212,7 +33381,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "r5-cn-food",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33227,7 +33396,7 @@
           },
           {
             "href": {
-              "$source": "r2-pay-3",
+              "$source": "r5-cn-standard",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33235,7 +33404,7 @@
             },
             "id": "r2-pay-3",
             "label": {
-              "$source": "r2-pay-3",
+              "$source": "r5-cn-standard",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34091,7 +34260,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "sag-moa"
             ],
             "id": "image-use",
             "mitigation": {
@@ -34127,7 +34296,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "sag-moa"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -34163,7 +34332,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "cn-rule"
+              "employer"
             ],
             "id": "project-income",
             "mitigation": {
@@ -34235,8 +34404,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "nist",
-              "sag-moa"
+              "nist"
             ],
             "id": "project-data",
             "mitigation": {
@@ -34272,8 +34440,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "employer"
+              "cn-rule"
             ],
             "id": "audition-feedback",
             "mitigation": {
@@ -34300,7 +34467,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "sag-moa",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34308,7 +34475,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "sag-moa",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34323,7 +34490,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-ooh-parent",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34331,7 +34498,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-ooh-parent",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34346,7 +34513,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "r5-cn-food",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34354,7 +34521,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "r5-cn-food",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34392,7 +34559,7 @@
           },
           {
             "href": {
-              "$source": "nist",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34400,7 +34567,7 @@
             },
             "id": "nist",
             "label": {
-              "$source": "nist",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34426,13 +34593,18 @@
           "bls_table": [
             {
               "指标": "数据类型",
-              "数值": "健康证明与食品安全要求为主",
-              "说明": "中国大陆公开工资统计按行业门类与单位类型发布，未建立与本职业对应的职业级口径；本页因此保留缺口，不以行业均值替代。"
+              "数值": "职业工资缺口；行业年平均作背景",
+              "说明": {
+                "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
             },
             {
               "指标": "上岗硬条件",
-              "数值": "健康证明与每日晨检",
-              "说明": "按《餐饮服务食品安全操作规范》第十一条，接触直接入口食品的从业人员须取得健康证明、每年健康检查，食品安全管理人员每天上岗前检查健康状况。"
+              "数值": "直接入口岗位健康证明；日常健康检查",
+              "说明": "中国2018《餐饮服务食品安全操作规范》相关要求在第14章，不是第11/12章。14.1.1接触直接入口食品者（含相应加工、传菜、洗消及新/临时人员）先取得健康证明、每年健康检查，必要时临时检查；14.1.2食品安全管理人员每天上岗前检查从业人员健康，发热/腹泻/咽部炎症/皮肤伤口感染等先报告并暂停接触直接入口食品工作，查明原因并治愈相关疾病后才重新上岗，不一律停止全部非接触岗位。14.2培训考核合格方可上岗，企业每年、特定餐饮提供者每半年培训考核。"
             },
             {
               "指标": "培训考核",
@@ -34441,18 +34613,18 @@
             },
             {
               "指标": "技能等级",
-              "数值": "餐厅服务员（五级至一级，可选）",
-              "说明": "按《餐厅服务员国家职业技能标准（2020 年版）》，普通受教育程度为初中毕业或相当文化程度；该标准面向餐厅服务员，与本页前厅协助层级相关但不完全等同。"
+              "数值": "相关餐厅服务员技能标准，非精确等价",
+              "说明": "餐厅服务员2020标准4-03-02-05，初中/相当文化、五级至一级；定义含排座点菜配菜、宴会设计布置等，比美国协助细类更宽，非一一互认。五级可按规定培训结业或累计相关工作1年分支申报；四级有五级后4年、累计6年或规定学校等分支，三级有四级后5年、相关学校/专业或相关专科加四级后2年等分支，二/一级再按相应经验与学校条件。260/240/200/100/100为各等级参考学时，不套所有分支或日历时长；理论/技能及适用综合评审各60，技师/高技含综合评审。目标评价机构当前申报、费用、补贴和岗位是否要求证书未逐核，证书不自动带来工资/录用或酒精服务权限。"
             },
             {
               "指标": "计酬方式",
-              "数值": "按小时或按月，可能含小费与工作餐或住宿折算",
-              "说明": "餐厅与食堂的计酬结构差别较大，常见基本工资加班次补贴与全勤或绩效，部分岗位含小费或服务费分配。"
+              "数值": "按真实合同核工资与福利/扣费",
+              "说明": "未取得代表性中国薪酬样本；小费、服务费分配与餐住宿不得一概当现金工资。"
             },
             {
               "指标": "用工形式",
-              "数值": "住宿与餐饮企业为主，含单位食堂",
-              "说明": "以餐厅、酒店餐饮部、单位与学校食堂与自助餐与宴会服务为主要载体，多为按班次排班的岗位。"
+              "数值": "住宿餐饮、学校或机构食堂可作场景例；本轮未核中国本职业全国用工构成。",
+              "说明": "具体排班与工时按岗位合同核；NBS行业工资均值不证明职业雇主份额或全国班次比例。"
             },
             {
               "指标": "样本边界",
@@ -34462,7 +34634,7 @@
             {
               "指标": "地区比较",
               "数值": "中美证据分别解释",
-              "说明": "美国分位为受雇税前工资统计口径（不含加班与班次津贴与小费与自营收入）；中国大陆为按小时或按月计酬，两者应分别解释，不能直接换算或合并。"
+              "说明": "美国35-9011.00，2025年5月全国工资10/25/50/75/90分位：年21,300/28,330/33,980/37,250/46,570美元；时10.24/13.62/16.34/17.91/22.39美元。OEWS直时税前工资包含小费、基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金及自雇；不笼统排除全部津贴或全部合同雇员。分位非起薪、年限、到手收入或待遇保证。 中国工资缺口和行业均值分别解释，不直接汇率换算。"
             }
           ],
           "china_ai_row": {
@@ -34475,43 +34647,23 @@
           "china_edu_table": [
             {
               "学历段": "上岗要求",
-              "岗位方向": "从事接触直接入口食品工作须取得健康证明、接受每日晨检并经食品安全培训考核合格；患有发热、腹泻、咽部炎症等病症及皮肤有伤口或感染者应暂停相关岗位。",
-              "说明": {
-                "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
-                "block": "china-salary",
-                "copy_key": "career.item.career-snapshot-primary-locale",
-                "type": "prose"
-              }
+              "岗位方向": "中国2018《餐饮服务食品安全操作规范》相关要求在第14章，不是第11/12章。14.1.1接触直接入口食品者（含相应加工、传菜、洗消及新/临时人员）先取得健康证明、每年健康检查，必要时临时检查；14.1.2食品安全管理人员每天上岗前检查从业人员健康，发热/腹泻/咽部炎症/皮肤伤口感染等先报告并暂停接触直接入口食品工作，查明原因并治愈相关疾病后才重新上岗，不一律停止全部非接触岗位。14.2培训考核合格方可上岗，企业每年、特定餐饮提供者每半年培训考核。",
+              "说明": "中国2018《餐饮服务食品安全操作规范》相关要求在第14章，不是第11/12章。14.1.1接触直接入口食品者（含相应加工、传菜、洗消及新/临时人员）先取得健康证明、每年健康检查，必要时临时检查；14.1.2食品安全管理人员每天上岗前检查从业人员健康，发热/腹泻/咽部炎症/皮肤伤口感染等先报告并暂停接触直接入口食品工作，查明原因并治愈相关疾病后才重新上岗，不一律停止全部非接触岗位。14.2培训考核合格方可上岗，企业每年、特定餐饮提供者每半年培训考核。"
             },
             {
               "学历段": "个人卫生与清洗消毒",
-              "岗位方向": "操作前洗净手部并按情形洗手消毒，穿戴清洁的工作衣帽、头发不外露、不留长指甲与不涂指甲油、饰物不外露；清洗消毒与保洁设施应在专用区域并设专用水池与保洁设施。",
-              "说明": {
-                "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
-                "block": "china-salary",
-                "copy_key": "career.item.career-snapshot-primary-locale",
-                "type": "prose"
-              }
+              "岗位方向": "第14.3—14.5章按区域和任务区分卫生：食品处理区工作帽覆盖头发；专间和明确列举专用操作任务佩戴清洁口罩，其他相应直接入口操作为宜戴，不写所有前厅人员均须口罩。洗手/消毒按是否直接入口及接触污物、钱、手机等具体情形；手套不替代洗手。第10章食品接触餐具洗后使用前消毒，设备/药剂按适用说明；第8.2章顾客在场避免扬尘。工作衣服受污染及时更换，直接入口岗位每天更换为宜；不把建议统一写强制。",
+              "说明": "第14.3—14.5章按区域和任务区分卫生：食品处理区工作帽覆盖头发；专间和明确列举专用操作任务佩戴清洁口罩，其他相应直接入口操作为宜戴，不写所有前厅人员均须口罩。洗手/消毒按是否直接入口及接触污物、钱、手机等具体情形；手套不替代洗手。第10章食品接触餐具洗后使用前消毒，设备/药剂按适用说明；第8.2章顾客在场避免扬尘。工作衣服受污染及时更换，直接入口岗位每天更换为宜；不把建议统一写强制。"
             },
             {
               "学历段": "技能等级与职业发展",
-              "岗位方向": "可通过《餐厅服务员国家职业技能标准（2020 年版）》分级取得技能等级凭证；实际晋升更多依赖岗位经验、带教与班次负责与顾客反馈。",
-              "说明": {
-                "$item": "actors.display.career_snapshot_primary_locale.scenario.theater",
-                "block": "china-salary",
-                "copy_key": "career.item.career-snapshot-primary-locale",
-                "type": "prose"
-              }
+              "岗位方向": "餐厅服务员2020标准4-03-02-05，初中/相当文化、五级至一级；定义含排座点菜配菜、宴会设计布置等，比美国协助细类更宽，非一一互认。五级可按规定培训结业或累计相关工作1年分支申报；四级有五级后4年、累计6年或规定学校等分支，三级有四级后5年、相关学校/专业或相关专科加四级后2年等分支，二/一级再按相应经验与学校条件。260/240/200/100/100为各等级参考学时，不套所有分支或日历时长；理论/技能及适用综合评审各60，技师/高技含综合评审。目标评价机构当前申报、费用、补贴和岗位是否要求证书未逐核，证书不自动带来工资/录用或酒精服务权限。",
+              "说明": "餐厅服务员2020标准4-03-02-05，初中/相当文化、五级至一级；定义含排座点菜配菜、宴会设计布置等，比美国协助细类更宽，非一一互认。五级可按规定培训结业或累计相关工作1年分支申报；四级有五级后4年、累计6年或规定学校等分支，三级有四级后5年、相关学校/专业或相关专科加四级后2年等分支，二/一级再按相应经验与学校条件。260/240/200/100/100为各等级参考学时，不套所有分支或日历时长；理论/技能及适用综合评审各60，技师/高技含综合评审。目标评价机构当前申报、费用、补贴和岗位是否要求证书未逐核，证书不自动带来工资/录用或酒精服务权限。"
             },
             {
               "学历段": "全国职业级工资分布",
               "岗位方向": "本轮未取得可核对的职业级工资统计；不以行业均值或招聘报价替代。",
-              "说明": {
-                "$item": "actors.display.career_snapshot_primary_locale.scenario.national",
-                "block": "china-salary",
-                "copy_key": "career.item.career-snapshot-primary-locale",
-                "type": "prose"
-              }
+              "说明": "证据不足：未取得精确职业工资，不推断全国资料不存在。"
             }
           ],
           "china_industry_table": [
@@ -34578,14 +34730,14 @@
           "china_ref": {
             "$join": [
               {
-                "$source": "r2-pay-1",
+                "$source": "r5-nbs-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
                 "item": "actors.source-register.published.1"
               },
               {
-                "$source": "r2-pay-1",
+                "$source": "r5-nbs-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -34615,7 +34767,7 @@
               "月薪参考": {
                 "$join": [
                   {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
+                    "$fact": "r5-current-china-jiaojiang-featured-daily-2026",
                     "field": "display_value"
                   },
                   {
@@ -34641,7 +34793,7 @@
           "china_soc_row": "中国大陆薪资口径",
           "edu": "训练与技能等级见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "r5-current-china-jiaojiang-featured-daily-2026"
           ],
           "sources_note": "来源链接按各自适用范围使用。",
           "ui": {
@@ -34704,10 +34856,10 @@
         },
         "bls_table": [
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-low",
             "指标": "薪资 · 10 分位",
             "数值": {
-              "$fact": "low",
+              "$fact": "r5-current-low",
               "field": "display_value"
             },
             "说明": "本职业 2025 年 5 月工资数据的分布低端，是统计位置而不是入职起薪。"
@@ -34718,10 +34870,10 @@
             "说明": "本职业 2025 年 5 月工资数据的下四分位；小时口径为 13.62 美元。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-median",
             "指标": "薪资 · 中位数",
             "数值": {
-              "$fact": "median",
+              "$fact": "r5-current-median",
               "field": "display_value"
             },
             "说明": "本职业 2025 年 5 月工资数据的中间位置：一半从业者低于、一半高于该值（中位时薪 16.34 美元）。"
@@ -34732,40 +34884,40 @@
             "说明": "本职业 2025 年 5 月工资数据的上四分位；小时口径为 17.91 美元。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-high",
             "指标": "薪资 · 90 分位",
             "数值": {
-              "$fact": "high",
+              "$fact": "r5-current-high",
               "field": "display_value"
             },
-            "说明": "本职业 2025 年 5 月工资数据的分布高端，通常与雇主类型、地区与是否含小费或服务费分配相关。"
+            "说明": "2025第90分位不是起薪、年限或待遇因果；源数据未证明雇主/服务费机制导致该位置。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024 就业 · 本职业人数",
+            "fact_ref": "r5-current-employment",
+            "指标": "2025就业 · 本职业岗位",
             "数值": {
-              "$fact": "employment",
+              "$fact": "r5-current-employment",
               "field": "display_value"
             },
-            "说明": "2024 年本职业就业规模（O*NET 摘要页口径约 527,400 人）；总量较大，地方性差异明显。"
+            "说明": "2025就业546,600；预测覆盖与受雇工资不同。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 增长预测",
+            "fact_ref": "r5-current-growth",
+            "指标": "2025—2035就业 · 增长预测",
             "数值": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "display_value"
             },
-            "说明": "O*NET 摘要页标注为增长 5% 至 6%（快于平均）；本页未取得 BLS 职业展望页第一手口径，故不并列第二个数值。"
+            "说明": "2025—2035 BLS5.3%；O*NET全国取整5%、摘要分组5—6%，同一预测期间。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 预计空缺",
+            "fact_ref": "r5-current-openings",
+            "指标": "2025—2035就业 · 年均空缺",
             "数值": {
-              "$fact": "openings",
+              "$fact": "r5-current-openings",
               "field": "display_value"
             },
-            "说明": "约 99,600 个，为预测期内因增长与更替等形成的合计空缺，不是每年净增。"
+            "说明": "2025—2035年均95,300空缺含增长更替；非十年合计、年净增或录用率。"
           }
         ],
         "boundary": {
@@ -34827,7 +34979,7 @@
           "type": "prose"
         },
         "growth": {
-          "$fact": "growth",
+          "$fact": "r5-current-growth",
           "field": "display_value"
         },
         "heading": {
@@ -34842,13 +34994,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024 年基期（O*NET 摘要页与详细资料页）",
+        "industry_period": "2025基期；O*NET本职业就业行业份额与情境调查分别解释",
         "industry_rows": [
           {
-            "fact_ref": "median",
-            "industry": "住宿与食品服务业（O*NET 2024 年基期给出的主要行业门类，未附占比与人数）",
+            "fact_ref": "r5-current-median",
+            "industry": "住宿与食品服务业：占本职业2025就业83%，非行业工资",
             "median": {
-              "$fact": "industry-theater",
+              "$fact": "r5-current-industry-theater",
               "field": "display_value"
             },
             "note": {
@@ -34859,10 +35011,10 @@
             }
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-median",
             "industry": "餐厅与酒店餐饮部、单位与学校食堂、自助餐与宴会服务与快餐厅",
             "median": {
-              "$fact": "industry-education",
+              "$fact": "r5-current-industry-education",
               "field": "display_value"
             },
             "note": {
@@ -34873,10 +35025,10 @@
             }
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-current-median",
             "industry": "工作情境：持续行走或跑动 88%、持续站立 84%、持续与他人接触 80%、持续用手操作 80%、每天处于室内受控环境 67%",
             "median": {
-              "$fact": "industry-amusement",
+              "$fact": "r5-current-industry-amusement",
               "field": "display_value"
             },
             "note": {
@@ -34887,8 +35039,8 @@
             }
           },
           {
-            "industry": "O*NET 未提供更细的行业分布与行业工资",
-            "median": "统计不含自雇",
+            "industry": "本轮未取得本职业细行业工资；组合OOH行业时薪不代填",
+            "median": "OEWS工资不覆盖自雇；就业预测含自雇",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -34943,7 +35095,7 @@
           }
         ],
         "median": {
-          "$fact": "median",
+          "$fact": "r5-current-median",
           "field": "display_value"
         },
         "outlook_heading": {
@@ -34953,7 +35105,7 @@
           "type": "prose"
         },
         "outlook_period": {
-          "$fact": "growth",
+          "$fact": "r5-current-growth",
           "field": "period"
         },
         "wage_column_labels": [
@@ -34979,7 +35131,7 @@
             },
             "label": "较低工资位置",
             "value": {
-              "$fact": "low",
+              "$fact": "r5-current-low",
               "field": "display_value"
             }
           },
@@ -34993,7 +35145,7 @@
             },
             "label": "全国中位工资",
             "value": {
-              "$fact": "median",
+              "$fact": "r5-current-median",
               "field": "display_value"
             }
           },
@@ -35007,7 +35159,7 @@
             },
             "label": "较高工资位置",
             "value": {
-              "$fact": "high",
+              "$fact": "r5-current-high",
               "field": "display_value"
             }
           }
@@ -35135,12 +35287,7 @@
         ],
         "direct_answer": {
           "$join": [
-            {
-              "$item": "actors.market-signals.market-signal-card.1",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "美国35-9011当前2025—2035：2025就业546,600→2035预计575,500，净增28,900；BLS表1.2增长5.3%，O*NET全国趋势取整5%，摘要分组5—6%，保留各来源精度。年均95,300空缺含增长与更替，不是十年合计或每年净增；自雇0.1%。全国预测非个人录用概率，也不证明AI就业因果。",
             {
               "$item": "actors.market-signals.market-signal-card.5",
               "block": "market-signals",
@@ -35160,7 +35307,7 @@
           {
             "geography": "美国",
             "horizon": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "period"
             },
             "interpretation": {
@@ -35179,13 +35326,13 @@
             "occupation_scope": "餐厅与食堂服务员帮工（O*NET-SOC 35-9011.00）",
             "source_id": "bls",
             "value": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "display_value"
             }
           },
           {
             "geography": "美国",
-            "horizon": "2024 年基期",
+            "horizon": "2025基期",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -35201,7 +35348,7 @@
             "metric": "本职业就业规模",
             "occupation_scope": "餐厅与食堂服务员帮工（O*NET-SOC 35-9011.00）",
             "source_id": "ratify",
-            "value": "2024 年约 527,400 人（O*NET 摘要页口径）；实际招聘受住宿与餐饮业景气与排班需求影响"
+            "value": "本职业546,600岗位；全国预测非当前地方招聘数量"
           },
           {
             "geography": "美国与中国大陆",
@@ -35221,14 +35368,14 @@
             "metric": "训练与资格路径",
             "occupation_scope": "餐厅与食堂服务员帮工（O*NET-SOC 35-9011.00）",
             "source_id": "employer",
-            "value": "美国以在职培训与带教为主（几天到一年），无需统一执照；中国大陆无统一强制证书，但接触直接入口食品须取得健康证明并通过每日晨检与食品安全培训，餐厅服务员技能等级为可选凭证"
+            "value": "美国BLS表1.2典型入门为无正式教育凭证、相关工作经验None、短期在岗训练。O*NET Job Zone1—2、SVP低于6；几天到一年是该准备组说明，不是本职业每位雇主固定培训期。74%高中/同等、22%高中以下、2%高中后证书是对新入职所需学历的受访意见，非雇主占比、员工学历或中国门槛。未逐核各州酒精服务年龄、培训、许可及雇主条件。 中国2018《餐饮服务食品安全操作规范》相关要求在第14章，不是第11/12章。14.1.1接触直接入口食品者（含相应加工、传菜、洗消及新/临时人员）先取得健康证明、每年健康检查，必要时临时检查；14.1.2食品安全管理人员每天上岗前检查从业人员健康，发热/腹泻/咽部炎症/皮肤伤口感染等先报告并暂停接触直接入口食品工作，查明原因并治愈相关疾病后才重新上岗，不一律停止全部非接触岗位。14.2培训考核合格方可上岗，企业每年、特定餐饮提供者每半年培训考核。"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35236,7 +35383,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35251,7 +35398,7 @@
           },
           {
             "href": {
-              "$source": "ratify",
+              "$source": "r5-trends-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35259,7 +35406,7 @@
             },
             "id": "ratify",
             "label": {
-              "$source": "ratify",
+              "$source": "r5-trends-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35274,7 +35421,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-ooh-parent",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35282,7 +35429,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-ooh-parent",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36402,14 +36549,14 @@
           },
           {
             "href": {
-              "$source": "enrichment",
+              "$source": "r5-cn-food",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "enrichment",
+              "$source": "r5-cn-food",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -37062,6 +37209,148 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "33,980美元/年；16.34美元/时（2025中位）",
+        "fact_id": "r5-current-median",
+        "market": "美国",
+        "measure": "全国工资分位",
+        "occupation_scope": "美国35-9011.00，2025年5月全国工资10/25/50/75/90分位：年21,300/28,330/33,980/37,250/46,570美元；时10.24/13.62/16.34/17.91/22.39美元。OEWS直时税前工资包含小费、基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金及自雇；不笼统排除全部津贴或全部合同雇员。分位非起薪、年限、到手收入或待遇保证。",
+        "period": "2025年5月",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "21,300美元/年；10.24美元/时（2025第10分位）",
+        "fact_id": "r5-current-low",
+        "market": "美国",
+        "measure": "全国工资分位",
+        "occupation_scope": "美国35-9011.00，2025年5月全国工资10/25/50/75/90分位：年21,300/28,330/33,980/37,250/46,570美元；时10.24/13.62/16.34/17.91/22.39美元。OEWS直时税前工资包含小费、基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金及自雇；不笼统排除全部津贴或全部合同雇员。分位非起薪、年限、到手收入或待遇保证。",
+        "period": "2025年5月",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "46,570美元/年；22.39美元/时（2025第90分位）",
+        "fact_id": "r5-current-high",
+        "market": "美国",
+        "measure": "全国工资分位",
+        "occupation_scope": "美国35-9011.00，2025年5月全国工资10/25/50/75/90分位：年21,300/28,330/33,980/37,250/46,570美元；时10.24/13.62/16.34/17.91/22.39美元。OEWS直时税前工资包含小费、基本工资、规定津贴及佣金/生产奖金等激励，排除加班溢价、轮班差额、非生产奖金及自雇；不笼统排除全部津贴或全部合同雇员。分位非起薪、年限、到手收入或待遇保证。",
+        "period": "2025年5月",
+        "source_refs": [
+          "bls",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "546,600岗位（2025）",
+        "fact_id": "r5-current-employment",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "美国35-9011当前2025—2035：2025就业546,600→2035预计575,500，净增28,900；BLS表1.2增长5.3%，O*NET全国趋势取整5%，摘要分组5—6%，保留各来源精度。年均95,300空缺含增长与更替，不是十年合计或每年净增；自雇0.1%。全国预测非个人录用概率，也不证明AI就业因果。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-current",
+          "r5-trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "BLS增长5.3%；O*NET全国取整5%、摘要分组5—6%",
+        "fact_id": "r5-current-growth",
+        "market": "美国",
+        "measure": "十年就业变化",
+        "occupation_scope": "美国35-9011当前2025—2035：2025就业546,600→2035预计575,500，净增28,900；BLS表1.2增长5.3%，O*NET全国趋势取整5%，摘要分组5—6%，保留各来源精度。年均95,300空缺含增长与更替，不是十年合计或每年净增；自雇0.1%。全国预测非个人录用概率，也不证明AI就业因果。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-current",
+          "r5-trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均95,300空缺（2025—2035，含增长与更替）",
+        "fact_id": "r5-current-openings",
+        "market": "美国",
+        "measure": "年均空缺",
+        "occupation_scope": "美国35-9011当前2025—2035：2025就业546,600→2035预计575,500，净增28,900；BLS表1.2增长5.3%，O*NET全国趋势取整5%，摘要分组5—6%，保留各来源精度。年均95,300空缺含增长与更替，不是十年合计或每年净增；自雇0.1%。全国预测非个人录用概率，也不证明AI就业因果。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-current",
+          "r5-trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "本职业以清桌、撤餐、换布草、摆台、补充餐具及服务吧台物资、提供水/咖啡/调味品等餐饮协助为定义。24项任务为16核心、7补充和1新任务；操作收银机为核心（重要性88），不是一律只能协助收银。混合准备调饮配料、切水果配饰等列补充任务；三明治准备为新任务且重要性未提供，不填0。任务可能与其他餐饮岗位交叉，实际菜单/酒水操作、点单、收款退款和服务承诺仍按岗位授权及当地规则核。",
+        "fact_id": "r5-current-identity",
+        "market": "美国",
+        "measure": "职业定义及任务边界",
+        "occupation_scope": "本职业以清桌、撤餐、换布草、摆台、补充餐具及服务吧台物资、提供水/咖啡/调味品等餐饮协助为定义。24项任务为16核心、7补充和1新任务；操作收银机为核心（重要性88），不是一律只能协助收银。混合准备调饮配料、切水果配饰等列补充任务；三明治准备为新任务且重要性未提供，不填0。任务可能与其他餐饮岗位交叉，实际菜单/酒水操作、点单、收款退款和服务承诺仍按岗位授权及当地规则核。",
+        "period": "2026页面",
+        "source_refs": [
+          "onet",
+          "sag-moa"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "住宿与食品服务业占本职业2025就业83%，非行业工资",
+        "fact_id": "r5-current-industry-theater",
+        "market": "美国",
+        "measure": "就业行业份额",
+        "occupation_scope": "本职业就业行业分布，不是各行业工资或OOH组合81%",
+        "period": "2025",
+        "source_refs": [
+          "onet",
+          "sag-moa"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET工作情境调查：持续行走/跑动88%、持续站立84%、持续用手操作80%、持续接触他人80%；每天面对面69%、室内受控67%、常见PPE57%；身体距离接近触碰53%，团队71%极重要、公众服务61%极重要。愤怒/无礼人员接触14%每天、54%每周但非每天、19%每月；54%不写成每周及以上。周工时71%恰40小时、23%少于40；55%规律、30%不规律、15%季节安排。调查比例非所有雇主要求、个人健康门槛或事故率。",
+        "fact_id": "r5-current-industry-education",
+        "market": "美国",
+        "measure": "工作情境调查",
+        "occupation_scope": "O*NET工作情境调查：持续行走/跑动88%、持续站立84%、持续用手操作80%、持续接触他人80%；每天面对面69%、室内受控67%、常见PPE57%；身体距离接近触碰53%，团队71%极重要、公众服务61%极重要。愤怒/无礼人员接触14%每天、54%每周但非每天、19%每月；54%不写成每周及以上。周工时71%恰40小时、23%少于40；55%规律、30%不规律、15%季节安排。调查比例非所有雇主要求、个人健康门槛或事故率。",
+        "period": "2026页面",
+        "source_refs": [
+          "onet",
+          "sag-moa"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "本轮未取得本职业细行业工资；O*NET已提供主要行业份额83%，情境非行业工资",
+        "fact_id": "r5-current-industry-amusement",
+        "market": "美国",
+        "measure": "行业工资缺口",
+        "occupation_scope": "不宣称官方无行业细分",
+        "period": "检索2026-10-09",
+        "source_refs": [
+          "onet",
+          "sag-moa"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "中国全国精确职业工资缺口；相关住宿餐饮业2025年平均非私营62,461/私营55,123元为行业背景，不代本职业",
+        "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
+        "market": "中国大陆",
+        "measure": "精确工资缺口与行业背景",
+        "occupation_scope": "国家统计局2025住宿和餐饮业城镇非私营62,461/私营55,123元税前年平均；覆盖行业内多职业，为相关单位背景，不是本职业中位、起薪或岗位月薪。调查城镇5人以上法人，非私营不只国企，排除个体/自由职业等；学校/医院自身食堂未必属于住宿餐饮单位，不套全部场景。",
+        "period": "2025年及检索2026-10-09",
+        "source_refs": [
+          "r5-nbs-current"
+        ]
       }
     ]
   },
@@ -37070,7 +37359,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "服务与现场执行 · 摆台与撤收 · 清洁与补货",
@@ -37121,7 +37410,7 @@
       "text": "餐厅与食堂服务员帮工"
     }
   },
-  "source_content_sha256": "ea2309ad18b80011fc5a8d288f441662c6bdabb7ca6da89ec906ef2b8801f200",
+  "source_content_sha256": "3fc6b4f17546a9d5a587b520fa4c417928220f1110777f156238b5a46a64a46d",
   "subject": {
     "canonical_slug": "dining-room-and-cafeteria-attendants-and-bartender-helpers",
     "name": "餐厅与食堂服务员帮工",

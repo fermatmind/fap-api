@@ -12004,28 +12004,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.href": {
-        "ref": {
-          "id": "chemical-technicians.us-salary.career-snapshot-secondary-locale.18",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.label": {
         "ref": {
@@ -23689,7 +23669,7 @@
           ],
           "id": "chemical-technicians.profile.definition-block.1",
           "source_refs": [
-            "onet-details"
+            "ct-details-20261009"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23704,7 +23684,7 @@
           },
           "id": "chemical-technicians.profile.definition-block.2",
           "source_refs": [
-            "onet-details"
+            "ct-details-20261009"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23719,7 +23699,7 @@
           },
           "id": "chemical-technicians.profile.definition-block.3",
           "source_refs": [
-            "onet-details"
+            "ct-details-20261009"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23734,7 +23714,7 @@
           },
           "id": "chemical-technicians.profile.definition-block.4",
           "source_refs": [
-            "onet-details"
+            "ct-details-20261009"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23749,7 +23729,7 @@
           },
           "id": "chemical-technicians.profile.definition-block.5",
           "source_refs": [
-            "nasa-seh"
+            "ct-cn-class-2022"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23809,7 +23789,7 @@
           },
           "id": "chemical-technicians.profile.definition-block.9",
           "source_refs": [
-            "nasa-seh"
+            "ct-cn-class-2022"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23834,7 +23814,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "化学技术员的工作可以分成三类相连但独立的工作面。第一类是实验室检测与分析：按标准或已验证方法执行化学与物理检测，使用色谱与光谱与分离技术与显微镜搭建并开展实验，并按规范监控产品质量是否符合标准。第二类是样品与溶液制备与仪器维护：取样与制备样品、按配方配制标准溶液与试剂、维护与清洁与灭菌仪器设备，并记录仪器使用与校准状态。第三类是数据与记录与报告与协作：汇总与解读检测结果，撰写技术报告与图表，参与安全审核与整改，为化学家与工程师提供技术支持并把异常与处置交接清楚。三类工作的共同点是以方法、原始数据与可追溯记录说话，区别在于判断与签认的授权不同。"
+              "编辑按O*NET任务整理三类工作面：化学技术员的工作可以分成三类相连但独立的工作面。第一类是实验室检测与分析：按标准或已验证方法执行化学与物理检测，使用色谱与光谱与分离技术与显微镜搭建并开展实验，并按规范监控产品质量是否符合标准。第二类是样品与溶液制备与仪器维护：取样与制备样品、按配方配制标准溶液与试剂、维护与清洁与灭菌仪器设备，并记录仪器使用与校准状态。第三类是数据与记录与报告与协作：汇总与解读检测结果，撰写技术报告与图表，参与安全审核与整改，为化学家与工程师提供技术支持并把异常与处置交接清楚。三类工作的共同点是以方法、原始数据与可追溯记录说话，区别在于判断与签认的授权不同。"
             ]
           },
           "id": "chemical-technicians.profile.career-quick-answers-block.1",
@@ -23856,7 +23836,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "读取并确认检测方法、标准与判定规则 → 核对样品标识与状态与试剂与标准品有效期 → 确认仪器状态与校准与适用条件 → 按方法执行检测并记录原始数据 → 比对质控样与历史数据识别异常 → 对异常按程序复测或保留记录并升级 → 汇总结果并说明适用条件与限制"
+              "读取并确认检测方法、标准与判定规则 → 核对样品标识与状态与试剂与标准品有效期 → 确认仪器状态与校准与适用条件 → 按方法执行检测并记录原始数据 → 比对质控样与历史数据识别异常 → 对异常保留记录并及时报告，依程序决定是否调查、复测或升级 → 汇总结果并说明适用条件与限制"
             ]
           },
           "id": "chemical-technicians.profile.career-quick-answers-block.3",
@@ -23889,7 +23869,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "汇总并解读检测与分析结果，核对结果与质控样与历史趋势是否一致；撰写技术报告或制作图表以记录实验结果，说明方法、样品条件与结果适用范围；对不符预期或超出规范的结果先复核原始记录与仪器状态，再按程序复测与升级；不得用估计值替代实测记录，也不修改原始数据以匹配预期。"
+              "汇总和解读检测结果、撰写报告或图表，说明方法、条件及限制；不以估计替实测、不改原始数据迎合预期。编辑建议：异常及时保留原始记录并按实际程序报告；调查先核方法、样品、仪器与质控。复测/重取样仅在程序允许、安全条件和授权具备时实施，不能用反复检测挑选合格值或延误安全处置。"
             ]
           },
           "id": "chemical-technicians.profile.career-quick-answers-block.6",
@@ -23944,7 +23924,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "化学家或工程师通常指导并评价技术员工作；技术员可在项目安排中参与实验配方、实验设计和新工艺开发。方法变更须按质量体系审批，不能用职业名称排除开发任务。"
+              "化学家或工程师通常指导并评价技术员工作；技术员可在项目安排中参与实验配方、实验设计和新工艺开发。方法变更按适用质量体系核验证、记录和授权要求，不能用职业名称排除开发任务。"
             ]
           },
           "id": "chemical-technicians.profile.career-quick-answers-block.11",
@@ -24054,7 +24034,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "跨岗位比较不能只看名称相近；行业与产品类型、方法体系、质量体系与授权范围不同，任务看起来相似但责任完全不同。"
+              "跨岗位比较先核行业、样品和产品、方法及质量体系、实际授权；任务相似不证明责任完全相同或完全不同。"
             ]
           },
           "id": "chemical-technicians.profile.career-quick-answers-block.21",
@@ -24065,7 +24045,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "六个反复出现的职业判断：方法与判定规则是否适用当前样品；样品与试剂与仪器状态是否可信；结果异常是先复测还是先停机升级；原始数据是否完整可追溯；质控样与趋势是否支持结论；以及报告是否写清适用条件与限制。"
+              "六个编辑核对点：方法适用性，样品/试剂/仪器状态，异常是否需立即报告或执行应急程序，原始记录是否完整，质控依据是否足够，报告适用范围。复测与停机不由本页统一排序。"
             ]
           },
           "id": "chemical-technicians.profile.career-quick-answers-block.22",
@@ -24120,7 +24100,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "判断三：先复测还是先升级"
+              "判断三：异常报告、调查与复测边界"
             ]
           },
           "id": "chemical-technicians.profile.career-quick-answers-block.27",
@@ -24131,7 +24111,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "常规偏差可按程序复测并核对质控样；涉及安全、批量放行、不符合项或结果可能与规范冲突时，保留原始记录并立即升级，不自行修改数据或选择性报告。"
+              "编辑建议：异常及时保留原始记录并按实际程序报告；调查先核方法、样品、仪器与质控。复测/重取样仅在程序允许、安全条件和授权具备时实施，不能用反复检测挑选合格值或延误安全处置。"
             ]
           },
           "id": "chemical-technicians.profile.career-quick-answers-block.28",
@@ -24175,7 +24155,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "用质控样、平行样与历史趋势判断结果是否受控；单一结果与质控或趋势不符时，先核查过程再报告，不以个别结果代表整体质量。"
+              "编辑核对质控样、平行样与趋势；其规则按具体方法核，趋势不自动推翻实测。异常及时保留记录并报告，不为等待复核或挑选合格值延误处置，不以单样结果代表未核整体。"
             ]
           },
           "id": "chemical-technicians.profile.career-quick-answers-block.32",
@@ -24252,10 +24232,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业分布：O*NET当前页面列制造43%、专业科学技术服务32%、其他25%，该页未注明统计资料年，不拼为2025产业结构。BLS2025—2035预测为60,000→63,000人、5%（表1.2精确4.9%）、年均空缺7,600。BLS 2025行业工资中位数：批发65,960、研发63,900、化学制造63,040、教育59,750、检测实验室49,050美元/年。"
+              "O*NET详情明确2025行业分布：制造43%、专业科学技术服务31%；当前行业子页同为43/31，其他26%（含批发）。行业结构不是工资。BLS2025—2035预测60,000→63,000人、5%（表1.2精确4.9%）、年均空缺7,600。2025年5月行业工资中位保留：批发65,960、研发63,900、化学制造63,040、教育59,750、检测实验室49,050美元/年。"
             ]
           },
           "id": "chemical-technicians.profile.onet-structured-fields-block.4",
+          "source_refs": [
+            "ct-details-20261009",
+            "ct-ooh-2025",
+            "ct-ep-2025"
+          ],
           "type": "prose"
         },
         {
@@ -24290,7 +24275,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "防护与安全｜100% 每天佩戴常规防护或安全装备；51% 每天暴露于危险条件；25% 每天佩戴专用防护装备；13% 每天暴露于辐射；18% 每周以上有轻微烫伤与割伤或咬伤风险。\n环境与作业空间｜98% 每天在环境受控的室内工作，95% 每天接触污染物，13% 每天在非受控室内工作，16% 每天在遮蔽的户外工作，14% 每天在露天天气下工作，13% 每天处于极亮或不足照明。\n准确性与重复性｜88% 认为精确或准确极其重要、12% 认为非常重要；34% 认为重复同一任务极其重要、23% 认为非常重要；15% 的工作高度自动化、45% 中度自动化、15% 轻微自动化、25% 完全未自动化。\n协作与沟通｜99% 每天进行面对面讨论；100% 每天使用电子邮件；59% 认为与工作团队协作极其重要、39% 认为非常重要；42% 持续与他人接触；另31% 大部分时间与他人接触；16% 每天进行电话交谈。\n工时与排班｜86% 为规律排班、14% 为不规律排班；多数人全职工作，项目截止或生产异常时可能需要加班。\n决策与自主｜48% 每天做决策；26% 对如何决策有很大自由、57% 有一些自由、12% 没有自由；60% 对确定任务与优先级有一些自由；27% 认为作业节奏由设备速度决定极其重要。\n身体与作业负荷｜39% 持续或几乎持续用手处理或操控物体与工具；63% 超过一半工时站立；37% 超过一半工时走动；13% 超过一半工时做重复动作。\n责任与影响｜23% 对他人健康与安全承担高度责任、12% 承担有限责任；37% 认为决策对同事影响非常重要；就准确性而言 88% 认为极其重要。\n竞争与压力｜48% 每天面临时间压力；15% 认为竞争极其激烈、24% 高度竞争、28% 中等竞争、30% 轻微竞争。"
+              "防护与安全｜100% 每天佩戴常规防护或安全装备；51% 每天暴露于危险条件；25% 每天佩戴专用防护装备；13% 每天暴露于辐射；18% 每周或更多、但非每天暴露于轻微烫伤、割伤、咬伤或蜇伤条件（非实际伤害发生率）。\n环境与作业空间｜98% 每天在环境受控的室内工作，95% 每天接触污染物，13% 每天在非受控室内工作，16% 每天在遮蔽的户外工作，14% 每天在露天天气下工作，13% 每天处于极亮或不足照明。\n准确性与重复性｜88% 认为精确或准确极其重要、12% 认为非常重要；34% 认为重复同一任务极其重要、23% 认为非常重要；15% 的工作高度自动化、45% 中度自动化、15% 轻微自动化、25% 完全未自动化。\n协作与沟通｜99% 每天进行面对面讨论；100% 每天使用电子邮件；59% 认为与工作团队协作极其重要、39% 认为非常重要；42% 持续与他人接触；另31% 大部分时间与他人接触；16% 每天进行电话交谈。\n工时与排班｜86% 为规律排班、14% 为不规律排班；多数人全职工作，项目截止或生产异常时可能需要加班。\n决策与自主｜48% 每天做决策；26% 对如何决策有很大自由、57% 有一些自由、12% 没有自由；60% 对确定任务与优先级有一些自由；27% 认为作业节奏由设备速度决定极其重要。\n身体与作业负荷｜39% 持续或几乎持续用手处理或操控物体与工具；63% 超过一半工时站立；37% 超过一半工时走动；13% 超过一半工时做重复动作。\n责任与影响｜23% 对他人健康与安全承担高度责任、12% 承担有限责任；37% 认为决策对同事影响非常重要；就准确性而言 88% 认为极其重要。\n竞争与压力｜48% 每天面临时间压力；15% 认为竞争极其激烈、24% 高度竞争、28% 中等竞争、30% 轻微竞争。\n以上O*NET数值为美国受访问卷特定答项，非事故率、个人日程或中国岗位保证；全职及可能加班另来自BLS OOH。"
             ]
           },
           "id": "chemical-technicians.profile.work-context-block.1",
@@ -24912,31 +24897,31 @@
                 "url": "https://www.onetonline.org/link/summary/19-4031.00"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（19-4031.00，显示 BLS 就业预测）",
+                "entity": "BLS Chemical Technicians（2025—2035就业预测及典型入行）",
                 "id": "link-7",
                 "relation": "related-evidence",
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/chemical-technicians.htm"
               },
               {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "entity": "O*NET19-4031.00职业详情",
                 "id": "link-8",
                 "relation": "related-evidence",
                 "url": "https://www.onetonline.org/link/details/19-4031.00"
               },
               {
-                "entity": "O*NET-SOC 19-4031.00 职业详细资料",
+                "entity": "O*NET19-4031.00全国工资分位（BLS OEWS）",
                 "id": "link-9",
                 "relation": "related-evidence",
                 "url": "https://www.onetonline.org/link/localwages/19-4031.00"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
+                "entity": "ILO生成式AI职业暴露研究",
                 "id": "link-10",
                 "relation": "related-evidence",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（19-4031.00，显示 BLS 就业预测）",
+                "entity": "NIST AI RMF1.0自愿风险治理框架",
                 "id": "link-11",
                 "relation": "related-evidence",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
@@ -24948,10 +24933,10 @@
                 "url": "https://www.onetonline.org/link/hot_tech/19-4031.00"
               },
               {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "entity": "O*NET19-4031.00任务及BLS预测边界",
                 "id": "link-13",
                 "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.onetonline.org/link/details/19-4031.00"
               },
               {
                 "entity": "O*NET 技术清单（19-4031.00 招聘技术关键词）",
@@ -24966,19 +24951,19 @@
                 "url": "https://www.onetonline.org/link/details/19-4031.00"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（19-4031.00，显示 BLS 就业预测）",
+                "entity": "BLS Chemical Technicians（2025—2035就业预测及典型入行）",
                 "id": "link-16",
                 "relation": "related-evidence",
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/chemical-technicians.htm"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
+                "entity": "中国检验检测机构监督管理办法",
                 "id": "link-17",
                 "relation": "related-evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2025/art_bff8f35d8f114acca7643bddd77e9505.html"
               },
               {
-                "entity": "O*NET 全国工资分位页面（19-4031.00）",
+                "entity": "BLS Chemical Technicians就业预测",
                 "id": "link-18",
                 "relation": "related-evidence",
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/chemical-technicians.htm"
@@ -25032,7 +25017,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把数字化工具用在数据录入与趋势与报表上，但把方法适用性判断、异常复测与结果升级保留在方法与人工确认之内。"
+              "编辑试用：在授权数据和已验证方法内试验录入、汇总与报表；方法适用性、异常调查和结果处置按实际程序落实复核责任，复测不由工具或本页自动授权。"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.13",
@@ -25054,7 +25039,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用数据看板提高异常与质控偏差的可见性，但把方法确认、不符合项判定与放行授权写清楚，避免让系统提示替代原始记录与复核。"
+              "编辑试用：比较看板对异常呈现和交接的实际效果，未取得本职业实测增益；方法确认、不符合项和放行权限按机构程序核。"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.15",
@@ -25252,7 +25237,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表按三条真实工作方向比较：AI 主要改变什么，以及哪些责任仍然留在人这一侧。三条方向来自该职业的任务结构（实验室检测与分析、样品与溶液制备与仪器维护、数据与记录与报告与协作），不是行业统一职级。"
+              "编辑按三类任务面比较工具可能用途与验证、复核、责任条件；不是已实现效果或永久人工分工，也非统一职级。"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.33",
@@ -25263,7 +25248,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把仪器读数与检测数据自动采集并生成结果表与趋势图、把方法参数与样品信息自动带入记录模板、对历史批次的质控数据做一致性比对。"
+              "编辑用途建议，须验证输入、规则与实际结果：把仪器读数与检测数据自动采集并生成结果表与趋势图、把方法参数与样品信息自动带入记录模板、对历史批次的质控数据做一致性比对。"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.34",
@@ -25274,7 +25259,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "确认方法是否适用当前样品基体、判断偏差是真实结果还是过程或仪器问题、以及在结果超出规范时按程序复测与升级。"
+              "核当前方法、基体、范围和质控；异常保留记录并按程序报告，调查和复测须核条件，不由AI提示授权。"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.35",
@@ -25285,7 +25270,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按配制表生成称量与定容提示、把样品前处理步骤转成可核对的清单、对试剂与标准品有效期与库存给出提醒。"
+              "编辑用途建议，须验证输入、规则与实际结果：按配制表生成称量与定容提示、把样品前处理步骤转成可核对的清单、对试剂与标准品有效期与库存给出提醒。"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.36",
@@ -25307,7 +25292,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把原始数据自动录入并生成报告草稿与图表、把异常与处置整理成交接摘要、核对记录是否完整可追溯。"
+              "编辑用途建议，须验证输入、规则与实际结果：把原始数据自动录入并生成报告草稿与图表、把异常与处置整理成交接摘要、核对记录是否完整可追溯。"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.38",
@@ -25560,7 +25545,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术能力回答「模型在原则上能做什么」。对本职业而言，较可靠的部分是数据录入与结果汇总与图表生成、记录模板与清单与提醒；不可靠的部分是未经核实的异常判定、方法适用性判断与超出规范的结果处理建议。"
+              "能力用途是编辑试验建议：可尝试录入、汇总、图表、模板和提醒；本轮没有本职业可靠性测试，不能先宣称这些环节可靠。方法适用性、异常与规范判断均应验证输入、输出及适用条件。"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.61",
@@ -25593,7 +25578,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能这样推断。该职业的任务结构以按方法执行检测、样品与试剂与仪器处理与可追溯记录为主：确认方法适用性、识别过程异常、判断结果是否符合规范都需要对数据质量负责的人来做。AI 会改变数据采集与记录与汇总的方式，但公开资料不支持「职业被取代」的结论。"
+              "O*NET包含检测、实验配方、研究支持、中试和新工艺开发。任务暴露、软件关键词及BLS总体预测不证明职业消失，也不证明职责永远不变；工具用途是编辑建议，责任按方法、机构和法域核。"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.64",
@@ -25604,7 +25589,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 19-4031.00 任务与工作活动；BLS 就业预测"
+              "O*NET19-4031.00任务；BLS OOH及表1.2预测；ILO暴露研究不能给替代年份"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.65",
@@ -25681,10 +25666,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。方法确认与结论签认与不合格品处置与企业放行的决定属于有授权的岗位与质量与资质体系的组织行为；涉及对外检测报告时通常还涉及检验检测资质认定与授权签字人要求。AI 生成的文本不具备这种责任能力，也不能替代原始记录与现场确认。"
+              "中国适用的对外证明性检验检测报告由授权签字人在技术能力范围签发；其他研发报告、方法确认和产品放行依各自质量体系及授权核。AI文本不替代依法应由人员或机构承担的责任。中国《检验检测机构监督管理办法》第2条适用向社会出具具有证明作用报告的活动；第8、12条核签字人能力和技术范围，第13条原始记录与报告至少保存6年。CMA或特别资质按机构、项目和法源核，不是每位技术员个人执照或所有外发数据统一门槛。"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.72",
+          "source_refs": [
+            "samr-testing-supervision",
+            "samr-cma"
+          ],
           "type": "prose"
         },
         {
@@ -25692,7 +25681,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST AI RMF 1.0 责任与记录要求；O*NET 19-4031.00 任务描述"
+              "中国检验检测监督管理办法第2、8、12、13条；NIST自愿框架仅作治理参考"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.73",
@@ -25824,7 +25813,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅以已验证方法与原始记录与质控数据为依据；对异常先复测与核对过程，再形成结论并留痕。"
+              "编辑建议：异常及时保留原始记录并按实际程序报告；调查先核方法、样品、仪器与质控。复测/重取样仅在程序允许、安全条件和授权具备时实施，不能用反复检测挑选合格值或延误安全处置。"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.85",
@@ -25835,7 +25824,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "配方、工艺参数、检测数据与客户信息属于企业核心信息，上传到外部服务可能构成违规披露或知识产权风险。"
+              "部分配方、参数、客户和检测数据可能受企业或法律保密要求约束，不能把全部检测数据自动视为商业秘密；外传前核实际分级、合同、授权与服务条款。"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.86",
@@ -25857,7 +25846,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "同一数据在不同系统与版本下可能得到不同汇总或图表；缺少版本与时间记录会使复核与责任追溯无法进行。"
+              "系统/模型版本、输入与汇总规则变化可能产生差异；保留足以复核的版本、时间与变更记录，不能断言少一个版本字段就必然完全无法追溯。"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.88",
@@ -25956,7 +25945,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数据采集与结果汇总的自动化程度提高；方法适用性与异常判定仍是人工职责"
+              "编辑用途/控制建议：数据采集与结果汇总的可试验自动采集与汇总，实际效果另核；方法适用性与异常判定按适用程序复核责任"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.97",
@@ -26000,7 +25989,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "清单与提醒可自动化；前处理确认与仪器状态判断仍由执行人员按规程执行"
+              "编辑用途/控制建议：清单与提醒可自动化；前处理确认与仪器状态判断仍由执行人员按规程执行"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.101",
@@ -26011,7 +26000,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断异常结果是否需要复测或重新取样，并确认记录与原始数据与批次一致。"
+              "编辑建议：异常及时保留原始记录并按实际程序报告；调查先核方法、样品、仪器与质控。复测/重取样仅在程序允许、安全条件和授权具备时实施，不能用反复检测挑选合格值或延误安全处置。"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.102",
@@ -26044,7 +26033,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "汇总与图表可自动生成；结果解读与适用条件与报告责任仍由人承担"
+              "编辑用途/控制建议：汇总与图表可自动生成；结果解读与适用条件与报告责任仍由人承担"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.105",
@@ -26088,7 +26077,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "培训与记录可数字化；现场风险识别与应急处置不可外包"
+              "编辑用途/控制建议：培训与记录可数字化；现场风险识别与应急处置须按实际应急职责及程序执行"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.109",
@@ -26132,7 +26121,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "摘要与报表可自动生成；记录真实性与交接责任仍由人承担"
+              "编辑用途/控制建议：摘要与报表可自动生成；记录真实性与交接责任仍由人承担"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.113",
@@ -26176,7 +26165,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "报修与校准提醒可自动化；故障判断与影响评估仍由人负责"
+              "编辑用途/控制建议：报修与校准提醒可自动化；故障判断与影响评估仍由人负责"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.117",
@@ -26220,7 +26209,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "计划与培训记录可数字化；取样代表性与带教质量仍需人工确认"
+              "编辑用途/控制建议：计划与培训记录可数字化；取样代表性与带教质量仍需人工确认"
             ]
           },
           "id": "chemical-technicians.ai-impact.ai-impact-table.121",
@@ -26255,7 +26244,7 @@
           },
           "id": "chemical-technicians.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-wages"
+            "ct-nbs-2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26270,7 +26259,7 @@
           },
           "id": "chemical-technicians.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wages"
+            "ct-nbs-2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26351,7 +26340,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮查阅范围为：国家统计局公开工资资料入口、人力资源社会保障部公开信息，以及本职业的 O*NET/BLS 精确职业来源；后者其市场与辖区明确为美国，不支持中国精确职业工资口径。因此本页不给出本职业的中位数、分位数或起薪，也不把美国数值换算成人民币；只发布上述两条已标注的行业代理值。"
+              "本轮实际核NBS2025行业表、O*NET/BLS美国职业原文及职业分类大典部分职责。NBS2025中国城镇非私营/私营制造业均值113,594/76,055元/年；科学研究和技术服务业182,064/83,560元/年。四值均为行业背景，非本职业、细分检测行业、中位、起薪或到手收入。 未取得中国精确职业工资分位、起薪或有统计方法的招聘样本。"
             ]
           },
           "id": "chemical-technicians.china-salary.career-snapshot-primary-locale.8",
@@ -26373,7 +26362,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "该口径覆盖城镇地域内就业人数 5 人及以上法人单位，不含个体工商户与自由职业者；用它替代本职业工资会同时引入行业与用工形式两重偏差。"
+              "NBS覆盖城镇地域内5人及以上法人单位；按规定视同法人的产业活动单位亦纳入。工资含代扣个税及个人社保公积金等，不是到手收入；个体工商户、自由职业者等不在该调查范围。"
             ]
           },
           "id": "chemical-technicians.china-salary.career-snapshot-primary-locale.10",
@@ -26417,7 +26406,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本条证据路由不使用招聘样本或相邻岗位报价填补职业级缺口，因为无法核验其统计对象与抽样方法。"
+              "本轮未取得具有可核统计对象与抽样方法的招聘样本，不用个别报价填全国职业工资缺口；不断言所有招聘样本都无法核验。"
             ]
           },
           "id": "chemical-technicians.china-salary.career-snapshot-primary-locale.14",
@@ -26428,7 +26417,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "统计覆盖范围：中国大陆公开工资统计以城镇法人单位为对象，劳务派遣与外包与个体经营等形式的覆盖不同，与本职业的实际用工结构并不完全重合。"
+              "NBS按法人单位调查并有视同法人例外；派遣人员原则由实际用工单位统计就业及实际支付工资，非一概排除。外包按统计归属核，不与个体/自由职业笼统合并。"
             ]
           },
           "id": "chemical-technicians.china-salary.career-snapshot-primary-locale.15",
@@ -26472,10 +26461,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "匹配依据：本职业测试和研发支持任务分布在制造与专业科学技术服务行业；故NBS相关门类只作宽口径参考。2025中国城镇非私营/私营制造业均值113,594/76,055元/年，科学研究和技术服务业182,064/83,560元/年，分别列示。统计含税工资、覆盖5人及以上法人单位；不是本职业中位、细分检测行业工资、新手薪资或个人到手收入。"
+              "匹配依据：O*NET2025制造43%、专业科学技术服务31%支持参考相应NBS较宽门类。NBS2025中国城镇非私营/私营制造业均值113,594/76,055元/年；科学研究和技术服务业182,064/83,560元/年。四值均为行业背景，非本职业、细分检测行业、中位、起薪或到手收入。 NBS含税工资、5人及以上法人及规定视同法人单位；不等中国本职业用工结构。"
             ]
           },
           "id": "chemical-technicians.china-salary.career-snapshot-primary-locale.19",
+          "source_refs": [
+            "ct-nbs-2025",
+            "ct-details-20261009"
+          ],
           "type": "prose"
         },
         {
@@ -26494,10 +26487,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "岗位映射边界：本条证据路由未建立与 O*NET-SOC 19-4031.00 一一对应的职业细类，相关职责可能分布在化学检验员、化验员、实验员、化工生产技术支持等多个岗位中，须按岗位实际职责与资质判断。"
+              "大典2022的6-31-03-01化学检验员（PDF第559页、印刷255页）列采样、前处理、试剂配制、分析、数据判定及仪器维护，支持部分任务对照；不覆盖美国19-4031全部研发、中试和新工艺开发，也不能据此建立一一对应或移植工资。"
             ]
           },
           "id": "chemical-technicians.china-salary.career-snapshot-primary-locale.21",
+          "source_refs": [
+            "ct-cn-class-2022"
+          ],
           "type": "prose"
         },
         {
@@ -26516,7 +26512,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "自动化与数字化会改变数据采集与记录与报表的组织方式，但不改变中国大陆对本职业的统计口径：职业级统计缺口与工具无关。"
+              "没有本职业工资变化的AI归因证据；工具变化不能填补现有职业级统计缺口，也不能保证官方分类或统计口径永远不变。"
             ]
           },
           "id": "chemical-technicians.china-salary.career-snapshot-primary-locale.23",
@@ -26538,7 +26534,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "高中或中等职业学校（化工或分析相关专业优先）"
+              "高中或中等职业学校（编辑选岗自查）"
             ]
           },
           "id": "chemical-technicians.china-salary.career-snapshot-primary-locale.25",
@@ -26560,7 +26556,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理，不是薪资统计：学历是招聘条件之一，岗位方向由企业与行业与资质决定，不能据此推断收入。"
+              "编辑自查：核实际岗位是否接受当前学历、是否提供监督培训及法定资格要求；本轮未取得中国招聘样本，不据此预测录用或工资。"
             ]
           },
           "id": "chemical-technicians.china-salary.career-snapshot-primary-locale.27",
@@ -26593,7 +26589,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：学历与专业对能否进入独立检测与仪器分析岗位有影响，本页不把学历直接对应到收入区间。"
+              "编辑方向提示：核目标岗位实际方法、仪器及监督培训；不是中国学历与独立检测岗位的统计对应。"
             ]
           },
           "id": "chemical-technicians.china-salary.career-snapshot-primary-locale.30",
@@ -26626,7 +26622,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：这些岗位与本职业相邻但职责与授权不同，若目标为方法开发或质量体系岗位，需要另行完成学历与项目经验准备。"
+              "方法开发与质量体系并非本职业统一之外任务；技术员已有开发经历按成果核。教育与项目要求查目标雇主，不要求所有人重新完成一段学历。"
             ]
           },
           "id": "chemical-technicians.china-salary.career-snapshot-primary-locale.33",
@@ -26681,7 +26677,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：以原料与中间体与产品的质量检验与过程分析为主，涉及危险化学品的岗位对作业资格与防护要求较高。"
+              "编辑核对：目标岗位是否负责原料、中间体或产品检测及过程分析；危化品培训防护与具体法定作业资格按单位、物质和工种核，不从行业名称推资格强弱。"
             ]
           },
           "id": "chemical-technicians.china-salary.career-snapshot-primary-locale.38",
@@ -26703,7 +26699,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：多品种小批量与质量体系要求较严格，对方法与记录与偏差处理要求较高。"
+              "编辑核对：实际产品、批量、质量体系、方法及偏差程序；不假定所有医药或精细化工岗位都是小批量、或记录要求一定更严。"
             ]
           },
           "id": "chemical-technicians.china-salary.career-snapshot-primary-locale.40",
@@ -26725,7 +26721,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：以第三方或企业实验室的样品检测为主，对外出具数据时须符合资质认定与授权签字要求。"
+              "编辑核对第三方与内设实验室实际任务；向社会出具证明性报告且适用相关制度时核机构资质和授权签字范围，非所有外发数据一律CMA。"
             ]
           },
           "id": "chemical-technicians.china-salary.career-snapshot-primary-locale.42",
@@ -26769,7 +26765,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "比较不同机会时应确认用工形式（企业内设、劳务派遣、项目制）、实际承担的检测与作业范围、是否涉及危险化学品与特种设备作业、是否对外出具检测数据，并注意本页给出的两条为行业代理值而非职业数值。"
+              "比较机会先核用工、实际检测范围、危化品及特种作业/设备资格和报告用途。NBS2025中国城镇非私营/私营制造业均值113,594/76,055元/年；科学研究和技术服务业182,064/83,560元/年。四值均为行业背景，非本职业、细分检测行业、中位、起薪或到手收入。"
             ]
           },
           "id": "chemical-technicians.china-salary.career-snapshot-primary-locale.46",
@@ -26780,7 +26776,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中华人民共和国职业分类大典（2022 年版）公布信息｜https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
+              "职业分类大典2022，化学检验员6-31-03-01，PDF559/印刷255页｜https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
             ]
           },
           "id": "chemical-technicians.china-salary.career-snapshot-primary-locale.47",
@@ -26868,7 +26864,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业对照：美国 O*NET-SOC 19-4031.00（Chemical Technicians，SOC 19-4031）；中国大陆本条证据路由未建立一一对应的职业细类，相关职责可能分布在化学检验与化验与实验与生产技术支持等多个序列，须按岗位实际职责与资质与机构授权归类，页面语言不构成职业等价或工资映射。"
+              "美国O*NET19-4031.00/SOC19-4031；大典2022的6-31-03-01化学检验员（PDF第559页、印刷255页）列采样、前处理、试剂配制、分析、数据判定及仪器维护，支持部分任务对照；不覆盖美国19-4031全部研发、中试和新工艺开发，也不能据此建立一一对应或移植工资。"
             ]
           },
           "id": "chemical-technicians.china-salary.career-snapshot-primary-locale.55",
@@ -27150,10 +27146,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第90分位描述工资分布上端，不代表资深岗位。OEWS工资定义包括部分津贴、排除加班工资；不含自雇者收益，不能作为个人实发工资。；BLS OEWS工资分位与定义｜https://www.onetonline.org/link/localwages/19-4031.00"
+              "第90分位92,040美元/年描述工资上端，非资深岗位。OEWS含基本/部分保障津贴、排除加班和班次差额等；工资覆盖及排除项查BLS方法，不含自雇收益。分位：https://www.onetonline.org/link/localwages/19-4031.00；方法：https://www.bls.gov/oes/current/oes_tec.htm"
             ]
           },
           "id": "chemical-technicians.us-salary.career-snapshot-secondary-locale.18",
+          "source_refs": [
+            "ct-oews-methods"
+          ],
           "type": "prose"
         },
         {
@@ -27238,10 +27237,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：BLS 显示 2025 年 5 月该职业年薪中位数为 60,390 美元、时薪中位数为 29.03 美元；2025—2035 年就业预计增长 5%，年均空缺 7,600 个。这些是美国受雇岗位的统计位置，不是个人起薪或到手收入。"
+              "美国2025年5月OEWS中位60,390美元/年、29.03美元/时，非起薪/到手工资；BLS2025—2035就业增长5%、年均空缺7,600另属含自雇者的预测（2025自雇占2.4%），不能把预测全部说成受雇工资分布。"
             ]
           },
           "id": "chemical-technicians.us-salary.career-snapshot-secondary-locale.26",
+          "source_refs": [
+            "ct-ep-2025"
+          ],
           "type": "prose"
         },
         {
@@ -27348,10 +27350,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行业为 O*NET 行业分布中制造业的主要组成，本页不据此推算个人收入。"
+              "BLS OOH2025就业中化学制造占30%，O*NET制造门类占43%；两者行业层级不同，不把30%写成整个制造业占比。"
             ]
           },
           "id": "chemical-technicians.us-salary.career-snapshot-secondary-locale.36",
+          "source_refs": [
+            "ct-ooh-2025"
+          ],
           "type": "prose"
         },
         {
@@ -27370,7 +27375,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS Occupational Outlook Handbook（2025 年 5 月）给出的该行业本职业工资中位数；该行业中位数低于全国中位数，说明行业结构会影响收入水平。"
+              "BLS2025年5月检测实验室与服务行业本职业中位49,050美元/年，低于全国60,390；表述统计差异，不由横截面差异推因果或个人薪资。"
             ]
           },
           "id": "chemical-technicians.us-salary.career-snapshot-secondary-locale.38",
@@ -27447,7 +27452,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "公开的州级统计存在地区差异，但本页不逐州列出，也不以最高值当作普遍水平。"
+              "教育服务59,750、批发65,960为BLS所列行业中本职业工资中位；州级报价、个人收入和行业中位分别核，本轮未作州际排名。"
             ]
           },
           "id": "chemical-technicians.us-salary.career-snapshot-secondary-locale.45",
@@ -27491,7 +27496,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与地区、方法与资质要求、班制与加班、以及是否从事对外检测或研发支持都会影响实际收入；本页只给出统计口径下的分布与行业中位数，不预测个人收入。"
+              "比较个人offer时核行业、地区、职责、班制、加班和津贴约定；本轮未量化各因素独立工资效应，不据此预测个人收益。"
             ]
           },
           "id": "chemical-technicians.us-salary.career-snapshot-secondary-locale.49",
@@ -27664,7 +27669,7 @@
           },
           "id": "chemical-technicians.fit.riasec-fit-block.8",
           "source_refs": [
-            "nasa-seh"
+            "ct-cn-class-2022"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27759,7 +27764,7 @@
                 "url": "https://www.onetonline.org/link/summary/19-4031.00"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（19-4031.00）",
+                "entity": "BLS Chemical Technicians（2025—2035就业预测及典型入行）",
                 "id": "link-15",
                 "relation": "related-evidence",
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/chemical-technicians.htm"
@@ -27984,7 +27989,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业对数学与科学的要求偏实用：O*NET 基本技能中科学为最高分项（78）、批判性思维与阅读理解各 75、主动倾听与监控与写作各 72、数学 50；完整知识清单33项，前四项为化学70、英语63、数学60、计算机与电子53（重要性评分）；实际工作中大量换算与计算由仪器与系统完成，真正需要的是理解浓度与稀释与单位与有效数字，并能判断结果是否合理。"
+              "该职业对数学与科学的要求偏实用：O*NET 基本技能中科学为最高分项（78）、批判性思维与阅读理解各 75、主动倾听与监控与写作各 72、数学 50；完整知识清单33项，前四项为化学70、英语63、数学60、计算机与电子53（重要性评分）；这些是美国职业要求评分，不是个人IQ阈值。编辑自查单位、浓度、稀释和有效数字，系统输出也须核，不能假定计算已全部由仪器代做。"
             ]
           },
           "id": "chemical-technicians.fit.personality-fit-block.18",
@@ -28018,7 +28023,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：如果对单位与稀释与有效数字长期吃力，结果计算与报告环节会持续出错，风险直接落在数据质量上。"
+              "编辑自查：反复在单位、稀释或有效数字上遇到困难，应通过训练和监督核算补齐；不据一次测验断言持续出错。"
             ]
           },
           "id": "chemical-technicians.fit.personality-fit-block.21",
@@ -28063,7 +28068,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：把沟通当成额外负担、只管自己那一批样品，会在异常升级与交接配合中出问题。"
+              "编辑自查：能否说明异常和交接限制；不由内外向或单次沟通偏好预测工作表现。"
             ]
           },
           "id": "chemical-technicians.fit.personality-fit-block.25",
@@ -28316,7 +28321,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。外向本身不是优势或劣势，关键是能否把结果与限制说清楚；如果更偏好独立工作，可以选择相对独立的仪器分析岗位。"
+              "外向不决定表现；若偏好较独立任务，应查具体岗位实际协作及复核安排，不能从“仪器分析”名称保证独立工作。"
             ]
           },
           "id": "chemical-technicians.fit.personality-fit-block.48",
@@ -28349,7 +28354,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。人格特质分数与工作表现的关联在不同研究中强弱不一，且受岗位与组织影响；本页不用它作为录用或适配判断依据。"
+              "本轮未取得本职业人格分数的专门效度、因果或录用阈值依据，不将职业风格评分直接当个人大五预测。"
             ]
           },
           "id": "chemical-technicians.fit.personality-fit-block.51",
@@ -28360,7 +28365,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业对数学的要求是实用层面的：O*NET 基本技能中科学 78、批判性思维与阅读理解各 75，数学 50；知识清单包含化学与数学与计算机与电子；如果连浓度与稀释与单位换算都长期吃力，需要通过培训或演练补齐，否则会在检测与报告环节持续出错。"
+              "O*NET科学78、批判思维/阅读75、数学50为职业技能评分；编辑建议通过单位、稀释和量级核对训练补齐困难，不能由IQ或数学测验一次结果判定胜任。"
             ]
           },
           "id": "chemical-technicians.fit.personality-fit-block.52",
@@ -28525,7 +28530,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "适配提示：如果你愿意按已验证的方法把检测做准、把原始记录写清，并在结果异常时先复核再报告，而不是急着给出结论，这个职业与你的取向更接近。"
+              "编辑适配自查：愿按方法记录，在异常时保留数据并及时报告，按条件和程序调查/复测；这只是任务偏好线索，不是录用判断。"
             ]
           },
           "id": "chemical-technicians.fit.riasec-fit-block.9",
@@ -28536,7 +28541,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣取向：该职业群体以研究型为主，并带有明显的现实型与常规型成分；日常任务以按方法检测、制备样品与试剂、记录与核对数据为主。"
+              "IRC描述研究、现实、常规的职业活动取向；本职业有检测、配方、研究支持和开发任务，不是从业者人格分布或个人资格。"
             ]
           },
           "id": "chemical-technicians.fit.riasec-fit-block.10",
@@ -28582,7 +28587,7 @@
           },
           "id": "chemical-technicians.risk.career-risk-cards.1",
           "source_refs": [
-            "nasa-seh"
+            "ct-cn-class-2022"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28612,7 +28617,7 @@
           },
           "id": "chemical-technicians.risk.career-risk-cards.3",
           "source_refs": [
-            "nasa-seh"
+            "ct-cn-class-2022"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28627,7 +28632,7 @@
           },
           "id": "chemical-technicians.risk.career-risk-cards.4",
           "source_refs": [
-            "nasa-seh"
+            "ct-cn-class-2022"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28735,10 +28740,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "美国任务和问卷来自O*NET；中国危险化学品培训查安全法第5条，检验检测责任、记录与签署查监督管理办法第5、9、12—16条。下列控制建议为编辑整理，须按实际方法、机构和法域落实。"
+              "O*NET为美国任务/问卷；中国危化法5/127条核培训、防护及施行，检验检测监督办法2/5/8/9/12—16条核适用范围、能力、签署和记录；美国实验室标准1910.1450另核(a)/(b)覆盖。下列为编辑控制建议，不能当统一操作授权。"
             ]
           },
           "id": "chemical-technicians.risk.career-risk-cards.10",
+          "source_refs": [
+            "ct-osha-lab",
+            "samr-testing-supervision"
+          ],
           "type": "prose"
         },
         {
@@ -28768,7 +28777,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "明确方法与判定规则与检出限与不确定度；对异常先复核过程并复测；保留原始记录与复测记录；对超出方法适用范围的结果报告并申请确认。"
+              "方法、检出限/不确定度按实际样品和报告要求核；编辑建议：异常及时保留原始记录并按实际程序报告；调查先核方法、样品、仪器与质控。复测/重取样仅在程序允许、安全条件和授权具备时实施，不能用反复检测挑选合格值或延误安全处置。"
             ]
           },
           "id": "chemical-technicians.risk.career-risk-cards.13",
@@ -28812,10 +28821,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程佩戴防护装备并使用通风柜与洗眼器与应急喷淋；按分区与标签要求存放与处置化学品与废弃物；参与安全培训与演练并熟悉泄漏与火灾处置流程。"
+              "先核实际化学品、安全资料、暴露评估和岗位培训，按适用程序选择防护与通风、标签和废物处置。美国1910.1450仅覆盖符合实验室使用定义的情形，非所有生产或中试；其(e)/(f)核化学卫生计划和培训，非统一洗眼/喷淋配置清单。泄漏按现场应急职责报告和处置，不能因本页而自行进入泄漏区。中国危化法5条培训/防护；直接危及人身安全时依法停止作业或采取可能应急措施后撤离并及时报告，不能等待额外批准。"
             ]
           },
           "id": "chemical-technicians.risk.career-risk-cards.17",
+          "source_refs": [
+            "ct-osha-lab",
+            "ct-cn-safety",
+            "faa-design-approvals"
+          ],
           "type": "prose"
         },
         {
@@ -28856,10 +28870,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按记录管理要求及时书写并留痕修改；保留质控与仪器校准与人员培训记录；对外检测前确认机构资质与授权签字人安排。"
+              "原始记录按适用管理要求及时留存、修改留痕；中国《检验检测机构监督管理办法》第2条适用向社会出具具有证明作用报告的活动；第8、12条核签字人能力和技术范围，第13条原始记录与报告至少保存6年。CMA或特别资质按机构、项目和法源核，不是每位技术员个人执照或所有外发数据统一门槛。 内部质量及研发记录期限另核，不把6年强加全部实验室。"
             ]
           },
           "id": "chemical-technicians.risk.career-risk-cards.21",
+          "source_refs": [
+            "samr-testing-supervision",
+            "samr-cma"
+          ],
           "type": "prose"
         },
         {
@@ -28889,7 +28907,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "配方与工艺参数与检测数据与客户信息属于企业核心信息，拍照或外发会造成商业损失；把受控资料上传到外部工具可能构成违规披露。"
+              "受法律、合同或机构制度保护的信息外泄可能造成损失；并非所有检测数据自动都是商业秘密，上传外部工具前核真实分级、授权及服务条款。"
             ]
           },
           "id": "chemical-technicians.risk.career-risk-cards.24",
@@ -28911,7 +28929,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "为方便记录用手机拍摄原始数据或配方；把检测数据粘贴到外部服务中处理或分析。"
+              "在未核权限、保护范围和工具条款时拍摄或外发受控资料；不能由“使用手机”本身判断违法或泄密。"
             ]
           },
           "id": "chemical-technicians.risk.career-risk-cards.26",
@@ -28933,7 +28951,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "方法未经确认或仪器校准与期间核查失效时，仍按原方法出具结果，会使数据不可追溯并可能导致结论无效。"
+              "仪器、方法或质控异常可能使结果失真/无法复核；并非每次校准逾期都必然使全部数据无效。先保留记录、报告并评估受影响范围。"
             ]
           },
           "id": "chemical-technicians.risk.career-risk-cards.28",
@@ -28944,7 +28962,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按周期完成仪器校准与期间核查并保留记录；方法或仪器变更时先完成确认或验证再投入使用；对超出确认状态的结果单独标记并按程序处理。"
+              "按适用方法/体系核仪器检定或校准、期间核查及变更验证；异常保留记录并报告，影响评估及使用/恢复授权按程序核，不只标记后继续出结论。"
             ]
           },
           "id": "chemical-technicians.risk.career-risk-cards.29",
@@ -28977,7 +28995,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "方法与仪器更新后，如果只熟悉一种方法或一套软件，在方法升级或岗位调整时会面临选择空间收窄。"
+              "编辑风险情境：长期仅熟悉一套方法，遇工具/方法变化时可能需要补训；本轮没有本职业概率或因果测算。"
             ]
           },
           "id": "chemical-technicians.risk.career-risk-cards.32",
@@ -29043,7 +29061,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对行业分布与实验室作业环境说明"
+              "O*NET行业分布支持就业行业结构；实验室与制造作业环境另查BLS OOH，不用行业表证明具体作业环境。"
             ]
           },
           "id": "chemical-technicians.risk.career-risk-cards.38",
@@ -29054,7 +29072,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明任务暴露的度量思路与其指标限制"
+              "ILO支持暴露方法及限制，不证明该职业已发生能力折旧；具体风险情境为编辑建议。"
             ]
           },
           "id": "chemical-technicians.risk.career-risk-cards.39",
@@ -29209,7 +29227,7 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET 全国就业趋势页面（19-4031.00，显示 BLS 就业预测）",
+                "entity": "BLS Chemical Technicians（2025—2035就业预测及典型入行）",
                 "id": "link-1",
                 "relation": "related-evidence",
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/chemical-technicians.htm"
@@ -29341,10 +29359,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：进入该职业最常见的路径是完成副学士学位或两年制高等教育后，由企业提供中等期限的在职培训，从在监督下执行标准检测开始；O*NET 把该职业列为 Job Zone Three（中等准备程度）、SVP 区间 6.0 至 7.0 以下，BLS 显示入行学历通常为副学士学位，部分岗位要求学士学位或高中文凭。能否进入岗位主要看三点：是否理解并遵守方法与安全规范、能否稳定执行重复检测并如实记录、以及能否与化学家与工程师与同事配合完成交接。"
+              "美国BLS典型副学士或两年高等教育、经验None、中等期限在职培训；有本科或高中岗位。O*NETJobZone3/SVP6至<7为准备分组，不等每个雇主统一门槛。编辑自查方法、安全、记录与协作；中国准入按具体雇主和作业法源核。"
             ]
           },
           "id": "chemical-technicians.path.career-path-block.20",
+          "source_refs": [
+            "ct-ooh-2025",
+            "ct-ep-2025"
+          ],
           "type": "prose"
         },
         {
@@ -29396,7 +29418,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对准备层级与在职培训说明"
+              "localtraining用于培训项目发现；不证明典型学历或招生保证，项目内容、报名条件及当前开放另核。"
             ]
           },
           "id": "chemical-technicians.path.career-path-block.25",
@@ -29407,7 +29429,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "认证发现页列34项与发证方；学徒标题另查O*NET职业摘要。具体条件、费用与当前名额须查项目方。"
+              "localcert用于认证发现与发证方查询；具体条件、费用、认可、有效期及当前开放须查项目方；不提供职业身份和任务结构。"
             ]
           },
           "id": "chemical-technicians.path.career-path-block.26",
@@ -29594,10 +29616,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国对外检验报告须由授权签字人在技术能力范围签发；机构资质、人员能力与实际岗位要求分别核，不把继续教育或证书写成全职业统一条件。"
+              "中国向社会出具证明性检验检测报告的适用活动按监督办法2/8/12条核授权签字能力及技术范围；研发与内设报告分别核，不把继续教育或证书变全职业统一条件。"
             ]
           },
           "id": "chemical-technicians.path.career-path-block.43",
+          "source_refs": [
+            "samr-testing-supervision"
+          ],
           "type": "prose"
         },
         {
@@ -30098,8 +30123,8 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
-              "没经验如何证明",
+              "编辑建议：核目标雇主考察什么",
+              "可核的能力材料（非都适合零经验）",
               "与其他方向的区别"
             ],
             "rows": [
@@ -30136,7 +30161,7 @@
                 "支持方法与产品开发中的检测与数据评估。",
                 "对新方法的理解、数据评估能力、跨部门沟通。",
                 "用项目参与记录与数据评估说明证明。",
-                "与检测岗位相比更偏探索与协作，结论责任仍在项目负责人。"
+                "研发支持也可能承担实验设计/开发和数据解释；项目责任与结论权限依实际分工，不一概只归项目负责人。"
               ]
             ]
           },
@@ -30153,7 +30178,7 @@
                 "id": "education",
                 "values": [
                   "学历与经验",
-                  "副学士学位或两年制高等教育（化学与分析或检测技术相关专业优先）；部分岗位要求学士学位，部分岗位接受高中文凭并配以培训； BLS 显示该职业入行学历通常为副学士学位，在职培训为中等期限；",
+                  "美国BLS典型副学士或两年高等教育，常见应用科学/化学技术背景；另有本科/高中岗位。中等期限在岗培训不等中国统一学历门槛。",
                   "部分企业要求或优先考虑有相关方法或仪器操作经验的人员。"
                 ]
               },
@@ -30161,7 +30186,7 @@
                 "id": "clearance",
                 "values": [
                   "岗位授权与安全",
-                  "企业通常要求完成安全教育与方法培训并通过考核后才可独立检测； 涉及危险化学品与特种设备作业的岗位须按所在地规定取得相应资格；",
+                  "实际操作核安全教育、方法培训及岗位授权；危化法5条仅对有资格要求岗位配置相应人员，接触危化品不自动同一证。特种作业/设备按类别核。",
                   "涉及对外检测的岗位须在机构资质与授权签字人框架内工作。"
                 ]
               },
@@ -30282,7 +30307,7 @@
             ],
             "column_labels": [
               "阶段",
-              "可能考察",
+              "编辑示例：可能考察",
               "观察证据",
               "使用边界"
             ],
@@ -30296,7 +30321,7 @@
               [
                 "面试与方法知识",
                 "对常用方法原理与安全规范的理解、对异常与不符合项处理的认识。",
-                "是否知道结果异常与不符合项时的复测与上报路径。",
+                "知道异常保留记录、及时报告和按程序调查，复测须核安全与权限。",
                 "面试问答不等同于实操能力，企业通常另有实操培训与考核。"
               ],
               [
@@ -30431,7 +30456,7 @@
                 "企业内部安全与质量培训与岗位授权",
                 "所有实验与检测人员",
                 "是实际作业的前提条件",
-                "是（由企业制度规定）",
+                "依法应培训的单位/作业依具体法源；内部授权另按制度，非全球同一执照",
                 "按企业培训与考核制度取得授权；涉及特种作业的另需取证",
                 "培训周期由岗位与企业决定，未取得统一天数",
                 "授权与企业绑定，换单位后通常需要重新培训与授权"
@@ -30457,7 +30482,7 @@
               [
                 "行业与技术认证（BCSI 实验室技能、实验室分析员分级等）",
                 "希望证明特定方向能力的人员",
-                "部分岗位认可，属于加分项",
+                "用于发现能力证明；本轮未核雇主认可或录用加分效果",
                 "否",
                 "各认证机构与培训机构自定条件与考试要求，须逐项核实",
                 "各项目费用、条件和有效期未逐项核实",
@@ -30527,7 +30552,7 @@
           ],
           "id": "chemical-technicians.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls-outlook"
+            "ct-ep-2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30545,7 +30570,7 @@
           ],
           "id": "chemical-technicians.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls-outlook"
+            "ct-ep-2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30560,7 +30585,7 @@
           },
           "id": "chemical-technicians.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls-outlook"
+            "ct-ep-2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30578,7 +30603,7 @@
           ],
           "id": "chemical-technicians.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls-outlook"
+            "ct-ep-2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30593,7 +30618,7 @@
           },
           "id": "chemical-technicians.market-signals.market-signal-card.5",
           "source_refs": [
-            "onet-industry"
+            "ct-details-20261009"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30608,7 +30633,7 @@
           },
           "id": "chemical-technicians.market-signals.market-signal-card.6",
           "source_refs": [
-            "bls-outlook"
+            "ct-ep-2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30631,7 +30656,7 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（19-4031.00，显示 BLS 就业预测）",
+                "entity": "BLS Chemical Technicians（2025—2035就业预测及典型入行）",
                 "id": "link-3",
                 "relation": "related-evidence",
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/chemical-technicians.htm"
@@ -31020,7 +31045,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：大。化学工程师方向需要工程学历与设计能力，不是检测经验的自然延伸。"
+              "编辑估计，非实测转换成功率：转向距离：大。化学工程师方向需要工程学历与设计能力，不是检测经验的自然延伸。"
             ]
           },
           "id": "chemical-technicians.market-signals.market-signal-card.36",
@@ -31031,7 +31056,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少流程与效率与人机与排程与成本方面的系统训练。"
+              "编辑自查目标能力：核本人是否已有流程与效率与人机与排程与成本方面的系统训练。；已具备的经验按作品核，不预设全部缺失。"
             ]
           },
           "id": "chemical-technicians.market-signals.market-signal-card.37",
@@ -31053,7 +31078,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。工业工程师方向的对象是流程与效率而不是实验室方法。"
+              "编辑估计，非实测转换成功率：转向距离：中等。工业工程师方向的对象是流程与效率而不是实验室方法。"
             ]
           },
           "id": "chemical-technicians.market-signals.market-signal-card.39",
@@ -31064,7 +31089,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少材料性能与选材与失效分析的系统训练与相应学历。"
+              "编辑自查目标能力：核本人是否已有材料性能与选材与失效分析的系统训练与相应学历。；已具备的经验按作品核，不预设全部缺失。"
             ]
           },
           "id": "chemical-technicians.market-signals.market-signal-card.40",
@@ -31086,7 +31111,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。材料工程师方向需要材料学训练与方案设计能力。"
+              "编辑估计，非实测转换成功率：转向距离：中等。材料工程师方向需要材料学训练与方案设计能力。"
             ]
           },
           "id": "chemical-technicians.market-signals.market-signal-card.42",
@@ -31130,7 +31155,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少现场工时与动作与流程测量与改进方面的经验。"
+              "编辑自查目标能力：核本人是否已有现场工时与动作与流程测量与改进方面的经验。；已具备的经验按作品核，不预设全部缺失。"
             ]
           },
           "id": "chemical-technicians.market-signals.market-signal-card.46",
@@ -31152,7 +31177,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较小。工业工程技术员方向以现场流程测量为主，工具与规范体系不同。"
+              "编辑估计，非实测转换成功率：转向距离：较小。工业工程技术员方向以现场流程测量为主，工具与规范体系不同。"
             ]
           },
           "id": "chemical-technicians.market-signals.market-signal-card.48",
@@ -31196,7 +31221,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少材料科学的研究训练与材料数据解释的深度。"
+              "编辑自查目标能力：核本人是否已有材料科学的研究训练与材料数据解释的深度。；已具备的经验按作品核，不预设全部缺失。"
             ]
           },
           "id": "chemical-technicians.market-signals.market-signal-card.52",
@@ -31218,7 +31243,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。材料科学家方向更偏研究与方法开发，通常需要更高学历。"
+              "编辑估计中等；材料科学家研究材料结构/性质及新材料，目标岗位教育和研究能力单独核，不断言全部必须更高学历。"
             ]
           },
           "id": "chemical-technicians.market-signals.market-signal-card.54",
@@ -31229,7 +31254,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少整套装置运行与开停车与跨单元调节的现场经验。"
+              "编辑自查目标能力：核本人是否已有整套装置运行与开停车与跨单元调节的现场经验。；已具备的经验按作品核，不预设全部缺失。"
             ]
           },
           "id": "chemical-technicians.market-signals.market-signal-card.55",
@@ -31251,7 +31276,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。化工装置操作员方向以现场连续运行为主，授权与责任结构不同。"
+              "编辑估计中等；装置操作员控制整套化学过程/设备系统，现场连续或批次安排依装置核；检测经验不自动授开停车和调节权。"
             ]
           },
           "id": "chemical-technicians.market-signals.market-signal-card.57",
@@ -31394,7 +31419,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容由费马测试职业内容编辑组按公开官方来源整理，职业身份、任务与工作情境采用 O*NET-SOC 19-4031.00，美国工资采用 BLS OEWS（2025 年 5 月）与 BLS Occupational Outlook Handbook（行业中位数），就业与展望采用 BLS 就业预测（2025—2035 年，经 O*NET 页面显示）；中国大陆采用国家统计局的制造业行业代理值并显式标注；编辑归纳与虚构练习单独标注。"
+              "本页职业信息据O*NET19-4031.00/BLS OEWS及OOH、表1.2整理；中国NBS制造及科学研究和技术服务门类仅作行业代理。中国危化品/检验检测规则与美国实验室法规各核法域；用途、能力阶段、人格自查及转岗距离为编辑归纳。"
             ]
           },
           "id": "chemical-technicians.sources.source-card.1",
@@ -31405,7 +31430,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源为美国 O*NET OnLine 与 U.S. Bureau of Labor Statistics 的公开页面，以及国家统计局与人力资源社会保障部的公开信息入口。所有数值均保留其职业、地域、期间、单位与统计口径；来源清单见页面「资料来源」。"
+              "本轮实际读取O*NET详情、行业、工资分位、软件关键词、34认证与八相邻定义；BLS OOH/表1.2；中国危化法、检验检测监督及资质办法；大典化学检验员条。NBS2025及安全法、OEWS/NIST/ILO同版已核资料按实际适用范围复用。行业分布采用当前详情明确的2025资料，旧行业登记值不得替代当前值。"
             ]
           },
           "id": "chemical-technicians.sources.source-card.2",
@@ -31416,7 +31441,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮检索与修订：2026-10-03；来源的工资资料期及预测期分别标注。"
+              "本次资料核对：2026-10-09；工资统计期与就业预测期分别标注。"
             ]
           },
           "id": "chemical-technicians.sources.source-card.3",
@@ -31427,7 +31452,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得本职业中国全国职业工资、细分专业技术服务业工资及各任务AI实际采用或影响先后的时间序列。已核行业均值、2025美国软件招聘数据和总体就业预测不能填补这些精确缺口。 使用提示：本页是职业信息服务，不构成检测、安全操作、执业、法律、投资或医疗建议；涉及危险化学品与特种设备作业、检验检测资质认定与作业资格的决定，须以适用法规、方法文件原文与具备相应授权的人员意见为准。"
+              "证据不足：本轮未取得中国全国精确职业工资、细分专业技术服务业工资、职业级AI实际采用/效果及影响先后时间序列、专门人格效度、系统招聘样本和转岗成功率。行业均值、软件关键词和总体预测不填这些缺口。行业分布采用当前详情2025的制造43%、专业科学技术服务31%及子页其他26%；旧登记32/25不作当前值。具体操作、恢复、报告和资格按适用方法、法域及授权核，本页不授操作许可。"
             ]
           },
           "id": "chemical-technicians.sources.source-card.4",
@@ -31835,6 +31860,231 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent",
                 "url": "https://www.onetonline.org/link/summary/17-2131.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "16任务12核心4补充、20风格、33知识、11软件类别、57情境；制造43%、专业科学技术服务31%，子页其他26%。美国问卷非中国个人保证。"
+                ],
+                "evidence_type": "official source",
+                "id": "ct-details-20261009",
+                "limitation": "16任务12核心4补充、20风格、33知识、11软件类别、57情境；制造43%、专业科学技术服务31%，子页其他26%。美国问卷非中国个人保证。",
+                "market": "美国",
+                "name": "O*NET19-4031.00职业详情与2025行业结构",
+                "period": "2026更新；2025行业",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/19-4031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "60.0→63.0千、净3.0千、4.9%、空缺7.6千/年、2025自雇2.4%；典型副学士、经验None、中期OJT。预测非AI归因。"
+                ],
+                "evidence_type": "official source",
+                "id": "ct-ep-2025",
+                "limitation": "60.0→63.0千、净3.0千、4.9%、空缺7.6千/年、2025自雇2.4%；典型副学士、经验None、中期OJT。预测非AI归因。",
+                "market": "美国",
+                "name": "BLS职业预测表1.2：19-4031",
+                "period": "2025—2035",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "全国中位60,390；五行业中位见Pay；化学制造就业30%。全职/偶有加班、典型教育支持，行业工资非个人报价。"
+                ],
+                "evidence_type": "official source",
+                "id": "ct-ooh-2025",
+                "limitation": "全国中位60,390；五行业中位见Pay；化学制造就业30%。全职/偶有加班、典型教育支持，行业工资非个人报价。",
+                "market": "美国",
+                "name": "BLS Chemical Technicians工资、职责及典型路径",
+                "period": "工资2025年5月；预测2025—2035",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/chemical-technicians.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "制造113,594/76,055、科学研究和技术服务182,064/83,560（非私营/私营）；含税行业均值及5人以上法人/规定视同法人，派遣按实际用工统计，不是本职业工资。"
+                ],
+                "evidence_type": "official source",
+                "id": "ct-nbs-2025",
+                "limitation": "制造113,594/76,055、科学研究和技术服务182,064/83,560（非私营/私营）；含税行业均值及5人以上法人/规定视同法人，派遣按实际用工统计，不是本职业工资。",
+                "market": "中国大陆",
+                "name": "NBS2025城镇单位年平均工资表2/5及附注",
+                "period": "2025工资；2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "部分任务对照：采样、前处理、试剂、理化/仪器分析、数据及维护；不等美国全部研发/中试职责一一对应。"
+                ],
+                "evidence_type": "official source",
+                "id": "ct-cn-class-2022",
+                "limitation": "部分任务对照：采样、前处理、试剂、理化/仪器分析、数据及维护；不等美国全部研发/中试职责一一对应。",
+                "market": "中国大陆",
+                "name": "职业分类大典2022：化学检验员6-31-03-01",
+                "period": "2022版；PDF559/印刷255页",
+                "publisher": "人社部等编制；政府站公布全文",
+                "scope": "contextual",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "(a)/(b)核实验室使用定义及非生产边界；(e)/(f)计划/防护/培训、(g)医疗、(h)标签SDS。不是所有生产/中试的统一程序。"
+                ],
+                "evidence_type": "official source",
+                "id": "ct-osha-lab",
+                "limitation": "(a)/(b)核实验室使用定义及非生产边界；(e)/(f)计划/防护/培训、(g)医疗、(h)标签SDS。不是所有生产/中试的统一程序。",
+                "market": "美国",
+                "name": "OSHA1910.1450实验室危险化学品暴露",
+                "period": "现行条文；2026-10-09读取",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.1450"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "含受雇全兼职及部分工资津贴；排除加班/班次差额、自雇收益；2080小时标准折算不等个人工时。"
+                ],
+                "evidence_type": "official source",
+                "id": "ct-oews-methods",
+                "limitation": "含受雇全兼职及部分工资津贴；排除加班/班次差额、自雇收益；2080小时标准折算不等个人工时。",
+                "market": "美国",
+                "name": "OEWS技术说明：工资定义与覆盖",
+                "period": "2025方法说明",
+                "publisher": "BLS",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/current/oes_tec.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "27/28/30/33及55/57—59按适用单位/作业核；紧急撤离不待额外批准，资格按类别，非全职业统一证。"
+                ],
+                "evidence_type": "official source",
+                "id": "ct-cn-safety",
+                "limitation": "27/28/30/33及55/57—59按适用单位/作业核；紧急撤离不待额外批准，资格按类别，非全职业统一证。",
+                "market": "中国大陆",
+                "name": "安全生产法：教育、防护与紧急停止撤离",
+                "period": "2021修订",
+                "publisher": "全国人大；SAMR公布",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本轮实际读定义核比较对象；转岗能力差距和距离为编辑自查，非资格授权或成功率。"
+                ],
+                "evidence_type": "official source",
+                "id": "ct-adjacent-17-2041.00",
+                "limitation": "本轮实际读定义核比较对象；转岗能力差距和距离为编辑自查，非资格授权或成功率。",
+                "market": "美国",
+                "name": "O*NET相邻职业定义 17-2041.00",
+                "period": "2026更新",
+                "publisher": "O*NET OnLine",
+                "scope": "adjacent",
+                "url": "https://www.onetonline.org/link/summary/17-2041.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本轮实际读定义核比较对象；转岗能力差距和距离为编辑自查，非资格授权或成功率。"
+                ],
+                "evidence_type": "official source",
+                "id": "ct-adjacent-17-2112.00",
+                "limitation": "本轮实际读定义核比较对象；转岗能力差距和距离为编辑自查，非资格授权或成功率。",
+                "market": "美国",
+                "name": "O*NET相邻职业定义 17-2112.00",
+                "period": "2026更新",
+                "publisher": "O*NET OnLine",
+                "scope": "adjacent",
+                "url": "https://www.onetonline.org/link/summary/17-2112.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本轮实际读定义核比较对象；转岗能力差距和距离为编辑自查，非资格授权或成功率。"
+                ],
+                "evidence_type": "official source",
+                "id": "ct-adjacent-17-3021.00",
+                "limitation": "本轮实际读定义核比较对象；转岗能力差距和距离为编辑自查，非资格授权或成功率。",
+                "market": "美国",
+                "name": "O*NET相邻职业定义 17-3021.00",
+                "period": "2026更新",
+                "publisher": "O*NET OnLine",
+                "scope": "adjacent",
+                "url": "https://www.onetonline.org/link/summary/17-3021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本轮实际读定义核比较对象；转岗能力差距和距离为编辑自查，非资格授权或成功率。"
+                ],
+                "evidence_type": "official source",
+                "id": "ct-adjacent-17-3026.00",
+                "limitation": "本轮实际读定义核比较对象；转岗能力差距和距离为编辑自查，非资格授权或成功率。",
+                "market": "美国",
+                "name": "O*NET相邻职业定义 17-3026.00",
+                "period": "2026更新",
+                "publisher": "O*NET OnLine",
+                "scope": "adjacent",
+                "url": "https://www.onetonline.org/link/summary/17-3026.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本轮实际读定义核比较对象；转岗能力差距和距离为编辑自查，非资格授权或成功率。"
+                ],
+                "evidence_type": "official source",
+                "id": "ct-adjacent-19-2031.00",
+                "limitation": "本轮实际读定义核比较对象；转岗能力差距和距离为编辑自查，非资格授权或成功率。",
+                "market": "美国",
+                "name": "O*NET相邻职业定义 19-2031.00",
+                "period": "2026更新",
+                "publisher": "O*NET OnLine",
+                "scope": "adjacent",
+                "url": "https://www.onetonline.org/link/summary/19-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本轮实际读定义核比较对象；转岗能力差距和距离为编辑自查，非资格授权或成功率。"
+                ],
+                "evidence_type": "official source",
+                "id": "ct-adjacent-19-2032.00",
+                "limitation": "本轮实际读定义核比较对象；转岗能力差距和距离为编辑自查，非资格授权或成功率。",
+                "market": "美国",
+                "name": "O*NET相邻职业定义 19-2032.00",
+                "period": "2026更新",
+                "publisher": "O*NET OnLine",
+                "scope": "adjacent",
+                "url": "https://www.onetonline.org/link/summary/19-2032.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本轮实际读定义核比较对象；转岗能力差距和距离为编辑自查，非资格授权或成功率。"
+                ],
+                "evidence_type": "official source",
+                "id": "ct-adjacent-51-8091.00",
+                "limitation": "本轮实际读定义核比较对象；转岗能力差距和距离为编辑自查，非资格授权或成功率。",
+                "market": "美国",
+                "name": "O*NET相邻职业定义 51-8091.00",
+                "period": "2026更新",
+                "publisher": "O*NET OnLine",
+                "scope": "adjacent",
+                "url": "https://www.onetonline.org/link/summary/51-8091.00"
               }
             ]
           },
@@ -32724,7 +32974,7 @@
               "entry": "link-17",
               "field": "url"
             },
-            "问题": "AI 能签署设计或放行文件吗？"
+            "问题": "AI能替代检测报告签署或产品放行责任吗？"
           },
           {
             "回答": {
@@ -34079,7 +34329,9 @@
             },
             "evidence_refs": [
               "onet-context",
-              "hazchem-law"
+              "hazchem-law",
+              "ct-lab-law",
+              "ct-safety-law"
             ],
             "id": "chemical-exposure-safety",
             "mitigation": {
@@ -34359,6 +34611,18 @@
             "id": "samr-cma",
             "label": "检验检测机构资质认定管理办法",
             "scope": "中国对外提供证明作用数据的机构资质，非全职业个人许可"
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.1450",
+            "id": "ct-lab-law",
+            "label": "美国OSHA实验室危险化学品标准",
+            "scope": "仅符合(a)/(b)实验室使用定义的情形"
+          },
+          {
+            "href": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html",
+            "id": "ct-safety-law",
+            "label": "中国安全生产法",
+            "scope": "按实际适用单位/作业核紧急停止撤离及报告"
           }
         ]
       },
@@ -34947,10 +35211,7 @@
         },
         "heading": "美国化学技术员工资与就业数据？",
         "industry_heading": "不同行业的美国工资差多少？",
-        "industry_period": {
-          "$fact": "us-wage-2025",
-          "field": "period"
-        },
+        "industry_period": "2025年5月（BLS OOH行业工资）",
         "industry_rows": [
           {
             "fact_ref": "us-industry-wage-aerospace-mfg-2025",
@@ -37040,7 +37301,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "RIASEC · IRC",
@@ -37091,7 +37352,7 @@
       "text": "化学技术员"
     }
   },
-  "source_content_sha256": "f7e9dbb6a0308357693f92a59359efa1c1e5590d26009da80487fd85dba07b7e",
+  "source_content_sha256": "9f43acfdafc278aa5d3127bce37cf8c8d70ff14b7592bf6c390734f405f4635c",
   "subject": {
     "canonical_slug": "chemical-technicians",
     "name": "化学技术员",

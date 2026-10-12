@@ -27744,7 +27744,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "上海2026-03-31、北京2024-10-31截止已过；港铁2026-12-31截止。港铁和北京只读官方检索正文，直接页面空详情或502，不称完整条款已核。"
+              "上海2026-03-31、北京2024-10-31截止已过；港铁2026-12-31截止。截至2026-10-12，北京历史公告正文已读取，港铁官方招聘正文可读，附加入职奖金条款未取得，不称全部附加条件已核。"
             ]
           },
           "id": "subway-and-streetcar-operators.china-salary.career-snapshot-primary-locale.5",
@@ -27846,7 +27846,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "港铁09-17重铁车长，入职培训轮班，预计综合月入23,200港币；12-31截止，官方检索正文已读，未核额外条款。"
+              "港铁09-17重铁车长岗位，入职培训轮班，预计综合月入23,200港币；截至10-12尚未到12-31截止，官方招聘正文已读，附加入职奖金条款另核。"
             ]
           },
           "id": "subway-and-streetcar-operators.display.career_snapshot_primary_locale.scenario.theater",
@@ -28320,7 +28320,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国53-4041工资和EP本职最新预测，不补中国工资或AI净因果。O*NET旧2024摘要不混用；空缺含替补且千人值舍入。"
+              "美国53-4041工资及EP2025–2035本职预测，不补中国或AI净因果；本次O*NET摘要已更新2025–2035，与EP口径一致，空缺含替补且千人值舍入，不重算增长。"
             ]
           },
           "id": "subway-and-streetcar-operators.display.career_snapshot_secondary_locale.boundary.detail",
@@ -31047,7 +31047,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "港铁该重铁岗位香港学业和英粤沟通、轮班及入职培训条件与内地分开。官方检索已读，直接页面空详情，附加条款未核，不把未到截止当保证获聘。"
+              "港铁该重铁岗位香港学业和英粤沟通、轮班及入职培训与内地分开；当前官方招聘正文已读，附加入职奖金条款未取得，不把未到截止当保证获聘。"
             ]
           },
           "id": "subway-and-streetcar-operators.path.career-path-block.3",
@@ -32446,7 +32446,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "港铁官方检索正文支持该岗条件与综合待遇，直接页面空详情。"
+              "港铁当前官方招聘正文支持该岗条件与预计综合待遇；额外奖金条款未核。"
             ]
           },
           "id": "subway-and-streetcar-operators.display.career_path_block.source.employer",
@@ -33275,7 +33275,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮复核BLS53-4041地铁与有轨电车司机本职预测，新增NBS2025内地交通运输仓储邮政行业两单位全就业税前年均背景，按实际轨道客运雇主所属行业条件参照。O*NET任务工资八邻职、MOT/NRA资格组织及自动运行解读、三地岗位资料沿原实读范围；北京香港仅官方检索正文，美国行业数表未取，ILO摘要NIST复用旧通用范围。"
+              "本次核读O*NET本职任务RC与当前工资预测、BLS EP、城市轨道第13条及行车组织2–4条、铁路资格细则适用范围、全自动规范官方解读、三地招聘与八邻职。北京历史公告本次200并按GBK解码全文，港铁官方正文可读但额外条款未取；美国行业表仍不足。NBS/ILO/NIST同批已核适用背景复用。"
             ]
           },
           "id": "subway-and-streetcar-operators.display.source_card.source",
@@ -33289,7 +33289,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-01初读制作；2026-10-02复核BLS本职预测及NBS内地行业工资，其余来源沿原日期范围未重全文；统计期法域及截止分别列示。"
+              "2026-10-12九模块作者核查；共享历史来源保持，待独立复核，未执行HTML或发布。"
             ]
           },
           "id": "subway-and-streetcar-operators.display.source_card.updated-at",
@@ -36667,6 +36667,78 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "cn-policy",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "subway-and-streetcar-operators.source-register.published.1"
+            },
+            "id": "cn-policy",
+            "label": {
+              "$source": "cn-policy",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "subway-and-streetcar-operators.source-register.published.1"
+            },
+            "scope": "城市轨道行车组织与资料责任背景，非任意上传许可。"
+          },
+          {
+            "href": {
+              "$source": "bls-oews",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "subway-and-streetcar-operators.source-register.published.1"
+            },
+            "id": "bls-oews",
+            "label": {
+              "$source": "bls-oews",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "subway-and-streetcar-operators.source-register.published.1"
+            },
+            "scope": "美国53-4041正常工时税前工资，不代个人实得。"
+          },
+          {
+            "href": {
+              "$source": "r2-pay-3",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "subway-and-streetcar-operators.source-register.published.1"
+            },
+            "id": "r2-pay-3",
+            "label": {
+              "$source": "r2-pay-3",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "subway-and-streetcar-operators.source-register.published.1"
+            },
+            "scope": "香港重铁岗位预计综合待遇，附加条款另核。"
+          },
+          {
+            "href": {
+              "$source": "sag-moa",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "subway-and-streetcar-operators.source-register.published.1"
+            },
+            "id": "sag-moa",
+            "label": {
+              "$source": "sag-moa",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "subway-and-streetcar-operators.source-register.published.1"
+            },
+            "scope": "国家铁路资格限定范围，不套全部纯城市地铁。"
           }
         ]
       },
@@ -39315,7 +39387,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "美国53-4041轨道客运",
@@ -39366,7 +39438,7 @@
       "text": "地铁与有轨电车司机"
     }
   },
-  "source_content_sha256": "96459d8900918a6055feb494255e0faed92c1a202ee3c08167b5769f5a6a01f6",
+  "source_content_sha256": "23b6b213411904c6d5d1b4fdcf43a0264cf10c315785e7bc952437538f72c79d",
   "subject": {
     "canonical_slug": "subway-and-streetcar-operators",
     "name": "地铁与有轨电车司机",

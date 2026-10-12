@@ -11799,28 +11799,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.href": {
-        "ref": {
-          "id": "agricultural-technicians.us-salary.career-snapshot-secondary-locale.18",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.label": {
         "ref": {
@@ -23557,7 +23537,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS表1.2的19-4012单一职业：2025年约19,500人，2035年约20,600人，2025—2035增长5.4%，净增约1,100人，年均空缺约2,800个。空缺包括增长和替代，不能视为净增或个人机会；O*NET仍展示2024—2034旧期，不能混合基年。"
+              "BLS表1.2的19-4012单一职业：2025年约19,500人，2035年约20,600人，2025—2035增长5.4%，净增约1,100人，年均空缺约2,800个。空缺包括增长和替代，不能视为净增或个人机会。"
             ]
           },
           "id": "agricultural-technicians.profile.onet-structured-fields-block.4",
@@ -24768,7 +24748,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本职AI能力评分依据、实际采用率、效果或岗位因果研究，Hero保留缺失态。O*NET支持任务背景，不证明AI正在替代工作；以下变化是编辑试验问题，需具体工具和现场条件验证。"
+              "证据不足：未取得本职AI能力评分依据、实际采用率、效果或岗位因果研究。O*NET支持任务背景，不证明AI正在替代工作；以下变化是编辑试验问题，需具体工具和现场条件验证。"
             ]
           },
           "id": "agricultural-technicians.ai-impact.ai-impact-table.18",
@@ -25081,7 +25061,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五卡提供工资、任务情境、招聘软件、学历与旧期行业背景，均不证明AI替代率；技术试验与采用、就业结果分开。"
+              "五卡提供工资、任务情境、招聘软件、学历与行业背景，均不证明AI替代率；技术试验与采用、就业结果分开。"
             ]
           },
           "id": "agricultural-technicians.ai-impact.ai-impact-table.40",
@@ -25143,7 +25123,7 @@
           },
           "id": "agricultural-technicians.ai-impact.ai-impact-table.44",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25362,7 +25342,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET旧期2024行业占比：教育27%、专业科学技术27%、农林牧渔狩猎18%、其他28%；与当前2025预测分开，不作招聘增速。"
+              "O*NET2025行业分布：教育24%、农林牧渔和狩猎23%、专业科学技术23%、批发贸易14%、其他16%；是宽行业就业分布，不是行业工资或招聘增速。"
             ]
           },
           "id": "agricultural-technicians.ai-impact.ai-impact-table.60",
@@ -25404,7 +25384,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得AI导致本职增减岗位的因果证据。BLS19-4012预测2025—2035增长5.4%、年均约2,800空缺，预测不是AI单独贡献，不能相互替代。"
+              "证据不足：未取得AI导致农业技术员岗位增减的因果证据。BLS19-4012的2025—2035总体就业预测，非AI归因：增长5.4%，年均约2,800个空缺；不表示AI采用率或替代率。"
             ]
           },
           "id": "agricultural-technicians.ai-impact.ai-impact-table.63",
@@ -25506,7 +25486,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS表1.2的19-4012单一职业：2025年约19,500人，2035年约20,600人，2025—2035增长5.4%，净增约1,100人，年均空缺约2,800个。空缺包括增长和替代，不能视为净增或个人机会；O*NET仍展示2024—2034旧期，不能混合基年。该预测不区分AI贡献。"
+              "BLS表1.2的19-4012单一职业：2025年约19,500人，2035年约20,600人，2025—2035增长5.4%，净增约1,100人，年均空缺约2,800个。空缺包括增长和替代，不能视为净增或个人机会。该预测不区分AI贡献。"
             ]
           },
           "id": "agricultural-technicians.ai-impact.ai-impact-table.70",
@@ -27162,7 +27142,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "最高 10% 的从业者年工资高于该值；高收入端常与行业、技能等级与地区相关。；O*NET 展示的 BLS 2025 年 5 月工资数据｜https://www.onetonline.org/link/localwages/19-4012.00"
+              "第90分位边界76,480美元/年，非统一职级或资深报价；OEWS2025年5月19-4012全国分位，具体岗位收入另核合同。"
             ]
           },
           "id": "agricultural-technicians.us-salary.career-snapshot-secondary-locale.18",
@@ -27659,7 +27639,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "最高 10% 高于 76,480 美元/年；高收入端常与行业、技能等级与地区相关。"
+              "第90分位边界76,480美元/年，属于2025年5月全国受覆盖雇员分布；不能据分位认定资深等级或某项技能带来的收入。"
             ]
           },
           "id": "agricultural-technicians.us-salary.career-snapshot-secondary-locale.53",
@@ -28791,7 +28771,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 19-4012.00 详细工作活动，用于设计入行练习任务。"
+              "O*NET19-4012行业分布用于就业行业背景，不支持练习设计、个人测评或转岗效果。"
             ]
           },
           "id": "agricultural-technicians.fit.personality-fit-block.64",
@@ -29383,7 +29363,7 @@
             "column_labels": [
               "入门方向",
               "初期任务",
-              "雇主认可能力的凭证",
+              "编辑建议：可核对的能力证据",
               "无经验可出示的证据",
               "与相邻岗位的区别"
             ],
@@ -29393,21 +29373,21 @@
                 "在带教下完成整地、除草与机具辅助作业，学习安全规程与设备检查。",
                 "能在监督下完成一次作业前的机具检查并说明安全要求。",
                 "匿名化的作业前检查清单与作业记录（参数、天气、异常）。",
-                "比农业操作员多出采样与记录职责；比农业工程师不承担工程设计。"
+                "本方向结合田间作业、农业设备与试验记录；农业机具操作员也记录作业，工程师侧重工程设计。按实际任务分工核方案及操作权限，不由职业名统一排除职责。"
               ],
               [
                 "实验室与样品方向",
                 "在带教下完成样品接收、编号与基础制备。",
                 "能按规程完成样品制备并说明污染控制要求。",
                 "虚构样品的采样与编号记录、制备与称量记录。",
-                "比生物技术员的对象与领域不同；比研究人员不负责方案与结论。"
+                "本方向以农业样品和试验数据为对象；生物技术员也可处理土壤、植物、动物样品并分析结果。具体方法研究、方案和结论职责依岗位与训练核对。"
               ],
               [
                 "数据与质量方向",
                 "在带教下录入与核对数据，按模板整理摘要与图表。",
                 "能按规范录入并标注缺失与异常，说明追溯路径。",
                 "含单位与异常说明的数据摘要与追溯记录。",
-                "比质量控制分析师不做统计放行判定；比检测岗不承担对外结论。"
+                "本方向整理农业试验数据、异常与追溯记录；质量控制分析师有检验分析任务。是否承担判定、放行或对外报告依实际授权，不一律排除农业技术员的数据分析与报告职责。"
               ],
               [
                 "样品追溯与记录",
@@ -29421,7 +29401,7 @@
                 "识别设备与数据异常，按规程停止作业并上报。",
                 "能说明异常识别依据与上报流程。",
                 "一份含异常识别与处置步骤的作业记录。",
-                "比质量授权岗不自行判定合格；比维修岗不拆修专业设备。"
+                "本方向识别设备与数据异常，依训练及岗位规程处理和升级；O*NET农业技术员也包含设备维修。维修范围、合格判定与对外签署须核实际授权，不由职业名一概排除。"
               ]
             ]
           },
@@ -30056,7 +30036,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国采用O*NET/BLS本职资料，中国采用2022职业分类和北京2022特定工种备案案例；本页不把旧劳动合同法页面或茶园标准当全部农业技术员现行规定。"
+              "美国采用O*NET/BLS本职资料，中国采用2022职业分类和北京2022特定工种备案案例。资格、安全规程与具体作业权限须按实际工种、机构与岗位核对，不把个别工种备案推广为全部农业技术员的入职要求。"
             ]
           },
           "id": "agricultural-technicians.path.career-path-block.22",
@@ -31114,7 +31094,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS表1.2的19-4012单一职业：2025年约19,500人，2035年约20,600人，2025—2035增长5.4%，净增约1,100人，年均空缺约2,800个。空缺包括增长和替代，不能视为净增或个人机会；O*NET仍展示2024—2034旧期，不能混合基年。O*NET旧期2024教育27%、专业科学技术27%、农林牧渔狩猎18%为不同期宽行业分布，不拼成2025份额。"
+              "BLS表1.2的19-4012单一职业：2025年约19,500人，2035年约20,600人，2025—2035增长5.4%，净增约1,100人，年均空缺约2,800个。空缺包括增长和替代，不能视为净增或个人机会。O*NET2025行业分布：教育24%、农林牧渔和狩猎23%、专业科学技术23%、批发贸易14%、其他16%；是宽行业就业分布，不是行业工资或招聘增速。"
             ]
           },
           "id": "agricultural-technicians.market-signals.market-signal-card.8",
@@ -31255,7 +31235,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS表1.2单项增长5.4%，净增约1,100岗位；OOH取整5%，不能混为O*NET旧期3%—4%。"
+              "BLS表1.2单项增长5.4%，净增约1,100岗位；OOH取整5%，不是AI作用研究或个人就业保证。"
             ]
           },
           "id": "agricultural-technicians.market-signals.market-signal-card.18",
@@ -31437,7 +31417,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET19-4012旧期2024行业占比：27/27/18/28%，与当前2025预测分开。"
+              "O*NET2025行业分布：教育24%、农林牧渔和狩猎23%、专业科学技术23%、批发贸易14%、其他16%；是宽行业就业分布，不是行业工资或招聘增速。"
             ]
           },
           "id": "agricultural-technicians.market-signals.market-signal-card.31",
@@ -31917,7 +31897,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET19-4012任务情境、新人学历与2025软件广告；BLS表1.2当前单项预测及OOH单项行业工资；NBS2025宽类别工资；中国2022职业分类与北京特定工种备案。O*NET旧期2024就业资料独立注明。"
+              "O*NET19-4012任务情境、新人学历与2025软件广告；BLS表1.2单项预测及OOH农业细项行业工资；NBS2025宽类别工资；中国2022职业分类与北京特定工种备案。"
             ]
           },
           "id": "agricultural-technicians.sources.source-card.2",
@@ -31951,7 +31931,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "美国单项工资、当前预测与旧期行业各标明统计期；中国工资仅宽行业或岗位类别，推广服务职业与美国范围不同。资格按具体工种岗位核；纸面练习和适配提问是编辑设计，不作招聘、AI效果或实操证明。"
+              "美国单项工资、当前预测与行业分布各标明统计期；中国工资仅宽行业或岗位类别，推广服务职业与美国范围不同。资格按具体工种岗位核；纸面练习和适配提问是编辑设计，不作招聘、AI效果或实操证明。"
             ]
           },
           "id": "agricultural-technicians.sources.source-card.4",
@@ -32039,12 +32019,12 @@
                   "与科学家合作开展测试、采样、设备维护及记录分析。",
                   "补充任务含方法研究与培训监督；不推中国权限或AI效果。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet",
                 "limitation": "补充任务含方法研究与培训监督；不推中国权限或AI效果。",
                 "market": "美国",
                 "name": "O*NET19-4012：农业技术员",
-                "period": "2026职业资料；旧期2024就业另标",
+                "period": "2026职业资料；就业另标2025基年及2025—2035预测",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/19-4012.00"
@@ -32055,14 +32035,14 @@
                   "19-4010大组中位51,160美元，农业细项49,630、食品52,130。",
                   "农业细项行业中位54,720/51,570/47,410；大组预测不能代本职单项。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "bls",
                 "limitation": "农业细项行业中位54,720/51,570/47,410；大组预测不能代本职单项。",
                 "market": "美国",
                 "name": "BLS OOH：农业与食品科学技术员",
                 "period": "2025工资与2025—2035预测",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "contextual",
+                "scope": "officially_combined",
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/agricultural-and-food-science-technicians.htm"
               },
               {
@@ -32071,7 +32051,7 @@
                   "任务包括试验、方法研究、维修与数据分析。",
                   "职业名称不能统一排除方法、解释、维修或监督任务。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "ep",
                 "limitation": "职业名称不能统一排除方法、解释、维修或监督任务。",
                 "market": "美国",
@@ -32087,7 +32067,7 @@
                   "全国P10/25/50/75/90为35,980/40,950/49,630/63,630/76,480美元。",
                   "时薪中位23.86；California行60,320不当全国值；工资不代表起薪。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "oews",
                 "limitation": "时薪中位23.86；California行60,320不当全国值；工资不代表起薪。",
                 "market": "美国全国",
@@ -32103,7 +32083,7 @@
                   "总体非私营129,441、私营71,590；非私营农林牧渔74,424、科研技术182,064、制造113,594元/年。",
                   "规上企业专业技术155,491、办事94,936；私营农林牧渔46,552，均非本职单列工资。"
                 ],
-                "evidence_type": "industry_proxy",
+                "evidence_type": "primary_document",
                 "id": "nbs",
                 "limitation": "规上企业专业技术155,491、办事94,936；私营农林牧渔46,552，均非本职单列工资。",
                 "market": "中国大陆全国",
@@ -32119,14 +32099,14 @@
                   "PDF物理第311页、印刷第304页：5-05-01-01从事农林牧渔技术推广和服务。",
                   "含品种、病虫害、机具指导和技术培训等多个工种；不等同美国19-4012全部任务。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnclass",
                 "limitation": "含品种、病虫害、机具指导和技术培训等多个工种；不等同美国19-4012全部任务。",
                 "market": "中国大陆",
                 "name": "中国职业分类大典2022：农业技术员",
                 "period": "2022年版",
                 "publisher": "广元市人力资源和社会保障局发布",
-                "scope": "contextual",
+                "scope": "parent",
                 "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
               },
               {
@@ -32135,7 +32115,7 @@
                   "54%每天全天气户外、40%每天污染物、42%每天防护装备。",
                   "决策自由30%很大34%一定25%有限；不能推限制原因或中国个体风险。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "privacy",
                 "limitation": "决策自由30%很大34%一定25%有限；不能推限制原因或中国个体风险。",
                 "market": "美国",
@@ -32151,14 +32131,14 @@
                   "Office7%、Excel6%、Outlook3%、PowerPoint3%、Word1%、SAP低于1%、Access未给比例。",
                   "Lightcast独立广告提及技能占本职广告的比例，不是采用率或AI效果。"
                 ],
-                "evidence_type": "recruitment_proxy",
+                "evidence_type": "recruitment",
                 "id": "facilities",
-                "limitation": "Lightcast独立广告提及技能占本职广告的比例，不是采用率或AI效果。",
+                "limitation": "本职业招聘广告中的软件提及比例，样本不代表所有岗位或实际采用；Lightcast独立广告提及技能占本职广告的比例，不是采用率或AI效果。",
                 "market": "美国全国",
                 "name": "O*NET19-4012招聘软件2025",
                 "period": "2025年1月1日—12月31日",
                 "publisher": "O*NET OnLine / Lightcast",
-                "scope": "recruitment_proxy",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/19-4012.00"
               },
               {
@@ -32167,14 +32147,14 @@
                   "工资为正常税前报酬，覆盖受薪全/兼职，不含自雇等；部分农业行业不在调查内。",
                   "标准年2,080小时不是个人工时；加班、非生产奖金与福利等不计入正常工资。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "operations",
                 "limitation": "标准年2,080小时不是个人工时；加班、非生产奖金与福利等不计入正常工资。",
                 "market": "美国",
                 "name": "BLS OEWS常见问题",
                 "period": "当前方法页；核对2026-10-02",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "contextual",
+                "scope": "parent",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
@@ -32183,14 +32163,14 @@
                   "以农业机具作业为主要对象，也含维护及作业记录任务。",
                   "用于任务比较，不证明本职可直接转岗或检测记录比例下降。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "hr",
                 "limitation": "用于任务比较，不证明本职可直接转岗或检测记录比例下降。",
                 "market": "美国",
                 "name": "O*NET45-2091农业机具操作员",
                 "period": "2026职业资料",
                 "publisher": "O*NET OnLine",
-                "scope": "contextual",
+                "scope": "cross_occupation",
                 "url": "https://www.onetonline.org/link/summary/45-2091.00"
               },
               {
@@ -32199,14 +32179,14 @@
                   "就业矩阵含非农受薪岗位及自雇、农业行业和家庭雇用等。",
                   "一人可有多岗；工资OEWS覆盖不可套到EP就业估计。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "health",
                 "limitation": "一人可有多岗；工资OEWS覆盖不可套到EP就业估计。",
                 "market": "美国",
                 "name": "BLS Employment Projections方法",
                 "period": "当前方法页；核对2026-10-02",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "contextual",
+                "scope": "parent",
                 "url": "https://www.bls.gov/emp/documentation/projections-methods.htm"
               },
               {
@@ -32215,14 +32195,14 @@
                   "研究动物营养、饲养和繁育等问题。",
                   "只支持相邻任务背景，不证明转岗距离、成功率或统一学历。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "ilo",
                 "limitation": "只支持相邻任务背景，不证明转岗距离、成功率或统一学历。",
                 "market": "美国",
                 "name": "O*NET19-1011动物科学家",
-                "period": "当前职业资料；本目标前项已核",
+                "period": "动态职业任务资料；不适用统计年度",
                 "publisher": "O*NET OnLine",
-                "scope": "contextual",
+                "scope": "cross_occupation",
                 "url": "https://www.onetonline.org/link/summary/19-1011.00"
               },
               {
@@ -32231,14 +32211,14 @@
                   "北京首农食品集团备案农业技术员/农作物种植技术员5、4、3、2、1级。",
                   "仅该机构工种；不是全国统一入职证书、当前报名公告或茶园标准。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "editor",
                 "limitation": "仅该机构工种；不是全国统一入职证书、当前报名公告或茶园标准。",
                 "market": "中国大陆北京市；特定机构工种",
                 "name": "北京市2022工种技能评价备案",
                 "period": "2022归档备案案例",
                 "publisher": "北京市人力资源和社会保障局",
-                "scope": "contextual",
+                "scope": "parent",
                 "url": "https://rsj.beijing.gov.cn/ywsite/zyjd/zyjd_jnrd/zyjd_bjrs/bjrs_yrdw/202203/t20220322_2636287.html"
               },
               {
@@ -32247,7 +32227,7 @@
                   "19,500→20,600，增长5.4%，净增约1,100，年均空缺约2,800。",
                   "典型副学士，相关经验None、中等期限在职培训；不是每岗硬门槛或AI因果结果。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "nist",
                 "limitation": "典型副学士，相关经验None、中等期限在职培训；不是每岗硬门槛或AI因果结果。",
                 "market": "美国全国",
@@ -32258,17 +32238,17 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
-                  "教育27%、专业科学技术27%、农林牧渔狩猎18%、其他28%。",
-                  "宽门类旧期分布不能拼成BLS2025细分行业份额或招聘增长。"
+                  "教育24%、农林牧渔23%、专业科学技术23%、批发14%、其他16%。",
+                  "宽门类就业份额不等于OOH细分行业工资或招聘增长。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "arxiv",
-                "limitation": "宽门类旧期分布不能拼成BLS2025细分行业份额或招聘增长。",
+                "limitation": "宽门类2025就业分布；不是行业内本职业工资、AI采用或招聘增长。",
                 "market": "美国",
-                "name": "O*NET19-4012旧期行业分布",
-                "period": "2024年就业分布；O*NET明示旧期",
+                "name": "O*NET19-4012行业分布",
+                "period": "2025年就业分布",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/19-4012.00"
@@ -32279,14 +32259,14 @@
                   "研究土壤、作物与植物生产相关问题，含方法及数据任务。",
                   "只作相邻任务比较，不给本职转岗距离或保证成功。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "weforum",
                 "limitation": "只作相邻任务比较，不给本职转岗距离或保证成功。",
                 "market": "美国",
                 "name": "O*NET19-1013土壤与植物科学家",
-                "period": "当前职业资料；本目标前项已核",
+                "period": "动态职业任务资料；不适用统计年度",
                 "publisher": "O*NET OnLine",
-                "scope": "contextual",
+                "scope": "cross_occupation",
                 "url": "https://www.onetonline.org/link/summary/19-1013.00"
               },
               {
@@ -32295,7 +32275,7 @@
                   "包括样品、数据分析、设备与农业方法研究。",
                   "AT26-V1题面、量表和示例由编辑设计，不是来源发布的作业标准。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "employer",
                 "limitation": "AT26-V1题面、量表和示例由编辑设计，不是来源发布的作业标准。",
                 "market": "美国",
@@ -32311,14 +32291,14 @@
                   "可采集土壤植物动物等样本，操作实验室与现场设备并分析数据。",
                   "与农业技术任务重叠，不能仅限医疗和受控室内；不证明转岗容易。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "purchasing-managers",
                 "limitation": "与农业技术任务重叠，不能仅限医疗和受控室内；不证明转岗容易。",
                 "market": "美国",
                 "name": "O*NET19-4021生物技术员",
                 "period": "2026职业资料",
                 "publisher": "O*NET OnLine",
-                "scope": "contextual",
+                "scope": "cross_occupation",
                 "url": "https://www.onetonline.org/link/summary/19-4021.00"
               },
               {
@@ -32327,14 +32307,14 @@
                   "食品及添加剂检验、测试、数据整理和食品研发支持。",
                   "它与本职19-4012组成19-4010大组，不把食品任务套到全部农业技术员。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-1",
                 "limitation": "它与本职19-4012组成19-4010大组，不把食品任务套到全部农业技术员。",
                 "market": "美国",
                 "name": "O*NET19-4013食品科学技术员",
                 "period": "2026职业资料",
                 "publisher": "O*NET OnLine",
-                "scope": "contextual",
+                "scope": "cross_occupation",
                 "url": "https://www.onetonline.org/link/summary/19-4013.00"
               },
               {
@@ -32343,14 +32323,14 @@
                   "GIS/GPS、采样网格、地图分析、传感器维护与变量作业。",
                   "同19-4012下细分；也含田间任务，不推体力降低或直接转岗。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-2",
                 "limitation": "同19-4012下细分；也含田间任务，不推体力降低或直接转岗。",
                 "market": "美国",
                 "name": "O*NET19-4012.01精准农业技术员",
                 "period": "2026职业资料",
                 "publisher": "O*NET OnLine",
-                "scope": "contextual",
+                "scope": "cross_occupation",
                 "url": "https://www.onetonline.org/link/summary/19-4012.01"
               },
               {
@@ -32359,14 +32339,14 @@
                   "研究食品组成、加工与保存方法，开发产品及标准。",
                   "不提供农业技术员转岗成功率或统一学历差距。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-3",
                 "limitation": "不提供农业技术员转岗成功率或统一学历差距。",
                 "market": "美国",
                 "name": "O*NET19-1012食品科学家与技术专家",
                 "period": "2026职业资料",
                 "publisher": "O*NET OnLine",
-                "scope": "contextual",
+                "scope": "cross_occupation",
                 "url": "https://www.onetonline.org/link/summary/19-1012.00"
               },
               {
@@ -32375,7 +32355,7 @@
                   "41%高中/同等，18%学士，13%副学士/其他两年学位；Job Zone3。",
                   "不是学历总体分布、个人适合率或中国资格；BLS典型入门另列。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "census",
                 "limitation": "不是学历总体分布、个人适合率或中国资格；BLS典型入门另列。",
                 "market": "美国",
@@ -32391,7 +32371,7 @@
                   "兴趣RIC，R97/I60/C54是职业维度；含理解、表达及推理能力。",
                   "不提供大五、MBTI、九型、IQ/EI或内外向个人适合及录用阈值。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "msresearch",
                 "limitation": "不提供大五、MBTI、九型、IQ/EI或内外向个人适合及录用阈值。",
                 "market": "美国",
@@ -32407,7 +32387,7 @@
                   "农业细项中位：批发54,720，州立高校51,570，物理工程生命科学研发47,410美元/年。",
                   "选农业19-4012表；不能误用食品19-4013行业表或整个大组中位。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet-wages",
                 "limitation": "选农业19-4012表；不能误用食品19-4013行业表或整个大组中位。",
                 "market": "美国",
@@ -32423,14 +32403,14 @@
                   "检查农产品及相关作业、取样和检查报告，可执行监管规定。",
                   "本职记录经验不自动赋执法权；美国任务不代中国权限。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "archivists",
                 "limitation": "本职记录经验不自动赋执法权；美国任务不代中国权限。",
                 "market": "美国",
                 "name": "O*NET45-2011农业检查员",
                 "period": "2026职业资料",
                 "publisher": "O*NET OnLine",
-                "scope": "contextual",
+                "scope": "cross_occupation",
                 "url": "https://www.onetonline.org/link/summary/45-2011.00"
               }
             ]
@@ -34342,7 +34322,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "档",
+                  "label": "实验、研究与照护记录",
                   "secondary_value": null,
                   "value": {
                     "$item": "agricultural-technicians.profile.career-quick-answers-block.6",
@@ -34679,7 +34659,7 @@
             },
             "evidence_refs": [
               "onet",
-              "ep"
+              "facilities"
             ],
             "id": "record-version",
             "mitigation": {
@@ -34711,7 +34691,7 @@
             },
             "evidence_refs": [
               "onet",
-              "ep"
+              "facilities"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34743,7 +34723,7 @@
             },
             "evidence_refs": [
               "onet",
-              "ep"
+              "facilities"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -34775,7 +34755,7 @@
             },
             "evidence_refs": [
               "onet",
-              "ep"
+              "facilities"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -34806,8 +34786,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "privacy",
-              "bls"
+              "onet",
+              "employer"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -37730,7 +37710,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "采样测试与数据分析",
@@ -37781,7 +37761,7 @@
       "text": "农业技术员：职业内容、薪资与就业前景"
     }
   },
-  "source_content_sha256": "7a01361d48be294cb40247bd5369e7d62c05d18c31905e2194cb2a464fa8a030",
+  "source_content_sha256": "0c182804a91891774df47904330221a5db4d5f65be5ad912ca6580854b4d91b4",
   "subject": {
     "canonical_slug": "agricultural-technicians",
     "name": "农业技术员",

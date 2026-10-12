@@ -7543,7 +7543,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "维护管理系统（CMMS）、故障预测、图纸检索与记录汇总等工具可辅助排单、提示维护周期并汇总数据，但现场检查诊断、能源隔离、拆解更换、校准验收与安全判断仍由人负责。"
+              "编辑任务假设：CMMS排单、传感器故障预测和图纸检索与生成式AI分开；后者可能整理虚构工单草稿，未取得本职业采用率或岗位结果。现场诊断、能源隔离、维修与验收须人员按规程核验，模型建议不授设备/电气作业权限。"
             ]
           },
           "id": "maintenance-and-repair-workers-general.ai-impact.ai-impact-table.2",
@@ -7571,7 +7571,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不同环节受影响不同：排单、维护周期提示与记录汇总更易自动化，但现场诊断、拆解更换、校准验收与安全判断仍由人负责。"
+              "编辑分析：排单、维护周期提示与记录汇总可作工具辅助试用候选；本页未取得各环节AI自动化程度的比较研究。现场诊断、拆解更换、校准验收与安全作业仍按岗位规程和授权落实。"
             ]
           },
           "id": "maintenance-and-repair-workers-general.ai-impact.ai-impact-table.4",
@@ -7613,7 +7613,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议：工具可辅助排单、维护周期提示与记录汇总；当前资料不证明机构普遍采用这些系统。"
+              "编辑试用建议：仅虚构资料下的小样草稿；普通专用软件与生成式AI不同，未证明本职业机构普遍采用。"
             ]
           },
           "id": "maintenance-and-repair-workers-general.ai-impact.ai-impact-table.7",
@@ -7784,15 +7784,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布与局限：该页 2024 年主要行业为 Real Estate and Rental and Leasing 与 Manufacturing；行业分布是雇主场景信号，不是需求预测。"
+              "BLS OOH Pay表提供2025年5月一般维修与保养工在房地产与租赁、制造业、政府及教育服务业的年薪中位数；此处为同职业分行业工资，不是就业行业占比或需求预测。"
             ]
           },
           "fact_refs": [
-            "us-employment-2024"
+            "us-wage-median"
           ],
           "id": "maintenance-and-repair-workers-general.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "onet-industry"
+            "bls-ooh-general-maintenance"
           ],
           "type": "prose"
         },
@@ -8040,7 +8040,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国侧该职业属 Job Zone 3（中等准备）：多数岗位要求职业学校培训、相关在岗经验或副学士学位，并需一至两年培训（含学徒）；具体要求按雇主与行业核对。"
+              "美国O*NET列本职业为Job Zone 3；职业学校、经验或副学士及一至两年训练是该组通用准备描述，不是本职业统一门槛。BLS本职业路径为通常高中或同等学历、随有经验人员在岗学习，也可经学徒或培训计划进入；具体要求核雇主。"
             ]
           },
           "id": "maintenance-and-repair-workers-general.path.career-path-block.2",
@@ -8054,7 +8054,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国：以职业学校培训加在岗训练或在监督下学习设备与建筑维护为常见路径，学徒计划常见。中国大陆：本页未建立与该 O*NET 精确对应的统一资格条目；实际岗位须核对雇主、所在地与具体任务的资格和授权要求，不能据此断言没有要求。"
+              "美国BLS说明通常随有经验人员在岗学习，也可经学徒或培训计划进入，不据此称学徒普遍必需。中国大陆未建立与49-9071.00一对一资格映射；按真实电气、暖通、焊接、高处等任务、设备、所在地和授权分别核验，不能推断没有要求。"
             ]
           },
           "id": "maintenance-and-repair-workers-general.path.career-path-block.3",
@@ -8203,7 +8203,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：目标雇主的设备类型与安全授权、专精工种（电工、暖通、机械维修）执照或培训，或转向预防性维护计划与设施管理所需的经验与责任证据。"
+              "转向机械维护工须补足目标生产设备的日常检查、润滑、更换易损件与预防性保养规程，核设备危险能量控制及停机转交边界；综合建筑维修经验不等于工业设备保养能力。"
             ]
           },
           "id": "maintenance-and-repair-workers-general.market-signals.market-signal-card.5",
@@ -8642,6 +8642,70 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "How to Become One说明高中及同等和在岗学习，可经学徒/培训；不同于Job Zone组通用期限。",
+                  "美国资料，不替代中国法律或目标雇主设备授权。",
+                  "Pay表：2025年5月本职业分行业年薪中位数；制造61500、政府（不含州/地方教育和医院）51160、教育50270、房地产租赁48360、食宿39590美元。"
+                ],
+                "evidence_type": "official occupation guidance",
+                "id": "bls-ooh-general-maintenance",
+                "limitation": "准备及安全资料不授予任何个人作业权限，不推定中国资格。",
+                "market": "美国",
+                "name": "BLS：一般维修与保养工职业手册",
+                "period": "现行网页；本轮查阅2026-10-11",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/general-maintenance-and-repair-workers.htm"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "机器维护和清障须控制意外启动及储能释放；区分受训授权人员与受影响人员。",
+                  "美国资料，不替代中国法律或目标雇主设备授权。"
+                ],
+                "evidence_type": "official safety guidance",
+                "id": "osha-energy-control",
+                "limitation": "准备及安全资料不授予任何个人作业权限，不推定中国资格。",
+                "market": "美国",
+                "name": "OSHA：危险能量控制",
+                "period": "现行网页；本轮查阅2026-10-11",
+                "publisher": "OSHA",
+                "scope": "industry_proxy",
+                "url": "https://www.osha.gov/control-hazardous-energy"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "受限空间不能仅凭狭小外观判断；危险评估、进入条件、许可与救援须依适用程序。",
+                  "美国资料，不替代中国法律或目标雇主设备授权。"
+                ],
+                "evidence_type": "official safety guidance",
+                "id": "osha-confined-spaces",
+                "limitation": "准备及安全资料不授予任何个人作业权限，不推定中国资格。",
+                "market": "美国",
+                "name": "OSHA：受限空间",
+                "period": "现行网页；本轮查阅2026-10-11",
+                "publisher": "OSHA",
+                "scope": "industry_proxy",
+                "url": "https://www.osha.gov/confined-spaces"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "高处平台与洞口须按适用作业场景防护、提供保护装备和危害训练；不能跨法域套用美国阈值。"
+                ],
+                "evidence_type": "official safety guidance",
+                "id": "osha-fall-protection",
+                "limitation": "美国资料不授予个人作业权限，不替代中国适用规则和现场授权。",
+                "market": "美国",
+                "name": "OSHA：坠落防护",
+                "period": "现行网页；查阅2026-10-11",
+                "publisher": "OSHA",
+                "scope": "industry_proxy",
+                "url": "https://www.osha.gov/fall-protection"
               }
             ]
           },
@@ -8749,7 +8813,7 @@
         "action_rows": [
           {
             "人群": "入行者",
-            "应对重点": "练习诊断、工具使用与能源隔离。"
+            "应对重点": "先做纸面诊断与安全边界整理；真实工具和能源隔离须经训练授权，在监督下进行。"
           },
           {
             "人群": "在岗者",
@@ -8830,12 +8894,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "任务分配与数据汇总",
+            "AI主要改变": "可能整理工单草稿；CMMS和预测维护不证明生成式AI采用。",
             "仍由人负责": "安全与状态核对",
             "方向": "排单与记录"
           },
           {
-            "AI主要改变": "有限提示",
+            "AI主要改变": "编辑分析：故障提示须验证输入、设备与模型适用性，不推自动化比例。",
             "仍由人负责": "根因判定与拆解维修",
             "方向": "诊断与检修"
           }
@@ -9193,7 +9257,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "维护管理系统（CMMS）、故障预测、图纸检索与记录汇总等工具可辅助排单、提示维护周期并汇总数据，但现场检查诊断、能源隔离、拆解更换、校准验收与安全判断仍由人负责。"
+          "编辑任务假设：CMMS排单、传感器故障预测和图纸检索与生成式AI分开；后者可能整理虚构工单草稿，未取得本职业采用率或岗位结果。现场诊断、能源隔离、维修与验收须人员按规程核验，模型建议不授设备/电气作业权限。"
         ],
         "heading": "一般维修与保养工的工作对象与 AI 边界"
       },
@@ -9335,6 +9399,12 @@
               "item": "maintenance-and-repair-workers-general.source-register.published.1"
             },
             "scope": "中国行业工资口径；不等于本职业精确工资。"
+          },
+          {
+            "href": "https://www.bls.gov/ooh/installation-maintenance-and-repair/general-maintenance-and-repair-workers.htm",
+            "id": "maintenance-and-repair-workers-general.display.source.bls-ooh-general-maintenance",
+            "label": "BLS：一般维修与保养工职业手册",
+            "scope": "美国本职业准备和晋升方向，不等中国资格或承诺期限。"
           }
         ],
         "tracks": [
@@ -9618,10 +9688,10 @@
             "affected_roles": "维修作业岗位",
             "consequence": "可能造成机械或电气伤害。",
             "evidence_refs": [
-              "onet-tasks"
+              "maintenance-and-repair-workers-general.display.source.osha-energy-control"
             ],
             "id": "risk-1",
-            "mitigation": "执行能源隔离与上锁挂牌并验电。",
+            "mitigation": "先核任务和危险能源；由受训授权人员按设备适用程序隔离、控制储能并确认安全状态，电气等专精操作超授权即转交。",
             "scenario": "未隔离能源或未上锁挂牌即拆解。",
             "title": {
               "$item": "maintenance-and-repair-workers-general.risk.career-risk-cards.1",
@@ -9634,10 +9704,11 @@
             "affected_roles": "结构与设备作业岗位",
             "consequence": "可能造成坠落或缺氧风险。",
             "evidence_refs": [
-              "onet-context"
+              "maintenance-and-repair-workers-general.display.source.osha-confined-spaces",
+              "maintenance-and-repair-workers-general.display.source.osha-fall-protection"
             ],
             "id": "risk-2",
-            "mitigation": "按规程采取防坠落与通风措施。",
+            "mitigation": "高处与受限空间分别评估；未确认防护、进入程序、人员训练和救援安排前不得作业，转交现场安全责任人；不能仅通风就进入。",
             "scenario": "高处或狭小空间未采取防护。",
             "title": {
               "$item": "maintenance-and-repair-workers-general.risk.career-risk-cards.2",
@@ -9650,7 +9721,7 @@
             "affected_roles": "电气与专精作业岗位",
             "consequence": "可能造成电击或违规。",
             "evidence_refs": [
-              "onet-tasks"
+              "maintenance-and-repair-workers-general.display.source.onet-tasks"
             ],
             "id": "risk-3",
             "mitigation": "按法域与授权交由具资格人员作业。",
@@ -9666,7 +9737,7 @@
             "affected_roles": "维修作业岗位",
             "consequence": "可能造成伤害或火灾。",
             "evidence_refs": [
-              "onet-context"
+              "maintenance-and-repair-workers-general.display.source.onet-context"
             ],
             "id": "risk-4",
             "mitigation": "按规程使用并佩戴防护。",
@@ -9680,13 +9751,13 @@
           },
           {
             "affected_roles": "维修作业岗位",
-            "consequence": "可能造成设备损坏与停机。",
+            "consequence": "可能造成越权操作、安全伤害及合规风险。",
             "evidence_refs": [
-              "onet-tasks"
+              "maintenance-and-repair-workers-general.display.source.onet-tasks"
             ],
             "id": "risk-5",
-            "mitigation": "按系统诊断并查阅手册再维修。",
-            "scenario": "凭猜测维修导致重复故障。",
+            "mitigation": "先查所在地、设备、任务与个人授权边界，无法确认即停止并转交具相应资格或授权人员。",
+            "scenario": "未核资格或岗位授权即跨入电气、暖通等专精系统。",
             "title": {
               "$item": "maintenance-and-repair-workers-general.risk.career-risk-cards.5",
               "block": "risk",
@@ -9696,14 +9767,14 @@
           },
           {
             "affected_roles": "维修作业岗位",
-            "consequence": "可能造成安全与合规风险。",
+            "consequence": "可能造成重复故障、设备损坏或停机。",
             "evidence_refs": [
-              "onet-summary"
+              "maintenance-and-repair-workers-general.display.source.onet-summary"
             ],
             "id": "risk-6",
-            "mitigation": "明确授权边界并及时转交。",
-            "scenario": "在无授权或资格情况下处理专精系统时。",
-            "title": "交叉工种作业边界不清"
+            "mitigation": "按系统整理诊断依据与未决项，无法确认时上报，维修后按适用标准验收。",
+            "scenario": "缺少测试或手册依据，凭猜测确定根因和备件。",
+            "title": "故障根因未经核实即维修"
           }
         ],
         "schema_version": "career.work_risk.v1",
@@ -9779,6 +9850,24 @@
               "item": "maintenance-and-repair-workers-general.source-register.published.1"
             },
             "scope": "认证入口；不替代专精执照。"
+          },
+          {
+            "href": "https://www.osha.gov/control-hazardous-energy",
+            "id": "maintenance-and-repair-workers-general.display.source.osha-energy-control",
+            "label": "OSHA：危险能量控制",
+            "scope": "准备及安全资料不授予任何个人作业权限，不推定中国资格。"
+          },
+          {
+            "href": "https://www.osha.gov/confined-spaces",
+            "id": "maintenance-and-repair-workers-general.display.source.osha-confined-spaces",
+            "label": "OSHA：受限空间",
+            "scope": "准备及安全资料不授予任何个人作业权限，不推定中国资格。"
+          },
+          {
+            "href": "https://www.osha.gov/fall-protection",
+            "id": "maintenance-and-repair-workers-general.display.source.osha-fall-protection",
+            "label": "OSHA：坠落防护",
+            "scope": "美国安全参考，不替代中国法域和现场规程。"
           }
         ]
       },
@@ -9896,7 +9985,7 @@
             ],
             "separator": ""
           },
-          "china_salary_note": "中国大陆行业口径与美国职业统计分开，不能跨市场拼接。",
+          "china_salary_note": "居民服务、修理和其他服务业仅为居民修理服务雇主的宽行业背景，不证明所有综合设施维修人员主要归属该行业。2025税前年平均、私营/非私营人群分列，不拼本职业区间或折月薪；美国工资另列。",
           "china_salary_table": [
             {
               "城市/区间": "全国·居民服务、修理和其他服务业（非私营）",
@@ -9968,7 +10057,8 @@
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "maintenance-and-repair-workers-general.source-register.published.1"
-            }
+            },
+            "｜行业工资：BLS OOH Pay｜https://www.bls.gov/ooh/installation-maintenance-and-repair/general-maintenance-and-repair-workers.htm"
           ],
           "separator": ""
         },
@@ -10022,7 +10112,7 @@
             }
           },
           {
-            "指标": "薪资 · 最低 10%",
+            "指标": "薪资 · 第10分位",
             "数值": "$35,350/年（2025，第10分位）",
             "说明": {
               "$join": [
@@ -10046,7 +10136,7 @@
             }
           },
           {
-            "指标": "薪资 · 最高 90%",
+            "指标": "薪资 · 第90分位",
             "数值": "$77,180/年（2025，第90分位）",
             "说明": {
               "$join": [
@@ -10166,7 +10256,7 @@
             }
           }
         ],
-        "boundary": "美国全国口径：工资、就业与行业均为 O*NET 展示的本职业 49-9071.00 数据，工资为 2025 OEWS、就业展望为 2024—2034 预测；不含个人到手收入、起薪或录用结论。",
+        "boundary": "美国全国口径：工资、就业与行业均为 O*NET 展示的本职业 49-9071.00 数据，工资为 2025 OEWS、就业展望为 2024—2034 预测；不含个人到手收入、起薪或录用结论。 本页就业值为保留的2024—2034历史版本，当前O*NET/BLS已换2025—2035；保护Hero及FAQ共享事实未同步，不视为最新全页就业统计。",
         "direct_answer": {
           "$item": "maintenance-and-repair-workers-general.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10175,11 +10265,11 @@
         },
         "factor_rows": [
           {
-            "answer": "多数岗位要求职业学校培训、相关经验或副学士学位并需一至两年培训；涉及电工、管道、暖通制冷等专精作业须按法域取得执照或资格。",
+            "answer": "美国O*NET列本职业为Job Zone 3；职业学校、经验或副学士及一至两年训练是该组通用准备描述，不是本职业统一门槛。BLS本职业路径为通常高中或同等学历、随有经验人员在岗学习，也可经学徒或培训计划进入；具体要求核雇主。 专精作业另核当地执照或资格及雇主授权。",
             "factor": "资格"
           },
           {
-            "answer": "多以学徒或在岗训练进入；诊断、工具使用与安全作业经验比证书名称更常被参考。",
+            "answer": "编辑建议：用诊断、工具使用和安全控制记录展示经验；BLS支持在岗学习路径，但未提供经验相对证书的招聘权重比较。",
             "factor": "经验"
           },
           {
@@ -10206,30 +10296,30 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024",
+        "industry_period": "2025年5月",
         "industry_rows": [
           {
             "industry": "Real Estate and Rental and Leasing",
-            "median": "本页未取得分行业工资",
-            "note": "本页未取得分行业工资分项；以整体中位数为准。"
+            "median": "$48,360/年",
+            "note": "2025年5月本职业49-9071分行业中位数；BLS OOH Pay表，不等于全国中位数、个人起薪或到手收入。"
           },
           {
             "industry": "Manufacturing",
-            "median": "见就业行",
-            "note": "行业口径为雇主场景信号，不跨职业外推。"
+            "median": "$61,500/年",
+            "note": "2025年5月本职业49-9071分行业中位数；BLS OOH Pay表，不等于全国中位数、个人起薪或到手收入。"
           },
           {
-            "industry": "行业口径说明二",
-            "median": "见就业行",
-            "note": "地区与雇主差异大，不得跨地区外推。"
+            "industry": "Government, excluding state and local education and hospitals",
+            "median": "$51,160/年",
+            "note": "2025年5月本职业49-9071分行业中位数；BLS OOH Pay表，不等于全国中位数、个人起薪或到手收入。"
           },
           {
-            "industry": "行业口径说明三",
-            "median": "见就业行",
-            "note": "全国职业工资分位不等于行业或地区工资，不以分位推断个人资历。"
+            "industry": "Educational services; state, local, and private",
+            "median": "$50,270/年",
+            "note": "2025年5月本职业49-9071分行业中位数；BLS OOH Pay表，不等于全国中位数、个人起薪或到手收入。"
           }
         ],
-        "industry_value_label": "行业值",
+        "industry_value_label": "年薪中位数（美元/年）",
         "interpretation_heading": {
           "$item": "maintenance-and-repair-workers-general.us-salary.career-snapshot-secondary-locale.4",
           "block": "us-salary",
@@ -10250,7 +10340,7 @@
             "question": "展望"
           },
           {
-            "answer": "按 O*NET/BLS 行业口径列为房地产与租赁及制造业，不等于全部从业者收入。",
+            "answer": "2025年5月同职业分行业年薪中位数；不同雇主行业，不能当个人资历等级或跨地区报价。",
             "question": "行业"
           }
         ],
@@ -10369,7 +10459,7 @@
             "geography": "美国全国",
             "horizon": "2024—2034",
             "interpretation": "就业规模、变化与职位空缺必须分别解释。",
-            "limitation": "为职业统计，不能作为个人就业保证。",
+            "limitation": "保留2024—2034历史版本；当前O*NET/BLS已展示2025—2035，保护Hero与FAQ未同步；不是最新全页或个人就业保证。",
             "metric": "就业规模与变化",
             "occupation_scope": "展示口径：Maintenance and Repair Workers, General（49-9071.00）",
             "value": {
@@ -10383,7 +10473,7 @@
             "geography": "美国全国",
             "horizon": "2024—2034",
             "interpretation": "为 2024—2034 年预测期年均值，含增长与替代需求，不等于在招岗位数；BLS 对该期表述为空缺「each year, on average, over the decade」。",
-            "limitation": "不能作为个人录用概率。",
+            "limitation": "旧预测期年均空缺，当前源已换期；不等在招数或个人录用概率。",
             "metric": "职位空缺（年均）",
             "occupation_scope": "展示口径：Maintenance and Repair Workers, General（49-9071.00）",
             "value": "约 159,800 个/年"
@@ -10563,7 +10653,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "riasec",
             "label": "RIASEC",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10582,7 +10672,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "big-five",
             "label": "大五人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10601,7 +10691,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "mbti",
             "label": "MBTI",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10615,7 +10705,7 @@
             "answer": "需要结合真实任务、安全边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "enneagram",
             "label": "九型人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10629,7 +10719,7 @@
             "answer": "需要结合真实任务、安全边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "iq",
             "label": "认知能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10643,7 +10733,7 @@
             "answer": "需要结合真实任务、安全边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "eq",
             "label": "情绪能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -11166,7 +11256,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "设备维护与故障诊断",
@@ -11217,7 +11307,7 @@
       "text": "一般维修与保养工职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "fb5d3dde3677a39f1629118dca4ab6daaaf3f94c83e3a7e086fdef1c4a4bd0b7",
+  "source_content_sha256": "bc321b20b495e1d2faa75b925a2b55523b8c3d256644e34d859cb9d820d74949",
   "subject": {
     "canonical_slug": "maintenance-and-repair-workers-general",
     "name": "一般维修与保养工",

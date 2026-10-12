@@ -2,6 +2,18 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:choreo-cn-industry-manufacturing-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:choreo-cn-industry-science-tech-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:choreo-cn-professional-technical-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:choreo-cn-urban-nonprivate-2024": {
+        "status": "pending_mapping"
+      },
       "fact:cn-industry-manufacturing-2024": {
         "status": "pending_mapping"
       },
@@ -23999,10 +24011,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "创作与排练决定由编舞师作出；舞者负责在其能力与安全范围内执行，医疗人员处理伤病，主办方承担许可与场地与演出合规"
+              "编舞师按项目职责作创作与排练决定；舞者在能力和安全范围内执行，伤病由合资格医疗人员评估。中国营业性演出的举办单位、场所经营单位各有审批核验和安全职责；兼任举办、表演或经营角色的编舞师须核实际义务，不能一概归给主办方。"
             ]
           },
           "id": "choreographers.profile.career-quick-answers-block.16",
+          "source_refs": [
+            "faa-design-approvals",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24032,10 +24048,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国大陆的营业性演出须按《营业性演出管理条例》办理审批与备案；使用音乐与影像与既有作品须先确认著作权与授权范围"
+              "中国《营业性演出管理条例》第6—9条按主体分别规定许可、登记或备案，第13、15条规定举办审批；编舞创作身份不等于举办或经营许可。音乐、影像及既有作品另核著作权和实际使用范围。"
             ]
           },
           "id": "choreographers.profile.career-quick-answers-block.19",
+          "source_refs": [
+            "faa-design-approvals",
+            "nasa-seh"
+          ],
           "type": "prose"
         },
         {
@@ -24087,7 +24107,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "把动作拆成可被他人学会的说明（节拍与呼吸与重心与视线与站位），并保留版本记录；只有自己能跳出来的动作无法被复现，也无法在替换舞者后维持。"
+              "把动作拆成可被他人学会的说明（节拍与呼吸与重心与视线与站位），并保留版本记录；缺少可理解的动作说明会增加他人学习、替换舞者及复排的难度；不能据此断言作品一定无法复现。"
             ]
           },
           "id": "choreographers.profile.career-quick-answers-block.24",
@@ -24109,10 +24129,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "设置热身、强度递进与停止条件，核对地面与道具与服装与超出能力的动作风险；出现疼痛或伤病信号时按项目安排转介专业人员，而不是要求继续完成动作。"
+              "编辑建议：结合具体舞种、人员能力和场地安排热身、递进与休息，核地面、道具和服装；IADMS说明热身须适合接下来的舞蹈活动。疼痛或伤病信号不能靠AI或本页清单判断可继续；暂停相关动作并请合资格人员评估，紧急情况按所在地应急路径处理，不等待项目常规安排。"
             ]
           },
           "id": "choreographers.profile.career-quick-answers-block.26",
+          "source_refs": [
+            "choreo-iadms-warmup",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24131,7 +24155,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "每次修改写清改动点与原因与影响范围；缺少版本记录会让排练与制作方无法对齐，也无法在复排或巡演时还原作品。"
+              "每次修改写清改动点与原因与影响范围；缺少版本记录会增加排练、制作交接及复排核对的难度；不把记录缺失等同必然无法还原作品。"
             ]
           },
           "id": "choreographers.profile.career-quick-answers-block.28",
@@ -24230,7 +24254,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国工资按 BLS OEWS 2025 年 5 月口径（O*NET 该职业 27-2032.00 页面显示）：年薪 10/25/50/75/90 分位为 34,090 与 41,600 与 55,310 与 75,710 与 138,630 美元；时薪 10/25/50/75/90 分位为 16.39 与 20.00 与 26.59 与 36.40 与 66.65 美元。分位描述受雇工资薪金岗位的分布位置；该职业以项目与短期合同与自雇形式较多，OEWS不含自雇者，不能反映个人项目收入与无薪空档期。"
+              "美国工资按 BLS OEWS 2025 年 5 月口径（O*NET 该职业 27-2032.00 页面显示）：年薪 10/25/50/75/90 分位为 34,090 与 41,600 与 55,310 与 75,710 与 138,630 美元；时薪 10/25/50/75/90 分位为 16.39 与 20.00 与 26.59 与 36.40 与 66.65 美元。分位描述受雇工资薪金岗位的分布位置；2025就业中自雇占39.6%，OOH说明兼职常见；项目与短期合同是可能情境，本轮没有其占比，逐岗位核，OEWS不含自雇者，不能反映个人项目收入与无薪空档期。"
             ]
           },
           "id": "choreographers.profile.onet-structured-fields-block.2",
@@ -24252,10 +24276,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS表1.2：美国编舞师2025年4.7千人，2035年4.9千人，增长3.1%，净增0.1千人、年均空缺0.6千个；四舍五入后的规模不能直接相减替代净增。2025年自雇占39.6%。O*NET当前行业页列教育42%、艺术娱乐休闲31%、其他27%，未标资料年，不拼为2025结构。"
+              "BLS表1.2：美国编舞师2025年4.7千人，2035年4.9千人，增长3.1%，净增0.1千人、年均空缺0.6千个；四舍五入后的规模不能直接相减替代净增。2025年自雇占39.6%。O*NET当前行业页列艺术娱乐休闲29%、教育29%、其他42%，未标资料年，不拼为2025结构。"
             ]
           },
           "id": "choreographers.profile.onet-structured-fields-block.4",
+          "source_refs": [
+            "bls-outlook",
+            "choreo-industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -24290,10 +24318,14 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "身体距离与接触｜100% 的受访者工作时与他人物理距离很近（近乎接触，不代表实际身体接触比例）；76% 持续与他人接触；75% 每天进行面对面讨论。\n身体负荷与体位｜71% 持续或几乎持续弯腰或扭身；57% 持续或几乎持续站立；57% 持续或几乎持续保持或恢复平衡；48% 持续或几乎持续重复同一动作；29% 不到一半时间走动或跑动；38% 不到一半时间跪或蹲或俯身或爬行。\n协作与团队｜62% 认为与工作组或团队协作极其重要；38% 认为协调或带领他人极其重要；48% 对他人的工作成果承担高责任。\n沟通方式｜76% 每天使用电子邮件；48% 每天进行电话交谈；30% 每天撰写信件与备忘录；38% 每月至少一次、但非每周进行公开演讲。\n竞争与时间压力｜57% 认为竞争程度极其激烈；38% 每周至少一次、但非每日遇到严格截止时间；25% 认为决策对同事或机构结果的影响重要。\n决策与自主性｜43% 对决策拥有很大自由度；33% 对确定任务与优先级与目标拥有很大自由度；33% 认为精确或准确极其重要。\n安全与责任｜67% 对他人的健康与安全承担高责任；动作强度与地面与道具与服装条件会直接影响舞者受伤风险。\n情绪与冲突｜48% 每月至少一次、但非每周遇到冲突情境；排练与演出的时间压力容易放大意见分歧，需要把分歧落到具体段落与版本改动上。\n工作场所｜76% 每天在环境受控的室内工作；实际工作场地随项目变化（排练厅、剧场、学校、影视与活动现场），需按场地条件调整安排。"
+              "身体距离与接触｜100% 的受访者工作时与他人物理距离很近（近乎接触，不代表实际身体接触比例）；76% 持续与他人接触；75% 每天进行面对面讨论。\n身体负荷与体位｜71% 持续或几乎持续弯腰或扭身；57% 持续或几乎持续站立；57% 持续或几乎持续保持或恢复平衡；48% 持续或几乎持续重复同一动作；29% 不到一半时间走动或跑动；38% 不到一半时间跪或蹲或俯身或爬行。\n协作与团队｜62% 认为与工作组或团队协作极其重要；38% 认为协调或带领他人极其重要；48% 对他人的工作成果承担高责任。\n沟通方式｜76% 每天使用电子邮件；48% 每天进行电话交谈；30% 每天撰写信件与备忘录；38% 每月至少一次、但非每周进行公开演讲。\n竞争与时间压力｜57% 认为竞争程度极其激烈；38% 每周至少一次、但非每日遇到严格截止时间；25% 认为决策对同事或机构结果的影响重要。\n决策与自主性｜43% 对决策拥有很大自由度；33% 对确定任务与优先级与目标拥有很大自由度；33% 认为精确或准确极其重要。\n安全与责任｜67%对其他工作人员健康与安全承担高责任；人员能力、排练负荷和场地条件作为编辑风险核对项；该问卷不提供事故率或个案安全结论。\n情绪与冲突｜48% 每月至少一次、但非每周遇到冲突情境；编辑建议把分歧落到具体段落与版本改动上；情境问卷本身不证明压力造成冲突。\n工作场所｜76% 每天在环境受控的室内工作；实际工作场地随项目变化（排练厅、剧场、学校、影视与活动现场），需按场地条件调整安排。"
             ]
           },
           "id": "choreographers.profile.work-context-block.1",
+          "source_refs": [
+            "nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         }
       ]
@@ -24918,28 +24950,28 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "entity": "O*NET编舞任务与工作活动",
                 "id": "link-8",
-                "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
-              },
-              {
-                "entity": "O*NET-SOC 27-2032.00 职业详细资料",
-                "id": "link-9",
                 "relation": "related-evidence",
                 "url": "https://www.onetonline.org/link/details/27-2032.00"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
-                "id": "link-10",
+                "entity": "O*NET所载OEWS全国完整工资分位",
+                "id": "link-9",
                 "relation": "related-evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://www.onetonline.org/link/localwages/27-2032.00"
               },
               {
-                "entity": "BLS 表1.2：编舞师27-2032分项预测",
+                "entity": "ILO任务暴露度研究",
+                "id": "link-10",
+                "relation": "related-evidence",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "entity": "NIST自愿AI风险框架",
                 "id": "link-11",
                 "relation": "related-evidence",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
                 "entity": "O*NET 技术清单（27-2032.00 招聘技术关键词）",
@@ -24948,16 +24980,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/27-2032.00"
               },
               {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "entity": "O*NET编舞任务；预测见已有BLS按钮",
                 "id": "link-13",
                 "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.onetonline.org/link/details/27-2032.00"
               },
               {
-                "entity": "O*NET 技术清单（27-2032.00 招聘技术关键词）",
+                "entity": "O*NET编舞教育与编程技能",
                 "id": "link-14",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/hot_tech/27-2032.00"
+                "url": "https://www.onetonline.org/link/details/27-2032.00"
               },
               {
                 "entity": "O*NET-SOC 27-2032.00 职业详细资料",
@@ -24972,22 +25004,22 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
+                "entity": "本页风险板块：对应法规的官方来源按钮",
                 "id": "link-17",
                 "relation": "related-evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://fermatmind.com/zh/career/jobs/choreographers#career-visual-group-risk"
               },
               {
-                "entity": "O*NET 全国工资分位页面（27-2032.00）",
+                "entity": "BLS表1.2：编舞分项预测",
                 "id": "link-18",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localwages/27-2032.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET-SOC 27-2032.00 职业摘要",
+                "entity": "O*NET2025招聘软件关键词",
                 "id": "link-19",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/summary/27-2032.00"
+                "url": "https://www.onetonline.org/link/hot_tech/27-2032.00"
               }
             ]
           },
@@ -25615,10 +25647,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不把编程当作入行门槛。O*NET 该职业的技术清单以办公与演示与影音与排练管理软件为主，新入职所需学历受访回答显示 33% 的受访者认为需要高中或同等学历；真正决定机会的是可出示的作品与排练经验。"
+              "学习建议：先核目标岗位所需作品、舞者经验、学历及排练能力，再学岗位软件。O*NET编程技能重要度3，不能据此断言所有岗位免编程要求；2025招聘热门技术六项未提供比例，不证明实际采用。作品与经验重要，但不能代替岗位资格。"
             ]
           },
           "id": "choreographers.ai-impact.ai-impact-table.66",
+          "source_refs": [
+            "onet-details",
+            "onet-hot-tech",
+            "bls-entry",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25626,7 +25664,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Employment Projections（经 O*NET 显示）；O*NET Hot Technologies 27-2032.00"
+              "O*NET详情教育问卷与编程重要度3；BLS典型教育经验另见OOH，不用Hot证明准入。"
             ]
           },
           "id": "choreographers.ai-impact.ai-impact-table.67",
@@ -25681,10 +25719,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。作品的最终采用与文化语境判断属于项目与委托方的决定范围，演出许可与著作权与肖像授权由主办方与权利人按法域规定处理；AI 输出既不能替代授权，也不能免除编舞者对自己作品的责任。"
+              "AI不能替代有权人员的决定或许可。中国著作权法第38条区分表演者与演出组织者取得许可的情形，录制、传播和委托创作另核相关权利及合同；编舞兼任这些角色时须核相应责任。肖像权另核同意及法定例外，不能仅凭主办方口头认可使用。"
             ]
           },
           "id": "choreographers.ai-impact.ai-impact-table.72",
+          "source_refs": [
+            "nasa-seh",
+            "civil-code-portrait",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25692,7 +25735,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST自愿治理建议；O*NET任务；具体合同和法域责任另核"
+              "中国著作权法第10/16/26/38条分别核作品使用、许可和表演者权利；肖像另见民法典1018—1023，不由NIST授采用许可。 对应官方正文见本页风险/入行法源按钮；此问链接为本页法源核对入口。"
             ]
           },
           "id": "choreographers.ai-impact.ai-impact-table.73",
@@ -25824,10 +25867,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅以现场观察与舞者反馈与既有记录为依据；对动作难度先试排再定稿，并保留修改与依据。"
+              "编辑建议先核人员能力、舞种、场地和授权，再由具备相应职责及能力的人员决定是否进行适当试排，记录观察与修改。未知高难度动作不能因模型建议直接试做；疼痛、伤病及紧急情况另请合资格人员处理，试排通过不是安全证明。"
             ]
           },
           "id": "choreographers.ai-impact.ai-impact-table.85",
+          "source_refs": [
+            "choreo-iadms-warmup",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25846,10 +25893,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按项目约定选择可用工具与存放方式，对舞者影像与未公开材料做最小化处理，并保留访问与导出记录。"
+              "编辑建议最小化舞者影像与未公开材料的输入，核存放、访问、导出及服务方处理条件。项目同意或内网本身不使个人信息处理合法；中国须核个保法合法处理基础及敏感信息规则，肖像另核同意或法定例外，其他法域另核。"
             ]
           },
           "id": "choreographers.ai-impact.ai-impact-table.87",
+          "source_refs": [
+            "choreo-privacy",
+            "civil-code-portrait",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25857,7 +25909,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "同一段落在不同版本下可能得到不同时长与队形结果；缺少版本与日期记录会使排练与制作方无法对齐。"
+              "同一段落在不同版本下可能得到不同时长与队形结果；缺少版本与日期记录会增加排练与制作方核对的难度。"
             ]
           },
           "id": "choreographers.ai-impact.ai-impact-table.88",
@@ -26088,10 +26140,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录与整理可加速；技术要点的准确性与留存责任仍由人承担"
+              "编辑试用记录与整理草稿；本轮未取得编舞师职业级节时或准确率对照，技术要点与留存仍须人工核对"
             ]
           },
           "id": "choreographers.ai-impact.ai-impact-table.109",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26351,7 +26406,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮查阅范围为：国家统计局与文化和旅游部与全国人大公开的工资与演出管理与著作权资料入口，以及本职业的 O*NET 精确职业来源；后者其市场与辖区明确为美国，不支持中国单职业收入口径。因此本页不给出职业级中位数、起薪或项目报价。"
+              "本轮核国家统计局2025工资表及中国演出、著作权法规原文，并查美国O*NET/BLS精确职业资料；后者不支持中国职业工资。尚未取得中国全国编舞师职业中位数、起薪、项目收入或城市分布，宽行业值仅作背景。"
             ]
           },
           "id": "choreographers.china-salary.career-snapshot-primary-locale.8",
@@ -26450,10 +26505,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "资料期：本轮查阅以 2025 年及以前已发布的公开资料为范围"
+              "资料期：2025年工资，国家统计局2026-05-15发布；本轮检索2026-10-09，不混同数据期与发布时间"
             ]
           },
           "id": "choreographers.china-salary.career-snapshot-primary-locale.17",
+          "source_refs": [
+            "nbs-wages"
+          ],
           "type": "prose"
         },
         {
@@ -26659,7 +26717,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：编舞机会更多来自可出示的作品与排练经验与推荐，本页不代替任何机构或主办方的录用条件。"
+              "编辑建议核目标项目的作品、排练经验、推荐和资格要求；本轮没有招聘样本证明这些因素的相对权重，也不代替录用条件。"
             ]
           },
           "id": "choreographers.china-salary.career-snapshot-primary-locale.36",
@@ -26681,10 +26739,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：以剧目创排与复排为主，需按《营业性演出管理条例》办理审批与备案，并与制作与舞台技术部门协作。"
+              "编辑归纳：院团方向可能涉及剧目创排或复排及舞台技术协作；构成营业性演出时，经营、举办和场地各按实际主体核许可、备案及审批，不把这些手续写成所有编舞师同一门槛。"
             ]
           },
           "id": "choreographers.china-salary.career-snapshot-primary-locale.38",
+          "source_refs": [
+            "faa-design-approvals",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26736,7 +26798,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局：2025年城镇单位就业人员年平均工资｜https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
+              "国家统计局2025年城镇单位就业人员年平均工资：表2非私营、表5私营｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "choreographers.china-salary.career-snapshot-primary-locale.43",
@@ -26891,7 +26953,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《城镇单位就业人员年平均工资情况》检索入口｜https://www.stats.gov.cn/；中华人民共和国职业分类大典（2022 年版）公布信息｜https://www.mohrss.gov.cn/"
+              "国家统计局2025行业工资表2/5及调查说明｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html；中国精确职业代码对应本轮仍未核定"
             ]
           },
           "id": "choreographers.china-salary.career-snapshot-primary-locale.57",
@@ -27194,10 +27256,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 至 2035 年预测期。预测含假设与误差，不等于逐年实际值。；BLS Occupational Outlook Handbook：Dancers and Choreographers（合计口径）｜https://www.bls.gov/ooh/entertainment-and-sports/dancers-and-choreographers.htm"
+              "2025—2035本职业增长3.1%，来源BLS表1.2的SOC27-2032分项；不是OOH舞者与编舞师合计2%。预测不等于逐年实绩。｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "choreographers.us-salary.career-snapshot-secondary-locale.22",
+          "source_refs": [
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -27216,10 +27281,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 至 2035 年年均空缺，含替补（离职与转岗）需求。空缺是流量，不等于在招岗位存量。；BLS Occupational Outlook Handbook：Dancers and Choreographers（合计口径）｜https://www.bls.gov/ooh/entertainment-and-sports/dancers-and-choreographers.htm"
+              "2025—2035本职业年均空缺0.6千个，来源BLS表1.2，含增长与转往其他职业/退出劳动力的替补需求；不等于现在在招岗位。｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "choreographers.us-salary.career-snapshot-secondary-locale.24",
+          "source_refs": [
+            "bls-outlook"
+          ],
           "type": "prose"
         },
         {
@@ -27249,10 +27317,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该职业以项目、短期合同与自雇形式较多（BLS OOH 说明舞蹈者与编舞师中兼职工作常见），因此公开时薪与年薪主要反映受雇岗位；项目数量的年际波动会直接影响实际年收入，不能用中位数替代。"
+              "BLS表1.2显示2025编舞师自雇39.6%；OOH说明舞者与编舞师兼职常见，不能由此证明本职业短期合同占比。工资反映OEWS受雇岗位，自雇者另核项目收支与有薪工时，不能用年度中位数预测个人收入。"
             ]
           },
           "id": "choreographers.us-salary.career-snapshot-secondary-locale.27",
+          "source_refs": [
+            "bls-outlook",
+            "bls-entry",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27271,10 +27344,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS OOH 说明该职业工作日程可能包括清晨与晚间与周末，可能需要出差；作品与项目的密度与个人在行业中的口碑与积累相关。"
+              "OOH对舞者与编舞师说明兼职常见，日程可包括清晨、晚间及周末；出差句针对舞者，不能当编舞师统一事实。编辑建议另核目标岗位差旅、排练档期、作品要求及报酬条件，本轮未取得口碑与机会数量的因果证据。"
             ]
           },
           "id": "choreographers.us-salary.career-snapshot-secondary-locale.29",
+          "source_refs": [
+            "bls-entry",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27293,10 +27370,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工作场景以院团与学校与演出与影视活动为主；不同地区的演出市场与机构预算差异会影响项目数量与报酬水平，本页不逐州列出，也不以最高值当作普遍水平。"
+              "编辑建议按实际机构、地区、项目预算和用工形式核报酬，不能用全国中位数或行业最高值推个人报价；本轮未取得地区项目数量或预算对编舞报酬影响的职业级比较。"
             ]
           },
           "id": "choreographers.us-salary.career-snapshot-secondary-locale.31",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27777,10 +27857,10 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "O*NET-SOC 27-2032.00 教育与培训信息入口",
+                "entity": "O*NET编舞Education新聘教育判断",
                 "id": "link-18",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtraining/27-2032.00"
+                "url": "https://www.onetonline.org/link/details/27-2032.00#Education"
               },
               {
                 "entity": "O*NET 技术清单（27-2032.00 招聘技术关键词）",
@@ -27928,10 +28008,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：MBTI 类型不是招聘条件，本页不提供按类型筛选岗位的建议。"
+              "需要留意：本页不以MBTI类型筛选岗位，本轮未取得编舞师按类型录用的有效证据；不能断言所有雇主都不使用这种要求。"
             ]
           },
           "id": "choreographers.fit.personality-fit-block.13",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28029,7 +28112,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业身体接触与协作强度高：O*NET 工作情境显示 100% 工作时与他人物理距离很近（近乎接触，不代表实际身体接触比例）、76% 持续与他人接触、75% 每天进行面对面讨论、62% 认为与工作组或团队协作极其重要。"
+              "该职业身体距离近、沟通协作要求较多：O*NET 工作情境显示 100% 工作时与他人物理距离很近（近乎接触，不代表实际身体接触比例）、76% 持续与他人接触、75% 每天进行面对面讨论、62% 认为与工作组或团队协作极其重要。"
             ]
           },
           "id": "choreographers.fit.personality-fit-block.22",
@@ -28349,10 +28432,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。人格特质分数与工作表现的关联在不同研究中强弱不一，且受项目与机构影响；本页不用它作为录用或适配判断依据。"
+              "本轮未取得编舞师人格测评分数预测工作表现的职业级效度证据；O*NET工作风格评分不能换算为个人预测，本页不据此承诺录用或适配。"
             ]
           },
           "id": "choreographers.fit.personality-fit-block.51",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28360,10 +28446,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业对数学的要求不是主要门槛：O*NET 知识清单以美术与教育与培训与行政与管理为主；但节拍与时长计算、排练时段与预算与档期的安排需要基本的数量理解。"
+              "O*NET数学基本技能重要度16、知识重要度24；美术知识88较高，但这些不是录用阈值或个人能力分数。编辑自查可核节拍、时长、排期与预算的基本数量理解，目标岗位具体要求另核。"
             ]
           },
           "id": "choreographers.fit.personality-fit-block.52",
+          "source_refs": [
+            "onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28492,7 +28582,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对新入职所需学历受访回答（高中 33%）与入行经验说明"
+              "用于核新聘教育所需受访判断（高中33%、证书19%、学士19%），不作人员学历构成；经验和典型要求另见OOH/JobZone。"
             ]
           },
           "id": "choreographers.fit.personality-fit-block.64",
@@ -28724,7 +28814,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答：该职业最需要提前判断的压力来自三处——高重复与高负荷排练下的舞者受伤风险、音乐与影像与既有作品的授权与职责边界、以及项目与空档期交替带来的收入与职业不可持续；此外版本失控与日程与场地条件压缩也是长期问题。"
+              "编辑归纳的重点压力：排练负荷与人员安全、音乐影像和既有作品权利、项目与空档期的收支安排，以及版本交接、档期和场地条件。它们不表示必然受伤、交付失败或职业不可持续。"
             ]
           },
           "id": "choreographers.risk.career-risk-cards.9",
@@ -28757,10 +28847,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "高重复排练、地面条件、道具与服装、以及超出舞者能力的动作会增加受伤风险，一次伤害可能同时影响作品进度与舞者职业生涯。"
+              "O*NET包含示范技术、帮助预防受伤及持续身体活动任务；IADMS热身资料强调针对活动准备。编辑风险核对人员能力、负荷、地面、道具与服装；未取得本职业事故率或这些因素的个别因果效应，不能据清单保证安全。"
             ]
           },
           "id": "choreographers.risk.career-risk-cards.12",
+          "source_refs": [
+            "onet-details",
+            "choreo-iadms-warmup",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28768,10 +28863,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "把热身与强度递进与停止条件写进排练计划；对高难度或新动作先试排并设置轮换与休息；出现疼痛或伤病信号时按项目安排转介专业人员并调整动作。"
+              "编辑建议结合舞种和个人能力安排适当热身、递进与休息，未知高难度动作先由相应专业人员核条件，不直接试做。出现疼痛或伤病信号暂停相关动作并请合资格人员评估；紧急情况立即走所在地应急路径，不等待项目例行转介。本页不规定恢复标准。"
             ]
           },
           "id": "choreographers.risk.career-risk-cards.13",
+          "source_refs": [
+            "choreo-iadms-warmup",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28845,7 +28944,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "缺少版本与动作说明会让复排与巡演无法还原作品，在替换舞者或交接给他人执导时直接造成交付失败。"
+              "编辑风险情境：动作说明与版本记录不足可能增加复排、巡演、替换舞者及交接核对的困难；不断言缺记录必然无法还原或直接交付失败。"
             ]
           },
           "id": "choreographers.risk.career-risk-cards.20",
@@ -28889,10 +28988,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "合同未约定交付内容与排练次数与署名与二次使用条款时，容易在追加修改与重复使用时产生争议与无偿劳动。"
+              "编辑建议核交付、排练次数、署名及二次使用范围，避免追加要求产生争议；中国委托创作权属按著作权法第19条及合同判断，不能把所有权利一概归委托方。"
             ]
           },
           "id": "choreographers.risk.career-risk-cards.24",
+          "source_refs": [
+            "nasa-seh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28911,7 +29014,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "以口头约定承接项目；把「再改一点」无限延续而不重新确认范围。"
+              "编辑反例：仅靠未记录的口头沟通追加修改、重复使用或改变署名而不确认范围；不是说所有口头合同均无效。"
             ]
           },
           "id": "choreographers.risk.career-risk-cards.26",
@@ -28933,10 +29036,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "装台与彩排窗口被压缩会同时增加舞台与人员风险，并让作品在未完成磨合的情况下首演。"
+              "编辑风险情境：装台和彩排窗口压缩可能妨碍技术与人员准备；具体安全标准和责任须另核，不能凭缩小规模就认定已安全。中国营业性演出的场所与举办单位分别履行条例第17—23条职责。"
             ]
           },
           "id": "choreographers.risk.career-risk-cards.28",
+          "source_refs": [
+            "faa-design-approvals",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28944,10 +29051,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "把场地可用时间与装台与灯光与音响窗口写进计划并留出缓冲；条件不齐时先缩小规模而不是压缩安全与技术准备时间。"
+              "编辑建议预留场地、灯光和音响核对及彩排时间；条件不足先报告并核是否调整或延期，不以缩小规模代替安全核验或擅自决定营业性演出中止。实际应急处置按适用法规、预案与有权岗位执行。"
             ]
           },
           "id": "choreographers.risk.career-risk-cards.29",
+          "source_refs": [
+            "faa-design-approvals",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29341,10 +29452,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：进入该职业最常见的路径是先积累舞蹈训练与表演经验，再通过助理与排练指导与小型作品逐步承担更完整的编舞责任；具体学历并非统一门槛（该职业页面的新入职所需学历受访回答为高中或同等学历 33%、高中后证书 19%、学士学位 19%），可出示的作品与排练记录通常比学历更直接。"
+              "美国OOH说明编舞师通常有舞者经验及至少高中学历，部分雇主要求或偏好本科；O*NET学历问卷33%高中、19%高中后证书、19%本科不是全国强制门槛。BLS表1.2另列5年及以上相关经验与长期在岗训练。编辑建议从作品与排练职责逐步积累，不用作品代替岗位学历或资格要求。"
             ]
           },
           "id": "choreographers.path.career-path-block.20",
+          "source_refs": [
+            "bls-entry",
+            "bls-outlook",
+            "onet-training",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29594,7 +29711,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求长期行业口碑与项目记录。"
+              "编辑核对建议：可核对是否要求长期行业口碑与项目记录。 本轮未取得该阶段普遍招聘门槛样本，按具体雇主确认。"
             ]
           },
           "id": "choreographers.path.career-path-block.43",
@@ -29649,7 +29766,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求一定的训练与教学经验。"
+              "编辑核对建议：可核对是否要求一定的训练与教学经验。 本轮未取得该阶段普遍招聘门槛样本，按具体雇主确认。"
             ]
           },
           "id": "choreographers.path.career-path-block.48",
@@ -29759,7 +29876,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求多年教学或排练经验。"
+              "编辑核对建议：可核对是否要求多年教学或排练经验。 本轮未取得该阶段普遍招聘门槛样本，按具体雇主确认。"
             ]
           },
           "id": "choreographers.path.career-path-block.58",
@@ -29814,7 +29931,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求多年经验与机构授权。"
+              "编辑核对建议：可核对是否要求多年经验与机构授权。 本轮未取得该阶段普遍招聘门槛样本，按具体雇主确认。"
             ]
           },
           "id": "choreographers.path.career-path-block.63",
@@ -29869,7 +29986,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求现场经验与安全培训。"
+              "编辑核对建议：可核对是否要求现场经验与安全培训。 本轮未取得该阶段普遍招聘门槛样本，按具体雇主确认。"
             ]
           },
           "id": "choreographers.path.career-path-block.68",
@@ -29979,7 +30096,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求多个完整项目的经验。"
+              "编辑核对建议：可核对是否要求多个完整项目的经验。 本轮未取得该阶段普遍招聘门槛样本，按具体雇主确认。"
             ]
           },
           "id": "choreographers.path.career-path-block.78",
@@ -30098,7 +30215,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "编辑可能考察项（具体雇主另核）",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -30108,14 +30225,14 @@
                 "在编舞指导下整理素材与带分段排练，不独立决定作品结构。",
                 "动作说明是否清楚、是否按计划推进、是否记录修改。",
                 "用排练记录与编舞评价证明。",
-                "与独立编舞相比不承担作品责任。"
+                "通常在指导下承担分工任务，但仍须对自己实际执行、记录和反馈负责；权限按岗位核"
               ],
               [
                 "舞者兼编舞",
                 "在参与表演的同时设计小段落并带同伴排练。",
                 "段落是否可行、是否与整体作品一致、舞者反馈如何处理。",
                 "用演出片段与段落说明与版本记录证明。",
-                "与专职编舞相比创作时间与权限有限。"
+                "表演与创作兼任，创作时间和决定权限须按实际项目核，不能仅凭名称推定"
               ],
               [
                 "独立编舞（项目制）",
@@ -30129,7 +30246,7 @@
                 "在院团或院校承担年度剧目与人才培养职责。",
                 "创作产出、复排质量、团队培养与安全执行。",
                 "用剧目记录与团队评价与复排记录证明。",
-                "与项目制相比更稳定但创作自由度受机构规划约束。"
+                "年度职责与创作安排受机构规划及合同影响；不保证收入稳定或创作自由度"
               ],
               [
                 "编舞总监或艺术负责人",
@@ -30141,6 +30258,9 @@
             ]
           },
           "id": "choreographers.path.entry-role-comparison.1",
+          "source_refs": [
+            "editorial"
+          ],
           "title": "入门方向比较",
           "type": "table"
         },
@@ -30154,14 +30274,14 @@
                 "values": [
                   "新入职所需学历受访回答为高中或同等学历 33%、高中后证书 19%、学士学位 19%（该职业页面）；",
                   "BLS OOH 说明编舞者通常至少需要高中文凭与舞者经验，部分雇主可能要求或倾向学士学位；",
-                  "院校与机构岗位通常另有学历与教学或研究方向要求。"
+                  "编辑核对：院校与机构目标岗位的学历、教学或研究条件分别确认，本轮无普遍要求样本。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "承接商业或委托项目通常需要合同与授权文件（音乐与影像与肖像）；",
-                  "机构或院校岗位通常另有背景与资质审核与安全培训要求；",
+                  "编辑核对：承接项目按具体音乐、影像、编排与肖像对象核合同和法定权利，不以“通常”代替适用条件。",
+                  "编辑建议向具体机构核背景、资质及安全培训；本轮未取得所有编舞岗位统一审核标准",
                   "涉及未成年人教学的项目另按所在地要求执行。"
                 ]
               },
@@ -30184,6 +30304,11 @@
             ]
           },
           "id": "choreographers.path.employer-evidence.1",
+          "source_refs": [
+            "onet-details",
+            "bls-entry",
+            "editorial"
+          ],
           "title": "雇主通常看什么证据",
           "type": "cards"
         },
@@ -30473,11 +30598,17 @@
                 "按实际合同及所用权利核",
                 "在合同中写清交付内容与排练次数与署名与授权与超范围计费",
                 "低",
-                "口头约定容易在追加修改与重复使用时产生争议。"
+                "建议保留可核书面范围；口头约定并非一概无效，实际权利及效力按法律和合同核"
               ]
             ]
           },
           "id": "choreographers.path.credential-decision.1",
+          "source_refs": [
+            "onet-localcert",
+            "bls-entry",
+            "nasa-seh",
+            "editorial"
+          ],
           "title": "资格选择",
           "type": "table"
         },
@@ -30596,7 +30727,7 @@
           },
           "id": "choreographers.market-signals.market-signal-card.5",
           "source_refs": [
-            "onet-industry"
+            "choreo-industry-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30646,10 +30777,10 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "国家统计局《城镇单位就业人员年平均工资情况》检索入口",
+                "entity": "NBS2025文化体育娱乐行业年均工资表及附注",
                 "id": "link-5",
                 "relation": "related-evidence",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET-SOC 27-2032.00 职业详细资料",
@@ -30715,7 +30846,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：BLS 就业预测显示 2025 至 2035 年美国该职业就业预计增长 3.1%，2025 年约 4,700 人，年均空缺约 600 个（含替补需求）；BLS OOH 同页对「舞蹈者与编舞师」合计口径给出 2025 年 18,600 人与 2025 至 2035 年增长 2%（低于平均）。该职业以项目与短期合同与自雇形式较多，中国大陆本页只发布两条已标注的宽行业代理值并登记缺口。"
+              "BLS表1.2预测美国编舞师2025—2035增长3.1%，2025就业约4,700、2035约4,900，官方净增约100，年均空缺约600；舍入规模不直接相减。2025自雇39.6%，不能由此推短期合同占比。OOH舞者与编舞师合计就业18,600、增长2%，与分项分开。中国精确职业收入仍证据不足，行业工资只作背景。"
             ]
           },
           "id": "choreographers.market-signals.market-signal-card.8",
@@ -30759,7 +30890,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为全国职业级预测，不区分地区与受雇形态；也不能用于推断某一机构或某一城市的机会数量。"
+              "增长3.1%为BLS2025—2035职业级预测，不是逐年实绩；假设、模型及现实变化会影响结果，不能当个人获聘保证。"
             ]
           },
           "id": "choreographers.market-signals.market-signal-card.12",
@@ -30902,7 +31033,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得与编舞师精确对应的中国大陆全国职业工资分布；仅提供已标注的宽行业均值。"
+              "2025年工资，2026-05-15发布；本轮查阅2026-10-09，精确职业收入仍证据不足"
             ]
           },
           "id": "choreographers.market-signals.market-signal-card.25",
@@ -31001,7 +31132,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少编舞与带排练的完整责任经验，以及作品方案的署名权。"
+              "编辑建议核自己是否已有作品创作、带排练及交接经验，并区分原作作者署名、表演者身份和委托作品权属；不是所有舞者都缺经验或署名权。"
             ]
           },
           "id": "choreographers.market-signals.market-signal-card.34",
@@ -31023,7 +31154,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较小。舞者经验是编舞的常见基础，但创作与指导责任不同。"
+              "编辑自查（不保证转岗成功）：转向距离：较小。舞者经验是编舞的常见基础，但创作与指导责任不同。"
             ]
           },
           "id": "choreographers.market-signals.market-signal-card.36",
@@ -31056,7 +31187,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。导演与制片方向需要补足制作与资源管理经验。"
+              "编辑自查（不保证转岗成功）：转向距离：中等。导演与制片方向需要补足制作与资源管理经验。"
             ]
           },
           "id": "choreographers.market-signals.market-signal-card.39",
@@ -31067,10 +31198,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少整体视觉与风格方向的判断经验与跨形式委托经验。"
+              "编辑建议补视觉媒体设计概念、呈现、美术与版式指导能力；当前链接是Art Directors，不等同院团艺术负责人。"
             ]
           },
           "id": "choreographers.market-signals.market-signal-card.40",
+          "source_refs": [
+            "onet-neighbor-artdirectors",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31089,10 +31224,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。艺术总监方向通常由机构或委托方聘任并负责整体方向。"
+              "转向距离为编辑自查：艺术与设计总监侧重视觉制作/媒体及美术版式指导；审美经验不等于已具完整岗位能力。"
             ]
           },
           "id": "choreographers.market-signals.market-signal-card.42",
+          "source_refs": [
+            "onet-neighbor-artdirectors",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31122,7 +31261,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。院校教师方向通常另有学历与研究要求。"
+              "编辑自查（不保证转岗成功）：转向距离：中等。院校教师方向通常另有学历与研究要求。"
             ]
           },
           "id": "choreographers.market-signals.market-signal-card.45",
@@ -31155,7 +31294,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较小。自我提升课程方向与编舞教学能力相近，但对课程体系要求不同。"
+              "编辑自查（不保证转岗成功）：转向距离：较小。自我提升课程方向与编舞教学能力相近，但对课程体系要求不同。"
             ]
           },
           "id": "choreographers.market-signals.market-signal-card.48",
@@ -31166,10 +31305,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少课程体系与教学资源与排课管理的经验。"
+              "编辑自查教学材料、内容、教育技术和教师指导能力；当前教学协调员职责不只是排课或行政管理。"
             ]
           },
           "id": "choreographers.market-signals.market-signal-card.49",
+          "source_refs": [
+            "onet-neighbor-coordinators",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31188,10 +31331,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。教学协调方向以管理为主，通常不承担创作职责。"
+              "转向距离为编辑判断：教学协调员侧重课程材料、内容及教师支持，不把它简化为管理岗；按目标机构核学历、经验与资格。"
             ]
           },
           "id": "choreographers.market-signals.market-signal-card.51",
+          "source_refs": [
+            "onet-neighbor-coordinators",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31221,7 +31368,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。音乐总监与作曲方向需要独立的音乐创作能力与相应授权经验。"
+              "编辑自查（不保证转岗成功）：转向距离：中等。音乐总监与作曲方向需要独立的音乐创作能力与相应授权经验。"
             ]
           },
           "id": "choreographers.market-signals.market-signal-card.54",
@@ -31254,7 +31401,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较小。演员方向与身体表达相通，但表演与台词能力需要单独积累。"
+              "编辑自查（不保证转岗成功）：转向距离：较小。演员方向与身体表达相通，但表演与台词能力需要单独积累。"
             ]
           },
           "id": "choreographers.market-signals.market-signal-card.57",
@@ -31419,7 +31566,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容检索与更新于2026年10月3日。"
+              "本页九模块资料本轮核对与更新于2026年10月9日；数据期和各来源访问日期分别标注。"
             ]
           },
           "id": "choreographers.sources.source-card.3",
@@ -31918,6 +32065,53 @@
                 "publisher": "O*NET OnLine",
                 "scope": "adjacent",
                 "url": "https://www.onetonline.org/link/summary/25-9031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方行业分布",
+                  "美国就业行业结构"
+                ],
+                "evidence_type": "official source",
+                "id": "choreo-industry-current",
+                "limitation": "当前页艺术、娱乐和休闲29%、教育服务29%、其他42%；页面未标数据年，不与OOH2025自雇/雇主分类拼接，非个人收入保证",
+                "market": "美国",
+                "name": "O*NET27-2032.00当前行业分布（本轮九模块引用）",
+                "period": "2026-10-09读取当前页；页面未给数据年",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/27-2032.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "署名教育委员会文章，非统计或法规",
+                  "热身准备及个体/活动条件"
+                ],
+                "evidence_type": "professional association educational guidance",
+                "id": "choreo-iadms-warmup",
+                "limitation": "实际核热身按舞种、人员及环境安排；不是伤病诊断、动作许可、事故率或恢复标准",
+                "market": "舞蹈活动通用教育参考",
+                "name": "IADMS舞蹈教育委员会：Are You Warm Enough to Start Dancing?",
+                "period": "2017-04-03教育文章；非2025职业调查",
+                "publisher": "International Association for Dance Medicine & Science",
+                "scope": "contextual",
+                "url": "https://iadms.azurewebsites.net/education-resources/blog/2017/april/are-you-warm-enough-to-start-dancing/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "第13、28—30条，非AI部署证据"
+                ],
+                "evidence_type": "official legal text",
+                "id": "choreo-privacy",
+                "limitation": "合法处理基础及敏感个人信息保护；项目许可、内网或最小化不独立授予处理权限，其他法域另核",
+                "market": "中国大陆",
+                "name": "中华人民共和国个人信息保护法",
+                "period": "2021-11-01施行；复用本任务同版已核条文",
+                "publisher": "全国人大／国家市场监督管理总局公开文本",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
               }
             ]
           },
@@ -32440,6 +32634,18 @@
               "entry": "link-7",
               "field": "url"
             }
+          },
+          {
+            "来源": "本页风险法源：中华人民共和国著作权法2020修正",
+            "类型": "法律正文",
+            "适用范围": "本页风险板块对应按钮直达官方正文；作品使用许可与表演者权利，各对象分开核",
+            "链接": "https://fermatmind.com/zh/career/jobs/choreographers#career-visual-group-risk"
+          },
+          {
+            "来源": "本页风险法源：民法典肖像权",
+            "类型": "法律正文",
+            "适用范围": "本页风险板块对应按钮直达官方正文；1018—1023肖像及法定例外，非作品著作权替代",
+            "链接": "https://fermatmind.com/zh/career/jobs/choreographers#career-visual-group-risk"
           }
         ],
         "difference_intro": {
@@ -32807,7 +33013,7 @@
               "entry": "link-17",
               "field": "url"
             },
-            "问题": "AI 能签署设计或放行文件吗？"
+            "问题": "AI能替代作品采用、演出许可或素材授权吗？"
           },
           {
             "回答": {
@@ -32898,7 +33104,7 @@
             }
           },
           {
-            "步骤": "专业签字／责任",
+            "步骤": "有权岗位确认与责任",
             "说明": {
               "$item": "choreographers.ai-impact.ai-impact-table.83",
               "block": "ai-impact",
@@ -32966,7 +33172,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "单位、量纲与边界错误"
+            "风险": "素材权利与授权边界错误"
           },
           {
             "为什么重要": {
@@ -34130,7 +34336,8 @@
             },
             "evidence_refs": [
               "onet",
-              "onet-context"
+              "onet-context",
+              "choreo-iadms-warmup"
             ],
             "id": "risk-injury",
             "mitigation": {
@@ -34209,7 +34416,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "版本失控与作品无法复现"
+            "title": "版本失控与复排交接困难"
           },
           {
             "affected_roles": {
@@ -34448,6 +34655,11 @@
             "id": "bls-employment",
             "label": "BLS表1.2：编舞师分项",
             "scope": "美国2025自雇占39.6%；不证明耗竭率或收入预测"
+          },
+          {
+            "href": "https://iadms.azurewebsites.net/education-resources/blog/2017/april/are-you-warm-enough-to-start-dancing/",
+            "id": "choreo-iadms-warmup",
+            "label": "IADMS舞蹈热身教育参考（非事故率或恢复标准）"
           }
         ]
       },
@@ -34800,10 +35012,10 @@
             "type": "prose"
           },
           "fact_refs": [
-            "cn-industry-science-tech-2024",
-            "cn-industry-manufacturing-2024",
-            "cn-professional-technical-2024",
-            "cn-urban-nonprivate-2024"
+            "choreo-cn-industry-science-tech-2024",
+            "choreo-cn-industry-manufacturing-2024",
+            "choreo-cn-professional-technical-2024",
+            "choreo-cn-urban-nonprivate-2024"
           ],
           "sources_note": {
             "$item": "choreographers.china-salary.career-snapshot-primary-locale.57",
@@ -37121,6 +37333,54 @@
         "source_refs": [
           "onet-localwages"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：本轮未取得与编舞师精确对应的中国大陆全国职业工资分布；仅提供已标注的宽行业均值。",
+        "fact_id": "choreo-cn-industry-science-tech-2024",
+        "market": "中国大陆",
+        "measure": "公开数据缺口（不代填）",
+        "occupation_scope": "编舞师",
+        "period": "2025工资／2026-05-15发布／2026-10-09查阅",
+        "source_refs": [
+          "nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：本轮未取得中国大陆编舞师按城市及项目形式细分的职业工资；文化、体育和娱乐业均值不代填。",
+        "fact_id": "choreo-cn-industry-manufacturing-2024",
+        "market": "中国大陆",
+        "measure": "公开数据缺口（不代填）",
+        "occupation_scope": "编舞师",
+        "period": "2025工资／2026-05-15发布／2026-10-09查阅",
+        "source_refs": [
+          "nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025 年城镇私营单位文化、体育和娱乐业年平均工资 64,015 元（宽行业代理，非职业级）",
+        "fact_id": "choreo-cn-professional-technical-2024",
+        "market": "中国大陆",
+        "measure": "行业门类均值代理（industry_proxy，非职业级）",
+        "occupation_scope": "文化、体育和娱乐业城镇法人单位全岗位，非编舞师职业估计",
+        "period": "2025工资／2026-05-15发布／2026-10-09查阅",
+        "source_refs": [
+          "nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025 年城镇非私营单位文化、体育和娱乐业年平均工资 129,447 元（宽行业代理，非职业级）",
+        "fact_id": "choreo-cn-urban-nonprivate-2024",
+        "market": "中国大陆",
+        "measure": "行业门类均值代理（industry_proxy，非职业级）",
+        "occupation_scope": "文化、体育和娱乐业城镇法人单位全岗位，非编舞师职业估计",
+        "period": "2025工资／2026-05-15发布／2026-10-09查阅",
+        "source_refs": [
+          "nbs-wages"
+        ]
       }
     ]
   },
@@ -37129,7 +37389,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "RIASEC · AS",
@@ -37180,7 +37440,7 @@
       "text": "编舞师"
     }
   },
-  "source_content_sha256": "64ba57bf224d00895148d67fce9053a8970a06ce5fd9f9ce0beb69ff12817929",
+  "source_content_sha256": "2bd3fedc8d36ab68968d3280005d0c351e2512b2429530b8e681c3f88df97ff7",
   "subject": {
     "canonical_slug": "choreographers",
     "name": "编舞师",

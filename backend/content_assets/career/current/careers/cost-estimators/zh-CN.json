@@ -8,6 +8,15 @@
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:g04-industry-amusement-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:g04-industry-education-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:g04-industry-theater-2025": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
       },
@@ -555,7 +564,7 @@
         "status": "mapped"
       },
       "item:actors.display.career_path_block.locale.summary": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.career_path_block.source.bls": {
         "status": "mapped"
@@ -759,7 +768,7 @@
         "status": "mapped"
       },
       "item:actors.display.career_quick_answers_block.comparison.answer": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.career_quick_answers_block.comparison.boundary.label": {
         "status": "mapped"
@@ -1005,7 +1014,7 @@
         "status": "mapped"
       },
       "item:actors.display.career_snapshot_primary_locale.quote-limits": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.career_snapshot_primary_locale.scenario.background": {
         "status": "mapped"
@@ -1020,7 +1029,7 @@
         "status": "mapped"
       },
       "item:actors.display.career_snapshot_secondary_locale.boundary.detail": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.career_snapshot_secondary_locale.factor.paid-work": {
         "status": "mapped"
@@ -1077,19 +1086,19 @@
         "status": "mapped"
       },
       "item:actors.display.fermat_decision_card.summary": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.fermat_decision_card.title": {
         "status": "mapped"
       },
       "item:actors.display.fit_decision_checklist.boundary-detail": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.fit_decision_checklist.how-detail": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.fit_decision_checklist.suit-detail": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.market_signal_card.heading": {
         "status": "mapped"
@@ -1329,7 +1338,7 @@
         "status": "mapped"
       },
       "item:actors.display.personality_fit_block.direct-answer": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.personality_fit_block.directions.agent.direction": {
         "status": "mapped"
@@ -1500,7 +1509,7 @@
         "status": "mapped"
       },
       "item:actors.display.source_card.note": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.display.source_card.source": {
         "status": "mapped"
@@ -1557,10 +1566,10 @@
         "status": "mapped"
       },
       "item:actors.fit.personality-fit-block.8": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.market-signals.market-signal-card.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.market-signals.market-signal-card.2": {
         "status": "mapped"
@@ -1572,7 +1581,7 @@
         "status": "mapped"
       },
       "item:actors.market-signals.market-signal-card.5": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.navigation.links.1": {
         "status": "pending_mapping"
@@ -1581,10 +1590,10 @@
         "status": "mapped"
       },
       "item:actors.path.career-path-block.2": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.career-path-block.3": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.credential-boundary.1": {
         "status": "mapped"
@@ -1617,7 +1626,7 @@
         "status": "mapped"
       },
       "item:actors.profile.work-context-block.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.profile.work-context-block.2": {
         "status": "mapped"
@@ -1641,16 +1650,16 @@
         "status": "mapped"
       },
       "item:actors.quick-decision.fit-decision-checklist.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.quick-decision.fit-decision-checklist.2": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.quick-decision.fit-decision-checklist.3": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.quick-decision.fit-decision-checklist.4": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.risk.career-risk-cards.1": {
         "status": "mapped"
@@ -1671,7 +1680,7 @@
         "status": "pending_mapping"
       },
       "item:actors.sources.boundary.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.sources.faq.1": {
         "status": "mapped"
@@ -1686,7 +1695,7 @@
         "status": "mapped"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.4": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.us-salary.career-snapshot-secondary-locale.5": {
         "status": "mapped"
@@ -6815,16 +6824,8 @@
         "status": "mapped"
       },
       "career_path_block.locale_requirements.summary": {
-        "ref": {
-          "path": [
-            "components",
-            "career_path_block",
-            "locale_requirements",
-            "summary"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_path_block.schema_version": {
         "ref": {
@@ -7934,17 +7935,8 @@
         "status": "mapped"
       },
       "career_quick_answers_block.items.02.answer": {
-        "ref": {
-          "path": [
-            "components",
-            "career_quick_answers_block",
-            "items",
-            1,
-            "answer"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_quick_answers_block.items.02.question": {
         "ref": {
@@ -8971,20 +8963,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.05.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            {
-              "id": "project-data"
-            },
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.05.mitigation": {
         "ref": {
@@ -11424,15 +11404,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.boundary": {
-        "ref": {
-          "path": [
-            "components",
-            "career_snapshot_secondary_locale",
-            "boundary"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.direct_answer": {
         "ref": {
@@ -14351,15 +14324,8 @@
         "status": "mapped"
       },
       "fermat_decision_card.summary": {
-        "ref": {
-          "path": [
-            "components",
-            "fermat_decision_card",
-            "summary"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "fermat_decision_card.title": {
         "ref": {
@@ -14374,37 +14340,16 @@
         "status": "mapped"
       },
       "fit_decision_checklist.boundary": {
-        "ref": {
-          "path": [
-            "components",
-            "fit_decision_checklist",
-            "boundary"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "fit_decision_checklist.how": {
-        "ref": {
-          "path": [
-            "components",
-            "fit_decision_checklist",
-            "how"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "fit_decision_checklist.suit": {
-        "ref": {
-          "path": [
-            "components",
-            "fit_decision_checklist",
-            "suit"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "hero.ai.derivation": {
         "ref": null,
@@ -16006,15 +15951,8 @@
         "status": "mapped"
       },
       "market_signal_card.direct_answer": {
-        "ref": {
-          "path": [
-            "components",
-            "market_signal_card",
-            "direct_answer"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "market_signal_card.heading": {
         "ref": {
@@ -17992,15 +17930,8 @@
         "status": "mapped"
       },
       "personality_fit_block.direct_answer": {
-        "ref": {
-          "path": [
-            "components",
-            "personality_fit_block",
-            "direct_answer"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "personality_fit_block.directions.01.direction": {
         "ref": {
@@ -19474,15 +19405,8 @@
         "status": "mapped"
       },
       "source_card.note": {
-        "ref": {
-          "path": [
-            "components",
-            "source_card",
-            "note"
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "source_card.secondary_links.01.href": {
         "ref": {
@@ -22711,7 +22635,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "按项目节点与招投标周期推进：先收集资料、确认口径与版本，并到现场核对条件，"
+              "编辑组织线索：收集需求版本和历史成本、核现场条件，分析量价及方案，再编估算与监控；具体顺序依项目及授权，非统一班次。"
             ]
           },
           "id": "actors.profile.work-context-block.4",
@@ -22739,7 +22663,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "协作与汇报关系｜与工程、采购、财务与现场人员按流程协作，"
+              "与工程、业主、承包商及供应商协商估算与变更，招标流程、谈判和供应商选择也在Core任务；签约让价权限按真实合同和机构核。"
             ]
           },
           "id": "actors.profile.work-context-block.6",
@@ -22781,7 +22705,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "成本估算师的工作可以分成三类相连但独立的工作面。第一类是数据收集与现场踏勘：读取图纸、清单、合同与规格，向工程、采购与现场人员收集材料与人工信息，并在需要时到现场记录通道、排水、地形与市政管线等条件，或借助遥感与无人机评估场地。第二类是估算与量价计算：按统一口径分解工程或产品科目，计算工程量、材料与人工需求，套用单价与费率并核定间接费用，判断自制或外购更合算。第三类是成本监控、报表与名录维护：建立成本监控与报告口径，编制成本与支出报表并跟踪变更，维护供应商、承包商与分包商名录，并在特殊研究中建立标准工时与成本数据。三类工作面在同一项目中交替推进，但依据资料、口径与责任不同；建筑、制造与专业服务场景的估算对象与合同要求也不同。"
+              "编辑按资料与历史成本、方案估算、招标谈判与监控归纳，不把职业缩为计算清单。O*NET15项中14Core：判读图纸规格与时间材料人工；与工程业主承包商核变更；收集历史成本；评估实际成本与投标差异；与客户供应商人员商讨；建立招标流程并谈判；编制供应商选择估算；为计划组织排程编估算；建监控报告；判断自制外购；周期报表；标准工时成本研究；到场记录通道排水地形公用设施；维护供应商承包商分包名录。遥感无人机在不能到场时为1项New，类别非所有岗位日常频率或普及率。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.answer",
@@ -22809,7 +22733,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "读取图纸清单与规格 → 向工程采购与现场收集资料 → 现场记录通道排水地形 → 核对市政与管线条件 → 借助遥感或无人机评估 → 登记资料版本"
+              "读图纸规格、收历史成本与变更 → 按需现场核通道排水地形公用设施 → 不能到场时遥感无人机为New任务，非普遍必用 → 核版本待确认项"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.camera.steps",
@@ -22893,7 +22817,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "建立监控与报告口径 → 编制成本与支出报表 → 跟踪变更并更新 → 维护供应商与分包商名录 → 汇总标准工时与成本数据 → 归集归档"
+              "建监控、周期报表及实际成本对比，维护名录和标准数据；另有Core招标流程、谈判及供应商选择，具体权限核合同和机构。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.shared.value",
@@ -23117,7 +23041,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "成本估算师对估算口径的一致性、工程量与单价的依据、假设与不确定项的说明、以及报表与变更的留痕负责；合同让价、投标决策与设计变更不由其单独决定。"
+              "成本估算师处理估算口径、量价依据、假设不确定项及报表变更记录；合同让价、投标决策和设计变更的决策权限须按实际岗位授权与项目制度核对，不越权。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.responsibility.primary",
@@ -23271,7 +23195,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "要按图纸、清单与规格计算工程量，并判读材料与人工需求；凭经验估算或跳步核对，是漏项与偏差最常见的来源。"
+              "核图纸规格与材料人工要求，识别漏项口径差异；本轮无差错原因排名，不称某类问题最常见。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.02.question",
@@ -23327,7 +23251,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "设计或范围变更要按流程更新估算与报表，并保留版本与依据；只更新口头数字而不留痕，会让成本失控难以追溯。"
+              "编辑风险分析：设计或范围变更要按流程更新估算与报表，并保留版本与依据；只更新口头数字而不留痕，可能使成本失控难以追溯。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.05.question",
@@ -23355,7 +23279,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "遇到资料缺失、口径冲突、价格异常波动或超出本人授权的情形，要停止自行定价并向主管或相应部门核对后升级，把已处理与待确认事项写进记录。"
+              "编辑建议：资料缺失、口径冲突或价格异常时列明假设与待确认项，按项目流程求证；超出授权的决定交有权者处理，不假定任何资料缺口都必须停止全部估算。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.06.question",
@@ -23369,7 +23293,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "成本口径与监控｜建立监控与报告口径｜建立成本监控与报告系统与流程，统一科目、单位与计量规则，明确数据来源与更新频率，使估算与报表可被复核。"
+              "监控与历史成本｜建立监控报告流程、收集历史成本供未来参考；比较实际与投标及方案成本效益，口径依据按真实项目。"
             ]
           },
           "id": "actors.display.responsibilities_block.01",
@@ -23383,7 +23307,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "需求判读｜判读材料与人工需求｜阅读图纸、清单与规格，判读材料与人工需求，并判断自制或外购哪种更合算。"
+              "估算与选择｜判读图纸规格时间材料人工，为计划排程及供应商选择编估算，判断自制或外购；不是自行获采购权限。"
             ]
           },
           "id": "actors.display.responsibilities_block.02",
@@ -23425,7 +23349,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "名录维护｜维护供应商与分包商名录｜准备并维护供应商、承包商与分包商名录，为询价与比价提供依据。"
+              "名录与招标协商｜维护供应商承包商分包名录、与客户等商讨估算，建立招标流程并谈判为Core，签约及承诺仍核实际授权。"
             ]
           },
           "id": "actors.display.responsibilities_block.05",
@@ -23467,7 +23391,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "成本估算师通常在环境可控的室内办公场所作业，按项目节点与招投标周期安排工作，持续面对图纸、清单与数据的阅读与推算，并需要与工程、采购与现场人员沟通；"
+              "美国档案含办公计算、历史数据、协商谈判、现场和监控；不同岗位实际组合另核，调查响应不等中国每人条件。"
             ]
           },
           "id": "actors.display.work_context_block.summary",
@@ -23481,7 +23405,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作场所｜O*NET 2026 年对成本估算师（13-1051.00）的调查：65% 表示每天在环境可控的室内作业，64% 表示持续或几乎持续地坐着工作；部分岗位还需到施工现场或工厂车间踏勘。"
+              "当前美国65%每日可控室内、64%几乎一直坐及32%超半；BLS部分到工地或装配线。页面更新2026不等所有问卷2026调查。"
             ]
           },
           "id": "actors.display.work_context_block.locations",
@@ -23495,7 +23419,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "主要对象与设备｜图纸、清单与规格文件，材料与人工数据，价格与费率资料，工程量与估算软件、电子表格、成本监控与报表系统、供应商与分包商名录、遥感与无人机等现场评估工具；设备与系统清单来自本职业任务与工作活动，不是采购或作业授权建议。"
+              "图纸规格、历史成本、材料人工与供应商记录，估算电子表格和项目工具；遥感无人机仅不能到场时New任务。2025全美Lightcast招聘16软件：Office21%、Excel19%、Outlook9%；Procore/AutoCAD/PPT/Word各4%，Primavera3%、Project2%、Revit1%，SAP/Access/QuickBooks/Visio/SketchUp/Acrobat各低于1%；岗位提及比非使用率、AI采用或熟练度。"
             ]
           },
           "id": "actors.display.work_context_block.materials",
@@ -23509,7 +23433,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "再按口径分解科目、计算工程量与套价、核定间接费用并编制报表；遇到资料缺失、口径冲突或价格异常时停止自行定价并向主管或相应部门核对；阶段结束前更新监控报表、变更记录与名录并交接。"
+              "按口径分解科目、计算工程量与套价、核定间接费用并编制报表；资料缺失、口径冲突或价格异常时标注假设并按项目流程核对，超出权限的决定交有权者处理；阶段结束更新报表、变更记录与名录并交接。"
             ]
           },
           "id": "actors.display.work_context_block.organization",
@@ -23523,7 +23447,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "节奏与强度｜O*NET 2026 年对成本估算师（13-1051.00）的调查：55% 表示每周一次以上面对时间压力，41% 认为准确与严谨至少「非常重要」，29% 认为重复同一任务至少「非常重要」，55% 表示典型工作周为 40 小时；招投标与结算节点前工作更集中。"
+              "时限14%每日、55%每周但非每日；准确32%极重要+41%很重要，重复19%极重要+29%很重要；周55%40小时、45%超40。响应不证明中国投标结算高峰的全国分布。"
             ]
           },
           "id": "actors.display.work_context_block.schedule",
@@ -23537,7 +23461,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "并向主管或项目经理汇报估算依据、假设与风险；O*NET 2026 年对成本估算师（13-1051.00）的调查：43% 认为在团队中共同工作至少「非常重要」，38% 认为协调或带领他人至少「非常重要」，80% 每天有电话沟通，100% 每天使用电子邮件，50% 每天有面对面讨论。"
+              "团队38%极重要及43%很重要，协调14%极重要及38%很重要；电话80%、邮件100%、面对面50%每日。等级分别列，非单项就是至少合计。"
             ]
           },
           "id": "actors.display.work_context_block.collaboration",
@@ -23551,7 +23475,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "复核与责任链条｜O*NET 2026 年对成本估算师（13-1051.00）的调查：41% 认为对同事或公司结果的影响至少「重要」，55% 表示拥有一定决策自由、68% 表示在确定任务与优先级上有一定自由，41% 认为竞争程度至少「中等」；估算与报价按机构制度留痕，让价与投标决策须按程序升级并存档。"
+              "对机构结果27%很重要、41%重要，竞争36%高及41%中等；决定自由18%很多/55%一些/27%有限，任务优先级68%一些/23%有限。等级不是授权规则；具体报价责任核机构及法域。"
             ]
           },
           "id": "actors.display.work_context_block.review",
@@ -23565,7 +23489,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "质量与职业要求｜O*NET 2026 年对成本估算师（13-1051.00）的调查：工作以长时间阅读、计算与数据核对为主，需要保持选择性注意与准确性；32% 表示每周一次以上作出决定，41% 表示与他人的接触时间约占一半；涉及价格、成本与报价数据时的保密与合规要求以适用法律和机构规定为准，本页不构成作业授权。"
+              "影响他人机构的决定14%每日、32%每周但非每日、32%每月但非每周、23%每年但非每月，四舍五入可非100；接触41%约半时间。自动化18%高14%中32%轻36%无，非AI采用。"
             ]
           },
           "id": "actors.display.work_context_block.quality",
@@ -23593,7 +23517,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "成本估算师的任务、详细工作活动、工作情境百分比与兴趣代码 CE"
+              "O*NET15项中14Core：判读图纸规格与时间材料人工；与工程业主承包商核变更；收集历史成本；评估实际成本与投标差异；与客户供应商人员商讨；建立招标流程并谈判；编制供应商选择估算；为计划组织排程编估算；建监控报告；判断自制外购；周期报表；标准工时成本研究；到场记录通道排水地形公用设施；维护供应商承包商分包名录。遥感无人机在不能到场时为1项New，类别非所有岗位日常频率或普及率。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.onet",
@@ -23607,7 +23531,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2025 年就业约 226,400 人、预测下降 3%（-6,900）与 Job Zone Four（SVP 7.0 至 8.0）"
+              "美国13-1051：2025就业226,400、2035预测219,500，下降3%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。准备层级来自O*NET而非BLS。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
@@ -23621,12 +23545,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2024 年行业分布（建筑 55%、制造 12%、其他服务 10%、其他 23%）、教育需求与技术工具"
+              "美国BLS通常学士，建筑常相关建筑或工程、制造常商务财务，多年施工经验有时可替代；典型中等时长在职训练非人人数周数月。O*NET教育响应82%学士、9%两年制、5%高中，其他未显示；JobZone4、SVP7至低于8是准备层级，层级概述多年经验/训练不能等同本岗每人训练。中国目标条件另核。美国O*NET2025建筑54%、制造12%、其他服务除公共行政10%；其他行业24%，原行业页列包含零售与批发，未给二者各自份额；行业份额非工资或中国雇主份额。BLS同年主要雇主专业承包33%、房屋建筑15%、制造12%、汽车维修9%、重土木5%口径层级另列。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -23635,12 +23560,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆造价与成本岗位的分类与执业语境，与中国职业级工资缺口"
+              "中国建人〔2018〕67号第2–4、17、20、25–29条：造价工程师是考试取证并注册后从事建设工程造价者，准入分一级二级；经注册才可以该名义执业，持注册证与印章；不得同时多单位执业或借名挂靠。一级与二级业务范围不同，成果签章担责并经一级审核盖章；不等所有企业产品估算人员一概须取该证。2024北京解读确认级别及按专业注册。具体2026报考年限、专业注册办法及工程计价标准未取得，不照抄2018年限。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
           "source_refs": [
-            "onet"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -23649,12 +23574,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆行业均值代理与职业级工资缺口"
+              "条件匹配行业背景：NBS2025建筑非私营92,036/私营66,275，制造113,594/76,055，科学研究技术服务182,064/83,560元税前年均；单位主营行业和私营分类匹配才用，非本岗工资分位或全国月薪。城镇5人及以上法人单位，不含个体自由职业，含工资奖金津补贴。中国职业工资、招聘样本及中美精确实体映射未取得。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23663,7 +23588,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "成本估算师在美国对应 O*NET-SOC 13-1051.00（Cost Estimators）；BLS 职业展望手册为该职业单列发布。工作内容包括建立成本监控与报告口径、收集并分析材料与人工需求以判断自制或外购、编制成本与支出报表、到现场记录通道排水地形与市政管线条件、借助遥感或无人机评估场地、维护供应商与分包商名录，以及在特殊研究中建立标准工时与成本数据。中国侧，造价、成本与商务估算岗位分属不同资质体系与用人单位，中美两套分类不是一一对应：本页不把美国的准备层级、工资或资格套用到中国大陆，也不把会计审计、预算分析、施工管理、物流或项目管理岗位的职责并入本职业。"
+              "美国成本估算师13-1051，BLS单列；O*NET15项中14Core：判读图纸规格与时间材料人工；与工程业主承包商核变更；收集历史成本；评估实际成本与投标差异；与客户供应商人员商讨；建立招标流程并谈判；编制供应商选择估算；为计划组织排程编估算；建监控报告；判断自制外购；周期报表；标准工时成本研究；到场记录通道排水地形公用设施；维护供应商承包商分包名录。遥感无人机在不能到场时为1项New，类别非所有岗位日常频率或普及率。中国对应实体映射未完成，不断言全国没有任何对应职业分类；造价资格法域另核。"
             ]
           },
           "id": "actors.display.definition_block.definition",
@@ -24166,7 +24091,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "指机构是否真的把工具放进流程。采用取决于预算、采购与合同要求、系统集成、数据与保密要求以及人员培训，通常慢于技术能力本身。"
+              "组织采用须核实际数据采购集成和训练，本轮无采用速度实测，不保证慢于技术能力。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.3",
@@ -24181,7 +24106,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "引入工具时责任不能随系统一起转移；下面是本职业可执行的人工控制步骤。"
+              "以下为编辑控制核对建议，需验证并纳入具体机构流程，非统一法定报价程序。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.4",
@@ -24256,7 +24181,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "列出雇主招聘中提到的估算、图纸与项目管理相关技术关键词。"
+              "2025全美Lightcast招聘16软件：Office21%、Excel19%、Outlook9%；Procore/AutoCAD/PPT/Word各4%，Primavera3%、Project2%、Revit1%，SAP/Access/QuickBooks/Visio/SketchUp/Acrobat各低于1%；岗位提及比非使用率、AI采用或熟练度。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.9",
@@ -24286,7 +24211,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答：目前可核对的是任务层面的变化，而不是岗位替代的时间表。价格库与历史成本库、工程量与估算软件、图纸识别与参数化建模、报表与监控系统可减少抄录、量算与汇总；但判读需求与图纸、判断自制或外购、核对单价与假设、解释口径与承担报价责任仍依赖人工判断，并受合同与单位流程约束。技术暴露不等于组织采用，更不等于岗位消失或收入变化。"
+              "BLS预期估算软件提高生产率减少需求，但不是生成式AI部署因果。编辑待验证机会包括量算、历史价格匹配、报表草稿及影像辅助；判读、方案比较、招标谈判、供应商选择和报价责任仍须核真实权限与复核。无本岗生成式AI采用率或工资因果，不能用常规软件当实测。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24361,7 +24286,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "研究不提供本职业单职业分数、采用率或替代日期。"
+              "本轮未取得直接匹配13-1051的单职业暴露分数，不断言ILO研究从无单职业分数；方法非采用率或替代时点。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.limit",
@@ -24391,7 +24316,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "列出建立监控口径、判读需求、编制报表、现场踏勘、维护名录与标准数据研究等任务及工作情境百分比。"
+              "O*NET15项中14Core：判读图纸规格与时间材料人工；与工程业主承包商核变更；收集历史成本；评估实际成本与投标差异；与客户供应商人员商讨；建立招标流程并谈判；编制供应商选择估算；为计划组织排程编估算；建监控报告；判断自制外购；周期报表；标准工时成本研究；到场记录通道排水地形公用设施；维护供应商承包商分包名录。遥感无人机在不能到场时为1项New，类别非所有岗位日常频率或普及率。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
@@ -24436,7 +24361,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025 年就业约 226,400 人，2025—2035 年下降 3%（-6,900），年均约 17,600 个替换性空缺。"
+              "美国13-1051：2025就业226,400、2035预测219,500，下降3%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
@@ -24481,7 +24406,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "要求明确 AI 系统的角色、责任、记录与人工监督。"
+              "NIST自愿AI治理框架建议角色责任及监督，非中国强制报价流程。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.conclusion",
@@ -24526,7 +24451,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 为成本估算师（13-1051.00）列出建立成本监控与报告系统与流程、判读材料与人工需求并决定自制或外购、编制成本与支出报表、开展特殊研究建立标准工时与成本数据、到现场记录通道排水地形与市政与管线条件、维护供应商与分包商名录，以及借助遥感或无人机评估场地等任务。"
+              "O*NET15项中14Core：判读图纸规格与时间材料人工；与工程业主承包商核变更；收集历史成本；评估实际成本与投标差异；与客户供应商人员商讨；建立招标流程并谈判；编制供应商选择估算；为计划组织排程编估算；建监控报告；判断自制外购；周期报表；标准工时成本研究；到场记录通道排水地形公用设施；维护供应商承包商分包名录。遥感无人机在不能到场时为1项New，类别非所有岗位日常频率或普及率。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.1.answer",
@@ -24556,7 +24481,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 技术档案列出雇主在成本估算师岗位招聘中提到的估算、图纸读取与项目管理相关技术关键词；这属于招聘市场信号，不代表使用率或熟练度。"
+              "2025全美Lightcast招聘16软件：Office21%、Excel19%、Outlook9%；Procore/AutoCAD/PPT/Word各4%，Primavera3%、Project2%、Revit1%，SAP/Access/QuickBooks/Visio/SketchUp/Acrobat各低于1%；岗位提及比非使用率、AI采用或熟练度。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
@@ -24631,7 +24556,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册显示 2025—2035 年该职业就业下降 3%（-6,900），年均约 17,600 个空缺且全部来自替换需求；该预测不含技术替代时点。"
+              "美国13-1051：2025就业226,400、2035预测219,500，下降3%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
@@ -24691,7 +24616,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "应明确角色与责任、保留访问与操作记录并设置人工监督点；治理框架不替代合同要求、保密规定与单位流程。"
+              "编辑控制建议：核角色、数据与操作记录及人工复核；NIST自愿框架不代中国造价注册、合同或单位完整程序。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.7.answer",
@@ -24751,7 +24676,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供本职业岗位雇主提到的技术关键词，属招聘市场信号"
+              "2025全美Lightcast招聘16软件：Office21%、Excel19%、Outlook9%；Procore/AutoCAD/PPT/Word各4%，Primavera3%、Project2%、Revit1%，SAP/Access/QuickBooks/Visio/SketchUp/Acrobat各低于1%；岗位提及比非使用率、AI采用或熟练度。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.scope",
@@ -24781,7 +24706,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按任务度量生成式 AI 与职业任务的接近程度，不提供单职业分数或自动化率"
+              "ILO支持暴露方法，本轮本岗精确分数与部署因果未取得。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
@@ -24871,7 +24796,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供 2025—2035 年就业预测、2025 年中位工资与职位空缺，不含工具采纳数据"
+              "美国13-1051：2025就业226,400、2035预测219,500，下降3%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
@@ -24901,7 +24826,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供 AI 系统风险治理的角色、责任、记录与人工监督要求"
+              "NIST自愿AI风险治理建议，非完整报价程序或法定授权。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.nist.scope",
@@ -24991,7 +24916,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "监控与报表系统可自动汇总并提示差异。"
+              "编辑待验证工具机会：监控与报表系统可自动汇总并提示差异。需核具体系统能力、条件及误差，非本岗采用效果实测。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.1.change",
@@ -25051,7 +24976,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "价格库与产能数据可辅助比价。"
+              "编辑待验证工具机会：价格库与产能数据可辅助比价。需核具体系统能力、条件及误差，非本岗采用效果实测。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.2.change",
@@ -25111,7 +25036,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "报表模板与统计工具可自动生成汇总。"
+              "编辑待验证工具机会：报表模板与统计工具可自动生成汇总。需核具体系统能力、条件及误差，非本岗采用效果实测。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.change",
@@ -25171,7 +25096,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "遥感与无人机影像可辅助评估场地。"
+              "编辑待验证工具机会：遥感与无人机影像可辅助评估场地。需核具体系统能力、条件及误差，非本岗采用效果实测。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.change",
@@ -25186,7 +25111,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "到现场核对条件并判断其对成本的影响。"
+              "无人机遥感New用于不能亲自到场时，不要求每次再到场；核影像版本盲区及需确认条件，合法使用和现场许可另核。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.human-control",
@@ -25231,7 +25156,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "名录与询价记录可集中管理并更新。"
+              "编辑待验证工具机会：名录与询价记录可集中管理并更新。需核具体系统能力、条件及误差，非本岗采用效果实测。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.change",
@@ -25291,7 +25216,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "历史数据与统计工具可辅助分析。"
+              "编辑待验证工具机会：历史数据与统计工具可辅助分析。需核具体系统能力、条件及误差，非本岗采用效果实测。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.change",
@@ -25351,7 +25276,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "变更台账与版本管理可自动提示。"
+              "编辑待验证工具机会：变更台账与版本管理可自动提示。需核具体系统能力、条件及误差，非本岗采用效果实测。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.7.change",
@@ -25396,7 +25321,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工程量计算、价格库与历史成本匹配、参数化估算可自动完成并生成草稿。"
+              "编辑待验证：量算、价格匹配和参数估算可作为工具候选，须核图纸完整性、真实能力和误差；不保证所有环节已可自动完成。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.1.change",
@@ -25441,7 +25366,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "成本监控、报表汇总与供应商名录的数据整理可自动完成。"
+              "编辑待验证：报表与名录汇总自动化候选，仍核版本、输入及真实部署，非已核岗位效果。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.2.change",
@@ -25531,7 +25456,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核对图纸、清单与价格资料的版本与来源，确认没有被错误匹配、覆盖或过期；输入错误会直接进入估算。"
+              "编辑风险分析：核对图纸、清单与价格资料的版本与来源，确认没有被错误匹配、覆盖或过期；输入错误可能进入估算。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.1.description",
@@ -25621,7 +25546,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "发现资料缺失、口径冲突、价格异常或超出授权范围时停止自行定价并升级。"
+              "编辑控制建议：资料缺失、口径冲突或价格异常时记录待确认项并按实际项目流程求证；超出权限的决定由有权者处理，不作全国统一停价程序。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.4.description",
@@ -25681,7 +25606,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "系统不会对估算结果与报价承担责任，漏项或错配会直接造成成本偏差与损失。"
+              "编辑风险分析：系统不会对估算结果与报价承担责任，漏项或错配可能造成成本偏差与损失。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.1.consequence",
@@ -25726,7 +25651,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "混用图纸版本或计量规则会让估算不可比、难以复核，并在变更时引发争议。"
+              "编辑风险分析：混用图纸版本或计量规则可能使估算不可比、难以复核，并可能在变更时引发争议。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.2.consequence",
@@ -25816,7 +25741,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "报价与成本数据属敏感商业信息，越权访问或传播会造成竞争与合规后果。"
+              "编辑数据风险分析：报价或成本资料是否涉商业秘密、合同保密或其他法定要求，须按具体数据属性及适用规则核实；越权访问传播可能引发竞争、合同或合规风险，不认定全部报价都属法定敏感信息。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.4.consequence",
@@ -25861,7 +25786,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把模型输出直接作为对外报价会让单位在合同与合规上失去控制。"
+              "编辑风险分析：把模型输出直接作为对外报价可能使单位在合同与合规上失去控制。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.5.consequence",
@@ -25876,7 +25801,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对外报价须经授权与审批后提交，保留底稿与依据，写明责任人与时间。"
+              "对外报价按实际授权及项目制度提交，需要审批时先履行审批；适用中国建设工程造价咨询成果的签章审核责任另按法规执行。建议保留底稿、依据、责任人与时间。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.5.control",
@@ -26033,7 +25958,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "主要用人场景：建筑施工与市政工程的造价与商务岗位、制造企业的成本与报价岗位、工程咨询与造价咨询机构、以及房地产开发与物业的成本管理岗位。"
+              "编辑待核中国场景：工程造价、制造产品估算及企业商务；未取得中国全国用人行业分布，不把美国份额作中国主要雇主证据。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
@@ -26075,12 +26000,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "说明：未取得职业单列数值不等于官方从未发布；本页只登记实际查阅范围与结果，不用行业均值或美国数据代填。"
+              "条件匹配行业背景：NBS2025建筑非私营92,036/私营66,275，制造113,594/76,055，科学研究技术服务182,064/83,560元税前年均；单位主营行业和私营分类匹配才用，非本岗工资分位或全国月薪。城镇5人及以上法人单位，不含个体自由职业，含工资奖金津补贴。中国职业工资、招聘样本及中美精确实体映射未取得。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26103,14 +26028,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "：中国大陆造价、成本与商务估算岗位分属不同资质体系与用人单位（如造价工程师执业资格、企业内部的成本与商务岗），没有与 O*NET-SOC 13-1051.00 对应的统一职业分类或计酬口径"
+              "本轮未完成中美职业实体映射，资格注册及真实岗位计酬分开核，不断言全国没有任何对应分类。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
             "sag-moa"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -26131,7 +26057,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：美国口径下该职业通常要求学士学位，准备层级为 Job Zone Four（SVP 7.0 至 8.0），在职训练为中等时长；部分行业可由有多年施工经验者进入。美国口径与中国大陆造价与成本岗位的学历与执业要求不可直接等同，具体以目标单位规定为准。"
+              "美国BLS通常学士，建筑常相关建筑或工程、制造常商务财务，多年施工经验有时可替代；典型中等时长在职训练非人人数周数月。O*NET教育响应82%学士、9%两年制、5%高中，其他未显示；JobZone4、SVP7至低于8是准备层级，层级概述多年经验/训练不能等同本岗每人训练。中国目标条件另核。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -26145,7 +26071,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：中国大陆造价岗位常与造价工程师执业资格、工程量清单计价规范等制度相关，企业成本与商务岗位则多按单位流程；学历、执业资格与岗位授权是不同层级的条件，不能互相替代。"
+              "中国建人〔2018〕67号第2–4、17、20、25–29条：造价工程师是考试取证并注册后从事建设工程造价者，准入分一级二级；经注册才可以该名义执业，持注册证与印章；不得同时多单位执业或借名挂靠。一级与二级业务范围不同，成果签章担责并经一级审核盖章；不等所有企业产品估算人员一概须取该证。2024北京解读确认级别及按专业注册。具体2026报考年限、专业注册办法及工程计价标准未取得，不照抄2018年限。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -26173,7 +26099,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：成本与商务方向的组长或主管方向通常要求熟悉计价规范并具备审核与带训能力，任职条件由单位规定；本页不构成资格认定。"
+              "编辑管理准备线索：核具体审核、协调带训及权限职责；本轮未取中国岗位样本，不声称全国主管普遍资格。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -26187,7 +26113,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "常见场景：成本估算岗位多按项目节点与招投标周期安排工作，月末结算与投标前后工作更集中；具体节奏须按目标单位与项目类型核对。"
+              "按目标单位项目投标结算安排核负荷，本轮无中国全国高峰分布；美国45%周超40及36%不规律，非中国排班制度。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
@@ -26201,7 +26127,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与工资的关系：价格库、工程量与估算软件可能改变成本岗位的分工与记录方式，但中国大陆公开工资统计按行业门类与人员类别聚合发布，工具变化不会产生可核对的职业级数值；本页因此不给出任何与 AI 相关的成本估算师工资影响数字。"
+              "本轮未取得中国本岗AI到工资因果；行业均值不测该关系，统计缺口不证明工具变化永远无法产生可核职业数据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
@@ -26215,12 +26141,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页中国大陆薪资板块只保留证据边界：不把行业均值当作职业工资、不用美国数据替代，也不陈述成本估算师的全国中位数、起薪或分位数。"
+              "条件匹配行业背景：NBS2025建筑非私营92,036/私营66,275，制造113,594/76,055，科学研究技术服务182,064/83,560元税前年均；单位主营行业和私营分类匹配才用，非本岗工资分位或全国月薪。城镇5人及以上法人单位，不含个体自由职业，含工资奖金津补贴。中国职业工资、招聘样本及中美精确实体映射未取得。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         }
@@ -26237,7 +26163,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国统计口径：本页的中位工资、分位、就业规模与就业预测均为 O*NET／OEWS 13-1051.00（Cost Estimators）单一职业口径；BLS 职业展望手册为该职业单列发布，两套口径一致。"
+              "美国O*NET细分13-1051.00与BLS-SOC13-1051本岗，工资2025五月与预测2025—2035分开；不是OEWS把代码写成13-1051.00。OEWS税前常规有薪岗位货币工资，不含自雇、直接家庭雇员及未付薪家人；官方年工资可引用，2080标准折算不保证个人工时，不能推每人实际年薪、月到手或加班奖金。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.1",
@@ -26267,7 +26193,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "按小时披露的工资不能在没有个人工时与加班安排时推算稳定年薪或月收入；项目节点与加班安排也会影响实际收入。"
+              "OEWS税前常规有薪岗位货币工资，不含自雇、直接家庭雇员及未付薪家人；官方年工资可引用，2080标准折算不保证个人工时，不能推每人实际年薪、月到手或加班奖金。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.3",
@@ -26297,7 +26223,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业表只说明该口径下的就业分布（以建筑业为主），不代表所有雇主的工资；不同行业与地区的工资差异要看具体岗位与地区。"
+              "美国O*NET2025建筑54%、制造12%、其他服务除公共行政10%；其他行业24%，原行业页列包含零售与批发，未给二者各自份额；行业份额非工资或中国雇主份额。BLS同年主要雇主专业承包33%、房屋建筑15%、制造12%、汽车维修9%、重土木5%口径层级另列。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.5",
@@ -26432,7 +26358,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "建筑业是最主要的用人行业，占 2024 年该项就业分布的 55%。"
+              "美国O*NET2025建筑54%、制造12%、其他服务除公共行政10%；其他行业24%，原行业页列包含零售与批发，未给二者各自份额；行业份额非工资或中国雇主份额。BLS同年主要雇主专业承包33%、房屋建筑15%、制造12%、汽车维修9%、重土木5%口径层级另列。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
@@ -26447,7 +26373,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "制造业占 12%、其他服务（公共行政除外）占 10%；这些是就业分布，不是工资中位数。"
+              "就业份额与行业工资分开；BLS2025重土木99,910、房屋建筑84,610、专业承包80,330、制造75,940、汽车维修64,800美元中位年薪；不能按前三大类份额直接分配个人工资。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
@@ -26477,7 +26403,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业表只说明就业归类，本行按原口径保留，不推算雇主类型或收入差异。"
+              "其他行业24%包含零售与批发；本轮冻结同版行业页未给二者各自百分比，不能当作自雇份额或工资。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
@@ -26507,7 +26433,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "统计工资以有薪岗位为准：每周工时、项目节点与加班安排直接决定实际到手收入，因此时薪与年收入不能互相替代。"
+              "OEWS税前常规有薪岗位货币工资，不含自雇、直接家庭雇员及未付薪家人；官方年工资可引用，2080标准折算不保证个人工时，不能推每人实际年薪、月到手或加班奖金。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.paid-work",
@@ -26522,7 +26448,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同一职业名下的职责差异不小：只负责工程量计算与套价、负责成本监控与报表、或负责报价与合同变更的岗位，对应不同的计酬口径。"
+              "实际职责与计酬核合同；本轮无纯量算、监控和报价岗位分别固定计酬的全国制度证据。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.scope",
@@ -26537,7 +26463,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工作场所与安排影响收入：行业（建筑、制造、专业服务）、所在地区与项目规模，以及是否为全职或项目制岗位。"
+              "行业地区项目合同与工时按具体岗位核，本轮无各因素对个人工资独立贡献比例。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.setting",
@@ -26590,7 +26516,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能长时间专注阅读与计算、愿意按口径反复核对并在不确定时写明假设的人，通常更容易适应。"
+              "编辑自问：是否愿意阅读计算、核依据并写明假设；本轮无偏好到胜任率实测，不保证更易适应。"
             ]
           },
           "id": "actors.fit.personality-fit-block.1",
@@ -26604,7 +26530,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "这类岗位每天都有大量重复的口径核对与量价计算；能接受重复并把每次核对做实，才是准确的前提。"
+              "本岗有重复核对，但O*NET重复19%极重要+29%很重要、24%完全不重要，不能写所有岗位每天大量重复；核目标任务组合。"
             ]
           },
           "id": "actors.fit.personality-fit-block.2",
@@ -26618,7 +26544,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "估算与报价会被主管与复核人检查；能把返工当作核对流程而不是针对个人，才能持续改进。"
+              "编辑自问：估算复核或返工时，能否核对具体量价差异并尝试调整？这是任务体验建议，不是持续改进的必要条件或人格效度结论。"
             ]
           },
           "id": "actors.fit.personality-fit-block.3",
@@ -26632,7 +26558,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "投标与结算节点前后工作集中，报价也常被质疑；能按口径回到依据核对而不是凭情绪回应，才更稳妥。"
+              "投标或结算前赶工、报价被质疑可作为编辑情境例；本页未取得中国岗位节点频率。建议核对口径和依据，实际工作节奏向目标岗位核实。"
             ]
           },
           "id": "actors.fit.personality-fit-block.4",
@@ -26772,7 +26698,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适配不是人格判断，而是把日常工作的真实要求——长时间坐着读图纸与清单、按统一口径反复做量化推算与核对、在有限信息与时间压力下给出有依据的估算、并把假设与不确定项写明——"
+              "把阅读估算、反复核对、现场及商讨谈判与个人偏好逐项对照；实际训练资格和授权另核，不由人格结果预测。"
             ]
           },
           "id": "actors.display.personality_fit_block.direct-answer",
@@ -26940,7 +26866,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "尽责性与情绪稳定性与这类工作的关系最直接：前者对应按口径细致核对与留痕，后者对应投标节点与报价争议压力下的稳定判断。大五没有官方的职业匹配阈值，本页只把它当作自我观察工具。"
+              "可自问核对完整和争议时沟通，本轮无本岗大五关联强度或阈值，不能称尽责与情绪稳定关系最直接。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.big-five.answer",
@@ -27038,7 +26964,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "偏好独立做量化推算的人可能更适合纯估算岗位。"
+              "体验独立量化推算再观察感受，不凭类型分配纯估算。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.1",
@@ -27052,7 +26978,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "偏好统筹协调的人可能更适合项目管理方向。"
+              "体验协调商讨再观察感受，不保证更适合项目管理。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.2",
@@ -27220,7 +27146,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业准备层级为 Job Zone Four（SVP 7.0 至 8.0），工作以数据分析、量化推算与口径核对为主；IQ 类量表描述的是通用认知表现，与岗位要求没有官方对应关系。"
+              "美国BLS通常学士，建筑常相关建筑或工程、制造常商务财务，多年施工经验有时可替代；典型中等时长在职训练非人人数周数月。O*NET教育响应82%学士、9%两年制、5%高中，其他未显示；JobZone4、SVP7至低于8是准备层级，层级概述多年经验/训练不能等同本岗每人训练。中国目标条件另核。IQ不是本岗能力或执业对应阈值。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.answer",
@@ -27388,7 +27314,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "为建筑与市政工程估算工程量、材料与人工，编制成本与支出报表并跟踪变更；适合愿意按计价规范做量化推算、对工程资料有兴趣的人。"
+              "建筑与市政工程方向涉及量价估算、报表和变更跟踪。编辑自问：是否愿意体验按计价规范核量和查工程资料？偏好不证明胜任或录用。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.camera.signals",
@@ -27430,7 +27356,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "为产品与制造过程估算材料、人工与间接费用，判断自制或外购并维护成本数据；适合偏好产品成本结构与标准数据研究的人。"
+              "产品制造方向涉及材料、人工、间接费用及自制外购判断。编辑自问：是否愿意体验成本结构与标准数据分析？偏好不证明胜任或录用。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.stage.signals",
@@ -27505,7 +27431,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.teacher.direction",
           "source_refs": [
-            "onet"
+            "editing"
           ],
           "type": "prose"
         },
@@ -27519,7 +27445,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.teacher.signals",
           "source_refs": [
-            "onet"
+            "editing"
           ],
           "type": "prose"
         },
@@ -27533,7 +27459,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.teacher.watchouts",
           "source_refs": [
-            "onet"
+            "editing"
           ],
           "type": "prose"
         },
@@ -27547,7 +27473,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.direction",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27561,7 +27487,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.signals",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27575,7 +27501,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.watchouts",
           "source_refs": [
-            "onet"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -27682,7 +27608,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "估算与报表受计价规范与单位流程约束：自由度有限，先看清目标单位的计价口径与流程再决定。"
+              "流程约束不等人人自由有限；美国决定18%很多55%一些27%有限，任务68%一些，核目标权限与职责。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.interest.answer",
@@ -27766,7 +27692,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "成本估算岗位多按项目节点与招投标周期安排，投标与结算前后更集中；具体按行业与单位项目周期核对。"
+              "美国时限14%每日55%每周但非每日，45%周超40；中国周期按目标岗位核，不推全国投标高峰。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.schedule.answer",
@@ -27794,7 +27720,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "读图纸、算工程量与核对口径靠反复练习与反馈；把练习量、返工次数和准确率记录下来，比测试分数更能说明适配。"
+              "编辑观察：记录虚构样本的依据完整、准确返工及反馈，不保证练习量比测评更能预测适配；参观跟班取得实际许可。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.practice.answer",
@@ -27822,7 +27748,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。测试描述偏好线索，不预测工作表现，也不构成录用、执业或适应性判断；真正的判断来自任务样本与训练反馈。"
+              "兴趣测评用于探索偏好，任务体验与训练反馈提供具体观察线索；本页未取得二者比较的预测效度证据，不能替代能力、执业资格或录用评估。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.test.answer",
@@ -28014,7 +27940,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "把假设、风险与敏感项单独列出并标注待确认；对外报价与让价须按流程经授权与审批后提交，保留底稿与依据。"
+              "编辑建议：单列假设、风险及待确认项，报价与让价按实际权限和项目流程办理，需要审批时履行审批；适用工程造价成果签章责任按法规执行，保留底稿与依据。"
             ]
           },
           "id": "actors.risk.career-risk-cards.3",
@@ -28089,7 +28015,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险集中在三类：长时间阅读、核对与久坐用眼造成的身体负担，工程量、单价与口径差错造成的估算偏差与合同争议，以及报价与成本数据泄露、假设未说明与责任越界造成的合规与商业风险；节点压力与竞争也会累积影响。"
+              "编辑风险场景：久坐工位负担、量价版本差错、假设未说明、越权报价及成本数据保护；调查支持工作条件，不证明疾病、损失或长期压力的发生率。"
             ]
           },
           "id": "actors.display.career_risk_cards.direct-answer",
@@ -28104,7 +28030,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险场景来自 O*NET 任务档案与工作情境百分比（O*NET-SOC 13-1051.00）与 BLS 职业展望手册的工作环境说明；中国大陆的岗位与执业语境来自公开信息；引入自动化或 AI 工具时的责任与记录要求参考 NIST AI 风险管理框架。"
+              "O*NET支持任务情境，BLS支持环境和估算软件预测解释；中国造价资格规则支持注册范围签章责任，非所有企业估算的数据处置法；NIST为自愿AI治理。实际单位完整程序未取得。"
             ]
           },
           "id": "actors.display.career_risk_cards.evidence-scope",
@@ -28179,7 +28105,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 调查显示 64% 表示持续或几乎持续地坐着工作，65% 每天在室内环境作业；投标与结算节点前长时间看图纸、清单与电子表格更集中。"
+              "O*NET调查64%表示持续或几乎持续坐着，65%每天室内作业；投标与结算前赶工是编辑情境例，实际中国岗位节奏与工位情况须另核。"
             ]
           },
           "id": "actors.display.career_risk_cards.image-use.scenario",
@@ -28194,7 +28120,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "长期久坐与用眼会造成疲劳与劳损，影响持续出勤与准确性。"
+              "久坐与阅读可作为工位不适评估线索，本轮无本岗劳损或缺勤准确性因果，不以响应诊断。"
             ]
           },
           "id": "actors.display.career_risk_cards.image-use.consequence",
@@ -28239,7 +28165,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在节点压力下跳步核对、套用过期单价或混用图纸版本，会把工程量或价格错误带入估算与报价；O*NET 显示 41% 认为准确与严谨至少「非常重要」。"
+              "编辑差错场景：混版本或过期价格可能带入偏差；准确32%极重要+41%很重要，非41%就是至少很重要合计。"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.scenario",
@@ -28254,7 +28180,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "差错会造成成本偏差、返工与合同争议，严重时造成亏损与信任损失。"
+              "编辑风险分析：差错可能造成成本偏差、返工与合同争议，严重时造成亏损与信任损失。"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.consequence",
@@ -28314,7 +28240,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "假设未说明或越权承诺会引发争议、返工与合规后果。"
+              "编辑风险分析：假设未说明或越权承诺可能引发争议、返工与合规后果。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-income.consequence",
@@ -28359,13 +28285,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国大陆造价、成本与商务估算岗位分属不同资质体系与用人单位，常与造价工程师执业资格、工程量清单计价规范等制度相关，数据权限与流程因单位与业务不同而差异明显。"
+              "中国建人〔2018〕67号第2–4、17、20、25–29条：造价工程师是考试取证并注册后从事建设工程造价者，准入分一级二级；经注册才可以该名义执业，持注册证与印章；不得同时多单位执业或借名挂靠。一级与二级业务范围不同，成果签章担责并经一级审核盖章；不等所有企业产品估算人员一概须取该证。2024北京解读确认级别及按专业注册。具体2026报考年限、专业注册办法及工程计价标准未取得，不照抄2018年限。"
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -28419,7 +28344,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "报价与成本数据属敏感商业信息；越权访问、随手转发或在不安全渠道传输，都可能造成数据泄露与竞争损失。"
+              "编辑情境例：将应保密的报价或成本资料越权转发、通过不适当渠道传输，可能带来泄露和竞争风险。具体保密属性、合同与制度须按实际数据核，不认定全部成本资料均属法定秘密。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.scenario",
@@ -28434,7 +28359,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "数据泄露会带来合规后果、竞争劣势与机构信誉风险。"
+              "编辑风险分析：数据泄露可能带来合规后果、竞争劣势与机构信誉风险。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.consequence",
@@ -28449,7 +28374,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "节点压力、竞争与报价争议的长期影响"
+              "节点压力、竞争与报价争议场景"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.title",
@@ -28479,7 +28404,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 调查显示 55% 表示每周一次以上面对时间压力，41% 认为竞争程度至少「中等」，41% 认为对同事或公司结果的影响至少「重要」；投标与结算节点前后负荷更集中。"
+              "时限14%每日55%每周但非每日；竞争36%高41%中等；结果27%很重要41%重要，各等级非单项就是合计。中国节点负荷按实际项目核。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.scenario",
@@ -28494,7 +28419,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "长期节点压力与报价争议会累积影响注意力与判断，进而影响准确性与留痕质量。"
+              "编辑风险假设：节点压力可能影响核对安排，需观察实际反馈；本轮无本岗长期压力到注意损伤因果。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.consequence",
@@ -28539,13 +28464,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于中国大陆造价与成本岗位的执业与数据处理边界的方向性核对。"
+              "建人2018资格规定支持注册名义、专业范围签章及责任，不支持完整数据处理或所有产品成本岗位资质。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.cn-rule",
           "source_refs": [
-            "sag",
-            "nist"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -28593,7 +28517,7 @@
           "data": {
             "paragraphs": [
               "本页不引用具体在招公告，也不把历史招聘案例计为在招岗位；招聘与执业条件须按目标单位当年公告核对。",
-              "示例中的情景判断、量价核对与试用期观察方式为编辑设计，用于说明常见验证方式，不代表任何单位的统一流程。"
+              "情景判断、量价核对与观察方式为编辑设计的任务观察思路，不证明招聘常用验证流程；实际考核按目标单位核。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
@@ -28618,7 +28542,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "编辑建议核对的能力线索",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -28678,8 +28602,8 @@
                 "id": "employer-0",
                 "values": [
                   "学历与专业背景要求",
-                  "美国口径下该职业通常要求学士学位，准备层级为 Job Zone Four；部分行业可由具有多年施工经验者进入。",
-                  "O*NET 摘要页显示准备层级为 Job Zone Four（SVP 7.0 至 8.0）；美国口径与中国大陆造价与成本岗位的学历与执业要求不可直接等同。"
+                  "美国BLS通常学士，建筑常相关建筑或工程、制造常商务财务，多年施工经验有时可替代；典型中等时长在职训练非人人数周数月。O*NET教育响应82%学士、9%两年制、5%高中，其他未显示；JobZone4、SVP7至低于8是准备层级，层级概述多年经验/训练不能等同本岗每人训练。中国目标条件另核。",
+                  "美国BLS通常学士，建筑常相关建筑或工程、制造常商务财务，多年施工经验有时可替代；典型中等时长在职训练非人人数周数月。O*NET教育响应82%学士、9%两年制、5%高中，其他未显示；JobZone4、SVP7至低于8是准备层级，层级概述多年经验/训练不能等同本岗每人训练。中国目标条件另核。"
                 ]
               },
               {
@@ -28687,7 +28611,7 @@
                 "values": [
                   "计价规范与工具能力",
                   "通常需要熟悉工程量计算与计价规则、成本核算方法，并能使用估算软件、电子表格与成本监控系统；具体工具与规范由单位与项目规定。",
-                  "本页未取得中国大陆全国统一的执业公开条件，须按目标单位当年招聘要求核对；本页不构成执业资格认定或授权建议。"
+                  "中国建人〔2018〕67号第2–4、17、20、25–29条：造价工程师是考试取证并注册后从事建设工程造价者，准入分一级二级；经注册才可以该名义执业，持注册证与印章；不得同时多单位执业或借名挂靠。一级与二级业务范围不同，成果签章担责并经一级审核盖章；不等所有企业产品估算人员一概须取该证。2024北京解读确认级别及按专业注册。具体2026报考年限、专业注册办法及工程计价标准未取得，不照抄2018年限。"
                 ]
               },
               {
@@ -28695,15 +28619,15 @@
                 "values": [
                   "可观察的专业能力证据",
                   "能按统一口径完成量价计算并核对工程量与单价、能判读资料并注明假设、能编制口径一致的成本与支出报表（来自 O*NET 任务与工作情境数据）。",
-                  "以上是任务与情境观察点，不是人格标签或录用阈值；工作情境显示 41% 认为准确与严谨至少非常重要、55% 表示每周一次以上面对时间压力、64% 表示持续或几乎持续地坐着工作。"
+                  "准确32%极重要41%很重要、时限14%每日55%每周但非每日、64%几乎一直坐；响应非录用阈值。"
                 ]
               },
               {
                 "id": "availability",
                 "values": [
                   "常见工具与系统范围",
-                  "工程量与估算软件、电子表格、成本监控与报表系统、供应商与分包商名录、遥感与无人机等现场评估工具；O*NET 列出的本职业技术关键词包含估算、图纸读取与项目管理相关软件。",
-                  "工具熟练度是市场偏好与招聘信号，不等于核心能力或报价授权。"
+                  "2025全美Lightcast招聘16软件：Office21%、Excel19%、Outlook9%；Procore/AutoCAD/PPT/Word各4%，Primavera3%、Project2%、Revit1%，SAP/Access/QuickBooks/Visio/SketchUp/Acrobat各低于1%；岗位提及比非使用率、AI采用或熟练度。",
+                  "软件关键词是所述美国招聘资料的提及，不能推定中国熟练度偏好、胜任或授权；目标要求另核。"
                 ]
               }
             ]
@@ -28841,55 +28765,55 @@
               [
                 "学历与专业背景（工程、造价、财务相关）",
                 "准备进入造价、成本与商务岗位的人",
-                "满足多数入门岗位的招录条件",
-                "不是统一强制门槛，按目标单位公告核对",
+                "美国典型学历与中国目标招聘分别核",
+                "目标单位条件另核，未取得中国全国岗位普及率",
                 "按目标单位公告的学历与专业要求",
-                "中（学历教育）",
+                "实际费用与周期未取得",
                 "学历不代表执业资格或报价授权。"
               ],
               [
                 "造价工程师等执业资格",
                 "承担清单计价与结算审核的人员",
-                "通常是从业与执业的前置或加分条件",
-                "按岗位与单位而定，部分岗位要求",
+                "以造价工程师名义执业须资格并注册，非所有企业估算人员统一要求",
+                "依法注册条件与机构录用分别核",
                 "按现行执业资格考试与注册规定",
-                "高（考试与注册周期）",
-                "执业资格与单位内部授权是不同层状态，不可互相替代。"
+                "实际费用与周期未取得",
+                "中国建人〔2018〕67号第2–4、17、20、25–29条：造价工程师是考试取证并注册后从事建设工程造价者，准入分一级二级；经注册才可以该名义执业，持注册证与印章；不得同时多单位执业或借名挂靠。一级与二级业务范围不同，成果签章担责并经一级审核盖章；不等所有企业产品估算人员一概须取该证。2024北京解读确认级别及按专业注册。具体2026报考年限、专业注册办法及工程计价标准未取得，不照抄2018年限。"
               ],
               [
                 "估算与计价软件能力",
                 "准备从事量价计算与成本岗位的人",
-                "通常是入门岗位的常见要求",
-                "多数岗位普遍要求",
+                "软件提及支持市场线索，非所有岗位门槛",
+                "目标单位条件另核，未取得中国全国岗位普及率",
                 "按目标单位要求或自行练习",
-                "低至中（可自行学习）",
+                "实际费用与周期未取得",
                 "软件熟练度不等于计价规范与合同能力。"
               ],
               [
                 "岗前与在职训练",
                 "已被录用并进入岗位的人员",
-                "通常决定能否独立承担估算",
-                "属录用后必经环节",
+                "美国典型中等时长在职训练，非中国必经统一时长",
+                "目标单位条件另核，未取得中国全国岗位普及率",
                 "由单位组织",
-                "中（数周至数月）",
+                "实际费用与周期未取得",
                 "训练合格不等于永久授权，须按岗位与制度执行。"
               ],
               [
                 "数据与报价授权",
                 "处理成本、报价与合同数据的人员",
-                "决定能否对外报价与访问数据",
-                "属制度授予，不是可选",
+                "访问与报价权限须按法定业务及单位流程核",
+                "目标单位条件另核，未取得中国全国岗位普及率",
                 "按现行规定与单位制度授予",
-                "不适用（由制度授予）",
+                "实际费用与周期未取得",
                 "授权不可跨单位通用，本页不构成授权意见。"
               ],
               [
                 "成本管理与审核能力",
                 "准备承担审核或成本管理职责的人",
-                "影响管理岗位的竞争与准备度",
-                "不是入职门槛",
+                "管理路线为编辑观察，非资格认定",
+                "目标单位条件另核，未取得中国全国岗位普及率",
                 "按单位制度与岗位要求",
-                "中（内部培训或带教）",
+                "实际费用与周期未取得",
                 "管理训练不等于报价或合同责任岗位授权。"
               ]
             ]
@@ -28908,10 +28832,10 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "本页把学历与专业背景、造价工程师等执业资格、估算与计价软件能力、岗前与在职训练、数据与报价授权以及成本管理与审核能力分开：学历与专业背景是基础，执业资格是部分岗位的前置或加分条件，训练与授权按单位制度与现行规定授予。",
-              "美国口径来自 O*NET 准备层级（Job Zone Four：通常要求学士学位；在职训练为中等时长；SVP 7.0 至 8.0）与 BLS 关于学士学位及部分行业可用经验替代的说明；这些不等于中国的任职条件。",
-              "中国大陆口径：造价、成本与商务估算岗位分属不同资质体系与用人单位，常与造价工程师执业资格、工程量清单计价规范等制度相关；本页未取得全国统一的强制资质公开条件，须按目标单位与主管部门现行规定核对，不能把美国准备层级当作中国门槛，也不能把岗位名称当作跨单位的报价或数据授权。",
-              "任何资格与任职要求都应以单位与主管部门的现行规定为准；本页不构成录用承诺、执业意见或报价授权建议。"
+              "美国BLS通常学士，建筑常相关建筑或工程、制造常商务财务，多年施工经验有时可替代；典型中等时长在职训练非人人数周数月。O*NET教育响应82%学士、9%两年制、5%高中，其他未显示；JobZone4、SVP7至低于8是准备层级，层级概述多年经验/训练不能等同本岗每人训练。中国目标条件另核。",
+              "中国建人〔2018〕67号第2–4、17、20、25–29条：造价工程师是考试取证并注册后从事建设工程造价者，准入分一级二级；经注册才可以该名义执业，持注册证与印章；不得同时多单位执业或借名挂靠。一级与二级业务范围不同，成果签章担责并经一级审核盖章；不等所有企业产品估算人员一概须取该证。2024北京解读确认级别及按专业注册。具体2026报考年限、专业注册办法及工程计价标准未取得，不照抄2018年限。",
+              "学历、资格证、注册、专业范围和机构报价权限分别核；能力样本不是依法注册及签章的替代。",
+              "具体2026报考年限、培训费用时长、专业注册实施办法和目标招聘公告未取得。"
             ]
           },
           "id": "actors.path.credential-boundary.1",
@@ -28928,7 +28852,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入行通常要求相关专业学历或工程背景：美国多数岗位要求学士学位，再从量价计算、报表编制与名录维护做起；能否按统一口径算出有依据、可被复核的估算并写明假设，是比证书更可核对的准备证据。"
+              "美国典型学士或部分建筑经验路径；中国目标招聘及建设造价注册分开。能否读依据、解释量价假设可作为编辑能力观察，不替代法定资格。"
             ]
           },
           "id": "actors.path.career-path-block.1",
@@ -28944,7 +28868,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国口径下，该职业准备层级为 Job Zone Four（SVP 7.0 至 8.0），通常要求学士学位，在职训练为中等时长；部分行业可由具有多年施工经验者进入；入职多从量价计算与报表编制做起，再承担报价与成本管理；"
+              "美国BLS通常学士，建筑常相关建筑或工程、制造常商务财务，多年施工经验有时可替代；典型中等时长在职训练非人人数周数月。O*NET教育响应82%学士、9%两年制、5%高中，其他未显示；JobZone4、SVP7至低于8是准备层级，层级概述多年经验/训练不能等同本岗每人训练。中国目标条件另核。以下阶段为编辑路线，非官方统一晋升顺序。"
             ]
           },
           "id": "actors.path.career-path-block.2",
@@ -28960,7 +28884,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆没有与 O*NET-SOC 一一对应的职业细类，造价、成本与商务估算岗位分属不同资质体系与用人单位，录用与执业条件须按目标单位与现行规定核对。"
+              "中国建人〔2018〕67号第2–4、17、20、25–29条：造价工程师是考试取证并注册后从事建设工程造价者，准入分一级二级；经注册才可以该名义执业，持注册证与印章；不得同时多单位执业或借名挂靠。一级与二级业务范围不同，成果签章担责并经一级审核盖章；不等所有企业产品估算人员一概须取该证。2024北京解读确认级别及按专业注册。具体2026报考年限、专业注册办法及工程计价标准未取得，不照抄2018年限。"
             ]
           },
           "id": "actors.path.career-path-block.3",
@@ -29161,7 +29085,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域：美国口径来自 O*NET 与 BLS 公开资料；中国大陆口径参考造价与成本岗位的公开执业与统计信息方向，具体要求以目标单位与现行规定为准。"
+              "美国O*NET准备及BLS典型条件；中国建人2018造价资格规则与2024北京解读，具体专业注册、当前报考条件及合同权限另核。"
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
@@ -29321,7 +29245,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与报价策略、成本管理与标准数据建设，承担审核与带训；该阶段通常要求先具备一线估算经验，任职条件由单位规定。"
+              "编辑发展方向：参与报价策略、成本管理、标准数据建设、审核与带训；经验和任职条件按目标单位岗位核对，不设统一一线经验门槛。"
             ]
           },
           "id": "actors.display.career_path_block.ladder.develop.description",
@@ -29401,7 +29325,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入职通常要求相关专业学历或工程背景；条件按单位规定。"
+              "中国实际学历及专业按目标公告；美国典型学历仅作市场背景，不写全国统一中国入职门槛。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.credentials",
@@ -29641,7 +29565,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "管理方向通常要求一线经验，条件由单位规定。"
+              "管理方向实际经验与任职条件按目标岗位公告和单位制度核对，本页未取得中国统一经验要求。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.04.credentials",
@@ -29737,7 +29661,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入职通常要求相关专业学历；条件按单位规定。"
+              "中国实际学历及专业按目标公告；美国典型学历仅作市场背景，不写全国统一中国入职门槛。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.01.credentials",
@@ -30073,7 +29997,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入职通常要求相关专业学历；条件按单位规定。"
+              "中国实际学历及专业按目标公告；美国典型学历仅作市场背景，不写全国统一中国入职门槛。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.01.credentials",
@@ -30377,7 +30301,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于中国大陆造价与成本岗位的执业与数据处理边界的方向性核对。"
+              "支持中国造价工程师分级注册范围成果签章，不支持企业所有估算人员须证或完整报价数据程序。"
             ]
           },
           "id": "actors.display.career_path_block.source.cn-rule",
@@ -30393,7 +30317,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明工资分位的统计位置与不可年化，不提供个人收入结论。"
+              "OEWS税前常规有薪岗位货币工资，不含自雇、直接家庭雇员及未付薪家人；官方年工资可引用，2080标准折算不保证个人工时，不能推每人实际年薪、月到手或加班奖金。"
             ]
           },
           "id": "actors.display.career_path_block.source.r2-pay-3",
@@ -30417,7 +30341,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需求信号要分三层看：美国官方就业预测反映职业总量变化，建设与制造业投资周期决定编制分布，"
+              "看美国预测及解释、真实单位项目需求、具体招聘样本；本轮未取中国投资到编制因果，不断言投资周期决定全部编制。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
@@ -30432,7 +30356,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册显示 2025—2035 年该职业就业下降 3%（-6,900），年均约 17,600 个空缺且全部来自替换需求；该预测不含技术替代时点。"
+              "美国13-1051：2025就业226,400、2035预测219,500，下降3%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
@@ -30597,13 +30521,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共同能力：成本意识、生产理解与协调能力。"
+              "共同能力：成本控制、计划意识与跨职能协作。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30612,13 +30535,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足：生产运营管理、人员与产能管理。"
+              "需补足：项目范围、进度与人力统筹方法。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30627,58 +30549,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从估算转向生产运营管理，通常需先积累一线经验。"
+              "距离说明：从成本估算转向项目全局统筹，需补足进度与人力管理。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.distance",
           "source_refs": [
-            "bls",
-            "oews"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "共同能力：量化分析、模型意识与数据解读。"
-            ]
-          },
-          "id": "actors.display.market_signal_card.transitions.enrichment.shared",
-          "source_refs": [
-            "bls",
-            "oews"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "需补足：财务建模、估值与投资分析。"
-            ]
-          },
-          "id": "actors.display.market_signal_card.transitions.enrichment.gaps",
-          "source_refs": [
-            "bls",
-            "oews"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "距离说明：从工程与产品成本转向财务与投资分析，需补足金融知识。"
-            ]
-          },
-          "id": "actors.display.market_signal_card.transitions.enrichment.distance",
-          "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30690,10 +30566,9 @@
               "共同能力：数据建模、量化分析与问题求解。"
             ]
           },
-          "id": "actors.display.market_signal_card.transitions.art.shared",
+          "id": "actors.display.market_signal_card.transitions.enrichment.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30705,10 +30580,9 @@
               "需补足：数学建模与优化方法。"
             ]
           },
-          "id": "actors.display.market_signal_card.transitions.art.gaps",
+          "id": "actors.display.market_signal_card.transitions.enrichment.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30720,10 +30594,51 @@
               "距离说明：从工程与产品成本估算转向建模与优化，需补足数学能力。"
             ]
           },
+          "id": "actors.display.market_signal_card.transitions.enrichment.distance",
+          "source_refs": [
+            "art"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "共同能力：数据核对、准确性意识与合规意识。"
+            ]
+          },
+          "id": "actors.display.market_signal_card.transitions.art.shared",
+          "source_refs": [
+            "dancing"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "需补足：账务处理与审计方法、财务规则。"
+            ]
+          },
+          "id": "actors.display.market_signal_card.transitions.art.gaps",
+          "source_refs": [
+            "dancing"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "距离说明：从量价估算转向账目与合规，需补足财务与审计知识。"
+            ]
+          },
           "id": "actors.display.market_signal_card.transitions.art.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30777,58 +30692,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共同能力：成本控制、计划意识与跨职能协作。"
+              "共同能力：工程理解、成本控制与现场意识。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.shared",
           "source_refs": [
-            "bls",
-            "oews"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "需补足：项目范围、进度与人力统筹方法。"
-            ]
-          },
-          "id": "actors.display.market_signal_card.transitions.announcing.gaps",
-          "source_refs": [
-            "bls",
-            "oews"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "距离说明：从成本估算转向项目全局统筹，需补足进度与人力管理。"
-            ]
-          },
-          "id": "actors.display.market_signal_card.transitions.announcing.distance",
-          "source_refs": [
-            "bls",
-            "oews"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "共同能力：工程理解、成本控制与现场意识。"
-            ]
-          },
-          "id": "actors.display.market_signal_card.transitions.editing.shared",
-          "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30840,10 +30709,9 @@
               "需补足：施工现场计划、进度与交付管理。"
             ]
           },
-          "id": "actors.display.market_signal_card.transitions.editing.gaps",
+          "id": "actors.display.market_signal_card.transitions.announcing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30855,10 +30723,9 @@
               "距离说明：从估算转为现场交付管理，需补足施工与现场经验。"
             ]
           },
-          "id": "actors.display.market_signal_card.transitions.editing.distance",
+          "id": "actors.display.market_signal_card.transitions.announcing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30867,13 +30734,54 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共同能力：数据核对、准确性意识与合规意识。"
+              "共同能力：量化分析、模型意识与数据解读。"
+            ]
+          },
+          "id": "actors.display.market_signal_card.transitions.editing.shared",
+          "source_refs": [
+            "enrichment"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "需补足：财务建模、估值与投资分析。"
+            ]
+          },
+          "id": "actors.display.market_signal_card.transitions.editing.gaps",
+          "source_refs": [
+            "enrichment"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "距离说明：从工程与产品成本转向财务与投资分析，需补足金融知识。"
+            ]
+          },
+          "id": "actors.display.market_signal_card.transitions.editing.distance",
+          "source_refs": [
+            "enrichment"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "共同能力：成本意识、生产理解与协调能力。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30882,13 +30790,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足：账务处理与审计方法、财务规则。"
+              "需补足：生产运营管理、人员与产能管理。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30897,13 +30804,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从量价估算转向账目与合规，需补足财务与审计知识。"
+              "距离说明：从估算转向生产运营管理，通常需先积累一线经验。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -31099,7 +31005,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind 职业内容编辑团队（来源核查与练习设计）"
+              "FermatMind职业内容编辑（来源核查）"
             ]
           },
           "id": "actors.display.source_card.author",
@@ -31113,7 +31019,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源：O*NET OnLine 成本估算师（13-1051.00）职业档案与全国工资（BLS OEWS 2025 年数据）、BLS 职业展望手册 Cost Estimators（2025 年中位工资与 2025—2035 年预测）、ILO 生成式 AI 与职业任务暴露研究、NIST AI 风险管理框架，以及国家统计局公开资料；各条目的口径与使用限制见下方来源登记。"
+              "本轮核O*NET15任务57情境、教育CE、2025招聘与工资、BLS2025工资和2025—2035预测；NBS2025条件匹配背景；中国造价资格规定与北京2024解读；ILO方法、NIST自愿治理；能力路线和工具机会是编辑线索。"
             ]
           },
           "id": "actors.display.source_card.source",
@@ -31127,7 +31033,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "更新：2026-09-18（各来源检索日期见来源登记）"
+              "本轮九模块来源核对：2026-10-09；复用方法资料保留原版时期。"
             ]
           },
           "id": "actors.display.source_card.updated-at",
@@ -31251,7 +31157,7 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于预算分析师方向的预算编制与监控职责对照（相邻职业）。",
                   "不把预算职责并入本职业。"
@@ -31267,7 +31173,7 @@
                 "url": "https://www.onetonline.org/link/summary/13-2031.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于项目管理专员方向的项目统筹职责对照（相邻职业）。",
                   "不把项目统筹职责并入本职业。"
@@ -31283,7 +31189,7 @@
                 "url": "https://www.onetonline.org/link/summary/13-1082.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于运筹学分析师方向的建模与优化职责对照（相邻职业）。",
                   "不把建模与优化职责并入本职业。"
@@ -31299,14 +31205,13 @@
                 "url": "https://www.onetonline.org/link/summary/15-2031.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持就业预测、职位空缺与中位工资的统计来源。",
-                  "该口径不含中国大陆信息，不能替代中国大陆数据。"
+                  "美国13-1051：2025就业226,400、2035预测219,500，下降3%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。美国BLS通常学士，建筑常相关建筑或工程、制造常商务财务，多年施工经验有时可替代；典型中等时长在职训练非人人数周数月。O*NET教育响应82%学士、9%两年制、5%高中，其他未显示；JobZone4、SVP7至低于8是准备层级，层级概述多年经验/训练不能等同本岗每人训练。中国目标条件另核。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "支持 2025 年职位数 226,400 人、2025—2035 年下降 3%（-6,900）、年均约 17,600 个替换性空缺，以及 2025 年中位 78,740 美元/年；该页为单一职业口径，不含中国大陆信息。",
+                "limitation": "美国13-1051：2025就业226,400、2035预测219,500，下降3%、净减6,900；2025—2035年均空缺17,600全为转岗退出替换，非净增或十年累计。BLS预期估算软件提高生产率减少需求，是预测解释，非生成式AI已造成裁员的因果实测或替代时点。美国BLS通常学士，建筑常相关建筑或工程、制造常商务财务，多年施工经验有时可替代；典型中等时长在职训练非人人数周数月。O*NET教育响应82%学士、9%两年制、5%高中，其他未显示；JobZone4、SVP7至低于8是准备层级，层级概述多年经验/训练不能等同本岗每人训练。中国目标条件另核。",
                 "market": "美国",
                 "name": "BLS 职业展望手册：Cost Estimators",
                 "period": "2025 年中位工资与 2025—2035 年预测；检索 2026-09-18",
@@ -31315,23 +31220,22 @@
                 "url": "https://www.bls.gov/ooh/business-and-financial/cost-estimators.htm"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持中国大陆造价与成本岗位的分类与执业语境。",
-                  "不据此推定任职资格、授权或工资数值。"
+                  "中国建人〔2018〕67号第2–4、17、20、25–29条：造价工程师是考试取证并注册后从事建设工程造价者，准入分一级二级；经注册才可以该名义执业，持注册证与印章；不得同时多单位执业或借名挂靠。一级与二级业务范围不同，成果签章担责并经一级审核盖章；不等所有企业产品估算人员一概须取该证。2024北京解读确认级别及按专业注册。具体2026报考年限、专业注册办法及工程计价标准未取得，不照抄2018年限。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official regulation",
                 "id": "cn-rule",
-                "limitation": "支持中国大陆造价、成本与商务估算岗位分属不同资质体系与用人单位的分类语境：常与造价工程师执业资格、工程量清单计价规范等制度相关；不证明全国统一的强制资质，也不能把该类岗位与美国职业代码一一对应。",
+                "limitation": "中国建人〔2018〕67号第2–4、17、20、25–29条：造价工程师是考试取证并注册后从事建设工程造价者，准入分一级二级；经注册才可以该名义执业，持注册证与印章；不得同时多单位执业或借名挂靠。一级与二级业务范围不同，成果签章担责并经一级审核盖章；不等所有企业产品估算人员一概须取该证。2024北京解读确认级别及按专业注册。具体2026报考年限、专业注册办法及工程计价标准未取得，不照抄2018年限。",
                 "market": "中国内地",
-                "name": "中国大陆公开人事与造价执业信息",
-                "period": "现行规定；检索 2026-09-18",
-                "publisher": "公开人事与执业信息",
+                "name": "建人〔2018〕67号造价工程师职业资格制度规定",
+                "period": "2018制度；2024北京解读复核注册",
+                "publisher": "住房城乡建设等四部门；北京市政府转载",
                 "scope": "contextual",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/201808/t20180810_781402.html"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于会计师和审计师方向的账目与合规职责对照（相邻职业）。",
                   "不把账务与审计职责并入本职业。"
@@ -31347,7 +31251,7 @@
                 "url": "https://www.onetonline.org/link/summary/13-2011.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于物流分析师方向的供应链分析对照（相邻职业）。",
                   "不把供应链职责并入本职业。"
@@ -31363,7 +31267,7 @@
                 "url": "https://www.onetonline.org/link/summary/13-1081.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于施工经理方向的现场交付职责对照（相邻职业）。",
                   "不把现场管理职责并入本职业。"
@@ -31395,30 +31299,29 @@
                 "url": "https://www.onetonline.org/link/summary/13-1031.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持入行准备层级与教育需求的观察点。",
-                  "不构成具体雇主的录用条件或中国大陆的门槛。"
+                  "美国BLS通常学士，建筑常相关建筑或工程、制造常商务财务，多年施工经验有时可替代；典型中等时长在职训练非人人数周数月。O*NET教育响应82%学士、9%两年制、5%高中，其他未显示；JobZone4、SVP7至低于8是准备层级，层级概述多年经验/训练不能等同本岗每人训练。中国目标条件另核。"
                 ],
                 "evidence_type": "official source",
                 "id": "employer",
-                "limitation": "支持本职业的准备层级（Job Zone Four，SVP 7.0 至 8.0）、教育需求（通常要求学士学位）与兴趣代码（CE）；不代表具体雇主的招聘条件，也不等同于中国大陆的要求。",
+                "limitation": "O*NET15项中14Core：判读图纸规格与时间材料人工；与工程业主承包商核变更；收集历史成本；评估实际成本与投标差异；与客户供应商人员商讨；建立招标流程并谈判；编制供应商选择估算；为计划组织排程编估算；建监控报告；判断自制外购；周期报表；标准工时成本研究；到场记录通道排水地形公用设施；维护供应商承包商分包名录。遥感无人机在不能到场时为1项New，类别非所有岗位日常频率或普及率。美国O*NET2025建筑54%、制造12%、其他服务除公共行政10%；其他24%由100减前三项，仅余量未核细项；行业份额非工资或中国雇主份额。BLS同年主要雇主专业承包33%、房屋建筑15%、制造12%、汽车维修9%、重土木5%口径层级另列。美国BLS通常学士，建筑常相关建筑或工程、制造常商务财务，多年施工经验有时可替代；典型中等时长在职训练非人人数周数月。O*NET教育响应82%学士、9%两年制、5%高中，其他未显示；JobZone4、SVP7至低于8是准备层级，层级概述多年经验/训练不能等同本岗每人训练。中国目标条件另核。",
                 "market": "美国",
                 "name": "O*NET OnLine：Cost Estimators 摘要（13-1051.00）",
-                "period": "页面 2026 年更新；检索 2026-09-18",
+                "period": "当前页面更新2026，各调查数据非统一2026调查；核2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/13-1051.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于金融与投资分析师方向的量化与建模职责对照（相邻职业）。",
                   "不把金融分析职责并入本职业。"
                 ],
                 "evidence_type": "official source",
                 "id": "enrichment",
-                "limitation": "只支持金融与投资分析师（相邻职业）的财务建模与投资分析任务；BLS 2025 年中位年薪 103,570 美元，通常要求学士学位。",
+                "limitation": "金融与投资分析13-2051任务含估值、投资信息、模型和交易；档案部分信息正在采集，不能强加未提供Core等级。BLS103,570为金融分析组合的对照，不冒充本细分单一精确工资。",
                 "market": "美国",
                 "name": "O*NET OnLine：Financial Analysts（13-2051.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31440,33 +31343,31 @@
                 "period": "当前工具；检索 2026-09-18",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/"
+                "url": "https://www.onetcenter.org/IP.html"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "登记中国大陆公开工资统计的细分层级。",
-                  "代理值不得写成本职业工资。"
+                  "条件匹配行业背景：NBS2025建筑非私营92,036/私营66,275，制造113,594/76,055，科学研究技术服务182,064/83,560元税前年均；单位主营行业和私营分类匹配才用，非本岗工资分位或全国月薪。城镇5人及以上法人单位，不含个体自由职业，含工资奖金津补贴。中国职业工资、招聘样本及中美精确实体映射未取得。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "nbs",
-                "limitation": "公开工资统计按行业门类与人员类别发布，未建立与 13-1051.00 对应的职业细类；行业或人员类别均值不是本职业工资，也不能外推为全国职业收入。",
+                "limitation": "条件匹配行业背景：NBS2025建筑非私营92,036/私营66,275，制造113,594/76,055，科学研究技术服务182,064/83,560元税前年均；单位主营行业和私营分类匹配才用，非本岗工资分位或全国月薪。城镇5人及以上法人单位，不含个体自由职业，含工资奖金津补贴。中国职业工资、招聘样本及中美精确实体映射未取得。",
                 "market": "中国内地",
-                "name": "国家统计局：公开统计与工资发布入口",
-                "period": "现行发布；检索 2026-09-18",
+                "name": "NBS2025城镇单位工资",
+                "period": "2025统计；2026-05-15发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "用于说明引入 AI 系统时的治理、记录与人工监督要求。",
-                  "框架不替代合同与机构流程的责任划分。"
+                  "NIST自愿AI风险治理框架，非中国强制报价程序。"
                 ],
                 "evidence_type": "institutional framework",
                 "id": "nist",
-                "limitation": "提供 AI 系统风险治理的用语与流程要求（角色、责任、记录与人工监督）；不规定估算与报价流程、合同责任或数据授权。",
+                "limitation": "NIST自愿AI风险治理框架，非中国强制报价程序。",
                 "market": "美国",
                 "name": "NIST：Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
                 "period": "AI RMF 1.0；检索 2026-09-18",
@@ -31475,78 +31376,74 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于说明工资统计的覆盖与折算口径。",
                   "不提供个人收入结论，也不能用于推算个人到手工资。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "oews",
-                "limitation": "提供按职业代码发布的工资统计入口与覆盖说明；本页分位数值经 O*NET 全国工资页（13-1051.00）公示，不能把行业平均工资当作本职业工资。",
+                "limitation": "OEWS税前常规有薪岗位货币工资，不含自雇、直接家庭雇员及未付薪家人；官方年工资可引用，2080标准折算不保证个人工时，不能推每人实际年薪、月到手或加班奖金。精确工资见本链接，方法另见r2-pay-2。",
                 "market": "美国",
                 "name": "BLS Occupational Employment and Wage Statistics（OEWS）",
                 "period": "2025 年 5 月工资数据；检索 2026-09-18",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.onetonline.org/link/localwages/13-1051.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持本职业的任务、工作情境与准备层级。",
-                  "不含技术采用与岗位替代数据。"
+                  "O*NET15项中14Core：判读图纸规格与时间材料人工；与工程业主承包商核变更；收集历史成本；评估实际成本与投标差异；与客户供应商人员商讨；建立招标流程并谈判；编制供应商选择估算；为计划组织排程编估算；建监控报告；判断自制外购；周期报表；标准工时成本研究；到场记录通道排水地形公用设施；维护供应商承包商分包名录。遥感无人机在不能到场时为1项New，类别非所有岗位日常频率或普及率。美国O*NET2025建筑54%、制造12%、其他服务除公共行政10%；其他24%由100减前三项，仅余量未核细项；行业份额非工资或中国雇主份额。BLS同年主要雇主专业承包33%、房屋建筑15%、制造12%、汽车维修9%、重土木5%口径层级另列。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet",
-                "limitation": "支持本职业的任务、详细工作活动、工作情境百分比、准备层级、兴趣代码与 2024 年行业就业占比；为单一职业口径，不含技术采用、岗位替代或收入变化数据。",
+                "limitation": "O*NET15项中14Core：判读图纸规格与时间材料人工；与工程业主承包商核变更；收集历史成本；评估实际成本与投标差异；与客户供应商人员商讨；建立招标流程并谈判；编制供应商选择估算；为计划组织排程编估算；建监控报告；判断自制外购；周期报表；标准工时成本研究；到场记录通道排水地形公用设施；维护供应商承包商分包名录。遥感无人机在不能到场时为1项New，类别非所有岗位日常频率或普及率。美国O*NET2025建筑54%、制造12%、其他服务除公共行政10%；其他24%由100减前三项，仅余量未核细项；行业份额非工资或中国雇主份额。BLS同年主要雇主专业承包33%、房屋建筑15%、制造12%、汽车维修9%、重土木5%口径层级另列。美国BLS通常学士，建筑常相关建筑或工程、制造常商务财务，多年施工经验有时可替代；典型中等时长在职训练非人人数周数月。O*NET教育响应82%学士、9%两年制、5%高中，其他未显示；JobZone4、SVP7至低于8是准备层级，层级概述多年经验/训练不能等同本岗每人训练。中国目标条件另核。",
                 "market": "美国",
                 "name": "O*NET OnLine：Cost Estimators（13-1051.00）职业档案",
-                "period": "页面 2026 年更新；检索 2026-09-18",
+                "period": "当前页面更新2026，各调查数据非统一2026调查；核2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/13-1051.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持雇主技术关键词的市场信号说明。",
-                  "关键词不等于采用率或能力要求。"
+                  "2025全美Lightcast招聘16软件：Office21%、Excel19%、Outlook9%；Procore/AutoCAD/PPT/Word各4%，Primavera3%、Project2%、Revit1%，SAP/Access/QuickBooks/Visio/SketchUp/Acrobat各低于1%；岗位提及比非使用率、AI采用或熟练度。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r2-ai",
-                "limitation": "列出雇主招聘中提到的估算、图纸读取与项目管理相关技术关键词；招聘关键词是市场信号，不衡量使用率、熟练度或岗位替代。",
+                "limitation": "2025全美Lightcast招聘16软件：Office21%、Excel19%、Outlook9%；Procore/AutoCAD/PPT/Word各4%，Primavera3%、Project2%、Revit1%，SAP/Access/QuickBooks/Visio/SketchUp/Acrobat各低于1%；岗位提及比非使用率、AI采用或熟练度。",
                 "market": "美国",
                 "name": "O*NET OnLine：Cost Estimators 热门技术（13-1051.00）",
-                "period": "页面 2026 年更新；检索 2026-09-18",
+                "period": "2025全美招聘数据",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/13-1051.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "登记中国大陆公开工资统计的细分层级。",
-                  "未取得本职业单列数值，不使用代理数字。"
+                  "条件匹配行业背景：NBS2025建筑非私营92,036/私营66,275，制造113,594/76,055，科学研究技术服务182,064/83,560元税前年均；单位主营行业和私营分类匹配才用，非本岗工资分位或全国月薪。城镇5人及以上法人单位，不含个体自由职业，含工资奖金津补贴。中国职业工资、招聘样本及中美精确实体映射未取得。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-1",
-                "limitation": "公开工资统计只按区域、行业门类与人员类别发布，未建立与本职业一一对应的职业细类；本页未取得本职业单列数值，缺口在页面可见位置标记。",
+                "limitation": "条件匹配行业背景：NBS2025建筑非私营92,036/私营66,275，制造113,594/76,055，科学研究技术服务182,064/83,560元税前年均；单位主营行业和私营分类匹配才用，非本岗工资分位或全国月薪。城镇5人及以上法人单位，不含个体自由职业，含工资奖金津补贴。中国职业工资、招聘样本及中美精确实体映射未取得。",
                 "market": "中国内地",
-                "name": "国家统计局：公开工资统计发布入口",
-                "period": "现行发布；检索 2026-09-18",
+                "name": "NBS2025城镇单位工资",
+                "period": "2025统计；2026-05-15发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "说明时薪、月薪与年收入不可直接互换。",
-                  "不提供个人收入结论。"
+                  "OEWS税前常规有薪岗位货币工资，不含自雇、直接家庭雇员及未付薪家人；官方年工资可引用，2080标准折算不保证个人工时，不能推每人实际年薪、月到手或加班奖金。"
                 ],
                 "evidence_type": "official methodology",
                 "id": "r2-pay-2",
-                "limitation": "说明 OEWS 的覆盖人群、工资构成与折算假设；不提供本职业具体数值，也不用于把时薪换算为个人月收入。",
+                "limitation": "OEWS税前常规有薪岗位货币工资，不含自雇、直接家庭雇员及未付薪家人；官方年工资可引用，2080标准折算不保证个人工时，不能推每人实际年薪、月到手或加班奖金。",
                 "market": "美国",
                 "name": "BLS Handbook of Methods：OEWS 工资与折算口径",
                 "period": "现行方法说明；检索 2026-09-18",
@@ -31555,7 +31452,7 @@
                 "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于说明工资分位的统计位置。",
                   "不提供个人收入结论，也不能按固定工时年化。"
@@ -31589,12 +31486,11 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "用于说明任务级暴露度量的方法。",
-                  "任务暴露不等于自动化采用或岗位替代结果。"
+                  "ILO2025任务暴露方法，本輪13-1051精确单职业分数未取得，不断言研究完全没有职业分数。"
                 ],
                 "evidence_type": "institutional research",
                 "id": "sag",
-                "limitation": "按任务级暴露度量生成式 AI 与职业任务的接近程度；不提供本职业单职业分数、采用率、自动化率或替代日期。",
+                "limitation": "ILO2025任务暴露方法，本輪13-1051精确单职业分数未取得，不断言研究完全没有职业分数。",
                 "market": "全球",
                 "name": "ILO：Generative AI and Jobs — Refined Global Index of Occupational Exposure",
                 "period": "研究发表时点；检索 2026-09-18",
@@ -31610,16 +31506,16 @@
                 ],
                 "evidence_type": "official source",
                 "id": "sag-moa",
-                "limitation": "支持本职业（13-1051.00）的任务、详细工作活动与工作情境百分比；该页为单一职业口径，不含技术采用或岗位替代数据。",
+                "limitation": "O*NET15项中14Core：判读图纸规格与时间材料人工；与工程业主承包商核变更；收集历史成本；评估实际成本与投标差异；与客户供应商人员商讨；建立招标流程并谈判；编制供应商选择估算；为计划组织排程编估算；建监控报告；判断自制外购；周期报表；标准工时成本研究；到场记录通道排水地形公用设施；维护供应商承包商分包名录。遥感无人机在不能到场时为1项New，类别非所有岗位日常频率或普及率。57情境百分比，页面更新年非统一调查年度；不含AI部署因果。",
                 "market": "美国",
                 "name": "O*NET OnLine：Cost Estimators 详细资料（13-1051.00）",
-                "period": "页面 2026 年更新；检索 2026-09-18",
+                "period": "当前页面更新2026，各调查数据非统一2026调查；核2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/13-1051.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于工业生产经理方向的生产运营管理职责对照（相邻职业）。",
                   "不把生产运营职责并入本职业。"
@@ -31633,6 +31529,21 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/11-3051.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "级别一二级、经注册方可名义执业；北京二级原则区域效力及跨区域另核。"
+                ],
+                "evidence_type": "official guidance",
+                "id": "g04-cn-2024",
+                "limitation": "级别、按专业注册及北京实施范围，不证明全国统一招聘学历。",
+                "market": "中国内地/北京",
+                "name": "北京市人社局2024造价资格制度解读",
+                "period": "2024政策解读",
+                "publisher": "北京市人社局",
+                "scope": "contextual",
+                "url": "https://rsj.beijing.gov.cn/xxgk/2024zcjd/202406/t20240617_3717747.html"
               }
             ]
           },
@@ -34237,8 +34148,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "nist",
-              "sag-moa"
+              "nist"
             ],
             "id": "project-data",
             "mitigation": {
@@ -34428,28 +34338,28 @@
           "bls_table": [
             {
               "指标": "数据与口径",
-              "数值": "本轮未取得与成本估算师（O*NET-SOC 13-1051.00）对应的中国大陆职业级工资数值，故不展示具体数字；缺口已在页面可见位置标记。",
-              "说明": "中国大陆公开工资统计最高细分到行业门类与人员类别，不发布该职业细类数值。"
+              "数值": "条件匹配行业背景：NBS2025建筑非私营92,036/私营66,275，制造113,594/76,055，科学研究技术服务182,064/83,560元税前年均；单位主营行业和私营分类匹配才用，非本岗工资分位或全国月薪。城镇5人及以上法人单位，不含个体自由职业，含工资奖金津补贴。中国职业工资、招聘样本及中美精确实体映射未取得。",
+              "说明": "行业条件匹配不代本岗"
             },
             {
               "指标": "查阅范围",
-              "数值": "国家统计局工资与统计发布页面（检索 2026-09-18）",
-              "说明": "只用于说明实际查阅范围与时间，不作数值换算依据。"
+              "数值": "NBS2025，2026-05-15发布；本轮2026-10-09核对",
+              "说明": "实际发布"
             },
             {
               "指标": "职业分类",
-              "数值": "中国大陆造价、成本与商务估算岗位分属不同资质体系与用人单位，常与造价工程师执业资格等制度相关",
-              "说明": "用于中国语境说明；不能把该类岗位直接等同于美国职业代码的职责或工资，也不能据此推定执业资格。"
+              "数值": "中国建人〔2018〕67号第2–4、17、20、25–29条：造价工程师是考试取证并注册后从事建设工程造价者，准入分一级二级；经注册才可以该名义执业，持注册证与印章；不得同时多单位执业或借名挂靠。一级与二级业务范围不同，成果签章担责并经一级审核盖章；不等所有企业产品估算人员一概须取该证。2024北京解读确认级别及按专业注册。具体2026报考年限、专业注册办法及工程计价标准未取得，不照抄2018年限。",
+              "说明": "工程造价准入与产品估算区分"
             },
             {
               "指标": "数据与合规",
-              "数值": "报价、合同与成本数据属敏感商业信息，处理受合同与保密要求约束",
-              "说明": "数据权限与处理流程须按具体单位与现行规定核对，本页不构成授权或作业建议。"
+              "数值": "成本报价信息按合同权限及适用法律核",
+              "说明": "不把所有材料自动定法律敏感"
             },
             {
               "指标": "统计覆盖",
-              "数值": "国家统计局城镇单位工资统计覆盖城镇法人单位，不含个体工商户与自由职业者等",
-              "说明": "成本估算岗位分布在不同行业门类，公开职业级数据未单列，行业均值不能代表该职业实际收入。"
+              "数值": "城镇5人及以上法人，不含个体自由职业",
+              "说明": "统计覆盖及奖金口径另列"
             },
             {
               "指标": "市场对照",
@@ -34473,10 +34383,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_class_row": "中国大陆用工场景：建筑施工与市政工程的造价与商务岗位、制造企业的成本与报价岗位、工程与造价咨询机构、房地产开发与物业的成本管理岗位；公开工资统计按行业门类与人员类别发布，未建立与 O*NET-SOC 13-1051.00 对应的职业细类，本页不据分类推定任职资格或收入。",
+          "china_class_row": "中国工程造价与产品成本估算按实际职责区分；造价工程师资格注册有国家规定，不能把产品估算自动等同该资格。",
           "china_edu_table": [
             {
-              "学历段": "大专及以上＋工程造价等专业背景",
+              "学历段": "美国典型准备（非中国门槛）",
               "岗位方向": "造价与成本核算基础岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -34486,7 +34396,7 @@
               }
             },
             {
-              "学历段": "大专及以上＋造价工程师执业资格",
+              "学历段": "中国造价资格与注册（依法分级专业）",
               "岗位方向": "工程量清单计价与结算审核岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -34496,7 +34406,7 @@
               }
             },
             {
-              "学历段": "本科及以上＋相关专业背景",
+              "学历段": "企业数据与报价权限（按岗位核）",
               "岗位方向": "企业成本管理、商务与报价岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.theater",
@@ -34506,7 +34416,7 @@
               }
             },
             {
-              "学历段": "熟悉计价规范＋内部审核与带训",
+              "学历段": "管理方向条件（目标公告待核）",
               "岗位方向": "成本与商务方向的组长或主管方向",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -34552,14 +34462,14 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国大陆公开信息检索入口：国家统计局工资与统计发布页面；本轮未取得该职业单列数值。",
+          "china_open": "本轮所读NBS2025表及覆盖说明；精确职业工资未取得。",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_ref": "国家统计局：公开统计与工资发布入口｜https://www.stats.gov.cn/",
+          "china_ref": "NBS2025城镇单位工资｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
           "china_salary_note": {
             "$item": "actors.display.career_snapshot_primary_locale.boundary",
             "block": "china-salary",
@@ -34577,22 +34487,8 @@
               }
             },
             {
-              "城市/区间": "中国大陆（行业均值代理口径）",
-              "月薪参考": {
-                "$join": [
-                  {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
-                    "field": "display_value"
-                  },
-                  {
-                    "$item": "actors.display.career_snapshot_primary_locale.quote-limits",
-                    "block": "china-salary",
-                    "copy_key": "career.item.career-snapshot-primary-locale",
-                    "type": "prose"
-                  }
-                ],
-                "separator": ""
-              }
+              "城市/区间": "行业背景（税前年均非月薪）",
+              "月薪参考": "条件匹配行业背景：NBS2025建筑非私营92,036/私营66,275，制造113,594/76,055，科学研究技术服务182,064/83,560元税前年均；单位主营行业和私营分类匹配才用，非本岗工资分位或全国月薪。城镇5人及以上法人单位，不含个体自由职业，含工资奖金津补贴。中国职业工资、招聘样本及中美精确实体映射未取得。"
             },
             {
               "城市/区间": "中国大陆（招聘报价口径）",
@@ -34604,7 +34500,7 @@
               }
             }
           ],
-          "china_soc_row": "美国职业代码：O*NET-SOC 13-1051.00（Cost Estimators）；BLS 职业展望手册为该职业单列发布；中国大陆未建立与之对应的职业级工资口径。",
+          "china_soc_row": "美国O*NET13-1051.00/BLS13-1051；本轮未完成中国精确职业实体映射，不断言全国不存在分类。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
             "china-jiaojiang-featured-daily-2026"
@@ -34766,15 +34662,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024 年（O*NET 行业分布，13-1051.00 口径）",
+        "industry_period": "2025年O*NET行业分布",
         "industry_rows": [
           {
-            "fact_ref": "median",
+            "fact_ref": "g04-industry-theater-2025",
             "industry": "建筑",
-            "median": {
-              "$fact": "industry-theater",
-              "field": "display_value"
-            },
+            "median": "建筑54%（2025就业份额）",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.theater",
               "block": "us-salary",
@@ -34783,12 +34676,9 @@
             }
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "g04-industry-education-2025",
             "industry": "制造",
-            "median": {
-              "$fact": "industry-education",
-              "field": "display_value"
-            },
+            "median": "制造12%（2025就业份额）",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.education",
               "block": "us-salary",
@@ -34797,12 +34687,9 @@
             }
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "g04-industry-amusement-2025",
             "industry": "其他服务（公共行政除外）",
-            "median": {
-              "$fact": "industry-amusement",
-              "field": "display_value"
-            },
+            "median": "其他服务除公共行政10%（2025就业份额）",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.amusement",
               "block": "us-salary",
@@ -34812,7 +34699,7 @@
           },
           {
             "industry": "成本估算师所在行业（统计分类）",
-            "median": "分布合计｜100%（2024 年 O*NET 行业分布；建筑 55%、制造 12%、其他服务 10%、其他行业 23%）",
+            "median": "其他行业24%（包含零售与批发，未给各自份额）",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -34894,7 +34781,7 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "不可按固定工时年化",
+            "equivalent": "官方年值可引用；标准折算不保证个人工时",
             "interpretation": {
               "$item": "actors.us-salary.career-snapshot-secondary-locale.2",
               "block": "us-salary",
@@ -36876,7 +36763,8 @@
         "occupation_scope": "Cost Estimators（O*NET-SOC 13-1051.00）全国工资；BLS 单列发布",
         "period": "2025 年 5 月工资数据；检索 2026-09-18",
         "source_refs": [
-          "oews"
+          "r2-pay-3",
+          "r2-pay-2"
         ]
       },
       {
@@ -36888,7 +36776,8 @@
         "occupation_scope": "Cost Estimators（13-1051.00）；分位是统计位置，不是入职起薪或职级等级",
         "period": "2025 年工资数据；检索 2026-09-18",
         "source_refs": [
-          "oews"
+          "r2-pay-3",
+          "r2-pay-2"
         ]
       },
       {
@@ -36900,7 +36789,8 @@
         "occupation_scope": "Cost Estimators（13-1051.00）；分位是统计位置，不是职级或资历等级",
         "period": "2025 年工资数据；检索 2026-09-18",
         "source_refs": [
-          "oews"
+          "r2-pay-3",
+          "r2-pay-2"
         ]
       },
       {
@@ -36986,6 +36876,42 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "建筑54%（2025就业占比，非工资）",
+        "fact_id": "g04-industry-theater-2025",
+        "market": "美国",
+        "measure": "行业就业占比（非工资）",
+        "occupation_scope": "Cost Estimators13-1051.00美国行业就业，非个人工资",
+        "period": "2025行业分布；本轮2026-10-09",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "制造12%（2025就业占比，非工资）",
+        "fact_id": "g04-industry-education-2025",
+        "market": "美国",
+        "measure": "行业就业占比（非工资）",
+        "occupation_scope": "Cost Estimators13-1051.00美国行业就业，非个人工资",
+        "period": "2025行业分布；本轮2026-10-09",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "其他服务除公共行政10%（2025就业占比，非工资）",
+        "fact_id": "g04-industry-amusement-2025",
+        "market": "美国",
+        "measure": "行业就业占比（非工资）",
+        "occupation_scope": "Cost Estimators13-1051.00美国行业就业，非个人工资",
+        "period": "2025行业分布；本轮2026-10-09",
+        "source_refs": [
+          "onet"
+        ]
       }
     ]
   },
@@ -36994,7 +36920,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "商业与财务 · 成本估算与报价",
@@ -37045,7 +36971,7 @@
       "text": "成本估算师"
     }
   },
-  "source_content_sha256": "a1bc448917669ccaa04a7b37542db284f06ba49f9666297a579da98ab4a4b10f",
+  "source_content_sha256": "9562c14bc2ff24035e92df2cb692a2b8334c8df7e41a966aceef12c14f3903d5",
   "subject": {
     "canonical_slug": "cost-estimators",
     "name": "成本估算师",

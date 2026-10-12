@@ -7560,7 +7560,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 可辅助检索词扩展、书目信息整理、清单初稿与常见问题分类，但借还登记与读者身份核对、编目与排架判断、逾期与罚金处理、读者隐私边界仍由人负责。"
+              "编辑建议：可测试检索词、清单与记录草稿辅助；未取得本职业采用率、性能或岗位结果。身份与借阅权限、索书号及费用规则须由责任人核对，普通系统自动化不等于生成式AI。"
             ]
           },
           "id": "library-assistants-clerical.ai-impact.ai-impact-table.2",
@@ -7666,7 +7666,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开工资统计：国家统计局按行业门类发布城镇单位就业人员年平均工资，图书馆文书助理多分布在教育、文化体育和娱乐、公共管理等行业，行业平均不能替代本职业工资。"
+              "本轮NBS行业表未单列图书馆文书助理全国职业工资。教育、文化体育娱乐与公共管理仅作机构背景，未取得本职业中国行业份额。"
             ]
           },
           "fact_refs": [
@@ -7717,7 +7717,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国大陆图书馆文书助理对应的全国职业工资中位数、统计期与口径，本页仅展示行业代理并标明其为行业口径，不使用代理数字。"
+              "证据不足：精确全国职业中位数未建立；仅展示明确标注的行业年平均背景，不能充当助理起薪或到手收入。"
             ]
           },
           "fact_refs": [
@@ -7759,7 +7759,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国全国口径下，图书馆文书助理 2024 年就业约 84,500 人，2034 年约 78,900 人（约 −7%），预计年均空缺 12,800 个；BLS 2025 工资数据中，年薪中位数 36,910 美元，第 10 至第 90 分位为 27,730—55,310 美元，时薪中位数 17.74 美元。"
+              "美国43-4121：2025年89,500人，2035年83,800人，下降6%（减少5,700），年均空缺12,300。2025年5月年薪中位36,910美元、时薪17.74美元；年薪五分位27,730／31,820／36,910／45,620／55,310美元。"
             ]
           },
           "fact_refs": [
@@ -7767,6 +7767,7 @@
           ],
           "id": "library-assistants-clerical.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
+            "bls-library-support",
             "onet-wages"
           ],
           "type": "prose"
@@ -8065,12 +8066,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国侧图书馆文书助理通常要求高中或大专学历并提供在职培训，具体学历与技能以招聘公告为准；中国大陆的岗位多按学校、公共图书馆或事业单位的用工与招录规定确定，须分别核对。"
+              "BLS说明文书助理通常高中或同等学历，接受短期在职培训；技术员通常需专科后证书，馆员通常需硕士。目标机构招聘条件另核，不以认证目录推出统一学历。"
             ]
           },
           "id": "library-assistants-clerical.path.career-path-block.2",
           "source_refs": [
-            "onet-cert"
+            "bls-library-support"
           ],
           "type": "prose"
         },
@@ -8079,12 +8080,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国：多数岗位要求高中或大专学历，熟悉办公与图书馆检索系统并接受在职培训，实际条件以招聘公告为准。中国大陆：学校、公共图书馆与事业单位的岗位设置、用工形式与培训要求由单位与当地规定确定。"
+              "BLS说明文书助理通常高中或同等学历，接受短期在职培训；技术员通常需专科后证书，馆员通常需硕士。目标机构招聘条件另核，不以认证目录推出统一学历。"
             ]
           },
           "id": "library-assistants-clerical.path.career-path-block.3",
           "source_refs": [
-            "onet-cert"
+            "bls-library-support"
           ],
           "type": "prose"
         },
@@ -8098,7 +8099,8 @@
           },
           "id": "library-assistants-clerical.path.career-path-block.4",
           "source_refs": [
-            "onet-cert"
+            "onet-details",
+            "bls-library-support"
           ],
           "type": "prose"
         },
@@ -8112,7 +8114,8 @@
           },
           "id": "library-assistants-clerical.path.career-path-block.5",
           "source_refs": [
-            "onet-cert"
+            "onet-details",
+            "bls-library-support"
           ],
           "type": "prose"
         },
@@ -8140,7 +8143,8 @@
           },
           "id": "library-assistants-clerical.path.career-path-block.7",
           "source_refs": [
-            "onet-cert"
+            "onet-details",
+            "bls-library-support"
           ],
           "type": "prose"
         },
@@ -8154,7 +8158,8 @@
           },
           "id": "library-assistants-clerical.path.career-path-block.8",
           "source_refs": [
-            "onet-cert"
+            "onet-details",
+            "bls-library-support"
           ],
           "type": "prose"
         }
@@ -8185,12 +8190,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国就业预测为 2024—2034 年下降约 7%（约 −5,600 人），预计年均空缺 12,800 个；这是职业统计，不是个人录用概率，也不同于招聘样本。"
+              "2025—2035美国43-4121就业下降6%（减少5,700），年均空缺12,300；合并技术员与助理的23,100不能代入精确职业。"
             ]
           },
           "id": "library-assistants-clerical.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-trends"
+            "bls-library-support",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8199,12 +8205,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 引用 BLS 数据：43-4121.00 就业 2024 年约 84,500 人，2034 年约 78,900 人，下降约 7%。"
+              "BLS精确行2025年89,500人、2035年83,800人；下降6%。全国预测不是招聘数或个人机会。"
             ]
           },
           "id": "library-assistants-clerical.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-trends"
+            "bls-library-support",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8724,6 +8731,36 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/43-4121.00"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "精确43-4121：2025—2035预测与助理行业时薪；25-4031及合并组须分开。"
+                ],
+                "evidence_type": "official statistics and occupational guidance",
+                "id": "bls-library-support",
+                "limitation": "合并组不代填精确职业。",
+                "market": "美国",
+                "name": "BLS：图书馆技术员与助理（分职业行）",
+                "period": "2025年5月工资；2025—2035预测",
+                "publisher": "BLS",
+                "scope": "美国43-4121；相邻25-4031另列",
+                "url": "https://www.bls.gov/ooh/education-training-and-library/library-technicians-and-assistants.htm"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "隐私、知识产权、公平服务与私人利益；概括伦理框架，不能决定具体法律后果。"
+                ],
+                "evidence_type": "official primary guidance or statistics",
+                "id": "ala-ethics",
+                "limitation": "按所述职业与法域使用，不能设定中国资格。",
+                "market": "美国",
+                "name": "ALA职业伦理准则",
+                "period": "2026-10-11核对当前原页",
+                "publisher": "American Library Association",
+                "scope": "美国图书馆职业伦理",
+                "url": "https://www.ala.org/tools/ethics"
               }
             ]
           },
@@ -8912,7 +8949,7 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "可能减少检索与登记整理时间，不证明岗位结果",
+            "AI主要改变": "可测试检索与记录初稿整理；节时幅度未核实",
             "仍由人负责": "读者身份核对、借阅权限与登记责任",
             "方向": "流通与借还"
           },
@@ -9106,7 +9143,12 @@
         ],
         "task_rows": [
           {
-            "人的控制点": "核对读者身份与借阅权限。",
+            "人的控制点": {
+              "$item": "library-assistants-clerical.ai-impact.ai-impact-table.8",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
             "任务": "办理借还并登记读者",
             "工作方向": "流通与借还",
             "当前变化": {
@@ -9117,12 +9159,7 @@
             }
           },
           {
-            "人的控制点": {
-              "$item": "library-assistants-clerical.ai-impact.ai-impact-table.8",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "type": "prose"
-            },
+            "人的控制点": "核对实体书索书号、排架位置与顺序，异常交主管处理。",
             "任务": "按索书号上架与整理书架",
             "工作方向": "上架与整架",
             "当前变化": "可能辅助生成排架提示"
@@ -9280,7 +9317,7 @@
         "heading": "图书馆文书助理的工作对象与 AI 边界"
       },
       "career_path_block": {
-        "boundary": "入口学历、用工形式、编制与系统权限由具体机构与当地规定核验。",
+        "boundary": "能力阶段是准备建议；升技术员须补专科后专业准备，升馆员通常须补图书馆科学硕士，原岗位经历不自动授予新职责。",
         "competence_ladder": [
           {
             "description": "确认图书资料、读者信息、权限与馆内规则。",
@@ -9675,7 +9712,7 @@
           }
         ],
         "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
-        "evidence_scope": "依据 O*NET 43-4121.00 的任务与工作情境、BLS 统计以及图书馆流通与隐私通行要求；具体规则按机构与当地规定核对，不跨范围外推。",
+        "evidence_scope": "O*NET支持登记、流通与上架任务；ALA伦理准则支持读者隐私边界，法律责任由所在地法规与机构政策核对。",
         "heading": "图书馆文书助理的工作风险与边界",
         "risks": [
           {
@@ -9698,7 +9735,7 @@
             "affected_roles": "流通与读者服务岗位",
             "consequence": "不当披露会侵犯隐私并损害读者信任。",
             "evidence_refs": [
-              "library-assistants-clerical.display.source.3"
+              "library-assistants-clerical.display.source.2"
             ],
             "id": "risk-2",
             "mitigation": "按馆内隐私政策最小化收集、限制访问并保留处理记录。",
@@ -9746,11 +9783,12 @@
             "affected_roles": "流通与读者服务岗位",
             "consequence": "越权处理会改变责任边界并造成合规风险。",
             "evidence_refs": [
-              "library-assistants-clerical.display.source.2"
+              "library-assistants-clerical.display.source.2",
+              "library-assistants-clerical.display.source.3"
             ],
             "id": "risk-5",
-            "mitigation": "先确认授权链与隐私规则，超出范围时记录并升级。",
-            "scenario": "读者请求超出岗位权限或涉及个人信息时。",
+            "mitigation": "核对归还状态、登记及赔偿规则，保留证据，争议交有权限人员处理。",
+            "scenario": "发现资料损坏、遗失或赔偿争议，且处理超出岗位权限时。",
             "title": {
               "$item": "library-assistants-clerical.risk.career-risk-cards.5",
               "block": "risk",
@@ -9810,7 +9848,7 @@
           },
           {
             "href": {
-              "$source": "onet-cert",
+              "$source": "ala-ethics",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9818,13 +9856,13 @@
             },
             "id": "library-assistants-clerical.display.source.2",
             "label": {
-              "$source": "onet-cert",
+              "$source": "ala-ethics",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "library-assistants-clerical.source-register.published.1"
             },
-            "scope": "目录条目不是州执照、雇主授权或普遍要求的证明。"
+            "scope": "ALA隐私伦理框架；不替代具体法域法律。"
           },
           {
             "href": {
@@ -10019,7 +10057,7 @@
         "authority_sources": {
           "$join": [
             {
-              "$source": "ilo-ai",
+              "$source": "onet-wages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10027,12 +10065,13 @@
             },
             "｜",
             {
-              "$source": "ilo-ai",
+              "$source": "onet-wages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "library-assistants-clerical.source-register.published.1"
-            }
+            },
+            "；BLS OOH｜https://www.bls.gov/ooh/education-training-and-library/library-technicians-and-assistants.htm"
           ],
           "separator": ""
         },
@@ -10159,78 +10198,21 @@
           },
           {
             "指标": "就业 · 规模",
-            "数值": "84,500 人",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "library-assistants-clerical.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "library-assistants-clerical.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "89,500人（2025）",
+            "说明": "2025—2035美国43-4121；空缺含替代，不是新增或在招。"
           },
           {
             "指标": "就业 · 增长",
-            "数值": "约 −7%（约 −5,600 人）",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "library-assistants-clerical.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "library-assistants-clerical.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "−6%（减少5,700人）",
+            "说明": "2025—2035美国43-4121；空缺含替代，不是新增或在招。"
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "12,800 个/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "library-assistants-clerical.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-trends",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "library-assistants-clerical.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "12,300个/年",
+            "说明": "2025—2035美国43-4121；空缺含替代，不是新增或在招。"
           }
         ],
-        "boundary": "美国全国口径：工资为 BLS 2025 数据，就业与展望为 2024—2034 年预测；不含个人到手收入、起薪或资格结论。",
+        "boundary": "美国43-4121精确口径；2025年5月工资，2025—2035预测；不得与技术员合并组混用。",
         "direct_answer": {
           "$item": "library-assistants-clerical.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10243,7 +10225,7 @@
             "factor": "资格"
           },
           {
-            "answer": "多数岗位要求高中或大专学历并接受在职培训。",
+            "answer": "助理通常高中或同等学历加短期在职培训；技术员的专科后证书不可混为助理统一门槛。",
             "factor": "经验"
           },
           {
@@ -10257,7 +10239,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "约 −7%（2024—2034）",
+        "growth": "−6%（2025—2035）",
         "heading": {
           "$item": "library-assistants-clerical.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10273,27 +10255,27 @@
         "industry_period": "2025",
         "industry_rows": [
           {
-            "industry": "教育服务",
-            "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体分位为准。"
+            "industry": "教育服务（公私立）",
+            "median": "$18.40/小时",
+            "note": "2025年5月职业在该行业时薪中位数。"
           },
           {
-            "industry": "公共部门（含公共图书馆）",
-            "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体分位为准。"
+            "industry": "地方政府（除教育及医院）",
+            "median": "$17.60/小时",
+            "note": "同一期职业行业时薪中位数。"
           },
           {
-            "industry": "其他行业（含信息与文化服务）",
-            "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体分位为准。"
+            "industry": "搜索门户、图书馆及档案等信息服务",
+            "median": "$16.63/小时",
+            "note": "同一期职业行业时薪中位数。"
           },
           {
-            "industry": "行业口径说明",
-            "median": "见就业行",
-            "note": "以 O*NET/BLS 行业口径为准，不跨职业外推。"
+            "industry": "份额与工资不可混用",
+            "median": "政府64%，教育26%",
+            "note": "2025年O*NET行业就业份额；剩余10%未拆分，不是工资。"
           }
         ],
-        "industry_value_label": "该行业分布与口径说明",
+        "industry_value_label": "行业时薪中位数／就业口径",
         "interpretation_heading": {
           "$item": "library-assistants-clerical.us-salary.career-snapshot-secondary-locale.4",
           "block": "us-salary",
@@ -10306,11 +10288,11 @@
             "question": "工资"
           },
           {
-            "answer": "2024 年在岗人数，不是招聘职位数。",
+            "answer": "2025精确职业就业规模，不是招聘数。",
             "question": "就业"
           },
           {
-            "answer": "2024—2034 预测下降约 7%，不是个人录用概率。",
+            "answer": "2025—2035下降6%；不等于个人录用概率，也不证明AI因果。",
             "question": "展望"
           },
           {
@@ -10320,7 +10302,7 @@
         ],
         "median": "$36,910/年（2025）",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "2024—2034",
+        "outlook_period": "2025—2035",
         "wage_column_labels": [
           "统计位置",
           "年工资参考",
@@ -10431,7 +10413,7 @@
         "outlook_evidence": [
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
+            "horizon": "2025—2035",
             "interpretation": "就业规模、增长率与职位空缺必须分别解释。",
             "limitation": "不能作为个人就业保证。",
             "metric": "就业规模与增长",
@@ -10445,12 +10427,12 @@
           },
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
+            "horizon": "2025—2035",
             "interpretation": "含替代与新增需求，不等于在招岗位数。",
             "limitation": "不能作为个人录用概率。",
             "metric": "预计年均空缺",
             "occupation_scope": "Library Assistants, Clerical 43-4121.00",
-            "value": "12,800 个/年"
+            "value": "12,300个/年"
           },
           {
             "geography": "美国全国",
@@ -10627,7 +10609,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "职业活动描述与编辑试验建议",
             "id": "riasec",
             "label": "RIASEC",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10646,7 +10628,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "职业活动描述与编辑试验建议",
             "id": "big-five",
             "label": "大五人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10654,7 +10636,7 @@
               "可观察任务",
               "过程记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "O*NET风格不是大五测量；不能推导资格或表现。"
           },
           {
             "answer": {
@@ -10665,7 +10647,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "职业活动描述与编辑试验建议",
             "id": "mbti",
             "label": "MBTI",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10679,7 +10661,7 @@
             "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "职业活动描述与编辑试验建议",
             "id": "enneagram",
             "label": "九型人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10693,7 +10675,7 @@
             "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "职业活动描述与编辑试验建议",
             "id": "iq",
             "label": "认知能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10707,7 +10689,7 @@
             "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "职业活动描述与编辑试验建议",
             "id": "eq",
             "label": "情绪能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10786,7 +10768,7 @@
           },
           {
             "answer": "用借还记录、上架清单与检索答复让他人复核。",
-            "question": "你的产出入如何被复核？"
+            "question": "借还登记和上架结果如何让他人复核？"
           },
           {
             "answer": "只在授权与隐私规则内处理读者信息，不把工具输出当结论。",
@@ -11185,7 +11167,7 @@
             "item": "library-assistants-clerical.source-register.published.1"
           }
         },
-        "note": "来源范围、限制和统计时期按原始证据分别核对。来源使用说明：Generative AI and Jobs: A Refined Global Index of Occupational Exposure：支持任务级暴露、岗位转型与持续人工投入边界的判断。；全球暴露证据不等于采用率、裁员概率、法规或授权证据。；2025年城镇单位就业人员年平均工资情况：证明当前公开统计是行业聚合口径，未建立与精确职业对应的全国职业工资分布。；中文页面语言不证明该美国职业分类在中国大陆存在精确等价映射；不使用行业均值或美国数据填补。；National Certifications 43-4121.00 Library Assistants, Clerical：该职业当前的认证目录。；目录条目不是州执照、雇主授权或普遍要求的证明。；Library Assistants, Clerical detailed occupation profile：详细任务、工作情境、技能与工作风格。；雇主任务与所在地授权存在差异。；Hot Technologies 43-4121.00 Library Assistants, Clerical：与该职业关联的技术提及。；招聘提及不证明熟练度、采用率或自动化比例。；43-4121.00 Library Assistants, Clerical：精确身份、官方范围与相关职业。；美国职业证据；中国映射与授权需另行核对。；National Employment Trends 43-4121.00 Library Assistants, Clerical：职业页当前显示的就业与预测指标。；预测不是录用保证；上级数据不是精确职业人数。；National Wages 43-4121.00 Library Assistants, Clerical：职业页当前显示的工资指标。；精确数据不可得时保留上级或合并数据；分位不是起薪。；43-4121.00 - Library Assistants, Clerical：候选来源；制作人需重新打开并绑定已核阅主张：任务、技能、工作情境。；仅用于所述 O*NET 职业、美国市场与页面主题；不建立中国映射、中国工资或法律授权。；43-4121.00 - Library Assistants, Clerical：候选来源；制作人需重新打开并绑定已核阅主张：身份、流程、工作情境、适配、风险。；仅用于所述 O*NET 职业、美国市场与页面主题；不建立中国映射、中国工资或法律授权。；Hot Technologies: 43-4121.00 - Library Assistants, Clerical：候选来源；制作人需重新打开并绑定已核阅主张：技术与 AI 任务变化。；仅用于所述 O*NET 职业、美国市场与页面主题；不建立中国映射、中国工资或法律授权。；Industries: 43-4121.00 - Library Assistants, Clerical：候选来源；制作人需重新打开并绑定已核阅主张：工作场所与市场范围。；仅用于所述 O*NET 职业、美国市场与页面主题；不建立中国映射、中国工资或法律授权。；National Certifications: 43-4121.00 - Library Assistants, Clerical：候选来源；制作人需重新打开并绑定已核阅主张：资格边界。；仅用于所述 O*NET 职业、美国市场与页面主题；不建立中国映射、中国工资或法律授权。；National Training: 43-4121.00 - Library Assistants, Clerical：候选来源；制作人需重新打开并绑定已核阅主张：入行教育。；仅用于所述 O*NET 职业、美国市场与页面主题；不建立中国映射、中国工资或法律授权。；National Wages: 43-4121.00 - Library Assistants, Clerical：候选来源；制作人需重新打开并绑定已核阅主张：美国工资分布。；O*NET 展示 BLS OEWS 工资数据，保留所示时期、人群、地域与单位；直接访问 BLS 失败不影响已打开的 O*NET 页面。；43-4121.00 - Library Assistants, Clerical：候选来源；制作人需重新打开并绑定已核阅主张：身份、入行、前景。；仅用于所述 O*NET 职业、美国市场与页面主题；不建立中国映射、中国工资或法律授权。；"
+        "note": "2026-10-11核对：BLS OOH的43-4121精确就业行与助理行业时薪；O*NET全国工资行与12,300精确空缺。合并组只作边界说明。ILO为全球任务暴露，不证明本职业采用或裁员；ALA伦理支持隐私控制。保护字段及来源候选文案未越范围覆盖。"
       },
       "work_context_block": {
         "$item": "library-assistants-clerical.profile.work-context-block.5",
@@ -11363,7 +11345,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "借还与上架",
@@ -11414,7 +11396,7 @@
       "text": "图书馆文书助理职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "5826d7ef72d83c3937042243e6c18a7a991e8dff233614c5ef6b4bb12d8555c1",
+  "source_content_sha256": "ccaa7c41caa91143bb0a3b4662c9a519ec7d1cc2aaffbdc54944a42694a5e595",
   "subject": {
     "canonical_slug": "library-assistants-clerical",
     "name": "图书馆文书助理",

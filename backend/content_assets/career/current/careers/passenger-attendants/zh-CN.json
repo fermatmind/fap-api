@@ -25225,7 +25225,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不是本職采用、取代或个人风险，未预测开发采用时间表。"
+              "不是本职采用率、替代率或个人失业概率；论文不预测模型开发与采用时间表。"
             ]
           },
           "id": "passenger-attendants.ai-impact.ai-impact-table.45",
@@ -28381,7 +28381,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "自我提问素材，不给型号匹配或成功率。"
+              "自我提问素材，不给人格类型匹配或成功率。"
             ]
           },
           "id": "passenger-attendants.fit.personality-fit-block.15",
@@ -28410,7 +28410,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能把型号当培训或任职条件。"
+              "不能把人格类型当作培训或任职条件。"
             ]
           },
           "id": "passenger-attendants.fit.personality-fit-block.17",
@@ -28961,7 +28961,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型只作自省，未取得本职型号适配研究，不能凭型号选人。"
+              "九型只作自省，本页未取得针对乘客服务员的人格类型适配研究，不能凭类型选人。"
             ]
           },
           "id": "passenger-attendants.fit.personality-fit-block.54",
@@ -32343,7 +32343,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮独立核ONet53-6061任务及2025工资、BLS2025—2035精确总体、NBS2025条件行业与行业分类、个人信息法；中国精确全国工资缺口保。"
+              "资料包括O*NET 53-6061任务与2025工资、BLS 2025—2035精确职业预测、NBS 2025条件行业均值与行业分类、个人信息保护法；中国全国精确职业工资缺口仍保留。"
             ]
           },
           "id": "passenger-attendants.sources.source-card.2",
@@ -36029,7 +36029,7 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "us-industry-wage-finance-2025",
             "industry": {
               "$item": "passenger-attendants.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -36050,7 +36050,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "us-industry-wage-professional-2025",
             "industry": {
               "$item": "passenger-attendants.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -36071,7 +36071,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "us-industry-wage-localgov-2025",
             "industry": {
               "$item": "passenger-attendants.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -36092,7 +36092,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "us-industry-wage-education-2025",
             "industry": {
               "$item": "passenger-attendants.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -37970,8 +37970,8 @@
         "display_value": "未取得该细分行业同口径工资",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
-        "measure": "职业代码与身份",
-        "occupation_scope": "不从美国全国职业中位数推算行业工资",
+        "measure": "细分运输行业本职业工资未取得",
+        "occupation_scope": "美国Passenger Attendants / SOC53-6061；铁路与站点服务。未取得同口径行业工资，不从全国职业中位数推算。",
         "period": "截至 2026-09-26",
         "source_refs": [
           "onet"
@@ -37982,8 +37982,8 @@
         "display_value": "未取得该细分行业同口径工资",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
-        "measure": "职业代码与身份",
-        "occupation_scope": "不从美国全国职业中位数推算行业工资",
+        "measure": "细分运输行业本职业工资未取得",
+        "occupation_scope": "美国Passenger Attendants / SOC53-6061；道路旅客服务。未取得同口径行业工资，不从全国职业中位数推算。",
         "period": "截至 2026-09-26",
         "source_refs": [
           "onet"
@@ -37994,8 +37994,8 @@
         "display_value": "未取得该细分行业同口径工资",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
-        "measure": "职业代码与身份",
-        "occupation_scope": "不从美国全国职业中位数推算行业工资",
+        "measure": "细分运输行业本职业工资未取得",
+        "occupation_scope": "美国Passenger Attendants / SOC53-6061；水路旅客服务。未取得同口径行业工资，不从全国职业中位数推算。",
         "period": "截至 2026-09-26",
         "source_refs": [
           "onet"
@@ -38006,8 +38006,8 @@
         "display_value": "未取得该细分行业同口径工资",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
-        "measure": "职业代码与身份",
-        "occupation_scope": "不从美国全国职业中位数推算行业工资",
+        "measure": "细分运输行业本职业工资未取得",
+        "occupation_scope": "美国Passenger Attendants / SOC53-6061；其他客运雇主。未取得同口径行业工资，不从全国职业中位数推算。",
         "period": "截至 2026-09-26",
         "source_refs": [
           "onet"
@@ -38186,7 +38186,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 53-6061.00 · 乘客服务",
@@ -38237,7 +38237,7 @@
       "text": "乘客服务员：工作内容、工资与旅客安全职责"
     }
   },
-  "source_content_sha256": "67be6a63955f5f85ed0c450a7da17aa6f65a10bd5a3a8051e62b8da674241065",
+  "source_content_sha256": "858fb976c43109330145173053f353d004b6d727dc9e4a665376a11cb29d252e",
   "subject": {
     "canonical_slug": "passenger-attendants",
     "name": "乘客服务员",

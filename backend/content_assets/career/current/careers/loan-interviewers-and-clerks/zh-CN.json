@@ -7409,7 +7409,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "相邻职责边界：本页只覆盖贷款面谈员与文员；信贷专员（负责审批与信贷决策）、信用分析师、账务催收员与保险核保师属不同岗位，审批权限、资格与最终责任不得与本页互换。"
+              "相邻职责边界：本页对象是贷款面谈与文书处理，不把信贷专员、信用分析师或催收员整体并入。同一机构内具体任务可能重叠，实际审批、额度调整、放款和账户处理权限以岗位授权为准，不能仅凭职位名称判断。"
             ]
           },
           "id": "loan-interviewers-and-clerks.profile.definition-block.10",
@@ -7554,7 +7554,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "贷款跟踪、承保与办公软件可辅助整理资料、核对缺项、生成文件草稿和汇总数据，但申请人核实、文件与费用复核判断、审批提交与最终责任仍由从业者与授权人员承担。"
+              "编辑建议：可把资料整理、缺项检查、文件草稿与计算复核作为离线工具试验的候选任务。是否有效须用虚构样本验证；申请人信息、文件、费用与权限由责任人复核，不把贷款软件存在等同于生成式 AI 已采用。"
             ]
           },
           "id": "loan-interviewers-and-clerks.ai-impact.ai-impact-table.2",
@@ -7582,7 +7582,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不同环节受影响不同：资料整理、文件草稿与缺项检查更易自动化，但申请人核实、异常判断与需要授权的决定仍由人负责。"
+              "编辑任务拆分：资料整理、文件草稿与缺项检查可先做受控试验；本轮没有证明各环节自动化难度排序或实际采用效果。核实差异、复核计算和授权决定须保留人工责任。"
             ]
           },
           "id": "loan-interviewers-and-clerks.ai-impact.ai-impact-table.4",
@@ -7660,7 +7660,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开职业工资：国家统计局按行业门类发布城镇单位就业人员年平均工资，贷款与信贷岗位主要计入金融业，行业平均不能替代本职业工资。"
+              "中国大陆工资边界：本轮取得的国家统计局资料按行业门类发布城镇单位年平均工资，未建立本职业的精确工资对应。金融业可作宽行业参考，行业平均不能替代贷款面谈员与文员工资。"
             ]
           },
           "id": "loan-interviewers-and-clerks.china-salary.career-snapshot-primary-locale.1",
@@ -7741,7 +7741,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国全国口径下，该职业 2025 年年薪中位数为 50,020 美元（约 24.05 美元/小时），经 O*NET 展示的 2025 年 BLS OEWS 分位为第 10 至第 90 分位 37,330—69,770 美元；O*NET 引用 BLS 数据显示 2024 年就业约 177,600 人、2024—2034 年预计下降约 2%、2034 年约 173,500 人、年均职位空缺约 13,300 个。"
+              "美国全国口径：BLS 2025 OEWS 经 O*NET 展示的年薪中位数为 50,020 美元、小时中位数为 24.05 美元，第 10 至第 90 百分位为 37,330—69,770 美元。就业预测另为 2025 年 169,100 人、2035 年 165,000 人，2025—2035 年下降约 2%，年均职位空缺 10,500 个，包含增长与替补需求。"
             ]
           },
           "fact_refs": [
@@ -7778,7 +7778,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "怎样理解这些位置：第 10 分位约 37,330 美元、第 90 分位约 69,770 美元，说明同职业内部随资历、地区与雇主类型存在差异；分位不是新手或资深等级。"
+              "分布解释：第 10 百分位 37,330 美元、第 90 百分位 69,770 美元只说明美国全国该职业工资分布边界，不能分解资历、地区、学历或雇主因素的贡献，也不对应新手与资深等级。"
             ]
           },
           "fact_refs": [
@@ -7796,7 +7796,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布与局限：O*NET 显示本职业主要集中于金融与保险业（约 84%），其余为其他行业（约 16%）；行业分布是雇主场景信号，不是需求预测。"
+              "O*NET 2025 行业分布显示金融与保险业占 86%。这是本职业所在行业的就业份额，不是行业工资或未来招聘需求；未展示的细项不自行分配。"
             ]
           },
           "fact_refs": [
@@ -7813,7 +7813,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "规模与口径提示：本职业就业规模较大（约 177,600 人）但预计小幅下降，引用时须标明年份、地域与覆盖范围，且分位与增长率不能跨市场拼接。"
+              "就业统计与工资分开：2025 年就业 169,100 人，2025—2035 年预计下降约 2%；年均空缺仍包含人员替补。预测不说明个人录用机会，不能作为 AI 导致减少的证据。"
             ]
           },
           "fact_refs": [
@@ -7923,7 +7923,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "大五等通用人格量表不提供本职业的岗位证据，只能用于自我反思；应结合真实文书处理、客户沟通与复核体验继续核对。"
+              "证据不足：本轮未取得针对贷款面谈员与文员的大五预测效度或与其他工具比较的研究。人格量表只作自我反思；通过虚构申请材料核对、客户沟通与计算复核来观察行为。"
             ]
           },
           "id": "loan-interviewers-and-clerks.fit.riasec-fit-block.7",
@@ -8052,7 +8052,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国侧该职业通常从文员或在职训练起步，常见起点为高中文凭或同等学历，也有相当比例受访者持学士学位；O*NET 将本职业列为 Job Zone 3（中等准备），通常包含 1—2 年培训与在职经验；教育与训练要求按雇主与岗位核对。"
+              "O*NET 的学历问题询问受访者认为新入职者需要何种教育：43% 选择高中或同等学历、38% 选择学士、12% 选择高中后证书，并非在岗人员已取得学历的分布。Job Zone 3 是职业准备分组，不能将分组说明换算为本职业固定 1—2 年入职培训。目标岗位要求须单独核验。"
             ]
           },
           "id": "loan-interviewers-and-clerks.path.career-path-block.2",
@@ -8066,12 +8066,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国：以在职训练与雇主培训为常见路径，相关认证不等于许可或授权。中国大陆：无与该 O*NET 精确对应的统一职业资格，岗位多按雇主与金融机构要求确定，须分别核对。"
+              "美国：住宅抵押贷款处理的许可判断须区分实际活动、雇员与独立承包人；CFPB Regulation H 附录 C 列明部分独立承包处理或承保活动涉及州贷款发起人许可，不能按“文员”名称豁免。中国大陆：证据不足，尚未建立本职业与具体岗位准入、机构合规及授权要求的精确对应，不能断言无统一资格。"
             ]
           },
           "id": "loan-interviewers-and-clerks.path.career-path-block.3",
           "source_refs": [
-            "onet-education"
+            "onet-education",
+            "cfpb-processor-license"
           ],
           "type": "prose"
         },
@@ -8136,7 +8137,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "向更高责任过渡：积累经验后可负责更复杂的申请与结清流程、带教新人，或转向信贷审批、信用分析、催收或运营质量方向。"
+              "编辑路径示例：可在已有受理、核实与复核证据基础上申请复杂文件处理或带教职责；信贷审批、信用分析、催收和运营质量是另行评估的目标岗位，须补足专业知识、合规与授权，不构成必经晋升顺序。"
             ]
           },
           "id": "loan-interviewers-and-clerks.path.career-path-block.8",
@@ -8172,7 +8173,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 O*NET 引用 BLS 数据：该职业 2024 年就业约 177,600 人，2024—2034 年预计下降约 2%，2034 年约 173,500 人，年均职位空缺约 13,300 个；这是职业统计，不是个人录用概率，也不同于招聘样本。"
+              "美国 O*NET 引用 BLS：2025 年就业 169,100 人，2035 年预计 165,000 人，2025—2035 年下降约 2%，年均空缺 10,500 个（增长与替补）。这是职业预测，不是当前招聘样本或个人录用概率。"
             ]
           },
           "id": "loan-interviewers-and-clerks.market-signals.market-signal-card.2",
@@ -8186,7 +8187,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 显示本职业主要集中于金融与保险业（约 84%）；就业与空缺为统计预测，须与个人机会分开解释。"
+              "O*NET 2025 年行业分布中金融与保险业占 86%；这是雇主场景信号，不能据此推断地区岗位需求或个人机会。"
             ]
           },
           "id": "loan-interviewers-and-clerks.market-signals.market-signal-card.3",
@@ -8652,6 +8653,21 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "美国许可按活动与身份区分，不由文员名称决定"
+                ],
+                "evidence_type": "official regulation",
+                "id": "cfpb-processor-license",
+                "limitation": "不能外推中国资格；需结合实际活动、身份和适用州规定",
+                "market": "美国",
+                "name": "CFPB Regulation H Appendix C：贷款处理与承保许可活动",
+                "period": "当前条文，2026-10-11查阅",
+                "publisher": "Consumer Financial Protection Bureau",
+                "scope": "美国住宅抵押贷款处理与承保活动的州许可边界",
+                "url": "https://www.consumerfinance.gov/rules-policy/regulations/1008/c/"
               }
             ]
           },
@@ -8840,12 +8856,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "资料整理与缺项检查",
+            "AI主要改变": "待验证候选：资料整理与缺项检查",
             "仍由人负责": "申请人核实与合规判断",
             "方向": "受理与资料管理"
           },
           {
-            "AI主要改变": "草稿生成与检索复盘",
+            "AI主要改变": "待验证候选：草稿生成与记录检索",
             "仍由人负责": "文件与费用复核",
             "方向": "文件与记录管理"
           }
@@ -8879,7 +8895,7 @@
           {
             "使用限制": "不替代所在地授权与合规要求。",
             "来源": {
-              "$source": "onet-context",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -8888,7 +8904,7 @@
             "研究对象": "43-4131.00 的任务与工作情境",
             "结论": "支持任务拆分，不支持 AI 采用率",
             "链接": {
-              "$source": "onet-context",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8905,7 +8921,7 @@
               "item": "loan-interviewers-and-clerks.source-register.published.1"
             },
             "研究对象": "美国精确职业就业预测",
-            "结论": "支持规模与增长判断",
+            "结论": "支持 2025—2035 职业就业预测；不证明 AI 因果影响",
             "链接": {
               "$source": "onet-trends",
               "block": "source-register",
@@ -8955,7 +8971,7 @@
             "问题": "AI 会取代贷款面谈员与文员吗？"
           },
           {
-            "回答": "目前只写到可辅助的资料整理、缺项检查与草稿生成，核实与复核判断仍由人承担。",
+            "回答": "编辑候选是资料整理、缺项检查与草稿生成；技术提及不证明 AI 功能、先后顺序或机构采用。",
             "来源": {
               "$source": "onet-hot",
               "block": "source-register",
@@ -8970,10 +8986,10 @@
               "field": "url",
               "item": "loan-interviewers-and-clerks.source-register.published.1"
             },
-            "问题": "数字化工具会先影响哪个环节？"
+            "问题": "数字化工具可在哪些环节做受控试验？"
           },
           {
-            "回答": "没有职业级采用率来源，本页不提供这类数字。",
+            "回答": "证据不足：本轮未取得该职业 AI 采用率、节省工时或岗位因果结果研究。",
             "来源": {
               "$source": "onet-details",
               "block": "source-register",
@@ -9203,12 +9219,12 @@
       },
       "career_ai_description_block": {
         "body": [
-          "贷款跟踪、承保与办公软件可辅助整理资料、检查缺项与生成草稿，但申请人核实、文件与费用复核、审批提交与最终责任仍由从业者与授权人员承担。"
+          "编辑建议：可把资料整理、缺项检查、文件草稿与计算复核作为离线工具试验的候选任务。是否有效须用虚构样本验证；申请人信息、文件、费用与权限由责任人复核，不把贷款软件存在等同于生成式 AI 已采用。"
         ],
         "heading": "贷款面谈员与文员的工作对象与 AI 边界"
       },
       "career_path_block": {
-        "boundary": "资质、认证与审批权限由具体法域、金融机构与雇主核验；认证不等于审批授权。",
+        "boundary": "三条路线为编辑比较示例，阶段不是固定晋升顺序。信贷审批、分析与催收需独立核岗位知识、许可、机构授权和任用条件。",
         "competence_ladder": [
           {
             "description": "确认申请人身份、材料清单与计算口径。",
@@ -9603,14 +9619,14 @@
           }
         ],
         "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
-        "evidence_scope": "依据 O*NET 43-4131.00 的任务与工作情境，以及贷款受理、资料核实与文件复核中的准确性、保密与合规要求；具体规则按雇主、金融机构与所在地核对，审批与授权按适用法域确认，不跨范围外推。",
+        "evidence_scope": "依据 O*NET 的贷款资料核实、计算、文件处理与沟通任务提出的编辑风险情境；并非事故率、法定隐私义务或许可清单。具体信息访问与处理要求须由机构合规规则确认。",
         "heading": "贷款面谈员与文员的工作风险与边界",
         "risks": [
           {
             "affected_roles": "受理与资料核实岗位",
             "consequence": "可能导致错误申请、审批延误或合规问题。",
             "evidence_refs": [
-              "onet-tasks"
+              "loan-interviewers-and-clerks.display.source.onet-tasks"
             ],
             "id": "risk-1",
             "mitigation": "按清单核对材料并向信用机构等来源核实，差异未澄清前不推进。",
@@ -9626,7 +9642,7 @@
             "affected_roles": "文件与费用复核岗位",
             "consequence": "可能导致结清金额错误或客户争议。",
             "evidence_refs": [
-              "onet-tasks"
+              "loan-interviewers-and-clerks.display.source.onet-tasks"
             ],
             "id": "risk-2",
             "mitigation": "按口径复核计算并保留复核记录，异常提交上级确认。",
@@ -9642,7 +9658,7 @@
             "affected_roles": "受理与流程推进岗位",
             "consequence": "可能越权处理并改变责任边界。",
             "evidence_refs": [
-              "onet-details"
+              "loan-interviewers-and-clerks.display.source.onet-details"
             ],
             "id": "risk-3",
             "mitigation": "按岗位权限提交审批，超出权限即停止并升级。",
@@ -9658,7 +9674,7 @@
             "affected_roles": "全体受理与文员岗位",
             "consequence": "可能造成隐私与合规风险。",
             "evidence_refs": [
-              "onet-context"
+              "loan-interviewers-and-clerks.display.source.onet-context"
             ],
             "id": "risk-4",
             "mitigation": "按权限访问、遵守保密要求并保留访问记录。",
@@ -9674,7 +9690,7 @@
             "affected_roles": "记录与账款跟进岗位",
             "consequence": "可能影响账户状态与后续处理。",
             "evidence_refs": [
-              "onet-summary"
+              "loan-interviewers-and-clerks.display.source.onet-summary"
             ],
             "id": "risk-5",
             "mitigation": "按周期更新记录并跟进，异常移交有责任的人员。",
@@ -9690,7 +9706,7 @@
             "affected_roles": "受理与复核协同岗位",
             "consequence": "可能导致资料、计算或权限判断与事实不符。",
             "evidence_refs": [
-              "onet-details"
+              "loan-interviewers-and-clerks.display.source.onet-details"
             ],
             "id": "risk-6",
             "mitigation": "以申请材料与口径核实为准，保留人工复核与升级记录。",
@@ -9780,7 +9796,7 @@
             {
               "指标": "中国大陆职业工资",
               "数值": "证据不足：未单列",
-              "说明": "国家统计局按行业门类发布，未单列本职业工资。"
+              "说明": "本轮国家统计局行业资料未建立本职业单列对应；不表示所有公开渠道均无数据。"
             },
             {
               "指标": "中国大陆行业代理",
@@ -9867,7 +9883,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国大陆无本职业单列工资；下列为行业代理，不是起薪、中位数或到手收入。",
+          "china_open": "证据不足：本轮未建立本职业单列工资对应；下列为行业年平均工资代理，不是起薪、中位数或到手收入。",
           "china_ref": {
             "$join": [
               {
@@ -10087,7 +10103,7 @@
           },
           {
             "指标": "就业 · 规模",
-            "数值": "177,600 人（2024）",
+            "数值": "169,100 人（2025）",
             "说明": {
               "$join": [
                 {
@@ -10111,7 +10127,7 @@
           },
           {
             "指标": "就业 · 增长",
-            "数值": "约 -2%（2024—2034）",
+            "数值": "-2%（2025—2035）",
             "说明": {
               "$join": [
                 {
@@ -10135,7 +10151,7 @@
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "约 13,300 个/年（2024—2034 年均）",
+            "数值": "10,500 个/年（2025—2035，增长与替补）",
             "说明": {
               "$join": [
                 {
@@ -10158,7 +10174,7 @@
             }
           }
         ],
-        "boundary": "美国全国口径：工资为 BLS 2025 年 OEWS 数据，就业与展望为 2024—2034 年预测；不含个人到手收入、起薪或授权结论。",
+        "boundary": "美国全国：工资为 2025 OEWS；就业与预测为 2025—2035。工资分布、行业就业份额与预测空缺分别解释。",
         "direct_answer": {
           "$item": "loan-interviewers-and-clerks.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10171,7 +10187,7 @@
             "factor": "资格"
           },
           {
-            "answer": "多从文员或在职训练起步；文件与数据核对经验与合规记录比学历更常被参考。",
+            "answer": "编辑求职建议：展示文件、数据核对与合规记录，同时核对雇主学历及经验要求；本轮没有证明经验与学历的相对录用权重。",
             "factor": "经验"
           },
           {
@@ -10185,7 +10201,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "约 -2%（下降，2024—2034）",
+        "growth": "-2%（2025—2035）",
         "heading": {
           "$item": "loan-interviewers-and-clerks.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10198,27 +10214,27 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024",
+        "industry_period": "2025",
         "industry_rows": [
           {
             "industry": "金融与保险业",
             "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体分位为准。"
+            "note": "证据不足：本轮未取得本职业与该行业对应的工资子表；整体工资分位不能冒充分行业中位数。"
           },
           {
             "industry": "其他行业（含企业管理）",
             "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体分位为准。"
+            "note": "证据不足：本轮未取得本职业与该行业对应的工资子表；整体工资分位不能冒充分行业中位数。"
           },
           {
             "industry": "行业口径说明一",
             "median": "见就业行",
-            "note": "以 O*NET/BLS 行业口径为准，不跨职业外推。"
+            "note": "证据不足：本轮未取得本职业与该行业对应的工资子表；整体工资分位不能冒充分行业中位数。"
           },
           {
             "industry": "行业口径说明二",
             "median": "见就业行",
-            "note": "就业规模较大但预计小幅下降，不得跨地区外推。"
+            "note": "证据不足：本轮未取得本职业与该行业对应的工资子表；整体工资分位不能冒充分行业中位数。"
           }
         ],
         "industry_value_label": "行业值",
@@ -10234,11 +10250,11 @@
             "question": "工资"
           },
           {
-            "answer": "2024 年在岗人数，不是招聘职位数。",
+            "answer": "2025 年就业人数，不是即时招聘职位数。",
             "question": "就业"
           },
           {
-            "answer": "2024—2034 预测下降约 2%，不是个人录用概率。",
+            "answer": "2025—2035 年预测下降约 2%，不是个人录用概率或 AI 因果结果。",
             "question": "展望"
           },
           {
@@ -10248,7 +10264,7 @@
         ],
         "median": "$50,020/年（2025）",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "2024—2034",
+        "outlook_period": "2025—2035",
         "wage_column_labels": [
           "分位",
           "年度参考",
@@ -10265,7 +10281,7 @@
           {
             "equivalent": "$17.95/小时",
             "interpretation": "第 10 分位边界，不是个人报价。",
-            "label": "最低 10%",
+            "label": "第10百分位",
             "value": "$37,330/年"
           },
           {
@@ -10277,7 +10293,7 @@
           {
             "equivalent": "$33.55/小时",
             "interpretation": "第 90 分位边界，不是个人报价。",
-            "label": "最高 90%",
+            "label": "第90百分位",
             "value": "$69,770/年"
           }
         ]
@@ -10359,7 +10375,7 @@
         "outlook_evidence": [
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
+            "horizon": "2025—2035",
             "interpretation": "就业规模、增长率与职位空缺必须分别解释。",
             "limitation": "不能作为个人就业保证。",
             "metric": "就业规模与增长",
@@ -10373,12 +10389,12 @@
           },
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
+            "horizon": "2025—2035",
             "interpretation": "含替代与新增需求，不等于在招岗位数。",
             "limitation": "不能作为个人录用概率。",
             "metric": "年均职位空缺",
             "occupation_scope": "O*NET 43-4131.00（美国全国）",
-            "value": "约 13,300 个/年"
+            "value": "10,500 个/年（增长与替补）"
           },
           {
             "geography": "美国全国",
@@ -11011,7 +11027,7 @@
             "item": "loan-interviewers-and-clerks.source-register.published.1"
           }
         },
-        "note": "来源范围、限制和统计时期按原始证据分别核对。来源使用说明：O*NET 43-4131.00 贷款面谈员与文员（摘要）：提供 43-4131.00 的职业身份、任务、兴趣代码、教育与相关职业。；摘要与详细档案需合并解释。；O*NET 43-4131.00（详细档案）：提供 43-4131.00 的任务、工作活动、工作情境、技能与工具技术细节。；任务与所在地授权存在差异。；O*NET 43-4131.00 任务（Tasks）：提供受理申请、资料核实、文件复核、结清与记录等任务清单。；任务样本不代表每个岗位执行全部任务。；O*NET 43-4131.00 工作情境（Work Context）：描述准确性要求、与外部客户接触、决策频率与室内办公等情境。；美国工作情境不替代中国法规与雇主规程。；O*NET 43-4131.00 全国工资（BLS OEWS 展示）：2025 BLS OEWS 分位与中位工资（美国全国）。；分位不是起薪；保留所示时期、人群与单位。；O*NET 43-4131.00 全国就业趋势：43-4131.00 的就业规模与 2024—2034 年预测与年均职位空缺。；预测不是录用保证。；Hot Technologies: 43-4131.00：与该职业关联的技术与软件提及（如贷款跟踪、承保与办公软件）。；招聘提及不证明熟练度、采用率或自动化比例。；Industries: 43-4131.00：43-4131.00 的行业分布（金融与保险业约 84%，其他行业约 16%）。；行业分布是雇主场景信号，不是增长或需求预测。；O*NET 43-4131.00 教育与职业准备：受访者教育水平分布与 Job Zone 3（中等准备）。；教育分布不等于每个雇主的硬性要求。；2025年城镇单位就业人员年平均工资情况：提供城镇非私营与私营单位分行业门类年平均工资，用于核对中国工资公开口径。；行业平均不是职业中位数，且不含个体工商户与自由职业者。；企业薪酬调查信息（2024年）：人力资源和社会保障部企业薪酬调查信息，按职业/岗位分类的薪酬查询入口。；覆盖城镇企业，不含机关事业单位；本页未取得与 43-4131.00 精确对应的条目。；FermatMind 贷款面谈员与文员任务影响量表：整理可辅助任务与人工控制点，用于任务级 AI 与适配讨论。；编辑量表不等于采用率、裁员、法规或证照证据。；"
+        "note": "本轮核对 O*NET 43-4131.00：工资 2025 OEWS；就业 2025—2035 为 169,100→165,000、-2%、年均空缺 10,500；行业 2025 金融保险 86%。Education 是受访者对新入职者所需教育的回答，不是在岗学历分布。国家统计局 2025 金融业平均工资仅作代理。CFPB 附录 C 仅用于美国住宅抵押贷款活动与身份的许可边界。原共享来源与事实被受保护 FAQ/hero 引用，未改其旧时期与学历表述；本轮模块采用上述当前口径，跨模块冲突待独立复核。AI、人格预测、中国精确工资与准入仍有明确缺口。"
       },
       "work_context_block": {
         "$item": "loan-interviewers-and-clerks.profile.work-context-block.5",
@@ -11201,7 +11217,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "贷款申请受理",
@@ -11252,7 +11268,7 @@
       "text": "贷款面谈员与文员职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "052db64dec2ed34f5ee94b8a1206b9188b432dfe54437932aa72c74b67c425f2",
+  "source_content_sha256": "fc52149dc678a5bdd3fa905d11dd45c8a567224eb7c5f15e4ab06dbb16941ec6",
   "subject": {
     "canonical_slug": "loan-interviewers-and-clerks",
     "name": "贷款面谈员与文员",

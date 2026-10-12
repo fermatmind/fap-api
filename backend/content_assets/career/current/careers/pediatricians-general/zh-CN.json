@@ -31879,7 +31879,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮资料核读2026-10-02；保留2026-09-26编辑的虚构甲乙题面。中国精确工资和完整报价缺口见前述说明，来源登记区分美国培养、单院招聘例和法域条件。"
+              "本轮2026-10-12核读O*NET任务与工资、BLS精确预测及福建2026单院方案；保留原虚构甲乙题面。中国精确工资、完整报价及本职AI临床效果资料仍缺；ACGME2026儿科PDF具体培养月数及NBS分类PDF原文本轮未能取得，不能将历史核读冒充本轮确认。"
             ]
           },
           "id": "pediatricians-general.sources.source-card.3",
@@ -35518,7 +35518,7 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "us-industry-wage-finance-2025",
             "industry": {
               "$item": "pediatricians-general.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -35539,7 +35539,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "us-industry-wage-professional-2025",
             "industry": {
               "$item": "pediatricians-general.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -35560,7 +35560,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "us-industry-wage-localgov-2025",
             "industry": {
               "$item": "pediatricians-general.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -35581,7 +35581,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "us-industry-wage-education-2025",
             "industry": {
               "$item": "pediatricians-general.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -37458,8 +37458,8 @@
         "display_value": "证据不足：未核得本职业该行业2025年独立工资。",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
-        "measure": "本职业该行业工资待核",
-        "occupation_scope": "美国普通儿科医生，SOC 29-1221 / O*NET 29-1221.00",
+        "measure": "本职业在医院和其他医疗机构的行业工资待核",
+        "occupation_scope": "美国普通儿科医生，SOC 29-1221 / O*NET 29-1221.00；医院和其他医疗机构交叉工资未核得",
         "period": "2025年5月工资；2025就业及2025—2035预测",
         "source_refs": [
           "bls"
@@ -37470,8 +37470,8 @@
         "display_value": "证据不足：未核得本职业该行业2025年独立工资。",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
-        "measure": "本职业该行业工资待核",
-        "occupation_scope": "美国普通儿科医生，SOC 29-1221 / O*NET 29-1221.00",
+        "measure": "本职业在医师诊所的行业工资待核",
+        "occupation_scope": "美国普通儿科医生，SOC 29-1221 / O*NET 29-1221.00；医师诊所交叉工资未核得",
         "period": "2025年5月工资；2025就业及2025—2035预测",
         "source_refs": [
           "bls"
@@ -37482,8 +37482,8 @@
         "display_value": "证据不足：未核得本职业该行业2025年独立工资。",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
-        "measure": "本职业该行业工资待核",
-        "occupation_scope": "美国普通儿科医生，SOC 29-1221 / O*NET 29-1221.00",
+        "measure": "本职业在高等教育与教学医院的行业工资待核",
+        "occupation_scope": "美国普通儿科医生，SOC 29-1221 / O*NET 29-1221.00；高等教育与教学医院交叉工资未核得",
         "period": "2025年5月工资；2025就业及2025—2035预测",
         "source_refs": [
           "bls"
@@ -37494,8 +37494,8 @@
         "display_value": "证据不足：未核得本职业该行业2025年独立工资。",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
-        "measure": "本职业该行业工资待核",
-        "occupation_scope": "美国普通儿科医生，SOC 29-1221 / O*NET 29-1221.00",
+        "measure": "本职业在其他医疗服务机构的行业工资待核",
+        "occupation_scope": "美国普通儿科医生，SOC 29-1221 / O*NET 29-1221.00；其他医疗服务机构交叉工资未核得",
         "period": "2025年5月工资；2025就业及2025—2035预测",
         "source_refs": [
           "bls"
@@ -37604,7 +37604,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "儿童常见病·生长发育",
@@ -37655,7 +37655,7 @@
       "text": "儿科医生"
     }
   },
-  "source_content_sha256": "02e2ae4260812eb7e70bbc8e184aa7bc1bd868384281e525782c7ce90e407272",
+  "source_content_sha256": "fc4afa9d5f5999b63351bf3a95879868a20b2fa20d9686199a09605a5a51c57b",
   "subject": {
     "canonical_slug": "pediatricians-general",
     "name": "普通儿科医生",

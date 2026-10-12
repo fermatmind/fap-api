@@ -27150,7 +27150,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "；证据不足：本轮无完整石匠雇主公告，不能给实际报价，不能以全国参照或美国工资补岗位待遇。"
+              "证据不足：本轮无完整石匠雇主公告，不能给实际报价，不能以全国参照或美国工资补岗位待遇。"
             ]
           },
           "id": "stonemasons.display.career_snapshot_primary_locale.quote-limits",
@@ -29944,7 +29944,7 @@
             "paragraphs": [
               "学习记录、技能等级、施工培训与设备或高处权限用途不同，不能用纸面布局证明实际施工资格。",
               "美国EP石匠典型学历为高中或同等、培训为学徒制；O*NET新入职画像与典型分类也不是中国统一门槛。",
-              "证据不足：本轮官方检索未核齐石匠对应中国地区、个人与具体任务的现行准入和办理条件，不宣称全国统一证书。",
+              "正式砌筑工2023年版标准已核，相关职业含石工；技能评价标准与法定准入用途不同。证据不足：尚未核齐个人现行申请、当地任务和设备对应的办理条件，不宣称全国统一石匠证。",
               "真实图样、施工变更与安全条件交指定专业负责人；不依据生成文字自行施工、改结构或放行。"
             ]
           },
@@ -29952,7 +29952,8 @@
           "source_refs": [
             "cn-policy",
             "bls-ors",
-            "bls-ooh"
+            "bls-ooh",
+            "masonry-standard-2023"
           ],
           "title": "训练、身份与合同边界",
           "type": "notice"
@@ -29976,12 +29977,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未核齐中国石匠各地区和任务对应的现行入行条件，不把美国学徒分类或征求意见材料当统一准入。"
+              "已核正式《砌筑工国家职业标准（2023年版）》：2023-03-30公布，职业6-29-01-01涉及块体砌筑、屋面挂瓦和块材饰面粘贴，设置五级至一级技能等级，相关职业列石工。它是训练和技能评价依据，不等于所有石匠岗位的统一法定准入证；中国任务工种映射、个人现行申报及当地设备高处权限仍需具体核对，不套美国学徒制度。"
             ]
           },
           "id": "stonemasons.path.career-path-block.2",
           "source_refs": [
-            "editorial"
+            "masonry-standard-2023"
           ],
           "type": "prose"
         },
@@ -31956,7 +31957,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET石匠任务与BLS47-2022独立统计沿原范围；本轮复核BLS整体预测，新增NBS2025建筑业两单位税前年均背景，非石匠职业工资。OSHA和CDC危害、ILO摘要与NIST框架沿原读取范围；编辑练习独立标明，暂无完整雇主公告。"
+              "本轮核O*NET石匠任务及R兴趣、BLS47-2022独立工资和预测，合并砌筑工行业工资不用作石匠。NBS2025建筑业两单位税前年均仅雇主行业背景；OSHA建筑硅尘/脚手架与CDC危害保美国法域。ILO潜在暴露与NIST自愿框架不能证明本职AI采用，八转岗任务分别核；有界官方招聘未得三条精确完整石匠报价，编辑练习不招聘证据。"
             ]
           },
           "id": "stonemasons.display.source_card.source",
@@ -31970,7 +31971,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-09-30初读制作；2026-10-02复核BLS石匠独立预测及NBS建筑业工资，其余来源沿原日期范围未重全文研究；来源期间分别列示。"
+              "2026-10-12仅核本次九模块及相关引用；共享来源和未选内容保各自原日期。统计期间、法域、资料访问及本职业缺口分别标记，不表示全页重新制作。"
             ]
           },
           "id": "stonemasons.display.source_card.updated-at",
@@ -32556,6 +32557,22 @@
                 "publisher": "FermatMind editorial",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-10-12",
+                "details": [
+                  "正式标准6-29-01-01，面向块体砌筑、屋面挂瓦、块材饰面粘贴；设五级至一级技能等级。",
+                  "相关职业列石工等，不能据此把美国Stonemasons自动认定为中国同一工种或统一法定许可。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "masonry-standard-2023",
+                "limitation": "技能训练评价依据与全部岗位法定准入不同；个人现行申请条件、当地评价及设备高处权限另核，不由历史标准推所有岗位办证。",
+                "market": "中国砌筑工技能评价",
+                "name": "砌筑工国家职业标准（2023年版）",
+                "period": "2023-03-30公布；2023年版",
+                "publisher": "人力资源社会保障部、住房和城乡建设部",
+                "scope": "contextual",
+                "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/rcrs_4225/jnrc/zyyjnpj/202304/W020230414729511788159.pdf"
               }
             ]
           },
@@ -35016,7 +35033,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "sag",
+              "employer",
               "sag-moa"
             ],
             "id": "image-use",
@@ -35053,8 +35070,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "ratify",
-              "onet"
+              "cn-rule",
+              "bls"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -35126,8 +35143,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "editorial"
+              "bls",
+              "ooh"
             ],
             "id": "identity-procedure",
             "mitigation": {
@@ -35164,7 +35181,7 @@
             },
             "evidence_refs": [
               "nist",
-              "editorial"
+              "bls"
             ],
             "id": "project-data",
             "mitigation": {
@@ -35200,8 +35217,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "editorial",
-              "onet"
+              "ooh",
+              "bls"
             ],
             "id": "audition-feedback",
             "mitigation": {
@@ -35339,6 +35356,54 @@
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$source": "oews",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "stonemasons.source-register.published.1"
+            },
+            "id": "oews",
+            "label": {
+              "$source": "oews",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "stonemasons.source-register.published.1"
+            },
+            "scope": {
+              "$source": "oews",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "limitation",
+              "item": "stonemasons.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "stonemasons.source-register.published.1"
+            },
+            "id": "ooh",
+            "label": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "stonemasons.source-register.published.1"
+            },
+            "scope": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "limitation",
+              "item": "stonemasons.source-register.published.1"
             }
           }
         ]
@@ -35596,7 +35661,7 @@
         },
         "bls_table": [
           {
-            "fact_ref": "low",
+            "fact_ref": "us-p10-2025",
             "指标": "薪资 · 年度P10",
             "数值": {
               "$fact": "us-p10-2025",
@@ -35610,7 +35675,7 @@
             "说明": "全国P25；对应小时21.85，直接读取年度发布值。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "us-median-2025",
             "指标": "薪资 · 年度中位数P50",
             "数值": {
               "$fact": "us-median-2025",
@@ -35624,7 +35689,7 @@
             "说明": "全国P75；对应小时34.44，不作年限等级。"
           },
           {
-            "fact_ref": "high",
+            "fact_ref": "us-p90-2025",
             "指标": "薪资 · 年度P90",
             "数值": {
               "$fact": "us-p90-2025",
@@ -35633,7 +35698,7 @@
             "说明": "全国年度86,180；对应小时41.43，不保证个人达到。"
           },
           {
-            "fact_ref": "employment",
+            "fact_ref": "us-employment-2024",
             "指标": "2025就业基数",
             "数值": {
               "$fact": "us-employment-2024",
@@ -35642,7 +35707,7 @@
             "说明": "EP9.3千→9300人；2035预测8.8千→8800人。"
           },
           {
-            "fact_ref": "growth",
+            "fact_ref": "us-growth-2024-2034",
             "指标": "2025–2035就业变化",
             "数值": {
               "$fact": "us-growth-2024-2034",
@@ -35651,7 +35716,7 @@
             "说明": "EP−5.4%，净减500；OOH−5%是四舍五入，合并+1%另范围。"
           },
           {
-            "fact_ref": "openings",
+            "fact_ref": "us-openings-2024-2034",
             "指标": "2025–2035 就业 · 年均空缺",
             "数值": {
               "$fact": "us-openings-2024-2034",
@@ -35737,7 +35802,7 @@
         "industry_period": "2025年5月",
         "industry_rows": [
           {
-            "fact_ref": "industry-theater",
+            "fact_ref": "industry-primary",
             "industry": "全国与行业不能混用",
             "median": {
               "$fact": "industry-primary",
@@ -35751,7 +35816,7 @@
             }
           },
           {
-            "fact_ref": "industry-education",
+            "fact_ref": "industry-secondary",
             "industry": "合并砌筑工行业表不代石匠",
             "median": {
               "$fact": "industry-secondary",
@@ -35765,7 +35830,7 @@
             }
           },
           {
-            "fact_ref": "industry-amusement",
+            "fact_ref": "industry-tertiary",
             "industry": "未核齐行业分位与计酬口径",
             "median": {
               "$fact": "industry-tertiary",
@@ -37984,7 +38049,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "石结构与现场安装",
@@ -38035,7 +38100,7 @@
       "text": "石匠"
     }
   },
-  "source_content_sha256": "9aa0bef86447c112386d946933bdbb3c5c80a9b4403bd3de84e3e29f93719945",
+  "source_content_sha256": "9e0eda26471daa254acfc16624a878dcbd596337cd8a128969df5f9453adb858",
   "subject": {
     "canonical_slug": "stonemasons",
     "name": "石匠",

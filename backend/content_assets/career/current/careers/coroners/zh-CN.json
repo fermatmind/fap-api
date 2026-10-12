@@ -7297,7 +7297,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "真实产出可能包括死亡调查案卷、死亡证明相关认定、现场与证据记录、家属沟通和跨机构转介；具体权限依法域。"
+              "美国O*NET 13-1041.06描述指导意外、暴力或原因不明死亡调查。产出包括死亡证明及死因／死亡方式认定、调查报告、证据与遗体移交、家属通知及司法配合；具体职务权力依法域。"
             ]
           },
           "id": "coroners.profile.work-context-block.1",
@@ -7325,7 +7325,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "典型流程是确认管辖与身份，检查或协调现场和遗体记录，保存证据，获取病史与检验资料，综合事实并完成法定文件。"
+              "编辑流程概括：核管辖与身份、记录现场及遗体、访谈取病史、保存移交物证、检查或安排尸检及病理毒理检验、形成有权签署的报告和文件。O*NET把法医学检查／尸检和指示尸检也列为任务，不能概括为所有验尸官只整理文书；执行主体与授权须另查。"
             ]
           },
           "id": "coroners.profile.work-context-block.3",
@@ -7381,12 +7381,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "质量标准是身份、时间线、证据编号、移交链、检验来源和更正记录可追溯，并保护敏感信息。"
+              "质量需使身份、时间线、证据编号、移交、检验与更正可追溯。O*NET当前57项情境中：70%受访者每日接触疾病感染、50%每日面临严格期限、60%通常每周超过40小时、55%工作时间不规律；这是美国受访分布，非中国比例或个人排班保证。"
             ]
           },
           "id": "coroners.profile.work-context-block.7",
           "source_refs": [
-            "onet-coroners"
+            "onet-coroners",
+            "nij-guide"
           ],
           "type": "prose"
         },
@@ -7395,13 +7396,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "责任边界：验尸官确会处理真实案件并可能依法认定死因/死亡方式；医学程序、尸检和签署权限必须按当地法律依次核对。"
+              "验尸官可能依法认定死因／死亡方式并承担签署和出庭责任；医学程序、尸检执行、管辖和签字权限分别核现行法。O*NET 13-1041.06为Job Zone 3／SVP 6至低于7；岗位层级说明不是法律资格。教育响应中35%本科、15%副学士或两年学位、15%学士后证书，其余比例未显示，不能补齐。CDC 2024综述说明coroner资格和产生方式各州不同，旧州别档案发表于2015年；现行申请与医学要求须查目标法域。"
             ]
           },
           "id": "coroners.profile.work-context-block.8",
           "source_refs": [
-            "cdc-mec",
-            "onet-coroners"
+            "onet-coroners",
+            "cdc-laws"
           ],
           "type": "prose"
         }
@@ -7601,7 +7602,8 @@
           "source_refs": [
             "g04-editor"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         }
       ]
     },
@@ -7616,11 +7618,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：现有官方来源未提供与验尸官精确一一对应的全国职业工资分布，本页因此不发布中国全国中位数或统一起薪。"
+              "司法部《法医类司法鉴定执业分类规定》第2、4—7条涉及诉讼专门问题的法医鉴定、法医病理、尸体检验及死亡方式判断；它说明相关业务，不建立与美国coroner一一对应的职位或工资，不提供本页目标单位的完整准入条件。 中国精确对应身份及全国职业工资仍缺。若真实雇主主营科学研究技术服务，可参照NBS2025非私营182,064／私营83,560元税前年均；主营卫生社会工作可参照146,266／75,631元；公共管理社会保障社会组织仅有非私营119,465元。本页未确认具体单位分类，不将这些行业全岗位平均当法医、验尸官中位数或起薪，不折个人月薪与到手。"
             ]
           },
           "id": "coroners.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
+            "cn-forensic-class",
+            "nbs-2025",
             "nbs-wage-method"
           ],
           "type": "prose"
@@ -7630,11 +7634,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不把行业平均写成职业中位数，也不提供统一起薪、月薪或个人到手收入。"
+              "NBS单位平均工资以工资总额除平均就业人数，含奖金津补贴和加班工资；2025调查覆盖城镇5人以上法人单位，不覆盖个体和自由职业。行业均值不能推某职业工资分布、入行起薪或个人净收入。"
             ]
           },
           "id": "coroners.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
+            "nbs-2025",
             "nbs-wage-method"
           ],
           "type": "prose"
@@ -7658,12 +7663,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "因此中国薪酬结论是“证据缺口”，不是零收入，也不能用美国数据替代。"
+              "中国单职业薪酬仍为证据缺口；行业背景可限定比较，不是零收入，也不以美国父职业薪资替代。AI案卷辅助同样是编辑推演，没有中国机构采用或薪酬效应样本。"
             ]
           },
           "id": "coroners.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "nbs-wage-method"
+            "nbs-2025",
+            "g04-editor"
           ],
           "type": "prose"
         }
@@ -7690,7 +7696,8 @@
           "source_refs": [
             "repair-current-us"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -7724,7 +7731,8 @@
           "source_refs": [
             "repair-current-us"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -7741,21 +7749,24 @@
           "source_refs": [
             "repair-current-us"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮只核对上述 BLS 职业范围；该来源只报告中位工资，未取得可解释为目标职业独立起薪的同范围数据。中位数不是起薪，就业人数不是招聘数，预测也不是个人录用概率。"
+              "BLS表1.2只提供此父职业中位年薪，未提供验尸官独立分位或起薪。中位数非起薪，就业为存量，年均空缺含替代需求。OEWS为有薪岗位常规税前货币工资，排除自雇、直接家庭雇员和未付薪家庭人员；不含福利与加班溢价，不推个人到手。"
             ]
           },
           "id": "coroners.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "repair-current-us"
+            "repair-current-us",
+            "bls-oews-method"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -7769,7 +7780,8 @@
           "source_refs": [
             "repair-current-us"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         }
       ]
     },
@@ -7826,7 +7838,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能接受夜间出勤、法域差异和公共问责。"
+              "是否能在实际岗位出现的不规律时间或长工时中保持准确？O*NET受访者55%不规律时间、60%每周超过40小时，不等于每岗都夜班。"
             ]
           },
           "id": "coroners.fit.personality-fit-block.4",
@@ -7868,14 +7880,16 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不适合追求快速结论或回避敏感沟通的人。"
+              "编辑自问：遇到信息不足、家属情绪或催促时，能否放慢结论、说明待核并尊重沟通？这用于观察训练需求，不能由一次表现或人格标签判定适合／不适合。"
             ]
           },
           "id": "coroners.fit.personality-fit-block.7",
           "source_refs": [
+            "g04-editor",
             "onet-coroners"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -7889,7 +7903,8 @@
           "source_refs": [
             "onet-coroners"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         }
       ]
     },
@@ -7918,7 +7933,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "现场记录、身份材料或证据链不完整时，调查团队和后续审查者可能无法重建事实；调查人员应保持原始状态、记录每次移交，并由指定负责人决定后续处理。"
+              "现场、身份或证据链不完整会妨碍重建事实。NIJ指南要求先考虑现场安全，再依权限记录现场与物证、逐次保留移交信息；不把“保持原始状态”作为可以忽视救援或持续暴露危险的指令。"
             ]
           },
           "id": "coroners.risk.career-risk-cards.2",
@@ -7937,7 +7952,8 @@
           },
           "id": "coroners.risk.career-risk-cards.3",
           "source_refs": [
-            "cdc-laws"
+            "nij-guide",
+            "onet-coroners"
           ],
           "type": "prose"
         },
@@ -7960,12 +7976,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "权限、身份、证据或通知对象发生冲突时，家属和调查链可能收到相互矛盾的信息；经办人员应停止扩展判断、保全记录并将冲突交正式责任链处理。"
+              "感染、污染、天气及狭窄现场可能危及到场人员；NIJ要求识别安全风险并协作，O*NET70%受访者每日接触疾病感染。编辑建议：按机构风险评估和权限决定进入、防护及暴露报告；未取得具体现场或尸检完整中止恢复程序，不提供通用可照做步骤。"
             ]
           },
           "id": "coroners.risk.career-risk-cards.5",
           "source_refs": [
-            "nij-guide"
+            "nij-guide",
+            "onet-coroners",
+            "g04-editor"
           ],
           "type": "prose"
         }
@@ -7983,7 +8001,7 @@
           "data": {
             "paragraphs": [
               "第一步不是报班，而是先确认目标县或州采用 coroner 还是 medical examiner 制度、职位由选举还是任命产生、最低资格与是否要求医学背景；这些只能由该法域的官方规则回答，通用证书不能直接换取职位。",
-              "招募或任命公告通常只列资格与程序，不等于真实空缺数量或统一流程；比较时应记录法域、职位性质、任期、薪酬与信息来源日期，并区分 coroner、medical examiner、死亡调查员与法证技术员等不同岗位。"
+              "本轮未取得招募或任命公告样本，不能概括公告内容或推真实空缺数量；编辑建议比较时记录法域、职位性质、任期、薪酬与信息来源日期，并区分 coroner、medical examiner、死亡调查员与法证技术员等不同岗位。"
             ]
           },
           "id": "coroners.path.recruitment-sample.1",
@@ -8003,12 +8021,19 @@
               "evidence",
               "next_step"
             ],
+            "column_labels": [
+              "岗位",
+              "初始任务",
+              "权限边界",
+              "能力证据",
+              "下一步"
+            ],
             "rows": [
               [
                 "死亡调查支持与记录岗位（受监督）",
                 "在机构授权下协助通知与响应、到场记录、死者身份与遗体信息、证据与移交记录。",
                 "不作死因或死亡方式裁决，不签署死亡证明；超出授权即停止并升级。",
-                "能按 NIJ 2024 现场调查步骤（通知与响应、到场、记录和评估现场、记录和评估遗体、记录死者资料、完成现场调查）保留可追溯记录。",
+                "能按NIJ2024六章节框架保留记录；指南不是全国统一六步或法定准入。",
                 "先确认目标法域的官方资格与招募程序，再考虑受监督的辅助岗位。"
               ],
               [
@@ -8020,15 +8045,15 @@
               ],
               [
                 "Medical examiner（医师主导）",
-                "由具备法医病理训练的医师主导死亡调查与尸检认定。",
-                "进入需独立医学与法医病理训练，coroner 经验不能替代。",
+                "CDC综述中的medical examiner通常为医学专业主导；具体职位是否要求医师及法医病理训练核现行州法。",
+                "医学或病理训练和法定职位条件分别核，不能用coroner经验自动替代。",
                 "能核对本州 medical examiner 制度的法定要求与任命方式。",
                 "把医学训练路径与 coroner 路径分别核对，不互相套用。"
               ],
               [
                 "Medicolegal death investigator（死亡调查员）",
                 "负责现场响应、死者与证据记录、与家属和执法沟通及案卷协调。",
-                "授权范围由具体机构与法域决定，不自行作医学或法定结论。",
+                "法域与机构决定实际授权。NIJ2024包括管辖初筛及理由记录并由coroner／medical examiner复核；不能把MDI一概说成不作任何法定判断，也不能据指南获得尸检执行或签署权。",
                 "能提供受监督的现场记录、证据链与案卷协调样本。",
                 "查目标机构是否为该岗位设置独立资格与训练要求。"
               ],
@@ -8037,14 +8062,16 @@
                 "收集、保存或分析刑事与物证材料，交付实验室结果。",
                 "职业对象与法定死亡裁决不同，不能按名称互换。",
                 "能说明物证处理与实验室交付的操作证据。",
-                "分别核对实验室岗位的教育与授权要求。"
+                "BLS法证科学技术员通常本科、部分岗位副学士；独立办案可另需能力考试或实验室批准。与coroner资格分开。"
               ]
             ]
           },
           "id": "coroners.path.entry-role-comparison.1",
           "source_refs": [
             "cdc-laws",
-            "g04-editor"
+            "g04-editor",
+            "nij-guide",
+            "dir-forensic"
           ],
           "type": "table"
         },
@@ -8057,15 +8084,15 @@
                 "id": "education",
                 "values": [
                   "学历与训练要求",
-                  "美国口径下验尸官的进入要求由各州规定，部分州不要求为医师，而尸检在一些州只能由病理医师进行；训练与资格差异很大。",
-                  "证据不足：本轮未取得中国大陆与 coroner 精确对应的职业资格公开条件，须按目标单位与主管部门现行规定核对，不与美国口径等同。"
+                  "O*NET 13-1041.06为Job Zone 3／SVP 6至低于7；岗位层级说明不是法律资格。教育响应中35%本科、15%副学士或两年学位、15%学士后证书，其余比例未显示，不能补齐。CDC 2024综述说明coroner资格和产生方式各州不同，旧州别档案发表于2015年；现行申请与医学要求须查目标法域。",
+                  "司法部《法医类司法鉴定执业分类规定》第2、4—7条涉及诉讼专门问题的法医鉴定、法医病理、尸体检验及死亡方式判断；它说明相关业务，不建立与美国coroner一一对应的职位或工资，不提供本页目标单位的完整准入条件。具体目标单位完整资格仍缺，不把业务分类当许可证条件。"
                 ]
               },
               {
                 "id": "safety",
                 "values": [
                   "健康与安全作业条件",
-                  "现场调查可能接触感染、化学与创伤材料，通常要求个人防护、暴露后处置与心理支持，具体由机构与主管部门规定。",
+                  "NIJ2024强调识别物理、化学、生物等现场风险与协作；O*NET有感染暴露响应。编辑建议向目标机构核实防护、暴露报告与心理支持安排，本轮无各雇主统一要求样本。",
                   "本页不构成安全操作、设备使用或临床授权；须按机构现行安全规程核对。"
                 ]
               },
@@ -8082,14 +8109,19 @@
                 "values": [
                   "常见工具与系统范围",
                   "案卷与死亡登记/报告系统、摄影与测量工具、证据封装与移交记录、与病理与毒理实验室的送检流程；数据现代化强调标准字段、权限与交换，而不是替代调查判断。",
-                  "工具与系统熟练度是招聘信号，不等于资格或授权。"
+                  "这些工具可用于任务准备；本轮没有招聘样本证明其统一权重，熟练度不等资格或授权。"
                 ]
               }
             ]
           },
           "id": "coroners.path.employer-evidence.1",
           "source_refs": [
-            "nij-guide"
+            "onet-coroners",
+            "cdc-laws",
+            "nij-guide",
+            "cdc-modernization",
+            "cn-forensic-class",
+            "g04-editor"
           ],
           "type": "cards"
         },
@@ -8194,6 +8226,15 @@
               "next_step",
               "review"
             ],
+            "column_labels": [
+              "资格条件",
+              "适用条件",
+              "边界",
+              "核对依据",
+              "法域",
+              "下一步",
+              "复核"
+            ],
             "rows": [
               [
                 "法域最低资格",
@@ -8234,15 +8275,15 @@
               [
                 "尸检与医学鉴定授权",
                 "由法域规定并通常与病理医师或 medical examiner 制度相关。",
-                "未获授权不得下令、执行或解释尸检与医学鉴定。",
+                "下令尸检、执行医学检查、解读报告和形成法定结论分别涉及职务权力与专业能力；逐项核权限，不把所有阅读解释都混为同一执业动作。",
                 "能引用法域规则说明尸检授权归属。",
                 "按具体法域与机构核对。",
-                "在授权范围内仅做记录与协调，不越权解释。",
+                "确认当前职位能安排、执行、协调或解释哪些动作，超出权限转相应人员。",
                 "尸检授权范围依法域而异，须逐案核对。"
               ],
               [
                 "机构授权与签字责任",
-                "由机构制度与实际职位授予，涉及死亡证明与司法转介的签署。",
+                "法律与实际职位、机构授权共同限定法定文件的签署；机构制度不能自行扩大法定权力。",
                 "未获职位与授权不得签署法定文件或以验尸官名义行事。",
                 "能说明签字文件的种类与授权来源。",
                 "按机构制度与法域规则核对。",
@@ -8262,15 +8303,16 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "美国没有统一的全国 coroner 门槛：是否必须为医师、如何产生、能否下令尸检、由谁签署死亡证明，都取决于州与地方制度；部分州不要求 coroner 是医师，而尸检在一些州只能由病理医师进行。",
+              "CDC2024综述指出美国各州制度、coroner产生方式及医学要求不同；其州别档案发表于2015年，只作制度背景。本轮未核指定州县现行完整资格、任期与尸检主体，不以历史页面定当前申请条件。",
               "因此本页把「法域最低资格」「职位产生方式」「医学/法医训练」「死亡调查训练」「尸检与医学鉴定授权」「机构授权与签字责任」分开核对：它们是不同层级的条件，不能互相替代。",
-              "中国大陆口径：本轮未取得与 coroner 精确对应的全国职业资格与工资公开条件，也不能把中国法医岗位机械映射为验尸官；具体要求须按目标单位与主管部门现行规定核对。",
+              "司法部《法医类司法鉴定执业分类规定》第2、4—7条涉及诉讼专门问题的法医鉴定、法医病理、尸体检验及死亡方式判断；它说明相关业务，不建立与美国coroner一一对应的职位或工资，不提供本页目标单位的完整准入条件。具体目标单位完整资格与工资仍未取得。",
               "任何资格与授权都应以适用法域与机构的现行文本为准；本页不构成资格意见、作业授权或录用承诺。"
             ]
           },
           "id": "coroners.path.credential-boundary.1",
           "source_refs": [
-            "cdc-laws"
+            "cdc-laws",
+            "cn-forensic-class"
           ],
           "type": "notice"
         },
@@ -8544,18 +8586,21 @@
           "source_refs": [
             "g04-editor"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "能在记录与证据链中保持准确，并按授权边界停止和升级。"
+              "编辑迁移分析：现场观察记录、物证链、报告及出庭沟通可与法证科学技术员交叉；不据共同技能承诺直接转入实验室。"
             ]
           },
           "id": "coroners.market-signals.market-signal-card.4",
           "source_refs": [
+            "onet-coroners",
+            "dir-forensic",
             "g04-editor"
           ],
           "type": "prose"
@@ -8565,11 +8610,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "法证科学技术员还要求物证处理与实验室交付的训练与授权。"
+              "BLS法证科学技术员通常本科、部分岗位可副学士，在岗训练及独立办案能力批准另核。转实验室需补具体分析方法、仪器与质量规范，已有现场与证据记录不必说成全部从零。"
             ]
           },
           "id": "coroners.market-signals.market-signal-card.5",
           "source_refs": [
+            "dir-forensic",
             "g04-editor"
           ],
           "type": "prose"
@@ -8838,23 +8884,23 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-08-30",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "各州死亡调查、验尸官与法医官资格和尸检授权差异。",
-                  "美国州法综述，不适用于中国。"
+                  "实际读取CDC制度概览；coroner产生方式和医学要求因州不同。",
+                  "州别档案为2015年历史资料；本轮未核指定州县现行完整法律。"
                 ],
                 "evidence_type": "official guidance",
                 "id": "cdc-laws",
-                "limitation": "美国州法综述，不适用于中国。",
+                "limitation": "制度综述及历史州别档案，不作2026具体州县任职资格结论。",
                 "market": "美国",
                 "name": "Coroner and Medical Examiner Laws",
-                "period": "published 2024-05-16; accessed 2026-08-30",
+                "period": "overview 2024-05-16; linked state profiles published 2015-01-15; accessed 2026-10-09",
                 "publisher": "Centers for Disease Control and Prevention",
                 "scope": "exact",
                 "url": "https://www.cdc.gov/phlp/php/coroner/"
               },
               {
-                "accessed_at": "2026-08-30",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "死亡证明、公共卫生数据质量和法医官/验尸官作用。",
                   "不规定单个州的任命资格。"
@@ -8870,7 +8916,7 @@
                 "url": "https://www.cdc.gov/nchs/nvss/medical-examiners-coroners.htm"
               },
               {
-                "accessed_at": "2026-08-30",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "数据交换、标准化和人工流程条件。",
                   "数据现代化不等于调查判断自动化。"
@@ -8886,19 +8932,19 @@
                 "url": "https://www.cdc.gov/comec/data-systems/modernizing-data-systems.html"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "本轮定向修复已打开并核对职业范围、职责、教育或统计字段。",
-                  "美国职业资料；不能外推为中国岗位、具体雇主要求或个人录用概率。"
+                  "实际读任务、工作时间、教育、在岗训练与独立办案批准。",
+                  "这是19-4092法证科学技术员相邻职业，不是13-1041.06验尸官工资或准入。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "dir-forensic",
-                "limitation": "美国职业资料；不能外推为中国岗位、具体雇主要求或个人录用概率。",
+                "limitation": "相邻职业资料，不作验尸官精确工资、AI采用或法域资格依据。",
                 "market": "美国",
                 "name": "Forensic Science Technicians",
-                "period": "official occupation profile; accessed 2026-09-06",
+                "period": "2025 wages and employment; 2025–2035 projections; accessed 2026-10-09",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "exact",
+                "scope": "adjacent_occupation_reference",
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/forensic-science-technicians.htm"
               },
               {
@@ -8918,7 +8964,7 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-08-30",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "中国单位工资统计方法。",
                   "无验尸官精确职业工资或身份映射。"
@@ -8928,16 +8974,16 @@
                 "limitation": "无验尸官精确职业工资或身份映射。",
                 "market": "中国大陆",
                 "name": "单位就业人员平均工资的计算方法",
-                "period": "published 2024-11-29; accessed 2026-08-30",
+                "period": "published 2024-11-29; accessed 2026-10-09",
                 "publisher": "国家统计局",
-                "scope": "industry_proxy",
+                "scope": "statistical_method_context",
                 "url": "https://www.stats.gov.cn/zs/tjws/zytjzbqs/dwjyry/202411/t20241128_1957598.html"
               },
               {
-                "accessed_at": "2026-08-30",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "通知响应、到场、现场和遗体记录、死者资料及结案流程。",
-                  "面向美国医疗法律死亡调查。"
+                  "实际读取目录、授权、A通知响应及管辖决定、B现场安全／证据链相关部分。",
+                  "指南六章节不是统一线性六步；实际授权依法规、机构政策与程序不同。"
                 ],
                 "evidence_type": "official guidance",
                 "id": "nij-guide",
@@ -8950,36 +8996,83 @@
                 "url": "https://nij.ojp.gov/library/publications/death-investigation-guide-scene-investigator-2024"
               },
               {
-                "accessed_at": "2026-08-30",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "职业身份、死亡调查任务、工作情境、准备与相邻职业。",
-                  "美国职业定义，不等同中国法医或其他机构身份。"
+                  "实际读取20任务（19Core、1Supplemental）、全部57工作情境、Job Zone3、教育及全部六类兴趣。",
+                  "核心任务含医学检查／尸检和指示尸检；职业任务不授予任何法域权限。教育部分响应未显示不能补齐，兴趣分数不是百分比。"
                 ],
                 "evidence_type": "official occupational profile",
                 "id": "onet-coroners",
                 "limitation": "美国职业定义，不等同中国法医或其他机构身份。",
                 "market": "美国",
                 "name": "O*NET 13-1041.06 Coroners",
-                "period": "accessed 2026-08-30",
+                "period": "current O*NET profile accessed 2026-10-09; element data periods may differ",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/13-1041.06"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "核对 合规官（13-1041，父职业代理） 的 2025 就业、中位年薪和 2025–2035 预测字段。",
-                  "美国职业资料；不能外推为中国岗位、具体雇主要求或个人录用概率。"
+                  "美国BLS 13-1041合规官父职业代理：2025就业436,400人，2035预测453,100人，净增16,700人、增长3.8%，2025—2035年均空缺32,700个。不是13-1041.06验尸官独立数据；空缺含转岗退出替代，不是净增、当前招聘或个人录用率。",
+                  "中位年薪80,730美元为2025父职业13-1041，不是验尸官独立分位或起薪。"
                 ],
                 "evidence_type": "official employment projection table",
                 "id": "repair-current-us",
                 "limitation": "美国职业资料；不能外推为中国岗位、具体雇主要求或个人录用概率。",
                 "market": "美国",
                 "name": "BLS Occupational Projections and Characteristics, 2025–2035",
-                "period": "BLS 2025 employment and 2025–2035 projections; accessed 2026-09-06",
+                "period": "BLS 2025 employment and 2025–2035 projections; accessed 2026-10-09",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取第2条、第4—7条及分类目录：法医病理的死因鉴定、尸体检验、死亡方式判断。",
+                  "转载页落款年与审议年文字不一致，本文不据此判断公布生效精确日期。"
+                ],
+                "evidence_type": "official professional scope regulation",
+                "id": "cn-forensic-class",
+                "limitation": "中国相关鉴定业务边界，不建立美国coroner精确职位映射；不是本页目标单位完整准入和工资证据。",
+                "market": "中国大陆",
+                "name": "司法部法医类司法鉴定执业分类规定（司规〔2020〕3号）",
+                "period": "official repost dated 2020-05-28; accessed 2026-10-09",
+                "publisher": "司法部；湖北省司法厅公开转载",
+                "scope": "related_professional_scope",
+                "url": "https://sft.hubei.gov.cn/fbjd/zfyw/202005/t20200528_2368085.shtml"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025行业分组全部就业人员税前年平均工资；实际核行业行与统计说明。",
+                  "中国精确对应身份及全国职业工资仍缺。若真实雇主主营科学研究技术服务，可参照NBS2025非私营182,064／私营83,560元税前年均；主营卫生社会工作可参照146,266／75,631元；公共管理社会保障社会组织仅有非私营119,465元。本页未确认具体单位分类，不将这些行业全岗位平均当法医、验尸官中位数或起薪，不折个人月薪与到手。"
+                ],
+                "evidence_type": "official annual wage statistics",
+                "id": "nbs-2025",
+                "limitation": "行业全岗位税前年均，仅在真实单位主营分类匹配时作背景；不作为验尸官或法医精确工资、起薪、月薪或个人净收入。",
+                "market": "中国大陆",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wages; published 2026-05-15; accessed 2026-10-09",
+                "publisher": "国家统计局",
+                "scope": "conditional_industry_reference",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "复用本轮已核同版有薪岗位覆盖、常规税前货币工资和排除项。"
+                ],
+                "evidence_type": "official statistical methodology",
+                "id": "bls-oews-method",
+                "limitation": "不提供验尸官精确工资，不推个人净收入或保证年工时。",
+                "market": "美国",
+                "name": "OEWS concepts and coverage",
+                "period": "methodology; accessed 2026-10-09",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "statistical_method_context",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
               }
             ]
           },
@@ -9130,16 +9223,16 @@
         "authority_links": [
           {
             "来源": {
-              "$source": "dir-forensic",
+              "$source": "cdc-modernization",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "类型": "官方或研究来源",
-            "适用范围": "仅按来源原始口径使用",
+            "类型": "官方数据现代化说明",
+            "适用范围": "数据系统现代化不证明生成式AI部署、准确率或岗位净增减。",
             "链接": {
-              "$source": "dir-forensic",
+              "$source": "cdc-modernization",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9154,8 +9247,8 @@
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "类型": "官方或研究来源",
-            "适用范围": "仅按来源原始口径使用",
+            "类型": "官方职业任务档案",
+            "适用范围": "任务档案不测量AI采用率，不授予个案权限。",
             "链接": {
               "$source": "onet-coroners",
               "block": "source-register",
@@ -9166,21 +9259,15 @@
           },
           {
             "来源": {
-              "$source": "repair-current-us",
+              "$source": "g04-editor",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "类型": "官方或研究来源",
-            "适用范围": "仅按来源原始口径使用",
-            "链接": {
-              "$source": "repair-current-us",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "coroners.source-register.published.1"
-            }
+            "类型": "编辑推演",
+            "适用范围": "不是实验效果、招聘预测或法定自动决策规则。",
+            "链接": null
           }
         ],
         "difference_intro": {
@@ -9191,12 +9278,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "信息整理",
+            "AI主要改变": "编辑推演：案卷字段与时间线辅助",
             "仍由人负责": "责任与授权",
             "方向": "验尸官"
           },
           {
-            "AI主要改变": "检索与复盘",
+            "AI主要改变": "编辑推演：检索与复盘辅助",
             "仍由人负责": "原始记录核对",
             "方向": "工作流程"
           }
@@ -9209,18 +9296,18 @@
         },
         "evidence_rows": [
           {
-            "使用限制": "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。",
+            "使用限制": "数据系统现代化不证明生成式AI部署、准确率或岗位净增减。",
             "来源": {
-              "$source": "dir-forensic",
+              "$source": "cdc-modernization",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "美国医疗法律死亡调查数据系统",
+            "结论": "CDC说明标准化录入、查询、报告、权限与审计轨迹，以及系统交换可减少重复输入。",
             "链接": {
-              "$source": "dir-forensic",
+              "$source": "cdc-modernization",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9228,7 +9315,7 @@
             }
           },
           {
-            "使用限制": "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。",
+            "使用限制": "任务档案不测量AI采用率，不授予个案权限。",
             "来源": {
               "$source": "onet-coroners",
               "block": "source-register",
@@ -9236,8 +9323,8 @@
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "美国13-1041.06任务与工作情境",
+            "结论": "任务覆盖现场访谈、身份记录、死亡认证、检查／尸检、家属通知与出庭；用于定位工具辅助边界。",
             "链接": {
               "$source": "onet-coroners",
               "block": "source-register",
@@ -9247,23 +9334,17 @@
             }
           },
           {
-            "使用限制": "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。",
+            "使用限制": "不是实验效果、招聘预测或法定自动决策规则。",
             "来源": {
-              "$source": "repair-current-us",
+              "$source": "g04-editor",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
-            "链接": {
-              "$source": "repair-current-us",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "coroners.source-register.published.1"
-            }
+            "研究对象": "本页辅助案卷与文书方案",
+            "结论": "案卷完整性与时间线辅助是编辑假设，尚无本页所列机构采用样本。",
+            "链接": null
           }
         ],
         "heading": {
@@ -9288,21 +9369,15 @@
         ],
         "questions": [
           {
-            "回答": "不能从任务暴露推导岗位裁撤日期。",
+            "回答": "编辑判断：本轮未取得验尸官AI采用与净就业影响，不能由任务暴露推岗位裁撤日期。",
             "来源": {
-              "$source": "dir-forensic",
+              "$source": "g04-editor",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "链接": {
-              "$source": "dir-forensic",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "coroners.source-register.published.1"
-            },
+            "链接": null,
             "问题": "AI 会取代岗位吗？"
           },
           {
@@ -9324,16 +9399,16 @@
             "问题": "AI 应先辅助什么？"
           },
           {
-            "回答": "关键判断、责任认定和停止升级。",
+            "回答": "编辑控制建议：工具不能赋予判断、签署或停止升级权限；NIJ指南授权依现行法域和机构政策程序，不提供AI作业许可。",
             "来源": {
-              "$source": "repair-current-us",
+              "$source": "nij-guide",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
             "链接": {
-              "$source": "repair-current-us",
+              "$source": "nij-guide",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9386,21 +9461,16 @@
         "task_rows": [
           {
             "人的控制点": "核对原始记录与失败模式。",
-            "任务": "整理记录",
+            "任务": "核对身份编号、案卷字段和时间线",
             "工作方向": "记录与信息管理",
-            "当前变化": {
-              "$item": "coroners.ai-impact.ai-impact-table.7",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "type": "prose"
-            }
+            "当前变化": "编辑推演：工具可在获准、去标识化环境中整理案卷字段、时间线和缺失项；这不是机构采用证据。"
           },
           {
-            "人的控制点": "按授权链保留人工判断。",
-            "任务": "执行核心任务",
+            "人的控制点": "现场与医学动作仍须相应训练和权限；工具不能替人取得权限。",
+            "任务": "现场访谈、遗体检查及跨机构协调",
             "工作方向": "执行与协同",
             "当前变化": {
-              "$item": "coroners.ai-impact.ai-impact-table.8",
+              "$item": "coroners.ai-impact.ai-impact-table.7",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -9416,7 +9486,7 @@
             "人的控制点": "由责任人确认结论。",
             "任务": "形成复盘记录",
             "工作方向": "复盘与改进",
-            "当前变化": "可能辅助整理"
+            "当前变化": "编辑推演：可能辅助整理复盘；没有本页机构采用率。"
           },
           {
             "人的控制点": "回到职业现场的原始资料。",
@@ -9434,7 +9504,7 @@
             "人的控制点": "责任人确认权限、结论和留痕。",
             "任务": "形成可追溯交付",
             "工作方向": "采用与责任",
-            "当前变化": "失败模式包括补造案情、合并同名人员、颠倒时间线、错配物证编号，或把概率写成法定结论。"
+            "当前变化": "编辑推演：可能辅助文书完整性核对；错配身份、时间和证据仍须人工检查。"
           }
         ],
         "transition": {
@@ -9534,7 +9604,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "AI 可辅助案卷字段校验、时间线整理与死亡证明草稿检查，但不能取得法域权限、判断死因或死亡方式，也不能替代尸检与毒理分析。"
+          "编辑推演：在机构批准且数据处理获授权的环境下，工具可能辅助案卷字段校验、时间线和文书草稿；是否可靠须验证。它不取得法定权限，不代有权人员形成死因／死亡方式结论或执行尸检毒理分析。CDC数据现代化资料不是生成式AI采用证据。"
         ],
         "heading": "验尸官的工作对象与 AI 边界"
       },
@@ -9558,7 +9628,7 @@
             "stage": "法定与统计"
           }
         ],
-        "direct_answer": "入行通常不要求先读医学：可先从受监督的记录、证据链与个案协调做起，再按法域制度竞聘；coroner、medical examiner、法医病理与公共卫生数据是不同分支，进入前先核对目标法域的资格与职位产生方式。",
+        "direct_answer": "先确定目标法域、职位类型及选举／任命或招聘方式，再核现行学历、医学训练、任职和动作权限。受监督记录支持可作为编辑探索方向，但不是保证通往coroner的统一晋升路径；medical examiner、死亡调查员与法证技术员分别核准入。",
         "heading": {
           "$item": "coroners.path.career-path-block.1",
           "block": "path",
@@ -9568,7 +9638,7 @@
         "locale_requirements": {
           "credential_boundary": "coroner 的最低资格、medical examiner 的医学训练、尸检与签署权限、机构授权不是同一状态，不能互相替代。",
           "jurisdiction": "适用法域：死亡调查制度、资格与尸检授权均按州、县或国家规则核定。",
-          "summary": "美国口径来自 O*NET 13-1041.06、CDC 州法综述与 NIJ 2024 死亡现场调查指南；中国大陆口径参考主管部门公开资料，具体资格以目标单位与法域现行规定为准。"
+          "summary": "美国依据O*NET任务、CDC2024制度综述及NIJ2024指南；CDC2015州别档案不代现行法。中国依据司法部法医类业务分类，未取得精确对应职位及目标单位完整准入条件。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
@@ -9588,7 +9658,7 @@
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "制度综述及历史州别档案，不作2026具体州县任职资格结论。"
           },
           {
             "href": {
@@ -9606,7 +9676,7 @@
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "不规定单个州的任命资格。"
           },
           {
             "href": {
@@ -9624,7 +9694,7 @@
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "数据现代化不等于调查判断自动化。"
           },
           {
             "href": {
@@ -9642,7 +9712,7 @@
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "相邻职业资料，不作验尸官精确工资、AI采用或法域资格依据。"
           }
         ],
         "tracks": [
@@ -9651,7 +9721,7 @@
             "stages": [
               {
                 "credentials": "按机构与法域规定。",
-                "next_moves": "熟悉 NIJ 现场调查步骤。",
+                "next_moves": "了解NIJ六章节内容框架；真实动作遵循机构程序与授权。",
                 "readiness_evidence": "记录编号、时间与来源一致。",
                 "responsibility": "在授权下协助通知与响应、到场与现场记录。",
                 "role": "现场响应辅助"
@@ -9674,7 +9744,7 @@
                 "credentials": "按机构与法域规定。",
                 "next_moves": "核对独立承担所需资格。",
                 "readiness_evidence": "边界清楚、越权前升级。",
-                "responsibility": "在法定人员指导下配合完成完整现场调查。",
+                "responsibility": "依本岗授权与机构协作完成现场调查；NIJ强调与执法独立且协作，不把所有调查员都写成辅助身份。",
                 "role": "受监督的现场调查"
               }
             ],
@@ -9787,7 +9857,7 @@
             }
           },
           {
-            "answer": "以通知与响应、到场、记录与评估、取证与检验、认定与转介形成闭环。",
+            "answer": "NIJ 2024指南按通知与响应、到场、现场、遗体、死者资料、完成现场调查六个章节组织内容；这是工作内容框架，不是所有案件固定六步或取代机构程序的操作指令。",
             "key": "qa2",
             "question": "怎样判断工作闭环？",
             "table": {
@@ -9796,7 +9866,7 @@
                   "alternate_value": null,
                   "label": "闭环",
                   "secondary_value": null,
-                  "value": "通知与响应 → 到场 → 记录与评估 → 取证与检验 → 认定与转介 → 复核"
+                  "value": "六章节框架：响应、到场、现场、遗体、死者资料、完成现场调查；执行依适用程序"
                 },
                 {
                   "alternate_value": null,
@@ -9893,15 +9963,16 @@
             "label": "查看职业风险"
           }
         ],
-        "direct_answer": "先识别法域权限、证据链与不可逆后果三类风险。",
-        "evidence_scope": "风险项按当前职业内容与所列来源（CDC 州法综述、NIJ 2024 指南）边界解释。",
+        "direct_answer": "分别核法域权限、证据链、死亡认证，以及现场感染与其他安全暴露。",
+        "evidence_scope": "CDC用于制度差异；NIJ 2024指南用于现场安全、移交和授权原则；O*NET用于美国受访工作情境。编辑控制建议不是具体现场程序。",
         "heading": "验尸官的风险与控制点",
         "risks": [
           {
             "affected_roles": "验尸官",
             "consequence": "调查与死亡认证可能失去合法基础，后续司法与统计受影响。",
             "evidence_refs": [
-              "cdc-laws"
+              "cdc-laws",
+              "nij-guide"
             ],
             "id": "risk-1",
             "mitigation": "先确认法域、管辖与授权归属；无法确认即停止作实体判断并升级。",
@@ -9917,10 +9988,10 @@
             "affected_roles": "验尸官",
             "consequence": "调查团队与后续审查者可能无法重建事实。",
             "evidence_refs": [
-              "cdc-laws"
+              "nij-guide"
             ],
             "id": "risk-2",
-            "mitigation": "保持原始状态、逐次记录移交，编号与时间冲突处标待核。",
+            "mitigation": "先依现场安全与适用权限记录保存，移交留痕；编号与时间冲突标待核，不以保持原状排斥安全处置。",
             "scenario": "现场、身份或证据链记录不完整或编号不一致。",
             "title": {
               "$item": "coroners.risk.career-risk-cards.2",
@@ -9933,7 +10004,8 @@
             "affected_roles": "验尸官",
             "consequence": "可能误导家属、公共记录与司法使用者。",
             "evidence_refs": [
-              "cdc-laws"
+              "nij-guide",
+              "onet-coroners"
             ],
             "id": "risk-3",
             "mitigation": "明确标注暂定与依据；最终结论由有权限者按程序形成。",
@@ -9949,7 +10021,8 @@
             "affected_roles": "验尸官",
             "consequence": "登记机构与公共卫生统计可能收到错误数据。",
             "evidence_refs": [
-              "cdc-laws"
+              "cdc-mec",
+              "cdc-modernization"
             ],
             "id": "risk-4",
             "mitigation": "按个案材料与法域规则核对字段，疑义交法域责任人确认。",
@@ -9962,14 +10035,16 @@
             }
           },
           {
-            "affected_roles": "验尸官",
-            "consequence": "家属与调查链可能收到相互矛盾的信息。",
+            "affected_roles": "到场调查人员、遗体检查人员及协作团队",
+            "consequence": "调查人员可能受伤或暴露；安全不足也会妨碍调查。",
             "evidence_refs": [
-              "cdc-laws"
+              "nij-guide",
+              "onet-coroners",
+              "g04-editor"
             ],
             "id": "risk-5",
-            "mitigation": "停止扩展判断、保全记录，并把冲突交正式责任链处理。",
-            "scenario": "权限、身份、证据或通知对象发生冲突。",
+            "mitigation": "编辑建议：按机构评估、训练和授权处理进入、防护与暴露报告；本页未取得具体场景中止恢复程序。",
+            "scenario": "到场、接触遗体或现场物质时面对感染及环境风险。",
             "title": {
               "$item": "coroners.risk.career-risk-cards.5",
               "block": "risk",
@@ -9981,7 +10056,7 @@
             "affected_roles": "验尸官",
             "consequence": "可能产生不可逆后果。",
             "evidence_refs": [
-              "cdc-laws"
+              "nij-guide"
             ],
             "id": "risk-boundary",
             "mitigation": "停止并按授权链升级。",
@@ -10007,7 +10082,7 @@
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "制度综述及历史州别档案，不作2026具体州县任职资格结论。"
           },
           {
             "href": {
@@ -10025,7 +10100,7 @@
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "不规定单个州的任命资格。"
           },
           {
             "href": {
@@ -10043,7 +10118,7 @@
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "数据现代化不等于调查判断自动化。"
           },
           {
             "href": {
@@ -10061,7 +10136,7 @@
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "相邻职业资料，不作验尸官精确工资、AI采用或法域资格依据。"
           }
         ]
       },
@@ -10070,8 +10145,8 @@
           "bls_table": [
             {
               "指标": "中国大陆薪资口径",
-              "数值": "暂无安全数值",
-              "说明": "未取得全国单职业精确口径，不以行业代理值替代。"
+              "数值": "未取得精确职业全国工资",
+              "说明": "美国coroner不与中国法医岗位一一对应；下列行业数仅供目标单位主营分类确定后的背景对照。"
             }
           ],
           "china_ai_row": {
@@ -10088,41 +10163,41 @@
           },
           "china_edu_table": [
             {
-              "学历段": "入口要求",
-              "岗位方向": "验尸官",
-              "说明": "按工作地和雇主核验。"
+              "学历段": "法医病理相关训练",
+              "岗位方向": "相关法医鉴定岗位",
+              "说明": "主管部门分类明确相关业务；目标岗位学历、登记和执业条件本轮未完整取得。"
             },
             {
-              "学历段": "入口要求",
-              "岗位方向": "验尸官",
-              "说明": "按工作地和雇主核验。"
+              "学历段": "医学与病理训练",
+              "岗位方向": "医师／病理方向",
+              "说明": "美国medical examiner路径不可套到全部coroner；中国具体专业和执业条件另核。"
             },
             {
-              "学历段": "入口要求",
-              "岗位方向": "验尸官",
-              "说明": "按工作地和雇主核验。"
+              "学历段": "现场记录与案卷训练",
+              "岗位方向": "死亡调查支持",
+              "说明": "只说明可补能力，不证明有独立岗位空缺或法定资格。"
             },
             {
-              "学历段": "入口要求",
-              "岗位方向": "验尸官",
-              "说明": "按工作地和雇主核验。"
+              "学历段": "数据与信息管理训练",
+              "岗位方向": "死亡登记／案卷系统",
+              "说明": "信息技能不取得死因鉴定或法定签署权限；无统一学历门槛数据。"
             }
           ],
           "china_industry_table": [
             {
-              "备注": "不以行业代理值替代单职业工资。",
-              "行业": "来源覆盖范围",
-              "需求": "暂无安全数值"
+              "备注": "非私营119,465元／年；NBS2025行业全部岗位税前平均；未确认目标单位分类，无私营对应数。",
+              "行业": "公共管理、社会保障和社会组织",
+              "需求": "证据不足：本职业需求量未取得"
             },
             {
-              "备注": "不以行业代理值替代单职业工资。",
-              "行业": "来源覆盖范围",
-              "需求": "暂无安全数值"
+              "备注": "非私营182,064／私营83,560元／年；仅在目标单位主营被归入该门类时作背景；不是鉴定人年薪或需求量。",
+              "行业": "科学研究和技术服务业",
+              "需求": "证据不足：本职业需求量未取得"
             },
             {
-              "备注": "不以行业代理值替代单职业工资。",
-              "行业": "来源覆盖范围",
-              "需求": "暂无安全数值"
+              "备注": "非私营146,266／私营75,631元／年；仅在目标单位主营归入该门类时作背景；不是验尸官工资。",
+              "行业": "卫生和社会工作",
+              "需求": "证据不足：本职业需求量未取得"
             }
           ],
           "china_intl": "中国与美国职业口径不作自动等同。",
@@ -10132,11 +10207,11 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "暂无安全数值",
+          "china_open": "证据不足：中国对应岗位年度空缺未取得",
           "china_ref": {
             "$join": [
               {
-                "$source": "dir-forensic",
+                "$source": "nbs-2025",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -10144,7 +10219,7 @@
               },
               "｜",
               {
-                "$source": "dir-forensic",
+                "$source": "nbs-2025",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10153,19 +10228,19 @@
             ],
             "separator": ""
           },
-          "china_salary_note": "中国公开来源仅用于说明口径边界。",
+          "china_salary_note": "中国精确对应身份及全国职业工资仍缺。若真实雇主主营科学研究技术服务，可参照NBS2025非私营182,064／私营83,560元税前年均；主营卫生社会工作可参照146,266／75,631元；公共管理社会保障社会组织仅有非私营119,465元。本页未确认具体单位分类，不将这些行业全岗位平均当法医、验尸官中位数或起薪，不折个人月薪与到手。",
           "china_salary_table": [
             {
-              "城市/区间": "全国单职业",
-              "月薪参考": "暂无安全数值"
+              "城市/区间": "全国验尸官精确职业",
+              "月薪参考": "证据不足：未取得可比月薪或起薪"
             },
             {
-              "城市/区间": "全国单职业",
-              "月薪参考": "暂无安全数值"
+              "城市/区间": "城市／目标单位",
+              "月薪参考": "证据不足：未取得可比月薪或起薪"
             },
             {
-              "城市/区间": "全国单职业",
-              "月薪参考": "暂无安全数值"
+              "城市/区间": "独立鉴定与自雇",
+              "月薪参考": "证据不足：未取得可比月薪或起薪"
             }
           ],
           "china_soc_row": {
@@ -10177,7 +10252,7 @@
           "sources_note": {
             "$join": [
               {
-                "$source": "nbs-wage-method",
+                "$source": "nbs-2025",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -10185,7 +10260,7 @@
               },
               "｜",
               {
-                "$source": "nbs-wage-method",
+                "$source": "nbs-2025",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10198,21 +10273,21 @@
             "ai_heading": "AI 辅助边界",
             "driver_heading": "影响因素",
             "official_heading": "中国大陆公开口径",
-            "scenario_caption": "未取得全国单职业精确工资，不以行业代理值替代。",
+            "scenario_caption": "已取得限定行业税前年均背景；本页没有精确职业工资、城市月薪或统一起薪。",
             "scenario_heading": "职业场景边界",
             "scenario_interpretation_label": "解释",
             "scenario_role_label": "职业",
             "scenario_value_label": "口径"
           },
-          "us_growth": "暂无安全数值",
-          "us_median": "暂无安全数值"
+          "us_growth": "3.8%（2025—2035合规官父职业）",
+          "us_median": "$80,730／年（2025合规官父职业）"
         }
       },
       "career_snapshot_secondary_locale": {
         "authority_sources": {
           "$join": [
             {
-              "$source": "nbs-wage-method",
+              "$source": "repair-current-us",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10220,7 +10295,7 @@
             },
             "｜",
             {
-              "$source": "nbs-wage-method",
+              "$source": "repair-current-us",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10231,199 +10306,47 @@
         },
         "bls_table": [
           {
-            "指标": "美国薪资中位数",
-            "数值": "暂无安全数值",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "dir-forensic",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "coroners.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "dir-forensic",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "coroners.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "指标": "中位年薪（合规官父职业）",
+            "数值": "$80,730",
+            "说明": "2025税前中位数；不代表验尸官独立工资或起薪。"
           },
           {
-            "指标": "美国薪资低位",
-            "数值": "暂无安全数值",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "dir-forensic",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "coroners.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "dir-forensic",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "coroners.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "指标": "验尸官独立低位分位",
+            "数值": "证据不足：未取得",
+            "说明": "父职业表1.2未列分位，不把最低工资或经验层级代分位。"
           },
           {
-            "指标": "美国薪资高位",
-            "数值": "暂无安全数值",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "dir-forensic",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "coroners.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "dir-forensic",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "coroners.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "指标": "验尸官独立高位分位",
+            "数值": "证据不足：未取得",
+            "说明": "不把父职业高薪或实验室邻职业分位套用。"
           },
           {
-            "指标": "美国薪资单位",
-            "数值": "按来源原始单位",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "dir-forensic",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "coroners.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "dir-forensic",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "coroners.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "指标": "工资单位",
+            "数值": "美元／年",
+            "说明": "常规税前工资，不折人民币到手或个人月薪。"
           },
           {
-            "指标": "美国薪资时期",
-            "数值": "按来源时期",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "dir-forensic",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "coroners.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "dir-forensic",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "coroners.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "指标": "工资时期",
+            "数值": "2025",
+            "说明": "统计年不以2026访问日期替换。"
           },
           {
-            "指标": "美国就业规模",
-            "数值": "暂无安全数值",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "nbs-wage-method",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "coroners.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "nbs-wage-method",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "coroners.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "指标": "就业规模（合规官父职业）",
+            "数值": "436,400人（2025）",
+            "说明": "全美父职业就业存量，非单岗招聘人数。"
           },
           {
-            "指标": "美国就业增长 outlook",
-            "数值": "暂无安全数值",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "nbs-wage-method",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "coroners.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "nbs-wage-method",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "coroners.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "指标": "就业增长（合规官父职业）",
+            "数值": "3.8%（2025—2035）",
+            "说明": "2035预测453,100人，净增16,700人；非AI因果。"
           },
           {
-            "指标": "美国就业空缺",
-            "数值": "暂无安全数值",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "nbs-wage-method",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "coroners.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "nbs-wage-method",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "coroners.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "指标": "年均空缺（合规官父职业）",
+            "数值": "32,700个／年（2025—2035）",
+            "说明": "包括转岗退出替代需求；非十年总数或净新增。"
           }
         ],
-        "boundary": "美国统计不代表中国职业工资或就业结果。",
+        "boundary": "13-1041合规官父职业代理，不是13-1041.06验尸官独立工资或招聘数据；不外推中国。",
         "direct_answer": {
           "$item": "coroners.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10432,118 +10355,93 @@
         },
         "factor_rows": [
           {
-            "answer": "按来源职业代码核对。",
+            "answer": "先核13-1041父类与13-1041.06细分差别，职业标题不能互换。",
             "factor": "职业口径"
           },
           {
-            "answer": "按来源地区核对。",
+            "answer": "核具体州县及选举／任命或受雇岗位，未取得本页所在地工资。",
             "factor": "地区"
           },
           {
-            "answer": "按来源时期核对。",
+            "answer": "工资为2025美元年中位数；增长与年均空缺为2025—2035预测。",
             "factor": "时期"
           }
         ],
-        "factors_heading": {
-          "$item": "coroners.us-salary.career-snapshot-secondary-locale.6",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
-        "growth": "暂无安全数值",
-        "heading": {
-          "$item": "coroners.us-salary.career-snapshot-secondary-locale.1",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
-        "industry_heading": {
-          "$item": "coroners.us-salary.career-snapshot-secondary-locale.5",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
-        "industry_period": "按来源时期",
+        "factors_heading": "报价核对因素",
+        "growth": "3.8%（合规官父职业）",
+        "heading": "美国薪资：合规官父职业代理",
+        "industry_heading": "行业、单位与地区差异",
+        "industry_period": "证据不足：本轮未取得验尸官独立行业工资表",
         "industry_rows": [
           {
-            "industry": "来源覆盖范围",
-            "median": "按原始来源",
-            "note": "不作跨市场换算。"
+            "industry": "验尸官独立行业工资",
+            "median": "证据不足：未取得",
+            "note": "不把13-1041父类或法证科学技术员行业数代此岗位。"
           },
           {
-            "industry": "机构/雇主",
-            "median": "需核对",
-            "note": "岗位要求可能不同。"
+            "industry": "选举／任命与雇主",
+            "median": "具体薪酬待核",
+            "note": "需当地职位薪酬和任期原文；本页无招聘样本。"
           },
           {
-            "industry": "地区",
-            "median": "需核对",
-            "note": "地区影响结果。"
+            "industry": "州县地区",
+            "median": "地区工资待核",
+            "note": "全美父类中位数不等于任一州县岗位工资。"
           },
           {
-            "industry": "时期",
-            "median": "按来源",
-            "note": "不得忽略时间口径。"
+            "industry": "工资及预测时期",
+            "median": "2025工资／2025—2035预测",
+            "note": "工资、就业存量和预测空缺分别解释。"
           }
         ],
         "industry_value_label": "来源原始值",
-        "interpretation_heading": {
-          "$item": "coroners.us-salary.career-snapshot-secondary-locale.4",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "interpretation_heading": "父职业代理怎样读",
         "interpretation_rows": [
           {
-            "answer": "按所列职业和时期解释。",
+            "answer": "BLS13-1041合规官父职业；O*NET13-1041.06才是验尸官细分职业。",
             "question": "统计对象是什么？"
           },
           {
-            "answer": "不能。",
+            "answer": "不能；中国法医业务与美国法定职位不可直接等同。",
             "question": "能否外推中国？"
           },
           {
-            "answer": "不能。",
+            "answer": "不能；全国中位数非个人报价，预测空缺非录用概率。",
             "question": "能否保证个人结果？"
           },
           {
-            "answer": "结合岗位和来源边界。",
+            "answer": "先核真实法域、职位产生方式和有薪岗位合同，再用父类统计作有限背景。",
             "question": "如何使用？"
           }
         ],
-        "median": "暂无安全数值",
-        "outlook_heading": "就业展望",
-        "outlook_period": "按来源时期",
+        "median": "$80,730／年（2025合规官父职业）",
+        "outlook_heading": "2025—2035父职业就业预测",
+        "outlook_period": "2025—2035",
         "wage_column_labels": [
           "口径",
           "数值",
           "时期",
           "限制"
         ],
-        "wage_heading": {
-          "$item": "coroners.us-salary.career-snapshot-secondary-locale.3",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "wage_heading": "2025税前中位年薪",
         "wage_tiers": [
           {
-            "equivalent": "不作换算",
-            "interpretation": "保留原始单位。",
+            "equivalent": "未取得",
+            "interpretation": "不按工龄代分位。",
             "label": "低位",
-            "value": "按来源"
+            "value": "证据不足：未取得验尸官独立分位"
           },
           {
-            "equivalent": "不作换算",
-            "interpretation": "保留原始单位。",
+            "equivalent": "2025",
+            "interpretation": "不是验尸官独立中位数或起薪。",
             "label": "中位",
-            "value": "按来源"
+            "value": "$80,730／年（合规官父职业）"
           },
           {
-            "equivalent": "不作换算",
-            "interpretation": "保留原始单位。",
+            "equivalent": "未取得",
+            "interpretation": "不套用邻职业高位值。",
             "label": "高位",
-            "value": "按来源"
+            "value": "证据不足：未取得验尸官独立分位"
           }
         ]
       },
@@ -10623,36 +10521,31 @@
         },
         "outlook_evidence": [
           {
-            "geography": "来源覆盖范围",
-            "horizon": "当前来源时期",
-            "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
-            "limitation": "不能作为个人就业保证。",
-            "metric": "市场信号",
-            "occupation_scope": "验尸官",
-            "value": {
-              "$item": "coroners.market-signals.market-signal-card.3",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            }
+            "geography": "美国全国",
+            "horizon": "2025—2035",
+            "interpretation": "相对2025父职业436,400人净增16,700人，不证明验尸官单岗增量。",
+            "limitation": "不外推中国、具体州县招聘或个人录用；不能推AI净影响。",
+            "metric": "就业增长",
+            "occupation_scope": "13-1041合规官父职业代理，非验尸官独立口径",
+            "value": "3.8%；2035预测453,100人"
           },
           {
-            "geography": "来源覆盖范围",
-            "horizon": "当前来源时期",
-            "interpretation": "就业规模与空缺不是同一指标。",
-            "limitation": "不能作为个人就业保证。",
-            "metric": "就业规模",
-            "occupation_scope": "验尸官",
-            "value": "暂无安全数值"
+            "geography": "美国全国",
+            "horizon": "2025",
+            "interpretation": "父职业存量不是当前招聘人数。",
+            "limitation": "不外推中国、具体州县招聘或个人录用；不能推AI净影响。",
+            "metric": "就业存量",
+            "occupation_scope": "13-1041合规官父职业代理，非验尸官独立口径",
+            "value": "436,400人"
           },
           {
-            "geography": "来源覆盖范围",
-            "horizon": "当前来源时期",
-            "interpretation": "职位空缺需按来源口径解释。",
-            "limitation": "不能作为个人就业保证。",
-            "metric": "职位空缺",
-            "occupation_scope": "验尸官",
-            "value": "暂无安全数值"
+            "geography": "美国全国",
+            "horizon": "2025—2035",
+            "interpretation": "含转岗退出替代，不是净新增或十年总量。",
+            "limitation": "不外推中国、具体州县招聘或个人录用；不能推AI净影响。",
+            "metric": "年均岗位空缺",
+            "occupation_scope": "13-1041合规官父职业代理，非验尸官独立口径",
+            "value": "32,700个／年"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -10673,7 +10566,7 @@
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "制度综述及历史州别档案，不作2026具体州县任职资格结论。"
           },
           {
             "href": {
@@ -10691,7 +10584,7 @@
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "不规定单个州的任命资格。"
           },
           {
             "href": {
@@ -10709,7 +10602,7 @@
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "数据现代化不等于调查判断自动化。"
           },
           {
             "href": {
@@ -10727,7 +10620,7 @@
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "相邻职业资料，不作验尸官精确工资、AI采用或法域资格依据。"
           }
         ],
         "transitions": [
@@ -10747,47 +10640,47 @@
             "target_href": "/zh/career/jobs/forensic-science-technicians",
             "target_slug": "forensic-science-technicians",
             "target_title": "法证科学技术员",
-            "transition_distance": "需补证据"
+            "transition_distance": "编辑判断：需补实验室专长及独立办案条件，非直接等岗"
           },
           {
-            "capability_gaps": "完整医学教育、住院训练与病理执业资格。",
-            "shared_capabilities": "能读懂医学与实验室资料并把结论与原始记录对应。",
+            "capability_gaps": "医学／病理教育、执业和专科训练按目标法域核；本轮未取得指定路径完整要求。",
+            "shared_capabilities": "编辑迁移分析：案件医学资料阅读和记录可支持沟通，不等于诊断或病理技术资质。",
             "target_href": "/zh/career/jobs/physicians-pathologists",
             "target_slug": "physicians-pathologists",
             "target_title": "医师、病理医师",
-            "transition_distance": "需补证据"
+            "transition_distance": "编辑判断：需独立专业准入，未量化时长"
           },
           {
-            "capability_gaps": "合规领域的法规、审计与行业规则训练。",
-            "shared_capabilities": "能在规则框架内核对事实、保留证据并撰写可复核文书。",
+            "capability_gaps": "目标行业法规、审计及单位要求另补；本轮无具体雇主岗位样本。",
+            "shared_capabilities": "编辑迁移分析：事实核对、规则执行与可追溯报告可交叉。",
             "target_href": "/zh/career/jobs/compliance-officers",
             "target_slug": "compliance-officers",
             "target_title": "合规专员",
-            "transition_distance": "需补证据"
+            "transition_distance": "编辑判断：领域规则与岗位条件待核"
           },
           {
-            "capability_gaps": "健康信息系统的登记、编码与隐私合规训练。",
-            "shared_capabilities": "能维护标准化记录与字段质量，并处理隐私要求。",
+            "capability_gaps": "目标信息系统、登记数据标准和隐私职责另核；不将所有岗位都等同医疗编码员。",
+            "shared_capabilities": "编辑迁移分析：死亡记录字段与数据质量经验可能交叉。",
             "target_href": "/zh/career/jobs/health-information-technologists-and-medical-registrars",
             "target_slug": "health-information-technologists-and-medical-registrars",
             "target_title": "健康信息技师与医疗登记专员",
-            "transition_distance": "需补证据"
+            "transition_distance": "编辑判断：信息技术与登记标准待核"
           },
           {
-            "capability_gaps": "殡葬法规、许可与遗体处置流程要求。",
-            "shared_capabilities": "能在敏感场景中与家属沟通并按规定处理遗体交接。",
+            "capability_gaps": "殡葬服务、经营或遗体技术职责与许可各自核；死亡调查权不转换为殡葬资格。",
+            "shared_capabilities": "编辑迁移分析：家属沟通和遗体移交经验可能交叉。",
             "target_href": "/zh/career/jobs/morticians-undertakers-and-funeral-arrangers",
             "target_slug": "morticians-undertakers-and-funeral-arrangers",
             "target_title": "殡葬师、殡仪承办人",
-            "transition_distance": "需补证据"
+            "transition_distance": "编辑判断：服务职责与准入待核"
           },
           {
-            "capability_gaps": "执法授权、调查程序与法定权限的准入要求。",
-            "shared_capabilities": "能保护现场、记录证据并按程序转介。",
+            "capability_gaps": "执法任职、警务训练与调查权另核；与执法合作不等于已具警察权限。",
+            "shared_capabilities": "编辑迁移分析：现场记录、证据链与出庭沟通可能交叉。",
             "target_href": "/zh/career/jobs/police-and-detectives",
             "target_slug": "police-and-detectives",
             "target_title": "警察与侦探",
-            "transition_distance": "需补证据"
+            "transition_distance": "编辑判断：须另核执法任职路径"
           }
         ]
       },
@@ -10819,8 +10712,8 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
-            "evidence_level": "工作样本",
+            "cta_label": "另做RIASEC职业兴趣探索",
+            "evidence_level": "编辑观察建议；未做实际测评或招聘验证",
             "id": "riasec",
             "label": "兴趣与任务",
             "question": "能否在信息不全时仍保持精确记录并主动标待核？",
@@ -10828,18 +10721,13 @@
               "记录",
               "待核"
             ],
-            "watchout": "不作人格诊断或录用结论。"
+            "watchout": "以下为编辑自问；链接仅供RIASEC兴趣探索，不检验本项压力、人格、智力、能力或资格。"
           },
           {
-            "answer": {
-              "$item": "coroners.fit.personality-fit-block.7",
-              "block": "fit",
-              "copy_key": "career.item.personality-fit-block",
-              "type": "prose"
-            },
+            "answer": "能面对死亡、创伤材料和家属情绪而保持准确与尊重。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
-            "evidence_level": "工作样本",
+            "cta_label": "另做RIASEC职业兴趣探索",
+            "evidence_level": "编辑观察建议；未做实际测评或招聘验证",
             "id": "big-five",
             "label": "压力与情绪负荷",
             "question": "能否面对创伤材料与家属沟通仍保持准确与尊重？",
@@ -10847,18 +10735,13 @@
               "情绪负荷",
               "沟通"
             ],
-            "watchout": "不作人格诊断或录用结论。"
+            "watchout": "以下为编辑自问；链接仅供RIASEC兴趣探索，不检验本项压力、人格、智力、能力或资格。"
           },
           {
-            "answer": {
-              "$item": "coroners.fit.personality-fit-block.8",
-              "block": "fit",
-              "copy_key": "career.item.riasec-fit-block",
-              "type": "prose"
-            },
+            "answer": "编辑自问：能否确认本人权限、注明待核并联系有权责任人？法域资格条件另查，兴趣测试不能回答。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
-            "evidence_level": "工作样本",
+            "cta_label": "另做RIASEC职业兴趣探索",
+            "evidence_level": "编辑观察建议；未做实际测评或招聘验证",
             "id": "mbti",
             "label": "边界与升级",
             "question": "能否在越权前停止并按规定升级？",
@@ -10866,13 +10749,13 @@
               "授权边界",
               "升级"
             ],
-            "watchout": "不作人格诊断或录用结论。"
+            "watchout": "以下为编辑自问；链接仅供RIASEC兴趣探索，不检验本项压力、人格、智力、能力或资格。"
           },
           {
             "answer": "用实际样本验证。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
-            "evidence_level": "工作样本",
+            "cta_label": "另做RIASEC职业兴趣探索",
+            "evidence_level": "编辑观察建议；未做实际测评或招聘验证",
             "id": "enneagram",
             "label": "动机观察",
             "question": "能否长期面对不确定的死因与家属情绪而不急于给结论？",
@@ -10880,13 +10763,13 @@
               "任务",
               "记录"
             ],
-            "watchout": "不作人格诊断或录用结论。"
+            "watchout": "以下为编辑自问；链接仅供RIASEC兴趣探索，不检验本项压力、人格、智力、能力或资格。"
           },
           {
             "answer": "用实际样本验证。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
-            "evidence_level": "工作样本",
+            "cta_label": "另做RIASEC职业兴趣探索",
+            "evidence_level": "编辑观察建议；未做实际测评或招聘验证",
             "id": "iq",
             "label": "问题解决",
             "question": "能否在信息冲突或缺失时理清事实并标出待核项？",
@@ -10894,13 +10777,13 @@
               "任务",
               "记录"
             ],
-            "watchout": "不作人格诊断或录用结论。"
+            "watchout": "以下为编辑自问；链接仅供RIASEC兴趣探索，不检验本项压力、人格、智力、能力或资格。"
           },
           {
             "answer": "用实际样本验证。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
-            "evidence_level": "工作样本",
+            "cta_label": "另做RIASEC职业兴趣探索",
+            "evidence_level": "编辑观察建议；未做实际测评或招聘验证",
             "id": "eq",
             "label": "协作边界",
             "question": "能否在执法、医疗与家属之间保持边界与尊重？",
@@ -10908,10 +10791,10 @@
               "任务",
               "记录"
             ],
-            "watchout": "不作人格诊断或录用结论。"
+            "watchout": "以下为编辑自问；链接仅供RIASEC兴趣探索，不检验本项压力、人格、智力、能力或资格。"
           }
         ],
-        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "boundary": "以下为编辑观察问题；RIASEC链接仅测职业兴趣，不能证明抗创伤、情绪稳定、专业能力、任职资格或录用。不得据一次样本给人格或不适合标签。",
         "direct_answer": {
           "$item": "coroners.fit.personality-fit-block.2",
           "block": "fit",
@@ -11042,7 +10925,7 @@
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+            "usage": "制度综述及历史州别档案，不作2026具体州县任职资格结论。"
           },
           {
             "href": {
@@ -11059,7 +10942,7 @@
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+            "usage": "不规定单个州的任命资格。"
           },
           {
             "href": {
@@ -11076,7 +10959,7 @@
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+            "usage": "数据现代化不等于调查判断自动化。"
           },
           {
             "href": {
@@ -11093,7 +10976,7 @@
               "field": "name",
               "item": "coroners.source-register.published.1"
             },
-            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+            "usage": "相邻职业资料，不作验尸官精确工资、AI采用或法域资格依据。"
           }
         ]
       },
@@ -11130,8 +11013,8 @@
         }
       ],
       "riasec_fit_block": {
-        "fit_interest": "工作样本优先",
-        "interest": "按现场响应、记录与授权边界核对兴趣适配，不作为人格或资格判断。",
+        "fit_interest": "I/C/E职业兴趣参考，结合具体任务探索",
+        "interest": "O*NET当前职业兴趣I66、C64、E52、R51、S35、A8是职业兴趣分数，不是人群比例、个体合格线或医学心理测评。",
         "riasec": "I/C/E",
         "riasec_short": "调查型 · 常规型 · 企业型"
       },
@@ -11153,7 +11036,7 @@
             "item": "coroners.source-register.published.1"
           }
         },
-        "note": "来源范围、限制和统计时期按原始证据分别核对。"
+        "note": "资料本轮于2026-10-09核对；CDC2015州别资料仅作制度背景，指定法域现行资格仍待核。父职业、相邻职业、条件行业背景与编辑推演分别解释。"
       },
       "work_context_block": {
         "$join": [
@@ -11382,7 +11265,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [],
     "metrics": [
@@ -11429,7 +11312,7 @@
       "text": "验尸官"
     }
   },
-  "source_content_sha256": "51f66ae4200a2cce08e5d7a68d145950ee5fae6c2be65f6aa4ff2bf427293fe9",
+  "source_content_sha256": "3045f5277e2c62c552d158d05356bab280902e09a9bc30aa2560287b7573f4e1",
   "subject": {
     "canonical_slug": "coroners",
     "name": "验尸官",

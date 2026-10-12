@@ -9070,18 +9070,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.03.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            2,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.03.mitigation": {
         "ref": {
@@ -9159,18 +9149,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.04.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            3,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.04.mitigation": {
         "ref": {
@@ -23648,7 +23628,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "边界看四件事：谁在航空器上驾驶与指挥、谁提供空中交通管制、谁实施航空器维修与放行、谁制定运营人运行标准。飞行员在执照与运营人授权范围内操纵航空器并对飞行安全负责，机长保留最终指挥权；空中交通管制由管制员负责；航空器维修与放行由持照维修人员实施；运行标准与安全管理由运营人与民航管理部门负责；超出执照等级、机型等级或运行手册范围的事项须按程序升级。"
+              "边界看四件事：谁在航空器上驾驶与指挥、谁提供空中交通管制、谁实施航空器维修与放行、谁制定运营人运行标准。飞行员在执照与运营人授权范围内操纵航空器并对飞行安全负责，机长保留最终指挥权；空中交通管制由管制员负责；航空器维修按机构和人员授权实施，独立放行另须满足相应资格与授权；运行标准与安全管理由运营人与民航管理部门负责；超出执照等级、机型等级或运行手册范围的事项须按程序升级。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.profile.career-quick-answers-block.7",
@@ -23819,7 +23799,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "航空器操纵与指挥由持照飞行机组在运营人授权范围内实施；空中交通管制由管制员实施；航空器维修与放行由持照维修人员实施；运行标准与安全管理由运营人与民航管理部门负责。"
+              "航空器操纵与指挥由持照飞行机组在运营人授权范围内实施；空中交通管制由管制员实施；航空器维修按机构和人员授权实施，独立放行另须满足相应资格与授权；运行标准与安全管理由运营人与民航管理部门负责。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.profile.career-quick-answers-block.17",
@@ -25136,7 +25116,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持职业属性、任务边界、工资与就业口径，不是 AI 替代率或岗位数量预测。"
+              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持职业属性、任务边界、工资与就业口径，不提供 AI 替代率或由 AI 导致的岗位数量预测。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.ai-impact.ai-impact-table.40",
@@ -25783,7 +25763,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "跳过检查单或放宽运行限制会把机械与系统缺陷带入飞行，直接影响飞行安全。"
+              "编辑风险情境：跳过检查或放宽适用限制可能使缺陷未被发现或风险未获处置；应按现行手册、法域及岗位权限检查和升级，不断言每次必然带入缺陷。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.ai-impact.ai-impact-table.84",
@@ -25813,7 +25793,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对自动驾驶与告警系统不加核实会削弱情景意识，在系统失效或异常时来不及接管。"
+              "编辑风险情境：未核自动化模式或告警可能影响状态判断与接管准备；具体行为依机型训练和运行程序确认，不预设必然来不及接管。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.ai-impact.ai-impact-table.86",
@@ -25872,7 +25852,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "机组分工与沟通不清会导致关键信息遗漏与处置延误。"
+              "编辑风险情境：机组信息传递不清可能干扰核对和协调；应按适用机组程序澄清并保留明确分工，不预设每次必然延误。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.ai-impact.ai-impact-table.90",
@@ -27350,14 +27330,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本次未取得匹配的美国53-2011全国工资均值记录，不代表官方从未公开。工资分位使用2025年5月53-2011，预测使用2025—2035年BLS单列职业；不是53-2010合计或商业飞行员53-2012，均不外推中国。"
+              "工资来自2025年5月OEWS美国非农受薪雇员估计，不覆盖自雇、非公司制业主/合伙人、家庭雇员及无薪家属。税前正常工资包括基本工资、部分津贴和生产奖金等，排除加班溢价、轮班差额、非生产奖金及雇主福利成本；飞行员年工资单独报告，不能统一按2080小时反推时薪，也不是个人飞行工时收入。就业及空缺另属EP2025–2035，工资覆盖不能从EP自雇比例推定。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
             "oews",
             "ooh",
-            "ep"
+            "ep",
+            "oews-method-2025"
           ],
           "type": "prose"
         },
@@ -28029,7 +28010,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣代码是可核对的起点：先用一周小任务体验按手册准备、核对参数与填写记录的真实感受，再判断自己是否愿意长期做这类需要精确、持续学习与接受考核的飞行工作；测评结果不保证录用，也不能预测工作表现。"
+              "兴趣代码是可核对的起点：先用模型L的虚构纸面题面观察核对参数、版本和记录的习惯，再判断是否愿意长期学习并接受正式训练与考核。纸面体验不代表真实飞行感受或适任，测评不保证录用或预测工作表现。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.fit.riasec-fit-block.9",
@@ -28472,7 +28453,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需按维修执照与机型授权训练并取证，面向维修与放行。"
+              "在役维修需另核法域、执照及具体项目授权；维修实施与独立放行资格分别核对，飞行资历不自动赋予两者权限。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.fit.personality-fit-block.36",
@@ -29057,7 +29038,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "跳过检查单或放宽运行限制会把机械与系统缺陷带入飞行，直接影响飞行安全。"
+              "编辑风险情境：检查或运行限制未落实可能使风险未获识别和处置；依实际程序、权限与运行条件确认，不给事故必然链或发生率。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.risk.career-risk-cards.12",
@@ -29117,7 +29098,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "对自动化与告警系统不加核实会削弱情景意识，在系统失效或异常时来不及接管。"
+              "编辑风险情境：未核自动化模式或告警可能增加状态判断与接管风险；按机型、训练和实际程序处理，不由任务问卷推出必然失控。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.risk.career-risk-cards.16",
@@ -29234,7 +29215,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "机组分工与沟通不清会导致关键信息遗漏与处置延误。"
+              "编辑风险情境：信息传递不清可能影响决策与协调；按实际程序复述、澄清和升级，不声称必然延误或事故。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.risk.career-risk-cards.24",
@@ -29339,7 +29320,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "夜航、跨时区与驻外岗位"
+              "承担夜航、跨时区或驻外任务的人员，以及负责排班和疲劳风险管理的岗位"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.risk.career-risk-cards.31",
@@ -29354,7 +29335,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "夜间跨时区飞行、驻外与不规律日程会降低注意力与判断能力。"
+              "夜间跨时区飞行、驻外与不规律日程可能带来疲劳，并影响注意力与判断；实际风险需结合休息、任务和运营人疲劳管理核对。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.risk.career-risk-cards.32",
@@ -30329,7 +30310,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与多机型或长航线运行并积累经历。"
+              "在已有机型与运行授权范围内积累航线经历；转机型另须训练和检查，不以同时参与多机型作为统一发展步骤。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.path.career-path-block.34",
@@ -30605,7 +30586,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "具多次复杂运行经历；按运营人规定。"
+              "编辑准备建议：整理已获授权运行或教学的经历、记录和反馈；目标岗位的资格、训练、经验和授权按具体法规及机构条件核对，不预设统一多次复杂或丰富经历门槛。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.path.career-path-block.53",
@@ -30751,7 +30732,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长飞行经历与管理能力；按运营人规定。"
+              "按目标运营人和职务核飞行经历、等级、考核及管理职责；本页未核实通用最低资历或年限。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.path.career-path-block.63",
@@ -30897,7 +30878,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "具较丰富教学与飞行经历；按训练机构规定。"
+              "编辑准备建议：整理已获授权运行或教学的经历、记录和反馈；目标岗位的资格、训练、经验和授权按具体法规及机构条件核对，不预设统一多次复杂或丰富经历门槛。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.path.career-path-block.73",
@@ -31043,7 +31024,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长教学与检查经历；按机构与局方规定。"
+              "按目标机构、局方和职务核教学与检查经历、资格及考核；本页未核实统一最低年限。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.path.career-path-block.83",
@@ -31380,7 +31361,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为全国预测口径，主要受航空运输活动与飞行员供给影响，不等于个人就业保证，也不能外推为中国大陆。"
+              "这是美国全国职业预测；OOH列旅客航空运输和货运活动需求背景，不等于个人就业保证或中国预测，也不能据此量化飞行员供给或AI的贡献。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.market-signals.market-signal-card.19",
@@ -31590,7 +31571,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻商业飞行的作业类别、执照及运营人规则分别核对；不预设日程比航空公司岗位更不规律。"
+              "相邻商业飞行的作业类别、执照及运营人规则分别核对；不预设日程比航空公司岗位更不规律；共通经验不保证录用或取得目标岗位资格。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.market-signals.market-signal-card.34",
@@ -31619,7 +31600,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻职业，需补作业资格。"
+              "编辑判断：相邻。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.market-signals.market-signal-card.36",
@@ -31634,7 +31615,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需按管制执照与岗位训练取证并提供管制指令，职责与资质体系不同。"
+              "需按管制执照与岗位训练取证并提供管制指令，职责与资质体系不同；共通经验不保证录用或取得目标岗位资格。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.market-signals.market-signal-card.37",
@@ -31664,7 +31645,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻方向，需投入管制训练与执照。"
+              "编辑判断：相邻。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.market-signals.market-signal-card.39",
@@ -31679,7 +31660,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需按维修执照与机型授权训练并取证，面向维修与放行。"
+              "在役维修需另核法域、执照及具体项目授权；维修实施与独立放行资格分别核对，飞行资历不自动赋予两者权限。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.market-signals.market-signal-card.40",
@@ -31709,7 +31690,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远距离转向，需投入执照训练。"
+              "编辑判断：较远。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.market-signals.market-signal-card.42",
@@ -31724,7 +31705,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "面向设计与工程分析，需补工程教育与设计能力。"
+              "面向设计与工程分析，需补工程教育与设计能力；共通经验不保证录用或取得目标岗位资格。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.market-signals.market-signal-card.43",
@@ -31754,7 +31735,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远距离转向，需投入工程教育。"
+              "编辑判断：较远。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.market-signals.market-signal-card.45",
@@ -31769,7 +31750,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "面向适航与运行合规监督，需补法规与检查实务。"
+              "面向适航与运行合规监督，需补法规与检查实务；共通经验不保证录用或取得目标岗位资格。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.market-signals.market-signal-card.46",
@@ -31799,7 +31780,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻方向，需补适航法规与检查实务。"
+              "编辑判断：相邻。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.market-signals.market-signal-card.48",
@@ -31814,7 +31795,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "面向飞行区场地、运行信息与安全程序，不承担航空器操纵。"
+              "面向飞行区场地、运行信息与安全程序，不承担航空器操纵；共通经验不保证录用或取得目标岗位资格。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.market-signals.market-signal-card.49",
@@ -31843,7 +31824,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远距离转向，需适应机场运行体系。"
+              "编辑判断：较远。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.market-signals.market-signal-card.51",
@@ -31857,7 +31838,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补重量与平衡、装载文件与班组管理能力。"
+              "需补重量与平衡、装载文件与班组管理能力；共通经验不保证录用或取得目标岗位资格。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.market-signals.market-signal-card.52",
@@ -31887,7 +31868,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远距离转向，需补配载与管理能力。"
+              "编辑判断：较远。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.market-signals.market-signal-card.54",
@@ -31902,7 +31883,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "面向设计支持、试验与运行技术，需补工程与试验能力。"
+              "面向设计支持、试验与运行技术，需补工程与试验能力；共通经验不保证录用或取得目标岗位资格。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.market-signals.market-signal-card.55",
@@ -31932,7 +31913,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远距离转向，需补工程与试验训练。"
+              "编辑判断：较远。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.market-signals.market-signal-card.57",
@@ -32071,7 +32052,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮内容与来源复核：2026-10-03。"
+              "资料核对日期：2026-10-08；工资2025年5月，就业预测2025–2035，法规及中国民航统计公报期分别注明。"
             ]
           },
           "id": "airline-pilots-copilots-and-flight-engineers.sources.source-card.3",
@@ -32651,6 +32632,21 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/53-2012.00"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "Scope of the survey及Concepts说明受薪雇员覆盖、排除对象、税前正常工资构成与常规2080小时换算。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "oews-method-2025",
+                "limitation": "方法不提供本职业工资值；教师、飞行员等有年工资单独报告例外，不能按个人实际工时推收入。",
+                "market": "美国",
+                "name": "BLS Technical Notes for May 2025 OEWS Estimates",
+                "period": "2025年5月估计；2026-05-15方法说明",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "statistical_method",
+                "url": "https://www.bls.gov/oes/2025/may/oes_tec.htm"
               }
             ]
           },
@@ -34865,8 +34861,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
-              "privacy"
+              "onet",
+              "facilities"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -34897,8 +34893,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
-              "privacy"
+              "onet",
+              "facilities"
             ],
             "id": "record-version",
             "mitigation": {
@@ -34929,8 +34925,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
-              "ooh"
+              "bls"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34961,8 +34956,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
-              "privacy"
+              "onet"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -34993,8 +34987,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "ccar61",
-              "ccar121"
+              "privacy",
+              "employer"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -35025,8 +35019,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "ooh",
-              "ccar121"
+              "bls",
+              "facilities"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -37416,7 +37410,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "大五人格（英文）"
           },
           {
             "href": {
@@ -37426,7 +37420,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "MBTI（中文）"
           },
           {
             "href": {
@@ -37436,7 +37430,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "九型人格（中文）"
           },
           {
             "href": {
@@ -37446,7 +37440,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "智力与推理（中文）"
           }
         ]
       },
@@ -38033,7 +38027,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "航空器驾驶：执照与运行资格 · 飞行计划与操纵监控 · 安全与机组协同",
@@ -38084,7 +38078,7 @@
       "text": "航空公司飞行员、副驾驶与飞行工程师：任务、工资与就业前景（O*NET 53-2011）"
     }
   },
-  "source_content_sha256": "f90996dc9736e78a5e8ccc021241af94881766a8bebb7ad3fb527df8a313f10b",
+  "source_content_sha256": "db037ad2848fa84ddb46881fe953440a9c6322f228c5ce7293e40a22b2309b7b",
   "subject": {
     "canonical_slug": "airline-pilots-copilots-and-flight-engineers",
     "name": "航空公司飞行员、副驾驶与飞行工程师",

@@ -13586,17 +13586,17 @@
         "difference_intro": "不同工作环节的工具影响不同：以任务层辅助为准，危害判断与合规责任仍需人工承担。",
         "difference_rows": [
           {
-            "AI主要改变": "法规检索与文书草稿可被加速。",
+            "AI主要改变": "编辑辅助假设：法规检索与文书草稿可被加速。 未取得本方向效果实测。",
             "仍由人负责": "法规适用判断、版本核对与结论签署。",
             "方向": "法规检索与文件准备"
           },
           {
-            "AI主要改变": "数据汇总与趋势提示可被加速。",
+            "AI主要改变": "编辑辅助假设：数据汇总与趋势提示可被加速。 未取得本方向效果实测。",
             "仍由人负责": "采样方法与数据有效性判断、检测结论。",
             "方向": "检测数据整理"
           },
           {
-            "AI主要改变": "事件时间线与初步统计可被辅助。",
+            "AI主要改变": "编辑辅助假设：事件时间线与初步统计可被辅助。 未取得本方向效果实测。",
             "仍由人负责": "原因判定、整改要求与上报决定。",
             "方向": "事故与隐患分析"
           }
@@ -13642,7 +13642,7 @@
         "heading": "作业健康专员的任务、工具与责任边界",
         "method_cards": [
           {
-            "含义": "工具可辅助法规检索、清单生成、数据整理与报告草稿，但不能作出危害结论、合规判断、事故原因认定或签署文件。",
+            "含义": "编辑辅助假设：可评估法规检索、清单和文书草稿等用途，先验证来源版本、准确性与权限；所列职业描述和软件招聘数据不证明AI效果。危害、合规与事故结论仍由有权限人员负责。",
             "概念": "技术能做什么"
           },
           {
@@ -13807,7 +13807,7 @@
         },
         "competence_ladder": [
           {
-            "description": "作业健康专员工作需围绕作业健康专员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "description": "取得目标任务所需训练与机构授权后，在监督下配合现场观察、危害记录与资料核对；以带教记录和反馈核实是否能追溯输入与异常。",
             "stage": "受监督协作阶段"
           },
           {
@@ -14164,8 +14164,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "source-pack-onet-details",
-              "cn-occupational-disease-law"
+              "onet",
+              "law"
             ],
             "id": "cost-change",
             "mitigation": "变更管理与危害复评：变更前重新识别、评价并更新控制措施与记录。",
@@ -14176,8 +14176,8 @@
             "affected_roles": "负责方案设计与整改跟踪的作业健康专员与安全管理人员",
             "consequence": "暴露继续存在，可能造成健康损害或事故。",
             "evidence_refs": [
-              "source-pack-onet-details",
-              "cn-occupational-disease-law"
+              "onet",
+              "law"
             ],
             "id": "record-version",
             "mitigation": "按控制层级选择措施并对整改有效性进行现场验证。",
@@ -14188,8 +14188,8 @@
             "affected_roles": "承担采样、检测与档案管理的人员",
             "consequence": "数据不可靠会影响合规判断与责任追溯。",
             "evidence_refs": [
-              "source-pack-onet-details",
-              "cn-occupational-disease-law"
+              "onet",
+              "law"
             ],
             "id": "personal-data",
             "mitigation": "按资质认可的方法与机构检测，双人复核并完整归档。",
@@ -14200,8 +14200,8 @@
             "affected_roles": "承担事故调查与原因分析的人员",
             "consequence": "原因判定错误会导致同类事故重复发生。",
             "evidence_refs": [
-              "source-pack-onet-details",
-              "cn-occupational-disease-law"
+              "onet",
+              "law"
             ],
             "id": "technical-boundary",
             "mitigation": "重建时间线、核验证物与证言并保留结论边界。",
@@ -14212,8 +14212,8 @@
             "affected_roles": "在岗的作业健康专员与技术服务机构人员",
             "consequence": "越权结论会影响整改方向与监管处置。",
             "evidence_refs": [
-              "cn-safety-engineer",
-              "cn-occupational-disease-law"
+              "cred",
+              "law"
             ],
             "id": "single-coverage",
             "mitigation": "按注册与资质范围执行，超范围转交有资质机构或授权人员。",
@@ -14224,8 +14224,8 @@
             "affected_roles": "负责档案、培训与应急维护的人员",
             "consequence": "在监管检查或事故追责时无法举证。",
             "evidence_refs": [
-              "cn-occupational-disease-law",
-              "source-pack-onet-custom"
+              "law",
+              "custom"
             ],
             "id": "delivery-acceptance",
             "mitigation": "按制度建立并保存档案、培训与演练记录，定期核查完整性。",
@@ -14454,7 +14454,7 @@
             "factor": "雇主类型与地区"
           },
           {
-            "answer": "核对注册安全工程师等资格、机构资质认可与岗位授权对薪酬的影响。",
+            "answer": "美国岗位应核雇主专业认证、具体职责、必要许可及签署权限；中国注册安全工程师资格不直接作为美国报价因素。",
             "factor": "资格与资质范围"
           },
           {
@@ -14763,7 +14763,7 @@
           },
           {
             "capability_gaps": "需补环境工程专业训练与工程设计能力。",
-            "shared_capabilities": "控制技术与非法规合规思路可部分迁移。",
+            "shared_capabilities": "危害控制、现场数据核对与法规适用分析可部分迁移。",
             "target_href": "/zh/career/jobs/environmental-engineers",
             "target_slug": "environmental-engineers",
             "target_title": "环境工程师",
@@ -14882,7 +14882,7 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "人格维度不预测职业胜任力。"
+            "watchout": "本页未提供大五人格量表预测职业健康与安全专员绩效的验证研究。"
           },
           {
             "answer": "MBTI仅讨论信息接收与沟通偏好，不据类型断言适合现场安全判断。",
@@ -15549,7 +15549,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "工作场所危害识别与暴露评估",
@@ -15600,7 +15600,7 @@
       "text": "作业健康专员（Occupational Health and Safety Specialists）职业画像｜任务、薪资、准入与边界"
     }
   },
-  "source_content_sha256": "1e2331d8d5af5fa28dfc317fcf44d568055f2c69b35cc1f7b543d3f90b9b7afd",
+  "source_content_sha256": "e3c6b9955e81ac6a59525ca5a081da17b7ae25fe1737bc96fd95503a8c007d37",
   "subject": {
     "canonical_slug": "occupational-health-and-safety-specialists",
     "name": "作业健康专员",

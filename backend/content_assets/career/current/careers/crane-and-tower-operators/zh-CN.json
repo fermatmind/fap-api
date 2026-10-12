@@ -7333,13 +7333,13 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "检查地面或基础、机构、钢丝绳、吊钩和附件，并确认唯一有效信号与禁入区。"
+              "检查地面、机构附件与钢缆，按职责维护；确认适用信号与现场隔离。美国施工1926.1419通常同一时刻一人给信号，但任何人可发停机或紧急停机信号。需要信号的作业若通讯中断，应安全停止，恢复通讯并给出且理解正确指令后再继续；视线受限须适当信号安排，不等一概禁止盲吊。"
             ]
           },
           "id": "crane-and-tower-operators.profile.responsibilities-block.2",
           "source_refs": [
             "crane-onet-current",
-            "osha-operator"
+            "g04-osha-signal"
           ],
           "type": "list"
         },
@@ -7348,13 +7348,14 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "试吊后平稳起升、回转、变幅和落位；异常时停止，记录并升级。"
+              "按制造商和现场受控程序平稳吊运落位，必要调整维修及时报告与交接；检查异常停止使用、消除故障隐患后方可恢复。"
             ]
           },
           "id": "crane-and-tower-operators.profile.responsibilities-block.3",
           "source_refs": [
             "crane-onet-current",
-            "osha-operator"
+            "g04-osha-operation",
+            "mohurd-crane-rule"
           ],
           "type": "list"
         },
@@ -7363,7 +7364,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作重点是持续核对吊装计划、载荷与幅度、场地设备和信号，并在试吊后平稳运移、落位、记录异常。"
+              "美国53-7021.00有11项任务：8项Core包括操纵起重设备、核地面稳定、检查调整机构附件、指挥支腿垫块、核重量与能力、清洁润滑维护及必要修理、检查更换钢缆、装卸货物；3项Supplemental包括引导货车和固定货物、读取每日作业配送次序、核包装要求与票据。类别不等每日频率，维护任务不自动授予所有维修资质。"
             ]
           },
           "id": "crane-and-tower-operators.profile.work-context-block.1",
@@ -7377,12 +7378,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "可复核闭环是：核计划→核载荷与配置→查场地和设备→确认信号与隔离→试吊→平稳运移→落位→记录异常与交接。"
+              "下面是编辑整理的吊运流程：核计划与配置、核重量和能力、查场地设备、确认适当信号与隔离、按设备规则操纵落位、记录异常交接；不把统一试吊顺序当全部岗位法定程序。美国施工1926.1419通常同一时刻一人给信号，但任何人可发停机或紧急停机信号。需要信号的作业若通讯中断，应安全停止，恢复通讯并给出且理解正确指令后再继续；视线受限须适当信号安排，不等一概禁止盲吊。"
             ]
           },
           "id": "crane-and-tower-operators.profile.work-context-block.2",
           "source_refs": [
-            "crane-onet-current"
+            "crane-editorial",
+            "g04-osha-signal"
           ],
           "type": "prose"
         },
@@ -7391,12 +7393,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "载荷表、检查表和控制软件只能辅助；真实能力、设备状态与现场条件必须由有职责人员核验。"
+              "美国Job Zone Three是跨职业准备层级，SVP6.0至小于7.0；通用的一至两年混合工作训练不是本岗统一岗前培训期。新聘教育响应61%高中后非学位凭证、32%高中同等、8%未完成高中，舍入可不合100%；不等副学士学位或中国准入条件。 2025年Lightcast全美本岗招聘热门表列Excel、Office、Outlook、Windows，比例未提供不填0；不测生成式AI采用、现场部署或替代率。"
             ]
           },
           "id": "crane-and-tower-operators.profile.onet-structured-fields-block.1",
           "source_refs": [
-            "crane-editorial"
+            "crane-onet-current",
+            "g04-hot"
           ],
           "type": "prose"
         },
@@ -7420,7 +7423,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "质量标准是负载受控、运行平稳、信号一致、禁入区有效，且每个检查与停工决定可追溯。"
+              "编辑观察负载控制、平稳操纵和检查记录；美国调查99%每天面对面讨论、98%每天露天、94%每天接触危险设备、78%对他人安全责任很高、76%错误后果极严重、77%周超40小时。各档比例不是事故率或中国工时。"
             ]
           },
           "id": "crane-and-tower-operators.profile.career-quick-answers-block.2",
@@ -7435,12 +7438,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "操作员控制设备；信号工传递指令、司索工连接索具、负责人组织方案与停工、维修人员处理故障，职责不能自动互换。"
+              "操作员控制设备，也有检查、润滑维护及必要修理任务；能否具体维修仍核培训、资质和制度。信号、司索、方案组织与维修职责不能自动互换。中国建筑施工人员有权拒绝违章指挥、强令冒险，危及人身安全的紧急情况可停止作业或采取必要应急措施后撤离，并报告隐患；不是等负责人批准才停。美国施工Subpart CC的1926.1418要求操作员有权停机拒绝吊运，直至qualified person确认安全。"
             ]
           },
           "id": "crane-and-tower-operators.profile.definition-block.2",
           "source_refs": [
-            "onet-details"
+            "crane-onet-current",
+            "g04-osha-stop",
+            "mohurd-special-2025"
           ],
           "type": "prose"
         }
@@ -7602,12 +7607,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "目前可核对的是任务层面的变化，而不是岗位替代的时间表：工具可协助检索载荷表、整理班前检查与日志、模拟盲吊路线；但真实载荷与配置、地基与索具状态、风况、禁入区与起吊授权仍由有职责人员核验。技术暴露不等于组织采用，更不等于岗位消失或收入变化。"
+              "编辑可验证检索、日志整理和纸面预演是否改善任务，尚未取得本岗现场采用、效率或工资因果实测；模拟器和控制软件不必然生成式AI。2025年Lightcast全美本岗招聘热门表列Excel、Office、Outlook、Windows，比例未提供不填0；不测生成式AI采用、现场部署或替代率。"
             ]
           },
           "id": "crane-and-tower-operators.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "crane-editorial"
+            "crane-editorial",
+            "g04-hot"
           ],
           "type": "prose"
         },
@@ -7630,7 +7636,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下面把任务分成更容易被工具改变的部分与仍由人承担判断与责任的部分。"
+              "下面是编辑提出的辅助任务与人工核对建议，未验证哪一类更容易被AI改变。"
             ]
           },
           "id": "crane-and-tower-operators.ai-impact.ai-impact-table.4",
@@ -7644,12 +7650,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "引入工具时责任不能随系统一起转移；下面是本职业可执行的人工控制步骤。"
+              "下面是编辑工具核对建议；实际操作责任按适用法规和岗位核。中国建筑施工人员有权拒绝违章指挥、强令冒险，危及人身安全的紧急情况可停止作业或采取必要应急措施后撤离，并报告隐患；不是等负责人批准才停。美国施工Subpart CC的1926.1418要求操作员有权停机拒绝吊运，直至qualified person确认安全。"
             ]
           },
           "id": "crane-and-tower-operators.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "crane-editorial"
+            "crane-editorial",
+            "g04-osha-stop",
+            "mohurd-special-2025"
           ],
           "type": "prose"
         },
@@ -7686,7 +7694,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "最小留痕包括输入范围、资料版本、人工核对项、冲突和批准状态。"
+              "编辑建议留输入范围、资料版本、人工核对、冲突和批准记录；不是本岗统一法定AI留痕程序。"
             ]
           },
           "id": "crane-and-tower-operators.ai-impact.ai-impact-table.8",
@@ -7750,12 +7758,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国大陆该职业招聘或报价统计；单条报价不能代表全国水平。"
+              "证据不足：本轮未取得中国起重机与塔吊操作员全国精确工资分布、分城市可核报价样本或AI与工资因果。国家统计局2025年行业税前工资均值仅作匹配单位背景：建筑业非私营92,036、私营66,275元/年；制造业113,594/76,055；交通运输仓储邮政133,981/73,133。行业按单位主要经济活动核，非本岗中位数、起薪或个人到手工资，不换成职业月薪。"
             ]
           },
           "id": "crane-and-tower-operators.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "crane-editorial"
+            "g04-nbs"
           ],
           "type": "prose"
         }
@@ -7848,7 +7856,7 @@
           },
           "id": "crane-and-tower-operators.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "crane-trends-current",
+            "g04-trends",
             "crane-wage-current"
           ],
           "type": "prose"
@@ -7880,12 +7888,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "适配不是人格判断，而是把日常工作的真实要求——长时间持续观察与精细操纵、严格复诵唯一信号、对他人安全负很高责任、并在信息不完整时停工——"
+              "编辑可观察持续注意、精细控制、检查记录、协作与依法停机行为；不据此给人格或录用结论。美国施工1926.1419通常同一时刻一人给信号，但任何人可发停机或紧急停机信号。需要信号的作业若通讯中断，应安全停止，恢复通讯并给出且理解正确指令后再继续；视线受限须适当信号安排，不等一概禁止盲吊。"
             ]
           },
           "id": "crane-and-tower-operators.fit.riasec-fit-block.2",
           "source_refs": [
-            "crane-onet-current"
+            "crane-onet-current",
+            "g04-osha-signal"
           ],
           "type": "prose"
         },
@@ -7894,7 +7903,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "愿意长期保持专注观察与平稳操作、并按检查表逐项核对的人，通常更容易适应。"
+              "编辑建议观察是否愿意持续注意、平稳操纵和按表检查；未取这些偏好预测适应速度的本岗效度。"
             ]
           },
           "id": "crane-and-tower-operators.fit.riasec-fit-block.3",
@@ -7908,7 +7917,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "先核对进度压力下的停工习惯、长时间高空与户外作业的耐受、以及能否承受高责任后果。"
+              "编辑核目标设备与岗位的户外、高处和责任条件；美国98%每日露天，高处仅显示23%每月至少一次但非每周，其他档未显示，不推所有岗长期高空。"
             ]
           },
           "id": "crane-and-tower-operators.fit.riasec-fit-block.4",
@@ -7941,7 +7950,7 @@
           },
           "id": "crane-and-tower-operators.fit.riasec-fit-block.6",
           "source_refs": [
-            "crane-editorial"
+            "crane-onet-current"
           ],
           "type": "prose"
         },
@@ -7991,7 +8000,7 @@
           },
           "id": "crane-and-tower-operators.risk.career-risk-cards.1",
           "source_refs": [
-            "osha-operator"
+            "g04-osha-operation"
           ],
           "type": "prose"
         },
@@ -8005,7 +8014,8 @@
           },
           "id": "crane-and-tower-operators.risk.career-risk-cards.2",
           "source_refs": [
-            "osha-operator"
+            "crane-onet-current",
+            "mohurd-crane-rule"
           ],
           "type": "prose"
         },
@@ -8033,7 +8043,8 @@
           },
           "id": "crane-and-tower-operators.risk.career-risk-cards.4",
           "source_refs": [
-            "osha-operator"
+            "g04-osha-signal",
+            "g04-osha-radio"
           ],
           "type": "prose"
         },
@@ -8078,7 +8089,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入行通常从与设备类型匹配的训练和实操评价开始：掌握设备控制、载荷核对、班前检查、手势或无线电通信与安全停机；美国多数岗位要求职业学校培训、相关在职经验或副学士学位，岗位培训一到两年；中国塔式起重机司机须先取得建筑施工特种作业资格。"
+              "美国Job Zone Three是跨职业准备层级，SVP6.0至小于7.0；通用的一至两年混合工作训练不是本岗统一岗前培训期。新聘教育响应61%高中后非学位凭证、32%高中同等、8%未完成高中，舍入可不合100%；不等副学士学位或中国准入条件。 中国房屋市政工程按住建部令60号（2026-06-01施行）核对应工种资格；首次取证正式上岗前须实习至少6个月，由同工种从业6年以上人员指导，实习期不得独立操作。资格证书全国有效3年；培训考核及设备项目条件分别核，Q2特种设备作业项目不能自动替代建筑施工资格。"
             ]
           },
           "id": "crane-and-tower-operators.path.career-path-block.2",
@@ -8093,12 +8104,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国口径下该职业准备层级为 Job Zone Three（需要中等准备，SVP 6.0 至 7.0），通常要求职业学校培训、相关在职经验或副学士学位，岗位培训一到两年；中国没有与 53-7021.00 一一对应的职业细类，资格与授权须按目标单位与主管部门规定核对。"
+              "美国Job Zone Three是跨职业准备层级，SVP6.0至小于7.0；通用的一至两年混合工作训练不是本岗统一岗前培训期。新聘教育响应61%高中后非学位凭证、32%高中同等、8%未完成高中，舍入可不合100%；不等副学士学位或中国准入条件。 中国设备、工种与工程法域分别核，不把美国SOC直接映射为统一中国操作证。"
             ]
           },
           "id": "crane-and-tower-operators.path.career-path-block.3",
           "source_refs": [
-            "crane-editorial"
+            "crane-onet-current"
           ],
           "type": "prose"
         },
@@ -8107,12 +8118,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格与授权要分项核对：OSHA 认证、建筑施工特种作业资格、设备类型专项训练与项目专项方案授权不是同一层状态，不能互相替代；涉及起重机械使用与检验、吊装方案审批与作业范围的，须按现行规定执行。"
+              "美国1926.1427适用于施工Subpart CC所覆设备，derrick、sideboom及制造商额定能力不超2,000磅设备另适用相关规则。由雇主确保培训、适用认证或许可、设备与任务评价；OSHA制定标准，不签发个人操作证。证书自身不等雇主评价合格。 中国房屋市政工程按住建部令60号（2026-06-01施行）核对应工种资格；首次取证正式上岗前须实习至少6个月，由同工种从业6年以上人员指导，实习期不得独立操作。资格证书全国有效3年；培训考核及设备项目条件分别核，Q2特种设备作业项目不能自动替代建筑施工资格。"
             ]
           },
           "id": "crane-and-tower-operators.path.career-path-block.4",
           "source_refs": [
-            "crane-editorial"
+            "osha-operator",
+            "mohurd-special-2025",
+            "samr-q2"
           ],
           "type": "prose"
         },
@@ -8121,12 +8134,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在持证操作员监督下完成信号复诵、索具识别、场地与设备外观检查，并记录班前检查项。"
+              "受训与首次取证实习按工作地规则执行，不以任何持证操作员监督替代指导者条件。中国房屋市政工程按住建部令60号（2026-06-01施行）核对应工种资格；首次取证正式上岗前须实习至少6个月，由同工种从业6年以上人员指导，实习期不得独立操作。资格证书全国有效3年；培训考核及设备项目条件分别核，Q2特种设备作业项目不能自动替代建筑施工资格。"
             ]
           },
           "id": "crane-and-tower-operators.path.career-path-block.5",
           "source_refs": [
-            "crane-editorial"
+            "mohurd-special-2025"
           ],
           "type": "prose"
         },
@@ -8135,12 +8148,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立操作授权设备完成常规吊运：读吊装计划、核载荷与幅度、试吊、平稳运移与落位。"
+              "满足相应资格、实习、雇主评价与设备项目条件后，才在实际授权范围执行常规吊运；不能持证即独立上岗。"
             ]
           },
           "id": "crane-and-tower-operators.path.career-path-block.6",
           "source_refs": [
-            "crane-editorial"
+            "osha-operator",
+            "mohurd-special-2025"
           ],
           "type": "prose"
         },
@@ -8163,12 +8177,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "组织吊装方案、分工与停工决策，协调信号工与司索工，并承担带训与现场安全责任。"
+              "吊装负责人组织方案、分工与带训，但管理职责另核；不取消操作员依法停机与拒绝冒险的权利。"
             ]
           },
           "id": "crane-and-tower-operators.path.career-path-block.8",
           "source_refs": [
-            "crane-editorial"
+            "crane-editorial",
+            "g04-osha-stop",
+            "mohurd-special-2025"
           ],
           "type": "prose"
         },
@@ -8183,18 +8199,25 @@
               "evidence",
               "next_step"
             ],
+            "column_labels": [
+              "方向",
+              "初始任务",
+              "职责边界",
+              "观察材料",
+              "下一步"
+            ],
             "rows": [
               [
                 "操作辅助与信号配合（受训期）",
-                "在持证操作员监督下完成信号复诵、索具识别与场地、设备外观检查，并记录班前检查项。",
+                "中国房屋市政工程按住建部令60号（2026-06-01施行）核对应工种资格；首次取证正式上岗前须实习至少6个月，由同工种从业6年以上人员指导，实习期不得独立操作。资格证书全国有效3年；培训考核及设备项目条件分别核，Q2特种设备作业项目不能自动替代建筑施工资格。",
                 "不得独立操作、独立起吊或自行判断授权。",
                 "一份虚构的班前检查与信号复诵记录。",
                 "熟悉载荷表与检查表。"
               ],
               [
-                "持证操作员（中小型设备）",
-                "独立操作授权设备完成常规吊运：读吊装计划、核载荷与幅度、试吊、平稳运移与落位。",
-                "授权限设备类型与项目范围，超出即由吊装负责人评估。",
+                "满足全部条件的操作员（设备范围另核）",
+                "在满足全部资格、评价和设备项目条件的范围内，核计划载荷幅度并按设备适用程序平稳吊运落位；试吊的具体适用条件另核，不作所有岗位统一顺序。",
+                "美国1926.1427适用于施工Subpart CC所覆设备，derrick、sideboom及制造商额定能力不超2,000磅设备另适用相关规则。由雇主确保培训、适用认证或许可、设备与任务评价；OSHA制定标准，不签发个人操作证。证书自身不等雇主评价合格。 中国房屋市政工程按住建部令60号（2026-06-01施行）核对应工种资格；首次取证正式上岗前须实习至少6个月，由同工种从业6年以上人员指导，实习期不得独立操作。资格证书全国有效3年；培训考核及设备项目条件分别核，Q2特种设备作业项目不能自动替代建筑施工资格。",
                 "一份虚构的吊装计划与载荷核对记录。",
                 "学习复杂吊装与带教。"
               ],
@@ -8208,20 +8231,27 @@
               [
                 "吊装负责人方向（相邻）",
                 "组织吊装方案、分工与停工决策，协调信号工与司索工。",
-                "授权与责任由单位与专项方案规定。",
+                "负责人职责按实际制度和方案核；不取消操作员停机拒绝冒险权。",
                 "一份虚构吊装方案与停工清单。",
                 "核对该方向的职责与任职要求。"
               ],
               [
                 "其他工程设备操作员（相邻方向）",
                 "操作推土机、平地机、装载机等土方机械挖掘、移动和整平土方。",
-                "属相邻职业，不承担起重设备载荷管理。",
+                "相邻47-2073也可能使用power cranes；转入按具体职责设备训练核，不绝对排除载荷管理。",
                 "一份虚构的土方作业计划。",
                 "核对土方机械操作要求。"
               ]
             ]
           },
           "id": "crane-and-tower-operators.path.entry-role-comparison.current.v1",
+          "source_refs": [
+            "crane-editorial",
+            "osha-operator",
+            "mohurd-special-2025",
+            "g04-osha-operation",
+            "crane-adj-equipment"
+          ],
           "type": "table"
         },
         {
@@ -8233,6 +8263,12 @@
               "observed_evidence",
               "possible_check",
               "escalation"
+            ],
+            "column_labels": [
+              "环节",
+              "观察证据",
+              "可能核对方式",
+              "条件与升级"
             ],
             "rows": [
               [
@@ -8249,7 +8285,7 @@
               ],
               [
                 "检查与信号实操",
-                "按检查表核对设备与索具，正确复诵并确认唯一信号。",
+                "按适用程序核设备索具并确认正常操作指令；美国施工1419(h/j)常规同时一人给信号，任何人可给停机或紧急停机信号且操作员须服从；信号通讯中断安全停止，重建且正确指令理解后再继续。",
                 "实操或模拟记录。",
                 "按设备与项目范围评价。"
               ],
@@ -8262,6 +8298,10 @@
             ]
           },
           "id": "crane-and-tower-operators.path.interview-probation.current.v1",
+          "source_refs": [
+            "crane-editorial",
+            "g04-osha-signal"
+          ],
           "type": "table"
         },
         {
@@ -8277,11 +8317,20 @@
               "next_step",
               "review"
             ],
+            "column_labels": [
+              "资格或条件",
+              "办理条件",
+              "边界",
+              "凭证",
+              "法域",
+              "下一步",
+              "复核"
+            ],
             "rows": [
               [
-                "美国 OSHA 操作员培训与认证",
-                "按 1926.1427 完成培训、认证与评估。",
-                "限所认证的设备类型。",
+                "美国施工操作员培训、认证/许可与雇主评价",
+                "美国1926.1427适用于施工Subpart CC所覆设备，derrick、sideboom及制造商额定能力不超2,000磅设备另适用相关规则。由雇主确保培训、适用认证或许可、设备与任务评价；OSHA制定标准，不签发个人操作证。证书自身不等雇主评价合格。",
+                "认证设备类型、实际评价和施工标准范围分别核；证书不代雇主评价。",
                 "培训与认证记录。",
                 "美国",
                 "按设备与雇主规则办理。",
@@ -8289,7 +8338,7 @@
               ],
               [
                 "中国建筑施工特种作业资格（塔式起重机司机）",
-                "按现行主管部门规则取得相应资格。",
+                "中国房屋市政工程按住建部令60号（2026-06-01施行）核对应工种资格；首次取证正式上岗前须实习至少6个月，由同工种从业6年以上人员指导，实习期不得独立操作。资格证书全国有效3年；培训考核及设备项目条件分别核，Q2特种设备作业项目不能自动替代建筑施工资格。",
                 "限授权设备与项目范围。",
                 "资格证书。",
                 "中国内地",
@@ -8307,7 +8356,7 @@
               ],
               [
                 "起重机械使用与检验登记",
-                "进场登记、检验与设备状态确认。",
+                "中国建筑起重机械依166号第16—19条组织检验验收、安装验收合格起30日内使用登记、检查维护记录。",
                 "设备不合规不得作业。",
                 "登记与检验记录。",
                 "中国内地",
@@ -8335,6 +8384,11 @@
             ]
           },
           "id": "crane-and-tower-operators.path.credential-decision.current.v1",
+          "source_refs": [
+            "osha-operator",
+            "mohurd-special-2025",
+            "mohurd-crane-rule"
+          ],
           "type": "table"
         }
       ]
@@ -8355,7 +8409,7 @@
           },
           "id": "crane-and-tower-operators.market-signals.market-signal-card.1",
           "source_refs": [
-            "crane-trends-current"
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -8369,7 +8423,7 @@
           },
           "id": "crane-and-tower-operators.market-signals.market-signal-card.2",
           "source_refs": [
-            "crane-trends-current"
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -8378,12 +8432,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 2024—2034 年预计年均约 3,800 个含增长与替补的空缺，预计增长 3%。"
+              "美国2025年就业42,900人，2035年预测44,500人；2025—2035年变化4%，年均空缺3,500个含增长和替换。空缺不是净增、十年累计或个人录用率，预测不是实绩。"
             ]
           },
           "id": "crane-and-tower-operators.market-signals.market-signal-card.3",
           "source_refs": [
-            "crane-trends-current"
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -8398,7 +8452,7 @@
           "id": "crane-and-tower-operators.market-signals.market-signal-card.4",
           "source_refs": [
             "crane-editorial",
-            "crane-trends-current"
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -8407,12 +8461,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足：起重设备控制、载荷核对与唯一信号协同。"
+              "从本岗转建筑劳工需补场地清理、测量标记、挖沟回填夯实及材料搬运等工地任务；设备经验不等体力与工序能力。"
             ]
           },
           "id": "crane-and-tower-operators.market-signals.market-signal-card.5",
           "source_refs": [
-            "crane-editorial"
+            "crane-adj-construction"
           ],
           "type": "prose"
         }
@@ -8774,10 +8828,10 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-09-07",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "实际打开完整O*NET详情页，共1293行。",
-                  "只支持列明职业身份与职责边界。"
+                  "本轮实际读取身份和完整Tasks段；不宣称完整阅读全部长页。",
+                  "职责比较非自动转岗资格。"
                 ],
                 "evidence_type": "官方职业资料",
                 "id": "crane-adj-construction",
@@ -8790,10 +8844,10 @@
                 "url": "https://www.onetonline.org/link/details/47-2061.00"
               },
               {
-                "accessed_at": "2026-09-07",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "实际打开完整O*NET详情页，共1259行。",
-                  "只支持列明职业身份与职责边界。"
+                  "本轮实际读取身份和完整Tasks段；不宣称完整阅读全部长页。",
+                  "职责比较非自动转岗资格。"
                 ],
                 "evidence_type": "官方职业资料",
                 "id": "crane-adj-equipment",
@@ -8806,10 +8860,10 @@
                 "url": "https://www.onetonline.org/link/details/47-2073.00"
               },
               {
-                "accessed_at": "2026-09-07",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "实际打开完整O*NET详情页，共1389行。",
-                  "只支持列明职业身份与职责边界。"
+                  "本轮实际读取身份和完整Tasks段；不宣称完整阅读全部长页。",
+                  "职责比较非自动转岗资格。"
                 ],
                 "evidence_type": "官方职业资料",
                 "id": "crane-adj-mining",
@@ -8822,10 +8876,10 @@
                 "url": "https://www.onetonline.org/link/details/47-5022.00"
               },
               {
-                "accessed_at": "2026-09-07",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "实际打开完整O*NET详情页，共1277行。",
-                  "只支持列明职业身份与职责边界。"
+                  "本轮实际读取身份和完整Tasks段；不宣称完整阅读全部长页。",
+                  "职责比较非自动转岗资格。"
                 ],
                 "evidence_type": "官方职业资料",
                 "id": "crane-adj-pile",
@@ -8838,10 +8892,10 @@
                 "url": "https://www.onetonline.org/link/details/47-2072.00"
               },
               {
-                "accessed_at": "2026-09-07",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "实际打开完整O*NET详情页，共1271行。",
-                  "只支持列明职业身份与职责边界。"
+                  "本轮实际读取身份和完整Tasks段；不宣称完整阅读全部长页。",
+                  "职责比较非自动转岗资格。"
                 ],
                 "evidence_type": "官方职业资料",
                 "id": "crane-adj-steel",
@@ -8870,14 +8924,14 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-09-07",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "实际打开完整O*NET详情页，共935行；定位身份、11项任务、工作情境和Job Zone。",
-                  "只支持列明职业身份与职责边界。"
+                  "美国53-7021.00有11项任务：8项Core包括操纵起重设备、核地面稳定、检查调整机构附件、指挥支腿垫块、核重量与能力、清洁润滑维护及必要修理、检查更换钢缆、装卸货物；3项Supplemental包括引导货车和固定货物、读取每日作业配送次序、核包装要求与票据。类别不等每日频率，维护任务不自动授予所有维修资质。",
+                  "实际读取57工作情境、教育、Job Zone；未显示百分比不补0。"
                 ],
-                "evidence_type": "官方职业资料",
+                "evidence_type": "官方职业档案",
                 "id": "crane-onet-current",
-                "limitation": "只支持列明职业身份与职责边界。",
+                "limitation": "美国任务情境，不代中国资格或AI采用",
                 "market": "美国",
                 "name": "O*NET 53-7021.00 Crane and Tower Operators",
                 "period": "updated 2026",
@@ -8902,14 +8956,13 @@
                 "url": "https://www.onetonline.org/link/localtrends/53-7021.00"
               },
               {
-                "accessed_at": "2026-09-07",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "实际打开完整工资页，共124行；2025年工资中位与10%边界。",
-                  "只支持列明职业身份与职责边界。"
+                  "美国2025年5月OEWS本岗工资：年中位68,080美元、时中位32.73；年P10为42,640、P90为103,570。工资就业覆盖与含自雇的就业预测分开；OEWS不含自雇、非公司企业业主等，分位非起薪或职级。官方年薪有效，不按个人实际班次推全年收入。"
                 ],
-                "evidence_type": "官方职业资料",
+                "evidence_type": "官方职业工资统计转引",
                 "id": "crane-wage-current",
-                "limitation": "只支持列明职业身份与职责边界。",
+                "limitation": "工资分位非起薪或AI因果",
                 "market": "美国",
                 "name": "O*NET National Wages 53-7021.00",
                 "period": "May 2025",
@@ -8918,14 +8971,13 @@
                 "url": "https://www.onetonline.org/link/localwages/53-7021.00"
               },
               {
-                "accessed_at": "2026-08-29",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "Acceptance, registration, inspection and licensed operators.",
-                  "Building construction machinery."
+                  "实际读取第16—25条：检验验收登记、故障停用、检查维护、多塔及操作人员权利职责。"
                 ],
-                "evidence_type": "official public authority",
+                "evidence_type": "部门规章（政府转载）",
                 "id": "mohurd-crane-rule",
-                "limitation": "Building construction machinery.",
+                "limitation": "建筑起重机械范围",
                 "market": "CN",
                 "name": "建筑起重机械安全监督管理规定",
                 "period": "current",
@@ -8934,14 +8986,13 @@
                 "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/201803/t20180321_776844.html"
               },
               {
-                "accessed_at": "2026-08-29",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "Current qualification framework.",
-                  "Construction special operations."
+                  "实际读取60号相关资格、实习、工作时间与人员权利条款；工种范围另规定。"
                 ],
-                "evidence_type": "official public authority",
+                "evidence_type": "部门规章",
                 "id": "mohurd-special-2025",
-                "limitation": "Construction special operations.",
+                "limitation": "房屋市政工程特种作业，不自动与Q2互换",
                 "market": "CN",
                 "name": "建筑施工特种作业人员管理规定（2025）",
                 "period": "effective 2026-06-01",
@@ -8950,14 +9001,13 @@
                 "url": "https://www.mohurd.gov.cn/api-gateway/jpaas-web-server/front/document/download?fileName=%E5%BB%BA%E7%AD%91%E6%96%BD%E5%B7%A5%E7%89%B9%E7%A7%8D%E4%BD%9C%E4%B8%9A%E4%BA%BA%E5%91%98%E7%AE%A1%E7%90%86%E8%A7%84%E5%AE%9A.pdf&fileUrl=YW5UzzlvCwcM%2FNHHX%2FtT6BJ6yM%2FAU1LVtmOVIvNjcurVKR%2BX1CGI4rdC4ELZqtYms98E2sxHfkyHxumYADbCT6bdWAVTWGjalbUn1YmtOxPLvhijcw1GWq8vXxiWQ%2BvJLHYdFyPxcx14ZtZaLhINjH1kpW%2FOfa7GyH911iLQ%2FAY%3D"
               },
               {
-                "accessed_at": "2026-08-29",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "Identity, tasks, context, abilities and preparation.",
-                  "US scope."
+                  "同53-7021.00详情页，读取职责、情境、教育与能力。"
                 ],
-                "evidence_type": "official public authority",
+                "evidence_type": "官方职业档案",
                 "id": "onet-details",
-                "limitation": "US scope.",
+                "limitation": "美国职业资料",
                 "market": "US",
                 "name": "O*NET 53-7021.00 detailed profile",
                 "period": "updated 2026",
@@ -8966,14 +9016,13 @@
                 "url": "https://www.onetonline.org/link/details/53-7021.00"
               },
               {
-                "accessed_at": "2026-08-29",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "Training, certification and evaluation.",
-                  "Construction scope."
+                  "美国1926.1427适用于施工Subpart CC所覆设备，derrick、sideboom及制造商额定能力不超2,000磅设备另适用相关规则。由雇主确保培训、适用认证或许可、设备与任务评价；OSHA制定标准，不签发个人操作证。证书自身不等雇主评价合格。"
                 ],
-                "evidence_type": "official public authority",
+                "evidence_type": "美国施工安全法规",
                 "id": "osha-operator",
-                "limitation": "Construction scope.",
+                "limitation": "施工Subpart CC及列明例外",
                 "market": "US",
                 "name": "OSHA 1926.1427 operator training, certification and evaluation",
                 "period": "current",
@@ -8982,20 +9031,169 @@
                 "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.1427"
               },
               {
-                "accessed_at": "2026-08-29",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "Q2 crane-driver mapping.",
-                  "Depends on equipment and jurisdiction."
+                  "实际读取附件换发对照：旧Q4—Q10到新Q2，依原持证项目标注限制范围；不当建筑施工证互认依据。"
                 ],
-                "evidence_type": "official public authority",
+                "evidence_type": "行政许可实施意见及换证对照表",
                 "id": "samr-q2",
-                "limitation": "Depends on equipment and jurisdiction.",
+                "limitation": "此处换证表非全部当前准入或施工互认规则",
                 "market": "CN",
                 "name": "特种设备行政许可有关事项实施意见",
                 "period": "current",
                 "publisher": "国家市场监督管理总局",
                 "scope": "combined_official",
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/tzsbs/art/2023/art_38dd3d54f6a24d8eab4730058bf255e6.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国2025年就业42,900人，2035年预测44,500人；2025—2035年变化4%，年均空缺3,500个含增长和替换。空缺不是净增、十年累计或个人录用率，预测不是实绩。"
+                ],
+                "evidence_type": "官方就业预测转引",
+                "id": "g04-trends",
+                "limitation": "非个人录用保证或AI因果",
+                "market": "US",
+                "name": "O*NET/BLS本岗就业预测2025—2035",
+                "period": "2025—2035",
+                "publisher": "官方原文",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/53-7021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025年本岗行业就业分布：建筑41%、制造25%、批发11%、其他23%（含运输仓储）；这是就业占比，不是行业工资。"
+                ],
+                "evidence_type": "官方行业就业分布",
+                "id": "g04-industry",
+                "limitation": "就业占比非工资",
+                "market": "US",
+                "name": "O*NET本岗2025行业就业分布",
+                "period": "2025",
+                "publisher": "官方原文",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/53-7021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025年Lightcast全美本岗招聘热门表列Excel、Office、Outlook、Windows，比例未提供不填0；不测生成式AI采用、现场部署或替代率。"
+                ],
+                "evidence_type": "招聘广告技术关键词统计",
+                "id": "g04-hot",
+                "limitation": "比例未提供；非AI采用",
+                "market": "US",
+                "name": "O*NET/Lightcast本岗招聘热门软件",
+                "period": "2025",
+                "publisher": "官方原文",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/53-7021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际核表2/5行业税前年均工资与附注；只作目标单位行业背景。"
+                ],
+                "evidence_type": "官方行业工资统计",
+                "id": "g04-nbs",
+                "limitation": "非本岗精确中位或自雇收入",
+                "market": "CN",
+                "name": "国家统计局2025城镇单位年平均工资",
+                "period": "2025；发布2026-05-15",
+                "publisher": "官方原文",
+                "scope": "combined_official",
+                "url": "https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取停机拒绝吊运及qualified person确认安全条件。"
+                ],
+                "evidence_type": "美国施工安全法规",
+                "id": "g04-osha-stop",
+                "limitation": "施工Subpart CC范围，不代中国法规",
+                "market": "US",
+                "name": "OSHA1926.1418施工操作员停机权",
+                "period": "现行条文，读取2026-10-09",
+                "publisher": "官方原文",
+                "scope": "exact",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.1418"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取(a)(f)(g)(h)(j)：信号需求、通讯中断、单一指令与停机信号例外。"
+                ],
+                "evidence_type": "美国施工安全法规",
+                "id": "g04-osha-signal",
+                "limitation": "美国施工范围",
+                "market": "US",
+                "name": "OSHA1926.1419施工信号规则",
+                "period": "现行条文，读取2026-10-09",
+                "publisher": "官方原文",
+                "scope": "exact",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.1419"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取现场测试、专用信道及例外、免手持接收。"
+                ],
+                "evidence_type": "美国施工安全法规",
+                "id": "g04-osha-radio",
+                "limitation": "美国施工范围，非所有无线电通则",
+                "market": "US",
+                "name": "OSHA1926.1420电子传输信号",
+                "period": "现行条文，读取2026-10-09",
+                "publisher": "官方原文",
+                "scope": "exact",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.1420"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取制造商程序、载荷、维修报告、天气、专业判断与停机信号等条款。"
+                ],
+                "evidence_type": "美国施工安全法规",
+                "id": "g04-osha-operation",
+                "limitation": "不把1926.1427认证条文当操作程序",
+                "market": "US",
+                "name": "OSHA1926.1417施工起重操作",
+                "period": "现行条文，读取2026-10-09",
+                "publisher": "官方原文",
+                "scope": "exact",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.1417"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取13任务：11Core2Supplemental。"
+                ],
+                "evidence_type": "官方职业档案",
+                "id": "g04-hoist",
+                "limitation": "相邻非本岗",
+                "market": "US",
+                "name": "O*NET53-7041.00 Hoist and Winch Operators",
+                "period": "updated2026",
+                "publisher": "官方原文",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-7041.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取14任务：13Core1Supplemental。"
+                ],
+                "evidence_type": "官方职业档案",
+                "id": "g04-riggers",
+                "limitation": "相邻非本岗",
+                "market": "US",
+                "name": "O*NET49-9096.00 Riggers",
+                "period": "updated2026",
+                "publisher": "官方原文",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/49-9096.00"
               }
             ]
           },
@@ -9152,8 +9350,8 @@
               "field": "name",
               "item": "crane-and-tower-operators.source-register.published.1"
             },
-            "类型": "官方或研究来源",
-            "适用范围": "仅按来源口径支持职业身份、任务与安全边界",
+            "类型": "美国官方职业档案",
+            "适用范围": "本岗身份、11任务、调查情境及能力；不是安全操作授权。",
             "链接": {
               "$source": "crane-onet-current",
               "block": "source-register",
@@ -9170,8 +9368,8 @@
               "field": "name",
               "item": "crane-and-tower-operators.source-register.published.1"
             },
-            "类型": "官方或研究来源",
-            "适用范围": "仅按来源口径支持职业身份、任务与安全边界",
+            "类型": "美国官方职业档案（同页补充）",
+            "适用范围": "本岗职责能力工作活动，非中国资格或AI采用实测。",
             "链接": {
               "$source": "onet-details",
               "block": "source-register",
@@ -9182,16 +9380,16 @@
           },
           {
             "来源": {
-              "$source": "crane-trends-current",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "crane-and-tower-operators.source-register.published.1"
             },
-            "类型": "官方或研究来源",
-            "适用范围": "仅按来源口径支持职业身份、任务与安全边界",
+            "类型": "美国官方就业预测转引",
+            "适用范围": "美国2025年就业42,900人，2035年预测44,500人；2025—2035年变化4%，年均空缺3,500个含增长和替换。空缺不是净增、十年累计或个人录用率，预测不是实绩。",
             "链接": {
-              "$source": "crane-trends-current",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9207,13 +9405,13 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "工具可检索载荷表、整理日志与班前检查。",
+            "AI主要改变": "编辑候选用途：工具可检索载荷表、整理日志与班前检查。 未核实际效果；模拟器不必然AI。",
             "仍由人负责": "确认地基、索具、风况与吊物路径无人等现场事实。",
             "方向": "信息检索与整理"
           },
           {
-            "AI主要改变": "模拟器与规划工具可辅助训练与路线预演。",
-            "仍由人负责": "真实起吊授权、责任认定与停工决策。",
+            "AI主要改变": "编辑候选用途：模拟器与规划工具可辅助训练与路线预演。 未核实际效果；模拟器不必然AI。",
+            "仍由人负责": "中国建筑施工人员有权拒绝违章指挥、强令冒险，危及人身安全的紧急情况可停止作业或采取必要应急措施后撤离，并报告隐患；不是等负责人批准才停。美国施工Subpart CC的1926.1418要求操作员有权停机拒绝吊运，直至qualified person确认安全。",
             "方向": "纸面预演与训练"
           }
         ],
@@ -9265,16 +9463,16 @@
           {
             "使用限制": "属职业总体统计，不含工具采纳的因果数据。",
             "来源": {
-              "$source": "crane-trends-current",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "crane-and-tower-operators.source-register.published.1"
             },
-            "研究对象": "O*NET 53-7021.00 就业趋势（基于 BLS 2024—2034 年预测）",
-            "结论": "提供 2024 年就业 42,300 人与 2024—2034 年增长 3%、年均空缺约 3,800 个。",
+            "研究对象": "O*NET转引BLS本岗2025—2035就业预测",
+            "结论": "美国2025年就业42,900人，2035年预测44,500人；2025—2035年变化4%，年均空缺3,500个含增长和替换。空缺不是净增、十年累计或个人录用率，预测不是实绩。",
             "链接": {
-              "$source": "crane-trends-current",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9290,11 +9488,11 @@
         },
         "method_cards": [
           {
-            "含义": "检索载荷表、识别日志异常、整理班前检查与模拟盲吊路线。",
+            "含义": "编辑建议验证受控资料检索、日志整理与纸面预演；未取得本岗部署效果。",
             "概念": "AI 可辅助的任务"
           },
           {
-            "含义": "技术演示不等于现场采用，采用取决于培训、责任与合规要求。",
+            "含义": "需核实际部署、培训与合规；演示或招聘关键词不能证明现场采用。",
             "概念": "组织采用"
           },
           {
@@ -9322,34 +9520,28 @@
             "问题": "AI 会直接取代起重机与塔吊操作员吗？"
           },
           {
-            "回答": "检索载荷表、整理班前检查与日志、模拟盲吊路线等辅助性任务。",
+            "回答": "编辑建议验证检索、日志整理和纸面预演，未取得本岗部署效果。",
             "来源": {
-              "$source": "crane-trends-current",
+              "$source": "crane-editorial",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "crane-and-tower-operators.source-register.published.1"
             },
-            "链接": {
-              "$source": "crane-trends-current",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "crane-and-tower-operators.source-register.published.1"
-            },
+            "链接": null,
             "问题": "AI 可以先辅助哪些任务？"
           },
           {
-            "回答": "载荷与配置确认、地基与索具状态、风况、禁入区与起吊授权、停工决策。",
+            "回答": "制造商程序、真实负载能力和现场状态须依法核；工具不能代专业判断。中国建筑施工人员有权拒绝违章指挥、强令冒险，危及人身安全的紧急情况可停止作业或采取必要应急措施后撤离，并报告隐患；不是等负责人批准才停。美国施工Subpart CC的1926.1418要求操作员有权停机拒绝吊运，直至qualified person确认安全。",
             "来源": {
-              "$source": "crane-onet-current",
+              "$source": "g04-osha-operation",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "crane-and-tower-operators.source-register.published.1"
             },
             "链接": {
-              "$source": "crane-onet-current",
+              "$source": "g04-osha-operation",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9379,7 +9571,7 @@
           },
           {
             "步骤": "记录升级",
-            "说明": "保留输入范围、资料版本与人工核对项；冲突或缺失即停止并升级。"
+            "说明": "编辑留核对记录，冲突按实际程序处理；操作员法定停机权不以审批链替代。"
           }
         ],
         "risk_rows": [
@@ -9394,7 +9586,7 @@
             "风险": "输入资料过期或错误"
           },
           {
-            "为什么重要": "把工具建议当作最终结论会改变责任边界。",
+            "为什么重要": "误把工具建议当最终结论可能误判或越权限；工具建议不自动转移法定责任。",
             "控制方式": "保留人工复核点与授权链，异常按流程升级。",
             "风险": "责任链模糊"
           }
@@ -9426,31 +9618,31 @@
             "人的控制点": "重量、幅度与配置的最终核对不得由工具替代。",
             "任务": "确认吊物重量与幅度",
             "工作方向": "载荷核对",
-            "当前变化": "工具可辅助换算与比对。"
+            "当前变化": "编辑建议验证：工具可辅助换算与比对。 本轮未取得现场应用实测。"
           },
           {
-            "人的控制点": "唯一有效信号与现场指挥仍由人确认。",
+            "人的控制点": "美国施工1926.1419通常同一时刻一人给信号，但任何人可发停机或紧急停机信号。需要信号的作业若通讯中断，应安全停止，恢复通讯并给出且理解正确指令后再继续；视线受限须适当信号安排，不等一概禁止盲吊。",
             "任务": "与信号工协同",
             "工作方向": "信号与协同",
-            "当前变化": "工具可协助记录信号约定。"
+            "当前变化": "编辑建议验证：工具可协助记录信号约定。 本轮未取得现场应用实测。"
           },
           {
-            "人的控制点": "真实起吊与负载运动仍由持证操作员控制。",
+            "人的控制点": "实际操作先核适用资格、实习与雇主评价，不以单有证书代替。",
             "任务": "试吊与平稳运移",
             "工作方向": "平稳操纵",
-            "当前变化": "模拟器可辅助训练与路线预演。"
+            "当前变化": "编辑建议验证：模拟器可辅助训练与路线预演。 本轮未取得现场应用实测。"
           },
           {
-            "人的控制点": "异常判定、隔离与恢复授权由责任人决定。",
+            "人的控制点": "中国建筑施工人员有权拒绝违章指挥、强令冒险，危及人身安全的紧急情况可停止作业或采取必要应急措施后撤离，并报告隐患；不是等负责人批准才停。美国施工Subpart CC的1926.1418要求操作员有权停机拒绝吊运，直至qualified person确认安全。 恢复条件按适用法域、故障原因和程序另核。",
             "任务": "落位并记录异常",
             "工作方向": "交付与记录",
-            "当前变化": "工具可整理异常与交接记录。"
+            "当前变化": "编辑建议验证：工具可整理异常与交接记录。 本轮未取得现场应用实测。"
           },
           {
             "人的控制点": "设备限制、专项方案与现场指挥优先于进度。",
             "任务": "风与多塔交叉条件判断",
             "工作方向": "条件判断",
-            "当前变化": "工具可接入气象与现场数据。"
+            "当前变化": "编辑建议验证：工具可接入气象与现场数据。 本轮未取得现场应用实测。"
           }
         ],
         "transition": {
@@ -9550,27 +9742,27 @@
       },
       "career_ai_description_block": {
         "body": [
-          "AI 可辅助记录整理与信息汇总，但不能替代授权判断和最终责任。"
+          "编辑候选用途：待实际验证记录整理与信息汇总是否适用；未取得本岗现场实测，工具不替代授权判断和法定责任。"
         ],
         "heading": "起重机与塔吊操作员的工作对象与 AI 边界"
       },
       "career_path_block": {
-        "boundary": "入口要求、执照、训练和最终责任由具体法域、机构或雇主核验；本页练习为虚构纸面材料，不构成起吊许可或资格。",
+        "boundary": "以下路径与阶梯是编辑准备方向示例，非必经晋升顺序、雇主职位承诺或操作授权；具体资格、实习、评价及管理要求另核。",
         "competence_ladder": [
           {
-            "description": "在监督下完成检查、信号复诵与基础吊运，建立载荷与安全习惯。",
+            "description": "中国房屋市政工程按住建部令60号（2026-06-01施行）核对应工种资格；首次取证正式上岗前须实习至少6个月，由同工种从业6年以上人员指导，实习期不得独立操作。资格证书全国有效3年；培训考核及设备项目条件分别核，Q2特种设备作业项目不能自动替代建筑施工资格。",
             "stage": "受训与基础操作"
           },
           {
-            "description": "独立操作授权设备完成常规吊运，处理常规异常并按条件停工。",
-            "stage": "独立持证操作"
+            "description": "资格、实习及设备任务评价完成后，在授权范围执行；不能单凭持证独立作业。",
+            "stage": "满足独立操作条件"
           },
           {
             "description": "在专项方案下完成大件或交叉作业吊装，形成稳定判断。",
             "stage": "复杂与交叉作业吊装"
           },
           {
-            "description": "组织方案、分工与停工决策，承担带训与现场安全责任。",
+            "description": "管理与指导职责另核；中国首次取证实习指导者须同工种从业6年以上，不以普通经验替代。",
             "stage": "吊装负责人与带训"
           }
         ],
@@ -9593,7 +9785,7 @@
             "copy_key": "career.item.career-path-block",
             "type": "prose"
           },
-          "jurisdiction": "适用法域：美国按 OSHA 1926.1427 的操作员培训、认证与评估；中国建筑施工塔式起重机司机属建筑施工特种作业人员，须按现行主管部门规则取证并在授权设备与项目范围内作业。",
+          "jurisdiction": "美国1926.1427适用于施工Subpart CC所覆设备，derrick、sideboom及制造商额定能力不超2,000磅设备另适用相关规则。由雇主确保培训、适用认证或许可、设备与任务评价；OSHA制定标准，不签发个人操作证。证书自身不等雇主评价合格。 中国房屋市政工程按住建部令60号（2026-06-01施行）核对应工种资格；首次取证正式上岗前须实习至少6个月，由同工种从业6年以上人员指导，实习期不得独立操作。资格证书全国有效3年；培训考核及设备项目条件分别核，Q2特种设备作业项目不能自动替代建筑施工资格。",
           "summary": {
             "$item": "crane-and-tower-operators.path.career-path-block.3",
             "block": "path",
@@ -9659,7 +9851,7 @@
           },
           {
             "href": {
-              "$source": "crane-trends-current",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9667,7 +9859,7 @@
             },
             "id": "crane-trends-current",
             "label": {
-              "$source": "crane-trends-current",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -9693,7 +9885,7 @@
                 "role": "受训操作辅助"
               },
               {
-                "credentials": "持有授权设备类型的资格。",
+                "credentials": "相应资格、首次取证实习及实际雇主评价条件分别核，不以持证代全部条件。",
                 "next_moves": "学习复杂吊装与带教。",
                 "readiness_evidence": "能独立完成常规吊运并记录。",
                 "responsibility": {
@@ -9702,7 +9894,7 @@
                   "copy_key": "career.item.career-path-block",
                   "type": "prose"
                 },
-                "role": "持证操作员（中小型设备）"
+                "role": "满足全部条件的操作员（设备范围另核）"
               },
               {
                 "credentials": "按设备与项目范围核验。",
@@ -9736,7 +9928,7 @@
             "stages": [
               {
                 "credentials": "按设备类型核验资格。",
-                "next_moves": "学习附着与爬升要点。",
+                "next_moves": "了解附着顶升的责任与资质边界，不自行实施安装拆卸。",
                 "readiness_evidence": "能平稳操纵并遵守限位与方案。",
                 "responsibility": "在授权塔式设备上完成常规与交叉作业吊装。",
                 "role": "塔式起重机操作"
@@ -9749,7 +9941,7 @@
                 "role": "履带式与汽车式起重机操作"
               },
               {
-                "credentials": "按方案审批授权。",
+                "credentials": "核实际设备与复杂吊运能力评价及项目程序；方案批准不代人员资格。",
                 "next_moves": "学习方案编制。",
                 "readiness_evidence": "能按专项方案与指挥协同。",
                 "responsibility": "完成大件、双机抬吊或盲吊等专项作业。",
@@ -9771,7 +9963,7 @@
               {
                 "credentials": "按岗位要求核验。",
                 "next_moves": "学习索具与信号规范。",
-                "readiness_evidence": "能准确复诵与确认唯一信号。",
+                "readiness_evidence": "能区分适当操作指令与任何人可发的停机信号，并按工作地规则协作。",
                 "responsibility": "与信号工、司索工协同完成信号与索具确认。",
                 "role": "信号与索具协同"
               },
@@ -9793,7 +9985,7 @@
                 "credentials": "按单位制度与规定。",
                 "next_moves": "核对管理方向任职要求。",
                 "readiness_evidence": "能兼顾质量、安全与进度边界。",
-                "responsibility": "负责吊装安全、分工与停工决策，并处理跨方协调。",
+                "responsibility": "相邻管理方向协调安全分工，任职另核；不垄断操作员停机拒绝冒险权。",
                 "role": "现场吊装负责人方向"
               }
             ],
@@ -9826,7 +10018,7 @@
                   "alternate_value": null,
                   "label": "输入",
                   "secondary_value": null,
-                  "value": "吊装计划、载荷表、场地与设备状态、唯一有效信号"
+                  "value": "受控吊装载荷资料、场地设备、适当指令与停机信号"
                 },
                 {
                   "alternate_value": null,
@@ -9852,7 +10044,7 @@
                   "alternate_value": null,
                   "label": "闭环",
                   "secondary_value": null,
-                  "value": "核计划与载荷 → 核对设备与配置 → 查场地与基础 → 确认信号与禁入区 → 试吊与平稳运移 → 落位并记录异常"
+                  "value": "编辑吊运流程示例；具体顺序和试吊条件按设备及适用程序核。"
                 },
                 {
                   "alternate_value": null,
@@ -9882,7 +10074,7 @@
                   "alternate_value": null,
                   "label": "步骤五",
                   "secondary_value": null,
-                  "value": "试吊与平稳运移"
+                  "value": "按适用程序操纵；试吊适用条件另核"
                 },
                 {
                   "alternate_value": null,
@@ -9894,7 +10086,7 @@
             }
           },
           {
-            "answer": "资格、授权和最终责任须按适用法域、设备和雇主规则分别核验：美国按 OSHA 1926.1427 培训、认证与评估，中国塔式起重机司机属建筑施工特种作业人员，须按现行主管部门规则取证并在授权设备与项目范围内作业。",
+            "answer": "美国1926.1427适用于施工Subpart CC所覆设备，derrick、sideboom及制造商额定能力不超2,000磅设备另适用相关规则。由雇主确保培训、适用认证或许可、设备与任务评价；OSHA制定标准，不签发个人操作证。证书自身不等雇主评价合格。 中国房屋市政工程按住建部令60号（2026-06-01施行）核对应工种资格；首次取证正式上岗前须实习至少6个月，由同工种从业6年以上人员指导，实习期不得独立操作。资格证书全国有效3年；培训考核及设备项目条件分别核，Q2特种设备作业项目不能自动替代建筑施工资格。",
             "key": "qa1",
             "question": "资格与授权边界是什么？",
             "table": {
@@ -9909,13 +10101,13 @@
                   "alternate_value": null,
                   "label": "美国",
                   "secondary_value": null,
-                  "value": "OSHA 1926.1427 培训、认证与评估"
+                  "value": "美国施工Subpart CC的培训、适用认证/许可及雇主评价；列明例外另核"
                 },
                 {
                   "alternate_value": null,
                   "label": "中国",
                   "secondary_value": null,
-                  "value": "塔式起重机司机属建筑施工特种作业人员"
+                  "value": "中国房屋市政相应工种资格及首次取证实习；Q2不自动替代"
                 },
                 {
                   "alternate_value": null,
@@ -9927,7 +10119,7 @@
                   "alternate_value": null,
                   "label": "责任",
                   "secondary_value": null,
-                  "value": "吊装负责人组织方案与停工决策"
+                  "value": "负责人组织方案，但操作员保有依法停机和拒绝冒险权"
                 },
                 {
                   "alternate_value": null,
@@ -9949,8 +10141,8 @@
             "label": "查看职业风险"
           }
         ],
-        "direct_answer": "风险集中在吊运本身与作业环境：超载或载荷与能力不匹配、地基或支腿失稳、索具与机构失效、风与能见度等天气变化、信号冲突或人员进入吊入下方，以及停工后的隔离与恢复授权不清；错误后果严重且往往不可逆，控制依赖载荷资料、检查、隔离、唯一信号和停工决策。",
-        "evidence_scope": "风险场景来自 O*NET 53-7021.00 的任务与工作情境（如 94% 每天接触危险设备、78% 对他人健康安全负很高责任、76% 认为错误后果极其严重）；载荷、检查、信号与停工的控制方向参考 OSHA 1926.1427 与中国建筑起重机械相关规定；本项目只按来源明确范围解释。",
+        "direct_answer": "吊运的载荷、地面支撑、索具机构、天气、多塔和信号失效可能造成倾覆碰撞坠物等严重伤害；不能据调查百分比判断事故率。中国建筑施工人员有权拒绝违章指挥、强令冒险，危及人身安全的紧急情况可停止作业或采取必要应急措施后撤离，并报告隐患；不是等负责人批准才停。美国施工Subpart CC的1926.1418要求操作员有权停机拒绝吊运，直至qualified person确认安全。",
+        "evidence_scope": "美国情境94%每天危险设备、78%他人安全责任很高、76%错误极严重是调查档位。具体控制分别核1926.1417/1418/1419/1420和中国166号、60号，不以操作员认证条文代全部作业程序。",
         "heading": "起重机与塔吊操作员的风险与控制点",
         "risks": [
           {
@@ -9958,7 +10150,7 @@
             "consequence": "可能导致整机倾覆、结构失效或负载坠落，造成严重人身伤害与设备损失。",
             "evidence_refs": [
               "crane-onet-current",
-              "osha-operator"
+              "g04-osha-operation"
             ],
             "id": "risk-1",
             "mitigation": "起吊前回到受控载荷资料核对重量、幅度、支腿或基础与配置，任何超出即停止并升级。",
@@ -9972,7 +10164,7 @@
           },
           {
             "affected_roles": "起重机与塔吊操作员",
-            "consequence": "可能造成倾覆、断绳或负载脱落，后果往往不可逆。",
+            "consequence": "可能造成倾覆、断绳或坠物伤害，未取得后果不可逆的发生比例。",
             "evidence_refs": [
               "crane-onet-current",
               "mohurd-crane-rule"
@@ -9992,11 +10184,11 @@
             "consequence": "可能造成失控、碰撞或结构受损，风险随天气与现场条件快速变化。",
             "evidence_refs": [
               "mohurd-crane-rule",
-              "osha-operator"
+              "g04-osha-operation"
             ],
             "id": "risk-3",
-            "mitigation": "以设备限制、专项方案和现场指挥为准，条件超限即停止并按方案复评。",
-            "scenario": "风速、能见度、雷电或多塔交叉作业超出设备限制或专项方案，未按现场指挥停止。",
+            "mitigation": "中国按使用单位安全措施及多塔责任分工；美国competent person须处理风冰雪影响。中国建筑施工人员有权拒绝违章指挥、强令冒险，危及人身安全的紧急情况可停止作业或采取必要应急措施后撤离，并报告隐患；不是等负责人批准才停。美国施工Subpart CC的1926.1418要求操作员有权停机拒绝吊运，直至qualified person确认安全。",
+            "scenario": "设备稳定和能力受风、冰雪等条件影响，多塔存在碰撞风险；天气条件和现场程序需核。",
             "title": {
               "$item": "crane-and-tower-operators.risk.career-risk-cards.3",
               "block": "risk",
@@ -10008,12 +10200,12 @@
             "affected_roles": "起重机与塔吊操作员",
             "consequence": "可能造成挤压、碰撞或坠物伤人。",
             "evidence_refs": [
-              "crane-onet-current",
-              "osha-operator"
+              "g04-osha-signal",
+              "g04-osha-radio"
             ],
             "id": "risk-4",
-            "mitigation": "只接受唯一有效信号，视线或禁入区不满足即中止受影响步骤，恢复前重新确认。",
-            "scenario": "出现多个信号源、唯一信号失效、视线中断，或人员与车辆进入吊物与回转范围。",
+            "mitigation": "美国施工1926.1419通常同一时刻一人给信号，但任何人可发停机或紧急停机信号。需要信号的作业若通讯中断，应安全停止，恢复通讯并给出且理解正确指令后再继续；视线受限须适当信号安排，不等一概禁止盲吊。 电子信号装置按1926.1420现场测试、适用专用信道及免手持接收规则。",
+            "scenario": "需要信号时通讯中断、指令未理解、或落点视线受限却无适当信号安排，可能误操；不能把多个人发停机信号本身判违规。",
             "title": {
               "$item": "crane-and-tower-operators.risk.career-risk-cards.4",
               "block": "risk",
@@ -10026,10 +10218,10 @@
             "consequence": "可能让未解决的问题重复出现，并造成责任不清。",
             "evidence_refs": [
               "mohurd-crane-rule",
-              "crane-onet-current"
+              "g04-osha-stop"
             ],
             "id": "risk-5",
-            "mitigation": "记录停工时间、已知事实、未确认项、隔离状态与接收人，不越权宣布恢复。",
+            "mitigation": "编辑建议记录停机原因、已知及待核状态和接收人。中国故障异常须停止使用、消除故障隐患后恢复；美国安全担忧须qualified person确认安全，不能只以日志齐全放行。",
             "scenario": "停工后未记录时间、已知事实与未确认项，或未授权即自行恢复起吊。",
             "title": {
               "$item": "crane-and-tower-operators.risk.career-risk-cards.5",
@@ -10040,12 +10232,13 @@
           },
           {
             "affected_roles": "起重机与塔吊操作员",
-            "consequence": "可能产生不可逆后果。",
+            "consequence": "未经适用资格、评价或设备条件确认的作业可能造成安全与合规问题。",
             "evidence_refs": [
-              "cn-wage-boundary"
+              "osha-operator",
+              "mohurd-special-2025"
             ],
             "id": "risk-boundary",
-            "mitigation": "停止并按授权链升级。",
+            "mitigation": "美国1926.1427适用于施工Subpart CC所覆设备，derrick、sideboom及制造商额定能力不超2,000磅设备另适用相关规则。由雇主确保培训、适用认证或许可、设备与任务评价；OSHA制定标准，不签发个人操作证。证书自身不等雇主评价合格。 中国房屋市政工程按住建部令60号（2026-06-01施行）核对应工种资格；首次取证正式上岗前须实习至少6个月，由同工种从业6年以上人员指导，实习期不得独立操作。资格证书全国有效3年；培训考核及设备项目条件分别核，Q2特种设备作业项目不能自动替代建筑施工资格。",
             "scenario": "遇到超出授权范围的任务。",
             "title": "责任边界"
           }
@@ -10072,15 +10265,15 @@
           },
           {
             "href": {
-              "$source": "osha-operator",
+              "$source": "g04-osha-operation",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "crane-and-tower-operators.source-register.published.1"
             },
-            "id": "osha-operator",
+            "id": "g04-osha-operation",
             "label": {
-              "$source": "osha-operator",
+              "$source": "g04-osha-operation",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10108,15 +10301,15 @@
           },
           {
             "href": {
-              "$source": "crane-trends-current",
+              "$source": "g04-osha-signal",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "crane-and-tower-operators.source-register.published.1"
             },
-            "id": "crane-trends-current",
+            "id": "g04-osha-signal",
             "label": {
-              "$source": "crane-trends-current",
+              "$source": "g04-osha-signal",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10132,7 +10325,7 @@
             {
               "指标": "中国大陆薪资口径",
               "数值": "证据不足：未取得中国大陆该职业单列数值",
-              "说明": "中国大陆公开工资统计最高细分到行业门类与人员类别，不发布该职业细类数值，不以行业代理值替代。"
+              "说明": "证据不足：本轮未取得中国起重机与塔吊操作员全国精确工资分布、分城市可核报价样本或AI与工资因果。国家统计局2025年行业税前工资均值仅作匹配单位背景：建筑业非私营92,036、私营66,275元/年；制造业113,594/76,055；交通运输仓储邮政133,981/73,133。行业按单位主要经济活动核，非本岗中位数、起薪或个人到手工资，不换成职业月薪。"
             }
           ],
           "china_ai_row": {
@@ -10149,22 +10342,22 @@
           },
           "china_edu_table": [
             {
-              "学历段": "高中或中专＋特种作业培训",
+              "学历段": "申报条件包括初中及以上（住建部令60号第7条）",
               "岗位方向": "塔式起重机司机（须持证）",
-              "说明": "按主管部门规则取证并在授权范围作业。"
+              "说明": "中国房屋市政工程按住建部令60号（2026-06-01施行）核对应工种资格；首次取证正式上岗前须实习至少6个月，由同工种从业6年以上人员指导，实习期不得独立操作。资格证书全国有效3年；培训考核及设备项目条件分别核，Q2特种设备作业项目不能自动替代建筑施工资格。"
             },
             {
-              "学历段": "职业学校培训或相关在职经验",
+              "学历段": "编辑建议核设备训练和实际招聘要求",
               "岗位方向": "履带式与汽车式起重机操作",
-              "说明": "按设备类型分别核验资格。"
+              "说明": "不同设备工程法域分别核；Q2限制范围见市场监管总局换发对照，不据美国Job Zone定中国学历。"
             },
             {
-              "学历段": "相关经验＋专项方案训练",
+              "学历段": "编辑准备示例：相关经验和方案知识",
               "岗位方向": "大型与复杂吊装作业",
               "说明": "按项目与专项方案授权。"
             },
             {
-              "学历段": "经验＋带训能力",
+              "学历段": "编辑准备示例：经验与带训",
               "岗位方向": "吊装负责人方向",
               "说明": "任职条件由单位规定。"
             }
@@ -10193,11 +10386,11 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国大陆公开信息检索入口：国家统计局工资与统计发布页面；本轮未取得该职业单列数值。",
+          "china_open": "国家统计局2025工资发布表2/5支持行业均值；本轮未取得本岗精确工资，不断言公开统计永远不发布职业数值。",
           "china_ref": {
             "$join": [
               {
-                "$source": "mohurd-crane-rule",
+                "$source": "g04-nbs",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -10205,7 +10398,7 @@
               },
               "｜",
               {
-                "$source": "crane-adj-construction",
+                "$source": "g04-nbs",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10214,7 +10407,7 @@
             ],
             "separator": ""
           },
-          "china_salary_note": "中国公开来源仅用于说明口径边界。",
+          "china_salary_note": "证据不足：本轮未取得中国起重机与塔吊操作员全国精确工资分布、分城市可核报价样本或AI与工资因果。国家统计局2025年行业税前工资均值仅作匹配单位背景：建筑业非私营92,036、私营66,275元/年；制造业113,594/76,055；交通运输仓储邮政133,981/73,133。行业按单位主要经济活动核，非本岗中位数、起薪或个人到手工资，不换成职业月薪。",
           "china_salary_table": [
             {
               "城市/区间": "中国大陆（全国职业级口径）",
@@ -10222,7 +10415,7 @@
             },
             {
               "城市/区间": "中国大陆（行业均值代理口径）",
-              "月薪参考": "不适用（不用行业均值替代职业工资）"
+              "月薪参考": "仅行业年均背景：建筑非私营92,036/私营66,275元/年，非职业月薪"
             },
             {
               "城市/区间": "中国大陆（招聘报价口径）",
@@ -10238,7 +10431,7 @@
           "sources_note": {
             "$join": [
               {
-                "$source": "crane-onet-current",
+                "$source": "g04-nbs",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -10246,7 +10439,7 @@
               },
               "｜",
               {
-                "$source": "crane-onet-current",
+                "$source": "g04-nbs",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10265,7 +10458,7 @@
             "scenario_role_label": "资格与训练背景",
             "scenario_value_label": "岗位方向"
           },
-          "us_growth": "增长 3%（2024—2034 年）",
+          "us_growth": "增长4%（2025—2035预测）",
           "us_median": "68,080 美元/年（2025 年 5 月）"
         }
       },
@@ -10413,11 +10606,11 @@
           },
           {
             "指标": "美国就业规模",
-            "数值": "42,300 人（2024 年）",
+            "数值": "42,900人（2025年）",
             "说明": {
               "$join": [
                 {
-                  "$source": "crane-trends-current",
+                  "$source": "g04-trends",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10425,7 +10618,7 @@
                 },
                 "｜",
                 {
-                  "$source": "crane-trends-current",
+                  "$source": "g04-trends",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10437,11 +10630,11 @@
           },
           {
             "指标": "美国就业增长",
-            "数值": "增长 3%（2024—2034 年）",
+            "数值": "增长4%（2025—2035预测）",
             "说明": {
               "$join": [
                 {
-                  "$source": "crane-trends-current",
+                  "$source": "g04-trends",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10449,7 +10642,7 @@
                 },
                 "｜",
                 {
-                  "$source": "crane-trends-current",
+                  "$source": "g04-trends",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10461,11 +10654,11 @@
           },
           {
             "指标": "美国就业空缺",
-            "数值": "约 3,800 个/年（2024—2034 年，含增长与替补）",
+            "数值": "3,500个/年（2025—2035年均，含增长与替换）",
             "说明": {
               "$join": [
                 {
-                  "$source": "crane-trends-current",
+                  "$source": "g04-trends",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10473,7 +10666,7 @@
                 },
                 "｜",
                 {
-                  "$source": "crane-trends-current",
+                  "$source": "g04-trends",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10484,7 +10677,7 @@
             }
           }
         ],
-        "boundary": "美国统计不代表中国职业工资或就业结果。",
+        "boundary": "美国2025年5月OEWS本岗工资：年中位68,080美元、时中位32.73；年P10为42,640、P90为103,570。工资就业覆盖与含自雇的就业预测分开；OEWS不含自雇、非公司企业业主等，分位非起薪或职级。官方年薪有效，不按个人实际班次推全年收入。 美国2025年就业42,900人，2035年预测44,500人；2025—2035年变化4%，年均空缺3,500个含增长和替换。空缺不是净增、十年累计或个人录用率，预测不是实绩。",
         "direct_answer": {
           "$item": "crane-and-tower-operators.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10493,15 +10686,15 @@
         },
         "factor_rows": [
           {
-            "answer": "塔式、履带式或汽车式起重机对应不同岗位与计酬。",
+            "answer": "核实际设备、行业地区与班次报价；未取得塔式、履带、汽车式各自全国工资分组。",
             "factor": "设备与项目类型"
           },
           {
-            "answer": "建筑业、制造业与运输仓储的岗位与地区差异影响收入。",
+            "answer": "核具体地区行业岗位报价及费用承担；本页未取得分组收入因果证据。",
             "factor": "地区与行业"
           },
           {
-            "answer": "77% 表示每周超过 40 小时；加班与班次影响实际收入。",
+            "answer": "美国情境77%每周超40小时，不代表个人全年班次；实际计薪、加班支付和班次条件另核，不由该比例推收入。",
             "factor": "班次与工时"
           }
         ],
@@ -10511,7 +10704,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "增长 3%（2024—2034 年）",
+        "growth": "增长4%（2025—2035预测）",
         "heading": {
           "$item": "crane-and-tower-operators.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10524,27 +10717,27 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024 年（O*NET 行业分布）",
+        "industry_period": "2025年（O*NET行业就业分布）",
         "industry_rows": [
           {
             "industry": "建筑业",
-            "median": "42%（2024 年就业占比）",
+            "median": "41%（2025年就业占比）",
             "note": "O*NET 单列行业之一。"
           },
           {
             "industry": "制造业",
-            "median": "22%（2024 年就业占比）",
-            "note": "O*NET 单列行业之一。"
-          },
-          {
-            "industry": "运输与仓储",
-            "median": "13%（2024 年就业占比）",
+            "median": "25%（2025年就业占比）",
             "note": "O*NET 单列行业之一。"
           },
           {
             "industry": "批发贸易",
-            "median": "10%（2024 年就业占比）",
+            "median": "11%（2025年就业占比）",
             "note": "O*NET 单列行业之一。"
+          },
+          {
+            "industry": "其他行业（含运输仓储）",
+            "median": "23%（2025年就业占比）",
+            "note": "其余行业合计，不是单一运输仓储占比。"
           }
         ],
         "industry_value_label": "行业就业占比／统计状态",
@@ -10556,7 +10749,7 @@
         },
         "interpretation_rows": [
           {
-            "answer": "O*NET 全国工资 53-7021.00，2025 年 5 月工资数据。",
+            "answer": "美国2025年5月OEWS本岗工资：年中位68,080美元、时中位32.73；年P10为42,640、P90为103,570。工资就业覆盖与含自雇的就业预测分开；OEWS不含自雇、非公司企业业主等，分位非起薪或职级。官方年薪有效，不按个人实际班次推全年收入。",
             "question": "美国工资数据的来源与期间是什么？"
           },
           {
@@ -10568,13 +10761,13 @@
             "question": "分位数应该怎样理解？"
           },
           {
-            "answer": "不是；预测是职业总量变化，年均空缺含增长与替补。",
+            "answer": "美国2025年就业42,900人，2035年预测44,500人；2025—2035年变化4%，年均空缺3,500个含增长和替换。空缺不是净增、十年累计或个人录用率，预测不是实绩。",
             "question": "预测为增长是否意味着容易入行？"
           }
         ],
         "median": "68,080 美元/年（2025 年 5 月）",
         "outlook_heading": "就业展望",
-        "outlook_period": "2024—2034 年（O*NET 就业趋势，基于 BLS 预测）",
+        "outlook_period": "2025—2035年（BLS预测转引）",
         "wage_column_labels": [
           "工资位置",
           "工资参考（年薪／时薪）",
@@ -10589,7 +10782,7 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "不可按固定工时年化",
+            "equivalent": "官方公布年薪；不能以个人实际工时推收入",
             "interpretation": "统计位置，不是入职起薪。",
             "label": "较低工资位置（第 10 分位）",
             "value": "42,640 美元/年"
@@ -10602,7 +10795,7 @@
           },
           {
             "equivalent": "不代表全年持续高收入",
-            "interpretation": "高分段与设备、行业与地区相关。",
+            "interpretation": "全国分位位置，不是某种设备或经验的因果溢价。",
             "label": "较高工资位置（第 90 分位）",
             "value": "103,570 美元/年"
           }
@@ -10696,8 +10889,8 @@
         "outlook_evidence": [
           {
             "geography": "美国",
-            "horizon": "2024—2034 年",
-            "interpretation": "年均空缺含增长与替补，不等于每年净增 3,800 人。",
+            "horizon": "2025—2035年",
+            "interpretation": "美国2025年就业42,900人，2035年预测44,500人；2025—2035年变化4%，年均空缺3,500个含增长和替换。空缺不是净增、十年累计或个人录用率，预测不是实绩。",
             "limitation": "是职业总量统计，不是个人录用保证。",
             "metric": "市场信号",
             "occupation_scope": "O*NET 53-7021.00 起重机与塔吊操作员",
@@ -10710,28 +10903,28 @@
           },
           {
             "geography": "美国",
-            "horizon": "当前来源时期",
+            "horizon": "2025年",
             "interpretation": "就业规模是存量统计，与职位空缺不是同一指标。",
             "limitation": "不能作为个人就业保证。",
             "metric": "就业规模",
             "occupation_scope": "O*NET 53-7021.00",
-            "value": "42,300 人（2024 年）"
+            "value": "42,900人（2025年）"
           },
           {
             "geography": "美国",
-            "horizon": "当前来源时期",
+            "horizon": "2025—2035年",
             "interpretation": "职位空缺含增长与替补，需按来源口径解释。",
             "limitation": "不能作为个人就业保证。",
             "metric": "职位空缺",
             "occupation_scope": "O*NET 53-7021.00",
-            "value": "约 3,800 个/年（2024—2034 年）"
+            "value": "3,500个/年（含增长与替换）"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
             "href": {
-              "$source": "crane-trends-current",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10739,7 +10932,7 @@
             },
             "id": "crane-trends-current",
             "label": {
-              "$source": "crane-trends-current",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10819,7 +11012,7 @@
             "target_href": "/zh/career/jobs/construction-laborers",
             "target_slug": "construction-laborers",
             "target_title": "建筑工人（相邻职业）",
-            "transition_distance": "距离说明：从工地体力与辅助任务转向起重设备操作。"
+            "transition_distance": "编辑比较：从本岗设备吊运转入建筑劳工的场地及辅助任务，非相反方向。"
           },
           {
             "capability_gaps": "需补足：打桩设备操作与桩基作业流程。",
@@ -10830,7 +11023,7 @@
             "transition_distance": "距离说明：从通用吊运转向桩基与打桩设备。"
           },
           {
-            "capability_gaps": "需补足：土方机械操作与开挖整平工艺。",
+            "capability_gaps": "补土方机械、开挖整平及地下设施识别；该职业也列power cranes与设备修理，不绝对排除起重作业。",
             "shared_capabilities": "共同能力：设备操作手感与场地判断。",
             "target_href": "/zh/career/jobs/operating-engineers-and-other-construction-equipment-operators",
             "target_slug": "operating-engineers-and-other-construction-equipment-operators",
@@ -10838,7 +11031,7 @@
             "transition_distance": "距离说明：从悬吊负载转向土方机械地面作业。"
           },
           {
-            "capability_gaps": "需补足：构件定位、连接与结构安装工艺。",
+            "capability_gaps": "补图纸、对齐、螺栓连接和切焊工艺；钢结构工也可能操作起重机，不按是否操作划绝对边界。",
             "shared_capabilities": "共同能力：高处作业安全意识与构件吊运配合。",
             "target_href": "/zh/career/jobs/structural-iron-and-steel-workers",
             "target_slug": "structural-iron-and-steel-workers",
@@ -10892,7 +11085,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣测试",
-            "evidence_level": "工作样本",
+            "evidence_level": "官方兴趣档案及编辑体验提问",
             "id": "riasec",
             "label": "兴趣与任务",
             "question": "我的兴趣类型与起重设备操作工作接近吗？",
@@ -10910,8 +11103,8 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
-            "evidence_level": "工作样本",
+            "cta_label": "查看职业兴趣参考（非本项测量）",
+            "evidence_level": "编辑自我观察；本岗测量效度未取得",
             "id": "big-five",
             "label": "稳定执行",
             "question": "我的性格特质对这类工作有帮助吗？",
@@ -10929,8 +11122,8 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
-            "evidence_level": "工作样本",
+            "cta_label": "查看职业兴趣参考（非本项测量）",
+            "evidence_level": "编辑自我观察；本岗测量效度未取得",
             "id": "mbti",
             "label": "偏好观察",
             "question": "MBTI 能说明我适合独立操作还是团队协作吗？",
@@ -10943,8 +11136,8 @@
           {
             "answer": "动机线索不同，对应的选择不同；把它当作提问工具，不当作岗位结论。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
-            "evidence_level": "工作样本",
+            "cta_label": "查看职业兴趣参考（非本项测量）",
+            "evidence_level": "编辑自我观察；本岗测量效度未取得",
             "id": "enneagram",
             "label": "动机观察",
             "question": "我为什么想做起重机操作？",
@@ -10955,10 +11148,10 @@
             "watchout": "不作人格诊断或录用结论。"
           },
           {
-            "answer": "需要持续注意、手眼协调与问题发现能力；IQ 类量表与岗位要求没有官方对应。",
+            "answer": "O*NET列控制精度、多肢协调、深度知觉与远视等能力；IQ对本岗预测效度未取得，不用分数代法定健康与资格审查。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
-            "evidence_level": "工作样本",
+            "cta_label": "查看职业兴趣参考（非本项测量）",
+            "evidence_level": "编辑自我观察；本岗测量效度未取得",
             "id": "iq",
             "label": "问题解决",
             "question": "长期观察与精细操纵对认知有什么要求？",
@@ -10969,10 +11162,10 @@
             "watchout": "不作人格诊断或录用结论。"
           },
           {
-            "answer": "需要与信号工、司索工和现场负责人精确沟通；99% 表示每天有面对面讨论。",
+            "answer": "美国99%每天面对面讨论是工作情境，编辑观察与信号司索及现场人员精确沟通；不据此定EQ录用阈值。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始职业兴趣测试",
-            "evidence_level": "工作样本",
+            "cta_label": "查看职业兴趣参考（非本项测量）",
+            "evidence_level": "编辑自我观察；本岗测量效度未取得",
             "id": "eq",
             "label": "协作边界",
             "question": "需要很强的沟通能力吗？",
@@ -11080,8 +11273,8 @@
             "watchouts": "对象转为构件定位与连接，转入需补足结构安装工艺。"
           },
           {
-            "direction": "卷扬与绞车操作（相邻职业）",
-            "fit_signals": "共同能力：悬吊设备控制与信号配合。",
+            "direction": "露天采掘设备操作（相邻职业）",
+            "fit_signals": "共同能力：机械控制、信号识别与场地设备检查。",
             "target": {
               "href": {
                 "$link": "crane-and-tower-operators.direction-comparison.adjacent-career-comparison-table.1",
@@ -11099,7 +11292,7 @@
                 "field": "entity"
               }
             },
-            "watchouts": "对象转为卷扬与绞车设备，转入需补足特定操作与维护。"
+            "watchouts": "实际目标47-5022.00：补采掘计划、坡道、岩土物料和采掘设备能力，不是卷扬绞车职业。"
           },
           {
             "direction": "长期训练与取证",
@@ -11119,8 +11312,8 @@
             "question": "能否在信息不完整时停止操作？"
           },
           {
-            "answer": "只接受唯一有效信号，信号冲突即中止。",
-            "question": "能否严格复诵唯一有效信号？"
+            "answer": "美国施工1926.1419通常同一时刻一人给信号，但任何人可发停机或紧急停机信号。需要信号的作业若通讯中断，应安全停止，恢复通讯并给出且理解正确指令后再继续；视线受限须适当信号安排，不等一概禁止盲吊。",
+            "question": "能否区分正常操作信号与停机信号？"
           },
           {
             "answer": "保留班前检查与异常记录。",
@@ -11135,7 +11328,7 @@
             "question": "能否接受复核与纠正？"
           },
           {
-            "answer": "美国按 OSHA 1926.1427，中国按特种作业规定。",
+            "answer": "美国1926.1427适用于施工Subpart CC所覆设备，derrick、sideboom及制造商额定能力不超2,000磅设备另适用相关规则。由雇主确保培训、适用认证或许可、设备与任务评价；OSHA制定标准，不签发个人操作证。证书自身不等雇主评价合格。 中国房屋市政工程按住建部令60号（2026-06-01施行）核对应工种资格；首次取证正式上岗前须实习至少6个月，由同工种从业6年以上人员指导，实习期不得独立操作。资格证书全国有效3年；培训考核及设备项目条件分别核，Q2特种设备作业项目不能自动替代建筑施工资格。",
             "question": "能否按法域与设备补足资格？"
           },
           {
@@ -11237,14 +11430,14 @@
           },
           {
             "href": {
-              "$source": "crane-trends-current",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "crane-and-tower-operators.source-register.published.1"
             },
             "label": {
-              "$source": "crane-trends-current",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -11317,15 +11510,9 @@
             "field": "name",
             "item": "crane-and-tower-operators.source-register.published.1"
           },
-          "updated_at": {
-            "$source": "crane-trends-current",
-            "block": "source-register",
-            "copy_key": "career.item.published-sources",
-            "field": "period",
-            "item": "crane-and-tower-operators.source-register.published.1"
-          }
+          "updated_at": "本轮九板块来源读取2026-10-09；统计期与法规生效期分别标注"
         },
-        "note": "来源范围、限制和统计时期按原始证据分别核对。"
+        "note": "任务情境、工资、就业预测、行业背景与法规适用范围分别标注；阅读日期不等统计期或法规生效日。"
       },
       "work_context_block": {
         "$join": [
@@ -11508,7 +11695,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "运输与物料搬运 · 起重与塔吊操作",
@@ -11559,7 +11746,7 @@
       "text": "起重机与塔吊操作员"
     }
   },
-  "source_content_sha256": "b8dabbc8bf554caa51e35451f8c9d4c4576a12dbb87a32bc85da1c1821cbc977",
+  "source_content_sha256": "82acdc6f66c6c61f657a2b4dbc3addff2f4aa2425800a862d41d31ef1c511e9b",
   "subject": {
     "canonical_slug": "crane-and-tower-operators",
     "name": "起重机与塔吊操作员",

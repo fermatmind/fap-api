@@ -20,6 +20,21 @@
       "fact:us-change-2025-2035": {
         "status": "pending_mapping"
       },
+      "fact:us-current-change-2025-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:us-current-employment-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-current-employment-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:us-current-growth-2025-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:us-current-openings-2025-2035": {
+        "status": "pending_mapping"
+      },
       "fact:us-employment-2025": {
         "status": "mapped"
       },
@@ -11413,52 +11428,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.authority_sources.sources.03.href": {
-        "ref": {
-          "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.8",
-          "parts": [
-            [
-              "；",
-              2,
-              3
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.authority_sources.sources.03.label": {
-        "ref": {
-          "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.8",
-          "parts": [
-            [
-              "；",
-              2,
-              3
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.notes.01": {
         "ref": {
@@ -12135,28 +12110,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.href": {
-        "ref": {
-          "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.20",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.label": {
         "ref": {
@@ -12266,28 +12221,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.href": {
-        "ref": {
-          "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.22",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.label": {
         "ref": {
@@ -12397,28 +12332,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.href": {
-        "ref": {
-          "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.24",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.label": {
         "ref": {
@@ -23988,7 +23903,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "计算机与信息研究科学家以基础研究与新原理与新方法为主，验证周期更长；本职业以可量产的硬件设计与规格达标为目标"
+              "计算机与信息研究科学家以计算科学问题、算法和新方法的研究为职业范围；计算机硬件工程师主要承担设备硬件设计和测试。两者均可能受规格、预算与应用约束，不能断言研究周期必然更长或研究岗位无量产约束。"
             ]
           },
           "id": "computer-hardware-engineers.profile.career-quick-answers-block.15",
@@ -24021,7 +23936,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国该职业准备层级为 Job Zone Four（需要相当准备），该页面教育分布表述为「多数岗位要求四年制学士学位，部分不是」，SVP 区间为 7.0 至 8.0；该页面另列出 1 个注册学徒岗位示例（Hardware Engineer）；常见路径为完成计算机工程或电气工程或相关专业本科或研究生学习，在实习或项目里完成过一次「规格—设计—原型—测试」闭环，再逐步承担模块与子系统与跨部门接口职责，以设计评审记录与测试与验证报告作为能力证据"
+              "美国O*NET Job Zone Four是准备层级，SVP为7.0至低于8.0；其四年制本科说法是该组通用说明，不是职业教育分布。本职业新聘人员教育要求调查当前列本科48%、硕士34%、部分大学教育但无学位7%，只展示部分回答，不能补成完整分布或中国门槛。BLS表1.2典型入门教育为本科，无相关工作经验要求、无在岗训练；具体雇主另核。 Hardware Engineer是该页列出的一个注册学徒名称示例；完成规格—设计—原型—测试闭环是编辑建议，不是已取得的雇主招聘条件。"
             ]
           },
           "id": "computer-hardware-engineers.profile.career-quick-answers-block.18",
@@ -24032,7 +23947,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国大陆：本条证据路由未建立与 O*NET-SOC 17-2061.00 一一对应的职业细类，相关职责可能分布在芯片与整机与板卡与终端厂商的硬件研发岗位、通信与汽车电子与工业控制企业的硬件岗位，以及科研院所与高校的硬件研发岗位；本条证据路由把中国大陆的工资登记为缺口（数据状态：暂无可安全使用的数据），处理说明 为「明确显示暂无可安全使用的数据，不用美国数字或相邻行业代理填补」，因此本页不发布中国大陆任何工资数值"
+              "证据不足：未取得与O*NET17-2061精确对应的中国大陆全国职业工资分布。本页另给匹配单位行业背景：2025城镇非私营制造业均值113,594元/年、私营76,055元/年；科学研究和技术服务业非私营182,064元/年、私营83,560元/年。四项分别是行业税前年平均工资，不是硬件工程师起薪、中位数、范围或个人到手收入。 GB/T4754-2017中391计算机制造（整机/零部件/外围设备）支持制造企业背景；7320工程和技术研究和试验发展支持专营研发机构背景。按雇主主要业务匹配，不按岗位名一律归类，不把中国行业和美国职业代码当精确等价。"
             ]
           },
           "id": "computer-hardware-engineers.profile.career-quick-answers-block.19",
@@ -24043,7 +23958,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "结论只适用于本页标注的 O*NET 与 BLS 口径与期间（美国工资为 BLS 2025 年工资数据、就业与预测为 2024—2034 年口径；中国大陆为已登记的工资缺口且不发布数值）"
+              "美国工资采用2025数据，就业采用2025—2035总体预测；中国工资提供2025匹配行业背景，精确职业工资仍缺。各期间与口径须分别比较，不把行业均值当职业工资。"
             ]
           },
           "id": "computer-hardware-engineers.profile.career-quick-answers-block.20",
@@ -24219,7 +24134,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "本页按 O*NET-SOC 17-2061.00（Computer Hardware Engineers，计算机硬件工程师；2026 年更新页面）的精确职业口径：该职业为商业、工业、军事或科学用途研究、设计、开发或测试计算机与计算机相关设备，并可能监督其制造与安装。该职业页面的兴趣代码为 RIC（现实型、研究型、常规型）（页面公示分数为现实型 78、研究型 76、常规型 73、企业型 16、艺术型 14、社会型 14），准备层级为 Job Zone Four（需要相当准备），该页面教育分布表述为「多数岗位要求四年制学士学位，部分不是」，SVP 区间为 7.0 至 8.0；该职业页面为该代码标注了 Bright Outlook。"
+              "美国O*NET-SOC17-2061.00（2026更新）定义为研究、设计、开发或测试计算机及相关设备，可能监督制造安装，标Bright Outlook。兴趣值R78/I76/C73/E16/A14/S14，是职业兴趣轮廓，不是人数分布或个人录用标准。美国O*NET Job Zone Four是准备层级，SVP为7.0至低于8.0；其四年制本科说法是该组通用说明，不是职业教育分布。本职业新聘人员教育要求调查当前列本科48%、硕士34%、部分大学教育但无学位7%，只展示部分回答，不能补成完整分布或中国门槛。BLS表1.2典型入门教育为本科，无相关工作经验要求、无在岗训练；具体雇主另核。"
             ]
           },
           "id": "computer-hardware-engineers.profile.onet-structured-fields-block.1",
@@ -24230,7 +24145,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国工资与就业（O*NET 页面显示的 BLS 口径）：该页面的美国工资中位数为 77.76 美元/小时、161,740 美元/年（BLS 2025 年工资数据），页面同时给出年薪 10/25/50/75/90 分位为 92,940 / 126,090 / 161,740 / 202,990 / 225,330 美元（时薪 44.68 / 60.62 / 77.76 / 97.59 / 108.33 美元）；就业（2024 年）为 76,800 人，预测（2034 年）为 82,400 人，2024—2034 年增长 7%（Much faster than average），预测年均职位空缺 4,700 个。使用边界：这是全国口径的统计分布，描述的是职业人群而不是个人报价；中位数不能解释为入门工资或起薪，百分位描述分布位置而不是能力等级，地区与行业与雇主类型差异不能直接外推到具体雇主。"
+              "美国2025工资中位数161,740美元/年、77.76美元/小时；五分位年薪92,940/126,090/161,740/202,990/225,330，时薪44.68/60.62/77.76/97.59/108.33。美国BLS表1.2（SOC17-2061）2025就业76,100人，2035预测83,000人，官方净变化+6,900人、增长9.1%，2025—2035年均空缺4,100个。空缺含增长和替补；这是总体就业预测，非AI归因，不是个人录用概率或逐年实际值。 中位数非起薪，分位非经验等级；OEWS不含自雇收入，不能外推个人报价。"
             ]
           },
           "id": "computer-hardware-engineers.profile.onet-structured-fields-block.2",
@@ -24241,7 +24156,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆：本条证据路由把本职业的中国大陆精确职业工资登记为缺口（数据状态：暂无可安全使用的数据），处理说明 为「明确显示暂无可安全使用的数据，不用美国数字或相邻行业代理填补」，口径说明 另明确「不能用科学研究和技术服务业行业均值或美国工资跨法域外推起薪、中位数或个人收入」。因此本页在中国大陆薪资模块不发布任何数值，只登记缺口与统计口径与岗位映射边界，并写明如需自行核价应按行业与城市与职责与工资口径分别核对。"
+              "证据不足：未取得与O*NET17-2061精确对应的中国大陆全国职业工资分布。本页另给匹配单位行业背景：2025城镇非私营制造业均值113,594元/年、私营76,055元/年；科学研究和技术服务业非私营182,064元/年、私营83,560元/年。四项分别是行业税前年平均工资，不是硬件工程师起薪、中位数、范围或个人到手收入。 GB/T4754-2017中391计算机制造（整机/零部件/外围设备）支持制造企业背景；7320工程和技术研究和试验发展支持专营研发机构背景。按雇主主要业务匹配，不按岗位名一律归类，不把中国行业和美国职业代码当精确等价。"
             ]
           },
           "id": "computer-hardware-engineers.profile.onet-structured-fields-block.3",
@@ -24252,7 +24167,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业与就业结构：该职业页面的行业分布为其他行业（含信息业与政府）41%、专业与科学与技术服务 33%、制造业 26%。该行业分布为当前页面结构数据；本页不据此推断就业规模或工资数值；就业规模与增长率与年均空缺以页面显示的 BLS 2024—2034 年口径为准（2024 年 76,800 人、2034 年预计 82,400 人、增长 7%、年均空缺 4,700 个）。需注意：行业分布为占比结构，不等于岗位数量或机会多少，也不预测某一雇主的招聘。"
+              "O*NET独立行业页当前列专业/科学/技术服务39%、制造业34%、其他行业（含政府和信息业）27%；详细页2025前两行业也为39%和34%。它是就业结构，不是行业工资或地区机会。 美国BLS表1.2（SOC17-2061）2025就业76,100人，2035预测83,000人，官方净变化+6,900人、增长9.1%，2025—2035年均空缺4,100个。空缺含增长和替补；这是总体就业预测，非AI归因，不是个人录用概率或逐年实际值。"
             ]
           },
           "id": "computer-hardware-engineers.profile.onet-structured-fields-block.4",
@@ -24290,7 +24205,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "沟通与协作｜93% 每天使用电子邮件；50% 每天进行面对面讨论（46% 每周一次以上）；39% 每天进行电话沟通（39% 每周一次以上）；34% 与他人保持持续接触（31% 大部分时间、31% 约一半时间）；43% 认为与工作组或团队协作极其重要（50% 非常重要）；34% 认为需要与外部客户或公众打交道重要（45% 比较重要）。\n决策与影响｜31% 拥有很大的决策自由度（66% 有一定自由度）；21% 拥有很大的任务与优先事项决定自由度（66% 有一定自由度）；18% 每周一次以上作出影响他人或财务资源或组织声誉的决定（32% 每月一次以上、11% 从不）；38% 认为其决定对同事或公司结果重要（24% 中等、28% 轻微）；21% 对其他员工的工作结果负有高责任（46% 中等、25% 有限）。\n精确与节奏｜59% 认为非常精确或高度准确极其重要（31% 非常重要）；14% 认为重复性任务极其重要（25% 非常重要、14% 完全不重要）；45% 每周一次以上面临严格截止期限（45% 每月一次以上）；11% 每天需要撰写正式信件与备忘（11% 从不）；76% 每周工作时间超过 40 小时（24% 为 40 小时）；69% 为常规固定班次（28% 不规律）。\n协作与领导｜52% 认为协调或带领他人非常重要（26% 重要、15% 比较重要）；17% 对他人健康与安全负有高责任（21% 中等、17% 无责任）；19% 认为竞争极其激烈（59% 很激烈、19% 中等）；14% 每周一次以上面对冲突情境（38% 每月一次以上、38% 每年一次以上）。\n工位与体力｜61% 持续或几乎持续坐着（29% 超过一半时间）；14% 持续或几乎持续用手操作物件与工具（52% 少于一半时间、17% 从不）；86% 站立时间少于一半；59% 少于一半时间需要走动或跑动（41% 从不）；17% 超过一半时间做重复性动作（34% 少于一半时间、28% 从不）；68% 从不弯腰或扭身；72% 从不跪蹲或爬行。\n场所与环境｜79% 每天在环境受控的室内工作；62% 从不在非受控室内环境工作；67% 从不接触污染物；63% 从不暴露于户外全天气条件；70% 从不在户外遮蔽处工作；74% 从不暴露于很热或很冷温度；82% 从不在极亮或不足的照明条件下工作。\n危险与防护｜64% 从不暴露于危险条件；78% 从不接触轻微烧伤与割伤与咬伤或刺伤；46% 从不穿戴常见防护与安全装备；59% 从不处于封闭车辆或操作封闭设备中；96% 从不接触疾病或感染；93% 从不接触辐射。\n自动化与节奏｜39% 的工作为中度自动化（39% 轻度、18% 高度）；82% 认为工作节奏完全不由设备速度决定；15% 每年一次以上暴露于令人分心的噪声（36% 每年一次以上、29% 从不）。\n责任与边界｜36% 认为工作误差后果严重（14% 非常严重、21% 比较严重）；56% 与他人工作距离略微接近（33% 与同事不密切接触）；元器件与产品的安全与电磁兼容与可靠性合规、以及涉及出口管制的技术资料管理须按适用法域与雇主与客户制度由具备相应权限与资格的岗位执行；设计与测试依据与版本须留痕并可复核；本页美国工资为 BLS 2025 年工资数据、就业与预测为 2024—2034 年口径；中国大陆为已登记的工资缺口，本页不发布数值。"
+              "沟通与协作｜93% 每天使用电子邮件；50% 每天进行面对面讨论（46% 每周一次以上）；39% 每天进行电话沟通（39% 每周一次以上）；34% 与他人保持持续接触（31% 大部分时间、31% 约一半时间）；43% 认为与工作组或团队协作极其重要（50% 非常重要）；34% 认为需要与外部客户或公众打交道重要（45% 比较重要）。\n决策与影响｜31% 拥有很大的决策自由度（66% 有一定自由度）；21% 拥有很大的任务与优先事项决定自由度（66% 有一定自由度）；18% 每周一次以上作出影响他人或财务资源或组织声誉的决定（32% 每月一次以上、11% 从不）；38% 认为其决定对同事或公司结果重要（24% 中等、28% 轻微）；21% 对其他员工的工作结果负有高责任（46% 中等、25% 有限）。\n精确与节奏｜59% 认为非常精确或高度准确极其重要（31% 非常重要）；14% 认为重复性任务极其重要（25% 非常重要、14% 完全不重要）；45% 每周一次以上面临严格截止期限（45% 每月一次以上）；11% 每天需要撰写正式信件与备忘（11% 从不）；76% 每周工作时间超过 40 小时（24% 为 40 小时）；69% 为常规固定班次（28% 不规律）。\n协作与领导｜52% 认为协调或带领他人非常重要（26% 重要、15% 比较重要）；17% 对他人健康与安全负有高责任（21% 中等、17% 无责任）；19% 认为竞争极其激烈（59% 很激烈、19% 中等）；14% 每周一次以上面对冲突情境（38% 每月一次以上、38% 每年一次以上）。\n工位与体力｜61% 持续或几乎持续坐着（29% 超过一半时间）；14% 持续或几乎持续用手操作物件与工具（52% 少于一半时间、17% 从不）；86% 站立时间少于一半；59% 少于一半时间需要走动或跑动（41% 从不）；14% 超过一半时间做重复性动作（17%约一半时间）（34% 少于一半时间、28% 从不）；68% 从不弯腰或扭身；72% 从不跪蹲或爬行。\n场所与环境｜79% 每天在环境受控的室内工作；62% 从不在非受控室内环境工作；67% 从不接触污染物；63% 从不暴露于户外全天气条件；70% 从不在户外遮蔽处工作；74% 从不暴露于很热或很冷温度；82% 从不在极亮或不足的照明条件下工作。\n危险与防护｜64% 从不暴露于危险条件；78% 从不接触轻微烧伤与割伤与咬伤或刺伤；46% 从不穿戴常见防护与安全装备；59% 从不处于封闭车辆或操作封闭设备中；96% 从不接触疾病或感染；93% 从不接触辐射。\n自动化与节奏｜39% 的工作为中度自动化（39% 轻度、18% 高度）；82% 认为工作节奏完全不由设备速度决定；18%每周一次以上但非每天、18%每月一次以上但非每周、36%每年一次以上但非每月暴露于令人分心的噪声，29%从不。\n责任与边界｜36% 认为工作误差后果严重（14% 非常严重、21% 比较严重）；56% 与他人工作距离略微接近（33% 与同事不密切接触）；元器件与产品的安全与电磁兼容与可靠性合规、以及涉及出口管制的技术资料管理须按适用法域与雇主与客户制度由具备相应权限与资格的岗位执行；设计与测试依据与版本须留痕并可复核；本次九板块美国工资为2025、就业预测为2025—2035；中国精确职业工资缺口与匹配行业背景分列。以上百分比是美国调查回答分布，不是个人工作条件保证，未展示项和四舍五入可能造成合计不为100%。"
             ]
           },
           "id": "computer-hardware-engineers.profile.work-context-block.1",
@@ -25054,7 +24969,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用工具提高测试脚本与数据整理与图表与报告草稿效率，但把测试条件设计、失效判据与测量不确定度判断留在人，并保留环境与仪器与固件与版本与原始数据。"
+              "编辑建议：在允许且经过验证的工具中试作测试脚本、数据和报告草稿；测试条件、失效判据与测量不确定度由工程人员核查，保留环境、仪器、固件、版本及原始数据。"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.15",
@@ -25076,7 +24991,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用工具提高功能规格说明与评审材料与变更记录整理效率，但把设计变更审批、合规结论与对外技术资料披露留给人，按雇主与客户与适用法域要求执行。"
+              "编辑建议：试作功能规格、评审材料及变更记录草稿，核对引用与版本；设计审批、合规结论及对外披露由实际授权人员确认，不预设效率提升。"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.17",
@@ -25087,7 +25002,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把技术能力、实际采用与岗位结果分开看：公开资料能支持的是「资料检索与代码与脚本与文档与图表草稿类辅助可被工具完成」，以及「企业在仿真与验证与测试自动化与设计工具上持续投入」；不能据此推断岗位数量或设计周期变化。"
+              "依据硬件职业任务，规格资料检索、代码脚本、测试数据和文档草稿可作为工具辅助候选用途；须在受控工具上测试正确性。证据不足：未取得本职业具体厂商投入、AI采用率、周期缩短或质量提升样本，不能从仿真工具存在推出生成式AI已采用。"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.18",
@@ -25131,7 +25046,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于核对工资与就业口径：页面显示 2025 年工资中位数 77.76 美元/小时、161,740 美元/年（10/25/50/75/90 分位 92,940 / 126,090 / 161,740 / 202,990 / 225,330 美元）；就业 76,800 人（2024 年）、2034 年预计 82,400 人、增长 7%、年均空缺 4,700 个"
+              "2025全国工资分位已核；就业另用BLS表1.2。美国BLS表1.2（SOC17-2061）2025就业76,100人，2035预测83,000人，官方净变化+6,900人、增长9.1%，2025—2035年均空缺4,100个。空缺含增长和替补；这是总体就业预测，非AI归因，不是个人录用概率或逐年实际值。"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.22",
@@ -25241,7 +25156,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024—2034 年就业预测与年均空缺的数值与口径"
+              "本次预测依据BLS表1.2的2025—2035期；O*NET趋势入口不代替表格核值，旧期不得称当前结果。"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.32",
@@ -25384,7 +25299,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "为美国全国口径的统计分布（BLS 2025 年工资数据、2024—2034 年就业预测）；描述职业人群而非个人报价，中位数不等于入门工资，地区与行业与雇主类型差异不能直接外推"
+              "2025美国全国工资与2025—2035总体就业预测，非个人报价、非AI归因；行业/地区/雇主不能无条件外推。"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.45",
@@ -25395,7 +25310,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 全国工资与就业趋势页面（17-2061.00，BLS 口径）"
+              "O*NET工资查询与BLS表1.2（17-2061）"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.46",
@@ -25417,7 +25332,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面显示 2025 年工资中位数 77.76 美元/小时、161,740 美元/年，2024 年就业 76,800 人、2034 年预计 82,400 人、增长 7%、年均空缺 4,700 个；这是统计分布，不是个人收入或录用概率"
+              "美国BLS表1.2（SOC17-2061）2025就业76,100人，2035预测83,000人，官方净变化+6,900人、增长9.1%，2025—2035年均空缺4,100个。空缺含增长和替补；这是总体就业预测，非AI归因，不是个人录用概率或逐年实际值。 2025工资中位数161,740美元/年、77.76美元/小时。"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.48",
@@ -25505,7 +25420,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "框架要求把用途与限制与监测与责任写清，可直接用于本页的复核与留痕建议"
+              "NIST AI RMF是自愿治理框架，可供编辑整理用途、限制、监测和责任建议；不是本职业强制流程或采用证据。"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.56",
@@ -25549,7 +25464,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该页面列出 20 项软件技能与提及比例（Python 23.39%、C++ 10.54%、The MathWorks MATLAB 10.24%、Linux 9.58%、C 8.49%、Perl 7.71%、Microsoft Office software 4.07%、Git 3.27%、Microsoft Excel 2.93%、Autodesk AutoCAD 1.95% 等）；来源为 2025 年全年美国全国招聘信息统计；提及比例不等于熟练度或设计能力"
+              "O*NET热技能页列20项：Python23%、C++10%、MATLAB10%、Linux9%、C8%、Perl7%、Office4%、Git3%、Excel2%、AutoCAD1%。来源为2025全年美国Lightcast招聘广告，提及比例不是熟练度、统一录用条件或AI采用率；旧小数精度本轮未获来源支持。"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.60",
@@ -25560,7 +25475,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术能力回答「模型在原则上能做什么」。对本职业而言，较可靠的部分是规格与资料检索、设计草案与脚本生成、测试数据处理与文档与图表草稿；不可靠的部分是指标与约束设定、接口与架构取舍、测试有效性与失效判据以及设计责任。"
+              "资料检索、设计脚本、数据与文档整理是按任务提出的辅助候选；本页未取得同产品线对照试验，不能先称可靠。需检查器件版本、边界条件、单位、计算与可复现性，设计和验证责任由授权人员承担。"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.61",
@@ -25571,7 +25486,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采用证据回答「雇主实际在用什么」。公开资料能支持的是企业在仿真与验证与测试自动化与设计工具上持续投入；具体企业与产品线差异很大，本页不从关键词推断采用率。"
+              "证据不足：本轮未取得本职业雇主实际部署生成式AI及效果的可核查样本。O*NET传统软件清单与招聘提及不能证明AI采用；企业仿真、测试工具投入也不能自动归因为生成式AI。"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.62",
@@ -25582,7 +25497,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "岗位结果回答「就业规模有没有变」。该职业页面的 BLS 口径显示 2024 年就业 76,800 人、2034 年预计 82,400 人、增长 7%（Much faster than average）、年均空缺 4,700 个；这是预测含假设与误差，不等于逐年实际值，也不能推出个人录用概率。"
+              "美国BLS表1.2（SOC17-2061）2025就业76,100人，2035预测83,000人，官方净变化+6,900人、增长9.1%，2025—2035年均空缺4,100个。空缺含增长和替补；这是总体就业预测，非AI归因，不是个人录用概率或逐年实际值。"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.63",
@@ -25615,7 +25530,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不把写代码当作全部，但代码与脚本与仿真能力是日常工作基础。该页面教育分布表述为「多数岗位要求四年制学士学位，部分不是」，准备层级为 Job Zone Four（需要相当准备），SVP 区间为 7.0 至 8.0；该页面列出 12 项全国认证与 1 个注册学徒岗位示例（Hardware Engineer），以及技术清单 20 项招聘技术关键词（Python 23.39%、C++ 10.54%、MATLAB 10.24% 等）；真正决定机会的是设计评审与测试验证记录。"
+              "代码不是整个职业，但脚本、仿真和数据处理是可练习的工具能力；O*NET任务及热技能页支持相关性，不能据此断言每个岗位每天写代码。O*NET热技能页列20项：Python23%、C++10%、MATLAB10%、Linux9%、C8%、Perl7%、Office4%、Git3%、Excel2%、AutoCAD1%。来源为2025全年美国Lightcast招聘广告，提及比例不是熟练度、统一录用条件或AI采用率；旧小数精度本轮未获来源支持。 应按目标产品线核语言与工具，并用可复现设计测试记录证明能力。"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.66",
@@ -25637,7 +25552,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "从任务结构看，受影响较早的是可结构化与可数字化的环节：规格与资料检索与对比、设计草案与脚本与样板生成、测试数据处理与图表与文档与规格草稿。受影响较晚的是需要判断与责任的环节：指标与约束设定、接口与架构与取舍、原型与实测验证与失效判据、以及设计变更与合规与对外披露。"
+              "编辑判断：资料与脚本、数据与文档草稿较便于先测试辅助工具；需求约束、接口架构、原型实测、失效判据和披露审批需要工程判断及授权。这是任务拆分，不是已观察到的采用先后或替代时间表。"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.68",
@@ -25659,7 +25574,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该职业页面显示的是增长而非收缩：2024 年 76,800 人、2034 年预计 82,400 人、增长 7%（Much faster than average）、年均空缺 4,700 个；但这是 BLS 的全国预测、含假设与误差，不等于逐年实际值，也不能推出个人录用概率，并且不区分行业与雇主类型。"
+              "美国BLS表1.2（SOC17-2061）2025就业76,100人，2035预测83,000人，官方净变化+6,900人、增长9.1%，2025—2035年均空缺4,100个。空缺含增长和替补；这是总体就业预测，非AI归因，不是个人录用概率或逐年实际值。"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.70",
@@ -25670,7 +25585,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 全国就业趋势页面（17-2061.00，BLS 2024—2034 年预测）"
+              "BLS职业预测与人员特征表1.2（17-2061，2025—2035）"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.71",
@@ -25703,7 +25618,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有可靠公开来源支持给该职业设定消失年份；本页不提供这类预测。更有用的是跟踪芯片与封装与接口标准与设计工具链的变化，以及雇主对验证与合规自动化的投入，而不是等待一个日期。"
+              "证据不足：未取得能给本职业设定消失年份的公开证据。本页不提供时间表；可跟踪目标产品线工具和验证规范变化，并核雇主实际部署材料。"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.74",
@@ -25769,7 +25684,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "由工具完成资料检索与设计草案与脚本与数据处理与文档与图表草稿，并记录所用工具与版本与数据来源与时间。"
+              "在雇主允许且已测试的工具中生成资料/代码/图表/文档候选草稿；记录版本与来源，对错误或不适用的输出拒绝采用。"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.80",
@@ -26231,7 +26146,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "如果要用一句话概括：AI 与数字工具会显著改变资料与草案与数据与文档的生成方式，但不会改变「谁对指标与约束、接口与架构取舍、测试有效性、以及设计变更与合规与对外披露负责」；需要长期积累的仍然是工程判断与验证纪律与文档能力。"
+              "编辑结论：可以测试工具对资料、代码、数据和文档工作的辅助价值；本轮没有职业级效果或采用率证据。长期准备仍应覆盖需求约束、接口取舍、实测验证和可追溯记录，责任按实际制度落实。"
             ]
           },
           "id": "computer-hardware-engineers.ai-impact.ai-impact-table.122",
@@ -26340,7 +26255,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与计算机硬件工程师精确对应的中国大陆全国职业工资口径；本条证据路由把该口径登记为缺口（暂无可安全使用的数据），并明确不用美国数字或相邻行业代理填补，本页不发布任何数值"
+              "证据不足：本职业中国大陆精确全国工资分布未取得；可用的匹配行业背景另列，不能填作职业工资。"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.7",
@@ -26351,7 +26266,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮查阅范围为：本条证据路由登记的中国大陆工资来源（国家统计局 2025 年公开资料）与本职业的 O*NET 精确职业来源；route claim 明确「2025 年国家统计局公开工资资料是行业或人员大类聚合口径，未建立与 O*NET 17-2061.00 精确对应的中国大陆全国职业工资分布」，并写明「zh-CN 只是页面语言，不是本职业在中国大陆存在精确等价职业的证明」；路由 resolution 为「明确显示暂无可安全使用的数据，不用美国数字或相邻行业代理填补」，因此本页在中国大陆薪资模块不发布任何数值。"
+              "本轮核国家统计局2025工资发布表2/表5及行业分类391/7320。GB/T4754-2017中391计算机制造（整机/零部件/外围设备）支持制造企业背景；7320工程和技术研究和试验发展支持专营研发机构背景。按雇主主要业务匹配，不按岗位名一律归类，不把中国行业和美国职业代码当精确等价。"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.8",
@@ -26362,7 +26277,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径说明：中国大陆公开工资统计按行业门类与登记注册类型与人员大类公布，本职业并不是该口径下的独立职业细类；本页不据此推算职业级数值"
+              "2025制造业年平均工资：非私营113,594元、私营76,055元（中国大陆，税前，行业全体统计就业人员）。"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.9",
@@ -26373,7 +26288,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "该口径覆盖相应统计范围的单位与人员大类，不含芯片与整机与板卡厂商在项目奖与股权与驻场补贴上的差异；本页不把行业或人员大类口径写成本职业数值。"
+              "用于主要经营计算机及相关设备制造的雇主背景；不是硬件工程师工资。工资总额含奖金、津补贴等，并非已逐项排除项目奖；股权估值和具体薪酬结构本页未获同口径数据。"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.10",
@@ -26384,7 +26299,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "较宽职业口径：公开统计与职业分类未单列与 O*NET-SOC 17-2061.00 一一对应的职业细类"
+              "2025科学研究和技术服务业年平均工资：非私营182,064元、私营83,560元（中国大陆，税前，行业就业人员）。"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.11",
@@ -26395,7 +26310,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "不同统计发布的分类口径与覆盖范围不同、资料期不同，本页不混用，也不做口径换算。"
+              "仅供按主要业务归入研究/技术服务的机构背景；不能把制造企业硬件岗位自动归入此业。非私营和私营分别取值，不组合成工资范围。"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.12",
@@ -26417,7 +26332,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "使用边界：route claim 明确不能用科学研究和技术服务业行业均值或美国工资跨法域外推起薪、中位数或个人收入；本页不把招聘样本或相邻职业数值写成本职业的月薪、分位或起薪。"
+              "招聘报价须另标雇主、城市、职责、日期、月/年单位和固定/奖金/股权结构；不能替代职业全国分位，本轮未取得可核价的招聘样本。"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.14",
@@ -26428,7 +26343,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "统计覆盖范围：中国大陆公开工资统计以城镇单位与规模以上企业等为对象；芯片与整机与终端厂商与科研院所的硬件研发岗位在用工形式与项目与股权激励结构上差异较大"
+              "2025城镇单位统计为城镇地域内就业人数5人及以上法人单位，不含个体工商户/自由职业者；私营、非私营与规模以上企业是不同分组。"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.15",
@@ -26450,7 +26365,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "资料期：本轮查阅以 2025 年及以前已发布的公开资料为范围"
+              "2025数据期；国家统计局2026-05-15发布，本次读取2026-10-08。"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.17",
@@ -26472,7 +26387,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论与缺口边界：本页对中国大陆登记缺口与统计口径与岗位映射边界，并说明不发布任何数值"
+              "行业背景可读，精确职业工资缺口仍在"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.19",
@@ -26483,7 +26398,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "未取得职业级数值不等于官方从未发布，也不等于该岗位在中国大陆不存在；本页只说明本轮未取得与 O*NET-SOC 17-2061.00 精确对应的全国职业工资口径。"
+              "没有职业精确分布不能推断官方永不发布或岗位不存在；行业均值不等于职业中位数，不能换算个人月薪或到手所得。"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.20",
@@ -26494,7 +26409,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "岗位映射边界：本条证据路由未建立与 O*NET-SOC 17-2061.00 一一对应的职业细类"
+              "单位行业映射：391计算机制造/7320工程和技术研究和试验发展；非职业等价映射"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.21",
@@ -26505,7 +26420,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "相关职责可能分布在芯片与整机与板卡与终端厂商的硬件研发岗位、通信与汽车电子与工业控制企业的硬件岗位，以及科研院所与高校的硬件研发岗位，须按岗位实际职责与单位类型归类；中文页面名称不构成中国等价职业或工资映射。"
+              "GB/T4754-2017中391计算机制造（整机/零部件/外围设备）支持制造企业背景；7320工程和技术研究和试验发展支持专营研发机构背景。按雇主主要业务匹配，不按岗位名一律归类，不把中国行业和美国职业代码当精确等价。"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.22",
@@ -26560,7 +26475,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理，不是薪资统计：相关专业学历与一次完整的硬件设计验证经历是入门的常见条件，实际岗位方向由单位类型与产品线决定，不能据此推断收入。"
+              "编辑准备建议：核目标公告对专业和设计验证经历的要求。本轮未取得中国雇主样本，不能把本科与完整项目写成已核常见门槛或对应收入。"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.27",
@@ -26626,7 +26541,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：培训与认证是岗位要求的组成部分，实际认定以单位与客户要求为准，本页不代替报考与授权条件。"
+              "编辑建议：培训/认证价值按具体岗位与发证方核查，本轮未取得目标雇主承认材料，不能默认必需。"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.33",
@@ -26736,7 +26651,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《城镇单位就业人员年平均工资情况》检索入口｜https://www.stats.gov.cn/"
+              "国家统计局2025年城镇单位工资发布｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.43",
@@ -26747,7 +26662,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆薪资参考：缺口与统计口径边界"
+              "中国工资参考：匹配行业背景与精确职业缺口"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.44",
@@ -26758,7 +26673,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆目前没有单列该岗位的全国职业工资统计可供本页引用；本条证据路由把该口径登记为缺口（数据状态：暂无可安全使用的数据），处理说明 为「明确显示暂无可安全使用的数据，不用美国数字或相邻行业代理填补」，因此本页不提供月薪区间、分位或起薪，也不以招聘报价代替。"
+              "证据不足：未取得与O*NET17-2061精确对应的中国大陆全国职业工资分布。本页另给匹配单位行业背景：2025城镇非私营制造业均值113,594元/年、私营76,055元/年；科学研究和技术服务业非私营182,064元/年、私营83,560元/年。四项分别是行业税前年平均工资，不是硬件工程师起薪、中位数、范围或个人到手收入。"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.45",
@@ -26769,7 +26684,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "比较不同机会时应确认单位类型与产品线方向与职责范围与用工形式，并明确本页在中国大陆未提供任何工资数值。"
+              "比较机会须核雇主主要业务、城市、职责及用工安排；本页四个行业均值分开列示，不代表个人工资或入门报价。"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.46",
@@ -26813,7 +26728,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与计算机硬件工程师精确对应的中国大陆全国职业工资口径；本条证据路由未提供可安全使用的数据或代理，本页不发布数值。"
+              "证据不足：未取得该职业中国大陆全国工资中位数、分位或城市样本；不以美国工资/行业均值填补。"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.50",
@@ -26824,7 +26739,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业与人员大类口径（不可用于本职业）"
+              "较宽行业参考（按雇主主要业务匹配）"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.51",
@@ -26835,7 +26750,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆公开统计按行业门类与登记注册类型与人员大类发布平均工资，该口径不含本职业单列数值；route claim 明确不能用科学研究和技术服务业行业均值外推本职业起薪或中位数，本页不据此换算月薪或分位。"
+              "证据不足：未取得与O*NET17-2061精确对应的中国大陆全国职业工资分布。本页另给匹配单位行业背景：2025城镇非私营制造业均值113,594元/年、私营76,055元/年；科学研究和技术服务业非私营182,064元/年、私营83,560元/年。四项分别是行业税前年平均工资，不是硬件工程师起薪、中位数、范围或个人到手收入。 GB/T4754-2017中391计算机制造（整机/零部件/外围设备）支持制造企业背景；7320工程和技术研究和试验发展支持专营研发机构背景。按雇主主要业务匹配，不按岗位名一律归类，不把中国行业和美国职业代码当精确等价。"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.52",
@@ -26846,7 +26761,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "招聘与岗位公告口径（不可用于本职业）"
+              "招聘报价（需按具体岗位另核）"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.53",
@@ -26857,7 +26772,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "招聘平台与岗位公告给出的是特定岗位与特定时期与特定结构的报价，不能作为职业级统计值使用；本条证据路由要求不用相邻行业代理填补。"
+              "本轮未取得目标雇主报价样本。单条公告是雇主报价，不是全国职业统计；须核发布日期、工作地、工资组成和职责，不能声称不可用于具体岗位核价。"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.54",
@@ -26902,7 +26817,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 7%（2024—2034 年）"
+              "增长9.1%（美国2025—2035，总体就业预测）"
             ]
           },
           "id": "computer-hardware-engineers.china-salary.career-snapshot-primary-locale.58",
@@ -27040,7 +26955,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 全国工资与就业趋势页面（17-2061.00）｜https://www.onetonline.org/link/localwages/17-2061.00；O*NET-SOC 17-2061.00 职业摘要｜https://www.onetonline.org/link/summary/17-2061.00；O*NET 全国就业趋势页面（17-2061.00）｜https://www.onetonline.org/link/localtrends/17-2061.00"
+              "2025全国工资查询（只取United States行）｜https://www.onetonline.org/link/localwages/17-2061.00?st=MA；2025—2035就业表1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.8",
@@ -27161,7 +27076,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "76,800人（2024 年）"
+              "76,100人（2025，美国全国）"
             ]
           },
           "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.19",
@@ -27172,7 +27087,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该数值为 BLS 2024—2034 年就业预测的基年口径，来源为 O*NET 全国就业趋势页面；它描述美国全国该职业的就业规模，不等于某一雇主或某一地区的岗位数量。；O*NET 全国就业趋势页面（17-2061.00）｜https://www.onetonline.org/link/localtrends/17-2061.00"
+              "BLS表1.2基年就业76.1千，按千人转写76,100；不等于当前某雇主岗位数。"
             ]
           },
           "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.20",
@@ -27183,7 +27098,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 7%（2024—2034 年）"
+              "增长9.1%（2025—2035）"
             ]
           },
           "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.21",
@@ -27194,7 +27109,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "页面同时标注为 Much faster than average；预测含假设与误差，不等于逐年实际值，也不能推出个人录用概率。；O*NET 全国就业趋势页面（17-2061.00）｜https://www.onetonline.org/link/localtrends/17-2061.00"
+              "BLS表1.2变化率9.1%；O*NET类别为Much faster than average。总体预测非AI归因，不能推出个人录用概率。"
             ]
           },
           "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.22",
@@ -27205,7 +27120,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约 4,700个/年（2024—2034 年年均）"
+              "约4,100个/年（2025—2035）"
             ]
           },
           "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.23",
@@ -27216,7 +27131,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "年均职位空缺同时包含增长需求与替补需求（退休与转岗等），不等于净新增岗位；净变化约为 +5,600 人（82,400 减 76,800）。；O*NET 全国就业趋势页面（17-2061.00）｜https://www.onetonline.org/link/localtrends/17-2061.00"
+              "年均空缺4.1千含增长与替补，不等于净新增；表1.2官方净变化+6.9千、2035就业83.0千。不能将空缺乘年数当新增岗位。"
             ]
           },
           "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.24",
@@ -27227,7 +27142,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界：本页美国工资为 BLS 2025 年工资数据（全国口径），就业与预测为 BLS 2024—2034 年口径；使用时必须同时保留市场（美国全国）、统计期间、职业范围与页面公布单位；中位数不是入门工资，百分位不是能力等级，该统计面向受雇工资薪金岗位、不含自雇主与业主收入；地区与行业与雇主类型数据不能当作个人报价。该职业页面的行业分布为其他行业（含信息业与政府）41%、专业与科学与技术服务 33%、制造业 26%，本页仅作为结构数据引用，页面未提供按行业细分的工资中位数。"
+              "美国2025全国工资为受雇工资薪金统计，排除自雇与非公司业主；中位数非起薪，分位非能力等级。年薪按2080小时统计折算，不是个人实际工作时长；奖金/股权需按OEWS定义另核。就业为2025—2035总体预测。O*NET独立行业页当前列专业/科学/技术服务39%、制造业34%、其他行业（含政府和信息业）27%；详细页2025前两行业也为39%和34%。它是就业结构，不是行业工资或地区机会。"
             ]
           },
           "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.25",
@@ -27238,7 +27153,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：美国该职业 2025 年工资中位数为 77.76 美元/小时、161,740 美元/年；年薪 10/25/50/75/90 分位为 92,940 / 126,090 / 161,740 / 202,990 / 225,330 美元（时薪 44.68 / 60.62 / 77.76 / 97.59 / 108.33 美元）；2024 年就业 76,800 人，2034 年预计 82,400 人，增长 7%，年均空缺 4,700 个。限制：这是美国全国统计分布，描述职业人群而不是个人报价；中位数不等于入门工资，地区与行业与雇主类型差异不能直接外推到具体雇主。"
+              "2025全国工资中位数161,740美元/年、77.76美元/小时；五分位年薪92,940/126,090/161,740/202,990/225,330美元。美国BLS表1.2（SOC17-2061）2025就业76,100人，2035预测83,000人，官方净变化+6,900人、增长9.1%，2025—2035年均空缺4,100个。空缺含增长和替补；这是总体就业预测，非AI归因，不是个人录用概率或逐年实际值。"
             ]
           },
           "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.26",
@@ -27271,7 +27186,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该页面工作情境显示 76% 每周工作时间超过 40 小时、45% 每周一次以上面临严格截止期限、59% 认为非常精确或高度准确极其重要、36% 认为工作误差后果严重，流片与打样与评审与量产导入节点会显著影响阶段性节奏。"
+              "O*NET美国情境：76%报告周工作超过40小时、45%每周一次以上但非每天有严格期限、59%认为精确极其重要、36%认为难纠错误后果严重。对流片、打样和导入节点如何安排是编辑核查建议，不作普遍节奏结论。"
             ]
           },
           "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.29",
@@ -27293,7 +27208,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该职业页面的行业分布为其他行业（含信息业与政府）41%、专业与科学与技术服务 33%、制造业 26%；不同地区的芯片与整机与系统厂商密度会影响机会与收入水平，本页不逐州列出，也不以最高值或州示例当作普遍水平。"
+              "O*NET独立行业页当前列专业/科学/技术服务39%、制造业34%、其他行业（含政府和信息业）27%；详细页2025前两行业也为39%和34%。它是就业结构，不是行业工资或地区机会。 地区机会/收入须查对应统计或招聘，不能从企业聚集推断薪资因果。"
             ]
           },
           "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.31",
@@ -27315,7 +27230,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 7%（2024—2034 年）"
+              "增长9.1%（2025—2035）"
             ]
           },
           "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.33",
@@ -27337,7 +27252,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行业就业占比 41%（O*NET 行业分布）"
+              "该行业就业占比27%（当前独立行业页）"
             ]
           },
           "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.35",
@@ -27370,7 +27285,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行业就业占比 33%（O*NET 行业分布）"
+              "该行业就业占比39%（2025详细页与当前行业页）"
             ]
           },
           "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.38",
@@ -27381,7 +27296,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行为就业占比而非行业工资；该行业中的设计服务与研发外包岗位常按项目周期配置人力。"
+              "该行为就业占比，不是行业工资或外包人力配置样本；具体项目周期需核雇主。"
             ]
           },
           "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.39",
@@ -27403,7 +27318,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行业就业占比 26%（O*NET 行业分布）"
+              "该行业就业占比34%（2025详细页与当前行业页）"
             ]
           },
           "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.41",
@@ -27469,7 +27384,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不能。时薪与年薪是同一统计分布的不同呈现，没有个人工时与任职安排时，不能由年薪中位数推算个人月收入或税后所得，也不能跨市场换算个人报价。"
+              "OEWS年薪使用2080小时标准工作年折算，实际工时与薪酬结构可不同；不能凭全国年薪中位数推算个人月薪或税后所得。"
             ]
           },
           "id": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.47",
@@ -27804,7 +27719,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 该职业页面的兴趣代码为 RIC（现实型、研究型、常规型）：该职业页面公示的兴趣分数为现实型 78、研究型 76、常规型 73、企业型 16、艺术型 14、社会型 14。现实型对应动手实现与设备操作，研究型对应分析与建模与验证，常规型对应按规格与流程与记录做事；该职业的工作活动以使用计算机（97）、作出决策与解决问题（92）、更新与使用相关知识（87）、分析数据或信息（86）、获取信息（85）为前几位；兴趣代码描述的是职业群体的取向分布，不是个人适配结论。"
+              "O*NET兴趣代码RIC，分数R78/I76/C73/E16/A14/S14；工作活动首项使用计算机97、决策解决问题92、更新知识87、分析信息86。它描述职业兴趣轮廓，不是人群比例或个人适配结论。"
             ]
           },
           "id": "computer-hardware-engineers.fit.personality-fit-block.2",
@@ -27815,7 +27730,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 兴趣代码与工作活动为官方职业测评数据，描述的是职业群体的取向分布，不是个人适配结论，也不是录用标准。"
+              "证据层次：O*NET兴趣与活动为美国职业数据；下列适配信号是编辑建议，不是录用标准。"
             ]
           },
           "id": "computer-hardware-engineers.fit.personality-fit-block.3",
@@ -27860,7 +27775,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 该职业页面提供工作风格清单（按影响度给出分数）；大五人格量表本身不是职业选拔工具。"
+              "O*NET工作风格数据支持细节、创新、可靠与求知等任务关联；映射到大五维度是编辑解释，本页不以量表预测录用或作诊断。"
             ]
           },
           "id": "computer-hardware-engineers.fit.personality-fit-block.7",
@@ -27928,7 +27843,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：MBTI 类型不是招聘条件，本页不提供按类型筛选岗位的建议。"
+              "本页不把MBTI类型设为招聘条件；具体雇主筛选需核实际公告。"
             ]
           },
           "id": "computer-hardware-engineers.fit.personality-fit-block.13",
@@ -27995,7 +27910,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 技能与知识清单为官方职业数据；IQ 分数不是职业准入条件。"
+              "O*NET知识/技能/能力为职业数据；本页不设IQ分数门槛，具体雇主评估方法须另核。"
             ]
           },
           "id": "computer-hardware-engineers.fit.personality-fit-block.19",
@@ -28085,7 +28000,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：与该职业任务最贴合的信号是「愿意把指标写到可测试」与「愿意用数据证明设计达标」；兴趣代码为 RIC，但代码只描述群体分布，不决定个人是否适合。"
+              "直接回答：与该职业任务最贴合的信号是「愿意把指标写到可测试」与「愿意用数据证明设计达标」；兴趣代码为 RIC，但代码描述职业兴趣特征，并非从业者群体分布，不决定个人是否适合。"
             ]
           },
           "id": "computer-hardware-engineers.fit.personality-fit-block.27",
@@ -28184,7 +28099,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向的对象是电气系统与设备，不以计算硬件指标为验收对象。"
+              "电气工程师范围含多种电气/电子系统；目标岗位产品与标准需核，不能一概等于强电或排除计算设备。"
             ]
           },
           "id": "computer-hardware-engineers.fit.personality-fit-block.36",
@@ -28250,7 +28165,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向聚焦射频识别方案落地，硬件设计范围更窄。"
+              "射频识别岗位可能含方案设计、设备整合与部署测试；须核实际任务，不能一概说设计范围更窄。"
             ]
           },
           "id": "computer-hardware-engineers.fit.personality-fit-block.42",
@@ -28283,7 +28198,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向不以规格达标与可量产为约束，产出形式与节奏不同。"
+              "研究方向重点是计算问题、方法和实验；具体应用、规格及产品化约束由项目决定，不能默认无量产约束。"
             ]
           },
           "id": "computer-hardware-engineers.fit.personality-fit-block.45",
@@ -28305,7 +28220,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。该职业以文档与工具与实验台为主，该页面工作情境显示 61% 持续或几乎持续坐着、79% 每天在环境受控的室内工作、86% 站立时间少于一半、46% 从不穿戴常见防护与安全装备、96% 从不接触疾病或感染；内向者可以用书面规格与数据建立可靠的工作方式，但跨部门接口与评审答辩仍需要主动表达。"
+              "本页不按内向/外向排除人。美国情境中93%每天邮件、50%每天面对面讨论，提示书面与口头协作都需准备；坐姿、PPE及感染暴露不能作内向适配证据。"
             ]
           },
           "id": "computer-hardware-engineers.fit.personality-fit-block.47",
@@ -28338,7 +28253,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 该职业页面的兴趣代码为 RIC（现实型、研究型、常规型）。这表示职业群体集中在这三类取向，但代码不是个人适配结论，仍需用实际任务验证。"
+              "RIC按职业兴趣值排序，R78/I76/C73；不是从业者人数集中比例，也不是个人适配或录用结论。"
             ]
           },
           "id": "computer-hardware-engineers.fit.personality-fit-block.50",
@@ -28360,7 +28275,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "数学要求不低但更偏工程化：O*NET 知识清单中数学为 79（前四位），能力清单中演绎推理与归纳推理与信息排序均为 75，技能清单中数学为 56；建模与性能与功耗与信号完整性分析需要可靠的数量与逻辑能力，但日常更多使用估算与工具而不要求推导定理。"
+              "数学知识重要度79、数学技能56，数学推理与数字运算能力各53；分值是职业重要性，不是个人合格线。建模和数量核对可用任务练习，是否需要深入推导由目标岗位决定，不能概括日常都不要求。"
             ]
           },
           "id": "computer-hardware-engineers.fit.personality-fit-block.52",
@@ -28459,7 +28374,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024—2034 年就业预测与年均空缺的数值与口径"
+              "当前就业预测以已核BLS表1.2（2025—2035）为准；旧预测期不能在当前入口上无证据沿用。"
             ]
           },
           "id": "computer-hardware-engineers.fit.personality-fit-block.61",
@@ -28492,7 +28407,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对准备层级（Job Zone Four）与该页面显示的教育分布表述与学徒示例"
+              "准备层级Job Zone Four和SVP7.0至低于8.0，与独立教育调查、本科48%/硕士34%/部分大学无学位7%、学徒名称分别读。"
             ]
           },
           "id": "computer-hardware-engineers.fit.personality-fit-block.64",
@@ -28536,7 +28451,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "现实型关注动手实现与设备与工具，研究型关注分析与建模与验证，常规型关注按规格与流程与记录与秩序；该职业以这三类兴趣取向为主导，企业型与艺术型与社会型都很低。"
+              "RIC三个职业兴趣分值相对较高；其他三类值较低不等于这类人格者不能从业。兴趣轮廓需结合真实任务练习，不能用作人格诊断。"
             ]
           },
           "id": "computer-hardware-engineers.fit.riasec-fit-block.10",
@@ -28713,7 +28628,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界：以下六张风险卡按本职业的任务与工作情境归纳，用于说明「会遇到什么、可以怎么控制」，不写发生率或事故概率；每条措施的适用范围须按适用法域与雇主与客户制度单独确认。"
+              "以下六卡是依据美国O*NET任务提出的编辑风险情境和控制建议，不是事故频率、发生率或已核企业程序。具体产品法规、测试授权与保密制度须另核；本页未取得具体产品/法域合规文本。"
             ]
           },
           "id": "computer-hardware-engineers.risk.career-risk-cards.8",
@@ -28724,7 +28639,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答：该职业最需要提前判断的风险来自三处——需求与规格不清导致的返工与设计失效、原型与测试覆盖不足导致的问题推迟到量产或客户现场、以及设计与测试数据不可复现导致的评审与合规争议；接口与器件与替代料、合规与出口管制与资料保密、以及设计变更与交接断层会放大以上三类风险。"
+              "编辑判断：可先核规格和接口是否可测试、验证是否覆盖适用边界、版本数据能否复现；失效和返工是可能后果，本轮没有证据把三类风险排名为最需要或最常见。"
             ]
           },
           "id": "computer-hardware-engineers.risk.career-risk-cards.9",
@@ -28735,7 +28650,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：任务与工作情境来自 O*NET 17-2061.00（美国口径）；美国工资为 BLS 2025 年工资数据、就业与预测为 2024—2034 年口径（76,800 → 82,400、增长 7%、年均空缺 4,700 个）；中国大陆为已登记的工资缺口，本页不发布数值；合规与出口管制与资料保密按公开制度与一般框架表述，不替代适用法规原文与雇主与客户制度。"
+              "职业任务/情境为美国O*NET17-2061；九板块就业采用2025—2035、工资2025。中国行业参考与精确职业缺口分列。合规/出口管制/保密仅提示需按实际产品、目的地、主体及制度核查，不是所有器件一律认证的法律结论。"
             ]
           },
           "id": "computer-hardware-engineers.risk.career-risk-cards.10",
@@ -28944,7 +28859,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按雇主与客户制度确认元器件与产品的合规定位与认证状态；对可能受出口管制的技术与资料按授权与最小必要管理并留痕；对外披露前完成审批。"
+              "编辑建议：由组织指定人员核具体市场/产品的适用安全、电磁兼容、可靠性要求及文件；对可能受管制资料核分类、目的地、接收方和许可，按已确认授权披露。证据不足：本页未取得具体产品认证或出口清单原文。"
             ]
           },
           "id": "computer-hardware-engineers.risk.career-risk-cards.29",
@@ -28955,7 +28870,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用未认证物料替代；把受管制资料上传到无授权的外部工具或渠道；对外承诺先于审批。"
+              "未经验证或未满足适用合规要求即采用替代料；向未授权外部渠道上传受控资料；对外技术承诺先于组织审批。不能把所有未认证元件本身一概判作违法。"
             ]
           },
           "id": "computer-hardware-engineers.risk.career-risk-cards.30",
@@ -29341,7 +29256,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：进入该职业最常见的路径是完成电子或计算机或电气相关专业本科或研究生学习（该页面教育分布表述为「多数岗位要求四年制学士学位，部分不是」，准备层级为 Job Zone Four、需要相当准备，SVP 区间为 7.0 至 8.0），并在实习或项目中完成过一次「规格—设计—原型—测试」闭环；该页面另列出 1 个注册学徒岗位示例（Hardware Engineer）。入行后通常先负责模块级设计与测试，再承担子系统与跨部门接口，最后参与设计流程与验证规范建设。"
+              "美国O*NET Job Zone Four是准备层级，SVP为7.0至低于8.0；其四年制本科说法是该组通用说明，不是职业教育分布。本职业新聘人员教育要求调查当前列本科48%、硕士34%、部分大学教育但无学位7%，只展示部分回答，不能补成完整分布或中国门槛。BLS表1.2典型入门教育为本科，无相关工作经验要求、无在岗训练；具体雇主另核。 Hardware Engineer为一个注册学徒名称示例；完成设计测试闭环和逐步扩展模块/系统职责为编辑建议，不承诺统一晋升路线。"
             ]
           },
           "id": "computer-hardware-engineers.path.career-path-block.20",
@@ -29374,7 +29289,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本页关于入行与培养采用 O*NET 口径：准备层级为 Job Zone Four（需要相当准备），该页面教育分布表述为「多数岗位要求四年制学士学位，部分不是」，SVP 区间为 7.0 至 8.0。中国大陆未建立与 O*NET-SOC 17-2061.00 一一对应的职业细类，相关职责通常分布在芯片与整机与板卡与终端厂商的硬件研发岗位以及科研院所的硬件研发岗位。"
+              "美国O*NET Job Zone Four是准备层级，SVP为7.0至低于8.0；其四年制本科说法是该组通用说明，不是职业教育分布。本职业新聘人员教育要求调查当前列本科48%、硕士34%、部分大学教育但无学位7%，只展示部分回答，不能补成完整分布或中国门槛。BLS表1.2典型入门教育为本科，无相关工作经验要求、无在岗训练；具体雇主另核。 中国按实际雇主职责核专业要求，不宣称已完成职业一一映射。"
             ]
           },
           "id": "computer-hardware-engineers.path.career-path-block.23",
@@ -29385,7 +29300,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对就业与工资的数值与口径（BLS 2025 年工资数据、2024—2034 年预测）"
+              "工资2025全国统计与就业2025—2035表1.2分别读取，不将认证页当就业来源。"
             ]
           },
           "id": "computer-hardware-engineers.path.career-path-block.24",
@@ -29396,7 +29311,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对准备层级（Job Zone Four）与该页面显示的教育分布表述与学徒示例"
+              "Job Zone Four/SVP7.0至低于8.0、教育调查和一个学徒名称示例是三类不同资料。"
             ]
           },
           "id": "computer-hardware-engineers.path.career-path-block.25",
@@ -29429,7 +29344,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求电子或计算机或电气相关专业基础。"
+              "编辑建议：核目标岗位电子/计算机/电气基础与专业要求。"
             ]
           },
           "id": "computer-hardware-engineers.path.career-path-block.28",
@@ -29484,7 +29399,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "须具备电路与数字系统与量测与仿真能力。"
+              "编辑能力建议：练电路、数字系统、量测与仿真；目标岗位考核另核。"
             ]
           },
           "id": "computer-hardware-engineers.path.career-path-block.33",
@@ -29539,7 +29454,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求多模块经验与跨部门协作经验。"
+              "编辑能力建议：准备多模块交付与协作证据，实际经验门槛另核。"
             ]
           },
           "id": "computer-hardware-engineers.path.career-path-block.38",
@@ -29594,7 +29509,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求雇主内职责与长期经验。"
+              "参与制度工作通常需组织任命；具体经验要求尚未取得，按雇主核。"
             ]
           },
           "id": "computer-hardware-engineers.path.career-path-block.43",
@@ -29649,7 +29564,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求量测基础与仪器使用基础。"
+              "编辑能力建议：先练量测与仪器安全使用，受控条件下操作。"
             ]
           },
           "id": "computer-hardware-engineers.path.career-path-block.48",
@@ -29704,7 +29619,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "须具备失效分析与测量不确定度与数据处理能力。"
+              "编辑能力建议：练失效分析、测量不确定度与数据处理；非统一证书门槛。"
             ]
           },
           "id": "computer-hardware-engineers.path.career-path-block.53",
@@ -29759,7 +29674,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求多产品验证经验与可靠性工程经验。"
+              "编辑能力建议：准备跨产品验证/可靠性记录，实际经验门槛另核。"
             ]
           },
           "id": "computer-hardware-engineers.path.career-path-block.58",
@@ -29814,7 +29729,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求雇主内职责与长期经验。"
+              "制度岗位权限与经验要求按实际组织核，本页不设统一要求。"
             ]
           },
           "id": "computer-hardware-engineers.path.career-path-block.63",
@@ -29869,7 +29784,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求系统与接口基础与沟通基础。"
+              "编辑能力建议：练系统接口与记录沟通，目标岗位基础另核。"
             ]
           },
           "id": "computer-hardware-engineers.path.career-path-block.68",
@@ -29924,7 +29839,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "须具备系统级问题定位与沟通与文档能力。"
+              "编辑能力建议：练系统问题定位与文档沟通，不能推出统一入职条件。"
             ]
           },
           "id": "computer-hardware-engineers.path.career-path-block.73",
@@ -29979,7 +29894,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求多产品与多方协作经验。"
+              "编辑能力建议：准备多产品多方协作证据，具体经验年限另核。"
             ]
           },
           "id": "computer-hardware-engineers.path.career-path-block.78",
@@ -30034,7 +29949,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求雇主内职责与长期经验。"
+              "制度岗位需核实际职责和组织授权，本页没有统一年限依据。"
             ]
           },
           "id": "computer-hardware-engineers.path.career-path-block.83",
@@ -30096,10 +30011,10 @@
               "distinction"
             ],
             "column_labels": [
-              "入门岗位",
+              "能力阶段／相邻管理岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
-              "没经验如何证明",
+              "编辑建议核查的能力证据",
+              "可展示的记录",
               "与其他方向的区别"
             ],
             "rows": [
@@ -30122,7 +30037,7 @@
                 "主导子系统设计或跨部门接口并协调供应商与设计人员与市场与销售。",
                 "接口与依赖管理、进度与资源、设计与测试质量、技术支持结果。",
                 "用子系统交付与接口评审与支持记录证明。",
-                "与流程规范岗相比不负责全球流程与验证规范制定。"
+                "与流程岗位相比侧重具体子系统交付；是否参与组织规范由实际职责决定。"
               ],
               [
                 "流程与验证规范岗",
@@ -30141,7 +30056,7 @@
             ]
           },
           "id": "computer-hardware-engineers.path.entry-role-comparison.1",
-          "title": "入门方向比较",
+          "title": "能力阶段与相邻管理岗位比较",
           "type": "table"
         },
         {
@@ -30152,39 +30067,39 @@
               {
                 "id": "education",
                 "values": [
-                  "该页面教育分布表述为「多数岗位要求四年制学士学位，部分不是」；",
-                  "准备层级为 Job Zone Four（需要相当准备），SVP 区间为 7.0 至 8.0；",
-                  "多数岗位还要求完整的设计到测试项目经历与工具与语言栈经验。"
+                  "准备层级与教育要求",
+                  "美国O*NET Job Zone Four是准备层级，SVP为7.0至低于8.0；其四年制本科说法是该组通用说明，不是职业教育分布。本职业新聘人员教育要求调查当前列本科48%、硕士34%、部分大学教育但无学位7%，只展示部分回答，不能补成完整分布或中国门槛。BLS表1.2典型入门教育为本科，无相关工作经验要求、无在岗训练；具体雇主另核。",
+                  "证据不足：本轮未取得目标雇主招聘原文；完整项目与语言栈是编辑核查建议。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "雇主通常要求遵守设计与评审与记录与物料与文件管理制度并接受检查；",
-                  "元器件与产品的合规测试与认证状态须按雇主与客户制度确认；",
-                  "涉及出口管制与客户资料的岗位还须按适用法规完成授权与保密培训。"
+                  "岗位制度与资料授权",
+                  "编辑建议：核设计评审、版本、资料、测试及对外披露权限。",
+                  "具体产品合规/出口许可文本与目标雇主培训原文未取得，须另核适用范围。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "该职业页面提供工作风格清单（按影响度给出分数：注重细节 89、创新 84、可靠 79、求知欲 78、成就取向 71）；",
-                  "知识以计算机与电子 93、工程与技术 92、设计 79、数学 79 为主；",
+                  "O*NET职业能力与工作风格",
+                  "美国工作风格：细节89、创新84、可靠79、求知78；知识计算机电子93、工程技术92、设计/数学各79。",
                   "工作活动以使用计算机 97、作出决策与解决问题 92、更新知识 87 为前几位。"
                 ]
               },
               {
                 "id": "tools",
                 "values": [
-                  "电子设计自动化与电路与版图与信号完整性仿真工具；",
+                  "工具与招聘提及信号",
                   "建模与计算与分析工具（如 MATLAB 与 Python 与 C/C++ 与脚本与版本控制）；",
-                  "示波器与逻辑分析仪与电源与热与可靠性测试设备；该职业页面列出 20 项软件技能（Python 23.39%、C++ 10.54%、MATLAB 10.24%、Linux 9.58%、C 8.49%、Perl 7.71% 等）。"
+                  "O*NET热技能页列20项：Python23%、C++10%、MATLAB10%、Linux9%、C8%、Perl7%、Office4%、Git3%、Excel2%、AutoCAD1%。来源为2025全年美国Lightcast招聘广告，提及比例不是熟练度、统一录用条件或AI采用率；旧小数精度本轮未获来源支持。具体仪器安全流程须按机型核。"
                 ]
               }
             ]
           },
           "id": "computer-hardware-engineers.path.employer-evidence.1",
-          "title": "雇主通常看什么证据",
+          "title": "职业能力资料与雇主条件待核",
           "type": "cards"
         },
         {
@@ -30425,8 +30340,8 @@
                 "是进入硬件研发岗位的常见条件",
                 "否（部分岗位以相关经验与成果补充）",
                 "完成学业并通过考核",
-                "高",
-                "该页面教育分布表述为「多数岗位要求四年制学士学位，部分不是」，本页不把学历直接对应到收入。"
+                "按课程/发证方/组织要求另核",
+                "美国O*NET Job Zone Four是准备层级，SVP为7.0至低于8.0；其四年制本科说法是该组通用说明，不是职业教育分布。本职业新聘人员教育要求调查当前列本科48%、硕士34%、部分大学教育但无学位7%，只展示部分回答，不能补成完整分布或中国门槛。BLS表1.2典型入门教育为本科，无相关工作经验要求、无在岗训练；具体雇主另核。"
               ],
               [
                 "设计到测试的完整项目经历",
@@ -30434,43 +30349,43 @@
                 "影响可承担的模块范围与是否独立负责子系统",
                 "否（为能力条件）",
                 "通过项目与评审与测试验证记录积累",
-                "高",
+                "按课程/发证方/组织要求另核",
                 "完整闭环经历是承担设计责任的基础，但不等于设计签字权或产品放行权。"
               ],
               [
                 "专业认证与注册学徒经历（如 12 项认证与 Hardware Engineer 学徒）",
                 "希望证明专业能力的人",
-                "作为专业能力与工程规范意识的证明",
+                "可作能力补充线索；目标雇主承认情况本轮未取得",
                 "否（认证不等于学位或产品认证资质）",
-                "通过培训与考核与项目积累",
-                "中",
+                "分别核发证方资格、考试、费用与经验条件；学徒按项目申请",
+                "按课程/发证方/组织要求另核",
                 "该页面提供 12 项全国认证与 1 个注册学徒岗位示例；认证不等于设计签字权或产品认证资质。"
               ],
               [
                 "雇主与客户的产品合规与认证要求",
                 "涉及产品安全与电磁兼容与可靠性的人",
                 "决定产品是否可以销售与交付",
-                "是（雇主与客户制度内必备）",
+                "依具体产品、市场和制度确认",
                 "按制度完成测试与认证与文件申报",
-                "高",
-                "合规与认证是硬性前置条件，具体标准须按适用法规与产品与市场确认。"
+                "按课程/发证方/组织要求另核",
+                "合规要求与是否须认证由具体法规/产品/市场决定；不能从职业名推出一律认证。"
               ],
               [
                 "出口管制与技术资料保密要求",
                 "涉及受管制技术与客户资料的人",
                 "决定资料可以给谁与如何保存与传递",
-                "是（雇主与客户制度内必备）",
+                "依资料、主体、目的地与制度确认",
                 "按制度分级与授权并留痕",
-                "高",
+                "按课程/发证方/组织要求另核",
                 "出口管制与保密要求由法规与雇主与客户制度决定，本页不代替合规与法律判断。"
               ],
               [
                 "设计评审与变更与签字授权",
                 "承担设计责任的人",
                 "决定谁可以批准设计与放行变更",
-                "是（雇主制度内必备）",
+                "依实际组织权限确认",
                 "按制度获得评审与签字与变更授权",
-                "中",
+                "按课程/发证方/组织要求另核",
                 "设计与变更授权由雇主制度决定，本页不代替具体授权判断。"
               ]
             ]
@@ -30484,8 +30399,8 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "本页把「学历与专业基础」「设计到测试的完整经历」「专业认证与学徒经历」与「产品合规与认证要求」「出口管制与保密要求」「设计评审与签字授权」分列：学历决定可进入的岗位序列，项目经历决定可承担的模块范围，专业认证与学徒经历提升工程规范可信度，产品合规与认证决定产品能否销售与交付，出口管制与保密要求决定资料可以给谁与如何保存，设计评审与签字授权决定谁可以批准设计与放行变更，六者不能互相替代。",
-              "美国：该职业的准备层级为 Job Zone Four（需要相当准备），该页面教育分布表述为「多数岗位要求四年制学士学位，部分不是」，SVP 区间为 7.0 至 8.0；该页面提供 12 项全国认证与 1 个注册学徒岗位示例，但认证不等于学位、雇主任命、设计签字权或产品认证资质。",
+              "学历、项目经历、个人认证/学徒、产品合规、资料许可、组织签字授权分别核查。学历与项目不能保证录用或晋升，个人认证不等于产品认证；产品/资料限制和设计批准范围以实际适用制度确认，不能互相替代。",
+              "美国O*NET Job Zone Four是准备层级，SVP为7.0至低于8.0；其四年制本科说法是该组通用说明，不是职业教育分布。本职业新聘人员教育要求调查当前列本科48%、硕士34%、部分大学教育但无学位7%，只展示部分回答，不能补成完整分布或中国门槛。BLS表1.2典型入门教育为本科，无相关工作经验要求、无在岗训练；具体雇主另核。 当前认证页12项、学徒名称1个，不等于岗位空缺、产品认证或签字许可。",
               "中国大陆：本条证据路由未建立与 O*NET-SOC 17-2061.00 一一对应的职业细类，相关职责可能分布在芯片与整机与板卡与终端厂商的硬件研发岗位以及科研院所的硬件研发岗位；元器件合规与出口管制与资料保密要求须按主管部门与单位规定执行。",
               "本页不保证任何培训或认证被特定雇主或客户承认，也不代替元器件合规与出口管制与知识产权的具体判断与法律意见。"
             ]
@@ -30626,16 +30541,16 @@
                 "url": "#career-visual-group-ai-impact"
               },
               {
-                "entity": "美国工资与就业数据（本页，BLS 2025 年工资与 2024—2034 年预测）",
+                "entity": "美国工资2025与就业2025—2035（本页）",
                 "id": "link-2",
                 "relation": "related-evidence",
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（17-2061.00）",
+                "entity": "BLS职业预测表1.2（17-2061）",
                 "id": "link-3",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/17-2061.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
@@ -30644,10 +30559,10 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "国家统计局《城镇单位就业人员年平均工资情况》检索入口",
+                "entity": "国家统计局2025工资发布",
                 "id": "link-5",
                 "relation": "related-evidence",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET-SOC 17-2061.00 职业详细资料",
@@ -30713,7 +30628,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：美国该职业页面显示 2024 年就业 76,800 人、2034 年预计 82,400 人、2024—2034 年增长 7%（Much faster than average）、预测年均职位空缺 4,700 个；行业分布为其他行业（含信息业与政府）41%、专业与科学与技术服务 33%、制造业 26%。需要强调：这是 BLS 的全国预测，含假设与误差，不等于逐年实际值，也不能推出个人录用概率；中国大陆为本条证据路由登记的缺口，本页不发布数值。"
+              "美国BLS表1.2（SOC17-2061）2025就业76,100人，2035预测83,000人，官方净变化+6,900人、增长9.1%，2025—2035年均空缺4,100个。空缺含增长和替补；这是总体就业预测，非AI归因，不是个人录用概率或逐年实际值。 O*NET独立行业页当前列专业/科学/技术服务39%、制造业34%、其他行业（含政府和信息业）27%；详细页2025前两行业也为39%和34%。它是就业结构，不是行业工资或地区机会。 中国只给行业工资背景，不能推断中国就业或个人机会。"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.8",
@@ -30735,7 +30650,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年（BLS 预测期）"
+              "2025—2035（BLS表1.2预测期）"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.10",
@@ -30746,7 +30661,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该数值是就业规模的变化率（76,800 → 82,400，增长 7%），页面标注为 Much faster than average；预测含假设与误差，不等于逐年实际值，也不能推出个人录用概率。"
+              "总体就业由76.1千预测83.0千，官方增长9.1%；净变化6.9千，年均空缺4.1千。非AI归因，不是个人机会或年度实际新增。"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.11",
@@ -30768,7 +30683,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业变化率（2024—2034 年）"
+              "总体就业变化率（2025—2035）"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.13",
@@ -30779,7 +30694,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "17-2061.00 精确职业口径（BLS 2024—2034 年预测）"
+              "SOC17-2061（美国全国总体预测）"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.14",
@@ -30790,7 +30705,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增长 7%（2024—2034 年）；年均职位空缺约 4,700 个"
+              "增长9.1%；年均空缺约4,100个（2025—2035）"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.15",
@@ -30889,7 +30804,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025 年及以前已发布资料"
+              "2025工资数据；2026-05-15发布"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.24",
@@ -30900,7 +30815,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本条证据路由把中国大陆精确职业工资登记为缺口（数据状态：暂无可安全使用的数据）；口径说明 明确 2025 年国家统计局公开工资为行业或人员大类聚合口径，未建立与本职业精确对应的全国职业工资分布。"
+              "证据不足：未取得与O*NET17-2061精确对应的中国大陆全国职业工资分布。本页另给匹配单位行业背景：2025城镇非私营制造业均值113,594元/年、私营76,055元/年；科学研究和技术服务业非私营182,064元/年、私营83,560元/年。四项分别是行业税前年平均工资，不是硬件工程师起薪、中位数、范围或个人到手收入。"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.25",
@@ -30911,7 +30826,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "路由 resolution 为「明确显示暂无可安全使用的数据，不用美国数字或相邻行业代理填补」；本页在中国大陆薪资模块不发布任何数值。"
+              "按主要业务匹配制造/科研技术服务行业；不代替精确职业工资，不推断就业变化或个人收入。"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.26",
@@ -30922,7 +30837,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺口（不发布数值）"
+              "行业工资背景＋精确职业工资缺口"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.27",
@@ -30933,7 +30848,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆（未建立一一对应的职业细类）"
+              "中国大陆：按雇主主要业务映射行业"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.28",
@@ -30944,7 +30859,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得全国职业工资口径，本页不发布数值"
+              "行业均值分别见中国工资板块；精确全国职业工资分布未取得"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.29",
@@ -30955,7 +30870,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对就业与工资的数值与口径（BLS 2025 年工资数据、2024—2034 年预测）"
+              "就业预测用BLS表1.2（2025—2035）；工资用2025全国分位。"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.30",
@@ -30977,7 +30892,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于登记中国大陆的工资缺口与统计口径"
+              "国家统计局2025行业工资背景与统计范围，不是本职业就业预测"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.32",
@@ -30999,7 +30914,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少硬件电路与原型与测试验证的实操经验。"
+              "编辑判断：转系统分析需补业务流程建模、需求访谈、系统选型与实施协调记录；不能把硬件实操反列为目标必缺。"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.34",
@@ -31021,7 +30936,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。系统分析方向以业务方案为主，需补业务建模经验。"
+              "编辑估计：中等"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.36",
@@ -31054,7 +30969,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较小。系统架构方向与本职业在系统与接口层面相通。"
+              "编辑估计：中等"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.39",
@@ -31065,7 +30980,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少电力与电气系统与设备的设计与检验经验。"
+              "编辑判断：按目标产品补电气系统设计、标准与测试；电气岗位不限于强电，具体权限另核。"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.40",
@@ -31087,7 +31002,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较大。电气方向涉及强电与不同标准体系，需补专业经验。"
+              "编辑估计：中等至较大"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.42",
@@ -31120,7 +31035,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。电子方向的对象与标准不同，需重新建立产品经验。"
+              "编辑估计：中等"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.45",
@@ -31131,7 +31046,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少射频与标签与读写器与现场部署经验。"
+              "编辑判断：补RFID协议、标签/读写器选型、集成与现场验证记录，设计深度按目标岗位核。"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.46",
@@ -31153,7 +31068,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。射频识别方向聚焦方案落地，设计范围更窄。"
+              "编辑估计：中等"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.48",
@@ -31164,7 +31079,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少网络设备与协议与互操作性的工程经验。"
+              "编辑判断：转计算机研究需补研究问题、算法/实验设计、文献与可复现研究记录；硬件建模经验不自动满足研究岗位要求。"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.49",
@@ -31175,7 +31090,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共享能力：硬件与协议理解、性能与互操作测试、文档与评审习惯。"
+              "共享基础：计算系统理解、建模实验、数据分析与技术写作；算法与研究方法仍需另练。"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.50",
@@ -31186,7 +31101,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较小。网络架构方向与本职业在硬件与协议层面相通。"
+              "编辑估计：较大"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.51",
@@ -31197,7 +31112,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少软件交付流程与产品级代码与版本发布经验。"
+              "编辑判断：转网络架构需补网络需求、协议与拓扑、容量与安全设计、部署验证及运行交接；设计硬件不等于网络设计经验。"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.52",
@@ -31208,7 +31123,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共享能力：编程与脚本、系统理解、调试与测试习惯。"
+              "共享基础：系统接口与性能意识、调试测试、跨部门沟通和文档；网络工程经验需另证。"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.53",
@@ -31219,7 +31134,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。计算机程序员方向以软件交付为目标，需补工程流程经验。"
+              "编辑估计：中等至较大"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.54",
@@ -31230,7 +31145,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少研究方法与论文与实验设计经验。"
+              "编辑判断：转程序员需补目标语言、软件需求实现、调试测试、版本与交付流程；硬件测试脚本不等于产品级软件经历。"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.55",
@@ -31241,7 +31156,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共享能力：理论建模、实验与复现方法、文献与写作能力。"
+              "共享基础：脚本/编程、计算系统理解、问题定位与测试记录；产品代码能力须另验证。"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.56",
@@ -31252,7 +31167,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较大。研究科学方向以新原理与方法为主，不以可量产为约束。"
+              "编辑估计：中等"
             ]
           },
           "id": "computer-hardware-engineers.market-signals.market-signal-card.57",
@@ -31395,7 +31310,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容由费马测试职业内容编辑组按公开官方来源整理，职业身份与任务与工作情境采用 O*NET-SOC 17-2061.00（Computer Hardware Engineers，计算机硬件工程师），美国工资为该页面显示的 BLS 2025 年工资数据、就业与预测为 BLS 2024—2034 年口径，并保留全国口径与职业范围与单位与自雇边界等使用说明；中国大陆按本条证据路由登记工资缺口且不发布数值；编辑归纳与虚构练习单独标注。"
+              "职业资料采用O*NET17-2061，美国工资2025与总体就业预测2025—2035分别标注；中国2025匹配行业工资背景和精确职业缺口分列。能力阶段、风险和转型建议是编辑归纳，不作已核雇主条件。"
             ]
           },
           "id": "computer-hardware-engineers.sources.source-card.1",
@@ -31417,7 +31332,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容检索与更新于 2026 年 9 月。"
+              "本次九板块查读与修订于2026-10-08；没有重新查读的来源保留原访问日，范围外内容不声明本次更新。"
             ]
           },
           "id": "computer-hardware-engineers.sources.source-card.3",
@@ -31502,7 +31417,7 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-17",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "官方职业详细资料",
                   "18 项任务、工作活动与工作情境"
@@ -31534,78 +31449,78 @@
                 "url": "https://www.onetonline.org/link/summary/17-2061.00"
               },
               {
-                "accessed_at": "2026-09-17",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "官方行业分布",
                   "行业结构占比（非岗位数量或工资）"
                 ],
                 "evidence_type": "official source",
                 "id": "onet-industry",
-                "limitation": "支持行业结构（其他行业含信息业与政府 41%、专业与科学与技术服务 33%、制造业 26%）；为占比结构，不代表岗位数量或工资。",
+                "limitation": "O*NET独立行业页当前列专业/科学/技术服务39%、制造业34%、其他行业（含政府和信息业）27%；详细页2025前两行业也为39%和34%。它是就业结构，不是行业工资或地区机会。",
                 "market": "美国",
                 "name": "O*NET-SOC 17-2061.00 行业分布",
-                "period": "当前页面；检索 2026-09",
+                "period": "当前行业页；详细页2025一致的前两行业",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/17-2061.00"
               },
               {
-                "accessed_at": "2026-09-17",
+                "accessed_at": "2026-10-08",
                 "details": [
-                  "官方技术清单",
-                  "20 项软件技能与提及比例"
+                  "O*NET热技能页列20项：Python23%、C++10%、MATLAB10%、Linux9%、C8%、Perl7%、Office4%、Git3%、Excel2%、AutoCAD1%。来源为2025全年美国Lightcast招聘广告，提及比例不是熟练度、统一录用条件或AI采用率；旧小数精度本轮未获来源支持。"
                 ],
                 "evidence_type": "official source",
                 "id": "onet-hot-tech",
-                "limitation": "该页面列出 20 项软件技能与提及比例（Python 23.39%、C++ 10.54%、MATLAB 10.24%、Linux 9.58%、C 8.49%、Perl 7.71% 等）；提及比例不等于熟练度或设计能力。",
+                "limitation": "O*NET热技能页列20项：Python23%、C++10%、MATLAB10%、Linux9%、C8%、Perl7%、Office4%、Git3%、Excel2%、AutoCAD1%。来源为2025全年美国Lightcast招聘广告，提及比例不是熟练度、统一录用条件或AI采用率；旧小数精度本轮未获来源支持。",
                 "market": "美国",
                 "name": "O*NET 技术清单（17-2061.00 雇主招聘技术关键词与提及比例）",
-                "period": "2025 年全年美国全国招聘信息统计；检索 2026-09",
+                "period": "2025全年美国招聘广告",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/17-2061.00"
               },
               {
-                "accessed_at": "2026-09-17",
+                "accessed_at": "2026-10-08",
                 "details": [
-                  "官方准备层级与教育分布",
-                  "Job Zone Four 与教育分布表述与 1 个学徒示例"
+                  "Job Zone Four/SVP7.0至低于8.0",
+                  "教育调查部分回答：本科48%/硕士34%/部分大学无学位7%",
+                  "注册学徒名称示例Hardware Engineer"
                 ],
                 "evidence_type": "official source",
                 "id": "onet-training",
-                "limitation": "支持准备层级（Job Zone Four：需要相当准备）与教育分布表述（多数岗位要求四年制学士学位，部分不是）与 SVP 区间 7.0 至 8.0，以及 1 个注册学徒岗位示例（Hardware Engineer）。",
+                "limitation": "美国O*NET Job Zone Four是准备层级，SVP为7.0至低于8.0；其四年制本科说法是该组通用说明，不是职业教育分布。本职业新聘人员教育要求调查当前列本科48%、硕士34%、部分大学教育但无学位7%，只展示部分回答，不能补成完整分布或中国门槛。BLS表1.2典型入门教育为本科，无相关工作经验要求、无在岗训练；具体雇主另核。学徒仅一个名称，不是当前招聘名额。",
                 "market": "美国",
-                "name": "O*NET-SOC 17-2061.00 准备层级与教育分布",
+                "name": "O*NET准备层级与教育调查及学徒名称",
                 "period": "当前页面；检索 2026-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/17-2061.00#JobZone"
               },
               {
-                "accessed_at": "2026-09-17",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "官方认证信息入口",
                   "12 项全国认证（认证不等于设计签字权或产品认证资质）"
                 ],
                 "evidence_type": "official source",
                 "id": "bls-entry",
-                "limitation": "该页面列出 12 项全国认证（Robotics Certification、Certified TestStand Architect、Certified Reliability Engineer、Registered Communications Distribution Designer、Fundamentals of Engineering - Electrical and Computer、ESD Associate Engineer 等）；认证不等于学位、雇主任命、设计签字权或产品认证资质。",
+                "limitation": "当前12项认证由CareerOneStop提供，名单不代表推荐/雇主承认/普遍门槛；逐项资格费用另核，不是BLS典型教育或就业数据来源。",
                 "market": "美国",
-                "name": "O*NET-SOC 17-2061.00 全国认证信息入口",
+                "name": "O*NET全国认证查询（12项）",
                 "period": "当前页面；检索 2026-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/17-2061.00"
               },
               {
-                "accessed_at": "2026-09-17",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "全国工资数据（BLS 2025 年）",
                   "全国中位数与 10/25/50/75/90 分位"
                 ],
                 "evidence_type": "official source",
                 "id": "bls-pay",
-                "limitation": "支持美国全国工资中位数（77.76 美元/小时、161,740 美元/年）与 10/25/50/75/90 年薪分位（92,940 / 126,090 / 161,740 / 202,990 / 225,330 美元）；为受雇工资薪金岗位口径，不含自雇主与业主收入，也不含按行业或地区的细分工资中位数。",
+                "limitation": "2025全国五分位工资已用带州查询页United States行核实；州值不作全国值，中位数非起薪，不含自雇和非公司业主，不能用于个人报价。",
                 "market": "美国",
                 "name": "O*NET 全国工资页面（17-2061.00，BLS 2025 年工资数据）",
                 "period": "BLS 2025 年工资数据；检索 2026-09",
@@ -31616,34 +31531,34 @@
               {
                 "accessed_at": "2026-09-17",
                 "details": [
-                  "全国就业趋势（BLS 2024—2034 年预测）",
-                  "76,800 → 82,400、增长 7%、年均空缺 4,700"
+                  "用于查询美国全国趋势",
+                  "本轮当前预测取BLS表1.2；不以URL证明旧数据仍有效"
                 ],
                 "evidence_type": "official source",
                 "id": "bls-outlook",
-                "limitation": "支持就业 76,800 人（2024 年）、82,400 人（2034 年预计）、增长 7%（Much faster than average）与年均职位空缺 4,700 个；为美国全国口径，预测含假设与误差。",
+                "limitation": "O*NET全国趋势查询入口；原文含旧2024—2034数据，本次九板块改用已核BLS表1.2的2025—2035，不以此URL证明旧数字当前仍有效。",
                 "market": "美国",
-                "name": "O*NET 全国就业趋势页面（17-2061.00，BLS 2024—2034 年预测）",
-                "period": "BLS 2024—2034 年就业预测；检索 2026-09",
+                "name": "O*NET全国趋势查询入口（17-2061.00）",
+                "period": "查询入口；原旧期显示本轮未核实",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/17-2061.00"
               },
               {
-                "accessed_at": "2026-09-17",
+                "accessed_at": "2026-10-08",
                 "details": [
-                  "官方统计入口（行业与人员大类口径）",
-                  "不含本职业单列工资；本页不发布数值"
+                  "2025工资发布表2非私营与表5私营",
+                  "制造业/科研技术服务业背景；无本职业单列工资"
                 ],
                 "evidence_type": "official source（行业与人员大类口径，不含本职业）",
                 "id": "nbs-wages",
-                "limitation": "本条证据路由据此类口径把本职业的中国大陆精确职业工资登记为缺口（数据状态：暂无可安全使用的数据），处理说明 为「明确显示暂无可安全使用的数据，不用美国数字或相邻行业代理填补」；本页不发布中国大陆数值。",
+                "limitation": "证据不足：未取得与O*NET17-2061精确对应的中国大陆全国职业工资分布。本页另给匹配单位行业背景：2025城镇非私营制造业均值113,594元/年、私营76,055元/年；科学研究和技术服务业非私营182,064元/年、私营83,560元/年。四项分别是行业税前年平均工资，不是硬件工程师起薪、中位数、范围或个人到手收入。 统计≥5人城镇法人单位，不含个体工商户和自由职业者；行业归类按单位主要业务。",
                 "market": "中国大陆",
-                "name": "国家统计局《城镇单位就业人员年平均工资情况》检索入口",
-                "period": "2025 年及以前已发布资料",
+                "name": "国家统计局2025年城镇单位就业人员年平均工资",
+                "period": "2025数据，2026-05-15发布",
                 "publisher": "国家统计局（中华人民共和国）",
                 "scope": "industry_only",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-17",
@@ -31715,9 +31630,9 @@
                   "治理框架",
                   "AI 风险治理与管理流程"
                 ],
-                "evidence_type": "research",
+                "evidence_type": "official source",
                 "id": "nist-ai-rmf",
-                "limitation": "为 AI 风险治理与管理流程框架，不含职业级采用数据；引用它不构成对该职业风险的量化结论。",
+                "limitation": "自愿AI风险治理框架；可作编辑建议参考，不提供职业级实际采用/效果/失业数据，不作产品强制标准。",
                 "market": "美国",
                 "name": "Artificial Intelligence Risk Management Framework 1.0（NIST AI 100-1）",
                 "period": "1.0 版；检索 2026-09",
@@ -31726,14 +31641,14 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "accessed_at": "2026-09-17",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "全国工资数据（BLS 2025 年）",
                   "全国中位数与分位"
                 ],
                 "evidence_type": "official source",
                 "id": "onet-localwages",
-                "limitation": "支持全国工资中位数与分位；使用须保留市场与期间与单位与职业范围，且地区数据不能当作个人报价。",
+                "limitation": "2025全国五分位工资已用带州查询页United States行核实；州值不作全国值，中位数非起薪，不含自雇和非公司业主，不能用于个人报价。",
                 "market": "美国",
                 "name": "O*NET 全国工资页面（17-2061.00，BLS 2025 年工资数据）",
                 "period": "BLS 2025 年工资数据；检索 2026-09",
@@ -31742,7 +31657,7 @@
                 "url": "https://www.onetonline.org/link/localwages/17-2061.00"
               },
               {
-                "accessed_at": "2026-09-17",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "官方工作情境字段",
                   "工作情境百分比分布"
@@ -31774,23 +31689,23 @@
                 "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
               },
               {
-                "accessed_at": "2026-09-17",
+                "accessed_at": "2026-10-08",
                 "details": [
-                  "官方就业预测（2024—2034 年）",
-                  "76,800 → 82,400、增长 7%、年均空缺 4,700"
+                  "表1.2，SOC17-2061",
+                  "76.1千→83.0千、净变化6.9千、增长9.1%、年均空缺4.1千"
                 ],
                 "evidence_type": "official source",
                 "id": "bls-projections",
-                "limitation": "支持本页就业与预测口径（2024 年 76,800 人、2034 年预计 82,400 人、增长 7%、年均空缺 4,700 个）；预测含假设与误差，不等于逐年实际值，也不能推出个人录用概率。",
+                "limitation": "美国BLS表1.2（SOC17-2061）2025就业76,100人，2035预测83,000人，官方净变化+6,900人、增长9.1%，2025—2035年均空缺4,100个。空缺含增长和替补；这是总体就业预测，非AI归因，不是个人录用概率或逐年实际值。",
                 "market": "美国",
-                "name": "BLS Occupational Projections and Characteristics（2024—2034 年口径）",
-                "period": "2024—2034 年预测期",
+                "name": "BLS职业预测与人员特征表1.2（2025—2035）",
+                "period": "2025—2035预测期",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-17",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "官方工作情境字段",
                   "工作情境百分比分布"
@@ -31804,6 +31719,22 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/17-2061.00#WorkContext"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "PDF第51页（印刷45）391",
+                  "PDF第78页（印刷72）7320"
+                ],
+                "evidence_type": "official source",
+                "id": "cn-industry-classification",
+                "limitation": "GB/T4754-2017中391计算机制造（整机/零部件/外围设备）支持制造企业背景；7320工程和技术研究和试验发展支持专营研发机构背景。按雇主主要业务匹配，不按岗位名一律归类，不把中国行业和美国职业代码当精确等价。",
+                "market": "中国大陆",
+                "name": "国民经济行业分类GB/T4754-2017（391/7320）",
+                "period": "GB/T4754-2017",
+                "publisher": "国家统计局",
+                "scope": "contextual",
+                "url": "https://www.stats.gov.cn/sj/tjbz/gmjjhyfl/202501/P020250116506795831658.pdf"
               }
             ]
           },
@@ -32671,7 +32602,7 @@
               "entry": "link-16",
               "field": "url"
             },
-            "问题": "到 2034 年这个职业会变少吗？"
+            "问题": "2025—2035年这个职业的总体就业如何变化？"
           },
           {
             "回答": {
@@ -34801,7 +34732,7 @@
             }
           },
           {
-            "fact_ref": "us-growth-2025-2035",
+            "fact_ref": "us-current-growth-2025-2035",
             "指标": "就业 · 增长率",
             "数值": {
               "$item": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.21",
@@ -34817,7 +34748,7 @@
             }
           },
           {
-            "fact_ref": "us-openings-2025-2035",
+            "fact_ref": "us-current-openings-2025-2035",
             "指标": "就业 · 年均职位空缺",
             "数值": {
               "$item": "computer-hardware-engineers.us-salary.career-snapshot-secondary-locale.23",
@@ -34897,7 +34828,7 @@
           "type": "prose"
         },
         "heading": "美国计算机硬件工程师工资与就业数据？",
-        "industry_heading": "不同行业的美国工资差多少？",
+        "industry_heading": "美国行业就业结构与工资细分缺口",
         "industry_period": {
           "$fact": "us-wage-2025",
           "field": "period"
@@ -35677,7 +35608,7 @@
           },
           {
             "alternate_value": null,
-            "label": "美国工资与就业（BLS 2025 年工资数据与 2024—2034 年就业预测）",
+            "label": "美国工资2025与总体就业预测2025—2035",
             "secondary_value": null,
             "value": {
               "$item": "computer-hardware-engineers.profile.onet-structured-fields-block.2",
@@ -35688,7 +35619,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中国大陆工资缺口与统计口径边界（本页不发布数值）",
+            "label": "中国大陆行业工资背景与精确职业工资缺口",
             "secondary_value": null,
             "value": {
               "$item": "computer-hardware-engineers.profile.onet-structured-fields-block.3",
@@ -36835,50 +36766,54 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得与计算机硬件工程师精确对应的中国大陆全国职业工资口径；本条证据路由把该口径登记为缺口（documented_unavailable、severity=non_material），并明确不用美国数字或相邻行业代理填补，本页不发布任何数值",
+        "display_value": "2025科研技术服务业：非私营182,064元/年、私营83,560元/年（行业税前均值）",
         "fact_id": "cn-industry-science-tech-2024",
         "market": "中国大陆",
-        "measure": "缺口（路由未授权任何代理，不发布数值）",
+        "measure": "匹配行业背景，非职业工资",
         "occupation_scope": "计算机硬件工程师",
-        "period": "2025 年及以前已发布资料",
+        "period": "2025数据；本轮2026-10-08读取",
         "source_refs": [
-          "nbs-wages"
+          "nbs-wages",
+          "cn-industry-classification"
         ]
       },
       {
         "derivation": null,
-        "display_value": "说明：中国大陆公开工资统计按行业门类与登记注册类型与人员大类公布，不含本职业单列数值；本页不据此换算职业级数值",
+        "display_value": "2025制造业：非私营113,594元/年、私营76,055元/年（行业税前均值）",
         "fact_id": "cn-industry-manufacturing-2024",
         "market": "中国大陆",
-        "measure": "口径与映射边界说明（非数值）",
+        "measure": "匹配行业背景，非职业工资",
         "occupation_scope": "计算机硬件工程师",
-        "period": "2025 年及以前已发布资料",
+        "period": "2025数据；本轮2026-10-08读取",
         "source_refs": [
-          "nbs-wages"
+          "nbs-wages",
+          "cn-industry-classification"
         ]
       },
       {
         "derivation": null,
-        "display_value": "说明：芯片与整机与板卡与终端厂商与科研院所的硬件研发岗位在用工形式与项目与股权激励结构上差异较大，本页不把行业或人员大类口径写成本职业数值",
+        "display_value": "精确职业全国中位数/分位/城市样本未取得；不由人员大类或行业均值推算",
         "fact_id": "cn-professional-technical-2024",
         "market": "中国大陆",
-        "measure": "用工形式与覆盖范围说明（非数值）",
+        "measure": "精确证据缺口",
         "occupation_scope": "计算机硬件工程师",
-        "period": "2025 年及以前已发布资料",
+        "period": "2025数据；本轮2026-10-08读取",
         "source_refs": [
-          "faa-design-approvals"
+          "nbs-wages",
+          "cn-industry-classification"
         ]
       },
       {
         "derivation": null,
-        "display_value": "说明：route claim 明确不能用科学研究和技术服务业行业均值或美国工资跨法域外推，本页不以任何代理数值替代中国大陆职业级数值",
+        "display_value": "GB/T4754-2017中391计算机制造（整机/零部件/外围设备）支持制造企业背景；7320工程和技术研究和试验发展支持专营研发机构背景。按雇主主要业务匹配，不按岗位名一律归类，不把中国行业和美国职业代码当精确等价。",
         "fact_id": "cn-urban-nonprivate-2024",
         "market": "中国大陆",
-        "measure": "缺口处理说明（非数值）",
+        "measure": "单位行业映射边界",
         "occupation_scope": "计算机硬件工程师",
-        "period": "2025 年及以前已发布资料",
+        "period": "2025数据；本轮2026-10-08读取",
         "source_refs": [
-          "nbs-wages"
+          "nbs-wages",
+          "cn-industry-classification"
         ]
       },
       {
@@ -36909,7 +36844,7 @@
       },
       {
         "derivation": null,
-        "display_value": "其他行业（含信息业与政府）41%、专业与科学与技术服务 33%、制造业 26%（O*NET 行业分布，结构占比，非工资与岗位数量数据）",
+        "display_value": "O*NET独立行业页当前列专业/科学/技术服务39%、制造业34%、其他行业（含政府和信息业）27%；详细页2025前两行业也为39%和34%。它是就业结构，不是行业工资或地区机会。",
         "fact_id": "us-industry-wage-aerospace-mfg-2025",
         "market": "美国",
         "measure": "行业结构占比（非工资数据）",
@@ -36992,6 +36927,66 @@
           "onet-localwages",
           "bls-pay"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "76,100人（2025）",
+        "fact_id": "us-current-employment-2025",
+        "market": "美国",
+        "measure": "全国就业规模",
+        "occupation_scope": "计算机硬件工程师（SOC17-2061）",
+        "period": "BLS2025—2035预测期",
+        "source_refs": [
+          "bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "83,000人（2035预计）",
+        "fact_id": "us-current-employment-2035",
+        "market": "美国",
+        "measure": "全国就业规模预测",
+        "occupation_scope": "计算机硬件工程师（SOC17-2061）",
+        "period": "BLS2025—2035预测期",
+        "source_refs": [
+          "bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "增长9.1%（2025—2035）",
+        "fact_id": "us-current-growth-2025-2035",
+        "market": "美国",
+        "measure": "总体就业变化率",
+        "occupation_scope": "计算机硬件工程师（SOC17-2061）",
+        "period": "BLS2025—2035预测期",
+        "source_refs": [
+          "bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约4,100个/年（2025—2035）",
+        "fact_id": "us-current-openings-2025-2035",
+        "market": "美国",
+        "measure": "年均空缺",
+        "occupation_scope": "计算机硬件工程师（SOC17-2061）",
+        "period": "BLS2025—2035预测期",
+        "source_refs": [
+          "bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "+6,900人（2025—2035）",
+        "fact_id": "us-current-change-2025-2035",
+        "market": "美国",
+        "measure": "官方净变化",
+        "occupation_scope": "计算机硬件工程师（SOC17-2061）",
+        "period": "BLS2025—2035预测期",
+        "source_refs": [
+          "bls-projections"
+        ]
       }
     ]
   },
@@ -37000,7 +36995,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "RIASEC · RIC",
@@ -37051,7 +37046,7 @@
       "text": "计算机硬件工程师"
     }
   },
-  "source_content_sha256": "b6f1542b6372b3ce7eb811d38876fc3a08411d85d5f908fcd6e0efc1e1a14d38",
+  "source_content_sha256": "b1cf6764b764bc9b4dcbc96152a83863ddb9b896a780401f0e34a3bdc0700ed8",
   "subject": {
     "canonical_slug": "computer-hardware-engineers",
     "name": "计算机硬件工程师",

@@ -1714,6 +1714,9 @@
       },
       "item:advertising-and-promotions-managers.us-salary.career-snapshot-secondary-locale.9": {
         "status": "mapped"
+      },
+      "item:advertising-and-promotions-managers.us-salary.cross-review-period": {
+        "status": "pending_mapping"
       }
     },
     "module_order": [
@@ -12454,14 +12457,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.industry_period": {
-        "ref": {
-          "id": "us-wage-2025",
-          "path": [
-            "period"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.industry_rows.01.industry": {
         "ref": {
@@ -24742,12 +24739,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页把工具能力、组织采用与就业结果分开：语言与图像模型已能生成文案变体与素材摘要，但 O*NET 的核心任务仍需人完成受众判断、主张取舍、跨团队协调与发布授权；采用还受素材版权、数据授权与平台规则约束；就就业而言，O*NET（2024—2034 年）预测下降（-1% 或更低），BLS（2025—2035 年）另定性提到技术（含 AI）可能削弱需求，均无整体取代的时间或概率。"
+              "本页把工具能力、组织采用与就业结果分开：语言与图像模型已能生成文案变体与素材摘要，但 O*NET 的核心任务仍需人完成受众判断、主张取舍、跨团队协调与发布授权；采用还受素材版权、数据授权与平台规则约束；就就业而言，O*NET（2025—2035 年）预测下降（-1% 或更低），BLS（2025—2035 年）另定性提到技术（含 AI）可能削弱需求，均无整体取代的时间或概率。"
             ]
           },
           "id": "advertising-and-promotions-managers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet"
+            "onet",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -24798,12 +24796,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国工资分位与 2024—2034 年就业预测"
+              "美国工资分位与 2025—2035 年就业预测"
             ]
           },
           "id": "advertising-and-promotions-managers.ai-impact.ai-impact-table.22",
           "source_refs": [
-            "onet"
+            "onet",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -24910,12 +24909,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025年工资中位数与2024—2034年就业规模和预测"
+              "2025年工资中位数与2025—2035年就业规模和预测"
             ]
           },
           "id": "advertising-and-promotions-managers.ai-impact.ai-impact-table.30",
           "source_refs": [
-            "onet"
+            "onet",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -25246,12 +25246,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 11-2011.00 就业预测（2024—2034 年）"
+              "O*NET 11-2011.00 就业预测（2025—2035 年）"
             ]
           },
           "id": "advertising-and-promotions-managers.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "onet"
+            "onet",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -25274,12 +25275,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2024 年在岗约 27,000 人，2024—2034 年预测为下降（-1% 或更低），同期年均约 2,100 个空缺；该预测为全国口径，不反映地区、行业或单一雇主的差异，且该页未讨论 AI 对任务的影响。"
+              "2025 年在岗约 33,200 人，2025—2035 年预测为下降（-1% 或更低），同期年均约 2,300 个空缺；该预测为全国口径，不反映地区、行业或单一雇主的差异，且该页未讨论 AI 对任务的影响。"
             ]
           },
           "id": "advertising-and-promotions-managers.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet"
+            "onet",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -25372,12 +25374,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "「岗位数量与工作重新分配」是另一层问题：即使任务被部分自动化，岗位数量也可能因市场需求与预算变化而增减。O*NET（2024—2034 年）对 11-2011.00 预测为下降（-1% 或更低），但没有给出整体取代的时间或概率，也没有单独量化生成式 AI 的因果贡献，因此不能用任务暴露推导裁员比例或替代时点。"
+              "「岗位数量与工作重新分配」是另一层问题：即使任务被部分自动化，岗位数量也可能因市场需求与预算变化而增减。O*NET（2025—2035 年）对 11-2011.00 预测为下降（-1% 或更低），但没有给出整体取代的时间或概率，也没有单独量化生成式 AI 的因果贡献，因此不能用任务暴露推导裁员比例或替代时点。"
             ]
           },
           "id": "advertising-and-promotions-managers.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet"
+            "onet",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -25386,12 +25389,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页所核O*NET与BLS资料不提供整体取代的时间或概率，也不单独量化生成式AI的因果贡献；O*NET（2024—2034）与 BLS（2025—2035）都预测该职业下降。"
+              "本页所核O*NET与BLS资料不提供整体取代的时间或概率，也不单独量化生成式AI的因果贡献；O*NET（2025—2035）与 BLS（2025—2035）都预测该职业下降。"
             ]
           },
           "id": "advertising-and-promotions-managers.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "onet"
+            "onet",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -25470,12 +25474,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET预计2024—2034年该职业就业下降（-1%或更低），年均空缺约2100个；空缺含增长与替代需求，不等于净新增。全国预测不能推出具体地区或个人录用结果，也不是职业消失日期。"
+              "O*NET预计2025—2035年该职业就业下降（-1%或更低），年均空缺约2300个；空缺含增长与替代需求，不等于净新增。全国预测不能推出具体地区或个人录用结果，也不是职业消失日期。"
             ]
           },
           "id": "advertising-and-promotions-managers.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "onet"
+            "onet",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -25484,12 +25489,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 11-2011.00就业预测（2024—2034年）"
+              "O*NET 11-2011.00就业预测（2025—2035年）"
             ]
           },
           "id": "advertising-and-promotions-managers.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "onet"
+            "onet",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -25526,12 +25532,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页所核O*NET与BLS资料不提供该职业的消失年份。O*NET 给出的是 2024—2034 年的就业变化预测，不是终止时间；把预测方向读成替代日期会高估确定性。更可行的做法是看任务级证据，判断哪些环节在变，再决定准备方向。"
+              "本页所核O*NET与BLS资料不提供该职业的消失年份。O*NET 给出的是 2025—2035 年的就业变化预测，不是终止时间；把预测方向读成替代日期会高估确定性。更可行的做法是看任务级证据，判断哪些环节在变，再决定准备方向。"
             ]
           },
           "id": "advertising-and-promotions-managers.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "onet"
+            "onet",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -25540,12 +25547,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 11-2011.00 就业预测（2024—2034 年）"
+              "O*NET 11-2011.00 就业预测（2025—2035 年）"
             ]
           },
           "id": "advertising-and-promotions-managers.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "onet"
+            "onet",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -26318,7 +26326,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业代理覆盖租赁和商务服务业中的全部管理岗位，人员类别代理覆盖全部行业，因此都不能拆解为本职业起薪或单岗位报价。"
+              "管理岗位职责与该参考分组有交集；租赁和商务服务业参考仅适用于实际属于该行业的雇主。两者均为规模以上企业管理人员税前年均值，不能拼成职业工资区间或新人报价。"
             ]
           },
           "id": "advertising-and-promotions-managers.china-salary.career-snapshot-primary-locale.14",
@@ -26920,14 +26928,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2024—2034 年预测为下降（-1% 或更低），同期年均约 2,100 个空缺。"
+              "2025—2035 年预测为下降（-1% 或更低），同期年均约 2,300 个空缺。"
             ]
           },
           "id": "advertising-and-promotions-managers.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
             "onet",
             "bls",
-            "oews"
+            "oews",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27136,14 +27145,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024 年在岗约 27,000 人，口径为 O*NET 11-2011.00 精确职业。"
+              "2025 年在岗约 33,200 人，口径为 O*NET 11-2011.00 精确职业。"
             ]
           },
           "id": "advertising-and-promotions-managers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
             "oews",
             "bls",
-            "onet"
+            "onet",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27168,14 +27178,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024—2034 年预测为下降（-1% 或更低）。"
+              "BLS 预计美国广告与促销经理（SOC 11-2011）2025—2035 年下降 4%，净减约 1,200 人。"
             ]
           },
           "id": "advertising-and-promotions-managers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
             "oews",
             "bls",
-            "onet"
+            "onet",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27200,14 +27211,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同期年均约 2,100 个空缺，包含增长与替代需求。"
+              "同期年均约 2,300 个空缺，包含增长与替代需求。"
             ]
           },
           "id": "advertising-and-promotions-managers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
             "oews",
             "bls",
-            "onet"
+            "onet",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27248,14 +27260,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国 O*NET 与 BLS 对 11-2011.00 的工资与就业按广告与促销经理口径展示。BLS 2025 年 5 月该职业工资中位数为 $133,660/年（$64.26/小时）；OEWS 2025 年五分位为 $63,300／$91,370／$133,660／$201,050／$286,240（$30.43／$43.93／$64.26／$96.66／$137.62）。就业方面，2024 年在岗 27,000 人；O*NET 预计 2024—2034 年下降（-1% 或更低），同期年均约 2,100 个空缺。以上均为美国全国口径，与该职业的实际岗位、地区与雇主报价不同，不能换算到中国大陆。"
+              "美国 O*NET 与 BLS 对 11-2011.00 的工资与就业按广告与促销经理口径展示。BLS 2025 年 5 月该职业工资中位数为 $133,660/年（$64.26/小时）；OEWS 2025 年五分位为 $63,300／$91,370／$133,660／$201,050／$286,240（$30.43／$43.93／$64.26／$96.66／$137.62）。就业方面，2025 年在岗 33,200 人；O*NET 预计 2025—2035 年下降（-1% 或更低），同期年均约 2,300 个空缺。以上均为美国全国口径，与该职业的实际岗位、地区与雇主报价不同，不能换算到中国大陆。"
             ]
           },
           "id": "advertising-and-promotions-managers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
             "oews",
             "bls",
-            "onet"
+            "onet",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27264,7 +27277,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "广告代理机构、品牌方与平台方的计薪方式不同：代理机构常见项目与客户绑定，品牌方与平台方更多按年度目标与奖金计算；年薪须与职责范围、预算规模、团队规模和提成结构一并读。"
+              "比较广告代理机构、品牌方与平台方岗位时，应分别核对基本工资、奖金、销售提成、预算与团队职责以及计薪周期；全国工资分布不能证明某类雇主的统一薪酬安排。"
             ]
           },
           "id": "advertising-and-promotions-managers.us-salary.career-snapshot-secondary-locale.27",
@@ -27296,14 +27309,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资分位取自 2025 年 5 月 OEWS，就业与预测取自 O*NET 的 2024—2034 年预测，统计期与用途不同，本页分别用于工资分布与就业预测，不并为趋势。"
+              "工资分位取自 2025 年 5 月 OEWS，就业与预测取自 O*NET 的 2025—2035 年预测，统计期与用途不同，本页分别用于工资分布与就业预测，不并为趋势。"
             ]
           },
           "id": "advertising-and-promotions-managers.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
             "oews",
             "bls",
-            "onet"
+            "onet",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27360,14 +27374,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024—2034 年预测为下降（-1% 或更低），同期年均约 2,100 个空缺。"
+              "2025—2035 年预测为下降（-1% 或更低），同期年均约 2,300 个空缺。"
             ]
           },
           "id": "advertising-and-promotions-managers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
             "oews",
             "bls",
-            "onet"
+            "onet",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27599,14 +27614,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资与分位来自 BLS OEWS 2025 年 5 月，经 O*NET OnLine 展示，口径为 11-2011.00；就业与预测来自 O*NET（2024—2034 年），统计期与用途不同。"
+              "工资与分位来自 BLS OEWS 2025 年 5 月，经 O*NET OnLine 展示，口径为 11-2011.00；就业与预测来自 O*NET（2025—2035 年），统计期与用途不同。"
             ]
           },
           "id": "advertising-and-promotions-managers.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
             "oews",
             "bls",
-            "onet"
+            "onet",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27687,6 +27703,20 @@
             "oews",
             "bls",
             "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "工资统计期：2025年5月；广告与促销经理11-2011。"
+            ]
+          },
+          "id": "advertising-and-promotions-managers.us-salary.cross-review-period",
+          "source_refs": [
+            "bls"
           ],
           "type": "prose"
         }
@@ -27974,13 +28004,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 只描述偏好，不能预测职业表现。内向或外向都能胜任：内向者可用结构化简报与书面证据发挥优势，外向者需要注意给创意与数据留出被质疑的空间。验证方式是素材评审与复盘反馈，而不是类型标签。"
+              "本页未取得MBTI类型预测本职表现的效度证据，不由内向或外向推断胜任。编辑建议观察简报、素材评审、证据核对和复盘反馈，不把类型作为录用标准。"
             ]
           },
           "id": "advertising-and-promotions-managers.fit.personality-fit-block.10",
           "source_refs": [
-            "onet",
-            "editor"
+            "editor",
+            "onet"
           ],
           "type": "prose"
         },
@@ -28187,7 +28217,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用智商分数筛选会排除合格候选人；本职业的能力要求限于证据、成本与效果口径的解读，需按岗位实际核对。"
+              "智力测评分数不能代替预算复算、指标解读与实际任务证据；具体统计、分析或其他能力要求须按目标岗位核对。"
             ]
           },
           "id": "advertising-and-promotions-managers.fit.personality-fit-block.21",
@@ -28368,13 +28398,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "交付的是结论与建议，不直接承担活动发布与预算执行。"
+              "主要交付市场分析与建议；是否承担活动或预算执行须核目标岗位，不设绝对职责界限。"
             ]
           },
           "id": "advertising-and-promotions-managers.fit.personality-fit-block.33",
           "source_refs": [
-            "onet",
-            "editor"
+            "editor",
+            "onet"
           ],
           "type": "prose"
         },
@@ -28503,13 +28533,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "重点在公众沟通与危机应对，不承担付费广告的活动预算。"
+              "主要侧重公众沟通与公共关系；可能参与推广、广告协调或购买广告空间，具体预算权限须核岗位。"
             ]
           },
           "id": "advertising-and-promotions-managers.fit.personality-fit-block.42",
           "source_refs": [
-            "onet",
-            "editor"
+            "editor",
+            "onet"
           ],
           "type": "prose"
         },
@@ -28548,13 +28578,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "通常聚焦创意方向与质量把关，预算与投放决策由业务方承担。"
+              "主要侧重视觉创意与项目质量；也可能管理项目预算及与客户核预算，具体投放与预算权限按岗位核。"
             ]
           },
           "id": "advertising-and-promotions-managers.fit.personality-fit-block.45",
           "source_refs": [
-            "onet",
-            "editor"
+            "editor",
+            "onet"
           ],
           "type": "prose"
         },
@@ -31273,14 +31303,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 O*NET 11-2011.00 的口径显示：2024 年在岗约 27,000 人，2024—2034 年预测为下降（-1% 或更低），同期年均约 2,100 个空缺。该数据为全国口径，不能推导特定行业、地区或个人的录用机会。"
+              "美国 O*NET 11-2011.00 的口径显示：2025 年在岗约 33,200 人，2025—2035 年预测为下降（-1% 或更低），同期年均约 2,300 个空缺。该数据为全国口径，不能推导特定行业、地区或个人的录用机会。"
             ]
           },
           "id": "advertising-and-promotions-managers.market-signals.market-signal-card.8",
           "source_refs": [
             "onet",
             "bls",
-            "oews"
+            "oews",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31305,7 +31336,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024 年"
+              "2025 年"
             ]
           },
           "id": "advertising-and-promotions-managers.market-signals.market-signal-card.10",
@@ -31385,14 +31416,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "27,000 人（2024）"
+              "33,200 人（2025）"
             ]
           },
           "id": "advertising-and-promotions-managers.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet",
-            "bls",
-            "oews"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31417,14 +31446,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年"
+              "2025—2035 年"
             ]
           },
           "id": "advertising-and-promotions-managers.market-signals.market-signal-card.17",
           "source_refs": [
             "onet",
             "bls",
-            "oews"
+            "oews",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31497,14 +31527,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "下降（-1% 或更低）"
+              "BLS 预计 2025—2035 年下降 4%，净减约 1,200 人（SOC 11-2011）；总体预测，非 AI 单独因果估计。"
             ]
           },
           "id": "advertising-and-promotions-managers.market-signals.market-signal-card.22",
           "source_refs": [
             "onet",
             "bls",
-            "oews"
+            "oews",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31529,14 +31560,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年"
+              "2025—2035 年"
             ]
           },
           "id": "advertising-and-promotions-managers.market-signals.market-signal-card.24",
           "source_refs": [
             "onet",
             "bls",
-            "oews"
+            "oews",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31609,14 +31641,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "约 2,100 个/年"
+              "约 2,300 个/年"
             ]
           },
           "id": "advertising-and-promotions-managers.market-signals.market-signal-card.29",
           "source_refs": [
             "onet",
             "bls",
-            "oews"
+            "oews",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31641,14 +31674,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "支持职业摘要、2024就业规模与2024—2034预测；不保证录用"
+              "支持职业摘要、2025就业规模与2025—2035预测；不保证录用"
             ]
           },
           "id": "advertising-and-promotions-managers.market-signals.market-signal-card.31",
           "source_refs": [
             "onet",
             "bls",
-            "oews"
+            "oews",
+            "adpromo-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -32191,7 +32225,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-09-14"
+              "2026-10-08（本轮限定九板块修订）"
             ]
           },
           "id": "advertising-and-promotions-managers.sources.source-card.3",
@@ -32543,6 +32577,38 @@
                 "publisher": "FermatMind 职业内容团队（本页登记）",
                 "scope": "数据缺口登记（中国大陆精确职业工资分布与可核验招聘样本）",
                 "url": "https://www.stats.gov.cn/"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "OOH就业预测子表的SOC 11-2011：2025就业33,200，预测2035就业31,900，变化-4%，净变化-1,200（各项独立四舍五入）。",
+                  "O*NET 11-2011.00 同期摘要列年均空缺2,300；含替代需求。"
+                ],
+                "evidence_type": "官方职业就业预测",
+                "id": "adpromo-ep-2025-2035",
+                "limitation": "使用合并页面中的广告与促销经理子表，不使用合并职业总数；不是AI单独因果估计或个人录用概率。",
+                "market": "美国",
+                "name": "BLS/O*NET 广告与促销经理 2025—2035 就业预测",
+                "period": "基年2025；预测2025—2035；2026-10-08查阅",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/management/advertising-promotions-and-marketing-managers.htm"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "2025年就业33,200人，2025—2035预测下降（-1%或更低区间）；年均2,300空缺。",
+                  "本职工资中位2025年133,660美元；完整分位另见全国工资页。"
+                ],
+                "evidence_type": "官方就业与工资口径",
+                "id": "health-cross-repair",
+                "limitation": "全国口径，不反映地区、行业或单一雇主的差异；该页未讨论 AI 对任务的影响。",
+                "market": "美国",
+                "name": "O*NET 11-2011.00 当前就业与工资趋势（2025—2035）",
+                "period": "2025基年；2025—2035预测；2025工资",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-2011.00"
               }
             ]
           },
@@ -33413,7 +33479,7 @@
               "entry": "link-16",
               "field": "url"
             },
-            "问题": "到 2034 年这个职业的岗位会变少吗？"
+            "问题": "到2035年这个职业的岗位会变少吗？"
           },
           {
             "回答": {
@@ -35636,8 +35702,10 @@
         "heading": "美国广告与促销经理工资多少？",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
-          "$fact": "us-wage-2025",
-          "field": "period"
+          "$item": "advertising-and-promotions-managers.us-salary.cross-review-period",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
         },
         "industry_rows": [
           {
@@ -36441,7 +36509,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 11-2011.00 就业预测（2024—2034）",
+            "label": "O*NET 11-2011.00 就业预测（2025—2035）",
             "secondary_value": null,
             "value": {
               "$item": "advertising-and-promotions-managers.profile.onet-structured-fields-block.5",
@@ -37879,7 +37947,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "受众与主张证据 · 素材与脚本规格 · 媒介与预算边界",
@@ -37930,7 +37998,7 @@
       "text": "广告与促销经理"
     }
   },
-  "source_content_sha256": "3c5987a93552f2ec7666f5ede48a61191ba25f3c13c16c9ba3cf25a6c70897a5",
+  "source_content_sha256": "80e395ffaed627c0dd4f389d1aaed0fd24dbdf25c392ff9431723b8968db100d",
   "subject": {
     "canonical_slug": "advertising-and-promotions-managers",
     "name": "广告与促销经理",

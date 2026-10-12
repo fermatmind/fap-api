@@ -29726,7 +29726,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "ASHA只能力内服务及AI准确性，州监管资格和中国康复分工/医师法给权限背景；Medicare仅适用支付范围，不推广全部保险。"
+              "ASHA能力范围及AI准确性、州监管资格、中国康复分工与医师法分别提供权限背景；Medicare只支持其支付范围。L版本与完成率是作者虚构情境，来源不证明其为临床疗效或实际事故率。"
             ]
           },
           "id": "speech-language-pathologists.risk.career-risk-cards.10",
@@ -32721,7 +32721,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "按正式专业资格或获准内部职责核，不由L资料练习直接授转岗许可"
+              "跨专业：另核训练与许可"
             ]
           },
           "id": "speech-language-pathologists.market-signals.market-signal-card.36",
@@ -32766,7 +32766,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "按正式专业资格或获准内部职责核，不由L资料练习直接授转岗许可"
+              "跨专业：另核训练与许可"
             ]
           },
           "id": "speech-language-pathologists.market-signals.market-signal-card.39",
@@ -32811,7 +32811,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "按正式专业资格或获准内部职责核，不由L资料练习直接授转岗许可"
+              "跨专业：另核训练与许可"
             ]
           },
           "id": "speech-language-pathologists.market-signals.market-signal-card.42",
@@ -32856,7 +32856,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "按正式专业资格或获准内部职责核，不由L资料练习直接授转岗许可"
+              "跨专业：另核训练与许可"
             ]
           },
           "id": "speech-language-pathologists.market-signals.market-signal-card.45",
@@ -32899,7 +32899,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "按正式专业资格或获准内部职责核，不由L资料练习直接授转岗许可"
+              "本职内部：按获准职责"
             ]
           },
           "id": "speech-language-pathologists.market-signals.market-signal-card.48",
@@ -32941,7 +32941,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "按正式专业资格或获准内部职责核，不由L资料练习直接授转岗许可"
+              "本职内部：按获准职责"
             ]
           },
           "id": "speech-language-pathologists.market-signals.market-signal-card.51",
@@ -32983,7 +32983,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "按正式专业资格或获准内部职责核，不由L资料练习直接授转岗许可"
+              "本职内部：按获准职责"
             ]
           },
           "id": "speech-language-pathologists.market-signals.market-signal-card.54",
@@ -33025,7 +33025,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "按正式专业资格或获准内部职责核，不由L资料练习直接授转岗许可"
+              "本职内部：按获准职责"
             ]
           },
           "id": "speech-language-pathologists.market-signals.market-signal-card.57",
@@ -33192,7 +33192,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-01核读；May2025工资与2025–2035预测单独标注；NHC历史指南不称新统计。"
+              "2026-10-12按九模块作者范围核查；May2025工资与2025–2035预测分别标注。原共享来源访问记录保留，NHC历史指南不称新统计；HTML、独立复核与发布未执行。"
             ]
           },
           "id": "speech-language-pathologists.sources.source-card.3",
@@ -35949,8 +35949,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "editor",
-              "archivists"
+              "archivists",
+              "bls"
             ],
             "id": "record-version",
             "mitigation": {
@@ -35981,8 +35981,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "editor",
-              "nist"
+              "nist",
+              "onet"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -36013,8 +36013,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "privacy",
-              "msresearch"
+              "msresearch",
+              "archivists"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -36046,7 +36046,7 @@
             },
             "evidence_refs": [
               "oews-method",
-              "editor"
+              "bls"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -36078,7 +36078,7 @@
             },
             "evidence_refs": [
               "bls",
-              "editor"
+              "onet"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -36211,6 +36211,126 @@
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$source": "employer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "speech-language-pathologists.source-register.published.1"
+            },
+            "id": "employer",
+            "label": {
+              "$source": "employer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "speech-language-pathologists.source-register.published.1"
+            },
+            "scope": {
+              "$source": "employer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "limitation",
+              "item": "speech-language-pathologists.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "archivists",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "speech-language-pathologists.source-register.published.1"
+            },
+            "id": "archivists",
+            "label": {
+              "$source": "archivists",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "speech-language-pathologists.source-register.published.1"
+            },
+            "scope": {
+              "$source": "archivists",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "limitation",
+              "item": "speech-language-pathologists.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "nist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "speech-language-pathologists.source-register.published.1"
+            },
+            "id": "nist",
+            "label": {
+              "$source": "nist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "speech-language-pathologists.source-register.published.1"
+            },
+            "scope": {
+              "$source": "nist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "limitation",
+              "item": "speech-language-pathologists.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "msresearch",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "speech-language-pathologists.source-register.published.1"
+            },
+            "id": "msresearch",
+            "label": {
+              "$source": "msresearch",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "speech-language-pathologists.source-register.published.1"
+            },
+            "scope": {
+              "$source": "msresearch",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "limitation",
+              "item": "speech-language-pathologists.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "oews-method",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "speech-language-pathologists.source-register.published.1"
+            },
+            "id": "oews-method",
+            "label": {
+              "$source": "oews-method",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "speech-language-pathologists.source-register.published.1"
+            },
+            "scope": {
+              "$source": "oews-method",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "limitation",
+              "item": "speech-language-pathologists.source-register.published.1"
             }
           }
         ]
@@ -37128,7 +37248,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls",
             "value": {
               "$item": "speech-language-pathologists.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -37319,6 +37439,30 @@
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$source": "cnclass",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "speech-language-pathologists.source-register.published.1"
+            },
+            "id": "cnclass",
+            "label": {
+              "$source": "cnclass",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "speech-language-pathologists.source-register.published.1"
+            },
+            "scope": {
+              "$source": "cnclass",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "limitation",
+              "item": "speech-language-pathologists.source-register.published.1"
             }
           }
         ],
@@ -38929,7 +39073,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "沟通与吞咽 · 专业评估治疗",
@@ -38980,7 +39124,7 @@
       "text": "言语语言病理师"
     }
   },
-  "source_content_sha256": "060e17a506af8bf65c5d3d3c8f86bf1f40967ba33d1a38d6a12247bbd8454bcf",
+  "source_content_sha256": "cfe17262f2cf26bf6e3b7e19b63f455e8a7ac733ae8ca99751c9c493792dbd49",
   "subject": {
     "canonical_slug": "speech-language-pathologists",
     "name": "言语语言病理师",

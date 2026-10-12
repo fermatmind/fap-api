@@ -11480,52 +11480,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.href": {
-        "ref": {
-          "id": "broadcast-announcers-and-radio-disc-jockeys.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.label": {
-        "ref": {
-          "id": "broadcast-announcers-and-radio-disc-jockeys.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.headers.explanation": {
         "ref": {
@@ -12135,28 +12095,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.href": {
-        "ref": {
-          "id": "broadcast-announcers-and-radio-disc-jockeys.us-salary.career-snapshot-secondary-locale.20",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.label": {
         "ref": {
@@ -24093,10 +24033,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "证据不足：中国职业分类与本页职责的一一映射尚未核实，不断言不存在对应细类。美国O*NET27-3011的2024结构为信息业85%、其他15%；BLS合并页含非电台DJ且单列精确职业子表。"
+              "证据不足：中国职业分类一一映射尚未核实。O*NET当前2025行业份额为信息业80%、其他20%（含教育与艺术娱乐休闲）；这是美国27-3011就业结构，不推导中国用工、行业工资或个人报酬。 本页27-3011与BLS合并页非电台DJ子项分读。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.profile.career-quick-answers-block.24",
+          "source_refs": [
+            "industry-current",
+            "summary-current",
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -24115,14 +24060,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "BLS列典型入门学历为学士学位；O*NET Job Zone Four为通用准备分区，教育栏把学士、大学未获学位及高中分别标为部分岗位要求，未给占比，不据此宣称学历构成以学士为主。实际条件按目标雇主核对。 中国大陆适用的制作、播出机构播音主持岗位须区分考试合格证与注册后的《中华人民共和国播音员主持人证》。总局当前服务指南列专科及以上、考试合格、相应岗位实习满一年、身体条件等；省级及以上播出机构口试须A级，其他制作播出机构须B级及以上，由所在机构经省级部门申请注册。并非所有自建播客或活动主持统一适用。"
+              "BLS列典型入门学历为学士学位；O*NET Job Zone Four为通用准备分区，教育栏把学士、大学未获学位及高中分别标为部分岗位要求，未给占比，不据此宣称学历构成以学士为主。实际条件按目标雇主核对。 中国大陆适用的制作、播出机构播音主持岗位须区分考试合格证与注册后的《中华人民共和国播音员主持人证》。总局当前服务指南列专科及以上、考试合格、相应岗位实习满一年、身体条件等；省级及以上播出机构口试须A级，其他制作播出机构须B级及以上，由所在机构经省级部门申请注册。并非所有自建播客或活动主持统一适用。 总局现行2023指南所列专科及以上、考试合格、实习满一年、身体与A/B口试等是部分条件，另有完全民事行为能力、政治法律要求和禁止情形，需读完整指南；机构经省级申请总局注册，考试合格证不等于执业证，网络视听适用岗位亦需核，不把自建播客或活动名称直接等同法定岗位。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.profile.career-quick-answers-block.26",
           "source_refs": [
-            "onet-details",
-            "bls-entry",
-            "nrta-registration"
+            "details-current",
+            "bls-ep-2025-2035",
+            "cn-register-current"
           ],
           "type": "prose"
         },
@@ -24190,14 +24135,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国大陆2024修订《广播电视管理条例》要求播前审查、重播重审及规范语言文字。中国大陆适用的制作、播出机构播音主持岗位须区分考试合格证与注册后的《中华人民共和国播音员主持人证》。总局当前服务指南列专科及以上、考试合格、相应岗位实习满一年、身体条件等；省级及以上播出机构口试须A级，其他制作播出机构须B级及以上，由所在机构经省级部门申请注册。并非所有自建播客或活动主持统一适用。 中国大陆现行《著作权法》须按使用行为核权利：第46条广播未发表作品须许可并付酬，已发表作品可不经许可但须付酬；第45条公开广播录音制品须付酬；录制表演及制作录音录像还须分别核作品、表演者权利与法定例外。不能概括为所有使用一律先许可，也不能把付酬例外理解为自由使用。"
+              "广播电视条例2024修订第33/34/36条分别规定电台电视台播前审查重播重审、新闻真实公正、规范语言文字；按主体及具体活动范围核。总局现行2023指南所列专科及以上、考试合格、实习满一年、身体与A/B口试等是部分条件，另有完全民事行为能力、政治法律要求和禁止情形，需读完整指南；机构经省级申请总局注册，考试合格证不等于执业证，网络视听适用岗位亦需核，不把自建播客或活动名称直接等同法定岗位。 著作权法第46条特指广播电台、电视台：播放他人未发表作品须许可付酬，已发表作品可不经许可但按规定付酬。不能把该主体特例直接用于普通网络音频上架、活动或企业内容；第45条录音制品公开传播/播送报酬、录制表演及制作制品等权利、许可和例外分别核。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.profile.career-quick-answers-block.32",
           "source_refs": [
-            "nrta-registration",
-            "nasa-seh",
-            "faa-design-approvals"
+            "cn-broadcast-current",
+            "cn-register-current",
+            "cn-copyright-current"
           ],
           "type": "prose"
         },
@@ -24217,10 +24162,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "岗位常见按栏目或期数安排班次，存在清晨、深夜、周末与节假日排班；节目形态差异很大（自办栏目、外购或联办节目、企业品牌内容、网络音频平台）。比较时把班次与待命时间、夜间与节假日补贴、稿件与素材成本的承担方式，以及节目内容的署名与使用约定纳入书面协议。"
+              "BLS合并组描述清晨、深夜、周末与节假日安排及可能兼职，不能据此证明本职业普遍按栏目或期数计酬。编辑合同核对建议：分别核实际班次、待命、补贴、素材成本、署名与使用，以及月薪、栏目或项目结算关系。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.profile.career-quick-answers-block.34",
+          "source_refs": [
+            "bls-entry",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24243,10 +24192,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业身份与任务：O*NET-SOC 27-3011.00 Broadcast Announcers and Radio Disc Jockeys，2026 年更新页面，Job Zone Four（SVP 7.0 至低于 8.0），该职业未被标注 Bright Outlook。官方职责为「在无线电、电视或其他传播媒体上播报或朗读稿件材料，如新闻报道或商业信息；可能播放并排播音乐、报出表演者或曲目名称、报台，或访谈嘉宾」；共 24 项任务，高重要度任务包括朗读新闻快讯（90）、播报音乐选择与站台间歇、商业广告或公共服务信息并接受听众点播（90）、操作播出控制台（88）、报台并介绍或结束节目（87）、研究背景资料以准备节目或访谈（85）。"
+              "O*NET 职业身份与任务：O*NET-SOC 27-3011.00 Broadcast Announcers and Radio Disc Jockeys，2026 年更新页面，Job Zone Four（SVP 7.0 至低于 8.0），该职业未被标注 Bright Outlook。官方职责为「在无线电、电视或其他传播媒体上播报或朗读稿件材料，如新闻报道或商业信息；可能播放并排播音乐、报出表演者或曲目名称、报台，或访谈嘉宾」；共 24 项任务，高重要度任务包括朗读新闻快讯（90）、播报音乐选择与站台间歇、商业广告或公共服务信息并接受听众点播（90）、操作播出控制台（88）、报台并介绍或结束节目（87）、研究背景资料以准备节目或访谈（85）。 24任务为19Core/5Supplemental，另41一般活动/15详细活动；共同选择内容79、故事线80属Core，不能视为纯读稿或由职业名自动授最终审批权。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -24265,10 +24217,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "证据不足：中国职业分类与本页职责的一一映射尚未核实，不断言不存在对应细类。美国O*NET27-3011的2024结构为信息业85%、其他15%；BLS合并页含非电台DJ且单列精确职业子表。"
+              "中国参考：国家统计局2025年城镇单位工资表列文化、体育和娱乐业非私营单位129,447元/年、私营单位64,015元/年，均为税前年平均工资。按实际雇主主要经济活动匹配行业，不能把行业均值当作本职业工资、城市起薪或个人报酬；本轮未取得中国精确职业工资与已核验的一一细类映射。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.profile.onet-structured-fields-block.3",
+          "source_refs": [
+            "nbs-wages",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24291,10 +24247,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET2024行业分布为信息业85%、其他15%，不推导行业工资；详细档案12类软件与Hot Technologies7个具体技能分别计数，招聘提及不是部署率。"
+              "O*NET当前2025行业份额为信息业80%、其他20%（含教育与艺术娱乐休闲）；这是美国27-3011就业结构，不推导中国用工、行业工资或个人报酬。 详细页12软件类别与Hot单页7产品计数不同，2025招聘提及不是部署率。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.profile.onet-structured-fields-block.5",
+          "source_refs": [
+            "industry-current",
+            "hot-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -24976,10 +24937,10 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "O*NET-SOC 27-3011.00 职业摘要",
+                "entity": "BLS就业章节：电台合并与AI DJ讨论",
                 "id": "link-13",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/27-3011.00"
+                "url": "https://www.bls.gov/ooh/media-and-communication/announcers.htm"
               },
               {
                 "entity": "O*NET-SOC 27-3011.00 详细资料（任务与工作活动）",
@@ -24994,16 +24955,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/27-3011.00"
               },
               {
-                "entity": "BLS《Occupational Outlook Handbook》Announcers and DJs",
+                "entity": "BLS表1.2：27-3011精确预测",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/media-and-communication/announcers.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET-SOC 27-3011.00 职业摘要",
+                "entity": "现行著作权法：45/46条及录制权利",
                 "id": "link-17",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/27-3011.00"
+                "url": "https://www.ncac.gov.cn/xxfb/flfg/flfg_532/202103/t20210309_50530.html"
               },
               {
                 "entity": "O*NET-SOC 27-3011.00 自定义职业档案",
@@ -25038,10 +24999,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先在带教下完成一次从选题与备稿、事实与来源核对、播出与串联、嘉宾访谈到播后日志与归档的小型闭环，再谈试播与作品；同时核对目标岗位属于广播电台、电视台、网络音频平台、制作公司还是企业品牌内容团队，其稿件流程、播出授权与用工形式不同。"
+              "编辑学习建议：先用纸面材料完成备稿、校错、时长与日志核对，再核目标机构资格、岗位与素材权限；安排合适带教或试播后取得反馈，不把首次学习前已获现场机会作为作品制作前提。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.ai-impact.ai-impact-table.11",
+          "source_refs": [
+            "editor-current",
+            "cn-register-current"
+          ],
           "type": "prose"
         },
         {
@@ -25229,10 +25194,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明该职业的行业分布；不能推导行业工资或就业规模。"
+              "O*NET当前2025行业份额为信息业80%、其他20%（含教育与艺术娱乐休闲）；这是美国27-3011就业结构，不推导中国用工、行业工资或个人报酬。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.ai-impact.ai-impact-table.28",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -25251,12 +25219,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于2025就业与2025—2035预测，非AI归因；O*NET旧一期仅留历史来源。"
+              "BLS表1.2精确27-3011：2025就业21800、2035预测20200、净减1700、下降7.6%、年均空缺2000；人数各自舍入，端点差1600不能替换净减1700。O*NET现行摘要/localtrends已更新同一期，显示整数-8%；总体预测非AI归因，空缺非新增。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.ai-impact.ai-impact-table.30",
           "source_refs": [
-            "bls-ep-2025-2035"
+            "bls-ep-2025-2035",
+            "trends-current"
           ],
           "type": "prose"
         },
@@ -25287,10 +25256,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表比较三组工作方向在自动化影响上的差别：哪些环节可被辅助，哪些判断与责任仍由人承担。"
+              "编辑工具比较：以下方向为可复核试用对象，非本职业已测部署或效率结果；按输入权利、复核和批准条件判断。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.ai-impact.ai-impact-table.33",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25342,7 +25314,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "字幕、剪辑初稿与节目摘要可由工具生成。"
+              "编辑试用建议：工具可辅助整理音乐与素材名称、来源、拟使用方式及已有许可文件，形成待人工核对的权利资料清单；本轮未取得本职业实际采用或效率研究。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.ai-impact.ai-impact-table.38",
@@ -25353,7 +25325,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不得把生成内容当作已核实事实或播出稿，须与来源和授权逐条核对。"
+              "由相应职责人员按实际行为、权利主体和法定例外逐项核对许可与付酬义务。广播电台、电视台播放已发表作品的特定许可例外仍需按规定付酬，不能泛用于普通网络上架；生成清单不证明已获授权，也不能替代权利文件及播前审查。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.ai-impact.ai-impact-table.39",
@@ -25364,10 +25336,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、行业分布、就业与工资数据以及任务暴露研究，不是 AI 替代率或岗位数量预测。"
+              "五证据卡覆盖职责、任务、招聘软件、就业与工资及全球暴露等不同对象。BLS确含总体岗位数量预测；未提供本职业AI替代率或AI归因数量预测，不把两者混同。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.ai-impact.ai-impact-table.40",
+          "source_refs": [
+            "bls-entry",
+            "bls-ep-2025-2035",
+            "ilo-genai"
+          ],
           "type": "prose"
         },
         {
@@ -25738,10 +25715,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可辅助核对，但不自动取得作品或表演者许可，也不替代适用的单位审查和执业注册。版权义务按具体行为、付酬及法定例外分别核对。"
+              "著作权法第46条特指广播电台、电视台：播放他人未发表作品须许可付酬，已发表作品可不经许可但按规定付酬。不能把该主体特例直接用于普通网络音频上架、活动或企业内容；第45条录音制品公开传播/播送报酬、录制表演及制作制品等权利、许可和例外分别核。 工具不能自动取得素材权利或替代适用执业注册和单位审查。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.ai-impact.ai-impact-table.72",
+          "source_refs": [
+            "cn-copyright-current",
+            "cn-register-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25749,10 +25731,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现行《著作权法》 / 编辑控制建议"
+              "著作权法45/46条、总局资格指南与本页编辑控制建议"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.ai-impact.ai-impact-table.73",
+          "source_refs": [
+            "cn-copyright-current",
+            "cn-register-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25793,10 +25780,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 培训与教育信息 / 自定义职业档案"
+              "O*NET27-3011详细档案任务/教育与Job Zone；纸面学习优先次序为编辑建议。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.ai-impact.ai-impact-table.77",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25804,10 +25795,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "生成式工具进入选题与播出流程时，人的控制点应按以下五步固定下来；任何一步缺失都不应扩大使用范围。"
+              "编辑治理建议：按下列步骤核输入、权利、事实与复核记录；是否扩大工具使用由单位按风险和权限安排，通用NIST框架不签播出批准或执业权。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.ai-impact.ai-impact-table.78",
+          "source_refs": [
+            "nist-ai-rmf",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25914,10 +25909,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "无法追溯的稿件版本与授权说明在争议或更正时无法重现过程，也无法支持责任划分。"
+              "版本与授权说明不可追溯会妨碍更正、争议调查和过程复现；完整记录有助核对，不自动决定法律责任。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.ai-impact.ai-impact-table.88",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26540,7 +26538,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "工资总额为税前口径，包含定义内奖金、津贴补贴及个人税费、社保公积金代扣部分。节目补贴或稿费是否计入应核统计关系与定义，不一概写为统计之外。"
+              "工资总额为税前口径，包含定义内工资、奖金、津贴补贴及个人税费、社保公积金代扣部分。《关于工资总额组成的规定》第十一条第五项所指稿费、讲课费及其他专门工作报酬不列入工资总额；节目补贴按实际统计关系和定义核对，栏目或项目计酬名称本身不自动等于法规所指稿费。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.china-salary.career-snapshot-primary-locale.20",
@@ -26573,10 +26571,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "生成式工具会改变资料检索与稿件整理环节，但不改变中国大陆对该职业的统计口径：统计缺口与工具无关。"
+              "编辑工具分析：资料检索与稿件整理可作为工具试用方向，需验证输入、效率与权限；中国职业工资缺口由统计覆盖和映射决定，不由工具补出精确工资。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.china-salary.career-snapshot-primary-locale.23",
+          "source_refs": [
+            "editor-current",
+            "nbs-wages"
+          ],
           "type": "prose"
         },
         {
@@ -26650,10 +26652,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆适用机构岗位须区分考试合格与执业注册：专科及以上、相应实习满一年等条件另核；播前审查与素材权利并不由学历替代。"
+              "总局现行2023指南所列专科及以上、考试合格、实习满一年、身体与A/B口试等是部分条件，另有完全民事行为能力、政治法律要求和禁止情形，需读完整指南；机构经省级申请总局注册，考试合格证不等于执业证，网络视听适用岗位亦需核，不把自建播客或活动名称直接等同法定岗位。 播前审查、素材权利不由学历或考试合格替代。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.china-salary.career-snapshot-primary-locale.30",
+          "source_refs": [
+            "cn-register-current",
+            "cn-broadcast-current"
+          ],
           "type": "prose"
         },
         {
@@ -26848,10 +26854,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不提供中国大陆该职业的月薪区间或城市排名；不同城市、不同平台的栏目数量与广告收入差异较大，比较时须把班次、节目形态与补贴安排纳入书面约定。"
+              "本页缺少城市级本职业工资/栏目收入样本，不发布月薪排名。编辑比较建议核平台、节目、班次、补贴及结算，不把城市广告收入差异当本轮已测事实。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.china-salary.career-snapshot-primary-locale.48",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27119,10 +27128,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "对应时薪第 10 分位 13.55 美元，为分布下限，不是入门起薪的承诺。；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/27-3011.00"
+              "时薪P10为13.55美元，描述全国受雇分布第10分位而非最低工资或入门起薪。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.us-salary.career-snapshot-secondary-locale.10",
+          "source_refs": [
+            "wages-current"
+          ],
           "type": "prose"
         },
         {
@@ -27232,13 +27244,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS表1.2精确就业基数；O*NET行业份额为2024结构，不能把85%套算为2025实际行业人数。；BLS表1.2｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "BLS表1.2就业基数2025为21800；O*NET当前2025行业份额为信息业80%、其他20%（含教育与艺术娱乐休闲）；这是美国27-3011就业结构，不推导中国用工、行业工资或个人报酬。 不用行业比例乘基数冒称精确行业人数。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
             "bls-ep-2025-2035",
-            "onet-industry"
+            "industry-current"
           ],
           "type": "prose"
         },
@@ -27347,10 +27359,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET2024信息业85%、其他15%是行业分布。下方2025行业时薪中位数则来自BLS本职业工资子表，两者不同指标，不用份额推算工资。"
+              "O*NET当前2025行业份额为信息业80%、其他20%（含教育与艺术娱乐休闲）；这是美国27-3011就业结构，不推导中国用工、行业工资或个人报酬。 下方2025职业×行业时薪中位数来自BLS精确子表，与就业份额为不同指标。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.us-salary.career-snapshot-secondary-locale.29",
+          "source_refs": [
+            "industry-current",
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -27466,7 +27482,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本职业×电视广播行业的时薪中位数，不以O*NET2024份额推算。"
+              "本职业×电视广播行业2025时薪中位数，不能由行业就业份额推导工资。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.us-salary.career-snapshot-secondary-locale.39",
@@ -27569,10 +27585,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "时薪与年薪是同一 OEWS 口径的两种呈现（该统计按标准工作年折算），不能据此推算个人实发收入、节目补贴或商业合作收入。"
+              "OEWS为正常工时税前工资口径，包含定义内佣金/生产奖金等，排除加班溢价、轮班差额和非生产奖金；小时职业年薪通常按2080小时折算，不能推个人时数或实发，亦不能代表全部自由职业/节目合作收入。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.us-salary.career-snapshot-secondary-locale.47",
+          "source_refs": [
+            "bls-oews-methods",
+            "wages-current"
+          ],
           "type": "prose"
         },
         {
@@ -27591,10 +27611,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "实际收入还受用工形式（全职、栏目制、项目制或自由职业）、班次与市场排名、地区与平台影响。"
+              "编辑薪酬核对：记录用工、地区平台、实际班次、职责及各项结算。BLS一般描述不能量化本职业各条件对个人收入的贡献，具体数值以真实合同核。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.us-salary.career-snapshot-secondary-locale.49",
+          "source_refs": [
+            "bls-entry",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27977,8 +28001,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "尽责性有助于按时间档改写稿件、核对事实与来源、完整填写节目日志。",
-              "注意细节与谨慎有助于发现稿件中的错误引用与表述风险，但仍须通过来源核实与送审验证判断。"
+              "编辑观察：是否按时间档改写并复算、核事实来源、完整填日志。",
+              "编辑观察：发现错引与表述风险后是否回到原始来源送审，不凭谨慎标签推定判断正确。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.fit.personality-fit-block.8",
@@ -28147,10 +28171,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力有帮助：需要在直播倒计时、临时改稿与听众反馈中保持稳定，在事实未核实或内容越界时坚持停下并上报。但这类能力不能用单一分数定义，也不能替代稿件训练与核实纪律。"
+              "编辑观察建议：看直播倒计时、临时改稿与反馈下是否仍核事实、报告未知并接受纠正；缺少本职业情绪测评效度证据，不把耐受能力分数写成已证实因果效果。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.fit.personality-fit-block.22",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28169,7 +28196,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能在开播前拒绝跳过事实核实，比情绪分数高低更重要。",
+              "编辑建议观察：能否在开播前拒绝跳过事实核实；本轮未取得这一行为与情绪量表分数的比较预测效度研究。",
               "愿意承认口误或稿件差错并立即更正，是专业能力的一部分。"
             ]
           },
@@ -28192,7 +28219,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。真正有解释力的证据是受监督的备稿与播出表现。"
+              "边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。编辑建议在具备相应条件的监督下观察备稿与播出表现；本轮未取得其与人格或单次测验的比较效度证据。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.fit.personality-fit-block.26",
@@ -28203,7 +28230,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：更有解释力的适配信号是能在时间档内把稿件讲清楚、在事实未核实时主动标注并上报、在访谈偏离提纲时把话题带回；对声音条件或表达欲的自信本身不足以证明胜任。"
+              "直接回答：编辑建议核对的行为表现是能在时间档内把稿件讲清楚、在事实未核实时主动标注并上报、在访谈偏离提纲时把话题带回；对声音条件或表达欲的自信本身不足以证明胜任。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.fit.personality-fit-block.27",
@@ -28236,10 +28263,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足现场流程控制与临场应变训练；现场没有改写稿件的时间余量。"
+              "需按目标活动补流程控制与临场应变；现场可能临时改稿与调整，也可能预先彩排，不能断言所有现场均无时间余量。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.fit.personality-fit-block.30",
+          "source_refs": [
+            "adj-dj-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28269,10 +28300,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足节目策划、预算与团队协作知识；与只做播出的职责不同。"
+              "编辑差距：节目制作目标更重创意、资源与整体组织；播音本身也可共同选择内容和发展故事线，不能把其统一写成只播出。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.fit.personality-fit-block.33",
+          "source_refs": [
+            "adj-producer-current",
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28401,10 +28437,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可迁移的是文字能力；缺少时间档内即时表达与互动的要求。"
+              "可迁移文字与结构能力；作家也写广告和脚本，交付周期依项目，不假定所有写作都缺少即时表达或固定时长要求。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.fit.personality-fit-block.45",
+          "source_refs": [
+            "adj-writer-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28423,7 +28463,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合与否不取决于内外向。工作情境显示 92% 每天在环境受控的室内工作、91% 每天使用电子邮件、69% 每天进行面对面讨论、67% 每天通电话、66% 表示与他人持续接触；能否在有限时间内把信息讲清楚并与人协作，比外向程度更关键。"
+              "不能仅凭内外向判断适配。工作情境显示 92% 每天在环境受控的室内工作、91% 每天使用电子邮件、69% 每天进行面对面讨论、67% 每天通电话、66% 表示与他人持续接触；编辑建议核对能否在有限时间内把信息讲清楚并与人协作，未取得与外向量表的比较效度证据。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.fit.personality-fit-block.47",
@@ -28492,10 +28532,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力确实有帮助：需要在直播倒计时与临时改稿中保持稳定、坚持按核实流程作业。但这类能力不能用单一分数定义，也不能替代稿件训练与播出纪律。"
+              "编辑观察建议：看直播倒计时、临时改稿与反馈下是否仍核事实、报告未知并接受纠正；缺少本职业情绪测评效度证据，不把耐受能力分数写成已证实因果效果。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.fit.personality-fit-block.53",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28646,10 +28689,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "适配信号：更有解释力的信号是能在时间档内把稿件讲清楚、在事实未核实时主动标注并上报、在访谈偏离提纲时把话题带回；对声音条件或表达欲的自信本身不足以证明胜任。"
+              "编辑观察建议：核时间内表达、未知事实标注报告、访谈推进和纠错；这些为具体讨论对象，不声称比测评分数有已验证的更高解释力。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.fit.riasec-fit-block.9",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28668,10 +28714,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 兴趣代码：AES（艺术型、企业型、社会型）。艺术型下的具体领域为媒体与表演艺术；企业型下的具体领域为公开演讲；该职业页面未列出社会型的进一步子领域。"
+              "O*NET兴趣AES：艺术78/企业56/社会42；完整41细领域含媒体98、公开演讲89、表演55、营销48、创作46、教学17、社会服务9、专业咨询8等。不能把默认前三项当未列社会型细领域；职业兴趣值不作个人录用阈值。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.fit.riasec-fit-block.11",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28823,6 +28872,12 @@
                 "id": "link-6",
                 "relation": "career.source",
                 "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "entity": "编辑现场核对建议（基于O*NET任务，非健康处方）",
+                "id": "link-7",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/details/27-3011.00"
               }
             ]
           },
@@ -28856,10 +28911,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：风险与边界条目依据 O*NET 27-3011.00 的官方任务、工作活动与工作情境、O*NET 培训与教育信息、《广播电视管理条例》与《中华人民共和国著作权法》的公开条文整理；不替代所在单位的播出制度与适用法域的具体规定。"
+              "资料范围：O*NET支持任务和情境，条例与版权法支持各自适用条款；用嗓、监听、直播提示与轮休为编辑核对建议，不是职业疾病证据或单位处置授权。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.risk.career-risk-cards.10",
+          "source_refs": [
+            "details-current",
+            "cn-broadcast-current",
+            "cn-copyright-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28977,10 +29038,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按具体广播、录制、复制或网络传播行为核作品与表演者权利、付酬及法定例外，并保留判断和许可依据；不能一概要求所有广播先许可。"
+              "著作权法第46条特指广播电台、电视台：播放他人未发表作品须许可付酬，已发表作品可不经许可但按规定付酬。不能把该主体特例直接用于普通网络音频上架、活动或企业内容；第45条录音制品公开传播/播送报酬、录制表演及制作制品等权利、许可和例外分别核。 保留适用判断、许可或付酬依据，不用一项权利证明覆盖所有传播行为。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.risk.career-risk-cards.21",
+          "source_refs": [
+            "cn-copyright-current"
+          ],
           "type": "prose"
         },
         {
@@ -29024,10 +29088,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "安排合理轮换与休息、控制监听音量、保持用嗓习惯与必要的听力保护。"
+              "编辑核对建议：按实际表达与监听负荷核休息轮换、音量控制及相应专业评估；现有职业资料不支持统一健康防护处方或个人疾病诊断。单位和人员按适用制度安排，不用“注意用嗓”替代风险识别。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.risk.career-risk-cards.25",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29156,10 +29223,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于著作权具体使用行为的许可、付酬和法定例外边界。"
+              "著作权法45条录音制品公开传播报酬、46条电台电视台作品播放特例及录制权利；网络上架等须另核具体权利，不泛用46条免许可。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.risk.career-risk-cards.37",
+          "source_refs": [
+            "cn-copyright-current"
+          ],
           "type": "prose"
         },
         {
@@ -29167,10 +29237,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于2024修订广播电视管理要求，含播前审查、重播重审及规范用语。"
+              "广播电视条例第2条适用范围；第33/34/36条对电台电视台播前审查重播重审、新闻真实公正和规范语言提出要求，非全部播客统一要求。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.risk.career-risk-cards.38",
+          "source_refs": [
+            "cn-broadcast-current"
+          ],
           "type": "prose"
         },
         {
@@ -29465,14 +29538,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS列典型入门学历为学士学位；O*NET Job Zone Four为通用准备分区，教育栏把学士、大学未获学位及高中分别标为部分岗位要求，未给占比，不据此宣称学历构成以学士为主。实际条件按目标雇主核对。 中国大陆适用的制作、播出机构播音主持岗位须区分考试合格证与注册后的《中华人民共和国播音员主持人证》。总局当前服务指南列专科及以上、考试合格、相应岗位实习满一年、身体条件等；省级及以上播出机构口试须A级，其他制作播出机构须B级及以上，由所在机构经省级部门申请注册。并非所有自建播客或活动主持统一适用。"
+              "BLS列典型入门学历为学士学位；O*NET Job Zone Four为通用准备分区，教育栏把学士、大学未获学位及高中分别标为部分岗位要求，未给占比，不据此宣称学历构成以学士为主。实际条件按目标雇主核对。 中国大陆适用的制作、播出机构播音主持岗位须区分考试合格证与注册后的《中华人民共和国播音员主持人证》。总局当前服务指南列专科及以上、考试合格、相应岗位实习满一年、身体条件等；省级及以上播出机构口试须A级，其他制作播出机构须B级及以上，由所在机构经省级部门申请注册。并非所有自建播客或活动主持统一适用。 总局现行2023指南所列专科及以上、考试合格、实习满一年、身体与A/B口试等是部分条件，另有完全民事行为能力、政治法律要求和禁止情形，需读完整指南；机构经省级申请总局注册，考试合格证不等于执业证，网络视听适用岗位亦需核，不把自建播客或活动名称直接等同法定岗位。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.path.career-path-block.20",
           "source_refs": [
-            "onet-details",
-            "bls-entry",
-            "nrta-registration"
+            "details-current",
+            "bls-ep-2025-2035",
+            "cn-register-current"
           ],
           "type": "prose"
         },
@@ -29580,10 +29653,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见起点岗位：栏目助理与编播辅助岗位。"
+              "编辑岗位示例：栏目助理与编播辅助；具体名称、职责、资格与晋级按真实单位核，未采集岗位频率样本。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.path.career-path-block.30",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29635,10 +29711,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：电台栏目主持与播报岗位。"
+              "编辑岗位示例：电台主持与播报；具体名称、职责、资格与晋级按真实单位核，未采集岗位频率样本。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.path.career-path-block.35",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29800,10 +29879,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见起点岗位：栏目助播与出镜辅助岗位。"
+              "编辑岗位示例：栏目助播与出镜辅助；具体名称、职责、资格与晋级按真实单位核，未采集岗位频率样本。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.path.career-path-block.50",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29855,10 +29937,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：电视栏目主持岗位。"
+              "编辑岗位示例：电视栏目主持；具体名称、职责、资格与晋级按真实单位核，未采集岗位频率样本。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.path.career-path-block.55",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30020,10 +30105,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见起点岗位：活动执行与主持助理岗位。"
+              "编辑岗位示例：活动执行或主持助理；具体名称、职责、资格与晋级按真实单位核，未采集岗位频率样本。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.path.career-path-block.70",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30042,10 +30130,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：活动内容与商业宣传口径由主办方确认。"
+              "编辑边界：活动宣传口径与流程按主办方/相关主体协作核定；主办方同意不代替事实真实性、他人权利或适用法定条件。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.path.career-path-block.72",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30075,10 +30166,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：活动主持人岗位。"
+              "编辑岗位示例：活动主持；具体名称、职责、资格与晋级按真实单位核，未采集岗位频率样本。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.path.career-path-block.75",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30130,10 +30224,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：活动主持统筹与执行负责人岗位。"
+              "编辑岗位示例：主持统筹或执行负责人；具体名称、职责、资格与晋级按真实单位核，未采集岗位频率样本。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.path.career-path-block.80",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30152,10 +30249,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：活动整体安全与商务条款由主办方决定。"
+              "编辑边界：主办及现场各主体按法律、合同与职责承担相应安全责任，商务条款由有权各方约定，不能说整体安全只由主办方决定或合同移转全部法定义务。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.path.career-path-block.82",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30294,7 +30394,7 @@
                 "values": [
                   "中国执业注册",
                   "中国大陆适用的制作、播出机构播音主持岗位须区分考试合格证与注册后的《中华人民共和国播音员主持人证》。总局当前服务指南列专科及以上、考试合格、相应岗位实习满一年、身体条件等；省级及以上播出机构口试须A级，其他制作播出机构须B级及以上，由所在机构经省级部门申请注册。并非所有自建播客或活动主持统一适用。",
-                  "机构注册与岗位授权分别核对；播前审查、素材权利也不由培训自动取得。"
+                  "机构注册与岗位授权分别核对；播前审查、素材权利也不由培训自动取得。 总局现行2023指南所列专科及以上、考试合格、实习满一年、身体与A/B口试等是部分条件，另有完全民事行为能力、政治法律要求和禁止情形，需读完整指南；机构经省级申请总局注册，考试合格证不等于执业证，网络视听适用岗位亦需核，不把自建播客或活动名称直接等同法定岗位。"
                 ]
               },
               {
@@ -30615,7 +30715,7 @@
                 "使用作品、录音或表演的团队",
                 "核具体广播、录制及传播权利。",
                 "按具体行为和法定例外判断。",
-                "广播未发表作品须许可付酬；已发表作品可不经许可但须付酬；录音广播与录制另核权利。",
+                "第46条特例限广播电台电视台播放作品；录音制品公开播送付酬、普通网络上架等其他行为分别核，不统一套用免许可。",
                 "以实际权利确认与协议费用核算。",
                 "不把所有使用一概许可，也不把法定例外当免费使用。"
               ]
@@ -30640,7 +30740,7 @@
               "学历、考试合格、执业注册、单位岗位授权、素材权利和内容审查分别核对。",
               "BLS列典型入门学历为学士学位；O*NET Job Zone Four为通用准备分区，教育栏把学士、大学未获学位及高中分别标为部分岗位要求，未给占比，不据此宣称学历构成以学士为主。实际条件按目标雇主核对。",
               "中国大陆适用的制作、播出机构播音主持岗位须区分考试合格证与注册后的《中华人民共和国播音员主持人证》。总局当前服务指南列专科及以上、考试合格、相应岗位实习满一年、身体条件等；省级及以上播出机构口试须A级，其他制作播出机构须B级及以上，由所在机构经省级部门申请注册。并非所有自建播客或活动主持统一适用。",
-              "中国大陆现行《著作权法》须按使用行为核权利：第46条广播未发表作品须许可并付酬，已发表作品可不经许可但须付酬；第45条公开广播录音制品须付酬；录制表演及制作录音录像还须分别核作品、表演者权利与法定例外。不能概括为所有使用一律先许可，也不能把付酬例外理解为自由使用。",
+              "著作权法第46条特指广播电台、电视台：播放他人未发表作品须许可付酬，已发表作品可不经许可但按规定付酬。不能把该主体特例直接用于普通网络音频上架、活动或企业内容；第45条录音制品公开传播/播送报酬、录制表演及制作制品等权利、许可和例外分别核。",
               "入职前核资格适用范围、单位考核与送审、班次及结算书面约定；本页未核2026考试日程，不据旧指南推定日期。"
             ]
           },
@@ -30924,10 +31024,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET2024信息业85%是旧一期结构，不由此推算2025行业人数；BLS讨论电台合并和AI DJ可能影响用人，非AI因果占比。"
+              "O*NET当前2025行业份额为信息业80%、其他20%（含教育与艺术娱乐休闲）；这是美国27-3011就业结构，不推导中国用工、行业工资或个人报酬。 BLS另外讨论电台合并及AI DJ可能影响用人，未分解AI因果占比。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.market-signals.market-signal-card.12",
+          "source_refs": [
+            "industry-current",
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -31145,10 +31249,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET用于身份与官方任务；其中2024—2034旧预测不作为本页当前决策数据。"
+              "O*NET现行摘要与趋势已更新2025就业和2025—2035预测，按精确职业分读；旧来源登记只留历史元数据，不继续称现行页仍旧。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.market-signals.market-signal-card.31",
+          "source_refs": [
+            "summary-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -31200,10 +31308,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同为语言表达类工作，但作业场合与稿件依据不同。"
+              "编辑距离判断：距离较近：同为语言表达类工作，但作业场合与稿件依据不同。 未取得实际转岗成功率。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.market-signals.market-signal-card.36",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31233,10 +31344,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同处内容链条，但责任层级不同。"
+              "编辑判断距离中等：内容与节目协作可迁移，制作人导演侧更重整体创意和组织；播音原任务亦可共同选内容，不只按责任层级机械区分。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.market-signals.market-signal-card.39",
+          "source_refs": [
+            "adj-producer-current",
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31266,10 +31382,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：都面向播出，但对象从内容转为信号。"
+              "编辑距离判断：距离中等：都面向播出，但对象从内容转为信号。 未取得实际转岗成功率。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.market-signals.market-signal-card.42",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31299,10 +31418,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较远：技术资格与作业安全要求不同。"
+              "编辑距离判断：距离较远：技术资格与作业安全要求不同。 未取得实际转岗成功率。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.market-signals.market-signal-card.45",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31332,10 +31454,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：都需要对公众沟通，但服务对象不同。"
+              "编辑距离判断：距离中等：都需要对公众沟通，但服务对象不同。 未取得实际转岗成功率。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.market-signals.market-signal-card.48",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31365,10 +31490,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属内容生产，但时间档约束不同。"
+              "编辑判断距离中等：文字结构有交集，作家/作者也写广告脚本，具体交付周期与时间档按项目核。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.market-signals.market-signal-card.51",
+          "source_refs": [
+            "adj-writer-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31398,10 +31527,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同处内容生产链条，但交付形式不同。"
+              "编辑距离判断：距离中等：同处内容生产链条，但交付形式不同。 未取得实际转岗成功率。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.market-signals.market-signal-card.54",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31431,10 +31563,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：都面向观众，但依据与责任范围不同。"
+              "编辑距离判断：距离较近：都面向观众，但依据与责任范围不同。 未取得实际转岗成功率。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.market-signals.market-signal-card.57",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -31586,10 +31721,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源：O*NET27-3011定义、任务、工作情境、教育、行业、详细软件与Hot Technologies；2025全国工资分位；BLS表1.2、OOH本职业子表及合并概览；2023 OEWS历史行业均值；国家统计局2025工资；总局资格注册指南、2024修订广播电视条例、2020修正著作权法；ILO与NIST一般研究。"
+              "主要来源：O*NET27-3011定义、任务、工作情境、教育、行业、详细软件与Hot Technologies；2025全国工资分位；BLS表1.2、OOH本职业子表及合并概览；2023 OEWS历史行业均值；国家统计局2025工资；总局资格注册指南、2024修订广播电视条例、2020修正著作权法；ILO与NIST一般研究。 本轮重核现行行业80/20、更新后摘要趋势、资格完整指南与版权特定主体；旧共享来源保留，现行证据隔离追加。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.sources.source-card.2",
+          "source_refs": [
+            "details-current",
+            "industry-current",
+            "trends-current",
+            "cn-register-current",
+            "cn-broadcast-current",
+            "cn-copyright-current"
+          ],
           "type": "prose"
         },
         {
@@ -31597,10 +31740,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核查2026-10-03：工资2025、精确预测2025—2035、行业结构2024、软件招聘2025；行业历史均值2023；中国工资2025；总局页面指南发布2023；广播电视条例2024修订、著作权法2020修正。O*NET旧预测保留历史来源，一般研究未重读部分沿用原访问说明。"
+              "2026-10-09本轮核：全国工资2025、精确预测2025—2035、O*NET行业结构2025（80/20）、软件招聘2025；历史行业均值2023，中国行业工资2025。总局现行指南发布2023、条例2024修订、著作权法2020修正；ILO/NIST一般方法同版复用。摘要当前预测已更新，不再把现行页称旧期。"
             ]
           },
           "id": "broadcast-announcers-and-radio-disc-jockeys.sources.source-card.3",
+          "source_refs": [
+            "industry-current",
+            "trends-current",
+            "cn-register-current",
+            "cn-broadcast-current",
+            "cn-copyright-current"
+          ],
           "type": "prose"
         },
         {
@@ -32000,6 +32150,294 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/oes/2023/may/oes273011.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET27-3011完整任务、活动、情境与教育",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "details-current",
+                "limitation": "24任务19Core/5Supplemental，41一般/15详细活动/57情境；教育为部分岗位要求，无比例。",
+                "market": "美国",
+                "name": "O*NET27-3011完整任务、活动、情境与教育",
+                "period": "2026更新",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/27-3011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET27-3011现行摘要",
+                  "2026更新；2025就业/2025—2035预测"
+                ],
+                "evidence_type": "primary_document",
+                "id": "summary-current",
+                "limitation": "精确广播播音与电台DJ，未标Bright Outlook；预测非AI归因。",
+                "market": "美国",
+                "name": "O*NET27-3011现行摘要",
+                "period": "2026更新；2025就业/2025—2035预测",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/27-3011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET27-3011现行行业份额",
+                  "2025"
+                ],
+                "evidence_type": "primary_document",
+                "id": "industry-current",
+                "limitation": "信息80%/其他20%；不是中国行业、受雇工资或个人收入。",
+                "market": "美国",
+                "name": "O*NET27-3011现行行业份额",
+                "period": "2025",
+                "publisher": "O*NET OnLine / BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/27-3011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET27-3011现行就业趋势",
+                  "2025—2035"
+                ],
+                "evidence_type": "primary_document",
+                "id": "trends-current",
+                "limitation": "21800→20200/整数-8%/2000空缺；BLS精确-7.6%及净减1700，人数独立舍入。",
+                "market": "美国",
+                "name": "O*NET27-3011现行就业趋势",
+                "period": "2025—2035",
+                "publisher": "O*NET OnLine / BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/27-3011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET27-3011七产品招聘提及",
+                  "2025美国全年招聘广告"
+                ],
+                "evidence_type": "primary_document",
+                "id": "hot-current",
+                "limitation": "Office5/Excel3/PowerPoint3，另外四产品未提供比例；12类别另计，非部署或替代率。",
+                "market": "美国",
+                "name": "O*NET27-3011七产品招聘提及",
+                "period": "2025美国全年招聘广告",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/27-3011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET27-3011全国五分位工资",
+                  "2025 OEWS"
+                ],
+                "evidence_type": "primary_document",
+                "id": "wages-current",
+                "limitation": "28190/35360/47340/75480/138440年，13.55/17/22.76/36.29/66.56小时，受雇统计不含自雇。",
+                "market": "美国",
+                "name": "O*NET27-3011全国五分位工资",
+                "period": "2025 OEWS",
+                "publisher": "O*NET OnLine / BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/27-3011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "总局播音员主持人资格认定服务指南",
+                  "2023-04指南；2026-10-09现行页"
+                ],
+                "evidence_type": "administrative_guidance",
+                "id": "cn-register-current",
+                "limitation": "考试合格与执业注册不同；指南还列完全民事能力、政治法律要求及禁止情形，不能用学历实习简表代替全部条件。",
+                "market": "中国大陆",
+                "name": "总局播音员主持人资格认定服务指南",
+                "period": "2023-04指南；2026-10-09现行页",
+                "publisher": "国家广播电视总局",
+                "scope": "contextual",
+                "url": "https://www.nrta.gov.cn/col/col2451/index.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "广播电视管理条例2/33/34/36/38及49/50条",
+                  "2024-12-06第四次修订"
+                ],
+                "evidence_type": "regulation",
+                "id": "cn-broadcast-current",
+                "limitation": "33播前审查重播重审和36规范语言主体为广播电台电视台，按2条活动范围核；不统一扩为自建播客或所有活动。",
+                "market": "中国大陆",
+                "name": "广播电视管理条例2/33/34/36/38及49/50条",
+                "period": "2024-12-06第四次修订",
+                "publisher": "国务院；司法部法规库",
+                "scope": "contextual",
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=1751"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "著作权法45/46/47条及38/39/42/43",
+                  "2020修正；2021-06-01施行"
+                ],
+                "evidence_type": "law",
+                "id": "cn-copyright-current",
+                "limitation": "46的已发表作品免许可付酬特定主体为广播电台电视台；不能泛化普通网络音频上架或所有公开使用。45录音制品公开播送报酬另核。",
+                "market": "中国大陆",
+                "name": "著作权法45/46/47条及38/39/42/43",
+                "period": "2020修正；2021-06-01施行",
+                "publisher": "全国人大常委会；国家版权局公开",
+                "scope": "contextual",
+                "url": "https://www.ncac.gov.cn/xxfb/flfg/flfg_532/202103/t20210309_50530.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "广播任务工具与转岗观察建议",
+                  "2026-10-09"
+                ],
+                "evidence_type": "editorial_synthesis",
+                "id": "editor-current",
+                "limitation": "工具试用、能力观察、路径与距离为编辑分析，无采用率、雇主频率、心理效度或成功率实证。",
+                "market": "美国",
+                "name": "广播任务工具与转岗观察建议",
+                "period": "2026-10-09",
+                "publisher": "费马测试职业内容编辑组",
+                "scope": "editorial_synthesis",
+                "url": "https://www.onetonline.org/link/details/27-3011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相邻职业定义27-2091.00",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-dj-current",
+                "limitation": "职责比较对象不并本页工资或预测，迁移/距离为编辑判断，许可按法域岗位核。",
+                "market": "美国",
+                "name": "相邻职业定义27-2091.00",
+                "period": "2026更新",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/27-2091.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相邻职业定义27-2012.00",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-producer-current",
+                "limitation": "职责比较对象不并本页工资或预测，迁移/距离为编辑判断，许可按法域岗位核。",
+                "market": "美国",
+                "name": "相邻职业定义27-2012.00",
+                "period": "2026更新",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/27-2012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相邻职业定义27-4012.00",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-broadcast-current",
+                "limitation": "职责比较对象不并本页工资或预测，迁移/距离为编辑判断，许可按法域岗位核。",
+                "market": "美国",
+                "name": "相邻职业定义27-4012.00",
+                "period": "2026更新",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/27-4012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相邻职业定义27-4011.00",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-av-current",
+                "limitation": "职责比较对象不并本页工资或预测，迁移/距离为编辑判断，许可按法域岗位核。",
+                "market": "美国",
+                "name": "相邻职业定义27-4011.00",
+                "period": "2026更新",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/27-4011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相邻职业定义27-3031.00",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-pr-current",
+                "limitation": "职责比较对象不并本页工资或预测，迁移/距离为编辑判断，许可按法域岗位核。",
+                "market": "美国",
+                "name": "相邻职业定义27-3031.00",
+                "period": "2026更新",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/27-3031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相邻职业定义27-3043.00",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-writer-current",
+                "limitation": "职责比较对象不并本页工资或预测，迁移/距离为编辑判断，许可按法域岗位核。",
+                "market": "美国",
+                "name": "相邻职业定义27-3043.00",
+                "period": "2026更新",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/27-3043.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相邻职业定义27-1014.00",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-animation-current",
+                "limitation": "职责比较对象不并本页工资或预测，迁移/距离为编辑判断，许可按法域岗位核。",
+                "market": "美国",
+                "name": "相邻职业定义27-1014.00",
+                "period": "2026更新",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/27-1014.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "相邻职业定义27-2011.00",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-actor-current",
+                "limitation": "职责比较对象不并本页工资或预测，迁移/距离为编辑判断，许可按法域岗位核。",
+                "market": "美国",
+                "name": "相邻职业定义27-2011.00",
+                "period": "2026更新",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/27-2011.00"
               }
             ]
           },
@@ -34211,8 +34649,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.onet-summary"
+              "onet-details",
+              "onet-summary"
             ],
             "id": "unverified-facts",
             "mitigation": {
@@ -34243,8 +34681,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.nasa-seh"
+              "onet-details",
+              "nasa-seh"
             ],
             "id": "content-compliance",
             "mitigation": {
@@ -34275,8 +34713,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.faa-design-approvals",
-              "career.source.onet-summary"
+              "faa-design-approvals",
+              "onet-summary"
             ],
             "id": "rights-and-licensing",
             "mitigation": {
@@ -34307,8 +34745,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.editorial"
+              "onet-details",
+              "editorial"
             ],
             "id": "voice-and-hearing",
             "mitigation": {
@@ -34339,8 +34777,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.editorial"
+              "onet-details",
+              "editorial"
             ],
             "id": "live-control",
             "mitigation": {
@@ -34371,8 +34809,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.onet-summary"
+              "onet-details",
+              "onet-summary"
             ],
             "id": "version-and-log",
             "mitigation": {
@@ -34506,6 +34944,24 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$link": "broadcast-announcers-and-radio-disc-jockeys.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "url"
+            },
+            "id": "editorial",
+            "label": {
+              "$link": "broadcast-announcers-and-radio-disc-jockeys.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "entity"
+            },
+            "scope": "资料范围：O*NET支持任务和情境，条例与版权法支持各自适用条款；用嗓、监听、直播提示与轮休为编辑核对建议，不是职业疾病证据或单位处置授权。"
           }
         ]
       },
@@ -35889,7 +36345,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 就业与预测字段（2024—2034 年）",
+            "label": "O*NET 就业与预测字段（2025—2035 年）",
             "secondary_value": null,
             "value": {
               "$item": "broadcast-announcers-and-radio-disc-jockeys.profile.onet-structured-fields-block.4",
@@ -37180,7 +37636,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 27-3011.00 · 播报与串联 / 访谈与音乐编排 · 室内与固定时间档",
@@ -37231,7 +37687,7 @@
       "text": "广播播音员与电台唱片骑师"
     }
   },
-  "source_content_sha256": "17abf84a1270dc536f6a9efeeb109a634e59240820f3c773c25bf256e2694b91",
+  "source_content_sha256": "8be830718764127cbf0c4292a1af8d0b5fd7900e6dcc344ec2997eba59c2f5f1",
   "subject": {
     "canonical_slug": "broadcast-announcers-and-radio-disc-jockeys",
     "name": "广播播音员与电台唱片骑师",

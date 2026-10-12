@@ -1717,6 +1717,9 @@
       },
       "item:advertising-promotions-and-marketing-managers.us-salary.career-snapshot-secondary-locale.9": {
         "status": "mapped"
+      },
+      "item:advertising-promotions-and-marketing-managers.us-salary.cross-review-period": {
+        "status": "pending_mapping"
       }
     },
     "module_order": [
@@ -12457,14 +12460,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.industry_period": {
-        "ref": {
-          "id": "us-wage-2025",
-          "path": [
-            "period"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.industry_rows.01.industry": {
         "ref": {
@@ -23438,7 +23435,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.1",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23452,7 +23449,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.onet-structured-fields-block.1",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23471,7 +23468,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.responsibilities-block.1",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "list"
         },
@@ -23485,7 +23482,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.work-context-block.1",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23499,7 +23496,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.2",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23513,7 +23510,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.onet-structured-fields-block.2",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23527,7 +23524,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.3",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23541,7 +23538,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23555,7 +23552,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.4",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23569,7 +23566,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23583,7 +23580,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.5",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23597,7 +23594,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23611,7 +23608,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.6",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23625,7 +23622,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.7",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23639,7 +23636,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23653,7 +23650,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23667,7 +23664,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.10",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23681,7 +23678,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.11",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23695,7 +23692,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.definition-block.11",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23709,7 +23706,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.12",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23723,7 +23720,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.13",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23737,7 +23734,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.14",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23751,7 +23748,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.15",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23765,7 +23762,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.16",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23779,7 +23776,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.17",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23793,7 +23790,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.18",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23807,7 +23804,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23821,7 +23818,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.20",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23835,7 +23832,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.21",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23849,7 +23846,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.22",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23863,7 +23860,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.23",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23877,7 +23874,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.24",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23891,7 +23888,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.25",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23905,7 +23902,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.26",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23919,7 +23916,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.27",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23933,7 +23930,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.28",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23947,7 +23944,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.29",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23961,7 +23958,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.30",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23975,7 +23972,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.31",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -23989,7 +23986,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.32",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -24003,7 +24000,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.33",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -24017,7 +24014,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.profile.career-quick-answers-block.34",
           "source_refs": [
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         }
@@ -24624,7 +24621,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.9",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "links"
@@ -24639,7 +24636,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.10",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24654,7 +24651,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.11",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24669,7 +24666,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.12",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24684,7 +24681,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.13",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24699,7 +24696,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.14",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24714,7 +24711,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.15",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24729,7 +24726,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.16",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24744,7 +24741,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.17",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24759,7 +24756,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24774,7 +24771,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.19",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24789,7 +24786,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.20",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24804,7 +24801,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.21",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24819,7 +24816,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.22",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24834,7 +24831,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.23",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24849,7 +24846,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.24",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24864,7 +24861,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.25",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24879,7 +24876,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.26",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24894,7 +24891,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.27",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24909,7 +24906,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.28",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24924,7 +24921,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.29",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24939,7 +24936,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.30",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24954,7 +24951,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.31",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24969,7 +24966,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.32",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24984,7 +24981,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -24999,7 +24996,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25014,7 +25011,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.35",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25029,7 +25026,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25044,7 +25041,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.37",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25059,7 +25056,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.38",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25074,7 +25071,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.39",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25089,7 +25086,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.40",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25104,7 +25101,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.41",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25119,7 +25116,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.42",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25134,7 +25131,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.43",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25149,7 +25146,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.44",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25164,7 +25161,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.45",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25179,7 +25176,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.46",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25194,7 +25191,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.47",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25209,7 +25206,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.48",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25224,7 +25221,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.49",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25239,7 +25236,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.50",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25254,7 +25251,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.51",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25269,7 +25266,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25284,7 +25281,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.53",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25299,7 +25296,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25314,7 +25311,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25324,12 +25321,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025 年在岗 454,800 人，2025—2035 年预计增长 6%，净增约 27,900 人，年均约 36,300 个空缺；2025 年 5 月中位年薪为 广告与促销经理 $133,660、营销经理 $166,790。该预测为全国口径，未把变化归因于生成式 AI。"
+              "2025 年在岗 454,800 人，2025—2035 年预计增长 6%，净增约 27,900 人，年均约 36,300 个空缺；2025 年 5 月中位年薪为 广告与促销经理 $133,660、营销经理 $166,790。该预测为全国口径，BLS有AI影响广告与促销经理需求的定性解释，但未提供AI单独因果贡献的量化估计。"
             ]
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25344,7 +25341,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.57",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25359,7 +25356,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.58",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25374,7 +25371,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.59",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25389,7 +25386,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25404,7 +25401,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.61",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25419,7 +25416,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.62",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25429,12 +25426,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "「岗位数量与工作重新分配」是另一层问题：即使任务被部分自动化，岗位数量也可能因市场需求与预算变化而增减。BLS 对该合并条目预测 2025—2035 年增长 6%，但未把变化归因于生成式 AI，因此不能用任务暴露推导裁员比例或替代时点。"
+              "「岗位数量与工作重新分配」是另一层问题：即使任务被部分自动化，岗位数量也可能因市场需求与预算变化而增减。BLS 对该合并条目预测 2025—2035 年增长 6%，但BLS同时定性讨论AI可能降低广告与促销经理需求；总体预测未单独量化AI贡献，因此不能用任务暴露推导裁员比例或替代时点。"
             ]
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25449,7 +25446,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25464,7 +25461,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25479,7 +25476,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.66",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25494,7 +25491,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25504,12 +25501,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "最直接的是竞争资料摘要、文案与素材变体、渠道数据汇总与初步归因解释；其次是排期与审批状态的信息化跟进。目标客户选择、定位与定价、预算调整和方案授权仍依赖人的判断与责任。"
+              "编辑建议先试做竞争摘要、文案变体、渠道数据汇总及归因初稿，并记录耗时、错误和返工；本页未取得足以给这些任务排序的实测证据。目标客户、定价、预算与方案授权仍须由负责人核对。"
             ]
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25524,7 +25521,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.69",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25539,7 +25536,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25554,7 +25551,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25569,7 +25566,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25584,7 +25581,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.73",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25599,7 +25596,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25614,7 +25611,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25629,7 +25626,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.76",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25644,7 +25641,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.77",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25659,7 +25656,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.78",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25674,7 +25671,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.79",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25689,7 +25686,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.80",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25704,7 +25701,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.81",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25719,7 +25716,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.82",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25734,7 +25731,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.83",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25749,7 +25746,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.84",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25764,7 +25761,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.85",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25779,7 +25776,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.86",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25794,7 +25791,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.87",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25809,7 +25806,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.88",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25824,7 +25821,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.89",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25839,7 +25836,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.90",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25854,7 +25851,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.91",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25869,7 +25866,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.92",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25884,7 +25881,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.93",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25899,7 +25896,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.94",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25914,7 +25911,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.95",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25929,7 +25926,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.96",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25944,7 +25941,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.97",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25959,7 +25956,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.98",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25974,7 +25971,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.99",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -25989,7 +25986,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.100",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26004,7 +26001,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.101",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26019,7 +26016,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.102",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26034,7 +26031,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.103",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26049,7 +26046,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.104",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26064,7 +26061,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.105",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26079,7 +26076,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.106",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26094,7 +26091,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.107",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26109,7 +26106,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.108",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26124,7 +26121,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.109",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26139,7 +26136,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.110",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26154,7 +26151,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.111",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26169,7 +26166,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.112",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26184,7 +26181,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.113",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26199,7 +26196,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.114",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26214,7 +26211,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.115",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26229,7 +26226,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.116",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26244,7 +26241,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.117",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26259,7 +26256,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.118",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26274,7 +26271,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.119",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26289,7 +26286,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.120",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26304,7 +26301,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.121",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26319,7 +26316,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.ai-impact.ai-impact-table.122",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -26435,7 +26432,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业代理覆盖该行业全部管理岗位，人员类别代理覆盖全部行业，因此都不能拆解为本职业起薪或单岗位报价。"
+              "市场管理职责与中层及以上管理人员分组有交集；各行业参考仅适用于实际归属相应行业的雇主。四项均为规模以上企业管理人员税前年均值，不是本职业薪酬区间，也不代表行业市场岗位。"
             ]
           },
           "id": "advertising-promotions-and-marketing-managers.china-salary.career-snapshot-primary-locale.14",
@@ -27080,7 +27077,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27096,7 +27093,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27112,7 +27109,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27128,7 +27125,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27144,7 +27141,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27160,7 +27157,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27176,7 +27173,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27192,7 +27189,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27208,7 +27205,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27224,7 +27221,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27240,7 +27237,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27249,14 +27246,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 合并职业 2025 年在岗 454,800 人；另据 O*NET，营销经理 2024 年在岗 407,000 人。年份不同，不用于相减。"
+              "BLS 合并职业2025年就业454,800人；同年子职业营销经理421,600人、广告与促销经理33,200人。均为全国就业预测基年规模，不是招聘数量。"
             ]
           },
           "id": "advertising-promotions-and-marketing-managers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair",
+            "combined-manager-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -27272,7 +27270,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27288,7 +27286,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27304,7 +27302,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27320,7 +27318,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27336,7 +27334,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27352,7 +27350,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27368,7 +27366,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27384,7 +27382,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27400,7 +27398,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27416,7 +27414,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27432,7 +27430,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27448,7 +27446,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27464,7 +27462,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27480,7 +27478,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27496,7 +27494,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27512,7 +27510,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27528,7 +27526,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27544,7 +27542,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27588,7 +27586,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27632,7 +27630,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27648,7 +27646,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27664,7 +27662,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27680,7 +27678,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27689,14 +27687,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "小时工资与年薪来自同一 OEWS 口径：年薪按全年全职等效工时折算。实际收入要结合雇主类型、奖金与提成结构判断；两个数字不能与项目制、提成制或当地招聘公告直接比较，也不能换算为个人到手收入或固定月薪。"
+              "BLS OOH合并条目Quick Facts直接列2025年中位年薪165,780美元及79.70美元/小时。这是官方统计口径，不是个人合同小时价或实际工时；OEWS年薪常按2080小时统计换算，不能用于推个人实收。营销经理分位与合并组仍是不同统计对象。"
             ]
           },
           "id": "advertising-promotions-and-marketing-managers.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
             "bls",
-            "oews",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27712,7 +27709,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27728,7 +27725,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27744,7 +27741,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27760,7 +27757,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27776,7 +27773,7 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -27792,7 +27789,21 @@
           "source_refs": [
             "bls",
             "oews",
-            "onet"
+            "onet-cross-repair"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "工资统计期：2025年5月；合并组与各子职业须分别阅读。"
+            ]
+          },
+          "id": "advertising-promotions-and-marketing-managers.us-salary.cross-review-period",
+          "source_refs": [
+            "bls"
           ],
           "type": "prose"
         }
@@ -27933,7 +27944,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.1",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "links"
@@ -27948,7 +27959,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.2",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -27963,7 +27974,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.3",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -27979,7 +27990,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.4",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "list"
@@ -27994,7 +28005,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.5",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28009,7 +28020,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.6",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28024,7 +28035,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.7",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28040,7 +28051,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.8",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "list"
@@ -28055,7 +28066,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.9",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28070,7 +28081,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.riasec-fit-block.9",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28085,7 +28096,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.10",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28100,7 +28111,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.riasec-fit-block.10",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28115,7 +28126,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.11",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28130,7 +28141,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.riasec-fit-block.11",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28146,7 +28157,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.12",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "list"
@@ -28161,7 +28172,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.riasec-fit-block.12",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28176,7 +28187,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.13",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28191,7 +28202,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.14",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28206,7 +28217,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.15",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28222,7 +28233,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.16",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "list"
@@ -28237,7 +28248,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.17",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28252,7 +28263,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.18",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28267,7 +28278,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.19",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28283,7 +28294,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.20",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "list"
@@ -28298,7 +28309,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.21",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28313,7 +28324,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.22",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28328,7 +28339,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.23",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28344,7 +28355,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.24",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "list"
@@ -28359,7 +28370,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.25",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28374,7 +28385,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.26",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28389,7 +28400,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.27",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28404,7 +28415,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.28",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28419,7 +28430,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.29",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28429,13 +28440,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "交付范围较窄，但不覆盖定价与产品组合决策。"
+              "主要侧重广告与促销项目，但可能参与营销策略、产品研发协调；定价和产品组合权限须核具体岗位，不能绝对排除。"
             ]
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.30",
           "source_refs": [
-            "onet",
-            "editor"
+            "editor",
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28449,7 +28460,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.31",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28464,7 +28475,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.32",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28479,7 +28490,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.33",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28494,7 +28505,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.34",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28509,7 +28520,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.35",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28524,7 +28535,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.36",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28539,7 +28550,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.37",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28554,7 +28565,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.38",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28564,13 +28575,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "以成交为核心，不决定市场方案与定价方向。"
+              "主要侧重销售组织与成交；市场方案或定价参与程度须核岗位，不建立绝对互斥。"
             ]
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.39",
           "source_refs": [
-            "onet",
-            "editor"
+            "editor",
+            "onet-cross-repair"
           ],
           "type": "prose"
         },
@@ -28584,7 +28595,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.40",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28599,7 +28610,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.41",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28614,7 +28625,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.42",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28629,7 +28640,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.43",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28644,7 +28655,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.44",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28659,7 +28670,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.45",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28674,7 +28685,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.46",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28689,7 +28700,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.47",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28699,12 +28710,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。外向者在跨团队推动与客户沟通中常更自然，但需要注意给数据与反对意见留出空间，避免过早锁定方案。可用一次 30 分钟方案评审验证：刻意增加提问与等待，再记录他人（虚构角色）是否提出关键风险。这次观察只说明某次沟通的组织方式，不等于整体能力。"
+              "外向偏好可以作为观察线索，但不能保证跨团队推动或客户沟通能力。可做一次模拟方案评审，记录是否问清数据、允许反对意见并解释取舍；这是编辑建议，单次表现不能推断长期胜任。"
             ]
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.48",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28719,7 +28730,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.49",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28734,7 +28745,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.50",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28749,7 +28760,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.51",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28764,7 +28775,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.52",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28779,7 +28790,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.53",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28794,7 +28805,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.54",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28809,7 +28820,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.55",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28824,7 +28835,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.56",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28839,7 +28850,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.57",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28854,7 +28865,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.58",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28869,7 +28880,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.59",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28884,7 +28895,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.60",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28899,7 +28910,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.61",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28914,7 +28925,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.62",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28929,7 +28940,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.63",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28944,7 +28955,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.64",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28959,7 +28970,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.65",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28974,7 +28985,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.fit.personality-fit-block.66",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29032,7 +29043,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.7",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "links"
@@ -29047,7 +29058,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.8",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29062,7 +29073,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.9",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29077,7 +29088,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.10",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29092,7 +29103,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.11",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29107,7 +29118,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.12",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29122,7 +29133,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.13",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29137,7 +29148,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.14",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29152,7 +29163,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.15",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29167,7 +29178,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.16",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29182,7 +29193,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.17",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29197,7 +29208,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.18",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29212,7 +29223,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.19",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29227,7 +29238,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.20",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29242,7 +29253,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.21",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29257,7 +29268,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.22",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29272,7 +29283,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.23",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29287,7 +29298,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.24",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29302,7 +29313,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.25",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29317,7 +29328,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.26",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29332,7 +29343,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.27",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29347,7 +29358,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.28",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29362,7 +29373,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.29",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29377,7 +29388,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.30",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29392,7 +29403,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.31",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29407,7 +29418,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.32",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29422,7 +29433,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.33",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29437,7 +29448,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.34",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29452,7 +29463,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.35",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29467,7 +29478,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.36",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29482,7 +29493,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.37",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29497,7 +29508,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.38",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29512,7 +29523,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.risk.career-risk-cards.39",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29583,7 +29594,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.entry-role-comparison.1",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -29631,7 +29642,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.employer-evidence.1",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -29953,7 +29964,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.credential-decision.1",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -29973,7 +29984,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.credential-boundary.1",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30031,7 +30042,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.10",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30047,7 +30058,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.11",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30063,7 +30074,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.12",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30079,7 +30090,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.13",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30095,7 +30106,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.14",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30111,7 +30122,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.15",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30127,7 +30138,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.16",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30143,7 +30154,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.17",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30159,7 +30170,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.18",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30175,7 +30186,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.19",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30191,7 +30202,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.20",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30207,7 +30218,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.21",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30223,7 +30234,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.22",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30239,7 +30250,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.23",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30255,7 +30266,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.24",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30271,7 +30282,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.25",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30287,7 +30298,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.26",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30303,7 +30314,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.27",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30319,7 +30330,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.28",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30335,7 +30346,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.29",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30351,7 +30362,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.30",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30367,7 +30378,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.31",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30383,7 +30394,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.32",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30399,7 +30410,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.33",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30415,7 +30426,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.34",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30431,7 +30442,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.35",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30447,7 +30458,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.36",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30463,7 +30474,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.37",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30479,7 +30490,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.38",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30495,7 +30506,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.39",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30511,7 +30522,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.40",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30527,7 +30538,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.41",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30543,7 +30554,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.42",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30559,7 +30570,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.43",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30575,7 +30586,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.44",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30591,7 +30602,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.45",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30607,7 +30618,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.46",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30623,7 +30634,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.47",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30639,7 +30650,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.48",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30655,7 +30666,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.49",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30671,7 +30682,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.50",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30687,7 +30698,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.51",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30703,7 +30714,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.52",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30719,7 +30730,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.53",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30735,7 +30746,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.54",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30751,7 +30762,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.55",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30767,7 +30778,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.56",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30783,7 +30794,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.57",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30799,7 +30810,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.58",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30815,7 +30826,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.59",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30831,7 +30842,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.60",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30847,7 +30858,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.61",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30863,7 +30874,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.62",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30879,7 +30890,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.63",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30895,7 +30906,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.64",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30911,7 +30922,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.65",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30927,7 +30938,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.66",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30943,7 +30954,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.67",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30959,7 +30970,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.68",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30975,7 +30986,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.69",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -30991,7 +31002,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.70",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -31007,7 +31018,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.71",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -31023,7 +31034,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.72",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -31039,7 +31050,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.73",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -31055,7 +31066,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.74",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -31071,7 +31082,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.75",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -31087,7 +31098,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.76",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -31103,7 +31114,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.77",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -31119,7 +31130,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.78",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -31135,7 +31146,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.79",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -31151,7 +31162,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.80",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -31167,7 +31178,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.81",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -31183,7 +31194,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.82",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -31199,7 +31210,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.83",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -31215,7 +31226,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.84",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -31231,7 +31242,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.85",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -31247,7 +31258,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.86",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -31263,7 +31274,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.path.career-path-block.87",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "editor"
           ],
@@ -31370,7 +31381,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.7",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "links"
@@ -31380,13 +31391,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 合并职业2025年在岗454,800人，2025—2035年预计增长6%、净增约27,900人、年均约36,300个空缺。另据 O*NET 2024年子职业资料，营销经理407,000人、广告与促销经理27,000人；广告与促销经理2024—2034年分类为下降。不同年份不能相减，也不能推导地区、行业或个人录用机会。"
+              "BLS 合并职业2025年就业454,800人，2025—2035年预计增长6%、净增约27,900人、年均空缺约36,300个。子职业同年营销经理421,600人、预测增长7%；广告与促销经理33,200人、预测下降4%。总体就业预测，非AI单独因果估计；不能推导个人录用机会。"
             ]
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet",
-            "bls"
+            "onet-cross-repair",
+            "bls",
+            "combined-manager-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31400,7 +31412,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31410,12 +31422,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024 年"
+              "2025 年"
             ]
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31430,7 +31442,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31445,7 +31457,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.12",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31460,7 +31472,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31475,7 +31487,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31485,13 +31497,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "407,000 人（2024）"
+              "421,600 人（2025，营销经理）"
             ]
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet",
-            "bls"
+            "onet-cross-repair",
+            "bls",
+            "combined-manager-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31505,7 +31518,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31520,7 +31533,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31535,7 +31548,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31550,7 +31563,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31565,7 +31578,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31580,7 +31593,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31595,7 +31608,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31610,7 +31623,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31620,12 +31633,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024 年；2024—2034 年"
+              "2025 年；2025—2035 年"
             ]
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31635,13 +31648,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "广告与促销经理2024年在岗27,000人；2024—2034年预测分类为下降（-1%或更低），与营销经理和2025—2035合并预测分开读。"
+              "广告与促销经理2025年就业33,200人；2025—2035年预计下降4%、净减约1,200人，O*NET年均空缺约2,300个。与营销经理及合并条目分开读。"
             ]
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet",
-            "bls"
+            "onet-cross-repair",
+            "bls",
+            "combined-manager-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31655,7 +31669,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.26",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31670,7 +31684,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31685,7 +31699,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31695,13 +31709,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "27,000 人"
+              "33,200 人（2025，广告与促销经理）"
             ]
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet",
-            "bls"
+            "onet-cross-repair",
+            "bls",
+            "combined-manager-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -31715,7 +31730,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.30",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31730,7 +31745,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.31",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31745,7 +31760,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.32",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31760,7 +31775,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.33",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31775,7 +31790,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.34",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31790,7 +31805,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.35",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31805,7 +31820,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.36",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31820,7 +31835,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.37",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31835,7 +31850,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.38",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31850,7 +31865,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.39",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31865,7 +31880,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.40",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31880,7 +31895,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.41",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31895,7 +31910,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.42",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31910,7 +31925,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.43",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31925,7 +31940,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.44",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31940,7 +31955,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.45",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31955,7 +31970,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.46",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31970,7 +31985,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.47",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -31985,7 +32000,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.48",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -32000,7 +32015,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.49",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -32015,7 +32030,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.50",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -32030,7 +32045,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.51",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -32045,7 +32060,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.52",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -32060,7 +32075,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.53",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -32075,7 +32090,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.54",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -32090,7 +32105,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.55",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -32105,7 +32120,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.56",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -32120,7 +32135,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.market-signals.market-signal-card.57",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls"
           ],
           "type": "prose"
@@ -32219,7 +32234,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.sources.source-card.1",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "oews",
             "cnclass"
@@ -32236,7 +32251,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.sources.source-card.2",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "oews",
             "cnclass"
@@ -32248,12 +32263,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-09-14"
+              "2026-10-08（本轮限定九板块修订）"
             ]
           },
           "id": "advertising-promotions-and-marketing-managers.sources.source-card.3",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "oews",
             "cnclass"
@@ -32270,7 +32285,7 @@
           },
           "id": "advertising-promotions-and-marketing-managers.sources.source-card.4",
           "source_refs": [
-            "onet",
+            "onet-cross-repair",
             "bls",
             "oews",
             "cnclass"
@@ -32604,6 +32619,38 @@
                 "publisher": "FermatMind 职业内容团队（本页登记）",
                 "scope": "数据缺口登记（中国大陆精确职业工资分布、分省数据与可核验公开招聘样本）",
                 "url": "https://www.stats.gov.cn/"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "就业预测表分别给出合并组、SOC11-2011及SOC11-2021；营销经理基年421,600，增长7%；广告与促销经理33,200，下降4%。"
+                ],
+                "evidence_type": "官方就业预测",
+                "id": "combined-manager-ep-2025-2035",
+                "limitation": "子职业与合并组分开使用；净变化与就业人数各自四舍五入，不以差额重算官方值；未量化AI单独贡献。",
+                "market": "美国",
+                "name": "BLS 广告促销与营销经理合并及子职业就业预测",
+                "period": "基年2025；预测2025—2035；2026-10-08查阅",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "officially_combined",
+                "url": "https://www.bls.gov/ooh/management/advertising-promotions-and-marketing-managers.htm"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "O*NET 与 SOC 11-2021.00 单列营销经理：规划、指导或协调营销政策与方案，识别潜在客户，制定定价策略并监测新产品需求。",
+                  "营销经理子职业2025年421,600人，2025—2035预测7%或以上；2025年工资中位166,790美元/年（80.19美元/小时）。不替代合并组454,800人。",
+                  "受访者中 80% 表示新员工需要学士学位，12% 需要高中文凭或同等学历，6% 需要硕士学位；兴趣代码为 EC。"
+                ],
+                "evidence_type": "官方职业档案",
+                "id": "onet-cross-repair",
+                "limitation": "该O*NET11-2021档案仅营销经理子职业；2025就业421,600及2025—2035增长7%不代表广告、促销与营销合并组，合并组另查BLS。",
+                "market": "美国",
+                "name": "O*NET 11-2021.00 营销经理职业摘要（工资与就业）",
+                "period": "2025工资/就业；2025—2035预测；任务描述",
+                "publisher": "O*NET OnLine（美国劳工部）",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-2021.00"
               }
             ]
           },
@@ -35113,6 +35160,12 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.fermatmind.com/zh/career",
+            "id": "editor",
+            "label": "费马测试编辑风险场景",
+            "scope": "本页编辑归纳，不是法律结论或发生率、控制效果证据。"
           }
         ]
       },
@@ -35697,8 +35750,10 @@
         "heading": "美国广告、促销与市场经理工资多少？",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
-          "$fact": "us-wage-2025",
-          "field": "period"
+          "$item": "advertising-promotions-and-marketing-managers.us-salary.cross-review-period",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
         },
         "industry_rows": [
           {
@@ -37951,7 +38006,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "RIASEC · EC",
@@ -38002,7 +38057,7 @@
       "text": "广告、促销与市场经理"
     }
   },
-  "source_content_sha256": "3e8c3cb65f8d85e9fe68322d4e3e090848e0080712a15fde58243c7e1d4f852e",
+  "source_content_sha256": "eb4afd2c2ba67cfb7493ee6188d33df194388d14df666ff154294f673630dce1",
   "subject": {
     "canonical_slug": "advertising-promotions-and-marketing-managers",
     "name": "广告、促销与市场经理",

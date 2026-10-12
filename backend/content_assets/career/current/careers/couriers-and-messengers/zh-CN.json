@@ -5,11 +5,20 @@
       "fact:china-jiaojiang-featured-daily-2026": {
         "status": "mapped"
       },
+      "fact:china-jiaojiang-featured-daily-2026-g04-current": {
+        "status": "pending_mapping"
+      },
       "fact:employment": {
         "status": "mapped"
       },
+      "fact:employment-g04-current": {
+        "status": "pending_mapping"
+      },
       "fact:growth": {
         "status": "mapped"
+      },
+      "fact:growth-g04-current": {
+        "status": "pending_mapping"
       },
       "fact:high": {
         "status": "pending_mapping"
@@ -20,10 +29,19 @@
       "fact:industry-amusement": {
         "status": "pending_mapping"
       },
+      "fact:industry-amusement-g04-current": {
+        "status": "pending_mapping"
+      },
       "fact:industry-education": {
         "status": "pending_mapping"
       },
+      "fact:industry-education-g04-current": {
+        "status": "pending_mapping"
+      },
       "fact:industry-theater": {
+        "status": "pending_mapping"
+      },
+      "fact:industry-theater-g04-current": {
         "status": "pending_mapping"
       },
       "fact:low": {
@@ -34,6 +52,9 @@
       },
       "fact:openings": {
         "status": "mapped"
+      },
+      "fact:openings-g04-current": {
+        "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
@@ -9063,20 +9084,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.06.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            {
-              "id": "audition-feedback"
-            },
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.06.mitigation": {
         "ref": {
@@ -22711,7 +22720,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "按派单与路线推进：先领取物件与投递信息并核对、按线路分拣并规划路线，"
+              "编辑流程示例：领取物件与投递信息、核对清单、沿路排序并规划取送，完成约定交付及记录；实际分工、品类条件与异常处理按单位流程和适用法规核。"
             ]
           },
           "id": "actors.profile.work-context-block.4",
@@ -22739,7 +22748,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "协作与汇报关系｜与同组同事、调度、网点与客服按流程协作，"
+              "协作与汇报关系｜取送协作｜与同组、调度、网点和客服沟通物件、交付信息与待处理记录；实际权限和分工须核对。"
             ]
           },
           "id": "actors.profile.work-context-block.6",
@@ -22781,12 +22790,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "快递员的工作可以分成三类相连但独立的工作面。第一类是领取派单与规划路线：接收待投递的物件与投递信息（收件人姓名、地址、电话与投递说明），按投递线路分拣、规划并遵循最省时的路线，并在装载时核对清单、对危险品采取预防措施。第二类是取件送件与记录签收：步行、骑行、驾车或乘公共交通到点投递与收取信件、文件、包裹等物品，在机构内部部门之间或机构之间往返，取得签收或收取款项，记录收取与投递的物品及收件人回应，送件后与本单位确认并接收新的指示。第三类是卸车分拣与事务支持：卸下沿线收集的物品并分拣、把大车货物转装到小型配送车辆、拆封分拣与分发来件，完成车辆例行维护（检查油液、补给燃料）并承担一般收发与文书事务。三类工作面在同一班次高频交替，但依据、责任与授权不同；机构内部信使、同城配送与医疗取送等场景的侧重也不同。"
+              "编辑归纳接收路线、到点取送、分拣事务三面，组合随单位；美国43-5021.00的16项任务为10Core、6Supplemental：Core含医疗记录、标本及药品取送、步行骑车驾车或公共交通、清单装载与危险物品预防、接收物品及投递信息、机构与住家取送文件报纸包裹、记录物品与回应、卸车分拣、沿路排序、规划省时路线、油液燃料等例行维护；Supplemental含签名或安排付款、大车转小车、拆封分拣来件、送后联系本单位、电话口头传信和一般文书差事。Core不等每日频次，Supplemental不等每岗必做。 中国需另核：中国《快递暂行条例》第5/31/34条禁止私拆快件及违法寄递禁限寄品：收寄前发现禁止寄递物应拒收，已收寄发现疑似禁止寄递物须立即停止分拣运输投递并依法处理、涉嫌犯罪报告配合；其余禁限寄按规定处理。美国危险物品预防任务不是中国承运许可。具体单位处置、解除中止和恢复程序未取得，不自行补授权。中国《快递市场管理办法》第27–28条：告知验收权，明显破损或易碎品告知检查内件或拒收；签字或其他可辨认可保存的明示确认可证明收到，不能面交需与用户约定方式，未经同意不得代为确认或投智能柜、服务站。代收款项仅适用实际业务，不是每次必收。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-rule",
+            "g04-cn-market"
           ],
           "type": "prose"
         },
@@ -22809,7 +22820,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "接收物件与投递信息 → 核对清单与地址 → 按线路分拣 → 规划最省时路线 → 装载车辆并注意危险品 → 确认出发"
+              "接收核对→沿路排序与路线→按清单装载；中国禁限寄核法定受理规则，不以危险品预防替代许可。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.camera.steps",
@@ -22851,7 +22862,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按时到点取送 → 核对收件人与件数 → 取得签收或代收款项 → 记录收取与投递 → 送件后回单位确认 → 接收新的指示"
+              "按实际派单取送→核收件人件数→依法定或约定方式确认收到，适用时安排收款→如实记录；送后联系单位为美国Supplemental。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.stage.steps",
@@ -22893,7 +22904,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "沿线收集物品卸车 → 按路线分拣 → 大车货物转装小型车 → 拆封分拣来件 → 车辆例行维护 → 承担收发与文书事务"
+              "美国卸车分拣及例行维护为Core，转装、拆封来件及文书为Supplemental；中国可开拆快件总包不等私拆单件。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.shared.value",
@@ -23257,7 +23268,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "要核对件数、地址、收件人与投递说明，确认没有错件、缺件或信息不符；只按派单出发而不核对，会送错、漏送或造成赔付争议。"
+              "编辑风险分析：要核对件数、地址、收件人与投递说明，确认没有错件、缺件或信息不符；只按派单出发而不核对，可能送错、漏送或造成赔付争议。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.01.question",
@@ -23271,7 +23282,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "要按线路、时效与路况规划最省时的顺序，兼顾收件时间窗；只按习惯路线走会让准点率下降并增加空驶。"
+              "编辑风险分析：要按线路、时效与路况规划最省时的顺序，兼顾收件时间窗；只按习惯路线走可能增加延误风险并增加空驶。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.02.question",
@@ -23285,12 +23296,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "要按清单正确装载、对危险品采取预防措施并保证固定与安全；装载不当会造成物品损坏、破损或安全隐患。"
+              "中国《快递暂行条例》第5/31/34条禁止私拆快件及违法寄递禁限寄品：收寄前发现禁止寄递物应拒收，已收寄发现疑似禁止寄递物须立即停止分拣运输投递并依法处理、涉嫌犯罪报告配合；其余禁限寄按规定处理。美国危险物品预防任务不是中国承运许可。具体单位处置、解除中止和恢复程序未取得，不自行补授权。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.03.question",
           "source_refs": [
-            "onet"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -23299,12 +23310,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "要取得签收或代收款项并当场核对，开具或记录凭证；签收缺失或款项差错会造成交付无法证明与账实不符。"
+              "中国《快递市场管理办法》第27–28条：告知验收权，明显破损或易碎品告知检查内件或拒收；签字或其他可辨认可保存的明示确认可证明收到，不能面交需与用户约定方式，未经同意不得代为确认或投智能柜、服务站。代收款项仅适用实际业务，不是每次必收。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.04.question",
           "source_refs": [
-            "onet"
+            "g04-cn-market"
           ],
           "type": "prose"
         },
@@ -23327,7 +23338,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "要及时记录收取与投递的物品、收件人回应与未送达原因；只记「已送」不记时间与状态，会让后续核对与追责失去依据。"
+              "编辑风险分析：要及时记录收取与投递的物品、收件人回应与未送达原因；只记「已送」不记时间与状态，可能增加后续核对与追责难度。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.05.question",
@@ -23355,12 +23366,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "遇到无法投递、物品破损、收件人争议、道路与天气风险或超出授权的情形，要停止自行处置，向调度或主管核对后升级，把已处理与待确认事项写进记录。"
+              "中国《快递暂行条例》27条无法投递应退寄件人或按寄件人要求处理；破损、争议、路况及超权限情形按实际规则核对交接，不将所有异常统一写成停工，也不授予员工独立赔付及恢复权限。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.06.question",
           "source_refs": [
-            "onet"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -23397,12 +23408,13 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "装载出发｜按清单装载并注意危险品｜按清单把物品正确装载到车辆，对危险品采取预防措施并保证物品固定安全，然后按路线出发。"
+              "清单装载为美国Core，涉及危险品的中国处理须区分禁限寄受理及已收寄情况；中国《快递暂行条例》第5/31/34条禁止私拆快件及违法寄递禁限寄品：收寄前发现禁止寄递物应拒收，已收寄发现疑似禁止寄递物须立即停止分拣运输投递并依法处理、涉嫌犯罪报告配合；其余禁限寄按规定处理。美国危险物品预防任务不是中国承运许可。具体单位处置、解除中止和恢复程序未取得，不自行补授权。"
             ]
           },
           "id": "actors.display.responsibilities_block.03",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -23411,7 +23423,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "取件送件｜到点投递与收取｜步行、骑行、驾车或乘公共交通到点，在机构内部部门之间或机构之间投递与收取信件、文件、包裹等物品。"
+              "美国Core除文件包裹取送也含医疗记录标本及药品；具体品类运输条件与培训需按实际规则核，不由任务档案授予医疗操作权限。"
             ]
           },
           "id": "actors.display.responsibilities_block.04",
@@ -23425,12 +23437,13 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "签收与收款｜取得签收或代收款项｜取得收件人签收或收取款项，记录收取与投递的物品及收件人回应，送件后与本单位确认并接收新的指示。"
+              "记录物品及回应为Core，签名与安排付款、送后联系单位为Supplemental；中国确认收件按法规和用户约定。中国《快递市场管理办法》第27–28条：告知验收权，明显破损或易碎品告知检查内件或拒收；签字或其他可辨认可保存的明示确认可证明收到，不能面交需与用户约定方式，未经同意不得代为确认或投智能柜、服务站。代收款项仅适用实际业务，不是每次必收。"
             ]
           },
           "id": "actors.display.responsibilities_block.05",
           "source_refs": [
-            "onet"
+            "onet",
+            "g04-cn-market"
           ],
           "type": "prose"
         },
@@ -23439,12 +23452,13 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "卸车分拣与事务｜卸车分拣并完成维护｜卸下沿线收集的物品并分拣、把大车货物转装到小型配送车辆、拆封分拣与分发来件，完成车辆例行维护并承担一般收发与文书事务。"
+              "卸车沿路分拣、油液燃料例行维护为Core；大车转小车、拆封分发及一般文书、电话口头传信为Supplemental，中国禁止私拆快件。"
             ]
           },
           "id": "actors.display.responsibilities_block.06",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -23467,7 +23481,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "快递员的工作在道路上与室内外交替进行，需要长时间驾驶、骑行或行走，并高频使用电话与到点人员沟通，面对时间压力与天气变化；"
+              "美国每日电话97%、面对面75%、时间压力74%；坐30%几乎一直65%超过半时合95%，不能一概长时行走或户外作业。"
             ]
           },
           "id": "actors.display.work_context_block.summary",
@@ -23481,7 +23495,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作场所｜O*NET 2026 年对快递员（43-5021.00）的调查：23% 表示从不在环境可控的室内作业，20% 表示每月一次以上要在户外各种天气条件下工作，13% 表示从不在封闭车辆内或操作封闭设备；工作以道路、户外与车辆为主。"
+              "美国走36%少半、30%从不，站41%少半、25%从不；23%从不在可控室内、13%从不在封闭车辆，不能由未显示响应推主要环境。户外各种天气20%每月但非每周、20%每年但非每月，不当每月至少20%。"
             ]
           },
           "id": "actors.display.work_context_block.locations",
@@ -23509,12 +23523,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "再装载出发、到点取送、取得签收或代收款项并记录；遇到无法投递、物品破损、道路与天气风险或超出授权的情形时停止自行处置并升级；交班前卸车分拣、更新记录并确认待办。"
+              "编辑顺序建议为装载取送、约定确认、适用收款及记录交接；中国《快递暂行条例》27条无法投递应退寄件人或按寄件人要求处理；破损、争议、路况及超权限情形按实际规则核对交接，不将所有异常统一写成停工，也不授予员工独立赔付及恢复权限。"
             ]
           },
           "id": "actors.display.work_context_block.organization",
           "source_refs": [
-            "onet"
+            "cn-rule",
+            "g04-cn-market"
           ],
           "type": "prose"
         },
@@ -23523,7 +23538,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "节奏与强度｜O*NET 2026 年对快递员（43-5021.00）的调查：74% 表示每天面对时间压力，55% 表示每天都需作出决定，69% 认为重复同一任务至少「非常重要」，14% 认为准确与严谨至少「比较重要」；派单高峰与收件时间窗决定当日节奏。"
+              "美国74%每日时间压力、55%每日决定；重复69%很重要、20%不重要，准确14%比较重要且其余等级未显示，不当至少14%；95%周40小时、91%规律排班，不证明中国旺季客流。页面更新2026不等统一同年调查。"
             ]
           },
           "id": "actors.display.work_context_block.schedule",
@@ -23537,7 +23552,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "并向调度或主管汇报投递异常与待办；O*NET 2026 年对快递员（43-5021.00）的调查：97% 表示每天有电话沟通、75% 每天有面对面讨论，70% 表示与他人持续接触，35% 认为在协调或带领他人完成工作上至少「非常重要」。"
+              "美国电话97%每日、面对面75%每日24%每周但非每日、持续接触70%；协调35%很重要20%重要34%比较重要，其余未显示，不写至少很重要35%。"
             ]
           },
           "id": "actors.display.work_context_block.collaboration",
@@ -23551,7 +23566,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "复核与责任链条｜O*NET 2026 年对快递员（43-5021.00）的调查：80% 表示在决策上有较多自由、44% 表示在确定任务与优先级上有较多自由，39% 表示对他人工作结果承担很高责任、35% 认为对同事或公司结果的影响至少「重要」；投递、签收与款项按单位制度留痕，投递异常与破损赔付须按程序升级并存档。"
+              "美国决策80%很多20%一些；优先级44%很多36%一些15%有限；他人工作责任39%很高15%高21%中等24%无；影响结果19%很重要35%重要合54%，25%中等20%无。不由调查授予赔付权限。"
             ]
           },
           "id": "actors.display.work_context_block.review",
@@ -23565,12 +23580,15 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "质量与职业要求｜O*NET 2026 年对快递员（43-5021.00）的调查：40% 认为与外部客户或公众打交道至少「非常重要」，43% 表示每月一次以上要与不愉快、愤怒或无礼的人打交道，30% 表示每天处于过亮或不足的照明条件、20% 表示每周一次以上暴露于疾病或传染源；涉及收件人信息、签收、代收款项与危险品处理时以单位流程与适用规定为准，本页不构成作业授权。"
+              "美国外部客户25%极重要40%很重要合65%；无礼20%每日21%每周43%每月16%每年，冲突19%每日20%每周21%每月20%每年20%从不；感染源20%每周20%每月12%从不，非疾病发生率。照明30%每日；自动化14%完全26%中16%轻40%无，非GenAI采用。中国《快递暂行条例》23/35条、《快递市场管理办法》35–37条及个人信息保护法：依法核适用收寄身份与信息，信件和安全协议用户等例外另核；身份信息除姓名地址电话不得记运单，履约最小必要并安全管理，员工不得非法泄露。姓名地址电话不一概属敏感个人信息，医疗健康等按法定条件核。信息处理者承担制度审计及事件处置义务，员工按真实权限报告，不授予全部处置职责。"
             ]
           },
           "id": "actors.display.work_context_block.quality",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-rule",
+            "g04-cn-market",
+            "g04-pipl"
           ],
           "type": "prose"
         },
@@ -23593,7 +23611,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "快递员的任务、详细工作活动、工作情境百分比与兴趣代码 CR"
+              "美国43-5021.00的16项任务为10Core、6Supplemental：Core含医疗记录、标本及药品取送、步行骑车驾车或公共交通、清单装载与危险物品预防、接收物品及投递信息、机构与住家取送文件报纸包裹、记录物品与回应、卸车分拣、沿路排序、规划省时路线、油液燃料等例行维护；Supplemental含签名或安排付款、大车转小车、拆封分拣来件、送后联系本单位、电话口头传信和一般文书差事。Core不等每日频次，Supplemental不等每岗必做。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.onet",
@@ -23607,7 +23625,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2024 年就业约 247,200 人、预测标签 Much faster than average（7% 或更高）与 Job Zone 1–2（SVP 低于 6.0）"
+              "美国本岗2025就业228,900人，2035预测247,100人；2025—2035增长8%，年均空缺23,800个含增长与替换，不是十年累计或每年净增。端点相差约18,200人受舍入影响。预测不等个人录用率或AI因果。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
@@ -23621,7 +23639,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2024 年行业分布（医疗保健与社会援助 11%、其他行业 89%）与技术工具"
+              "美国2025行业就业分布医疗保健与社会援助11%、其他行业89%含运输仓储；不是工资或中国雇主分布，不推未披露行业与自雇细分。美国JobZone1–2、SVP<6为跨职业准备层级，几天至一年训练是层级概述而非每人时长；本岗新聘教育响应80%高中或同等、13%部分大学无学位、7%未高中毕业，不是中国门槛。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
@@ -23635,12 +23653,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆快递与取送岗位的分类与用工语境，与中国职业级工资缺口"
+              "中国就业培训技术指导中心2022职业画像明确快递员4-02-07-08，下设快件揽收员、快件派送员，含揽收验视封装称重收费、票款交接、开拆快件总包与按址分装投递、改退、客户维护推广及投诉赔偿诉求。开拆总包不等私拆收件人快件；不与覆盖内部信使和医疗取送的美国43-5021精确一一对应。画像学历为初中或同等、列五级至一级技能等级，不据此认定证书为全国强制准入。中国《快递暂行条例》第5/31/34条禁止私拆快件及违法寄递禁限寄品：收寄前发现禁止寄递物应拒收，已收寄发现疑似禁止寄递物须立即停止分拣运输投递并依法处理、涉嫌犯罪报告配合；其余禁限寄按规定处理。美国危险物品预防任务不是中国承运许可。具体单位处置、解除中止和恢复程序未取得，不自行补授权。中国《快递市场管理办法》第27–28条：告知验收权，明显破损或易碎品告知检查内件或拒收；签字或其他可辨认可保存的明示确认可证明收到，不能面交需与用户约定方式，未经同意不得代为确认或投智能柜、服务站。代收款项仅适用实际业务，不是每次必收。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
           "source_refs": [
-            "onet"
+            "g04-cn-class",
+            "cn-rule",
+            "g04-cn-market"
           ],
           "type": "prose"
         },
@@ -23649,12 +23669,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆行业均值代理与职业级工资缺口"
+              "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23663,12 +23683,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "快递员在美国对应 O*NET-SOC 43-5021.00（Couriers and Messengers）。工作内容包括在机构内部或机构之间取送与投递信件、文件、包裹等物品：接收物件与投递信息、按线路分拣并规划最省时的路线、按清单装载车辆并注意危险品、步行骑行驾车或乘公共交通到点投递与收取、记录收取与投递的物品及收件人回应、取得签收或代收款项、卸车分拣、把大车货物转装小型车、拆封分拣与分发来件、完成车辆例行维护并承担一般收发与文书事务。中国侧，同类岗位多称快递员、同城配送、送件员或单位内部信使与收发员，中美两套分类不是一一对应：本页不把美国的准备层级、工资或资格套用到中国大陆，也不把轻型卡车司机、货物与货运代理、发运收货与库存文员、运输调度员、邮件文员或邮政邮件投递员的职责并入本职业。"
+              "美国43-5021.00覆盖机构与住家取送及医疗记录标本药品，不等中国单一快递员细类。美国43-5021.00的16项任务为10Core、6Supplemental：Core含医疗记录、标本及药品取送、步行骑车驾车或公共交通、清单装载与危险物品预防、接收物品及投递信息、机构与住家取送文件报纸包裹、记录物品与回应、卸车分拣、沿路排序、规划省时路线、油液燃料等例行维护；Supplemental含签名或安排付款、大车转小车、拆封分拣来件、送后联系本单位、电话口头传信和一般文书差事。Core不等每日频次，Supplemental不等每岗必做。中国就业培训技术指导中心2022职业画像明确快递员4-02-07-08，下设快件揽收员、快件派送员，含揽收验视封装称重收费、票款交接、开拆快件总包与按址分装投递、改退、客户维护推广及投诉赔偿诉求。开拆总包不等私拆收件人快件；不与覆盖内部信使和医疗取送的美国43-5021精确一一对应。画像学历为初中或同等、列五级至一级技能等级，不据此认定证书为全国强制准入。"
             ]
           },
           "id": "actors.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "onet",
+            "g04-cn-class"
           ],
           "type": "prose"
         }
@@ -24166,7 +24187,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "指机构是否真的把工具放进流程。采用取决于预算、系统集成、车辆与网点条件以及人员培训，通常慢于技术能力本身。"
+              "组织采用需核预算集成车辆网点及培训；未取采用速度实测，不保证通常慢于技术能力。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.3",
@@ -24181,7 +24202,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "引入工具时责任不能随系统一起转移；下面是本职业可执行的人工控制步骤。"
+              "以下人工核对为编辑建议，按真实流程验证；中国法定禁限寄、隐私和交付条件另核，不当统一可执行流程。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.4",
@@ -24226,7 +24247,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下一步：把上面三类任务变化与具体取送场景逐项核对——哪些环节已经由路线规划、电子面单或智能柜承担，哪些仍需人工判断，以及谁对签收、代收款项与物品安全负责。"
+              "核目标单位是否已部署、实际效果及人工权限；本轮未取得本岗部署样本。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.7",
@@ -24256,7 +24277,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "列出雇主招聘中提到的邮件、办公套件、路线导航与表格、文字处理等技术关键词。"
+              "O*NET转引Lightcast2025全美招聘热门技术仅4项：Office2%、Excel2%、Outlook1%、Word1%；未列路线导航。关键词比例不等采用率、熟练度、生成式AI效果。任务中的路线规划另有依据，不混同招聘表。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.9",
@@ -24286,7 +24307,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答：目前可核对的是任务层面的变化，而不是岗位替代的时间表。路线规划与导航、派单与电子面单、投递状态回传与自动通知、收件人自助寄取与智能柜可减少手工规划、登记与部分交接；但到点取送、面对面交付与签收、道路与天气下的现场判断、物品检查与危险品处理、以及异常与赔付的处置仍依赖人工，并受单位规程与安全要求约束。技术暴露不等于组织采用，更不等于岗位消失或收入变化。"
+              "编辑待验证机会：路线规划派单、电子面单状态通知、柜体及自助寄取；常规数字化不等GenAI，未取本岗采用率、节约量、编制或工资因果。中国未经用户同意不得代确认或投柜站，具体品类与确认方式依法核。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24361,7 +24382,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "研究不提供本职业单职业分数、采用率或替代日期。"
+              "ILO任务暴露方法，本轮匹配职业分数未取得，不断言研究无单职业分数；不代表采用率或替代日期。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.limit",
@@ -24391,13 +24412,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "列出领取派单、规划路线、装载取送、记录签收、卸车分拣与车辆维护等任务及工作情境百分比。"
+              "美国43-5021.00的16项任务为10Core、6Supplemental：Core含医疗记录、标本及药品取送、步行骑车驾车或公共交通、清单装载与危险物品预防、接收物品及投递信息、机构与住家取送文件报纸包裹、记录物品与回应、卸车分拣、沿路排序、规划省时路线、油液燃料等例行维护；Supplemental含签名或安排付款、大车转小车、拆封分拣来件、送后联系本单位、电话口头传信和一般文书差事。Core不等每日频次，Supplemental不等每岗必做。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24421,7 +24441,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势（BLS 2024—2034 年预测）"
+              "O*NET转引BLS2025—2035就业预测"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.object",
@@ -24436,13 +24456,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2024 年就业约 247,200 人，预测标签 Much faster than average（7% 或更高），累计约 27,900 个含增长与替换的空缺。"
+              "美国本岗2025就业228,900人，2035预测247,100人；2025—2035增长8%，年均空缺23,800个含增长与替换，不是十年累计或每年净增。端点相差约18,200人受舍入影响。预测不等个人录用率或AI因果。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "bls"
           ],
           "type": "prose"
         },
@@ -24481,7 +24500,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "要求明确 AI 系统的角色、责任、记录与人工监督。"
+              "NIST自愿AI治理建议角色责任、记录及人工监督，不代中国强制寄递法规。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.conclusion",
@@ -24526,7 +24545,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 为快递员（43-5021.00）列出按线路分拣并规划最省时路线、到点投递与收取信件文件与包裹、记录收取与投递的物品及收件人回应、取得签收或代收款项、装载与卸车并转装小型车、完成车辆例行维护以及拆封分拣来件并承担收发与文书事务等任务。"
+              "美国43-5021.00的16项任务为10Core、6Supplemental：Core含医疗记录、标本及药品取送、步行骑车驾车或公共交通、清单装载与危险物品预防、接收物品及投递信息、机构与住家取送文件报纸包裹、记录物品与回应、卸车分拣、沿路排序、规划省时路线、油液燃料等例行维护；Supplemental含签名或安排付款、大车转小车、拆封分拣来件、送后联系本单位、电话口头传信和一般文书差事。Core不等每日频次，Supplemental不等每岗必做。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.1.answer",
@@ -24556,7 +24575,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 技术档案列出雇主在该岗位招聘中提到的邮件、办公套件、路线导航以及表格与文字处理等技术关键词；这属于招聘市场信号，不代表使用率或熟练度。"
+              "O*NET转引Lightcast2025全美招聘热门技术仅4项：Office2%、Excel2%、Outlook1%、Word1%；未列路线导航。关键词比例不等采用率、熟练度、生成式AI效果。任务中的路线规划另有依据，不混同招聘表。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
@@ -24631,7 +24650,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）显示该细分 2024 年约 247,200 人，预测标签为 Much faster than average（7% 或更高），累计约 27,900 个含增长与替换的空缺；该预测不含技术替代时点。"
+              "美国本岗2025就业228,900人，2035预测247,100人；2025—2035增长8%，年均空缺23,800个含增长与替换，不是十年累计或每年净增。端点相差约18,200人受舍入影响。预测不等个人录用率或AI因果。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
@@ -24751,7 +24770,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供本职业岗位雇主提到的技术关键词，属招聘市场信号"
+              "O*NET转引Lightcast2025全美招聘热门技术仅4项：Office2%、Excel2%、Outlook1%、Word1%；未列路线导航。关键词比例不等采用率、熟练度、生成式AI效果。任务中的路线规划另有依据，不混同招聘表。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.scope",
@@ -24781,7 +24800,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按任务度量生成式 AI 与职业任务的接近程度，不提供单职业分数或自动化率"
+              "ILO任务暴露方法，匹配分数本轮未取，不等采用率。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
@@ -24871,7 +24890,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供该细分 2024—2034 年就业预测与职位空缺（O*NET 就业趋势页，基于 BLS 预测）"
+              "美国本岗2025就业228,900人，2035预测247,100人；2025—2035增长8%，年均空缺23,800个含增长与替换，不是十年累计或每年净增。端点相差约18,200人受舍入影响。预测不等个人录用率或AI因果。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
@@ -24901,7 +24920,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供 AI 系统风险治理的角色、责任、记录与人工监督要求"
+              "NIST自愿治理建议，不代中国交付、隐私和禁限寄规定。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.nist.scope",
@@ -24991,7 +25010,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "路线规划与导航系统可自动排序并提示路线。"
+              "编辑待验证机会，非部署及效果实测：路线规划与导航系统可自动排序并提示路线。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.1.change",
@@ -25051,7 +25070,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "电子面单与状态回传可自动更新进度。"
+              "编辑待验证机会，非部署及效果实测：电子面单与状态回传可自动更新进度。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.2.change",
@@ -25066,13 +25085,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "到点确认收件人、取得签收并处理投递失败等例外。"
+              "中国《快递市场管理办法》第27–28条：告知验收权，明显破损或易碎品告知检查内件或拒收；签字或其他可辨认可保存的明示确认可证明收到，不能面交需与用户约定方式，未经同意不得代为确认或投智能柜、服务站。代收款项仅适用实际业务，不是每次必收。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.2.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-cn-market"
           ],
           "type": "prose"
         },
@@ -25111,7 +25129,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "移动终端可自动记录时间与状态。"
+              "编辑待验证机会，非部署及效果实测：移动终端可自动记录时间与状态。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.change",
@@ -25156,7 +25174,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "取得签收或代收款项"
+              "美国Supplemental：取得签名或安排收件人付款，非每次代收。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.task",
@@ -25171,7 +25189,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "电子签收与移动支付可减少手工凭证。"
+              "编辑待验证机会，非部署及效果实测：电子签收与移动支付可减少手工凭证。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.change",
@@ -25186,13 +25204,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核对签收与款项、处理争议并承担款项责任。"
+              "中国《快递市场管理办法》第27–28条：告知验收权，明显破损或易碎品告知检查内件或拒收；签字或其他可辨认可保存的明示确认可证明收到，不能面交需与用户约定方式，未经同意不得代为确认或投智能柜、服务站。代收款项仅适用实际业务，不是每次必收。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-cn-market"
           ],
           "type": "prose"
         },
@@ -25231,7 +25248,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "装卸设备与扫码可辅助清点。"
+              "编辑待验证机会，非部署及效果实测：装卸设备与扫码可辅助清点。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.change",
@@ -25246,13 +25263,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按清单核对件数与固定，判断危险品处理并登记。"
+              "中国《快递暂行条例》第5/31/34条禁止私拆快件及违法寄递禁限寄品：收寄前发现禁止寄递物应拒收，已收寄发现疑似禁止寄递物须立即停止分拣运输投递并依法处理、涉嫌犯罪报告配合；其余禁限寄按规定处理。美国危险物品预防任务不是中国承运许可。具体单位处置、解除中止和恢复程序未取得，不自行补授权。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -25291,7 +25307,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "车辆自检与状态监测可提示异常。"
+              "编辑待验证机会，非部署及效果实测：车辆自检与状态监测可提示异常。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.change",
@@ -25351,7 +25367,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "分拣设备与邮件处理系统可辅助处理。"
+              "编辑待验证机会，非部署及效果实测：分拣设备与邮件处理系统可辅助处理。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.7.change",
@@ -25396,7 +25412,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "路线规划与导航、派单系统可自动排序并提示最省时路线。"
+              "编辑待验证机会，非AI因果或部署实测：路线规划与导航、派单系统可自动排序并提示最省时路线。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.1.change",
@@ -25441,7 +25457,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "电子面单与状态回传可自动更新投递进度并通知收件人。"
+              "编辑待验证机会，非AI因果或部署实测：电子面单与状态回传可自动更新投递进度并通知收件人。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.2.change",
@@ -25456,13 +25472,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "到点确认收件人、取得签收并处理投递失败与代收款项等例外。"
+              "中国《快递市场管理办法》第27–28条：告知验收权，明显破损或易碎品告知检查内件或拒收；签字或其他可辨认可保存的明示确认可证明收到，不能面交需与用户约定方式，未经同意不得代为确认或投智能柜、服务站。代收款项仅适用实际业务，不是每次必收。中国《快递暂行条例》27条无法投递应退寄件人或按寄件人要求处理；破损、争议、路况及超权限情形按实际规则核对交接，不将所有异常统一写成停工，也不授予员工独立赔付及恢复权限。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.2.human-responsibility",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-cn-market",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -25486,7 +25502,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "智能柜与自助寄取点可减少面对面交接与等待。"
+              "编辑待验证机会，非AI因果或部署实测：智能柜与自助寄取点可减少面对面交接与等待。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.3.change",
@@ -25501,13 +25517,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断物品是否适配柜体、处理超尺寸与破损，并承担交付确认责任。"
+              "中国《快递市场管理办法》第27–28条：告知验收权，明显破损或易碎品告知检查内件或拒收；签字或其他可辨认可保存的明示确认可证明收到，不能面交需与用户约定方式，未经同意不得代为确认或投智能柜、服务站。代收款项仅适用实际业务，不是每次必收。 核柜体与物品适配不是投柜的充分授权。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.3.human-responsibility",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-cn-market"
           ],
           "type": "prose"
         },
@@ -25531,7 +25546,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核对件数、地址、收件人与投递说明，确认没有被错误匹配、覆盖或重复；输入错误会直接导致错送与漏送。"
+              "编辑风险分析：核对件数、地址、收件人与投递说明，确认没有被错误匹配、覆盖或重复；输入错误可能导致错送与漏送。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.1.description",
@@ -25561,13 +25576,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对装载固定、危险品处理、签收与代收款项保留人工复核，不以系统状态替代现场核对。"
+              "中国《快递暂行条例》第5/31/34条禁止私拆快件及违法寄递禁限寄品：收寄前发现禁止寄递物应拒收，已收寄发现疑似禁止寄递物须立即停止分拣运输投递并依法处理、涉嫌犯罪报告配合；其余禁限寄按规定处理。美国危险物品预防任务不是中国承运许可。具体单位处置、解除中止和恢复程序未取得，不自行补授权。中国《快递市场管理办法》第27–28条：告知验收权，明显破损或易碎品告知检查内件或拒收；签字或其他可辨认可保存的明示确认可证明收到，不能面交需与用户约定方式，未经同意不得代为确认或投智能柜、服务站。代收款项仅适用实际业务，不是每次必收。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.2.description",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "cn-rule",
+            "g04-cn-market"
           ],
           "type": "prose"
         },
@@ -25621,13 +25636,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "发现无法投递、物品破损、收件人争议、道路与天气风险或超出授权时停止自行处置并按程序升级。"
+              "中国《快递暂行条例》27条无法投递应退寄件人或按寄件人要求处理；破损、争议、路况及超权限情形按实际规则核对交接，不将所有异常统一写成停工，也不授予员工独立赔付及恢复权限。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.4.description",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -25681,7 +25695,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "系统不会对错送、漏送或投递争议承担责任，误信会积累投诉与赔付。"
+              "错误路线或状态可能引发错送争议；法律责任按实际主体和事实确定，不称所有系统提供者都不承担责任。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.1.consequence",
@@ -25726,7 +25740,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只求送达而跳过签收或漏记代收款项，会让交付无法证明、账实不符。"
+              "未按约定或法定方式确认交付、漏记实际款项可能妨碍追溯；签字不是唯一合法确认方式。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.2.consequence",
@@ -25741,13 +25755,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按规程取得签收或代收凭证并当场核对，缺项当场补齐，不事后补记。"
+              "中国《快递市场管理办法》第27–28条：告知验收权，明显破损或易碎品告知检查内件或拒收；签字或其他可辨认可保存的明示确认可证明收到，不能面交需与用户约定方式，未经同意不得代为确认或投智能柜、服务站。代收款项仅适用实际业务，不是每次必收。 差错按真实程序更正留轨，不虚构绝对禁止事后补记。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.2.control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-cn-market"
           ],
           "type": "prose"
         },
@@ -25771,7 +25784,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "装载不当或忽略危险品预防会造成物品损坏、破损与安全隐患。"
+              "违规收寄和装载可能损伤物品及安全；美国危险物品预防不授权中国承运。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.3.consequence",
@@ -25786,13 +25799,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按清单装载并固定、对危险品采取预防措施，异常按规程上报，不擅自处置。"
+              "中国《快递暂行条例》第5/31/34条禁止私拆快件及违法寄递禁限寄品：收寄前发现禁止寄递物应拒收，已收寄发现疑似禁止寄递物须立即停止分拣运输投递并依法处理、涉嫌犯罪报告配合；其余禁限寄按规定处理。美国危险物品预防任务不是中国承运许可。具体单位处置、解除中止和恢复程序未取得，不自行补授权。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.3.control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -25816,13 +25828,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "收件人姓名、地址与电话属敏感数据，越权访问或传播会造成合规与信任后果。"
+              "中国《快递暂行条例》23/35条、《快递市场管理办法》35–37条及个人信息保护法：依法核适用收寄身份与信息，信件和安全协议用户等例外另核；身份信息除姓名地址电话不得记运单，履约最小必要并安全管理，员工不得非法泄露。姓名地址电话不一概属敏感个人信息，医疗健康等按法定条件核。信息处理者承担制度审计及事件处置义务，员工按真实权限报告，不授予全部处置职责。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.4.consequence",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "cn-rule",
+            "g04-cn-market",
+            "g04-pipl"
           ],
           "type": "prose"
         },
@@ -25861,7 +25874,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "赶时效或恶劣天气下冒险行驶会造成人身与车辆事故。"
+              "编辑风险分析：赶时效或恶劣天气下冒险行驶可能造成人身与车辆事故。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.5.consequence",
@@ -26033,7 +26046,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "主要用人场景：寄递与同城配送企业、运输与仓储的配送与转运岗位、医疗机构与实验室的标本与药品取送岗位，以及各行业单位的内部信使与收发岗位。"
+              "编辑按取送对象核寄递运输、医疗取送及内部信使等场景，非中国全国用人占比。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
@@ -26047,7 +26060,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "常见场景：以按件计酬或按趟计酬为主的配送岗位，以固定线路取送与签收为主的岗位，以及机构内部收发与信使岗位；不同场景的计酬方式差异较大。"
+              "按目标单位合同核固定薪、计件计趟及用工安排；本轮未取全国计酬比例，不称按件或按趟为主。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.3",
@@ -26075,12 +26088,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "说明：未取得职业单列数值不等于官方从未发布；本页只登记实际查阅范围与结果，不用行业均值或美国数据代填。"
+              "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26103,12 +26116,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "：中国大陆同类岗位多称快递员、同城配送、送件员或单位内部信使与收发员，分属寄递、运输仓储与各类机构的行政支持部门，常见全职与计件、外包并存，没有与 O*NET-SOC 43-5021.00 对应的统一职业分类或计酬口径"
+              "中国就业培训技术指导中心2022职业画像明确快递员4-02-07-08，下设快件揽收员、快件派送员，含揽收验视封装称重收费、票款交接、开拆快件总包与按址分装投递、改退、客户维护推广及投诉赔偿诉求。开拆总包不等私拆收件人快件；不与覆盖内部信使和医疗取送的美国43-5021精确一一对应。画像学历为初中或同等、列五级至一级技能等级，不据此认定证书为全国强制准入。 全国本岗工资与计酬分布仍缺。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "sag-moa"
+            "g04-cn-class"
           ],
           "type": "prose"
         },
@@ -26131,12 +26144,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：美国口径下该职业准备层级为 Job Zone 1–2（SVP 低于 6.0），通常要求高中文凭或同等学历，在职训练从几天到一年。美国口径与中国大陆同类岗位的录用与学历要求不可直接等同，具体以目标单位规定为准。"
+              "美国JobZone1–2、SVP<6为跨职业准备层级，几天至一年训练是层级概述而非每人时长；本岗新聘教育响应80%高中或同等、13%部分大学无学位、7%未高中毕业，不是中国门槛。中国就业培训技术指导中心2022职业画像明确快递员4-02-07-08，下设快件揽收员、快件派送员，含揽收验视封装称重收费、票款交接、开拆快件总包与按址分装投递、改退、客户维护推广及投诉赔偿诉求。开拆总包不等私拆收件人快件；不与覆盖内部信使和医疗取送的美国43-5021精确一一对应。画像学历为初中或同等、列五级至一级技能等级，不据此认定证书为全国强制准入。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "sag-moa"
+            "onet",
+            "g04-cn-class"
           ],
           "type": "prose"
         },
@@ -26145,7 +26159,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：中国大陆同类岗位通常经招聘或平台注册上岗，部分岗位要求驾驶资格或车辆条件；学历、驾驶资格与平台或单位的作业授权是不同层级的条件，不能互相替代。"
+              "按目标岗位具体车辆与法定条件核驾驶要求；无中国招聘公告样本，不称普遍平台登记或所有骑行均须驾驶证。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -26159,12 +26173,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：涉及收件人身份信息、代收款项与危险品处理的岗位受隐私、财务与安全规定约束，岗位职责与可授权范围须按具体单位与现行规定核对；本页不构成作业授权或录用条件。"
+              "中国《快递暂行条例》第5/31/34条禁止私拆快件及违法寄递禁限寄品：收寄前发现禁止寄递物应拒收，已收寄发现疑似禁止寄递物须立即停止分拣运输投递并依法处理、涉嫌犯罪报告配合；其余禁限寄按规定处理。美国危险物品预防任务不是中国承运许可。具体单位处置、解除中止和恢复程序未取得，不自行补授权。中国《快递暂行条例》23/35条、《快递市场管理办法》35–37条及个人信息保护法：依法核适用收寄身份与信息，信件和安全协议用户等例外另核；身份信息除姓名地址电话不得记运单，履约最小必要并安全管理，员工不得非法泄露。姓名地址电话不一概属敏感个人信息，医疗健康等按法定条件核。信息处理者承担制度审计及事件处置义务，员工按真实权限报告，不授予全部处置职责。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "sag-moa"
+            "cn-rule",
+            "g04-cn-market",
+            "g04-pipl"
           ],
           "type": "prose"
         },
@@ -26173,7 +26189,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：网点或配送站点的组长或调度方向通常要求熟悉线路与流程并具备核对与带训能力，任职条件由单位规定；本页不构成资格认定。"
+              "编辑管理准备线索为线路、交接与带训；实际任职条件未取公告，不推全国通常门槛。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -26187,7 +26203,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "常见场景：配送与取送岗位多按班次排班，含早班、晚班与节假日，旺季与促销期派单更集中；具体节奏须按目标单位与业务类型核对。"
+              "美国95%周40小时91%规律排班，不证明中国班次及促销高峰；实际目标单位派单与休息另核。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
@@ -26201,7 +26217,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与工资的关系：路线规划、派单与电子面单可能改变取送岗位的分工与记录方式，但中国大陆公开工资统计按行业门类与人员类别聚合发布，工具变化不会产生可核对的职业级数值；本页因此不给出任何与 AI 相关的快递员工资影响数字。"
+              "未取中国本岗AI到工资因果，NBS行业均值不测该关系，不断言工具变化不产生职业级统计。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
@@ -26215,12 +26231,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页中国大陆薪资板块只保留证据边界：不把行业均值当作职业工资、不用美国数据替代，也不陈述快递员的全国中位数、起薪或分位数。"
+              "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         }
@@ -26237,7 +26253,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国统计口径：本页的工资与分位为 O*NET／OEWS 43-5021.00（Couriers and Messengers）单一职业口径；就业规模与就业预测取自 O*NET 就业趋势页（基于 BLS 2024—2034 年预测）。"
+              "美国O*NET43-5021.00、OEWS43-5021本岗2025工资；2025—2035预测另列。OEWS43-5021本岗税前常规有薪工资，涵盖全兼职，含佣金生产奖金小费，排除加班溢价非生产奖金；自雇家庭雇员未付薪家人不在覆盖内。官方年值可引用，2080标准折算不保证个人工时或稳定月到手。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.1",
@@ -26267,7 +26283,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "按小时披露的工资不能在没有个人工时与派单量时推算稳定年薪或月收入；计件、加班与季节性派单也会影响实际收入。"
+              "OEWS43-5021本岗税前常规有薪工资，涵盖全兼职，含佣金生产奖金小费，排除加班溢价非生产奖金；自雇家庭雇员未付薪家人不在覆盖内。官方年值可引用，2080标准折算不保证个人工时或稳定月到手。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.3",
@@ -26297,7 +26313,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业表只说明该口径下的就业分布（O*NET 只单列医疗保健与社会援助，其余归入其他行业），不代表所有雇主的工资；不同行业与地区的工资差异要看具体岗位与地区。"
+              "美国2025行业就业分布医疗保健与社会援助11%、其他行业89%含运输仓储；不是工资或中国雇主分布，不推未披露行业与自雇细分。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.5",
@@ -26312,7 +26328,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资统计与档案的用途不同：OEWS 用于工资，O*NET 用于任务、工作情境与准备层级，就业预测限于 2024—2034 年预测期；引用时分别保留。"
+              "工资2025、就业预测2025—2035，任务情境准备不同调查，分别保留时期。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.6",
@@ -26432,13 +26448,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "医疗保健与社会援助是 O*NET 单列的行业，占 2024 年该项就业分布的 11%。"
+              "美国2025行业就业分布医疗保健与社会援助11%、其他行业89%含运输仓储；不是工资或中国雇主分布，不推未披露行业与自雇细分。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet"
           ],
           "type": "prose"
         },
@@ -26452,8 +26467,7 @@
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet"
           ],
           "type": "prose"
         },
@@ -26467,8 +26481,7 @@
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.amusement",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet"
           ],
           "type": "prose"
         },
@@ -26482,8 +26495,7 @@
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet"
           ],
           "type": "prose"
         },
@@ -26507,7 +26519,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "统计工资以有薪岗位为准：每周工时、计件与派单量以及季节性安排直接决定实际到手收入，因此时薪与年收入不能互相替代。"
+              "OEWS43-5021本岗税前常规有薪工资，涵盖全兼职，含佣金生产奖金小费，排除加班溢价非生产奖金；自雇家庭雇员未付薪家人不在覆盖内。官方年值可引用，2080标准折算不保证个人工时或稳定月到手。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.paid-work",
@@ -26522,7 +26534,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同一职业名下的职责差异不小：只负责固定线路取送、负责多点配送与签收、或负责车辆维护与分拣的岗位，对应不同的计酬口径。"
+              "任务侧重不同不等官方独立工资细类，本輪未取固定线或多点取送独立工资样本。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.scope",
@@ -26590,7 +26602,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意长时间在路上作业、能按规程核对与留痕、并在重复取送与时间压力下保持稳定的人，通常更容易适应。"
+              "编辑偏好核对为实际移动方式、重复核对和沟通压力；未取适应速度预测，不一概长时户外行走。"
             ]
           },
           "id": "actors.fit.personality-fit-block.1",
@@ -26604,7 +26616,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "这类岗位每天都有大量重复的取送、签收与分拣；能接受重复并把每次核对做实，才是准点与账实相符的前提。"
+              "取送、签收与分拣涉及重复任务；O*NET重复重要性不是每日数量。编辑自问：如何核对件数与记录？实际工作量向目标岗位核，不把接受重复当准点和账实相符的必要条件。"
             ]
           },
           "id": "actors.fit.personality-fit-block.2",
@@ -26618,7 +26630,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "投递记录与签收会被主管与后续客服复核；能把返工当作核对流程而不是针对个人，才能持续改进。"
+              "编辑自问：投递记录被复核指出差异时，能否核对具体信息并调整？这是体验建议，不是持续改进的必要条件或人格效度结论。"
             ]
           },
           "id": "actors.fit.personality-fit-block.3",
@@ -26632,7 +26644,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "按 O*NET 调查，43% 表示每月一次以上要与不愉快、愤怒或无礼的人打交道、21% 表示每月一次以上会遇到冲突情形；能先核对事实再回应，比凭情绪回应更稳妥。"
+              "无礼20%每日21%每周43%每月；冲突19%每日20%每周21%每月，分档不等每月至少。核事实再回应为编辑建议。"
             ]
           },
           "id": "actors.fit.personality-fit-block.4",
@@ -26772,7 +26784,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适配不是人格判断，而是把日常工作的真实要求——长时间驾驶、骑行或行走并在户外作业、按派单核对与取送、在时间压力与天气变化下把签收与代收款项核对清楚、在重复的取送与分拣中保持准确——"
+              "把实际车辆与移动时间、取送对象、交付记录及压力与自身承受条件核对；美国坐30%几乎一直65%超半，不一概长时行走。"
             ]
           },
           "id": "actors.display.personality_fit_block.direct-answer",
@@ -26870,7 +26882,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意长时间在户外驾驶、骑行或行走。"
+              "核具体移动、驾驶与环境暴露条件，不把兴趣代码当长时户外偏好的验证。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.riasec.signals.2",
@@ -26940,7 +26952,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "尽责性与情绪稳定性与这类工作的关系最直接：前者对应投递、签收与记录的准确，后者对应时间压力、道路风险与收件人抱怨时的稳定应对。大五没有官方的职业匹配阈值，本页只把它当作自我观察工具。"
+              "尽责与情绪稳定可供观察核对和催件体验；未取本岗表现验证，不称关系最直接或职业匹配阈值。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.big-five.answer",
@@ -27038,7 +27050,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "偏好户外活动与移动的人可能更适合在途取送岗位。"
+              "用实际移动与交付任务体验核偏好，不按类型分配在途岗位。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.1",
@@ -27052,7 +27064,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "偏好固定环境与细致操作的人可能更适合分拣与收发岗位。"
+              "用分拣登记的实际体验核偏好，不按类型分配室内岗位。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.2",
@@ -27318,7 +27330,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "这类岗位需要持续沟通：与收件人、调度、同组同事与客服对接；O*NET 调查显示 97% 每天有电话沟通、75% 每天有面对面讨论、70% 表示与他人持续接触，43% 表示每月一次以上要与不愉快、愤怒或无礼的人打交道。情绪类工具只提供自我观察角度，不是岗位门槛。"
+              "美国电话97%每日、面对面75%每日、持续接触70%；无礼20%每日21%每周43%每月，不等至少每月43%。工具只供观察，不当门槛。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.eq.answer",
@@ -27388,7 +27400,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "按派单领取物件与投递信息、规划路线、到点投递与收取、取得签收或代收款项并记录；适合愿意在户外长时间驾驶、骑行或行走并按规程作业的人。"
+              "核实际取送、记录与交通方式的任务体验，不由兴趣预测岗位适配或长时户外行走。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.camera.signals",
@@ -27402,7 +27414,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "长时间驾驶与户外作业、天气与道路风险；旺季派单集中，时间压力较大。"
+              "核目标路线、天气及驾驶休息；美国95%坐超半，不代表全岗全天户外；中国高峰派单样本未取得。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.camera.watchouts",
@@ -27430,7 +27442,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "分拣来件、登记收发、处理转运与核对单据；适合对单据与件数核对有耐心、偏好固定环境的人。"
+              "分拣、登记、转运与单据核对是任务线索。编辑自问：是否愿意体验件数和记录核对？实际场所须核，偏好不证明胜任或录用。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.stage.signals",
@@ -27444,7 +27456,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "以重复分拣与登记为主，需长时间站立或弯腰；客户接触较少。"
+              "按工位核站弯和客户接触，不把本岗站41%少半25%从不推长时站立；邮件文员也有客户包裹问答。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.stage.watchouts",
@@ -27463,7 +27475,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.agent.direction",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27477,7 +27489,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.agent.signals",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27491,7 +27503,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.agent.watchouts",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27505,7 +27517,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.teacher.direction",
           "source_refs": [
-            "onet"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -27519,7 +27531,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.teacher.signals",
           "source_refs": [
-            "onet"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -27533,7 +27545,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.teacher.watchouts",
           "source_refs": [
-            "onet"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -27547,7 +27559,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.direction",
           "source_refs": [
-            "onet"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -27561,7 +27573,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.signals",
           "source_refs": [
-            "onet"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -27570,12 +27582,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "以驾驶与整批货物运输为主，转入需核对驾驶资格与车型要求。"
+              "轻型卡车也含多点取送与收款，目标车型及当地驾驶要求另核，不称主要整批货物。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.watchouts",
           "source_refs": [
-            "onet"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -27589,7 +27601,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.art.direction",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         },
@@ -27603,7 +27615,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.art.signals",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         },
@@ -27617,7 +27629,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.art.watchouts",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         },
@@ -27682,7 +27694,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "路线与时效受派单与单位规程约束：自由度有限，先看清目标网点的路线安排与授权范围再决定。"
+              "美国决策80%很多20%一些，优先级44%很多36%一些15%有限；实际派单授权另核，不能概括自由有限。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.interest.answer",
@@ -27738,7 +27750,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 显示 23% 表示从不在环境可控的室内作业、20% 表示每月一次以上在户外各种天气下工作、13% 表示从不在封闭车辆内工作。对户外、天气或长时间驾驶敏感的人应优先核对工作形态。"
+              "美国户外各种天气20%每月非每周、20%每年非每月；23%从不可控室内、13%从不封闭车，其他响应未显示，不推全部环境。核具体工位与交通方式。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.appearance.answer",
@@ -27766,7 +27778,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "配送与取送岗位多按班次排班，含早班、晚班与节假日，旺季与促销期派单更集中；具体按单位与业务类型核对。"
+              "美国95%周40小时91%规律排班；目标中国班次休息与高峰业务量另核，无本轮全国数据。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.schedule.answer",
@@ -27794,7 +27806,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "路线组织、签收与记录靠反复练习与反馈；把练习量、返工次数和差错点记录下来，比测试分数更能说明适配。"
+              "记录任务核对过程和反馈帮助观察体验，本轮无证据证明比测评分数更能预测适配。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.practice.answer",
@@ -27822,7 +27834,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。测试描述偏好线索，不预测工作表现，也不构成录用、资格或适应性判断；真正的判断来自任务样本与训练反馈。"
+              "兴趣测评用于探索偏好，任务体验与训练反馈提供具体观察线索；本页未取得二者比较的预测效度证据，不替代能力、资格或录用评估。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.test.answer",
@@ -27999,7 +28011,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程取得签收或代收凭证并当场核对，缺项当场补齐；发现差异先核实再更正，不事后补记。"
+              "中国《快递市场管理办法》第27–28条：告知验收权，明显破损或易碎品告知检查内件或拒收；签字或其他可辨认可保存的明示确认可证明收到，不能面交需与用户约定方式，未经同意不得代为确认或投智能柜、服务站。代收款项仅适用实际业务，不是每次必收。 记录差错按真实程序更正留轨，不杜撰禁止事后补记。"
             ]
           },
           "id": "actors.risk.career-risk-cards.2",
@@ -28014,13 +28026,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按清单装载并固定、对危险品采取预防措施并按规程上报，破损与异常保留证据并按程序升级，不擅自处置。"
+              "中国《快递暂行条例》第5/31/34条禁止私拆快件及违法寄递禁限寄品：收寄前发现禁止寄递物应拒收，已收寄发现疑似禁止寄递物须立即停止分拣运输投递并依法处理、涉嫌犯罪报告配合；其余禁限寄按规定处理。美国危险物品预防任务不是中国承运许可。具体单位处置、解除中止和恢复程序未取得，不自行补授权。"
             ]
           },
           "id": "actors.risk.career-risk-cards.3",
           "source_refs": [
             "sag",
-            "nist"
+            "nist",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -28029,13 +28042,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按所在单位的规程、隐私、财务与安全规定处理收件人信息、款项与危险品并保留记录；具体权限与责任范围以现行规定为准，本页不构成授权或法律意见。"
+              "中国《快递暂行条例》23/35条、《快递市场管理办法》35–37条及个人信息保护法：依法核适用收寄身份与信息，信件和安全协议用户等例外另核；身份信息除姓名地址电话不得记运单，履约最小必要并安全管理，员工不得非法泄露。姓名地址电话不一概属敏感个人信息，医疗健康等按法定条件核。信息处理者承担制度审计及事件处置义务，员工按真实权限报告，不授予全部处置职责。中国《快递暂行条例》第5/31/34条禁止私拆快件及违法寄递禁限寄品：收寄前发现禁止寄递物应拒收，已收寄发现疑似禁止寄递物须立即停止分拣运输投递并依法处理、涉嫌犯罪报告配合；其余禁限寄按规定处理。美国危险物品预防任务不是中国承运许可。具体单位处置、解除中止和恢复程序未取得，不自行补授权。"
             ]
           },
           "id": "actors.risk.career-risk-cards.4",
           "source_refs": [
             "sag",
-            "nist"
+            "nist",
+            "cn-rule",
+            "g04-cn-market",
+            "g04-pipl"
           ],
           "type": "prose"
         },
@@ -28089,7 +28105,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险集中在三类：长时间驾驶骑行与户外作业造成的道路与天气暴露风险，签收缺失、代收款项差错与物品破损造成的交付与财务风险，以及收件人信息泄露、装载与危险品处理不当造成的安全与合规风险；旺季与促销期的高派单量也会累积影响。"
+              "编辑据任务核在途安全、交付款项和物品差错及信息泄露；美国情境不证明疾病事故发生率或中国旺季长期损害。"
             ]
           },
           "id": "actors.display.career_risk_cards.direct-answer",
@@ -28104,7 +28120,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险场景来自 O*NET 任务档案与工作情境百分比（O*NET-SOC 43-5021.00）；中国大陆的岗位与用工语境来自公开信息；引入自动化或 AI 工具时的责任与记录要求参考 NIST AI 风险管理框架。"
+              "美国任务情境提供风险线索；中国禁限寄与交付依法条，分类依职业画像；NIST自愿建议不代法律，单位具体恢复程序未取得。"
             ]
           },
           "id": "actors.display.career_risk_cards.evidence-scope",
@@ -28179,7 +28195,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 调查显示 23% 表示从不在环境可控的室内作业、20% 表示每月一次以上要在户外各种天气条件下工作、74% 表示每天面对时间压力；为赶时效在恶劣天气或疲劳下作业更危险。"
+              "美国74%每日时限；各种天气20%每月非每周、20%每年非每月，23%从不可控室内，不由这些响应推全部户外占比。"
             ]
           },
           "id": "actors.display.career_risk_cards.image-use.scenario",
@@ -28194,7 +28210,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "道路与天气暴露会造成交通与人身伤害，疲劳与赶时效会进一步放大风险。"
+              "编辑风险分析：道路与天气暴露可能造成交通与人身伤害，疲劳与赶时效可能增加风险。"
             ]
           },
           "id": "actors.display.career_risk_cards.image-use.consequence",
@@ -28239,7 +28255,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "赶件时跳过签收、未核对收件人或漏记代收款项，会让交付无法证明、账实不符；O*NET 显示 14% 认为准确与严谨至少「比较重要」。"
+              "中国《快递市场管理办法》第27–28条：告知验收权，明显破损或易碎品告知检查内件或拒收；签字或其他可辨认可保存的明示确认可证明收到，不能面交需与用户约定方式，未经同意不得代为确认或投智能柜、服务站。代收款项仅适用实际业务，不是每次必收。 美国准确仅显示14%比较重要，不能归为至少比较重要。"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.scenario",
@@ -28254,7 +28270,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "差错会造成投诉、赔付与账实不符，也让后续客服复核失去依据。"
+              "编辑风险分析：差错可能造成投诉、赔付与账实不符，并可能增加后续客服复核难度。"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.consequence",
@@ -28299,13 +28315,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "装载未固定、超载或危险品未采取预防措施，会在运输途中造成物品破损、丢失或安全隐患；未按清单核对件数也会造成错送与漏送。"
+              "中国《快递暂行条例》第5/31/34条禁止私拆快件及违法寄递禁限寄品：收寄前发现禁止寄递物应拒收，已收寄发现疑似禁止寄递物须立即停止分拣运输投递并依法处理、涉嫌犯罪报告配合；其余禁限寄按规定处理。美国危险物品预防任务不是中国承运许可。具体单位处置、解除中止和恢复程序未取得，不自行补授权。 清单装载、固定及件数核对为编辑安全检查线索，非具体运输操作授权。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-income.scenario",
           "source_refs": [
             "sag",
-            "nist"
+            "nist",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -28314,7 +28331,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "破损与丢失会带来赔付与声誉损失，危险品处置不当会造成安全事故。"
+              "编辑风险分析：破损与丢失可能带来赔付与声誉损失，危险品处置不当可能造成安全事故。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-income.consequence",
@@ -28359,13 +28376,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国大陆同类岗位多称快递员、同城配送、送件员或单位内部信使与收发员，分属寄递、运输仓储与各类机构的行政支持部门，常见全职、计件与外包并存，隐私、财务与安全规定因单位不同。"
+              "中国就业培训技术指导中心2022职业画像明确快递员4-02-07-08，下设快件揽收员、快件派送员，含揽收验视封装称重收费、票款交接、开拆快件总包与按址分装投递、改退、客户维护推广及投诉赔偿诉求。开拆总包不等私拆收件人快件；不与覆盖内部信使和医疗取送的美国43-5021精确一一对应。画像学历为初中或同等、列五级至一级技能等级，不据此认定证书为全国强制准入。中国《快递暂行条例》第5/31/34条禁止私拆快件及违法寄递禁限寄品：收寄前发现禁止寄递物应拒收，已收寄发现疑似禁止寄递物须立即停止分拣运输投递并依法处理、涉嫌犯罪报告配合；其余禁限寄按规定处理。美国危险物品预防任务不是中国承运许可。具体单位处置、解除中止和恢复程序未取得，不自行补授权。中国《快递市场管理办法》第27–28条：告知验收权，明显破损或易碎品告知检查内件或拒收；签字或其他可辨认可保存的明示确认可证明收到，不能面交需与用户约定方式，未经同意不得代为确认或投智能柜、服务站。代收款项仅适用实际业务，不是每次必收。"
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.scenario",
           "source_refs": [
             "sag",
-            "nist"
+            "nist",
+            "cn-rule",
+            "g04-cn-market",
+            "g04-cn-class"
           ],
           "type": "prose"
         },
@@ -28419,13 +28439,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "收件人身份与联系方式属敏感数据；越权访问、随手记录或单据丢失，都可能造成数据泄露与合规后果。"
+              "中国《快递暂行条例》23/35条、《快递市场管理办法》35–37条及个人信息保护法：依法核适用收寄身份与信息，信件和安全协议用户等例外另核；身份信息除姓名地址电话不得记运单，履约最小必要并安全管理，员工不得非法泄露。姓名地址电话不一概属敏感个人信息，医疗健康等按法定条件核。信息处理者承担制度审计及事件处置义务，员工按真实权限报告，不授予全部处置职责。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.scenario",
           "source_refs": [
             "sag",
-            "nist"
+            "nist",
+            "cn-rule",
+            "g04-cn-market",
+            "g04-pipl"
           ],
           "type": "prose"
         },
@@ -28434,7 +28457,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "数据泄露会带来合规后果与信任损失，记录缺失会让交付与追责失去依据。"
+              "编辑风险分析：数据泄露可能带来合规后果与信任损失，记录缺失可能增加交付核对与追责难度。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.consequence",
@@ -28479,7 +28502,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 调查显示 74% 表示每天面对时间压力，43% 表示每月一次以上要与不愉快、愤怒或无礼的人打交道，21% 表示每月一次以上遇到冲突情形；旺季与促销期派单与催件更集中。"
+              "美国74%每日压力，无礼20%每日21%每周43%每月，冲突19%每日20%每周21%每月；中国促销高峰量未取得。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.scenario",
@@ -28494,7 +28517,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "长期高峰压力与冲突情绪会累积影响注意力与判断，进而影响安全与服务质量。"
+              "编辑待核压力可能影响注意力服务；未取本岗长期因果、健康诊断或出勤影响数据。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.consequence",
@@ -28509,7 +28532,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于美国 2024—2034 年该细分就业预测与职位空缺（O*NET 就业趋势页，基于 BLS 预测）。"
+              "美国本岗2025就业228,900人，2035预测247,100人；2025—2035增长8%，年均空缺23,800个含增长与替换，不是十年累计或每年净增。端点相差约18,200人受舍入影响。预测不等个人录用率或AI因果。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.bls",
@@ -28539,13 +28562,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于中国大陆快递与取送岗位的用工与合规边界的方向性核对。"
+              "中国《快递暂行条例》第5/31/34条禁止私拆快件及违法寄递禁限寄品：收寄前发现禁止寄递物应拒收，已收寄发现疑似禁止寄递物须立即停止分拣运输投递并依法处理、涉嫌犯罪报告配合；其余禁限寄按规定处理。美国危险物品预防任务不是中国承运许可。具体单位处置、解除中止和恢复程序未取得，不自行补授权。中国《快递市场管理办法》第27–28条：告知验收权，明显破损或易碎品告知检查内件或拒收；签字或其他可辨认可保存的明示确认可证明收到，不能面交需与用户约定方式，未经同意不得代为确认或投智能柜、服务站。代收款项仅适用实际业务，不是每次必收。中国《快递暂行条例》23/35条、《快递市场管理办法》35–37条及个人信息保护法：依法核适用收寄身份与信息，信件和安全协议用户等例外另核；身份信息除姓名地址电话不得记运单，履约最小必要并安全管理，员工不得非法泄露。姓名地址电话不一概属敏感个人信息，医疗健康等按法定条件核。信息处理者承担制度审计及事件处置义务，员工按真实权限报告，不授予全部处置职责。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.cn-rule",
           "source_refs": [
             "sag",
-            "nist"
+            "nist",
+            "cn-rule",
+            "g04-cn-market",
+            "g04-pipl"
           ],
           "type": "prose"
         },
@@ -28593,7 +28619,7 @@
           "data": {
             "paragraphs": [
               "本页不引用具体在招公告，也不把历史招聘案例计为在招岗位；招聘与用工条件须按目标单位当年公告核对。",
-              "示例中的情景判断、路线核对与试用期观察方式为编辑设计，用于说明常见验证方式，不代表任何单位的统一流程。"
+              "情景判断、路线核对与观察方式为编辑设计的任务观察思路，未取得招聘样本，不证明雇主常用考核流程。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
@@ -28618,7 +28644,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "编辑建议核对能力（非招聘样本）",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -28649,14 +28675,14 @@
                 "分拣来件、处理转运登记并核对单据，跟进差异与待办。",
                 "分拣准确、单据完整、记录可追溯。",
                 "一份虚构的分拣与收发登记样本。",
-                "偏室内分拣与登记，客户接触较少。"
+                "偏邮件与登记，但客户接触由具体岗位核，不由分类推较少。"
               ],
               [
                 "轻型卡车司机（相邻方向）",
                 "驾驶轻型货车运输货物并装卸，按线路完成多点配送。",
                 "驾驶技能、货物安全与路线运输。",
                 "一份虚构的装载与运输记录样本。",
-                "属相邻职业，以驾驶整批货物运输为主，需驾驶资格。"
+                "美国轻型卡车相邻职业，含多点配送，车辆条件与目标法域驾驶资格另核。"
               ]
             ]
           },
@@ -28678,15 +28704,15 @@
                 "id": "employer-0",
                 "values": [
                   "学历与训练背景要求",
-                  "美国口径下该职业准备层级为 Job Zone 1–2，通常要求高中文凭或同等学历，在职训练从几天到一年。",
-                  "O*NET 摘要页显示准备层级为 Job Zone 1–2（SVP 低于 6.0）；美国口径与中国大陆同类岗位的录用与学历要求不可直接等同。"
+                  "美国JobZone1–2、SVP<6为跨职业准备层级，几天至一年训练是层级概述而非每人时长；本岗新聘教育响应80%高中或同等、13%部分大学无学位、7%未高中毕业，不是中国门槛。",
+                  "中国就业培训技术指导中心2022职业画像明确快递员4-02-07-08，下设快件揽收员、快件派送员，含揽收验视封装称重收费、票款交接、开拆快件总包与按址分装投递、改退、客户维护推广及投诉赔偿诉求。开拆总包不等私拆收件人快件；不与覆盖内部信使和医疗取送的美国43-5021精确一一对应。画像学历为初中或同等、列五级至一级技能等级，不据此认定证书为全国强制准入。"
                 ]
               },
               {
                 "id": "employer-1",
                 "values": [
                   "驾驶或骑行资格与路线熟悉度",
-                  "自驾或骑行取送通常需要相应驾驶资格与基本的安全作业能力；具体车型、资格与线路要求由单位规定。",
+                  "按目标车型及真实法定驾驶条件核；普通骑行不一概须机动车驾驶资格。",
                   "本页未取得中国大陆全国统一的资格公开条件，须按目标单位当年招聘要求核对；本页不构成授权或录用建议。"
                 ]
               },
@@ -28695,15 +28721,15 @@
                 "values": [
                   "可观察的专业能力证据",
                   "能按清单核对件数与地址、能按线路规划并按时取送、能取得签收或代收款项并完整记录（来自 O*NET 任务与工作情境数据）。",
-                  "以上是任务与情境观察点，不是人格标签或录用阈值；工作情境显示 74% 每天面对时间压力、14% 认为准确与严谨至少比较重要、69% 认为重复同一任务至少非常重要。"
+                  "美国74%每日时限、重复69%很重要；准确14%比较重要其余未显示，不推汇总。"
                 ]
               },
               {
                 "id": "availability",
                 "values": [
                   "常见工具与系统范围",
-                  "派单与路线规划系统、导航与投递记录工具、电话与在线沟通工具、配送车辆与装载工具；O*NET 列出的本职业技术关键词包含邮件、办公套件、路线导航与表格处理软件。",
-                  "工具熟练度是市场偏好与招聘信号，不等于核心能力或授权。"
+                  "O*NET转引Lightcast2025全美招聘热门技术仅4项：Office2%、Excel2%、Outlook1%、Word1%；未列路线导航。关键词比例不等采用率、熟练度、生成式AI效果。任务中的路线规划另有依据，不混同招聘表。",
+                  "热门软件关键词是所述美国招聘资料中的提及，不能推定中国熟练度偏好或胜任；目标要求另核。"
                 ]
               }
             ]
@@ -28712,7 +28738,8 @@
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "g04-cn-class"
           ],
           "title": "雇主通常会核对什么",
           "type": "cards"
@@ -28839,39 +28866,39 @@
             ],
             "rows": [
               [
-                "学历背景（高中及以上）",
+                "学历背景（按目标法域核）",
                 "准备进入快递与取送岗位的人",
-                "满足多数入门岗位的录用条件",
+                "美国JobZone1–2、SVP<6为跨职业准备层级，几天至一年训练是层级概述而非每人时长；本岗新聘教育响应80%高中或同等、13%部分大学无学位、7%未高中毕业，不是中国门槛。中国就业培训技术指导中心2022职业画像明确快递员4-02-07-08，下设快件揽收员、快件派送员，含揽收验视封装称重收费、票款交接、开拆快件总包与按址分装投递、改退、客户维护推广及投诉赔偿诉求。开拆总包不等私拆收件人快件；不与覆盖内部信使和医疗取送的美国43-5021精确一一对应。画像学历为初中或同等、列五级至一级技能等级，不据此认定证书为全国强制准入。",
                 "不是统一强制门槛，按目标单位公告核对",
                 "按目标单位公告的学历要求",
-                "低至中（在职或入职前完成）",
+                "实际费用、周期和方式本轮未取得，按目标公告与机构核。",
                 "学历不代表岗位胜任或作业授权。"
               ],
               [
                 "驾驶或骑行资格",
                 "驾驶或骑行取送的岗位",
-                "通常是自驾或骑行岗位的硬性要求",
+                "按车辆与法定条件核，普通骑行不一概驾驶证。",
                 "按岗位与车型而定",
                 "按主管部门规定的考试与证书办理",
-                "中（学习与考试周期）",
+                "实际费用、周期和方式本轮未取得，按目标公告与机构核。",
                 "驾驶资格不等于单位作业与线路授权。"
               ],
               [
                 "路线与投递系统操作",
                 "从事取送与记录岗位的人",
-                "通常是入门岗位的常见要求",
-                "多数岗位普遍要求",
+                "按实际系统及培训核对任务能力，无全国招聘样本。",
+                "实际任务与培训要求待目标公告核，不推全国多数。",
                 "按目标单位要求或自行练习",
-                "低（可自行学习）",
+                "实际费用、周期和方式本轮未取得，按目标公告与机构核。",
                 "系统熟练度不等于安全与合规能力。"
               ],
               [
                 "岗前与在职训练",
                 "已被录用并进入岗位的人员",
-                "通常决定能否独立取送与签收",
-                "属录用后必经环节",
+                "按岗位真实培训核独立职责，不能用美国层级时长代中国固定训练。",
+                "中国快递企业依法开展从业人员服务操作安全等培训，具体考核程序另核。",
                 "由单位组织",
-                "中（数天至一年）",
+                "实际费用、周期和方式本轮未取得，按目标公告与机构核。",
                 "训练合格不等于永久授权，须按岗位与制度执行。"
               ],
               [
@@ -28880,16 +28907,16 @@
                 "决定能否代收款项与处理赔付",
                 "属制度授予，不是可选",
                 "按单位制度与现行规定授予",
-                "不适用（由制度授予）",
+                "实际费用、周期和方式本轮未取得，按目标公告与机构核。",
                 "授权不可跨单位通用，本页不构成授权意见。"
               ],
               [
                 "网点与调度管理能力",
                 "准备承担网点或调度管理职责的人",
-                "影响管理岗位的竞争与准备度",
+                "编辑准备线索：核对网点协调和调度任务；未取得管理竞争收益证据。",
                 "不是入职门槛",
                 "按单位制度与岗位要求",
-                "中（内部培训或带教）",
+                "实际费用、周期和方式本轮未取得，按目标公告与机构核。",
                 "管理训练不等于款项、安全或合规责任岗位授权。"
               ]
             ]
@@ -28898,7 +28925,8 @@
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "g04-cn-class"
           ],
           "title": "训练、资格与作业授权怎么选择",
           "type": "table"
@@ -28909,8 +28937,8 @@
           "data": {
             "paragraphs": [
               "本页把学历背景、驾驶或骑行资格、路线与投递系统操作、岗前与在职训练、代收款项与赔付授权以及网点与调度管理能力分开：学历与系统操作是基础，训练与授权按单位制度与现行规定获得。",
-              "美国口径来自 O*NET 准备层级（Job Zone 1–2：通常要求高中文凭或同等学历；在职训练从几天到一年；SVP 低于 6.0）与 BLS 相关说明；这些不等于中国的任职条件。",
-              "中国大陆口径：同类岗位多称快递员、同城配送、送件员或单位内部信使与收发员，分属寄递、运输仓储与各类机构的行政支持部门，常见全职、计件与外包并存；本页未取得全国统一的强制资质公开条件，须按目标单位与主管部门现行规定核对，不能把美国准备层级当作中国门槛，也不能把岗位名称当作跨单位的作业或数据授权。",
+              "美国JobZone1–2、SVP<6为跨职业准备层级，几天至一年训练是层级概述而非每人时长；本岗新聘教育响应80%高中或同等、13%部分大学无学位、7%未高中毕业，不是中国门槛。",
+              "中国就业培训技术指导中心2022职业画像明确快递员4-02-07-08，下设快件揽收员、快件派送员，含揽收验视封装称重收费、票款交接、开拆快件总包与按址分装投递、改退、客户维护推广及投诉赔偿诉求。开拆总包不等私拆收件人快件；不与覆盖内部信使和医疗取送的美国43-5021精确一一对应。画像学历为初中或同等、列五级至一级技能等级，不据此认定证书为全国强制准入。 中国《快递暂行条例》第5/31/34条禁止私拆快件及违法寄递禁限寄品：收寄前发现禁止寄递物应拒收，已收寄发现疑似禁止寄递物须立即停止分拣运输投递并依法处理、涉嫌犯罪报告配合；其余禁限寄按规定处理。美国危险物品预防任务不是中国承运许可。具体单位处置、解除中止和恢复程序未取得，不自行补授权。",
               "任何资格与任职要求都应以单位与主管部门的现行规定为准；本页不构成录用承诺、资格意见或授权建议。"
             ]
           },
@@ -28928,7 +28956,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入行通常不要求专门学历：美国多数岗位要求高中文凭并在职学习，再从网点分拣、辅助取送与固定线路做起；能否把投递信息核对清楚、把签收与代收款项记录完整并留痕，是比证书更可核对的准备证据。"
+              "编辑建议先观察分拣取送和记录能力，无本轮招聘样本，不比较证书与任务证据预测力。美国JobZone1–2、SVP<6为跨职业准备层级，几天至一年训练是层级概述而非每人时长；本岗新聘教育响应80%高中或同等、13%部分大学无学位、7%未高中毕业，不是中国门槛。"
             ]
           },
           "id": "actors.path.career-path-block.1",
@@ -28944,7 +28972,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国口径下，该职业准备层级为 Job Zone 1–2（SVP 低于 6.0），通常要求高中文凭或同等学历，在职训练从几天到一年；入职多从网点分拣、辅助取送与固定线路做起，再承担多点配送与异常件处理；"
+              "美国JobZone1–2、SVP<6为跨职业准备层级，几天至一年训练是层级概述而非每人时长；本岗新聘教育响应80%高中或同等、13%部分大学无学位、7%未高中毕业，不是中国门槛。 下面路线为编辑准备示例，不是官方必经晋升序列。"
             ]
           },
           "id": "actors.path.career-path-block.2",
@@ -28960,14 +28988,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆没有与 O*NET-SOC 一一对应的职业细类，同类岗位多称快递员、同城配送、送件员或单位内部信使与收发员，分属寄递、运输仓储与各类机构的行政支持部门，录用与用工条件须按目标单位现行规定核对。"
+              "中国就业培训技术指导中心2022职业画像明确快递员4-02-07-08，下设快件揽收员、快件派送员，含揽收验视封装称重收费、票款交接、开拆快件总包与按址分装投递、改退、客户维护推广及投诉赔偿诉求。开拆总包不等私拆收件人快件；不与覆盖内部信使和医疗取送的美国43-5021精确一一对应。画像学历为初中或同等、列五级至一级技能等级，不据此认定证书为全国强制准入。"
             ]
           },
           "id": "actors.path.career-path-block.3",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "g04-cn-class"
           ],
           "type": "prose"
         },
@@ -29161,14 +29190,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域：美国口径来自 O*NET 与 BLS 公开资料；中国大陆口径参考快递与取送岗位的公开用工信息方向，具体要求以目标单位与现行规定为准。"
+              "美国任务与准备按O*NET；中国快递员依官方职业画像与寄递法规，内部信使医疗取送需按实际业务另核。"
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "g04-cn-class"
           ],
           "type": "prose"
         },
@@ -29321,7 +29351,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与线路与派单安排、异常件处理标准与质量抽查，承担班组协调与带训；该阶段通常要求先积累一线经验，任职条件由单位规定。"
+              "编辑管理准备方向：线路安排、交接质量、带训与协调，实际任职门槛未取公告，不保证通常经验年限。"
             ]
           },
           "id": "actors.display.career_path_block.ladder.develop.description",
@@ -29401,14 +29431,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入职通常要求高中文凭；条件按单位规定。"
+              "美国JobZone1–2、SVP<6为跨职业准备层级，几天至一年训练是层级概述而非每人时长；本岗新聘教育响应80%高中或同等、13%部分大学无学位、7%未高中毕业，不是中国门槛。中国就业培训技术指导中心2022职业画像明确快递员4-02-07-08，下设快件揽收员、快件派送员，含揽收验视封装称重收费、票款交接、开拆快件总包与按址分装投递、改退、客户维护推广及投诉赔偿诉求。开拆总包不等私拆收件人快件；不与覆盖内部信使和医疗取送的美国43-5021精确一一对应。画像学历为初中或同等、列五级至一级技能等级，不据此认定证书为全国强制准入。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.credentials",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "g04-cn-class"
           ],
           "type": "prose"
         },
@@ -29641,7 +29672,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "管理方向通常要求一线经验，条件由单位规定。"
+              "管理方向任职条件按目标公告核，当前未取得。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.04.credentials",
@@ -29737,7 +29768,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入职通常要求高中文凭；条件按单位规定。"
+              "美国JobZone1–2、SVP<6为跨职业准备层级，几天至一年训练是层级概述而非每人时长；本岗新聘教育响应80%高中或同等、13%部分大学无学位、7%未高中毕业，不是中国门槛。中国就业培训技术指导中心2022职业画像明确快递员4-02-07-08，下设快件揽收员、快件派送员，含揽收验视封装称重收费、票款交接、开拆快件总包与按址分装投递、改退、客户维护推广及投诉赔偿诉求。开拆总包不等私拆收件人快件；不与覆盖内部信使和医疗取送的美国43-5021精确一一对应。画像学历为初中或同等、列五级至一级技能等级，不据此认定证书为全国强制准入。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.01.credentials",
@@ -30009,7 +30040,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "车辆维护与设备支持方向"
+              "例行车辆维护与另需核实的设备支持方向"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.title",
@@ -30073,7 +30104,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入职通常要求高中文凭；条件按单位规定。"
+              "油液燃料例行维护为美国Core；维修与设备岗位另核资格和培训，不等本岗自动晋升。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.01.credentials",
@@ -30201,7 +30232,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "维护分拣与转运设备、跟进安全事项并为一线提供支持。"
+              "设备维修与安全支持为编辑相邻准备线索，超出油液燃料例行维护，岗位资格培训职责另核，不授予维修权限。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.03.responsibility",
@@ -30345,7 +30376,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "该细分 2024—2034 年就业预测与职位空缺（O*NET 就业趋势页，基于 BLS 预测）。"
+              "美国本岗2025就业228,900人，2035预测247,100人；2025—2035增长8%，年均空缺23,800个含增长与替换，不是十年累计或每年净增。端点相差约18,200人受舍入影响。预测不等个人录用率或AI因果。"
             ]
           },
           "id": "actors.display.career_path_block.source.bls",
@@ -30377,7 +30408,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于中国大陆快递与取送岗位的用工与合规边界的方向性核对。"
+              "中国《快递暂行条例》第5/31/34条禁止私拆快件及违法寄递禁限寄品：收寄前发现禁止寄递物应拒收，已收寄发现疑似禁止寄递物须立即停止分拣运输投递并依法处理、涉嫌犯罪报告配合；其余禁限寄按规定处理。美国危险物品预防任务不是中国承运许可。具体单位处置、解除中止和恢复程序未取得，不自行补授权。中国《快递市场管理办法》第27–28条：告知验收权，明显破损或易碎品告知检查内件或拒收；签字或其他可辨认可保存的明示确认可证明收到，不能面交需与用户约定方式，未经同意不得代为确认或投智能柜、服务站。代收款项仅适用实际业务，不是每次必收。中国《快递暂行条例》23/35条、《快递市场管理办法》35–37条及个人信息保护法：依法核适用收寄身份与信息，信件和安全协议用户等例外另核；身份信息除姓名地址电话不得记运单，履约最小必要并安全管理，员工不得非法泄露。姓名地址电话不一概属敏感个人信息，医疗健康等按法定条件核。信息处理者承担制度审计及事件处置义务，员工按真实权限报告，不授予全部处置职责。"
             ]
           },
           "id": "actors.display.career_path_block.source.cn-rule",
@@ -30393,7 +30424,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明工资分位的统计位置与不可年化，不提供个人收入结论。"
+              "工资分位是统计位置；OEWS可用2080小时标准年度折算，不保证个人实际工时或到手收入，官方年值可引用。"
             ]
           },
           "id": "actors.display.career_path_block.source.r2-pay-3",
@@ -30417,7 +30448,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需求信号要分三层看：官方就业预测反映职业总量变化，寄递与配送业务量与末端网络规模决定岗位分布，"
+              "需求信号分开核：官方就业预测是职业总量，业务量与末端网络可作进一步研究线索，招聘公告是特定时点单位需求；未取得样本时不断言业务量决定岗位分布。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
@@ -30432,7 +30463,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）显示该细分 2024 年约 247,200 人，预测标签为 Much faster than average（7% 或更高），累计约 27,900 个含增长与替换的空缺；该预测不含技术替代时点。"
+              "美国本岗2025就业228,900人，2035预测247,100人；2025—2035增长8%，年均空缺23,800个含增长与替换，不是十年累计或每年净增。端点相差约18,200人受舍入影响。预测不等个人录用率或AI因果。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
@@ -30557,8 +30588,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.agent.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30572,8 +30602,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.agent.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30587,8 +30616,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.agent.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30602,8 +30630,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.teacher.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30617,8 +30644,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.teacher.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30627,13 +30653,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从亲自取送转向运输安排，通常在室内处理单据。"
+              "从亲自取送转向货运订舱、运输与费用单据安排；实际仓库装卸客户任务另核，不一概室内。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30647,8 +30672,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30657,13 +30681,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足：驾驶资格、车型与整批货物运输流程。"
+              "需核对目标车型、当地驾驶资格、装卸、多点配送与实际货物流程；本岗已有取送交叉，不将整批运输设为统一缺项。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30672,13 +30695,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从密集取送转向整批货物运输，需核对驾驶资格。"
+              "轻型卡车也有多点取送、客户和收款；核目标车辆及驾驶条件，不一概整批货物或中国驾照级别。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30692,8 +30714,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.art.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30707,8 +30728,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.art.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30717,13 +30737,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从到点投递转向室内分拣处理，客户接触减少。"
+              "重点转向邮件及设备处理，但Core也含发放包裹、客户政策问答，不由分类断言客户接触减少。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30737,8 +30756,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.directing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30752,8 +30770,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.directing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30762,13 +30779,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从纯取送转向配送兼销售与结算。"
+              "转向配送兼商品销售与结算；本岗Supplemental已有安排付款，不能称原岗纯取送无款项。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30782,8 +30798,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.announcing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30797,8 +30812,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.announcing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30812,8 +30826,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.announcing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30827,8 +30840,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.editing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30842,8 +30854,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.editing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30852,13 +30863,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从路线取送转向固定场所的行李搬运服务。"
+              "转向行李与旅客服务；任务亦含当地交通及传信差事，不一概固定场所。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30872,8 +30882,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.dancing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30887,8 +30896,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.dancing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30902,8 +30910,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.dancing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30912,7 +30919,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于该细分 2024—2034 年就业预测与职位空缺（O*NET 就业趋势页，基于 BLS 预测）。"
+              "美国本岗2025就业228,900人，2035预测247,100人；2025—2035增长8%，年均空缺23,800个含增长与替换，不是十年累计或每年净增。端点相差约18,200人受舍入影响。预测不等个人录用率或AI因果。"
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
@@ -31113,7 +31120,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源：O*NET OnLine 快递员（43-5021.00）职业档案、全国工资（OEWS 2025 年工资数据）与就业趋势（基于 BLS 2024—2034 年预测）、ILO 生成式 AI 与职业任务暴露研究、NIST AI 风险管理框架，以及国家统计局公开资料；各条目的口径与使用限制见下方来源登记。"
+              "美国O*NET43-5021.00任务、2025工资及2025—2035预测；中国职业画像、快递暂行条例、快递市场管理办法、个人信息保护法与NBS2025条件行业背景。ILO与NIST只支持方法及自愿治理建议，边界见登记。"
             ]
           },
           "id": "actors.display.source_card.source",
@@ -31251,7 +31258,7 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于调度员方向的派单与线路统筹对照（相邻职业）。",
                   "不把派单调度职责并入本职业。"
@@ -31267,7 +31274,7 @@
                 "url": "https://www.onetonline.org/link/summary/43-5032.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于发运、收货与库存方向的单据登记对照（相邻职业）。",
                   "不把仓储物流职责并入本职业。"
@@ -31283,14 +31290,13 @@
                 "url": "https://www.onetonline.org/link/summary/43-5071.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于邮件文员方向的邮件分拣处理对照（相邻职业）。",
-                  "不把邮件分拣职责并入本职业。"
+                  "非邮政邮件文员Core含发放包裹和政策问答，不由分类推客户更少；2025中位39,280美元。"
                 ],
                 "evidence_type": "official source",
                 "id": "art",
-                "limitation": "只支持邮件文员与邮件机操作员（相邻职业）的邮件分拣与处理任务；同口径中位年薪 39,280 美元（O*NET 全国工资，2025 年工资数据）；通常不承担到点投递。",
+                "limitation": "非邮政邮件文员Core含发放包裹和政策问答，不由分类推客户更少；2025中位39,280美元。",
                 "market": "美国",
                 "name": "O*NET OnLine：Mail Clerks and Mail Machine Operators, Except Postal Service（43-9051.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31299,39 +31305,39 @@
                 "url": "https://www.onetonline.org/link/summary/43-9051.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持该细分的就业与预测口径。",
-                  "不含中国大陆信息，不能替代中国大陆数据。"
+                  "美国本岗2025就业228,900人，2035预测247,100人；2025—2035增长8%，年均空缺23,800个含增长与替换，不是十年累计或每年净增。端点相差约18,200人受舍入影响。预测不等个人录用率或AI因果。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "支持该细分 2024 年就业约 247,200 人、预测标签 Much faster than average（7% 或更高）与累计约 27,900 个含增长与替换的空缺；本页就业与预测以该 O*NET 就业趋势页为准。",
+                "limitation": "美国本岗2025就业228,900人，2035预测247,100人；2025—2035增长8%，年均空缺23,800个含增长与替换，不是十年累计或每年净增。端点相差约18,200人受舍入影响。预测不等个人录用率或AI因果。",
                 "market": "美国",
-                "name": "O*NET OnLine：Couriers and Messengers 就业趋势（基于 BLS 2024—2034 年预测）",
-                "period": "2024—2034 年预测期；检索 2026-09-18",
+                "name": "O*NET转引BLS Couriers and Messengers就业趋势2025—2035",
+                "period": "2025就业；2025—2035预测",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/43-5021.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持中国大陆快递与取送岗位的分类与用工语境。",
-                  "不据此推定任职资格、授权或工资数值。"
+                  "中国《快递暂行条例》第5/31/34条禁止私拆快件及违法寄递禁限寄品：收寄前发现禁止寄递物应拒收，已收寄发现疑似禁止寄递物须立即停止分拣运输投递并依法处理、涉嫌犯罪报告配合；其余禁限寄按规定处理。美国危险物品预防任务不是中国承运许可。具体单位处置、解除中止和恢复程序未取得，不自行补授权。",
+                  "中国《快递暂行条例》23/35条、《快递市场管理办法》35–37条及个人信息保护法：依法核适用收寄身份与信息，信件和安全协议用户等例外另核；身份信息除姓名地址电话不得记运单，履约最小必要并安全管理，员工不得非法泄露。姓名地址电话不一概属敏感个人信息，医疗健康等按法定条件核。信息处理者承担制度审计及事件处置义务，员工按真实权限报告，不授予全部处置职责。",
+                  "中国《快递暂行条例》27条无法投递应退寄件人或按寄件人要求处理；破损、争议、路况及超权限情形按实际规则核对交接，不将所有异常统一写成停工，也不授予员工独立赔付及恢复权限。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official regulation",
                 "id": "cn-rule",
-                "limitation": "支持中国大陆同类岗位多称快递员、同城配送、送件员或单位内部信使与收发员、分属寄递、运输仓储与各类机构行政支持部门的分类语境：常见全职、计件与外包并存，隐私、财务与安全规定因单位不同；不证明全国统一的强制资质，也不能把该类岗位与美国职业代码一一对应。",
+                "limitation": "中国《快递暂行条例》第5/31/34条禁止私拆快件及违法寄递禁限寄品：收寄前发现禁止寄递物应拒收，已收寄发现疑似禁止寄递物须立即停止分拣运输投递并依法处理、涉嫌犯罪报告配合；其余禁限寄按规定处理。美国危险物品预防任务不是中国承运许可。具体单位处置、解除中止和恢复程序未取得，不自行补授权。中国《快递暂行条例》23/35条、《快递市场管理办法》35–37条及个人信息保护法：依法核适用收寄身份与信息，信件和安全协议用户等例外另核；身份信息除姓名地址电话不得记运单，履约最小必要并安全管理，员工不得非法泄露。姓名地址电话不一概属敏感个人信息，医疗健康等按法定条件核。信息处理者承担制度审计及事件处置义务，员工按真实权限报告，不授予全部处置职责。中国《快递暂行条例》27条无法投递应退寄件人或按寄件人要求处理；破损、争议、路况及超权限情形按实际规则核对交接，不将所有异常统一写成停工，也不授予员工独立赔付及恢复权限。",
                 "market": "中国内地",
-                "name": "中国大陆公开寄递与运输用工信息（快递与取送岗位）",
-                "period": "现行规定；检索 2026-09-18",
-                "publisher": "公开寄递与运输用工信息",
+                "name": "快递暂行条例（2025第二次修订）",
+                "period": "2025-04-13第二次修订",
+                "publisher": "国务院；市场监管总局转载",
                 "scope": "contextual",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_ccea5d29862840979d0ff2304edabbb2.html"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于邮政邮件投递方向的按线路投递对照（相邻职业）。",
                   "不把邮政投递职责并入本职业。"
@@ -31347,14 +31353,13 @@
                 "url": "https://www.onetonline.org/link/summary/43-5052.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于司机兼销售方向的配送与结算对照（相邻职业）。",
-                  "不把销售与结算职责并入本职业。"
+                  "司机销售重商品销售与结算，本岗Supplemental已有付款，不排除所有收款；2025中位38,770美元。"
                 ],
                 "evidence_type": "official source",
                 "id": "directing",
-                "limitation": "只支持司机兼销售员（相邻职业）的驾驶配送与销售结算任务；同口径中位年薪 38,770 美元（O*NET 全国工资，2025 年工资数据）；O*NET 标注 Bright Outlook。",
+                "limitation": "司机销售重商品销售与结算，本岗Supplemental已有付款，不排除所有收款；2025中位38,770美元。",
                 "market": "美国",
                 "name": "O*NET OnLine：Driver/Sales Workers（53-3031.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31363,14 +31368,13 @@
                 "url": "https://www.onetonline.org/link/summary/53-3031.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于行李搬运方向的物品搬运与客户服务对照（相邻职业）。",
-                  "不把场所行李职责并入本职业。"
+                  "行李搬运有当地交通、传信及差事，不一概固定场所。"
                 ],
                 "evidence_type": "official source",
                 "id": "editing",
-                "limitation": "只支持行李搬运员与行李员（相邻职业）的场所行李搬运与客户服务任务；重心在固定场所的行李服务，客户接触较多。",
+                "limitation": "行李搬运有当地交通、传信及差事，不一概固定场所。",
                 "market": "美国",
                 "name": "O*NET OnLine：Baggage Porters and Bellhops（39-6011.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31379,7 +31383,7 @@
                 "url": "https://www.onetonline.org/link/summary/39-6011.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于邮件分拣处理方向的作业对照（相邻职业）。",
                   "不把分拣处理职责并入本职业。"
@@ -31395,14 +31399,13 @@
                 "url": "https://www.onetonline.org/link/summary/43-5053.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持入行准备层级与教育需求的观察点。",
-                  "不构成具体雇主的录用条件或中国大陆的门槛。"
+                  "美国JobZone1–2、SVP<6为跨职业准备层级，几天至一年训练是层级概述而非每人时长；本岗新聘教育响应80%高中或同等、13%部分大学无学位、7%未高中毕业，不是中国门槛。"
                 ],
                 "evidence_type": "official source",
                 "id": "employer",
-                "limitation": "支持本职业的准备层级（Job Zone 1–2，SVP 低于 6.0）与兴趣代码（CR）；不代表具体雇主的招聘条件，也不等同于中国大陆的要求。",
+                "limitation": "美国JobZone1–2、SVP<6为跨职业准备层级，几天至一年训练是层级概述而非每人时长；本岗新聘教育响应80%高中或同等、13%部分大学无学位、7%未高中毕业，不是中国门槛。",
                 "market": "美国",
                 "name": "O*NET OnLine：Couriers and Messengers 摘要（43-5021.00）",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31411,14 +31414,13 @@
                 "url": "https://www.onetonline.org/link/summary/43-5021.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于轻型卡车司机方向的驾驶与货物运输对照（相邻职业）。",
-                  "不把驾驶运输职责并入本职业。"
+                  "美国轻型卡车有多点配送及客户收款，车型容量定义不替代中国驾照条件；中位44,860美元2025。"
                 ],
                 "evidence_type": "official source",
                 "id": "enrichment",
-                "limitation": "只支持轻型卡车司机（相邻职业）的驾驶运输与装卸任务；同口径中位年薪 44,860 美元（O*NET 全国工资，2025 年工资数据）；O*NET 标注 Bright Outlook。",
+                "limitation": "美国轻型卡车有多点配送及客户收款，车型容量定义不替代中国驾照条件；中位44,860美元2025。",
                 "market": "美国",
                 "name": "O*NET OnLine：Light Truck Drivers（53-3033.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31440,33 +31442,31 @@
                 "period": "当前工具；检索 2026-09-18",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/"
+                "url": "https://www.onetcenter.org/IP.html"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "登记中国大陆公开工资统计的细分层级。",
-                  "代理值不得写成本职业工资。"
+                  "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "nbs",
-                "limitation": "公开工资统计按行业门类与人员类别发布，未建立与 43-5021.00 对应的职业细类；行业或人员类别均值不是本职业工资，也不能外推为全国职业收入。",
+                "limitation": "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。",
                 "market": "中国内地",
-                "name": "国家统计局：公开统计与工资发布入口",
-                "period": "现行发布；检索 2026-09-18",
+                "name": "国家统计局2025城镇单位工资",
+                "period": "2025数据，2026-05-15发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "用于说明引入 AI 系统时的治理、记录与人工监督要求。",
-                  "框架不替代单位规程与合规要求的责任划分。"
+                  "NIST自愿AI治理建议，不代强制寄递法律。"
                 ],
                 "evidence_type": "institutional framework",
                 "id": "nist",
-                "limitation": "提供 AI 系统风险治理的用语与流程要求（角色、责任、记录与人工监督）；不规定取送与投递流程、安全要求或款项授权。",
+                "limitation": "NIST自愿AI治理建议，不代强制寄递法律。",
                 "market": "美国",
                 "name": "NIST：Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
                 "period": "AI RMF 1.0；检索 2026-09-18",
@@ -31475,7 +31475,7 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于说明工资统计的覆盖与折算口径。",
                   "不提供个人收入结论，也不能用于推算个人到手工资。"
@@ -31488,65 +31488,61 @@
                 "period": "2025 年工资数据；检索 2026-09-18",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.onetonline.org/link/localwages/43-5021.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持本职业的任务、工作情境与准备层级。",
-                  "不含技术采用与岗位替代数据。"
+                  "美国43-5021.00的16项任务为10Core、6Supplemental：Core含医疗记录、标本及药品取送、步行骑车驾车或公共交通、清单装载与危险物品预防、接收物品及投递信息、机构与住家取送文件报纸包裹、记录物品与回应、卸车分拣、沿路排序、规划省时路线、油液燃料等例行维护；Supplemental含签名或安排付款、大车转小车、拆封分拣来件、送后联系本单位、电话口头传信和一般文书差事。Core不等每日频次，Supplemental不等每岗必做。美国2025行业就业分布医疗保健与社会援助11%、其他行业89%含运输仓储；不是工资或中国雇主分布，不推未披露行业与自雇细分。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet",
-                "limitation": "支持本职业的任务、详细工作活动、工作情境百分比、准备层级、兴趣代码与 2024 年行业就业占比；为单一职业口径，不含技术采用、岗位替代或收入变化数据。",
+                "limitation": "美国43-5021.00的16项任务为10Core、6Supplemental：Core含医疗记录、标本及药品取送、步行骑车驾车或公共交通、清单装载与危险物品预防、接收物品及投递信息、机构与住家取送文件报纸包裹、记录物品与回应、卸车分拣、沿路排序、规划省时路线、油液燃料等例行维护；Supplemental含签名或安排付款、大车转小车、拆封分拣来件、送后联系本单位、电话口头传信和一般文书差事。Core不等每日频次，Supplemental不等每岗必做。美国2025行业就业分布医疗保健与社会援助11%、其他行业89%含运输仓储；不是工资或中国雇主分布，不推未披露行业与自雇细分。",
                 "market": "美国",
                 "name": "O*NET OnLine：Couriers and Messengers（43-5021.00）职业档案",
-                "period": "页面 2026 年更新；检索 2026-09-18",
+                "period": "2026页面更新；2025行业，不同任务调查",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/43-5021.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持雇主技术关键词的市场信号说明。",
-                  "关键词不等于采用率或能力要求。"
+                  "O*NET转引Lightcast2025全美招聘热门技术仅4项：Office2%、Excel2%、Outlook1%、Word1%；未列路线导航。关键词比例不等采用率、熟练度、生成式AI效果。任务中的路线规划另有依据，不混同招聘表。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "r2-ai",
-                "limitation": "列出雇主招聘中提到的邮件、办公套件、路线导航以及表格与文字处理等技术关键词；招聘关键词是市场信号，不衡量使用率、熟练度或岗位替代。",
+                "limitation": "O*NET转引Lightcast2025全美招聘热门技术仅4项：Office2%、Excel2%、Outlook1%、Word1%；未列路线导航。关键词比例不等采用率、熟练度、生成式AI效果。任务中的路线规划另有依据，不混同招聘表。",
                 "market": "美国",
                 "name": "O*NET OnLine：Couriers and Messengers 热门技术（43-5021.00）",
-                "period": "页面 2026 年更新；检索 2026-09-18",
+                "period": "2025 Lightcast全美招聘",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/43-5021.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "登记中国大陆公开工资统计的细分层级。",
-                  "未取得本职业单列数值，不使用代理数字。"
+                  "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-1",
-                "limitation": "公开工资统计只按区域、行业门类与人员类别发布，未建立与本职业一一对应的职业细类；本页未取得本职业单列数值，缺口在页面可见位置标记。",
+                "limitation": "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。",
                 "market": "中国内地",
-                "name": "国家统计局：公开工资统计发布入口",
-                "period": "现行发布；检索 2026-09-18",
+                "name": "国家统计局2025城镇单位工资",
+                "period": "2025数据，2026-05-15发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "说明时薪、月薪与年收入不可直接互换。",
-                  "不提供个人收入结论。"
+                  "OEWS43-5021本岗税前常规有薪工资，涵盖全兼职，含佣金生产奖金小费，排除加班溢价非生产奖金；自雇家庭雇员未付薪家人不在覆盖内。官方年值可引用，2080标准折算不保证个人工时或稳定月到手。"
                 ],
                 "evidence_type": "official methodology",
                 "id": "r2-pay-2",
-                "limitation": "说明 OEWS 的覆盖人群、工资构成与折算假设；不提供本职业具体数值，也不用于把时薪换算为个人月收入。",
+                "limitation": "OEWS43-5021本岗税前常规有薪工资，涵盖全兼职，含佣金生产奖金小费，排除加班溢价非生产奖金；自雇家庭雇员未付薪家人不在覆盖内。官方年值可引用，2080标准折算不保证个人工时或稳定月到手。",
                 "market": "美国",
                 "name": "BLS Handbook of Methods：OEWS 工资与折算口径",
                 "period": "现行方法说明；检索 2026-09-18",
@@ -31555,7 +31551,7 @@
                 "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于说明工资分位的统计位置。",
                   "不提供个人收入结论，也不能按固定工时年化。"
@@ -31589,12 +31585,11 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "用于说明任务级暴露度量的方法。",
-                  "任务暴露不等于自动化采用或岗位替代结果。"
+                  "ILO暴露方法，匹配本岗分数未取得，不称研究没有。"
                 ],
                 "evidence_type": "institutional research",
                 "id": "sag",
-                "limitation": "按任务级暴露度量生成式 AI 与职业任务的接近程度；不提供本职业单职业分数、采用率、自动化率或替代日期。",
+                "limitation": "ILO暴露方法，匹配本岗分数未取得，不称研究没有。",
                 "market": "全球",
                 "name": "ILO：Generative AI and Jobs — Refined Global Index of Occupational Exposure",
                 "period": "研究发表时点；检索 2026-09-18",
@@ -31603,14 +31598,13 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持任务、工作活动与工作情境百分比。",
-                  "不含技术采用、岗位数量或收入变化数据。"
+                  "美国43-5021.00的16项任务为10Core、6Supplemental：Core含医疗记录、标本及药品取送、步行骑车驾车或公共交通、清单装载与危险物品预防、接收物品及投递信息、机构与住家取送文件报纸包裹、记录物品与回应、卸车分拣、沿路排序、规划省时路线、油液燃料等例行维护；Supplemental含签名或安排付款、大车转小车、拆封分拣来件、送后联系本单位、电话口头传信和一般文书差事。Core不等每日频次，Supplemental不等每岗必做。57项情境分档，不把更新年份当统一调查年。"
                 ],
                 "evidence_type": "official source",
                 "id": "sag-moa",
-                "limitation": "支持本职业（43-5021.00）的任务、详细工作活动与工作情境百分比；该页为单一职业口径，不含技术采用或岗位替代数据。",
+                "limitation": "美国43-5021.00的16项任务为10Core、6Supplemental：Core含医疗记录、标本及药品取送、步行骑车驾车或公共交通、清单装载与危险物品预防、接收物品及投递信息、机构与住家取送文件报纸包裹、记录物品与回应、卸车分拣、沿路排序、规划省时路线、油液燃料等例行维护；Supplemental含签名或安排付款、大车转小车、拆封分拣来件、送后联系本单位、电话口头传信和一般文书差事。Core不等每日频次，Supplemental不等每岗必做。57项情境分档，不把更新年份当统一调查年。",
                 "market": "美国",
                 "name": "O*NET OnLine：Couriers and Messengers 详细资料（43-5021.00）",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31619,20 +31613,64 @@
                 "url": "https://www.onetonline.org/link/details/43-5021.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于货物与货运代理方向的运输安排与单据对照（相邻职业）。",
-                  "不把货运代理职责并入本职业。"
+                  "货运代理有订舱货运费用和单据，也有仓库及处理任务，不一概室内；2025中位52,260美元。"
                 ],
                 "evidence_type": "official source",
                 "id": "teacher",
-                "limitation": "只支持货物与货运代理（相邻职业）的货运安排与单据处理任务；同口径中位年薪 52,260 美元（O*NET 全国工资，2025 年工资数据）；O*NET 标注 Bright Outlook。",
+                "limitation": "货运代理有订舱货运费用和单据，也有仓库及处理任务，不一概室内；2025中位52,260美元。",
                 "market": "美国",
                 "name": "O*NET OnLine：Cargo and Freight Agents（43-5011.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/43-5011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国就业培训技术指导中心2022职业画像明确快递员4-02-07-08，下设快件揽收员、快件派送员，含揽收验视封装称重收费、票款交接、开拆快件总包与按址分装投递、改退、客户维护推广及投诉赔偿诉求。开拆总包不等私拆收件人快件；不与覆盖内部信使和医疗取送的美国43-5021精确一一对应。画像学历为初中或同等、列五级至一级技能等级，不据此认定证书为全国强制准入。"
+                ],
+                "evidence_type": "official occupation guidance",
+                "id": "g04-cn-class",
+                "limitation": "中国就业培训技术指导中心2022职业画像明确快递员4-02-07-08，下设快件揽收员、快件派送员，含揽收验视封装称重收费、票款交接、开拆快件总包与按址分装投递、改退、客户维护推广及投诉赔偿诉求。开拆总包不等私拆收件人快件；不与覆盖内部信使和医疗取送的美国43-5021精确一一对应。画像学历为初中或同等、列五级至一级技能等级，不据此认定证书为全国强制准入。",
+                "market": "中国内地",
+                "name": "中国就业培训技术指导中心：快递员职业画像",
+                "period": "2022-06-08职业画像",
+                "publisher": "中国就业培训技术指导中心",
+                "scope": "contextual",
+                "url": "https://chinajob.mohrss.gov.cn/c/2022-06-08/352035.shtml"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国《快递市场管理办法》第27–28条：告知验收权，明显破损或易碎品告知检查内件或拒收；签字或其他可辨认可保存的明示确认可证明收到，不能面交需与用户约定方式，未经同意不得代为确认或投智能柜、服务站。代收款项仅适用实际业务，不是每次必收。中国《快递暂行条例》23/35条、《快递市场管理办法》35–37条及个人信息保护法：依法核适用收寄身份与信息，信件和安全协议用户等例外另核；身份信息除姓名地址电话不得记运单，履约最小必要并安全管理，员工不得非法泄露。姓名地址电话不一概属敏感个人信息，医疗健康等按法定条件核。信息处理者承担制度审计及事件处置义务，员工按真实权限报告，不授予全部处置职责。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "g04-cn-market",
+                "limitation": "中国《快递市场管理办法》第27–28条：告知验收权，明显破损或易碎品告知检查内件或拒收；签字或其他可辨认可保存的明示确认可证明收到，不能面交需与用户约定方式，未经同意不得代为确认或投智能柜、服务站。代收款项仅适用实际业务，不是每次必收。中国《快递暂行条例》23/35条、《快递市场管理办法》35–37条及个人信息保护法：依法核适用收寄身份与信息，信件和安全协议用户等例外另核；身份信息除姓名地址电话不得记运单，履约最小必要并安全管理，员工不得非法泄露。姓名地址电话不一概属敏感个人信息，医疗健康等按法定条件核。信息处理者承担制度审计及事件处置义务，员工按真实权限报告，不授予全部处置职责。",
+                "market": "中国内地",
+                "name": "快递市场管理办法（交通运输部令2023年第22号）",
+                "period": "2023年第22号令，2024-03-01施行",
+                "publisher": "交通运输部；国家邮政局转载",
+                "scope": "contextual",
+                "url": "https://sc.spb.gov.cn/scsyzglj/c100065/c100066/202401/89f3fa88e3b44702b108e1e20cae974c.shtml"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国《快递暂行条例》23/35条、《快递市场管理办法》35–37条及个人信息保护法：依法核适用收寄身份与信息，信件和安全协议用户等例外另核；身份信息除姓名地址电话不得记运单，履约最小必要并安全管理，员工不得非法泄露。姓名地址电话不一概属敏感个人信息，医疗健康等按法定条件核。信息处理者承担制度审计及事件处置义务，员工按真实权限报告，不授予全部处置职责。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "g04-pipl",
+                "limitation": "中国《快递暂行条例》23/35条、《快递市场管理办法》35–37条及个人信息保护法：依法核适用收寄身份与信息，信件和安全协议用户等例外另核；身份信息除姓名地址电话不得记运单，履约最小必要并安全管理，员工不得非法泄露。姓名地址电话不一概属敏感个人信息，医疗健康等按法定条件核。信息处理者承担制度审计及事件处置义务，员工按真实权限报告，不授予全部处置职责。",
+                "market": "中国内地",
+                "name": "中华人民共和国个人信息保护法",
+                "period": "2021通过，2021-11-01施行",
+                "publisher": "全国人大常委会；国家网信办转载",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               }
             ]
           },
@@ -34129,7 +34167,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls"
+              "g04-cn-market"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -34165,7 +34203,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls"
+              "cn-rule"
             ],
             "id": "project-income",
             "mitigation": {
@@ -34201,7 +34239,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "cn-rule"
+              "g04-cn-class",
+              "cn-rule",
+              "g04-cn-market"
             ],
             "id": "identity-procedure",
             "mitigation": {
@@ -34237,8 +34277,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "nist",
-              "sag-moa"
+              "g04-pipl",
+              "cn-rule",
+              "g04-cn-market"
             ],
             "id": "project-data",
             "mitigation": {
@@ -34274,8 +34315,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
-              "employer"
+              "sag-moa"
             ],
             "id": "audition-feedback",
             "mitigation": {
@@ -34429,27 +34469,27 @@
             {
               "指标": "数据与口径",
               "数值": "本轮未取得与快递员（O*NET-SOC 43-5021.00）对应的中国大陆职业级工资数值，故不展示具体数字；缺口已在页面可见位置标记。",
-              "说明": "中国大陆公开工资统计最高细分到行业门类与人员类别，不发布该职业细类数值。"
+              "说明": "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。"
             },
             {
               "指标": "查阅范围",
-              "数值": "国家统计局工资与统计发布页面（检索 2026-09-18）",
+              "数值": "国家统计局2025城镇单位工资发布，2026-05-15；本轮核2026-10-09",
               "说明": "只用于说明实际查阅范围与时间，不作数值换算依据。"
             },
             {
               "指标": "职业分类",
-              "数值": "中国大陆同类岗位多称快递员、同城配送、送件员或单位内部信使与收发员，分属寄递、运输仓储与各类机构的行政支持部门",
+              "数值": "中国就业培训技术指导中心2022职业画像明确快递员4-02-07-08，下设快件揽收员、快件派送员，含揽收验视封装称重收费、票款交接、开拆快件总包与按址分装投递、改退、客户维护推广及投诉赔偿诉求。开拆总包不等私拆收件人快件；不与覆盖内部信使和医疗取送的美国43-5021精确一一对应。画像学历为初中或同等、列五级至一级技能等级，不据此认定证书为全国强制准入。",
               "说明": "用于中国语境说明；不能把该类岗位直接等同于美国职业代码的职责或工资，也不能据此推定任职资格。"
             },
             {
               "指标": "数据与合规",
-              "数值": "涉及收件人身份信息、代收款项与危险品处理的岗位受隐私、财务与安全规定约束",
+              "数值": "中国《快递暂行条例》第5/31/34条禁止私拆快件及违法寄递禁限寄品：收寄前发现禁止寄递物应拒收，已收寄发现疑似禁止寄递物须立即停止分拣运输投递并依法处理、涉嫌犯罪报告配合；其余禁限寄按规定处理。美国危险物品预防任务不是中国承运许可。具体单位处置、解除中止和恢复程序未取得，不自行补授权。中国《快递市场管理办法》第27–28条：告知验收权，明显破损或易碎品告知检查内件或拒收；签字或其他可辨认可保存的明示确认可证明收到，不能面交需与用户约定方式，未经同意不得代为确认或投智能柜、服务站。代收款项仅适用实际业务，不是每次必收。中国《快递暂行条例》23/35条、《快递市场管理办法》35–37条及个人信息保护法：依法核适用收寄身份与信息，信件和安全协议用户等例外另核；身份信息除姓名地址电话不得记运单，履约最小必要并安全管理，员工不得非法泄露。姓名地址电话不一概属敏感个人信息，医疗健康等按法定条件核。信息处理者承担制度审计及事件处置义务，员工按真实权限报告，不授予全部处置职责。",
               "说明": "数据权限、款项处理与危险品作业须按具体单位与现行规定核对，本页不构成授权或作业建议。"
             },
             {
               "指标": "统计覆盖",
               "数值": "国家统计局城镇单位工资统计覆盖城镇法人单位，不含个体工商户与自由职业者等",
-              "说明": "快递与配送岗位大量以计件、外包与平台用工形式存在，公开职业级数据未单列，行业均值不能代表该职业实际收入。"
+              "说明": "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。"
             },
             {
               "指标": "市场对照",
@@ -34473,10 +34513,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_class_row": "中国大陆用工场景：寄递与同城配送企业、运输与仓储的配送与转运岗位、医疗机构与实验室的标本与药品取送岗位，以及各行业单位的内部信使与收发岗位；公开工资统计按行业门类与人员类别发布，未建立与 O*NET-SOC 43-5021.00 对应的职业细类，本页不据分类推定任职资格或收入。",
+          "china_class_row": "中国就业培训技术指导中心2022职业画像明确快递员4-02-07-08，下设快件揽收员、快件派送员，含揽收验视封装称重收费、票款交接、开拆快件总包与按址分装投递、改退、客户维护推广及投诉赔偿诉求。开拆总包不等私拆收件人快件；不与覆盖内部信使和医疗取送的美国43-5021精确一一对应。画像学历为初中或同等、列五级至一级技能等级，不据此认定证书为全国强制准入。",
           "china_edu_table": [
             {
-              "学历段": "高中或中专＋驾驶或骑行资格",
+              "学历段": "美国实际教育响应与中国画像分开核",
               "岗位方向": "同城配送、送件与固定线路取送岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -34486,7 +34526,7 @@
               }
             },
             {
-              "学历段": "高中或中专＋熟悉线路与系统",
+              "学历段": "目标岗位学历、车型和系统培训另核",
               "岗位方向": "派单取送与签收记录岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -34496,7 +34536,7 @@
               }
             },
             {
-              "学历段": "大专及以上＋寄递或物流知识",
+              "学历段": "中国职业画像及业务法规，不预设大专门槛",
               "岗位方向": "网点调度、异常件处理与业务支持岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.theater",
@@ -34552,14 +34592,14 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国大陆公开信息检索入口：国家统计局工资与统计发布页面；本轮未取得该职业单列数值。",
+          "china_open": "NBS2025工资发布，行业背景按法人主营行业条件匹配，非职业工资。",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_ref": "国家统计局：公开统计与工资发布入口｜https://www.stats.gov.cn/",
+          "china_ref": "国家统计局2025城镇单位工资｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
           "china_salary_note": {
             "$item": "actors.display.career_snapshot_primary_locale.boundary",
             "block": "china-salary",
@@ -34581,7 +34621,7 @@
               "月薪参考": {
                 "$join": [
                   {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
+                    "$fact": "china-jiaojiang-featured-daily-2026-g04-current",
                     "field": "display_value"
                   },
                   {
@@ -34604,7 +34644,7 @@
               }
             }
           ],
-          "china_soc_row": "美国职业代码：O*NET-SOC 43-5021.00（Couriers and Messengers）；BLS 就业预测经 O*NET 就业趋势页发布；中国大陆未建立与之对应的职业级工资口径。",
+          "china_soc_row": "美国43-5021包含内部及医疗信使；中国4-02-07-08已明确，精确映射和职业全国工资仍未取得。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
             "china-jiaojiang-featured-daily-2026"
@@ -34614,18 +34654,18 @@
             "ai_heading": "AI 或自动化会影响快递员的工资吗？",
             "driver_heading": "快递与配送场景怎样安排排班？",
             "official_heading": "官方统计口径与缺失说明",
-            "scenario_caption": "学历与训练背景、岗位方向与说明（编辑整理，不是薪资统计）",
-            "scenario_heading": "不同学历与训练背景对应哪些快递与取送岗位方向？",
+            "scenario_caption": "不同法域的准备线索，不是学历到岗位的录用映射",
+            "scenario_heading": "学历、培训与岗位要求怎样核对？",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "学历与训练背景",
             "scenario_value_label": "岗位方向"
           },
-          "us_growth": "增长 7% 或更高（2024—2034 年，远高于平均）",
+          "us_growth": "增长8%（2025—2035）",
           "us_median": "39,200美元/年（中位数，2025 年工资数据）"
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "O*NET OnLine 全国工资：Couriers and Messengers 43-5021.00（2025 年工资数据）｜https://www.onetonline.org/link/localwages/43-5021.00；O*NET 就业趋势（BLS 2024—2034 年预测）｜https://www.onetonline.org/link/localtrends/43-5021.00",
+        "authority_sources": "O*NET本岗2025全国工资与2025—2035就业预测；具体来源见登记。",
         "bls_table": [
           {
             "fact_ref": "low",
@@ -34665,31 +34705,31 @@
             "说明": "第 90 百分位是高分段位置，通常与行业、地区与用工安排差异相关，来源没有证明与经验的对应关系；O*NET 全国工资：43-5021.00（2025 年工资数据）｜https://www.onetonline.org/link/localwages/43-5021.00"
           },
           {
-            "fact_ref": "employment",
-            "指标": "2024 就业 · 基期人数",
+            "fact_ref": "employment-g04-current",
+            "指标": "2025就业·基期人数",
             "数值": {
-              "$fact": "employment",
+              "$fact": "employment-g04-current",
               "field": "display_value"
             },
-            "说明": "就业规模是存量统计，不是当年招聘数量或岗位空缺数；来源为 O*NET 就业趋势页（基于 BLS 2024—2034 年预测）。"
+            "说明": "美国本岗2025就业228,900人，2035预测247,100人；2025—2035增长8%，年均空缺23,800个含增长与替换，不是十年累计或每年净增。端点相差约18,200人受舍入影响。预测不等个人录用率或AI因果。"
           },
           {
-            "fact_ref": "growth",
-            "指标": "2024—2034 就业 · 增长预测",
+            "fact_ref": "growth-g04-current",
+            "指标": "2025—2035就业·增长",
             "数值": {
-              "$fact": "growth",
+              "$fact": "growth-g04-current",
               "field": "display_value"
             },
-            "说明": "预测标签为「远高于平均」，属于预测期的相对变化；该预测不含技术替代时点，也不代表个人录用概率。"
+            "说明": "美国本岗2025就业228,900人，2035预测247,100人；2025—2035增长8%，年均空缺23,800个含增长与替换，不是十年累计或每年净增。端点相差约18,200人受舍入影响。预测不等个人录用率或AI因果。"
           },
           {
-            "fact_ref": "openings",
-            "指标": "2024—2034 就业 · 职位空缺",
+            "fact_ref": "openings-g04-current",
+            "指标": "2025—2035就业·年均空缺",
             "数值": {
-              "$fact": "openings",
+              "$fact": "openings-g04-current",
               "field": "display_value"
             },
-            "说明": "该口径空缺说明含因增长与替换产生的职位空缺，不是每年净增岗位数；预测期为 2024—2034 年。"
+            "说明": "美国本岗2025就业228,900人，2035预测247,100人；2025—2035增长8%，年均空缺23,800个含增长与替换，不是十年累计或每年净增。端点相差约18,200人受舍入影响。预测不等个人录用率或AI因果。"
           }
         ],
         "boundary": {
@@ -34751,7 +34791,7 @@
           "type": "prose"
         },
         "growth": {
-          "$fact": "growth",
+          "$fact": "growth-g04-current",
           "field": "display_value"
         },
         "heading": {
@@ -34766,13 +34806,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024 年（O*NET 行业分布，43-5021.00 口径）",
+        "industry_period": "2025 O*NET行业就业分布（43-5021）",
         "industry_rows": [
           {
-            "fact_ref": "median",
+            "fact_ref": "industry-theater-g04-current",
             "industry": "医疗保健与社会援助",
             "median": {
-              "$fact": "industry-theater",
+              "$fact": "industry-theater-g04-current",
               "field": "display_value"
             },
             "note": {
@@ -34783,10 +34823,10 @@
             }
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "industry-education-g04-current",
             "industry": "其他行业（含运输与仓储）",
             "median": {
-              "$fact": "industry-education",
+              "$fact": "industry-education-g04-current",
               "field": "display_value"
             },
             "note": {
@@ -34797,10 +34837,10 @@
             }
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "industry-amusement-g04-current",
             "industry": "更细行业拆分",
             "median": {
-              "$fact": "industry-amusement",
+              "$fact": "industry-amusement-g04-current",
               "field": "display_value"
             },
             "note": {
@@ -34812,7 +34852,7 @@
           },
           {
             "industry": "快递员所在行业（统计分类）",
-            "median": "分布合计｜100%（2024 年 O*NET 行业分布；医疗保健与社会援助 11%、其他行业 89%）",
+            "median": "2025就业分布合计100%（医疗11%、其他89%）",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -34877,7 +34917,7 @@
           "type": "prose"
         },
         "outlook_period": {
-          "$fact": "growth",
+          "$fact": "growth-g04-current",
           "field": "period"
         },
         "wage_column_labels": [
@@ -34894,7 +34934,7 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "不可按固定工时年化",
+            "equivalent": "官方标准年度折算不保证个人实际工时或到手收入",
             "interpretation": {
               "$item": "actors.us-salary.career-snapshot-secondary-locale.2",
               "block": "us-salary",
@@ -35084,7 +35124,7 @@
           {
             "geography": "美国",
             "horizon": {
-              "$fact": "growth",
+              "$fact": "growth-g04-current",
               "field": "period"
             },
             "interpretation": {
@@ -35100,10 +35140,10 @@
               "type": "prose"
             },
             "metric": "就业总体变化",
-            "occupation_scope": "快递员（O*NET 就业趋势页，基于 BLS 2024—2034 年预测）",
+            "occupation_scope": "美国43-5021本岗2025—2035预测",
             "source_id": "bls",
             "value": {
-              "$fact": "growth",
+              "$fact": "growth-g04-current",
               "field": "display_value"
             }
           },
@@ -35269,13 +35309,13 @@
           },
           {
             "capability_gaps": {
-              "$item": "actors.display.market_signal_card.transitions.teacher.gaps",
+              "$item": "actors.display.market_signal_card.transitions.announcing.gaps",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
             "shared_capabilities": {
-              "$item": "actors.display.market_signal_card.transitions.teacher.shared",
+              "$item": "actors.display.market_signal_card.transitions.announcing.shared",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
@@ -35284,30 +35324,7 @@
             "target_slug": "shipping-receiving-and-inventory-clerks",
             "target_title": "发运、收货、库存文员（相邻职业）",
             "transition_distance": {
-              "$item": "actors.display.market_signal_card.transitions.teacher.distance",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            }
-          },
-          {
-            "capability_gaps": {
-              "$item": "actors.display.market_signal_card.transitions.enrichment.gaps",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "shared_capabilities": {
-              "$item": "actors.display.market_signal_card.transitions.enrichment.shared",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "target_href": "/zh/career/jobs/mail-clerks-and-mail-machine-operators-except-postal-service",
-            "target_slug": "mail-clerks-and-mail-machine-operators-except-postal-service",
-            "target_title": "邮件文员与邮件机操作员（相邻职业）",
-            "transition_distance": {
-              "$item": "actors.display.market_signal_card.transitions.enrichment.distance",
+              "$item": "actors.display.market_signal_card.transitions.announcing.distance",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
@@ -35326,11 +35343,34 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
+            "target_href": "/zh/career/jobs/mail-clerks-and-mail-machine-operators-except-postal-service",
+            "target_slug": "mail-clerks-and-mail-machine-operators-except-postal-service",
+            "target_title": "邮件文员与邮件机操作员（相邻职业）",
+            "transition_distance": {
+              "$item": "actors.display.market_signal_card.transitions.art.distance",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "capability_gaps": {
+              "$item": "actors.display.market_signal_card.transitions.dancing.gaps",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "actors.display.market_signal_card.transitions.dancing.shared",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
             "target_href": "/zh/career/jobs/postal-service-mail-carriers",
             "target_slug": "postal-service-mail-carriers",
             "target_title": "邮政服务邮件投递员（相邻职业）",
             "transition_distance": {
-              "$item": "actors.display.market_signal_card.transitions.art.distance",
+              "$item": "actors.display.market_signal_card.transitions.dancing.distance",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
@@ -35361,29 +35401,6 @@
           },
           {
             "capability_gaps": {
-              "$item": "actors.display.market_signal_card.transitions.announcing.gaps",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "shared_capabilities": {
-              "$item": "actors.display.market_signal_card.transitions.announcing.shared",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "target_href": "/zh/career/jobs/baggage-porters-and-bellhops",
-            "target_slug": "baggage-porters-and-bellhops",
-            "target_title": "行李搬运员与行李员（相邻职业）",
-            "transition_distance": {
-              "$item": "actors.display.market_signal_card.transitions.announcing.distance",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            }
-          },
-          {
-            "capability_gaps": {
               "$item": "actors.display.market_signal_card.transitions.editing.gaps",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
@@ -35395,9 +35412,9 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "target_href": "/zh/career/jobs/light-truck-drivers",
-            "target_slug": "light-truck-drivers",
-            "target_title": "轻型卡车司机（相邻职业）",
+            "target_href": "/zh/career/jobs/baggage-porters-and-bellhops",
+            "target_slug": "baggage-porters-and-bellhops",
+            "target_title": "行李搬运员与行李员（相邻职业）",
             "transition_distance": {
               "$item": "actors.display.market_signal_card.transitions.editing.distance",
               "block": "market-signals",
@@ -35407,13 +35424,36 @@
           },
           {
             "capability_gaps": {
-              "$item": "actors.display.market_signal_card.transitions.dancing.gaps",
+              "$item": "actors.display.market_signal_card.transitions.enrichment.gaps",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
             "shared_capabilities": {
-              "$item": "actors.display.market_signal_card.transitions.dancing.shared",
+              "$item": "actors.display.market_signal_card.transitions.enrichment.shared",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": "/zh/career/jobs/light-truck-drivers",
+            "target_slug": "light-truck-drivers",
+            "target_title": "轻型卡车司机（相邻职业）",
+            "transition_distance": {
+              "$item": "actors.display.market_signal_card.transitions.enrichment.distance",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "capability_gaps": {
+              "$item": "actors.display.market_signal_card.transitions.teacher.gaps",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "actors.display.market_signal_card.transitions.teacher.shared",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
@@ -35422,7 +35462,7 @@
             "target_slug": "cargo-and-freight-agents",
             "target_title": "货物与货运代理（相邻职业）",
             "transition_distance": {
-              "$item": "actors.display.market_signal_card.transitions.dancing.distance",
+              "$item": "actors.display.market_signal_card.transitions.teacher.distance",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
@@ -35452,7 +35492,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET OnLine 就业趋势（BLS 2024—2034 年预测）",
+            "label": "O*NET转引BLS2025—2035就业预测",
             "secondary_value": null,
             "value": {
               "$item": "actors.display.onet_structured_fields_block.bls",
@@ -35474,7 +35514,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中国公开寄递与运输用工信息",
+            "label": "中国职业画像、快递暂行条例与快递市场管理办法",
             "secondary_value": null,
             "value": {
               "$item": "actors.display.onet_structured_fields_block.cn",
@@ -36876,7 +36916,8 @@
         "occupation_scope": "Couriers and Messengers（O*NET-SOC 43-5021.00）全国工资；OEWS 该细分口径",
         "period": "2025 年工资数据；检索 2026-09-18",
         "source_refs": [
-          "oews"
+          "r2-pay-3",
+          "r2-pay-2"
         ]
       },
       {
@@ -36888,7 +36929,8 @@
         "occupation_scope": "Couriers and Messengers（43-5021.00）；分位是统计位置，不是入职起薪或职级等级",
         "period": "2025 年工资数据；检索 2026-09-18",
         "source_refs": [
-          "oews"
+          "r2-pay-3",
+          "r2-pay-2"
         ]
       },
       {
@@ -36900,7 +36942,8 @@
         "occupation_scope": "Couriers and Messengers（43-5021.00）；分位是统计位置，不是职级或资历等级",
         "period": "2025 年工资数据；检索 2026-09-18",
         "source_refs": [
-          "oews"
+          "r2-pay-3",
+          "r2-pay-2"
         ]
       },
       {
@@ -36986,6 +37029,90 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "228,900人（2025基期）",
+        "fact_id": "employment-g04-current",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "美国本岗2025就业228,900人，2035预测247,100人；2025—2035增长8%，年均空缺23,800个含增长与替换，不是十年累计或每年净增。端点相差约18,200人受舍入影响。预测不等个人录用率或AI因果。",
+        "period": "2025行业工资或就业；预测2025—2035；核2026-10-09",
+        "source_refs": [
+          "bls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "增长8%（2025—2035）",
+        "fact_id": "growth-g04-current",
+        "market": "美国",
+        "measure": "就业变化率",
+        "occupation_scope": "美国本岗2025就业228,900人，2035预测247,100人；2025—2035增长8%，年均空缺23,800个含增长与替换，不是十年累计或每年净增。端点相差约18,200人受舍入影响。预测不等个人录用率或AI因果。",
+        "period": "2025行业工资或就业；预测2025—2035；核2026-10-09",
+        "source_refs": [
+          "bls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均23,800个（2025—2035，增长及替换）",
+        "fact_id": "openings-g04-current",
+        "market": "美国",
+        "measure": "职位空缺",
+        "occupation_scope": "美国本岗2025就业228,900人，2035预测247,100人；2025—2035增长8%，年均空缺23,800个含增长与替换，不是十年累计或每年净增。端点相差约18,200人受舍入影响。预测不等个人录用率或AI因果。",
+        "period": "2025行业工资或就业；预测2025—2035；核2026-10-09",
+        "source_refs": [
+          "bls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "医疗保健与社会援助｜11%（2025就业）",
+        "fact_id": "industry-theater-g04-current",
+        "market": "美国",
+        "measure": "行业就业占比（非工资）",
+        "occupation_scope": "美国2025行业就业分布医疗保健与社会援助11%、其他行业89%含运输仓储；不是工资或中国雇主分布，不推未披露行业与自雇细分。",
+        "period": "2025行业工资或就业；预测2025—2035；核2026-10-09",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "其他行业｜89%（2025就业）",
+        "fact_id": "industry-education-g04-current",
+        "market": "美国",
+        "measure": "行业就业占比（非工资）",
+        "occupation_scope": "美国2025行业就业分布医疗保健与社会援助11%、其他行业89%含运输仓储；不是工资或中国雇主分布，不推未披露行业与自雇细分。",
+        "period": "2025行业工资或就业；预测2025—2035；核2026-10-09",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "其他行业未再拆分（2025就业）",
+        "fact_id": "industry-amusement-g04-current",
+        "market": "美国",
+        "measure": "行业分布的细分程度（非工资）",
+        "occupation_scope": "美国2025行业就业分布医疗保健与社会援助11%、其他行业89%含运输仓储；不是工资或中国雇主分布，不推未披露行业与自雇细分。",
+        "period": "2025行业工资或就业；预测2025—2035；核2026-10-09",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "中国职业工资缺口；另列NBS2025条件行业背景",
+        "fact_id": "china-jiaojiang-featured-daily-2026-g04-current",
+        "market": "中国内地",
+        "measure": "未取得的统计位置（中国大陆快递与取送岗位职业级工资）",
+        "occupation_scope": "国家统计局2025城镇单位税前年均行业背景：非私营/私营交通运输仓储邮政133,981/73,133元，卫生社会工作146,266/75,631元。须按雇主法人主营行业与私营分类匹配，非快递员职业中位、平台计件或月到手；5人及以上城镇法人单位，不含个体自由职业。中国本岗全国工资分布、招聘报价样本、全兼职计件外包比例及精确跨国映射未取得。",
+        "period": "2025行业工资或就业；预测2025—2035；核2026-10-09",
+        "source_refs": [
+          "r2-pay-1"
+        ]
       }
     ]
   },
@@ -36994,7 +37121,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "运输与物料搬运 · 取送与投递",
@@ -37045,7 +37172,7 @@
       "text": "快递员"
     }
   },
-  "source_content_sha256": "0d217e74021478c579eddfb627a3a4b081bd9ee5f5c3d2a6ea3bcf160e6a311d",
+  "source_content_sha256": "9e1c7a4ab2cb86c62b8638bc5cb348b0ea1a864fff2443558cefb4fef574a644",
   "subject": {
     "canonical_slug": "couriers-and-messengers",
     "name": "快递员",

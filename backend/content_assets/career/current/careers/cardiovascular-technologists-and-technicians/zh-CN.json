@@ -14,6 +14,45 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:current-cn-exact-gap": {
+        "status": "pending_mapping"
+      },
+      "fact:current-cn-health-nonprivate": {
+        "status": "pending_mapping"
+      },
+      "fact:current-cn-health-private": {
+        "status": "pending_mapping"
+      },
+      "fact:current-cn-recruitment-gap": {
+        "status": "pending_mapping"
+      },
+      "fact:current-exact-change": {
+        "status": "pending_mapping"
+      },
+      "fact:current-exact-employment-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:current-exact-employment-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:current-exact-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:current-exact-industry-0": {
+        "status": "pending_mapping"
+      },
+      "fact:current-exact-industry-1": {
+        "status": "pending_mapping"
+      },
+      "fact:current-exact-industry-2": {
+        "status": "pending_mapping"
+      },
+      "fact:current-exact-industry-3": {
+        "status": "pending_mapping"
+      },
+      "fact:current-exact-openings": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -399,6 +438,9 @@
         "status": "mapped"
       },
       "item:cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.9": {
+        "status": "pending_mapping"
+      },
+      "item:cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.9.unconsumed": {
         "status": "pending_mapping"
       },
       "item:cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.90": {
@@ -4387,7 +4429,7 @@
       },
       "ai_impact_table.evidence_rows.04.link": {
         "ref": {
-          "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.9",
+          "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.9.unconsumed",
           "path": [
             "data",
             "entries",
@@ -8197,99 +8239,24 @@
         "status": "mapped"
       },
       "career_quick_answers_block.items.01.table.rows.02.value.steps.02": {
-        "ref": {
-          "id": "cardiovascular-technologists-and-technicians.profile.career-quick-answers-block.5",
-          "parts": [
-            [
-              "→",
-              1,
-              6
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_quick_answers_block.items.01.table.rows.02.value.steps.03": {
-        "ref": {
-          "id": "cardiovascular-technologists-and-technicians.profile.career-quick-answers-block.5",
-          "parts": [
-            [
-              "→",
-              2,
-              6
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_quick_answers_block.items.01.table.rows.02.value.steps.04": {
-        "ref": {
-          "id": "cardiovascular-technologists-and-technicians.profile.career-quick-answers-block.5",
-          "parts": [
-            [
-              "→",
-              3,
-              6
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_quick_answers_block.items.01.table.rows.02.value.steps.05": {
-        "ref": {
-          "id": "cardiovascular-technologists-and-technicians.profile.career-quick-answers-block.5",
-          "parts": [
-            [
-              "→",
-              4,
-              6
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_quick_answers_block.items.01.table.rows.02.value.steps.06": {
-        "ref": {
-          "id": "cardiovascular-technologists-and-technicians.profile.career-quick-answers-block.5",
-          "parts": [
-            [
-              "→",
-              5,
-              6
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_quick_answers_block.items.01.table.rows.03.alternate_value": {
         "ref": null,
@@ -11480,28 +11447,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.href": {
-        "ref": {
-          "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.label": {
         "ref": {
@@ -12004,28 +11951,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.href": {
-        "ref": {
-          "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.18",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.label": {
         "ref": {
@@ -12135,28 +12062,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.href": {
-        "ref": {
-          "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.20",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.label": {
         "ref": {
@@ -12266,28 +12173,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.href": {
-        "ref": {
-          "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.22",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.label": {
         "ref": {
@@ -23878,10 +23765,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "确认防护与无菌要求并完成准备 → 在检查中持续观察心电图与生命体征 → 识别伪差与异常并与原始信号交叉核对 → 发现异常立即提醒医师并按程序处置 → 必要时中止检查并改用替代方案或转运 → 记录处置过程与患者状态"
+              "编辑流程：依机构规程监测患者与设备，识别异常立即通知负责团队，配合安全处置并记录；具体中止和恢复条件不能由通用页面决定。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.profile.career-quick-answers-block.5",
+          "source_refs": [
+            "details-current",
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -23900,10 +23792,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "心血管技师与技术员以检查质量、患者安全与可追溯记录为核心产出；麻醉医师助理负责麻醉前评估与麻醉中监测，放射治疗师负责放射治疗计划与实施，呼吸治疗师负责气道与呼吸支持治疗，骨科外科医师与小儿外科医师负责手术诊断与治疗决定，医学超声诊断师负责超声影像的采集与初步判读。名称相近或同处诊疗链条，都不代表执业许可、检查判读权与治疗决定权可以互换。"
+              "美国相邻职业对照：心血管技术人员侧重心肺检查与介入支持，呼吸治疗偏呼吸支持，放疗技师偏治疗实施，手术技术人员偏无菌与器械配合，MRI/神经诊断侧重其他检查系统；医师另承担诊断治疗。医学超声技术人员是美国29-2032分类，不因中文名称含诊断就等同中国超声医师。具体职责和资格不互换。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.profile.career-quick-answers-block.7",
+          "source_refs": [
+            "ooh-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24010,10 +23906,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "检查结果的判读与治疗决定由医师承担；检查执行与设备操作与记录质量由技师与技术员承担；开展项目与人员授权由医疗机构与科室负责；感染控制与辐射防护由机构制度与防护负责人监督；设备校准与质量由设备管理与质控岗位负责；超出本人授权或发现影响患者安全的异常时须先停止并按程序升级。"
+              "BLS职责包括分析异常及诊断信息、向医师汇总发现，O*NET还列Holter记录解释；技术分析不等于独立医学诊断、处方或治疗决定，报告签署按法域及项目权限核。 中国机构和科室承担相应质量管理，设备/院感/防护各有职责。编辑建议：患者异常及时通知负责医师/响应团队并依机构应急规程在本人职责范围内处置，不能等停机、复测或修设备后再报告；设备问题另依机构规程安全交接/停用、恢复验证，本文不授予统一停检、复检或替代检查权限。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.profile.career-quick-answers-block.17",
+          "source_refs": [
+            "ooh-current",
+            "details-current",
+            "quality-current",
+            "physician-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24032,10 +23935,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "能否操作特定检查设备、能否执行特定侵入性检查的辅助操作、能否使用造影剂或辐射设备、能否对外发布或签署报告，由医疗机构授权、院内准入与培训记录、适用法域对医技人员执业范围的规定以及细分方向的认证与资格决定；权限来自授权与培训与准入记录，不因个人经验自行产生；发现超出授权范围、患者条件不适宜或设备状态异常时须先停止并留痕。"
+              "中国需核医疗机构诊疗项目、人员法定资质和实际职责；临床应用办法16—20条区分机构目录/人员能力档案及医师手术授权，医师法22/24/25条规定注册范围诊查、医学证明及特殊检查知情同意。美国州许可、雇主认证与项目能力要求逐岗核，不能把境外认证直接套为中国执业权限。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.profile.career-quick-answers-block.19",
+          "source_refs": [
+            "clinical-current",
+            "physician-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -24054,10 +23962,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "检查记录与波形或影像说明的是「在既定患者条件、设备状态与操作规范下本次检查发生了什么」；它不构成诊断结论，也不替代医师的判读与治疗决定，并会随设备状态、患者配合与检查条件变化而不同；引用时应同时说明检查项目、设备与规程版本与记录时间。"
+              "本次波形与影像及检查记录是分析输入；BLS职责包括分析异常及诊断信息、向医师汇总发现，O*NET还列Holter记录解释；技术分析不等于独立医学诊断、处方或治疗决定，报告签署按法域及项目权限核。 患者状态、设备与采集条件和记录时间应随结果留痕。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.profile.career-quick-answers-block.21",
+          "source_refs": [
+            "ooh-current",
+            "details-current",
+            "quality-current"
+          ],
           "type": "prose"
         },
         {
@@ -24087,10 +24000,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET-SOC 29-2031.00（SOC 29-2031，医疗与技术服务大类内的心血管检查细分），列为 Job Zone Three（中等准备，SVP 6.0 至低于 7.0），未标注 Bright Outlook；兴趣代码为 RIC（现实型、研究型、常规型），现实型下的具体兴趣领域以健康照护服务（90）、医学科学（58）、机械与电子（44）为主。O*NET 行业分布显示该职业 94% 位于医疗与社会救助业、6% 位于其他行业。中国大陆本条证据路由把映射记为 none（未建立与 O*NET-SOC 29-2031.00 一一对应的职业细类），相关职责分散在心电与影像与介入等技术岗位上，须按岗位实际职责与医疗机构授权判断；中文页面语言不构成中国等价职业或工资映射。"
+              "本职业O*NET-SOC29-2031.00，ZoneThree，未标Bright Outlook。O*NET兴趣RIC：R77/I72/C62/S54/E5/A0；健康照护90、医学科学58、机械电子44、生命科学39是独立具体兴趣领域，不是现实型子分数或个人准入线。 O*NET本职业2025行业分布为卫生与社会救助95%、其他5%；BLS雇主类型另列医院77%、医师办公室13%、门诊2%、医检实验2%、自雇约1%（四舍五入），两套分类不相互替代。 未建立与中国职业细类的一一工资对应，按实际岗位职责核。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.profile.career-quick-answers-block.24",
+          "source_refs": [
+            "details-current",
+            "industry-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -24109,10 +24027,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把该职业列为 Job Zone Three（中等准备，SVP 6.0 至低于 7.0）：通常需要职业学校培训、相关在职经验或副学士学位；O*NET 教育调查显示 63% 的受访者认为需要副学士或其他两年制学历、13% 认为需要中等后证书、10% 认为高中文凭或同等学历即可；在职培训通常一至两年（含学徒形式，O*NET 该职业页列出 1 项学徒方向：Invasive Cardiovascular Technologist）。常见能力来自课程与临床实习：解剖与生理与心脏电生理基础、心电图与动态心电判读基础、超声与影像设备操作、无菌操作与感染控制、辐射防护、患者沟通与急救。在美国，常见入门为相关副学士或证书课程加临床实习与雇主能力考核，认证按细分方向由专业机构提供，注册认证与许可要求因州与机构与细分方向而异；在中国大陆，岗位准入与授权按医疗机构与医技人员管理规定逐项核实。"
+              "O*NET新入职需要学历问答63%副学士或两年制、13%中等后证书、10%高中/同等，并非在岗学历分布；ZoneThree一至两年训练是跨职业说明，不是每个岗位必修期限。BLS通常副学士或证书加课程临床部分，EKG入门可高中，证书通常不足一年；部分州要求许可，雇主可能要求或偏好专业认证，也可能要求BLS/CPR。 中国需核医疗机构诊疗项目、人员法定资质和实际职责；临床应用办法16—20条区分机构目录/人员能力档案及医师手术授权，医师法22/24/25条规定注册范围诊查、医学证明及特殊检查知情同意。美国州许可、雇主认证与项目能力要求逐岗核，不能把境外认证直接套为中国执业权限。 学徒仅列Invasive Cardiovascular Technologist (Nof)示例，非当前招生或全部入门要求。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.profile.career-quick-answers-block.26",
+          "source_refs": [
+            "details-current",
+            "ooh-current",
+            "clinical-current"
+          ],
           "type": "prose"
         },
         {
@@ -24153,10 +24076,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作以医院与门诊与检查室的固定班次为主，需要长时间站立或弯腰并持续用手操作设备；主要负荷来自与患者高频近距离接触、噪声与设备环境、感染与辐射暴露，以及在检查中同时处理患者沟通与设备操作。O*NET 工作情境显示：94% 持续与他人接触；89% 与他人保持非常近距离（近乎接触）；89% 每天在环境受控的室内；84% 每天进行面对面讨论；73% 认为精确或准确极其重要；72% 每天面临时间压力；71% 每天佩戴常规防护或安全装备；66% 持续或几乎持续用手操作、控制或感知物件与工具；55% 每天接触疾病或感染；52% 认为出错后果极其严重；42% 对他人健康与安全承担极高责任；39% 每天接触辐射；36% 持续弯腰或扭转身体。作业要求按感染控制与辐射防护规程执行个人防护，按设备校准与质控要求操作，发现患者异常或设备异常先停止再报告。"
+              "工作以医院与门诊与检查室的固定班次为主，需要长时间站立或弯腰并持续用手操作设备；主要负荷来自与患者高频近距离接触、患者沟通与设备操作、适用项目的感染和放射暴露，以及在检查中同时处理患者沟通与设备操作。O*NET 工作情境显示：94% 持续与他人接触；89% 与他人保持非常近距离（近乎接触）；89% 每天在环境受控的室内；84% 每天进行面对面讨论；73% 认为精确或准确极其重要；72% 每天面临时间压力；71% 每天佩戴常规防护或安全装备；66% 持续或几乎持续用手操作、控制或感知物件与工具；55% 每天接触疾病或感染；52% 认为出错后果极其严重；42% 对他人健康与安全承担极高责任；39% 每天接触辐射；36% 持续弯腰或扭转身体。作业要求按感染控制与辐射防护规程执行个人防护，按设备校准与质控要求操作，编辑建议：患者异常及时通知负责医师/响应团队并依机构应急规程在本人职责范围内处置，不能等停机、复测或修设备后再报告；设备问题另依机构规程安全交接/停用、恢复验证，本文不授予统一停检、复检或替代检查权限。 这些比例为美国调查回答而非每个岗位；心电/超声并不因此都存在电离辐射。 O*NET噪声问答50%从不、15%每日，不能把高噪声泛称全部岗位主要负荷。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.profile.career-quick-answers-block.30",
+          "source_refs": [
+            "details-current",
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24175,10 +24103,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "该职业属于受监管的医疗临床岗位：在美国，从业通常需要相关副学士或证书课程与临床实习，认证按细分方向由专业机构提供，注册认证与许可要求因州与机构与细分方向而异；在中国大陆，检查与介入支持必须在医疗机构授权、操作规范与医师责任链内进行，岗位需核验医疗机构与医技人员准入与院内授权与具体检查或介入规范，不把境外证书直接等同本地权限。本页不把两地的资格要求互相套用。"
+              "中国需核医疗机构诊疗项目、人员法定资质和实际职责；临床应用办法16—20条区分机构目录/人员能力档案及医师手术授权，医师法22/24/25条规定注册范围诊查、医学证明及特殊检查知情同意。美国州许可、雇主认证与项目能力要求逐岗核，不能把境外认证直接套为中国执业权限。 26关联认证含不同技术方向及医师专科、物理治疗等，不是全部技师必需；本轮未逐项核报考费用及条件。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.profile.career-quick-answers-block.32",
+          "source_refs": [
+            "ooh-current",
+            "cert-current",
+            "clinical-current",
+            "physician-current"
+          ],
           "type": "prose"
         },
         {
@@ -24197,10 +24131,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "岗位以医院与门诊的固定班次为主，可能包含轮班与待命；O*NET 工作情境显示 72% 每天面临时间压力、68% 每天做决策、42% 表示决策自由度很大、54% 认为重复性任务极其重要。美国该职业 2025 年 5 月全国年薪中位数为 74,310 美元（时薪中位数 35.73 美元），年薪第 10 至第 90 分位为 39,000 至 121,350 美元；O*NET 展示的 BLS 预测口径为 2024 年约 64,700 人、2034 年约 66,600 人、十年变化约 +3%（Average）、2024—2034 年年均空缺约 3,800 个；中国大陆没有单列本职业的全国职业工资统计，本页不发布职业级数值，只以可见标记登记口径与缺口。比较机会时应把岗位授权范围、排班与值班与待命安排、夜班与节假日计算方式与职业暴露防护纳入书面约定。"
+              "O*NET89%表示规则班期、65%每周40小时、13%超过40小时、22%不足40小时；规则班期不等于日班无夜班，BLS多数全职但兼职常见，可能晚间/周末/通宵。2025美国中位74310美元/年、35.73美元/时。美国SOC29-2031本职业2025约64500人、2035预测66900人，变化约4%（与平均相当），净增约2400人；2025—2035年均空缺3400个，包含流动及退出替代，非年均净增。 中国精确职业工资分布仍证据不足；国家统计局2025卫生和社会工作行业非私营146266元/年、私营75631元/年，均为税前年平均、多职业行业背景（industry_proxy），非本职业中位数、起薪、月薪或地区排名。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.profile.career-quick-answers-block.34",
+          "source_refs": [
+            "details-current",
+            "ooh-current",
+            "trends-current",
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -24241,10 +24181,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：本条证据路由把 china-salary 记为 （数据状态：暂无可安全使用的数据），attempted_source_ids 为心血管系统疾病相关专业医疗质量控制指标（2021 年版）与医疗质量管理办法，使用限制 为「没有可比的全国职业工资统计」，处理说明 为「标记不可用」。本页据此不给出本职业的中位数、分位数或起薪，也不发布任何行业或父职业代理数值；只登记统计口径、覆盖范围与缺口，并保留可见的缺口标记。"
+              "中国精确职业工资分布仍证据不足；国家统计局2025卫生和社会工作行业非私营146266元/年、私营75631元/年，均为税前年平均、多职业行业背景（industry_proxy），非本职业中位数、起薪、月薪或地区排名。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.profile.onet-structured-fields-block.3",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -24252,10 +24195,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业分布与就业背景：O*NET 行业分布显示该职业 94% 位于医疗与社会救助业、6% 位于其他行业；O*NET 展示的 BLS 预测口径为 2024 年约 64,700 人、2034 年约 66,600 人，十年变化约 +3%（Average）、2024—2034 年年均职位空缺约 3,800 个（含增长与替代需求）；该职业未标注 Bright Outlook，但其 O*NET 相关职业中诊断医学超声师（29-2032.00）、磁共振成像技师（29-2035.00）、神经诊断技师（29-2099.01）、医疗技术专家（29-2099.05）、呼吸治疗师（29-1126.00）与外科手术技师（29-2055.00）标注 Bright Outlook，属不同职业身份，不能互相代入。"
+              "O*NET本职业2025行业分布为卫生与社会救助95%、其他5%；BLS雇主类型另列医院77%、医师办公室13%、门诊2%、医检实验2%、自雇约1%（四舍五入），两套分类不相互替代。 美国SOC29-2031本职业2025约64500人、2035预测66900人，变化约4%（与平均相当），净增约2400人；2025—2035年均空缺3400个，包含流动及退出替代，非年均净增。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.profile.onet-structured-fields-block.4",
+          "source_refs": [
+            "industry-current",
+            "trends-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -24279,7 +24227,7 @@
               "设备操作与校准｜按规程开机自检与校准设备并调整参数，检查与测试并维护心脏设备，必要时做小修｜校准与设备维护记录。",
               "记录与报告流转｜获取并记录患者身份与病史与检查结果，转录与录入并分发报告供医师判读｜报告转录与分发记录。",
               "感染与辐射防护｜按无菌操作与感染控制与辐射防护要求执行个人防护与消毒与耗材处理｜防护与消毒记录。",
-              "异常升级与交接｜发现患者异常或设备异常时按程序停止并报告，向下一班与临床团队交接未完成事项｜异常与交接记录。"
+              "异常升级与交接｜患者异常及时通知医师或相应响应人员，按实际项目应急程序响应；设备异常按安全规程和职责处理，不以先停检、复测或自行维修作为报告前置，交接未完成事项｜异常与交接记录。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.profile.responsibilities-block.1",
@@ -24290,10 +24238,15 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "协作与沟通｜94% 持续与他人接触；89% 与他人保持非常近距离（近乎接触）；84% 每天进行面对面讨论；80% 认为与团队共同工作极其重要；65% 认为与外部客户或公众打交道极其重要；61% 每天进行电话交谈；50% 每天使用电子邮件。\n工时与节奏｜72% 每天面临时间压力；68% 每天做决策；54% 认为重复性任务极其重要；45% 表示对任务与优先级有很大自由；45% 持续或几乎持续做重复性动作。\n决策与自主｜68% 每天做决策；42% 表示决策自由度很大；36% 认为协调或领导他人非常重要；检查项目与设备参数由医嘱与操作规程确定。\n责任与影响｜73% 认为精确或准确极其重要；62% 认为决策对同事或公司结果有非常重要的影响；52% 认为出错后果极其严重；42% 对他人健康与安全承担极高责任；35% 对他人工作结果承担中等责任。\n环境与暴露｜89% 每天在环境受控的室内；55% 每天接触疾病或感染；39% 每天接触辐射；71% 每天佩戴常规防护或安全装备。\n身体与作业空间｜66% 持续或几乎持续用手操作、控制或感知物件与工具；36% 持续或几乎持续弯腰或扭转身体；35% 站立时间少于一半；27% 坐着超过一半时间。\n患者与家属接触｜工作以面对患者与家属为主，需要在检查中解释流程并安抚情绪；47% 每周一次以上需要处理不愉快、愤怒或无礼的人；43% 每周一次以上遇到冲突情形。\n安全与合规｜作业要求按无菌操作与感染控制与辐射防护规程执行个人防护与消毒；按设备校准与质控要求操作并留存记录；发现患者异常或设备异常先停止再报告。\n记录与交接｜检查记录、波形或影像、校准与质控记录、异常与处置记录须完整可追溯，报告转录与分发按院内流程进行，交接班须说明未完成与异常事项。"
+              "协作与沟通｜94% 持续与他人接触；89% 与他人保持非常近距离（近乎接触）；84% 每天进行面对面讨论；80% 认为与团队共同工作极其重要；65% 认为与外部客户或公众打交道极其重要；61% 每天进行电话交谈；50% 每天使用电子邮件。\n工时与节奏｜72% 每天面临时间压力；68% 每天做影响他人、单位财务或声誉的决策；54% 认为重复性任务极其重要；45% 表示对任务与优先级有很大自由；45% 持续或几乎持续做重复性动作。\n决策与自主｜68% 每天做影响他人、单位财务或声誉的决策；42% 表示决策自由度很大；36% 认为协调或领导他人非常重要；检查项目与设备参数由医嘱与操作规程确定。\n责任与影响｜73% 认为精确或准确极其重要；62% 认为决策对同事或公司结果有非常重要的影响；52% 认为出错后果极其严重；42% 对他人健康与安全承担极高责任；35% 对他人工作结果承担中等责任。\n环境与暴露｜89% 每天在环境受控的室内；55% 每天接触疾病或感染；39% 每天接触辐射；71% 每天佩戴常规防护或安全装备。\n身体与作业空间｜66% 持续或几乎持续用手操作、控制或感知物件与工具；36% 持续或几乎持续弯腰或扭转身体；35% 站立时间少于一半；27% 坐着超过一半时间。\n患者与家属接触｜工作以面对患者与家属为主，需要在检查中解释流程并安抚情绪；47% 每周一次以上但非每日处理不愉快、愤怒或无礼的人；43% 每周一次以上但非每日遇到冲突情形。\n安全与合规｜作业要求按无菌操作与感染控制与辐射防护规程执行个人防护与消毒；按设备校准与质控要求操作并留存记录；编辑建议：患者异常及时通知负责医师/响应团队并依机构应急规程在本人职责范围内处置，不能等停机、复测或修设备后再报告；设备问题另依机构规程安全交接/停用、恢复验证，本文不授予统一停检、复检或替代检查权限。\n记录与交接｜检查记录、波形或影像、校准与质控记录、异常与处置记录须完整可追溯，报告转录与分发按院内流程进行，交接班须说明未完成与异常事项。 这些比例为美国调查回答而非每个岗位；心电/超声并不因此都存在电离辐射。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.profile.work-context-block.1",
+          "source_refs": [
+            "details-current",
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -24936,22 +24889,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/29-2031.00"
               },
               {
-                "entity": "O*NET-SOC 29-2031.00 职业摘要（就业与预测字段）",
-                "id": "link-11",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/29-2031.00"
-              },
-              {
-                "entity": "ILO 工作论文 140《Generative AI and Jobs: A Refined Global Index of Occupational Exposure》",
+                "entity": "FDA医院心脏遥测QYW分类",
                 "id": "link-12",
                 "relation": "career.source",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpcd/classification.cfm?id=1087"
               },
               {
-                "entity": "O*NET-SOC 29-2031.00 职业摘要",
+                "entity": "FDA医院心脏遥测QYW分类",
                 "id": "link-13",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/29-2031.00"
+                "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpcd/classification.cfm?id=1087"
               },
               {
                 "entity": "O*NET-SOC 29-2031.00 培训与教育信息",
@@ -24972,16 +24919,16 @@
                 "url": "https://www.onetonline.org/link/summary/29-2031.00"
               },
               {
-                "entity": "O*NET-SOC 29-2031.00 详细资料（任务与工作活动）",
+                "entity": "FDA医院心脏遥测QYW分类",
                 "id": "link-17",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/29-2031.00"
+                "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpcd/classification.cfm?id=1087"
               },
               {
-                "entity": "ILO 工作论文 140《Generative AI and Jobs: A Refined Global Index of Occupational Exposure》",
+                "entity": "FDA ACS AI ECG模型分类登记",
                 "id": "link-18",
                 "relation": "career.source",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/denovo.cfm?ID=DEN250044"
               },
               {
                 "entity": "O*NET-SOC 29-2031.00 培训与教育信息",
@@ -25010,10 +24957,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先用自造材料完成一次闭环：用虚构的患者信息与检查申请写出一次心电图检查的计划，标出患者核对步骤、电极位置、预期波形特征、三项可能的伪差来源与两项中止与升级条件，再请同伴扮演医师质询；同时核对目标岗位需要的学历与培训与认证要求、可执行的检查项目与设备授权与防护安排。"
+              "编辑入门建议：核目标法域、岗位学历/认证、设备项目与监督要求；模拟材料只供学习沟通和风险识别，不能证明临床胜任或赋予检查权限。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.11",
+          "source_refs": [
+            "ooh-current",
+            "clinical-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25087,10 +25039,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：波形与影像的初步测量与标注、信号质量提示、设备自检与校准提醒、报告模板与记录转录、质控台账与到期提醒等环节可由自动化系统辅助，但没有官方证据表明它会取代患者核对、检查执行、异常确认与升级、报告判读与治疗决定的决策与责任。任务暴露、流程自动化程度与就业数量是三个不同概念。"
+              "FDA医院心脏遥测分类列持续自动分析ECG、异常检测与报警，同时要求现场合格人员审查和立即通知响应者；另有2026-09-03获授予的ACS AI ECG模型登记。仅证明相应技术/监管事实，不能推出所有AI或生成式AI能力、准确率、机构部署率及岗位替代率。 工具辅助候选与实际自动执行范围分开判断，责任存在不能推出操作都手动或个人岗位必保留。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.18",
+          "source_refs": [
+            "fda-telemetry-current",
+            "fda-denovo-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25197,10 +25154,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明医疗与社会救助业 94%、其他行业 6%；不能推导行业工资或就业规模。"
+              "O*NET本职业2025行业分布为卫生与社会救助95%、其他5%；BLS雇主类型另列医院77%、医师办公室13%、门诊2%、医检实验2%、自雇约1%（四舍五入），两套分类不相互替代。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.28",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -25296,10 +25256,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断影像是否满足判读要求、无菌区是否完好，并对停止或继续的时机负责。"
+              "编辑观察影像质量和无菌区情况，异常及时通知负责团队；继续/中止/恢复依据具体规程，不能自行获得决定权限。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.37",
+          "source_refs": [
+            "details-current",
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25329,10 +25294,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、招聘技术信号、工资分位与任务暴露研究，不是 AI 替代率或岗位数量预测。"
+              "本节分清官方职业任务、统计、招聘信号、FDA具体器械分类和编辑候选；均不直接提供本职业AI替代率。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.40",
+          "source_refs": [
+            "details-current",
+            "wages-current",
+            "fda-telemetry-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25516,10 +25487,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "指数衡量的是任务层面的暴露程度，不是采用率、自动化率或失业预测，也不能用于推算单职业岗位数量。"
+              "相应器械分类证明自动ECG分析与报警用途，不提供所有AI能力、临床准确率、生成式AI暴露或岗位替代比例。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.57",
+          "source_refs": [
+            "fda-telemetry-current",
+            "fda-denovo-current"
+          ],
           "type": "prose"
         },
         {
@@ -25527,10 +25502,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "国际劳工组织（ILO）工作论文 140"
+              "FDA医院心脏遥测QYW分类"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.58",
+          "source_refs": [
+            "fda-telemetry-current",
+            "fda-denovo-current"
+          ],
           "type": "prose"
         },
         {
@@ -25538,10 +25517,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "全球职业对生成式 AI 的任务暴露"
+              "处方机构心电监护器械的用途与响应要求"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.59",
+          "source_refs": [
+            "fda-telemetry-current",
+            "fda-denovo-current"
+          ],
           "type": "prose"
         },
         {
@@ -25549,10 +25532,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 2025 年方法用 29,753 项职业任务中的代表性样本、1,640 人调查与 52,558 个数据点构建暴露梯度；报告指出多数职业由需要人工投入的任务组成，最可能的影响是工作转型而非整体替代，且该指数不提供单一职业的岗位数量预测。"
+              "FDA医院心脏遥测分类列持续自动分析ECG、异常检测与报警，同时要求现场合格人员审查和立即通知响应者；另有2026-09-03获授予的ACS AI ECG模型登记。仅证明相应技术/监管事实，不能推出所有AI或生成式AI能力、准确率、机构部署率及岗位替代率。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.60",
+          "source_refs": [
+            "fda-telemetry-current",
+            "fda-denovo-current"
+          ],
           "type": "prose"
         },
         {
@@ -25560,10 +25547,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在波形与影像的初步测量与标注、信号质量提示、设备自检与校准提醒、报告模板与记录转录、质控台账这类可复核环节，工具确实能提高效率。但工具看不到患者的实际状态、皮肤与电极接触情况、伪差来源与现场沟通，产出必须回到原始波形或影像核对，并经有授权的人员确认。"
+              "编辑可考虑信号分析、标注、草稿和质控提醒，本轮未取得节时收益。设备可接入生理信号及部分质量信息，不能笼统说工具看不到患者或接触状态；具体准确性、适用人群、患者状态与异常须核。FDA医院心脏遥测分类列持续自动分析ECG、异常检测与报警，同时要求现场合格人员审查和立即通知响应者；另有2026-09-03获授予的ACS AI ECG模型登记。仅证明相应技术/监管事实，不能推出所有AI或生成式AI能力、准确率、机构部署率及岗位替代率。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.61",
+          "source_refs": [
+            "fda-telemetry-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25582,10 +25573,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露、流程自动化程度与就业数量是不同测量对象。该职业页面显示 2024 年约 64,700 人、2034 年约 66,600 人、十年变化约 +3%（Average）、年均职位空缺约 3,800 个；这是职业群体统计，不能推出个别机构或科室的岗位变化。"
+              "美国SOC29-2031本职业2025约64500人、2035预测66900人，变化约4%（与平均相当），净增约2400人；2025—2035年均空缺3400个，包含流动及退出替代，非年均净增。 不把职业预测归因为AI。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.63",
+          "source_refs": [
+            "trends-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -25593,10 +25588,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不会以整体取代的方式发生：患者核对、检查执行、异常确认与升级、报告判读与治疗决定，仍需由有授权的人员负责；工具改变的是可复核的测量、提示、转录与台账环节。"
+              "FDA医院心脏遥测分类列持续自动分析ECG、异常检测与报警，同时要求现场合格人员审查和立即通知响应者；另有2026-09-03获授予的ACS AI ECG模型登记。仅证明相应技术/监管事实，不能推出所有AI或生成式AI能力、准确率、机构部署率及岗位替代率。 本轮未取得本职业工具采用前后人员数量研究，不承诺整体永不替代或替代年份。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.64",
+          "source_refs": [
+            "fda-telemetry-current",
+            "fda-denovo-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25604,10 +25604,18 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业摘要 / 详细资料"
+              "本轮依据：BLS本职业OOH、FDA医院遥测分类及模型登记、中国医师法和医疗技术/质量管理办法；其余工具候选为编辑分析，非临床性能验证。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.65",
+          "source_refs": [
+            "ooh-current",
+            "fda-telemetry-current",
+            "fda-denovo-current",
+            "physician-current",
+            "clinical-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25615,7 +25623,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "需要的是解剖与生理与心脏电生理基础、设备操作与信号质量判断、无菌操作与感染控制与辐射防护、患者沟通与急救能力，而不是编程能力；是否需要使用专业软件取决于机构设备与信息系统配置。"
+              "编辑学习建议：优先核解剖、生理与心脏电生理、设备及信号质量、适用无菌感染控制与辐射防护、患者沟通和应急配合基础；软件或编程要求按实际设备、机构和岗位核，本轮无统一编程门槛证据。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.66",
@@ -25637,10 +25645,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "波形与影像的初步测量与标注、信号质量提示、设备自检与校准提醒、报告模板与记录转录、质控台账与到期提醒等；这些环节可复核、可追溯。"
+              "编辑候选包括信号分析、测量、报警、记录与台账；是否适用取决于具体器械预期用途、数据质量及机构流程，未取得“最易影响”实证排名。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.68",
+          "source_refs": [
+            "fda-telemetry-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25648,10 +25660,18 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 详细资料 / 本页方法说明"
+              "本轮依据：BLS本职业OOH、FDA医院遥测分类及模型登记、中国医师法和医疗技术/质量管理办法；其余工具候选为编辑分析，非临床性能验证。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.69",
+          "source_refs": [
+            "ooh-current",
+            "fda-telemetry-current",
+            "fda-denovo-current",
+            "physician-current",
+            "clinical-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25659,10 +25679,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该职业的就业与预测为 O*NET 展示的 BLS 预测口径：2024 年约 64,700 人、2034 年约 66,600 人、十年变化约 +3%（Average）、年均空缺约 3,800 个。该职业页面未标注 Bright Outlook（其 O*NET 相关职业中诊断医学超声师 29-2032.00、磁共振成像技师 29-2035.00、神经诊断技师 29-2099.01、医疗技术专家 29-2099.05、呼吸治疗师 29-1126.00 与外科手术技师 29-2055.00 标注 Bright Outlook，属不同职业身份）。这些是职业群体统计，不构成个别机构或科室的就业保证。"
+              "美国SOC29-2031本职业2025约64500人、2035预测66900人，变化约4%（与平均相当），净增约2400人；2025—2035年均空缺3400个，包含流动及退出替代，非年均净增。 本职业未标Bright Outlook；不以邻职标签保证岗位需求。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.70",
+          "source_refs": [
+            "trends-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -25681,10 +25705,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。检查结果判读与治疗决定由医师承担，报告的发布与签署须由有授权的执业人员确认；系统既不能承担责任，也不能取得执业资格；工具只能提供可复核的测量、提示、转录与台账支持。"
+              "BLS职责包括分析异常及诊断信息、向医师汇总发现，O*NET还列Holter记录解释；技术分析不等于独立医学诊断、处方或治疗决定，报告签署按法域及项目权限核。 FDA医院心脏遥测分类列持续自动分析ECG、异常检测与报警，同时要求现场合格人员审查和立即通知响应者；另有2026-09-03获授予的ACS AI ECG模型登记。仅证明相应技术/监管事实，不能推出所有AI或生成式AI能力、准确率、机构部署率及岗位替代率。 中国具体诊断文书和治疗决定还需医师执业范围与机构项目管理，通用工具不授予签署资格。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.72",
+          "source_refs": [
+            "ooh-current",
+            "physician-current",
+            "clinical-current",
+            "fda-telemetry-current"
+          ],
           "type": "prose"
         },
         {
@@ -25692,10 +25722,18 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页方法说明 / 医疗机构授权与执业范围规定"
+              "本轮依据：BLS本职业OOH、FDA医院遥测分类及模型登记、中国医师法和医疗技术/质量管理办法；其余工具候选为编辑分析，非临床性能验证。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.73",
+          "source_refs": [
+            "ooh-current",
+            "fda-telemetry-current",
+            "fda-denovo-current",
+            "physician-current",
+            "clinical-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25703,10 +25741,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有任何官方来源给出这样的年份。任务暴露、流程自动化程度与就业数量是不同概念，本页不做岗位消失年份预测。"
+              "本轮实际查阅职业统计和FDA资料未给出本职业消失年份，不从任务暴露或设备分类推算该年份。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.74",
+          "source_refs": [
+            "trends-current",
+            "fda-telemetry-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25714,10 +25757,18 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页方法说明"
+              "本轮依据：BLS本职业OOH、FDA医院遥测分类及模型登记、中国医师法和医疗技术/质量管理办法；其余工具候选为编辑分析，非临床性能验证。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.75",
+          "source_refs": [
+            "ooh-current",
+            "fda-telemetry-current",
+            "fda-denovo-current",
+            "physician-current",
+            "clinical-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25747,10 +25798,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "自动化系统进入波形与影像测量、信号提示、设备记录与报告转录等环节时，人的控制点应按以下五步固定下来；任何一步缺失都不应扩大使用范围。"
+              "以下是编辑提出的核对顺序，需与实际器械适用范围及机构规程对应，不能替代医疗技术准入或应急预案。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.78",
+          "source_refs": [
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25769,10 +25824,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只把可复核的初步测量与标注、信号质量提示、设备自检记录、报告模板与台账整理交给工具。"
+              "编辑先核具体器械说明和已批准用途；自动分析或报警不只限于草稿，未知工具不据此进入临床。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.80",
+          "source_refs": [
+            "fda-telemetry-current",
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25780,10 +25840,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "逐项回看原始波形或影像与患者实际状态，判断自动输出与现场是否一致；不一致时以原始信号为准并复测或重新采集。"
+              "编辑核自动输出与原始信号及患者状态的差异，异常及时通知负责人员并按规程处置；不默认原始信号总正确，也不自动决定重采。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.81",
+          "source_refs": [
+            "details-current",
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25802,10 +25867,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "检查判读、报告发布与治疗决定由有授权的执业人员按院内流程确认并留痕。"
+              "BLS职责包括分析异常及诊断信息、向医师汇总发现，O*NET还列Holter记录解释；技术分析不等于独立医学诊断、处方或治疗决定，报告签署按法域及项目权限核。 责任与报告权限按实际法域项目核，非所有技术分析一概禁止。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.83",
+          "source_refs": [
+            "ooh-current",
+            "physician-current",
+            "clinical-current"
+          ],
           "type": "prose"
         },
         {
@@ -25824,10 +25894,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用原始波形与影像复核自动数值，发现不一致先复测或重新采集并记录。"
+              "编辑核信号伪差和患者状态，及时报告并依机构规程决定是否需要重复采集；放射检查还需避免无必要重复照射。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.85",
+          "source_refs": [
+            "quality-current",
+            "radiology-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25868,10 +25943,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按规程执行个人防护与消毒与无菌操作，按辐射防护要求使用屏蔽与剂量监测。"
+              "院感防护按实际检查项目和机构规范执行；介入放射等适用项目需剂量与健康培训档案，心电和超声不一概电离辐射。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.89",
+          "source_refs": [
+            "quality-current",
+            "radiology-current"
+          ],
           "type": "prose"
         },
         {
@@ -25890,10 +25969,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按规程完成自检与校准与质控并留存记录，设备异常先停用并报修再使用。"
+              "编辑建议发现设备问题立即通知负责人员，依机构规程安全交接及停用、修复验证；患者异常响应不能等待报修结束。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.91",
+          "source_refs": [
+            "quality-current",
+            "radiology-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25956,10 +26040,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "波形采集与初步测量可由设备自动完成，参数调整与信号质量判断仍需人工。"
+              "设备可自动采集和分析信号；具体人工核对、参数和异常职责按批准用途及机构流程核，不写成一律人工技术上限。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.97",
+          "source_refs": [
+            "fda-telemetry-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25967,10 +26055,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断提示是否成立，并对是否继续检查与何时升级负责。"
+              "编辑核本人职责、患者状态和设备信号，异常及时通知负责人员；继续/中止/停用/恢复由适用规程和职责决定，不把编辑描述当临床授权。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.98",
+          "source_refs": [
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26000,10 +26092,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "异常提示可由算法初筛，异常确认与升级判断仍需人工。"
+              "FDA相应遥测分类支持自动异常检测及报警，并要求现场合格审查与即时响应通知；不代表每类工具具备同样功能。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.101",
+          "source_refs": [
+            "fda-telemetry-current"
+          ],
           "type": "prose"
         },
         {
@@ -26011,10 +26106,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断影像是否满足判读要求、无菌区是否完好，并对停止或继续的时机负责。"
+              "编辑核本人职责、患者状态和设备信号，异常及时通知负责人员；继续/中止/停用/恢复由适用规程和职责决定，不把编辑描述当临床授权。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.102",
+          "source_refs": [
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26044,10 +26143,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "图像后处理与分割可由软件辅助，造影剂注射与无菌操作仍需人工。"
+              "编辑可核图像处理、注射与介入设备各自自动功能和批准范围；无菌与患者安全职责依机构规定，不断言造影注射永远只能手动。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.105",
+          "source_refs": [
+            "details-current",
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26055,10 +26159,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断设备状态是否可用于患者检查，并对停用与报修决定负责。"
+              "编辑核本人职责、患者状态和设备信号，异常及时通知负责人员；继续/中止/停用/恢复由适用规程和职责决定，不把编辑描述当临床授权。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.106",
+          "source_refs": [
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26110,10 +26218,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录患者信息与检查结果，完成质控并转录与分发报告供医师判读。"
+              "按权限记录检查与分析发现，保持真实完整及时和患者隐私，报告签署及分发按项目流程核。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.111",
+          "source_refs": [
+            "quality-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -26143,10 +26255,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断是否满足规范与授权范围，并对停止与整改判断负责。"
+              "编辑核本人职责、患者状态和设备信号，异常及时通知负责人员；继续/中止/停用/恢复由适用规程和职责决定，不把编辑描述当临床授权。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.114",
+          "source_refs": [
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26176,10 +26292,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "检查清单与到期提醒可辅助，停用与整改判断仍需人工。"
+              "编辑可考虑清单提醒；安全整改与设备恢复按机构制度处理，未取得具体自动判断工具的效果证据。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.117",
+          "source_refs": [
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26236,6 +26356,23 @@
           },
           "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.122",
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "O*NET-SOC 29-2031.00 职业摘要（就业与预测字段）",
+                "id": "link-11",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/summary/29-2031.00"
+              }
+            ]
+          },
+          "id": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.9.unconsumed",
+          "type": "links",
+          "visibility": "internal"
         }
       ]
     },
@@ -26340,10 +26477,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与心血管技师与技术员精确对应的中国大陆全国职业工资分布；本条证据路由记为 （数据状态：暂无可安全使用的数据），本页不发布本职业的中位数、分位数或起薪。"
+              "证据不足：本轮未取得中国本职业全国精确工资中位、分位或起薪，行业参考不补齐该缺口。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.7",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26351,10 +26491,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "consequence 为「没有可比的全国职业工资统计」，resolution 为「标记不可用」；本轮尝试的来源为心血管系统疾病相关专业医疗质量控制指标（2021 年版）与医疗质量管理办法，两者均为质量与执业管理口径，不含职业级工资分布，因此本页不做任何代理填补。"
+              "中国精确职业工资分布仍证据不足；国家统计局2025卫生和社会工作行业非私营146266元/年、私营75631元/年，均为税前年平均、多职业行业背景（industry_proxy），非本职业中位数、起薪、月薪或地区排名。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.8",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26362,10 +26505,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本条路由不使用行业平均作为替代数值"
+              "146266元/年（2025卫生和社会工作非私营税前年平均）"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.9",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26373,10 +26519,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "可得的官方全国工资表按行业门类与单位类型汇总，其中卫生和社会工作门类混合了大量与本职业无关的岗位；本条路由明确要求不用行业平均填充，故本页不发布其数值，只登记口径与覆盖范围。"
+              "industry_proxy：与医疗机构业务相关，但包含社会工作及许多其他职业，不是心血管技师工资，不换算职业月薪。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.10",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26384,10 +26533,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本条路由不使用父职业或岗位类别汇总值作为替代数值"
+              "75631元/年（2025卫生和社会工作私营税前年平均）"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.11",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26395,10 +26547,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "岗位类别平均数按《中华人民共和国职业分类大典（2022 年版）》岗位类别汇总，不区分具体职业，也不区分心电与影像与介入等技术岗位的职责差异；本页只登记口径，不发布数值。"
+              "industry_proxy：同版行业私营平均，不是本职业或父职业中位；两类均值不能推出个人公私薪酬溢价。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.12",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26483,10 +26638,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "若引用中国大陆工资总额数据，须注意其为税前口径，包含单位代扣代缴的个人所得税、社会保险和住房公积金个人缴纳部分，不等于到手收入；夜班与值班与防护补贴按实际约定计算，通常不计入工资总额口径。"
+              "统计为税前，含个税、社保和公积金个人缴纳部分。工资组成规定4、8条纳入津贴补贴和加班，11条排除出差伙食补助等；夜班/值班/防护支付按实际性质核，不能笼统说通常不计入。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.20",
+          "source_refs": [
+            "nbs-current",
+            "wage-definition-current"
+          ],
           "type": "prose"
         },
         {
@@ -26494,10 +26653,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论：中国大陆无本职业精确职业数据；本条路由要求保留证据边界、不用行业平均或父职业或美国数据填充，本页只登记口径、覆盖范围与缺口，不给出任何本职业数值。"
+              "中国精确职业工资分布仍证据不足；国家统计局2025卫生和社会工作行业非私营146266元/年、私营75631元/年，均为税前年平均、多职业行业背景（industry_proxy），非本职业中位数、起薪、月薪或地区排名。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.21",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26516,10 +26678,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "自动测量与算法提示会改变记录与质控环节，但不改变中国大陆对该职业的统计口径：职业级统计缺口与工具无关。"
+              "本轮未取得中国本职业工具采用前后工资研究；AI候选与统计缺口不能推出涨薪、降薪或收入保证。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.23",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26527,10 +26692,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业分类：本条证据路由把中国大陆映射记为 none（未建立与 O*NET-SOC 29-2031.00 一一对应的职业细类）；相关职责分散在心电与影像与介入等技术岗位上，岗位准入与可执行的检查项目与设备授权须按医疗机构与医技人员管理规定逐项核实，检查结果判读与治疗决定由医师承担，技术人员不能越权诊断、处方或独立决定治疗。中文页面语言不构成中国等价职业或工资映射。"
+              "中国需核医疗机构诊疗项目、人员法定资质和实际职责；临床应用办法16—20条区分机构目录/人员能力档案及医师手术授权，医师法22/24/25条规定注册范围诊查、医学证明及特殊检查知情同意。美国州许可、雇主认证与项目能力要求逐岗核，不能把境外认证直接套为中国执业权限。 本轮未建立中国一一职业工资映射，技术分析与医学诊断还须区分。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.24",
+          "source_refs": [
+            "clinical-current",
+            "physician-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -26560,10 +26730,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "该层级以在岗带教为主；须完成院内岗前培训与感染控制与防护培训，在指导下执行基础检查与记录，不得独立承担侵入性操作的辅助或报告发布。"
+              "编辑路线比较：高中或中职可先核助理/登记岗位要求；不视为中国临床检查准入条件，具体学历、专业、资质与监督要求本轮未核雇主样本。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.27",
+          "source_refs": [
+            "editor-current",
+            "quality-current"
+          ],
           "type": "prose"
         },
         {
@@ -26593,10 +26767,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "可按规定执行相应检查并记录；可执行的检查项目与设备按医疗机构授权与培训记录确定，不因学历自动扩大。"
+              "编辑比较高职/大专相关课程与目标技术岗位；学历不自动获得所有项目权限，须核法定资质与实际岗位条件。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.30",
+          "source_refs": [
+            "clinical-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26626,10 +26804,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "该层级可承担侵入性检查的辅助操作与设备管理与质量控制；操作范围按院内准入与培训记录确定，判读与治疗决定仍由医师承担。"
+              "编辑比较本科相关课程与设备质控或介入支持需求；生物医学工程学历不自动授予临床侵入操作权限，实际职责及资质另核。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.33",
+          "source_refs": [
+            "clinical-current",
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26659,10 +26842,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "管理岗涉及检查质量监督、设备与质控管理与培训与排班；执业范围与项目授权仍由医疗机构与主管机关负责。"
+              "编辑管理路线需核机构岗位与考核规定；质量责任按医疗质量管理办法9条院科分工，不把晋升自动等同诊断资格。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.36",
+          "source_refs": [
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26681,10 +26868,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "医疗机构相关岗位主要归入该类；该类把卫生和社会工作人员合并统计，仅公布宽口径均值，本页不据此推算本职业工资。"
+              "中国精确职业工资分布仍证据不足；国家统计局2025卫生和社会工作行业非私营146266元/年、私营75631元/年，均为税前年平均、多职业行业背景（industry_proxy），非本职业中位数、起薪、月薪或地区排名。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.38",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26714,10 +26904,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业级工资缺口（本条路由不使用代理）"
+              "精确职业工资缺口／行业税前年平均参考"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.41",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26725,10 +26918,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本条证据路由要求保留证据边界并明确不用行业平均、父职业或美国数据填充；本页不发布任何代理数值，只登记口径与检索记录。"
+              "中国精确职业工资分布仍证据不足；国家统计局2025卫生和社会工作行业非私营146266元/年、私营75631元/年，均为税前年平均、多职业行业背景（industry_proxy），非本职业中位数、起薪、月薪或地区排名。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.42",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26758,10 +26954,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆目前没有单列该职业的全国职业工资统计；本页只登记可核对的统计口径、职业映射边界与检索记录，不给出替代数值。"
+              "中国精确职业工资分布仍证据不足；国家统计局2025卫生和社会工作行业非私营146266元/年、私营75631元/年，均为税前年平均、多职业行业背景（industry_proxy），非本职业中位数、起薪、月薪或地区排名。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.45",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26769,10 +26968,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "比较不同机会时应确认机构类型与科室、岗位职责与可执行的检查项目与设备授权、用工形式与职称层级、排班与值班与夜班计算方式、职业暴露防护与体检安排，并明确本页不提供中国大陆该职业的工资数值。"
+              "编辑比较实际机构、岗位资质、设备项目、合同工资、夜班和防护安排；本轮没有真实招聘报价样本，行业参考不构成报价。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.46",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26813,10 +27015,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与心血管技师与技术员精确对应的全国职业月薪分布；本页不发布替代数值。"
+              "证据不足：本职业全国精确月薪分布未取得；行业年均仅另列背景。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.50",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26902,10 +27107,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "变化约 +3%（Average）"
+              "变化约4%（2025—2035，与平均相当）"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.58",
+          "source_refs": [
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -27062,10 +27270,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "对应时薪第 10 分位 18.75 美元，为分布下限，不是入门起薪的承诺。；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/29-2031.00"
+              "同口径P10时薪18.75美元，约10%工资在此及以下；是分位而非最低或新人起薪。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.10",
+          "source_refs": [
+            "wages-current"
+          ],
           "type": "prose"
         },
         {
@@ -27150,10 +27361,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同口径时薪第 90 分位为 58.34 美元，高分段通常与细分方向、机构类型与职称与资历相关。；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/29-2031.00"
+              "P90时薪58.34美元；分位本身不能证明高薪由资历、职称或方向导致。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.18",
+          "source_refs": [
+            "wages-current"
+          ],
           "type": "prose"
         },
         {
@@ -27161,10 +27375,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "64,700人（2024 年）"
+              "64500人（2025）"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.19",
+          "source_refs": [
+            "trends-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27172,10 +27390,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为 Cardiovascular Technologists and Technicians（SOC 29-2031）精确职业口径 的就业基数，该职业 94% 位于医疗与社会救助业、6% 位于其他行业。；O*NET 职业摘要｜https://www.onetonline.org/link/summary/29-2031.00"
+              "O*NET本职业2025行业分布为卫生与社会救助95%、其他5%；BLS雇主类型另列医院77%、医师办公室13%、门诊2%、医检实验2%、自雇约1%（四舍五入），两套分类不相互替代。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.20",
+          "source_refs": [
+            "industry-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27183,10 +27405,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "变化约 +3%（Average，2024—2034 年）"
+              "变化约4%（2025—2035，与平均相当）"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.21",
+          "source_refs": [
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -27194,10 +27419,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该变化标签为 Cardiovascular Technologists and Technicians（SOC 29-2031）精确职业口径，该职业页面未标注 Bright Outlook。；O*NET 职业摘要｜https://www.onetonline.org/link/summary/29-2031.00"
+              "本职业精确预测；未标Bright Outlook，标签与工资或就业保证无关。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.22",
+          "source_refs": [
+            "details-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -27205,10 +27434,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "3,800个/年（2024—2034 年预测）"
+              "3400个/年（2025—2035预测）"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.23",
+          "source_refs": [
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -27227,10 +27459,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界：本页美国工资与就业为本职业精确口径 Cardiovascular Technologists and Technicians（SOC 29-2031）精确职业口径（2025 年 5 月 BLS OEWS 工资分位与 2024—2034 年 BLS 预测），不是行业代理数据；该职业 2024—2034 年预测变化约 +3%，属与平均相当的稳定增长区间；该职业本身未标注 Bright Outlook，其 O*NET 相关职业中诊断医学超声师（29-2032.00）、磁共振成像技师（29-2035.00）、神经诊断技师（29-2099.01）、医疗技术专家（29-2099.05）、呼吸治疗师（29-1126.00）与外科手术技师（29-2055.00）标注 Bright Outlook，属不同职业身份，不互相代入；行业分布描述统计分类而不是工资水平，本页不据此推导行业工资。"
+              "本职业2025OEWS工资和2025—2035精确就业预测分开读；OOH还给同职业分行业中位工资，不由行业比例推算。美国SOC29-2031本职业2025约64500人、2035预测66900人，变化约4%（与平均相当），净增约2400人；2025—2035年均空缺3400个，包含流动及退出替代，非年均净增。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.25",
+          "source_refs": [
+            "wages-current",
+            "trends-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27238,10 +27475,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：美国公开数据给出本职业精确口径的工资分布——2025 年中位年薪 74,310 美元、中位时薪 35.73 美元，年薪第 10 至第 90 分位为 39,000 至 121,350 美元；2024 年就业约 64,700 人，2024—2034 年预测变化约 +3%、年均职位空缺约 3,800 个。这些数字描述统计分类，不是个人起薪承诺，也不构成个人就业保证；该职业在美国通常需要相关副学士或证书课程与临床实习，并通过雇主能力考核；学历与认证是入职条件而非工资保证。"
+              "2025中位74310美元/年、35.73美元/时，年P10—P90为39000—121350。美国SOC29-2031本职业2025约64500人、2035预测66900人，变化约4%（与平均相当），净增约2400人；2025—2035年均空缺3400个，包含流动及退出替代，非年均净增。 O*NET新入职需要学历问答63%副学士或两年制、13%中等后证书、10%高中/同等，并非在岗学历分布；ZoneThree一至两年训练是跨职业说明，不是每个岗位必修期限。BLS通常副学士或证书加课程临床部分，EKG入门可高中，证书通常不足一年；部分州要求许可，雇主可能要求或偏好专业认证，也可能要求BLS/CPR。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.26",
+          "source_refs": [
+            "wages-current",
+            "trends-current",
+            "ooh-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -27249,10 +27492,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "学历与训练通常影响起点：O*NET 把该职业列为 Job Zone Three（SVP 6.0 至低于 7.0），通常需要职业学校培训、相关在职经验或副学士学位；教育调查中 63% 的受访者认为需要副学士或其他两年制学历、13% 认为需要中等后证书、10% 认为高中文凭或同等学历即可；在职培训通常一至两年（含学徒形式，页面列出 1 项学徒方向：Invasive Cardiovascular Technologist）。细分方向的认证与机构准入是本职业扩展操作范围的关键门槛。"
+              "O*NET新入职需要学历问答63%副学士或两年制、13%中等后证书、10%高中/同等，并非在岗学历分布；ZoneThree一至两年训练是跨职业说明，不是每个岗位必修期限。BLS通常副学士或证书加课程临床部分，EKG入门可高中，证书通常不足一年；部分州要求许可，雇主可能要求或偏好专业认证，也可能要求BLS/CPR。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.27",
+          "source_refs": [
+            "details-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27271,10 +27518,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与雇主类型影响报酬：O*NET 行业分布显示该职业 94% 位于医疗与社会救助业、6% 位于其他行业；综合医院与专科医院与门诊与影像中心与基层医疗机构的排班与值班方式与计酬结构不同。"
+              "O*NET本职业2025行业分布为卫生与社会救助95%、其他5%；BLS雇主类型另列医院77%、医师办公室13%、门诊2%、医检实验2%、自雇约1%（四舍五入），两套分类不相互替代。 本职业OOH同版行业中位差异仅为群体描述，非因果或合同报价。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.29",
+          "source_refs": [
+            "industry-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27293,10 +27544,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "职责范围影响报酬：是否能承担心导管与介入辅助等侵入性检查的辅助操作、是否具备超声或动态心电与设备与质控管理等细分方向能力、是否负责带教与质控与设备管理职责，通常比固定项目的常规检查岗位更影响报酬水平。"
+              "编辑比较职责、方向、质控带教与排班作为岗位合同核对项；本轮未取得这些因素导致本职业薪酬变化的因果研究。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.31",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27315,10 +27569,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "变化约 +3%（Average）"
+              "变化约4%（与平均相当）"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.33",
+          "source_refs": [
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -27326,10 +27583,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "医疗与社会救助业（94%）"
+              "门诊照护中心"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.34",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27337,10 +27597,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "95080美元/年（2025该行业本职业年工资中位）"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.35",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27348,10 +27611,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布显示该职业 94% 位于医疗与社会救助业。"
+              "SOC29-2031精确职业在该行业的工资中位，非行业全员平均或本人报价；不推导中国工资。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.36",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27359,10 +27625,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他行业（6%）"
+              "医学及诊断实验室"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.37",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27370,10 +27639,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "81200美元/年（2025该行业本职业年工资中位）"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.38",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27381,10 +27653,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 把其余 6% 合并为「其他行业」；本页不拆分该部分，也不推算其工资。"
+              "SOC29-2031精确职业在该行业的工资中位，非行业全员平均或本人报价；不推导中国工资。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.39",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27392,10 +27667,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "细分方向与检查类型未公布"
+              "医师办公室"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.40",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27403,10 +27681,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：来源未公布按细分方向或检查类型细分的工资中位数。"
+              "76850美元/年（2025该行业本职业年工资中位）"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.41",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27414,10 +27695,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 未公布按心电与超声与介入等细分方向的工资；本页不推测该部分构成或工资。"
+              "SOC29-2031精确职业在该行业的工资中位，非行业全员平均或本人报价；不推导中国工资。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.42",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27425,10 +27709,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "职称与机构类型细分未公布"
+              "州/地方/私营医院"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.43",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27436,10 +27723,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：来源未公布按职称层级或机构类型细分的工资中位数。"
+              "69970美元/年（2025该行业本职业年工资中位）"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.44",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27447,10 +27737,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 未公布按职称与机构类型细分的工资；本页不推测该部分构成或工资。"
+              "SOC29-2031精确职业在该行业的工资中位，非行业全员平均或本人报价；不推导中国工资。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.45",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27458,10 +27751,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位数不是入门工资：它表示一半从业者高于、一半低于该值；第 10 与第 25 分位更接近分布低端，但仍受细分方向、机构类型、职称层级与排班安排影响。"
+              "中位数是工资分布中点；P10/P25也不是新人样本，不从分位推出资历、方向或排班薪酬因果。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.46",
+          "source_refs": [
+            "wages-current"
+          ],
           "type": "prose"
         },
         {
@@ -27480,10 +27776,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "数字来自 O*NET 展示的 BLS 2025 年 OEWS 工资数据，口径为 Cardiovascular Technologists and Technicians（SOC 29-2031）；就业与预测期为 2024—2034 年。该职业 94% 集中于医疗与社会救助业，行业间工资差异未在来源中公布。"
+              "2025OEWS工资分位；美国SOC29-2031本职业2025约64500人、2035预测66900人，变化约4%（与平均相当），净增约2400人；2025—2035年均空缺3400个，包含流动及退出替代，非年均净增。 OOH分行业工资中位为同职业门诊95080、医检实验81200、医师办公室76850、医院69970美元/年。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.48",
+          "source_refs": [
+            "wages-current",
+            "trends-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27535,10 +27836,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位为年薪 121,350 美元；高端通常与细分方向、机构类型与职称与资历相关，不代表普遍水平。"
+              "P90为121350美元/年，非工资上限或普遍水平；仅分位不解释收入形成原因。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.53",
+          "source_refs": [
+            "wages-current"
+          ],
           "type": "prose"
         }
       ]
@@ -27747,10 +28051,10 @@
                 "url": "/zh/career/jobs/neurodiagnostic-technologists"
               },
               {
-                "entity": "O*NET-SOC 29-2031.00 培训与教育信息",
+                "entity": "O*NET新入职学历及学徒示例",
                 "id": "link-13",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtraining/29-2031.00"
+                "url": "https://www.onetonline.org/link/details/29-2031.00"
               },
               {
                 "entity": "O*NET-SOC 29-2031.00 专业认证信息",
@@ -27783,10 +28087,10 @@
                 "url": "https://www.onetonline.org/link/summary/29-2031.00"
               },
               {
-                "entity": "O*NET-SOC 29-2031.00 培训与教育信息（准备层级）",
+                "entity": "O*NET本职业教育问答",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtraining/29-2031.00"
+                "url": "https://www.onetonline.org/link/details/29-2031.00"
               },
               {
                 "entity": "O*NET-SOC 29-2031.00 技术清单（雇主招聘技术信号）",
@@ -27804,10 +28108,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "霍兰德兴趣代码为 RIC（现实型、研究型、常规型）：现实型对应在真实环境中操作检查设备并对患者身体条件作出反应，研究型对应理解生理机制与识别波形与影像异常，常规型对应按规程与检查单与质控要求执行并完整记录。"
+              "O*NET兴趣RIC：R77/I72/C62/S54/E5/A0；健康照护90、医学科学58、机械电子44、生命科学39是独立具体兴趣领域，不是现实型子分数或个人准入线。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.2",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -27849,10 +28156,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格中与工作方式更相关的是尽责性（按规程核对患者与设备并完整记录）、情绪稳定性（在患者紧张与设备报警与时间压力下保持判断）与宜人性（对患者与同事保持耐心与协作）。这些关联来自一般性研究结论，强度低于实际表现。"
+              "编辑可用计划核对、压力下沟通和协作表现提出自我观察问题；本轮未取得大五对本职业的预测研究，不写成已证明的效度关联。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.6",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27860,10 +28170,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：人格与工作行为的相关性属于一般性研究结论，不能替代可复核的检查记录、校准与质控记录、患者核对记录与异常与处置记录。"
+              "O*NET工作风格是职业描述，不是大五测验效度证据；编辑观察不能替代真实训练、能力考核和准入。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.7",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27871,11 +28185,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "尽责性有助于按规程完成患者核对与设备校准与记录，减少遗漏。",
-              "情绪稳定性与自控有助于在患者不适或设备报警时按程序停止并升级，而不是凭经验继续。"
+              "编辑观察：能否按规程核对并记录，具体行为比人格标签更可复核。",
+              "编辑观察：压力下及时沟通和接受纠正，本轮未核大五本职业效度。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.8",
+          "source_refs": [
+            "editor-current",
+            "quality-current"
+          ],
           "type": "list"
         },
         {
@@ -27894,7 +28212,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业适配或专业胜任的评估工具，也没有官方资料支持「某种类型最适合心血管技师与技术员」的说法。可用于自我反思与沟通偏好理解，但不能用于招聘筛选、院内准入考核或岗位分配。"
+              "本轮职业资料未提供MBTI对本职业胜任、招聘或院内准入的预测效度；本页只借偏好提出核对问题，不据类型定任职。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.10",
@@ -27905,10 +28223,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：MBTI 的职业预测效度有限，且不被 O*NET 或 BLS 用作适配标准。"
+              "本轮O*NET/BLS不提供MBTI招聘或个人胜任标准；不据此推断所有雇主不使用，也未核本职业预测效度。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.11",
+          "source_refs": [
+            "details-current",
+            "ooh-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27939,7 +28262,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样不是职业适配工具，缺乏官方职业资料支持，也不用于招聘或准入判断。可用于自我反思，但不能据此决定是否投入长期培训与临床实习。"
+              "本轮未取得九型人格对本职业胜任或准入的研究；可提出反思问题，本页不据类型决定长期培训与临床实习。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.14",
@@ -27950,10 +28273,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：无官方职业资料来源支持将九型人格用于职业适配判断。"
+              "本轮职业资料未提供九型适配标准，不据此制定招聘或资格结论。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.15",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28029,10 +28355,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力有帮助：需要在患者紧张或不适、设备报警与时间压力下保持稳定并按程序处置。但这类能力不能用单一分数定义，也不能替代院内准入、认证与防护规程。"
+              "编辑关注患者紧张、报警和时间压力下清楚沟通与接受纠正的行为；未核本职业EI预测效度，不设情绪分数门槛。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.22",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28040,10 +28369,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：O*NET 工作风格以注重细节（92）与可靠性（88）与合作（85）与谨慎性（78）与自控（75）为主；情绪智力测验的预测效度有限，不能替代实践证据。"
+              "O*NET细节92/可靠88/合作85/谨慎78/自控75为职业工作风格，不是EI测验验证。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.23",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28051,11 +28383,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能在被指出核对或记录问题时按规程改正，比情绪分数高低更重要。",
-              "愿意承认不确定并立即复测或重新采集、通知医师，是专业能力的一部分。"
+              "编辑观察：接受对核对和记录的纠正。",
+              "患者异常及时通知负责团队并依规程处置；不能默认先重采再报告。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.24",
+          "source_refs": [
+            "editor-current",
+            "quality-current"
+          ],
           "type": "list"
         },
         {
@@ -28085,10 +28421,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：更有解释力的适配信号是能在与患者近距离接触与多台设备同时运行的环境中保持注意力、愿意按规程逐项核对患者与设备、能在发现异常时立即停止并升级；家用血压计或健身手环的使用经验不足以证明能完成心导管或超声心动图检查。"
+              "编辑适配观察：能维持注意、核对患者和设备、及时报告异常并接受专业纠正；编辑建议：患者异常及时通知负责医师/响应团队并依机构应急规程在本人职责范围内处置，不能等停机、复测或修设备后再报告；设备问题另依机构规程安全交接/停用、恢复验证，本文不授予统一停检、复检或替代检查权限。 家用健康设备经验不等于临床胜任。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.27",
+          "source_refs": [
+            "editor-current",
+            "details-current",
+            "quality-current"
+          ],
           "type": "prose"
         },
         {
@@ -28096,10 +28437,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更偏心电与动态心电的方向"
+              "呼吸治疗方向"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.28",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28107,10 +28451,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意执行常规心电图与动态心电与压力测试并逐份核对记录质量。"
+              "愿意学习呼吸支持、患者评估和团队照护。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.29",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28118,10 +28465,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足心脏电生理基础与伪差识别能力；对重复核对与记录完整性要求高。"
+              "编辑需补呼吸治疗专业训练与对应许可认证，肺功能检查经验不自动等于治疗资格。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.30",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28129,10 +28479,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更偏心导管与介入辅助的方向"
+              "放射治疗方向"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.31",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28140,10 +28493,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意在导管室承担无菌操作与器械与影像支持并承受较高节奏。"
+              "愿意转向治疗实施、定位与剂量/安全核对。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.32",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28151,10 +28507,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足无菌操作与介入器械与造影与辐射防护能力；对团队配合与应急要求更高。"
+              "编辑需补放疗专业课程、临床训练和资质，心血管检查不能直接授予治疗资格。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.33",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28162,10 +28521,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更偏超声心动图与血管超声的方向"
+              "外科手术技术方向"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.34",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28173,10 +28535,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意长期从事超声采集与测量并按标准切面与测量规范执行。"
+              "愿意承担无菌与器械准备及手术团队配合。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.35",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28184,10 +28549,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足超声解剖与切面与测量规范能力；对图像质量判断要求更高。"
+              "编辑需补手术流程和专业训练，介入支持经验仅部分迁移。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.36",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28195,10 +28563,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更偏肺功能与运动试验的方向"
+              "医学超声技术方向（美国分类）"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.37",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28206,10 +28577,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意指导患者在负荷条件下配合检查并处理呼吸相关不适。"
+              "愿意学习超声解剖、标准切面、图像质量与测量。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.38",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28217,10 +28591,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足呼吸生理与运动试验判据与急救能力；对患者安全监护要求更高。"
+              "编辑需核超声方向课程认证及法域，不等同中国医师诊断资格。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.39",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28228,10 +28605,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更偏设备与质控管理的方向"
+              "磁共振成像技术方向"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.40",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28239,10 +28619,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意承担设备维护与校准管理与质量控制与培训职责。"
+              "愿意学习MRI图像采集与磁场/植入物安全。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.41",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28250,10 +28633,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足设备原理与质控方法与培训能力；职责从单次检查转向检查质量体系。"
+              "编辑需补MRI专门训练和资质，心电/超声设备能力不直接互换。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.42",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28261,10 +28647,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更偏检查质量与合规管理的方向"
+              "神经诊断技术方向"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.43",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28272,10 +28661,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意承担检查质量监督、操作规程与培训与合规管理职责。"
+              "愿意学习神经电生理、长程监测和信号质量。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.44",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28283,10 +28675,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足质量管理与审核与培训能力；责任对象从单次检查转向科室与制度层面。"
+              "编辑需补神经检查训练与项目资格，心电记录经验仅部分迁移。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.45",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28305,7 +28700,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合与否不取决于内外向。工作情境显示 94% 持续与他人接触、89% 与他人保持非常近距离、84% 每天面对面讨论，同时 73% 认为精确或准确极其重要、72% 每天面临时间压力、66% 持续用手操作；能否在患者面前把流程讲清并把记录填全，比外向程度更关键。"
+              "美国情境问答94%持续接触、89%近距离、84%每天面谈，73%准确极重要、72%每天时间压力、66%持续手动。编辑观察建议：核患者沟通、记录与压力下响应；本轮未取得与外向性的比较效度。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.47",
@@ -28316,10 +28711,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能。外向有助于安抚患者与团队沟通与带教，但工作仍以按规程核对、持续观察波形与影像与完整记录为主（94% 持续与他人接触、89% 每天在环境受控的室内、54% 认为重复性任务极其重要）；能否接受重复核对与固定班次，比表达欲更关键。"
+              "外向偏好不决定胜任；O*NET高频接触和重复任务描述美国职业群，规则班期还可能含晚间/周末/通宵。按实际患者沟通、记录及轮班表现判断。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.48",
+          "source_refs": [
+            "details-current",
+            "ooh-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28327,7 +28727,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有官方结论，也不存在最适合的类型。MBTI 只能帮助整理偏好并提出核对问题，不能预测专业胜任力或院内准入与招聘结果；本页不提供类型名单。"
+              "本轮未取得支持某MBTI类型最适合本职业的研究；本页不提供类型名单，不据偏好标签预测院内准入或招聘结果。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.49",
@@ -28338,10 +28738,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 把该职业的兴趣代码列为 RIC（现实型、研究型、常规型）：现实型对应在真实环境中操作检查设备（具体领域以健康照护服务 90 为主），研究型对应理解生理机制与识别波形与影像异常（具体领域含医学科学 58、生命科学 39），常规型对应按规程与检查单与质控要求执行并记录。兴趣代码描述职业群体特征，不是个人适配结论。"
+              "O*NET兴趣RIC：R77/I72/C62/S54/E5/A0；健康照护90、医学科学58、机械电子44、生命科学39是独立具体兴趣领域，不是现实型子分数或个人准入线。 兴趣相似不等于临床能力。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.50",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28349,7 +28752,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。人格与兴趣工具的效度有限，不能替代可复核的检查记录、校准与质控记录、患者核对记录与实际操作表现；本页只用它们提出核对问题。"
+              "本轮未取得人格、兴趣工具对本职业胜任的预测效度；可结合检查、校准质控、患者核对记录与实际操作表现核对，不据分数定任职。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.51",
@@ -28371,10 +28774,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力确实有帮助：需要在患者紧张或不适与设备报警与时间压力下保持稳定并按程序处置。但这类能力不能用单一分数定义，也不能替代院内准入、认证与防护规程。"
+              "编辑可观察压力下沟通和遵规表现；本轮未核本职业EI效度，不能由测验分数代替临床训练或资质。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.53",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28382,7 +28788,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。九型人格不是职业适配或胜任评估工具，也不被官方职业资料用作招聘依据；可用于自我反思，但不能据此做培训与认证投入决定。"
+              "本轮未取得九型人格对本职业招聘、胜任或投入回报的研究；本页不据类型决定培训与认证投入。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.54",
@@ -28393,10 +28799,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用可复核的产出判断：一份含患者核对与电极位置与伪差识别与中止条件的模拟检查方案、一份完整的模拟心电图检查记录、一份校准与质控记录、一份异常与升级与交接记录。若你能按规范完成并被在岗人员复核通过，说明你具备基本适配条件。"
+              "模拟检查、记录与质控材料可供受监督的学习和反馈，不足以证明基本临床胜任、实际患者操作或获得项目授权。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.55",
+          "source_refs": [
+            "editor-current",
+            "clinical-current"
+          ],
           "type": "prose"
         },
         {
@@ -28404,10 +28814,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "你能按规程完成患者核对与检查执行与记录并留下可追溯证据；你愿意在超出授权、患者条件不适宜或设备状态异常时先停止并请示，而不是凭经验硬做。"
+              "编辑观察：愿意核对、记录、承认不确定并及时请负责人员处理；编辑建议：患者异常及时通知负责医师/响应团队并依机构应急规程在本人职责范围内处置，不能等停机、复测或修设备后再报告；设备问题另依机构规程安全交接/停用、恢复验证，本文不授予统一停检、复检或替代检查权限。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.56",
+          "source_refs": [
+            "editor-current",
+            "quality-current"
+          ],
           "type": "prose"
         },
         {
@@ -28437,10 +28851,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的准备层级、学历构成与培训入口。"
+              "学历问答是新入职需要估计，培训页是学校项目目录与毕业人数，均非在岗学历组成。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.59",
+          "source_refs": [
+            "details-current",
+            "training-current"
+          ],
           "type": "prose"
         },
         {
@@ -28448,10 +28866,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明证书与准入的定位：本职业为受监管的医疗临床岗位，认证不等于执业许可或检查判读权，也不等于院内授权。"
+              "美国州许可和雇主认证要求需逐岗核；26关联认证含不同专业且CCI只部分，不自动形成中国资质或诊断文书权限。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.personality-fit-block.60",
+          "source_refs": [
+            "ooh-current",
+            "cert-current",
+            "physician-current"
+          ],
           "type": "prose"
         },
         {
@@ -28525,10 +28948,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "适配信号：更有解释力的信号是能在与患者近距离接触与多台设备同时运行的环境中保持注意力、愿意按规程逐项核对患者与设备、能在发现异常时立即停止并升级；家用健康设备的使用经验不足以证明胜任。"
+              "编辑适配观察重在注意、核对和及时报告，不把发现任何异常一概先停机或重采；编辑建议：患者异常及时通知负责医师/响应团队并依机构应急规程在本人职责范围内处置，不能等停机、复测或修设备后再报告；设备问题另依机构规程安全交接/停用、恢复验证，本文不授予统一停检、复检或替代检查权限。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.riasec-fit-block.9",
+          "source_refs": [
+            "editor-current",
+            "quality-current"
+          ],
           "type": "prose"
         },
         {
@@ -28536,10 +28963,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣画像：O*NET 把该职业的兴趣代码列为 RIC，现实型对应在真实环境中操作检查设备并处理患者接触，研究型对应理解生理机制与识别波形与影像异常，常规型对应按规程与检查单与质控要求执行并记录。"
+              "O*NET兴趣RIC：R77/I72/C62/S54/E5/A0；健康照护90、医学科学58、机械电子44、生命科学39是独立具体兴趣领域，不是现实型子分数或个人准入线。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.riasec-fit-block.10",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28547,10 +28977,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 兴趣代码：RIC（现实型、研究型、常规型）。现实型下的具体兴趣领域以健康照护服务（90）、医学科学（58）、机械与电子（44）与生命科学（39）为主；研究型在本页对应理解生理机制与识别波形与影像异常。"
+              "O*NET兴趣RIC：R77/I72/C62/S54/E5/A0；健康照护90、医学科学58、机械电子44、生命科学39是独立具体兴趣领域，不是现实型子分数或个人准入线。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.fit.riasec-fit-block.11",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28680,28 +29113,34 @@
                 "url": "https://www.onetonline.org/link/summary/29-2031.00"
               },
               {
-                "entity": "国家卫生健康委员会（医疗质量与执业管理政策入口）",
+                "entity": "医疗质量管理办法",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.nhc.gov.cn/wjw/c100221/202201/d2633bf795e443b6a879f27e408539f3.shtml"
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/201905/t20190522_59652.html"
               },
               {
-                "entity": "《心血管系统疾病相关专业医疗质量控制指标（2021 年版）》",
+                "entity": "O*NET任务与情境",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.nhc.gov.cn/wjw/c100175/202102/0744ee0064e14e13aaa225272657747e.shtml"
+                "url": "https://www.onetonline.org/link/details/29-2031.00"
               },
               {
-                "entity": "基本医疗卫生与健康促进相关法律入口（全国人民代表大会）",
+                "entity": "中华人民共和国医师法",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://wb.flk.npc.gov.cn/flfg/PDF/69d193074a7c4be197eadb40dc485c9e.pdf"
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992842.html"
               },
               {
-                "entity": "《中华人民共和国职业分类大典（2022 年版）》公布信息（人力资源和社会保障部）",
+                "entity": "医疗技术临床应用管理办法",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/201905/t20190522_61482.html"
+              },
+              {
+                "entity": "放射诊疗管理规定",
+                "id": "link-7",
+                "relation": "career.source",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/201912/t20191218_1266816.html"
               }
             ]
           },
@@ -28735,10 +29174,18 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：风险与边界条目依据 O*NET 29-2031.00 的官方任务、工作活动与工作情境，以及国家卫生健康委员会公开的心血管系统疾病相关专业医疗质量控制指标（2021 年版）与医疗质量管理办法所体现的质量与执业管理要求整理；不替代医疗机构授权、执业范围规定、科室操作规程与设备说明书的具体要求。"
+              "风险场景为编辑整理：美国O*NET任务情境及中国医疗技术/质量管理、医师法和放射诊疗实际条款；不替代具体科室患者应急、设备停用恢复或复检规程。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.risk.career-risk-cards.10",
+          "source_refs": [
+            "details-current",
+            "clinical-current",
+            "quality-current",
+            "physician-current",
+            "radiology-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28768,10 +29215,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按流程核对医嘱与患者身份并留存核对记录；发现信息不一致时先停止检查并向医师确认，必要时请第二人复核。"
+              "编辑核对患者及医嘱，信息不一致立即通知负责人员，依机构流程确认；患者紧急情况按应急规程处置，不由页面统一下达停检命令。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.risk.career-risk-cards.13",
+          "source_refs": [
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28812,10 +29263,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用原始波形与影像复核自动数值与算法提示；发现不一致先复测或重新采集并记录伪差来源，不以自动结果直接出具报告。"
+              "编辑核原始数据与患者状态，及时报告差异，依规程评估是否重采；不得用复测延迟临床响应，放射检查避免无必要重复照射。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.risk.career-risk-cards.17",
+          "source_refs": [
+            "quality-current",
+            "radiology-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28856,10 +29312,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程执行个人防护与手卫生与消毒与无菌操作，按辐射防护要求使用屏蔽与剂量监测；防护装备或屏蔽不足时先停止并报告。"
+              "机构执行院感及相应防护；放射项目有个人剂量、健康培训与照射保护要求，心电/超声不一概电离辐射。防护不足及时报告并依机构安全流程处理。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.risk.career-risk-cards.21",
+          "source_refs": [
+            "quality-current",
+            "radiology-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28900,10 +29361,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程完成开机自检与校准与质控并留存记录；设备异常或质控超限时先停用并报修，恢复后重新验证。"
+              "编辑核设备质控和记录，异常及时通知设备/临床负责人员并依规程安全交接、停用及恢复验证；放射设备检测合格启用要求不等同一般技师自行维修许可。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.risk.career-risk-cards.25",
+          "source_refs": [
+            "quality-current",
+            "radiology-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28944,10 +29410,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "只在授权与培训范围内执行检查；判读与报告发布按院内流程由有授权的执业人员完成并留痕；授权范围变更须有培训与考核记录支撑。"
+              "BLS职责包括分析异常及诊断信息、向医师汇总发现，O*NET还列Holter记录解释；技术分析不等于独立医学诊断、处方或治疗决定，报告签署按法域及项目权限核。 中国需核医疗机构诊疗项目、人员法定资质和实际职责；临床应用办法16—20条区分机构目录/人员能力档案及医师手术授权，医师法22/24/25条规定注册范围诊查、医学证明及特殊检查知情同意。美国州许可、雇主认证与项目能力要求逐岗核，不能把境外认证直接套为中国执业权限。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.risk.career-risk-cards.29",
+          "source_refs": [
+            "ooh-current",
+            "physician-current",
+            "clinical-current"
+          ],
           "type": "prose"
         },
         {
@@ -28988,10 +29459,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按设备与规程更新安排再培训与考核，保留培训与授权记录；新设备与新流程首次使用前完成验证。"
+              "机构按质量管理办法31条组织法律规范及质量方法培训考核；编辑建议设备或流程变化时核实际培训、验证和职责记录，不冒充具体机构制度。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.risk.career-risk-cards.33",
+          "source_refs": [
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29010,10 +29485,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明美国职业身份与官方职责，不用于风险评估。"
+              "O*NET职业任务与工作情境支持风险对象和接触情况，风险发生率未取得。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.risk.career-risk-cards.35",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -29021,10 +29499,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆医疗质量与执业管理的公开要求范围，不构成对具体机构或个人的合规定性。"
+              "医疗质量管理办法16/17/20/22/23/24/36条支持资质、质控、院感、记录、隐私与预案责任。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.risk.career-risk-cards.36",
+          "source_refs": [
+            "quality-current"
+          ],
           "type": "prose"
         },
         {
@@ -29032,10 +29513,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明官方任务、工作活动与工作情境口径，不用于风险评估。"
+              "O*NET任务与美国OOH支持技术异常分析和团队职责，不授予中国诊断治疗资格。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.risk.career-risk-cards.37",
+          "source_refs": [
+            "details-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -29043,10 +29528,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆职业分类与岗位类别汇总口径，不发布数值。"
+              "医师法22/24/25条支持注册范围、医学证明及特殊检查同意；不等同技术分析一概禁止。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.risk.career-risk-cards.38",
+          "source_refs": [
+            "physician-current"
+          ],
           "type": "prose"
         },
         {
@@ -29054,10 +29542,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明官方统计按行业与单位类型汇总、但不单列本职业的口径，不发布数值。"
+              "医疗技术临床应用办法16—20条支持机构目录、人员能力档案及医师手术授权，非工资或统一停检程序。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.risk.career-risk-cards.39",
+          "source_refs": [
+            "clinical-current"
+          ],
           "type": "prose"
         }
       ]
@@ -29215,10 +29706,10 @@
                 "url": "https://www.onetonline.org/link/summary/29-2031.00"
               },
               {
-                "entity": "O*NET-SOC 29-2031.00 培训与教育信息",
+                "entity": "O*NET新入职学历与学徒示例",
                 "id": "link-2",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/29-2031.00"
+                "url": "https://www.onetonline.org/link/details/29-2031.00"
               },
               {
                 "entity": "O*NET-SOC 29-2031.00 详细资料（任务与工作活动）",
@@ -29319,10 +29810,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能负责检查质量体系与设备与培训与合规管理，并对科室检查质量整体负责。"
+              "编辑进阶角色可参与质量设备培训管理；中国科室质量第一责任人为科室负责人，不因承担设备管理自动对全部科室负责。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.career-path-block.18",
+          "source_refs": [
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29341,10 +29836,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：O*NET 把该职业列为 Job Zone Three（中等准备，SVP 6.0 至低于 7.0），通常需要职业学校培训、相关在职经验或副学士学位（教育调查中 63% 认为需要副学士或其他两年制学历、13% 认为需要中等后证书、10% 认为高中文凭或同等学历即可），并有一至两年的在职培训（含学徒形式，该职业页列出 1 项学徒方向：Invasive Cardiovascular Technologist）。在美国，常见入门为相关副学士或证书课程加临床实习与雇主能力考核，细分方向的认证由 Cardiovascular Credentialing International 等机构提供，注册认证与许可要求因州与机构与细分方向而异。在中国大陆，检查与介入支持必须在医疗机构授权、操作规范与医师责任链内进行，岗位需核验医疗机构与医技人员准入与院内授权，不把境外证书直接等同本地权限。"
+              "O*NET新入职需要学历问答63%副学士或两年制、13%中等后证书、10%高中/同等，并非在岗学历分布；ZoneThree一至两年训练是跨职业说明，不是每个岗位必修期限。BLS通常副学士或证书加课程临床部分，EKG入门可高中，证书通常不足一年；部分州要求许可，雇主可能要求或偏好专业认证，也可能要求BLS/CPR。 中国需核医疗机构诊疗项目、人员法定资质和实际职责；临床应用办法16—20条区分机构目录/人员能力档案及医师手术授权，医师法22/24/25条规定注册范围诊查、医学证明及特殊检查知情同意。美国州许可、雇主认证与项目能力要求逐岗核，不能把境外认证直接套为中国执业权限。 学徒仅1个获认可示例，不保证招生。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.career-path-block.20",
+          "source_refs": [
+            "details-current",
+            "ooh-current",
+            "clinical-current",
+            "physician-current"
+          ],
           "type": "prose"
         },
         {
@@ -29363,10 +29864,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域：美国（州注册与认证要求、机构准入与能力考核）与中国大陆（医疗机构授权与医技人员管理规定、执业范围与项目授权）分别核对，不跨法域直接套用；两地都以机构授权与培训记录为执行检查的前提，且可执行的项目与设备范围各异。"
+              "中国需核医疗机构诊疗项目、人员法定资质和实际职责；临床应用办法16—20条区分机构目录/人员能力档案及医师手术授权，医师法22/24/25条规定注册范围诊查、医学证明及特殊检查知情同意。美国州许可、雇主认证与项目能力要求逐岗核，不能把境外认证直接套为中国执业权限。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.career-path-block.22",
+          "source_refs": [
+            "clinical-current",
+            "physician-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -29374,10 +29880,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "路径概要：以患者核对与基础检查与记录为起点，通过稳定的检查质量、完整的校准与质控记录与安全表现积累证据，先取得机构对单一检查方向的授权，再逐步承担侵入性检查辅助或复杂检查与质控与带教职责。"
+              "以下发展路线为编辑比较，按具体方向积累课程、临床训练和被允许的技能，不是全国统一晋升或自动转入侵入性操作通道。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.career-path-block.23",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29396,10 +29905,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的准备层级、学历构成与培训入口。"
+              "详细档案含新入职学历问答与Job Zone；培训页仅关联项目目录/毕业人数。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.career-path-block.25",
+          "source_refs": [
+            "details-current",
+            "training-current"
+          ],
           "type": "prose"
         },
         {
@@ -29418,10 +29931,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明官方自定义职业档案可选取字段的范围，以及认证与院内授权按岗位确定的事实。"
+              "自定义档案说明可选字段，不支持认证或院内授权事实；这些要求改据BLS与中国实际法规核。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.career-path-block.27",
+          "source_refs": [
+            "ooh-current",
+            "clinical-current"
+          ],
           "type": "prose"
         },
         {
@@ -29429,10 +29946,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "高中或中等职业教育或相关专业课程，并完成院内岗前培训与防护培训。"
+              "编辑助理路线先核所需教育与岗位要求；美国EKG可高中不代表中国临床技术岗位统一高中准入。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.career-path-block.28",
+          "source_refs": [
+            "ooh-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29484,10 +30005,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "取得相关副学士或证书课程学历与临床实习经历。"
+              "美国常见副学士或相关证书及临床部分，细分EKG等路径有差异；中国具体资质和机构条件另核。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.career-path-block.33",
+          "source_refs": [
+            "ooh-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29539,10 +30064,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "取得细分方向认证并积累带教与质控经验。"
+              "编辑按方向核认证与实际临床技能，不把目录中任意证书视为扩大检查权限。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.career-path-block.38",
+          "source_refs": [
+            "cert-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29627,10 +30156,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "对科室检查质量整体负责。"
+              "编辑质量管理角色的职责须由机构分工确认，医疗质量管理办法9条区分院科责任。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.career-path-block.46",
+          "source_refs": [
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29649,10 +30182,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相关专业课程或同等培训，并完成无菌操作与辐射防护培训。"
+              "编辑需核介入支持实际岗位教育、临床训练、无菌和适用放射防护，不将“同等培训”直接认定法定资质。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.career-path-block.48",
+          "source_refs": [
+            "clinical-current",
+            "radiology-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29715,10 +30253,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立承担导管室内的无菌操作与器械与影像支持并配合造影与介入操作。"
+              "按本人法定资质和明确职责提供器械、无菌与影像支持，配合有权限团队；不因完成培训自动取得所有侵入操作权限。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.career-path-block.54",
+          "source_refs": [
+            "clinical-current",
+            "physician-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29759,10 +30302,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "取得细分方向认证并积累复杂操作与应急经验。"
+              "编辑积累与实际方向匹配的临床训练和应急配合经验；认证不是统一晋升条件或处置授权。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.career-path-block.58",
+          "source_refs": [
+            "cert-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29847,10 +30394,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "对介入检查质量与安全整体负责。"
+              "编辑管理角色按机构分工负责相关质量安全；不把技术晋升等同全部项目临床责任。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.career-path-block.66",
+          "source_refs": [
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29869,10 +30420,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相关专业课程或同等培训，并完成患者沟通与急救培训。"
+              "编辑超声/功能方向核专业课程、临床训练及岗位资质；O*NET任务含超声，BLS现OOH将超声职业另指29-2032，分类需按实际岗位核。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.career-path-block.68",
+          "source_refs": [
+            "details-current",
+            "ooh-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29935,10 +30491,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立完成超声心动图或血管超声或肺功能与运动试验检查与测量。"
+              "在对应资格、监督和项目职责内完成相关采集测量；超声、肺功能和运动试验并非一张证书或所有岗位统一权限。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.career-path-block.74",
+          "source_refs": [
+            "clinical-current",
+            "ooh-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30067,10 +30628,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "对检查质量整体负责。"
+              "编辑质量角色依机构分工承担相应职责；不把设备管理自动等同科室全部质量责任。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.career-path-block.86",
+          "source_refs": [
+            "quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30098,49 +30663,55 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "编辑岗位核对建议（未取得真实招聘样本）",
               "没经验如何证明",
               "与其他方向的区别"
             ],
             "rows": [
               [
-                "助理或登记岗位（在岗培训为主）",
+                "助理或登记岗位（实际要求逐岗核）",
                 "在带教下完成患者引导与准备与基础记录与耗材准备，学习核对与防护要求。",
-                "用工方看重院内岗前培训、感染控制与防护意识、沟通能力与记录习惯。",
+                "编辑建议核对：院内岗前培训、感染控制与防护意识、沟通能力与记录习惯。",
                 "提交一份含患者核对与准备流程与记录要点的练习说明材料。",
                 "此路径以监督下作业为主；不得独立承担侵入性操作辅助或报告发布。"
               ],
               [
                 "心电与动态心电或超声或肺功能技术岗位",
-                "按规程独立完成本方向常规检查与记录与质控，处理常见伪差与患者不适。",
-                "用工方看重相关学历或培训与临床实习、本方向设备操作与质控记录。",
+                "在对应岗位资质、监督和职责范围内执行本方向检查、监测与记录，不默认所有检查可独立承担。",
+                "编辑建议核对：相关学历或培训与临床实习、本方向设备操作与质控记录。",
                 "提交一份含检查操作要点与伪差处理与质控记录的练习样例。",
                 "可执行的项目与设备按机构授权与培训记录确定，不因学历自动扩大。"
               ],
               [
                 "心导管与介入辅助岗位",
                 "在导管室承担无菌操作与器械与影像支持，配合医师完成造影与介入操作。",
-                "用工方看重无菌操作与介入器械与造影与辐射防护经验与应急配合能力。",
+                "编辑建议核对：无菌操作与介入器械与造影与辐射防护经验与应急配合能力。",
                 "提交一份含无菌区维持与器械准备与防护措施的练习方案。",
-                "侵入性操作辅助须在授权与培训范围内执行，判读与治疗决定属医师职责。"
+                "BLS职责包括分析异常及诊断信息、向医师汇总发现，O*NET还列Holter记录解释；技术分析不等于独立医学诊断、处方或治疗决定，报告签署按法域及项目权限核。 侵入操作按法定及项目职责核，不因统一培训自动获得。"
               ],
               [
                 "设备与质控管理岗位",
                 "负责设备维护与校准与质量控制与培训与检查流程改进。",
-                "用工方看重设备原理与质控方法与培训与流程管理能力。",
+                "编辑建议核对：设备原理与质控方法与培训与流程管理能力。",
                 "提交一份含质控指标与设备维护计划与培训安排的说明材料。",
-                "质控职责不含检查判读权或治疗决定权，报告仍由有授权人员发布。"
+                "质控不自动等同医学诊断或治疗决定；报告权限按项目法规和机构分工确认。"
               ],
               [
                 "相邻方向转入（呼吸治疗、放射治疗、医学超声、外科手术技术等）",
                 "把原有临床接触与设备操作经验映射到本职业的检查规程与记录与防护要求。",
-                "用工方看重可迁移的患者沟通与设备操作与安全防护经验。",
+                "编辑建议核对：可迁移的患者沟通与设备操作与安全防护经验。",
                 "提交一份把既有工作经验转写为检查与质控语言的说明。",
                 "转岗不自动带来本方向的认证或院内授权；须按机构要求重新培训与考核。"
               ]
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.entry-role-comparison.1",
+          "source_refs": [
+            "editor-current",
+            "ooh-current",
+            "clinical-current",
+            "physician-current"
+          ],
           "title": "入门方向比较",
           "type": "table"
         },
@@ -30152,17 +30723,17 @@
               {
                 "id": "education",
                 "values": [
-                  "O*NET 把该职业列为 Job Zone Three（SVP 6.0 至低于 7.0），通常需要职业学校培训、相关在职经验或副学士学位。",
-                  "在职培训通常一至两年，含学徒形式（O*NET 该职业页列出 1 项学徒方向）；能力主要来自科室带教与轮转。",
-                  "该职业在 O*NET 页面未标注 Bright Outlook；在美国通常需要相关副学士或证书课程与临床实习。"
+                  "O*NET新入职需要学历问答63%副学士或两年制、13%中等后证书、10%高中/同等，并非在岗学历分布；ZoneThree一至两年训练是跨职业说明，不是每个岗位必修期限。BLS通常副学士或证书加课程临床部分，EKG入门可高中，证书通常不足一年；部分州要求许可，雇主可能要求或偏好专业认证，也可能要求BLS/CPR。",
+                  "仅1项学徒示例Invasive Cardiovascular Technologist (Nof)，非当前招生或每个岗位必修。",
+                  "培训页学校项目的学历/毕业数不是从业者学历；实际资格按方向核。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "入职通常需完成岗前培训与健康与防护培训，并按机构要求取得相应授权。",
-                  "涉及患者信息与检查数据的岗位须遵守信息安全与隐私要求。",
-                  "检查判读与报告发布按院内流程由有授权人员签署，超出授权的操作须上报。"
+                  "中国需核医疗机构诊疗项目、人员法定资质和实际职责；临床应用办法16—20条区分机构目录/人员能力档案及医师手术授权，医师法22/24/25条规定注册范围诊查、医学证明及特殊检查知情同意。美国州许可、雇主认证与项目能力要求逐岗核，不能把境外认证直接套为中国执业权限。",
+                  "质量管理办法24及32条支持患者隐私与信息安全。",
+                  "BLS职责包括分析异常及诊断信息、向医师汇总发现，O*NET还列Holter记录解释；技术分析不等于独立医学诊断、处方或治疗决定，报告签署按法域及项目权限核。"
                 ]
               },
               {
@@ -30184,6 +30755,13 @@
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.employer-evidence.1",
+          "source_refs": [
+            "details-current",
+            "training-current",
+            "ooh-current",
+            "quality-current",
+            "clinical-current"
+          ],
           "title": "雇主通常看什么证据",
           "type": "cards"
         },
@@ -30419,62 +30997,71 @@
             ],
             "rows": [
               [
-                "学历（高中或同等学历，部分助理岗位不要求）",
-                "希望进入该职业的求职者",
-                "影响培训起点与可获得岗位，但不决定可执行的检查范围。",
-                "属于常见起点：O*NET 列为 Job Zone Three，教育调查中 63% 认为需要副学士或其他两年制学历、10% 认为高中文凭或同等学历即可。",
-                "受访者学历构成为 O*NET 教育信息口径；多数路径以专业课程与临床实习为主。",
-                "按学制与学费投入。",
-                "学历不等于认证或院内授权。"
+                "美国常见教育及EKG例外",
+                "核相应美国岗位者",
+                "课程与临床部分支持职业技能准备。",
+                "通常副学士或中等后证书；EKG入门可高中/同等，不外推中国。",
+                "学历问答63/13/10为新入职需要估计，不是在岗学历。",
+                "具体学费、项目招生未核。",
+                "学历不自动等于州许可或临床项目权限。"
               ],
               [
-                "在职培训与学徒（通常一至两年）",
-                "所有新入职人员",
-                "决定能否独立完成本方向常规检查。",
-                "属于通行要求：在职培训通常一至两年，O*NET 该职业页列出 1 项学徒方向（Invasive Cardiovascular Technologist）。",
-                "常见形式为科室带教、轮转与内部考核。",
-                "按在岗时间投入。",
-                "培训记录不自动转换为认证或操作授权。"
+                "在职训练与学徒示例",
+                "按实际方向需要者",
+                "供技能培养与受监督实践。",
+                "Zone3一至两年是跨职业概述，不是所有新技师统一期限。",
+                "1个Invasive Cardiovascular Technologist (Nof)示例，非当前招生或统一必修。",
+                "具体计划及费用未核。",
+                "BLS典型OJTNone分类不代表无临床训练。"
               ],
               [
-                "副学士或证书课程加临床实习",
-                "在美国通常的入门路径",
-                "影响能否满足认证与机构准入的学历前提。",
-                "属于常见要求：O*NET 教育调查中 63% 认为需要副学士或其他两年制学历、13% 认为需要中等后证书。",
-                "课程通常包含解剖与生理与设备操作与临床实习。",
-                "按学制与学费与实习时间投入。",
-                "完成课程不等于取得认证或获得机构授权。"
+                "相关副学士或证书及临床部分",
+                "按美国方向准备者",
+                "常见正式教育路线。",
+                "BLS通常副学士或证书，EKG证书一般不足一年。",
+                "院校课程及临床安排逐项目核，培训目录非认证保证。",
+                "实际费用未核。",
+                "课程完成不自动授予全部操作或签署权。"
               ],
               [
-                "细分方向专业认证（如心电、心脏介入、节律分析、肺功能等）",
-                "在岗并希望扩展操作范围的人员",
-                "影响能否承担相应方向的检查与部分医疗机构准入。",
-                "属于行业认证：O*NET 该职业页列出 26 项认证，多由 Cardiovascular Credentialing International 等专业机构提供。",
-                "认证通常要求学历或培训与临床经历并通过考试与维持要求。",
-                "按培训与考试与维持费用投入。",
-                "认证不等于执业许可、检查判读权或报告签署权。"
+                "细分专业认证目录",
+                "核目标岗位实际要求者",
+                "雇主可能要求或偏好；部分州另要求许可。",
+                "26关联条目含心电、介入、超声、呼吸和医师专科等，非26统一门槛。",
+                "CCI提供部分如RCIS/CCT/CRAT；本轮未逐项核报考经验及费用。",
+                "考试与维持投入未核。",
+                "认证非中国执业资质；也不能自动诊断处方。"
               ],
               [
-                "院内准入与操作授权",
-                "所有实际执行检查的人员",
-                "决定能否操作特定设备与执行特定检查项目。",
-                "属于医疗机构制度而非行业统一资格。",
-                "常见依据为岗前培训、设备操作考核、防护培训与质控记录。",
-                "按机构流程与考核周期投入。",
-                "院内授权范围限定于考核通过的项目与设备，变更须重新考核。"
+                "中国机构项目、人员资质及岗位职责",
+                "执行对应临床技术者",
+                "需符合法定资质及项目能力。",
+                "质量管理办法16/17与临床应用办法16—20按机构和项目核。",
+                "目录、设备、人员能力档案与医师手术授权区分，非所有技师统一证书。",
+                "实际岗位考核周期费用未核。",
+                "技术异常分析不等于独立诊断，特殊检查同意等按法规。"
               ],
               [
-                "内部资格与晋升评估",
-                "寻求晋升的人员",
-                "影响能否承担带教与质控与设备管理职责。",
-                "属于机构制度而非行业统一资格。",
-                "常见依据为检查质量、质控与培训记录与团队协作表现。",
-                "按工作年限与考核投入。",
-                "内部资格不自动带来执业许可或检查判读权。"
+                "内部质量/带教职责",
+                "承担相关管理者",
+                "按机构分工承担对应职责。",
+                "不是全国统一晋升证书。",
+                "本轮未取得真实雇主晋升制度，建议核岗位和考核要求。",
+                "实际投入未核。",
+                "内部职位不自动授予医学诊断或所有报告权限。"
               ]
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.credential-decision.1",
+          "source_refs": [
+            "details-current",
+            "ooh-current",
+            "cert-current",
+            "clinical-current",
+            "quality-current",
+            "physician-current",
+            "editor-current"
+          ],
           "title": "资格选择",
           "type": "table"
         },
@@ -30483,13 +31070,21 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界：学历、培训与临床实习、细分方向认证、执业许可或注册、院内准入与操作授权、检查判读与报告签署权是不同状态，任何一项都不能由另一项自动推出。",
-              "学历与经验：O*NET 把该职业列为 Job Zone Three（SVP 6.0 至低于 7.0），通常需要职业学校培训、相关在职经验或副学士学位，在职培训通常一至两年。",
-              "证书定位：本职业为受监管的医疗临床岗位——在美国，细分方向认证由 Cardiovascular Credentialing International 等机构提供，注册认证与许可要求因州与机构与细分方向而异；在中国大陆，检查与介入支持必须在医疗机构授权、操作规范与医师责任链内进行，岗位准入与可执行项目按机构与医技人员管理规定核定。认证不等于执业许可或检查判读权，也不等于院内授权。",
-              "入职前应逐项核对检查方向与认证要求与可执行项目、院内准入与授权范围、排班与值班与防护安排、是否承担报告转录与发布职责，并保留书面确认。"
+              "学历、课程临床训练、专业认证、州许可、人员法定资质与实际项目职责分别核，不能相互自动推出。",
+              "O*NET新入职需要学历问答63%副学士或两年制、13%中等后证书、10%高中/同等，并非在岗学历分布；ZoneThree一至两年训练是跨职业说明，不是每个岗位必修期限。BLS通常副学士或证书加课程临床部分，EKG入门可高中，证书通常不足一年；部分州要求许可，雇主可能要求或偏好专业认证，也可能要求BLS/CPR。",
+              "中国需核医疗机构诊疗项目、人员法定资质和实际职责；临床应用办法16—20条区分机构目录/人员能力档案及医师手术授权，医师法22/24/25条规定注册范围诊查、医学证明及特殊检查知情同意。美国州许可、雇主认证与项目能力要求逐岗核，不能把境外认证直接套为中国执业权限。",
+              "本轮未逐项核全部认证报考和费用、真实雇主晋升或患者应急/停检恢复程序，模拟材料不授予操作权限。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.credential-boundary.1",
+          "source_refs": [
+            "details-current",
+            "ooh-current",
+            "clinical-current",
+            "quality-current",
+            "physician-current",
+            "editor-current"
+          ],
           "title": "资格与练习边界",
           "type": "notice"
         },
@@ -30498,11 +31093,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明：本节不引用具体机构的招聘公告，只说明岗位核对应关注的项目；公开渠道出现的岗位名称包括心电图技师、动态心电技师、超声心动图技师、心导管技师、介入技师、肺功能技师、心脏科技师等，其培训背景、认证与可执行项目差别很大。",
+              "本轮没有具体雇主招聘样本；编辑可核目标岗位是否偏心电、导管支持、肺功能、超声或质控，并核专业资质、设备项目、监督、排班、防护及报告职责，不把方向示例称已采集的公开招聘名称。",
               "阅读招聘信息时应核对所学专业与培训与认证要求、可执行的项目与设备、院内准入与授权流程、排班与值班与夜班安排、职业暴露防护与体检要求，并警惕把「有设备操作经验」表述为可独立判读报告或拥有报告签署权的说明。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.path.recruitment-sample.1",
+          "source_refs": [
+            "editor-current"
+          ],
           "title": "招聘样本使用说明",
           "type": "notice"
         }
@@ -30712,10 +31310,17 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：本条证据路由下 Cardiovascular Technologists and Technicians（SOC 29-2031）精确职业口径 的工资与就业数据有来源支持——O*NET 展示的 BLS 2025 年 OEWS 全国中位年薪为 74,310 美元、中位时薪 35.73 美元（年薪第 10 至第 90 分位 39,000 至 121,350 美元），2024 年就业约 64,700 人、2034 年约 66,600 人、十年变化约 +3%（Average）、2024—2034 年年均职位空缺约 3,800 个。该职业页面未标注 Bright Outlook，其 O*NET 相关职业中诊断医学超声师（29-2032.00）、磁共振成像技师（29-2035.00）、神经诊断技师（29-2099.01）、医疗技术专家（29-2099.05）、呼吸治疗师（29-1126.00）与外科手术技师（29-2055.00）标注 Bright Outlook，属不同职业身份。中国大陆没有单列该职业的全国职业工资统计，本条路由要求保留证据边界，本页不发布职业级数值，也不用行业平均、父职业或美国数据填充。"
+              "2025美国本职业中位74310美元/年、35.73美元/时，年P10—P90为39000—121350。美国SOC29-2031本职业2025约64500人、2035预测66900人，变化约4%（与平均相当），净增约2400人；2025—2035年均空缺3400个，包含流动及退出替代，非年均净增。 O*NET本职业2025行业分布为卫生与社会救助95%、其他5%；BLS雇主类型另列医院77%、医师办公室13%、门诊2%、医检实验2%、自雇约1%（四舍五入），两套分类不相互替代。 中国精确职业工资分布仍证据不足；国家统计局2025卫生和社会工作行业非私营146266元/年、私营75631元/年，均为税前年平均、多职业行业背景（industry_proxy），非本职业中位数、起薪、月薪或地区排名。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.8",
+          "source_refs": [
+            "wages-current",
+            "trends-current",
+            "industry-current",
+            "ooh-current",
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30734,10 +31339,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年"
+              "2025—2035"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.10",
+          "source_refs": [
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -30745,10 +31353,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为 Cardiovascular Technologists and Technicians（SOC 29-2031）精确职业口径 的 BLS 预测口径（2024—2034 年）；该职业页面未标注 Bright Outlook。"
+              "美国SOC29-2031本职业2025约64500人、2035预测66900人，变化约4%（与平均相当），净增约2400人；2025—2035年均空缺3400个，包含流动及退出替代，非年均净增。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.11",
+          "source_refs": [
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -30767,10 +31378,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业变化率（年均职位空缺约 3,800 个）"
+              "就业变化率与3400个年均空缺分别列"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.13",
+          "source_refs": [
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -30789,10 +31403,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "变化约 +3%（Average，2024—2034 年）"
+              "变化约4%（与平均相当）"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.15",
+          "source_refs": [
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -30899,10 +31516,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局按行业门类与单位类型公布城镇单位就业人员平均工资；可得的全国表把卫生和社会工作人员合并统计，没有单列本职业。"
+              "NBS2025卫生和社会工作多职业行业税前年平均，不是本职业统计。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.25",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30910,10 +31530,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本条路由要求保留证据边界且不用行业平均、父职业或美国数据填充；本页只登记口径与覆盖范围，不发布数值。"
+              "industry_proxy可作相关行业背景，不能换算本职业月薪或作为岗位增长证据。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.26",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30921,10 +31544,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "职业级工资缺口（不使用代理数值）"
+              "精确职业工资缺口／行业税前年平均"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.27",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30932,10 +31558,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "暂无可安全使用的数据"
+              "industry_proxy（行业代理）"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.28",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30943,10 +31572,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该职业的全国职业工资分布，本页不做代理填补"
+              "中国精确职业工资分布仍证据不足；国家统计局2025卫生和社会工作行业非私营146266元/年、私营75631元/年，均为税前年平均、多职业行业背景（industry_proxy），非本职业中位数、起薪、月薪或地区排名。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.29",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30954,10 +31586,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明该精确职业的就业与预测口径（BLS 预测，2024—2034 年），并说明该职业未标注 Bright Outlook。"
+              "美国SOC29-2031本职业2025约64500人、2035预测66900人，变化约4%（与平均相当），净增约2400人；2025—2035年均空缺3400个，包含流动及退出替代，非年均净增。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.30",
+          "source_refs": [
+            "trends-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -30965,10 +31601,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明该职业的行业分布（医疗与社会救助业 94%、其他行业 6%），须与工资数据分开解读。"
+              "O*NET本职业2025行业分布为卫生与社会救助95%、其他5%；BLS雇主类型另列医院77%、医师办公室13%、门诊2%、医检实验2%、自雇约1%（四舍五入），两套分类不相互替代。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.31",
+          "source_refs": [
+            "industry-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -30976,10 +31616,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆统计口径、覆盖范围与职业映射边界，不发布数值。"
+              "中国精确职业工资分布仍证据不足；国家统计局2025卫生和社会工作行业非私营146266元/年、私营75631元/年，均为税前年平均、多职业行业背景（industry_proxy），非本职业中位数、起薪、月薪或地区排名。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.32",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30998,10 +31641,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足气道管理与呼吸支持治疗能力与呼吸生理基础。"
+              "编辑比较：需要补足气道管理与呼吸支持治疗能力与呼吸生理基础。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.34",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31009,10 +31655,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是患者接触与生命体征观察与设备操作经验。"
+              "编辑比较：可迁移的是患者接触与生命体征观察与设备操作经验。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.35",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31020,10 +31669,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属诊疗链条，责任从检查执行转向治疗性操作与参数调整。"
+              "编辑比较：距离中等：同属诊疗链条，责任从检查执行转向治疗性操作与参数调整。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.36",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31031,10 +31683,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足放射治疗定位与剂量实施与防护能力。"
+              "编辑比较：需要补足放射治疗定位与剂量实施与防护能力。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.37",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31042,10 +31697,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是患者沟通与设备操作与防护纪律。"
+              "编辑比较：可迁移的是患者沟通与设备操作与防护纪律。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.38",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31053,10 +31711,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属成像与照射相关岗位，责任从诊断性检查转向治疗实施。"
+              "编辑比较：距离中等：同属成像与照射相关岗位，责任从诊断性检查转向治疗实施。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.39",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31064,10 +31725,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足外科无菌操作与器械传递与手术配合能力。"
+              "编辑比较：需要补足外科无菌操作与器械传递与手术配合能力。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.40",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31075,10 +31739,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是无菌操作与器械准备与团队配合经验。"
+              "编辑比较：可迁移的是无菌操作与器械准备与团队配合经验。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.41",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31086,10 +31753,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属诊疗操作岗位，责任从检查执行转向手术配合。"
+              "编辑比较：距离较近：同属诊疗操作岗位，责任从检查执行转向手术配合。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.42",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31097,10 +31767,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足超声解剖与标准切面与测量规范能力。"
+              "编辑比较：需要补足超声解剖与标准切面与测量规范能力。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.43",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31108,10 +31781,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是设备操作与图像质量判断与患者沟通经验。"
+              "编辑比较：可迁移的是设备操作与图像质量判断与患者沟通经验。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.44",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31119,10 +31795,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离最近：同属影像与检查执行岗位，成像类职责部分重叠而不完全相同。"
+              "编辑比较：距离最近：同属影像与检查执行岗位，成像类职责部分重叠而不完全相同。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.45",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31130,10 +31809,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足磁共振原理与安全（磁场与对比剂）与图像采集能力。"
+              "编辑比较：需要补足磁共振原理与安全（磁场与对比剂）与图像采集能力。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.46",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31141,10 +31823,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是影像采集规范与患者安全监护经验。"
+              "编辑比较：可迁移的是影像采集规范与患者安全监护经验。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.47",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31152,10 +31837,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属影像技术岗位，设备原理与安全要求不同。"
+              "编辑比较：距离较近：同属影像技术岗位，设备原理与安全要求不同。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.48",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31163,10 +31851,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足放射性药物与核医学成像与辐射防护能力。"
+              "编辑比较：需要补足放射性药物与核医学成像与辐射防护能力。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.49",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31174,10 +31865,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是影像采集与辐射防护与质控经验。"
+              "编辑比较：可迁移的是影像采集与辐射防护与质控经验。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.50",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31185,10 +31879,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属影像与辐射相关岗位，检查原理与判读要求不同。"
+              "编辑比较：距离较近：同属影像与辐射相关岗位，检查原理与判读要求不同。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.51",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31196,10 +31893,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足神经电生理与长程监测与判读基础能力。"
+              "编辑比较：需要补足神经电生理与长程监测与判读基础能力。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.52",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31207,10 +31907,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是电极贴放与长程记录与信号质量判断经验。"
+              "编辑比较：可迁移的是电极贴放与长程记录与信号质量判断经验。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.53",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31218,10 +31921,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属电生理记录岗位，记录对象与判读要求不同。"
+              "编辑比较：距离较近：同属电生理记录岗位，记录对象与判读要求不同。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.54",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31229,10 +31935,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足检验标本处理与仪器操作与实验质量控制能力。"
+              "编辑比较：需要补足检验标本处理与仪器操作与实验质量控制能力。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.55",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31240,10 +31949,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是规程执行与质控记录与样本核对经验。"
+              "编辑比较：可迁移的是规程执行与质控记录与样本核对经验。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.56",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31251,10 +31963,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属医技链条，工作对象从患者检查转向标本与实验。"
+              "编辑比较：距离中等：同属医技链条，工作对象从患者检查转向标本与实验。 具体训练、资质和岗位条件另核，不保证直接转岗。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.57",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -31367,26 +32082,28 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "边界一：本页身份口径为 O*NET-SOC 29-2031.00（Cardiovascular Technologists and Technicians）；该职业页面列为 Job Zone Three（SVP 6.0 至低于 7.0），未标注 Bright Outlook；官方职责为对患者心肺系统进行检查以用于诊断、治疗或研究，检查与介入支持必须在医疗机构授权、操作规范与医师责任链内进行。",
-              "边界二：本页美国工资与就业为 O*NET 展示的 BLS 2025 年 OEWS 本职业精确口径（中位年薪 74,310 美元、中位时薪 35.73 美元；年薪第 10 至第 90 分位 39,000 至 121,350 美元；2024 年约 64,700 人、2034 年约 66,600 人、变化约 +3%、年均空缺约 3,800 个）；该职业未标注 Bright Outlook，其 O*NET 相关职业中诊断医学超声师（29-2032.00）、磁共振成像技师（29-2035.00）、神经诊断技师（29-2099.01）、医疗技术专家（29-2099.05）、呼吸治疗师（29-1126.00）与外科手术技师（29-2055.00）标注 Bright Outlook，属不同职业身份，不互相代入。",
-              "边界三：中国大陆按证据路由把中国薪资记为 cn-wage-gap（status=documented_unavailable，severity=material），本轮尝试的来源为心血管系统疾病相关专业医疗质量控制指标（2021 年版）与医疗质量管理办法，两者为质量与执业管理口径且不含职业级工资分布，resolution 为「标记不可用」；本页据此不发布任何中国大陆职业级数值，也不使用行业或父职业均值代理，只登记统计口径与缺口。",
+              "身份：美国O*NET29-2031.00心血管技术人员，21任务含10核心11补充；OOH超声另列29-2032，不等同中国医师资格。",
+              "2025美国精确职业工资中位74310美元/年、35.73美元/时；美国SOC29-2031本职业2025约64500人、2035预测66900人，变化约4%（与平均相当），净增约2400人；2025—2035年均空缺3400个，包含流动及退出替代，非年均净增。 同职业行业中位来自BLS专属OOH。",
+              "中国精确职业工资分布仍证据不足；国家统计局2025卫生和社会工作行业非私营146266元/年、私营75631元/年，均为税前年平均、多职业行业背景（industry_proxy），非本职业中位数、起薪、月薪或地区排名。",
               "边界四：编辑练习与检查建议均为模拟材料，读者不应据此进行真实患者检查、诊断判断、报告发布或安全结论；练习结果不构成执业许可、专业认证、院内授权或报告签署权。",
-              "边界五：本页由 O*NET 职业摘要、详细资料、行业分布、技术清单、培训与教育信息与认证信息与全国工资分位页面，O*NET 展示的 BLS 工资与预测口径，BLS 职业展望手册心血管技师与技术员职业页，Cardiovascular Credentialing International 认证信息，国家卫生健康委员会医疗质量与执业管理相关公开材料与心血管系统疾病相关专业医疗质量控制指标，《中华人民共和国职业分类大典（2022 年版）》公布信息，国家统计局工资发布口径，ILO 任务暴露研究等公开资料及编辑设计组成；每项资料的适用范围与缺口单独标记。"
+              "本轮实际来源为O*NET9入口、BLS专属OOH、NBS2025行业及工资总额规定、中国医疗技术和质量管理办法/医师法/放射诊疗规定、FDAQYW分类及DEN250044登记；风险、转岗和工具候选为编辑比较，未取得岗位替代或效率研究。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.sources.boundary.1",
           "source_refs": [
-            "bls-entry",
-            "bls-outlook",
-            "bls-pay",
-            "editorial",
-            "ilo-genai",
-            "nasa-seh",
-            "nbs-wages",
-            "onet-details",
-            "onet-hot-tech",
-            "onet-industry",
-            "onet-training"
+            "details-current",
+            "ooh-current",
+            "wages-current",
+            "trends-current",
+            "nbs-current",
+            "wage-definition-current",
+            "clinical-current",
+            "quality-current",
+            "physician-current",
+            "radiology-current",
+            "fda-telemetry-current",
+            "fda-denovo-current",
+            "editor-current"
           ],
           "type": "list",
           "visibility": "internal"
@@ -31396,10 +32113,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "费马测试职业内容编辑组：依据 O*NET、BLS 工资与预测口径、美国专业认证机构与临床实习路径信息、中国大陆医疗质量与执业管理的公开要求等资料整理，逐项标注口径、数据期与缺口。"
+              "费马测试编辑依据本轮官方统计、职业档案及实际法条整理，区分精确职业、行业参考、临床职责及编辑建议。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.sources.source-card.1",
+          "source_refs": [
+            "trends-current",
+            "nbs-current",
+            "clinical-current",
+            "physician-current",
+            "ooh-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31407,10 +32132,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源：O*NET-SOC 29-2031.00 职业摘要、详细资料、自定义职业档案、行业分布、技术清单、培训与教育信息、认证信息与全国工资分位页面；O*NET 展示的 BLS 2025 年 OEWS 工资与 2024—2034 年预测；BLS 职业展望手册心血管技师与技术员职业页；Cardiovascular Credentialing International 认证信息；国家卫生健康委员会《心血管系统疾病相关专业医疗质量控制指标（2021 年版）》与《医疗质量管理办法》；《中华人民共和国职业分类大典（2022 年版）》公布信息；基本医疗卫生与健康促进相关法律入口；国家统计局城镇单位就业人员年平均工资情况；ILO 工作论文 140《Generative AI and Jobs》。"
+              "本轮主要来源：O*NET本职业9入口，BLS心血管技术专属OOH、NBS2025卫生和社会工作及工资组成规定，医疗技术临床应用管理办法、医疗质量管理办法、医师法、放射诊疗规定、FDA医院遥测QYW及Queen of Hearts ACS AI ECG分类登记。既有共享来源留存不代表本轮均实际重核。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.sources.source-card.2",
+          "source_refs": [
+            "trends-current",
+            "nbs-current",
+            "clinical-current",
+            "physician-current",
+            "ooh-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31418,10 +32151,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：O*NET 与行业分布页面为 2026 年更新；工资为 2025 年 OEWS 口径（经 O*NET 展示）；就业与预测为 2024—2034 年 BLS 预测口径；招聘技术比例来自 Lightcast 2025 年 1 月至 12 月美国招聘信息；国家统计局数据为 2025 年；中国大陆质量与执业管理要求以页面发布为准；ILO 工作论文 140 为 2025-05-20 发布；检索日 2026-09-16。"
+              "检索2026-10-09；工资及行业2025，预测2025—2035，招聘技术2025全年；培训项目2025—26/IPEDS2024—25；中国临床技术2018、质量2016、医师法2021通过2022施行，放射规定公开文本；FDA分类10-05更新、模型09-03决定。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.sources.source-card.3",
+          "source_refs": [
+            "trends-current",
+            "nbs-current",
+            "clinical-current",
+            "physician-current",
+            "ooh-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31429,10 +32170,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "使用说明：本页身份口径为 O*NET-SOC 29-2031.00（Cardiovascular Technologists and Technicians）；美国工资与就业为本职业精确口径（2025 年中位年薪 74,310 美元、中位时薪 35.73 美元；2024 年约 64,700 人、2034 年约 66,600 人、变化约 +3%、2024—2034 年年均空缺约 3,800 个）；该职业未标注 Bright Outlook；中国大陆按证据路由把中国薪资记为 暂无可安全使用的数据，本页不发布职业级数值、不用行业平均或父职业或美国数据填充；本职业为受监管的医疗临床岗位，检查与介入支持必须在医疗机构授权、操作规范与医师责任链内进行，技术人员不能越权诊断、处方或独立决定治疗，认证不等于执业许可或检查判读权。"
+              "美国SOC29-2031本职业2025约64500人、2035预测66900人，变化约4%（与平均相当），净增约2400人；2025—2035年均空缺3400个，包含流动及退出替代，非年均净增。 中国精确职业工资分布仍证据不足；国家统计局2025卫生和社会工作行业非私营146266元/年、私营75631元/年，均为税前年平均、多职业行业背景（industry_proxy），非本职业中位数、起薪、月薪或地区排名。 中国需核医疗机构诊疗项目、人员法定资质和实际职责；临床应用办法16—20条区分机构目录/人员能力档案及医师手术授权，医师法22/24/25条规定注册范围诊查、医学证明及特殊检查知情同意。美国州许可、雇主认证与项目能力要求逐岗核，不能把境外认证直接套为中国执业权限。 BLS职责包括分析异常及诊断信息、向医师汇总发现，O*NET还列Holter记录解释；技术分析不等于独立医学诊断、处方或治疗决定，报告签署按法域及项目权限核。 AI采用、替代、节时与个体工资因果尚无本轮证据；具体患者处置和报告权限须依真实制度。"
             ]
           },
           "id": "cardiovascular-technologists-and-technicians.sources.source-card.4",
+          "source_refs": [
+            "trends-current",
+            "nbs-current",
+            "clinical-current",
+            "physician-current",
+            "ooh-current",
+            "editor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -31773,6 +32522,278 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/custom/29-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET本职业详细档案",
+                  "2026"
+                ],
+                "evidence_type": "primary_document",
+                "id": "details-current",
+                "limitation": "21任务=10核心11补充；41一般活动27详细活动57情境；R77/I72/C62/S54/E5/A0，具体兴趣另计；学历是新入职需要问答，不是在岗学历；Zone3一至两年是跨职业说明。",
+                "market": "美国",
+                "name": "O*NET本职业详细档案",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET本职业招聘技术",
+                  "2025全年"
+                ],
+                "evidence_type": "primary_document",
+                "id": "hot-current",
+                "limitation": "10软件类别，6热技术；Office/MEDITECH/Excel/Outlook/Word各低于1%，JavaScript NA非0；不是部署率、AI采用或统一编程要求。",
+                "market": "美国",
+                "name": "O*NET本职业招聘技术",
+                "period": "2025全年",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/29-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET本职业行业分布",
+                  "2025"
+                ],
+                "evidence_type": "primary_statistics",
+                "id": "industry-current",
+                "limitation": "卫生与社会救助95%、其他5%，非旧94/6；行业比例不能推工资。",
+                "market": "美国",
+                "name": "O*NET本职业行业分布",
+                "period": "2025",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/29-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET展示BLS本职业工资分位",
+                  "2025 OEWS"
+                ],
+                "evidence_type": "primary_statistics",
+                "id": "wages-current",
+                "limitation": "年39000/47890/74310/98110/121350，时18.75/23.02/35.73/47.17/58.34美元，P10非最低、P90非资历因果；OEWS不含自雇。",
+                "market": "美国",
+                "name": "O*NET展示BLS本职业工资分位",
+                "period": "2025 OEWS",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/29-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET展示BLS本职业预测",
+                  "2025—2035"
+                ],
+                "evidence_type": "primary_statistics",
+                "id": "trends-current",
+                "limitation": "64500→66900/+4%Average/3400年均空缺，非旧64700→66600/+3%/3800。",
+                "market": "美国",
+                "name": "O*NET展示BLS本职业预测",
+                "period": "2025—2035",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/29-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET关联认证目录",
+                  "2026"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cert-current",
+                "limitation": "26认证横跨心电/介入/呼吸/超声/体外循环/血管医学及医师专科等，CCI仅部分，非26项通用入职门槛；目录不提供所有报考条件。",
+                "market": "美国",
+                "name": "O*NET关联认证目录",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localcert/29-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET关联学校项目",
+                  "2025—26目录／IPEDS2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "training-current",
+                "limitation": "项目毕业人数非在岗学历：首3校ATC-LA256证书，Smith Chason4证书160副学士29本科，Eastwick Ramsey120副学士6本科，非项目推荐或保证招生。",
+                "market": "美国",
+                "name": "O*NET关联学校项目",
+                "period": "2025—26目录／IPEDS2024—25",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtraining/29-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS心血管技师与技术员专属OOH",
+                  "2025工资／2025—2035预测"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ooh-current",
+                "limitation": "29-2031专属：64500→66900/4%/净2400/3400年均；行业年薪中位门诊95080/医检实验81200/医师办公室76850/医院69970；副学士或证书常见，EKG可高中且证书通常不足1年，部分州许可/雇主认证/BLS或CPR。",
+                "market": "美国",
+                "name": "BLS心血管技师与技术员专属OOH",
+                "period": "2025工资／2025—2035预测",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/healthcare/cardiovascular-technologists-and-technicians.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "国家统计局2025城镇单位工资",
+                  "2025／2026发布"
+                ],
+                "evidence_type": "primary_statistics",
+                "id": "nbs-current",
+                "limitation": "卫生和社会工作非私营146266/私营75631元税前年平均，含多种职业社会工作，不能当心血管技师工资、职业月薪、起薪或城市排名；5人及以上法人不含个体自由职业。",
+                "market": "中国大陆",
+                "name": "国家统计局2025城镇单位工资",
+                "period": "2025／2026发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "关于工资总额组成的规定",
+                  "1990规定／2026公开文本"
+                ],
+                "evidence_type": "primary_regulation",
+                "id": "wage-definition-current",
+                "limitation": "3全部劳动报酬，4津贴补贴及加班纳入，8特殊劳动津贴，11出差伙食等排除；不得笼统断言夜班和值班防护补贴通常不计。",
+                "market": "中国大陆",
+                "name": "关于工资总额组成的规定",
+                "period": "1990规定／2026公开文本",
+                "publisher": "国家统计局",
+                "scope": "contextual",
+                "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "医疗技术临床应用管理办法",
+                  "2018第1号／11月1日施行"
+                ],
+                "evidence_type": "primary_regulation",
+                "id": "clinical-current",
+                "limitation": "16目录手术分级医师授权质控档案动态评估；17人员设备与技术规范；19与能力相适应技术并档案；20医师手术权限；不是所有技师统一许可证或现场停检程序。",
+                "market": "中国大陆",
+                "name": "医疗技术临床应用管理办法",
+                "period": "2018第1号／11月1日施行",
+                "publisher": "国家卫生健康委／北京市政府转载",
+                "scope": "contextual",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/201905/t20190522_61482.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "医疗质量管理办法",
+                  "2016第10号／11月1日施行"
+                ],
+                "evidence_type": "primary_regulation",
+                "id": "quality-current",
+                "limitation": "9院科质量责任，16登记诊疗和法定资质/批准器械，17操作规范，20医技全过程质控，22院感，23真实完整及时记录，24隐私同意，36应急预案流程，47核心制度；非工资来源。",
+                "market": "中国大陆",
+                "name": "医疗质量管理办法",
+                "period": "2016第10号／11月1日施行",
+                "publisher": "原国家卫生计生委／北京市政府转载",
+                "scope": "contextual",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/201905/t20190522_59652.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中华人民共和国医师法",
+                  "2021通过／2022施行"
+                ],
+                "evidence_type": "primary_legislation",
+                "id": "physician-current",
+                "limitation": "22注册范围内诊查处置医学证明；24亲自诊查真实文书；25特殊检查说明风险及明确同意；27紧急诊治；未赋予所有技师诊断处方权。",
+                "market": "中国大陆",
+                "name": "中华人民共和国医师法",
+                "period": "2021通过／2022施行",
+                "publisher": "北京市卫生健康委转载",
+                "scope": "contextual",
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992842.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "放射诊疗管理规定",
+                  "第46号公开文本"
+                ],
+                "evidence_type": "primary_regulation",
+                "id": "radiology-current",
+                "limitation": "20设备检测维护合格启用，22剂量计23健康培训档案25照射正当化最优化26避免无必要重复照射；仅放射诊疗项目，心电与超声不一概电离辐射。",
+                "market": "中国大陆",
+                "name": "放射诊疗管理规定",
+                "period": "第46号公开文本",
+                "publisher": "原卫生部／北京市政府公开",
+                "scope": "contextual",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/201912/t20191218_1266816.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "FDA医院心脏遥测QYW分类",
+                  "页面2026-10-05更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "fda-telemetry-current",
+                "limitation": "自动持续记录分析ECG并检测致命心律失常/报警，可远程显示，限定机构处方监护，现场合格人员审查后立即通知响应者；不代表所有AI/GenAI或本地部署收益。",
+                "market": "美国",
+                "name": "FDA医院心脏遥测QYW分类",
+                "period": "页面2026-10-05更新",
+                "publisher": "FDA",
+                "scope": "contextual",
+                "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpcd/classification.cfm?id=1087"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "FDA Queen of Hearts ACS AI ECG Model分类决定",
+                  "2026-09-03授予／页面10-05更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "fda-denovo-current",
+                "limitation": "DEN250044，模型名称及decision granted、SHS分类可核；未读取临床说明书及性能，不据登记推准确率、诊断自治、人员替代或中国适用。",
+                "market": "美国",
+                "name": "FDA Queen of Hearts ACS AI ECG Model分类决定",
+                "period": "2026-09-03授予／页面10-05更新",
+                "publisher": "FDA",
+                "scope": "contextual",
+                "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/denovo.cfm?ID=DEN250044"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "费马测试本职业编辑比较",
+                  "2026-10-09"
+                ],
+                "evidence_type": "editorial_synthesis",
+                "id": "editor-current",
+                "limitation": "技术候选、流程观察、风险控制、转岗距离与路线为编辑建议，不是实测效率、企业处置程序、招聘样本、个人胜任测试或操作授权。",
+                "market": "全球",
+                "name": "费马测试本职业编辑比较",
+                "period": "2026-10-09",
+                "publisher": "费马测试",
+                "scope": "editorial_synthesis",
+                "url": "https://www.onetonline.org/link/details/29-2031.00"
               }
             ]
           },
@@ -32482,11 +33503,11 @@
               "type": "prose"
             },
             "链接": {
-              "$link": "cardiovascular-technologists-and-technicians.ai-impact.ai-impact-table.9",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "entry": "link-11",
-              "field": "url"
+              "$source": "wages-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "cardiovascular-technologists-and-technicians.source-register.published.1"
             }
           },
           {
@@ -32640,7 +33661,7 @@
               "entry": "link-16",
               "field": "url"
             },
-            "问题": "到 2034 年这个职业会变少吗？"
+            "问题": "到2035年这个职业的就业数量怎么变化？"
           },
           {
             "回答": {
@@ -33984,8 +35005,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.onet-summary"
+              "onet-details",
+              "nasa-seh"
             ],
             "id": "patient-identification",
             "mitigation": {
@@ -34016,8 +35037,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.faa-design-approvals"
+              "onet-details",
+              "nasa-seh"
             ],
             "id": "measurement-artifact",
             "mitigation": {
@@ -34048,8 +35069,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-summary",
-              "career.source.nasa-seh"
+              "nasa-seh",
+              "radiology-current"
             ],
             "id": "infection-radiation",
             "mitigation": {
@@ -34080,8 +35101,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.faa-design-approvals"
+              "nasa-seh",
+              "radiology-current"
             ],
             "id": "equipment-qc",
             "mitigation": {
@@ -34112,8 +35133,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-summary",
-              "career.source.nbs-wages"
+              "faa-design-approvals",
+              "nbs-wages"
             ],
             "id": "scope-signoff",
             "mitigation": {
@@ -34144,8 +35165,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.nasa-seh"
+              "nasa-seh",
+              "faa-design-approvals"
             ],
             "id": "protocol-currency",
             "mitigation": {
@@ -34279,6 +35300,24 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$link": "cardiovascular-technologists-and-technicians.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "url"
+            },
+            "id": "radiology-current",
+            "label": {
+              "$link": "cardiovascular-technologists-and-technicians.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "entity"
+            },
+            "scope": "机构执行院感及相应防护；放射项目有个人剂量、健康培训与照射保护要求，心电/超声不一概电离辐射。防护不足及时报告并依机构安全流程处理。"
           }
         ]
       },
@@ -34301,7 +35340,7 @@
               }
             },
             {
-              "指标": "行业平均口径（本条路由不采用）",
+              "指标": "卫生和社会工作非私营行业税前年平均",
               "数值": {
                 "$item": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.9",
                 "block": "china-salary",
@@ -34316,7 +35355,7 @@
               }
             },
             {
-              "指标": "父职业与岗位类别口径（本条路由不采用）",
+              "指标": "卫生和社会工作私营行业税前年平均",
               "数值": {
                 "$item": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.11",
                 "block": "china-salary",
@@ -34631,10 +35670,10 @@
             "type": "prose"
           },
           "fact_refs": [
-            "cn-industry-science-tech-2024",
-            "cn-industry-manufacturing-2024",
-            "cn-professional-technical-2024",
-            "cn-urban-nonprivate-2024"
+            "current-cn-exact-gap",
+            "current-cn-health-nonprivate",
+            "current-cn-health-private",
+            "current-cn-recruitment-gap"
           ],
           "sources_note": {
             "$item": "cardiovascular-technologists-and-technicians.china-salary.career-snapshot-primary-locale.57",
@@ -34646,10 +35685,10 @@
             "ai_heading": "AI 会影响心血管技师与技术员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "中国大陆薪资参考：官方统计口径与缺口",
-            "scenario_caption": "学历背景、岗位方向与说明（编辑整理，不是薪资统计）",
-            "scenario_heading": "不同学历背景对应哪些岗位方向？",
+            "scenario_caption": "教育、在岗资历与专业认证核对示例（编辑整理，不是学历或工资分布）",
+            "scenario_heading": "不同教育、经验与资格背景可核对哪些岗位方向？",
             "scenario_interpretation_label": "说明与核对建议",
-            "scenario_role_label": "学历背景",
+            "scenario_role_label": "教育、经验与资格背景",
             "scenario_value_label": "岗位方向"
           },
           "us_growth": {
@@ -34770,7 +35809,7 @@
             }
           },
           {
-            "fact_ref": "us-growth-2025-2035",
+            "fact_ref": "current-exact-growth",
             "指标": "就业 · 增长率",
             "数值": {
               "$item": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.21",
@@ -34786,7 +35825,7 @@
             }
           },
           {
-            "fact_ref": "us-openings-2025-2035",
+            "fact_ref": "current-exact-openings",
             "指标": "就业 · 年均职位空缺",
             "数值": {
               "$item": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.23",
@@ -34873,7 +35912,7 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "current-exact-industry-0",
             "industry": {
               "$item": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -34894,7 +35933,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "current-exact-industry-1",
             "industry": {
               "$item": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -34915,7 +35954,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "current-exact-industry-2",
             "industry": {
               "$item": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -34936,7 +35975,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "current-exact-industry-3",
             "industry": {
               "$item": "cardiovascular-technologists-and-technicians.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -35005,7 +36044,7 @@
         },
         "outlook_heading": "美国就业前景与准备层级",
         "outlook_period": {
-          "$fact": "us-growth-2025-2035",
+          "$fact": "current-exact-growth",
           "field": "period"
         },
         "wage_column_labels": [
@@ -35200,7 +36239,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls-outlook",
+            "source_id": "onet-summary",
             "value": {
               "$item": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35245,7 +36284,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls-pay",
+            "source_id": "onet-localwages",
             "value": {
               "$item": "cardiovascular-technologists-and-technicians.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36951,6 +37990,167 @@
         "source_refs": [
           "bls-pay"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "64500人（2025）",
+        "fact_id": "current-exact-employment-2025",
+        "market": "美国",
+        "measure": "就业基数",
+        "occupation_scope": "美国SOC29-2031本职业精确",
+        "period": "2025—2035",
+        "source_refs": [
+          "trends-current",
+          "ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "66900人（2035预测）",
+        "fact_id": "current-exact-employment-2035",
+        "market": "美国",
+        "measure": "预测就业",
+        "occupation_scope": "美国SOC29-2031本职业精确",
+        "period": "2025—2035",
+        "source_refs": [
+          "trends-current",
+          "ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "变化约4%（与平均相当）",
+        "fact_id": "current-exact-growth",
+        "market": "美国",
+        "measure": "预测变化率",
+        "occupation_scope": "美国SOC29-2031本职业精确",
+        "period": "2025—2035",
+        "source_refs": [
+          "trends-current",
+          "ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "净增约2400人",
+        "fact_id": "current-exact-change",
+        "market": "美国",
+        "measure": "预测净变化",
+        "occupation_scope": "美国SOC29-2031本职业精确",
+        "period": "2025—2035",
+        "source_refs": [
+          "trends-current",
+          "ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "3400个/年（2025—2035，非净增）",
+        "fact_id": "current-exact-openings",
+        "market": "美国",
+        "measure": "年均空缺",
+        "occupation_scope": "美国SOC29-2031本职业精确",
+        "period": "2025—2035",
+        "source_refs": [
+          "trends-current",
+          "ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：本职业全国精确工资未取得",
+        "fact_id": "current-cn-exact-gap",
+        "market": "中国大陆",
+        "measure": "精确工资缺口",
+        "occupation_scope": "中国卫生和社会工作多职业行业背景，本职业精确工资未取得",
+        "period": "2025／检索2026-10-09",
+        "source_refs": [
+          "nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "146266元/年（卫生和社会工作非私营税前年平均，非本职业）",
+        "fact_id": "current-cn-health-nonprivate",
+        "market": "中国大陆",
+        "measure": "行业税前年平均",
+        "occupation_scope": "中国卫生和社会工作多职业行业背景，本职业精确工资未取得",
+        "period": "2025／检索2026-10-09",
+        "source_refs": [
+          "nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "75631元/年（卫生和社会工作私营税前年平均，非本职业）",
+        "fact_id": "current-cn-health-private",
+        "market": "中国大陆",
+        "measure": "行业税前年平均",
+        "occupation_scope": "中国卫生和社会工作多职业行业背景，本职业精确工资未取得",
+        "period": "2025／检索2026-10-09",
+        "source_refs": [
+          "nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：真实招聘价格与个体收入分布未取得",
+        "fact_id": "current-cn-recruitment-gap",
+        "market": "中国大陆",
+        "measure": "招聘及个体覆盖缺口",
+        "occupation_scope": "中国卫生和社会工作多职业行业背景，本职业精确工资未取得",
+        "period": "2025／检索2026-10-09",
+        "source_refs": [
+          "nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "95080美元/年（门诊照护中心内本职业中位）",
+        "fact_id": "current-exact-industry-0",
+        "market": "美国",
+        "measure": "行业内本职业年工资中位",
+        "occupation_scope": "美国SOC29-2031精确职业在门诊照护中心",
+        "period": "2025",
+        "source_refs": [
+          "ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "81200美元/年（医学及诊断实验室内本职业中位）",
+        "fact_id": "current-exact-industry-1",
+        "market": "美国",
+        "measure": "行业内本职业年工资中位",
+        "occupation_scope": "美国SOC29-2031精确职业在医学及诊断实验室",
+        "period": "2025",
+        "source_refs": [
+          "ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "76850美元/年（医师办公室内本职业中位）",
+        "fact_id": "current-exact-industry-2",
+        "market": "美国",
+        "measure": "行业内本职业年工资中位",
+        "occupation_scope": "美国SOC29-2031精确职业在医师办公室",
+        "period": "2025",
+        "source_refs": [
+          "ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "69970美元/年（州/地方/私营医院内本职业中位）",
+        "fact_id": "current-exact-industry-3",
+        "market": "美国",
+        "measure": "行业内本职业年工资中位",
+        "occupation_scope": "美国SOC29-2031精确职业在州/地方/私营医院",
+        "period": "2025",
+        "source_refs": [
+          "ooh-current"
+        ]
       }
     ]
   },
@@ -36959,7 +38159,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 29-2031.00 · 检查执行 / 患者监测与安全 / 记录与质控",
@@ -37010,7 +38210,7 @@
       "text": "心血管技师与技术员"
     }
   },
-  "source_content_sha256": "779c26dc62d4ed6f762c5a10f219929c3916539d34cde27a2be5bdad4a382358",
+  "source_content_sha256": "671f4b4205be883969bb518233810191ca51e38f1e2409007599e73c382d5f3c",
   "subject": {
     "canonical_slug": "cardiovascular-technologists-and-technicians",
     "name": "心血管技师与技术员",

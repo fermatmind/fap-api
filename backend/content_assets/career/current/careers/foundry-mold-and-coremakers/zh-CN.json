@@ -24773,13 +24773,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "证据不足：专项行业工资本轮未取得，不用行业或大组均值代填。OEWS为抽样估计，细分可缺失。BLS51-4071当前专项预测：2025年约12,700人，2035年约9,800人，变化-23.0%，十年净减少约2,900；2025—2035年均空缺约800，含增长与替换，非新增800或实际招聘。原表就业及空缺单位千人；EP含自雇，专项自雇栏“—”非0。O*NETsummary仍列旧2024—2034与900空缺，本文使用BLS更新表。"
+              "正常May2025Profiles全国及四明确行业工资已取；当前专项2025—2035就业12.7至9.8千、净减2.9千、-23%、年均空缺.8千含替换非新增，非AI因果。"
             ]
           },
           "id": "foundry-mold-and-coremakers.profile.career-quick-answers-block.34",
           "source_refs": [
-            "ep",
-            "hr"
+            "oews-profile-2025",
+            "ep"
           ],
           "type": "prose"
         }
@@ -25246,7 +25246,7 @@
                 "url": "https://www.onetonline.org/link/details/51-4071.00"
               },
               {
-                "entity": "BLS 职业就业预测（2024—2034）",
+                "entity": "BLS 职业就业预测（2025—2035）",
                 "id": "link-2",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -25306,7 +25306,7 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "entity": "BLS 职业就业预测（2024—2034）",
+                "entity": "BLS 职业就业预测（2025—2035）",
                 "id": "link-12",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -25590,12 +25590,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于理解技术对任务的影响机制；研究对象以职业大组与制造流程为主，不预测本职业个人岗位变化。"
+              "ILO2025WP140按任务调查、专家与模型估计全球ISCO08潜在暴露，不是制造流程占比、本SOC采用效率或就业因果；原专题入口不当论文全文。"
             ]
           },
           "id": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.26",
           "source_refs": [
-            "onet"
+            "ilo-2025-study",
+            "employer"
           ],
           "type": "prose"
         },
@@ -25828,12 +25829,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务与工作情境为职业级描述，说明动手与现场作业与高温粉尘占比高"
+              "O*NET列现场任务与情境，不给任务工时占比、高温粉尘事故率或生成式AI评分。"
             ]
           },
           "id": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.43",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25926,12 +25927,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 未来工作与生成式 AI 研究"
+              "ILO2025生成式AI任务潜在暴露研究"
             ]
           },
           "id": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.50",
           "source_refs": [
-            "onet"
+            "ilo-2025-study"
           ],
           "type": "prose"
         },
@@ -25940,12 +25941,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露研究，以职业大组与制造流程为主"
+              "全球ISCO08任务潜在暴露，非制造流程或本SOC采用结果。"
             ]
           },
           "id": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.51",
           "source_refs": [
-            "onet"
+            "ilo-2025-study"
           ],
           "type": "prose"
         },
@@ -26388,12 +26389,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "升级与确认：涉及停机与隔离与废品判定与工艺变更与人员受伤的决定须经班组与工艺与质量负责人确认并留痕。"
+              "应急与权限｜直接危险及受伤先安全避险报警求援上报，不等班组确认才停止危险活动或求援；停止方式及能源隔离按有效程序交具训练授权人员，工艺变更、废品、恢复放行另核并留痕。"
             ]
           },
           "id": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.83",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -27933,13 +27934,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：四个探索行业的本职业工资中位数本轮未取得，不以行业均值代填。OEWS覆盖全职及兼职领取工资雇员，排自雇；正常工时税前工资包含基本、计件、佣金、生产奖金、生活费用及危险工作报酬等，排加班溢价、班次差额、非生产奖金与雇主福利成本。不能把所有津贴或派遣季节身份一概排除。年工资通常按时薪乘2080折算，不等于个人实际工时、实发或全年所得。"
+              "正常Profiles已核May2025雇员12790/RSE3.1%、均年49860、中位48110及全分位；EP12700是另一项目。四明确行业中位已核，不外推中国或个人实发；OEWS含全兼职雇员，排自雇、加班溢价、班次差额及雇主福利成本。"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "hr",
-            "oews"
+            "oews-profile-2025",
+            "ep"
           ],
           "type": "prose"
         },
@@ -28064,12 +28065,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "汽车与机械与五金与管件铸造"
+              "医疗设备与用品制造"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.34",
           "source_refs": [
-            "onet"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28078,12 +28079,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "76,900 美元/年"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "onet"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28092,12 +28093,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "编辑行业探索｜运输设备、机械、金属及专业铸造可核型芯工序；标签非互斥NAICS或专项工资组，主要雇主、严格程度及订单影响未量化。"
+              "May2025该行业内SOC51-4071年工资中位，非行业全员工资、起薪或雇主规模排名，不推差异因果。"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "onet"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28106,12 +28107,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "铸件与精密铸造与有色合金专业厂"
+              "联邦行政部门（OEWS指定）"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.37",
           "source_refs": [
-            "onet"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28120,12 +28121,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "71,180 美元/年"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "onet"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28134,12 +28135,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "编辑行业探索｜运输设备、机械、金属及专业铸造可核型芯工序；标签非互斥NAICS或专项工资组，主要雇主、严格程度及订单影响未量化。"
+              "May2025该行业内SOC51-4071年工资中位，非行业全员工资、起薪或雇主规模排名，不推差异因果。"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "onet"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28148,12 +28149,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "金属制品与工具与模具制造"
+              "非铁金属生产加工（不含铝）"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.40",
           "source_refs": [
-            "onet"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28162,12 +28163,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "57,350 美元/年"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "onet"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28176,12 +28177,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "编辑行业探索｜运输设备、机械、金属及专业铸造可核型芯工序；标签非互斥NAICS或专项工资组，主要雇主、严格程度及订单影响未量化。"
+              "May2025该行业内SOC51-4071年工资中位，非行业全员工资、起薪或雇主规模排名，不推差异因果。"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "onet"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28190,12 +28191,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他运输设备与工业机械制造"
+              "机械制造（仅3331、3332、3334及3339）"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.43",
           "source_refs": [
-            "onet"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28204,12 +28205,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "54,900 美元/年"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "onet"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28218,12 +28219,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "编辑行业探索｜运输设备、机械、金属及专业铸造可核型芯工序；标签非互斥NAICS或专项工资组，主要雇主、严格程度及订单影响未量化。"
+              "May2025该行业内SOC51-4071年工资中位，非行业全员工资、起薪或雇主规模排名，不推差异因果。"
             ]
           },
           "id": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "onet"
+            "oews-profile-2025"
           ],
           "type": "prose"
         },
@@ -28472,7 +28473,7 @@
                 "url": "https://www.onetonline.org/link/localwages/51-4071.00"
               },
               {
-                "entity": "BLS 就业预测（2024—2034）",
+                "entity": "BLS 就业预测（2025—2035）",
                 "id": "link-20",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -28874,12 +28875,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪能力可以通过班组协作与异常处置经历与刻意练习提升，不必以测评分数自我设限。"
+              "可从协作情境及反馈提出学习问题，不据未验证刻意练习承诺情绪能力改善或绩效。"
             ]
           },
           "id": "foundry-mold-and-coremakers.fit.personality-fit-block.25",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -29168,12 +29169,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合什么性格的人？本职业更看重责任心、动手能力、安全与质量意识与按规程作业，而不是某一性格类型；O*NET 兴趣代码为 RC（现实型—常规型），可作为探索起点。"
+              "适配探索｜RC为任务兴趣描述，可按制型制芯、记录检验和协作情境提问，未取得性格分数预测胜任研究，不给性格排序。"
             ]
           },
           "id": "foundry-mold-and-coremakers.fit.personality-fit-block.46",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29394,12 +29396,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于了解该职业通常需要的准备与培训层级。"
+              "localtraining是课程目录，JobZone1—2为总体准备层级，不推出本职业统一训练期限或证照。"
             ]
           },
           "id": "foundry-mold-and-coremakers.fit.personality-fit-block.62",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -30017,7 +30019,7 @@
                 "模具与工装加工与装配辅助、试模与修配辅助",
                 "机加工与模具培训与实习记录",
                 "一份虚构的模具尺寸与配合检查记录",
-                "以模具与工具与夹具制造与修配为产出，本职业使用模具而不制造模具"
+                "工具模具方向偏加工制造；本职业制作成形蜡模砂型砂芯并修补表面，不按名称绝对排除模具制作，具体任务另核。"
               ],
               [
                 "机械师",
@@ -30694,12 +30696,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于了解该职业通常需要的准备与培训层级（O*NET 训练资料口径）。"
+              "localtraining是课程目录，JobZone1—2为总体准备层级，不推出本职业统一训练期限或证照。"
             ]
           },
           "id": "foundry-mold-and-coremakers.path.career-path-block.27",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -30988,12 +30990,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "工艺与档案管理培训；无工艺变更与质量判定权。"
+              "工艺档案训练；工艺变更质量权按真实任命核。"
             ]
           },
           "id": "foundry-mold-and-coremakers.path.career-path-block.48",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -31268,12 +31270,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "生产与物料管理培训；无工艺变更决定权。"
+              "生产物料训练；工艺变更权按真实任命核。"
             ]
           },
           "id": "foundry-mold-and-coremakers.path.career-path-block.68",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -31892,12 +31894,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业门类平均工资不区分职业（制造业：城镇非私营 113,594、城镇私营 76,055 元/年），且本职业用工形式（正式工与劳务与派遣与计件）与班次与加班结构差异较大，不能替代职业工资。"
+              "NBS2025制造业非私营113594/私营76055元年仅行业代理；无本职业用工形式与班次加班比例样本，不断言结构差异大小。"
             ]
           },
           "id": "foundry-mold-and-coremakers.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet"
+            "nbs",
+            "employer"
           ],
           "type": "prose"
         },
@@ -32475,15 +32478,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源核查｜本轮读O*NET51-4071官方任务、情境、软件及新聘问卷、localwages全国五分位、BLS2025—2035专项表、OEWS方法和NBS2025制造业表；旧O*NET期间不作当前EP。"
+              "2026-10-11核O*NET51-4071全13任务含炉浇注、情境、兴趣教育软件；正常May2025全国及四明确行业工资、专项2025—2035预测；NBS2025制造业英文表与ILO2025潜在暴露复用本窗已读全文。"
             ]
           },
           "id": "foundry-mold-and-coremakers.sources.source-card.1",
           "source_refs": [
             "onet",
-            "hr",
             "ep",
-            "nbs"
+            "nbs",
+            "oews-profile-2025",
+            "ilo-2025-study"
           ],
           "type": "prose"
         },
@@ -32506,7 +32510,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "访问记录｜2026-10-02本轮实际访问O*NETsummary及localwages、NBS英文发布、BLS专项预测及OEWSFAQ；未直接重访目录保历史访问日，不伪造本轮查阅。"
+              "当前查阅2026-10-11，O*NET2026、May2025工资、专项2025—2035预测及NBS2025；共享历史访问记录未改。"
             ]
           },
           "id": "foundry-mold-and-coremakers.sources.source-card.3",
@@ -32523,7 +32527,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "证据不足：美国专项行业工资、中国职业地区工资及招聘资格、AI评分采用因果、测评专项效度等未取得；代理不代填，完整题目答案作品为作者责任不能豁免。"
+              "全国及四明确行业中位已核；中国职业城市工资、招聘及具体设备证照、AI采用效率因果与问卷效度未取。受保护及共享冲突列作者报告。"
             ]
           },
           "id": "foundry-mold-and-coremakers.sources.source-card.4",
@@ -33000,6 +33004,38 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "national projections",
                 "url": "https://www.bls.gov/emp/"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "SOC51-4071全国及行业内工资",
+                  "具体企业采用及任命另核"
+                ],
+                "evidence_type": "official primary source",
+                "id": "oews-profile-2025",
+                "limitation": "不外推个人结果或具体任命",
+                "market": "美国",
+                "name": "BLS May2025铸造模具型芯工工资Profiles",
+                "period": "May2025",
+                "publisher": "BLS",
+                "scope": "SOC51-4071全国及行业内工资",
+                "url": "https://data.bls.gov/oesprofile/?year=2025&major_group=510000&occupation=514071&measure=13&areas=INDUSTRY,STATE,MSA"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "全球ISCO08潜在任务暴露",
+                  "具体企业采用及任命另核"
+                ],
+                "evidence_type": "official primary source",
+                "id": "ilo-2025-study",
+                "limitation": "不外推个人结果或具体任命",
+                "market": "全球",
+                "name": "ILO2025生成式AI任务暴露研究",
+                "period": "2025",
+                "publisher": "ILO",
+                "scope": "全球ISCO08潜在任务暴露",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               }
             ]
           },
@@ -34081,13 +34117,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.96",
+              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.97",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.97",
+              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.96",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34107,13 +34143,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.100",
+              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.101",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.101",
+              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.100",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34133,13 +34169,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.104",
+              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.105",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.105",
+              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.104",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34159,13 +34195,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.108",
+              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.109",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.109",
+              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.108",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34185,13 +34221,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.112",
+              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.113",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.113",
+              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.112",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34211,13 +34247,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.116",
+              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.117",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.117",
+              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.116",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34237,13 +34273,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.120",
+              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.121",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.121",
+              "$item": "foundry-mold-and-coremakers.ai-impact.ai-impact-table.120",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -35912,7 +35948,6 @@
             }
           },
           {
-            "fact_ref": "us-wage-q25-2025",
             "指标": "薪资 · 25 分位",
             "数值": {
               "$item": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.13",
@@ -35944,7 +35979,6 @@
             }
           },
           {
-            "fact_ref": "us-wage-q75-2025",
             "指标": "薪资 · 75 分位",
             "数值": {
               "$item": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.15",
@@ -36095,7 +36129,6 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
             "industry": {
               "$item": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -36116,7 +36149,6 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
             "industry": {
               "$item": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -36137,7 +36169,6 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
             "industry": {
               "$item": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -36158,7 +36189,6 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
             "industry": {
               "$item": "foundry-mold-and-coremakers.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -38072,7 +38102,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "铸造模具型芯工 · 任务、交付与责任边界",
@@ -38123,7 +38153,7 @@
       "text": "铸造模具型芯工"
     }
   },
-  "source_content_sha256": "f3122042f525b4b25d0189b70823fa2c6d9194e1c395044d049ce3e436643b0e",
+  "source_content_sha256": "a7af3e9f5e2fedaca9a82b4e0710125e891c6075f0026da98fc6e46085e5f5ee",
   "subject": {
     "canonical_slug": "foundry-mold-and-coremakers",
     "name": "铸造模具型芯工",

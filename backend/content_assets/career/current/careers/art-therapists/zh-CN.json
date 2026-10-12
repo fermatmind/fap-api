@@ -11260,52 +11260,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.href": {
-        "ref": {
-          "id": "art-therapists.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.label": {
-        "ref": {
-          "id": "art-therapists.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.headers.explanation": {
         "ref": {
@@ -23428,7 +23388,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业身份与任务：O*NET-SOC 29-1129.01 Art Therapists，Bright Outlook，2026 年更新；官方职责为「规划或开展艺术治疗疗程或项目，以改善来访者的身体、认知或情绪健康。」。页面列出 27 项任务，包括开展有引导的自我表达、与来访者建立关系并回顾其反应、评估来访者需求、设计疗程目标、选择与准备艺术媒介、观察并记录进展、与治疗团队协同、撰写治疗计划与个案总结、督导实习人员，以及在来访者紧急情况时启动危机干预与转介。"
+              "O*NET 职业身份与任务：O*NET-SOC 29-1129.01 Art Therapists，Bright Outlook，2026 年更新；官方职责为「规划或开展艺术治疗疗程或项目，以改善来访者的身体、认知或情绪健康。」。页面列出 27 项任务，包括开展有引导的自我表达、与来访者建立关系并回顾其反应、评估来访者需求、设计疗程目标、选择与准备艺术媒介、观察并记录进展、与治疗团队协同、撰写治疗计划与个案总结、督导实习人员，以及在来访者紧急情况时启动危机干预与转介。 当前27任务为22核心、3补充、2未评分新任务（安全保存作品、危机时联系应急人员协调治疗），不以未评分代表不重要或自行授予处置权限。"
             ]
           },
           "id": "art-therapists.profile.onet-structured-fields-block.1",
@@ -23445,15 +23405,15 @@
               "读取与确认｜阅读转介目的、既有记录与本人权限，核对来访者同意范围与需要升级的风险｜一份注明来源、权限与未决问题的会前确认记录。",
               "目标与媒介｜根据治疗目标、感官与动作能力、材料风险与文化背景选择媒介，并说明本次活动的边界｜目标、媒介与活动边界一一对应的活动方案。",
               "过程与观察｜开展有引导的自我表达，观察创作过程与言语反应，与来访者讨论体验而不把作品符号机械解释为诊断｜含具体观察依据与来访者原话的过程记录。",
-              "记录与复盘｜记录目标、材料、参与情况、反应与后续计划，并与获授权的照护团队复盘｜可追踪、能与后续目标衔接的治疗记录。",
-              "协作与升级｜与医师、护士、心理专业人员、康复人员和督导协同，在超出训练与授权范围时停止并转介｜写明交接对象、事实与待决问题的升级记录。",
-              "边界与责任｜作品既是来访者的创作物也是服务记录的一部分，谁保管、能否拍照、何时返还或销毁须事先说明｜符合机构规则与隐私要求的作品保管与销毁说明。"
+              "记录与复盘｜记录治疗目标、活动和进展，按获准分工与团队复盘｜编辑记录示例，不保证所有判断可完整追溯。",
+              "协作与升级｜O*NET包含团队协作、督导与紧急时联系应急人员协调治疗；个人具体权限和中止、转介程序依真实制度核｜编辑交接提示，本页不规定统一现场操作程序。",
+              "边界与责任｜AATA第4节将作品视为来访者财产及受保护信息，某些场景可成为临床记录；复制、展示、保管和保留期按相应同意及制度核｜不概括每幅作品均为服务记录，销毁权限本轮未核完整。"
             ]
           },
           "id": "art-therapists.profile.responsibilities-block.1",
           "source_refs": [
             "onet",
-            "onet"
+            "privacy"
           ],
           "type": "list"
         },
@@ -23551,7 +23511,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 最新就业与预测：父职业 Therapists, All Other（SOC 29-1129）2025 年就业 56,100 人，2035 年预计 63,200 人；Table 1.2 给出增长 12.6%、十年净增 7,100 人、年均职位空缺 3,600 个。OOH 将增长率四舍五入为 13%。O*NET 摘要仍显示 2024—2034 旧预测，本页最新预测采用 BLS。父职业混合艺术治疗、音乐治疗等职业，不能推导艺术治疗师的精确人数、增幅或个人录用概率。"
+              "BLS父职业Therapists, All Other（29-1129）2025就业56100→2035预计63200，增长12.6%、净7100、年均空缺3600；OOH增长舍入13%。本轮O*NET也已显示2025—2035和相同基期、空缺，不再是旧预测。父职业合并统计不能推艺术治疗专属值或个人录用率。"
             ]
           },
           "id": "art-therapists.profile.onet-structured-fields-block.4",
@@ -23582,7 +23542,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业与招聘软件信号：O*NET 的 2024 年行业分布使用父职业 Therapists, All Other，卫生和社会救助占 29%、其他行业占 71%，不是艺术治疗师专属比例。2025 全年美国 Lightcast 招聘数据对应 29-1129.01，列出 14 项软件：Office 为 1%，Excel 与 Outlook 低于 1%，其余未提供比例。分母是与职业匹配的招聘帖，不是从业人数；不能据此推出采用率、代码门槛或 AI 替代率。"
+              "本轮O*NET摘要明确行业及就业属父职业Therapists, All Other，Top industries标2025；行业详情页卫生社会救助35%、其他65%，该页未单列年，不写旧2024的29/71。2025关联唯一招聘14软件，Office1%、Excel/Outlook低于1%，其余未提供非0；不等个人技能门槛、采用或替代率。"
             ]
           },
           "id": "art-therapists.profile.onet-structured-fields-block.5",
@@ -24701,13 +24661,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把生成式工具用于排程、材料清单、去标识化资料检索和记录结构等可回滚环节，但媒介选择是否适合来访者、现场风险观察、关系建立、危机升级和最终治疗记录仍须人工负责，并在记录中写明人工修改理由。"
+              "编辑试验建议：先以虚构或允许资料试排程、材料清单和记录结构草稿，核误述与漏项；评估、媒介选择、关系与危机责任按本人资格及机构分工。本轮未核实际临床产品、部署或效果。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.13",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -24731,13 +24692,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "引入工具时先明确可用环节、数据权限与同意范围、访问控制、保留与销毁规则、出错升级路径和人工覆盖责任人，保证任何输出都回到可追溯的临床记录。"
+              "编辑核对建议：确认允许用途、资料处理依据、访问范围、保留及销毁制度和责任人；核记录是否可回查，不保证任何输出都可完整追溯。AATA原则不等全部州法或本职业AI成效研究。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.15",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -24777,14 +24739,17 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑任务判断：排程、材料清单和虚构资料记录结构可尝试用工具生成草稿，再由人逐条复核；真实作品和健康资料先核同意及机构数据权限。O*NET 职责、软件招聘词频和 BLS 父职业预测均不是 AI 取代率研究，因此本页不宣称不会整体取代、岗位消失年份或自动化百分比。责任与合法权限仍按专业要求落实。"
+              "编辑任务判断：排程、材料清单和虚构资料记录结构可尝试用工具生成草稿，再由人逐条复核；真实作品和健康资料先核同意及机构数据权限。O*NET 职责、软件招聘词频和 BLS 父职业预测均不是 AI 取代率研究，因此本页不宣称不会整体取代、岗位消失年份或自动化百分比。责任与合法权限仍按专业要求落实。 ILO仅跨职业暴露方法官方介绍及扩展摘要，NIST仅自愿组织风险简介，本轮未读完整论文/PDF或本职业采用与因果研究。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.18",
           "source_refs": [
             "onet",
             "hr",
-            "ep"
+            "ep",
+            "privacy",
+            "genai-ilo",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -24919,7 +24884,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2024 年父职业行业分布用于说明 Therapists, All Other 的行业结构，不能推出艺术治疗师专属行业工资。"
+              "父职业行业份额本轮详情页35%卫生社会救助、65%其他，详情未单列年份；摘要Top industries标2025，不能沿用2024的29/71或推艺术治疗师专属工资。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.28",
@@ -24989,12 +24954,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表比较三组方向在自动化影响上的差别：哪些环节可被辅助，哪些判断与责任仍由人承担。"
+              "三组方向为基于职责提出的编辑工具试验候选，本轮未测自动化程度或方向间影响差异。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25003,12 +24970,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "排程、材料清单、去标识化资料检索与记录结构整理可辅助完成。"
+              "编辑试验候选：虚构或允许输入的排程、材料清单、检索和记录草稿，先核具体工具能力及误差。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25031,13 +25000,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对去标识化记录做主题检索、汇总进度摘要与统一文件命名可自动初筛。"
+              "编辑试验候选：虚构记录的目录、摘要或命名整理，未核软件自动初筛正确率，不由去标识化标签自行确认数据可用。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25061,13 +25031,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "非临床的构思练习、宣传素材排版与说明文字初稿可由工具生成。"
+              "编辑试验候选：虚构宣传材料的排版和文字草稿，核内容与合法使用依据，未验证真实工具全自动完成。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25076,13 +25047,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不得把模型输出写成评估结论或诊断，也不得在缺乏同意与人工复核时处理可识别材料。"
+              "编辑建议：模型草稿不自行构成正式评估或诊断，真实资料使用先核适用规则、同意及法定例外，正式决定按合法资格和责任分工复核。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.39",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25219,11 +25191,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "出现频率不是通用门槛，也不代表企业已部署 AI 或岗位已被替代。"
+              "任务重要性评分不是出现频率，招聘词频不等AI采用；均不代表具体机构已部署或岗位已被替代。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.49",
           "source_refs": [
+            "bls",
             "hr"
           ],
           "type": "prose"
@@ -25360,7 +25333,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2024 年父职业行业分布"
+              "父职业行业分布（本轮当前页面，详情未单列年）"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.59",
@@ -25374,7 +25347,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 的 2024 年行业分布归于父职业 Therapists, All Other：卫生和社会救助 29%、其他行业 71%；不是艺术治疗师专属行业样本。"
+              "本轮父职业行业页卫生社会救助35%、其他65%；美国父职业合并口径，不是艺术治疗师细分行业样本。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.60",
@@ -25388,13 +25361,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助的是排程、材料清单、去标识化资料检索、记录结构整理、影像归档与说明初稿等可回滚环节；这是辅助能力，不是替代概率。"
+              "编辑试验候选：允许或虚构资料上的清单、摘要或目录整理，实际产品能力、准确性与部署本轮未核，不能当已验证辅助效果。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.61",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25491,13 +25465,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "排程与材料清单、去标识化资料检索、记录结构整理与进度摘要、作品影像归档与说明初稿等；都是可回滚、可复核的辅助环节。"
+              "排程、材料清单、记录结构及摘要仅编辑试验候选；是否可回查或撤回核实际工具与系统，本轮未测效果。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25636,13 +25611,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具进入工作流程时，人的控制点应按以下五步固定下来；任何一步缺失都不应扩大使用范围。"
+              "以下五步是编辑试用核对建议，非官方规定的全行业统一控制流程；具体权限与应急、停用和恢复制度须独立核。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.78",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25666,13 +25642,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只把可回滚、可复核的辅助环节交给工具，例如排程、材料清单与去标识化检索。"
+              "编辑建议：用虚构或明确允许资料核清单与草稿能力，不由“可回滚”标签保证已具撤销条件。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.80",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25696,13 +25673,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "保留原始记录、工具版本与人工修改理由，使判断可追溯。"
+              "编辑建议：按允许范围记录资料出处、工具与人工更正，核可回查性；记录不自动保证完整追溯，保留期限及删除按适用制度。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.82",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25711,13 +25689,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "正式记录、诊断性表述与危机处置由具备训练并获授权的人签署和承担。"
+              "正式评估、记录与危机责任依资格和实际制度核；中国诊断由精神科执业医师作出，心理咨询、心理治疗与诊断不能混为同一权限。本页不授处置或签字资格。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.83",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25786,12 +25765,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "无法复核的判断不能作为后续照护依据。"
+              "无法核对的草稿可能误导后续决定，先核来源和用途；正式使用依据按真实制度，本页未读完整临床流程。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.88",
           "source_refs": [
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25800,13 +25781,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录工具名称与版本、输入范围、人工修改理由与决定人。"
+              "编辑记录建议：核工具、输入范围、人工更正及负责人是否可回查，本轮未核所有机构共同清单。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.89",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25815,13 +25797,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "错放或误删作品会破坏来访者所有权与服务记录。"
+              "编辑风险情景：错放、误删可能损害保管与复核；作品所有权不因错放就自动转移，具体责任本轮未核个案。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.90",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25860,13 +25843,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在会前确认复核人与升级链，超出训练与授权范围时停止并转介。"
+              "编辑建议：按真实资格与机构分工确认咨询和应急联系人员，超出能力请求督导或适当转介；停止活动和恢复条件需核机构程序，本页不规定现场操作。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.93",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25917,13 +25901,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可借助结构化问卷与记录模板整理信息；评估结论与目标仍由人作出。"
+              "编辑试验：允许或虚构资料的问卷与模板整理，量表适用性和评估方法需相应训练，未取得工具评估效果。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.97",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -25974,13 +25959,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "材料清单与库存可由软件辅助维护。"
+              "编辑试验候选：虚构材料库存与清单整理，核软件误差；未验证具体产品或机构部署。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.101",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -26031,13 +26017,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现场关系建立、情绪容纳与风险观察不可由工具替代。"
+              "现场关系、观察与处置是职责与资格问题，本轮未取得AI能力或替代效果研究，不仅凭任务摘要断言技术永不可替代。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.105",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -26088,13 +26075,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结构化整理与摘要草稿可辅助生成。"
+              "编辑试验候选：虚构记录结构和摘要草稿，逐项核原输入，不保证自动正确。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.109",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -26145,13 +26133,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "会议排程与信息同步可辅助。"
+              "编辑试验候选：允许信息的会议排程或清单，实际同步能力、数据范围和错误处理另核。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.113",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -26202,12 +26191,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "影像归档与检索可辅助，但授权与销毁决定不可交由工具。"
+              "编辑试验候选：允许资料的目录和影像索引，核准确性与访问依据；工具不自动产生授权或销毁权限。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.117",
           "source_refs": [
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -26258,13 +26249,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "课程与材料准备可辅助生成初稿。"
+              "编辑试验候选：虚构课程材料初稿，核内容与适用对象；本轮未验证产品能力或训练效果。"
             ]
           },
           "id": "art-therapists.ai-impact.ai-impact-table.121",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "privacy",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -26310,7 +26302,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "截至本轮 2026-10-03，所核国家统计局发布按单位、行业门类及岗位大类汇总，没有提供艺术治疗师专属全国工资分布；本页不以行业或岗位平均数代填。"
+              "本窗口本轮2026-10-09复用同日同版NBS2025公告，未单列中国艺术治疗师职业工资，不用行业或岗位平均代填。"
             ]
           },
           "id": "art-therapists.china-salary.career-snapshot-primary-locale.8",
@@ -26466,7 +26458,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "元/年（税前工资总额口径）。"
+              "元/年（税前年平均工资，工资总额÷平均就业人数）"
             ]
           },
           "id": "art-therapists.china-salary.career-snapshot-primary-locale.19",
@@ -26480,7 +26472,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "工资总额为税前口径，包含单位代扣代缴的个人所得税、社会保险和住房公积金个人缴纳部分，不等于到手收入。"
+              "工资总额为税前口径，包含单位代扣代缴的个人所得税、社会保险和住房公积金个人缴纳部分，不等于到手收入。 年平均工资为工资总额÷平均就业人数，不把平均数写成工资总额。"
             ]
           },
           "id": "art-therapists.china-salary.career-snapshot-primary-locale.20",
@@ -26522,13 +26514,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与数字工具可能改变排程、材料清单与记录整理等辅助环节，但不改变中国大陆对该职业的统计口径：统计口径的缺口与 AI 无关。"
+              "编辑试验候选：允许资料的排程与清单草稿，未取得本职业AI采用、工资因果或统计分类影响研究；本轮职业工资缺口不能用任务建议填补。"
             ]
           },
           "id": "art-therapists.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
             "onet",
-            "onet"
+            "nbs",
+            "genai-ilo"
           ],
           "type": "prose"
         },
@@ -26567,7 +26560,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "学校艺术教育或康复活动辅助岗位；社区与养老机构的艺术活动组织岗位。"
+              "编辑中国岗位探索（非全国招聘样本）：学校艺术教育或康复活动辅助岗位；社区与养老机构的艺术活动组织岗位。 学位、机构和任职条件逐岗核，不由该学历保证对应岗位录用。"
             ]
           },
           "id": "art-therapists.china-salary.career-snapshot-primary-locale.26",
@@ -26582,13 +26575,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "以活动组织与教学为主，不得从事诊断或心理治疗；应核对机构性质与岗位职责。"
+              "编辑岗位探索：艺术教学或活动支持按具体职责核；中国心理咨询人员不得心理治疗或精神障碍诊断治疗。不同人员资格不能由相关学位或活动岗位名自动推。"
             ]
           },
           "id": "art-therapists.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "cnclass",
-            "atcb-license"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -26612,7 +26604,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "医疗机构内的康复或心理服务岗位；专业康复机构的艺术治疗相关岗位。"
+              "编辑中国岗位探索（非全国招聘样本）：医疗机构内的康复或心理服务岗位；专业康复机构的艺术治疗相关岗位。 学位、机构和任职条件逐岗核，不由该学历保证对应岗位录用。"
             ]
           },
           "id": "art-therapists.china-salary.career-snapshot-primary-locale.29",
@@ -26632,8 +26624,7 @@
           },
           "id": "art-therapists.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "cnclass",
-            "atcb-license"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -26657,7 +26648,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "医疗机构内心理治疗、心理评估或康复相关岗位。"
+              "编辑中国岗位探索（非全国招聘样本）：医疗机构内心理治疗、心理评估或康复相关岗位。 学位、机构和任职条件逐岗核，不由该学历保证对应岗位录用。"
             ]
           },
           "id": "art-therapists.china-salary.career-snapshot-primary-locale.32",
@@ -26672,13 +26663,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "精神障碍诊断由精神科执业医师作出；心理治疗人员不得诊断、开处方或实施外科治疗。"
+              "中国精神卫生法第29条精神障碍诊断由精神科执业医师；第51条专门心理治疗人员不得精神障碍诊断、为其开处方或外科治疗。具体人员身份分清，不泛化为所有专业人员都无诊断权限。"
             ]
           },
           "id": "art-therapists.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "cnclass",
-            "atcb-license"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -26702,7 +26692,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "外资医疗机构、国际学校或跨境服务岗位。"
+              "编辑中国岗位探索（非全国招聘样本）：外资医疗机构、国际学校或跨境服务岗位。 学位、机构和任职条件逐岗核，不由该学历保证对应岗位录用。"
             ]
           },
           "id": "art-therapists.china-salary.career-snapshot-primary-locale.35",
@@ -26722,8 +26712,7 @@
           },
           "id": "art-therapists.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
-            "cnclass",
-            "atcb-license"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -26802,12 +26791,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "文化艺术机构、社区文化服务与艺术培训岗位可能归入该门类；该行业门类 2025 年城镇非私营单位平均工资为 129,447 元/年。"
+              "文化机构可作编辑相邻活动探索，按主要活动分类；GB/T4754文化艺术培训8393属于教育，不混归文化行业。NBS非私营文化体育娱乐129447元/年仅宽背景。"
             ]
           },
           "id": "art-therapists.china-salary.career-snapshot-primary-locale.42",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "gb-industry"
           ],
           "type": "prose"
         },
@@ -27008,7 +26998,7 @@
           },
           "id": "art-therapists.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27022,7 +27012,8 @@
           },
           "id": "art-therapists.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "onet"
+            "ep",
+            "operations"
           ],
           "type": "prose"
         },
@@ -27036,7 +27027,7 @@
           },
           "id": "art-therapists.china-salary.career-snapshot-primary-locale.59",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         }
@@ -27074,7 +27065,8 @@
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -27083,12 +27075,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约 22.37 美元/小时，为分位下限，不是入门起薪的承诺。；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/29-1129.01"
+              "22.37美元/小时为父职业第10分位值，不是最低工资或分位下限，也不是入门起薪承诺。"
             ]
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -27102,7 +27095,8 @@
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -27111,12 +27105,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同口径的时薪第 25 分位为 28.29 美元。；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/29-1129.01"
+              "同口径的时薪第 25 分位为 28.29 美元；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/29-1129.01"
             ]
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -27130,7 +27125,8 @@
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -27139,12 +27135,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "对应时薪中位数 37.47 美元，中位数不等于入门工资。；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/29-1129.01"
+              "对应时薪中位数 37.47 美元，中位数不等于入门工资；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/29-1129.01"
             ]
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -27158,7 +27155,8 @@
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -27167,12 +27165,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同口径的时薪第 75 分位为 50.85 美元。；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/29-1129.01"
+              "同口径的时薪第 75 分位为 50.85 美元；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/29-1129.01"
             ]
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -27186,7 +27185,8 @@
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -27195,7 +27195,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同口径时薪第 90 分位为 73.33 美元；工资表未解释高分位的成因。；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/29-1129.01"
+              "同口径时薪第 90 分位为 73.33 美元；工资表未解释高分位的成因；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/29-1129.01"
             ]
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.18",
@@ -27214,7 +27214,8 @@
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "ep",
+            "operations"
           ],
           "type": "prose"
         },
@@ -27223,13 +27224,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为 Therapists, All Other（SOC 29-1129） 的合并就业基数，不是精确人数。；BLS occupational data for Therapists, All Other（SOC 29-1129）｜https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm"
+              "为 Therapists, All Other（SOC 29-1129） 的合并就业基数，不是精确人数；BLS occupational data for Therapists, All Other（SOC 29-1129）｜https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm"
             ]
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep",
+            "operations"
           ],
           "type": "prose"
         },
@@ -27243,7 +27244,8 @@
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "ep",
+            "operations"
           ],
           "type": "prose"
         },
@@ -27252,12 +27254,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 归类为远快于平均增长，该投影混合多种治疗职业。；BLS occupational data for Therapists, All Other（SOC 29-1129）｜https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm"
+              "BLS 归类为远快于平均增长，该投影混合多种治疗职业；BLS occupational data for Therapists, All Other（SOC 29-1129）｜https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm"
             ]
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "ep",
+            "operations"
           ],
           "type": "prose"
         },
@@ -27271,7 +27274,8 @@
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "ep"
+            "ep",
+            "operations"
           ],
           "type": "prose"
         },
@@ -27280,12 +27284,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS Table 1.2 的年均职位空缺，包含增长与人员离职、转职业形成的补充需求；十年净增为 7,100 人，两者不可互换。；BLS 2025—2035 职业预测表｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "BLS Table 1.2 的年均职位空缺，包含增长与人员离职、转职业形成的补充需求；十年净增为 7,100 人，两者不可互换；BLS 2025—2035 职业预测表｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "ep"
+            "ep",
+            "operations"
           ],
           "type": "prose"
         },
@@ -27315,7 +27320,8 @@
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet-wages"
+            "onet-wages",
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -27414,7 +27420,8 @@
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "onet"
+            "ep",
+            "operations"
           ],
           "type": "prose"
         },
@@ -27452,7 +27459,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 的 2024 年行业分布明确归于 Therapists, All Other：卫生和社会救助 29%、其他行业 71%。它是父职业分布，不是艺术治疗师专属行业占比。"
+              "本轮O*NET行业详情显示35%卫生社会救助、65%其他，详情未单列年；摘要说明为父职业Therapists, All Other、Top industries标2025，不沿用2024的29/71。不是艺术治疗细分份额。"
             ]
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.36",
@@ -27602,7 +27609,8 @@
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "onet-wages"
+            "onet-wages",
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -27616,7 +27624,8 @@
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "onet-wages"
+            "onet-wages",
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -27630,7 +27639,8 @@
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -27659,7 +27669,8 @@
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -27673,8 +27684,8 @@
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet",
-            "onet"
+            "onet-wages",
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -27688,7 +27699,8 @@
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -27702,7 +27714,8 @@
           },
           "id": "art-therapists.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet-wages"
+            "onet-wages",
+            "r2-pay-1"
           ],
           "type": "prose"
         }
@@ -27945,8 +27958,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "尽责性与稳定情绪有助于持续完成记录、按流程核对材料风险并在压力下保持边界。",
-              "开放性与创造力有助于设计活动，但仍须通过目标、观察与记录来验证效果。"
+              "编辑观察建议：核记录、反馈与压力反应，本轮未取得尽责性或情绪稳定对本职业表现的因果或预测效度。",
+              "编辑观察建议：核活动构思与实际目标，不用开放性或创造力分数保证效果。"
             ]
           },
           "id": "art-therapists.fit.personality-fit-block.8",
@@ -27990,7 +28003,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业适配或临床胜任的评估工具，也没有官方资料支持「某种类型最适合艺术治疗师」的说法。可用于自我反思与沟通偏好理解，但不能作为培训投入或录用依据。"
+              "本轮未取得MBTI预测艺术治疗师表现或最适类型的效度研究，不把类型用作录用、资格或培训投入结论；偏好讨论另核实际任务。"
             ]
           },
           "id": "art-therapists.fit.personality-fit-block.10",
@@ -28049,8 +28062,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "若把 MBTI 用作讨论沟通偏好的起点，应同时用工作样本与受督导反馈来检验。",
-              "把类型标签当作能力边界，会阻碍接受督导与修正判断。"
+              "编辑讨论建议：偏好可以用作核对问题，工作样本和反馈本轮未测其相对效度。",
+              "类型标签不自行证明能力或资格，不据其预测接受督导程度。"
             ]
           },
           "id": "art-therapists.fit.personality-fit-block.12",
@@ -28163,7 +28176,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：O*NET 的官方能力清单未把高等数学列为关键能力；职业要求集中在口语与书面理解表达、归纳推理与问题敏感性。"
+              "O*NET数学技能重要性25，口语表达75及归纳推理、口语理解、问题敏感性等72为职业评分，非个人准入线；本轮未核所有学校或雇主数学要求。"
             ]
           },
           "id": "art-therapists.fit.personality-fit-block.19",
@@ -28177,8 +28190,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能读懂研究摘要中的比例与变化表述，有助于判断干预是否有效。",
-              "若对数字与清单核对明显回避，需评估是否会影响记录与材料安全。"
+              "编辑建议：核能否读懂研究比例及限制，研究摘要不能单独证明干预有效。",
+              "编辑建议：如清单核对有困难，观察具体差错与改进，不据人格或数字偏好下能力结论。"
             ]
           },
           "id": "art-therapists.fit.personality-fit-block.20",
@@ -28206,7 +28219,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪能力有帮助：需要识别自己与来访者的情绪、在强烈情绪中保持边界并及时求助。但情绪能力不能用单一分数定义，也不能替代伦理训练、督导与记录纪律。"
+              "编辑建议：观察情绪变化、求助和接受反馈，O*NET共情与自控只是工作风格背景；本轮未核情绪智力测验职业预测效应或比较权重。"
             ]
           },
           "id": "art-therapists.fit.personality-fit-block.22",
@@ -28235,8 +28248,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能在来访者情绪升级时保持稳定并启动机构流程，比分数高低更重要。",
-              "愿意承认不确定并求助，是专业能力的一部分。"
+              "编辑建议：核情绪变化下能否按真实应急制度求助，未测其相比量表分数更重要。",
+              "编辑建议：记录不确定并向合适人员咨询，不能由一次表现授临床资格。"
             ]
           },
           "id": "art-therapists.fit.personality-fit-block.24",
@@ -28265,7 +28278,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。真正有解释力的证据是受督导实践中的可复核表现。"
+              "兴趣、人格或单次测试不自动证明资格；编辑建议另观察受督导表现，本轮未取得其与量表比较的预测效度，不称它真正更有解释力。"
             ]
           },
           "id": "art-therapists.fit.personality-fit-block.26",
@@ -28279,7 +28292,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：更有解释力的适配信号是能同时关注来访者反应、创作媒介安全与治疗目标，愿意记录细节、接受督导，并在不确定情境中保持边界；艺术兴趣本身不足以证明临床胜任力。"
+              "编辑观察建议：来访者反应、材料条件、记录及接受督导可作为需核行为；本次没有相对量表更有解释力的效度或录用研究，艺术兴趣不自动授资格。"
             ]
           },
           "id": "art-therapists.fit.personality-fit-block.27",
@@ -28314,8 +28327,7 @@
           },
           "id": "art-therapists.fit.personality-fit-block.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "psychologists"
           ],
           "type": "prose"
         },
@@ -28329,8 +28341,8 @@
           },
           "id": "art-therapists.fit.personality-fit-block.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "psychologists",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -28359,8 +28371,7 @@
           },
           "id": "art-therapists.fit.personality-fit-block.32",
           "source_refs": [
-            "onet",
-            "onet"
+            "family"
           ],
           "type": "prose"
         },
@@ -28374,8 +28385,8 @@
           },
           "id": "art-therapists.fit.personality-fit-block.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "family",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -28404,8 +28415,7 @@
           },
           "id": "art-therapists.fit.personality-fit-block.35",
           "source_refs": [
-            "onet",
-            "onet"
+            "family"
           ],
           "type": "prose"
         },
@@ -28419,8 +28429,8 @@
           },
           "id": "art-therapists.fit.personality-fit-block.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "family",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -28444,13 +28454,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意投入更长学制，承担评估与心理治疗责任，并按法域要求取得执照。"
+              "编辑探索：临床与咨询心理学家有心理评估和治疗任务，需核目标岗位教育、实习、许可；本轮未测其学制一定更长或资格一定更高。"
             ]
           },
           "id": "art-therapists.fit.personality-fit-block.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "psychologists"
           ],
           "type": "prose"
         },
@@ -28459,13 +28468,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "学制与执照要求更高；须核对相应层级的学位、实习与受督导要求。"
+              "教育、实习、督导及许可按目标法域核，本轮未取得与艺术治疗学制或要求高低的统一比较。"
             ]
           },
           "id": "art-therapists.fit.personality-fit-block.39",
           "source_refs": [
-            "onet",
-            "onet"
+            "psychologists",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -28495,9 +28504,7 @@
           },
           "id": "art-therapists.fit.personality-fit-block.41",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "rehabilitation"
           ],
           "type": "prose"
         },
@@ -28511,9 +28518,7 @@
           },
           "id": "art-therapists.fit.personality-fit-block.42",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "rehabilitation"
           ],
           "type": "prose"
         },
@@ -28542,8 +28547,7 @@
           },
           "id": "art-therapists.fit.personality-fit-block.44",
           "source_refs": [
-            "onet",
-            "onet"
+            "psychologists"
           ],
           "type": "prose"
         },
@@ -28557,8 +28561,8 @@
           },
           "id": "art-therapists.fit.personality-fit-block.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "psychologists",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -28567,7 +28571,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "与其说某种性格，不如说某种工作方式：能观察而不武断解释，愿意记录细节、接受督导，并在不确定情境中保持边界。O*NET 列出的工作风格包括真诚、乐观、创新、适应、共情、自控、社会取向、合作、正直与可靠，这些描述的是工作方式，不是录用标准。"
+              "与其说某种性格，不如说某种工作方式：能观察而不武断解释，愿意记录细节、接受督导，并在不确定情境中保持边界。O*NET 列出的工作风格包括真诚、乐观、创新、适应、共情、自控、社会取向、合作、正直与可靠，这些是职业群体描述，不构成本页已验证的个人录用阈值；实际岗位条件与行为考核另核。"
             ]
           },
           "id": "art-therapists.fit.personality-fit-block.46",
@@ -28582,7 +28586,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合与否不取决于内外向。工作情境显示该职业 86% 每天有面对面讨论、66% 持续与他人接触，同时 71% 拥有很大决策自由度、57% 超过一半时间久坐；需要的是能承受高强度人际接触，并在会后完成独立记录与反思。"
+              "本轮未取得内向与外向预测本职业表现的比较证据，不据类型判适合或不适合。86%面对面、66%持续接触、71%较大决策自由、57%超过半时坐姿仅群体背景。"
             ]
           },
           "id": "art-therapists.fit.personality-fit-block.47",
@@ -28597,7 +28601,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能。外向有助于建立关系，但治疗工作要求把注意力放在来访者的反应而不是自己的表达；能否在活动中保持观察、节制建议并守住边界，比外向程度更关键。"
+              "本轮未取得外向建立关系优势或适任效度，不能保证外向者适合；编辑建议观察实际互动、记录和接受督导，岗位资格另核。"
             ]
           },
           "id": "art-therapists.fit.personality-fit-block.48",
@@ -28669,7 +28673,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪能力确实有帮助：需要识别自己与来访者的情绪、在强烈情绪中保持边界并及时求助。但情绪能力不能用单一分数定义，也不能替代伦理训练、督导与记录纪律。"
+              "编辑观察建议：核情绪应对、求助与记录行为，未取得本职业情绪能力预测效度或训练因果研究，不作分数授资格。"
             ]
           },
           "id": "art-therapists.fit.personality-fit-block.53",
@@ -28764,7 +28768,7 @@
           },
           "id": "art-therapists.fit.personality-fit-block.59",
           "source_refs": [
-            "onet"
+            "weforum"
           ],
           "type": "prose"
         },
@@ -28792,7 +28796,8 @@
           },
           "id": "art-therapists.fit.personality-fit-block.61",
           "source_refs": [
-            "onet"
+            "facilities",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -28806,7 +28811,8 @@
           },
           "id": "art-therapists.fit.personality-fit-block.62",
           "source_refs": [
-            "onet"
+            "ep",
+            "operations"
           ],
           "type": "prose"
         },
@@ -28820,7 +28826,7 @@
           },
           "id": "art-therapists.fit.personality-fit-block.63",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -28834,7 +28840,7 @@
           },
           "id": "art-therapists.fit.personality-fit-block.64",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28949,7 +28955,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答：主要风险包括执业越界、危机信号未升级、作品与健康信息泄露、材料伤害，以及记录与作品保管失控；控制依赖清楚的权限、督导、同意、记录与转介。"
+              "编辑风险场景：越界解释、危机联系延误、资料披露、材料安全和保管记录缺失；职责与协会伦理提供背景，未取得发生率或风险排名。具体控制与转介权限核真实法域和机构程序。"
             ]
           },
           "id": "art-therapists.risk.career-risk-cards.9",
@@ -29011,14 +29017,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "区分观察与诊断，按机构流程请精神科执业医师或相应专业人员处理。"
+              "中国精神障碍诊断依法由精神科执业医师；其他法域按实际执照核，作品评估与诊断分清。本轮未核具体机构处置程序。"
             ]
           },
           "id": "art-therapists.risk.career-risk-cards.13",
           "source_refs": [
-            "privacy",
-            "onet",
-            "cnclass"
+            "cnclass",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29073,14 +29078,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "停止活动、保护现场并启动机构应急与转介链。"
+              "O*NET新任务是紧急时联系应急人员并协调治疗；编辑建议提前核机构应急联系人与真实程序。本页不规定所有情形统一停止、保护现场或恢复活动条件，不授临床操作权限。"
             ]
           },
           "id": "art-therapists.risk.career-risk-cards.17",
           "source_refs": [
-            "privacy",
             "onet",
-            "cnclass"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29134,7 +29138,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "最小收集、取得授权、限制访问并按制度保存或销毁。"
+              "AATA第2节核保密及依法或紧迫危险披露例外，第4节对拍摄、教学及公开使用等规定相应书面同意；具体保存、销毁与访问另核法域和机构规则，不一概所有处理只有同意一种依据。"
             ]
           },
           "id": "art-therapists.risk.career-risk-cards.21",
@@ -29194,7 +29198,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "会前筛查、改用替代媒介、现场监护并在异常时停用。"
+              "AATA1.8涉及安全环境和材料危险知识；编辑建议先核来访者、材料与实际机构安全程序。本轮未核完整会前筛查、监护、停用或恢复清单，不把建议当统一操作授权。"
             ]
           },
           "id": "art-therapists.risk.career-risk-cards.25",
@@ -29239,7 +29243,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "破坏来访者所有权与服务记录的可追溯性。"
+              "编辑风险情景：错误保管或记录缺失可能损害复核与信任；作品仍为来访者财产，不因错放就自动破坏法律所有权。"
             ]
           },
           "id": "art-therapists.risk.career-risk-cards.28",
@@ -29269,7 +29273,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未按规则记录、拍摄或保存作品，或记录缺失导致无法复核。"
+              "未确认拍摄、使用或保留要求，以及记录缺失可能妨碍复核；不一概无法复核，具体后果需核。"
             ]
           },
           "id": "art-therapists.risk.career-risk-cards.30",
@@ -29314,7 +29318,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "停止越界做法、记录事实，并按流程协助获得其他服务。"
+              "AATA1.7要求不确定时求督导或咨询，评估方法需训练；编辑建议核适当转介和机构程序。本页不规定所有越界情形的统一停止或恢复方式。"
             ]
           },
           "id": "art-therapists.risk.career-risk-cards.33",
@@ -29364,7 +29368,8 @@
           },
           "id": "art-therapists.risk.career-risk-cards.36",
           "source_refs": [
-            "onet"
+            "facilities",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -29378,7 +29383,8 @@
           },
           "id": "art-therapists.risk.career-risk-cards.37",
           "source_refs": [
-            "onet"
+            "operations",
+            "ep"
           ],
           "type": "prose"
         },
@@ -29406,7 +29412,7 @@
           },
           "id": "art-therapists.risk.career-risk-cards.39",
           "source_refs": [
-            "onet"
+            "cnclass"
           ],
           "type": "prose"
         }
@@ -29442,7 +29448,7 @@
                 "在督导下准备材料、记录过程与反应、协助个案复盘；先熟悉转介流程、同意与作品保管规则。",
                 "美国专业路径核硕士项目、实习与 ATR-P/ATR 条件；中国岗位单独核机构和人员要求，不由海外认证推定录用。",
                 "用完全虚构的案例提交活动方案、观察记录样例与转介决定说明，不使用真实来访者数据。",
-                "此路径的临床判断与记录责任最重，须逐项核对机构资质、督导安排与本人授权范围。"
+                "编辑比较：该方向是否含临床判断、记录及督导须逐岗核；本轮未测其责任一定最重，不由医疗机构名自动授本人权限。"
               ],
               [
                 "社区、养老与庇护机构的艺术活动岗位",
@@ -29519,7 +29525,7 @@
                 "id": "tools",
                 "values": [
                   "O*NET 的 2025 全年 Lightcast 招聘信号列 14 项软件：Office 1%、Excel/Outlook 低于 1%，其他未给比例；不是工具使用率或统一技能门槛。",
-                  "这些工具用于记录、材料整理、影像归档与远程协作，不改变临床判断与记录责任。",
+                  "软件招聘提及不证明实际用途或部署；记录、材料及目录整理可作编辑试验候选，具体产品和权限另核。",
                   "把工具用作辅助前，须确认机构的数据权限、同意范围与人工复核安排。"
                 ]
               }
@@ -29806,7 +29812,7 @@
                 "完成符合要求教育、拟积累毕业后经验者",
                 "专业认证路径，不保证招聘或独立执业。",
                 "ATR-P 通常是 ATR 前置，互认路径另核；不等于所有州法律门槛。",
-                "指定项目路径：毕业后直接接触 1000 小时、督导 100 小时，其中 50 小时 ATR-BC；桥接计划个别核。",
+                "CAAHEP及所列毕业路径：毕业后直接接触1000小时、督导100小时其中50由ATR-BC；桥接按个人计划。ATR需有效ATR-P，开始累积督导可在提交ATR-P申请时，具体计时点依标准核。",
                 "申请、督导、维持凭证的时间与费用向 ATCB 和机构核，不编造总成本。",
                 "按 2026 标准核督导资质和经验可计时点；不与教育内实习混算。"
               ],
@@ -29815,7 +29821,7 @@
                 "符合 ATCB 条件的 ATR 持有人",
                 "通过 ATCBE 表明所考理论与技能知识。",
                 "是认证路径，不是本页确认的普遍法律或招聘门槛。",
-                "核 ATR、考试资格与 ATCBE；维持 ATR，按规定每五年再认证。",
+                "核ATR和ATCBE资格及通过条件；维持ATR，每五年再认证。ATCB页面列继续教育或再次通过考试安排，细则逐路径核，不保证认证或许可。",
                 "现行费用向 ATCB 核实；本页不提供金额或通过保证。",
                 "不自动产生州执照或中国大陆诊断、心理治疗权限。"
               ],
@@ -29957,7 +29963,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能在督导下安全准备材料、按模板完成记录，并识别需要升级的情形。"
+              "编辑发展示例：在实际督导、资格与授权范围内准备材料及记录，需升级的情形按真实程序核。"
             ]
           },
           "id": "art-therapists.path.career-path-block.12",
@@ -29986,7 +29992,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能在督导下设计目标、匹配媒介、写出观察与转介判断，并接受逐条复核。"
+              "编辑发展示例：在合适督导下整理目标、媒介与观察，并核权限和评估方法训练；不是统一可授独立服务的标准。"
             ]
           },
           "id": "art-therapists.path.career-path-block.14",
@@ -30015,7 +30021,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能独立承担常规个案的活动与记录，在复杂案例中主动请求督导或转介。"
+              "编辑发展示例：是否独立承担常规个案取决合法资格、服务范围和实际机构条件，阶段描述不授权限；复杂任务按真实分工求助。"
             ]
           },
           "id": "art-therapists.path.career-path-block.16",
@@ -30044,7 +30050,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能带教实习人员、参与项目设计，并对团队记录与伦理流程负责。"
+              "编辑发展示例：具备所需资格与分工后可能承担带教、项目或记录审核，不保证全部督导均有团队制度权限。"
             ]
           },
           "id": "art-therapists.path.career-path-block.18",
@@ -30193,7 +30199,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成受督导的教育与实习时数。"
+              "按适用教育、实习及认证路径完成相应受督导要求，不把所有法域合并为同一时数。"
             ]
           },
           "id": "art-therapists.path.career-path-block.28",
@@ -30267,7 +30273,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "取得 ATR 或完成同等受督导经验。"
+              "编辑路径示例：选择ATR时按ATCB标准核，其他资历是否满足岗位须核具体制度，不能仅称同等经验就授资格。"
             ]
           },
           "id": "art-therapists.path.career-path-block.33",
@@ -30413,7 +30419,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "具备督导资格与机构授权。"
+              "督导资质、个人资格与机构分工分别核；本轮未读完整ATCS或所有机构督导标准，ATR-BC不能自动推通用督导权限。"
             ]
           },
           "id": "art-therapists.path.career-path-block.43",
@@ -30484,7 +30490,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "教育或相关背景，具活动组织经验。"
+              "编辑活动岗位示例：相关训练和经验要求逐岗位核，非全国统一门槛。"
             ]
           },
           "id": "art-therapists.path.career-path-block.48",
@@ -30557,7 +30563,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相关专业背景与项目经验。"
+              "编辑项目岗位示例：专业背景与经验逐岗位核，非已核全国录用要求。"
             ]
           },
           "id": "art-therapists.path.career-path-block.53",
@@ -30630,7 +30636,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "项目管理与相关领域经验。"
+              "编辑发展示例：项目管理和相关经验可能需核，未取得统一岗位资格或晋升标准。"
             ]
           },
           "id": "art-therapists.path.career-path-block.58",
@@ -30703,7 +30709,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相关经验与教培能力。"
+              "编辑培训方向示例：教培与领域经验按任务核，不由阶段名自动取得督导、治疗或评价权限。"
             ]
           },
           "id": "art-therapists.path.career-path-block.63",
@@ -30774,7 +30780,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相关专业背景或转岗培训。"
+              "编辑相邻支持方向示例：具体训练与工作范围另核，不概括所有岗位统一转岗培训。"
             ]
           },
           "id": "art-therapists.path.career-path-block.68",
@@ -30847,7 +30853,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "目标方向的学历与实习要求。"
+              "目标方向教育、实习、督导及许可按具体法域和岗位核，不建立本页统一补课路径。"
             ]
           },
           "id": "art-therapists.path.career-path-block.73",
@@ -30920,7 +30926,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "所在法域的执照或注册要求。"
+              "需要执照或注册的服务按目标法域核，不能推所有相邻工作都受同一许可制度。"
             ]
           },
           "id": "art-therapists.path.career-path-block.78",
@@ -30993,7 +30999,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "两类服务的基本训练与协作经验。"
+              "编辑跨领域协调示例：两类服务训练与授权分别核，不由合作经历互授资格。"
             ]
           },
           "id": "art-therapists.path.career-path-block.83",
@@ -31195,6 +31201,8 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.9",
           "source_refs": [
+            "ep",
+            "operations",
             "onet"
           ],
           "type": "prose"
@@ -31209,6 +31217,8 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.10",
           "source_refs": [
+            "ep",
+            "operations",
             "onet"
           ],
           "type": "prose"
@@ -31223,6 +31233,8 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.11",
           "source_refs": [
+            "ep",
+            "operations",
             "onet"
           ],
           "type": "prose"
@@ -31237,6 +31249,8 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.12",
           "source_refs": [
+            "ep",
+            "operations",
             "onet"
           ],
           "type": "prose"
@@ -31251,6 +31265,8 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.13",
           "source_refs": [
+            "ep",
+            "operations",
             "onet"
           ],
           "type": "prose"
@@ -31265,6 +31281,8 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.14",
           "source_refs": [
+            "ep",
+            "operations",
             "onet"
           ],
           "type": "prose"
@@ -31279,6 +31297,8 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.15",
           "source_refs": [
+            "ep",
+            "operations",
             "onet"
           ],
           "type": "prose"
@@ -31293,6 +31313,8 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.16",
           "source_refs": [
+            "ep",
+            "operations",
             "onet"
           ],
           "type": "prose"
@@ -31307,6 +31329,8 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.17",
           "source_refs": [
+            "ep",
+            "operations",
             "onet"
           ],
           "type": "prose"
@@ -31321,6 +31345,8 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.18",
           "source_refs": [
+            "ep",
+            "operations",
             "onet"
           ],
           "type": "prose"
@@ -31335,6 +31361,8 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.19",
           "source_refs": [
+            "ep",
+            "operations",
             "onet"
           ],
           "type": "prose"
@@ -31349,6 +31377,8 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.20",
           "source_refs": [
+            "ep",
+            "operations",
             "onet"
           ],
           "type": "prose"
@@ -31363,6 +31393,8 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.21",
           "source_refs": [
+            "ep",
+            "operations",
             "onet"
           ],
           "type": "prose"
@@ -31377,6 +31409,8 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.22",
           "source_refs": [
+            "ep",
+            "operations",
             "onet"
           ],
           "type": "prose"
@@ -31391,7 +31425,7 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31405,7 +31439,7 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31419,7 +31453,7 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31433,7 +31467,7 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.26",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31447,7 +31481,7 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31461,7 +31495,7 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31475,7 +31509,7 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31489,7 +31523,8 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.30",
           "source_refs": [
-            "onet"
+            "operations",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31498,7 +31533,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 最新 Table 1.2 提供父职业 2025—2035 年就业与年均空缺；O*NET 摘要仍显示旧预测，二者不能混标资料期。"
+              "本轮BLS表1.2父职业2025—2035预测与O*NET当前期间一致；就业56100、年均空缺3600一致，详细12.6%与OOH整数13%分清。两者仍非艺术治疗细分统计。"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.31",
@@ -31518,7 +31553,7 @@
           },
           "id": "art-therapists.market-signals.market-signal-card.32",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31541,13 +31576,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足心理学方向的学历、受督导实践与执照；诊断与系统心理治疗权限不能迁移。"
+              "编辑差距建议：需要补足心理学方向的学历、受督导实践与执照；诊断与系统心理治疗权限不能迁移。 实际要求按目标法域与岗位核，非完整资格清单。"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "psychologists",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31556,13 +31591,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是评估思路、沟通与记录习惯。"
+              "编辑判断：可能相关的是评估思路、沟通与记录习惯。 未取得资格互认或转岗成效研究。"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.35",
           "source_refs": [
-            "onet",
-            "onet"
+            "psychologists",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31571,13 +31606,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较远：学制与资格要求更高。"
+              "编辑判断较远：临床心理职责与许可另核，本轮未取得学制一定更长、资格一定更高的统一比较；距离未测量。"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "psychologists",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31586,13 +31621,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足关系治疗方向的学位、受督导实践与许可。"
+              "编辑差距建议：需要补足关系治疗方向的学位、受督导实践与许可。 实际要求按目标法域与岗位核，非完整资格清单。"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.37",
           "source_refs": [
-            "onet",
-            "onet"
+            "family",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31601,13 +31636,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是关系视角与沟通能力。"
+              "编辑判断：可能相关的是关系视角与沟通能力。 未取得资格互认或转岗成效研究。"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "family",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31616,13 +31651,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：分析单位从个人扩展到关系系统。"
+              "距离中等：分析单位从个人扩展到关系系统。（距离为编辑判断，未测转换成本。）"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.39",
           "source_refs": [
-            "onet",
-            "onet"
+            "family",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31631,13 +31666,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足咨询方向的训练与执照要求；两者不能只按职位名称互换。"
+              "编辑差距建议：需要补足咨询方向的训练与执照要求；两者不能只按职位名称互换。 实际要求按目标法域与岗位核，非完整资格清单。"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.40",
           "source_refs": [
-            "onet",
-            "onet"
+            "mental",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31646,13 +31681,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是助人沟通与个案管理经验。"
+              "编辑判断：可能相关的是助人沟通与个案管理经验。 未取得资格互认或转岗成效研究。"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.41",
           "source_refs": [
-            "onet",
-            "onet"
+            "mental",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31661,13 +31696,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：以谈话与咨询计划为主要工作方式。"
+              "距离中等：以谈话与咨询计划为主要工作方式。（距离为编辑判断，未测转换成本。）"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.42",
           "source_refs": [
-            "onet",
-            "onet"
+            "mental",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31676,13 +31711,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足康复咨询方向的训练与资格。"
+              "编辑差距建议：需要补足康复咨询方向的训练与资格。 实际要求按目标法域与岗位核，非完整资格清单。"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.43",
           "source_refs": [
-            "onet",
-            "onet"
+            "rehabilitation",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31691,13 +31726,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是与康复团队协作和记录的经验。"
+              "编辑判断：可能相关的是与康复团队协作和记录的经验。 未取得资格互认或转岗成效研究。"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.44",
           "source_refs": [
-            "onet",
-            "onet"
+            "rehabilitation",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31706,13 +31741,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：服务链更靠近就业与社会保障。"
+              "距离中等：服务链更靠近就业与社会保障。（距离为编辑判断，未测转换成本。）"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "rehabilitation",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31721,13 +31756,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足研究方法与统计训练，以及相应学位路径。"
+              "编辑差距建议：需要补足研究方法与统计训练，以及相应学位路径。 实际要求按目标法域与岗位核，非完整资格清单。"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "psychologists",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31736,13 +31771,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是评估与记录质量意识。"
+              "编辑判断：可能相关的是评估与记录质量意识。 未取得资格互认或转岗成效研究。"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.47",
           "source_refs": [
-            "onet",
-            "onet"
+            "psychologists",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31751,13 +31786,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较远：以评估与研究证据为主要工具。"
+              "编辑判断较远：心理学家可承担评估与治疗，不一概以研究为主要工作；具体方向和方法训练差距另核，距离未测量。"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "psychologists",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31766,13 +31801,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足关系治疗方向的实习与督导时数。"
+              "编辑差距建议：需要补足关系治疗方向的实习与督导时数。 实际要求按目标法域与岗位核，非完整资格清单。"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.49",
           "source_refs": [
-            "onet",
-            "onet"
+            "family",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31781,12 +31816,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是与家庭沟通的经验。"
+              "编辑判断：可能相关的是与家庭沟通的经验。 未取得资格互认或转岗成效研究。"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.50",
           "source_refs": [
-            "onet"
+            "family",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31795,12 +31831,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：需要重新积累面向家庭系统的实践证据。"
+              "距离中等：需要重新积累面向家庭系统的实践证据。（距离为编辑判断，未测转换成本。）"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.51",
           "source_refs": [
-            "onet"
+            "family",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31809,13 +31846,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足咨询方向的课程、实习与执照要求。"
+              "编辑差距建议：需要补足咨询方向的课程、实习与执照要求。 实际要求按目标法域与岗位核，非完整资格清单。"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.52",
           "source_refs": [
-            "onet",
-            "onet"
+            "mental",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31824,13 +31861,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是危机识别与转介意识。"
+              "编辑判断：可能相关的是危机识别与转介意识。 未取得资格互认或转岗成效研究。"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.53",
           "source_refs": [
-            "onet",
-            "onet"
+            "mental",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31839,13 +31876,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：工作场景相似但法定范围不同。"
+              "距离中等：工作场景相似但法定范围不同。（距离为编辑判断，未测转换成本。）"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.54",
           "source_refs": [
-            "onet",
-            "onet"
+            "mental",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31854,13 +31891,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足康复评估与就业支持的训练。"
+              "编辑差距建议：需要补足康复评估与就业支持的训练。 实际要求按目标法域与岗位核，非完整资格清单。"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.55",
           "source_refs": [
-            "onet",
-            "onet"
+            "rehabilitation",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31869,13 +31906,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是跨专业协作与个案记录能力。"
+              "编辑判断：可能相关的是跨专业协作与个案记录能力。 未取得资格互认或转岗成效研究。"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.56",
           "source_refs": [
-            "onet",
-            "onet"
+            "rehabilitation",
+            "atcb-license"
           ],
           "type": "prose"
         },
@@ -31884,13 +31921,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：产出从治疗记录转向康复与就业计划。"
+              "距离中等：产出从治疗记录转向康复与就业计划。（距离为编辑判断，未测转换成本。）"
             ]
           },
           "id": "art-therapists.market-signals.market-signal-card.57",
           "source_refs": [
-            "onet",
-            "onet"
+            "rehabilitation",
+            "atcb-license"
           ],
           "type": "prose"
         }
@@ -32008,7 +32045,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源按实际文档列出：O*NET 艺术治疗师任务/情境、招聘软件信号和父职业工资；BLS 最新职业预测；AATA 教育与伦理；ATCB ATR、ATR-BC 及执照边界；国家统计局单位工资；中国大陆《精神卫生法》。相邻方向另引各自职业摘要。链接数量不等于独立证据数量。"
+              "来源按实际文档列出：O*NET 艺术治疗师任务/情境、招聘软件信号和父职业工资；BLS 最新职业预测；AATA 教育与伦理；ATCB ATR、ATR-BC 及执照边界；国家统计局单位工资；中国大陆《精神卫生法》。相邻方向另引各自职业摘要。链接数量不等于独立证据数量。 本轮O*NET自定义仅字段入口；AATA前言及1—4节、ATCB对应资格与权限条款、精神卫生法23/25/27—29/51条实际读取，未核完整机构临床程序。GB行业、ILO介绍扩展摘要与NIST简介为本窗口同日同版对应原文复用，非职业工资或AI成效。"
             ]
           },
           "id": "art-therapists.sources.source-card.2",
@@ -32024,7 +32061,10 @@
             "atcb-board",
             "atcb-license",
             "nbs",
-            "cnclass"
+            "cnclass",
+            "gb-industry",
+            "genai-ilo",
+            "genai-nist"
           ],
           "type": "prose"
         },
@@ -32033,7 +32073,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核对日期 2026-10-03；O*NET 职业资料标 2026 更新，工资为 2025 年 5 月，行业为父职业 2024 年分布。最新预测采用 BLS 2025—2035；O*NET 摘要仍展示 2024—2034。AATA 伦理 PDF 标 2013-12 修订且当前伦理页仍链接；ATR 为 2026 标准；中国单位工资为 2025 年数据。"
+              "本窗口本轮核对日期2026-10-09；2025工资与2025—2035预测，O*NET本轮已更新同期间。行业详情35/65未单列年，摘要Top industries标2025；AATA伦理PDF2013-12修订仍在当前官方伦理页链接，ATR标准2026，NBS工资2025。"
             ]
           },
           "id": "art-therapists.sources.source-card.3",
@@ -32051,7 +32091,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "使用说明：本页区分精确口径、父职业代理口径与行业代理口径；中国大陆的行业平均工资只作对照，不作为职业工资；缺口以「证据不足」标记，不用推测数字填补。"
+              "使用说明：本页区分精确口径、父职业代理口径与行业代理口径；中国大陆的行业平均工资只作对照，不作为职业工资；缺口以「证据不足」标记，不用推测数字填补。 仍未取得艺术治疗精确职业工资就业、AI采用临床效果与因果、人格效度、转岗互认或完整逐州及机构应急程序；范围外练习、定义与共享facts原值冻结，不签整页验收。"
             ]
           },
           "id": "art-therapists.sources.source-card.4",
@@ -32132,10 +32172,10 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "official occupation profile",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet",
@@ -32148,10 +32188,10 @@
                 "url": "https://www.onetonline.org/link/summary/29-1129.01"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "official occupation details",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official occupation details",
                 "id": "bls",
@@ -32164,14 +32204,14 @@
                 "url": "https://www.onetonline.org/link/details/29-1129.01"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "Table 1.2, SOC 29-1129",
-                  "就业 56.1→63.2 千人、净增 7.1 千人、12.6%、年均空缺 3.6 千个"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official employment projections",
                 "id": "ep",
-                "limitation": "父职业 Therapists, All Other，非艺术治疗师专属；O*NET 摘要仍显示 2024—2034 旧预测。",
+                "limitation": "BLS表1.2父职业29-1129：56.1→63.2千人、7.1千净增、12.6%、年均3.6千空缺。O*NET本轮也已显示2025—2035；不是艺术治疗精确值。",
                 "market": "美国",
                 "name": "BLS Table 1.2：职业预测与从业者特征（2025—2035）",
                 "period": "2025 基期、2025—2035 预测；表内就业单位千人",
@@ -32180,10 +32220,10 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "official wage statistics",
-                  "2025 BLS OEWS wage data displayed by O*NET OnLine"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official wage statistics",
                 "id": "oews",
@@ -32196,10 +32236,10 @@
                 "url": "https://www.onetonline.org/link/localwages/29-1129.01"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "official industry wage statistics",
-                  "2025 年；2026-05-15 发布"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs",
@@ -32212,14 +32252,14 @@
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "第 29 条诊断人员、第 51 条心理治疗边界",
-                  "中国大陆法律，非职业分类或独立艺术治疗资格文件"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "national mental health law",
                 "id": "cnclass",
-                "limitation": "第 29、51 条仅用于相应中国大陆法律边界，不能证明已核完整职业资格体系。",
+                "limitation": "实际读政府托管2018修正全文相关第23/25/27—29/51条：咨询与心理治疗、精神障碍诊断及人员场所分清；非独立艺术治疗资格体系或具体机构应急程序。",
                 "market": "中国大陆",
                 "name": "《中华人民共和国精神卫生法》",
                 "period": "2018-04-27 修正；政府托管全文",
@@ -32228,30 +32268,30 @@
                 "url": "https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3171/site/attach/0/88015fc8b12047f3b6e69701bbc399a8.pdf"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "AATA 自律伦理原则，非州法或 AI 实证研究",
-                  "第 1 节能力/转介、第 2 节保密、第 3 节评估、第 4 节作品"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "professional ethics standard",
                 "id": "privacy",
-                "limitation": "协会伦理原则不替代州法、合法执照或机构程序；未直接研究生成式 AI。",
+                "limitation": "实际读前言及第1—4节：会员伦理原则、能力咨询、安全、保密及依法/紧迫危险例外、评估训练、作品财产和相应书面同意；不是州法或AI效能研究，未核完整临床操作程序。",
                 "market": "美国",
                 "name": "AATA《Ethical Principles for Art Therapists》",
-                "period": "2013-12 修订；2026-10-03 AATA 伦理页仍链接此文件",
+                "period": "2013-12修订，2026-10-09当前伦理页链接；访问2026-10-09",
                 "publisher": "American Art Therapy Association",
                 "scope": "exact",
                 "url": "https://arttherapy.org/wp-content/uploads/2017/06/Ethical-Principles-for-Art-Therapists.pdf"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "2026 ATR 标准：ATR-P 前置（互认除外）",
-                  "指定项目毕业后直接接触 1000 小时、督导 100 小时，其中 50 小时 ATR-BC；桥接另核"
+                  "终端403但web原文16—66可读",
+                  "认证不代替州执照"
                 ],
                 "evidence_type": "credentialing requirements",
                 "id": "facilities",
-                "limitation": "指定路径的毕业后要求，不能与教育内实习混算；认证不替代州执照。",
+                "limitation": "实际读2026标准：ATR-P与互认、指定毕业后1000直接/100督导其中50ATR-BC，桥接个人计划；申请提交可开始督导计时、最终ATR需有效ATR-P。非州许可或完整督导资格标准。",
                 "market": "美国",
                 "name": "ATCB《2026 Registration Standards for ATR》",
                 "period": "2026 注册标准",
@@ -32260,10 +32300,10 @@
                 "url": "https://atcb.org/registered-art-therapist-lp/2026-atr-credential-requirements/"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "official wage and employment data",
-                  "May 2025 工资；2025—2035 年预测"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official wage and employment data",
                 "id": "operations",
@@ -32276,14 +32316,14 @@
                 "url": "https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "Lightcast 美国招聘帖，2025-01-01—2025-12-31",
-                  "14 项：Office 1%、Excel/Outlook 低于 1%，其他未提供；分母为职业匹配招聘帖"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "employer job-posting signal",
                 "id": "hr",
-                "limitation": "招聘软件词频不等于工作使用率、资格要求或 AI 替代率；未提供总体样本数。",
+                "limitation": "2025美国关联唯一招聘14软件，Office1%/Excel及Outlook低于1%；未提供非0，不证明工作使用、采用或统一门槛。",
                 "market": "美国",
                 "name": "O*NET-SOC 29-1129.01 技术清单（2025 年美国招聘信号）",
                 "period": "2025 年美国招聘信号；访问 2026-09-15",
@@ -32292,26 +32332,26 @@
                 "url": "https://www.onetonline.org/link/hot_tech/29-1129.01"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "official industry distribution",
-                  "2024 年分布；访问 2026-09-15"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "health",
-                "limitation": "页面明确行业数据为 Therapists, All Other（29-1129）；2024 行业占比不代表艺术治疗师专属分布。",
+                "limitation": "本轮卫生社会救助35%、其他65%；摘要明确行业为父职业Therapists, All Other，非艺术治疗细分份额或工资。",
                 "market": "美国",
                 "name": "O*NET 29-1129.01 摘要：父职业行业分布",
-                "period": "2024 年分布；访问 2026-09-15",
+                "period": "本轮行业详情未单列年，摘要Top industries标2025",
                 "publisher": "O*NET OnLine",
                 "scope": "parent_occupation_proxy",
-                "url": "https://www.onetonline.org/link/summary/29-1129.01"
+                "url": "https://www.onetonline.org/link/industry/29-1129.01"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "official certification discovery",
-                  "访问 2026-09-15"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official certification discovery",
                 "id": "ilo",
@@ -32324,30 +32364,30 @@
                 "url": "https://www.onetonline.org/link/localcert/29-1129.01"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "官方职业摘要，非费马内部记录",
-                  "编辑判断见正文标注，不伪装外部出版物"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "editor",
                 "limitation": "本 URL 为 O*NET 资料，不是费马测试编辑组的核对记录。",
                 "market": "美国",
                 "name": "O*NET 29-1129.01 摘要：职业事实核对入口",
-                "period": "2026 更新页面；本轮核对 2026-10-03",
+                "period": "本轮核对2026-10-09；历史核对2026-10-03（非统计期）",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-1129.01"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "Job Zone Five / Education",
-                  "原 localtraining 入口本轮访问失败；此页不作为具体学校认证目录"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
-                "evidence_type": "official training discovery",
+                "evidence_type": "官方职业摘要教育与准备区",
                 "id": "nist",
-                "limitation": "Job Zone 为职业准备程度，学历为新聘教育需要的受访意见；不推荐具体课程。",
+                "limitation": "实际读JobZoneFive、SVP8以上与新聘教育97%硕士/3%硕士后证书，非现任学历构成、课程发现或具体项目认证。",
                 "market": "美国",
                 "name": "O*NET 29-1129.01 摘要：Job Zone 与教育信息",
                 "period": "2026 更新页面",
@@ -32356,14 +32396,14 @@
                 "url": "https://www.onetonline.org/link/summary/29-1129.01"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "official custom occupation profile",
-                  "访问 2026-09-15"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official custom occupation profile",
                 "id": "arxiv",
-                "limitation": "官方档案字段说明，不设定个人胜任阈值。",
+                "limitation": "本轮实际返回自定义字段选择入口，不是已加载完整自定义档案，不由入口形成个人胜任阈值。",
                 "market": "美国",
                 "name": "O*NET-SOC 29-1129.01 自定义职业档案",
                 "period": "访问 2026-09-15",
@@ -32372,10 +32412,10 @@
                 "url": "https://www.onetonline.org/link/custom/29-1129.01"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "professional education guidance",
-                  "现行指引；访问 2026-08-30"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "professional education guidance",
                 "id": "weforum",
@@ -32388,10 +32428,10 @@
                 "url": "https://arttherapy.org/becoming-art-therapist/"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "official occupation details",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official occupation details",
                 "id": "employer",
@@ -32404,10 +32444,10 @@
                 "url": "https://www.onetonline.org/link/details/29-1129.01"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "official occupation profile",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "purchasing-managers",
@@ -32420,10 +32460,10 @@
                 "url": "https://www.onetonline.org/link/summary/29-1129.01"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "official wage statistics",
-                  "2025 BLS OEWS wage data displayed by O*NET OnLine"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official wage statistics",
                 "id": "r2-pay-1",
@@ -32436,10 +32476,10 @@
                 "url": "https://www.onetonline.org/link/localwages/29-1129.01"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "official occupation profile",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "r2-pay-2",
@@ -32452,10 +32492,10 @@
                 "url": "https://www.onetonline.org/link/summary/29-1129.01"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "official occupation details",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official occupation details",
                 "id": "r2-pay-3",
@@ -32468,10 +32508,10 @@
                 "url": "https://www.onetonline.org/link/details/29-1129.01"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "official statistical scope note",
-                  "2025 年；2026-05-15 发布"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official statistical scope note",
                 "id": "census",
@@ -32484,10 +32524,10 @@
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "official occupation details",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official occupation details",
                 "id": "msresearch",
@@ -32500,10 +32540,10 @@
                 "url": "https://www.onetonline.org/link/details/29-1129.01"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "official wage statistics",
-                  "2025 BLS OEWS wage data displayed by O*NET OnLine"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official wage statistics",
                 "id": "onet-wages",
@@ -32516,10 +32556,10 @@
                 "url": "https://www.onetonline.org/link/localwages/29-1129.01"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "professional association",
-                  "现行指引；访问 2026-08-30"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "professional association",
                 "id": "archivists",
@@ -32532,164 +32572,212 @@
                 "url": "https://arttherapy.org/becoming-art-therapist/"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "2026-10-03 查阅",
-                  "ATCB 不签发或监管州执照，具体合法权限由州主管机构决定。"
+                  "终端403，web原文相关权限或认证条款可读",
+                  "非逐州许可法或完整费用/考试清单"
                 ],
                 "evidence_type": "professional qualification guidance",
                 "id": "atcb-license",
                 "limitation": "ATCB 不签发或监管州执照，具体合法权限由州主管机构决定。",
                 "market": "美国",
                 "name": "ATCB：州执照与机构权限边界",
-                "period": "2026-10-03 查阅",
+                "period": "本轮当前官方页面，访问2026-10-09",
                 "publisher": "Art Therapy Credentials Board",
                 "scope": "contextual",
                 "url": "https://atcb.org/state-licensure-lp/"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "2026-10-03 查阅",
-                  "ATR 加 ATCBE 及持续维护要求；不等于州执照。"
+                  "终端403，web原文相关权限或认证条款可读",
+                  "非逐州许可法或完整费用/考试清单"
                 ],
                 "evidence_type": "professional qualification guidance",
                 "id": "atcb-board",
                 "limitation": "ATR 加 ATCBE 及持续维护要求；不等于州执照。",
                 "market": "美国",
                 "name": "ATCB：ATR-BC 委员会认证",
-                "period": "2026-10-03 查阅",
+                "period": "本轮当前官方页面，访问2026-10-09",
                 "publisher": "Art Therapy Credentials Board",
                 "scope": "contextual",
                 "url": "https://atcb.org/board-certification-lp/"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "2026 更新",
-                  "仅比较职业任务和媒介，不能转授资格。"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "music",
-                "limitation": "仅比较职业任务和媒介，不能转授资格。",
+                "limitation": "本轮实际读职业定义支持职责比较，未核完整目标教育、许可或招聘；编辑转岗距离不证明互认或成效。",
                 "market": "美国",
                 "name": "O*NET：音乐治疗师 29-1129.02",
                 "period": "2026 更新",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/29-1129.02"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "2026 更新",
-                  "功能与生活活动任务比较，不证明跨法域资格。"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "occupational",
-                "limitation": "功能与生活活动任务比较，不证明跨法域资格。",
+                "limitation": "本轮实际读职业定义支持职责比较，未核完整目标教育、许可或招聘；编辑转岗距离不证明互认或成效。",
                 "market": "美国",
                 "name": "O*NET：职业治疗师 29-1122.00",
                 "period": "2026 更新",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/29-1122.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "2026 更新",
-                  "视觉与定向行走任务比较，不代表艺术治疗禁用某种活动。"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "vision",
-                "limitation": "视觉与定向行走任务比较，不代表艺术治疗禁用某种活动。",
+                "limitation": "本轮实际读职业定义支持职责比较，未核完整目标教育、许可或招聘；编辑转岗距离不证明互认或成效。",
                 "market": "美国",
                 "name": "O*NET：视觉康复职业 29-1122.01",
                 "period": "2026 更新",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/29-1122.01"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "2026 更新",
-                  "残障适应、就业与生活目标任务比较。"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "rehabilitation",
-                "limitation": "残障适应、就业与生活目标任务比较。",
+                "limitation": "本轮实际读职业定义支持职责比较，未核完整目标教育、许可或招聘；编辑转岗距离不证明互认或成效。",
                 "market": "美国",
                 "name": "O*NET：康复咨询师 21-1015.00",
                 "period": "2026 更新",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/21-1015.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "2026 更新",
-                  "美国心理评估与治疗任务，不授予中国大陆诊断权限。"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "psychologists",
-                "limitation": "美国心理评估与治疗任务，不授予中国大陆诊断权限。",
+                "limitation": "本轮实际读职业定义支持职责比较，未核完整目标教育、许可或招聘；编辑转岗距离不证明互认或成效。",
                 "market": "美国",
                 "name": "O*NET：临床与咨询心理学家 19-3033.00",
                 "period": "2026 更新",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/19-3033.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "2026 更新",
-                  "关系系统职业任务比较，资格仍按目标法域核。"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "family",
-                "limitation": "关系系统职业任务比较，资格仍按目标法域核。",
+                "limitation": "本轮实际读职业定义支持职责比较，未核完整目标教育、许可或招聘；编辑转岗距离不证明互认或成效。",
                 "market": "美国",
                 "name": "O*NET：婚姻与家庭治疗师 21-1013.00",
                 "period": "2026 更新",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/21-1013.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "2026 更新",
-                  "心理服务任务比较，不能将艺术治疗经验直接等同准入。"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "mental",
-                "limitation": "心理服务任务比较，不能将艺术治疗经验直接等同准入。",
+                "limitation": "本轮实际读职业定义支持职责比较，未核完整目标教育、许可或招聘；编辑转岗距离不证明互认或成效。",
                 "market": "美国",
                 "name": "O*NET：精神健康咨询师 21-1014.00",
                 "period": "2026 更新",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/21-1014.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "第 3—4 条工资总额及组成",
-                  "个别具体统计处理另见 2025 工资发布附注"
+                  "本窗口本轮原文读取；NBS为本窗口同日同版对应公告复用",
+                  "章节与未读范围见本轮作者报告"
                 ],
                 "evidence_type": "official statistical definition",
                 "id": "nbs-wage-total",
-                "limitation": "定义与组成，不是艺术治疗师职业工资或个人到手收入。",
+                "limitation": "实际读工资总额第3—4条定义及六组成，平均工资按2025公告总额÷平均人数，非本职业工资或到手收入。",
                 "market": "中国大陆",
                 "name": "国家统计局《关于工资总额组成的规定》",
                 "period": "1990-01-01 发布；当前页面标有效",
                 "publisher": "国家统计局",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本窗口同日同版原文复用",
+                  "不按公办或机构名直接归类"
+                ],
+                "evidence_type": "官方行业分类标准PDF",
+                "id": "gb-industry",
+                "limitation": "复用本窗口同日实际读PDF85/86页：文化艺术培训8393属教育，文化创作表演另列；不是职业大典或艺术治疗精确分类。",
+                "market": "中国大陆",
+                "name": "GB/T4754—2017行业分类教育与文化",
+                "period": "2017版，访问2026-10-09",
+                "publisher": "国家统计局",
+                "scope": "contextual",
+                "url": "https://www.stats.gov.cn/sj/tjbz/gjtjbz/202302/P020230213402699744172.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "对应原文同日复用",
+                  "非职业精确估计"
+                ],
+                "evidence_type": "国际组织研究介绍与扩展摘要",
+                "id": "genai-ilo",
+                "limitation": "仅复用本窗口同日官方介绍及扩展摘要，未读全文或艺术治疗映射；跨职业暴露方法非采用、临床效果或就业因果。",
+                "market": "全球",
+                "name": "ILO生成式AI职业暴露研究官方介绍",
+                "period": "2025-05-20，访问2026-10-09",
+                "publisher": "International Labour Organization",
+                "scope": "contextual",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "对应原文同日复用",
+                  "非完整框架或职业因果"
+                ],
+                "evidence_type": "官方自愿风险参考简介与摘要",
+                "id": "genai-nist",
+                "limitation": "仅复用本窗口同日简介摘要，未读完整PDF；跨行业组织风险参考非本职业临床成效、个人权限或州法律。",
+                "market": "美国",
+                "name": "NIST生成式AI风险Profile官方简介",
+                "period": "2024-07-26发布，网页2026-04-08更新，访问2026-10-09",
+                "publisher": "National Institute of Standards and Technology",
+                "scope": "contextual",
+                "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
               }
             ]
           },
@@ -34904,8 +34992,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.privacy",
-              "career.source.cnclass"
+              "aata-ethics",
+              "cn-mental-health-law"
             ],
             "id": "scope-referral",
             "mitigation": {
@@ -34936,8 +35024,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet",
-              "career.source.cnclass"
+              "onet-summary",
+              "cn-mental-health-law"
             ],
             "id": "crisis-escalation",
             "mitigation": {
@@ -34968,8 +35056,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.privacy",
-              "career.source.onet"
+              "aata-ethics",
+              "onet-summary"
             ],
             "id": "record-material-privacy",
             "mitigation": {
@@ -35000,8 +35088,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet",
-              "career.source.privacy"
+              "aata-ethics",
+              "onet-summary"
             ],
             "id": "material-harm",
             "mitigation": {
@@ -35032,8 +35120,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.privacy",
-              "career.source.onet"
+              "aata-ethics",
+              "onet-summary"
             ],
             "id": "record-custody",
             "mitigation": {
@@ -35064,8 +35152,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.privacy",
-              "career.source.facilities"
+              "aata-ethics",
+              "atcb-atr"
             ],
             "id": "supervision-referral",
             "mitigation": {
@@ -35560,7 +35648,7 @@
             "ai_heading": "AI 会影响艺术治疗师的工资吗？",
             "driver_heading": "哪些行业与岗位可能涉及这个职业？",
             "official_heading": "中国大陆薪资参考（行业代理口径，非本职业工资）",
-            "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
+            "scenario_caption": "学历背景、编辑探索方向与核对建议（不是全国招聘分布或薪资统计）",
             "scenario_heading": "中国大陆岗位核对方向（编辑建议）",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "学历背景",
@@ -36577,7 +36665,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 最新就业预测与 O*NET 旧资料期区别",
+            "label": "当前BLS就业预测与父职业代理边界",
             "secondary_value": null,
             "value": {
               "$item": "art-therapists.profile.onet-structured-fields-block.4",
@@ -37932,7 +38020,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 29-1129.01 · 受督导实践 · 记录与转介责任",
@@ -37983,7 +38071,7 @@
       "text": "艺术治疗师"
     }
   },
-  "source_content_sha256": "7d07e3a6549f21ce00603cc0a76408b6c3d2f2c5c6bdd4521a990d70a9108785",
+  "source_content_sha256": "4e175d5d7a1d0c8b5737b6573bc01a9e4356a673d01d2b6eec6050ac1b212283",
   "subject": {
     "canonical_slug": "art-therapists",
     "name": "艺术治疗师",

@@ -25838,7 +25838,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务与工作情境为职业级描述，说明电子邮件与面对面与电话沟通占比极高"
+              "O*NET13-1131.00任务及情境：100%邮件、100%面对面、95%电话每天；回答频率并非任务时间占比或AI采用程度。"
             ]
           },
           "id": "fundraisers.ai-impact.ai-impact-table.43",
@@ -27485,12 +27485,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜募资专员（行业与招聘中常称筹款专员、发展专员、捐赠人关系专员、公益筹款、慈善募捐、基金会项目与筹款、校友与患者关系、企业社会责任与公益项目专员）"
+              "名称对照｜固定职业为募资专员；筹款、发展、捐赠人关系、校友患者关系及企业公益项目等仅为编辑检索线索，未核中国招聘样本，不认定全部是本职同义名。"
             ]
           },
           "id": "fundraisers.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -27941,12 +27941,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "范围边界｜美国BLS13-1131全国OEWS2025工资及2025—2035EP，工资排自雇、EP含自雇0.5%；非中国或个人承诺。OOH已有本职业部分行业工资，当前表按明确行业取值，不拿行业全职业均值代填。"
+              "全国May2025 OEWS13-1131雇员111040、均年77200/时37.12、中位72550/34.88，工资排自雇；EP140900为另一项目且含自雇0.5%。OOH本职主要行业工资已核，与Profiles最高中位行业名单分开，不代中国或个人收入。"
             ]
           },
           "id": "fundraisers.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "onet"
+            "oews-profile-2025",
+            "ep-current",
+            "bls"
           ],
           "type": "prose"
         },
@@ -29334,12 +29336,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "验证建议：先用一次模拟或真实的募资任务检验人群分层与信息设计与承诺与限制记录，并了解目标组织对经历与合规与数据能力的要求，再决定是否长期投入。"
+              "编辑探索｜先用已有虚构G/V2纸面题观察人群分层、表达依据、承诺与限制记录；再核目标组织实际条件，不由模拟表现推胜任或长期适配。"
             ]
           },
           "id": "fundraisers.fit.personality-fit-block.58",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -29390,11 +29392,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于了解该职业通常需要的准备与培训层级。"
+              "此为课程目录；教育问卷与Zone4准备层级取O*NET本职概览详情，目录不证明统一学历、年数或许可。"
             ]
           },
           "id": "fundraisers.fit.personality-fit-block.62",
           "source_refs": [
+            "facilities",
             "onet"
           ],
           "type": "prose"
@@ -30684,11 +30687,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于了解该职业通常需要的准备与培训层级（O*NET 训练资料口径）。"
+              "课程目录用于检索培训项目；O*NET本职Zone4及新聘教育问卷另核，不能从目录推出统一准备层级、个人年数或募捐资格。"
             ]
           },
           "id": "fundraisers.path.career-path-block.27",
           "source_refs": [
+            "facilities",
             "onet"
           ],
           "type": "prose"
@@ -32469,12 +32473,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "证据不足：中国本职精确工资就业未取得，行业值不代专项，也不推全国不存在。本轮核O*NET本职概览详情、BLS本职OOH与当前EP、OEWS FAQ、O*NET CA页内全国工资、NBS行业方法与两法条；美国列示行业工资已核。"
+              "2026-10-11核O*NET13-1131.00全28任务、情境教育兴趣软件；当前本职OOH主要行业工资与EP2025—2035；正常May2025 Profiles全国。NBS2025、OEWS方法、NIST及PIPL同窗已读复用；慈善法2023修正江阴链接访问失败，改读泉州市民政局同一法律文本核22—30条，既有法律登记不另造权威。"
             ]
           },
           "id": "fundraisers.sources.source-card.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls",
+            "ep-current",
+            "oews-profile-2025",
+            "nbs",
+            "pipl-law",
+            "charity-law"
           ],
           "type": "prose"
         },
@@ -32497,12 +32507,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "实际日期｜2026-10-02重访O*NET概览详情及CA页全国工资、BLS本职OOH/EP/OEWS方法、NBS当前发布、PIPL与2023修正慈善法政府转载。目录和旧行业页本轮未重访保旧日期，不冒全部来源重访。"
+              "当前访问2026-10-11；O*NET2026、工资May2025、预测2025—2035、NBS2025。目录与共享历史日期未刷新；慈善法本轮用泉州市民政局同一2023修正文本交叉核。"
             ]
           },
           "id": "fundraisers.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "onet",
+            "charity-law"
           ],
           "type": "prose"
         },
@@ -32511,12 +32522,12 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆本职职业工资就业、城市用工收入、具体招聘条件与分类对应未取得；本职AI量化采用效度及个案法域程序未核。美国国家工资与OOH列示行业中位已核，CA州及细分地区只作已见背景不代全国。缺口不豁免完整题面答案、作品和作者审阅。"
+              "中国本职业及城市工资就业、招聘条件与精确分类对应、AI实际采用因果及测评效度、具体组织活动涉税与州登记程序仍未核。美国全国与OOH列示主要行业工资已核；保护共享历史来源冲突列报告，不签全页验收。"
             ]
           },
           "id": "fundraisers.sources.source-card.4",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         }
@@ -33050,6 +33061,22 @@
                 "publisher": "全国人民代表大会常务委员会；江阴市政府转载",
                 "scope": "charity law",
                 "url": "https://www.jiangyin.gov.cn/doc/2023/12/29/1345017.shtml"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "全国雇员111040、年中位72550美元",
+                  "行业最高中位与OOH主要行业表不同，不能混用"
+                ],
+                "evidence_type": "official primary source",
+                "id": "oews-profile-2025",
+                "limitation": "非EP就业或个人收入",
+                "market": "美国",
+                "name": "BLS May2025募资专员工资Profiles",
+                "period": "May2025",
+                "publisher": "BLS",
+                "scope": "SOC13-1131全国雇员工资",
+                "url": "https://data.bls.gov/oesprofile/?year=2025&major_group=130000&occupation=131131&measure=13&areas=INDUSTRY,STATE,MSA"
               }
             ]
           },
@@ -34053,7 +34080,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "初稿内容被当成已确认事实"
+            "风险": "未经核实的信息进入募资材料"
           },
           {
             "为什么重要": {
@@ -34068,7 +34095,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "本职业捐赠人名单与捐赠数据被不当外发"
+            "风险": "捐赠限制对价与涉税表述错误"
           },
           {
             "为什么重要": {
@@ -34083,7 +34110,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "工具版本与输出不可追溯"
+            "风险": "捐赠资料越权外发"
           },
           {
             "为什么重要": {
@@ -34098,7 +34125,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "金额、期间与捐赠限制记录错误"
+            "风险": "金额期间与记录失真"
           },
           {
             "为什么重要": {
@@ -34113,7 +34140,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "复核缺失导致责任不清"
+            "风险": "复核与对外承诺责任不明"
           }
         ],
         "task_rows": [
@@ -34131,13 +34158,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "fundraisers.ai-impact.ai-impact-table.96",
+              "$item": "fundraisers.ai-impact.ai-impact-table.97",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "fundraisers.ai-impact.ai-impact-table.97",
+              "$item": "fundraisers.ai-impact.ai-impact-table.96",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34157,13 +34184,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "fundraisers.ai-impact.ai-impact-table.100",
+              "$item": "fundraisers.ai-impact.ai-impact-table.101",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "fundraisers.ai-impact.ai-impact-table.101",
+              "$item": "fundraisers.ai-impact.ai-impact-table.100",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34183,13 +34210,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "fundraisers.ai-impact.ai-impact-table.104",
+              "$item": "fundraisers.ai-impact.ai-impact-table.105",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "fundraisers.ai-impact.ai-impact-table.105",
+              "$item": "fundraisers.ai-impact.ai-impact-table.104",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34209,13 +34236,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "fundraisers.ai-impact.ai-impact-table.108",
+              "$item": "fundraisers.ai-impact.ai-impact-table.109",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "fundraisers.ai-impact.ai-impact-table.109",
+              "$item": "fundraisers.ai-impact.ai-impact-table.108",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34235,13 +34262,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "fundraisers.ai-impact.ai-impact-table.112",
+              "$item": "fundraisers.ai-impact.ai-impact-table.113",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "fundraisers.ai-impact.ai-impact-table.113",
+              "$item": "fundraisers.ai-impact.ai-impact-table.112",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34261,13 +34288,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "fundraisers.ai-impact.ai-impact-table.116",
+              "$item": "fundraisers.ai-impact.ai-impact-table.117",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "fundraisers.ai-impact.ai-impact-table.117",
+              "$item": "fundraisers.ai-impact.ai-impact-table.116",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -34287,13 +34314,13 @@
               "type": "prose"
             },
             "工作方向": {
-              "$item": "fundraisers.ai-impact.ai-impact-table.120",
+              "$item": "fundraisers.ai-impact.ai-impact-table.121",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
             "当前变化": {
-              "$item": "fundraisers.ai-impact.ai-impact-table.121",
+              "$item": "fundraisers.ai-impact.ai-impact-table.120",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
@@ -35962,7 +35989,6 @@
             }
           },
           {
-            "fact_ref": "us-wage-q25-2025",
             "指标": "薪资 · 25 分位",
             "数值": {
               "$item": "fundraisers.us-salary.career-snapshot-secondary-locale.13",
@@ -35994,7 +36020,6 @@
             }
           },
           {
-            "fact_ref": "us-wage-q75-2025",
             "指标": "薪资 · 75 分位",
             "数值": {
               "$item": "fundraisers.us-salary.career-snapshot-secondary-locale.15",
@@ -38191,7 +38216,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "募资专员 · 任务、交付与责任边界",
@@ -38242,7 +38267,7 @@
       "text": "募资专员"
     }
   },
-  "source_content_sha256": "4c63219dfba136b4e28190b7c658a18a531bf45ce003d3e0cf918b9f15498cae",
+  "source_content_sha256": "eccc1aaf80004e81ea2f12692e1a535f703cb5d4506d0f22f4f91d0d585ba8b2",
   "subject": {
     "canonical_slug": "fundraisers",
     "name": "募资专员",

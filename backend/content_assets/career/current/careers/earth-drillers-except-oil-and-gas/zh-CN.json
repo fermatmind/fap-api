@@ -35,6 +35,27 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:r5-china-jiaojiang-featured-daily-2026": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-employment": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-industry-amusement": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-industry-education": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-median": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-openings": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -11902,40 +11923,16 @@
         "status": "mapped"
       },
       "entry_decisions.credential-boundary.paragraphs.02": {
-        "ref": {
-          "id": "actors.path.credential-boundary.1",
-          "path": [
-            "data",
-            "paragraphs",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.credential-boundary.paragraphs.03": {
-        "ref": {
-          "id": "actors.path.credential-boundary.1",
-          "path": [
-            "data",
-            "paragraphs",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.credential-boundary.paragraphs.04": {
-        "ref": {
-          "id": "actors.path.credential-boundary.1",
-          "path": [
-            "data",
-            "paragraphs",
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.credential-boundary.title": {
         "ref": {
@@ -22767,7 +22764,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "环境与节奏：以野外与施工现场为主并与班组高频沟通；每天面对面讨论 75%、持续接触他人 39%、决策自由度「很大」66%、精确或准确「极其重要」16%＋「非常重要」50%、持续站立或几乎连续 52%、每天暴露于危险设备 71%、每天穿戴常见防护或安全装备 84%、每天噪音 65%、极热极冷每天 28%＋每周以上 39%、户外各种天气每天 79%、全身振动每天 42%＋每周以上 43%、重复任务「极其重要」18%、错误后果「极其严重」52%、竞争「不竞争」33%、每天作出决定 44%、时间压力每天 20%。"
+              "美国O*NET反馈：面对面每日75%/每周非每日18%，持续接触39%/大部分33%，电话每日35%/每周非每日39%/从不22%；准确极重要16%/很重要50%/重要25%，站立持续52%/>一半23%，危险设备每日71%/每周非每日17%，普通PPE每日84%，噪声每日65%/每周非每日15%，高低温每日28%/每周非每日39%，全天候户外每日79%，全身振动每日42%/每周非每日43%，错误极严重52%/很严重15%/严重15%，每日决策44%、每日时间压力20%，不竞争33%。周工时>40h53%/40h47%，不规律61%/规律36%，不证明中国每人夜班/连续值班。情境是反馈非伤害发生率或个人风险。"
             ]
           },
           "id": "actors.profile.work-context-block.8",
@@ -23243,12 +23240,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "常见错误集中在四类：一是任务与孔位与管线与埋设物没核清就进场就位，导致误钻地下管线与孔位偏差与返工；二是场地与支腿与吊装与临边与用电条件没确认就钻进，导致设备倾覆与人员伤害与事故；三是钻具与钻头选配与钻进参数与孔内事故处理不当，导致孔斜与埋钻与卡钻与落井工具与工期延误；四是取样编录与成井与洗井与记录与安全与环保处置缺失，导致样品失真与井体不可用与无法追溯。核对办法是每项都有一个可回看的依据：孔位与孔深与孔径与钻具选配与场地与安全要点清单、就位与调平与支腿稳固与警戒与防护记录、孔深与孔位与垂直度与地层与取样编录记录、成井与洗井与抽水试验与异常处理与交接记录，而不是靠记忆或口头默契。"
+              "编辑风险核对：孔位/管线、设备就位、钻具参数、取样成井与记录错误可能带来返工、人身伤害或结果失真，未取得发生率，不能称四类“常见错误”排序。按实际设计/场地与规程核证，不能靠口头记忆。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "r5-editor",
+            "r5-aq",
+            "r5-aq-status"
           ],
           "type": "prose"
         },
@@ -23313,12 +23313,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按标准与制度执行：钻探与坑探工程施工单位应按《金属与非金属矿产资源地质勘探安全生产监督管理暂行规定》（国家安全生产监督管理总局令第 35 号公布，据第 78 号修正）取得安全生产许可证并向工作区域所在地县级安全生产监督管理部门书面报告，建立健全安全生产责任与岗位操作规程与教育培训与重大危险源检测监控与隐患排查治理与事故信息报告与应急预案演练与防护与野外救生用品配备等制度，特种作业人员须取得特种作业操作证后上岗，坑探工程作业人员首次上岗前接受不少于 72 小时安全生产教育并于此后每年不少于 20 小时再培训，地质勘探工程的设计与施工与安全管理应符合《地质勘探安全规程》（AQ 2004），坑探工程设计方案应设安全专篇并经审查同意；作业还应符合《中华人民共和国安全生产法》与《民用爆炸物品安全管理条例》（如涉爆破）等要求。具体适用以所在法域法规与标准与本项目要求为准，本页按法规与标准名称与已核要点引用而未逐条核对条文编号。"
+              "35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。 AQ2004-2005平台现行/强制；1范围为中国地质勘探（石油天然气地质勘探除外），明确不适用用该技术从事其他行业，不把美国代码范围全映成标准范围。实读4.5地质勘探单位对野外从业人员每两年至少一次野外生存、自救互救技能训练；项目组每年野外工作出队前或变换地区前安全教育、4.7防护用品、4.8体检；10.1/10.2机台地基与钻架安装搬运，10.4.1开孔前设备防护检查、10.4.2禁止转动时擦洗拆卸维修与跨越传动带、10.4.3高压胶管修配停机；10.5.2孔内事故由机班长或熟练技工操作/专人指挥、其他撤离，10.7.8维修电器断电挂牌或看护。具体设计/设备/引用标准新版本另核，不以本页当操作手册。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.04.answer",
           "source_refs": [
-            "onet"
+            "r5-geology-rule",
+            "r5-qualification-cancel",
+            "r5-aq",
+            "r5-aq-status"
           ],
           "type": "prose"
         },
@@ -23355,12 +23358,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "孔内异常或设备隐患或安全或环境问题或超出授权的指令出现时，是否按「先保障人身与作业安全并停止受影响作业、按制度记录与上报、必要时请班组长与技术负责人与主管部门介入」的顺序处理？"
+              "中国安全生产法44/45条单位告知危险并供合规PPE，54条可拒违章指挥强令冒险；55条直接人身危险紧急时可停或必要应急后撤离，不须登记/报告批准在先；57/58条守规程/正确PPE/培训，59条隐患立即报告现场安全管理或单位负责人。普通质量问题中止/恢复与专业签字岗位须核真实项目制度；本轮未取得，不能授予班组长/地质/维修/检验统一最终权。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.06.question",
           "source_refs": [
-            "onet"
+            "r5-safety-law"
           ],
           "type": "prose"
         },
@@ -23439,12 +23442,14 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "责任边界：本职业承担按任务与岩土条件选配钻具与控制钻进并取心取样与下管成井与记录与安全与环保处置的执行责任；不核对管线与埋设物与边坡与场地承载就进场就位、不调平与不稳固支腿与不设警戒就钻进、不带护具或不停机就接触旋转部件与高压管路、不按岩土条件选配钻头与调整参数、不按规程处理孔内事故与落井工具、不按要求处置泥浆与废油与废水与弃土、不隐瞒或延迟上报，异常事项立即上报。"
+              "按适用设计与规程执行并报告；中国单位与主要负责人承担法定安全责任，不以本页分工代替实际验收/复工权限。中国安全生产法44/45条单位告知危险并供合规PPE，54条可拒违章指挥强令冒险；55条直接人身危险紧急时可停或必要应急后撤离，不须登记/报告批准在先；57/58条守规程/正确PPE/培训，59条隐患立即报告现场安全管理或单位负责人。普通质量问题中止/恢复与专业签字岗位须核真实项目制度；本轮未取得，不能授予班组长/地质/维修/检验统一最终权。"
             ]
           },
           "id": "actors.display.responsibilities_block.06",
           "source_refs": [
-            "onet"
+            "r5-safety-law",
+            "r5-geology-rule",
+            "r5-qualification-cancel"
           ],
           "type": "prose"
         },
@@ -23467,7 +23472,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "以野外与施工现场为主并与班组高频沟通：每天面对面讨论 75%（另 18% 每周以上）、持续接触他人 39%（另 33% 大部分时间）、每天电话 35%（另 39% 每周以上、22% 从不）、团队协作「极其重要」34%（另 12% 非常重要、27% 重要）、决策自由度「很大」66%（另 21% 一些）、精确或准确「极其重要」16%＋「非常重要」50%＋「重要」25%、持续站立或几乎连续 52%（另 23% 超过一半）、每天暴露于危险设备 71%（另 17% 每周以上）、每天穿戴常见防护或安全装备 84%、每天噪音 65%（另 15% 每周以上）、极热极冷每天 28%＋每周以上 39%、户外各种天气每天 79%、全身振动每天 42%＋每周以上 43%、重复相同任务「极其重要」18%、错误后果「极其严重」52%（另 15% 非常严重、15% 严重）、竞争「不竞争」33%（另 30% 中等、15% 轻度）、每天作出决定 44%、时间压力每天 20%。"
+              "美国O*NET反馈：面对面每日75%/每周非每日18%，持续接触39%/大部分33%，电话每日35%/每周非每日39%/从不22%；准确极重要16%/很重要50%/重要25%，站立持续52%/>一半23%，危险设备每日71%/每周非每日17%，普通PPE每日84%，噪声每日65%/每周非每日15%，高低温每日28%/每周非每日39%，全天候户外每日79%，全身振动每日42%/每周非每日43%，错误极严重52%/很严重15%/严重15%，每日决策44%、每日时间压力20%，不竞争33%。周工时>40h53%/40h47%，不规律61%/规律36%，不证明中国每人夜班/连续值班。情境是反馈非伤害发生率或个人风险。"
             ]
           },
           "id": "actors.display.work_context_block.summary",
@@ -23523,7 +23528,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "作业受任务与工期与天气影响，常见连续值班与野外驻场；节奏由孔深与岩土条件与取样与成井节点决定。"
+              "美国不规律61%/规律36%、>40h53%/40h47%，不能外推全部中国连续值班/驻场/夜班；真实岗位另核。"
             ]
           },
           "id": "actors.display.work_context_block.schedule",
@@ -23593,12 +23598,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 47-5023.00：2024 年就业约 18,300 人，2024—2034 年预测为「平均（Average，3% 至 4%）」，预计空缺 1,700；准备层级 Job Zone 1-2（SVP 低于 6.0），兴趣代码 RCI；任务共 29 项。"
+              "美国47-5023精确职业：2025就业19500→2035预计20200，BLS净增约700、精确增长3.6%；O*NET国家趋势取整4%，摘要类别Average3—4%。2025—2035年均1400空缺含增长与替代，非十年合计、非1400年净增或实时招聘。BLS自雇比例为“—”不填0、不推出全为受雇；预测非中国需求、个人录用或AI因果。 美国O*NET新雇教育反馈高中/同等73%、不足高中15%、中等后证书12%，Job Zone1—2/SVP<6为群组准备描述、训练几天至1年，不是本职业法律门槛或人人数周上手。BLS2025精确行典型高中、相关工作经验少于5年、长期在岗训练；两个来源指标不同，不能据群组标签称零经验必录或普遍短训。 兴趣R100/C45/I44/E12/S4/A2；29任务14Core/14Supp/1New未给重要度。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.onet",
           "source_refs": [
-            "onet"
+            "onet",
+            "r5-projections",
+            "r5-trends"
           ],
           "type": "prose"
         },
@@ -23621,12 +23628,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "主要行业为采矿与采石与油气支持与建筑与地质勘探与水利与岩土工程等；常见岗位为钻机操作员与取样工与成井工，多为按小时计酬并含野外与出勤补贴的现场作业岗位。"
+              "职业可在取水/矿产勘探取样/基础钻孔等场景，但未取得本职业补贴/支付/岗位样本；不据任务描述断言普遍计时加补贴。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
           "source_refs": [
-            "onet"
+            "onet",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -23635,12 +23643,16 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆相关要求按法规区分：钻探与坑探工程施工的地质勘探单位应按《金属与非金属矿产资源地质勘探安全生产监督管理暂行规定》（国家安全生产监督管理总局令第 35 号公布，据第 78 号修正）取得安全生产许可证并向工作区域所在地县级安全生产监督管理部门书面报告，建立健全安全生产责任与操作规程与教育培训与隐患排查与应急等制度，特种作业人员须持特种作业操作证上岗，坑探作业人员首次上岗前接受不少于 72 小时安全生产教育并于此后每年不少于 20 小时再培训，地质勘探工程设计与施工与安全管理应符合《地质勘探安全规程》（AQ 2004），坑探工程设计方案应设安全专篇并经审查同意；作业还应符合《中华人民共和国安全生产法》要求。本条按法规与标准名称与已核要点引用，未逐条核对条文编号。"
+              "35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。 AQ2004-2005平台现行/强制；1范围为中国地质勘探（石油天然气地质勘探除外），明确不适用用该技术从事其他行业，不把美国代码范围全映成标准范围。实读4.5地质勘探单位对野外从业人员每两年至少一次野外生存、自救互救技能训练；项目组每年野外工作出队前或变换地区前安全教育、4.7防护用品、4.8体检；10.1/10.2机台地基与钻架安装搬运，10.4.1开孔前设备防护检查、10.4.2禁止转动时擦洗拆卸维修与跨越传动带、10.4.3高压胶管修配停机；10.5.2孔内事故由机班长或熟练技工操作/专人指挥、其他撤离，10.7.8维修电器断电挂牌或看护。具体设计/设备/引用标准新版本另核，不以本页当操作手册。 中国安全生产法44/45条单位告知危险并供合规PPE，54条可拒违章指挥强令冒险；55条直接人身危险紧急时可停或必要应急后撤离，不须登记/报告批准在先；57/58条守规程/正确PPE/培训，59条隐患立即报告现场安全管理或单位负责人。普通质量问题中止/恢复与专业签字岗位须核真实项目制度；本轮未取得，不能授予班组长/地质/维修/检验统一最终权。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
           "source_refs": [
-            "onet"
+            "r5-geology-rule",
+            "r5-qualification-cancel",
+            "r5-aq",
+            "r5-aq-status",
+            "r5-safety-law"
           ],
           "type": "prose"
         },
@@ -24136,13 +24148,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以下为基于职业任务与工作情境的有限编辑推演，并非该职业的实际部署证据：AI 与量测与地质编录与钻进参数辅助工具在土方钻探里主要辅助任务书与地质资料与孔位与孔深与孔径识读、钻具与钻头选配与钻进参数与孔深与垂直度计算、岩心与样品编录与地层数据整理、成井与洗井与抽水试验与设备维护记录归档、以及现场进度与取样与安全与环保记录整理。"
+              "编辑候选：测试任务/孔位资料提取、参数表核对、取样与维护记录整理；需真实数据与已批准方案、人工现场核验。未核部署/提效/减漏/替代；量测/传统计算/机械控制不当然是GenAI。O*NET软件4类GPS、Office、Excel、Word；Hot3项2025美国全部唯一职业招聘分母均未给比例，不填0。ILO暴露非采用/裁员，NIST治理非钻探合规许可。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor",
+            "r5-hot"
           ],
           "type": "prose"
         },
@@ -24166,13 +24181,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务书与地质资料与孔位与孔深与钻孔方案整理可提高效率，但钻孔方案与场地与安全与环保措施仍须由班组长与技术负责人与地质人员确认。"
+              "编辑候选：测试任务/孔位资料提取、参数表核对、取样与维护记录整理；需真实数据与已批准方案、人工现场核验。未核部署/提效/减漏/替代；量测/传统计算/机械控制不当然是GenAI。O*NET软件4类GPS、Office、Excel、Word；Hot3项2025美国全部唯一职业招聘分母均未给比例，不填0。ILO暴露非采用/裁员，NIST治理非钻探合规许可。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor",
+            "r5-hot"
           ],
           "type": "prose"
         },
@@ -24181,7 +24199,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "钻具与钻头选配与钻进参数与孔深与垂直度计算可辅助提示，但岩土与地层判断与参数调整仍须按现场条件由操作人员确认。"
+              "编辑试验候选：钻具选配、参数、孔深与垂直度信息整理是否可获AI辅助须经安全授权和现场人工核验；本轮未取得部署或效果样本。岩土、地层判断与参数调整依实际条件及岗位权限，不把O*NET任务或传统软件技能当GenAI能力证据。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.4",
@@ -24196,13 +24214,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "岩心与样品编录与地层与成井与设备记录归档可减少漏记，但取样与成井与洗井与抽水试验与孔内异常处置不能交给系统。"
+              "编辑候选：测试任务/孔位资料提取、参数表核对、取样与维护记录整理；需真实数据与已批准方案、人工现场核验。未核部署/提效/减漏/替代；量测/传统计算/机械控制不当然是GenAI。O*NET软件4类GPS、Office、Excel、Word；Hot3项2025美国全部唯一职业招聘分母均未给比例，不填0。ILO暴露非采用/裁员，NIST治理非钻探合规许可。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor",
+            "r5-hot"
           ],
           "type": "prose"
         },
@@ -24211,13 +24232,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现场岩土变化与孔内异常与落井工具与卡钻与涌水与设备状态需要现场判断与人际协调，难以完全交给系统。"
+              "编辑判断：现场岩土与设备/孔内状态要实测/处置，未核全自动系统能力，不从任务描述断言技术不可能。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor",
+            "r5-hot"
           ],
           "type": "prose"
         },
@@ -24226,13 +24250,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务书与地质资料与孔位与项目与人员数据属于敏感信息，只能在批准的系统内按最小必要原则处理并留痕。"
+              "地质/孔位/项目资料不当然是个人或法定敏感信息；可识别个人资料按PIPL实际内容核，生物识别/金融账户/行踪等28条敏感信息须另核。商业机密/地质资料权属按合同和适用规则核；上传接收方、用途/训练使用、保存、权限本轮未取得，编辑建议先核后用。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -24241,7 +24265,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "最终的钻进与取样与成井与洗井与抽水试验与记录与异常上报责任，以及孔内异常与设备隐患与安全与环境问题的处置，由操作人员与班组与技术负责人承担并留痕。"
+              "AI输出不能代替岗位安全责任或授权。实际操作、质量确认与异常处置须按项目规程、设计要求和岗位分工落实；具体签字、验收与复工权限未取得，不据职业名称指定。发现隐患应立即向现场安全管理人员或本单位负责人报告；紧急避险不以先获批准或完成记录为条件。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.8",
@@ -24286,13 +24310,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 可辅助任务书与地质资料与孔位与孔深识读、钻具与钻头选配与钻进参数与孔深与垂直度计算、岩心与样品编录与记录归档，但不能替代岩土与地层判断、孔位与孔深与垂直度现场核定、孔内异常与落井工具与卡钻与涌水处置、安全与环保处置以及钻进与成井责任。"
+              "编辑候选：测试任务/孔位资料提取、参数表核对、取样与维护记录整理；需真实数据与已批准方案、人工现场核验。未核部署/提效/减漏/替代；量测/传统计算/机械控制不当然是GenAI。O*NET软件4类GPS、Office、Excel、Word；Hot3项2025美国全部唯一职业招聘分母均未给比例，不填0。ILO暴露非采用/裁员，NIST治理非钻探合规许可。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -24316,13 +24342,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业档案（任务与工作情境）"
+              "ILO任务暴露研究"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.1.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24331,13 +24356,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅适用于美国 47-5023.00 的任务与情境描述，不映射中国岗位或标准与资质制度。"
+              "暴露指标非本职业采用/裁员。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.1.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current"
           ],
           "type": "prose"
         },
@@ -24346,13 +24370,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS OEWS 工资与就业统计"
+              "OEWS工资方法"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24361,13 +24384,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅适用于所列职业与期间，不提供自动化或替代结论。"
+              "受雇直时工资非AI证据。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24376,13 +24398,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 治理与风险管理来源"
+              "NIST风险治理"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24391,13 +24412,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "治理原则供参考：透明、隐私、人工监督与留痕。"
+              "治理方法非钻探许可。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24406,13 +24426,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不提供本职业采用率、替代概率或时间表。"
+              "治理方法非钻探许可。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24421,13 +24440,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业与用工结构来源"
+              "美国职业档案"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24436,13 +24454,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "说明本职业岗位分布在采矿与采石与油气支持与建筑与地质勘探与水利与岩土工程等场景。"
+              "任务/就业非真实企业部署。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24451,13 +24468,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用工结构不等于个人录用或收入保证。"
+              "任务/就业非真实企业部署。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24466,13 +24482,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合（本页说明与练习设计）"
+              "本项编辑说明"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -24481,13 +24496,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅用于整理本页的说明与练习边界。"
+              "编辑不是外部事实证明。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -24496,13 +24510,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合不是外部事实、标准、法规或工资证据。"
+              "编辑不是外部事实证明。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -24556,13 +24569,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先限定在任务书与地质资料与孔位与孔深识读、钻具与钻头选配与钻进参数与孔深与垂直度计算、岩心与样品编录与记录归档等可复核环节。"
+              "编辑候选：测试任务/孔位资料提取、参数表核对、取样与维护记录整理；需真实数据与已批准方案、人工现场核验。未核部署/提效/减漏/替代；量测/传统计算/机械控制不当然是GenAI。O*NET软件4类GPS、Office、Excel、Word；Hot3项2025美国全部唯一职业招聘分母均未给比例，不填0。ILO暴露非采用/裁员，NIST治理非钻探合规许可。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -24661,13 +24676,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只在批准的系统内按最小必要处理，不用于工作以外用途，并按制度留痕并接受监督。"
+              "地质/孔位/项目资料不当然是个人或法定敏感信息；可识别个人资料按PIPL实际内容核，生物识别/金融账户/行踪等28条敏感信息须另核。商业机密/地质资料权属按合同和适用规则核；上传接收方、用途/训练使用、保存、权限本轮未取得，编辑建议先核后用。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.6.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -24691,7 +24706,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用可比孔位的孔斜与孔深合格率、取样成功率、孔内事故与停工时间与异常上报时效做前后对照，并保留人工校核记录。"
+              "编辑验证建议：在安全与项目授权允许的范围内预先约定准确性、记录完整性和耗时等指标，用现场人工校核作基准；比较须核设备、地层、人员和施工方案差异，简单前后对照不能证明AI因果效果。不为测试效果改变安全参数或诱发事故，本轮未核职业采用/提效。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.7.answer",
@@ -24736,13 +24751,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合"
+              "国际组织研究，既有ILO首页不是研究正文。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24766,13 +24781,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "北美行业口径（不适用于本职业）"
+              "OOH职业查询导航，不是演员工会，也不是本职业安全原文。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24781,13 +24795,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用演员工会或影视行业口径，仅登记其不适用。"
+              "OOH职业查询导航，不是演员工会，也不是本职业安全原文。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24796,13 +24809,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "北美行业口径（不适用于本职业）"
+              "OEWS工资导航，不是影视或AI采用统计。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24811,13 +24824,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用该口径，仅登记其不适用。"
+              "OEWS工资导航，不是影视或AI采用统计。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24826,13 +24839,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业发布口径（不适用于本职业）"
+              "O*NET认证目录用于查询，不是本职业法定准入清单。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24841,13 +24853,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用该口径，仅登记其不适用。"
+              "O*NET认证目录用于查询，不是本职业法定准入清单。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24871,13 +24882,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅按 BLS/OEWS 2025 年工资与 O*NET 2024—2034 年预测口径使用。"
+              "美国47-5023 2025年年薪10/25/50/75/90分位44460/49900/60190/72450/83800美元；时薪21.37/23.99/28.94/34.83/40.29。OEWS受雇税前直时工资，排除自雇，含佣金/生产奖金，不含加班溢价；不能一概排除全部野外/夜班/温度补贴，具体工资项按定义核。分位非起薪/年限等级/个人上限。 美国47-5023精确职业：2025就业19500→2035预计20200，BLS净增约700、精确增长3.6%；O*NET国家趋势取整4%，摘要类别Average3—4%。2025—2035年均1400空缺含增长与替代，非十年合计、非1400年净增或实时招聘。BLS自雇比例为“—”不填0、不推出全为受雇；预测非中国需求、个人录用或AI因果。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-wages",
+            "r5-oews-concepts",
+            "r5-projections",
+            "r5-trends"
           ],
           "type": "prose"
         },
@@ -24991,13 +25004,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助任务书与地质资料与孔位与孔深识读与场地与管线资料整理"
+              "编辑候选，未核采用/提效：可辅助任务书与地质资料与孔位与孔深识读与场地与管线资料整理"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.1.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25006,7 +25021,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "孔位与孔深与孔径与场地与管线与就位由班组长与技术负责人与地质人员确认。"
+              "编辑建议：核对任务书、孔位参数、管线资料与现场条件；具体设计确认和施工授权按项目制度执行，不能由AI草稿代替。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.1.human-control",
@@ -25051,13 +25066,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助钻具选配与钻进参数与孔深与垂直度计算"
+              "编辑候选，未核采用/提效：可辅助钻具选配与钻进参数与孔深与垂直度计算"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.2.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25066,7 +25083,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "岩土与地层判断与参数调整与孔深与垂直度由操作人员与班组长确认。"
+              "操作人员须依据岩土条件、设备规程与现场反馈核对参数和孔深；设计变更与超出岗位权限的处置不能仅凭AI建议决定。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.2.human-control",
@@ -25111,13 +25128,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助岩心与样品编录与地层数据整理与送检记录"
+              "编辑候选，未核采用/提效：可辅助岩心与样品编录与地层数据整理与送检记录"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25126,7 +25145,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "取样代表性与编录结论由操作人员与地质人员负责。"
+              "编辑建议：核对样品位置、编号与原始地层记录；样品分析、编录结论及签字权限按项目分工确认，不把钻探操作能力等同地质判断资质。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.human-control",
@@ -25171,13 +25190,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助成井材料与工序与试验数据记录"
+              "编辑候选，未核采用/提效：可辅助成井材料与工序与试验数据记录"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25186,7 +25207,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "成井质量与洗井与抽水试验判定由操作人员与班组长与检验确认。"
+              "成井、洗井与抽水试验须按适用设计和规程实施；具体检验人员、判定标准与验收权限未取得，不能由AI输出或操作者自行确认替代。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.human-control",
@@ -25231,13 +25252,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助设备维护台账与故障与处理记录汇总"
+              "编辑候选，未核采用/提效：可辅助设备维护台账与故障与处理记录汇总"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25246,7 +25269,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "孔内事故判断与处理与设备维修由操作人员与维修人员负责。"
+              "适用AQ2004地质勘探项目中，孔内事故处理由机班长或熟练技工操作、专人指挥，其他人员撤离；设备维修按停机、断电及岗位规程执行。不能由AI建议赋予新人事故处置权限，也不外推为全部水井或施工项目的统一程序。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.human-control",
@@ -25291,13 +25314,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助检查项与处置与记录归档"
+              "编辑候选，未核采用/提效：可辅助检查项与处置与记录归档"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25306,7 +25331,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "安全与环保处置与隐患判定由班组长与安全环保人员确认。"
+              "发现事故隐患或不安全因素应立即报告现场安全管理人员或本单位负责人；直接危及人身安全的紧急情况可停止作业或采取可能的应急措施后撤离。环保处置与恢复标准须核项目适用要求，AI不代替合规判定。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.human-control",
@@ -25351,13 +25376,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助记录汇总与交接清单整理"
+              "编辑候选，未核采用/提效：可辅助记录汇总与交接清单整理"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.7.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25366,7 +25393,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录结论与异常判定与上报由班组长与技术负责人负责。"
+              "编辑建议：逐条核对原始记录、样品编号与交接对象；发现隐患应立即报告现场安全管理人员或本单位负责人，不能等班组长完成文书后再上报。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.7.human-control",
@@ -25396,13 +25423,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "资料与记录与参数计算自动化"
+              "编辑候选，未核采用：资料与记录与参数计算自动化"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.1.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25441,13 +25470,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "检查与记录与提示"
+              "编辑候选，未核采用：检查与记录与提示"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.2.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25486,13 +25517,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务书与地质与项目数据整理"
+              "编辑候选，未核采用：任务书与地质与项目数据整理"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.3.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25621,13 +25654,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "孔内异常与设备隐患与安全与环境问题与越权指令登记后按规定上报。"
+              "中国安全生产法44/45条单位告知危险并供合规PPE，54条可拒违章指挥强令冒险；55条直接人身危险紧急时可停或必要应急后撤离，不须登记/报告批准在先；57/58条守规程/正确PPE/培训，59条隐患立即报告现场安全管理或单位负责人。普通质量问题中止/恢复与专业签字岗位须核真实项目制度；本轮未取得，不能授予班组长/地质/维修/检验统一最终权。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.4.description",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-safety-law"
           ],
           "type": "prose"
         },
@@ -26019,12 +26051,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与中国大陆「土方钻探工（石油天然气除外）」精确对应的全国单职业工资口径。中国大陆官方公开工资资料按行业与单位类型统计（如采矿与建筑与地质勘查），本职业相关岗位分散在采矿与采石与油气支持与建筑与地质勘探与水利与岩土工程等场景，未建立与美国 O*NET 47-5023.00 一一对应的全国职业工资分布。"
+              "中国本职业全国精确工资缺口。NBS2025建筑业非私营92036/私营66275、科学技术服务业非私营182064/私营83560元/年（当前中英文原页表5：2025=83560、2024=82387）分别行业税前均值，施工/地质/岩土岗位可能相关但单位归类须核，不是职业中位/起薪/月薪；5+城镇法人、排除个体自由职业，不一概排除单位计件/兼职/劳务派遣。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "sag-moa"
+            "nbs",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -26033,12 +26066,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不把采矿或建筑或地质勘查行业门类平均工资、招聘平台报价或野外补贴与出勤补贴与计件与承包收入改写成该职业的中位数、分位数、起薪或月薪。"
+              "中国本职业全国精确工资缺口。NBS2025建筑业非私营92036/私营66275、科学技术服务业非私营182064/私营83560元/年（当前中英文原页表5：2025=83560、2024=82387）分别行业税前均值，施工/地质/岩土岗位可能相关但单位归类须核，不是职业中位/起薪/月薪；5+城镇法人、排除个体自由职业，不一概排除单位计件/兼职/劳务派遣。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "sag-moa"
+            "nbs",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -26075,12 +26109,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "计酬口径常见差异：有的按天或按月定额并含野外与出勤与夜班补贴，有的按孔深或按米或按台班或按承包结算，有的含工期奖与安全奖；比较时必须先确认统计量与工时与结算方式，再作比较。"
+              "编辑比较实际合同计时/计件/台班/承包与补贴、工时、结算量/返工、社保税前后；本轮样本未采，不说常见支付比例。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "nbs",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -26131,12 +26166,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本职业相关报酬通常由「基本工资或日薪＋野外与出勤与夜班与温度等补贴（如适用）＋计件或台班或承包结算（如适用）＋工期奖与安全奖（如适用）」构成，不同地区与企业与项目差别较大。"
+              "编辑核真实合同基本/补贴/计时计件与结算；未取得本职业典型支付分布。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "sag-moa"
+            "r5-editor",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26145,12 +26181,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业门类平均工资覆盖的是行业就业人员，不等于本职业的岗位工资，也不覆盖计件制与承包制与劳务派遣与班组承包。"
+              "中国本职业全国精确工资缺口。NBS2025建筑业非私营92036/私营66275、科学技术服务业非私营182064/私营83560元/年（当前中英文原页表5：2025=83560、2024=82387）分别行业税前均值，施工/地质/岩土岗位可能相关但单位归类须核，不是职业中位/起薪/月薪；5+城镇法人、排除个体自由职业，不一概排除单位计件/兼职/劳务派遣。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26159,12 +26195,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "勘探与施工旺季与工期节点紧张时作业强度上升，计件与台班与承包与加班收入会随工程量与工期波动变化。"
+              "编辑核旺季/工期与工时/待遇条款，未核强度或收入必增加。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "sag-moa"
+            "r5-editor",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26173,12 +26210,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆未发布与美国 47-5023.00 一一对应的全国职业工资分布，因此不给出中位数或分位数；行业平均工资只作为可见行业代理，并明确排除。"
+              "中国本职业全国精确工资缺口。NBS2025建筑业非私营92036/私营66275、科学技术服务业非私营182064/私营83560元/年（当前中英文原页表5：2025=83560、2024=82387）分别行业税前均值，施工/地质/岩土岗位可能相关但单位归类须核，不是职业中位/起薪/月薪；5+城镇法人、排除个体自由职业，不一概排除单位计件/兼职/劳务派遣。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26201,12 +26238,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与量测与地质编录与钻进参数辅助工具可辅助尺寸与孔深与用材与记录，但工资与录用结论不由此产生；本页只说明口径与边界。"
+              "编辑候选：测试任务/孔位资料提取、参数表核对、取样与维护记录整理；需真实数据与已批准方案、人工现场核验。未核部署/提效/减漏/替代；量测/传统计算/机械控制不当然是GenAI。O*NET软件4类GPS、Office、Excel、Word；Hot3项2025美国全部唯一职业招聘分母均未给比例，不填0。ILO暴露非采用/裁员，NIST治理非钻探合规许可。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
           "source_refs": [
-            "sag-moa"
+            "r5-editor",
+            "r5-hot"
           ],
           "type": "prose"
         },
@@ -26252,13 +26290,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资分位是统计位置，不是新手、熟练或班组长的等级标签；同一职业内部因地区、企业与项目与是否含野外与夜班与加班补贴差异很大。"
+              "美国47-5023 2025年年薪10/25/50/75/90分位44460/49900/60190/72450/83800美元；时薪21.37/23.99/28.94/34.83/40.29。OEWS受雇税前直时工资，排除自雇，含佣金/生产奖金，不含加班溢价；不能一概排除全部野外/夜班/温度补贴，具体工资项按定义核。分位非起薪/年限等级/个人上限。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26282,13 +26320,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业规模、预测变化与预计空缺分别回答不同问题，不能混成个人录用概率；本职业预测为平均，含大量更替需求。"
+              "美国47-5023精确职业：2025就业19500→2035预计20200，BLS净增约700、精确增长3.6%；O*NET国家趋势取整4%，摘要类别Average3—4%。2025—2035年均1400空缺含增长与替代，非十年合计、非1400年净增或实时招聘。BLS自雇比例为“—”不填0、不推出全为受雇；预测非中国需求、个人录用或AI因果。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-projections",
+            "r5-trends"
           ],
           "type": "prose"
         },
@@ -26402,13 +26440,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024 年就业约 18,300 人；2024—2034 年预测为「平均（Average，3% 至 4%）」，预计空缺 1,700；该来源只给出类别与区间而未给出单一精确百分比，本页按口径原文表述；空缺同时包含增长与更替，不是净增岗位。"
+              "美国47-5023精确职业：2025就业19500→2035预计20200，BLS净增约700、精确增长3.6%；O*NET国家趋势取整4%，摘要类别Average3—4%。2025—2035年均1400空缺含增长与替代，非十年合计、非1400年净增或实时招聘。BLS自雇比例为“—”不填0、不推出全为受雇；预测非中国需求、个人录用或AI因果。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.project",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-projections",
+            "r5-trends"
           ],
           "type": "prose"
         },
@@ -26447,13 +26485,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "教育反馈：73% 要求高中或同等学历、15% 要求低于高中毕业、12% 要求中学后证书（该页显示这三项、合计 100%）；在职通常通过带教与在岗培训上手，特种作业按法规另行取证。"
+              "美国O*NET新雇教育反馈高中/同等73%、不足高中15%、中等后证书12%，Job Zone1—2/SVP<6为群组准备描述、训练几天至1年，不是本职业法律门槛或人人数周上手。BLS2025精确行典型高中、相关工作经验少于5年、长期在岗训练；两个来源指标不同，不能据群组标签称零经验必录或普遍短训。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "r5-projections",
+            "r5-trends"
           ],
           "type": "prose"
         },
@@ -26477,13 +26516,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本职业以受雇岗位为主，亦有野外驻场与台班与承包；承包与计件的收入口径与受雇工资不可直接比较。"
+              "美国47-5023 2025年年薪10/25/50/75/90分位44460/49900/60190/72450/83800美元；时薪21.37/23.99/28.94/34.83/40.29。OEWS受雇税前直时工资，排除自雇，含佣金/生产奖金，不含加班溢价；不能一概排除全部野外/夜班/温度补贴，具体工资项按定义核。分位非起薪/年限等级/个人上限。 美国47-5023精确职业：2025就业19500→2035预计20200，BLS净增约700、精确增长3.6%；O*NET国家趋势取整4%，摘要类别Average3—4%。2025—2035年均1400空缺含增长与替代，非十年合计、非1400年净增或实时招聘。BLS自雇比例为“—”不填0、不推出全为受雇；预测非中国需求、个人录用或AI因果。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-wages",
+            "r5-oews-concepts",
+            "r5-projections",
+            "r5-trends"
           ],
           "type": "prose"
         },
@@ -26507,13 +26548,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "城市与地区、单位类型与项目规模、是否含野外与夜班与温度补贴与加班、以及岗位是否含带班职责都会影响实际收入。"
+              "编辑比较地区/岗位/合同工资项与实际工时，未核各因素对分位的因果或幅度。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.paid-work",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-wages",
+            "r5-oews-concepts",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -26567,13 +26609,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国统计不代表中国大陆职业工资或就业结果；本页未引用 BLS 职业展望本职业页数值。"
+              "美国47-5023精确职业：2025就业19500→2035预计20200，BLS净增约700、精确增长3.6%；O*NET国家趋势取整4%，摘要类别Average3—4%。2025—2035年均1400空缺含增长与替代，非十年合计、非1400年净增或实时招聘。BLS自雇比例为“—”不填0、不推出全为受雇；预测非中国需求、个人录用或AI因果。 美国47-5023 2025年年薪10/25/50/75/90分位44460/49900/60190/72450/83800美元；时薪21.37/23.99/28.94/34.83/40.29。OEWS受雇税前直时工资，排除自雇，含佣金/生产奖金，不含加班溢价；不能一概排除全部野外/夜班/温度补贴，具体工资项按定义核。分位非起薪/年限等级/个人上限。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.boundary.detail",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-projections",
+            "r5-trends",
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         }
@@ -26660,7 +26704,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "工作负荷包括每天面对面讨论 75%、持续接触他人 39%、每天电话 35%、持续站立或几乎连续 52%、每天暴露于危险设备 71%、每天穿戴常见防护或安全装备 84%、每天噪音 65%、极热极冷每天 28%＋每周以上 39%、户外各种天气每天 79%、全身振动每天 42%＋每周以上 43%、错误后果极其严重 52%、每天作出决定 44%、时间压力每天 20%。"
+              "美国O*NET反馈：面对面每日75%/每周非每日18%，持续接触39%/大部分33%，电话每日35%/每周非每日39%/从不22%；准确极重要16%/很重要50%/重要25%，站立持续52%/>一半23%，危险设备每日71%/每周非每日17%，普通PPE每日84%，噪声每日65%/每周非每日15%，高低温每日28%/每周非每日39%，全天候户外每日79%，全身振动每日42%/每周非每日43%，错误极严重52%/很严重15%/严重15%，每日决策44%、每日时间压力20%，不竞争33%。周工时>40h53%/40h47%，不规律61%/规律36%，不证明中国每人夜班/连续值班。情境是反馈非伤害发生率或个人风险。"
             ]
           },
           "id": "actors.fit.personality-fit-block.6",
@@ -26716,7 +26760,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "官方兴趣代码 RCI；不作人格诊断或录用依据。"
+              "RCI为职业兴趣概括，不作人格/健康适岗或录用判断。"
             ]
           },
           "id": "actors.display.riasec_fit_block.short",
@@ -26730,7 +26774,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "官方兴趣代码 RCI（现实型＋常规型＋研究型）：以在野外与施工现场操作钻机与钻具与设备并处理现场与岩土问题（现实型，子领域含体力劳动与机械操作与机械电子）、按任务与规程与标准与记录办事（常规型）、以及观察返出物与岩心与记录地层并判断岩土条件（研究型）为主。"
+              "美国O*NET职业兴趣R100/C45/I44/E12/S4/A2，RCI作前三兴趣概括，不是个人诊断/成绩/录用概率。"
             ]
           },
           "id": "actors.display.riasec_fit_block.interest",
@@ -26940,12 +26984,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "在受监督野外作业观察赶工与孔内异常与恶劣天气时段的表现。"
+              "编辑先核具备训练/防护的观察环境，不以赶工/恶劣天气/孔内事故危险试做验证人格或健康适岗。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.big-five.answer",
           "source_refs": [
-            "onet"
+            "r5-editor",
+            "r5-safety-law"
           ],
           "type": "prose"
         },
@@ -27710,7 +27755,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要但不是主要：每天面对面讨论 75%（另 18% 每周以上）、持续接触他人 39%（另 33% 大部分时间）、每天电话 35%；沟通以与班组长与地质与测量与检验与后方为主。"
+              "面对面75%/接触39%是总体反馈，不能推出大量陌生客户；外部客户很重要31%/重要20%/完全不重要35%，也不能据此诊断外向。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.outgoing.answer",
@@ -27738,12 +27783,16 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "美国反馈显示 73% 要求高中或同等学历、15% 要求低于高中毕业、12% 要求中学后证书（该页显示这三项、合计 100%）。中国大陆钻探与坑探工程施工的地质勘探单位应按《金属与非金属矿产资源地质勘探安全生产监督管理暂行规定》取得安全生产许可证并向工作区域所在地县级安全生产监督管理部门书面报告，特种作业人员须持特种作业操作证上岗，坑探作业人员首次上岗前接受不少于 72 小时安全生产教育并于此后每年不少于 20 小时再培训。"
+              "美国O*NET新雇教育反馈高中/同等73%、不足高中15%、中等后证书12%，Job Zone1—2/SVP<6为群组准备描述、训练几天至1年，不是本职业法律门槛或人人数周上手。BLS2025精确行典型高中、相关工作经验少于5年、长期在岗训练；两个来源指标不同，不能据群组标签称零经验必录或普遍短训。 35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.appearance.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "r5-projections",
+            "r5-trends",
+            "r5-geology-rule",
+            "r5-qualification-cancel"
           ],
           "type": "prose"
         },
@@ -27766,12 +27815,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本职业持续站立或几乎连续 52%、每天暴露于危险设备 71%、每天穿戴常见防护或安全装备 84%、每天噪音 65%、极热极冷每天 28%＋每周以上 39%、户外各种天气每天 79%、全身振动每天 42%＋每周以上 43%；防护与作业与野外资格按企业制度与法规执行。"
+              "美国O*NET反馈：面对面每日75%/每周非每日18%，持续接触39%/大部分33%，电话每日35%/每周非每日39%/从不22%；准确极重要16%/很重要50%/重要25%，站立持续52%/>一半23%，危险设备每日71%/每周非每日17%，普通PPE每日84%，噪声每日65%/每周非每日15%，高低温每日28%/每周非每日39%，全天候户外每日79%，全身振动每日42%/每周非每日43%，错误极严重52%/很严重15%/严重15%，每日决策44%、每日时间压力20%，不竞争33%。周工时>40h53%/40h47%，不规律61%/规律36%，不证明中国每人夜班/连续值班。情境是反馈非伤害发生率或个人风险。 中国安全生产法44/45条单位告知危险并供合规PPE，54条可拒违章指挥强令冒险；55条直接人身危险紧急时可停或必要应急后撤离，不须登记/报告批准在先；57/58条守规程/正确PPE/培训，59条隐患立即报告现场安全管理或单位负责人。普通质量问题中止/恢复与专业签字岗位须核真实项目制度；本轮未取得，不能授予班组长/地质/维修/检验统一最终权。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.schedule.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "r5-safety-law"
           ],
           "type": "prose"
         },
@@ -27892,12 +27942,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "企业与项目制度与授权规则：用于说明孔位、孔深、钻具与参数、取样与成井、安全与环保与数据与记录边界。"
+              "本轮未取得真实企业/项目制度，不能把人社首页当作授权证据。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.employer",
           "source_refs": [
-            "onet"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -27934,7 +27984,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻岗位对照（打桩机与施工机械与建筑工人）：用于说明桩基与土方与现场辅助的差异。"
+              "O*NET井架操作工47-5011职责支持井架维护与土方钻探任务比较，不代表准入互认。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.teacher",
@@ -27948,12 +27998,16 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "钻探与坑探安全法规（《金属与非金属矿产资源地质勘探安全生产监督管理暂行规定》与《地质勘探安全规程》AQ 2004 与《中华人民共和国安全生产法》）：用于说明钻探与坑探安全要求（按法规与标准名称与已核要点引用）。"
+              "O*NET打桩机操作工47-2072职责支持桩基任务比较，不是中国地勘安全法规。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.enrichment",
           "source_refs": [
-            "onet"
+            "r5-geology-rule",
+            "r5-qualification-cancel",
+            "r5-aq",
+            "r5-aq-status",
+            "r5-safety-law"
           ],
           "type": "prose"
         },
@@ -27962,12 +28016,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑综合：用于本页练习与边界设计，不构成外部事实或标准与资质证据。"
+              "O*NET施工机械操作工47-2073职责支持施工机械与钻探任务比较，不是AI效果或准入证明。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.art",
           "source_refs": [
-            "onet"
+            "r5-editor"
           ],
           "type": "prose"
         }
@@ -27984,13 +28038,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "任务与孔位与管线差错风险：任务书与地质资料与孔位与孔深与孔径与场地与管线与埋设物条件核对不清，导致误钻地下管线与孔位偏差与返工与材料与工期浪费。"
+              "任务与孔位与管线差错风险：任务书与地质资料与孔位与孔深与孔径与场地与管线与埋设物条件核对不清，导致误钻地下管线与孔位偏差与返工与材料与工期浪费。 AQ2004-2005平台现行/强制；1范围为中国地质勘探（石油天然气地质勘探除外），明确不适用用该技术从事其他行业，不把美国代码范围全映成标准范围。实读4.5地质勘探单位对野外从业人员每两年至少一次野外生存、自救互救技能训练；项目组每年野外工作出队前或变换地区前安全教育、4.7防护用品、4.8体检；10.1/10.2机台地基与钻架安装搬运，10.4.1开孔前设备防护检查、10.4.2禁止转动时擦洗拆卸维修与跨越传动带、10.4.3高压胶管修配停机；10.5.2孔内事故由机班长或熟练技工操作/专人指挥、其他撤离，10.7.8维修电器断电挂牌或看护。具体设计/设备/引用标准新版本另核，不以本页当操作手册。 中国安全生产法44/45条单位告知危险并供合规PPE，54条可拒违章指挥强令冒险；55条直接人身危险紧急时可停或必要应急后撤离，不须登记/报告批准在先；57/58条守规程/正确PPE/培训，59条隐患立即报告现场安全管理或单位负责人。普通质量问题中止/恢复与专业签字岗位须核真实项目制度；本轮未取得，不能授予班组长/地质/维修/检验统一最终权。"
             ]
           },
           "id": "actors.risk.career-risk-cards.1",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-aq",
+            "r5-aq-status",
+            "r5-safety-law",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -27999,13 +28056,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场地与支腿与吊装缺陷风险：场地承载与平整与支腿稳固与警戒与吊装与用电条件未确认就钻进，导致设备倾覆与人员伤害与作业事故。"
+              "场地与支腿与吊装缺陷风险：场地承载与平整与支腿稳固与警戒与吊装与用电条件未确认就钻进，导致设备倾覆与人员伤害与作业事故。 AQ2004-2005平台现行/强制；1范围为中国地质勘探（石油天然气地质勘探除外），明确不适用用该技术从事其他行业，不把美国代码范围全映成标准范围。实读4.5地质勘探单位对野外从业人员每两年至少一次野外生存、自救互救技能训练；项目组每年野外工作出队前或变换地区前安全教育、4.7防护用品、4.8体检；10.1/10.2机台地基与钻架安装搬运，10.4.1开孔前设备防护检查、10.4.2禁止转动时擦洗拆卸维修与跨越传动带、10.4.3高压胶管修配停机；10.5.2孔内事故由机班长或熟练技工操作/专人指挥、其他撤离，10.7.8维修电器断电挂牌或看护。具体设计/设备/引用标准新版本另核，不以本页当操作手册。 中国安全生产法44/45条单位告知危险并供合规PPE，54条可拒违章指挥强令冒险；55条直接人身危险紧急时可停或必要应急后撤离，不须登记/报告批准在先；57/58条守规程/正确PPE/培训，59条隐患立即报告现场安全管理或单位负责人。普通质量问题中止/恢复与专业签字岗位须核真实项目制度；本轮未取得，不能授予班组长/地质/维修/检验统一最终权。"
             ]
           },
           "id": "actors.risk.career-risk-cards.2",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-aq",
+            "r5-aq-status",
+            "r5-safety-law",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -28014,13 +28074,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "钻具与参数与孔内事故风险：钻具与钻头选配与转速与气压与下压与冲洗不符合岩土条件或未按规程处理孔内异常，导致孔斜与埋钻与卡钻与落井工具与工期延误。"
+              "钻具与参数与孔内事故风险：钻具与钻头选配与转速与气压与下压与冲洗不符合岩土条件或未按规程处理孔内异常，导致孔斜与埋钻与卡钻与落井工具与工期延误。 适用AQ10.5.2孔内事故由机班长或熟练技工操作、专人指挥、其他人撤离；不是维修人员统一最终权。AQ2004-2005平台现行/强制；1范围为中国地质勘探（石油天然气地质勘探除外），明确不适用用该技术从事其他行业，不把美国代码范围全映成标准范围。实读4.5地质勘探单位对野外从业人员每两年至少一次野外生存、自救互救技能训练；项目组每年野外工作出队前或变换地区前安全教育、4.7防护用品、4.8体检；10.1/10.2机台地基与钻架安装搬运，10.4.1开孔前设备防护检查、10.4.2禁止转动时擦洗拆卸维修与跨越传动带、10.4.3高压胶管修配停机；10.5.2孔内事故由机班长或熟练技工操作/专人指挥、其他撤离，10.7.8维修电器断电挂牌或看护。具体设计/设备/引用标准新版本另核，不以本页当操作手册。"
             ]
           },
           "id": "actors.risk.career-risk-cards.3",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-aq",
+            "r5-aq-status",
+            "r5-safety-law",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -28029,13 +28092,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "取样与成井与洗井不当风险：取心与取样与编录与下管与成井与洗井与抽水试验未按任务或设计执行，导致样品失真与井体不可用与试验不成立。"
+              "取样与成井与洗井不当风险：取心与取样与编录与下管与成井与洗井与抽水试验未按任务或设计执行，导致样品失真与井体不可用与试验不成立。 按任务设计取样/成井，O*NET若干成井/泵系统设计属Supplemental，非人人必做。具体质量验收组织未取得，不规定统一“检验”签字权。"
             ]
           },
           "id": "actors.risk.career-risk-cards.4",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-aq",
+            "r5-aq-status",
+            "r5-safety-law",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -28044,13 +28110,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "安全与环保处置不当风险：未按临边与用电与吊装与旋转部件与高压管路与粉尘与噪声要求作业或未按规程处置泥浆与废油与废水与弃土与恢复场地，导致人身伤害与环境污染。"
+              "安全与环保处置不当风险：未按临边与用电与吊装与旋转部件与高压管路与粉尘与噪声要求作业或未按规程处置泥浆与废油与废水与弃土与恢复场地，导致人身伤害与环境污染。 实际依法核单位防护/废物与水排放要求；未取得本项目环境许可/处理参数，不能以治理框架证明环境合规。中国安全生产法44/45条单位告知危险并供合规PPE，54条可拒违章指挥强令冒险；55条直接人身危险紧急时可停或必要应急后撤离，不须登记/报告批准在先；57/58条守规程/正确PPE/培训，59条隐患立即报告现场安全管理或单位负责人。普通质量问题中止/恢复与专业签字岗位须核真实项目制度；本轮未取得，不能授予班组长/地质/维修/检验统一最终权。"
             ]
           },
           "id": "actors.risk.career-risk-cards.5",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-aq",
+            "r5-aq-status",
+            "r5-safety-law",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -28059,13 +28128,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "记录与异常上报延迟风险：孔位与孔深与取样与成井与设备维护记录缺失或孔内异常与设备隐患与安全与环境问题未按规定上报，延误处置并放大后果。"
+              "编辑建议核记录与报告真实性；紧急人身危险依法先避险，隐患立即报告安全管理/单位负责人；具体停工复工权限未核。中国安全生产法44/45条单位告知危险并供合规PPE，54条可拒违章指挥强令冒险；55条直接人身危险紧急时可停或必要应急后撤离，不须登记/报告批准在先；57/58条守规程/正确PPE/培训，59条隐患立即报告现场安全管理或单位负责人。普通质量问题中止/恢复与专业签字岗位须核真实项目制度；本轮未取得，不能授予班组长/地质/维修/检验统一最终权。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.mitigation",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-safety-law",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -28104,13 +28173,18 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险项按本职业内容与所列来源（O*NET 工作情境、企业与项目制度、《金属与非金属矿产资源地质勘探安全生产监督管理暂行规定》与《地质勘探安全规程》AQ 2004 与《中华人民共和国安全生产法》）边界解释。"
+              "O*NET支持美国任务/情境；中国规章/AQ各限实际范围。后果为编辑分析非发生率，企业制度与全部环保许可未取得。"
             ]
           },
           "id": "actors.display.career_risk_cards.evidence-scope",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-geology-rule",
+            "r5-qualification-cancel",
+            "r5-aq",
+            "r5-aq-status",
+            "r5-safety-law",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -28194,13 +28268,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "造成误钻管线与孔位偏差与返工与工期浪费。"
+              "可能：造成误钻管线与孔位偏差与返工与工期浪费。（编辑风险分析，未核发生率）。"
             ]
           },
           "id": "actors.display.career_risk_cards.image-use.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -28254,13 +28328,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "造成设备倾覆与人员伤害与作业事故。"
+              "可能：造成设备倾覆与人员伤害与作业事故。（编辑风险分析，未核发生率）。"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -28314,13 +28388,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "造成孔斜与埋钻与卡钻与落井工具与工期延误。"
+              "可能：造成孔斜与埋钻与卡钻与落井工具与工期延误。（编辑风险分析，未核发生率）。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-income.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -28374,13 +28448,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "造成样品失真与井体不可用与试验不成立。"
+              "可能：造成样品失真与井体不可用与试验不成立。（编辑风险分析，未核发生率）。"
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -28434,13 +28508,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "造成人身伤害与环境污染与场地未恢复。"
+              "可能：造成人身伤害与环境污染与场地未恢复。（编辑风险分析，未核发生率）。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -28494,13 +28568,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "造成事故扩大与责任风险。"
+              "可能：造成事故扩大与责任风险。（编辑风险分析，未核发生率）。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.consequence",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -28524,13 +28598,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "企业与项目制度与授权规则：用于孔位、孔深、钻具与参数、取样与成井、安全与环保与数据与记录边界。"
+              "中国安全生产法44/45条单位告知危险并供合规PPE，54条可拒违章指挥强令冒险；55条直接人身危险紧急时可停或必要应急后撤离，不须登记/报告批准在先；57/58条守规程/正确PPE/培训，59条隐患立即报告现场安全管理或单位负责人。普通质量问题中止/恢复与专业签字岗位须核真实项目制度；本轮未取得，不能授予班组长/地质/维修/检验统一最终权。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.employer",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-safety-law"
           ],
           "type": "prose"
         },
@@ -28539,13 +28612,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "钻探与坑探安全法规（《金属与非金属矿产资源地质勘探安全生产监督管理暂行规定》与《地质勘探安全规程》AQ 2004 与《中华人民共和国安全生产法》）：用于钻探与坑探安全口径（按法规与标准名称与已核要点引用）。"
+              "35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。 AQ2004-2005平台现行/强制；1范围为中国地质勘探（石油天然气地质勘探除外），明确不适用用该技术从事其他行业，不把美国代码范围全映成标准范围。实读4.5地质勘探单位对野外从业人员每两年至少一次野外生存、自救互救技能训练；项目组每年野外工作出队前或变换地区前安全教育、4.7防护用品、4.8体检；10.1/10.2机台地基与钻架安装搬运，10.4.1开孔前设备防护检查、10.4.2禁止转动时擦洗拆卸维修与跨越传动带、10.4.3高压胶管修配停机；10.5.2孔内事故由机班长或熟练技工操作/专人指挥、其他撤离，10.7.8维修电器断电挂牌或看护。具体设计/设备/引用标准新版本另核，不以本页当操作手册。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.cn-rule",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-geology-rule",
+            "r5-qualification-cancel",
+            "r5-aq",
+            "r5-aq-status"
           ],
           "type": "prose"
         },
@@ -28554,13 +28629,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "不使用影视或演员工会口径；仅登记其不适用。"
+              "实际OEWS方法非影视工会。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.sag",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -28592,14 +28667,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘公告与钻探方案中的经验、资格与计酬关系必须逐条读取；本职业多数岗位以任务书识读与就位调平与钻具选配与钻进参数与取样与安全环保带教上手，一项可放宽不代表特种作业与安全与环保与井控与资质要求可以替代。"
+              "编辑核真实公告经验、钻机/工序、场地/班次与法定训练；本轮未采招聘样本，不说多数零基础短训必录。美国O*NET新雇教育反馈高中/同等73%、不足高中15%、中等后证书12%，Job Zone1—2/SVP<6为群组准备描述、训练几天至1年，不是本职业法律门槛或人人数周上手。BLS2025精确行典型高中、相关工作经验少于5年、长期在岗训练；两个来源指标不同，不能据群组标签称零经验必录或普遍短训。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "r5-projections",
+            "r5-trends",
+            "r5-editor"
           ],
           "type": "notice"
         },
@@ -28627,7 +28703,7 @@
                 "在带教下协助场地勘察与就位与调平与支腿稳固与钻具组装与钻进操作。",
                 "就位与调平与钻进协助准确率、带班评语。",
                 "纸面就位与钻具选配与钻进参数练习、受监督野外作业的带班评语。",
-                "偏就位与钻进执行，孔位与参数与孔内异常处理由技术负责人与地质人员承担。"
+                "偏就位与钻进执行，孔位与参数按真实项目分工核；适用AQ2004的孔内事故由机班长或熟练技工操作、专人指挥，其他人员撤离，不泛授技术负责人或新手处理权。"
               ],
               [
                 "取样与编录",
@@ -28641,29 +28717,31 @@
                 "协助下入井管与滤水管与滤料与止水并洗井与抽水试验与消毒。",
                 "成井与洗井与试验记录、检验反馈。",
                 "成井与洗井与抽水试验记录练习。",
-                "偏成井执行，成井质量与试验判定由技术负责人与检验承担。"
+                "偏成井协作与记录；质量、抽水试验评价及验收签认的岗位权限依真实项目制度核，本轮未取得通用分工。"
               ],
               [
                 "设备维护与孔内处理",
                 "协助例行维护与升级设备并处理卡钻与埋钻与打捞落井设备与涌水。",
                 "设备维护台账与孔内处理记录、维修人员评语。",
                 "设备维护与孔内处理记录练习。",
-                "偏维护与处理执行，孔内事故判断与设备维修由维修人员承担。"
+                "适用AQ孔内事故由机班长或熟练技工/专人指挥，具体维修与项目分工另核，不授统一维修人员处理权"
               ],
               [
                 "安全与环保与记录",
                 "完成场地与临边与用电与吊装检查与泥浆与废油与废水处置与记录并配合检验。",
                 "检查与处置与记录准确率、安全环保人员反馈。",
                 "安全与环保检查与处置与记录练习。",
-                "偏检查与处置执行，安全与环保隐患判定由安全环保人员承担。"
+                "偏检查、报告与处置配合；从业者发现隐患应立即按安全生产法报告，不限定安全环保人员才可识别；专业处置及环保验收权限另核。"
               ]
             ]
           },
           "id": "actors.path.entry-role-comparison.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "r5-aq",
+            "r5-aq-status",
+            "r5-safety-law",
+            "r5-editor"
           ],
           "title": "常见入门方向与初期任务",
           "type": "table"
@@ -28833,17 +28911,17 @@
             "rows": [
               [
                 "钻探与坑探施工安全许可（中国大陆）",
-                "从事钻探工程、坑探工程施工的地质勘探单位与人员",
-                "合规要求：应按《金属与非金属矿产资源地质勘探安全生产监督管理暂行规定》（国家安全生产监督管理总局令第 35 号公布，据第 78 号修正）取得安全生产许可证，并持地质勘查资质证书与项目任务批准文件或合同书向工作区域所在地县级安全生产监督管理部门书面报告。",
+                "规定金属/非金属矿产勘探范围施工单位；非所有钻探人员",
+                "35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。",
                 "是（针对钻探与坑探施工单位）：属部门规章适用范围。",
                 "按规章与本项目与属地要求核对资质与许可与报告要求。",
                 "合规与整改时间。",
-                "本条依据安监总局令第 35 号（据第 78 号修正）；具体以现行规章原文与本项目要求为准。"
+                "单位安全许可与已取消地质勘查资质审批分开；属地材料另核。"
               ],
               [
                 "特种作业与坑探培训（中国大陆）",
                 "特种作业人员与坑探作业人员",
-                "合规要求：特种作业人员须经专门安全技术培训并考核合格、取得特种作业操作证后方可上岗；坑探工程作业人员首次上岗前应接受不少于 72 小时安全生产教育，以后每年不少于 20 小时再培训。",
+                "35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。",
                 "是（针对特种作业与坑探作业）：属规章明确要求。",
                 "按规章与项目制度核对培训与取证与复训记录。",
                 "培训与取证时间。",
@@ -28852,17 +28930,17 @@
               [
                 "地质勘探安全规程与安全专篇（中国大陆）",
                 "地质勘探工程设计与施工与安全管理人员",
-                "合规要求：地质勘探工程的设计与施工与安全管理应符合《地质勘探安全规程》（AQ 2004）；坑探工程设计方案应设安全专篇并经所在地安全生产监督管理部门审查同意；应建立安全生产责任与岗位操作规程与教育培训与隐患排查治理与应急等制度。",
+                "AQ2004-2005平台现行/强制；1范围为中国地质勘探（石油天然气地质勘探除外），明确不适用用该技术从事其他行业，不把美国代码范围全映成标准范围。实读4.5地质勘探单位对野外从业人员每两年至少一次野外生存、自救互救技能训练；项目组每年野外工作出队前或变换地区前安全教育、4.7防护用品、4.8体检；10.1/10.2机台地基与钻架安装搬运，10.4.1开孔前设备防护检查、10.4.2禁止转动时擦洗拆卸维修与跨越传动带、10.4.3高压胶管修配停机；10.5.2孔内事故由机班长或熟练技工操作/专人指挥、其他撤离，10.7.8维修电器断电挂牌或看护。具体设计/设备/引用标准新版本另核，不以本页当操作手册。 35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。",
                 "是（针对地质勘探工程）：属行业标准与规章适用范围。",
                 "按规程与规章与本项目设计文件核对安全措施与专篇与制度。",
                 "合规与整改时间。",
                 "本条按标准与规章名称与已核要点引用，未逐条核对条文编号。"
               ],
               [
-                "在岗培训与带教（数周到数月）",
+                "在岗训练与经验（美国统计分开）",
                 "零基础入行者",
-                "现实入口：多数岗位通过任务书识读与就位调平与钻具选配与钻进参数与取样与安全环保带教上手。",
-                "是：O*NET 指出本职业准备层级为 Job Zone 1-2。",
+                "美国O*NET新雇教育反馈高中/同等73%、不足高中15%、中等后证书12%，Job Zone1—2/SVP<6为群组准备描述、训练几天至1年，不是本职业法律门槛或人人数周上手。BLS2025精确行典型高中、相关工作经验少于5年、长期在岗训练；两个来源指标不同，不能据群组标签称零经验必录或普遍短训。",
+                "群组准备非普遍门槛；BLS典型长期训练/相关经验",
                 "按企业与项目培训计划完成并接受考核。",
                 "时间投入与学习节奏。",
                 "完成培训不等于取得特种作业资格或安全许可或井控资质。"
@@ -28889,9 +28967,14 @@
           },
           "id": "actors.path.credential-decision.1",
           "source_refs": [
+            "r5-geology-rule",
+            "r5-qualification-cancel",
+            "r5-aq",
+            "r5-aq-status",
             "onet",
-            "bls",
-            "cn-rule"
+            "r5-projections",
+            "r5-trends",
+            "r5-editor"
           ],
           "title": "训练、特种作业与安全环保怎么选择",
           "type": "table"
@@ -28901,17 +28984,16 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "学历与经验要求必须逐条读取：本职业多数岗位以任务书识读与就位调平与钻具选配与钻进参数与取样与安全环保带教上手，教育反馈为 73% 高中或同等学历、15% 低于高中毕业、12% 中学后证书；一项可放宽不代表特种作业与安全与环保与井控与资质要求可以替代。",
-              "本页建议的作品与七天体验只用于职业探索，不构成岗位培训、特种作业资格或安全与环保授权。",
-              "进入本职业不是只报一个课程：先核对目标岗位的项目与工序与班次与野外驻场安排、是否需要特种作业训练或钻机操作技能、以及企业与项目的安全与环保与井控规则。",
-              "涉及钻探与坑探与爆破辅助与临边与用电与吊装与旋转部件与高压管路的作业，须先确认安全与环保与必要许可要求并取得授权；不得在无防护与无授权条件下独立承担相应职责。"
+              "美国O*NET新雇教育反馈高中/同等73%、不足高中15%、中等后证书12%，Job Zone1—2/SVP<6为群组准备描述、训练几天至1年，不是本职业法律门槛或人人数周上手。BLS2025精确行典型高中、相关工作经验少于5年、长期在岗训练；两个来源指标不同，不能据群组标签称零经验必录或普遍短训。 35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。 本页探索作品不能授予真实作业/安全/环保资格。"
             ]
           },
           "id": "actors.path.credential-boundary.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "r5-projections",
+            "r5-trends",
+            "r5-geology-rule",
+            "r5-qualification-cancel"
           ],
           "title": "训练、特种作业与安全环保边界",
           "type": "notice"
@@ -29136,14 +29218,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入口要求、特种作业与安全与环保边界由具体法域、企业与项目核验；本页练习不构成岗位培训或特种作业资格或安全与环保授权。"
+              "成长路线与证据是编辑建议，非雇主必录/晋升标准；单位许可不等个人证，零经验岗位要求须核实际招聘。35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。"
             ]
           },
           "id": "actors.display.career_path_block.boundary",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-geology-rule",
+            "r5-qualification-cancel",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -29152,14 +29234,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国由企业与项目规定并须遵守相关安全与环保与井控要求；中国大陆钻探与坑探工程施工的地质勘探单位应按《金属与非金属矿产资源地质勘探安全生产监督管理暂行规定》（国家安全生产监督管理总局令第 35 号公布，据第 78 号修正）取得安全生产许可证并书面报告，特种作业人员须持特种作业操作证上岗。"
+              "35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。 中国安全生产法44/45条单位告知危险并供合规PPE，54条可拒违章指挥强令冒险；55条直接人身危险紧急时可停或必要应急后撤离，不须登记/报告批准在先；57/58条守规程/正确PPE/培训，59条隐患立即报告现场安全管理或单位负责人。普通质量问题中止/恢复与专业签字岗位须核真实项目制度；本轮未取得，不能授予班组长/地质/维修/检验统一最终权。"
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-geology-rule",
+            "r5-qualification-cancel",
+            "r5-safety-law"
           ],
           "type": "prose"
         },
@@ -29168,14 +29250,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆相关依据：钻探与坑探工程施工的地质勘探单位应取得安全生产许可证并持地质勘查资质证书与项目任务批准文件或合同书向工作区域所在地县级安全生产监督管理部门书面报告，应建立安全生产责任与岗位操作规程与教育培训与重大危险源检测监控与隐患排查治理与事故信息报告与应急预案演练与防护与野外救生用品配备等制度；特种作业人员须经专门安全技术培训并考核合格、取得特种作业操作证后方可上岗；坑探工程作业人员首次上岗前应接受不少于 72 小时安全生产教育并于此后每年不少于 20 小时再培训；地质勘探工程的设计与施工与安全管理应符合《地质勘探安全规程》（AQ 2004）；坑探工程设计方案应设安全专篇并经所在地安全生产监督管理部门审查同意。上述按规章与标准名称与已核要点引用，未逐条核对条文编号。"
+              "35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。 AQ2004-2005平台现行/强制；1范围为中国地质勘探（石油天然气地质勘探除外），明确不适用用该技术从事其他行业，不把美国代码范围全映成标准范围。实读4.5地质勘探单位对野外从业人员每两年至少一次野外生存、自救互救技能训练；项目组每年野外工作出队前或变换地区前安全教育、4.7防护用品、4.8体检；10.1/10.2机台地基与钻架安装搬运，10.4.1开孔前设备防护检查、10.4.2禁止转动时擦洗拆卸维修与跨越传动带、10.4.3高压胶管修配停机；10.5.2孔内事故由机班长或熟练技工操作/专人指挥、其他撤离，10.7.8维修电器断电挂牌或看护。具体设计/设备/引用标准新版本另核，不以本页当操作手册。"
             ]
           },
           "id": "actors.display.career_path_block.locale.summary",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-geology-rule",
+            "r5-qualification-cancel",
+            "r5-aq",
+            "r5-aq-status"
           ],
           "type": "prose"
         },
@@ -29184,14 +29267,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国本职业准备层级为 Job Zone 1-2（SVP 低于 6.0），以任务书识读与就位调平与钻具选配与钻进参数与取样与安全环保带教为主，教育反馈为 73% 高中或同等学历、15% 低于高中毕业、12% 中学后证书；中国大陆不设统一准入类职业资格，实际以企业与项目与属地要求为准。"
+              "美国O*NET新雇教育反馈高中/同等73%、不足高中15%、中等后证书12%，Job Zone1—2/SVP<6为群组准备描述、训练几天至1年，不是本职业法律门槛或人人数周上手。BLS2025精确行典型高中、相关工作经验少于5年、长期在岗训练；两个来源指标不同，不能据群组标签称零经验必录或普遍短训。 中国按实际工种与雇主核；未取得全资格目录，不能概括全国无统一执照。"
             ]
           },
           "id": "actors.display.career_path_block.locale.credentials",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "r5-projections",
+            "r5-trends",
+            "r5-geology-rule",
+            "r5-qualification-cancel"
           ],
           "type": "prose"
         },
@@ -29440,14 +29525,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立完成就位与调平与钻具选配与钻进协助并保持高峰时段效率。"
+              "在实际训练、权限和带教范围完成就位/钻进协助；未核“高峰效率”标准，不以短训自动授权。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.02.responsibility",
           "source_refs": [
+            "r5-editor",
             "onet",
-            "bls",
-            "cn-rule"
+            "r5-safety-law"
           ],
           "type": "prose"
         },
@@ -30352,14 +30437,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "企业与项目制度与授权规则：用于入口要求与孔位、孔深、钻具与参数、取样与成井、安全与环保与数据与记录边界。"
+              "中国安全生产法44/45条单位告知危险并供合规PPE，54条可拒违章指挥强令冒险；55条直接人身危险紧急时可停或必要应急后撤离，不须登记/报告批准在先；57/58条守规程/正确PPE/培训，59条隐患立即报告现场安全管理或单位负责人。普通质量问题中止/恢复与专业签字岗位须核真实项目制度；本轮未取得，不能授予班组长/地质/维修/检验统一最终权。"
             ]
           },
           "id": "actors.display.career_path_block.source.employer",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-safety-law"
           ],
           "type": "prose"
         },
@@ -30368,14 +30451,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "钻探与坑探安全法规（《金属与非金属矿产资源地质勘探安全生产监督管理暂行规定》与《地质勘探安全规程》AQ 2004 与《中华人民共和国安全生产法》）：用于钻探与坑探安全口径（按法规与标准名称与已核要点引用）。"
+              "35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。 AQ2004-2005平台现行/强制；1范围为中国地质勘探（石油天然气地质勘探除外），明确不适用用该技术从事其他行业，不把美国代码范围全映成标准范围。实读4.5地质勘探单位对野外从业人员每两年至少一次野外生存、自救互救技能训练；项目组每年野外工作出队前或变换地区前安全教育、4.7防护用品、4.8体检；10.1/10.2机台地基与钻架安装搬运，10.4.1开孔前设备防护检查、10.4.2禁止转动时擦洗拆卸维修与跨越传动带、10.4.3高压胶管修配停机；10.5.2孔内事故由机班长或熟练技工操作/专人指挥、其他撤离，10.7.8维修电器断电挂牌或看护。具体设计/设备/引用标准新版本另核，不以本页当操作手册。"
             ]
           },
           "id": "actors.display.career_path_block.source.cn-rule",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-geology-rule",
+            "r5-qualification-cancel",
+            "r5-aq",
+            "r5-aq-status"
           ],
           "type": "prose"
         },
@@ -30408,13 +30492,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 47-5023.00 精确职业数据：2024 年就业约 18,300 人。"
+              "美国47-5023精确职业：2025就业19500→2035预计20200，BLS净增约700、精确增长3.6%；O*NET国家趋势取整4%，摘要类别Average3—4%。2025—2035年均1400空缺含增长与替代，非十年合计、非1400年净增或实时招聘。BLS自雇比例为“—”不填0、不推出全为受雇；预测非中国需求、个人录用或AI因果。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-projections",
+            "r5-trends"
           ],
           "type": "prose"
         },
@@ -30423,13 +30507,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年预测为「平均（Average，3% 至 4%）」，预计空缺 1,700；该来源只给出类别与区间而未给出单一精确百分比，本页按口径原文表述；空缺同时包含增长与更替，不是净增岗位。"
+              "美国47-5023精确职业：2025就业19500→2035预计20200，BLS净增约700、精确增长3.6%；O*NET国家趋势取整4%，摘要类别Average3—4%。2025—2035年均1400空缺含增长与替代，非十年合计、非1400年净增或实时招聘。BLS自雇比例为“—”不填0、不推出全为受雇；预测非中国需求、个人录用或AI因果。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-projections",
+            "r5-trends"
           ],
           "type": "prose"
         },
@@ -30438,13 +30522,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "这些全国数据只对应美国 47-5023.00，不代表某州、某项目或企业，也不代表中国市场或个人录用概率；本职业预测为平均，统计波动与采矿与勘探与基建景气相关。"
+              "统计只限美国全国47-5023与2025—2035；未核行业景气因果、AI效果、中国或个人机会。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-projections",
+            "r5-trends",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30453,13 +30538,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本职业相关岗位分布在采矿与采石与油气支持与建筑与地质勘探与水利与岩土工程等场景，多为按小时计酬并含野外与出勤与夜班补贴的现场作业岗位。"
+              "任务含取水/矿产勘探/土壤取样/建筑基础或爆破辅助钻孔；未核普遍野外补贴/计时安排。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30573,13 +30658,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，对象与井控规程不同"
+              "编辑比较：中，对象与井控规程不同；未验证个人距离/成功率。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30588,13 +30672,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：钻具操作与钻台配合与井口作业经验。"
+              "编辑可核钻具与设备/协作经验，不据本职业推出已有油气井口/井控经验。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-editor",
+            "onet"
           ],
           "type": "prose"
         },
@@ -30618,13 +30702,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，岗位与授权不同"
+              "编辑比较：中，岗位与授权不同；未验证个人距离/成功率。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30663,13 +30746,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，对象与工序不同"
+              "编辑比较：中，对象与工序不同；未验证个人距离/成功率。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30708,13 +30790,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，设备相近但对象不同"
+              "编辑比较：近，设备相近但对象不同；未验证个人距离/成功率。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30753,13 +30834,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，机械操作相近"
+              "编辑比较：近，机械操作相近；未验证个人距离/成功率。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30798,13 +30878,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，职责层次不同"
+              "编辑比较：近，职责层次不同；未验证个人距离/成功率。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30813,13 +30892,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：孔位与钻孔与装药配合与安全经验。"
+              "编辑可核孔位/钻孔和安全沟通经验，不据辅助爆破钻孔推出已有装药/爆破资质。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-editor",
+            "onet"
           ],
           "type": "prose"
         },
@@ -30843,13 +30922,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，作业与资质不同"
+              "编辑比较：中，作业与资质不同；未验证个人距离/成功率。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30888,13 +30966,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，对象与设备不同"
+              "编辑比较：中，对象与设备不同；未验证个人距离/成功率。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30918,13 +30995,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "钻探与坑探安全法规：用于钻探与坑探安全与环保口径（按法规与标准名称与已核要点引用）。"
+              "美国47-5023精确职业：2025就业19500→2035预计20200，BLS净增约700、精确增长3.6%；O*NET国家趋势取整4%，摘要类别Average3—4%。2025—2035年均1400空缺含增长与替代，非十年合计、非1400年净增或实时招聘。BLS自雇比例为“—”不填0、不推出全为受雇；预测非中国需求、个人录用或AI因果。"
             ]
           },
           "id": "actors.display.market_signal_card.source.ratify",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-projections",
+            "r5-trends"
           ],
           "type": "prose"
         },
@@ -30933,13 +31010,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "企业与项目制度与授权规则：用于孔位、孔深、钻具与参数、取样与成井、安全与环保与数据与记录边界。"
+              "35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。"
             ]
           },
           "id": "actors.display.market_signal_card.source.employer",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-geology-rule",
+            "r5-qualification-cancel"
           ],
           "type": "prose"
         },
@@ -31111,12 +31188,20 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET 47-5023.00、BLS/OEWS、《金属与非金属矿产资源地质勘探安全生产监督管理暂行规定》与《地质勘探安全规程》（AQ 2004）"
+              "O*NET任务/工资与BLS就业分开；35号规章、资质取消答复及AQ实读章节限实际法域/任务。"
             ]
           },
           "id": "actors.display.source_card.source",
           "source_refs": [
-            "onet"
+            "onet",
+            "r5-wages",
+            "r5-oews-concepts",
+            "r5-projections",
+            "r5-trends",
+            "r5-geology-rule",
+            "r5-qualification-cancel",
+            "r5-aq",
+            "r5-aq-status"
           ],
           "type": "prose"
         },
@@ -31125,7 +31210,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-09-19"
+              "2026-10-09：本轮作者实读，不是独立验收。"
             ]
           },
           "id": "actors.display.source_card.updated-at",
@@ -31299,10 +31384,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于核对采矿与建筑与地质勘探类职业信息与就业展望的查询入口与方法说明。",
-                  "本职业一手展望页本轮未取得；不据入口页推断本职业具体数值。"
+                  "既有链接是部门/方法/检索入口，不代替本职业统计、企业制度或法规标准具体条文；本轮新增正文来源支撑授权九模块。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation / query entry",
                 "id": "bls",
                 "limitation": "本职业一手展望页本轮未取得；不据入口页推断本职业具体数值。",
                 "market": "美国",
@@ -31315,10 +31399,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "规定从事钻探工程与坑探工程施工的地质勘探单位应取得安全生产许可证并持地质勘查资质证书与项目任务批准文件或合同书向工作区域所在地县级安全生产监督管理部门书面报告，应建立安全生产责任与岗位操作规程与教育培训与重大危险源检测监控与隐患排查治理与事故信息报告与应急预案演练与防护与野外救生用品配备等制度；特种作业人员须经专门安全技术培训并考核合格、取得特种作业操作证后方可上岗；坑探工程作业人员首次上岗前应接受不少于 72 小时安全生产教育并于此后每年不少于 20 小时再培训；地质勘探工程的设计与施工与安全管理应符合 AQ 2004；坑探工程设计方案应设安全专篇并经审查同意。",
-                  "为钻探与坑探安全与环保要求，不规定工资水平；本条按规章与标准名称与已核要点引用，未逐条核对条文编号；具体以现行规章与标准原文与本项目要求为准。"
+                  "既有链接是部门/方法/检索入口，不代替本职业统计、企业制度或法规标准具体条文；本轮新增正文来源支撑授权九模块。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation / query entry",
                 "id": "cn-rule",
                 "limitation": "为钻探与坑探安全与环保要求，不规定工资水平；本条按规章与标准名称与已核要点引用，未逐条核对条文编号；具体以现行规章与标准原文与本项目要求为准。",
                 "market": "中国大陆",
@@ -31379,10 +31462,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于检索地质勘探与钻探安全相关标准（含 AQ 2004 等）的现行版本与代替关系。",
-                  "标准查询入口不代替标准原文与本项目要求；不规定工资水平。"
+                  "既有链接是部门/方法/检索入口，不代替本职业统计、企业制度或法规标准具体条文；本轮新增正文来源支撑授权九模块。"
                 ],
-                "evidence_type": "official standard",
+                "evidence_type": "official navigation / query entry",
                 "id": "editor",
                 "limitation": "标准查询入口不代替标准原文与本项目要求；不规定工资水平。",
                 "market": "中国大陆",
@@ -31395,10 +31477,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于核对就业与技能培训与职业信息服务（含特种作业与技能等级相关公开信息）。",
-                  "主管部门入口不代替岗位招聘公告与本企业制度。"
+                  "既有链接是部门/方法/检索入口，不代替本职业统计、企业制度或法规标准具体条文；本轮新增正文来源支撑授权九模块。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation / query entry",
                 "id": "employer",
                 "limitation": "主管部门入口不代替岗位招聘公告与本企业制度。",
                 "market": "中国大陆",
@@ -31427,10 +31508,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于说明兴趣代码只提示探索方向。",
-                  "兴趣测评不作人格诊断或录用依据。"
+                  "既有链接是部门/方法/检索入口，不代替本职业统计、企业制度或法规标准具体条文；本轮新增正文来源支撑授权九模块。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation / query entry",
                 "id": "interest-profiler",
                 "limitation": "兴趣测评不作人格诊断或录用依据。",
                 "market": "美国",
@@ -31441,14 +31521,13 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "为行业与单位类型层级口径（如采矿与建筑），作为可见行业代理使用。",
-                  "行业平均工资不是本职业中位数或起薪或个人到手收入，本页明确排除。"
+                  "中国本职业全国精确工资缺口。NBS2025建筑业非私营92036/私营66275、科学技术服务业非私营182064/私营83560元/年（当前中英文原页表5：2025=83560、2024=82387）分别行业税前均值，施工/地质/岩土岗位可能相关但单位归类须核，不是职业中位/起薪/月薪；5+城镇法人、排除个体自由职业，不一概排除单位计件/兼职/劳务派遣。"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs",
-                "limitation": "行业平均工资不是本职业中位数或起薪或个人到手收入，本页明确排除。",
+                "limitation": "中国本职业全国精确工资缺口。NBS2025建筑业非私营92036/私营66275、科学技术服务业非私营182064/私营83560元/年（当前中英文原页表5：2025=83560、2024=82387）分别行业税前均值，施工/地质/岩土岗位可能相关但单位归类须核，不是职业中位/起薪/月薪；5+城镇法人、排除个体自由职业，不一概排除单位计件/兼职/劳务派遣。",
                 "market": "中国大陆",
                 "name": "国家统计局公开渠道：2025 年城镇单位就业人员年平均工资情况",
                 "period": "2025 年；accessed 2026-09-19",
@@ -31475,10 +31554,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于说明本职业工资统计的来源与方法。",
-                  "全国统计位置不是个人起薪或地区报价。"
+                  "既有链接是部门/方法/检索入口，不代替本职业统计、企业制度或法规标准具体条文；本轮新增正文来源支撑授权九模块。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official navigation / query entry",
                 "id": "oews",
                 "limitation": "全国统计位置不是个人起薪或地区报价。",
                 "market": "美国",
@@ -31489,17 +31567,19 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "核验职业定义、任务（29 项）、工作情境与准备层级（Job Zone 1-2，SVP 低于 6.0）与兴趣代码 RCI 与 2024 年就业 18,300 与 2024—2034 年预测。",
-                  "美国精确职业数据；不定义中国资格、工资或标准与资质。"
+                  "美国47-5023全部29任务：14Core、14Supplemental、1New且重要度未给；可含设计井泵系统/钻爆布局，不等中国设计/爆破许可。",
+                  "美国O*NET反馈：面对面每日75%/每周非每日18%，持续接触39%/大部分33%，电话每日35%/每周非每日39%/从不22%；准确极重要16%/很重要50%/重要25%，站立持续52%/>一半23%，危险设备每日71%/每周非每日17%，普通PPE每日84%，噪声每日65%/每周非每日15%，高低温每日28%/每周非每日39%，全天候户外每日79%，全身振动每日42%/每周非每日43%，错误极严重52%/很严重15%/严重15%，每日决策44%、每日时间压力20%，不竞争33%。周工时>40h53%/40h47%，不规律61%/规律36%，不证明中国每人夜班/连续值班。情境是反馈非伤害发生率或个人风险。",
+                  "美国O*NET新雇教育反馈高中/同等73%、不足高中15%、中等后证书12%，Job Zone1—2/SVP<6为群组准备描述、训练几天至1年，不是本职业法律门槛或人人数周上手。BLS2025精确行典型高中、相关工作经验少于5年、长期在岗训练；两个来源指标不同，不能据群组标签称零经验必录或普遍短训。",
+                  "美国47-5023精确职业：2025就业19500→2035预计20200，BLS净增约700、精确增长3.6%；O*NET国家趋势取整4%，摘要类别Average3—4%。2025—2035年均1400空缺含增长与替代，非十年合计、非1400年净增或实时招聘。BLS自雇比例为“—”不填0、不推出全为受雇；预测非中国需求、个人录用或AI因果。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet",
                 "limitation": "美国精确职业数据；不定义中国资格、工资或标准与资质。",
                 "market": "美国",
                 "name": "O*NET OnLine：Earth Drillers, Except Oil and Gas（47-5023.00）职业档案",
-                "period": "updated 2026; accessed 2026-09-19",
+                "period": "2026档案；2025工资/2025—2035预测",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/47-5023.00"
@@ -31507,10 +31587,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "把任务层面的生成式 AI 暴露与「实际采用、岗位增减」区分开。",
-                  "不提供本职业采用率、裁员率或因果就业证据。"
+                  "既有链接是部门/方法/检索入口，不代替本职业统计、企业制度或法规标准具体条文；本轮新增正文来源支撑授权九模块。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation / query entry",
                 "id": "r2-ai",
                 "limitation": "不提供本职业采用率、裁员率或因果就业证据。",
                 "market": "全球",
@@ -31523,10 +31602,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于说明中国大陆招聘公告与计酬结构（基本工资与野外与夜班补贴与台班与承包与工期奖）的阅读方法。",
-                  "招聘报价不是职业级统计口径，也不代表本职业中位数或起薪。"
+                  "既有链接是部门/方法/检索入口，不代替本职业统计、企业制度或法规标准具体条文；本轮新增正文来源支撑授权九模块。"
                 ],
-                "evidence_type": "editorial synthesis",
+                "evidence_type": "editorial method / navigation",
                 "id": "r2-pay-1",
                 "limitation": "招聘报价不是职业级统计口径，也不代表本职业中位数或起薪。",
                 "market": "中国大陆",
@@ -31539,10 +31617,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于说明计酬口径与工资数据发布方法。",
-                  "方法说明不是本职业具体工资结论。"
+                  "既有链接是部门/方法/检索入口，不代替本职业统计、企业制度或法规标准具体条文；本轮新增正文来源支撑授权九模块。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation / query entry",
                 "id": "r2-pay-2",
                 "limitation": "方法说明不是本职业具体工资结论。",
                 "market": "美国",
@@ -31555,10 +31632,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于说明 OEWS 抽样、计酬口径与公布方法。",
-                  "方法说明不是本职业具体工资结论。"
+                  "既有链接是部门/方法/检索入口，不代替本职业统计、企业制度或法规标准具体条文；本轮新增正文来源支撑授权九模块。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation / query entry",
                 "id": "r2-pay-3",
                 "limitation": "方法说明不是本职业具体工资结论。",
                 "market": "美国",
@@ -31587,10 +31663,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于核对职业安全与工作条件信息。",
-                  "不提供本职业采用率、替代概率或合规结论。"
+                  "既有链接是部门/方法/检索入口，不代替本职业统计、企业制度或法规标准具体条文；本轮新增正文来源支撑授权九模块。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation / query entry",
                 "id": "sag",
                 "limitation": "不提供本职业采用率、替代概率或合规结论。",
                 "market": "美国",
@@ -31603,10 +31678,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于核对 OEWS 统计口径与期间。",
-                  "不提供本职业采用率、替代概率或合规结论。"
+                  "既有链接是部门/方法/检索入口，不代替本职业统计、企业制度或法规标准具体条文；本轮新增正文来源支撑授权九模块。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official navigation / query entry",
                 "id": "sag-moa",
                 "limitation": "不提供本职业采用率、替代概率或合规结论。",
                 "market": "美国",
@@ -31619,10 +31693,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于核对工程建设标准与建筑市场与安全生产相关公开要求（含基础工程与爆破辅助钻孔相关作业）。",
-                  "主管部门入口不代替标准与法规原文与本项目要求；不规定工资水平。"
+                  "既有链接是部门/方法/检索入口，不代替本职业统计、企业制度或法规标准具体条文；本轮新增正文来源支撑授权九模块。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation / query entry",
                 "id": "teacher",
                 "limitation": "主管部门入口不代替标准与法规原文与本项目要求；不规定工资水平。",
                 "market": "中国大陆",
@@ -31631,6 +31704,216 @@
                 "publisher": "中华人民共和国住房和城乡建设部",
                 "scope": "industry_proxy",
                 "url": "https://www.mohurd.gov.cn/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-oews-concepts",
+                "limitation": "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。",
+                "market": "美国",
+                "name": "BLS OEWS工资人群与组成",
+                "period": "现行方法；本批检索2026-10-09",
+                "publisher": "Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。"
+                ],
+                "evidence_type": "official law",
+                "id": "r5-cn-pipl",
+                "limitation": "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。",
+                "market": "中国内地",
+                "name": "个人信息保护法：图纸、孔位和地质项目资料中的可识别个人信息边界",
+                "period": "2021法；本批实际读；检索2026-10-09",
+                "publisher": "全国人大/中央网信办",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "自愿AI治理建议非图纸、孔位和地质项目资料的行业技术规范或岗位授权，也非工具采用/提效实测。"
+                ],
+                "evidence_type": "official framework",
+                "id": "r5-nist-current",
+                "limitation": "自愿AI治理建议非图纸、孔位和地质项目资料的行业技术规范或岗位授权，也非工具采用/提效实测。",
+                "market": "跨市场",
+                "name": "NIST AI RMF官方框架说明",
+                "period": "自愿框架1.0；本批实际读；检索2026-10-09",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本批实际读ILO2025摘要，本职业未核SOC47-5023与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。"
+                ],
+                "evidence_type": "official research summary",
+                "id": "r5-ilo-current",
+                "limitation": "本批实际读ILO2025摘要，本职业未核SOC47-5023与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。",
+                "market": "跨市场",
+                "name": "ILO2025 GenAI暴露研究官方摘要",
+                "period": "2025研究摘要；本批实际读；检索2026-10-09",
+                "publisher": "ILO",
+                "scope": "contextual",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国47-5023 2025年年薪10/25/50/75/90分位44460/49900/60190/72450/83800美元；时薪21.37/23.99/28.94/34.83/40.29。OEWS受雇税前直时工资，排除自雇，含佣金/生产奖金，不含加班溢价；不能一概排除全部野外/夜班/温度补贴，具体工资项按定义核。分位非起薪/年限等级/个人上限。"
+                ],
+                "evidence_type": "official wage statistics",
+                "id": "r5-wages",
+                "limitation": "美国47-5023 2025年年薪10/25/50/75/90分位44460/49900/60190/72450/83800美元；时薪21.37/23.99/28.94/34.83/40.29。OEWS受雇税前直时工资，排除自雇，含佣金/生产奖金，不含加班溢价；不能一概排除全部野外/夜班/温度补贴，具体工资项按定义核。分位非起薪/年限等级/个人上限。",
+                "market": "美国",
+                "name": "O*NET转引BLS47-5023全国工资五分位",
+                "period": "2025工资",
+                "publisher": "O*NET / BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/47-5023.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国47-5023精确职业：2025就业19500→2035预计20200，BLS净增约700、精确增长3.6%；O*NET国家趋势取整4%，摘要类别Average3—4%。2025—2035年均1400空缺含增长与替代，非十年合计、非1400年净增或实时招聘。BLS自雇比例为“—”不填0、不推出全为受雇；预测非中国需求、个人录用或AI因果。"
+                ],
+                "evidence_type": "official employment projections",
+                "id": "r5-trends",
+                "limitation": "美国47-5023精确职业：2025就业19500→2035预计20200，BLS净增约700、精确增长3.6%；O*NET国家趋势取整4%，摘要类别Average3—4%。2025—2035年均1400空缺含增长与替代，非十年合计、非1400年净增或实时招聘。BLS自雇比例为“—”不填0、不推出全为受雇；预测非中国需求、个人录用或AI因果。",
+                "market": "美国",
+                "name": "O*NET47-5023国家就业趋势",
+                "period": "2025—2035",
+                "publisher": "O*NET / BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/47-5023.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国47-5023精确职业：2025就业19500→2035预计20200，BLS净增约700、精确增长3.6%；O*NET国家趋势取整4%，摘要类别Average3—4%。2025—2035年均1400空缺含增长与替代，非十年合计、非1400年净增或实时招聘。BLS自雇比例为“—”不填0、不推出全为受雇；预测非中国需求、个人录用或AI因果。 美国O*NET新雇教育反馈高中/同等73%、不足高中15%、中等后证书12%，Job Zone1—2/SVP<6为群组准备描述、训练几天至1年，不是本职业法律门槛或人人数周上手。BLS2025精确行典型高中、相关工作经验少于5年、长期在岗训练；两个来源指标不同，不能据群组标签称零经验必录或普遍短训。"
+                ],
+                "evidence_type": "official employment projections",
+                "id": "r5-projections",
+                "limitation": "美国47-5023精确职业：2025就业19500→2035预计20200，BLS净增约700、精确增长3.6%；O*NET国家趋势取整4%，摘要类别Average3—4%。2025—2035年均1400空缺含增长与替代，非十年合计、非1400年净增或实时招聘。BLS自雇比例为“—”不填0、不推出全为受雇；预测非中国需求、个人录用或AI因果。 美国O*NET新雇教育反馈高中/同等73%、不足高中15%、中等后证书12%，Job Zone1—2/SVP<6为群组准备描述、训练几天至1年，不是本职业法律门槛或人人数周上手。BLS2025精确行典型高中、相关工作经验少于5年、长期在岗训练；两个来源指标不同，不能据群组标签称零经验必录或普遍短训。",
+                "market": "美国",
+                "name": "BLS预测与特征47-5023精确行",
+                "period": "2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "编辑候选：测试任务/孔位资料提取、参数表核对、取样与维护记录整理；需真实数据与已批准方案、人工现场核验。未核部署/提效/减漏/替代；量测/传统计算/机械控制不当然是GenAI。O*NET软件4类GPS、Office、Excel、Word；Hot3项2025美国全部唯一职业招聘分母均未给比例，不填0。ILO暴露非采用/裁员，NIST治理非钻探合规许可。"
+                ],
+                "evidence_type": "job posting skill statistics",
+                "id": "r5-hot",
+                "limitation": "编辑候选：测试任务/孔位资料提取、参数表核对、取样与维护记录整理；需真实数据与已批准方案、人工现场核验。未核部署/提效/减漏/替代；量测/传统计算/机械控制不当然是GenAI。O*NET软件4类GPS、Office、Excel、Word；Hot3项2025美国全部唯一职业招聘分母均未给比例，不填0。ILO暴露非采用/裁员，NIST治理非钻探合规许可。",
+                "market": "美国",
+                "name": "O*NET47-5023招聘技术数据",
+                "period": "2025招聘",
+                "publisher": "O*NET / Lightcast",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/47-5023.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "r5-geology-rule",
+                "limitation": "35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。",
+                "market": "中国大陆",
+                "name": "35号经78号修正地质勘探安全规章正文",
+                "period": "2011实施；2015修正",
+                "publisher": "原安监总局 / 应急管理部",
+                "scope": "industry_proxy",
+                "url": "https://www.mem.gov.cn/gk/gwgg/agwzlfl/zjl_01/201505/t20150526_233767.shtml"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025-11-11公开答复：2017国发46取消勘查资质审批，固体矿产单位/人员不再有该项准入；仍遵守法规标准/安全生态要求。不能推免安全许可。"
+                ],
+                "evidence_type": "official policy explanation",
+                "id": "r5-qualification-cancel",
+                "limitation": "2025-11-11公开答复：2017国发46取消勘查资质审批，固体矿产单位/人员不再有该项准入；仍遵守法规标准/安全生态要求。不能推免安全许可。",
+                "market": "中国大陆",
+                "name": "自然资源部固体矿产勘查资质取消答复（通辽自然资源局转载）",
+                "period": "2025-11-11",
+                "publisher": "自然资源部 / 通辽市自然资源局",
+                "scope": "industry_proxy",
+                "url": "https://zrzyj.tongliao.gov.cn/jlhd/zcwdk/dz/202511/t20251111_1012874.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "AQ2004-2005平台现行/强制；1范围为中国地质勘探（石油天然气地质勘探除外），明确不适用用该技术从事其他行业，不把美国代码范围全映成标准范围。实读4.5地质勘探单位对野外从业人员每两年至少一次野外生存、自救互救技能训练；项目组每年野外工作出队前或变换地区前安全教育、4.7防护用品、4.8体检；10.1/10.2机台地基与钻架安装搬运，10.4.1开孔前设备防护检查、10.4.2禁止转动时擦洗拆卸维修与跨越传动带、10.4.3高压胶管修配停机；10.5.2孔内事故由机班长或熟练技工操作/专人指挥、其他撤离，10.7.8维修电器断电挂牌或看护。具体设计/设备/引用标准新版本另核，不以本页当操作手册。"
+                ],
+                "evidence_type": "official standard",
+                "id": "r5-aq",
+                "limitation": "AQ2004-2005平台现行/强制；1范围为中国地质勘探（石油天然气地质勘探除外），明确不适用用该技术从事其他行业，不把美国代码范围全映成标准范围。实读4.5地质勘探单位对野外从业人员每两年至少一次野外生存、自救互救技能训练；项目组每年野外工作出队前或变换地区前安全教育、4.7防护用品、4.8体检；10.1/10.2机台地基与钻架安装搬运，10.4.1开孔前设备防护检查、10.4.2禁止转动时擦洗拆卸维修与跨越传动带、10.4.3高压胶管修配停机；10.5.2孔内事故由机班长或熟练技工操作/专人指挥、其他撤离，10.7.8维修电器断电挂牌或看护。具体设计/设备/引用标准新版本另核，不以本页当操作手册。",
+                "market": "中国大陆",
+                "name": "AQ2004-2005地质勘探安全规程正文",
+                "period": "2005-05-01实施；所列章实读",
+                "publisher": "原安监总局 / 国家矿山安全监察局山东局",
+                "scope": "industry_proxy",
+                "url": "https://sd.chinamine-safety.gov.cn/resource/sdcoal2021/att/202205/4e1e3230-6960-4bdf-862b-4753b416a940.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2026-10-09页面现行/强制，2005-02-21发布、2005-05-01实施。查询页只证身份状态非具体操作。"
+                ],
+                "evidence_type": "official standard catalogue",
+                "id": "r5-aq-status",
+                "limitation": "2026-10-09页面现行/强制，2005-02-21发布、2005-05-01实施。查询页只证身份状态非具体操作。",
+                "market": "中国大陆",
+                "name": "标准平台AQ2004-2005现行状态",
+                "period": "2026-10-09",
+                "publisher": "国家标准技术审评中心",
+                "scope": "industry_proxy",
+                "url": "https://std.samr.gov.cn/hb/search/stdHBDetailed?id=8B1827F189A9BB19E05397BE0A0AB44A"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国安全生产法44/45条单位告知危险并供合规PPE，54条可拒违章指挥强令冒险；55条直接人身危险紧急时可停或必要应急后撤离，不须登记/报告批准在先；57/58条守规程/正确PPE/培训，59条隐患立即报告现场安全管理或单位负责人。普通质量问题中止/恢复与专业签字岗位须核真实项目制度；本轮未取得，不能授予班组长/地质/维修/检验统一最终权。"
+                ],
+                "evidence_type": "official law",
+                "id": "r5-safety-law",
+                "limitation": "中国安全生产法44/45条单位告知危险并供合规PPE，54条可拒违章指挥强令冒险；55条直接人身危险紧急时可停或必要应急后撤离，不须登记/报告批准在先；57/58条守规程/正确PPE/培训，59条隐患立即报告现场安全管理或单位负责人。普通质量问题中止/恢复与专业签字岗位须核真实项目制度；本轮未取得，不能授予班组长/地质/维修/检验统一最终权。",
+                "market": "中国大陆",
+                "name": "安全生产法2021修正正文",
+                "period": "2021-09-01实施",
+                "publisher": "全国人大常委会 / 应急管理部",
+                "scope": "industry_proxy",
+                "url": "https://www.mem.gov.cn/fw/flfgbz/fg/202107/t20210716_416558.shtml"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "观察、训练路线、可能后果/候选试验是编辑判断，不是招聘样本、法规操作流程或个人成功率。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "r5-editor",
+                "limitation": "观察、训练路线、可能后果/候选试验是编辑判断，不是招聘样本、法规操作流程或个人成功率。",
+                "market": "全球",
+                "name": "本项观察与AI候选/转岗比较编辑说明",
+                "period": "2026-10-09实读",
+                "publisher": "FermatMind本轮作者",
+                "scope": "editorial_synthesis",
+                "url": null
               }
             ]
           },
@@ -32091,7 +32374,7 @@
           },
           {
             "来源": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32110,7 +32393,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32222,7 +32505,7 @@
         },
         "evidence_rows": [
           {
-            "source_ref": "r2-ai",
+            "source_ref": "r5-ilo-current",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.1.limit",
               "block": "ai-impact",
@@ -32230,7 +32513,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "r2-ai",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32249,7 +32532,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "r2-ai",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32257,7 +32540,7 @@
             }
           },
           {
-            "source_ref": "sag",
+            "source_ref": "r5-oews-concepts",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.2.limit",
               "block": "ai-impact",
@@ -32265,7 +32548,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag",
+              "$source": "r5-oews-concepts",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32284,7 +32567,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "sag",
+              "$source": "r5-oews-concepts",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32292,7 +32575,7 @@
             }
           },
           {
-            "source_ref": "sag-moa",
+            "source_ref": "r5-nist-current",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.3.limit",
               "block": "ai-impact",
@@ -32300,7 +32583,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag-moa",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32319,7 +32602,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "sag-moa",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32327,7 +32610,7 @@
             }
           },
           {
-            "source_ref": "bls",
+            "source_ref": "onet",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.4.limit",
               "block": "ai-impact",
@@ -32335,7 +32618,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "bls",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32354,7 +32637,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32362,7 +32645,7 @@
             }
           },
           {
-            "source_ref": "nist",
+            "source_ref": "r5-editor",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.5.limit",
               "block": "ai-impact",
@@ -32370,7 +32653,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "nist",
+              "$source": "r5-editor",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32388,13 +32671,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "链接": {
-              "$source": "nist",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "actors.source-register.published.1"
-            }
+            "链接": null
           }
         ],
         "heading": {
@@ -32594,7 +32871,7 @@
             }
           },
           {
-            "source_ref": "sag",
+            "source_ref": "r5-cn-pipl",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.6.answer",
               "block": "ai-impact",
@@ -32602,14 +32879,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "sag",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33158,7 +33435,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33166,7 +33443,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33181,7 +33458,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-safety-law",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33189,7 +33466,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-safety-law",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33204,7 +33481,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "r5-geology-rule",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33212,7 +33489,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "r5-geology-rule",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33227,7 +33504,7 @@
           },
           {
             "href": {
-              "$source": "r2-pay-3",
+              "$source": "r5-qualification-cancel",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33235,7 +33512,7 @@
             },
             "id": "r2-pay-3",
             "label": {
-              "$source": "r2-pay-3",
+              "$source": "r5-qualification-cancel",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34091,7 +34368,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "onet",
+              "cn-rule",
+              "employer"
             ],
             "id": "image-use",
             "mitigation": {
@@ -34127,7 +34406,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "onet",
+              "cn-rule",
+              "employer"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -34163,7 +34444,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "cn-rule"
+              "onet",
+              "cn-rule",
+              "employer"
             ],
             "id": "project-income",
             "mitigation": {
@@ -34199,7 +34482,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "cn-rule"
+              "onet",
+              "cn-rule",
+              "employer"
             ],
             "id": "identity-procedure",
             "mitigation": {
@@ -34235,8 +34520,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "nist",
-              "sag-moa"
+              "onet",
+              "cn-rule",
+              "employer"
             ],
             "id": "project-data",
             "mitigation": {
@@ -34272,8 +34558,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "employer"
+              "employer",
+              "sag-moa"
             ],
             "id": "audition-feedback",
             "mitigation": {
@@ -34300,7 +34586,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34308,7 +34594,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34323,7 +34609,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-safety-law",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34331,7 +34617,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-safety-law",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34346,7 +34632,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "r5-aq",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34354,7 +34640,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "r5-aq",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34369,7 +34655,7 @@
           },
           {
             "href": {
-              "$source": "sag-moa",
+              "$source": "r5-geology-rule",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34377,7 +34663,7 @@
             },
             "id": "sag-moa",
             "label": {
-              "$source": "sag-moa",
+              "$source": "r5-geology-rule",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34392,7 +34678,7 @@
           },
           {
             "href": {
-              "$source": "nist",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34400,7 +34686,7 @@
             },
             "id": "nist",
             "label": {
-              "$source": "nist",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34412,6 +34698,24 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "onet",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "onet",
+            "label": {
+              "$source": "onet",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            },
+            "scope": "BLS/OEWS 与 O*NET：用于工资、就业与工作情境与准备层级口径。"
           }
         ]
       },
@@ -34427,42 +34731,42 @@
             {
               "指标": "数据类型",
               "数值": "钻探与坑探安全与环保与特种作业要求为主",
-              "说明": "中国大陆公开工资统计按行业门类与单位类型发布，且本职业相关岗位分散在采矿与采石与油气支持与建筑与地质勘探与水利与岩土工程等行业，未建立与本职业对应的职业级口径；本页因此保留缺口，不以行业均值替代。"
+              "说明": "中国本职业全国精确工资缺口。NBS2025建筑业非私营92036/私营66275、科学技术服务业非私营182064/私营83560元/年（当前中英文原页表5：2025=83560、2024=82387）分别行业税前均值，施工/地质/岩土岗位可能相关但单位归类须核，不是职业中位/起薪/月薪；5+城镇法人、排除个体自由职业，不一概排除单位计件/兼职/劳务派遣。"
             },
             {
               "指标": "安全生产许可",
               "数值": "应取得安全生产许可证",
-              "说明": "从事钻探工程与坑探工程施工的地质勘探单位应取得安全生产许可证，并持地质勘查资质证书与项目任务批准文件或合同书向工作区域所在地县级安全生产监督管理部门书面报告（《金属与非金属矿产资源地质勘探安全生产监督管理暂行规定》，国家安全生产监督管理总局令第 35 号公布，据第 78 号修正）。"
+              "说明": "35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。"
             },
             {
               "指标": "特种作业与培训",
-              "数值": "持证上岗与 72 小时培训",
-              "说明": "特种作业人员须经专门安全技术培训并考核合格、取得特种作业操作证后方可上岗；坑探工程作业人员首次上岗前应接受不少于 72 小时安全生产教育并于此后每年不少于 20 小时再培训。"
+              "数值": "特种取证；72h/20h仅规定范围坑探",
+              "说明": "35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。"
             },
             {
               "指标": "安全规程与安全专篇",
-              "数值": "符合 AQ 2004 并设安全专篇",
-              "说明": "地质勘探工程的设计与施工与安全管理应符合《地质勘探安全规程》（AQ 2004）；坑探工程设计方案应设安全专篇并经所在地安全生产监督管理部门审查同意（本页按规章与标准名称与已核要点引用，未逐条核对条文编号）。"
+              "数值": "AQ2004地质范围；专篇仅规定范围坑探",
+              "说明": "AQ2004-2005平台现行/强制；1范围为中国地质勘探（石油天然气地质勘探除外），明确不适用用该技术从事其他行业，不把美国代码范围全映成标准范围。实读4.5地质勘探单位对野外从业人员每两年至少一次野外生存、自救互救技能训练；项目组每年野外工作出队前或变换地区前安全教育、4.7防护用品、4.8体检；10.1/10.2机台地基与钻架安装搬运，10.4.1开孔前设备防护检查、10.4.2禁止转动时擦洗拆卸维修与跨越传动带、10.4.3高压胶管修配停机；10.5.2孔内事故由机班长或熟练技工操作/专人指挥、其他撤离，10.7.8维修电器断电挂牌或看护。具体设计/设备/引用标准新版本另核，不以本页当操作手册。 35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。"
             },
             {
               "指标": "计酬方式",
               "数值": "计时或计件或台班或承包",
-              "说明": "相关岗位计酬结构差别较大，常见按天或按月定额加野外与夜班与温度补贴与台班或承包结算与工期奖与安全奖。"
+              "说明": "编辑核合同支付与工时/结算；本轮未采常见安排。"
             },
             {
               "指标": "工时与作业节奏",
               "数值": "任务驱动与野外驻场",
-              "说明": "作业受任务与工期与天气影响，常见连续值班与野外驻场与夜班；作息与防护与作业许可按企业与项目制度与法规执行。"
+              "说明": "美国O*NET反馈：面对面每日75%/每周非每日18%，持续接触39%/大部分33%，电话每日35%/每周非每日39%/从不22%；准确极重要16%/很重要50%/重要25%，站立持续52%/>一半23%，危险设备每日71%/每周非每日17%，普通PPE每日84%，噪声每日65%/每周非每日15%，高低温每日28%/每周非每日39%，全天候户外每日79%，全身振动每日42%/每周非每日43%，错误极严重52%/很严重15%/严重15%，每日决策44%、每日时间压力20%，不竞争33%。周工时>40h53%/40h47%，不规律61%/规律36%，不证明中国每人夜班/连续值班。情境是反馈非伤害发生率或个人风险。"
             },
             {
               "指标": "样本边界",
               "数值": "职业级缺口",
-              "说明": "招聘报价、行业门类均值与计件制与承包制与劳务派遣都不能折算为全国中位数，也不能与美国受雇工资统计直接比较。"
+              "说明": "中国本职业全国精确工资缺口。NBS2025建筑业非私营92036/私营66275、科学技术服务业非私营182064/私营83560元/年（当前中英文原页表5：2025=83560、2024=82387）分别行业税前均值，施工/地质/岩土岗位可能相关但单位归类须核，不是职业中位/起薪/月薪；5+城镇法人、排除个体自由职业，不一概排除单位计件/兼职/劳务派遣。"
             },
             {
               "指标": "地区比较",
               "数值": "中美证据分别解释",
-              "说明": "美国分位为受雇税前工资统计口径（不含野外与夜班与温度补贴与加班与台班或承包）；中国大陆按企业与项目与野外与夜班与台班或承包制度确定，两者应分别解释，不能直接换算或合并。"
+              "说明": "美国47-5023 2025年年薪10/25/50/75/90分位44460/49900/60190/72450/83800美元；时薪21.37/23.99/28.94/34.83/40.29。OEWS受雇税前直时工资，排除自雇，含佣金/生产奖金，不含加班溢价；不能一概排除全部野外/夜班/温度补贴，具体工资项按定义核。分位非起薪/年限等级/个人上限。 中国合同另核。"
             }
           ],
           "china_ai_row": {
@@ -34475,7 +34779,7 @@
           "china_edu_table": [
             {
               "学历段": "安全生产许可",
-              "岗位方向": "从事钻探工程与坑探工程施工的地质勘探单位应取得安全生产许可证并持地质勘查资质证书与项目任务批准文件或合同书向工作区域所在地县级安全生产监督管理部门书面报告。",
+              "岗位方向": "35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
                 "block": "china-salary",
@@ -34485,7 +34789,7 @@
             },
             {
               "学历段": "特种作业与培训",
-              "岗位方向": "特种作业人员须经专门安全技术培训并考核合格、取得特种作业操作证后方可上岗；坑探工程作业人员首次上岗前应接受不少于 72 小时安全生产教育并于此后每年不少于 20 小时再培训。",
+              "岗位方向": "35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
                 "block": "china-salary",
@@ -34495,7 +34799,7 @@
             },
             {
               "学历段": "安全规程与安全专篇",
-              "岗位方向": "地质勘探工程的设计与施工与安全管理应符合《地质勘探安全规程》（AQ 2004）；坑探工程设计方案应设安全专篇并经审查同意。",
+              "岗位方向": "AQ2004-2005平台现行/强制；1范围为中国地质勘探（石油天然气地质勘探除外），明确不适用用该技术从事其他行业，不把美国代码范围全映成标准范围。实读4.5地质勘探单位对野外从业人员每两年至少一次野外生存、自救互救技能训练；项目组每年野外工作出队前或变换地区前安全教育、4.7防护用品、4.8体检；10.1/10.2机台地基与钻架安装搬运，10.4.1开孔前设备防护检查、10.4.2禁止转动时擦洗拆卸维修与跨越传动带、10.4.3高压胶管修配停机；10.5.2孔内事故由机班长或熟练技工操作/专人指挥、其他撤离，10.7.8维修电器断电挂牌或看护。具体设计/设备/引用标准新版本另核，不以本页当操作手册。 35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.theater",
                 "block": "china-salary",
@@ -34505,7 +34809,7 @@
             },
             {
               "学历段": "全国职业级工资分布",
-              "岗位方向": "本轮未取得可核对的职业级工资统计；不以行业均值或招聘报价替代，行业平均工资只作为可见行业代理。",
+              "岗位方向": "中国本职业全国精确工资缺口。NBS2025建筑业非私营92036/私营66275、科学技术服务业非私营182064/私营83560元/年（当前中英文原页表5：2025=83560、2024=82387）分别行业税前均值，施工/地质/岩土岗位可能相关但单位归类须核，不是职业中位/起薪/月薪；5+城镇法人、排除个体自由职业，不一概排除单位计件/兼职/劳务派遣。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.national",
                 "block": "china-salary",
@@ -34615,7 +34919,7 @@
               "月薪参考": {
                 "$join": [
                   {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
+                    "$fact": "r5-china-jiaojiang-featured-daily-2026",
                     "field": "display_value"
                   },
                   {
@@ -34641,7 +34945,7 @@
           "china_soc_row": "中国大陆薪资口径",
           "edu": "训练与特种作业与安全环保见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "r5-china-jiaojiang-featured-daily-2026"
           ],
           "sources_note": "来源链接按各自适用范围使用。",
           "ui": {
@@ -34704,7 +35008,7 @@
         },
         "bls_table": [
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-median",
             "指标": "薪资 · 10 分位",
             "数值": {
               "$fact": "low",
@@ -34718,10 +35022,10 @@
             "说明": "本职业 2025 年工资数据的下四分位；小时口径为 23.99 美元。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-median",
             "指标": "薪资 · 中位数",
             "数值": {
-              "$fact": "median",
+              "$fact": "r5-median",
               "field": "display_value"
             },
             "说明": "本职业 2025 年工资数据的中间位置：一半从业者低于、一半高于该值（中位时薪 28.94 美元）。"
@@ -34732,40 +35036,40 @@
             "说明": "本职业 2025 年工资数据的上四分位；小时口径为 34.83 美元。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-median",
             "指标": "薪资 · 90 分位",
             "数值": {
               "$fact": "high",
               "field": "display_value"
             },
-            "说明": "本职业 2025 年工资数据的分布高端，通常与地区、行业与项目与是否含野外与夜班与承包与带班相关。"
+            "说明": "第90分位不是上限；未核地区/项目/补贴与分位因果。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024 就业 · 本职业人数",
+            "fact_ref": "r5-median",
+            "指标": "2025就业存量",
             "数值": {
-              "$fact": "employment",
+              "$fact": "r5-employment",
               "field": "display_value"
             },
-            "说明": "2024 年本职业就业规模（O*NET 摘要页口径约 18,300 人）；随采矿与勘探与基建与水利需求变化。"
+            "说明": "美国47-5023精确职业：2025就业19500→2035预计20200，BLS净增约700、精确增长3.6%；O*NET国家趋势取整4%，摘要类别Average3—4%。2025—2035年均1400空缺含增长与替代，非十年合计、非1400年净增或实时招聘。BLS自雇比例为“—”不填0、不推出全为受雇；预测非中国需求、个人录用或AI因果。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 增长预测",
+            "fact_ref": "r5-median",
+            "指标": "2025—2035增长",
             "数值": {
-              "$fact": "growth",
+              "$fact": "r5-growth",
               "field": "display_value"
             },
-            "说明": "O*NET 摘要页标注为「平均（Average，3% 至 4%）」，该页未给出单一精确百分比，本页按口径原文表述；未取得 BLS 职业展望本职业页一手口径。"
+            "说明": "美国47-5023精确职业：2025就业19500→2035预计20200，BLS净增约700、精确增长3.6%；O*NET国家趋势取整4%，摘要类别Average3—4%。2025—2035年均1400空缺含增长与替代，非十年合计、非1400年净增或实时招聘。BLS自雇比例为“—”不填0、不推出全为受雇；预测非中国需求、个人录用或AI因果。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 预计空缺",
+            "fact_ref": "r5-median",
+            "指标": "2025—2035年均空缺",
             "数值": {
-              "$fact": "openings",
+              "$fact": "r5-openings",
               "field": "display_value"
             },
-            "说明": "约 1,700 个，为预测期内因增长与更替等形成的合计空缺，不是每年净增。"
+            "说明": "美国47-5023精确职业：2025就业19500→2035预计20200，BLS净增约700、精确增长3.6%；O*NET国家趋势取整4%，摘要类别Average3—4%。2025—2035年均1400空缺含增长与替代，非十年合计、非1400年净增或实时招聘。BLS自雇比例为“—”不填0、不推出全为受雇；预测非中国需求、个人录用或AI因果。"
           }
         ],
         "boundary": {
@@ -34827,7 +35131,7 @@
           "type": "prose"
         },
         "growth": {
-          "$fact": "growth",
+          "$fact": "r5-growth",
           "field": "display_value"
         },
         "heading": {
@@ -34842,10 +35146,10 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024 年基期（O*NET 摘要页与详细资料页）",
+        "industry_period": "2025统计/2026情境",
         "industry_rows": [
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-median",
             "industry": "采矿与采石与油气支持与建筑与地质勘探与水利与岩土工程等场景（O*NET 摘要页与任务描述，未附行业门类占比与人数）",
             "median": {
               "$fact": "industry-theater",
@@ -34859,10 +35163,10 @@
             }
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-median",
             "industry": "野外与施工现场与孔位作业面，按孔位与工序与班次与野外驻场安排",
             "median": {
-              "$fact": "industry-education",
+              "$fact": "r5-industry-education",
               "field": "display_value"
             },
             "note": {
@@ -34873,10 +35177,10 @@
             }
           },
           {
-            "fact_ref": "median",
-            "industry": "工作情境：每天暴露于危险设备 71%、每天穿戴常见防护或安全装备 84%、每天噪音 65%、极热极冷每天 28%＋每周以上 39%、户外各种天气每天 79%、全身振动每天 42%＋每周以上 43%",
+            "fact_ref": "r5-median",
+            "industry": "美国O*NET反馈：面对面每日75%/每周非每日18%，持续接触39%/大部分33%，电话每日35%/每周非每日39%/从不22%；准确极重要16%/很重要50%/重要25%，站立持续52%/>一半23%，危险设备每日71%/每周非每日17%，普通PPE每日84%，噪声每日65%/每周非每日15%，高低温每日28%/每周非每日39%，全天候户外每日79%，全身振动每日42%/每周非每日43%，错误极严重52%/很严重15%/严重15%，每日决策44%、每日时间压力20%，不竞争33%。周工时>40h53%/40h47%，不规律61%/规律36%，不证明中国每人夜班/连续值班。情境是反馈非伤害发生率或个人风险。",
             "median": {
-              "$fact": "industry-amusement",
+              "$fact": "r5-industry-amusement",
               "field": "display_value"
             },
             "note": {
@@ -34888,7 +35192,7 @@
           },
           {
             "industry": "O*NET 未提供更细的行业分布与行业工资",
-            "median": "统计不含自雇",
+            "median": "OEWS工资排除自雇；EP自雇比例未给",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -34943,7 +35247,7 @@
           }
         ],
         "median": {
-          "$fact": "median",
+          "$fact": "r5-median",
           "field": "display_value"
         },
         "outlook_heading": {
@@ -34953,7 +35257,7 @@
           "type": "prose"
         },
         "outlook_period": {
-          "$fact": "growth",
+          "$fact": "r5-growth",
           "field": "period"
         },
         "wage_column_labels": [
@@ -34993,7 +35297,7 @@
             },
             "label": "全国中位工资",
             "value": {
-              "$fact": "median",
+              "$fact": "r5-median",
               "field": "display_value"
             }
           },
@@ -35160,7 +35464,7 @@
           {
             "geography": "美国",
             "horizon": {
-              "$fact": "growth",
+              "$fact": "r5-growth",
               "field": "period"
             },
             "interpretation": {
@@ -35177,15 +35481,15 @@
             },
             "metric": "就业总体变化",
             "occupation_scope": "土方钻探工、石油天然气除外（O*NET-SOC 47-5023.00）",
-            "source_id": "bls",
+            "source_id": "r5-projections",
             "value": {
-              "$fact": "growth",
+              "$fact": "r5-growth",
               "field": "display_value"
             }
           },
           {
             "geography": "美国",
-            "horizon": "2024 年基期",
+            "horizon": "2025基期",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -35200,8 +35504,8 @@
             },
             "metric": "本职业就业规模",
             "occupation_scope": "土方钻探工、石油天然气除外（O*NET-SOC 47-5023.00）",
-            "source_id": "ratify",
-            "value": "2024 年约 18,300 人（O*NET 摘要页口径）；本职业预测为平均，统计波动与采矿与勘探与基建景气相关"
+            "source_id": "r5-projections",
+            "value": "美国本职业19500人；2035预计20200，非实时招聘"
           },
           {
             "geography": "美国与中国大陆",
@@ -35220,15 +35524,15 @@
             },
             "metric": "训练与特种作业与安全环保路径",
             "occupation_scope": "土方钻探工、石油天然气除外（O*NET-SOC 47-5023.00）",
-            "source_id": "employer",
-            "value": "美国以任务书识读与就位调平与钻具选配与钻进参数与安全环保带教为主（Job Zone 1-2），无统一执照；中国大陆钻探与坑探工程施工的地质勘探单位应取得安全生产许可证并书面报告，特种作业人员须持特种作业操作证上岗，坑探作业人员首次上岗前接受不少于 72 小时安全生产教育并于此后每年不少于 20 小时再培训"
+            "source_id": "r5-geology-rule",
+            "value": "美国O*NET新雇教育反馈高中/同等73%、不足高中15%、中等后证书12%，Job Zone1—2/SVP<6为群组准备描述、训练几天至1年，不是本职业法律门槛或人人数周上手。BLS2025精确行典型高中、相关工作经验少于5年、长期在岗训练；两个来源指标不同，不能据群组标签称零经验必录或普遍短训。 35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35236,7 +35540,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35251,7 +35555,7 @@
           },
           {
             "href": {
-              "$source": "ratify",
+              "$source": "r5-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35259,7 +35563,7 @@
             },
             "id": "ratify",
             "label": {
-              "$source": "ratify",
+              "$source": "r5-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35274,7 +35578,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-geology-rule",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35282,7 +35586,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-geology-rule",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36380,14 +36684,14 @@
           },
           {
             "href": {
-              "$source": "teacher",
+              "$source": "announcing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "teacher",
+              "$source": "announcing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36402,14 +36706,14 @@
           },
           {
             "href": {
-              "$source": "enrichment",
+              "$source": "dancing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "enrichment",
+              "$source": "dancing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36424,14 +36728,14 @@
           },
           {
             "href": {
-              "$source": "art",
+              "$source": "directing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "art",
+              "$source": "directing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -37062,6 +37366,97 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "美国47-5023 2025年年薪10/25/50/75/90分位44460/49900/60190/72450/83800美元；时薪21.37/23.99/28.94/34.83/40.29。OEWS受雇税前直时工资，排除自雇，含佣金/生产奖金，不含加班溢价；不能一概排除全部野外/夜班/温度补贴，具体工资项按定义核。分位非起薪/年限等级/个人上限。",
+        "fact_id": "r5-median",
+        "market": "美国",
+        "measure": "中位工资（年度口径，附小时口径）",
+        "occupation_scope": "税前受雇直时工资",
+        "period": "2025",
+        "source_refs": [
+          "r5-wages",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025美国本职业19500人",
+        "fact_id": "r5-employment",
+        "market": "美国",
+        "measure": "就业规模（存量统计）",
+        "occupation_scope": "美国SOC47-5023",
+        "period": "2025",
+        "source_refs": [
+          "r5-projections",
+          "r5-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025—2035本职业精确增长3.6%（BLS）；O*NET趋势取整4%/类别Average3—4%",
+        "fact_id": "r5-growth",
+        "market": "美国",
+        "measure": "预测就业变化（职业总量）",
+        "occupation_scope": "美国SOC47-5023",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-projections",
+          "r5-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025—2035年均1400空缺，含增长与替代，非净增/十年合计",
+        "fact_id": "r5-openings",
+        "market": "美国",
+        "measure": "预测期职位空缺（含更替需求）",
+        "occupation_scope": "美国SOC47-5023",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-projections",
+          "r5-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "美国O*NET反馈：面对面每日75%/每周非每日18%，持续接触39%/大部分33%，电话每日35%/每周非每日39%/从不22%；准确极重要16%/很重要50%/重要25%，站立持续52%/>一半23%，危险设备每日71%/每周非每日17%，普通PPE每日84%，噪声每日65%/每周非每日15%，高低温每日28%/每周非每日39%，全天候户外每日79%，全身振动每日42%/每周非每日43%，错误极严重52%/很严重15%/严重15%，每日决策44%、每日时间压力20%，不竞争33%。周工时>40h53%/40h47%，不规律61%/规律36%，不证明中国每人夜班/连续值班。情境是反馈非伤害发生率或个人风险。",
+        "fact_id": "r5-industry-education",
+        "market": "美国",
+        "measure": "工作情境（从业者反馈比例）",
+        "occupation_scope": "美国O*NET反馈非个人风险",
+        "period": "2026档案",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "行业具体工资/全部分布仍缺；O*NET工资/情境与BLS就业指标分开",
+        "fact_id": "r5-industry-amusement",
+        "market": "美国",
+        "measure": "行业与情境信息的可得性边界",
+        "occupation_scope": "美国SOC47-5023",
+        "period": "2025/2026",
+        "source_refs": [
+          "r5-projections",
+          "r5-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "中国本职业全国精确工资缺口。NBS2025建筑业非私营92036/私营66275、科学技术服务业非私营182064/私营83560元/年（当前中英文原页表5：2025=83560、2024=82387）分别行业税前均值，施工/地质/岩土岗位可能相关但单位归类须核，不是职业中位/起薪/月薪；5+城镇法人、排除个体自由职业，不一概排除单位计件/兼职/劳务派遣。 35号经78号修正规章适用金属/非金属矿产地质勘探，不适用生产矿山探矿；7条要求该范围钻探/坑探施工单位安全许可，8条书面报告，9条制度、18/19条防护救生与应急。11条特种人员专训考核取相应证；12条坑探人员首次至少72h、年再训20h，不外推全体地面钻工。15条坑探设计设安全专篇/审查，不外推一般水井/全部土方钻孔。2017地质勘查资质审批已取消，2025自然资源部公开答复确认固体矿产勘查单位/人员无该项准入门槛；不能继续把旧“资质证书”列现行普遍条件，也不因此免除安全许可/特种取证。现行报告材料、主管部门和属地办理另核。",
+        "fact_id": "r5-china-jiaojiang-featured-daily-2026",
+        "market": "中国内地",
+        "measure": "未取得的统计位置（中国大陆职业级工资）",
+        "occupation_scope": "中国行业代理/实际工种",
+        "period": "2025工资/现行法规",
+        "source_refs": [
+          "r5-geology-rule",
+          "r5-qualification-cancel",
+          "nbs"
+        ]
       }
     ]
   },
@@ -37070,7 +37465,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "钻探与成井 · 取样与编录 · 野外与安全与环保",
@@ -37121,7 +37516,7 @@
       "text": "土方钻探工、石油天然气除外"
     }
   },
-  "source_content_sha256": "6dea9b475f89a84ce84309343292e8aa51ec27d0a007cc451740e11bc906d6d1",
+  "source_content_sha256": "ac298680f206cb2366b65c59c02607a04aac4dda7f600310e4894e83eee2503c",
   "subject": {
     "canonical_slug": "earth-drillers-except-oil-and-gas",
     "name": "土方钻探工、石油天然气除外",

@@ -23391,13 +23391,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "房地产经纪人与销售代理的工作面经常由同一人衔接，但性质不同：有的按委托取得房源并代理买卖，有的核对价格与融资并安排交易，有的经营门店或监督经纪人。把它们分开看，才能判断岗位到底在要求哪一类能力。"
+              "本页合并美国经纪人41-9021与销售代理41-9022，任务有交集而责任不同：经纪人可经营房地产业务，销售代理须与经纪人合作。下列房源、定价、交易、合规与经营工作面不表示同一人通常全部兼任。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.profile.career-quick-answers-block.1",
           "source_refs": [
-            "editor",
-            "onet"
+            "onet",
+            "facilities",
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -23406,12 +23408,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "该档案给出 O*NET 41-9021.00（Real Estate Brokers）的官方任务与工作活动，是定义与职责的主要来源；美国工资与就业按该精确职业的 BLS 资料给出，行业分列中位数未取得时另作标注。"
+              "O*NET41-9021.00提供经纪人任务、41-9022.00提供销售代理任务。BLS OOH工资与就业概览按合并组；经纪人单列自报情境与分位不能作为整个合并组数据。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.profile.onet-structured-fields-block.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -23440,13 +23445,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "沟通方式｜官方工作环境数据显示：约 100% 的从业者每天使用电子邮件，约 62% 每天进行面对面讨论。\n工作场所｜约 59% 每天在环境控制的室内工作，约 35% 每天在户外并暴露于各种天气。\n客户与公众｜约 65% 认为与外部客户或公众打交道「极其重要」。\n精确性要求｜约 76% 认为工作「非常重要」需精确或准确，价格与合同条款偏差直接影响交易。\n决策自由度｜约 87% 报告有很大决策自由，约 73% 可自行确定任务、优先事项与目标。\n工时与节奏｜约 48% 报告典型工作周超过 40 小时，约 47% 每周至少一次经历时间压力。\n竞争与协作｜约 46% 认为竞争程度「中等」，约 45% 认为协调或带领他人「较重要」。\n冲突情境｜在价格与交割争议中需处理冲突与投诉。\n与他人接触｜约 78% 持续接触他人。"
+              "以下比例仅是美国O*NET经纪人41-9021.00自报情境，不是销售代理或合并组调查：沟通方式｜美国O*NET自报工作情境数据显示：约 100% 的从业者每天使用电子邮件，约 62% 每天进行面对面讨论。\n工作场所｜约 59% 每天在环境控制的室内工作，约 35% 每天在户外并暴露于各种天气。\n客户与公众｜约 65% 认为与外部客户或公众打交道「极其重要」。\n精确性要求｜约 76% 认为工作「非常重要」需精确或准确，价格与合同条款偏差直接影响交易。\n决策自由度｜约 87% 报告有很大决策自由，约 73% 报告确定任务、优先事项与目标有很大自由度。\n工时与节奏｜约 48% 报告典型工作周超过 40 小时，约 47% 每周至少一次但非每天经历时间压力。\n竞争与协作｜约 46% 认为竞争程度「中等」，约 45% 认为协调或带领他人「相当重要」。\n冲突情境｜在价格与交割争议中需处理冲突与投诉。\n与他人接触｜约 78% 持续接触他人。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.profile.work-context-block.1",
           "source_refs": [
             "onet",
-            "bls"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23470,12 +23475,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 全国工资页给出本精确职业 41-9021.00 的 OEWS 分位；本页美国工资按该精确职业口径使用，行业分列中位数官方未单列时另作证据不足标注。"
+              "本页工资中位按BLS OOH合并组57,400美元/年；O*NET41-9021全国工资页是经纪人单列分位，不用于代填合并组分位。合并组分位与行业中位数本轮未取得。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.profile.onet-structured-fields-block.2",
           "source_refs": [
-            "bls"
+            "bls",
+            "onet-wages",
+            "editor"
           ],
           "type": "prose"
         },
@@ -23528,12 +23535,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国就业预测表的职业行给出基期与预测期就业和净变化，用于前景判断；预测不是个人求职结果。"
+              "BLS2025—2035合并组530.6→538.8千人，官方净增8.3千人、表1.2增长1.6%；OOH整数概览为2%，年均空缺40.4千个（含替换）。这两种精度一致，非AI归因。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "ep"
+            "bls",
+            "ep",
+            "editor"
           ],
           "type": "prose"
         },
@@ -23586,13 +23595,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "下表以相邻的房地产销售代理为主要比较对象，逐行对照两者的核心目的、对象与依据、核心过程、主要产出、责任主体、批准权限和结论边界：两者都做物业交易，但本职业可经营门店、监督经纪人并承担更广的合规与经营责任，房地产销售代理在经纪人监督下执行销售。中国现有公开职业标准目录中的相近名称属于不同业务对象，也不能据此互换资格或权限。"
+              "下表具体比较合并组内经纪人与销售代理：美国经纪人可经营业务并监督销售代理，代理须与经纪人合作。共同交易任务不等于经营权限相同；经纪人的职责不适用于合并组每个成员。美国执照分工不能直接建立中国资格或权限互认。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.profile.career-quick-answers-block.7",
           "source_refs": [
             "onet",
-            "editor",
+            "facilities",
+            "bls",
             "editor"
           ],
           "type": "prose"
@@ -23602,12 +23612,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "房地产销售代理：在经纪人监督下为客户买卖或出租物业。"
+              "合并组内角色比较：房地产销售代理：在经纪人监督下为客户买卖或出租物业。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet",
+            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -23617,7 +23627,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "房地产经纪人与销售代理：经营门店或为公司工作，监督交易并监督经纪人。"
+              "合并组内角色比较：房地产经纪人与销售代理：经营门店或为公司工作，监督交易并监督经纪人。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.profile.career-quick-answers-block.9",
@@ -23632,12 +23642,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "房地产销售代理：客户与房源；依据委托与机构规程。"
+              "合并组内角色比较：房地产销售代理：客户与房源；依据委托与机构规程。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.profile.career-quick-answers-block.10",
           "source_refs": [
-            "onet",
+            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -23647,7 +23657,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "房地产经纪人与销售代理：门店经营与交易合规；依据房地产法规、委托与公平住房要求。"
+              "合并组内角色比较：房地产经纪人与销售代理：门店经营与交易合规；依据房地产法规、委托与公平住房要求。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.profile.career-quick-answers-block.11",
@@ -23678,12 +23688,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "房地产销售代理：接洽—带看—报价—谈判—成交。"
+              "合并组内角色比较：房地产销售代理：接洽—带看—报价—谈判—成交。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.profile.career-quick-answers-block.12",
           "source_refs": [
-            "onet",
+            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -23693,7 +23703,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "房地产经纪人与销售代理：取得委托—核对房源与价格—带看与谈判—核对融资合规—推动交割—记录结佣。"
+              "合并组内角色比较：房地产经纪人与销售代理：取得委托—核对房源与价格—带看与谈判—核对融资合规—推动交割—记录结佣。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.profile.career-quick-answers-block.13",
@@ -23708,12 +23718,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "房地产销售代理：带看记录与成交资料。"
+              "合并组内角色比较：房地产销售代理：带看记录与成交资料。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.profile.career-quick-answers-block.14",
           "source_refs": [
-            "onet",
+            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -23723,7 +23733,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "房地产经纪人与销售代理：交易记录、委托与合规记录、佣金与费用依据。"
+              "合并组内角色比较：房地产经纪人与销售代理：交易记录、委托与合规记录、佣金与费用依据。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.profile.career-quick-answers-block.15",
@@ -23738,12 +23748,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "房地产销售代理：对销售执行负责，由经纪人监督。"
+              "合并组内角色比较：房地产销售代理：对销售执行负责，由经纪人监督。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.profile.career-quick-answers-block.16",
           "source_refs": [
-            "onet",
+            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -23753,7 +23763,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "房地产经纪人与销售代理：对交易合规与经营负责；代理、资金与贷款须按执照与授权执行。"
+              "合并组内角色比较：房地产经纪人与销售代理：对交易合规与经营负责；代理、资金与贷款须按执照与授权执行。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.profile.career-quick-answers-block.17",
@@ -23768,12 +23778,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "房地产销售代理：带看与成交依机构规程与经纪人安排，不由头衔决定。"
+              "合并组内角色比较：房地产销售代理：带看与成交依机构规程与经纪人安排，不由头衔决定。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.profile.career-quick-answers-block.18",
           "source_refs": [
-            "onet",
+            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -23783,7 +23793,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "房地产经纪人与销售代理：核对代理、资金托管与贷款的批准权限与升级路径。"
+              "合并组内角色比较：房地产经纪人与销售代理：核对代理、资金托管与贷款的批准权限与升级路径。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.profile.career-quick-answers-block.19",
@@ -23798,12 +23808,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "房地产销售代理：销售与客户能力可迁移，经营与合规责任须另行学习。"
+              "合并组内角色比较：房地产销售代理：销售与客户能力可迁移，经营与合规责任须另行学习。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.profile.career-quick-answers-block.20",
           "source_refs": [
-            "onet",
+            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -24548,10 +24558,10 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "O*NET 41-9022.00 职业档案（销售代理）",
+                "entity": "GPTs are GPTs（任务影响潜力）",
                 "id": "link-9",
                 "relation": "career.evidence",
-                "url": "https://www.onetonline.org/link/summary/41-9022.00"
+                "url": "https://arxiv.org/abs/2303.10130"
               },
               {
                 "entity": "世界经济论坛《未来就业报告 2025》",
@@ -24755,15 +24765,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现有研究支持「文档、数据与检索类任务受影响较大」，不支持「整个职业被替代」；现场带看、居间谈判、合规判断与资金责任仍需人承担。"
+              "跨职业研究提供潜在任务暴露与雇主预期，不测本职业现场采用、效率、工资或裁员。编辑分析可试评估资料草稿、法规检索与成交对比；房源真实性、谈判承诺、合规和资金责任仍按法域与岗位核。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "editor",
-            "editor",
             "onet",
-            "bls"
+            "ilo",
+            "arxiv",
+            "weforum",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24777,7 +24788,9 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.19",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24835,7 +24848,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.23",
           "source_refs": [
-            "editor"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -24849,7 +24862,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.24",
           "source_refs": [
-            "editor"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -24863,7 +24876,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.25",
           "source_refs": [
-            "editor"
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -24877,7 +24890,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.26",
           "source_refs": [
-            "editor"
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -24891,7 +24904,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.27",
           "source_refs": [
-            "editor"
+            "weforum"
           ],
           "type": "prose"
         },
@@ -24905,7 +24918,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.28",
           "source_refs": [
-            "editor"
+            "weforum"
           ],
           "type": "prose"
         },
@@ -24919,7 +24932,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.29",
           "source_refs": [
-            "editor"
+            "nist"
           ],
           "type": "prose"
         },
@@ -24933,7 +24946,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.30",
           "source_refs": [
-            "editor"
+            "nist"
           ],
           "type": "prose"
         },
@@ -24947,7 +24960,9 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.31",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24985,12 +25000,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI主要改变：房源与资料整理｜可试辅助整理房源与交易资料。"
+              "潜在辅助（编辑分析）：房源与资料整理｜可试辅助整理房源与交易资料。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "editor",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -25015,12 +25030,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI主要改变：带看与谈判｜可试提示带看安排与谈判要点。"
+              "潜在辅助（编辑分析）：带看与谈判｜可试提示带看安排与谈判要点。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "editor",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -25045,12 +25060,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI主要改变：合规与记录｜可试汇总合规要点与记录草稿。"
+              "潜在辅助（编辑分析）：合规与记录｜可试汇总合规要点与记录草稿。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.38",
           "source_refs": [
-            "editor",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -25094,7 +25109,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.41",
           "source_refs": [
-            "editor"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25108,7 +25123,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.42",
           "source_refs": [
-            "editor"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25122,7 +25137,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.43",
           "source_refs": [
-            "editor"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25136,7 +25151,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.44",
           "source_refs": [
-            "editor"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25150,7 +25165,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.45",
           "source_refs": [
-            "editor"
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -25164,7 +25179,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.46",
           "source_refs": [
-            "editor"
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -25178,7 +25193,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.47",
           "source_refs": [
-            "editor"
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -25192,7 +25207,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.48",
           "source_refs": [
-            "editor"
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -25206,7 +25221,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.49",
           "source_refs": [
-            "editor"
+            "weforum"
           ],
           "type": "prose"
         },
@@ -25220,7 +25235,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.50",
           "source_refs": [
-            "editor"
+            "weforum"
           ],
           "type": "prose"
         },
@@ -25234,7 +25249,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.51",
           "source_refs": [
-            "editor"
+            "weforum"
           ],
           "type": "prose"
         },
@@ -25248,7 +25263,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "editor"
+            "weforum"
           ],
           "type": "prose"
         },
@@ -25262,7 +25277,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.53",
           "source_refs": [
-            "editor"
+            "nist"
           ],
           "type": "prose"
         },
@@ -25276,7 +25291,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "editor"
+            "nist"
           ],
           "type": "prose"
         },
@@ -25290,7 +25305,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "editor"
+            "nist"
           ],
           "type": "prose"
         },
@@ -25304,7 +25319,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "editor"
+            "nist"
           ],
           "type": "prose"
         },
@@ -25332,7 +25347,9 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.58",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25399,13 +25416,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现有研究支持文档与数据类任务受影响较大，不支持整个职业被替代；带看、谈判与合规责任仍需人承担。"
+              "跨职业研究提供潜在任务暴露与雇主预期，不测本职业现场采用、效率、工资或裁员。编辑分析可试评估资料草稿、法规检索与成交对比；房源真实性、谈判承诺、合规和资金责任仍按法域与岗位核。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "editor",
-            "onet"
+            "onet",
+            "ilo",
+            "arxiv",
+            "weforum",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25414,13 +25434,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现有研究支持「文档、数据与检索类任务受影响较大」，不支持「整个职业被替代」；现场带看、居间谈判、合规判断与资金责任仍需人承担。"
+              "跨职业研究提供潜在任务暴露与雇主预期，不测本职业现场采用、效率、工资或裁员。编辑分析可试评估资料草稿、法规检索与成交对比；房源真实性、谈判承诺、合规和资金责任仍按法域与岗位核。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "editor",
-            "onet"
+            "onet",
+            "ilo",
+            "arxiv",
+            "weforum",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25434,8 +25457,8 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "editor",
-            "onet"
+            "ilo",
+            "weforum"
           ],
           "type": "prose"
         },
@@ -25464,7 +25487,8 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "editor",
+            "onet",
+            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -25474,13 +25498,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据集中在文档、数据与检索类任务（资料整理、法规检索、成交对比）；需要带看、谈判与合规判断的环节受影响更小。"
+              "编辑分析：资料整理、法规检索、成交对比可作为辅助试验候选。本页未取得直接比较本职业各环节影响的实测研究，不把带看、谈判等排序为已证实的低替代率。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "editor",
-            "onet"
+            "onet",
+            "ilo",
+            "arxiv",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25494,6 +25520,23 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.69",
           "source_refs": [
+            "ilo",
+            "arxiv"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "BLS OOH合并组2025—2035增长2%（表1.2精确1.6%），年均空缺40,400个，包含替换；不是AI采用、裁员或工资效果测量。"
+            ]
+          },
+          "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.70",
+          "source_refs": [
+            "bls",
+            "ep",
             "editor"
           ],
           "type": "prose"
@@ -25503,28 +25546,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业展望将房地产经纪人与销售代理合并发布：2025—2035 预计增长 2%（低于平均），年均空缺约 40,400 个；预测不能证明 AI 采用或就业因果。"
-            ]
-          },
-          "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.70",
-          "source_refs": [
-            "ep",
-            "bls"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.ai-impact-table",
-          "data": {
-            "paragraphs": [
-              "BLS 2025—2035 就业预测（合并组口径）"
+              "BLS2025—2035总体就业预测（合并组）"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "ep",
-            "bls"
+            "bls",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25553,6 +25581,8 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.73",
           "source_refs": [
+            "onet",
+            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -25577,12 +25607,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2025—2035 就业预测（无消失年份）"
+              "BLS总体就业预测不提供岗位消失年份"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "editor",
+            "ep",
             "editor"
           ],
           "type": "prose"
@@ -25612,7 +25642,8 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.77",
           "source_refs": [
-            "editor",
+            "onet",
+            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -25980,7 +26011,8 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.102",
           "source_refs": [
-            "privacy"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26022,7 +26054,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.ai-impact.ai-impact-table.105",
           "source_refs": [
-            "privacy",
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -26282,7 +26314,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "129,441元/年"
+              "89,679元/年"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.7",
@@ -26296,12 +26328,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "全国城镇非私营单位就业人员年平均工资（2025 年，税前工资总额口径）。它与本职业无精确对应，仅用于理解整体量级。"
+              "2025全国城镇非私营单位房地产业就业人员税前年平均工资；房地产经纪属于该业务背景，但该门类含多职业，不是经纪人中位数或新人报价。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26310,7 +26343,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "71,590元/年"
+              "53,338元/年"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.9",
@@ -26324,12 +26357,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "全国城镇私营单位就业人员年平均工资（2025 年，税前工资总额口径）。统计私营单位全部就业人员，与上一行口径不同，不能相互替代。"
+              "2025全国城镇私营单位房地产业税前年平均工资；与非私营分列，不能拼成本职业个人收入区间。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26352,12 +26386,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "规模以上企业中「中层及以上管理人员」的年平均工资（2025 年）。这是宽岗位类别，包含但不限于本职业。"
+              "2025规模以上企业中层及以上管理人员宽岗位均值；不证明所有经纪人属于管理人员。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26380,12 +26415,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "规模以上企业中「办事人员和有关人员」的年平均工资（2025 年）。这一类别对应执行层，一般不承担代理与资金职责。"
+              "2025规模以上企业办事人员和有关人员均值；不提供本职业职责分类或资金权限。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26408,12 +26444,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "规模以上企业中「专业技术人员」的年平均工资（2025 年）。金融与地产类专业岗多归入此类，与管理人员分开统计。"
+              "2025规模以上企业专业技术人员均值；不能据地产头衔推定归属。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26521,7 +26558,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国内地没有与「房地产经纪人与销售代理」精确对应且可核验的公开招聘薪酬样本；本节据此保留缺口，仅展示国家统计局的宽口径背景，不用单条公告或行业均值替代本职业工资。"
+              "证据不足：本轮未取得职责、地区、机构与交易范围匹配且状态可核的中国招聘薪酬原文；不等于中国没有公开样本。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.24",
@@ -26535,13 +26572,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "大专或本科学历为常见起点"
+              "大专学历背景（核对路径）"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
-            "editor",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -26565,13 +26601,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国岗位多从销售与交易辅助岗起步；能否独立签约与经营门店取决于机构授权与从业资格。"
+              "编辑建议：核销售、资料或交易辅助岗位是否接受该学历以及专业、经验要求；本轮未取得支持其为普遍起点的招聘原文。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "editor",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -26580,12 +26615,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本科学历为常见起点"
+              "本科学历背景（核对路径）"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.28",
           "source_refs": [
-            "bls",
             "editor"
           ],
           "type": "prose"
@@ -26610,12 +26644,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "多数经纪与管理岗以本科为招聘起点；是否独立负责项目取决于机构制度与资历。"
+              "核经纪、门店或顾问岗位公告中的学历、职责与经验；不由美国数据推成中国多数岗位要求本科。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "bls",
             "editor"
           ],
           "type": "prose"
@@ -26655,12 +26688,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "这类条件属于特定机构与岗位要求，不构成本职业普遍门槛。"
+              "编辑建议：核研究、投资或经营岗位具体学历、成果与经验条件；不是已核本职业学历分层门槛。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "editor",
             "editor"
           ],
           "type": "prose"
@@ -26730,12 +26762,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "二手房与租赁经纪需求集中，岗位多为经纪机构与门店的销售、交易与经营岗，需另核备案与执业要求。"
+              "可核二手房与租赁机构的房源、客户及交易任务和机构备案；在招数量和集中程度须另取证据。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
-            "nbs",
             "editor"
           ],
           "type": "prose"
@@ -26760,12 +26791,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "商业地产租售与投资顾问需求稳定，岗位以顾问与交易服务为主，需另核资质与项目范围。"
+              "可核商业地产租售、咨询与开发业务范围；本页无需求稳定性的时间序列证据。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
-            "nbs",
             "editor"
           ],
           "type": "prose"
@@ -26790,12 +26820,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "物业租售与资产管理需求存在，岗位以租赁与运营为主，需另核单位性质与用工方式。"
+              "可核物业租赁与运营任务、雇佣或自营模式；不由编辑场景推成已核招聘需求。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.42",
           "source_refs": [
-            "nbs",
             "editor"
           ],
           "type": "prose"
@@ -26834,12 +26863,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "下表为编辑整理，依据公开招聘公告与官方学历说明归纳，不是薪资统计；学历、专业与经验是招聘条件中的并列项，需按目标岗位公告逐条核对。"
+              "下表按学历背景列待核岗位方向，属于编辑建议。本轮未取得支持中国常见学历起点的匹配招聘原文。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "nbs",
             "editor"
           ],
           "type": "prose"
@@ -26864,12 +26892,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局 2025 年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/"
+              "国家统计局2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.47",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "editor"
           ],
           "type": "prose"
         },
@@ -26977,12 +27006,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "同一称谓在中国内地覆盖的岗位差异很大：既有执行层的销售与交易辅助岗，也有承担签约、资金与门店经营的复合岗位。核对时应看职责与授权，而不是只看头衔。"
+              "编辑建议：在中国目标岗位中核房源、客户、交易与机构经营的具体分工，不由头衔推定签约、资金或融资权限。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "editor",
             "editor"
           ],
           "type": "prose"
@@ -26992,12 +27020,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局 2025 年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/"
+              "国家统计局2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
-            "nbs"
+            "nbs",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27006,12 +27035,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "{{fact:us-growth-2025-2035}}"
+              "现行BLS合并组2025—2035总体增长OOH整数2%（表1.2为1.6%），不推算中国需求或AI因果。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "ep"
+            "bls",
+            "ep",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27058,12 +27089,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：官方未公布合并组分位"
+              "证据不足：本轮未取得合并组分位"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "bls"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27072,12 +27104,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "官方职业展望对房地产经纪人与销售代理合并组只公布年工资中位数，未公布 10/25/75/90 分位；分位仅按 41-9021（经纪人）与 41-9022（销售代理）单列。本页不代填合并组分位。；美国劳工统计局职业展望｜https://www.bls.gov/ooh/sales/real-estate-brokers-and-sales-agents.htm"
+              "本轮核读OOH提供合并组中位数，未取得合并组第10分位；单列经纪人与销售代理分位不能直接合并，不据本页缺项断言全部官方统计未发布。；美国劳工统计局职业展望｜https://www.bls.gov/ooh/sales/real-estate-brokers-and-sales-agents.htm"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "bls"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27086,12 +27119,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：官方未公布合并组分位"
+              "证据不足：本轮未取得合并组分位"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "oews"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27100,12 +27134,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同上：合并组未公布第 25 分位；单列口径下经纪人中位约 73,220 美元/年、销售代理中位约 52,830 美元/年，不能作为合并组的分位值。；美国劳工统计局职业展望｜https://www.bls.gov/ooh/sales/real-estate-brokers-and-sales-agents.htm"
+              "本轮核读OOH提供合并组中位数，未取得合并组第25分位；单列经纪人与销售代理分位不能直接合并，不据本页缺项断言全部官方统计未发布。；美国劳工统计局职业展望｜https://www.bls.gov/ooh/sales/real-estate-brokers-and-sales-agents.htm"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "oews"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27142,12 +27177,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：官方未公布合并组分位"
+              "证据不足：本轮未取得合并组分位"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "oews"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27156,12 +27192,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同上：合并组未公布第 75 分位，本页不代填。；美国劳工统计局职业展望｜https://www.bls.gov/ooh/sales/real-estate-brokers-and-sales-agents.htm"
+              "本轮核读OOH提供合并组中位数，未取得合并组第75分位；单列经纪人与销售代理分位不能直接合并，不据本页缺项断言全部官方统计未发布。；美国劳工统计局职业展望｜https://www.bls.gov/ooh/sales/real-estate-brokers-and-sales-agents.htm"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "oews"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27170,12 +27207,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：官方未公布合并组分位"
+              "证据不足：本轮未取得合并组分位"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "bls"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27184,12 +27222,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同上：合并组未公布最高 10% 分位，本页不代填。；美国劳工统计局职业展望｜https://www.bls.gov/ooh/sales/real-estate-brokers-and-sales-agents.htm"
+              "本轮核读OOH提供合并组中位数，未取得合并组第90分位；单列经纪人与销售代理分位不能直接合并，不据本页缺项断言全部官方统计未发布。；美国劳工统计局职业展望｜https://www.bls.gov/ooh/sales/real-estate-brokers-and-sales-agents.htm"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "bls"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27319,6 +27358,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.27",
           "source_refs": [
+            "bls",
             "oews-method"
           ],
           "type": "prose"
@@ -27333,6 +27373,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.28",
           "source_refs": [
+            "bls",
             "oews-method"
           ],
           "type": "prose"
@@ -27370,12 +27411,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业、地区、资历与专业方向会明显影响工资；本页未取得官方按本职业单列的行业中位数，保留缺口。"
+              "合并组职业×行业中位本轮未取得；OOH分别提供经纪人和销售代理行业中位，不能直接合并。个人合同、地区与佣金模式另核。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.31",
           "source_refs": [
-            "bls"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27399,12 +27441,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "{{fact:us-growth-2025-2035}}"
+              "合并组2025—2035总体增长OOH整数2%、表1.2精确1.6%，非AI因果。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "ep"
+            "bls",
+            "ep",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27427,12 +27471,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：官方未单列本职业中位数"
+              "证据不足：本轮未取得合并组职业×行业中位数"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "bls"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27441,12 +27486,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "经纪与租赁岗位集中于房地产与租赁行业；官方未按本职业单列中位数，不代填。"
+              "OOH列经纪人在房地产业与租赁业中位72,700美元/年、销售代理在该行业49,850美元/年，均为2025单列数据；本轮未取得合并组行业中位，不代填。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "bls"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27469,12 +27515,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：官方未单列本职业中位数"
+              "证据不足：本轮未取得合并组职业×行业中位数"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "bls"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27483,12 +27530,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "融资与交易服务部分归入此类；本页未取得本职业单列中位数。"
+              "融资配合不证明从业者雇主被划入金融与保险；行业归类及工资须另核原表。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "bls"
+            "onet-wages",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27511,12 +27559,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：官方未单列本职业中位数"
+              "证据不足：本轮未取得合并组职业×行业中位数"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "bls"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27525,12 +27574,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "商业地产顾问多归入此类；本页未取得本职业单列中位数。"
+              "商业地产顾问名称不自动决定NAICS归类；本轮未取得匹配中位数。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "bls"
+            "onet-wages",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27553,12 +27603,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：官方未单列本职业中位数"
+              "证据不足：本轮未取得合并组职业×行业中位数"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "bls"
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -27624,7 +27675,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业、地区、资历与专业方向都会影响收入；本页未取得官方按本职业单列的行业中位数，不推算个人水平。"
+              "合并组分位与职业×行业中位本轮未取得；已核两子职业的中位不直接合并，也不代表自雇全部收入。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.49",
@@ -27653,13 +27704,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "合并组只公布中位数：BLS 职业展望对合并组未公布 10/25/75/90 分位，本页据此保留缺口，不把单列就业分位当作合并组数值。"
+              "本轮OOH核读取得合并组中位，未取得合并组10/25/75/90分位；不把单列职业数值当合并组分位，不据查阅缺项断言官方均未发布。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
             "bls",
-            "oews"
+            "editor"
           ],
           "type": "prose"
         },
@@ -27682,7 +27733,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "合并组未公布最高 10% 分位；单列口径下经纪人与销售代理的最高 10% 分位不同，不能合并为单一数值，本页不代填。"
+              "合并组最高10%分位本轮未取得；不能简单平均或拼接两子职业分位来代填。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.53",
@@ -27947,11 +27998,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格分数不能预测成交结果或合规质量。"
+              "本页未验证人格分数预测成交或合规绩效的效度，不设分数阈值。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.9",
           "source_refs": [
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -27961,7 +28013,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "美国 房地产经纪人与销售代理 职业页当前显示的预测增长为 3%，就业规模由 2024 人变为 115000 人；预测不等于个人录用概率。 具体条件、授权、资格和统计口径须按目标地区与原始来源核对。"
+              "编辑建议：核纸面委托的物业对象、期限与客户需求，观察能否识别缺项而不补猜。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.fit.riasec-fit-block.9",
@@ -27990,12 +28042,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "对应到日常，就是澄清需求、比较相关方与条款、跟进交付并协调内部批准；这些活动构成房地产经纪人与销售代理的兴趣基线。"
+              "本页兴趣EC来自经纪人41-9021.00的E91/C79自报兴趣档案；澄清需求、比较物业和条款、协调交易是可观察任务。该分数不是合并组测量或录用标准。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.fit.riasec-fit-block.10",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28018,13 +28071,15 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "房地产经纪人与销售代理对应 O*NET 41-9021.00（Real Estate Brokers And Sales Agents）；官方范围为：Operate real estate office, or work for commercial real estate firm, overseeing real estate transactions. Other duties usually include selling real estate or renting properties and arranging loans.；Rent, buy, or sell property for clients. Perform duties such as study property listings, interview prospective clients, accompany clients to property site, discuss conditions of sale, and draw up real estate contracts. Includes agents who represent buyer. 具体条件、授权、资格和统计口径须按目标地区与原始来源核对。"
+              "本页合并O*NET41-9021.00 Real Estate Brokers与41-9022.00 Real Estate Sales Agents两个精确职业，不存在41-9021.00对应合并英文名称的记录。美国经纪人经营与监督，销售代理须与经纪人合作；具体执照及权限另核法域。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.fit.riasec-fit-block.11",
           "source_refs": [
-            "editor",
-            "onet"
+            "onet",
+            "facilities",
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28048,11 +28103,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "real-estate-brokers-and-sales-agents 处理判断是否进入 房地产经纪人与销售代理，先用公开或模拟材料完成一次小样本：说明对象、步骤、质量检查、失败条件和升级路径，再评估自己是否愿意长期做操作控制、销售推广、研究调查、房地产经纪人与销售代理、记录、消费者安全、顾客、需求、服务、交易。的中国大陆薪资经过有界检索仍未建立安全对应的统计值，页面必须展示缺失而非使用代理数字。 具体条件、授权、资格和统计口径须按目标地区与原始来源核对。"
+              "本页未验证RIASEC、人格与任务样本之间的相对预测效度；各框架用于提出探索问题，不作录用结论。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.fit.riasec-fit-block.12",
           "source_refs": [
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -28133,7 +28189,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本职业不以智商测试为门槛，但需要价格比较、合同条款与合规逻辑，这是可练习的工作方法。"
+              "本页不设智商测试门槛；可观察价格比较、合同条款与核对逻辑，目标雇主是否另有考核须读公告。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.18",
@@ -28284,7 +28340,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.28",
           "source_refs": [
-            "editor",
+            "hr",
             "editor"
           ],
           "type": "prose"
@@ -28299,7 +28355,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.29",
           "source_refs": [
-            "editor",
+            "hr",
             "editor"
           ],
           "type": "prose"
@@ -28314,7 +28370,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.30",
           "source_refs": [
-            "editor",
+            "hr",
             "editor"
           ],
           "type": "prose"
@@ -28329,7 +28385,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.31",
           "source_refs": [
-            "editor",
+            "health",
             "editor"
           ],
           "type": "prose"
@@ -28344,7 +28400,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.32",
           "source_refs": [
-            "editor",
+            "health",
             "editor"
           ],
           "type": "prose"
@@ -28359,7 +28415,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.33",
           "source_refs": [
-            "editor",
+            "health",
             "editor"
           ],
           "type": "prose"
@@ -28374,7 +28430,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.34",
           "source_refs": [
-            "editor",
+            "archivists",
             "editor"
           ],
           "type": "prose"
@@ -28389,7 +28445,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.35",
           "source_refs": [
-            "editor",
+            "archivists",
             "editor"
           ],
           "type": "prose"
@@ -28404,7 +28460,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.36",
           "source_refs": [
-            "editor",
+            "archivists",
             "editor"
           ],
           "type": "prose"
@@ -28419,7 +28475,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.37",
           "source_refs": [
-            "onet",
+            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -28434,7 +28490,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.38",
           "source_refs": [
-            "onet",
+            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -28449,7 +28505,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.39",
           "source_refs": [
-            "onet",
+            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -28464,8 +28520,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.40",
           "source_refs": [
-            "editor",
-            "onet",
+            "operations",
             "editor"
           ],
           "type": "prose"
@@ -28480,8 +28535,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.41",
           "source_refs": [
-            "editor",
-            "onet",
+            "operations",
             "editor"
           ],
           "type": "prose"
@@ -28496,8 +28550,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.42",
           "source_refs": [
-            "editor",
-            "onet",
+            "operations",
             "editor"
           ],
           "type": "prose"
@@ -28512,7 +28565,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.43",
           "source_refs": [
-            "editor",
+            "insurance-profile",
             "editor"
           ],
           "type": "prose"
@@ -28527,7 +28580,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.44",
           "source_refs": [
-            "editor",
+            "insurance-profile",
             "editor"
           ],
           "type": "prose"
@@ -28542,7 +28595,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.45",
           "source_refs": [
-            "editor",
+            "insurance-profile",
             "editor"
           ],
           "type": "prose"
@@ -28626,11 +28679,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格分数不能预测成交结果或合规质量；本页不设阈值。"
+              "本页未取得人格分数预测本职业绩效的验证证据，不设阈值。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.51",
           "source_refs": [
+            "onet",
             "editor"
           ],
           "type": "prose"
@@ -28640,13 +28694,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不需要高深数学，但需要价格比较、合同条款与合规逻辑，且可练习、无统一门槛。"
+              "编辑建议：先核价格、面积、佣金与合同条件的纸面计算；数学或测验要求按目标岗位核，不声明统一无门槛。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.52",
           "source_refs": [
-            "editor",
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28789,7 +28843,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.62",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -28803,7 +28857,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.63",
           "source_refs": [
-            "onet"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -28817,7 +28871,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.64",
           "source_refs": [
-            "editor"
+            "operations"
           ],
           "type": "prose"
         },
@@ -28831,7 +28885,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.65",
           "source_refs": [
-            "editor"
+            "hr"
           ],
           "type": "prose"
         },
@@ -28845,7 +28899,8 @@
           },
           "id": "real-estate-brokers-and-sales-agents.fit.personality-fit-block.66",
           "source_refs": [
-            "privacy"
+            "health",
+            "archivists"
           ],
           "type": "prose"
         }
@@ -28875,16 +28930,16 @@
                 "url": "https://www.onetonline.org/link/summary/41-9021.00"
               },
               {
-                "entity": "BLS 职业就业工资统计：41-9021（OEWS）",
+                "entity": "24 CFR100.70（美国住房引导歧视规则）",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/current/oes419021.htm"
+                "url": "https://www.ecfr.gov/current/title-24/subtitle-B/chapter-I/part-100/subpart-B/section-100.70"
               },
               {
-                "entity": "O*NET 41-9022.00 房地产销售代理（相邻职业）",
+                "entity": "房地产经纪管理办法（中国，机构与人员职责）",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/41-9022.00"
+                "url": "https://www.mohurd.gov.cn/api-gateway/jpaas-web-server/front/document/download?fileName=%E6%88%BF%E5%9C%B0%E4%BA%A7%E7%BB%8F%E7%BA%AA%E7%AE%A1%E7%90%86%E5%8A%9E%E6%B3%95-%E5%9B%BE%E7%89%87%E7%89%88&fileUrl=YW5UzzlvCwcM%2FNHHX%2FtT6BJ6yM%2FAU1LVtmOVIvNjcurGdLAiZRkjaBvXEKJvAoVSuh3FyuPxDVZ3nOhHkmh3vITkKEfE6jGgmAg%2B%2F2wAFchij7skWenPd%2B9EdyPwGcaS%2FD4BU9T7SuybjHQQMVYNrQ%3D%3D"
               },
               {
                 "entity": "中华人民共和国个人信息保护法",
@@ -28893,10 +28948,10 @@
                 "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12c401d9a13e0a97f1c60d5.html"
               },
               {
-                "entity": "BLS 就业预测与职业特征表",
+                "entity": "O*NET41-9021.00任务与工作情境",
                 "id": "link-6",
                 "relation": "career.evidence",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+                "url": "https://www.onetonline.org/link/details/41-9021.00"
               }
             ]
           },
@@ -28947,15 +29002,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本模块证据来自 O*NET 官方任务与工作情境、BLS 职业就业工资统计与就业预测资料、销售与合规通用要求及个人信息保护法原文；编辑示例与应对建议属于本任务范围内的编辑整理，不是合规或法律结论。"
+              "O*NET提供任务与美国自报情境，中国管理办法提供委托、收费、房源和资金的行为要求，24 CFR100.70提供美国住房歧视边界。触发、后果和应对是编辑风险分析，不是发生率；工资和预测不支持安全或合规主张。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.10",
           "source_refs": [
             "onet",
-            "bls",
-            "privacy",
-            "onet"
+            "cn-broker-rule",
+            "fair-housing-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28970,7 +29025,8 @@
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.11",
           "source_refs": [
             "onet",
-            "onet"
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28985,7 +29041,8 @@
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.12",
           "source_refs": [
             "onet",
-            "onet"
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29000,7 +29057,8 @@
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.13",
           "source_refs": [
             "onet",
-            "onet"
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29015,7 +29073,8 @@
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.14",
           "source_refs": [
             "onet",
-            "onet"
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29030,7 +29089,8 @@
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.15",
           "source_refs": [
             "onet",
-            "privacy"
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29045,7 +29105,8 @@
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.16",
           "source_refs": [
             "onet",
-            "privacy"
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29059,8 +29120,9 @@
           },
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.17",
           "source_refs": [
-            "privacy",
-            "onet"
+            "onet",
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29074,8 +29136,9 @@
           },
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.18",
           "source_refs": [
-            "privacy",
-            "onet"
+            "onet",
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29089,7 +29152,9 @@
           },
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.19",
           "source_refs": [
-            "privacy"
+            "onet",
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29103,7 +29168,9 @@
           },
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.20",
           "source_refs": [
-            "privacy"
+            "onet",
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29112,12 +29179,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程通过监管账户收付并留痕，异常立即报告。"
+              "中国管理办法24条：当事人约定机构代收代付时，经客户交易结算资金专用存款账户划转，并按规定签字盖章；不等于所有交易一律由经纪人托管。异常按单位程序报告。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.21",
           "source_refs": [
-            "privacy"
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29131,8 +29199,9 @@
           },
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.22",
           "source_refs": [
-            "privacy",
-            "onet"
+            "onet",
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29146,8 +29215,9 @@
           },
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.23",
           "source_refs": [
+            "fair-housing-rule",
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29156,13 +29226,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "违反公平住房法规，机构与个人承担责任。"
+              "在美国适用住房规则下，基于法定受保护特征限制房源选择可能违反24 CFR100.70；不把美国法域外推中国全部交易。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "fair-housing-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29176,8 +29246,9 @@
           },
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.25",
           "source_refs": [
+            "fair-housing-rule",
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29191,8 +29262,9 @@
           },
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.26",
           "source_refs": [
+            "fair-housing-rule",
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29206,8 +29278,9 @@
           },
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.27",
           "source_refs": [
-            "bls",
-            "onet"
+            "onet",
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29221,8 +29294,9 @@
           },
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.28",
           "source_refs": [
-            "bls",
-            "onet"
+            "onet",
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29237,7 +29311,8 @@
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.29",
           "source_refs": [
             "onet",
-            "bls"
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29252,7 +29327,8 @@
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.30",
           "source_refs": [
             "onet",
-            "bls"
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29267,7 +29343,8 @@
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.31",
           "source_refs": [
             "onet",
-            "onet"
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29282,7 +29359,8 @@
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.32",
           "source_refs": [
             "onet",
-            "onet"
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29297,7 +29375,8 @@
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.33",
           "source_refs": [
             "onet",
-            "onet"
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29312,7 +29391,8 @@
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.34",
           "source_refs": [
             "onet",
-            "onet"
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29335,12 +29415,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于工作环境与工时表述；不代表所有岗位都需外出。"
+              "本链接为美国24 CFR100.70住房行为规则，不支持工时或工作环境；情境另取O*NET。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.36",
           "source_refs": [
-            "bls"
+            "fair-housing-rule",
+            "onet"
           ],
           "type": "prose"
         },
@@ -29349,12 +29430,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于相邻职业职责边界；不构成本职业资格互认。"
+              "中国管理办法11/14/16/20/22/24/26条区分机构备案、承接收费、合同签名、房源及资金记录；不等于美国执照。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.37",
           "source_refs": [
-            "onet"
+            "cn-broker-rule"
           ],
           "type": "prose"
         },
@@ -29378,12 +29459,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于就业与行业差异背景；不代表单个雇主的岗位条件。"
+              "本链接与另一onet别名均指精确职业任务/情境；不支持单个雇主录用标准。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.risk.career-risk-cards.39",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         }
@@ -29469,7 +29551,7 @@
                 "id": "education",
                 "values": [
                   "学历与经验要求",
-                  "美国典型入职学历为四年制学士学位（O*NET Job Zone 4，约 26% 学士、21% 低于高中），通常需要相当的工作相关经验；这是美国典型背景，不是中国统一门槛，也不代表单个机构的要求组合。",
+                  "BLS OOH合并组典型高中或同等学历；表1.2经纪人少于5年相关经验/None OJT，销售代理无相关经验/中等在岗培训。O*NET26%学士/21%低于高中及JobZone4仅经纪人记录，不是合并组学士门槛；各州执照与雇主要求另核。",
                   "核对方式：把目标公告中的每条要求对应到一项可展示的能力或经历。"
                 ]
               },
@@ -29477,7 +29559,7 @@
                 "id": "clearance",
                 "values": [
                   "执照与执业要求",
-                  "美国多数州要求房地产从业者持照或注册；涉及代理签约与资金托管时，机构会规定执业范围与合规要求。",
+                  "BLS OOH说明美国所有州要求经纪人与销售代理持照，条件因州而异。经纪人经验、课程、考试及续照另核目标州；中国区分机构备案、个人职业资格与合同签名职责。",
                   "核对方式：确认执照、执业范围、账号权限与可独立操作的范围。"
                 ]
               },
@@ -29502,6 +29584,10 @@
           "id": "real-estate-brokers-and-sales-agents.path.employer-evidence.1",
           "source_refs": [
             "onet",
+            "ep",
+            "bls",
+            "ca-broker-license",
+            "cn-broker-rule",
             "editor"
           ],
           "title": "雇主在招聘中通常看什么？",
@@ -29759,25 +29845,25 @@
               [
                 "学士学位（相关专业优先）",
                 "希望进入经纪岗位的求职者",
-                "美国典型学历要求，但不保证独立签约与经营",
-                "美国常见要求；官方说明存在其他路径",
+                "不是BLS该职业典型最低学历；可按目标机构核学历与课程",
+                "不把JobZone组概述当统一学士门槛",
                 "按目标雇主公告",
                 "中：四年制学位投入较大",
                 "学历本身不授予代理与资金权限"
               ],
               [
-                "房地产经纪从业资格/备案",
+                "中国机构备案与人员职业资格（分别核）",
                 "从事房地产经纪的人员",
-                "中国从事房地产经纪通常要求备案或资格",
-                "由机构与地方规定",
-                "按考试与备案条件",
+                "管理办法11条机构及分支30日备案；9—10条人员职业资格与20条签名分别规定",
+                "主体和行为不同，不能写个人备案或资格二选一",
+                "人员考试条件及机构备案材料另核主管机关",
                 "中：备考与考试",
                 "资格不等于资金托管与经营授权"
               ],
               [
                 "组织内部执业授权",
                 "已入职、需要独立负责交易的人",
-                "内部授权决定能否独立签约与处理资金",
+                "内部授权不能替代州执照或法定合同/资金要求",
                 "由机构规程规定",
                 "按培训、考核与授权记录",
                 "通常为内部培训与考核时间",
@@ -29786,16 +29872,16 @@
               [
                 "经纪人执照（监督与经营）",
                 "希望经营门店并监督经纪人的人",
-                "美国与部分法域要求经纪人执照方可经营与监督",
-                "经营与监督通常要求持照",
-                "按考试与执照条件",
+                "美国所有州要求持照；Broker与Salesperson分工和具体条件按州核",
+                "美国执照要求不自动适用于中国",
+                "加州例：18岁、近5年2年持照销售或等同经验/合格地产专业学位、8课程、考试与许可申请",
                 "中到高：备考与执业年限",
                 "执照不等于任意业务的授权"
               ],
               [
                 "房地产估价或物业相关资格",
                 "从事估价或物业运营的人",
-                "可作为相关专业能力参考",
+                "先核具体估价/物业角色与所在地资格，不泛称统一持证",
                 "由机构与雇主要求规定",
                 "按考试与认证条件",
                 "中：备考与考试",
@@ -29804,21 +29890,21 @@
               [
                 "关联金融与保险牌照",
                 "涉及贷款或保险业务的人",
-                "从事相关业务通常需要相应牌照",
-                "由监管与雇主要求规定",
-                "按监管与考试要求",
-                "中：培训与考试",
+                "先区分协助代办、贷款发放/经纪与保险销售；本页未取得匹配的中国金融保险资格细则",
+                "具体行为、法域和发证方待核，不能一律要求金融保险牌照",
+                "按实际目标业务另核",
+                "未取得具体项目，不估计",
                 "牌照范围决定可从事的具体业务"
               ]
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.path.credential-decision.1",
           "source_refs": [
+            "ep",
             "bls",
-            "editor",
-            "editor",
-            "onet",
-            "privacy"
+            "ca-broker-license",
+            "cn-broker-rule",
+            "editor"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -29828,17 +29914,20 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "培训证明、录用资格与执业授权是三件事：拿到学历、资格或执照不等于获得机构的代理签约、资金托管与经营授权，也不承诺签字权。",
-              "美国以学士学位与执照为主；中国以学历、专业与备案资格为主，并对关联金融与保险业务有牌照要求，两者不互认。",
-              "客户与交易信息的义务由机构与雇主承担，须依法律与制度执行；本页不构成个人信息保护或房地产法律意见。",
-              "涉及代理签约、资金托管与公平住房的要求由机构规程与法规规定，是否适用取决于法域与业务，本页不替代执业规范与制度条款。"
+              "学历、个人执照/职业资格、机构备案与内部授权分别核；学位和内部培训不自动授予业务权限。",
+              "BLS OOH合并组典型高中；经纪人与销售代理的经验及培训行不同，美国所有州要求持照、细则因州而异。加州经纪人示例不能外推全美或销售代理，中国机构备案与人员资格不同。",
+              "中国管理办法20条服务合同须机构盖章与一名经纪人或两名协理签名；14条禁止人员个人承接与收费，内部授权不能替代。",
+              "代收代付按24条适用条件与专用账户核；美国公平住房及中国个人信息要求分别按法域和具体行为核，本页不替代执业规范。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.path.credential-boundary.1",
           "source_refs": [
+            "ep",
             "bls",
-            "editor",
-            "privacy"
+            "ca-broker-license",
+            "cn-broker-rule",
+            "privacy",
+            "editor"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -30038,12 +30127,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国典型路径为四年制学士学位加相关经验（O*NET Job Zone 4），常见起点是受监督的销售与交易辅助岗，可向交易与合同、融资与交割、物业出租与管理方向探索。中国要求以目标机构与雇主公告为准。"
+              "BLS OOH合并组典型高中；经纪人与销售代理的经验、在岗培训和执照分工不同。三条受监督探索方向是编辑建议，须按目标州和中国实际职责另核，不是统一学士或晋升路线。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.path.career-path-block.20",
           "source_refs": [
             "bls",
+            "ep",
+            "cn-broker-rule",
             "editor"
           ],
           "type": "prose"
@@ -30053,14 +30144,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "不同法域对房地产执业与关联金融业务的资质要求不同；美国以学历与执照为主，中国以学历、专业与备案资格为主，两者不互认，须按雇主与机构确认。"
+              "美国州执照、中国机构备案与人员职业资格分别核，不从中文头衔建立互认；内部授权不替代法定要求。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.path.career-path-block.21",
           "source_refs": [
+            "ep",
             "bls",
-            "editor",
-            "privacy"
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -30085,13 +30177,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国典型路径：学士学位加相关经验；常见起点为受监督的销售与交易辅助岗，可向交易与合同、融资与交割、物业出租与管理方向探索。"
+              "BLS OOH合并组典型高中；经纪人与销售代理的经验、在岗培训和执照分工不同。三条受监督探索方向是编辑建议，须按目标州和中国实际职责另核，不是统一学士或晋升路线。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.path.career-path-block.23",
           "source_refs": [
-            "editor",
-            "onet"
+            "bls",
+            "ep",
+            "cn-broker-rule",
+            "editor"
           ],
           "type": "prose"
         },
@@ -30133,7 +30227,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.path.career-path-block.26",
           "source_refs": [
-            "nbs"
+            "ep"
           ],
           "type": "prose"
         },
@@ -30375,12 +30469,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按机构授权；带教能力为常见要求。"
+              "编辑建议：按目标岗位核带教、项目及联络职责，不声明招聘常见要求。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.path.career-path-block.43",
           "source_refs": [
+            "ep",
             "bls",
+            "cn-broker-rule",
             "editor"
           ],
           "type": "prose"
@@ -31140,13 +31236,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 资料显示本职业 2024 年约 111,300 人，2024—2034 预计增长接近平均（3%—4%），年均空缺约 9,700 个（含替换）；2025 年 5 月工资中位 73,220 美元/年。中国区未取得本职业精确工资。"
+              "BLS2025—2035合并组530.6→538.8千人，官方净增8.3千、表1.2增长1.6%（OOH整数2%），年均空缺40.4千含替换；2025合并工资中位57,400美元/年。单列经纪人中位73,220、代理52,830不能代替合并组。中国精确工资未取得。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.8",
           "source_refs": [
+            "bls",
             "ep",
-            "onet",
             "editor"
           ],
           "type": "prose"
@@ -31170,12 +31266,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034"
+              "2025—2035"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.10",
           "source_refs": [
-            "ep"
+            "ep",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31184,12 +31281,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增长接近平均（3%—4%）属官方预测，不是承诺；净增量与年均空缺是不同指标。"
+              "合并组表1.2增长1.6%、OOH整数概览2%，官方净增8.3千；年均空缺40.4千含替换，不是净新增、AI因果或个人承诺。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.11",
           "source_refs": [
-            "ep"
+            "bls",
+            "ep",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31226,12 +31325,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 41-9021.00（精确职业）"
+              "美国41-9021与41-9022（合并组）"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.14",
           "source_refs": [
-            "ep"
+            "bls",
+            "ep",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31240,12 +31341,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "接近平均（2024—2034）"
+              "合并组OOH预计增长2%（2025—2035）"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.15",
           "source_refs": [
-            "ep"
+            "bls",
+            "ep",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31450,12 +31553,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 职业就业工资统计：美国工资与行业背景。"
+              "BLS OOH合并组工资、两子职业工资与行业背景。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.30",
           "source_refs": [
-            "ep"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31469,7 +31572,7 @@
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.31",
           "source_refs": [
-            "bls"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31492,12 +31595,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 41-9021.00：任务与工作情境。"
+              "O*NET41-9021经纪人与41-9022销售代理任务；自报情境按单职业分别核。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.33",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -31506,13 +31610,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补估价方法与认证"
+              "合并组内销售代理角色：需与经纪人合作并核目标州销售执照"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "facilities",
+            "bls",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31521,12 +31626,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "交易与价格经验"
+              "客户、房源与交易配合经验"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.35",
           "source_refs": [
-            "onet",
+            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -31536,12 +31641,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移：价格经验；需补：估价方法与认证"
+              "可迁移：客户房源核对；需补：目标州销售执照与监督规则"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.36",
           "source_refs": [
-            "onet",
+            "facilities",
             "editor"
           ],
           "type": "prose"
@@ -31551,13 +31656,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补物业运营与租赁管理"
+              "需补物业运营、预算与维护管理"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.37",
           "source_refs": [
-            "editor",
-            "onet"
+            "health",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31566,12 +31671,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "交易与客户经验"
+              "客户与租赁协调经验"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.38",
           "source_refs": [
-            "editor",
+            "health",
             "editor"
           ],
           "type": "prose"
@@ -31581,12 +31686,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移：客户经验；需补：物业运营与租赁"
+              "可迁移：客户协调；需补：物业运营与维护"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.39",
           "source_refs": [
-            "editor",
+            "health",
             "editor"
           ],
           "type": "prose"
@@ -31596,13 +31701,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补团队管理与制度"
+              "需补估价方法、报告标准与适用资格"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.40",
           "source_refs": [
-            "editor",
-            "onet"
+            "hr",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31611,12 +31716,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "销售与客户经验"
+              "成交比较与物业资料经验"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.41",
           "source_refs": [
-            "editor",
+            "hr",
             "editor"
           ],
           "type": "prose"
@@ -31626,12 +31731,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移：销售经验；需补：团队管理与制度"
+              "可迁移：价格与资料；需补：正式估价方法与资格"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.42",
           "source_refs": [
-            "editor",
+            "hr",
             "editor"
           ],
           "type": "prose"
@@ -31641,13 +31746,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需接受监督并专注销售"
+              "需补信用分析、贷款审批权限与适用资格"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.43",
           "source_refs": [
-            "editor",
-            "onet"
+            "operations",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31656,12 +31761,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "客户与房源经验"
+              "融资配合与客户资料经验"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.44",
           "source_refs": [
-            "editor",
+            "operations",
             "editor"
           ],
           "type": "prose"
@@ -31671,12 +31776,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移：客户经验；需补：监督下的销售执行"
+              "可迁移：客户资料核对；需补：信贷分析与授权"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.45",
           "source_refs": [
-            "editor",
+            "operations",
             "editor"
           ],
           "type": "prose"
@@ -31686,58 +31791,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补信贷与融资规则"
+              "需补保险产品与目标法域销售许可"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.46",
           "source_refs": [
-            "editor",
-            "onet"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "交易与合规经验"
-            ]
-          },
-          "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.47",
-          "source_refs": [
-            "editor",
+            "insurance-profile",
             "editor"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "可迁移：合规经验；需补：信贷与融资"
-            ]
-          },
-          "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.48",
-          "source_refs": [
-            "editor",
-            "editor"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.market-signal-card",
-          "data": {
-            "paragraphs": [
-              "需补保险产品与牌照"
-            ]
-          },
-          "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.49",
-          "source_refs": [
-            "editor",
-            "onet"
           ],
           "type": "prose"
         },
@@ -31749,8 +31809,9 @@
               "销售与客户经验"
             ]
           },
-          "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.50",
+          "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.47",
           "source_refs": [
+            "insurance-profile",
             "editor"
           ],
           "type": "prose"
@@ -31760,11 +31821,57 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移：销售经验；需补：保险产品与牌照"
+              "可迁移：客户沟通；需补：保险产品与牌照"
+            ]
+          },
+          "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.48",
+          "source_refs": [
+            "insurance-profile",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "需补团队管理、目标与绩效制度"
+            ]
+          },
+          "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.49",
+          "source_refs": [
+            "archivists",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "交易组织与客户经验"
+            ]
+          },
+          "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.50",
+          "source_refs": [
+            "archivists",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "可迁移：销售协调；需补：人员与绩效管理"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.51",
           "source_refs": [
+            "archivists",
             "editor"
           ],
           "type": "prose"
@@ -31774,12 +31881,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补证券与合规知识"
+              "需补证券产品、交易与合规规则"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.52",
           "source_refs": [
-            "onet",
+            "real-estate-brokers-and-sales-agents",
             "editor"
           ],
           "type": "prose"
@@ -31789,12 +31896,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "销售与交易经验"
+              "销售与交易记录经验"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.53",
           "source_refs": [
-            "onet",
+            "real-estate-brokers-and-sales-agents",
             "editor"
           ],
           "type": "prose"
@@ -31804,12 +31911,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移：销售经验；需补：证券与合规"
+              "可迁移：客户记录；需补：证券专业及适用许可"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.54",
           "source_refs": [
-            "onet",
+            "real-estate-brokers-and-sales-agents",
             "editor"
           ],
           "type": "prose"
@@ -31819,12 +31926,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补产权检索与法规"
+              "需补产权、权利负担检索与报告方法"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.55",
           "source_refs": [
-            "onet",
+            "title-profile",
             "editor"
           ],
           "type": "prose"
@@ -31834,12 +31941,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "交易与资料经验"
+              "交易资料核对经验"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.56",
           "source_refs": [
-            "onet",
+            "title-profile",
             "editor"
           ],
           "type": "prose"
@@ -31849,12 +31956,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移：资料经验；需补：产权检索与法规"
+              "可迁移：资料核对；需补：产权检索与法规"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.market-signals.market-signal-card.57",
           "source_refs": [
-            "onet",
+            "title-profile",
             "editor"
           ],
           "type": "prose"
@@ -31981,7 +32088,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页资料核读日期：2026-09-30；来源访问日期与之相同。"
+              "本次九模块作者核读2026-10-12；原来源登记2026-09-30为历史访问日，保护依赖未统一刷新。独立内容复核、HTML与发布尚未执行。"
             ]
           },
           "id": "real-estate-brokers-and-sales-agents.sources.source-card.3",
@@ -32487,6 +32594,81 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "general",
                 "url": "https://www.bls.gov/oes/oes_method.htm"
+              },
+              {
+                "accessed_at": "2026-10-12",
+                "details": [
+                  "仅加州；18岁、经验或符合条件学位、8课程、考试及申请审批，非美国统一细则。"
+                ],
+                "evidence_type": "official",
+                "id": "ca-broker-license",
+                "limitation": "仅加州；18岁、经验或符合条件学位、8课程、考试及申请审批，非美国统一细则。",
+                "market": "美国加利福尼亚州",
+                "name": "California DRE Broker License Requirements",
+                "period": "现行公开资料；核读2026-10-12",
+                "publisher": "BLS/DRE/住建部/eCFR/O*NET（见具体链接）",
+                "scope": "adjacent",
+                "url": "https://www.dre.ca.gov/Examinees/RequirementsBroker.html"
+              },
+              {
+                "accessed_at": "2026-10-12",
+                "details": [
+                  "2016修正文；机构备案与个人职业资格、服务合同签名及资金职责分别核。"
+                ],
+                "evidence_type": "law",
+                "id": "cn-broker-rule",
+                "limitation": "2016修正文；机构备案与个人职业资格、服务合同签名及资金职责分别核。",
+                "market": "中国大陆",
+                "name": "房地产经纪管理办法（住建部现行公布文本）",
+                "period": "现行公开资料；核读2026-10-12",
+                "publisher": "BLS/DRE/住建部/eCFR/O*NET（见具体链接）",
+                "scope": "contextual",
+                "url": "https://www.mohurd.gov.cn/api-gateway/jpaas-web-server/front/document/download?fileName=%E6%88%BF%E5%9C%B0%E4%BA%A7%E7%BB%8F%E7%BA%AA%E7%AE%A1%E7%90%86%E5%8A%9E%E6%B3%95-%E5%9B%BE%E7%89%87%E7%89%88&fileUrl=YW5UzzlvCwcM%2FNHHX%2FtT6BJ6yM%2FAU1LVtmOVIvNjcurGdLAiZRkjaBvXEKJvAoVSuh3FyuPxDVZ3nOhHkmh3vITkKEfE6jGgmAg%2B%2F2wAFchij7skWenPd%2B9EdyPwGcaS%2FD4BU9T7SuybjHQQMVYNrQ%3D%3D"
+              },
+              {
+                "accessed_at": "2026-10-12",
+                "details": [
+                  "具体美国住房行为限制与适用性，非中国规则。"
+                ],
+                "evidence_type": "law",
+                "id": "fair-housing-rule",
+                "limitation": "具体美国住房行为限制与适用性，非中国规则。",
+                "market": "美国",
+                "name": "24 CFR100.70 Other prohibited sale and rental conduct",
+                "period": "现行公开资料；核读2026-10-12",
+                "publisher": "BLS/DRE/住建部/eCFR/O*NET（见具体链接）",
+                "scope": "contextual",
+                "url": "https://www.ecfr.gov/current/title-24/subtitle-B/chapter-I/part-100/subpart-B/section-100.70"
+              },
+              {
+                "accessed_at": "2026-10-12",
+                "details": [
+                  "相邻任务不构成牌照互认。"
+                ],
+                "evidence_type": "official",
+                "id": "insurance-profile",
+                "limitation": "相邻任务不构成牌照互认。",
+                "market": "美国",
+                "name": "O*NET41-3021.00保险销售代理",
+                "period": "现行公开资料；核读2026-10-12",
+                "publisher": "BLS/DRE/住建部/eCFR/O*NET（见具体链接）",
+                "scope": "adjacent",
+                "url": "https://www.onetonline.org/link/details/41-3021.00"
+              },
+              {
+                "accessed_at": "2026-10-12",
+                "details": [
+                  "相邻任务不构成资格互认。"
+                ],
+                "evidence_type": "official",
+                "id": "title-profile",
+                "limitation": "相邻任务不构成资格互认。",
+                "market": "美国",
+                "name": "O*NET23-2093.00产权审查员摘要员检索员",
+                "period": "现行公开资料；核读2026-10-12",
+                "publisher": "BLS/DRE/住建部/eCFR/O*NET（见具体链接）",
+                "scope": "adjacent",
+                "url": "https://www.onetonline.org/link/details/23-2093.00"
               }
             ]
           },
@@ -33034,7 +33216,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "方向": "本职业工作运行支持"
+            "方向": "房源与资料整理"
           },
           {
             "AI主要改变": {
@@ -33049,7 +33231,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "方向": "本职业记录与信息管理"
+            "方向": "带看与谈判"
           },
           {
             "AI主要改变": {
@@ -33064,7 +33246,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "方向": "相关方与费用"
+            "方向": "合规与记录"
           }
         ],
         "evidence_intro": {
@@ -33258,7 +33440,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "概念": "哪些环节会真正被采用？"
+            "概念": "采用前应核哪些条件？"
           },
           {
             "含义": {
@@ -33508,7 +33690,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "风险": "本职业工作个人信息被不当外发"
+            "风险": "客户与交易信息被不当外发"
           },
           {
             "为什么重要": {
@@ -34702,7 +34884,7 @@
             },
             "evidence_refs": [
               "onet",
-              "employer"
+              "facilities"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -34734,7 +34916,7 @@
             },
             "evidence_refs": [
               "onet",
-              "employer"
+              "facilities"
             ],
             "id": "record-version",
             "mitigation": {
@@ -34798,7 +34980,7 @@
             },
             "evidence_refs": [
               "onet",
-              "operations"
+              "bls"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -34829,8 +35011,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "privacy",
-              "employer"
+              "onet",
+              "facilities"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -34861,8 +35043,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
-              "employer"
+              "onet",
+              "facilities"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35357,11 +35539,11 @@
             "ai_heading": "AI 会影响房地产经纪人与销售代理的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "公开招聘样本（历史公告，非官方统计）",
-            "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "房地产经纪人与销售代理在不同学历背景下通常从哪些岗位方向开始？",
+            "scenario_caption": "学历与待核岗位方向（编辑建议，未取得匹配招聘原文）",
+            "scenario_heading": "不同学历背景可核哪些岗位方向？",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "学历背景",
-            "scenario_value_label": "常见岗位方向"
+            "scenario_value_label": "待核岗位方向"
           },
           "us_growth": {
             "$item": "real-estate-brokers-and-sales-agents.china-salary.career-snapshot-primary-locale.58",
@@ -35466,7 +35648,7 @@
             }
           },
           {
-            "fact_ref": "us-employment-2025",
+            "fact_ref": null,
             "指标": "就业 · 就业规模",
             "数值": {
               "$item": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.19",
@@ -35482,7 +35664,7 @@
             }
           },
           {
-            "fact_ref": "us-growth-2025-2035",
+            "fact_ref": null,
             "指标": "就业 · 增长率",
             "数值": {
               "$item": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.21",
@@ -35498,7 +35680,7 @@
             }
           },
           {
-            "fact_ref": "us-openings-2025-2035",
+            "fact_ref": null,
             "指标": "就业 · 年均职位空缺",
             "数值": {
               "$item": "real-estate-brokers-and-sales-agents.us-salary.career-snapshot-secondary-locale.23",
@@ -36358,7 +36540,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Occupational Outlook Handbook",
+            "label": "O*NET全国工资（BLS OEWS派生）",
             "secondary_value": null,
             "value": {
               "$item": "real-estate-brokers-and-sales-agents.profile.onet-structured-fields-block.2",
@@ -37426,11 +37608,11 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：官方未公布合并组分位",
+        "display_value": "证据不足：本轮未取得合并组分位",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
         "measure": "工资第 10 分位可得性",
-        "occupation_scope": "美国房地产经纪人与销售代理（合并组：41-9021.00 与 41-9022.00）；合并组仅公布中位数，分位另见单列",
+        "occupation_scope": "美国经纪人41-9021与销售代理41-9022合并组；本轮OOH查阅未取得该分位，不由缺项推断官方未发布",
         "period": "May 2025",
         "source_refs": [
           "bls"
@@ -37438,11 +37620,11 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：官方未公布合并组分位",
+        "display_value": "证据不足：本轮未取得合并组分位",
         "fact_id": "us-wage-q25-2025",
         "market": "美国",
         "measure": "工资第 25 分位可得性",
-        "occupation_scope": "美国房地产经纪人与销售代理（合并组：41-9021.00 与 41-9022.00）；合并组未公布第 25 分位",
+        "occupation_scope": "美国经纪人41-9021与销售代理41-9022合并组；本轮OOH查阅未取得该分位，不由缺项推断官方未发布",
         "period": "May 2025",
         "source_refs": [
           "bls"
@@ -37462,11 +37644,11 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：官方未公布合并组分位",
+        "display_value": "证据不足：本轮未取得合并组分位",
         "fact_id": "us-wage-q75-2025",
         "market": "美国",
         "measure": "工资第 75 分位可得性",
-        "occupation_scope": "美国房地产经纪人与销售代理（合并组：41-9021.00 与 41-9022.00）；合并组未公布第 75 分位",
+        "occupation_scope": "美国经纪人41-9021与销售代理41-9022合并组；本轮OOH查阅未取得该分位，不由缺项推断官方未发布",
         "period": "May 2025",
         "source_refs": [
           "bls"
@@ -37474,11 +37656,11 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：官方未公布合并组分位",
+        "display_value": "证据不足：本轮未取得合并组分位",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
         "measure": "工资第 90 分位可得性",
-        "occupation_scope": "美国房地产经纪人与销售代理（合并组：41-9021.00 与 41-9022.00）；合并组未公布最高 10% 分位",
+        "occupation_scope": "美国经纪人41-9021与销售代理41-9022合并组；本轮OOH查阅未取得该分位，不由缺项推断官方未发布",
         "period": "May 2025",
         "source_refs": [
           "bls"
@@ -37522,50 +37704,54 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：官方未单列本职业中位数",
+        "display_value": "证据不足：本轮未取得合并组职业×行业中位数",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
-        "measure": "行业分列中位数可得性",
-        "occupation_scope": "美国房地产经纪人与销售代理（合并组：41-9021.00 与 41-9022.00）；房地产与租赁为主要行业，未单列中位数",
+        "measure": "本轮职业×行业中位数查阅缺口",
+        "occupation_scope": "美国41-9021与41-9022合并组，本轮未取得行业中位数；单列行业中位不可代填",
         "period": "May 2025",
         "source_refs": [
-          "bls"
+          "bls",
+          "editor"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：官方未单列本职业中位数",
+        "display_value": "证据不足：本轮未取得合并组职业×行业中位数",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
-        "measure": "行业分列中位数可得性",
-        "occupation_scope": "美国房地产经纪人与销售代理（合并组：41-9021.00 与 41-9022.00）；金融与保险，未单列中位数",
+        "measure": "本轮职业×行业中位数查阅缺口",
+        "occupation_scope": "美国41-9021与41-9022合并组，本轮未取得行业中位数；单列行业中位不可代填",
         "period": "May 2025",
         "source_refs": [
-          "bls"
+          "bls",
+          "editor"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：官方未单列本职业中位数",
+        "display_value": "证据不足：本轮未取得合并组职业×行业中位数",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
-        "measure": "行业分列中位数可得性",
-        "occupation_scope": "美国房地产经纪人与销售代理（合并组：41-9021.00 与 41-9022.00）；专业与商业服务，未单列中位数",
+        "measure": "本轮职业×行业中位数查阅缺口",
+        "occupation_scope": "美国41-9021与41-9022合并组，本轮未取得行业中位数；单列行业中位不可代填",
         "period": "May 2025",
         "source_refs": [
-          "bls"
+          "bls",
+          "editor"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：官方未单列本职业中位数",
+        "display_value": "证据不足：本轮未取得合并组职业×行业中位数",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
-        "measure": "行业分列中位数可得性",
-        "occupation_scope": "美国房地产经纪人与销售代理（合并组：41-9021.00 与 41-9022.00）；其他行业未按本职业单列中位数",
+        "measure": "本轮职业×行业中位数查阅缺口",
+        "occupation_scope": "美国41-9021与41-9022合并组，本轮未取得行业中位数；单列行业中位不可代填",
         "period": "May 2025",
         "source_refs": [
-          "bls"
+          "bls",
+          "editor"
         ]
       },
       {
@@ -37671,7 +37857,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "房地产经纪人与销售代理 · 任务拆分 · 结果复核",
@@ -37722,7 +37908,7 @@
       "text": "房地产经纪人与销售代理"
     }
   },
-  "source_content_sha256": "b8db283ab3add312f35a2e777b550e5fa2e3901e95b5ccbe62e333c4ccc8705d",
+  "source_content_sha256": "be76e2d58cb92aadc7edeaca62210550829949f823a76dc9e125ffc63a9aff65",
   "subject": {
     "canonical_slug": "real-estate-brokers-and-sales-agents",
     "name": "房地产经纪人与销售代理",

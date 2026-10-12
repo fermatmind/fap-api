@@ -17,6 +17,45 @@
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
+      "fact:pilot-review-cn-industry-manufacturing-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:pilot-review-cn-industry-science-tech-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:pilot-review-cn-professional-technical-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:pilot-review-cn-urban-nonprivate-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:pilot-review-us-change-2025-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:pilot-review-us-employment-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:pilot-review-us-employment-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:pilot-review-us-growth-2025-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:pilot-review-us-industry-wage-aerospace-mfg-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:pilot-review-us-industry-wage-engineering-services-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:pilot-review-us-industry-wage-federal-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:pilot-review-us-industry-wage-rd-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:pilot-review-us-openings-2025-2035": {
+        "status": "pending_mapping"
+      },
       "fact:us-change-2025-2035": {
         "status": "pending_mapping"
       },
@@ -11742,28 +11781,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.03.explanation.sources.02.href": {
-        "ref": {
-          "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.14",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.03.explanation.sources.02.label": {
         "ref": {
@@ -12135,28 +12154,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.href": {
-        "ref": {
-          "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.20",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.label": {
         "ref": {
@@ -12266,28 +12265,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.href": {
-        "ref": {
-          "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.22",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.label": {
         "ref": {
@@ -23689,7 +23668,7 @@
           ],
           "id": "commercial-pilots.profile.definition-block.1",
           "source_refs": [
-            "onet-details"
+            "pilot-review-onet-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23704,7 +23683,7 @@
           },
           "id": "commercial-pilots.profile.definition-block.2",
           "source_refs": [
-            "onet-details"
+            "pilot-review-onet-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23719,7 +23698,7 @@
           },
           "id": "commercial-pilots.profile.definition-block.3",
           "source_refs": [
-            "onet-details"
+            "pilot-review-onet-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23734,7 +23713,7 @@
           },
           "id": "commercial-pilots.profile.definition-block.4",
           "source_refs": [
-            "onet-details"
+            "pilot-review-onet-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23764,7 +23743,7 @@
           },
           "id": "commercial-pilots.profile.definition-block.6",
           "source_refs": [
-            "bls-entry"
+            "pilot-review-bls-entry"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23779,7 +23758,7 @@
           },
           "id": "commercial-pilots.profile.definition-block.7",
           "source_refs": [
-            "onet-hot-tech"
+            "pilot-review-onet-hot-tech"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23856,7 +23835,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "复核任务与天气与运行条件 → 飞行前检查与性能与燃油计算 → 提交飞行计划并取得放行与许可 → 启动发动机并按程序驾驶 → 飞行中监控与协调与调整 → 落地后填写记录并完成交接"
+              "编辑流程概括：任务天气空域核对→按当次条件检查、性能燃油和载荷核对→完成适用飞行计划、运行放行及空管许可→操纵监控和协调→按实际异常程序判断→记录交接。放行、计划及许可要求随运行类型不同，不把概括当统一操作程序。"
             ]
           },
           "id": "commercial-pilots.profile.career-quick-answers-block.3",
@@ -23878,7 +23857,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "获取天气与空域与载荷信息 → 计算性能与燃油并核对航空器状态 → 提交计划并取得放行 → 按规定操纵与监控航空器 → 按需调整航路高度或速度 → 落地与记录与交接"
+              "编辑流程概括：任务天气空域核对→按当次条件检查、性能燃油和载荷核对→完成适用飞行计划、运行放行及空管许可→操纵监控和协调→按实际异常程序判断→记录交接。放行、计划及许可要求随运行类型不同，不把概括当统一操作程序。"
             ]
           },
           "id": "commercial-pilots.profile.career-quick-answers-block.5",
@@ -23889,10 +23868,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "飞行计划与放行记录、飞行前检查记录、飞行日志（飞行时间与高度与燃油消耗）、载荷与重量与平衡记录、空管通信与许可记录、天气与通告简报、飞行中测试与评估报告、维修与保养与大修安排记录、异常与偏离与升级记录，以及机组与地面与运行的交接记录。"
+              "飞行时间、高度、燃油等来自O*NET任务；设备异常、载荷、天气许可、值勤和交接可作任务相关编辑核对清单，具体强制项目、签署人及期限按运行类型和适用制度核，不统一为全法域法律义务。"
             ]
           },
           "id": "commercial-pilots.profile.career-quick-answers-block.6",
+          "source_refs": [
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -23900,10 +23883,22 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "常见相邻岗位包括航空公司飞行员、副驾驶与飞行工程师，空中交通管制员，飞机机械师技术员与航空电子技术员，机场运行专员与航空检查员与运输检查员，以及空乘人员、遥感技术员与船长、大副和船舶引航员等。边界上：航空公司飞行员、副驾驶与飞行工程师在定期航线与大型运输航空器上运行，本职业页面明确把地区、国内与国际航空公司的航线飞行员排除在外；空中交通管制员在地面设施内发布放行与间隔指令，不操纵航空器；飞机机械师技术员以航空器维修与放行为主，通常不承担飞行操纵责任；航空电子技术员以机载电子与仪表系统维修为主；机场运行专员负责场道与运行保障，不执行飞行任务；航空检查员与运输检查员以检查与监督合规为主；空乘人员负责客舱安全与服务，不参与操纵；遥感技术员与无人机作业在数据采集侧相衔接，但不承担有人驾驶的放行与安全责任。本职业以有人驾驶的非定期航线运行、以及对飞行安全与记录的最终责任为核心。"
+              "八邻岗官方主要对象：航空公司飞行员通常定期航线运输及其教员；管制员协调机场周边和扇区航空交通；机务诊断调整维修航空器发动机及总成；航电安装测试维修航空器或航天器电子设备；机场运行协调管制维修、场道导航、安全及记录；空乘负责客舱安全服务；遥感技术支持科学应用，可能准备飞行计划或传感器配置；船长等指挥监督船舶并需美国海岸警卫队执照。定义支持对象区别，不证明所有工作场所、个人权限或互认；本职业也不把全部飞行员等同机长。"
             ]
           },
           "id": "commercial-pilots.profile.career-quick-answers-block.7",
+          "source_refs": [
+            "pilot-review-onet-details",
+            "pilot-review-neighbor-0",
+            "pilot-review-neighbor-1",
+            "pilot-review-neighbor-2",
+            "pilot-review-neighbor-3",
+            "pilot-review-neighbor-4",
+            "pilot-review-neighbor-5",
+            "pilot-review-neighbor-6",
+            "pilot-review-neighbor-7",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -23944,7 +23939,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "航空公司飞行员、副驾驶与飞行工程师在定期航线与大型运输航空器上运行；本职业按该职业页面口径限定为非定期航线与直升机运行并排除航线飞行员"
+              "相邻航空公司飞行员通常在定期航线运送客货，官方定义含航线飞行员及其教员；本职业定义排除地区、国内与国际航线飞行员，不用航空器大小作唯一分类。"
             ]
           },
           "id": "commercial-pilots.profile.career-quick-answers-block.11",
@@ -23955,7 +23950,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "复核运行条件 → 飞行前检查与性能计算 → 提交计划与取得放行 → 操纵与监控 → 调整与记录与交接"
+              "编辑流程概括：任务天气空域核对→按当次条件检查、性能燃油和载荷核对→完成适用飞行计划、运行放行及空管许可→操纵监控和协调→按实际异常程序判断→记录交接。放行、计划及许可要求随运行类型不同，不把概括当统一操作程序。"
             ]
           },
           "id": "commercial-pilots.profile.career-quick-answers-block.12",
@@ -23966,7 +23961,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "空中交通管制员在地面设施中提供放行与间隔服务，不操纵航空器；本职业在驾驶舱内操纵并监控航空器并对飞行安全负最终责任"
+              "管制方向重点协调机场周边及扇区航空交通；本职业重点操纵监控航空器。美国91.3规定机长对航空器运行直接负责并有最终决定权；维修签署、运行控制及签派等须按各自适用资格和运行规则核，不合并为机长承担所有岗位最终义务。91.3飞行中需即时行动的紧急情况允许机长在所需程度内偏离Part91规则；不能将所有异常统一成先获签派批准或立即停止/改航。具体处置依实际规章、批准手册和训练，不由本页提供动作参数。"
             ]
           },
           "id": "commercial-pilots.profile.career-quick-answers-block.13",
@@ -23977,10 +23972,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "飞行计划与放行记录、飞行前检查单、飞行日志、重量与平衡与燃油记录、天气与通告简报、空管许可与通信记录、测试与评估报告、异常与升级记录、交接记录"
+              "飞行时间、高度、燃油等来自O*NET任务；设备异常、载荷、天气许可、值勤和交接可作任务相关编辑核对清单，具体强制项目、签署人及期限按运行类型和适用制度核，不统一为全法域法律义务。"
             ]
           },
           "id": "commercial-pilots.profile.career-quick-answers-block.14",
+          "source_refs": [
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -23988,7 +23987,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "飞机机械师技术员以航空器维修与适航放行为主，通常不承担飞行操纵与航路决策；本职业以飞行操纵与运行决策为主，维修安排与大修工作另行委托或安排"
+              "飞机机械师技术员主要诊断调整维修发动机与总成；飞行员的少量维护任务不自动赋予维修签署权。实际飞行、检查和签署职责须分别核。"
             ]
           },
           "id": "commercial-pilots.profile.career-quick-answers-block.15",
@@ -23999,10 +23998,18 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "运行安全优先于进度；发现设备、天气、燃油、疲劳或授权条件不满足时立即停止或改航并升级；航空器适航与维修放行、放行签派、体检合格与执照等级、危险品运输与载重平衡须按适用法规与运行规章与雇主运行手册由具备相应资质与授权的人员执行；飞行记录与运行结论需可复核，本页不代替放行与安全决策"
+              "美国91.3规定机长对航空器运行直接负责并有最终决定权；维修签署、运行控制及签派等须按各自适用资格和运行规则核，不合并为机长承担所有岗位最终义务。91.3飞行中需即时行动的紧急情况允许机长在所需程度内偏离Part91规则；不能将所有异常统一成先获签派批准或立即停止/改航。具体处置依实际规章、批准手册和训练，不由本页提供动作参数。 美国91.7要求适航，机长核安全飞行状态，并在机械、电气或结构导致不适航时停止该飞行。91.213故障设备须依适用MEL、授权及记录条件，特定航空器另有无批准MEL的有条件路径；不是所有航空器必须同一MEL，也不是每项缺陷可自动放行或必须立即改航。"
             ]
           },
           "id": "commercial-pilots.profile.career-quick-answers-block.16",
+          "source_refs": [
+            "pilot-review-onet-context",
+            "pilot-review-onet-details",
+            "pilot-review-far-91-3",
+            "pilot-review-far-91-7",
+            "pilot-review-far-91-213",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24021,10 +24028,18 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国该职业准备层级为 Job Zone Three（中等准备），该页面教育分布显示受访者回答「部分岗位需要中等后证书」「部分岗位需要高中文凭或同等学历」「部分岗位需要上过大学但未取得学位」（页面按这三档表述，未给百分比）；常见路径为飞行训练学校或航空院校的飞行训练与商业飞行员执照训练，配合累计飞行小时、教员带飞、体检合格与按雇主与运行要求取得的等级与认证"
+              "O*NET新入职者所需教育的受访回答列三档：中等后证书、高中或同等、部分大学未学位，未给比例；JobZone3为准备层级。BLS典型飞行训练与部分雇主学位条件另核。美国61.123/61.133/61.23涉及证书、等级、体检及条件例外；学历、资格和运行授权不能互代。"
             ]
           },
           "id": "commercial-pilots.profile.career-quick-answers-block.18",
+          "source_refs": [
+            "pilot-review-onet-training",
+            "pilot-review-onet-details",
+            "pilot-review-bls-ooh",
+            "pilot-review-far-61-123",
+            "pilot-review-far-61-133",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24032,7 +24047,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国大陆：本条证据路由未建立与 O*NET-SOC 53-2012.00 一一对应的职业细类，相关职责可能分布在公共航空运输与通用航空的飞行运行序列；本条证据路由提供的中国大陆工资为「交通运输、仓储和邮政业」行业均值代理（城镇非私营单位 133,981 元/年、城镇私营单位 73,133 元/年），不是本职业的中位数、起薪或月薪"
+              "NBS2025（2026-05-15发布）交通运输、仓储和邮政业非私营133,981元/人/年、私营73,133元/人/年，均为行业全体就业人员税前年平均工资，只在雇主实际属该行业时作宽背景；不是商业飞行员中位数、起薪或月薪。本轮未建立中国精确职业及工资映射，不等中国没有该细类或官方从未发布。"
             ]
           },
           "id": "commercial-pilots.profile.career-quick-answers-block.19",
@@ -24043,7 +24058,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "结论只适用于本页标注的 O*NET 与 BLS 口径与期间（美国工资为 2025 年；就业为 2024 至 2034 年预测；中国大陆为 2025 年行业均值代理）"
+              "结论只适用于本页标注的 O*NET 与 BLS 口径与期间（美国工资为 2025 年；就业为 2025 至 2035 年预测；中国大陆为 2025 年行业均值代理）"
             ]
           },
           "id": "commercial-pilots.profile.career-quick-answers-block.20",
@@ -24065,7 +24080,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "六个反复出现的职业判断：航空器与系统状态是否按检查单与最低设备清单核对；重量与平衡与性能与燃油是否按当次条件计算并留有裕度；天气与空域与通告是否满足本次运行的放行条件；空管通信与放行与改航是否按程序执行；值勤与休息与疲劳是否在规章限值内；以及飞行记录与异常与交接是否可复核。"
+              "编辑判断清单：航空器状态及适用故障设备条件，重量平衡性能燃油，天气空域及授权，通信许可，适用值勤休息和疲劳，飞行记录交接。各项依法域、运行和职责核，不等统一MEL或单一放行流程。"
             ]
           },
           "id": "commercial-pilots.profile.career-quick-answers-block.22",
@@ -24076,7 +24091,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "判断一：航空器与系统状态是否按检查单与最低设备清单核对"
+              "判断一：航空器状态与适用故障设备条件是否满足"
             ]
           },
           "id": "commercial-pilots.profile.career-quick-answers-block.23",
@@ -24087,10 +24102,18 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "飞行前按检查单逐项核对发动机、操纵、仪表与其他系统；对不在最低设备清单允许范围内的缺陷，先停止并安排维修或按程序取得放行，不以上次可用来代替本次检查；维修与大修由具备相应资质的岗位完成。"
+              "美国91.7要求适航，机长核安全飞行状态，并在机械、电气或结构导致不适航时停止该飞行。91.213故障设备须依适用MEL、授权及记录条件，特定航空器另有无批准MEL的有条件路径；不是所有航空器必须同一MEL，也不是每项缺陷可自动放行或必须立即改航。"
             ]
           },
           "id": "commercial-pilots.profile.career-quick-answers-block.24",
+          "source_refs": [
+            "pilot-review-onet-context",
+            "pilot-review-onet-details",
+            "pilot-review-far-91-3",
+            "pilot-review-far-91-7",
+            "pilot-review-far-91-213",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24131,10 +24154,18 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "把天气实况与预报、通告、空域限制与备降条件作为放行前置条件；条件超出计划或超出本人等级与授权范围时，与运行控制或签派共同决定推迟、改航或改场，并把决定与依据记录在案。"
+              "核当天天气、通告、空域及备降条件和本人权限；涉及运行控制/签派时按其制度协调，各自职责不能合并。美国91.3规定机长对航空器运行直接负责并有最终决定权；维修签署、运行控制及签派等须按各自适用资格和运行规则核，不合并为机长承担所有岗位最终义务。91.3飞行中需即时行动的紧急情况允许机长在所需程度内偏离Part91规则；不能将所有异常统一成先获签派批准或立即停止/改航。具体处置依实际规章、批准手册和训练，不由本页提供动作参数。"
             ]
           },
           "id": "commercial-pilots.profile.career-quick-answers-block.28",
+          "source_refs": [
+            "pilot-review-onet-context",
+            "pilot-review-onet-details",
+            "pilot-review-far-91-3",
+            "pilot-review-far-91-7",
+            "pilot-review-far-91-213",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24153,10 +24184,18 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "使用无线电联络管制塔台取得起飞许可与到达指令，按程序复诵并确认；需要改高度或改航时按程序提出并取得许可后执行；对通信不清或指令冲突的情形先澄清再动作，不凭推测执行。"
+              "正常运行按适用程序完成通信、复诵、许可和变更协调；通信含混不能凭推测执行。美国91.3规定机长对航空器运行直接负责并有最终决定权；维修签署、运行控制及签派等须按各自适用资格和运行规则核，不合并为机长承担所有岗位最终义务。91.3飞行中需即时行动的紧急情况允许机长在所需程度内偏离Part91规则；不能将所有异常统一成先获签派批准或立即停止/改航。具体处置依实际规章、批准手册和训练，不由本页提供动作参数。"
             ]
           },
           "id": "commercial-pilots.profile.career-quick-answers-block.30",
+          "source_refs": [
+            "pilot-review-onet-context",
+            "pilot-review-onet-details",
+            "pilot-review-far-91-3",
+            "pilot-review-far-91-7",
+            "pilot-review-far-91-213",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24219,10 +24258,18 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "本页按 O*NET-SOC 53-2012.00（Commercial Pilots，商业飞行员；2026 年更新页面）的精确职业口径：该职业在非定期航线上驾驶并导航固定翼航空器，或驾驶直升机；须持有商业飞行员执照；包括持有类似执照的包机飞行员，以及空中救护与空中游览飞行员；不含地区、国内与国际航空公司的航线飞行员。该职业兴趣代码为 CRE（常规型、现实型、企业型）（页面公示分数为常规型 64、现实型 63、企业型 49、研究型 26、社会型 26、艺术型 2），准备层级为 Job Zone Three（中等准备）；该页面教育分布显示受访者回答「部分岗位需要中等后证书」「部分岗位需要高中文凭或同等学历」「部分岗位需要上过大学但未取得学位」（页面按这三档表述，未给百分比）；该职业页面为该代码标注了 Bright Outlook。"
+              "本页按 O*NET-SOC 53-2012.00（Commercial Pilots，商业飞行员；2026 年更新页面）的精确职业口径：该职业在非定期航线上驾驶并导航固定翼航空器，或驾驶直升机；须持有商业飞行员执照；包括持有类似执照的包机飞行员，以及空中救护与空中游览飞行员；不含地区、国内与国际航空公司的航线飞行员。当前职业兴趣前三项编辑简称CRE（常规型、现实型、企业型）（页面公示分数为常规型 64、现实型 63、企业型 49、研究型 26、社会型 26、艺术型 2），准备层级为 Job Zone Three（中等准备）；该页面新入职者所需教育的受访回答显示受访者回答「新入职者部分岗位需要中等后证书」「部分岗位需要高中文凭或同等学历」「部分岗位需要上过大学但未取得学位」（页面按这三档表述，未给百分比）；该职业页面为该代码标注了 Bright Outlook。"
             ]
           },
           "id": "commercial-pilots.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "pilot-review-onet-training",
+            "pilot-review-onet-details",
+            "pilot-review-bls-ooh",
+            "pilot-review-far-61-123",
+            "pilot-review-far-61-133",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24241,7 +24288,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆：本条证据路由按行业均值代理登记，而不是把代理值写成本职业口径。路由登记的两条 claim 为：2025 年城镇非私营单位「交通运输、仓储和邮政业」年平均工资 133,981 元，以及城镇私营单位同行业年平均工资 73,133 元；证据路由把该口径的缺口标记为 （仅在收窄后的范围内使用，处理状态：已按说明处理），并明确「不能把交通运输行业平均工资写成飞行员中位数或起薪」。因此本页在使用时逐处标注代理性质：它们描述的是行业与用工形式层面的平均水平，不是本职业的月薪、分位或起薪，也不能据此推算个人收入。"
+              "NBS2025（2026-05-15发布）交通运输、仓储和邮政业非私营133,981元/人/年、私营73,133元/人/年，均为行业全体就业人员税前年平均工资，只在雇主实际属该行业时作宽背景；不是商业飞行员中位数、起薪或月薪。本轮未建立中国精确职业及工资映射，不等中国没有该细类或官方从未发布。"
             ]
           },
           "id": "commercial-pilots.profile.onet-structured-fields-block.3",
@@ -24252,10 +24299,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业与就业：按 O*NET 该职业页面显示的 BLS 就业预测（2024 至 2034 年，精确职业口径）：2024 年就业约 55,400 人，2034 年预计约 58,300 人，预计增长 5%（Faster than average，快于平均），年均职位空缺约 6,600 个；该职业页面的行业分布为运输与仓储 58%、教育服务 11%、其他行业合计 31%（含医疗与社会救助等）。需注意：预测含假设与误差，不等于逐年实际值，也不预测某一机构或某一机队的机会数量；职业存在不等于稳定招聘或个人录用。"
+              "BLS表1.2（SOC53-2012，2025—2035）就业约50,400→53,000人、净增约2,600人、增长5.2%、年均职位空缺约5,200个，2025自雇占2.0%。OOH商业飞行员增长5%为同预测四舍五入；O*NET显示Faster than average（5%—6%）。空缺含增长及更替，不等净增、招聘或录用保证，也不是AI因果研究。 当前O*NET本职业就业行业构成为运输与仓储51%、教育服务13%、医疗与社会救助11%、其他25%（包括专业科学技术服务）；这是美国就业构成，不是行业工资或中国雇主归类。"
             ]
           },
           "id": "commercial-pilots.profile.onet-structured-fields-block.4",
+          "source_refs": [
+            "pilot-review-onet-industry",
+            "pilot-review-bls-projections"
+          ],
           "type": "prose"
         },
         {
@@ -24263,7 +24314,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "技术与工作情境：该职业工作情境显示 96% 每天使用电子邮件、81% 拥有很大的决策自由度（19% 有一定自由度）、70% 对他人健康与安全负有很高责任（28% 为高责任）、83% 认为自己的决定对同事或公司结果非常重要（15% 为中等结果）、70% 认为与工作组或团队协作极其重要（28% 非常重要）、63% 认为非常精确或高度准确极其重要（37% 非常重要）、68% 的工作作息不规律（19% 为规律作息）、80% 每周工作时间超过 40 小时、66% 每天进行面对面讨论（20% 每周一次以上）、54% 每天进行电话沟通（34% 每周一次以上）、39% 与他人保持持续接触（60% 大部分时间有接触）、54% 每天在封闭车辆或封闭设备中作业（19% 每周一次以上、15% 从不）、37% 每天面临严格截止期限（18% 每周一次以上、32% 每月一次以上）、53% 每天在户外全天气条件下作业（15% 每年一次以上、17% 从不）、66% 认为工作误差的后果极其严重（17% 相当严重、17% 完全不严重）、37% 持续或几乎持续用手操作工具或控制件、31% 每天暴露于高处（15% 每周一次以上、17% 每年一次以上、37% 从不）。"
+              "技术与工作情境：该职业工作情境显示 96% 每天使用电子邮件、81% 拥有很大的决策自由度（19% 有一定自由度）、70% 对他人健康与安全负有很高责任（28% 为高责任）、83% 认为自己的决定对同事或公司结果非常重要（15% 为中等结果）、70% 认为与工作组或团队协作极其重要（28% 非常重要）、63% 认为非常精确或高度准确极其重要（37% 非常重要）、68% 的工作作息不规律（19% 为规律作息）、80% 每周工作时间超过 40 小时、66% 每天进行面对面讨论（20% 每周一次以上但非每天）、54% 每天进行电话沟通（34% 每周一次以上但非每天）、39% 与他人保持持续接触（60% 大部分时间有接触）、54% 每天在封闭车辆或封闭设备中作业（19% 每周一次以上但非每天、15% 从不）、37% 每天面临严格截止期限（18% 每周一次以上但非每天、32% 每月一次以上但非每周）、53% 每天在户外全天气条件下作业（15% 每年一次以上但非每月、17% 从不）、66% 认为工作误差的后果极其严重（17% 相当严重、17% 完全不严重）、37% 持续或几乎持续用手操作工具或控制件、31% 每天暴露于高处（15% 每周一次以上但非每天、17% 每年一次以上但非每月、37% 从不）。 以上为职业受访分布，工作周时数不等飞行小时；不是个人能力、事故率或每岗保证。 当前详细页列13类软件，包括分析科学、航空地面支持、排期、航图、数据库查询、开发环境、飞行控制、图形图像、信息检索、地图制作、办公、项目管理和航路导航；HotTechnology招聘表另为2项：2025美国招聘Office3%、AdobeCreativeCloud比例未提供。类别不等13产品，关键词不等实际采用、熟练度或AI成效。"
             ]
           },
           "id": "commercial-pilots.profile.onet-structured-fields-block.5",
@@ -24290,10 +24341,18 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "作业环境｜53% 每天在户外全天气条件下作业、15% 每年一次以上、17% 从不；34% 每天在户外但有遮蔽处作业、18% 每周一次以上、17% 每月一次以上、31% 从不；36% 每天在环境受控的室内作业、33% 每周一次以上、19% 从不。\n防护与安全装备｜17% 每周一次以上穿戴常见防护与安全装备（安全鞋、护目镜、手套、听力防护、安全帽或救生衣）、17% 每年一次以上、16% 从不；31% 每天穿戴专业防护或安全装备（如呼吸装置、安全带、全防护服或辐射防护）、17% 每年一次以上、52% 从不。\n沟通与协作｜39% 与他人保持持续接触、60% 大部分时间有接触；66% 每天进行面对面讨论、20% 每周一次以上；70% 认为与工作组或团队协作极其重要、28% 非常重要；38% 需要协调或带领他人（38% 认为极其重要、31% 非常重要、15% 重要、16% 比较重要）；54% 每天进行电话沟通、34% 每周一次以上；96% 每天使用电子邮件。\n自主与决策｜81% 拥有很大的决策自由度、19% 有一定自由度；17% 每月一次以上需要作出影响他人、财务资源或组织声誉的决定；83% 其决定对同事或公司结果非常重要、15% 为中等结果。\n责任与影响｜70% 对他人健康与安全负有很高责任、28% 为高责任；38% 对其他员工的工作结果负有很高责任、27% 为中等责任；66% 认为工作误差的后果极其严重、17% 相当严重、17% 完全不严重。\n精确与节奏｜63% 认为非常精确或高度准确极其重要、37% 非常重要；35% 认为连续重复性活动极其重要、61% 重要；37% 每天面临严格截止期限、18% 每周一次以上、32% 每月一次以上；68% 的工作作息不规律（随天气、生产需求或合同期变化）、19% 为规律作息；80% 每周工作时间超过 40 小时、19% 为 40 小时。\n体位与体力｜37% 持续或几乎持续坐着、61% 超过一半时间坐着；37% 持续或几乎持续用手操作工具或控制件、17% 从不；31% 持续或几乎持续做重复性动作、30% 从不；68% 站立时间少于一半、17% 从不。\n工作场所与暴露｜54% 每天在封闭车辆或封闭设备中作业、19% 每周一次以上、15% 从不；33% 每天暴露于危险条件、31% 每周一次以上、17% 每年一次以上、19% 从不；31% 每天暴露于高处、15% 每周一次以上、17% 每年一次以上、37% 从不；25% 每天暴露于干扰性或不适的噪音、17% 每月一次以上。\n边界与授权｜飞行运行须按适用法域与运行规章与雇主运行手册，由持有相应执照、等级与体检合格证的人员执行；航空器适航与维修放行、放行签派、载重平衡与危险品运输的最终责任由机长与运行控制岗位承担；发现设备、天气、燃油、疲劳或授权条件不满足时立即停止或改航并升级，不以工具输出替代放行与安全判断。"
+              "作业环境｜53% 每天在户外全天气条件下作业、15% 每年一次以上但非每月、17% 从不；34% 每天在户外但有遮蔽处作业、18% 每周一次以上但非每天、17% 每月一次以上但非每周、31% 从不；36% 每天在环境受控的室内作业、33% 每周一次以上但非每天、19% 从不。\n防护与安全装备｜17% 每周一次以上但非每天穿戴常见防护与安全装备（安全鞋、护目镜、手套、听力防护、安全帽或救生衣）、17% 每年一次以上但非每月、16% 从不；31% 每天穿戴专业防护或安全装备（如呼吸装置、安全带、全防护服或辐射防护）、17% 每年一次以上但非每月、52% 从不。\n沟通与协作｜39% 与他人保持持续接触、60% 大部分时间有接触；66% 每天进行面对面讨论、20% 每周一次以上但非每天；70% 认为与工作组或团队协作极其重要、28% 非常重要；协调带领的重要性回答38%极其重要、31%非常重要、15%重要、16%比较重要；54% 每天进行电话沟通、34% 每周一次以上但非每天；96% 每天使用电子邮件。\n自主与决策｜81% 拥有很大的决策自由度、19% 有一定自由度；17% 每月一次以上但非每周需要作出影响他人、财务资源或组织声誉的决定；83% 其决定对同事或公司结果非常重要、15% 为中等结果。\n责任与影响｜70% 对他人健康与安全负有很高责任、28% 为高责任；38% 对其他员工的工作结果负有很高责任、27% 为中等责任；66% 认为工作误差的后果极其严重、17% 相当严重、17% 完全不严重。\n精确与节奏｜63% 认为非常精确或高度准确极其重要、37% 非常重要；35% 认为连续重复性活动极其重要、61% 重要；37% 每天面临严格截止期限、18% 每周一次以上但非每天、32% 每月一次以上但非每周；68% 的工作作息不规律（随天气、生产需求或合同期变化）、19% 为规律作息；80% 每周工作时间超过 40 小时、19% 为 40 小时。\n体位与体力｜37% 持续或几乎持续坐着、61% 超过一半时间坐着；37% 持续或几乎持续用手操作工具或控制件、17% 从不；31% 持续或几乎持续做重复性动作、30% 从不；68% 站立时间少于一半、17% 从不。\n工作场所与暴露｜54% 每天在封闭车辆或封闭设备中作业、19% 每周一次以上但非每天、15% 从不；33% 每天暴露于危险条件、31% 每周一次以上但非每天、17% 每年一次以上但非每月、19% 从不；31% 每天暴露于高处、15% 每周一次以上但非每天、17% 每年一次以上但非每月、37% 从不；25% 每天暴露于干扰性或不适的噪音、17% 每月一次以上但非每周。\n受访边界｜以上为职业受访分布，不代表每岗相同，超过40小时是工作周而不是飞行小时。\n边界与授权｜美国91.3规定机长对航空器运行直接负责并有最终决定权；维修签署、运行控制及签派等须按各自适用资格和运行规则核，不合并为机长承担所有岗位最终义务。91.3飞行中需即时行动的紧急情况允许机长在所需程度内偏离Part91规则；不能将所有异常统一成先获签派批准或立即停止/改航。具体处置依实际规章、批准手册和训练，不由本页提供动作参数。 美国91.7要求适航，机长核安全飞行状态，并在机械、电气或结构导致不适航时停止该飞行。91.213故障设备须依适用MEL、授权及记录条件，特定航空器另有无批准MEL的有条件路径；不是所有航空器必须同一MEL，也不是每项缺陷可自动放行或必须立即改航。"
             ]
           },
           "id": "commercial-pilots.profile.work-context-block.1",
+          "source_refs": [
+            "pilot-review-onet-context",
+            "pilot-review-onet-details",
+            "pilot-review-far-91-3",
+            "pilot-review-far-91-7",
+            "pilot-review-far-91-213",
+            "editorial"
+          ],
           "type": "prose"
         }
       ]
@@ -24760,7 +24819,7 @@
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "ilo-genai"
+            "pilot-review-ilo-genai"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -24972,10 +25031,10 @@
                 "url": "https://www.onetonline.org/link/localtrends/53-2012.00"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
+                "entity": "14CFR91.3机长责任",
                 "id": "link-17",
                 "relation": "related-evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://www.ecfr.gov/current/title-14/section-91.3"
               },
               {
                 "entity": "O*NET-SOC 53-2012.00 职业摘要",
@@ -25054,10 +25113,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用工具提高排班与值勤与训练记录与检查单的一致性，但把天气与空域与设备与疲劳的现场判断与停飞决定留给人，不让未经核对的信息进入放行与运行指令。"
+              "编辑试用候选：仅用获准的虚构或合规资料，试天气与通告资料、日志、排班或报告草稿整理，按原始信息核时效、单位、遗漏、构型和复核总耗时。本轮未取得本职业生成式AI可靠性、采用率或提效实证；批准的航空计算系统不能与生成式AI混称。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.15",
+          "source_refs": [
+            "pilot-review-onet-details",
+            "pilot-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25076,10 +25140,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用工具提高故障诊断与工卡与适航记录的整理效率，但把适航放行与维修签署与缺陷判断保留在具备相应资质的岗位，并保留完整留痕。"
+              "编辑试用候选：仅用获准的虚构或合规资料，试天气与通告资料、日志、排班或报告草稿整理，按原始信息核时效、单位、遗漏、构型和复核总耗时。本轮未取得本职业生成式AI可靠性、采用率或提效实证；批准的航空计算系统不能与生成式AI混称。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.17",
+          "source_refs": [
+            "pilot-review-onet-details",
+            "pilot-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25087,10 +25156,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把技术能力、实际采用与岗位结果分开看：公开资料能支持的是「航路与燃油与性能计算、气象与通告汇总、飞行记录与运行数据集整理类辅助可被工具完成」，以及「航空运行在飞行计划与气象与飞行数据监测系统上持续投入」；不能据此推断岗位数量或收入变化。"
+              "编辑试用候选：仅用获准的虚构或合规资料，试天气与通告资料、日志、排班或报告草稿整理，按原始信息核时效、单位、遗漏、构型和复核总耗时。本轮未取得本职业生成式AI可靠性、采用率或提效实证；批准的航空计算系统不能与生成式AI混称。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.18",
+          "source_refs": [
+            "pilot-review-onet-details",
+            "pilot-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25241,7 +25315,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024 至 2034 年的就业预测与年均空缺"
+              "用于核对该职业 2025 至 2035 年的就业预测与年均空缺"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.32",
@@ -25252,7 +25326,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表按三条真实工作方向比较：AI 与数字工具主要改变什么，以及哪些责任仍然留在人这一侧。三条方向来自该职业的任务结构（飞行前准备与飞行计划、飞行操作与系统监控、空管通信与运行协调与异常处置）。"
+              "三方向来自本职业任务结构；下表工具用途为编辑试用候选，不称已发生的AI改变。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.33",
@@ -25263,7 +25337,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "汇总气象与通告与航路信息、按性能与重量与平衡数据生成飞行计划与燃油与备降方案草稿。"
+              "编辑试用候选：汇总气象与通告与航路信息、按性能与重量与平衡数据生成飞行计划与燃油与备降方案草稿。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.34",
@@ -25285,7 +25359,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "整理飞行数据与系统状态趋势、生成监控告警与飞行记录与报告草稿。"
+              "编辑试用候选：整理飞行数据与系统状态趋势、生成监控告警与飞行记录与报告草稿。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.36",
@@ -25307,7 +25381,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "整理空管许可与通信记录、机组协同清单与异常处置与复盘材料。"
+              "编辑试用候选：整理空管许可与通信记录、机组协同清单与异常处置与复盘材料。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.38",
@@ -25384,7 +25458,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该页面展示的是本职业 53-2012.00 的精确工资口径；分位描述受雇工资薪金岗位的统计位置，不是起薪；该职业收入受机型与运行类型与值勤排班与资历与资质影响很大"
+              "本页提供53-2012.00全国受雇工资分位，描述统计位置而非起薪。机型、运行、排班、资历和资格是具体合同核对项；未取得效应大小，不据本表断言收入影响很大。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.45",
@@ -25505,7 +25579,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "框架要求把用途与限制与监测与责任写清，可直接用于本页的复核与留痕建议"
+              "NIST1.0为自愿风险管理框架；用途、限制、监测、责任和记录可供编辑治理建议，不是本职业法定流程或采用实证。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.56",
@@ -25549,7 +25623,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该页面列出 10 类软件关键词（如航空地面支持软件 ArduPilot Mission Planner、航图软件 Aeronautical charts、航路导航软件 Navzilla、数据库查询软件 Skylog Pro 与信息检索软件 AeroPlanner 等）；关键词统计不等于作业能力或使用率"
+              "当前详细页列13类软件，包括分析科学、航空地面支持、排期、航图、数据库查询、开发环境、飞行控制、图形图像、信息检索、地图制作、办公、项目管理和航路导航；HotTechnology招聘表另为2项：2025美国招聘Office3%、AdobeCreativeCloud比例未提供。类别不等13产品，关键词不等实际采用、熟练度或AI成效。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.60",
@@ -25560,10 +25634,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术能力回答「模型在原则上能做什么」。对本职业而言，较可靠的部分是航路与气象与通告汇总、性能与燃油与记录计算、飞行记录与运行数据集整理；不可靠的部分是放行判断、天气与设备与疲劳的现场判断、改航与备降决定。"
+              "编辑试用候选：仅用获准的虚构或合规资料，试天气与通告资料、日志、排班或报告草稿整理，按原始信息核时效、单位、遗漏、构型和复核总耗时。本轮未取得本职业生成式AI可靠性、采用率或提效实证；批准的航空计算系统不能与生成式AI混称。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.61",
+          "source_refs": [
+            "pilot-review-onet-details",
+            "pilot-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25571,10 +25650,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采用证据回答「机构实际在用什么」。公开资料能支持的是航空运行在飞行计划与气象与飞行数据监测系统上持续投入；具体运营人与机型差异很大，本页不从关键词推断采用率。"
+              "编辑试用候选：仅用获准的虚构或合规资料，试天气与通告资料、日志、排班或报告草稿整理，按原始信息核时效、单位、遗漏、构型和复核总耗时。本轮未取得本职业生成式AI可靠性、采用率或提效实证；批准的航空计算系统不能与生成式AI混称。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.62",
+          "source_refs": [
+            "pilot-review-onet-details",
+            "pilot-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25582,7 +25666,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "岗位结果回答「就业规模有没有变」。该页面显示 2024 年约 55,400 人、2034 年预计约 58,300 人、预计增长 5%（Faster than average）、年均空缺约 6,600 个；预测含假设与误差，本页不把变化归因于或归罪于 AI。"
+              "岗位结果回答「就业规模有没有变」。该页面显示 2025 年约 50,400 人、2035 年预计约 53,000 人、预计增长 5%（Faster than average）、年均空缺约 5,200 个；预测含假设与误差，本页不把变化归因于或归罪于 AI。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.63",
@@ -25604,7 +25688,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 53-2012.00 任务与工作活动；ILO 暴露指数"
+              "O*NET 53-2012.00任务（当前按钮）；ILO暴露边界见本模块资料入口"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.65",
@@ -25615,7 +25699,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不把编程当作入行门槛，但飞行计划与气象与性能与飞行数据工具的使用能力越来越有用。该页面教育分布显示受访者回答「部分岗位需要中等后证书」「部分岗位需要高中文凭或同等学历」「部分岗位需要上过大学但未取得学位」（页面按这三档表述，未给百分比）；真正决定机会的是飞行小时与训练记录、执照与等级、体检合格与运行经历。"
+              "当前任务和软件资料不证明编程为统一门槛或工具越来越有用。美国61.123商业飞行员证书要求年龄、语言、训练及教员认可、知识/实践考试和对应类别等级经验，私人执照或61.73适用路径分别核。61.133商业执照权限仍受相应运行规则限制；执照、等级、体检、运营资质和岗位任命不能互代。61.23体检要求有按权限和航空器的例外，不能说所有商业运行人员均须同一体检证。 教育回答不是个人录用因果，本轮无代表性招聘样本。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.66",
@@ -25626,7 +25710,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 53-2012.00 任务与工作活动；O*NET 技术清单 53-2012.00"
+              "O*NET 53-2012.00招聘技术关键词（当前按钮）；任务和NIST框架另见本模块资料入口"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.67",
@@ -25637,7 +25721,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "从任务结构看，受影响较早的是可结构化与可数字化的环节：航路与气象与通告汇总、性能与燃油与重量与平衡计算、飞行记录与运行数据整理、排班与值勤与训练记录填写。受影响较晚的是需要判断与责任的环节：天气与空域与设备状态判断、放行与改航与备降决定、疲劳与值勤限制判断、以及操纵与紧急情况处置。"
+              "编辑比较可整理的资料草稿与须受训授权者决定的操纵、适航及运行判断，不提供AI替代先后时间。编辑试用候选：仅用获准的虚构或合规资料，试天气与通告资料、日志、排班或报告草稿整理，按原始信息核时效、单位、遗漏、构型和复核总耗时。本轮未取得本职业生成式AI可靠性、采用率或提效实证；批准的航空计算系统不能与生成式AI混称。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.68",
@@ -25648,7 +25732,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 53-2012.00 任务与工作活动；ILO 暴露指数"
+              "O*NET 53-2012.00任务（当前按钮）；ILO暴露边界见本模块资料入口"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.69",
@@ -25659,7 +25743,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能据此判断。该页面显示 2024 至 2034 年预计增长 5%（Faster than average），就业规模由约 55,400 人变为预计约 58,300 人、年均空缺约 6,600 个；预测含假设与误差，不等于逐年实际值，也不预测某一运营人或某一机队的岗位数量。"
+              "不能据此判断。该页面显示 2025 至 2035 年预计增长 5%（Faster than average），就业规模由约 50,400 人变为预计约 53,000 人、年均空缺约 5,200 个；预测含假设与误差，不等于逐年实际值，也不预测某一运营人或某一机队的岗位数量。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.70",
@@ -25681,7 +25765,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。放行签派与飞行记录签署与机长决定须由持有相应执照、等级与体检合格证并按运行规章取得授权的人员作出；工具不承担该责任，也不免除运行安全义务。"
+              "AI输出不赋予任何飞行、维修签署或签派权限，也不免除既有义务；各岗位需对应资质和分工，不概括所有工具提供者均无责任。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.72",
@@ -25692,7 +25776,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 53-2012.00 任务与工作活动；运行规章与雇主运行手册"
+              "美国91.3机长运行责任及飞行中即时紧急权限（当前按钮）；具体运行类别另核"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.73",
@@ -25703,7 +25787,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有可靠公开来源支持给该职业设定消失年份；本页不提供这类预测。更有用的是跟踪运行规章与机型与空域与自动化的变化，而不是等待一个日期。"
+              "本轮未取得本职业消失年份的可靠研究，不提供时间表。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.74",
@@ -25736,7 +25820,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 技术清单 53-2012.00（技术关键词）；NIST AI RMF 1.0"
+              "O*NET 53-2012.00招聘技术关键词（当前按钮）；任务和NIST框架另见本模块资料入口"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.77",
@@ -25769,10 +25853,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "由工具完成气象与通告汇总与航路与性能与燃油与重量与平衡计算与飞行记录与运行报告草稿，并记录所用工具与版本与数据来源与时间。"
+              "编辑试用候选：仅用获准的虚构或合规资料，试天气与通告资料、日志、排班或报告草稿整理，按原始信息核时效、单位、遗漏、构型和复核总耗时。本轮未取得本职业生成式AI可靠性、采用率或提效实证；批准的航空计算系统不能与生成式AI混称。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.80",
+          "source_refs": [
+            "pilot-review-onet-details",
+            "pilot-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25780,7 +25869,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "由本人与授权岗位复核：航空器状态与最低设备清单是否满足、性能与载荷与燃油计算依据是否正确、天气与空域条件是否满足放行、值勤与休息是否在限值内。"
+              "编辑复核建议：按原始天气、通告、航空器构型及批准计算核资料，适用故障设备、运行和人员条件分别确认；生成式AI草稿不能成为操纵或放行指令。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.81",
@@ -25802,7 +25891,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "由持有相应执照与等级与体检合格证并按运行规章取得授权的岗位确认放行与飞行记录与机长决定；工具不承担该责任，也不免除运行安全义务。"
+              "由各自具备相应资质和职责的岗位核其权限内事项，不把机长、签派及维修签署合为一种资格。美国91.3规定机长对航空器运行直接负责并有最终决定权；维修签署、运行控制及签派等须按各自适用资格和运行规则核，不合并为机长承担所有岗位最终义务。91.3飞行中需即时行动的紧急情况允许机长在所需程度内偏离Part91规则；不能将所有异常统一成先获签派批准或立即停止/改航。具体处置依实际规章、批准手册和训练，不由本页提供动作参数。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.83",
@@ -25835,7 +25924,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "航路与载荷与旅客与运行数据属于运营人或客户敏感信息，上传到外部服务可能造成泄露与合规风险。"
+              "航路、载荷、旅客和运行资料是否敏感，按实际分级、合同、个人信息及权限核；未经许可上传可能泄露，不将所有航路一概归机密。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.86",
@@ -25846,7 +25935,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按信息分级与权限选择可用工具与部署方式，对可识别信息脱敏或使用受控系统，并保留访问与导出记录。"
+              "先核允许上传和工具使用范围，再按真实分级脱敏或选受控系统；脱敏不替代授权。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.87",
@@ -25857,7 +25946,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "性能与载荷与燃油与气象数据的单位与口径混用，会直接导致放行与安全裕度错误。"
+              "编辑版本风险情境：工具或模型版本、性能数据适用构型和更新时间未留记录时，可能难以复现辅助计算；数据单位混用若未被纠正，也可能影响性能与安全裕度核对。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.88",
@@ -25868,7 +25957,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把这些计算的数据来源与单位与版本与时间固定为人工前置核对条件，工具只用于计算与整理并保留可追溯记录。"
+              "记录工具或模型标识、版本、使用时间及输入数据版本，按批准系统和原始资料人工复核单位与口径；记录不能代替授权放行判断。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.89",
@@ -26231,10 +26320,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "如果要用一句话概括：AI 与数字工具会显著改变气象与航路汇总、性能与燃油与记录计算、飞行数据与运行报告整理的方式，但不会改变「谁对放行、操纵、天气与设备判断、改航与备降决定与飞行安全负责」；需要长期积累的仍然是运行判断与规章意识。"
+              "编辑试用候选：仅用获准的虚构或合规资料，试天气与通告资料、日志、排班或报告草稿整理，按原始信息核时效、单位、遗漏、构型和复核总耗时。本轮未取得本职业生成式AI可靠性、采用率或提效实证；批准的航空计算系统不能与生成式AI混称。"
             ]
           },
           "id": "commercial-pilots.ai-impact.ai-impact-table.122",
+          "source_refs": [
+            "pilot-review-onet-details",
+            "pilot-review-nist-ai-rmf",
+            "editorial"
+          ],
           "type": "prose"
         }
       ]
@@ -26255,7 +26349,7 @@
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-wages"
+            "pilot-review-nbs-wages"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26270,7 +26364,7 @@
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wages"
+            "pilot-review-nbs-wages"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26351,10 +26445,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮查阅范围为：本条证据路由登记的 2025 年城镇单位就业人员年平均工资公开口径（国家统计局发布，2026-05-16），以及本职业的 O*NET 精确职业来源；后者其市场与辖区明确为美国，不支持中国精确工资口径。本条证据路由对中国大陆的缺口标记为 （仅在收窄后的范围内使用、处理状态：已按说明处理），提供的中国大陆数值只有「交通运输、仓储和邮政业」行业均值，因此本页把它作为显式代理使用，并逐处标注它不是本职业口径。"
+              "NBS2025（2026-05-15发布）交通运输、仓储和邮政业非私营133,981元/人/年、私营73,133元/人/年，均为行业全体就业人员税前年平均工资，只在雇主实际属该行业时作宽背景；不是商业飞行员中位数、起薪或月薪。本轮未建立中国精确职业及工资映射，不等中国没有该细类或官方从未发布。"
             ]
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.8",
+          "source_refs": [
+            "pilot-review-nbs-wages",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26373,10 +26471,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "该口径覆盖城镇法人单位，不含个体经营与项目制与境外作业等用工形式；用它替代本职业工资会引入行业与用工形式两重偏差。"
+              "统计对象为城镇5人及以上法人单位就业人员，不含个体户自由职业等非单位就业；项目制或境外任务不因名称自动被排除，须核实际统计单位和人员归属。税前年均不能代职业分位。"
             ]
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.10",
+          "source_refs": [
+            "pilot-review-nbs-wages",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26384,10 +26486,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "较宽职业口径：公开统计与职业分类未单列与 O*NET-SOC 53-2012.00 一一对应的职业细类"
+              "本轮未建立与美国53-2012精确对应的中国职业及工资映射"
             ]
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.11",
+          "source_refs": [
+            "pilot-review-nbs-wages",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26417,10 +26523,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "使用边界：本条证据路由的行业代理 claim 明确「不能把交通运输行业平均工资写成飞行员中位数或起薪」；本页不把代理值写成本职业的月薪、分位或起薪，也不以招聘样本推算职业级数值。"
+              "NBS2025（2026-05-15发布）交通运输、仓储和邮政业非私营133,981元/人/年、私营73,133元/人/年，均为行业全体就业人员税前年平均工资，只在雇主实际属该行业时作宽背景；不是商业飞行员中位数、起薪或月薪。本轮未建立中国精确职业及工资映射，不等中国没有该细类或官方从未发布。"
             ]
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.14",
+          "source_refs": [
+            "pilot-review-nbs-wages",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26428,10 +26538,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "统计覆盖范围：中国大陆公开工资统计以城镇法人单位为对象，公共航空运输与通用航空运营人的用工与结算方式（含飞行小时费与驻外补贴与机型等级差异）不同"
+              "编辑比较建议：核实际雇主行业、用工、税前工资项目、机型基地和运行安排；本轮没有代表性中国岗位薪酬结构样本，不统一假定飞行小时费或驻外补贴。"
             ]
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.15",
+          "source_refs": [
+            "pilot-review-nbs-wages",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26450,7 +26564,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "资料期：本轮查阅以 2025 年及以前已发布的公开资料为范围（代理值发布于 2026-05-16）"
+              "资料期：本轮查阅以 2025 年及以前已发布的公开资料为范围（代理值发布于 2026-05-15）"
             ]
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.17",
@@ -26516,7 +26630,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "飞行计划与气象与飞行数据工具会改变运行与记录的方式，但不改变中国大陆对本职业的统计口径：职业级统计缺口与工具无关。"
+              "数字工具试用不能补齐中国职业工资映射；本轮无工具对中国薪酬或统计分类影响的实证。"
             ]
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.23",
@@ -26560,7 +26674,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理，不是薪资统计：飞行训练与执照与等级是进入相应序列的常见条件，岗位方向由运营人类型与运行类型决定，不能据此推断收入。"
+              "编辑核对建议：查目标法域与运营人的具体飞行训练、执照等级和岗位要求；美国教育回答不证明中国常见门槛，不据学历推收入。"
             ]
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.27",
@@ -26593,7 +26707,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：运输航空与公务航空通常更看重机型等级与运行经历；本页不把学历直接对应到收入区间。"
+              "编辑核对建议：按实际运行类型核机型等级、经历和岗位分工；本轮无中国代表性招聘样本，不称雇主通常更看重什么。"
             ]
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.30",
@@ -26681,7 +26795,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：以定期与非定期客货运输飞行为主，通常按航班与值勤与排班安排工作。"
+              "中国岗位可涉及定期客货或通航职责；此为映射核对候选，不能将美国本页定义排除的定期航线工资并入本职业。"
             ]
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.38",
@@ -26736,10 +26850,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《城镇单位就业人员年平均工资情况》检索入口｜https://www.stats.gov.cn/"
+              "国家统计局2025年城镇单位就业人员年平均工资｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.43",
+          "source_refs": [
+            "pilot-review-nbs-wages",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26758,10 +26876,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆目前没有单列该岗位的全国职业工资统计可供本页引用；本条证据路由提供的是「交通运输、仓储和邮政业」行业均值代理（城镇非私营单位 133,981 元/年、城镇私营单位 73,133 元/年），因此本页把它作为代理展示并明确标注它不是本职业的中位数或起薪。"
+              "NBS2025（2026-05-15发布）交通运输、仓储和邮政业非私营133,981元/人/年、私营73,133元/人/年，均为行业全体就业人员税前年平均工资，只在雇主实际属该行业时作宽背景；不是商业飞行员中位数、起薪或月薪。本轮未建立中国精确职业及工资映射，不等中国没有该细类或官方从未发布。"
             ]
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.45",
+          "source_refs": [
+            "pilot-review-nbs-wages",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26780,7 +26902,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中华人民共和国职业分类大典（2022 年版）公布信息｜https://www.mohrss.gov.cn/"
+              "人社部职业分类一般入口（未核精确映射）｜https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
             ]
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.47",
@@ -26791,7 +26913,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不提供中国大陆该岗位的月薪区间或城市排名；运营人类型与机型与等级与运行类型与基地差异很大，比较时应把执照与等级与体检合格与值勤限制与保险与训练安排纳入书面确认。"
+              "本页不提供中国大陆该岗位的月薪区间或城市排名；运营人类型与机型与等级与运行类型与基地的安排须逐岗位核对，比较时应把执照与等级与体检合格与值勤限制与保险与训练安排纳入书面确认。"
             ]
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.48",
@@ -26813,10 +26935,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "133,981元/年（「交通运输、仓储和邮政业」行业均值，2025 年数据、2026-05-16 发布）；这是行业均值代理，不是本职业中位数、起薪或月薪，也不能据此推算个人收入。"
+              "NBS2025（2026-05-15发布）交通运输、仓储和邮政业非私营133,981元/人/年、私营73,133元/人/年，均为行业全体就业人员税前年平均工资，只在雇主实际属该行业时作宽背景；不是商业飞行员中位数、起薪或月薪。本轮未建立中国精确职业及工资映射，不等中国没有该细类或官方从未发布。"
             ]
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.50",
+          "source_refs": [
+            "pilot-review-nbs-wages",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26835,10 +26961,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "73,133元/年（「交通运输、仓储和邮政业」行业均值，2025 年数据）；同为行业均值代理，且私营单位与项目制与个体经营形态的覆盖差异更大。"
+              "NBS2025（2026-05-15发布）交通运输、仓储和邮政业非私营133,981元/人/年、私营73,133元/人/年，均为行业全体就业人员税前年平均工资，只在雇主实际属该行业时作宽背景；不是商业飞行员中位数、起薪或月薪。本轮未建立中国精确职业及工资映射，不等中国没有该细类或官方从未发布。"
             ]
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.52",
+          "source_refs": [
+            "pilot-review-nbs-wages",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26891,7 +27021,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《城镇单位就业人员年平均工资情况》检索入口｜https://www.stats.gov.cn/；中华人民共和国职业分类大典（2022 年版）公布信息｜https://www.mohrss.gov.cn/"
+              "国家统计局《城镇单位就业人员年平均工资情况》检索入口｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html；人社部职业分类一般入口（未核精确映射）｜https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
             ]
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.57",
@@ -26902,7 +27032,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 5%（2024—2034 年）"
+              "增长5.2%（2025—2035）"
             ]
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.58",
@@ -26940,7 +27070,7 @@
           ],
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "bls-pay"
+            "pilot-review-bls-pay"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26955,7 +27085,7 @@
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "bls-pay"
+            "pilot-review-bls-pay"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26985,7 +27115,7 @@
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "bls-entry"
+            "pilot-review-bls-entry"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27000,7 +27130,7 @@
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "bls-pay"
+            "pilot-review-bls-pay"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27030,7 +27160,7 @@
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.7",
           "source_refs": [
-            "bls-pay"
+            "pilot-review-bls-pay"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27106,7 +27236,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位数。该页面按年薪口径发布，未提供时薪分位；与入职薪酬不是同一概念，也不含自雇主与业主收入。；O*NET 全国工资分位页面（53-2012.00）｜https://www.onetonline.org/link/localwages/53-2012.00"
+              "中位123,220美元/年；全国受雇工资分布中点，不是均值或起薪。OEWS排除自雇及未法人化业主合伙人，法人公司受薪高管可覆盖；原表未提供时薪。"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.14",
@@ -27150,7 +27280,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位。该分位不包含机型与运行类型与地区差异的个体分布。；O*NET 全国工资分位页面（53-2012.00）｜https://www.onetonline.org/link/localwages/53-2012.00"
+              "第90分位为全国受雇工资汇总分布分位点，未单列地区、行业或项目周期分组；不是最高收入上限。；O*NET全国工资分位页面｜https://www.onetonline.org/link/localwages/53-2012.00"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.18",
@@ -27161,7 +27291,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "55,400人（2024 年）"
+              "约50,400人（2025）"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.19",
@@ -27172,7 +27302,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "按 O*NET 该职业页面显示的 BLS 就业预测（2024 至 2034 年，精确职业口径）：2024 年就业约 55,400 人、2034 年预计约 58,300 人、预计增长 5%（Faster than average）、年均空缺约 6,600 个。；O*NET 全国就业趋势页面（53-2012.00）｜https://www.onetonline.org/link/localtrends/53-2012.00"
+              "BLS表1.2（SOC53-2012，2025—2035）就业约50,400→53,000人、净增约2,600人、增长5.2%、年均职位空缺约5,200个，2025自雇占2.0%。OOH商业飞行员增长5%为同预测四舍五入；O*NET显示Faster than average（5%—6%）。空缺含增长及更替，不等净增、招聘或录用保证，也不是AI因果研究。"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.20",
@@ -27183,7 +27313,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 5%（2024—2034 年）"
+              "增长5.2%（2025—2035）"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.21",
@@ -27194,7 +27324,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024 至 2034 年预测期，增长评级为 Faster than average（快于平均）。预测含假设与误差，不等于逐年实际值，也不预测某一运营人或某一机队的机会数量。；O*NET 全国就业趋势页面（53-2012.00）｜https://www.onetonline.org/link/localtrends/53-2012.00"
+              "BLS表1.2（SOC53-2012，2025—2035）就业约50,400→53,000人、净增约2,600人、增长5.2%、年均职位空缺约5,200个，2025自雇占2.0%。OOH商业飞行员增长5%为同预测四舍五入；O*NET显示Faster than average（5%—6%）。空缺含增长及更替，不等净增、招聘或录用保证，也不是AI因果研究。"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.22",
@@ -27205,7 +27335,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约 6,600 个/年"
+              "约 5,200 个/年"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.23",
@@ -27216,7 +27346,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024 至 2034 年年均空缺，含增长与替补需求；空缺数不等于净新增岗位。；O*NET 全国就业趋势页面（53-2012.00）｜https://www.onetonline.org/link/localtrends/53-2012.00"
+              "2025 至 2035 年年均空缺，含增长与替补需求；空缺数不等于净新增岗位。；O*NET 全国就业趋势页面（53-2012.00）｜https://www.onetonline.org/link/localtrends/53-2012.00"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.24",
@@ -27227,7 +27357,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界：以上数值为 O*NET 该职业页面显示的 BLS OEWS 2025 年工资数据与该职业的 BLS 就业预测（2024 至 2034 年，53-2012.00 精确职业口径）；该页面按年薪口径发布，未提供时薪分位。该统计面向受雇工资薪金岗位，不含自雇主与业主收入；该职业收入受机型与运行类型与值勤排班与资历与资质影响很大，单一全国中位数不能代表具体报价；该职业页面未提供按行业或地区细分的工资中位数，本页已登记对应缺口。"
+              "全国五分位为OEWS2025本职业受雇工资，未提供时薪；自雇及未法人化业主合伙人排除，法人公司受薪高管可覆盖。就业预测口径另含自雇。BLS表1.2（SOC53-2012，2025—2035）就业约50,400→53,000人、净增约2,600人、增长5.2%、年均职位空缺约5,200个，2025自雇占2.0%。OOH商业飞行员增长5%为同预测四舍五入；O*NET显示Faster than average（5%—6%）。空缺含增长及更替，不等净增、招聘或录用保证，也不是AI因果研究。 当前OOH另提供五行业工资中位数；地区及个人任职形式工资仍缺。"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.25",
@@ -27238,7 +27368,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：O*NET 该职业页面显示 2025 年年薪中位数为 123,220 美元，第 10 与第 90 百分位分别为 58,850 与 266,620 美元；按该页面的 BLS 就业预测（2024 至 2034 年），2024 年约 55,400 人、2034 年预计约 58,300 人、预计增长 5%、年均空缺约 6,600 个。限制：该统计不含自雇主与业主收入；该页面未提供时薪分位；中位数不代表个人实际收入。"
+              "2025本职业年薪中位123,220美元，10/90分位58,850/266,620美元，不是起薪、个人承诺或航空公司飞行员工资。BLS表1.2（SOC53-2012，2025—2035）就业约50,400→53,000人、净增约2,600人、增长5.2%、年均职位空缺约5,200个，2025自雇占2.0%。OOH商业飞行员增长5%为同预测四舍五入；O*NET显示Faster than average（5%—6%）。空缺含增长及更替，不等净增、招聘或录用保证，也不是AI因果研究。"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.26",
@@ -27249,7 +27379,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该职业的机型与运行类型差异很大（运输航空与货运与公务与包机与空中游览与空中救护与作业飞行与飞行训练），因此公开分位主要反映受雇工资薪金岗位；机型等级与运行经历与基地与排班会影响收入水平，但需按精确职业与地区数据比较。"
+              "OEWS覆盖受薪全兼职员工，排除自雇和未法人化业主合伙人；覆盖由调查定义决定。逐岗位核运行类型、任职安排和地区，不由差异大小推统计覆盖。"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.27",
@@ -27271,7 +27401,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 工作情境显示 68% 的工作作息不规律、80% 每周工作超过 40 小时、37% 每天面临严格截止期限，值勤与休息与排班与航线网络会显著影响阶段性节奏。"
+              "O*NET回答68%排期不规律、80%工作周超过40小时、37%每天严格期限；工作周不等飞行小时，不用这些比例量化工资或节奏因果。"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.29",
@@ -27293,10 +27423,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工作场景以运输与仓储为主（该职业行业分布 58%）、教育服务 11%、其他行业合计 31%（含医疗与社会救助等）；不同地区的枢纽机场与通用航空与作业飞行密度会影响机会与收入水平，本页不逐州列出，也不以最高值或州示例当作普遍水平。"
+              "当前O*NET本职业就业行业构成为运输与仓储51%、教育服务13%、医疗与社会救助11%、其他25%（包括专业科学技术服务）；这是美国就业构成，不是行业工资或中国雇主归类。 BLSOOH雇主细行业份额38/11/10/8/5为另一分类，不能混同；地区及个人工资需另核。"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.31",
+          "source_refs": [
+            "pilot-review-onet-industry",
+            "pilot-review-bls-ooh",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27315,7 +27450,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 5%（2024—2034 年）"
+              "增长5.2%（2025—2035）"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.33",
@@ -27326,10 +27461,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "运输与仓储"
+              "非定期航空运输"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.34",
+          "source_refs": [
+            "pilot-review-bls-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27337,10 +27475,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行业就业占比 58%（O*NET 行业分布）"
+              "133,150美元/年"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.35",
+          "source_refs": [
+            "pilot-review-bls-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27348,10 +27489,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行为就业占比而非行业工资；O*NET 该职业页面未提供行业工资中位数。"
+              "BLSOOH2025本职业该行业年工资中位数；非行业全员均值、起薪或个人承诺。"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.36",
+          "source_refs": [
+            "pilot-review-bls-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27359,10 +27503,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "教育服务"
+              "专业科学技术服务"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.37",
+          "source_refs": [
+            "pilot-review-bls-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27370,10 +27517,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行业就业占比 11%（O*NET 行业分布）"
+              "129,610美元/年"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.38",
+          "source_refs": [
+            "pilot-review-bls-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27381,10 +27531,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行为就业占比而非行业工资；其余行业合计 31%（含医疗与社会救助等）未进一步拆分。"
+              "BLSOOH2025本职业该行业年工资中位数；非行业全员均值、起薪或个人承诺。"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.39",
+          "source_refs": [
+            "pilot-review-bls-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27392,10 +27545,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与地区工资细分"
+              "航空运输支持活动"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.40",
+          "source_refs": [
+            "pilot-review-bls-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27403,10 +27559,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该职业按行业或地区细分的工资中位数"
+              "123,090美元/年"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.41",
+          "source_refs": [
+            "pilot-review-bls-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27414,10 +27573,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "缺少细分数值时不使用行业均值或相邻职业数据替代；如需比较可查阅 OEWS 的行业与地区查询入口。"
+              "BLSOOH2025本职业该行业年工资中位数；非行业全员均值、起薪或个人承诺。"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.42",
+          "source_refs": [
+            "pilot-review-bls-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27425,10 +27587,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "运行类型与任职形态差异"
+              "其他门诊医疗服务"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.43",
+          "source_refs": [
+            "pilot-review-bls-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27436,10 +27601,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得按运行类型（运输航空与货运与公务与包机与空中游览与空中救护与作业飞行）或任职形态细分的工资中位数"
+              "100,330美元/年"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.44",
+          "source_refs": [
+            "pilot-review-bls-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27447,10 +27615,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该页面的分位数据来自受雇工资薪金岗位统计，不能用于推断某一运行类型或某一任职形态的个人收入。"
+              "BLSOOH2025本职业该行业年工资中位数；非行业全员均值、起薪或个人承诺。 私营技术与贸易学校另为93,820美元/年；运行类型与任职形态细分及地区工资仍未取得。"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.45",
+          "source_refs": [
+            "pilot-review-bls-ooh"
+          ],
           "type": "prose"
         },
         {
@@ -27469,7 +27640,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不能。该页面按年薪口径发布，未提供时薪分位；该职业的收入与飞行小时与值勤排班与驻外补贴等结构相关，没有个人工时与任职安排时，不能推算个人年薪、月收入或税后所得。"
+              "不能。当前页面仅发布年工资分位，未给时薪；飞行小时费、排班、差旅或驻外安排应列为具体合同核对项，不由航空公司飞行员薪酬描述推出本职业统一结构。不能据此推个人月薪或税后所得。"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.47",
@@ -27491,7 +27662,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "运营人类型（运输航空与货运与公务与包机与空中游览与空中救护与作业飞行）、机型与等级与运行经历与基地与任职形态都会影响实际收入；本页不预测个人收入。"
+              "运营人类型（运输航空与货运与公务与包机与空中游览与空中救护与作业飞行）、机型与等级与运行经历与基地与任职形态须在具体合同和分组数据中核对，不断言普遍改变收入；本页不预测个人收入。"
             ]
           },
           "id": "commercial-pilots.us-salary.career-snapshot-secondary-locale.49",
@@ -27604,7 +27775,7 @@
           },
           "id": "commercial-pilots.fit.riasec-fit-block.4",
           "source_refs": [
-            "bls-entry"
+            "pilot-review-bls-entry"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27777,10 +27948,10 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "O*NET-SOC 53-2012.00 教育与培训信息入口",
+                "entity": "O*NET新入职者教育需求",
                 "id": "link-18",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtraining/53-2012.00"
+                "url": "https://www.onetonline.org/link/details/53-2012.00#Education"
               },
               {
                 "entity": "O*NET 技术清单（53-2012.00 招聘技术关键词）",
@@ -27804,7 +27975,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业兴趣代码为 CRE（常规型、现实型、企业型）：该职业页面公示的兴趣分数为常规型 64、现实型 63、企业型 49、研究型 26、社会型 26、艺术型 2。常规型对应按规程与检查单与记录执行，现实型对应操纵设备与在真实环境中动手处置，企业型对应在时间压力下组织资源并作出决定；该职业的工作活动以检查设备与结构或材料、操作车辆与机械装置或设备、控制机器与过程、作出决策与解决问题、识别对象与动作与事件为前几位；兴趣代码描述的是职业群体的取向分布，不是个人适配结论。"
+              "O*NET 职业兴趣前三项编辑简称CRE（常规型、现实型、企业型）：该职业页面公示的兴趣分数为常规型 64、现实型 63、企业型 49、研究型 26、社会型 26、艺术型 2。常规型对应按规程与检查单与记录执行，现实型对应操纵设备与在真实环境中动手处置，企业型对应在时间压力下组织资源并作出决定；该职业的工作活动以检查设备与结构或材料、操作车辆与机械装置或设备、控制机器与过程、作出决策与解决问题、识别对象与动作与事件为前几位；兴趣代码描述的是职业层面的兴趣特征，不是个人适配结论。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.2",
@@ -27815,7 +27986,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 兴趣代码与工作活动为官方职业测评数据，描述的是职业群体的取向分布，不是个人适配结论，也不是录用标准。"
+              "证据等级：O*NET 兴趣代码与工作活动为官方职业测评数据，描述的是职业层面的兴趣特征，不是个人适配结论，也不是录用标准。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.3",
@@ -27838,7 +28009,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：该职业页面列出 21 项工作风格（含谨慎、自控、可靠、注重细节、压力耐受、自信等），但不提供分数；从任务与工作情境看，若你倾向于用进度或经验覆盖检查单与规章步骤，这项工作在运行安全层面的风险会显著上升。"
+              "当前O*NET21项WorkStyles有Impact指标：谨慎100、自控100、可靠98、细节91、压力耐受89、自信80等。它们是职业指标，不是个人筛选分数，也不证明大五人格预测效度。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.5",
@@ -27849,7 +28020,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格在本页只用于描述工作方式，不作为录用依据。与该职业任务更相关的是尽责性维度下的检查单与记录管理、情绪稳定性维度下的异常与压力处置、以及宜人性维度中的机组配合与沟通；这些特质影响你如何执行飞行任务，而不是你能不能学会操纵与运行技能。"
+              "本轮未取得大五人格预测本职业表现的效度；检查单、记录及压力下遵守程序可作编辑行为自查，不推人格因果或学习能力。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.6",
@@ -27860,7 +28031,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 该职业页面提供 21 项工作风格清单（不含分数）；大五人格量表本身不是职业选拔工具。"
+              "当前O*NET21项WorkStyles有Impact指标：谨慎100、自控100、可靠98、细节91、压力耐受89、自信80等。它们是职业指标，不是个人筛选分数，也不证明大五人格预测效度。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.7",
@@ -27883,7 +28054,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：把「先飞完」放在「先核对航空器与条件」之前，会在飞行运行中直接放大安全风险。"
+              "编辑风险观察：把「先飞完」放在「先核对航空器与条件」之前，可能在飞行运行中增加安全风险。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.9",
@@ -27894,7 +28065,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣取向：该职业群体的兴趣代码为 CRE（常规型、现实型、企业型），日常任务以飞行前检查与飞行计划、飞行操作与系统监控、空管通信与运行协调为主。"
+              "兴趣取向：当前职业兴趣前三项编辑简称CRE（常规型、现实型、企业型），日常任务以飞行前检查与飞行计划、飞行操作与系统监控、空管通信与运行协调为主。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.10",
@@ -27905,7 +28076,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 等类型学工具与本职业适配没有官方证据支持。本页不使用「哪种类型最适合商业飞行员」的表述：类型学描述的是偏好，不预测工作表现，也不对应岗位准入。"
+              "本轮未取得MBTI对本职业适配或表现的可靠效度，不按类型排序；官方资料未提供不证明所有研究不存在。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.11",
@@ -27916,7 +28087,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "适配信号：如果你享受把一次复杂运行在没有遗漏的情况下完整做下来，这份工作会让你有成就感。",
+              "编辑观察候选：若你喜欢完整核对一次复杂运行，可记录这类任务是否带来成就感；个体体验需要实际核对。",
               "适配信号：如果你更关注气象与性能与技术细节，飞行计划与运行监控方向同样可长期精进。"
             ]
           },
@@ -27928,7 +28099,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：MBTI 类型不是招聘条件，本页不提供按类型筛选岗位的建议。"
+              "本页不以MBTI类型判断准入或建议按类型筛选岗位；实际招聘条件核具体雇主公告。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.13",
@@ -27939,7 +28110,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样不是职业测评工具，没有官方职业证据支持。可替代的做法是用具体行为验证兴趣：能否就一次虚构运行写出飞行计划与性能与燃油计算与检查单要点，能否把一份虚构天气与通告简报整理成放行判断清单，能否写出一页含改航与备降与升级条件的运行摘要。"
+              "本轮未取得九型对本职业适配效度；可用明确虚构材料观察纸面资料整理与异常摘要，不代合规训练和真实飞行能力。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.14",
@@ -27995,7 +28166,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 技能与知识清单为官方职业数据；IQ 分数不是职业准入条件。"
+              "O*NET技能知识清单是职业层面数据；本页不以个人IQ分数判断准入，实际资格与岗位条件另核。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.19",
@@ -28029,7 +28200,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业沟通与协同要求高：O*NET 工作情境显示 96% 每天使用电子邮件、70% 认为与工作组或团队协作极其重要（28% 非常重要）、66% 每天进行面对面讨论（20% 每周一次以上）、54% 每天进行电话沟通（34% 每周一次以上）、39% 与他人保持持续接触（60% 大部分时间有接触）、38% 需要协调或带领他人（38% 认为极其重要）；空中运行中的通信依赖无线电与标准用语与复诵确认。"
+              "职业受访回答96%每天email、70%团队极其重要/28%非常重要、66%每天面对面/20%周一次以上非每天、54%每天电话/34%周一次以上非每天、39%持续/60%大部分时间接触；协调带领38%极其重要/31%非常重要/15%重要/16%比较重要，不是仅38%需协作。无线电联络为实际任务。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.22",
@@ -28063,7 +28234,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：为赶时刻或完成任务而省略检查或压缩休息或跳过许可确认，会同时带来安全与责任风险。"
+              "编辑风险观察：为赶时刻或完成任务而省略检查或压缩休息或跳过许可确认，可能带来安全与责任风险。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.25",
@@ -28085,7 +28256,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：与该职业任务最贴合的信号是「愿意把检查单与规章与运行数据做扎实再起飞」与「能在时间压力下按程序判断与升级」；兴趣代码为 CRE，但代码只描述群体分布，不决定个人是否适合。"
+              "编辑任务观察候选是「愿意把检查单与规章与运行数据做扎实再起飞」与「能在时间压力下按程序判断与升级」；兴趣前三项编辑简称CRE，但代码只描述职业层面的兴趣特征，不决定个人是否适合。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.27",
@@ -28111,6 +28282,10 @@
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.29",
+          "source_refs": [
+            "pilot-review-neighbor-0",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28118,10 +28293,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向按定期航线与航班时刻运行，机型改装与航线资格要求更高。"
+              "航空公司方向通常定期航线运输；机型、训练及资格按实际运行核，不笼统声称都高于本职业。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.30",
+          "source_refs": [
+            "pilot-review-neighbor-0",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28144,6 +28323,10 @@
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.32",
+          "source_refs": [
+            "pilot-review-neighbor-1",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28155,6 +28338,10 @@
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.33",
+          "source_refs": [
+            "pilot-review-neighbor-1",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28177,6 +28364,10 @@
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.35",
+          "source_refs": [
+            "pilot-review-neighbor-2",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28184,10 +28375,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向以维修与适航放行为主，不承担飞行操纵与航路决策。"
+              "机务主要诊断维修发动机总成；实际检查飞行或签署权限另核，职业名不证明绝无操纵任务。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.36",
+          "source_refs": [
+            "pilot-review-neighbor-2",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28210,6 +28405,10 @@
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.38",
+          "source_refs": [
+            "pilot-review-neighbor-3",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28217,10 +28416,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向作业对象是系统与线路，不涉及驾驶舱操纵与放行责任。"
+              "航电主要安装测试维修航空器或航天器电子设备；不从名称排除所有驾驶舱工作或授维修签署权。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.39",
+          "source_refs": [
+            "pilot-review-neighbor-3",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28243,6 +28446,10 @@
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.41",
+          "source_refs": [
+            "pilot-review-neighbor-4",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28250,10 +28457,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向以地面运行保障为主，不执行飞行任务。"
+              "机场运行主要协调管制维修、场道导航与安全记录；实际具体职责和权限按岗位核，不从定义断言绝无飞行任务。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.42",
+          "source_refs": [
+            "pilot-review-neighbor-4",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28276,6 +28487,10 @@
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.44",
+          "source_refs": [
+            "pilot-review-neighbor-5",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28287,6 +28502,10 @@
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.45",
+          "source_refs": [
+            "pilot-review-neighbor-5",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28294,7 +28513,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不是。把职业简化为「最合适的一种性格」会掩盖真实差异：运输航空与货运与公务与包机与空中游览与作业飞行的运行方式差别很大。更有用的做法是用一次可交付的运行流程练习验证。"
+              "不是。把职业简化为「最合适的一种性格」会掩盖真实差异：运输航空与货运与公务与包机与空中游览与作业飞行的运行方式须逐岗位核对。更有用的做法是用一次可交付的运行流程练习验证。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.46",
@@ -28305,7 +28524,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。该职业以规程执行与监控与记录为主，O*NET 工作情境显示 54% 每天在封闭车辆或封闭设备中作业、66% 每天进行面对面讨论、39% 与他人保持持续接触；内向者可以通过清单化流程与书面记录建立可靠的工作方式，但与管制与机组的无线电与口头沟通是硬性要求。"
+              "本轮未取得内外向与飞行表现比较实证；纸面流程可作编辑自查，不能保证适配，实际沟通操纵须合规训练考核。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.47",
@@ -28316,7 +28535,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。外向本身不是优势或劣势，关键是能否在标准用语与规程下把每一步做准确；如果更偏好协作与沟通，可以侧重运行管理与机组协同与教学类任务。"
+              "外向本身不证明运行或教学能力；任务反馈、训练和授权须分别核，不据性格推荐管理岗。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.48",
@@ -28327,7 +28546,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有官方证据支持某种 MBTI 类型更适合该职业；本页不提供这种排序。"
+              "本轮未取得可靠MBTI适配排序，不按类型筛选。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.49",
@@ -28338,7 +28557,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 该职业的兴趣代码为 CRE（常规型、现实型、企业型）。这表示职业群体集中在这三类取向，但代码不是个人适配结论，仍需用实际任务验证。"
+              "O*NET 该职业的兴趣前三项编辑简称CRE（常规型、现实型、企业型）。这是职业兴趣前三项，但代码不是个人适配结论，仍需用实际任务验证。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.50",
@@ -28349,7 +28568,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。人格特质分数与工作表现的关联在不同研究中强弱不一，且受运营人与机型与值勤条件影响；本页不用它作为录用或适配判断依据。"
+              "本轮未取得人格分数预测本职业表现的可靠效度，不用职业指标推个人录用。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.51",
@@ -28382,7 +28601,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不建议。九型人格不是职业测评工具，也没有官方职业适配证据。"
+              "本轮未取得九型适配效度，不由类型决定选择。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.54",
@@ -28448,7 +28667,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对知识、能力与兴趣代码 CRE 与 21 项工作风格"
+              "当前O*NET21项WorkStyles有Impact指标：谨慎100、自控100、可靠98、细节91、压力耐受89、自信80等。它们是职业指标，不是个人筛选分数，也不证明大五人格预测效度。"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.60",
@@ -28459,7 +28678,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024 至 2034 年就业预测与年均空缺"
+              "用于核对该职业 2025 至 2035 年就业预测与年均空缺"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.61",
@@ -28492,7 +28711,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对准备层级（Job Zone Three）与该页面显示的教育分布三档表述"
+              "用于核对准备层级（Job Zone Three）与该页面显示的新入职者所需教育的受访回答三档表述"
             ]
           },
           "id": "commercial-pilots.fit.personality-fit-block.64",
@@ -28558,7 +28777,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "CRE"
+              "CRE（编辑概括当前职业兴趣前三项）"
             ]
           },
           "id": "commercial-pilots.fit.riasec-fit-block.12",
@@ -28686,10 +28905,10 @@
                 "url": "https://www.onetonline.org/link/details/53-2012.00#WorkContext"
               },
               {
-                "entity": "美国联邦航空管理局（FAA）飞行员与运行信息入口",
+                "entity": "FAA14CFR91.213（故障设备适用条件）",
                 "id": "link-4",
                 "relation": "related-evidence",
-                "url": "https://www.faa.gov/pilots/become"
+                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-91/subpart-C/section-91.213"
               },
               {
                 "entity": "O*NET-SOC 53-2012.00 全国认证信息入口（航空运行相关认证）",
@@ -28724,7 +28943,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答：该职业最需要提前判断的风险来自三处——航空器与系统状态未按检查单核对、天气与空域条件判断失误、以及疲劳与值勤时间超出限制；机组沟通与放行与记录缺陷会放大以上三类风险。"
+              "编辑提前核对三类情境：航空器系统核对、天气空域判断、疲劳和值勤限制；沟通、放行或记录缺陷可能增加风险。不是职业风险频率或重要性排名。"
             ]
           },
           "id": "commercial-pilots.risk.career-risk-cards.9",
@@ -28735,7 +28954,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：任务与工作情境来自 O*NET 53-2012.00（美国口径）；工资数值来自 O*NET 该职业页面显示的 BLS 数据（2025 年，精确职业口径）；就业数值来自该页面的 BLS 预测（2024 至 2034 年）；运行安全与值勤限制与适航与放行边界按公开运行规章的一般框架表述，不替代适用法规原文与运行规章与运营人运行手册。"
+              "任务情境为当前O*NET，工资OEWS2025、预测BLS2025—2035。下述控制建议区分任务与美国91.3/91.7/91.213边界；本轮未完整核各运行类别值勤、维修、签派和记录全部条款。"
             ]
           },
           "id": "commercial-pilots.risk.career-risk-cards.10",
@@ -28757,10 +28976,17 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "航空器系统缺陷或最低设备清单范围内的项目未处置，会在飞行中形成失效风险，并使本次运行被迫中止或返航。"
+              "未按适用要求处置系统或仪表缺陷可能形成失效、违规及中断运行风险；是否需停飞、维修或其他处置须按缺陷及规则核，不写必然返航。"
             ]
           },
           "id": "commercial-pilots.risk.career-risk-cards.12",
+          "source_refs": [
+            "pilot-review-onet-details",
+            "pilot-review-far-91-3",
+            "pilot-review-far-91-7",
+            "pilot-review-far-91-213",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28768,10 +28994,17 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "起飞前按检查单逐项核对发动机、操纵、仪表与其他系统，按最低设备清单与维护放行要求处置缺陷并记录；发现缺陷立即停飞或按程序取得放行，不以上次可用代替本次检查。"
+              "美国91.7要求适航，机长核安全飞行状态，并在机械、电气或结构导致不适航时停止该飞行。91.213故障设备须依适用MEL、授权及记录条件，特定航空器另有无批准MEL的有条件路径；不是所有航空器必须同一MEL，也不是每项缺陷可自动放行或必须立即改航。"
             ]
           },
           "id": "commercial-pilots.risk.career-risk-cards.13",
+          "source_refs": [
+            "pilot-review-onet-details",
+            "pilot-review-far-91-3",
+            "pilot-review-far-91-7",
+            "pilot-review-far-91-213",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28801,7 +29034,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "性能与重量与平衡或燃油计算错误会直接影响起飞与爬升与航程裕度，并可能触发运行超限与安全事件。"
+              "性能与重量与平衡或燃油计算错误若未被复核纠正，可能影响起飞与爬升与航程裕度，并可能触发运行超限与安全事件。"
             ]
           },
           "id": "commercial-pilots.risk.career-risk-cards.16",
@@ -28845,7 +29078,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在天气或空域条件超出计划或超出本人等级与授权范围时起飞或继续，会显著增加运行风险并可能导致改航或备降与事件。"
+              "超出实际天气空域、等级或运行权限可能造成安全和违规风险；本轮未取得显著增加或发生率的职业量化证据。"
             ]
           },
           "id": "commercial-pilots.risk.career-risk-cards.20",
@@ -28856,10 +29089,17 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "把天气实况与预报与通告与空域限制与备降条件作为放行前置条件；条件超限时与运行控制或签派共同决定推迟或改航或改场，并把决定与依据留痕。"
+              "编辑建议核当次天气通告、空域、权限及条件，涉及签派/运行控制时按分工协调。美国91.3规定机长对航空器运行直接负责并有最终决定权；维修签署、运行控制及签派等须按各自适用资格和运行规则核，不合并为机长承担所有岗位最终义务。91.3飞行中需即时行动的紧急情况允许机长在所需程度内偏离Part91规则；不能将所有异常统一成先获签派批准或立即停止/改航。具体处置依实际规章、批准手册和训练，不由本页提供动作参数。"
             ]
           },
           "id": "commercial-pilots.risk.career-risk-cards.21",
+          "source_refs": [
+            "pilot-review-onet-details",
+            "pilot-review-far-91-3",
+            "pilot-review-far-91-7",
+            "pilot-review-far-91-213",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28889,7 +29129,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "疲劳与值勤时间超限会显著降低判断与操纵质量，并可能同时触发运行规章与公司制度层面的责任问题。"
+              "疲劳或超过适用值勤要求可能影响表现和合规；具体限制随运行类别及规则核，本轮未取得本职业降低幅度实证，不将所有岗位同一限值。"
             ]
           },
           "id": "commercial-pilots.risk.career-risk-cards.24",
@@ -28933,7 +29173,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "通信与许可确认与改航程序执行不到位，会导致间隔或航路偏差与运行违规，严重时危及航空安全。"
+              "通信与许可确认与改航程序执行不到位，可能导致间隔或航路偏差与运行违规，严重时危及航空安全。"
             ]
           },
           "id": "commercial-pilots.risk.career-risk-cards.28",
@@ -28944,10 +29184,17 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按标准用语联络管制并复诵与确认许可；需要改高度或改航时按程序提出并取得许可后执行；对通信不清或指令冲突的情形先澄清再动作。"
+              "正常运行按适用通信许可及变更程序核，不凭听不清指令推测。美国91.3规定机长对航空器运行直接负责并有最终决定权；维修签署、运行控制及签派等须按各自适用资格和运行规则核，不合并为机长承担所有岗位最终义务。91.3飞行中需即时行动的紧急情况允许机长在所需程度内偏离Part91规则；不能将所有异常统一成先获签派批准或立即停止/改航。具体处置依实际规章、批准手册和训练，不由本页提供动作参数。"
             ]
           },
           "id": "commercial-pilots.risk.career-risk-cards.29",
+          "source_refs": [
+            "pilot-review-onet-details",
+            "pilot-review-far-91-3",
+            "pilot-review-far-91-7",
+            "pilot-review-far-91-213",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28955,10 +29202,17 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "凭推测执行听不清的许可；未复诵即执行指令；在未取得许可时改变高度或航路。"
+              "正常情境误做：凭推测执行含混指令或未按适用许可程序变更；紧急情况需即时行动的规则例外另核，不写所有未先获许可的变更均错误。"
             ]
           },
           "id": "commercial-pilots.risk.career-risk-cards.30",
+          "source_refs": [
+            "pilot-review-onet-details",
+            "pilot-review-far-91-3",
+            "pilot-review-far-91-7",
+            "pilot-review-far-91-213",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28977,7 +29231,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "记录缺失会让运行参数与设备异常与处置与值勤情况无法追溯，影响后续维修判断与事件调查与运行审计。"
+              "记录缺失可能妨碍复核运行参数与设备异常与处置与值勤情况的追溯；仍需核其他可用资料，影响后续维修判断与事件调查与运行审计。"
             ]
           },
           "id": "commercial-pilots.risk.career-risk-cards.32",
@@ -28988,7 +29242,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "把运行时间与航路与高度与燃油与载荷与天气与许可与设备异常与处置与值勤与交接写清，并对应到人与时间。"
+              "飞行时间、高度、燃油等来自O*NET任务；设备异常、载荷、天气许可、值勤和交接可作任务相关编辑核对清单，具体强制项目、签署人及期限按运行类型和适用制度核，不统一为全法域法律义务。"
             ]
           },
           "id": "commercial-pilots.risk.career-risk-cards.33",
@@ -29032,7 +29286,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对知识、能力与兴趣代码 CRE 与工作风格清单"
+              "当前按钮为美国91.213故障仪表和设备规定：有MEL及无MEL路径条件须分别核，不是知识、兴趣或风格数据。"
             ]
           },
           "id": "commercial-pilots.risk.career-risk-cards.37",
@@ -29043,7 +29297,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对行业分布与就业结构"
+              "当前按钮为O*NET关联认证目录：用于找发证机构与不同证书用途，不提供行业就业分布。"
             ]
           },
           "id": "commercial-pilots.risk.career-risk-cards.38",
@@ -29078,7 +29332,7 @@
           },
           "id": "commercial-pilots.path.career-path-block.1",
           "source_refs": [
-            "onet-training"
+            "pilot-review-onet-training"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -29231,6 +29485,42 @@
                 "id": "link-4",
                 "relation": "related-evidence",
                 "url": "https://www.onetonline.org/link/summary/53-2012.00"
+              },
+              {
+                "entity": "14CFR61.123",
+                "id": "repair-61.123",
+                "relation": "related-evidence",
+                "url": "https://www.ecfr.gov/current/title-14/section-61.123"
+              },
+              {
+                "entity": "14CFR61.133",
+                "id": "repair-61.133",
+                "relation": "related-evidence",
+                "url": "https://www.ecfr.gov/current/title-14/section-61.133"
+              },
+              {
+                "entity": "14CFR61.23",
+                "id": "repair-61.23",
+                "relation": "related-evidence",
+                "url": "https://www.ecfr.gov/current/title-14/section-61.23"
+              },
+              {
+                "entity": "14CFR91.3",
+                "id": "repair-91.3",
+                "relation": "related-evidence",
+                "url": "https://www.ecfr.gov/current/title-14/section-91.3"
+              },
+              {
+                "entity": "14CFR91.7",
+                "id": "repair-91.7",
+                "relation": "related-evidence",
+                "url": "https://www.ecfr.gov/current/title-14/section-91.7"
+              },
+              {
+                "entity": "14CFR91.213",
+                "id": "repair-91.213",
+                "relation": "related-evidence",
+                "url": "https://www.ecfr.gov/current/title-14/section-91.213"
               }
             ]
           },
@@ -29253,7 +29543,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能在教员或机长监督下完成飞行前检查与飞行计划与性能与燃油与记录辅助，按检查单与运行程序穿戴与使用防护装备，在发现航空器缺陷或条件异常时立即上报并停止。"
+              "编辑辅助阶段建议：在教员或机长监督和授权范围内完成飞前检查、计划、性能、燃油及记录辅助；发现缺陷或条件异常时停止自身受影响的地面辅助作业并上报。飞行运行异常按实际角色、飞行阶段、批准程序及适用紧急权限处置，不提供通用空中停止动作。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.12",
@@ -29341,10 +29631,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：进入该职业最常见的路径是完成飞行训练学校或航空院校的飞行训练与商业飞行员执照训练（该页面教育分布显示受访者回答「部分岗位需要中等后证书」「部分岗位需要高中文凭或同等学历」「部分岗位需要上过大学但未取得学位」，页面按这三档表述、未给百分比；准备层级为 Job Zone Three，中等准备），配合教员带飞与累计飞行小时并逐步承担机长职责；入行后先承担副驾驶与常规运行，再逐步承担复杂运行与教员与检查与运行管理职责；执照与等级与体检合格与运行经历须按适用法域与运行规章与运营人程序取得。"
+              "三方向四阶段为编辑能力候选，不是唯一、最常见或保证晋升顺序；商业飞行员不都由副驾驶起步。美国61.123商业飞行员证书要求年龄、语言、训练及教员认可、知识/实践考试和对应类别等级经验，私人执照或61.73适用路径分别核。61.133商业执照权限仍受相应运行规则限制；执照、等级、体检、运营资质和岗位任命不能互代。61.23体检要求有按权限和航空器的例外，不能说所有商业运行人员均须同一体检证。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.20",
+          "source_refs": [
+            "pilot-review-onet-training",
+            "pilot-review-bls-entry",
+            "pilot-review-far-61-123",
+            "pilot-review-far-61-133",
+            "pilot-review-far-61-23",
+            "pilot-review-far-61-193",
+            "pilot-review-far-107-1",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29352,10 +29652,20 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界：学历、飞行训练、专业认证、执照与等级与岗位授权必须分别核对。该页面提供 30 项全国认证（多数由美国联邦航空管理局签发，如 Commercial Pilot、Airline Transport Pilot、Commercial Pilot, Airplane Single Engine (ASE) Rating、Instrument Rating、Certified Flight Instructor 系列与 Remote Pilot Certificate，另有 Offshore Petroleum Industry Training Organization 的 Helicopter Underwater Escape Training、ASTM International 的 Autonomous Navigation Systems 等），但认证不等于运行许可、雇主任命、放行权或所在地授权；商业运行还须持有相应执照与等级与体检合格证，并按适用法域与运行规章与运营人运行手册执行；本页不把学历或认证写成法定资质。"
+              "当前O*NET30关联认证目录：FAA执照/等级/教员和遥控证书，以及HUET、NWCG直升机机组培训、ASTM系统认证等；用途不同、不能假定互认。FAA商业执照本身是相应飞行资格，不能一概称认证非许可。美国61.123商业飞行员证书要求年龄、语言、训练及教员认可、知识/实践考试和对应类别等级经验，私人执照或61.73适用路径分别核。61.133商业执照权限仍受相应运行规则限制；执照、等级、体检、运营资质和岗位任命不能互代。61.23体检要求有按权限和航空器的例外，不能说所有商业运行人员均须同一体检证。 61.193教员仅在其证书等级限制内训练/特定检查/认可，仍不替代运营资质；61.133轻于空气教学有特定例外。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.21",
+          "source_refs": [
+            "pilot-review-onet-training",
+            "pilot-review-bls-entry",
+            "pilot-review-far-61-123",
+            "pilot-review-far-61-133",
+            "pilot-review-far-61-23",
+            "pilot-review-far-61-193",
+            "pilot-review-far-107-1",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29374,7 +29684,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本页关于入行与培养采用 O*NET 口径：准备层级为 Job Zone Three（中等准备），该页面教育分布显示受访者回答「部分岗位需要中等后证书」「部分岗位需要高中文凭或同等学历」「部分岗位需要上过大学但未取得学位」（页面按这三档表述，未给百分比）。中国大陆未建立与 O*NET-SOC 53-2012.00 一一对应的职业细类，相关职责通常分布在公共航空运输与通用航空的飞行运行序列。"
+              "美国JobZone3及三档部分岗位教育需求未给比例；本轮未建立中国细类及工资映射，不等中国没有细类，须实际职责核。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.23",
@@ -29385,7 +29695,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024 至 2034 年就业预测与年均空缺"
+              "用于核对该职业 2025 至 2035 年就业预测与年均空缺"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.24",
@@ -29396,7 +29706,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对准备层级（Job Zone Three）与该页面显示的教育分布三档表述"
+              "用于核对准备层级（Job Zone Three）与该页面显示的新入职者所需教育的受访回答三档表述"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.25",
@@ -29418,7 +29728,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对全国认证信息入口（30 项认证；认证不等于许可或雇主任命）"
+              "当前30项关联认证目录，不等30项全部为商业运行准入或可互代。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.27",
@@ -29429,7 +29739,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求飞行训练与商业飞行员执照训练结业与基础记录能力。"
+              "编辑阶段能力核对：可核飞行训练与商业飞行员执照训练结业与基础记录能力。 具体训练、执照及岗位分工依任务法域核，非统一晋升门槛。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.28",
@@ -29484,7 +29794,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "须具备运行判断与通信与记录能力。"
+              "编辑阶段能力核对：可核运行判断与通信与记录能力。 具体训练、执照及岗位分工依任务法域核，非统一晋升门槛。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.33",
@@ -29517,7 +29827,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立完成常规天气与航路条件下的运输与游览飞行并完整记录。"
+              "在实际执照等级、运行许可、适用体检与岗位权限内承担相应常规任务并记录；独立承担不等无团队。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.36",
@@ -29539,7 +29849,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求机型签注与多运行类型经验与特殊运行资格。"
+              "编辑阶段能力核对：可核机型签注与多运行类型经验与特殊运行资格。 具体训练、执照及岗位分工依任务法域核，非统一晋升门槛。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.38",
@@ -29572,7 +29882,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承担复杂天气与特殊机场与夜航等运行并带教新同事。"
+              "编辑进阶候选：复杂任务、特殊运行和带教分别核类别等级、运营制度及实际授权；经验不自动授教学、检查或特殊运行权限。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.41",
@@ -29594,7 +29904,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求组织内职责与长期经验。"
+              "编辑阶段能力核对：可核组织内职责与长期经验。 具体训练、执照及岗位分工依任务法域核，非统一晋升门槛。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.43",
@@ -29649,7 +29959,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求飞行训练结业与作业安全基础。"
+              "编辑阶段能力核对：可核飞行训练结业与作业安全基础。 具体训练、执照及岗位分工依任务法域核，非统一晋升门槛。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.48",
@@ -29704,7 +30014,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "须具备低空作业与任务设备使用能力。"
+              "编辑阶段能力核对：可核低空作业与任务设备使用能力。 具体训练、执照及岗位分工依任务法域核，非统一晋升门槛。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.53",
@@ -29737,7 +30047,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立完成巡线或航拍或喷洒等常规作业飞行并留痕。"
+              "在实际执照等级、运行许可、适用体检与岗位权限内承担相应常规任务并记录；独立承担不等无团队。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.56",
@@ -29759,7 +30069,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "须具备专项资质与多场景经验。"
+              "编辑阶段能力核对：可核专项资质与多场景经验。 具体训练、执照及岗位分工依任务法域核，非统一晋升门槛。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.58",
@@ -29792,7 +30102,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承担复杂地形或高风险作业并协同无人机与遥感数据采集。"
+              "编辑进阶候选：复杂任务、特殊运行和带教分别核类别等级、运营制度及实际授权；经验不自动授教学、检查或特殊运行权限。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.61",
@@ -29814,7 +30124,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求组织内职责与长期经验。"
+              "编辑阶段能力核对：可核组织内职责与长期经验。 具体训练、执照及岗位分工依任务法域核，非统一晋升门槛。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.63",
@@ -29869,7 +30179,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求飞行训练结业与应急与协同基础。"
+              "编辑阶段能力核对：可核飞行训练结业与应急与协同基础。 具体训练、执照及岗位分工依任务法域核，非统一晋升门槛。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.68",
@@ -29924,7 +30234,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "须具备应急运行与教学表达能力。"
+              "编辑阶段能力核对：可核应急运行与教学表达能力。 具体训练、执照及岗位分工依任务法域核，非统一晋升门槛。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.73",
@@ -29957,7 +30267,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立承担常规空中救护或飞行教学任务并完整记录。"
+              "在实际执照等级、运行许可、适用体检与岗位权限内承担相应常规任务并记录；独立承担不等无团队。救护、教学和检查权限分开核，不由商业执照自动取得教员及检查权限。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.76",
@@ -29979,7 +30289,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "须具备检查员或教员资格与多场景经验。"
+              "编辑阶段能力核对：可核检查员或教员资格与多场景经验。 具体训练、执照及岗位分工依任务法域核，非统一晋升门槛。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.78",
@@ -30012,7 +30322,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承担复杂条件救护与飞行检查与评估任务并带教。"
+              "编辑进阶候选：复杂任务、特殊运行和带教分别核类别等级、运营制度及实际授权；经验不自动授教学、检查或特殊运行权限。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.81",
@@ -30034,7 +30344,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求组织内职责与长期经验。"
+              "编辑阶段能力核对：可核组织内职责与长期经验。 具体训练、执照及岗位分工依任务法域核，非统一晋升门槛。"
             ]
           },
           "id": "commercial-pilots.path.career-path-block.83",
@@ -30106,37 +30416,37 @@
               [
                 "副驾驶（在机长监督下）",
                 "在机长监督下完成飞行前检查与飞行计划与性能与燃油与记录辅助并执行检查单要求。",
-                "检查单执行是否规范、记录是否完整、异常是否及时上报。",
+                "编辑可能考察：检查单执行是否规范、记录是否完整、异常是否及时上报。",
                 "用脱敏后的训练记录与飞行日志与检查记录与带教意见证明。",
-                "与机长岗相比不承担放行与最终操纵决策责任。"
+                "编辑主要对象比较；具体岗位职责可能交叠，机长、签派、教员/检查及管理权限分别核。"
               ],
               [
                 "机长（常规运行）",
                 "独立承担常规运行条件下的飞行操纵与监控与通信与记录并按计划执行值勤与许可要求。",
-                "计划执行、航空器状态、空管通信、记录与异常处置是否完整。",
+                "编辑可能考察：计划执行、航空器状态、空管通信、记录与异常处置是否完整。",
                 "用飞行日志与许可记录与检查记录证明。",
-                "与教学与检查岗相比不承担教学与检查与特殊运行授权责任。"
+                "编辑主要对象比较；具体岗位职责可能交叠，机长、签派、教员/检查及管理权限分别核。"
               ],
               [
                 "教员与检查员（特殊运行与教学）",
                 "承担复杂天气与特殊运行与教学与检查任务并带教新同事。",
-                "教学质量与检查执行、规章与记录质量、带教与评估情况。",
+                "编辑可能考察：教学质量与检查执行、规章与记录质量、带教与评估情况。",
                 "用教学与检查记录与飞行日志与评估报告证明。",
-                "与运行管理岗相比不负责排班与训练体系与安全管理的统筹决定。"
+                "编辑主要对象比较；具体岗位职责可能交叠，机长、签派、教员/检查及管理权限分别核。"
               ],
               [
                 "安全管理与规章岗",
                 "参与运行规章与安全管理与应急与训练与记录制度建设。",
-                "规章文件与执行情况、应急演练与事件调查、训练覆盖。",
+                "编辑可能考察：规章文件与执行情况、应急演练与事件调查、训练覆盖。",
                 "用规章文件与检查与训练与演练记录证明。",
-                "与运行岗相比侧重体系与合规而非单次飞行。"
+                "编辑主要对象比较；具体岗位职责可能交叠，机长、签派、教员/检查及管理权限分别核。"
               ],
               [
                 "运行管理与排班岗",
                 "负责排班与值勤与训练与机队与基地与运行保障与成本协调。",
-                "运行完成与安全记录、资源与成本、运营人与机组协作情况。",
+                "编辑可能考察：运行完成与安全记录、资源与成本、运营人与机组协作情况。",
                 "用排班与训练与成本与协作记录证明。",
-                "与运行岗相比增加人员与资源与对外承诺责任。"
+                "编辑主要对象比较；具体岗位职责可能交叠，机长、签派、教员/检查及管理权限分别核。"
               ]
             ]
           },
@@ -30152,23 +30462,23 @@
               {
                 "id": "education",
                 "values": [
-                  "该页面教育分布显示受访者回答「部分岗位需要中等后证书」「部分岗位需要高中文凭或同等学历」「部分岗位需要上过大学但未取得学位」（页面按这三档表述，未给百分比）；",
+                  "该页面询问新入职者所需教育，受访者回答「部分岗位需要中等后证书」「部分岗位需要高中文凭或同等学历」「部分岗位需要上过大学但未取得学位」（页面按这三档表述，未给百分比）；",
                   "准备层级为 Job Zone Three（中等准备）；",
-                  "多数岗位还要求飞行训练与执照与等级与体检合格与运行经历与机型签注。"
+                  "执照类别等级、经历、适用体检及运行权限分别核；不推所有商业岗位同一机型等级。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "运营人通常要求遵守运行规章与运行手册与安全与应急要求并接受检查；",
-                  "放行与指挥与停飞权限须按运营人程序与授权执行；",
-                  "多数岗位要求体检合格与背景与安全核查要求。"
+                  "按实际运行制度接受训练和检查；本轮无统一雇主条件样本。",
+                  "美国91.3规定机长对航空器运行直接负责并有最终决定权；维修签署、运行控制及签派等须按各自适用资格和运行规则核，不合并为机长承担所有岗位最终义务。91.3飞行中需即时行动的紧急情况允许机长在所需程度内偏离Part91规则；不能将所有异常统一成先获签派批准或立即停止/改航。具体处置依实际规章、批准手册和训练，不由本页提供动作参数。",
+                  "体检及背景要求依法域、任务核，不说所有工作人员同一要求。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "该职业页面提供 21 项工作风格（含谨慎、自控、可靠、注重细节、压力耐受、自信）且不提供分数；",
+                  "当前O*NET21项WorkStyles有Impact指标：谨慎100、自控100、可靠98、细节91、压力耐受89、自信80等。它们是职业指标，不是个人筛选分数，也不证明大五人格预测效度。",
                   "知识以客户与个人服务、英语语言、运输、地理、公共安全与安保为主；",
                   "工作活动以检查设备与结构或材料、操作车辆与机械装置或设备、控制机器与过程、作出决策与解决问题为前几位。"
                 ]
@@ -30178,7 +30488,7 @@
                 "values": [
                   "航空器与飞行仪表与自动驾驶与通信与导航设备；",
                   "飞行计划与气象与性能与重量与平衡与飞行数据监测软件；",
-                  "无人机与遥感与航拍设备（该职业页面列出 10 类软件关键词，如航空地面支持软件 ArduPilot Mission Planner、航图软件 Aeronautical charts、航路导航软件 Navzilla 等）。"
+                  "当前详细页列13类软件，包括分析科学、航空地面支持、排期、航图、数据库查询、开发环境、飞行控制、图形图像、信息检索、地图制作、办公、项目管理和航路导航；HotTechnology招聘表另为2项：2025美国招聘Office3%、AdobeCreativeCloud比例未提供。类别不等13产品，关键词不等实际采用、熟练度或AI成效。"
                 ]
               }
             ]
@@ -30297,8 +30607,8 @@
               [
                 "面试与情境问答",
                 "对给定天气或设备或疲劳或通信异常情境的处置思路、发现条件不满足时如何处理。",
-                "是否知道先停止或改航再处理、是否区分设备问题与天气问题与人员状态问题。",
-                "面试问答不等同于飞行能力，运营人通常另有模拟机与航线检查。"
+                "编辑可能观察：是否区分飞行阶段、异常种类、实际权限和批准程序；不把所有条件不满足统一成先停止或改航。",
+                "问答不能代飞行能力；实际模拟机/检查要求按运行及雇主核，不称所有运营人必用。"
               ],
               [
                 "模拟机或案例考核",
@@ -30310,7 +30620,7 @@
                 "试用或带飞期",
                 "在机长或教员监督下承担实际运行并接受运行与安全与记录检查。",
                 "是否按规程执行、是否及时上报异常、被指出问题后的改正速度。",
-                "带飞期表现不等于长期能力上限，机型与运行类型与带教质量影响很大。"
+                "带飞期表现不等长期能力上限；逐项核机型、运行类型、带教安排与反馈，不推统一影响幅度。"
               ]
             ]
           },
@@ -30421,61 +30731,71 @@
             "rows": [
               [
                 "飞行训练学校或航空院校的飞行训练",
-                "多数入行者",
-                "是进入相应序列的常见条件",
-                "否（部分路径以其他训练体系与飞行小时补充）",
+                "核目标训练路径的入行者",
+                "飞行训练与目标类别等级资格分别核",
+                "按实际路径；61.123有私人执照或61.73适用路径，不以学历替代必要训练",
                 "完成飞行训练并通过相应执照与等级考核",
-                "中",
-                "该页面教育分布显示受访者回答「部分岗位需要中等后证书」「部分岗位需要高中文凭或同等学历」「部分岗位需要上过大学但未取得学位」（页面按这三档表述，未给百分比），本页不把学历直接对应到收入。"
+                "证据不足：未核对应时间及费用",
+                "该页面询问新入职者所需教育，受访者回答「部分岗位需要中等后证书」「部分岗位需要高中文凭或同等学历」「部分岗位需要上过大学但未取得学位」（页面按这三档表述，未给百分比），本页不把学历直接对应到收入。"
               ],
               [
                 "累计飞行小时与教员带飞与运行经历",
                 "承担一线运行的人",
                 "影响可承担的机型与运行类型与值勤范围",
-                "否（为能力条件）",
+                "经历是对应资格/运行条件之一，不能一概称仅能力而非法定要求",
                 "通过训练与带飞与运行经历积累",
-                "中",
+                "证据不足：未核对应时间及费用",
                 "运行经历是承担一线运行的基础，但不等于运行授权与机长资格。"
               ],
               [
-                "专业认证（如 Airline Transport Pilot 与教员系列与 Remote Pilot Certificate）",
+                "FAA商业/ATP/教员/遥控等资格及其他机构证书（分开核）",
                 "希望证明运行与教学与无人机能力的人",
-                "作为专业能力证明",
-                "否（认证不等于运行许可或雇主任命）",
-                "通过训练与考核与运行经历积累",
-                "中",
-                "该页面提供 30 项全国认证；认证不等于运行许可、雇主任命、放行权或所在地授权。"
+                "用途、航空器和权限不同，不只是软性能力证明",
+                "对应任务的法定资格可能必需，不能统称非准入门槛",
+                "美国61.123商业飞行员证书要求年龄、语言、训练及教员认可、知识/实践考试和对应类别等级经验，私人执照或61.73适用路径分别核。61.133商业执照权限仍受相应运行规则限制；执照、等级、体检、运营资质和岗位任命不能互代。61.23体检要求有按权限和航空器的例外，不能说所有商业运行人员均须同一体检证。",
+                "证据不足：未核对应时间及费用",
+                "30关联目录不是互认清单；教学按61.193和适用例外，遥控证书不自动授大型无人机运行权"
               ],
               [
                 "运营人运行手册与岗位授权",
-                "所有参与飞行运行的人员",
+                "适用运营制度的运行岗位",
                 "决定可承担的机型与航路与运行与指挥职责",
-                "是（运营人内必备）",
+                "按运行类型和组织实际要求核",
                 "按运营人程序完成训练与考核与授权",
-                "低中",
+                "证据不足：未核对应时间及费用",
                 "授权范围与运营人制度绑定，放行与指挥与停飞权限须按程序确认。"
               ],
               [
                 "体检合格证与执照等级（含机型签注）",
-                "所有商业运行人员",
+                "相应飞行权限执行者",
                 "决定是否满足运行的健康与资格条件",
-                "是（按适用法域与运行规章）",
+                "按61.23适用权限和航空器核；有例外，不是全部商业工作人员同一标准",
                 "按适用要求完成体检与训练与考核",
-                "高",
-                "体检与执照等级是商业运行的硬性条件，具体标准须按适用法规与主管部门要求确认。"
+                "证据不足：未核对应时间及费用",
+                "执照等级和体检按拟执行权限、航空器及61.23例外核，不能把全部工作人员归同一标准；中国条件另核。"
               ],
               [
                 "危险品运输与载重平衡与值勤限制要求",
                 "承担运输与运行组织的人员",
                 "决定可运输的货物与可执行的航段与值勤安排",
-                "是（按适用法域与运行规章）",
+                "按实际货物、运行类别和职责核，不对所有商业飞行统一要求",
                 "按适用要求完成培训与考核",
-                "低中",
+                "证据不足：未核对应时间及费用",
                 "相关要求须按适用法规与运营人制度执行，本页不代替具体合规条件核对。"
               ]
             ]
           },
           "id": "commercial-pilots.path.credential-decision.1",
+          "source_refs": [
+            "pilot-review-onet-training",
+            "pilot-review-bls-entry",
+            "pilot-review-far-61-123",
+            "pilot-review-far-61-133",
+            "pilot-review-far-61-23",
+            "pilot-review-far-61-193",
+            "pilot-review-far-107-1",
+            "editorial"
+          ],
           "title": "资格选择",
           "type": "table"
         },
@@ -30484,13 +30804,23 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "本页把「飞行训练与执照与等级」「飞行小时与运行经历」「专业认证」与「运营人运行手册与岗位授权」「体检合格与值勤与危险品要求」分列：训练与执照决定可进入的序列，运行经历决定可承担的机型与运行类型范围，专业认证提升运行与教学与无人机能力的可信度，运营人授权决定可执行的运行与指挥职责，体检合格与值勤与危险品要求由相应规章与制度决定，五者不能互相替代。",
-              "美国：该职业的准备层级为 Job Zone Three（中等准备），该页面教育分布显示受访者回答「部分岗位需要中等后证书」「部分岗位需要高中文凭或同等学历」「部分岗位需要上过大学但未取得学位」（页面按这三档表述，未给百分比）；该页面提供 30 项全国认证，但认证不等于运行许可、雇主任命、放行权或所在地授权；商业运行还须持有相应执照与等级与体检合格证。",
-              "中国大陆：本条证据路由未建立与 O*NET-SOC 53-2012.00 一一对应的职业细类，相关职责可能分布在公共航空运输与通用航空的飞行运行序列；执照与等级与体检合格与运行经历与值勤要求须按主管部门与运营人规定执行。",
+              "执照等级、经历、体检、教学/检查资格、运营资质和岗位权限分别核。训练与经历不自动授新类别等级，FAA资格与其他机构认证不混称软性证明，教员证也不代运营资质。",
+              "美国61.123商业飞行员证书要求年龄、语言、训练及教员认可、知识/实践考试和对应类别等级经验，私人执照或61.73适用路径分别核。61.133商业执照权限仍受相应运行规则限制；执照、等级、体检、运营资质和岗位任命不能互代。61.23体检要求有按权限和航空器的例外，不能说所有商业运行人员均须同一体检证。 30目录含用途不同的关联资格；大型无人机新增任务不能自动按小型UAS Part107处理，107.1另有适用及例外。",
+              "中国大陆本轮未建立与美国53-2012的一一对应职业及工资映射；目标岗位的执照等级、体检、经历、运营及值勤要求须按主管部门和实际运行核，不以境外目录替代。",
               "本页不保证任何培训或认证被特定运营人承认，也不代替运行规章与体检与值勤要求的具体判断与授权条件核对。"
             ]
           },
           "id": "commercial-pilots.path.credential-boundary.1",
+          "source_refs": [
+            "pilot-review-onet-training",
+            "pilot-review-bls-entry",
+            "pilot-review-far-61-123",
+            "pilot-review-far-61-133",
+            "pilot-review-far-61-23",
+            "pilot-review-far-61-193",
+            "pilot-review-far-107-1",
+            "editorial"
+          ],
           "title": "资格与练习边界",
           "type": "notice"
         },
@@ -30528,7 +30858,7 @@
           ],
           "id": "commercial-pilots.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls-outlook"
+            "pilot-review-bls-outlook"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30546,7 +30876,7 @@
           ],
           "id": "commercial-pilots.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls-outlook"
+            "pilot-review-bls-outlook"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30561,7 +30891,7 @@
           },
           "id": "commercial-pilots.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls-outlook"
+            "pilot-review-bls-outlook"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30579,7 +30909,7 @@
           ],
           "id": "commercial-pilots.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls-outlook"
+            "pilot-review-bls-outlook"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30594,7 +30924,7 @@
           },
           "id": "commercial-pilots.market-signals.market-signal-card.5",
           "source_refs": [
-            "onet-industry"
+            "pilot-review-onet-industry"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30609,7 +30939,7 @@
           },
           "id": "commercial-pilots.market-signals.market-signal-card.6",
           "source_refs": [
-            "bls-outlook"
+            "pilot-review-bls-outlook"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30644,10 +30974,10 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "国家统计局《城镇单位就业人员年平均工资情况》检索入口",
+                "entity": "国家统计局2025城镇单位年平均工资（行业背景）",
                 "id": "link-5",
                 "relation": "related-evidence",
-                "url": "https://www.stats.gov.cn/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET-SOC 53-2012.00 职业详细资料",
@@ -30713,7 +31043,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：按 O*NET 该职业页面显示的 BLS 就业预测（2024 至 2034 年，53-2012.00 精确职业口径）：2024 年就业约 55,400 人、2034 年预计约 58,300 人、预计增长 5%（Faster than average，快于平均）、年均空缺约 6,600 个；预测含假设与误差，不等于逐年实际值，也不预测某一运营人或某一机队的岗位数量。"
+              "直接回答：按 O*NET 该职业页面显示的 BLS 就业预测（2025 至 2035 年，53-2012.00 精确职业口径）：2025 年就业约 50,400 人、2035 年预计约 53,000 人、预计增长 5%（Faster than average，快于平均）、年均空缺约 5,200 个；预测含假设与误差，不等于逐年实际值，也不预测某一运营人或某一机队的岗位数量。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.8",
@@ -30735,7 +31065,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024 至 2034 年（预测，53-2012.00 精确职业口径）"
+              "2025 至 2035 年（预测，53-2012.00 精确职业口径）"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.10",
@@ -30746,7 +31076,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该职业预计增长 5%，评级为 Faster than average（快于平均）；预测以现有产业结构与运行环境为假设，含误差，不等于逐年的实际岗位数。"
+              "BLS表1.2（SOC53-2012，2025—2035）就业约50,400→53,000人、净增约2,600人、增长5.2%、年均职位空缺约5,200个，2025自雇占2.0%。OOH商业飞行员增长5%为同预测四舍五入；O*NET显示Faster than average（5%—6%）。空缺含增长及更替，不等净增、招聘或录用保证，也不是AI因果研究。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.11",
@@ -30790,7 +31120,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增长 5%（2024—2034 年）"
+              "增长 5%（2025—2035 年）"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.15",
@@ -30889,7 +31219,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025 年数据（2026-05-16 发布）"
+              "2025 年数据（2026-05-15 发布）"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.24",
@@ -30900,10 +31230,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本条证据路由为中国大陆工资登记的是行业均值代理：2025 年城镇非私营单位「交通运输、仓储和邮政业」年平均工资 133,981 元、城镇私营单位同行业 73,133 元；证据路由把该口径标记为 （仅在收窄后的范围内使用、处理状态：已按说明处理），并写明不能把行业平均工资写成飞行员中位数或起薪。"
+              "NBS2025（2026-05-15发布）交通运输、仓储和邮政业非私营133,981元/人/年、私营73,133元/人/年，均为行业全体就业人员税前年平均工资，只在雇主实际属该行业时作宽背景；不是商业飞行员中位数、起薪或月薪。本轮未建立中国精确职业及工资映射，不等中国没有该细类或官方从未发布。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.25",
+          "source_refs": [
+            "pilot-review-nbs-wages"
+          ],
           "type": "prose"
         },
         {
@@ -30955,7 +31288,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024 至 2034 年就业预测与年均空缺"
+              "用于核对该职业 2025 至 2035 年就业预测与年均空缺"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.30",
@@ -30999,10 +31332,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少定期航线与大型运输航空器的机型改装与航线资格与航线运行经历。"
+              "逐人核已有与待补的定期航线与大型运输航空器的机型改装与航线资格与航线运行经历。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.34",
+          "source_refs": [
+            "pilot-review-neighbor-0",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31014,6 +31352,11 @@
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.35",
+          "source_refs": [
+            "pilot-review-neighbor-0",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31021,10 +31364,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。航线方向需要进入航空公司体系并完成改装与航线资格训练。"
+              "编辑转岗核对：航线方向需要进入航空公司体系并完成改装与航线资格训练。 本轮未取得统一转岗距离、培训成本或互认依据；对应资格须目标岗位核。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.36",
+          "source_refs": [
+            "pilot-review-neighbor-0",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31032,10 +31380,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少管制席位资格与雷达与间隔与扇区运行经验。"
+              "逐人核已有与待补的管制席位资格与雷达与间隔与扇区运行经验。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.37",
+          "source_refs": [
+            "pilot-review-neighbor-1",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31047,6 +31400,11 @@
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.38",
+          "source_refs": [
+            "pilot-review-neighbor-1",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31054,10 +31412,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较大。管制方向需要另行通过选拔与专业培训与执照与席位资格。"
+              "编辑转岗核对：对照目标管制岗位的选拔、培训、执照及席位条件，任务交集不授管制权限；本轮无统一距离、成本或互认实证。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.39",
+          "source_refs": [
+            "pilot-review-neighbor-1",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31065,10 +31427,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少航空器维修培训与执照与机型签署与工卡与适航放行经验。"
+              "逐人核已有与待补的航空器维修培训与执照与机型签署与工卡与适航放行经验。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.40",
+          "source_refs": [
+            "pilot-review-neighbor-2",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31080,6 +31447,11 @@
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.41",
+          "source_refs": [
+            "pilot-review-neighbor-2",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31087,10 +31459,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较大。机务方向以维修与适航放行为主，需另行取得维修资质。"
+              "编辑转岗核对：对照拟承担的发动机总成维修、检查及签署职责和对应资格；驾驶及少量维护经历不自动授维修签署权，无统一距离或成本实证。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.42",
+          "source_refs": [
+            "pilot-review-neighbor-2",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31098,10 +31474,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少机载电子与通信与导航与仪表系统的测试与排故经验。"
+              "逐人核已有与待补的机载电子与通信与导航与仪表系统的测试与排故经验。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.43",
+          "source_refs": [
+            "pilot-review-neighbor-3",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31113,6 +31494,11 @@
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.44",
+          "source_refs": [
+            "pilot-review-neighbor-3",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31120,10 +31506,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较大。航电方向需要专门的电子与仪表系统训练与资质。"
+              "编辑转岗核对：对照航空器/航天器电子系统安装测试维修技能和实际资格，系统使用不等维修能力；本轮无统一距离、成本或互认实证。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.45",
+          "source_refs": [
+            "pilot-review-neighbor-3",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31131,10 +31521,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少场道与运行保障与地面协调与应急响应经验。"
+              "逐人核已有与待补的场道与运行保障与地面协调与应急响应经验。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.46",
+          "source_refs": [
+            "pilot-review-neighbor-4",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31146,6 +31541,11 @@
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.47",
+          "source_refs": [
+            "pilot-review-neighbor-4",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31153,10 +31553,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。机场运行方向以地面保障与协调为主，不执行飞行任务。"
+              "编辑转岗核对：机场运行重点管制维修、场道及安全记录协调，具体权限须岗位核；定义不证明所有岗位绝无飞行任务。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.48",
+          "source_refs": [
+            "pilot-review-neighbor-4",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31164,10 +31569,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少客舱安全与服务与应急撤离组织经验。"
+              "逐人核已有与待补的客舱安全与服务与应急撤离组织经验。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.49",
+          "source_refs": [
+            "pilot-review-neighbor-5",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31179,6 +31589,11 @@
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.50",
+          "source_refs": [
+            "pilot-review-neighbor-5",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31186,10 +31601,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。客舱方向以安全与服务为主，不参与航空器操纵。"
+              "编辑转岗核对：客舱方向以安全与服务为主，不参与航空器操纵。 本轮未取得统一转岗距离、培训成本或互认依据；对应资格须目标岗位核。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.51",
+          "source_refs": [
+            "pilot-review-neighbor-5",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31197,10 +31617,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少航空影像与遥感数据采集与处理与无人机运行经验。"
+              "逐人核已有与待补的航空影像与遥感数据采集与处理与无人机运行经验。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.52",
+          "source_refs": [
+            "pilot-review-neighbor-6",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31212,6 +31637,11 @@
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.53",
+          "source_refs": [
+            "pilot-review-neighbor-6",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31219,10 +31649,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。遥感与无人机方向侧重数据采集与处理，需补充相应资质。"
+              "编辑转岗核对：遥感技术支持科学领域，可能准备飞行计划和传感器配置；遥感岗位不等全部无人机驾驶岗位。实际资料处理与任务权限须核，不推大型无人机与小型遥控资格互代。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.54",
+          "source_refs": [
+            "pilot-review-neighbor-6",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31230,10 +31665,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少水上航行与船舶操作与轮机与港口作业经验。"
+              "逐人核已有与待补的水上航行与船舶操作与轮机与港口作业经验。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.55",
+          "source_refs": [
+            "pilot-review-neighbor-7",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31245,6 +31685,11 @@
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.56",
+          "source_refs": [
+            "pilot-review-neighbor-7",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31252,10 +31697,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较大。水上航行方向以船舶操作与航法为主，需另行积累。"
+              "编辑转岗核对：水上航行方向以船舶操作与航法为主，需另行积累。 本轮未取得统一转岗距离、培训成本或互认依据；对应资格须目标岗位核。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.57",
+          "source_refs": [
+            "pilot-review-neighbor-7",
+            "pilot-review-onet-details",
+            "editorial"
+          ],
           "type": "prose"
         }
       ]
@@ -31395,7 +31845,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容由费马测试职业内容编辑组按公开官方来源整理，职业身份与任务与工作情境采用 O*NET-SOC 53-2012.00（Commercial Pilots，商业飞行员），美国工资与就业采用 O*NET 该职业页面显示的 BLS 数据（53-2012.00 精确职业口径，工资为 2025 年、就业为 2024 至 2034 年预测）；中国大陆按本条证据路由展示「交通运输、仓储和邮政业」行业均值代理并逐处标注其非职业口径；编辑归纳与虚构练习单独标注。"
+              "本轮九模块按当前原文、O*NET/BLS、NBS及实际读取的美国航空条文核定；任务、统计、法规及编辑建议分别使用，未开展整页或中国资格完整审查。"
             ]
           },
           "id": "commercial-pilots.sources.source-card.1",
@@ -31406,7 +31856,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源为美国 O*NET OnLine 公开页面（含职业详细资料与摘要与行业分布与技术与工资与就业趋势与认证信息）、U.S. Bureau of Labor Statistics 的公开统计与预测口径、以及飞行运行与适航与值勤要求与无人机运行的公开规章入口；中国大陆口径引用国家统计局与人社部的公开信息入口。所有数值均保留其职业与地域与期间与单位与统计口径；来源清单见页面「资料来源」。"
+              "2026-10-09：当前O*NET、OEWS2025、BLS2025—2035、NBS2025及eCFR（Title14截至2026-10-07）"
             ]
           },
           "id": "commercial-pilots.sources.source-card.2",
@@ -31417,7 +31867,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容检索与更新于 2026 年 9 月。"
+              "工资分位/行业均值、就业预测、职业关联认证目录、法规具体节及AI研究用途分别标注；来源可访问不等所有结论受支持。"
             ]
           },
           "id": "commercial-pilots.sources.source-card.3",
@@ -31428,7 +31878,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "使用提示：本页是职业信息服务，不构成飞行运行、安全、适航、医疗、环保、财税或法律建议；涉及执照与等级与体检合格与运行许可与值勤限制与危险品运输与无人机作业的决定，须以适用法规与运行规章与运营人运行手册及具备相应资质人员的意见为准。"
+              "保留中国职业工资映射、地区及任职形式工资、AI采用成效和人格效度真实缺口；共享范围外事实未联动，未称整页一致或正式验收。"
             ]
           },
           "id": "commercial-pilots.sources.source-card.4",
@@ -31804,6 +32254,513 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-2012.00#WorkContext"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方职业详细资料",
+                  "任务、工作活动与工作情境"
+                ],
+                "evidence_type": "official source",
+                "id": "pilot-review-onet-details",
+                "limitation": "本职业25任务19Core/5Supplemental/1New；教育三档部分岗位未给比例，JobZone3；兴趣C64R63E49I26S26A2，21工作风格有Impact、情境为受访分布，不授个人资格。",
+                "market": "美国",
+                "name": "O*NET-SOC 53-2012.00 职业详细资料（任务与工作活动）",
+                "period": "当前公开版本；本轮2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-2012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方职业摘要",
+                  "知识、能力、兴趣代码 CRE 与工作风格"
+                ],
+                "evidence_type": "official source",
+                "id": "pilot-review-onet-summary",
+                "limitation": "本职业25任务19Core/5Supplemental/1New；教育三档部分岗位未给比例，JobZone3；兴趣C64R63E49I26S26A2，21工作风格有Impact、情境为受访分布，不授个人资格。",
+                "market": "美国",
+                "name": "O*NET-SOC 53-2012.00 职业摘要（知识、能力、兴趣代码与工作风格）",
+                "period": "当前公开版本；本轮2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/53-2012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方行业分布",
+                  "美国就业行业结构"
+                ],
+                "evidence_type": "official source",
+                "id": "pilot-review-onet-industry",
+                "limitation": "当前O*NET本职业就业行业构成为运输与仓储51%、教育服务13%、医疗与社会救助11%、其他25%（包括专业科学技术服务）；这是美国就业构成，不是行业工资或中国雇主归类。",
+                "market": "美国",
+                "name": "O*NET-SOC 53-2012.00 行业分布",
+                "period": "2025行业数据",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/53-2012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025美国招聘HotTechnology2项；详细页另13软件类别"
+                ],
+                "evidence_type": "official source",
+                "id": "pilot-review-onet-hot-tech",
+                "limitation": "当前详细页列13类软件，包括分析科学、航空地面支持、排期、航图、数据库查询、开发环境、飞行控制、图形图像、信息检索、地图制作、办公、项目管理和航路导航；HotTechnology招聘表另为2项：2025美国招聘Office3%、AdobeCreativeCloud比例未提供。类别不等13产品，关键词不等实际采用、熟练度或AI成效。",
+                "market": "美国",
+                "name": "O*NET 技术清单（53-2012.00 招聘技术关键词）",
+                "period": "当前公开版本；本轮2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/53-2012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方准备层级与教育分布",
+                  "Job Zone 与教育分布三档表述"
+                ],
+                "evidence_type": "official source",
+                "id": "pilot-review-onet-training",
+                "limitation": "本职业25任务19Core/5Supplemental/1New；教育三档部分岗位未给比例，JobZone3；兴趣C64R63E49I26S26A2，21工作风格有Impact、情境为受访分布，不授个人资格。",
+                "market": "美国",
+                "name": "O*NET-SOC 53-2012.00 准备层级与教育分布",
+                "period": "当前公开版本；本轮2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-2012.00#JobZone"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET关联认证目录",
+                  "FAA证书可能构成任务法定资格；其他认证用途另核，目录不证明互认"
+                ],
+                "evidence_type": "occupational credential directory",
+                "id": "pilot-review-bls-entry",
+                "limitation": "当前30项关联目录，含FAA执照/等级和其他组织培训/系统认证，不等统一商业许可或互认。",
+                "market": "美国",
+                "name": "O*NET-SOC 53-2012.00 全国认证信息入口（航空运行相关认证）",
+                "period": "当前公开版本；本轮2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localcert/53-2012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方工资分位（精确职业口径）",
+                  "2025 年年薪分位"
+                ],
+                "evidence_type": "official occupational wage statistics",
+                "id": "pilot-review-bls-pay",
+                "limitation": "全国年工资五分位58850/84540/123220/190440/266620美元；未提供时薪，不推个人工资或起薪。",
+                "market": "美国",
+                "name": "O*NET 全国工资分位页面（53-2012.00，精确职业口径）",
+                "period": "2025工资",
+                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/53-2012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取表1.2 headers及SOC53-2012行"
+                ],
+                "evidence_type": "official employment projections",
+                "id": "pilot-review-bls-outlook",
+                "limitation": "BLS表1.2（SOC53-2012，2025—2035）就业约50,400→53,000人、净增约2,600人、增长5.2%、年均职位空缺约5,200个，2025自雇占2.0%。OOH商业飞行员增长5%为同预测四舍五入；O*NET显示Faster than average（5%—6%）。空缺含增长及更替，不等净增、招聘或录用保证，也不是AI因果研究。",
+                "market": "美国",
+                "name": "BLS表1.2就业预测（SOC53-2012，2025—2035）",
+                "period": "2025—2035预测",
+                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "表2/4交通运输仓储邮政；税前年平均及单位覆盖定义"
+                ],
+                "evidence_type": "official statistical release",
+                "id": "pilot-review-nbs-wages",
+                "limitation": "NBS2025（2026-05-15发布）交通运输、仓储和邮政业非私营133,981元/人/年、私营73,133元/人/年，均为行业全体就业人员税前年平均工资，只在雇主实际属该行业时作宽背景；不是商业飞行员中位数、起薪或月薪。本轮未建立中国精确职业及工资映射，不等中国没有该细类或官方从未发布。",
+                "market": "中国大陆",
+                "name": "NBS2025城镇单位就业人员年平均工资",
+                "period": "2025数据，2026-05-15发布",
+                "publisher": "国家统计局（中华人民共和国）",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "研究论文",
+                  "生成式 AI 职业暴露指数"
+                ],
+                "evidence_type": "research",
+                "id": "pilot-review-ilo-genai",
+                "limitation": "为暴露度量，不是采用率、自动化率或岗位减少预测；跨经济体口径不能直接换算为国别岗位变化。",
+                "market": "全球",
+                "name": "ILO 工作论文《Generative AI and Jobs: A Refined Global Index of Occupational Exposure》",
+                "period": "当前公开版本；本轮2026-10-09",
+                "publisher": "International Labour Organization",
+                "scope": "market_signal",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "治理框架",
+                  "AI 风险治理与管理流程"
+                ],
+                "evidence_type": "voluntary AI risk management framework",
+                "id": "pilot-review-nist-ai-rmf",
+                "limitation": "NIST1.0自愿框架，不是本职业法定流程、采用率、可靠性或成效实证。",
+                "market": "美国",
+                "name": "Artificial Intelligence Risk Management Framework 1.0（NIST AI 100-1）",
+                "period": "当前公开版本；本轮2026-10-09",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方工资分位页面（精确职业口径）",
+                  "年薪分位"
+                ],
+                "evidence_type": "official occupational wage statistics",
+                "id": "pilot-review-onet-localwages",
+                "limitation": "全国年工资五分位58850/84540/123220/190440/266620美元；未提供时薪，不推个人工资或起薪。",
+                "market": "美国",
+                "name": "O*NET 全国工资分位页面（53-2012.00，年薪分位，精确职业口径）",
+                "period": "2025工资",
+                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/53-2012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方工作情境字段",
+                  "工作情境百分比分布"
+                ],
+                "evidence_type": "official source",
+                "id": "pilot-review-onet-17-3021",
+                "limitation": "本职业25任务19Core/5Supplemental/1New；教育三档部分岗位未给比例，JobZone3；兴趣C64R63E49I26S26A2，21工作风格有Impact、情境为受访分布，不授个人资格。",
+                "market": "美国",
+                "name": "O*NET-SOC 53-2012.00 工作情境（Work Context 字段）",
+                "period": "当前公开版本；本轮2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-2012.00#WorkContext"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方方法说明",
+                  "工资统计覆盖范围与折算口径"
+                ],
+                "evidence_type": "official statistical methods",
+                "id": "pilot-review-bls-oews-methods",
+                "limitation": "OEWS受雇全兼职工资范围；排除自雇及未法人化业主合伙人，法人公司受薪高管可覆盖；航空飞行员只给年工资，不按2080自行推时薪。",
+                "market": "美国",
+                "name": "BLS Occupational Employment and Wage Statistics 方法说明（Handbook of Methods）",
+                "period": "当前公开版本；本轮2026-10-09",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读取表1.2 headers及SOC53-2012行"
+                ],
+                "evidence_type": "official employment projections",
+                "id": "pilot-review-bls-projections",
+                "limitation": "BLS表1.2（SOC53-2012，2025—2035）就业约50,400→53,000人、净增约2,600人、增长5.2%、年均职位空缺约5,200个，2025自雇占2.0%。OOH商业飞行员增长5%为同预测四舍五入；O*NET显示Faster than average（5%—6%）。空缺含增长及更替，不等净增、招聘或录用保证，也不是AI因果研究。",
+                "market": "美国",
+                "name": "BLS Occupational Projections and Characteristics",
+                "period": "2025—2035预测",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "官方工作情境字段",
+                  "工作情境百分比分布"
+                ],
+                "evidence_type": "official source",
+                "id": "pilot-review-onet-context",
+                "limitation": "本职业25任务19Core/5Supplemental/1New；教育三档部分岗位未给比例，JobZone3；兴趣C64R63E49I26S26A2，21工作风格有Impact、情境为受访分布，不授个人资格。",
+                "market": "美国",
+                "name": "O*NET-SOC 53-2012.00 工作情境（Work Context 字段）",
+                "period": "当前公开版本；本轮2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-2012.00#WorkContext"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际阅读本节适用条文"
+                ],
+                "evidence_type": "official regulation",
+                "id": "pilot-review-far-61-123",
+                "limitation": "商业飞行员证书条件，类别等级经验及私人或61.73路径；不替运行许可；不能直接作为中国资格要求或完整运行程序。",
+                "market": "美国",
+                "name": "eCFR14CFR61.123",
+                "period": "Title14截至2026-10-07，最后修订2026-09-29",
+                "publisher": "FAA / Office of the Federal Register",
+                "scope": "contextual",
+                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-D/part-61/subpart-F/section-61.123"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际阅读本节适用条文"
+                ],
+                "evidence_type": "official regulation",
+                "id": "pilot-review-far-61-133",
+                "limitation": "商业权限受适用运行规则；特定类别仪表限制及轻于空气教学例外，不推全部类别同条件；不能直接作为中国资格要求或完整运行程序。",
+                "market": "美国",
+                "name": "eCFR14CFR61.133",
+                "period": "Title14截至2026-10-07，最后修订2026-09-29",
+                "publisher": "FAA / Office of the Federal Register",
+                "scope": "contextual",
+                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-D/part-61/subpart-F/section-61.133"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际阅读本节适用条文"
+                ],
+                "evidence_type": "official regulation",
+                "id": "pilot-review-far-91-3",
+                "limitation": "机长对运行直接负责并最终决定；飞行中需即时行动紧急情形可在所需程度内偏离Part91；不能直接作为中国资格要求或完整运行程序。",
+                "market": "美国",
+                "name": "eCFR14CFR91.3",
+                "period": "Title14截至2026-10-07，最后修订2026-09-29",
+                "publisher": "FAA / Office of the Federal Register",
+                "scope": "contextual",
+                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-91/subpart-A/section-91.3"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际阅读本节适用条文"
+                ],
+                "evidence_type": "official regulation",
+                "id": "pilot-review-far-91-7",
+                "limitation": "适航及机长安全飞行判断；不提供具体故障处置动作；不能直接作为中国资格要求或完整运行程序。",
+                "market": "美国",
+                "name": "eCFR14CFR91.7",
+                "period": "Title14截至2026-10-07，最后修订2026-09-29",
+                "publisher": "FAA / Office of the Federal Register",
+                "scope": "contextual",
+                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-91/subpart-A/section-91.7"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际阅读本节适用条文"
+                ],
+                "evidence_type": "official regulation",
+                "id": "pilot-review-far-91-213",
+                "limitation": "故障设备MEL授权及条件，特定航空器无批准MEL有条件路径；不授任意放行；不能直接作为中国资格要求或完整运行程序。",
+                "market": "美国",
+                "name": "eCFR14CFR91.213",
+                "period": "Title14截至2026-10-07，最后修订2026-09-29",
+                "publisher": "FAA / Office of the Federal Register",
+                "scope": "contextual",
+                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-91/subpart-C/section-91.213"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际阅读本节适用条文"
+                ],
+                "evidence_type": "official regulation",
+                "id": "pilot-review-far-61-23",
+                "limitation": "体检要求按权限/航空器及例外，时间类别不同；不统一全部商业人员；不能直接作为中国资格要求或完整运行程序。",
+                "market": "美国",
+                "name": "eCFR14CFR61.23",
+                "period": "Title14截至2026-10-07，最后修订2026-09-29",
+                "publisher": "FAA / Office of the Federal Register",
+                "scope": "contextual",
+                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-D/part-61/subpart-A/section-61.23"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际阅读本节适用条文"
+                ],
+                "evidence_type": "official regulation",
+                "id": "pilot-review-far-61-193",
+                "limitation": "教员证书和等级限制内训练特定检查及认可，不替运营资质；不能直接作为中国资格要求或完整运行程序。",
+                "market": "美国",
+                "name": "eCFR14CFR61.193",
+                "period": "Title14截至2026-10-07，最后修订2026-09-29",
+                "publisher": "FAA / Office of the Federal Register",
+                "scope": "contextual",
+                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-D/part-61/subpart-H/section-61.193"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际阅读本节适用条文"
+                ],
+                "evidence_type": "official regulation",
+                "id": "pilot-review-far-107-1",
+                "limitation": "Part107民用小型UAS适用及例外；不由大型无人机新增任务自动适用；不能直接作为中国资格要求或完整运行程序。",
+                "market": "美国",
+                "name": "eCFR14CFR107.1",
+                "period": "Title14截至2026-10-07，最后修订2026-09-29",
+                "publisher": "FAA / Office of the Federal Register",
+                "scope": "contextual",
+                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107/subpart-A/section-107.1"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际读商业任务、教育、行业五工资中位及预测表"
+                ],
+                "evidence_type": "official occupational outlook and wage statistics",
+                "id": "pilot-review-bls-ooh",
+                "limitation": "商业工资123220及行业133150/129610/123090/100330/93820；航线飞行员232140及合并16400空缺/7%增长不得并入商业。",
+                "market": "美国",
+                "name": "BLSOOH Airline and Commercial Pilots（分别读取商业数据）",
+                "period": "工资2025／预测2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/transportation-and-material-moving/airline-and-commercial-pilots.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际阅读职业定义"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "pilot-review-neighbor-0",
+                "limitation": "支持主要对象；不证明统一转岗距离、全部岗位权限或资格互认。",
+                "market": "美国",
+                "name": "O*NET相邻定义 53-2011.00",
+                "period": "Updated2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/53-2011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际阅读职业定义"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "pilot-review-neighbor-1",
+                "limitation": "支持主要对象；不证明统一转岗距离、全部岗位权限或资格互认。",
+                "market": "美国",
+                "name": "O*NET相邻定义 53-2021.00",
+                "period": "Updated2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/53-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际阅读职业定义"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "pilot-review-neighbor-2",
+                "limitation": "支持主要对象；不证明统一转岗距离、全部岗位权限或资格互认。",
+                "market": "美国",
+                "name": "O*NET相邻定义 49-3011.00",
+                "period": "Updated2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/49-3011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际阅读职业定义"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "pilot-review-neighbor-3",
+                "limitation": "支持主要对象；不证明统一转岗距离、全部岗位权限或资格互认。",
+                "market": "美国",
+                "name": "O*NET相邻定义 49-2091.00",
+                "period": "Updated2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/49-2091.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际阅读职业定义"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "pilot-review-neighbor-4",
+                "limitation": "支持主要对象；不证明统一转岗距离、全部岗位权限或资格互认。",
+                "market": "美国",
+                "name": "O*NET相邻定义 53-2022.00",
+                "period": "Updated2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/53-2022.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际阅读职业定义"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "pilot-review-neighbor-5",
+                "limitation": "支持主要对象；不证明统一转岗距离、全部岗位权限或资格互认。",
+                "market": "美国",
+                "name": "O*NET相邻定义 53-2031.00",
+                "period": "Updated2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/53-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际阅读职业定义"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "pilot-review-neighbor-6",
+                "limitation": "支持主要对象；不证明统一转岗距离、全部岗位权限或资格互认。",
+                "market": "美国",
+                "name": "O*NET相邻定义 19-4099.03",
+                "period": "Updated2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/19-4099.03"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际阅读职业定义"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "pilot-review-neighbor-7",
+                "limitation": "支持主要对象；不证明统一转岗距离、全部岗位权限或资格互认。",
+                "market": "美国",
+                "name": "O*NET相邻定义 53-5021.00",
+                "period": "Updated2026",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/53-5021.00"
               }
             ]
           },
@@ -32671,7 +33628,7 @@
               "entry": "link-16",
               "field": "url"
             },
-            "问题": "到 2034 年这个职业会变少吗？"
+            "问题": "到 2035 年这个职业会变少吗？"
           },
           {
             "回答": {
@@ -32784,7 +33741,7 @@
             }
           },
           {
-            "步骤": "机长决策与放行责任",
+            "步骤": "各岗位权限与运行责任",
             "说明": {
               "$item": "commercial-pilots.ai-impact.ai-impact-table.83",
               "block": "ai-impact",
@@ -33255,6 +34212,78 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$link": "commercial-pilots.path.career-path-block.10",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "repair-61.123",
+              "field": "url"
+            },
+            "id": "repair-61.123",
+            "label": "14CFR61.123",
+            "scope": "美国对应条款；按航空器、角色及运行类别核"
+          },
+          {
+            "href": {
+              "$link": "commercial-pilots.path.career-path-block.10",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "repair-61.133",
+              "field": "url"
+            },
+            "id": "repair-61.133",
+            "label": "14CFR61.133",
+            "scope": "美国对应条款；按航空器、角色及运行类别核"
+          },
+          {
+            "href": {
+              "$link": "commercial-pilots.path.career-path-block.10",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "repair-61.23",
+              "field": "url"
+            },
+            "id": "repair-61.23",
+            "label": "14CFR61.23",
+            "scope": "美国对应条款；按航空器、角色及运行类别核"
+          },
+          {
+            "href": {
+              "$link": "commercial-pilots.path.career-path-block.10",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "repair-91.3",
+              "field": "url"
+            },
+            "id": "repair-91.3",
+            "label": "14CFR91.3",
+            "scope": "美国对应条款；按航空器、角色及运行类别核"
+          },
+          {
+            "href": {
+              "$link": "commercial-pilots.path.career-path-block.10",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "repair-91.7",
+              "field": "url"
+            },
+            "id": "repair-91.7",
+            "label": "14CFR91.7",
+            "scope": "美国对应条款；按航空器、角色及运行类别核"
+          },
+          {
+            "href": {
+              "$link": "commercial-pilots.path.career-path-block.10",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "repair-91.213",
+              "field": "url"
+            },
+            "id": "repair-91.213",
+            "label": "14CFR91.213",
+            "scope": "美国对应条款；按航空器、角色及运行类别核"
           }
         ],
         "tracks": [
@@ -34015,8 +35044,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details",
-              "faa-pilots"
+              "pilot-review-onet-details",
+              "pilot-review-far-91-213"
             ],
             "id": "aircraft-airworthiness",
             "mitigation": {
@@ -34031,7 +35060,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "航空器状态与最低设备清单未核对"
+            "title": "航空器状态与适用故障设备条件未核对"
           },
           {
             "affected_roles": {
@@ -34047,7 +35076,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details",
+              "pilot-review-onet-details",
               "faa-pilots"
             ],
             "id": "performance-fuel-planning",
@@ -34079,8 +35108,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-context",
-              "faa-pilots"
+              "pilot-review-onet-context",
+              "pilot-review-far-91-3"
             ],
             "id": "weather-airspace-judgment",
             "mitigation": {
@@ -34111,7 +35140,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-context",
+              "pilot-review-onet-context",
               "faa-pilots"
             ],
             "id": "fatigue-duty-limits",
@@ -34143,8 +35172,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details",
-              "onet-context"
+              "pilot-review-onet-details",
+              "pilot-review-far-91-3"
             ],
             "id": "clearance-communication",
             "mitigation": {
@@ -34175,8 +35204,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet-details",
-              "onet-context"
+              "pilot-review-onet-details",
+              "pilot-review-onet-context"
             ],
             "id": "record-handover",
             "mitigation": {
@@ -34662,10 +35691,10 @@
             "type": "prose"
           },
           "fact_refs": [
-            "cn-industry-science-tech-2024",
-            "cn-industry-manufacturing-2024",
-            "cn-professional-technical-2024",
-            "cn-urban-nonprivate-2024"
+            "pilot-review-cn-industry-science-tech-2024",
+            "pilot-review-cn-industry-manufacturing-2024",
+            "pilot-review-cn-professional-technical-2024",
+            "pilot-review-cn-urban-nonprivate-2024"
           ],
           "sources_note": {
             "$item": "commercial-pilots.china-salary.career-snapshot-primary-locale.57",
@@ -34801,7 +35830,7 @@
             }
           },
           {
-            "fact_ref": "us-growth-2025-2035",
+            "fact_ref": "pilot-review-us-growth-2025-2035",
             "指标": "就业 · 增长率",
             "数值": {
               "$item": "commercial-pilots.us-salary.career-snapshot-secondary-locale.21",
@@ -34817,7 +35846,7 @@
             }
           },
           {
-            "fact_ref": "us-openings-2025-2035",
+            "fact_ref": "pilot-review-us-openings-2025-2035",
             "指标": "就业 · 年均职位空缺",
             "数值": {
               "$item": "commercial-pilots.us-salary.career-snapshot-secondary-locale.23",
@@ -34904,7 +35933,7 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "pilot-review-us-industry-wage-aerospace-mfg-2025",
             "industry": {
               "$item": "commercial-pilots.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -34925,7 +35954,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "pilot-review-us-industry-wage-engineering-services-2025",
             "industry": {
               "$item": "commercial-pilots.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -34946,7 +35975,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "pilot-review-us-industry-wage-federal-2025",
             "industry": {
               "$item": "commercial-pilots.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -34967,7 +35996,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "pilot-review-us-industry-wage-rd-2025",
             "industry": {
               "$item": "commercial-pilots.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -35036,7 +36065,7 @@
         },
         "outlook_heading": "美国就业前景",
         "outlook_period": {
-          "$fact": "us-growth-2025-2035",
+          "$fact": "pilot-review-us-growth-2025-2035",
           "field": "period"
         },
         "wage_column_labels": [
@@ -35048,7 +36077,7 @@
         "wage_heading": "美国工资分布",
         "wage_tiers": [
           {
-            "equivalent": "官方折算，非个人月收入",
+            "equivalent": "官方年工资分位，非个人月收入",
             "interpretation": {
               "$item": "commercial-pilots.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
@@ -35062,7 +36091,7 @@
             }
           },
           {
-            "equivalent": "非个人月收入",
+            "equivalent": "官方年工资分位，非个人月收入",
             "interpretation": {
               "$item": "commercial-pilots.us-salary.career-snapshot-secondary-locale.52",
               "block": "us-salary",
@@ -35076,7 +36105,7 @@
             }
           },
           {
-            "equivalent": "官方折算，非个人实发工资",
+            "equivalent": "官方年工资分位，非个人月收入",
             "interpretation": {
               "$item": "commercial-pilots.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
@@ -35677,7 +36706,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 页面显示的 BLS 工资（2025 年）与就业预测（2024—2034 年，53-2012.00 精确职业口径）",
+            "label": "O*NET 页面显示的 BLS 工资（2025 年）与就业预测（2025—2035 年，53-2012.00 精确职业口径）",
             "secondary_value": null,
             "value": {
               "$item": "commercial-pilots.profile.onet-structured-fields-block.2",
@@ -36987,6 +38016,162 @@
         "source_refs": [
           "onet-localwages"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约50,400人（2025）",
+        "fact_id": "pilot-review-us-employment-2025",
+        "market": "美国",
+        "measure": "2025就业规模",
+        "occupation_scope": "商业飞行员",
+        "period": "2025—2035预测",
+        "source_refs": [
+          "pilot-review-bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约53,000人（2035预计）",
+        "fact_id": "pilot-review-us-employment-2035",
+        "market": "美国",
+        "measure": "2035预测就业规模",
+        "occupation_scope": "商业飞行员",
+        "period": "2025—2035预测",
+        "source_refs": [
+          "pilot-review-bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "增长5.2%（2025—2035）",
+        "fact_id": "pilot-review-us-growth-2025-2035",
+        "market": "美国",
+        "measure": "就业预测变化率",
+        "occupation_scope": "商业飞行员",
+        "period": "2025—2035预测",
+        "source_refs": [
+          "pilot-review-bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "净增约2,600人（2025—2035）",
+        "fact_id": "pilot-review-us-change-2025-2035",
+        "market": "美国",
+        "measure": "预测净变化，与空缺不同",
+        "occupation_scope": "商业飞行员",
+        "period": "2025—2035预测",
+        "source_refs": [
+          "pilot-review-bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均约5,200个职位空缺（2025—2035）",
+        "fact_id": "pilot-review-us-openings-2025-2035",
+        "market": "美国",
+        "measure": "预测年均空缺，含增长和更替",
+        "occupation_scope": "商业飞行员",
+        "period": "2025—2035预测",
+        "source_refs": [
+          "pilot-review-bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "133,981元/人/年（2025非私营交通运输仓储邮政行业税前年平均）",
+        "fact_id": "pilot-review-cn-industry-science-tech-2024",
+        "market": "中国大陆",
+        "measure": "行业均值背景，非职业工资",
+        "occupation_scope": "商业飞行员",
+        "period": "2025数据（NBS2026-05-15发布）",
+        "source_refs": [
+          "pilot-review-nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：本轮未建立中国本职业精确工资映射",
+        "fact_id": "pilot-review-cn-industry-manufacturing-2024",
+        "market": "中国大陆",
+        "measure": "职业映射缺口",
+        "occupation_scope": "商业飞行员",
+        "period": "2025数据（NBS2026-05-15发布）",
+        "source_refs": [
+          "pilot-review-nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "城镇5人及以上法人单位就业人员工资口径；项目制名称不自动排除",
+        "fact_id": "pilot-review-cn-professional-technical-2024",
+        "market": "中国大陆",
+        "measure": "统计覆盖定义，非职业薪酬结构",
+        "occupation_scope": "商业飞行员",
+        "period": "2025数据（NBS2026-05-15发布）",
+        "source_refs": [
+          "pilot-review-nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "73,133元/人/年（2025私营交通运输仓储邮政行业税前年平均）",
+        "fact_id": "pilot-review-cn-urban-nonprivate-2024",
+        "market": "中国大陆",
+        "measure": "行业均值背景，非职业工资",
+        "occupation_scope": "商业飞行员",
+        "period": "2025数据（NBS2026-05-15发布）",
+        "source_refs": [
+          "pilot-review-nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "133,150美元/年（2025非定期航空运输，本职业中位数）",
+        "fact_id": "pilot-review-us-industry-wage-aerospace-mfg-2025",
+        "market": "美国",
+        "measure": "行业内本职业年工资中位",
+        "occupation_scope": "商业飞行员",
+        "period": "2025工资",
+        "source_refs": [
+          "pilot-review-bls-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "129,610美元/年（2025专业科学技术服务，本职业中位数）",
+        "fact_id": "pilot-review-us-industry-wage-engineering-services-2025",
+        "market": "美国",
+        "measure": "行业内本职业年工资中位",
+        "occupation_scope": "商业飞行员",
+        "period": "2025工资",
+        "source_refs": [
+          "pilot-review-bls-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "123,090美元/年（2025航空运输支持活动，本职业中位数）",
+        "fact_id": "pilot-review-us-industry-wage-federal-2025",
+        "market": "美国",
+        "measure": "行业内本职业年工资中位",
+        "occupation_scope": "商业飞行员",
+        "period": "2025工资",
+        "source_refs": [
+          "pilot-review-bls-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "100,330美元/年（2025其他门诊医疗服务，本职业中位数）",
+        "fact_id": "pilot-review-us-industry-wage-rd-2025",
+        "market": "美国",
+        "measure": "行业内本职业年工资中位",
+        "occupation_scope": "商业飞行员",
+        "period": "2025工资",
+        "source_refs": [
+          "pilot-review-bls-ooh"
+        ]
       }
     ]
   },
@@ -36995,7 +38180,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "RIASEC · CRE",
@@ -37046,7 +38231,7 @@
       "text": "商业飞行员"
     }
   },
-  "source_content_sha256": "cd84729f2fd2f1fae29a1dd239c4791048a0eae2605bc1f378c85a1c5927585e",
+  "source_content_sha256": "7e76d27c458612375439e0cf1b8b3a2ddbc6c532edf0887ac31dd5bdd30bddcf",
   "subject": {
     "canonical_slug": "commercial-pilots",
     "name": "商业飞行员",

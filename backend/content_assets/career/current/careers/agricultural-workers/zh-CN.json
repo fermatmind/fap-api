@@ -9150,18 +9150,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.04.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            3,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.04.mitigation": {
         "ref": {
@@ -23520,7 +23510,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS手册合集2025年5月年薪中位35,890美元、时薪17.25美元；2025—2035年下降约2%，年均111,500空缺来自替代需求。多数岗位无需正式学历凭证，但动物育种员典型要求高中；设备操作训练可能更长。BLS同期间细分：设备+8.6%、作物−2.4%、动物−3.2%、其他+3.8%、育种+3.0%；不能用O*NET旧2024—2034摘要替换这些指标。"
+              "BLS手册合集2025年5月年薪中位35,890美元、时薪17.25美元；2025—2035年下降约2%，年均111,500空缺来自替代需求。多数岗位无需正式学历凭证，但动物育种员典型要求高中；设备操作训练可能更长。BLS同期间细分：设备+8.6%、作物−2.4%、动物−3.2%、其他+3.8%、育种+3.0%；合集与各细分范围分别使用，不拼接其他统计期。"
             ]
           },
           "id": "agricultural-workers.profile.onet-structured-fields-block.2",
@@ -23846,10 +23836,9 @@
           },
           "id": "agricultural-workers.profile.career-quick-answers-block.19",
           "source_refs": [
-            "bls",
-            "onet",
-            "nist",
-            "facilities"
+            "cn-driver",
+            "cn-pesticide",
+            "bls"
           ],
           "type": "prose"
         },
@@ -24969,7 +24958,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET45-2092：2024年行业分布"
+              "O*NET45-2092：2025年行业分布"
             ]
           },
           "id": "agricultural-workers.ai-impact.ai-impact-table.29",
@@ -25099,7 +25088,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑可能场景（不是已验证采用或效果）：辅助驾驶与作业监控可减少重复驾驶并提示漏作业。"
+              "编辑待验证场景：比较辅助驾驶提示与作业记录，核是否漏作业；本页未取得减少驾驶时间或提高覆盖率的本职效果证据。"
             ]
           },
           "id": "agricultural-workers.ai-impact.ai-impact-table.38",
@@ -25427,7 +25416,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "45-2092 中约 79% 就业集中在农业、林业、渔业与狩猎行业，其余约 21% 属其他行业；45-2091 中约 70% 集中在同一行业。比例为就业分布，不等于招聘增长率。"
+              "O*NET2025行业分布：45-2092农作物细分79%在农林牧渔和狩猎行业、其他21%；45-2091机具细分该行业72%、批发贸易13%、其他15%。分别为细分职业就业分布，不等于工资或招聘增长率。"
             ]
           },
           "id": "agricultural-workers.ai-impact.ai-impact-table.60",
@@ -25476,7 +25465,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本合集AI采用率、替代比例或工资因果估计。BLS五类合集预计2025—2035年约下降2%，年均111,500空缺；原文讨论机械化和生产率，不能把预测识别为AI因果效应，也不能断言AI与就业变化完全无关。自动记录和设备提示只是任务讨论，现场结果仍须核。"
+              "证据不足：未取得本合集AI采用率、替代比例或工资因果估计。BLS五类合集2025—2035总体就业预测，非AI归因：约下降2%，年均111,500个替代空缺；机械化讨论不能直接识别AI因果效应。"
             ]
           },
           "id": "agricultural-workers.ai-impact.ai-impact-table.63",
@@ -26259,7 +26248,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑可能场景（不是已验证采用或效果）：辅助驾驶与作业监控可减少重复驾驶，但故障判断与安全复核仍需人工。"
+              "编辑待验证场景：核辅助驾驶、作业监控提示与实际记录；未取得减少重复驾驶的本职效果证据。"
             ]
           },
           "id": "agricultural-workers.ai-impact.ai-impact-table.113",
@@ -26505,7 +26494,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本职业最贴近的行业门类代理，但覆盖大量非生产岗位，不能当成农业从业人员中位数。"
+              "2025年中国城镇非私营农林牧渔业年平均工资，生产任务与该行业相关，但统计覆盖各岗位且限城镇法人单位；非农业从业人员中位数，未证明是最贴近的工资代理。"
             ]
           },
           "id": "agricultural-workers.china-salary.career-snapshot-primary-locale.12",
@@ -26645,7 +26634,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按岗位类别统计，用于对照行政事务类岗位的收入水平。"
+              "2025年中国规模以上企业办事人员和有关人员年平均工资；宽岗位类别背景，不能当农业作业或高校行政岗工资。"
             ]
           },
           "id": "agricultural-workers.china-salary.career-snapshot-primary-locale.22",
@@ -27566,7 +27555,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该行业本职业工资中位数；该行业占 45-2092 就业约 79%、45-2091 约 70%（O*NET 行业分布 2024）。"
+              "证据不足：未取得该行业本职业工资中位数；O*NET2025就业分布中农林牧渔和狩猎占45-2092约79%、45-2091约72%。行业份额不提供行业工资。"
             ]
           },
           "id": "agricultural-workers.us-salary.career-snapshot-secondary-locale.35",
@@ -27656,7 +27645,7 @@
           },
           "id": "agricultural-workers.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28103,7 +28092,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣代码是可核对的起点：先用一周小任务体验田间体力作业、动物饲养与机具操作的真实感受，再判断自己是否愿意长期做这类需要体力耐受与按规记录的工作；测评结果不保证录用，也不能预测工作表现。"
+              "兴趣代码只作任务阅读起点；先完成AW27-V1纸面核数与记录，比较过程兴趣。真实田间、动物或设备体验另需合法带教、训练及安全条件，一周纸面练习不证明操作耐受。"
             ]
           },
           "id": "agricultural-workers.fit.riasec-fit-block.9",
@@ -28119,7 +28108,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业匹配工具，也没有证据支持“某种类型最适合农业从业人员”；本页只用它作为自我观察的语言，不作为选职业的依据。"
+              "证据不足：本页未取得农业从业人员MBTI筛选效度或类型优势研究。可描述个人偏好，不能据此判断胜任或指定最适类型。"
             ]
           },
           "id": "agricultural-workers.fit.personality-fit-block.10",
@@ -28726,7 +28715,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有。MBTI 不是职业匹配工具，也没有证据支持某一类型最适合这个职业。"
+              "证据不足：本页未取得农业从业人员MBTI职业匹配效度或类型排名；本页不据类型作录用或个人适合判断。"
             ]
           },
           "id": "agricultural-workers.fit.personality-fit-block.49",
@@ -28770,7 +28759,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "数学不是固定门槛，但核对数量与填写记录是日常工作；可以在作业中逐步建立。"
+              "证据不足：未取得本职业统一数学成绩门槛。编辑建议先练AW27-V1数量、单位和记录，实际计算要求与训练另查岗位。"
             ]
           },
           "id": "agricultural-workers.fit.personality-fit-block.52",
@@ -29521,12 +29510,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本页编辑归纳（条件性建议），不代表用人单位统一流程或强制要求。"
+              "BLS美国五类合集的作业、工作环境、培训和总体就业预测；控制措施为编辑建议，不是统一安全规程或中国法律。"
             ]
           },
           "id": "agricultural-workers.risk.career-risk-cards.38",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -29567,7 +29556,7 @@
             "column_labels": [
               "入门方向",
               "初期任务",
-              "雇主认可能力的凭证",
+              "编辑建议：可核对的能力证据",
               "无经验可出示的证据",
               "与相邻岗位的区别"
             ],
@@ -29577,7 +29566,7 @@
                 "在带教下完成除草、浇水、采收与分拣包装等基础作业。",
                 "能在监督下按规格完成采收与分拣并如实记录数量。",
                 "模拟或自有地块的采收与分拣记录（数量、规格、异常）。",
-                "比农业技术员不承担采样与检测；比农场主不负责方案与经营。"
+                "本方向以种植、养护、采收、分拣及作业记录为对象；农业技术员也可能参与田间作业、采样和测试。本职还可参与作业商议、指导与维护，具体职责按岗位及训练核，不由职业名统一排除。"
               ],
               [
                 "动物饲养（45-2093）",
@@ -29591,21 +29580,21 @@
                 "在带教下完成机具辅助、田间搬运与清洁保养。",
                 "能按清单完成班前检查与基础保养记录。",
                 "机具班前检查清单与作业参数记录。",
-                "比农业操作员以外的岗位更强调机具与安全；不承担工程与设计。"
+                "本方向操作农业机具，保留班前检查、参数与维护记录；工程设计和专业检修的分工依实际岗位与训练，不能从名称推所有机具岗位均不参与相关工作。"
               ],
               [
                 "记录与结算依据",
                 "填写作业数量、时间与异常并按班组交接。",
                 "记录可追溯到地块、圈舍与班次，异常单独标注。",
                 "含时间、数量与异常说明的班组记录。",
-                "比仓储与物流记录更强调田间与养殖现场条件。"
+                "本方向记录地块、圈舍和班次的数量、时间及异常；仓储物流也有记录与追溯任务。按对象与用途比较，不排序谁更重视现场条件。"
               ],
               [
                 "安全与防护",
                 "按规程穿戴防护装备，识别并上报现场风险点。",
                 "能说出高温低温、化学品与动物接触的防护与应急步骤。",
                 "一份含风险点与处置步骤的作业安全清单。",
-                "比管理岗不承担安全制度设计；比专业维修不拆装设备。"
+                "本方向识别作业风险并按规程处理、报告，O*NET任务也含维护和维修。可维修范围、安全制度和操作权限须核训练及实际职责，不由职业名统一排除。"
               ]
             ]
           },
@@ -29958,7 +29947,7 @@
               [
                 "相关专业学历",
                 "机具与技术辅助岗位",
-                "影响可承担方向与岗位层级，部分岗位要求",
+                "编辑核对建议：查目标招聘是否要求特定学历及岗位职责，未取得本职学历门槛样本",
                 "不同雇主差异较大",
                 "按招聘与用人单位规定",
                 "按学历教育周期",
@@ -29967,10 +29956,10 @@
               [
                 "养殖或农场管理软件技能",
                 "需要记录与管理的岗位",
-                "用于证明能规范记录与整理数据，通常是加分项",
+                "编辑核对建议：用记录整理样例说明工具操作，是否要求或加分须查具体招聘",
                 "不是准入资格",
                 "按用人单位系统与数据规范",
-                "短期学习",
+                "按实际培训内容核学习投入，不估统一周期",
                 "工具操作不等于记录真实或管理合规"
               ]
             ]
@@ -30308,7 +30297,7 @@
           },
           "id": "agricultural-workers.path.career-path-block.25",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -30336,7 +30325,7 @@
           },
           "id": "agricultural-workers.path.career-path-block.27",
           "source_refs": [
-            "onet"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30564,7 +30553,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑岗位示例，非统一门槛：通常要求多年经验与带班能力；非统一职级。"
+              "编辑能力观察：核相关任务记录、带教或协调经历；本页未取得统一经验年限、技能等级或晋升门槛，实际条件查目标岗位。"
             ]
           },
           "id": "agricultural-workers.path.career-path-block.43",
@@ -30856,7 +30845,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑岗位示例，非统一门槛：通常要求多年经验与带班能力；非统一职级。"
+              "编辑能力观察：核相关任务记录、带教或协调经历；本页未取得统一经验年限、技能等级或晋升门槛，实际条件查目标岗位。"
             ]
           },
           "id": "agricultural-workers.path.career-path-block.63",
@@ -31074,7 +31063,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑岗位示例，非统一门槛：具多年操作经验；技能等级条件另核。"
+              "编辑能力观察：核相关任务记录、带教或协调经历；本页未取得统一经验年限、技能等级或晋升门槛，实际条件查目标岗位。"
             ]
           },
           "id": "agricultural-workers.path.career-path-block.78",
@@ -31147,7 +31136,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "编辑岗位示例，非统一门槛：通常要求丰富经验与管理能力；非统一职级。"
+              "编辑能力观察：核相关任务记录、带教或协调经历；本页未取得统一经验年限、技能等级或晋升门槛，实际条件查目标岗位。"
             ]
           },
           "id": "agricultural-workers.path.career-path-block.83",
@@ -31671,7 +31660,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET三个重点细分页面用于任务、工作情境和软件示例；页面仍展示2024—2034旧预测。当前就业指标另用BLS2025—2035，不从“7%或以上”读成精确+7%。"
+              "O*NET三个重点细分页面用于任务、工作情境、软件示例及各自2025基年/2025—2035预测。就业指标采用BLS同期间细分与合集，不能把增长类别下界读成精确增长值。"
             ]
           },
           "id": "agricultural-workers.market-signals.market-signal-card.31",
@@ -31730,7 +31719,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "机具操作与田间作业经验可以直接迁移。"
+              "机具操作与田间作业有相邻任务重叠；拟转岗位需重新核设备训练、准驾资格与雇主要求，不保证现有经验可直接获得录用或操作授权。"
             ]
           },
           "id": "agricultural-workers.market-signals.market-signal-card.35",
@@ -31744,7 +31733,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近：训练及许可"
+              "编辑核对：目标设备训练与许可"
             ]
           },
           "id": "agricultural-workers.market-signals.market-signal-card.36",
@@ -31828,7 +31817,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近：核照料流程"
+              "编辑核对：目标动物照护流程与训练"
             ]
           },
           "id": "agricultural-workers.market-signals.market-signal-card.42",
@@ -31870,7 +31859,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远：补专业教育"
+              "编辑核对：专业教育及法定执业要求"
             ]
           },
           "id": "agricultural-workers.market-signals.market-signal-card.45",
@@ -31912,7 +31901,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等：补经营能力"
+              "编辑核对：经营、人员与资源管理要求"
             ]
           },
           "id": "agricultural-workers.market-signals.market-signal-card.48",
@@ -31954,7 +31943,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等：补法规知识"
+              "编辑核对：法规知识及实际检查权限"
             ]
           },
           "id": "agricultural-workers.market-signals.market-signal-card.51",
@@ -31996,7 +31985,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近：核带班条件"
+              "编辑核对：带班经验与岗位职责"
             ]
           },
           "id": "agricultural-workers.market-signals.market-signal-card.54",
@@ -32187,7 +32176,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "美国指标采用BLS手册五类合集及同期间详细SOC，45-2090四类小组另分；O*NET旧预测不替代当前2025—2035。中国行业平均、招聘门槛、技能等级和行政许可分开，本页不能保证待遇、资格或个人适配。"
+              "美国指标采用BLS手册五类合集及同期间详细SOC，45-2090四类小组另分；O*NET各细分用于任务与当前期背景，不替代合集范围。中国行业平均、招聘门槛、技能等级和行政许可分开，本页不能保证待遇、资格或个人适配。"
             ]
           },
           "id": "agricultural-workers.sources.source-card.4",
@@ -32276,14 +32265,14 @@
                   "O*NET OnLine 45-2092.00 农作物与苗圃温室劳务工职业摘要",
                   "用于该细分的职业身份、任务、工作情境、教育要求与 BLS 展示的工资与预测；美国单一职业口径。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet",
-                "limitation": "用于该细分的职业身份、任务、工作情境、教育要求与 BLS 展示的工资与预测；美国单一职业口径。",
+                "limitation": "仅标题所列细分职业或资料主题，不能代五类合集全部人员；用于该细分的职业身份、任务、工作情境、教育要求与 BLS 展示的工资与预测；美国单一职业口径。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2092.00 农作物与苗圃温室劳务工职业摘要",
                 "period": "现行公开资料；访问2026-10-02",
                 "publisher": "O*NET OnLine",
-                "scope": "O*NET OnLine 45-2092.00 农作物与苗圃温室劳务工职业摘要｜具体职业及所列资料范围",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/45-2092.00"
               },
               {
@@ -32292,14 +32281,14 @@
                   "2025年831,900个岗位；2025—2035年约−2%、年均111,500替代空缺。",
                   "2025年5月工资中位35,890、最低10%低于31,270、最高10%高于47,880；批发业合集工资中位37,800美元。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "bls",
                 "limitation": "工资OEWS覆盖排自雇及作物/动物生产等未调查行业，EP就业覆盖另核；合集五类不能只含三个细分，不能赋SOC45-2090。",
                 "market": "美国",
                 "name": "BLS职业展望手册：Agricultural Workers五类合集",
                 "period": "2025年5月工资；2025—2035年预测",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "BLS手册五类合集｜45-2091/2092/2093/2099及45-2021，非45-2090",
+                "scope": "officially_combined",
                 "url": "https://www.bls.gov/ooh/farming-fishing-and-forestry/agricultural-workers.htm"
               },
               {
@@ -32308,14 +32297,14 @@
                   "45-2090四类小组825,000个岗位，不含45-2021育种；不同于OOH五类合集831,900。",
                   "详细行45-2091/2092/2093预测8.6%/−2.4%/−3.2%，同为2025—2035；工资来自OEWS，覆盖与EP就业不同。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "ep",
-                "limitation": "就业含农业及自雇；预测不是个人录用保证，不能识别AI因果。OOH五类合集不是表内45-2090四类组。",
+                "limitation": "Table1.2四类组与各详细SOC分别使用；原有五类OOH合集范围不同。就业含农业及自雇；预测不是个人录用保证，不能识别AI因果。OOH五类合集不是表内45-2090四类组。",
                 "market": "美国",
                 "name": "BLS表1.2：职业预测与劳动者特征，2025—2035",
                 "period": "2025—2035年预测；2025年5月工资",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "BLS表1.2｜45-2090四类组与各详细SOC分别核",
+                "scope": "officially_combined",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
@@ -32324,14 +32313,14 @@
                   "O*NET 展示的 BLS OEWS 2025 年 5 月工资分位：45-2092",
                   "用于最大细分的工资分位与时薪中位数；单一职业口径。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "oews",
-                "limitation": "用于最大细分的工资分位与时薪中位数；单一职业口径。",
+                "limitation": "仅标题所列细分职业或资料主题，不能代五类合集全部人员；用于最大细分的工资分位与时薪中位数；单一职业口径。",
                 "market": "美国",
                 "name": "O*NET 展示的 BLS OEWS 2025 年 5 月工资分位：45-2092",
-                "period": "现行公开资料；访问2026-10-02",
+                "period": "2025年5月全国工资",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
-                "scope": "O*NET 展示的 BLS OEWS 2025 年 5 月工资分位：45-2092｜具体职业及所列资料范围",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/45-2092.00"
               },
               {
@@ -32340,14 +32329,14 @@
                   "行业非私营/私营与规上岗位类别分开：农林牧渔74424/46552；科研技术非私营182064；制造非私营113594。",
                   "规上专业技术155491、办事人员和有关人员94936为跨行业岗位类别，不是农业现场工人工资。"
                 ],
-                "evidence_type": "industry_proxy",
+                "evidence_type": "primary_document",
                 "id": "nbs",
                 "limitation": "不含个体工商户和自由职业；税前含个人代扣社保公积金个税，不是职业中位或个人实际收入。",
                 "market": "中国大陆",
                 "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
                 "period": "2025年工资统计；2026-05-15发布",
                 "publisher": "国家统计局",
-                "scope": "国家统计局2025年城镇单位工资｜城镇5人及以上法人单位税前年平均，非本职业工资",
+                "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
               },
               {
@@ -32356,14 +32345,14 @@
                   "政府公开PDF正文列第五大类及农业、林业、畜牧、渔业与生产辅助类别。",
                   "用于分类名称，不能单凭颁布通知或分类正文推技能评价条件、法定许可、招聘学历或工资。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cnclass",
                 "limitation": "类别和职业名称不等于标准条款、驾驶资格、技能等级申报条件或中美一对一码。",
                 "market": "中国大陆",
                 "name": "中国职业分类大典2022年版｜政府公开正文",
                 "period": "2022年版分类",
                 "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "中国大典第五大类｜农林牧渔生产及辅助人员，非中美一对一映射",
+                "scope": "parent",
                 "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
               },
               {
@@ -32372,14 +32361,14 @@
                   "O*NET OnLine 45-2092.00 工作情境（Work Context）",
                   "用于户外条件、体力操作与时间压力等受访比例。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "privacy",
-                "limitation": "用于户外条件、体力操作与时间压力等受访比例。",
+                "limitation": "仅标题所列细分职业或资料主题，不能代五类合集全部人员；用于户外条件、体力操作与时间压力等受访比例。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2092.00 工作情境（Work Context）",
                 "period": "现行公开资料；访问2026-10-02",
                 "publisher": "O*NET OnLine",
-                "scope": "O*NET OnLine 45-2092.00 工作情境（Work Context）｜具体职业及所列资料范围",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/45-2092.00"
               },
               {
@@ -32388,14 +32377,14 @@
                   "O*NET OnLine 45-2091.00 农业设备操作员职业摘要",
                   "用于机具操作细分的任务、工资与预测；单一职业口径。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "facilities",
-                "limitation": "用于机具操作细分的任务、工资与预测；单一职业口径。",
+                "limitation": "仅标题所列细分职业或资料主题，不能代五类合集全部人员；用于机具操作细分的任务、工资与预测；单一职业口径。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2091.00 农业设备操作员职业摘要",
                 "period": "现行公开资料；访问2026-10-02",
                 "publisher": "O*NET OnLine",
-                "scope": "O*NET OnLine 45-2091.00 农业设备操作员职业摘要｜具体职业及所列资料范围",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/45-2091.00"
               },
               {
@@ -32404,14 +32393,14 @@
                   "O*NET OnLine 45-2092.00 认证目录",
                   "用于可选认证信息，不构成本职业强制资格。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "operations",
-                "limitation": "用于可选认证信息，不构成本职业强制资格。",
+                "limitation": "仅标题所列细分职业或资料主题，不能代五类合集全部人员；用于可选认证信息，不构成本职业强制资格。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2092.00 认证目录",
                 "period": "现行公开资料；访问2026-10-02",
                 "publisher": "O*NET OnLine",
-                "scope": "O*NET OnLine 45-2092.00 认证目录｜具体职业及所列资料范围",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/45-2092.00"
               },
               {
@@ -32420,14 +32409,14 @@
                   "当前详细页确有培训、州别许可和认证入口。",
                   "本轮独立localtraining网页抓取失败；未核具体课程、价格或证书效力。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "hr",
-                "limitation": "只能作为导航，不能证明具体课程可用或中国技能等级；不称全目录已核。",
+                "limitation": "仅标题所列细分职业或资料主题，不能代五类合集全部人员；只能作为导航，不能证明具体课程可用或中国技能等级；不称全目录已核。",
                 "market": "美国",
                 "name": "O*NET45-2092：Job Zone与Training & Credentials入口",
                 "period": "现行公开资料；访问2026-10-02",
                 "publisher": "O*NET OnLine",
-                "scope": "O*NET作物细分｜准备等级与培训目录入口，非具体课程验证",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/45-2092.00"
               },
               {
@@ -32436,14 +32425,14 @@
                   "国家统计局《关于工资总额组成的规定》",
                   "用于解释工资总额为税前口径及其组成范围。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "health",
                 "limitation": "用于解释工资总额为税前口径及其组成范围。",
                 "market": "中国大陆",
                 "name": "国家统计局《关于工资总额组成的规定》",
                 "period": "现行公开资料；访问2026-10-02",
                 "publisher": "国家统计局",
-                "scope": "国家统计局《关于工资总额组成的规定》｜具体职业及所列资料范围",
+                "scope": "parent",
                 "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
               },
               {
@@ -32452,14 +32441,14 @@
                   "第2条劳动关系适用范围及第17条工作内容、地点、工时、报酬与劳动保护等合同条款。",
                   "不由季节工作名义判定所有主体劳动关系，也不保证个人争议结果。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "ilo",
                 "limitation": "用于合同信息核对，不替代个案劳动关系认定或当地争议程序。",
                 "market": "中国大陆",
                 "name": "中华人民共和国劳动合同法（2012修正）",
                 "period": "2012修正；访问2026-10-02",
                 "publisher": "国家市场监督管理总局公开法律全文",
-                "scope": "劳动合同法｜劳动关系适用范围及书面用工条款",
+                "scope": "parent",
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_0abfdd261c03417b949df19d869add8d.html"
               },
               {
@@ -32468,14 +32457,14 @@
                   "政府公开PDF正文列第五大类及农业、林业、畜牧、渔业与生产辅助类别。",
                   "用于分类名称，不能单凭颁布通知或分类正文推技能评价条件、法定许可、招聘学历或工资。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "editor",
                 "limitation": "类别和职业名称不等于标准条款、驾驶资格、技能等级申报条件或中美一对一码。",
                 "market": "中国大陆",
                 "name": "中国职业分类大典2022年版｜政府公开正文",
                 "period": "2022年版分类",
                 "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "中国大典第五大类｜农林牧渔生产及辅助人员，非中美一对一映射",
+                "scope": "parent",
                 "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
               },
               {
@@ -32484,30 +32473,30 @@
                   "O*NET OnLine 45-2093.00 动物饲养劳务工职业摘要",
                   "用于动物饲养细分的任务、工作情境、工资与预测；单一职业口径。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "nist",
-                "limitation": "用于动物饲养细分的任务、工作情境、工资与预测；单一职业口径。",
+                "limitation": "仅标题所列细分职业或资料主题，不能代五类合集全部人员；用于动物饲养细分的任务、工作情境、工资与预测；单一职业口径。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2093.00 动物饲养劳务工职业摘要",
                 "period": "现行公开资料；访问2026-10-02",
                 "publisher": "O*NET OnLine",
-                "scope": "O*NET OnLine 45-2093.00 动物饲养劳务工职业摘要｜具体职业及所列资料范围",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/45-2093.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
-                  "O*NET OnLine 45-2092.00 行业分布",
-                  "用于该细分的行业分布参考。"
+                  "作物细分79%农林牧渔、其他21%。",
+                  "仅该细分的行业就业分布，不能代全部农业从业人员或行业内工资。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "arxiv",
-                "limitation": "用于该细分的行业分布参考。",
+                "limitation": "仅标题所列细分职业或资料主题，不能代五类合集全部人员；仅该细分的行业就业分布，不能代全部农业从业人员或行业内工资。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2092.00 行业分布",
-                "period": "现行公开资料；访问2026-10-02",
+                "period": "2025年行业分布",
                 "publisher": "O*NET OnLine",
-                "scope": "O*NET OnLine 45-2092.00 行业分布｜具体职业及所列资料范围",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/45-2092.00"
               },
               {
@@ -32516,30 +32505,30 @@
                   "O*NET OnLine 45-2092.00 教育要求（Job Zone）",
                   "用于职业准备等级与学历要求说明。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "weforum",
-                "limitation": "用于职业准备等级与学历要求说明。",
+                "limitation": "仅标题所列细分职业或资料主题，不能代五类合集全部人员；用于职业准备等级与学历要求说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2092.00 教育要求（Job Zone）",
                 "period": "现行公开资料；访问2026-10-02",
                 "publisher": "O*NET OnLine",
-                "scope": "O*NET OnLine 45-2092.00 教育要求（Job Zone）｜具体职业及所列资料范围",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/45-2092.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
-                  "O*NET OnLine 45-2091.00 行业分布",
-                  "用于机具操作细分的行业分布参考。"
+                  "机具细分72%农林牧渔、13%批发、其他15%。",
+                  "仅该细分的行业就业分布，不能代全部农业从业人员或行业内工资。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "employer",
-                "limitation": "用于机具操作细分的行业分布参考。",
+                "limitation": "仅标题所列细分职业或资料主题，不能代五类合集全部人员；仅该细分的行业就业分布，不能代全部农业从业人员或行业内工资。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2091.00 行业分布",
-                "period": "现行公开资料；访问2026-10-02",
+                "period": "2025年行业分布",
                 "publisher": "O*NET OnLine",
-                "scope": "O*NET OnLine 45-2091.00 行业分布｜具体职业及所列资料范围",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/45-2091.00"
               },
               {
@@ -32548,14 +32537,14 @@
                   "O*NET45-2093热技术：2025美国招聘Excel2%、Office2%、Word不足1%。",
                   "WinCrop、PCDART、DairyCOMP305属于另一个软件技能示例清单，不在此热技术三项中。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "recruitment",
                 "id": "purchasing-managers",
-                "limitation": "不是软件采用率、AI效果、全部招聘或中国需求。",
+                "limitation": "仅标题所列细分职业或资料主题，不能代五类合集全部人员；不是软件采用率、AI效果、全部招聘或中国需求。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2093.00 技术清单（Hot Technologies）",
                 "period": "2025-01-01至12-31招聘文本",
                 "publisher": "O*NET OnLine",
-                "scope": "O*NET45-2093热技术｜2025美国招聘提及比例",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/45-2093.00"
               },
               {
@@ -32564,14 +32553,14 @@
                   "O*NET OnLine 45-2093.00 任务与工作活动",
                   "用于动物饲养细分的任务资料。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-1",
-                "limitation": "用于动物饲养细分的任务资料。",
+                "limitation": "仅标题所列细分职业或资料主题，不能代五类合集全部人员；用于动物饲养细分的任务资料。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2093.00 任务与工作活动",
                 "period": "现行公开资料；访问2026-10-02",
                 "publisher": "O*NET OnLine",
-                "scope": "O*NET OnLine 45-2093.00 任务与工作活动｜具体职业及所列资料范围",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/45-2093.00"
               },
               {
@@ -32580,14 +32569,14 @@
                   "O*NET OnLine 45-2092.00 自定义职业档案",
                   "用于职业概述与相关职业入口。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-2",
-                "limitation": "用于职业概述与相关职业入口。",
+                "limitation": "仅标题所列细分职业或资料主题，不能代五类合集全部人员；用于职业概述与相关职业入口。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2092.00 自定义职业档案",
                 "period": "现行公开资料；访问2026-10-02",
                 "publisher": "O*NET OnLine",
-                "scope": "O*NET OnLine 45-2092.00 自定义职业档案｜具体职业及所列资料范围",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/custom/45-2092.00"
               },
               {
@@ -32596,14 +32585,14 @@
                   "O*NET 展示的 BLS OEWS 2025 年 5 月工资分位：45-2093",
                   "用于动物饲养细分的工资分位。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "r2-pay-3",
-                "limitation": "用于动物饲养细分的工资分位。",
+                "limitation": "仅标题所列细分职业或资料主题，不能代五类合集全部人员；用于动物饲养细分的工资分位。",
                 "market": "美国",
                 "name": "O*NET 展示的 BLS OEWS 2025 年 5 月工资分位：45-2093",
-                "period": "现行公开资料；访问2026-10-02",
+                "period": "2025年5月全国工资",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
-                "scope": "O*NET 展示的 BLS OEWS 2025 年 5 月工资分位：45-2093｜具体职业及所列资料范围",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/45-2093.00"
               },
               {
@@ -32612,14 +32601,14 @@
                   "O*NET OnLine 45-2091.00 职业详细资料（任务与工作活动）",
                   "用于机具操作细分的任务与工作活动资料。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "census",
-                "limitation": "用于机具操作细分的任务与工作活动资料。",
+                "limitation": "仅标题所列细分职业或资料主题，不能代五类合集全部人员；用于机具操作细分的任务与工作活动资料。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2091.00 职业详细资料（任务与工作活动）",
                 "period": "现行公开资料；访问2026-10-02",
                 "publisher": "O*NET OnLine",
-                "scope": "O*NET OnLine 45-2091.00 职业详细资料（任务与工作活动）｜具体职业及所列资料范围",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/45-2091.00"
               },
               {
@@ -32628,14 +32617,14 @@
                   "O*NET OnLine 45-2092.00 职业摘要（任务与兴趣）",
                   "用于任务与兴趣代码参考。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "msresearch",
-                "limitation": "用于任务与兴趣代码参考。",
+                "limitation": "仅标题所列细分职业或资料主题，不能代五类合集全部人员；用于任务与兴趣代码参考。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2092.00 职业摘要（任务与兴趣）",
                 "period": "现行公开资料；访问2026-10-02",
                 "publisher": "O*NET OnLine",
-                "scope": "O*NET OnLine 45-2092.00 职业摘要（任务与兴趣）｜具体职业及所列资料范围",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/45-2092.00"
               },
               {
@@ -32644,14 +32633,14 @@
                   "O*NET 展示的 BLS OEWS 2025 年 5 月工资分位：45-2091",
                   "用于机具操作细分的工资分位。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "onet-wages",
-                "limitation": "用于机具操作细分的工资分位。",
+                "limitation": "仅标题所列细分职业或资料主题，不能代五类合集全部人员；用于机具操作细分的工资分位。",
                 "market": "美国",
                 "name": "O*NET 展示的 BLS OEWS 2025 年 5 月工资分位：45-2091",
-                "period": "现行公开资料；访问2026-10-02",
+                "period": "2025年5月全国工资",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
-                "scope": "O*NET 展示的 BLS OEWS 2025 年 5 月工资分位：45-2091｜具体职业及所列资料范围",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/45-2091.00"
               },
               {
@@ -32660,14 +32649,14 @@
                   "O*NET OnLine 45-2092.00 详细工作活动与记录要求",
                   "用于记录、作业与安全过程资料。"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "primary_document",
                 "id": "archivists",
-                "limitation": "用于记录、作业与安全过程资料。",
+                "limitation": "仅标题所列细分职业或资料主题，不能代五类合集全部人员；用于记录、作业与安全过程资料。",
                 "market": "美国",
                 "name": "O*NET OnLine 45-2092.00 详细工作活动与记录要求",
                 "period": "现行公开资料；访问2026-10-02",
                 "publisher": "O*NET OnLine",
-                "scope": "O*NET OnLine 45-2092.00 详细工作活动与记录要求｜具体职业及所列资料范围",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/45-2092.00"
               },
               {
@@ -32676,14 +32665,14 @@
                   "调查不含自雇及NAICS111/112等农业行业，覆盖全职兼职雇员。",
                   "年薪折算不等于个人真实有薪工时；不按是否季节工一概排除。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "oews-method",
                 "limitation": "这些是工资调查限制，不可套用于EP就业覆盖。",
                 "market": "美国",
                 "name": "BLS OEWS FAQ：调查范围与工资折算",
                 "period": "现行方法页；访问2026-10-02",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "BLS OEWS FAQ｜雇员工资覆盖和2080小时统计折算",
+                "scope": "parent",
                 "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
@@ -32692,14 +32681,14 @@
                   "驾驶拖拉机、联合收割机须申请考取对应驾驶证；准驾机型分别列。",
                   "不将该证扩为全部农机通用操作许可证，不列未经核实个人申领费用周期。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cn-driver",
                 "limitation": "只支持所列两类设备，不能外推所有机具或美国州规则。",
                 "market": "中国大陆",
                 "name": "拖拉机和联合收割机驾驶证管理规定",
                 "period": "2018-06-01施行；现行公开页面核2026-10-02",
                 "publisher": "北京市政府转载农业部规章",
-                "scope": "拖拉机和联合收割机驾驶证管理规定｜第2、7、8条设备与准驾机型",
+                "scope": "parent",
                 "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/201802/t20180222_776733.html"
               },
               {
@@ -32708,14 +32697,14 @@
                   "第33、34条要求用药防护及依标签范围、方法、剂量和注意事项使用。",
                   "生产、经营许可不等于全部个人使用者需普遍持一张施药证。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "cn-pesticide",
                 "limitation": "不提供某雇主培训内容、个人资格办理费用或美国州许可规定。",
                 "market": "中国大陆",
                 "name": "农药管理条例｜农业农村部公开全文",
                 "period": "现行公开全文；访问2026-10-02",
                 "publisher": "农业农村部",
-                "scope": "农药管理条例｜使用标签、防护、记录与经营许可区分",
+                "scope": "parent",
                 "url": "https://fgs.moa.gov.cn/flfg/202312/t20231205_6442161.htm"
               },
               {
@@ -32724,14 +32713,14 @@
                   "就业矩阵统计岗位而非独立人数，覆盖农业；自雇指标为非公司制自雇。",
                   "空缺由净变化与退出、转职形成，同职业换雇主不产生该定义的空缺。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "primary_document",
                 "id": "ep-method",
                 "limitation": "方法定义不能证明地方招聘、个人机会或OEWS工资覆盖。",
                 "market": "美国",
                 "name": "BLS Employment Projections Data Definitions",
                 "period": "当前公开方法定义",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "就业矩阵岗位计数、自雇及职业空缺定义",
+                "scope": "parent",
                 "url": "https://www.bls.gov/emp/documentation/definitions.htm"
               }
             ]
@@ -35043,8 +35032,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "privacy",
-              "bls"
+              "privacy"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -35603,11 +35591,11 @@
             "ai_heading": "AI 会影响农业从业人员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "国家统计局2025年城镇单位工资（行业与岗位类别背景）",
-            "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "农业从业人员在不同学历背景下通常从哪些岗位方向开始？",
+            "scenario_caption": "编辑询问清单；未取得中国本職学历分组招聘样本",
+            "scenario_heading": "按准备背景核对任务与用工条件",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "学历背景",
-            "scenario_value_label": "常见岗位方向"
+            "scenario_value_label": "待核对岗位方向"
           },
           "us_growth": {
             "$item": "agricultural-workers.china-salary.career-snapshot-primary-locale.58",
@@ -38084,7 +38072,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "任务：种植与采收 · 动物饲养照料 · 机具操作",
@@ -38135,7 +38123,7 @@
       "text": "农业从业人员：职业内容、薪资与就业前景"
     }
   },
-  "source_content_sha256": "6182822346a62f123f2505a05f2c86378e83859ef4884a4d634b3d668e88fd3e",
+  "source_content_sha256": "8fc217e59fc75e424ac37b12cb140281faf5c4cdcdedd332d15c51bc38dafe12",
   "subject": {
     "canonical_slug": "agricultural-workers",
     "name": "农业从业人员",

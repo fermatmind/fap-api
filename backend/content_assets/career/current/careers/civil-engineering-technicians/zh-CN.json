@@ -2,6 +2,48 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:civil-change-2025-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:civil-cn-construction-nonprivate-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:civil-cn-construction-private-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:civil-cn-science-nonprivate-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:civil-cn-science-private-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:civil-employment-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:civil-employment-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:civil-growth-2025-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:civil-openings-2025-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:civil-self-employed-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:civil-us-construction-wage-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:civil-us-engineering-services-wage-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:civil-us-local-government-wage-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:civil-us-state-government-wage-2025": {
+        "status": "pending_mapping"
+      },
       "fact:cn-industry-manufacturing-2024": {
         "status": "pending_mapping"
       },
@@ -12004,52 +12046,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.href": {
-        "ref": {
-          "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.18",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.label": {
-        "ref": {
-          "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.18",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.05.headers.explanation": {
         "ref": {
@@ -12397,52 +12399,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.href": {
-        "ref": {
-          "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.24",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.label": {
-        "ref": {
-          "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.24",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.08.headers.explanation": {
         "ref": {
@@ -23689,7 +23651,7 @@
           ],
           "id": "civil-engineering-technicians.profile.definition-block.1",
           "source_refs": [
-            "onet-details"
+            "civil-onet-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23704,7 +23666,7 @@
           },
           "id": "civil-engineering-technicians.profile.definition-block.2",
           "source_refs": [
-            "onet-details"
+            "civil-onet-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23719,7 +23681,7 @@
           },
           "id": "civil-engineering-technicians.profile.definition-block.3",
           "source_refs": [
-            "onet-details"
+            "civil-onet-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23734,7 +23696,7 @@
           },
           "id": "civil-engineering-technicians.profile.definition-block.4",
           "source_refs": [
-            "onet-details"
+            "civil-onet-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23749,7 +23711,7 @@
           },
           "id": "civil-engineering-technicians.profile.definition-block.5",
           "source_refs": [
-            "nasa-seh"
+            "editorial"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23764,7 +23726,7 @@
           },
           "id": "civil-engineering-technicians.profile.definition-block.6",
           "source_refs": [
-            "bls-entry"
+            "civil-ooh-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23809,7 +23771,7 @@
           },
           "id": "civil-engineering-technicians.profile.definition-block.9",
           "source_refs": [
-            "nasa-seh"
+            "editorial"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23999,10 +23961,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "技术判断与签字责任由具备相应资格的工程人员承担；本职业在指导下执行并在授权范围内记录与检验"
+              "技术员对自己实际执行、取值、检验和记录负责；设计批准及总项目监督须按资格和职责分配。美国OOH说明本职业不能批准设计或监督整个项目。中国检验记录由专人签字，监理与总监有不同签认职责；不能把所有技术判断与签字一概归给工程师。"
             ]
           },
           "id": "civil-engineering-technicians.profile.career-quick-answers-block.16",
+          "source_refs": [
+            "civil-ooh-current",
+            "civil-design-law",
+            "civil-quality-law",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24021,7 +23989,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国多数岗位要求高中后证书或副学士层次的技术训练；注册工程师资格与工程签字权属于相应执业体系"
+              "美国BLS说明典型入行学历是副学士，雇主可能偏好认可课程，但并非所有岗位必须有学位；部分technologist岗位要求本科。高中后技术证书是另一训练路线，30%学历问卷回答不能证明多数岗位最低要求。认证不普遍作为入行必需，也不授设计批准权。"
             ]
           },
           "id": "civil-engineering-technicians.profile.career-quick-answers-block.18",
@@ -24032,10 +24000,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国大陆的工程勘察设计与施工与监理活动另有各自的执业与技术标准要求，须按岗位与所在地规定核对"
+              "中国《建设工程勘察设计管理条例》第7—10条区分单位资质、承揽范围和人员注册；《建设工程质量管理条例》第19、28—31、37条分配设计、施工、检验和监理职责。岗位名称或机构授权不能替代法定资格与程序。"
             ]
           },
           "id": "civil-engineering-technicians.profile.career-quick-answers-block.19",
+          "source_refs": [
+            "civil-ooh-current",
+            "civil-design-law",
+            "civil-quality-law",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24153,10 +24127,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按规程取样与试验并记录环境与设备与操作条件；结果异常时先复核试验过程再判断材料是否合格，避免直接下结论。"
+              "按适用规程取样与试验，保存环境、设备、操作和原始数据；异常结果如实记录并及时上报，按要求复核。中国质量条例第29条规定未经检验或检验不合格的材料等不得使用；过程复核不授继续使用或自行改判的权限。"
             ]
           },
           "id": "civil-engineering-technicians.profile.career-quick-answers-block.30",
+          "source_refs": [
+            "civil-ooh-current",
+            "civil-design-law",
+            "civil-quality-law",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24197,10 +24177,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "明确本人可独立完成的复核与检验范围；涉及设计变更与结构安全判断与签字的事项须提交具备相应资格的工程人员。"
+              "明确本人可执行、复核和签认的范围。中国设计文件修改须按勘察设计条例第28条由原设计单位或依法获委托的有资质单位处理，重大修改报原批准机关；不能用现场口头同意、普通书面确认或本页清单替代。"
             ]
           },
           "id": "civil-engineering-technicians.profile.career-quick-answers-block.34",
+          "source_refs": [
+            "civil-ooh-current",
+            "civil-design-law",
+            "civil-quality-law",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24241,10 +24227,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆：本条证据路由把精确职业工资登记为已核实不可得（数据状态：暂无可安全使用的数据），处理说明 为「保留模块级缺口，并明确中文页面语言不构成中国等价职业或工资映射」，因此本页不给出中国大陆的月薪区间或城市排名。"
+              "中国大陆精确职业工资仍证据不足：未核定与O*NET-SOC17-3022.00一一对应的全国职业工资。2025科学研究和技术服务业、建筑业年平均工资可作相应用人单位的宽行业背景，不能作为技术员工资、起薪、月薪区间或城市排名。"
             ]
           },
           "id": "civil-engineering-technicians.profile.onet-structured-fields-block.3",
+          "source_refs": [
+            "civil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -24252,10 +24242,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业与就业：BLS 就业预测显示 2024 年该职业约 64,900 人，2024 至 2034 年预计增长 1% 至 2%（低于平均），年均空缺约 5,500 个；O*NET 行业分布显示专业科学与技术服务 50%、政府 43%、其他行业合计 7%。该职业页面未提供按行业或地区细分的工资中位数，本页已登记对应缺口。"
+              "BLS表1.2：2025就业70,900、2035预计73,200，官方净增2,300，增长3.2%，年均空缺约6,100（2025—2035）；OOH将增长取整为3%、约与平均相同。O*NET当前行业页为专业科学与技术服务51%、政府42%、其他7%。OOH另提供2025工程服务、州/地方政府及建筑业内本职业工资，不能与大门类占比混作同一表。"
             ]
           },
           "id": "civil-engineering-technicians.profile.onet-structured-fields-block.4",
+          "source_refs": [
+            "civil-ep-current",
+            "civil-industry-current",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -24279,7 +24274,7 @@
               "现场与会商｜参与现场工作并与主管确认细节｜与主管会商以确定计划编制与验收测试与现场条件评估等项目细节；规划并实施现场测量以确定新场地位置并分析场址细节（对应 O*NET 任务第四与第十二项）。",
               "检验与试验｜检查现场与开展材料试验｜检查项目现场并评估承包商工作以发现设计故障并确认是否符合设计规格与适用规范；使用工具与设备并运用工程知识开展材料试验与分析（对应 O*NET 任务第八与第九项）。",
               "成本与预算｜估算安装与施工成本并编制项目预算｜编制系统安装或设施使用或结构施工的计划并估算成本；通过估算项目活动成本编制项目预算（对应 O*NET 任务第十与第十一项）。",
-              "变更与沟通｜报告现场问题并协商变更与回应公众｜向主管报告现场发生的维护问题并协商变更以解决系统冲突；就新合同或既有合同修改与承包商协商价格；回应公众意见与投诉；并操作无人机进行场地测量与检查以获得详细的航拍视图（对应 O*NET 任务第七与第十三与第十四与第十五项）。"
+              "变更与沟通｜报告现场问题、回应公众及参与合同协商｜O*NET当前任务顺序：第7维护问题与变更、第13公众意见/投诉、第14合同价格；第15无人机场地测量与检查未给重要度。任务出现不授合同承诺、设计修改或无人机飞行权限。"
             ]
           },
           "id": "civil-engineering-technicians.profile.responsibilities-block.1",
@@ -24290,7 +24285,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "沟通与协作｜96% 每天进行面对面讨论；84% 每天使用电子邮件；83% 持续与他人接触；58% 认为与工作组或团队协作极其重要；38% 认为协调或带领他人极其重要。\n决策与准确度｜21% 每周或更频繁地做决策；55% 对决策拥有一定自由度；71% 认为精确或准确非常重要；40% 对确定任务与优先级与目标拥有一定自由度。\n工作场所｜67% 每天在环境受控的室内工作；38% 每天在户外暴露于各种天气；39% 每天在封闭车辆或操作封闭设备中；总体需要在办公室与工地之间切换。\n体位与体力｜62% 超过一半时间坐着；40% 超过一半时间做重复动作；61% 与同事保持稍有距离的位置（如共用办公室）。\n时间与节奏｜84% 的典型工作周为 40 小时；49% 每月或更频繁地感受到时间压力；38% 认为重复同一任务重要。\n责任与影响｜42% 对他人的工作成果承担中等责任；35% 认为决策对同事或机构结果的影响非常重要；38% 认为直接面对外部客户或公众极其重要。\n防护与安全｜38% 每年或更频繁地需要佩戴常规防护或安全装备；工地与试验场景的防护要求按机构与场地规程执行。\n文书与记录｜29% 从不撰写信件与备忘录；记录更多以图纸与计算书与技术报告与检验记录的形式出现。\n工作性质｜以按图计算与制图与现场核对为主；输出需要能被复核并在工程人员的指导下推进。"
+              "沟通与协作｜96% 每天进行面对面讨论；84% 每天使用电子邮件；83% 持续与他人接触；58% 认为与工作组或团队协作极其重要；38% 认为协调或带领他人极其重要。\n决策与准确度｜21%每周或更频繁但非每天做影响他人、机构资金或声誉的决策；55% 对决策拥有一定自由度；71% 认为精确或准确非常重要；40% 对确定任务与优先级与目标拥有一定自由度。\n工作场所｜67% 每天在环境受控的室内工作；38% 每天在户外暴露于各种天气；39% 每天在封闭车辆或操作封闭设备中；总体需要在办公室与工地之间切换。\n体位与体力｜62% 超过一半时间坐着；40% 超过一半时间做重复动作；61% 与同事保持稍有距离的位置（如共用办公室）。\n时间与节奏｜84% 的典型工作周为 40 小时；49%每月或更频繁但非每周地感受到时间压力；38% 认为重复同一任务重要。\n责任与影响｜42% 对他人的工作成果承担中等责任；35% 认为决策对同事或机构结果的影响非常重要；38% 认为直接面对外部客户或公众极其重要。\n防护与安全｜38%每年或更频繁但非每月需要佩戴常规防护或安全装备；工地与试验场景的防护要求按机构与场地规程执行。\n文书与记录｜29% 从不撰写信件与备忘录；这一题不能证明各类记录的相对频率；图纸、报告和项目记录任务另见任务清单。\n工作性质｜以按图计算与制图与现场核对为主；输出需要能被复核并在工程人员的指导下推进。"
             ]
           },
           "id": "civil-engineering-technicians.profile.work-context-block.1",
@@ -24885,7 +24880,7 @@
                 "entity": "BLS Occupational Outlook Handbook：Civil Engineering Technologists and Technicians",
                 "id": "link-2",
                 "relation": "related-evidence",
-                "url": "https://www.bls.gov/ooh/architecture-and-engineering/civil-engineering-technologists-and-technicians.htm"
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/civil-engineering-technicians.htm"
               },
               {
                 "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
@@ -24906,40 +24901,40 @@
                 "url": "https://www.onetonline.org/link/hot_tech/17-3022.00"
               },
               {
-                "entity": "O*NET-SOC 17-3022.00 职业摘要",
+                "entity": "O*NET17-3022.00现行完整详细资料",
                 "id": "link-6",
-                "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/summary/17-3022.00"
-              },
-              {
-                "entity": "O*NET 全国就业趋势页面（17-3022.00，显示 BLS 就业预测）",
-                "id": "link-7",
-                "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/17-3022.00"
-              },
-              {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
-                "id": "link-8",
-                "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
-              },
-              {
-                "entity": "O*NET-SOC 17-3022.00 职业详细资料",
-                "id": "link-9",
                 "relation": "related-evidence",
                 "url": "https://www.onetonline.org/link/details/17-3022.00"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
-                "id": "link-10",
+                "entity": "BLS表1.2：SOC17-3022，2025—2035",
+                "id": "link-7",
                 "relation": "related-evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（17-3022.00，显示 BLS 就业预测）",
+                "entity": "O*NET-SOC 17-3022.00 职业详细资料",
+                "id": "link-8",
+                "relation": "related-evidence",
+                "url": "https://www.onetonline.org/link/details/17-3022.00"
+              },
+              {
+                "entity": "O*NET 全国工资分位页面（17-3022.00）",
+                "id": "link-9",
+                "relation": "related-evidence",
+                "url": "https://www.onetonline.org/link/localwages/17-3022.00"
+              },
+              {
+                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "id": "link-10",
+                "relation": "related-evidence",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "entity": "NIST AI Risk Management Framework 1.0",
                 "id": "link-11",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/17-3022.00"
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
                 "entity": "O*NET 技术清单（17-3022.00 招聘技术关键词）",
@@ -24948,16 +24943,16 @@
                 "url": "https://www.onetonline.org/link/hot_tech/17-3022.00"
               },
               {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "entity": "O*NET-SOC 17-3022.00 职业详细资料",
                 "id": "link-13",
                 "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+                "url": "https://www.onetonline.org/link/details/17-3022.00"
               },
               {
-                "entity": "O*NET 技术清单（17-3022.00 招聘技术关键词）",
+                "entity": "O*NET-SOC 17-3022.00 职业详细资料",
                 "id": "link-14",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/hot_tech/17-3022.00"
+                "url": "https://www.onetonline.org/link/details/17-3022.00"
               },
               {
                 "entity": "O*NET-SOC 17-3022.00 职业详细资料",
@@ -24966,28 +24961,28 @@
                 "url": "https://www.onetonline.org/link/details/17-3022.00"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（17-3022.00，显示 BLS 就业预测）",
+                "entity": "BLS表1.2：SOC17-3022，2025—2035",
                 "id": "link-16",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/17-3022.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
+                "entity": "中国建设工程勘察设计管理条例（第28条；其余职责边界另见同卡来源与本页美国OOH）",
                 "id": "link-17",
                 "relation": "related-evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_7aebb685f7b94720bfdccf8ac71541c9.html"
               },
               {
-                "entity": "O*NET 全国工资分位页面（17-3022.00）",
+                "entity": "BLS表1.2：SOC17-3022，2025—2035",
                 "id": "link-18",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localwages/17-3022.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET-SOC 17-3022.00 职业摘要",
+                "entity": "O*NET 技术清单（17-3022.00 招聘技术关键词）",
                 "id": "link-19",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/summary/17-3022.00"
+                "url": "https://www.onetonline.org/link/hot_tech/17-3022.00"
               }
             ]
           },
@@ -25087,10 +25082,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把技术能力、实际采用与岗位结果分开看：公开资料能支持的是「图纸与工程量与报告的整理与比对与草稿类任务可借助软件提速」，以及「制图与建模与地理信息软件已是常见工具」；不能据此推断岗位数量或收入变化。"
+              "O*NET证明任务、软件类别及招聘关键词出现，不能证明生成式AI提速、采用率或收入效应。可将资料提取、比对和草稿作为编辑建议试点；先在获准数据上检验准确性、漏项、复核成本，再决定使用范围。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.18",
+          "source_refs": [
+            "civil-onet-current",
+            "onet-hot-tech",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25131,7 +25131,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于核对入行与就业说明；该页本轮直接访问返回 HTTP 403，工资与就业数值以 O*NET 显示为准"
+              "本轮实际读到正确BLS职业页的职责、学历、认证、行业工资及2025—2035展望；原登记URL与历史访问缺口保留，不能继续用它说明现时未取得原文。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.22",
@@ -25168,6 +25168,10 @@
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.25",
+          "source_refs": [
+            "civil-nist-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25179,6 +25183,10 @@
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.26",
+          "source_refs": [
+            "civil-nist-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25230,7 +25238,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 就业预测（经 O*NET 显示，2024 至 2034 年）"
+              "BLS表1.2与OOH：2025—2035就业预测"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.31",
@@ -25241,7 +25249,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024 至 2034 年的就业预测与年均空缺"
+              "用于核对本职业70.9千就业、3.2%增长、6.1千年均空缺及统计期间"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.32",
@@ -25252,10 +25260,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表按三条真实工作方向比较：AI 主要改变什么，以及哪些责任仍然留在人这一侧。三条方向来自该职业的任务结构（计算与制图、现场与检验、记录与沟通）。"
+              "下表是结合O*NET三类工作面提出的编辑试用建议，不是已验证AI效果或采用时间排序；每项试用仍须核数据权限、错误和人工复核。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.33",
+          "source_refs": [
+            "civil-onet-current",
+            "onet-hot-tech",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25267,6 +25280,11 @@
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.34",
+          "source_refs": [
+            "civil-onet-current",
+            "onet-hot-tech",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25289,6 +25307,11 @@
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.36",
+          "source_refs": [
+            "civil-onet-current",
+            "onet-hot-tech",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25296,10 +25319,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断现场条件是否满足取样与试验要求、识别不符合项是否影响结构安全、以及决定是否需要立即停止相关工序并上报。"
+              "现场条件、取样和材料结果由相应岗位按规程判断并如实上报。发现紧急人身危险时按适用安全规则停止自身相关作业或撤离；项目/工序中止、设计修改及恢复另由有权主体依法处理，不因技术员发现异常就推定其拥有全部权限。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.37",
+          "source_refs": [
+            "civil-safety-law",
+            "civil-quality-law",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25311,6 +25339,11 @@
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.38",
+          "source_refs": [
+            "civil-onet-current",
+            "onet-hot-tech",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25318,7 +25351,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "确认记录与事实一致、确认变更经过授权，以及对应项目文档的准确性与留痕承担责任。"
+              "确认记录与事实一致；设计变更按法定程序和有资质单位处理，合同调整另核权限，本人对实际记录与反馈负责。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.39",
@@ -25373,7 +25406,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "15 项任务中按页面顺序前几项为使用计算器或计算机计算尺寸与面积与构件规格与材料用量、阅读并审阅项目蓝图与结构规格以确定结构或系统的尺寸与材料要求、绘制详细尺寸图与设计布置图以确保符合规格；该页面未提供任务重要度分数"
+              "O*NET现有15项任务，前3项计算、蓝图审阅、详图绘制重要度分别81、78、77；其他任务亦有分数，新增无人机任务为Not available。分数不是个人能力、录用阈值或AI替代率。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.44",
@@ -25476,6 +25509,10 @@
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.53",
+          "source_refs": [
+            "civil-nist-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25487,6 +25524,10 @@
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.54",
+          "source_refs": [
+            "civil-nist-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25498,6 +25539,10 @@
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.55",
+          "source_refs": [
+            "civil-nist-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25505,10 +25550,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "框架要求把用途与限制与监测与责任写清，可直接用于本页的复核与留痕建议"
+              "NIST AI RMF 1.0是自愿、通用的风险框架。编辑可借其用途、限制、测量和责任思路制定本项目复核记录；不能写成强制工程规程或直接可用的验收标准。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.56",
+          "source_refs": [
+            "civil-nist-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25560,10 +25609,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术能力回答「模型在原则上能做什么」。对本职业而言，较可靠的部分是图纸与工程量与报告的整理与比对与草稿；不可靠的部分是取值与假设判断、规范符合性与现场安全判断。"
+              "编辑建议在获准资料上试测图纸信息提取、工程量草稿、报告和版本比对；本轮未取得本职业可靠性对照实验，不能先称这些环节较可靠。取值适用性、规范和现场安全仍须有权人员核定。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.61",
+          "source_refs": [
+            "civil-onet-current",
+            "onet-hot-tech",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25571,10 +25625,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采用证据回答「机构实际在用什么」。公开资料能支持的是制图与建模与地理信息软件与办公套件在工程单位中已是常见工具；具体机构差异很大，本页不从关键词推断采用率。"
+              "O*NET列出工程制图/GIS/办公软件，2025美国招聘关键词也含这些技术；它们证明列示或招聘提及，不给出机构实际采用率，更不能证明生成式AI已普及。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.62",
+          "source_refs": [
+            "civil-onet-current",
+            "onet-hot-tech",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25582,7 +25641,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "岗位结果回答「就业规模有没有变」。BLS 对 2024 至 2034 年的预测是该职业增长 1% 至 2%、年均空缺约 5,500 个，属于就业规模预测；公开资料不支持「AI 使该职业岗位减少」的结论。"
+              "BLS预测2025—2035本职业增长3.2%、年均空缺约6,100；这是就业模型结果。OOH指出改进CAD可能限制增长，但没有给生成式AI单独效应，不能将全国增长或空缺变化归因为AI。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.63",
@@ -25604,7 +25663,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 17-3022.00 任务与工作活动；BLS 就业预测"
+              "O*NET 17-3022.00任务与工作活动；本回答是编辑任务边界分析，不是AI替代率预测"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.65",
@@ -25615,10 +25674,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不把编程当作入行门槛。O*NET 该职业的技术清单以制图与建模与地理信息软件与办公套件为主；教育分布显示高中后证书 30%、上过大学但无学位 28%、副学士 21%，真正决定机会的是读图与计算与检验的实操能力。"
+              "本页不把编程设为统一门槛：O*NET编程技能重要度22，不是岗位要求比例；具体雇主另核。BLS典型入行学历为副学士，部分technologist要求本科；O*NET教育问卷30%证书、28%上过大学无学位、21%副学士描述新入职教育要求回答，实操能力不能替代确有的学历要求。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.66",
+          "source_refs": [
+            "civil-onet-current",
+            "civil-ooh-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25626,7 +25690,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 就业预测（经 O*NET 显示）；O*NET Hot Technologies 17-3022.00"
+              "O*NET17-3022.00详细资料：Programming及Education；美国典型学历另见本页BLS OOH入行来源"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.67",
@@ -25637,10 +25701,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "从任务结构看，受影响较早的是可结构化输入的环节：图纸信息提取、工程量计算、报告与记录草稿、文档版本比对。受影响较晚的是必须在现场完成的环节：现场核对与取样与试验、判断施工是否与设计一致、以及处理现场冲突。"
+              "编辑可优先试测结构化资料提取、工程量草稿、文档比对与报告整理；现场取样、试验及符合性判断需保留相应人员核验。本轮没有分环节采用时间数据，不推断先后或哪项最早受影响。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.68",
+          "source_refs": [
+            "civil-onet-current",
+            "onet-hot-tech",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25659,7 +25728,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 预测 2024 至 2034 年该职业增长 1% 至 2%，年均空缺约 5,500 个，其中相当部分来自离职与转岗的替补需求；该职业页面未标注 Bright Outlook。"
+              "BLS表1.2预测2025—2035增长3.2%、年均空缺约6,100；空缺含转往其他职业或退出劳动力的替补需求，与净增2,300不同。OOH取整为3%，O*NET本页未标Bright Outlook，标签不能代替预测。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.70",
@@ -25685,6 +25754,12 @@
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.72",
+          "source_refs": [
+            "civil-design-law",
+            "civil-quality-law",
+            "civil-ooh-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25692,10 +25767,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST AI RMF 1.0 责任与记录要求；O*NET 17-3022.00 任务描述"
+              "美国OOH职责边界；中国勘察设计条例第28条、质量条例第19/29/37条；NIST为通用自愿风险框架"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.73",
+          "source_refs": [
+            "civil-design-law",
+            "civil-quality-law",
+            "civil-ooh-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25714,7 +25795,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Employment Projections（2024 至 2034 年预测期与说明）"
+              "BLS Employment Projections：2025—2035，表1.2；预测不是职业消失日期"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.75",
@@ -25736,7 +25817,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET Hot Technologies 17-3022.00（技术关键词）；NIST AI RMF 1.0"
+              "O*NET Hot Technologies 17-3022.00技术关键词；编辑学习建议；NIST通用风险框架另见本模块来源入口"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.77",
@@ -25802,10 +25883,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "由具备相应资格的工程人员确认设计与技术结论并签字；系统与工具不承担该责任，也不免除技术员如实记录与按流程上报的义务。"
+              "按实际角色和法定资格确认、复核或签认。中国材料检验由专人留记录签字，设计及监理/总监有各自职责；美国本职业不因工具熟练就能批准设计或监督整个项目。工具不免除本人如实执行与记录义务。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.83",
+          "source_refs": [
+            "civil-design-law",
+            "civil-quality-law",
+            "civil-ooh-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25835,10 +25922,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "项目图纸与技术资料与地勘与测量数据属于受控或涉密信息，上传到外部服务可能造成泄露与合规风险。"
+              "图纸、地勘或测量资料可能受保密、合同或个人信息限制，须核实际分类与许可；不能把所有项目数据一概断言为涉密。未经核权限上传外部服务可能形成泄露或违法处理风险。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.86",
+          "source_refs": [
+            "civil-privacy-law",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25846,10 +25937,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按机构数据分级选择可用工具与部署方式，对敏感资料做脱敏或使用内部系统，并保留访问与导出记录。"
+              "编辑建议先核输入授权、数据分类、服务方处理和留存条件，再决定是否使用；脱敏或内网本身不授处理权限。含中国个人信息时另核合法处理基础和敏感信息规则；无法确认权限的资料不输入外部AI。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.87",
+          "source_refs": [
+            "civil-privacy-law",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25857,7 +25952,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "同一套图纸在不同版本或不同工具下可能产生不同数量结果；缺少版本与日期记录会使现场与设计无法对齐。"
+              "不同图纸、规范或工具版本可能产生不同结果；缺少版本、日期、假设和原始数据会增加追溯与交接困难，不能断言必然无法对齐。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.88",
@@ -25890,10 +25985,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对现场变更先取得书面确认或按流程发起变更单，并把口头沟通补成记录。"
+              "中国设计文件修改按勘察设计条例第28条办理：建设、施工、监理不得擅改，原设计单位或依法获书面同意委托的其他有资质单位修改，重大修改报原批准机关；普通书面确认与口头补记不替代此程序。合同价格调整另核权限。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.91",
+          "source_refs": [
+            "civil-design-law",
+            "civil-quality-law",
+            "civil-ooh-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -25956,10 +26057,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提取与试算可提速；取值判断与规范符合性仍是人工职责"
+              "编辑试测建议：提取与试算需核准确性和总复核工时，不预先承诺提速"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.97",
+          "source_refs": [
+            "civil-onet-current",
+            "onet-hot-tech",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26011,10 +26117,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "确认取样与试验过程符合规程，并在结果异常时先复核过程。"
+              "取样、试验及设备状态按规程核，异常原始结果如实记录并及时上报；复核不授继续使用未经检验/不合格材料或自行改判权限。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.102",
+          "source_refs": [
+            "civil-design-law",
+            "civil-quality-law",
+            "civil-ooh-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26088,10 +26200,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "图纸绘制与标注可大幅自动化；依据与符合性判断仍由人负责"
+              "CAD绘图与标注可作为编辑工具试用方向；本轮无证据量化AI自动化程度，依据与符合性仍需有权人员核"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.109",
+          "source_refs": [
+            "civil-onet-current",
+            "onet-hot-tech",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26143,10 +26260,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "确认变更与价格调整经过授权并留下书面依据。"
+              "确认设计变更按法定程序办理，合同价格调整由有权人员确认，分别留下依据；不能仅靠普通项目授权改设计。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.114",
+          "source_refs": [
+            "civil-design-law",
+            "civil-quality-law",
+            "civil-ooh-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26198,10 +26321,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "参与现场测量并用无人机进行场地测量与检查"
+              "O*NET列有现场测量与无人机场地检查；这不授飞行许可或测绘资格，目标场地与法域要求另核"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.119",
+          "source_refs": [
+            "civil-onet-current",
+            "onet-hot-tech",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26231,10 +26359,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "如果要用一句话概括：AI 与数字化会显著改变技术员整理图纸资料、计算工程量与编写记录的方式，但不会改变「谁对取值与规范符合性与现场判断负责」；需要长期积累的仍然是读图与计算与现场核对的手上功夫。"
+              "编辑建议把资料整理、工程量草稿与记录辅助作为可检验的工具用途，核错误、漏项和复核成本。本轮未取得显著提速或采用率证据；职责与资格、设计批准、材料使用和现场安全仍按实际岗位与法规执行。"
             ]
           },
           "id": "civil-engineering-technicians.ai-impact.ai-impact-table.122",
+          "source_refs": [
+            "civil-onet-current",
+            "onet-hot-tech",
+            "editorial"
+          ],
           "type": "prose"
         }
       ]
@@ -26255,7 +26388,7 @@
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-wages"
+            "civil-nbs-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26270,7 +26403,7 @@
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wages"
+            "civil-nbs-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26351,10 +26484,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮查阅范围为：人力资源和社会保障部与国家统计局公开的工资与薪酬调查资料入口，以及本职业的 O*NET 精确职业来源；后者其市场与辖区明确为美国，不支持中国精确工资口径。因此本页不给出职业级中位数、分位数、起薪或稳定月薪。"
+              "本轮已读国家统计局2025年工资表2/5及调查说明，职业级中位数、分位数、起薪和城市月薪仍未取得；相应用人单位的宽行业均值只作为背景。美国O*NET数据不支持中国精确工资映射。"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.8",
+          "source_refs": [
+            "civil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26362,10 +26499,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业门类口径：国家统计局按行业门类公布城镇单位就业人员年平均工资，但土木工程技术员并不是该口径下的独立行业门类"
+              "科学研究和技术服务业：2025城镇非私营182,064元/年、私营83,560元/年（行业年平均工资）"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.9",
+          "source_refs": [
+            "civil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26373,10 +26514,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "该口径覆盖城镇地域内法人单位，不含个体工商户与自由职业者；工程技术与设计服务与施工与监理等用人单位分属不同门类，用它替代本职业工资会同时引入行业与用工形式两重偏差。"
+              "NBS表2/5，适用于归入该门类的工程设计、技术服务等用人单位背景；覆盖该门类所有受雇职业，不能当技术员中位数或设计院报价。"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.10",
+          "source_refs": [
+            "civil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26384,10 +26529,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "较宽职业口径：公开统计与职业分类未单列与 O*NET-SOC 17-3022.00 一一对应的职业细类"
+              "建筑业：2025城镇非私营92,036元/年、私营66,275元/年（行业年平均工资）"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.11",
+          "source_refs": [
+            "civil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26395,10 +26544,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "不同统计发布的分类口径与覆盖范围不同、资料期不同，本页不混用，也不做口径换算。"
+              "NBS表2/5，适用于归入建筑业的施工用人单位背景，包含该门类各职业；不是现场技术员工资，不能与科学技术服务业合并为本职业区间。"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.12",
+          "source_refs": [
+            "civil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26428,10 +26581,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "统计覆盖范围：中国大陆公开工资统计以城镇法人单位为对象，设计院与施工单位与监理单位与政府部门的覆盖不同"
+              "NBS调查为城镇地域内就业人数5人及以上法人单位；不含个体工商户与自由职业者，非私营含机关、事业等但不等同政府工资"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.15",
+          "source_refs": [
+            "civil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26450,10 +26607,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "资料期：本轮查阅以 2025 年及以前已发布的公开资料为范围"
+              "资料期：2025年工资，2026-05-15发布；本轮查阅2026-10-09，不混同统计期与检索日期"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.17",
+          "source_refs": [
+            "civil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26472,10 +26633,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论与缺口：本页对中国大陆只登记可核对的统计口径、岗位映射边界与检索记录，不给出替代数值"
+              "精确缺口：本轮未取得与O*NET-SOC17-3022.00一一对应的全国职业工资；上述两门类仅作相应用人单位行业背景，不发布职业月薪与城市排名"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.19",
+          "source_refs": [
+            "civil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26516,7 +26681,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "自动化与数字化会改变图纸与工程量与记录的生成方式，但不改变中国大陆对本职业的统计口径：职业级统计缺口与工具无关。"
+              "工具变化本身不能填补本轮职业映射与工资样本缺口；不据AI能力或美国软件关键词推算中国收入或断言统计分类永远不变。"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.23",
@@ -26538,7 +26703,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "高中后证书或职业教育（工程或建筑或测绘相关）"
+              "中国职业教育／专科背景（工程、建筑、测绘相关）"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.25",
@@ -26571,7 +26736,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "副学士或其他两年制学位（工程相关）"
+              "中国专科／高职背景（工程相关；不与美国副学士直接等同）"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.28",
@@ -26593,7 +26758,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：不同单位对制图与检测能力的要求不同，本页不把学历直接对应到收入区间。"
+              "编辑核对建议：目标雇主的学历、制图、检测和经历要求另核，中国专科不因名称近似就等同美国副学士或直接对应收入。"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.30",
@@ -26736,10 +26901,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《城镇单位就业人员年平均工资情况》检索入口｜https://www.stats.gov.cn/"
+              "国家统计局2025年城镇单位就业人员年平均工资，表2/5与调查说明｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.43",
+          "source_refs": [
+            "civil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26747,7 +26916,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆薪资参考：官方统计口径与缺口"
+              "中国大陆薪资：精确职业缺口与宽行业背景"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.44",
@@ -26758,10 +26927,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆目前没有单列该岗位的全国职业工资统计可供本页引用；本页只登记可核对的统计口径、岗位映射边界与检索记录，不给出替代数值。"
+              "未取得本职业精确中国全国工资；2025科学技术服务业和建筑业年均工资已列为相应用人单位背景，并非本职业工资、月薪区间或城市排名。不能由检索缺口断言官方从未发布。"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.45",
+          "source_refs": [
+            "civil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26791,10 +26964,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不提供中国大陆该岗位的月薪区间或城市排名；单位类型与地区与项目周期差异很大，比较时应把职责范围、授权与签字要求纳入书面确认。"
+              "中国大陆：精确职业工资证据不足，另列2025行业年平均工资背景"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.48",
+          "source_refs": [
+            "civil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26813,10 +26990,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与土木工程技术员精确对应的中国大陆全国职业月薪分布；本页不发布替代数值，也不以相邻岗位报价推算。"
+              "证据不足：未取得与本职业精确对应的全国职业月薪分布；宽行业年均工资不折算为职业月薪"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.50",
+          "source_refs": [
+            "civil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26857,10 +27038,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未有官方或可核验来源支持其他地区该岗位的月薪区间。"
+              "证据不足：本轮未取得可核验的其他地区职业月薪数据，不等于断言没有任何来源"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.54",
+          "source_refs": [
+            "civil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26891,10 +27076,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《城镇单位就业人员年平均工资情况》检索入口｜https://www.stats.gov.cn/；人力资源和社会保障部企业薪酬调查信息入口｜https://www.mohrss.gov.cn/"
+              "NBS2025行业年平均工资表2/5与调查说明｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html；精确职业代码映射本轮未核定"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.57",
+          "source_refs": [
+            "civil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -26902,7 +27091,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 1%—2%（2024—2034 年）"
+              "增长3.2%（美国2025—2035，BLS表1.2；OOH取整3%）"
             ]
           },
           "id": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.58",
@@ -26985,7 +27174,7 @@
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "bls-entry"
+            "civil-ooh-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27040,7 +27229,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 全国工资分位页面（17-3022.00）｜https://www.onetonline.org/link/localwages/17-3022.00；O*NET-SOC 17-3022.00 职业详细资料｜https://www.onetonline.org/link/details/17-3022.00；BLS Occupational Outlook Handbook：Civil Engineering Technologists and Technicians｜https://www.bls.gov/ooh/architecture-and-engineering/civil-engineering-technologists-and-technicians.htm"
+              "O*NET 全国工资分位页面（17-3022.00）｜https://www.onetonline.org/link/localwages/17-3022.00；O*NET-SOC 17-3022.00 职业详细资料｜https://www.onetonline.org/link/details/17-3022.00；BLS Occupational Outlook Handbook：Civil Engineering Technologists and Technicians｜https://www.bls.gov/ooh/architecture-and-engineering/civil-engineering-technicians.htm"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.8",
@@ -27150,7 +27339,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位。该分位不包含加班与津贴的个体差异，也不含自雇主收入。；O*NET 全国工资分位页面（17-3022.00）｜https://www.onetonline.org/link/localwages/17-3022.00"
+              "第90分位为受雇工资分布位置，不是个人全报酬或自雇收入，也不说明任何个人加班或津贴水平。｜https://www.onetonline.org/link/localwages/17-3022.00"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.18",
@@ -27161,10 +27350,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "64,900 人（2024 年）"
+              "70,900人（2025年）"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.19",
+          "source_refs": [
+            "civil-ep-current",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27172,10 +27365,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 就业预测公布的 2024 年该职业就业人数；2024 至 2034 年预计增长 1% 至 2%，年均空缺约 5,500 个。；O*NET-SOC 17-3022.00 职业详细资料｜https://www.onetonline.org/link/details/17-3022.00"
+              "BLS表1.2：2025就业70.9千、2035预计73.2千、净增2.3千、增长3.2%、年均空缺6.1千；均为全国预测口径。｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.20",
+          "source_refs": [
+            "civil-ep-current",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27183,10 +27380,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 1%—2%"
+              "增长3.2%（OOH取整3%）"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.21",
+          "source_refs": [
+            "civil-ep-current",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27194,10 +27395,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024 至 2034 年预测期，低于所有职业平均。预测含假设与误差，不等于逐年实际值。；O*NET-SOC 17-3022.00 职业详细资料｜https://www.onetonline.org/link/details/17-3022.00"
+              "2025—2035本职业预测，OOH归为约与平均相同；表1.2保留3.2%。不代表逐年实际值或个人获聘机会。｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.22",
+          "source_refs": [
+            "civil-ep-current",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27205,10 +27410,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约 5,500 个/年"
+              "约6,100个/年"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.23",
+          "source_refs": [
+            "civil-ep-current",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27216,10 +27425,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024 至 2034 年年均空缺，含替补（离职与转岗）需求。空缺是流量，不等于在招岗位存量。；O*NET-SOC 17-3022.00 职业详细资料｜https://www.onetonline.org/link/details/17-3022.00"
+              "2025—2035年均空缺含增长、转往其他职业及退出劳动力的替补，不是当前招聘存量或每年净增。｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.24",
+          "source_refs": [
+            "civil-ep-current",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27227,10 +27440,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界：以上数值均为美国全国口径，面向受雇工资薪金岗位；O*NET 该职业页面未提供按行业或地区细分的工资中位数，本页已登记对应缺口；BLS Occupational Outlook Handbook 该职业页本轮直接访问返回 HTTP 403，未取得页面原文，因此本页行业用工与工资表述以 O*NET 页面为准；地区或行业差异不能直接外推到具体雇主，本页不据此推算个人年收入。"
+              "OEWS工资面向受雇工资薪金岗位，不含自雇收入；EP就业包含自雇，表1.2本职业自雇占比0.7%（2025）。正确OOH页已取得行业工资；全国、行业和地区口径分开，不能推个人收入。"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.25",
+          "source_refs": [
+            "civil-ep-current",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27238,10 +27455,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：BLS 显示 2025 年 5 月该职业时薪中位数为 31.23 美元、年薪中位数为 64,950 美元；第 10 与第 90 百分位年薪分别为 44,220 与 98,980 美元；2024 至 2034 年就业预计增长 1% 至 2%、年均空缺约 5,500 个。该职业页面未标注 Bright Outlook，工资统计不含自雇主收入。"
+              "BLS/O*NET：2025年5月中位年薪64,950美元、时薪31.23；年薪10/90分位44,220/98,980。BLS2025—2035预测增长3.2%、年均空缺6,100；工资不含自雇，就业含自雇。没有Bright Outlook标签不表示岗位消失。"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.26",
+          "source_refs": [
+            "civil-ep-current",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27249,10 +27470,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该职业以受雇岗位为主（用人单位多为设计咨询与政府部门），因此公开分位主要反映受雇工资薪金岗位；地区与行业结构会影响收入水平，但需按职业级与地区数据比较。"
+              "BLS表1.2本职业2025自雇占比0.7%，以受雇岗位为主；OEWS分位反映受雇工资，不包含自雇经营收入。行业差别见同职业行业工资表，不把单位类型直接当个人报价。"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.27",
+          "source_refs": [
+            "civil-ep-current",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27271,7 +27496,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 工作情境显示 84% 的典型工作周为 40 小时，工作以按项目与图纸推进为主，项目周期会影响加班与出差安排。"
+              "O*NET问卷84%回答典型周40小时；OOH说明通常全时，工地日程可受天气和项目安排影响。具体加班、出差和有薪工时另核，不据问卷承诺个人班制。"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.29",
@@ -27293,7 +27518,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工作场景以工程与设计咨询单位与政府部门为主；不同地区的建设投资规模与用人单位结构会影响收入水平，本页不逐州列出，也不以最高值当作普遍水平。"
+              "OOH列工程服务47%、州政府23%、地方政府19%、建筑业3%（2025部分主要雇主）；这不同于O*NET门类51/42/7。编辑建议按目标地区、单位和职责核报酬，不声称建设投资规模已证明个人收入效应。"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.31",
@@ -27315,10 +27540,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 1%—2%（2024—2034 年）"
+              "增长3.2%（2025—2035；OOH取整3%）"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.33",
+          "source_refs": [
+            "civil-ep-current",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27326,10 +27555,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "专业科学与技术服务"
+              "地方政府（不含教育与医院）"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.34",
+          "source_refs": [
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27337,10 +27569,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行业就业占比 50%（O*NET 行业分布）"
+              "76,190美元/年（中位数）"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.35",
+          "source_refs": [
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27348,10 +27583,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行为就业占比而非行业工资；O*NET 该职业页面未提供行业工资中位数。"
+              "OOH Pay：2025年5月，该行业内本职业工资中位数；不是行业所有职业均值、行业就业占比或个人报价。｜https://www.bls.gov/ooh/architecture-and-engineering/civil-engineering-technicians.htm"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.36",
+          "source_refs": [
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27359,10 +27597,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "政府"
+              "工程服务"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.37",
+          "source_refs": [
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27370,10 +27611,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行业就业占比 43%（O*NET 行业分布）"
+              "63,340美元/年（中位数）"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.38",
+          "source_refs": [
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27381,10 +27625,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该行业的职业工资中位数；公共部门另有薪酬管理规定。"
+              "OOH Pay：2025年5月，该行业内本职业工资中位数；不是行业所有职业均值、行业就业占比或个人报价。｜https://www.bls.gov/ooh/architecture-and-engineering/civil-engineering-technicians.htm"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.39",
+          "source_refs": [
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27392,10 +27639,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他行业"
+              "建筑业"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.40",
+          "source_refs": [
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27403,10 +27653,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "合计占比 7%（O*NET 行业分布）"
+              "61,980美元/年（中位数）"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.41",
+          "source_refs": [
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27414,10 +27667,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：该合计项未进一步拆分，也未提供对应工资数据。"
+              "OOH Pay：2025年5月，该行业内本职业工资中位数；不是行业所有职业均值、行业就业占比或个人报价。｜https://www.bls.gov/ooh/architecture-and-engineering/civil-engineering-technicians.htm"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.42",
+          "source_refs": [
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27425,10 +27681,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与地区工资细分"
+              "州政府（不含教育与医院）"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.43",
+          "source_refs": [
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27436,10 +27695,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该职业按行业或地区细分的工资中位数"
+              "61,950美元/年（中位数）"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.44",
+          "source_refs": [
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27447,10 +27709,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "缺少细分数值时不使用行业均值或相邻职业数据替代；如需比较可查阅 BLS OEWS 的行业与地区查询入口。"
+              "OOH Pay：2025年5月，该行业内本职业工资中位数；不是行业所有职业均值、行业就业占比或个人报价。｜https://www.bls.gov/ooh/architecture-and-engineering/civil-engineering-technicians.htm"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.45",
+          "source_refs": [
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27491,7 +27756,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "单位类型（设计咨询、施工、政府）、地区建设投资规模、项目周期与加班安排、以及是否取得注册类资格都会影响实际收入；本页不预测个人收入。"
+              "编辑建议核目标单位、地区、项目安排、有薪工时和资格要求对报酬的具体约定；本轮没有这些因素对个人收入的因果估计，不能仅由注册资格推定涨薪。"
             ]
           },
           "id": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.49",
@@ -27604,7 +27869,7 @@
           },
           "id": "civil-engineering-technicians.fit.riasec-fit-block.4",
           "source_refs": [
-            "bls-entry"
+            "civil-ooh-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27664,7 +27929,7 @@
           },
           "id": "civil-engineering-technicians.fit.riasec-fit-block.8",
           "source_refs": [
-            "nasa-seh"
+            "editorial"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27753,16 +28018,16 @@
                 "url": "https://www.onetonline.org/link/details/17-3022.00"
               },
               {
-                "entity": "O*NET-SOC 17-3022.00 职业摘要",
+                "entity": "O*NET17-3022.00现行完整详细资料",
                 "id": "link-14",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/summary/17-3022.00"
+                "url": "https://www.onetonline.org/link/details/17-3022.00"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（17-3022.00）",
+                "entity": "BLS表1.2：SOC17-3022，2025—2035",
                 "id": "link-15",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/17-3022.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET-SOC 17-3022.00 工作情境字段",
@@ -27777,10 +28042,10 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "O*NET-SOC 17-3022.00 教育与培训信息入口",
+                "entity": "O*NET新入职教育要求问卷及准备层级",
                 "id": "link-18",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtraining/17-3022.00"
+                "url": "https://www.onetonline.org/link/details/17-3022.00#Education"
               },
               {
                 "entity": "O*NET 技术清单（17-3022.00 招聘技术关键词）",
@@ -27804,10 +28069,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业兴趣代码为 RIC（现实型、研究型、常规型）：现实型对应动手操作与现场工作，研究型对应分析与判断，常规型对应按规程与标准处理数据与文档。该职业的工作活动以获取信息、使用计算机、处理信息、评估信息是否符合标准为前几位；兴趣代码描述的是职业群体的取向分布，不是个人适配结论。"
+              "O*NET 职业兴趣代码为 RIC（现实型、研究型、常规型）：现实型对应动手操作与现场工作，研究型对应分析与判断，常规型对应按规程与标准处理数据与文档。该职业的工作活动以获取信息、使用计算机、处理信息、评估信息是否符合标准为前几位；兴趣代码描述的是职业工作内容的兴趣特征，不是个人适配结论。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.2",
+          "source_refs": [
+            "civil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27815,10 +28084,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 兴趣代码与工作活动为官方职业测评数据，描述的是职业群体的取向分布，不是个人适配结论，也不是录用标准。"
+              "证据等级：O*NET 兴趣代码与工作活动为官方职业测评数据，描述的是职业工作内容的兴趣特征，不是个人适配结论，也不是录用标准。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.3",
+          "source_refs": [
+            "civil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27838,10 +28111,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：O*NET 工作风格清单只列出注重细节与可靠两项；如果你在重复核对中容易跳步，或在现场发现问题时不愿意按流程上报，这个职业的风险会明显上升。"
+              "O*NET现行工作风格完整21项，注重细节89、可靠80居前；评分不是个人阈值。编辑建议核自己在重复检查、异常上报和记录交接中的表现，不能直接由测评分数推事故概率。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.5",
+          "source_refs": [
+            "civil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27849,10 +28126,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格在本页只用于描述工作方式，不作为录用或淘汰依据。与该职业任务更相关的是尽责性维度下的「注重细节」与「可靠」、开放性维度下的部分分析倾向，以及情绪稳定性在工地冲突与进度压力下的作用；这些特质影响你如何执行核对与记录，而不是你能不能学会制图。"
+              "编辑自查可关注核对习惯、可靠记录、谨慎和压力下反馈。O*NET工作风格不是大五人格量表，本轮没有把两者分数换算或预测本职业个人表现的效度证据，不作因果判断或录用排序。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.6",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27860,10 +28140,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 工作风格为职业级描述性数据；大五人格量表本身不是职业选拔工具。"
+              "O*NET工作风格为职业级描述；大五自查为编辑建议，未取得本职业具体量表的选拔效度，不能一概断言所有大五量表都不能用于选拔。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.7",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27894,7 +28177,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣取向：该职业群体的兴趣代码为 RIC（现实型、研究型、常规型），日常任务以读图与计算与制图、现场核对与材料试验、按规程记录为主。"
+              "兴趣取向：该职业工作内容的兴趣代码为 RIC（现实型、研究型、常规型），日常任务以读图与计算与制图、现场核对与材料试验、按规程记录为主。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.10",
@@ -27905,10 +28188,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 等类型学工具与本职业适配没有官方证据支持。本页不使用「哪种类型最适合土木工程技术员」的表述：类型学描述的是偏好，不预测工作表现，也不对应岗位准入。"
+              "本轮未取得某一MBTI类型更适合本职业的有效证据；本页不按类型排行或筛选，以读图、计算、记录、协作等实际任务核能力。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.11",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27916,7 +28202,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "适配信号：如果你享受把一处工程量算准并让别人按你的图施工，这份工作会让你有成就感。",
+              "编辑适配信号：愿意把工程量算清并提交图纸供有权人员复核；样本或软件生成的图纸不直接用于施工。",
               "适配信号：如果你更关注现场与实体结构，检验与试验同样是可长期精进的方向。"
             ]
           },
@@ -27928,10 +28214,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：MBTI 类型不是招聘条件，本页不提供按类型筛选岗位的建议。"
+              "本页不以MBTI类型筛选岗位，本轮未取得本职业按类型录用的有效证据；不能断言所有雇主都不使用这种要求。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.13",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27939,10 +28228,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样不是职业测评工具，没有官方职业证据支持。可替代的做法是用具体行为验证兴趣：能否按图独立算出一段构件的工程量并写出依据，能否完成一次现场检验记录，能否在发现不符合项时写出上报说明。"
+              "本轮未取得九型人格预测本职业适配的有效证据。编辑建议用获准、在指导下的图纸计算和检验记录观察兴趣与技能，不把类型作为能力或资格判断。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.14",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27984,10 +28276,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业对数学与阅读的要求明确：O*NET 核心技能清单包含批判性思维、主动倾听、阅读理解、数学、口语表达、监控与写作七项；知识清单以工程与技术、数学、房屋与建筑、设计为前几位；能力清单以演绎推理、数学推理、近视力与口头与书面理解为前几位。"
+              "O*NET现行基本技能10项，其中批判思维72、主动倾听69、阅读理解69、数学66；另列可迁移技能25、知识33、能力52。能力前列包括演绎和数学推理、近视力、口头与书面理解（各72）。这些是职业重要度，非个人能力分数或统一录用标准。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.18",
+          "source_refs": [
+            "civil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -27995,10 +28291,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 技能与知识清单为官方职业数据；IQ 分数不是职业准入条件。"
+              "O*NET技能与知识为职业级资料；本页未取得统一IQ门槛，不能从职业重要度反推个人IQ或替代具体岗位测试。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.19",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28085,7 +28384,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：与该职业任务最贴合的信号是「愿意把图纸与规范核对到底」与「能在现场压力下按流程上报」；兴趣代码为 RIC，但代码只描述群体分布，不决定个人是否适合。"
+              "直接回答：与该职业任务最贴合的信号是「愿意把图纸与规范核对到底」与「能在现场压力下按流程上报」；兴趣代码为 RIC，但代码描述职业工作内容，不决定个人是否适合。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.27",
@@ -28096,10 +28395,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "计算与制图方向"
+              "建筑与工程经理"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.28",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28107,10 +28409,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：愿意长期做工程量计算与详图绘制，并能把依据与假设写清楚。"
+              "编辑自查：希望协调多专业团队、规划工程活动、管理资源与技术质量；不能仅由文档工作推定已具管理能力。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.29",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28118,10 +28423,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你不愿意反复核对同一组数据，这条方向会很快消耗你。"
+              "编辑自查：需补跨专业技术与团队管理经验；本轮未取得晋升概率，不把此方向写成技术员自然升职。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.30",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28129,10 +28437,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "现场检验与材料试验方向"
+              "物流工程师"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.31",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28140,10 +28451,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：愿意到工地并按规定取样与试验，且能如实记录不利结果。"
+              "编辑自查：愿意学习物流系统设计、运输仓储流程与数据分析；工程和记录经验可作学习起点。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.32",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28151,10 +28465,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：这条方向需要频繁往返现场并面对工期压力，需接受户外与防护要求。"
+              "编辑自查：须补物流对象、优化方法和目标岗位训练；现场材料试验并不等同物流工程。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.33",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28162,10 +28479,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "文档与项目支持方向"
+              "项目管理专员"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.34",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28173,10 +28493,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：愿意维护版本与记录与变更台账，并能把流程讲清楚。"
+              "编辑自查：愿意做进度、预算、采购、人员与沟通协调，能维护项目记录和跟踪执行。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.35",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28184,10 +28507,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：这条方向事务性工作多，需要耐心处理版本与分发与留痕。"
+              "编辑自查：须补计划、预算与跨方协调；文档支持经历不等同完整项目管理能力。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.36",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28217,10 +28543,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向需要学历与注册路径，通常不能由技术员岗位直接平移。"
+              "土木工程师通常需相关本科；美国向公众提供服务涉及所在州PE许可要求，不是所有工程师一开始都须持PE。不能由技术员软件能力直接推设计批准权，中国另核法定资格。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.39",
+          "source_refs": [
+            "civil-engineer-neighbor",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28250,10 +28580,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：该方向以管理与协调为主，技术计算占比下降。"
+              "编辑转向自查：施工经理以项目进度、预算、合同和人员协调为重点，仍须有技术理解；本轮没有与技术员技术计算占比的比较数据。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.42",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28327,10 +28660,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有官方证据支持某种 MBTI 类型更适合该职业；本页不提供这种排序。"
+              "本轮未取得某种MBTI类型更适合本职业的有效证据，不提供类型排序。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.49",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28338,7 +28674,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 该职业的兴趣代码为 RIC（现实型、研究型、常规型）。这表示职业群体集中在这三类取向，但代码不是个人适配结论，仍需用实际任务验证。"
+              "O*NET 该职业的兴趣代码为 RIC（现实型、研究型、常规型）。这表示职业内容较符合这三类兴趣，但代码不是个人适配结论，仍需用实际任务验证。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.50",
@@ -28349,10 +28685,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。人格特质分数与工作表现的关联在不同研究中强弱不一，且受机构与项目影响；本页不用它作为录用或适配判断依据。"
+              "本轮未取得本职业具体人格量表分数预测表现的效度证据；O*NET职业工作风格不能换算为个人获聘或绩效概率。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.51",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28371,7 +28710,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业对冲突与压力处理有明确要求：工作情境显示 49% 每月或更频繁地感受到时间压力、38% 认为协调或带领他人极其重要、38% 认为直接面对外部客户或公众极其重要；把分歧落到图纸与实测数据上，是可练习的协作技术。"
+              "该职业对冲突与压力处理有明确要求：工作情境显示 49%每月或更频繁但非每周地感受到时间压力、38% 认为协调或带领他人极其重要、38% 认为直接面对外部客户或公众极其重要；把分歧落到图纸与实测数据上，是可练习的协作技术。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.53",
@@ -28382,10 +28721,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不建议。九型人格不是职业测评工具，也没有官方职业适配证据。"
+              "本轮未取得九型人格用于本职业适配的有效证据；本页建议以任务表现和实际资格核对。"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.54",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28448,10 +28790,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对知识、工作风格与兴趣代码 RIC（能力清单 21 项）"
+              "用于核对现行知识33、能力52、工作风格21和兴趣特征RIC；完整表数量与摘要节选分开"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.60",
+          "source_refs": [
+            "civil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28459,7 +28805,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对 2024 至 2034 年就业预测与年均空缺"
+              "用于核对2025—2035 BLS职业级预测与年均空缺"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.61",
@@ -28492,10 +28838,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对教育分布（高中后证书 30%）与技术训练说明"
+              "用于核对新入职者教育要求问卷：30%高中后证书、28%上过大学无学位、21%副学士；不是在职人口学历比例或统一门槛"
             ]
           },
           "id": "civil-engineering-technicians.fit.personality-fit-block.64",
+          "source_refs": [
+            "civil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28582,7 +28932,7 @@
           },
           "id": "civil-engineering-technicians.risk.career-risk-cards.1",
           "source_refs": [
-            "nasa-seh"
+            "editorial"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28612,7 +28962,7 @@
           },
           "id": "civil-engineering-technicians.risk.career-risk-cards.3",
           "source_refs": [
-            "nasa-seh"
+            "editorial"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28627,7 +28977,7 @@
           },
           "id": "civil-engineering-technicians.risk.career-risk-cards.4",
           "source_refs": [
-            "nasa-seh"
+            "editorial"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28686,10 +29036,10 @@
                 "url": "https://www.onetonline.org/link/details/17-3022.00#WorkContext"
               },
               {
-                "entity": "O*NET-SOC 17-3022.00 职业摘要",
+                "entity": "O*NET17-3022.00现行完整详细资料",
                 "id": "link-4",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/summary/17-3022.00"
+                "url": "https://www.onetonline.org/link/details/17-3022.00"
               },
               {
                 "entity": "O*NET-SOC 17-3022.00 行业分布",
@@ -28735,10 +29085,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：任务与工作情境来自 O*NET 17-3022.00（美国口径）；工资与就业数值来自 O*NET 页面显示的 BLS 数据；BLS Occupational Outlook Handbook 该职业页本轮直接访问返回 HTTP 403，未取得页面原文；中国大陆的执业与技术标准要求来自主管部门公开信息的一般框架；具体阈值与程序以机构制度与适用法规为准。"
+              "任务与情境来自美国O*NET；本轮已读正确OOH职业页。中国设计修改依据勘察设计条例第28条，材料与监理签认依据质量条例第28—31、37条；安全培训、防护和紧急人身危险依据安全条例第25/27/32/33/37条，各主体职责分开。"
             ]
           },
           "id": "civil-engineering-technicians.risk.career-risk-cards.10",
+          "source_refs": [
+            "civil-design-law",
+            "civil-quality-law",
+            "civil-ooh-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28757,10 +29113,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "取值假设与单位与图纸版本出错会造成工程量与材料计划偏差，进而引起采购与施工返工与成本损失。"
+              "编辑风险情境：取值、单位或版本错误可能形成工程量与材料计划偏差，进一步带来采购、施工返工或成本损失；本轮没有发生率或个案成本估计。"
             ]
           },
           "id": "civil-engineering-technicians.risk.career-risk-cards.12",
+          "source_refs": [
+            "civil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28801,10 +29161,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "现场不符合项未被识别或未被记录，会使结构或设施在验收与使用阶段暴露风险；试验过程不规范会使数据失效并导致错误判定。"
+              "编辑风险情境：漏记不符合项或试验过程不合规可能造成错误判定、返工或安全隐患；不能断言任何过程异常必然使全部数据失效。异常如实上报，材料使用遵守适用检验规则。"
             ]
           },
           "id": "civil-engineering-technicians.risk.career-risk-cards.16",
+          "source_refs": [
+            "civil-design-law",
+            "civil-quality-law",
+            "civil-ooh-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28816,6 +29182,12 @@
             ]
           },
           "id": "civil-engineering-technicians.risk.career-risk-cards.17",
+          "source_refs": [
+            "civil-design-law",
+            "civil-quality-law",
+            "civil-ooh-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28845,10 +29217,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "工地存在坠落与机械与临时用电与交通等风险；未按规定佩戴防护装备或未遵守场地安全规程会增加伤害概率。"
+              "编辑核对工地坠落、机械、用电和车辆等可能危险；O*NET问卷是接触情境而非事故率。中国安全条例规定危险部位警示、防护用具、培训和正确使用义务，不能由本页清单判断场地已安全。"
             ]
           },
           "id": "civil-engineering-technicians.risk.career-risk-cards.20",
+          "source_refs": [
+            "civil-safety-law",
+            "civil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28856,10 +29233,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "进入现场前完成安全培训并按规定佩戴防护装备；遵守场地安全规程与作业许可要求，不进入未授权的作业区域。"
+              "中国安全条例：新岗位/现场前须教育培训合格，正确使用防护用具与设备，特种作业另有专门资格；项目管理技术人员有安全交底职责。紧急人身危险按第32条可停止自身作业或采取必要应急措施后撤离，不等待AI/普通复核；项目全面中止与恢复另核有权主体。"
             ]
           },
           "id": "civil-engineering-technicians.risk.career-risk-cards.21",
+          "source_refs": [
+            "civil-safety-law",
+            "civil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28889,10 +29271,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "图纸与计算书与试验报告的版本失控会造成现场按旧版施工，并在验收与结算阶段引发争议。"
+              "编辑风险情境：版本失控可能导致误用旧图及验收/结算争议。中国质量条例要求按设计图和标准施工，不得擅改；用记录补齐不能追认不合法改图。"
             ]
           },
           "id": "civil-engineering-technicians.risk.career-risk-cards.24",
+          "source_refs": [
+            "civil-design-law",
+            "civil-quality-law",
+            "civil-ooh-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28904,6 +29292,12 @@
             ]
           },
           "id": "civil-engineering-technicians.risk.career-risk-cards.25",
+          "source_refs": [
+            "civil-design-law",
+            "civil-quality-law",
+            "civil-ooh-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28944,10 +29338,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "明确本人可确认的范围；涉及设计变更与价格与安全的事项提交相应岗位并按流程记录。"
+              "明确合同承诺权限；中国设计文件修改须由原设计单位或依法获委托的有资质单位办理，重大修改报原批准机关。材料与安全事项按质量/安全条例实际职责执行，普通书面确认不替代法定程序。"
             ]
           },
           "id": "civil-engineering-technicians.risk.career-risk-cards.29",
+          "source_refs": [
+            "civil-design-law",
+            "civil-quality-law",
+            "civil-ooh-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -28977,10 +29377,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "长期在工期与现场压力下工作且缺少反馈与支持时，会出现核对流于形式与风险麻木，进而影响判断质量。"
+              "编辑风险情境：工期压力、疲劳或反馈不足可能妨碍认真核对；本轮未取得它们造成职业判断下降的因果测量，不断言长期从业必然风险麻木。"
             ]
           },
           "id": "civil-engineering-technicians.risk.career-risk-cards.32",
+          "source_refs": [
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29078,7 +29481,7 @@
           },
           "id": "civil-engineering-technicians.path.career-path-block.1",
           "source_refs": [
-            "onet-training"
+            "civil-onet-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -29209,10 +29612,10 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET 全国就业趋势页面（17-3022.00，显示 BLS 就业预测）",
+                "entity": "BLS表1.2：SOC17-3022，2025—2035",
                 "id": "link-1",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/17-3022.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET-SOC 17-3022.00 准备层级（Job Zone）",
@@ -29221,16 +29624,16 @@
                 "url": "https://www.onetonline.org/link/details/17-3022.00#JobZone"
               },
               {
-                "entity": "O*NET-SOC 17-3022.00 教育与培训信息入口",
+                "entity": "O*NET17-3022.00完整职责、教育问卷与Job Zone",
                 "id": "link-3",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtraining/17-3022.00"
+                "url": "https://www.onetonline.org/link/details/17-3022.00"
               },
               {
-                "entity": "O*NET-SOC 17-3022.00 技能与能力入口",
+                "entity": "BLS土木工程技师与技术员：入行与职责边界",
                 "id": "link-4",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/details/17-3022.00#Skills"
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/civil-engineering-technicians.htm"
               }
             ]
           },
@@ -29275,7 +29678,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能独立承担一类构件的计算与图纸并对依据负责，能独立完成现场检验与试验记录并跟踪不符合项关闭。"
+              "编辑能力阶段：在实际职责、资格与复核安排内承担一类构件计算/图纸、检验记录和不符合项跟踪；能独立执行分工任务不等于可批准设计或监督整个项目。"
             ]
           },
           "id": "civil-engineering-technicians.path.career-path-block.14",
@@ -29341,10 +29744,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：进入该职业最常见的路径是完成工程或建筑或测绘相关的技术训练（该职业页面的教育分布为高中后证书 30%、上过大学但无学位 28%、副学士 21%），从制图与计算与现场配合岗位开始积累，再逐步承担独立的技术任务。"
+              "美国BLS典型入行学历为副学士，雇主可偏好认可课程但并非所有岗位须有学位，技术学校证书/文凭是另一训练途径；部分technologist要求本科，也有制图/CAD经验转入路线。O*NET30/28/21为新入职教育要求问卷回答，不能据此称证书为多数人的最低门槛。中国资格与岗位要求另核。"
             ]
           },
           "id": "civil-engineering-technicians.path.career-path-block.20",
+          "source_refs": [
+            "civil-ooh-current",
+            "civil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29352,10 +29760,19 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界：教育背景、职业培训与认证、法定或执业资格、机构授权是四件不同的事。在美国，注册工程师（PE）资格与工程签字权属于相应执业体系，技术员通常在工程人员指导下工作；O*NET 该职业页面列出多项行业认证（如 NICET 与 ACI 方向），认证是能力与方向的证明，不等于执照或签字权。"
+              "美国OOH说明入行不普遍强制认证，但可帮助发展；O*NET认证页列29项，包括NICET与ACI方向。认证内容与级别不同，须核考试、经历、实操及雇主认可，不等于执照或设计批准权；中国单位资质、人员资格、职称和实际岗位职责分别核。"
             ]
           },
           "id": "civil-engineering-technicians.path.career-path-block.21",
+          "source_refs": [
+            "civil-cert-current",
+            "civil-nicet",
+            "civil-aci",
+            "civil-ooh-current",
+            "civil-design-law",
+            "civil-quality-law",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29374,10 +29791,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本页关于入行与培养采用 O*NET 口径：Job Zone Three、SVP 区间 6.0 至 7.0 以下、教育分布为高中后证书 30% 与上过大学但无学位 28% 与副学士 21%；中国大陆未建立与 O*NET-SOC 17-3022.00 一一对应的职业细类，工程勘察设计与施工与监理活动另有各自的执业与技术标准要求。"
+              "O*NET Job Zone Three、SVP6.0至<7.0是准备层级；教育问卷问新入职者所需教育，不是全国在职学历比例。BLS典型副学士，不能直接等同中国专科；中国具体职业映射及资格本轮未核定。"
             ]
           },
           "id": "civil-engineering-technicians.path.career-path-block.23",
+          "source_refs": [
+            "civil-ooh-current",
+            "civil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29385,7 +29807,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对 2024 至 2034 年就业预测与年均空缺"
+              "用于核对2025—2035 BLS职业级预测与年均空缺"
             ]
           },
           "id": "civil-engineering-technicians.path.career-path-block.24",
@@ -29396,7 +29818,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对准备层级与教育分布"
+              "用于核对Job Zone/SVP与新入职教育要求问卷，不是从业者学历分布"
             ]
           },
           "id": "civil-engineering-technicians.path.career-path-block.25",
@@ -29418,10 +29840,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对入行说明（该页本轮直接访问返回 HTTP 403，未取得原文）"
+              "正确BLS页已读学历、制图经验转入、认证非普遍必需及设计批准职责边界"
             ]
           },
           "id": "civil-engineering-technicians.path.career-path-block.27",
+          "source_refs": [
+            "civil-ooh-current",
+            "civil-onet-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29440,7 +29867,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "把单位与取值与依据写成固定格式，减少复核成本。"
+              "编辑建议把单位、取值和依据写明便于复核；本轮无复核成本降低幅度证据。"
             ]
           },
           "id": "civil-engineering-technicians.path.career-path-block.29",
@@ -29484,7 +29911,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "岗位通常要求一定的项目经验与软件能力。"
+              "编辑建议向目标雇主核具体项目经历与软件要求；本轮无招聘样本证明统一经验门槛。"
             ]
           },
           "id": "civil-engineering-technicians.path.career-path-block.33",
@@ -29517,7 +29944,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立完成一类构件的计算与详图并对依据负责。"
+              "在符合实际资格、职责与审核程序的范围内完成一类构件计算与详图并对依据负责，不自行批准设计。"
             ]
           },
           "id": "civil-engineering-technicians.path.career-path-block.36",
@@ -29539,7 +29966,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "校核岗通常要求多年经验与机构授权。"
+              "编辑建议核目标校核岗位的经历、能力与授权要求；本轮不设统一多年经验门槛。"
             ]
           },
           "id": "civil-engineering-technicians.path.career-path-block.38",
@@ -29594,7 +30021,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求机构内明确职责与相应授权。"
+              "编辑建议核职责分配与相应授权，机构安排不能替代法定义务。"
             ]
           },
           "id": "civil-engineering-technicians.path.career-path-block.43",
@@ -29649,10 +30076,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求安全培训与现场作业许可。"
+              "进入新现场前核培训合格与防护要求；实际需要特种作业资格或其他许可时另核，不称所有技术员统一须作业许可。"
             ]
           },
           "id": "civil-engineering-technicians.path.career-path-block.48",
+          "source_refs": [
+            "civil-safety-law",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29704,10 +30135,19 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "部分岗位要求行业认证（如材料试验方向）。"
+              "美国认证非普遍入行必需；材料试验雇主可能按具体项目核NICET/ACI等认可，不能把所有现场岗位统一设证书门槛。"
             ]
           },
           "id": "civil-engineering-technicians.path.career-path-block.53",
+          "source_refs": [
+            "civil-cert-current",
+            "civil-nicet",
+            "civil-aci",
+            "civil-ooh-current",
+            "civil-design-law",
+            "civil-quality-law",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -29759,7 +30199,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求多年现场经验与机构授权。"
+              "编辑建议核现场经验、实操能力与授权；本轮不设统一多年经验门槛。"
             ]
           },
           "id": "civil-engineering-technicians.path.career-path-block.58",
@@ -29814,7 +30254,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求相应资质与机构授权。"
+              "编辑建议按具体现场职责核法定资格和机构授权，不能一概为所有技术员设资质门槛。"
             ]
           },
           "id": "civil-engineering-technicians.path.career-path-block.63",
@@ -29869,7 +30309,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求熟悉机构文档管理制度。"
+              "编辑建议先熟悉目标机构文档制度，具体入职要求另核。"
             ]
           },
           "id": "civil-engineering-technicians.path.career-path-block.68",
@@ -29979,7 +30419,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求多个完整项目的经验。"
+              "编辑建议核目标岗位项目记录与实际承担范围；不设多个完整项目的普遍经验门槛。"
             ]
           },
           "id": "civil-engineering-technicians.path.career-path-block.78",
@@ -30034,7 +30474,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求机构内明确职责与授权。"
+              "编辑建议核目标协调职责与机构授权，具体要求另向雇主核。"
             ]
           },
           "id": "civil-engineering-technicians.path.career-path-block.83",
@@ -30098,7 +30538,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "编辑建议核对的岗位条件",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -30108,18 +30548,18 @@
                 "在指导下整理图纸与资料并按模板绘图，不独立决定计算取值。",
                 "图纸是否规范、修改是否留痕、被指出问题后是否改正。",
                 "用图纸样本与带教评价证明。",
-                "与独立技术岗相比不承担计算与判断责任。"
+                "在指导下承担分工任务，仍对本人执行和记录负责，不等于没有计算或判断责任"
               ],
               [
                 "技术员（计算与制图）",
                 "按图完成尺寸与数量计算与详图绘制并对依据负责。",
                 "取值与单位是否正确、依据是否可复核、是否符合规范。",
                 "用一段时间的计算书与图纸与复核意见证明。",
-                "与校核岗相比不承担他人成果的校核责任。"
+                "编辑分工示例：计算与制图侧重本人任务，是否校核他人成果仍按具体岗位职责及授权核，不按本表排除。"
               ],
               [
                 "现场检验技术员",
-                "独立完成现场核对与取样与试验并跟踪不符合项。",
+                "在符合实际资格、培训与规程的范围内核对、取样、试验并记录上报；不等于设计或材料使用批准权",
                 "检验记录完整性、问题上报及时性、关闭状态是否可追溯。",
                 "用检验记录与整改跟踪记录证明。",
                 "与设计岗相比更依赖现场条件与工期配合。"
@@ -30132,11 +30572,11 @@
                 "与执行岗相比增加校核责任与协调职责。"
               ],
               [
-                "项目技术负责人",
+                "后续发展目标：项目技术管理（非本职业统一入门岗位）",
                 "统筹项目技术方案与专业接口与质量标准执行。",
                 "技术方案完整性、接口协调、质量与合规执行。",
                 "用项目技术文件与验收记录证明。",
-                "与一般技术岗相比增加管理与对外责任。"
+                "需另核该角色资格、职责及项目管理经验；美国本职业不能直接批准设计或监督整个项目"
               ]
             ]
           },
@@ -30152,7 +30592,7 @@
               {
                 "id": "education",
                 "values": [
-                  "教育分布为高中后证书 30%、上过大学但无学位 28%、副学士或其他两年制学位 21%（该职业页面）；",
+                  "美国新入职教育要求问卷30%证书、28%上过大学无学位、21%副学士；不是学历人口比例，BLS典型入行副学士，部分technologist雇主要求本科",
                   "岗位通常要求制图与测量与材料试验的实操能力；",
                   "设计与注册路径通常另有学历与工作经验要求。"
                 ]
@@ -30161,14 +30601,14 @@
                 "id": "clearance",
                 "values": [
                   "进入工地通常需要完成安全培训并按规定佩戴防护装备；",
-                  "部分岗位要求健康检查与作业许可；",
+                  "编辑建议按具体岗位核健康或许可要求；特种作业另有资格，不把这些写成所有技术员同一门槛",
                   "涉及受控资料与涉密项目的岗位另按机构制度审核。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "O*NET 工作风格列出注重细节与可靠两项；",
+                  "O*NET工作风格完整21项，注重细节89、可靠80居前；不是个人阈值",
                   "核心技能以批判性思维与主动倾听与阅读理解与数学为前几位；",
                   "工作活动以获取信息、使用计算机、处理信息、评估信息是否符合标准为前几位。"
                 ]
@@ -30297,7 +30737,7 @@
                 "面试与技术问答",
                 "对图纸与规范的理解、单位与取值习惯、遇到不符项的处理方式。",
                 "是否知道先澄清再计算、是否理解上报流程。",
-                "面试问答不等同于实际执行力，机构通常另有带岗与培训。"
+                "面试问答不等同实际执行能力；编辑建议向目标机构核带岗、培训及实操安排。"
               ],
               [
                 "实操或算量测试",
@@ -30420,9 +30860,9 @@
             "rows": [
               [
                 "高中后证书（工程或建筑或测绘）",
-                "多数入行者",
-                "是常见的最低技术训练要求",
-                "多为要求（该职业页面教育分布 30%）",
+                "美国职业技术证书路线的申请者",
+                "是技术训练路线之一，30%问卷回答不证明多数岗位最低要求",
+                "非统一门槛；BLS典型入行学历副学士",
                 "完成职业技术课程并掌握制图与测量基础",
                 "中",
                 "不同机构与地区对课程内容要求不同。"
@@ -30430,8 +30870,8 @@
               [
                 "副学士或其他两年制学位",
                 "希望进入设计与咨询岗位的人",
-                "对技术岗位有明显帮助",
-                "否（非统一门槛，教育分布 21%）",
+                "美国BLS典型入行学历，雇主可能偏好认可课程",
+                "典型要求，不代表所有雇主；21%问卷是新入职要求回答",
                 "完成两年制工程相关课程",
                 "中",
                 "学历不是能力证明，但对岗位层级有影响。"
@@ -30440,7 +30880,7 @@
                 "本科学历（土木或测绘等）",
                 "希望走设计与注册路径的人",
                 "对设计与注册路径有实际作用",
-                "否（多数技术员岗位不强制）",
+                "部分美国technologist雇主要求本科，具体岗位另核",
                 "完成本科学习并满足先修要求",
                 "高",
                 "注册工程师路径通常还需要工作经验与考试。"
@@ -30450,8 +30890,8 @@
                 "希望获得方向性认可的人",
                 "作为能力与方向的证明",
                 "否（认证不等于执照）",
-                "按各认证机构要求提交材料并通过考试",
-                "中",
+                "例：NICET混凝土分级须考试、主管实操验证及相应经历；ACI强度试验须笔试与实操，不能一概简化为交材料和笔试",
+                "编辑投入建议：先核方向、等级、经验和收费，本轮未核目标考试总成本",
                 "认证不被承认的情形存在，须按机构与法域核对。"
               ],
               [
@@ -30466,7 +30906,7 @@
               [
                 "注册类执业资格（美国 PE 等）",
                 "希望承担设计与签字责任的人",
-                "决定能否承担设计签字与技术责任",
+                "美国向公众提供工程服务与依法批准设计须核州许可；并非技术员统一入行要求",
                 "否（技术员岗位通常不需要）",
                 "按所在法域要求完成学历与工作经验与考试",
                 "高",
@@ -30475,6 +30915,15 @@
             ]
           },
           "id": "civil-engineering-technicians.path.credential-decision.1",
+          "source_refs": [
+            "civil-cert-current",
+            "civil-nicet",
+            "civil-aci",
+            "civil-ooh-current",
+            "civil-design-law",
+            "civil-quality-law",
+            "editorial"
+          ],
           "title": "资格选择",
           "type": "table"
         },
@@ -30483,13 +30932,22 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "本页把「教育背景」「职业培训与认证」「法定或执业资格」与「机构授权」分列：学历与技术训练决定可进入的岗位层级，培训用于能力建设，注册类执业资格与工程签字权由法域主管部门规定，机构授权与复核由机构制度决定，四者不能互相替代。",
+              "教育、培训/认证、执业资格、单位资质及实际岗位职责分别核，不能互相替代。美国OOH本职业不能批准设计或监督整个项目，认证非普遍入行必需；NICET分级须经历和实操验证，ACI强度试验须笔试及实操，均不授设计签字权。中国勘察设计单位资质和人员注册、施工材料检验专人签字、监理及总监职责按法规判断；机构授权不能免除法定义务。",
               "美国：注册工程师（PE）资格与工程签字权属于相应执业体系，技术员通常在工程人员指导下工作；O*NET 该职业页面列出多项行业认证（如 NICET 与 ACI 方向），认证不等于执照或签字权。",
               "中国大陆：工程勘察设计与施工与监理等活动另有各自的执业与技术标准要求，注册类资格与专业技术职称与岗位职责的关系须按主管部门与用人单位规定核对。",
               "本页不保证任何培训或认证被特定机构或法域承认，也不代替执业资格与签字权限的具体判断。"
             ]
           },
           "id": "civil-engineering-technicians.path.credential-boundary.1",
+          "source_refs": [
+            "civil-cert-current",
+            "civil-nicet",
+            "civil-aci",
+            "civil-ooh-current",
+            "civil-design-law",
+            "civil-quality-law",
+            "editorial"
+          ],
           "title": "资格与练习边界",
           "type": "notice"
         },
@@ -30523,11 +30981,11 @@
             ]
           },
           "fact_refs": [
-            "us-employment-2025"
+            "civil-employment-2025"
           ],
           "id": "civil-engineering-technicians.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls-outlook"
+            "civil-ep-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30541,11 +30999,11 @@
             ]
           },
           "fact_refs": [
-            "us-growth-2025-2035"
+            "civil-growth-2025-2035"
           ],
           "id": "civil-engineering-technicians.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls-outlook"
+            "civil-ep-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30560,7 +31018,7 @@
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls-outlook"
+            "civil-ep-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30574,11 +31032,11 @@
             ]
           },
           "fact_refs": [
-            "us-openings-2025-2035"
+            "civil-openings-2025-2035"
           ],
           "id": "civil-engineering-technicians.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls-outlook"
+            "civil-ep-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30593,7 +31051,7 @@
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.5",
           "source_refs": [
-            "onet-industry"
+            "civil-industry-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30608,7 +31066,7 @@
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.6",
           "source_refs": [
-            "bls-outlook"
+            "civil-ep-current"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30631,10 +31089,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（17-3022.00，显示 BLS 就业预测）",
+                "entity": "BLS表1.2：SOC17-3022，2025—2035",
                 "id": "link-3",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/17-3022.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
@@ -30643,10 +31101,10 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "人力资源和社会保障部企业薪酬调查信息入口",
+                "entity": "国家统计局：2025年城镇单位就业人员年平均工资（行业背景）",
                 "id": "link-5",
                 "relation": "related-evidence",
-                "url": "https://www.mohrss.gov.cn/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET-SOC 17-3022.00 职业详细资料",
@@ -30712,10 +31170,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：BLS 就业预测显示 2024 年该职业约 64,900 人，2024 至 2034 年预计增长 1% 至 2%（低于所有职业平均），年均空缺约 5,500 个；需求受基础设施与建设投资与政府项目影响，单一项目繁荣不能推断所有地区稳定扩张。"
+              "BLS表1.2预测2025—2035本职业就业70,900→73,200、净增2,300、增长3.2%、年均空缺6,100；OOH取整3%，约与平均相同。OOH说明基础设施修复及水系统项目需要技术支持，改进CAD可能限制增长，不是生成式AI因果估计。不能由全国预测推某城市或雇主机会。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.8",
+          "source_refs": [
+            "civil-ep-current",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -30734,10 +31196,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024 至 2034 年（预测）"
+              "2025—2035年（预测）"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.10",
+          "source_refs": [
+            "civil-ep-current",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -30745,10 +31211,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增长 1% 至 2%，低于所有职业平均；预测以现有产业结构为假设，含误差，不等于逐年的实际岗位数。"
+              "增长3.2%（BLS表1.2），OOH取整3%、约与所有职业平均相同；含假设与误差，不是逐年实际值。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.11",
+          "source_refs": [
+            "civil-ep-current",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -30789,10 +31259,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增长 1% 至 2%（2024 至 2034 年）"
+              "增长3.2%（2025—2035；OOH取整3%）"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.15",
+          "source_refs": [
+            "civil-ep-current",
+            "civil-ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -30888,10 +31362,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025 年及以前已发布资料"
+              "2025年工资、2026-05-15发布；本轮查阅2026-10-09"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.24",
+          "source_refs": [
+            "civil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -30899,10 +31377,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本条证据路由把精确职业工资登记为已核实不可得，本页只登记统计口径与缺口，不发布数值。"
+              "中国精确职业工资仍证据不足；2025科学技术服务业/建筑业年平均工资只作相应用人单位背景，不是职业级收入或就业增长预测。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.25",
+          "source_refs": [
+            "civil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -30910,10 +31392,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业门类或较宽职业口径不能替代本职业的精确全国口径；本页不采用招聘样本或相邻岗位报价填补。"
+              "门类覆盖所有职业及不同单位形态，不替代本职业全国工资；不以招聘报价或相邻岗位填补精确缺口。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.26",
+          "source_refs": [
+            "civil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -30976,10 +31462,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于登记中国大陆的统计口径与缺口"
+              "用于核中国宽行业工资背景与统计覆盖，不能支持本职业工资或就业预测"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.32",
+          "source_refs": [
+            "civil-nbs-current",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -30998,7 +31488,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少现场与合同与团队与成本管理的完整周期经验。"
+              "缺少承担设计责任所需的学历与注册路径。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.34",
@@ -31009,7 +31499,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共享能力：读图与规范理解、现场沟通、记录与协调。"
+              "共享能力：读图与计算、规范理解、现场与设计配合。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.35",
@@ -31020,7 +31510,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。施工经理方向需要补足合同与团队与进度管理经验。"
+              "编辑转向自查：土木工程师通常需相关本科，美国向公众提供服务另涉及州PE许可，不是所有工程师入职即须PE；技术员任务经验不等于设计批准权，资格按目标法域核。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.36",
@@ -31031,7 +31521,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少跨专业设计接口与团队与项目组合的统筹经验。"
+              "缺少现场与合同与团队与成本管理的完整周期经验。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.37",
@@ -31042,7 +31532,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共享能力：技术流程理解、多专业协调、文档与质量控制。"
+              "共享能力：读图与规范理解、现场沟通、记录与协调。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.38",
@@ -31053,7 +31543,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。建筑与工程经理方向通常从专业负责人起步。"
+              "编辑任务自查：施工经理需另补合同、团队、进度及现场管理能力；具体目标职责与经验要求向雇主核，不是实测转岗难度。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.39",
@@ -31064,7 +31554,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少系统的估算方法与清单与计价训练。"
+              "缺少跨专业设计接口与团队与项目组合的统筹经验。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.40",
@@ -31075,7 +31565,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共享能力：工程量计算、图纸与规范理解、数据核对。"
+              "共享能力：技术流程理解、多专业协调、文档与质量控制。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.41",
@@ -31086,7 +31576,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较小。造价方向与本职业共享工程量基础，但方法与工具需专门学习。"
+              "编辑转向自查：建筑与工程经理涉及统筹技术活动、人员与资源，需补跨专业与管理经验；不是技术员统一晋升路线，距离标签不表示成功概率。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.42",
@@ -31097,7 +31587,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少运输与仓储与流程优化的专业训练。"
+              "缺少系统的估算方法与清单与计价训练。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.43",
@@ -31108,7 +31598,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共享能力：工程方法与数据分析、流程与效率意识。"
+              "共享能力：工程量计算、图纸与规范理解、数据核对。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.44",
@@ -31119,7 +31609,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。物流工程方向的对象与工具与本职业不同。"
+              "编辑任务自查：造价与估算方向可利用工程量基础，需另学估算、清单与计价方法；不表示转岗容易或成功概率。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.45",
@@ -31130,7 +31620,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少计划体系与跨方协调与汇报机制的经验。"
+              "缺少运输与仓储与流程优化的专业训练。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.46",
@@ -31141,7 +31631,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共享能力：进度意识、文档与沟通、多方协调。"
+              "共享能力：工程方法与数据分析、流程与效率意识。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.47",
@@ -31152,7 +31642,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较小。项目管理方向与本职业共享计划与沟通能力，但通常不承担技术计算。"
+              "编辑任务自查：物流工程对象涉及运输、仓储和流程优化，需核目标任务及专业训练；不表示实测转岗距离。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.48",
@@ -31163,7 +31653,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少承担设计责任所需的学历与注册路径。"
+              "缺少计划体系与跨方协调与汇报机制的经验。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.49",
@@ -31174,7 +31664,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "共享能力：读图与计算、规范理解、现场与设计配合。"
+              "共享能力：进度意识、文档与沟通、多方协调。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.50",
@@ -31185,10 +31675,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。土木工程师方向需要学历与注册资格，责任层级不同。"
+              "编辑任务自查：项目管理方向可利用记录、沟通和协调经验，需补计划与跨方协调；技术计算是否在职责内由目标岗位核。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.51",
+          "source_refs": [
+            "civil-engineer-neighbor",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31218,7 +31712,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较小。测绘与制图方向与本职业的现场与图纸能力相通。"
+              "编辑任务自查：测绘与制图方向可利用坐标、高程与现场记录基础，需补测量仪器和成果规范训练；不表示实测转岗距离。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.54",
@@ -31251,7 +31745,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较小。制图方向以图纸产出为主，现场与检验职责较少。"
+              "编辑任务自查：制图方向可利用图纸和版本管理基础，需补专职制图规范训练；现场和检验职责按目标岗位核，不作职业间占比判断。"
             ]
           },
           "id": "civil-engineering-technicians.market-signals.market-signal-card.57",
@@ -31394,10 +31888,22 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容由费马测试职业内容编辑组按公开官方来源整理，职业身份与任务与工作情境采用 O*NET-SOC 17-3022.00，美国工资采用 BLS OEWS（2025 年 5 月），就业与展望采用 BLS 就业预测（2024 至 2034 年，经 O*NET 页面显示）；BLS Occupational Outlook Handbook 该职业页本轮直接访问返回 HTTP 403，未取得页面原文，本页已登记该访问缺口；中国大陆按证据路由登记为公开数据缺口，不发布数值；编辑归纳与虚构练习单独标注。"
+              "本轮2026-10-09逐段核九模块：O*NET17-3022.00职责与现行完整表、OEWS2025年5月工资、BLS2025—2035表1.2及正确OOH页；中国精确工资仍缺，另补2025匹配行业背景。原引用被FAQ/边界等范围外内容共享，保留旧登记并追加本轮来源，九模块采用新引用；历史403与旧数字不作为本轮新结论。"
             ]
           },
           "id": "civil-engineering-technicians.sources.source-card.1",
+          "source_refs": [
+            "civil-onet-current",
+            "civil-ooh-current",
+            "civil-ep-current",
+            "civil-nbs-current",
+            "civil-design-law",
+            "civil-quality-law",
+            "civil-safety-law",
+            "civil-nist-current",
+            "ilo-genai",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31405,10 +31911,22 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源为美国 O*NET OnLine 公开页面（含职业详细资料与摘要与行业分布与技术清单与认证与工资分位）与 U.S. Bureau of Labor Statistics 的公开统计口径，以及人力资源和社会保障部与国家统计局的公开信息入口。所有数值均保留其职业与地域与期间与单位与统计口径；来源清单见页面「资料来源」。"
+              "数值分别来自O*NET全国工资、BLS职业预测及OOH同行业职业工资；中国背景来自国家统计局表2/5和调查说明。设计、施工检验与安全职责核公开法规原文；NIST为通用自愿框架、ILO为暴露研究，编辑试测建议不是验证效果。"
             ]
           },
           "id": "civil-engineering-technicians.sources.source-card.2",
+          "source_refs": [
+            "civil-onet-current",
+            "civil-ooh-current",
+            "civil-ep-current",
+            "civil-nbs-current",
+            "civil-design-law",
+            "civil-quality-law",
+            "civil-safety-law",
+            "civil-nist-current",
+            "ilo-genai",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31416,10 +31934,22 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容检索与更新于 2026 年 9 月。"
+              "本次九模块阅读与修订日期2026-10-09；来源统计期、发布日期、法规版本分别登记，不把检索日期当数据期。"
             ]
           },
           "id": "civil-engineering-technicians.sources.source-card.3",
+          "source_refs": [
+            "civil-onet-current",
+            "civil-ooh-current",
+            "civil-ep-current",
+            "civil-nbs-current",
+            "civil-design-law",
+            "civil-quality-law",
+            "civil-safety-law",
+            "civil-nist-current",
+            "ilo-genai",
+            "editorial"
+          ],
           "type": "prose"
         },
         {
@@ -31771,6 +32301,216 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "Tasks / Skills / Knowledge / Abilities / Work Styles / Education / Work Context / Job Zone"
+                ],
+                "evidence_type": "official source",
+                "id": "civil-onet-current",
+                "limitation": "15任务、41工作活动、基本技能10/可迁移25、知识33、能力52、工作风格21及教育问卷；职业评分和受访回答不能当个人阈值",
+                "market": "美国",
+                "name": "O*NET17-3022.00现行详细资料",
+                "period": "2026更新页面；检索2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-3022.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "Industry"
+                ],
+                "evidence_type": "official source",
+                "id": "civil-industry-current",
+                "limitation": "专业科学技术服务51%、政府42%、其他7%；门类占比非行业工资，不能与OOH部分主要雇主占比当同一表",
+                "market": "美国",
+                "name": "O*NET17-3022.00行业分布",
+                "period": "当前行业页；2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/17-3022.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "What They Do / How to Become One / Pay / Job Outlook"
+                ],
+                "evidence_type": "official source",
+                "id": "civil-ooh-current",
+                "limitation": "本轮web读到原文，终端下载403不撤销已读证据；典型副学士、认证非普遍必需、不批准设计或监督总项目；行业工资为同行业内本职业，非门类均值",
+                "market": "美国",
+                "name": "BLS Civil Engineering Technologists and Technicians（正确职业页）",
+                "period": "2025工资/就业、2025—2035预测；更新2026-08-27",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/civil-engineering-technicians.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "Table 1.2，SOC17-3022行及列头"
+                ],
+                "evidence_type": "official statistical table",
+                "id": "civil-ep-current",
+                "limitation": "SOC17-3022：规模单位千人，70.9→73.2、净增2.3、增长3.2%、年均空缺6.1、自雇0.7%；不将舍入值推个人机会或AI因果",
+                "market": "美国",
+                "name": "BLS表1.2 Occupational projections and worker characteristics",
+                "period": "2025—2035预测；2025基期",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "表2、表5、统计范围及工资定义"
+                ],
+                "evidence_type": "official statistical release",
+                "id": "civil-nbs-current",
+                "limitation": "科学技术服务业/建筑业表2非私营及表5私营，年平均工资覆盖整个门类；5人及以上城镇法人单位，不含个体/自由职业；不能当本职业中位数或月薪",
+                "market": "中国大陆",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025年工资；2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "第7—10、25—30条"
+                ],
+                "evidence_type": "official legal text",
+                "id": "civil-design-law",
+                "limitation": "第7—10条单位资质、范围和人员注册；第28条设计文件修改主体、书面同意委托和重大修改报批，不把普通项目确认当改图授权",
+                "market": "中国大陆",
+                "name": "建设工程勘察设计管理条例（2017修改公开文本）",
+                "period": "2017修改公开文本；2026-10-09读取",
+                "publisher": "国家市场监督管理总局公开国务院法规",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_7aebb685f7b94720bfdccf8ac71541c9.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "第19、25—38条"
+                ],
+                "evidence_type": "official legal text",
+                "id": "civil-quality-law",
+                "limitation": "第19条设计人员责任；第28—31条不得擅改、检验专人签字、未经检验/不合格不得使用及见证取样；第37条监理/总监不同签认职责",
+                "market": "中国大陆",
+                "name": "建设工程质量管理条例（2019第二次修订公开文本）",
+                "period": "2019第二次修订公开文本；2026-10-09读取",
+                "publisher": "国家市场监督管理总局公开国务院法规",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_e42ecef60e9146af83cf9846821fac6c.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "第25—37条"
+                ],
+                "evidence_type": "official legal text",
+                "id": "civil-safety-law",
+                "limitation": "第25特种作业资格、第27安全交底、第32防护与紧急人身危险停止自身作业/撤离、第33正确使用、第37新岗位/现场培训；不是通用项目恢复许可",
+                "market": "中国大陆",
+                "name": "建设工程安全生产管理条例",
+                "period": "2004-02-01施行公开文本；2026-10-09读取",
+                "publisher": "教育部公开国务院法规",
+                "scope": "contextual",
+                "url": "https://www.moe.gov.cn/jyb_xwfb/xw_zt/moe_357/s3581/moe_2698/moe_2825/tnull_53863.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "框架导言、Govern / Map / Measure / Manage"
+                ],
+                "evidence_type": "official framework",
+                "id": "civil-nist-current",
+                "limitation": "自愿通用风险框架，不是强制工程规程、职业采用率或本职业效果试验；编辑建议须按项目改写",
+                "market": "通用风险框架",
+                "name": "NIST AI Risk Management Framework 1.0",
+                "period": "2023-01，AI100-1；复用本任务同版已核",
+                "publisher": "National Institute of Standards and Technology",
+                "scope": "contextual",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "第13、28—30条"
+                ],
+                "evidence_type": "official legal text",
+                "id": "civil-privacy-law",
+                "limitation": "第13条合法处理基础及28—30敏感信息规则；脱敏或内网本身不授处理权限，不涉及本职业采用率",
+                "market": "中国大陆",
+                "name": "中华人民共和国个人信息保护法",
+                "period": "2021-11-01施行；复用本任务同版已核",
+                "publisher": "国家市场监督管理总局公开法律文本",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "National Certifications / 来源及非背书说明"
+                ],
+                "evidence_type": "official source",
+                "id": "civil-cert-current",
+                "limitation": "29项是相关认证入口，非普遍录用或法定资格；NICET/ACI的具体项目须读颁证方要求",
+                "market": "美国",
+                "name": "O*NET17-3022.00 National Certifications",
+                "period": "当前29项认证；2026-10-09读取",
+                "publisher": "O*NET OnLine / CareerOneStop",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localcert/17-3022.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "Certification Requirements，Levels I—IV"
+                ],
+                "evidence_type": "credential issuer requirements",
+                "id": "civil-nicet",
+                "limitation": "各级考试、主管实操验证和经历要求分别核；不将认证作为所有技术员入行条件或设计执照",
+                "market": "美国",
+                "name": "NICET混凝土材料检测认证分级要求",
+                "period": "当前公开分级要求；2026-10-09读取",
+                "publisher": "National Institute for Certification in Engineering Technologies",
+                "scope": "contextual",
+                "url": "https://www.nicet.org/certification-programs/civil-engineering/asphalt-concrete-soils/construction-materials-testing-concrete/certification-requirements/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "Definition / Certification Requirements / Recertification"
+                ],
+                "evidence_type": "credential issuer requirements",
+                "id": "civil-aci",
+                "limitation": "笔试及实操均须通过，认证5年，课程自身不颁证；不是本职业统一门槛、飞行/设计许可或中国检测单位资格",
+                "market": "认证项目说明",
+                "name": "ACI Concrete Strength Testing Technician",
+                "period": "当前颁证要求；2026-10-09读取",
+                "publisher": "American Concrete Institute",
+                "scope": "contextual",
+                "url": "https://www.concrete.org/certification/certificationprograms.aspx?cert=Concrete+Strength+Testing+Technician&m=details&pgm=Concrete+Strength+Testing+Technician"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "How to Become One / Licenses"
+                ],
+                "evidence_type": "official source",
+                "id": "civil-engineer-neighbor",
+                "limitation": "典型本科，初级岗位不必先有许可，向公众提供服务通常需州许可；不适用于技术员或所有法域",
+                "market": "美国",
+                "name": "BLS Civil Engineers：教育与执业边界",
+                "period": "当前OOH；2026-10-09读取",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/civil-engineers.htm"
               }
             ]
           },
@@ -34284,7 +35024,7 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "数据与口径",
+              "指标": "精确职业缺口",
               "数值": {
                 "$item": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.7",
                 "block": "china-salary",
@@ -34299,7 +35039,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "科学研究和技术服务业（全职业背景）",
               "数值": {
                 "$item": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.9",
                 "block": "china-salary",
@@ -34314,7 +35054,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "建筑业（全职业背景）",
               "数值": {
                 "$item": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.11",
                 "block": "china-salary",
@@ -34329,7 +35069,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "招聘报价边界",
               "数值": {
                 "$item": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.13",
                 "block": "china-salary",
@@ -34344,7 +35084,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "调查覆盖",
               "数值": {
                 "$item": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.15",
                 "block": "china-salary",
@@ -34359,7 +35099,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "资料期与发布日期",
               "数值": {
                 "$item": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.17",
                 "block": "china-salary",
@@ -34374,7 +35114,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "精确职业缺口",
               "数值": {
                 "$item": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.19",
                 "block": "china-salary",
@@ -34389,7 +35129,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "职业映射边界",
               "数值": {
                 "$item": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.21",
                 "block": "china-salary",
@@ -34629,10 +35369,10 @@
             "type": "prose"
           },
           "fact_refs": [
-            "cn-industry-science-tech-2024",
-            "cn-industry-manufacturing-2024",
-            "cn-professional-technical-2024",
-            "cn-urban-nonprivate-2024"
+            "civil-cn-science-nonprivate-2025",
+            "civil-cn-science-private-2025",
+            "civil-cn-construction-nonprivate-2025",
+            "civil-cn-construction-private-2025"
           ],
           "sources_note": {
             "$item": "civil-engineering-technicians.china-salary.career-snapshot-primary-locale.57",
@@ -34643,7 +35383,7 @@
           "ui": {
             "ai_heading": "AI 会影响土木工程技师与技术员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "官方统计口径与缺失说明",
+            "official_heading": "官方2025行业工资背景与精确职业缺口",
             "scenario_caption": "学历背景、岗位方向与说明（编辑整理，不是薪资统计）",
             "scenario_heading": "不同学历背景对应哪些岗位方向？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -34768,7 +35508,7 @@
             }
           },
           {
-            "fact_ref": "us-growth-2025-2035",
+            "fact_ref": "civil-growth-2025-2035",
             "指标": "就业 · 增长率",
             "数值": {
               "$item": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.21",
@@ -34784,7 +35524,7 @@
             }
           },
           {
-            "fact_ref": "us-openings-2025-2035",
+            "fact_ref": "civil-openings-2025-2035",
             "指标": "就业 · 年均职位空缺",
             "数值": {
               "$item": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.23",
@@ -34871,7 +35611,7 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "civil-us-local-government-wage-2025",
             "industry": {
               "$item": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -34892,7 +35632,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "civil-us-engineering-services-wage-2025",
             "industry": {
               "$item": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -34913,7 +35653,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "civil-us-construction-wage-2025",
             "industry": {
               "$item": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -34934,7 +35674,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "civil-us-state-government-wage-2025",
             "industry": {
               "$item": "civil-engineering-technicians.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -34955,7 +35695,7 @@
             }
           }
         ],
-        "industry_value_label": "该行业内本职业工资中位数",
+        "industry_value_label": "2025年5月该行业内本职业年工资中位数（美元）",
         "interpretation_heading": "美国土木工程技师与技术员工资怎么理解？",
         "interpretation_rows": [
           {
@@ -35003,7 +35743,7 @@
         },
         "outlook_heading": "美国就业前景",
         "outlook_period": {
-          "$fact": "us-growth-2025-2035",
+          "$fact": "civil-growth-2025-2035",
           "field": "period"
         },
         "wage_column_labels": [
@@ -35644,7 +36384,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 工资（2025 年 5 月）与就业预测（2024—2034 年）",
+            "label": "BLS工资（2025年5月）与就业预测（2025—2035年）",
             "secondary_value": null,
             "value": {
               "$item": "civil-engineering-technicians.profile.onet-structured-fields-block.2",
@@ -35655,7 +36395,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中国大陆统计口径与缺口（本条路由不发布数值）",
+            "label": "中国大陆精确职业缺口与2025年宽行业背景",
             "secondary_value": null,
             "value": {
               "$item": "civil-engineering-technicians.profile.onet-structured-fields-block.3",
@@ -35929,13 +36669,13 @@
         "directions": [
           {
             "direction": {
-              "$item": "civil-engineering-technicians.fit.personality-fit-block.28",
+              "$item": "civil-engineering-technicians.fit.personality-fit-block.37",
               "block": "fit",
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
             "fit_signals": {
-              "$item": "civil-engineering-technicians.fit.personality-fit-block.29",
+              "$item": "civil-engineering-technicians.fit.personality-fit-block.38",
               "block": "fit",
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
@@ -35954,117 +36694,6 @@
                 "block": "fit",
                 "copy_key": "career.item.personality-fit-block",
                 "entry": "link-7",
-                "field": "entity"
-              }
-            },
-            "watchouts": {
-              "$item": "civil-engineering-technicians.fit.personality-fit-block.30",
-              "block": "fit",
-              "copy_key": "career.item.personality-fit-block",
-              "type": "prose"
-            }
-          },
-          {
-            "direction": {
-              "$item": "civil-engineering-technicians.fit.personality-fit-block.31",
-              "block": "fit",
-              "copy_key": "career.item.personality-fit-block",
-              "type": "prose"
-            },
-            "fit_signals": {
-              "$item": "civil-engineering-technicians.fit.personality-fit-block.32",
-              "block": "fit",
-              "copy_key": "career.item.personality-fit-block",
-              "type": "prose"
-            },
-            "target": {
-              "href": {
-                "$link": "civil-engineering-technicians.fit.personality-fit-block.1",
-                "block": "fit",
-                "copy_key": "career.item.personality-fit-block",
-                "entry": "link-8",
-                "field": "url"
-              },
-              "slug": "construction-managers",
-              "title": {
-                "$link": "civil-engineering-technicians.fit.personality-fit-block.1",
-                "block": "fit",
-                "copy_key": "career.item.personality-fit-block",
-                "entry": "link-8",
-                "field": "entity"
-              }
-            },
-            "watchouts": {
-              "$item": "civil-engineering-technicians.fit.personality-fit-block.33",
-              "block": "fit",
-              "copy_key": "career.item.personality-fit-block",
-              "type": "prose"
-            }
-          },
-          {
-            "direction": {
-              "$item": "civil-engineering-technicians.fit.personality-fit-block.34",
-              "block": "fit",
-              "copy_key": "career.item.personality-fit-block",
-              "type": "prose"
-            },
-            "fit_signals": {
-              "$item": "civil-engineering-technicians.fit.personality-fit-block.35",
-              "block": "fit",
-              "copy_key": "career.item.personality-fit-block",
-              "type": "prose"
-            },
-            "target": {
-              "href": {
-                "$link": "civil-engineering-technicians.fit.personality-fit-block.1",
-                "block": "fit",
-                "copy_key": "career.item.personality-fit-block",
-                "entry": "link-9",
-                "field": "url"
-              },
-              "slug": "architectural-and-engineering-managers",
-              "title": {
-                "$link": "civil-engineering-technicians.fit.personality-fit-block.1",
-                "block": "fit",
-                "copy_key": "career.item.personality-fit-block",
-                "entry": "link-9",
-                "field": "entity"
-              }
-            },
-            "watchouts": {
-              "$item": "civil-engineering-technicians.fit.personality-fit-block.36",
-              "block": "fit",
-              "copy_key": "career.item.personality-fit-block",
-              "type": "prose"
-            }
-          },
-          {
-            "direction": {
-              "$item": "civil-engineering-technicians.fit.personality-fit-block.37",
-              "block": "fit",
-              "copy_key": "career.item.personality-fit-block",
-              "type": "prose"
-            },
-            "fit_signals": {
-              "$item": "civil-engineering-technicians.fit.personality-fit-block.38",
-              "block": "fit",
-              "copy_key": "career.item.personality-fit-block",
-              "type": "prose"
-            },
-            "target": {
-              "href": {
-                "$link": "civil-engineering-technicians.fit.personality-fit-block.1",
-                "block": "fit",
-                "copy_key": "career.item.personality-fit-block",
-                "entry": "link-10",
-                "field": "url"
-              },
-              "slug": "cost-estimators",
-              "title": {
-                "$link": "civil-engineering-technicians.fit.personality-fit-block.1",
-                "block": "fit",
-                "copy_key": "career.item.personality-fit-block",
-                "entry": "link-10",
                 "field": "entity"
               }
             },
@@ -36093,20 +36722,57 @@
                 "$link": "civil-engineering-technicians.fit.personality-fit-block.1",
                 "block": "fit",
                 "copy_key": "career.item.personality-fit-block",
-                "entry": "link-11",
+                "entry": "link-8",
                 "field": "url"
               },
-              "slug": "logistics-engineers",
+              "slug": "construction-managers",
               "title": {
                 "$link": "civil-engineering-technicians.fit.personality-fit-block.1",
                 "block": "fit",
                 "copy_key": "career.item.personality-fit-block",
-                "entry": "link-11",
+                "entry": "link-8",
                 "field": "entity"
               }
             },
             "watchouts": {
               "$item": "civil-engineering-technicians.fit.personality-fit-block.42",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "direction": {
+              "$item": "civil-engineering-technicians.fit.personality-fit-block.28",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "fit_signals": {
+              "$item": "civil-engineering-technicians.fit.personality-fit-block.29",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "target": {
+              "href": {
+                "$link": "civil-engineering-technicians.fit.personality-fit-block.1",
+                "block": "fit",
+                "copy_key": "career.item.personality-fit-block",
+                "entry": "link-9",
+                "field": "url"
+              },
+              "slug": "architectural-and-engineering-managers",
+              "title": {
+                "$link": "civil-engineering-technicians.fit.personality-fit-block.1",
+                "block": "fit",
+                "copy_key": "career.item.personality-fit-block",
+                "entry": "link-9",
+                "field": "entity"
+              }
+            },
+            "watchouts": {
+              "$item": "civil-engineering-technicians.fit.personality-fit-block.30",
               "block": "fit",
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
@@ -36130,6 +36796,80 @@
                 "$link": "civil-engineering-technicians.fit.personality-fit-block.1",
                 "block": "fit",
                 "copy_key": "career.item.personality-fit-block",
+                "entry": "link-10",
+                "field": "url"
+              },
+              "slug": "cost-estimators",
+              "title": {
+                "$link": "civil-engineering-technicians.fit.personality-fit-block.1",
+                "block": "fit",
+                "copy_key": "career.item.personality-fit-block",
+                "entry": "link-10",
+                "field": "entity"
+              }
+            },
+            "watchouts": {
+              "$item": "civil-engineering-technicians.fit.personality-fit-block.45",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "direction": {
+              "$item": "civil-engineering-technicians.fit.personality-fit-block.31",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "fit_signals": {
+              "$item": "civil-engineering-technicians.fit.personality-fit-block.32",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "target": {
+              "href": {
+                "$link": "civil-engineering-technicians.fit.personality-fit-block.1",
+                "block": "fit",
+                "copy_key": "career.item.personality-fit-block",
+                "entry": "link-11",
+                "field": "url"
+              },
+              "slug": "logistics-engineers",
+              "title": {
+                "$link": "civil-engineering-technicians.fit.personality-fit-block.1",
+                "block": "fit",
+                "copy_key": "career.item.personality-fit-block",
+                "entry": "link-11",
+                "field": "entity"
+              }
+            },
+            "watchouts": {
+              "$item": "civil-engineering-technicians.fit.personality-fit-block.33",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "direction": {
+              "$item": "civil-engineering-technicians.fit.personality-fit-block.34",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "fit_signals": {
+              "$item": "civil-engineering-technicians.fit.personality-fit-block.35",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "target": {
+              "href": {
+                "$link": "civil-engineering-technicians.fit.personality-fit-block.1",
+                "block": "fit",
+                "copy_key": "career.item.personality-fit-block",
                 "entry": "link-12",
                 "field": "url"
               },
@@ -36143,7 +36883,7 @@
               }
             },
             "watchouts": {
-              "$item": "civil-engineering-technicians.fit.personality-fit-block.45",
+              "$item": "civil-engineering-technicians.fit.personality-fit-block.36",
               "block": "fit",
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
@@ -36950,6 +37690,174 @@
         "source_refs": [
           "onet-localwages"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "70,900人",
+        "fact_id": "civil-employment-2025",
+        "market": "美国",
+        "measure": "BLS表1.2 基期就业",
+        "occupation_scope": "SOC17-3022",
+        "period": "2025",
+        "source_refs": [
+          "civil-ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "73,200人（预测）",
+        "fact_id": "civil-employment-2035",
+        "market": "美国",
+        "measure": "BLS表1.2 预测就业",
+        "occupation_scope": "SOC17-3022",
+        "period": "2035（预测）",
+        "source_refs": [
+          "civil-ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "增长3.2%（OOH取整3%）",
+        "fact_id": "civil-growth-2025-2035",
+        "market": "美国",
+        "measure": "BLS表1.2 就业变化率",
+        "occupation_scope": "SOC17-3022",
+        "period": "2025—2035（预测）",
+        "source_refs": [
+          "civil-ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "净增2,300人（预测）",
+        "fact_id": "civil-change-2025-2035",
+        "market": "美国",
+        "measure": "BLS表1.2 净就业变化",
+        "occupation_scope": "SOC17-3022",
+        "period": "2025—2035（预测）",
+        "source_refs": [
+          "civil-ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约6,100个/年",
+        "fact_id": "civil-openings-2025-2035",
+        "market": "美国",
+        "measure": "BLS表1.2 年均空缺，含替补非净增",
+        "occupation_scope": "SOC17-3022",
+        "period": "2025—2035年均（预测）",
+        "source_refs": [
+          "civil-ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "0.7%",
+        "fact_id": "civil-self-employed-2025",
+        "market": "美国",
+        "measure": "BLS表1.2自雇就业占比",
+        "occupation_scope": "SOC17-3022",
+        "period": "2025",
+        "source_refs": [
+          "civil-ep-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "182,064元/年（年平均工资）",
+        "fact_id": "civil-cn-science-nonprivate-2025",
+        "market": "中国大陆",
+        "measure": "NBS城镇非私营行业年平均工资",
+        "occupation_scope": "科学研究和技术服务业全职业，不是本职业工资",
+        "period": "2025年工资；2026-05-15发布",
+        "source_refs": [
+          "civil-nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "83,560元/年（年平均工资）",
+        "fact_id": "civil-cn-science-private-2025",
+        "market": "中国大陆",
+        "measure": "NBS城镇私营行业年平均工资",
+        "occupation_scope": "科学研究和技术服务业全职业，不是本职业工资",
+        "period": "2025年工资；2026-05-15发布",
+        "source_refs": [
+          "civil-nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "92,036元/年（年平均工资）",
+        "fact_id": "civil-cn-construction-nonprivate-2025",
+        "market": "中国大陆",
+        "measure": "NBS城镇非私营行业年平均工资",
+        "occupation_scope": "建筑业全职业，不是本职业工资",
+        "period": "2025年工资；2026-05-15发布",
+        "source_refs": [
+          "civil-nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "66,275元/年（年平均工资）",
+        "fact_id": "civil-cn-construction-private-2025",
+        "market": "中国大陆",
+        "measure": "NBS城镇私营行业年平均工资",
+        "occupation_scope": "建筑业全职业，不是本职业工资",
+        "period": "2025年工资；2026-05-15发布",
+        "source_refs": [
+          "civil-nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "76,190美元/年（中位数）",
+        "fact_id": "civil-us-local-government-wage-2025",
+        "market": "美国",
+        "measure": "BLS OEWS同行业本职业年工资中位数",
+        "occupation_scope": "SOC17-3022，地方政府（不含教育与医院）",
+        "period": "2025年5月",
+        "source_refs": [
+          "civil-ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "63,340美元/年（中位数）",
+        "fact_id": "civil-us-engineering-services-wage-2025",
+        "market": "美国",
+        "measure": "BLS OEWS同行业本职业年工资中位数",
+        "occupation_scope": "SOC17-3022，工程服务",
+        "period": "2025年5月",
+        "source_refs": [
+          "civil-ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "61,980美元/年（中位数）",
+        "fact_id": "civil-us-construction-wage-2025",
+        "market": "美国",
+        "measure": "BLS OEWS同行业本职业年工资中位数",
+        "occupation_scope": "SOC17-3022，建筑业",
+        "period": "2025年5月",
+        "source_refs": [
+          "civil-ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "61,950美元/年（中位数）",
+        "fact_id": "civil-us-state-government-wage-2025",
+        "market": "美国",
+        "measure": "BLS OEWS同行业本职业年工资中位数",
+        "occupation_scope": "SOC17-3022，州政府（不含教育与医院）",
+        "period": "2025年5月",
+        "source_refs": [
+          "civil-ooh-current"
+        ]
       }
     ]
   },
@@ -36958,7 +37866,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "RIASEC · RIC",
@@ -37009,7 +37917,7 @@
       "text": "土木工程技术员"
     }
   },
-  "source_content_sha256": "ff82c99ece3c6b7985a1b2719628f75ef19c6d31cb39b25a5dfffc4d138391e6",
+  "source_content_sha256": "0df233e644e8617e3f0e506e79a1a3a9311e1bff596635c92f3646c5d9ffafd3",
   "subject": {
     "canonical_slug": "civil-engineering-technicians",
     "name": "土木工程技术员",

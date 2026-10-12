@@ -27206,7 +27206,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆本职业全国2025工资分布及完整可核雇主报价未取得，国家统计局大类工资不能代填。中国补货拣货岗位需按实际职责与雇主条件核对，不沿用旧影视项目报价。 2025中国城镇批发和零售业全部就业人员税前年平均工资：非私营135,749、私营69,622元/年。作者仅门店补货或批零雇主方向条件参照；行业包含多职业，两单位人口不同，非补货拣货工资、中位数起薪或个人区间。 2025中国城镇交通运输、仓储和邮政业全部就业人员税前年平均工资：非私营133,981、私营73,133元/年。作者仅实际雇主属于该行业的仓储订单方向条件参照，零售制造企业内部仓库另核雇主行业；两单位人口不同，非拣货工资或个人区间。 两行业统计均限城镇5人及以上法人单位，含个人税、社保和公积金缴扣，排个体及自由职业者；不同人群不合成区间。"
+              "证据不足：中国大陆本职业全国2025工资分布未取得，国家统计局大类工资不能代填。中国补货拣货岗位需按实际职责与雇主条件核对，不沿用旧影视项目报价。 2025中国城镇批发和零售业全部就业人员税前年平均工资：非私营135,749、私营69,622元/年。作者仅门店补货或批零雇主方向条件参照；行业包含多职业，两单位人口不同，非补货拣货工资、中位数起薪或个人区间。 2025中国城镇交通运输、仓储和邮政业全部就业人员税前年平均工资：非私营133,981、私营73,133元/年。作者仅实际雇主属于该行业的仓储订单方向条件参照，零售制造企业内部仓库另核雇主行业；两单位人口不同，非拣货工资或个人区间。 两行业统计均限城镇5人及以上法人单位，含个人税、社保和公积金缴扣，排个体及自由职业者；不同人群不合成区间。"
             ]
           },
           "id": "stockers-and-order-fillers.china-salary.career-snapshot-primary-locale.4",
@@ -27251,13 +27251,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未采用职责、地区、日期和计酬条件可核的城市雇主报价。"
+              "历史地方招聘报价：黄埔2026-07-21公告中广东京邦达仓储分拣正式工（打包、拣货、上架）6000–8000元/月；信丰2026-09-09公告中赣州食再鲜冷库仓库拣货员3500–5000元/月；招远2026-08-20公告中山东金都百货长白班仓库拣货员3700–4300元/月。货品、地区、班次和福利不同，分别核合同，不合成全国工资区间或当前在招结论。"
             ]
           },
           "id": "stockers-and-order-fillers.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "nbs",
-            "editorial"
+            "huangpu-picking-2026",
+            "xinfeng-picking-2026",
+            "zhaoyuan-picking-2026"
           ],
           "type": "prose"
         },
@@ -27266,13 +27267,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得同一岗位任务、班次、福利与工时可比的报价样本，不按任务名称推工资。"
+              "黄埔同公告另列打包拣货兼职23.7元/时（月结），每天4小时、每周5–6天；不能按正式工月薪比较。三条月薪记录也未统一保证工时、加班和税前税后口径，仍缺可比样本。"
             ]
           },
           "id": "stockers-and-order-fillers.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "nbs",
-            "editorial"
+            "huangpu-picking-2026",
+            "xinfeng-picking-2026",
+            "zhaoyuan-picking-2026"
           ],
           "type": "prose"
         },
@@ -29859,8 +29861,8 @@
               {
                 "id": "employer-0",
                 "values": [
-                  "真实雇主要求需查公告",
-                  "证据不足：本轮未形成可核招聘公告样本。官方职业任务与编辑试做不能代替雇主录用条件。"
+                  "历史雇主公告：条件各异",
+                  "黄埔京邦达2026-07-21仓储分拣岗含打包、拣货、上架及手机识别要求；信丰2026-09-09冷库拣货与招远2026-08-20长白班拣货另有条件。各公告不保证当前仍在招。"
                 ]
               },
               {
@@ -29888,7 +29890,10 @@
           },
           "id": "stockers-and-order-fillers.path.employer-evidence.1",
           "source_refs": [
-            "editorial"
+            "editorial",
+            "huangpu-picking-2026",
+            "xinfeng-picking-2026",
+            "zhaoyuan-picking-2026"
           ],
           "title": "雇主可能核对的岗位能力与材料",
           "type": "cards"
@@ -30133,14 +30138,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "证据不足：未采用中国职责、地区、日期与条件完整可核的雇主公告，不给统一录用要求。"
+              "三条历史地方公告显示岗位条件不同：黄埔京邦达拣货上架岗列智能手机和英文字母识别；信丰食再鲜拣货岗涉及冷库整理归类、包吃与部分保险；招远金都百货拣货岗列长白班、大秦家金百物流园及五险一金等福利。条件只适用于各公告，仍需核当前实际货品、身体要求、班次、工资和培训，不给全国统一录用门槛。"
             ]
           },
           "id": "stockers-and-order-fillers.path.career-path-block.3",
           "source_refs": [
-            "onet",
-            "bls",
-            "editorial"
+            "huangpu-picking-2026",
+            "xinfeng-picking-2026",
+            "zhaoyuan-picking-2026"
           ],
           "type": "prose"
         },
@@ -32136,7 +32141,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "官方任务、工资、仓储设备规则与跨职业AI研究沿初读范围；本轮复核BLS独立53-7065预测，新增NBS2025批零及运输仓储邮政两单位税前年均背景，非本职工资。无完整雇主样本，编辑试做不招聘证据。"
+              "本轮核读O*NET本职与八个真实转岗方向、BLS独立53-7065预测和工资、NBS2025两行业工资、OSHA仓储与车辆培训规则；补三条地方历史招聘报价，岗位条件各异，非全国职业统计。AI跨职业研究与NIST不能证明本职采用或工资因果，编辑试做不作招聘样本。"
             ]
           },
           "id": "stockers-and-order-fillers.display.source_card.source",
@@ -32150,7 +32155,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-09-30初读制作；2026-10-02复核BLS本职预测及NBS两行业工资，其他来源沿原日期范围未重全文研究。统计与规则期间分别见来源。"
+              "2026-10-12仅核查本次九模块及相关引用；共享来源登记和未选内容保持各自原日期。统计期间与历史招聘发布日期分别列示，不表示全部页面重新研究或当前仍在招。"
             ]
           },
           "id": "stockers-and-order-fillers.display.source_card.updated-at",
@@ -33008,6 +33013,51 @@
                 "publisher": "O*NET / U.S. DOL",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/43-5011.00"
+              },
+              {
+                "accessed_at": "2026-10-12",
+                "details": [
+                  "广东京邦达仓储分拣正式工50名，打包、拣货、上架，报价6000–8000元/月；同公告另列兼职23.7元/时，不合并。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "huangpu-picking-2026",
+                "limitation": "历史地方岗位公告，不保证仍在招、税后到账、保证工时或全国职业工资；详细待遇与当前岗位另核。",
+                "market": "中国大陆地方招聘",
+                "name": "黄埔2026灵活就业专场：京东仓储分拣",
+                "period": "2026-07-21",
+                "publisher": "广州市黄埔区劳动就业服务管理中心",
+                "scope": "contextual",
+                "url": "https://www.hp.gov.cn/gzjg/qt/gzshpqrcjlfwzx/hprczc/rdzx/rddt/content/post_10910846.html"
+              },
+              {
+                "accessed_at": "2026-10-12",
+                "details": [
+                  "赣州食再鲜仓库拣货员报价3500–5000元/月；冷库进出整理归类货物，包吃、部分保险，公告列年龄45岁以下和学历不限。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "xinfeng-picking-2026",
+                "limitation": "历史地方岗位公告，不保证仍在招、税后到账、保证工时或全国职业工资；详细待遇与当前岗位另核。",
+                "market": "中国大陆地方招聘",
+                "name": "信丰2026年9月第2周招聘：食再鲜仓库拣货",
+                "period": "2026-09-09",
+                "publisher": "信丰县人民政府信息公开",
+                "scope": "contextual",
+                "url": "https://www.jxxf.gov.cn/xfxxxgk/wgjy/202609/11057c9c5eb6411ab033075036ca1e17.shtml"
+              },
+              {
+                "accessed_at": "2026-10-12",
+                "details": [
+                  "山东金都百货仓库拣货员长白班，地点大秦家金百物流园，报价3700–4300元/月；公告列五险一金、月休四天及福利，不挪用理货员金额。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "zhaoyuan-picking-2026",
+                "limitation": "历史地方岗位公告，不保证仍在招、税后到账、保证工时或全国职业工资；详细待遇与当前岗位另核。",
+                "market": "中国大陆地方招聘",
+                "name": "招远2026网络招聘会八：金都百货仓库拣货",
+                "period": "2026-08-20",
+                "publisher": "招远市人力资源和社会保障局",
+                "scope": "contextual",
+                "url": "https://www.zhaoyuan.gov.cn/col/col102041/art/2026/art_05e8151eae2e4b55920273b792997a66.html"
               }
             ]
           },
@@ -35504,7 +35554,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "osha"
+              "employer"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -35540,7 +35590,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "osha"
+              "employer"
             ],
             "id": "project-income",
             "mitigation": {
@@ -35612,7 +35662,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "nist",
+              "sag-moa",
               "onet"
             ],
             "id": "project-data",
@@ -35650,7 +35700,7 @@
             },
             "evidence_refs": [
               "bls",
-              "samr"
+              "cn-rule"
             ],
             "id": "audition-feedback",
             "mitigation": {
@@ -35789,6 +35839,30 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "onet",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "stockers-and-order-fillers.source-register.published.1"
+            },
+            "id": "onet",
+            "label": {
+              "$source": "onet",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "stockers-and-order-fillers.source-register.published.1"
+            },
+            "scope": {
+              "$source": "onet",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "limitation",
+              "item": "stockers-and-order-fillers.source-register.published.1"
+            }
           }
         ]
       },
@@ -35808,8 +35882,8 @@
             },
             {
               "指标": "城市报价",
-              "数值": "未提供",
-              "说明": "证据不足：未采用职责、地区、日期与条件可核的雇主报价。"
+              "数值": "三条历史地方公告，金额分别列示",
+              "说明": "黄埔6000–8000、信丰3500–5000、招远3700–4300元/月，公告日期、任务、班次和福利各异；不合成全国职业工资或当前仍在招结论。"
             },
             {
               "指标": "入职工资",
@@ -35955,10 +36029,7 @@
               "城市/区间": "具体城市雇主报价",
               "月薪参考": {
                 "$join": [
-                  {
-                    "$fact": "china-pay-gap",
-                    "field": "display_value"
-                  },
+                  "三条历史地方公告",
                   {
                     "$item": "stockers-and-order-fillers.display.career_snapshot_primary_locale.quote-limits",
                     "block": "china-salary",
@@ -35984,7 +36055,7 @@
           "fact_refs": [
             "china-pay-gap"
           ],
-          "sources_note": "国家统计局2025城镇单位工资｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+          "sources_note": "国家统计局2025城镇单位工资｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html；黄埔2026-07-21招聘｜https://www.hp.gov.cn/gzjg/qt/gzshpqrcjlfwzx/hprczc/rdzx/rddt/content/post_10910846.html；信丰2026-09-09招聘｜https://www.jxxf.gov.cn/xfxxxgk/wgjy/202609/11057c9c5eb6411ab033075036ca1e17.shtml；招远2026-08-20招聘｜https://www.zhaoyuan.gov.cn/col/col102041/art/2026/art_05e8151eae2e4b55920273b792997a66.html",
           "ui": {
             "ai_heading": "AI采用能直接说明工资变化吗？",
             "driver_heading": "比较岗位报酬应核什么？",
@@ -36045,7 +36116,7 @@
         },
         "bls_table": [
           {
-            "fact_ref": "low",
+            "fact_ref": "us-p10-2025",
             "指标": "薪资 · 10 分位",
             "数值": {
               "$fact": "us-p10-2025",
@@ -36059,7 +36130,7 @@
             "说明": "2025美国全国工资第25分位，不是职级。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "us-median-2025",
             "指标": "薪资 · 中位数",
             "数值": {
               "$fact": "us-median-2025",
@@ -36073,7 +36144,7 @@
             "说明": "2025美国全国工资第75分位，不是晋升保证。"
           },
           {
-            "fact_ref": "high",
+            "fact_ref": "us-p90-2025",
             "指标": "薪资 · 90 分位",
             "数值": {
               "$fact": "us-p90-2025",
@@ -36082,7 +36153,7 @@
             "说明": "2025美国全国工资第90分位，不是资深报价。"
           },
           {
-            "fact_ref": "employment",
+            "fact_ref": "us-employment-2024",
             "指标": "2025–2035 就业 · 基期人数",
             "数值": {
               "$fact": "us-employment-2024",
@@ -36091,7 +36162,7 @@
             "说明": "2025预测基期就业规模；原表取整。"
           },
           {
-            "fact_ref": "growth",
+            "fact_ref": "us-growth-2024-2034",
             "指标": "2025–2035 就业 · 增长预测",
             "数值": {
               "$fact": "us-growth-2024-2034",
@@ -36100,7 +36171,7 @@
             "说明": "2025–2035独立职业变化8.9%，不是录用概率。"
           },
           {
-            "fact_ref": "openings",
+            "fact_ref": "us-openings-2024-2034",
             "指标": "2025–2035 就业 · 年均空缺",
             "数值": {
               "$fact": "us-openings-2024-2034",
@@ -36186,7 +36257,7 @@
         "industry_period": "2025年5月",
         "industry_rows": [
           {
-            "fact_ref": "industry-theater",
+            "fact_ref": "industry-primary",
             "industry": "一般商品零售",
             "median": {
               "$fact": "industry-primary",
@@ -36200,7 +36271,7 @@
             }
           },
           {
-            "fact_ref": "industry-education",
+            "fact_ref": "industry-secondary",
             "industry": "仓储与储存",
             "median": {
               "$fact": "industry-secondary",
@@ -36214,7 +36285,7 @@
             }
           },
           {
-            "fact_ref": "industry-amusement",
+            "fact_ref": "industry-tertiary",
             "industry": "食品与饮料零售",
             "median": {
               "$fact": "industry-tertiary",
@@ -36518,7 +36589,7 @@
             },
             "metric": "十年就业变化",
             "occupation_scope": "美国SOC53-7065独立职业",
-            "source_id": "ep",
+            "source_id": "bls",
             "value": {
               "$fact": "us-growth-2024-2034",
               "field": "display_value"
@@ -36541,7 +36612,7 @@
             },
             "metric": "年均职位空缺",
             "occupation_scope": "美国SOC53-7065独立职业",
-            "source_id": "ep",
+            "source_id": "bls",
             "value": "约430700人/年"
           },
           {
@@ -36561,7 +36632,7 @@
             },
             "metric": "中国就业与招聘",
             "occupation_scope": "中国补货拣货岗位",
-            "source_id": "nbs",
+            "source_id": "employer",
             "value": "未提供职业总量"
           }
         ],
@@ -38459,7 +38530,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI任务影响（本页不评分）"
     },
     "badges": [
       "货品、货位与数量核对",
@@ -38510,7 +38581,7 @@
       "text": "补货与订单拣货员"
     }
   },
-  "source_content_sha256": "235e19c01fdd2a9623f6cb21626d5fcfde1d1c3618ba1459c32ce0dbc65c3329",
+  "source_content_sha256": "7dacad353a75d74e8f8f2bf84c761d343726e0dfb02b6f4ea0d472ac9ce2d5f0",
   "subject": {
     "canonical_slug": "stockers-and-order-fillers",
     "name": "补货与订单拣货员",

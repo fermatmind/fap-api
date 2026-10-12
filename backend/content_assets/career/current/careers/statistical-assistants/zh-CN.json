@@ -28932,10 +28932,10 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "Census统计质量标准",
+                "entity": "Census C2编辑与插补标准",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.census.gov/about/policies/quality/standards.html"
+                "url": "https://www.census.gov/about/policies/quality/standards/standardc2.html"
               },
               {
                 "entity": "个人信息保护法",
@@ -28955,7 +28955,7 @@
           "source_refs": [
             "onet",
             "bls",
-            "onet",
+            "facilities",
             "privacy",
             "onet"
           ],
@@ -29400,7 +29400,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "Census统计质量与文档原则；不作为中国统一规定。"
+              "Census C2质量标准：保留原值、检查重复缺失、测试处理规则与留存文档；适用Census机构范围，不是中国全部雇主法规。"
             ]
           },
           "id": "statistical-assistants.risk.career-risk-cards.37",
@@ -29896,13 +29896,14 @@
           "data": {
             "paragraphs": [
               "证据不足：本轮未取得中国统计助理、同一地区与时间且身份和完整条件可核的雇主招聘公告；本页不填在招数量、招聘薪酬或统一门槛。",
-              "本轮检索中国高校与政府域名“统计助理”招聘，并核读北京大学环境学院2026-01-12科研助理公告：含数据整理、统计分析和论文及行政支持，截止2026-01-19，故未作为当前统计助理独立职业样本。中山大学历史数据统计助理页本轮读取被拒；官方职业资料和工资发布也不能代替雇主公告。下方任务方向与试用情境仍为编辑建议。"
+              "本轮检索中国高校与政府域名“统计助理”招聘，并核读中山大学党委宣传部2020-09-11原公告：数据统计助理岗2人，面向南校园在读学生，任务含收集、分析、统计和协助报告；报名截止2020-09-18，未列薪酬。它是历史学生勤工助学岗位，不纳入当前独立职业招聘或工资样本。此前北京大学环境学院科研助理记录仍限历史混合职责参考，未重新核读原公告；下方任务方向与试用情境仍为编辑建议。"
             ]
           },
           "id": "statistical-assistants.path.recruitment-sample.1",
           "source_refs": [
             "onet",
-            "editor"
+            "editor",
+            "sysu-student-2020"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -32088,7 +32089,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料初次核读2026-09-30；本轮2026-10-02复核BLS本职预测与NBS2025规上办事宽岗位工资。其他资料沿原查阅日期与范围，未本轮重新全文研究。工资采用2025资料，预测2025–2035，不混旧预测。"
+              "九模块作者于2026-10-12核查本职O*NET任务与全国工资、BLS2025–2035独立行、Census C2、NIST AI RMF 1.0和中国个人信息保护法，并读取中山大学历史学生岗位；NBS2025口径与本批当前原文核对。直接OEWS职业页访问失败，行业工资缺口保留。共享来源登记历史日期和未选模块保持原记录；本轮不是全页独立复核。"
             ]
           },
           "id": "statistical-assistants.sources.source-card.3",
@@ -32722,6 +32723,22 @@
                 "publisher": "O*NET / U.S. DOL",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/15-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-12",
+                "details": [
+                  "数据统计助理岗2人，面向南校园在读学生；任务含数据收集分析统计和协助报告。",
+                  "当前范围只用于区分学生岗位与职业雇员样本。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "sysu-student-2020",
+                "limitation": "历史在校学生勤工助学岗位，未列薪酬；不作当前独立统计助理招聘、全国工资或普遍门槛。",
+                "market": "中国广州南校园",
+                "name": "中山大学党委宣传部学生助理招聘启事",
+                "period": "2020-09-11公告；2020-09-18报名截止",
+                "publisher": "中山大学党委宣传部",
+                "scope": "related",
+                "url": "https://xcb.sysu.edu.cn/zytz/1380195.htm"
               }
             ]
           },
@@ -37958,7 +37975,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "数据整理与统计计算",
@@ -38009,7 +38026,7 @@
       "text": "统计助理"
     }
   },
-  "source_content_sha256": "f62abb8b986afeaa1c50aabfb2576778781879f4bd87d63a96ce6a332fa1983c",
+  "source_content_sha256": "cfa096073a916fdc19741f3b3fa20d0326bd82d4cae455dc394df42611c4701d",
   "subject": {
     "canonical_slug": "statistical-assistants",
     "name": "统计助理",

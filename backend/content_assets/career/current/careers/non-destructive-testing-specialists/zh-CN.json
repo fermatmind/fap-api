@@ -12550,12 +12550,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "较适合辅助｜检测方案与程序草稿、标准与规范检索、报告格式与字段检查、校准与参数记录整理、缺陷候选标注的初步排序。"
+              "辅助候选（编辑分析）｜授权环境下程序草稿、标准检索、记录与格式检查可评估工具辅助；缺陷标注需检测算法专项验证，Hot清单不证明生成式模型具备检测性能。"
             ]
           },
           "id": "non-destructive-testing-specialists.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -12578,12 +12578,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "风险筛查辅助｜可提示参数越界、记录缺失或前后不一致；不能替代对原始信号、图像与现场条件的判读。"
+              "条件性编辑建议｜规则校验可检查参数和缺字段；实际部署、误报率与生成式AI效果本轮未取得，不能替代原始信号与现场判读。"
             ]
           },
           "id": "non-destructive-testing-specialists.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -12620,7 +12620,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数据门槛｜被检对象的尺寸、图像与业主信息属受控资料，不得输入未授权的外部工具；涉及核电与国防等场景时按合同与保密要求处理。"
+              "数据使用先核分类、合同及业主授权；涉及核电、国防等保密信息按适用制度处理，不把所有公开教学尺寸与图像一律称秘密或受控。不得上传未获授权资料。"
             ]
           },
           "id": "non-destructive-testing-specialists.ai-impact.ai-impact-table.7",
@@ -12698,13 +12698,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未公布与「无损检测专员（O*NET 17-3029.01）」对应的全国职业工资分布；本页以行业门类平均值作参照并标明其边界，不据此推算本职业中位数、分位数或个人收入。资格核验｜射线类作业须完成辐射安全培训并取得合格证书后方可上岗，证书持有者应每四年接受再培训，不参加或考核不合格的证书自动失效；具体条件以现行法规与发证机关公告为准。"
+              "证据不足：本轮未取得中国对应全国职业工资分布；科研技术服务及制造行业均值仅相关雇主参考，不推职业中位或个人收入。自2020年起按生态环境部2019第57号公告参加平台考核，不能把旧四年培训证规则当所有新人员统一要求；仅从事Ⅲ类射线装置销售、使用的人员按2021第9号公告由单位自行考核，结果有效五年、到期再培训考核。其他类别核平台及成绩报告具体要求。"
             ]
           },
           "id": "non-destructive-testing-specialists.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
             "nbs-wages-2025",
-            "mee-radiation-rule"
+            "mee-exam-2020"
           ],
           "type": "prose"
         }
@@ -12763,12 +12763,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS 为机构工资薪金雇员调查，不含自雇与合伙收入，也不反映出差、驻场与夜班津贴等浮动部分。"
+              "OEWS为税前正常工时工资，不含自雇及未法人化企业业主/合伙人；含危险津贴、激励与生产奖金，排加班、轮班差额、食宿支付等，不笼统排所有驻场或浮动部分。"
             ]
           },
           "id": "non-destructive-testing-specialists.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "onet-wages-17302901"
+            "bls-oews-definitions"
           ],
           "type": "prose"
         },
@@ -12843,7 +12843,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "适合信号｜你能在噪声、辐射与户外条件下遵守安全规定，主动确认隔离、警示与作业时间限制。",
+              "适合信号｜按目标项目噪声、户外或射线等具体安全条件遵守规程；射线隔离警示只外推相关作业，不将所有方法概括有辐射。",
               "把信号与具体工作样本、带教反馈和岗位要求对照。"
             ]
           },
@@ -12958,7 +12958,8 @@
           },
           "id": "non-destructive-testing-specialists.risk.career-risk-cards.2",
           "source_refs": [
-            "mee-radiation-rule"
+            "mee-radiation-rule",
+            "samr-ndt-rule"
           ],
           "type": "prose"
         },
@@ -12982,7 +12983,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "受影响角色｜负责方法选择、设备操作与参数记录、信号判读与报告签发的人员，以及与其协作的现场作业、辐射防护与项目质量岗位；Ⅰ级人员在指导不足时最易产生操作与记录偏差。"
+              "方法选择、操作记录、判读签发及现场/辐射/质量岗位均可能受影响；指导不足可能造成偏差，未取得Ⅰ级最容易出错的群体比较证据。"
             ]
           },
           "id": "non-destructive-testing-specialists.risk.career-risk-cards.4",
@@ -13115,7 +13116,7 @@
                 "在指导下完成设备准备、清洁与参数记录",
                 "不独立评定结果或签发报告",
                 "操作记录与带教评价",
-                "取得Ⅰ级资格并进入独立操作"
+                "取得相应方法Ⅰ级后按指导书操作，判读报告另核级别与授权"
               ],
               [
                 "独立操作阶段",
@@ -13159,15 +13160,15 @@
           "data": {
             "paragraphs": [
               "边界说明一｜学历、在岗培训、方法资格、级别与雇主授权是不同状态：完成培训不产生资格，取得资格也不自动获得特定项目的签字权。",
-              "边界说明二｜方法资格按项目分别取得：射线与超声的体积检测能力不能由表面方法资格替代，专项项目（如相控阵、TOFD、数字成像）另需对应资格。",
-              "边界说明三｜射线类作业除方法资格外还须满足辐射安全培训与再培训要求；使用伽马射线移动探伤设备等作业须接受中级或高级辐射安全培训。",
+              "方法、项目覆盖按TSG表1核，不随意互换：UT覆盖UT(AUTO)、ECT覆盖ECT(AUTO)，PA/TOFD/RT(D)按各自项目核；不能说所有专项一律另需证。",
+              "自2020年起按生态环境部2019第57号公告参加平台考核，不能把旧四年培训证规则当所有新人员统一要求；仅从事Ⅲ类射线装置销售、使用的人员按2021第9号公告由单位自行考核，结果有效五年、到期再培训考核。其他类别核平台及成绩报告具体要求。",
               "边界说明四｜检测结论的效力取决于项目接受条件：业主、监理或行业的验收要求可能高于法定最低要求，应按合同与项目质量计划核对。"
             ]
           },
           "id": "non-destructive-testing-specialists.path.credential-boundary.5",
           "source_refs": [
             "samr-ndt-rule",
-            "mee-radiation-rule"
+            "mee-exam-2020"
           ],
           "type": "notice"
         },
@@ -13327,18 +13328,18 @@
                 "编制工艺、审核报告并承担全面技术工作",
                 "由国家级发证机关批准颁发",
                 "按更高学历与经历条件核对",
-                "Ⅲ级仍需雇主授权",
+                "工艺并非仅Ⅲ级：Ⅱ级持证四年以上可编审，未设Ⅲ级项目由Ⅱ级承担",
                 "发证机关与机构",
                 "核对职责与任命范围"
               ],
               [
-                "辐射安全培训合格证书",
-                "射线类作业的岗位前提",
-                "由生态环境部门认可的方式考核后取得",
-                "按作业类别确定初中高级别",
-                "每四年需再培训，否则失效",
+                "辐射安全考核记录",
+                "相关射线作业按类别上岗考核要求",
+                "平台考核；仅Ⅲ类装置销售使用由单位自行考核",
+                "按2019/2021公告及作业类别核，不统一套旧初中高培训证",
+                "Ⅲ类装置自行考核有效五年，其他按报告及平台要求核",
                 "生态环境主管部门与单位",
-                "核对再培训时间"
+                "核作业类别、考核记录及有效期"
               ],
               [
                 "雇主与项目授权",
@@ -13363,8 +13364,8 @@
           "id": "non-destructive-testing-specialists.path.credential-decision.10",
           "source_refs": [
             "samr-ndt-rule",
-            "mee-radiation-rule",
-            "onet-cert-17302901"
+            "mee-exam-2020",
+            "samr-ndt-amend-2025"
           ],
           "type": "table"
         }
@@ -13381,12 +13382,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国合并职业信号｜O*NET 转发的数据以 17-3029 合并口径给出：2024 年就业 67,300 人，预计 2034 年 68,300 人，增长 2%（低于平均），年均职位空缺 5,700 个；这不是 17-3029.01 单列口径，也不代表中国大陆需求。"
+              "BLS17-3029合并职业：2025就业62,400，2035预计64,100，增长2.8%，年均5,400空缺；非无损检测单列或中国需求。O*NET当前分类显示平均3%—4%，与BLS精确值分开。"
             ]
           },
           "id": "non-destructive-testing-specialists.market-signals.market-signal-card.1",
           "source_refs": [
-            "onet-summary-17302901"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -13409,12 +13410,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "统计期间｜工资为 2025 年数据，就业与预测为 2024—2034 年，行业分布为 2024 年数据。"
+              "工资OEWS2025，预测BLS2025—2035，行业详情2025；独立子页未标年度。"
             ]
           },
           "id": "non-destructive-testing-specialists.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-summary-17302901"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -13423,12 +13424,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "解读｜合并职业总量接近持平、增长低于平均，但年均仍有 5,700 个空缺，说明需求以替换为主；在役设备检验、核电延寿与新能源项目对检测人力的需求还需按行业单独核对。"
+              "合并职业增长2.8%与年均5,400空缺同时存在；空缺含替换，非当前招聘、个人录用率或AI因果。具体在役/延寿/新能源需求未单独核。"
             ]
           },
           "id": "non-destructive-testing-specialists.market-signals.market-signal-card.4",
           "source_refs": [
-            "onet-summary-17302901"
+            "bls-ep-2025-2035"
           ],
           "type": "prose"
         },
@@ -13877,6 +13878,96 @@
                 "publisher": "地方生态环境主管部门（公开政务答复汇编）",
                 "scope": "exact",
                 "url": "https://www.fujian.gov.cn/hdjl/hdjlzsk/hjbht/jypx/202211/t20221110_6043542.htm"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "BLS17-3029合并职业：2025就业62,400，2035预计64,100，增长2.8%，年均5,400空缺；非无损检测单列或中国需求。O*NET当前分类显示平均3%—4%，与BLS精确值分开。"
+                ],
+                "evidence_type": "official",
+                "id": "bls-ep-2025-2035",
+                "limitation": "限定统计口径或文件主体行为，不证明个人授权或全部法域",
+                "market": "US",
+                "name": "BLS职业预测2025—2035",
+                "period": "2026-10-11查阅；文件时期见标题",
+                "publisher": "BLS职业预测2025—2035",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "OEWS为税前正常工时工资，不含自雇及未法人化企业业主/合伙人；含危险津贴、激励与生产奖金，排加班、轮班差额、食宿支付等，不笼统排所有驻场或浮动部分。"
+                ],
+                "evidence_type": "official",
+                "id": "bls-oews-definitions",
+                "limitation": "限定统计口径或文件主体行为，不证明个人授权或全部法域",
+                "market": "US",
+                "name": "BLS OEWS工资定义",
+                "period": "2026-10-11查阅；文件时期见标题",
+                "publisher": "BLS OEWS工资定义",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "2025发布即施行，申请年龄及免考/考试换证窗口修改；原表2方法经历条件需合读。"
+                ],
+                "evidence_type": "official",
+                "id": "samr-ndt-amend-2025",
+                "limitation": "限定统计口径或文件主体行为，不证明个人授权或全部法域",
+                "market": "CN",
+                "name": "TSG Z8001—2019第1号修改单",
+                "period": "2026-10-11查阅；文件时期见标题",
+                "publisher": "TSG Z8001—2019第1号修改单",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/tzsbs/art/2025/art_43bc707de5a54c11b3ecbb1bf6031d0a.html"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "2020起平台考核替代推荐培训单位模式，原有效培训证到期前有效。"
+                ],
+                "evidence_type": "official",
+                "id": "mee-exam-2020",
+                "limitation": "限定统计口径或文件主体行为，不证明个人授权或全部法域",
+                "market": "CN",
+                "name": "生态环境部2019第57号公告",
+                "period": "2026-10-11查阅；文件时期见标题",
+                "publisher": "生态环境部2019第57号公告",
+                "scope": "contextual",
+                "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk01/201912/t20191225_751572.html"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "仅Ⅲ类装置销售使用单位自考，有效五年，到期再培训考核。"
+                ],
+                "evidence_type": "official",
+                "id": "mee-exam-class3",
+                "limitation": "限定统计口径或文件主体行为，不证明个人授权或全部法域",
+                "market": "CN",
+                "name": "生态环境部2021第9号公告",
+                "period": "2026-10-11查阅；文件时期见标题",
+                "publisher": "生态环境部2021第9号公告",
+                "scope": "contextual",
+                "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk01/202103/t20210312_824510.html"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "机构考试外仍须雇主视力、实操及必要岗位考试，不自动完整雇主认证。"
+                ],
+                "evidence_type": "official",
+                "id": "asnt-ndt-ii-current",
+                "limitation": "限定统计口径或文件主体行为，不证明个人授权或全部法域",
+                "market": "US",
+                "name": "ASNT NDT Level II当前条件",
+                "period": "2026-10-11查阅；文件时期见标题",
+                "publisher": "ASNT NDT Level II当前条件",
+                "scope": "contextual",
+                "url": "https://certification.asnt.org/certification/asnt-ndt-level-ii"
               }
             ]
           },
@@ -14069,7 +14160,7 @@
           {
             "来源": "O*NET 17-3029.01 职业档案",
             "类型": "官方职业来源",
-            "适用范围": "职业定义、16 项核心任务与工作情境",
+            "适用范围": "O*NET2026任务共17项：15核心、1补充、1新列无人机远程检查任务；新任务无重要性分值，不据此推已部署或所有岗位要求。",
             "链接": "https://www.onetonline.org/link/details/17-3029.01"
           },
           {
@@ -14091,15 +14182,15 @@
             "链接": "https://www.onetonline.org/link/localwages/17-3029.01"
           },
           {
-            "来源": "O*NET 17-3029.01 就业与预测",
+            "来源": "BLS2025—2035职业预测",
             "类型": "官方就业预测",
-            "适用范围": "2024 年就业与 2024—2034 年预测",
-            "链接": "https://www.onetonline.org/link/summary/17-3029.01"
+            "适用范围": "17-3029合并增长2.8%，年均5,400空缺",
+            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
             "来源": "O*NET 行业分布 17-3029.01",
             "类型": "官方行业来源",
-            "适用范围": "2024 年行业分布",
+            "适用范围": "详情2025行业，独立子页未标年度",
             "链接": "https://www.onetonline.org/link/industry/17-3029.01"
           },
           {
@@ -14109,7 +14200,7 @@
             "链接": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
           }
         ],
-        "difference_intro": "本职业不同工作方向受到的影响不同，下表比较职业内的真实方向。",
+        "difference_intro": "按方向作条件性任务分析；数字化检测算法与生成式AI分开，非已核部署或性能。",
         "difference_rows": [
           {
             "AI主要改变": "报告与记录整理可被辅助",
@@ -14127,17 +14218,17 @@
             "方向": "航空航天与复合材料"
           }
         ],
-        "evidence_intro": "以下证据分别说明技术能力、采用信号与国际研究口径，样本、范围与限制随条目写明。",
+        "evidence_intro": "职责与软件清单支持工作内容和招聘技能，ILO是全球暴露研究；职业生成式AI采用、检测性能及因果效果本轮未取得，表中辅助为条件性编辑分析。",
         "evidence_rows": [
           {
             "使用限制": "美国职业档案，不含中国资格或工资结论",
             "来源": "O*NET OnLine",
             "研究对象": "O*NET 17-3029.01 职业档案",
-            "结论": "给出 16 项核心任务与补充任务，以及辐射暴露、防护装备使用与错误后果等工作情境回应",
+            "结论": "O*NET2026任务共17项：15核心、1补充、1新列无人机远程检查任务；新任务无重要性分值，不据此推已部署或所有岗位要求。",
             "链接": "https://www.onetonline.org/link/details/17-3029.01"
           },
           {
-            "使用限制": "招聘提及不证明熟练度、生成式 AI 采用率或自动化程度",
+            "使用限制": "2025美国招聘技能提及，非设备性能、生成式采用或熟练度；NA不等于0。",
             "来源": "O*NET OnLine",
             "研究对象": "O*NET 雇主技术信号（Hot Technologies）",
             "结论": "列出 9 项软件并给出占比：Microsoft Office software 10%、Excel 8%、Word 7%、PowerPoint 4%、Outlook 3%、SAP 1%、Access 1%、AutoCAD 与 Project 不可得",
@@ -14153,22 +14244,22 @@
           {
             "使用限制": "合并职业口径的宏观预测，不是个人录用保证",
             "来源": "O*NET OnLine（BLS 数据）",
-            "研究对象": "17-3029 合并职业就业与预测（2024—2034）",
-            "结论": "2024 年就业 67,300 人，预计 2034 年 68,300 人，增长 2%（低于平均），年均空缺 5,700 个",
-            "链接": "https://www.onetonline.org/link/summary/17-3029.01"
+            "研究对象": "BLS17-3029合并职业2025—2035",
+            "结论": "BLS17-3029合并职业：2025就业62,400，2035预计64,100，增长2.8%，年均5,400空缺；非无损检测单列或中国需求。O*NET当前分类显示平均3%—4%，与BLS精确值分开。",
+            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
             "使用限制": "行业分布不说明具体方法、级别或辐射安全条件",
             "来源": "O*NET OnLine",
-            "研究对象": "17-3029.01 行业分布（2024）",
-            "结论": "政府部门 30%、专业科学与技术服务 29%、制造业 26%、其他行业 15%",
+            "研究对象": "行业背景，详情2025/子页无年度",
+            "结论": "详情2025政府32%、制造26%、专业科学技术26%；独立子页另列其他16%而未标年度。",
             "链接": "https://www.onetonline.org/link/industry/17-3029.01"
           }
         ],
         "heading": "无损检测专员的日常任务与 AI 边界",
         "method_cards": [
           {
-            "含义": "可辅助检测方案与程序草稿、标准与规范检索、报告格式与字段检查、校准与参数记录整理，以及缺陷候选的初步排序。",
+            "含义": "程序与记录草稿可作授权下辅助候选；成像及缺陷标注另核算法验证，不把数字设备或软件名AI认作生成式AI性能。",
             "概念": "技术能力：工具能处理什么"
           },
           {
@@ -14188,9 +14279,9 @@
             "问题": "AI 会取代无损检测专员吗？"
           },
           {
-            "回答": "检测方案与程序草稿、标准检索、报告格式检查、校准与参数记录整理，以及数字化成像与分析辅助。",
+            "回答": "程序草稿、标准检索、格式与字段检查是编辑辅助候选；数字化成像与分析属专用设备/算法范畴，实际性能另核。",
             "来源": "O*NET OnLine",
-            "链接": "https://www.onetonline.org/link/hot_tech/17-3029.01",
+            "链接": "https://www.onetonline.org/link/details/17-3029.01",
             "问题": "哪些环节更可能被工具或设备辅助？"
           },
           {
@@ -14212,7 +14303,7 @@
             "问题": "如何正确使用本页的任务影响说明？"
           },
           {
-            "回答": "被检对象数据、图像与业主信息属受控资料，须在机构授权系统与合同约定的范围内处理；输出必须由有资格人员复核并保留记录。",
+            "回答": "按资料分类、合同与机构授权核系统使用；核电国防等按适用保密制度，公开教学资料不一律受控。输出需有资格人员复核，原始资料可追溯。",
             "来源": "O*NET OnLine",
             "链接": "https://www.onetonline.org/link/details/17-3029.01",
             "问题": "采用生成式工具需要哪些条件？"
@@ -14345,17 +14436,17 @@
             "stage": "判读与报告阶段"
           },
           {
-            "description": "处理复杂几何与新材料对象，编制检测工艺、审核报告、指导Ⅰ／Ⅱ级人员，并对方法与质量体系负责。",
+            "description": "TSG特种设备Ⅲ级承担技术管理、工艺编审与人员指导；持Ⅱ级四年以上可编审工艺，未设Ⅲ级项目由Ⅱ级承担，实际项目授权另核。",
             "stage": "工艺与质量负责阶段"
           }
         ],
-        "direct_answer": "进入本职业的主路径是取得方法资格并在受监督环境中积累经验：中国大陆特种设备无损检测须按 TSG Z8001—2019 取得《特种设备检验检测人员证（无损检测人员）》，按方法与Ⅰ／Ⅱ／Ⅲ级分级，Ⅰ级在Ⅱ级或Ⅲ级指导下操作与记录，Ⅱ级可实施检测与评定，Ⅲ级负责工艺与审核；射线类作业还须完成辐射安全培训并每四年再培训。美国没有统一州级执照，行业认证以 ASNT 的 NDT Level II／Level III、ACCP 与 IRSSP 等为主，实际放行由雇主与项目授权决定；O*NET 将本职业列为 Job Zone 1-2，但页面同时提示该分级与专业化要求不一致，实际门槛主要来自资格培训与授权。",
+        "direct_answer": "先核方法、行业及法域。中国特种设备按TSG2019及2025修改单取证，Ⅰ级操作记录、Ⅱ级实施评定/报告、Ⅲ级技术管理；持Ⅱ级四年以上可编审工艺，未设Ⅲ级的项目由Ⅱ级承担该工作，不能说工艺仅Ⅲ级。自2020年起按生态环境部2019第57号公告参加平台考核，不能把旧四年培训证规则当所有新人员统一要求；仅从事Ⅲ类射线装置销售、使用的人员按2021第9号公告由单位自行考核，结果有效五年、到期再培训考核。其他类别核平台及成绩报告具体要求。 美国ASNT NDT与9712各有条件，SNT-TC-1A雇主书面程序认证不等ASNT颁证；未核全美法域执照，不作一律免执照结论。",
         "entry_heading": "从受监督操作到独立判读与工艺负责",
         "heading": "无损检测专员的入行、资格与职业发展路径",
         "locale_requirements": {
           "credential_boundary": "学历、在岗培训、方法资格、级别、辐射安全培训、雇主授权与项目签字权是不同状态；持证不等于可对任意对象放行程序或结论，任何课程与证书都不能自动赋予特定项目的签字权。",
-          "jurisdiction": "本页职业事实采用美国 O*NET 17-3029.01 口径；美国认证参考 ASNT 等机构（经 O*NET 认证查询页面列出）；中国资格与培训参考《特种设备无损检测人员考核规则》（TSG Z8001—2019）与生态环境部辐射安全规定。其他行业（航空航天、核电、轨道交通等）另有资格与授权要求，须另查现行规定。",
-          "summary": "中国大陆特种设备无损检测按方法与Ⅰ／Ⅱ／Ⅲ级分级取证，RT／UT／MT／PT 的Ⅰ、Ⅱ级向省级发证机关申请、其他项目与级别向国家市场监督管理总局申请，证书有效期 5 年；射线类作业须接受辐射安全培训并每四年再培训。美国以 ASNT 等行业认证为主，O*NET 将本职业列为 Job Zone 1-2（SVP 低于 6.0），实际门槛来自资格培训与雇主授权。"
+          "jurisdiction": "中国TSG适用于特种设备目录内，连同2025修改单；辐射2019公告及2021Ⅲ类装置例外按实际作业核。美国ASNT项目与雇主认证分开；航空核电等目标专项规则未完整取得，不能由一类证书推全部行业许可。",
+          "summary": "特种设备RT/UT/MT/PTⅠⅡ级省级申请，其余国家级，证五年；2025修改单更新申请年龄18以上不满63、换证不满65与换证窗口。美国JobZone1—2与68/9/9调查不代中国学历或父类BLS副学士。自2020年起按生态环境部2019第57号公告参加平台考核，不能把旧四年培训证规则当所有新人员统一要求；仅从事Ⅲ类射线装置销售、使用的人员按2021第9号公告由单位自行考核，结果有效五年、到期再培训考核。其他类别核平台及成绩报告具体要求。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
@@ -14382,6 +14473,36 @@
             "id": "cn",
             "label": "特种设备无损检测人员考核规则（TSG Z8001—2019）",
             "scope": "中国方法与级别资格要求"
+          },
+          {
+            "href": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/tzsbs/art/2025/art_43bc707de5a54c11b3ecbb1bf6031d0a.html",
+            "id": "amend-2025",
+            "label": "TSG2025修改单",
+            "scope": "申请与换证条件"
+          },
+          {
+            "href": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk01/201912/t20191225_751572.html",
+            "id": "rad-2020",
+            "label": "辐射考核2019公告",
+            "scope": "2020起平台考核"
+          },
+          {
+            "href": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk01/202103/t20210312_824510.html",
+            "id": "rad-class3",
+            "label": "Ⅲ类装置自考公告",
+            "scope": "限定销售使用人员五年自考"
+          },
+          {
+            "href": "https://certification.asnt.org/certification/asnt-ndt-level-ii",
+            "id": "asnt-ii",
+            "label": "ASNT NDT II要求",
+            "scope": "雇主补充考试"
+          },
+          {
+            "href": "https://www.samr.gov.cn/cms_files/filemanager/samr/www/samrnew/tzsbj/zcfg/aqjsgf/202006/P020200622398895602737.pdf",
+            "id": "tsg-full",
+            "label": "TSG2019官方完整PDF",
+            "scope": "表1覆盖与Ⅱ级工艺职责"
           }
         ],
         "tracks": [
@@ -14390,7 +14511,7 @@
             "stages": [
               {
                 "credentials": "Ⅰ级资格取证准备与安全培训",
-                "next_moves": "独立承担特定方法检测",
+                "next_moves": "取相应方法级别后按指导书与监督安排承担操作，不据Ⅰ级称全面独立判读",
                 "readiness_evidence": "操作记录与带教评价（编辑建议，非雇主统一考核要求）",
                 "responsibility": "在指导下完成设备准备、清洁与参数记录",
                 "role": "受监督操作阶段"
@@ -14404,13 +14525,13 @@
               },
               {
                 "credentials": "Ⅱ级资格与雇主授权",
-                "next_moves": "编制工艺与处理疑难判读",
+                "next_moves": "复杂判读与工艺能力；持Ⅱ级四年以上编审工艺按TSG限定",
                 "readiness_evidence": "报告样本与复核意见（编辑建议，非雇主统一考核要求）",
                 "responsibility": "依据标准评定结果并编写检测报告",
                 "role": "判读与报告阶段"
               },
               {
-                "credentials": "Ⅲ级资格与机构任命",
+                "credentials": "Ⅲ级与任命；未设置Ⅲ级项目由Ⅱ级承担相应工作",
                 "next_moves": "参与标准与体系事务",
                 "readiness_evidence": "工艺文件与质控记录（编辑建议，非雇主统一考核要求）",
                 "responsibility": "编制检测工艺、审核报告并指导人员",
@@ -14739,7 +14860,7 @@
             "consequence": "质量责任无法追溯，复检与验收产生争议",
             "evidence_refs": [
               "cn-ndt",
-              "bls"
+              "onet"
             ],
             "id": "single-coverage",
             "mitigation": "按项目要求实时记录并保存原始数据与复核痕迹",
@@ -14828,7 +14949,7 @@
             {
               "学历段": "高中或同等学历",
               "岗位方向": "进入检测辅助与Ⅰ级取证准备",
-              "说明": "多数岗位以高中文凭加在职培训为主。"
+              "说明": "中国按TSG表2及目标机构招聘核，美国68%高中调查不是中国多数岗位要求。"
             },
             {
               "学历段": "中专或大专相关专业",
@@ -14838,12 +14959,12 @@
             {
               "学历段": "方法资格取证与分级",
               "岗位方向": "按方法与Ⅰ／Ⅱ／Ⅲ级承担相应职责",
-              "说明": "证书有效期 5 年，需按期换证。"
+              "说明": "特种设备证五年，2025修改单区分免考换证到期前3—6个月、考试换证前6—12个月；非所有行业同证。"
             },
             {
               "学历段": "辐射安全培训",
               "岗位方向": "射线类作业上岗前提",
-              "说明": "取得合格证书后每四年再培训。"
+              "说明": "自2020年起按生态环境部2019第57号公告参加平台考核，不能把旧四年培训证规则当所有新人员统一要求；仅从事Ⅲ类射线装置销售、使用的人员按2021第9号公告由单位自行考核，结果有效五年、到期再培训考核。其他类别核平台及成绩报告具体要求。"
             }
           ],
           "china_industry_table": [
@@ -14870,7 +14991,7 @@
           "china_open": "可用公开职责、资格规则与安全要求信息做职业探索，但不能据此推导中国大陆个人收入。",
           "china_open_note": "如需收入判断，应回到具体行业、项目类型、方法级别与合同条件核对。",
           "china_ref": "国家统计局：2025 年城镇单位就业人员平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
-          "china_salary_note": "中国精确职业工资数据不可得；本页只展示行业门类均值并标明其边界，不换算为本职业或个人薪资。",
+          "china_salary_note": "证据不足：本轮未取得中国同口径职业工资；匹配检测服务/制造雇主的行业均值不代职业分布。",
           "china_salary_table": [
             {
               "城市/区间": "职业精确工资",
@@ -14891,18 +15012,18 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "sources_note": "中国数据来自国家统计局 2025 年城镇单位工资统计的科学研究和技术服务业与制造业行业门类均值，以及《特种设备无损检测人员考核规则》与生态环境部辐射安全规定；美国数据来自 O*NET 展示的 2025 BLS OEWS 与 2024—2034 预测（17-3029 合并口径）。",
+          "sources_note": "NBS2025科研技术服务及制造行业均值；TSG2019需连同2025第1号修改单，辐射考核连同2019/2021公告。美国OEWS2025合并工资、BLS2025—2035合并预测。",
           "ui": {
             "ai_heading": "工具与责任边界",
             "driver_heading": "影响因素",
             "official_heading": "中国工资数据状态",
-            "scenario_caption": "不以不可得的精确数字替代证据。",
+            "scenario_caption": "学历、方法资格与辐射考核分别核，不代中国统一招聘要求。",
             "scenario_heading": "场景化判断",
             "scenario_interpretation_label": "解释",
-            "scenario_role_label": "岗位方向",
-            "scenario_value_label": "数据状态"
+            "scenario_role_label": "学历或资格",
+            "scenario_value_label": "岗位方向"
           },
-          "us_growth": "低于平均（2%，2024—2034，合并口径）",
+          "us_growth": "BLS增长2.8%（2025—2035，17-3029合并）",
           "us_median": "78,350 美元/年（2025，合并口径）"
         }
       },
@@ -14936,18 +15057,18 @@
           },
           {
             "指标": "就业人数",
-            "数值": "67,300 人（2024）",
-            "说明": "O*NET/BLS 2024 年美国 17-3029 合并口径就业规模，不是当前招聘数量｜https://www.onetonline.org/link/summary/17-3029.01"
+            "数值": "62,400人（2025）",
+            "说明": "BLS17-3029合并就业存量｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
-            "指标": "就业变化 2024—2034",
-            "数值": "低于平均（2%）",
-            "说明": "2024—2034 年就业预测（合并口径）｜https://www.onetonline.org/link/summary/17-3029.01"
+            "指标": "就业变化2025—2035",
+            "数值": "增长2.8%",
+            "说明": "BLS合并职业精确值；O*NET平均3%—4%为分类｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
-            "指标": "就业岗位空缺（2024—2034 年均）",
-            "数值": "5,700 个/年",
-            "说明": "O*NET 页面给出预测期年均空缺，含增长与替换需求；不等于个人录用概率｜https://www.onetonline.org/link/summary/17-3029.01"
+            "指标": "年均岗位空缺2025—2035",
+            "数值": "5,400个/年",
+            "说明": "增长及替换年均空缺，不是录用保证｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           }
         ],
         "boundary": "美国数据只适用于所列期间与 17-3029 合并职业口径；OEWS 为机构工资薪金雇员调查，不含自雇与合伙收入，也不能换算为中国大陆个人收入。",
@@ -14978,33 +15099,33 @@
           }
         ],
         "factors_heading": "影响实际报价的因素",
-        "growth": "低于平均（2%，2024—2034，17-3029 合并口径）",
+        "growth": "BLS增长2.8%（17-3029合并）",
         "heading": "无损检测专员的美国薪资与就业数据边界",
         "industry_heading": "行业与岗位差异",
-        "industry_period": "2024",
+        "industry_period": "2025（详情；独立页无年度）",
         "industry_rows": [
           {
             "industry": "政府部门",
             "median": "需核对具体岗位",
-            "note": "O*NET 行业页面显示 30% 出现在政府部门，含国防与公共设施检验岗位。"
+            "note": "详情2025政府32%，比例不能证明其中具体部门和任务。"
           },
           {
             "industry": "专业科学与技术服务",
             "median": "需核对具体岗位",
-            "note": "检验检测机构与工程服务公司通常按项目派驻，出差与驻场比例较高。"
+            "note": "详情2025专业科学技术26%；具体派驻、出差比例未核，不将全部机构外推。"
           },
           {
             "industry": "制造业",
             "median": "需核对具体岗位",
-            "note": "O*NET 行业页面显示 26% 出现在制造业，方法与级别配置随产品类型变化。"
+            "note": "详情2025制造26%，非行业工资。"
           },
           {
             "industry": "其他行业与专项领域",
             "median": "需核对具体岗位",
-            "note": "O*NET 行业页面显示 15% 分布于其他行业；核电、航空航天等另有准入与保密要求。"
+            "note": "独立子页其他16%未标年度，不能把核电航空专项全部归入这16%。"
           }
         ],
-        "industry_value_label": "行业列举（O*NET 17-3029.01，2024；页面未提供工资占比）",
+        "industry_value_label": "行业背景，非行业工资",
         "interpretation_heading": "如何解读",
         "interpretation_rows": [
           {
@@ -15025,7 +15146,7 @@
           {
             "answer": {
               "$join": [
-                "现有材料没有同范围、可解释的分位工资分布。",
+                "2025五分位已核，为17-3029合并职业分布，不作方法或资历收入排序",
                 {
                   "$item": "non-destructive-testing-specialists.us-salary.career-snapshot-secondary-locale.6",
                   "block": "us-salary",
@@ -15035,10 +15156,10 @@
               ],
               "separator": "；"
             },
-            "question": "为什么不展示分位数？"
+            "question": "如何解读分位数？"
           },
           {
-            "answer": "它是 2024 年美国合并职业口径的就业存量与 2024—2034 年预测；总量接近持平但仍有年均空缺，需求以替换为主。",
+            "answer": "BLS17-3029合并职业：2025就业62,400，2035预计64,100，增长2.8%，年均5,400空缺；非无损检测单列或中国需求。O*NET当前分类显示平均3%—4%，与BLS精确值分开。",
             "question": "就业人数与变化代表什么？"
           },
           {
@@ -15048,7 +15169,7 @@
         ],
         "median": "$78,350",
         "outlook_heading": "就业前景",
-        "outlook_period": "2024—2034",
+        "outlook_period": "2025—2035",
         "wage_column_labels": [
           "工资层级",
           "年薪参考",
@@ -15078,7 +15199,7 @@
             "equivalent": "$29.03—$47.75/小时",
             "interpretation": {
               "$join": [
-                "没有同范围可解释的分位工资数据。",
+                "已核全国第25—75分位为中间50%，非资历等级或起薪",
                 {
                   "$item": "non-destructive-testing-specialists.us-salary.career-snapshot-secondary-locale.3",
                   "block": "us-salary",
@@ -15095,7 +15216,7 @@
             "equivalent": "$22.61—$56.89/小时",
             "interpretation": {
               "$join": [
-                "没有同范围可解释的分位工资数据。",
+                "已核全国第10—90分位，非个人报价或税后工资",
                 {
                   "$item": "non-destructive-testing-specialists.us-salary.career-snapshot-secondary-locale.4",
                   "block": "us-salary",
@@ -15110,7 +15231,7 @@
           }
         ]
       },
-      "definition_block": "无损检测专员（O*NET-SOC 17-3029.01）使用射线、超声、磁粉、渗透、涡流、声发射、目视与热成像等方法，在不破坏被检对象的前提下检查结构、车辆或设备的安全性；工作包括选择与校准设备、实施检测、判读信号与图像、依据规范评估结果、记录过程并编写报告；实际可执行范围由方法级别资格、辐射安全培训与雇主授权决定。",
+      "definition_block": "无损检测专员（O*NET-SOC 17-3029.01）使用射线、超声、磁粉、渗透、涡流、声发射、目视与热成像等方法，在不破坏被检对象的前提下检查结构、车辆或设备的安全性；工作包括选择与校准设备、实施检测、判读信号与图像、依据规范评估结果、记录过程并编写报告；实际可执行范围由方法级别资格、相应安全要求与雇主授权决定。 辐射要求适用于射线等相关作业，不外推全部方法。",
       "faq_block": {
         "items": {
           "$item": "non-destructive-testing-specialists.sources.faq-block.1",
@@ -15201,13 +15322,13 @@
             "metric": "美国就业变化",
             "occupation_scope": "Engineering Technologists and Technicians, Except Drafters, All Other（17-3029）合并口径",
             "source_id": "ep",
-            "value": "低于平均（2%，2024—2034）；预计年均职位空缺 5,700 个"
+            "value": "BLS增长2.8%，年均5,400空缺（2025—2035）"
           },
           {
             "geography": "美国全国（合并职业口径）",
             "horizon": "2025 年工资数据",
             "interpretation": "该页按 17-3029 合并口径给出中位与五分位工资，不是 17-3029.01 单列值。",
-            "limitation": "OEWS 不含自雇与合伙收入，也不反映出差与现场津贴。",
+            "limitation": "OEWS为税前正常工时工资，不含自雇及未法人化企业业主/合伙人；含危险津贴、激励与生产奖金，排加班、轮班差额、食宿支付等，不笼统排所有驻场或浮动部分。",
             "metric": "职业工资分布（美国）",
             "occupation_scope": "O*NET National Wages 17-3029.01（2025 BLS OEWS，17-3029 合并口径）",
             "source_id": "bls",
@@ -15233,10 +15354,10 @@
             "scope": "美国工资与分位"
           },
           {
-            "href": "https://www.onetonline.org/link/summary/17-3029.01",
+            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "ep",
-            "label": "O*NET 17-3029.01 就业与预测（合并口径）",
-            "scope": "美国就业规模与 2024—2034 预测"
+            "label": "BLS17-3029合并职业2025—2035预测",
+            "scope": "合并就业及空缺"
           },
           {
             "href": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
@@ -15277,27 +15398,27 @@
             "transition_distance": "相邻"
           },
           {
-            "capability_gaps": "需补电气与控制系统知识",
+            "capability_gaps": "电气控制与机械系统另补，不仅电气技师",
             "shared_capabilities": "设备操作与故障判断",
             "target_href": "/zh/career/jobs/electro-mechanical-and-mechatronics-technologists-and-technicians",
             "target_slug": "electro-mechanical-and-mechatronics-technologists-and-technicians",
-            "target_title": "机电与电气技师",
+            "target_title": "机电与机电一体化工程技师和技术人员",
             "transition_distance": "相邻"
           },
           {
-            "capability_gaps": "需补职业健康与安全管理训练",
+            "capability_gaps": "目标宽于辐射防护，按岗位教育、现场安全和许可另核",
             "shared_capabilities": "安全规程与剂量管理意识",
             "target_href": "/zh/career/jobs/occupational-health-and-safety-specialists",
             "target_slug": "occupational-health-and-safety-specialists",
-            "target_title": "辐射防护与安全岗位",
+            "target_title": "职业健康与安全专员",
             "transition_distance": "相邻"
           },
           {
-            "capability_gaps": "需补核工程专业教育与执业资格",
+            "capability_gaps": "核工程专业教育及目标岗位条件另核；该链接不是中国注册核安全工程师资格页",
             "shared_capabilities": "核技术应用基础",
             "target_href": "/zh/career/jobs/nuclear-engineers",
             "target_slug": "nuclear-engineers",
-            "target_title": "注册核安全工程师相关岗位",
+            "target_title": "核工程师",
             "transition_distance": "较远（需专业教育路径）"
           },
           {
@@ -15309,11 +15430,11 @@
             "transition_distance": "相邻"
           },
           {
-            "capability_gaps": "需补机械电气维修训练",
+            "capability_gaps": "目标包含一般维护修理，不是校准专属职业；按具体设备补技能",
             "shared_capabilities": "设备操作与校准意识",
             "target_href": "/zh/career/jobs/maintenance-and-repair-workers-general",
             "target_slug": "maintenance-and-repair-workers-general",
-            "target_title": "设备维护与校准技师",
+            "target_title": "一般维护与修理工",
             "transition_distance": "相邻"
           }
         ]
@@ -15342,15 +15463,15 @@
           },
           {
             "alternate_value": null,
-            "label": "美国就业（2024）",
+            "label": "美国就业（2025）",
             "secondary_value": null,
-            "value": "67,300 人（17-3029 合并口径）"
+            "value": "62,400人（17-3029合并）"
           },
           {
             "alternate_value": null,
-            "label": "美国就业变化（2024—2034）",
+            "label": "美国就业变化（2025—2035）",
             "secondary_value": null,
-            "value": "低于平均（2%）；预计年均职位空缺 5,700 个（合并口径）"
+            "value": "BLS增长2.8%，年均5,400空缺（合并口径）"
           }
         ],
         "schema_version": "career.onet_structured_fields.v1"
@@ -15365,7 +15486,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始测评并查看结果",
+            "cta_label": "查看 RIASEC 兴趣测评",
             "evidence_level": {
               "$item": "non-destructive-testing-specialists.fit.personality-fit-block.8",
               "block": "fit",
@@ -15386,7 +15507,7 @@
           {
             "answer": "你可以把它当作反思现场作业耐受度与记录纪律的参照，但不能替代对安全要求与判读责任的核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始测评并查看结果",
+            "cta_label": "查看 RIASEC 兴趣测评",
             "evidence_level": "探索性证据：该框架为自我反思工具，不是本职业的选拔或准入标准。",
             "id": "big-five",
             "label": "大五人格五因素模型",
@@ -15402,7 +15523,7 @@
           {
             "answer": "测评结果只作自我探索，不构成检测资格、授权或录用证据。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始测评并查看结果",
+            "cta_label": "查看 RIASEC 兴趣测评",
             "evidence_level": "探索性证据：该框架为自我反思工具，不是本职业的选拔或准入标准。",
             "id": "mbti",
             "label": "MBTI 十六型人格类型测验",
@@ -15418,7 +15539,7 @@
           {
             "answer": "测评结果只作自我探索，不构成检测资格、授权或录用证据。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始测评并查看结果",
+            "cta_label": "查看 RIASEC 兴趣测评",
             "evidence_level": "探索性证据：该框架为自我反思工具，不是本职业的选拔或准入标准。",
             "id": "enneagram",
             "label": "九型人格类型测验",
@@ -15434,7 +15555,7 @@
           {
             "answer": "测评结果只作自我探索，不构成检测资格、授权或录用证据。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始测评并查看结果",
+            "cta_label": "查看 RIASEC 兴趣测评",
             "evidence_level": "探索性证据：该框架为自我反思工具，不是本职业的选拔或准入标准。",
             "id": "iq",
             "label": "认知能力与推理测验",
@@ -15450,7 +15571,7 @@
           {
             "answer": "测评结果只作自我探索，不构成检测资格、授权或录用证据。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "开始测评并查看结果",
+            "cta_label": "查看 RIASEC 兴趣测评",
             "evidence_level": "探索性证据：该框架为自我反思工具，不是本职业的选拔或准入标准。",
             "id": "eq",
             "label": "情绪与协作能力测验",
@@ -15465,7 +15586,7 @@
           }
         ],
         "boundary": "本页的适配信号与工具说明只用于自我探索，不构成能力测评、选拔标准、检测资格或录用承诺；兴趣与人格框架的证据定位见下方说明。",
-        "direct_answer": "适配本职业的关键信号是：能长期按程序操作设备并保持记录一致性、愿意把原始信号与解释分开陈述并用标准条款支撑结论、能在辐射与现场安全约束下作业，并愿意按方法逐项取证、承担判读责任。",
+        "direct_answer": "方法标准知识、程序化设备操作、原始记录与判读可追溯是适配线索；现场约束按方法与项目核，射线安全不外推全部NDT。培训与资格、实际授权分别取得。",
         "directions": [
           {
             "direction": "质量检验员（工业）",
@@ -15488,14 +15609,14 @@
             "watchouts": "若你更偏好工艺设计与数据分析"
           },
           {
-            "direction": "机电与电气技师",
+            "direction": "机电与机电一体化工程技师和技术人员",
             "fit_signals": "设备维护与故障判断",
             "target": {
               "href": "/zh/career/jobs/electro-mechanical-and-mechatronics-technologists-and-technicians",
               "slug": "electro-mechanical-and-mechatronics-technologists-and-technicians",
-              "title": "机电与电气技师"
+              "title": "机电与机电一体化工程技师和技术人员"
             },
-            "watchouts": "若你更偏好像电控设备维护"
+            "watchouts": "若更偏好机械、电气和控制系统维护，另核该方向要求"
           },
           {
             "direction": "职业健康与安全专员",
@@ -15518,14 +15639,14 @@
             "watchouts": "若你更偏好结构工程方向的现场工作"
           },
           {
-            "direction": "设备维护与校准技师",
+            "direction": "一般维护与修理工",
             "fit_signals": "设备校准与维修",
             "target": {
               "href": "/zh/career/jobs/maintenance-and-repair-workers-general",
               "slug": "maintenance-and-repair-workers-general",
-              "title": "设备维护与校准技师"
+              "title": "一般维护与修理工"
             },
-            "watchouts": "若你更偏好设备维护而不承担判读责任"
+            "watchouts": "目标宽于检测设备校准，具体维修范围另核"
           }
         ],
         "heading": "无损检测专员的职业适配指南",
@@ -15539,11 +15660,11 @@
             "question": "兴趣代码 RIC 能决定我适不适合吗？"
           },
           {
-            "answer": "O*NET 列为 Job Zone 1-2，教育调查显示 68% 高中文凭、9% 部分大学教育、9% 副学士；页面提示该分级与专业化要求不一致，实际门槛来自资格培训与雇主授权。",
+            "answer": "O*NET美国调查68%高中、9%部分大学无学位、9%副学士及JobZone1—2，未见原文声明分级与专业要求不一致。BLS父类典型副学士为不同口径；中国按TSG表2及招聘要求核。",
             "question": "需要什么学历？"
           },
           {
-            "answer": "中国大陆特种设备无损检测需取得《特种设备检验检测人员证（无损检测人员）》并按方法与Ⅰ／Ⅱ／Ⅲ级分级；美国以 ASNT 等行业认证为主，实际放行由雇主与项目授权决定。",
+            "answer": "中国特种设备方法项目/级别取证，按TSG2019及2025修改单；美国ASNT NDT与9712等项目各有条件，SNT-TC-1A雇主认证与ASNT证书分开，不能由认证列表证明全法域无执照。",
             "question": "需要哪些资格？"
           },
           {
@@ -15555,7 +15676,7 @@
             "question": "工作环境和排班如何？"
           },
           {
-            "answer": "O*NET 转发的 BLS 预测显示 17-3029 合并口径 2024—2034 年增长 2%（低于平均），年均空缺 5,700 个，需求以替换为主。",
+            "answer": "BLS17-3029合并职业：2025就业62,400，2035预计64,100，增长2.8%，年均5,400空缺；非无损检测单列或中国需求。O*NET当前分类显示平均3%—4%，与BLS精确值分开。",
             "question": "这个职业的前景如何？"
           },
           {
@@ -15580,7 +15701,7 @@
             "tone": "positive"
           },
           {
-            "body": "倾向只报结论不留原始记录，难以接受不规律排班与辐射作业要求，或倾向夸大证书与授权范围。",
+            "body": "只报结论不保留原始资料、夸大证书授权需谨慎；排班及射线条件需对照目标项目，不将所有方法统一辐射要求。",
             "id": "caution",
             "label": "需要谨慎的信号",
             "tone": "caution"
@@ -15671,8 +15792,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "本页职业事实来自 O*NET 17-3029.01 官方档案（定义、16 项核心任务、工作情境、兴趣代码 RIC、准备层级与教育调查构成）及 O*NET 展示的 2025 BLS OEWS 工资与 2024—2034 年预测（17-3029 合并口径）；美国资格参考 O*NET 认证查询页面列出的 ASNT 等机构认证；中国资格与安全参考《特种设备无损检测人员考核规则》（TSG Z8001—2019）与生态环境部辐射安全规定；生成式 AI 任务暴露参考 ILO 2025 年工作报告；中国工资使用国家统计局 2025 年科学研究和技术服务业与制造业行业门类均值。",
-          "updated_at": "O*NET 档案更新 2026；BLS 工资为 2025 年数据；就业与预测为 2024—2034 年；ILO 报告为 2025-05-20 发布；中国监管文件以现行法规与发证机关公告为准；国家统计局为 2025 年数据（2026-05-15 发布）；本页查阅 2026-09-26。"
+          "source": "局部O*NET2026任务17（15核心/1补充/1新）、2025工资五分位与BLS2025—2035合并预测2.8%/5,400已核；NBS2025相关行业均值核原表。资格合读TSG2019完整PDF与2025修改单，辐射2019/2021考核公告，ASNT机构与雇主认证区分。保护FAQ/快答仍含历史数据与旧资格摘要，未作全页同步。",
+          "updated_at": "本轮查阅2026-10-11；局部工资行业2025，预测2025—2035；保护历史元数据保持。"
         },
         "note": "证据只支持在标注市场、职业口径与期间内的范围性判断，不构成个人收入、录用或检测授权；检测实施、结果评定与报告签发须由取得相应方法级别资格并获授权的人员执行。",
         "secondary_links": [
@@ -15718,7 +15839,7 @@
           }
         ]
       },
-      "work_context_block": "工作情境：以现场与车间为主，23% 每天暴露于辐射、32% 每天佩戴专业防护装备、77% 每天佩戴常见防护装备，32% 每天暴露于噪声、14% 每天在户外无遮蔽环境工作；77% 的工作日程不规律、73% 每周工作超过 40 小时；59% 认为精确性或准确性极其重要、38% 报告错误后果极其严重、41% 对他人健康与安全承担极高责任。"
+      "work_context_block": "美国O*NET工作情境调查：23%每天辐射、32%专业防护、77%常见防护、32%噪声、14%户外无遮蔽；77%日程不规律、73%周工时超过40；精确性59%、极严重错误38%、极高他人安全责任41%。这些是受访回应，非中国雇主比例或事故率；方法与项目决定具体辐射条件，不能据此证明全部以现场车间为主。"
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
@@ -16016,7 +16137,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "不破坏对象的缺陷检查",
@@ -16067,7 +16188,7 @@
       "text": "无损检测专员"
     }
   },
-  "source_content_sha256": "d02c7543396dd711176c5fde2ce4078da1d506a6175b6f892ac9dd9cb404da5b",
+  "source_content_sha256": "5b1ef38c3e47f7129374a3a0aec8bed153db0e2bd5023c39aa14011b2c1133fc",
   "subject": {
     "canonical_slug": "non-destructive-testing-specialists",
     "name": "无损检测专员",

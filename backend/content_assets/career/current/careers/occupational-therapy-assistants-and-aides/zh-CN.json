@@ -13842,7 +13842,7 @@
             "链接": "https://www.bls.gov/ooh/healthcare/occupational-therapy-assistants-and-aides.htm"
           }
         ],
-        "difference_intro": "区分文书可辅助、现场患者判断必须核、治疗计划须由治疗师负责。",
+        "difference_intro": "以下为基于两类岗位任务的编辑试用建议，不是机构采用或效率提升的实测结果；现场观察与治疗计划仍须有权限人员核对。",
         "difference_rows": [
           {
             "AI主要改变": "整理草稿。",
@@ -14452,16 +14452,28 @@
         "risks": [
           {
             "affected_roles": {
-              "$item": "occupational-therapy-assistants-and-aides.risk.career-risk-cards.4",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "辅助员、委派任务的助理及监督治疗师。相关信息边界：",
+                {
+                  "$item": "occupational-therapy-assistants-and-aides.risk.career-risk-cards.4",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "consequence": {
-              "$item": "occupational-therapy-assistants-and-aides.risk.career-risk-cards.5",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "可能让未获准人员承担治疗实施，损害患者安全并违反当地职责规则。出现异常时：",
+                {
+                  "$item": "occupational-therapy-assistants-and-aides.risk.career-risk-cards.5",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "evidence_refs": [
               "onet",
@@ -14473,8 +14485,8 @@
             "title": "身份混淆"
           },
           {
-            "affected_roles": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
-            "consequence": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
+            "affected_roles": "参与患者转移的助理、辅助员与监督团队。",
+            "consequence": "可能造成患者跌倒或工作人员肌肉骨骼损伤。",
             "evidence_refs": [
               "onet",
               "privacy"
@@ -14485,8 +14497,8 @@
             "title": "患者跌倒"
           },
           {
-            "affected_roles": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
-            "consequence": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
+            "affected_roles": "准备和清洁治疗区、器材的人员及使用者。",
+            "consequence": "可能增加接触污染与感染传播风险。",
             "evidence_refs": [
               "privacy",
               "privacy"
@@ -14497,11 +14509,11 @@
             "title": "感染暴露"
           },
           {
-            "affected_roles": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
-            "consequence": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
+            "affected_roles": "接触健康信息、病历与工具系统的人员。",
+            "consequence": "可能使健康信息被未授权访问或披露。",
             "evidence_refs": [
-              "onet",
-              "onet"
+              "privacy",
+              "privacy"
             ],
             "id": "technical-boundary",
             "mitigation": "只用获准系统。",
@@ -14509,8 +14521,8 @@
             "title": "病历泄露"
           },
           {
-            "affected_roles": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
-            "consequence": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
+            "affected_roles": "观察记录的助理与接收反馈的治疗师。",
+            "consequence": "可能延迟识别不适和调整治疗安排。",
             "evidence_refs": [
               "bls",
               "bls"
@@ -14521,8 +14533,8 @@
             "title": "漏记变化"
           },
           {
-            "affected_roles": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
-            "consequence": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
+            "affected_roles": "实施活动的助理及制定计划的治疗师。",
+            "consequence": "可能偏离审定计划并产生患者安全与权限风险。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14539,31 +14551,31 @@
             "href": "https://www.bls.gov/ooh/healthcare/occupational-therapy-assistants-and-aides.htm",
             "id": "onet",
             "label": "BLS职责",
-            "scope": "两类岗位患者安全与责任"
+            "scope": "美国对应职业任务、教育与工作环境；风险情境是编辑提示，不提供发生频率或目标州完整授权规则。"
           },
           {
             "href": "https://www.onetonline.org/link/details/31-2011.00",
             "id": "bls",
             "label": "O*NET助理",
-            "scope": "两类岗位患者安全与责任"
+            "scope": "美国对应职业任务、教育与工作环境；风险情境是编辑提示，不提供发生频率或目标州完整授权规则。"
           },
           {
             "href": "https://www.onetonline.org/link/details/31-2012.00",
             "id": "facilities",
             "label": "O*NET辅助员",
-            "scope": "两类岗位患者安全与责任"
+            "scope": "美国对应职业任务、教育与工作环境；风险情境是编辑提示，不提供发生频率或目标州完整授权规则。"
           },
           {
-            "href": "https://www.bls.gov/ooh/healthcare/occupational-therapy-assistants-and-aides.htm",
+            "href": "https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/minimum-necessary-requirement/index.html",
             "id": "privacy",
-            "label": "BLS环境",
-            "scope": "两类岗位患者安全与责任"
+            "label": "HHS健康信息最少必要要求",
+            "scope": "美国HIPAA适用主体；治疗披露等存在例外，机构访问政策与州法另核，非全球统一规则。"
           },
           {
             "href": "https://www.bls.gov/ooh/healthcare/occupational-therapy-assistants-and-aides.htm",
             "id": "onet",
             "label": "BLS资格",
-            "scope": "两类岗位患者安全与责任"
+            "scope": "美国对应职业任务、教育与工作环境；风险情境是编辑提示，不提供发生频率或目标州完整授权规则。"
           }
         ]
       },
@@ -14769,23 +14781,23 @@
         "industry_rows": [
           {
             "industry": "助理：治疗师诊所",
-            "median": "按具体地区核",
-            "note": "BLS 2025年5月；不同职业和场景不可直接比较。"
+            "median": "$70,740",
+            "note": "助理31-2011；治疗师等诊所，美国2025年5月年薪中位。 非组合中位数、起薪或个人报价。"
           },
           {
             "industry": "助理：护理机构",
-            "median": "按具体地区核",
-            "note": "BLS 2025年5月；不同职业和场景不可直接比较。"
+            "median": "$76,780",
+            "note": "助理31-2011；护理机构，美国2025年5月年薪中位。 非组合中位数、起薪或个人报价。"
           },
           {
             "industry": "辅助员：治疗师诊所",
-            "median": "按具体地区核",
-            "note": "BLS 2025年5月；不同职业和场景不可直接比较。"
+            "median": "$38,500",
+            "note": "辅助员31-2012；其他健康从业者诊所，美国2025年5月年薪中位。 非组合中位数、起薪或个人报价。"
           },
           {
             "industry": "辅助员：医院",
-            "median": "按具体地区核",
-            "note": "BLS 2025年5月；不同职业和场景不可直接比较。"
+            "median": "$39,430",
+            "note": "辅助员31-2012；医院，美国2025年5月年薪中位。 非组合中位数、起薪或个人报价。"
           }
         ],
         "industry_value_label": "年薪中位数（美元）",
@@ -14958,50 +14970,59 @@
         "heading": "组合就业展望与两类转向",
         "outlook_evidence": [
           {
-            "geography": {
-              "$item": "occupational-therapy-assistants-and-aides.market-signals.market-signal-card.2",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "horizon": {
-              "$item": "occupational-therapy-assistants-and-aides.market-signals.market-signal-card.3",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "geography": "美国",
+            "horizon": "2025基期",
             "interpretation": {
-              "$item": "occupational-therapy-assistants-and-aides.market-signals.market-signal-card.4",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
+              "$join": [
+                "组合存量、招聘样本、AI边界与资格背景分别阅读：",
+                {
+                  "$item": "occupational-therapy-assistants-and-aides.market-signals.market-signal-card.2",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "occupational-therapy-assistants-and-aides.market-signals.market-signal-card.3",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "occupational-therapy-assistants-and-aides.market-signals.market-signal-card.4",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "occupational-therapy-assistants-and-aides.market-signals.market-signal-card.5",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
-            "limitation": {
-              "$item": "occupational-therapy-assistants-and-aides.market-signals.market-signal-card.5",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "limitation": "组合就业存量，不代表任一单项或中国需求。",
             "metric": "2025组合在岗",
             "occupation_scope": "美国助理52,200＋辅助员4,400",
             "source_id": "ep",
             "value": "约56,600"
           },
           {
-            "geography": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
-            "horizon": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
+            "geography": "美国",
+            "horizon": "2025—2035年",
             "interpretation": "31-2010合并组总体增长，非AI因果或个人失业，不按人数比例分配子职业。",
-            "limitation": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
+            "limitation": "31-2010合并组预测；不拆给单项，不代表当前招聘、中国需求或AI因果。",
             "metric": "2025—2035组合增长",
             "occupation_scope": "BLS组合；单项速度不同",
             "source_id": "ep",
             "value": "20.1%"
           },
           {
-            "geography": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
-            "horizon": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
+            "geography": "美国",
+            "horizon": "2025—2035年",
             "interpretation": "年均8600含替补，非净增11400、子职业或中国需求。",
-            "limitation": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
+            "limitation": "31-2010合并组预测；不拆给单项，不代表当前招聘、中国需求或AI因果。",
             "metric": "组合年均空缺",
             "occupation_scope": "含人员替代，不能拆给一类",
             "source_id": "ep",
@@ -15149,7 +15170,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
+            "cta_label": "查看霍兰德兴趣测评",
             "evidence_level": {
               "$item": "occupational-therapy-assistants-and-aides.fit.riasec-fit-block.8",
               "block": "fit",
@@ -15168,10 +15189,10 @@
             "watchout": "量表结果不等于资格或机构授权。"
           },
           {
-            "answer": "作业治疗助理与助手可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较说明活动步骤、倾听反馈和及时交接的具体表现。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "依据BLS工作任务的编辑探索建议；未取得本页自评预测临床能力或录用的效度证据。",
             "id": "big-five",
             "label": "沟通方式",
             "question": "做作业治疗助理与助手需要怎样的能力与工作方式？",
@@ -15184,10 +15205,10 @@
             "watchout": "量表结果不等于资格或机构授权。"
           },
           {
-            "answer": "作业治疗助理与助手可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "区分实际观察与推测，逐项核器材、身份及记录。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "依据BLS工作任务的编辑探索建议；未取得本页自评预测临床能力或录用的效度证据。",
             "id": "mbti",
             "label": "观察细节",
             "question": "做作业治疗助理与助手需要怎样的能力与工作方式？",
@@ -15200,10 +15221,10 @@
             "watchout": "量表结果不等于资格或机构授权。"
           },
           {
-            "answer": "作业治疗助理与助手可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较患者服务、程序纪律和团队协作对自己的吸引力。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "依据BLS工作任务的编辑探索建议；未取得本页自评预测临床能力或录用的效度证据。",
             "id": "enneagram",
             "label": "工作价值",
             "question": "做作业治疗助理与助手需要怎样的能力与工作方式？",
@@ -15216,10 +15237,10 @@
             "watchout": "量表结果不等于资格或机构授权。"
           },
           {
-            "answer": "作业治疗助理与助手可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较治疗协作与器材、接待、事务支持，分别核培训成本。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "依据BLS工作任务的编辑探索建议；未取得本页自评预测临床能力或录用的效度证据。",
             "id": "iq",
             "label": "场景偏好",
             "question": "做作业治疗助理与助手需要怎样的能力与工作方式？",
@@ -15232,10 +15253,10 @@
             "watchout": "量表结果不等于资格或机构授权。"
           },
           {
-            "answer": "作业治疗助理与助手可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "用虚构活动记录和器材清单体验分工，复盘遗漏与停手条件。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "助理按治疗师计划实施活动并记录；辅助员准备场地器材和完成例行支持。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "依据BLS工作任务的编辑探索建议；未取得本页自评预测临床能力或录用的效度证据。",
             "id": "eq",
             "label": "虚构案例",
             "question": "做作业治疗助理与助手需要怎样的能力与工作方式？",
@@ -15456,7 +15477,7 @@
             "type": "prose"
           },
           "source": "BLS OOH 2025；O*NET 31-2011/31-2012；国家统计局2025",
-          "updated_at": "2026-09-26"
+          "updated_at": "2026-10-12"
         },
         "note": "证据只支持作业治疗助理与助手在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -15468,7 +15489,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "作业治疗助理与辅助员的职责边界"
+            "label": "MBTI测评（英文）"
           },
           {
             "href": {
@@ -15478,7 +15499,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "作业治疗助理与辅助员的职责边界"
+            "label": "大五人格测评（英文）"
           },
           {
             "href": {
@@ -15488,7 +15509,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "作业治疗助理与辅助员的职责边界"
+            "label": "MBTI测评（中文）"
           },
           {
             "href": {
@@ -15498,7 +15519,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "作业治疗助理与辅助员的职责边界"
+            "label": "大五人格测评（中文）"
           }
         ]
       },
@@ -15671,7 +15692,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "美国两类岗位：31-2011助理／31-2012辅助员",
@@ -15722,7 +15743,7 @@
       "text": "作业治疗助理与辅助员：职责、工资及资格差异"
     }
   },
-  "source_content_sha256": "7772efcef66e705665e0fe1c6ba0d9b6612976e3859f7f052331d447a91c135a",
+  "source_content_sha256": "35ba70e9b6e49a407c933ec5e7d458cac90e3119a033142a11a1afcde69532f0",
   "subject": {
     "canonical_slug": "occupational-therapy-assistants-and-aides",
     "name": "作业治疗助理与辅助员",

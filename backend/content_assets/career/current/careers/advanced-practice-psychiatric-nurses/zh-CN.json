@@ -1660,6 +1660,9 @@
       },
       "item:advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.9": {
         "status": "mapped"
+      },
+      "item:advanced-practice-psychiatric-nurses.us-salary.cross-review-period": {
+        "status": "pending_mapping"
       }
     },
     "module_order": [
@@ -12400,14 +12403,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.industry_period": {
-        "ref": {
-          "id": "us-wage-2025",
-          "path": [
-            "period"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.industry_rows.01.industry": {
         "ref": {
@@ -23383,7 +23380,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23399,7 +23396,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23420,7 +23417,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "list"
         },
@@ -23436,7 +23433,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23452,7 +23449,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23468,7 +23465,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23484,7 +23481,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23500,7 +23497,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23516,7 +23513,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23532,7 +23529,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23548,7 +23545,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23564,7 +23561,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23580,7 +23577,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23596,7 +23593,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23612,7 +23609,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23628,7 +23625,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23644,7 +23641,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23660,7 +23657,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23676,7 +23673,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23692,7 +23689,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23708,7 +23705,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23724,7 +23721,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23740,7 +23737,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23749,14 +23746,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "执业护士与协作医师共同负责处方范围界定、用药监测与记录复核。"
+              "执业护士对自身诊断、处方与记录承担责任；所在州要求协作时，另按法规与协议明确协作医师的职责。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.profile.career-quick-answers-block.16",
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23772,7 +23769,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23788,7 +23785,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23804,7 +23801,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23820,7 +23817,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23836,7 +23833,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23852,7 +23849,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23868,7 +23865,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23884,7 +23881,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23900,7 +23897,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23916,7 +23913,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23932,7 +23929,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23948,7 +23945,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23964,7 +23961,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23980,7 +23977,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -23996,7 +23993,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -24012,7 +24009,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -24028,7 +24025,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -24044,7 +24041,7 @@
           "source_refs": [
             "ep",
             "onet",
-            "bls"
+            "bls-cross-repair"
           ],
           "type": "prose"
         }
@@ -24652,7 +24649,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.9",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -24670,7 +24667,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.10",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -24688,7 +24685,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.11",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -24706,7 +24703,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.12",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -24724,7 +24721,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.13",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -24742,7 +24739,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.14",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -24760,7 +24757,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.15",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -24778,7 +24775,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.16",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -24796,7 +24793,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.17",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -24814,7 +24811,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.18",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -24832,7 +24829,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.19",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -24850,7 +24847,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.20",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -24868,7 +24865,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.21",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -24886,7 +24883,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.22",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -24904,7 +24901,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.23",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -24922,7 +24919,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.24",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -24940,7 +24937,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.25",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -24958,7 +24955,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.26",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -24976,7 +24973,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.27",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -24994,7 +24991,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.28",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25012,7 +25009,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.29",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25030,7 +25027,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.30",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25048,7 +25045,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.31",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25066,7 +25063,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.32",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25084,7 +25081,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.33",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25102,7 +25099,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.34",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25120,7 +25117,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.35",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25138,7 +25135,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.36",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25156,7 +25153,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.37",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25174,7 +25171,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.38",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25192,7 +25189,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.39",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25210,7 +25207,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.40",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25228,7 +25225,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.41",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25246,7 +25243,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.42",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25264,7 +25261,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.43",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25282,7 +25279,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.44",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25300,7 +25297,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.45",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25318,7 +25315,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.46",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25336,7 +25333,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.47",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25354,7 +25351,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.48",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25372,7 +25369,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.49",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25390,7 +25387,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.50",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25408,7 +25405,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.51",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25426,7 +25423,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.52",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25444,7 +25441,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.53",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25462,7 +25459,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.54",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25480,7 +25477,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.55",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25498,7 +25495,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.56",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25516,7 +25513,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.57",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25534,7 +25531,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.58",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25552,7 +25549,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.59",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25570,7 +25567,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.60",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25588,7 +25585,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.61",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25606,7 +25603,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.62",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25624,7 +25621,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.63",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25636,16 +25633,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不会在可预见期内被整体取代：BLS 预测 2025—2035 年注册护士就业增长 6%，未把变化归因于生成式 AI；研究也显示模型在复杂个案与风险分层上仍有局限。"
+              "本页未取得本职整体被AI替代的验证研究。BLS注册护士父级2025—2035就业预测增长6%，没有单独估计生成式AI影响；不能据父级预测保证本职不会被替代。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
-            "health",
-            "limits"
+            "health"
           ],
           "type": "prose"
         },
@@ -25660,7 +25655,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.65",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25678,7 +25673,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.66",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25696,7 +25691,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.67",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25714,7 +25709,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.68",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25732,7 +25727,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.69",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25750,7 +25745,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.70",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25768,7 +25763,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.71",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25786,7 +25781,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.72",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25804,7 +25799,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.73",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25816,13 +25811,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有任何官方来源给出消失年份。BLS 给出的是 2025—2035 年的就业变化预测，不是终止时间；把研究方向读成替代日期会高估确定性。更可行的做法是看任务级证据，判断哪些环节在变，再决定准备方向。"
+              "本页已核对的来源未给出本职消失年份。BLS 给出的是 2025—2035 年的就业变化预测，不是终止时间；把研究方向读成替代日期会高估确定性。更可行的做法是看任务级证据，判断哪些环节在变，再决定准备方向。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.74",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25840,7 +25835,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.75",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25858,7 +25853,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.76",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25876,7 +25871,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.77",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25894,7 +25889,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.78",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25912,7 +25907,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.79",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25930,7 +25925,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.80",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25948,7 +25943,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.81",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25966,7 +25961,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.82",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -25984,7 +25979,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.83",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26002,7 +25997,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.84",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26020,7 +26015,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.85",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26038,7 +26033,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.86",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26056,7 +26051,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.87",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26074,7 +26069,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.88",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26092,7 +26087,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.89",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26110,7 +26105,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.90",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26128,7 +26123,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.91",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26146,7 +26141,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.92",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26164,7 +26159,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.93",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26182,7 +26177,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.94",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26200,7 +26195,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.95",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26218,7 +26213,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.96",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26236,7 +26231,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.97",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26254,7 +26249,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.98",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26272,7 +26267,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.99",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26290,7 +26285,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.100",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26308,7 +26303,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.101",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26326,7 +26321,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.102",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26344,7 +26339,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.103",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26362,7 +26357,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.104",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26374,13 +26369,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "明确项目采用"
+              "编辑探索；本页未核实对应组织的真实临床采用及效果"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.105",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26398,7 +26393,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.106",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26416,7 +26411,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.107",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26434,7 +26429,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.108",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26452,7 +26447,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.109",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26470,7 +26465,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.110",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26488,7 +26483,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.111",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26506,7 +26501,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.112",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26518,13 +26513,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "明确项目采用"
+              "编辑探索；本页未核实对应组织的真实临床采用及效果"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.113",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26542,7 +26537,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.114",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26560,7 +26555,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.115",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26578,7 +26573,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.116",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26596,7 +26591,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.117",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26614,7 +26609,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.118",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26632,7 +26627,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.119",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26650,7 +26645,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.120",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26668,7 +26663,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.121",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26686,7 +26681,7 @@
           "id": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.122",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "hr",
             "health",
             "limits"
@@ -26706,7 +26701,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆尚无与美国 29-1141.02 对应的全国职业工资分布；本页采用人社部 2025 年企业薪酬调查「卫生专业技术人员」职业中类父级代理。"
+              "证据不足：本页未核得中国大陆与美国 29-1141.02 精确对应的全国职业工资分布；人社部卫生专业技术人员企业工资价位仅作宽岗位参考。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.china-salary.career-snapshot-primary-locale.7",
@@ -27551,8 +27546,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27568,8 +27563,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27585,8 +27580,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27602,8 +27597,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27619,8 +27614,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27636,8 +27631,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27653,8 +27648,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27670,8 +27665,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27687,8 +27682,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27704,8 +27699,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27721,8 +27716,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27738,8 +27733,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27755,8 +27750,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27772,8 +27767,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27789,8 +27784,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27806,8 +27801,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27823,8 +27818,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27840,8 +27835,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27857,8 +27852,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27874,8 +27869,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.27",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27891,8 +27886,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.28",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27908,8 +27903,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27925,8 +27920,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.30",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27942,8 +27937,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.31",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27959,8 +27954,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.32",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27976,8 +27971,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -27993,8 +27988,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.34",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -28010,8 +28005,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -28022,13 +28017,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 只说明该行业为最大雇主行业，未提供可核验的行业内工资。"
+              "O*NET 行业信息采用注册护士父级口径；证据不足：本页未核得高级执业精神科护士独立的行业工资。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -28044,8 +28039,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.37",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -28061,8 +28056,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -28073,13 +28068,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 只列出常见工作场所，未提供按机构类型划分的工资。"
+              "BLS 注册护士页面提供父级职业的部分行业工资，不能据此认定本细分职业的行业待遇；本页未核得对应细分统计。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -28095,8 +28090,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.40",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -28112,8 +28107,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -28124,13 +28119,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 只列出常见工作场所，未提供按机构类型划分的工资。"
+              "BLS 注册护士页面提供父级职业的部分行业工资，不能据此认定本细分职业的行业待遇；本页未核得对应细分统计。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -28146,8 +28141,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.43",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -28163,8 +28158,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -28175,13 +28170,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 只列出常见工作场所，未提供按机构类型划分的工资。"
+              "BLS 注册护士页面提供父级职业的部分行业工资，不能据此认定本细分职业的行业待遇；本页未核得对应细分统计。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -28197,8 +28192,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -28214,8 +28209,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -28231,8 +28226,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -28248,8 +28243,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -28265,8 +28260,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -28277,13 +28272,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 10 分位年薪 $68,940（$33.14/小时），表示在注册护士口径下有 10% 的从业者低于该水平。它描述的是 BLS OEWS 2025 年 5 月全职等效口径下的分布位置，不等于应届或新人起薪，也不代表某一州、某一机构或某一岗位方向的实际报价；由于该统计不区分 29-1141.02 这一细分职业，读这个数字时应同时核对目标州与雇主的现行工资口径，并注意最低分位不等于入门水平，也不覆盖自雇或兼职安排。"
+              "第 10 分位年薪 $68,940（$33.14/小时），表示在注册护士口径下有 10% 的从业者低于该水平。它描述的是 BLS OEWS 2025 年 5 月全职等效口径下的分布位置，不等于应届或新人起薪，也不代表某一州、某一机构或某一岗位方向的实际报价；由于该统计不区分 29-1141.02 这一细分职业，读这个数字时应同时核对目标州与雇主的现行工资口径，并注意最低分位不等于入门水平，OEWS不覆盖自雇者，但包含全职和兼职工资雇员；此处年薪是统计换算口径，不是个人兼职年收入或兼职报价。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -28299,8 +28294,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
           ],
@@ -28316,10 +28311,24 @@
           },
           "id": "advanced-practice-psychiatric-nurses.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "onet",
             "facilities"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "工资：2025年5月；本页使用注册护士29-1141父级口径，不是精神科高级执业护士独立统计。"
+            ]
+          },
+          "id": "advanced-practice-psychiatric-nurses.us-salary.cross-review-period",
+          "source_refs": [
+            "bls-cross-repair"
           ],
           "type": "prose"
         }
@@ -28461,7 +28470,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.1",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "links"
@@ -28477,7 +28486,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.2",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28493,7 +28502,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.3",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28510,7 +28519,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.4",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "list"
@@ -28526,7 +28535,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.5",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28542,7 +28551,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.6",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28558,7 +28567,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.7",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28575,7 +28584,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.8",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "list"
@@ -28591,7 +28600,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.9",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28607,7 +28616,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.riasec-fit-block.9",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28623,7 +28632,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.10",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28639,7 +28648,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.riasec-fit-block.10",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28655,7 +28664,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.11",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28671,7 +28680,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.riasec-fit-block.11",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28688,7 +28697,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.12",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "list"
@@ -28704,7 +28713,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.riasec-fit-block.12",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28720,7 +28729,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.13",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28736,7 +28745,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.14",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28752,7 +28761,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.15",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28769,7 +28778,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.16",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "list"
@@ -28785,7 +28794,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.17",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28795,13 +28804,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本职业不要求高等数学能力，但需要能解读量表评分、检验结果与流行病学证据，并按统计口径判断风险。智力分数不是准入条件，也不能预测临床质量；判断方式是用一次量表解读与一次文献评估来验证实际任务表现。"
+              "本职业需要解读量表、检验结果与研究证据，并掌握岗位所需的剂量计算。课程与岗位要求须逐项核对；智力测评分数不能代替实际任务表现或法定资格。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.18",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28817,7 +28826,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.19",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28834,7 +28843,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.20",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "list"
@@ -28850,7 +28859,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.21",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28866,7 +28875,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.22",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28882,7 +28891,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.23",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28899,7 +28908,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.24",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "list"
@@ -28915,7 +28924,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.25",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28931,7 +28940,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.26",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28947,7 +28956,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.27",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28963,7 +28972,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.28",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28979,7 +28988,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.29",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -28995,7 +29004,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.30",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29011,7 +29020,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.31",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29027,7 +29036,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.32",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29043,7 +29052,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.33",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29059,7 +29068,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.34",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29075,7 +29084,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.35",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29085,14 +29094,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需研究生教育并通过 CNS 方向认证。"
+              "须核对目标州认可的 CNS 教育与许可路径；ANCC 成人精神科 CNS 认证目前仅供续证，不可当作新考生通道。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.36",
           "source_refs": [
             "ep",
-            "bls",
-            "editor"
+            "bls-cross-repair",
+            "editor",
+            "ancc-cns-renewal-2026"
           ],
           "type": "prose"
         },
@@ -29107,7 +29117,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.37",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29123,7 +29133,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.38",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29139,7 +29149,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.39",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29155,7 +29165,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.40",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29171,7 +29181,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.41",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29187,7 +29197,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.42",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29203,7 +29213,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.43",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29219,7 +29229,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.44",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29235,7 +29245,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.45",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29251,7 +29261,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.46",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29267,7 +29277,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.47",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29283,7 +29293,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.48",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29299,7 +29309,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.49",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29315,7 +29325,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.50",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29331,7 +29341,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.51",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29341,13 +29351,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。该职业对数学的要求集中在量表分值、检验结果、剂量计算与风险统计判断，不涉及高等数学。若目标方向涉及药理学与剂量调整，仍需系统掌握相关计算与安全规则。可用一次剂量核对与一次检验结果解读来验证：你能否解释依据、能否识别异常值。这次验证只说明该任务的可完成度，不代表整体适配。"
+              "数学准备应对照目标课程与岗位：量表、检验结果、剂量计算和研究统计都需要准确理解。可用虚构材料练习核对并请合格教师反馈；单次完成不能证明临床胜任或免除课程要求。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.52",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29363,7 +29373,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.53",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29379,7 +29389,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.54",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29395,7 +29405,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.55",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29411,7 +29421,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.56",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29427,7 +29437,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.57",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29443,7 +29453,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.58",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29459,7 +29469,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.59",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29475,7 +29485,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.60",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29491,7 +29501,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.61",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29507,7 +29517,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.62",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29523,7 +29533,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.63",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29539,7 +29549,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.64",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29555,7 +29565,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.65",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29571,7 +29581,7 @@
           "id": "advanced-practice-psychiatric-nurses.fit.personality-fit-block.66",
           "source_refs": [
             "ep",
-            "bls",
+            "bls-cross-repair",
             "editor"
           ],
           "type": "prose"
@@ -29822,7 +29832,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在未取得处方权或缺少现行书面协作协议的辖区，沿用既往习惯开具或调整药物。"
+              "在尚未取得当地处方授权，或当地要求协作协议但未满足要求时，沿用既往习惯开具或调整药物。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.risk.career-risk-cards.18",
@@ -30279,7 +30289,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.entry-role-comparison.1",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -30325,7 +30335,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.employer-evidence.1",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -30636,18 +30646,18 @@
                 "申请精神科-心理健康执业护士全国认证的研究生毕业生。",
                 "证明达到全国认证的考试要求，是申请州 APRN 执照的常见条件之一。",
                 "多数州要求持有效认证，具体要求以州规定为准。",
-                "需持有效且无限制的注册护士执照，完成经认可的研究生或博士项目，并通过全国认证考试与背景审查。",
+                "须持当前有效的 RN 执照或境外合法同等身份，完成认可的全生命周期 PMHNP 硕士、研究生证书或 DNP 项目；包含至少 500 小时教师督导临床实践、三门 APRN 核心课程及至少两种心理治疗模式训练，具体以 ANCC 当期条件为准。",
                 "中：含认证考试费用、材料提交与备考时间，通常无需额外学位投入。",
                 "认证只证明专业能力，不替代州执照与协作协议，也不能单独授予处方权。"
               ],
               [
-                "ANCC CNS 认证",
-                "申请精神科-心理健康临床护理专家方向全国认证的研究生毕业生。",
-                "支持 CNS 方向岗位申请，强调流程、质量与团队能力建设。",
-                "是否要求取决于州与雇主，岗位设置差异较大。",
-                "按 ANCC 的现行要求提交学历证明、研究生课程与临床时数记录，并通过认证考试。",
-                "中：含认证考试费用、材料提交与备考时间。",
-                "认证本身不授予处方权，处方与独立执业权限须按所在州规定确认。"
+                "ANCC 成人精神科 CNS 认证（仅续证）",
+                "已持有该 ANCC 精神科 CNS 认证且需维持资格者。",
+                "维持已有 PMHCNS-BC 资格；不能作为新申请者报考路径。",
+                "不是新申请者可通过考试取得的通用入行资格。",
+                "ANCC 当前页面仅开放续证；新申请者须先向目标州确认认可的 CNS 教育、认证与许可通道。",
+                "续证投入按当期执照、继续教育与申请要求核对。",
+                "仅供既有持证者续证，不授予州执业或处方权限。"
               ],
               [
                 "DEA 注册与受控物质",
@@ -30662,11 +30672,12 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.credential-decision.1",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
-            "practice"
+            "practice",
+            "ancc-cns-renewal-2026"
           ],
           "title": "资格与门槛",
           "type": "table"
@@ -30684,7 +30695,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.credential-boundary.1",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -30703,7 +30714,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.recruitment-sample.1",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -30745,7 +30756,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.10",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -30763,7 +30774,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.11",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -30781,7 +30792,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.12",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -30799,7 +30810,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.13",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -30817,7 +30828,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.14",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -30835,7 +30846,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.15",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -30853,7 +30864,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.16",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -30871,7 +30882,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.17",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -30889,7 +30900,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.18",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -30907,7 +30918,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.19",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -30925,7 +30936,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.20",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -30943,7 +30954,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.21",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -30961,7 +30972,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.22",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -30979,7 +30990,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.23",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -30997,7 +31008,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.24",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31015,7 +31026,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.25",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31033,7 +31044,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.26",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31051,7 +31062,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.27",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31069,7 +31080,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.28",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31087,7 +31098,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.29",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31105,7 +31116,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.30",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31123,7 +31134,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.31",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31141,7 +31152,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.32",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31154,16 +31165,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "注册护士执照与临床经验为前置条件，是否另需研究生教育按岗位而定。"
+              "美国APRN角色须核对应研究生教育、角色及精神/心理健康人群焦点认证，以及目标州APRN许可与执业权限；普通RN执照不能单独支持高级执业。各州采纳共识模型程度不同。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.33",
           "source_refs": [
-            "bls",
-            "privacy",
-            "facilities",
-            "operations",
-            "practice"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -31177,7 +31184,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.34",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31195,7 +31202,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.35",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31213,7 +31220,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.36",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31226,12 +31233,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "可独立接诊的注册护士"
+              "获州授权的精神科高级执业护士"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.37",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31249,7 +31256,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.38",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31267,7 +31274,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.39",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31285,7 +31292,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.40",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31303,7 +31310,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.41",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31321,7 +31328,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.42",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31339,7 +31346,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.43",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31357,7 +31364,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.44",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31375,7 +31382,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.45",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31393,7 +31400,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.46",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31411,7 +31418,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.47",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31424,16 +31431,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "目标州要求的注册护士执照、研究生教育与 PMHNP 认证。"
+              "CNS方向须核目标州认可的研究生教育、CNS角色与精神/心理健康人群焦点资格、RN及APRN许可。ANCC成人精神科CNS该入口目前仅供续证，不保证新申请通道。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.48",
           "source_refs": [
-            "bls",
             "privacy",
-            "facilities",
-            "operations",
-            "practice"
+            "ancc-cns-renewal-2026"
           ],
           "type": "prose"
         },
@@ -31442,16 +31446,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "受督导练习"
+              "编辑准备方向：核目标州CNS岗位范围与监督要求。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.49",
           "source_refs": [
-            "bls",
             "privacy",
-            "facilities",
-            "operations",
-            "practice"
+            "ancc-cns-renewal-2026"
           ],
           "type": "prose"
         },
@@ -31460,16 +31461,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "一份评估、诊断假设与用药监测计划。"
+              "编辑观察材料：照护方案、质量改进建议与证据记录；不作执业资格证明。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.50",
           "source_refs": [
-            "bls",
             "privacy",
-            "facilities",
-            "operations",
-            "practice"
+            "ancc-cns-renewal-2026"
           ],
           "type": "prose"
         },
@@ -31478,16 +31476,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在协作协议下参与处方开具与随访。"
+              "在目标州许可及岗位授权范围内提供临床专业支持；不将CNS与NP角色互换或统一赋予处方权。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.51",
           "source_refs": [
-            "bls",
             "privacy",
-            "facilities",
-            "operations",
-            "practice"
+            "ancc-cns-renewal-2026"
           ],
           "type": "prose"
         },
@@ -31496,16 +31491,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "执业护士"
+              "按目标州获准任职的临床护理专家（CNS）"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.52",
           "source_refs": [
-            "bls",
             "privacy",
-            "facilities",
-            "operations",
-            "practice"
+            "ancc-cns-renewal-2026"
           ],
           "type": "prose"
         },
@@ -31514,16 +31506,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在多数州需持 APRN 执照并满足协作要求。"
+              "核目标州CNS许可、处方权限及协作条件；本页未取得各州具体规则，不宣称统一独立或协作要求。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.53",
           "source_refs": [
-            "bls",
             "privacy",
-            "facilities",
-            "operations",
-            "practice"
+            "ancc-cns-renewal-2026"
           ],
           "type": "prose"
         },
@@ -31532,16 +31521,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立管理一组患者的用药与随访。"
+              "按实际授权承担CNS专科护理和照护改进任务。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.54",
           "source_refs": [
-            "bls",
             "privacy",
-            "facilities",
-            "operations",
-            "practice"
+            "ancc-cns-renewal-2026"
           ],
           "type": "prose"
         },
@@ -31550,16 +31536,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用药调整依据与不良反应监测记录表。"
+              "编辑观察：照护建议依据、团队沟通和质量改进记录；具体招聘认可尚未取得。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.55",
           "source_refs": [
-            "bls",
             "privacy",
-            "facilities",
-            "operations",
-            "practice"
+            "ancc-cns-renewal-2026"
           ],
           "type": "prose"
         },
@@ -31568,16 +31551,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立开具并监测精神药物，按法规留痕。"
+              "在本州许可及岗位范围内提供专科护理支持，处方与独立执业须另核州规则。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.56",
           "source_refs": [
-            "bls",
             "privacy",
-            "facilities",
-            "operations",
-            "practice"
+            "ancc-cns-renewal-2026"
           ],
           "type": "prose"
         },
@@ -31586,16 +31566,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "执业护士"
+              "按目标州获准任职的临床护理专家（CNS）"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.57",
           "source_refs": [
-            "bls",
             "privacy",
-            "facilities",
-            "operations",
-            "practice"
+            "ancc-cns-renewal-2026"
           ],
           "type": "prose"
         },
@@ -31604,16 +31581,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "部分州设专门证书或要求额外培训。"
+              "若涉及专项角色或证书，须查目标州与岗位现行要求；本页未取得统一要求。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.58",
           "source_refs": [
-            "bls",
             "privacy",
-            "facilities",
-            "operations",
-            "practice"
+            "ancc-cns-renewal-2026"
           ],
           "type": "prose"
         },
@@ -31627,7 +31601,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.59",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31645,7 +31619,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.60",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31663,7 +31637,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.61",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31681,7 +31655,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.62",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31694,16 +31668,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "管理岗通常要求相关学位与多年高级执业经验。"
+              "管理方向所需教育与经历须查目标岗位招聘或任用文件；不提供统一学位或年限门槛。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.63",
           "source_refs": [
-            "bls",
             "privacy",
-            "facilities",
-            "operations",
-            "practice"
+            "ancc-cns-renewal-2026"
           ],
           "type": "prose"
         },
@@ -31717,7 +31688,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.64",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31735,7 +31706,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.65",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31753,7 +31724,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.66",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31771,7 +31742,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.67",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31789,7 +31760,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.68",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31807,7 +31778,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.69",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31825,7 +31796,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.70",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31843,7 +31814,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.71",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31861,7 +31832,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.72",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31874,16 +31845,17 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "多数岗位要求研究生教育与 CNS 方向认证。"
+              "先核对目标州认可的 CNS 教育、认证及许可路径；ANCC 成人精神科 CNS 认证目前仅供既有持证者续证。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.73",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
-            "practice"
+            "practice",
+            "ancc-cns-renewal-2026"
           ],
           "type": "prose"
         },
@@ -31897,7 +31869,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.74",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31915,7 +31887,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.75",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31933,7 +31905,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.76",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31951,7 +31923,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.77",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31969,7 +31941,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.78",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -31987,7 +31959,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.79",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -32005,7 +31977,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.80",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -32023,7 +31995,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.81",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -32041,7 +32013,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.82",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -32059,7 +32031,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.83",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -32077,7 +32049,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.84",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -32095,7 +32067,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.85",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -32113,7 +32085,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.86",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -32131,7 +32103,7 @@
           },
           "id": "advanced-practice-psychiatric-nurses.path.career-path-block.87",
           "source_refs": [
-            "bls",
+            "bls-cross-repair",
             "privacy",
             "facilities",
             "operations",
@@ -32240,8 +32212,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.7",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32257,8 +32229,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.8",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32274,8 +32246,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.9",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32291,8 +32263,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.10",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32308,8 +32280,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.11",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32325,8 +32297,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.12",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32342,8 +32314,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.13",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32354,13 +32326,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact（注册护士口径）"
+              "父级参考：注册护士（SOC 29-1141），非本细分职业独立统计"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.14",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32376,8 +32348,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.15",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32393,8 +32365,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.16",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32410,8 +32382,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.17",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32427,8 +32399,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.18",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32444,8 +32416,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.19",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32461,8 +32433,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.20",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32473,13 +32445,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact（注册护士口径）"
+              "父级参考：注册护士（SOC 29-1141），非本细分职业独立统计"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.21",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32495,8 +32467,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.22",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32512,8 +32484,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.23",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32529,8 +32501,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.24",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32546,8 +32518,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.25",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32563,8 +32535,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.26",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32580,8 +32552,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.27",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32592,13 +32564,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "exact（注册护士口径）"
+              "父级参考：注册护士（SOC 29-1141），非本细分职业独立统计"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.28",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32614,8 +32586,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.29",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32626,15 +32598,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "支持美国注册护士执照与认证核对"
+              "BLS注册护士29-1141父级工资与就业预测；不提供精神科高级执业护士独立统计"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.30",
           "source_refs": [
-            "bls",
-            "oews",
-            "cnclass",
-            "privacy"
+            "bls-cross-repair"
           ],
           "type": "prose"
         },
@@ -32643,15 +32612,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "支持美国就业预测与空缺口径核对"
+              "O*NET29-1141.02本职任务及职业描述；不授予执业资格"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.31",
           "source_refs": [
-            "bls",
-            "oews",
-            "cnclass",
-            "privacy"
+            "onet"
           ],
           "type": "prose"
         },
@@ -32660,14 +32626,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "支持美国工资分位与岗位口径核对"
+              "NCSBN美国APRN角色、研究生教育和州监管差异；不提供工资分位"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.32",
           "source_refs": [
-            "bls",
-            "oews",
-            "cnclass",
             "privacy"
           ],
           "type": "prose"
@@ -32677,15 +32640,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "支持该职业任务与工作情境口径核对"
+              "人社部卫生专业技术人员宽职业组薪酬参照；本页未取得完整方法及本职精确分布"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.33",
           "source_refs": [
-            "bls",
-            "oews",
-            "cnclass",
-            "privacy"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -32694,15 +32654,16 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "研究生教育与 CNS 认证、流程改进经验"
+              "补足目标州认可的 CNS 教育、许可与质量改进经验；ANCC 成人精神科 CNS 认证仅供续证，先确认新申请通道。"
             ]
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.34",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
-            "privacy"
+            "privacy",
+            "ancc-cns-renewal-2026"
           ],
           "type": "prose"
         },
@@ -32716,8 +32677,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.35",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32733,8 +32694,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.36",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32750,8 +32711,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.37",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32767,8 +32728,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.38",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32784,8 +32745,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.39",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32801,8 +32762,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.40",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32818,8 +32779,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.41",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32835,8 +32796,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.42",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32852,8 +32813,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.43",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32869,8 +32830,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.44",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32886,8 +32847,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.45",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32903,8 +32864,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.46",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32920,8 +32881,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.47",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32937,8 +32898,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.48",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32954,8 +32915,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.49",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32971,8 +32932,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.50",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -32988,8 +32949,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.51",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -33005,8 +32966,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.52",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -33022,8 +32983,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.53",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -33039,8 +33000,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.54",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -33056,8 +33017,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.55",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -33073,8 +33034,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.56",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -33090,8 +33051,8 @@
           },
           "id": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.57",
           "source_refs": [
-            "bls",
-            "oews",
+            "bls-cross-repair",
+            "oews-cross-repair",
             "cnclass",
             "privacy"
           ],
@@ -33191,7 +33152,7 @@
           "id": "advanced-practice-psychiatric-nurses.sources.source-card.1",
           "source_refs": [
             "onet",
-            "bls",
+            "bls-cross-repair",
             "cnclass"
           ],
           "type": "prose"
@@ -33207,7 +33168,7 @@
           "id": "advanced-practice-psychiatric-nurses.sources.source-card.2",
           "source_refs": [
             "onet",
-            "bls",
+            "bls-cross-repair",
             "cnclass"
           ],
           "type": "prose"
@@ -33223,7 +33184,7 @@
           "id": "advanced-practice-psychiatric-nurses.sources.source-card.3",
           "source_refs": [
             "onet",
-            "bls",
+            "bls-cross-repair",
             "cnclass"
           ],
           "type": "prose"
@@ -33239,7 +33200,7 @@
           "id": "advanced-practice-psychiatric-nurses.sources.source-card.4",
           "source_refs": [
             "onet",
-            "bls",
+            "bls-cross-repair",
             "cnclass"
           ],
           "type": "prose"
@@ -33585,6 +33546,55 @@
                 "publisher": "FermatMind 职业内容团队（本页登记）",
                 "scope": "not_available",
                 "url": "https://www.mohrss.gov.cn/"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "该成人精神科 CNS 认证目前仅提供续证。"
+                ],
+                "evidence_type": "认证机构说明",
+                "id": "ancc-cns-renewal-2026",
+                "limitation": "不证明其他认证或各州许可通道可用；新申请者须另核目标州要求。",
+                "market": "美国",
+                "name": "ANCC 成人精神科 CNS 认证：仅供续证",
+                "period": "2026-10-08 查阅",
+                "publisher": "ANCC",
+                "scope": "exact",
+                "url": "https://www.nursingworld.org/our-certifications/cns-in-adult-psychiatric---mental-health-renewal/"
+              },
+              {
+                "accessed_at": "2026-09-13",
+                "details": [
+                  "2025 年 5 月注册护士工资中位数 $97,550/年。",
+                  "2025 年在岗 3,465,400 人；2025—2035 年增长 6%，净增 194,700 人。",
+                  "年均约 180,800 个空缺，来自增长与替代需求；典型入门学历为学士学位，且必须持照。"
+                ],
+                "evidence_type": "官方职业展望",
+                "id": "bls-cross-repair",
+                "limitation": "为注册护士（29-1141）口径的全国数据，不是 29-1141.02 的独立工资或就业序列；不能外推为中国结论。 本页细分对象相对Registered Nurses为父级代理统计。",
+                "market": "美国",
+                "name": "bls_ooh_registered_nurses",
+                "period": "工资 2025 年 5 月；就业 2025 年；预测 2025—2035 年",
+                "publisher": "U.S. Bureau of Labor Statistics（美国劳工统计局）",
+                "scope": "parent",
+                "url": "https://www.bls.gov/ooh/healthcare/registered-nurses.htm"
+              },
+              {
+                "accessed_at": "2026-09-13",
+                "details": [
+                  "全国年薪分位：$68,940（P10）、$80,330（P25）、$97,550（中位）、$112,350（P75）、$137,470（P90）。",
+                  "全国时薪分位为 $33.14、$38.62、$46.90、$54.02、$66.09，与年薪为同一 OEWS 2025 口径。",
+                  "页面明确标注工资数据为 Registered Nurses 口径。"
+                ],
+                "evidence_type": "官方工资分位",
+                "id": "oews-cross-repair",
+                "limitation": "不覆盖自雇者；为注册护士口径的全国分位，不能替代州或雇主报价。 本页细分对象相对Registered Nurses为父级代理统计。",
+                "market": "美国",
+                "name": "bls_oews_29-1141_percentiles_2025",
+                "period": "2025 年 BLS OEWS 工资数据",
+                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "scope": "parent",
+                "url": "https://www.onetonline.org/link/localwages/29-1141.02"
               }
             ]
           },
@@ -34001,7 +34011,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方工资与展望",
+            "类型": "官方任务与工作情境",
             "适用范围": {
               "$item": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.22",
               "block": "ai-impact",
@@ -34023,7 +34033,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "国际组织暴露度研究",
+            "类型": "招聘文本技术提及",
             "适用范围": {
               "$item": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.24",
               "block": "ai-impact",
@@ -34045,7 +34055,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "学术研究",
+            "类型": "官方就业行业分布",
             "适用范围": {
               "$item": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.26",
               "block": "ai-impact",
@@ -34067,7 +34077,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "雇主预期调查",
+            "类型": "官方工资分位（注册护士父级）",
             "适用范围": {
               "$item": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.28",
               "block": "ai-impact",
@@ -34089,7 +34099,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "人工智能风险框架",
+            "类型": "官方职业展望（注册护士父级）",
             "适用范围": {
               "$item": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.30",
               "block": "ai-impact",
@@ -34111,7 +34121,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方职业任务资料",
+            "类型": "官方工作情境调查",
             "适用范围": {
               "$item": "advanced-practice-psychiatric-nurses.ai-impact.ai-impact-table.32",
               "block": "ai-impact",
@@ -36693,8 +36703,10 @@
         "heading": "美国精神科护士工资多少？",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
-          "$fact": "us-wage-2025",
-          "field": "period"
+          "$item": "advanced-practice-psychiatric-nurses.us-salary.cross-review-period",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
         },
         "industry_rows": [
           {
@@ -37019,7 +37031,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls",
             "value": {
               "$item": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -37109,7 +37121,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "bls",
             "value": {
               "$item": "advanced-practice-psychiatric-nurses.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -37454,7 +37466,7 @@
         "rows": [
           {
             "alternate_value": null,
-            "label": "O*NET 精神科高级执业护士职业档案（29-1141.02）",
+            "label": "O*NET 精神科高级执业护士任务与工作情境（29-1141.02）",
             "secondary_value": null,
             "value": {
               "$item": "advanced-practice-psychiatric-nurses.profile.onet-structured-fields-block.1",
@@ -37465,7 +37477,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Occupational Outlook Handbook",
+            "label": "BLS 注册护士父级工资与就业（29-1141）",
             "secondary_value": null,
             "value": {
               "$item": "advanced-practice-psychiatric-nurses.profile.onet-structured-fields-block.2",
@@ -37476,7 +37488,7 @@
           },
           {
             "alternate_value": null,
-            "label": "国家统计局 2025 年城镇单位工资",
+            "label": "人社部卫生专业技术人员宽职业组工资",
             "secondary_value": null,
             "value": {
               "$item": "advanced-practice-psychiatric-nurses.profile.onet-structured-fields-block.3",
@@ -37487,7 +37499,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测表 1.2（2025–35）",
+            "label": "中国护士执业注册与专科培训规定",
             "secondary_value": null,
             "value": {
               "$item": "advanced-practice-psychiatric-nurses.profile.onet-structured-fields-block.4",
@@ -37498,7 +37510,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中华人民共和国个人信息保护法",
+            "label": "精神健康任务的AI研究与实验边界",
             "secondary_value": null,
             "value": {
               "$item": "advanced-practice-psychiatric-nurses.profile.onet-structured-fields-block.5",
@@ -38365,7 +38377,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI 人格测试（英文）"
+            "label": "大五人格（英文）"
           },
           {
             "href": {
@@ -38375,7 +38387,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five 大五人格（英文）"
+            "label": "MBTI（中文）"
           },
           {
             "href": {
@@ -38385,7 +38397,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "九型人格（中文）"
           },
           {
             "href": {
@@ -38395,7 +38407,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "智力与推理（中文）"
           }
         ]
       },
@@ -38718,7 +38730,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "RIASEC · SI",
@@ -38769,7 +38781,7 @@
       "text": "精神科护士"
     }
   },
-  "source_content_sha256": "f8f4313436ca06c8fc775600eef20d9a16659c197d7cdc5c35c8b903628e37f0",
+  "source_content_sha256": "aa09d333226e0c575fb6ce2ac3827cd17e577e8b4389f4564090aad03834ffd9",
   "subject": {
     "canonical_slug": "advanced-practice-psychiatric-nurses",
     "name": "精神科护士",

@@ -12342,7 +12342,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有与 O*NET-SOC 51-4061.00 完全同口径的全国职业工资；本页改用制造业与生产制造岗位大类统计作行业代理，不能当作本职业或个人工资。"
+              "证据不足：本次未取得与O*NET-SOC 51-4061.00同口径的中国大陆全国职业工资分布；国家统计局制造业与生产制造岗位组可作匹配参考，不能作为本职业或个人工资。"
             ]
           },
           "id": "model-makers-metal-and-plastic.china-salary.career-snapshot-primary-locale.1",
@@ -12827,35 +12827,35 @@
             ],
             "rows": [
               [
-                "入职 0—6 个月",
+                "带教入门",
                 "在带教下读图、使用量具并操作通用机床完成简单件",
                 "不得独立编程或做质量放行结论",
                 "简单件尺寸记录与带教反馈",
                 "扩展到有公差件的独立加工"
               ],
               [
-                "6—18 个月",
+                "常规模型执行",
                 "独立完成常规模型件加工、自检与返修",
                 "数控程序须经复核，不做首件放行",
                 "尺寸记录与首件检验记录",
                 "扩展到复杂形状与配合"
               ],
               [
-                "1—3 年",
+                "复杂形状与装配",
                 "处理复杂形状、配合与装配验证，编制工序",
                 "工装与工艺变更按流程审批",
                 "复杂件记录与工程反馈",
                 "扩展到工装与首件策划"
               ],
               [
-                "3—5 年",
+                "工装与首件策划",
                 "设计工装夹具、主导首件检验与偏差分析",
                 "质量结论由授权人签署",
                 "工装方案与首件报告",
                 "扩展到工艺规范与带教"
               ],
               [
-                "5 年以上",
+                "工艺改进与带教",
                 "在授权范围内主导工艺规范、质量改进与带教",
                 "不替代雇主安全与质量签署职责",
                 "工艺文件、改进与带教记录",
@@ -13001,7 +13001,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国本职业就业规模小且预计收缩：2024 年约 3,200 人，2024—2034 年预计下降约 1% 或更低；就业预测是市场信号，不是个人就业概率。"
+              "美国O*NET精确职业：2025年约2,600人，2025—2035就业预计下降（-1%或更低类别），平均每年约200个空缺，含增长与替换。总体就业预测，非AI归因，不是个人录用概率。"
             ]
           },
           "id": "model-makers-metal-and-plastic.market-signals.market-signal-card.1",
@@ -13029,7 +13029,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034"
+              "2025—2035"
             ]
           },
           "id": "model-makers-metal-and-plastic.market-signals.market-signal-card.3",
@@ -13730,22 +13730,22 @@
         "difference_intro": "不同工作方向对任务变化与剩余责任的处理不同，下表比较本职业内的真实方向。",
         "difference_rows": [
           {
-            "AI主要改变": "图纸检查、刀路生成与测量记录整理更易被工具辅助",
+            "AI主要改变": "编辑分析：图纸检查、刀路生成与测量记录整理更易被工具辅助；非实测岗位结果",
             "仍由人负责": "尺寸判定、首件检验与可加工性取舍",
             "方向": "原型与工作模型"
           },
           {
-            "AI主要改变": "程序生成、仿真与过程监控可辅助",
+            "AI主要改变": "编辑分析：程序生成、仿真与过程监控可辅助；非实测岗位结果",
             "仍由人负责": "程序与刀具路径的最终确认、异常停机与安全",
             "方向": "数控加工"
           },
           {
-            "AI主要改变": "工装设计初稿与尺寸链计算可辅助",
+            "AI主要改变": "编辑分析：工装设计初稿与尺寸链计算可辅助；非实测岗位结果",
             "仍由人负责": "工装与模型的最终验证、质量结论与交接责任",
             "方向": "工装与试制配合"
           }
         ],
-        "evidence_intro": "以下证据分别说明技术能力、实际采用与岗位结果，样本、指标与限制随条目写明。",
+        "evidence_intro": "下列资料分别支持职业任务、招聘软件提及、全球暴露背景和总体就业；未取得本职业AI采用率或因果岗位结果。",
         "evidence_rows": [
           {
             "使用限制": "仅描述本职业口径，不证明采用或自动化程度",
@@ -13794,7 +13794,7 @@
             "概念": "采用证据"
           },
           {
-            "含义": "任务可被辅助不等于岗位消失：原型制作、装配、测量、返修与安全控制仍在，技术变化更可能重组任务而非直接取消岗位。",
+            "含义": "证据不足：未取得本职业生成式AI采用、提效或岗位变化的因果研究。原型、装配、测量、返修与安全控制是现有职业任务；全球暴露研究不能证明本职业更可能如何变化。",
             "概念": "岗位结果"
           }
         ],
@@ -13842,7 +13842,7 @@
             "问题": "质量指标应关注什么？"
           }
         ],
-        "responsibility_intro": "下列环节说明金属与塑料模型制作工使用工具时的人工控制顺序：输入核对、使用条件、输出复核与记录。",
+        "responsibility_intro": "编辑建议：使用辅助工具时核对输入、使用条件、输出、记录与异常升级；具体强制流程以设备和雇主文件为准。",
         "responsibility_steps": [
           {
             "步骤": "第1步 核对输入",
@@ -13897,43 +13897,43 @@
             "人的控制点": "核对图纸版本、公差与基准，确认可加工性",
             "任务": "读图纸、草图与三维数据，确定材料、尺寸、公差与基准",
             "工作方向": "读图与规划",
-            "当前变化": "图纸问题清单与工序初稿可被工具辅助"
+            "当前变化": "编辑分析：图纸问题清单与工序初稿可被工具辅助；采用与效果未验证"
           },
           {
             "人的控制点": "按材料、机床能力与经验取舍并复核",
             "任务": "确定加工顺序、装夹与工装，选择刀具与切削参数",
             "工作方向": "工艺规划",
-            "当前变化": "参数与工序组合可被工具建议"
+            "当前变化": "编辑分析：参数与工序组合可被工具建议；采用与效果未验证"
           },
           {
             "人的控制点": "核对程序版本、坐标系与安全高度后再试切",
             "任务": "设置或编程数控机床，装夹找正并对刀",
             "工作方向": "机床设置与编程",
-            "当前变化": "程序与刀路仿真可辅助生成与校验"
+            "当前变化": "编辑分析：程序与刀路仿真可辅助生成与校验；采用与效果未验证"
           },
           {
             "人的控制点": "首件与过程测量由人确认，异常立即停机",
             "任务": "车、铣、钻、磨等切削成形到规定尺寸",
             "工作方向": "切削成形",
-            "当前变化": "过程监控与自适应控制可辅助"
+            "当前变化": "编辑分析：过程监控与自适应控制可辅助；采用与效果未验证"
           },
           {
             "人的控制点": "是否超差与是否返修由人判定",
             "任务": "用精密量具测量尺寸、形位与配合并记录",
             "工作方向": "精密测量",
-            "当前变化": "数据记录与趋势整理可被辅助"
+            "当前变化": "编辑分析：数据记录与趋势整理可被辅助；采用与效果未验证"
           },
           {
             "人的控制点": "配合与功能判定、记录与交接由人确认",
             "任务": "装配零件并验证模型功能与配合",
             "工作方向": "装配与验证",
-            "当前变化": "装配顺序与间隙检查可被提示"
+            "当前变化": "编辑分析：装配顺序与间隙检查可被提示；采用与效果未验证"
           },
           {
             "人的控制点": "返修范围、复测结论与放行由人负责",
             "任务": "按偏差返修或修改程序后复测",
             "工作方向": "返修与复测",
-            "当前变化": "返修方案可被建议"
+            "当前变化": "编辑分析：返修方案可被建议；采用与效果未验证"
           }
         ],
         "transition": "转向相邻职业时先比较可迁移能力（识图、机加工艺、测量与记录），再补目标岗位需要的专门资格。"
@@ -14002,13 +14002,13 @@
             "stage": "工艺与质量负责"
           }
         ],
-        "direct_answer": "进入本职业通常从职业教育、学徒训练或相关在岗经验开始，通过带教与实操逐步掌握识图、机床操作、数控编程与测量；资格与安全授权以雇主与所在地规则核验。",
+        "direct_answer": "可从职业教育、学徒或相关岗位训练准备识图、机床操作、数控编程与测量；下述四阶段与作品证据为编辑组织，不是普遍雇主晋升规则。操作与质量签署须核设备和雇主授权。",
         "entry_heading": "从职业教育与学徒训练到独立负责",
         "heading": "模型制作工的入行、资格与职业发展路径",
         "locale_requirements": {
           "credential_boundary": "学历、职业培训证书、数控编程认证与雇主任命不是同一状态；取得培训或证书不等于可独立签署首件放行或质量结论。",
           "jurisdiction": "本页采用美国 O*NET/BLS 口径说明职业事实；中国大陆的岗位、训练与安全规则以当地主管部门与用人单位为准。",
-          "summary": "美国本职业通常要求高中文凭或同等学历并接受约一至两年在岗或学徒训练，数控编程岗位常要求中等后教育；中国大陆的岗位与安全要求按主管部门与用人单位规则核验。"
+          "summary": "美国O*NET将本职业列入Job Zone Three；职业组训练期一至两年不是本职业统一期限。Education列有高中、专科后证书和部分大学学习岗位。中国大陆具体岗位训练、设备安全与授权要求仍须查所在地和雇主文件。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
@@ -14022,7 +14022,7 @@
             "href": "https://www.onetonline.org/link/localtraining/51-4061.00",
             "id": "source-pack-onet-localtraining",
             "label": "O*NET National Training 51-4061.00",
-            "scope": "培训与学徒机会"
+            "scope": "培训发现入口；不支持统一训练期限、岗位授权或晋升要求"
           },
           {
             "href": "https://www.onetonline.org/link/localcert/51-4061.00",
@@ -14364,7 +14364,7 @@
               "osha-guarding"
             ],
             "id": "record-version",
-            "mitigation": "使用夹具与去毛刺工具、佩戴防割手套并规范操作",
+            "mitigation": "停机并按设备程序隔离后，用夹具和去毛刺工具处理锐边；防割手套只按静止工件任务及雇主风险评估选用，不在旋转部件附近佩戴可能被卷入的手套。",
             "scenario": "去毛刺或倒角时手持工件直接接触锐边",
             "title": "锐边与毛刺"
           },
@@ -14385,7 +14385,7 @@
             "consequence": "可能整件报废、返工或影响工程验证结论",
             "evidence_refs": [
               "onet-details",
-              "onet"
+              "onet-summary"
             ],
             "id": "technical-boundary",
             "mitigation": "首件检验、量具校准与程序版本核对后再继续加工",
@@ -14397,7 +14397,7 @@
             "consequence": "可能损坏机床、刀具或工件并造成停机",
             "evidence_refs": [
               "onet-details",
-              "bls"
+              "onet-summary"
             ],
             "id": "single-coverage",
             "mitigation": "仿真与空运行校验、单段运行与授权确认",
@@ -14409,7 +14409,7 @@
             "consequence": "难以证明符合尺寸要求或追溯改动",
             "evidence_refs": [
               "onet-details",
-              "onet"
+              "onet-summary"
             ],
             "id": "delivery-acceptance",
             "mitigation": "按记录规范复测并保留版本与偏差",
@@ -14527,8 +14527,8 @@
           },
           "china_open": "可用公开职责与技能信息做职业探索，但不能据此推导中国大陆个人薪资。",
           "china_open_note": "如需薪资判断，应回到具体城市、雇主、岗位级别与公开合同条件核对。",
-          "china_ref": "51-4061.00 Model Makers, Metal and Plastic｜https://www.onetonline.org/link/details/51-4061.00",
-          "china_salary_note": "中国精确职业工资不可得；本页改用国家统计局 2025 年行业与岗位大类代理口径，并标明不能当作本职业或个人工资。",
+          "china_ref": "国家统计局2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+          "china_salary_note": "证据不足：未取得中国大陆本职业全国工资分布。2025年制造业和生产制造岗位组统计为相关参考，单位为元/年、指标为平均工资；不同统计总体不得拼成职业工资区间。",
           "china_salary_table": [
             {
               "城市/区间": "职业精确工资",
@@ -14558,7 +14558,7 @@
             "scenario_heading": "场景化判断",
             "scenario_interpretation_label": "解释",
             "scenario_role_label": "岗位方向",
-            "scenario_value_label": "数据状态"
+            "scenario_value_label": "岗位与训练参考"
           },
           "us_growth": "未提供",
           "us_median": "未提供"
@@ -14569,43 +14569,43 @@
         "bls_table": [
           {
             "指标": "薪资第10百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "$39,760/年",
+            "说明": "美国全国，Model Makers, Metal and Plastic（51-4061）；2025 BLS OEWS分位工资｜https://www.onetonline.org/link/localwages/51-4061.00?st=CA"
           },
           {
             "指标": "薪资第25百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "$47,360/年",
+            "说明": "美国全国，Model Makers, Metal and Plastic（51-4061）；2025 BLS OEWS分位工资｜https://www.onetonline.org/link/localwages/51-4061.00?st=CA"
           },
           {
             "指标": "薪资中位数",
-            "数值": "$61,660",
-            "说明": "Metal and Plastic Machine Workers｜https://www.bls.gov/ooh/production/metal-and-plastic-machine-workers.htm"
+            "数值": "$63,340/年",
+            "说明": "美国全国，Model Makers, Metal and Plastic（51-4061）；2025 BLS OEWS分位工资｜https://www.onetonline.org/link/localwages/51-4061.00?st=CA"
           },
           {
             "指标": "薪资第75百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "$86,740/年",
+            "说明": "美国全国，Model Makers, Metal and Plastic（51-4061）；2025 BLS OEWS分位工资｜https://www.onetonline.org/link/localwages/51-4061.00?st=CA"
           },
           {
             "指标": "薪资第90百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "$99,010/年",
+            "说明": "美国全国，Model Makers, Metal and Plastic（51-4061）；2025 BLS OEWS分位工资｜https://www.onetonline.org/link/localwages/51-4061.00?st=CA"
           },
           {
-            "指标": "就业人数",
-            "数值": "71,800",
-            "说明": "国家职业分类大典（2022年版）公示｜https://www.mohrss.gov.cn/SYrlzyhshbzb/dongtaixinwen/buneiyaowen/rsxw/202207/t20220714_457800.html"
+            "指标": "就业人数（2025）",
+            "数值": "2,600人",
+            "说明": "美国51-4061，2025就业与2025—2035预测；空缺含增长和替换，不是招聘存量｜https://www.onetonline.org/link/details/51-4061.00"
           },
           {
             "指标": "就业前景 2025—2035",
-            "数值": "12.6%",
-            "说明": "Metal and Plastic Machine Workers｜https://www.bls.gov/ooh/production/metal-and-plastic-machine-workers.htm"
+            "数值": "下降（-1%或更低；O*NET分类）",
+            "说明": "美国51-4061，2025就业与2025—2035预测；空缺含增长和替换，不是招聘存量｜https://www.onetonline.org/link/details/51-4061.00"
           },
           {
-            "指标": "就业岗位空缺（平均年度）",
-            "数值": "8,200",
-            "说明": "国家职业分类大典（2022年版）公示｜https://www.mohrss.gov.cn/SYrlzyhshbzb/dongtaixinwen/buneiyaowen/rsxw/202207/t20220714_457800.html"
+            "指标": "就业岗位空缺（平均年度，2025—2035）",
+            "数值": "约200个/年",
+            "说明": "美国51-4061，2025就业与2025—2035预测；空缺含增长和替换，不是招聘存量｜https://www.onetonline.org/link/details/51-4061.00"
           }
         ],
         "boundary": "美国数据只适用于 O*NET/BLS 51-4061.00 的美国口径与所列期间，不能换算或外推为中国大陆个人收入。",
@@ -14643,22 +14643,22 @@
         "industry_rows": [
           {
             "industry": "制造业",
-            "median": "需核对具体岗位",
-            "note": "O*NET 2024 主要行业之一，岗位差异较大。"
+            "median": "证据不足：未取得本职业该行业2025工资",
+            "note": "O*NET Top industries（2025）显示制造业占61%；这是雇主行业分布，不是职业×行业工资。"
           },
           {
             "industry": "专业、科学与技术服务",
-            "median": "需核对具体岗位",
-            "note": "原型与试制服务岗位要求可能不同。"
+            "median": "证据不足：未取得本职业该行业2025工资",
+            "note": "O*NET Top industries（2025）专业、科学与技术服务占31%；未据此取得职业×行业工资。"
           },
           {
             "industry": "其他制造与工程服务",
-            "median": "需核对具体岗位",
+            "median": "证据不足：未取得本职业该行业2025工资",
             "note": "需核对项目周期与协作方式。"
           },
           {
             "industry": "其他雇主与地区",
-            "median": "需核对具体岗位",
+            "median": "证据不足：未取得本职业该行业2025工资",
             "note": "地点、经验、福利与资格会改变实际条件。"
           }
         ],
@@ -14706,7 +14706,7 @@
         ],
         "median": "$63,340",
         "outlook_heading": "就业前景",
-        "outlook_period": "2024—2034",
+        "outlook_period": "2025—2035",
         "wage_column_labels": [
           "统计位置",
           "年薪参考",
@@ -14859,118 +14859,118 @@
             "metric": "美国在岗人数",
             "occupation_scope": "O*NET/BLS 51-4061.00 本职业口径",
             "source_id": "ep",
-            "value": "约 3,200 人（2024）"
+            "value": "约2,600人（2025）"
           },
           {
             "geography": "美国",
-            "horizon": "2024—2034",
+            "horizon": "2025—2035",
             "interpretation": "为预测期总就业的估计变化",
             "limitation": "预测不等于保证，行业与地区差异较大",
             "metric": "美国就业增长",
             "occupation_scope": "O*NET/BLS 51-4061.00 本职业口径",
             "source_id": "bls",
-            "value": "下降约 1% 或更低（2024—2034）"
+            "value": "下降（-1%或更低类别；2025—2035）"
           },
           {
             "geography": "美国",
-            "horizon": "2024—2034",
-            "interpretation": "预测期合计空缺",
+            "horizon": "2025—2035",
+            "interpretation": "预测期平均每年因增长和替换产生的空缺",
             "limitation": "含替换需求，不等于个人录用概率",
-            "metric": "美国预测期职位空缺",
+            "metric": "美国年均职位空缺",
             "occupation_scope": "O*NET/BLS 51-4061.00 本职业口径",
             "source_id": "nbs",
-            "value": "约 300 个（2024—2034）"
+            "value": "约200个/年（2025—2035）"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
-            "href": "https://www.bls.gov/ooh/production/metal-and-plastic-machine-workers.htm",
+            "href": "https://www.onetonline.org/link/details/51-4061.00",
             "id": "bls",
-            "label": "Metal and Plastic Machine Workers",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET 51-4061.00 Model Makers, Metal and Plastic",
+            "scope": "美国精确职业2025就业、2025—2035预测及2025行业分布；总体就业预测，非AI归因"
           },
           {
-            "href": "https://www.bls.gov/ooh/production/metal-and-plastic-machine-workers.htm",
+            "href": "https://www.onetonline.org/link/details/51-4061.00",
             "id": "ep",
-            "label": "Metal and Plastic Machine Workers",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET 51-4061.00 Model Makers, Metal and Plastic",
+            "scope": "美国精确职业2025就业、2025—2035预测及2025行业分布；总体就业预测，非AI归因"
           },
           {
-            "href": "https://www.bls.gov/ooh/production/metal-and-plastic-machine-workers.htm",
+            "href": "https://www.onetonline.org/link/details/51-4061.00",
             "id": "nbs",
-            "label": "Metal and Plastic Machine Workers",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET 51-4061.00 Model Makers, Metal and Plastic",
+            "scope": "美国精确职业2025就业、2025—2035预测及2025行业分布；总体就业预测，非AI归因"
           },
           {
-            "href": "https://www.bls.gov/ooh/production/metal-and-plastic-machine-workers.htm",
+            "href": "https://www.onetonline.org/link/details/51-4061.00",
             "id": "onet",
-            "label": "Metal and Plastic Machine Workers",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET 51-4061.00 Model Makers, Metal and Plastic",
+            "scope": "美国精确职业2025就业、2025—2035预测及2025行业分布；总体就业预测，非AI归因"
           }
         ],
         "transitions": [
           {
             "capability_gaps": "木料与样板成形工艺",
             "shared_capabilities": "识图与手工成形基础",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
+            "target_href": "/zh/career/jobs/model-makers-wood",
+            "target_slug": "model-makers-wood",
             "target_title": "木模型制作工",
             "transition_distance": "相邻"
           },
           {
             "capability_gaps": "按既定图纸的量产加工经验",
             "shared_capabilities": "机加工与测量基础",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
+            "target_href": "/zh/career/jobs/machinists",
+            "target_slug": "machinists",
             "target_title": "机械师",
             "transition_distance": "相邻"
           },
           {
             "capability_gaps": "生产工装与模具的设计责任",
             "shared_capabilities": "精密加工与配合",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
+            "target_href": "/zh/career/jobs/tool-and-die-makers",
+            "target_slug": "tool-and-die-makers",
             "target_title": "工具与模具制造工",
             "transition_distance": "相邻"
           },
           {
             "capability_gaps": "定型程序的高效执行",
             "shared_capabilities": "数控编程与机床设置",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
+            "target_href": "/zh/career/jobs/computer-numerically-controlled-tool-operators",
+            "target_slug": "computer-numerically-controlled-tool-operators",
             "target_title": "数控机床操作工",
             "transition_distance": "相邻"
           },
           {
             "capability_gaps": "铸型、浇注与批量成形",
             "shared_capabilities": "材料与成形知识",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
+            "target_href": "/zh/career/jobs/molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic",
+            "target_slug": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "金属与塑料铸模与制芯工",
             "transition_distance": "较远"
           },
           {
             "capability_gaps": "设备维护、诊断与安全隔离",
             "shared_capabilities": "机械与测量基础",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
+            "target_href": "/zh/career/jobs/industrial-machinery-mechanics",
+            "target_slug": "industrial-machinery-mechanics",
             "target_title": "工业机械维修工",
             "transition_distance": "较远"
           },
           {
             "capability_gaps": "设计与工艺工程技术要求",
             "shared_capabilities": "图纸与测量",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
+            "target_href": "/zh/career/jobs/mechanical-engineering-technicians",
+            "target_slug": "mechanical-engineering-technicians",
             "target_title": "机械工程技术员",
             "transition_distance": "较远"
           },
           {
             "capability_gaps": "统计过程控制与质量体系",
             "shared_capabilities": "量具与公差判定",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
+            "target_href": "/zh/career/jobs/inspectors-testers-sorters-samplers-and-weighers",
+            "target_slug": "inspectors-testers-sorters-samplers-and-weighers",
             "target_title": "质量检验员",
             "transition_distance": "较远"
           }
@@ -14996,17 +14996,17 @@
             "alternate_value": null,
             "label": "准备层级",
             "secondary_value": null,
-            "value": "准备层级三：通常要求职业院校训练、相关在岗经验或副学士层级学习，并约一至两年在岗或学徒训练"
+            "value": "O*NET Job Zone Three（中等准备）；职业组说明常见职业教育、相关经验或副学士学习，以及一至两年在岗训练，不能作为本职业统一训练期限。"
           },
           {
             "alternate_value": null,
-            "label": "美国就业（2024）",
+            "label": "美国就业（2025）",
             "secondary_value": null,
-            "value": "约 3,200 人"
+            "value": "约2,600人"
           },
           {
             "alternate_value": null,
-            "label": "美国增长（2024—2034）",
+            "label": "美国增长（2025—2035）",
             "secondary_value": null,
             "value": "下降约 1% 或更低"
           }
@@ -15123,15 +15123,15 @@
           }
         ],
         "boundary": "本页仅用于职业探索；真实执业、机床操作、数控编程与安全放行需按雇主流程和所在地规则核验。",
-        "direct_answer": "模型制作工的强匹配证据是可复核的工件与尺寸记录（识图、加工、测量、安全遵守），而不是自我标签；RC 兴趣代码只描述活动偏好。",
+        "direct_answer": "编辑建议：用可复核工件、尺寸记录与带教反馈观察识图、加工、测量和安全执行；RC只描述活动偏好，本页未验证各测评或工作样本的相对预测效度。",
         "directions": [
           {
             "direction": "原型与工作模型",
             "fit_signals": "愿意把图纸读成尺寸与工序、按公差加工并如实记录",
             "target": {
-              "href": "/zh/career/jobs/general-and-operations-managers",
-              "slug": "general-and-operations-managers",
-              "title": "Metal and Plastic Machine Workers"
+              "href": "/zh/career/jobs/model-makers-metal-and-plastic",
+              "slug": "model-makers-metal-and-plastic",
+              "title": "模型制作工（金属与塑料）"
             },
             "watchouts": "误读公差或不愿留记录"
           },
@@ -15139,9 +15139,9 @@
             "direction": "数控加工",
             "fit_signals": "愿意学习编程、仿真并核对程序版本",
             "target": {
-              "href": "/zh/career/jobs/purchasing-managers",
-              "slug": "purchasing-managers",
-              "title": "Metal and Plastic Machine Workers"
+              "href": "/zh/career/jobs/model-makers-metal-and-plastic",
+              "slug": "model-makers-metal-and-plastic",
+              "title": "模型制作工（金属与塑料）"
             },
             "watchouts": "跳过仿真或凭经验改程序"
           },
@@ -15149,9 +15149,9 @@
             "direction": "精密测量",
             "fit_signals": "愿意反复测量与复测，对微小误差敏感",
             "target": {
-              "href": "/zh/career/jobs/archivists",
-              "slug": "archivists",
-              "title": "Metal and Plastic Machine Workers"
+              "href": "/zh/career/jobs/model-makers-metal-and-plastic",
+              "slug": "model-makers-metal-and-plastic",
+              "title": "模型制作工（金属与塑料）"
             },
             "watchouts": "只看单次读数就判定合格"
           },
@@ -15159,9 +15159,9 @@
             "direction": "工装与首件",
             "fit_signals": "愿意设计工装并主导首件与偏差分析",
             "target": {
-              "href": "/zh/career/jobs/administrative-services-managers",
-              "slug": "administrative-services-managers",
-              "title": "Metal and Plastic Machine Workers"
+              "href": "/zh/career/jobs/model-makers-metal-and-plastic",
+              "slug": "model-makers-metal-and-plastic",
+              "title": "模型制作工（金属与塑料）"
             },
             "watchouts": "不做首件直接批量加工"
           },
@@ -15169,9 +15169,9 @@
             "direction": "安全与规程",
             "fit_signals": "愿意遵守防护、停机与隔离规则并升级异常",
             "target": {
-              "href": "/zh/career/jobs/human-resources-managers",
-              "slug": "human-resources-managers",
-              "title": "Metal and Plastic Machine Workers"
+              "href": "/zh/career/jobs/model-makers-metal-and-plastic",
+              "slug": "model-makers-metal-and-plastic",
+              "title": "模型制作工（金属与塑料）"
             },
             "watchouts": "为赶进度跳过安全程序"
           },
@@ -15179,9 +15179,9 @@
             "direction": "学习与带教",
             "fit_signals": "愿意更新工艺与设备知识并带教他人",
             "target": {
-              "href": "/zh/career/jobs/medical-and-health-services-managers",
-              "slug": "medical-and-health-services-managers",
-              "title": "Metal and Plastic Machine Workers"
+              "href": "/zh/career/jobs/model-makers-metal-and-plastic",
+              "slug": "model-makers-metal-and-plastic",
+              "title": "模型制作工（金属与塑料）"
             },
             "watchouts": "拒绝更新技能或安全规则"
           }
@@ -15197,11 +15197,11 @@
             "question": "兴趣代码 RC 能决定我适不适合吗？"
           },
           {
-            "answer": "可以，多数人从职业教育或学徒训练起步，在带教下逐步独立；但不得跳过安全培训与授权。",
+            "answer": "可先核对职业教育、学徒或雇主带教岗位；O*NET准备层级是职业组参考，不说明多数人的入行路径。操作真实机床前须完成岗位训练与授权。",
             "question": "没有机床经验可以入行吗？"
           },
           {
-            "answer": "与内外向关系不大，关键是对公差、记录与安全规程的稳定执行。",
+            "answer": "本页没有内外向与本职业胜任的比较研究；可观察公差复核、如实记录与安全规程执行，不用性格标签判断资格。",
             "question": "性格外向还是内向更适合？"
           },
           {
@@ -15221,7 +15221,7 @@
             "question": "什么时候应停止作业？"
           },
           {
-            "answer": "少数雇主要求测评，但结果通常不是唯一依据；实操与安全记录更关键。",
+            "answer": "证据不足：未取得本职业雇主人格测评使用率及录用预测效度。核对具体招聘公告；测评结果不能替代设备操作训练与授权。",
             "question": "人格工具在招聘中被使用吗？"
           },
           {
@@ -15342,7 +15342,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "模型制作工：按图纸设置并操作车床、铣床、雕刻机与坐标镗床等机床，做切削成形、精密测量、返修与尺寸记录，并按公差要求复核。"
+            "label": "MBTI测评（英文）"
           },
           {
             "href": {
@@ -15352,7 +15352,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "模型制作工：按图纸设置并操作车床、铣床、雕刻机与坐标镗床等机床，做切削成形、精密测量、返修与尺寸记录，并按公差要求复核。"
+            "label": "大五人格测评（英文）"
           },
           {
             "href": {
@@ -15362,7 +15362,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "模型制作工：按图纸设置并操作车床、铣床、雕刻机与坐标镗床等机床，做切削成形、精密测量、返修与尺寸记录，并按公差要求复核。"
+            "label": "MBTI测评（中文）"
           },
           {
             "href": {
@@ -15372,7 +15372,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "模型制作工：按图纸设置并操作车床、铣床、雕刻机与坐标镗床等机床，做切削成形、精密测量、返修与尺寸记录，并按公差要求复核。"
+            "label": "大五人格测评（中文）"
           }
         ]
       },
@@ -15545,7 +15545,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "图纸与公差识读",
@@ -15596,7 +15596,7 @@
       "text": "金属与塑料模型制作工"
     }
   },
-  "source_content_sha256": "8b64e9be2841a97615555baf0767990433d1d2df8964d0fbe7b334984deffe3e",
+  "source_content_sha256": "53eba2fa6cf0f0d2c21eae0695b635124341e80769778925a650603866f50267",
   "subject": {
     "canonical_slug": "model-makers-metal-and-plastic",
     "name": "模型制作工",

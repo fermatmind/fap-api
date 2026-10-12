@@ -44,6 +44,36 @@
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
+      "fact:revision-adhesive-cn-0": {
+        "status": "pending_mapping"
+      },
+      "fact:revision-adhesive-cn-1": {
+        "status": "pending_mapping"
+      },
+      "fact:revision-adhesive-ep-5": {
+        "status": "pending_mapping"
+      },
+      "fact:revision-adhesive-ep-6": {
+        "status": "pending_mapping"
+      },
+      "fact:revision-adhesive-ep-7": {
+        "status": "pending_mapping"
+      },
+      "fact:revision-adhesive-p10": {
+        "status": "pending_mapping"
+      },
+      "fact:revision-adhesive-p25": {
+        "status": "pending_mapping"
+      },
+      "fact:revision-adhesive-p50": {
+        "status": "pending_mapping"
+      },
+      "fact:revision-adhesive-p75": {
+        "status": "pending_mapping"
+      },
+      "fact:revision-adhesive-p90": {
+        "status": "pending_mapping"
+      },
       "fact:technology-context": {
         "status": "pending_mapping"
       },
@@ -1290,7 +1320,7 @@
         "status": "pending_mapping"
       },
       "item:adhesive-bonding-machine-operators-and-tenders.path.entry-portfolio.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:adhesive-bonding-machine-operators-and-tenders.path.entry-role-comparison.1": {
         "status": "mapped"
@@ -23338,7 +23368,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "这份工作适合愿意对照工单处理胶粘剂和材料、持续监看仪表与粘合状态，并能在节拍中保持操作控制和检验记录的人。"
+              "需要慎重的是不愿持续核对重复作业，或想凭网页自行上机、清堵和改参数。先核现场材料暴露、噪声、班次、防护与训练条件；不以人格类型判断健康或安全能力。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.quick-decision.fit-decision-checklist.1",
@@ -23353,7 +23383,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "若你对胶粘剂气味、噪声、重复动作或轮班强烈排斥，应先核实具体车间的 SDS、通风、防护和排班条件。；可观察信号是：按顺序核对材料和参数，从连续数据中发现异常，不跳过检验，停机后能说清现象和已采取动作。"
+              "编辑练习：用45分钟完成八张纸样的虚构工单、对位测量与异常交接。5号缺单，7号超2mm；其他六张逐张测量核单，不预设通过。不用工业胶黏剂或真实设备，2mm仅为题面条件。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.quick-decision.fit-decision-checklist.2",
@@ -23367,7 +23397,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "可观察信号是：按顺序核对材料和参数，从连续数据中发现异常，不跳过检验，停机后能说清现象和已采取动作。"
+              "适合愿意按工单逐项核材料、记录实际观察与未知，并完整交接异常的人。观察的是本次纸样行为；入职仍核目标工厂培训、机型和权限，不按人格分数筛人。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.quick-decision.fit-decision-checklist.3",
@@ -23383,7 +23413,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "做 45 分钟安全模拟：用纸片、可移除胶带和虚构工单对位 8 个样件，记录偏差、返工原因和改进。不使用工业胶或机器。；这份工作适合愿意对照工单处理胶粘剂和材料、持续监看仪表与粘合状态，并能在节拍中保持操作控制和检验记录的人。"
+              "本页练习和行为观察为编辑设计；费马测试不据此证明实际工厂技能、安全能力或录用资格。真实设备、材料和授权条件须另核。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.quick-decision.fermat-decision-card.6",
@@ -23485,7 +23515,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 强调操作控制、运行监看、质量控制分析、故障诊断和协调、它们是职业环境描述，不是个人诊断。；胶粘/粘合设备操作员与看护员对应 O*NET 51-9191.00，操作或看护使用胶粘剂连接板材、纸张、橡胶、织物或塑料的机器。"
+              "输入是获准工单、材料/批次、设备程序与质量要求；产出是准备核对和未确认项记录。未知条件不猜填。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.2",
@@ -23514,7 +23544,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "输入是工单、材料批次、胶粘剂和质量规格、输出是已粘合工件、检验结果、产量和异常记录。 → 读工单并确认材料、数量、对位和工艺要求。 → 上料、定位，按权限调节流量、速度或温度。 → 监看仪表、材料走向和粘合表现。 → 检验尺寸、外观或连接完整性，隔离不合格品。 → 工作多在室内生产线，需站立、搬运材料、反复使用手部操作件，并与上下游工位连续交接。"
+              "读工单及版本 → 核材料与批次 → 核数量和工件方向 → 查岗位程序 → 确认培训与权限 → 记录差异并交接"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.3",
@@ -23543,7 +23573,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "上料、定位，按权限调节流量、速度或温度。；监看仪表、材料走向和粘合表现。"
+              "输入是实际观察、仪表和检验要求；产出是数量、检查和异常记录。网页不授予清堵、维修、改参数或放行权限。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.4",
@@ -23572,7 +23602,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "检验尺寸、外观或连接完整性，隔离不合格品。 → 工作多在室内生产线，需站立、搬运材料、反复使用手部操作件，并与上下游工位连续交接。 → 防护取决于胶粘剂配方和机台：需查看 SDS，核对排风、手套、护目和噪声控制。 → 关键判断是材料、胶量、对位和固化是否在规格内，以及异常是否超出自己的处理权限。 → O*NET 强调操作控制、运行监看、质量控制分析、故障诊断和协调、它们是职业环境描述，不是个人诊断。 → 胶粘/粘合设备操作员与看护员对应 O*NET 51-9191.00，操作或看护使用胶粘剂连接板材、纸张、橡胶、织物或塑料的机器。"
+              "按获准流程看护 → 观察设备状态 → 核对实际工件 → 记录检验结果 → 标识异常及未知 → 按职责报告交接"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.5",
@@ -23601,7 +23631,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "防护取决于胶粘剂配方和机台：需查看 SDS，核对排风、手套、护目和噪声控制。"
+              "记录工单版本、材料/批次、设备、时点、数量、检查结果、异常和接手者。只写已核事实，未确认状态留待对应角色复核。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.6",
@@ -23616,14 +23646,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "关键判断是材料、胶量、对位和固化是否在规格内，以及异常是否超出自己的处理权限。"
+              "这里比较美国51-9191粘合设备操作与49-9041工业机械维修：生产看护与故障维修的主要产出不同，交集任务不能推出同等权限。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-neighbor-4"
           ],
           "type": "prose"
         },
@@ -23632,13 +23661,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 强调操作控制、运行监看、质量控制分析、故障诊断和协调；它们是职业环境描述，不是个人诊断。"
+              "工业机械维修：维护、诊断和修复机械设备，使其恢复规定功能。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-neighbor-4"
           ],
           "type": "prose"
         },
@@ -23647,13 +23676,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "胶粘/粘合设备操作员与看护员对应 O*NET 51-9191.00，操作或看护使用胶粘剂连接板材、纸张、橡胶、织物或塑料的机器。"
+              "粘合设备操作：按工单连接材料，看护生产并记录质量状态。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.9",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-neighbor-4"
           ],
           "type": "prose"
         },
@@ -23662,13 +23691,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "输入是工单、材料批次、胶粘剂和质量规格、输出是已粘合工件、检验结果、产量和异常记录。；读工单并确认材料、数量、对位和工艺要求。"
+              "机械、零件及维修技术资料；具体故障、设备型号和维修工单。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.10",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-neighbor-4"
           ],
           "type": "prose"
         },
@@ -23677,13 +23706,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "读工单并确认材料、数量、对位和工艺要求。；上料、定位，按权限调节流量、速度或温度。"
+              "工单、材料/批次、工件及粘合设备；现场工艺和质量要求。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-neighbor-4"
           ],
           "type": "prose"
         },
@@ -23708,13 +23737,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "监看仪表、材料走向和粘合表现。"
+              "检查故障→诊断原因→按权限修复或更换→测试设备→记录维修。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.12",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-neighbor-4"
           ],
           "type": "prose"
         },
@@ -23723,13 +23752,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "检验尺寸、外观或连接完整性，隔离不合格品。"
+              "核工单与材料→按授权看护生产→检验工件→记录异常并交接。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.13",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-neighbor-4"
           ],
           "type": "prose"
         },
@@ -23738,13 +23767,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作多在室内生产线，需站立、搬运材料、反复使用手部操作件，并与上下游工位连续交接。"
+              "维修、零件更换与功能测试记录；是否复机依现场批准。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.14",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-neighbor-4"
           ],
           "type": "prose"
         },
@@ -23753,13 +23782,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "防护取决于胶粘剂配方和机台：需查看 SDS，核对排风、手套、护目和噪声控制。"
+              "生产数量、实际检验结果及异常交接；是否合格放行依质量权限。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.15",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-neighbor-4"
           ],
           "type": "prose"
         },
@@ -23768,13 +23797,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "关键判断是材料、胶量、对位和固化是否在规格内，以及异常是否超出自己的处理权限。"
+              "维修人员承担其授权内的诊断、维修和测试，必要时转交专业角色。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.16",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-neighbor-4"
           ],
           "type": "prose"
         },
@@ -23783,13 +23812,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 强调操作控制、运行监看、质量控制分析、故障诊断和协调、它们是职业环境描述，不是个人诊断。；胶粘/粘合设备操作员与看护员对应 O*NET 51-9191.00，操作或看护使用胶粘剂连接板材、纸张、橡胶、织物或塑料的机器。"
+              "操作员承担其授权内的生产看护、检查和如实记录，不承担全部工程判断。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.17",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-neighbor-4"
           ],
           "type": "prose"
         },
@@ -23798,13 +23827,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "胶粘/粘合设备操作员与看护员对应 O*NET 51-9191.00，操作或看护使用胶粘剂连接板材、纸张、橡胶、织物或塑料的机器。"
+              "维修、危险能量控制及复机条件须另核培训与企业授权。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.18",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-neighbor-4"
           ],
           "type": "prose"
         },
@@ -23813,13 +23842,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "输入是工单、材料批次、胶粘剂和质量规格；输出是已粘合工件、检验结果、产量和异常记录。"
+              "生产操作、调参、清堵与放行均须核实际权限；岗位名称不授予维修许可。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-neighbor-4"
           ],
           "type": "prose"
         },
@@ -23828,13 +23857,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "读工单并确认材料、数量、对位和工艺要求。"
+              "美国49-9041任务背景，不定义中国统一资格、个人能力或所有工厂分工。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.20",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-neighbor-4"
           ],
           "type": "prose"
         },
@@ -23843,13 +23872,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "上料、定位，按权限调节流量、速度或温度。"
+              "美国51-9191任务背景，不定义中国统一资格、个人能力或所有工厂分工。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.21",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-neighbor-4"
           ],
           "type": "prose"
         },
@@ -23858,7 +23887,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "监看仪表、材料走向和粘合表现。"
+              "逐项核目标工厂、材料、机型及班次。招聘岗位名称不能替代以下条件的书面确认。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.22",
@@ -23873,7 +23902,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "检验尺寸、外观或连接完整性，隔离不合格品。"
+              "核材料、胶黏剂、工件和机型；不同车间要求不互用。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.23",
@@ -23887,7 +23916,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作多在室内生产线，需站立、搬运材料、反复使用手部操作件，并与上下游工位连续交接。"
+              "材料与机型"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.24",
@@ -23902,7 +23931,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "防护取决于胶粘剂配方和机台：需查看 SDS，核对排风、手套、护目和噪声控制。"
+              "核版本、批次、数量、检验标准和放行角色，不用纸样2mm当行业公差。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.25",
@@ -23916,7 +23945,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "关键判断是材料、胶量、对位和固化是否在规格内，以及异常是否超出自己的处理权限。"
+              "工单与质量"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.26",
@@ -23931,7 +23960,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 强调操作控制、运行监看、质量控制分析、故障诊断和协调；它们是职业环境描述，不是个人诊断。"
+              "确认岗位培训、可操作范围及调参、清堵、维修和复机权限。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.27",
@@ -23945,7 +23974,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "胶粘/粘合设备操作员与看护员对应 O*NET 51-9191.00，操作或看护使用胶粘剂连接板材、纸张、橡胶、织物或塑料的机器。"
+              "培训与权限"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.28",
@@ -23960,7 +23989,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "输入是工单、材料批次、胶粘剂和质量规格；输出是已粘合工件、检验结果、产量和异常记录。"
+              "核设备防护、SDS、PPE与异常报告程序；网页不替代现场风险评估。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.29",
@@ -23974,7 +24003,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "读工单并确认材料、数量、对位和工艺要求。"
+              "防护与危险沟通"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.30",
@@ -23989,7 +24018,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "上料、定位，按权限调节流量、速度或温度。"
+              "核工作地、班次、工时、加班、计件或固定薪酬及合同口径。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.31",
@@ -24004,7 +24033,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "监看仪表、材料走向和粘合表现。"
+              "班次与薪酬"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.32",
@@ -24019,7 +24048,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "检验尺寸、外观或连接完整性，隔离不合格品。"
+              "明确记录、标识、报告和接手者；停机不等于完成能源隔离。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.33",
@@ -24034,7 +24063,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作多在室内生产线，需站立、搬运材料、反复使用手部操作件，并与上下游工位连续交接。"
+              "异常与交接"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.34",
@@ -24058,44 +24087,44 @@
           "data": {
             "entries": [
               {
-                "entity": "51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
+                "entity": "美国装配与制造工（职业组）",
                 "id": "link-1",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/custom/51-9191.00"
+                "url": "https://www.bls.gov/ooh/production/assemblers-and-fabricators.htm"
               },
               {
-                "entity": "51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
+                "entity": "美国成形/挤压/压制机台51-9041",
                 "id": "link-2",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/51-9191.00"
+                "url": "https://www.onetonline.org/link/summary/51-9041.00"
               },
               {
-                "entity": "Hot Technologies: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
+                "entity": "美国检查/测试人员51-9061",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/hot_tech/51-9191.00"
+                "url": "https://www.onetonline.org/link/summary/51-9061.00"
               },
               {
-                "entity": "Industries: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
+                "entity": "美国工业机械维修49-9041",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/industry/51-9191.00"
+                "url": "https://www.onetonline.org/link/summary/49-9041.00"
               },
               {
-                "entity": "National Certifications: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
+                "entity": "美国包装/灌装设备操作51-9111",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localcert/51-9191.00"
+                "url": "https://www.onetonline.org/link/summary/51-9111.00"
               }
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "revision-adhesive-neighbor-1",
+            "revision-adhesive-neighbor-2",
+            "revision-adhesive-neighbor-3",
+            "revision-adhesive-neighbor-4",
+            "revision-adhesive-neighbor-5"
           ],
           "type": "links"
         },
@@ -24620,10 +24649,10 @@
                 "url": "https://www.onetonline.org/link/details/51-9191.00"
               },
               {
-                "entity": "BLS: Occupational Employment and Wage Statistics, May 2024",
+                "entity": "BLS2025–2035职业预测51-9191独立行",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/news.release/archives/ocwage_04022025.pdf"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "NIST AI Risk Management Framework (AI RMF 1.0)",
@@ -24774,13 +24803,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页未取得可复核的本职业任务级 AI 评分依据，因此不评分。AI 仅可作为低风险信息整理的编辑候选；不能替代材料与工件核对、粘合质量判断、异常隔离、停线决定、能源隔离或维修授权。"
+              "证据不足：本次未取得51-9191职业级AI实测准确率、节时、采用率、替代率或消失年份。不评分；仅可试虚构记录草稿，材料实物、工艺和设备权限由实际角色复核。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "ilo"
+            "revision-adhesive-onet",
+            "ilo",
+            "nist"
           ],
           "type": "prose"
         },
@@ -25505,12 +25535,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有本页可归因于 AI 的 2035 年职业结果；美国职业展望或工资背景不能证明 AI 会使该职业增减。"
+              "BLS2025–2035精确51-9191官方增长1.3%、净增约200人、年均1300空缺含补缺；这不是AI因果或中国需求。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "bls"
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -25519,13 +25549,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业统计；ILO 任务研究边界"
+              "BLS2025–2035精确职业行"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "bls",
-            "ilo"
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -26264,12 +26293,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "107,987 元/年"
+              "113,594元/年（2025非私营制造业）"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "nbs"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -26278,12 +26307,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2024 年城镇非私营单位制造业年平均工资；行业代理，不是胶粘设备操作员工资。"
+              "制造业全部岗位行业年平均；不是胶黏设备操作员工资。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "nbs"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -26292,12 +26321,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "78,561 元/年"
+              "76,055元/年（2025私营制造业）"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "nbs"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -26306,12 +26335,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "2024 年规模以上企业生产制造及有关人员年平均工资；跨行业大类代理，不是私营单位平均或细分职业工资。"
+              "私营制造业全部岗位行业年平均；非跨行业生产制造职业大类，也非个人收入。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "nbs"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -26320,12 +26349,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "未取得"
+              "证据不足：中国本职业全国工资分布未取得"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "nbs"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -26334,12 +26363,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "未取得中国大陆胶粘设备操作员全国工资分布；不以代理补成职业中位数。"
+              "行业背景不能补成职业中位或招聘报价。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "nbs"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -26390,12 +26419,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "以上代理均为 2024 年年平均工资，不能直接换算为本职业月薪、到手收入或新人报价。"
+              "2025税前年平均，含代扣税社保公积金；5人及以上法人单位，不含个体工商户与自由职业，不推个人月薪。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "nbs"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -26446,12 +26475,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页未核实带雇主、日期、班次和薪酬口径的中国岗位公告样本，因此不展示“招聘区间”。"
+              "证据不足：未核实雇主、日期、班次、设备/材料及薪酬同核的中国招聘原文。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "nbs"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -26502,12 +26531,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "没有可信证据把 AI 使用直接推导为该职业在中国的工资变化。"
+              "证据不足：本次未取得AI对中国本职业工资变化的因果研究。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "nbs"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -26768,12 +26797,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202505/t20250516_1959826.html"
+              "国家统计局2025制造业工资｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.43",
           "source_refs": [
-            "nbs"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -26824,12 +26853,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202505/t20250516_1959826.html"
+              "国家统计局2025制造业工资｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.47",
           "source_refs": [
-            "nbs"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -26838,12 +26867,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本模块明确区分制造业行业代理、生产制造大类代理与本细分职业缺口。"
+              "2025制造业非私营与私营单位年平均工资只作行业背景；不能推成本职业中位、个人月薪或招聘报价。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "nbs"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -26852,12 +26881,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "全国细分职业工资"
+              "本职业精确工资"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "nbs"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -26866,12 +26895,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "未取得"
+              "证据不足：中国本职业全国中位、城市及职级数据未取得"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "nbs"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -26880,12 +26909,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "制造业行业代理"
+              "2025非私营制造业"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "nbs"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -26894,12 +26923,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "107,987 元/年（城镇非私营单位制造业）"
+              "113,594元/年（全部行业岗位）"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "nbs"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -26908,12 +26937,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "生产制造大类代理"
+              "2025私营制造业"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "nbs"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -26922,12 +26951,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "78,561 元/年（规模以上企业生产制造及有关人员）"
+              "76,055元/年（全部行业岗位）"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "nbs"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -26936,13 +26965,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆目前没有在本页证据中建立该职业的全国工资中位数，只能使用宽口径官方背景。"
+              "证据不足：中国本细分职业工资分布未取得；行业均值不能补齐。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -27001,14 +27029,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "51-9191.00 - Adhesive Bonding Machine Operators and Tenders｜https://www.onetonline.org/link/custom/51-9191.00；51-9191.00 - Adhesive Bonding Machine Operators and Tenders｜https://www.onetonline.org/link/details/51-9191.00；Hot Technologies: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders｜https://www.onetonline.org/link/hot_tech/51-9191.00"
+              "O*NET/BLS2025全国工资｜https://www.onetonline.org/link/localwages/51-9191.00；BLS2025–2035精确职业行｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET51-9191任务｜https://www.onetonline.org/link/summary/51-9191.00"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "revision-adhesive-wages",
+            "revision-adhesive-ep",
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -27017,12 +27045,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国工资分布中点为 时薪中位数 21.74 美元；年薪中位数 45,210 美元，中位数不能代表新人工资。"
+              "31,460美元/年"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27031,12 +27059,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Hot Technologies: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders｜https://www.onetonline.org/link/hot_tech/51-9191.00；Industries: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders｜https://www.onetonline.org/link/industry/51-9191.00"
+              "2025美国51-9191全国第10分位，非起薪或职级。；O*NET/BLS工资｜https://www.onetonline.org/link/localwages/51-9191.00"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27045,12 +27073,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS 的现时工资与 BLS 的未来就业预测是不同测量，不能合成一个薪资前景分。"
+              "37,220美元/年"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27059,12 +27087,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "National Certifications: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders｜https://www.onetonline.org/link/localcert/51-9191.00；National Training: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders｜https://www.onetonline.org/link/localtraining/51-9191.00"
+              "2025美国51-9191全国第25分位，非起薪或职级。；O*NET/BLS工资｜https://www.onetonline.org/link/localwages/51-9191.00"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27073,12 +27101,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "入门者应用本地、同班次、相似材料和机台的真实岗位核对报价，全美中位数只是锚点。"
+              "46,460美元/年"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27087,12 +27115,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "National Wages: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders｜https://www.onetonline.org/link/localwages/51-9191.00；51-9191.00 - Adhesive Bonding Machine Operators and Tenders｜https://www.onetonline.org/link/summary/51-9191.00"
+              "2025美国51-9191全国第50分位，非起薪或职级。；O*NET/BLS工资｜https://www.onetonline.org/link/localwages/51-9191.00"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27101,12 +27129,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国工资分布中点为 时薪中位数 21.74 美元；年薪中位数 45,210 美元，中位数不能代表新人工资。"
+              "53,610美元/年"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27115,12 +27143,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "51-9191.00 - Adhesive Bonding Machine Operators and Tenders｜https://www.onetonline.org/link/custom/51-9191.00；51-9191.00 - Adhesive Bonding Machine Operators and Tenders｜https://www.onetonline.org/link/details/51-9191.00"
+              "2025美国51-9191全国第75分位，非起薪或职级。；O*NET/BLS工资｜https://www.onetonline.org/link/localwages/51-9191.00"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27129,12 +27157,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS 的现时工资与 BLS 的未来就业预测是不同测量，不能合成一个薪资前景分。"
+              "60,810美元/年"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27143,12 +27171,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "Hot Technologies: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders｜https://www.onetonline.org/link/hot_tech/51-9191.00；Industries: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders｜https://www.onetonline.org/link/industry/51-9191.00"
+              "2025美国51-9191全国第90分位，非起薪或职级。；O*NET/BLS工资｜https://www.onetonline.org/link/localwages/51-9191.00"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27157,12 +27185,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "入门者应用本地、同班次、相似材料和机台的真实岗位核对报价，全美中位数只是锚点。"
+              "12,100人（EP2025基期，千人舍入）"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -27171,13 +27199,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "National Certifications: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders｜https://www.onetonline.org/link/localcert/51-9191.00；National Training: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders｜https://www.onetonline.org/link/localtraining/51-9191.00"
+              "BLS精确职业行；显示千人独立舍入，净增用官方0.2千，不按显示两数相减。｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -27186,12 +27213,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国工资分布中点为 时薪中位数 21.74 美元；年薪中位数 45,210 美元，中位数不能代表新人工资。"
+              "2025–2035增长1.3%；官方净增约200人"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -27200,12 +27227,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "National Wages: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders｜https://www.onetonline.org/link/localwages/51-9191.00；51-9191.00 - Adhesive Bonding Machine Operators and Tenders｜https://www.onetonline.org/link/summary/51-9191.00"
+              "BLS精确职业行；显示千人独立舍入，净增用官方0.2千，不按显示两数相减。｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -27214,12 +27241,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS 的现时工资与 BLS 的未来就业预测是不同测量，不能合成一个薪资前景分。"
+              "年均1,300空缺（2025–2035，含补缺）"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -27228,13 +27255,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "51-9191.00 - Adhesive Bonding Machine Operators and Tenders｜https://www.onetonline.org/link/custom/51-9191.00；51-9191.00 - Adhesive Bonding Machine Operators and Tenders｜https://www.onetonline.org/link/details/51-9191.00"
+              "BLS精确职业行；显示千人独立舍入，净增用官方0.2千，不按显示两数相减。｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -27243,13 +27269,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "入门者应用本地、同班次、相似材料和机台的真实岗位核对报价，全美中位数只是锚点。；美国 BLS 2024 年 OEWS 估计为 未取得，平均值不能写成起薪。"
+              "实际报价要核地区、班次和工时；全国分位不是个人合同工资。；全国年工资中位46,460美元（2025）。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-wages",
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -27258,13 +27284,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国 BLS 2024 年 OEWS 估计为 就业 12,170 人；平均时薪 21.96 美元；平均年薪 45,670 美元，平均值不能写成起薪。"
+              "2025美国51-9191全国年工资中位46,460美元、小时中位22.34美元；EP2025基期约12,100人，2025–2035官方增长1.3%、净增约200人，年均1,300空缺含补缺。非中国工资或AI因果。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-wages",
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -27273,12 +27299,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国工资分布中点为 未取得，中位数不能代表新人工资。；收入会受班次津贴、加班、地区、行业、雇佣协议和任职时间影响。"
+              "实际报价核工作地、材料、机型与班次；全国分位不是个人合同工资。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.27",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages",
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -27287,12 +27314,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "收入会受班次津贴、加班、地区、行业、雇佣协议和任职时间影响。"
+              "地区、雇主与班次"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.28",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27301,12 +27328,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS 的现时工资与 BLS 的未来就业预测是不同测量，不能合成一个薪资前景分。；比较岗位时需确认时薪或年薪、是否含加班、每周排班时数和待命要求。"
+              "官方年薪和时薪分别展示；个人工时、加班和津贴按实际合同核，不从中位推排班。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages",
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -27315,12 +27343,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "比较岗位时需确认时薪或年薪、是否含加班、每周排班时数和待命要求。"
+              "工时与计酬"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.30",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27329,12 +27357,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "入门者应用本地、同班次、相似材料和机台的真实岗位核对报价，全美中位数只是锚点。；美国 BLS 2024 年 OEWS 估计为 未取得，平均值不能写成起薪。"
+              "2025全国工资分位不是职业×行业工资中位；就业预测也不是工资涨幅。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.31",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages",
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -27343,13 +27372,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国 BLS 2024 年 OEWS 估计为 就业 12,170 人；平均时薪 21.96 美元；平均年薪 45,670 美元，平均值不能写成起薪。"
+              "行业与统计口径"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.32",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27358,12 +27386,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国工资分布中点为 时薪中位数 21.74 美元；年薪中位数 45,210 美元，中位数不能代表新人工资。"
+              "2025–2035增长1.3%；官方净增约200人"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages",
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -27372,12 +27401,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "收入会受班次津贴、加班、地区、行业、雇佣协议和任职时间影响。"
+              "木制品制造（NAICS321）"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.34",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27386,12 +27415,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS 的现时工资与 BLS 的未来就业预测是不同测量，不能合成一个薪资前景分。"
+              "证据不足：未取得美国2025年51-9191在木制品制造（NAICS321）的职业工资中位数。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27400,12 +27429,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "比较岗位时需确认时薪或年薪、是否含加班、每周排班时数和待命要求。"
+              "木单板定位与胶合板拼合，关注层片位置、接合和记录。场景为依据O*NET任务的编辑归纳；BLS行业目录只核分类，未取得该行职业中位，不代表雇用人数排序。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27414,12 +27443,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "入门者应用本地、同班次、相似材料和机台的真实岗位核对报价，全美中位数只是锚点。"
+              "纸品制造（NAICS322）"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.37",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27428,12 +27457,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国 BLS 2024 年 OEWS 估计为 就业 12,170 人；平均时薪 21.96 美元；平均年薪 45,670 美元，平均值不能写成起薪。"
+              "证据不足：未取得美国2025年51-9191在纸品制造（NAICS322）的职业工资中位数。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27442,12 +27471,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国工资分布中点为 未取得，中位数不能代表新人工资。；收入会受班次津贴、加班、地区、行业、雇佣协议和任职时间影响。"
+              "纸张胶合与纸品转换，关注纸层对位、粘接和批次记录。场景为依据O*NET任务的编辑归纳；BLS行业目录只核分类，未取得该行职业中位，不代表雇用人数排序。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27456,12 +27485,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "收入会受班次津贴、加班、地区、行业、雇佣协议和任职时间影响。"
+              "塑料制品制造（NAICS3261）"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.40",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27470,12 +27499,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "职业相关行业工资"
+              "证据不足：未取得美国2025年51-9191在塑料制品制造（NAICS3261）的职业工资中位数。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27484,12 +27513,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "未取得可复核的 51-9191.00 行业工资统计"
+              "塑料材料粘合，关注材料标识、接合位置和可见结果记录。场景为依据O*NET任务的编辑归纳；BLS行业目录只核分类，未取得该行职业中位，不代表雇用人数排序。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27498,12 +27527,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本轮未核实同职业、同期间、同单位的行业工资；不以行业分布、其他职业或全国中位数代填。"
+              "橡胶制品制造（NAICS3262）"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.43",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27512,12 +27541,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "职业相关行业工资"
+              "证据不足：未取得美国2025年51-9191在橡胶制品制造（NAICS3262）的职业工资中位数。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27526,12 +27555,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "未取得可复核的 51-9191.00 行业工资统计"
+              "橡胶及橡胶化织物部件接合，关注部件对位与接合检查。场景为依据O*NET任务的编辑归纳；BLS行业目录只核分类，未取得该行职业中位，不代表雇用人数排序。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27540,13 +27569,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本轮未核实同职业、同期间、同单位的行业工资；不以行业分布、其他职业或全国中位数代填。"
+              "全国职业中位不是起薪；入门报价按实际地区、班次、材料和机型核。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-wages",
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -27555,12 +27584,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "职业相关行业工资"
+              "年薪与时薪为官方不同展示单位，不推个人排班或实发；加班及津贴另核。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages",
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -27569,12 +27599,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "未取得可复核的 51-9191.00 行业工资统计"
+              "2025工资为O*NET展示BLS OEWS；EP2025–2035是就业预测，二者不混成工资前景分。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages",
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -27583,13 +27614,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本轮未核实同职业、同期间、同单位的行业工资；不以行业分布、其他职业或全国中位数代填。"
+              "实际收入按地区雇主班次合同核；行业内职业中位本次未取得，不断言官方未发布。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-wages",
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -27598,12 +27629,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "职业相关行业工资"
+              "{{fact:revision-adhesive-p50}}"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27612,13 +27643,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "未取得可复核的 51-9191.00 行业工资统计"
+              "第10分位是职业分布位置，不是新人起薪、资历线或个人报价。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27627,12 +27657,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本轮未核实同职业、同期间、同单位的行业工资；不以行业分布、其他职业或全国中位数代填。"
+              "第50分位是职业分布位置，不是新人起薪、资历线或个人报价。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -27641,13 +27671,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS 的现时工资与 BLS 的未来就业预测是不同测量，不能合成一个薪资前景分。；比较岗位时需确认时薪或年薪、是否含加班、每周排班时数和待命要求。"
+              "第90分位60,810美元/年是2025全国职业工资分布位置，不是高级职级、个人报价或预测。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         }
@@ -27802,13 +27831,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 环境信号偏现实型，因为工作围绕设备、材料、手部操作和物理产出；它不是个人门槛。"
+              "O*NET当前51-9191兴趣为RC：现实型与常规型。可探索材料、设备与顺序记录兴趣；这是工作环境线索，不是个人诊断。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.2",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -27817,12 +27845,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "自测应看能否在设备节拍中同时注意材料、仪表和质量输出。"
+              "O*NET兴趣资料支持职业环境描述，不验证个人录用、安全能力或本练习成绩。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.3",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -27831,8 +27859,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "内向外向都可以，关键是交接班、故障上报和质量异常时能准确传信息。",
-              "绕防护、未隔离能源就清堵，是需要改变的行为风险，不是性格类型。"
+              "愿意探索材料对位、可见检查等实物任务",
+              "对按编号、工单和批次有序记录有兴趣"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.4",
@@ -27847,12 +27875,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "正向行为是按固定顺序上料、对位和检验，又不对异常麻木。"
+              "兴趣相近仍须核目标工厂材料、机型、班次和雇主培训；网页与纸样不授予操作权限。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.5",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -27861,13 +27889,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "车间可能有噪声、污染物、长时间站立和重复动作，应在入职前现场确认。；木材、纸品、橡胶、纺织或塑料车间的材料、气味、节拍和质量标准不同。"
+              "可讨论自己是否愿意持续核对并如实交接未知；本页不按大五特质分数筛人，也不指定最适合的特质组合。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -27876,12 +27903,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "木材、纸品、橡胶、纺织或塑料车间的材料、气味、节拍和质量标准不同。"
+              "本页未取得大五分数预测51-9191岗位表现的验证证据；观察建议为编辑建议。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.7",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -27890,8 +27917,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "用安全模拟的准确率、记录完整性和偏差返工表现，比用人格标签判断更有效。",
-              "O*NET 环境信号偏现实型，因为工作围绕设备、材料、手部操作和物理产出；它不是个人门槛。"
+              "反复核八行记录时，观察自己是否愿意保持完整与准确",
+              "被指出漏项时，观察能否核证据后修正，而不是掩盖"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.8",
@@ -27906,12 +27933,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "自测应看能否在设备节拍中同时注意材料、仪表和质量输出。；内向外向都可以，关键是交接班、故障上报和质量异常时能准确传信息。"
+              "责任心标签不等于现场记录完整或设备操作能力，需看本次任务及实际培训。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.9",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -27920,13 +27947,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "适配线索是能在明确程序下持续核对材料与记录、发现异常并及时交接；这不是性格或健康适配测试。"
+              "RC可探索实物材料、设备与顺序记录兴趣，不是个人能力或录用阈值。纸样练习不证明上机、维修或放行授权。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.riasec-fit-block.9",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -27935,12 +27961,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "绕防护、未隔离能源就清堵，是需要改变的行为风险，不是性格类型。；正向行为是按固定顺序上料、对位和检验，又不对异常麻木。"
+              "MBTI只可用于讨论学习和沟通偏好；本页不按类型判断适合性，不指定最佳类型。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.10",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -27949,12 +27975,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "可能喜欢的工作特征包括实物材料、重复但需专注的流程、可见质量检查和班组协作；噪声、站立、节奏与材料环境应在现场核对。"
+              "观察任务兴趣：按材料1八件坐标逐件算偏差并核工单，再对照材料3；记录自己对实物核对和有序记录是否有兴趣，不把纸样结果当真实机台能力或授权。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.riasec-fit-block.10",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -27963,12 +27989,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "车间可能有噪声、污染物、长时间站立和重复动作，应在入职前现场确认。"
+              "本页未取得MBTI类型预测本职业绩效的验证证据；偏好不代替能力或授权。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.11",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -27977,13 +28003,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "RIASEC 可作环境语言：本职业通常更接近现实型（R）与常规型（C）的任务组合；它不是招聘筛选、能力测验或收入预测。"
+              "RC · 现实型 / 常规型"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.riasec-fit-block.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -27992,8 +28017,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "用安全模拟的准确率、记录完整性和偏差返工表现，比用人格标签判断更有效。",
-              "O*NET 环境信号偏现实型，因为工作围绕设备、材料、手部操作和物理产出；它不是个人门槛。"
+              "学习纸样记录时，讨论自己偏好先看完整流程还是逐步示范",
+              "交接练习时，尝试书面清单和口头说明，比较哪种更便于自己学习"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.12",
@@ -28007,12 +28032,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "自测可问：我能否在规则、重复检查与交接中保持专注，并在不确定时停止上报？答案不确定时先做受监督观察。"
+              "RC"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.riasec-fit-block.12",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28021,12 +28046,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "内向外向都可以，关键是交接班、故障上报和质量异常时能准确传信息。；绕防护、未隔离能源就清堵，是需要改变的行为风险，不是性格类型。"
+              "先描述自己的学习和沟通偏好，再用同一八行记录检验交接是否完整；偏好标签不代替证据或授权。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.13",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28035,12 +28060,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "绕防护、未隔离能源就清堵，是需要改变的行为风险，不是性格类型。"
+              "九型可帮助讨论个人动机；本页没有把九型类型与本职业适合性、绩效或安全能力对应的验证依据。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.14",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28049,12 +28074,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "正向行为是按固定顺序上料、对位和检验，又不对异常麻木。"
+              "本页不提供九型录用、绩效或事故预测；动机讨论不是职业级验证。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.15",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28063,8 +28088,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "车间可能有噪声、污染物、长时间站立和重复动作，应在入职前现场确认。",
-              "木材、纸品、橡胶、纺织或塑料车间的材料、气味、节拍和质量标准不同。"
+              "讨论自己更在意少犯错、赶进度还是获得认可，哪些动机会让自己想跳过核对",
+              "遇到5号缺单时，观察能否承认未知而不为证明自己补填"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.16",
@@ -28078,12 +28103,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用安全模拟的准确率、记录完整性和偏差返工表现，比用人格标签判断更有效。；O*NET 环境信号偏现实型，因为工作围绕设备、材料、手部操作和物理产出、它不是个人门槛。"
+              "不要以人格类型免除核工单、记录未知和异常报告，也不据类型筛人。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.17",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28092,13 +28117,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 环境信号偏现实型，因为工作围绕设备、材料、手部操作和物理产出、它不是个人门槛。；自测应看能否在设备节拍中同时注意材料、仪表和质量输出。"
+              "先练读单位、测量和题面比较：5号缺单、7号超过2mm，其余逐张核。这里2mm是虚构纸样条件，不是行业公差。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.18",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28107,12 +28131,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "自测应看能否在设备节拍中同时注意材料、仪表和质量输出。"
+              "纸样记录只说明本次练习；本页未设IQ或数学成绩录用门槛，不外推真实机台表现。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.19",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28121,8 +28145,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "内向外向都可以，关键是交接班、故障上报和质量异常时能准确传信息。",
-              "绕防护、未隔离能源就清堵，是需要改变的行为风险，不是性格类型。"
+              "按毫米单位计算纸B与纸A标记的水平距离，再与2mm题面上限比较",
+              "区分5号工单缺失与7号数值超限，不能把两者合并成同一推理"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.20",
@@ -28136,12 +28160,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "正向行为是按固定顺序上料、对位和检验，又不对异常麻木。；车间可能有噪声、污染物、长时间站立和重复动作，应在入职前现场确认。"
+              "遇到未知参数要保留未知并找对应角色确认，不能用推测替代工单或设备要求。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.21",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28150,13 +28174,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "车间可能有噪声、污染物、长时间站立和重复动作，应在入职前现场确认。"
+              "不设置情商分数门槛。可观察自己能否清楚交接已知事实、未知项、隔离编号及需复核对象。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.22",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28165,12 +28188,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "木材、纸品、橡胶、纺织或塑料车间的材料、气味、节拍和质量标准不同。"
+              "交接观察是编辑建议；本页未取得情商分数预测本职业表现的验证证据。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.23",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28179,8 +28202,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "用安全模拟的准确率、记录完整性和偏差返工表现，比用人格标签判断更有效。",
-              "O*NET 环境信号偏现实型，因为工作围绕设备、材料、手部操作和物理产出；它不是个人门槛。"
+              "交接5号缺单时，只说事实、未知项与需确认对象，不责怪同伴",
+              "同伴质疑7号结果时，先核标记与工单再回应，不靠争论替代证据"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.24",
@@ -28195,12 +28218,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "自测应看能否在设备节拍中同时注意材料、仪表和质量输出。"
+              "善于交流仍须记录并按职责升级，不能把沟通顺畅当质量、安全或操作授权。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.25",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28238,13 +28261,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "正向行为是按固定顺序上料、对位和检验，又不对异常麻木。"
+              "轧制机台操作"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28253,13 +28275,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "车间可能有噪声、污染物、长时间站立和重复动作，应在入职前现场确认。"
+              "编辑建议：愿意按顺序核材料、读数与记录，作为探索相邻机台工作的观察线索。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28268,13 +28289,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "木材、纸品、橡胶、纺织或塑料车间的材料、气味、节拍和质量标准不同。"
+              "轧制设备与胶黏工艺不同；纸样成绩不授予操作或维护权限。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28283,13 +28303,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用安全模拟的准确率、记录完整性和偏差返工表现，比用人格标签判断更有效。"
+              "挤压拉伸机台"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.31",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28298,13 +28317,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 环境信号偏现实型，因为工作围绕设备、材料、手部操作和物理产出；它不是个人门槛。"
+              "编辑建议：能逐项记录材料、规格与异常，可探索挤压拉伸作业的学习要求。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.32",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28313,13 +28331,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "自测应看能否在设备节拍中同时注意材料、仪表和质量输出。；内向外向都可以，关键是交接班、故障上报和质量异常时能准确传信息。"
+              "须另核目标设备培训与现场程序，不把对位纸样当工艺经验。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28328,13 +28345,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "内向外向都可以，关键是交接班、故障上报和质量异常时能准确传信息。"
+              "维修协作准备"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28343,13 +28359,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "绕防护、未隔离能源就清堵，是需要改变的行为风险，不是性格类型。"
+              "编辑建议：能区分观察到的异常与猜测原因，按编号提供可追溯信息。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.35",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28358,13 +28373,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "正向行为是按固定顺序上料、对位和检验，又不对异常麻木。；车间可能有噪声、污染物、长时间站立和重复动作，应在入职前现场确认。"
+              "维修另需实际能力与授权；停机不等于完成危险能量隔离。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28373,13 +28387,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "车间可能有噪声、污染物、长时间站立和重复动作，应在入职前现场确认。"
+              "故障信息交接"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.37",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28388,13 +28401,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "木材、纸品、橡胶、纺织或塑料车间的材料、气味、节拍和质量标准不同。"
+              "编辑建议：愿意核工单、记录已知与未知，再向对应角色完整交接。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28403,13 +28415,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用安全模拟的准确率、记录完整性和偏差返工表现，比用人格标签判断更有效。"
+              "向维修人员提供信息不等于获准排故、复机或放行。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.39",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28418,14 +28429,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 环境信号偏现实型，因为工作围绕设备、材料、手部操作和物理产出；它不是个人门槛。"
+              "切割冲压机台"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.40",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28434,14 +28443,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "自测应看能否在设备节拍中同时注意材料、仪表和质量输出。"
+              "编辑建议：能观察重复记录和规格核对是否符合自己的工作偏好。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.41",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28450,14 +28457,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "内向外向都可以，关键是交接班、故障上报和质量异常时能准确传信息。"
+              "机台危险、材料和程序另核；RC兴趣不能证明操作安全能力。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.42",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28466,13 +28471,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "绕防护、未隔离能源就清堵，是需要改变的行为风险，不是性格类型。"
+              "研磨抛光机台"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.43",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28481,13 +28485,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "正向行为是按固定顺序上料、对位和检验，又不对异常麻木。"
+              "编辑建议：愿意记录表面观察与检查条件，可探索研磨抛光岗位要求。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.44",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28496,13 +28499,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "车间可能有噪声、污染物、长时间站立和重复动作，应在入职前现场确认。"
+              "质量标准和设备权限另核，不能以胶黏纸样或人格分数替代。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28511,13 +28513,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "木材、纸品、橡胶、纺织或塑料车间的材料、气味、节拍和质量标准不同。"
+              "不限定性格类型。可观察是否愿意按工单、逐张核对并记录未知；这是编辑观察建议，不是录用或安全能力判定。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28526,13 +28527,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用安全模拟的准确率、记录完整性和偏差返工表现，比用人格标签判断更有效。；O*NET 环境信号偏现实型，因为工作围绕设备、材料、手部操作和物理产出、它不是个人门槛。"
+              "内向不是排除条件。练习时观察能否完整交接缺单和超阈值信息，不把交流偏好当能力结论。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.47",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28541,13 +28541,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 环境信号偏现实型，因为工作围绕设备、材料、手部操作和物理产出、它不是个人门槛。；自测应看能否在设备节拍中同时注意材料、仪表和质量输出。"
+              "外向不是通过条件。愿意沟通也须按编号记录、核事实与未知，不能靠口头热情替代检查。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28556,12 +28555,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "自测应看能否在设备节拍中同时注意材料、仪表和质量输出。；内向外向都可以，关键是交接班、故障上报和质量异常时能准确传信息。"
+              "本页不选最适合的MBTI。未取得本职业类型与绩效的验证证据；可用偏好讨论学习方式，不能据类型授予权限。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.49",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28570,13 +28569,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "内向外向都可以，关键是交接班、故障上报和质量异常时能准确传信息。；绕防护、未隔离能源就清堵，是需要改变的行为风险，不是性格类型。"
+              "O*NET当前职业兴趣为RC，指现实型与常规型工作环境线索；不是个人能力、录用或成绩门槛。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.50",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28585,12 +28583,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "绕防护、未隔离能源就清堵，是需要改变的行为风险，不是性格类型。；正向行为是按固定顺序上料、对位和检验，又不对异常麻木。"
+              "本页没有人格分数预测51-9191工作表现的验证证据。纸样完成情况仅记录本次练习，不外推真实机台绩效。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.51",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28599,13 +28597,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "正向行为是按固定顺序上料、对位和检验，又不对异常麻木。；车间可能有噪声、污染物、长时间站立和重复动作，应在入职前现场确认。"
+              "先练读单位、测量和按题面比较。纸样≤2mm是虚构条件，不是行业公差；数学标签不代替实际岗位学习核对。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.52",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28614,13 +28611,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "车间可能有噪声、污染物、长时间站立和重复动作，应在入职前现场确认。；木材、纸品、橡胶、纺织或塑料车间的材料、气味、节拍和质量标准不同。"
+              "不设置情商分数门槛。可观察交接是否完整、能否承认未知和按角色报告；这不是已验证的情商预测。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.53",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28629,12 +28625,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "木材、纸品、橡胶、纺织或塑料车间的材料、气味、节拍和质量标准不同。；用安全模拟的准确率、记录完整性和偏差返工表现，比用人格标签判断更有效。"
+              "九型可作为自我讨论材料；本页没有类型判定本职业适合性或绩效的验证证据，不据此筛人。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.54",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28643,12 +28639,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用安全模拟的准确率、记录完整性和偏差返工表现，比用人格标签判断更有效。；O*NET 环境信号偏现实型，因为工作围绕设备、材料、手部操作和物理产出、它不是个人门槛。"
+              "整理材料1工单与八件坐标、材料2检查表和交接、材料3复核记录。5号待确认、7号不满足纸面规则；其余六件逐件核工单及偏差，不凭编号猜通过。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.55",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28657,7 +28653,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 环境信号偏现实型，因为工作围绕设备、材料、手部操作和物理产出；它不是个人门槛。"
+              "编辑观察：愿意反复核工单、材料与标记，发现不一致仍如实记录；对实物对位和完整交接有持续兴趣，可继续探索。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.56",
@@ -28672,7 +28668,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "自测应看能否在设备节拍中同时注意材料、仪表和质量输出。"
+              "编辑观察：为赶进度补填缺失工单、把异常当作正常，或想绕防护自行清堵，均需慎重并先学习报告与授权边界。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.57",
@@ -28687,7 +28683,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "内向外向都可以，关键是交接班、故障上报和质量异常时能准确传信息。"
+              "用下方材料1的八件纸样坐标与工单，完成材料2检查表及交接摘要；先逐件核再对照材料3，观察自己是否愿意重复记录和承认未知。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.58",
@@ -28757,12 +28753,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用安全模拟的准确率、记录完整性和偏差返工表现，比用人格标签判断更有效。"
+              "认证目录用于查阅证书名称与适用范围；目录出现不等于该岗位必需、取得能力或获准上机。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.fit.personality-fit-block.63",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -28828,34 +28824,34 @@
                 "url": "#career-visual-group-ai-impact"
               },
               {
-                "entity": "51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
+                "entity": "O*NET51-9191任务、兴趣与准备度",
                 "id": "link-2",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/51-9191.00"
+                "url": "https://www.onetonline.org/link/summary/51-9191.00"
               },
               {
-                "entity": "Hot Technologies: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
+                "entity": "OSHA1910.147危险能量控制",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/hot_tech/51-9191.00"
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
               },
               {
-                "entity": "Industries: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
+                "entity": "O*NET51-9191任务、兴趣与准备度",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/51-9191.00"
+                "url": "https://www.onetonline.org/link/summary/51-9191.00"
               },
               {
-                "entity": "National Certifications: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
+                "entity": "OSHA1910.1200危险沟通",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localcert/51-9191.00"
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.1200"
               },
               {
-                "entity": "National Training: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
+                "entity": "GB/T35076-2018机械安全 生产设备安全通则",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/51-9191.00"
+                "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D82D89D3A7E05397BE0A0AB82A"
               }
             ]
           },
@@ -28906,15 +28902,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 支持职业任务与工作情境；OSHA 1910.147 说明美国控制危险能量的规则框架，但具体设备程序、SDS、PPE、授权与中国适用要求均须由雇主和当地规则确认。"
+              "六种情境为编辑示例，非事故率。O*NET支持职业任务；OSHA1910.147/1200仅美国适用能源控制与危险沟通框架；GB/T35076-2018是机械安全推荐性标准。具体SDS、PPE、设备程序与中国要求按现场核。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.risk.career-risk-cards.10",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-energy",
+            "revision-adhesive-hazcom",
+            "revision-adhesive-gb"
           ],
           "type": "prose"
         },
@@ -29175,13 +29171,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "漏检、误操作和肌肉骨骼不适的概率会上升。"
+              "可能出现漏检、误操作或身体不适；本页未测发生概率，不能从工资或招聘页推风险增幅。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.risk.career-risk-cards.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -29280,7 +29275,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "职业任务与工作情境"
+              "本职业任务与美国工作情境，不是事故率。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.risk.career-risk-cards.35",
@@ -29294,7 +29289,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "美国危险能量控制规则框架"
+              "OSHA1910.147仅美国适用维修保养与危险能量控制，不是中国规则或具体机台步骤。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.risk.career-risk-cards.36",
@@ -29308,7 +29303,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "材料标签、SDS、PPE 与设备程序须在现场核对"
+              "O*NET检查、测量及生产记录任务；隔离放行为编辑核对建议。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.risk.career-risk-cards.37",
@@ -29322,7 +29317,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "岗位授权、停机和维修边界以雇主书面程序为准"
+              "OSHA1910.1200美国危险化学品标签、SDS、培训；不据此指定配方或PPE。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.risk.career-risk-cards.38",
@@ -29336,7 +29331,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "虚构情景仅用于识别控制点，不替代培训"
+              "GB/T35076-2018机械安全推荐性标准目录；非职业分类、个人授权或已核厂规。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.risk.career-risk-cards.39",
@@ -29473,32 +29468,32 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构纸质练习：8 张已印中心标记的样片、可移除胶带、模拟工单和检查表。模拟工单写明：材料为“纸 A/纸 B”，数量 8，样片中心标记允许偏差不超过 2 mm；这只是纸面练习规则，不是工业工艺规格。",
-                  "已知：8 个编号样片、中心标记、模拟批次号和预期观察栏；未知：真实胶粘剂型号、设备参数、SDS、产品用途与实际质量标准。情景变化：第 5 张样片的模拟工单缺失，且第 7 张中心标记偏离超过 2 mm。",
-                  "限制：不使用工业胶粘剂、设备、能源隔离或化学品；只做纸质对位、记录和上报推理。"
+                  "材料1｜八件虚构纸样、工单与空表",
+                  "纸面版本P1。准备纸笔和毫米尺；每件由纸A、纸B两张60×40mm矩形组成，左下角为原点，x向右、y向上。用尺画矩形与十字标记，按同编号叠齐边缘后核标记；不用胶也可完成。所有A标记坐标均为(30,20)mm；B标记分别为：1号(30,20)、2号(31,20)、3号(28,20)、4号(30.5,20)、5号(31,20)、6号(28.5,20)、7号(33,20)、8号(32,20)，单位均mm。这里“中心标记”是对位记号，B记号可以偏离几何中心；横向偏差为|B的x−30|，全部y相同。可按给定坐标计算，也可按尺手绘观察；屏幕/打印缩放不是1:1量具，不能直接量截图当给定值。若手绘偏离目标，另记实际观察与差异，不偷改原输入。",
+                  "标签：1—8号均写材料纸A/纸B、批次P1、对应编号。虚构工单F01/F02/F03/F04/F06/F07/F08分别对应1/2/3/4/6/7/8号，每单均写材料纸A/纸B、批次P1、数量1对、60×40mm、A标记(30,20)mm、横向偏差≤2mm；七单这些字段齐全。5号只有标签和坐标，没有F05工单，不得从通用规则补造。空检查表抄八行，编号1—8；每行填写：标签材料/批次｜工单号或缺失｜给定B坐标｜计算偏差mm｜实际手绘观察（可不做）｜工单是否完整｜仅纸面分类｜下一步｜记录时间｜交接对象。交接对象在练习中固定为“模拟复核人”，时间填写实际练习时间。本页只提供虚构纸样规则，不提供真实胶剂、设备参数、SDS或工业质量标准。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "45 分钟内完成一张核对表：逐张记录编号、可见对位、工单是否齐全、是否满足题面 2 mm 纸面规则，以及下一步“通过/待确认/隔离并上报”。",
-                  "写明处理第 5 和第 7 张时的理由：缺失工单和超出题面规则都是待确认项，不能由练习者补填、放行或推断真实原因。",
-                  "输出一份交接摘要，列明已知观察、未知信息、隔离编号和需要有权人员确认的事项。"
+                  "材料2｜逐件检查与异常交接",
+                  "45分钟内先独立填写材料1八行空表。先核标签与对应工单，再由给定坐标逐件算横向偏差；偏差≤2mm且对应工单完整才记“符合纸面条件”，缺工单记“待确认”，偏差>2mm记“纸面规则不满足”。后两类在纸面标记隔离并交模拟复核人；不得补单或写真实产品放行。可选手绘只作另外的观察练习，不覆盖给定坐标记录。",
+                  "输出交接摘要：题面版本P1、编号与工单、观察/计算依据、资料缺失或超限、纸面分类和需模拟复核人确认的事项；没有真实根因证据就保留未知。完成独立记录后再读材料3，并逐项记原结论、参考依据及是否需改。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "参考推导：第 1—4、6、8 张若中心标记偏差不超过 2 mm 且工单完整，可记为“符合纸面练习条件”；这不等于真实产品合格。",
-                  "第 5 张工单缺失，应标为“待确认/隔离并上报”；第 7 张偏差超过 2 mm，应标为“纸面规则不满足/隔离并上报”。真实材料、设备和原因均属于未知。",
-                  "可复核证据是编号、工单状态、测量/观察、时间和交接对象；不得编造参数、材料性能、维修方法或能源控制步骤。"
+                  "材料3｜参考结果与逐项复核",
+                  "给定坐标偏差：1号0mm，2号1mm，3号2mm，4号0.5mm，5号1mm，6号1.5mm，7号3mm，8号2mm。逐件核：1/F01、2/F02、3/F03、4/F04、6/F06、8/F08的材料、批次、数量与标记字段齐全且≤2mm，故仅记符合纸面条件；3号与8号等于上限也符合。5号即使偏差1mm仍因无工单待确认，不能猜补；7/F07工单齐全但3mm>2mm，纸面规则不满足。5、7纸面隔离并交模拟复核人；六件符合不能外推工业合格、真实设备能力或放行。",
+                  "逐行复核工单与坐标原文、绝对值计算、等号、分类、时间和交接对象。若手绘观察与给定值不同，分开记录绘制误差，不能用它改题面答案。未知包括真实材料性能、设备参数、原因、SDS和实际产品标准；不能编维修、调参或能源控制步骤。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "答案只从虚构题面推导，不能用于真实生产、设备操作、化学品处理、质量放行或安全培训。",
-                  "关键资料缺失、出现异常或超出岗位授权时，练习答案应写“停止、记录并按雇主程序寻求有权人员”，而非自行清理、维修、调参或放行。"
+                  "材料4｜纸面练习的使用边界",
+                  "所有工单、批次与坐标都是编辑虚构输入，既非工业规格，也非安全培训、真实生产或质量批准。只能做纸面观察、计算、记录及交接；不用工业胶剂、设备或化学品，不实施能源隔离。真实现场异常按雇主程序停止、记录并交有权人员，网页不授予维修、改参、上机或放行权。"
                 ]
               }
             ]
@@ -29507,7 +29502,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "入行练习：一次完整的胶粘/粘合设备操作员与看护员任务任务（虚构材料）",
+          "title": "入行练习：八张虚构纸样的对位与工单复核",
           "type": "cards"
         },
         {
@@ -29518,31 +29513,29 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "作品一：虚构工单—标签核对表。核验：能逐项写清已知字段、缺失字段和待确认对象。",
-                  "作品二：8 张纸样检查表。核验：编号、可见观察、纸面阈值和隔离决定可以复查。",
-                  "作品三：异常交接单。核验：区分事实、未知项和需由有权人员决定的事项。"
+                  "作品一｜工单与标签核对",
+                  "使用材料1版本P1，逐件对应1—8号标签及F01/F02/F03/F04/F06/F07/F08，5号无单保持缺失；核材料、批次、数量和标记规则，列已知/未知，不补造F05。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "作品四：一页岗位边界说明。核验：能指出哪些工作可在监督下练习，哪些属于维修、能源控制、化学品和质量放行授权。",
-                  "所有材料均为虚构纸面数据；不以作品替代雇主上岗培训、设备授权、SDS 培训或质量放行资格。",
-                  "交付前自查：是否保留了未知项，是否避免了工艺参数和维修建议，是否给出停止、记录与升级路径。"
+                  "作品二｜八行检查与复核",
+                  "按材料2空表逐行填工单状态、B坐标、绝对偏差、纸面分类、下一步、时间与交接对象；独立完成后对照材料3。5号待确认、7号不满足，其他六件须核各自工单和数值；可选手绘观察另记，不改变给定输入。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "面试中展示的是核对、记录和交接的判断过程，不是“会操作任何机台”的承诺。",
-                  "可用一页摘要说明愿意在监督下承担的工作、仍需雇主培训的内容，以及不应越过的授权边界。"
+                  "作品三｜异常交接摘要",
+                  "以材料1—3同版输入写5号缺工单、7号3mm超限的事实与未知，纸面隔离并交模拟复核人；不猜根因、补单或放行。面试只展示记录和推理，不承诺能操作任何机台。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具可以是纸笔、表格或获准文档；不得把真实订单、配方、客户信息或可识别生产数据放入未获准系统。",
-                  "AI 若用于语言润色，只能处理虚构题面并由作者逐项复核；不能把生成内容当作设备、化学品或质量决定。"
+                  "作品四｜岗位边界说明",
+                  "引用材料4说明纸样不证明上机、维修、能源控制、SDS或质量放行资格。用纸笔/表格整理虚构输入；AI可润色但须逐项复核，不输入真实订单配方或个人生产数据，不把生成文本当设备决定。"
                 ]
               }
             ]
@@ -29620,43 +29613,43 @@
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第 2 天：完成一张虚构工单—标签核对表，标出已知、未知和缺失字段。",
-                  "产出：工单核对表；全程不用真实设备、化学品或生产数据。"
+                  "第2天｜核材料1的标签与七份工单",
+                  "产出：版本P1的八件工单核对表，逐件核材料、批次与数量；5号只登记缺单，不补造F05。全程不用真实设备、化学品或生产数据。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第 3 天：用 8 张纸样进行中心标记对位练习，只记录纸面观察。",
-                  "产出：纸样观察表；全程不用真实设备、化学品或生产数据。"
+                  "第3天｜逐件算偏差并选做手绘",
+                  "按材料1八件B坐标计算横向偏差，抄材料2八行空表；可用尺画纸A/纸B观察，实际绘制误差另记，不用截图缩放代替毫米值。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第 4 天：填写检查表，练习区分符合纸面条件、待确认与隔离并上报。",
-                  "产出：异常分类表；全程不用真实设备、化学品或生产数据。"
+                  "第4天｜完成分类并对照材料3",
+                  "独立记录后再核参考：六件逐件核单及≤2mm、5号待确认、7号不满足；记录具体错误和修正依据，没有错误也如实记无修改。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第 5 天：模拟缺失工单和超出纸面阈值，写出停止、记录和交接摘要。",
-                  "产出：交接摘要；全程不用真实设备、化学品或生产数据。"
+                  "第5天｜交接两个既有异常",
+                  "以P1输入写5号缺单、7号3mm超限的纸面隔离/交接摘要，列已知、未知与模拟复核人；不额外制造新情境或真实设备处置指令。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第 6 天：请成人同伴按题面复查表格，标记两处无法追溯或越界的表述。",
-                  "产出：同伴复核记录；全程不用真实设备、化学品或生产数据。"
+                  "第6天｜请同伴按同版材料复核",
+                  "交材料1—3和自己的八行记录，同伴逐件查坐标、工单、单位、等号与未知项；记录实际发现及修改，无问题写未发现，不为凑两处编造。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第 7 天：汇总四件虚构作品，选择下一步：确认岗位要求、寻找受监督机会或比较相邻岗位。",
-                  "产出：个人决策说明；全程不用真实设备、化学品或生产数据。"
+                  "第7天｜汇总四件虚构作品与下一步",
+                  "汇总同版工单核对、八行检查、异常交接和边界说明；只展示记录准备度。选择确认岗位要求、受监督学习或比较相邻岗位，不能以纸样成绩申请真实操作放行。"
                 ]
               }
             ]
@@ -29665,7 +29658,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "七天体验：用虚构材料完成一次胶粘/粘合设备操作员与看护员任务闭环",
+          "title": "七天体验：虚构纸样的检查与交接",
           "type": "timeline"
         },
         {
@@ -29758,23 +29751,23 @@
                 "不能把可见检查外推为根因或工艺批准。"
               ],
               [
-                "职业分类与本地要求核对",
+                "岗位与标准边界核对",
                 "所有求职者",
-                "避免把职业分类或美国资料误当准入规则",
-                "建议完成",
-                "工作地、行业或岗位变化时复核",
-                "查询主管部门、雇主与岗位公告",
-                "GB/T 35076-2018 和 O*NET 均不单独授予个人资格。"
+                "区分职业资料、设备安全标准与个人授权",
+                "编辑建议核对项",
+                "工作地、设备或岗位变化时复核",
+                "查询主管部门、雇主与设备要求",
+                "GB/T35076-2018为机械安全推荐性标准，O*NET为美国职业资料，均非个人执照。"
               ]
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.path.credential-decision.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-ep",
+            "revision-adhesive-gb",
+            "revision-adhesive-energy",
+            "revision-adhesive-hazcom"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -29785,16 +29778,17 @@
           "data": {
             "paragraphs": [
               "本表比较的是培训和授权的用途，不构成执照目录或雇佣保证。",
-              "O*NET 的美国职业资料不是中国法定门槛；GB/T 35076-2018 是职业分类标准，也不单独证明个人可维修、进行能源控制或质量放行。",
+              "O*NET是美国职业资料；GB/T35076-2018是机械安全推荐性标准，不是职业分类或个人准入证照。具体职责、维修、能源控制与质量放行按适用法域和现场授权核。",
               "优先核对工作地法规、雇主书面程序、机台/材料要求与培训记录；冲突或不明时向雇主和当地主管机构确认。",
               "任何需要实际设备、化学品、能源控制或质量放行的任务，均以现场授权和书面程序为前提。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.path.credential-boundary.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "revision-adhesive-gb",
+            "revision-adhesive-onet",
+            "revision-adhesive-energy",
+            "revision-adhesive-hazcom"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -29804,16 +29798,13 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "本页未取得同时包含雇主、角色、设备或材料、发布日期与截止日的可复核招聘公告，因此不展示“在招样本”。",
-              "比较表与纸面练习只帮助读者准备可核对的材料；申请前必须以目标雇主公告和现场程序核对机型、培训、班次、工资与授权。"
+              "证据不足：本次未取得雇主、角色、设备或材料、发布日期与截止日同核的可复核中国招聘公告；不展示在招样本。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.path.recruitment-sample.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-ep"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -29830,10 +29821,10 @@
                 "url": "https://www.onetonline.org/link/summary/51-9191.00"
               },
               {
-                "entity": "BLS：Occupational Employment and Wages, May 2024",
+                "entity": "BLS2025–2035职业预测51-9191独立行",
                 "id": "link-2",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/news.release/archives/ocwage_04022025.pdf"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "国家标准信息公共服务平台：GB/T 35076-2018",
@@ -29994,13 +29985,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "更可靠的入行路径是先确认工厂机型、材料、班次、SDS、培训与授权要求，再用虚构工单、记录和异常上报练习证明准备度。"
+              "美国BLS精确职业典型入门为高中或同等学历、无前置相关经验、中期在职培训；O*NET当前Job Zone1–2。中国取目标工厂机型材料班次与实际培训授权；纸样练习仅证明记录准备。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.path.career-path-block.20",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-ep",
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -30041,13 +30032,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "GB/T 35076-2018 是职业分类标准，不能单独证明个人具备执照、设备维修、能源隔离或放行签字权。"
+              "GB/T35076-2018是《机械安全 生产设备安全通则》推荐性标准，不是职业分类标准，也不单独授予个人维修、能源隔离或放行权。本轮核官方目录，具体程序按设备及雇主授权。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.path.career-path-block.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-gb"
           ],
           "type": "prose"
         },
@@ -30070,12 +30060,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国职业就业背景"
+              "BLS2025–2035精确职业行：美国典型高中学历、无前置经验、中期在职培训；不代替中国雇主要求。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.path.career-path-block.25",
           "source_refs": [
-            "onet"
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -30084,12 +30074,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "职业分类与法规边界"
+              "机械安全标准与美中岗位边界"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.path.career-path-block.26",
           "source_refs": [
-            "onet"
+            "revision-adhesive-gb",
+            "revision-adhesive-energy"
           ],
           "type": "prose"
         },
@@ -31009,28 +31000,28 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "Hot Technologies: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
+                "entity": "O*NET/BLS2025胶黏设备职业全国工资",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/hot_tech/51-9191.00"
+                "url": "https://www.onetonline.org/link/localwages/51-9191.00"
               },
               {
-                "entity": "Industries: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
+                "entity": "BLS2025–2035职业预测51-9191独立行",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/51-9191.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "National Certifications: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
+                "entity": "国家统计局2025城镇单位工资（制造业背景）",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localcert/51-9191.00"
+                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
               },
               {
-                "entity": "National Training: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
+                "entity": "O*NET51-9191任务、兴趣与准备度",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/51-9191.00"
+                "url": "https://www.onetonline.org/link/summary/51-9191.00"
               },
               {
                 "entity": "工业机械维修人员",
@@ -31096,14 +31087,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 BLS 预测为 未取得、这不是中国需求、全球增长率或个人录用保证。；年均岗位空缺包含退休和转岗的替代需求，不等于净新增岗位。"
+              "美国BLS2025–2035精确51-9191官方增长1.3%、净增约200人、年均1300空缺含补缺；2025全国工资中位46460美元。中国制造业工资为行业背景，不等职业需求。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "revision-adhesive-ep",
+            "revision-adhesive-wages",
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -31112,12 +31103,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "年均岗位空缺包含退休和转岗的替代需求，不等于净新增岗位。"
+              "美国"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -31126,12 +31117,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本页未提供可定位的 OECD 调查，故不作机构归因；一般行业或招聘信号不能推导该职业的 AI 就业因果。"
+              "2025–2035"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -31140,12 +31131,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "迁移证据是操作控制、运行监看、质量检验、生产记录和故障交接，再对照目标机台差距。"
+              "表列12.1→12.2千；官方净增0.2千、1.3%，数值独立舍入不自行相减。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -31154,12 +31145,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国工资仅是制造业和生产制造大类代理，不能证明本职业的招聘数量或薪资趋势。；美国 BLS 预测为 未取得、这不是中国需求、全球增长率或个人录用保证。"
+              "非AI因果、中国需求或个人录用率。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.12",
           "source_refs": [
-            "onet"
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -31168,12 +31159,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 BLS 预测为 2024–2034 增长 1.3%；年均岗位空缺约 1.3 千个；这不是中国需求、全球增长率或个人录用保证。"
+              "增长及官方净变化"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -31182,12 +31173,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "年均岗位空缺包含退休和转岗的替代需求，不等于净新增岗位。"
+              "51-9191精确职业"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -31196,12 +31187,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本页未提供可定位的 OECD 调查，故不作机构归因；一般行业或招聘信号不能推导该职业的 AI 就业因果。"
+              "12.1→12.2千；净增约200人（1.3%）"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -31210,12 +31201,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "迁移证据是操作控制、运行监看、质量检验、生产记录和故障交接，再对照目标机台差距。"
+              "美国"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -31224,12 +31215,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国工资仅是制造业和生产制造大类代理，不能证明本职业的招聘数量或薪资趋势。"
+              "2025"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -31238,12 +31229,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 BLS 预测为 未取得、这不是中国需求、全球增长率或个人录用保证。；年均岗位空缺包含退休和转岗的替代需求，不等于净新增岗位。"
+              "全国职业年薪中位46460美元；五分位为工资分布，不等资历或起薪。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -31252,12 +31243,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本页未提供可定位的 OECD 调查，故不作机构归因；一般行业或招聘信号不能推导该职业的 AI 就业因果。"
+              "职业×行业内中位本次未取得；不以全国分位代填。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -31266,12 +31257,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本页未提供可定位的 OECD 调查，故不作机构归因；一般行业或招聘信号不能推导该职业的 AI 就业因果。"
+              "全国工资中位"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -31280,12 +31271,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "迁移证据是操作控制、运行监看、质量检验、生产记录和故障交接，再对照目标机台差距。"
+              "51-9191精确职业"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -31294,12 +31285,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国工资仅是制造业和生产制造大类代理，不能证明本职业的招聘数量或薪资趋势。"
+              "46,460美元/年"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -31308,12 +31299,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 BLS 预测为 2024–2034 增长 1.3%；年均岗位空缺约 1.3 千个；这不是中国需求、全球增长率或个人录用保证。"
+              "中国大陆"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -31322,12 +31313,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "年均岗位空缺包含退休和转岗的替代需求，不等于净新增岗位。"
+              "2025统计；2026-05发布"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -31336,12 +31327,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本页未提供可定位的 OECD 调查，故不作机构归因；一般行业或招聘信号不能推导该职业的 AI 就业因果。"
+              "制造业非私营113594/私营76055元税前年平均，为全部岗位行业背景。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -31350,12 +31341,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "迁移证据是操作控制、运行监看、质量检验、生产记录和故障交接，再对照目标机台差距。；中国工资仅是制造业和生产制造大类代理，不能证明本职业的招聘数量或薪资趋势。"
+              "证据不足：中国本职业精确工资、就业预测未取得，行业均值不代填。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.26",
           "source_refs": [
-            "onet"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -31364,12 +31355,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国工资仅是制造业和生产制造大类代理，不能证明本职业的招聘数量或薪资趋势。"
+              "制造业行业年均工资"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -31378,12 +31369,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 BLS 预测为 2024–2034 增长 1.3%；年均岗位空缺约 1.3 千个；这不是中国需求、全球增长率或个人录用保证。"
+              "中国制造业全部岗位"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -31392,12 +31383,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "年均岗位空缺包含退休和转岗的替代需求，不等于净新增岗位。"
+              "行业113594 / 76055元/年"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -31406,12 +31397,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本页未提供可定位的 OECD 调查，故不作机构归因；一般行业或招聘信号不能推导该职业的 AI 就业因果。"
+              "O*NET展示2025BLS全国职业工资。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.30",
           "source_refs": [
-            "onet"
+            "revision-adhesive-wages"
           ],
           "type": "prose"
         },
@@ -31420,12 +31411,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "迁移证据是操作控制、运行监看、质量检验、生产记录和故障交接，再对照目标机台差距。；中国工资仅是制造业和生产制造大类代理，不能证明本职业的招聘数量或薪资趋势。"
+              "BLS2025–2035职业预测；含补缺空缺非净增。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.31",
           "source_refs": [
-            "onet"
+            "revision-adhesive-ep"
           ],
           "type": "prose"
         },
@@ -31434,12 +31425,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国工资仅是制造业和生产制造大类代理，不能证明本职业的招聘数量或薪资趋势。；美国 BLS 预测为 未取得、这不是中国需求、全球增长率或个人录用保证。"
+              "中国制造业非私营/私营行业均值，非本职业工资。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.32",
           "source_refs": [
-            "onet"
+            "revision-adhesive-nbs"
           ],
           "type": "prose"
         },
@@ -31448,12 +31439,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 BLS 预测为 2024–2034 增长 1.3%；年均岗位空缺约 1.3 千个；这不是中国需求、全球增长率或个人录用保证。"
+              "O*NET精确任务、兴趣与工作情境。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.33",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet"
           ],
           "type": "prose"
         },
@@ -31462,7 +31453,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补机械、电气、诊断工具、维修方法及雇主授权。"
+              "需要补机械、电气、诊断工具、维修方法及雇主授权。维修与危险能量控制不是普通操作岗位的自动延伸。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.34",
@@ -31492,7 +31483,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较远：维修与危险能量控制不是普通操作岗位的自动延伸。"
+              "编辑判断：距离较远"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.36",
@@ -31507,7 +31498,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要学习目标机台的材料行为、成形控制点和质量要求。"
+              "需要学习目标机台的材料行为、成形控制点和质量要求。可迁移操作习惯，但工艺、机台与培训需重新确认。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.37",
@@ -31537,7 +31528,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：可迁移操作习惯，但工艺、机台与培训需重新确认。"
+              "编辑判断：距离中等"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.39",
@@ -31552,7 +31543,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补金属轧制材料、辊系风险、目标机台控制和现场培训。"
+              "需要补金属轧制材料、辊系风险、目标机台控制和现场培训。同为设备操作，但材料与工艺控制不同。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.40",
@@ -31582,7 +31573,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同为设备操作，但材料与工艺控制不同。"
+              "编辑判断：距离中等"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.42",
@@ -31597,7 +31588,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补目标设备的危险区、防护、材料和质量控制要求。"
+              "需要补目标设备的危险区、防护、材料和质量控制要求。设备风险与工艺不同，不能凭相邻职业直接上岗。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.43",
@@ -31627,7 +31618,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：设备风险与工艺不同，不能凭相邻职业直接上岗。"
+              "编辑判断：距离中等"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.45",
@@ -31642,7 +31633,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补表面处理、粉尘/防护、量具和质量要求。"
+              "需要补表面处理、粉尘/防护、量具和质量要求。材料暴露和设备控制点不同，须完成对应培训。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.46",
@@ -31672,7 +31663,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：材料暴露和设备控制点不同，须完成对应培训。"
+              "编辑判断：距离中等"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.48",
@@ -31687,7 +31678,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补故障诊断、机械/电气维修、测试与危险能量控制授权。"
+              "需要补故障诊断、机械/电气维修、测试与危险能量控制授权。观察异常不等于具备维修或隔离资格。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.49",
@@ -31716,7 +31707,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较远：观察异常不等于具备维修或隔离资格。"
+              "编辑判断：距离较远"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.51",
@@ -31730,7 +31721,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补该机台材料、工艺、换型和检验标准。"
+              "需要补该机台材料、工艺、换型和检验标准。进入前仍应核对机台授权与材料培训。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.52",
@@ -31760,7 +31751,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：进入前仍应核对机台授权与材料培训。"
+              "编辑判断：距离中等"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.54",
@@ -31775,7 +31766,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补轧制工艺、材料规格、辊系风险与岗位培训。"
+              "需要补轧制工艺、材料规格、辊系风险与岗位培训。工艺转换不自动授予任何维修或质量放行权限。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.55",
@@ -31805,7 +31796,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：工艺转换不自动授予任何维修或质量放行权限。"
+              "编辑判断：距离中等"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.market-signals.market-signal-card.57",
@@ -31841,7 +31832,7 @@
                 "question_key": "career.faq.adhesive-bonding-machine-operators-and-tenders.role-comparison"
               },
               {
-                "answer": "可先看自己是否能接受重复核对、现场节奏、记录责任和异常交接。RIASEC 只提供工作环境语言，不能预测健康适配、绩效或录用。",
+                "answer": "可观察自己是否愿意重复核对、如实记录和交接异常。本页没有RIASEC预测该职业健康适配、绩效或录用的验证模型；兴趣只作探索线索。",
                 "id": "adhesive-bonding-machine-operators-and-tenders.faq.3",
                 "question": "怎样判断是否适合？",
                 "question_key": "career.faq.adhesive-bonding-machine-operators-and-tenders.fit"
@@ -31859,7 +31850,7 @@
                 "question_key": "career.faq.adhesive-bonding-machine-operators-and-tenders.human-control"
               },
               {
-                "answer": "页面提供的中国数据是制造业或生产制造大类代理，不能当作该细分职业的中位数、招聘数量或个人薪资承诺。",
+                "answer": "当前中国工资板块为2025制造业非私营113594元、私营76055元税前年均，均含行业全部岗位；不是本职业工资。历史2024生产制造职业大类也不是私营制造业，不能混用。",
                 "id": "adhesive-bonding-machine-operators-and-tenders.faq.6",
                 "question": "中国大陆工资如何理解？",
                 "question_key": "career.faq.adhesive-bonding-machine-operators-and-tenders.china-pay"
@@ -31871,7 +31862,7 @@
                 "question_key": "career.faq.adhesive-bonding-machine-operators-and-tenders.us-pay"
               },
               {
-                "answer": "先核对目标工厂的机型、材料、班次、培训和授权要求；用虚构工单、检查表和交接练习展示可复核的准备度。",
+                "answer": "先核目标工厂机型、材料、班次、培训与授权。可用本页入行练习材料1—4的P1八件坐标、七份工单和空表，先独立检查再对照参考，整理四件虚构作品；5号缺单、7号超限，纸面结果不证明真实设备能力或授权。",
                 "id": "adhesive-bonding-machine-operators-and-tenders.faq.8",
                 "question": "入行需要什么准备？",
                 "question_key": "career.faq.adhesive-bonding-machine-operators-and-tenders.education-path"
@@ -31907,12 +31898,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "胶粘/粘合设备操作员与看护员的职业专属任务、输入、输出和责任边界应按来源核对。"
+              "本轮编辑核职业对象、原生消费者与纸样题面—参考交付—作品—七日；不冒充真实工厂操作或独立验收。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.sources.source-card.1",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-wages",
+            "revision-adhesive-ep",
+            "revision-adhesive-nbs",
+            "revision-adhesive-gb",
+            "revision-adhesive-energy",
+            "revision-adhesive-hazcom"
           ],
           "type": "prose"
         },
@@ -31921,14 +31918,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "胶粘/粘合设备操作员与看护员的职业专属任务、输入、输出和责任边界应按来源核对。；胶粘/粘合设备操作员与看护员的职业专属任务、输入、输出和责任边界应按来源核对。"
+              "精确统计：O*NET/BLS2025工资与BLS2025–2035预测；中国NBS制造业行业均值只作背景。；职业级AI效果和中国精确工资招聘留可见缺口。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.sources.source-card.2",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-wages",
+            "revision-adhesive-ep",
+            "revision-adhesive-nbs",
+            "revision-adhesive-gb",
+            "revision-adhesive-energy",
+            "revision-adhesive-hazcom"
           ],
           "type": "prose"
         },
@@ -31937,12 +31938,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "胶粘/粘合设备操作员与看护员的职业专属任务、输入、输出和责任边界应按来源核对。；胶粘/粘合设备操作员与看护员的职业专属任务、输入、输出和责任边界应按来源核对。"
+              "本轮核读O*NET、工资原表、BLS预测、NBS、GB标准目录及OSHA相关范围（2026-10-08）。；原共享来源条目日期保留，不能冒充本轮重新研究。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-wages",
+            "revision-adhesive-ep",
+            "revision-adhesive-nbs",
+            "revision-adhesive-gb",
+            "revision-adhesive-energy",
+            "revision-adhesive-hazcom"
           ],
           "type": "prose"
         },
@@ -31951,13 +31958,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "胶粘/粘合设备操作员与看护员的职业专属任务、输入、输出和责任边界应按来源核对。；胶粘/粘合设备操作员与看护员的职业专属任务、输入、输出和责任边界应按来源核对。"
+              "美国工资按2025全国职业分布理解；就业使用2025基期与2025–2035预测。中国2025制造业均值只作行业背景，不是本职业工资。历史统计期不能混入当前指标。"
             ]
           },
           "id": "adhesive-bonding-machine-operators-and-tenders.sources.source-card.4",
           "source_refs": [
-            "onet",
-            "onet"
+            "revision-adhesive-onet",
+            "revision-adhesive-wages",
+            "revision-adhesive-ep",
+            "revision-adhesive-nbs",
+            "revision-adhesive-gb",
+            "revision-adhesive-energy",
+            "revision-adhesive-hazcom"
           ],
           "type": "prose"
         }
@@ -32042,7 +32054,7 @@
                 "limitation": "工资和预测均为美国职业统计，不证明中国同名岗位、个人起薪、维修或安全授权。",
                 "market": "美国",
                 "name": "Adhesive Bonding Machine Operators and Tenders (51-9191.00)",
-                "period": "当前页面；2025 工资、2024–2034 就业预测",
+                "period": "当前职业资料；2025工资、2025–2035就业预测",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-9191.00"
@@ -32088,7 +32100,7 @@
                 "evidence_type": "official industry distribution",
                 "id": "oews",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "Industries: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
                 "period": "current page; accessed 2026-09-04",
                 "publisher": "O*NET OnLine",
@@ -32098,8 +32110,8 @@
               {
                 "accessed_at": "2026-09-13",
                 "details": [
-                  "official certification discovery",
-                  "current page; accessed 2026-09-04"
+                  "国家统计局2024城镇单位工资发布",
+                  "制造业非私营行业均值与规模以上企业生产制造职业大类均值，二者范围不同。"
                 ],
                 "evidence_type": "官方工资统计",
                 "id": "nbs",
@@ -32120,7 +32132,7 @@
                 "evidence_type": "official local training discovery",
                 "id": "cnclass",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "National Training: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
                 "period": "current page; accessed 2026-09-04",
                 "publisher": "O*NET OnLine",
@@ -32152,7 +32164,7 @@
                 "evidence_type": "official occupation summary",
                 "id": "facilities",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
                 "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
                 "publisher": "O*NET OnLine",
@@ -32168,7 +32180,7 @@
                 "evidence_type": "official custom occupation profile",
                 "id": "operations",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
                 "period": "current page; accessed 2026-09-04",
                 "publisher": "O*NET OnLine",
@@ -32184,7 +32196,7 @@
                 "evidence_type": "official occupation details",
                 "id": "hr",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
                 "period": "current page; accessed 2026-09-04",
                 "publisher": "O*NET OnLine",
@@ -32200,7 +32212,7 @@
                 "evidence_type": "official technology profile",
                 "id": "health",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "Hot Technologies: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
                 "period": "current page; accessed 2026-09-04",
                 "publisher": "O*NET OnLine",
@@ -32264,7 +32276,7 @@
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "arxiv",
                 "limitation": "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "National Wages: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
                 "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
@@ -32280,7 +32292,7 @@
                 "evidence_type": "official occupation summary",
                 "id": "weforum",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
                 "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
                 "publisher": "O*NET OnLine",
@@ -32296,7 +32308,7 @@
                 "evidence_type": "official custom occupation profile",
                 "id": "employer",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
                 "period": "current page; accessed 2026-09-04",
                 "publisher": "O*NET OnLine",
@@ -32312,7 +32324,7 @@
                 "evidence_type": "official occupation details",
                 "id": "purchasing-managers",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
                 "period": "current page; accessed 2026-09-04",
                 "publisher": "O*NET OnLine",
@@ -32328,7 +32340,7 @@
                 "evidence_type": "official technology profile",
                 "id": "r2-pay-1",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "Hot Technologies: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
                 "period": "current page; accessed 2026-09-04",
                 "publisher": "O*NET OnLine",
@@ -32344,7 +32356,7 @@
                 "evidence_type": "official industry distribution",
                 "id": "r2-pay-2",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "Industries: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
                 "period": "current page; accessed 2026-09-04",
                 "publisher": "O*NET OnLine",
@@ -32360,7 +32372,7 @@
                 "evidence_type": "official certification discovery",
                 "id": "r2-pay-3",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "National Certifications: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
                 "period": "current page; accessed 2026-09-04",
                 "publisher": "O*NET OnLine",
@@ -32376,7 +32388,7 @@
                 "evidence_type": "official local training discovery",
                 "id": "census",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "National Training: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
                 "period": "current page; accessed 2026-09-04",
                 "publisher": "O*NET OnLine",
@@ -32392,7 +32404,7 @@
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "msresearch",
                 "limitation": "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "National Wages: 51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
                 "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
@@ -32408,7 +32420,7 @@
                 "evidence_type": "official occupation summary",
                 "id": "onet-wages",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
                 "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
                 "publisher": "O*NET OnLine",
@@ -32424,12 +32436,208 @@
                 "evidence_type": "official custom occupation profile",
                 "id": "archivists",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "51-9191.00 - Adhesive Bonding Machine Operators and Tenders",
                 "period": "current page; accessed 2026-09-04",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/custom/51-9191.00"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "制造业非私营113594、私营76055元税前年均。"
+                ],
+                "evidence_type": "官方资料，范围按条目",
+                "id": "revision-adhesive-nbs",
+                "limitation": "全部制造业岗位，非胶黏设备操作员工资；5人及以上法人单位，不含个体与自由职业。",
+                "market": "中国大陆",
+                "name": "国家统计局2025城镇单位工资（制造业背景）",
+                "period": "2025统计；2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "表列12.1千→12.2千；官方净增0.2千、增长1.3%；年均空缺1.3千；高中、无前置经验、中期在职培训。"
+                ],
+                "evidence_type": "官方资料，范围按条目",
+                "id": "revision-adhesive-ep",
+                "limitation": "千人数据独立舍入，净变化用官方0.2千，不从12.2-12.1自行推100人；空缺含补缺，非AI因果。",
+                "market": "美国",
+                "name": "BLS2025–2035职业预测51-9191独立行",
+                "period": "2025–2035",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "年薪10/25/50/75/90分位31460/37220/46460/53610/60810美元；时薪15.12/17.90/22.34/25.77/29.24。"
+                ],
+                "evidence_type": "官方资料，范围按条目",
+                "id": "revision-adhesive-wages",
+                "limitation": "分位非资历职级线，不是个人报价或实发；不以时薪推实际年工时。",
+                "market": "美国",
+                "name": "O*NET/BLS2025胶黏设备职业全国工资",
+                "period": "2025年5月",
+                "publisher": "O*NET OnLine / BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/51-9191.00"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "材料对位、按规格调设备、看护、试生产、测量检查、生产记录；兴趣RC；Job Zone1–2。"
+                ],
+                "evidence_type": "官方资料，范围按条目",
+                "id": "revision-adhesive-onet",
+                "limitation": "岗位任务可含清理维护等，不凭网页授予现场维修/能源隔离授权；美国自报情境非中国事故率。",
+                "market": "美国",
+                "name": "O*NET51-9191任务、兴趣与准备度",
+                "period": "2026档案",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-9191.00"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "官方目录核名称、推荐性标准、2018-05-14发布、2018-12-01实施。"
+                ],
+                "evidence_type": "官方资料，范围按条目",
+                "id": "revision-adhesive-gb",
+                "limitation": "本次核目录未据全文编现场操作步骤；不是职业分类标准或个人准入证照。",
+                "market": "中国大陆",
+                "name": "GB/T35076-2018机械安全 生产设备安全通则",
+                "period": "2018公布实施；2025复审继续有效",
+                "publisher": "国家标准信息公共服务平台",
+                "scope": "contextual",
+                "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D82D89D3A7E05397BE0A0AB82A"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "维修保养情境、授权与受影响员工区分、能源控制程序和培训。"
+                ],
+                "evidence_type": "官方资料，范围按条目",
+                "id": "revision-adhesive-energy",
+                "limitation": "适用范围与例外按原文；不是中国法规或任意设备隔离操作步骤，停机不等于已安全隔离。",
+                "market": "美国",
+                "name": "OSHA1910.147危险能量控制",
+                "period": "现行文本查阅2026-10-08",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "工作地危险化学品标签、SDS与培训要求，g条SDS信息、h条培训。"
+                ],
+                "evidence_type": "官方资料，范围按条目",
+                "id": "revision-adhesive-hazcom",
+                "limitation": "按危险化学品和适用法域判断，非本职业所有胶黏剂统一配方/PPE或中国法定义务。",
+                "market": "美国",
+                "name": "OSHA1910.1200危险沟通",
+                "period": "现行文本查阅2026-10-08",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.1200"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "装配与制造职业组，包括多种装配岗位；不是单一51-9191职业或中国权限。"
+                ],
+                "evidence_type": "官方相邻职业任务",
+                "id": "revision-adhesive-neighbor-1",
+                "limitation": "用于对应相邻方向任务比较，不证明中国职位映射、个人能力、工资或统一资格。",
+                "market": "美国",
+                "name": "美国装配与制造工（职业组）",
+                "period": "当前任务资料；核查2026-10-08",
+                "publisher": "BLS OOH",
+                "scope": "group_background",
+                "url": "https://www.bls.gov/ooh/production/assemblers-and-fabricators.htm"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "按工单设置机台、成形材料并测量产品；不同于胶黏连接。"
+                ],
+                "evidence_type": "官方相邻职业任务",
+                "id": "revision-adhesive-neighbor-2",
+                "limitation": "用于对应相邻方向任务比较，不证明中国职位映射、个人能力、工资或统一资格。",
+                "market": "美国",
+                "name": "美国成形/挤压/压制机台51-9041",
+                "period": "当前任务资料；核查2026-10-08",
+                "publisher": "O*NET OnLine",
+                "scope": "adjacent_occupation",
+                "url": "https://www.onetonline.org/link/summary/51-9041.00"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "依据规格检查、测量和记录结果；具体放行权限依企业。"
+                ],
+                "evidence_type": "官方相邻职业任务",
+                "id": "revision-adhesive-neighbor-3",
+                "limitation": "用于对应相邻方向任务比较，不证明中国职位映射、个人能力、工资或统一资格。",
+                "market": "美国",
+                "name": "美国检查/测试人员51-9061",
+                "period": "当前任务资料；核查2026-10-08",
+                "publisher": "O*NET OnLine",
+                "scope": "adjacent_occupation",
+                "url": "https://www.onetonline.org/link/summary/51-9061.00"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "机械检查、诊断、维修及功能测试；不是普通操作员自动获准的任务。"
+                ],
+                "evidence_type": "官方相邻职业任务",
+                "id": "revision-adhesive-neighbor-4",
+                "limitation": "用于对应相邻方向任务比较，不证明中国职位映射、个人能力、工资或统一资格。",
+                "market": "美国",
+                "name": "美国工业机械维修49-9041",
+                "period": "当前任务资料；核查2026-10-08",
+                "publisher": "O*NET OnLine",
+                "scope": "adjacent_occupation",
+                "url": "https://www.onetonline.org/link/summary/49-9041.00"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "包装/灌装、标识及生产记录；与胶黏材料连接不同。"
+                ],
+                "evidence_type": "官方相邻职业任务",
+                "id": "revision-adhesive-neighbor-5",
+                "limitation": "用于对应相邻方向任务比较，不证明中国职位映射、个人能力、工资或统一资格。",
+                "market": "美国",
+                "name": "美国包装/灌装设备操作51-9111",
+                "period": "当前任务资料；核查2026-10-08",
+                "publisher": "O*NET OnLine",
+                "scope": "adjacent_occupation",
+                "url": "https://www.onetonline.org/link/summary/51-9111.00"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "本轮实际核目录分类；行业场景任务另据O*NET51-9191材料与胶合任务作编辑归纳。",
+                  "四个静态明细URL本轮未能访问，保留每行精确中位缺口；不写成官方未发布。"
+                ],
+                "evidence_type": "official statistical directory",
+                "id": "revision-adhesive-naics",
+                "limitation": "目录支持NAICS321木制品、322纸品、3261塑料制品、3262橡胶制品分类；未取得四行业的51-9191工资中位，不由目录推值、行业排名或个人工资。",
+                "market": "美国",
+                "name": "BLS May 2025行业分类与职业工资查询目录",
+                "period": "May 2025目录",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "industry_classification_background",
+                "url": "https://www.bls.gov/oes/current/oessrci.htm"
               }
             ]
           },
@@ -34303,12 +34511,12 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "胶粘/粘合设备操作员与看护员任务工作可以分成哪几类？",
+            "question": "粘合设备操作包含哪些任务？",
             "table": {
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "胶粘/粘合设备操作员与看护员核心任务",
+                  "label": "工单与生产准备",
                   "secondary_value": {
                     "$item": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.2",
                     "block": "profile",
@@ -34324,7 +34532,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "胶粘/粘合设备操作员与看护员的数据与协作任务",
+                  "label": "看护与质量交接",
                   "secondary_value": {
                     "$item": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.4",
                     "block": "profile",
@@ -34340,7 +34548,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "记录与信息管理",
+                  "label": "生产记录与异常移交",
                   "secondary_value": null,
                   "value": {
                     "$item": "adhesive-bonding-machine-operators-and-tenders.profile.career-quick-answers-block.6",
@@ -34360,7 +34568,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "胶粘/粘合设备操作员与看护员和相邻岗位的边界在哪里？",
+            "question": "和工业机械维修人员有什么区别？",
             "table": {
               "rows": [
                 {
@@ -34677,7 +34885,7 @@
             },
             "evidence_refs": [
               "onet",
-              "privacy"
+              "bls"
             ],
             "id": "record-version",
             "mitigation": {
@@ -34708,8 +34916,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "privacy",
-              "employer"
+              "onet",
+              "privacy"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34740,8 +34948,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "facilities",
-              "onet"
+              "onet",
+              "facilities"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -34772,7 +34980,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
+              "onet",
               "employer"
             ],
             "id": "single-coverage",
@@ -34946,7 +35154,7 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "数据与口径",
+              "指标": "岗位核对重点",
               "数值": {
                 "$item": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.7",
                 "block": "china-salary",
@@ -34961,7 +35169,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "统计年度与覆盖",
               "数值": {
                 "$item": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.9",
                 "block": "china-salary",
@@ -34976,7 +35184,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "职业范围",
               "数值": {
                 "$item": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.11",
                 "block": "china-salary",
@@ -34991,7 +35199,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "招聘缺口",
               "数值": {
                 "$item": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.13",
                 "block": "china-salary",
@@ -35006,7 +35214,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "使用边界",
               "数值": {
                 "$item": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.15",
                 "block": "china-salary",
@@ -35021,7 +35229,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "AI工资证据",
               "数值": {
                 "$item": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.17",
                 "block": "china-salary",
@@ -35036,7 +35244,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "基础准备",
               "数值": {
                 "$item": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.19",
                 "block": "china-salary",
@@ -35051,7 +35259,7 @@
               }
             },
             {
-              "指标": "数据与口径",
+              "指标": "雇主培训",
               "数值": {
                 "$item": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.21",
                 "block": "china-salary",
@@ -35299,12 +35507,12 @@
           "ui": {
             "ai_heading": "AI 与中国工资：没有可复核评分",
             "driver_heading": "相关制造场景与岗位边界",
-            "official_heading": "中国工资：职业精确统计缺口与官方代理",
-            "scenario_caption": "教育、雇主培训、经验与授权的核对边界",
-            "scenario_heading": "入门准备与岗位核对（非薪资分类）",
+            "official_heading": "制造业年平均工资（2025，行业背景）",
+            "scenario_caption": "核对事项，不推中国统一学历分布",
+            "scenario_heading": "岗位准备与授权如何核对？",
             "scenario_interpretation_label": "不应外推的结论",
-            "scenario_role_label": "准备环节",
-            "scenario_value_label": "可核对的岗位事项"
+            "scenario_role_label": "核对事项",
+            "scenario_value_label": "对应准备"
           },
           "us_growth": {
             "$item": "adhesive-bonding-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.58",
@@ -35329,7 +35537,7 @@
         },
         "bls_table": [
           {
-            "fact_ref": "us-wage-low10-2025",
+            "fact_ref": "revision-adhesive-p10",
             "指标": "薪资 · 10 分位",
             "数值": {
               "$item": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.9",
@@ -35345,7 +35553,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-q25-2025",
+            "fact_ref": "revision-adhesive-p25",
             "指标": "薪资 · 25 分位",
             "数值": {
               "$item": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.11",
@@ -35361,7 +35569,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-2025",
+            "fact_ref": "revision-adhesive-p50",
             "指标": "薪资 · 中位数",
             "数值": {
               "$item": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.13",
@@ -35377,7 +35585,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-q75-2025",
+            "fact_ref": "revision-adhesive-p75",
             "指标": "薪资 · 75 分位",
             "数值": {
               "$item": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.15",
@@ -35393,7 +35601,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-high10-2025",
+            "fact_ref": "revision-adhesive-p90",
             "指标": "薪资 · 90 分位",
             "数值": {
               "$item": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.17",
@@ -35409,7 +35617,7 @@
             }
           },
           {
-            "fact_ref": "us-employment-2025",
+            "fact_ref": "revision-adhesive-ep-5",
             "指标": "就业 · 就业规模",
             "数值": {
               "$item": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.19",
@@ -35425,7 +35633,7 @@
             }
           },
           {
-            "fact_ref": "us-growth-2025-2035",
+            "fact_ref": "revision-adhesive-ep-6",
             "指标": "就业 · 增长率",
             "数值": {
               "$item": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.21",
@@ -35441,7 +35649,7 @@
             }
           },
           {
-            "fact_ref": "us-openings-2025-2035",
+            "fact_ref": "revision-adhesive-ep-7",
             "指标": "就业 · 年均职位空缺",
             "数值": {
               "$item": "adhesive-bonding-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.23",
@@ -35521,9 +35729,9 @@
           "type": "prose"
         },
         "heading": "美国胶粘/粘合设备操作员与看护员工资多少？",
-        "industry_heading": "不同行业的美国工资差多少？",
+        "industry_heading": "四种制造场景与职业工资中位缺口",
         "industry_period": {
-          "$fact": "us-wage-2025",
+          "$fact": "revision-adhesive-p50",
           "field": "period"
         },
         "industry_rows": [
@@ -35612,7 +35820,7 @@
             }
           }
         ],
-        "industry_value_label": "该行业内本职业工资中位数",
+        "industry_value_label": "本次核查结果",
         "interpretation_heading": "这组美国工资数字应当怎么理解？",
         "interpretation_rows": [
           {
@@ -35660,7 +35868,7 @@
         },
         "outlook_heading": "美国就业前景",
         "outlook_period": {
-          "$fact": "us-growth-2025-2035",
+          "$fact": "revision-adhesive-ep-6",
           "field": "period"
         },
         "wage_column_labels": [
@@ -35669,7 +35877,7 @@
           "折算边界",
           "怎样理解这个位置"
         ],
-        "wage_heading": "美国工资分布",
+        "wage_heading": "美国精确职业工资分布（2025）",
         "wage_tiers": [
           {
             "equivalent": "官方年工资，非个人月收入",
@@ -35681,7 +35889,7 @@
             },
             "label": "最低 10%",
             "value": {
-              "$fact": "us-wage-low10-2025",
+              "$fact": "revision-adhesive-p10",
               "field": "display_value"
             }
           },
@@ -35695,7 +35903,7 @@
             },
             "label": "中位数（50%）",
             "value": {
-              "$fact": "us-wage-2025",
+              "$fact": "revision-adhesive-p50",
               "field": "display_value"
             }
           },
@@ -35709,7 +35917,7 @@
             },
             "label": "最高 10%",
             "value": {
-              "$fact": "us-wage-high10-2025",
+              "$fact": "revision-adhesive-p90",
               "field": "display_value"
             }
           }
@@ -37240,6 +37448,9 @@
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪些工作方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
+      "interface.profile.comparison.dimension_header": "比较维度",
+      "interface.profile.comparison.primary_header": "粘合设备操作（美国51-9191）",
+      "interface.profile.comparison.secondary_header": "工业机械维修（美国49-9041）",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37720,6 +37931,126 @@
         "source_refs": [
           "onet"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "31,460美元/年（2025第10分位）",
+        "fact_id": "revision-adhesive-p10",
+        "market": "美国",
+        "measure": "年工资第10分位",
+        "occupation_scope": "51-9191精确职业",
+        "period": "2025",
+        "source_refs": [
+          "revision-adhesive-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "37,220美元/年（2025第25分位）",
+        "fact_id": "revision-adhesive-p25",
+        "market": "美国",
+        "measure": "年工资第25分位",
+        "occupation_scope": "51-9191精确职业",
+        "period": "2025",
+        "source_refs": [
+          "revision-adhesive-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "46,460美元/年（2025第50分位）",
+        "fact_id": "revision-adhesive-p50",
+        "market": "美国",
+        "measure": "年工资第50分位",
+        "occupation_scope": "51-9191精确职业",
+        "period": "2025",
+        "source_refs": [
+          "revision-adhesive-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "53,610美元/年（2025第75分位）",
+        "fact_id": "revision-adhesive-p75",
+        "market": "美国",
+        "measure": "年工资第75分位",
+        "occupation_scope": "51-9191精确职业",
+        "period": "2025",
+        "source_refs": [
+          "revision-adhesive-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "60,810美元/年（2025第90分位）",
+        "fact_id": "revision-adhesive-p90",
+        "market": "美国",
+        "measure": "年工资第90分位",
+        "occupation_scope": "51-9191精确职业",
+        "period": "2025",
+        "source_refs": [
+          "revision-adhesive-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "12,100人（EP2025基期，千人舍入）",
+        "fact_id": "revision-adhesive-ep-5",
+        "market": "美国",
+        "measure": "基期就业",
+        "occupation_scope": "51-9191精确职业",
+        "period": "2025基期",
+        "source_refs": [
+          "revision-adhesive-ep"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025–2035增长1.3%；官方净增约200人",
+        "fact_id": "revision-adhesive-ep-6",
+        "market": "美国",
+        "measure": "增长及官方净变化",
+        "occupation_scope": "51-9191精确职业",
+        "period": "2025–2035",
+        "source_refs": [
+          "revision-adhesive-ep"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均1,300空缺（2025–2035，含补缺）",
+        "fact_id": "revision-adhesive-ep-7",
+        "market": "美国",
+        "measure": "年均职位空缺",
+        "occupation_scope": "51-9191精确职业",
+        "period": "2025–2035",
+        "source_refs": [
+          "revision-adhesive-ep"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "113,594元/年",
+        "fact_id": "revision-adhesive-cn-0",
+        "market": "中国大陆",
+        "measure": "行业税前年平均工资",
+        "occupation_scope": "制造业全部岗位，非胶黏设备职业",
+        "period": "2025",
+        "source_refs": [
+          "revision-adhesive-nbs"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "76,055元/年",
+        "fact_id": "revision-adhesive-cn-1",
+        "market": "中国大陆",
+        "measure": "行业税前年平均工资",
+        "occupation_scope": "制造业全部岗位，非胶黏设备职业",
+        "period": "2025",
+        "source_refs": [
+          "revision-adhesive-nbs"
+        ]
       }
     ]
   },
@@ -37728,35 +38059,35 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
-      "胶粘/粘合设备操作员与看护员任务 · 胶粘/粘合设备操作员与看护员的模型与结果复核 · 胶粘/粘合设备操作员与看护员的假设与版本记录",
-      "胶粘/粘合设备操作员与看护员的跨团队协作 / 胶粘/粘合设备操作员与看护员的异常升级 / 胶粘/粘合设备操作员与看护员的流程改善",
+      "工单与材料核对 · 设备看护 · 质量记录",
+      "权限边界明确 · 异常交接",
       "数据缺口保留 · 权限边界标注"
     ],
     "metrics": [
       {
         "availability": "available",
-        "fact_ref": "us-wage-2025",
+        "fact_ref": "revision-adhesive-p50",
         "key": "us_pay",
         "label": "美国年薪中位数"
       },
       {
         "availability": "available",
-        "fact_ref": "us-growth-2025-2035",
+        "fact_ref": "revision-adhesive-ep-6",
         "key": "us_growth",
         "label": "美国就业增长"
       },
       {
         "availability": "available",
-        "fact_ref": "us-employment-2025",
+        "fact_ref": "revision-adhesive-ep-5",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国就业基期"
       },
       {
         "availability": "available",
-        "fact_ref": "us-openings-2025-2035",
+        "fact_ref": "revision-adhesive-ep-7",
         "key": "us_openings",
         "label": "美国年均职位空缺"
       },
@@ -37779,7 +38110,7 @@
       "text": "胶粘/粘合设备操作员与看护员"
     }
   },
-  "source_content_sha256": "e9fce729e86ca42f07f4b4ec8d811b9d41a92f9a3a5f3f994b18eaa490a87fc7",
+  "source_content_sha256": "7e83d551049270c8e04072870dcd8916cf1e599e79100b72e6e25f78b838f9c0",
   "subject": {
     "canonical_slug": "adhesive-bonding-machine-operators-and-tenders",
     "name": "胶粘/粘合设备操作员与看护员",

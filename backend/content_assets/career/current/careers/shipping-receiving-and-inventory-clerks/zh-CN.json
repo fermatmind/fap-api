@@ -28091,7 +28091,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI偏好可用于讨论表达方式，不能预测盘点准确、设备安全或库存判断。让同伴仅凭差异单复述应到、实到、损坏和待办更有依据。"
+              "MBTI偏好可用于讨论表达方式；本页未取得其预测本职业盘点准确、设备安全或库存判断的效度证据。让同伴凭差异单复述应到、实到、破损和待办，可观察具体任务表现。"
             ]
           },
           "id": "shipping-receiving-and-inventory-clerks.fit.personality-fit-block.10",
@@ -29578,7 +29578,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "建议核对的任务证据",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -36033,7 +36033,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最低 10%",
+            "label": "第10百分位（P10）",
             "value": {
               "$fact": "us-wage-low10-2025",
               "field": "display_value"
@@ -36061,7 +36061,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最高 10%",
+            "label": "第90百分位（P90）",
             "value": {
               "$fact": "us-wage-high10-2025",
               "field": "display_value"
@@ -37968,7 +37968,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "收发货核验 · SKU与数量 · 库存记录",
@@ -38019,7 +38019,7 @@
       "text": "发运、收货、库存文员"
     }
   },
-  "source_content_sha256": "57ef09c089465e7fb33e294e291789a00b3c6a29f582abec9f29e12be4470cb0",
+  "source_content_sha256": "5a6a995ee777017c1aeccc1d92a449c441576c2fb362c0188a41fd1cf71385d9",
   "subject": {
     "canonical_slug": "shipping-receiving-and-inventory-clerks",
     "name": "发运、收货、库存文员",

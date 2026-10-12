@@ -9040,18 +9040,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.03.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            2,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.03.mitigation": {
         "ref": {
@@ -22884,28 +22874,8 @@
         "status": "unfilled"
       },
       "work_context_block.01.description": {
-        "ref": {
-          "id": "animal-care-and-service-workers.profile.work-context-block.1",
-          "parts": [
-            [
-              "\n",
-              0,
-              9
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "work_context_block.01.label": {
         "ref": {
@@ -23454,8 +23424,9 @@
           },
           "id": "animal-care-and-service-workers.profile.responsibilities-block.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "list"
         },
@@ -23464,12 +23435,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜87% 每天在环境受控的室内工作，98% 为规律固定日程，56% 工作周为 40 小时、37% 少于 40 小时（O*NET 39-2021.00 受访比例）。\n户外与噪音｜56% 每天在户外暴露于各种天气、14% 每周至少一次、11% 从不；78% 每天暴露于干扰性或不适噪音。\n暴露与伤病｜63% 每天暴露于污染物、18% 从不；45% 每天暴露于疾病或感染、20% 每月至少一次、19% 从不；58% 每天暴露于轻微烧伤、割伤、咬伤或蜇伤、14% 从不；27% 每天暴露于危险条件、63% 从不；24% 每天暴露于极热或极冷温度。\n防护装备｜28% 每天穿戴普通防护或安全装备、23% 每周至少一次、44% 从不；80% 从不穿戴专用防护装备。\n体力姿势｜56% 持续或几乎持续站立、26% 超过一半时间；34% 持续或几乎持续行走或跑动；38% 持续或几乎持续用手操作；19% 持续弯腰扭转、37% 超过一半时间；13% 持续跪蹲弯腰或爬行、54% 少于一半时间；51% 少于一半时间坐着、47% 从不坐着。\n精确性与错误后果｜24% 认为精确或准确极其重要、20% 认为非常重要、42% 认为重要；29% 认为错误后果极其严重、20% 认为非常严重、16% 认为严重。\n决策与自主｜61% 每天作决定、20% 每周至少一次；28% 拥有很大决策自由度、27% 有一些、28% 有限、17% 很少。\n沟通与协作｜77% 持续与他人接触、22% 大部分时间；93% 每天有面对面讨论；78% 认为与团队合作极其重要；34% 认为应对外部客户或公众极其重要、29% 认为非常重要；52% 每天有电话沟通。\n压力与冲突｜25% 每天面对时间压力、32% 每周至少一次、22% 从不；13% 每天须应对不愉快或愤怒或无礼的人、32% 每周至少一次、29% 每月至少一次；34% 每周至少一次遇到冲突情境；37% 每年至少一次需应对有暴力或攻击性的人员、63% 从不。\n责任与重复｜24% 对其他工作人员的健康与安全承担非常高的责任、15% 高责任、24% 中等责任、29% 有限责任；22% 认为重复相同任务极其重要、12% 非常重要、43% 认为重要。"
+              "美国O*NET受访工作情境；不能外推中国、个人排班或事故概率。\n工作环境｜87% 每天在环境受控的室内工作，98% 为规律固定日程，56% 工作周为 40 小时、37% 少于 40 小时（O*NET 39-2021.00 受访比例）。\n户外与噪音｜56% 每天在户外暴露于各种天气、14% 每周至少一次但非每日、11% 从不；78% 每天暴露于干扰性或不适噪音。\n暴露与伤病｜63% 每天暴露于污染物、18% 从不；45% 每天暴露于疾病或感染、20% 每月至少一次但非每周、19% 从不；58% 每天暴露于轻微烧伤、割伤、咬伤或蜇伤、14% 从不；27% 每天暴露于危险条件、63% 从不；24% 每天暴露于极热或极冷温度。\n防护装备｜28% 每天穿戴普通防护或安全装备、23% 每周至少一次但非每日、44% 从不；80% 从不穿戴专用防护装备。\n体力姿势｜56% 持续或几乎持续站立、26% 超过一半时间；34% 持续或几乎持续行走或跑动；38% 持续或几乎持续用手操作；19% 持续弯腰扭转、37% 超过一半时间；13% 持续跪蹲弯腰或爬行、54% 少于一半时间；51% 少于一半时间坐着、47% 从不坐着。\n精确性与错误后果｜24% 认为精确或准确极其重要、20% 认为非常重要、42% 认为重要；29% 认为错误后果极其严重、20% 认为非常严重、16% 认为严重。\n决策与自主｜61%每日作出影响他人、资源或机构形象的决定、20% 每周至少一次但非每日；28% 拥有很大决策自由度、27% 有一些、28% 有限、17% 很少。\n沟通与协作｜77% 持续与他人接触、22% 大部分时间；93% 每天有面对面讨论；78% 认为与团队合作极其重要；34% 认为应对外部客户或公众极其重要、29% 认为非常重要；52% 每天有电话沟通。\n压力与冲突｜25% 每天面对时间压力、32% 每周至少一次但非每日、22% 从不；13% 每天须应对不愉快或愤怒或无礼的人、32% 每周至少一次但非每日、29% 每月至少一次但非每周；34% 每周至少一次但非每日遇到冲突情境；37% 每年至少一次但非每月需应对有暴力或攻击性的人员、63% 从不。\n责任与重复｜24% 对其他工作人员的健康与安全承担非常高的责任、15% 高责任、24% 中等责任、29% 有限责任；22% 认为重复相同任务极其重要、12% 非常重要、43% 认为重要。"
             ]
           },
           "id": "animal-care-and-service-workers.profile.work-context-block.1",
           "source_refs": [
-            "onet"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -23492,7 +23463,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "ONET展示May2025工资五分位27,250/29,820/35,360/40,050/50,060美元，时中位17.00；BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025—2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。ONET旧2024预测不用作当前。64%高中/同等、14%副学士或两年学位、13%学士为美国受访者报告的新聘人员学历要求；典型高中短OJT，动物园饲养员常需相关本科，非中国统一门槛。"
+              "ONET展示May2025工资五分位27,250/29,820/35,360/40,050/50,060美元，时中位17.00；BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025—2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。O*NET当前已列2025就业与2025—2035预测；精确值仍直接核EP。64%高中/同等、14%副学士或两年学位、13%学士为美国受访者报告的新聘人员学历要求；典型高中短OJT，动物园饲养员常需相关本科，非中国统一门槛。"
             ]
           },
           "id": "animal-care-and-service-workers.profile.onet-structured-fields-block.2",
@@ -23696,7 +23667,8 @@
             "onet",
             "oews",
             "ep",
-            "cnvet"
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -24622,10 +24594,10 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "entity": "ONET美国任务；中国法律另见资格及来源登记",
+                "entity": "执业兽医和乡村兽医管理办法：角色、备案、监督和诊疗范围",
                 "id": "link-17",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/39-2021.00"
+                "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408942.htm"
               },
               {
                 "entity": "BLS EP本职业当前预测",
@@ -24679,8 +24651,9 @@
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnpet",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -24734,13 +24707,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在引入动物管理与监控系统时，明确人机分工、记录与交接责任，确保动物记录可追溯，并保留照护人员对动物观察与保定操作、异常判断的主导地位；同时明确动物诊疗须由执业兽医依法进行。"
+              "编辑流程建议：引入动物记录或监控系统前核机构授权、人机分工、原始记录和交接责任；工具提示与现场观察分开。实际动物操作须在本人训练及合法岗位授权内；中国诊疗按兽医师、助理及乡村兽医各自资格、备案、地域、机构和监督条件核，不概括为所有活动仅一种角色。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.15",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -24829,8 +24803,7 @@
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.21",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -24844,8 +24817,7 @@
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.22",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25008,13 +24980,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "预约与客户记录、服务流程提醒可自动化处理。"
+              "编辑可能用途：整理预约、客户记录与流程提醒；本轮未核自动化或AI采用率、效果，不据软件条目证明已部署。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25038,13 +25009,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "饲喂与环境设备的定时控制、动物档案管理可自动化处理。"
+              "编辑可能用途：整理动物档案、饲喂与环境记录；本轮未核定时设备或AI系统效果，实际设备使用及操作按机构授权和适用规程。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25068,13 +25038,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "环境温湿度监测与记录可自动化处理。"
+              "编辑可能用途：汇总既有温湿度记录并标记资料缺口；本轮未核自动监测效果，不由软件条目证明设备部署或诊断能力。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25325,7 +25294,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职业增长12.1%，OOH取整12%，年均62,800个空缺；组合增长11.2%/年均69,400另列，ONET旧2024预测不用作当前。"
+              "本职业39-2021增长12.1%，OOH取整12%、年均62,800个空缺；39-2000组合增长11.2%/年均69,400另列。O*NET当前也已列2025就业与2025—2035预测；精确增长、净变化及空缺直接核EP，不能归因AI。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.56",
@@ -25410,13 +25379,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "是否采用取决于机构的设施与信息系统、动物种类与规模、数据质量与生物安全要求、设备可靠性与培训条件。技术可行不等于已部署，本页不推测采用进度。"
+              "编辑采购与使用核对项：核机构设施、动物种类、允许的数据、系统可靠性、监督训练与授权；本页没有采用进度或这些条件对采用率的因果估计。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.62",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25489,8 +25457,7 @@
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25564,9 +25531,9 @@
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.72",
           "source_refs": [
+            "operations",
             "cnvet",
-            "cnclinic",
-            "onet"
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -25575,12 +25542,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ONET美国任务；中国合法角色及许可另见资格与农业农村部来源。"
+              "中国角色、资格、备案及范围由兽医管理办法核；经营性诊疗机构许可另核诊疗机构办法。美国任务不授予中国权限。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.73",
           "source_refs": [
-            "onet",
+            "operations",
             "cnvet",
             "cnclinic"
           ],
@@ -25625,8 +25592,9 @@
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.76",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnpet",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -25640,8 +25608,9 @@
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.77",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnpet",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -25670,6 +25639,7 @@
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.79",
           "source_refs": [
+            "operations",
             "cnvet",
             "cnclinic"
           ],
@@ -25680,13 +25650,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "限定辅助手段只处理允许的环节，例如动物档案管理、监控与行为数据整理、环境与饲喂设备控制，不直接产出诊断结论。"
+              "编辑可能用途限定于获机构允许的资料整理、预约与既有环境记录；未核监控效果或设备控制的批准用途，不生成诊断或操作参数。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.80",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25695,13 +25664,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "由照护人员结合现场动物观察与操作核对提示与数据，复核异常判断与处置路径，并记录人工判断理由。"
+              "在本人训练、合法岗位授权和机构程序内核对已有观察与系统提示，保留来源及缺口；异常报告和实际诊疗处置分开，由具备对应权限者确认。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.81",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25730,8 +25698,9 @@
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.83",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -25754,13 +25723,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按动物行为与保定规范操作并使用防护用品，掌握咬伤蜇伤后的处置流程。"
+              "先核机构已批准的动物接触、防护、监督与应急报告程序；只在本人训练和合法权限内执行，本页不提供保定、伤口处理或应急操作步骤。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.85",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -25769,13 +25739,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "每天暴露于疾病或感染与污染物会带来健康风险并可能造成疫病传播。"
+              "编辑风险识别：动物接触、疾病或感染、污染物暴露需要核作业安全和报告程序；美国受访频率不估计患病或疫病传播概率。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.86",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25784,13 +25753,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按生物安全要求清洁消毒并做好隔离，按规定使用防护用品并报告异常。"
+              "核机构适用的清洁、防疫、防护与异常报告程序；实际隔离、用药、免疫或诊疗按训练及法定权限，不依据本页自设措施或阈值。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.87",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -25799,12 +25769,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "未及时发现疾病伤病或延迟报告会延误治疗并影响动物福利。"
+              "编辑风险识别：观察、记录与报告缺口需核机构程序；本页没有延迟报告对治疗或福利结果的因果估计。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.88",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25813,13 +25783,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按制度观察并记录，发现异常立即报告并联系兽医。"
+              "按本人岗位范围记录已有观察，异常按机构程序及时反馈并联系具备对应权限者；本页不提供诊断或处置方法。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.89",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -25848,6 +25819,7 @@
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.91",
           "source_refs": [
+            "operations",
             "cnvet",
             "cnclinic"
           ],
@@ -25858,13 +25830,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "13% 每天须应对不愉快或愤怒或无礼的人，34% 每周至少一次遇到冲突情境。"
+              "美国O*NET受访13%每日应对无礼或愤怒人员，34%每周至少一次但非每日遇到冲突；不是个人必然冲突或纠纷概率。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.92",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25930,13 +25901,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "饲喂与环境设备可自动控制，但巡检与执行仍由人负责。"
+              "编辑可能用途：整理饲喂及环境记录；未核自动控制设备或AI效果，实际巡检及执行须按机构规程和本人授权。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.97",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25987,13 +25957,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "监控与行为数据可辅助，但识别与报告仍由人负责。"
+              "编辑可能用途：整理已有观察与行为记录；未核识别效果，不以系统提示替代现场核对或兽医诊疗。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.101",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -26044,13 +26013,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美容设备可辅助，但手工操作与动物保定仍由人负责。"
+              "编辑可能用途：整理美容预约和服务记录；未核设备或AI操作效果，实际手工操作及动物接触依训练和机构授权。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.105",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -26101,13 +26069,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "环境控制可自动化，但运动陪伴与状态判断仍由人负责。"
+              "编辑可能用途：汇总既有环境与运动记录；未核环境自动控制或状态识别效果，实际设备与动物操作另核。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.109",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -26158,13 +26125,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "档案系统可自动化管理，但数据准确与真实性仍由人负责。"
+              "编辑可能用途：整理动物档案与交接资料；未核自动识别或AI效果，原值、缺失及真实性须人工核查。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.113",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -26215,12 +26181,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "客服与销售系统可辅助，但沟通与建议责任仍由人负责。"
+              "编辑可能用途：整理客户问题与产品资料；未核自动客服效果，健康疑点须转交相应兽医，不由客服生成诊疗结论。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.117",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -26271,13 +26237,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "信息与匹配工具可辅助，但行为判断与领养决定仍由人负责。"
+              "编辑可能用途：整理已有领养资料及待核条件；未核匹配或行为识别效果，机构按实际程序和授权确认安置。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.121",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -26286,13 +26251,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以上内容区分自动化能力、实际部署与招聘结果；进入下一节可以查看中国大陆民用工资参照与其统计范围说明。"
+              "本节区分编辑可能用途、未经效果验证的实际部署及合法操作范围；下一节中国工资是行业与单位类型宽参照，不是本职业工资分布。"
             ]
           },
           "id": "animal-care-and-service-workers.ai-impact.ai-impact-table.122",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         }
@@ -26407,7 +26371,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按岗位类别统计，用于对照行政事务类岗位的收入水平。"
+              "规模以上企业“办事人员和有关人员”岗位大类年平均，不只行政事务岗位；不能等同照护员工资，具体统计范围和单位类别另核。"
             ]
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.14",
@@ -26568,8 +26532,10 @@
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -26583,8 +26549,10 @@
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -26614,8 +26582,10 @@
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -26629,8 +26599,10 @@
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -26658,8 +26630,10 @@
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.31",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -26673,8 +26647,10 @@
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.32",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -26702,8 +26678,10 @@
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -26717,8 +26695,10 @@
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.35",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -26746,8 +26726,10 @@
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.37",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -26756,13 +26738,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "以美容与养护服务、寄养照护与客户沟通为主；对服务规范、动物保定与客户体验要求高。"
+              "编辑方向示例：宠物美容、寄养照护与客户资料沟通。实际服务任务、动物接触训练、质量和客户流程按目标岗位核；本页没有中国招聘样本证明普遍任务占比。"
             ]
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -26776,8 +26760,10 @@
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.39",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -26786,13 +26772,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "以群体动物照护、清洁消毒与领养安置为主；对动物福利、疾病观察与志愿者协作要求高。"
+              "编辑方向示例：群体照护、清洁记录与领养沟通。实际福利、防疫、监督和志愿者分工核目标机构；本页未取得岗位要求比例或培训效果。"
             ]
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -26806,8 +26794,10 @@
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.41",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -26816,13 +26806,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "以展示动物饲养、环境控制、展区维护与公众讲解为主；对行为观察、设施维护与体能条件要求高。"
+              "编辑方向示例：展示动物照护、既有环境记录、展区维护及讲解。动物种类、特殊场景、设备、训练和法定权限按实际岗位核，不将展示名称等同统一行业或岗位门槛。"
             ]
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.42",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -26888,7 +26880,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              "国家统计局《2025年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.47",
@@ -26902,7 +26894,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS城镇5人以上法人单位税前年平均工资，含个人代扣社保、公积金与个税；排除个体及自由职业、纳入符合范围的私营法人。行业/岗位大类非本职业，不估计多数宠物服务纳入比例。"
+              "NBS城镇单位工资统计为城镇地区5人及以上法人单位的税前年平均，包含个人缴纳社保、公积金与个税；不含个体工商户和自由职业者。规模以上企业岗位类别有独立统计范围，不能等同所有宠物门店或动物园。行业和岗位大类不是职业分布，也不估计多数宠物服务纳入比例。"
             ]
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.48",
@@ -27000,7 +26992,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业与职业分类分开：GB/T4754-2017宠物医院服务8222属宠物服务，兽医服务7493排除宠物医院，动物园水族馆管理服务7715属公共设施管理。不能把宠物诊疗直接归卫生或动物园展示岗位直接归文娱；实际机构按主营活动核。中国宠物职业目录仅方向参照，不等美国39-2021。"
+              "行业与职业分类分开：GB/T4754-2017宠物医院服务8222属宠物服务，兽医服务7493排除宠物医院，动物园水族馆管理服务7715属771生态保护、77生态保护和环境治理业（上位N水利、环境和公共设施管理业）。不能把宠物诊疗直接归卫生或动物园展示岗位直接归文娱；实际机构按主营活动核。中国宠物职业目录仅方向参照，不等美国39-2021。"
             ]
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.55",
@@ -27016,7 +27008,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              "国家统计局《2025年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.57",
@@ -27049,7 +27041,7 @@
           },
           "id": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.59",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         }
@@ -27115,7 +27107,7 @@
           },
           "id": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27143,7 +27135,7 @@
           },
           "id": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27171,7 +27163,7 @@
           },
           "id": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27306,7 +27298,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025工资为OEWS受雇分位；EP2025—2035就业含自雇。OOH本职业明细另列，39-2000组合不代39-2021；ONET旧2024预测不用作当前。OOH另公布文娱37,460、零售35,290美元行业内本职业中位。"
+              "May2025工资为OEWS受雇分位；EP2025—2035就业含自雇。OOH本职业明细另列，39-2000组合不代39-2021；O*NET当前也列2025就业及2025—2035预测，精确值直接核EP。OOH另公布文娱37,460、零售35,290美元行业内本职业中位。"
             ]
           },
           "id": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.25",
@@ -27370,7 +27362,8 @@
           },
           "id": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
-            "onet"
+            "ooh",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27384,7 +27377,8 @@
           },
           "id": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.30",
           "source_refs": [
-            "onet"
+            "ooh",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27398,7 +27392,8 @@
           },
           "id": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.31",
           "source_refs": [
-            "onet"
+            "ooh",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27412,8 +27407,8 @@
           },
           "id": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.32",
           "source_refs": [
-            "onet",
-            "onet"
+            "ooh",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27870,8 +27865,7 @@
           },
           "id": "animal-care-and-service-workers.fit.personality-fit-block.2",
           "source_refs": [
-            "onet",
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -27885,7 +27879,7 @@
           },
           "id": "animal-care-and-service-workers.fit.personality-fit-block.3",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -28016,7 +28010,7 @@
           },
           "id": "animal-care-and-service-workers.fit.riasec-fit-block.10",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -28044,8 +28038,7 @@
           },
           "id": "animal-care-and-service-workers.fit.riasec-fit-block.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -28074,7 +28067,7 @@
           },
           "id": "animal-care-and-service-workers.fit.riasec-fit-block.12",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -28373,13 +28366,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "面向诊疗辅助与检验技术，需相应训练与资格，职责与照护服务不同。"
+              "编辑转向核对项：动物诊疗辅助与检验任务须按目标法域、角色资格、监督训练及机构条件确认；美国相邻岗位名不等中国统一角色。"
             ]
           },
           "id": "animal-care-and-service-workers.fit.personality-fit-block.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnvet",
+            "cnclinic",
+            "operations"
           ],
           "type": "prose"
         },
@@ -28630,8 +28624,7 @@
           },
           "id": "animal-care-and-service-workers.fit.personality-fit-block.50",
           "source_refs": [
-            "onet",
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -28801,7 +28794,7 @@
           },
           "id": "animal-care-and-service-workers.fit.personality-fit-block.62",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -28838,7 +28831,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "ONET摘要Bright Outlook标签与旧期预测；当前就业另见EP，不提供中国补贴。"
+              "O*NET摘要用于Bright Outlook及职业资料；当前页已列2025就业和2025—2035预测，精确增长与空缺直接核EP。它不提供中国补贴或人格预测。"
             ]
           },
           "id": "animal-care-and-service-workers.fit.personality-fit-block.65",
@@ -28900,26 +28893,25 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "entity": "BLS OOH动物照护与服务：本职业明细及教育训练",
+                "entity": "执业兽医和乡村兽医管理办法：角色、备案与诊疗权限",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm"
+                "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408942.htm"
               },
               {
-                "entity": "O*NET 39-2021.00 前景光明职业说明",
+                "entity": "动物诊疗机构管理办法：机构许可、监督与病历",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/39-2021.00"
+                "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408940.htm"
               }
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.7",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "ooh",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "links"
         },
@@ -28944,14 +28936,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "最需要提前判断的是四类风险：一是人身安全风险（被咬伤踢伤或蜇伤、接触污染物与化学品、长时间站立与体力负荷），二是人畜共患病与生物安全风险（疾病与感染暴露、清洁消毒不到位导致疫病传播），三是动物健康与服务质量风险（未及时发现疾病伤病或延迟报告、美容与保定操作不当造成动物应激或受伤），四是合规与客户风险（超范围从事动物诊疗、记录不完整、与客户发生冲突或服务纠纷）。风险随方向不同：宠物美容更贴近保定与客户沟通风险，犬舍与收容所照护更贴近群体健康与生物安全风险，动物园与水族馆饲养更贴近环境控制与设施维护风险。"
+              "编辑风险核对项包括动物接触与身体负荷、疾病或污染物暴露、观察与报告、美容等具体操作、诊疗合规及客户沟通。美国任务与受访情境支持核对重点，不估计事故概率或方向间风险排序；中国权限由对应法规核，具体流程以机构授权及适用程序为准。"
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "operations",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -28960,14 +28952,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "ONET2026任务与受访情境支持站立、接触、噪音和感染等风险场景；暴露频率非事故概率。BLS当前EP与May2025工资非风险估计。中国诊疗边界由兽医及诊疗机构办法支持，补贴不授予操作许可。风险卡为编辑归纳。"
+              "O*NET美国任务和受访情境用于接触、噪音、站立及感染暴露等描述，频率不是事故或患病概率。BLS OOH支持美国职责、工作场景和训练，不证明中国诊疗权限。中国兽医及机构办法支持各自角色、备案、监督与许可条件；以下情景是编辑示例。"
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.10",
           "source_refs": [
             "onet",
-            "ep",
-            "oews",
+            "ooh",
             "cnvet",
             "cnclinic"
           ],
@@ -28983,8 +28974,8 @@
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -28998,7 +28989,8 @@
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.12",
           "source_refs": [
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29007,13 +28999,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "掌握动物行为与保定方法并使用防护用品，按程序处置咬伤蜇伤并记录上报。"
+              "核机构已批准的动物接触、防护、监督和报告程序；仅在本人训练及合法授权内执行，本页不提供保定或伤口应急处置方法。"
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.13",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29022,13 +29014,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未做保定或未评估动物应激即直接接触陌生或受惊动物。"
+              "编辑情景：陌生或受惊动物接触前，所需训练、监督或防护确认缺失；不据本页自行操作。"
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.14",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29042,8 +29034,8 @@
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.15",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29057,7 +29049,8 @@
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.16",
           "source_refs": [
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29066,13 +29059,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按生物安全要求清洁消毒与隔离，按规定使用防护用品并报告异常。"
+              "核机构适用的清洁、防疫、防护和异常报告程序；实际隔离、用药和诊疗须分别核岗位训练与法定权限，本页不设处置方法或期限。"
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.17",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29081,13 +29074,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "收容新进动物未隔离观察即与群体接触。"
+              "编辑情景：新进动物的适用观察、隔离或交接要求未核清；本页不规定隔离期限。"
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.18",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29101,7 +29094,8 @@
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.19",
           "source_refs": [
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29110,12 +29104,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未及时发现疾病伤病或延迟报告会延误治疗并影响动物福利。"
+              "编辑风险识别：观察与报告遗漏需要核机构程序；本页没有延迟报告对治疗或福利结果的因果估计。"
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.20",
           "source_refs": [
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29124,12 +29119,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按制度观察并记录，发现异常立即报告并联系兽医。"
+              "在本人岗位范围如实记录观察，异常按机构程序及时反馈并联系具备对应权限者；不由本页生成诊断或处置方法。"
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.21",
           "source_refs": [
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29138,13 +29134,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "发现动物食欲与行为异常但未上报或记录。"
+              "编辑情景：观察信息存在缺失或异常，机构所需记录与报告尚未确认；不是诊断或处置阈值。"
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.22",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29158,8 +29154,8 @@
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -29198,13 +29194,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "自行诊断并用药治疗患病动物而未转交执业兽医。"
+              "编辑情景：拟诊断或用药者未确认角色资格、备案范围和机构条件；应按实际适用权限确认，不把所有监督协助或乡村例外写成违法。"
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -29218,8 +29214,8 @@
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.27",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29228,13 +29224,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "操作粗暴或保定不当造成动物应激、受伤或人员受伤。"
+              "编辑风险识别：美容及动物接触的操作与监督条件需核；本页没有动物应激或伤害的发生概率和技术效果估计。"
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29243,13 +29239,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按美容与保定规范操作，评估动物状态并在必要时中止服务。"
+              "核机构适用的美容、安全、监督和中止报告程序，只在本人训练与授权内执行；本页不提供保定方法或应激阈值。"
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29258,13 +29254,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "动物明显应激仍强行完成美容流程。"
+              "编辑情景：动物状态出现变化，服务所需复核和报告程序未确认；不依据本页强行操作。"
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29278,8 +29274,8 @@
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.31",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29288,13 +29284,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "13% 每天须应对不愉快或愤怒或无礼的人、34% 每周至少一次遇到冲突情境。"
+              "美国受访13%每日应对无礼或愤怒人员、34%每周至少一次但非每日遇到冲突；不是个人必然冲突或纠纷概率。"
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.32",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29308,8 +29304,8 @@
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29318,13 +29314,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "客户不满时与客户争执或擅自承诺赔偿。"
+              "编辑情景：客户提出异议，授权范围和主管介入条件未核清却作承诺；具体服务和责任规则按机构制度。"
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29338,7 +29334,8 @@
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.35",
           "source_refs": [
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29347,13 +29344,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS当前EP2025—2035与May2025工资，不支持中国诊疗许可或事故概率。"
+              "该局部链接为BLS OOH，用于美国工作场景、职责和训练；不能证明中国诊疗权限或事故概率。"
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.36",
           "source_refs": [
-            "ep",
-            "oews"
+            "ooh"
           ],
           "type": "prose"
         },
@@ -29362,12 +29358,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 39-2021.00 职业摘要（任务与职责）。"
+              "O*NET美国详细工作情境用于群体接触、站立、压力和暴露，不支持中国法规。"
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.37",
           "source_refs": [
-            "onet"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -29376,14 +29372,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国兽医角色、备案与动物诊疗机构许可；广东2025技能补贴指导标准不等诊疗资格。"
+              "该局部链接为中国兽医管理办法，用于角色、备案、诊疗范围与监督条件，不是补贴或人格研究。"
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.38",
           "source_refs": [
-            "cnvet",
-            "cnclinic",
-            "cnpet"
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -29392,12 +29386,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本页编辑归纳（条件性建议），不代表监管或机构的强制流程。"
+              "该局部链接为动物诊疗机构办法，用于机构许可、诊疗活动及监督；普通照护记录不一律适用病历档案至少三年。"
             ]
           },
           "id": "animal-care-and-service-workers.risk.career-risk-cards.39",
           "source_refs": [
-            "onet"
+            "cnclinic"
           ],
           "type": "prose"
         }
@@ -29433,7 +29427,7 @@
                 "从事宠物洗浴、刷毛、修剪与基础养护并接待客户。",
                 "美容服务质量稳定、动物与人员安全、客户沟通记录完整。",
                 "A/B/C纸面记录与三句服务沟通，不执行实际美容。",
-                "与兽医不同：照护人员提供美容与养护服务，动物诊疗须由执业兽医依法进行。"
+                "照护、美容与实际诊疗分开核；中国不同兽医角色、监督人员、备案和机构条件各有适用范围，照护岗位名不授予诊疗资格。"
               ],
               [
                 "犬舍与收容所照护方向",
@@ -29454,7 +29448,7 @@
                 "记录动物健康状况、饲喂与治疗与安置信息并完成交接。",
                 "记录连续、完整、可追溯。",
                 "原表、交接与计算三列对照。",
-                "与兽医技术员不同：照护人员记录日常照护信息，不承担诊疗技术操作责任。"
+                "日常照护记录与实际诊疗技术任务可有协作或重叠，须分别核真实岗位分工、兽医角色及合法权限。"
               ],
               [
                 "安全与生物安全执行",
@@ -29467,9 +29461,9 @@
           },
           "id": "animal-care-and-service-workers.path.entry-role-comparison.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "operations",
+            "cnvet",
+            "cnclinic"
           ],
           "title": "动物照护与服务人员的入门岗位与初期任务怎么比较？",
           "type": "table"
@@ -29792,7 +29786,7 @@
                 "相关护理、美容、训练方向",
                 "证明相应技能评价，可核适用补贴",
                 "非统一诊疗准入",
-                "广东2025三类B级指导补贴须满足适用条件",
+                "广东2025目录列三类B类职业指导标准；实际申请条件与现行政策另核，不代表所有等级当前必有补贴。",
                 "按认定安排",
                 "不保证录用、收入或补贴，不等兽医资格"
               ],
@@ -29828,10 +29822,10 @@
           "id": "animal-care-and-service-workers.path.credential-decision.1",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -29843,7 +29837,7 @@
             "paragraphs": [
               "普通照护与美容按岗位、合法训练和适用技能要求核，技能等级不等诊疗资格；补贴指导标准须核申请条件。",
               "中国动物诊疗须按兽医师、助理兽医师或乡村兽医各自资格、备案及范围执行；符合办法的兽医相关专业学生/毕业生仅可在兽医师监督指导下协助，照护岗位名不授予诊疗权限。经营性诊疗机构另需许可。",
-              "兽医师、助理及乡村兽医具体权限不同；兽医相关专业学生/毕业生符合办法时只可监督协助。诊疗机构病例至少三年，普通照护记录按适用制度核。",
+              "兽医师、助理及乡村兽医具体权限不同；兽医相关专业学生/毕业生符合办法时只可监督协助。动物诊疗机构病历档案至少保存三年，普通照护记录按适用制度核。",
               "美国39-2021统计不含训练师组合；中国三类宠物职业仅方向参照，特殊动物场景另核。纸面练习与作品均不授予现场操作或诊疗许可。"
             ]
           },
@@ -29971,13 +29965,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "掌握宠物美容或动物照护专项技能并取得技能等级或培训证明。"
+              "编辑准备项：核专项课程、监督实训、实际考核及目标机构认可；技能评价或培训证明不自动证明独立操作或诊疗权限。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.14",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30000,13 +29997,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能处理复杂动物行为与健康观察问题、带教新人并与兽医协作。"
+              "编辑进阶核对项：在授权内复核观察记录、按程序报告复杂疑点、与相应兽医协作并核带教职责；不把资深称呼当健康问题处理许可。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.16",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30091,14 +30091,18 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本节采用国家与地区并列口径：美国部分为 O*NET 与 BLS 的职业统计与预测（专属口径，前景光明职业）；中国大陆部分为《中华人民共和国职业分类大典（2022 年版）》、广东省职业技能等级与补贴文件与国家统计局的行业工资参照。两者不可互相外推，本页不使用民用行业数字替代职业工资。"
+              "美国资料按Animal Caretakers 39-2021核，含训练师的39-2000组合另列；中国侧采用2025广东技能补贴目录、兽医及诊疗机构办法与NBS行业工资参照。旧大典PDF未取得全文，仅历史方向参考；中国学习路径、补贴和诊疗权限分别核，不由美国典型教育推出。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.22",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic",
+            "nbs",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30151,7 +30155,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "广东2025技能补贴目录与农业农村部兽医/诊疗机构办法，技能等级、个人角色备案和主体许可分开。"
+              "BLS OOH美国动物照护与服务人员教育、在岗训练与经营要求；中国目录及法规分别见来源登记cnpet、cnvet、cnclinic，不由此美国链接支持。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.26",
@@ -30172,7 +30176,7 @@
           },
           "id": "animal-care-and-service-workers.path.career-path-block.27",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -30254,13 +30258,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按技能等级认定与机构制度（部分地区有技能提升补贴）。"
+              "核目标机构对训练及技能评价的书面要求；广东2025补贴目录是指导标准，实际申请条件和现行政策另核。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30283,13 +30290,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能独立完成美容服务且动物与人员安全。"
+              "在本人训练、岗位考核与合法授权内承担相应美容服务，按机构程序记录和报告；培训证明不保证安全结果或独立操作能力。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.35",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30298,13 +30308,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "掌握洗浴、刷毛、剪毛修毛、剪指甲与清洁耳朵并取得技能等级或培训证明。"
+              "核美容相关专项课程、监督实训、实际考核与机构认可；不以技能评价或培训证明代替合法岗位授权。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30357,13 +30370,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能对服务质量与动物福利负责。"
+              "能说明本人授权的服务质量、记录复核与异常反馈职责，不保证动物福利或安全结果。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.40",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30401,13 +30417,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长经验；按机构规定。"
+              "编辑进阶核对项：核目标机构实际经验、训练、管理及选拔条件；本页没有统一经验年限或岗位样本。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.43",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30547,13 +30566,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按技能等级认定与机构制度。"
+              "核目标机构的监督训练、考核与适用技能评价要求；本页未取得所有照护岗位统一强制等级证据。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.53",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30576,13 +30598,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能独立完成群体照护与异常报告。"
+              "在训练、实际岗位考核及合法授权内承担相应群体照护和报告，记录真实；不由培训证明推定所有场景可独立完成。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.55",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30591,13 +30616,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "掌握动物健康观察、保定与领养接待并取得技能等级或培训证明。"
+              "核观察、动物接触和领养沟通的课程、监督训练与实际岗位考核；培训证明的认可条件另核，不授予诊疗资格。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.56",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30650,13 +30678,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能对动物福利与生物安全负责。"
+              "能核本人授权的照护记录、异常报告与生物安全分工，不保证生产或健康结果。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.60",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30694,13 +30725,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长经验；按机构规定。"
+              "编辑进阶核对项：核目标机构经验、训练与选拔条件，本页不设普遍年限。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.63",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30840,13 +30874,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按技能等级认定、潜水等专项资质与机构制度。"
+              "按实际岗位核展示动物、设备、潜水等专项训练、考核及合法权限；本页未核统一潜水资质名称或全国通用要求。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.73",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30869,13 +30906,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能独立完成饲养与展区维护并准确记录。"
+              "在训练、岗位考核及合法授权内承担相应饲养与展区维护，保留记录和异常反馈；不得由学历或培训证明推出全部场景独立权限。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.75",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30884,13 +30924,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "掌握展示动物饲养、环境温湿度管理与访客沟通（水族馆岗位可能需潜水资质）。"
+              "编辑准备项：核展示动物照护、环境记录、访客沟通等训练。实际潜水任务的监督、设备和资质要求另核，不能由美国任务页证明中国通用资格。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.76",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30943,13 +30986,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能对动物福利与展区安全负责。"
+              "能核本人授权的动物观察、记录、展区与公众安全分工，不保证福利或安全结果。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.80",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30958,13 +31004,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "处理复杂环境与行为问题、带教志愿者与新人。"
+              "在授权内复核已有环境和行为资料、报告复杂疑点并核带教职责；实际特殊动物、设备或诊疗任务按适用权限，不由资历授予全部操作能力。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.81",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30987,13 +31036,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长经验；按机构规定。"
+              "编辑进阶核对项：核目标岗位实际经验、训练和选拔条件；本页没有普遍经验年限证据。"
             ]
           },
           "id": "animal-care-and-service-workers.path.career-path-block.83",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "ooh",
+            "cnpet",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -31087,22 +31139,22 @@
                 "url": "https://www.onetonline.org/link/summary/39-2021.00"
               },
               {
-                "entity": "BLS OOH动物照护与服务：本职业明细及教育训练",
+                "entity": "BLS EP 2025—2035动物照护员39-2021详细预测",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
+                "entity": "国家统计局2025年城镇单位年平均工资",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "entity": "BLS OOH动物照护与服务：本职业明细及教育训练",
+                "entity": "广东2025职业技能培训补贴指导目录（宠物职业）",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm"
+                "url": "https://www.shanwei.gov.cn/swrsj/zcfg/rsrc/content/post_1131467.html"
               },
               {
                 "entity": "兽医",
@@ -31168,7 +31220,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国本职业全国就业预测。BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025—2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。美国本职业自雇24.8%，OOH其他个人服务40%/自雇25%等为就业结构，不保证个人就业。39-2000组合413,000/11.2%/69,400与ONET旧期另分；增长不推AI因果。"
+              "证据不足：未取得中国本职业全国就业预测。BLS EP本职业39-2021：2025年365,300人，2035年409,400人，官方净增44,100；2025—2035增长12.1%（OOH取整12%），年均62,800个空缺含增长与替代。美国本职业自雇24.8%，OOH其他个人服务40%/自雇25%等为就业结构，不保证个人就业。39-2000组合413,000/11.2%/69,400另分，O*NET当前页也列2025就业与2025—2035预测；增长不推AI因果。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.8",
@@ -31188,7 +31240,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31202,8 +31254,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.10",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31217,8 +31268,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.11",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31232,7 +31282,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.12",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31246,7 +31296,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31260,7 +31310,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31274,8 +31324,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.15",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31289,7 +31338,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31303,8 +31352,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.17",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31318,8 +31366,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.18",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31333,7 +31380,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31347,7 +31394,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31361,7 +31408,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31375,8 +31422,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.22",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31390,7 +31436,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31404,8 +31450,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.24",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31419,8 +31464,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.25",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31434,8 +31478,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.26",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31449,7 +31492,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31463,7 +31506,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31477,8 +31520,7 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.29",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31501,13 +31543,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS EP2025—2035和OOH本职业明细；May2025工资为OEWS。"
+              "BLS EP39-2021详细职业表支持就业、净变化、精确增长和年均空缺；39-2000组合另列，不是行业工资。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.31",
           "source_refs": [
-            "ep",
-            "ooh"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31516,12 +31557,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》（中国大陆民用口径，仅作参照）。"
+              "国家统计局2025年城镇单位行业和单位类型年平均工资，仅宽参照，不是本职业就业预测。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.32",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31530,14 +31571,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "广东2025宠物职业补贴指导目录；诊疗另核兽医及机构管理办法。"
+              "广东2025目录用于三类宠物职业指导补贴与代码，不证明统一准入、自动发放或诊疗资格；实际申请条件及现行政策另核。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.33",
           "source_refs": [
-            "cnpet",
-            "cnvet",
-            "cnclinic"
+            "cnpet"
           ],
           "type": "prose"
         },
@@ -31576,13 +31615,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻方向，需改换为兽医资格体系。"
+              "编辑转向核对项：相邻方向，需改换为兽医资格体系。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -31596,8 +31636,9 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.37",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -31611,8 +31652,9 @@
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -31621,13 +31663,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻方向，需补诊疗辅助训练与资格。"
+              "编辑转向核对项：相邻方向，需补诊疗辅助训练与资格。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.39",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -31666,7 +31709,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "邻近方向，需补繁育与人工授精技能。"
+              "编辑转向核对项：邻近方向，需补繁育与人工授精技能。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.42",
@@ -31711,7 +31754,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "邻近方向，需补动物控制培训与授权。"
+              "编辑转向核对项：邻近方向，需补动物控制培训与授权。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.45",
@@ -31756,7 +31799,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远距离转向，需补科研训练与学历。"
+              "编辑转向核对项：较远距离转向，需补科研训练与学历。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.48",
@@ -31800,7 +31843,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远距离转向，需补科研训练与学历。"
+              "编辑转向核对项：较远距离转向，需补科研训练与学历。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.51",
@@ -31844,7 +31887,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "邻近方向，需补农场作业技能。"
+              "编辑转向核对项：邻近方向，需补农场作业技能。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.54",
@@ -31888,7 +31931,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "邻近方向，需补零售与客户服务技能。"
+              "编辑转向核对项：邻近方向，需补零售与客户服务技能。 真实教育、训练、备案或授权条件按目标法域和岗位核；本页未核完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-care-and-service-workers.market-signals.market-signal-card.57",
@@ -31995,9 +32038,6 @@
             ]
           },
           "id": "animal-care-and-service-workers.sources.source-card.1",
-          "source_refs": [
-            "onet"
-          ],
           "type": "prose"
         },
         {
@@ -32027,17 +32067,10 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核心任务、美国工资/预测与中国统计/诊疗/补贴来源核对2026-10-02；旧大典PDF未取全文，旧来源日期保留。"
+              "本轮核心事实核对2026-10-08—09：O*NET任务、情境与全国工资，BLS职业明细及行业工资，NBS同版统计和广东2025目录；兽医同文权限沿用本窗口已核原文，诊疗机构病历条款另核。旧大典PDF及行业注释PDF全文未取得，不宣称全文阅读。"
             ]
           },
           "id": "animal-care-and-service-workers.sources.source-card.3",
-          "source_refs": [
-            "onet",
-            "ep",
-            "nbs",
-            "cnvet",
-            "cnpet"
-          ],
           "type": "prose"
         },
         {
@@ -32132,14 +32165,14 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "exact",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "exact",
                 "id": "onet",
-                "limitation": "24任务、情境、受访者报告的新聘人员学历要求与RSC兴趣；所示旧2024预测不作当前，不证明中国权限或AI效果。",
+                "limitation": "24任务、受访情境、教育与RSC；当前工资2025、就业2025及预测2025—2035，精确增长和空缺另核EP。不证明中国权限、人格预测或AI效果。",
                 "market": "美国",
                 "name": "ONET2026 Animal Caretakers详细职业",
                 "period": "2026年更新职业资料",
@@ -32148,10 +32181,10 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "exact",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "exact",
                 "id": "bls",
@@ -32164,10 +32197,10 @@
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "exact",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "exact",
                 "id": "ep",
@@ -32180,10 +32213,10 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "exact",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "exact",
                 "id": "oews",
@@ -32196,10 +32229,10 @@
                 "url": "https://www.onetonline.org/link/localwages/39-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "industry_proxy",
-                  "查阅2026-10-02"
+                  "访问2026-10-09"
                 ],
                 "evidence_type": "industry_proxy",
                 "id": "nbs",
@@ -32228,14 +32261,14 @@
                 "url": "https://hrss.sz.gov.cn/attachment/0/731/731778/8340671.pdf"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "cnpet",
-                "limitation": "三类4-10-07-01/02/03宠物职业B类五级1000/1500/2000/2500/3000元；须满足适用申请条件，不保证补贴或授予诊疗资格。",
+                "limitation": "2025目录列三类宠物职业B类，初级/中级/高级/技师/高级技师指导标准1000/1500/2000/2500/3000元；这是2025文件参照，实际适用对象、程序及现行政策另核，不保证发放或授予诊疗资格。",
                 "market": "中国大陆",
                 "name": "广东2025职业技能培训补贴指导目录（汕尾人社转载）",
                 "period": "2025年版，2025-03-01实施",
@@ -32244,10 +32277,10 @@
                 "url": "https://www.shanwei.gov.cn/swrsj/zcfg/rsrc/content/post_1131467.html"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "privacy",
@@ -32260,10 +32293,10 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "facilities",
@@ -32276,10 +32309,10 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "operations",
@@ -32292,10 +32325,10 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "hr",
@@ -32308,10 +32341,10 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "health",
@@ -32324,10 +32357,10 @@
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "ilo",
@@ -32340,10 +32373,10 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "editor",
@@ -32351,15 +32384,15 @@
                 "market": "美国",
                 "name": "BLS OOH教育训练及经营要求",
                 "period": "2025—2035版",
-                "publisher": "O*NET OnLine",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "nist",
@@ -32372,10 +32405,10 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "arxiv",
@@ -32388,10 +32421,10 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "weforum",
@@ -32404,10 +32437,10 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "employer",
@@ -32420,10 +32453,10 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "purchasing-managers",
@@ -32436,10 +32469,10 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-1",
@@ -32452,10 +32485,10 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-2",
@@ -32468,10 +32501,10 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-3",
@@ -32484,10 +32517,10 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "census",
@@ -32495,15 +32528,15 @@
                 "market": "美国",
                 "name": "BLS OOH当前就业行业结构",
                 "period": "2025年就业",
-                "publisher": "O*NET OnLine",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "msresearch",
@@ -32516,10 +32549,10 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "exact",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "exact",
                 "id": "onet-wages",
@@ -32532,10 +32565,10 @@
                 "url": "https://www.onetonline.org/link/localwages/39-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "archivists",
@@ -32548,10 +32581,10 @@
                 "url": "https://www.onetonline.org/link/details/39-2021.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "exact",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "exact",
                 "id": "ooh",
@@ -32564,10 +32597,10 @@
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/animal-care-and-service-workers.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "cnvet",
@@ -32580,10 +32613,10 @@
                 "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408942.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "查阅2026-10-02"
+                  "访问2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "cnclinic",
@@ -32596,14 +32629,14 @@
                 "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408940.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
                   "查阅2026-10-02"
                 ],
                 "evidence_type": "contextual",
                 "id": "cnindustry",
-                "limitation": "已核官方可检索注释8222宠物医院、7493排除宠物医院、7715动物园水族馆管理；本轮PDF全文未取得，不声称全文重核。",
+                "limitation": "本轮官方检索片段核8222宠物医院、7493排除宠物医院及7715动物园水族馆管理；NBS原PDF全文与广州统计局HTML直接读取失败，不声称全文已核。机构行业按主营活动核，不由员工名称推定。",
                 "market": "中国大陆",
                 "name": "国家统计局GB/T4754-2017行业分类注释",
                 "period": "2017行业分类注释",
@@ -34856,8 +34889,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "hr",
-              "operations"
+              "facilities",
+              "onet"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -34888,8 +34921,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
-              "hr"
+              "facilities",
+              "onet"
             ],
             "id": "record-version",
             "mitigation": {
@@ -34920,8 +34953,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
-              "hr"
+              "onet"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34952,8 +34984,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "cnvet",
-              "cnclinic"
+              "privacy",
+              "employer"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -34984,8 +35016,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
-              "hr"
+              "onet",
+              "facilities"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -35016,8 +35048,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "hr",
-              "employer"
+              "facilities",
+              "onet"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35512,11 +35544,11 @@
             "ai_heading": "AI 会影响动物照护与服务人员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "中国职业工资缺口与行业参照",
-            "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "动物照护与服务人员在不同学历背景下通常从哪些岗位方向开始？",
+            "scenario_caption": "学习背景与准备方向（编辑建议，真实岗位条件另核）",
+            "scenario_heading": "不同学习背景需核哪些准备与岗位条件？",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "学历背景",
-            "scenario_value_label": "常见岗位方向"
+            "scenario_value_label": "准备或岗位方向示例"
           },
           "us_growth": {
             "$item": "animal-care-and-service-workers.china-salary.career-snapshot-primary-locale.58",
@@ -35725,7 +35757,7 @@
             }
           }
         ],
-        "factors_heading": "哪些因素会影响美国动物照护与服务人员工资？",
+        "factors_heading": "核实际美国报酬需比较哪些条件？",
         "growth": {
           "$item": "animal-care-and-service-workers.us-salary.career-snapshot-secondary-locale.33",
           "block": "us-salary",
@@ -35824,7 +35856,7 @@
             }
           }
         ],
-        "industry_value_label": "该行业内本职业工资中位数",
+        "industry_value_label": "行业内本职业中位数／全国参照（分别标明）",
         "interpretation_heading": "这组美国工资数字应当怎么理解？",
         "interpretation_rows": [
           {
@@ -36106,7 +36138,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
             "value": {
               "$item": "animal-care-and-service-workers.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36151,7 +36183,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "ep",
             "value": {
               "$item": "animal-care-and-service-workers.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -36507,7 +36539,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 职业就业与工资统计（OEWS）：39-2021（专属口径）",
+            "label": "美国工资、教育与就业字段（各按来源区分）",
             "secondary_value": null,
             "value": {
               "$item": "animal-care-and-service-workers.profile.onet-structured-fields-block.2",
@@ -36518,7 +36550,7 @@
           },
           {
             "alternate_value": null,
-            "label": "国家统计局 2025 年城镇单位工资（民用口径）",
+            "label": "国家统计局2025年行业及单位类型工资参照",
             "secondary_value": null,
             "value": {
               "$item": "animal-care-and-service-workers.profile.onet-structured-fields-block.3",
@@ -36529,7 +36561,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 展示的 BLS 工资分位（2025 年 5 月）",
+            "label": "BLS EP 2025—2035动物照护员就业预测",
             "secondary_value": null,
             "value": {
               "$item": "animal-care-and-service-workers.profile.onet-structured-fields-block.4",
@@ -36540,7 +36572,7 @@
           },
           {
             "alternate_value": null,
-            "label": "《中华人民共和国职业分类大典（2022 年版）》宠物服务人员（4-10-07）",
+            "label": "中国宠物职业技能补贴目录与诊疗权限边界",
             "secondary_value": null,
             "value": {
               "$item": "animal-care-and-service-workers.profile.onet-structured-fields-block.5",
@@ -37904,7 +37936,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "动物照护与服务：饲喂清洁与保定 · 美容与养护 · 动物观察与记录",
@@ -37955,7 +37987,7 @@
       "text": "动物照护与服务人员：任务、工资与就业前景（O*NET 39-2021.00）"
     }
   },
-  "source_content_sha256": "0cf9068898c67fa9872b36a4078410d231698e6a5a4c073fc331501ee8f1dee9",
+  "source_content_sha256": "a2a42c9b672b6848cbd333a7e58b8f13e09a616a00b8b6338e03e24463098717",
   "subject": {
     "canonical_slug": "animal-care-and-service-workers",
     "name": "动物照护与服务人员",

@@ -7346,14 +7346,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "先区分描述、预测和因果问题。",
+              "编辑交付建议：区分描述、预测和因果问题。",
               "保留数据字典、代码、假设和版本。",
-              "把不确定性与限制和结论一起交付。"
+              "把不确定性与限制和结论一起交付；实际机构标准另核。"
             ]
           },
           "id": "economists.profile.responsibilities-block.3",
           "source_refs": [
-            "editorial"
+            "onet-details",
+            "r5-editor"
           ],
           "type": "list"
         },
@@ -7390,12 +7391,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET任务覆盖政策影响、市场预测、咨询、研究发表与经济标准制定。"
+              "美国O*NET16项任务包括政策影响、预测、咨询、研究发表、教学与专家证言；不是每岗位都承担全部任务。教育与准备：BLS美国典型至少硕士，部分政府入门岗接受有足够经济学/统计/数学课程的学士；商业、研究或国际组织可要求硕士或博士与工作经验。O*NET新聘教育反馈50%硕士、25%博士、21%学士（所列96%），不是中国普遍学历或招聘占比；Job Zone Five准备层级不等本职业人人五年以上经验。"
             ]
           },
           "id": "economists.profile.onet-structured-fields-block.1",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "bls-path"
           ],
           "type": "prose"
         },
@@ -7418,7 +7420,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "对外建议必须区分模型估计与最终政策价值判断。"
+              "编辑交付核对建议：研究问题、数据来源与口径、方法与代码、可复核结果、稳健性和限制、解释与建议应形成可追溯链条，再核真实机构审阅与发布授权；模型估计与最终政策价值判断仍须分开。本页未取得机构统一闭环制度，不作为通用审批流程。"
             ]
           },
           "id": "economists.profile.career-quick-answers-block.2",
@@ -7432,12 +7434,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "职业代码19-3011.00不包含以销售潜力或证券估值为核心的相邻角色。"
+              "19-3011.00以经济问题研究、报告和政策/市场解释为核心；与市场研究、证券估值岗位按实际主要职责分类。经济学家也可能分析消费需求和销售，不能把相邻代码解释为任务绝不重叠。"
             ]
           },
           "id": "economists.profile.definition-block.2",
           "source_refs": [
             "onet-details",
+            "bls-duties",
             "onet-financial",
             "onet-market"
           ],
@@ -7573,7 +7576,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "招聘信息中Excel、R、Python各27%，SQL 15%、SAS 14%，这是软件需求而非AI采用率。"
+              "2025全年美国本职业唯一招聘中提及软件技能的比例：Excel/R/Python各27%、PowerPoint18%、SQL15%、SAS14%；分母为关联本O*NET职业的全部唯一招聘。24技能行含未给比例项，未给不等0；不代表GenAI采用、提效或替代率。"
             ]
           },
           "id": "economists.ai-impact.ai-impact-table.1",
@@ -7587,12 +7590,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助：数据清理代码、变量说明、图表和报告结构草稿。"
+              "编辑候选，未核本职业采用或提效：在获准资料上测试数据清理代码、变量说明、图表和报告草稿，逐项对回原数据。"
             ]
           },
           "id": "economists.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "editorial"
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -7601,12 +7606,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助：列出替代模型、稳健性检查与复现清单。"
+              "编辑候选，未核效果：测试替代模型、稳健性检查和复现清单起草；研究者仍核模型的适用假设与代码。"
             ]
           },
           "id": "economists.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "editorial"
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -7615,12 +7622,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不可替代：判断变量定义是否对应理论问题。"
+              "变量定义与理论问题的对应需要研究者复核；这是责任与质量建议，不能据任务描述断言技术永久不可替代。"
             ]
           },
           "id": "economists.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "editorial"
+            "onet-details",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -7629,12 +7639,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不可替代：确认因果识别、政策取舍与利益影响。"
+              "因果识别、政策取舍与利益影响须按岗位权限审查；AI输出不能自行取得政策决定权，不作无法自动化的预测。"
             ]
           },
           "id": "economists.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "editorial"
+            "onet-details",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -7671,12 +7684,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可加快分析环节，但不会自动承担研究诚信或政策建议责任。"
+              "编辑建议以同任务比较错误、复现和复核时间；未取得本职业提效或净就业因果证据。工具不自动承担研究诚信或政策责任。"
             ]
           },
           "id": "economists.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "editorial"
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         }
@@ -7693,12 +7708,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本页所核国家统计局与人力资源社会保障部资料未取得与 19-3011.00 一一对应的中国精确职业分位，仅到行业与人员大类口径。"
+              "中国精确经济学家工资分布未取得。2025科学研究和技术服务业城镇非私营182,064元/年、私营83,560元/年，是匹配科研/咨询方向的行业税前均值，不覆盖所有政府或金融方向；5人及以上城镇法人单位口径，排除个体/自由职业。行业包含多职业，不能当经济学家中位数、分位、起薪或月薪。"
             ]
           },
           "id": "economists.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-wages"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -7707,12 +7722,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局行业和人员大类均值只能作为背景，不能冒充经济学家个人报价。"
+              "中国精确经济学家工资分布未取得。2025科学研究和技术服务业城镇非私营182,064元/年、私营83,560元/年，是匹配科研/咨询方向的行业税前均值，不覆盖所有政府或金融方向；5人及以上城镇法人单位口径，排除个体/自由职业。行业包含多职业，不能当经济学家中位数、分位、起薪或月薪。"
             ]
           },
           "id": "economists.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wages"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -7813,12 +7828,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国职业分布不是个人起薪承诺。"
+              "美国19-3011，2025年5月年薪10/25/50/75/90分位67,360/89,330/124,720/174,720/238,060美元；同口径时薪32.38/42.95/59.96/84.00/114.45美元。50分位是中位数而非均值；受雇税前直时工资、排除自雇，分位不对应学历、职级或个人起薪。"
             ]
           },
           "id": "economists.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "editorial"
+            "onet-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -7827,13 +7843,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业、地区、学位、研究领域和责任范围会影响具体报价。"
+              "BLS部分主要行业2025年薪中位：联邦政府144,680、管理科学技术咨询141,010、科研开发139,880、地方政府100,370、州政府78,080美元（政府均相应排除项）。行业描述分布非学历/领域工资因果证据；具体合同另核。"
             ]
           },
           "id": "economists.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "bls-pay",
-            "editorial"
+            "bls-pay"
           ],
           "type": "prose"
         }
@@ -7948,12 +7963,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "一周练习能否复现结果并清楚陈述限制，比性格标签更有用。"
+              "编辑观察建议：比较分析结果能否复现、限制能否解释；本轮没有人格量表预测工作表现的证据，不作性格优劣判断。"
             ]
           },
           "id": "economists.fit.riasec-fit-block.8",
           "source_refs": [
-            "editorial"
+            "onet-details",
+            "r5-editor"
           ],
           "type": "prose"
         }
@@ -7970,12 +7986,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "数据口径变更；每次分析前由数据责任人核定义、时期和版本，差异交研究负责人。"
+              "编辑建议核数据定义、时期和版本并说明差异，实际数据责任人和接受标准另核。"
             ]
           },
           "id": "economists.risk.career-risk-cards.1",
           "source_refs": [
-            "editorial"
+            "onet-details",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -7984,12 +8001,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "样本选择偏差；建模前记录纳入排除规则和覆盖范围，关键缺口交项目负责人决定是否继续。"
+              "编辑建议记录纳入排除规则、覆盖范围和关键缺口；是否继续分析由实际项目制度核定。"
             ]
           },
           "id": "economists.risk.career-risk-cards.2",
           "source_refs": [
-            "editorial"
+            "onet-details",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -7998,12 +8016,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "模型设定不稳；出报告前由分析者运行替代设定与敏感性检查，结论变化显著时升级独立审阅。"
+              "编辑建议比较替代设定与敏感性，结论不稳时标明限制并按实际制度审阅。"
             ]
           },
           "id": "economists.risk.career-risk-cards.3",
           "source_refs": [
-            "editorial"
+            "onet-details",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -8012,12 +8031,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "相关性被写成因果；对外发布前由审阅者核识别假设和证据强度，证据不足则降级措辞。"
+              "编辑建议核识别假设和证据强度，相关性不直接写成因果；实际发布人员另核。"
             ]
           },
           "id": "economists.risk.career-risk-cards.4",
           "source_refs": [
-            "editorial"
+            "onet-details",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -8026,12 +8046,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "工具生成错误代码或引用；每次交付前由具名责任人复现结果并核原始来源，工具不拥有发布或政策签字权。"
+              "编辑建议复现工具代码并核原始引用；工具不能自行取得发布或政策决定权。"
             ]
           },
           "id": "economists.risk.career-risk-cards.5",
           "source_refs": [
-            "editorial"
+            "onet-details",
+            "r5-editor"
           ],
           "type": "prose"
         }
@@ -8048,12 +8069,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS称典型入行至少硕士学位，部分政府入门岗位可接受相关学士背景。"
+              "BLS美国典型至少硕士，部分政府入门岗接受有足够经济学/统计/数学课程的学士；商业、研究或国际组织可要求硕士或博士与工作经验。O*NET新聘教育反馈50%硕士、25%博士、21%学士（所列96%），不是中国普遍学历或招聘占比；Job Zone Five准备层级不等本职业人人五年以上经验。"
             ]
           },
           "id": "economists.path.career-path-block.1",
           "source_refs": [
-            "bls-path"
+            "bls-path",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8090,12 +8112,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "进阶再承担计量模型、因果设计、预测、政策评估与对外解释。"
+              "编辑能力进阶建议：以实际项目证据核计量、因果设计、预测、政策评估与解释能力；不是固定晋升顺序或自动取得发布权限。"
             ]
           },
           "id": "economists.path.career-path-block.4",
           "source_refs": [
-            "editorial"
+            "onet-details",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -8166,11 +8189,18 @@
               "evidence",
               "next_step"
             ],
+            "column_labels": [
+              "岗位方向",
+              "初始任务",
+              "边界",
+              "观察证据",
+              "后续发展"
+            ],
             "rows": [
               [
                 "受监督研究助理",
                 "清理数据、整理文献与描述统计，并在监督下复现常规分析。",
-                "不独立对外发布结论或代表机构。",
+                "受监督范围和发布权按实际岗位制度核；非统一禁令",
                 "数据字典与可复现代码记录、带教评语。",
                 "独立完成常规分析并复核。"
               ],
@@ -8184,7 +8214,7 @@
               [
                 "经济学家（企业或咨询方向）",
                 "开展市场、定价与竞争分析并向客户提供建议。",
-                "建议不等于针对个人的投资或法律意见。",
+                "企业经济学家也可研究需求与销售；不据职业名自动取得个人投资/法律执业权限",
                 "项目报告与假设与限制说明。",
                 "承担项目负责人职责。"
               ],
@@ -8198,13 +8228,18 @@
               [
                 "教学与研究结合方向",
                 "授课并指导学生研究，同时开展个人研究。",
-                "教学与研究职责与学术规范分列。",
+                "经济学家任务可含教学；专职高校经济学教师另有25-1063分类，按实际主要职责判断",
                 "课程与研究记录、指导记录。",
                 "走学位与学术发展路径。"
               ]
             ]
           },
           "id": "economists.path.entry-role-comparison.current.v1",
+          "source_refs": [
+            "bls-duties",
+            "bls-path",
+            "r5-editor"
+          ],
           "type": "table"
         },
         {
@@ -8260,13 +8295,22 @@
               "next_step",
               "review"
             ],
+            "column_labels": [
+              "资格或训练",
+              "适用条件",
+              "是否入口要求",
+              "核对材料",
+              "地域与岗位边界",
+              "下一步",
+              "核验对象"
+            ],
             "rows": [
               [
                 "硕士学位（典型入口）",
                 "经济学或相关领域硕士",
                 "是：BLS 称典型入行至少硕士",
                 "学位材料与课程记录",
-                "按机构与岗位核验",
+                "美国BLS典型入口；中国岗位另核",
                 "核对目标岗位学历要求",
                 "由机构确认"
               ],
@@ -8275,7 +8319,7 @@
                 "含足够经济学、统计或数学课程的本科",
                 "视岗位：主要在政府的入门岗位",
                 "成绩单与相关课程记录",
-                "按机构与岗位核验",
+                "美国部分政府入口，不代表中国",
                 "核对目标岗位是否接受本科",
                 "由机构确认"
               ],
@@ -8284,7 +8328,7 @@
                 "经济学或相关领域博士",
                 "视岗位：研究或学术岗位常见",
                 "学位与研究记录",
-                "按机构与岗位核验",
+                "美国部分岗位要求，非人人博士",
                 "核对目标岗位是否要求博士",
                 "由机构确认"
               ],
@@ -8300,7 +8344,7 @@
               [
                 "分析工具训练（R／Python／SQL 等）",
                 "数据处理与可视化工具",
-                "方向相关：招聘中常见工具信号",
+                "2025美国招聘软件技能信号，非软件证书统一要求",
                 "可复现的作品与代码",
                 "按机构与岗位核验",
                 "核对目标岗位工具要求",
@@ -8318,6 +8362,12 @@
             ]
           },
           "id": "economists.path.credential-decision.current.v1",
+          "source_refs": [
+            "bls-path",
+            "onet-details",
+            "onet-tech",
+            "r5-editor"
+          ],
           "type": "table"
         }
       ]
@@ -8361,12 +8411,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035 年预计增长 5%（快于全职业平均），预计年均约 1,100 个空缺。"
+              "美国2025就业18,600人，2035预计19,500人，十年净增约900；2025—2035增长5%（BLS取整），年均约1,100空缺含增长与替代需求，非年净增或十年合计。政府预算变化可影响就业；不是中国需求、机构实时岗位或个人录用概率。"
             ]
           },
           "id": "economists.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls-outlook"
+            "bls-outlook",
+            "r5-trend"
           ],
           "type": "prose"
         },
@@ -8532,22 +8583,12 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "paragraphs": [
-              "本页所核中国来源仅提供行业和人员大类背景，不用于生成19-3011.00精确报价。"
+              "中国精确经济学家工资分布未取得。2025科学研究和技术服务业城镇非私营182,064元/年、私营83,560元/年，是匹配科研/咨询方向的行业税前均值，不覆盖所有政府或金融方向；5人及以上城镇法人单位口径，排除个体/自由职业。行业包含多职业，不能当经济学家中位数、分位、起薪或月薪。"
             ]
           },
           "id": "economists.sources.boundary.1",
           "source_refs": [
-            "bls-duties",
-            "bls-outlook",
-            "bls-path",
-            "bls-pay",
-            "editorial",
-            "nbs-wages",
-            "onet-details",
-            "onet-financial",
-            "onet-market",
-            "onet-tech",
-            "onet-wages"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -8556,22 +8597,19 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "paragraphs": [
-              "相关性、预测与因果解释分开；工具输出须经数据、代码和假设复核。"
+              "任务、工资、就业预测、软件招聘比例分别对应不同文档；风险控制与AI试验为编辑建议，未取得机构统一流程或本职业采用/提效。"
             ]
           },
           "id": "economists.sources.boundary.1.2",
           "source_refs": [
-            "bls-duties",
-            "bls-outlook",
-            "bls-path",
-            "bls-pay",
-            "editorial",
-            "nbs-wages",
             "onet-details",
-            "onet-financial",
-            "onet-market",
-            "onet-tech",
-            "onet-wages"
+            "onet-wages",
+            "r5-oews-concepts",
+            "bls-outlook",
+            "r5-trend",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -8697,14 +8735,13 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "可通过本条所列来源链接查看原文。",
-                  "仅用于所列职业、市场、时期和口径。"
+                  "What They Do / Work Environment：办公室、调查、建模预测、政策评估与咨询；政府/企业任务可重叠商业需求分析。"
                 ],
                 "evidence_type": "official duties and work context",
                 "id": "bls-duties",
-                "limitation": "仅用于所列职业、市场、时期和口径。",
+                "limitation": "What They Do / Work Environment：办公室、调查、建模预测、政策评估与咨询；政府/企业任务可重叠商业需求分析。",
                 "market": "美国",
                 "name": "BLS OOH — Economists duties",
                 "period": "current page; accessed 2026-09-06",
@@ -8713,14 +8750,13 @@
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/economists.htm"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "可通过本条所列来源链接查看原文。",
-                  "仅用于所列职业、市场、时期和口径。"
+                  "美国2025就业18,600人，2035预计19,500人，十年净增约900；2025—2035增长5%（BLS取整），年均约1,100空缺含增长与替代需求，非年净增或十年合计。政府预算变化可影响就业；不是中国需求、机构实时岗位或个人录用概率。"
                 ],
                 "evidence_type": "official employment projection",
                 "id": "bls-outlook",
-                "limitation": "仅用于所列职业、市场、时期和口径。",
+                "limitation": "美国2025就业18,600人，2035预计19,500人，十年净增约900；2025—2035增长5%（BLS取整），年均约1,100空缺含增长与替代需求，非年净增或十年合计。政府预算变化可影响就业；不是中国需求、机构实时岗位或个人录用概率。",
                 "market": "美国",
                 "name": "BLS OOH — Economists outlook",
                 "period": "2025-2035 projections",
@@ -8729,14 +8765,13 @@
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/economists.htm"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "可通过本条所列来源链接查看原文。",
-                  "仅用于所列职业、市场、时期和口径。"
+                  "BLS美国典型至少硕士，部分政府入门岗接受有足够经济学/统计/数学课程的学士；商业、研究或国际组织可要求硕士或博士与工作经验。O*NET新聘教育反馈50%硕士、25%博士、21%学士（所列96%），不是中国普遍学历或招聘占比；Job Zone Five准备层级不等本职业人人五年以上经验。"
                 ],
                 "evidence_type": "official entry path",
                 "id": "bls-path",
-                "limitation": "仅用于所列职业、市场、时期和口径。",
+                "limitation": "BLS美国典型至少硕士，部分政府入门岗接受有足够经济学/统计/数学课程的学士；商业、研究或国际组织可要求硕士或博士与工作经验。O*NET新聘教育反馈50%硕士、25%博士、21%学士（所列96%），不是中国普遍学历或招聘占比；Job Zone Five准备层级不等本职业人人五年以上经验。",
                 "market": "美国",
                 "name": "BLS OOH — Economists education and qualities",
                 "period": "current page; accessed 2026-09-06",
@@ -8745,14 +8780,13 @@
                 "url": "https://www.bls.gov/ooh/life-physical-and-social-science/economists.htm"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "可通过本条所列来源链接查看原文。",
-                  "仅用于所列职业、市场、时期和口径。"
+                  "美国19-3011，2025年5月年薪10/25/50/75/90分位67,360/89,330/124,720/174,720/238,060美元；同口径时薪32.38/42.95/59.96/84.00/114.45美元。50分位是中位数而非均值；受雇税前直时工资、排除自雇，分位不对应学历、职级或个人起薪。"
                 ],
                 "evidence_type": "official wage data",
                 "id": "bls-pay",
-                "limitation": "仅用于所列职业、市场、时期和口径。",
+                "limitation": "美国19-3011，2025年5月年薪10/25/50/75/90分位67,360/89,330/124,720/174,720/238,060美元；同口径时薪32.38/42.95/59.96/84.00/114.45美元。50分位是中位数而非均值；受雇税前直时工资、排除自雇，分位不对应学历、职级或个人起薪。",
                 "market": "美国",
                 "name": "BLS OOH — Economists pay",
                 "period": "May 2025 wages",
@@ -8777,14 +8811,13 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "可通过本条所列来源链接查看原文。",
-                  "按行业和人员大类聚合，不是19-3011.00精确职业工资。"
+                  "保留原登记URL；实际发布正文另登记r5-nbs-current。中国精确经济学家工资分布未取得。2025科学研究和技术服务业城镇非私营182,064元/年、私营83,560元/年，是匹配科研/咨询方向的行业税前均值，不覆盖所有政府或金融方向；5人及以上城镇法人单位口径，排除个体/自由职业。行业包含多职业，不能当经济学家中位数、分位、起薪或月薪。"
                 ],
                 "evidence_type": "official aggregate wage statistics",
                 "id": "nbs-wages",
-                "limitation": "按行业和人员大类聚合，不是19-3011.00精确职业工资。",
+                "limitation": "保留原登记URL；实际发布正文另登记r5-nbs-current。中国精确经济学家工资分布未取得。2025科学研究和技术服务业城镇非私营182,064元/年、私营83,560元/年，是匹配科研/咨询方向的行业税前均值，不覆盖所有政府或金融方向；5人及以上城镇法人单位口径，排除个体/自由职业。行业包含多职业，不能当经济学家中位数、分位、起薪或月薪。",
                 "market": "中国大陆",
                 "name": "国家统计局 — 2025年城镇单位就业人员年平均工资情况",
                 "period": "2025 wage aggregates published 2026",
@@ -8793,14 +8826,13 @@
                 "url": "https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "可通过本条所列来源链接查看原文。",
-                  "仅用于所列职业、市场、时期和口径。"
+                  "2026档案：16任务、57情境；兴趣I100/C59/E49/A24/S23/R6；教育50/25/21与20工作风格，均美国职业档案。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-details",
-                "limitation": "仅用于所列职业、市场、时期和口径。",
+                "limitation": "2026档案：16任务、57情境；兴趣I100/C59/E49/A24/S23/R6；教育50/25/21与20工作风格，均美国职业档案。",
                 "market": "美国",
                 "name": "O*NET OnLine — Economists 19-3011.00",
                 "period": "current page; accessed 2026-09-06",
@@ -8841,14 +8873,13 @@
                 "url": "https://www.onetonline.org/link/summary/13-1161.00"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "可通过本条所列来源链接查看原文。",
-                  "仅用于所列职业、市场、时期和口径。"
+                  "2025全年美国本职业唯一招聘中提及软件技能的比例：Excel/R/Python各27%、PowerPoint18%、SQL15%、SAS14%；分母为关联本O*NET职业的全部唯一招聘。24技能行含未给比例项，未给不等0；不代表GenAI采用、提效或替代率。"
                 ],
                 "evidence_type": "official job-posting software signals",
                 "id": "onet-tech",
-                "limitation": "仅用于所列职业、市场、时期和口径。",
+                "limitation": "2025全年美国本职业唯一招聘中提及软件技能的比例：Excel/R/Python各27%、PowerPoint18%、SQL15%、SAS14%；分母为关联本O*NET职业的全部唯一招聘。24技能行含未给比例项，未给不等0；不代表GenAI采用、提效或替代率。",
                 "market": "美国",
                 "name": "O*NET OnLine — Economists hot technologies",
                 "period": "2025 US job postings",
@@ -8857,20 +8888,184 @@
                 "url": "https://www.onetonline.org/link/hot_tech/19-3011.00"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "可通过本条所列来源链接查看原文。",
-                  "仅用于所列职业、市场、时期和口径。"
+                  "美国19-3011，2025年5月年薪10/25/50/75/90分位67,360/89,330/124,720/174,720/238,060美元；同口径时薪32.38/42.95/59.96/84.00/114.45美元。50分位是中位数而非均值；受雇税前直时工资、排除自雇，分位不对应学历、职级或个人起薪。"
                 ],
                 "evidence_type": "official national wage distribution",
                 "id": "onet-wages",
-                "limitation": "仅用于所列职业、市场、时期和口径。",
+                "limitation": "美国19-3011，2025年5月年薪10/25/50/75/90分位67,360/89,330/124,720/174,720/238,060美元；同口径时薪32.38/42.95/59.96/84.00/114.45美元。50分位是中位数而非均值；受雇税前直时工资、排除自雇，分位不对应学历、职级或个人起薪。",
                 "market": "美国",
                 "name": "O*NET OnLine — National wages for Economists",
                 "period": "2025 BLS wage data",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/19-3011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-oews-concepts",
+                "limitation": "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。",
+                "market": "美国",
+                "name": "BLS OEWS工资人群与组成",
+                "period": "现行方法；本批检索2026-10-09",
+                "publisher": "Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。"
+                ],
+                "evidence_type": "official law",
+                "id": "r5-cn-pipl",
+                "limitation": "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。",
+                "market": "中国内地",
+                "name": "个人信息保护法：经济学研究、调查和客户资料中的可识别个人信息边界",
+                "period": "2021法；本批实际读；检索2026-10-09",
+                "publisher": "全国人大/中央网信办",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "自愿AI治理建议非经济学研究、调查和客户资料的行业技术规范或岗位授权，也非工具采用/提效实测。"
+                ],
+                "evidence_type": "official framework",
+                "id": "r5-nist-current",
+                "limitation": "自愿AI治理建议非经济学研究、调查和客户资料的行业技术规范或岗位授权，也非工具采用/提效实测。",
+                "market": "跨市场",
+                "name": "NIST AI RMF官方框架说明",
+                "period": "自愿框架1.0；本批实际读；检索2026-10-09",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本批实际读ILO2025摘要，本职业未核SOC19-3011与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。"
+                ],
+                "evidence_type": "official research summary",
+                "id": "r5-ilo-current",
+                "limitation": "本批实际读ILO2025摘要，本职业未核SOC19-3011与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。",
+                "market": "跨市场",
+                "name": "ILO2025 GenAI暴露研究官方摘要",
+                "period": "2025研究摘要；本批实际读；检索2026-10-09",
+                "publisher": "ILO",
+                "scope": "contextual",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国精确经济学家工资分布未取得。2025科学研究和技术服务业城镇非私营182,064元/年、私营83,560元/年，是匹配科研/咨询方向的行业税前均值，不覆盖所有政府或金融方向；5人及以上城镇法人单位口径，排除个体/自由职业。行业包含多职业，不能当经济学家中位数、分位、起薪或月薪。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "r5-nbs-current",
+                "limitation": "中国精确经济学家工资分布未取得。2025科学研究和技术服务业城镇非私营182,064元/年、私营83,560元/年，是匹配科研/咨询方向的行业税前均值，不覆盖所有政府或金融方向；5人及以上城镇法人单位口径，排除个体/自由职业。行业包含多职业，不能当经济学家中位数、分位、起薪或月薪。",
+                "market": "中国大陆",
+                "name": "国家统计局2025城镇工资原发布正文",
+                "period": "2025年度/2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "编辑候选、风险分析和能力比较不是实测效果、法定统一程序、招聘样本或个人成功率。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "r5-editor",
+                "limitation": "编辑候选、风险分析和能力比较不是实测效果、法定统一程序、招聘样本或个人成功率。",
+                "market": "全球",
+                "name": "经济学家AI候选、风险控制与转岗编辑说明",
+                "period": "2026-10-09实读",
+                "publisher": "FermatMind本轮作者",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国2025就业18,600人，2035预计19,500人，十年净增约900；2025—2035增长5%（BLS取整），年均约1,100空缺含增长与替代需求，非年净增或十年合计。政府预算变化可影响就业；不是中国需求、机构实时岗位或个人录用概率。"
+                ],
+                "evidence_type": "official employment projections",
+                "id": "r5-trend",
+                "limitation": "美国2025就业18,600人，2035预计19,500人，十年净增约900；2025—2035增长5%（BLS取整），年均约1,100空缺含增长与替代需求，非年净增或十年合计。政府预算变化可影响就业；不是中国需求、机构实时岗位或个人录用概率。",
+                "market": "美国",
+                "name": "O*NET经济学家全国就业趋势",
+                "period": "2025—2035",
+                "publisher": "O*NET / BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/19-3011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "仅支持美国相邻职业的主要工作对象和职责比较，转岗距离为编辑判断，不保证技能互认、执业资格或成功率。"
+                ],
+                "evidence_type": "official adjacent occupation profile",
+                "id": "r5-fund",
+                "limitation": "仅支持美国相邻职业的主要工作对象和职责比较，转岗距离为编辑判断，不保证技能互认、执业资格或成功率。",
+                "market": "美国",
+                "name": "O*NET相邻职业定义：投资基金经理",
+                "period": "2026-10-09实读",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-3031.03"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "仅支持美国相邻职业的主要工作对象和职责比较，转岗距离为编辑判断，不保证技能互认、执业资格或成功率。"
+                ],
+                "evidence_type": "official adjacent occupation profile",
+                "id": "r5-advisors",
+                "limitation": "仅支持美国相邻职业的主要工作对象和职责比较，转岗距离为编辑判断，不保证技能互认、执业资格或成功率。",
+                "market": "美国",
+                "name": "O*NET相邻职业定义：个人财务顾问",
+                "period": "2026-10-09实读",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-2052.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "仅支持美国相邻职业的主要工作对象和职责比较，转岗距离为编辑判断，不保证技能互认、执业资格或成功率。"
+                ],
+                "evidence_type": "official adjacent occupation profile",
+                "id": "r5-risk",
+                "limitation": "仅支持美国相邻职业的主要工作对象和职责比较，转岗距离为编辑判断，不保证技能互认、执业资格或成功率。",
+                "market": "美国",
+                "name": "O*NET相邻职业定义：金融风险专家",
+                "period": "2026-10-09实读",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-2054.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "仅支持美国相邻职业的主要工作对象和职责比较，转岗距离为编辑判断，不保证技能互认、执业资格或成功率。"
+                ],
+                "evidence_type": "official adjacent occupation profile",
+                "id": "r5-statistician",
+                "limitation": "仅支持美国相邻职业的主要工作对象和职责比较，转岗距离为编辑判断，不保证技能互认、执业资格或成功率。",
+                "market": "美国",
+                "name": "O*NET相邻职业定义：统计师",
+                "period": "2026-10-09实读",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-2041.00"
               }
             ]
           },
@@ -9077,12 +9272,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "数据整理与图表草稿",
+            "AI主要改变": "编辑候选，未核效果：数据整理与图表草稿",
             "仍由人负责": "问题定义、识别策略与因果解释",
             "方向": "研究对象"
           },
           {
-            "AI主要改变": "检索与复现清单起草",
+            "AI主要改变": "编辑候选，未核效果：检索与复现清单起草",
             "仍由人负责": "原始数据核对与发布授权",
             "方向": "工作流程"
           }
@@ -9095,18 +9290,19 @@
         },
         "evidence_rows": [
           {
-            "使用限制": "仅适用于所列职业、市场与时期；不外推到中国或所有机构与雇主。",
+            "source_ref": "onet-tech",
+            "使用限制": "软件提及比例不是AI采用或提效",
             "来源": {
-              "$source": "bls-duties",
+              "$source": "onet-tech",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "economists.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "2025美国招聘软件技能",
+            "结论": "2025全年美国本职业唯一招聘中提及软件技能的比例：Excel/R/Python各27%、PowerPoint18%、SQL15%、SAS14%；分母为关联本O*NET职业的全部唯一招聘。24技能行含未给比例项，未给不等0；不代表GenAI采用、提效或替代率。",
             "链接": {
-              "$source": "bls-duties",
+              "$source": "onet-tech",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9114,18 +9310,19 @@
             }
           },
           {
-            "使用限制": "仅适用于所列职业、市场与时期；不外推到中国或所有机构与雇主。",
+            "source_ref": "r5-ilo-current",
+            "使用限制": "非中国本职业实测采用与效果",
             "来源": {
-              "$source": "bls-outlook",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "economists.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "ILO任务暴露研究",
+            "结论": "任务暴露不是裁员率或替代日期",
             "链接": {
-              "$source": "bls-outlook",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9133,18 +9330,19 @@
             }
           },
           {
-            "使用限制": "仅适用于所列职业、市场与时期；不外推到中国或所有机构与雇主。",
+            "source_ref": "r5-nist-current",
+            "使用限制": "非本职业提效或替代预测",
             "来源": {
-              "$source": "bls-path",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "economists.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "NIST AI风险框架",
+            "结论": "治理参考，不授予机构权限",
             "链接": {
-              "$source": "bls-path",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9160,7 +9358,7 @@
         },
         "method_cards": [
           {
-            "含义": "先区分可辅助任务与必须由研究者完成的判断。",
+            "含义": "区分编辑辅助候选与研究者须复核的判断；不作永久不可替代预测。",
             "概念": "任务能力"
           },
           {
@@ -9192,16 +9390,16 @@
             "问题": "AI 会取代经济学家吗？"
           },
           {
-            "回答": "先限定在数据清理、变量说明、检索、图表与报告草稿。",
+            "回答": "编辑候选：在获准数据上试验清理、变量说明、检索、图表与草稿，再核错误和复核成本；未核部署率。",
             "来源": {
-              "$source": "bls-outlook",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "economists.source-register.published.1"
             },
             "链接": {
-              "$source": "bls-outlook",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9245,11 +9443,11 @@
           },
           {
             "步骤": "人工复核",
-            "说明": "由具名研究者复核模型设定、估计与结论。"
+            "说明": "编辑建议由有权限研究者复核模型、估计与结论；实际责任岗位另核。"
           },
           {
             "步骤": "记录升级",
-            "说明": "发现口径冲突或越权发布立即停止并上报。"
+            "说明": "编辑建议标明异常并按实际制度报告，暂停/恢复条件和对象未取得，不设统一上报顺序。"
           }
         ],
         "risk_rows": [
@@ -9299,28 +9497,28 @@
             "当前变化": "不作自动授权"
           },
           {
-            "人的控制点": "由具名审阅者确认结论。",
+            "人的控制点": "编辑建议由有权限的研究或审阅人员复核，未取得统一审阅制度。",
             "任务": "形成复现与审阅记录",
             "工作方向": "复盘与改进",
-            "当前变化": "可能辅助整理"
+            "当前变化": "编辑候选，未核采用或效果：可能辅助整理"
           },
           {
             "人的控制点": "回到原始数据与文档核对。",
             "任务": "核对数据来源与变量定义",
             "工作方向": "输入与版本",
-            "当前变化": "招聘信息中Excel、R、Python各27%，SQL 15%、SAS 14%，这是软件需求而非AI采用率。"
+            "当前变化": "2025全年美国本职业唯一招聘中提及软件技能的比例：Excel/R/Python各27%、PowerPoint18%、SQL15%、SAS14%；分母为关联本O*NET职业的全部唯一招聘。24技能行含未给比例项，未给不等0；不代表GenAI采用、提效或替代率。"
           },
           {
-            "人的控制点": "发现越界或异常即停止并升级。",
+            "人的控制点": "编辑建议标明口径或权限异常，停止依赖未核结果；实际报告对象、暂停和恢复程序另核。",
             "任务": "识别口径冲突与缺失",
             "工作方向": "边界与异常",
-            "当前变化": "可辅助：数据清理代码、变量说明、图表和报告结构草稿。"
+            "当前变化": "编辑候选，未核采用或效果：可辅助：数据清理代码、变量说明、图表和报告结构草稿。"
           },
           {
-            "人的控制点": "责任人确认权限、结论与留痕。",
+            "人的控制点": "编辑建议核责任人、数据权限和发布条件，实际制度另核。",
             "任务": "形成可追溯的分析交付",
             "工作方向": "采用与责任",
-            "当前变化": "可辅助：列出替代模型、稳健性检查与复现清单。"
+            "当前变化": "编辑候选，未核采用或效果：可辅助：列出替代模型、稳健性检查与复现清单。"
           }
         ],
         "transition": {
@@ -9420,12 +9618,12 @@
       },
       "career_ai_description_block": {
         "body": [
-          "AI 与统计软件可辅助数据清理、变量说明、检索、图表与报告草稿；但数据口径与代表性、因果识别、模型假设、稳健性、对外发布与政策建议的最终责任仍由具名研究者与机构承担。"
+          "编辑试验候选：数据清理、变量说明、检索、图表和报告草稿是否适用生成式AI须验证；O*NET统计软件招聘信号不能证明GenAI能力、职业采用或提效。本轮未取得经济学家AI部署与效果样本。数据口径与代表性、因果识别、假设和稳健性须人工复核，发布及政策建议依实际机构权限与责任安排。"
         ],
         "heading": "经济学家的工作对象与 AI 边界"
       },
       "career_path_block": {
-        "boundary": "入口要求、数据权限、发布授权与最终责任由具体机构与岗位核验。",
+        "boundary": "学历典型条件来自美国BLS/O*NET，不等中国统一法定门槛；路径与岗位观察为编辑建议，实际数据、发布和责任制度未取得。",
         "competence_ladder": [
           {
             "description": "明确研究对象、指标与口径。",
@@ -9620,9 +9818,9 @@
               },
               {
                 "credentials": "按机构与岗位规则核验。",
-                "next_moves": "按授权链处理并留痕。",
+                "next_moves": "按实际岗位制度处理，未核统一授权链",
                 "readiness_evidence": "有升级与处理记录。",
-                "responsibility": "识别口径与数据异常并停止。",
+                "responsibility": "编辑建议识别口径和数据异常，标明限制；实际暂停程序另核",
                 "role": "异常处理"
               },
               {
@@ -9656,7 +9854,7 @@
                 "credentials": "按机构与岗位规则核验。",
                 "next_moves": "保留决定依据。",
                 "readiness_evidence": "异常及时上报。",
-                "responsibility": "设置停止与升级条件。",
+                "responsibility": "编辑建议核实际暂停、报告和恢复条件，非统一职业程序",
                 "role": "风险升级"
               },
               {
@@ -9820,17 +10018,17 @@
           }
         ],
         "direct_answer": "先识别数据口径、样本与模型、因果表述、工具输出与授权边界五类风险。",
-        "evidence_scope": "风险项按本职业内容与所列来源（BLS OOH 与 O*NET）边界解释。",
+        "evidence_scope": "BLS/O*NET支持任务背景；以下后果和控制为编辑风险分析，不是发生率、法定流程或统一责任岗位。",
         "heading": "经济学家的风险与控制点",
         "risks": [
           {
             "affected_roles": "经济学家",
             "consequence": "可能使估计与结论不可比，影响下游决策。",
             "evidence_refs": [
-              "bls-duties"
+              "r5-editor"
             ],
             "id": "risk-1",
-            "mitigation": "由数据责任人核定义、时期与版本，差异交研究负责人。",
+            "mitigation": "编辑建议核数据定义、时期和版本并说明差异，实际数据责任人和接受标准另核。",
             "scenario": "数据口径或版本变更而未被记录。",
             "title": {
               "$item": "economists.risk.career-risk-cards.1",
@@ -9843,10 +10041,10 @@
             "affected_roles": "经济学家",
             "consequence": "可能使结论无法外推或产生误导。",
             "evidence_refs": [
-              "bls-duties"
+              "r5-editor"
             ],
             "id": "risk-2",
-            "mitigation": "建模前记录纳入排除规则与覆盖范围，关键缺口交项目负责人。",
+            "mitigation": "编辑建议记录纳入排除规则、覆盖范围和关键缺口；是否继续分析由实际项目制度核定。",
             "scenario": "样本选择偏差或覆盖范围不当。",
             "title": {
               "$item": "economists.risk.career-risk-cards.2",
@@ -9859,10 +10057,10 @@
             "affected_roles": "经济学家",
             "consequence": "可能使结论对设定高度敏感而不可靠。",
             "evidence_refs": [
-              "bls-duties"
+              "r5-editor"
             ],
             "id": "risk-3",
-            "mitigation": "运行替代设定与敏感性检查，结论变化显著时升级独立审阅。",
+            "mitigation": "编辑建议比较替代设定与敏感性，结论不稳时标明限制并按实际制度审阅。",
             "scenario": "模型设定不稳或稳健性检查缺失。",
             "title": {
               "$item": "economists.risk.career-risk-cards.3",
@@ -9875,10 +10073,10 @@
             "affected_roles": "经济学家",
             "consequence": "可能误导政策或投资判断。",
             "evidence_refs": [
-              "bls-duties"
+              "r5-editor"
             ],
             "id": "risk-4",
-            "mitigation": "核识别假设与证据强度，证据不足则降级措辞。",
+            "mitigation": "编辑建议核识别假设和证据强度，相关性不直接写成因果；实际发布人员另核。",
             "scenario": "把相关性或预测写成因果。",
             "title": {
               "$item": "economists.risk.career-risk-cards.4",
@@ -9891,10 +10089,10 @@
             "affected_roles": "经济学家",
             "consequence": "可能产生不可复现或错误的结论。",
             "evidence_refs": [
-              "bls-duties"
+              "r5-editor"
             ],
             "id": "risk-5",
-            "mitigation": "由具名责任人复现结果并核原始来源，工具不拥有发布或签字权。",
+            "mitigation": "编辑建议复现工具代码并核原始引用；工具不能自行取得发布或政策决定权。",
             "scenario": "工具生成的错误代码或引用未被发现。",
             "title": {
               "$item": "economists.risk.career-risk-cards.5",
@@ -9907,10 +10105,11 @@
             "affected_roles": "经济学家",
             "consequence": "可能产生不可逆的合规或声誉后果。",
             "evidence_refs": [
-              "bls-duties"
+              "r5-editor",
+              "r5-cn-pipl"
             ],
             "id": "risk-boundary",
-            "mitigation": "停止并按机构授权链升级。",
+            "mitigation": "编辑建议先核数据与发布权限；具体报告对象、暂停/恢复程序另核。涉及可识别个人的调查、行政或客户数据时，按个人信息保护法核合法基础、目的、最小必要与安全措施；敏感信息另按28条类别及风险判断，经济数据不当然全部是敏感个人信息。编辑建议核工具接收方、用途、保留、权限和训练使用，机构批准不替代法律义务。",
             "scenario": "遇到超出授权范围的数据或发布任务。",
             "title": "责任边界"
           }
@@ -9988,6 +10187,36 @@
               "item": "economists.source-register.published.1"
             },
             "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": null,
+            "id": "r5-editor",
+            "label": {
+              "$source": "r5-editor",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "economists.source-register.published.1"
+            },
+            "scope": "编辑建议非统一制度"
+          },
+          {
+            "href": {
+              "$source": "r5-cn-pipl",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "economists.source-register.published.1"
+            },
+            "id": "r5-cn-pipl",
+            "label": {
+              "$source": "r5-cn-pipl",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "economists.source-register.published.1"
+            },
+            "scope": "涉及可识别个人的调查、行政或客户数据时，按个人信息保护法核合法基础、目的、最小必要与安全措施；敏感信息另按28条类别及风险判断，经济数据不当然全部是敏感个人信息。编辑建议核工具接收方、用途、保留、权限和训练使用，机构批准不替代法律义务。"
           }
         ]
       },
@@ -9996,8 +10225,8 @@
           "bls_table": [
             {
               "指标": "中国大陆薪资口径",
-              "数值": "证据不足：未取得全国单职业口径",
-              "说明": "现有官方来源为行业与人员大类聚合，未建立与 19-3011.00 精确对应的全国职业工资分布。"
+              "数值": "精确职业缺口；科研技术行业代理",
+              "说明": "中国精确经济学家工资分布未取得。2025科学研究和技术服务业城镇非私营182,064元/年、私营83,560元/年，是匹配科研/咨询方向的行业税前均值，不覆盖所有政府或金融方向；5人及以上城镇法人单位口径，排除个体/自由职业。行业包含多职业，不能当经济学家中位数、分位、起薪或月薪。"
             }
           ],
           "china_ai_row": {
@@ -10016,7 +10245,7 @@
             {
               "学历段": "入口要求",
               "岗位方向": "研究型岗位",
-              "说明": "通常至少硕士学位；部分研究或学术岗位需博士。"
+              "说明": "中国目标岗位学历未采；美国BLS典型硕士和部分学士入口不能外推中国。"
             },
             {
               "学历段": "在职训练",
@@ -10041,9 +10270,9 @@
               "需求": "证据不足：未取得全国单职业口径"
             },
             {
-              "备注": "岗位与地区差异明显。",
+              "备注": "中国精确经济学家工资分布未取得。2025科学研究和技术服务业城镇非私营182,064元/年、私营83,560元/年，是匹配科研/咨询方向的行业税前均值，不覆盖所有政府或金融方向；5人及以上城镇法人单位口径，排除个体/自由职业。行业包含多职业，不能当经济学家中位数、分位、起薪或月薪。",
               "行业": "专业、科学与技术服务",
-              "需求": "证据不足：未取得全国单职业口径"
+              "需求": "2025行业年均182,064/83,560元"
             },
             {
               "备注": "需按具体岗位核对。",
@@ -10062,7 +10291,7 @@
           "china_ref": {
             "$join": [
               {
-                "$source": "bls-duties",
+                "$source": "r5-nbs-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -10070,7 +10299,7 @@
               },
               "｜",
               {
-                "$source": "bls-duties",
+                "$source": "r5-nbs-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10079,7 +10308,7 @@
             ],
             "separator": ""
           },
-          "china_salary_note": "中国公开来源仅用于说明口径边界，不提供本职业工资。",
+          "china_salary_note": "中国精确经济学家工资分布未取得。2025科学研究和技术服务业城镇非私营182,064元/年、私营83,560元/年，是匹配科研/咨询方向的行业税前均值，不覆盖所有政府或金融方向；5人及以上城镇法人单位口径，排除个体/自由职业。行业包含多职业，不能当经济学家中位数、分位、起薪或月薪。",
           "china_salary_table": [
             {
               "城市/区间": "全国单职业",
@@ -10087,7 +10316,7 @@
             },
             {
               "城市/区间": "行业平均工资（不可替代）",
-              "月薪参考": "证据不足：不以行业均值替代职业工资"
+              "月薪参考": "2025行业年均182,064/83,560元（非私营/私营）；不折算职业月薪"
             },
             {
               "城市/区间": "招聘报价（不可替代）",
@@ -10103,7 +10332,7 @@
           "sources_note": {
             "$join": [
               {
-                "$source": "nbs-wages",
+                "$source": "r5-nbs-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -10111,7 +10340,7 @@
               },
               "｜",
               {
-                "$source": "nbs-wages",
+                "$source": "r5-nbs-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10138,7 +10367,7 @@
         "authority_sources": {
           "$join": [
             {
-              "$source": "nbs-wages",
+              "$source": "onet-wages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10146,7 +10375,7 @@
             },
             "｜",
             {
-              "$source": "nbs-wages",
+              "$source": "onet-wages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10162,7 +10391,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "bls-duties",
+                  "$source": "onet-wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10170,7 +10399,7 @@
                 },
                 "｜",
                 {
-                  "$source": "bls-duties",
+                  "$source": "onet-wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10186,7 +10415,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "bls-duties",
+                  "$source": "onet-wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10194,7 +10423,7 @@
                 },
                 "｜",
                 {
-                  "$source": "bls-duties",
+                  "$source": "onet-wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10210,7 +10439,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "bls-duties",
+                  "$source": "onet-wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10218,7 +10447,7 @@
                 },
                 "｜",
                 {
-                  "$source": "bls-duties",
+                  "$source": "onet-wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10234,7 +10463,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "bls-duties",
+                  "$source": "onet-wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10242,7 +10471,7 @@
                 },
                 "｜",
                 {
-                  "$source": "bls-duties",
+                  "$source": "onet-wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10258,7 +10487,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "bls-duties",
+                  "$source": "onet-wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10266,7 +10495,7 @@
                 },
                 "｜",
                 {
-                  "$source": "bls-duties",
+                  "$source": "onet-wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10282,7 +10511,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "nbs-wages",
+                  "$source": "bls-outlook",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10290,7 +10519,7 @@
                 },
                 "｜",
                 {
-                  "$source": "nbs-wages",
+                  "$source": "bls-outlook",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10306,7 +10535,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "nbs-wages",
+                  "$source": "bls-outlook",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10314,7 +10543,7 @@
                 },
                 "｜",
                 {
-                  "$source": "nbs-wages",
+                  "$source": "bls-outlook",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10330,7 +10559,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "nbs-wages",
+                  "$source": "bls-outlook",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10338,7 +10567,7 @@
                 },
                 "｜",
                 {
-                  "$source": "nbs-wages",
+                  "$source": "bls-outlook",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10392,19 +10621,19 @@
         "industry_period": "2025 年 5 月工资数据",
         "industry_rows": [
           {
-            "industry": "政府（Government）",
-            "median": "按来源",
-            "note": "BLS 列为该职业主要行业之一。"
+            "industry": "联邦政府（不含邮政）",
+            "median": "144,680美元/年",
+            "note": "BLS2025部分主要行业工资中位，非全政府均值"
           },
           {
-            "industry": "专业、科学与技术服务",
-            "median": "按来源",
-            "note": "BLS 列为该职业主要行业之一。"
+            "industry": "管理、科学与技术咨询服务",
+            "median": "141,010美元/年",
+            "note": "BLS2025部分主要行业工资中位，非中国咨询工资"
           },
           {
-            "industry": "机构/雇主",
-            "median": "需核对",
-            "note": "数据权限与发布要求可能不同。"
+            "industry": "科学研究与开发服务",
+            "median": "139,880美元/年",
+            "note": "BLS2025部分主要行业工资中位；合同权限另核"
           },
           {
             "industry": "时期",
@@ -10467,7 +10696,7 @@
           },
           {
             "equivalent": "第 90 百分位",
-            "interpretation": "分布高端，通常与机构、学位与领域相关。",
+            "interpretation": "美国本职业90分位，非高学历/高职级的保证；具体合同另核。",
             "label": "高位",
             "value": "238,060 美元/年"
           }
@@ -10580,7 +10809,7 @@
             "limitation": "预测不是个人录用保证。",
             "metric": "就业规模",
             "occupation_scope": "经济学家（19-3011.00）",
-            "value": "约 18,600 人（2025 年）"
+            "value": "2025约18,600人；2035预计19,500，十年净增约900"
           },
           {
             "geography": "美国",
@@ -10681,50 +10910,56 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
+            "source_id": "r5-fund",
             "target_href": "/zh/career/jobs/investment-fund-managers",
             "target_slug": "investment-fund-managers",
             "target_title": "投资基金经理：与本职业在受托投资决策上的差异",
-            "transition_distance": "中，需补组合管理与合规"
+            "transition_distance": "编辑比较：中，需补组合管理与合规；未核个人成功率或资格互认"
           },
           {
             "capability_gaps": "需要补足：市场调研设计与营销分析。",
             "shared_capabilities": "可转移能力：数据与统计分析与报告写作。",
+            "source_id": "onet-market",
             "target_href": "/zh/career/jobs/market-research-analysts-and-marketing-specialists",
             "target_slug": "market-research-analysts-and-marketing-specialists",
             "target_title": "市场研究分析师与营销专家：与本职业在商业营销研究上的差异",
-            "transition_distance": "中，需补市场调研"
+            "transition_distance": "编辑比较：中，需补市场调研；未核个人成功率或资格互认"
           },
           {
             "capability_gaps": "需要补足：估值方法与行业分析。",
             "shared_capabilities": "可转移能力：数据处理与量化分析。",
+            "source_id": "onet-financial",
             "target_href": "/zh/career/jobs/financial-and-investment-analysts",
             "target_slug": "financial-and-investment-analysts",
             "target_title": "金融与投资分析师：与本职业在估值与投资标的上的差异",
-            "transition_distance": "中，需补估值与行业分析"
+            "transition_distance": "编辑比较：中，需补估值与行业分析；未核个人成功率或资格互认"
           },
           {
             "capability_gaps": "需要补足：面向个人客户的合规与受托责任。",
             "shared_capabilities": "可转移能力：经济与财务分析与沟通。",
+            "source_id": "r5-advisors",
             "target_href": "/zh/career/jobs/personal-financial-advisors",
             "target_slug": "personal-financial-advisors",
             "target_title": "个人财务顾问：与本职业在个人客户责任与监管上的差异",
-            "transition_distance": "远，需补合规与客户责任"
+            "transition_distance": "编辑比较：远，需补合规与客户责任；未核个人成功率或资格互认"
           },
           {
             "capability_gaps": "需要补足：机构风险管理框架与合规。",
             "shared_capabilities": "可转移能力：数据分析与风险评估思路。",
+            "source_id": "r5-risk",
             "target_href": "/zh/career/jobs/financial-risk-specialists",
             "target_slug": "financial-risk-specialists",
             "target_title": "金融风险专家：与本职业在机构风险管理上的差异",
-            "transition_distance": "中，需补风险管理框架"
+            "transition_distance": "编辑比较：中，需补风险管理框架；未核个人成功率或资格互认"
           },
           {
             "capability_gaps": "需要补足：统计理论与实验设计。",
             "shared_capabilities": "可转移能力：统计推断与数据建模。",
+            "source_id": "r5-statistician",
             "target_href": "/zh/career/jobs/statisticians",
             "target_slug": "statisticians",
             "target_title": "统计师：与本职业在统计方法与实验设计上的差异",
-            "transition_distance": "近，方法相近但对象不同"
+            "transition_distance": "编辑比较：近，方法相近但对象不同；未核个人成功率或资格互认"
           }
         ]
       },
@@ -11168,9 +11403,9 @@
       ],
       "riasec_fit_block": {
         "fit_interest": "兴趣只提示探索方向；实际适配以可复核的分析作品与跟岗观察核验。",
-        "interest": "官方兴趣代码 ICE（研究型、常规型、企业型）：以数据与模型研究经济现象、按口径与标准处理数据，并以分析支持决策与政策。",
+        "interest": "O*NET美国职业兴趣I100/C59/E49/A24/S23/R6；ICE为前三兴趣概括，不是个人能力或诊断。",
         "riasec": "ICE",
-        "riasec_short": "官方兴趣代码 ICE；不作人格诊断或录用依据。"
+        "riasec_short": "ICE概括美国职业兴趣前三项；不作个人诊断或录用依据。"
       },
       "source_card": {
         "eeat_signals": {
@@ -11370,7 +11605,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "经济研究与政策评估 · 统计与计量方法 · 报告与咨询",
@@ -11421,7 +11656,7 @@
       "text": "经济学家"
     }
   },
-  "source_content_sha256": "a48aae854df0cea2fb3905340df0188249b86cc35947a2ab258fbd96a787f856",
+  "source_content_sha256": "83a2a13a93b4acf2ed0a190297d3a2adf402f98eaeca90101fe7499c6e547131",
   "subject": {
     "canonical_slug": "economists",
     "name": "经济学家",

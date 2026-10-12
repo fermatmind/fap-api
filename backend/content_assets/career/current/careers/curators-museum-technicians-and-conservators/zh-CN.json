@@ -5,13 +5,25 @@
       "fact:china-jiaojiang-featured-daily-2026": {
         "status": "mapped"
       },
+      "fact:china-jiaojiang-featured-daily-2026-g04-current": {
+        "status": "pending_mapping"
+      },
       "fact:employment": {
         "status": "mapped"
+      },
+      "fact:employment-g04-current": {
+        "status": "pending_mapping"
       },
       "fact:growth": {
         "status": "mapped"
       },
+      "fact:growth-g04-current": {
+        "status": "pending_mapping"
+      },
       "fact:high": {
+        "status": "pending_mapping"
+      },
+      "fact:high-g04-current": {
         "status": "pending_mapping"
       },
       "fact:identity": {
@@ -20,10 +32,19 @@
       "fact:industry-amusement": {
         "status": "pending_mapping"
       },
+      "fact:industry-amusement-g04-current": {
+        "status": "pending_mapping"
+      },
       "fact:industry-education": {
         "status": "pending_mapping"
       },
+      "fact:industry-education-g04-current": {
+        "status": "pending_mapping"
+      },
       "fact:industry-theater": {
+        "status": "pending_mapping"
+      },
+      "fact:industry-theater-g04-current": {
         "status": "pending_mapping"
       },
       "fact:low": {
@@ -34,6 +55,9 @@
       },
       "fact:openings": {
         "status": "mapped"
+      },
+      "fact:openings-g04-current": {
+        "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
@@ -9063,20 +9087,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.06.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            {
-              "id": "audition-feedback"
-            },
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.06.mitigation": {
         "ref": {
@@ -22781,12 +22793,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "策展人的工作可以分成三类相连但独立的工作面。第一类是藏品与记录管理：规划并组织藏品的征集、保管与展览，建立并维护机构的登记、编目与基础记录系统（多使用数据库），研究、检查并测试拟入藏对象以鉴定其来源、构成与历史并评估当前价值，就藏品的购买、出售、交换或借展进行谈判并按授权批准，为借展对象或专题展览安排保险并建议调整整体藏品保额。第二类是研究与展览策划：在自身专业领域规划并开展研究项目，制定展览主题与设计并制作或安装展陈材料，设定复制品的规格并监督其制作或从商用复制品中挑选，撰写并评审资助申请、期刊论文、机构报告与宣传材料。第三类是公众服务与运营协作：向其他策展人与公众提供馆藏信息，设计并组织导览、工作坊与教学活动，参加专业会议与公共活动以推广机构服务、争取经费并维护社区关系，训练并督导策展、财务、技术与研究员工以及志愿者与实习生，与理事会商定政策与预算并规划整体运营，检查场馆以判断维修需要并确保温湿度与虫害控制问题得到处理，安排活动细节并组织相关事务。三类工作面交替进行，但依据、责任与风险不同；博物馆、美术馆、档案馆、历史遗址与高校博物馆等场景的藏品类型、资金来源与治理结构也不同。"
+              "藏品记录、研究展览、公众运营三工作面为编辑归纳。当前15Tasks为12Core、3Supplemental：征集保管展览主题与制作安装、登记数据库、研究、馆藏信息、购买出售交换借用谈判授权、鉴定价值、场馆检查、写作、教育、推广筹资、员工督导和理事会政策预算为Core；保险、含餐饮装饰收费的活动细节、复制品规格制造为Supplemental。重要性非从业占比，任务有机构与法域权限。 美国目录谈判授权不代表中国可出售国有馆藏文物；中国来源、账档、借用与安全具体条件见风险和法律来源。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "g04-heritage"
           ],
           "type": "prose"
         },
@@ -22963,12 +22976,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的核心目的：人类学家与考古学家以田野与实物证据的学科研究为核心；历史学家以史料基础上的研究与解释为核心；社会科学研究助理为研究项目提供资料收集、整理与数据处理支持；建筑学教师（高等教育）以高校教学与学术研究为核心。"
+              "人类学考古重学科与田野证据，也含教学和公众展示；历史学家重史料方法，也有展览保护公共项目；社会科学研究助理重数据、质量核查和研究支持，也报告发现与协助研究设计；建筑学高校教师重课程设计评估和建筑专业研究，也有咨询与行政。任务有重叠，不能靠名称推互斥职责或权限。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.purpose.secondary",
           "source_refs": [
-            "onet"
+            "onet",
+            "agent",
+            "teacher",
+            "enrichment",
+            "art"
           ],
           "type": "prose"
         },
@@ -23010,7 +23027,11 @@
           },
           "id": "actors.display.career_quick_answers_block.comparison.inputs.secondary",
           "source_refs": [
-            "onet"
+            "onet",
+            "agent",
+            "teacher",
+            "enrichment",
+            "art"
           ],
           "type": "prose"
         },
@@ -23052,7 +23073,11 @@
           },
           "id": "actors.display.career_quick_answers_block.comparison.process.secondary",
           "source_refs": [
-            "onet"
+            "onet",
+            "agent",
+            "teacher",
+            "enrichment",
+            "art"
           ],
           "type": "prose"
         },
@@ -23094,7 +23119,11 @@
           },
           "id": "actors.display.career_quick_answers_block.comparison.outputs.secondary",
           "source_refs": [
-            "onet"
+            "onet",
+            "agent",
+            "teacher",
+            "enrichment",
+            "art"
           ],
           "type": "prose"
         },
@@ -23136,7 +23165,11 @@
           },
           "id": "actors.display.career_quick_answers_block.comparison.responsibility.secondary",
           "source_refs": [
-            "onet"
+            "onet",
+            "agent",
+            "teacher",
+            "enrichment",
+            "art"
           ],
           "type": "prose"
         },
@@ -23159,12 +23192,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "与保护、教育、登记、财务与管理等部门按权限协作，并向理事会与主管报告；遇到来源不清、权属存疑或保存条件不足时停止推进并按规程处置与上报并保留记录。"
+              "编辑控制建议：来源、权属或保存条件存疑时记录待核信息，交负责登记、保护及管理人员核对，暂缓作出未经核实的征集承诺；具体紧急保护方案须按实际制度。中国博物馆不得取得来源不明或不合法藏品，国有馆藏文物法定处分禁限不因主管同意解除；不把暂存保护等同正式入藏。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.cooperation.primary",
           "source_refs": [
-            "onet"
+            "onet",
+            "g04-heritage"
           ],
           "type": "prose"
         },
@@ -23178,7 +23212,11 @@
           },
           "id": "actors.display.career_quick_answers_block.comparison.cooperation.secondary",
           "source_refs": [
-            "onet"
+            "onet",
+            "agent",
+            "teacher",
+            "enrichment",
+            "art"
           ],
           "type": "prose"
         },
@@ -23201,12 +23239,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "岗位名称相近不代表职责相同：对象是藏品的征集保管研究与展览判断、田野与实物证据的学科研究、史料研究与解释，还是研究支持或高校教学，以及是否承担藏品征集、处置或高风险外借的授权责任，决定职责范围与考核方式，不能按名称互换。"
+              "按对象、流程与真实权限区分策展、人类学考古、历史、研究辅助和建筑教学，登记研究展示公众服务有交集，不把编辑比较当法定独占职责；具体技术处理与处分须查法域和岗位。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.boundary.primary",
           "source_refs": [
-            "onet"
+            "onet",
+            "agent",
+            "teacher",
+            "enrichment",
+            "art"
           ],
           "type": "prose"
         },
@@ -23243,7 +23285,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "六个反复出现的专业判断：对象的来源与权属链是否查清并可追溯；真实性与状况评估是否有依据、是否区分事实与推测；登记与编目记录是否准确完整；展览叙事与展签是否与实际证据层级一致；公众解释是否交代不确定性并保持尊重；遇到来源不清、权属存疑、保存条件不足或超出授权的征集处置要求时是否停止推进、上报并按授权链处理。"
+              "来源权属、真实性状况、登记记录、展签证据、公众解释、授权异常六判断是编辑归纳。中国来源与账档复制品规则有具体条款；紧急保护、入藏、借用、退出馆藏按法定条件及制度分别核，不用一种停止或批准步骤替代全部场景。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.answer",
@@ -23355,12 +23397,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "遇到来源不清、权属存疑、保存条件不足或超出授权的征集、处置与外借要求时，要停止推进、按授权链请示并保留记录，不擅自决定。"
+              "编辑控制建议：来源、权属或保存条件存疑时记录待核信息，交负责登记、保护及管理人员核对，暂缓作出未经核实的征集承诺；具体紧急保护方案须按实际制度。中国博物馆不得取得来源不明或不合法藏品，国有馆藏文物法定处分禁限不因主管同意解除；不把暂存保护等同正式入藏。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.06.question",
           "source_refs": [
-            "onet"
+            "onet",
+            "g04-heritage"
           ],
           "type": "prose"
         },
@@ -23369,7 +23412,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "藏品管理｜规划并组织藏品的征集、保管与展览｜规划并组织藏品与研究材料的征集、保管与展览，包括选定展览主题与设计并制作或安装展陈材料，安排借展对象或专题展览的保险并建议调整整体保额。"
+              "Core规划征集保管与展览含主题设计制作安装；保险安排是Supplemental，不把每班必做或法定许可从任务目录推出。"
             ]
           },
           "id": "actors.display.responsibilities_block.01",
@@ -23411,12 +23454,13 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "征集与外借｜谈判并按授权办理｜就藏品的购买、出售、交换或借展进行谈判并按授权批准，设定复制品的规格并监督其制作或从商用复制品中挑选。"
+              "Core谈判并按机构法域权限处理购买出售交换借用；复制品规格制造选择为Supplemental。中国国有馆藏文物不得以机构授权出售等，复制品明示与相关文物批准条件另核。"
             ]
           },
           "id": "actors.display.responsibilities_block.04",
           "source_refs": [
-            "onet"
+            "onet",
+            "g04-heritage"
           ],
           "type": "prose"
         },
@@ -23425,7 +23469,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "公众服务｜导览、教学与对外联络｜设计并组织导览、工作坊与教学活动，参加会议、会展与公共活动以推广机构服务、争取经费并维护社区关系，安排活动细节。"
+              "Core提供馆藏信息、导览工作坊教学、会议公共活动推广筹资与社区联系；活动餐饮娱乐装饰费用等安排为Supplemental。"
             ]
           },
           "id": "actors.display.responsibilities_block.05",
@@ -23481,7 +23525,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作场所｜O*NET 2026 年对策展人（25-4012.00）的调查：69% 把「室内、环境可控」记为每天出现，19% 记为每周一次以上；35% 表示从不进入非环境控制的室内、46% 表示从不暴露于户外各种天气；工作以博物馆与文博机构的办公室、库房与展厅为主。"
+              "工作场所｜本轮读取的美国O*NET25-4012.00情境回答（页面更新年非统一调查年）：69% 把「室内、环境可控」记为每天出现，19% 记为每周一次以上；35% 表示从不进入非环境控制的室内、46% 表示从不暴露于户外各种天气；工作以博物馆与文博机构的办公室、库房与展厅为主。"
             ]
           },
           "id": "actors.display.work_context_block.locations",
@@ -23495,7 +23539,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "主要对象与设备｜藏品与研究材料、来源与权属文件、登记与编目数据库、保护与环境监测设备、展陈与展签材料、复制品与文件工具；O*NET 技术档案列出 Microsoft Office、Excel、PowerPoint、Outlook、Word、Adobe Photoshop 与 Creative Cloud 等技术关键词；对象与工具清单来自本职业任务与技术档案，不是采购或授权建议。"
+              "对象与设备为藏品文件记录数据库、展陈及环境监测的编辑归纳。2025全年Lightcast招聘21技术关键词中：Office16%、Excel10%、PowerPoint/Outlook各5%、Word/Photoshop各4%、Creative Cloud2%、Access/Illustrator/InDesign各1%，其余11项Not available不填0。招聘提及非使用率、熟练或AI效果；详细软件技能目录另列，不当采用。"
             ]
           },
           "id": "actors.display.work_context_block.materials",
@@ -23509,12 +23553,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "再开展研究与状况评估、建立或更新登记编目、形成展览大纲与展签文字，协调设计、制作与安装并组织公众项目；同期处理征集、借展与外借谈判并按授权办理；项目节点上整理记录、核对待办并按规程交接；遇到来源不清、权属存疑、保存条件不足或超出授权的要求时停止推进并按规程处置与上报。"
+              "编辑控制建议：来源、权属或保存条件存疑时记录待核信息，交负责登记、保护及管理人员核对，暂缓作出未经核实的征集承诺；具体紧急保护方案须按实际制度。中国博物馆不得取得来源不明或不合法藏品，国有馆藏文物法定处分禁限不因主管同意解除；不把暂存保护等同正式入藏。"
             ]
           },
           "id": "actors.display.work_context_block.organization",
           "source_refs": [
-            "onet"
+            "onet",
+            "g04-heritage"
           ],
           "type": "prose"
         },
@@ -23523,7 +23568,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "节奏与强度｜O*NET 2026 年对策展人（25-4012.00）的调查：82% 表示工作时间表为固定常规安排，57% 表示每周超过 40 小时、22% 表示 40 小时；50% 表示每月一次以上面临严格期限，63% 表示每月一次以上需要公开演讲；51% 表示超过一半时间坐着，71% 表示站立不到一半时间；展览开幕与研究申报节点决定忙闲。"
+              "美国情境82常规18不规则；工时57超过40、22等于40、21低于40小时。严格期限50每月非每周、30每周非每日；公众演讲63每月非每周。坐51超过半另14持续、站71低于半等是分档回答，不推中国工时或所有开幕节点必加班。"
             ]
           },
           "id": "actors.display.work_context_block.schedule",
@@ -23537,7 +23582,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "O*NET 2026 年对策展人（25-4012.00）的调查：81% 把面对面讨论记为每天出现，50% 表示持续与他人接触、36% 表示大部分时间接触他人，76% 表示每天使用电话、85% 表示每天使用电子邮件；58% 表示与团队协作极其重要。"
+              "本轮读取的美国O*NET25-4012.00情境回答（页面更新年非统一调查年）：81% 把面对面讨论记为每天出现，50% 表示持续与他人接触、36% 表示大部分时间接触他人，76% 表示每天使用电话、85% 表示每天使用电子邮件；58% 表示与团队协作极其重要。"
             ]
           },
           "id": "actors.display.work_context_block.collaboration",
@@ -23551,7 +23596,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "复核与责任链条｜O*NET 2026 年对策展人（25-4012.00）的调查：34% 表示对他人工作结果的责任高、29% 表示很高；74% 表示在决定任务与优先级上自由「很大」，69% 表示决策自由「很大」；21% 把「错误的后果」记为很严重、13% 严重、22% 较严重；研究结论、征集与外借按机构授权链留痕，来源存疑或合规异常须按程序处置并存档。"
+              "复核与责任链条｜本轮读取的美国O*NET25-4012.00情境回答（页面更新年非统一调查年）：34% 表示对他人工作结果的责任高、29% 表示很高；74% 表示在决定任务与优先级上自由「很大」，69% 表示决策自由「很大」；21% 把「错误的后果」记为很严重、13% 严重、22% 较严重；研究结论、征集与外借按机构授权链留痕，来源存疑或合规异常须按程序处置并存档。"
             ]
           },
           "id": "actors.display.work_context_block.review",
@@ -23565,7 +23610,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "质量与职业要求｜O*NET 2026 年对策展人（25-4012.00）的调查：40% 把准确与严谨记为极其重要、37% 为非常重要，20% 把竞争程度记为极强、35% 为较强；涉及藏品来源与权属核查、文物保护与环境控制、藏品处置与外借审批时，以法律、行业伦理准则与机构制度为准，本页不构成鉴定意见、合规认定或法律意见。"
+              "质量与职业要求｜本轮读取的美国O*NET25-4012.00情境回答（页面更新年非统一调查年）：40% 把准确与严谨记为极其重要、37% 为非常重要，20% 把竞争程度记为极强、35% 为较强；涉及藏品来源与权属核查、文物保护与环境控制、藏品处置与外借审批时，以法律、行业伦理准则与机构制度为准，本页不构成鉴定意见、合规认定或法律意见。"
             ]
           },
           "id": "actors.display.work_context_block.quality",
@@ -23607,12 +23652,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2024 年就业约 15,100 人、预测标签 Much faster than average（远高于平均，7% 或更高）与十年约 1,800 个含增长与替换的空缺"
+              "美国25-4012.00单一职业2025—2035就业预测：2025就业14,200人，2035预测14,900人，增长5%（Faster than average），年均1,600个增长与替换空缺。空缺非净增或个人概率，也不证明AI因果；不混OOH档案策展博物馆工作人员合并4%/4,300年均空缺。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
           "source_refs": [
-            "onet"
+            "onet",
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -23621,12 +23667,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2024 年行业分布（艺术娱乐与休闲 46%、政府 17%、其他行业含教育服务 15% 共 22%）与准备层级 Job Zone Five（SVP 8.0 及以上，通常要求研究生学历）"
+              "2025美国本职业行业就业：艺术娱乐休闲48%、政府18%、教育服务17%、其他17%；合计100%，不是中国比例或行业工资。 美国本岗新聘教育回答44%硕士、35%博士、8%学士后证书（post-baccalaureate certificate，不是中等后证书），未显示余项不补零。Job Zone Five/SVP8及以上为通用充分准备层级，不能把其他职业五年以上经验例子套成本岗统一条件。BLS策展通常相关硕士，小型博物馆有本科申请机会；具体雇主另核，不直接套中国。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
           "source_refs": [
-            "onet"
+            "onet",
+            "g04-industry",
+            "g04-ooh"
           ],
           "type": "prose"
         },
@@ -23635,12 +23683,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆博物馆、美术馆与文化机构中藏品征集、保管、研究与展览岗位的分类与用工语境，以及中国职业级工资缺口"
+              "中国文博相关法域与2019职称评审类别，招聘条件及与25-4012.00的一一分类映射未取得，不根据缺口断言不存在。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
           "source_refs": [
-            "onet"
+            "onet",
+            "g04-title"
           ],
           "type": "prose"
         },
@@ -23649,12 +23698,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆文化、体育和娱乐业行业均值代理与职业级工资缺口"
+              "条件行业背景：法人主营归文化体育娱乐业时，NBS2025城镇非私营129,447元、私营64,015元税前年平均工资可作背景。城镇5人以上法人，排个体工商户和自由职业者；非本岗工资、中位起薪分位或月到手，不混人群。高校、政府等其他主营须另匹配，不能把美国48%行业占比当中国分类。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
           "source_refs": [
-            "onet"
+            "onet",
+            "g04-nbs"
           ],
           "type": "prose"
         },
@@ -23663,12 +23713,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页条目为合并命名「策展人、博物馆技术员与文物保护员（合并职业）」，其身份口径为策展人，在美国对应 O*NET-SOC 25-4012.00（Curators）。官方范围为：在博物馆等机构管理藏品与研究材料，规划并组织其征集、保管与展览。工作内容包括制定展览主题与设计并制作或安装展陈材料；建立并维护机构的登记、编目与基础记录系统（多使用数据库）；在专业领域规划并开展研究项目；向其他策展人与公众提供馆藏信息；就藏品的购买、出售、交换或借展进行谈判并按授权批准；研究、检查并测试拟入藏对象以鉴定来源、构成与历史并评估当前价值；检查场馆以判断维修需要并处理温湿度与虫害控制问题；撰写并评审资助申请、期刊论文、机构报告与宣传材料；设计并组织导览、工作坊与教学活动；参加专业会议与公共活动以推广服务、争取经费并维护社区关系；训练并督导策展、财务、技术与研究员工及志愿者与实习生；与理事会商定政策与预算并规划整体运营；为借展对象或专题展览安排保险并建议调整整体保额；安排活动细节；设定复制品规格并监督其制作。该职业准备层级为 Job Zone Five（SVP 8.0 及以上），通常要求研究生学历，官方教育反馈显示硕士 44%、博士 35%、中等后教育证书 8%。本页固定编号 0243 的 slug 为合并命名（curators-museum-technicians-and-conservators），冻结路由把条目身份映射为 O*NET-SOC 25-4012.00 这一个官方细分职业；合并命名覆盖的博物馆技术员与文物保护员等职业，其职责、口径与数值单独标注，不并入本页身份。中国侧，同类岗位为博物馆、美术馆与文化机构中的藏品征集、保管、研究、展览策划与公众教育岗位，多按文物博物馆研究、文物保护、文物考古、文物利用等职称类别评聘；中美两套分类不是一一对应：本页不把美国的准备层级、工资或资格套用到中国大陆，也不把人类学家与考古学家、历史学家、社会科学研究助理或建筑学教师的职责并入本职业。"
+              "本页固定编号0243与合并slug保留，冻结身份为25-4012.00 Curators；技术员保护员25-4013.00及BLS含档案人员的合并群体分别引用，工资就业行业不相加、不并入本页身份。美国25-4012.00策展人管理艺术品、历史物品、科学标本等机构藏品，可承担教育研究公众服务。当前15Tasks为12Core、3Supplemental：征集保管展览主题与制作安装、登记数据库、研究、馆藏信息、购买出售交换借用谈判授权、鉴定价值、场馆检查、写作、教育、推广筹资、员工督导和理事会政策预算为Core；保险、含餐饮装饰收费的活动细节、复制品规格制造为Supplemental。重要性非从业占比，任务有机构与法域权限。 美国本岗新聘教育回答44%硕士、35%博士、8%学士后证书（post-baccalaureate certificate，不是中等后证书），未显示余项不补零。Job Zone Five/SVP8及以上为通用充分准备层级，不能把其他职业五年以上经验例子套成本岗统一条件。BLS策展通常相关硕士，小型博物馆有本科申请机会；具体雇主另核，不直接套中国。 中国相关文博岗位按实际职责、博物馆及文物法律和机构条件核；一一职业分类映射未取，不称不存在；职称意见四专业是评审类别，不是美国任务全部合并成中国单一职位。"
             ]
           },
           "id": "actors.display.definition_block.definition",
           "source_refs": [
-            "onet"
+            "onet",
+            "g04-ooh"
           ],
           "type": "prose"
         }
@@ -24166,7 +24217,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "指博物馆与文化机构是否真的把整理、检索与生成工具放进工作流程。采用取决于预算、数据基础、藏品与观众数据的合规要求与培训，通常慢于技术能力本身。"
+              "组织是否实际采用工具须核预算数据授权培训与制度，本轮未取得本岗采用率或采用滞后时长；不从技术能力直接推组织使用。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.3",
@@ -24181,7 +24232,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "引入工具时责任不能随系统一起转移；下面是本职业可执行的人工控制步骤。"
+              "以下为编辑控制建议：明确人工复核、记录和异常处理，具体法律合同机构责任另核。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.4",
@@ -24241,7 +24292,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "指编制数量与收入的实际变化，由公共文化投入、捐赠与资助、观众需求以及工具采用共同决定；本页没有可核对的本职业单职业因果数据。"
+              "公共投入捐赠资助观众需求及技术采用是可核对的编辑因素清单，不证明各因素决定本岗编制或收入的因果。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.8",
@@ -24256,7 +24307,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "列出雇主招聘与工作场景中提到的软件与技术关键词（Microsoft Office、Excel、PowerPoint、Outlook、Word、Adobe Photoshop 与 Creative Cloud 等）。"
+              "2025全年Lightcast招聘21技术关键词中：Office16%、Excel10%、PowerPoint/Outlook各5%、Word/Photoshop各4%、Creative Cloud2%、Access/Illustrator/InDesign各1%，其余11项Not available不填0。招聘提及非使用率、熟练或AI效果；详细软件技能目录另列，不当采用。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.9",
@@ -24286,13 +24337,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答：目前可核对的是任务层面的变化，而不是岗位替代的时间表。元数据补全、检索聚类、初步文本摘要、翻译与标签草案等工具可减少部分人工整理与转录工作；但来源与权属核查、真实性与状况评估、展览叙事与展签写作、公众解释与授权判断仍依赖人工，并受藏品管理与伦理准则约束。O*NET 工作情境显示本职业 78% 表示工作完全不自动化、16% 中度自动化，技术暴露不等于组织采用，更不等于岗位消失或收入变化。"
+              "元数据草稿、检索摘要翻译展签原型可作编辑试用方向，实际本岗效率采用替代未取；来源真实性记录和发布须人工核。美国情境78不自动化16中度不衡量生成式AI。ICOM2026伦理准则C.1—C.7倡导藏品政策、保存安全、复制品清晰永久标识、征集尽职调查、记录安全和负责的退出馆藏与技术使用；P.6保护工作保密与个人信息。ICOM会员须遵守，非会员作专业参考，不是中国强制法、全部机构程序或本岗AI效率证据；原始法域规则和机构权限另核。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "nist",
+            "g04-icom"
           ],
           "type": "prose"
         },
@@ -24316,7 +24368,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 对策展人（25-4012.00）的技术与热门技术统计"
+              "2025全年Lightcast招聘21技术关键词中：Office16%、Excel10%、PowerPoint/Outlook各5%、Word/Photoshop各4%、Creative Cloud2%、Access/Illustrator/InDesign各1%，其余11项Not available不填0。招聘提及非使用率、熟练或AI效果；详细软件技能目录另列，不当采用。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.1.object",
@@ -24361,7 +24413,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "研究不提供本职业单职业分数、采用率或替代日期。"
+              "本轮未取得与本职业精确匹配的暴露分数，不等研究没有职业明细；任务暴露不代采用、自动化率、效率或替代日期。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.limit",
@@ -24421,13 +24473,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 摘要与就业趋势（BLS 2024—2034 年预测）"
+              "美国25-4012.00单一职业2025—2035就业预测：2025就业14,200人，2035预测14,900人，增长5%（Faster than average），年均1,600个增长与替换空缺。空缺非净增或个人概率，也不证明AI因果；不混OOH档案策展博物馆工作人员合并4%/4,300年均空缺。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.object",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "nist",
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -24436,13 +24489,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2024 年就业约 15,100 人，预测标签远高于平均（7% 或更高），十年约 1,800 个含增长与替换的空缺。"
+              "美国25-4012.00单一职业2025—2035就业预测：2025就业14,200人，2035预测14,900人，增长5%（Faster than average），年均1,600个增长与替换空缺。空缺非净增或个人概率，也不证明AI因果；不混OOH档案策展博物馆工作人员合并4%/4,300年均空缺。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "nist",
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -24481,7 +24535,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "要求明确 AI 系统的角色、责任、记录与人工监督。"
+              "NIST AI RMF1.0自愿框架建议明确角色责任、记录与人工监督，不是策展岗位强制法律。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.conclusion",
@@ -24526,13 +24580,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 为策展人（25-4012.00）列出规划并组织藏品的征集保管与展览、制定展览主题与设计并制作或安装展陈材料、建立并维护登记编目与基础记录系统、规划并开展专业研究项目、向其他策展人与公众提供馆藏信息、就藏品的购买出售交换或借展进行谈判并按授权批准、研究检查并测试拟入藏对象以鉴定来源构成与历史并评估价值、检查场馆以判断维修需要并处理温湿度与虫害问题、撰写并评审资助申请期刊论文机构报告与宣传材料、设计并组织导览工作坊与教学活动、参加专业会议与公共活动以推广服务并争取经费、训练并督导策展财务技术与研究员工及志愿者与实习生、与理事会商定政策与预算并规划整体运营、为借展对象或专题展览安排保险、安排活动细节，以及设定复制品规格并监督其制作等任务。"
+              "当前15Tasks为12Core、3Supplemental：征集保管展览主题与制作安装、登记数据库、研究、馆藏信息、购买出售交换借用谈判授权、鉴定价值、场馆检查、写作、教育、推广筹资、员工督导和理事会政策预算为Core；保险、含餐饮装饰收费的活动细节、复制品规格制造为Supplemental。重要性非从业占比，任务有机构与法域权限。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.1.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24556,7 +24609,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 技术档案列出 Microsoft Office、Microsoft Excel、Microsoft PowerPoint、Microsoft Outlook、Microsoft Word、Adobe Photoshop 与 Adobe Creative Cloud 等；这属于招聘与工作场景的市场信号，不代表使用率或熟练度。"
+              "2025全年Lightcast招聘21技术关键词中：Office16%、Excel10%、PowerPoint/Outlook各5%、Word/Photoshop各4%、Creative Cloud2%、Access/Illustrator/InDesign各1%，其余11项Not available不填0。招聘提及非使用率、熟练或AI效果；详细软件技能目录另列，不当采用。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
@@ -24631,13 +24684,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 摘要与就业趋势页（基于 BLS 2024—2034 年预测）显示该职业 2024 年约 15,100 人，预测标签为远高于平均（7% 或更高），十年约 1,800 个含增长与替换的空缺；该预测不含技术替代时点，且文博岗位竞争通常激烈。"
+              "美国25-4012.00单一职业2025—2035就业预测：2025就业14,200人，2035预测14,900人，增长5%（Faster than average），年均1,600个增长与替换空缺。空缺非净增或个人概率，也不证明AI因果；不混OOH档案策展博物馆工作人员合并4%/4,300年均空缺。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "nist",
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -24751,7 +24805,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供本职业岗位与工作场景提到的技术关键词，属市场信号"
+              "2025全年Lightcast招聘21技术关键词中：Office16%、Excel10%、PowerPoint/Outlook各5%、Word/Photoshop各4%、Creative Cloud2%、Access/Illustrator/InDesign各1%，其余11项Not available不填0。招聘提及非使用率、熟练或AI效果；详细软件技能目录另列，不当采用。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.scope",
@@ -24781,7 +24835,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按任务度量生成式 AI 与职业任务的接近程度，不提供单职业分数或自动化率"
+              "本轮未取得与本职业精确匹配的暴露分数，不等研究没有职业明细；任务暴露不代采用、自动化率、效率或替代日期。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
@@ -24826,7 +24880,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "伦理与专业准则"
+              "官方认证查询入口"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.type",
@@ -24841,13 +24895,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供博物馆与文博行业的伦理准则与操作规范入口，用于核对来源、权属与处置边界"
+              "CareerOneStop返回4项National Association for Interpretation认证，是认证目录，不是伦理准则全文或法定许可清单；具体当前项目条件未读。ICOM伦理另列独立来源。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "ratify",
+            "g04-icom"
           ],
           "type": "prose"
         },
@@ -24871,13 +24925,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供该职业 2024—2034 年就业预测、职位空缺与全国工资分位"
+              "美国25-4012.00单一职业2025—2035就业预测：2025就业14,200人，2035预测14,900人，增长5%（Faster than average），年均1,600个增长与替换空缺。空缺非净增或个人概率，也不证明AI因果；不混OOH档案策展博物馆工作人员合并4%/4,300年均空缺。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "nist",
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -24901,7 +24956,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供 AI 系统风险治理的角色、责任、记录与人工监督要求"
+              "提供自愿风险治理方法，不直接规定本岗法律、文物权限或全部机构流程。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.nist.scope",
@@ -24991,7 +25046,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可整理征集线索与展览素材清单。"
+              "编辑试用方向：工具可整理征集线索与展览素材清单。 本岗实际效果未取。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.1.change",
@@ -25051,7 +25106,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可补全元数据并生成条目草稿。"
+              "编辑试用方向：工具可补全元数据并生成条目草稿。 本岗实际效果未取。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.2.change",
@@ -25111,7 +25166,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可检索比对资料并生成初步摘要。"
+              "编辑试用方向：工具可检索比对资料并生成初步摘要。 本岗实际效果未取。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.change",
@@ -25171,7 +25226,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可做文献摘要与文字草拟。"
+              "编辑试用方向：工具可做文献摘要与文字草拟。 本岗实际效果未取。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.change",
@@ -25231,7 +25286,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可生成讲解草案与交互原型。"
+              "编辑试用方向：工具可生成讲解草案与交互原型。 本岗实际效果未取。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.change",
@@ -25291,7 +25346,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可整理排班与预算信息。"
+              "编辑试用方向：工具可整理排班与预算信息。 本岗实际效果未取。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.change",
@@ -25351,7 +25406,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "监测设备可提示温湿度与虫害异常。"
+              "环境监测提示属于设备辅助场景，不等生成式AI；具体传感与虫害检测能力须核所用设备。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.7.change",
@@ -25396,7 +25451,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可补全元数据、聚类检索并生成标签草案。"
+              "编辑试用方向：工具可补全元数据、聚类检索并生成标签草案。 本岗效率与采用未取。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.1.change",
@@ -25441,7 +25496,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可做初步摘要、翻译与文字草拟。"
+              "编辑试用方向：工具可做初步摘要、翻译与文字草拟。 本岗效率与采用未取。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.2.change",
@@ -25486,7 +25541,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可生成展签草案与观众交互原型。"
+              "编辑试用方向：工具可生成展签草案与观众交互原型。 本岗效率与采用未取。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.3.change",
@@ -25531,7 +25586,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核对工具提示所用对象、来源与权属材料是否真实完整；来源与权属信息错误会直接进入记录与展览。"
+              "核工具提示的对象、来源与权属材料；错误若被采纳且未发现纠正，可能传入记录与展览，不能由工具输出推自动入流。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.1.description",
@@ -25621,13 +25676,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "发现来源不清、权属存疑、文化敏感性争议或保存条件不足时停止推进并按机构授权链处置与上报。"
+              "编辑控制建议：来源、权属或保存条件存疑时记录待核信息，交负责登记、保护及管理人员核对，暂缓作出未经核实的征集承诺；具体紧急保护方案须按实际制度。中国博物馆不得取得来源不明或不合法藏品，国有馆藏文物法定处分禁限不因主管同意解除；不把暂存保护等同正式入藏。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.4.description",
           "source_refs": [
             "r2-ai",
-            "nist"
+            "nist",
+            "g04-heritage"
           ],
           "type": "prose"
         },
@@ -25681,7 +25737,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具不会对来源、准确性与文化敏感性负责，误用可能误导研究与公众。"
+              "生成结果不能自行承担岗位判断；使用人员、机构和服务方责任须按法律合同分别核，不能断言工具提供方均不负责。误用可能误导研究和公众。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.1.consequence",
@@ -26019,12 +26075,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与策展人（O*NET-SOC 25-4012.00）对应的中国大陆职业级工资分布；公开工资统计最高细分到行业门类与人员类别，未发布该职业细类数值。"
+              "证据不足：本轮未取得中国策展相关岗位全国工资分布及与25-4012.00的一一分类映射；不等官方从未发布、不存在分类或统计最高只能行业。条件行业背景：法人主营归文化体育娱乐业时，NBS2025城镇非私营129,447元、私营64,015元税前年平均工资可作背景。城镇5人以上法人，排个体工商户和自由职业者；非本岗工资、中位起薪分位或月到手，不混人群。高校、政府等其他主营须另匹配，不能把美国48%行业占比当中国分类。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "sag-moa"
+            "sag-moa",
+            "g04-nbs"
           ],
           "type": "prose"
         },
@@ -26047,7 +26104,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "常见场景：以事业单位聘用或项目制岗位为主（按岗位等级、职称与绩效计酬），以及文化企业与展陈服务机构的项目岗位；编制形式、聘期与计酬方式差异较大。"
+              "事业单位、非国有博物馆和项目岗位可能有不同聘用计酬安排；全国各方式占比未取，不说以其中一类为主，具体岗位等级职称绩效合同条件另核。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.3",
@@ -26103,12 +26160,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "：中国大陆同类岗位多称博物馆藏品管理、文博研究或展览策划岗位，按机构性质与专业方向分工，并多按文物博物馆研究、文物保护、文物考古、文物利用等职称类别评聘，没有与 O*NET-SOC 25-4012.00 对应的统一职业分类或统一计酬口径"
+              "2019人社部发122号文博职称意见设文物博物馆研究、保护、考古、利用四专业，分别有助理馆员、馆员、副研究馆员、研究馆员层级；非国有及符合条件编外人员可申报，职称评审、岗位聘用和作业授权分开。学历资历论文有规定条件和例外，非全国策展统一研究生录用要求；地方单位当前实施另核。 一一职业分类与统一计酬映射未取得，不推不存在。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "sag-moa"
+            "sag-moa",
+            "g04-title"
           ],
           "type": "prose"
         },
@@ -26131,12 +26189,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：美国口径下该职业准备层级为 Job Zone Five（需要充分准备，SVP 8.0 及以上），通常要求研究生学历，官方教育反馈显示硕士 44%、博士 35%、中等后教育证书 8%；美国口径与中国大陆文博岗位的录用与学历要求不可直接等同，具体以目标单位要求为准。"
+              "美国本岗新聘教育回答44%硕士、35%博士、8%学士后证书（post-baccalaureate certificate，不是中等后证书），未显示余项不补零。Job Zone Five/SVP8及以上为通用充分准备层级，不能把其他职业五年以上经验例子套成本岗统一条件。BLS策展通常相关硕士，小型博物馆有本科申请机会；具体雇主另核，不直接套中国。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "sag-moa"
+            "sag-moa",
+            "g04-ooh"
           ],
           "type": "prose"
         },
@@ -26145,12 +26204,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：中国大陆同类岗位通常经事业单位公开招聘或机构聘用，多要求文博、历史、艺术等相关专业背景与相应学历，并参加职称评聘；学历、职称评聘与岗位聘任是不同层级的条件，不能互相替代。"
+              "编辑准备方向：按目标岗位专业、学历、研究与公众工作要求核招聘原文；本轮未取得全国录用学历比例。2019人社部发122号文博职称意见设文物博物馆研究、保护、考古、利用四专业，分别有助理馆员、馆员、副研究馆员、研究馆员层级；非国有及符合条件编外人员可申报，职称评审、岗位聘用和作业授权分开。学历资历论文有规定条件和例外，非全国策展统一研究生录用要求；地方单位当前实施另核。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "sag-moa"
+            "sag-moa",
+            "g04-title"
           ],
           "type": "prose"
         },
@@ -26173,7 +26233,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：部门管理或馆务管理方向通常要求研究与展览经验、协调能力与专业资历，任职条件由机构与主管部门规定；本页不构成资格认定。"
+              "编辑发展方向：了解部门或馆务管理任务；研究展览经验、协调与资历条件按目标公告核，未取得常见录用条件证据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -26187,7 +26247,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "常见场景：展览与征集按项目周期推进，岗位多按机构作息与项目节点安排工时；开幕、布展与申报节点会出现阶段性加班，收入结构含岗位等级与绩效差异，具体按机构情况核对。"
+              "编辑核对项：展览征集排期与工作时间、项目聘期及绩效合同，实际加班与收入按单位公告合同核，不从美国工时推中国全部机构。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
@@ -26201,7 +26261,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与工资的关系：整理、检索与生成工具可能改变研究与记录的分工与工作方式，但中国大陆公开工资统计按行业门类与人员类别聚合发布，工具变化不会产生可核对的职业级数值；本页因此不给出任何与 AI 相关的本职业工资影响数字。"
+              "整理检索生成工具可作编辑试用方向，实际本岗工资因果未取，不给影响数字；统计聚合不能证明未来不会出现职业级数据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
@@ -26237,13 +26297,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国统计口径：本页的工资与分位为 O*NET／OEWS 25-4012.00（Curators）单一职业口径，即本页身份口径；就业规模与就业预测取自 O*NET 摘要页（基于 BLS 2024—2034 年预测）。与本条 slug 同源的 BLS 职业展望手册合并页覆盖档案管理员、策展人、博物馆技术员与文物保护员的更宽群体，统计期为 2025—2035 年，其数值不属于本页身份口径，不与本页数值混用或相加。"
+              "美国2025工资为25-4012.00精确职业，2025—2035就业预测分别引用；OOH联合档案策展博物馆人员总体不代本岗数字。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
             "bls",
-            "oews"
+            "oews",
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -26252,7 +26313,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "分位是统计位置，不是学历或职称等级划分；同一分位的从业者在机构类型、职级、专业领域与地区上差异很大，高分段通常与机构规模、职级与专业领域相关。"
+              "分位是统计位置不是学历职称；全国分位未给机构职级专业地区差异的因果拆分，具体报价按目标岗位核。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.2",
@@ -26267,7 +26328,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可用于推算本职业个人到手收入或起薪的细分数据（美国，2025 年工资数据期）。该口径同时公布年薪与小时工资；按小时披露的报酬不能在没有工时、聘期与机构类型的情况下推算稳定年薪或月收入；合同制、项目制与兼职安排也会使实际收入不同于全职口径。"
+              "2025常规税前有薪全兼职工资，排自雇及加班溢价等；通常2080标准小时年化，不是个人有薪时数或月到手。个人起薪聘期工时税费未取，不据标准统计推个人收入。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.3",
@@ -26297,13 +26358,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业表只说明该口径下的就业分布（O*NET 单列艺术娱乐与休闲、政府，其余归入其他行业），不代表所有雇主的工资；不同机构类型、职级与地区的工资差异要看具体岗位与地区。"
+              "2025美国本职业行业就业：艺术娱乐休闲48%、政府18%、教育服务17%、其他17%；合计100%，不是中国比例或行业工资。 官方实际单列教育服务，不把它合并进其他；比例不提供中国行业或行业薪资。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
             "bls",
-            "oews"
+            "oews",
+            "g04-industry"
           ],
           "type": "prose"
         },
@@ -26312,13 +26374,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本职业按州或地区细分的工资中位数（美国，2025 年工资数据期）。地区数值须在 O*NET 当地工资页按地区与期间查询，不能当作个人报价。工资统计与档案的用途不同：OEWS 用于工资，O*NET 用于任务、工作情境与准备层级，就业预测限于 2024—2034 年预测期；引用时分别保留。"
+              "美国25-4012.00单一职业2025—2035就业预测：2025就业14,200人，2035预测14,900人，增长5%（Faster than average），年均1,600个增长与替换空缺。空缺非净增或个人概率，也不证明AI因果；不混OOH档案策展博物馆工作人员合并4%/4,300年均空缺。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
             "bls",
-            "oews"
+            "oews",
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -26387,7 +26450,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "分位对应分布位置而不是学历或职称等级：第 10 分位与第 90 分位之间的差异同时来自机构类型、职级、专业领域与地区；来源没有证明与经验的对应关系，也不能当成个人报价。"
+              "五分位均为2025同职业统计位置，不是学历职称年资等级，未给机构职级专业地区对工资差异的因果拆分，不能当个人报价。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.percentile",
@@ -26402,7 +26465,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "预测是职业总量的变化，不是个人找到工作的概率；该口径预测为远高于平均（7% 或更高），但总量增长不代表个人录用机会，文博岗位竞争通常激烈。"
+              "地区工资统计描述相应统计样本的分布，不能当作个人报价；须核目标雇主、合同职责、工时及薪酬构成。本页未取得个人合理报价或到手收入证据。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.project",
@@ -26432,7 +26495,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "艺术、娱乐与休闲是 O*NET 单列的行业，占 2024 年该项就业分布的 46%。"
+              "2025艺术娱乐休闲占48%，是本职业行业就业比例，不是行业工资。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
@@ -26447,7 +26510,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "政府占 17%、教育服务占 15%，都是 O*NET 单列的行业；这些是就业分布，不是工资中位数。"
+              "2025政府18%、教育服务17%，为本职业各行业就业比例，不是职业工资。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
@@ -26462,7 +26525,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他行业合计占 22%，是 O*NET 单列的其余行业。"
+              "2025其他行业17%，与48/18/17前三行业合计100%，旧22对应旧期不能继续作当前。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.amusement",
@@ -26507,7 +26570,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "统计工资以有薪岗位为准：是否全职、是否含聘期与项目周期以及每周工时多少，都会影响实际到手收入，因此时薪与年收入不能互相替代；本职业 57% 表示每周超过 40 小时。"
+              "OEWS覆盖有薪全兼职常规税前工资、通常2080标准年化；个人聘期时数税费另核。美国情境57超过40小时与工资年化是两套不同调查口径。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.paid-work",
@@ -26537,7 +26600,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "机构类型与安排影响收入：公共博物馆、政府机构、高校博物馆或文化企业，所在地区、职级与是否承担管理与筹资职责。"
+              "编辑报价核对项：单位地区职级、管理筹资职责与聘期；全国分位本身未量化各项收入因果。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.setting",
@@ -26590,7 +26653,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意长期处理登记、编目与来源核查的细碎工作、能把研究结论与证据层级写清楚、并愿意面向公众讲解的人，通常更容易适应。"
+              "编辑自我观察：是否愿意细致核来源登记研究、写清证据并面向公众，实际能力与资格另核，不预测必然更容易适应。"
             ]
           },
           "id": "actors.fit.personality-fit-block.1",
@@ -26604,7 +26667,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "藏品工作大量时间花在记录、核对与归档上；能把重复当作可追溯与可信的前提，才能持续做对。"
+              "编辑观察：重复核查登记时能否持续如实记录并求助；不能凭愿意重复保证持续做对。"
             ]
           },
           "id": "actors.fit.personality-fit-block.2",
@@ -26618,7 +26681,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "研究结论与展签文字常被同行、学术评审或公众复核；能把复核当作质量控制而不是否定自己，才能持续改进。"
+              "编辑观察：能否按同行带教意见回到证据修订，实际改进须看结果，不从态度保证持续进步。"
             ]
           },
           "id": "actors.fit.personality-fit-block.3",
@@ -26632,7 +26695,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "展览与征集常受预算、审批与排期影响；O*NET 显示 50% 表示每月一次以上面临严格期限；按程序调整并按授权链推进比硬扛更稳妥。"
+              "美国严格期限50每月非每周、30每周非每日；编辑建议预留核查协调时间，实际机构排期权限另核。"
             ]
           },
           "id": "actors.fit.personality-fit-block.4",
@@ -26884,7 +26947,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "官方来源：O*NET OnLine 25-4012.00 兴趣代码（2026 年更新）"
+              "O*NET25-4012.00当前CES活动线索，C73/E47/S47/I41/A33/R25不是从业比例或表现预测。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -26940,7 +27003,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "尽责性与开放性在这类工作中都直接相关：前者对应把来源、记录与依据做扎实，后者对应研究与叙事的创造性表达。大五没有官方的职业匹配阈值，本页只把它当作自我观察工具。"
+              "编辑自我观察：是否细致记录来源、探索研究表达；本轮未取得大五与策展表现的本岗效度或匹配阈值，不把尽责开放直接当经证实的岗位关联。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.big-five.answer",
@@ -27038,7 +27101,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "偏好长期案头研究的人可能更适合研究与写作方向。"
+              "编辑观察：案头研究写作是否有持续兴趣，用真实任务和反馈核。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.1",
@@ -27052,7 +27115,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "偏好组织与沟通的人可能更适合展览项目与公众服务方向。"
+              "编辑观察：展览协调公众服务是否有持续兴趣，用真实任务和反馈核。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.2",
@@ -27220,12 +27283,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业准备层级为 Job Zone Five（SVP 8.0 及以上），通常要求研究生学历；工作以研究、写作、核对与判断为主；IQ 类量表描述的是通用认知表现，与岗位要求没有官方对应关系。"
+              "美国本岗新聘教育回答44%硕士、35%博士、8%学士后证书（post-baccalaureate certificate，不是中等后证书），未显示余项不补零。Job Zone Five/SVP8及以上为通用充分准备层级，不能把其他职业五年以上经验例子套成本岗统一条件。BLS策展通常相关硕士，小型博物馆有本科申请机会；具体雇主另核，不直接套中国。 通用认知测试与本岗门槛或表现效度未取。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "g04-ooh"
           ],
           "type": "prose"
         },
@@ -27388,7 +27452,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "研究对象与来源、鉴定真实性与状况、参与征集与外借谈判并按授权办理；适合愿意深入专业领域并把来源核查做扎实的人。"
+              "藏品研究涉及来源、真实性与状况核查及按授权办理征集外借；编辑自问是否愿意体验这些任务，不由意愿推适配。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.camera.signals",
@@ -27430,7 +27494,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "制定展览主题与叙事、组织展陈与教育活动、面向公众与同行解释；适合愿意把研究成果转化为公众表达的人。"
+              "展览与公众服务涉及主题叙事、展陈教育及解释；编辑自问是否愿意体验研究转化与表达任务，不由偏好推适配。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.stage.signals",
@@ -27477,7 +27541,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.agent.signals",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27491,7 +27555,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.agent.watchouts",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27519,7 +27583,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.teacher.signals",
           "source_refs": [
-            "onet"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -27533,7 +27597,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.teacher.watchouts",
           "source_refs": [
-            "onet"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -27561,7 +27625,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.signals",
           "source_refs": [
-            "onet"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -27575,7 +27639,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.watchouts",
           "source_refs": [
-            "onet"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -27603,7 +27667,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.art.signals",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         },
@@ -27617,7 +27681,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.art.watchouts",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         },
@@ -27682,7 +27746,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "藏品研究更看重来源核查与专业深度，公众服务更看重表达与组织：先看清目标方向再决定。"
+              "编辑准备对照：研究与公众服务的任务对象有差别；按目标岗位核来源核查、写作表达和组织任务，未取得雇主优先级比较。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.interest.answer",
@@ -27794,7 +27858,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "研究与展览能力靠长期练习与反馈；把带教反馈与项目复盘记录下来，比测试分数更能说明适配。"
+              "编辑建议留研究写作及项目复盘记录供自我观察，本轮未取得这些记录比测试分数更能预测适配的效度。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.practice.answer",
@@ -27822,7 +27886,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。测试描述偏好线索，不预测工作表现，也不构成录用、资格或适应性判断；真正的判断来自实际机构观察、带教反馈与自身状态。"
+              "兴趣或类型结果、机构观察带教反馈均是信息输入；本轮未取六产品对策展胜任或录用预测效度，不能用某一输入签岗位结论。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.test.answer",
@@ -27984,13 +28048,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程完成来源与权属尽职调查、交叉核验取得链，保存决策记录并按机构授权链升级，存疑时不推进入藏。"
+              "中国博物馆不得取得来源不明或不合法藏品，收藏单位履行合理注意来源义务；编辑建议记录取得链和待核项，交负责人员核查，不编造链条。ICOM C.4尽职调查为专业准则，紧急暂存保护不自动变正式入藏。"
             ]
           },
           "id": "actors.risk.career-risk-cards.1",
           "source_refs": [
-            "sag",
-            "nist"
+            "g04-museum",
+            "g04-heritage",
+            "g04-icom"
           ],
           "type": "prose"
         },
@@ -27999,13 +28064,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "标明证据层级与复制仿制说明、复核文字并保留修订记录，涉及争议表述时按机构程序评估并征询相关方意见。"
+              "中国博物馆条例30复制仿制须明示、文字讲解科学准确；ICOM C.2复制数字副本尊重原件并清晰永久标识。编辑建议事实推测争议分开写、留修订依据，具体展览备案及制度另核。"
             ]
           },
           "id": "actors.risk.career-risk-cards.2",
           "source_refs": [
             "sag",
-            "nist"
+            "nist",
+            "g04-museum",
+            "g04-icom"
           ],
           "type": "prose"
         },
@@ -28014,13 +28081,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程建立账档、定期检查设施与环境，为珍贵或易损藏品配置适当条件，发现异常按制度处置并记录。"
+              "中国博物馆条例22—24要求账档管理、设施检查珍贵易损保存和离任交接；2024文物法51/63要求文物档案管理及安全措施。法定代表人或主要负责人安全责任与岗位操作责任分开，现场应急方案未取得不自行编操作顺序。"
             ]
           },
           "id": "actors.risk.career-risk-cards.3",
           "source_refs": [
-            "sag",
-            "nist"
+            "g04-museum",
+            "g04-heritage"
           ],
           "type": "prose"
         },
@@ -28029,13 +28096,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按机构规则及时如实登记编目并保留依据，控制敏感信息访问范围，发现错误及时更正并记录原因。"
+              "中国博物馆与文物收藏单位账档和管理要求按对象执行；ICOM C.5/P.6建议安全存储及保护保密个人资料。编辑建议留更正原因与访问权限，馆藏权属资料不一概属于中国法定敏感个人信息。"
             ]
           },
           "id": "actors.risk.career-risk-cards.4",
           "source_refs": [
             "sag",
-            "nist"
+            "nist",
+            "g04-icom"
           ],
           "type": "prose"
         },
@@ -28044,13 +28112,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按机构授权链与法规程序请示与办理，保留审批记录，不擅自承诺或处置，遇紧急情况按制度处置并即时上报。"
+              "中国博物馆条例第21/22条禁止取得来源不明或不合法藏品、要求账档，未建账档不得交换出借；第23/24条法人代表对安全负责、离任移交、设施检查与珍贵易损保存；第30条复制仿制应明示、讲解科学准确。2024修订文物保护法（2025-03-01施行）第52条要求收藏单位合理注意来源合法性，第56条国有馆间借用备案、非国有等借用国有需批准，不能统称所有外借均批准；第60条禁止国有收藏单位把馆藏文物赠与出租出售抵押质押。机构同意不能豁免法定禁止；任务目录中的美国purchase/sale不是中国权限。"
             ]
           },
           "id": "actors.risk.career-risk-cards.5",
           "source_refs": [
             "sag",
-            "nist"
+            "nist",
+            "g04-museum",
+            "g04-heritage"
           ],
           "type": "prose"
         },
@@ -28104,13 +28174,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险场景来自 O*NET 任务档案与工作情境百分比（O*NET-SOC 25-4012.00）、博物馆与文博行业的伦理准则与藏品管理规范、以及文物与博物馆相关法规与机构制度的要求；中国大陆的岗位与用工语境来自公开信息；引入自动化或 AI 工具时的责任与记录要求参考 NIST AI 风险管理框架。"
+              "美国O*NET任务情境支持岗位场景非发生率；中国博物馆条例及2024文物保护法支持对应对象的来源账档安全借用处分边界；ICOM2026为会员准则、非会员参考；NIST自愿AI方法。风险例子和控制建议为编辑归纳，实际机构方案另核。"
             ]
           },
           "id": "actors.display.career_risk_cards.evidence-scope",
           "source_refs": [
             "sag",
-            "nist"
+            "nist",
+            "g04-museum",
+            "g04-heritage",
+            "g04-icom"
           ],
           "type": "prose"
         },
@@ -28194,7 +28267,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "来源或权属缺陷会造成退还、声誉与法律后果。"
+              "来源不明或不合法取得藏品可能导致改正、处罚等法律与声誉后果；返还要按适用法律和个案处理，不是一切材料缺段自动返还。"
             ]
           },
           "id": "actors.display.career_risk_cards.image-use.consequence",
@@ -28304,8 +28377,9 @@
           },
           "id": "actors.display.career_risk_cards.project-income.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "g04-museum",
+            "g04-icom"
           ],
           "type": "prose"
         },
@@ -28314,7 +28388,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "保存条件失效会造成不可逆的藏品损害。"
+              "依材料、实际暴露与持续时间，保存条件失效可能造成严重甚至不可逆损害；具体控制及应急程序按机构规则核。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-income.consequence",
@@ -28359,7 +28433,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "登记、编目与借还记录缺失或失实，会使藏品无法追溯、影响研究引用与后续处置判断；记录系统还涉及权属与敏感信息保护。"
+              "登记、编目与借还记录缺失或失实可能妨碍追溯、研究引用及处置判断；记录系统按实际权属和信息保护要求管理。"
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.scenario",
@@ -28419,13 +28493,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "收购、出售、交换、注销或高风险外借通常须按机构授权链与法规程序批准；超出授权自行承诺会带来法律与资产责任。"
+              "中国国有馆藏文物法定禁止赠与出租出售抵押质押，不能只写主管批准即可；借用备案或批准按借方对象分别核，机构授权不能代法定条件。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.scenario",
           "source_refs": [
             "sag",
-            "nist"
+            "nist",
+            "g04-heritage"
           ],
           "type": "prose"
         },
@@ -28479,7 +28554,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 显示该职业 51% 表示超过一半时间坐着、57% 表示每周超过 40 小时、50% 表示每月一次以上面临严格期限、63% 表示每月一次以上需要公开演讲；长期案头工作与开幕节点压力会累积疲劳。"
+              "美国坐51超过半另14持续，工时57>40/22=40/21<40，期限50月非周、演讲63月非周。编辑风险场景：长时案头与协调可能有负荷，实际疲劳疾病发生率未取。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.scenario",
@@ -28494,7 +28569,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "长期久坐与节点压力会累积影响身体与情绪状态。"
+              "可能影响个人舒适度与工作状态的编辑场景，不是已证实的本岗健康疾病发生率或个体诊断。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.consequence",
@@ -28509,13 +28584,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于美国 2024—2034 年该职业就业预测与职位空缺。"
+              "美国25-4012.00单一职业2025—2035就业预测：2025就业14,200人，2035预测14,900人，增长5%（Faster than average），年均1,600个增长与替换空缺。空缺非净增或个人概率，也不证明AI因果；不混OOH档案策展博物馆工作人员合并4%/4,300年均空缺。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.bls",
           "source_refs": [
             "sag",
-            "nist"
+            "nist",
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -28539,13 +28615,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于中国大陆文博机构岗位的聘用、职称与授权边界的方向性核对。"
+              "中国博物馆条例第21/22条禁止取得来源不明或不合法藏品、要求账档，未建账档不得交换出借；第23/24条法人代表对安全负责、离任移交、设施检查与珍贵易损保存；第30条复制仿制应明示、讲解科学准确。2024修订文物保护法（2025-03-01施行）第52条要求收藏单位合理注意来源合法性，第56条国有馆间借用备案、非国有等借用国有需批准，不能统称所有外借均批准；第60条禁止国有收藏单位把馆藏文物赠与出租出售抵押质押。机构同意不能豁免法定禁止；任务目录中的美国purchase/sale不是中国权限。 2019人社部发122号文博职称意见设文物博物馆研究、保护、考古、利用四专业，分别有助理馆员、馆员、副研究馆员、研究馆员层级；非国有及符合条件编外人员可申报，职称评审、岗位聘用和作业授权分开。学历资历论文有规定条件和例外，非全国策展统一研究生录用要求；地方单位当前实施另核。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.cn-rule",
           "source_refs": [
             "sag",
-            "nist"
+            "nist",
+            "g04-museum",
+            "g04-heritage",
+            "g04-title"
           ],
           "type": "prose"
         },
@@ -28593,7 +28672,7 @@
           "data": {
             "paragraphs": [
               "本页不引用具体在招公告，也不把历史招聘案例计为在招岗位；招聘与任职条件须按目标单位当年公开信息核对。",
-              "示例中的专业训练、观察与带教考察方式为编辑设计，用于说明常见验证方式，不代表任何单位的统一流程。"
+              "专业训练、观察和带教考察为编辑核对示例，不代表常见雇主验证方式或任何单位统一流程。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
@@ -28618,7 +28697,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "编辑可准备与核对的证据",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -28656,7 +28735,7 @@
                 "准备与安装藏品、检查状况并实施保护处理与修复。",
                 "材料与保护科学知识、操作规范与状况评估能力。",
                 "一份虚构的对象状况检查与保护处理说明样本。",
-                "属相邻职业，以对象保护与修复操作专业方向为核心，不承担策展与叙事判断。"
+                "相邻职业以检测保护修复为重点，也有研究、编目、展陈和公众教育；具体叙事与权限按岗位核，不划绝对互斥职责。"
               ]
             ]
           },
@@ -28678,15 +28757,15 @@
                 "id": "employer-0",
                 "values": [
                   "学历与训练要求",
-                  "美国口径下该职业准备层级为 Job Zone Five（SVP 8.0 及以上），通常要求研究生学历，官方教育反馈显示硕士 44%、博士 35%、中等后教育证书 8%，并看重相关实习或志愿经历；中国大陆通常要求文博、历史、艺术等相关专业研究生学历。",
-                  "O*NET 摘要页显示准备层级为 Job Zone Five；美国口径与中国大陆文博岗位的录用与学历要求不可直接等同。"
+                  "美国本岗新聘教育回答44%硕士、35%博士、8%学士后证书（post-baccalaureate certificate，不是中等后证书），未显示余项不补零。Job Zone Five/SVP8及以上为通用充分准备层级，不能把其他职业五年以上经验例子套成本岗统一条件。BLS策展通常相关硕士，小型博物馆有本科申请机会；具体雇主另核，不直接套中国。 中国具体专业学历按目标公告核，全国比例未取。",
+                  "O*NET通用层级、新聘回答和BLS具体策展途径分别使用，实习志愿有帮助不是全部岗位硬门槛。"
                 ]
               },
               {
                 "id": "employer-1",
                 "values": [
                   "职称与专业资历",
-                  "中国大陆文博人员可沿文物博物馆研究、文物保护、文物考古、文物利用等类别参与职称评聘；具体申报条件由现行职称政策与主管部门规定。",
+                  "2019人社部发122号文博职称意见设文物博物馆研究、保护、考古、利用四专业，分别有助理馆员、馆员、副研究馆员、研究馆员层级；非国有及符合条件编外人员可申报，职称评审、岗位聘用和作业授权分开。学历资历论文有规定条件和例外，非全国策展统一研究生录用要求；地方单位当前实施另核。",
                   "职称评聘不等于面向所有策展岗位的统一个人执业许可，也不能替代岗位聘任条件；本页不构成资格认定。"
                 ]
               },
@@ -28702,8 +28781,8 @@
                 "id": "availability",
                 "values": [
                   "常见对象与工具范围",
-                  "藏品与研究材料、来源与权属文件、登记与编目数据库、保护与环境监测设备、展陈与展签材料与文件工具；O*NET 技术档案列出 Microsoft Office、Excel、PowerPoint、Outlook、Word、Adobe Photoshop 与 Creative Cloud 等技术关键词。",
-                  "工具熟练度是市场偏好与招聘信号，不等于专业能力或机构授权。"
+                  "2025全年Lightcast招聘21技术关键词中：Office16%、Excel10%、PowerPoint/Outlook各5%、Word/Photoshop各4%、Creative Cloud2%、Access/Illustrator/InDesign各1%，其余11项Not available不填0。招聘提及非使用率、熟练或AI效果；详细软件技能目录另列，不当采用。",
+                  "招聘关键词非实际采用、统一必需技能或法律授权。"
                 ]
               }
             ]
@@ -28712,9 +28791,11 @@
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "g04-title",
+            "g04-ooh"
           ],
-          "title": "雇主通常会核对什么",
+          "title": "编辑整理：核目标单位任务与条件",
           "type": "cards"
         },
         {
@@ -28841,19 +28922,19 @@
               [
                 "学历",
                 "准备进入文博与策展岗位的人",
-                "满足多数岗位的基本条件",
-                "美国通常要求研究生学历；中国大陆多要求相关专业研究生学历，按目标单位核对",
+                "学历是否满足目标岗位须核招聘原文，不作全国统一门槛。",
+                "美国本岗新聘教育回答44%硕士、35%博士、8%学士后证书（post-baccalaureate certificate，不是中等后证书），未显示余项不补零。Job Zone Five/SVP8及以上为通用充分准备层级，不能把其他职业五年以上经验例子套成本岗统一条件。BLS策展通常相关硕士，小型博物馆有本科申请机会；具体雇主另核，不直接套中国。 中国全国统一研究生条件未取。",
                 "按目标单位招聘公告",
-                "高（本科至研究生）",
+                "按具体项目课程学制费用核，本轮未取统一投入。",
                 "学历不代表研究能力或伦理判断。"
               ],
               [
                 "专业训练与实习",
                 "缺乏机构经验的人",
-                "是进入机构工作的常见前提",
-                "多数机构看重实习或志愿经历",
+                "BLS说明实习志愿经历有帮助，不等所有机构必需。",
+                "具体岗位是否必需按公告核。",
                 "通过实习、志愿或项目实践积累",
-                "中至长（数月至一年以上）",
+                "实际项目时长费用另核，未取统一数月一年。",
                 "实习经历不等于岗位聘任或处置授权。"
               ],
               [
@@ -28861,8 +28942,8 @@
                 "在文博机构任职并符合申报条件的人",
                 "影响岗位等级与职业发展",
                 "按机构岗位与现行职称政策而定",
-                "按文物博物馆研究、文物保护、文物考古、文物利用等类别申报",
-                "中至长（按资历与成果）",
+                "2019职称意见四评审专业及相应国家标准；地方单位当前实施另核。",
+                "实际申报、授权或训练条件与投入按具体项目核，本轮未取统一时长费用。",
                 "职称评聘不等于统一个人执业许可，也不替代岗位聘任条件。"
               ],
               [
@@ -28870,26 +28951,26 @@
                 "需要参与征集、处置或外借办理的位置",
                 "影响可执行的工作范围",
                 "按岗位与机构制度而定",
-                "按机构授权链与法规程序批准",
-                "中（依授权要求）",
-                "授权有范围与期限，不等于永久资质。"
+                "按对象借方与法域核备案、批准及禁止，不凭机构授权豁免中国国有馆藏处分禁令。",
+                "实际申报、授权或训练条件与投入按具体项目核，本轮未取统一时长费用。",
+                "机构授权具体范围期限另核，法定禁止不因授权解除。"
               ],
               [
                 "研究写作与发表",
                 "准备承担研究岗位的人",
-                "影响研究岗位的竞争与准备度",
-                "不是入职门槛",
+                "编辑准备关注点；按目标岗位公告核要求，未取得招聘竞争收益比较证据。",
+                "是否招聘门槛按具体岗位公告核，不一概断言不是门槛。",
                 "通过研究项目与写作实践积累",
-                "中至长（持续积累）",
+                "实际申报、授权或训练条件与投入按具体项目核，本轮未取统一时长费用。",
                 "发表成果不等于展览能力或管理能力。"
               ],
               [
                 "管理与筹资能力",
                 "准备承担部门或馆务职责的人",
-                "影响相关岗位的竞争与准备度",
-                "不是入职门槛",
+                "编辑准备关注点；按目标岗位公告核要求，未取得招聘竞争收益比较证据。",
+                "是否招聘门槛按具体岗位公告核，不一概断言不是门槛。",
                 "通过项目统筹与带团队实践积累",
-                "中至长（现场积累）",
+                "实际申报、授权或训练条件与投入按具体项目核，本轮未取统一时长费用。",
                 "管理能力不等于藏品处置或外借授权。"
               ]
             ]
@@ -28898,7 +28979,9 @@
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "g04-title",
+            "g04-ooh"
           ],
           "title": "学历、职称与授权怎么选择",
           "type": "table"
@@ -28909,8 +28992,8 @@
           "data": {
             "paragraphs": [
               "本页把学历、专业训练与实习、职称评聘、藏品处置与外借授权以及研究写作与管理能力分开：学历与训练是基础，来源核查、研究与展览能力须通过实际项目与带教体现。",
-              "美国口径来自 O*NET 准备层级（Job Zone Five：通常要求研究生学历；SVP 8.0 及以上）与相关实习或志愿经历的提示；这些不等于中国大陆的任职条件。",
-              "中国大陆口径：同类岗位为博物馆、美术馆与文化机构中的藏品征集、保管、研究与展览策划岗位，多经事业单位公开招聘或机构聘用并参加职称评聘；本页未取得全国统一的强制资质公开条件，须按目标单位与现行规定核对，不能把美国准备层级当作中国大陆门槛，也不能把职称评聘当作统一个人执业许可。",
+              "美国本岗新聘教育回答44%硕士、35%博士、8%学士后证书（post-baccalaureate certificate，不是中等后证书），未显示余项不补零。Job Zone Five/SVP8及以上为通用充分准备层级，不能把其他职业五年以上经验例子套成本岗统一条件。BLS策展通常相关硕士，小型博物馆有本科申请机会；具体雇主另核，不直接套中国。",
+              "2019人社部发122号文博职称意见设文物博物馆研究、保护、考古、利用四专业，分别有助理馆员、馆员、副研究馆员、研究馆员层级；非国有及符合条件编外人员可申报，职称评审、岗位聘用和作业授权分开。学历资历论文有规定条件和例外，非全国策展统一研究生录用要求；地方单位当前实施另核。 全国统一个人执业许可与全部招聘条件未取，不根据缺口作不存在结论。",
               "任何资格与授权要求都应以目标单位与主管部门的现行规定为准；本页不构成录用承诺、鉴定意见或法律意见。"
             ]
           },
@@ -28918,7 +29001,9 @@
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "g04-title",
+            "g04-ooh"
           ],
           "title": "学历、职称与藏品授权边界",
           "type": "notice"
@@ -28928,14 +29013,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入行通常要求文博、历史、艺术等相关专业的研究生学历并具备研究与写作训练：美国多数岗位要求硕士及以上并看重实习或志愿经历；中国大陆多经事业单位公开招聘或机构聘用并参加职称评聘。能否完成一次可核查的来源研究、把依据写清楚并形成可交接的记录，是比证书更可核对的准备证据。"
+              "美国BLS策展通常相关硕士，小型馆有本科机会，相关实习志愿经验有帮助；中国具体专业学历按公告核，本轮未取全国比例。研究登记展签能力记录为编辑准备，不代学历、职称、聘任或法律权限。"
             ]
           },
           "id": "actors.path.career-path-block.1",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "g04-ooh"
           ],
           "type": "prose"
         },
@@ -28944,14 +29030,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国口径下，该职业准备层级为 Job Zone Five（需要充分准备，SVP 8.0 及以上），通常要求研究生学历，官方教育反馈显示硕士 44%、博士 35%、中等后教育证书 8%；相关实习或志愿经历有助于进入博物馆工作；"
+              "美国本岗新聘教育回答44%硕士、35%博士、8%学士后证书（post-baccalaureate certificate，不是中等后证书），未显示余项不补零。Job Zone Five/SVP8及以上为通用充分准备层级，不能把其他职业五年以上经验例子套成本岗统一条件。BLS策展通常相关硕士，小型博物馆有本科申请机会；具体雇主另核，不直接套中国。"
             ]
           },
           "id": "actors.path.career-path-block.2",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "g04-ooh"
           ],
           "type": "prose"
         },
@@ -28960,14 +29047,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆没有与 O*NET-SOC 一一对应的职业细类，同类岗位为博物馆、美术馆与文化机构中的藏品征集、保管、研究与展览策划岗位，多经事业单位公开招聘或机构聘用，并多按文物博物馆研究、文物保护、文物考古、文物利用等职称类别评聘；学历、职称评聘与岗位聘任是不同层级的条件，须按目标单位与现行规定核对。"
+              "2019人社部发122号文博职称意见设文物博物馆研究、保护、考古、利用四专业，分别有助理馆员、馆员、副研究馆员、研究馆员层级；非国有及符合条件编外人员可申报，职称评审、岗位聘用和作业授权分开。学历资历论文有规定条件和例外，非全国策展统一研究生录用要求；地方单位当前实施另核。 中国与美国一一职业分类未取，不称不存在；实际招聘、薪酬和权限另核。"
             ]
           },
           "id": "actors.path.career-path-block.3",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "g04-title"
           ],
           "type": "prose"
         },
@@ -29161,14 +29249,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域：美国口径来自 O*NET 与 BLS 公开资料；中国大陆口径参考博物馆与文博机构的公开招聘、职称评聘与藏品管理制度方向，具体要求以目标单位与现行规定为准。"
+              "美国O*NET及BLS准备条件、中国博物馆条例、2024文物法和2019职称意见分开使用；本轮没有实际读取具体在招公告，单位地方现行实施另核。"
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "g04-museum",
+            "g04-title"
           ],
           "type": "prose"
         },
@@ -29177,7 +29267,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本板块把美国的准备层级与中国大陆的实际情况分开说明："
+              "三条方向与能力阶段是编辑归纳，不是统一职级或保证晋升；美国教育调查与中国职称、岗位聘用分开。"
             ]
           },
           "id": "actors.display.career_path_block.locale.summary",
@@ -29321,7 +29411,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与政策与预算、员工与志愿者督导以及馆务协调；该阶段通常要求研究与展览经验与专业资历，任职条件由机构与主管部门规定。"
+              "编辑发展方向：了解政策预算、员工志愿者督导及馆务协调任务；研究展览经验、资历和聘任条件按目标单位公告与制度核，不设统一阶段。"
             ]
           },
           "id": "actors.display.career_path_block.ladder.develop.description",
@@ -29401,7 +29491,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求相关专业本科及以上与岗位训练；条件按单位规定。"
+              "编辑准备项：相关专业训练与受监督经验；具体学历条件按岗位公告核，不推统一本科门槛。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.credentials",
@@ -29481,7 +29571,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按单位要求；专业训练与研究能力为核心依据。"
+              "编辑核对：专业训练、研究写作、展览或机构经验及资历要求按目标单位当年公告核，未取得常见录用优先级；职称评审、岗位聘任与法定授权分别核。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.02.credentials",
@@ -29641,7 +29731,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求研究与展览经验与专业资历，条件由机构与主管部门规定。"
+              "编辑核对：专业训练、研究写作、展览或机构经验及资历要求按目标单位当年公告核，未取得常见录用优先级；职称评审、岗位聘任与法定授权分别核。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.04.credentials",
@@ -29737,7 +29827,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求相关专业本科及以上与岗位训练；条件按单位规定。"
+              "编辑准备项：相关专业训练与受监督经验；具体学历条件按岗位公告核，不推统一本科门槛。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.01.credentials",
@@ -29817,7 +29907,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按单位要求；研究、写作与表达为核心依据。"
+              "编辑核对：专业训练、研究写作、展览或机构经验及资历要求按目标单位当年公告核，未取得常见录用优先级；职称评审、岗位聘任与法定授权分别核。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.02.credentials",
@@ -30073,7 +30163,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求相关专业背景与机构经验；条件按机构规定。"
+              "编辑核对：专业训练、研究写作、展览或机构经验及资历要求按目标单位当年公告核，未取得常见录用优先级；职称评审、岗位聘任与法定授权分别核。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.01.credentials",
@@ -30153,7 +30243,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按机构要求；专业经验与责任意识为核心依据。"
+              "编辑核对：专业训练、研究写作、展览或机构经验及资历要求按目标单位当年公告核，未取得常见录用优先级；职称评审、岗位聘任与法定授权分别核。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.02.credentials",
@@ -30345,14 +30435,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "该职业 2024—2034 年就业预测与职位空缺（基于 BLS 预测）。"
+              "美国25-4012.00单一职业2025—2035就业预测：2025就业14,200人，2035预测14,900人，增长5%（Faster than average），年均1,600个增长与替换空缺。空缺非净增或个人概率，也不证明AI因果；不混OOH档案策展博物馆工作人员合并4%/4,300年均空缺。"
             ]
           },
           "id": "actors.display.career_path_block.source.bls",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -30377,14 +30468,17 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于中国大陆文博机构岗位的聘用、职称与授权边界的方向性核对。"
+              "中国博物馆条例第21/22条禁止取得来源不明或不合法藏品、要求账档，未建账档不得交换出借；第23/24条法人代表对安全负责、离任移交、设施检查与珍贵易损保存；第30条复制仿制应明示、讲解科学准确。2024修订文物保护法（2025-03-01施行）第52条要求收藏单位合理注意来源合法性，第56条国有馆间借用备案、非国有等借用国有需批准，不能统称所有外借均批准；第60条禁止国有收藏单位把馆藏文物赠与出租出售抵押质押。机构同意不能豁免法定禁止；任务目录中的美国purchase/sale不是中国权限。 2019人社部发122号文博职称意见设文物博物馆研究、保护、考古、利用四专业，分别有助理馆员、馆员、副研究馆员、研究馆员层级；非国有及符合条件编外人员可申报，职称评审、岗位聘用和作业授权分开。学历资历论文有规定条件和例外，非全国策展统一研究生录用要求；地方单位当前实施另核。"
             ]
           },
           "id": "actors.display.career_path_block.source.cn-rule",
           "source_refs": [
             "onet",
             "bls",
-            "cn-rule"
+            "cn-rule",
+            "g04-museum",
+            "g04-heritage",
+            "g04-title"
           ],
           "type": "prose"
         },
@@ -30393,7 +30487,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明工资分位的统计位置与不可年化，不提供个人收入结论。"
+              "支持2025五工资分位与小时对应，通常2080标准年化；不代个人到手或固定月收入。"
             ]
           },
           "id": "actors.display.career_path_block.source.r2-pay-3",
@@ -30417,7 +30511,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需求信号要分三层看：官方就业预测反映职业总量变化，公共文化投入、捐赠与资助以及观众需求决定岗位分布，"
+              "就业总量预测、实际机构招聘、预算项目观众等可核对项分别看；后者为编辑核对因素，不从清单证明需求因果或全国占比。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
@@ -30432,13 +30526,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 摘要与就业趋势页（基于 BLS 2024—2034 年预测）显示该职业 2024 年约 15,100 人，预测标签为 Much faster than average（远高于平均，7% 或更高），十年约 1,800 个含增长与替换的空缺；总量增长不代表个人录用机会，文博岗位竞争通常激烈，该预测也不含技术替代时点。"
+              "美国25-4012.00单一职业2025—2035就业预测：2025就业14,200人，2035预测14,900人，增长5%（Faster than average），年均1,600个增长与替换空缺。空缺非净增或个人概率，也不证明AI因果；不混OOH档案策展博物馆工作人员合并4%/4,300年均空缺。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
           "source_refs": [
             "bls",
-            "oews"
+            "oews",
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -30447,13 +30542,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 提供该细分的认证与培训查询入口，以及博物馆与文博行业的伦理与专业准则入口，用于核对证书、培训与伦理边界；这属于信息入口说明，而不是需求信号。"
+              "O*NET认证查询本次显示4个National Association for Interpretation项目，非伦理准则或法定许可清单；具体项目当前报名条件未读，不代需求。ICOM2026准则另列来源。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls",
-            "oews"
+            "ratify",
+            "g04-icom"
           ],
           "type": "prose"
         },
@@ -30522,7 +30617,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "认证、培训与伦理准则入口不预测岗位数量或工资水平。"
+              "认证查询结果不预测岗位工资，也不证明不存在执照培训；本入口没有行业伦理准则全文。"
             ]
           },
           "id": "actors.display.market_signal_card.outlook.contract.limit",
@@ -30557,8 +30652,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.agent.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30572,8 +30666,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.agent.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30582,13 +30675,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从机构藏品与展览判断转向学科研究与田野工作。"
+              "编辑比较：人类学考古也含公共展览与教学，重田野和学科证据；与策展可重叠，实际许可及社区权利条件另核。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30602,8 +30694,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.teacher.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30617,8 +30708,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.teacher.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30627,13 +30717,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从藏品与展览责任转向以研究与写作为核心。"
+              "编辑比较：历史学家也有展览、文物保护、征集建议和公共项目，转向史料研究专业方法为重点，不划绝对互斥职责。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30647,8 +30736,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30662,8 +30750,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30672,13 +30759,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从独立承担藏品与展览判断转向研究项目支持。"
+              "编辑比较：社会科学研究助理Core数据程序、统计、研究质量核查、报告与展示，Supplemental研究设计协助和参与者管理；转向项目研究支持，不把独立判断与支持职责划绝对互斥。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30692,8 +30778,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.art.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30707,8 +30792,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.art.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30717,13 +30801,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从机构策展转向高校教学与学术研究。"
+              "编辑比较：建筑学高校教师Core课程设计、授课评价、专业研究发表、科研经费与指导，另有咨询行政；建筑专业和教学准备须另核，知识表达有交集不代专业资格。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30737,8 +30820,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.directing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30752,8 +30834,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.directing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30767,8 +30848,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.directing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30782,8 +30862,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.announcing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30797,8 +30876,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.announcing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30807,13 +30885,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从研究与展览判断转向对象保护与修复操作。"
+              "编辑比较：保护技术也含研究编目展陈教育，转向材料检测保存修复为重点，具体操作资格另核。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30827,8 +30904,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.editing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30842,8 +30918,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.editing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30852,13 +30927,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从藏品研究与展览判断转向档案整理与可检索性。"
+              "编辑比较：档案也含征集展示研究教育，转向记录体系与公共访问为重点，具体职责和资格另核。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30872,8 +30946,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.dancing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30887,8 +30960,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.dancing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30902,8 +30974,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.dancing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30912,13 +30983,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于该职业 2024—2034 年就业预测与职位空缺（基于 BLS 预测）。"
+              "美国25-4012.00单一职业2025—2035就业预测：2025就业14,200人，2035预测14,900人，增长5%（Faster than average），年均1,600个增长与替换空缺。空缺非净增或个人概率，也不证明AI因果；不混OOH档案策展博物馆工作人员合并4%/4,300年均空缺。"
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
           "source_refs": [
             "bls",
-            "oews"
+            "oews",
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -30927,13 +30999,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于查询认证、培训与行业伦理准则信息的官方入口，不预测岗位数量或工资水平。"
+              "认证查询结果不预测岗位工资，也不证明不存在执照培训；本入口没有行业伦理准则全文。"
             ]
           },
           "id": "actors.display.market_signal_card.source.ratify",
           "source_refs": [
-            "bls",
-            "oews"
+            "ratify"
           ],
           "type": "prose"
         },
@@ -30962,8 +31033,8 @@
           },
           "id": "actors.display.market_signal_card.source.onet",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "sag-moa"
           ],
           "type": "prose"
         }
@@ -31099,7 +31170,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind 职业内容编辑团队（来源核查与练习设计）"
+              "FermatMind职业内容编辑；本轮九模块来源核对"
             ]
           },
           "id": "actors.display.source_card.author",
@@ -31113,12 +31184,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源：O*NET OnLine 策展人（25-4012.00）职业档案、全国工资与摘要（OEWS 2025 年工资数据）、博物馆与文博行业伦理准则与藏品管理规范、ILO 生成式 AI 与职业任务暴露研究、NIST AI 风险管理框架，以及国家统计局与主管部门公开资料；各条目的口径与使用限制见下方来源登记。"
+              "O*NET25-4012.00任务情境教育兴趣、2025工资行业及2025—2035预测；中国博物馆与文物法律、2019文博职称政策及NBS条件行业背景；ICOM2026职业伦理与NIST自愿AI方法分别守类型法域。认证查询不是伦理全文，未取本岗AI效果、全国工资或统一录用条件。"
             ]
           },
           "id": "actors.display.source_card.source",
           "source_refs": [
-            "onet"
+            "onet",
+            "g04-trends",
+            "g04-title",
+            "g04-icom"
           ],
           "type": "prose"
         },
@@ -31127,7 +31201,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "更新：2026-09-18（各来源检索日期见来源登记）"
+              "九模块核对2026-10-09；范围外未重审，各来源期间与实际访问边界见登记。"
             ]
           },
           "id": "actors.display.source_card.updated-at",
@@ -31251,14 +31325,14 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于人类学家与考古学家方向的学科研究与田野方法对照（相邻职业）。",
                   "不把学科研究与田野职责并入本职业。"
                 ],
                 "evidence_type": "official source",
                 "id": "agent",
-                "limitation": "只支持人类学家与考古学家（相邻职业）的田野研究与实物证据的学科研究任务；本职业以机构藏品与展览工作为主，不把学科研究与田野职责并入本职业。",
+                "limitation": "人类学考古也含公众展示和教学，按田野学科研究重点区分，不划绝对互斥。",
                 "market": "美国",
                 "name": "O*NET OnLine：Anthropologists and Archeologists（19-3091.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31267,14 +31341,13 @@
                 "url": "https://www.onetonline.org/link/summary/19-3091.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持合并命名覆盖的博物馆技术员与文物保护员（25-4013.00）的官方身份与规模：2024 年就业约 15,700 人、2025 年年薪中位数 51,440 美元（时薪 24.73 美元）、2024—2034 年增长高于平均（5% 至 6%）、预测期职位空缺约 1,900 个。",
-                  "该子职业与本页身份口径（25-4012.00 Curators）不同，其数值单独标注，不并入本页统计，也不与本页数值混用或相加。"
+                  "25-4013.00技术员保护员为相邻独立职业；实际任务含保护检测、研究编目、展陈与公众教育。旧2024规模预测不签当前证据；本轮未读其精确2025—2035预测。"
                 ],
                 "evidence_type": "official source",
                 "id": "announcing",
-                "limitation": "只支持博物馆技术员与文物保护员（25-4013.00）这一子职业的身份与统计口径；本页身份口径为 O*NET-SOC 25-4012.00（Curators），该子职业的口径与数值单独标注，不并入本页身份，也不把其对象准备、状况检查与保护处理职责并入本页。",
+                "limitation": "相邻任务与本页可重叠，具体保护操作资格另核；不把旧规模预测或相邻工资并入本页。",
                 "market": "美国",
                 "name": "O*NET OnLine：Museum Technicians and Conservators（25-4013.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31283,14 +31356,14 @@
                 "url": "https://www.onetonline.org/link/summary/25-4013.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于建筑学教师（高等教育）方向的教学与学术研究对照（相邻职业）。",
                   "不把教学职责并入本职业。"
                 ],
                 "evidence_type": "official source",
                 "id": "art",
-                "limitation": "只支持建筑学教师（高等教育）（相邻职业）的高校教学与学术研究任务；本职业以机构藏品与展览工作为主，不把教学职责并入本职业。",
+                "limitation": "实际22任务含19Core课程设计授课评价研究发表经费指导，3Supplemental行政咨询社区；建筑专业资格另核。",
                 "market": "美国",
                 "name": "O*NET OnLine：Architecture Teachers, Postsecondary（25-1031.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31301,12 +31374,11 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "支持该职业的就业与预测口径。",
-                  "不含中国大陆信息，不能替代中国大陆数据。"
+                  "旧共享2024—2034引用保留，当前授权消费者使用g04-trends。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "支持该职业 2024 年约 15,100 人、预测标签 Much faster than average（远高于平均，7% 或更高）与十年约 1,800 个含增长与替换的空缺；本页就业与预测以该 O*NET 页面为准。",
+                "limitation": "原旧期不是本轮当前统计证据，保护Hero/FAQ不签当前核实。",
                 "market": "美国",
                 "name": "O*NET OnLine：Curators 25-4012.00 摘要与就业趋势（基于 BLS 2024—2034 年预测）",
                 "period": "2024—2034 年预测期；检索 2026-09-18",
@@ -31315,14 +31387,14 @@
                 "url": "https://www.onetonline.org/link/summary/25-4012.00"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持本页标题的合并命名来源与同源合并页的更宽群体口径：该页覆盖档案管理员、策展人、博物馆技术员与文物保护员；2025 年 5 月年薪中位数 60,330 美元（时薪 29.00 美元）、2025 年在岗 38,500 人、2025—2035 年增长 4%（与平均相当）、就业变化约 1,600 人、预测期年均约 4,300 个空缺；入门学历通常为相关领域硕士，博物馆技术员通常为学士。",
-                  "该页是含档案管理员的更宽群体口径，统计期为 2025—2035 年，与本页身份口径 O*NET-SOC 25-4012.00（2025 年工资数据、2024—2034 年预测）不同；其数值不属于本页身份口径，不并入本页，也不与本页数值混用或相加。"
+                  "实际当前合并群体2025就业38,500、中位年薪60,330，2025—2035增长4%、年均空缺4,300。其中策展2025就业14,200、中位63,420，技术保护员14,000、中位51,440，档案10,300、中位64,550。",
+                  "策展通常相关硕士，小型馆本科有机会；技术员通常本科部分硕士，修复师通常硕士。合并群体不是本页精确职业。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls-ooh",
-                "limitation": "只支持与本条 slug 同源的 BLS 职业展望手册合并页的命名来源与更宽群体（档案管理员、策展人、博物馆技术员与文物保护员）的口径与规模；该页含档案管理员且统计期为 2025—2035 年，不能作为本页身份口径 O*NET-SOC 25-4012.00 的数值。",
+                "limitation": "合并名称沿用边界保留，子职业统计分别标明，不并入本页Curators身份。",
                 "market": "美国",
                 "name": "BLS《Occupational Outlook Handbook》：Archivists, Curators, and Museum Workers（合并职业页）",
                 "period": "2025 年 5 月工资数据；2025—2035 年预测；检索 2026-09-26",
@@ -31336,25 +31408,25 @@
                   "支持中国大陆文博岗位的分类与用工语境。",
                   "不据此推定任职资格、授权或工资数值。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official website index",
                 "id": "cn-rule",
-                "limitation": "支持中国大陆同类岗位为博物馆、美术馆与文化机构中藏品征集、保管、研究与展览岗位、多经事业单位公开招聘或机构聘用并参加职称评聘、受法律、行业伦理准则与机构制度约束的分类语境；不证明全国统一的强制资质或个人执业许可，也不能把该类岗位与美国职业代码一一对应。",
+                "limitation": "主页不是博物馆、文物法律或职称原文，也不证明统一研究生条件或无对应分类。",
                 "market": "中国内地",
-                "name": "中国大陆公开文博机构与博物馆管理法规信息（博物馆条例与文博职称政策）",
+                "name": "中国政府网主页：原信息索引",
                 "period": "现行规定；检索 2026-09-18",
                 "publisher": "公开主管部门与法规信息",
                 "scope": "contextual",
                 "url": "https://www.gov.cn/"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于图书馆员与媒体馆藏专员方向的馆藏组织与读者服务对照（相邻职业）。",
                   "不把馆藏组织与读者服务职责并入本职业。"
                 ],
                 "evidence_type": "official source",
                 "id": "dancing",
-                "limitation": "只支持图书馆员与媒体馆藏专员（相邻职业）的馆藏组织与读者服务任务；本职业以藏品征集与展览策划为主，不把馆藏组织与读者服务职责并入本职业。",
+                "limitation": "图书馆含教学管理研究及馆藏服务，重点不同不划互斥。",
                 "market": "美国",
                 "name": "O*NET OnLine：Librarians and Media Collections Specialists（25-4022.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31363,14 +31435,14 @@
                 "url": "https://www.onetonline.org/link/summary/25-4022.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于高校人类学和考古学教师方向的教学与研究对照（相邻职业）。",
                   "不把教学职责并入本职业。"
                 ],
                 "evidence_type": "official source",
                 "id": "directing",
-                "limitation": "只支持高校人类学和考古学教师（相邻职业）的教学与学科研究任务；本职业以机构藏品与展览工作为主，不把教学职责并入本职业。",
+                "limitation": "高校教学研究和田野督导有重叠，具体任职另核。",
                 "market": "美国",
                 "name": "O*NET OnLine：Anthropology and Archeology Teachers, Postsecondary（25-1061.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31379,14 +31451,14 @@
                 "url": "https://www.onetonline.org/link/summary/25-1061.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于档案管理员方向的记录整理与信息组织对照（相邻职业）。",
                   "不把档案整理职责并入本职业。"
                 ],
                 "evidence_type": "official source",
                 "id": "editing",
-                "limitation": "只支持档案管理员（相邻职业）的记录鉴定、整理与可检索性任务；本职业以藏品研究与展览叙事为主，不把档案整理职责并入本职业。",
+                "limitation": "档案也含征集展示研究公众教育，与策展有交集。",
                 "market": "美国",
                 "name": "O*NET OnLine：Archivists（25-4011.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31395,14 +31467,14 @@
                 "url": "https://www.onetonline.org/link/summary/25-4011.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于高校历史教师方向的教学与研究对照（相邻职业）。",
                   "不把教学职责并入本职业。"
                 ],
                 "evidence_type": "official source",
                 "id": "editor",
-                "limitation": "只支持高校历史教师（相邻职业）的教学与史学研究任务；本职业以机构藏品与展览工作为主，不把教学职责并入本职业。",
+                "limitation": "历史高校教师含研究课程评价行政，任职资格另核。",
                 "market": "美国",
                 "name": "O*NET OnLine：History Teachers, Postsecondary（25-1125.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31411,30 +31483,30 @@
                 "url": "https://www.onetonline.org/link/summary/25-1125.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持入行准备层级、兴趣代码与行业分布的观察点。",
-                  "不构成具体雇主的录用条件或中国大陆的门槛。"
+                  "美国本岗新聘教育回答44%硕士、35%博士、8%学士后证书（post-baccalaureate certificate，不是中等后证书），未显示余项不补零。Job Zone Five/SVP8及以上为通用充分准备层级，不能把其他职业五年以上经验例子套成本岗统一条件。BLS策展通常相关硕士，小型博物馆有本科申请机会；具体雇主另核，不直接套中国。",
+                  "2025美国本职业行业就业：艺术娱乐休闲48%、政府18%、教育服务17%、其他17%；合计100%，不是中国比例或行业工资。"
                 ],
                 "evidence_type": "official source",
                 "id": "employer",
-                "limitation": "支持本职业的准备层级（Job Zone Five，SVP 8.0 及以上）、兴趣代码（CES）与 2024 年行业分布（艺术娱乐与休闲 46%、政府 17%、教育服务 15%、其他行业 22%）；不代表具体雇主的招聘条件，也不等同于中国大陆的要求。",
+                "limitation": "通用Zone不代具体雇主条件，不误译学士后证书。",
                 "market": "美国",
                 "name": "O*NET OnLine：Curators 摘要（25-4012.00）",
-                "period": "页面 2026 年更新；检索 2026-09-18",
+                "period": "行业2025；教育回答未统一调查年",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/25-4012.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于社会科学研究助理方向的研究支持与数据处理对照（相邻职业）。",
                   "不把研究支持职责并入本职业。"
                 ],
                 "evidence_type": "official source",
                 "id": "enrichment",
-                "limitation": "只支持社会科学研究助理（相邻职业）的资料收集、整理与数据处理任务；本职业对藏品与展览判断承担独立责任，不把研究支持职责并入本职业。",
+                "limitation": "23任务含10Core统计程序数据质量报告展示、12Supplemental设计协助与参与者管理，New资助提案重要性NA不补0；具体研究资格与权限另核。",
                 "market": "美国",
                 "name": "O*NET OnLine：Social Science Research Assistants（19-4061.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31443,14 +31515,14 @@
                 "url": "https://www.onetonline.org/link/summary/19-4061.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "兴趣问卷只用于自我观察。",
                   "不得作为录用、职称评聘或晋升依据。"
                 ],
-                "evidence_type": "official tool",
+                "evidence_type": "official tool entry",
                 "id": "interest-profiler",
-                "limitation": "兴趣问卷只描述体验偏好，不替代能力、资格、专业训练或录用判断，也不预测工作表现。",
+                "limitation": "主页是索引，不证明六产品本岗效度。",
                 "market": "美国/通用",
                 "name": "O*NET Interest Profiler（职业兴趣问卷）",
                 "period": "当前工具；检索 2026-09-18",
@@ -31464,9 +31536,9 @@
                   "登记中国大陆公开工资统计的细分层级。",
                   "代理值不得写成本职业工资。"
                 ],
-                "evidence_type": "official statistics",
+                "evidence_type": "official website index",
                 "id": "nbs",
-                "limitation": "公开工资统计按行业门类与人员类别发布，未建立与 25-4012.00 对应的职业细类；文化、体育和娱乐业行业均值不是本职业工资，也不能外推为全国职业收入。",
+                "limitation": "主页不证明分类不存在或工资从未发布；条件背景实际统计另列g04-nbs。",
                 "market": "中国内地",
                 "name": "国家统计局：公开统计与工资发布入口",
                 "period": "现行发布；检索 2026-09-18",
@@ -31475,14 +31547,13 @@
                 "url": "https://www.stats.gov.cn/"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明引入 AI 系统时的治理、记录与人工监督要求。",
-                  "框架不替代法律、伦理准则与机构制度的责任划分。"
+                  "AI RMF1.0自愿治理框架"
                 ],
                 "evidence_type": "institutional framework",
                 "id": "nist",
-                "limitation": "提供 AI 系统风险治理的用语与流程要求（角色、责任、记录与人工监督）；不规定藏品管理与伦理要求。",
+                "limitation": "非策展岗位强制法或所有机构程序。",
                 "market": "美国",
                 "name": "NIST：Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
                 "period": "AI RMF 1.0；检索 2026-09-18",
@@ -31507,33 +31578,33 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持本职业的任务、工作情境与准备层级。",
-                  "不含技术采用与岗位替代数据。"
+                  "当前15Tasks为12Core、3Supplemental：征集保管展览主题与制作安装、登记数据库、研究、馆藏信息、购买出售交换借用谈判授权、鉴定价值、场馆检查、写作、教育、推广筹资、员工督导和理事会政策预算为Core；保险、含餐饮装饰收费的活动细节、复制品规格制造为Supplemental。重要性非从业占比，任务有机构与法域权限。",
+                  "美国本岗新聘教育回答44%硕士、35%博士、8%学士后证书（post-baccalaureate certificate，不是中等后证书），未显示余项不补零。Job Zone Five/SVP8及以上为通用充分准备层级，不能把其他职业五年以上经验例子套成本岗统一条件。BLS策展通常相关硕士，小型博物馆有本科申请机会；具体雇主另核，不直接套中国。",
+                  "2025美国本职业行业就业：艺术娱乐休闲48%、政府18%、教育服务17%、其他17%；合计100%，不是中国比例或行业工资。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet",
-                "limitation": "支持本职业的任务、工作活动、工作情境百分比、准备层级、兴趣代码与 2024 年行业就业占比；为单一职业口径，不含技术采用、岗位替代或收入变化数据。",
+                "limitation": "单一职业档案，非中国法律权限或AI效果。",
                 "market": "美国",
                 "name": "O*NET OnLine：Curators（25-4012.00）职业档案",
-                "period": "页面 2026 年更新；检索 2026-09-18",
+                "period": "2026-10-09读取，非统一任务情境调查年；行业2025",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/25-4012.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持雇主技术关键词的市场信号说明。",
-                  "关键词不等于采用率或能力要求。"
+                  "2025全年Lightcast招聘21技术关键词中：Office16%、Excel10%、PowerPoint/Outlook各5%、Word/Photoshop各4%、Creative Cloud2%、Access/Illustrator/InDesign各1%，其余11项Not available不填0。招聘提及非使用率、熟练或AI效果；详细软件技能目录另列，不当采用。"
                 ],
-                "evidence_type": "official occupation data",
+                "evidence_type": "job posting technology keyword data",
                 "id": "r2-ai",
-                "limitation": "列出雇主招聘与工作场景中提到的软件与技术关键词（Microsoft Office、Excel、PowerPoint、Outlook、Word、Adobe Photoshop 与 Creative Cloud 等）；技术关键词是市场信号，不衡量使用率、熟练度或岗位替代。",
+                "limitation": "21关键词不代目录、采用率或AI效果。",
                 "market": "美国",
                 "name": "O*NET OnLine：Curators 热门技术（25-4012.00）",
-                "period": "页面 2026 年更新；检索 2026-09-18",
+                "period": "2025全年",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/25-4012.00"
@@ -31544,9 +31615,9 @@
                   "登记中国大陆公开工资统计的细分层级。",
                   "未取得本职业单列数值，不使用未标注的代理数字。"
                 ],
-                "evidence_type": "official statistics",
+                "evidence_type": "official website index",
                 "id": "r2-pay-1",
-                "limitation": "公开工资统计只按区域、行业门类与人员类别发布，未建立与本职业一一对应的职业细类；本页未取得本职业单列数值，缺口在页面可见位置标记。",
+                "limitation": "主页不证明统计最高只能行业或本岗数据从未发布。",
                 "market": "中国内地",
                 "name": "国家统计局：公开工资统计发布入口",
                 "period": "现行发布；检索 2026-09-18",
@@ -31555,14 +31626,13 @@
                 "url": "https://www.stats.gov.cn/"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "说明时薪与年收入不可直接互换。",
-                  "不提供个人收入结论。"
+                  "OEWS有薪全兼职常规税前工资，排自雇加班溢价等，通常2080标准年化。"
                 ],
                 "evidence_type": "official methodology",
                 "id": "r2-pay-2",
-                "limitation": "说明 OEWS 的覆盖人群、工资构成与折算假设；不提供本职业具体数值，也不用于把时薪换算为个人月收入。",
+                "limitation": "不是个人实际工时月到手，不是不可标准年化。",
                 "market": "美国",
                 "name": "BLS Handbook of Methods：OEWS 工资与折算口径",
                 "period": "现行方法说明；检索 2026-09-18",
@@ -31571,14 +31641,13 @@
                 "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明工资分位的统计位置。",
-                  "不提供个人收入结论，也不能按固定工时年化。"
+                  "实际2025年度40470/48870/63420/83080/107140，小时19.46/23.49/30.49/39.94/51.51。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-3",
-                "limitation": "公示本职业年工资分位 40,470／48,870／63,420／83,080／107,140 美元，并同时公布小时工资（19.46／23.49／30.49／39.94／51.51）；分位是统计位置，不是学历或职称等级，也不能换算个人月收入或到手工资；按州或地区细分的数据须在该页按地区与期间查询。",
+                "limitation": "分位不是经验职级或机构因果；统计年度不代月到手。",
                 "market": "美国",
                 "name": "O*NET OnLine：Curators 全国工资（25-4012.00）",
                 "period": "2025 年工资数据；检索 2026-09-18",
@@ -31587,14 +31656,13 @@
                 "url": "https://www.onetonline.org/link/localwages/25-4012.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "支持认证与培训信息的核对入口。",
-                  "入口不预测岗位数量或工资水平。"
+                  "实际4项NAI认证：Certified Interpretive Planner/Trainer、Certified Heritage Interpreter、Certified Interpretive Manager。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official certification query",
                 "id": "ratify",
-                "limitation": "提供该细分的认证与培训查询入口，用于核对证书与培训信息；属于信息入口说明，不预测岗位数量或工资水平，也不替代中国大陆的职称评聘与岗位要求。",
+                "limitation": "不是伦理准则、法定许可或报名条件全文；不证明全国无资格培训。",
                 "market": "美国",
                 "name": "O*NET OnLine：Curators 认证与培训入口（25-4012.00）",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31603,14 +31671,14 @@
                 "url": "https://www.onetonline.org/link/localcert/25-4012.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "用于说明任务级暴露度量的方法。",
                   "任务暴露不等于自动化采用或岗位替代结果。"
                 ],
                 "evidence_type": "institutional research",
                 "id": "sag",
-                "limitation": "按任务级暴露度量生成式 AI 与职业任务的接近程度；不提供本职业单职业分数、采用率、自动化率或替代日期。",
+                "limitation": "精确暴露分数本轮未取得，不说研究没有单职业明细；非采用率或替代日期。",
                 "market": "全球",
                 "name": "ILO：Generative AI and Jobs — Refined Global Index of Occupational Exposure",
                 "period": "研究发表时点；检索 2026-09-18",
@@ -31649,6 +31717,126 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/19-3093.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国25-4012.00单一职业2025—2035就业预测：2025就业14,200人，2035预测14,900人，增长5%（Faster than average），年均1,600个增长与替换空缺。空缺非净增或个人概率，也不证明AI因果；不混OOH档案策展博物馆工作人员合并4%/4,300年均空缺。"
+                ],
+                "evidence_type": "official employment projection",
+                "id": "g04-trends",
+                "limitation": "精确职业非OOH合并数据或AI因果",
+                "market": "美国",
+                "name": "O*NET策展2025—2035就业预测",
+                "period": "2025—2035",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/25-4012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025美国本职业行业就业：艺术娱乐休闲48%、政府18%、教育服务17%、其他17%；合计100%，不是中国比例或行业工资。"
+                ],
+                "evidence_type": "official occupation industry employment distribution",
+                "id": "g04-industry",
+                "limitation": "实际industry四项，summary核年份，非行业工资",
+                "market": "美国",
+                "name": "O*NET策展2025行业分布",
+                "period": "2025",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/25-4012.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国博物馆条例第21/22条禁止取得来源不明或不合法藏品、要求账档，未建账档不得交换出借；第23/24条法人代表对安全负责、离任移交、设施检查与珍贵易损保存；第30条复制仿制应明示、讲解科学准确。2024修订文物保护法（2025-03-01施行）第52条要求收藏单位合理注意来源合法性，第56条国有馆间借用备案、非国有等借用国有需批准，不能统称所有外借均批准；第60条禁止国有收藏单位把馆藏文物赠与出租出售抵押质押。机构同意不能豁免法定禁止；任务目录中的美国purchase/sale不是中国权限。"
+                ],
+                "evidence_type": "administrative regulation",
+                "id": "g04-museum",
+                "limitation": "实际18—27及30/31相关条款，非所有中国文化机构与收藏对象",
+                "market": "中国内地",
+                "name": "博物馆条例",
+                "period": "2015-03-20施行",
+                "publisher": "国务院；北京市政府转载",
+                "scope": "contextual",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/201503/t20150302_780994.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国博物馆条例第21/22条禁止取得来源不明或不合法藏品、要求账档，未建账档不得交换出借；第23/24条法人代表对安全负责、离任移交、设施检查与珍贵易损保存；第30条复制仿制应明示、讲解科学准确。2024修订文物保护法（2025-03-01施行）第52条要求收藏单位合理注意来源合法性，第56条国有馆间借用备案、非国有等借用国有需批准，不能统称所有外借均批准；第60条禁止国有收藏单位把馆藏文物赠与出租出售抵押质押。机构同意不能豁免法定禁止；任务目录中的美国purchase/sale不是中国权限。"
+                ],
+                "evidence_type": "national statute",
+                "id": "g04-heritage",
+                "limitation": "实际第50—65与相关出境条款；文物对象与所有权不同条件不同，非机构同意即合法",
+                "market": "中国内地",
+                "name": "中华人民共和国文物保护法（2024修订）",
+                "period": "2024修订；2025-03-01施行",
+                "publisher": "全国人大常委会；最高检转载",
+                "scope": "contextual",
+                "url": "https://www.spp.gov.cn/spp/zdgz/202411/t20241109_671626.shtml"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2019人社部发122号文博职称意见设文物博物馆研究、保护、考古、利用四专业，分别有助理馆员、馆员、副研究馆员、研究馆员层级；非国有及符合条件编外人员可申报，职称评审、岗位聘用和作业授权分开。学历资历论文有规定条件和例外，非全国策展统一研究生录用要求；地方单位当前实施另核。"
+                ],
+                "evidence_type": "ministerial professional title guidance",
+                "id": "g04-title",
+                "limitation": "实际前言四专业、例外、代表作及非国有编外评审范围；不代当前地方单位公告或策展统一许可",
+                "market": "中国内地",
+                "name": "深化文物博物专业人员职称制度改革意见",
+                "period": "人社部发2019年122号",
+                "publisher": "人力资源社会保障部、国家文物局",
+                "scope": "contextual",
+                "url": "https://rsjwhjxjy.weihai.cn/uploads/113/file/public/202109/20210903102525_urrj7i5w6c.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "ICOM2026伦理准则C.1—C.7倡导藏品政策、保存安全、复制品清晰永久标识、征集尽职调查、记录安全和负责的退出馆藏与技术使用；P.6保护工作保密与个人信息。ICOM会员须遵守，非会员作专业参考，不是中国强制法、全部机构程序或本岗AI效率证据；原始法域规则和机构权限另核。"
+                ],
+                "evidence_type": "professional ethics code",
+                "id": "g04-icom",
+                "limitation": "实际前言、P.6及C.1—C.10相关段，非中国强制法或本岗AI效果",
+                "market": "国际",
+                "name": "ICOM Code of Ethics for Museums 2026",
+                "period": "2026版，2026-06-25采用",
+                "publisher": "International Council of Museums",
+                "scope": "contextual",
+                "url": "https://icom.museum/wp-content/uploads/2026/07/ICOM-Code-of-Ethics-for-Museums_2026_EN.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国本岗新聘教育回答44%硕士、35%博士、8%学士后证书（post-baccalaureate certificate，不是中等后证书），未显示余项不补零。Job Zone Five/SVP8及以上为通用充分准备层级，不能把其他职业五年以上经验例子套成本岗统一条件。BLS策展通常相关硕士，小型博物馆有本科申请机会；具体雇主另核，不直接套中国。"
+                ],
+                "evidence_type": "official occupational guidance",
+                "id": "g04-ooh",
+                "limitation": "具体策展硕士小馆本科与其他子职业分开，不用合并规模工资增长替本岗",
+                "market": "美国",
+                "name": "BLS策展、档案与博物馆工作人员入行职责",
+                "period": "2025统计与当前入行说明",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/education-training-and-library/curators-museum-technicians-and-conservators.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "条件行业背景：法人主营归文化体育娱乐业时，NBS2025城镇非私营129,447元、私营64,015元税前年平均工资可作背景。城镇5人以上法人，排个体工商户和自由职业者；非本岗工资、中位起薪分位或月到手，不混人群。高校、政府等其他主营须另匹配，不能把美国48%行业占比当中国分类。"
+                ],
+                "evidence_type": "official wage statistics",
+                "id": "g04-nbs",
+                "limitation": "法人主营文化体育娱乐匹配条件背景，其他高校政府主营另核，非本岗工资。",
+                "market": "中国内地",
+                "name": "国家统计局2025年城镇单位就业人员平均工资",
+                "period": "2025工资，2026-05-15发布",
+                "publisher": "中国政府官方网站",
+                "scope": "proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
               }
             ]
           },
@@ -32109,7 +32297,7 @@
           },
           {
             "来源": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32128,7 +32316,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32345,7 +32533,7 @@
             }
           },
           {
-            "source_ref": "bls",
+            "source_ref": "g04-trends",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.4.limit",
               "block": "ai-impact",
@@ -32353,7 +32541,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32372,7 +32560,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32583,7 +32771,7 @@
             }
           },
           {
-            "source_ref": "bls",
+            "source_ref": "g04-trends",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.5.answer",
               "block": "ai-impact",
@@ -32591,14 +32779,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33176,7 +33364,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33184,7 +33372,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33222,7 +33410,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "g04-museum",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33230,7 +33418,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "g04-museum",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34109,7 +34297,10 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "sag-moa"
+              "onet",
+              "g04-museum",
+              "g04-heritage",
+              "g04-icom"
             ],
             "id": "image-use",
             "mitigation": {
@@ -34145,7 +34336,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls"
+              "g04-museum",
+              "g04-icom"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -34181,7 +34373,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls"
+              "onet",
+              "g04-museum",
+              "g04-heritage"
             ],
             "id": "project-income",
             "mitigation": {
@@ -34217,7 +34411,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "cn-rule"
+              "g04-museum",
+              "g04-heritage",
+              "g04-icom"
             ],
             "id": "identity-procedure",
             "mitigation": {
@@ -34253,8 +34449,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "nist",
-              "sag-moa"
+              "g04-museum",
+              "g04-heritage"
             ],
             "id": "project-data",
             "mitigation": {
@@ -34290,8 +34486,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
-              "employer"
+              "onet"
             ],
             "id": "audition-feedback",
             "mitigation": {
@@ -34318,7 +34513,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34326,7 +34521,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34364,7 +34559,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "g04-museum",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34372,7 +34567,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "g04-museum",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34444,23 +34639,23 @@
           "bls_table": [
             {
               "指标": "数据与口径",
-              "数值": "中国大陆未发布策展人单一职业工资中位数，职业级数值按缺口处理；缺口已在页面可见位置标记。",
-              "说明": "公开工资统计最高细分到行业门类与人员类别，不发布该职业细类数值。"
+              "数值": "证据不足：本轮未取得中国策展相关岗位全国工资分布；不说官方从未发布。",
+              "说明": "一一职业分类映射未取得，不等分类不存在或统计最高只能行业。"
             },
             {
               "指标": "查阅范围",
-              "数值": "国家统计局工资与统计发布页面、文博机构公开招聘信息（检索 2026-09-18）",
+              "数值": "本轮实际核NBS2025工资发布、博物馆条例、2024文物法及2019职称意见；未读取具体在招公告。",
               "说明": "只用于说明实际查阅范围与时间，不作数值换算依据。"
             },
             {
               "指标": "行业均值代理",
               "数值": "2025 年城镇非私营单位文化、体育和娱乐业就业人员年平均工资为 129,447 元",
-              "说明": "这是行业门类均值，不是策展人职业工资，不能外推为个人收入或起薪。"
+              "说明": "法人主营文化体育娱乐业匹配才可用非私营行业均值背景，非本岗工资起薪或个人报价。"
             },
             {
               "指标": "行业均值代理",
               "数值": "2025 年城镇私营单位文化、体育和娱乐业就业人员年平均工资为 64,015 元",
-              "说明": "私营单位口径与策展人所在机构类型不同，只能作为量级参考，不能替代职业工资。"
+              "说明": "法人主营匹配才用私营行业背景，不能仅按职位名称套行业或与非私营混人群。"
             },
             {
               "指标": "职业分类",
@@ -34474,8 +34669,8 @@
             },
             {
               "指标": "统计覆盖",
-              "数值": "国家统计局城镇单位工资统计覆盖城镇法人单位，不含个体工商户与自由职业者等",
-              "说明": "部分聘期制与项目制岗位以非标准用工形式存在，公开职业级数据未单列，行业均值不能代表该职业实际收入。"
+              "数值": "NBS城镇5人以上法人有薪单位人群，排个体工商户与自由职业者。",
+              "说明": "精确职业工资未取；单位主营行业不同需另匹配，不能推全国职业收入。"
             },
             {
               "指标": "市场对照",
@@ -34489,10 +34684,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_class_row": "中国大陆用工场景：博物馆与纪念馆、美术馆与文化机构、档案馆与历史遗址、高校博物馆等机构的藏品管理、研究与展览策划岗位；公开工资统计按行业门类与人员类别发布，未建立与 O*NET-SOC 25-4012.00 对应的职业细类，本页不据分类推定任职资格或收入。",
+          "china_class_row": "2019人社部发122号文博职称意见设文物博物馆研究、保护、考古、利用四专业，分别有助理馆员、馆员、副研究馆员、研究馆员层级；非国有及符合条件编外人员可申报，职称评审、岗位聘用和作业授权分开。学历资历论文有规定条件和例外，非全国策展统一研究生录用要求；地方单位当前实施另核。 与美国代码的一一分类未取得，不声称不存在。",
           "china_edu_table": [
             {
-              "学历段": "本科及以上＋文博或相关专业",
+              "学历段": "相关专业与基础记录训练（编辑准备）",
               "岗位方向": "博物馆藏品管理或公众教育岗位方向",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -34502,7 +34697,7 @@
               }
             },
             {
-              "学历段": "硕士及以上＋专业研究方向",
+              "学历段": "专业研究与写作（编辑准备）",
               "岗位方向": "策展或文博研究岗位方向",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -34512,7 +34707,7 @@
               }
             },
             {
-              "学历段": "研究生学历＋研究与展览经验",
+              "学历段": "展览项目与公众表达（编辑准备）",
               "岗位方向": "展览策划与项目管理方向",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.theater",
@@ -34522,7 +34717,7 @@
               }
             },
             {
-              "学历段": "专业资历＋管理与协调能力",
+              "学历段": "专业资历与协调管理（编辑准备）",
               "岗位方向": "部门管理或馆务管理方向",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -34586,7 +34781,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国大陆公开信息检索入口：国家统计局工资与统计发布页面与文博机构公开招聘信息；本轮未取得该职业单列数值。",
+          "china_open": "实际查阅NBS2025及相关文博政策；未取得本岗全国工资与具体在招报价。",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34633,7 +34828,7 @@
               "月薪参考": {
                 "$join": [
                   {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
+                    "$fact": "china-jiaojiang-featured-daily-2026-g04-current",
                     "field": "display_value"
                   },
                   {
@@ -34656,23 +34851,23 @@
               }
             }
           ],
-          "china_soc_row": "美国职业代码：O*NET-SOC 25-4012.00（Curators）；中国大陆未建立与之对应的职业级工资口径。",
+          "china_soc_row": "美国25-4012.00；中国对应职业分类与全国工资一一映射未取，不根据缺口否定分类存在。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "china-jiaojiang-featured-daily-2026-g04-current"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响这个职业的工资吗？",
-            "driver_heading": "策展工作怎样按展览与征集周期安排？",
+            "driver_heading": "展览征集安排中应核对哪些条件？",
             "official_heading": "官方统计口径与缺失说明",
-            "scenario_caption": "学历与训练背景、岗位方向与说明（编辑整理，不是薪资统计）",
-            "scenario_heading": "不同学历与训练背景对应哪些文博岗位方向？",
-            "scenario_interpretation_label": "说明与核对建议",
-            "scenario_role_label": "学历与训练背景",
+            "scenario_caption": "编辑准备方向与核对项，非统一学历门槛或工资等级",
+            "scenario_heading": "不同准备方向应核对哪些文博岗位条件？",
+            "scenario_interpretation_label": "条件与核对建议",
+            "scenario_role_label": "准备方向",
             "scenario_value_label": "岗位方向"
           },
-          "us_growth": "远高于平均（7% 或更高，2024—2034 年，标签「远高于平均」）",
+          "us_growth": "增长5%（2025—2035本职业预测）",
           "us_median": "63,420美元/年（中位数，2025 年工资数据）"
         }
       },
@@ -34682,14 +34877,14 @@
             {
               "$join": [
                 {
-                  "$source": "bls",
+                  "$source": "g04-trends",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
                   "item": "actors.source-register.published.1"
                 },
                 {
-                  "$source": "bls",
+                  "$source": "g04-trends",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -34750,40 +34945,40 @@
             "说明": "第 75 百分位是分布上四分之一的位置，来源为同一统计期；不能据此推断经验年限或职级；O*NET 全国工资：25-4012.00（2025 年工资数据）｜https://www.onetonline.org/link/localwages/25-4012.00"
           },
           {
-            "fact_ref": "high",
+            "fact_ref": "high-g04-current",
             "指标": "薪资 · 90 分位（年薪）",
             "数值": {
-              "$fact": "high",
+              "$fact": "high-g04-current",
               "field": "display_value"
             },
-            "说明": "第 90 百分位是高分段位置，通常与机构类型、职级与专业领域差异相关，来源没有证明与经验的对应关系；O*NET 全国工资：25-4012.00（2025 年工资数据）｜https://www.onetonline.org/link/localwages/25-4012.00"
+            "说明": "2025第90分位是统计位置，来源未拆机构职级专业地区因果，不代经验等级。"
           },
           {
-            "fact_ref": "employment",
-            "指标": "2024 就业 · 基期人数",
+            "fact_ref": "employment-g04-current",
+            "指标": "2025就业基期",
             "数值": {
-              "$fact": "employment",
+              "$fact": "employment-g04-current",
               "field": "display_value"
             },
-            "说明": "就业规模是存量统计，不是当年招聘数量或岗位空缺数；来源为 O*NET 摘要页（基于 BLS 2024—2034 年预测）。"
+            "说明": "美国25-4012.00单一职业2025—2035就业预测：2025就业14,200人，2035预测14,900人，增长5%（Faster than average），年均1,600个增长与替换空缺。空缺非净增或个人概率，也不证明AI因果；不混OOH档案策展博物馆工作人员合并4%/4,300年均空缺。"
           },
           {
-            "fact_ref": "growth",
-            "指标": "2024—2034 就业 · 增长预测",
+            "fact_ref": "growth-g04-current",
+            "指标": "2025—2035就业增长预测",
             "数值": {
-              "$fact": "growth",
+              "$fact": "growth-g04-current",
               "field": "display_value"
             },
-            "说明": "预测标签为「远高于平均」，属于预测期的相对变化；总量增长不代表个人录用概率，文博岗位竞争通常激烈。"
+            "说明": "美国25-4012.00单一职业2025—2035就业预测：2025就业14,200人，2035预测14,900人，增长5%（Faster than average），年均1,600个增长与替换空缺。空缺非净增或个人概率，也不证明AI因果；不混OOH档案策展博物馆工作人员合并4%/4,300年均空缺。"
           },
           {
-            "fact_ref": "openings",
-            "指标": "2024—2034 就业 · 职位空缺",
+            "fact_ref": "openings-g04-current",
+            "指标": "2025—2035年均职位空缺",
             "数值": {
-              "$fact": "openings",
+              "$fact": "openings-g04-current",
               "field": "display_value"
             },
-            "说明": "该口径空缺为 2024—2034 年合计，含因增长与替换产生的职位空缺，不是每年净增岗位数。"
+            "说明": "增长与替换年均空缺，非每年净增。"
           }
         ],
         "boundary": {
@@ -34845,7 +35040,7 @@
           "type": "prose"
         },
         "growth": {
-          "$fact": "growth",
+          "$fact": "growth-g04-current",
           "field": "display_value"
         },
         "heading": {
@@ -34860,13 +35055,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024 年（O*NET 行业分布，25-4012.00 口径）",
+        "industry_period": "2025（本职业行业就业）",
         "industry_rows": [
           {
-            "fact_ref": "median",
+            "fact_ref": "industry-theater-g04-current",
             "industry": "艺术、娱乐与休闲",
             "median": {
-              "$fact": "industry-theater",
+              "$fact": "industry-theater-g04-current",
               "field": "display_value"
             },
             "note": {
@@ -34877,10 +35072,10 @@
             }
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "industry-education-g04-current",
             "industry": "政府",
             "median": {
-              "$fact": "industry-education",
+              "$fact": "industry-education-g04-current",
               "field": "display_value"
             },
             "note": {
@@ -34891,10 +35086,10 @@
             }
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "industry-amusement-g04-current",
             "industry": "教育服务",
             "median": {
-              "$fact": "industry-amusement",
+              "$fact": "industry-amusement-g04-current",
               "field": "display_value"
             },
             "note": {
@@ -34905,8 +35100,8 @@
             }
           },
           {
-            "industry": "策展人所在行业（统计分类）",
-            "median": "分布合计｜100%（2024 年 O*NET 行业分布；艺术娱乐与休闲 46%、政府 17%、教育服务 15%、其他行业 22%）",
+            "industry": "其他行业及合计说明",
+            "median": "其他17%；48/18/17/17合计100%（2025行业就业，非行业工资）",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -34971,13 +35166,13 @@
           "type": "prose"
         },
         "outlook_period": {
-          "$fact": "growth",
+          "$fact": "growth-g04-current",
           "field": "period"
         },
         "wage_column_labels": [
           "工资位置",
           "工资参考（年薪）",
-          "全年收入的换算边界",
+          "统计年化与个人收入边界",
           "怎样理解这个位置"
         ],
         "wage_heading": {
@@ -34988,7 +35183,7 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "不可按固定工时年化",
+            "equivalent": "通常2080标准年化，非个人全年时数",
             "interpretation": {
               "$item": "actors.us-salary.career-snapshot-secondary-locale.2",
               "block": "us-salary",
@@ -35002,7 +35197,7 @@
             }
           },
           {
-            "equivalent": "不等于固定月收入",
+            "equivalent": "官方年度中位，不代固定月到手",
             "interpretation": {
               "$item": "actors.display.career_snapshot_secondary_locale.tier.median",
               "block": "us-salary",
@@ -35016,7 +35211,7 @@
             }
           },
           {
-            "equivalent": "不代表全年持续高收入",
+            "equivalent": "官方年度高分位，不代个人持续收入",
             "interpretation": {
               "$item": "actors.us-salary.career-snapshot-secondary-locale.3",
               "block": "us-salary",
@@ -35025,7 +35220,7 @@
             },
             "label": "较高工资位置（第 90 分位）",
             "value": {
-              "$fact": "high",
+              "$fact": "high-g04-current",
               "field": "display_value"
             }
           }
@@ -35178,7 +35373,7 @@
           {
             "geography": "美国",
             "horizon": {
-              "$fact": "growth",
+              "$fact": "growth-g04-current",
               "field": "period"
             },
             "interpretation": {
@@ -35194,16 +35389,16 @@
               "type": "prose"
             },
             "metric": "就业总体变化",
-            "occupation_scope": "策展人（O*NET 摘要与就业趋势页，BLS 2024—2034 年预测）",
-            "source_id": "bls",
+            "occupation_scope": "Curators25-4012.00精确职业",
+            "source_id": "g04-trends",
             "value": {
-              "$fact": "growth",
+              "$fact": "growth-g04-current",
               "field": "display_value"
             }
           },
           {
             "geography": "美国",
-            "horizon": "现行页面（2026 年更新）",
+            "horizon": "2026-10-09实际查询",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -35216,14 +35411,14 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "metric": "认证、培训与伦理准则信息",
+            "metric": "认证查询结果",
             "occupation_scope": "策展人（O*NET 25-4012.00 口径）",
             "source_id": "ratify",
-            "value": "认证、培训与行业伦理准则入口"
+            "value": "4项NAI解释教育相关认证；项目条件未读"
           },
           {
             "geography": "本页编辑整理",
-            "horizon": "本页编辑设计（2026-09-18）",
+            "horizon": "编辑核对建议，非实际在招样本",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.4",
               "block": "market-signals",
@@ -35246,7 +35441,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35254,7 +35449,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35546,7 +35741,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET OnLine 就业趋势（BLS 2024—2034 年预测）",
+            "label": "O*NET就业趋势（BLS2025—2035）",
             "secondary_value": null,
             "value": {
               "$item": "actors.display.onet_structured_fields_block.bls",
@@ -36310,14 +36505,14 @@
           },
           {
             "href": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -37080,6 +37275,102 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "14,200人（2025本职业）",
+        "fact_id": "employment-g04-current",
+        "market": "美国",
+        "measure": "就业规模（存量统计）",
+        "occupation_scope": "美国25-4012.00单一职业2025—2035就业预测：2025就业14,200人，2035预测14,900人，增长5%（Faster than average），年均1,600个增长与替换空缺。空缺非净增或个人概率，也不证明AI因果；不混OOH档案策展博物馆工作人员合并4%/4,300年均空缺。",
+        "period": "2025—2035；核2026-10-09",
+        "source_refs": [
+          "g04-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "增长5%（2025—2035；14,200→14,900）",
+        "fact_id": "growth-g04-current",
+        "market": "美国",
+        "measure": "预测就业变化（职业总量）",
+        "occupation_scope": "美国25-4012.00单一职业2025—2035就业预测：2025就业14,200人，2035预测14,900人，增长5%（Faster than average），年均1,600个增长与替换空缺。空缺非净增或个人概率，也不证明AI因果；不混OOH档案策展博物馆工作人员合并4%/4,300年均空缺。",
+        "period": "2025—2035；核2026-10-09",
+        "source_refs": [
+          "g04-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均1,600个（2025—2035增长与替换）",
+        "fact_id": "openings-g04-current",
+        "market": "美国",
+        "measure": "预测期职位空缺（含增长与替换）",
+        "occupation_scope": "美国25-4012.00单一职业2025—2035就业预测：2025就业14,200人，2035预测14,900人，增长5%（Faster than average），年均1,600个增长与替换空缺。空缺非净增或个人概率，也不证明AI因果；不混OOH档案策展博物馆工作人员合并4%/4,300年均空缺。",
+        "period": "2025—2035；核2026-10-09",
+        "source_refs": [
+          "g04-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "艺术娱乐休闲｜48%（2025行业就业）",
+        "fact_id": "industry-theater-g04-current",
+        "market": "美国",
+        "measure": "行业就业占比（非工资）",
+        "occupation_scope": "2025美国本职业行业就业：艺术娱乐休闲48%、政府18%、教育服务17%、其他17%；合计100%，不是中国比例或行业工资。",
+        "period": "2025；核2026-10-09",
+        "source_refs": [
+          "g04-industry"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "政府｜18%（2025行业就业）",
+        "fact_id": "industry-education-g04-current",
+        "market": "美国",
+        "measure": "行业就业占比（非工资）",
+        "occupation_scope": "2025美国本职业行业就业：艺术娱乐休闲48%、政府18%、教育服务17%、其他17%；合计100%，不是中国比例或行业工资。",
+        "period": "2025；核2026-10-09",
+        "source_refs": [
+          "g04-industry"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "教育服务｜17%（2025行业就业；其他另17%）",
+        "fact_id": "industry-amusement-g04-current",
+        "market": "美国",
+        "measure": "行业就业占比（非工资）",
+        "occupation_scope": "2025美国本职业行业就业：艺术娱乐休闲48%、政府18%、教育服务17%、其他17%；合计100%，不是中国比例或行业工资。",
+        "period": "2025；核2026-10-09",
+        "source_refs": [
+          "g04-industry"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "107,140美元/年（2025第90分位，非经验职级）",
+        "fact_id": "high-g04-current",
+        "market": "美国",
+        "measure": "高端分位工资（单一职业口径）",
+        "occupation_scope": "2025本岗工资分位非机构职级专业因果",
+        "period": "2025；核2026-10-09",
+        "source_refs": [
+          "r2-pay-3"
+        ]
+      },
+      {
+        "derivation": "条件行业背景不代本岗工资，不否定细类存在。",
+        "display_value": "条件行业背景：法人主营归文化体育娱乐业时，NBS2025城镇非私营129,447元、私营64,015元税前年平均工资可作背景。城镇5人以上法人，排个体工商户和自由职业者；非本岗工资、中位起薪分位或月到手，不混人群。高校、政府等其他主营须另匹配，不能把美国48%行业占比当中国分类。",
+        "fact_id": "china-jiaojiang-featured-daily-2026-g04-current",
+        "market": "中国内地",
+        "measure": "未取得的统计位置（中国大陆策展人职业级工资）",
+        "occupation_scope": "条件行业背景：法人主营归文化体育娱乐业时，NBS2025城镇非私营129,447元、私营64,015元税前年平均工资可作背景。城镇5人以上法人，排个体工商户和自由职业者；非本岗工资、中位起薪分位或月到手，不混人群。高校、政府等其他主营须另匹配，不能把美国48%行业占比当中国分类。",
+        "period": "2025；核2026-10-09",
+        "source_refs": [
+          "g04-nbs"
+        ]
       }
     ]
   },
@@ -37088,7 +37379,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "合并职业同名条目 · 身份口径 O*NET-SOC 25-4012.00（Curators）",
@@ -37139,7 +37430,7 @@
       "text": "策展人、博物馆技术员与文物保护员（合并职业）"
     }
   },
-  "source_content_sha256": "f7325de0c19624f5bf6f9efa8ebdb4bbbe515ff5aad5a469c89a48d06e89c487",
+  "source_content_sha256": "f499b74baccb99b49c1226cce70246f27ef0a4fdc4a4b02d8b67d22460e1808f",
   "subject": {
     "canonical_slug": "curators-museum-technicians-and-conservators",
     "name": "策展人、博物馆技术员与文物保护员（合并职业）",

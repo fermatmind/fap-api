@@ -2,6 +2,66 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:ch-change2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ch-cn-manufacturing2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ch-cn-scitech2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ch-employment2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ch-employment2035": {
+        "status": "pending_mapping"
+      },
+      "fact:ch-govwages2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ch-growth2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ch-openings2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ch-primary-occupation-identity": {
+        "status": "pending_mapping"
+      },
+      "fact:ch-primary-us-industry-wage-aerospace-mfg-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ch-primary-us-industry-wage-engineering-services-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ch-primary-us-industry-wage-federal-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ch-primary-us-industry-wage-instruments-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ch-primary-us-industry-wage-rd-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ch-primary-us-wage-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ch-primary-us-wage-high10-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ch-primary-us-wage-hourly-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ch-primary-us-wage-low10-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ch-primary-us-wage-p25-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:ch-primary-us-wage-p75-2025": {
+        "status": "pending_mapping"
+      },
       "fact:cn-industry-manufacturing-2024": {
         "status": "pending_mapping"
       },
@@ -12397,52 +12457,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.href": {
-        "ref": {
-          "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.24",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.label": {
-        "ref": {
-          "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.24",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.08.headers.explanation": {
         "ref": {
@@ -23689,7 +23709,7 @@
           ],
           "id": "chemists-and-materials-scientists.profile.definition-block.1",
           "source_refs": [
-            "onet-details"
+            "ch-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23704,7 +23724,7 @@
           },
           "id": "chemists-and-materials-scientists.profile.definition-block.2",
           "source_refs": [
-            "onet-details"
+            "ch-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23719,7 +23739,7 @@
           },
           "id": "chemists-and-materials-scientists.profile.definition-block.3",
           "source_refs": [
-            "onet-details"
+            "ch-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23734,7 +23754,7 @@
           },
           "id": "chemists-and-materials-scientists.profile.definition-block.4",
           "source_refs": [
-            "onet-details"
+            "ch-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23749,7 +23769,8 @@
           },
           "id": "chemists-and-materials-scientists.profile.definition-block.5",
           "source_refs": [
-            "nasa-seh"
+            "ch-supervision",
+            "ch-safety"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23764,7 +23785,7 @@
           },
           "id": "chemists-and-materials-scientists.profile.definition-block.6",
           "source_refs": [
-            "bls-entry"
+            "ch-cert"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23779,7 +23800,7 @@
           },
           "id": "chemists-and-materials-scientists.profile.definition-block.7",
           "source_refs": [
-            "onet-hot-tech"
+            "ch-hot"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23809,7 +23830,8 @@
           },
           "id": "chemists-and-materials-scientists.profile.definition-block.9",
           "source_refs": [
-            "nasa-seh"
+            "ch-supervision",
+            "ch-safety"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -23834,7 +23856,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "化学家的工作可以分成三类相连但独立的工作面。第一类是实验室分析与检测：按方法处理样品并使用色谱与光谱或分光光度技术分析有机或无机化合物，确定其性质与组成与结构或反应，并开展质量控制测试。第二类是方法与产品与工艺开发：开发与改进或定制产品与设备与配方与流程或分析方法，通过引入热与光与能量或催化剂改变物质组成，并开发非标准测试。第三类是记录与报告与协作与合规：记录与汇总分析测试信息，撰写技术论文与报告或编制标准与规范，维护仪器并在需要时排除故障，评估实验室安全程序并与科学家与工程师协商。三类工作的共同点是以方法、原始数据与可追溯记录说话，区别在于对结果放行与变更的授权不同。"
+              "编辑按O*NET任务归纳三类可交叉的工作面。第一类是实验室分析与检测：按方法处理样品并使用色谱与光谱或分光光度技术分析有机或无机化合物，确定其性质与组成与结构或反应，并开展质量控制测试。第二类是方法与产品与工艺开发：开发与改进或定制产品与设备与配方与流程或分析方法，通过引入热与光与能量或催化剂改变物质组成，并开发非标准测试。第三类是记录与报告与协作与合规：记录与汇总分析测试信息，撰写技术论文与报告或编制标准与规范，维护仪器并在需要时排除故障，评估实验室安全程序并与科学家与工程师协商。三类工作的共同点是以方法、原始数据与可追溯记录说话，具体方法确认、结果发布和变更权限依岗位、法域及机构制度核，不由三类名称确定。"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.career-quick-answers-block.1",
@@ -23856,7 +23878,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "读取并确认分析方法与判定标准与适用范围 → 核对样品标识与状态与试剂与标准品有效期 → 确认仪器状态与校准与实验条件 → 按方法执行实验与检测并记录原始数据 → 比对质控样与历史数据识别异常 → 对异常按程序复测或保留记录并升级 → 汇总结果并说明适用条件与限制"
+              "读取并确认分析方法与判定标准与适用范围 → 核对样品标识与状态与试剂与标准品有效期 → 确认仪器状态与校准与实验条件 → 按方法执行实验与检测并记录原始数据 → 比对质控样与历史数据识别异常 → 对异常保留记录并及时报告，调查及复测须核程序、条件与授权 → 汇总结果并说明适用条件与限制"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.career-quick-answers-block.3",
@@ -23889,7 +23911,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "汇总与分析测试信息，确定工艺或设备运行效率或诊断故障；撰写技术论文或报告，或编制流程与设施与产品或测试的标准与规范；对不符预期或超出规范的结果先复核原始记录与仪器状态，再按程序复测与升级；不得用估计值替代实测记录，也不修改原始数据以匹配预期。"
+              "汇总与分析测试信息，确定工艺或设备运行效率或诊断故障；撰写技术论文或报告，或编制流程与设施与产品或测试的标准与规范；编辑核对建议：异常及时保留原始记录并按实际程序报告；调查核方法、样品、仪器与质控。复测或重取样仅在程序允许、安全条件及授权具备时实施，不用反复检测挑选合格值或延误安全处置。"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.career-quick-answers-block.6",
@@ -23900,10 +23922,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "与本页并列的最近相邻职业是材料科学家：它更聚焦材料的结构—性能—加工关系并含陶瓷与金属与高分子与半导体等专门方向；其他常见相邻岗位包括化学工程师、材料工程师、工业工程师、生物化学家与生物物理学家与自然科学经理。边界判断的关键不是名称，而是「谁对方法开发与结论解释负责、谁对产品与工艺设计与放大负责、谁对团队与资源与预算负责」。"
+              "本合并路由并列材料科学家：研究天然、合成和复合材料结构及化学性质、强化和开发新材料；化学家也研究开发。两者不是纯分析与纯研究分界。工程设计、加工、团队及预算责任核具体岗位，不从相邻名称自动授予。"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.career-quick-answers-block.7",
+          "source_refs": [
+            "ch-details",
+            "ch-adjacent-17-2041.00",
+            "ch-adjacent-17-2131.00",
+            "ch-adjacent-17-2112.00"
+          ],
           "type": "prose"
         },
         {
@@ -23944,7 +23972,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "化学工程师负责工艺与装置的设计与放大；本职业负责取得可信数据并解释结果"
+              "化学工程师侧重化学过程、装置及生产工程设计；化学家也开发产品、配方与流程并解释分析和研究结果。二者任务可交叉，放大和设计责任核实际岗位。"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.career-quick-answers-block.11",
@@ -23966,7 +23994,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "材料工程师负责材料选型与性能方案；本职业负责材料与化学分析数据并支持判断"
+              "材料工程师侧重材料及加工的工程应用；化学家可开展物质研究、材料分析及产品开发。不能把本职业全部限定为取得数据或排除工程协作。"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.career-quick-answers-block.13",
@@ -23999,7 +24027,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "实验与数据分析由化学家完成；方法确认与结果放行由有授权的岗位与体系决定"
+              "实验、方法开发及数据解释可由化学家承担；方法确认、报告签署与产品放行依具体职责及授权核，化学家本人也可能具有相应权限。"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.career-quick-answers-block.16",
@@ -24021,7 +24049,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国通常要求学士学位，研究岗常要求硕士或博士；企业安全与质量培训是实际门槛"
+              "美国BLS典型入职为化学或相关专业学士；OOH说明部分研究岗位需要硕士或博士及经验。EP的经验和典型在职培训列None，不等于各单位都无需设备、安全培训；不能从学历自动取得岗位授权。"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.career-quick-answers-block.18",
@@ -24032,7 +24060,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国大陆涉及危险化学品与检测资质认定的岗位另有安全生产与资质管理规定"
+              "中国《检验检测机构监督管理办法》第2条适用向社会出具具有证明作用报告的活动；第8、12条核授权签字人能力和技术范围，第13条原始记录与报告至少保存6年。CMA或特别资质依机构、项目及法源核，不是每位化学家个人执照或所有外发数据统一门槛。 安全教育、防护和特种作业/设备资格按实际单位与类别核，不从“接触危化品”推统一证书。"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.career-quick-answers-block.19",
@@ -24054,7 +24082,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "跨岗位比较不能只看名称相近；行业与产品类型、方法体系、质量体系与授权范围不同，任务看起来相似但责任完全不同。"
+              "跨岗位比较核行业、产品、方法与质量体系、实际职责和权限；相似任务不保证责任相同，也不证明责任完全不同。"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.career-quick-answers-block.21",
@@ -24065,7 +24093,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "六个反复出现的职业判断：方法是否适用于当前样品；样品与试剂与仪器状态是否可信；结果异常是先复测还是先升级；原始数据是否完整可追溯；质控与趋势是否支持结论；以及安全程序是否被真正执行。"
+              "六个编辑核对点：方法适用性，样品/试剂/仪器状态，异常是否需立即报告或应急处置，原始记录完整性，质控依据及安全程序执行。复测与升级不由本页统一排序。"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.career-quick-answers-block.22",
@@ -24087,7 +24115,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "先确认方法的适用范围是否覆盖当前样品基体与浓度范围，再决定是否可以直接执行；超出范围时应开发或调整方法并做验证，而不是先出数据。"
+              "先核方法适用范围；超范围时按实际程序提出开发或调整、验证方案并核安全与授权，不自行改变受控方法后直接出结果。"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.career-quick-answers-block.24",
@@ -24120,7 +24148,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "判断三：先复测还是先升级"
+              "判断三：异常报告、调查与复测边界"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.career-quick-answers-block.27",
@@ -24131,7 +24159,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "常规偏差可按程序复测并核对质控样；涉及安全、批量放行、不符合项或结果可能与规范冲突时，保留原始记录并立即升级，不自行修改数据或选择性报告。"
+              "编辑核对建议：异常及时保留原始记录并按实际程序报告；调查核方法、样品、仪器与质控。复测或重取样仅在程序允许、安全条件及授权具备时实施，不用反复检测挑选合格值或延误安全处置。"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.career-quick-answers-block.28",
@@ -24175,7 +24203,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "用质控样与平行样与历史趋势判断结果是否受控；单一结果与质控或趋势不符时，先核查过程再报告，不以个别结果代表整体质量。"
+              "按具体方法核质控、平行样与趋势；异常保留记录并及时报告，调查及复测须核条件。不以单一结果推整体，也不为等待复核延误安全处置。"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.career-quick-answers-block.32",
@@ -24208,7 +24236,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本条路由以化学家（O*NET-SOC 19-2031.00）为主要职业身份，并说明美国劳工统计局常把化学家与材料科学家（19-2032.00）并列在同一职业页面：化学家研究物质的组成、性质与反应；材料科学家研究天然与合成或复合材料（含金属与合金与橡胶与陶瓷与半导体与高分子与玻璃）的结构与化学性质，并确定强化或复合材料的途径或开发具有特定性能的新材料，常见专门方向包括玻璃与陶瓷与冶金与高分子科学家。本页的数值与任务陈述以化学家口径为准，并在相应位置单列材料科学家的对比数值。化学家在实验室开展定性与定量化学分析或实验，用于质量控制或工艺控制，或用于开发新产品或新知识（O*NET-SOC 19-2031.00 官方职责）。在日常工作中，他们要开发、改进或定制产品、设备、配方、流程或分析方法；使用色谱、光谱或分光光度技术分析有机或无机化合物，以确定其化学或物理性质、组成、结构、关系或反应；通过引入热、光、能量或化学催化剂改变物质组成以进行定量或定性分析；开展质量控制测试；撰写技术论文或报告，或编制流程、设施、产品或测试的标准与规范；维护实验室仪器以确保正常工作并在需要时排除故障；为实验室人员准备测试溶液、化合物或试剂；汇总与分析测试信息以确定工艺或设备运行效率或诊断故障；与科学家或工程师协商以分析研究项目、解读测试结果或开发非标准测试；评估实验室安全程序以确保符合标准或在需要时改进；指导、协调或建议人员执行分析材料成分或物理性质的测试程序；并在库存不足或接近有效期时采购化学品等实验室用品。责任边界：化学家对方法适用性与实验设计、原始数据的真实完整、结果的解读与报告、以及实验室安全程序的执行与评估负责；但方法确认与结果放行、产品与工艺变更、以及安全事故与合规问题的最终认定，由具备相应授权与资质的岗位与制度决定，不能由本页推断为化学家个人可以决定的事项。"
+              "本条路由以化学家（O*NET-SOC 19-2031.00）为主要职业身份，并说明美国劳工统计局常把化学家与材料科学家（19-2032.00）并列在同一职业页面：化学家研究物质的组成、性质与反应；材料科学家研究天然与合成或复合材料（含金属与合金与橡胶与陶瓷与半导体与高分子与玻璃）的结构与化学性质，并确定强化或复合材料的途径或开发具有特定性能的新材料，常见专门方向包括玻璃与陶瓷与冶金与高分子科学家。本页的数值与任务陈述以化学家口径为准，并在相应位置单列材料科学家的对比数值。化学家在实验室开展定性与定量化学分析或实验，用于质量控制或工艺控制，或用于开发新产品或新知识（O*NET-SOC 19-2031.00 官方职责）。在日常工作中，他们要开发、改进或定制产品、设备、配方、流程或分析方法；使用色谱、光谱或分光光度技术分析有机或无机化合物，以确定其化学或物理性质、组成、结构、关系或反应；通过引入热、光、能量或化学催化剂改变物质组成以进行定量或定性分析；开展质量控制测试；撰写技术论文或报告，或编制流程、设施、产品或测试的标准与规范；维护实验室仪器以确保正常工作并在需要时排除故障；为实验室人员准备测试溶液、化合物或试剂；汇总与分析测试信息以确定工艺或设备运行效率或诊断故障；与科学家或工程师协商以分析研究项目、解读测试结果或开发非标准测试；评估实验室安全程序以确保符合标准或在需要时改进；指导、协调或建议人员执行分析材料成分或物理性质的测试程序；并在库存不足或接近有效期时采购化学品等实验室用品。责任边界：具体数据、方法、报告和安全责任依岗位与适用制度核；化学家也可能获方法确认或签署授权。中国证明性检验检测报告另核机构适用范围及授权签字人，不从职业名称授予或排除权限。"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.definition-block.11",
@@ -24219,10 +24247,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "本页以 O*NET-SOC 19-2031.00（Chemists）为主要职业身份，并说明 BLS 常将其与 19-2032.00（Materials Scientists）并列；材料科学家同为 Job Zone Four、SVP 区间 7.0 至 8.0 以下、兴趣代码 IRC，其官方范围聚焦材料的结构与化学性质与强化或复合途径。化学家口径：Job Zone Four（需要相当程度的准备），SVP 区间 7.0 至 8.0 以下；兴趣代码 IRC；官方列出 12 项任务（全部为核心任务），重要度从 80（开发、改进或定制产品、设备、配方、流程或分析方法）到 61（在库存不足或接近有效期时采购实验室用品）；多数岗位要求四年制学士学位，研究岗常要求硕士或博士。"
+              "本路由以19-2031化学家为主要描述口径，材料科学家19-2032并列。两者JobZone4、SVP7至<8；职业兴趣IRC分别95/78/64与93/80/53，非人格比例。化学家12核心任务80至61；材料科学家详情17任务（15Core、1Supplemental、1New未提供重要度），不能将前者数量或评分当合并职业统计。准备程度不是统一雇主条件。"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "ch-details",
+            "ch-material"
+          ],
           "type": "prose"
         },
         {
@@ -24241,7 +24273,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆：本条证据路由把精确职业工资登记为已核实不可得（尚无缺口关闭结论）；处理说明 为「保留模块级缺口，并明确中文页面语言不构成中国等价职业或工资映射」。因此本页不发布任何中国大陆数值，也不以行业均值或招聘报价或美国数值换算代填；本页不声称中国官方从未发布相关统计，只说明本轮未取得与本职业精确对应的全国口径。"
+              "证据不足：未取得中国化学家精确职业工资中位、分位、起薪及地区月薪。NBS2025中国城镇非私营/私营制造业年平均工资113,594/76,055元，科学研究和技术服务业182,064/83,560元。四值为较宽行业背景，非化学家、化学制造或检测细行业专属工资，也非中位、起薪、到手收入或地区月薪。 行业背景不关闭精确缺口，不使用未核招聘报价或美国换算代填。"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.onet-structured-fields-block.3",
@@ -24252,10 +24284,17 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业与就业：O*NET 行业分布为制造业 37%、专业与科学与技术服务 32%、政府 12%、其他行业 19%；BLS 就业预测显示 2024 年 86,800 人、2034 年预计 91,000 人，2024—2034 年增长 5%（Faster than average，快于所有职业平均），年均空缺 6,300 个。行业工资中位数按 BLS Occupational Outlook Handbook（化学家分项，2025 年 5 月）：联邦政府（不含邮政）137,720、科学研究与开发服务 105,930、化学制造 88,890、州与地方政府（不含教育与医院）81,830、检测实验室与服务 66,140 美元/年。并列说明（材料科学家，2025 年 5 月）：年薪中位数 117,790 美元，就业 2024 年 8,700 人，2024—2034 年预测增长 5%—6%（Faster than average），年均空缺 600 个，主要行业为专业与科学与技术服务与制造业；该组数值属并列职业口径，不作为本页化学家数值引用。"
+              "O*NET2025美国行业分布：制造41%、专业科学技术服务29%、政府12%、其他18%。BLS表1.2的美国SOC19-2031化学家2025—2035预测：84,900→90,300人，增长6.4%，年均空缺5,900；OOH化学家分项整数为6%（快于平均）。官方净增5.5千人独立舍入，与已舍入两端之差5.4千人不同，不重算覆盖。空缺含增长及转岗、退出劳动力市场等替补需求，非在招存量、AI归因或逐年实绩。 BLS OOH2025年5月化学家行业工资中位保留：联邦政府不含邮政137,720、研发105,930、化学制造88,890、州地方政府不含教育医院81,830、检测实验室服务66,140美元/年；不混用父级组合或材料科学家。 并列材料科学家19-2032：2025年5月中位117,790美元/年、56.63美元/时；2025—2035就业8.6→9.3千、净0.7千、8.3%、年空缺0.6千，OOH整数8%远快于平均；2025专业科学技术服务43%、制造35%。组合19-2030就业93.5→99.7千、6.6%（OOH整数7%）、年空缺6.5千，中位95,060，不能当化学家分项。"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.onet-structured-fields-block.4",
+          "source_refs": [
+            "ch-details",
+            "ch-industry",
+            "ch-ep2025",
+            "ch-ooh",
+            "ch-material"
+          ],
           "type": "prose"
         },
         {
@@ -24263,7 +24302,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "技术与工作情境：O*NET 技术清单覆盖 16 类软件，含科学分析软件（Agilent ChemStation、Waters Empower、Minitab 等）、分子建模与化学信息学（ChemDraw 与 ChemOffice 等）、数据库与 SQL、开发环境（LabVIEW、C、Visual Basic）与企业资源计划（SAP）、库存管理（ChemSW CIS）与办公与演示与表格与文字处理等，页面标注 15 项热门技术与 3 项招聘需求技能；工作情境显示实验室作业特征突出——95% 每天在环境受控的室内工作、92% 每天使用电子邮件、80% 每天佩戴常规防护或安全装备、74% 每天面对面讨论、69% 认为精确或准确极其重要、44% 对如何决策有很大自由、30% 每天接触污染物、39% 的工作完全未自动化、32% 轻微自动化、21% 中度自动化。招聘技术关键词是市场信号，不等于熟练度、采用率或长期趋势。"
+              "技术与工作情境：O*NET 技术清单覆盖 16 类软件，含科学分析软件（Agilent ChemStation、Waters Empower、Minitab 等）、分子建模与化学信息学（ChemDraw 与 ChemOffice 等）、数据库与 SQL、开发环境（LabVIEW、C、Visual Basic）与企业资源计划（SAP）、库存管理（ChemSW CIS）与办公与演示与表格与文字处理等，页面标注 15 项热门技术与 3 项招聘需求技能；工作情境显示实验室作业特征突出——95% 每天在环境受控的室内工作、92% 每天使用电子邮件、80% 每天佩戴常规防护或安全装备、74% 每天面对面讨论、69% 认为精确或准确极其重要、44% 对如何决策有很大自由、30% 每天接触污染物、39% 的工作完全未自动化、32% 轻微自动化、21% 中度自动化。招聘技术关键词是市场信号，不等于熟练度、采用率或长期趋势。 Hot页面15项是跨职业常见技术关键词，3项In Demand是Excel11%、Office9%、PowerPoint7%；2025美国招聘样本不等采用率、AI效果或中国招聘门槛。"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.onet-structured-fields-block.5",
@@ -24290,7 +24329,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "环境与作业空间｜95% 每天在环境受控的室内工作；30% 每天接触污染物、19% 每周以上但非每天、20% 从不；暴露于极亮或不足照明与极端温度与高处与振动的比例均很低。\n防护与安全｜80% 每天佩戴常规防护或安全装备、15% 每周以上但非每天；11% 每周以上暴露于危险条件、22% 每月以上但非每周；暴露于辐射与疾病或感染的比例很低。\n准确性与重复性｜69% 认为精确或准确极其重要、28% 认为非常重要；33% 认为重复同一任务极其重要、34% 认为重要；39% 的工作完全未自动化、32% 轻微自动化、21% 中度自动化。\n协作与沟通｜92% 每天使用电子邮件；74% 每天进行面对面讨论；42% 持续与他接触、19% 大部分时间；37% 认为与工作团队协作极其重要、21% 认为非常重要；40% 每天进行电话交谈；14% 与他人距离非常接近。\n工时与排班｜31% 的典型工作周超过 40 小时、59% 为 40 小时；93% 为规律排班、7% 为不规律排班；项目截止或时限性实验时可能需要加班。\n决策与自主｜44% 对如何决策有很大自由、56% 有一些自由；29% 每天做决策、34% 每周以上但非每天。\n责任与影响｜23% 对他人健康与安全承担极高责任、46% 高责任；14% 认为决策结果非常重要、50% 认为重要；22% 认为出错后果极其严重、37% 非常严重。\n身体与作业负荷｜26% 超过一半工时坐着、57% 约一半工时坐着；18% 超过一半工时站立、55% 约一半工时站立。\n竞争与压力｜40% 认为竞争高度激烈、54% 中度竞争；25% 每天面临时间压力、38% 每周以上但非每天。"
+              "环境与作业空间｜95% 每天在环境受控的室内工作；30% 每天接触污染物、19% 每周以上但非每天、20% 从不；暴露于极亮或不足照明与极端温度与高处与振动的比例均很低。\n防护与安全｜80% 每天佩戴常规防护或安全装备、15% 每周以上但非每天；11% 每周以上暴露于危险条件、22% 每月以上但非每周；暴露于辐射与疾病或感染的比例很低。\n准确性与重复性｜69% 认为精确或准确极其重要、28% 认为非常重要；33% 认为重复同一任务极其重要、34% 认为重要；39% 的工作完全未自动化、32% 轻微自动化、21% 中度自动化。\n协作与沟通｜92% 每天使用电子邮件；74% 每天进行面对面讨论；42% 持续与他人接触、19% 大部分时间；37% 认为与工作团队协作极其重要、21% 认为非常重要；40% 每天进行电话交谈；14% 与他人距离非常接近。\n工时与排班｜31% 的典型工作周超过 40 小时、59% 为 40 小时；93% 为规律排班（未展示其余答项，不能把余数全判为不规律）；项目截止或时限性实验时可能需要加班。\n决策与自主｜44% 对如何决策有很大自由、56% 有一些自由；29% 每天做决策、34% 每周以上但非每天。\n责任与影响｜23% 对他人健康与安全承担极高责任、46% 高责任；14% 认为决策结果非常重要、50% 认为重要；22% 认为出错后果极其严重、37% 非常严重。\n身体与作业负荷｜26% 超过一半工时坐着、57% 约一半工时坐着；18% 超过一半工时站立、55% 约一半工时站立。\n竞争与压力｜40% 认为竞争高度激烈、54% 中度竞争；25% 每天面临时间压力、38% 每周以上但非每天。\n上述为美国受访者特定答项，非个人日程、事故发生率或中国岗位分布。"
             ]
           },
           "id": "chemists-and-materials-scientists.profile.work-context-block.1",
@@ -24882,10 +24921,10 @@
                 "url": "https://www.onetonline.org/link/details/19-2031.00"
               },
               {
-                "entity": "BLS Occupational Outlook Handbook：Chemists and Materials Scientists",
+                "entity": "O*NET全国工资分位（BLS OEWS2025年5月）",
                 "id": "link-2",
                 "relation": "related-evidence",
-                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/chemists-and-materials-scientists.htm"
+                "url": "https://www.onetonline.org/link/localwages/19-2031.00"
               },
               {
                 "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
@@ -24912,34 +24951,34 @@
                 "url": "https://www.onetonline.org/link/summary/19-2031.00"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（19-2031.00，显示 BLS 就业预测）",
+                "entity": "BLS表1.2职业预测2025—2035",
                 "id": "link-7",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/19-2031.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "entity": "O*NET19-2031任务原文",
                 "id": "link-8",
-                "relation": "related-evidence",
-                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
-              },
-              {
-                "entity": "O*NET-SOC 19-2031.00 职业详细资料",
-                "id": "link-9",
                 "relation": "related-evidence",
                 "url": "https://www.onetonline.org/link/details/19-2031.00"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
-                "id": "link-10",
+                "entity": "O*NET19-2031全国工资分位",
+                "id": "link-9",
                 "relation": "related-evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://www.onetonline.org/link/localwages/19-2031.00"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（19-2031.00，显示 BLS 就业预测）",
+                "entity": "ILO生成式AI职业暴露研究",
+                "id": "link-10",
+                "relation": "related-evidence",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "entity": "NIST AI RMF1.0自愿框架",
                 "id": "link-11",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/19-2031.00"
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
                 "entity": "O*NET 技术清单（19-2031.00 招聘技术关键词）",
@@ -24966,22 +25005,22 @@
                 "url": "https://www.onetonline.org/link/details/19-2031.00"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（19-2031.00，显示 BLS 就业预测）",
+                "entity": "BLS表1.2职业预测2025—2035",
                 "id": "link-16",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/19-2031.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "NIST AI Risk Management Framework 1.0",
+                "entity": "中国检验检测机构监督管理办法",
                 "id": "link-17",
                 "relation": "related-evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2025/art_bff8f35d8f114acca7643bddd77e9505.html"
               },
               {
-                "entity": "O*NET 全国工资分位页面（19-2031.00）",
+                "entity": "BLS预测（不提供职业消失年份）",
                 "id": "link-18",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localwages/19-2031.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET-SOC 19-2031.00 职业摘要",
@@ -25032,7 +25071,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把数字化工具用在数据整理与趋势与报告草稿上，但把方法适用性判断、异常复测与结果解释保留在方法与人工确认之内。"
+              "编辑试用：在授权数据和验证条件内尝试数据整理、趋势及报告草稿；核方法适用性和输出，异常及时报告，复测须依程序、条件与授权。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.13",
@@ -25054,7 +25093,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用数据看板提高异常与质控偏差的可见性，但把方法确认、不符合项判定与结果放行写清楚，避免让系统提示替代原始记录与复核。"
+              "编辑试用：验证看板是否有助于呈现异常和质控偏差；本轮未取得提效实测。方法确认、不符合项及放行依实际制度，不以系统提示替代原始记录。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.15",
@@ -25087,7 +25126,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把技术能力、实际采用与岗位结果分开看：公开资料能支持的是「数据整理、谱图与结果汇总、报告与标准草案与检索类任务可借助软件提速」，以及「招聘中出现数据分析与化学信息学与数据库工具的关键词」；不支持「该职业被替代」「某个年份岗位消失」这类结论。BLS 对 2024—2034 年的预测是增长 5%、年均空缺 6,300 个，这是就业规模预测，不是 AI 采用率或替代率。"
+              "公开资料支持任务、软件关键词、AI暴露方法与就业预测；谱图辅助、汇总、草稿和检索是编辑试用建议，本轮无该职业可靠性或提速实测。BLS表1.2的美国SOC19-2031化学家2025—2035预测：84,900→90,300人，增长6.4%，年均空缺5,900；OOH化学家分项整数为6%（快于平均）。官方净增5.5千人独立舍入，与已舍入两端之差5.4千人不同，不重算覆盖。空缺含增长及转岗、退出劳动力市场等替补需求，非在招存量、AI归因或逐年实绩。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.18",
@@ -25230,7 +25269,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Employment Projections（经 O*NET Employment Trends 显示）"
+              "BLS职业预测表1.2：SOC19-2031（2025—2035）"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.31",
@@ -25241,7 +25280,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024—2034 年的就业预测与年均空缺"
+              "核当前职业级预测，不把旧期或父级组合值作本轮化学家值"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.32",
@@ -25252,7 +25291,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表按三条真实工作方向比较：AI 主要改变什么，以及哪些责任仍然留在人这一侧。三条方向来自该职业的任务结构（实验室分析与检测、方法与产品与工艺开发、记录与报告与协作与合规），不是行业统一职级。"
+              "编辑按分析检测、方法产品开发、记录协作三类任务面比较潜在工具用途及验证和责任条件；不是职业采用时序、实测效果或永久分工。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.33",
@@ -25263,7 +25302,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把谱图与仪器读数自动解析并生成结果表、把方法参数与样品信息自动带入记录模板、对历史质控数据做一致性比对与趋势提示。"
+              "编辑用途建议，须核授权、输入及实际输出：把谱图与仪器读数自动解析并生成结果表、把方法参数与样品信息自动带入记录模板、对历史质控数据做一致性比对与趋势提示。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.34",
@@ -25274,7 +25313,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "确认方法是否适用当前样品基体、判断偏差是真实结果还是过程或仪器问题、以及在结果超出规范时按程序复测与升级。"
+              "方法、基体、范围和质控须核；异常保留记录并报告，调查与复测依条件、程序及权限，不由工具自动授权。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.35",
@@ -25285,7 +25324,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按目标性能生成候选方法条件与实验设计建议、把配方与工艺条件与法规限值整理成可核对的清单、对试剂与标准品有效期与库存给出提醒。"
+              "编辑用途建议，须核授权、输入及实际输出：按目标性能生成候选方法条件与实验设计建议、把配方与工艺条件与法规限值整理成可核对的清单、对试剂与标准品有效期与库存给出提醒。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.36",
@@ -25307,7 +25346,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把原始数据与统计结果整理成图表与报告草稿、把偏差与整改整理成记录、核对引文与数据是否可追溯。"
+              "编辑用途建议，须核授权、输入及实际输出：把原始数据与统计结果整理成图表与报告草稿、把偏差与整改整理成记录、核对引文与数据是否可追溯。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.38",
@@ -25373,7 +25412,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "12 项任务中重要性最高的四项为开发改进或定制产品与方法 80、分析化合物 77、改变物质组成 74、质量控制测试与报告与仪器维护各 73"
+              "12项核心任务最高三项为产品/方法开发80、分析化合物77、改变物质组成74；随后质控测试、论文报告/标准、仪器维护、配制溶液试剂四项同为73，不是仅四项最高任务。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.44",
@@ -25505,7 +25544,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "框架要求把用途、限制、监测与责任写清，可直接用于本页的复核与留痕建议"
+              "NIST AI RMF1.0是自愿风险治理框架，可启发用途、限制、监测及记录建议；不赋予本职业中国报告签署或作业权限。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.56",
@@ -25549,7 +25588,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该职业技术清单覆盖科学分析软件（ChemStation、Empower、Minitab）、化学信息学与分子建模、数据库与 SQL、开发环境（LabVIEW 等）、企业资源计划（SAP）与库存管理与办公套件等 16 类"
+              "热门技术页列15项Hot关键词：Excel11%、Office9%、PowerPoint7%同时为3项In Demand；Word3%、SQL/SAP2%、R1%，其他部分低于1%或未提供。完整详情另列16类软件，两页不是同一清单，不是AI采用率。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.60",
@@ -25560,7 +25599,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术能力回答「模型在原则上能做什么」。对本职业而言，较可靠的部分是数据整理与谱图解析辅助、报告与标准草案生成、检索与信息汇总；不可靠的部分是方法适用性判断、异常根因判定与结果解释。"
+              "数据整理、谱图辅助、草稿及检索是编辑可试用途；本轮未取得本职业准确率、可靠性或提速实测。方法、数据、引用、结果与安全提示均须按用途验证，不先区分哪些已可靠。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.61",
@@ -25571,7 +25610,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采用证据回答「企业实际在用什么」。公开资料能支持的是该职业招聘中出现数据分析与化学信息学与数据库与编程工具的关键词，以及仪器数据系统与实验室信息管理系统的普及；具体企业的落地范围属于商业信息，本页不推断。"
+              "O*NET提供2025美国招聘软件关键词和职业软件描述；不证明具体企业生成式AI采用或LIMS普及率。实际使用、权限和效果须核机构证据。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.62",
@@ -25582,7 +25621,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "岗位结果回答「就业规模有没有变」。BLS 对 2024—2034 年的预测是增长 5%、年均空缺 6,300 个，属于就业规模预测；公开资料未提供把该数字归因于 AI 的证据，因此本页不写替代率或消失年份。"
+              "BLS表1.2的美国SOC19-2031化学家2025—2035预测：84,900→90,300人，增长6.4%，年均空缺5,900；OOH化学家分项整数为6%（快于平均）。官方净增5.5千人独立舍入，与已舍入两端之差5.4千人不同，不重算覆盖。空缺含增长及转岗、退出劳动力市场等替补需求，非在招存量、AI归因或逐年实绩。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.63",
@@ -25593,7 +25632,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能这样推断。该职业的核心任务以实验设计与分析、方法开发与验证、异常判断与安全评估为主：确认方法适用性、解释不符合预期的数据、在实验室现场处置安全异常都需要对数据与安全负责的化学家来做。AI 会改变数据处理与记录与检索的方式，但公开资料不支持「职业被取代」的结论。"
+              "任务描述、软件关键词、ILO暴露研究和BLS预测不足以判定职业被替代或永远不被替代；可以逐任务试验工具用途，复核和安全职责依具体制度及法域核。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.64",
@@ -25604,7 +25643,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 19-2031.00 任务与工作活动；BLS 就业预测"
+              "O*NET19-2031任务；BLS表1.2预测；ILO暴露方法（不提供本职业替代年份）"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.65",
@@ -25615,7 +25654,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不把编程当作入行门槛。O*NET 该职业的技术清单列出科学分析软件、化学信息学与分子建模、数据库与 SQL 与办公与表格工具，也列出 C 与 Java 与 R 与 LabVIEW，但这些是招聘中出现的关键词，不是入门硬性条件；BLS 显示多数岗位要求四年制学士学位，研究岗常要求硕士或博士。更实用的顺序是先掌握方法与实验与原始记录，再学用数据分析与信息学工具。"
+              "编程不是全职业统一门槛，也不能据此排除具体岗位要求。O*NET可迁移技能Programming28，完整软件描述含分析、数据库和开发工具；Hot招聘词不能证明每个工具都是硬性条件。编辑建议先补化学、实验、安全与记录，再按目标研究和数据岗位补编程。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.66",
@@ -25626,7 +25665,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Employment Projections（经 O*NET 显示）；O*NET Hot Technologies 19-2031.00"
+              "O*NET详情Software/Transferable Skills；BLS OOH教育及表1.2典型入职"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.67",
@@ -25637,7 +25676,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "从任务结构看，受影响较早的是可结构化输入的环节：谱图解析与结果汇总、数据整理与图表生成、报告与标准草案、检索与文献与法规限值整理。受影响较晚的是必须在现场判断并对安全负责的环节：方法适用性与验证设计、异常根因诊断、非标准样品的处理与实验室安全评估。"
+              "编辑比较：结构化数据、谱图辅助、图表草稿和检索可作为试验对象；现场、方法验证、异常根因及安全另核条件。没有职业级采用时间序列，不断言哪些必然较早或较晚受影响。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.68",
@@ -25659,7 +25698,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 预测 2024—2034 年该职业就业增长 5%，属「快于所有职业平均」，年均空缺 6,300 个，其中相当部分来自离职与退休带来的替补需求。预测本身有假设与误差，不等于逐年的实际岗位数。"
+              "BLS表1.2的美国SOC19-2031化学家2025—2035预测：84,900→90,300人，增长6.4%，年均空缺5,900；OOH化学家分项整数为6%（快于平均）。官方净增5.5千人独立舍入，与已舍入两端之差5.4千人不同，不重算覆盖。空缺含增长及转岗、退出劳动力市场等替补需求，非在招存量、AI归因或逐年实绩。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.70",
@@ -25670,7 +25709,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Employment Projections（经 O*NET Employment Trends 显示）"
+              "BLS表1.2的19-2031职业级2025—2035预测；OOH化学家分项"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.71",
@@ -25681,7 +25720,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。方法确认与结果放行与产品与工艺变更与企业合规的决定属于有授权的岗位与质量与安全体系的责任行为；对外出具数据时通常还涉及检验检测资质与授权签字要求。AI 生成的文本不具备这种责任能力，也不能替代原始记录与现场安全确认。"
+              "AI文本不替代依法应由人员或机构承担的责任。中国《检验检测机构监督管理办法》第2条适用向社会出具具有证明作用报告的活动；第8、12条核授权签字人能力和技术范围，第13条原始记录与报告至少保存6年。CMA或特别资质依机构、项目及法源核，不是每位化学家个人执照或所有外发数据统一门槛。 其他研发报告、方法确认及产品放行依适用质量体系和权限核，不用NIST证明法定签署权限。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.72",
@@ -25692,7 +25731,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST AI RMF 1.0 责任与记录要求；O*NET 19-2031.00 任务描述"
+              "中国检验检测监督办法第2、8、12、13条；NIST仅自愿治理参考"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.73",
@@ -25714,7 +25753,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS Employment Projections（2024—2034 年预测期与说明）"
+              "BLS表1.2的2025—2035预测（不提供消失年份）"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.75",
@@ -25824,7 +25863,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅以已验证方法与原始谱图与质控数据为依据；对异常先复测与核对过程，再形成结论并留痕。"
+              "编辑核对建议：异常及时保留原始记录并按实际程序报告；调查核方法、样品、仪器与质控。复测或重取样仅在程序允许、安全条件及授权具备时实施，不用反复检测挑选合格值或延误安全处置。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.85",
@@ -25835,7 +25874,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "配方、工艺参数、检测数据与客户与专利信息属于企业核心信息，上传到外部服务可能构成违规披露或知识产权风险。"
+              "部分配方、参数、客户及检测信息可能受法律、合同或单位规定保护；不是全部实验数据或已公开专利都属商业秘密。上传前核类别、实际授权和服务条款。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.86",
@@ -25846,7 +25885,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按企业数据分级选择可用工具与部署方式，对敏感信息做脱敏或使用内部系统，并保留访问与导出记录。"
+              "编辑建议：先核数据权限及工具条款；脱敏不自动等于匿名化或取得外传许可，内部系统也须按职责限制访问，按适用制度留存导出记录。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.87",
@@ -25857,7 +25896,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "同一数据在不同系统与版本下可能得到不同汇总或解析结果；缺少版本与时间记录会使复核与责任追溯无法进行。"
+              "工具、模型版本及汇总规则变化可能产生差异；保留足以复核的输入、输出、时间及变更记录，不因少一个字段断言必然完全无法追溯。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.88",
@@ -25879,7 +25918,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "单位与浓度与稀释倍数、有效数字与检出限的错误会直接改变结论，且系统不会主动提示。"
+              "单位、浓度、稀释、有效数字和检出限错误可能改变结论；工具提示不能保证识别全部错误，关键数值须主动核。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.90",
@@ -25956,7 +25995,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "谱图解析与结果汇总的自动化程度提高；方法适用性与异常判定仍是人工职责"
+              "编辑用途建议：可试验谱图与汇总辅助；核方法、输出及异常条件，未取得提效实测。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.97",
@@ -26000,7 +26039,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "方案与条件建议可自动生成；验证设计与可行性判断仍由人负责"
+              "编辑用途建议：可试验方案与条件草稿；验证设计和可行性依程序核。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.101",
@@ -26011,7 +26050,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断异常结果是否需要复测或重新取样，并确认记录与原始数据与批次一致。"
+              "编辑核对建议：异常及时保留原始记录并按实际程序报告；调查核方法、样品、仪器与质控。复测或重取样仅在程序允许、安全条件及授权具备时实施，不用反复检测挑选合格值或延误安全处置。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.102",
@@ -26044,7 +26083,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "汇总与图表与草案生成可加速；结论与技术意义与报告责任仍由人承担"
+              "编辑用途建议：可试验汇总、图表与草稿；结论、技术意义及报告职责依实际制度。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.105",
@@ -26088,7 +26127,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "校准与维护提醒可数字化；故障诊断与现场安全处置不可外包"
+              "编辑用途建议：可试验维护提醒；故障诊断、维修及应急处置依实际职责，不能一概禁止外部专业服务。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.109",
@@ -26132,7 +26171,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "摘要与报表可自动生成；记录真实性与交接责任仍由人承担"
+              "编辑用途建议：可试验摘要与报表；验证记录真实性、完整性及交接条件。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.113",
@@ -26176,7 +26215,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "库存与到期提醒可自动化；化学品合规采购与处置仍需人工确认"
+              "编辑用途建议：可试验库存到期提醒；采购、储存及处置依实际危化品制度。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.117",
@@ -26220,7 +26259,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "沟通与培训记录可数字化；技术判断与指导质量仍需人工负责"
+              "编辑用途建议：可试验沟通培训记录辅助；核技术内容及适用职责。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.121",
@@ -26231,7 +26270,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "如果要用一句话概括：AI 与数字化会显著改变化学家采集数据、解析谱图、整理记录与检索信息的方式，但不会改变「谁对方法适用性、数据质量与安全程序负责」这一结构；判断依据始终是已验证的方法、受控的质控数据与完整可追溯的原始记录，以及有授权的复核与放行。"
+              "AI及数字化可在具体方法、数据与权限条件下试验；本轮无职业级改变幅度或采用时序实测。核科学依据、原始数据、验证、质控与安全制度，不能把用途建议写成必然提效或永久责任结构。"
             ]
           },
           "id": "chemists-and-materials-scientists.ai-impact.ai-impact-table.122",
@@ -26255,7 +26294,7 @@
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-wages"
+            "ch-nbs2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26270,7 +26309,7 @@
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wages"
+            "ch-nbs2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26340,7 +26379,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与化学家精确对应的中国大陆全国职业工资分布；本条证据路由把该缺口登记为 （暂无可安全使用的数据，尚无缺口关闭结论），处理说明 为「保留模块级缺口，并明确中文页面语言不构成中国等价职业或工资映射」，本页据此不发布任何中国大陆数值。"
+              "证据不足：未取得中国化学家职业工资中位、分位、起薪及地区月薪。NBS2025中国城镇非私营/私营制造业年平均工资113,594/76,055元，科学研究和技术服务业182,064/83,560元。四值为较宽行业背景，非化学家、化学制造或检测细行业专属工资，也非中位、起薪、到手收入或地区月薪。"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.7",
@@ -26351,7 +26390,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮查阅范围为：国家统计局与人力资源社会保障部公开工资资料入口，以及本职业的 O*NET/BLS 精确职业来源；后者其市场与辖区明确为美国，不支持中国精确工资口径。因此本页不给出中位数、分位数、起薪或稳定月薪，也不把美国数值换算成人民币。"
+              "本轮核NBS2025表2/5及附注、O*NET/BLS美国职业和中国检验检测/安全法律原文；不以美国换算或未经核样本填中国工资。"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.8",
@@ -26362,7 +26401,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业门类口径：国家统计局按行业门类公布城镇单位就业人员年平均工资，化学家分布在化学原料与化学制品制造与医药与检验检测等多个门类中，但该口径不是职业级数值，本页不采用它替代本职业工资。"
+              "化学原料和医药制造属制造业内细行业，研发及检测还涉及技术服务等场景。NBS2025中国城镇非私营/私营制造业年平均工资113,594/76,055元，科学研究和技术服务业182,064/83,560元。四值为较宽行业背景，非化学家、化学制造或检测细行业专属工资，也非中位、起薪、到手收入或地区月薪。 不是把化工、医药、检测都称独立行业门类；美国行业结构不能当中国职业分布。"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.9",
@@ -26373,7 +26412,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "该口径覆盖城镇地域内就业人数 5 人及以上法人单位，不含个体工商户与自由职业者；用它替代本职业工资会同时引入行业与用工形式两重偏差。"
+              "NBS调查覆盖城镇5人及以上法人单位及规定视同法人的产业活动单位；不含个体和自由职业者。工资含代扣个税、个人社保公积金等，为税前平均劳动报酬，不是中位或到手。"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.10",
@@ -26384,7 +26423,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "较宽职业口径：公开统计与职业分类使用较宽的口径，未单列与 O*NET-SOC 19-2031.00 一一对应的职业细类，不能把其分位数写成本职业的全国中位数。"
+              "本轮未取得与美国19-2031一一对应的中国工资细类和全国职业分布；分类公布信息不是完整映射证明，不断言全部官方统计从未单列。"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.11",
@@ -26417,7 +26456,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本条证据路由不使用招聘样本或相邻岗位报价填补职业级缺口，因为无法核验其统计对象与抽样方法。"
+              "本轮未取得可核对象、样本及统计方法的招聘待遇数据；不以个别报价填全国职业分位。"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.14",
@@ -26428,7 +26467,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "统计覆盖范围：中国大陆公开工资统计以城镇法人单位为对象，劳务派遣与外包与个体经营等形式的覆盖不同，与本职业的实际用工结构并不完全重合。"
+              "统计覆盖按NBS调查对象及人员支付关系核；派遣、外包不一概排除或与个体自由职业合并。比较机会核实际用工、工资支付及统计归属。"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.15",
@@ -26450,7 +26489,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "资料期：本轮查阅以 2025 年及以前已发布的公开资料为范围；资料期不同会影响可比性，本页不跨期拼接。"
+              "行业资料期为2025全年，NBS发布2026-05-15、本轮检索2026-10-09；不是2026年工资或跨期拼接的职业分布。"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.17",
@@ -26472,7 +26511,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论与缺口：本页对中国大陆只登记可核对的统计口径、岗位映射边界与检索记录，不给出替代数值。"
+              "化学家任务涵盖制造、研究和分析，O*NET2025行业结构提供选择制造及科学技术服务背景的参考；不移植美国占比为中国分布。NBS2025中国城镇非私营/私营制造业年平均工资113,594/76,055元，科学研究和技术服务业182,064/83,560元。四值为较宽行业背景，非化学家、化学制造或检测细行业专属工资，也非中位、起薪、到手收入或地区月薪。 精确缺口仍保留。"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.19",
@@ -26516,7 +26555,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "自动化与数字化会改变谱图解析与记录与报表的组织方式，但不改变中国大陆对本职业的统计口径：职业级统计缺口与工具无关。"
+              "工具可能改变数据与流程，本轮无中国职业工资效应或统计分类变化证据；不能保证官方分类永远不变，也不据软件关键词推算收入。"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.23",
@@ -26527,7 +26566,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "作业与资格边界：分析与研发岗位可能同时在化工生产、检验检测、医药研发与环保监测等多个序列中，其用工形式、班制、作业范围与任职要求各不相同。涉及危险化学品与特种设备作业的岗位另有安全生产与特种作业管理规定；面向社会出具检测数据的机构另有检验检测机构资质认定与授权签字人要求。"
+              "中国《检验检测机构监督管理办法》第2条适用向社会出具具有证明作用报告的活动；第8、12条核授权签字人能力和技术范围，第13条原始记录与报告至少保存6年。CMA或特别资质依机构、项目及法源核，不是每位化学家个人执照或所有外发数据统一门槛。 中国安全教育、危化品和特种作业/设备资格依实际单位及类别核。"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.24",
@@ -26604,7 +26643,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "博士（研究型岗位与高校与院所岗位的常见起点）"
+              "博士研究背景（目标岗位条件另核）"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.31",
@@ -26615,7 +26654,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "基础研究与高层次研发方向、技术与团队负责方向"
+              "基础研究与研发方向（不自动取得团队负责人权限）"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.32",
@@ -26626,7 +26665,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：这些岗位与常规分析岗位相邻但职责与授权不同，若目标为基础研究或团队负责岗位，需要另行完成成果与项目准备。"
+              "编辑方向提示：研究成果可证明专业经验；是否进入研发、技术或团队负责岗位核实际聘任及职责，不从学历自动推权限或收入。"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.33",
@@ -26648,7 +26687,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "企业内部检测与研发培训、特种作业与危险化学品作业资格"
+              "单位安全与方法培训；具体法定作业资格按类别核"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.35",
@@ -26659,7 +26698,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：是否必须取证取决于岗位涉及的作业类型与是否对外出具检测数据，须以主管部门与企业制度为准，本页不代替考证条件。"
+              "安全培训、个人作业资格、机构资质及授权签字是不同条件，依具体单位、活动及法源核；接触危化品不自动需要同一种证书。"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.36",
@@ -26681,7 +26720,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：以产品与中间体的分析与质量控制为主，涉及危险化学品的岗位对作业资格与防护要求较高。"
+              "编辑核对目标岗位是否负责原料、中间体或产品分析和质量控制；危化品风险、培训、防护及资格依物质和作业类别核，不从行业名称判断要求强弱。"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.38",
@@ -26703,7 +26742,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：多品种小批量与质量体系要求较严格，对方法与记录与偏差处理要求较高。"
+              "编辑核对产品、批量、方法、质量体系与偏差程序；不假定全部医药精细化工都是小批量或规范要求更严。"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.40",
@@ -26725,7 +26764,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：以第三方或企业实验室的样品检测为主，对外出具数据时须符合资质认定与授权签字要求。"
+              "编辑核对第三方与内设实验室任务；向社会出具具有证明作用报告的适用活动核机构资质和签字人技术范围，非所有外发数据一律CMA。"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.42",
@@ -26736,7 +26775,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《城镇单位就业人员年平均工资情况》检索入口｜https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html"
+              "NBS2025工资表2/5及附注｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.43",
@@ -26747,7 +26786,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆薪资参考：官方统计口径与缺口"
+              "中国精确职业工资缺口与行业均值背景"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.44",
@@ -26758,7 +26797,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆目前没有单列该岗位的全国职业工资统计可供本页引用；本页只登记可核对的统计口径、岗位映射边界与检索记录，不给出替代数值。"
+              "本轮未取得中国化学家全国职业工资分布，不等于官方从未发布。NBS2025中国城镇非私营/私营制造业年平均工资113,594/76,055元，科学研究和技术服务业182,064/83,560元。四值为较宽行业背景，非化学家、化学制造或检测细行业专属工资，也非中位、起薪、到手收入或地区月薪。"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.45",
@@ -26769,7 +26808,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "比较不同机会时应确认用工形式（企业内设、劳务派遣、项目制）、实际承担的检测与研发范围、是否涉及危险化学品与特种设备作业、是否对外出具检测数据，并明确本页不提供中国大陆该岗位的工资数值。"
+              "比较机会核用工、检测与研发范围、危化品和具体作业/设备类别、报告用途及薪酬结构；行业背景不能预测个人工资。"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.46",
@@ -26802,7 +26841,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆（本条路由不发布数值）"
+              "中国大陆（职业月薪缺口；行业年均值另列）"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.49",
@@ -26891,7 +26930,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《城镇单位就业人员年平均工资情况》检索入口｜https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html；O*NET 全国工资分位页面（19-2031.00）｜https://www.onetonline.org/link/localwages/19-2031.00"
+              "NBS2025行业工资背景｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html；美国工资分位｜https://www.onetonline.org/link/localwages/19-2031.00（不能换算代填中国职业工资）"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.57",
@@ -26902,7 +26941,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 5%（快于所有职业平均）"
+              "美国2025—2035增长6.4%（OOH整数6%，快于平均）"
             ]
           },
           "id": "chemists-and-materials-scientists.china-salary.career-snapshot-primary-locale.58",
@@ -26940,7 +26979,8 @@
           ],
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "bls-pay"
+            "ch-wages",
+            "ch-methods"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26955,7 +26995,7 @@
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "bls-pay"
+            "ch-ooh"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -26985,7 +27025,8 @@
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "bls-entry"
+            "ch-ep2025",
+            "ch-ooh"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27000,7 +27041,7 @@
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "bls-pay"
+            "ch-ooh"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27030,7 +27071,8 @@
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.7",
           "source_refs": [
-            "bls-pay"
+            "ch-wages",
+            "ch-methods"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27040,7 +27082,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS Occupational Outlook Handbook：Chemists and Materials Scientists（含化学家分项与行业中位数）｜https://www.bls.gov/ooh/life-physical-and-social-science/chemists-and-materials-scientists.htm；O*NET 全国工资分位页面（19-2031.00）｜https://www.onetonline.org/link/localwages/19-2031.00；O*NET 全国就业趋势页面（19-2031.00，显示 BLS 就业预测）｜https://www.onetonline.org/link/localtrends/19-2031.00"
+              "O*NET全国工资分位（OEWS2025年5月）｜https://www.onetonline.org/link/localwages/19-2031.00；BLS OOH化学家分项｜https://www.bls.gov/ooh/life-physical-and-social-science/chemists-and-materials-scientists.htm；BLS表1.2预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；OEWS方法｜https://www.bls.gov/oes/current/oes_tec.htm"
             ]
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.8",
@@ -27150,7 +27192,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位。该分位不包含津贴与加班的个体差异，也不含自雇主收入。；BLS 全国工资分位（19-2031.00，2025 年 5 月）｜https://www.onetonline.org/link/localwages/19-2031.00"
+              "第90分位160,830美元/年为受雇工资上端，非资深或管理工资。OEWS不含自雇收益、加班和班次差额等；包括/排除项查方法，不是个人全部收入。｜https://www.onetonline.org/link/localwages/19-2031.00；https://www.bls.gov/oes/current/oes_tec.htm"
             ]
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.18",
@@ -27161,7 +27203,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "86,800 人（2024 年）"
+              "84,900人（2025）"
             ]
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.19",
@@ -27172,7 +27214,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 就业预测公布的 2024 年该职业就业人数；2034 年预计为 91,000 人，2024—2034 年变化约 +4,200 人。；BLS 就业预测（经 O*NET 就业趋势页面显示）｜https://www.onetonline.org/link/localtrends/19-2031.00"
+              "2025就业84.9千、2035预计90.3千；官方净增5.5千独立舍入，不以端点重算覆盖。｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.20",
@@ -27183,7 +27225,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 5%"
+              "增长6.4%（OOH整数6%）"
             ]
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.21",
@@ -27194,7 +27236,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024—2034 年预测期，快于所有职业平均。预测含假设与误差，不等于逐年实际值。；BLS 就业预测（经 O*NET 就业趋势页面显示）｜https://www.onetonline.org/link/localtrends/19-2031.00"
+              "2025—2035职业级预测，快于平均；含假设误差，不是逐年实绩或AI替代率。｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.22",
@@ -27205,7 +27247,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约 6,300 个/年"
+              "约5,900个/年"
             ]
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.23",
@@ -27216,7 +27258,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024—2034 年年均空缺，含增长与替补（离职与退休）需求。空缺是流量，不等于在招岗位存量。；BLS 就业预测（经 O*NET 就业趋势页面显示）｜https://www.onetonline.org/link/localtrends/19-2031.00"
+              "2025—2035年均空缺5.9千，含增长及转岗/退出等替补流量，非在招存量。｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.24",
@@ -27227,7 +27269,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界：以上数值均为美国全国口径，面向受雇工资薪金岗位；实际到手收入还受行业与地区与班制与加班与津贴影响，本页不据此推算个人年收入，也不构成对中国大陆的推断。"
+              "OEWS工资覆盖美国受雇全职和兼职，排除自雇等，正常工时税前工资的含排项按方法核；EP就业预测口径不同，2025自雇0.3%，不能将全部就业值说成受雇工资分布。"
             ]
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.25",
@@ -27238,7 +27280,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：BLS 显示 2025 年 5 月该职业年薪中位数为 91,240 美元、时薪中位数为 43.87 美元；2024—2034 年就业预计增长 5%，年均空缺 6,300 个。这些是美国受雇岗位的统计位置，不是个人起薪或到手收入。"
+              "2025年5月化学家OEWS中位91,240美元/年、43.87美元/时；分位为工资统计位置，非起薪或到手收入。BLS表1.2的美国SOC19-2031化学家2025—2035预测：84,900→90,300人，增长6.4%，年均空缺5,900；OOH化学家分项整数为6%（快于平均）。官方净增5.5千人独立舍入，与已舍入两端之差5.4千人不同，不重算覆盖。空缺含增长及转岗、退出劳动力市场等替补需求，非在招存量、AI归因或逐年实绩。 本页五分位及五行业工资采用化学家19-2031，非组合统计；材料科学家中位117,790及组合95,060只作同页并列背景。"
             ]
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.26",
@@ -27249,7 +27291,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "多数化学家全职工作；项目截止或时限性实验可能需要加班或错时工作（O*NET 工作情境显示 31% 的典型工作周超过 40 小时、93% 为规律排班）。统计的年度工资不区分加班与津贴构成，因此不能反推个人收入结构。"
+              "BLS OOH说明多数全职，项目截止或时限性实验可能错时/加班；O*NET具体答项31%超过40小时、93%规律排班。OEWS排除加班及班次差额等，不能反推个人收入构成。"
             ]
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.27",
@@ -27271,7 +27313,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与产品类型决定任务与责任范围：化学制造与医药与检验检测与政府实验室在质量体系、资质要求与班制上安排不同，收入水平也存在行业差异。"
+              "具体行业、产品、质量体系、资质及班制依岗位核；下表行业工资可比较统计位置，不由横截面差异证明各因素独立工资效应。"
             ]
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.29",
@@ -27315,7 +27357,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 5%（快于所有职业平均）"
+              "增长6.4%（OOH整数6%，快于平均）"
             ]
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.33",
@@ -27348,7 +27390,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该行业为 O*NET 行业分布中制造业的主要组成，本页不据此推算个人收入。"
+              "O*NET制造门类41%；BLS OOH所列化学制造细行业占美国化学家就业33%（2025）。层级不同，不互换，也不据占比推个人工资。"
             ]
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.36",
@@ -27370,7 +27412,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS Occupational Outlook Handbook（化学家分项，2025 年 5 月）给出的该行业工资中位数；该行业中位数低于全国中位数，说明行业结构会影响收入水平。"
+              "检测实验室与服务中位66,140美元/年低于全国91,240（2025年5月）；这是描述性差异，不能仅据此推行业因果或个人薪资。"
             ]
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.38",
@@ -27403,7 +27445,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS Occupational Outlook Handbook（化学家分项，2025 年 5 月）给出的该行业工资中位数；研发岗位通常对方法与数据规范性要求更高。"
+              "研发服务本职业工资中位105,930美元/年（2025年5月）；不据高工资推规范要求比其他行业更高。"
             ]
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.41",
@@ -27447,7 +27489,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "公开的州级统计存在地区差异，但本页不逐州列出，也不以最高值当作普遍水平。"
+              "联邦137,720与州地方81,830为两类行业工资中位，非州际排名或个人报价；本轮未作州级工资比较。"
             ]
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.45",
@@ -27491,7 +27533,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与地区、方法与资质要求、班制与加班、以及是否从事对外检测或研发支持都会影响实际收入；本页只给出统计口径下的分布与行业中位数，不预测个人收入。"
+              "比较个人offer核行业、地区、实际职责、资格、工时和薪酬含排项；本轮未量化这些因素独立效应，不预测个人收益。"
             ]
           },
           "id": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.49",
@@ -27604,7 +27646,7 @@
           },
           "id": "chemists-and-materials-scientists.fit.riasec-fit-block.4",
           "source_refs": [
-            "bls-entry"
+            "ch-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27664,7 +27706,7 @@
           },
           "id": "chemists-and-materials-scientists.fit.riasec-fit-block.8",
           "source_refs": [
-            "nasa-seh"
+            "ch-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -27759,10 +27801,10 @@
                 "url": "https://www.onetonline.org/link/summary/19-2031.00"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（19-2031.00）",
+                "entity": "BLS表1.2化学家2025—2035预测",
                 "id": "link-15",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/19-2031.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET-SOC 19-2031.00 工作情境字段",
@@ -27804,10 +27846,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业兴趣代码为 IRC（研究型、现实型、常规型）。研究型对应「研究非生命物体与材料与现象」的取向（具体领域为物理科学、数学与统计学、医学科学）；现实型对应「设计或建造或维修设备与材料，或从事体力活动与户外工作」的取向；常规型对应「遵循程序与法规组织信息或数据」的取向（具体领域为数学与统计学）。该职业的工作活动以记录信息（85）、分析数据（80）、获取信息（78）为最高分项，说明它更像「把方法做准并把数据说清楚」而不是「只做一次漂亮实验」。"
+              "O*NET职业兴趣IRC：研究95、现实78、常规64，描述职业活动取向，非从业者人格比例或个人适配阈值。工作活动记录85、分析80、获取信息78为职业要求评分；编辑建议用方法、数据及记录任务自查。 上述为化学家19-2031；材料科学家IRC93/80/53另有任务评分，不用化学家值代表合并从业群体。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.2",
+          "source_refs": [
+            "ch-details",
+            "ch-material"
+          ],
           "type": "prose"
         },
         {
@@ -27815,7 +27861,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 兴趣代码与工作活动重要性为官方职业测评数据，描述的是职业群体的取向分布，不是个人适配结论，也不是录用标准。"
+              "O*NET职业兴趣与活动评分是职业级描述，不是人格群体分布、录用标准或个人表现预测。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.3",
@@ -27838,7 +27884,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：O*NET 工作风格清单列出创新、成就取向、求知欲、谨慎性、诚信、注重细节与可靠性七项；如果你容易在重复分析中松懈，或不习惯把过程写成记录，质量与安全要求会持续带来压力。"
+              "O*NET详情完整20项工作风格；原创新、成就、求知、谨慎、诚信、细节及可靠性是七项摘要，非完整清单。编辑自查能否保持精细操作、记录和学习。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.5",
@@ -27849,7 +27895,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格在本页只用于描述工作方式，不作为录用或淘汰依据。与该职业任务更相关的是开放性维度下的「创新」与「求知欲」、尽责性维度下的「注重细节」与「可靠性」、以及情绪稳定性维度下的「谨慎性」；O*NET 工作情境显示69% 认为精确或准确极其重要、33% 认为重复同一任务极其重要、22% 认为出错后果极其严重、37% 认为非常严重。"
+              "本页大五人格仅作工作方式讨论，未建立与本职业表现的有效阈值或与O*NET风格的逐项等价映射；谨慎性不直接等于情绪稳定性。准确性69%极重要、重复任务33%极重要、错误后果22%极严重/37%很严重为美国问卷答项。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.6",
@@ -27860,7 +27906,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级：O*NET 工作风格为职业级描述性数据；大五人格量表本身不是职业选拔工具。"
+              "O*NET工作风格是职业描述；本页未提供经验证的本职业大五选拔阈值，不能据测评分数决定录用。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.7",
@@ -27894,7 +27940,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 等类型学工具与本职业适配没有官方证据支持。本页不使用「哪种类型最适合化学家」的表述：类型学描述的是偏好，不预测工作表现，也不对应岗位准入。"
+              "本页未取得MBTI类型对化学家胜任或录用的有效性证据，不按类型排序。类型偏好不能代替实验、方法、数据及安全能力材料。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.10",
@@ -27939,7 +27985,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样不是职业测评工具，没有官方职业证据支持。可替代的做法是用具体行为验证兴趣：能否在受监督下按方法完整完成一次分析并如实记录，能否在结果异常时按程序复测与上报。"
+              "本页未取得九型人格对该职业适配的验证证据，不据类型诊断或筛选。编辑自查在监督下完成方法和记录；异常保留数据并报告，复测须核程序和条件。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.14",
@@ -27984,7 +28030,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业对科学方法与数学的要求偏系统：O*NET 基本技能中科学 78、批判性思维与阅读理解各 75、口语表达 72、主动倾听与数学与写作各 69、主动学习 66、监控 63；知识清单为化学、英语语言、数学、生产与加工、行政与管理、计算机与电子、行政、物理学、工程与技术 9 项；可迁移技能以复杂问题解决 66 与判断与决策与质量控制分析各 56 为最高分项。"
+              "该职业对科学方法与数学的要求偏系统：O*NET 基本技能中科学 78、批判性思维与阅读理解各 75、口语表达 72、主动倾听与数学与写作各 69、主动学习 66、监控 63；知识摘要为化学、英语语言、数学、生产与加工、行政与管理、计算机与电子、行政、物理学、工程与技术 9 项（完整详情33项知识、52项能力）；可迁移技能以复杂问题解决 66 与判断与决策与质量控制分析各 56 为最高分项。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.18",
@@ -28018,7 +28064,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要留意：如果对单位与稀释与有效数字长期吃力，数据处理与报告环节会持续出错，风险直接落在数据质量与安全上。"
+              "编辑自查：若长期难以核单位、稀释与有效数字，应通过训练、监督和复核补齐；不能用一次测验预测持续出错或职业命运。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.21",
@@ -28085,7 +28131,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：与该职业任务最贴合的信号是「愿意按方法长期重复并如实记录」与「数据不符预期时先复核再下结论」；兴趣代码 IRC 说明该职业偏向研究型并带有现实型与常规型成分，但代码只描述群体分布，不决定个人是否适合。"
+              "编辑适配自查：愿按方法长期实验、如实记录并在异常时保留证据和及时报告；IRC是职业活动取向，不是群体人格分布或个人录用判断。 本页化学家主口径的偏好线索不代表所有材料科学家。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.27",
@@ -28096,10 +28142,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "分析方法与检测方向"
+              "材料科学家"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.28",
+          "source_refs": [
+            "ch-adjacent-19-2032.00"
+          ],
           "type": "prose"
         },
         {
@@ -28107,7 +28156,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：喜欢按方法把数据做准，愿意在仪器前长时间专注，并能接受重复分析与记录带来的枯燥。"
+              "编辑自查：更愿研究材料结构、性质和新材料。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.29",
@@ -28118,7 +28167,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你更希望工作内容每天不同或不需要精细操作，这条方向会很吃力。"
+              "核材料表征及研究能力；不预设比化学家都需更高学历。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.30",
@@ -28129,10 +28178,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "方法与产品开发方向"
+              "化学工程师"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.31",
+          "source_refs": [
+            "ch-adjacent-17-2041.00"
+          ],
           "type": "prose"
         },
         {
@@ -28140,7 +28192,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：愿意承担方法开发与验证，能把验证指标与判定要求说清楚并推动落地。"
+              "编辑自查：更愿参与化学过程、装置及放大设计。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.32",
@@ -28151,7 +28203,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你不愿意为方法验证结论与工艺影响承担责任，这条方向的压力会更大。"
+              "核过程工程设计和安全能力；分析经验不自动授予装置责任。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.33",
@@ -28162,10 +28214,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "质量与安全与合规方向"
+              "材料工程师"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.34",
+          "source_refs": [
+            "ch-adjacent-17-2131.00"
+          ],
           "type": "prose"
         },
         {
@@ -28173,7 +28228,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：愿意研读标准与法规，并能把要求转成可执行的检查项与记录。"
+              "编辑自查：更愿开发材料加工及满足工程性能的方案。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.35",
@@ -28184,7 +28239,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：这条方向经常要指出不符合项，需要有坚持依据的准备。"
+              "核材料工程、制造过程及方案能力；与材料研究可交叉。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.36",
@@ -28195,10 +28250,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "化学工程师"
+              "工业工程师"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.37",
+          "source_refs": [
+            "ch-adjacent-17-2112.00"
+          ],
           "type": "prose"
         },
         {
@@ -28206,7 +28264,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：更希望参与工艺与装置的设计与放大判断。"
+              "编辑自查：更愿设计优化人员设备、流程及生产系统。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.38",
@@ -28217,7 +28275,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你更愿意做方法与数据而不是设计与计算，本职业更合适。"
+              "核人因、质量物流、效率和成本能力；转岗按个人经验。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.39",
@@ -28228,10 +28286,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "材料工程师"
+              "生物化学家与生物物理学家"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.40",
+          "source_refs": [
+            "ch-adjacent-19-1021.00"
+          ],
           "type": "prose"
         },
         {
@@ -28239,7 +28300,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：更喜欢材料性能与选材与失效方向的判断。"
+              "编辑自查：更愿研究生命体系的化学及物理机制。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.41",
@@ -28250,7 +28311,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你更愿意在化学分析与方法方向深耕，本职业更合适。"
+              "核生命研究训练；两者均可做实验研究，不是研发与分析绝对分界。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.42",
@@ -28265,6 +28326,9 @@
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.43",
+          "source_refs": [
+            "ch-adjacent-11-9121.00"
+          ],
           "type": "prose"
         },
         {
@@ -28272,7 +28336,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合信号：更关注团队与预算与项目与绩效管理。"
+              "编辑自查：更愿组织科研团队、预算及项目资源。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.44",
@@ -28283,7 +28347,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：若你希望长期亲自做实验与分析，本职业更合适。"
+              "核真实管理经历；管理者也可研究，不以亲自实验绝对区分。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.45",
@@ -28338,7 +28402,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 该职业的兴趣代码为 IRC（研究型、现实型、常规型）。这表示职业群体更多分布在研究型并带有现实型与常规型取向，但代码不是个人适配结论，仍需用实际任务验证。"
+              "IRC为研究95、现实78、常规64的职业兴趣取向摘要，非从业者人格比例或个人阈值；需结合真实任务及能力核。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.50",
@@ -28349,7 +28413,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。人格特质分数与工作表现的关联在不同研究中强弱不一，且受岗位与组织影响；本页不用它作为录用或适配判断依据。"
+              "本页未取得足以用人格分数预测本职业表现的验证证据；不据此作录用或职业适配决定。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.51",
@@ -28371,7 +28435,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业需要沟通但不是情绪劳动型岗位：工作活动「与主管、同事或下属沟通」73；重点是结果与异常与限制的说明，不要求处理顾客情绪。"
+              "化学家需要说明结果、异常和限制并与团队或客户协作；O*NET显示与主管同事沟通活动73。不能排除客户沟通或情绪要求，也不把情商分数作统一门槛。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.53",
@@ -28382,7 +28446,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不建议。九型人格不是职业测评工具，也没有官方职业适配证据。"
+              "本页未取得九型人格对化学家适配的验证证据，不按类型筛选职业。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.54",
@@ -28393,7 +28457,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用可交付物判断：能否在受监督下按方法完整完成一次分析并如实记录；能否独立完成一次方法验证的关键指标计算与判定；能否在结果异常时按程序复测与上报并写清过程。哪一类让你更愿意投入，就往哪个方向走。"
+              "编辑自查：在监督和允许条件下完成分析及记录、计算验证指标，并在异常时保留证据及时报告；复测须按条件、程序及授权。任务偏好不能替代资格或录用判断。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.55",
@@ -28448,7 +28512,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对知识、能力、工作风格与兴趣代码 IRC"
+              "用于核对O*NET摘要的精选知识、能力、工作风格和职业兴趣；完整33知识、52能力、20风格清单见已有详情入口，不把摘要当全量。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.60",
@@ -28459,7 +28523,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024—2034 年就业预测与年均空缺"
+              "核BLS19-2031的2025—2035职业级预测和年均空缺"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.personality-fit-block.61",
@@ -28536,7 +28600,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣取向：该职业群体以研究型为主，并带有明显的现实型与常规型成分；日常任务以方法开发与执行、样品与仪器处理、数据记录与分析为主。"
+              "IRC描述研究、现实和常规的职业活动取向，非群体人格分布；任务涵盖研究、开发、样品仪器、数据解释及记录。"
             ]
           },
           "id": "chemists-and-materials-scientists.fit.riasec-fit-block.10",
@@ -28582,7 +28646,8 @@
           },
           "id": "chemists-and-materials-scientists.risk.career-risk-cards.1",
           "source_refs": [
-            "nasa-seh"
+            "ch-osha",
+            "ch-safety"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28612,7 +28677,7 @@
           },
           "id": "chemists-and-materials-scientists.risk.career-risk-cards.3",
           "source_refs": [
-            "nasa-seh"
+            "ch-supervision"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28627,7 +28692,8 @@
           },
           "id": "chemists-and-materials-scientists.risk.career-risk-cards.4",
           "source_refs": [
-            "nasa-seh"
+            "ch-supervision",
+            "ch-safety"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -28735,7 +28801,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：任务与工作情境来自 O*NET 19-2031.00（美国口径）；安全与危险化学品与检验检测资质要求来自公开法规与标准的一般框架；具体阈值、许可与责任划分属于企业与法域事项，本条为编辑归纳，不构成合规或安全操作意见。"
+              "O*NET为美国任务和情境问卷；中国检验检测监督办法核第2、8、12、13条活动、签字和记录，安全生产法核第27、28、30、33、55、57—59条单位/作业条件；美国OSHA1910.1450核实验室定义和计划培训。控制措施为编辑核对，不能当统一作业授权。"
             ]
           },
           "id": "chemists-and-materials-scientists.risk.career-risk-cards.10",
@@ -28768,7 +28834,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "明确方法的适用范围与判定标准与检出限与不确定度；对新样品基体或新条件先做验证并记录；对超出范围的结果报告并申请确认。"
+              "方法、基体、范围及验证指标依实际样品和报告目的核，超范围提出验证与授权要求；编辑核对建议：异常及时保留原始记录并按实际程序报告；调查核方法、样品、仪器与质控。复测或重取样仅在程序允许、安全条件及授权具备时实施，不用反复检测挑选合格值或延误安全处置。"
             ]
           },
           "id": "chemists-and-materials-scientists.risk.career-risk-cards.13",
@@ -28801,7 +28867,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "原始数据不完整或修改无留痕会使结果无法追溯，在客户审核与监管检查中无法自证，严重时会引发数据完整性指控。"
+              "记录不完整或修改无痕可能妨碍复核、审核及责任说明；不能一概断言所有记录缺口都使全部数据无法追溯。中国适用证明性检测记录及报告至少保存6年，其他研发资料期限依制度核。"
             ]
           },
           "id": "chemists-and-materials-scientists.risk.career-risk-cards.16",
@@ -28856,7 +28922,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程佩戴防护装备并使用通风柜与洗眼器与应急喷淋；按类别与兼容性存放化学品并标注有效期；参与安全培训与演练并熟悉泄漏与火灾处置流程。"
+              "按实际化学品、安全资料、风险评估及程序选防护和工程控制，核标签、兼容储存、废物及应急设施；不能把通风柜、洗眼或喷淋写成所有岗位同一配置。美国1910.1450仅适用定义内实验室使用，排除生产或模拟生产；中国直接危及人身安全时依法停止作业或采取可能应急措施后撤离并及时报告，不待额外批准。"
             ]
           },
           "id": "chemists-and-materials-scientists.risk.career-risk-cards.21",
@@ -28889,7 +28955,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "样品污染或标识错误与仪器失校会导致结果无效，需要整批复检并可能延误交付或影响生产。"
+              "样品、标识或仪器状态异常可能使结果失真并延误交付；先保留记录、报告、评估受影响范围，调查和复检依程序、条件及授权，不自动判全部数据无效或整批复检。"
             ]
           },
           "id": "chemists-and-materials-scientists.risk.career-risk-cards.24",
@@ -28900,7 +28966,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规定条件保存与流转样品并核对标识；按周期完成仪器校准与期间核查并保留记录；对不合格或异常状态单独标记并按程序处理。"
+              "按方法核样品流转及仪器检定/校准、期间核查和变更；异常标识不能代替报告及影响评估，使用或恢复权限依程序核。"
             ]
           },
           "id": "chemists-and-materials-scientists.risk.career-risk-cards.25",
@@ -28933,7 +28999,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "配方与工艺参数与检测数据与客户与专利信息属于企业核心信息，拍照或外发会造成商业损失；上传到外部工具可能构成违规披露。"
+              "部分配方、客户和检测资料可能受法律、合同及单位制度保护；不是全部数据或已公开专利都属商业秘密。外传前核实际分级、权限及条款。"
             ]
           },
           "id": "chemists-and-materials-scientists.risk.career-risk-cards.28",
@@ -28944,7 +29010,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按企业数据分级使用工具与系统；不在实验室使用个人设备拍摄资料；对外提供信息前按制度审批并留痕。"
+              "按真实数据分类和权限使用工具；拍照、个人设备或外传的限制核单位制度及法源，不从设备名称一概判泄密；提供资料前核授权并留痕。"
             ]
           },
           "id": "chemists-and-materials-scientists.risk.career-risk-cards.29",
@@ -28955,7 +29021,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "为方便记录用手机拍摄原始谱图或配方；把检测数据粘贴到外部服务中处理或分析。"
+              "未核保护范围、许可和服务条款而拍摄或外传受控资料；不由使用手机或外部工具本身直接认定违法。"
             ]
           },
           "id": "chemists-and-materials-scientists.risk.career-risk-cards.30",
@@ -28977,7 +29043,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "方法与仪器更新后，如果只熟悉一种方法或一套软件，在方法升级或岗位调整时会面临选择空间收窄。"
+              "编辑风险情境：仅熟悉单一方法遇仪器或方法变化时可能需补训；本轮无该职业概率或工资损失实测。"
             ]
           },
           "id": "chemists-and-materials-scientists.risk.career-risk-cards.32",
@@ -29043,7 +29109,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对行业分布与实验室作业环境说明"
+              "O*NET行业分布支持就业行业结构；具体实验室作业环境另见BLS OOH，不用行业表证明防护或现场程序"
             ]
           },
           "id": "chemists-and-materials-scientists.risk.career-risk-cards.38",
@@ -29054,7 +29120,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明任务暴露的度量思路与其指标限制"
+              "ILO支持暴露方法及限制，不证明本职业已发生能力折旧；具体风险情境为编辑建议"
             ]
           },
           "id": "chemists-and-materials-scientists.risk.career-risk-cards.39",
@@ -29078,7 +29144,10 @@
           },
           "id": "chemists-and-materials-scientists.path.career-path-block.1",
           "source_refs": [
-            "onet-training"
+            "ch-details",
+            "ch-ooh",
+            "ch-supervision",
+            "ch-safety"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -29209,10 +29278,10 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET 全国就业趋势页面（19-2031.00，显示 BLS 就业预测）",
+                "entity": "BLS化学家预测与典型入职",
                 "id": "link-1",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/19-2031.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET-SOC 19-2031.00 准备层级（Job Zone）",
@@ -29221,16 +29290,16 @@
                 "url": "https://www.onetonline.org/link/details/19-2031.00#JobZone"
               },
               {
-                "entity": "O*NET-SOC 19-2031.00 培训与教育信息入口",
+                "entity": "O*NET全国认证发现目录",
                 "id": "link-3",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtraining/19-2031.00"
+                "url": "https://www.onetonline.org/link/localcert/19-2031.00"
               },
               {
-                "entity": "O*NET-SOC 19-2031.00 认证信息入口",
+                "entity": "O*NET化学家任务原文",
                 "id": "link-4",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localcert/19-2031.00"
+                "url": "https://www.onetonline.org/link/details/19-2031.00"
               }
             ]
           },
@@ -29341,7 +29410,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：进入该职业最常见的路径是完成化学或相关专业本科教育（研究岗常要求硕士或博士），在校期间通过实验课与毕业设计或实习积累方法与仪器经验，毕业后从分析或质量控制或研发辅助岗位开始；O*NET 把该职业列为 Job Zone Four（需要相当程度的准备）、SVP 区间 7.0 至 8.0 以下。能否进入岗位主要看三点：是否具备系统的化学与分析化学基础、能否稳定执行方法并如实记录、以及能否在异常与安全问题上按程序处置。"
+              "美国BLS典型入职为化学或相关专业学士；部分研究岗位需要硕博及经验。O*NET JobZone4/SVP7至<8为准备分组，不是统一学制。编辑建议以课程、项目和实习核化学、实验、数据及安全能力；中国实际招聘、作业资格和机构要求另核。"
             ]
           },
           "id": "chemists-and-materials-scientists.path.career-path-block.20",
@@ -29352,7 +29421,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界：学历与培训、行业认证、法定与作业资格、岗位授权是四件不同的事。在美国，该职业入门不要求执照，但企业通常要求完成内部安全与质量培训并按岗位授权作业；O*NET 认证页面列出 10 项全国性认证（Approved Chemist、Chemical Hygiene Officer、Toxicological Chemist、Protective Coatings Specialist、Toxicological Chemistry、Certified Professional Chemist、Qualified Environmental Professional、Clinical Chemistry、Environmental Analytical Technologist、Clinical Chemist），属能力证明与雇主偏好。在中国大陆，涉及危险化学品与特种设备作业的岗位另有安全生产与特种作业管理规定，面向社会出具检测数据的机构另有检验检测机构资质认定与授权签字人要求。本页不把某一法域的要求推到其他法域，也不把认证写成作业许可。"
+              "学历、培训、行业认证、个人作业资格、机构资质和授权签字不同。O*NET本职业列10项全国认证，仅是发现目录，本轮未核发行机构报考/续证条件、费用或雇主认可，不据此宣称统一执照或就业加分。中国《检验检测机构监督管理办法》第2条适用向社会出具具有证明作用报告的活动；第8、12条核授权签字人能力和技术范围，第13条原始记录与报告至少保存6年。CMA或特别资质依机构、项目及法源核，不是每位化学家个人执照或所有外发数据统一门槛。"
             ]
           },
           "id": "chemists-and-materials-scientists.path.career-path-block.21",
@@ -29374,7 +29443,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本页关于入行与培养采用 O*NET/BLS 口径：Job Zone Four、SVP 区间 7.0 至 8.0 以下、多数岗位要求四年制学士学位、研究岗常要求硕士或博士；中国大陆部分只说明公开的安全生产与检验检测资质制度框架，不对中国大陆的雇主门槛作统一结论，因为企业与机构差异较大。"
+              "美国JobZone4/SVP7至<8与BLS典型学士、部分研究岗位硕博为描述；中国资格依具体单位、作业及证明性报告用途核，不移植美国目录。 本页能力轨迹主要按化学家任务整理；材料科学家研究材料与测试方法，不能将10项化学家认证视为两职业共同目录。"
             ]
           },
           "id": "chemists-and-materials-scientists.path.career-path-block.23",
@@ -29385,7 +29454,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业 2024—2034 年就业预测与年均空缺"
+              "核BLS19-2031职业级2025—2035预测和典型入职"
             ]
           },
           "id": "chemists-and-materials-scientists.path.career-path-block.24",
@@ -29407,7 +29476,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对认证入口（该职业页列出 10 项全国性认证）"
+              "核O*NET19-2031全国认证发现目录（10项，非认可效果）"
             ]
           },
           "id": "chemists-and-materials-scientists.path.career-path-block.26",
@@ -29418,7 +29487,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对官方职业身份与任务结构"
+              "核O*NET19-2031任务原文"
             ]
           },
           "id": "chemists-and-materials-scientists.path.career-path-block.27",
@@ -29429,7 +29498,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求化学或相关专业本科学历并完成企业安全与质量培训；涉及危险化学品作业的岗位须按所在地规定取得相应作业资格。"
+              "美国典型化学或相关专业学士；实际安全、方法培训及授权依雇主和法域核。中国危化品、特种作业及设备资格按类别适用，不因接触化学品统一取证。"
             ]
           },
           "id": "chemists-and-materials-scientists.path.career-path-block.28",
@@ -29517,7 +29586,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立承担常规方法的分析与数据处理，判断质控是否受控，按程序复测与升级。"
+              "在实际授权内负责方法和质控；异常保留记录并及时报告，调查及复测须核程序与条件。"
             ]
           },
           "id": "chemists-and-materials-scientists.path.career-path-block.36",
@@ -29594,7 +29663,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "对外检测须符合机构资质与授权签字人要求，并完成规定的继续教育与能力确认。"
+              "中国《检验检测机构监督管理办法》第2条适用向社会出具具有证明作用报告的活动；第8、12条核授权签字人能力和技术范围，第13条原始记录与报告至少保存6年。CMA或特别资质依机构、项目及法源核，不是每位化学家个人执照或所有外发数据统一门槛。 本轮未核全职业统一继续教育条件，不将具体制度泛化。"
             ]
           },
           "id": "chemists-and-materials-scientists.path.career-path-block.43",
@@ -29869,7 +29938,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "该阶段无强制资格要求；参与现场检查须完成相应安全培训。"
+              "阶段名称不免除安全教育或资格；进入现场前核单位、作业类别、风险与培训授权，不一概称无强制条件。"
             ]
           },
           "id": "chemists-and-materials-scientists.path.career-path-block.68",
@@ -29979,7 +30048,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆相关岗位可能要求注册安全工程师或相应资格，须按当地与行业规定确认。"
+              "中国安全生产法第27条对危险物品生产、储存等特定单位的安全管理人员配置提出注册安全工程师要求；不是全部化学家统一资格，核实际单位及任职职责。"
             ]
           },
           "id": "chemists-and-materials-scientists.path.career-path-block.78",
@@ -30096,10 +30165,10 @@
               "distinction"
             ],
             "column_labels": [
-              "入门岗位",
+              "岗位示例（入门及进阶）",
               "入职初期主要做什么",
-              "雇主通常看什么",
-              "没经验如何证明",
+              "编辑自查：目标岗位可能考察",
+              "能力材料示例（非均适合零经验）",
               "与其他方向的区别"
             ],
             "rows": [
@@ -30136,7 +30205,7 @@
                 "支持方法与产品开发中的实验与数据评估。",
                 "对新方法的理解、数据评估能力、跨部门沟通。",
                 "用项目参与记录与数据评估说明证明。",
-                "与分析岗位相比更偏探索与协作，结论责任仍在项目负责人。"
+                "研发支持也可能承担设计、方法开发及数据解释；项目责任与结论权限依真实分工，不一概只归负责人。"
               ]
             ]
           },
@@ -30152,8 +30221,8 @@
               {
                 "id": "education",
                 "values": [
-                  "四年制学士学位（化学与材料与药物化学等相关专业）；研究岗常要求硕士或博士；",
-                  "BLS 显示多数岗位要求四年制学士学位，部分岗位要求更高学历；",
+                  "美国典型化学或相关专业学士；部分研究岗位需要硕博和经验；具体中国岗位另核。",
+                  "美国BLS典型学士，部分研究岗位硕博及经验；不等中国统一学历或每个雇主四年学制。",
                   "部分企业要求或优先考虑有特定仪器或方法（色谱、光谱、质谱等）操作经验的人员。"
                 ]
               },
@@ -30161,14 +30230,14 @@
                 "id": "clearance",
                 "values": [
                   "企业通常要求完成安全教育与方法培训并通过考核后才可独立分析；",
-                  "涉及危险化学品与特种设备作业的岗位须按所在地规定取得相应资格；",
-                  "涉及对外检测的岗位须在机构资质与授权签字人框架内工作。"
+                  "资格按实际法域、单位和作业/设备类别核，不因接触危化品自动同一证。",
+                  "中国适用证明性检验检测活动核机构资质及授权签字范围；不覆盖所有外发数据。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "O*NET 工作风格列出创新、成就取向、求知欲、谨慎性、诚信、注重细节与可靠性七项；",
+                  "O*NET完整20项风格；细节/求知100、可靠84、创新80、谨慎78、成就71、诚信70为摘要，不是七项全清单。",
                   "基本技能中科学 78、批判性思维与阅读理解各 75、口语表达 72、数学与写作与主动倾听各 69；",
                   "工作活动以记录信息 85、分析数据 80、获取信息 78 为最高分项；可迁移技能以复杂问题解决 66 最高。"
                 ]
@@ -30297,8 +30366,8 @@
               [
                 "面试与方法知识",
                 "对常用方法原理与安全规范的理解、对异常与偏差处理的认识。",
-                "是否知道结果异常与不符合项时的复测与上报路径。",
-                "面试问答不等同于实操能力，企业通常另有实操培训与考核。"
+                "异常先保留记录并及时报告，按程序调查；复测核条件和授权，不反复挑合格值。",
+                "问答不等实操；目标雇主培训考核要求另核，本轮无中国招聘样本统计。"
               ],
               [
                 "实操或模拟",
@@ -30420,18 +30489,18 @@
             ],
             "rows": [
               [
-                "四年制学士学位（化学或相关专业）",
+                "美国典型学士学位（化学或相关专业）",
                 "多数入行者的常见起点",
-                "是求职的基础门槛，决定可进入的岗位序列",
-                "是（BLS 显示多数岗位要求四年制学士学位）",
+                "美国典型入职学历，不保证录用或决定全部岗位序列",
+                "美国典型学士；各雇主及中国实际条件另核",
                 "完成化学或材料或药物化学等相关专业学习；实验课与毕业设计是主要方法来源",
-                "中（学制四年）",
+                "投入按教育项目核，学士不一概全球四年",
                 "学位本身不等于作业资格与检测授权，也不代表可独立出具对外报告"
               ],
               [
                 "硕士或博士学位",
                 "研发岗位与高校与院所岗位",
-                "在研究型岗位上是实质条件",
+                "部分研究岗位要求；不是全部研发统一条件",
                 "视岗位类型而定",
                 "完成研究生阶段研究与论文；研究方向与岗位匹配",
                 "高（学制数年）",
@@ -30439,38 +30508,38 @@
               ],
               [
                 "企业内部安全与质量培训与岗位授权",
-                "所有实验室人员",
+                "实际单位及作业适用人员",
                 "是实际作业的前提条件",
-                "是（由企业制度规定）",
+                "依法应培训及制度授权的情形核具体法源",
                 "按企业培训与考核制度取得授权；涉及特种作业的另需取证",
-                "低到中（数天到数周）",
+                "本轮未核时长与费用，不给数天到数周通用值",
                 "授权与企业绑定，换单位后通常需要重新培训与授权"
               ],
               [
-                "特种作业与危险化学品作业资格",
-                "从事危险化学品与特种设备与受限空间等作业的人员",
+                "法定作业或设备资格（按具体类别）",
+                "依法属于相应资格类别的作业人员",
                 "在相应岗位上是实质条件",
                 "视岗位涉及的作业类别而定",
                 "按所在地主管部门规定参加培训与考核；具体条件以官方公布为准",
-                "中（培训与考核周期）",
+                "本轮未核具体资格费用及周期",
                 "作业资格按类别与地区管理，须核对有效期与作业范围，本页不代替官方条件"
               ],
               [
                 "行业认证（化学与安全与环境类）",
                 "希望证明特定方向能力的人员",
-                "部分岗位认可，属于加分项",
+                "用于发现潜在能力证明；未核雇主认可或加分效果",
                 "否",
                 "各认证机构自定报考条件与考试要求，须逐项核实",
-                "中到高（培训与考试费用）",
+                "本轮未核各认证费用与周期",
                 "行业认证不等于法定作业资格，也不替代企业授权与资质认定"
               ],
               [
                 "检验检测机构资质与授权签字人要求",
-                "对外出具检测数据的机构与人员",
+                "中国适用的证明性检测机构及签字岗位",
                 "在相应岗位上是实质条件",
-                "是（对外检测场景）",
+                "按机构、项目、报告用途及法源适用",
                 "按主管部门规定申请机构资质认定并确定授权签字人；条件以官方公布为准",
-                "高（机构与人员双重程序）",
+                "本轮未核费用或办理周期",
                 "资质与授权范围按机构与项目核定，本页不代替官方条件"
               ]
             ]
@@ -30484,9 +30553,9 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "本页把「学历与培训」「行业认证」「法定与作业资格」与「岗位授权」分列：学历决定你能进入哪些岗位序列，行业认证用于证明特定方向的能力，作业资格由法域主管部门规定，岗位授权由企业制度决定，四者不能互相替代。",
-              "美国：入门岗位不要求执照，但企业通常要求完成内部安全与质量培训并按岗位授权作业；O*NET 该职业的认证页面列出 10 项全国性认证（Approved Chemist、Chemical Hygiene Officer、Certified Professional Chemist 等），属能力证明与雇主偏好，当次未列出注册学徒制岗位。",
-              "中国大陆：涉及危险化学品与特种设备与有限空间等作业的岗位另有安全生产与特种作业管理规定；面向社会出具检测数据的机构另有检验检测机构资质认定与授权签字人要求，须按所在地主管部门与企业制度确认；本页不代替官方报考或取证条件。",
+              "学历与培训、认证、个人作业资格、机构资质及岗位授权分别核，不能互相替代；学历不是权限或收入保证。",
+              "美国O*NET列10项全国认证，仅为发现目录；未核全美各类岗位许可及雇主认可，不宣称全部化学家免执照。详情另有Apprenticeship.gov通用入口，本轮未核具体学徒岗位，不能写成全职业不存在。",
+              "中国《检验检测机构监督管理办法》第2条适用向社会出具具有证明作用报告的活动；第8、12条核授权签字人能力和技术范围，第13条原始记录与报告至少保存6年。CMA或特别资质依机构、项目及法源核，不是每位化学家个人执照或所有外发数据统一门槛。 中国安全教育及具体作业/设备资格依实际类别核，本页不代替报考条件。",
               "本页涉及的认证信息来自 O*NET 的认证发现入口，其报考条件、有效期与认可范围须由各认证机构原文核实；本页不保证任何认证在特定雇主或法域被承认。"
             ]
           },
@@ -30528,7 +30597,7 @@
           ],
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls-outlook"
+            "ch-ep2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30546,7 +30615,7 @@
           ],
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls-outlook"
+            "ch-ep2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30561,7 +30630,7 @@
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls-outlook"
+            "ch-ep2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30579,7 +30648,7 @@
           ],
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls-outlook"
+            "ch-ep2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30594,7 +30663,7 @@
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.5",
           "source_refs": [
-            "onet-industry"
+            "ch-industry"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30609,7 +30678,7 @@
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.6",
           "source_refs": [
-            "bls-outlook"
+            "ch-ep2025"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -30632,10 +30701,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 全国就业趋势页面（19-2031.00，显示 BLS 就业预测）",
+                "entity": "BLS表1.2化学家职业预测",
                 "id": "link-3",
                 "relation": "related-evidence",
-                "url": "https://www.onetonline.org/link/localtrends/19-2031.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "ILO：Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
@@ -30644,10 +30713,10 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "国家统计局《城镇单位就业人员年平均工资情况》检索入口",
+                "entity": "NBS2025行业工资表及附注",
                 "id": "link-5",
                 "relation": "related-evidence",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET-SOC 19-2031.00 职业详细资料",
@@ -30713,10 +30782,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：BLS 就业预测显示 2024—2034 年美国该职业就业增长 5%（Faster than average，快于所有职业平均），2024 年 86,800 人、2034 年预计 91,000 人，年均空缺 6,300 个，其中相当部分来自离职与退休的替补需求。（BLS 同页另给出「化学家与材料科学家」组合口径与材料科学家数值，本页不把它们当作化学家职业数值引用。）中国大陆未取得与该岗位精确对应的全国工资与就业统计口径，本页只登记缺口，不给出替代数值。"
+              "BLS表1.2的美国SOC19-2031化学家2025—2035预测：84,900→90,300人，增长6.4%，年均空缺5,900；OOH化学家分项整数为6%（快于平均）。官方净增5.5千人独立舍入，与已舍入两端之差5.4千人不同，不重算覆盖。空缺含增长及转岗、退出劳动力市场等替补需求，非在招存量、AI归因或逐年实绩。 中国精确职业就业和工资分布本轮未取得；行业工资背景另列，不代填职业预测。 合并路由保留化学家主口径；材料科学家19-2032另为8.6→9.3千、8.3%、年空缺600，组合19-2030为6.6%、年空缺6500（2025—2035）。分项和组合不能互换，均不提供AI归因。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.8",
+          "source_refs": [
+            "ch-ep2025",
+            "ch-ooh",
+            "ch-material"
+          ],
           "type": "prose"
         },
         {
@@ -30735,7 +30809,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年（预测）"
+              "2025—2035年（预测）"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.10",
@@ -30746,7 +30820,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增长 5% 属「快于所有职业平均」；预测以现有产业结构为假设，含误差，不等于逐年的实际岗位数。"
+              "美国化学家职业级增长6.4%，OOH整数6%为快于平均；预测含假设与误差，不是AI归因或逐年实绩。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.11",
@@ -30779,7 +30853,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET-SOC 19-2031.00 精确职业口径（美国）"
+              "主要统计口径：美国化学家SOC19-2031；材料科学家19-2032及组合19-2030仅并列"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.14",
@@ -30790,7 +30864,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增长 5%（2024—2034 年）"
+              "增长6.4%（2025—2035；OOH整数6%）"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.15",
@@ -30889,7 +30963,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025 年及以前已发布资料"
+              "2025全年行业工资，2026-05-15发布"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.24",
@@ -30900,7 +30974,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本条证据路由把中国大陆的精确职业工资登记为已核实不可得，本页只登记统计口径与缺口，不发布数值。"
+              "中国精确职业工资/就业缺口仍保留；NBS2025中国城镇非私营/私营制造业年平均工资113,594/76,055元，科学研究和技术服务业182,064/83,560元。四值为较宽行业背景，非化学家、化学制造或检测细行业专属工资，也非中位、起薪、到手收入或地区月薪。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.25",
@@ -30911,7 +30985,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业或较宽职业口径不能替代本职业的精确全国口径；本页不采用招聘样本或相邻岗位报价填补。"
+              "四行业均值仅作背景，不替代化学家全国职业分位或就业预测；美国行业结构不等中国分布。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.26",
@@ -30922,7 +30996,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精确职业工资口径"
+              "中国精确缺口及制造/科学技术服务工资背景"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.27",
@@ -30977,7 +31051,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于登记中国大陆的统计口径与缺口"
+              "核NBS2025表2/5及工资调查附注；不关闭精确职业缺口"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.32",
@@ -30999,10 +31073,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少工艺与装置设计、放大判断与工艺文件编制的系统训练，且通常需要相应学历与工程资格。"
+              "编辑转岗自查：核本人是否已有工艺与装置设计、放大判断与工艺文件编制的系统训练，；实际学历和资格核目标岗位。 已有经验以成果核，不预设每位化学家全缺。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.34",
+          "source_refs": [
+            "ch-adjacent-17-2041.00"
+          ],
           "type": "prose"
         },
         {
@@ -31021,7 +31098,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：大。化学工程师方向需要工程学历与设计能力，不是分析经验的自然延伸。"
+              "编辑条件估计，非成功率：转向距离：大。化学工程师方向需要工程学历与设计能力，不是分析经验的自然延伸。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.36",
@@ -31032,10 +31109,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少材料性能与选材与失效分析的系统训练与相应学历。"
+              "编辑转岗自查：核本人是否已有材料性能与选材与失效分析的系统训练与相应学历。 已有经验以成果核，不预设每位化学家全缺。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.37",
+          "source_refs": [
+            "ch-adjacent-17-2131.00"
+          ],
           "type": "prose"
         },
         {
@@ -31054,7 +31134,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。材料工程师方向需要材料学训练与方案设计能力。"
+              "编辑条件估计，非成功率：转向距离：中等。材料工程师方向需要材料学训练与方案设计能力。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.39",
@@ -31065,10 +31145,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少流程与效率与人机与排程与成本方面的系统训练。"
+              "编辑转岗自查：核本人是否已有流程与效率与人机与排程与成本方面的系统训练。 已有经验以成果核，不预设每位化学家全缺。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.40",
+          "source_refs": [
+            "ch-adjacent-17-2112.00"
+          ],
           "type": "prose"
         },
         {
@@ -31087,7 +31170,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。工业工程师方向的对象是流程与效率而不是实验室方法。"
+              "编辑条件估计，非成功率：转向距离：中等。工业工程师方向的对象是流程与效率而不是实验室方法。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.42",
@@ -31098,10 +31181,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少生命体系分子机制方面的专门训练与研究积累。"
+              "编辑转岗自查：核本人是否已有生命体系分子机制方面的专门训练与研究积累。 已有经验以成果核，不预设每位化学家全缺。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.43",
+          "source_refs": [
+            "ch-adjacent-19-1021.00"
+          ],
           "type": "prose"
         },
         {
@@ -31120,7 +31206,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。生物化学与生物物理方向需要专门的学科训练与研究方向匹配。"
+              "编辑条件估计，非成功率：转向距离：中等。生物化学与生物物理方向需要专门的学科训练与研究方向匹配。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.45",
@@ -31131,10 +31217,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少团队与预算与项目与绩效管理的经验。"
+              "编辑转岗自查：核本人是否已有团队与预算与项目与绩效管理的经验。 已有经验以成果核，不预设每位化学家全缺。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.46",
+          "source_refs": [
+            "ch-adjacent-11-9121.00"
+          ],
           "type": "prose"
         },
         {
@@ -31153,7 +31242,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。自然科学经理方向以管理与资源配置为主，通常不再亲自做实验。"
+              "编辑条件估计中等：自然科学经理组织研究、团队和资源，也可能参与科研，不能一概称不再亲自实验；能力差距依本人管理经历核。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.48",
@@ -31164,10 +31253,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少工程器械与材料开发与验证方面的系统训练。"
+              "编辑转岗自查：核本人是否已有工程器械与材料开发与验证方面的系统训练。 已有经验以成果核，不预设每位化学家全缺。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.49",
+          "source_refs": [
+            "ch-adjacent-17-2031.00"
+          ],
           "type": "prose"
         },
         {
@@ -31186,7 +31278,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较大。生物医学工程方向需要工程学历与产品开发与验证经验。"
+              "编辑条件估计，非成功率：转向距离：较大。生物医学工程方向需要工程学历与产品开发与验证经验。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.51",
@@ -31197,10 +31289,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少材料科学的研究训练与材料表征方向的深度积累。"
+              "编辑转岗自查：核本人是否已有材料科学的研究训练与材料表征方向的深度积累。 已有经验以成果核，不预设每位化学家全缺。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.52",
+          "source_refs": [
+            "ch-adjacent-19-2032.00"
+          ],
           "type": "prose"
         },
         {
@@ -31219,7 +31314,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：中等。材料科学家方向更偏研究与方法开发，通常需要更高学历。"
+              "编辑条件估计中等：材料科学家研究材料结构、性质和新材料；学历及方法要求查具体岗位，不断言所有岗位都需要比化学家更高学历。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.54",
@@ -31230,10 +31325,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "缺少独立研究方法开发与实验室能力体系建设的系统训练。"
+              "编辑转岗自查：化学技术员重实验支持、分析、设备与记录，也可参与配方、研究、中试或新工艺。核执行及现场能力和具体分工，不把目标误写成缺独立研究与体系建设。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.55",
+          "source_refs": [
+            "ch-adjacent-19-4031.00"
+          ],
           "type": "prose"
         },
         {
@@ -31252,7 +31350,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向距离：较小。化学技术员方向与分析岗位的能力高度重叠，但学历与授权层级不同。"
+              "编辑条件估计较小：共享仪器、分析与记录经验；具体职责、监督、招聘及权限查岗位，不能只凭名称断定学历层级或自动转岗。"
             ]
           },
           "id": "chemists-and-materials-scientists.market-signals.market-signal-card.57",
@@ -31395,7 +31493,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容由费马测试职业内容编辑组按公开官方来源整理，职业身份、任务与工作情境采用 O*NET-SOC 19-2031.00，美国工资采用 BLS OEWS（2025 年 5 月），行业中位数采用 BLS Occupational Outlook Handbook（化学家分项），就业与展望采用 BLS 就业预测（2024—2034 年，经 O*NET 页面显示）；编辑归纳与虚构练习单独标注。"
+              "本轮由费马测试核九模块：O*NET19-2031任务、情境及技术，OEWS2025工资，BLS表1.2的2025—2035预测；中国行业工资背景及检验检测和安全法律分别标范围。编辑用途、适配及转岗距离不充作实测。 合并路由身份保持，19-2031为主；新增核19-2032准备/兴趣/任务与分项预测，并明确19-2030组合边界。"
             ]
           },
           "id": "chemists-and-materials-scientists.sources.source-card.1",
@@ -31406,7 +31504,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源为美国 O*NET OnLine 与 U.S. Bureau of Labor Statistics 的公开页面，以及国家统计局与人力资源社会保障部的公开信息入口。所有数值均保留其职业、地域、期间、单位与统计口径；来源清单见页面「资料来源」。"
+              "本轮使用O*NET详情/工资/行业/技术/认证目录、BLS职业预测及方法、NBS2025表2/5、SAMR具体法规和OSHA实验室标准。原17来源及21facts为保护范围外消费者保留；九模块现行结论用本轮ch-*来源/事实和正文，旧FAQ、快速决策及独立方向冲突留待其授权修订。"
             ]
           },
           "id": "chemists-and-materials-scientists.sources.source-card.2",
@@ -31417,7 +31515,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页内容检索与更新于 2026 年 9 月。"
+              "本轮九模块检索修订：2026-10-09；范围外内容未同步更新，未生成HTML或完整页面验收。"
             ]
           },
           "id": "chemists-and-materials-scientists.sources.source-card.3",
@@ -31772,6 +31870,349 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET19-2031职业详情",
+                  "12核心任务、57情境、33知识、52能力、20风格、16软件类别、IRC95/78/64；问卷非个人保证"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "ch-details",
+                "limitation": "12核心任务、57情境、33知识、52能力、20风格、16软件类别、IRC95/78/64；问卷非个人保证",
+                "market": "美国",
+                "name": "O*NET19-2031职业详情",
+                "period": "2026更新；2025行业及招聘",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/19-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET19-2031全国工资分位",
+                  "年薪五分位58460/69460/91240/125550/160830；时薪28.11/33.39/43.87/60.36/77.32；受雇含全兼职非自雇及个人起薪"
+                ],
+                "evidence_type": "official wage statistics",
+                "id": "ch-wages",
+                "limitation": "年薪五分位58460/69460/91240/125550/160830；时薪28.11/33.39/43.87/60.36/77.32；受雇含全兼职非自雇及个人起薪",
+                "market": "美国",
+                "name": "O*NET19-2031全国工资分位",
+                "period": "OEWS2025年5月",
+                "publisher": "O*NET OnLine / BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/19-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS表1.2化学家职业预测",
+                  "SOC19-2031：84.9→90.3千、官方净5.5千独立舍入、6.4%、年均空缺5.9千、自雇0.3%；典型学士、经验None、OJTNone不等无培训"
+                ],
+                "evidence_type": "official employment projections",
+                "id": "ch-ep2025",
+                "limitation": "SOC19-2031：84.9→90.3千、官方净5.5千独立舍入、6.4%、年均空缺5.9千、自雇0.3%；典型学士、经验None、OJTNone不等无培训",
+                "market": "美国",
+                "name": "BLS表1.2化学家职业预测",
+                "period": "2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS OOH化学家分项与父级边界",
+                  "化学家中位91240、5行业工资；化学制造就业33%；父级19-2030组合95060/7%/6500不移植，部分研究硕博及经验"
+                ],
+                "evidence_type": "official occupation handbook",
+                "id": "ch-ooh",
+                "limitation": "化学家中位91240、5行业工资；化学制造就业33%；父级19-2030组合95060/7%/6500不移植，部分研究硕博及经验",
+                "market": "美国",
+                "name": "BLS OOH化学家分项与父级边界",
+                "period": "2025工资及就业；2025—2035预测",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/chemists-and-materials-scientists.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "NBS2025城镇单位工资表2/5和附注",
+                  "制造非私营113594/私营76055、科学研究技术服务182064/83560；5人以上法人及规定视同法人，含税行业均值非化学家、细行业、中位或到手"
+                ],
+                "evidence_type": "official industry wage statistics",
+                "id": "ch-nbs2025",
+                "limitation": "制造非私营113594/私营76055、科学研究技术服务182064/83560；5人以上法人及规定视同法人，含税行业均值非化学家、细行业、中位或到手",
+                "market": "中国大陆",
+                "name": "NBS2025城镇单位工资表2/5和附注",
+                "period": "2025全年；2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "OEWS技术说明：定义与覆盖",
+                  "受雇全兼职；正常工时税前工资，排除自雇、加班和班次差额等；2080标准折算不等个人实际工时"
+                ],
+                "evidence_type": "official statistical methodology",
+                "id": "ch-methods",
+                "limitation": "受雇全兼职；正常工时税前工资，排除自雇、加班和班次差额等；2080标准折算不等个人实际工时",
+                "market": "美国",
+                "name": "OEWS技术说明：定义与覆盖",
+                "period": "方法说明非数据期",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/current/oes_tec.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET19-2031行业结构",
+                  "制造41%、专业科学技术服务29%、政府12%、其他18%；非中国职业分布、个人收入或实验操作程序"
+                ],
+                "evidence_type": "official employment industry distribution",
+                "id": "ch-industry",
+                "limitation": "制造41%、专业科学技术服务29%、政府12%、其他18%；非中国职业分布、个人收入或实验操作程序",
+                "market": "美国",
+                "name": "O*NET19-2031行业结构",
+                "period": "2025",
+                "publisher": "O*NET OnLine / BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/19-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET19-2031热门及In Demand技术",
+                  "15Hot；Excel11/Office9/PowerPoint7为3项In Demand；Word3/SQL2/SAP2/R1，部分低于1或未提供；非完整16类软件或AI采用率"
+                ],
+                "evidence_type": "official presentation of job posting signals",
+                "id": "ch-hot",
+                "limitation": "15Hot；Excel11/Office9/PowerPoint7为3项In Demand；Word3/SQL2/SAP2/R1，部分低于1或未提供；非完整16类软件或AI采用率",
+                "market": "美国",
+                "name": "O*NET19-2031热门及In Demand技术",
+                "period": "2025美国招聘样本",
+                "publisher": "O*NET OnLine / Lightcast",
+                "scope": "market_signal",
+                "url": "https://www.onetonline.org/link/hot_tech/19-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET19-2031全国认证发现目录",
+                  "列10项；不证明法定许可、雇主认可、加分、费用、报考或续证条件；发行机构原文未取得"
+                ],
+                "evidence_type": "credential discovery directory",
+                "id": "ch-cert",
+                "limitation": "列10项；不证明法定许可、雇主认可、加分、费用、报考或续证条件；发行机构原文未取得",
+                "market": "美国",
+                "name": "O*NET19-2031全国认证发现目录",
+                "period": "2026-10-09访问",
+                "publisher": "O*NET OnLine / CareerOneStop",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/localcert/19-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "检验检测机构监督管理办法",
+                  "第2活动为对社会出具证明性报告，8/12签字能力范围、13记录报告至少6年；不覆盖全部研发外发数据或化学家个人许可"
+                ],
+                "evidence_type": "official departmental regulation",
+                "id": "ch-supervision",
+                "limitation": "第2活动为对社会出具证明性报告，8/12签字能力范围、13记录报告至少6年；不覆盖全部研发外发数据或化学家个人许可",
+                "market": "中国大陆",
+                "name": "检验检测机构监督管理办法",
+                "period": "2025修订现行原文",
+                "publisher": "国家市场监督管理总局",
+                "scope": "jurisdictional",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2025/art_bff8f35d8f114acca7643bddd77e9505.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "OSHA1910.1450实验室危险化学品标准",
+                  "(a)/(b)实验室使用及非生产/非模拟生产边界；(e)/(f)化学卫生计划、防护及培训，非全球统一设施清单"
+                ],
+                "evidence_type": "official safety regulation",
+                "id": "ch-osha",
+                "limitation": "(a)/(b)实验室使用及非生产/非模拟生产边界；(e)/(f)化学卫生计划、防护及培训，非全球统一设施清单",
+                "market": "美国",
+                "name": "OSHA1910.1450实验室危险化学品标准",
+                "period": "现行公开原文非统计期",
+                "publisher": "OSHA",
+                "scope": "jurisdictional",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.1450"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "安全生产法：培训资格与紧急停止撤离",
+                  "27/28/30/33及55/57—59：特定单位安全人员、教育、类别资格、防护；紧急撤离报告不待额外批准，非全化学家注册安全工程师"
+                ],
+                "evidence_type": "official law",
+                "id": "ch-safety",
+                "limitation": "27/28/30/33及55/57—59：特定单位安全人员、教育、类别资格、防护；紧急撤离报告不待额外批准，非全化学家注册安全工程师",
+                "market": "中国大陆",
+                "name": "安全生产法：培训资格与紧急停止撤离",
+                "period": "2021修订现行原文",
+                "publisher": "国家市场监督管理总局转载法律原文",
+                "scope": "jurisdictional",
+                "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "NIST AI RMF1.0",
+                  "自愿治理参考，无职业采用、可靠性、效果或法定签署权限"
+                ],
+                "evidence_type": "voluntary risk management framework",
+                "id": "ch-nist",
+                "limitation": "自愿治理参考，无职业采用、可靠性、效果或法定签署权限",
+                "market": "美国/框架参考",
+                "name": "NIST AI RMF1.0",
+                "period": "2023版本",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "职业定义及报告职称"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "ch-adjacent-17-2041.00",
+                "limitation": "本轮实际读职业定义核对比较对象；转岗差距与距离为个人条件自查，非实测成功率或资格授权",
+                "market": "美国",
+                "name": "O*NET相邻职业职责 17-2041.00",
+                "period": "2026更新；本轮访问",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/17-2041.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "职业定义及报告职称"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "ch-adjacent-17-2131.00",
+                "limitation": "本轮实际读职业定义核对比较对象；转岗差距与距离为个人条件自查，非实测成功率或资格授权",
+                "market": "美国",
+                "name": "O*NET相邻职业职责 17-2131.00",
+                "period": "2026更新；本轮访问",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/17-2131.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "职业定义及报告职称"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "ch-adjacent-11-9121.00",
+                "limitation": "本轮实际读职业定义核对比较对象；转岗差距与距离为个人条件自查，非实测成功率或资格授权",
+                "market": "美国",
+                "name": "O*NET相邻职业职责 11-9121.00",
+                "period": "2026更新；本轮访问",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/11-9121.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "职业定义及报告职称"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "ch-adjacent-19-1021.00",
+                "limitation": "本轮实际读职业定义核对比较对象；转岗差距与距离为个人条件自查，非实测成功率或资格授权",
+                "market": "美国",
+                "name": "O*NET相邻职业职责 19-1021.00",
+                "period": "2026更新；本轮访问",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/19-1021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "职业定义及报告职称"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "ch-adjacent-17-2112.00",
+                "limitation": "本轮实际读职业定义核对比较对象；转岗差距与距离为个人条件自查，非实测成功率或资格授权",
+                "market": "美国",
+                "name": "O*NET相邻职业职责 17-2112.00",
+                "period": "2026更新；本轮访问",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/17-2112.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "职业定义及报告职称"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "ch-adjacent-17-2031.00",
+                "limitation": "本轮实际读职业定义核对比较对象；转岗差距与距离为个人条件自查，非实测成功率或资格授权",
+                "market": "美国",
+                "name": "O*NET相邻职业职责 17-2031.00",
+                "period": "2026更新；本轮访问",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/17-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "职业定义及报告职称"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "ch-adjacent-19-2032.00",
+                "limitation": "本轮实际读职业定义核对比较对象；转岗差距与距离为个人条件自查，非实测成功率或资格授权",
+                "market": "美国",
+                "name": "O*NET相邻职业职责 19-2032.00",
+                "period": "2026更新；本轮访问",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/19-2032.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "职业定义及报告职称"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "ch-adjacent-19-4031.00",
+                "limitation": "本轮实际读职业定义核对比较对象；转岗差距与距离为个人条件自查，非实测成功率或资格授权",
+                "market": "美国",
+                "name": "O*NET相邻职业职责 19-4031.00",
+                "period": "2026更新；本轮访问",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/19-4031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "材料定义、任务、准备、兴趣和行业"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "ch-material",
+                "limitation": "JobZone4/SVP7至<8，IRC93/80/53；17任务15Core/1Supplemental/1New未提供分值；2025就业8600、工资117790/56.63，2025—2035空缺600、43%专业科学技术服务/35%制造；非化学家值",
+                "market": "美国",
+                "name": "O*NET19-2032材料科学家并列原文",
+                "period": "2026更新；2025数据",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/19-2032.00"
               }
             ]
           },
@@ -32661,7 +33102,7 @@
               "entry": "link-17",
               "field": "url"
             },
-            "问题": "AI 能签署设计或放行文件吗？"
+            "问题": "AI能替代检测报告签署或产品放行责任吗？"
           },
           {
             "回答": {
@@ -33223,6 +33664,18 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2025/art_bff8f35d8f114acca7643bddd77e9505.html",
+            "id": "ch-supervision",
+            "label": "中国检验检测机构监督管理办法",
+            "scope": "活动、机构及签字范围"
+          },
+          {
+            "href": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html",
+            "id": "ch-safety",
+            "label": "中国安全生产法",
+            "scope": "特定单位、作业类别及安全教育"
           }
         ],
         "tracks": [
@@ -34016,7 +34469,8 @@
             },
             "evidence_refs": [
               "onet",
-              "onet-context"
+              "onet-context",
+              "ch-supervision"
             ],
             "id": "data-record-integrity",
             "mitigation": {
@@ -34048,7 +34502,9 @@
             },
             "evidence_refs": [
               "onet",
-              "onet-context"
+              "onet-context",
+              "ch-osha",
+              "ch-safety"
             ],
             "id": "chemical-lab-safety",
             "mitigation": {
@@ -34111,8 +34567,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "onet-industry"
+              "ch-supervision",
+              "editorial"
             ],
             "id": "controlled-information",
             "mitigation": {
@@ -34278,6 +34734,30 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2025/art_bff8f35d8f114acca7643bddd77e9505.html",
+            "id": "ch-supervision",
+            "label": "中国检验检测机构监督管理办法",
+            "scope": "监督办法第2条限定证明性检验检测活动；8/12签字能力、13记录、16国家秘密和商业秘密义务；不扩及所有内部研发资料。"
+          },
+          {
+            "href": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.1450",
+            "id": "ch-osha",
+            "label": "美国OSHA实验室标准1910.1450",
+            "scope": "定义内实验室使用，非生产或模拟生产"
+          },
+          {
+            "href": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2021/art_d8ec5ba871464b49bfd0a0275bb57756.html",
+            "id": "ch-safety",
+            "label": "中国安全生产法",
+            "scope": "培训、类别资格及紧急停止撤离"
+          },
+          {
+            "href": "#career-visual-group-risk",
+            "id": "editorial",
+            "label": "编辑核对建议",
+            "scope": "其他受控资料、合同和外传权限按具体单位/数据核，非行业份额的法律推论。"
           }
         ]
       },
@@ -34630,8 +35110,8 @@
             "type": "prose"
           },
           "fact_refs": [
-            "cn-industry-science-tech-2024",
-            "cn-industry-manufacturing-2024",
+            "ch-cn-scitech2025",
+            "ch-cn-manufacturing2025",
             "cn-professional-technical-2024",
             "cn-urban-nonprivate-2024"
           ],
@@ -34674,7 +35154,7 @@
         },
         "bls_table": [
           {
-            "fact_ref": "us-wage-low10-2025",
+            "fact_ref": "ch-primary-us-wage-low10-2025",
             "指标": "薪资 · 10 分位",
             "数值": {
               "$item": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.9",
@@ -34690,7 +35170,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-p25-2025",
+            "fact_ref": "ch-primary-us-wage-p25-2025",
             "指标": "薪资 · 25 分位",
             "数值": {
               "$item": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.11",
@@ -34706,7 +35186,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-2025",
+            "fact_ref": "ch-primary-us-wage-2025",
             "指标": "薪资 · 中位数",
             "数值": {
               "$item": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.13",
@@ -34722,7 +35202,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-p75-2025",
+            "fact_ref": "ch-primary-us-wage-p75-2025",
             "指标": "薪资 · 75 分位",
             "数值": {
               "$item": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.15",
@@ -34738,7 +35218,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-high10-2025",
+            "fact_ref": "ch-primary-us-wage-high10-2025",
             "指标": "薪资 · 90 分位",
             "数值": {
               "$item": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.17",
@@ -34769,7 +35249,7 @@
             }
           },
           {
-            "fact_ref": "us-growth-2025-2035",
+            "fact_ref": "ch-growth2025",
             "指标": "就业 · 增长率",
             "数值": {
               "$item": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.21",
@@ -34785,7 +35265,7 @@
             }
           },
           {
-            "fact_ref": "us-openings-2025-2035",
+            "fact_ref": "ch-openings2025",
             "指标": "就业 · 年均职位空缺",
             "数值": {
               "$item": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.23",
@@ -34864,15 +35344,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "美国化学家与材料科学家（合并职业）工资与就业数据？",
+        "heading": "美国化学家分项工资与就业（合并路由主口径）",
         "industry_heading": "不同行业的美国工资差多少？",
-        "industry_period": {
-          "$fact": "us-wage-2025",
-          "field": "period"
-        },
+        "industry_period": "2025年5月（BLS OOH化学家行业工资）",
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "ch-primary-us-industry-wage-aerospace-mfg-2025",
             "industry": {
               "$item": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -34893,7 +35370,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "ch-primary-us-industry-wage-engineering-services-2025",
             "industry": {
               "$item": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -34914,7 +35391,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "ch-primary-us-industry-wage-rd-2025",
             "industry": {
               "$item": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -34935,7 +35412,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "ch-govwages2025",
             "industry": {
               "$item": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -34956,7 +35433,7 @@
             }
           }
         ],
-        "industry_value_label": "该行业内本职业工资中位数",
+        "industry_value_label": "化学家分项的行业工资中位数",
         "interpretation_heading": "美国化学家与材料科学家（合并职业）工资怎么理解？",
         "interpretation_rows": [
           {
@@ -35003,20 +35480,17 @@
           "type": "prose"
         },
         "outlook_heading": "美国就业前景",
-        "outlook_period": {
-          "$fact": "us-growth-2025-2035",
-          "field": "period"
-        },
+        "outlook_period": "2025—2035年（BLS职业级预测）",
         "wage_column_labels": [
           "工资统计位置",
           "年工资参考",
           "换算边界",
           "怎样理解这个位置"
         ],
-        "wage_heading": "美国工资分布",
+        "wage_heading": "美国化学家19-2031工资分布",
         "wage_tiers": [
           {
-            "equivalent": "官方折算，非个人月收入",
+            "equivalent": "年工资统计，非个人月收入",
             "interpretation": {
               "$item": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
@@ -35025,7 +35499,7 @@
             },
             "label": "第 10 百分位",
             "value": {
-              "$fact": "us-wage-low10-2025",
+              "$fact": "ch-primary-us-wage-low10-2025",
               "field": "display_value"
             }
           },
@@ -35039,12 +35513,12 @@
             },
             "label": "第 50 百分位",
             "value": {
-              "$fact": "us-wage-2025",
+              "$fact": "ch-primary-us-wage-2025",
               "field": "display_value"
             }
           },
           {
-            "equivalent": "官方折算，非个人实发工资",
+            "equivalent": "年工资统计，非个人实发收入",
             "interpretation": {
               "$item": "chemists-and-materials-scientists.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
@@ -35053,7 +35527,7 @@
             },
             "label": "第 90 百分位",
             "value": {
-              "$fact": "us-wage-high10-2025",
+              "$fact": "ch-primary-us-wage-high10-2025",
               "field": "display_value"
             }
           }
@@ -35645,7 +36119,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 工资（2025 年 5 月）与就业预测（2024—2034 年）",
+            "label": "BLS工资（2025年5月）与化学家预测（2025—2035）",
             "secondary_value": null,
             "value": {
               "$item": "chemists-and-materials-scientists.profile.onet-structured-fields-block.2",
@@ -35656,7 +36130,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中国大陆统计口径与缺口（本条路由不发布数值）",
+            "label": "中国精确职业工资缺口与行业均值背景",
             "secondary_value": null,
             "value": {
               "$item": "chemists-and-materials-scientists.profile.onet-structured-fields-block.3",
@@ -36951,6 +37425,252 @@
         "source_refs": [
           "onet-localwages"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "84,900人（2025）",
+        "fact_id": "ch-employment2025",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "化学家SOC19-2031",
+        "period": "2025",
+        "source_refs": [
+          "ch-ep2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "90,300人（2035预计）",
+        "fact_id": "ch-employment2035",
+        "market": "美国",
+        "measure": "预测就业",
+        "occupation_scope": "化学家SOC19-2031",
+        "period": "2035预测",
+        "source_refs": [
+          "ch-ep2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "增长6.4%（OOH整数6%，快于平均）",
+        "fact_id": "ch-growth2025",
+        "market": "美国",
+        "measure": "增长率",
+        "occupation_scope": "化学家SOC19-2031",
+        "period": "2025—2035预测",
+        "source_refs": [
+          "ch-ep2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "官方净增约5,500人（独立舍入）",
+        "fact_id": "ch-change2025",
+        "market": "美国",
+        "measure": "净就业变化",
+        "occupation_scope": "化学家SOC19-2031",
+        "period": "2025—2035预测",
+        "source_refs": [
+          "ch-ep2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约5,900个/年",
+        "fact_id": "ch-openings2025",
+        "market": "美国",
+        "measure": "年均空缺流量",
+        "occupation_scope": "化学家SOC19-2031",
+        "period": "2025—2035预测",
+        "source_refs": [
+          "ch-ep2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "非私营113,594/私营76,055元/年（制造行业均值）",
+        "fact_id": "ch-cn-manufacturing2025",
+        "market": "中国大陆",
+        "measure": "单位就业人员年平均工资",
+        "occupation_scope": "制造业全部职业",
+        "period": "2025全年",
+        "source_refs": [
+          "ch-nbs2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "非私营182,064/私营83,560元/年（科学技术服务行业均值）",
+        "fact_id": "ch-cn-scitech2025",
+        "market": "中国大陆",
+        "measure": "单位就业人员年平均工资",
+        "occupation_scope": "科学研究和技术服务全部职业",
+        "period": "2025全年",
+        "source_refs": [
+          "ch-nbs2025"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "联邦137,720/州地方81,830美元/年（两类行业中位）",
+        "fact_id": "ch-govwages2025",
+        "market": "美国",
+        "measure": "行业工资中位并列，非平均或合并中位",
+        "occupation_scope": "化学家；联邦不邮政/州地方不教育医院",
+        "period": "2025年5月",
+        "source_refs": [
+          "ch-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET-SOC 19-2031.00",
+        "fact_id": "ch-primary-occupation-identity",
+        "market": "美国",
+        "measure": "官方职业代码（本页身份口径）",
+        "occupation_scope": "化学家SOC19-2031（本合并路由主口径，非19-2030合计）",
+        "period": "2026-10-09核职业身份",
+        "source_refs": [
+          "ch-details"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "91,240美元/年（中位数）",
+        "fact_id": "ch-primary-us-wage-2025",
+        "market": "美国",
+        "measure": "BLS OEWS 全国工资中位数（受雇工资薪金岗位）",
+        "occupation_scope": "化学家SOC19-2031（本合并路由主口径，非19-2030合计）",
+        "period": "2025年5月",
+        "source_refs": [
+          "ch-wages",
+          "ch-methods"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "43.87美元/时（中位数）",
+        "fact_id": "ch-primary-us-wage-hourly-2025",
+        "market": "美国",
+        "measure": "BLS OEWS 全国时薪中位数",
+        "occupation_scope": "化学家SOC19-2031（本合并路由主口径，非19-2030合计）",
+        "period": "2025年5月",
+        "source_refs": [
+          "ch-wages",
+          "ch-methods"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "58,460美元/年（第 10 分位）",
+        "fact_id": "ch-primary-us-wage-low10-2025",
+        "market": "美国",
+        "measure": "BLS OEWS 全国工资分位（统计位置）",
+        "occupation_scope": "化学家SOC19-2031（本合并路由主口径，非19-2030合计）",
+        "period": "2025年5月",
+        "source_refs": [
+          "ch-wages",
+          "ch-methods"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "160,830美元/年（第 90 分位）",
+        "fact_id": "ch-primary-us-wage-high10-2025",
+        "market": "美国",
+        "measure": "BLS OEWS 全国工资分位（统计位置）",
+        "occupation_scope": "化学家SOC19-2031（本合并路由主口径，非19-2030合计）",
+        "period": "2025年5月",
+        "source_refs": [
+          "ch-wages",
+          "ch-methods"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "化学制造行业工资中位数 88,890 美元/年（2025 年 5 月，BLS OOH 化学家分项）",
+        "fact_id": "ch-primary-us-industry-wage-aerospace-mfg-2025",
+        "market": "美国",
+        "measure": "行业中位数（BLS OOH 化学家分项）",
+        "occupation_scope": "化学家SOC19-2031（本合并路由主口径，非19-2030合计）",
+        "period": "2025年5月",
+        "source_refs": [
+          "ch-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "检测实验室与服务行业工资中位数 66,140 美元/年（2025 年 5 月，BLS OOH 化学家分项）",
+        "fact_id": "ch-primary-us-industry-wage-engineering-services-2025",
+        "market": "美国",
+        "measure": "行业中位数（BLS OOH 化学家分项）",
+        "occupation_scope": "化学家SOC19-2031（本合并路由主口径，非19-2030合计）",
+        "period": "2025年5月",
+        "source_refs": [
+          "ch-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "联邦政府（不含邮政）行业工资中位数 137,720 美元/年（2025 年 5 月，BLS OOH 化学家分项）",
+        "fact_id": "ch-primary-us-industry-wage-federal-2025",
+        "market": "美国",
+        "measure": "行业中位数（BLS OOH 化学家分项）",
+        "occupation_scope": "化学家SOC19-2031（本合并路由主口径，非19-2030合计）",
+        "period": "2025年5月",
+        "source_refs": [
+          "ch-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "科学研究与开发服务行业工资中位数 105,930 美元/年（2025 年 5 月，BLS OOH 化学家分项）",
+        "fact_id": "ch-primary-us-industry-wage-rd-2025",
+        "market": "美国",
+        "measure": "行业中位数（BLS OOH 化学家分项）",
+        "occupation_scope": "化学家SOC19-2031（本合并路由主口径，非19-2030合计）",
+        "period": "2025年5月",
+        "source_refs": [
+          "ch-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "州与地方政府（不含教育与医院）行业工资中位数 81,830 美元/年（2025 年 5 月，BLS OOH 化学家分项）",
+        "fact_id": "ch-primary-us-industry-wage-instruments-2025",
+        "market": "美国",
+        "measure": "行业中位数（BLS OOH 化学家分项）",
+        "occupation_scope": "化学家SOC19-2031（本合并路由主口径，非19-2030合计）",
+        "period": "2025年5月",
+        "source_refs": [
+          "ch-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "69,460美元/年（第 25 分位）",
+        "fact_id": "ch-primary-us-wage-p25-2025",
+        "market": "美国",
+        "measure": "BLS OEWS 全国工资分位（统计位置）",
+        "occupation_scope": "化学家SOC19-2031（本合并路由主口径，非19-2030合计）",
+        "period": "2025年5月",
+        "source_refs": [
+          "ch-wages",
+          "ch-methods"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "125,550美元/年（第 75 分位）",
+        "fact_id": "ch-primary-us-wage-p75-2025",
+        "market": "美国",
+        "measure": "BLS OEWS 全国工资分位（统计位置）",
+        "occupation_scope": "化学家SOC19-2031（本合并路由主口径，非19-2030合计）",
+        "period": "2025年5月",
+        "source_refs": [
+          "ch-wages",
+          "ch-methods"
+        ]
       }
     ]
   },
@@ -36959,7 +37679,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "RIASEC · IRC",
@@ -37010,7 +37730,7 @@
       "text": "化学家与材料科学家（合并职业）"
     }
   },
-  "source_content_sha256": "cf5b71f23dbfd4a9282510a054a50ed79d295f91c2c98f008a2ea0b037069e2e",
+  "source_content_sha256": "ccfb89eb214962e3a37b8e5471fadf49b5b5f41e874f494d33ecb127318290cc",
   "subject": {
     "canonical_slug": "chemists-and-materials-scientists",
     "name": "化学家与材料科学家（合并职业）",

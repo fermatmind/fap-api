@@ -7312,7 +7312,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "完整工作流程：核对工单与场地条件 → 估算用料并规划工序 → 平整并固定基础与单元 → 封闭模块开口 → 连接水电气等管线并测试 → 安装门窗五金与器具 → 检查测试运行状态 → 修复缺陷并进行收尾交接。"
+              "工作流程按工单区分运输准备与现场安装：先核房屋类型、制造商说明、场地与许可 → 编部件/工序计划 → 按适用方案就位、支承与锚固 → 在授权范围内连接系统、检查并记录 → 处理缺陷和交接。ONet的模块开口封闭任务用于运输前保护，不把它写成现场安装的固定下一工序；电气与燃气等作业另核执行者资格。"
             ]
           },
           "id": "manufactured-building-and-mobile-home-installers.profile.responsibilities-block.4",
@@ -7326,12 +7326,14 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "关键判断：场地与基础是否满足就位与固定要求、哪些工作须由持证人员完成、管线连接与测试是否合格、结构框架损伤如何修复，以及在天气或安全条件不满足时是否暂停作业。"
+              "关键判断：先识别适用的房屋和安装制度，再核制造商说明、土壤/基础与锚固方案、许可及执行者授权；现场条件不符时暂停移交，不自行更改结构设计。管线连接和测试按实际规范由适格人员确认。"
             ]
           },
           "id": "manufactured-building-and-mobile-home-installers.profile.work-context-block.5",
           "source_refs": [
-            "onet-context"
+            "onet-context",
+            "hud-install-resources",
+            "ecfr-install-standards"
           ],
           "type": "prose"
         },
@@ -7340,7 +7342,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "环境与节奏：以业主场地、移动房屋园区和户外作业为主，多在无环境控制的室内或不避风雨的场地；需长时间站立、弯腰扭身与跪蹲爬行，接触危险设备并有高处作业，多数一周工作超过 40 小时，受天气与工期影响。"
+              "环境与节奏：ONet调查显示长时间站立、弯腰/扭身与跪蹲动作常见，危险设备接触较频繁，多数受访者一周超过40小时；具体室内外、天气和高处负荷按岗位核查，不把全部安装岗位视为同一场地。"
             ]
           },
           "id": "manufactured-building-and-mobile-home-installers.profile.work-context-block.6",
@@ -7543,7 +7545,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "排班与工单调度、部件清单与用料估算、安装说明检索、测量与记录整理等工具可辅助安装工规划工序、核对部件并生成记录草稿；但单元的就位固定、封闭、管线连接与测试、结构修复与安全作业是现场手工与判断，工具不能替代对场地、结构与接口状态的确认。"
+              "编辑任务假设：工具可能辅助虚构工单、部件清单和记录草稿；普通邮件、浏览器或电子表格不等于生成式AI。估算及安装说明需核原文件版本和现场条件；未取得本职业采用率或岗位结果，AI输出不能替代锚固设计、管线测试或安装验收。"
             ]
           },
           "id": "manufactured-building-and-mobile-home-installers.ai-impact.ai-impact-table.2",
@@ -7571,7 +7573,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不同环节受影响不同：工单调度、清单与用料估算、记录整理更易被工具辅助，但就位固定、封闭、管线连接与测试、结构修复仍由人负责。"
+              "编辑比较：信息检索与记录可能被辅助，能否采用依赖文件权限、版本与复核；现场固定、系统连接和验收不能由文本输出代替。"
             ]
           },
           "id": "manufactured-building-and-mobile-home-installers.ai-impact.ai-impact-table.4",
@@ -7613,7 +7615,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议：工单调度、清单与用料估算、记录整理可由工具辅助；当前资料不证明机构普遍采用这些系统。"
+              "编辑假设：清单或记录草稿可能获得辅助，须用原工单、说明与图纸复核；不由软件技能清单推导AI采用。"
             ]
           },
           "id": "manufactured-building-and-mobile-home-installers.ai-impact.ai-impact-table.7",
@@ -7663,7 +7665,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径说明：国家统计局 2025 年建筑业就业人员年平均工资，城镇非私营单位为 {{fact:cn-construction-nonprivate-wage}}、城镇私营单位为 {{fact:cn-construction-private-wage}}；全国城镇非私营单位合计为 {{fact:cn-national-nonprivate-wage}}。均为行业口径，不等于本职业中位数或起薪。"
+              "口径说明：国家统计局2025建筑业单位年平均工资，非私营{{fact:cn-construction-nonprivate-wage}}、私营{{fact:cn-construction-private-wage}}；全国非私营{{fact:cn-national-nonprivate-wage}}。仅当实际雇主属于该行业时作背景，不证明所有安装工主要归此门类，也不代表职业中位数或个体经营收入。"
             ]
           },
           "id": "manufactured-building-and-mobile-home-installers.china-salary.career-snapshot-primary-locale.2",
@@ -7730,7 +7732,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 该页显示 2025 年 BLS OEWS 年薪中位数为 45,990 美元（约 22.11 美元/小时）；就业方面 2024 年约 3,100 人、2024—2034 年预计高于平均（Faster than average，5% 至 6%）、预测期内年均职位空缺约 300 个。该全国页同时发布第10百分位 27,120 美元/年和第90百分位 60,810 美元/年。以上为美国全国口径且属本职业 49-9095.00，「高于平均」为统计预测，不等于个人就业结果。"
+              "2025美国全国本职业工资年薪中位数45,990美元，时薪中位数22.11美元；原表分位分别列于下方。就业事实保留旧2024—2034版本；当前ONet为2025年3,500人、2025—2035增长5%—6%、年均空缺300。版本与覆盖期不同，不把旧规模与新预测混用，也不作个人录用承诺。"
             ]
           },
           "fact_refs": [
@@ -7784,11 +7786,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布与局限：该页 2024 年主要行业为 Retail Trade 与 Manufacturing；行业分布是雇主场景信号，不是需求预测。"
+              "行业分布不等于工资：当前ONet2025零售40%、制造18%只表雇主场景，不能由本职业全国中位数推断行业收入；未取得本职业分行业工资，精确缺口保留。"
             ]
           },
           "fact_refs": [
-            "us-employment-2024"
+            "us-wage-median"
           ],
           "id": "manufactured-building-and-mobile-home-installers.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
@@ -7801,7 +7803,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "规模与口径提示：该职业 2024 年就业约 3,100 人、预计高于平均；引用时须标明年份、覆盖范围与本职业口径，且中位数与增长描述不能跨市场拼接。"
+              "就业版本提示：页面旧事实为2024年3,100人及2024—2034预测；当前ONet为2025年3,500人及2025—2035年均空缺300。空缺含增长与替补，非在招数，统计规模较小不推导个人机会。"
             ]
           },
           "fact_refs": [
@@ -7855,7 +7857,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "积极信号：能按安全规程作业、动手与测量能力强、能读懂工单与图纸、能在户外天气下坚持作业、遇到不确定会暂停并升级。"
+              "积极信号：能读工单、测量和记录，遵守安全及授权边界；天气、基础或接口条件不满足时愿意暂停。纸面A/B/C练习只验证信息核对，不能证明身体耐受或现场安装能力。"
             ]
           },
           "id": "manufactured-building-and-mobile-home-installers.fit.riasec-fit-block.3",
@@ -8040,12 +8042,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国O*NET教育调查：该职业教育受访者中59%报告低于高中文凭、40%高中或同等学历、1%高中后证书；这是新聘学历需求调查，不是无学历门槛或法律授权。Job Zone 1-2的通用说明通常高中/GED、部分职业例外；在职培训约数天至一年。 实际门槛与水电气作业授权按雇主及州核对。"
+              "ONet本职业新聘学历调查59%低于高中、40%高中或同等、1%高中后证书，保留其调查口径；Job Zone1–2的数天至一年培训是组描述，不是本职业许可完成时间。美国manufactured home安装须核州或HUD项目的安装许可，不能只核水电气资格。"
             ]
           },
           "id": "manufactured-building-and-mobile-home-installers.path.career-path-block.2",
           "source_refs": [
-            "onet-education"
+            "onet-education",
+            "hud-install-resources",
+            "ecfr-installer-license"
           ],
           "type": "prose"
         },
@@ -8054,12 +8058,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国：以在职培训与雇主带教为主，部分岗位提供注册学徒；涉及电气与燃气等作业须另核所在地、具体任务和执行者的资格与授权。中国大陆：本页未建立与该 O*NET 精确对应的统一资格条目，岗位多按用人单位与所在地施工、安全与特种作业规定确定，涉及持证作业须分别核对。"
+              "美国：先核房屋类型、安装地点及州/HUD安装项目；HUD管理州的安装人员须核HUD许可，认可州项目按州要求。现行3286.205对HUD许可有经历/教育、训练、考试等要求，雇主带教不自动授权。未取得本职业当地注册学徒项目，不写普遍提供。中国资格映射仍未建立，按实际施工及特种作业要求核查。"
             ]
           },
           "id": "manufactured-building-and-mobile-home-installers.path.career-path-block.3",
           "source_refs": [
-            "onet-education"
+            "onet-education",
+            "hud-install-resources",
+            "ecfr-installer-license"
           ],
           "type": "prose"
         },
@@ -8161,7 +8167,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 引用 BLS 数据显示，该职业 2024 年就业约 3,100 人，2024—2034 年预计高于平均（5% 至 6%），预测期内年均职位空缺约 300 个；该职业规模很小，就业与空缺数字波动敏感，这是职业统计而非个人录用概率，也不同于招聘样本。"
+              "旧事实保留2024年3,100人及2024—2034年均300空缺；当前ONet为2025年3,500人、2025—2035增长5%—6%、年均300。均为职业统计，非招聘样本；不把旧/新覆盖期或增长与空缺相互替代。"
             ]
           },
           "id": "manufactured-building-and-mobile-home-installers.market-signals.market-signal-card.2",
@@ -8203,7 +8209,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：所在州或地区对水电气等特种作业的持证要求、特定单元与接口的操作训练，或转向木工、电工、管道工方向所需的技能与资格。"
+              "第一目标木工：须补木结构/构件的放样、切割与连接、图纸尺寸和木工质量控制；单元安装的测量与工具经验不自动等于木结构制作能力，按目标工种安全与授权核验。"
             ]
           },
           "id": "manufactured-building-and-mobile-home-installers.market-signals.market-signal-card.5",
@@ -8643,6 +8649,66 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "美国HUD住房类型、州/HUD安装制度及许可，非所有预制建筑规则。"
+                ],
+                "evidence_type": "official installation or safety guidance",
+                "id": "hud-install-resources",
+                "limitation": "美国适用范围按文件核；不建立中国资格映射或覆盖全部预制建筑。",
+                "market": "美国",
+                "name": "HUD manufactured home 安装与住房资料",
+                "period": "现行网页/法规（2026-10-11查阅）",
+                "publisher": "HUD",
+                "scope": "exact",
+                "url": "https://www.hud.gov/hud-partners/manufactured-home-resources"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "适用新manufactured home初次安装；制造商说明与适用支承锚固方案，非所有旧屋修理。"
+                ],
+                "evidence_type": "official installation or safety guidance",
+                "id": "ecfr-install-standards",
+                "limitation": "美国适用范围按文件核；不建立中国资格映射或覆盖全部预制建筑。",
+                "market": "美国",
+                "name": "24 CFR 3285 安装标准",
+                "period": "现行网页/法规（2026-10-11查阅）",
+                "publisher": "eCFR / HUD",
+                "scope": "exact",
+                "url": "https://www.ecfr.gov/current/title-24/subtitle-B/chapter-XX/part-3285"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "HUD管理安装项目许可的经历/教育、培训、考试等前提，不是全国所有建筑工种统一要求。"
+                ],
+                "evidence_type": "official installation or safety guidance",
+                "id": "ecfr-installer-license",
+                "limitation": "美国适用范围按文件核；不建立中国资格映射或覆盖全部预制建筑。",
+                "market": "美国",
+                "name": "24 CFR 3286.205 安装许可前提",
+                "period": "现行网页/法规（2026-10-11查阅）",
+                "publisher": "eCFR / HUD",
+                "scope": "exact",
+                "url": "https://www.ecfr.gov/current/title-24/subtitle-B/chapter-XX/part-3286/subpart-C/section-3286.205"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "防护按作业类别、临边洞口和危险设备判断，不能统一套高度或仅佩安全带。"
+                ],
+                "evidence_type": "official installation or safety guidance",
+                "id": "osha-fall",
+                "limitation": "美国适用范围按文件核；不建立中国资格映射或覆盖全部预制建筑。",
+                "market": "美国",
+                "name": "OSHA高处坠落防护",
+                "period": "现行网页/法规（2026-10-11查阅）",
+                "publisher": "OSHA",
+                "scope": "exact",
+                "url": "https://www.osha.gov/fall-protection"
               }
             ]
           },
@@ -8750,7 +8816,7 @@
         "action_rows": [
           {
             "人群": "入行者",
-            "应对重点": "练习安全规程与基础固定。"
+            "应对重点": "先做原A/B/C纸面核对；实际固定、接口连接和测试须训练、监督及必要许可。"
           },
           {
             "人群": "在岗者",
@@ -8831,12 +8897,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "清单与用料估算",
+            "AI主要改变": "可能辅助清单草稿；用料与方案须按原图纸复核。",
             "仍由人负责": "场地与部件核对",
             "方向": "工单与规划"
           },
           {
-            "AI主要改变": "记录整理",
+            "AI主要改变": "可能辅助整理记录，不能补造测试结果。",
             "仍由人负责": "运行确认与责任",
             "方向": "检查与交付"
           }
@@ -8946,7 +9012,7 @@
             "问题": "AI 会取代预制建筑与移动房屋安装工吗？"
           },
           {
-            "回答": "目前只写到可辅助的工单调度、清单估算与记录整理，就位固定、连接测试与结构修复仍由人承担。",
+            "回答": "仅列任务假设，未取得职业级采用或先后顺序研究；现场就位固定、接口测试与验收须由授权人员承担。",
             "来源": {
               "$source": "onet-tasks",
               "block": "source-register",
@@ -9194,7 +9260,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "排班与工单调度、部件清单与用料估算、安装说明检索、测量与记录整理等工具可辅助安装工规划工序、核对部件并生成记录草稿；但单元的就位固定、封闭、管线连接与测试、结构修复与安全作业是现场手工与判断，工具不能替代对场地、结构与接口状态的确认。"
+          "编辑任务假设：工具可能辅助虚构工单、部件清单和记录草稿；普通邮件、浏览器或电子表格不等于生成式AI。估算及安装说明需核原文件版本和现场条件；未取得本职业采用率或岗位结果，AI输出不能替代锚固设计、管线测试或安装验收。"
         ],
         "heading": "预制建筑与移动房屋安装工的工作对象与 AI 边界"
       },
@@ -9237,7 +9303,7 @@
             "copy_key": "career.item.career-path-block",
             "type": "prose"
           },
-          "jurisdiction": "美国在职培训与雇主带教，特种作业按州持证；中国大陆按用人单位与所在地施工、安全与特种作业规定核对",
+          "jurisdiction": "美国区分州/HUD manufactured home安装许可与管线作业资格；中国按实际施工和所在地要求核对",
           "summary": {
             "$item": "manufactured-building-and-mobile-home-installers.path.career-path-block.3",
             "block": "path",
@@ -9336,6 +9402,18 @@
               "item": "manufactured-building-and-mobile-home-installers.source-register.published.1"
             },
             "scope": "中国行业工资口径；不等于本职业精确工资。"
+          },
+          {
+            "href": "https://www.hud.gov/hud-partners/manufactured-home-resources",
+            "id": "manufactured-building-and-mobile-home-installers.display.source.hud-install-resources",
+            "label": "HUD manufactured home 安装与住房资料",
+            "scope": "美国HUD住房类型、州/HUD安装制度及许可，非所有预制建筑规则。"
+          },
+          {
+            "href": "https://www.ecfr.gov/current/title-24/subtitle-B/chapter-XX/part-3286/subpart-C/section-3286.205",
+            "id": "manufactured-building-and-mobile-home-installers.display.source.ecfr-installer-license",
+            "label": "24 CFR 3286.205 安装许可前提",
+            "scope": "HUD管理安装项目许可的经历/教育、培训、考试等前提，不是全国所有建筑工种统一要求。"
           }
         ],
         "tracks": [
@@ -9365,7 +9443,7 @@
                 "role": "安装助手"
               },
               {
-                "credentials": "按雇主要求核验。",
+                "credentials": "分别核安装许可、专项作业资格及当地要求，不能仅凭雇主录用。",
                 "next_moves": {
                   "$item": "manufactured-building-and-mobile-home-installers.path.career-path-block.8",
                   "block": "path",
@@ -9373,7 +9451,7 @@
                   "type": "prose"
                 },
                 "readiness_evidence": "保留安装与测试记录。",
-                "responsibility": "独立完成就位固定与系统连接并接受复核。",
+                "responsibility": "在适用安装许可和系统作业授权范围内完成就位固定与连接，按制度接受检验。",
                 "role": "预制建筑与移动房屋安装工"
               },
               {
@@ -9604,7 +9682,7 @@
         "schema_version": "career.quick_answers.v1"
       },
       "career_risk_cards": {
-        "boundary": "涉及电气、燃气与特种作业的最终处置由具备相应资格的机构或人员按所在地规定承担；本页不替代专业意见或安全要求。",
+        "boundary": "安装许可、专项资格和验收职责分别核对，人员与雇主按各自授权负责；美国HUD manufactured home规定不自动覆盖其他预制建筑或中国施工。",
         "context_links": [
           {
             "href": "#career-visual-group-risk",
@@ -9612,17 +9690,17 @@
           }
         ],
         "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
-        "evidence_scope": "依据 O*NET 49-9095.00 的任务与工作情境，以及固定与结构、水电气接口、高处与危险设备、持证边界与天气工期中的具体要求；具体规则按雇主与适用法规核对，不跨范围外推。",
+        "evidence_scope": "ONet任务支持风险情境；HUD/eCFR支持其适用住房与美国安装制度，OSHA支持作业类型对应的坠落防护。未核的中国或其他建筑规则不外推。",
         "heading": "预制建筑与移动房屋安装工的工作风险与边界",
         "risks": [
           {
             "affected_roles": "现场安装岗位",
             "consequence": "可能影响单元安全与使用。",
             "evidence_refs": [
-              "onet-tasks"
+              "manufactured-building-and-mobile-home-installers.display.source.ecfr-install-standards"
             ],
             "id": "risk-1",
-            "mitigation": "按规程固定并复核基础与连接件。",
+            "mitigation": "核适用制造商安装说明及批准基础/锚固方案；现场不匹配即暂停移交，不自行改支承或结构设计。",
             "scenario": "基础或固定未按规程完成。",
             "title": {
               "$item": "manufactured-building-and-mobile-home-installers.risk.career-risk-cards.1",
@@ -9635,7 +9713,7 @@
             "affected_roles": "连接与测试岗位",
             "consequence": "可能引发泄漏、断电或伤害。",
             "evidence_refs": [
-              "onet-tasks"
+              "manufactured-building-and-mobile-home-installers.display.source.onet-tasks"
             ],
             "id": "risk-2",
             "mitigation": "在持证边界内连接并做测试。",
@@ -9651,10 +9729,10 @@
             "affected_roles": "现场安装岗位",
             "consequence": "可能导致人身伤害。",
             "evidence_refs": [
-              "onet-context"
+              "manufactured-building-and-mobile-home-installers.display.source.osha-fall"
             ],
             "id": "risk-3",
-            "mitigation": "落实防护并停止不安全作业。",
+            "mitigation": "按作业类别和现场临边、洞口、危险设备落实合适防护及培训；条件不满足先停，不能只凭佩戴安全带继续。",
             "scenario": "高处或危险设备作业未落实防护。",
             "title": {
               "$item": "manufactured-building-and-mobile-home-installers.risk.career-risk-cards.3",
@@ -9667,11 +9745,11 @@
             "affected_roles": "连接与测试岗位",
             "consequence": "可能违反安全与执业规定。",
             "evidence_refs": [
-              "onet-cert"
+              "manufactured-building-and-mobile-home-installers.display.source.hud-install-resources"
             ],
             "id": "risk-4",
-            "mitigation": "按所在地要求由持证人员完成。",
-            "scenario": "在持证边界外完成电气或燃气作业。",
+            "mitigation": "先区分州/HUD manufactured home安装制度，核安装人员许可；再分别核管线作业资格和当地许可，不能互相替代。",
+            "scenario": "未核适用安装许可，或越权进行电气、燃气等专项作业。",
             "title": {
               "$item": "manufactured-building-and-mobile-home-installers.risk.career-risk-cards.4",
               "block": "risk",
@@ -9683,7 +9761,7 @@
             "affected_roles": "现场安装岗位",
             "consequence": "可能影响质量与安全。",
             "evidence_refs": [
-              "onet-context"
+              "manufactured-building-and-mobile-home-installers.display.source.onet-context"
             ],
             "id": "risk-5",
             "mitigation": "按天气调整计划并在条件不满足时暂停。",
@@ -9699,7 +9777,7 @@
             "affected_roles": "现场安装岗位",
             "consequence": "可能返工或延误交付。",
             "evidence_refs": [
-              "onet-tasks"
+              "manufactured-building-and-mobile-home-installers.display.source.onet-tasks"
             ],
             "id": "risk-6",
             "mitigation": "先核对并记录差异，再决定继续或升级。",
@@ -9780,6 +9858,30 @@
               "item": "manufactured-building-and-mobile-home-installers.source-register.published.1"
             },
             "scope": "执照与认证入口；不替代执业授权。"
+          },
+          {
+            "href": "https://www.hud.gov/hud-partners/manufactured-home-resources",
+            "id": "manufactured-building-and-mobile-home-installers.display.source.hud-install-resources",
+            "label": "HUD manufactured home 安装与住房资料",
+            "scope": "美国HUD住房类型、州/HUD安装制度及许可，非所有预制建筑规则。"
+          },
+          {
+            "href": "https://www.ecfr.gov/current/title-24/subtitle-B/chapter-XX/part-3285",
+            "id": "manufactured-building-and-mobile-home-installers.display.source.ecfr-install-standards",
+            "label": "24 CFR 3285 安装标准",
+            "scope": "适用新manufactured home初次安装；制造商说明与适用支承锚固方案，非所有旧屋修理。"
+          },
+          {
+            "href": "https://www.ecfr.gov/current/title-24/subtitle-B/chapter-XX/part-3286/subpart-C/section-3286.205",
+            "id": "manufactured-building-and-mobile-home-installers.display.source.ecfr-installer-license",
+            "label": "24 CFR 3286.205 安装许可前提",
+            "scope": "HUD管理安装项目许可的经历/教育、培训、考试等前提，不是全国所有建筑工种统一要求。"
+          },
+          {
+            "href": "https://www.osha.gov/fall-protection",
+            "id": "manufactured-building-and-mobile-home-installers.display.source.osha-fall",
+            "label": "OSHA高处坠落防护",
+            "scope": "防护按作业类别、临边洞口和危险设备判断，不能统一套高度或仅佩安全带。"
           }
         ]
       },
@@ -9876,7 +9978,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "本页未取得中国大陆精确职业工资；下列行业平均仅作背景，不能代替本职业起薪、中位数或到手收入。",
+          "china_open": "未取得中国精确职业工资；建筑业均值仅供相应单位雇主背景，不证明本职业主要行业归属，不含个体工商户和自由职业者。",
           "china_ref": {
             "$join": [
               {
@@ -10167,7 +10269,7 @@
             }
           }
         ],
-        "boundary": "美国全国口径：工资、就业与行业均为 O*NET 展示的本职业 49-9095.00 数据，工资为 2025 OEWS、就业展望为 2024—2034 预测；不含个人到手收入、起薪或录用结论。",
+        "boundary": "美国49-9095.00、2025OEWS工资；就业保留旧2024—2034事实并注明当前版本。分位不是资历，行业占比不是行业工资或需求预测。",
         "direct_answer": {
           "$item": "manufactured-building-and-mobile-home-installers.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10176,11 +10278,11 @@
         },
         "factor_rows": [
           {
-            "answer": "美国侧学历要求多为高中及以下并在职培训；涉及水电气等管线的作业须按州核对持证要求。",
+            "answer": "教育调查多为高中及以下；Job Zone培训是组描述。美国manufactured home安装另核州/HUD安装许可及管线作业资格。",
             "factor": "资格"
           },
           {
-            "answer": "以现场安装、工具使用与安全作业经验为主；实际动手能力比证书名称更常被参考。",
+            "answer": "核现场安装、安全、工单与测试记录，以及目标雇主要求；未取得动手能力与证书在录用中权重的比较。",
             "factor": "经验"
           },
           {
@@ -10207,30 +10309,30 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024",
+        "industry_period": "2025雇主行业分布；行业工资未取得",
         "industry_rows": [
           {
-            "industry": "Retail Trade",
-            "median": "本页未取得分行业工资",
-            "note": "本页未取得分行业工资分项；以整体中位数为准。"
+            "industry": "Retail Trade（零售）",
+            "median": "证据不足：未取得",
+            "note": "2025占40%是雇主分布，不是工资。"
           },
           {
-            "industry": "Manufacturing",
-            "median": "见就业行",
-            "note": "行业口径为雇主场景信号，不跨职业外推。"
+            "industry": "Manufacturing（制造）",
+            "median": "证据不足：未取得",
+            "note": "2025占18%是雇主分布，不是工资。"
           },
           {
-            "industry": "行业口径说明二",
-            "median": "见就业行",
-            "note": "地区与行业差异大，不得跨地区外推。"
+            "industry": "其他细分行业",
+            "median": "证据不足：未取得",
+            "note": "不以全国工资填行业分项。"
           },
           {
-            "industry": "行业口径说明三",
-            "median": "见就业行",
-            "note": "全国分位工资不是分行业工资，不能填入行业分项。"
+            "industry": "地区×行业",
+            "median": "证据不足：未取得",
+            "note": "不以就业或代理均值填精确工资。"
           }
         ],
-        "industry_value_label": "行业值",
+        "industry_value_label": "同职业行业工资证据",
         "interpretation_heading": {
           "$item": "manufactured-building-and-mobile-home-installers.us-salary.career-snapshot-secondary-locale.4",
           "block": "us-salary",
@@ -10247,7 +10349,7 @@
             "question": "就业"
           },
           {
-            "answer": "2024—2034 预测高于平均（5% 至 6%），是职业统计，不是个人录用结果。",
+            "answer": "保留旧2024—2034；当前2025—2035增长5%—6%、年均300空缺，数字相同不意味着版本相同。",
             "question": "展望"
           },
           {
@@ -10273,20 +10375,32 @@
         "wage_tiers": [
           {
             "equivalent": "$13.04/小时",
-            "interpretation": "2025美国全国第10百分位，不等于新手工资。",
-            "label": "第10百分位",
+            "interpretation": "2025美国全国本职业分位，两表分别列示；非资历或个人工时换算。",
+            "label": "P10",
             "value": "$27,120/年"
           },
           {
+            "equivalent": "$17.21/小时",
+            "interpretation": "2025美国全国本职业分位，两表分别列示；非资历或个人工时换算。",
+            "label": "P25",
+            "value": "$35,800/年"
+          },
+          {
             "equivalent": "$22.11/小时",
-            "interpretation": "2025 美国全国年薪中位数（本职业 49-9095.00 口径）。",
-            "label": "中位数（50%）",
+            "interpretation": "2025美国全国本职业分位，两表分别列示；非资历或个人工时换算。",
+            "label": "P50（中位数）",
             "value": "$45,990/年"
           },
           {
+            "equivalent": "$24.99/小时",
+            "interpretation": "2025美国全国本职业分位，两表分别列示；非资历或个人工时换算。",
+            "label": "P75",
+            "value": "$51,970/年"
+          },
+          {
             "equivalent": "$29.24/小时",
-            "interpretation": "2025美国全国第90百分位，不等于资深人员工资。",
-            "label": "第90百分位",
+            "interpretation": "2025美国全国本职业分位，两表分别列示；非资历或个人工时换算。",
+            "label": "P90",
             "value": "$60,810/年"
           }
         ]
@@ -10494,7 +10608,7 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补足整单元安装与接口技能。",
+            "capability_gaps": "须核目标施工类型、场地准备、材料搬运及对应施工工具安全；整屋安装接口经验不能代替各类建筑一般施工训练。",
             "shared_capabilities": "现场施工与工具基础。",
             "target_href": "/zh/career/jobs/construction-laborers",
             "target_slug": "construction-laborers",
@@ -10564,7 +10678,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "riasec",
             "label": "RIASEC",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10583,7 +10697,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "big-five",
             "label": "大五人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10602,7 +10716,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "mbti",
             "label": "MBTI",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10616,7 +10730,7 @@
             "answer": "需要结合真实任务、边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "enneagram",
             "label": "九型人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10630,7 +10744,7 @@
             "answer": "需要结合真实任务、边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "iq",
             "label": "认知能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10644,7 +10758,7 @@
             "answer": "需要结合真实任务、边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "eq",
             "label": "情绪能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -11167,7 +11281,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "单元就位与固定",
@@ -11218,7 +11332,7 @@
       "text": "预制建筑与移动房屋安装工职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "54f21e29d130781e8a3cc792e63204290bb9b86e8742b79d552748f7fec408ee",
+  "source_content_sha256": "77fad5e69937ff109cace5baabcd03dfe352a0b5dd166c23634dca6512c08daf",
   "subject": {
     "canonical_slug": "manufactured-building-and-mobile-home-installers",
     "name": "预制建筑与移动房屋安装工",

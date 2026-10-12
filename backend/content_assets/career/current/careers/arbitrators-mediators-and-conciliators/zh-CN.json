@@ -9340,18 +9340,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.06.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            5,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.06.mitigation": {
         "ref": {
@@ -12085,28 +12075,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.href": {
-        "ref": {
-          "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.22",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.label": {
         "ref": {
@@ -23465,7 +23435,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 23-1022.00 仲裁员、调解员与和解员（Arbitrators, Mediators, and Conciliators）：通过对话促进谈判与冲突解决，经当事各方共同同意在法院系统之外处理争议。页面列出的常见职位名称包括替代性争议解决协调员、仲裁人、仲裁员、离婚调解员、家庭调解员、联邦调解员、劳动仲裁员、劳动调解员、调解员与公共就业调解员。兴趣代码为 ECS（企业型、常规型、社会型）；页面列出 20 项任务。该职业需要大量准备（Job Zone Five，SVP 8.0 及以上），受访者回答中 37% 认为需专业学位、16% 认为需学士学位、11% 认为需学士后证书。"
+              "O*NET 23-1022.00 仲裁员、调解员与和解员（Arbitrators, Mediators, and Conciliators）：通过对话促进谈判与冲突解决，经当事各方共同同意在法院系统之外处理争议。页面列出的常见职位名称包括替代性争议解决协调员、仲裁人、仲裁员、离婚调解员、家庭调解员、联邦调解员、劳动仲裁员、劳动调解员、调解员与公共就业调解员。兴趣代码为 ECS（企业型、常规型、社会型）；页面列出 20 项任务。该职业需要大量准备（Job Zone Five，SVP 8.0 及以上），受访者回答中 37% 认为需专业学位、16% 认为需学士学位、11% 认为需学士后证书。 37/16/11是新入职教育需要回答，非现有从业者学历构成，JobZone不授中国聘任资格。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.profile.onet-structured-fields-block.1",
@@ -23482,14 +23452,13 @@
               "案件材料审查与事实梳理｜先把材料与争点固定下来｜审查索赔申请、合同、证明、出生或死亡证明、医师或雇主记录等材料，与争议方沟通澄清争点并识别各方真实需要与利益。",
               "法律检索与依据适用｜用可核对的依据支撑结论｜研究相关法律、法规、政策与先例，将其适用于案件事实以得出结论，并依证据与法律或行政与司法先例确定责任范围。",
               "听证与调解会议主持｜按程序推进并保持中立｜主持听证以获取信息或证据，裁定异议、动议与证据可采性，或主持调解会议并运用调解技巧促进沟通与理解。",
-              "和解促成与方案处理｜让当事人自愿达成协议｜引导当事人在自愿基础上达成协议，准备和解协议，并就接受或拒绝和解方案提出建议、授权支付有效索赔。",
+              "和解促成与方案处理｜让当事人自愿达成协议｜引导当事人在自愿基础上达成协议，准备和解协议，并就接受或拒绝和解方案提出建议、授权支付有效索赔。 美国任务组合包含仲裁与调解不同角色，人民调解不授权索赔支付；是否约束和解建议按具体角色与法域核。",
               "裁决与文书撰写｜按规范出具可复核文书｜撰写书面意见或裁决并说明认定事实、依据与理由，撰写案件记录与程序文书，并按要求准备出庭或作证材料。",
-              "程序记录与档案管理｜让过程与结果可追溯｜记录程序进展与结果、整理并归档案件材料，研究上诉与撤销程序是否符合法律要求，并按规定保存与移交档案。"
+              "程序记录与档案管理｜按实际程序维护记录｜记录程序进展与结果、整理并归档案件材料，研究上诉与撤销程序是否符合法律要求，按实际程序保存档案，不承诺全程可追溯。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.profile.responsibilities-block.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -23499,12 +23468,11 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "沟通与接触｜25% 持续与他人接触、25% 大部分时间、40% 约一半时间；11% 每天有面对面讨论（61% 每周至少一次）；21% 每天有电话交谈（26% 每周至少一次）；70% 每天使用电子邮件（O*NET 23-1022.00 受访比例）。\n决策与自由度｜35% 每天作决定、15% 每周至少一次、35% 每月至少一次、15% 每年至少一次；85% 拥有很大决策自由度。\n精确性与错误后果｜65% 认为精确或准确极其重要、35% 认为非常重要；20% 认为错误后果非常严重、30% 严重、35% 完全不严重；55% 认为决策对同事或机构结果非常重要、25% 重要、15% 中等。\n时间压力与工作周｜30% 每天面对时间压力、30% 每周至少一次、35% 每月至少一次；47% 工作周超过 40 小时、32% 为 40 小时、21% 少于 40 小时；63% 为不规律日程、37% 为规律固定日程。\n协作与竞争｜15% 认为与团队协作非常重要、15% 重要、20% 比较重要、45% 完全不重要；20% 认为协调或领导他人非常重要、15% 重要、15% 比较重要、45% 完全不重要；50% 认为竞争高度激烈、20% 中度竞争、15% 轻微竞争。\n外部沟通与冲突应对｜21% 认为与外部客户或公众打交道非常重要、16% 重要、11% 比较重要、47% 完全不重要；25% 每周至少一次需要应对不愉快或愤怒的人（25% 每月至少一次、35% 每年至少一次）；45% 每天面对冲突情形、20% 每周至少一次、15% 每月至少一次、15% 每年至少一次。\n环境与姿势｜25% 每天在环境可控室内（15% 每周至少一次、25% 每月至少一次、25% 从不）；80% 持续或几乎持续坐着、15% 超过一半时间坐着。\n书面沟通｜21% 每天撰写信件与备忘录、47% 每周至少一次、21% 每月至少一次。\n工作活动与技能侧重｜工作活动以获取信息（91）与解决冲突并与他人谈判（91）为主，其后是决策与解决问题（90）、分析数据或信息（85）、评估信息以确定是否符合标准（84）、更新并运用相关知识（81）、判断物体与服务和人的质量（79）以及为他人解读信息含义（78）。"
+              "沟通与接触｜25% 持续与他人接触、25% 大部分时间、40% 约一半时间；11% 每天有面对面讨论（61% 每周至少一次但非每日）；21% 每天有电话交谈（26% 每周至少一次但非每日）；70% 每天使用电子邮件（O*NET 23-1022.00 受访比例）。\n决策与自由度｜35% 每天作出影响他人、机构资源或形象的决定、15% 每周至少一次但非每日、35% 每月至少一次但非每周、15% 每年至少一次但非每月；85% 拥有很大决策自由度。\n精确性与错误后果｜65% 认为精确或准确极其重要、35% 认为非常重要；20% 认为错误不易纠正时后果非常严重、30% 较严重、35% 完全不严重；55% 认为决策对同事或机构结果非常重要、25% 重要、15% 中等。\n时间压力与工作周｜30% 每天面对时间压力、30% 每周至少一次但非每日、35% 每月至少一次但非每周；47% 工作周超过 40 小时、32% 为 40 小时、21% 少于 40 小时；63% 为不规律日程、37% 为规律固定日程。\n协作与竞争｜15% 认为与团队协作非常重要、15% 重要、20% 比较重要、45% 完全不重要；20% 认为协调或领导他人非常重要、15% 重要、15% 比较重要、45% 完全不重要；50% 认为竞争高度激烈、20% 中度竞争、15% 轻微竞争。\n外部沟通与冲突应对｜21% 认为与外部客户或公众打交道非常重要、16% 重要、11% 比较重要、47% 完全不重要；25% 每周至少一次但非每日需要应对不愉快或愤怒的人（25% 每月至少一次但非每周、35% 每年至少一次但非每月）；45% 每天面对冲突情形、20% 每周至少一次但非每日、15% 每月至少一次但非每周、15% 每年至少一次但非每月。\n环境与姿势｜25% 每天在环境可控室内（15% 每周至少一次但非每日、25% 每月至少一次但非每周、25% 从不）；80% 持续或几乎持续坐着、15% 超过一半时间坐着。\n书面沟通｜21% 每天撰写信件与备忘录、47% 每周至少一次但非每日、21% 每月至少一次但非每周。\n工作活动与技能侧重｜工作活动以获取信息（91）与解决冲突并与他人谈判（91）为主，其后是决策与解决问题（90）、分析数据或信息（85）、评估信息以确定是否符合标准（84）、更新并运用相关知识（81）、判断物体与服务和人的质量（79）以及为他人解读信息含义（78）。 美国工作情境分档非工时份额、事故率或中国岗位统计；活动评分非个人测评分。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.profile.work-context-block.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23529,7 +23497,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS职业展望手册：2025年约10,500个岗位；2025—2035年预计增长5%，净增约500个，年均约300个空缺。2025年5月年薪中位数75,530美元，工资分位为47,220／57,360／75,530／108,000／155,440美元。BLS通常入门学历为学士学位，并需要相关经验；O*NET受访学历回答37%专业学位、16%学士、11%学士后证书属于另一调查，不能混为中国统一门槛。"
+              "BLS职业展望手册：2025年约10,500个岗位；2025—2035年预计增长5%，净增约500个，年均约300个空缺。2025年5月年薪中位数75,530美元，工资分位为47,220／57,360／75,530／108,000／155,440美元。BLS通常入门学历为学士学位，并需要相关经验；O*NET受访学历回答37%专业学位、16%学士、11%学士后证书属于另一调查，不能混为中国统一门槛。 EP精确增长4.7%，OOH5%取整。ONET2025专业科学技术服务43%、政府29%，与OOH法律服务33%/地方政府15%/州政府13%/其他专业科技9%分类不同。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.profile.onet-structured-fields-block.2",
@@ -23589,7 +23557,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "现行BLS预测为2025—2035年：约10,500人增至11,000人，增长5%，净增约500人，年均约300个职位空缺。空缺包含职业转出和退出劳动力市场的替代需求，不等于净新增。O*NET仍展示2024—2034年3%—4%的旧预测，不能与当前基期拼接。BLS同时公布四个行业的2025年5月职业工资中位数，详见美国薪资表。"
+              "BLS EP23-1022：2025年10.5千至2035年11.0千，官方净增0.5千/4.7%、年均空缺0.3千；OOH增长5%为取整。O*NET本次也显示2025—2035年、就业10500、年空缺300，增长标签5—6%分档另保留，不把该标签说成EP精确值或解释差异原因。 空缺含替代需求，非净增或个人就业保证，行业工资与份额另核，不推中国。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.profile.onet-structured-fields-block.4",
@@ -23619,7 +23587,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧依据《中华人民共和国仲裁法》（1994-08-31 通过，2009 与 2017 两次修正，2025-09-12 修订，主席令第五十四号，自 2026-03-01 施行）：仲裁机构依法设立并登记，属于公益性非营利法人；仲裁员由仲裁机构从公道正派、具备良好专业素质并勤勉尽责的人员中聘任，应当符合下列条件之一——通过国家统一法律职业资格考试取得法律职业资格并从事仲裁工作满八年、律师执业满八年、曾任法官或检察官满八年、从事法律研究或教学工作并具有高级职称、具有法律知识并从事法律或经济贸易或海事海商或科学技术等专业工作并具有高级职称或具有同等专业水平；仲裁机构按不同专业设仲裁员名册；仲裁依法独立进行，不受行政机关、社会团体和个人干涉，实行一裁终局、不公开进行。另据《中华人民共和国人民调解法》（2010-08-28 通过，主席令第三十四号，2011-01-01 施行）：人民调解委员会是依法设立的调解民间纠纷的群众性组织，调解不收取任何费用；人民调解员由人民调解委员会委员和人民调解委员会聘任的人员担任，应当由公道正派、热心人民调解工作并具有一定文化水平、政策水平和法律知识的成年公民担任；国务院司法行政部门与县级以上地方人民政府司法行政部门负责指导，基层人民法院进行业务指导；经调解达成的调解协议具有法律约束力，双方当事人可自协议生效之日起三十日内共同向人民法院申请司法确认。本页不构成法律或资格考试意见。"
+              "中国大陆侧依据《中华人民共和国仲裁法》（1994-08-31 通过，2009 与 2017 两次修正，2025-09-12 修订，主席令第五十四号，自 2026-03-01 施行）：仲裁机构依法设立并登记，属于公益性非营利法人；仲裁员由仲裁机构从公道正派、具备良好专业素质并勤勉尽责的人员中聘任，应当符合下列条件之一——通过国家统一法律职业资格考试取得法律职业资格并从事仲裁工作满八年、律师执业满八年、曾任法官或检察官满八年、从事法律研究或教学工作并具有高级职称、具有法律知识并从事法律或经济贸易或海事海商或科学技术等专业工作并具有高级职称或具有同等专业水平；仲裁机构按不同专业设仲裁员名册；仲裁依法独立进行，不受行政机关、社会团体和个人干涉，实行一裁终局；第52条原则上不公开，当事人协议公开可以公开，但涉及国家秘密、他人商业秘密或个人隐私除外。另据《中华人民共和国人民调解法》（2010-08-28 通过，主席令第三十四号，2011-01-01 施行）：人民调解委员会是依法设立的调解民间纠纷的群众性组织，调解不收取任何费用；人民调解员由人民调解委员会委员和人民调解委员会聘任的人员担任，应当由公道正派、热心人民调解工作并具有一定文化水平、政策水平和法律知识的成年公民担任；国务院司法行政部门与县级以上地方人民政府司法行政部门负责指导，基层人民法院进行业务指导；经调解达成的调解协议具有法律约束力，双方当事人可自协议生效之日起三十日内共同向人民法院申请司法确认。本页不构成法律或资格考试意见。 普通条件与境外人士聘任、82条特定涉外组庭及93条专门仲裁须区分，不把所有调解和仲裁套同一条件。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.profile.onet-structured-fields-block.5",
@@ -23725,7 +23693,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页对应美国O*NET/BLS 23-1022.00。仲裁员在适用授权和程序内处理争议并作出裁决；调解员及和解员帮助当事人沟通和自愿达成协议，不代替其作决定。共同任务包括审查材料、澄清争点、主持会议、撰写文书并维护记录。中国民商事仲裁适用现行仲裁法，劳动等专门仲裁另依法；人民调解按人民调解法选任和开展工作。美国BLS2025年就业约10,500、2025—2035增长5%、年均300空缺，O*NET旧2024—2034资料另列，均不是中国职业统计。"
+              "本页对应美国O*NET/BLS 23-1022.00。仲裁员在适用授权和程序内处理争议并作出裁决；调解员及和解员帮助当事人沟通和自愿达成协议，不代替其作决定。共同任务包括审查材料、澄清争点、主持会议、撰写文书并维护记录。中国民商事仲裁适用现行仲裁法，劳动等专门仲裁另依法；人民调解按人民调解法选任和开展工作。美国BLS2025年就业约10,500、2025—2035增长5%、年均300空缺，本次O*NET也展示2025—2035；EP精确4.7%、OOH取整5%及ONET5—6%标签分别核，均不是中国职业统计。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.profile.definition-block.11",
@@ -24683,13 +24651,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.9",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -24704,7 +24665,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.10",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24721,7 +24681,7 @@
           "source_refs": [
             "cnclass",
             "cnmed",
-            "editorial"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24735,7 +24695,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.12",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24750,7 +24709,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.13",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24765,7 +24723,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.14",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24775,14 +24732,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在引入法律检索与文书生成工具时明确人机分工、案件材料与当事人信息的处理规则与文书复核责任，保证程序记录与依据可追溯，并保留仲裁员或调解员对事实认定与法律适用与结论的主导权。"
+              "编辑核实际工具、资料权限、版本与复核分工，不承诺全程序可追溯。SVAMC指南依采用范围核保密与个人裁决职责；中国仲裁庭裁决及人民调解自愿协议依法分别承担，不给调解员裁决权。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.15",
           "source_refs": [
+            "svamc-ai",
             "cnclass",
-            "cnmed",
-            "editorial"
+            "cnmed"
           ],
           "type": "prose"
         },
@@ -24796,8 +24753,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.16",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24812,8 +24767,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.17",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -24823,15 +24776,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：AI 与自动化会改变法律与先例检索、材料摘要与分类、文书与记录初稿整理、数据与期限台账汇总等环节，但没有证据表明它会取代事实认定与证据可采性判断、法律适用取舍、听证或调解的主持与沟通、以及裁决与协议的责任，本页也不据此推测岗位数量变化。技术能力、实际部署与就业结果要分开判断；本页引用的 2024—2034 年平均增长 3% 至 4% 是 O*NET 23-1022.00 页面展示的 BLS 预测，不能等同于「AI 会替代」或「AI 会创造」。"
+              "SVAMC2024第一版仲裁AI指南为行业建议，依当事人同意和/或仲裁庭、机构采用而适用，不减法定或其他强制规则；关注工具限制、保密、核验输出与证据完整性、仲裁员不委托个人裁决职责及正当程序。 不能证明23-1022采用率、跨任务效果、工资就业因果或中国法定授权；检索、摘要和台账为编辑辅助核问，职业预测不归因AI。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.18",
           "source_refs": [
+            "svamc-ai",
             "onet",
-            "onet",
-            "onet",
-            "onet"
+            "ep",
+            "cnclass",
+            "cnmed"
           ],
           "type": "prose"
         },
@@ -24966,12 +24920,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于行业分布37%专业技术服务、32%政府、31%其他；不与BLS2025雇主细分类拼接。"
+              "ONET本次2025职业行业：专业科学技术服务43%、政府29%，不与OOH法律服务33%、地方15%、州13%及其他专业科技9%分类混用。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.28",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -24994,7 +24949,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于美国侧学历构成（37% 专业学位、16% 学士学位、11% 学士后证书）与准备周期说明。"
+              "O*NET37%专业学位、16%学士、11%学士后证书为新聘教育需要，非从业者分布；JobZone5/SVP8以上为准备背景，非中国资格。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.30",
@@ -25036,13 +24991,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表比较本职业内部主要方向在自动化影响上的差别。"
+              "下表为编辑对检索、文书与台账的辅助场景核问，不是各方向自动化影响程度或比较效果结果。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.33",
           "source_refs": [
             "onet",
-            "onet"
+            "svamc-ai"
           ],
           "type": "prose"
         },
@@ -25056,7 +25011,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25071,7 +25025,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25086,7 +25039,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25101,7 +25053,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25116,7 +25067,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25131,7 +25081,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25141,14 +25090,17 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本职业AI采用率、替代率或工资因果研究。五张资料卡核对美国任务、工资、BLS现行就业、O*NET旧预测及学历调查和招聘软件需求；重复O*NET链接属于同一资料系列，不是五项独立AI研究。"
+              "五资料卡支持美国任务、工资、预测、新聘教育及招聘软件需求，不是五项独立AI研究；另补SVAMC2024指南背景，依同意/采用范围适用，仍缺职业采用和效果因果。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.40",
           "source_refs": [
             "onet",
+            "oews",
             "bls",
-            "hottech"
+            "ep",
+            "hottech",
+            "svamc-ai"
           ],
           "type": "prose"
         },
@@ -25311,12 +25263,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册为美国该职业工资与就业与预测的官方来源：2025 年 5 月中位年薪 75,530 美元（时薪 36.31 美元），2025 年约 10,500 个岗位，2025—2035 年增长 5%（快于平均），净增约 500 个，年均约 300 个空缺，通常要求学士学位并具有少于 5 年的相关经验。该资料期与 O*NET 页面展示的 2024—2034 年预测不同，两者分别标注。"
+              "BLS OOH2025就业约10500、May2025中位75530美元/36.31美元时、25—35取整增长5%/净约500/年空缺300；通常学士、相关经验少于5年及中期OJT为统计典型，不是中国统一门槛。EP精确4.7%。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "bls"
+            "bls",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25325,7 +25278,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET旧2024—2034年预测与学历受访回答；不能与BLS现行2025—2035年基期合并，不构成AI研究。"
+              "本次ONET显示2025—2035职业预测及新聘教育，预测不等教育效果或AI因果；其增长标签与BLS精确/取整值分别核。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.53",
@@ -25339,7 +25292,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET旧2024—2034年就业预测及Job Zone、学历回答；同属职业资料，不是AI研究。"
+              "O*NET现期2025—2035预测及JobZone、新聘教育需要；同属职业资料，不是AI研究。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.54",
@@ -25353,7 +25306,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国O*NET旧预测与教育调查"
+              "美国职业预测与新聘教育需要"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.55",
@@ -25367,12 +25320,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 预测该职业在 2024—2034 年平均增长 3% 至 4%，年均约 300 个职位空缺；O*NET 23-1022.00 显示该职业需要大量准备（Job Zone Five，SVP 8.0 及以上），受访者回答为 37% 认为需专业学位、16% 认为需学士学位、11% 认为需学士后证书。"
+              "BLS EP23-1022：2025年10.5千至2035年11.0千，官方净增0.5千/4.7%、年均空缺0.3千；OOH增长5%为取整。O*NET本次也显示2025—2035年、就业10500、年空缺300，增长标签5—6%分档另保留，不把该标签说成EP精确值或解释差异原因。 JobZone5/SVP8以上及新聘教育37/16/11为另一类回答，不能推增长因果。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep",
+            "bls"
           ],
           "type": "prose"
         },
@@ -25442,7 +25397,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.61",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25452,13 +25406,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "是否采用取决于机构的程序与留痕规范、案件材料与当事人信息的保密与个人信息处理要求、系统条件以及仲裁员或调解员是否具备使用能力；本页不推测采用进度，也没有该职业的采用率统计。"
+              "编辑按实际系统、权限、机构及程序核工具使用，SVAMC指南是采用后建议背景，不证明本职业整体采用程度；AI使用披露依具体程序核，不等中国利益关系书面披露义务。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.62",
           "source_refs": [
-            "onet",
-            "onet"
+            "svamc-ai",
+            "cnclass",
+            "cnmed"
           ],
           "type": "prose"
         },
@@ -25467,12 +25422,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面展示的 BLS 预测该职业 2024—2034 年平均增长 3% 至 4%，年均约 300 个空缺且与替代需求相关。本页不把任务自动化程度等同于岗位数量变化，也不据技术名词推断岗位增减。"
+              "BLS EP23-1022：2025年10.5千至2035年11.0千，官方净增0.5千/4.7%、年均空缺0.3千；OOH增长5%为取整。O*NET本次也显示2025—2035年、就业10500、年空缺300，增长标签5—6%分档另保留，不把该标签说成EP精确值或解释差异原因。 不由任务辅助或软件推职业数量变化的AI因果。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet",
+            "ep",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -25482,13 +25438,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页未取得职业级AI采用或替代研究。材料检索、摘要和台账可以作为辅助试用场景；事实认定、程序主持、裁决与当事人意愿确认仍依适用法律承担责任。BLS2025—2035年增长5%是职业总体预测，不能证明AI会创造或减少岗位。"
+              "SVAMC2024第一版仲裁AI指南为行业建议，依当事人同意和/或仲裁庭、机构采用而适用，不减法定或其他强制规则；关注工具限制、保密、核验输出与证据完整性、仲裁员不委托个人裁决职责及正当程序。 未取得全职业替代率或工资就业因果，不能凭指南或预测判断岗位替代；仲裁、人民调解和其他争议解决责任分别依法核。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "bls",
-            "cnclass"
+            "svamc-ai",
+            "ep",
+            "cnclass",
+            "cnmed"
           ],
           "type": "prose"
         },
@@ -25513,13 +25471,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不需要。核心能力是法律适用与程序与证据规则、事实梳理与文书写作、听证或调解的主持与沟通；法律检索与文书工具会用即可，是否需要额外技术能力取决于机构与案件类型。"
+              "本轮职业资料不支持统一编程准入或无需编程结论；按具体机构、系统与数据职责核，软件清单或指南不证明全部岗位同一技能要求。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.66",
           "source_refs": [
             "onet",
-            "onet"
+            "hottech",
+            "svamc-ai"
           ],
           "type": "prose"
         },
@@ -25533,7 +25492,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25543,13 +25501,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "法律与先例检索、材料登记与分类、程序期限台账与文书模板整理等环节信息化程度较高；受影响程度取决于机构案件管理系统条件、材料保密要求与程序规范。"
+              "编辑核具体法律数据库、案管、台账、文书系统与权限；任务有信息处理不等信息化程度或AI影响已量化，SVAMC指南不提供影响排序。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.68",
           "source_refs": [
             "onet",
-            "onet"
+            "svamc-ai"
           ],
           "type": "prose"
         },
@@ -25589,12 +25547,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面展示的 BLS 2024—2034 年就业预测与 O*NET 23-1022.00（编辑建议）"
+              "BLS EP/OOH与ONET本次2025—2035职业资料，非个人就业或AI因果预测。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "onet",
+            "ep",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -25610,7 +25569,8 @@
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.72",
           "source_refs": [
             "cnclass",
-            "cnmed"
+            "cnmed",
+            "svamc-ai"
           ],
           "type": "prose"
         },
@@ -25624,6 +25584,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.73",
           "source_refs": [
+            "cnclass",
+            "cnmed",
             "onet"
           ],
           "type": "prose"
@@ -25633,13 +25595,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不提供此类年份。技术能力、实际采用与就业结果要分开判断；现有官方资料只给出 2024—2034 年的就业预测与 2025—2035 年的手册预测，没有任何来源给出该职业的消失年份。"
+              "本轮未取得23-1022消失年份，不填年份、不把2035预测终点当消失时间。BLS职业预测与SVAMC行业AI建议不证明采用率、全职业替代或工资就业因果。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep",
+            "bls",
+            "svamc-ai"
           ],
           "type": "prose"
         },
@@ -25653,7 +25616,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25716,7 +25678,7 @@
           "source_refs": [
             "cnclass",
             "cnmed",
-            "editorial"
+            "svamc-ai"
           ],
           "type": "prose"
         },
@@ -25730,8 +25692,9 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.80",
           "source_refs": [
-            "editorial",
-            "cnclass"
+            "cnclass",
+            "cnmed",
+            "svamc-ai"
           ],
           "type": "prose"
         },
@@ -25745,7 +25708,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.81",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -25755,14 +25717,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按法律与机构规范如实填写程序记录与文书，保留材料版本与检索记录，使程序与结论可复核、可追溯，并按规定归档与保存。"
+              "中国仲裁法60/67条核笔录及裁决文书签名印章，人民调解法27—30条核记录归档和书面/口头协议；编辑另核版本及保存，不承诺全程可追溯，不一律要求人民调解必须书面协议。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.82",
           "source_refs": [
             "cnclass",
-            "cnmed",
-            "editorial"
+            "cnmed"
           ],
           "type": "prose"
         },
@@ -25771,14 +25732,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仲裁员与人民调解员的选任与程序按《中华人民共和国仲裁法》与《中华人民共和国人民调解法》与主管部门与机构规定执行；诉讼案件的审理与裁判由人民法院进行，代理与法律意见由律师提供，行政决定由行政机关作出；事实认定与裁决或协议的责任由仲裁员或调解员在受托范围内承担。"
+              "中国普通仲裁、人民调解及专门仲裁分别核人员、程序与授权，人民调解不代当事人作决定。仲裁法40条可委托律师或其他代理人，不能将全部代理/法律意见排他写成只有律师提供。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.83",
           "source_refs": [
             "cnclass",
             "cnmed",
-            "editorial"
+            "onet"
           ],
           "type": "prose"
         },
@@ -25831,14 +25792,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按保密与个人信息处理要求处理，不上传可识别当事人身份与案件信息的材料。"
+              "编辑依法、委托和机构核资料权限，不能以泛称脱敏替保密。SVAMC指南2在其适用范围要求保密资料上传前适当核查/授权，不能推成全部资料一律禁传或中国法律通则。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.87",
           "source_refs": [
+            "svamc-ai",
             "cnclass",
-            "cnmed",
-            "editorial"
+            "cnmed"
           ],
           "type": "prose"
         },
@@ -25875,7 +25836,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "当事人姓名、标的金额、期间与依据填写错误会直接影响程序与结论。"
+              "编辑核姓名、金额、期间与依据原材料；具体程序、实体或文书效力须依真实事实和法律，不把字段错误直接判为裁决无效。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.90",
@@ -25910,7 +25871,7 @@
           "source_refs": [
             "cnclass",
             "cnmed",
-            "editorial"
+            "onet"
           ],
           "type": "prose"
         },
@@ -25919,14 +25880,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在记录中写明承办人与复核人与受托范围，超出承办范围或存在利害关系冲突的事项按法律与机构程序上报或回避。"
+              "中国仲裁法45—48条核及时向机构书面披露及法定回避、有权主体决定；人民调解核其法定选任/中立义务，不统一套仲裁程序。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.93",
           "source_refs": [
             "cnclass",
-            "cnmed",
-            "editorial"
+            "cnmed"
           ],
           "type": "prose"
         },
@@ -25940,6 +25900,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.94",
           "source_refs": [
+            "cnclass",
+            "cnmed",
             "onet"
           ],
           "type": "prose"
@@ -26052,6 +26014,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.102",
           "source_refs": [
+            "cnclass",
+            "cnmed",
             "onet"
           ],
           "type": "prose"
@@ -26108,6 +26072,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.106",
           "source_refs": [
+            "cnclass",
+            "cnmed",
             "onet"
           ],
           "type": "prose"
@@ -26166,7 +26132,7 @@
           "source_refs": [
             "cnclass",
             "cnmed",
-            "editorial"
+            "onet"
           ],
           "type": "prose"
         },
@@ -26182,7 +26148,7 @@
           "source_refs": [
             "cnclass",
             "cnmed",
-            "editorial"
+            "onet"
           ],
           "type": "prose"
         },
@@ -26228,7 +26194,9 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.114",
           "source_refs": [
-            "cnclass"
+            "cnclass",
+            "cnmed",
+            "onet"
           ],
           "type": "prose"
         },
@@ -26244,7 +26212,7 @@
           "source_refs": [
             "cnclass",
             "cnmed",
-            "editorial"
+            "onet"
           ],
           "type": "prose"
         },
@@ -26276,7 +26244,7 @@
           "source_refs": [
             "cnclass",
             "cnmed",
-            "editorial"
+            "onet"
           ],
           "type": "prose"
         },
@@ -26290,6 +26258,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.118",
           "source_refs": [
+            "cnclass",
+            "cnmed",
             "onet"
           ],
           "type": "prose"
@@ -26299,12 +26269,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "建立并维护案件与程序记录，使历史结论可查询、可追溯。"
+              "编辑维护程序记录及版本，按真实机构和法域保存；任务资料及法源不保证所有历史结论全面可追溯。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.119",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnclass",
+            "cnmed"
           ],
           "type": "prose"
         },
@@ -26346,7 +26318,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.122",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26434,7 +26405,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按岗位类别统计（中层及以上管理人员）；仲裁机构与调解组织的负责人与管理人员可能归入此类，仅作岗位类别对照，不是本职业工资。"
+              "规模以上企业中层及以上管理人员岗位类别均值，覆盖多行业；本轮未核特定仲裁/调解组织统计归类，非本职业工资。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.12",
@@ -26462,7 +26433,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按岗位类别统计（办事人员和有关人员）；案件事务与档案与流程辅助岗位可能归入此类，仅作参照。"
+              "规模以上企业办事人员及有关人员岗位类别均值；不直接确定本职业事务/档案辅助岗归类或收入。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.14",
@@ -26546,7 +26517,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "高校法学教育与研究岗位与部分培训机构归入该门类，与法律与争议解决人才培养相关；仅作宽口径对照。"
+              "教育门类多岗位平均工资，仅作宽背景；本轮未核具体法律培训机构行业归类或需求，不作本职业工资。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.20",
@@ -26579,8 +26550,7 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "nbs",
-            "cnmed"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26589,13 +26559,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 改变的是具体任务（法律与先例检索、材料摘要与分类、期限台账与文书初稿整理）。目前没有针对本职业的工资因果研究，不能用任务暴露度推断涨薪或降薪；工资差异主要由工作方向（劳动与商业仲裁、社区与家事调解、行政与公共争议调解、环境与自然资源争议调解）、机构性质（仲裁机构、人民调解组织、企业与律师事务所、研究与咨询机构）、选任条件与承办范围、案源与计酬方式以及所在地区决定。"
+              "编辑核方向、机构、本人聘任条件、权限、实际薪酬/按案支付、福利及地区；本轮未取得这些因素对职业工资差异的因果量化。SVAMC AI建议和检索辅助不证明涨薪降薪。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs",
+            "cnclass",
+            "cnmed",
+            "svamc-ai"
           ],
           "type": "prose"
         },
@@ -26623,7 +26595,10 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
-            "nbs"
+            "cnclass",
+            "cnmed",
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -26637,9 +26612,10 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "editorial",
+            "onet",
             "cnclass",
-            "cnmed"
+            "cnmed",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26653,9 +26629,10 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "editorial",
             "cnclass",
-            "cnmed"
+            "cnmed",
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -26669,7 +26646,10 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.28",
           "source_refs": [
-            "nbs"
+            "cnclass",
+            "cnmed",
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -26683,9 +26663,10 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "editorial",
+            "onet",
             "cnclass",
-            "cnmed"
+            "cnmed",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26699,9 +26680,10 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "editorial",
             "cnclass",
-            "cnmed"
+            "cnmed",
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -26715,7 +26697,10 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.31",
           "source_refs": [
-            "nbs"
+            "cnclass",
+            "cnmed",
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -26729,9 +26714,10 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.32",
           "source_refs": [
-            "editorial",
+            "onet",
             "cnclass",
-            "cnmed"
+            "cnmed",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26745,7 +26731,10 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "editorial"
+            "cnclass",
+            "cnmed",
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -26759,9 +26748,10 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.34",
           "source_refs": [
-            "editorial",
             "cnclass",
-            "cnmed"
+            "cnmed",
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -26775,9 +26765,10 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.35",
           "source_refs": [
-            "editorial",
+            "onet",
             "cnclass",
-            "cnmed"
+            "cnmed",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26786,14 +26777,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "企业与专门领域与涉外案件相关岗位按机构或企业招聘程序进入，对学历与专业要求不一，更看重实务经历与语言与专业能力；涉及依照仲裁或调解程序承办案件仍须符合相应选任条件。本页不提供各机构的具体门槛。"
+              "企业或专门领域岗位学历、训练与权限按真实公告及业务核；本轮未取得职业级偏好/因素排名或统一门槛，不泛称更看重经历和语言。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
-            "editorial",
             "cnclass",
-            "cnmed"
+            "cnmed",
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -26821,6 +26813,9 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
+            "onet",
+            "cnclass",
+            "cnmed",
             "nbs"
           ],
           "type": "prose"
@@ -26849,6 +26844,9 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
+            "onet",
+            "cnclass",
+            "cnmed",
             "nbs"
           ],
           "type": "prose"
@@ -26863,8 +26861,7 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.41",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26878,6 +26875,9 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.42",
           "source_refs": [
+            "onet",
+            "cnclass",
+            "cnmed",
             "nbs"
           ],
           "type": "prose"
@@ -26892,8 +26892,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.43",
           "source_refs": [
-            "bls",
-            "oews"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         },
@@ -26907,8 +26907,7 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26922,9 +26921,10 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "editorial",
+            "onet",
             "cnclass",
-            "cnmed"
+            "cnmed",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26938,9 +26938,10 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "editorial",
+            "onet",
             "cnclass",
-            "cnmed"
+            "cnmed",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26949,7 +26950,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.47",
@@ -26982,7 +26983,7 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.49",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27010,7 +27011,7 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27038,7 +27039,7 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27075,7 +27076,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.57",
@@ -27089,12 +27090,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "平均（3% 至 4%）"
+              "OOH5%；EP4.7%（2025—2035）"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "onet"
+            "bls",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27108,7 +27110,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.59",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         }
@@ -27130,9 +27133,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27141,12 +27143,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "低于47,220美元/年"
+              "47,220美元/年（P10）"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27155,12 +27158,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "年薪第 10 分位上界（时薪 22.70 美元），为统计分布位置，不代表起薪或最低工资。；O*NET 23-1022.00 页面展示的 BLS 2025 年 5 月工资分位｜https://www.onetonline.org/link/localwages/23-1022.00"
+              "年薪第10分位，O*NET表述10%不高于该值（时薪 22.70 美元），为统计分布位置，不代表起薪或最低工资；O*NET 23-1022.00 页面展示的 BLS 2025 年 5 月工资分位｜https://www.onetonline.org/link/localwages/23-1022.00"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27174,7 +27178,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27183,12 +27188,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "年薪第 25 分位（时薪 27.58 美元）。；O*NET 23-1022.00 页面展示的 BLS 2025 年 5 月工资分位｜https://www.onetonline.org/link/localwages/23-1022.00"
+              "年薪第 25 分位（时薪 27.58 美元）；O*NET 23-1022.00 页面展示的 BLS 2025 年 5 月工资分位｜https://www.onetonline.org/link/localwages/23-1022.00"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27202,7 +27208,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27216,6 +27223,7 @@
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
+            "oews",
             "bls"
           ],
           "type": "prose"
@@ -27230,7 +27238,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27239,12 +27248,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "年薪第 75 分位（时薪 51.92 美元）。；O*NET 23-1022.00 页面展示的 BLS 2025 年 5 月工资分位｜https://www.onetonline.org/link/localwages/23-1022.00"
+              "年薪第 75 分位（时薪 51.92 美元）；O*NET 23-1022.00 页面展示的 BLS 2025 年 5 月工资分位｜https://www.onetonline.org/link/localwages/23-1022.00"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27253,12 +27263,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "高于155,440美元/年"
+              "155,440美元/年（P90）"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27272,7 +27283,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "oews"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27287,7 +27299,7 @@
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
             "bls",
-            "oews"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27302,7 +27314,7 @@
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
             "bls",
-            "oews"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27311,13 +27323,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "5%（2025—2035年）"
+              "OOH5%；EP4.7%（2025—2035）"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
             "bls",
-            "oews"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27326,13 +27338,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "预计2025年10,500人增至2035年11,000人，净增约500人；BLS职业展望手册｜https://www.bls.gov/ooh/legal/arbitrators-mediators-and-conciliators.htm"
+              "2025就业10.5千→2035年11.0千，EP官方净增0.5千/4.7%、年空缺0.3千，OOH增长5%取整；非个人就业保证。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
             "bls",
-            "oews"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27346,7 +27358,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "bls",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27361,7 +27374,7 @@
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
             "bls",
-            "oews"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27376,7 +27389,7 @@
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
             "bls",
-            "oews"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27390,8 +27403,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27400,12 +27413,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该职业 47% 受访者工作周超过 40 小时、32% 为 40 小时、21% 少于 40 小时；官方年工资是统计折算口径，不等于个人全年收入，聘任兼职与按案件计酬的岗位收入差异更明显。"
+              "美国47%受访工作周超40小时、32%40、21%不足40为情境；工资分位不是个人全年实收，本轮未取得专兼职/按案报酬差异比较。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.27",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27419,7 +27433,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.28",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27428,12 +27443,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "案源与计酬方式（专职固定薪酬、聘任兼职或按案件分成）受经济活跃度与合同与劳动关系争议量影响；63% 为不规律日程，需按实际聘任与计酬安排核对。"
+              "编辑核案源、固定薪酬/按案支付、实际结算、合同及费用；63%不规律日程不证明计酬分布或经济/争议量对收入的具体因果。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27447,7 +27463,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.30",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27456,12 +27473,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "案卷阅读与听证或调解会议并存：80% 持续或几乎持续坐着、47% 工作周超过 40 小时，且 45% 每天面对冲突情形、50% 认为竞争高度激烈、20% 中度竞争，会影响实际工作体验与长期可持续性。"
+              "美国80%持续/几乎持续久坐、47%工作周超40小时、45%每日冲突、竞争50%高度/20%中等为受访背景，非工时份额；本轮未取得长期可持续性、健康或事故因果。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.31",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27476,7 +27494,7 @@
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.32",
           "source_refs": [
             "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -27485,13 +27503,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "5%（2025—2035年）"
+              "OOH5%；EP4.7%（2025—2035）"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
             "bls",
-            "oews"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27673,8 +27691,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "bls",
-            "oews"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27688,7 +27706,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27702,7 +27721,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "onet"
+            "bls",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27716,8 +27736,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27731,7 +27751,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27745,8 +27766,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "bls",
-            "oews"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27760,7 +27781,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27774,8 +27796,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "bls",
-            "oews"
+            "oews",
+            "bls"
           ],
           "type": "prose"
         }
@@ -27916,11 +27938,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -27935,7 +27952,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.2",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -27966,7 +27982,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.4",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -28025,7 +28040,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.8",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -28111,7 +28125,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.fit.riasec-fit-block.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28207,7 +28220,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用类型标签解释执业受挫，会减少改进机会。"
+              "编辑核具体受挫后的回应和改进，不凭类型标签判胜任；本轮未取得类型解释减少改进机会的因果证据。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.17",
@@ -28221,12 +28234,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "阅读与逻辑推理与文字表达与数字核对能力有助于材料审查、依据比对与金额与期间核对；但没有统一 IQ 门槛，本职业更看重法律训练与程序与文书规范，准入以选任条件与机构要求为准。"
+              "编辑核具体材料阅读、逻辑、文书及数字准备；本轮O*NET不提供IQ选任阈值，未取得因素排名或训练效果，不声称全球无统一门槛。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.18",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28265,7 +28277,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用单次推理分数代替材料阅读、逻辑核查与文书练习，会忽略可训练能力。"
+              "编辑核具体阅读、逻辑与文书准备，不以单次分数判胜任；本轮未取得本职业训练干预效果。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.21",
@@ -28279,13 +28291,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "在当事人沟通、听证或调解主持与程序说明中需要耐心与沟通能力（21% 认为与外部客户或公众打交道非常重要、16% 重要），但情商不是准入硬指标；关键是在当事人冲突、利害关系或一方施压时仍保持中立、按程序作业并如实说明依据。"
+              "编辑观察双方沟通、程序说明和压力中真实回应；ONET公众21%非常重要/16%重要不证明情商准入或胜任效度。仲裁披露回避与人民调解中立依法分别核。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.22",
           "source_refs": [
             "onet",
-            "onet"
+            "cnclass",
+            "cnmed"
           ],
           "type": "prose"
         },
@@ -28309,12 +28322,11 @@
           "data": {
             "entries": [
               "能在当事人施压或一方情绪激动时保持中立与耐心。",
-              "愿意在证据存疑时暂停程序并补正材料。"
+              "愿意报告证据疑点，并依适用程序和有权主体的决定补正材料或调整安排（编辑核问）。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -28352,12 +28364,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本职业为仲裁员、调解员与和解员（O*NET 23-1022.00），兴趣代码为 ECS（企业型、常规型、社会型）。适配判断应看可观察行为：能否长期投入案卷阅读与法律检索与文书写作（65% 认为精确或准确极其重要、35% 认为非常重要），能否在冲突情境与多方沟通中保持中立与耐心（45% 每天面对冲突情形、25% 每周至少一次需要应对不愉快或愤怒的人），能否适应长时久坐与不规律日程（80% 持续或几乎持续坐着、47% 工作周超过 40 小时、63% 不规律）。"
+              "本职业为仲裁员、调解员与和解员（O*NET 23-1022.00），兴趣代码为 ECS（企业型、常规型、社会型）。适配判断应看可观察行为：能否长期投入案卷阅读与法律检索与文书写作（65% 认为精确或准确极其重要、35% 认为非常重要），能否在冲突情境与多方沟通中保持中立与耐心（45% 每天面对冲突情形、25% 每周但非每日需要应对不愉快或愤怒的人），能否适应长时久坐与不规律日程（80% 持续或几乎持续坐着、47% 工作周超过 40 小时、63% 不规律）。 编辑观察非已验证的筛选效度。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28372,7 +28383,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.28",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28382,12 +28392,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合愿意按司法程序审理裁判并对判决负责的人。"
+              "编辑兴趣核问：可核是否愿意按司法程序审理裁判并对判决负责的人。 具体训练、条件及权限另核，兴趣不判适任。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.29",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28397,12 +28406,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "以国家司法权审理并裁判案件，结论具有司法强制力；若希望以当事人合意为基础处理争议，需理解仲裁与调解的自愿与一裁终局特点。"
+              "编辑比较：以国家司法权审理并裁判案件，结论具有司法强制力；若希望以当事人合意为基础处理争议，需理解仲裁与调解的自愿与一裁终局特点。 真实角色可交叉，法域/机构和资格各自核，不作全部岗位排他结论。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.30",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28417,7 +28425,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28427,12 +28434,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合愿意在行政程序内审理争议并撰写裁决的人。"
+              "编辑兴趣核问：可核是否愿意在行政程序内审理争议并撰写裁决的人。 具体训练、条件及权限另核，兴趣不判适任。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.32",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28442,12 +28448,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "以行政机关的裁决程序为主，处理的是行政争议而非平等主体之间的合同与财产权益纠纷，权限与依据不同。"
+              "编辑比较：以行政机关的裁决程序为主，处理的是行政争议而非平等主体之间的合同与财产权益纠纷，权限与依据不同。 真实角色可交叉，法域/机构和资格各自核，不作全部岗位排他结论。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.33",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28462,7 +28467,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28472,12 +28476,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合愿意为一方当事人主张权利并做代理与谈判的人。"
+              "编辑兴趣核问：可核是否愿意为一方当事人主张权利并做代理与谈判的人。 具体训练、条件及权限另核，兴趣不判适任。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28487,12 +28490,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "以代理与法律意见与谈判为主，立场为委托方服务；与保持中立的仲裁与调解工作不同，需补足中立与程序主持能力。"
+              "编辑比较：以代理与法律意见与谈判为主，立场为委托方服务；与保持中立的仲裁与调解工作不同，需补足中立与程序主持能力。 真实角色可交叉，法域/机构和资格各自核，不作全部岗位排他结论。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28507,7 +28509,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28517,12 +28518,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合愿意在组织内部处理员工关系与集体协商与争议预防的人。"
+              "编辑兴趣核问：可核是否愿意在组织内部处理员工关系与集体协商与争议预防的人。 具体训练、条件及权限另核，兴趣不判适任。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28532,12 +28532,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "在用人单位内部代表组织处理劳动关系并预防争议，不作出中立裁决，工会与集体协商能力是主要补充方向。"
+              "编辑比较：在用人单位内部代表组织处理劳动关系并预防争议，是否兼任争议解决须另核，工会与集体协商能力是主要补充方向。 真实角色可交叉，法域/机构和资格各自核，不作全部岗位排他结论。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28552,8 +28551,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.40",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28563,13 +28560,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合愿意做法律检索与文书与卷宗管理支持的人。"
+              "编辑兴趣核问：可核是否愿意做法律检索与文书与卷宗管理支持的人。 具体训练、条件及权限另核，兴趣不判适任。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.41",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28579,13 +28574,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "以协助律师完成检索与文书与材料整理为主，不作出裁决或主持程序；承办案件须另行满足选任条件。"
+              "编辑比较：以协助律师完成检索与文书与材料整理为主，是否兼任主持或裁决须另核；承办案件须另行满足选任条件。 真实角色可交叉，法域/机构和资格各自核，不作全部岗位排他结论。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.42",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28600,7 +28593,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28610,12 +28602,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合愿意做合规规则梳理与内部审查与整改跟进的人。"
+              "编辑兴趣核问：可核是否愿意做合规规则梳理与内部审查与整改跟进的人。 具体训练、条件及权限另核，兴趣不判适任。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28625,12 +28616,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "以组织内部合规与监管要求落地为主，关注的是是否违规与如何整改，而非居中处理当事人之间的争议。"
+              "编辑比较：以组织内部合规与监管要求落地为主，关注的是是否违规与如何整改，而非居中处理当事人之间的争议。 真实角色可交叉，法域/机构和资格各自核，不作全部岗位排他结论。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28640,12 +28630,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有某种「适合」的性格。可靠性来自可观察行为：能否按程序完成并复核证据与记录与文书、能否在材料不足或结论被质疑时如实说明依据与限制、能否长期持续产出可复核的裁决或调解文书。"
+              "编辑以材料核验、如实记录及说明限制的真实行为核准备；本轮未取得其可靠性或选任预测效度，不凭性格下结论。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28655,12 +28644,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "性格内向并不构成障碍；仲裁与调解工作有大量独立案卷阅读与文书写作时间，但听证或调解主持与程序说明与多方沟通需要主动接触当事人与代理人（11% 每天有面对面讨论、21% 每天有电话交谈、45% 每天面对冲突情形）。"
+              "本轮未取得内向与胜任/选任的职业级效度证据；编辑核具体任务：仲裁与调解工作有大量独立案卷阅读与文书写作时间，但听证或调解主持与程序说明与多方沟通需要主动接触当事人与代理人（11% 每天有面对面讨论、21% 每天有电话交谈、45% 每天面对冲突情形）。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.47",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28703,7 +28691,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.50",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28727,12 +28714,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "阅读与推理与文字表达与数字核对能力有助于材料审查与依据比对；但没有统一 IQ 门槛，可通过法律教育与实务训练建立。"
+              "编辑核具体阅读、推理、表达及复算准备；本轮未取得IQ录用阈值或训练效果，不声称全球无门槛。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.52",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28742,12 +28728,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "沟通与抗压有帮助但不是硬指标；更重要的是在当事人冲突、一方施压或材料存疑时仍保持中立并按程序作业。"
+              "编辑核双方冲突、施压或资料存疑中的真实回应；本轮未取得沟通/抗压统一阈值或因素排名，资格与实际岗位条件另核。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28785,12 +28770,11 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适配信号来自可观察行为：能否长期投入案卷阅读与法律检索与文书写作（65% 认为精确或准确极其重要、35% 认为非常重要），能否在冲突情境与多方沟通中保持中立（45% 每天面对冲突情形、25% 每周至少一次需要应对不愉快或愤怒的人），能否适应长时久坐与不规律日程（80% 持续或几乎持续坐着、47% 工作周超过 40 小时、63% 不规律）。兴趣代码 ECS（企业型、常规型、社会型）是可核对的起点。"
+              "适配信号来自可观察行为：能否长期投入案卷阅读与法律检索与文书写作（65% 认为精确或准确极其重要、35% 认为非常重要），能否在冲突情境与多方沟通中保持中立（45% 每天面对冲突情形、25% 每周但非每日需要应对不愉快或愤怒的人），能否适应长时久坐与不规律日程（80% 持续或几乎持续坐着、47% 工作周超过 40 小时、63% 不规律）。兴趣代码 ECS（企业型、常规型、社会型）是可核对的起点。 编辑观察非已验证的筛选效度。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28805,7 +28789,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.57",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -28871,12 +28854,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 23-1022.00 行业分布，用于主要行业说明（专业、科学与技术服务 37%，政府 32%，其余约 31%）。"
+              "ONET2025职业行业为专业科学技术服务43%、政府29%，不同于OOH法律服务33%、地方15%、州13%、其他专业科技9%分类，不推中国或需求因果。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.62",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -28899,7 +28883,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 23-1022.00 培训与教育信息，用于 Job Zone Five（SVP 8.0 及以上）与学历构成说明（37% 专业学位、16% 学士学位、11% 学士后证书）。"
+              "O*NET JobZone5/SVP8以上和新聘教育37%专业学位/16%学士/11%学士后证书，非现有学历构成或中国选任。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.fit.personality-fit-block.64",
@@ -28989,10 +28973,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.risk.career-risk-cards.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -29017,13 +28997,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "最需要提前判断的是四类风险：一是合规与执业风险（未取得相应资格或超出承办范围处理案件、伪造程序记录或证据或依据、未按规定回避利害关系），二是结论与依据风险（证据可采性判断不当、法律适用取舍错误、当事人与标的与金额与期间认定错误导致裁决或协议被质疑甚至被撤销），三是程序与人身风险（听证或调解会议与出行带来的现场安全与健康问题、长时案卷阅读与不规律日程带来的职业健康问题），四是信息与独立性风险（当事人身份与商业秘密与个人隐私与案件材料泄露，结论受一方压力影响，或在撤销与复核与执行环节中被质疑）。风险随方向不同：劳动与商业仲裁方向更贴近证据与法律适用风险，社区与家事调解方向更贴近当事人情绪与自愿真实性的风险，行政与公共争议调解方向更贴近程序合法性风险，环境与自然资源争议方向更贴近多方利益协调与专门事实核对风险。"
+              "编辑核选任和授权、材料/程序/记录、隐私与独立性、现场秩序及专门事实；中国普通仲裁与人民调解分别依法，不能用统一资格替代。情境不提供事故率、健康因果、方向风险排名或撤销/责任结局。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.risk.career-risk-cards.9",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29033,14 +29011,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：O*NET 23-1022.00 提供任务与工作情境（65% 认为精确或准确极其重要、35% 认为非常重要；20% 认为错误后果非常严重、30% 严重；47% 工作周超过 40 小时、63% 为不规律日程；80% 持续或几乎持续坐着；45% 每天面对冲突情形、25% 每周至少一次需要应对不愉快或愤怒的人；21% 认为与外部客户或公众打交道非常重要；50% 认为竞争高度激烈）。中国大陆侧提供《中华人民共和国仲裁法》（2025-09-12 修订，2026-03-01 施行）与《中华人民共和国人民调解法》（2010-08-28 通过，2011-01-01 施行）关于选任与程序与保密的规定。风险场景、后果与应对为编辑归纳；本页不写入未经来源支持的事故率或处罚金额。"
+              "证据范围：O*NET 23-1022.00 提供任务与工作情境（65% 认为精确或准确极其重要、35% 认为非常重要；20% 认为错误不易纠正时后果非常严重、30% 较严重；47% 工作周超过 40 小时、63% 为不规律日程；80% 持续或几乎持续坐着；45% 每天面对冲突情形、25% 每周但非每日需要应对不愉快或愤怒的人；21% 认为与外部客户或公众打交道非常重要；50% 认为竞争高度激烈）。中国大陆侧提供《中华人民共和国仲裁法》（2025-09-12 修订，2026-03-01 施行）与《中华人民共和国人民调解法》（2010-08-28 通过，2011-01-01 施行）关于选任与程序与保密的规定。风险场景、后果与应对为编辑归纳；本页不写入未经来源支持的事故率或处罚金额。 美国比例非中国风险或事件发生率。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.risk.career-risk-cards.10",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29055,7 +29030,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.risk.career-risk-cards.11",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29065,7 +29039,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "可能因程序与费用约定不清被当事人质疑程序合法性，影响裁决或协议效力。"
+              "程序、费用和通知需依具体业务核；人民调解不收费。裁决/协议效力与责任须依法按真实事实和程序核，不能因约定不清直接断结果。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.risk.career-risk-cards.12",
@@ -29080,7 +29054,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "受理时以书面方式说明程序、费用与时限安排并留存当事人确认记录，程序变更及时通知并记录。"
+              "编辑按实际法域、业务及机构核程序、时限和通知记录；人民调解依法不收费，仲裁费用另依法核，不设全部程序统一确认或变更流程。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.risk.career-risk-cards.13",
@@ -29115,7 +29089,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.risk.career-risk-cards.15",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29125,7 +29098,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "记录与文书不一致会使程序无法复核，结论可能被质疑或撤销。"
+              "编辑核记录与文书差异及补正；具体裁决撤销或协议争议须依法定条件与程序，不由版本差异直接判断。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.risk.career-risk-cards.16",
@@ -29184,7 +29157,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "可能侵害当事人隐私与商业秘密并引发合规争议与信任损失。"
+              "依法核隐私、商业秘密及资料权限；具体侵害、争议与信任损失依真实事实核，本轮未取得因果量。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.risk.career-risk-cards.20",
@@ -29199,7 +29172,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按保密与个人信息保护要求处理案件材料，对可识别信息脱敏并限定使用范围，不上传含当事人身份与案件信息的材料。"
+              "编辑依法、委托及机构核资料接收方、用途与保护措施，不能以脱敏替保密或设全部资料统一禁传。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.risk.career-risk-cards.21",
@@ -29234,7 +29207,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.risk.career-risk-cards.23",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29244,12 +29216,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "可能发生会议与出行中的现场冲突或安全事故，影响人身安全与程序进度。"
+              "编辑核具体会场、出行及争议激化安全；美国冲突比例不证明事故率或个人医学风险。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.risk.career-risk-cards.24",
           "source_refs": [
-            "onet",
+            "cnmed",
             "onet"
           ],
           "type": "prose"
@@ -29259,12 +29231,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按安全与秩序要求安排会议与出行，落实会场秩序与应急安排，在一方情绪激动或存在安全风险时暂停或调整程序并记录。"
+              "人民调解法25条：纠纷可能激化采取针对预防措施，可能引起治安/刑事案件及时报告公安等；其他程序依真实授权，不把情绪激动一律当暂停授权。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.risk.career-risk-cards.25",
           "source_refs": [
-            "onet",
+            "cnmed",
             "onet"
           ],
           "type": "prose"
@@ -29279,7 +29251,7 @@
           },
           "id": "arbitrators-mediators-and-conciliators.risk.career-risk-cards.26",
           "source_refs": [
-            "onet",
+            "cnmed",
             "onet"
           ],
           "type": "prose"
@@ -29294,7 +29266,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.risk.career-risk-cards.27",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29304,7 +29275,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "可能因独立性不足或依据不清导致结论被推翻并承担相应责任。"
+              "仲裁45—48条核书面披露、法定回避及决定主体；具体裁决撤销与责任依法定事实和程序，不由独立性疑点直断结果。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.risk.career-risk-cards.28",
@@ -29354,7 +29325,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.risk.career-risk-cards.31",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29364,7 +29334,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "对超出专业范围的问题自行认定会导致结论错误并被质疑。"
+              "编辑核专门事实和所需鉴定，具体错误、效力与责任依真实材料和程序，本轮未取得统一因果量。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.risk.career-risk-cards.32",
@@ -29384,7 +29354,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.risk.career-risk-cards.33",
           "source_refs": [
-            "cnclass"
+            "cnclass",
+            "cnmed"
           ],
           "type": "prose"
         },
@@ -29496,7 +29467,7 @@
             "column_labels": [
               "入门方向",
               "初期任务",
-              "雇主或机构认可能力的凭证",
+              "可核问的能力凭证",
               "无经验可出示的准备证据",
               "与相邻岗位的区别"
             ],
@@ -29504,35 +29475,35 @@
               [
                 "材料审查与程序支持方向",
                 "在承办人指导下登记案件材料、建立证据索引与程序时间线，整理争点与待确认事项。",
-                "记录规范完整、索引清楚、能发现材料缺漏并报告。",
+                "编辑能力核问：记录规范完整、索引清楚、能发现材料缺漏并报告。 未取得雇主认可或录用效度。",
                 "一份含当事人与授权与程序问题与待补证据栏的虚构案件审查表。",
                 "与律师助理不同：本方向服务于中立程序推进，不承担代理与为一方主张权利。"
               ],
               [
                 "调解会议准备与主持辅助方向",
                 "在调解员指导下准备会议议程与开场说明要点，核对当事人意愿与授权，记录会议要点。",
-                "议程完整、能准确复述双方观点、记录中立且可复核。",
+                "编辑能力核问：议程完整、能准确复述双方观点、记录中立且可复核。 未取得雇主认可或录用效度。",
                 "一份含程序与保密与自愿原则与时间安排与下一步的虚构调解会议开场说明。",
                 "与劳动关系专员不同：本方向以中立促成合意为目的，不代表组织立场。"
               ],
               [
                 "仲裁听证准备与文书方向",
                 "协助整理证据可采性要点与先例检索结论，起草程序文书与认定理由结构草案。",
-                "检索结论准确、文书结构清楚、依据与事实可对应。",
+                "编辑能力核问：检索结论准确、文书结构清楚、依据与事实可对应。 未取得雇主认可或录用效度。",
                 "一份含争议事项与适用依据与拟采步骤与待补证据的虚构程序推进备忘。",
                 "与法官岗位不同：本方向受当事人选择与聘任范围约束，不承担司法裁判权。"
               ],
               [
                 "社区与家事调解方向",
                 "协助接待当事人、说明调解流程与保密原则，整理家庭与邻里纠纷事实与诉求。",
-                "沟通耐心、事实与诉求分开记录、能识别情绪与安全风险。",
+                "编辑能力核问：沟通耐心、事实与诉求分开记录、能识别情绪与安全风险。 未取得雇主认可或录用效度。",
                 "一份含当事人诉求与利益与可选方案与履行安排的虚构调解方案要点。",
                 "与社区工作者不同：本方向以促成调解协议与程序留痕为核心，不承担社会救助与行政管理。"
               ],
               [
                 "行政与公共争议调解辅助方向",
                 "协助梳理政策与法规依据与程序节点，整理利害相关方意见并归档。",
-                "程序节点清楚、依据引用可追溯、意见记录完整。",
+                "编辑能力核问：程序节点清楚、依据引用可追溯、意见记录完整。 未取得雇主认可或录用效度。",
                 "一份含程序节点与权限依据与各方意见与处理建议的虚构说明材料。",
                 "与行政办事人员不同：本方向以争议协调与依据说明为主，不作出行政决定。"
               ]
@@ -29554,7 +29525,7 @@
                 "id": "education",
                 "values": [
                   "学历、经验与法定资格",
-                  "美国：BLS通常要求学士及相关经验；O*NET37%专业学位、16%学士、11%学士后证书为受访回答，Job Zone Five不是中国资格标准。",
+                  "美国：BLS通常要求学士及相关经验；O*NET37%专业学位、16%学士、11%学士后证书为新入职教育需要回答，非现有学历构成，Job Zone Five不是中国资格标准。 BLS典型经验少于5年及中期OJT不作中国统一门槛。",
                   "中国大陆侧：仲裁员按《中华人民共和国仲裁法》由仲裁机构从公道正派人员中聘任并符合法定条件之一（法律职业资格并从事仲裁工作满八年、律师执业满八年、曾任法官或检察官满八年、法律研究或教学高级职称、法律知识并从事法律或经济贸易或海事海商或科学技术等专业工作并具有高级职称或同等专业水平），并按专业列入名册；人民调解员按《中华人民共和国人民调解法》由人民调解委员会委员和聘任人员担任，应由公道正派、热心人民调解工作并具有一定文化水平、政策水平和法律知识的成年公民担任。",
                   "学历与准备能力须按具体岗位核对；中国人民调解法不设统一大学学历，民商事仲裁员五项条件也不等于统一学位门槛。"
                 ]
@@ -29564,7 +29535,7 @@
                 "values": [
                   "聘任、保密与回避",
                   "中国普通民商事仲裁核机构聘任与名册；第82条特殊涉外仲裁另核具体条件。仲裁原则上不公开，当事人协议公开但涉及国家秘密、第三方商业秘密或个人隐私时仍不公开。人民调解依自愿原则，可公开或不公开，依法保护隐私与商业秘密。",
-                  "应保护案件隐私与商业秘密；依法应回避的情形须回避，披露不能替代回避，是否回避由法定机构程序决定。",
+                  "普通民商事仲裁45—48条核书面披露、法定回避与有权主体决定；人民调解核其中立和保密义务，不一律套仲裁回避程序。资料权限依法及实际机构核。",
                   "证据不足：未取得支持本职业统一无犯罪证明或培训周期要求的完整招聘样本。仍须核实际聘任、保密及回避要求。"
                 ]
               },
@@ -29573,7 +29544,7 @@
                 "values": [
                   "美国职业调查特征",
                   "O*NET 23-1022.00 兴趣代码为 ECS（企业型、常规型、社会型）；工作活动以获取信息（91）与解决冲突并与他人谈判（91）为主，其后是决策与解决问题（90）、分析数据或信息（85）、评估信息以确定是否符合标准（84）。",
-                  "工作情境以高精确性与较高错误后果（65% 认为精确或准确极其重要、35% 认为非常重要；20% 错误后果非常严重、30% 严重）、中等时间压力（30% 每天、30% 每周至少一次）、长时久坐与不规律日程（80% 持续或几乎持续坐着、47% 超过 40 小时、63% 不规律）与高频冲突情境（45% 每天面对冲突情形、25% 每周至少一次需要应对不愉快或愤怒的人）为特征；50% 认为竞争高度激烈、20% 中度竞争。",
+                  "工作情境以高精确性与较高错误不易纠正时后果（65% 认为精确或准确极其重要、35% 认为非常重要；20% 错误不易纠正时后果非常严重、30% 较严重）、时间压力频率（30% 每天、30% 每周但非每日）、长时久坐与不规律日程（80% 持续或几乎持续坐着、47% 超过 40 小时、63% 不规律）与高频冲突情境（45% 每天面对冲突情形、25% 每周但非每日需要应对不愉快或愤怒的人）为特征；50% 认为竞争高度激烈、20% 中度竞争。 不是工时份额或风险发生率。",
                   "美国受访者85%有很大决策自由度；21%认为外部客户或公众沟通非常重要、16%重要。这是调查分布，不证明每个岗位外联要求都高。"
                 ]
               },
@@ -29581,7 +29552,7 @@
                 "id": "tools",
                 "values": [
                   "工具使用与人工责任",
-                  "案件管理系统、法律与法规数据库、文书与表格软件、在线听证或视频会议工具是常见工具，用于材料登记、先例检索、程序节点管理与文书起草。",
+                  "编辑工具核问：按真实机构核案件管理、法律检索、文书表格及线上会议系统，用于哪些资料和环节；本轮工具清单不能证明全职业实际采用程度。",
                   "部分方向使用电子卷宗与证据整理工具；是否提供专用系统与数据库须与机构核对。",
                   "工具无法替代判断：证据可采性、事实认定、法律适用取舍与主持与结论仍由仲裁员或调解员负责并如实记录。"
                 ]
@@ -29851,11 +29822,11 @@
               [
                 "仲裁员聘任（按专业列入名册）",
                 "拟在中国大陆从事仲裁案件承办者",
-                "决定能否接受选定或指定承办仲裁案件并作出裁决",
+                "具备法定条件与机构聘任后，具体组庭选定/指定及权限依程序核",
                 "法定条件（《中华人民共和国仲裁法》）",
                 "按现行仲裁法第21—23条满足操守与五项条件之一，并经机构聘任；境外人士聘任及特定涉外特别仲裁另核第22、82条。",
                 "按实务年限与考试与聘任周期",
-                "未按法定条件聘任或超范围承办属于违规"
+                "具体违规、除名及责任须依法按真实事实核"
               ],
               [
                 "人民调解员选任",
@@ -29878,17 +29849,17 @@
               [
                 "实务经历与主持训练",
                 "全部拟入行者",
-                "决定能否独立完成材料审查与主持与文书编制",
+                "编辑核真实训练及记录，不直接证明独立承办能力",
                 "机构实际要求",
                 "按机构或组织安排，在具备条件的人员指导下开展",
                 "按机构与案件累计",
-                "未参加实务训练难以独立承办案件"
+                "实际承办按法定条件、聘任/选任及机构核，不设训练直接判胜任"
               ],
               [
                 "法律检索与文书工具能力",
                 "全部方向",
-                "影响作业效率与文书质量",
-                "岗位常见要求",
+                "编辑核工具与材料复核，本轮未取得效率/文书质量比较效果",
+                "按实际机构系统及职责核，不设全职业统一要求",
                 "按机构案件管理系统与数据库与文书规范",
                 "按培训与项目实践",
                 "工具能力不等于法律适用判断与责任"
@@ -29896,7 +29867,7 @@
               [
                 "保密与回避培训",
                 "全部方向（涉及涉外与商事案件更需）",
-                "决定文书能否被采信与规避执业风险",
+                "依法核保密及披露回避，不由培训直接判文书可采信或规避风险",
                 "法律与机构规范要求",
                 "按保密制度与回避与独立性要求",
                 "按培训与审查周期",
@@ -29916,10 +29887,10 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "本职业的资格以法定选任条件为主，且分法域差异明显：中国大陆侧，依据《中华人民共和国仲裁法》（1994-08-31 通过，2009 与 2017 两次修正，2025-09-12 修订，主席令第五十四号，自 2026-03-01 施行），仲裁员由仲裁机构从公道正派、具备良好专业素质并勤勉尽责的人员中聘任，应当符合法定条件之一——通过国家统一法律职业资格考试取得法律职业资格并从事仲裁工作满八年、律师执业满八年、曾任法官或检察官满八年、从事法律研究或教学工作并具有高级职称、具有法律知识并从事法律或经济贸易或海事海商或科学技术等专业工作并具有高级职称或具有同等专业水平；仲裁机构按不同专业设仲裁员名册；仲裁依法独立进行，实行一裁终局、不公开进行。",
-              "《中华人民共和国人民调解法》（2010-08-28 通过，主席令第三十四号，自 2011-01-01 施行）规定：人民调解委员会是依法设立的调解民间纠纷的群众性组织，调解不收取任何费用；人民调解员由人民调解委员会委员和人民调解委员会聘任的人员担任，应当由公道正派、热心人民调解工作并具有一定文化水平、政策水平和法律知识的成年公民担任；国务院司法行政部门与县级以上地方人民政府司法行政部门负责指导，基层人民法院进行业务指导；经调解达成的调解协议具有法律约束力，双方当事人可自协议生效之日起三十日内共同向人民法院申请司法确认。本页未核实仲裁与调解岗位的统一中国职业分类映射；本页不提供未核实的细类编码，也不提供各机构的具体聘任条件与通过率。",
+              "本职业的资格以法定选任条件为主，且分法域差异明显：中国大陆侧，依据《中华人民共和国仲裁法》（1994-08-31 通过，2009 与 2017 两次修正，2025-09-12 修订，主席令第五十四号，自 2026-03-01 施行），仲裁员由仲裁机构从公道正派、具备良好专业素质并勤勉尽责的人员中聘任，应当符合法定条件之一——通过国家统一法律职业资格考试取得法律职业资格并从事仲裁工作满八年、律师执业满八年、曾任法官或检察官满八年、从事法律研究或教学工作并具有高级职称、具有法律知识并从事法律或经济贸易或海事海商或科学技术等专业工作并具有高级职称或具有同等专业水平；仲裁机构按不同专业设仲裁员名册；仲裁依法独立进行，实行一裁终局；52条原则不公开，当事人协议公开可以公开，但国家秘密、他人商业秘密或个人隐私除外。",
+              "《中华人民共和国人民调解法》（2010-08-28 通过，主席令第三十四号，自 2011-01-01 施行）规定：人民调解委员会是依法设立的调解民间纠纷的群众性组织，调解不收取任何费用；人民调解员由人民调解委员会委员和人民调解委员会聘任的人员担任，应当由公道正派、热心人民调解工作并具有一定文化水平、政策水平和法律知识的成年公民担任；国务院司法行政部门与县级以上地方人民政府司法行政部门负责指导，基层人民法院进行业务指导；经调解达成的调解协议具有法律约束力，双方当事人可自协议生效之日起三十日内共同向人民法院申请司法确认。本页未核实仲裁与调解岗位的统一中国职业分类映射；本页不提供未核实的细类编码，也不提供各机构的具体聘任条件与通过率。 人民调解28/30条允许书面或口头协议，不是全部案件必须制作协议书。",
               "当事人与案件材料涉及身份、商业秘密与个人隐私时须遵守保密与个人信息保护要求；存在利害关系或可能影响独立性的情形应按规定披露并依法回避。",
-              "美国O*NET列Job Zone Five、SVP8.0及以上；37%专业学位、16%学士、11%学士后证书是受访回答。BLS说明没有全国统一执照，但部分州或法院有认证、培训时数或律师等专业执照要求；具体所在地规则另核。",
+              "美国O*NET列Job Zone Five、SVP8.0及以上；37%专业学位、16%学士、11%学士后证书为新聘教育需要回答，非从业者学历构成。BLS说明没有全国统一执照，但部分州或法院有认证、培训时数或律师等专业执照要求；具体所在地规则另核。",
               "有意入行者应核对主管部门与机构规定与院校培养方案，并通过官方或合规渠道参加实务训练与聘任程序；本页不构成法律、资格考试或聘任意见。"
             ]
           },
@@ -29981,9 +29952,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.10",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "links"
@@ -30008,7 +29976,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能在指导下按规范完成案件材料登记与证据索引与程序时间线整理，准确执行程序要求并如实说明材料缺漏。"
+              "编辑发展场景：能在指导下按规范完成案件材料登记与证据索引与程序时间线整理，准确执行程序要求并如实说明材料缺漏。 按真实训练、法域及机构授权核，不由阶段名授全部独立主持、裁决、带教或管理权限。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.12",
@@ -30036,7 +30004,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能独立完成一项常规案件的程序推进与文书编制并形成可复核文件，能说明依据与认定理由并接受复核意见。"
+              "编辑发展场景：能独立完成一项常规案件的程序推进与文书编制并形成可复核文件，能说明依据与认定理由并接受复核意见。 按真实训练、法域及机构授权核，不由阶段名授全部独立主持、裁决、带教或管理权限。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.14",
@@ -30064,7 +30032,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能主持复杂或涉外案件的听证或调解，独立处理依据争议与回避与独立性冲突并带教新人。"
+              "编辑发展场景：能主持复杂或涉外案件的听证或调解，独立处理依据争议与回避与独立性冲突并带教新人。 按真实训练、法域及机构授权核，不由阶段名授全部独立主持、裁决、带教或管理权限。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.16",
@@ -30092,7 +30060,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能承担机构业务管理与质量制度与对外协作，或转向企业争议管理与合规与专业研究方向。"
+              "编辑发展场景：能承担机构业务管理与质量制度与对外协作，或转向企业争议管理与合规与专业研究方向。 按真实训练、法域及机构授权核，不由阶段名授全部独立主持、裁决、带教或管理权限。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.18",
@@ -30151,13 +30119,11 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本页同时采用美国与中国大陆两种口径：美国部分为 O*NET 23-1022.00 页面展示的 BLS 工资与就业与预测（2025 年 5 月工资、2024 年就业、2024—2034 年预测）与 BLS 职业展望手册的 2025—2035 年资料期；中国大陆部分为《中华人民共和国仲裁法》与《中华人民共和国人民调解法》的选任与程序规定以及国家统计局行业门类与岗位类别工资参照。两者不可互相外推。"
+              "美国O*NET现期2025就业/25—35预测与May2025工资，BLS EP增长4.7%/OOH取整5%分别核；中国普通仲裁、人民调解及专门仲裁依法分开，NBS行业/岗位工资仅宽参照，不互相外推。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.22",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30167,7 +30133,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "发展路径按机构性质与方向：仲裁机构走实务积累与专业方向深耕与文书复核路线；劳动人事争议处理机构走劳动关系与集体协商与争议调处路线；人民调解组织与公共法律服务机构走基层调解与矛盾排查与协议确认路线；企业与研究与咨询机构走争议管理与企业法务与政策研究路线。晋升通常与是否符合法定选任条件与列入名册、可复核的文书质量与复杂案件经验、专门领域（涉外、海事海商、知识产权、建设工程）能力以及合规与独立性记录相关；跨法域执业需要另行满足目标国家或地区的资格与雇主要求。"
+              "编辑发展场景：按真实机构职责、法律聘任/选任、训练与案件经验核项目、复核、管理或相邻方向；本轮未取得晋升因素排名、速度/收入因果，跨法域条件另核。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.23",
@@ -30195,12 +30161,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET 23-1022.00 页面展示的 BLS 工资与就业与 2024—2034 年预测（美国）。"
+              "O*NET本次2025就业及2025—2035预测、May2025工资；BLS EP/OOH来源另列，非旧基期。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.25",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep",
+            "bls"
           ],
           "type": "prose"
         },
@@ -30209,7 +30177,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "O*NET 23-1022.00 培训与教育信息（Job Zone Five，SVP 8.0 及以上，美国学历构成说明）。"
+              "O*NETJobZone5/SVP8以上与新聘教育37/16/11，非现有学历构成或中国选任。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.26",
@@ -30281,7 +30249,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在承办人指导下登记案件材料、建立证据索引与程序时间线，整理争点与待确认事项。"
+              "编辑发展场景：在承办人指导下登记案件材料、建立证据索引与程序时间线，整理争点与待确认事项。 按真实训练、法域及机构授权核，不由阶段名授全部独立主持、裁决、带教或管理权限。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.31",
@@ -30324,7 +30292,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立完成常规案件的程序推进与文书编制，接受复核并改正问题。"
+              "编辑发展场景：独立完成常规案件的程序推进与文书编制，接受复核并改正问题。 按真实训练、法域及机构授权核，不由阶段名授全部独立主持、裁决、带教或管理权限。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.34",
@@ -30352,7 +30320,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立承办常规合同与财产权益争议案件并对认定与依据与结论负责。"
+              "编辑发展场景：独立承办常规合同与财产权益争议案件并对认定与依据与结论负责。 按真实训练、法域及机构授权核，不由阶段名授全部独立主持、裁决、带教或管理权限。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.36",
@@ -30423,7 +30391,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "复核他人文书、处理依据争议与回避与独立性冲突并对技术质量负责。"
+              "编辑发展场景：复核他人文书、处理依据争议与回避与独立性冲突并对技术质量负责。 按真实训练、法域及机构授权核，不由阶段名授全部独立主持、裁决、带教或管理权限。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.41",
@@ -30494,7 +30462,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹业务与团队并对机构办案质量与合规负责。"
+              "编辑发展场景：统筹业务与团队并对机构办案质量与合规负责。 按真实训练、法域及机构授权核，不由阶段名授全部独立主持、裁决、带教或管理权限。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.46",
@@ -30527,7 +30495,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30565,7 +30532,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "协助整理劳动争议材料、核对劳动合同与工资与考勤与解除材料并建立事实时间线。"
+              "编辑发展场景：协助整理劳动争议材料、核对劳动合同与工资与考勤与解除材料并建立事实时间线。 按真实训练、法域及机构授权核，不由阶段名授全部独立主持、裁决、带教或管理权限。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.51",
@@ -30598,7 +30565,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30608,7 +30574,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立完成劳动争议案件的调解或仲裁审理并形成可复核结论。"
+              "编辑发展场景：独立完成劳动争议案件的调解或仲裁审理并形成可复核结论。 按真实训练、法域及机构授权核，不由阶段名授全部独立主持、裁决、带教或管理权限。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.54",
@@ -30636,7 +30602,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按案件要求主持调解或听证，理顺劳动关系事实与依据并促成协议或作出裁决。"
+              "编辑发展场景：按案件要求主持调解或听证，理顺劳动关系事实与依据并促成协议或作出裁决。 按真实训练、法域及机构授权核，不由阶段名授全部独立主持、裁决、带教或管理权限。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.56",
@@ -30669,7 +30635,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.58",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30707,7 +30672,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "复核结论与文书，统一案件处理方法并对质量负责。"
+              "编辑发展场景：复核结论与文书，统一案件处理方法并对质量负责。 按真实训练、法域及机构授权核，不由阶段名授全部独立主持、裁决、带教或管理权限。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.61",
@@ -30740,7 +30705,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.63",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -30778,7 +30742,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "管理机构业务与人员，对调处质量与合规负责。"
+              "编辑发展场景：管理机构业务与人员，对调处质量与合规负责。 按真实训练、法域及机构授权核，不由阶段名授全部独立主持、裁决、带教或管理权限。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.66",
@@ -30850,7 +30814,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "接待当事人、说明调解流程与保密原则，梳理事实与诉求并促成调解协议。"
+              "编辑发展场景：接待当事人、说明调解流程与保密原则，梳理事实与诉求并促成调解协议。 按真实训练、法域及机构授权核，不由阶段名授全部独立主持、裁决、带教或管理权限。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.71",
@@ -30893,7 +30857,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立处理常见民间纠纷并指导当事人申请司法确认。"
+              "编辑发展场景：独立处理常见民间纠纷并指导当事人申请司法确认。 按真实训练、法域及机构授权核，不由阶段名授全部独立主持、裁决、带教或管理权限。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.74",
@@ -30921,7 +30885,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "主持调解并制作调解协议书，跟踪履行并按规定立卷归档。"
+              "人民调解依法主持、记录归档及督促履行；28/30条允许书面或口头协议，是否制作协议书按当事人及法定条件核。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.76",
@@ -30992,7 +30956,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "检查调解卷宗规范、指导疑难纠纷处理并按制度报送。"
+              "编辑发展场景：检查调解卷宗规范、指导疑难纠纷处理并按制度报送。 按真实训练、法域及机构授权核，不由阶段名授全部独立主持、裁决、带教或管理权限。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.81",
@@ -31063,7 +31027,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹区域调解工作与队伍建设，对质量与合规负责。"
+              "编辑发展场景：统筹区域调解工作与队伍建设，对质量与合规负责。 按真实训练、法域及机构授权核，不由阶段名授全部独立主持、裁决、带教或管理权限。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.path.career-path-block.86",
@@ -31118,22 +31082,22 @@
                 "url": "https://www.onetonline.org/link/summary/23-1022.00"
               },
               {
-                "entity": "O*NET 23-1022.00 页面展示的 BLS 工资分位",
+                "entity": "BLS EP2025—2035：23-1022职业预测",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localwages/23-1022.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET 23-1022.00 培训与教育信息（Job Zone 5）",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/23-1022.00"
+                "url": "https://www.onetonline.org/link/details/23-1022.00"
               },
               {
                 "entity": "法官、裁判官与治安法官",
@@ -31188,9 +31152,8 @@
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.7",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet"
+            "ep",
+            "nbs"
           ],
           "type": "links"
         },
@@ -31199,14 +31162,17 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国侧 O*NET 23-1022.00 页面展示的 BLS 数据为：2024—2034 年平均增长 3% 至 4%，年均约 300 个空缺，2024 年在岗约 9,100 人，行业分布为专业、科学与技术服务（37%）与政府（32%）；BLS 职业展望手册另给出 2025 年约 10,500 个岗位、2025—2035 年增长 5%、净增约 500 个、年均约 300 个空缺，属不同资料期，本页分别标注。进入门槛以法律或相关专业教育与实务经历为主（Job Zone Five；受访者回答 37% 需专业学位、16% 需学士学位、11% 需学士后证书）。中国大陆侧依据《中华人民共和国仲裁法》由仲裁机构聘任仲裁员并符合法定条件之一、按专业列入名册；依据《中华人民共和国人民调解法》人民调解员由委员和聘任人员担任并符合条件；国家统计局不单列该职业工资，本页只提供行业门类与岗位类别的宽口径参照。可转向的方向包括法官与司法审判、行政裁决、律师与代理、律师助理与法务支持、劳动关系与集体协商、合规与监管、平等机会与反歧视、人力资源管理等，但各方向的资格与职责体系不同。"
+              "BLS EP23-1022：2025年10.5千至2035年11.0千，官方净增0.5千/4.7%、年均空缺0.3千；OOH增长5%为取整。O*NET本次也显示2025—2035年、就业10500、年空缺300，增长标签5—6%分档另保留，不把该标签说成EP精确值或解释差异原因。 O*NET2025行业43%专业科技/29%政府，新聘教育37/16/11及JobZone5均不直接证明中国条件。中国普通仲裁、人民调解与专门仲裁选任各自核；工资/招聘及全国预测精确缺口不以行业宽值补。相邻方向的实际任务、资格及考核另核。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.8",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "ep",
+            "bls",
+            "cnclass",
+            "cnmed",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31220,6 +31186,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.9",
           "source_refs": [
+            "ep",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -31229,11 +31197,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年"
+              "2025—2035年"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.10",
           "source_refs": [
+            "ep",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -31243,11 +31213,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "页面展示的 BLS 预测该职业 2024—2034 年平均增长 3% 至 4%，年均约 300 个空缺且多数来自替代需求。"
+              "BLS EP精确增长4.7%、年均300空缺；OOH显示5%取整，空缺含替代及增长，非净增。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.11",
           "source_refs": [
+            "ep",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -31257,11 +31229,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "空缺数不等于净新增岗位，也不代表个人就业保证，且不能外推为中国大陆；BLS 职业展望手册另有 2025—2035 年资料期（增长 5%、净增约 500 个），本页分别标注。"
+              "职业独立口径，美国预测非个人保证或中国预测；ONET现期增长标签5—6%另保留，不混为EP精确值。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.12",
           "source_refs": [
+            "ep",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -31276,6 +31250,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.13",
           "source_refs": [
+            "ep",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -31290,6 +31266,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.14",
           "source_refs": [
+            "ep",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -31299,11 +31277,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "平均（3% 至 4%）；年均约300个"
+              "EP4.7%／OOH5%；年均300个"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.15",
           "source_refs": [
+            "ep",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -31318,7 +31298,9 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "bls",
+            "ep",
+            "oews"
           ],
           "type": "prose"
         },
@@ -31327,12 +31309,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年（工资为 2025 年 5 月）"
+              "2025年就业／2025年5月工资"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "bls",
+            "ep",
+            "oews"
           ],
           "type": "prose"
         },
@@ -31341,12 +31325,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 23-1022.00 页面展示的 BLS 工资分位为 2025 年 5 月中位数 75,530 美元（时薪 36.31 美元），2024 年在岗约 9,100 人；中位年薪与 BLS 职业展望手册的 2025 年数据一致。"
+              "2025年就业约10500；May2025中位75530美元/36.31时。就业含自雇、工资不含自雇，非同一调查样本。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "bls",
+            "ep",
+            "oews"
           ],
           "type": "prose"
         },
@@ -31360,7 +31346,9 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet"
+            "bls",
+            "ep",
+            "oews"
           ],
           "type": "prose"
         },
@@ -31374,7 +31362,9 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "bls",
+            "ep",
+            "oews"
           ],
           "type": "prose"
         },
@@ -31388,7 +31378,9 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "bls",
+            "ep",
+            "oews"
           ],
           "type": "prose"
         },
@@ -31397,12 +31389,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "75,530美元/年（2025年5月）；2024年约9,100人"
+              "75,530美元/年；2025年约10,500人"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "bls",
+            "ep",
+            "oews"
           ],
           "type": "prose"
         },
@@ -31416,7 +31410,7 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31439,11 +31433,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局按法人单位发布行业门类与岗位类别工资，本职业未单列；仲裁员与人民调解员须符合法定选任条件，反映准入与承办范围要求而非工资水平。案件量与经济活动与合同与劳动关系争议量相关，但国家统计局没有该职业的公开全国就业预测。"
+              "中国仲裁、人民调解条件分别核；NBS本表未单列职业工资，本轮未取得职业全国就业预测或需求份额，不由法律或争议处理需求推增长。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.25",
           "source_refs": [
+            "cnclass",
+            "cnmed",
             "nbs"
           ],
           "type": "prose"
@@ -31472,7 +31468,9 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "cnclass",
+            "cnmed",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31486,7 +31484,9 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "cnclass",
+            "cnmed",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31500,7 +31500,9 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "cnclass",
+            "cnmed",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31509,12 +31511,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于美国工资与就业口径（2025 年 5 月工资、2024 年就业、2024—2034 年预测）。"
+              "O*NET现期2025就业/25—35预测及May2025工资；工资与就业覆盖各自核，EP精确值和OOH另列。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.30",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31528,7 +31532,8 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.31",
           "source_refs": [
-            "onet"
+            "ep",
+            "bls"
           ],
           "type": "prose"
         },
@@ -31570,7 +31575,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.34",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31580,12 +31584,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据审查与法律适用与主持听证与文书写作能力可迁移。"
+              "编辑迁移核问：证据审查与法律适用与主持听证与文书写作能力可作目标任务核问线索。 未取得直接转岗效度；方法、训练、资格、考核及权限另核，不保证录用。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.35",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31595,12 +31598,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等：都做争议审查与法律适用与文书，但裁判权来源与强制力不同。"
+              "编辑比较：都做争议审查与法律适用与文书，但裁判权来源与强制力不同。 未取得难度/成功率量化；角色可交叉，目标法域及资格另核。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.36",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31615,7 +31617,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31625,12 +31626,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "程序主持与事实查明与依据适用能力可迁移，适用于行政争议。"
+              "编辑迁移核问：程序主持与事实查明与依据适用能力可作目标任务核问线索，适用于行政争议。 未取得直接转岗效度；方法、训练、资格、考核及权限另核，不保证录用。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31640,12 +31640,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近：都做居中审查与裁决，但争议性质与权限来源不同。"
+              "编辑比较：都做居中审查与裁决，但争议性质与权限来源不同。 未取得难度/成功率量化；角色可交叉，目标法域及资格另核。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.39",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31660,7 +31659,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.40",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31670,12 +31668,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "法律检索与文书写作与证据分析能力可迁移。"
+              "编辑迁移核问：法律检索与文书写作与证据分析能力可作目标任务核问线索。 未取得直接转岗效度；方法、训练、资格、考核及权限另核，不保证录用。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.41",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31685,12 +31682,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近：都用法律与证据工作，但立场从中立转为代表一方。"
+              "编辑比较：都用法律与证据工作，但立场从中立转为代表一方。 未取得难度/成功率量化；角色可交叉，目标法域及资格另核。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.42",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31705,7 +31701,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.43",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31715,12 +31710,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "材料整理与法律检索与记录留痕能力可迁移，适用于法务支持。"
+              "编辑迁移核问：材料整理与法律检索与记录留痕能力可作目标任务核问线索，适用于法务支持。 未取得直接转岗效度；方法、训练、资格、考核及权限另核，不保证录用。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.44",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31730,12 +31724,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近：都围绕案件材料与文书，但不承担裁决或主持职责。"
+              "编辑比较：都围绕案件材料与文书，但裁决或主持是否兼任须核。 未取得难度/成功率量化；角色可交叉，目标法域及资格另核。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.45",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31750,7 +31743,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.46",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31760,12 +31752,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "劳动争议处理与沟通谈判能力可迁移。"
+              "编辑迁移核问：劳动争议处理与沟通谈判能力可作目标任务核问线索。 未取得直接转岗效度；方法、训练、资格、考核及权限另核，不保证录用。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.47",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31775,12 +31766,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近：都处理劳动争议，但立场从中立转为代表组织。"
+              "编辑比较：都处理劳动争议，但立场从中立转为代表组织。 未取得难度/成功率量化；角色可交叉，目标法域及资格另核。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.48",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31795,7 +31785,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.49",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31805,7 +31794,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "规则梳理与依据检索与书面说明能力可迁移。"
+              "编辑迁移核问：规则梳理与依据检索与书面说明能力可作目标任务核问线索。 未取得直接转岗效度；方法、训练、资格、考核及权限另核，不保证录用。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.50",
@@ -31819,7 +31808,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等：都对照规则作判断，但对象从争议处理转为组织合规。"
+              "编辑比较：都对照规则作判断，但对象从争议处理转为组织合规。 未取得难度/成功率量化；角色可交叉，目标法域及资格另核。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.51",
@@ -31838,7 +31827,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.52",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31848,12 +31836,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "事实调查与沟通与程序记录能力可迁移。"
+              "编辑迁移核问：事实调查与沟通与程序记录能力可作目标任务核问线索。 未取得直接转岗效度；方法、训练、资格、考核及权限另核，不保证录用。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.53",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31863,12 +31850,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近：都涉及权利纠纷的调查与处理，但依据与管辖不同。"
+              "编辑比较：都涉及权利纠纷的调查与处理，但依据与管辖不同。 未取得难度/成功率量化；角色可交叉，目标法域及资格另核。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.54",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31883,7 +31869,6 @@
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.55",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31893,12 +31878,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "沟通与争议预防与流程记录能力可迁移。"
+              "编辑迁移核问：沟通与争议预防与流程记录能力可作目标任务核问线索。 未取得直接转岗效度；方法、训练、资格、考核及权限另核，不保证录用。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.56",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -31908,12 +31892,11 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等：都涉及员工关系，但职责从居中处理争议转为组织人事管理。"
+              "编辑比较：都涉及员工关系，但职责从居中处理争议转为组织人事管理。 未取得难度/成功率量化；角色可交叉，目标法域及资格另核。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.market-signals.market-signal-card.57",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -32014,9 +31997,6 @@
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.sources.source-card.1",
-          "source_refs": [
-            "onet"
-          ],
           "type": "prose"
         },
         {
@@ -32024,14 +32004,20 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET 23-1022.00 仲裁员、调解员与和解员职业摘要与详细资料；O*NET 23-1022.00 页面展示的 BLS 2025 年 5 月工资分位与 2024—2034 年就业预测；BLS 职业展望手册《仲裁员、调解员与和解员》；《中华人民共和国仲裁法》（2025 年修订）；《中华人民共和国人民调解法》；国家统计局《2025 年城镇单位就业人员年平均工资情况》。"
+              "本轮实际读O*NET23-1022现期详情/工资/HotTech、BLS EP/OOH、2025修订仲裁法与人民调解法；NBS已读宽统计有限复用。SVAMC2024指南仅行业背景，同源用途别名不当多项研究。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.sources.source-card.2",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "oews",
+            "bls",
+            "ep",
+            "cnclass",
+            "cnmed",
+            "nbs",
+            "hottech",
+            "svamc-ai"
           ],
           "type": "prose"
         },
@@ -32040,13 +32026,10 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核对与更新日期：2026-10-03。"
+              "本窗口2026-10-09核上述职业资料及法源；NBS有限复用10月8日。教育部仲裁法网页在web读取失败，终端实际81768字节法条成功，并另核司法部转载；SVAMC PDF实读适用前提及1—7指南，未逐段核全部评注。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.sources.source-card.3",
-          "source_refs": [
-            "editorial"
-          ],
           "type": "prose"
         },
         {
@@ -32054,17 +32037,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国精确职业工资分布、可比专兼职薪酬样本和完整招聘公告；未取得本职业AI采用率或替代率研究。美国2025年5月分位及四行业职业中位数已核，就业预测采用BLS2025—2035，旧O*NET期另列。NBS只作行业及岗位类别参照，中国职业细类映射未核实。来源核对不构成个人录用或案件意见。"
+              "证据不足：中国职业/城市工资、专兼职/按案收入、完整招聘与全国预测、职业AI采用率/跨任务比较效果/工资就业因果/消失年份、2022职业与机构行业细类、美国逐州及相邻完整准入、人格预测效度、医学事故因果仍缺。ONET现期2025/25—35，增长标签5—6%、EP4.7%及OOH5%分别核，不编造差异原因。SVAMC2024为采用后行业指南，不代中国法定授权，全部评注与后续版本未核。事实register历史旧期值无当前可见消费者按范围保留，禁改练习作品不声称已修。"
             ]
           },
           "id": "arbitrators-mediators-and-conciliators.sources.source-card.4",
           "source_refs": [
-            "bls",
+            "onet",
             "oews",
-            "nbs",
+            "ep",
+            "bls",
             "cnclass",
             "cnmed",
-            "editorial"
+            "nbs",
+            "svamc-ai"
           ],
           "type": "prose"
         }
@@ -32139,90 +32124,90 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "onet",
-                "limitation": "用于职业身份、任务（20 项）、工作活动、兴趣代码（ECS）与常见职位名称。",
+                "limitation": "用于职业身份、任务（20 项）、工作活动、兴趣代码（ECS）与常见职位名称。 本次现期2025就业10500、25—35增长标签5—6%/年空缺300；2025专业科技43%/政府29%。标签与EP4.7%/OOH5%分别核，不推原因或中国。",
                 "market": "美国",
                 "name": "O*NET OnLine 23-1022.00 仲裁员、调解员与和解员职业摘要",
-                "period": "2026 年更新页面；核对2026-10-03",
+                "period": "2026 年更新页面；核对2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/23-1022.00"
+                "url": "https://www.onetonline.org/link/details/23-1022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "bls",
-                "limitation": "用于核对美国该职业工资与就业与 2025—2035 年预测的官方口径，并与 O*NET 展示的 2024—2034 年预测分别标注。",
+                "limitation": "美国2025就业、May2025工资及25—35取整增长5%/年空缺300；EP精确4.7%另列。美国执照与培训规则不外推中国。",
                 "market": "美国",
                 "name": "BLS 职业展望手册《仲裁员、调解员与和解员》",
-                "period": "2025年（就业与工资）／2025—2035年（预测）；核对2026-10-03",
+                "period": "2025年（就业与工资）／2025—2035年（预测）；核对2026-10-09",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/legal/arbitrators-mediators-and-conciliators.htm"
               },
               {
-                "accessed_at": "2026-10-03",
-                "details": [
-                  "contextual",
-                  "本轮核对2026-10-03"
-                ],
-                "evidence_type": "contextual",
-                "id": "ep",
-                "limitation": "本页现行就业数字实际核自BLS职业展望手册；预测表仅为补充官方入口，不支持旧2024基期。",
-                "market": "美国",
-                "name": "BLS 就业预测表（按详细职业）",
-                "period": "2025—2035年；本轮核对2026-10-03",
-                "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "contextual",
-                "url": "https://www.bls.gov/emp/tables/emp-by-detailed-occupation.htm"
-              },
-              {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "本轮核对2026-10-03"
+                  "本窗口2026-10-09实际核23-1022行"
+                ],
+                "evidence_type": "exact",
+                "id": "ep",
+                "limitation": "23-1022职业2025就业10.5千→2035年11.0千、净0.5千、4.7%、自雇9.5%、年空缺0.3千，学士/少于5年相关经验/中期OJT分类；非中国准入或AI因果。",
+                "market": "美国",
+                "name": "BLS 就业预测表（按详细职业）",
+                "period": "2025—2035年；本轮核对2026-10-09",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "exact",
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "oews",
                 "limitation": "用于年薪 10/25/50/75/90 分位数值与资料期（含时薪中位数）。",
                 "market": "美国",
                 "name": "O*NET 23-1022.00 页面展示的 BLS 2025 年 5 月工资分位",
-                "period": "2025年5月；核对2026-10-03",
-                "publisher": "O*NET OnLine",
+                "period": "2025年5月；核对2026-10-09",
+                "publisher": "O*NET OnLine（BLS OEWS数据）",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/23-1022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "industry_proxy",
-                  "本轮核对2026-10-03"
+                  "本窗口NBS已读原文有限复用 2026-10-08"
                 ],
                 "evidence_type": "industry_proxy",
                 "id": "nbs",
                 "limitation": "按行业门类、单位类型与岗位类别发布，不含本职业单列工资；仅作宽口径参照。",
                 "market": "中国大陆",
                 "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
-                "period": "2025年；2026-05-15 发布",
+                "period": "2025统计；2026-05-15发布；本窗口2026-10-08已读有限复用",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "cnclass",
@@ -32235,65 +32220,65 @@
                 "url": "https://qspfw.moe.gov.cn/html/sublaws/20250917/23360.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "privacy",
                 "limitation": "美国Work Context受访比例，Very important为非常重要；不支持中国法律、事故率或职业健康诊断。",
                 "market": "美国",
                 "name": "O*NET 23-1022.00 详细资料（工作情境）",
-                "period": "2026 年更新页面；核对2026-10-03",
+                "period": "2026 年更新页面；核对2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/23-1022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "facilities",
                 "limitation": "用于工作活动权重说明（获取信息 91、解决冲突并与他人谈判 91、决策与解决问题 90、分析数据或信息 85 等）。",
                 "market": "美国",
                 "name": "O*NET 23-1022.00 详细资料（工作活动与技能）",
-                "period": "2026 年更新页面；核对2026-10-03",
+                "period": "2026 年更新页面；核对2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/23-1022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "operations",
                 "limitation": "用于美国任务、工作活动与情境；不能支持中国法律、行业工资或AI采用率。",
                 "market": "美国",
                 "name": "O*NET 23-1022.00 详细资料（任务与工作活动）",
-                "period": "2026 年更新页面；核对2026-10-03",
+                "period": "2026 年更新页面；核对2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/23-1022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "hr",
                 "limitation": "用于工作周时长、日程规律性、久坐比例与室内作业比例。",
                 "market": "美国",
                 "name": "O*NET 23-1022.00 详细资料（工作时间与环境）",
-                "period": "2026 年更新页面；核对2026-10-03",
+                "period": "2026 年更新页面；核对2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/23-1022.00"
@@ -32315,234 +32300,234 @@
                 "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "ilo",
-                "limitation": "用于主要行业说明（专业、科学与技术服务 37%，政府 32%，其余约 31% 含其他服务与医疗和社会救助）。",
+                "limitation": "本次2025专业科学技术服务43%、政府29%，与OOH法律服务/地方/州/其他专业服务分类不同；不推职业中国分布或工资因果。",
                 "market": "美国",
                 "name": "O*NET 23-1022.00 行业分布",
-                "period": "2026 年更新页面；核对2026-10-03",
+                "period": "2026 年更新页面；核对2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/industry/23-1022.00"
+                "url": "https://www.onetonline.org/link/details/23-1022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "editor",
                 "limitation": "美国无全国统一执照；部分州及法院有认证、培训或专业执照要求；不能外推中国。",
                 "market": "美国",
                 "name": "BLS执照、认证与注册要求",
-                "period": "2026 年更新页面；核对2026-10-03",
+                "period": "2026 年更新页面；核对2026-10-09",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/legal/arbitrators-mediators-and-conciliators.htm"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "nist",
                 "limitation": "用于职业任务与工作特征的组合视图。",
                 "market": "美国",
                 "name": "O*NET 23-1022.00 自定义职业档案",
-                "period": "2026 年更新页面；核对2026-10-03",
+                "period": "2026 年更新页面；核对2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/custom/23-1022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "arxiv",
                 "limitation": "用于程序记录与文书与档案要求说明。",
                 "market": "美国",
                 "name": "O*NET 23-1022.00 详细资料（记录与成果要求）",
-                "period": "2026 年更新页面；核对2026-10-03",
+                "period": "2026 年更新页面；核对2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/23-1022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "weforum",
                 "limitation": "用于任务清单核对。",
                 "market": "美国",
                 "name": "O*NET 23-1022.00 详细资料（任务清单）",
-                "period": "2026 年更新页面；核对2026-10-03",
+                "period": "2026 年更新页面；核对2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/23-1022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "employer",
                 "limitation": "用于记录与数据要求与执业责任说明。",
                 "market": "美国",
                 "name": "O*NET 23-1022.00 详细资料（记录与数据要求）",
-                "period": "2026 年更新页面；核对2026-10-03",
+                "period": "2026 年更新页面；核对2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/23-1022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "purchasing-managers",
                 "limitation": "用于相关职业（法官与裁判官、行政法法官、律师、律师助理、劳动关系专员、合规专员等）说明。",
                 "market": "美国",
                 "name": "O*NET 23-1022.00 职业摘要（相关职业）",
-                "period": "2026 年更新页面；核对2026-10-03",
+                "period": "2026 年更新页面；核对2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/23-1022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-1",
                 "limitation": "用于任务描述核对。",
                 "market": "美国",
                 "name": "O*NET 23-1022.00 职业摘要（任务描述）",
-                "period": "2026 年更新页面；核对2026-10-03",
+                "period": "2026 年更新页面；核对2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/23-1022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-2",
                 "limitation": "用于职业属性核对。",
                 "market": "美国",
                 "name": "O*NET 23-1022.00 职业摘要（职业属性）",
-                "period": "2026 年更新页面；核对2026-10-03",
+                "period": "2026 年更新页面；核对2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/23-1022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-3",
                 "limitation": "用于数据说明核对。",
                 "market": "美国",
                 "name": "O*NET 23-1022.00 详细资料（数据说明）",
-                "period": "2026 年更新页面；核对2026-10-03",
+                "period": "2026 年更新页面；核对2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/23-1022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "census",
                 "limitation": "用于 Job Zone Five（SVP 8.0 及以上）与准备周期说明。",
                 "market": "美国",
                 "name": "O*NET 23-1022.00 培训与教育信息（Job Zone 5）",
-                "period": "2026 年更新页面；核对2026-10-03",
+                "period": "2026 年更新页面；核对2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/23-1022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "msresearch",
-                "limitation": "用于学历构成（37% 专业学位、16% 学士学位、11% 学士后证书）说明。",
+                "limitation": "37%专业学位、16%学士、11%学士后证书为新聘需要回答，非现有从业者学历构成。",
                 "market": "美国",
-                "name": "O*NET 23-1022.00 培训与教育信息（学历构成）",
-                "period": "2026 年更新页面；核对2026-10-03",
+                "name": "O*NET23-1022新入职教育需要",
+                "period": "2026 年更新页面；核对2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/23-1022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "onet-wages",
                 "limitation": "2025年5月美国全国工资五分位；行业中位数由BLS职业展望手册另提供。",
                 "market": "美国",
                 "name": "O*NET 23-1022.00 全国工资分位页面",
-                "period": "2025年5月；核对2026-10-03",
-                "publisher": "O*NET OnLine",
+                "period": "2025年5月；核对2026-10-09",
+                "publisher": "O*NET OnLine（BLS OEWS数据）",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/23-1022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "archivists",
                 "limitation": "用于作业强度与工作情境与责任说明。",
                 "market": "美国",
                 "name": "O*NET 23-1022.00 详细资料（工作情境与作业强度）",
-                "period": "2026 年更新页面；核对2026-10-03",
+                "period": "2026 年更新页面；核对2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/23-1022.00"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "cnmed",
@@ -32555,10 +32540,10 @@
                 "url": "https://www.audit.gov.cn/n7/n34/n58/c109685/content.html"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "recruitment_proxy",
-                  "核对2026-10-03"
+                  "本窗口实际读对应原文，同源用途共享 2026-10-09"
                 ],
                 "evidence_type": "recruitment_proxy",
                 "id": "hottech",
@@ -32585,6 +32570,22 @@
                 "publisher": "费马测试职业内容编辑组",
                 "scope": "editorial_synthesis",
                 "url": "/zh/career/jobs/arbitrators-mediators-and-conciliators"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "contextual",
+                  "2026-10-09实际读PDF适用前提及指南1—7；未逐段读全部评注"
+                ],
+                "evidence_type": "contextual",
+                "id": "svamc-ai",
+                "limitation": "行业建议，依当事人同意和/或仲裁庭、机构采用范围适用，不减强制规则；涵盖工具限制、保密、逐案AI披露、输出/证据核验、不委托个人裁决职责及正当程序。非中国强制规则、全职业采用率或比较/工资就业因果研究，未核全部评注及后续版本。",
+                "market": "采用指南的国内/国际仲裁程序参与人",
+                "name": "SVAMC仲裁人工智能使用指南2024第一版",
+                "period": "2024-04-30第一版公布",
+                "publisher": "Silicon Valley Arbitration & Mediation Center",
+                "scope": "contextual",
+                "url": "https://svamc.org/wp-content/uploads/SVAMC-AI-Guidelines-First-Edition.pdf"
               }
             ]
           },
@@ -32986,7 +32987,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方工资与就业",
+            "类型": "官方工资分位",
             "适用范围": {
               "$item": "arbitrators-mediators-and-conciliators.ai-impact.ai-impact-table.22",
               "block": "ai-impact",
@@ -34895,8 +34896,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "privacy",
-              "bls"
+              "onet",
+              "cnmed"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -34959,8 +34960,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "cnclass",
-              "cnmed"
+              "cnclass"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35454,12 +35454,12 @@
           "ui": {
             "ai_heading": "AI 会影响仲裁员、调解员与和解员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "公开招聘样本（历史公告，非官方统计）",
-            "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "仲裁员、调解员与和解员在不同学历背景下通常从哪些岗位方向开始？",
+            "official_heading": "国家统计局2025年行业与岗位工资（宽口径参考）",
+            "scenario_caption": "学历背景、候选岗位方向与核对建议（编辑整理，不是薪资统计）",
+            "scenario_heading": "仲裁员、调解员与和解员不同学历背景的候选岗位方向（编辑核问）",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "学历背景",
-            "scenario_value_label": "常见岗位方向"
+            "scenario_value_label": "候选岗位方向（编辑核问）"
           },
           "us_growth": {
             "$item": "arbitrators-mediators-and-conciliators.china-salary.career-snapshot-primary-locale.58",
@@ -37981,7 +37981,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "争议处理：材料审查与法律适用 · 听证与调解主持 · 裁决或和解协议与案件档案",
@@ -38032,7 +38032,7 @@
       "text": "仲裁员、调解员与和解员"
     }
   },
-  "source_content_sha256": "e802f7486d712351a948d392eda4d84c851176e2ff688899acb0e3b52c72b6f6",
+  "source_content_sha256": "7b394299320c54c55429f04e236a3be62d6abf82efc20dba326dc9b48dc9e1ee",
   "subject": {
     "canonical_slug": "arbitrators-mediators-and-conciliators",
     "name": "仲裁员、调解员与和解员",

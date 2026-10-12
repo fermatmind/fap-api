@@ -11930,28 +11930,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.href": {
-        "ref": {
-          "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.20",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.label": {
         "ref": {
@@ -23446,7 +23426,8 @@
           "source_refs": [
             "onet",
             "cnlaw",
-            "cnvet"
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -23465,7 +23446,6 @@
           },
           "id": "animal-control-workers.profile.responsibilities-block.1",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "list"
@@ -23475,12 +23455,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜96% 每天在封闭车辆内或操作封闭设备，92% 每天在户外暴露于各种天气；50% 工作周超过 40 小时、46% 为 40 小时；69% 为规律固定班表、31% 不规律（O*NET 33-9011.00 受访比例）。\n暴露与防护｜62% 每天暴露于疾病或感染、27% 每周至少一次；73% 每天暴露于污染物、15% 每周至少一次；73% 每天暴露于干扰性噪音；58% 每天暴露于轻微烧伤割伤咬伤或蜇伤、19% 每周至少一次；76% 每天穿戴普通防护或安全装备；35% 每天暴露于极热或极冷温度、42% 每周至少一次。\n精确性与错误后果｜38% 认为精确或准确极其重要、35% 认为非常重要、23% 认为重要；46% 认为错误后果极其严重、23% 认为非常严重、19% 认为严重。\n决策与责任｜73% 每天作决定、19% 每周至少一次；58% 拥有很大决策自由度、38% 有一些；50% 认为决策对同事或机构结果非常重要、38% 认为重要；35% 对其他工作人员的健康与安全承担非常高的责任、27% 高责任。\n沟通与协作｜69% 持续与他人接触、23% 大部分时间；96% 每天有面对面讨论；100% 每天有电话交谈；92% 每天使用电子邮件；81% 认为应对外部客户或公众极其重要、15% 认为非常重要；23% 认为协调或领导他人极其重要、15% 非常重要、27% 重要。\n压力与冲突｜38% 每天面对时间压力、27% 每周至少一次；68% 每天须应对不愉快或愤怒或无礼的人、28% 每周至少一次；50% 每天遇到冲突情境、38% 每周至少一次；20% 每周至少一次须应对有暴力或攻击性的人员、52% 每月至少一次。\n体力姿势｜27% 超过一半时间站立、38% 约一半时间；42% 约一半时间行走或跑动；38% 约一半时间坐着；12% 持续或几乎持续弯腰扭转、42% 约一半时间；65% 少于一半时间跪蹲弯腰或爬行。\n重复任务｜27% 认为重复相同任务极其重要、23% 认为非常重要、31% 认为重要；77% 认为工作完全不自动化、12% 认为中等自动化。\n记录与文书｜每项接报、现场评估、捕获约束、证据与收容处置均需形成记录与档案；92% 每天使用电子邮件、96% 每天有面对面讨论，不能由沟通频率推文书耗时占比。以上为美国受访情境，不是事故率、患病率或个人预测；规律班表不等只工作日。"
+              "工作环境｜96% 每天在封闭车辆内或操作封闭设备，92% 每天在户外暴露于各种天气；50% 工作周超过 40 小时、46% 为 40 小时；69% 为规律固定班表、31% 不规律（O*NET 33-9011.00 受访比例）。\n暴露与防护｜62% 每天暴露于疾病或感染、27% 每周至少一次但非每日；73% 每天暴露于污染物、15% 每周至少一次但非每日；73% 每天暴露于干扰性噪音；58% 每天暴露于轻微烧伤割伤咬伤或蜇伤、19% 每周至少一次但非每日；76% 每天穿戴普通防护或安全装备；35% 每天暴露于极热或极冷温度、42% 每周至少一次但非每日。\n精确性与错误后果｜38% 认为精确或准确极其重要、35% 认为非常重要、23% 认为重要；46% 认为错误后果极其严重、23% 认为非常严重、19% 认为严重。\n决策与责任｜73%每日作出影响他人、机构资源或形象的决定、19% 每周至少一次但非每日；58% 拥有很大决策自由度、38% 有一些；50% 认为决策对同事或机构结果非常重要、38% 认为重要；35% 对其他工作人员的健康与安全承担非常高的责任、27% 高责任。\n沟通与协作｜69% 持续与他人接触、23% 大部分时间；96% 每天有面对面讨论；100% 每天有电话交谈；92% 每天使用电子邮件；81% 认为应对外部客户或公众极其重要、15% 认为非常重要；23% 认为协调或领导他人极其重要、15% 非常重要、27% 重要。\n压力与冲突｜38% 每天面对时间压力、27% 每周至少一次但非每日；68% 每天须应对不愉快或愤怒或无礼的人、28% 每周至少一次但非每日；50% 每天遇到冲突情境、38% 每周至少一次但非每日；20% 每周至少一次但非每日须应对有暴力或攻击性的人员、52% 每月至少一次但非每周。\n体力姿势｜27% 超过一半时间站立、38% 约一半时间；42% 约一半时间行走或跑动；38% 约一半时间坐着；12% 持续或几乎持续弯腰扭转、42% 约一半时间；65% 少于一半时间跪蹲弯腰或爬行。\n重复任务｜27% 认为重复相同任务极其重要、23% 认为非常重要、31% 认为重要；77% 认为工作完全不自动化、12% 认为中等自动化。\n记录与文书｜美国任务包括活动报告及收容、处置档案；编辑核对各环节的实际记录要求；92% 每天使用电子邮件、96% 每天有面对面讨论，不能由沟通频率推文书耗时占比。以上为美国受访情境，不是事故率、患病率或个人预测；规律班表不等只工作日。"
             ]
           },
           "id": "animal-control-workers.profile.work-context-block.1",
           "source_refs": [
-            "onet"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -23562,7 +23542,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS EP 33-9011：2025年13,800人、2035年14,300人；2025—2035增长4.0%，官方净增600人、年均1,500个空缺，自雇占10.2%。公开人数取整，不能用两端相减替换官方净变化。O*NET仍显示2024年12,200人、2024—2034增长3%—4%、年均1,300空缺；这是旧期数据，本页当前预测采用EP2025—2035，不混算。空缺含增长与替代不等净增；证据不足：本轮未取得中国本职业就业预测，不保证个人就业。"
+              "BLS EP 33-9011：2025年13,800人、2035年14,300人；2025—2035增长4.0%，官方净增600人、年均1,500个空缺，自雇占10.2%。公开人数取整，不能用两端相减替换官方净变化。O*NET当前已列2025就业13,800人和2025—2035年均1,500空缺；增长显示3%—4%分类，精确4.0%与官方净增600直接核EP，不混统计分类和精确变化。空缺含增长与替代不等净增；证据不足：本轮未取得中国本职业就业预测，不保证个人就业。"
             ]
           },
           "id": "animal-control-workers.profile.onet-structured-fields-block.4",
@@ -23705,10 +23685,9 @@
           "id": "animal-control-workers.profile.definition-block.11",
           "source_refs": [
             "onet",
-            "oews",
-            "ep",
             "cnlaw",
-            "cnvet"
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -24641,10 +24620,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "entity": "ONET美国任务权限限制",
+                "entity": "中国动物防疫法：职责分工、报告及疫情认定",
                 "id": "link-17",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/33-9011.00"
+                "url": "https://fgs.moa.gov.cn/flfg/202104/t20210425_6366545.htm"
               },
               {
                 "entity": "EP当前就业与空缺",
@@ -24694,7 +24673,9 @@
           "id": "animal-control-workers.ai-impact.ai-impact-table.11",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -24724,7 +24705,9 @@
           "id": "animal-control-workers.ai-impact.ai-impact-table.13",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -25126,7 +25109,10 @@
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.41",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -25196,7 +25182,7 @@
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.46",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25210,7 +25196,7 @@
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.47",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25224,7 +25210,7 @@
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.48",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25239,7 +25225,7 @@
           "id": "animal-control-workers.ai-impact.ai-impact-table.49",
           "source_refs": [
             "ep",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25253,8 +25239,7 @@
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.50",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25268,8 +25253,7 @@
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.51",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25283,8 +25267,7 @@
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25298,8 +25281,7 @@
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.53",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25313,8 +25295,7 @@
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25328,8 +25309,7 @@
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25343,8 +25323,7 @@
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25423,7 +25402,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "是否采用取决于机构的信息系统与数据合规要求、证据与档案管理规定、设备可靠性与培训条件。技术可行不等于已部署，本页不推测采用进度。"
+              "编辑采用核对项：核机构允许的数据、信息系统、证据档案程序、设备可靠性与监督训练；本页没有采用进度或这些因素影响采用率的因果估计。"
             ]
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.62",
@@ -25443,8 +25422,7 @@
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25472,7 +25450,8 @@
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25514,7 +25493,8 @@
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25571,7 +25551,10 @@
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -25580,12 +25563,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ONET美国任务，不是中国法律证明。"
+              "该链接为中国动物防疫法，支持职责、报告和疫情认定分工；兽医角色、备案及机构许可另按对应办法核。美国任务描述不授予中国权限。"
             ]
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.73",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -25594,13 +25580,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS EP 33-9011：2025年13,800人、2035年14,300人；2025—2035增长4.0%，官方净增600人、年均1,500个空缺，自雇占10.2%。公开人数取整，不能用两端相减替换官方净变化。空缺含增长与替代，不等净增或流动率；O*NET仍显示2024年12,200人、2024—2034增长3%—4%、年均1,300空缺；这是旧期数据，本页当前预测采用EP2025—2035，不混算。"
+              "BLS EP 33-9011：2025年13,800人、2035年14,300人；2025—2035增长4.0%，官方净增600人、年均1,500个空缺，自雇占10.2%。公开人数取整，不能用两端相减替换官方净变化。空缺含增长与替代，不等净增或流动率；O*NET当前已列2025就业13,800人和2025—2035年均1,500空缺；增长显示3%—4%分类，精确4.0%与官方净增600直接核EP，不混统计分类和精确变化。"
             ]
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25614,8 +25599,7 @@
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25672,7 +25656,10 @@
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.79",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -25730,7 +25717,10 @@
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.83",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -25753,13 +25743,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按动物行为与约束规范操作并使用防护装备，掌握咬伤蜇伤后的处置与报告流程。"
+              "核机构适用的动物接触、防护、监督、报告及应急医疗转介程序，只在本人合法训练与授权内执行；本页不提供捕获、保定或伤口处置操作方法。"
             ]
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.85",
           "source_refs": [
             "onet",
-            "onet"
+            "cdc"
           ],
           "type": "prose"
         },
@@ -25782,13 +25772,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按生物安全要求操作并做好隔离与消毒，发现疑似染疫立即报告法定机构。"
+              "按中国动物防疫法第31条区分适用角色的立即报告和控制义务与其他发现者的及时报告；具体行动须核合法训练及机构程序，不依据本页自设隔离、消毒或转移方法。"
             ]
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.87",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -25797,12 +25789,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "68% 每天须应对不愉快或愤怒或无礼的人、50% 每天遇到冲突情境、20% 每周至少一次须应对有暴力或攻击性的人员。"
+              "68% 每天须应对不愉快或愤怒或无礼的人、50% 每天遇到冲突情境、20% 每周至少一次但非每日须应对有暴力或攻击性的人员。 美国受访情境频率，不是个人冲突或受攻击概率。"
             ]
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.88",
           "source_refs": [
-            "onet"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -25811,7 +25803,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按程序请求支援并保持安全距离，避免单独处置高风险场景，全过程记录并留痕。"
+              "编辑准备核对项：确认机构的现场评估、支援、监督和报告程序；具体距离、单独作业或现场处置条件以适用训练与真实程序为准，不由本页设定。"
             ]
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.89",
@@ -25845,7 +25837,10 @@
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.91",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -25854,13 +25849,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "超出执法或委任授权处置、无证从事动物诊疗或替代法定检疫防疫职责属违规并带来法律与公共卫生风险。"
+              "编辑合规核对项：中国实际执法、诊疗、检疫及疫情认定分别核法定角色和权限；美国任务或机构口头许可不授予全部权力，不将合法监督协助或助理乡村例外笼统写为违规。"
             ]
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.92",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -25869,13 +25866,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在授权范围内处置，涉诊疗与检疫防疫事项按程序转交执业兽医或法定机构。"
+              "在实际合法岗位范围如实记录并按程序转交；检疫、疫情认定和诊疗由对应法定机构、角色与许可范围实施，不以软件提示代替权限。"
             ]
           },
           "id": "animal-control-workers.ai-impact.ai-impact-table.93",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -26559,7 +26558,8 @@
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26574,7 +26574,8 @@
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26605,7 +26606,8 @@
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.28",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26620,7 +26622,8 @@
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26650,7 +26653,8 @@
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.31",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26665,7 +26669,8 @@
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.32",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26695,7 +26700,8 @@
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.34",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26710,7 +26716,8 @@
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.35",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26740,7 +26747,8 @@
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.37",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26770,7 +26778,8 @@
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.39",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26800,7 +26809,8 @@
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.41",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet"
           ],
           "type": "prose"
         },
@@ -26843,8 +26853,7 @@
           },
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26858,8 +26867,7 @@
           },
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26873,8 +26881,8 @@
           },
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs",
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -26883,7 +26891,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              "国家统计局《2025年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.47",
@@ -26897,7 +26905,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NBS2025城镇5人以上法人，排除个体自由职业；税前含个人代扣社保公积金等，不等到手收入或职业分布。"
+              "NBS2025城镇5人以上法人，排除个体自由职业；税前含个人代扣社保公积金等，不等到手收入或职业分布。 规模以上企业岗位大类有独立统计范围，不能等同全部城镇单位或所有动物管控岗位。"
             ]
           },
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.48",
@@ -27009,7 +27017,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+              "国家统计局《2025年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.57",
@@ -27042,7 +27050,7 @@
           },
           "id": "animal-control-workers.china-salary.career-snapshot-primary-locale.59",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         }
@@ -27108,7 +27116,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27122,7 +27130,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27136,7 +27144,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27164,7 +27172,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27178,7 +27186,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27220,9 +27228,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "ep",
-            "onet",
-            "oews"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27231,7 +27237,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS EP33-9011基年就业含自雇。ONET政府92%为2024行业结构，不套当前基年。；EP当前就业/预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "BLS EP33-9011基年就业13,800人，含自雇；O*NET当前政府83%为2025本职业就业行业结构，不是政府工资或地方政府占比。"
             ]
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.20",
@@ -27251,9 +27257,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "ep",
-            "onet",
-            "oews"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27267,8 +27271,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27282,9 +27285,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "ep",
-            "onet",
-            "oews"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27298,8 +27299,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27308,7 +27308,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "May2025美国年薪10/25/50/75/90分位33,090/37,750/45,660/57,060/68,070美元，时薪15.91/18.15/21.95/27.44/32.72美元。分位是分布位置，不是起薪、最低工资或经验回报。BLS EP 33-9011：2025年13,800人、2035年14,300人；2025—2035增长4.0%，官方净增600人、年均1,500个空缺，自雇占10.2%。公开人数取整，不能用两端相减替换官方净变化。O*NET仍显示2024年12,200人、2024—2034增长3%—4%、年均1,300空缺；这是旧期数据，本页当前预测采用EP2025—2035，不混算。"
+              "May2025美国年薪10/25/50/75/90分位33,090/37,750/45,660/57,060/68,070美元，时薪15.91/18.15/21.95/27.44/32.72美元。分位是分布位置，不是起薪、最低工资或经验回报。BLS EP 33-9011：2025年13,800人、2035年14,300人；2025—2035增长4.0%，官方净增600人、年均1,500个空缺，自雇占10.2%。公开人数取整，不能用两端相减替换官方净变化。O*NET当前已列2025就业13,800人和2025—2035年均1,500空缺；增长显示3%—4%分类，精确4.0%与官方净增600直接核EP，不混统计分类和精确变化。"
             ]
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.25",
@@ -27428,9 +27428,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "ep",
-            "onet",
-            "oews"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27444,7 +27442,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.34",
           "source_refs": [
-            "onet"
+            "blsindustry"
           ],
           "type": "prose"
         },
@@ -27458,8 +27456,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "blsindustry",
-            "onet"
+            "blsindustry"
           ],
           "type": "prose"
         },
@@ -27468,12 +27465,11 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "ONET政府92%为2024本职业就业结构，非政府工资或地方政府占比。"
+              "O*NET当前政府83%为2025本职业就业行业结构，不是政府行业工资或地方政府占比。"
             ]
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "blsindustry",
             "onet"
           ],
           "type": "prose"
@@ -27488,7 +27484,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.37",
           "source_refs": [
-            "onet"
+            "blsindustry"
           ],
           "type": "prose"
         },
@@ -27502,8 +27498,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "blsindustry",
-            "onet"
+            "blsindustry"
           ],
           "type": "prose"
         },
@@ -27517,8 +27512,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "blsindustry",
-            "onet"
+            "blsindustry"
           ],
           "type": "prose"
         },
@@ -27532,7 +27526,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.40",
           "source_refs": [
-            "onet"
+            "blsindustry"
           ],
           "type": "prose"
         },
@@ -27546,8 +27540,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "blsindustry",
-            "onet"
+            "blsindustry"
           ],
           "type": "prose"
         },
@@ -27561,8 +27554,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "blsindustry",
-            "onet"
+            "blsindustry"
           ],
           "type": "prose"
         },
@@ -27576,7 +27568,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.43",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27590,7 +27582,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27604,7 +27596,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27641,7 +27633,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资为May2025 OEWS经ONET，当前预测为EP2025—2035含自雇；O*NET仍显示2024年12,200人、2024—2034增长3%—4%、年均1,300空缺；这是旧期数据，本页当前预测采用EP2025—2035，不混算。"
+              "工资为May2025 OEWS经ONET，当前预测为EP2025—2035含自雇；O*NET当前已列2025就业13,800人和2025—2035年均1,500空缺；增长显示3%—4%分类，精确4.0%与官方净增600直接核EP，不混统计分类和精确变化。"
             ]
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.48",
@@ -27662,8 +27654,8 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27677,7 +27669,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27705,7 +27697,7 @@
           },
           "id": "animal-control-workers.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28149,7 +28141,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用类型标签解释处置失误，会减少改进机会。"
+              "编辑自查：复核事实、来源和实际程序，不用类型标签判断处置失误原因；本页未核这种标签对改进效果的因果关系。"
             ]
           },
           "id": "animal-control-workers.fit.personality-fit-block.17",
@@ -28264,7 +28256,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "以工作负荷为由省略记录或保全证据，会放大法律与安全风险。"
+              "编辑风险识别：核实际记录、原值与交接程序；美国任务支持记录重要性，本页没有省略记录对法律或安全结果的因果估计。"
             ]
           },
           "id": "animal-control-workers.fit.personality-fit-block.25",
@@ -28321,7 +28313,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合愿意承担动物诊疗责任的人。"
+              "编辑探索方向：兽医。可了解是否愿意承担动物诊疗责任的人。 实际任务、训练和法定资格另核，不能从意愿判适任或录用。"
             ]
           },
           "id": "animal-control-workers.fit.personality-fit-block.29",
@@ -28366,7 +28358,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合愿意做法规合规检查的人。"
+              "编辑探索方向：环境合规检查员。可了解是否愿意做法规合规检查的人。 实际任务、训练和法定资格另核，不能从意愿判适任或录用。"
             ]
           },
           "id": "animal-control-workers.fit.personality-fit-block.32",
@@ -28381,7 +28373,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "面向环境与合规检查，领域与依据不同，需相应专业训练。"
+              "编辑转向核对项：面向环境与合规检查，领域与依据不同，需相应专业训练。 具体法域、真实岗位和训练条件另核；本页未取得完整相邻准入细则。"
             ]
           },
           "id": "animal-control-workers.fit.personality-fit-block.33",
@@ -28411,7 +28403,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合愿意做死亡调查与法定鉴定的人。"
+              "编辑探索方向：验尸官。可了解是否愿意做死亡调查与法定鉴定的人。 实际任务、训练和法定资格另核，不能从意愿判适任或录用。"
             ]
           },
           "id": "animal-control-workers.fit.personality-fit-block.35",
@@ -28426,7 +28418,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "面向死亡原因调查与法定程序，需相应资格与训练，与动物管控职责不同。"
+              "编辑转向核对项：面向死亡原因调查与法定程序，需相应资格与训练，与动物管控职责不同。 具体法域、真实岗位和训练条件另核；本页未取得完整相邻准入细则。"
             ]
           },
           "id": "animal-control-workers.fit.personality-fit-block.36",
@@ -28456,7 +28448,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合愿意做现场秩序与安全防护的人。"
+              "编辑探索方向：保安员。可了解是否愿意做现场秩序与安全防护的人。 实际任务、训练和法定资格另核，不能从意愿判适任或录用。"
             ]
           },
           "id": "animal-control-workers.fit.personality-fit-block.38",
@@ -28501,7 +28493,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合愿意做动物日常照护的人。"
+              "编辑探索方向：动物照护员。可了解是否愿意做动物日常照护的人。 实际任务、训练和法定资格另核，不能从意愿判适任或录用。"
             ]
           },
           "id": "animal-control-workers.fit.personality-fit-block.41",
@@ -28546,7 +28538,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合愿意做野生动物研究与保护的人。"
+              "编辑探索方向：动物学家与野生动物生物学家。可了解是否愿意做野生动物研究与保护的人。 实际任务、训练和法定资格另核，不能从意愿判适任或录用。"
             ]
           },
           "id": "animal-control-workers.fit.personality-fit-block.44",
@@ -28561,7 +28553,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "面向野外研究与保护管理，需科研训练与学历。"
+              "编辑转向核对项：面向野外研究与保护管理，需科研训练与学历。 具体法域、真实岗位和训练条件另核；本页未取得完整相邻准入细则。"
             ]
           },
           "id": "animal-control-workers.fit.personality-fit-block.45",
@@ -28864,7 +28856,8 @@
           "id": "animal-control-workers.fit.personality-fit-block.66",
           "source_refs": [
             "cnlaw",
-            "cnvet"
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         }
@@ -28922,10 +28915,9 @@
           "id": "animal-control-workers.risk.career-risk-cards.7",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "cdc",
+            "cnlaw",
+            "cdcprep"
           ],
           "type": "links"
         },
@@ -28966,7 +28958,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "ONET户外92%、感染62%、轻伤58%、愤怒公众68%、冲突50%、暴力人员每周20%、超40小时50%为美国情境。中国职责依动物防疫法，医疗转介见CDC；工资/预测不证明健康或事故率。"
+              "ONET户外92%、感染62%、轻伤58%、愤怒公众68%、冲突50%、暴力人员每周至少一次但非每日20%、超40小时50%为美国情境。中国职责依动物防疫法，医疗转介见CDC；工资/预测不证明健康或事故率。"
             ]
           },
           "id": "animal-control-workers.risk.career-risk-cards.10",
@@ -29026,7 +29018,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未评估动物应激状态或未做约束即直接接触陌生或受惊动物。"
+              "编辑情景：陌生或受惊动物接触前，所需训练、监督或防护尚未确认；本页不建议自行约束或捕获。"
             ]
           },
           "id": "animal-control-workers.risk.career-risk-cards.14",
@@ -29056,7 +29048,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "68% 每天须应对不愉快或愤怒或无礼的人、50% 每天遇到冲突情境、20% 每周至少一次须应对有暴力或攻击性的人员。"
+              "68% 每天须应对不愉快或愤怒或无礼的人、50% 每天遇到冲突情境、20% 每周至少一次但非每日须应对有暴力或攻击性的人员。"
             ]
           },
           "id": "animal-control-workers.risk.career-risk-cards.16",
@@ -29071,7 +29063,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按程序请求支援并保持安全距离，避免单独处置高风险场景，全过程记录并留痕。"
+              "核机构适用的现场安全、监督、支援及记录程序，只在本人合法训练和授权内执行；本页不设安全距离或单独作业规则。"
             ]
           },
           "id": "animal-control-workers.risk.career-risk-cards.17",
@@ -29086,7 +29078,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "单独前往高风险现场且未做支援预案。"
+              "编辑情景：实际岗位需要的现场评估或支援条件尚未确认；具体安排以适用制度和训练为准。"
             ]
           },
           "id": "animal-control-workers.risk.career-risk-cards.18",
@@ -29115,12 +29107,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "62% 每天暴露于疾病或感染、73% 每天暴露于污染物，处置疑似染疫动物存在疫病传播风险。"
+              "美国受访62%每日暴露于疾病或感染、73%每日暴露于污染物；不是患病率或传播概率。中国疑似染疫报告与控制义务按第31条适用身份核。"
             ]
           },
           "id": "animal-control-workers.risk.career-risk-cards.20",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -29145,13 +29138,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "发现疑似染疫动物未报告即自行转移或处置。"
+              "编辑情景：发现疑似染疫信息，适用身份的报告及控制义务尚未核清；来电描述不等疫情认定或个人处置权限。"
             ]
           },
           "id": "animal-control-workers.risk.career-risk-cards.22",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -29175,12 +29167,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据链不完整或档案与处置记录不规范会影响执法与起诉并损害当事人与动物权益。"
+              "编辑风险识别：核原始材料、记录及更正轨迹；美国任务包括报告和出庭，不证明具体法院证据规则或省略记录对结果的因果大小。"
             ]
           },
           "id": "animal-control-workers.risk.career-risk-cards.24",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29190,12 +29181,11 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按证据与档案管理要求收集、保全与如实记录，必要时出庭作证。"
+              "在本人实际合法岗位和机构程序内整理、如实记录并交接已有材料；出庭或证据保全按目标法域和授权，不由本页设统一证据规则。"
             ]
           },
           "id": "animal-control-workers.risk.career-risk-cards.25",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -29205,7 +29195,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "现场未固定证据或事后补记处置过程。"
+              "编辑情景：材料来源或记录更正过程未说明，实际追溯要求待核；不得编造现场已核、处置已完成或接收反馈。"
             ]
           },
           "id": "animal-control-workers.risk.career-risk-cards.26",
@@ -29267,13 +29257,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "自行对动物作出诊疗判断或未经审批实施安乐死。"
+              "编辑情景：拟诊疗或处置者未确认自身角色、机构条件与当地适用规则；美国安乐死任务不构成中国处置依据，本页不提供实施方案。"
             ]
           },
           "id": "animal-control-workers.risk.career-risk-cards.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -29370,7 +29361,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 33-9011.00 职业摘要（任务与职责）。"
+              "本局部链接为O*NET详细工作情境，用于美国户外、压力、冲突和暴露频率，不支持中国法定分工或医疗方案。"
             ]
           },
           "id": "animal-control-workers.risk.career-risk-cards.37",
@@ -29389,9 +29380,7 @@
           },
           "id": "animal-control-workers.risk.career-risk-cards.38",
           "source_refs": [
-            "cnlaw",
-            "cnvet",
-            "cnclinic"
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -29476,8 +29465,10 @@
           "id": "animal-control-workers.path.entry-role-comparison.1",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "ep",
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "title": "动物管控员的入门岗位与初期任务怎么比较？",
           "type": "table"
@@ -29524,7 +29515,10 @@
           "id": "animal-control-workers.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "onet"
+            "ep",
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "title": "入门准备核对",
           "type": "cards"
@@ -29838,10 +29832,10 @@
           "id": "animal-control-workers.path.credential-decision.1",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "ep",
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -29881,9 +29875,10 @@
           "id": "animal-control-workers.path.recruitment-sample.1",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet"
+            "ep",
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -29912,19 +29907,19 @@
                 "url": "https://fgs.moa.gov.cn/flfg/202104/t20210425_6366545.htm"
               },
               {
-                "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
+                "entity": "国家统计局2025城镇单位年平均工资（宽参照）",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               }
             ]
           },
           "id": "animal-control-workers.path.career-path-block.10",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet"
+            "ep",
+            "cnlaw",
+            "nbs"
           ],
           "type": "links"
         },
@@ -29941,7 +29936,8 @@
             "onet",
             "ep",
             "cnlaw",
-            "cnvet"
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -29950,13 +29946,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通过招录或应聘进入机构，取得相应的执法或委任授权并完成入岗培训。"
+              "编辑入行核对项：核目标岗位真实招录条件、法定职责、具体授权及合法入岗训练；录用或机构委任不自动产生全部执法或诊疗权限。"
             ]
           },
           "id": "animal-control-workers.path.career-path-block.12",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -29979,13 +29977,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "掌握动物行为与约束、现场安全评估与生物安全、法规适用与文书与证据要求。"
+              "核目标岗位动物接触、现场评估、防护、法规与记录要求的监督训练和实际考核；本页不提供捕获或生物安全操作课程。"
             ]
           },
           "id": "animal-control-workers.path.career-path-block.14",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30008,13 +30008,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能独立开展虐待与攻击调查、证据保全与出庭作证，并处理高风险现场。"
+              "编辑进阶核对项：在本人合法岗位范围承担相应调查、材料记录与协作；独立调查、出庭或高风险现场条件由真实法域和机构确认，培训证明不推定全部胜任。"
             ]
           },
           "id": "animal-control-workers.path.career-path-block.16",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30074,7 +30076,8 @@
             "onet",
             "ep",
             "cnlaw",
-            "cnvet"
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30091,7 +30094,8 @@
             "onet",
             "ep",
             "cnlaw",
-            "cnvet"
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30100,15 +30104,18 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国ONET任务/新聘学历、OEWS工资、EP2025—2035各自支持；中国NBS宽行业和MOA职责/诊疗角色各自支持，不能互代。"
+              "美国ONET任务及新聘学历、OEWS工资、EP2025—2035分别支持；中国NBS宽工资、动物防疫法职责和兽医/机构办法分别支持，不能互代。"
             ]
           },
           "id": "animal-control-workers.path.career-path-block.22",
           "source_refs": [
             "onet",
+            "oews",
             "ep",
+            "nbs",
             "cnlaw",
-            "cnvet"
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30122,10 +30129,7 @@
           },
           "id": "animal-control-workers.path.career-path-block.23",
           "source_refs": [
-            "onet",
-            "ep",
-            "cnlaw",
-            "cnvet"
+            "onet"
           ],
           "type": "prose"
         },
@@ -30220,13 +30224,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能按授权范围完成接报与现场处置。"
+              "能说明本人合法岗位范围的接报、记录与转交职责；具体现场任务依训练、考核和授权，不保证独立处置。"
             ]
           },
           "id": "animal-control-workers.path.career-path-block.30",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30235,13 +30241,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通过招录或应聘进入机构并取得现场处置授权与入岗培训。"
+              "核目标岗位招录、实际职责及合法监督训练；美国岗位委任不等中国统一执法授权。"
             ]
           },
           "id": "animal-control-workers.path.career-path-block.31",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30293,13 +30301,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能独立完成捕获、收容照护与规范记录。"
+              "在训练、实际岗位考核和合法授权范围内承担相应动物接触、收容记录与照护；纸面作品或培训证明不推定独立捕获能力。"
             ]
           },
           "id": "animal-control-workers.path.career-path-block.35",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30308,13 +30318,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "掌握动物行为与约束、现场安全评估与生物安全。"
+              "核动物接触、现场安全和生物安全的合法训练、监督与考核，实际方法以适用程序为准。"
             ]
           },
           "id": "animal-control-workers.path.career-path-block.36",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30366,13 +30378,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能对现场安全与动物福利负责。"
+              "能核本人授权的现场记录、报告及动物福利分工；不保证公共安全或动物健康结果。"
             ]
           },
           "id": "animal-control-workers.path.career-path-block.40",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30381,13 +30395,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "处理高风险或群体事件、复杂动物应激与健康观察问题。"
+              "在本人合法岗位范围复核已有现场和动物观察信息、报告复杂疑点并核监督职责；实际捕获或诊疗条件另核。"
             ]
           },
           "id": "animal-control-workers.path.career-path-block.41",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30587,13 +30603,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能独立完成调查报告并规范保全证据。"
+              "核本人实际授权的调查记录、原始材料与报告复核职责；独立调查和证据处理须按目标法律与机构制度。"
             ]
           },
           "id": "animal-control-workers.path.career-path-block.55",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30660,13 +30678,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能对证据链完整与陈述准确负责。"
+              "能说明实际材料来源、原值、缺失及更正轨迹；不是完整证据链或司法可采性的保证。"
             ]
           },
           "id": "animal-control-workers.path.career-path-block.60",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30881,13 +30901,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能独立完成检查、文书与依法处置。"
+              "在本人真实合法角色、考核及授权范围完成相应检查、记录与转交；本页不授传票、执法或独立处置权。"
             ]
           },
           "id": "animal-control-workers.path.career-path-block.75",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30896,13 +30918,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "掌握法规适用、检查与文书、传票与移送程序。"
+              "核目标法域法规适用、检查、文书与移送等实际训练；美国传票任务不等中国统一程序。"
             ]
           },
           "id": "animal-control-workers.path.career-path-block.76",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30954,13 +30978,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能对程序合法与裁量适当负责。"
+              "能说明本人合法角色的程序核对、记录及协作职责，不保证裁量或案件结果。"
             ]
           },
           "id": "animal-control-workers.path.career-path-block.80",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -30969,13 +30995,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "处理争议或复议情形并与警方与检察机关协作。"
+              "在本人真实法定职责范围协作并报告复杂疑点；争议、复议及司法程序依目标法域，不以资历扩张权力。"
             ]
           },
           "id": "animal-control-workers.path.career-path-block.81",
           "source_refs": [
             "onet",
-            "onet"
+            "cnlaw",
+            "cnvet",
+            "cnclinic"
           ],
           "type": "prose"
         },
@@ -31106,10 +31134,10 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
+                "entity": "国家统计局2025城镇单位年平均工资（宽参照）",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "中国动物防疫法",
@@ -31170,9 +31198,9 @@
           "id": "animal-control-workers.market-signals.market-signal-card.7",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet"
+            "ep",
+            "nbs",
+            "cnlaw"
           ],
           "type": "links"
         },
@@ -31181,7 +31209,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得中国动物管控员职业预测。美国当前及旧期区别如下：BLS EP 33-9011：2025年13,800人、2035年14,300人；2025—2035增长4.0%，官方净增600人、年均1,500个空缺，自雇占10.2%。公开人数取整，不能用两端相减替换官方净变化。O*NET仍显示2024年12,200人、2024—2034增长3%—4%、年均1,300空缺；这是旧期数据，本页当前预测采用EP2025—2035，不混算。政府92%是ONET2024行业结构，不能套2025基年或推需求因果；证据不足：本轮未取得中国本职业预测。"
+              "证据不足：本轮未取得中国动物管控员职业预测。美国资料如下：BLS EP 33-9011：2025年13,800人、2035年14,300人；2025—2035增长4.0%，官方净增600人、年均1,500个空缺，自雇占10.2%。公开人数取整，不能用两端相减替换官方净变化。本页当前预测采用BLS EP2025—2035明细，统计精度与O*NET分类展示分开。当前ONET政府83%为2025就业行业结构，不能当政府工资或需求因果；证据不足：本轮未取得中国本职业预测。"
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.8",
@@ -31201,7 +31229,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.9",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31215,8 +31243,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.10",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31230,8 +31257,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.11",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31245,8 +31271,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.12",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31260,7 +31285,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.13",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31274,7 +31299,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31288,8 +31313,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.15",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31303,7 +31327,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.16",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31317,8 +31341,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.17",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31332,8 +31355,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.18",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31347,8 +31369,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.19",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31362,7 +31383,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.20",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31376,7 +31397,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.21",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31390,8 +31411,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.22",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31405,7 +31425,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.23",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31419,8 +31439,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.24",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31434,8 +31453,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.25",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31449,8 +31467,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.26",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31464,7 +31481,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.27",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31478,7 +31495,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31492,8 +31509,7 @@
           },
           "id": "animal-control-workers.market-signals.market-signal-card.29",
           "source_refs": [
-            "ep",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31531,12 +31547,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》（中国大陆民用口径，仅作参照）。"
+              "国家统计局2025年城镇单位、行业及岗位大类税前年平均工资，只作宽参照，不是动物管控员职业预测。"
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.32",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31545,13 +31561,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国法定职责见防疫法，診疗角色见兽医办法，不作美国33-9011等效或心理预测。"
+              "本局部链接为中国动物防疫法，用于法定职责、报告及疫情认定分工；兽医与机构许可另核对应办法，不作美国职业等效或人格预测。"
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.33",
           "source_refs": [
-            "cnlaw",
-            "cnvet"
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -31590,7 +31605,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻方向，需改换为兽医资格体系。"
+              "编辑转向核对项：相邻方向，需改换为兽医资格体系。 真实法域、目标岗位教育、训练与权限另核，未取得完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.36",
@@ -31635,7 +31650,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻方向，需补环境法规与专业训练。"
+              "编辑转向核对项：相邻方向，需补环境法规与专业训练。 真实法域、目标岗位教育、训练与权限另核，未取得完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.39",
@@ -31680,7 +31695,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远距离转向，需补法定鉴定资格。"
+              "编辑转向核对项：较远距离转向，需补法定鉴定资格。 真实法域、目标岗位教育、训练与权限另核，未取得完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.42",
@@ -31695,7 +31710,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "面向场所秩序与安全防护，不含动物处置与法规执法职责。"
+              "编辑比较：保安任务侧重场所秩序与安全，实际与管控现场秩序可能重叠；不能从任一名称取得动物处置或执法权限。"
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.43",
@@ -31725,7 +31740,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "邻近方向，需补法规与动物处置能力。"
+              "转向保安岗位需核目标法域招录、训练、职责和权限；本页未核完整准入细则，不把补动物管控执法能力当保安统一门槛。"
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.45",
@@ -31769,7 +31784,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "邻近方向，需补执法与调查能力与授权。"
+              "转向动物照护岗位需核具体动物种类、照护训练、考核与岗位范围；照护可能与本职业收容任务重叠，不把取得管控执法或调查授权当所有照护岗位门槛。"
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.48",
@@ -31813,7 +31828,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "邻近方向，需补繁育与人工授精技能。"
+              "编辑转向核对项：邻近方向，需补繁育与人工授精技能。 真实法域、目标岗位教育、训练与权限另核，未取得完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.51",
@@ -31857,7 +31872,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远距离转向，需补科研训练与学历。"
+              "编辑转向核对项：较远距离转向，需补科研训练与学历。 真实法域、目标岗位教育、训练与权限另核，未取得完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.54",
@@ -31902,7 +31917,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "邻近方向，需补农业法规与专业知识。"
+              "编辑转向核对项：邻近方向，需补农业法规与专业知识。 真实法域、目标岗位教育、训练与权限另核，未取得完整相邻准入细则，不保证直接转岗。"
             ]
           },
           "id": "animal-control-workers.market-signals.market-signal-card.57",
@@ -32009,9 +32024,6 @@
             ]
           },
           "id": "animal-control-workers.sources.source-card.1",
-          "source_refs": [
-            "onet"
-          ],
           "type": "prose"
         },
         {
@@ -32041,14 +32053,10 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核对日期：2026-10-02；前批次已核同中国兽医/机构办法按本页角色复核，不冒充新的独立研究。"
+              "本窗口2026-10-09核O*NET33-9011详细页和摘要、BLS EP、动物防疫法及CDC两页；全国工资网页接口读取失败，随后终端读取同一官方工资原文成功，年时五分位核对。NBS与兽医同版正文复用本窗口10月8日已核材料，机构办法复用10月9日已核；旧大典全文及行业内职业工资仍缺。"
             ]
           },
           "id": "animal-control-workers.sources.source-card.3",
-          "source_refs": [
-            "onet",
-            "cnvet"
-          ],
           "type": "prose"
         },
         {
@@ -32056,7 +32064,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "May2025美国年薪10/25/50/75/90分位33,090/37,750/45,660/57,060/68,070美元，时薪15.91/18.15/21.95/27.44/32.72美元。分位是分布位置，不是起薪、最低工资或经验回报。BLS EP 33-9011：2025年13,800人、2035年14,300人；2025—2035增长4.0%，官方净增600人、年均1,500个空缺，自雇占10.2%。公开人数取整，不能用两端相减替换官方净变化。O*NET仍显示2024年12,200人、2024—2034增长3%—4%、年均1,300空缺；这是旧期数据，本页当前预测采用EP2025—2035，不混算。行业工资本轮读取未得不等未发布。中国宽行业均值非职业工资；中国实际职责按所在地法定分工、具体岗位和权限核；本轮未核定与美国33-9011一致的中国单一职业对应，不称疫病防治员或检疫人员等效。美国狂犬病/无人认领/重伤安乐死任务不构成中国合法处置依据。中国诊疗依兽医师、助理兽医师或乡村兽医各自资格、备案与范围实施；相关兽医专业学生或毕业生可依办法在兽医师监督指导下协助，机构另需诊疗许可。助理一般不能开处方、诊断书或证明，省级乡村独立诊疗例外另核。岗位名或普通培训不授予诊疗权。"
+              "May2025美国年薪10/25/50/75/90分位33,090/37,750/45,660/57,060/68,070美元，时薪15.91/18.15/21.95/27.44/32.72美元。分位是分布位置，不是起薪、最低工资或经验回报。BLS EP 33-9011：2025年13,800人、2035年14,300人；2025—2035增长4.0%，官方净增600人、年均1,500个空缺，自雇占10.2%。公开人数取整，不能用两端相减替换官方净变化。本页当前预测采用BLS EP2025—2035明细，统计精度与O*NET分类展示分开。行业工资历史查询未取得，本次仍保留缺口，不等未发布。中国宽行业均值非职业工资；中国实际职责按所在地法定分工、具体岗位和权限核；本轮未核定与美国33-9011一致的中国单一职业对应，不称疫病防治员或检疫人员等效。美国狂犬病/无人认领/重伤安乐死任务不构成中国合法处置依据。中国诊疗依兽医师、助理兽医师或乡村兽医各自资格、备案与范围实施；相关兽医专业学生或毕业生可依办法在兽医师监督指导下协助，机构另需诊疗许可。助理一般不能开处方、诊断书或证明，省级乡村独立诊疗例外另核。岗位名或普通培训不授予诊疗权。 证据不足：未取得中国职业工资和预测、AI采用/效果/替代和工资因果、人格录用效度、旧分类全文、完整相邻准入及具体地方执法/工具条件；不以宽参照代填。"
             ]
           },
           "id": "animal-control-workers.sources.source-card.4",
@@ -32142,14 +32150,14 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "onet",
-                "limitation": "支持美国20任务/情境/新聘学历/RCI或软件例示；非中国权限、心理效度或AI研究。摘要仍有2024—2034旧预测，不当当前EP。",
+                "limitation": "20美国任务、受访情境、新聘学历与RCI及软件；当前已列2025工资与就业、2025—2035预测和政府83%就业结构，精确4.0%及净增600直接核EP。不授中国执法、诊疗或安乐死权限，不是AI/人格效度研究。",
                 "market": "美国",
                 "name": "ONET动物管控员详细资料",
                 "period": "2026更新",
@@ -32158,10 +32166,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "bls",
@@ -32174,10 +32182,10 @@
                 "url": "https://www.onetonline.org/link/localwages/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "ep",
@@ -32190,10 +32198,10 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "oews",
@@ -32206,10 +32214,10 @@
                 "url": "https://www.onetonline.org/link/localwages/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "industry_proxy",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-08"
                 ],
                 "evidence_type": "industry_proxy",
                 "id": "nbs",
@@ -32219,13 +32227,13 @@
                 "period": "2025",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "cnlaw",
@@ -32254,10 +32262,10 @@
                 "url": "https://hrss.sz.gov.cn/attachment/0/731/731778/8340671.pdf"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "privacy",
@@ -32270,10 +32278,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "facilities",
@@ -32286,10 +32294,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "operations",
@@ -32302,10 +32310,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "hr",
@@ -32318,10 +32326,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "health",
@@ -32334,10 +32342,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "ilo",
@@ -32350,10 +32358,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "editor",
@@ -32366,10 +32374,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "nist",
@@ -32382,10 +32390,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "arxiv",
@@ -32398,10 +32406,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "weforum",
@@ -32414,10 +32422,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "employer",
@@ -32430,10 +32438,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "purchasing-managers",
@@ -32446,10 +32454,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-1",
@@ -32462,10 +32470,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-2",
@@ -32478,10 +32486,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-3",
@@ -32494,10 +32502,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "census",
@@ -32510,10 +32518,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "msresearch",
@@ -32526,10 +32534,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "exact",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "exact",
                 "id": "onet-wages",
@@ -32542,10 +32550,10 @@
                 "url": "https://www.onetonline.org/link/localwages/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮实际查阅或同源用途复核2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "archivists",
@@ -32558,10 +32566,10 @@
                 "url": "https://www.onetonline.org/link/details/33-9011.00"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-08",
                 "details": [
                   "contextual",
-                  "本轮查阅/同批已核复用2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-08"
                 ],
                 "evidence_type": "contextual",
                 "id": "cnvet",
@@ -32574,10 +32582,10 @@
                 "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408942.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮查阅/同批已核复用2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "cnclinic",
@@ -32590,10 +32598,10 @@
                 "url": "https://xmsyj.moa.gov.cn/gzdt/202209/t20220909_6408940.htm"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮查阅/同批已核复用2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "cdc",
@@ -32606,10 +32614,10 @@
                 "url": "https://www.cdc.gov/rabies/prevention/index.html"
               },
               {
-                "accessed_at": "2026-10-02",
+                "accessed_at": "2026-10-09",
                 "details": [
                   "contextual",
-                  "本轮查阅/同批已核复用2026-10-02"
+                  "本窗口实际核读/同文复用2026-10-09"
                 ],
                 "evidence_type": "contextual",
                 "id": "cdcprep",
@@ -34914,8 +34922,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "cdcprep"
+              "onet-context",
+              "cnlaw"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -35506,11 +35514,11 @@
             "ai_heading": "AI 会影响动物管控员的工资吗？",
             "driver_heading": "机构场景需要核对什么？",
             "official_heading": "职业工资缺口与宽参照",
-            "scenario_caption": "准备方向核问，不是学历路径比例或工资统计",
-            "scenario_heading": "教育与训练需要核对什么？",
+            "scenario_caption": "编辑准备方向，真实中国招录条件另核",
+            "scenario_heading": "不同学习背景需核哪些准备与岗位条件？",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "教育准备",
-            "scenario_value_label": "核问方向"
+            "scenario_value_label": "准备或岗位方向示例"
           },
           "us_growth": {
             "$item": "animal-control-workers.china-salary.career-snapshot-primary-locale.58",
@@ -35719,7 +35727,7 @@
             }
           }
         ],
-        "factors_heading": "实际收入需要核对哪些书面条件？",
+        "factors_heading": "核实际美国报酬需比较哪些条件？",
         "growth": {
           "$item": "animal-control-workers.us-salary.career-snapshot-secondary-locale.33",
           "block": "us-salary",
@@ -35818,7 +35826,7 @@
             }
           }
         ],
-        "industry_value_label": "该行业内本职业工资中位数",
+        "industry_value_label": "行业内本职业中位数／全国参照（分别标明）",
         "interpretation_heading": "这组美国工资数字应当怎么理解？",
         "interpretation_rows": [
           {
@@ -36523,7 +36531,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 展示的 BLS 工资分位（2025 年 5 月）",
+            "label": "BLS EP本职业2025—2035就业预测",
             "secondary_value": null,
             "value": {
               "$item": "animal-control-workers.profile.onet-structured-fields-block.4",
@@ -37937,7 +37945,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "公共安全与动物管理：现场捕获与约束 · 调查取证与法规执法 · 收容处置与公众教育",
@@ -37988,7 +37996,7 @@
       "text": "动物管控员：任务、工资与就业前景（O*NET 33-9011.00）"
     }
   },
-  "source_content_sha256": "affffe66c43ab1f10f24775e64edd68e610e2e8423839dbbf4bcbb5a507a2deb",
+  "source_content_sha256": "91183d0c82ba47697e3593d1b89c487a6cd13c2e0d96d1f5648b3562a7cd094a",
   "subject": {
     "canonical_slug": "animal-control-workers",
     "name": "动物管控员",

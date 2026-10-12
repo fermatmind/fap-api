@@ -2,6 +2,9 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
+      "fact:change-current": {
+        "status": "pending_mapping"
+      },
       "fact:cn-industry-manufacturing-2024": {
         "status": "pending_mapping"
       },
@@ -14,7 +17,31 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:employment-current": {
+        "status": "pending_mapping"
+      },
+      "fact:growth-current": {
+        "status": "pending_mapping"
+      },
+      "fact:industry-local-current": {
+        "status": "pending_mapping"
+      },
+      "fact:industry-repair-current": {
+        "status": "pending_mapping"
+      },
+      "fact:industry-truck-current": {
+        "status": "pending_mapping"
+      },
+      "fact:industry-wholesale-current": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
+        "status": "pending_mapping"
+      },
+      "fact:openings-current": {
+        "status": "pending_mapping"
+      },
+      "fact:projected-current": {
         "status": "pending_mapping"
       },
       "fact:us-change-2025-2035": {
@@ -399,6 +426,9 @@
         "status": "mapped"
       },
       "item:bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.9": {
+        "status": "pending_mapping"
+      },
+      "item:bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.9.unconsumed": {
         "status": "pending_mapping"
       },
       "item:bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.90": {
@@ -4515,7 +4545,7 @@
       },
       "ai_impact_table.evidence_rows.05.link": {
         "ref": {
-          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.9",
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.9.unconsumed",
           "path": [
             "data",
             "entries",
@@ -5198,7 +5228,7 @@
       },
       "ai_impact_table.questions.05.link": {
         "ref": {
-          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.9",
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.9.unconsumed",
           "path": [
             "data",
             "entries",
@@ -9343,18 +9373,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.04.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            3,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.04.mitigation": {
         "ref": {
@@ -11480,28 +11500,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.href": {
-        "ref": {
-          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.label": {
         "ref": {
@@ -12004,28 +12004,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.href": {
-        "ref": {
-          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.18",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.label": {
         "ref": {
@@ -12135,52 +12115,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.href": {
-        "ref": {
-          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.20",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.label": {
-        "ref": {
-          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.20",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.headers.explanation": {
         "ref": {
@@ -12266,52 +12206,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.href": {
-        "ref": {
-          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.22",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.label": {
-        "ref": {
-          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.22",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.07.headers.explanation": {
         "ref": {
@@ -12397,52 +12297,12 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.href": {
-        "ref": {
-          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.24",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.label": {
-        "ref": {
-          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.24",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              0,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.08.headers.explanation": {
         "ref": {
@@ -23889,10 +23749,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "试驾或路试验证，填写维修与竣工记录、结算清单，按备案范围开展服务并按规定处置废弃物，完成交车说明与留痕。"
+              "试车或路试按实际驾驶资格、车辆条件和单位安排执行，记录维修与交接；经营性维修另核备案范围、竣工检验和废物规定，内部车队任务核自身适用要求。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.career-quick-answers-block.6",
+          "source_refs": [
+            "ooh-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -23900,10 +23764,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "公交卡车机械师与柴油机专员以柴油车辆与发动机的诊断、维修与保养为核心；汽车维修技师面向乘用车的机械与电控维修；移动重型设备机械师面向工程机械；轨道车辆维修工面向铁路车辆；飞机机械师与维修技师面向航空器；工业机械维修工面向工厂设备；暖通制冷机械师面向暖通与制冷系统。名称相近或同处维修行业，都不代表承修范围与检验权限可以互换。"
+              "本职业涉及公交卡车及各类柴油发动机；汽车维修技师也涵盖轻型卡车，移动重型设备（发动机除外）、轨道车辆、飞机、工业机械、暖通各有对象与制度，经验不自动互换权限。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.career-quick-answers-block.7",
+          "source_refs": [
+            "ooh-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -23922,10 +23790,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按技术规范与维修手册，把车辆的故障与隐患转化为可复现的诊断结论与合格的车辆状态，保证运营安全、控制停机时间并留下可追溯的维修记录。"
+              "按技术规范和维修手册诊断、维修、复核并记录，为运营安全和减少停机提供支持；不保证消除全部风险。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.career-quick-answers-block.9",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -24010,10 +23881,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "维修质量与操作安全由维修人员与其班组负责；维修质量检验与合格证签发由具备相应能力的人员按规范执行；经营合规与安全生产主体责任由维修经营者承担；整车修理、总成修理与二级维护的质量检验按适用规定实施；超出本人承修范围与授权的判断须按流程升级。"
+              "中国机动车维修经营：2026道路运输条例37/39规定条件及县级交通备案，2023维修规定7/20按备案范围；二级维护、总成或整车修理须三检，合格由质量检验人员签发机动车维修竣工出厂合格证（31—32）。经营者质量安全主责；个人训练不自动给签证权限。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.career-quick-answers-block.17",
+          "source_refs": [
+            "mot-current",
+            "transport-current"
+          ],
           "type": "prose"
         },
         {
@@ -24032,10 +23907,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "能否承修某类车型与项目、能否签发维修合格证、能否进行改装相关作业，由备案经营范围、单位制度与适用规定决定；作业权限来自培训与授权记录，不由资历或熟练程度自行产生；涉及安全系统与用电用气的作业须按规程审批与监护。"
+              "承修经营范围、个人任务能力和竣工签证身份分别核。培训不等授权；改装须核车主法定手续及允许范围，不以厂家信息代替法律。狭窄/别扭姿态不自动等于法定有限空间。核车型、设备及能源危险和场地现行规程；审批监护只在适用规定或场地程序要求时办理。美国适用OSHA1910.244(a)千斤顶要求载荷、支承、举升后立即固定及检查停用；1910.147先核危险能源维修适用及例外，不外推中国或作为自行停复机授权。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.career-quick-answers-block.19",
+          "source_refs": [
+            "mot-current",
+            "transport-current",
+            "jacks-current",
+            "energy-current"
+          ],
           "type": "prose"
         },
         {
@@ -24087,10 +23968,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧为 O*NET-SOC 49-3031.00（SOC 49-3031），归属于安装、维护与维修职业群；该职业未被标注 Bright Outlook，列为 Job Zone Three（SVP 6.0 至低于 7.0）。O*NET 2024 年行业分布为运输与仓储 28%、批发贸易 14%、其他服务 11%、政府 10%、其他 37%（含行政与支持服务与制造业）。中国大陆《中华人民共和国职业分类大典（2022 年版）》没有与「公交卡车机械师与柴油机专员」一一对应的细类，相关职责可能落在汽车维修工、机动车检测维修、运输企业车辆维护、工程机械维修等岗位中，其承修范围、检验权限与责任边界各不相同，需按岗位实际职责判断。"
+              "2022职业分类大典4-12-01-01汽车维修工涵盖汽车及特种车辆发动机、底盘、车身、电气等维护修理调试，是相关较宽口径；美国49-3031还包括船舶柴油机。证据不足：本页具体中国岗位与该美国范围的精确映射，按实际职责核，不断言中国无对应细类。 O*NET2025行业：运输与仓储27%、批发13%、政府11%、其他服务11%、其他38%（含行政支持、房地产租赁）。OOH较细分类另列卡车运输18%、批发13%、地方政府（不含教育医院）9%、汽车修理9%、租赁6%，不可强行重算或推工资。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.career-quick-answers-block.24",
+          "source_refs": [
+            "classification-current",
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -24109,10 +23994,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把该职业列为 Job Zone Three（SVP 6.0 至低于 7.0），受访者中 39% 认为需中等后证书、37% 认为需高中或同等学历；实际入行多依靠中等后柴油机维修培训项目、学徒制或在岗学习，并可能需要行业认证；电控与排放系统的持续学习尤其重要。"
+              "O*NET新入职教育要求问答39%中等后证书、37%高中或同等，非现有从业者学历构成；JobZone3/SVP6至不足7是准备概括。BLS典型高中/相关经验None/长期在岗培训；雇主可能偏好中等后项目或要求认证，部分试驾岗位需CDL，逐岗核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.career-quick-answers-block.26",
+          "source_refs": [
+            "details-current",
+            "ooh-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -24131,10 +24021,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 技术清单共 11 项技术与软件技能（其中 6 项标注 Hot Technology），包括 Microsoft Office／Excel／Word、SAP、Autodesk AutoCAD 与 Dassault Systemes SolidWorks；招聘启事中的出现频率较低（多数在 1% 及以下）。现场工具以手动工具、气动工具、举升与起重设备、诊断仪与便携电脑、电机分析仪、压力表与底盘图、加热与冷却系统检测设备为主；标注表示招聘启事中的出现频率，不代表机构已部署或岗位已被替代。"
+              "O*NET列11软件类别，Hot清单另列6具体产品、无InDemand标记；Office和Excel各1%、Word和SAP各不足1%，AutoCAD/SolidWorks为NA（非0）。详细软件还含Cummins INSITE、诊断与维护管理软件；招聘提及不是部署率或AI采用率。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.career-quick-answers-block.28",
+          "source_refs": [
+            "details-current",
+            "hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -24153,10 +24047,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作风险以油污与化学品暴露、噪声、粉尘与受限空间、举升与高压系统、以及电气与焊接作业为主；O*NET 工作情境显示 85% 每天接触污染物、81% 每天暴露于噪声、78% 每天穿戴常用防护装备、74% 每天在非环境受控的室内作业、67% 每天处于狭窄或别扭姿势；应按规程使用个体防护、办理举升与用电用气作业审批与监护，并规范处置废弃物。"
+              "O*NET美国情境85%每日污染物、81%每日噪声、78%每日常用PPE、74%每日非受控室内、67%每日狭窄别扭姿态；不是事故率。狭窄/别扭姿态不自动等于法定有限空间。核车型、设备及能源危险和场地现行规程；审批监护只在适用规定或场地程序要求时办理。美国适用OSHA1910.244(a)千斤顶要求载荷、支承、举升后立即固定及检查停用；1910.147先核危险能源维修适用及例外，不外推中国或作为自行停复机授权。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.career-quick-answers-block.30",
+          "source_refs": [
+            "details-current",
+            "jacks-current",
+            "energy-current"
+          ],
           "type": "prose"
         },
         {
@@ -24175,10 +24074,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "在中国大陆，机动车维修经营者应当落实安全生产主体责任和维修质量主体责任，按备案经营范围开展维修服务，按国家、行业或地方维修标准规范和技术信息进行维修，不得使用假冒伪劣配件、不得擅自改装机动车、不得承修已报废的机动车；对机动车进行二级维护、总成修理或整车修理的应当进行维修质量检验并签发维修合格证；产生的废弃物应按国家有关规定处理。"
+              "中国机动车维修经营：2026道路运输条例37/39规定条件及县级交通备案，2023维修规定7/20按备案范围；二级维护、总成或整车修理须三检，合格由质量检验人员签发机动车维修竣工出厂合格证（31—32）。经营者质量安全主责；个人训练不自动给签证权限。 不得假冒配件、擅自改装或承修报废车辆；配件追溯、废弃物按国家规定处置。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.career-quick-answers-block.32",
+          "source_refs": [
+            "mot-current",
+            "transport-current"
+          ],
           "type": "prose"
         },
         {
@@ -24197,10 +24100,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "岗位通常按运输与维修作业安排，87% 受访者为固定班制，部分岗位需轮班或值班；计酬常见按工时或计件加绩效；比较时把班次与加班安排、工时定额与计酬口径、工具与防护用品的承担方式，以及培训与认证成本纳入书面约定。"
+              "O*NET87%固定班制、53%通常每周超40小时、46%40小时；OOH部分夜间周末和24小时维修服务。编辑核对：具体工时、计件及奖金方案、工具防护和培训费用另问雇主，不宣称某计酬方式全国常见。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.career-quick-answers-block.34",
+          "source_refs": [
+            "details-current",
+            "ooh-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24219,10 +24127,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业身份与任务：O*NET-SOC 49-3031.00 Bus and Truck Mechanics and Diesel Engine Specialists，2026 年更新页面，Job Zone Three（SVP 6.0 至低于 7.0），该职业未被标注 Bright Outlook。官方职责为「Diagnose, adjust, repair, or overhaul buses and trucks, or maintain and repair any type of diesel engines. Includes mechanics working primarily with automobile or marine diesel engines.」；共 26 项任务，其中使用手动工具与动力工具重要性为 89、检查制动系统与转向机构与轮毂轴承等部件为 83、用液压千斤顶或起重设备举升车辆与重型部件为 81、调整与更换制动衬片并定位车轮为 80、连接测试仪器并读取表盘以诊断故障为 79。"
+              "档案2026/JobZone3/SVP6至不足7，未标BrightOutlook；26任务23Core/3Supplemental；41一般活动/25详细活动/57情境。工具89、关键部件83、举升81、制动衬片80、测试和常规维护79等原值正确，不等每岗全部承担。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -24241,10 +24152,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：国家统计局《2025 年城镇单位就业人员年平均工资情况》按行业门类与岗位大类公布平均工资，但没有单列「公交卡车机械师与柴油机专员」这一职业；本页按证据路由（暂无可安全使用的数据）不发布职业级工资数值，也不用行业均值或美国数据替代，只保留统计口径、覆盖范围与缺口标记。"
+              "2025城镇单位税前年平均工资行业背景（元/年）：非私营运输仓储邮政133981、居民服务修理其他70226、批零135749；对应私营73133、52059、69622。按实际用工单位行业选择，非本职业平均、中位数或城市月薪。 精确职业及城市工资仍证据不足。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.onet-structured-fields-block.3",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -24252,10 +24166,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "就业与前景：O*NET 页面显示本职业 2024 年就业 319,900 人，2024—2034 年预测增长标签为 Slower than average（低于平均，1% 至 2%），预测期年均职位空缺 26,500 个；空缺主要来自替代需求。BLS 职业展望手册的 Diesel Service Technicians and Mechanics 页面为同一职业的 2025—2035 年期间，给出 2025 年在岗 316,000 人、增长 4%、年均约 24,400 个空缺，两段期间不同，本页分别标注。"
+              "美国49-3031：2025就业316000人、2035预测327400人；2025—2035 BLS表1.2增长3.6%、OOH/O*NET整数4%（Average 3%—4%）、净增11400人、年均空缺24400个。空缺含转岗和退出替代，非净增或AI归因。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.onet-structured-fields-block.4",
+          "source_refs": [
+            "trends-current",
+            "ep-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -24263,10 +24182,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业分布与工具信号：O*NET 2024 年行业分布为运输与仓储 28%、批发贸易 14%、其他服务 11%、政府 10%、其他 37%（含行政与支持服务与制造业）；技术清单 11 项中 6 项标注 Hot Technology。行业分布描述统计分类，不能推导行业工资、雇主类型或个人岗位归属。"
+              "O*NET2025行业：运输与仓储27%、批发13%、政府11%、其他服务11%、其他38%（含行政支持、房地产租赁）。OOH较细分类另列卡车运输18%、批发13%、地方政府（不含教育医院）9%、汽车修理9%、租赁6%，不可强行重算或推工资。 O*NET列11软件类别，Hot清单另列6具体产品、无InDemand标记；Office和Excel各1%、Word和SAP各不足1%，AutoCAD/SolidWorks为NA（非0）。详细软件还含Cummins INSITE、诊断与维护管理软件；招聘提及不是部署率或AI采用率。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.onet-structured-fields-block.5",
+          "source_refs": [
+            "industry-current",
+            "hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -24290,10 +24213,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "作业场所｜74% 受访者每天在非环境受控的室内工作；68% 每天在封闭车辆内或操作封闭设备。\n暴露与噪声｜85% 每天接触污染物、81% 每天暴露于干扰或不适的噪声、60% 每天接触危险设备。\n防护与安全｜78% 每天穿戴安全鞋、护目镜、手套、听力保护等常用防护装备。\n姿态与体力｜80% 持续或几乎持续用手操作物件与工具；59% 持续或几乎持续站立、59% 持续弯腰或扭转；67% 每天处于狭窄或别扭姿势。\n沟通方式｜90% 每天进行面对面讨论；51% 持续与他人接触、31% 大部分时间接触。\n决策自由度｜55% 表示确定任务与优先级有很大自由、30% 有一定自由；66% 每天需要做决策。\n结果影响｜72% 表示对他人健康与安全负极高责任；69% 认为其决定对同事或单位结果非常重要。\n工作时间｜87% 为固定班制；部分岗位需轮班或值班，运营高峰与故障抢修会出现集中加班。\n温度环境｜52% 每天暴露于很热或很冷的环境；17% 每周一次以上在非受控室内作业的补充情形。"
+              "作业场所｜74% 受访者每天在非环境受控的室内工作；68% 每天在封闭车辆内或操作封闭设备。\n暴露与噪声｜85% 每天接触污染物、81% 每天暴露于干扰或不适的噪声、60% 每天接触危险设备。\n防护与安全｜78% 每天穿戴安全鞋、护目镜、手套、听力保护等常用防护装备。\n姿态与体力｜80% 持续或几乎持续用手操作物件与工具；59% 持续或几乎持续站立、59% 持续弯腰或扭转；67% 每天处于狭窄或别扭姿势。\n沟通方式｜90% 每天进行面对面讨论；51% 持续与他人接触、31% 大部分时间接触。\n决策自由度｜55% 表示确定任务与优先级有很大自由、30% 有一定自由；66% 每天需要做决策。\n结果影响｜72% 表示对他人健康与安全负极高责任；69% 认为其决定对同事或单位结果非常重要。\n工作时间｜87% 为固定班制；部分岗位需轮班或值班，53%通常每周超40小时、46%40小时；具体加班另核。\n温度环境｜52% 每天暴露于很热或很冷的环境；17% 每周一次以上在非受控室内作业的补充情形。 各比例为美国职业受访者，不是中国工场暴露或事故率。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.work-context-block.1",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         }
       ]
@@ -24942,12 +24868,6 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "O*NET-SOC 49-3031.00 行业分布",
-                "id": "link-12",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/49-3031.00"
-              },
-              {
                 "entity": "O*NET-SOC 49-3031.00 职业摘要",
                 "id": "link-13",
                 "relation": "career.source",
@@ -24970,12 +24890,6 @@
                 "id": "link-16",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/diesel-service-technicians-and-mechanics.htm"
-              },
-              {
-                "entity": "O*NET-SOC 49-3031.00 职业摘要",
-                "id": "link-17",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/49-3031.00"
               },
               {
                 "entity": "O*NET-SOC 49-3031.00 自定义职业档案",
@@ -25010,7 +24924,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先在带教下完整参与一次从接车问诊、读码与测量、诊断、拆装维修、安全复核到试车的闭环，再谈认证与实习；同时核对目标岗位属于公交或货运车队、经销商服务站还是综合维修厂，其承修车型与项目范围不同。"
+              "编辑建议：核对车队、经销商或综合维修厂的承修车型和项目范围，在带教下从适用基础任务逐步学习诊断、维修、复核与记录；认证、实习和任务训练可按具体项目条件并行核对，不以先独立完成全流程作为统一起点。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.11",
@@ -25087,7 +25001,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：数字化诊断与人脸识别式的辅助会改变读码、测量、资料检索与记录环节，但没有官方证据表明它会取代故障根源判断、安全系统复核、维修质量与竣工结论的责任。任务暴露、流程自动化程度与就业数量是三个不同概念。"
+              "编辑用途示例：数字化诊断数据整理、测量记录与资料检索可辅助维修人员核对；本轮未取得本职业AI实测提效或整体替代证据。故障判断、适用安全复核和竣工结论须按实际职责处理；任务暴露、流程自动化与就业数量分开判断。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.18",
@@ -25175,7 +25089,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 11 项技术与软件技能（含 6 项 Hot Technology）；不代表机构已部署或岗位已被替代。"
+              "详细档案列11个软件类别，Hot Technology另列6个具体产品；两个清单的计数对象不同，不代表机构部署率或岗位替代率。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.26",
@@ -25197,10 +25111,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明运输与仓储 28%、批发贸易 14%、其他服务 11%、政府 10%、其他 37%；不能推导行业工资或就业规模。"
+              "O*NET2025行业：运输与仓储27%、批发13%、政府11%、其他服务11%、其他38%（含行政支持、房地产租赁）。OOH较细分类另列卡车运输18%、批发13%、地方政府（不含教育医院）9%、汽车修理9%、租赁6%，不可强行重算或推工资。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.28",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -25219,10 +25136,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明 Bus and Truck Mechanics and Diesel Engine Specialists（SOC 49-3031）口径 的就业规模与 2024—2034 年预测。"
+              "美国49-3031：2025就业316000人、2035预测327400人；2025—2035 BLS表1.2增长3.6%、OOH/O*NET整数4%（Average 3%—4%）、净增11400人、年均空缺24400个。空缺含转岗和退出替代，非净增或AI归因。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.30",
+          "source_refs": [
+            "trends-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -25329,10 +25250,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、招聘技术信号、就业与工资数据以及任务暴露研究，不是 AI 替代率或岗位数量预测。"
+              "五卡分别提供职责任务、招聘软件、工资就业和一般任务暴露研究；BLS有本职业岗位数量预测，但不是AI替代率、部署率或AI导致失业的预测。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.40",
+          "source_refs": [
+            "ooh-current",
+            "ilo-genai"
+          ],
           "type": "prose"
         },
         {
@@ -25406,10 +25331,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "官方 26 项任务与 41 项工作活动"
+              "26任务（23Core/3Supplemental）与41一般、25详细工作活动分开读取。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.47",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25461,10 +25389,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面共列出 11 项技术与软件技能，其中 6 项标注 Hot Technology，包括 Microsoft Office／Excel／Word、SAP、Autodesk AutoCAD 与 Dassault Systemes SolidWorks；招聘启事中的出现频率普遍很低（多数在 1% 及以下）。"
+              "O*NET列11软件类别，Hot清单另列6具体产品、无InDemand标记；Office和Excel各1%、Word和SAP各不足1%，AutoCAD/SolidWorks为NA（非0）。详细软件还含Cummins INSITE、诊断与维护管理软件；招聘提及不是部署率或AI采用率。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.52",
+          "source_refs": [
+            "details-current",
+            "hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -25472,10 +25404,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "为 Bus and Truck Mechanics and Diesel Engine Specialists（SOC 49-3031）口径 的全国工资分布，不区分行业、雇主与用工形式，也不构成个人就业保证。"
+              "OOH精确职业有整体工资及五行业工资中位数、预测；不是个人起薪、AI采用率或因AI就业变化。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.53",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -25505,10 +25440,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该页给出该职业 2025 年 5 月中位年薪 61,770 美元、2025 年在岗 316,000 人、2025—2035 年增长 4%（与平均相当）、就业变化约 11,400 人、年均约 24,400 个空缺；典型入门学历为高中或同等学历、在岗培训为长期；并指出行业认证可能需要。其期间（2025—2035 年）与 O*NET 展示的 2024—2034 年不同，本页分别标注、不混用。"
+              "美国49-3031：2025就业316000人、2035预测327400人；2025—2035 BLS表1.2增长3.6%、OOH/O*NET整数4%（Average 3%—4%）、净增11400人、年均空缺24400个。空缺含转岗和退出替代，非净增或AI归因。 2025工资中位61770美元/年、29.70/小时；O*NET新入职教育要求问答39%中等后证书、37%高中或同等，非现有从业者学历构成；JobZone3/SVP6至不足7是准备概括。BLS典型高中/相关经验None/长期在岗培训；雇主可能偏好中等后项目或要求认证，部分试驾岗位需CDL，逐岗核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.56",
+          "source_refs": [
+            "ooh-current",
+            "ep-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25560,10 +25500,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在故障码读取、数据流分析、维修资料检索与工时记录这类可复核环节，工具确实能提高效率。但工具不知道车辆的实际磨损与使用历史、不掌握拆装与安全规范，产出必须回到实车状态与维修手册逐条核对。"
+              "编辑建议：工具可协助检索、整理诊断数据和记录；本轮未取得本职业实测效率或全面部署证据。判断工具掌握哪些车辆信息、核实读数和手册适用，不声称工具一律不知道历史或不懂规范。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.61",
+          "source_refs": [
+            "editor-current",
+            "nist-ai-rmf"
+          ],
           "type": "prose"
         },
         {
@@ -25582,10 +25526,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露、流程自动化程度与就业数量是不同测量对象。O*NET 页面仍显示该职业 2024 年就业 319,900 人、2024—2034 年预测增长 1% 至 2%、年均 26,500 个空缺；而故障根源判断、安全复核与维修质量责任无法由工具承担，因此不能从暴露度推断岗位消失。"
+              "美国49-3031：2025就业316000人、2035预测327400人；2025—2035 BLS表1.2增长3.6%、OOH/O*NET整数4%（Average 3%—4%）、净增11400人、年均空缺24400个。空缺含转岗和退出替代，非净增或AI归因。 任务暴露不等自动化或岗位数量，责任要求本身不证明就业不会下降。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.63",
+          "source_refs": [
+            "ep-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25593,10 +25541,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不会以整体取代的方式发生：诊断判断、拆装与安全复核、维修竣工与交车责任，仍需由受过训练并获得授权的人负责；工具改变的是可复核的数据与记录环节。"
+              "证据不足：本职业整体替代率或发生年份。本轮资料支持按任务讨论辅助条件；OOH也指出部分电动车维护需求减少，不能据法律责任断言整体不会取代。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.64",
+          "source_refs": [
+            "ooh-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25615,10 +25567,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不需要会写代码，但需要电控与数据素养：会读故障码与数据流、看懂电路与气压与液压图、能用诊断仪与测量工具定位问题；会用办公与诊断软件有帮助，但柴油机原理、诊断流程与安全规范才是门槛。"
+              "常见软件及诊断读数可作学习线索；O*NET没有统一编程门槛。具体岗位核柴油机、电控、测量、安全及软件要求，不把不会代码或先后顺序作为普遍条件。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.66",
+          "source_refs": [
+            "details-current",
+            "hot-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25659,10 +25616,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 页面显示该职业 2024—2034 年预测增长标签为 Slower than average（1% 至 2%）、年均约 26,500 个空缺；BLS 职业展望手册为同一职业的 2025—2035 年期间（增长 4%、年均约 24,400 个空缺）。该预测为统计口径，不构成个人就业保证；实际岗位受货运与客运量、车队更新与电气化进程影响。"
+              "美国49-3031：2025就业316000人、2035预测327400人；2025—2035 BLS表1.2增长3.6%、OOH/O*NET整数4%（Average 3%—4%）、净增11400人、年均空缺24400个。空缺含转岗和退出替代，非净增或AI归因。 OOH运输需求和老旧车维护支持需求，部分配送电动车较少维护可能压低需求，不作AI归因。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.70",
+          "source_refs": [
+            "ooh-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -25681,10 +25642,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。维修质量检验与合格证签发须由具备相应能力的人员按规范执行，涉及制动、转向与安全系统的结论也不能由工具承担，工具既不能承担责任，也不能取得相应授权。"
+              "中国机动车维修经营：2026道路运输条例37/39规定条件及县级交通备案，2023维修规定7/20按备案范围；二级维护、总成或整车修理须三检，合格由质量检验人员签发机动车维修竣工出厂合格证（31—32）。经营者质量安全主责；个人训练不自动给签证权限。 工具可以辅助整理和核对，法定检验人员与经营者依法承担职责。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.72",
+          "source_refs": [
+            "mot-current",
+            "transport-current"
+          ],
           "type": "prose"
         },
         {
@@ -25703,7 +25668,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有任何官方来源给出这样的年份。任务暴露、流程自动化程度与就业数量是不同概念，本页不做岗位消失年份预测。"
+              "证据不足：本轮查阅的O*NET、BLS及ILO资料未给出该职业消失年份依据。本页不据任务暴露或流程自动化推算岗位消失年份。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.74",
@@ -25725,10 +25690,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "优先学柴油机与电控系统原理、诊断流程与测量方法、拆装与安全规范、排放与后处理系统以及维修记录与交车规范，并完成一次受监督的完整维修流程；把工具使用排在原理与安全规范之后。"
+              "编辑建议：柴油机、电控、测量、诊断软件和安全知识结合学习，在合规受监督任务中逐步验证，不把先完成全流程或先学完原理设成所有岗位起点。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.76",
+          "source_refs": [
+            "editor-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -25747,10 +25716,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数字化诊断与管理系统进入维修流程时，人的控制点应按以下五步固定下来；任何一步缺失都不应扩大使用范围。"
+              "以下五步为编辑核对建议，按数据权限和真实作业程序确定控制点，不是行业强制步骤或复工许可。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.78",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25769,10 +25741,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只把可复核的读码与数据流分析、资料检索、工时与料费记录、报表初稿交给工具。"
+              "编辑建议：按任务条件辅助读码整理、资料查询、工单、保养计划和说明；验证适用范围及输出，不能将所有软件用途限定为初稿。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.80",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26187,10 +26162,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对班组作业纪律与安全规范执行负责。"
+              "班组负责人按实际职责安排带教、质量和安全核对；普通维修人员不自动负责全班组纪律。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.118",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26236,6 +26214,29 @@
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.122",
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "O*NET-SOC 49-3031.00 行业分布",
+                "id": "link-12",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/industry/49-3031.00"
+              },
+              {
+                "entity": "O*NET-SOC 49-3031.00 职业摘要",
+                "id": "link-17",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/summary/49-3031.00"
+              }
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.9.unconsumed",
+          "type": "links",
+          "visibility": "internal"
         }
       ]
     },
@@ -26351,10 +26352,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "截至 2026 年 9 月，有界检索未找到单列「公交卡车机械师与柴油机专员」的全国职业工资统计；该路由的记录为 china-exact-wage-unavailable，consequence 为「不能发布精确中国职业薪资数字」，因此本页不把任何行业或岗位大类平均数写成该职业工资，也不用美国数据替代。"
+              "证据不足：本轮有界资料未取得中国该具体职业的全国工资分布；可显示匹配用工单位行业背景，精确缺口不自动否定所有较宽统计。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.8",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26362,10 +26367,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》按行业门类公布平均工资，但没有单列本职业。"
+              "非私营运输仓储邮政133981、居民服务修理其他70226、批零135749元/年（2025行业平均）。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.9",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26373,10 +26382,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业门类平均工资混合运输、批发零售、专业服务与公共管理等多类岗位，不能替代本职业职业工资；按证据路由本页不展示该类数值，只登记该口径不可替代。"
+              "按实际用工单位行业选择背景；同一行业含多岗位，非柴油维修职业工资，不用于个人报价。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.10",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26384,10 +26397,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "同一发布另有城镇私营单位口径，同样按行业门类汇总，也不单列本职业。"
+              "私营对应73133、52059、69622元/年（2025行业平均）。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.11",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26395,10 +26412,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "私营单位与非私营单位覆盖的机构类型不同，且都不提供本职业职业级数值，两者均不可作为本职业工资。"
+              "私营/非私营为单位类型对照，非同一职业或同一雇主薪酬差；不按美国行业份额映射。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.12",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26439,10 +26460,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "劳务派遣、维修外包与按工时或计件结算的岗位收入不在该统计覆盖范围内；本页要求读者以当地真实招聘与合同为准。"
+              "不能因派遣、外包或计件结算一概排除：核实际报告单位、劳动报酬及统计关系；城镇单位工资包含符合工资总额的计时计件和奖金，仍不等具体合同收入。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.16",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26461,10 +26486,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国工资资料期为 2025 年（BLS OEWS）与 2024—2034 年预测；两个市场的资料期与口径不同，不能并列比较。"
+              "中国行业背景2025，美国工资2025与预测2025—2035；分别保留元/美元、平均/中位和人群，不能简单换汇排名。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.18",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26483,10 +26512,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "工资总额为税前口径，包含单位代扣代缴的个人所得税、社会保险和住房公积金个人缴纳部分，不等于到手收入；计件与绩效奖金另按实际约定计算。"
+              "税前工资总额含代扣个人税费、社保公积金；计件工资及符合统计定义的奖金可计入，不另作一律排除。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.20",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26494,10 +26527,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论：中国大陆无本职业精确职业数据；本页只展示统计口径、覆盖范围与缺口标记，不给出任何替代数值。"
+              "中国具体职业、地区月薪及就业分布证据不足；行业税前年平均仅补背景，不给职业平均月薪或起薪。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.21",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26516,7 +26553,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "数字化诊断会改变读码与记录等环节，但不改变中国大陆对该职业的统计口径：统计缺口与工具无关。"
+              "证据不足：本轮未取得数字化诊断对本职业中国大陆工资统计或分类口径影响的资料；现有行业均值不能替代精确职业工资。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.23",
@@ -26527,10 +26564,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业分类：中国大陆《中华人民共和国职业分类大典（2022 年版）》没有与「公交卡车机械师与柴油机专员」一一对应的细类；相关职责可能落在汽车维修工、机动车检测维修、运输企业车辆维护、工程机械维修等岗位中，承修范围、检验权限与责任边界随之不同，须按岗位实际职责判断。"
+              "2022职业分类大典4-12-01-01汽车维修工涵盖汽车及特种车辆发动机、底盘、车身、电气等维护修理调试，是相关较宽口径；美国49-3031还包括船舶柴油机。证据不足：本页具体中国岗位与该美国范围的精确映射，按实际职责核，不断言中国无对应细类。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.24",
+          "source_refs": [
+            "classification-current"
+          ],
           "type": "prose"
         },
         {
@@ -26560,10 +26600,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "通常不独立签发维修合格证或对外承诺维修质量；应核对备案范围与岗位授权。"
+              "编辑核对：具体岗位任务、培训、个人授权及经营性维修的检验签证要求分别核，不由学历自动推权限。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.27",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26670,10 +26714,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "居民服务、修理和其他服务业（仅说明归类）"
+              "居民服务、修理和其他服务业（雇主行业背景）"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.37",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26681,10 +26729,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "机动车维修类岗位可能归入该门类；该类仅公布行业平均数，本页不据此推算或展示本职业工资。"
+              "2025非私营70226、私营52059元/年；维修经营单位可能归类此门类，仍按实际单位核，非职业工资。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.38",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26692,10 +26744,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "交通运输、仓储和邮政业（仅说明归类）"
+              "交通运输、仓储和邮政业（雇主行业背景）"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.39",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26703,10 +26759,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "运输企业自有维修与车辆维护岗位可能归入该门类；同样不单列本职业，本页不据此推算工资。"
+              "2025非私营133981、私营73133元/年；运输企业内部维修可作雇主背景，非维修岗位平均。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.40",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26714,10 +26774,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "批发和零售业（仅说明归类）"
+              "批发和零售业（雇主行业背景）"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.41",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26725,10 +26789,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "配件销售与服务站类岗位可能归入该门类；本页不把该门类均值当作本职业工资，仅提示归类可能。"
+              "2025非私营135749、私营69622元/年；按实际经销单位归类核，非服务站具体工资。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.42",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26758,10 +26826,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆目前没有单列该职业的全国职业工资统计；按证据路由本页只展示可核对的统计口径、覆盖范围与缺口，不给出替代数值。"
+              "中国精确职业与城市月薪证据不足；保留官方行业背景及单位覆盖，按实际岗位和合同核报价。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.45",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26813,10 +26885,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与公交卡车机械师与柴油机专员精确对应的全国职业月薪分布；本页不发布替代数值。"
+              "证据不足：本职业全国月薪分布；行业元/年平均不改称职业月薪。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.50",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26868,10 +26944,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业对照：美国 O*NET-SOC 49-3031.00（Bus and Truck Mechanics and Diesel Engine Specialists，SOC 49-3031）；汽车维修技师（49-3023.00）等为独立相邻条目；中国大陆无直接对应的职业细类代码。"
+              "美国49-3031.00与相邻49-3023.00分开；2022职业分类大典4-12-01-01汽车维修工涵盖汽车及特种车辆发动机、底盘、车身、电气等维护修理调试，是相关较宽口径；美国49-3031还包括船舶柴油机。证据不足：本页具体中国岗位与该美国范围的精确映射，按实际职责核，不断言中国无对应细类。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.55",
+          "source_refs": [
+            "classification-current"
+          ],
           "type": "prose"
         },
         {
@@ -26902,10 +26981,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 1% 至 2%（Slower than average）"
+              "2025—2035增长整数4%（BLS精确3.6%），年均空缺24400个。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.58",
+          "source_refs": [
+            "trends-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27062,10 +27145,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "对应时薪第 10 分位 21.41 美元，为分布下限，不是入门起薪的承诺。；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/49-3031.00"
+              "年薪第10分位44530美元、时薪21.41；低于此分位仍有人，不是分布最低工资或新人起薪。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.10",
+          "source_refs": [
+            "bls-pay"
+          ],
           "type": "prose"
         },
         {
@@ -27150,10 +27236,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同口径时薪第 90 分位为 42.66 美元，高分段通常与车型专长、认证与资历相关。；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/49-3031.00"
+              "年薪第90分位88740美元、时薪42.66，非最大工资；数据不证明车型、认证或资历与高分位的因果。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.18",
+          "source_refs": [
+            "bls-pay"
+          ],
           "type": "prose"
         },
         {
@@ -27161,10 +27250,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "319,900人（2024 年，Bus and Truck Mechanics and Diesel Engine Specialists（SOC 49-3031）口径）"
+              "316000人（2025美国49-3031就业基数）。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.19",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27172,10 +27264,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为 Bus and Truck Mechanics and Diesel Engine Specialists（SOC 49-3031）口径 的就业基数，该职业主要集中于运输与仓储（28%）。；O*NET 职业摘要｜https://www.onetonline.org/link/summary/49-3031.00"
+              "O*NET2025行业：运输与仓储27%、批发13%、政府11%、其他服务11%、其他38%（含行政支持、房地产租赁）。OOH较细分类另列卡车运输18%、批发13%、地方政府（不含教育医院）9%、汽车修理9%、租赁6%，不可强行重算或推工资。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.20",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -27183,10 +27278,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 1% 至 2%（Slower than average，2024—2034 年）"
+              "2025—2035增长3.6%（BLS表1.2），OOH/O*NET整数4%。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.21",
+          "source_refs": [
+            "ep-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -27194,10 +27293,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该增长标签为 Bus and Truck Mechanics and Diesel Engine Specialists（SOC 49-3031）口径，该职业未被标注 Bright Outlook。；O*NET 职业摘要｜https://www.onetonline.org/link/summary/49-3031.00"
+              "本职业预测，不是AI就业归因，未标BrightOutlook不否定当前Average标签。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.22",
+          "source_refs": [
+            "trends-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27205,10 +27308,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "26,500个/年（2024—2034 年预测）"
+              "24400个/年（2025—2035年均空缺）。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.23",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27216,10 +27322,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为预测期年均职位空缺，主要来自替代需求，不是净新增，也不构成个人就业保证。；O*NET 职业摘要｜https://www.onetonline.org/link/summary/49-3031.00"
+              "空缺包含转岗和退出的替代，非11400净增，也非个人就业保证。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.24",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27227,10 +27336,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界：本页美国工资、就业与预测数据即为 Bus and Truck Mechanics and Diesel Engine Specialists（SOC 49-3031）口径 的本职业口径（2025 年 BLS OEWS 与2024—2034 年预测），不是父类或行业代理数据；BLS 职业展望手册的 Diesel Service Technicians and Mechanics 页面为同一职业的 2025—2035 年期间口径，本页分别标注、不混用或相加；行业分布描述统计分类而不是工资水平，本页不据此推导行业工资。"
+              "美国本职业2025工资分位及2025—2035预测；OOH提供五个行业内本职业工资中位数，行业分类细于O*NET份额，不从份额推工资。中国行业背景另标。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.25",
+          "source_refs": [
+            "ooh-current",
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -27238,10 +27351,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：美国公开数据给出本职业的工资分布——2025 年时薪中位数 29.70 美元、年薪中位数 61,770 美元，年薪第 10 至第 90 分位为 44,530 至 88,740 美元；2024 年就业 319,900 人，2024—2034 年预测增长 1% 至 2%、年均职位空缺 26,500 个。这些数字描述统计分类，不是个人起薪承诺。"
+              "2025年薪中位61770美元、时薪29.70，年薪P10—P90为44530—88740；美国49-3031：2025就业316000人、2035预测327400人；2025—2035 BLS表1.2增长3.6%、OOH/O*NET整数4%（Average 3%—4%）、净增11400人、年均空缺24400个。空缺含转岗和退出替代，非净增或AI归因。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.26",
+          "source_refs": [
+            "ooh-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27249,10 +27366,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "学历与训练通常影响起点：O*NET 列该职业为 Job Zone Three（SVP 6.0 至低于 7.0），受访者中 39% 认为需中等后证书、37% 认为需高中或同等学历；实际入行多依靠中等后柴油机维修培训项目、学徒制或在岗学习，并可能需要行业认证。"
+              "O*NET新入职教育要求问答39%中等后证书、37%高中或同等，非现有从业者学历构成；JobZone3/SVP6至不足7是准备概括。BLS典型高中/相关经验None/长期在岗培训；雇主可能偏好中等后项目或要求认证，部分试驾岗位需CDL，逐岗核。 教育问答不证明学历导致工资差。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.27",
+          "source_refs": [
+            "details-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27271,10 +27392,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与雇主类型影响报酬：O*NET 2024 年行业分布为运输与仓储 28%、批发贸易 14%、其他服务 11%、政府 10%、其他 37%（含行政与支持服务与制造业）；运输企业车队、经销商服务站与综合维修厂的薪酬与计酬方式不同。"
+              "O*NET2025行业：运输与仓储27%、批发13%、政府11%、其他服务11%、其他38%（含行政支持、房地产租赁）。OOH较细分类另列卡车运输18%、批发13%、地方政府（不含教育医院）9%、汽车修理9%、租赁6%，不可强行重算或推工资。 OOH有行业工资差异，不能由份额推个人工资。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.29",
+          "source_refs": [
+            "industry-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27293,10 +27418,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "职责范围影响报酬：是否掌握电控与后处理系统、是否承担质量检验与带教、是否具备多车型与专项认证，通常比单纯换件更影响报酬水平。"
+              "编辑核对：目标任务是否包含电控后处理、质检、带教，地区、工时、认证和实际报价另查；本轮未取得这些因素比换件更影响工资的比较证据。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.31",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27315,10 +27443,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 1% 至 2%（Slower than average）"
+              "2025—2035整数4%（精确3.6%）。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.33",
+          "source_refs": [
+            "trends-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27326,10 +27458,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "运输与仓储（28%）"
+              "地方政府（不含教育及医院）"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.34",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27337,10 +27472,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "71460美元/年"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.35",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27348,10 +27486,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 2024 年行业分布显示该职业 28% 位于运输与仓储。"
+              "BLS OOH2025年5月该行业内本职业年薪中位数；不是O*NET较宽门类份额、全部行业工资或个人起薪。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.36",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27359,10 +27500,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "批发贸易（14%）"
+              "批发贸易"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.37",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27370,10 +27514,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "63070美元/年"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.38",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27381,10 +27528,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 2024 年行业分布显示批发贸易占 14%，本页不据此推算其工资。"
+              "BLS OOH2025年5月该行业内本职业年薪中位数；不是O*NET较宽门类份额、全部行业工资或个人起薪。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.39",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27392,10 +27542,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他服务与政府（合计约 21%）"
+              "汽车修理与维护"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.40",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27403,10 +27556,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "60330美元/年"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.41",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27414,10 +27570,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 2024 年行业分布显示其他服务 11%、政府 10%，本页不据此推算其工资。"
+              "BLS OOH2025年5月该行业内本职业年薪中位数；不是O*NET较宽门类份额、全部行业工资或个人起薪。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.42",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27425,10 +27584,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他行业（37%，含行政与支持服务与制造业）"
+              "卡车运输"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.43",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27436,10 +27598,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "59820美元/年"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.44",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27447,10 +27612,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 把其余 37% 合并为「其他行业」并注明含行政与支持服务与制造业；本页不拆分该部分，也不推算其工资。"
+              "BLS OOH2025年5月该行业内本职业年薪中位数；不是O*NET较宽门类份额、全部行业工资或个人起薪。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.45",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27458,10 +27626,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位数不是入门工资：它表示一半从业者高于、一半低于该值；第 10 与第 25 分位更接近分布低端，但仍受车型专长、认证与用工形式影响。"
+              "中位数是统计分布中点，分位不等经验或资历档；未取得本职业认证、车型和训练对分位的因果估计。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.46",
+          "source_refs": [
+            "ooh-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27480,10 +27652,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "数字来自 O*NET 展示的 BLS 2025 年 OEWS 工资数据，口径为 Bus and Truck Mechanics and Diesel Engine Specialists（SOC 49-3031）；就业与预测期为 2024—2034 年。该职业主要集中于运输与仓储，行业间工资差异未在来源中公布。"
+              "O*NET2025本职业工资分位；OOH2025五行业本职业中位年薪；就业预测2025—2035，各口径分开。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.48",
+          "source_refs": [
+            "ooh-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27535,10 +27711,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位为年薪 88,740 美元；高端通常与车型专长、认证与资历相关，不代表普遍水平。"
+              "P90年薪88740美元，描述统计高分段，不是最大工资或资深人士统一报价。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.53",
+          "source_refs": [
+            "bls-pay"
+          ],
           "type": "prose"
         }
       ]
@@ -27747,10 +27926,10 @@
                 "url": "/zh/career/jobs/outdoor-power-equipment-and-other-small-engine-mechanics"
               },
               {
-                "entity": "O*NET-SOC 49-3031.00 培训与教育信息",
+                "entity": "O*NET新入职教育问答与JobZone",
                 "id": "link-13",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtraining/49-3031.00"
+                "url": "https://www.onetonline.org/link/details/49-3031.00"
               },
               {
                 "entity": "《机动车维修管理规定》",
@@ -27783,10 +27962,10 @@
                 "url": "https://www.onetonline.org/link/summary/49-3031.00"
               },
               {
-                "entity": "O*NET-SOC 49-3031.00 职业摘要（入门学历构成）",
+                "entity": "O*NET新入职教育要求（非学历构成）",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/49-3031.00"
+                "url": "https://www.onetonline.org/link/details/49-3031.00"
               },
               {
                 "entity": "O*NET-SOC 49-3031.00 技术清单（雇主招聘技术信号）",
@@ -27804,10 +27983,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "霍兰德兴趣代码为 RCI（现实型、常规型、研究型）：现实型对应使用工具、设备与动手作业处理实际问题，具体领域为机械与电子、体力与手工劳动；常规型对应按规程与既定程序处理数据与记录，具体领域为机械与电子；研究型对应通过分析与测量理解故障成因。"
+              "O*NET兴趣R100/C46/I38/S9/E5/A0，前三类RCI；41具体领域另列机械电子93、体力手工82、工程57、运输32、IT12、数学统计11，不是RIASEC类型的排他子类或个人合格线。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.2",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -27849,10 +28031,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格中与工作方式更相关的是尽责性（按规范复核安全部件、如实记录与跟踪返修）、情绪稳定性（面对抢修时限、返修与责任压力）与宜人性（与驾驶员、调度与班组配合）。这些关联来自一般性研究结论，强度低于实际作业表现。"
+              "编辑观察建议：是否愿意按手册核读数、记录未知、提出需要复核的问题并接受改进。O*NET职业资料不证明人格因果或与实际作业的比较预测效度，本轮未取得本职业量表效度。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.6",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -27860,10 +28046,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：人格与工作行为的相关性属于一般性研究结论，不能替代工作样本与受监督的维修实践。"
+              "编辑观察建议：是否愿意按手册核读数、记录未知、提出需要复核的问题并接受改进。O*NET职业资料不证明人格因果或与实际作业的比较预测效度，本轮未取得本职业量表效度。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.7",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -27871,11 +28061,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "尽责性有助于发现螺栓、油液与间隙等细节异常，并按规范完成复核与留痕。",
-              "注意细节与谨慎有助于识别隐患，但仍须通过规范与试车确认才能判定。"
+              "编辑观察：逐项核工具、读数与记录，不从尽责性分数推出能发现故障。",
+              "O*NET17工作风格：可靠82、细节81、谨慎65、坚持59、抗压42等，是职业特征，非大五效度或个人阈值。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.8",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "list"
         },
         {
@@ -27905,10 +28099,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：MBTI 的职业预测效度有限，且不被 O*NET 或 BLS 用作适配标准。"
+              "本轮O*NET/BLS职业资料不提供MBTI对本职业的专门预测效度；本页不按类型或分数设胜任、录用门槛。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.11",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28006,8 +28204,8 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能长时间在油污、噪声与受限空间条件下作业并保持准确，是完成工作的前提。",
-              "若明显不适应 85% 每天接触污染物、81% 每天暴露于噪声、78% 每天穿戴防护装备、59% 持续站立或弯腰，需评估持续从业的可行性。"
+              "先核合规防护、工作条件与健康适应安排，不把忍受油污、噪声或危险暴露作为胜任前提。",
+              "O*NET85%每日污染物、81%每日噪声、78%每日PPE、59%持续站立弯腰、67%狭窄别扭姿态为美国职业情况；狭窄不自动是有限空间。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.20",
@@ -28029,10 +28227,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力有帮助：需要在抢修时限、返修与责任压力下保持稳定，并在故障不明或安全部件存疑时坚持停下确认。但这类能力不能用单一分数定义，也不能替代柴油机原理与安全规范训练。"
+              "编辑观察建议：面对抢修或返修时能否说明疑点、依程序寻求复核和清楚沟通。工作风格不等情绪智力量表；本轮未取得本职业专门预测效度，不用分数推录用或责任承受能力。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.22",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28040,10 +28242,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：O*NET 工作风格包含注意细节与可靠性等特征；情绪智力测验的预测效度有限，不能替代实践证据。"
+              "编辑观察建议：面对抢修或返修时能否说明疑点、依程序寻求复核和清楚沟通。工作风格不等情绪智力量表；本轮未取得本职业专门预测效度，不用分数推录用或责任承受能力。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.23",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28051,7 +28257,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能在故障不明或安全部件存疑时先停下确认，比情绪分数高低更重要。",
+              "编辑观察建议：记录故障不明或安全部件存疑时能否暂停核对并上报；未取得与情绪分数的比较效度。",
               "愿意承认诊断或装配偏差并立即返工与留痕，是专业能力的一部分。"
             ]
           },
@@ -28074,10 +28280,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。真正有解释力的证据是受监督的维修实践与可复核的作业记录。"
+              "编辑观察建议：是否愿意按手册核读数、记录未知、提出需要复核的问题并接受改进。O*NET职业资料不证明人格因果或与实际作业的比较预测效度，本轮未取得本职业量表效度。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.26",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28085,10 +28295,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：更有解释力的适配信号是能按手册逐步排查并如实记录、在故障不明或安全部件存疑时先停下确认、能接受复核与返修意见并据此改进；对车辆的兴趣本身不足以证明胜任。"
+              "编辑观察建议：是否愿意按手册核读数、记录未知、提出需要复核的问题并接受改进。O*NET职业资料不证明人格因果或与实际作业的比较预测效度，本轮未取得本职业量表效度。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.27",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28107,7 +28321,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意做乘用车机械与电控维修，接受较轻车型与更快的作业节奏。"
+              "愿意学习汽车及轻型卡车的机械、电控诊断与维修；本轮未取得与柴油公交卡车维修作业节奏的比较资料。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.29",
@@ -28118,7 +28332,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足乘用车电控与诊断体系训练；对象从重型柴油车转为轻型车。"
+              "编辑转向建议：补足目标汽车及轻型卡车的系统结构、厂家技术资料、诊断与安全训练；既有柴油车经验不覆盖全部目标车型。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.30",
@@ -28162,7 +28376,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更偏电控与后处理专项的方向"
+              "轨道车辆维修方向"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.34",
@@ -28173,7 +28387,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意钻研电控、排放后处理与诊断系统，接受专项培训与认证。"
+              "愿意检修轨道车辆的轮轴、联接、车体及推进和制动系统，并学习铁路车辆规范。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.35",
@@ -28184,7 +28398,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可迁移的是诊断思路与动手能力；范围更集中于电子与排放系统。"
+              "编辑转向建议：诊断与拆装经验可作线索，须补足轨道车辆结构、测量和作业规范，不能以柴油后处理专项经验代替。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.36",
@@ -28195,7 +28409,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更偏质量检验与技术支持的方向"
+              "工业机械维修方向"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.37",
@@ -28206,7 +28420,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意做维修质量检验与技术支持，接受规范与文档工作。"
+              "愿意对生产机器进行检查、拆装、诊断、维修与调整，学习工厂设备技术资料。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.38",
@@ -28217,7 +28431,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足检验规范与质量体系知识；动手作业比重下降。"
+              "编辑转向建议：补足目标生产设备的传动、控制与维修规范；不将其等同质量检验岗位，也不推定动手作业比重下降。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.39",
@@ -28305,7 +28519,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合与否不取决于内外向。工作情境显示 90% 每天进行面对面讨论、51% 持续与他人接触；能否在班组、驾驶员与调度之间把故障与进度确认清楚，比外向程度更关键。"
+              "美国工作情境问答显示90%每天面对面讨论、51%持续与他人接触。编辑观察建议：关注与班组、驾驶员和调度核对故障及进度的具体表现；不据此比较外向性与工作表现的预测效度。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.47",
@@ -28316,10 +28530,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能。外向有助于与驾驶员和班组沟通，但工作还要把注意力放在测量、公差与安全复核上；能否接受复核与返工，比表达欲更关键。"
+              "沟通偏好可以作为尝试线索，核是否能说清故障和交接信息；本轮未取得外向性对本职业的因果或预测效度，不由表达欲推胜任。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.48",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28327,10 +28544,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有官方结论，也不存在最适合的类型。MBTI 只能帮助整理偏好并提出核对问题，不能预测专业胜任力或录用结果；本页不提供类型名单。"
+              "本轮未取得MBTI某类型对本职业更适合或预测录用的依据；只可作偏好核对线索，本页不提供适合类型名单。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.49",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28338,10 +28558,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 把该职业的兴趣代码列为 RCI（现实型、常规型、研究型）：现实型对应使用工具与动手作业（机械与电子、体力与手工劳动），常规型对应按规程处理数据与记录（机械与电子），研究型对应通过分析与测量理解故障成因（工程与技术）。兴趣代码描述职业群体特征，不是个人适配结论。"
+              "O*NET兴趣R100/C46/I38/S9/E5/A0，前三类RCI；41具体领域另列机械电子93、体力手工82、工程57、运输32、IT12、数学统计11，不是RIASEC类型的排他子类或个人合格线。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.50",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28360,10 +28583,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不建议在该职业上长期投入：工作以油污、噪声与体力负荷为主（85% 每天接触污染物、81% 每天噪声、59% 持续站立或弯腰、67% 每天处于狭窄或别扭姿势），87% 为固定班制但部分岗位需轮班与抢修；可以先在一次受监督的维修任务中体验完整流程，再判断自己是否适应这种节奏。"
+              "数学基础较弱不自动排除。编辑建议先观察能否理解测量单位、读数、规格与公差，在合规训练中补不足；O*NET任务要求测量和诊断，但没有本页IQ或数学分数门槛。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.52",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28371,10 +28598,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力确实有帮助：需要在抢修时限与返修压力下保持稳定、坚持按规范处置安全部件。但这类能力不能用单一分数定义，也不能替代柴油机原理与安全规范训练。"
+              "编辑观察建议：面对抢修或返修时能否说明疑点、依程序寻求复核和清楚沟通。工作风格不等情绪智力量表；本轮未取得本职业专门预测效度，不用分数推录用或责任承受能力。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.53",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28393,10 +28624,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用可复核的产出判断：一份注明现象与依据的诊断记录、一份更换部件与维修过程记录、一份安全部件复核与试车记录。若你能按流程完成并被复核通过，说明你具备基本适配条件。"
+              "编辑观察：通过诊断依据、维修记录及复核反馈了解任务要求与学习差距；几份记录获认可不证明整体适配、独立维修或签证资格。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.55",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28426,10 +28660,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "在受监督的实训或实习中，按一份简化车型场景完成读码与测量、故障判断与拆装维修，请一位有经验者指出偏差；再判断自己是否愿意长期做这类工作。"
+              "编辑建议：先阅读公开手册和虚构故障记录，了解测量、记录及工作条件；有正规培训安排时再在其监督与安全程序下尝试，不凭页面自行拆装或举升。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.58",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28437,10 +28674,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 Job Zone、学历构成与培训路径。"
+              "详细档案的新入职教育问答和JobZone准备概括，非学历构成；培训目录仅检索具体项目。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.59",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28470,10 +28710,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明 Bus and Truck Mechanics and Diesel Engine Specialists（SOC 49-3031）口径 的就业与 2024—2034 年预测。"
+              "美国49-3031：2025就业316000人、2035预测327400人；2025—2035 BLS表1.2增长3.6%、OOH/O*NET整数4%（Average 3%—4%）、净增11400人、年均空缺24400个。空缺含转岗和退出替代，非净增或AI归因。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.62",
+          "source_refs": [
+            "trends-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -28492,10 +28736,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 Job Zone 与培训路径。"
+              "职业准备及训练线索；本页不据目录推出统一时长或门槛。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.personality-fit-block.64",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28525,10 +28773,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "适配信号：更有解释力的信号是能按手册逐步排查并如实记录、在故障不明或安全部件存疑时先停下确认、能接受复核与返修意见并据此改进；对车辆的兴趣本身不足以证明胜任。"
+              "编辑观察建议：是否愿意按手册核读数、记录未知、提出需要复核的问题并接受改进。O*NET职业资料不证明人格因果或与实际作业的比较预测效度，本轮未取得本职业量表效度。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.riasec-fit-block.9",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28547,10 +28799,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 兴趣代码：RCI（现实型、常规型、研究型）。现实型下的具体领域为机械与电子、体力与手工劳动；常规型下的具体领域为机械与电子；研究型下的具体领域为工程与技术。"
+              "O*NET兴趣R100/C46/I38/S9/E5/A0，前三类RCI；41具体领域另列机械电子93、体力手工82、工程57、运输32、IT12、数学统计11，不是RIASEC类型的排他子类或个人合格线。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.riasec-fit-block.11",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28692,16 +28947,34 @@
                 "url": "https://www.gov.cn/gongbao/2024/issue_11146/202402/content_6930538.html"
               },
               {
-                "entity": "《中华人民共和国道路运输条例》",
+                "entity": "道路运输条例2026第六次修订",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.gov.cn/govweb/gongbao/content/2004/content_62803.htm"
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=1806"
               },
               {
                 "entity": "NIST AI Risk Management Framework 1.0",
                 "id": "link-6",
                 "relation": "career.source",
                 "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "entity": "OSHA美国千斤顶标准",
+                "id": "link-7",
+                "relation": "career.source",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.244"
+              },
+              {
+                "entity": "OSHA美国危险能源适用范围",
+                "id": "link-8",
+                "relation": "career.source",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
+              },
+              {
+                "entity": "费马测试编辑核对建议",
+                "id": "link-9",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/details/49-3031.00"
               }
             ]
           },
@@ -28724,10 +28997,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答：主要风险包括污染物与化学品暴露、噪声与振动、狭窄与受限空间作业、举升与高压系统伤害、电气与焊接作业风险、以及误判故障或漏检安全部件导致车辆带病运行；控制依赖个体防护与作业审批、按手册诊断与安全复核、工具与举升设备检查、维修记录与返修复盘，以及持续的专项培训。"
+              "主要风险线索为污染物噪声、狭窄别扭姿态、举升及设备能源、故障漏检和质量合规。O*NET为情境，OOH提及扭伤切伤，非发生率；狭窄/别扭姿态不自动等于法定有限空间。核车型、设备及能源危险和场地现行规程；审批监护只在适用规定或场地程序要求时办理。美国适用OSHA1910.244(a)千斤顶要求载荷、支承、举升后立即固定及检查停用；1910.147先核危险能源维修适用及例外，不外推中国或作为自行停复机授权。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.9",
+          "source_refs": [
+            "details-current",
+            "ooh-current",
+            "jacks-current",
+            "energy-current"
+          ],
           "type": "prose"
         },
         {
@@ -28735,10 +29014,19 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：风险与边界条目依据 O*NET 49-3031.00 的官方任务、工作活动与工作情境、O*NET 培训与教育信息、《中华人民共和国道路运输条例》与《机动车维修管理规定》的公开条文整理；不替代所在单位的规程与适用法域的具体规定。"
+              "来源分工：O*NET/OOH职业情境与定性伤害；中国2023维修规定和2026道路运输条例为经营责任；美国千斤顶及危险能源标准先核适用；其余复核、数据保护和带教为编辑建议。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.10",
+          "source_refs": [
+            "details-current",
+            "ooh-current",
+            "mot-current",
+            "transport-current",
+            "jacks-current",
+            "energy-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28757,10 +29045,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "污染物、化学品、噪声与狭窄空间作业可能危害健康，举升与高压系统操作失误可致伤。"
+              "污染物、噪声和狭窄别扭姿态是职业暴露线索，举升或意外能源释放可伤人；不把姿态等同有限空间或当发生率。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.12",
+          "source_refs": [
+            "details-current",
+            "jacks-current",
+            "energy-current"
+          ],
           "type": "prose"
         },
         {
@@ -28768,10 +29061,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程使用个体防护与危害沟通、办理举升与用电用气作业审批与监护、按规范停机与泄压。"
+              "狭窄/别扭姿态不自动等于法定有限空间。核车型、设备及能源危险和场地现行规程；审批监护只在适用规定或场地程序要求时办理。美国适用OSHA1910.244(a)千斤顶要求载荷、支承、举升后立即固定及检查停用；1910.147先核危险能源维修适用及例外，不外推中国或作为自行停复机授权。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.13",
+          "source_refs": [
+            "jacks-current",
+            "energy-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28779,10 +29077,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "为省时间省略防护、不办审批即举升或带电作业。"
+              "未核载荷或支承、在设备缺陷及意外能源危险未按适用程序处置时作业；审批要求按实际适用条件核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.14",
+          "source_refs": [
+            "jacks-current",
+            "energy-current"
+          ],
           "type": "prose"
         },
         {
@@ -28812,10 +29114,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按维修手册与标准规范逐步排查、对安全系统强制复核、用试车与测量验证并留痕。"
+              "依适用维修标准和厂家技术信息诊断测量；经营性二级维护/总成/整车按31—32三检及检验合格签证，额外安全部件核对依真实流程，不宣布普遍强制双人复核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.17",
+          "source_refs": [
+            "mot-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28867,10 +29173,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "承修已报废车辆、擅自改装或使用无合格证配件。"
+              "承修报废、擅自改装或使用假冒伪劣配件；产品凭证及来源追溯按维修规定30核，不把所有非原厂配件称违法。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.22",
+          "source_refs": [
+            "mot-current",
+            "transport-current"
+          ],
           "type": "prose"
         },
         {
@@ -28900,10 +29210,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按最小知悉与最小权限处理，遵守单位保密要求，不把数据放入未授权平台。"
+              "编辑建议：按单位实际信息权限和平台授权处理车主、运营及费用资料；不是本页取得的专门数据保护法合规结论。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.25",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28944,10 +29257,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "建立作业规范与带教机制，把返修与事故复盘结论回写到操作手册与检查清单。"
+              "经营者按维修规定23落实安全与职业道德教育，个人按操作规程作业；案例复盘及清单更新是编辑建议，不代替厂家规范或声称已证实干预效果。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.29",
+          "source_refs": [
+            "mot-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28988,10 +29305,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规定分类收集与处置维修废弃物，并保留处置记录。"
+              "维修规定24要求废弃物依国家规定处置；具体分类及记录义务按废物和适用规则核，不把所有废件自动判危废或以配件交车条款授权废油交车。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.33",
+          "source_refs": [
+            "mot-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29010,10 +29331,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明美国职业身份与官方职责，不用于风险评估。"
+              "职业摘要身份职责，不给事故率或作业许可。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.35",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -29021,10 +29345,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明官方任务、工作活动与工作情境口径，不用于风险评估。"
+              "任务活动及57工作情境，提供美国职业风险线索而非发生率。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.36",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -29032,10 +29359,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明 Bus and Truck Mechanics and Diesel Engine Specialists（SOC 49-3031）口径 的就业与预测，不用于风险评估。"
+              "2023维修规定经营备案、质量、安全教育和废弃物范围；非所有内部车队任务。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.37",
+          "source_refs": [
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29043,10 +29373,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明机动车维修经营备案、维修质量与安全生产责任等要求，不构成对具体企业的合规定性。"
+              "道路运输条例2026修订37/39经营条件备案、43—45质量配件及禁报废改装。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.38",
+          "source_refs": [
+            "transport-current"
+          ],
           "type": "prose"
         },
         {
@@ -29054,10 +29387,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明道路运输相关业务（含机动车维修经营）的管理要求，不构成对具体企业的合规定性。"
+              "NIST为一般AI风险框架；额外数据保护与带教安排另为编辑建议，不是道路运输法规。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.39",
+          "source_refs": [
+            "nist-ai-rmf",
+            "editor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -29215,10 +29552,10 @@
                 "url": "https://www.onetonline.org/link/summary/49-3031.00"
               },
               {
-                "entity": "O*NET-SOC 49-3031.00 培训与教育信息",
+                "entity": "O*NET新入职教育问答与准备概括",
                 "id": "link-2",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/49-3031.00"
+                "url": "https://www.onetonline.org/link/details/49-3031.00"
               },
               {
                 "entity": "BLS《Occupational Outlook Handbook》Diesel Service Technicians and Mechanics",
@@ -29374,10 +29711,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "路径概要：以中等后柴油机维修培训或学徒制为基础，通过实际维修积累诊断与安全复核能力，先取得常规承修作业授权，再逐步承担专项维修、质量检验与带教职责。"
+              "编辑路径：按基础核高中后在岗训练、中等后柴油机项目或适用学徒机会；逐岗查认证、驾驶及任务安全条件，不把某路径设成统一门槛。O*NET新入职教育要求问答39%中等后证书、37%高中或同等，非现有从业者学历构成；JobZone3/SVP6至不足7是准备概括。BLS典型高中/相关经验None/长期在岗培训；雇主可能偏好中等后项目或要求认证，部分试驾岗位需CDL，逐岗核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.23",
+          "source_refs": [
+            "ooh-current",
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29396,10 +29738,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 Job Zone、学历构成与培训入口。"
+              "详细档案的新入职教育问答和JobZone，不是现有从业者学历构成；培训目录仅项目检索。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.25",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -29407,10 +29752,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明 Bus and Truck Mechanics and Diesel Engine Specialists（SOC 49-3031）口径 的就业与 2024—2034 年预测。"
+              "BLS当前2025—2035就业、典型HS/长期在岗培训，雇主认证偏好及部分试驾CDL条件。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.26",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -29418,10 +29766,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明机动车维修经营备案与维修质量检验等要求。"
+              "中国机动车维修经营：2026道路运输条例37/39规定条件及县级交通备案，2023维修规定7/20按备案范围；二级维护、总成或整车修理须三检，合格由质量检验人员签发机动车维修竣工出厂合格证（31—32）。经营者质量安全主责；个人训练不自动给签证权限。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.27",
+          "source_refs": [
+            "mot-current",
+            "transport-current"
+          ],
           "type": "prose"
         },
         {
@@ -29429,10 +29781,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能在带教下完成接车检查、保养与基础拆装，按手册记录并识别需要请示的情形。"
+              "编辑训练线索：安全教育、保养与检查规范、基础拆装。；具体课程、资格及单位条件另核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.28",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29440,10 +29796,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能正确使用举升与常用工具并执行安全防护。"
+              "编辑下一步：正确使用举升与常用工具并执行安全防护。，按受监督任务反馈补差距；非晋升保证。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.29",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29451,10 +29811,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见起点岗位：车队机修学徒与保养岗位。"
+              "编辑能力观察：能在带教下完成接车检查、保养与基础拆装，按手册记录并识别需要请示的情形。；不以单次演示自动授独立作业或签证权限。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.30",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29462,10 +29826,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "所需训练：安全教育、保养与检查规范、基础拆装。"
+              "责任与边界：安全部件作业与试车须经复核确认。，按实际岗位、适用规则和授权核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.31",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29473,10 +29841,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：安全部件作业与试车须经复核确认。"
+              "编辑角色示例：车队机修学徒与保养岗位。；未取得本轮招聘频率或统一晋升证据。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.32",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29484,10 +29856,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能独立完成常规故障诊断与维修，对制动与转向等安全部件复核并试车。"
+              "编辑训练线索：柴油机诊断、制动与转向系统规范、记录与交接。；具体课程、资格及单位条件另核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.33",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29495,10 +29871,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能按规范记录并处理常见返修。"
+              "编辑下一步：按规范记录并处理常见返修。，按受监督任务反馈补差距；非晋升保证。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.34",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29506,10 +29886,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：车队维修技师。"
+              "编辑能力观察：能独立完成常规故障诊断与维修，对制动与转向等安全部件复核并试车。；不以单次演示自动授独立作业或签证权限。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.35",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29517,10 +29901,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "所需训练：柴油机诊断、制动与转向系统规范、记录与交接。"
+              "责任与边界：安全系统结论须靠规范与试车确认。，按实际岗位、适用规则和授权核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.36",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29528,10 +29916,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：安全系统结论须靠规范与试车确认。"
+              "编辑角色示例：车队维修技师。；未取得本轮招聘频率或统一晋升证据。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.37",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29539,10 +29931,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能处理电控与后处理系统等复杂故障，参与质量检验与带教。"
+              "编辑训练线索：电控与排放系统、质量检验规范与带教方法。；具体课程、资格及单位条件另核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.38",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29550,10 +29946,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能组织抢修并按计划维护车辆可用性。"
+              "编辑下一步：组织抢修并按计划维护车辆可用性。，按受监督任务反馈补差距；非晋升保证。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.39",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29561,10 +29961,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：技术骨干与质量检验岗位。"
+              "编辑能力观察：能处理电控与后处理系统等复杂故障，参与质量检验与带教。；不以单次演示自动授独立作业或签证权限。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.40",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29572,10 +29976,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "所需训练：电控与排放系统、质量检验规范与带教方法。"
+              "责任与边界：检验签发按制度与能力要求执行。，按实际岗位、适用规则和授权核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.41",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29583,10 +29991,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：检验签发按制度与能力要求执行。"
+              "编辑角色示例：技术骨干与质量检验岗位。；未取得本轮招聘频率或统一晋升证据。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.42",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29594,10 +30006,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能负责车队的维修计划、技术规范与安全体系。"
+              "编辑训练线索：计划管理、质量与安全管理、团队管理。；具体课程、资格及单位条件另核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.43",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29605,10 +30021,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能对车辆可用性与维修质量负责。"
+              "编辑下一步：对车辆可用性与维修质量负责。，按受监督任务反馈补差距；非晋升保证。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.44",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29616,10 +30036,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：车间技术负责人。"
+              "编辑能力观察：能负责车队的维修计划、技术规范与安全体系。；不以单次演示自动授独立作业或签证权限。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.45",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29627,10 +30051,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "所需训练：计划管理、质量与安全管理、团队管理。"
+              "责任与边界：重大技术与设备决策须按制度审批。，按实际岗位、适用规则和授权核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.46",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29638,10 +30066,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：重大技术与设备决策须按制度审批。"
+              "编辑角色示例：车间技术负责人。；未取得本轮招聘频率或统一晋升证据。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.47",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29649,10 +30081,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能在带教下完成货运车辆的保养与基础维修。"
+              "编辑训练线索：安全教育、保养规范、基础拆装。；具体课程、资格及单位条件另核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.48",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29660,10 +30096,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能按规范记录并识别隐患。"
+              "编辑下一步：按规范记录并识别隐患。，按受监督任务反馈补差距；非晋升保证。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.49",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29671,10 +30111,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见起点岗位：货运车队机修岗位。"
+              "编辑能力观察：能在带教下完成货运车辆的保养与基础维修。；不以单次演示自动授独立作业或签证权限。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.50",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29682,10 +30126,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "所需训练：安全教育、保养规范、基础拆装。"
+              "责任与边界：涉及承载与制动系统须按台账复核。，按实际岗位、适用规则和授权核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.51",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29693,10 +30141,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：涉及承载与制动系统须按台账复核。"
+              "编辑角色示例：货运车队机修岗位。；未取得本轮招聘频率或统一晋升证据。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.52",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29704,10 +30156,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能独立完成长途运输车辆的诊断与维修，处理常见抛锚与抢修。"
+              "编辑训练线索：负荷与传动系统、液压与气路系统、应急抢修。；具体课程、资格及单位条件另核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.53",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29715,10 +30171,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能按计划减少停机时间。"
+              "编辑下一步：按计划减少停机时间。，按受监督任务反馈补差距；非晋升保证。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.54",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29726,10 +30186,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：货运车辆维修技师。"
+              "编辑能力观察：能独立完成长途运输车辆的诊断与维修，处理常见抛锚与抢修。；不以单次演示自动授独立作业或签证权限。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.55",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29737,10 +30201,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "所需训练：负荷与传动系统、液压与气路系统、应急抢修。"
+              "责任与边界：路侧抢修的作业条件须按安全规程评估。，按实际岗位、适用规则和授权核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.56",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29748,10 +30216,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：路侧抢修的作业条件须按安全规程评估。"
+              "编辑角色示例：货运车辆维修技师。；未取得本轮招聘频率或统一晋升证据。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.57",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29759,10 +30231,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能承担复杂故障与多车型维修，参与轮胎与承载及制动专项。"
+              "编辑训练线索：专项系统与检测、调度协调。；具体课程、资格及单位条件另核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.58",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29770,10 +30246,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能配合车队调度处理紧急需求。"
+              "编辑下一步：配合车队调度处理紧急需求。，按受监督任务反馈补差距；非晋升保证。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.59",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29781,10 +30261,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：专项维修与抢修负责人。"
+              "编辑能力观察：能承担复杂故障与多车型维修，参与轮胎与承载及制动专项。；不以单次演示自动授独立作业或签证权限。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.60",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29792,10 +30276,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "所需训练：专项系统与检测、调度协调。"
+              "责任与边界：重大维修须按厂方技术信息执行。，按实际岗位、适用规则和授权核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.61",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29803,10 +30291,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：重大维修须按厂方技术信息执行。"
+              "编辑角色示例：专项维修与抢修负责人。；未取得本轮招聘频率或统一晋升证据。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.62",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29814,10 +30306,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能负责货运车队的维修体系、配件追溯与成本控制。"
+              "编辑训练线索：成本与配件管理、质量体系与团队管理。；具体课程、资格及单位条件另核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.63",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29825,10 +30321,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能对安全与成本指标负责。"
+              "编辑下一步：对安全与成本指标负责。，按受监督任务反馈补差距；非晋升保证。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.64",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29836,10 +30336,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：车队维修管理负责人。"
+              "编辑能力观察：能负责货运车队的维修体系、配件追溯与成本控制。；不以单次演示自动授独立作业或签证权限。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.65",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29847,10 +30351,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "所需训练：成本与配件管理、质量体系与团队管理。"
+              "责任与边界：采购与成本决策须按制度审批。，按实际岗位、适用规则和授权核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.66",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29858,10 +30366,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：采购与成本决策须按制度审批。"
+              "编辑角色示例：车队维修管理负责人。；未取得本轮招聘频率或统一晋升证据。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.67",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29869,10 +30381,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能在带教下完成故障码读取、数据流记录与基础电路检查。"
+              "编辑训练线索：电学基础、诊断仪使用、电路图识读。；具体课程、资格及单位条件另核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.68",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29880,10 +30396,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能按电路图与手册核对并规范记录。"
+              "编辑下一步：按电路图与手册核对并规范记录。，按受监督任务反馈补差距；非晋升保证。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.69",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29891,10 +30411,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见起点岗位：电控维修辅助岗位。"
+              "编辑能力观察：能在带教下完成故障码读取、数据流记录与基础电路检查。；不以单次演示自动授独立作业或签证权限。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.70",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29902,10 +30426,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "所需训练：电学基础、诊断仪使用、电路图识读。"
+              "普通柴油机电控不自动是新能源高压任务；涉及高压、带电或危险能源时，先核设备及任务适用规则、培训和场地现行程序，不给全部电控岗位套同一证书。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.71",
+          "source_refs": [
+            "editor-current",
+            "energy-current"
+          ],
           "type": "prose"
         },
         {
@@ -29913,10 +30441,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：高压与带电作业须由具备资格的人员实施。"
+              "编辑角色示例：电控维修辅助岗位。；未取得本轮招聘频率或统一晋升证据。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.72",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29924,10 +30456,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能独立完成电控与传感器故障诊断，处理后处理系统常见问题。"
+              "编辑训练线索：电控系统原理、排放后处理、专用诊断软件。；具体课程、资格及单位条件另核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.73",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29935,10 +30471,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能按规范完成升级与参数确认。"
+              "编辑下一步：按规范完成升级与参数确认。，按受监督任务反馈补差距；非晋升保证。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.74",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29946,10 +30486,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：电控与后处理系统技师。"
+              "编辑能力观察：能独立完成电控与传感器故障诊断，处理后处理系统常见问题。；不以单次演示自动授独立作业或签证权限。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.75",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29957,10 +30501,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "所需训练：电控系统原理、排放后处理、专用诊断软件。"
+              "责任与边界：升级与参数调整须按厂方技术信息与授权执行。，按实际岗位、适用规则和授权核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.76",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29968,10 +30516,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：升级与参数调整须按厂方技术信息与授权执行。"
+              "编辑角色示例：电控与后处理系统技师。；未取得本轮招聘频率或统一晋升证据。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.77",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29979,10 +30531,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能处理跨系统疑难故障，参与技术案例复盘与流程改进。"
+              "编辑训练线索：系统集成诊断、案例分析与培训方法。；具体课程、资格及单位条件另核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.78",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -29990,10 +30546,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能提供技术支持与培训。"
+              "编辑下一步：提供技术支持与培训。，按受监督任务反馈补差距；非晋升保证。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.79",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -30001,10 +30561,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：专项技术支持岗位。"
+              "编辑能力观察：能处理跨系统疑难故障，参与技术案例复盘与流程改进。；不以单次演示自动授独立作业或签证权限。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.80",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -30012,10 +30576,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "所需训练：系统集成诊断、案例分析与培训方法。"
+              "责任与边界：涉及安全与排放合规的判断须按规定执行。，按实际岗位、适用规则和授权核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.81",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -30023,10 +30591,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：涉及安全与排放合规的判断须按规定执行。"
+              "编辑角色示例：专项技术支持岗位。；未取得本轮招聘频率或统一晋升证据。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.82",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -30034,10 +30606,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能负责电控与后处理专项的技术标准与能力建设。"
+              "编辑训练线索：技术标准管理、培训体系与团队管理。；具体课程、资格及单位条件另核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.83",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -30045,10 +30621,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能对专项质量与培训负责。"
+              "编辑下一步：对专项质量与培训负责。，按受监督任务反馈补差距；非晋升保证。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.84",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -30056,10 +30636,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "常见岗位：专项技术负责人。"
+              "编辑能力观察：能负责电控与后处理专项的技术标准与能力建设。；不以单次演示自动授独立作业或签证权限。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.85",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -30067,10 +30651,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "所需训练：技术标准管理、培训体系与团队管理。"
+              "责任与边界：重大技术变更须按制度与厂方信息审批。，按实际岗位、适用规则和授权核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.86",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -30078,10 +30666,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：重大技术变更须按制度与厂方信息审批。"
+              "编辑角色示例：专项技术负责人。；未取得本轮招聘频率或统一晋升证据。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.87",
+          "source_refs": [
+            "editor-current",
+            "mot-current"
+          ],
           "type": "prose"
         },
         {
@@ -30098,7 +30690,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "应向用工方核对的条件",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -30106,35 +30698,35 @@
               [
                 "运输企业车队的机修岗位",
                 "在带教下完成接车检查、换油与保养、协助拆装与调整，学习诊断流程与记录规范。",
-                "用工方看重动手能力、安全规范与出勤稳定性；通常要求中等后培训或学徒经历。",
+                "核高中后在岗训练、中等后项目或实际学徒条件、安全基础和班次，非统一要求先有证书。",
                 "提交一份受监督完成的保养与检查记录，注明项目与结果。",
                 "此路径不独立签发维修合格证或承修全部车型；须核对承修范围与授权。"
               ],
               [
                 "维修企业的机修与电控岗位",
                 "按工单完成故障诊断与维修、读取故障码与数据流、更换与调整部件。",
-                "用工方看诊断能力、规范执行与作业效率。",
+                "核初期受监督任务、诊断训练、安全规范和岗位认证要求。",
                 "提交一份诊断与维修过程记录样例。",
                 "安全部件复核与试车须按规范执行，不得跳步交付。"
               ],
               [
                 "经销商与品牌服务站岗位",
                 "按厂家技术信息与专用诊断系统完成维修与升级，学习保修与技术服务流程。",
-                "用工方看品牌体系理解、诊断系统操作与客户沟通能力。",
+                "核品牌系统、厂家技术信息、保修流程和实际沟通职责。",
                 "提交一份按技术信息完成维修的记录样例。",
-                "涉及升级与改装须按厂家技术信息与授权执行。"
+                "升级与改装先核法定允许范围；改变颜色、发动机、车身或车架等须核车主已办理规定手续，禁止擅自改装。厂家技术资料与授权仅承接适用技术作业条件。"
               ],
               [
                 "质量检验与技术支持岗位",
                 "协助维修质量检验、路试与记录审核，学习检验规范与标准。",
-                "用工方看规范理解、细致程度与文档能力。",
+                "核检验岗位人员能力、驾驶条件及签证身份，非所有新人可直接承担。",
                 "提交一份检验项目与判定说明样例。",
                 "检验与合格证签发权限由具备能力的人员与制度确定。"
               ],
               [
                 "相邻工种转入（汽车维修、工业机械维修）",
                 "承接保养、拆装与基础诊断任务，熟悉柴油车辆与运营场景。",
-                "用工方看相关经验与安全记录，并核对柴油机与电控基础。",
+                "核既有技能、柴油机电控差距、安全培训和具体任务权限。",
                 "提交一份从既有岗位整理的可复核作业记录，并说明与柴油车维修的差距。",
                 "相邻经验不等于承修授权；转岗须补足柴油机原理、诊断与安全规范训练。"
               ]
@@ -30152,33 +30744,33 @@
               {
                 "id": "education",
                 "values": [
-                  "美国侧：O*NET 把该职业列为 Job Zone Three（SVP 6.0 至低于 7.0），受访者中 39% 认为需中等后证书、37% 认为需高中或同等学历；BLS 指出典型入门学历为高中或同等学历、在岗培训为长期，并可能需要行业认证。",
-                  "实际入行多依靠中等后柴油机维修培训、学徒制或在岗学习；诊断能力与返修率常被用作能力依据。",
-                  "该职业页面未标注 Bright Outlook，本页不使用该标签。"
+                  "教育与训练要求",
+                  "O*NET新入职教育要求问答39%中等后证书、37%高中或同等，非现有从业者学历构成；JobZone3/SVP6至不足7是准备概括。BLS典型高中/相关经验None/长期在岗培训；雇主可能偏好中等后项目或要求认证，部分试驾岗位需CDL，逐岗核。",
+                  "教育问答非从业者构成或证书合格线；岗位单独核。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "进入车间需完成安全教育与危害沟通，并按规程使用个体防护、办理举升与用电用气作业审批与监护。",
-                  "在中国大陆，机动车维修经营者应当落实安全生产主体责任和维修质量主体责任，按备案经营范围开展服务，并对二级维护、总成修理或整车修理进行维修质量检验并签发维修合格证。",
-                  "维修废弃物应按国家有关规定处理，配件实行追溯并留存来源凭证。"
+                  "作业条件与经营要求",
+                  "中国机动车维修经营：2026道路运输条例37/39规定条件及县级交通备案，2023维修规定7/20按备案范围；二级维护、总成或整车修理须三检，合格由质量检验人员签发机动车维修竣工出厂合格证（31—32）。经营者质量安全主责；个人训练不自动给签证权限。",
+                  "狭窄/别扭姿态不自动等于法定有限空间。核车型、设备及能源危险和场地现行规程；审批监护只在适用规定或场地程序要求时办理。美国适用OSHA1910.244(a)千斤顶要求载荷、支承、举升后立即固定及检查停用；1910.147先核危险能源维修适用及例外，不外推中国或作为自行停复机授权。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "官方任务清单中检查制动系统与转向机构与轮毂轴承等部件重要性 83、调整与更换制动衬片并定位车轮 80、连接测试仪器并读取表盘以诊断故障 79、执行换油与润滑等例行保养 79、检查与调整防护装置与安全设备 78；工作活动以维修与维护机械设备（91）、检查设备与结构或材料（85）、获取信息（82）、识别对象与动作与事件（82）、操作车辆与机械化设备（81）为主。",
-                  "工作情境显示 85% 每天接触污染物、81% 每天暴露于噪声、78% 每天穿戴常用防护装备、74% 每天在非环境受控的室内工作、67% 每天处于狭窄或别扭姿势。",
-                  "兴趣代码为 RCI（现实型、常规型、研究型）；这些字段描述职业群体特征，不构成个人胜任阈值。"
+                  "职业任务与工作情境",
+                  "26任务23Core/3Supplemental、41一般/25详细活动、57工作情境；原关键任务及活动重要度正确。",
+                  "O*NET兴趣R100/C46/I38/S9/E5/A0，前三类RCI；41具体领域另列机械电子93、体力手工82、工程57、运输32、IT12、数学统计11，不是RIASEC类型的排他子类或个人合格线。"
                 ]
               },
               {
                 "id": "tools",
                 "values": [
-                  "O*NET 技术清单共 11 项技术与软件技能（6 项 Hot Technology），包括 Microsoft Office／Excel／Word、SAP、Autodesk AutoCAD 与 Dassault Systemes SolidWorks；招聘启事中的出现频率普遍很低（多数在 1% 及以下）。",
-                  "现场工具以手动工具、气动工具、举升与起重设备、诊断仪与便携电脑、电机分析仪、压力表与底盘图为主。",
-                  "把诊断系统输出用于维修与竣工依据前，须确认规范与复核要求。"
+                  "软件与现场工具",
+                  "O*NET列11软件类别，Hot清单另列6具体产品、无InDemand标记；Office和Excel各1%、Word和SAP各不足1%，AutoCAD/SolidWorks为NA（非0）。详细软件还含Cummins INSITE、诊断与维护管理软件；招聘提及不是部署率或AI采用率。",
+                  "工具选择和诊断输出按车型、手册及实际流程验证，不由清单自动授权。"
                 ]
               }
             ]
@@ -30421,37 +31013,37 @@
               [
                 "中等后证书（美国）",
                 "计划在美国长期从事该职业的人",
-                "O*NET 受访者中 39% 认为需要，属于常见要求之一。",
+                "39%回答新入职需中等后证书，非现有从业者构成或岗位占比。",
                 "不是所有雇主的硬性门槛。",
                 "视专业方向（柴油机维修等）与雇主要求而定。",
-                "数月至两年不等。",
+                "按具体项目课程与学费核，不给统一数月到两年。",
                 "证书本身不等于承修授权或检验签发资格。"
               ],
               [
                 "高中或同等学历（美国）",
                 "以学徒制或在岗培训入行的人",
-                "O*NET 受访者中 37% 认为需要，属于部分岗位的实际情况。",
-                "属于部分岗位的实际情况，通常需配合长期在岗培训。",
-                "须以学徒与作业记录补足。",
-                "长期在岗培训（数月至数年）。",
+                "37%回答新入职需高中或同等，BLS典型HS；问答非雇主占比。",
+                "BLS典型学历配长期在岗训练，具体雇主可另有偏好。",
+                "按实际雇主训练及适用学徒项目核，非普遍需先有学徒记录。",
+                "BLS长期在岗训练类别，不给个人统一完成时长。",
                 "学历状态不影响对安全规程与作业授权的同等适用。"
               ],
               [
                 "行业认证（美国）",
-                "希望提升专长与议价能力的人",
-                "BLS 指出行业认证可能需要，具体视雇主与车型而定。",
+                "目标雇主要求或希望展示专长的人",
+                "认证可能被要求或偏好，未取得本职业认证工资溢价。",
                 "属于雇主偏好或岗位要求。",
-                "视认证体系与车型方向而定。",
+                "按认证机构经验与考试条件核；部分车辆试驾另需美国CDL，非所有技师要求。",
                 "按认证要求投入培训与考试时间。",
                 "认证不自动产生承修范围与合格证签发权限。"
               ],
               [
-                "学徒制与在岗带教（美国与中国大陆通用）",
-                "所有新入职人员",
-                "决定能否独立承担所在岗位的维修任务。",
-                "属于机构的通行做法。",
+                "雇主训练与适用学徒项目",
+                "需补具体维修任务能力的人",
+                "帮助学习与展示任务能力，不自动决定独立作业。",
+                "美国BLS长期在岗训练；中国经营者需安全教育，学徒不是两市场统一法定路径。",
                 "须完成机构规定的培训与考核。",
-                "数月至数年不等，随车型与技术更新需要复训。",
+                "按单位或项目安排；未取得中国本职业统一时长。",
                 "培训记录不等于质量检验与对外承诺权限。"
               ],
               [
@@ -30459,16 +31051,16 @@
                 "机动车维修经营者",
                 "决定可以承修哪些车型与项目。",
                 "属于法定要求：从事机动车维修经营应向所在地县级交通运输主管部门备案，并按备案范围开展服务。",
-                "须符合场地、设备、技术人员与管理制度等条件。",
+                "2026条例37及维修规定12等的场地设备人员管理环保条件按经营类别核。",
                 "按备案与变更流程安排。",
                 "备案范围不等于个人作业授权。"
               ],
               [
-                "维修质量检验与合格证（中国大陆）",
+                "机动车维修竣工出厂合格证（中国大陆）",
                 "承担二级维护、总成修理或整车修理的经营者",
                 "决定维修结果能否被确认为合格。",
-                "属于法定要求：应当进行维修质量检验，检验合格由检验人员签发维修合格证。",
-                "并实行质量保证期制度，质量保证期内因维修质量原因无法正常使用应无偿返修。",
+                "二级维护、总成或整车按维修规定31三检，32检验合格由质量检验人员签发；不是普通维修员一律可签。",
+                "36—37按作业类别及先到期的里程/时间执行质量保证；因维修质量原因依法返修，非所有故障都无偿。",
                 "按规范与周期投入。",
                 "检验签发权限由具备能力的人员按制度执行，不由个人资历自行产生。"
               ]
@@ -30484,12 +31076,18 @@
           "data": {
             "paragraphs": [
               "资格边界：培训经历、动手熟练度、作业记录、承修范围、维修质量检验与合格证签发权限是不同状态，任何一项都不能由另一项自动推出。",
-              "美国侧：O*NET 把该职业列为 Job Zone Three（SVP 6.0 至低于 7.0），受访者中 39% 认为需中等后证书、37% 认为需高中或同等学历；BLS 指出在岗培训为长期并可能需要行业认证。",
-              "中国大陆侧：机动车维修经营者应当落实安全生产与维修质量主体责任，按备案经营范围开展服务；对机动车进行二级维护、总成修理或整车修理的应当进行维修质量检验并签发维修合格证；不得使用假冒伪劣配件、不得擅自改装机动车、不得承修已报废的机动车。",
+              "O*NET新入职教育要求问答39%中等后证书、37%高中或同等，非现有从业者学历构成；JobZone3/SVP6至不足7是准备概括。BLS典型高中/相关经验None/长期在岗培训；雇主可能偏好中等后项目或要求认证，部分试驾岗位需CDL，逐岗核。",
+              "中国机动车维修经营：2026道路运输条例37/39规定条件及县级交通备案，2023维修规定7/20按备案范围；二级维护、总成或整车修理须三检，合格由质量检验人员签发机动车维修竣工出厂合格证（31—32）。经营者质量安全主责；个人训练不自动给签证权限。 配件、改装、报废、保证期依具体条文，不自动适用全部内部车队任务。",
               "入职前应逐项核实培训与认证记录、承修范围、检验签发权限、作业安全与防护要求，以及班次与计酬口径，并保留书面确认。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.credential-boundary.1",
+          "source_refs": [
+            "details-current",
+            "ooh-current",
+            "mot-current",
+            "transport-current"
+          ],
           "title": "资格与练习边界",
           "type": "notice"
         },
@@ -30498,7 +31096,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明：本节不引用具体雇主的招聘公告，只说明岗位核对应关注的项目；公开渠道出现的岗位名称包括柴油车维修技师、公交车辆维修工、货运车辆机修、电控与后处理系统技师等，其承修范围与用工形式差别很大。",
+              "招聘核对说明：本节未取得具体雇主招聘样本。柴油车维修、公交机修、货运机修、电控后处理等为编辑岗位示例，不能称本轮公开招聘频率或统一岗位序列。",
               "阅读招聘信息时应核对用工形式（运输企业、维修企业、经销商或外包）、班次与值班安排、培训与认证要求、承修车型与项目范围、工时与计酬方式，并警惕把短期培训宣传为可独立签发维修合格证的表述。"
             ]
           },
@@ -30523,7 +31121,7 @@
             ]
           },
           "fact_refs": [
-            "us-employment-2025"
+            "employment-current"
           ],
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.1",
           "source_refs": [
@@ -30541,7 +31139,7 @@
             ]
           },
           "fact_refs": [
-            "us-growth-2025-2035"
+            "growth-current"
           ],
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.2",
           "source_refs": [
@@ -30574,7 +31172,7 @@
             ]
           },
           "fact_refs": [
-            "us-openings-2025-2035"
+            "openings-current"
           ],
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.4",
           "source_refs": [
@@ -30712,10 +31310,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：公开数据支持的是 Bus and Truck Mechanics and Diesel Engine Specialists（SOC 49-3031）口径 的判断——2024 年就业 319,900 人，2024—2034 年预测增长 1% 至 2%、年均职位空缺 26,500 个；BLS 职业展望手册的 Diesel Service Technicians and Mechanics 为同一职业的 2025—2035 年期间（2025 年在岗 316,000 人、增长 4%、年均约 24,400 个空缺），两段期间不同，须分别标注；中国大陆按证据路由只登记统计口径与缺口，不发布替代数值。"
+              "美国49-3031：2025就业316000人、2035预测327400人；2025—2035 BLS表1.2增长3.6%、OOH/O*NET整数4%（Average 3%—4%）、净增11400人、年均空缺24400个。空缺含转岗和退出替代，非净增或AI归因。 中国精确职业就业和工资仍证据不足，2025行业工资只补雇主背景。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.8",
+          "source_refs": [
+            "ep-current",
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30734,10 +31336,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024 年"
+              "2025年"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.10",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30756,10 +31361,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该职业主要集中于运输与仓储（28%）与批发贸易（14%），岗位受运输量与车队更新影响。"
+              "O*NET2025行业：运输与仓储27%、批发13%、政府11%、其他服务11%、其他38%（含行政支持、房地产租赁）。OOH较细分类另列卡车运输18%、批发13%、地方政府（不含教育医院）9%、汽车修理9%、租赁6%，不可强行重算或推工资。 OOH货运需求/老旧车维护与部分配送电气化分别影响需求。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.12",
+          "source_refs": [
+            "industry-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -30789,10 +31398,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "319,900 人"
+              "316000人"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.15",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30811,10 +31423,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年"
+              "2025—2035年"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.17",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30822,10 +31437,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 页面标注为 Slower than average（1% 至 2%），口径为 Bus and Truck Mechanics and Diesel Engine Specialists（SOC 49-3031）。"
+              "O*NET当前整数4%（Average 3%—4%）；BLS表1.2精确3.6%，同一预测期。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.18",
+          "source_refs": [
+            "trends-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30833,10 +31452,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该预测为本职业统计口径；BLS 职业展望手册的期间（2025—2035 年）与数值不同，不构成个人就业保证。"
+              "本职业预测，不是AI归因；净增11400与年均空缺24400不同，不保证录用。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.19",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30866,10 +31488,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增长 1% 至 2%（年均空缺 26,500 个）"
+              "增长3.6%（整数4%）；年均空缺24400个。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.22",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30899,10 +31524,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局按行业门类公布平均工资，但没有单列本职业；按证据路由（暂无可安全使用的数据），本页不展示行业均值也不据此推算本职业工资。"
+              "2025城镇单位税前年平均工资行业背景（元/年）：非私营运输仓储邮政133981、居民服务修理其他70226、批零135749；对应私营73133、52059、69622。按实际用工单位行业选择，非本职业平均、中位数或城市月薪。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.25",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30910,10 +31538,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该口径为行业门类平均工资，混合多类岗位；本页只登记其不可替代性，不发布职业级或代理数值。"
+              "用工单位行业平均混合多岗位；可补背景，不能替代职业工资或就业分布。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.26",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30921,10 +31552,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业门类口径（仅登记，不展示数值）"
+              "雇主行业工资背景（非职业工资）"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.27",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30943,10 +31577,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该职业的全国职业工资与就业分布"
+              "精确职业工资及就业分布证据不足；可见行业元/年背景另读。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.29",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30954,10 +31591,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明 Bus and Truck Mechanics and Diesel Engine Specialists（SOC 49-3031）口径 的就业与 2024—2034 年预测；BLS 职业展望手册的 2025—2035 年期间另行标注。"
+              "美国49-3031：2025就业316000人、2035预测327400人；2025—2035 BLS表1.2增长3.6%、OOH/O*NET整数4%（Average 3%—4%）、净增11400人、年均空缺24400个。空缺含转岗和退出替代，非净增或AI归因。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.30",
+          "source_refs": [
+            "ep-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -30976,10 +31617,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆的统计口径与范围，不作为职业工资。"
+              "统计局2025行业背景及单位覆盖，非精确职业工资就业。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.32",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30987,10 +31631,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明官方任务与工作活动口径。"
+              "BLS OOH工作职责、训练、行业工资与2025—2035预测；任务活动数量另看O*NET详细档案。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.33",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -30998,10 +31645,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足乘用车电控与诊断体系训练。"
+              "编辑补差距：汽车维修目标还包括轻型卡车，按具体车型补电控、诊断体系与服务流程，不限乘用车。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.34",
+          "source_refs": [
+            "ooh-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31020,10 +31671,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属车辆维修，但车型与系统不同。"
+              "编辑距离判断：距离较近：同属车辆维修，但车型与系统不同。 未取得转岗成功率或统一门槛，按目标对象、岗位任务和法域资格核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.36",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31053,10 +31707,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：都属重型设备，但作业场景不同。"
+              "编辑距离判断：距离中等：都属重型设备，但作业场景不同。 未取得转岗成功率或统一门槛，按目标对象、岗位任务和法域资格核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.39",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31086,10 +31743,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属检修类岗位，对象不同。"
+              "编辑距离判断：距离中等：同属检修类岗位，对象不同。 未取得转岗成功率或统一门槛，按目标对象、岗位任务和法域资格核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.42",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31119,10 +31779,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属机械设备维修，对象不同。"
+              "编辑距离判断：距离较近：同属机械设备维修，对象不同。 未取得转岗成功率或统一门槛，按目标对象、岗位任务和法域资格核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.45",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31152,10 +31815,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：涉及管路与电气，但系统对象不同。"
+              "编辑距离判断：距离中等：涉及管路与电气，但系统对象不同。 未取得转岗成功率或统一门槛，按目标对象、岗位任务和法域资格核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.48",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31185,10 +31851,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较远：职责从维修转为驾驶与运营服务。"
+              "编辑距离判断：距离较远：职责从维修转为驾驶与运营服务。 未取得转岗成功率或统一门槛，按目标对象、岗位任务和法域资格核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.51",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31218,10 +31887,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属内燃机维修，规模与对象不同。"
+              "编辑距离判断：距离较近：同属内燃机维修，规模与对象不同。 未取得转岗成功率或统一门槛，按目标对象、岗位任务和法域资格核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.54",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31251,10 +31923,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：都涉及电气系统，但作业对象不同。"
+              "编辑距离判断：距离中等：都涉及电气系统，但作业对象不同。 未取得转岗成功率或统一门槛，按目标对象、岗位任务和法域资格核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.57",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -31367,8 +32042,8 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "边界一：本页身份口径为 O*NET-SOC 49-3031.00（Bus and Truck Mechanics and Diesel Engine Specialists，公交卡车机械师与柴油机专员）；BLS 职业展望手册的 Diesel Service Technicians and Mechanics 页面为同一职业的 2025—2035 年期间，与本页采用的 O*NET 展示 2024—2034 年期间不同，两者分别标注、不混用或相加。",
-              "边界二：本页把美国口径与中国大陆口径分开标注，不跨法域套用或换算；美国身份口径为 2025 年 BLS OEWS 工资与 2024—2034 年预测；中国大陆按证据路由（documented_unavailable，severity=material）只登记统计口径与缺口，不发布职业级数值、也不用行业均值或美国数据替代。",
+              "美国49-3031当前2025工资、2025—2035预测；O*NET当前也更新，不再把本輪现行页面称2024—2034。共享保护范围的历史事实和来源未改，不能称全页已统一。",
+              "美国工资中位/分位与中国2025行业平均分开；中国精确职业、城市月薪及就业仍证据不足，但可提供匹配用工单位行业背景，不因历史路由一概排除。",
               "边界三：编辑练习与作品建议均为虚构材料，读者不应据此在真实车辆上拆卸、举升或带电作业，也不得把练习结果包装成维修合格、竣工或安全结论。",
               "边界四：本页由 O*NET、BLS、国家统计局、《中华人民共和国道路运输条例》《机动车维修管理规定》、NIST AI 风险管理框架与 ILO 任务暴露研究等公开资料及编辑设计组成；每项资料的适用范围与缺口单独标记。"
             ]
@@ -31406,10 +32081,27 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源：O*NET-SOC 49-3031.00 职业摘要、详细资料、自定义职业档案、技术清单、行业分布、培训与教育信息与全国工资分位页面；BLS《Occupational Outlook Handbook》Diesel Service Technicians and Mechanics；国家统计局《2025 年城镇单位就业人员年平均工资情况》；ILO 工作论文 140。"
+              "来源：O*NET2026任务活动情境教育兴趣风格，2025行业与招聘软件，2025工资及2025—2035预测；BLS OOH/表1.2；统计局2025行业；2022分类大典汽车维修工；2023维修规定/2026道路运输条例；美国OSHA千斤顶及危险能源适用；ILO/NIST同版一般方法，编辑建议分标。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.sources.source-card.2",
+          "source_refs": [
+            "details-current",
+            "industry-current",
+            "hot-current",
+            "trends-current",
+            "ep-current",
+            "ooh-current",
+            "nbs-current",
+            "classification-current",
+            "mot-current",
+            "transport-current",
+            "jacks-current",
+            "energy-current",
+            "ilo-genai",
+            "nist-ai-rmf",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31417,10 +32109,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：O*NET 页面为 2026 年更新；工资为 2025 年 BLS OEWS（本职业口径）；就业与预测为 2024 年与 2024—2034 年；行业分布为 2024 年；BLS 职业展望手册为 2025 年 5 月工资与 2025—2035 年预测；国家统计局数据为 2025 年、2026-05-15 发布；《中华人民共和国道路运输条例》自 2004-07-01 施行并多次修订（引用文本为政府门户公开转载版本）；《机动车维修管理规定》依 2023 年第五次修正重新公布；检索日 2026-09-16。"
+              "2026-10-09核：O*NET档案2026、招聘行业工资2025、预测2025—2035；统计局2025/2026-05-15；维修规定2023第五修正、道路运输条例2026-01-30第六修订。原2004转载等共享历史来源仍保留，当前经营条文以新增现行来源核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.sources.source-card.3",
+          "source_refs": [
+            "details-current",
+            "trends-current",
+            "nbs-current",
+            "mot-current",
+            "transport-current"
+          ],
           "type": "prose"
         },
         {
@@ -31428,10 +32127,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "使用说明：本页身份口径为 O*NET-SOC 49-3031.00，美国工资、就业与预测采用该口径；BLS 职业展望手册的 Diesel Service Technicians and Mechanics 页面为同一职业的 2025—2035 年期间，分别标注；中国大陆按证据路由（暂无可安全使用的数据）处理，不发布职业级工资数值，也不用行业均值或美国数据替代，缺口以「证据不足」标记。"
+              "精确美国职业统计不等个人起薪、因AI失业或部署率；中国行业平均只补实际雇主背景，精确职业/城市/就业保留缺口；资格、经营备案和个人签证权限分法域及任务核。"
             ]
           },
           "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.sources.source-card.4",
+          "source_refs": [
+            "editor-current",
+            "ooh-current",
+            "nbs-current",
+            "mot-current",
+            "transport-current"
+          ],
           "type": "prose"
         }
       ]
@@ -31772,6 +32478,214 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET柴油车辆维修现行详细档案",
+                  "2026档案"
+                ],
+                "evidence_type": "primary_document",
+                "id": "details-current",
+                "limitation": "26任务23Core/3Supplemental；41一般/25详细活动/57情境；新入职教育非学历构成，RCI及41兴趣领域/17工作风格。",
+                "market": "美国",
+                "name": "O*NET柴油车辆维修现行详细档案",
+                "period": "2026档案",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/49-3031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET本职业行业分布",
+                  "2025"
+                ],
+                "evidence_type": "primary_document",
+                "id": "industry-current",
+                "limitation": "运输27/批发13/政府11/其他服务11/其他38；不等OOH较细行业份额。",
+                "market": "美国",
+                "name": "O*NET本职业行业分布",
+                "period": "2025",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/49-3031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET招聘软件提及",
+                  "2025招聘"
+                ],
+                "evidence_type": "primary_document",
+                "id": "hot-current",
+                "limitation": "6Hot具体产品不是11软件类别中的6类；AutoCAD和SolidWorks提及NA非0，非AI使用率。",
+                "market": "美国",
+                "name": "O*NET招聘软件提及",
+                "period": "2025招聘",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/49-3031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET本职业现行就业预测",
+                  "2025—2035"
+                ],
+                "evidence_type": "primary_document",
+                "id": "trends-current",
+                "limitation": "316000→327400，整数4%，24400空缺/年；非AI归因。",
+                "market": "美国",
+                "name": "O*NET本职业现行就业预测",
+                "period": "2025—2035",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/49-3031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS柴油维修技师现行职业展望",
+                  "2025工资/2025—2035预测"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ooh-current",
+                "limitation": "工作、HS/长期在岗训练、雇主可偏好中等后及认证、部分试驾需CDL；五行业工资中位数不是行业份额。",
+                "market": "美国",
+                "name": "BLS柴油维修技师现行职业展望",
+                "period": "2025工资/2025—2035预测",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/diesel-service-technicians-and-mechanics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS表1.2本职业预测",
+                  "2025—2035"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ep-current",
+                "limitation": "49-3031：316000→327400/3.6%/净增11400/年均空缺24400，典型HS/相关经验None/长期在岗培训。",
+                "market": "美国",
+                "name": "BLS表1.2本职业预测",
+                "period": "2025—2035",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "国家统计局2025城镇单位行业平均工资",
+                  "2025/2026-05-15发布"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbs-current",
+                "limitation": "运输、修理其他服务、批零行业非私营/私营税前年平均，仅雇主行业背景；不等职业工资或城市月薪。",
+                "market": "中国大陆",
+                "name": "国家统计局2025城镇单位行业平均工资",
+                "period": "2025/2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "机动车维修管理规定2023第五次修正",
+                  "2023第五次修正"
+                ],
+                "evidence_type": "primary_document",
+                "id": "mot-current",
+                "limitation": "经营备案7/20、人员12、禁改装及报废22、教育23、废物24、配件30、三检31/竣工合格证32/档案33/保证期36—37；仅适用维修经营，不给所有内部车队维修自动套备案。",
+                "market": "中国大陆",
+                "name": "机动车维修管理规定2023第五次修正",
+                "period": "2023第五次修正",
+                "publisher": "交通运输部",
+                "scope": "contextual",
+                "url": "https://xxgk.mot.gov.cn/jigou/fgs/202312/t20231204_3961931.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "道路运输条例2026第六次修订",
+                  "2026-01-30第六次修订"
+                ],
+                "evidence_type": "primary_document",
+                "id": "transport-current",
+                "limitation": "37维修经营条件/39县交通备案/43规范配件价格/44质量检验签证及质量保证/45禁报废和擅自改装。",
+                "market": "中国大陆",
+                "name": "道路运输条例2026第六次修订",
+                "period": "2026-01-30第六次修订",
+                "publisher": "国家行政法规库",
+                "scope": "contextual",
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=1806"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "OSHA1910.244(a)千斤顶",
+                  "2026-10-09现行页面核"
+                ],
+                "evidence_type": "primary_document",
+                "id": "jacks-current",
+                "limitation": "额定载荷/稳定支承/举升立即支撑固定/检查/故障停用；美国适用工场千斤顶，不是所有举升的通用行政审批。",
+                "market": "美国",
+                "name": "OSHA1910.244(a)千斤顶",
+                "period": "2026-10-09现行页面核",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.244"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "OSHA1910.147能源控制适用范围",
+                  "2026-10-09现行页面核"
+                ],
+                "evidence_type": "primary_document",
+                "id": "energy-current",
+                "limitation": "(a)适用危险能源维修及排除例外；核适用与场地既有程序，不将短文当停复机授权、不外推中国。",
+                "market": "美国",
+                "name": "OSHA1910.147能源控制适用范围",
+                "period": "2026-10-09现行页面核",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "职业分类大典2022汽车维修工定义",
+                  "2022年版/原书269页"
+                ],
+                "evidence_type": "primary_document",
+                "id": "classification-current",
+                "limitation": "PDF第276页4-12-01-01汽车维修工：汽车及特种车辆发动机底盘车身电气维修；是相关较宽细类，不等柴油汽车船舶美国完整范围。",
+                "market": "中国大陆",
+                "name": "职业分类大典2022汽车维修工定义",
+                "period": "2022年版/原书269页",
+                "publisher": "广元市人社局公开2022职业分类大典",
+                "scope": "contextual",
+                "url": "https://srsj.cngy.gov.cn/Files/UploadFile/SiteFile/20160720104022026/2026/04/14/8a8384d8e7d34d90b1a8e191a4f585cb.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "费马测试维修任务与转岗核对建议",
+                  "2026-10-09作者整理"
+                ],
+                "evidence_type": "editorial_synthesis",
+                "id": "editor-current",
+                "limitation": "工具应用、人格观察、路径递进、招聘核对与转岗距离为编辑建议，非招聘频率、测评效度、许可或风险干预效果。",
+                "market": "跨市场",
+                "name": "费马测试维修任务与转岗核对建议",
+                "period": "2026-10-09作者整理",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": "https://www.onetonline.org/link/details/49-3031.00"
               }
             ]
           },
@@ -32484,7 +33398,7 @@
               "$link": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.9",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
-              "entry": "link-11",
+              "entry": "link-16",
               "field": "url"
             }
           },
@@ -32517,7 +33431,7 @@
               "$link": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.9",
               "block": "ai-impact",
               "copy_key": "career.item.ai-impact-table",
-              "entry": "link-12",
+              "entry": "link-11",
               "field": "url"
             }
           }
@@ -32632,13 +33546,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "链接": {
-              "$link": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.9",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "entry": "link-16",
-              "field": "url"
-            },
+            "链接": "https://www.bls.gov/ooh/installation-maintenance-and-repair/diesel-service-technicians-and-mechanics.htm",
             "问题": "到 2035 年这个职业会变少吗？"
           },
           {
@@ -32655,11 +33563,11 @@
               "type": "prose"
             },
             "链接": {
-              "$link": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.9",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "entry": "link-17",
-              "field": "url"
+              "$source": "mot-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "bus-and-truck-mechanics-and-diesel-engine-specialists.source-register.published.1"
             },
             "问题": "诊断设备能代替人做安全与竣工结论吗？"
           },
@@ -33983,8 +34891,10 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.bls-outlook"
+              "onet-summary",
+              "jacks-current",
+              "energy-current",
+              "editor-current"
             ],
             "id": "hazard-exposure",
             "mitigation": {
@@ -34015,8 +34925,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.faa-design-approvals"
+              "onet-summary",
+              "bls-outlook",
+              "editor-current"
             ],
             "id": "missed-safety-parts",
             "mitigation": {
@@ -34047,8 +34958,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.nasa-seh"
+              "bls-outlook",
+              "faa-design-approvals"
             ],
             "id": "overreach-and-counterfeit",
             "mitigation": {
@@ -34079,8 +34990,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-summary",
-              "career.source.bls-outlook"
+              "editor-current"
             ],
             "id": "data-and-customer",
             "mitigation": {
@@ -34111,8 +35021,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.onet-summary"
+              "bls-outlook",
+              "editor-current"
             ],
             "id": "work-discipline",
             "mitigation": {
@@ -34143,8 +35053,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.faa-design-approvals",
-              "career.source.nasa-seh"
+              "bls-outlook",
+              "editor-current"
             ],
             "id": "waste-disposal",
             "mitigation": {
@@ -34278,6 +35188,60 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$link": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "url"
+            },
+            "id": "jacks-current",
+            "label": {
+              "$link": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "entity"
+            },
+            "scope": "美国标准先核适用；编辑建议非许可/发生率/干预效果。"
+          },
+          {
+            "href": {
+              "$link": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-8",
+              "field": "url"
+            },
+            "id": "energy-current",
+            "label": {
+              "$link": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-8",
+              "field": "entity"
+            },
+            "scope": "美国标准先核适用；编辑建议非许可/发生率/干预效果。"
+          },
+          {
+            "href": {
+              "$link": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-9",
+              "field": "url"
+            },
+            "id": "editor-current",
+            "label": {
+              "$link": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-9",
+              "field": "entity"
+            },
+            "scope": "美国标准先核适用；编辑建议非许可/发生率/干预效果。"
           }
         ]
       },
@@ -34645,10 +35609,10 @@
             "ai_heading": "AI 会影响公交卡车机械师与柴油机专员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "中国大陆薪资参考：官方统计口径与缺口",
-            "scenario_caption": "学历背景、岗位方向与说明（编辑整理，不是薪资统计）",
-            "scenario_heading": "不同学历背景对应哪些岗位方向？",
+            "scenario_caption": "教育训练与经验条件、岗位方向与说明（编辑整理，不是学历或薪资分布）",
+            "scenario_heading": "不同教育训练与经验条件可核对哪些岗位方向？",
             "scenario_interpretation_label": "说明与核对建议",
-            "scenario_role_label": "学历背景",
+            "scenario_role_label": "教育训练与经验条件",
             "scenario_value_label": "岗位方向"
           },
           "us_growth": {
@@ -34754,6 +35718,7 @@
             }
           },
           {
+            "fact_ref": "employment-current",
             "指标": "就业 · 就业规模",
             "数值": {
               "$item": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.19",
@@ -34769,7 +35734,7 @@
             }
           },
           {
-            "fact_ref": "us-growth-2025-2035",
+            "fact_ref": "growth-current",
             "指标": "就业 · 增长率",
             "数值": {
               "$item": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.21",
@@ -34785,7 +35750,7 @@
             }
           },
           {
-            "fact_ref": "us-openings-2025-2035",
+            "fact_ref": "openings-current",
             "指标": "就业 · 年均职位空缺",
             "数值": {
               "$item": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.23",
@@ -34872,7 +35837,7 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "industry-local-current",
             "industry": {
               "$item": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -34893,7 +35858,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "industry-wholesale-current",
             "industry": {
               "$item": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -34914,7 +35879,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "industry-repair-current",
             "industry": {
               "$item": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -34935,7 +35900,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "industry-truck-current",
             "industry": {
               "$item": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -35004,7 +35969,7 @@
         },
         "outlook_heading": "美国就业前景",
         "outlook_period": {
-          "$fact": "us-growth-2025-2035",
+          "$fact": "growth-current",
           "field": "period"
         },
         "wage_column_labels": [
@@ -35650,7 +36615,7 @@
           },
           {
             "alternate_value": null,
-            "label": "国家统计局 2025 年工资（未单列本职业，本页不展示数值）",
+            "label": "中国2025行业平均工资背景（非本职业工资）",
             "secondary_value": null,
             "value": {
               "$item": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.onet-structured-fields-block.3",
@@ -35661,7 +36626,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 就业与预测字段（2024—2034 年）",
+            "label": "O*NET就业与预测字段（2025—2035）",
             "secondary_value": null,
             "value": {
               "$item": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.onet-structured-fields-block.4",
@@ -36944,6 +37909,119 @@
         "source_refs": [
           "bls-pay"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "316000人",
+        "fact_id": "employment-current",
+        "market": "美国",
+        "measure": "2025就业规模",
+        "occupation_scope": "美国SOC49-3031本职业",
+        "period": "2025—2035",
+        "source_refs": [
+          "ep-current",
+          "trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "327400人",
+        "fact_id": "projected-current",
+        "market": "美国",
+        "measure": "2035预测就业",
+        "occupation_scope": "美国SOC49-3031本职业",
+        "period": "2025—2035",
+        "source_refs": [
+          "ep-current",
+          "trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "3.6%（整数4%）",
+        "fact_id": "growth-current",
+        "market": "美国",
+        "measure": "预测就业增长",
+        "occupation_scope": "美国SOC49-3031本职业",
+        "period": "2025—2035",
+        "source_refs": [
+          "ep-current",
+          "trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "11400人",
+        "fact_id": "change-current",
+        "market": "美国",
+        "measure": "预测就业净增",
+        "occupation_scope": "美国SOC49-3031本职业",
+        "period": "2025—2035",
+        "source_refs": [
+          "ep-current",
+          "trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "24400个/年",
+        "fact_id": "openings-current",
+        "market": "美国",
+        "measure": "预测期年均职位空缺",
+        "occupation_scope": "美国SOC49-3031本职业",
+        "period": "2025—2035",
+        "source_refs": [
+          "ep-current",
+          "trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "71460美元/年",
+        "fact_id": "industry-local-current",
+        "market": "美国",
+        "measure": "该行业内本职业年工资中位数",
+        "occupation_scope": "地方政府（不含教育及医院）行业SOC49-3031",
+        "period": "2025年5月",
+        "source_refs": [
+          "ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "63070美元/年",
+        "fact_id": "industry-wholesale-current",
+        "market": "美国",
+        "measure": "该行业内本职业年工资中位数",
+        "occupation_scope": "批发贸易行业SOC49-3031",
+        "period": "2025年5月",
+        "source_refs": [
+          "ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "60330美元/年",
+        "fact_id": "industry-repair-current",
+        "market": "美国",
+        "measure": "该行业内本职业年工资中位数",
+        "occupation_scope": "汽车修理与维护行业SOC49-3031",
+        "period": "2025年5月",
+        "source_refs": [
+          "ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "59820美元/年",
+        "fact_id": "industry-truck-current",
+        "market": "美国",
+        "measure": "该行业内本职业年工资中位数",
+        "occupation_scope": "卡车运输行业SOC49-3031",
+        "period": "2025年5月",
+        "source_refs": [
+          "ooh-current"
+        ]
       }
     ]
   },
@@ -36952,7 +38030,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 49-3031.00 · 柴油机诊断 / 拆装与调整 / 安全系统复核与试车",
@@ -37003,7 +38081,7 @@
       "text": "公交卡车机械师与柴油机专员"
     }
   },
-  "source_content_sha256": "a63c6c587ff27655e4eb9b6f87bffc156b47361152982efd08fea68b76d133da",
+  "source_content_sha256": "134916500da60f16cbc6a71dc839392898ecca3e4ad68bab04733bffeedfd07d",
   "subject": {
     "canonical_slug": "bus-and-truck-mechanics-and-diesel-engine-specialists",
     "name": "公交卡车机械师与柴油机专员",

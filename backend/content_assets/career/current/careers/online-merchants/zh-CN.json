@@ -12596,6 +12596,22 @@
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-12",
+                "details": [
+                  "第十条市场主体登记含法定例外；第十一条纳税、第十二条有关行政许可。",
+                  "第十七条真实披露；第二十三条用户个人信息义务。"
+                ],
+                "evidence_type": "official legislation text",
+                "id": "samr-ecommerce-law",
+                "limitation": "第二条法定适用范围；特殊商品、跨境、平台条款及个人信息配套规则另核，非美国资格或AI效果。",
+                "market": "中国大陆",
+                "name": "中华人民共和国电子商务法",
+                "period": "2018通过；2019施行；2026-10-12读取现行官方托管文本",
+                "publisher": "国家市场监督管理总局（法律文本托管）",
+                "scope": "jurisdiction_law",
+                "url": "https://www.samr.gov.cn/zfjcj/tzgg/art/2023/art_d337c3291e8b40459ca03dea54395856.html"
               }
             ]
           },
@@ -12804,10 +12820,10 @@
             "链接": "https://www.onetonline.org/link/details/13-1199.06"
           },
           {
-            "来源": "资格",
+            "来源": "中国电子商务经营义务",
             "类型": "官方职业资料",
-            "适用范围": "O*NET 13-1199.06精确任务；BLS 13-1199仅为上位职业代理；不含AI替代率",
-            "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+            "适用范围": "中国境内法定电子商务活动；登记有第十条例外、需许可业务按第十二条；非美国资格或AI替代证据。",
+            "链接": "https://www.samr.gov.cn/zfjcj/tzgg/art/2023/art_d337c3291e8b40459ca03dea54395856.html"
           },
           {
             "来源": "职业预测",
@@ -12828,7 +12844,7 @@
             "链接": "https://www.onetonline.org/link/details/13-1199.06"
           }
         ],
-        "difference_intro": "内容生成和数据汇总更快，实物、交易和消费者承诺仍须核实。",
+        "difference_intro": "以下为根据商品、订单与库存任务的编辑试用建议；本页未取得生成用时或采用效果实测，实物、交易和消费者承诺仍须核实。",
         "difference_rows": [
           {
             "AI主要改变": "辅助归纳销量与报价",
@@ -12873,7 +12889,7 @@
             "使用限制": "具体授权按所在地和雇主。",
             "来源": "教育与资格",
             "研究对象": "在线零售商家",
-            "结论": "O*NET职业任务无统一执照；开店资质、税务和商品规则按地区与平台核。",
+            "结论": "O*NET提供美国职业任务，不能证明无统一执照；开店登记、许可、税务及商品规则须按经营地和业务核。",
             "链接": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
           },
           {
@@ -13080,10 +13096,10 @@
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "href": "https://www.samr.gov.cn/zfjcj/tzgg/art/2023/art_d337c3291e8b40459ca03dea54395856.html",
             "id": "bls",
-            "label": "教育与资格",
-            "scope": "O*NET 13-1199.06精确任务；BLS 13-1199仅为上位职业代理"
+            "label": "中国电子商务经营条件",
+            "scope": "中国境内电子商务；第十条登记含例外、第十一条纳税、第十二条许可。平台培训不能免除法律义务，跨境及特殊商品另核。"
           },
           {
             "href": "https://www.onetonline.org/link/details/13-1199.06",
@@ -13403,20 +13419,32 @@
         "risks": [
           {
             "affected_roles": {
-              "$item": "online-merchants.risk.career-risk-cards.4",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "编写或发布商品信息的经营者、团队及消费者。数据边界：",
+                {
+                  "$item": "online-merchants.risk.career-risk-cards.4",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "consequence": {
-              "$item": "online-merchants.risk.career-risk-cards.5",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "可能误导消费者并引起履约或质量争议。异常处理背景：",
+                {
+                  "$item": "online-merchants.risk.career-risk-cards.5",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "evidence_refs": [
-              "onet",
-              "onet"
+              "privacy",
+              "privacy"
             ],
             "id": "cost-change",
             "mitigation": "逐项核证据和平台规则。",
@@ -13424,11 +13452,11 @@
             "title": "虚假宣传"
           },
           {
-            "affected_roles": "核商品、库存、订单、费用和售后，区分销售额与净利润。",
-            "consequence": "核商品、库存、订单、费用和售后，区分销售额与净利润。",
+            "affected_roles": "维护库存、承诺交期的经营者与购买者。",
+            "consequence": "可能取消订单、延误履约并增加投诉和退款。",
             "evidence_refs": [
               "onet",
-              "privacy"
+              "onet"
             ],
             "id": "record-version",
             "mitigation": "定期核库存并设安全余量。",
@@ -13436,8 +13464,8 @@
             "title": "超卖"
           },
           {
-            "affected_roles": "核商品、库存、订单、费用和售后，区分销售额与净利润。",
-            "consequence": "核商品、库存、订单、费用和售后，区分销售额与净利润。",
+            "affected_roles": "处理订单、客户账户与支付信息的团队和客户。",
+            "consequence": "可能发生未授权访问、信息泄漏或交易损失。",
             "evidence_refs": [
               "privacy",
               "privacy"
@@ -13448,11 +13476,11 @@
             "title": "支付与隐私"
           },
           {
-            "affected_roles": "核商品、库存、订单、费用和售后，区分销售额与净利润。",
-            "consequence": "核商品、库存、订单、费用和售后，区分销售额与净利润。",
+            "affected_roles": "处理售后的经营者、客服与消费者。",
+            "consequence": "可能产生退款争议、投诉及额外资金占用。",
             "evidence_refs": [
-              "onet",
-              "onet"
+              "privacy",
+              "privacy"
             ],
             "id": "technical-boundary",
             "mitigation": "留处理记录并及时响应。",
@@ -13460,11 +13488,11 @@
             "title": "退款争议"
           },
           {
-            "affected_roles": "核商品、库存、订单、费用和售后，区分销售额与净利润。",
-            "consequence": "核商品、库存、订单、费用和售后，区分销售额与净利润。",
+            "affected_roles": "采购、投放、对账的经营者和财务人员。",
+            "consequence": "可能低估费用、退货损失和资金缺口。",
             "evidence_refs": [
-              "bls",
-              "bls"
+              "onet",
+              "onet"
             ],
             "id": "single-coverage",
             "mitigation": "按单核毛利及退货成本。",
@@ -13472,8 +13500,8 @@
             "title": "现金流"
           },
           {
-            "affected_roles": "核商品、库存、订单、费用和售后，区分销售额与净利润。",
-            "consequence": "核商品、库存、订单、费用和售后，区分销售额与净利润。",
+            "affected_roles": "采购和履约人员、供应商及购买者。",
+            "consequence": "可能出现缺货、质量不符、退货或履约延误。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -13490,31 +13518,31 @@
             "href": "https://www.onetonline.org/link/details/13-1199.06",
             "id": "onet",
             "label": "任务",
-            "scope": "O*NET 13-1199.06精确任务；BLS 13-1199仅为上位职业代理"
+            "scope": "O*NET为美国细分类任务；BLS仅父类就业和工资，均不证明中国经营许可、隐私法规或风险发生率。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
             "label": "资格",
-            "scope": "O*NET 13-1199.06精确任务；BLS 13-1199仅为上位职业代理"
+            "scope": "O*NET为美国细分类任务；BLS仅父类就业和工资，均不证明中国经营许可、隐私法规或风险发生率。"
           },
           {
             "href": "https://www.onetonline.org/link/details/13-1199.06",
             "id": "facilities",
             "label": "工作环境",
-            "scope": "O*NET 13-1199.06精确任务；BLS 13-1199仅为上位职业代理"
+            "scope": "O*NET为美国细分类任务；BLS仅父类就业和工资，均不证明中国经营许可、隐私法规或风险发生率。"
           },
           {
-            "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+            "href": "https://www.samr.gov.cn/zfjcj/tzgg/art/2023/art_d337c3291e8b40459ca03dea54395856.html",
             "id": "privacy",
-            "label": "就业资料",
-            "scope": "O*NET 13-1199.06精确任务；BLS 13-1199仅为上位职业代理"
+            "label": "电子商务法：经营与用户信息义务",
+            "scope": "中国境内电子商务适用范围按第二条；商品真实披露第十七条、用户个人信息第二十三条，具体品类/平台/个人信息规则仍须另核。"
           },
           {
             "href": "https://www.onetonline.org/link/details/13-1199.06",
             "id": "onet",
             "label": "职业活动",
-            "scope": "O*NET 13-1199.06精确任务；BLS 13-1199仅为上位职业代理"
+            "scope": "O*NET为美国细分类任务；BLS仅父类就业和工资，均不证明中国经营许可、隐私法规或风险发生率。"
           }
         ]
       },
@@ -13909,30 +13937,39 @@
         "heading": "在线商家精确职业数据未单列",
         "outlook_evidence": [
           {
-            "geography": {
-              "$item": "online-merchants.market-signals.market-signal-card.2",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "horizon": {
-              "$item": "online-merchants.market-signals.market-signal-card.3",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "geography": "美国",
+            "horizon": "2025工资；2025—2035预测",
             "interpretation": {
-              "$item": "online-merchants.market-signals.market-signal-card.4",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
+              "$join": [
+                "父类统计、经营指标、任务变化和转向分别说明：",
+                {
+                  "$item": "online-merchants.market-signals.market-signal-card.2",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "online-merchants.market-signals.market-signal-card.3",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "online-merchants.market-signals.market-signal-card.4",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "online-merchants.market-signals.market-signal-card.5",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
-            "limitation": {
-              "$item": "online-merchants.market-signals.market-signal-card.5",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "limitation": "O*NET细分类工资与就业未单列；13-1199父类不得分配给在线商家。",
             "metric": "美国精确工资",
             "occupation_scope": "O*NET 13-1199.06",
             "source_id": "bls",
@@ -14077,7 +14114,7 @@
           },
           {
             "alternate_value": null,
-            "label": "知识",
+            "label": "任务相关知识（编辑归纳）",
             "secondary_value": null,
             "value": "电商平台、零售采购、物流、消费者权益和财务记录。"
           },
@@ -14100,7 +14137,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
+            "cta_label": "查看霍兰德兴趣测评",
             "evidence_level": {
               "$item": "online-merchants.fit.riasec-fit-block.8",
               "block": "fit",
@@ -14119,10 +14156,10 @@
             "watchout": "兴趣自评不能证明经营盈利；用小规模真实记录核成本和客户体验。"
           },
           {
-            "answer": "在线商户可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "检查商品规格、变体、库存和订单金额，给每次修订留来源。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "核商品、库存、订单、费用和售后，区分销售额与净利润。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据O*NET任务的编辑探索建议；未取得本页自评预测盈利、绩效或录用的效度。",
             "id": "big-five",
             "label": "细节能力",
             "question": "做在线商户需要怎样的能力与工作方式？",
@@ -14135,10 +14172,10 @@
             "watchout": "兴趣自评不能证明经营盈利；用小规模真实记录核成本和客户体验。"
           },
           {
-            "answer": "在线商户可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "说明缺货、交期和售后事实，观察能否听清诉求并留下处理记录。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "核商品、库存、订单、费用和售后，区分销售额与净利润。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据O*NET任务的编辑探索建议；未取得本页自评预测盈利、绩效或录用的效度。",
             "id": "mbti",
             "label": "沟通",
             "question": "做在线商户需要怎样的能力与工作方式？",
@@ -14151,10 +14188,10 @@
             "watchout": "兴趣自评不能证明经营盈利；用小规模真实记录核成本和客户体验。"
           },
           {
-            "answer": "在线商户可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较客户服务、真实商品承诺和经营责任是否符合自己的价值。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "核商品、库存、订单、费用和售后，区分销售额与净利润。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据O*NET任务的编辑探索建议；未取得本页自评预测盈利、绩效或录用的效度。",
             "id": "enneagram",
             "label": "工作价值",
             "question": "做在线商户需要怎样的能力与工作方式？",
@@ -14167,10 +14204,10 @@
             "watchout": "兴趣自评不能证明经营盈利；用小规模真实记录核成本和客户体验。"
           },
           {
-            "answer": "在线商户可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较雇员、自营和跨境模式；分别核库存投入、现金流和所在地规则。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "核商品、库存、订单、费用和售后，区分销售额与净利润。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据O*NET任务的编辑探索建议；未取得本页自评预测盈利、绩效或录用的效度。",
             "id": "iq",
             "label": "场景偏好",
             "question": "做在线商户需要怎样的能力与工作方式？",
@@ -14183,10 +14220,10 @@
             "watchout": "兴趣自评不能证明经营盈利；用小规模真实记录核成本和客户体验。"
           },
           {
-            "answer": "在线商户可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "用虚构商品、订单、费用与退款跑完整流程，核售价与净利润差异。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "核商品、库存、订单、费用和售后，区分销售额与净利润。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据O*NET任务的编辑探索建议；未取得本页自评预测盈利、绩效或录用的效度。",
             "id": "eq",
             "label": "虚构案例",
             "question": "做在线商户需要怎样的能力与工作方式？",
@@ -14395,8 +14432,8 @@
       "riasec_fit_block": {
         "fit_interest": "能按订单复核库存、毛利、退货和客户承诺。",
         "interest": "喜欢商品选择、客户沟通和数字经营。",
-        "riasec": "企业型E、常规型C与研究型I可供探索，量表不保证盈利。",
-        "riasec_short": "E/C/I：经营、组织与分析。"
+        "riasec": "O*NET当前职业兴趣以常规型C、企业型E为主；用于探索订单组织与经营偏好，不以群体画像推断个人盈利。",
+        "riasec_short": "C/E：订单组织与经营。"
       },
       "source_card": {
         "eeat_signals": {
@@ -14406,8 +14443,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "O*NET 13-1199.06精确任务；BLS 13-1199仅上位职业代理；中国精确工资与商家净利润未获官方单列。",
-          "updated_at": "2026-09-26核官方职业任务与当前统计。"
+          "source": "O*NET 13-1199.06任务；BLS 13-1199父类代理；NBS2025批零行业工资；SAMR电子商务法文本。",
+          "updated_at": "2026-10-12"
         },
         "note": "证据只支持在线商户在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -14419,7 +14456,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "职业任务"
+            "label": "MBTI测评（英文）"
           },
           {
             "href": {
@@ -14429,7 +14466,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "工资就业"
+            "label": "大五人格测评（英文）"
           },
           {
             "href": {
@@ -14439,7 +14476,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "资格或规则"
+            "label": "MBTI测评（中文）"
           },
           {
             "href": {
@@ -14449,7 +14486,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "统计边界"
+            "label": "大五人格测评（中文）"
           }
         ]
       },
@@ -14702,7 +14739,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "在线零售商家 · O*NET 13-1199.06",
@@ -14753,7 +14790,7 @@
       "text": "在线零售商家：选品、履约、利润与风险"
     }
   },
-  "source_content_sha256": "c0e13755d5abd7035cce9342259087ac45454d10522598f44bb10a3ea5ce22dc",
+  "source_content_sha256": "988c37e6bb0d5917e84d9465ec74136d50c8a3d75d6695dc91a379d2c0db179e",
   "subject": {
     "canonical_slug": "online-merchants",
     "name": "在线零售商家",

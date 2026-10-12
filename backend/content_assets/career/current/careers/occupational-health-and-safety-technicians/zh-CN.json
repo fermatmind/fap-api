@@ -12549,7 +12549,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用虚构A/B/C案例检验自己是否喜欢检查、采样与控制复查；兴趣量表只能帮助提问，不能预测现场胜任。"
+              "用虚构A/B/C案例检验自己是否喜欢检查、采样与控制复查；兴趣量表可帮助提问，本页未提供其预测现场胜任的验证证据。"
             ]
           },
           "id": "occupational-health-and-safety-technicians.fit.riasec-fit-block.7",
@@ -13739,13 +13739,13 @@
             "来源": "BLS职业展望",
             "类型": "美国职业说明",
             "适用范围": "职责、学历与就业预测",
-            "链接": "https://www.bls.gov/ooh/healthcare/occupational-health-and-safety-technicians.htm"
+            "链接": "https://www.bls.gov/ooh/healthcare/occupational-health-and-safety-specialists-and-technicians.htm"
           },
           {
             "来源": "BLS职业展望",
             "类型": "美国职业就业预测",
             "适用范围": "与AI采用率分别解读",
-            "链接": "https://www.bls.gov/ooh/healthcare/occupational-health-and-safety-technicians.htm"
+            "链接": "https://www.bls.gov/ooh/healthcare/occupational-health-and-safety-specialists-and-technicians.htm"
           },
           {
             "来源": "O*NET专员任务详情",
@@ -13754,7 +13754,7 @@
             "链接": "https://www.onetonline.org/link/details/19-5011.00"
           }
         ],
-        "difference_intro": "分别看任务、工具和责任：同一系统可能加快记录处理，却无法从缺失或错误的现场证据中得出可靠控制结论。",
+        "difference_intro": "以下是依据职业任务提出的编辑试用建议；本页未测量记录处理速度、识别准确率或整改效果，不能视为已经发生的职业变化。",
         "difference_rows": [
           {
             "AI主要改变": "汇总图片与检查记录，提示疑似缺失防护。",
@@ -13807,7 +13807,7 @@
             "来源": "BLS职业展望",
             "研究对象": "美国职业说明",
             "结论": "列出专员与技术员的职责、教育和就业展望。",
-            "链接": "https://www.bls.gov/ooh/healthcare/occupational-health-and-safety-technicians.htm"
+            "链接": "https://www.bls.gov/ooh/healthcare/occupational-health-and-safety-specialists-and-technicians.htm"
           },
           {
             "source_ref": "bls-ep-2025",
@@ -13956,7 +13956,7 @@
             "人的控制点": "确认语言、工况、适用标准及理解情况",
             "任务": "生成不同受众的安全提示草稿",
             "工作方向": "培训沟通",
-            "当前变化": "可提高初稿速度"
+            "当前变化": "编辑试用建议：起草提示语并核对事实；节时效果未在本页验证"
           },
           {
             "人的控制点": "授权人确认完成条件并签收",
@@ -14048,7 +14048,7 @@
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": "https://www.bls.gov/ooh/healthcare/occupational-health-and-safety-technicians.htm",
+            "href": "https://www.bls.gov/ooh/healthcare/occupational-health-and-safety-specialists-and-technicians.htm",
             "id": "bls",
             "label": "BLS职业展望：专员与技术员",
             "scope": "美国职责、学历入口与工作环境"
@@ -14904,7 +14904,7 @@
           {
             "geography": "美国",
             "horizon": "2025—2035",
-            "interpretation": "技术员从2025年约31,200人出发；与专员分列。",
+            "interpretation": "专员2025年就业基数约143,100人；18%是BLS OOH分项整数展示，与本页技术员31,200人及19.4%分列。",
             "limitation": "不可将两职业增速相加。",
             "metric": "美国安全健康专员就业增长",
             "occupation_scope": "19-5011安全健康专员",
@@ -14915,23 +14915,23 @@
             "geography": "中国",
             "horizon": "2025",
             "interpretation": "国家统计局宽行业工资不能替代本职业就业预测；看具体地区招聘。",
-            "limitation": "没有可与BLS同口径比较的中国预测。",
+            "limitation": "本次核对的BLS/O*NET是美国统计，国家统计局是中国宽岗位工资；不足以给出本职业中国增速。",
             "metric": "本职业就业增速",
             "occupation_scope": "职业健康与安全技术员",
             "source_id": "nbs",
-            "value": "暂无同口径公开数值"
+            "value": "证据不足：本次所核来源未取得中国同口径职业就业预测"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
-            "href": "https://www.bls.gov/ooh/healthcare/occupational-health-and-safety-technicians.htm",
+            "href": "https://www.bls.gov/ooh/healthcare/occupational-health-and-safety-specialists-and-technicians.htm",
             "id": "bls",
             "label": "BLS职业展望",
             "scope": "美国2025就业基数、2025—2035预测"
           },
           {
-            "href": "https://www.bls.gov/ooh/healthcare/occupational-health-and-safety-technicians.htm",
+            "href": "https://www.bls.gov/ooh/healthcare/occupational-health-and-safety-specialists-and-technicians.htm",
             "id": "ep",
             "label": "BLS就业预测说明",
             "scope": "美国专员与技术员分别看增长率"
@@ -15082,8 +15082,8 @@
             "watchout": "只提示是否喜欢调查、分析和帮助他人，不判断能否执业。"
           },
           {
-            "answer": "观察自己能否记录校准、时间、位置和版本；量表不能预测安全绩效。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "观察自己能否记录校准、时间、位置和版本；本页未提供量表预测该职业安全绩效的验证证据。",
+            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
             "cta_label": "用大五观察工作习惯",
             "evidence_level": "自我反思工具；不提供职业胜任预测",
             "id": "big-five",
@@ -15099,7 +15099,7 @@
           },
           {
             "answer": "用A/B/C案例向同伴讲清已知、未知和升级对象，不以类型定岗位。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
             "cta_label": "用MBTI提出沟通问题",
             "evidence_level": "自我反思工具；不提供职业胜任预测",
             "id": "mbti",
@@ -15116,7 +15116,7 @@
           {
             "answer": "模拟发现A防护缺失时能否暂停判断并按程序上报。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "用九型提问压力反应",
+            "cta_label": "用兴趣量表补充任务偏好",
             "evidence_level": "自我反思工具；不提供职业胜任预测",
             "id": "enneagram",
             "label": "九型压力反应",
@@ -15132,7 +15132,7 @@
           {
             "answer": "试读O*NET任务和OSHA控制指南，再解释采样误差与控制顺序。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "用认知题反思学习方式",
+            "cta_label": "用兴趣量表补充任务偏好",
             "evidence_level": "自我反思工具；不提供职业胜任预测",
             "id": "iq",
             "label": "认知学习",
@@ -15143,12 +15143,12 @@
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "学习标准与解释数据比单次分数更重要。"
+            "watchout": "将学习标准和解释数据的实际表现与岗位要求对照；本页没有量表与工作样本预测效度的比较证据。"
           },
           {
             "answer": "让同伴挑战B采样和C湿滑方案，记录分歧并修订。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "用情绪能力提问沟通",
+            "cta_label": "用兴趣量表补充任务偏好",
             "evidence_level": "自我反思工具；不提供职业胜任预测",
             "id": "eq",
             "label": "情绪与协作",
@@ -15302,7 +15302,7 @@
             "usage": "核任务、资格或控制边界；不能单独推断个体适配"
           },
           {
-            "href": "https://www.bls.gov/ooh/healthcare/occupational-health-and-safety-technicians.htm",
+            "href": "https://www.bls.gov/ooh/healthcare/occupational-health-and-safety-specialists-and-technicians.htm",
             "label": "BLS职业展望",
             "usage": "核任务、资格或控制边界；不能单独推断个体适配"
           },
@@ -15327,7 +15327,7 @@
             "usage": "核任务、资格或控制边界；不能单独推断个体适配"
           },
           {
-            "href": "https://www.bls.gov/ooh/healthcare/occupational-health-and-safety-technicians.htm",
+            "href": "https://www.bls.gov/ooh/healthcare/occupational-health-and-safety-specialists-and-technicians.htm",
             "label": "BLS入职路径",
             "usage": "核任务、资格或控制边界；不能单独推断个体适配"
           }
@@ -15370,7 +15370,7 @@
             "type": "prose"
           },
           "source": "美国BLS 2025年职业工资与就业、O*NET 19-5012任务、OSHA危害控制；中国工资引用国家统计局2025年城镇单位表并明确缺口。",
-          "updated_at": "2026-09-26核查官方来源，保留各来源原统计期。"
+          "updated_at": "2026-10-12 核对本次九模块来源与内容，保留各来源原统计期。"
         },
         "note": "证据只支持作业健康技术员在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -15382,7 +15382,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "查看职业兴趣测评"
+            "label": "了解MBTI测评（英文）"
           },
           {
             "href": {
@@ -15392,7 +15392,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "查看岗位导航"
+            "label": "了解大五测评（英文）"
           },
           {
             "href": {
@@ -15402,7 +15402,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "返回职业目录"
+            "label": "了解MBTI测评（中文）"
           },
           {
             "href": {
@@ -15412,7 +15412,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "作业健康技术员：作业健康技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则"
+            "label": "了解大五测评（中文）"
           }
         ]
       },
@@ -15573,7 +15573,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "职业健康与安全技术员 · O*NET 19-5012.00",
@@ -15624,7 +15624,7 @@
       "text": "职业健康与安全技术员：职责、工资与入门路径"
     }
   },
-  "source_content_sha256": "e5f770ef954c0581b9bd0de6f15da41936266a265288e340cf28b98d71a893d9",
+  "source_content_sha256": "308dcb819b6dadc9f89f03c46430da02d435842381d7799d18d4f6247e69d797",
   "subject": {
     "canonical_slug": "occupational-health-and-safety-technicians",
     "name": "职业健康与安全技术员",

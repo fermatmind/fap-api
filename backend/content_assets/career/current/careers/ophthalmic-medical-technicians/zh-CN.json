@@ -11894,7 +11894,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更强证据是受监督工作样本、原始记录和反馈；兴趣测评不能证明患者身份、检查结果核验、给药与异常转诊的授权责任能力。"
+              "能力判断可观察受监督检查记录、仪器训练和异常上报反馈；兴趣仅探索，不授临床权限。"
             ]
           },
           "id": "ophthalmic-medical-technicians.fit.riasec-fit-block.7",
@@ -12938,7 +12938,7 @@
             "链接": "https://www.onetonline.org/link/details/29-2057.00"
           }
         ],
-        "difference_intro": "资料汇总可加快；患者身份、检查结果核验、给药与异常转诊的授权责任需要人的检查。",
+        "difference_intro": "病史摘要、影像整理及记录校对为编辑试用建议，未取得单项AI采用或提效实测；身份、眼别、医嘱和结果须人工核验。",
         "difference_rows": [
           {
             "AI主要改变": "辅助归纳记录与候选",
@@ -13227,8 +13227,8 @@
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
-            "label": "教育与资格",
-            "scope": "美国29-2057.00精确职业"
+            "label": "典型入门教育统计",
+            "scope": "美国29-2057典型非学位中学后培训；具体认证、检查、给药及手术协助权限须按地区、机构和医生监督另核。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-2057.00",
@@ -13548,16 +13548,28 @@
         "risks": [
           {
             "affected_roles": {
-              "$item": "ophthalmic-medical-technicians.risk.career-risk-cards.4",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "患者、检查技术员及接收结果的医生。识别背景：",
+                {
+                  "$item": "ophthalmic-medical-technicians.risk.career-risk-cards.4",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "consequence": {
-              "$item": "ophthalmic-medical-technicians.risk.career-risk-cards.5",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "可能将检查或结果交给错误患者、标错眼别。升级边界：",
+                {
+                  "$item": "ophthalmic-medical-technicians.risk.career-risk-cards.5",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "evidence_refs": [
               "onet",
@@ -13569,11 +13581,11 @@
             "title": "患者识别"
           },
           {
-            "affected_roles": "医疗技术员工作需围绕医疗技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "医疗技术员工作需围绕医疗技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "检查技术员、患者及使用结果的眼科医生。",
+            "consequence": "可能误导医生判断并需重新核测。",
             "evidence_refs": [
               "onet",
-              "privacy"
+              "onet"
             ],
             "id": "record-version",
             "mitigation": "重复测量并标质量。",
@@ -13581,11 +13593,11 @@
             "title": "测量失准"
           },
           {
-            "affected_roles": "医疗技术员工作需围绕医疗技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "医疗技术员工作需围绕医疗技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "患者、眼科技术员和其他接触器械的人员。",
+            "consequence": "可能造成感染传播。",
             "evidence_refs": [
-              "privacy",
-              "privacy"
+              "onet",
+              "onet"
             ],
             "id": "personal-data",
             "mitigation": "按感染控制流程处理。",
@@ -13593,8 +13605,8 @@
             "title": "感染传播"
           },
           {
-            "affected_roles": "医疗技术员工作需围绕医疗技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "医疗技术员工作需围绕医疗技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "执行给药协助的人员、监督医生及患者。",
+            "consequence": "可能造成药物相关伤害或超越许可范围。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -13605,11 +13617,11 @@
             "title": "越权给药"
           },
           {
-            "affected_roles": "医疗技术员工作需围绕医疗技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "医疗技术员工作需围绕医疗技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "技术员、眼科医生及患者。",
+            "consequence": "可能延误评估或将设备提示误当诊断。",
             "evidence_refs": [
-              "bls",
-              "bls"
+              "onet",
+              "onet"
             ],
             "id": "single-coverage",
             "mitigation": "结果交眼科医生解释。",
@@ -13617,8 +13629,8 @@
             "title": "影像误读"
           },
           {
-            "affected_roles": "医疗技术员工作需围绕医疗技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
-            "consequence": "医疗技术员工作需围绕医疗技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "affected_roles": "患者、病历管理人员和经手资料的技术员。",
+            "consequence": "可能泄露病历或眼部影像并违反适用数据规则。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -13635,31 +13647,31 @@
             "href": "https://www.onetonline.org/link/details/29-2057.00",
             "id": "onet",
             "label": "任务",
-            "scope": "美国29-2057.00精确职业"
+            "scope": "O*NET支持29-2057检查、器械消毒和医生协助任务；BLS仅统计与典型培训。风险为编辑提示，非诊疗规则、感染率或法域给药许可。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "bls",
             "label": "资格",
-            "scope": "美国29-2057.00精确职业"
+            "scope": "O*NET支持29-2057检查、器械消毒和医生协助任务；BLS仅统计与典型培训。风险为编辑提示，非诊疗规则、感染率或法域给药许可。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-2057.00",
             "id": "facilities",
             "label": "工作环境",
-            "scope": "美国29-2057.00精确职业"
+            "scope": "O*NET支持29-2057检查、器械消毒和医生协助任务；BLS仅统计与典型培训。风险为编辑提示，非诊疗规则、感染率或法域给药许可。"
           },
           {
             "href": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
             "id": "privacy",
             "label": "就业资料",
-            "scope": "美国29-2057.00精确职业"
+            "scope": "O*NET支持29-2057检查、器械消毒和医生协助任务；BLS仅统计与典型培训。风险为编辑提示，非诊疗规则、感染率或法域给药许可。"
           },
           {
             "href": "https://www.onetonline.org/link/details/29-2057.00",
             "id": "onet",
             "label": "职业活动",
-            "scope": "美国29-2057.00精确职业"
+            "scope": "O*NET支持29-2057检查、器械消毒和医生协助任务；BLS仅统计与典型培训。风险为编辑提示，非诊疗规则、感染率或法域给药许可。"
           }
         ]
       },
@@ -13791,28 +13803,28 @@
         "bls_table": [
           {
             "指标": "薪资第10百分位",
-            "数值": "未单列",
-            "说明": "无精确分位则保持缺口。"
+            "数值": "$35,700",
+            "说明": "O*NET展示BLS 2025美国29-2057年薪分布；非起薪或个人报价。"
           },
           {
             "指标": "薪资第25百分位",
-            "数值": "未单列",
-            "说明": "无精确分位则保持缺口。"
+            "数值": "$38,170",
+            "说明": "O*NET展示BLS 2025美国29-2057年薪分布；非起薪或个人报价。"
           },
           {
             "指标": "薪资中位数",
             "数值": "$45,570",
-            "说明": "2025美国29-2057精确中位年薪，非起薪个人报价。"
+            "说明": "O*NET展示BLS 2025美国29-2057年薪分布；非起薪或个人报价。"
           },
           {
             "指标": "薪资第75百分位",
-            "数值": "未单列",
-            "说明": "无精确分位则保持缺口。"
+            "数值": "$51,390",
+            "说明": "O*NET展示BLS 2025美国29-2057年薪分布；非起薪或个人报价。"
           },
           {
             "指标": "薪资第90百分位",
-            "数值": "未单列",
-            "说明": "无精确分位则保持缺口。"
+            "数值": "$61,940",
+            "说明": "O*NET展示BLS 2025美国29-2057年薪分布；非起薪或个人报价。"
           },
           {
             "指标": "就业人数",
@@ -13884,7 +13896,7 @@
             "note": "精确职业行业分位在本页未单列。"
           }
         ],
-        "industry_value_label": "年薪中位数（美元）",
+        "industry_value_label": "单项行业工资数据状态",
         "interpretation_heading": "如何解读",
         "interpretation_rows": [
           {
@@ -13951,8 +13963,8 @@
               ],
               "separator": "；"
             },
-            "label": "低工资分位",
-            "value": "未单列"
+            "label": "第10百分位",
+            "value": "$35,700"
           },
           {
             "equivalent": "不换算中国月薪",
@@ -13985,8 +13997,8 @@
               ],
               "separator": "；"
             },
-            "label": "高工资分位",
-            "value": "未单列"
+            "label": "第90百分位",
+            "value": "$61,940"
           }
         ]
       },
@@ -14054,30 +14066,39 @@
         "heading": "美国29-2057.00就业展望",
         "outlook_evidence": [
           {
-            "geography": {
-              "$item": "ophthalmic-medical-technicians.market-signals.market-signal-card.2",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "horizon": {
-              "$item": "ophthalmic-medical-technicians.market-signals.market-signal-card.3",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "geography": "美国",
+            "horizon": "2025基期",
             "interpretation": {
-              "$item": "ophthalmic-medical-technicians.market-signals.market-signal-card.4",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
+              "$join": [
+                "就业及其他背景分开解读：",
+                {
+                  "$item": "ophthalmic-medical-technicians.market-signals.market-signal-card.2",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "ophthalmic-medical-technicians.market-signals.market-signal-card.3",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "ophthalmic-medical-technicians.market-signals.market-signal-card.4",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                },
+                {
+                  "$item": "ophthalmic-medical-technicians.market-signals.market-signal-card.5",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
-            "limitation": {
-              "$item": "ophthalmic-medical-technicians.market-signals.market-signal-card.5",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "limitation": "29-2057精确眼科医疗技术员，非泛医疗组合；非当前招聘、AI归因或中国需求。",
             "metric": "2025在岗",
             "occupation_scope": "美国29-2057.00",
             "source_id": "bls",
@@ -14222,7 +14243,7 @@
           },
           {
             "alternate_value": null,
-            "label": "知识",
+            "label": "任务相关知识（编辑归纳）",
             "secondary_value": null,
             "value": "眼部解剖、检查流程、测量误差、隐私与临床安全"
           },
@@ -14245,7 +14266,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
+            "cta_label": "查看霍兰德兴趣测评",
             "evidence_level": {
               "$item": "ophthalmic-medical-technicians.fit.riasec-fit-block.8",
               "block": "fit",
@@ -14264,10 +14285,10 @@
             "watchout": "兴趣测评不证明患者身份、检查结果核验、给药与异常转诊的授权责任能力或资格。"
           },
           {
-            "answer": "医疗技术员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "核患者双标识、左右眼、时间、仪器与测量质量，观察是否能发现缺项。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "医疗技术员工作需围绕医疗技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "big-five",
             "label": "细节能力",
             "question": "做医疗技术员需要怎样的能力与工作方式？",
@@ -14280,10 +14301,10 @@
             "watchout": "兴趣测评不证明患者身份、检查结果核验、给药与异常转诊的授权责任能力或资格。"
           },
           {
-            "answer": "医疗技术员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "遇标识冲突、仪器异常或权限不明，练暂缓采信并交医生或授权人员。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "医疗技术员工作需围绕医疗技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "mbti",
             "label": "风险处理",
             "question": "做医疗技术员需要怎样的能力与工作方式？",
@@ -14296,10 +14317,10 @@
             "watchout": "兴趣测评不证明患者身份、检查结果核验、给药与异常转诊的授权责任能力或资格。"
           },
           {
-            "answer": "医疗技术员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "比较患者服务、准确记录和遵守临床监督是否符合工作价值。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "医疗技术员工作需围绕医疗技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "enneagram",
             "label": "工作价值",
             "question": "做医疗技术员需要怎样的能力与工作方式？",
@@ -14312,10 +14333,10 @@
             "watchout": "兴趣测评不证明患者身份、检查结果核验、给药与异常转诊的授权责任能力或资格。"
           },
           {
-            "answer": "医疗技术员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "核面对患者、感染防护、门诊排班和重复精密测量是否可接受。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "医疗技术员工作需围绕医疗技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "iq",
             "label": "场景偏好",
             "question": "做医疗技术员需要怎样的能力与工作方式？",
@@ -14328,10 +14349,10 @@
             "watchout": "兴趣测评不证明患者身份、检查结果核验、给药与异常转诊的授权责任能力或资格。"
           },
           {
-            "answer": "医疗技术员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "按既有虚构病例核对标识和缺项；纸面记录不证明临床判断或给药能力。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "医疗技术员工作需围绕医疗技术员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则核对输入、执行、结果和责任交接。",
+            "cta_label": "查看霍兰德兴趣测评",
+            "evidence_level": "根据职业任务的编辑探索建议；本页自评预测绩效或安全的效度未取得。",
             "id": "eq",
             "label": "虚构案例",
             "question": "做医疗技术员需要怎样的能力与工作方式？",
@@ -14551,8 +14572,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "BLS 29-2057.00 2025—2035精确职业统计；O*NET任务；国家统计局中国工资缺口。",
-          "updated_at": "2026-09-26核官方职业任务与当前统计。"
+          "source": "BLS美国29-2057单项统计；O*NET临床辅助任务和2025工资；NBS2025卫生社会工作两类单位宽行业统计。",
+          "updated_at": "2026-10-12"
         },
         "note": "证据只支持医疗技术员在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -14564,7 +14585,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "职业任务"
+            "label": "MBTI测评（英文）"
           },
           {
             "href": {
@@ -14574,7 +14595,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "工资就业"
+            "label": "大五人格测评（英文）"
           },
           {
             "href": {
@@ -14584,7 +14605,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "资格或规则"
+            "label": "MBTI测评（中文）"
           },
           {
             "href": {
@@ -14594,7 +14615,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "统计边界"
+            "label": "大五人格测评（中文）"
           }
         ]
       },
@@ -14803,7 +14824,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "眼科医疗技术员 · O*NET 29-2057.00",
@@ -14854,7 +14875,7 @@
       "text": "眼科医疗技术员：工作、工资与入行路径"
     }
   },
-  "source_content_sha256": "7c69125dfd426b655f0d088fb844baea7a8e3dd4b1d2f06629c4fb76a4878a9d",
+  "source_content_sha256": "b67aa43477989fc8df8612f5de1562d7ac96e2440e8bacceb4c6ac6f6c507353",
   "subject": {
     "canonical_slug": "ophthalmic-medical-technicians",
     "name": "眼科医疗技术员",

@@ -9343,18 +9343,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.04.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            3,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.04.mitigation": {
         "ref": {
@@ -9432,18 +9422,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.05.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            4,
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.05.mitigation": {
         "ref": {
@@ -23838,6 +23818,10 @@
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -23860,6 +23844,10 @@
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.career-quick-answers-block.3",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -23882,6 +23870,10 @@
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.career-quick-answers-block.5",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -23893,6 +23885,10 @@
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.career-quick-answers-block.6",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -23970,6 +23966,10 @@
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.career-quick-answers-block.13",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -23992,6 +23992,10 @@
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.career-quick-answers-block.15",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24010,10 +24014,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "砌体与饰面的施工质量由施工班组与作业人员负责；工序验收由施工单位的质量与技术人员组织；设计与结构判断由设计单位负责；监理对施工质量与安全承担监理责任；项目负责人对建设工程项目的安全施工负责。"
+              "中国工程质量条例19/26/36—38条分别规定设计单位、施工单位及监理质量责任，施工单位建立质量责任制和工序检验；监理工程师签字与总监签字有不同法定环节。班组和作业人员按实际岗位落实作业、自检与报告；安全条例21条项目负责人对项目安全施工负责，个人自检不替代单位检验或监理签字。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.career-quick-answers-block.17",
+          "source_refs": [
+            "cn-quality-current",
+            "cn-safety-current"
+          ],
           "type": "prose"
         },
         {
@@ -24036,6 +24044,10 @@
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.career-quick-answers-block.19",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24058,6 +24070,10 @@
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.career-quick-answers-block.21",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24069,6 +24085,10 @@
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.career-quick-answers-block.22",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24112,10 +24132,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国O*NET列Job Zone 1-2、SVP低于6.0；教育问项70%选高中或同等学历、13%低于高中、13%上过大学但未取得学位，是受访者对岗位教育要求的回答，不是从业学历构成。BLS列典型入门学历为高中或同等学历、在岗训练为学徒制；OOH说明学徒或在岗学习路径，部分岗位接受低于高中学历，具体项目条件另核。"
+              "O*NET Job Zone1—2、SVP低于6.0；教育要求问项70%答高中同等、13%低于高中、13%大学未取得学位，是岗位要求回答，非从业学历构成或全员准入。BLS典型入门为高中同等和学徒训练，OOH说明学徒或在岗学习；低于高中这一问项来自ONet，不归为本次OOH直接结论。具体项目准入另核。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.career-quick-answers-block.26",
+          "source_refs": [
+            "details-current",
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -24134,10 +24158,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 技术清单列出 7 类软件与工具，其中 4 项标注为 Hot Technology（QuickBooks、Microsoft Office、Windows 与 Excel），另有工地估算与结构计算类软件；现场工具以镘刀、水平仪、铅锤、皮数杆、切割机与砂浆搅拌设备为主，工具只是实现手段，砌筑质量仍需由人负责。"
+              "详细页列7类软件，Hot单页4项产品：Office/Excel各见于1%的2025美国唯一招聘广告，QuickBooks/Windows比例未公布，不填0。估算、CAD与结构计算产品在详细清单，不是Hot单页另列产品；7类与4产品不是同一指标，均非采用率、必备技能或AI替代率。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.career-quick-answers-block.28",
+          "source_refs": [
+            "details-current",
+            "hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -24160,6 +24188,10 @@
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.career-quick-answers-block.30",
+          "source_refs": [
+            "cn-safety-current",
+            "cn-building-current"
+          ],
           "type": "prose"
         },
         {
@@ -24182,6 +24214,10 @@
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.career-quick-answers-block.32",
+          "source_refs": [
+            "cn-safety-current",
+            "cn-building-current"
+          ],
           "type": "prose"
         },
         {
@@ -24204,6 +24240,10 @@
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.career-quick-answers-block.34",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24211,10 +24251,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "砖石与砌块工（Brickmasons and Blockmasons，O*NET-SOC47-2021.00）使用砂浆及其他材料铺设并粘合砖、结构瓦、混凝土砌块、煤渣砌块、玻璃砖和陶土砖，建造或修复墙体、隔断、拱门、下水道等结构。按图纸计算材料，用量具控制尺寸、垂直水平与灰缝。石工47-2022主要砌筑/安装石材，BLS47-2020合并类别及OOH群体汇总须分开；本职业工艺表现不产生设计变更或结构安全结论。"
+              "砖石与砌块工（Brickmasons and Blockmasons，O*NET-SOC47-2021.00）使用砂浆及其他材料铺设并粘合砖、结构瓦、混凝土砌块、煤渣砌块、玻璃砖和陶土砖，建造或修复墙体、隔断、拱门、下水道等结构。按图纸计算材料，用量具控制尺寸、垂直水平与灰缝。石工47-2022主要砌筑/安装石材，BLS47-2020合并类别及OOH群体汇总须分开；本职业工艺表现不产生设计变更或结构安全结论。 当前15任务包括耐火炉窑砌筑、损坏砖拆除和新无人机检查高大结构；后者重要度未公布，不填0，亦非所有岗位必备或自动产生操作许可。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.definition-block.11",
+          "source_refs": [
+            "details-current",
+            "cn-quality-current"
+          ],
           "type": "prose"
         },
         {
@@ -24222,10 +24266,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业身份与任务：O*NET-SOC 47-2021.00 Brickmasons and Blockmasons，2026 年更新页面，Job Zone 1-2（SVP 低于 6.0），该职业未被标注 Bright Outlook。官方职责为「使用砂浆及其他物质铺设并粘合建筑材料，如砖、结构瓦、混凝土砌块、煤渣砌块、玻璃砖和陶土砖，以建造或修复墙体、隔断、拱门、下水道和其他结构」；共 15 项任务，高重要度任务包括按基准点量距并标记放线（93）、做角并拉线控制皮数（89）、涂抹并抹平砂浆（87）、计算角度与皮数并确定垂直与水平（84）、切割砖与砌块（83）、解读图纸并计算材料（82）。"
+              "O*NET 职业身份与任务：O*NET-SOC 47-2021.00 Brickmasons and Blockmasons，2026 年更新页面，Job Zone 1-2（SVP 低于 6.0），该职业未被标注 Bright Outlook。官方职责为「使用砂浆及其他物质铺设并粘合建筑材料，如砖、结构瓦、混凝土砌块、煤渣砌块、玻璃砖和陶土砖，以建造或修复墙体、隔断、拱门、下水道和其他结构」；共15项任务（12Core、2Supplemental、1New；新无人机检查条目重要度未公布），高重要度任务包括按基准点量距并标记放线（93）、做角并拉线控制皮数（89）、涂抹并抹平砂浆（87）、计算角度与皮数并确定垂直与水平（84）、切割砖与砌块（83）、解读图纸并计算材料（82）。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -24244,23 +24291,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：国家统计局《2025 年城镇单位就业人员年平均工资情况》（2026-05-15 发布）按行业门类与岗位大类公布平均工资，但没有单列「砖石与砌块工」这一职业；本页按证据路由只发布租赁和商务服务业行业均值 110,162 元/年作为显式代理，并明确它不是本职业的职业工资。"
+              "NBS2025建筑业税前年平均工资：城镇非私营92,036/私营66,275元；规模以上（有资质建筑业）全部79,161、生产制造及有关人员69,081元。该人员类含建筑施工，但仍混合多职业；按实际单位行业和本人职责匹配，非砌筑工中位、起薪或月薪。 精确全国及城市职业工资缺口保留。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.onet-structured-fields-block.3",
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.onet-structured-fields-block",
-          "data": {
-            "paragraphs": [
-              "BLS现行SOC 47-2021预测：2025年就业62,400人，2035年63,100人；2025—2035年增长1.1%、净增700人，年均约4,100个职位空缺。空缺包含人员转岗、退出劳动力市场与净增长需求，不是每年新增4,100个岗位或个人录用保证。 O*NET摘要的2024年74,100人、2024—2034年Average（3%—4%）与5,600个年均空缺属于历史期间，不能混入本页现行预测。"
-            ]
-          },
-          "id": "brickmasons-blockmasons-and-stonemasons.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "bls-ep-2025-2035"
+            "nbs-current"
           ],
           "type": "prose"
         },
@@ -24269,10 +24305,30 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业分布与工具信号：O*NET 2024 年行业分布为建筑业 69%、其他行业 31%；技术清单共 7 类，其中 4 项标注为 Hot Technology。行业分布描述统计分类，不能推导行业工资或个人岗位归属。"
+              "O*NET已更新2025—2035，与BLS表1.2同期：62,400→63,100人，BLS增长1.1%/净增700人/年均4,100空缺；ONet与OOH增长四舍五入1%。空缺含替代和增长，非每年新增或个人录用保证。"
+            ]
+          },
+          "id": "brickmasons-blockmasons-and-stonemasons.profile.onet-structured-fields-block.4",
+          "source_refs": [
+            "bls-ep-2025-2035",
+            "trends-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "O*NET当前2025美国行业分布：建筑业78%、其他22%。不是中国行业归属、工资解释或个人雇主分类。 详细页列7类软件，Hot单页4项产品：Office/Excel各见于1%的2025美国唯一招聘广告，QuickBooks/Windows比例未公布，不填0。估算、CAD与结构计算产品在详细清单，不是Hot单页另列产品；7类与4产品不是同一指标，均非采用率、必备技能或AI替代率。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.onet-structured-fields-block.5",
+          "source_refs": [
+            "industry-current",
+            "details-current",
+            "hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -24300,6 +24356,9 @@
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.profile.work-context-block.1",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         }
       ]
@@ -25038,10 +25097,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把数字化工具用在图纸与节点说明查看、材料用量估算、切割排布与灰缝排版计算、工程量与工时统计等可复核环节；放线、砂浆状态判断、垂直度控制与外观质量仍须由人负责。"
+              "编辑任务分析：把数字化工具用在图纸与节点说明查看、材料用量估算、切割排布与灰缝排版计算、工程量与工时统计等可复核环节；放线、砂浆状态判断、垂直度控制与外观质量仍须由人负责。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.13",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25060,10 +25123,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "引入工具前先明确可用环节、图纸与工程量数据的知悉范围、安全技术交底与验收流程、记录填写与复核责任人，保证任何输出都回到可追溯的图纸、方案与验收记录。"
+              "编辑任务分析：引入工具前先明确可用环节、图纸与工程量数据的知悉范围、安全技术交底与验收流程、记录填写与复核责任人，保证任何输出都回到可追溯的图纸、方案与验收记录。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.15",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25082,10 +25149,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把训练重点放在读图与放线、砂浆与材料性能、皮数与垂直度控制、切割与勾缝手法、高处与户外作业安全上，同时训练对软件输出的核对习惯与对工艺问题的报告意识。"
+              "编辑任务分析：把训练重点放在读图与放线、砂浆与材料性能、皮数与垂直度控制、切割与勾缝手法、高处与户外作业安全上，同时训练对软件输出的核对习惯与对工艺问题的报告意识。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.17",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25184,10 +25255,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明该职业的 7 类软件与工具及 4 项 Hot Technology 标注；不代表设备自动化程度或岗位替代。"
+              "详细页列7类软件，Hot单页4项产品：Office/Excel各见于1%的2025美国唯一招聘广告，QuickBooks/Windows比例未公布，不填0。估算、CAD与结构计算产品在详细清单，不是Hot单页另列产品；7类与4产品不是同一指标，均非采用率、必备技能或AI替代率。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.26",
+          "source_refs": [
+            "details-current",
+            "hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -25206,10 +25281,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明该职业的行业分布；不能推导行业工资或就业规模。"
+              "O*NET当前2025美国行业分布：建筑业78%、其他22%。不是中国行业归属、工资解释或个人雇主分类。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.28",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -25228,10 +25306,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现行就业指标采用BLS2025—2035年精确SOC 47-2021表；原O*NET摘要链接只解释历史2024—2034期间。"
+              "O*NET已更新2025—2035，与BLS表1.2同期：62,400→63,100人，BLS增长1.1%/净增700人/年均4,100空缺；ONet与OOH增长四舍五入1%。空缺含替代和增长，非每年新增或个人录用保证。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.30",
+          "source_refs": [
+            "trends-current",
+            "bls-ep-2025-2035"
+          ],
           "type": "prose"
         },
         {
@@ -25261,10 +25343,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表比较三组工作方向在自动化影响上的差别：哪些环节可被辅助，哪些判断与责任仍由人承担。"
+              "编辑任务分析：下表比较三组工作方向在自动化影响上的差别：哪些环节可被辅助，哪些判断与责任仍由人承担。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.33",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25272,10 +25358,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "图纸与节点说明查看、材料用量与工程量计算、切割排布可辅助完成。"
+              "编辑任务分析：图纸与节点说明查看、材料用量与工程量计算、切割排布可辅助完成。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.34",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25283,10 +25373,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "决定放线基准、皮数与垂直度控制方式、砂浆状态是否可用，并对实体质量与安全负责。"
+              "编辑任务分析：决定放线基准、皮数与垂直度控制方式、砂浆状态是否可用，并对实体质量与安全负责。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.35",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25294,10 +25388,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工程量统计、工时记录与材料盘点可自动汇总。"
+              "编辑任务分析：工程量统计、工时记录与材料盘点可自动汇总。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.36",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25305,10 +25403,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核对实际材料消耗与图纸要求、确认成品尺寸与外观、记录偏差并承担质量责任。"
+              "编辑任务分析：核对实际材料消耗与图纸要求、确认成品尺寸与外观、记录偏差并承担质量责任。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.37",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25316,10 +25418,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "自检记录、工序交接单与遗留问题清单初稿可由工具生成。"
+              "编辑任务分析：自检记录、工序交接单与遗留问题清单初稿可由工具生成。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.38",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25327,10 +25433,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不得把软件输出当作验收结论或模板支撑方案，须逐条对照实物与规范核对并由责任人确认。"
+              "编辑任务分析：不得把软件输出当作验收结论或模板支撑方案，须逐条对照实物与规范核对并由责任人确认。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.39",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25338,10 +25448,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、行业分布、就业与工资数据以及任务暴露研究，不是 AI 替代率或岗位数量预测。"
+              "证据卡的职责、招聘技术、BLS工资/就业和ILO任务暴露分别解读。BLS确实提供职业数量预测；ILO暴露和软件招聘指标不等采用率、AI替代率或失业预测。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.40",
+          "source_refs": [
+            "bls-ep-2025-2035",
+            "ilo-genai",
+            "hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -25415,10 +25530,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "官方 15 项任务与 41 项工作活动"
+              "15项具体任务（12Core、2Supplemental、1New）与41项一般活动，另15项详细活动。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.47",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25426,10 +25544,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务包含按基准点量距并标记放线（93）、做角并拉线控制皮数（89）、涂抹并抹平砂浆（87）、计算角度与皮数并确定垂直与水平（84）、切割砖与砌块（83）、解读图纸并计算材料（82）；工作活动以操作与搬运物件（79）、检查设备与结构（78）、获取信息（77）为主。"
+              "任务包含按基准点量距并标记放线（93）、做角并拉线控制皮数（89）、涂抹并抹平砂浆（87）、计算角度与皮数并确定垂直与水平（84）、切割砖与砌块（83）、解读图纸并计算材料（82）；工作活动以操作与搬运物件（79）、检查设备与结构（78）、获取信息（77）为主。 新无人机检查高大结构任务重要度未公布，不填0，也不把它推为人人必修或持证授权。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.48",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25470,10 +25591,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面列出 7 类软件与工具，其中 4 项标注 Hot Technology：QuickBooks、Microsoft Office、Microsoft Windows 与 Microsoft Excel；另有工程估算与结构计算类软件。"
+              "详细页列7类软件，Hot单页4项产品：Office/Excel各见于1%的2025美国唯一招聘广告，QuickBooks/Windows比例未公布，不填0。估算、CAD与结构计算产品在详细清单，不是Hot单页另列产品；7类与4产品不是同一指标，均非采用率、必备技能或AI替代率。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.52",
+          "source_refs": [
+            "details-current",
+            "hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -25481,10 +25606,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "为 Brickmasons and Blockmasons（SOC 47-2021）口径 的本精确职业口径，不是父类或行业代理数据，也不构成个人就业保证。"
+              "实际OOH按表区分：工资62,120及预测62400→63100为精确47-2021；顶部工资58,270、就业277,700及行业工资为Masonry Workers群体。4,100空缺与1.1%精确增长来自表1.2，不能全部标成精确或全部标成群体。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.53",
+          "source_refs": [
+            "bls-entry",
+            "bls-ep-2025-2035"
+          ],
           "type": "prose"
         },
         {
@@ -25503,10 +25632,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "砌筑工群体的入门学历、培训、工资与 2025—2035 年预测（合计口径）"
+              "OOH砌筑工群体资料及其精确分职业行，按各表范围解读。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.55",
+          "source_refs": [
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -25591,7 +25723,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露、设备自动化和就业数量分别测量。BLS现行SOC 47-2021预测：2025年就业62,400人，2035年63,100人；2025—2035年增长1.1%、净增700人，年均约4,100个职位空缺。空缺包含人员转岗、退出劳动力市场与净增长需求，不是每年新增4,100个岗位或个人录用保证。 BLS认为预制砌体及板材安装可限制部分需求，维修维护提供需求；这是行业就业判断，不能归因为生成式AI单独作用，责任仍由人承担也不保证岗位不减少。"
+              "任务暴露、设备自动化和就业数量分别测量。BLS现行SOC 47-2021预测：2025年就业62,400人，2035年63,100人；2025—2035年增长1.1%、净增700人，年均约4,100个职位空缺。空缺包含人员转岗、退出劳动力市场与净增长需求，不是每年新增4,100个岗位或个人录用保证。 BLS就业展望把需求联系到新建筑与道路建设，并说明预制板可能限制现场安装需求；这是行业就业判断，不能归因为生成式AI单独作用，责任仍由人承担也不保证岗位不减少。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.63",
@@ -25628,10 +25760,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不需要会写代码。O*NET 技术清单只列出 7 类工具（含 4 项 Hot Technology），现场能力（读图放线、砌筑手法、切割与勾缝）才是门槛；数字化工具有助于算量与记录，但不替代工艺与安全训练。"
+              "7软件类/4Hot产品清单不能证明所有岗位无需代码，也不构成全员必备。按具体雇主核数字技能；读图放线、砌筑、切割勾缝和安全训练有职责依据，不能由软件使用代替。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.66",
+          "source_refs": [
+            "details-current",
+            "hot-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25639,10 +25776,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 技术清单 / 详细资料"
+              "实际详细页支持7软件类别与任务；4Hot招聘产品比例另见Hot单页。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.67",
+          "source_refs": [
+            "details-current",
+            "hot-current"
+          ],
           "type": "prose"
         },
         {
@@ -25650,10 +25791,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "图纸与节点查看、材料与工程量计算、切割排布、工时与进度记录等；这些环节可复核、可追溯。"
+              "编辑任务分析：图纸与节点查看、材料与工程量计算、切割排布、工时与进度记录等；这些环节可复核、可追溯。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.68",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25661,10 +25806,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 详细资料 / 本页方法说明"
+              "实际链接Hot单页，只支持招聘技术信号；辅助用途排序属编辑分析。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.69",
+          "source_refs": [
+            "hot-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25698,10 +25847,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具输出不自行取得岗位授权、工序验收权或执业资格。NIST AI RMF要求明确人的角色、责任与监督；中国工程责任按适用法律、项目组织与人员职责办理，不能由美国AI框架认定。"
+              "工具输出不产生岗位授权、验收权或执业资格。NIST AI RMF1.0是自愿框架，GOVERN2.1—2.3/3.2建议明确责任、培训与人类监督；中国施工安全、质量和相应特种作业义务另按法规与实际岗位核。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.72",
+          "source_refs": [
+            "nist-pdf-current",
+            "cn-safety-current",
+            "cn-quality-current",
+            "cn-special-current"
+          ],
           "type": "prose"
         },
         {
@@ -25731,10 +25886,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页方法说明"
+              "实际custom入口可选择职业字段；本轮所读资料未给消失年份。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.75",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25753,10 +25911,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 培训与教育信息 / 自定义职业档案"
+              "实际详细页支持Job Zone与教育要求问项；培训目录另为项目检索。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.77",
+          "source_refs": [
+            "details-current",
+            "training-current"
+          ],
           "type": "prose"
         },
         {
@@ -26116,10 +26278,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "决定作业面是否具备条件、是否需要停工，并对个人安全与工序质量负责。"
+              "按实际岗位确认作业条件；中国安全条例32条规定危及人身安全紧急情况下停止或撤离权，普通偏差处理和复工按项目职责核，不能由编辑场景授予检查或恢复权限。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.110",
+          "source_refs": [
+            "cn-safety-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26215,10 +26381,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "带教新入行的学徒与劳务人员，示范规范操作并纠正不安全行为。"
+              "编辑带教场景：O*NET培训他人属于一般活动（56），非15项具体任务之一；是否对全班组质量或安全负责须有实际岗位职责。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.ai-impact.ai-impact-table.119",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26423,10 +26593,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "规模以上企业建筑业就业人员平均工资79,161元/年（2025年，宽口径代理）；岗位大类表也未单列砌筑工。"
+              "NBS2025建筑业税前年平均工资：城镇非私营92,036/私营66,275元；规模以上（有资质建筑业）全部79,161、生产制造及有关人员69,081元。该人员类含建筑施工，但仍混合多职业；按实际单位行业和本人职责匹配，非砌筑工中位、起薪或月薪。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.china-salary.career-snapshot-primary-locale.13",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26434,10 +26607,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "岗位大类平均数按《中华人民共和国职业分类大典（2022 年版）》五类岗位汇总，不区分具体职业；本页不据此推算本职业工资。"
+              "NBS五类岗位中生产制造及有关人员含工程施工；建筑业该类69,081元年平均仍非精确砌筑工，规模以上口径为有资质建筑业单位，不能与全部城镇单位覆盖混用。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.china-salary.career-snapshot-primary-locale.14",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26533,10 +26709,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "数字化工具会改变算量、排布与记录等辅助环节，但不改变中国大陆对该职业的统计口径：统计缺口与工具无关。"
+              "编辑推演：数字工具可能辅助算量与记录，效果另需测量；当前NBS资料的精确职业缺口取决统计覆盖，不能据工具存在推工资或分类必然改变或永远不变。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.china-salary.career-snapshot-primary-locale.23",
+          "source_refs": [
+            "editor-current",
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26558,10 +26738,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "初中或高中及以上学历，随班组学艺"
+              "编辑路径/比较建议：初中或高中及以上学历，随班组学艺"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.china-salary.career-snapshot-primary-locale.25",
+          "source_refs": [
+            "editor-current",
+            "cn-safety-current"
+          ],
           "type": "prose"
         },
         {
@@ -26569,10 +26753,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "总承包或专业分包项目的砌筑辅助岗位；装配式构件安装辅助岗位。"
+              "编辑路径/比较建议：总承包或专业分包项目的砌筑辅助岗位；装配式构件安装辅助岗位。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.china-salary.career-snapshot-primary-locale.26",
+          "source_refs": [
+            "editor-current",
+            "cn-safety-current"
+          ],
           "type": "prose"
         },
         {
@@ -26580,10 +26768,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "通常不独立负责放线与质量验收；应核对安全教育与交底记录、师傅带教安排与个人防护配备。"
+              "编辑路径/比较建议：通常不独立负责放线与质量验收；应核对安全教育与交底记录、师傅带教安排与个人防护配备。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.china-salary.career-snapshot-primary-locale.27",
+          "source_refs": [
+            "editor-current",
+            "cn-safety-current"
+          ],
           "type": "prose"
         },
         {
@@ -26591,10 +26783,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "技校或高职（建筑施工、装饰装修方向）"
+              "编辑路径/比较建议：技校或高职（建筑施工、装饰装修方向）"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.china-salary.career-snapshot-primary-locale.28",
+          "source_refs": [
+            "editor-current",
+            "cn-safety-current"
+          ],
           "type": "prose"
         },
         {
@@ -26602,10 +26798,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "房屋建筑砌体作业班组；市政与管沟砌筑班组；既有建筑修缮与加固班组。"
+              "编辑路径/比较建议：房屋建筑砌体作业班组；市政与管沟砌筑班组；既有建筑修缮与加固班组。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.china-salary.career-snapshot-primary-locale.29",
+          "source_refs": [
+            "editor-current",
+            "cn-safety-current"
+          ],
           "type": "prose"
         },
         {
@@ -26624,10 +26824,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "具备多个工种经验并熟悉砌体与饰面配合"
+              "编辑路径/比较建议：具备多个工种经验并熟悉砌体与饰面配合"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.china-salary.career-snapshot-primary-locale.31",
+          "source_refs": [
+            "editor-current",
+            "cn-safety-current"
+          ],
           "type": "prose"
         },
         {
@@ -26635,10 +26839,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "装饰装修与修缮改造项目的砌筑与饰面班组。"
+              "编辑路径/比较建议：装饰装修与修缮改造项目的砌筑与饰面班组。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.china-salary.career-snapshot-primary-locale.32",
+          "source_refs": [
+            "editor-current",
+            "cn-safety-current"
+          ],
           "type": "prose"
         },
         {
@@ -26646,10 +26854,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "工序验收权限仍由施工单位技术质量人员与监理行使，不因经验年限自动取得。"
+              "工序检查按单位技术质量制度及工程质量条例核，监理签字有法定环节；熟练或年限不自动取得验收权限，也不把全部工序一概称同一人员独有权限。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.china-salary.career-snapshot-primary-locale.33",
+          "source_refs": [
+            "cn-quality-current"
+          ],
           "type": "prose"
         },
         {
@@ -26657,10 +26868,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "海外施工项目经验或培训经历"
+              "编辑路径/比较建议：海外施工项目经验或培训经历"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.china-salary.career-snapshot-primary-locale.34",
+          "source_refs": [
+            "editor-current",
+            "cn-safety-current"
+          ],
           "type": "prose"
         },
         {
@@ -26668,10 +26883,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "跨国工程公司或海外项目中的砌筑作业岗位。"
+              "编辑路径/比较建议：跨国工程公司或海外项目中的砌筑作业岗位。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.china-salary.career-snapshot-primary-locale.35",
+          "source_refs": [
+            "editor-current",
+            "cn-safety-current"
+          ],
           "type": "prose"
         },
         {
@@ -26789,10 +27008,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "比较不同机会时应确认用工形式、计酬方式（日薪、计件或月薪）、工程量确认与结算周期、停工待工待遇，以及是否提供个人防护与住宿，不要把行业均值当作个人工资预期。"
+              "编辑路径/比较建议：比较不同机会时应确认用工形式、计酬方式（日薪、计件或月薪）、工程量确认与结算周期、停工待工待遇，以及是否提供个人防护与住宿，不要把行业均值当作个人工资预期。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.china-salary.career-snapshot-primary-locale.46",
+          "source_refs": [
+            "editor-current",
+            "cn-safety-current"
+          ],
           "type": "prose"
         },
         {
@@ -27250,12 +27473,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资采用2025年OEWS精确SOC 47-2021；现行就业采用BLS2025—2035年同职业表。O*NET摘要的2024年74,100人、2024—2034年Average（3%—4%）与5,600个年均空缺属于历史期间，不能混入本页现行预测。 下列行业工资为OOH Masonry Workers群体代理，非本职业精确行业中位数。"
+              "工资为2025全国OEWS精确47-2021；ONet/BLS已同用2025—2035。原文提及2024—2034是修前历史记录，当前摘要已更新。行业工资表仍是OOH Masonry Workers群体代理，非精确职业行业中位。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "bls-ep-2025-2035",
+            "onet-localwages",
+            "trends-current",
             "bls-entry"
           ],
           "type": "prose"
@@ -27276,10 +27500,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国O*NET列Job Zone 1-2、SVP低于6.0；教育问项70%选高中或同等学历、13%低于高中、13%上过大学但未取得学位，是受访者对岗位教育要求的回答，不是从业学历构成。BLS列典型入门学历为高中或同等学历、在岗训练为学徒制；OOH说明学徒或在岗学习路径，部分岗位接受低于高中学历，具体项目条件另核。"
+              "O*NET Job Zone1—2、SVP低于6.0；教育要求问项70%答高中同等、13%低于高中、13%大学未取得学位，是岗位要求回答，非从业学历构成或全员准入。BLS典型入门为高中同等和学徒训练，OOH说明学徒或在岗学习；低于高中这一问项来自ONet，不归为本次OOH直接结论。具体项目准入另核。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.us-salary.career-snapshot-secondary-locale.27",
+          "source_refs": [
+            "details-current",
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -27298,10 +27526,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与雇主类型影响报酬：O*NET 2024 年行业分布为建筑业 69%、其他行业 31%，不同雇主的用工形式与计酬方式不同。"
+              "O*NET当前2025美国行业分布：建筑业78%、其他22%。不是中国行业归属、工资解释或个人雇主分类。 比较计酬、职责与雇主为编辑核对建议，行业分布未测其对工资的效应。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.us-salary.career-snapshot-secondary-locale.29",
+          "source_refs": [
+            "industry-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27507,10 +27739,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资分位来自O*NET展示的BLS2025全国OEWS；现行就业来自BLS2025—2035年表1.2，历史O*NET摘要单列解释。行业表采用OOH群体代理，不当作47-2021精确行业工资。"
+              "工资2025全国精确47-2021；就业当前ONet/BLS2025—2035同口径，BLS表1.2增长1.1%、ONet/OOH四舍五入1%；OOH行业工资是群体代理。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.us-salary.career-snapshot-secondary-locale.48",
+          "source_refs": [
+            "onet-localwages",
+            "trends-current",
+            "bls-ep-2025-2035",
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -27518,10 +27756,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "实际收入还受教育与训练、行业与雇主类型、职责范围与责任层级、所在地区与季节性影响。"
+              "编辑建议比较教育训练、职责、地区、工时与季节性条款；本页没有这些因素对砌筑工资影响的单独量化或因果估计。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.us-salary.career-snapshot-secondary-locale.49",
+          "source_refs": [
+            "editor-current",
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -27810,7 +28052,7 @@
                 "url": "https://www.onetonline.org/link/summary/47-2021.00"
               },
               {
-                "entity": "O*NET-SOC 47-2021.00 职业摘要（入门学历构成）",
+                "entity": "O*NET教育要求问项（非从业学历构成）",
                 "id": "link-19",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/47-2021.00"
@@ -27831,10 +28073,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "霍兰德兴趣代码为 RC（现实型与常规型）：现实型对应设计、建造或修理设备、材料与结构，具体领域为体力与手工劳动、建筑与木作；常规型对应按既定程序与规定组织信息与数据。"
+              "兴趣代码RC；现实型99、常规型47为群体职业兴趣，非个人要求分。具体兴趣中体力手工93、建筑木作30较高，另列工程20、数学统计16等，不能把前两项称全部领域。兴趣相近不证明施工、安全或验收能力。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.fit.personality-fit-block.2",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28056,10 +28301,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力有帮助：需要在工期压力、天气变化与高处作业中保持专注，在发现偏差或材料问题时坚持停下并报告。但这类能力不能用单一分数定义，也不能替代安全训练与工艺纪律。"
+              "编辑观察：在工期与天气变化中核自己能否持续记录、报告并接受纠正；O*NET风格含压力耐受33、自控25，但不是情绪智力考试或绩效效度，不能推情绪分数准入门槛。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.fit.personality-fit-block.22",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28078,11 +28327,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能在工期压力下拒绝跳过安全措施，比情绪分数高低更重要。",
+              "编辑观察：工期压力下能否遵守安全条件与报告问题；未取得这与EI分数对绩效的比较效应。",
               "愿意承认尺寸偏差并返工，是专业能力的一部分。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.fit.personality-fit-block.24",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "list"
         },
         {
@@ -28101,10 +28354,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。真正有解释力的证据是在师傅带教下的实际操作与自检表现。"
+              "编辑观察建议：边界：职业适配判断不能由人格测试、兴趣代码或任何单次测试决定；本页提供的信号只用于提出核对问题。可进一步核对的证据是在师傅带教下的实际操作与自检表现。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.fit.personality-fit-block.26",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28112,10 +28369,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答：更有解释力的适配信号是能按图放线并把垂直度、平整度与灰缝控制到位、愿意接受师傅与质量检查、在发现偏差或材料问题时如实报告；对工具或力气的自我评价本身不足以证明胜任。"
+              "编辑观察建议：直接回答：可核对的适配信号是能按图放线并把垂直度、平整度与灰缝控制到位、愿意接受师傅与质量检查、在发现偏差或材料问题时如实报告；对工具或力气的自我评价本身不足以证明胜任。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.fit.personality-fit-block.27",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28332,10 +28593,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合与否不取决于内外向。工作情境显示 64% 每天进行面对面讨论、57% 每天通电话，51% 表示团队协作极其重要、34% 非常重要；能否在班组中清楚交接工序与质量要求比外向程度更关键。"
+              "编辑观察建议：适合与否不取决于内外向。工作情境显示 64% 每天进行面对面讨论、57% 每天通电话，51% 表示团队协作极其重要、34% 非常重要；能否在班组中清楚交接工序与质量要求可作为观察内容；未测与外向程度的预测效度比较。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.fit.personality-fit-block.47",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28398,10 +28663,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力确实有帮助：需要在工期压力与天气变化中保持专注、坚持按规范作业。但这类能力不能用单一分数定义，也不能替代安全训练与工艺纪律。"
+              "编辑观察：在工期与天气变化中核自己能否持续记录、报告并接受纠正；O*NET风格含压力耐受33、自控25，但不是情绪智力考试或绩效效度，不能推情绪分数准入门槛。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.fit.personality-fit-block.53",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28464,10 +28733,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "Job Zone和教育要求问项由O*NET职业摘要/详情支持；学徒训练另参照BLS，培训查询链接只供查项目。"
+              "实际localtraining为59关联美国项目，IPEDS2025—26/授位2024—25；非实时招生或中国资格。Job Zone与教育问项另由摘要/详情支持。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.fit.personality-fit-block.59",
+          "source_refs": [
+            "training-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28497,10 +28770,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "原O*NET摘要解释2024—2034历史就业字段；当前就业主指标另采用BLS2025—2035精确职业表。"
+              "O*NET已更新2025—2035，与BLS表1.2同期：62,400→63,100人，BLS增长1.1%/净增700人/年均4,100空缺；ONet与OOH增长四舍五入1%。空缺含替代和增长，非每年新增或个人录用保证。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.fit.personality-fit-block.62",
+          "source_refs": [
+            "trends-current",
+            "bls-ep-2025-2035"
+          ],
           "type": "prose"
         },
         {
@@ -28519,10 +28796,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "培训查询入口只用于查美国项目；不能用它证明Job Zone、教育问项或中国资格。"
+              "实际链接摘要支持身份、RC、Job Zone及现行工资预测；不是localtraining入口。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.fit.personality-fit-block.64",
+          "source_refs": [
+            "onet-summary",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -28530,10 +28811,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于职业身份与官方职责描述。"
+              "实际摘要教育问项70/13/13为岗位教育要求回答，不是从业学历构成或统一准入门槛。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.fit.personality-fit-block.65",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28552,10 +28836,14 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "适配信号：更有解释力的信号是能按图放线并把垂直度、平整度与灰缝控制到位、愿意接受师傅与质量检查、在发现偏差或材料问题时如实报告；对工具或力气的自我评价本身不足以证明胜任。"
+              "编辑观察建议：适配信号：可核对的信号是能按图放线并把垂直度、平整度与灰缝控制到位、愿意接受师傅与质量检查、在发现偏差或材料问题时如实报告；对工具或力气的自我评价本身不足以证明胜任。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.fit.riasec-fit-block.9",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28574,10 +28862,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 兴趣代码：RC（现实型与常规型）。现实型下的具体领域为体力与手工劳动、建筑与木作；该职业页面未列出常规型的进一步子领域。"
+              "兴趣代码RC；具体兴趣中体力手工93、建筑木作30较高，数学统计16等也列出，不能将前两项说成全部领域或常规型绝无相关细分。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.fit.riasec-fit-block.11",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28729,6 +29020,24 @@
                 "id": "link-6",
                 "relation": "career.source",
                 "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "entity": "OSHA1926.1153建筑硅尘",
+                "id": "link-7",
+                "relation": "career.source",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.1153"
+              },
+              {
+                "entity": "建设工程质量管理条例",
+                "id": "link-8",
+                "relation": "career.source",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_e42ecef60e9146af83cf9846821fac6c.html"
+              },
+              {
+                "entity": "BLS砌筑工作环境",
+                "id": "link-9",
+                "relation": "career.source",
+                "url": "https://www.bls.gov/ooh/construction-and-extraction/brickmasons-blockmasons-and-stonemasons.htm"
               }
             ]
           },
@@ -28795,10 +29104,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按安全技术交底作业，正确使用安全帽、安全带与防护用品，作业前检查脚手架与通道。"
+              "按中国安全条例27/32—35条核交底、防护提供及设备管理；作业人员检查可用状态并报告，不能把本人观察当作脚手架搭设验收或专业检查资格。现场集体防护和具体系挂条件按实际方案核。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.risk.career-risk-cards.13",
+          "source_refs": [
+            "cn-safety-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28839,10 +29152,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按要求立皮数杆、拉控制线并逐皮自检，偏差超限时停止并报告。"
+              "按图纸与技术标准落实尺寸和灰缝核对；超限报告、返工或暂停按实际工序职责办理。质量条例28—33规定单位检验、材料不得不合格使用与培训，编辑核对步骤不授复工或验收权限。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.risk.career-risk-cards.17",
+          "source_refs": [
+            "cn-quality-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28977,10 +29294,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在分包合同与交底记录中明确作业范围、材料与工具提供、检查点与责任主体。"
+              "安全条例24条：总包对现场安全负总责，总包和分包对分包工程安全承担连带责任，分包服从总包管理；合同明确权利义务不能免除法定责任。材料工具和检查点书面核对属编辑建议。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.risk.career-risk-cards.29",
+          "source_refs": [
+            "cn-safety-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29010,10 +29331,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "工期紧张、天气停工与计件结算压力可能导致疲劳作业与违章。"
+              "编辑风险场景：工期、计件或天气变化下应关注疲劳与安全条件。BLS说明加班和天气影响安排，但未给本职业计件导致违章的因果统计。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.risk.career-risk-cards.32",
+          "source_refs": [
+            "bls-entry",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29043,10 +29368,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明美国职业身份与官方任务口径，不用于风险评估。"
+              "实际按钮链接摘要，支持美国身份及当前数据，非具体风险率或现场SOP。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.risk.career-risk-cards.35",
+          "source_refs": [
+            "onet-summary"
+          ],
           "type": "prose"
         },
         {
@@ -29054,10 +29382,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明官方任务、工作活动与工作情境口径，不用于风险评估。"
+              "实际按钮链接详情，支持15任务/41活动/57情境，非个人事故概率。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.risk.career-risk-cards.36",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -29065,10 +29396,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明 Brickmasons and Blockmasons（SOC 47-2021）口径 的就业与预测，不用于风险评估。"
+              "实际按钮链接中国安全条例：单位/项目责任、交底、培训、防护及总分包责任，非BLS预测。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.risk.career-risk-cards.37",
+          "source_refs": [
+            "cn-safety-current"
+          ],
           "type": "prose"
         },
         {
@@ -29076,10 +29410,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明施工单位的安全生产责任制度、教育培训与项目负责人资格要求。"
+              "实际按钮链接OSHA美国建筑安全入口，指向建筑法规与指导，非中国施工单位责任依据。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.risk.career-risk-cards.38",
+          "source_refs": [
+            "osha-current"
+          ],
           "type": "prose"
         },
         {
@@ -29087,10 +29424,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明建筑行业高处、坠落、粉尘与临边作业等一般安全要求，不构成对具体项目的合规判定。"
+              "实际按钮链接NIST自愿AI治理框架，非坠落硅尘法或中国工程SOP。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.risk.career-risk-cards.39",
+          "source_refs": [
+            "nist-pdf-current"
+          ],
           "type": "prose"
         }
       ]
@@ -29275,10 +29615,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界：本节描述的是可核对的资格与路径信息，不构成对任何机构、项目或个人的评价，也不提供录用或通过考核的建议。"
+              "路径阶段、工作样例与岗位名为编辑建议，非统一晋级制度。中国资格、带教与现场授权分别核；美国Job Zone通用训练期不是所有学徒项目固定周期。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.path.career-path-block.11",
+          "source_refs": [
+            "editor-current",
+            "details-current",
+            "cn-safety-current"
+          ],
           "type": "prose"
         },
         {
@@ -29407,10 +29752,17 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国BLS说明学徒与在岗学习路径；中国实际培训、带教、资格和用工要求向目标单位及主管部门核，本页不声称已测得各路径占比。"
+              "美国BLS说明学徒与在岗学习；ONet有6个批准注册学徒标题、59关联训练项目和5关联认证（技能、检查、测试、主管角色不同），非实时招生或5个人人必备许可。中国一般砌筑与相应特种作业要求分核，未测路径占比。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.path.career-path-block.23",
+          "source_refs": [
+            "details-current",
+            "training-current",
+            "cert-current",
+            "bls-entry",
+            "cn-special-current"
+          ],
           "type": "prose"
         },
         {
@@ -29429,10 +29781,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "Job Zone和教育要求问项由O*NET摘要/详情支持；原培训查询链接只用于查美国项目。"
+              "实际localtraining目录59项目，来源IPEDS2025—26/授位2024—25及职业课程映射；不是Job Zone、全员技能门槛或当前可报名清单。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.path.career-path-block.25",
+          "source_refs": [
+            "training-current"
+          ],
           "type": "prose"
         },
         {
@@ -29440,10 +29795,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的入门培训路径与就业口径。"
+              "实际OOH含入门与在岗/学徒路径、精确职业行和群体表；具体学徒年限、费用与接收条件向实际项目核。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.path.career-path-block.26",
+          "source_refs": [
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -30186,8 +30544,8 @@
                 "id": "education",
                 "values": [
                   "美国学历与训练",
-                  "O*NET Job Zone1-2、SVP低于6.0；教育要求问项70%高中同等、13%低于高中、13%大学未取得学位。是岗位要求回答，非从业学历构成。",
-                  "BLS典型高中同等学历、学徒训练；OOH也说明在岗学习及部分岗位接受低于高中。具体项目与雇主条件另核；本职业页面没有Bright Outlook标签。"
+                  "O*NET Job Zone1—2、SVP低于6.0；教育要求问项70%答高中同等、13%低于高中、13%大学未取得学位，是岗位要求回答，非从业学历构成或全员准入。BLS典型入门为高中同等和学徒训练，OOH说明学徒或在岗学习；低于高中这一问项来自ONet，不归为本次OOH直接结论。具体项目准入另核。",
+                  "BLS典型高中同等与学徒训练，OOH也说明在岗学习；ONet教育问项13%低于高中不等本次OOH直接陈述。具体项目与雇主条件另核，当前页面没有Bright Outlook标签。"
                 ]
               },
               {
@@ -30210,13 +30568,19 @@
                 "id": "tools",
                 "values": [
                   "软件与现场工具",
-                  "O*NET列7类软件、4项Hot Technology：QuickBooks、Office、Windows、Excel；其他含估算及结构软件，软件清单不是全员必需或自动化率。",
+                  "详细页列7类软件，Hot单页4项产品：Office/Excel各见于1%的2025美国唯一招聘广告，QuickBooks/Windows比例未公布，不填0。估算、CAD与结构计算产品在详细清单，不是Hot单页另列产品；7类与4产品不是同一指标，均非采用率、必备技能或AI替代率。",
                   "现场任务涉及量测、镘刀、切割与搅拌等工具；实际操作需设备和安全训练。纸面MA-01只用纸笔或表格，不要求购买施工设备。"
                 ]
               }
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.path.employer-evidence.1",
+          "source_refs": [
+            "details-current",
+            "hot-current",
+            "cn-safety-current",
+            "cn-special-current"
+          ],
           "title": "雇主通常看什么证据",
           "type": "cards"
         },
@@ -30459,7 +30823,7 @@
                 "计划进入美国该职业的人",
                 "BLS典型入门学历为高中或同等。",
                 "不是所有雇主的硬性门槛。",
-                "部分岗位接受低于高中学历并有在岗培训。",
+                "ONet教育要求问项13%答低于高中；BLS典型学历不等全部雇主统一门槛，项目条件另核。",
                 "学习时间按本人基础与项目核。",
                 "学历本身不等于岗位授权或安全资格。"
               ],
@@ -30469,7 +30833,7 @@
                 "BLS 把学徒制列为常见入行路径之一。",
                 "BLS列典型训练为学徒制；OOH也说明在岗学习路径。",
                 "项目准入及课程在岗要求向具体项目核。",
-                "一般数年的在岗与课程时间投入。",
+                "BLS本次OOH未给全部学徒统一年限；具体课程/在岗时长和费用向项目核。",
                 "学徒经历不自动产生工长或验收权限。"
               ],
               [
@@ -30486,9 +30850,9 @@
                 "实际从事主管部门规定相应工种的人",
                 "取得对应工种证书方可从事相应特种作业。",
                 "不是所有砌筑或高处临边岗位统一取证；先核工种范围。",
-                "住建部令第60号：专门培训考核取证；首次上岗前至少6个月指导实习，不得独立作业。",
+                "令60号7/9条：满18岁、初中以上、规定体检/安全记录条件和完成培训；理论先通过，再操作考核，均通过取证。22条首次上岗前至少6个月实习，由同工种6年以上人员指导，不独立作业。",
                 "培训、考核及规定实习时间，费用向实施机构核。",
-                "证书只对应载明工种，不代替现场条件、交底或工序验收权。"
+                "载明工种适用；证书有效3年，延期提前30个工作日申请，按体检、安全记录、培训及记分条件复核；不能泛化全部砌筑或高处临边岗位。"
               ],
               [
                 "项目负责人执业资格（中国大陆）",
@@ -30512,7 +30876,10 @@
           },
           "id": "brickmasons-blockmasons-and-stonemasons.path.credential-decision.1",
           "source_refs": [
-            "cn-special-construction-2026"
+            "cn-special-current",
+            "cn-safety-current",
+            "bls-entry",
+            "editor-current"
           ],
           "title": "资格选择",
           "type": "table"
@@ -30999,10 +31366,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "原O*NET摘要只说明2024—2034历史预测，不作为本页现行就业指标来源。"
+              "O*NET已更新2025—2035，与BLS表1.2同期：62,400→63,100人，BLS增长1.1%/净增700人/年均4,100空缺；ONet与OOH增长四舍五入1%。空缺含替代和增长，非每年新增或个人录用保证。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.30",
+          "source_refs": [
+            "trends-current",
+            "bls-ep-2025-2035"
+          ],
           "type": "prose"
         },
         {
@@ -31032,10 +31403,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明官方任务与工作活动口径。"
+              "实际链接BLS OOH支持职责、训练、精确职业预测行与群体工资/环境，不是ONet41活动清单。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.33",
+          "source_refs": [
+            "bls-entry"
+          ],
           "type": "prose"
         },
         {
@@ -31043,10 +31417,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足石材加工与安装训练。"
+              "编辑转岗比较：需要补足石材加工与安装训练。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.34",
+          "source_refs": [
+            "adj-stone",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31054,10 +31432,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是砌筑手感与放线能力。"
+              "编辑转岗比较：可迁移的是砌筑手感与放线能力。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.35",
+          "source_refs": [
+            "adj-stone",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31065,10 +31447,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离很近：工艺相通，材料不同。"
+              "编辑转岗比较：距离很近：工艺相通，材料不同。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.36",
+          "source_refs": [
+            "adj-stone",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31076,10 +31462,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足木工工具与节点做法训练。"
+              "编辑转岗比较：需要补足木工工具与节点做法训练。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.37",
+          "source_refs": [
+            "adj-wood",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31087,10 +31477,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是尺寸与安装意识。"
+              "编辑转岗比较：可迁移的是尺寸与安装意识。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.38",
+          "source_refs": [
+            "adj-wood",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31098,10 +31492,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：材料与工序差异较大。"
+              "编辑转岗比较：距离中等：材料与工序差异较大。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.39",
+          "source_refs": [
+            "adj-wood",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31109,10 +31507,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足薄层粘结与找平工艺训练。"
+              "编辑转岗比较：需要补足薄层粘结与找平工艺训练。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.40",
+          "source_refs": [
+            "adj-tile",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31120,10 +31522,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是基层处理与对缝经验。"
+              "编辑转岗比较：可迁移的是基层处理与对缝经验。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.41",
+          "source_refs": [
+            "adj-tile",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31131,10 +31537,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属饰面与砌筑链条。"
+              "编辑转岗比较：距离较近：同属饰面与砌筑链条。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.42",
+          "source_refs": [
+            "adj-tile",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31142,10 +31552,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足地面找平与铺贴工艺训练。"
+              "编辑转岗比较：需要补足地面找平与铺贴工艺训练。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.43",
+          "source_refs": [
+            "adj-floor",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31153,10 +31567,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是基层处理能力。"
+              "编辑转岗比较：可迁移的是基层处理能力。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.44",
+          "source_refs": [
+            "adj-floor",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31164,10 +31582,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：作业姿态与对象不同。"
+              "编辑转岗比较：距离中等：作业姿态与对象不同。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.45",
+          "source_refs": [
+            "adj-floor",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31175,10 +31597,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补混凝土表面收面、模板定位与伸缩缝处理训练，不把钢筋绑扎当成本职业主要工作。"
+              "编辑转岗比较：需补混凝土表面收面、模板定位与伸缩缝处理训练，不把钢筋绑扎当成本职业主要工作。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.46",
+          "source_refs": [
+            "adj-cement",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31186,10 +31612,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是现场配合与尺寸控制能力。"
+              "编辑转岗比较：可迁移的是现场配合与尺寸控制能力。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.47",
+          "source_refs": [
+            "adj-cement",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31197,10 +31627,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同为结构施工链条。"
+              "编辑转岗比较：距离较近：同为结构施工链条。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.48",
+          "source_refs": [
+            "adj-cement",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31208,10 +31642,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补钢筋或钢筋网定位、固定与绑扎及目标设备操作训练。"
+              "编辑转岗比较：需补钢筋或钢筋网定位、固定与绑扎及目标设备操作训练。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.49",
+          "source_refs": [
+            "adj-rebar",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31219,10 +31657,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移现场尺寸核对与工序交接习惯，不能代替钢筋作业训练。"
+              "编辑转岗比较：可迁移现场尺寸核对与工序交接习惯，不能代替钢筋作业训练。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.50",
+          "source_refs": [
+            "adj-rebar",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31230,10 +31672,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑比较：工地协作可迁移，材料与工法另学，非职业准入保证。"
+              "编辑转岗比较：编辑比较：工地协作可迁移，材料与工法另学，非职业准入保证。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.51",
+          "source_refs": [
+            "adj-rebar",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31241,10 +31687,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补涂料、基层、涂装设备与适用环境控制知识。"
+              "编辑转岗比较：需补涂料、基层、涂装设备与适用环境控制知识。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.52",
+          "source_refs": [
+            "adj-paint",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31252,10 +31702,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移基层观察与外观质量意识，不能代替涂装训练。"
+              "编辑转岗比较：可迁移基层观察与外观质量意识，不能代替涂装训练。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.53",
+          "source_refs": [
+            "adj-paint",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31263,10 +31717,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "编辑比较：工序可相邻，但目标材料与设备不同，需另核训练。"
+              "编辑转岗比较：编辑比较：工序可相邻，但目标材料与设备不同，需另核训练。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.54",
+          "source_refs": [
+            "adj-paint",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31274,10 +31732,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足材料转运与场地配合训练。"
+              "编辑转岗比较：需要补足材料转运与场地配合训练。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.55",
+          "source_refs": [
+            "adj-labor",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31285,10 +31747,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是体力与现场适应能力。"
+              "编辑转岗比较：可迁移的是体力与现场适应能力。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.56",
+          "source_refs": [
+            "adj-labor",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31296,10 +31762,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离很近：常在同一班组内转换。"
+              "编辑转岗比较：距离很近：可能有现场协作经验；未取得班组内转岗频率统计。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.market-signals.market-signal-card.57",
+          "source_refs": [
+            "adj-labor",
+            "editor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -31412,7 +31882,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "美国工资和就业为精确SOC47-2021；OOH顶部总数及行业工资为Masonry Workers群体，历史摘要另标期间。",
+              "美国工资和就业为精确SOC47-2021；OOH顶部总数及行业工资为Masonry Workers群体，当前ONet/BLS均用2025—2035预测。",
               "MA-01仅虚构纸面探索，不是工程图、施工操作或工序验收依据。",
               "中国工资为行业代理，职业分类、安全培训、作业资格与项目职责分别核；来源范围及缺口单独标明。"
             ]
@@ -31450,10 +31920,27 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源：O*NET职业摘要、详情、行业及软件清单、培训查询和工资分位；BLS2025—2035就业预测表1.2与OOH；NBS2025单位工资；中国建设工程安全条例、现行特种作业管理规定及职业标准目录；OSHA、ILO与NIST。"
+              "本轮主要资料：ONet当前15任务（含New无人机检查）、软件与Hot、2025行业/工资、2025—2035预测及训练/认证目录；BLS表1.2/OOH；NBS2025建筑业与人员大类；中国建筑法、安全/质量条例、令60号及2023职业标准目录；OSHA1926.1153、ILO140与NIST指定GOVERN章节。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.sources.source-card.2",
+          "source_refs": [
+            "details-current",
+            "hot-current",
+            "industry-current",
+            "trends-current",
+            "training-current",
+            "cert-current",
+            "nbs-current",
+            "cn-building-current",
+            "cn-safety-current",
+            "cn-quality-current",
+            "cn-special-current",
+            "cn-masonry-standard-catalog",
+            "osha-silica-current",
+            "nist-pdf-current",
+            "ilo-genai"
+          ],
           "type": "prose"
         },
         {
@@ -31461,10 +31948,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：O*NET2026更新；全国工资2025年OEWS，现行就业预测2025—2035年；旧O*NET2024—2034仅历史。中国工资2025年、2026-05-15发布，特种作业规定2026-06-01施行；本轮查阅2026-10-03。"
+              "本轮2026-10-09：ONet2026页面，工资/行业/招聘2025，预测2025—2035；训练IPEDS2025—26/授位2024—25。中国工资2025、建筑法2019文本/质量条例2019修订、安全条例及2026-06-01令60号；OSHA当前1926.1153、NIST2023 AI100-1、ILO2025论文140。当前ONet摘要已更新，不再把它称仍显示2024—2034。"
             ]
           },
           "id": "brickmasons-blockmasons-and-stonemasons.sources.source-card.3",
+          "source_refs": [
+            "details-current",
+            "trends-current",
+            "nbs-current",
+            "cn-special-current",
+            "cn-quality-current",
+            "nist-pdf-current",
+            "ilo-genai"
+          ],
           "type": "prose"
         },
         {
@@ -31876,6 +32372,390 @@
                 "publisher": "U.S. Occupational Safety and Health Administration",
                 "scope": "contextual",
                 "url": "https://www.osha.gov/silica-crystalline/construction"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "当前15任务/41活动/57情境",
+                  "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "details-current",
+                "limitation": "任务群体非全员职责，目录非实时招生、统一门槛或许可。",
+                "market": "美国",
+                "name": "当前15任务/41活动/57情境",
+                "period": "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "当前美国行业分布",
+                  "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "industry-current",
+                "limitation": "任务群体非全员职责，目录非实时招生、统一门槛或许可。",
+                "market": "美国",
+                "name": "当前美国行业分布",
+                "period": "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/47-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025—2035现行预测",
+                  "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "trends-current",
+                "limitation": "任务群体非全员职责，目录非实时招生、统一门槛或许可。",
+                "market": "美国",
+                "name": "2025—2035现行预测",
+                "period": "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/47-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "59相关训练目录",
+                  "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "training-current",
+                "limitation": "任务群体非全员职责，目录非实时招生、统一门槛或许可。",
+                "market": "美国",
+                "name": "59相关训练目录",
+                "period": "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/localtraining/47-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "5关联认证目录",
+                  "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cert-current",
+                "limitation": "任务群体非全员职责，目录非实时招生、统一门槛或许可。",
+                "market": "美国",
+                "name": "5关联认证目录",
+                "period": "2026更新；行业2025；预测2025—2035；训练IPEDS2025—26/授位2024—25",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/localcert/47-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "4项Hot招聘软件信号",
+                  "2025美国招聘广告"
+                ],
+                "evidence_type": "primary_document",
+                "id": "hot-current",
+                "limitation": "Office/Excel各1%；QuickBooks/Windows未公布比例不填0。不是采用、自动化或替代率。",
+                "market": "美国",
+                "name": "4项Hot招聘软件信号",
+                "period": "2025美国招聘广告",
+                "publisher": "O*NET / Lightcast",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/47-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "砌筑任务、核对与转岗编辑分析",
+                  "2026-10-09"
+                ],
+                "evidence_type": "editorial_synthesis",
+                "id": "editor-current",
+                "limitation": "工具用途、阶段、转岗距离与观察建议为编辑分析，非测得因果、统一晋级或施工授权。",
+                "market": "美国",
+                "name": "砌筑任务、核对与转岗编辑分析",
+                "period": "2026-10-09",
+                "publisher": "费马测试职业内容编辑组",
+                "scope": "editorial_synthesis",
+                "url": "https://www.onetonline.org/link/details/47-2021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "NBS2025建筑业表2/5/7及附注",
+                  "2025；2026-05-15"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbs-current",
+                "limitation": "税前年平均非本职业中位或起薪；规模以上为有资质建筑业单位，生产制造及有关人员含工程施工而非精确砌筑工。",
+                "market": "中国大陆",
+                "name": "NBS2025建筑业表2/5/7及附注",
+                "period": "2025；2026-05-15",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "建设工程安全条例21/24/27/32—37条",
+                  "2004-02-01施行；当前全文核读"
+                ],
+                "evidence_type": "regulation",
+                "id": "cn-safety-current",
+                "limitation": "单位、项目负责人、技术人员与作业人员各自责任；紧急停工撤离权不等于所有项目恢复程序。",
+                "market": "中国大陆",
+                "name": "建设工程安全条例21/24/27/32—37条",
+                "period": "2004-02-01施行；当前全文核读",
+                "publisher": "国务院；能源局官方转载",
+                "scope": "contextual",
+                "url": "https://hbj.nea.gov.cn/xxgk/fdzdgknr/hbjgfl/flwj/202311/t20231105_196004.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "建设工程质量条例19/26—33/36—38条",
+                  "2000发布、2019修订文本"
+                ],
+                "evidence_type": "regulation",
+                "id": "cn-quality-current",
+                "limitation": "设计/施工/监理责任，材料工序检查与签字，不提供本项目具体质量限值。",
+                "market": "中国大陆",
+                "name": "建设工程质量条例19/26—33/36—38条",
+                "period": "2000发布、2019修订文本",
+                "publisher": "国务院；市场监管总局全文",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_e42ecef60e9146af83cf9846821fac6c.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "建筑法46/47/49条",
+                  "2019修正全文"
+                ],
+                "evidence_type": "law",
+                "id": "cn-building-current",
+                "limitation": "培训、安全作业及承重结构装修设计方案，不以美国职业定义授中国设计权限。",
+                "market": "中国大陆",
+                "name": "建筑法46/47/49条",
+                "period": "2019修正全文",
+                "publisher": "全国人大",
+                "scope": "contextual",
+                "url": "https://www.npc.gov.cn/zgrdw/npc/xinwen/2019-05/07/content_2086833.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "住建部令60号7/9/14/17/20/22/45条",
+                  "2025-12-17公布；2026-06-01施行"
+                ],
+                "evidence_type": "regulation",
+                "id": "cn-special-current",
+                "limitation": "相应特种作业条件/考试/有效期和首次实习，不泛化全部砌筑或高处岗位；地方工种及费用另核。",
+                "market": "中国大陆",
+                "name": "住建部令60号7/9/14/17/20/22/45条",
+                "period": "2025-12-17公布；2026-06-01施行",
+                "publisher": "住房城乡建设部；商务部官方转载",
+                "scope": "contextual",
+                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=105695"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "OSHA建筑安全资料入口",
+                  "2026-10-09读取"
+                ],
+                "evidence_type": "primary_document",
+                "id": "osha-current",
+                "limitation": "美国建筑行业法规与指导入口，非中国合规或现场SOP。",
+                "market": "美国",
+                "name": "OSHA建筑安全资料入口",
+                "period": "2026-10-09读取",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/construction"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "OSHA1926.1153表1及控制计划",
+                  "当前网页1926.1153"
+                ],
+                "evidence_type": "regulation",
+                "id": "osha-silica-current",
+                "limitation": "任务对应工程控制或暴露评估；防护与健康监护有适用条件，不直接作为中国标准。",
+                "market": "美国",
+                "name": "OSHA1926.1153表1及控制计划",
+                "period": "当前网页1926.1153",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.1153"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "AI RMF1.0 GOVERN2.1—2.3/3.2",
+                  "2023 AI100-1"
+                ],
+                "evidence_type": "framework",
+                "id": "nist-pdf-current",
+                "limitation": "自愿AI治理框架、人类职责和监督，非施工安全法或验收资格。",
+                "market": "美国",
+                "name": "AI RMF1.0 GOVERN2.1—2.3/3.2",
+                "period": "2023 AI100-1",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "石工目标职责",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-stone",
+                "limitation": "目标职责支持；补课和转岗距离为编辑分析，非统一年限、岗位保证或训练互认。",
+                "market": "美国",
+                "name": "石工目标职责",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/47-2022.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "木工目标职责",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-wood",
+                "limitation": "目标职责支持；补课和转岗距离为编辑分析，非统一年限、岗位保证或训练互认。",
+                "market": "美国",
+                "name": "木工目标职责",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/47-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "瓷砖石材铺贴目标职责",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-tile",
+                "limitation": "目标职责支持；补课和转岗距离为编辑分析，非统一年限、岗位保证或训练互认。",
+                "market": "美国",
+                "name": "瓷砖石材铺贴目标职责",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/47-2044.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "地面覆盖层安装目标职责",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-floor",
+                "limitation": "目标职责支持；补课和转岗距离为编辑分析，非统一年限、岗位保证或训练互认。",
+                "market": "美国",
+                "name": "地面覆盖层安装目标职责",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/47-2042.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "混凝土收面目标职责",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-cement",
+                "limitation": "目标职责支持；补课和转岗距离为编辑分析，非统一年限、岗位保证或训练互认。",
+                "market": "美国",
+                "name": "混凝土收面目标职责",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/47-2051.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "钢筋定位固定目标职责",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-rebar",
+                "limitation": "目标职责支持；补课和转岗距离为编辑分析，非统一年限、岗位保证或训练互认。",
+                "market": "美国",
+                "name": "钢筋定位固定目标职责",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/47-2171.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "建筑涂装目标职责",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-paint",
+                "limitation": "目标职责支持；补课和转岗距离为编辑分析，非统一年限、岗位保证或训练互认。",
+                "market": "美国",
+                "name": "建筑涂装目标职责",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/47-2141.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "建筑普工目标职责",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-labor",
+                "limitation": "目标职责支持；补课和转岗距离为编辑分析，非统一年限、岗位保证或训练互认。",
+                "market": "美国",
+                "name": "建筑普工目标职责",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/47-2061.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "建筑工程经理目标职责",
+                  "2026更新"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-manager",
+                "limitation": "目标职责支持；补课和转岗距离为编辑分析，非统一年限、岗位保证或训练互认。",
+                "market": "美国",
+                "name": "建筑工程经理目标职责",
+                "period": "2026更新",
+                "publisher": "O*NET",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/11-9041.00"
               }
             ]
           },
@@ -34087,8 +34967,10 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.nasa-seh"
+              "onet-summary",
+              "faa-design-approvals",
+              "bls-outlook",
+              "bls-current"
             ],
             "id": "fall-and-scaffold",
             "mitigation": {
@@ -34119,8 +35001,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.bls-outlook"
+              "onet-summary",
+              "cn-quality-current"
             ],
             "id": "masonry-dimension-quality",
             "mitigation": {
@@ -34151,8 +35033,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.nasa-seh"
+              "onet-summary",
+              "osha-silica-current",
+              "faa-design-approvals"
             ],
             "id": "dust-and-noise",
             "mitigation": {
@@ -34183,8 +35066,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-summary",
-              "career.source.nasa-seh"
+              "bls-outlook"
             ],
             "id": "manual-handling",
             "mitigation": {
@@ -34199,7 +35081,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "重物搬运与重复动作损伤"
+            "title": "安全培训与项目负责人资格缺失"
           },
           {
             "affected_roles": {
@@ -34215,8 +35097,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.faa-design-approvals",
-              "career.source.bls-outlook"
+              "bls-outlook"
             ],
             "id": "training-and-permit",
             "mitigation": {
@@ -34231,7 +35112,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "未按交底施工与培训缺失"
+            "title": "分包协作与法定责任不清"
           },
           {
             "affected_roles": {
@@ -34247,8 +35128,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-summary",
-              "career.source.onet-details"
+              "bls-current",
+              "onet-summary"
             ],
             "id": "subcontract-responsibility",
             "mitigation": {
@@ -34263,7 +35144,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "分包协作与责任划分不清"
+            "title": "工期、天气与疲劳作业压力"
           }
         ],
         "schema_version": "career.work_risk.v1",
@@ -34382,6 +35263,60 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$link": "brickmasons-blockmasons-and-stonemasons.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "url"
+            },
+            "id": "osha-silica-current",
+            "label": {
+              "$link": "brickmasons-blockmasons-and-stonemasons.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "entity"
+            },
+            "scope": "先核材料与作业的粉尘暴露及工程控制，例如符合设备要求的湿式或有效除尘措施；呼吸防护、听力保护、培训与健康监护按适用规则配置。OSHA建筑硅尘要求属美国法域，不直接当作中国合规结论。"
+          },
+          {
+            "href": {
+              "$link": "brickmasons-blockmasons-and-stonemasons.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-8",
+              "field": "url"
+            },
+            "id": "cn-quality-current",
+            "label": {
+              "$link": "brickmasons-blockmasons-and-stonemasons.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-8",
+              "field": "entity"
+            },
+            "scope": "按图纸与技术标准落实尺寸和灰缝核对；超限报告、返工或暂停按实际工序职责办理。质量条例28—33规定单位检验、材料不得不合格使用与培训，编辑核对步骤不授复工或验收权限。"
+          },
+          {
+            "href": {
+              "$link": "brickmasons-blockmasons-and-stonemasons.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-9",
+              "field": "url"
+            },
+            "id": "bls-current",
+            "label": {
+              "$link": "brickmasons-blockmasons-and-stonemasons.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-9",
+              "field": "entity"
+            },
+            "scope": "编辑风险场景：工期、计件或天气变化下应关注疲劳与安全条件。BLS说明加班和天气影响安排，但未给本职业计件导致违章的因果统计。"
           }
         ]
       },
@@ -35762,7 +36697,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 就业与预测字段（2024—2034 年）",
+            "label": "O*NET 就业与预测字段（2025—2035 年）",
             "secondary_value": null,
             "value": {
               "$item": "brickmasons-blockmasons-and-stonemasons.profile.onet-structured-fields-block.4",
@@ -37053,7 +37988,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 47-2021.00 · 砖与砌块施工",
@@ -37104,7 +38039,7 @@
       "text": "砖石与砌块工"
     }
   },
-  "source_content_sha256": "b2cf9f2142e2c370b951640ac258d0d839e8daab4f00ea6a0b4aeb60e3cd2f16",
+  "source_content_sha256": "702e77cbba37c4c9fdf8ae88f8cbe1cccadaa0bfe374c124ff1fd5609cf9caa2",
   "subject": {
     "canonical_slug": "brickmasons-blockmasons-and-stonemasons",
     "name": "砖石与砌块工",

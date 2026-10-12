@@ -14,6 +14,45 @@
       "fact:cn-urban-nonprivate-2024": {
         "status": "pending_mapping"
       },
+      "fact:current-cn-exact-gap": {
+        "status": "pending_mapping"
+      },
+      "fact:current-cn-recruitment-gap": {
+        "status": "pending_mapping"
+      },
+      "fact:current-cn-transport-nonprivate": {
+        "status": "pending_mapping"
+      },
+      "fact:current-cn-transport-private": {
+        "status": "pending_mapping"
+      },
+      "fact:current-exact-change": {
+        "status": "pending_mapping"
+      },
+      "fact:current-exact-employment-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:current-exact-employment-2035": {
+        "status": "pending_mapping"
+      },
+      "fact:current-exact-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:current-exact-openings": {
+        "status": "pending_mapping"
+      },
+      "fact:current-us-parent-industry-0": {
+        "status": "pending_mapping"
+      },
+      "fact:current-us-parent-industry-1": {
+        "status": "pending_mapping"
+      },
+      "fact:current-us-parent-industry-2": {
+        "status": "pending_mapping"
+      },
+      "fact:current-us-parent-industry-3": {
+        "status": "pending_mapping"
+      },
       "fact:occupation-identity": {
         "status": "pending_mapping"
       },
@@ -399,6 +438,9 @@
         "status": "mapped"
       },
       "item:captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.9": {
+        "status": "pending_mapping"
+      },
+      "item:captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.9.unconsumed": {
         "status": "pending_mapping"
       },
       "item:captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.90": {
@@ -4387,7 +4429,7 @@
       },
       "ai_impact_table.evidence_rows.04.link": {
         "ref": {
-          "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.9",
+          "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.9.unconsumed",
           "path": [
             "data",
             "entries",
@@ -8273,23 +8315,8 @@
         "status": "mapped"
       },
       "career_quick_answers_block.items.01.table.rows.02.value.steps.06": {
-        "ref": {
-          "id": "captains-mates-and-pilots-of-water-vessels.profile.career-quick-answers-block.5",
-          "parts": [
-            [
-              "→",
-              5,
-              6
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_quick_answers_block.items.01.table.rows.03.alternate_value": {
         "ref": null,
@@ -11480,28 +11507,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.href": {
-        "ref": {
-          "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.10",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.label": {
         "ref": {
@@ -12004,28 +12011,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.href": {
-        "ref": {
-          "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.18",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.05.explanation.sources.02.label": {
         "ref": {
@@ -12135,28 +12122,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.href": {
-        "ref": {
-          "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.20",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.06.explanation.sources.02.label": {
         "ref": {
@@ -12266,28 +12233,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.href": {
-        "ref": {
-          "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.22",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.07.explanation.sources.02.label": {
         "ref": {
@@ -12397,28 +12344,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.href": {
-        "ref": {
-          "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.24",
-          "parts": [
-            [
-              "；",
-              1,
-              2
-            ],
-            [
-              "｜",
-              1,
-              2
-            ]
-          ],
-          "path": [
-            "data",
-            "paragraphs",
-            0
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.bls_table.08.explanation.sources.02.label": {
         "ref": {
@@ -23878,10 +23805,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "交接班并核对船位与航向与设备状态 → 持续监控仪表与海况与他船动态 → 按检查单逐项核对关键设备 → 识别异常并交叉验证 → 按程序报告并按指令处置 → 记录值班与休息与事件"
+              "编辑流程：交接并核船位、航向、设备→持续监控与交叉核对→识别异常并立即通知有职责者→结合态势安全处置→记录事件与交接；不是具体船舶操作授权。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.profile.career-quick-answers-block.5",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24010,10 +23941,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "航行指挥与最终安全责任由船长承担；甲板部组织与货物与驾驶台值班由大副等高级船员承担；限定水域的本地操纵专业意见由引航员提供，但引航员的专业职责不解除船长与驾驶台值班人员的安全义务；动力与机舱系统由轮机部门负责；船舶证书与配员与监管要求由船东与主管机关负责；超出本人执照与授权或发现影响航行安全的异常时须先停止并按程序升级。"
+              "船长承担航行指挥管理责任，大副等甲板职务与引航员各按实际职责执行，船东还须保障安全条件和配员。中国海上交通安全法31条：引航不解除船长指挥管理责任；34条不得冒险开航且船东不得强令；38条船长对生命安全、保安、防污染可独立决定。 出现异常时立即通知驾驶台值班负责人或船长，由有相应职责者依据实际航行态势采取安全措施；减速、停车、交接或拒绝作业分别评估，不能统一先停航。船长依法独立作安全决定，不以内部请示替代。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.profile.career-quick-answers-block.17",
+          "source_refs": [
+            "details-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24032,10 +23968,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "能否指挥特定总吨位与航区与船型的船舶、能否在特定水域担任引航、能否批准开航或继续航行、能否在指令可能威胁航行安全或造成污染时纠正或制止或要求更换引航员，由执照与适任证书的类别与等级与航区、船东授权与船舶安全管理体系以及适用法域规定决定；权限来自执照与任职与授权记录，不因个人经验自行产生；发现超越证书范围、船舶不适航或安全受威胁时须先停止并留痕。"
+              "中国海船驾驶按2026修正规则的航区、职务、等级、船舶及职能范围核适任证；健康、基本安全、适任/特殊培训、资历与考试按任务核，值班证有效期不超过5年及66岁生日。引航另按2025施行办法取得相应海港/内河类别、等级和范围证书并受聘引航机构；海船规则不覆盖内河完整发证要求。 中国海上交通安全法31条：引航不解除船长指挥管理责任；34条不得冒险开航且船东不得强令；38条船长对生命安全、保安、防污染可独立决定。 中国引航规定26条要求双方交换引航方案与船舶操纵等信息；33条原则配合采纳，危及安全例外，可要求改指令、必要时请机构更换并及时报海事。30条引航员拒绝、暂停、终止前须告知船长并妥善安排船舶安全；不直接弃船或突然停止。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.profile.career-quick-answers-block.19",
+          "source_refs": [
+            "sea-cert-current",
+            "pilot-rule-current",
+            "sea-law-current",
+            "pilot-operation-current"
+          ],
           "type": "prose"
         },
         {
@@ -24087,10 +24029,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET-SOC 53-5021.00（SOC 53-5021，运输与物料搬运大类内的水上运输细分），列为 Job Zone Three（中等准备，SVP 6.0 至低于 7.0），未标注 Bright Outlook；兴趣代码为 RCE（现实型、常规型、企业型），现实型对应的具体兴趣领域以运输与机械操作（88）、管理与行政（60）、自然与户外（43）为主。O*NET 行业分布显示该职业 66% 位于运输与仓储业、34% 位于其他行业（含政府与其他服务）。中国大陆本条证据路由把映射记为 none（未建立与 O*NET-SOC 53-5021.00 一一对应的职业细类），相关职责分散在船舶驾驶、引航与港航管理等岗位与证书体系中，须按岗位实际职责与证书类别判断；中文页面语言不构成中国等价职业或工资映射。"
+              "本职业身份O*NET-SOC53-5021.00；ZoneThree、未标Bright Outlook。兴趣RCE：R77/C59/E54/I27/S15/A0；具体领域运输/机器操作88、管理/行政60、自然/户外43另计，不是R子分数或个人准入线。 O*NET2025行业分布：运输与仓储71%、其他29%（含政府）；这是本职业分类分布，非工资或中国行业映射。 中国海船驾驶、内河驾驶与引航需按实际职责及各自证书体系核，未建立一一工资映射。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.profile.career-quick-answers-block.24",
+          "source_refs": [
+            "details-current",
+            "industry-current",
+            "sea-cert-current",
+            "pilot-rule-current"
+          ],
           "type": "prose"
         },
         {
@@ -24109,10 +24057,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 把该职业列为 Job Zone Three（中等准备，SVP 6.0 至低于 7.0）：通常需要职业学校培训、相关在职经验或副学士学位；O*NET 教育调查显示 42% 的受访者认为高中文凭或同等学历即可、37% 认为需要中等后证书、8% 认为需要学士学位；在职培训通常一至两年（含学徒形式，O*NET 该职业页列出 2 项学徒方向：Officer in Charge of Navigational Watch 与 Pilot, Ship）。常见能力来自课程与在岗训练：海图作业与航次计划、避碰规则与驾驶台资源管理、船舶操纵与靠离泊、气象与水文判断、货物与旅客安全、应急与消防与救生演练。在美国还必须持有美国海岸警卫队签发的执照并按职务与航区升级；在中国大陆须按船员条例与适任考试和发证规则取得相应适任证书，引航员另按引航员管理办法取得引航适任证书。"
+              "O*NET新入职需要学历问答42%高中/同等、37%中等后证书、8%本科，所示类别非完整分布且不是在岗学历。BLS本职业典型中等后非学位证书、相关经验少于5年、OJTNone；ZoneThree一般一至两年训练非所有岗位期限。学徒示例Officer in Charge of Navig Watch/Pilot, Ship非当前招生或统一必修。 中国海船驾驶按2026修正规则的航区、职务、等级、船舶及职能范围核适任证；健康、基本安全、适任/特殊培训、资历与考试按任务核，值班证有效期不超过5年及66岁生日。引航另按2025施行办法取得相应海港/内河类别、等级和范围证书并受聘引航机构；海船规则不覆盖内河完整发证要求。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.profile.career-quick-answers-block.26",
+          "source_refs": [
+            "details-current",
+            "ep-current",
+            "sea-cert-current",
+            "pilot-rule-current"
+          ],
           "type": "prose"
         },
         {
@@ -24131,10 +24085,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "O*NET 技术清单列出 13 类软件技能；Hot Technologies 页面按招聘启事出现比例给出Microsoft Office 软件（5%）、Microsoft Excel（2%）、Microsoft Outlook（1%），Apple macOS、Autodesk Revit、Microsoft PowerPoint 与 Microsoft Word 未给出比例（数据来源为 Lightcast 2025 年 1 月 1 日至 12 月 31 日的美国招聘信息）。现场方法与工具以雷达与自动雷达标绘与电子海图与测深仪、磁罗经与电罗经与舵与侧推与锚与缆绳与拖带设备、船对岸与船内通信设备、海图与潮汐表与航行通告与气象资料、救生消防与污染防控设备为主。招聘需求标注表示雇主招聘启事中的出现频率，不代表机构已部署该类工具或岗位已被替代。"
+              "13软件类别、7热产品、1InDemand（Office）；2025全年美国招聘Office5%、Excel2%、Outlook1%，macOS/Revit/PowerPoint/Word为NA非0；招聘提及不等于部署、效率、自动化率或强制门槛。 现场工具包含雷达、电子海图、测深、无线电、助航标志及操舵缆绳等，按实际船舶配置核。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.profile.career-quick-answers-block.28",
+          "source_refs": [
+            "hot-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -24153,10 +24111,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作以船上轮班与驾驶台值班为主，可能连续数周或数月离家；引航员更多在特定港口或航段登离船。主要负荷来自天气与夜航与狭窄水域与噪声与持续监控，以及长时间离家的生活安排，值班安排必须控制疲劳。O*NET 工作情境显示：88% 每天进行面对面讨论；82% 每周工作超过 40 小时；72% 每天接触干扰性或不适噪声；72% 认为出错后果极其严重；73% 对他人健康与安全承担极高责任；69% 每天在封闭车辆或操作封闭设备中；66% 每天佩戴常规防护或安全装备；62% 每天在户外暴露于各种天气条件；61% 持续或几乎持续用手操作、控制或感知物件与工具；51% 每天接触污染物；49% 每天接触全身振动；47% 每天面临时间压力。作业要求按安全管理体系与检查单执行，落实值班与休息规定，系带缆绳与登离船作业须按程序防护，发现异常先停止再报告。"
+              "工作以船上轮班与驾驶台值班为主，可能连续数周或数月离家；引航员更多在特定港口或航段登离船。主要负荷来自天气与夜航与狭窄水域与噪声与持续监控，以及长时间离家的生活安排，值班安排必须控制疲劳。O*NET 工作情境显示：88% 每天进行面对面讨论；82% 每周工作超过 40 小时；72% 每天接触干扰性或不适噪声；72% 认为出错后果极其严重；73% 对他人健康与安全承担极高责任；69% 每天在封闭车辆或操作封闭设备中；66% 每天佩戴常规防护或安全装备；62% 每天在户外暴露于各种天气条件；61% 持续或几乎持续用手操作、控制或感知物件与工具；51% 每天接触污染物；49% 每天接触全身振动；47% 每天面临时间压力。作业要求按安全管理体系与检查单执行，落实值班与休息规定，系带缆绳与登离船作业须按程序防护，出现异常时立即通知驾驶台值班负责人或船长，由有相应职责者依据实际航行态势采取安全措施；减速、停车、交接或拒绝作业分别评估，不能统一先停航。船长依法独立作安全决定，不以内部请示替代。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.profile.career-quick-answers-block.30",
+          "source_refs": [
+            "details-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24175,10 +24138,16 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "该职业属于法定持证职业：在美国必须持有美国海岸警卫队签发的执照，并按职务与航区与总吨位升级；在中国大陆，船长与大副须依船员条例与海船船员适任考试和发证规则完成注册、健康、基本安全与适任培训、任职资历与考试，引航员须依引航员管理办法受聘于引航机构并取得限定类别与等级与范围的引航适任证书，引航作业另受船舶引航管理规定约束。本页不把两地的执照与适任要求互相套用。"
+              "中国海船驾驶按2026修正规则的航区、职务、等级、船舶及职能范围核适任证；健康、基本安全、适任/特殊培训、资历与考试按任务核，值班证有效期不超过5年及66岁生日。引航另按2025施行办法取得相应海港/内河类别、等级和范围证书并受聘引航机构；海船规则不覆盖内河完整发证要求。 美国46CFR15.401按任职核TWIC和/或MMC、对应endorsement、medical与所需STCW；部分州引航还需州许可，不以目录关联替代法定条件。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.profile.career-quick-answers-block.32",
+          "source_refs": [
+            "sea-cert-current",
+            "pilot-rule-current",
+            "us-credential-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -24197,10 +24166,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "岗位以轮班与航次制为主：O*NET 工作情境显示 82% 每周工作超过 40 小时、47% 每天面临时间压力，引航员在登离船与操纵期间工作强度集中。美国该职业 2025 年 5 月全国年薪中位数为 92,460 美元（时薪中位数 44.45 美元），年薪第 10 至第 90 分位为 47,420 至 170,640 美元；O*NET 展示的 BLS 预测口径为 2024 年约 40,700 人 → 2034 年约 40,900 人、变化约 +1%、年均空缺约 4,300 个，而 BLS 职业展望手册把该职业并入更大口径发布（2025 年约 41,300 人 → 2035 年约 42,900 人、增长约 4%），两者不得混用；中国大陆没有单列本职业的全国职业工资统计，本页不发布职业级数值，只以可见标记登记口径与缺口。比较机会时应把证书类别与航区、船舶类型与航次周期、值班与休息安排与超时计算方式纳入书面约定。"
+              "O*NET82%典型每周超过40小时、47%每日严格期限；班期46%规则/42%不规则/12%季节性，部分深海或驳船航次长期离家，不代表每岗。2025美国中位92460美元/年、44.45/时；美国SOC53-5021本职业2025约41300人→2035预测42900人，变化4.0%（平均），BLS净变化约1700人，2025—2035年均空缺3800个，非净增；舍入就业端点不反算净变化。 中国本职业全国精确工资仍证据不足；NBS2025交通运输仓储邮政业非私营133981/私营73133元税前年均，相关航运业务的多职业行业背景，非船长大副引航员工资、起薪、月薪或个人报价。 比较机会时另核证书、船型、航次、实际排班与报酬构成。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.profile.career-quick-answers-block.34",
+          "source_refs": [
+            "details-current",
+            "wages-current",
+            "ep-current",
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -24219,10 +24195,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业身份与任务：O*NET-SOC 53-5021.00 Captains, Mates, and Pilots of Water Vessels，2026 年更新页面，列为 Job Zone Three（中等准备，SVP 6.0 至低于 7.0），未标注 Bright Outlook。官方职责为「Command or supervise operations of ships and water vessels, such as tugboats and ferryboats. Required to hold license issued by U.S. Coast Guard.」；页面列出 31 项任务（26 项核心 + 3 项补充 + 2 项新增），核心覆盖依据当地风与天气与水深与潮汐与水流与危险物的专业知识指挥航向与航速（100）、阻止处于航行控制下的船舶从事不安全作业（98）、在抵达港口或泊位时担任靠泊指挥（97）、查阅海图与图表与天气报告或导航设备确定并指挥船舶运动（96）、使用无线电与测深仪与雷达与灯光与浮标或灯塔操纵船舶（94）、操作船对岸无线电交换作业信息（93）、靠离泊并可能在船闸等狭窄空间操纵（93）、在规定时段担任航行值班（91）、检查船舶与设备确保安全运行并符合法规（90）、读取仪表确认液压油与气压或氧气水平（89）、向主管机关报告违反引航法规的行为（87）、协助海上救助（86）、用汽笛与闪光灯与旗语或无线电向过往船舶发信号（85）、测量水深（85）、向船员或甲板水手发信号（84）、维护船上发动机与绞车与导航与灭火与救生设备（84）、记录日常活动与船位与挂靠港与天气与污染控制与货物或旅客状态（81）、就港口规则与海关程序向船长提出建议（81）、监督装卸符合规范（81）、用电子测深设备并按海图等深线计算陆标定位（80）、通过授课与模拟器或模型学习新系统（79）、指挥或协调装卸与操舵与机舱与设备维修作业（78）、安排加油与补给或修理（77）；补充任务含拖带与操纵驳船或指挥拖船（88）、检查港区或岸线有无溢油或其他污染物（82）、分配值班与居住舱室（64）、面试并雇用船员（55）；新增任务含开展人员落水或消防等安全演习，以及监督无人机用于船上难以到达部位的检查与维护（均标注为新增任务、无重要性分值）。"
+              "O*NET 职业身份与任务：O*NET-SOC 53-5021.00 Captains, Mates, and Pilots of Water Vessels，2026 年更新页面，列为 Job Zone Three（中等准备，SVP 6.0 至低于 7.0），未标注 Bright Outlook。官方职责为「Command or supervise operations of ships and water vessels, such as tugboats and ferryboats. Required to hold license issued by U.S. Coast Guard.」；页面列出 31 项任务（25 项核心 + 4 项补充 + 2 项新增），核心覆盖依据当地风与天气与水深与潮汐与水流与危险物的专业知识指挥航向与航速（100）、阻止处于航行控制下的船舶从事不安全作业（98）、在抵达港口或泊位时担任靠泊指挥（97）、查阅海图与图表与天气报告或导航设备确定并指挥船舶运动（96）、使用无线电与测深仪与雷达与灯光与浮标或灯塔操纵船舶（94）、操作船对岸无线电交换作业信息（93）、靠离泊并可能在船闸等狭窄空间操纵（93）、在规定时段担任航行值班（91）、检查船舶与设备确保安全运行并符合法规（90）、读取仪表确认液压油与气压或氧气水平（89）、向主管机关报告违反引航法规的行为（87）、协助海上救助（86）、用汽笛与闪光灯与旗语或无线电向过往船舶发信号（85）、测量水深（85）、向船员或甲板水手发信号（84）、维护船上发动机与绞车与导航与灭火与救生设备（84）、记录日常活动与船位与挂靠港与天气与污染控制与货物或旅客状态（81）、就港口规则与海关程序向船长提出建议（81）、监督装卸符合规范（81）、用电子测深设备并按海图等深线计算陆标定位（80）、通过授课与模拟器或模型学习新系统（79）、指挥或协调装卸与操舵与机舱与设备维修作业（78）、安排加油与补给或修理（77）；补充任务含拖带与操纵驳船或指挥拖船（88）、检查港区或岸线有无溢油或其他污染物（82）、分配值班与居住舱室（64）、面试并雇用船员（55）；新增任务含开展人员落水或消防等安全演习，以及监督无人机用于船上难以到达部位的检查与维护（均标注为新增任务、无重要性分值）。 核心另含清洁维护监督63、采购63；四项补充拖带88/污染检查82/分配值班64/雇船员55，新任务无分值非0。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -24241,10 +24220,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：本条证据路由把 china-salary 记为 （数据状态：暂无可安全使用的数据），使用限制 为「不能发布可比的全国中位数、分位分布或起薪」，处理说明 为「标记中国薪资不可用，并说明可得的全国表是更宽口径的交通运输与仓储与邮政服务类别」。本页据此不给出本职业的中位数、分位数或起薪，也不发布任何行业或父职业代理数值；只登记统计口径、覆盖范围与缺口，并保留可见的缺口标记。"
+              "中国本职业全国精确工资仍证据不足；NBS2025交通运输仓储邮政业非私营133981/私营73133元税前年均，相关航运业务的多职业行业背景，非船长大副引航员工资、起薪、月薪或个人报价。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.profile.onet-structured-fields-block.3",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -24252,10 +24234,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "行业分布与就业背景：O*NET 行业分布显示该职业 66% 位于运输与仓储业、34% 位于其他行业（含政府与其他服务）；O*NET 展示的 BLS 预测口径为 2024 年约 40,700 人、2034 年约 40,900 人，十年变化约 +1%（Slower than average）、2024—2034 年年均职位空缺约 4,300 个（含增长与替代需求）；而 BLS 职业展望手册把船长与大副与引航员并入更大口径发布（2025 年约 41,300 人、2035 年约 42,900 人、增长约 4%），其中公布的年均 8,600 个空缺属全部水上运输工作者并含转职与退休等替代需求，不是本职业的精确空缺数，两者口径与期间不同，本页分开标注、不混写。该职业未标注 Bright Outlook，但其相关职业中的飞机货物装卸主管（53-1041）与商业飞行员（53-2012）标注 Bright Outlook，属不同职业身份，不能互相代入。"
+              "O*NET2025行业分布：运输与仓储71%、其他29%（含政府）；这是本职业分类分布，非工资或中国行业映射。 美国SOC53-5021本职业2025约41300人→2035预测42900人，变化4.0%（平均），BLS净变化约1700人，2025—2035年均空缺3800个，非净增；舍入就业端点不反算净变化。 OOH41300→42900/4%同属本职业专属行；8600年均空缺仅属全部水上运输职业群，不能替代本职业3800。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.profile.onet-structured-fields-block.4",
+          "source_refs": [
+            "industry-current",
+            "ep-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -24290,10 +24277,15 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "协作与沟通｜88% 每天进行面对面讨论；69% 持续与他人接触；62% 认为与团队共同工作极其重要；59% 每天进行电话交谈；43% 每天使用电子邮件。\n工时与节奏｜82% 每周工作超过 40 小时；47% 每天面临时间压力；38% 认为重复性任务极其重要；轮班与航次周期可能连续数周或数月离家。\n决策与自主｜80% 每天做决策；68% 表示决策自由度很大、56% 表示对任务与优先级有很大自由；40% 认为协调或领导他人极其重要。\n责任与影响｜76% 认为决策对同事或公司结果有非常重要的影响；73% 对他人健康与安全承担极高责任；72% 认为出错后果极其严重；54% 对他人工作结果承担很高责任。\n环境与暴露｜72% 每天接触干扰性或不适噪声；62% 每天在户外暴露于各种天气条件；53% 每天接触极亮或照明不足的条件；51% 每天接触污染物；51% 每天在非环境受控的室内；49% 每天接触全身振动；31% 每周一次以上接触很热或很冷的温度。\n身体与作业空间｜61% 持续或几乎持续用手操作、控制或感知物件与工具；39% 站立时间超过一半；36% 重复性动作时间少于一半；37% 每月一次以上处于狭窄或别扭姿势。\n场所与设备｜69% 每天在封闭车辆或操作封闭设备中；66% 每天佩戴常规防护或安全装备；42% 每天在敞开车辆或操作设备；48% 与他人保持中等近距离（一臂之内）。\n对外接触与竞争｜40% 认为与外部客户或公众打交道极其重要；40% 认为工作具有中等竞争性；32% 每年一次以上遇到冲突情形。\n安全与合规｜作业要求按安全管理体系与检查单执行，落实值班与休息规定控制疲劳；系带缆绳与登离船与靠离泊作业须按程序防护；发现异常先停止再报告。"
+              "协作与沟通｜88% 每天进行面对面讨论；69% 持续与他人接触；62% 认为与团队共同工作极其重要；59% 每天进行电话交谈；43% 每天使用电子邮件。\n工时与节奏｜82% 每周工作超过 40 小时；47% 每天面临时间压力；38% 认为重复性任务极其重要；轮班与航次周期可能连续数周或数月离家。\n决策与自主｜80% 每天做影响他人或单位财务/声誉的决策；68% 表示决策自由度很大、56% 表示对任务与优先级有很大自由；40% 认为协调或领导他人极其重要。\n责任与影响｜76% 认为决策对同事或公司结果有非常重要的影响；73% 对他人健康与安全承担极高责任；72% 认为出错后果极其严重；54% 对他人工作结果承担很高责任。\n环境与暴露｜72% 每天接触干扰性或不适噪声；62% 每天在户外暴露于各种天气条件；53% 每天接触极亮或照明不足的条件；51% 每天接触污染物；51% 每天在非环境受控的室内；49% 每天接触全身振动；31% 每周一次以上接触很热或很冷的温度。\n身体与作业空间｜61% 持续或几乎持续用手操作、控制或感知物件与工具；39% 站立时间超过一半；36% 重复性动作时间少于一半；37% 每月一次以上处于狭窄或别扭姿势。\n场所与设备｜69% 每天在封闭车辆或操作封闭设备中；66% 每天佩戴常规防护或安全装备；42% 每天在敞开车辆或操作设备；48% 与他人保持中等近距离（一臂之内）。\n对外接触与竞争｜40% 认为与外部客户或公众打交道极其重要；40% 认为工作具有中等竞争性；32% 每年一次以上遇到冲突情形。\n安全与合规｜作业要求按安全管理体系与检查单执行，落实值班与休息规定控制疲劳；系带缆绳与登离船与靠离泊作业须按程序防护；出现异常时立即通知驾驶台值班负责人或船长，由有相应职责者依据实际航行态势采取安全措施；减速、停车、交接或拒绝作业分别评估，不能统一先停航。船长依法独立作安全决定，不以内部请示替代。 班期46%规则、42%不规则、12%季节性；自动化问答56%完全未自动化、23%轻微、13%高度，所示类别非全分布，非GenAI采用率。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.profile.work-context-block.1",
+          "source_refs": [
+            "details-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -24936,28 +24928,22 @@
                 "url": "https://www.onetonline.org/link/hot_tech/53-5021.00"
               },
               {
-                "entity": "O*NET-SOC 53-5021.00 职业摘要（就业与预测字段）",
-                "id": "link-11",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/53-5021.00"
-              },
-              {
                 "entity": "ILO 工作论文 140《Generative AI and Jobs: A Refined Global Index of Occupational Exposure》",
                 "id": "link-12",
                 "relation": "career.source",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "O*NET-SOC 53-5021.00 职业摘要",
+                "entity": "IMO2026MASS规则通过公告",
                 "id": "link-13",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/53-5021.00"
+                "url": "https://www.imo.org/en/mediacentre/pressbriefings/pages/imo-adopts-mass-code.aspx"
               },
               {
-                "entity": "O*NET-SOC 53-5021.00 培训与教育信息",
+                "entity": "O*NET本职业软件与技能",
                 "id": "link-14",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/53-5021.00"
+                "url": "https://www.onetonline.org/link/details/53-5021.00"
               },
               {
                 "entity": "O*NET-SOC 53-5021.00 详细资料（任务与工作活动）",
@@ -24966,16 +24952,16 @@
                 "url": "https://www.onetonline.org/link/details/53-5021.00"
               },
               {
-                "entity": "O*NET-SOC 53-5021.00 职业摘要（就业与预测字段）",
+                "entity": "BLS表1.2本职业预测",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/53-5021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET-SOC 53-5021.00 详细资料（任务与工作活动）",
+                "entity": "IMO2026MASS规则通过公告",
                 "id": "link-17",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/53-5021.00"
+                "url": "https://www.imo.org/en/mediacentre/pressbriefings/pages/imo-adopts-mass-code.aspx"
               },
               {
                 "entity": "ILO 工作论文 140《Generative AI and Jobs: A Refined Global Index of Occupational Exposure》",
@@ -24984,10 +24970,10 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "O*NET-SOC 53-5021.00 培训与教育信息",
+                "entity": "O*NET本职业学历与学徒示例",
                 "id": "link-19",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/53-5021.00"
+                "url": "https://www.onetonline.org/link/details/53-5021.00"
               }
             ]
           },
@@ -25010,10 +24996,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先用自造材料完成一次闭环：用虚构船舶参数与潮流与天气与狭水道图写出一份靠港前主引航交换卡，标出三项风险、两项中止条件、操纵顺序、通信复诵点与备选方案，再请同伴扮演船长质询；同时核对目标岗位需要的执照或适任证书类别与航区、船舶类型与值班与休息安排。"
+              "编辑入门建议：先核法域、岗位证书、任职资历及培训条件；模拟材料用于训练风险识别和沟通，不据此做真实航次决定或取得任职资格。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.11",
+          "source_refs": [
+            "sea-cert-current",
+            "pilot-rule-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25032,10 +25023,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把工具用在航线检查、传感器告警归并、电子海图信息检索、记录初稿与设备状态预测等可复核环节；航行计划与中止条件判断、异常确认、避碰决策、靠离泊操纵、引航沟通与应急升级，仍须由持有相应执照或适任证书的人员核对并留痕。"
+              "编辑可考虑航线信息检索、告警归并、记录草稿、维护提醒等，但本轮未取得本职业工具实测收益。IMO2026非强制MASS规则适用于SOLAS第1章货船，涉及自主动作、远程运营、风险评估、通信与网络安全及远程运营中心，船长保留总体责任，包括不在船上。不能由责任存在推出每项操纵必由现场人手执行，也不能推出已全面采用或个人岗位不会被替代。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.13",
+          "source_refs": [
+            "imo-mass-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25054,10 +25049,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "引入自动航线建议、告警归并或远程监控前，先明确部署是否满足船舶认证要求、是否有冗余通信与合格的传感器与网络安全措施，异常由谁确认、由谁下令、由谁复核，并保证岸船协同与人类控制链在任何自动结果失效时仍可回到原始船舶与水域信息核对。"
+              "引入系统时核实际船舶审批与运行范围、通信、网络安全、风险评估和远程/船上职责。IMO2026非强制MASS规则适用于SOLAS第1章货船，涉及自主动作、远程运营、风险评估、通信与网络安全及远程运营中心，船长保留总体责任，包括不在船上。不能由责任存在推出每项操纵必由现场人手执行，也不能推出已全面采用或个人岗位不会被替代。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.15",
+          "source_refs": [
+            "imo-mass-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25087,10 +25086,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：航线检查、告警归并、海图信息检索、记录初稿与设备状态预测等环节可由自动化系统辅助，但没有官方证据表明它会取代航行计划、异常确认、避碰、靠离泊、引航沟通与应急升级的决策与责任。即使使用自主或远程系统，人类控制链仍须明确；任务暴露、流程自动化程度与就业数量是三个不同概念。"
+              "IMO2026非强制MASS规则适用于SOLAS第1章货船，涉及自主动作、远程运营、风险评估、通信与网络安全及远程运营中心，船长保留总体责任，包括不在船上。不能由责任存在推出每项操纵必由现场人手执行，也不能推出已全面采用或个人岗位不会被替代。 本页信息检索、草稿与提醒例子为编辑设想，未实测效率；任务暴露、部署和就业数量分别判断。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.18",
+          "source_refs": [
+            "imo-mass-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25197,10 +25200,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明运输与仓储业 66%、其他行业（含政府与其他服务）34%；不能推导行业工资或就业规模。"
+              "O*NET2025行业分布：运输与仓储71%、其他29%（含政府）；这是本职业分类分布，非工资或中国行业映射。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.28",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -25252,10 +25258,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表比较三组工作方向在自动化影响上的差别：哪些环节可被辅助，哪些判断与责任仍由人承担。"
+              "三组任务的技术影响为编辑比较；自主操纵能力与船长责任分开核，不把责任等同于所有操作只能人工。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.33",
+          "source_refs": [
+            "imo-mass-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25263,10 +25273,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "航线检查与海图信息检索、告警归并、记录初稿可由系统生成初稿。"
+              "编辑设想：信息筛选与记录可辅助；自主或远程系统也可能执行运行范围内动作，不能限于文书。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.34",
+          "source_refs": [
+            "imo-mass-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25274,10 +25288,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断计划是否可执行、异常是否成立、避碰与操纵决策是否安全，并对航行安全负责。"
+              "中国海上交通安全法31条：引航不解除船长指挥管理责任；34条不得冒险开航且船东不得强令；38条船长对生命安全、保安、防污染可独立决定。 IMO2026非强制MASS规则适用于SOLAS第1章货船，涉及自主动作、远程运营、风险评估、通信与网络安全及远程运营中心，船长保留总体责任，包括不在船上。不能由责任存在推出每项操纵必由现场人手执行，也不能推出已全面采用或个人岗位不会被替代。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.35",
+          "source_refs": [
+            "sea-law-current",
+            "imo-mass-current"
+          ],
           "type": "prose"
         },
         {
@@ -25285,10 +25303,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "设备状态预测与维护提醒、值班与休息记录汇总可由系统承载。"
+              "编辑设想：设备状态和休息记录工具可辅助，未取得实际收益；实际值班休息义务按适用规则核。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.36",
+          "source_refs": [
+            "us-rest-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25318,10 +25340,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "确认操纵与通信是否按程序执行、记录是否可追溯，并对合规与报告负责。"
+              "编辑核实际操纵系统的批准范围、驾驶台或远程操作职责和日志，保留船长安全责任；不是断言操纵皆手动。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.39",
+          "source_refs": [
+            "imo-mass-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25329,7 +25356,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、招聘技术信号、行业分布与任务暴露研究，不是 AI 替代率或岗位数量预测。"
+              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、任务口径、招聘技术信号、工资分布与任务暴露研究，不是AI替代率或岗位数量预测。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.40",
@@ -25384,10 +25411,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务清单描述职业群体工作，不代表每个岗位都承担全部 31 项任务；可指挥的船舶类型与总吨位与航区由执照与船东授权确定。"
+              "31项任务为职业群描述非每岗全部；可任船舶和任务须符合法定证书与任职条件，船东不得强令船长冒险开航。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.45",
+          "source_refs": [
+            "details-current",
+            "sea-law-current",
+            "sea-cert-current"
+          ],
           "type": "prose"
         },
         {
@@ -25461,10 +25493,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "页面共列出 13 类软件技能，按招聘启事出现比例给出 Microsoft Office 软件（5%）、Microsoft Excel（2%）、Microsoft Outlook（1%）；现场以雷达与电子海图与测深仪、操舵与侧推与锚与缆绳与拖带设备、通信设备与海图与潮汐与气象资料、救生消防与污染防控设备为主。"
+              "13软件类别、7热产品、1InDemand（Office）；2025全年美国招聘Office5%、Excel2%、Outlook1%，macOS/Revit/PowerPoint/Word为NA非0；招聘提及不等于部署、效率、自动化率或强制门槛。 仪表与航海设备另按details任务及实际配置核。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.52",
+          "source_refs": [
+            "hot-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -25560,10 +25596,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在航线检查、海图信息检索、告警归并、记录草拟与设备状态预测这类可复核环节，工具确实能提高效率。但工具看不到实际的海况与能见度、他船动态与驾驶台现场沟通，产出必须回到原始船舶与水域信息核对，并经持有相应执照或适任证书的人员确认。"
+              "编辑设想：资料检索、告警归并、草稿与维护提醒可辅助，尚无本职业实测效率。传感器接入可提供部分海况他船信息，不能说工具一律看不到现场；准确性、时效、覆盖和异常须检验。IMO2026非强制MASS规则适用于SOLAS第1章货船，涉及自主动作、远程运营、风险评估、通信与网络安全及远程运营中心，船长保留总体责任，包括不在船上。不能由责任存在推出每项操纵必由现场人手执行，也不能推出已全面采用或个人岗位不会被替代。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.61",
+          "source_refs": [
+            "imo-mass-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25571,10 +25611,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "取决于船舶认证与船旗国与港口国要求、是否有冗余通信与合格的传感器与网络安全措施、安全管理系统是否允许把航行数据接入外部系统，以及岸船协同与责任划分是否明确。技术可行不等于被允许用于航行决策、操纵执行或对外报告，也不等于企业已经采用。"
+              "IMO2026非强制MASS规则适用于SOLAS第1章货船，涉及自主动作、远程运营、风险评估、通信与网络安全及远程运营中心，船长保留总体责任，包括不在船上。不能由责任存在推出每项操纵必由现场人手执行，也不能推出已全面采用或个人岗位不会被替代。 具体船舶批准、运行边界及回退方案未逐船核，不冒充已部署。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.62",
+          "source_refs": [
+            "imo-mass-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25582,10 +25626,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露、流程自动化程度与就业数量是不同测量对象。该职业页面显示 2024 年约 40,700 人、2034 年约 40,900 人、十年变化约 +1%（Slower than average）、年均职位空缺约 4,300 个；BLS 职业展望手册另以更大口径发布（2025 年约 41,300 人 → 2035 年约 42,900 人、增长约 4%）。两组数字口径与期间不同，均为职业群体统计，不能推出个别船舶或公司的岗位变化。"
+              "美国SOC53-5021本职业2025约41300人→2035预测42900人，变化4.0%（平均），BLS净变化约1700人，2025—2035年均空缺3800个，非净增；舍入就业端点不反算净变化。 OOH相同专属行不是另一更大口径；预测不能归因为AI或作个人就业保证。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.63",
+          "source_refs": [
+            "ep-current",
+            "trends-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -25593,10 +25642,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不会以整体取代的方式发生：航行计划、异常确认、避碰、靠离泊、引航沟通与应急升级，仍需由持有相应执照或适任证书的人员负责；工具改变的是可复核的检查、归并与记录环节。"
+              "IMO2026非强制MASS规则适用于SOLAS第1章货船，涉及自主动作、远程运营、风险评估、通信与网络安全及远程运营中心，船长保留总体责任，包括不在船上。不能由责任存在推出每项操纵必由现场人手执行，也不能推出已全面采用或个人岗位不会被替代。 本轮未取得53-5021的GenAI替代率或单船岗位变化实证。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.64",
+          "source_refs": [
+            "imo-mass-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25604,10 +25657,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业摘要 / 详细资料"
+              "本轮依据：IMO2026MASS公告／BLS本职业表1.2／海上交通安全法；信息检索和训练候选为编辑分析，未核具体企业系统或收益。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.65",
+          "source_refs": [
+            "imo-mass-current",
+            "ep-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25615,7 +25674,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "需要的是海图与航行知识、态势感知与通信与指挥能力，而不是编程能力：能读懂海图与航行通告与气象资料、能按规则与检查单执行、能在压力下清楚下令并要求复诵；是否需要使用专业软件取决于船舶与公司配置。"
+              "编辑学习建议：先核海图、航行通知、气象、态势感知与通信指挥基础，以及按规则核对和清楚下令复诵的要求。专业软件或编程能力按具体船舶、公司与岗位核；本轮未取得通用编程门槛证据。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.66",
@@ -25637,10 +25696,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "航线检查与航行通告筛选、海图信息检索、告警归并、记录与报表初稿、设备状态预测等；这些环节可复核、可追溯。"
+              "编辑列出的信息检索、草稿和记录候选不是已实测“最易受影响”排名；自主运行还涉及导航动作，须核设计运行范围。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.68",
+          "source_refs": [
+            "imo-mass-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25648,10 +25711,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 详细资料 / 本页方法说明"
+              "本轮依据：IMO2026MASS公告／BLS本职业表1.2／海上交通安全法；信息检索和训练候选为编辑分析，未核具体企业系统或收益。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.69",
+          "source_refs": [
+            "imo-mass-current",
+            "ep-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25659,10 +25728,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该职业的就业与预测为 O*NET 展示的 BLS 预测口径：2024 年约 40,700 人、2034 年约 40,900 人、十年变化约 +1%（Slower than average）、年均空缺约 4,300 个；BLS 职业展望手册另以更大口径发布 2025 年约 41,300 人 → 2035 年约 42,900 人、增长约 4%，其中 8,600 个年均空缺属全部水上运输工作者。该职业页面未标注 Bright Outlook（相关职业中的飞机货物装卸主管 53-1041 与商业飞行员 53-2012 标注 Bright Outlook，属不同职业身份）。这些是职业群体统计，不构成个别船舶或公司的就业保证。"
+              "美国SOC53-5021本职业2025约41300人→2035预测42900人，变化4.0%（平均），BLS净变化约1700人，2025—2035年均空缺3800个，非净增；舍入就业端点不反算净变化。 OOH职业群8600空缺不用于本职业；本职业未标Bright Outlook，不外推邻职标签。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.70",
+          "source_refs": [
+            "ep-current",
+            "trends-current"
+          ],
           "type": "prose"
         },
         {
@@ -25670,10 +25743,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业摘要（就业与预测字段）"
+              "BLS表1.2：SOC53-5021，2025—2035精确职业预测"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.71",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -25681,10 +25757,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。航行决策与操纵与对外报告须由持有相应执照或适任证书的人员确认；系统既不能承担责任，也不能取得执照；工具只能提供可复核的检查、归并与记录支持。"
+              "IMO2026非强制MASS规则适用于SOLAS第1章货船，涉及自主动作、远程运营、风险评估、通信与网络安全及远程运营中心，船长保留总体责任，包括不在船上。不能由责任存在推出每项操纵必由现场人手执行，也不能推出已全面采用或个人岗位不会被替代。 中国海上交通安全法38条船长独立安全决定；系统不能替代法定责任主体，报告签署资格按具体规则核，本轮未核所有报告制度。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.72",
+          "source_refs": [
+            "imo-mass-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25692,10 +25773,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页方法说明 / 船舶安全管理体系与值班制度"
+              "本轮依据：IMO2026MASS公告／BLS本职业表1.2／海上交通安全法；信息检索和训练候选为编辑分析，未核具体企业系统或收益。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.73",
+          "source_refs": [
+            "imo-mass-current",
+            "ep-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25703,10 +25790,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有任何官方来源给出这样的年份。任务暴露、流程自动化程度与就业数量是不同概念，本页不做岗位消失年份预测。"
+              "本轮所核资料不提供本职业消失年份；MASS技术框架和就业预测均不支持推算该年份。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.74",
+          "source_refs": [
+            "imo-mass-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -25714,10 +25805,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页方法说明"
+              "按钮为ILO生成式AI任务暴露方法；暴露不能推本职业消失年份。IMO、BLS与海上交通安全法见关联来源；具体企业系统与收益未核。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.75",
+          "source_refs": [
+            "imo-mass-current",
+            "ep-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25747,10 +25844,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "自动化系统进入航线检查、告警归并、记录与报表等环节时，人的控制点应按以下五步固定下来；任何一步缺失都不应扩大使用范围。"
+              "以下是编辑建议的核对步骤，实际船上/远程职责和船长责任须依适用规则及系统运行范围核，非统一企业程序。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.78",
+          "source_refs": [
+            "editor-current",
+            "imo-mass-current"
+          ],
           "type": "prose"
         },
         {
@@ -25769,10 +25870,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只把可复核的航线检查、信息检索、告警归并、记录与报表草稿交给工具。"
+              "编辑可从可复核检索与草稿试用，但这不是自主系统只能处理文书的技术限制；实际动作以批准范围核。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.80",
+          "source_refs": [
+            "imo-mass-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25802,10 +25907,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "航行决策、操纵指令与对外报告由持有相应执照或适任证书的人员按程序确认并留痕。"
+              "按具体任职分工确认决策和报告职责；船长保留安全责任，自主或远程系统可在批准范围执行动作，报告签署规则另核。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.83",
+          "source_refs": [
+            "imo-mass-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25824,10 +25934,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按检查单交叉核对雷达与电子海图与目视与测深与声号信息，发现不一致先减速或停止并核实。"
+              "编辑建议交叉核对雷达、海图、目视、测深等；出现异常时立即通知驾驶台值班负责人或船长，由有相应职责者依据实际航行态势采取安全措施；减速、停车、交接或拒绝作业分别评估，不能统一先停航。船长依法独立作安全决定，不以内部请示替代。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.85",
+          "source_refs": [
+            "details-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25868,10 +25983,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按规定安排值班与休息并留存记录，疲劳影响判断时先交接或停航再评估。"
+              "美国46CFR15.1111对越boundary line的适用值班及安全、防污染、保安人员，常规休息24小时至少10小时、7日至少77小时；通常最多两段、一段至少6小时、间隔不超过14小时，另有紧急、演习及受限例外和补休，需排班与休息记录，不跨法域套用。 出现异常时立即通知驾驶台值班负责人或船长，由有相应职责者依据实际航行态势采取安全措施；减速、停车、交接或拒绝作业分别评估，不能统一先停航。船长依法独立作安全决定，不以内部请示替代。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.89",
+          "source_refs": [
+            "us-rest-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25890,10 +26010,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "船长应配合并采纳引航指令，但当指令可能威胁航行安全或造成污染时应纠正、制止或要求更换引航员并留痕。"
+              "中国引航规定26条要求双方交换引航方案与船舶操纵等信息；33条原则配合采纳，危及安全例外，可要求改指令、必要时请机构更换并及时报海事。30条引航员拒绝、暂停、终止前须告知船长并妥善安排船舶安全；不直接弃船或突然停止。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.91",
+          "source_refs": [
+            "pilot-operation-current",
+            "sea-law-current"
+          ],
           "type": "prose"
         },
         {
@@ -25912,10 +26036,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只在执照或适任证书范围内作业，发现船舶不适航或安全受威胁时先停止并升级。"
+              "中国海船驾驶按2026修正规则的航区、职务、等级、船舶及职能范围核适任证；健康、基本安全、适任/特殊培训、资历与考试按任务核，值班证有效期不超过5年及66岁生日。引航另按2025施行办法取得相应海港/内河类别、等级和范围证书并受聘引航机构；海船规则不覆盖内河完整发证要求。 出现异常时立即通知驾驶台值班负责人或船长，由有相应职责者依据实际航行态势采取安全措施；减速、停车、交接或拒绝作业分别评估，不能统一先停航。船长依法独立作安全决定，不以内部请示替代。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.93",
+          "source_refs": [
+            "sea-cert-current",
+            "pilot-rule-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -25956,10 +26086,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "航线检查与信息检索可由工具辅助，航向航速与操纵决策仍由人工完成。"
+              "编辑核导航系统运行边界：航向航速及操纵动作可有自动或远程执行，船长总体责任仍存在，非一律人工。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.97",
+          "source_refs": [
+            "imo-mass-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26000,10 +26134,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "告警归并与记录汇总可辅助，异常确认与升级判断仍需人工。"
+              "编辑设想告警归并和记录汇总；实际异常处理与船上/远程职责按系统和法规核，未实测收益。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.101",
+          "source_refs": [
+            "imo-mass-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26044,10 +26182,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "靠泊参数记录可辅助，操纵执行与引航沟通仍需人工。"
+              "引航交流与船长责任按适用法核；自动或远程操纵能力按船舶运行范围核，不把全部操纵执行必为人手操作。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.105",
+          "source_refs": [
+            "imo-mass-current",
+            "pilot-operation-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26088,10 +26231,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "设备状态预测与维护提醒可辅助，适航判断仍需人工。"
+              "编辑可考虑维护提醒或预测，未实测；人员仍承担适航与安全责任，不推断每项诊断不可自动化。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.109",
+          "source_refs": [
+            "imo-mass-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26132,10 +26280,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "培训材料与模拟器场景整理可辅助，示范与现场纠正仍需人工。"
+              "编辑可考虑培训素材整理或模拟，未核实自动化效果；现场或远程职责及人员资格另核。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.113",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26176,10 +26327,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "检查清单与到期提醒可辅助，停航与整改判断仍需人工。"
+              "编辑可考虑清单与到期提醒；中国海上交通安全法31条：引航不解除船长指挥管理责任；34条不得冒险开航且船东不得强令；38条船长对生命安全、保安、防污染可独立决定。 出现异常时立即通知驾驶台值班负责人或船长，由有相应职责者依据实际航行态势采取安全措施；减速、停车、交接或拒绝作业分别评估，不能统一先停航。船长依法独立作安全决定，不以内部请示替代。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.117",
+          "source_refs": [
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26220,10 +26375,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录模板与台账可辅助，带教效果与规范执行仍需人工评估。"
+              "编辑可考虑模板台账，人员承担训练和规范职责，未核具体自动评估效度。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.121",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26236,6 +26394,23 @@
           },
           "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.122",
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "O*NET-SOC 53-5021.00 职业摘要（就业与预测字段）",
+                "id": "link-11",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/summary/53-5021.00"
+              }
+            ]
+          },
+          "id": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.9.unconsumed",
+          "type": "links",
+          "visibility": "internal"
         }
       ]
     },
@@ -26340,10 +26515,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与船长、大副与船舶引航员精确对应的中国大陆全国职业工资分布；本条证据路由记为 （数据状态：暂无可安全使用的数据），本页不发布本职业的中位数、分位数或起薪。"
+              "证据不足：本轮未取得中国船长、大副与引航员全国精确工资分布，不发布该职业中位、分位或起薪。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.7",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26351,10 +26529,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "consequence 为「不能发布可比的全国中位数、分位分布或起薪」，resolution 为「标记中国薪资不可用，并说明可得的全国表是更宽口径的交通运输与仓储与邮政服务类别」；因此本页不做任何代理填补，只登记口径与缺口。"
+              "中国本职业全国精确工资仍证据不足；NBS2025交通运输仓储邮政业非私营133981/私营73133元税前年均，相关航运业务的多职业行业背景，非船长大副引航员工资、起薪、月薪或个人报价。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.8",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26362,10 +26543,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本条路由不使用行业平均作为替代数值"
+              "133981元/年（2025交通运输仓储邮政业非私营税前年均）"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.9",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26373,10 +26557,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "可得的官方全国工资表把交通运输与仓储与邮政服务人员合并统计，其中混合了大量与本职业无关的岗位；本条路由明确要求不用行业平均填充，故本页不发布其数值，只登记口径与覆盖范围。"
+              "industry_proxy：相关航运业务的多职业行业背景，含铁路公路航空仓储邮政等，不是本职业工资，不换算职业月薪。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.10",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26384,10 +26571,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本条路由不使用父职业或岗位类别汇总值作为替代数值"
+              "73133元/年（2025交通运输仓储邮政业私营税前年均）"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.11",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26395,10 +26585,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "岗位类别平均数按《中华人民共和国职业分类大典（2022 年版）》岗位类别汇总，不区分具体职业，也不区分船舶驾驶与引航与港航管理等职责；本页只登记口径，不发布数值。"
+              "industry_proxy：同一行业私营单位年平均工资，非船长、大副、引航员专属或中位数；不能据两均值推出个人单位溢价。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.12",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26406,10 +26599,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可核验的岗位招聘价格分布"
+              "证据不足：本轮未取得可核验的本职业招聘报价分布或个体收入统计。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.13",
+          "source_refs": [
+            "nbs-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26417,10 +26614,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "公开招聘报价受船型与航区与用工形式（航运企业编制、劳务派遣、项目制）与航次补贴结构影响，缺乏可核对的口径与样本；本页不据此推算本职业工资。"
+              "编辑比较应核船型、航区、聘用形式、工资组成与航次周期；没有本轮真实招聘样本，不据此拟造报价或差异。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.14",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26483,10 +26683,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "若引用中国大陆工资总额数据，须注意其为税前口径，包含单位代扣代缴的个人所得税、社会保险和住房公积金个人缴纳部分，不等于到手收入；在船津贴与航次补贴按实际约定计算，通常不计入工资总额口径。"
+              "税前统计包含个人所得税、社保和公积金个人缴纳部分；工资总额规定4、8条纳入津贴补贴及加班，11条排除出差伙食补助等。按实际支付性质区分在船/航次报酬和报销，不笼统断言津贴通常不计。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.20",
+          "source_refs": [
+            "nbs-current",
+            "wage-definition-current"
+          ],
           "type": "prose"
         },
         {
@@ -26494,10 +26698,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "结论：中国大陆无本职业精确职业数据；本条路由要求保留证据边界、不用行业平均或父职业或美国数据填充，本页只登记口径、覆盖范围与缺口，不给出任何本职业数值。"
+              "中国本职业全国精确工资仍证据不足；NBS2025交通运输仓储邮政业非私营133981/私营73133元税前年均，相关航运业务的多职业行业背景，非船长大副引航员工资、起薪、月薪或个人报价。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.21",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26516,10 +26723,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "自主与远程航运会改变监控与协同任务，但不改变中国大陆对该职业的统计口径：职业级统计缺口与工具无关。"
+              "MASS技术变化不补齐中国本职业工资或薪酬因果证据；本轮未取得工具采用前后工资研究。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.23",
+          "source_refs": [
+            "imo-mass-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26527,10 +26738,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业分类：本条证据路由把中国大陆映射记为 none（未建立与 O*NET-SOC 53-5021.00 一一对应的职业细类）；相关职责分散在船舶驾驶、引航与港航管理等岗位与证书体系中，船长与大副依《中华人民共和国船员条例》与海船船员适任考试和发证规则取得相应适任证书，引航员依引航员管理办法受聘于引航机构并取得限定类别与等级与范围的适任证书，其用工形式、船型条件与资质要求各不相同，须按岗位实际职责判断。中文页面语言不构成中国等价职业或工资映射。"
+              "中国海船驾驶与引航适用不同证书体系，工资未建立美国53-5021一一映射。中国海船驾驶按2026修正规则的航区、职务、等级、船舶及职能范围核适任证；健康、基本安全、适任/特殊培训、资历与考试按任务核，值班证有效期不超过5年及66岁生日。引航另按2025施行办法取得相应海港/内河类别、等级和范围证书并受聘引航机构；海船规则不覆盖内河完整发证要求。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.24",
+          "source_refs": [
+            "sea-cert-current",
+            "pilot-rule-current"
+          ],
           "type": "prose"
         },
         {
@@ -26560,10 +26775,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "该层级以在岗带教为主；须按规定完成船员注册与基本安全与适任培训，在指导下执行甲板与值班任务，不得独立承担航行指挥或对外报告责任。"
+              "编辑起点建议：先核实际学员/值班岗位证书和培训条件，受监督学习不等于可无证担任值班职务；海船10条对值班水手证有专门要求。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.27",
+          "source_refs": [
+            "sea-cert-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26593,10 +26812,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "可按规定承担值班与货物与旅客相关职责；可任职的航区与职务与船舶等级按适任证书类别与船东授权确定，不因学历自动扩大。"
+              "编辑方向参考：学历不自动授予二副三副职务；先核对应证书、资历、考试和船舶任职条件，海船与内河分开。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.30",
+          "source_refs": [
+            "sea-cert-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26626,10 +26849,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "该层级承担航行指挥与最终安全责任或限定水域的引航职责；开航与继续航行与拒绝不安全指令的判断须按安全管理体系与适用规定执行并留痕。"
+              "编辑进阶参考：大副船长需要相应任职资格和资历，不能从本科直接推出；引航有大副及符合条件应届生二副路线。中国海上交通安全法31条：引航不解除船长指挥管理责任；34条不得冒险开航且船东不得强令；38条船长对生命安全、保安、防污染可独立决定。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.33",
+          "source_refs": [
+            "sea-cert-current",
+            "pilot-rule-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26681,10 +26910,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "航运与港口相关岗位可能归入该类；该类把交通运输与仓储与邮政服务人员合并统计，仅公布宽口径均值，本页不据此推算本职业工资。"
+              "中国本职业全国精确工资仍证据不足；NBS2025交通运输仓储邮政业非私营133981/私营73133元税前年均，相关航运业务的多职业行业背景，非船长大副引航员工资、起薪、月薪或个人报价。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.38",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26714,10 +26946,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业级工资缺口（本条路由不使用代理）"
+              "精确工资缺口与行业背景分开"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.41",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26725,10 +26960,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本条证据路由要求保留证据边界并明确不用行业平均、父职业或美国数据填充；本页不发布任何代理数值，只登记口径与检索记录。"
+              "中国本职业全国精确工资仍证据不足；NBS2025交通运输仓储邮政业非私营133981/私营73133元税前年均，相关航运业务的多职业行业背景，非船长大副引航员工资、起薪、月薪或个人报价。 不将代理替换精确缺口。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.42",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26758,10 +26996,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆目前没有单列该职业的全国职业工资统计；本页只登记可核对的统计口径、职业映射边界与检索记录，不给出替代数值。"
+              "中国本职业全国精确工资仍证据不足；NBS2025交通运输仓储邮政业非私营133981/私营73133元税前年均，相关航运业务的多职业行业背景，非船长大副引航员工资、起薪、月薪或个人报价。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.45",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26769,10 +27010,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "比较不同机会时应确认用工形式（航运企业编制、劳务派遣与项目制）、证书类别与航区与职务、船舶类型与航次周期、值班与休息与在船津贴计算方式，并明确本页不提供中国大陆该职业的工资数值。"
+              "编辑比较真实机会时核法域、任职证书、船舶类型、航次与排班、报酬组成；行业均值不作为个人报价或中国本职业收入。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.46",
+          "source_refs": [
+            "editor-current",
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26813,10 +27058,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与船长、大副与船舶引航员精确对应的全国职业月薪分布；本页不发布替代数值。"
+              "证据不足：本轮未取得本职业中国全国月薪分布；上方为行业税前年均背景，不作职业月薪代填。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.50",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -26857,10 +27105,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未有官方或可核验来源支持其他地区该职业的月薪区间。"
+              "证据不足：本轮未取得其他地区该职业可核验月薪分布；不据未取得推断官方从未发布。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.54",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -26902,10 +27153,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "变化约 +1%（Slower than average）"
+              "变化4.0%（平均，2025—2035美国本职业）"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.58",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27062,10 +27316,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "对应时薪第 10 分位 22.80 美元，为分布下限，不是入门起薪的承诺。；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/53-5021.00"
+              "时薪P10为22.80美元；第10百分位不是最低工资或起薪承诺。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.10",
+          "source_refs": [
+            "wages-current"
+          ],
           "type": "prose"
         },
         {
@@ -27150,10 +27407,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同口径时薪第 90 分位为 82.04 美元，高分段通常与船舶类型、航区与职务层级与航次条件相关。；O*NET 展示的 BLS 2025 年工资分位｜https://www.onetonline.org/link/localwages/53-5021.00"
+              "时薪P90为82.04美元；统计不说明该分位由何种船型、航区或职务导致，非普遍水平或因果结论。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.18",
+          "source_refs": [
+            "wages-current"
+          ],
           "type": "prose"
         },
         {
@@ -27161,10 +27421,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "40,700人（2024 年）"
+              "41300人（2025本职业就业）"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.19",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27172,10 +27435,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为 Captains, Mates, and Pilots of Water Vessels（SOC 53-5021）精确职业口径 的就业基数，该职业 66% 位于运输与仓储业、34% 位于其他行业（含政府与其他服务）。；O*NET 职业摘要｜https://www.onetonline.org/link/summary/53-5021.00"
+              "O*NET2025行业分布：运输与仓储71%、其他29%（含政府）；这是本职业分类分布，非工资或中国行业映射。 就业规模为本职业，行业分布另计不推出行业工资。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.20",
+          "source_refs": [
+            "industry-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27183,10 +27450,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "变化约 +1%（Slower than average，2024—2034 年）"
+              "变化4.0%（平均，2025—2035）"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.21",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27194,10 +27464,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该变化标签为 Captains, Mates, and Pilots of Water Vessels（SOC 53-5021）精确职业口径，该职业页面未标注 Bright Outlook。；O*NET 职业摘要｜https://www.onetonline.org/link/summary/53-5021.00"
+              "美国SOC53-5021本职业2025约41300人→2035预测42900人，变化4.0%（平均），BLS净变化约1700人，2025—2035年均空缺3800个，非净增；舍入就业端点不反算净变化。 本职业未标Bright Outlook，不移用邻职标签。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.22",
+          "source_refs": [
+            "ep-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -27205,10 +27479,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "4,300个/年（2024—2034 年预测）"
+              "3800个/年（2025—2035本职业预测）"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.23",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27216,10 +27493,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "为 Captains, Mates, and Pilots of Water Vessels（SOC 53-5021）精确职业口径 的预测期年均职位空缺，由增长与替代需求共同构成，不是净新增，也不构成个人就业保证。BLS 职业展望手册另以更大口径发布 8,600 个年均空缺（属全部水上运输工作者，不能当作本职业的精确空缺数）。；O*NET 职业摘要｜https://www.onetonline.org/link/summary/53-5021.00"
+              "美国SOC53-5021本职业2025约41300人→2035预测42900人，变化4.0%（平均），BLS净变化约1700人，2025—2035年均空缺3800个，非净增；舍入就业端点不反算净变化。 OOH8600空缺是53-5000全部水上运输职业群，不代替本职业。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.24",
+          "source_refs": [
+            "ep-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27227,10 +27508,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界：本页美国工资与就业为本职业精确口径 Captains, Mates, and Pilots of Water Vessels（SOC 53-5021）精确职业口径（2025 年 5 月 BLS OEWS 工资分位与 2024—2034 年 BLS 预测），不是行业代理数据；该职业 2024—2034 年预测变化约 +1%，属慢于平均的正增长区间；BLS 职业展望手册把船长与大副与引航员并入更大口径发布（2025 年约 41,300 人 → 2035 年约 42,900 人、增长约 4%，8,600 个年均空缺属全部水上运输工作者并含转职与退休等替代需求），两组数字的统计范围与期间不同，本页分开标注、不混写为单一增长率，也不得互相替代；该职业本身未标注 Bright Outlook，其相关职业中飞机货物装卸主管（53-1041）与商业飞行员（53-2012）标注 Bright Outlook，属不同职业身份；行业分布描述统计分类而不是工资水平，本页不据此推导行业工资。"
+              "2025OEWS本职业工资分位与2025—2035BLS本职业预测分别列示。OOH41300→42900/4%不是更大口径，53-5000职业群85900→89000/4%及8600空缺另计。OEWS不含自雇；本职业预测自雇8.2%不当工资分布覆盖。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.25",
+          "source_refs": [
+            "wages-current",
+            "ep-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27238,10 +27524,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答：美国公开数据给出本职业精确口径的工资分布——2025 年中位年薪 92,460 美元、中位时薪 44.45 美元，年薪第 10 至第 90 分位为 47,420 至 170,640 美元；2024 年就业约 40,700 人，2024—2034 年预测变化约 +1%、年均职位空缺约 4,300 个。这些数字描述统计分类，不是个人起薪承诺，也不构成个人就业保证；该职业在美国通常必须持有美国海岸警卫队签发的执照，持证是入职前提而非工资保证。"
+              "2025美国本职业中位92460美元/年、44.45/时，年P10—P90为47420—170640。美国SOC53-5021本职业2025约41300人→2035预测42900人，变化4.0%（平均），BLS净变化约1700人，2025—2035年均空缺3800个，非净增；舍入就业端点不反算净变化。 持证不保证收入或录用。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.26",
+          "source_refs": [
+            "wages-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27249,10 +27539,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "学历与训练通常影响起点：O*NET 把该职业列为 Job Zone Three（SVP 6.0 至低于 7.0），通常需要职业学校培训、相关在职经验或副学士学位；教育调查中 42% 的受访者认为高中文凭或同等学历即可、37% 认为需要中等后证书；在职培训通常一至两年（含学徒形式，页面列出 2 项学徒方向：Officer in Charge of Navigational Watch 与 Pilot, Ship）。法定执照与适任证书是本职业的关键门槛，并按职务与航区与总吨位或引航范围逐级限定。"
+              "O*NET新入职需要学历问答42%高中/同等、37%中等后证书、8%本科，所示类别非完整分布且不是在岗学历。BLS本职业典型中等后非学位证书、相关经验少于5年、OJTNone；ZoneThree一般一至两年训练非所有岗位期限。学徒示例Officer in Charge of Navig Watch/Pilot, Ship非当前招生或统一必修。 美国实际TWIC/MMC、endorsement、medical和STCW条件须逐岗核，不把69关联目录条目当通用驾驶必需。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.27",
+          "source_refs": [
+            "details-current",
+            "ep-current",
+            "us-credential-current",
+            "cert-current"
+          ],
           "type": "prose"
         },
         {
@@ -27271,10 +27567,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业与雇主类型影响报酬：O*NET 行业分布显示该职业 66% 位于运输与仓储业、34% 位于其他行业（含政府与其他服务）；航运企业与拖带与渡运与港务与引航机构与工程作业船舶的计酬方式与航次周期不同。"
+              "O*NET2025行业分布：运输与仓储71%、其他29%（含政府）；这是本职业分类分布，非工资或中国行业映射。 编辑比较实际合同应另核雇主、岗位和计酬构成；无本轮雇主报酬差异实测。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.29",
+          "source_refs": [
+            "industry-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27293,10 +27593,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "职责范围影响报酬：是否能承担更大总吨位与更复杂航区的指挥、是否具备引航或动力定位与特种作业资格、是否负责配员与安全管理职责，通常比固定航线的值班岗位更影响报酬水平。"
+              "编辑核对职责、船型、航区、资历和计酬安排，不由职务责任直接推出更高收入，也未核各因素薪酬因果或大小排序。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.31",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27315,10 +27618,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "变化约 +1%（Slower than average）"
+              "变化4.0%（平均，2025—2035）"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.33",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27326,10 +27632,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "运输与仓储业（66%）"
+              "深海、沿海与五大湖水运（全部水上运输职业群父级背景）"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.34",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27337,10 +27646,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "79420美元/年（2025该行业水上运输职业群中位，非本职业）"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.35",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27348,10 +27660,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布显示该职业 66% 位于运输与仓储业。"
+              "parent_occupation_proxy：包含船长大副引航员、水手机油员、轮机员及小艇操作员；不当53-5021行业工资，本轮精确缺口仍在。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.36",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27359,10 +27674,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他行业（含政府与其他服务，34%）"
+              "水运支持活动（全部水上运输职业群父级背景）"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.37",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27370,10 +27688,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：O*NET 与 BLS 未公布该职业按行业细分的工资中位数。"
+              "77990美元/年（2025该行业水上运输职业群中位，非本职业）"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.38",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27381,10 +27702,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 把其余 34% 合并为「其他行业」；本页不拆分该部分，也不推算其工资。"
+              "parent_occupation_proxy：包含船长大副引航员、水手机油员、轮机员及小艇操作员；不当53-5021行业工资，本轮精确缺口仍在。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.39",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27392,10 +27716,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "船舶类型与航区细分未公布"
+              "内河水运（全部水上运输职业群父级背景）"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.40",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27403,10 +27730,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：来源未公布按船舶类型或航区层级细分的工资中位数。"
+              "65660美元/年（2025该行业水上运输职业群中位，非本职业）"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.41",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27414,10 +27744,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 未公布按船型与航区细分的工资；本页不推测该部分构成或工资。"
+              "parent_occupation_proxy：包含船长大副引航员、水手机油员、轮机员及小艇操作员；不当53-5021行业工资，本轮精确缺口仍在。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.42",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27425,10 +27758,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "职务与航次条件细分未公布"
+              "联邦政府（不含邮政）（全部水上运输职业群父级背景）"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.43",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27436,10 +27772,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：来源未公布按职务层级或航次条件细分的工资中位数。"
+              "57930美元/年（2025该行业水上运输职业群中位，非本职业）"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.44",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27447,10 +27786,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 未公布按职务细分的工资；本页不推测该部分构成或工资。"
+              "parent_occupation_proxy：包含船长大副引航员、水手机油员、轮机员及小艇操作员；不当53-5021行业工资，本轮精确缺口仍在。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.45",
+          "source_refs": [
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -27458,10 +27800,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位数不是入门工资：它表示一半从业者高于、一半低于该值；第 10 与第 25 分位更接近分布低端，但仍受船舶类型、航区、职务层级与航次条件影响。"
+              "中位不是起薪；P10/P25为较低分位非最低值或所有新人，P90为较高分位非普遍水平；工资分位不支持船型航区职务因果说明。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.46",
+          "source_refs": [
+            "wages-current"
+          ],
           "type": "prose"
         },
         {
@@ -27480,10 +27825,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "数字来自 O*NET 展示的 BLS 2025 年 OEWS 工资数据，口径为 Captains, Mates, and Pilots of Water Vessels（SOC 53-5021）；就业与预测期为 2024—2034 年。该职业 66% 集中于运输与仓储业，行业间工资差异未在来源中公布。"
+              "本职业2025年薪/时薪五分位见O*NET/BLS，预测2025—2035。O*NET2025行业分布：运输与仓储71%、其他29%（含政府）；这是本职业分类分布，非工资或中国行业映射。 本轮未取得53-5021精确职业分行业中位；OOH已公布的是全部水上运输职业群分行业中位，以下仅作父级背景。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.48",
+          "source_refs": [
+            "wages-current",
+            "industry-current",
+            "ooh-current",
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -27491,10 +27842,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "实际收入还受用工形式（航运企业编制、劳务派遣与项目制）、船舶类型与航区与航次周期、值班与休息安排与在船津贴计算方式影响。"
+              "编辑比较实际收入应核雇主合同、岗位、航次、值班休息、津贴与加班等；本轮未取得各因素薪酬差异研究或真实招聘样本。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.49",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27535,10 +27889,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位为年薪 170,640 美元；高端通常与船舶类型、航区与职务层级与航次条件相关，不代表普遍水平。"
+              "P90为170640美元/年；高于此值约10%，非最大值或普遍水平，不由此推断船型航区职务成因。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.53",
+          "source_refs": [
+            "wages-current"
+          ],
           "type": "prose"
         }
       ]
@@ -27849,10 +28206,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格中与工作方式更相关的是尽责性（按检查单核对、完整记录值班与航次）、情绪稳定性（在天气与交通与设备异常下保持判断）与谨慎性（对风险保守、不冒险）。这些关联来自一般性研究结论，强度低于实际表现。"
+              "编辑观察可关注记录、规则、压力下沟通与纠正习惯；O*NET工作风格不是大五人格分数，谨慎性也不能另称大五维度。本轮未核本职业大五预测效度研究。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.6",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27860,10 +28221,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：人格与工作行为的相关性属于一般性研究结论，不能替代可复核的航次计划、值班与休息记录、检查与维护记录与合规报告。"
+              "职业工作风格的官方描述与大五测验效度不同；本轮没有本职业效度、阈值或录用预测证据，使用具体行为观察。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.7",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -27871,11 +28235,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "尽责性有助于按航次计划与检查单执行、完整记录船位与动态与值班情况。",
-              "情绪稳定性与自控有助于在紧迫局面下保持口令清晰并要求复诵，而不是凭感觉操纵。"
+              "编辑观察：是否按计划核对并完整记录船位、动态和值班，具体表现比人格标签更可核。",
+              "编辑观察：压力下能清楚交流和接受纠正；本轮未核大五测验对该职业的预测效度。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.8",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "list"
         },
         {
@@ -27894,7 +28261,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业适配或专业胜任的评估工具，也没有官方资料支持「某种类型最适合船长、大副与船舶引航员」的说法。可用于自我反思与沟通偏好理解，但不能用于招聘筛选、执照考核或岗位分配。"
+              "本轮所读职业资料未提供MBTI对本职业胜任、招聘或适任判断的预测效度；本页仅借偏好提出核对问题，不据类型判任职。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.10",
@@ -27905,7 +28272,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：MBTI 的职业预测效度有限，且不被 O*NET 或 BLS 用作适配标准。"
+              "证据边界：本轮未取得MBTI对本职业预测效度或类型准入的研究，不将资料缺口写成已证明无效。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.11",
@@ -27939,7 +28306,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样不是职业适配工具，缺乏官方职业资料支持，也不用于招聘或适任判断。可用于自我反思，但不能据此决定是否投入长期培训与持证路径。"
+              "本轮未取得九型人格对本职业胜任或适任判断的研究；可提出反思问题，本页不据类型决定长期培训与持证投入。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.14",
@@ -27950,7 +28317,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：无官方职业资料来源支持将九型人格用于职业适配判断。"
+              "证据边界：本轮未取得九型人格的本职业预测或招聘效度，不能据类型定准入。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.15",
@@ -28029,10 +28396,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力有帮助：需要在紧迫局面、恶劣天气与疲劳压力下保持稳定并清楚下令、复诵与升级。但这类能力不能用单一分数定义，也不能替代执照、适任证书与值班与休息规定。"
+              "编辑可观察压力下清楚交流、接受纠正和履行安全职责的表现；不将情绪分数推为适任，也未核本职业EI预测研究。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.22",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28040,10 +28410,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据强度：O*NET 工作风格以领导取向（100）与可靠性（98）与谨慎性（91）与注重细节（87）与压力耐受（85）为主；情绪智力测验的预测效度有限，不能替代实践证据。"
+              "O*NET风格影响值：领导100/可靠98/谨慎91/细节87/压力耐受85，描述职业而非EI效度。本轮未核本职业EI预测研究或个人门槛。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.23",
+          "source_refs": [
+            "details-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28051,11 +28425,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "entries": [
-              "能在被指出操纵或记录问题时按程序改正，比情绪分数高低更重要。",
-              "愿意承认判断不确定并立即减速或停航核实、通知驾驶台与船岸，是专业能力的一部分。"
+              "编辑观察建议：操纵或记录问题被指出时，核是否按程序复查改正；未取得与情绪分数的比较效度。",
+              "编辑观察：愿意承认信息不足并立即通知有职责者、结合态势安全处置，不能统一有疑问即停航。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.24",
+          "source_refs": [
+            "editor-current",
+            "sea-law-current"
+          ],
           "type": "list"
         },
         {
@@ -28096,10 +28474,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更偏海港引航的方向"
+              "船舶工程师与海军建筑师"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.28",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28107,10 +28488,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意在限定水域反复登离船并承担靠离泊与狭窄水域操纵责任。"
+              "编辑比较：关注船体或系统技术设计者"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.29",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28118,10 +28502,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足本地水文与操纵特性与引航规程；对登离船安全与沟通复诵要求更高。"
+              "编辑比较：需补工程设计、计算及相应教育，驾驶经验不等于工程能力。 不保证直接准入。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.30",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28129,10 +28516,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更偏沿海与内河值班的方向"
+              "渔猎从业人员"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.31",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28140,10 +28530,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意按航次计划执行长时段值班并处理避碰与狭窄水道操纵。"
+              "编辑比较：关注捕捞等生产作业者"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.32",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28151,10 +28544,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足避碰规则与驾驶台资源管理与疲劳管理能力；对纪律与记录要求高。"
+              "编辑比较：需另核渔具、作业技能与许可，海上环境经验不等于渔业准入。 不保证直接准入。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.33",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28162,10 +28558,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更偏拖带与驳船作业的方向"
+              "商业潜水员"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.34",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28173,10 +28572,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意执行拖带编队与系带缆绳与驳船操纵等作业。"
+              "编辑比较：关注水下施工检验者"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.35",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28184,10 +28586,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足拖带力学与作业安全知识；对系带缆绳与人员安全防护要求更高。"
+              "编辑比较：需另核潜水训练、健康与水下作业资格，不由航海经验直接转任。 不保证直接准入。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.36",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28195,10 +28600,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更偏渡运与客船的方向"
+              "索具工"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.37",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28206,10 +28614,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意承担旅客安全与高频靠离泊与班期管理责任。"
+              "编辑比较：关注吊装绑扎作业者"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.38",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28217,10 +28628,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足旅客安全与应急疏散与班期管理能力；对人流密集作业要求更高。"
+              "编辑比较：需补载荷、索具选择与吊装安全，不由驾驶台操纵经验直接胜任。 不保证直接准入。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.39",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28228,10 +28642,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更偏工程与特种作业船舶的方向"
+              "飞机货物装卸主管"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.40",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28239,10 +28656,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意在动力定位与作业窗口与多工种协同条件下操纵船舶。"
+              "编辑比较：关注航空货运作业组织者"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.41",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28250,10 +28670,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足动力定位与作业支持与多工种协同能力；对精度与沟通要求更高。"
+              "编辑比较：需补航空配载装载规则与岗位条件，不能沿用海事资格。 不保证直接准入。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.42",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28261,10 +28684,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更偏海务与安全管理的方向"
+              "水手与船舶机油员"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.43",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28272,10 +28698,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意承担航行安全监督、配员与培训与合规管理职责。"
+              "编辑比较：关注船上甲板或机舱执行者"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.44",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28283,10 +28712,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要补足安全管理体系与审核与培训能力；职责从单船指挥转向船队与制度层面。"
+              "编辑比较：需分甲板与机舱核值班辅助、设备及对应资格，不与驾驶职務混用。 不保证直接准入。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.45",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28294,10 +28726,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "与其说某种性格，不如说某种工作方式：把航次计划看清、把检查单核完、把口令喊清并要求复诵、把值班与休息记全、把不确定的地方停下来问明白。O*NET 工作活动强调操作与控制、检查设备、识别对象与动作与事件与决策与解决问题。"
+              "编辑适配观察：愿意查计划、核信息、清楚交流、完整记录并及时处理不确定性；不由人格类型或模拟表现认定可任职。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.46",
+          "source_refs": [
+            "editor-current",
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28305,7 +28741,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合与否不取决于内外向。工作情境显示 88% 每天面对面讨论、69% 持续与他人接触、59% 每天电话交谈，同时 82% 每周工作超过 40 小时、61% 持续用手操作、62% 每天在户外暴露于各种天气；能否在驾驶台把指令讲清并把记录填全，比外向程度更关键。"
+              "美国情境问答88%每天面谈、69%持续接触、59%每天电话，82%周工时超过40小时、61%持续手动、62%每天户外天气暴露。编辑观察建议：核指令澄清与记录表现；未取得与外向性的比较效度。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.47",
@@ -28316,7 +28752,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能。外向有助于在驾驶台与船岸沟通与带教，但工作仍以长时间值班、按检查单核对与持续监控为主（82% 每周工作超过 40 小时、69% 每天在封闭车辆或操作封闭设备中、48% 与他人保持一臂之内距离）；能否接受轮班与长期离家，比表达欲更关键。"
+              "本轮未取得外向分数对本职业沟通或轮班胜任的研究。82%周工时超过40小时、69%每天封闭车辆或设备、48%近距离接触是情境问答；可结合具体岗位观察沟通、检查单和轮班适应，长期离家条件另核。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.48",
@@ -28327,7 +28763,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有官方结论，也不存在最适合的类型。MBTI 只能帮助整理偏好并提出核对问题，不能预测专业胜任力或招聘与执照考核结果；本页不提供类型名单。"
+              "本轮未取得支持某MBTI类型最适合本职业的研究；本页不提供类型名单，不据偏好标签预测招聘或适任考核结果。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.49",
@@ -28338,10 +28774,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 把该职业的兴趣代码列为 RCE（现实型、常规型、企业型）：现实型对应在真实环境中操作船舶与设备（具体领域以运输与机械操作 88 为主），常规型对应按规则与检查单与记录执行，企业型对应指挥与协调并承担责任。兴趣代码描述职业群体特征，不是个人适配结论。"
+              "兴趣RCE：R77/C59/E54/I27/S15/A0；具体领域运输/机器操作88、管理/行政60、自然/户外43另计，不是R子分数或个人准入线。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.50",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28349,7 +28788,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。人格与兴趣工具的效度有限，不能替代可复核的航次记录、值班与休息记录、检查与维护记录与合规表现；本页只用它们提出核对问题。"
+              "本轮未取得人格、兴趣工具对本职业胜任的预测效度；可结合航次、值班休息、检查维护记录及实际合规表现核对，不据分数定任职。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.51",
@@ -28360,10 +28799,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不建议长期投入的情形：你无法适应长时间值班与长期离家（82% 每周工作超过 40 小时、72% 认为出错后果极其严重），或不愿按规定记录值班与休息、不愿在不确定时停航或拒绝不安全操作；可以先在一次完整的模拟航行与主引航交换练习后再判断。该职业基础技能中数学重要度 35、科学 22，但航次计算与稳性与吃水与潮汐推算仍需要基本计算与空间判断能力。"
+              "编辑慎重信号：明显不适应相应航次工时与离家安排、抵触记录或拒绝安全纠正，可先在受监督模拟中观察。O*NET82%典型周>40h、72%难纠正错误后果极严重；数学35/科学22为职业技能重要度非个人及格线。出现异常时立即通知驾驶台值班负责人或船长，由有相应职责者依据实际航行态势采取安全措施；减速、停车、交接或拒绝作业分别评估，不能统一先停航。船长依法独立作安全决定，不以内部请示替代。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.52",
+          "source_refs": [
+            "details-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28371,10 +28815,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与耐受能力确实有帮助：需要在紧迫局面与恶劣天气与疲劳压力下保持稳定并清楚下令与复诵。但这类能力不能用单一分数定义，也不能替代执照、适任证书与值班与休息规定。"
+              "编辑关注紧迫情境下的交流和纠正习惯；本轮未核本职业EI测验效度，不设情绪分数门槛，不替代法定任职条件。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.53",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28382,7 +28829,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。九型人格不是职业适配或胜任评估工具，也不被官方职业资料用作招聘依据；可用于自我反思，但不能据此做培训与持证投入决定。"
+              "本轮未取得九型人格对本职业招聘、胜任或投入回报的研究；本页不据类型决定培训与持证投入。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.54",
@@ -28393,10 +28840,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用可复核的产出判断：一份含航次计划与中止条件的航行方案、一份主引航交换卡（含三项风险、两项中止条件、操纵顺序、通信复诵点与备选方案）、一份模拟值班与异常处置记录、一份值班与休息与合规记录。若你能按规范完成并被在岗人员复核通过，说明你具备基本适配条件。"
+              "编辑可用受监督模拟的计划、信息交换、异常识别与记录来发现需训练之处；在岗人员复核模拟不证明基本适任或授予值班操纵资格，必须另核法定证书和实际任职条件。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.55",
+          "source_refs": [
+            "editor-current",
+            "sea-cert-current",
+            "pilot-rule-current"
+          ],
           "type": "prose"
         },
         {
@@ -28404,10 +28856,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "你能按规则与检查单完成航行与操纵并留下可追溯记录；你愿意在证书范围不足、船舶不适航或安全受威胁时先停止并请示，而不是硬来。"
+              "编辑积极信号：能核信息并留下可复核记录，承认证书范围与职责边界并及时报告异常。中国海上交通安全法31条：引航不解除船长指挥管理责任；34条不得冒险开航且船东不得强令；38条船长对生命安全、保安、防污染可独立决定。 出现异常时立即通知驾驶台值班负责人或船长，由有相应职责者依据实际航行态势采取安全措施；减速、停车、交接或拒绝作业分别评估，不能统一先停航。船长依法独立作安全决定，不以内部请示替代。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.56",
+          "source_refs": [
+            "editor-current",
+            "sea-law-current"
+          ],
           "type": "prose"
         },
         {
@@ -28437,10 +28893,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的准备层级、学历构成与培训入口。"
+              "O*NET新入职需要学历问答42%高中/同等、37%中等后证书、8%本科，所示类别非完整分布且不是在岗学历。BLS本职业典型中等后非学位证书、相关经验少于5年、OJTNone；ZoneThree一般一至两年训练非所有岗位期限。学徒示例Officer in Charge of Navig Watch/Pilot, Ship非当前招生或统一必修。 培训目录另列11项目，不能把毕业数当在岗学历。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.59",
+          "source_refs": [
+            "details-current",
+            "ep-current",
+            "training-current"
+          ],
           "type": "prose"
         },
         {
@@ -28448,10 +28909,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明证书与培训的定位：本职业在美国为法定持证职业，职业证书不等于船东聘用或特定船舶授权。"
+              "认证目录69关联项含驾驶、轮机/STCW及休闲航海项目，关联不等于驾驶任职必需；美国法定证件条件依据46CFR15.401另核。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.60",
+          "source_refs": [
+            "cert-current",
+            "us-credential-current"
+          ],
           "type": "prose"
         },
         {
@@ -28492,10 +28957,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的准备层级与培训入口。"
+              "学历及2项学徒示例见details；ZoneThree通用准备描述非每岗一至两年。11培训项目目录不证明通用法定资格。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.personality-fit-block.64",
+          "source_refs": [
+            "details-current",
+            "training-current"
+          ],
           "type": "prose"
         },
         {
@@ -28547,10 +29016,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 兴趣代码：RCE（现实型、常规型、企业型）。现实型下的具体兴趣领域以运输与机械操作（88）、管理与行政（60）、自然与户外（43）为主；常规型在本页对应按避碰规则与检查单与记录执行。"
+              "兴趣RCE：R77/C59/E54/I27/S15/A0；具体领域运输/机器操作88、管理/行政60、自然/户外43另计，不是R子分数或个人准入线。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.fit.riasec-fit-block.11",
+          "source_refs": [
+            "details-current"
+          ],
           "type": "prose"
         },
         {
@@ -28680,28 +29152,28 @@
                 "url": "https://www.onetonline.org/link/summary/53-5021.00"
               },
               {
-                "entity": "中华人民共和国交通运输部（水上运输与船员与引航政策入口）",
+                "entity": "海上交通安全法2021",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://xxgk.mot.gov.cn/zhengceapp/index_1.html"
+                "url": "https://www.js.msa.gov.cn/art/2021/9/9/art_842_842.html"
               },
               {
-                "entity": "《中华人民共和国引航员管理办法》",
+                "entity": "引航员管理办法2025施行",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://xxgk.mot.gov.cn/jigou/fgs/202501/t20250120_4162795.html"
+                "url": "https://www.js.msa.gov.cn/art/2025/3/1/art_842_1862.html"
               },
               {
-                "entity": "《中华人民共和国船舶引航管理规定》",
+                "entity": "船舶引航管理规定2021修正",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://xxgk.mot.gov.cn/jigou/fgs/202109/t20210910_3618358.html"
+                "url": "https://js.msa.gov.cn/art/2022/5/16/art_842_1108.html"
               },
               {
-                "entity": "《中华人民共和国船员条例》",
+                "entity": "海船船员适任发证规则2026修正",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://xxgk.mot.gov.cn/2020/jigou/fgs/202006/t20200623_3307981.html"
+                "url": "https://xxgk.mot.gov.cn/jigou/fgs/202607/t20260715_4209687.html"
               }
             ]
           },
@@ -28724,10 +29196,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答：主要风险包括水深或潮流判断错误导致搁浅、驾驶台信息交换遗漏或口令未复诵导致操纵冲突、连续值班与疲劳导致注意力下降、恶劣海况下引航员登离船受伤、对自动告警过度信任，以及超出执照或适任范围作业与污染防控失当；控制依赖航次计划与中止条件、主引航交换、标准口令与复诵与交叉监控、值班与休息记录、按检查单核实原始信息、停航或拒绝不安全操作与应急升级。"
+              "编辑风险归纳：水深船位误判、交流遗漏、疲劳、登离船和缆绳伤害、盲信自动告警及超证书范围作业。出现异常时立即通知驾驶台值班负责人或船长，由有相应职责者依据实际航行态势采取安全措施；减速、停车、交接或拒绝作业分别评估，不能统一先停航。船长依法独立作安全决定，不以内部请示替代。 中国引航规定26条要求双方交换引航方案与船舶操纵等信息；33条原则配合采纳，危及安全例外，可要求改指令、必要时请机构更换并及时报海事。30条引航员拒绝、暂停、终止前须告知船长并妥善安排船舶安全；不直接弃船或突然停止。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.risk.career-risk-cards.9",
+          "source_refs": [
+            "details-current",
+            "sea-law-current",
+            "pilot-operation-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28735,10 +29213,19 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：风险与边界条目依据 O*NET 53-5021.00 的官方任务、工作活动与工作情境，以及国际海事组织关于自主航运与海员工时休息与引航程序的公开材料，与中国大陆船员条例与引航员管理办法与船舶引航管理规定的公开要求整理；不替代船旗国与港口国要求、船东安全管理体系与适用法域的具体规定。"
+              "本轮实际依据O*NET任务/57情境、海上交通安全法31/33/34/37/38、2026海船发证规则、2025引航办法、引航规定26/30/33/34和美国46CFR15.1111；事故场景和措施归纳为编辑建议，未取得具体船舶安全管理程序。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.risk.career-risk-cards.10",
+          "source_refs": [
+            "details-current",
+            "sea-law-current",
+            "sea-cert-current",
+            "pilot-rule-current",
+            "pilot-operation-current",
+            "us-rest-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28768,10 +29255,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按航次计划执行并在关键转向与进入浅水区前用测深与目视与雷达交叉核实；不确定时减速或停止并报告，不凭单一信息源继续。"
+              "编辑建议关键船位、水深和转向信息多源核对；出现异常时立即通知驾驶台值班负责人或船长，由有相应职责者依据实际航行态势采取安全措施；减速、停车、交接或拒绝作业分别评估，不能统一先停航。船长依法独立作安全决定，不以内部请示替代。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.risk.career-risk-cards.13",
+          "source_refs": [
+            "details-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28812,10 +29304,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "完成主引航交换并明确风险与中止条件与通信与复诵与备选方案；使用标准口令并要求复诵，落实交叉监控。"
+              "中国引航规定26条要求双方交换引航方案与船舶操纵等信息；33条原则配合采纳，危及安全例外，可要求改指令、必要时请机构更换并及时报海事。30条引航员拒绝、暂停、终止前须告知船长并妥善安排船舶安全；不直接弃船或突然停止。 复诵和交叉监控为编辑训练建议，未核所有机构统一口令制度。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.risk.career-risk-cards.17",
+          "source_refs": [
+            "pilot-operation-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28845,10 +29341,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "引航指令可能威胁航行安全或造成污染，处理不当会造成安全与环境后果；引航员的专业职责不解除船长与驾驶台值班人员的安全义务。"
+              "引航交流与错误指令可造成风险；中国海上交通安全法31条明确引航不解除船长指挥管理责任，不能将全部责任转给引航员。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.risk.career-risk-cards.20",
+          "source_refs": [
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28856,10 +29356,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "船长应配合并采纳引航指令，但当指令可能威胁航行安全或造成污染时应纠正、制止或要求更换引航员，并按规定报告与留痕。"
+              "中国引航规定26条要求双方交换引航方案与船舶操纵等信息；33条原则配合采纳，危及安全例外，可要求改指令、必要时请机构更换并及时报海事。30条引航员拒绝、暂停、终止前须告知船长并妥善安排船舶安全；不直接弃船或突然停止。 中国海上交通安全法31条：引航不解除船长指挥管理责任；34条不得冒险开航且船东不得强令；38条船长对生命安全、保安、防污染可独立决定。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.risk.career-risk-cards.21",
+          "source_refs": [
+            "pilot-operation-current",
+            "sea-law-current"
+          ],
           "type": "prose"
         },
         {
@@ -28900,10 +29404,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规定安排值班与休息并留存记录，疲劳影响判断时先交接或停航再评估；配员不足时按程序报告。"
+              "美国46CFR15.1111对越boundary line的适用值班及安全、防污染、保安人员，常规休息24小时至少10小时、7日至少77小时；通常最多两段、一段至少6小时、间隔不超过14小时，另有紧急、演习及受限例外和补休，需排班与休息记录，不跨法域套用。 疲劳问题立即报告有职责者，安全交接或调整值班须结合实际状态，不统一要求先停航；中国要求另核适用船舶制度。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.risk.career-risk-cards.25",
+          "source_refs": [
+            "us-rest-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28944,10 +29453,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按程序选择登离船时机与舷侧并做好防护与照明与通信准备；评估不适当时推迟或改用替代方案并留痕。"
+              "中国引航规定33—35条要求安全登离设备、必要保障、确认安全后离船；30条拒绝暂停终止前告知船长并妥善安排船舶安全。本轮未取得具体登离作业程序或替代方案批准条件，不写成页面授权。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.risk.career-risk-cards.29",
+          "source_refs": [
+            "pilot-operation-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -28988,10 +29501,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "对自动告警保持审慎并回看原始传感器与目视信息；只在证书与授权范围内作业，污染防控与报告按程序执行并留痕。"
+              "中国海船驾驶按2026修正规则的航区、职务、等级、船舶及职能范围核适任证；健康、基本安全、适任/特殊培训、资历与考试按任务核，值班证有效期不超过5年及66岁生日。引航另按2025施行办法取得相应海港/内河类别、等级和范围证书并受聘引航机构；海船规则不覆盖内河完整发证要求。 中国海上交通安全法31条：引航不解除船长指挥管理责任；34条不得冒险开航且船东不得强令；38条船长对生命安全、保安、防污染可独立决定。 自动告警核原始信息为编辑建议，不替代实际系统运行批准。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.risk.career-risk-cards.33",
+          "source_refs": [
+            "sea-cert-current",
+            "pilot-rule-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29021,10 +29540,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆水上运输与船舶驾驶与引航与安全的监管与政策入口，不构成对具体机构或个人的合规定性。"
+              "实际核海上交通安全法31/33/34/37/38，支持船长责任、开航准备和独立安全决定；不只引用政策发现入口。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.risk.career-risk-cards.36",
+          "source_refs": [
+            "sea-law-current"
+          ],
           "type": "prose"
         },
         {
@@ -29043,10 +29565,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明官方相邻职业对照与身份边界口径，不用于风险评估。"
+              "实际核船舶引航管理规定26/30/33/34，支持信息交换、拒绝暂停终止前安全安排和危险指令处理。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.risk.career-risk-cards.38",
+          "source_refs": [
+            "pilot-operation-current"
+          ],
           "type": "prose"
         },
         {
@@ -29054,10 +29579,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆薪酬调查按岗位与行业汇总、但不单列本职业的口径，不发布数值。"
+              "本轮依据2026海船适任发证规则，说明航区职务等级与资格范围，不以薪酬调查支持安全措施。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.risk.career-risk-cards.39",
+          "source_refs": [
+            "sea-cert-current"
+          ],
           "type": "prose"
         }
       ]
@@ -29341,10 +29869,19 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答：O*NET 把该职业列为 Job Zone Three（中等准备，SVP 6.0 至低于 7.0），通常需要职业学校培训、相关在职经验或副学士学位（教育调查中 42% 认为高中文凭或同等学历即可、37% 认为需要中等后证书），并有一至两年的在职培训（含学徒形式，该职业页列出 2 项学徒方向：Officer in Charge of Navigational Watch 与 Pilot, Ship）。本职业在美国通常必须持有美国海岸警卫队签发的执照并按职务与航区与总吨位升级；在中国大陆，船长与大副须依《中华人民共和国船员条例》与海船船员适任考试和发证规则取得相应适任证书，引航员须依引航员管理办法受聘于引航机构并取得限定类别与等级与范围的适任证书，引航作业另受船舶引航管理规定约束。证书本身不自动带来船东聘用或特定船舶授权。"
+              "O*NET新入职需要学历问答42%高中/同等、37%中等后证书、8%本科，所示类别非完整分布且不是在岗学历。BLS本职业典型中等后非学位证书、相关经验少于5年、OJTNone；ZoneThree一般一至两年训练非所有岗位期限。学徒示例Officer in Charge of Navig Watch/Pilot, Ship非当前招生或统一必修。 中国海船驾驶按2026修正规则的航区、职务、等级、船舶及职能范围核适任证；健康、基本安全、适任/特殊培训、资历与考试按任务核，值班证有效期不超过5年及66岁生日。引航另按2025施行办法取得相应海港/内河类别、等级和范围证书并受聘引航机构；海船规则不覆盖内河完整发证要求。 美国按46CFR15.401及具体职务、船舶限制核MMC/endorsement、TWIC、medical、STCW和可能州引航许可。三条发展线为编辑示意，非统一晋升计划或保证。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.career-path-block.20",
+          "source_refs": [
+            "details-current",
+            "ep-current",
+            "sea-cert-current",
+            "pilot-rule-current",
+            "us-credential-current",
+            "ooh-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29352,10 +29889,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界：学历、适任培训与考试、法定执照或适任证书、船东授权与船舶配员、对外报告与签字权是不同状态，任何一项都不能由另一项自动推出。"
+              "学历、培训、任职资历、法定证书与船舶任职分别核；内部聘用不扩大法定证书范围，也不限制船长依法独立作安全决定。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.career-path-block.21",
+          "source_refs": [
+            "sea-cert-current",
+            "pilot-rule-current",
+            "sea-law-current"
+          ],
           "type": "prose"
         },
         {
@@ -29363,10 +29905,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域：美国（美国海岸警卫队执照与船旗国与港口国要求）与中国大陆（船员条例与适任考试和发证规则、引航员管理办法与船舶引航管理规定）分别核对，不跨法域直接套用；两地都以法定持证或适任为前提，且证书按航区、职务与船舶等级或引航范围限定。"
+              "中国海船驾驶按2026修正规则的航区、职务、等级、船舶及职能范围核适任证；健康、基本安全、适任/特殊培训、资历与考试按任务核，值班证有效期不超过5年及66岁生日。引航另按2025施行办法取得相应海港/内河类别、等级和范围证书并受聘引航机构；海船规则不覆盖内河完整发证要求。 美国条件按适用职位和船舶核；不用中国海船规则套内河或美国，不把法定资格等同于每个目录认证。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.career-path-block.22",
+          "source_refs": [
+            "sea-cert-current",
+            "pilot-rule-current",
+            "us-credential-current"
+          ],
           "type": "prose"
         },
         {
@@ -29374,10 +29921,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "路径概要：以甲板与值班基本功为起点，通过稳定的值班质量、完整的航次与值班与休息记录与合规表现积累证据，先取得单一航区与职务的适任资格，再逐步承担航行指挥或引航职责与船队安全管理职责。"
+              "以下为编辑发展路线；甲板辅助、驾驶值班、船长、引航和岸基管理是不同任职条件，不能从模拟、学历或一年两年训练自动取得。中国海上交通安全法31条：引航不解除船长指挥管理责任；34条不得冒险开航且船东不得强令；38条船长对生命安全、保安、防污染可独立决定。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.career-path-block.23",
+          "source_refs": [
+            "editor-current",
+            "sea-law-current",
+            "sea-cert-current",
+            "pilot-rule-current"
+          ],
           "type": "prose"
         },
         {
@@ -29396,10 +29949,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明该职业的准备层级、学历构成与培训入口。"
+              "O*NET新入职需要学历问答42%高中/同等、37%中等后证书、8%本科，所示类别非完整分布且不是在岗学历。BLS本职业典型中等后非学位证书、相关经验少于5年、OJTNone；ZoneThree一般一至两年训练非所有岗位期限。学徒示例Officer in Charge of Navig Watch/Pilot, Ship非当前招生或统一必修。 11培训目录与2学徒示例分属不同入口。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.career-path-block.25",
+          "source_refs": [
+            "details-current",
+            "ep-current",
+            "training-current"
+          ],
           "type": "prose"
         },
         {
@@ -29418,10 +29976,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明官方自定义职业档案可选取字段的范围，以及执照与适任与船东授权按岗位确定的事实。"
+              "认证目录69关联项含多类USCG/STCW及休闲航海证；关联不等于本职业驾驶必需或按所有项目报考，实际要求依据46CFR15.401及对应证书规则。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.career-path-block.27",
+          "source_refs": [
+            "cert-current",
+            "us-credential-current"
+          ],
           "type": "prose"
         },
         {
@@ -29429,10 +29991,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "高中或同等学历或航海技术相关培训，并完成船员注册与基本安全培训。"
+              "编辑起点：先核实际船员职务的证件和基本安全条件，学历不直接授予海港引航资格。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.career-path-block.28",
+          "source_refs": [
+            "sea-cert-current",
+            "pilot-rule-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29484,10 +30051,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "取得相应船长或大副适任资格并积累实际任职资历。"
+              "中国引航办法24条海港三级路线之一：无限航区一等大副且对应船舶实际任职至少12个月、助理引航至少12个月；另有符合条件机构直招驾驶专业大专以上毕业生二副路线，不要求所有人先为船长/大副。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.career-path-block.33",
+          "source_refs": [
+            "pilot-rule-current"
+          ],
           "type": "prose"
         },
         {
@@ -29495,10 +30065,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在助理引航阶段承担部分航段操作并在监督下完成靠离泊。"
+              "编辑示意：在合法任职和监督安排下积累本地引航资历；助理经历不允许无证独立提供引航服务。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.career-path-block.34",
+          "source_refs": [
+            "pilot-rule-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29539,10 +30113,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "取得限定海港或内河类别与等级与引航范围的引航员适任证书。"
+              "须取得对应海港/内河类别、等级和范围引航适任证并受聘机构；长度及特定船型范围不同，不把海船吨位证等同引航范围。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.career-path-block.38",
+          "source_refs": [
+            "pilot-rule-current"
+          ],
           "type": "prose"
         },
         {
@@ -29572,10 +30149,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "对引航安全与中止条件判断负责。"
+              "引航职责与船长指挥管理责任并存；拒绝、暂停、终止按引航规定30条告知及妥善安排安全，不能突然弃船。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.career-path-block.41",
+          "source_refs": [
+            "pilot-operation-current",
+            "sea-law-current"
+          ],
           "type": "prose"
         },
         {
@@ -29649,10 +30230,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "高中或同等学历或航海技术相关培训，并完成基本安全与适任培训。"
+              "编辑起点：按海船或内河实际职务核基本安全、健康、培训与资格；不能以高中或某课程通用代替。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.career-path-block.48",
+          "source_refs": [
+            "sea-cert-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29704,10 +30289,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "取得相应航区与职务的适任证书。"
+              "海船驾驶职务按2026规则核对应航区、职务、等级、船型和资历，内河驾驶另核内河规则；本輪未完整核内河发证细则。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.career-path-block.53",
+          "source_refs": [
+            "sea-cert-current"
+          ],
           "type": "prose"
         },
         {
@@ -29759,10 +30347,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "具备操纵与应急与带教能力。"
+              "进阶须满足相应大副或船长的法定证书、资历和任职条件；操纵、应急与带教表现是编辑观察证据，不单独授予资格。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.career-path-block.58",
+          "source_refs": [
+            "sea-cert-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29869,10 +30461,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "高中或同等学历或相关培训，并完成基本安全培训。"
+              "编辑起点：按实际拖轮或作业船舶职务核基本安全、培训与证书，拖轮驾驶证等级按相应主推进功率核，不一律用总吨位。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.career-path-block.68",
+          "source_refs": [
+            "sea-cert-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -29924,10 +30520,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "取得相应职务适任资格并掌握一类拖带或特种作业。"
+              "取得对应职务、航区和船舶条件的法定适任；特种船舶需对应特殊培训，具体工程作业系统条件另核，不由一类经验概括授权。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.career-path-block.73",
+          "source_refs": [
+            "sea-cert-current"
+          ],
           "type": "prose"
         },
         {
@@ -29979,10 +30578,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "具备多船型与多作业类型操纵与协同能力。"
+              "须具对应船长任职证书与资历，多船型或多作业经验是编辑发展参考，不自动扩大法定范围。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.career-path-block.78",
+          "source_refs": [
+            "sea-cert-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -30106,41 +30709,47 @@
               [
                 "甲板实习或值班水手岗位",
                 "在带教下执行甲板与系带缆绳与瞭望与清洁维护任务，学习值班与记录要求。",
-                "用工方看重基本安全培训、动手能力与纪律性与合规习惯。",
+                "编辑核对建议（未读真实招聘样本）：用工方看重基本安全培训、动手能力与纪律性与合规习惯。",
                 "提交一份含基本安全培训与值班与记录练习的说明材料。",
                 "此路径以监督下作业为主；不得独立承担航行指挥或对外报告责任。"
               ],
               [
                 "三副或二副等驾驶部职务岗位",
                 "按航区与船舶等级承担航行值班与货物与旅客相关职责，执行检查单与记录。",
-                "用工方看重适任证书类别与航区、值班质量与记录完整度。",
+                "编辑核对建议（未读真实招聘样本）：用工方看重适任证书类别与航区、值班质量与记录完整度。",
                 "提交一份含航次计划与值班与异常处置说明的练习样例。",
                 "可任职的航区与职务与船舶等级按适任证书与船东授权确定。"
               ],
               [
                 "大副与船长岗位",
                 "承担甲板部组织与航行指挥与最终安全责任，处理紧迫局面与应急与合规报告。",
-                "用工方看重航行资历、操纵与应急能力与合规记录。",
+                "编辑核对建议（未读真实招聘样本）：用工方看重航行资历、操纵与应急能力与合规记录。",
                 "提交一份含主引航交换与中止条件与应急升级说明的方案样例。",
-                "开航与继续航行与拒绝不安全指令的判断须按安全管理体系执行并留痕。"
+                "中国海上交通安全法31条：引航不解除船长指挥管理责任；34条不得冒险开航且船东不得强令；38条船长对生命安全、保安、防污染可独立决定。 异常处置须结合实际航行态势，不把内部审批置于法定独立安全决定之前。"
               ],
               [
                 "引航机构助理引航与引航岗位",
                 "在限定水域完成靠离泊与狭窄水域操纵，与船长完成主引航交换并沟通复诵。",
-                "用工方看重相应船长或大副资历、助理引航经历与本地水文熟悉程度。",
+                "中国引航办法24条含大副路线及符合条件机构直招应届生二副路线；法定资历条件不等于具体机构招聘偏好。",
                 "提交一份含本地风险与中止条件与通信复诵点的引航交换卡。",
                 "引航员须受聘于引航机构并取得限定类别与等级与范围的适任证书，不能无证直接转入。"
               ],
               [
                 "相邻方向转入（船舶工程、渔猎、商业潜水、索具、航空货运）",
                 "把原有经验映射到航行规则与值班与记录要求，补齐海图与避碰与操纵能力。",
-                "用工方看重可迁移的设备操作与安全纪律与团队协作经验。",
+                "编辑核对建议（未读真实招聘样本）：用工方看重可迁移的设备操作与安全纪律与团队协作经验。",
                 "提交一份把既有工作经验转写为航行与值班语言的说明。",
                 "转岗不自动带来航行指挥权或执照与适任资格；须按目标法域考试与发证要求取得。"
               ]
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.entry-role-comparison.1",
+          "source_refs": [
+            "sea-law-current",
+            "sea-cert-current",
+            "pilot-rule-current",
+            "editor-current"
+          ],
           "title": "入门方向比较",
           "type": "table"
         },
@@ -30152,17 +30761,17 @@
               {
                 "id": "education",
                 "values": [
-                  "O*NET 把该职业列为 Job Zone Three（SVP 6.0 至低于 7.0），通常需要职业学校培训、相关在职经验或副学士学位。",
-                  "在职培训通常一至两年，含学徒形式（O*NET 该职业页列出 2 项学徒方向）；能力主要来自船上带教与职务轮换。",
-                  "该职业在 O*NET 页面未标注 Bright Outlook；在美国通常必须持有美国海岸警卫队签发的执照。"
+                  "O*NET新入职需要学历问答42%高中/同等、37%中等后证书、8%本科，所示类别非完整分布且不是在岗学历。BLS本职业典型中等后非学位证书、相关经验少于5年、OJTNone；ZoneThree一般一至两年训练非所有岗位期限。学徒示例Officer in Charge of Navig Watch/Pilot, Ship非当前招生或统一必修。",
+                  "培训目录11项目及2学徒示例不是在岗构成、统一期限或当前招生。",
+                  "美国任职按46CFR15.401核实际证件；相关sea time与州引航要求另核。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "入职通常需完成基本安全培训与体检，并按法域要求取得执照或适任证书。",
-                  "涉及航行数据与船舶与货物信息的岗位须遵守船东与主管机关的信息与合规要求。",
-                  "航行决策与对外报告按安全管理体系签署，超出证书范围的判断须上报。"
+                  "中国海船驾驶按2026修正规则的航区、职务、等级、船舶及职能范围核适任证；健康、基本安全、适任/特殊培训、资历与考试按任务核，值班证有效期不超过5年及66岁生日。引航另按2025施行办法取得相应海港/内河类别、等级和范围证书并受聘引航机构；海船规则不覆盖内河完整发证要求。",
+                  "中国海上交通安全法31条：引航不解除船长指挥管理责任；34条不得冒险开航且船东不得强令；38条船长对生命安全、保安、防污染可独立决定。",
+                  "航行数据使用、报告签署和具体船舶内部程序需逐项核，本轮未读真实企业制度。"
                 ]
               },
               {
@@ -30176,14 +30785,25 @@
               {
                 "id": "tools",
                 "values": [
-                  "技术清单列出 13 类软件技能，招聘启事中出现比例最高的是 Microsoft Office 软件（5%）、Microsoft Excel（2%）、Microsoft Outlook（1%）（Lightcast 2025 年美国招聘信息）。",
+                  "13软件类别、7热产品、1InDemand（Office）；2025全年美国招聘Office5%、Excel2%、Outlook1%，macOS/Revit/PowerPoint/Word为NA非0；招聘提及不等于部署、效率、自动化率或强制门槛。",
                   "常用工具与设备包括雷达与自动雷达标绘与电子海图与测深仪、操舵与侧推与锚与缆绳与拖带设备、船对岸与船内通信设备、海图与潮汐与气象资料、救生消防与污染防控设备。",
-                  "招聘需求标注表示招聘启事中的出现频率，不代表机构已部署该类工具。"
+                  "招聘提及非部署效益或硬性通用门槛；未读本轮企业招聘样本。"
                 ]
               }
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.employer-evidence.1",
+          "source_refs": [
+            "details-current",
+            "ep-current",
+            "training-current",
+            "hot-current",
+            "sea-cert-current",
+            "pilot-rule-current",
+            "sea-law-current",
+            "us-credential-current",
+            "editor-current"
+          ],
           "title": "雇主通常看什么证据",
           "type": "cards"
         },
@@ -30419,62 +31039,73 @@
             ],
             "rows": [
               [
-                "学历（高中或同等学历，部分岗位不要求）",
-                "希望进入该职业的求职者",
-                "影响培训起点与考证路径，但不决定适任证书类别。",
-                "属于常见起点：O*NET 列为 Job Zone Three，教育调查中 42% 认为高中文凭或同等学历即可、37% 认为需要中等后证书。",
-                "受访者学历构成为 O*NET 教育信息口径；多数路径以适任培训与考试为主。",
-                "按学制与学费投入。",
-                "学历不等于适任证书或航行指挥权。"
+                "学历与教育",
+                "准备相关培训者",
+                "影响教育路线，不等于证书或任职。",
+                "O*NET新入职需要学历问答42%高中/同等、37%中等后证书、8%本科，所示类别非完整分布且不是在岗学历。BLS本职业典型中等后非学位证书、相关经验少于5年、OJTNone；ZoneThree一般一至两年训练非所有岗位期限。学徒示例Officer in Charge of Navig Watch/Pilot, Ship非当前招生或统一必修。",
+                "海船岗位适任培训或航海教育材料按2026规则13条核，不以问答比例代替条件。",
+                "具体学费与时间本轮未核。",
+                "学历不自动授予船长大副或引航资格。"
               ],
               [
-                "在岗培训与学徒（通常一至两年）",
-                "所有新入职人员",
-                "决定能否独立承担某类航区与职务值班。",
-                "属于通行要求：在职培训通常一至两年，O*NET 该职业页列出 2 项学徒方向（Officer in Charge of Navigational Watch、Pilot, Ship）。",
-                "常见形式为船上带教、职务轮换与内部考核。",
-                "按在岗时间投入。",
-                "培训记录不自动转换为适任证书或船东授权。"
+                "在岗训练及学徒示例",
+                "按实际路线考虑者",
+                "用于技能和合法资历积累，不单独授予职务。",
+                "ZoneThree一至两年为跨职业描述；BLS本职业OJTNone分类非没有海上训练。",
+                "学徒示例Officer in Charge of Navig Watch/Pilot, Ship，非当前招生；具体项目条件未核。",
+                "实际计划年限费用未核，不设统一一至两年。",
+                "训练需与法定资历和考试条件分开核。"
               ],
               [
-                "美国海岸警卫队执照（按职务与航区与总吨位）",
-                "在美国任职的船长与大副与引航员",
-                "决定能否合法担任相应职务与操纵相应船舶。",
-                "属于法定要求：O*NET 官方职责明确要求持有美国海岸警卫队签发的执照。",
-                "O*NET 认证页列出多项由美国海岸警卫队国家海事中心签发的职务与航区证书。",
-                "按培训与考试与维持与体检要求投入。",
-                "执照不等于船东聘用或特定船舶与航线的作业授权。"
+                "美国任职证件与相应endorsement",
+                "在适用美国船舶职位任职者",
+                "按职务、船舶和限制核合法任职条件。",
+                "46CFR15.401要求适用TWIC和/或MMC、正确endorsement与医疗/STCW条件；部分州引航另需州许可。",
+                "69认证目录含驾驶、轮机/通信及休闲航海条目，不是全部驾驶必需；对应具体发证考试资历条件未逐项核。",
+                "具体报考、培训、体检和更新费用未核。",
+                "法定资格不保证聘用，不外推到中国或所有关联认证。"
               ],
               [
-                "中国大陆船员适任证书（船长与大副，按航区与职务与船舶等级）",
-                "在中国大陆船舶任职的船长与大副",
-                "决定能否在相应航区与船舶等级担任相应职务。",
-                "属于法定要求：依《中华人民共和国船员条例》与海船船员适任考试和发证规则。",
-                "通常需完成船员注册、健康、基本安全与适任培训、任职资历与考试。",
-                "按培训与考试与证件维持费用投入。",
-                "证书按航区与职务与船舶等级限定，不等于船东聘用或特定船舶授权。"
+                "中国海船驾驶适任证",
+                "海船船长及大副等驾驶职务",
+                "在证书对应航区、职务、等级和船舶范围任职。",
+                "2026第二次修正规则，海船适用；内河驾驶需另核。",
+                "11条年龄、健康、基本安全、考试及适任特殊培训/资历，13条材料；24条特殊船舶培训。",
+                "具体费用未核；值班证不超过5年及66岁生日，再有效条件19—20条。",
+                "船东不得强令冒险开航，船长38条安全决定独立；内部聘用不扩大证书范围。"
               ],
               [
-                "引航员适任证书（按海港或内河类别与等级与引航范围）",
-                "在引航机构任职的引航员",
-                "决定能否在限定水域与航段提供引航服务。",
-                "属于法定要求：依引航员管理办法，须受聘于引航机构并取得引航员适任证书。",
-                "申请考试通常还需相应船长或大副证书与实际任职与助理引航资历，不能无证直接转入。",
-                "按培训与考试与资历积累投入。",
-                "引航资格限定于证书载明的类别与等级与范围。"
+                "中国引航员适任证及机构聘用",
+                "机构引航任职者",
+                "限定海港/内河类别、等级和引航范围提供服务。",
+                "2025-03-01施行办法4条要求证件与受聘机构。",
+                "24条含一等大副对应任职12月+助理12月路线及符合条件机构直招大专以上毕业生二副任职12月+助理18月路线；类别资格条件分别核。",
+                "具体费用未核；13条有效期不超过5年，更新条件另核。",
+                "引航证范围还按长度和特定船型限制；引航不解除船长管理责任，不等同海船吨位证。"
               ],
               [
                 "内部资格与晋升评估",
                 "寻求晋升的人员",
                 "影响能否承担更大船舶或船队安全管理职责。",
                 "属于船东或机构制度而非行业统一资格。",
-                "常见依据为航行资历、值班质量、记录与合规记录与带教能力。",
+                "编辑核具体机构的岗位、培训和晋升规则，本轮未读取真实雇主制度或招聘样本。",
                 "按工作年限与考核投入。",
                 "内部资格不自动带来更高航区或职务的法定适任资格。"
               ]
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.credential-decision.1",
+          "source_refs": [
+            "details-current",
+            "ep-current",
+            "cert-current",
+            "us-credential-current",
+            "ooh-current",
+            "sea-cert-current",
+            "pilot-rule-current",
+            "sea-law-current",
+            "editor-current"
+          ],
           "title": "资格选择",
           "type": "table"
         },
@@ -30483,13 +31114,22 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界：学历、适任培训与考试、法定执照或适任证书、船东授权与船舶配员、对外报告与签字权是不同状态，任何一项都不能由另一项自动推出。",
-              "学历与经验：O*NET 把该职业列为 Job Zone Three（SVP 6.0 至低于 7.0），通常需要职业学校培训、相关在职经验或副学士学位，在职培训通常一至两年。",
-              "证书定位：本职业属于法定持证职业——美国要求持有美国海岸警卫队签发的执照，中国大陆船长与大副须取得船员适任证书、引航员须取得引航员适任证书；证书按航区与职务与船舶等级或引航范围限定，不等于船东聘用或特定船舶授权。",
-              "入职前应逐项核对作业场景与证书类别、船舶配员与值班与休息安排、船东资质与安全管理体系、是否承担对外报告与签字职责，并保留书面确认。"
+              "资格、资历、培训、任职和内部职责分别核，不能自动互推。中国海上交通安全法31条：引航不解除船长指挥管理责任；34条不得冒险开航且船东不得强令；38条船长对生命安全、保安、防污染可独立决定。",
+              "O*NET新入职需要学历问答42%高中/同等、37%中等后证书、8%本科，所示类别非完整分布且不是在岗学历。BLS本职业典型中等后非学位证书、相关经验少于5年、OJTNone；ZoneThree一般一至两年训练非所有岗位期限。学徒示例Officer in Charge of Navig Watch/Pilot, Ship非当前招生或统一必修。",
+              "中国海船驾驶按2026修正规则的航区、职务、等级、船舶及职能范围核适任证；健康、基本安全、适任/特殊培训、资历与考试按任务核，值班证有效期不超过5年及66岁生日。引航另按2025施行办法取得相应海港/内河类别、等级和范围证书并受聘引航机构；海船规则不覆盖内河完整发证要求。",
+              "美国实际MMC/endorsement、TWIC、medical/STCW及州引航条件逐岗核；中国海船、内河和引航规则分开。本轮未取得所有发证项目费用或真实企业任职程序。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.path.credential-boundary.1",
+          "source_refs": [
+            "details-current",
+            "ep-current",
+            "sea-cert-current",
+            "pilot-rule-current",
+            "sea-law-current",
+            "us-credential-current",
+            "ooh-current"
+          ],
           "title": "资格与练习边界",
           "type": "notice"
         },
@@ -30631,10 +31271,10 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET-SOC 53-5021.00 职业摘要（就业与预测字段）",
+                "entity": "BLS表1.2本职业预测",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/53-5021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET-SOC 53-5021.00 行业分布",
@@ -30712,10 +31352,16 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答：本条证据路由下 Captains, Mates, and Pilots of Water Vessels（SOC 53-5021）精确职业口径 的工资与就业数据有来源支持——O*NET 展示的 BLS 2025 年 OEWS 全国中位年薪为 92,460 美元、中位时薪 44.45 美元（年薪第 10 至第 90 分位 47,420 至 170,640 美元），2024 年就业约 40,700 人、2034 年约 40,900 人、十年变化约 +1%（Slower than average）、2024—2034 年年均职位空缺约 4,300 个；BLS 职业展望手册把该职业并入更大口径发布（2025 年约 41,300 人 → 2035 年约 42,900 人、增长约 4%），其中 8,600 个年均空缺属全部水上运输工作者，不能当作本职业的精确空缺数。该职业页面未标注 Bright Outlook，其相关职业中的飞机货物装卸主管（53-1041）与商业飞行员（53-2012）标注 Bright Outlook，属不同职业身份。中国大陆没有单列该职业的全国职业工资统计，本条路由要求保留证据边界，本页不发布职业级数值，也不用行业平均、父职业或美国数据填充。"
+              "2025美国本职业中位92460美元/年、44.45/时，年P10—P90为47420—170640。美国SOC53-5021本职业2025约41300人→2035预测42900人，变化4.0%（平均），BLS净变化约1700人，2025—2035年均空缺3800个，非净增；舍入就业端点不反算净变化。 O*NET2025行业分布：运输与仓储71%、其他29%（含政府）；这是本职业分类分布，非工资或中国行业映射。 中国本职业全国精确工资仍证据不足；NBS2025交通运输仓储邮政业非私营133981/私营73133元税前年均，相关航运业务的多职业行业背景，非船长大副引航员工资、起薪、月薪或个人报价。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.8",
+          "source_refs": [
+            "wages-current",
+            "ep-current",
+            "industry-current",
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30734,10 +31380,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年"
+              "2025—2035"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.10",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30745,10 +31394,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为 Captains, Mates, and Pilots of Water Vessels（SOC 53-5021）精确职业口径 的 BLS 预测口径（2024—2034 年）；该职业页面未标注 Bright Outlook。"
+              "美国SOC53-5021本职业2025约41300人→2035预测42900人，变化4.0%（平均），BLS净变化约1700人，2025—2035年均空缺3800个，非净增；舍入就业端点不反算净变化。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.11",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30767,10 +31419,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业变化率（年均职位空缺约 4,300 个）"
+              "预测变化率与年均空缺分别列"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.13",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30789,10 +31444,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "变化约 +1%（Slower than average，2024—2034 年）"
+              "变化4.0%（平均），年均空缺3800"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.15",
+          "source_refs": [
+            "ep-current"
+          ],
           "type": "prose"
         },
         {
@@ -30833,10 +31491,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位数不是入门工资，也不构成个人录用报价；分位数字不能当作起薪承诺；该职业通常要求法定执照或适任资格，持证不保证获得该水平收入。"
+              "工资分位非起薪或个体合同，OEWS不含自雇；预测自雇8.2%另计非工资分布覆盖。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.19",
+          "source_refs": [
+            "wages-current",
+            "ep-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -30899,10 +31562,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局按行业门类与单位类型公布城镇单位就业人员平均工资；可得的全国表把交通运输与仓储与邮政服务人员合并统计，没有单列本职业。"
+              "NBS2025行业与单位类型税前年均背景，交通运输仓储邮政含许多职业；不当本职业工资或岗位增长证据。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.25",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30910,10 +31576,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本条路由要求保留证据边界且不用行业平均、父职业或美国数据填充；本页只登记口径与覆盖范围，不发布数值。"
+              "industry_proxy：航运业务相关行业背景，非职业中位、起薪、月薪或城市排名，不由行业工资推就业前景。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.26",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30921,10 +31590,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "职业级工资缺口（不使用代理数值）"
+              "精确工资缺口／行业税前年均参考"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.27",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30932,10 +31604,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "暂无可安全使用的数据"
+              "industry_proxy（行业代理）"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.28",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30943,10 +31618,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：未取得该职业的全国职业工资分布，本页不做代理填补"
+              "中国本职业全国精确工资仍证据不足；NBS2025交通运输仓储邮政业非私营133981/私营73133元税前年均，相关航运业务的多职业行业背景，非船长大副引航员工资、起薪、月薪或个人报价。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.29",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30954,10 +31632,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明该精确职业的就业与预测口径（BLS 预测，2024—2034 年），并与 BLS 职业展望手册的合并口径分开标注。"
+              "美国SOC53-5021本职业2025约41300人→2035预测42900人，变化4.0%（平均），BLS净变化约1700人，2025—2035年均空缺3800个，非净增；舍入就业端点不反算净变化。 OOH相同本职业专属行，非更大职业群；8600空缺属于53-5000。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.30",
+          "source_refs": [
+            "ep-current",
+            "ooh-current"
+          ],
           "type": "prose"
         },
         {
@@ -30965,10 +31647,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明该职业的行业分布（运输与仓储业 66%、其他行业含政府与其他服务 34%），须与工资数据分开解读。"
+              "O*NET2025行业分布：运输与仓储71%、其他29%（含政府）；这是本职业分类分布，非工资或中国行业映射。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.31",
+          "source_refs": [
+            "industry-current"
+          ],
           "type": "prose"
         },
         {
@@ -30976,10 +31661,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆统计口径、覆盖范围与职业映射边界，不发布数值。"
+              "中国本职业全国精确工资仍证据不足；NBS2025交通运输仓储邮政业非私营133981/私营73133元税前年均，相关航运业务的多职业行业背景，非船长大副引航员工资、起薪、月薪或个人报价。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.32",
+          "source_refs": [
+            "nbs-current"
+          ],
           "type": "prose"
         },
         {
@@ -30998,10 +31686,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足船体与动力与机械系统设计与维护能力。"
+              "编辑比较：船舶工程师与海军建筑师以船体/系统工程设计为核心，需补工程理论、设计计算与教育条件；不概称转入船上日常维护。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.34",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31020,10 +31711,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属船舶与海事链条，但对象从航行指挥转向系统设计与技术状态管理。"
+              "编辑距离判断：海事对象有交集，职责从航行管理转工程设计，训练与准入条件另核，不保证直接转岗。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.36",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31053,10 +31747,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同处海上作业环境，责任对象从运输安全转向捕捞作业。"
+              "编辑比较：距离中等：同处海上作业环境，责任对象从运输安全转向捕捞作业。 具体训练与资格另核，不保证准入。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.39",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31086,10 +31783,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等偏上：同属高风险水上作业，职责从驾驶台决策转向水下施工与检验。"
+              "编辑比较：距离中等偏上：同属高风险水上作业，职责从驾驶台决策转向水下施工与检验。 具体训练与资格另核，不保证准入。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.42",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31119,10 +31819,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属码头与作业面协作，责任从航行指挥转向吊装与绑扎作业。"
+              "编辑比较：距离较近：同属码头与作业面协作，责任从航行指挥转向吊装与绑扎作业。 具体训练与资格另核，不保证准入。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.45",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31152,10 +31855,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属运输作业组织，规则体系从海事转向航空货运。"
+              "编辑比较：距离中等：同属运输作业组织，规则体系从海事转向航空货运。 具体训练与资格另核，不保证准入。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.48",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31185,10 +31891,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属船上作业链条，责任从指挥与决策转向操作执行。"
+              "编辑比较：距离较近：同属船上作业链条，责任从指挥与决策转向操作执行。 具体训练与资格另核，不保证准入。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.51",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31207,10 +31916,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移的是轮机与设备维护与值班经验。"
+              "编辑比较：船长大副具设备与跨部门协调经验不等于轮机员资历；需补推进机舱系统、相应证书与轮机任职条件。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.53",
+          "source_refs": [
+            "editor-current",
+            "sea-cert-current"
+          ],
           "type": "prose"
         },
         {
@@ -31218,10 +31931,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离较近：同属船上职务体系，专业方向从甲板驾驶转向机舱动力。"
+              "编辑距离判断：同属船上体系但甲板与轮机专业不同，不能直接互换证书或凭共事视为具备维护资历。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.54",
+          "source_refs": [
+            "editor-current",
+            "sea-cert-current"
+          ],
           "type": "prose"
         },
         {
@@ -31251,10 +31968,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离中等：同属运输合规领域，立场从被检查方转向监管检查方。"
+              "编辑转岗比较：从航行管理转向装载、运输检查与合规核对，具体雇主职责、训练和权限须另核；检查任务不自动授予行政监管权，不保证准入。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.57",
+          "source_refs": [
+            "editor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -31368,25 +32088,27 @@
           "data": {
             "entries": [
               "边界一：本页身份口径为 O*NET-SOC 53-5021.00（Captains, Mates, and Pilots of Water Vessels）；该职业页面列为 Job Zone Three（SVP 6.0 至低于 7.0），未标注 Bright Outlook；官方职责明确要求在美国持有美国海岸警卫队签发的执照。",
-              "边界二：本页美国工资与就业为 O*NET 展示的 BLS 2025 年 OEWS 本职业精确口径（中位年薪 92,460 美元、中位时薪 44.45 美元；年薪第 10 至第 90 分位 47,420 至 170,640 美元；2024 年约 40,700 人、2034 年约 40,900 人、变化约 +1%、年均空缺约 4,300 个）；BLS 职业展望手册另以包含其他水上运输岗位的合并口径发布（2025 年约 41,300 人 → 2035 年约 42,900 人、增长约 4%，8,600 个年均空缺属全部水上运输工作者并含转职与退休等替代需求），两组数字的统计范围与期间不同，本页分开标注、不混用、不互相替代；该职业未标注 Bright Outlook，其相关职业中的飞机货物装卸主管（53-1041）与商业飞行员（53-2012）标注 Bright Outlook，属不同职业身份，不互相代入。",
-              "边界三：中国大陆按证据路由把中国薪资记为 cn-wage-gap（status=documented_unavailable，severity=material），resolution 为「标记中国薪资不可用，并说明可得的全国表是更宽口径的交通运输与仓储与邮政服务类别」；本页据此不发布任何中国大陆职业级数值，也不使用行业或父职业均值代理，只登记统计口径与缺口。",
+              "本轮2025美国工资中位92460美元/年、44.45/时；美国SOC53-5021本职业2025约41300人→2035预测42900人，变化4.0%（平均），BLS净变化约1700人，2025—2035年均空缺3800个，非净增；舍入就业端点不反算净变化。 OOH职业群71860中位/8600空缺及父级分行业中位不当本职业。",
+              "中国本职业全国精确工资仍证据不足；NBS2025交通运输仓储邮政业非私营133981/私营73133元税前年均，相关航运业务的多职业行业背景，非船长大副引航员工资、起薪、月薪或个人报价。",
               "边界四：编辑练习与航行建议均为模拟材料，读者不应据此进行真实航次决策、船舶操纵、报告签署或安全结论；练习结果不构成执照、适任资格、船舶操纵授权或对外签字权。",
-              "边界五：本页由 O*NET 职业摘要、详细资料、行业分布、技术清单、培训与教育信息与认证信息与全国工资分位页面，O*NET 展示的 BLS 工资与预测口径，BLS 职业展望手册水上运输职业页，国际海事组织关于自主航运与海员工时与休息与引航程序的公开材料，《中华人民共和国船员条例》与海船船员适任考试和发证规则与引航员管理办法与船舶引航管理规定，国家统计局工资发布口径，人力资源和社会保障部门薪酬调查公开信息，ILO 任务暴露研究等公开资料及编辑设计组成；每项资料的适用范围与缺口单独标记。"
+              "本轮实际核O*NET9入口及31任务/57情境/兴趣风格/学历学徒/技术/工资预测，BLS表1.2与OOH，NBS行业及工资组成，海上交通安全法、2026海船发证、2025引航办法、2021引航规定、美国46CFR15.401/15.1111与IMO2026MASS公告。编辑建议非真实企业程序或实测收益。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.sources.boundary.1",
           "source_refs": [
-            "bls-entry",
-            "bls-outlook",
-            "bls-pay",
-            "editorial",
-            "ilo-genai",
-            "nasa-seh",
-            "nbs-wages",
-            "onet-details",
-            "onet-hot-tech",
-            "onet-industry",
-            "onet-training"
+            "details-current",
+            "ep-current",
+            "ooh-current",
+            "nbs-current",
+            "wage-definition-current",
+            "sea-law-current",
+            "sea-cert-current",
+            "pilot-rule-current",
+            "pilot-operation-current",
+            "us-credential-current",
+            "us-rest-current",
+            "imo-mass-current",
+            "editor-current"
           ],
           "type": "list",
           "visibility": "internal"
@@ -31396,10 +32118,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "费马测试职业内容编辑组：依据 O*NET、BLS 工资与预测口径、国际海事组织公开材料、中国大陆船员与引航与水上运输法规公开要求等资料整理，逐项标注口径、数据期与缺口。"
+              "费马测试编辑整理：本轮分清精确职业统计、行业及父级背景、实际法条和编辑建议；未取得工具实测效益、真实招聘或具体船舶处置程序。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.sources.source-card.1",
+          "source_refs": [
+            "ep-current",
+            "nbs-current",
+            "details-current",
+            "sea-cert-current",
+            "pilot-rule-current",
+            "imo-mass-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31407,10 +32138,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "主要来源：O*NET-SOC 53-5021.00 职业摘要、详细资料、自定义职业档案、行业分布、技术清单、培训与教育信息、认证信息与全国工资分位页面；O*NET 展示的 BLS 2025 年 OEWS 工资与 2024—2034 年预测；BLS 职业展望手册水上运输职业页；国际海事组织关于自主航运、海员工时与休息、引航程序（A.960(23)）的公开材料；《中华人民共和国船员条例》、海船船员适任考试和发证规则、引航员管理办法与船舶引航管理规定；国家统计局城镇单位就业人员年平均工资情况；ILO 工作论文 140《Generative AI and Jobs》。"
+              "本轮来源：O*NET当前9入口、BLS表1.2本职业及OOH职业群、NBS2025运输行业及工资组成规定、海上交通安全法、2026海船发证规则、2025施行引航办法、2021引航规定、46CFR15.401/15.1111、IMO2026MASS公告。既有ILO只作任务暴露方法，不给本职业替代率。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.sources.source-card.2",
+          "source_refs": [
+            "ep-current",
+            "nbs-current",
+            "details-current",
+            "sea-cert-current",
+            "pilot-rule-current",
+            "imo-mass-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31418,10 +32158,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "资料期：O*NET 与行业分布页面为 2026 年更新；工资为 2025 年 OEWS 口径（经 O*NET 展示）；就业与预测为 2024—2034 年 BLS 预测口径，BLS 职业展望手册合并口径为 2025—2035 年；招聘技术比例来自 Lightcast 2025 年 1 月至 12 月美国招聘信息；国家统计局数据为 2025 年；中国大陆法规资料期以页面发布为准；ILO 工作论文 140 为 2025-05-20 发布；检索日 2026-09-16。"
+              "本轮检索2026-10-09：工资行业2025、预测2025—2035、招聘技术2025全年；NBS2025于2026发布；海船规则2026第二次修正，引航办法2025施行，引航规定2021修正；MASS2026非强制规则，eCFR截至2026-10-06。旧共享来源记录保留保护消费者，不混旧新口径。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.sources.source-card.3",
+          "source_refs": [
+            "ep-current",
+            "nbs-current",
+            "details-current",
+            "sea-cert-current",
+            "pilot-rule-current",
+            "imo-mass-current",
+            "editor-current"
+          ],
           "type": "prose"
         },
         {
@@ -31429,10 +32178,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "使用说明：本页身份口径为 O*NET-SOC 53-5021.00（Captains, Mates, and Pilots of Water Vessels）；美国工资与就业为本职业精确口径（2025 年中位年薪 92,460 美元、中位时薪 44.45 美元；2024 年约 40,700 人、2034 年约 40,900 人、变化约 +1%、2024—2034 年年均空缺约 4,300 个），并与 BLS 职业展望手册的合并口径（2025 年约 41,300 人 → 2035 年约 42,900 人、增长约 4%）分开标注、不混用；该职业未标注 Bright Outlook；中国大陆按证据路由把中国薪资记为 暂无可安全使用的数据，本页不发布职业级数值、不用行业平均或父职业或美国数据填充；该职业属于法定持证职业，执照与适任证书按航区与职务与船舶等级或引航范围限定，不等于船东聘用或特定船舶授权。"
+              "美国SOC53-5021本职业2025约41300人→2035预测42900人，变化4.0%（平均），BLS净变化约1700人，2025—2035年均空缺3800个，非净增；舍入就业端点不反算净变化。 中国本职业全国精确工资仍证据不足；NBS2025交通运输仓储邮政业非私营133981/私营73133元税前年均，相关航运业务的多职业行业背景，非船长大副引航员工资、起薪、月薪或个人报价。 O*NET新入职需要学历问答42%高中/同等、37%中等后证书、8%本科，所示类别非完整分布且不是在岗学历。BLS本职业典型中等后非学位证书、相关经验少于5年、OJTNone；ZoneThree一般一至两年训练非所有岗位期限。学徒示例Officer in Charge of Navig Watch/Pilot, Ship非当前招生或统一必修。 中国海船驾驶按2026修正规则的航区、职务、等级、船舶及职能范围核适任证；健康、基本安全、适任/特殊培训、资历与考试按任务核，值班证有效期不超过5年及66岁生日。引航另按2025施行办法取得相应海港/内河类别、等级和范围证书并受聘引航机构；海船规则不覆盖内河完整发证要求。 IMO2026非强制MASS规则适用于SOLAS第1章货船，涉及自主动作、远程运营、风险评估、通信与网络安全及远程运营中心，船长保留总体责任，包括不在船上。不能由责任存在推出每项操纵必由现场人手执行，也不能推出已全面采用或个人岗位不会被替代。 具体船舶企业程序、发证费用、内河完整细则及AI收益未全核；页面建议不授予实际作业权限。"
             ]
           },
           "id": "captains-mates-and-pilots-of-water-vessels.sources.source-card.4",
+          "source_refs": [
+            "ep-current",
+            "nbs-current",
+            "details-current",
+            "sea-cert-current",
+            "pilot-rule-current",
+            "imo-mass-current",
+            "editor-current"
+          ],
           "type": "prose"
         }
       ]
@@ -31773,6 +32531,310 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/custom/53-5021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET船長大副引航员详细档案",
+                  "2026"
+                ],
+                "evidence_type": "primary_document",
+                "id": "details-current",
+                "limitation": "31任务=25Core+4Supplemental+2NewNA；41一般活动/25详细活动/57情境；新入职需要学历42%高中37%中等后证书8%本科，不是在岗构成；ZoneThree跨职业准备描述非所有岗位一至两年；学徒示例非当前招生。",
+                "market": "美国",
+                "name": "O*NET船长大副引航员详细档案",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-5021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET本职业招聘热技术",
+                  "2025全年美国招聘"
+                ],
+                "evidence_type": "primary_document",
+                "id": "hot-current",
+                "limitation": "13软件类别/7热产品/1InDemand；Office5%、Excel2%、Outlook1%，macOS/Revit/PPT/Word NA非0；招聘提及不是部署效益或强制门槛。",
+                "market": "美国",
+                "name": "O*NET本职业招聘热技术",
+                "period": "2025全年美国招聘",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/53-5021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET本职业行业分布",
+                  "2025"
+                ],
+                "evidence_type": "primary_statistics",
+                "id": "industry-current",
+                "limitation": "运输仓储71%、其他29%含政府；行业分布非工资，不映射中国。",
+                "market": "美国",
+                "name": "O*NET本职业行业分布",
+                "period": "2025",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/53-5021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET展示BLS本职业工资",
+                  "2025"
+                ],
+                "evidence_type": "primary_statistics",
+                "id": "wages-current",
+                "limitation": "年薪47420/63880/92460/127180/170640；时薪22.80/30.71/44.45/61.14/82.04美元；P10非最低工资，P90不提供船型航区因果解释，OEWS不含自雇。",
+                "market": "美国",
+                "name": "O*NET展示BLS本职业工资",
+                "period": "2025",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/53-5021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET本职业就业预测",
+                  "2025—2035"
+                ],
+                "evidence_type": "primary_statistics",
+                "id": "trends-current",
+                "limitation": "41300→42900/4%Average/3800年均空缺，与BLS同精确53-5021，非旧40700/40900/+1/4300。",
+                "market": "美国",
+                "name": "O*NET本职业就业预测",
+                "period": "2025—2035",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/53-5021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS表1.2船长大副引航员53-5021",
+                  "2025—2035"
+                ],
+                "evidence_type": "primary_statistics",
+                "id": "ep-current",
+                "limitation": "41.3千→42.9千，净1.7千、4.0%、年均3.8千空缺，自雇8.2%；典型中等后非学位证书、相关经验少于5年、OJTNone。舍入端点不可反算成净1600。",
+                "market": "美国",
+                "name": "BLS表1.2船长大副引航员53-5021",
+                "period": "2025—2035",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS OOH水上运输职业群及本职业专属行",
+                  "2025／2025—2035"
+                ],
+                "evidence_type": "primary_statistics",
+                "id": "ooh-current",
+                "limitation": "本职业工资92460/就业41300→42900/4/净1700；71860、行业中位79420/77990/65660/57930/51190、8600空缺均属水上运输职业群53-5000非本职业。学历培训/sea time/州引航许可因岗位而异。",
+                "market": "美国",
+                "name": "BLS OOH水上运输职业群及本职业专属行",
+                "period": "2025／2025—2035",
+                "publisher": "BLS",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/ooh/transportation-and-material-moving/water-transportation-occupations.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET本职业认证目录",
+                  "2026-10-09读取"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cert-current",
+                "limitation": "69关联项含USCG职务/STCW、轮机/通信条目及JWorld休闲航海认证，关联不等于每项驾驶任职必需；本轮未逐项读取发行者报考费用更新规则。",
+                "market": "美国",
+                "name": "O*NET本职业认证目录",
+                "period": "2026-10-09读取",
+                "publisher": "O*NET/CareerOneStop",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/localcert/53-5021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "O*NET本职业培训目录",
+                  "2026-10-09读取"
+                ],
+                "evidence_type": "primary_document",
+                "id": "training-current",
+                "limitation": "11项目；实际读取前3校SUNY103/USMMA88/Maine66毕业数及学位层次，不当在岗构成或择校推荐。学徒2示例在details非本目录。",
+                "market": "美国",
+                "name": "O*NET本职业培训目录",
+                "period": "2026-10-09读取",
+                "publisher": "O*NET/CareerOneStop",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/localtraining/53-5021.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "国家统计局2025交通运输仓储邮政行业工资",
+                  "2025／2026发布"
+                ],
+                "evidence_type": "primary_statistics",
+                "id": "nbs-current",
+                "limitation": "非私营133981/私营73133元税前年均，多职业混合行业背景，非船长大副引航员精确工资、起薪或月薪；单位统计不含个体自由职业。",
+                "market": "中国大陆",
+                "name": "国家统计局2025交通运输仓储邮政行业工资",
+                "period": "2025／2026发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "工资总额组成规定",
+                  "1990规定／2026网页读取"
+                ],
+                "evidence_type": "primary_regulation",
+                "id": "wage-definition-current",
+                "limitation": "3全部劳动报酬；4津贴补贴和加班等纳入，8补偿特殊劳动津贴，11出差伙食等排除；不能笼统说在船津贴航次补贴通常不计，按实际性质核。",
+                "market": "中国大陆",
+                "name": "工资总额组成规定",
+                "period": "1990规定／2026网页读取",
+                "publisher": "国家统计局",
+                "scope": "contextual",
+                "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "海上交通安全法2021修订",
+                  "2021修订"
+                ],
+                "evidence_type": "primary_legislation",
+                "id": "sea-law-current",
+                "limitation": "31引航不解除船长指挥管理责任；33最低配员与有效适任；34不得冒险开航且船东不得强令；37真实日志；38船长独立安全保安防污染决定。",
+                "market": "中国大陆",
+                "name": "海上交通安全法2021修订",
+                "period": "2021修订",
+                "publisher": "江苏海事局",
+                "scope": "contextual",
+                "url": "https://www.js.msa.gov.cn/art/2021/9/9/art_842_842.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "海船船员适任考试发证规则2026修正",
+                  "2026第二次修正／7月9日施行"
+                ],
+                "evidence_type": "primary_regulation",
+                "id": "sea-cert-current",
+                "limitation": "5—10航区职务等级职能及范围；11健康基本安全考试+值班者适任特殊培训资历，初申18—60/实习16；18值班证不超过5年及66岁生日；19—20再有效；24特殊船舶培训。只适用于海船不覆盖内河完整规则。",
+                "market": "中国大陆",
+                "name": "海船船员适任考试发证规则2026修正",
+                "period": "2026第二次修正／7月9日施行",
+                "publisher": "交通运输部",
+                "scope": "contextual",
+                "url": "https://xxgk.mot.gov.cn/jigou/fgs/202607/t20260715_4209687.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "引航员管理办法2024第13号",
+                  "2024公布／2025-03-01施行"
+                ],
+                "evidence_type": "primary_regulation",
+                "id": "pilot-rule-current",
+                "limitation": "4适任证+受聘机构；5—8海港内河/三级/船长长度范围，非海船吨位证；13不超过5年；24大副资历路线及直接招收驾驶专业大专以上毕业生二副路线；25升级。",
+                "market": "中国大陆",
+                "name": "引航员管理办法2024第13号",
+                "period": "2024公布／2025-03-01施行",
+                "publisher": "江苏海事局",
+                "scope": "contextual",
+                "url": "https://www.js.msa.gov.cn/art/2025/3/1/art_842_1862.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "船舶引航管理规定2021修正",
+                  "2021修正／2022页面"
+                ],
+                "evidence_type": "primary_regulation",
+                "id": "pilot-operation-current",
+                "limitation": "26主引航交换；30拒绝暂停终止前告知船长并妥善安排安全地点；33指令采纳危险例外、要求更改必要更换及时报告；34安全交接离船。",
+                "market": "中国大陆",
+                "name": "船舶引航管理规定2021修正",
+                "period": "2021修正／2022页面",
+                "publisher": "江苏海事局",
+                "scope": "contextual",
+                "url": "https://js.msa.gov.cn/art/2022/5/16/art_842_1108.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "46CFR15.401船员证件要求",
+                  "截至2026-10-06"
+                ],
+                "evidence_type": "primary_regulation",
+                "id": "us-credential-current",
+                "limitation": "适用职位TWIC和/或MMC及正确endorsement、medical与STCW条件按任务核，不能把69目录条目全当驾驶必需；本地HTML被访问挑战拦截，正文经web实际核(a)—(d)。",
+                "market": "美国",
+                "name": "46CFR15.401船员证件要求",
+                "period": "截至2026-10-06",
+                "publisher": "eCFR",
+                "scope": "contextual",
+                "url": "https://www.ecfr.gov/current/title-46/chapter-I/subchapter-B/part-15/subpart-D/section-15.401"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "46CFR15.1111值班休息",
+                  "截至2026-10-06"
+                ],
+                "evidence_type": "primary_regulation",
+                "id": "us-rest-current",
+                "limitation": "越boundaryline的适用值班及安全防污染保安人员常规24h至少10h/7d77h，最多2段一段6h、间隔14h；紧急演习及特例有限条件、恢复补休、排班记录。不是全法域全船简单统一制。",
+                "market": "美国",
+                "name": "46CFR15.1111值班休息",
+                "period": "截至2026-10-06",
+                "publisher": "eCFR",
+                "scope": "contextual",
+                "url": "https://www.ecfr.gov/current/title-46/chapter-I/subchapter-B/part-15/subpart-K/section-15.1111"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "IMO2026MASS规则通过公告",
+                  "2026-05-22／7月1日起适用非强制规则"
+                ],
+                "evidence_type": "primary_document",
+                "id": "imo-mass-current",
+                "limitation": "SOLAS第1章货船非强制MASS框架，含自主动作、远程运营和ROC/网络安全/风险评估，船长总体责任包括不在船；不是所有船已自主或岗位替代率，强制规则2030/2032仅规划。",
+                "market": "全球",
+                "name": "IMO2026MASS规则通过公告",
+                "period": "2026-05-22／7月1日起适用非强制规则",
+                "publisher": "IMO",
+                "scope": "contextual",
+                "url": "https://www.imo.org/en/mediacentre/pressbriefings/pages/imo-adopts-mass-code.aspx"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "费马测试本职业编辑分析",
+                  "2026-10-09"
+                ],
+                "evidence_type": "editorial_synthesis",
+                "id": "editor-current",
+                "limitation": "AI设想、风险场景、适配观察、相邻转岗与训练路线为编辑建议，非实测收益、企业程序、真实招聘样本或作业授权。",
+                "market": "全球",
+                "name": "费马测试本职业编辑分析",
+                "period": "2026-10-09",
+                "publisher": "费马测试",
+                "scope": "editorial_synthesis",
+                "url": "https://www.onetonline.org/link/details/53-5021.00"
               }
             ]
           },
@@ -32482,11 +33544,11 @@
               "type": "prose"
             },
             "链接": {
-              "$link": "captains-mates-and-pilots-of-water-vessels.ai-impact.ai-impact-table.9",
-              "block": "ai-impact",
-              "copy_key": "career.item.ai-impact-table",
-              "entry": "link-11",
-              "field": "url"
+              "$source": "wages-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "captains-mates-and-pilots-of-water-vessels.source-register.published.1"
             }
           },
           {
@@ -32640,7 +33702,7 @@
               "entry": "link-16",
               "field": "url"
             },
-            "问题": "到 2034 年这个职业会变少吗？"
+            "问题": "到2035年这个职业的就业数量怎么变化？"
           },
           {
             "回答": {
@@ -33984,8 +35046,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.onet-summary"
+              "onet-details",
+              "nasa-seh"
             ],
             "id": "grounding-and-collision",
             "mitigation": {
@@ -34016,8 +35078,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.onet-summary"
+              "onet-details",
+              "onet-17-3021"
             ],
             "id": "bridge-communication-loss",
             "mitigation": {
@@ -34048,8 +35110,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.faa-design-approvals"
+              "nasa-seh",
+              "onet-17-3021"
             ],
             "id": "pilot-command-conflict",
             "mitigation": {
@@ -34080,8 +35142,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-summary",
-              "career.source.nasa-seh"
+              "onet-details",
+              "nasa-seh",
+              "us-rest-current"
             ],
             "id": "fatigue-and-rest",
             "mitigation": {
@@ -34112,8 +35175,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-summary",
-              "career.source.faa-design-approvals"
+              "onet-details",
+              "onet-17-3021"
             ],
             "id": "pilot-boarding-injury",
             "mitigation": {
@@ -34144,8 +35207,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "career.source.onet-details",
-              "career.source.onet-17-3021"
+              "nasa-seh",
+              "faa-design-approvals"
             ],
             "id": "over-trust-and-out-of-scope",
             "mitigation": {
@@ -34279,6 +35342,12 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.ecfr.gov/current/title-46/chapter-I/subchapter-B/part-15/subpart-K/section-15.1111",
+            "id": "us-rest-current",
+            "label": "46CFR15.1111适用值班休息规则",
+            "scope": "美国46CFR15.1111对越boundary line的适用值班及安全、防污染、保安人员，常规休息24小时至少10小时、7日至少77小时；通常最多两段、一段至少6小时、间隔不超过14小时，另有紧急、演习及受限例外和补休，需排班与休息记录，不跨法域套用。 疲劳问题立即报告有职责者，安全交接或调整值班须结合实际状态，不统一要求先停航；中国要求另核适用船舶制度。"
           }
         ]
       },
@@ -34301,7 +35370,7 @@
               }
             },
             {
-              "指标": "行业平均口径（本条路由不采用）",
+              "指标": "交通运输仓储邮政非私营行业参考",
               "数值": {
                 "$item": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.9",
                 "block": "china-salary",
@@ -34316,7 +35385,7 @@
               }
             },
             {
-              "指标": "父职业与岗位类别口径（本条路由不采用）",
+              "指标": "交通运输仓储邮政私营行业参考",
               "数值": {
                 "$item": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.11",
                 "block": "china-salary",
@@ -34331,7 +35400,7 @@
               }
             },
             {
-              "指标": "招聘价格口径（不采用）",
+              "指标": "招聘与个体工资缺口",
               "数值": {
                 "$item": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.13",
                 "block": "china-salary",
@@ -34631,10 +35700,10 @@
             "type": "prose"
           },
           "fact_refs": [
-            "cn-industry-science-tech-2024",
-            "cn-industry-manufacturing-2024",
-            "cn-professional-technical-2024",
-            "cn-urban-nonprivate-2024"
+            "current-cn-exact-gap",
+            "current-cn-transport-nonprivate",
+            "current-cn-transport-private",
+            "current-cn-recruitment-gap"
           ],
           "sources_note": {
             "$item": "captains-mates-and-pilots-of-water-vessels.china-salary.career-snapshot-primary-locale.57",
@@ -34645,11 +35714,11 @@
           "ui": {
             "ai_heading": "AI 会影响船长、大副与船舶引航员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "中国大陆薪资参考：官方统计口径与缺口",
-            "scenario_caption": "学历背景、岗位方向与说明（编辑整理，不是薪资统计）",
-            "scenario_heading": "不同学历背景对应哪些岗位方向？",
+            "official_heading": "中国大陆精确工资缺口与行业年平均工资背景",
+            "scenario_caption": "教育、在岗资历与适任证书核对示例（编辑整理，不是学历或工资分布）",
+            "scenario_heading": "不同教育、经验与资格背景可核对哪些岗位方向？",
             "scenario_interpretation_label": "说明与核对建议",
-            "scenario_role_label": "学历背景",
+            "scenario_role_label": "教育、经验与资格背景",
             "scenario_value_label": "岗位方向"
           },
           "us_growth": {
@@ -34770,7 +35839,7 @@
             }
           },
           {
-            "fact_ref": "us-growth-2025-2035",
+            "fact_ref": "current-exact-growth",
             "指标": "就业 · 增长率",
             "数值": {
               "$item": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.21",
@@ -34786,7 +35855,7 @@
             }
           },
           {
-            "fact_ref": "us-openings-2025-2035",
+            "fact_ref": "current-exact-openings",
             "指标": "就业 · 年均职位空缺",
             "数值": {
               "$item": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.23",
@@ -34866,14 +35935,11 @@
           "type": "prose"
         },
         "heading": "美国船长、大副与船舶引航员工资与就业数据？",
-        "industry_heading": "不同行业的美国工资差多少？",
-        "industry_period": {
-          "$fact": "us-wage-2025",
-          "field": "period"
-        },
+        "industry_heading": "美国水上运输职业群分行业工资背景（非本职业专属）",
+        "industry_period": "2025年53-5000水上运输职业群行业中位工资（非53-5021专属）",
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "current-us-parent-industry-0",
             "industry": {
               "$item": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -34894,7 +35960,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "current-us-parent-industry-1",
             "industry": {
               "$item": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -34915,7 +35981,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "current-us-parent-industry-2",
             "industry": {
               "$item": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -34936,7 +36002,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "current-us-parent-industry-3",
             "industry": {
               "$item": "captains-mates-and-pilots-of-water-vessels.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -34957,7 +36023,7 @@
             }
           }
         ],
-        "industry_value_label": "该行业内本职业工资中位数",
+        "industry_value_label": "该行业水上运输职业群工资中位数",
         "interpretation_heading": "美国船长、大副与船舶引航员工资怎么理解？",
         "interpretation_rows": [
           {
@@ -35005,7 +36071,7 @@
         },
         "outlook_heading": "美国就业前景与准备层级",
         "outlook_period": {
-          "$fact": "us-growth-2025-2035",
+          "$fact": "current-exact-growth",
           "field": "period"
         },
         "wage_column_labels": [
@@ -35200,7 +36266,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls-outlook",
+            "source_id": "onet-summary",
             "value": {
               "$item": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -35245,7 +36311,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls-pay",
+            "source_id": "onet-localwages",
             "value": {
               "$item": "captains-mates-and-pilots-of-water-vessels.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36951,6 +38017,167 @@
         "source_refs": [
           "bls-pay"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "41300人（2025）",
+        "fact_id": "current-exact-employment-2025",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "美国SOC53-5021本职业精确口径",
+        "period": "2025—2035",
+        "source_refs": [
+          "ep-current",
+          "trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "42900人（2035预测）",
+        "fact_id": "current-exact-employment-2035",
+        "market": "美国",
+        "measure": "预测就业",
+        "occupation_scope": "美国SOC53-5021本职业精确口径",
+        "period": "2025—2035",
+        "source_refs": [
+          "ep-current",
+          "trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "变化4.0%（平均）",
+        "fact_id": "current-exact-growth",
+        "market": "美国",
+        "measure": "预测变化率",
+        "occupation_scope": "美国SOC53-5021本职业精确口径",
+        "period": "2025—2035",
+        "source_refs": [
+          "ep-current",
+          "trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "净变化约1700人（BLS先舍入）",
+        "fact_id": "current-exact-change",
+        "market": "美国",
+        "measure": "预测净变化",
+        "occupation_scope": "美国SOC53-5021本职业精确口径",
+        "period": "2025—2035",
+        "source_refs": [
+          "ep-current",
+          "trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "3800个/年（非净增）",
+        "fact_id": "current-exact-openings",
+        "market": "美国",
+        "measure": "年均空缺",
+        "occupation_scope": "美国SOC53-5021本职业精确口径",
+        "period": "2025—2035",
+        "source_refs": [
+          "ep-current",
+          "trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：本轮未取得中国本职业全国精确工资",
+        "fact_id": "current-cn-exact-gap",
+        "market": "中国大陆",
+        "measure": "精确职业缺口",
+        "occupation_scope": "中国船长大副引航员精确工资未取得，交通运输仓储邮政仅多职业行业背景",
+        "period": "2025／截至2026-10-09",
+        "source_refs": [
+          "nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "133981元/年（2025交通运输仓储邮政非私营税前年均，非本职业）",
+        "fact_id": "current-cn-transport-nonprivate",
+        "market": "中国大陆",
+        "measure": "行业税前年平均工资",
+        "occupation_scope": "中国船长大副引航员精确工资未取得，交通运输仓储邮政仅多职业行业背景",
+        "period": "2025／截至2026-10-09",
+        "source_refs": [
+          "nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "73133元/年（2025交通运输仓储邮政私营税前年均，非本职业）",
+        "fact_id": "current-cn-transport-private",
+        "market": "中国大陆",
+        "measure": "行业税前年平均工资",
+        "occupation_scope": "中国船长大副引航员精确工资未取得，交通运输仓储邮政仅多职业行业背景",
+        "period": "2025／截至2026-10-09",
+        "source_refs": [
+          "nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：本轮未取得真实招聘价格分布及个体收入",
+        "fact_id": "current-cn-recruitment-gap",
+        "market": "中国大陆",
+        "measure": "招聘与个体覆盖缺口",
+        "occupation_scope": "中国船长大副引航员精确工资未取得，交通运输仓储邮政仅多职业行业背景",
+        "period": "2025／截至2026-10-09",
+        "source_refs": [
+          "nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "79420美元/年（2025该行业水上运输职业群中位，非本职业）",
+        "fact_id": "current-us-parent-industry-0",
+        "market": "美国",
+        "measure": "父级职业群行业工资中位",
+        "occupation_scope": "美国53-5000全部水上运输职业群在深海、沿海与五大湖水运行业，非53-5021专属",
+        "period": "2025",
+        "source_refs": [
+          "ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "77990美元/年（2025该行业水上运输职业群中位，非本职业）",
+        "fact_id": "current-us-parent-industry-1",
+        "market": "美国",
+        "measure": "父级职业群行业工资中位",
+        "occupation_scope": "美国53-5000全部水上运输职业群在水运支持活动行业，非53-5021专属",
+        "period": "2025",
+        "source_refs": [
+          "ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "65660美元/年（2025该行业水上运输职业群中位，非本职业）",
+        "fact_id": "current-us-parent-industry-2",
+        "market": "美国",
+        "measure": "父级职业群行业工资中位",
+        "occupation_scope": "美国53-5000全部水上运输职业群在内河水运行业，非53-5021专属",
+        "period": "2025",
+        "source_refs": [
+          "ooh-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "57930美元/年（2025该行业水上运输职业群中位，非本职业）",
+        "fact_id": "current-us-parent-industry-3",
+        "market": "美国",
+        "measure": "父级职业群行业工资中位",
+        "occupation_scope": "美国53-5000全部水上运输职业群在联邦政府（不含邮政）行业，非53-5021专属",
+        "period": "2025",
+        "source_refs": [
+          "ooh-current"
+        ]
       }
     ]
   },
@@ -36959,7 +38186,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "O*NET 53-5021.00 · 航行与操纵 / 值班与监控 / 管理与合规",
@@ -37010,7 +38237,7 @@
       "text": "船长、大副与船舶引航员"
     }
   },
-  "source_content_sha256": "46185f680c684dd9c746da0d54c2e5578d6871ee6f638497017230ee622dd741",
+  "source_content_sha256": "f262efb0244d8bf702f08d3e047bdab098af3c5c9e916669bde5532475ea628e",
   "subject": {
     "canonical_slug": "captains-mates-and-pilots-of-water-vessels",
     "name": "船长、大副与船舶引航员",

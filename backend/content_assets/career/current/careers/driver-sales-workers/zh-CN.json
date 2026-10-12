@@ -35,6 +35,39 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:r5-current-china-jiaojiang-featured-daily-2026": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-employment": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-high": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-identity": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-amusement": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-education": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-industry-theater": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-low": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-median": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-current-openings": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -1587,7 +1620,7 @@
         "status": "mapped"
       },
       "item:actors.path.credential-boundary.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:actors.path.credential-decision.1": {
         "status": "mapped"
@@ -22669,7 +22702,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的工作对象是路线配送与销售现场：配送单与订单与路线表与客户清单、商品与货物与数量与批号与保质期、价格与促销与货款与票据与挂账规则、车辆与食品分发设备与冷藏与安全状态、道路与天气与时效要求，以及销售与配送与结算记录。产出是按时完成且能对账的配送与销售成果与其记录：按路线与时效送达的商品、按制度收取的货款与开具的凭据、按规则完成的接单与上货与陈列促销、可复核的销售与配送与差异与退货与拒收记录，以及车辆与设备检查与清洁与异常上报与交接。判断依据是配送单与订单与路线与价格与收款制度与交通与食品安全要求，而不是个人习惯或岗位名称。"
+              "工作对象是既定路线或区域的销售或配送，可包括食品、医疗用品、报纸或商业洗涤物。O*NET六Core包括驾驶配送、向熟客介绍产品价格、日销售或配送记录、投诉、收款凭据与车辆食品设备维护清洁；接单收款按定义可能承担，不每人承担全部任务。促销陈列、售货机补货、订单合同、清单装车及特色食品销售为Supplemental。冷链批号保质期仅按实际适用货物，签收对账异常交接等为具体岗位编辑核对项，非统一核心产出。"
             ]
           },
           "id": "actors.profile.work-context-block.1",
@@ -22767,7 +22800,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "环境与节奏：以户外与道路与客户现场为主并与客户高频互动；户外各种天气「每天」100%、每天时间压力 92%、每天极热或极冷温度 82%、重复相同任务「极其重要」76%、持续用手 76%、每天在封闭车辆内 78%、每天面对面讨论 77%、决策自由度「很大」43%、每天决策 39%、每天需面对不愉快或愤怒的人 19%、冲突情境「每周以上」26%、工作时间「规律」82%、持续做重复动作 64%、持续弯腰或扭身 59%、每天暴露于污染物 40%、竞争「极度竞争」21%、错误后果「极其严重」32%、每周工作超过 40 小时 81%。"
+              "美国57项情境实际读：户外各种天气每天100%、期限每天92%、冷热每天82%/每周但非每天18%、面对面每天77%/每周但非每天18%；典型周超40小时81%/40小时14%，规律82%/不规律18%。持续用手76%、重复动作64%、弯腰扭身59%，封闭车每天78%/从不22%；决策自由很大43%/一些14%/没有14%，每日决策39%，污染物每天40%。不愉快愤怒人员每天19%/每周但非每天18%，冲突每周但非每天26%/每年但非每月15%/从不17%；暴力人员每年但非每月18%/从不82%，不是天天人身攻击。错误极严重32%/严重19%/完全不严重12%，竞争极度21%。电话/邮件/持续接触/团队/自动化等本次反馈未给比例，不填0、不推GenAI采用率或个体事故率。"
             ]
           },
           "id": "actors.profile.work-context-block.8",
@@ -22921,12 +22954,18 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本表把本页职业与相邻岗位按核心目的、主要对象与依据、核心过程、主要产出、责任主体、协作与督导、结论边界七项逐一对照：本页职业（O*NET-SOC 53-3031.00）是沿既定路线或在既定区域内驾驶车辆一边配送一边销售与收款的路线销售岗位；重型与半挂卡车司机（53-3032.00）负责长途货运；轻型卡车司机（53-3033.00）以纯配送为主不承担销售收款；快递员与信使（43-5021.00）以揽派件与时效为主；零售销售员（41-2031.00）在门店内成交；收银员（41-2011.00）在收银台结算；补货与订单拣货员（53-7065.00）在仓库与门店理货拣货。比较时要以岗位职责与交通与从业资格与食品安全与收款制度逐项核对，不能按岗位名称互换，也不能把路线配送与销售职责读成长途运输权、门店定价权、收银主管权或食品安全与合规结论权。"
+              "本页53-3031沿路线/区域销售或配送，收款接单可为任务；重型53-3032为牵引挂车或至少26001磅总重卡车含拖车须CDL，不全等长途；轻型53-3033低于26001磅主要取货送货可装卸，不推绝不收款。快递43-5021可步行/骑车/公共交通传递物件，零售41-2031消费者商品销售不全限室内门店；收银41-2011非金融机构收支，拣货53-7065仓储/堆场/货架订单。不按名称互认资格。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "agent",
+            "r5-light",
+            "enrichment",
+            "art",
+            "editing",
+            "announcing"
           ],
           "type": "prose"
         },
@@ -22963,12 +23002,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的核心目的：长途卡车运输保证干线货运；轻型卡车配送保证点对点送货；快递保证揽派件时效；门店零售保证到店成交与体验；收银保证结账准确；理货拣货保证库存与订单准确。"
+              "编辑相邻任务比较：重型牵引挂车货运按车型重量与运输任务核，不全限长途干线；轻型配送以取送货为主，可能收款；快递可步骑或其他运输；零售向消费者售商品不全限门店，收银处理付款，理货拣货侧重库存订单，职责可交叉。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.purpose.secondary",
           "source_refs": [
-            "onet"
+            "agent",
+            "r5-light",
+            "enrichment",
+            "art",
+            "editing",
+            "announcing"
           ],
           "type": "prose"
         },
@@ -23047,12 +23091,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的过程：装货与长途驾驶与卸货（长途货运）；装货与点对点配送与签收（轻型配送）；揽收与分拣与派送（快递）；接待与推荐与成交与结账（门店零售）；扫码与收款与找零与对账（收银）；到货与上架与拣货与复核（理货拣货）。"
+              "编辑任务差距：重型车辆驾驶装卸和拖车任务不全长途；轻型取送交付可能收款；快递取送可非驾车；零售解释推荐商品给消费者非只门店；收银支付及找零记录、拣货库存复核按实际岗位核，流程不作各职业唯一顺序。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.process.secondary",
           "source_refs": [
-            "onet"
+            "agent",
+            "r5-light",
+            "enrichment",
+            "art",
+            "editing",
+            "announcing"
           ],
           "type": "prose"
         },
@@ -23313,12 +23362,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按法规与制度执行：从事「经营性道路客货运输」的驾驶人须按《道路运输从业人员管理规定》（交通运输部令 2026 年第 4 号第四次修正，自 2026 年 3 月 20 日起施行）取得相应从业资格证，未取得相应从业资格证件或使用失效与伪造与变造证件或超越核定范围驾驶道路客运车辆的，由县级以上交通运输主管部门责令改正并处 200 元以上 2000 元以下罚款；驾驶道路货运车辆违反同一情形的，责令改正并处 200 元罚款（第四十六条）；「使用总质量 4500 千克及以下普通货运车辆的驾驶员与非经营性私人用车驾驶员不需取得从业资格证」，该规定「不涉及出租汽车驾驶员」；同时应遵守《中华人民共和国道路交通安全法》与（如涉食品配送）《中华人民共和国食品安全法》与《中华人民共和国消费者权益保护法》的要求。具体适用以所在法域法规与主管部门与本企业制度为准，本页按法规名称与一般要求引用而未逐条核对条文编号。"
+              "《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。 道路交通安全法2021：19条相应驾驶证和准驾车型；21条出车前认真检查安全技术性能，不驾驶安全隐患车；22条过度疲劳等影响安全驾驶不得驾驶。70条事故立即停车保护现场、人伤立即抢救迅速報警；无伤事实成因无争议可即行撤离恢复交通协商，不撤须迅速報警，轻微财产损失事实清楚先撤再协商。73条公安交管部门制作事故认定书，本人/单位不自行发正式责任结论。一般投诉/货款差异和事故不能套同一停作业上报顺序；未采企业重启制度。 食品安全法2025修正政府正文：33条6项运输贮存装卸容器工具设备安全无害清洁、防污染、所需温湿条件且不与有毒有害同运；非食品经营者从事贮存运输装卸也适用该项。45条健康制度及接触直接入口食品人员每年健康检查证明，不是所有包装食品配送员统一健康证。44条经营企业培训/管理、主要负责人责任；47条经营条件不再符合须整改、潜在食品事故风险立即停食品经营并向县级以上所在地食安部门报告；63条不合标准或可能有害食品由相应生产/经营者停止、通知及依法召回，非配送员任意销毁权限。41条另有重点液态食品道路散装运输准运制度，仅该特定范围，具体目录/配套本轮未核，不泛化普通包裹。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.04.answer",
           "source_refs": [
-            "onet"
+            "r5-road",
+            "r5-road-regulation",
+            "r5-traffic",
+            "r5-food"
           ],
           "type": "prose"
         },
@@ -23355,12 +23407,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "交通事故或商品破损或货款差异或客户投诉或设备异常或超出授权的要求出现时，是否按「先保障人身与道路与食品安全并停止受影响作业、按制度记录与上报、必要时请调度与门店与主管部门介入」的顺序处理？"
+              "事故依交通法70条实际人伤/财损情形停车、抢救、报告或撤离；投诉/货款/设备/食品异常按各适用程序处理，能否及时核并交接？未采统一停止/恢复规则。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.06.question",
           "source_refs": [
-            "onet"
+            "r5-traffic",
+            "r5-food",
+            "r5-road",
+            "r5-road-regulation"
           ],
           "type": "prose"
         },
@@ -23383,7 +23438,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "核心产出：按路线与时效完成的配送与销售记录、交付与签收与上货与陈列记录、收款与开票与挂账与差异处理记录、车辆与设备检查与清洁与维护记录，以及破损与投诉与事故与设备异常上报与交接记录。"
+              "按实际销售或配送角色核交付、日记录、客户服务及车辆/适用食品设备维护清洁；接单收款不是每岗全部承担，促销陈列、售货机及清单装车等为补充任务。签收、挂账、差异处置及交接记录按真实制度核，不列成统一Core，食品条件依货物适用。"
             ]
           },
           "id": "actors.display.responsibilities_block.02",
@@ -23467,7 +23522,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "以户外与道路与客户现场为主并与客户高频互动：户外暴露于各种天气「每天」100%，每天时间压力 92%，每天暴露于极热或极冷温度 82%（另 18% 每周以上），重复相同任务「极其重要」76%（另 18% 重要），持续用手 76%（另 14% 约一半），每天在封闭车辆内 78%（另 22% 从不），每天面对面讨论 77%（另 18% 每周以上）；决策自由度「很大」43%，每天决策 39%，每天需面对不愉快或愤怒的人 19%（另 18% 每周以上），冲突情境「每周以上」26%，工作时间「规律」82%，持续做重复动作 64%，持续弯腰或扭身 59%，坐「超过一半」28%，每天暴露于污染物 40%，竞争「极度竞争」21%，错误后果「极其严重」32%（另 19% 严重），每周工作超过 40 小时 81%。"
+              "美国57项情境实际读：户外各种天气每天100%、期限每天92%、冷热每天82%/每周但非每天18%、面对面每天77%/每周但非每天18%；典型周超40小时81%/40小时14%，规律82%/不规律18%。持续用手76%、重复动作64%、弯腰扭身59%，封闭车每天78%/从不22%；决策自由很大43%/一些14%/没有14%，每日决策39%，污染物每天40%。不愉快愤怒人员每天19%/每周但非每天18%，冲突每周但非每天26%/每年但非每月15%/从不17%；暴力人员每年但非每月18%/从不82%，不是天天人身攻击。错误极严重32%/严重19%/完全不严重12%，竞争极度21%。电话/邮件/持续接触/团队/自动化等本次反馈未给比例，不填0、不推GenAI采用率或个体事故率。"
             ]
           },
           "id": "actors.display.work_context_block.summary",
@@ -23523,12 +23578,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作时间「规律」82%，但常见早起与旺季与配送时效驱动的加班；节奏由路线与客户需求与时效与季节决定。"
+              "美国规律82%/不规律18%、超40小时81%。OOH合并叙述固定路线可能早晚开工、周末节假日；不是中国普遍旺季加班因果。"
             ]
           },
           "id": "actors.display.work_context_block.schedule",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -23551,12 +23607,14 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "复核方式含出车前车辆与设备与货物检查、交付与收款与票据抽查、销售与配送与货款对账、车辆与设备维护与异常上报跟踪与交接；交通事故与破损与货款差异与投诉按规定上报。"
+              "编辑记录核对建议：交付收款票据和货款差异如何检查、维护上报交接如何组织，依具体企业制度，本轮未采统一抽查方式。出车检查、事故处理及法定教育按实际交通运输法规，不由编辑建议替代即时报警或安全义务。"
             ]
           },
           "id": "actors.display.work_context_block.review",
           "source_refs": [
-            "onet"
+            "onet",
+            "r5-traffic",
+            "r5-road-regulation"
           ],
           "type": "prose"
         },
@@ -23593,12 +23651,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 53-3031.00：2024 年就业约 451,500 人，2024—2034 年预测为「远高于平均（Much faster than average，7% 或更高）」，预计空缺 51,300；准备层级 Job Zone 1-2（SVP 低于 6.0），兴趣代码 RCE；任务共 11 项。"
+              "美国53-3031.00定义沿既定路线/区域驾驶车辆销售或配送商品、收取或递送商业洗涤等，接单、收款、上货为可能职责，不能说每人必须所有任务。11任务6Core/5Supplemental：驾驶配送83、向熟客介绍新产品/服务及价格77、每日记录76、聆听解决投诉75、收款找零和客户凭据记录74、维护卡车/食品分发设备及清洁74为Core；促销陈列79、售货机收币补货撤旧78、按公司规则订单及销售合同67、核客户/交付清单装车63、出售特色食品重要性未提供为Supplemental。维修与清洁可在本职职责中，重大维修/处置权限须另核；冷链、批号保质期适用于实际食品而非所有货物。 O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。 BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.onet",
           "source_refs": [
-            "onet"
+            "onet",
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -23621,12 +23680,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "主要行业为食品与饮料配送与批发与零售与餐饮供应等路线销售场景；常见岗位为路线配送与路线销售与外卖配送，多为按小时计酬或含提成的路线班次岗位；该页教育反馈只给定性答复（部分岗位要求高中或同等学历、部分岗位要求低于高中学历），未给百分比。"
+              "O*NET2025本职业行业就业份额住宿餐饮40%、批发25%；OOH更细食品服务及饮料场所39%、批发25%、零售9%、运输仓储6%，自雇取整7%与精细7.3%区分。这些是本职业就业分布，不是工资。OOH本职业2025行业年薪中位：批发49,090、运输仓储45,690、零售36,640、食品服务饮料30,580美元；只适用该职业在该行业受雇工资，不替中国或个人报价。 O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -23635,12 +23695,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆相关要求按法规与口径区分：从事经营性道路客货运输的驾驶人须按《道路运输从业人员管理规定》（交通运输部令 2026 年第 4 号第四次修正，自 2026 年 3 月 20 日起施行）取得相应从业资格证，未取得相应从业资格证件或使用失效与伪造与变造证件或超越核定范围驾驶道路客运车辆的责令改正并处 200 元以上 2000 元以下罚款；驾驶道路货运车辆违反同一情形的责令改正并处 200 元罚款（第四十六条）；使用总质量 4500 千克及以下普通货运车辆的驾驶员与非经营性私人用车驾驶员不需取得从业资格证；该规定不涉及出租汽车驾驶员；同时应遵守《中华人民共和国道路交通安全法》与（如涉食品配送）《中华人民共和国食品安全法》与《中华人民共和国消费者权益保护法》。本条按法规名称与一般要求引用，未逐条核对条文编号。"
+              "《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。 道路运输条例2026-01-30第六次修订：2条范围为运输经营及相关业务；21/22货运车辆/安全管理及驾驶证、主管部门年龄和知识考试（4500千克及以下普通货运例外）；24条同类普通货运经营无需该条经营许可证及车辆营运证，是经营/车辆手续不是个人驾驶许可。28条适用经营者教育与从业规程、连续驾驶不超4小时，30/31条车辆维护检测与经营者事故等应急预案。实际经营属性、总质量和货物类别须核，不能按司机兼销售名称决定。 道路交通安全法2021：19条相应驾驶证和准驾车型；21条出车前认真检查安全技术性能，不驾驶安全隐患车；22条过度疲劳等影响安全驾驶不得驾驶。70条事故立即停车保护现场、人伤立即抢救迅速報警；无伤事实成因无争议可即行撤离恢复交通协商，不撤须迅速報警，轻微财产损失事实清楚先撤再协商。73条公安交管部门制作事故认定书，本人/单位不自行发正式责任结论。一般投诉/货款差异和事故不能套同一停作业上报顺序；未采企业重启制度。 食品安全法2025修正政府正文：33条6项运输贮存装卸容器工具设备安全无害清洁、防污染、所需温湿条件且不与有毒有害同运；非食品经营者从事贮存运输装卸也适用该项。45条健康制度及接触直接入口食品人员每年健康检查证明，不是所有包装食品配送员统一健康证。44条经营企业培训/管理、主要负责人责任；47条经营条件不再符合须整改、潜在食品事故风险立即停食品经营并向县级以上所在地食安部门报告；63条不合标准或可能有害食品由相应生产/经营者停止、通知及依法召回，非配送员任意销毁权限。41条另有重点液态食品道路散装运输准运制度，仅该特定范围，具体目录/配套本轮未核，不泛化普通包裹。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
           "source_refs": [
-            "onet"
+            "r5-road",
+            "r5-road-regulation",
+            "r5-traffic",
+            "r5-food"
           ],
           "type": "prose"
         },
@@ -23663,7 +23726,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页精确对应美国 O*NET 53-3031.00 Driver/Sales Workers（司机兼销售员）：驾驶卡车或其他车辆，沿既定路线或在既定区域内行驶，销售或配送食品与餐厅外卖等商品，或收取与递送商业洗涤等物品；工作含核对配送单与订单与路线并装载货物，检查车辆与食品分发设备，按路线驾驶并在交付点送货交付与签收，介绍新产品与价格变动并接单，上货与陈列促销或发放促销材料，给自动售货机收款与补货与撤除陈旧商品，收款找零并开具凭据或按单挂账，处理客户对商品或服务的投诉，在每日销售或配送记录上记录销售与配送信息，维护车辆与食品分发设备并清洁食品或饮料分发机内部；属沿既定路线的路线销售与配送岗位，不含重型与半挂长途运输与轻型卡车纯配送与快递与门店零售与收银与理货拣货等相邻岗位；不提供交通违法与责任判定、食品安全、商品质量或价格合规意见。"
+              "美国53-3031.00定义沿既定路线/区域驾驶车辆销售或配送商品、收取或递送商业洗涤等，接单、收款、上货为可能职责，不能说每人必须所有任务。11任务6Core/5Supplemental：驾驶配送83、向熟客介绍新产品/服务及价格77、每日记录76、聆听解决投诉75、收款找零和客户凭据记录74、维护卡车/食品分发设备及清洁74为Core；促销陈列79、售货机收币补货撤旧78、按公司规则订单及销售合同67、核客户/交付清单装车63、出售特色食品重要性未提供为Supplemental。维修与清洁可在本职职责中，重大维修/处置权限须另核；冷链、批号保质期适用于实际食品而非所有货物。"
             ]
           },
           "id": "actors.display.definition_block.definition",
@@ -24136,13 +24199,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以下为基于职业任务与工作情境的有限编辑推演，并非该职业的实际部署证据：AI 与路线与移动商务工具在路线配送与销售里主要辅助路线优化与订单与客户信息整理、销量与库存与补货预测、移动收款与开票与对账、车辆状态与设备提醒与配送与销售记录归档。"
+              "路线订单、销量库存提示、对账及记录整理属编辑待验证应用，传统路线规划/商务软件不等GenAI；软件目录7类通信IBM Domino、路线账务数据库、库存、地图路线、Office、bMobile项目/销售、Excel。Hot2技能Excel/Office各低于1%，2025美国本职业所有唯一招聘为分母，不是有技能广告内比例、不是0使用/0AI。ILO任务暴露/NIST治理不提供本职业采用/替代概率或提效实测。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-hot"
           ],
           "type": "prose"
         },
@@ -24166,13 +24231,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "路线与订单与客户信息整理可提高效率，但路线与时效与客户需求与交付方案仍须由驾驶人与调度与客户确认。"
+              "编辑待验证：路线订单整理是否提效须用合规同条件路线核准确和耗时，不因有工具称已改善。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24181,13 +24246,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "销量与库存与补货预测可辅助备货，但货与款清点与差异与破损处置仍须由人员与财务判断。"
+              "编辑待验证用途：销量与库存与补货预测可辅助备货，但货与款清点与差异与破损处置仍须由人员与财务判断。具体获准系统能力、准确性及效果需另核；普通路线或移动商务自动化不等GenAI，招聘关键词不是部署功能证据。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-hot",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24196,13 +24262,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "移动收款与开票与对账可减少漏记，但价格与折扣与挂账与退货拒收与货款差错不能交给系统。"
+              "编辑待验证对账整理是否减少漏记；按真实价格、收款、差异程序复核，本轮无实测与企业程序。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24226,13 +24292,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "路线与客户与货款与位置数据属于敏感信息，只能在批准的系统内按最小必要原则处理并留痕。"
+              "客户/位置/货款不自动全属法定敏感个人信息；识别到个人按目的必要，行踪轨迹/金融账户等敏感类型按个人信息保护法28条核；商品路线数据还须核权属/保密和对外传输留存训练权限，脱敏不等获授权。具体企业规程未采。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -24286,13 +24351,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 可辅助路线优化与订单与客户信息整理、销量与库存与补货预测、移动收款与开票与对账与记录归档，但不能替代路线与时效与客户判断、交通与食品安全处置、货款与差异与投诉的现场处置以及配送与销售与收款责任。"
+              "路线订单、销量库存提示、对账及记录整理属编辑待验证应用，传统路线规划/商务软件不等GenAI；软件目录7类通信IBM Domino、路线账务数据库、库存、地图路线、Office、bMobile项目/销售、Excel。Hot2技能Excel/Office各低于1%，2025美国本职业所有唯一招聘为分母，不是有技能广告内比例、不是0使用/0AI。ILO任务暴露/NIST治理不提供本职业采用/替代概率或提效实测。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24436,13 +24502,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "说明本职业岗位分布在食品与饮料配送与批发与零售与餐饮供应等路线销售场景。"
+              "O*NET2025本职业行业就业份额住宿餐饮40%、批发25%；OOH更细食品服务及饮料场所39%、批发25%、零售9%、运输仓储6%，自雇取整7%与精细7.3%区分。这些是本职业就业分布，不是工资。OOH本职业2025行业年薪中位：批发49,090、运输仓储45,690、零售36,640、食品服务饮料30,580美元；只适用该职业在该行业受雇工资，不替中国或个人报价。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -24556,13 +24622,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先限定在路线优化与订单与客户信息整理、销量与库存与补货预测、移动收款与开票与对账与记录归档等可复核环节。"
+              "编辑待验证用途：先限定在路线优化与订单与客户信息整理、销量与库存与补货预测、移动收款与开票与对账与记录归档等可复核环节。具体获准系统能力、准确性及效果需另核；普通路线或移动商务自动化不等GenAI，招聘关键词不是部署功能证据。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-hot",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24661,13 +24728,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只在批准的系统内按最小必要处理，不用于工作以外用途，并按制度留痕并接受监督。"
+              "客户/位置/货款不自动全属法定敏感个人信息；识别到个人按目的必要，行踪轨迹/金融账户等敏感类型按个人信息保护法28条核；商品路线数据还须核权属/保密和对外传输留存训练权限，脱敏不等获授权。具体企业规程未采。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.6.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -24736,13 +24802,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合"
+              "ILO导航入口"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24751,13 +24817,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅用于本页 AI 边界的说明，不代表采用率或替代结论。"
+              "路线订单、销量库存提示、对账及记录整理属编辑待验证应用，传统路线规划/商务软件不等GenAI；软件目录7类通信IBM Domino、路线账务数据库、库存、地图路线、Office、bMobile项目/销售、Excel。Hot2技能Excel/Office各低于1%，2025美国本职业所有唯一招聘为分母，不是有技能广告内比例、不是0使用/0AI。ILO任务暴露/NIST治理不提供本职业采用/替代概率或提效实测。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -24766,13 +24832,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "北美行业口径（不适用于本职业）"
+              "OOH查询入口"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -24781,13 +24846,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用演员工会或影视行业口径，仅登记其不适用。"
+              "实际不是工会或本职业部署证据。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -24796,13 +24860,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "北美行业口径（不适用于本职业）"
+              "OEWS首页"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24811,13 +24875,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用该口径，仅登记其不适用。"
+              "实际不是O*NET情境，不能说明行业结构。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24826,13 +24890,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业发布口径（不适用于本职业）"
+              "资格培训查询"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -24841,13 +24905,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用该口径，仅登记其不适用。"
+              "O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -24856,13 +24920,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "官方统计"
+              "OOH职业合并页"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-wages",
+            "r5-oews-concepts",
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -24871,13 +24936,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅按 BLS/OEWS 2025 年工资与 O*NET 2024—2034 年预测口径使用。"
+              "BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。 美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-wages",
+            "r5-oews-concepts",
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -25051,13 +25117,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助路线优化与到达提醒与状态监测"
+              "编辑待验证用途：可辅助路线优化与到达提醒与状态监测。具体获准系统能力、准确性及效果需另核；普通路线或移动商务自动化不等GenAI，招聘关键词不是部署功能证据。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.2.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-hot",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -25231,13 +25298,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助设备状态监测与清洁与保养提醒"
+              "编辑待验证用途：可辅助设备状态监测与清洁与保养提醒。具体获准系统能力、准确性及效果需另核；普通路线或移动商务自动化不等GenAI，招聘关键词不是部署功能证据。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-hot",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -26019,12 +26087,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与中国大陆「司机兼销售员」精确对应的全国单职业工资口径。中国大陆官方公开工资资料按行业与单位类型统计（如交通运输、仓储和邮政业），本职业相关岗位分散在该行业与批发零售与餐饮供应等场景，未建立与美国 O*NET 53-3031.00 一一对应的全国职业工资分布。"
+              "国家统计局2025城镇单位工资：交通运输仓储邮政非私营133981/私营73133元、批发零售135749/69622元、住宿餐饮62461/55123元，税前年平均，仅匹配可能行业背景，不是司机兼销售员职业中位/分位/月薪。5人以上法人就业统计排个体/自由职业等，不全排提成、项目、外包、派遣雇员。证据不足：未取得中国精确全国职业工资及真实薪酬样本，不能称全国从未发布、普遍补贴扣款或旺季必加薪。扣款是否合法须按实际法律合同核，不由页面授权。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26075,12 +26143,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "计酬口径常见差异：有的按月定额并含油补与餐补与全勤，有的按固定工资加提成或绩效，有的按配送件数与销售额结算并含货款差错扣款；比较时必须先确认统计量与工时与提成与扣款方式，再作比较。"
+              "编辑核对项：核真实合同固定/计时/件量/提成、工时补贴及扣款是否合法。未采真实样本，不声称通常组合或旺季必增加收入。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26131,12 +26199,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本职业相关报酬通常由「基本工资＋提成或绩效（如适用）＋油补与餐补与全勤等补贴（如适用）－货款差错与货损扣款（如适用）」构成，不同行业与企业与路线差别较大。"
+              "编辑核对项：核真实合同固定/计时/件量/提成、工时补贴及扣款是否合法。未采真实样本，不声称通常组合或旺季必增加收入。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26145,12 +26213,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业门类平均工资覆盖的是行业就业人员，不等于本职业的岗位工资，也不覆盖提成制与外包与劳务派遣与个体经营者。"
+              "国家统计局2025城镇单位工资：交通运输仓储邮政非私营133981/私营73133元、批发零售135749/69622元、住宿餐饮62461/55123元，税前年平均，仅匹配可能行业背景，不是司机兼销售员职业中位/分位/月薪。5人以上法人就业统计排个体/自由职业等，不全排提成、项目、外包、派遣雇员。证据不足：未取得中国精确全国职业工资及真实薪酬样本，不能称全国从未发布、普遍补贴扣款或旺季必加薪。扣款是否合法须按实际法律合同核，不由页面授权。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26159,12 +26227,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "旺季与节假日与促销期配送与销售强度上升，提成与加班收入会随销量与件量波动变化。"
+              "编辑核对项：核真实合同固定/计时/件量/提成、工时补贴及扣款是否合法。未采真实样本，不声称通常组合或旺季必增加收入。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26173,12 +26241,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆未发布与美国 53-3031.00 一一对应的全国职业工资分布，因此不给出中位数或分位数；行业平均工资只作为可见行业代理，并明确排除提成与岗位组合与个人到手收入推断。"
+              "国家统计局2025城镇单位工资：交通运输仓储邮政非私营133981/私营73133元、批发零售135749/69622元、住宿餐饮62461/55123元，税前年平均，仅匹配可能行业背景，不是司机兼销售员职业中位/分位/月薪。5人以上法人就业统计排个体/自由职业等，不全排提成、项目、外包、派遣雇员。证据不足：未取得中国精确全国职业工资及真实薪酬样本，不能称全国从未发布、普遍补贴扣款或旺季必加薪。扣款是否合法须按实际法律合同核，不由页面授权。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26187,12 +26255,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "影响计酬的因素主要是城市与行业、单位类型与规模、岗位是路线销售还是纯配送或快递、是否含提成与绩效与油补与餐补、以及货款差错与货损扣款规则。"
+              "编辑合同比较：城市行业、实际销售或配送角色、提成绩效油餐补以及货款差异怎样约定？本轮未取职业报酬因素主次样本；扣款是否合法需另核，不授扣款权，行业均值不证明主要驱动。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26201,12 +26269,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与路线优化与移动收款与库存工具可辅助路线与订单与对账与记录，但工资与录用结论不由此产生；本页只说明口径与边界。"
+              "编辑待验证用途：AI 与路线优化与移动收款与库存工具可辅助路线与订单与对账与记录，但工资与录用结论不由此产生；本页只说明口径与边界。具体获准系统能力、准确性及效果需另核；普通路线或移动商务自动化不等GenAI，招聘关键词不是部署功能证据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
           "source_refs": [
-            "sag-moa"
+            "onet",
+            "r5-hot",
+            "r5-nist-current"
           ],
           "type": "prose"
         },
@@ -26252,13 +26322,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资分位是统计位置，不是新手、熟练或路线负责人的等级标签；同一职业内部因行业、企业与路线与是否含提成差异很大。"
+              "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26282,13 +26352,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业规模、预测变化与预计空缺分别回答不同问题，不能混成个人录用概率；本职业预测为远高于平均，但含大量更替需求。"
+              "BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -26402,13 +26471,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024 年就业约 451,500 人；2024—2034 年预测为「远高于平均（Much faster than average，7% 或更高）」，预计空缺 51,300；该来源只给出类别与阈值而未给出单一精确百分比，本页按口径原文表述；空缺同时包含增长与更替，不是净增岗位。"
+              "BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.project",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -26432,13 +26500,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "相关岗位分布在食品与饮料配送与批发与零售与餐饮供应等路线销售场景；既有大批量路线配送与销售岗位，也有外卖与社区配送与小区域路线岗位。"
+              "O*NET2025本职业行业就业份额住宿餐饮40%、批发25%；OOH更细食品服务及饮料场所39%、批发25%、零售9%、运输仓储6%，自雇取整7%与精细7.3%区分。这些是本职业就业分布，不是工资。OOH本职业2025行业年薪中位：批发49,090、运输仓储45,690、零售36,640、食品服务饮料30,580美元；只适用该职业在该行业受雇工资，不替中国或个人报价。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -26447,13 +26515,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "教育反馈：该页只给定性答复（部分岗位要求高中或同等学历、部分岗位要求低于高中学历），本页不编造百分比；在职通常通过路线带教与在岗培训上手。"
+              "O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "r5-bls-projections",
+            "bls"
           ],
           "type": "prose"
         },
@@ -26462,13 +26531,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工作场景为道路与车辆驾驶室与客户交付点与门店或仓库；不同企业与行业的车辆与安全与食品安全与收款要求差别较大。"
+              "美国57项情境实际读：户外各种天气每天100%、期限每天92%、冷热每天82%/每周但非每天18%、面对面每天77%/每周但非每天18%；典型周超40小时81%/40小时14%，规律82%/不规律18%。持续用手76%、重复动作64%、弯腰扭身59%，封闭车每天78%/从不22%；决策自由很大43%/一些14%/没有14%，每日决策39%，污染物每天40%。不愉快愤怒人员每天19%/每周但非每天18%，冲突每周但非每天26%/每年但非每月15%/从不17%；暴力人员每年但非每月18%/从不82%，不是天天人身攻击。错误极严重32%/严重19%/完全不严重12%，竞争极度21%。电话/邮件/持续接触/团队/自动化等本次反馈未给比例，不填0、不推GenAI采用率或个体事故率。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.amusement",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet"
           ],
           "type": "prose"
         },
@@ -26477,13 +26545,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本职业以受雇岗位为主，亦有提成制与个体经营者；个体经营与提成制的收入口径与受雇工资不可直接比较。"
+              "BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。 美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-projections",
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26507,13 +26576,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "城市与行业、单位类型与规模、是否含提成与绩效与油补与餐补、以及路线密度与销量与件量都会影响实际收入。"
+              "编辑比较核地区/行业/路线/合同/工时及提成，未采其对工资分位的因果估计。美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.paid-work",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26567,13 +26636,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国统计不代表中国大陆职业工资或就业结果；本页未引用 BLS 职业展望本职业页数值。"
+              "BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.boundary.detail",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-projections"
           ],
           "type": "prose"
         }
@@ -27528,12 +27596,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "注意时效与签收与不承担销售收款职责的区别。"
+              "轻卡主要取送货，不以绝不收款区分；具体销售和收款职责另核。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.watchouts",
           "source_refs": [
-            "onet"
+            "r5-light",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27710,7 +27779,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要：每天面对面讨论 77%（另 18% 每周以上），每天需面对不愉快或愤怒的人 19%（另 18% 每周以上），冲突情境「每周以上」26%；沟通以与客户与收货人与调度与门店为主。"
+              "美国面对面77每天/18每周但非每天；愤怒19每天/18每周但非每天，冲突26每周但非每天，暴力82从不。不是从反馈推人人需外向或人人天天危险。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.outgoing.answer",
@@ -27738,12 +27807,16 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "美国教育反馈本轮只给定性答复（部分岗位要求高中或同等学历、部分岗位要求低于高中学历），本页不编造百分比。中国大陆本职业不设统一准入类职业资格，但从事经营性道路客货运输的驾驶人须按《道路运输从业人员管理规定》（交通运输部令 2026 年第 4 号第四次修正，2026 年 3 月 20 日起施行）取得相应从业资格证；使用总质量 4500 千克及以下普通货运车辆的驾驶员与非经营性私人用车驾驶员不需取得从业资格证，该规定不涉及出租汽车驾驶员。"
+              "O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。 《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.appearance.answer",
           "source_refs": [
-            "onet"
+            "onet",
+            "r5-bls-projections",
+            "r5-road",
+            "r5-road-regulation",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27864,7 +27937,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 53-3031.00 的任务与工作情境：用于说明本职业的现场与安全与负荷与技能要求。"
+              "官方RCE：R72/C61/E45/S24/A0/I0；可靠82/社交63/坚持59/细节51/正直50/自控48/压力41是职业描述强度，非从业者人格百分比或个人录用门槛。美国57项情境实际读：户外各种天气每天100%、期限每天92%、冷热每天82%/每周但非每天18%、面对面每天77%/每周但非每天18%；典型周超40小时81%/40小时14%，规律82%/不规律18%。持续用手76%、重复动作64%、弯腰扭身59%，封闭车每天78%/从不22%；决策自由很大43%/一些14%/没有14%，每日决策39%，污染物每天40%。不愉快愤怒人员每天19%/每周但非每天18%，冲突每周但非每天26%/每年但非每月15%/从不17%；暴力人员每年但非每月18%/从不82%，不是天天人身攻击。错误极严重32%/严重19%/完全不严重12%，竞争极度21%。电话/邮件/持续接触/团队/自动化等本次反馈未给比例，不填0、不推GenAI采用率或个体事故率。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.onet",
@@ -27892,12 +27965,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "企业与车队与门店制度与授权规则：用于说明路线、交付、收款、货款差错、设备与数据与记录边界。"
+              "实际链接是人社部门首页，为检索入口，非企业路线交付收款规则；这些具体制度本轮未实采。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.employer",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -27934,12 +28007,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻岗位对照（门店零售与收银与理货拣货）：用于说明成交与结账与库存职责的差异。"
+              "实际链接是交通运输部首页，非零售收银理货任务对照原文，具体法条另见正文来源。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.teacher",
           "source_refs": [
-            "onet"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -27948,12 +28021,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "道路运输与交通与食品安全法规（《道路运输从业人员管理规定》与《中华人民共和国道路交通安全法》与《中华人民共和国食品安全法》）：用于说明从业资格与交通与食品安全要求（按名称与一般要求引用）。"
+              "实际链接是快递员及信使职业定义，用于比较取送文件包裹、可步行骑行等任务，非中国道路或食品法规。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.enrichment",
           "source_refs": [
-            "onet"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -27962,12 +28035,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑综合：用于本页练习与边界设计，不构成外部事实或资格证据。"
+              "实际链接是零售销售职业定义，支持面向消费者售商品的任务对照，不是编辑综合或测评效度证据。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.art",
           "source_refs": [
-            "onet"
+            "art"
           ],
           "type": "prose"
         }
@@ -27984,13 +28057,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "路线与货物差错风险：配送单与路线与客户与数量与批号与保质期核对不清，导致错送漏送与数量与保质期不符与客户投诉。"
+              "编辑建议按实际订单和客户清单核路线/数量；涉食品另核批号保质期与温湿要求，实际装载顺序和复核程序未采。"
             ]
           },
           "id": "actors.risk.career-risk-cards.1",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-food"
           ],
           "type": "prose"
         },
@@ -27999,13 +28072,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "车辆与设备与食品缺陷风险：车辆与冷藏与食品分发设备或安全装置存在缺陷仍出车，导致路上故障与商品变质与人身与食品安全风险。"
+              "驾驶人按交通法21条认真检查，不驾有安全隐患车；食品容器设备依33条6项清洁安全及所需温湿条件，转修/恢复按真实设备制度核。"
             ]
           },
           "id": "actors.risk.career-risk-cards.2",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-traffic",
+            "r5-food"
           ],
           "type": "prose"
         },
@@ -28014,13 +28087,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "驾驶违规与事故风险：为赶时间超速或疲劳驾驶或分心使用手机，导致交通违法与事故与人身与货物损失。"
+              "驾驶按交通法22条不疲劳，适用经营货运另遵从业规定38条连续驾驶不超4小时；事故按70条人伤/财损分情形救助报告或撤离，不等先内部登记后报警。"
             ]
           },
           "id": "actors.risk.career-risk-cards.3",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-traffic",
+            "r5-road",
+            "r5-road-regulation"
           ],
           "type": "prose"
         },
@@ -28029,13 +28103,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "货款与差异差错风险：收款不留凭据或私自改价或漏记货款或差异未按制度处理，导致货与款不符与无法对账与责任纠纷。"
+              "编辑建议按真实价格/收款规则核订单、金额与凭据，差异准确记录报告，不自行改价/销账；真实企业程序未采。"
             ]
           },
           "id": "actors.risk.career-risk-cards.4",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28044,13 +28117,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "记录与异常上报延迟风险：销售与配送记录缺失或事故与破损与设备异常未按规定上报，延误处置并放大后果。"
+              "准确记录并及时报告相关人员；道路人伤事故先救助迅速報警，食品隐患由适用经营者依法整改/停经营报告，普通投诉不机械套同流程。"
             ]
           },
           "id": "actors.risk.career-risk-cards.5",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-traffic",
+            "r5-food"
           ],
           "type": "prose"
         },
@@ -28059,13 +28132,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "客户情绪与人身安全风险：在与不愉快或愤怒的客户互动或独自在陌生地点送货时发生冲突或人身与财物风险。"
+              "编辑建议事前核陌生交付点和真实求助渠道，遇冲突避免升级、保障自身安全并按实际应急渠道求助记录；未采具体车队安保/重启程序，受访愤怒或暴力频率不是事故率。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.mitigation",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28104,13 +28176,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险项按本职业内容与所列来源（O*NET 工作情境、企业与车队与门店制度、《道路运输从业人员管理规定》与《中华人民共和国道路交通安全法》与《中华人民共和国食品安全法》）边界解释。"
+              "六风险为结合任务的编辑场景，O*NET不提供事故率。法定交通、货运和食品责任按实际条款/对象区分，具体企业收款/恢复程序未采。道路交通安全法2021：19条相应驾驶证和准驾车型；21条出车前认真检查安全技术性能，不驾驶安全隐患车；22条过度疲劳等影响安全驾驶不得驾驶。70条事故立即停车保护现场、人伤立即抢救迅速報警；无伤事实成因无争议可即行撤离恢复交通协商，不撤须迅速報警，轻微财产损失事实清楚先撤再协商。73条公安交管部门制作事故认定书，本人/单位不自行发正式责任结论。一般投诉/货款差异和事故不能套同一停作业上报顺序；未采企业重启制度。 食品安全法2025修正政府正文：33条6项运输贮存装卸容器工具设备安全无害清洁、防污染、所需温湿条件且不与有毒有害同运；非食品经营者从事贮存运输装卸也适用该项。45条健康制度及接触直接入口食品人员每年健康检查证明，不是所有包装食品配送员统一健康证。44条经营企业培训/管理、主要负责人责任；47条经营条件不再符合须整改、潜在食品事故风险立即停食品经营并向县级以上所在地食安部门报告；63条不合标准或可能有害食品由相应生产/经营者停止、通知及依法召回，非配送员任意销毁权限。41条另有重点液态食品道路散装运输准运制度，仅该特定范围，具体目录/配套本轮未核，不泛化普通包裹。"
             ]
           },
           "id": "actors.display.career_risk_cards.evidence-scope",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-traffic",
+            "r5-food"
           ],
           "type": "prose"
         },
@@ -28524,13 +28597,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "企业与车队与门店制度与授权规则：用于路线、交付、收款、货款差错、设备与数据与记录边界。"
+              "实际链接是食品安全法政府正文，支持适用食品运输条件、直接入口接触人员健康及经营者风险处理，不是实采企业车队或门店制度。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.employer",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-food"
           ],
           "type": "prose"
         },
@@ -28539,13 +28611,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "道路运输与交通与食品安全法规（《道路运输从业人员管理规定》与《道路交通安全法》与《食品安全法》）：用于从业资格与交通与食品安全口径（按名称与一般要求引用）。"
+              "《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。 道路交通安全法2021：19条相应驾驶证和准驾车型；21条出车前认真检查安全技术性能，不驾驶安全隐患车；22条过度疲劳等影响安全驾驶不得驾驶。70条事故立即停车保护现场、人伤立即抢救迅速報警；无伤事实成因无争议可即行撤离恢复交通协商，不撤须迅速報警，轻微财产损失事实清楚先撤再协商。73条公安交管部门制作事故认定书，本人/单位不自行发正式责任结论。一般投诉/货款差异和事故不能套同一停作业上报顺序；未采企业重启制度。 食品安全法2025修正政府正文：33条6项运输贮存装卸容器工具设备安全无害清洁、防污染、所需温湿条件且不与有毒有害同运；非食品经营者从事贮存运输装卸也适用该项。45条健康制度及接触直接入口食品人员每年健康检查证明，不是所有包装食品配送员统一健康证。44条经营企业培训/管理、主要负责人责任；47条经营条件不再符合须整改、潜在食品事故风险立即停食品经营并向县级以上所在地食安部门报告；63条不合标准或可能有害食品由相应生产/经营者停止、通知及依法召回，非配送员任意销毁权限。41条另有重点液态食品道路散装运输准运制度，仅该特定范围，具体目录/配套本轮未核，不泛化普通包裹。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.cn-rule",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-road",
+            "r5-road-regulation",
+            "r5-traffic",
+            "r5-food"
           ],
           "type": "prose"
         },
@@ -28554,13 +28628,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "不使用影视或演员工会口径；仅登记其不适用。"
+              "实际链接是O*NET本职业档案，支持任务与工作情境，非OEWS首页或中国交通法规。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.sag",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -28569,13 +28642,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "AI 风险管理框架：用于说明系统辅助的治理边界，不构成本职业合规清单。"
+              "驾驶/事故责任按交通法具体条款，不以NIST作交通合规清单。道路交通安全法2021：19条相应驾驶证和准驾车型；21条出车前认真检查安全技术性能，不驾驶安全隐患车；22条过度疲劳等影响安全驾驶不得驾驶。70条事故立即停车保护现场、人伤立即抢救迅速報警；无伤事实成因无争议可即行撤离恢复交通协商，不撤须迅速報警，轻微财产损失事实清楚先撤再协商。73条公安交管部门制作事故认定书，本人/单位不自行发正式责任结论。一般投诉/货款差异和事故不能套同一停作业上报顺序；未采企业重启制度。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.nist",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-traffic"
           ],
           "type": "prose"
         }
@@ -28592,14 +28664,14 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘公告与配送与销售文件中的经验、资格与提成关系必须逐条读取；本职业多数岗位以路线带教与在岗培训上手，一项可放宽不代表驾驶与从业资格（如适用）、交通与食品安全、收款与票据要求可以替代。"
+              "O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。 中国实际岗位广告未采，不称多数中国岗位带教上手。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "r5-bls-projections",
+            "bls"
           ],
           "type": "notice"
         },
@@ -28617,7 +28689,7 @@
             "column_labels": [
               "入门方向",
               "初期主要做什么",
-              "雇主要求与观察依据",
+              "编辑观察建议（未实采企业门槛）",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -28648,7 +28720,7 @@
                 "完成车辆与食品分发设备检查与清洁与异常上报。",
                 "车辆与设备检查与清洁记录、带班评语。",
                 "车辆与设备检查与清洁记录练习。",
-                "偏检查与清洁执行，维修与食品安全处置由维修与门店承担。"
+                "检查/清洁及本职设备维护；食品经营者责任与实际驾驶员/岗位义务分别核，不全归维修或门店。"
               ],
               [
                 "记录与结算配合",
@@ -28662,8 +28734,7 @@
           "id": "actors.path.entry-role-comparison.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "r5-food"
           ],
           "title": "常见入门方向与初期任务",
           "type": "table"
@@ -28677,28 +28748,28 @@
                 "id": "employer-0",
                 "values": [
                   "路线与班次记录",
-                  "能提供参与过的路线与班次与配送与销售记录。"
+                  "编辑求职材料建议，按实际职责及展示权限核：能提供参与过的路线与班次与配送与销售记录。本轮未实采普遍雇主要求，无经历不虚构记录。"
                 ]
               },
               {
                 "id": "employer-1",
                 "values": [
                   "驾驶与培训与资格记录",
-                  "能提供与目标岗位相适应的驾驶证与从业资格（如适用）或安全与食品与收款培训记录。"
+                  "编辑求职材料建议，按实际职责及展示权限核：能提供与目标岗位相适应的驾驶证与从业资格（如适用）或安全与食品与收款培训记录。本轮未实采普遍雇主要求，无经历不虚构记录。"
                 ]
               },
               {
                 "id": "employer-2",
                 "values": [
                   "受监督路线的带班评语",
-                  "能提供带班或调度对驾驶与交付与收款与协作的具体评语。"
+                  "编辑求职材料建议，按实际职责及展示权限核：能提供带班或调度对驾驶与交付与收款与协作的具体评语。本轮未实采普遍雇主要求，无经历不虚构记录。"
                 ]
               },
               {
                 "id": "availability",
                 "values": [
                   "记录与核对习惯",
-                  "能提供配送单与路线与销售与配送与货款记录的核对示例。"
+                  "编辑求职材料建议，按实际职责及展示权限核：能提供配送单与路线与销售与配送与货款记录的核对示例。本轮未实采普遍雇主要求，无经历不虚构记录。"
                 ]
               }
             ]
@@ -28832,47 +28903,47 @@
             ],
             "rows": [
               [
-                "道路运输从业资格（中国大陆）",
-                "从事经营性道路客货运输的驾驶人",
-                "合规要求：应按《道路运输从业人员管理规定》（交通运输部令 2026 年第 4 号第四次修正，自 2026 年 3 月 20 日起施行）取得相应从业资格证。",
-                "是（针对经营性道路客货运输）：未取得相应从业资格证件或使用失效与伪造与变造证件或超越核定范围驾驶道路客运车辆的，责令改正并处 200 元以上 2000 元以下罚款；驾驶道路货运车辆违反同一情形的，责令改正并处 200 元罚款（第四十六条）。",
-                "按该规定核对适用对象与条件（经营性道路客货运输驾驶员与道路危险货物运输从业人员与驾驶操作教练员等）。",
-                "申请与核查时间与合规成本。",
-                "本条依据交通运输部令 2026 年第 4 号；使用总质量 4500 千克及以下普通货运车辆驾驶员与非经营性私人用车驾驶员不需取得从业资格证，该规定不涉及出租汽车驾驶员；具体以法规与本辖区要求为准。"
+                "道路运输从业资格（中国）",
+                "符合适用经营性客货/危险货运对象者",
+                "资格按真实业务和车辆类别核",
+                "非全部司机销售统一同证；52条普通4500千克例外",
+                "《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。",
+                "实际费用按当地公告核，本轮未采",
+                "《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。 道路运输条例2026-01-30第六次修订：2条范围为运输经营及相关业务；21/22货运车辆/安全管理及驾驶证、主管部门年龄和知识考试（4500千克及以下普通货运例外）；24条同类普通货运经营无需该条经营许可证及车辆营运证，是经营/车辆手续不是个人驾驶许可。28条适用经营者教育与从业规程、连续驾驶不超4小时，30/31条车辆维护检测与经营者事故等应急预案。实际经营属性、总质量和货物类别须核，不能按司机兼销售名称决定。"
               ],
               [
                 "机动车驾驶证（中国大陆）",
                 "驾驶机动车的驾驶人",
                 "合规要求：应按准驾车型持相应机动车驾驶证并遵守道路交通安全法律法规。",
                 "是（针对驾驶）：属《中华人民共和国道路交通安全法》的适用范围。",
-                "按准驾车型与驾驶证状态核对。",
+                "道路交通安全法2021：19条相应驾驶证和准驾车型；21条出车前认真检查安全技术性能，不驾驶安全隐患车；22条过度疲劳等影响安全驾驶不得驾驶。70条事故立即停车保护现场、人伤立即抢救迅速報警；无伤事实成因无争议可即行撤离恢复交通协商，不撤须迅速報警，轻微财产损失事实清楚先撤再协商。73条公安交管部门制作事故认定书，本人/单位不自行发正式责任结论。一般投诉/货款差异和事故不能套同一停作业上报顺序；未采企业重启制度。",
                 "领证与审验时间。",
-                "本条按法律名称与一般要求引用，未逐条核对条文编号。"
+                "道路交通安全法2021：19条相应驾驶证和准驾车型；21条出车前认真检查安全技术性能，不驾驶安全隐患车；22条过度疲劳等影响安全驾驶不得驾驶。70条事故立即停车保护现场、人伤立即抢救迅速報警；无伤事实成因无争议可即行撤离恢复交通协商，不撤须迅速報警，轻微财产损失事实清楚先撤再协商。73条公安交管部门制作事故认定书，本人/单位不自行发正式责任结论。一般投诉/货款差异和事故不能套同一停作业上报顺序；未采企业重启制度。"
               ],
               [
-                "食品安全（如涉食品配送，中国大陆）",
-                "配送与销售食品的经营者与从业人员",
-                "合规要求：应按《中华人民共和国食品安全法》保障食品贮存与运输与配送条件与从业人员健康管理要求。",
-                "是（针对食品经营）：属食品安全法适用范围。",
-                "按冷藏与保质期与清洁与健康证明要求核对。",
-                "合规与整改时间。",
-                "本条按法律名称与一般要求引用，未逐条核对条文编号。"
+                "食品安全/健康管理（实际接触对象核）",
+                "从事适用食品经营及运输者",
+                "33条运输条件；45条直接入口接触人员健康证明",
+                "不是全部包装食品配送员同健康证",
+                "食品安全法2025修正政府正文：33条6项运输贮存装卸容器工具设备安全无害清洁、防污染、所需温湿条件且不与有毒有害同运；非食品经营者从事贮存运输装卸也适用该项。45条健康制度及接触直接入口食品人员每年健康检查证明，不是所有包装食品配送员统一健康证。44条经营企业培训/管理、主要负责人责任；47条经营条件不再符合须整改、潜在食品事故风险立即停食品经营并向县级以上所在地食安部门报告；63条不合标准或可能有害食品由相应生产/经营者停止、通知及依法召回，非配送员任意销毁权限。41条另有重点液态食品道路散装运输准运制度，仅该特定范围，具体目录/配套本轮未核，不泛化普通包裹。",
+                "实际健康及设备费用未采",
+                "食品安全法2025修正政府正文：33条6项运输贮存装卸容器工具设备安全无害清洁、防污染、所需温湿条件且不与有毒有害同运；非食品经营者从事贮存运输装卸也适用该项。45条健康制度及接触直接入口食品人员每年健康检查证明，不是所有包装食品配送员统一健康证。44条经营企业培训/管理、主要负责人责任；47条经营条件不再符合须整改、潜在食品事故风险立即停食品经营并向县级以上所在地食安部门报告；63条不合标准或可能有害食品由相应生产/经营者停止、通知及依法召回，非配送员任意销毁权限。41条另有重点液态食品道路散装运输准运制度，仅该特定范围，具体目录/配套本轮未核，不泛化普通包裹。"
               ],
               [
-                "在岗培训与带教（数天到数周）",
-                "零基础入行者",
-                "现实入口：多数岗位通过路线带教与在岗培训上手。",
-                "是：O*NET 指出本职业准备层级为 Job Zone 1-2。",
-                "按企业与车队与门店培训计划完成并接受考核。",
-                "时间投入与学习节奏。",
-                "完成培训不等于取得驾驶资格或从业资格或食品安全或收款授权。"
+                "在岗训练（实际时间另核）",
+                "目标入门者",
+                "BLS典型短期OJT；OOH合并叙述1个月或以下",
+                "统计典型不等所有企业强制同课程",
+                "O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。",
+                "实际企业课程费用另核",
+                "O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。"
               ],
               [
                 "车辆与设备与食品与安全培训",
                 "配送与销售人员",
                 "现场能力：有助于安全驾驶与车辆与冷藏与食品分发设备检查与清洁与应急。",
                 "视企业与车队与门店制度与法规要求。",
-                "按制度参加并定期复训。",
+                "按具体岗位法规和单位计划核，统一定期复训周期未采",
                 "培训时间。",
                 "培训不等于取得外部执业资质，也不能替代驾驶与从业资格与食品安全要求。"
               ],
@@ -28890,8 +28961,12 @@
           "id": "actors.path.credential-decision.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "r5-bls-projections",
+            "r5-road",
+            "r5-road-regulation",
+            "r5-traffic",
+            "r5-food",
+            "bls"
           ],
           "title": "训练、驾驶与从业资格怎么选择",
           "type": "table"
@@ -28901,17 +28976,23 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "学历与经验要求必须逐条读取：本职业多数岗位以路线带教与在岗培训上手，部分岗位要求高中或同等学历、部分岗位要求低于高中学历（O*NET 本轮只给定性）；一项可放宽不代表驾驶与从业资格（如适用）、交通与食品安全、收款与票据要求可以替代。",
-              "本页建议的作品与七天体验只用于职业探索，不构成岗位培训、驾驶授权、从业资格或食品安全与收款授权。",
-              "进入本职业不是只报一个课程：先核对目标岗位的路线与班次与区域与产品类型、是否需要相应驾驶证或从业资格、以及企业与车队与门店的安全与食品与收款规则。",
-              "涉及道路运输经营与食品配送与收款的作业，须先确认驾驶与从业资格（如适用）与食品安全与收款制度要求并取得授权；不得在无资格与无授权条件下独立承担相应职责。"
+              "O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。",
+              "《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。",
+              "道路运输条例2026-01-30第六次修订：2条范围为运输经营及相关业务；21/22货运车辆/安全管理及驾驶证、主管部门年龄和知识考试（4500千克及以下普通货运例外）；24条同类普通货运经营无需该条经营许可证及车辆营运证，是经营/车辆手续不是个人驾驶许可。28条适用经营者教育与从业规程、连续驾驶不超4小时，30/31条车辆维护检测与经营者事故等应急预案。实际经营属性、总质量和货物类别须核，不能按司机兼销售名称决定。",
+              "道路交通安全法2021：19条相应驾驶证和准驾车型；21条出车前认真检查安全技术性能，不驾驶安全隐患车；22条过度疲劳等影响安全驾驶不得驾驶。70条事故立即停车保护现场、人伤立即抢救迅速報警；无伤事实成因无争议可即行撤离恢复交通协商，不撤须迅速報警，轻微财产损失事实清楚先撤再协商。73条公安交管部门制作事故认定书，本人/单位不自行发正式责任结论。一般投诉/货款差异和事故不能套同一停作业上报顺序；未采企业重启制度。",
+              "食品安全法2025修正政府正文：33条6项运输贮存装卸容器工具设备安全无害清洁、防污染、所需温湿条件且不与有毒有害同运；非食品经营者从事贮存运输装卸也适用该项。45条健康制度及接触直接入口食品人员每年健康检查证明，不是所有包装食品配送员统一健康证。44条经营企业培训/管理、主要负责人责任；47条经营条件不再符合须整改、潜在食品事故风险立即停食品经营并向县级以上所在地食安部门报告；63条不合标准或可能有害食品由相应生产/经营者停止、通知及依法召回，非配送员任意销毁权限。41条另有重点液态食品道路散装运输准运制度，仅该特定范围，具体目录/配套本轮未核，不泛化普通包裹。",
+              "驾驶证/资格/企业操作及食品条件分别核，探索练习不等培训或许可；具体全部州/中国法域、车型和出租规则未穷尽核。"
             ]
           },
           "id": "actors.path.credential-boundary.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "r5-bls-projections",
+            "r5-road",
+            "r5-road-regulation",
+            "r5-traffic",
+            "r5-food",
+            "bls"
           ],
           "title": "训练、从业资格与交通安全与食品边界",
           "type": "notice"
@@ -29152,14 +29233,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国由企业与车队与门店规定并须遵守相关交通与安全与食品安全要求；中国大陆从事经营性道路客货运输的驾驶人须按《道路运输从业人员管理规定》取得相应从业资格证（使用总质量 4500 千克及以下普通货运车辆驾驶员与非经营性私人用车驾驶员不需取得从业资格证，该规定不涉及出租汽车驾驶员）。"
+              "《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。 道路交通安全法2021：19条相应驾驶证和准驾车型；21条出车前认真检查安全技术性能，不驾驶安全隐患车；22条过度疲劳等影响安全驾驶不得驾驶。70条事故立即停车保护现场、人伤立即抢救迅速報警；无伤事实成因无争议可即行撤离恢复交通协商，不撤须迅速報警，轻微财产损失事实清楚先撤再协商。73条公安交管部门制作事故认定书，本人/单位不自行发正式责任结论。一般投诉/货款差异和事故不能套同一停作业上报顺序；未采企业重启制度。 食品安全法2025修正政府正文：33条6项运输贮存装卸容器工具设备安全无害清洁、防污染、所需温湿条件且不与有毒有害同运；非食品经营者从事贮存运输装卸也适用该项。45条健康制度及接触直接入口食品人员每年健康检查证明，不是所有包装食品配送员统一健康证。44条经营企业培训/管理、主要负责人责任；47条经营条件不再符合须整改、潜在食品事故风险立即停食品经营并向县级以上所在地食安部门报告；63条不合标准或可能有害食品由相应生产/经营者停止、通知及依法召回，非配送员任意销毁权限。41条另有重点液态食品道路散装运输准运制度，仅该特定范围，具体目录/配套本轮未核，不泛化普通包裹。"
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-road",
+            "r5-road-regulation",
+            "r5-traffic",
+            "r5-food"
           ],
           "type": "prose"
         },
@@ -29168,14 +29250,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆相关依据：《道路运输从业人员管理规定》（交通运输部令 2026 年第 4 号《关于修改〈道路运输从业人员管理规定〉的决定》第四次修正，2026 年 2 月 6 日公布、自 2026 年 3 月 20 日起施行；核心为经营性道路客货运输驾驶员与道路危险货物运输从业人员与驾驶操作教练员的从业年龄上限由 60 周岁延长至 63 周岁，同步将注销条件由「年龄超过 60 周岁」改为「年龄超过 63 周岁」；第四十六条对未取得相应从业资格证件或使用失效与伪造与变造证件或超越核定范围驾驶道路客运车辆的，责令改正并处 200 元以上 2000 元以下罚款，驾驶道路货运车辆违反同一情形的，责令改正并处 200 元罚款）；同时应遵守《中华人民共和国道路交通安全法》与（如涉食品配送）《中华人民共和国食品安全法》与《中华人民共和国消费者权益保护法》的要求。上述除交通运输部令 2026 年第 4 号的施行信息与年龄调整外的部分按法规名称与一般要求引用，未逐条核对条文编号。"
+              "《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。 道路运输条例2026-01-30第六次修订：2条范围为运输经营及相关业务；21/22货运车辆/安全管理及驾驶证、主管部门年龄和知识考试（4500千克及以下普通货运例外）；24条同类普通货运经营无需该条经营许可证及车辆营运证，是经营/车辆手续不是个人驾驶许可。28条适用经营者教育与从业规程、连续驾驶不超4小时，30/31条车辆维护检测与经营者事故等应急预案。实际经营属性、总质量和货物类别须核，不能按司机兼销售名称决定。 道路交通安全法2021：19条相应驾驶证和准驾车型；21条出车前认真检查安全技术性能，不驾驶安全隐患车；22条过度疲劳等影响安全驾驶不得驾驶。70条事故立即停车保护现场、人伤立即抢救迅速報警；无伤事实成因无争议可即行撤离恢复交通协商，不撤须迅速報警，轻微财产损失事实清楚先撤再协商。73条公安交管部门制作事故认定书，本人/单位不自行发正式责任结论。一般投诉/货款差异和事故不能套同一停作业上报顺序；未采企业重启制度。 食品安全法2025修正政府正文：33条6项运输贮存装卸容器工具设备安全无害清洁、防污染、所需温湿条件且不与有毒有害同运；非食品经营者从事贮存运输装卸也适用该项。45条健康制度及接触直接入口食品人员每年健康检查证明，不是所有包装食品配送员统一健康证。44条经营企业培训/管理、主要负责人责任；47条经营条件不再符合须整改、潜在食品事故风险立即停食品经营并向县级以上所在地食安部门报告；63条不合标准或可能有害食品由相应生产/经营者停止、通知及依法召回，非配送员任意销毁权限。41条另有重点液态食品道路散装运输准运制度，仅该特定范围，具体目录/配套本轮未核，不泛化普通包裹。"
             ]
           },
           "id": "actors.display.career_path_block.locale.summary",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-road",
+            "r5-road-regulation",
+            "r5-traffic",
+            "r5-food"
           ],
           "type": "prose"
         },
@@ -29184,14 +29267,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国本职业准备层级为 Job Zone 1-2（SVP 低于 6.0），以路线带教与在岗培训为主，教育反馈本轮只为定性答复（部分岗位要求高中或同等学历、部分岗位要求低于高中学历），本页不编造百分比；中国大陆不设统一准入类职业资格，但从事经营性道路客货运输的驾驶人须取得相应从业资格证，实际以企业与车队与门店与属地要求为准。"
+              "O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。 《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。"
             ]
           },
           "id": "actors.display.career_path_block.locale.credentials",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "r5-bls-projections",
+            "r5-road",
+            "r5-road-regulation",
+            "bls"
           ],
           "type": "prose"
         },
@@ -29312,14 +29397,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与路线优化与客户维护与货款改进，做好记录与交接并带教新的驾驶人与配送人员。"
+              "编辑任务探索：真实角色是否需要路线、客户和货款改进、带线或带教，按具体授权核，不作统一晋级或必然负责人发展。"
             ]
           },
           "id": "actors.display.career_path_block.ladder.develop.description",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "onet"
           ],
           "type": "prose"
         },
@@ -29472,14 +29555,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按制度参加复训。"
+              "编辑待核：具体企业是否要求复训及周期；法定安全教育培训另按适用交通运输规则，不由此推出统一升任路径。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.02.credentials",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-road-regulation"
           ],
           "type": "prose"
         },
@@ -30352,14 +30433,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "企业与车队与门店制度与授权规则：用于入口要求与路线、交付、收款、货款差错、设备与数据与记录边界。"
+              "真实雇主训练/授权制度未采。"
             ]
           },
           "id": "actors.display.career_path_block.source.employer",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "onet"
           ],
           "type": "prose"
         },
@@ -30368,14 +30447,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "道路运输与交通与食品安全法规（《道路运输从业人员管理规定》与《道路交通安全法》与《食品安全法》）：用于从业资格与交通与食品安全口径（按名称与一般要求引用）。"
+              "实际链接绑定2026道路运输从业人员管理规定，支持适用经营客货或危险货运资格对象、证书及普通轻货驾驶员例外；不以一个规章链接证明交通法事故或食品法条款，其他法律另见对应正文。"
             ]
           },
           "id": "actors.display.career_path_block.source.cn-rule",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-road"
           ],
           "type": "prose"
         },
@@ -30408,13 +30485,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 53-3031.00 精确职业数据：2024 年就业约 451,500 人（该页标注 Bright Outlook）。"
+              "BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -30423,13 +30499,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年预测为「远高于平均（Much faster than average，7% 或更高）」，预计空缺 51,300；该来源只给出类别与阈值而未给出单一精确百分比，本页按口径原文表述；空缺同时包含增长与更替，不是净增岗位。"
+              "BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -30453,13 +30528,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本职业相关岗位分布在食品与饮料配送与批发与零售与餐饮供应等路线销售场景，多为按小时计酬或含提成的路线班次岗位。"
+              "O*NET2025本职业行业就业份额住宿餐饮40%、批发25%；OOH更细食品服务及饮料场所39%、批发25%、零售9%、运输仓储6%，自雇取整7%与精细7.3%区分。这些是本职业就业分布，不是工资。OOH本职业2025行业年薪中位：批发49,090、运输仓储45,690、零售36,640、食品服务饮料30,580美元；只适用该职业在该行业受雇工资，不替中国或个人报价。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "bls"
           ],
           "type": "prose"
         },
@@ -30543,13 +30618,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：驾驶与路线与车辆与货物安全与单据经验。"
+              "编辑可转移能力假设：驾驶/客户/记录或货款经验须本人验证，不假设已有乘客服务/目标设备经验。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30558,13 +30632,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：长途与干线运输与挂车与从业资格与运输合同与疲劳管理。"
+              "重型53-3032牵引挂车/至少26001磅总重及CDL，含拖车，不全等长途；补车型、装卸及许可。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30573,13 +30646,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，运输规模不同"
+              "编辑评估，按个人真实技能与目标职责验证，不承诺培训距离/时长、资格互认或录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30588,13 +30660,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：区域配送与路线与签收与车辆安全经验。"
+              "编辑可转移能力假设：驾驶/客户/记录或货款经验须本人验证，不假设已有乘客服务/目标设备经验。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-light"
           ],
           "type": "prose"
         },
@@ -30603,13 +30674,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：点对点配送规程与不承担销售收款的纯配送作业。"
+              "轻型53-3033低于26001磅主要取送货可装卸，不推完全不收款；补目标设备及取送流程。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-light"
           ],
           "type": "prose"
         },
@@ -30618,13 +30688,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，职责范围不同"
+              "编辑评估，按个人真实技能与目标职责验证，不承诺培训距离/时长、资格互认或录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-light"
           ],
           "type": "prose"
         },
@@ -30633,13 +30702,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：驾驶与路线与客户沟通与时效理解。"
+              "编辑可转移能力假设：驾驶/客户/记录或货款经验须本人验证，不假设已有乘客服务/目标设备经验。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30648,13 +30716,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：揽派件与面单与分拨与快递服务规范与时效考核。"
+              "快递43-5021可步行、自行车、摩托、汽车、公共交通传递文档物件，不全仓配件；补对象/时效。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30663,13 +30730,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，对象不同"
+              "编辑评估，按个人真实技能与目标职责验证，不承诺培训距离/时长、资格互认或录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30678,13 +30744,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：客户沟通与产品介绍与销售与服务经验。"
+              "编辑可转移能力假设：驾驶/客户/记录或货款经验须本人验证，不假设已有乘客服务/目标设备经验。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30693,13 +30758,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：门店营运与陈列与库存与收银与门店价格制度。"
+              "零售41-2031家具汽车家电衣物等消费者销售，不全限门店；补产品和实际销售流程。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30708,13 +30772,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，场景不同"
+              "编辑评估，按个人真实技能与目标职责验证，不承诺培训距离/时长、资格互认或录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30723,13 +30786,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：安全驾驶与路线与乘客沟通与时间管理经验。"
+              "编辑可转移能力假设：驾驶/客户/记录或货款经验须本人验证，不假设已有乘客服务/目标设备经验。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30738,13 +30800,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：客运资质与乘客服务与公交调度与安全规程。"
+              "公交53-3052包含定线、包车、私人承运，可行李/收票；补客运车辆、适用资格和乘客服务。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30753,13 +30814,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，客运不同"
+              "编辑评估，按个人真实技能与目标职责验证，不承诺培训距离/时长、资格互认或录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30768,13 +30828,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：货物清点与装卸与货位与库存理解。"
+              "编辑可转移能力假设：驾驶/客户/记录或货款经验须本人验证，不假设已有乘客服务/目标设备经验。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30783,13 +30842,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：仓库与门店理货与拣货与复核与仓储规程。"
+              "拣货53-7065仓库/堆场接收存储出库上架订单，可动力设备/标价陈列；补库存设备及订单。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30798,13 +30856,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，场景不同"
+              "编辑评估，按个人真实技能与目标职责验证，不承诺培训距离/时长、资格互认或录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30813,13 +30870,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：收款与找零与票据与对账与客户服务经验。"
+              "编辑可转移能力假设：驾驶/客户/记录或货款经验须本人验证，不假设已有乘客服务/目标设备经验。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30828,13 +30884,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：收银规程与支付工具与前台与差异处理。"
+              "收银41-2011非金融机构收付，可扫描、信用借记/支票，不全门店；补真实支付及复核程序。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30843,13 +30898,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，结账场景不同"
+              "编辑评估，按个人真实技能与目标职责验证，不承诺培训距离/时长、资格互认或录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30858,13 +30912,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：客户接待与柜台业务与单据与收款理解。"
+              "编辑可转移能力假设：驾驶/客户/记录或货款经验须本人验证，不假设已有乘客服务/目标设备经验。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30873,13 +30926,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：柜台与租赁业务规则与合同与押金与归还流程。"
+              "柜台租赁41-2021接维修/租赁/服务订单，可介绍选项算价收款，不只租赁；补合同与实际业务。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30888,13 +30940,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，业务不同"
+              "编辑评估，按个人真实技能与目标职责验证，不承诺培训距离/时长、资格互认或录用。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30903,13 +30954,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS/OEWS 与 O*NET：用于工资、就业与工作情境与准备层级口径。"
+              "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。 BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。"
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-wages",
+            "r5-oews-concepts",
+            "r5-bls-projections"
           ],
           "type": "prose"
         },
@@ -30918,13 +30970,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "道路运输与交通与食品安全法规：用于从业资格与交通与食品安全口径（按名称与一般要求引用）。"
+              "实际链接是O*NET认证查询入口，不是中国货运法规原文，也不证明全国免照或许可互认；中国条件另见具体规章。"
             ]
           },
           "id": "actors.display.market_signal_card.source.ratify",
           "source_refs": [
-            "bls",
-            "oews"
+            "ratify"
           ],
           "type": "prose"
         },
@@ -30933,13 +30984,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "企业与车队与门店制度与授权规则：用于路线、交付、收款、货款差错、设备与数据与记录边界。"
+              "未采真实企业招聘和制度。"
             ]
           },
           "id": "actors.display.market_signal_card.source.employer",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet"
           ],
           "type": "prose"
         },
@@ -31081,14 +31131,35 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "中国与美国数据分栏；精确职业、上级职业代理与企业与车队与门店制度口径均保留原口径。",
-              "工资、就业与准备层级以及驾驶与从业资格与交通与食品安全与收款要求按各自来源范围使用，不跨法域互认。",
-              "本页用于职业探索，不替代岗位培训、驾驶授权、从业资格或食品安全与收款授权与当地安全与运输规定。"
+              "美国53-3031.00定义沿既定路线/区域驾驶车辆销售或配送商品、收取或递送商业洗涤等，接单、收款、上货为可能职责，不能说每人必须所有任务。11任务6Core/5Supplemental：驾驶配送83、向熟客介绍新产品/服务及价格77、每日记录76、聆听解决投诉75、收款找零和客户凭据记录74、维护卡车/食品分发设备及清洁74为Core；促销陈列79、售货机收币补货撤旧78、按公司规则订单及销售合同67、核客户/交付清单装车63、出售特色食品重要性未提供为Supplemental。维修与清洁可在本职职责中，重大维修/处置权限须另核；冷链、批号保质期适用于实际食品而非所有货物。",
+              "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。",
+              "BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。",
+              "O*NET2025本职业行业就业份额住宿餐饮40%、批发25%；OOH更细食品服务及饮料场所39%、批发25%、零售9%、运输仓储6%，自雇取整7%与精细7.3%区分。这些是本职业就业分布，不是工资。OOH本职业2025行业年薪中位：批发49,090、运输仓储45,690、零售36,640、食品服务饮料30,580美元；只适用该职业在该行业受雇工资，不替中国或个人报价。",
+              "国家统计局2025城镇单位工资：交通运输仓储邮政非私营133981/私营73133元、批发零售135749/69622元、住宿餐饮62461/55123元，税前年平均，仅匹配可能行业背景，不是司机兼销售员职业中位/分位/月薪。5人以上法人就业统计排个体/自由职业等，不全排提成、项目、外包、派遣雇员。证据不足：未取得中国精确全国职业工资及真实薪酬样本，不能称全国从未发布、普遍补贴扣款或旺季必加薪。扣款是否合法须按实际法律合同核，不由页面授权。",
+              "O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。",
+              "《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。",
+              "道路运输条例2026-01-30第六次修订：2条范围为运输经营及相关业务；21/22货运车辆/安全管理及驾驶证、主管部门年龄和知识考试（4500千克及以下普通货运例外）；24条同类普通货运经营无需该条经营许可证及车辆营运证，是经营/车辆手续不是个人驾驶许可。28条适用经营者教育与从业规程、连续驾驶不超4小时，30/31条车辆维护检测与经营者事故等应急预案。实际经营属性、总质量和货物类别须核，不能按司机兼销售名称决定。",
+              "道路交通安全法2021：19条相应驾驶证和准驾车型；21条出车前认真检查安全技术性能，不驾驶安全隐患车；22条过度疲劳等影响安全驾驶不得驾驶。70条事故立即停车保护现场、人伤立即抢救迅速報警；无伤事实成因无争议可即行撤离恢复交通协商，不撤须迅速報警，轻微财产损失事实清楚先撤再协商。73条公安交管部门制作事故认定书，本人/单位不自行发正式责任结论。一般投诉/货款差异和事故不能套同一停作业上报顺序；未采企业重启制度。",
+              "食品安全法2025修正政府正文：33条6项运输贮存装卸容器工具设备安全无害清洁、防污染、所需温湿条件且不与有毒有害同运；非食品经营者从事贮存运输装卸也适用该项。45条健康制度及接触直接入口食品人员每年健康检查证明，不是所有包装食品配送员统一健康证。44条经营企业培训/管理、主要负责人责任；47条经营条件不再符合须整改、潜在食品事故风险立即停食品经营并向县级以上所在地食安部门报告；63条不合标准或可能有害食品由相应生产/经营者停止、通知及依法召回，非配送员任意销毁权限。41条另有重点液态食品道路散装运输准运制度，仅该特定范围，具体目录/配套本轮未核，不泛化普通包裹。",
+              "路线订单、销量库存提示、对账及记录整理属编辑待验证应用，传统路线规划/商务软件不等GenAI；软件目录7类通信IBM Domino、路线账务数据库、库存、地图路线、Office、bMobile项目/销售、Excel。Hot2技能Excel/Office各低于1%，2025美国本职业所有唯一招聘为分母，不是有技能广告内比例、不是0使用/0AI。ILO任务暴露/NIST治理不提供本职业采用/替代概率或提效实测。",
+              "客户/位置/货款不自动全属法定敏感个人信息；识别到个人按目的必要，行踪轨迹/金融账户等敏感类型按个人信息保护法28条核；商品路线数据还须核权属/保密和对外传输留存训练权限，脱敏不等获授权。具体企业规程未采。"
             ]
           },
           "id": "actors.sources.boundary.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "r5-wages",
+            "r5-oews-concepts",
+            "r5-bls-projections",
+            "bls",
+            "nbs",
+            "r5-road",
+            "r5-road-regulation",
+            "r5-traffic",
+            "r5-food",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-cn-pipl"
           ],
           "type": "list"
         },
@@ -31125,12 +31196,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-09-19"
+              "2026-10-09"
             ]
           },
           "id": "actors.display.source_card.updated-at",
           "source_refs": [
-            "onet"
+            "onet",
+            "r5-bls-projections",
+            "r5-road",
+            "r5-road-regulation",
+            "r5-traffic",
+            "r5-food"
           ],
           "type": "prose"
         },
@@ -31297,14 +31373,13 @@
                 "url": "https://www.onetonline.org/link/summary/41-2031.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于核对配送与路线销售的行业与就业语境；该页部分叙述与年度空缺把 driver/sales workers 与轻型卡车司机合并。",
-                  "该来源为合并口径，本页工资与就业与预测仅取 O*NET/BLS 53-3031.00 精确行，不把合并叙述当作本职业精确数值。"
+                  "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。 O*NET2025本职业行业就业份额住宿餐饮40%、批发25%；OOH更细食品服务及饮料场所39%、批发25%、零售9%、运输仓储6%，自雇取整7%与精细7.3%区分。这些是本职业就业分布，不是工资。OOH本职业2025行业年薪中位：批发49,090、运输仓储45,690、零售36,640、食品服务饮料30,580美元；只适用该职业在该行业受雇工资，不替中国或个人报价。 O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。 BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。 合并叙述不等全部细类统计。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official occupational outlook profile",
                 "id": "bls",
-                "limitation": "该来源为合并口径，本页工资与就业与预测仅取 O*NET/BLS 53-3031.00 精确行，不把合并叙述当作本职业精确数值。",
+                "limitation": "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。 O*NET2025本职业行业就业份额住宿餐饮40%、批发25%；OOH更细食品服务及饮料场所39%、批发25%、零售9%、运输仓储6%，自雇取整7%与精细7.3%区分。这些是本职业就业分布，不是工资。OOH本职业2025行业年薪中位：批发49,090、运输仓储45,690、零售36,640、食品服务饮料30,580美元；只适用该职业在该行业受雇工资，不替中国或个人报价。 O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。 BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。 合并叙述不等全部细类统计。",
                 "market": "美国",
                 "name": "Delivery Truck Drivers and Driver/Sales Workers（BLS 职业展望）",
                 "period": "accessed 2026-09-19",
@@ -31313,14 +31388,13 @@
                 "url": "https://www.bls.gov/ooh/transportation-and-material-moving/delivery-truck-drivers-and-driver-sales-workers.htm"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "《道路运输从业人员管理规定》（交通运输部令 2026 年第 4 号第四次修正，自 2026 年 3 月 20 日起施行）对经营性道路客货运输驾驶人规定从业资格与从业年龄上限（由 60 周岁延长至 63 周岁）；《中华人民共和国道路交通安全法》规定按准驾车型持证驾驶与交通安全要求；《中华人民共和国食品安全法》规定食品贮存与运输与配送与从业人员健康管理要求。",
-                  "为交通与食品与运输管理要求，不规定工资水平；本条按法规名称与一般要求引用，未逐条核对条文编号；具体以法规原文与本辖区要求为准。"
+                  "《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。 道路交通安全法2021：19条相应驾驶证和准驾车型；21条出车前认真检查安全技术性能，不驾驶安全隐患车；22条过度疲劳等影响安全驾驶不得驾驶。70条事故立即停车保护现场、人伤立即抢救迅速報警；无伤事实成因无争议可即行撤离恢复交通协商，不撤须迅速報警，轻微财产损失事实清楚先撤再协商。73条公安交管部门制作事故认定书，本人/单位不自行发正式责任结论。一般投诉/货款差异和事故不能套同一停作业上报顺序；未采企业重启制度。 食品安全法2025修正政府正文：33条6项运输贮存装卸容器工具设备安全无害清洁、防污染、所需温湿条件且不与有毒有害同运；非食品经营者从事贮存运输装卸也适用该项。45条健康制度及接触直接入口食品人员每年健康检查证明，不是所有包装食品配送员统一健康证。44条经营企业培训/管理、主要负责人责任；47条经营条件不再符合须整改、潜在食品事故风险立即停食品经营并向县级以上所在地食安部门报告；63条不合标准或可能有害食品由相应生产/经营者停止、通知及依法召回，非配送员任意销毁权限。41条另有重点液态食品道路散装运输准运制度，仅该特定范围，具体目录/配套本轮未核，不泛化普通包裹。 原gov首页仅入口。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation entry",
                 "id": "cn-rule",
-                "limitation": "为交通与食品与运输管理要求，不规定工资水平；本条按法规名称与一般要求引用，未逐条核对条文编号；具体以法规原文与本辖区要求为准。",
+                "limitation": "《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。 道路交通安全法2021：19条相应驾驶证和准驾车型；21条出车前认真检查安全技术性能，不驾驶安全隐患车；22条过度疲劳等影响安全驾驶不得驾驶。70条事故立即停车保护现场、人伤立即抢救迅速報警；无伤事实成因无争议可即行撤离恢复交通协商，不撤须迅速報警，轻微财产损失事实清楚先撤再协商。73条公安交管部门制作事故认定书，本人/单位不自行发正式责任结论。一般投诉/货款差异和事故不能套同一停作业上报顺序；未采企业重启制度。 食品安全法2025修正政府正文：33条6项运输贮存装卸容器工具设备安全无害清洁、防污染、所需温湿条件且不与有毒有害同运；非食品经营者从事贮存运输装卸也适用该项。45条健康制度及接触直接入口食品人员每年健康检查证明，不是所有包装食品配送员统一健康证。44条经营企业培训/管理、主要负责人责任；47条经营条件不再符合须整改、潜在食品事故风险立即停食品经营并向县级以上所在地食安部门报告；63条不合标准或可能有害食品由相应生产/经营者停止、通知及依法召回，非配送员任意销毁权限。41条另有重点液态食品道路散装运输准运制度，仅该特定范围，具体目录/配套本轮未核，不泛化普通包裹。 原gov首页仅入口。",
                 "market": "中国大陆",
                 "name": "《道路运输从业人员管理规定》与《中华人民共和国道路交通安全法》与《中华人民共和国食品安全法》（中国政府网公开入口）",
                 "period": "现行法规；accessed 2026-09-19",
@@ -31377,14 +31451,13 @@
                 "url": "https://www.onetonline.org/link/summary/41-2011.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "《交通运输部关于修改〈道路运输从业人员管理规定〉的决定》第四次修正，将经营性道路客货运输驾驶员与道路危险货物运输从业人员与驾驶操作教练员的从业年龄上限由 60 周岁延长至 63 周岁，并同步调整注销条件；第四十六条规定未取得相应从业资格证件或使用失效与伪造与变造证件或超越核定范围驾驶道路客运车辆的，责令改正并处 200 元以上 2000 元以下罚款，驾驶道路货运车辆违反同一情形的处 200 元罚款；使用总质量 4500 千克及以下普通货运车辆驾驶员与非经营性私人用车驾驶员不需取得从业资格证；该规定不涉及出租汽车驾驶员。",
-                  "适用营业性道路运输的从业人员，并非每个开小车顺便卖货的员工都属其调整范围；不规定工资水平；具体以法规原文与本辖区要求为准。"
+                  "《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。 原入口不替本轮取得完整正文。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official regulation entry",
                 "id": "editor",
-                "limitation": "适用营业性道路运输的从业人员，并非每个开小车顺便卖货的员工都属其调整范围；不规定工资水平；具体以法规原文与本辖区要求为准。",
+                "limitation": "《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。 原入口不替本轮取得完整正文。",
                 "market": "中国大陆",
                 "name": "交通运输部：《道路运输从业人员管理规定》（2026 年第 4 号修改）官网入口",
                 "period": "2026-02-06 公布，自 2026-03-20 施行；accessed 2026-09-19",
@@ -31393,14 +31466,13 @@
                 "url": "https://xxgk.mot.gov.cn/gz/202602/t20260213_4200291.html"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于核对就业与技能培训与职业信息服务。",
-                  "主管部门入口不代替岗位招聘公告与本企业制度。"
+                  "人社首页不是招聘/车队/门店制度；本轮未采真实企业规则。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation entry",
                 "id": "employer",
-                "limitation": "主管部门入口不代替岗位招聘公告与本企业制度。",
+                "limitation": "人社首页不是招聘/车队/门店制度；本轮未采真实企业规则。",
                 "market": "中国大陆",
                 "name": "人力资源社会保障部：技能人才评价与就业服务公开入口",
                 "period": "accessed 2026-09-19",
@@ -31441,14 +31513,13 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "为行业与单位类型层级口径（如交通运输、仓储和邮政业），作为可见行业代理使用。",
-                  "行业平均工资不是司机兼销售员的职业中位数或起薪或提成或个人到手收入，本页明确排除提成与岗位组合与个人到手收入推断。"
+                  "国家统计局2025城镇单位工资：交通运输仓储邮政非私营133981/私营73133元、批发零售135749/69622元、住宿餐饮62461/55123元，税前年平均，仅匹配可能行业背景，不是司机兼销售员职业中位/分位/月薪。5人以上法人就业统计排个体/自由职业等，不全排提成、项目、外包、派遣雇员。证据不足：未取得中国精确全国职业工资及真实薪酬样本，不能称全国从未发布、普遍补贴扣款或旺季必加薪。扣款是否合法须按实际法律合同核，不由页面授权。"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs",
-                "limitation": "行业平均工资不是司机兼销售员的职业中位数或起薪或提成或个人到手收入，本页明确排除提成与岗位组合与个人到手收入推断。",
+                "limitation": "国家统计局2025城镇单位工资：交通运输仓储邮政非私营133981/私营73133元、批发零售135749/69622元、住宿餐饮62461/55123元，税前年平均，仅匹配可能行业背景，不是司机兼销售员职业中位/分位/月薪。5人以上法人就业统计排个体/自由职业等，不全排提成、项目、外包、派遣雇员。证据不足：未取得中国精确全国职业工资及真实薪酬样本，不能称全国从未发布、普遍补贴扣款或旺季必加薪。扣款是否合法须按实际法律合同核，不由页面授权。",
                 "market": "中国大陆",
                 "name": "国家统计局公开渠道：2025 年城镇单位就业人员年平均工资情况",
                 "period": "2025 年；accessed 2026-09-19",
@@ -31473,14 +31544,13 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明本职业工资统计的来源与方法。",
-                  "全国统计位置不是个人起薪或地区报价。"
+                  "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。 首页是统计入口非具体表。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official wage statistics navigation",
                 "id": "oews",
-                "limitation": "全国统计位置不是个人起薪或地区报价。",
+                "limitation": "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。 首页是统计入口非具体表。",
                 "market": "美国",
                 "name": "BLS Occupational Employment and Wage Statistics（OEWS）",
                 "period": "2025 年工资数据口径; accessed 2026-09-19",
@@ -31489,14 +31559,13 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "核验职业定义、任务（11 项）、工作情境与准备层级（Job Zone 1-2，SVP 低于 6.0）与兴趣代码 RCE 与 2024 年就业 451,500 与 2024—2034 年预测。",
-                  "美国精确职业数据；不定义中国资格、工资或从业资格。"
+                  "美国53-3031.00定义沿既定路线/区域驾驶车辆销售或配送商品、收取或递送商业洗涤等，接单、收款、上货为可能职责，不能说每人必须所有任务。11任务6Core/5Supplemental：驾驶配送83、向熟客介绍新产品/服务及价格77、每日记录76、聆听解决投诉75、收款找零和客户凭据记录74、维护卡车/食品分发设备及清洁74为Core；促销陈列79、售货机收币补货撤旧78、按公司规则订单及销售合同67、核客户/交付清单装车63、出售特色食品重要性未提供为Supplemental。维修与清洁可在本职职责中，重大维修/处置权限须另核；冷链、批号保质期适用于实际食品而非所有货物。 美国57项情境实际读：户外各种天气每天100%、期限每天92%、冷热每天82%/每周但非每天18%、面对面每天77%/每周但非每天18%；典型周超40小时81%/40小时14%，规律82%/不规律18%。持续用手76%、重复动作64%、弯腰扭身59%，封闭车每天78%/从不22%；决策自由很大43%/一些14%/没有14%，每日决策39%，污染物每天40%。不愉快愤怒人员每天19%/每周但非每天18%，冲突每周但非每天26%/每年但非每月15%/从不17%；暴力人员每年但非每月18%/从不82%，不是天天人身攻击。错误极严重32%/严重19%/完全不严重12%，竞争极度21%。电话/邮件/持续接触/团队/自动化等本次反馈未给比例，不填0、不推GenAI采用率或个体事故率。 O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。 O*NET2025本职业行业就业份额住宿餐饮40%、批发25%；OOH更细食品服务及饮料场所39%、批发25%、零售9%、运输仓储6%，自雇取整7%与精细7.3%区分。这些是本职业就业分布，不是工资。OOH本职业2025行业年薪中位：批发49,090、运输仓储45,690、零售36,640、食品服务饮料30,580美元；只适用该职业在该行业受雇工资，不替中国或个人报价。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet",
-                "limitation": "美国精确职业数据；不定义中国资格、工资或从业资格。",
+                "limitation": "美国53-3031.00定义沿既定路线/区域驾驶车辆销售或配送商品、收取或递送商业洗涤等，接单、收款、上货为可能职责，不能说每人必须所有任务。11任务6Core/5Supplemental：驾驶配送83、向熟客介绍新产品/服务及价格77、每日记录76、聆听解决投诉75、收款找零和客户凭据记录74、维护卡车/食品分发设备及清洁74为Core；促销陈列79、售货机收币补货撤旧78、按公司规则订单及销售合同67、核客户/交付清单装车63、出售特色食品重要性未提供为Supplemental。维修与清洁可在本职职责中，重大维修/处置权限须另核；冷链、批号保质期适用于实际食品而非所有货物。 美国57项情境实际读：户外各种天气每天100%、期限每天92%、冷热每天82%/每周但非每天18%、面对面每天77%/每周但非每天18%；典型周超40小时81%/40小时14%，规律82%/不规律18%。持续用手76%、重复动作64%、弯腰扭身59%，封闭车每天78%/从不22%；决策自由很大43%/一些14%/没有14%，每日决策39%，污染物每天40%。不愉快愤怒人员每天19%/每周但非每天18%，冲突每周但非每天26%/每年但非每月15%/从不17%；暴力人员每年但非每月18%/从不82%，不是天天人身攻击。错误极严重32%/严重19%/完全不严重12%，竞争极度21%。电话/邮件/持续接触/团队/自动化等本次反馈未给比例，不填0、不推GenAI采用率或个体事故率。 O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。 O*NET2025本职业行业就业份额住宿餐饮40%、批发25%；OOH更细食品服务及饮料场所39%、批发25%、零售9%、运输仓储6%，自雇取整7%与精细7.3%区分。这些是本职业就业分布，不是工资。OOH本职业2025行业年薪中位：批发49,090、运输仓储45,690、零售36,640、食品服务饮料30,580美元；只适用该职业在该行业受雇工资，不替中国或个人报价。",
                 "market": "美国",
                 "name": "O*NET OnLine：Driver/Sales Workers（53-3031.00）职业档案",
                 "period": "updated 2026; accessed 2026-09-19",
@@ -31505,14 +31574,13 @@
                 "url": "https://www.onetonline.org/link/summary/53-3031.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "把任务层面的生成式 AI 暴露与「实际采用、岗位增减」区分开。",
-                  "不提供本职业采用率、裁员率或因果就业证据。"
+                  "路线订单、销量库存提示、对账及记录整理属编辑待验证应用，传统路线规划/商务软件不等GenAI；软件目录7类通信IBM Domino、路线账务数据库、库存、地图路线、Office、bMobile项目/销售、Excel。Hot2技能Excel/Office各低于1%，2025美国本职业所有唯一招聘为分母，不是有技能广告内比例、不是0使用/0AI。ILO任务暴露/NIST治理不提供本职业采用/替代概率或提效实测。 原ILO首页仅入口。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation entry",
                 "id": "r2-ai",
-                "limitation": "不提供本职业采用率、裁员率或因果就业证据。",
+                "limitation": "路线订单、销量库存提示、对账及记录整理属编辑待验证应用，传统路线规划/商务软件不等GenAI；软件目录7类通信IBM Domino、路线账务数据库、库存、地图路线、Office、bMobile项目/销售、Excel。Hot2技能Excel/Office各低于1%，2025美国本职业所有唯一招聘为分母，不是有技能广告内比例、不是0使用/0AI。ILO任务暴露/NIST治理不提供本职业采用/替代概率或提效实测。 原ILO首页仅入口。",
                 "market": "全球",
                 "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
                 "period": "ILO 2025; accessed 2026-09-19",
@@ -31521,14 +31589,13 @@
                 "url": "https://www.ilo.org/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明中国大陆招聘公告与计酬结构（基本工资与提成与绩效与补贴与扣款）的阅读方法。",
-                  "招聘报价不是职业级统计口径，也不代表本职业中位数或起薪。"
+                  "国家统计局2025城镇单位工资：交通运输仓储邮政非私营133981/私营73133元、批发零售135749/69622元、住宿餐饮62461/55123元，税前年平均，仅匹配可能行业背景，不是司机兼销售员职业中位/分位/月薪。5人以上法人就业统计排个体/自由职业等，不全排提成、项目、外包、派遣雇员。证据不足：未取得中国精确全国职业工资及真实薪酬样本，不能称全国从未发布、普遍补贴扣款或旺季必加薪。扣款是否合法须按实际法律合同核，不由页面授权。 原人社首页非报价样本。"
                 ],
-                "evidence_type": "editorial synthesis",
+                "evidence_type": "official navigation entry",
                 "id": "r2-pay-1",
-                "limitation": "招聘报价不是职业级统计口径，也不代表本职业中位数或起薪。",
+                "limitation": "国家统计局2025城镇单位工资：交通运输仓储邮政非私营133981/私营73133元、批发零售135749/69622元、住宿餐饮62461/55123元，税前年平均，仅匹配可能行业背景，不是司机兼销售员职业中位/分位/月薪。5人以上法人就业统计排个体/自由职业等，不全排提成、项目、外包、派遣雇员。证据不足：未取得中国精确全国职业工资及真实薪酬样本，不能称全国从未发布、普遍补贴扣款或旺季必加薪。扣款是否合法须按实际法律合同核，不由页面授权。 原人社首页非报价样本。",
                 "market": "中国大陆",
                 "name": "中国公共招聘与计酬口径核对入口（编辑综合）",
                 "period": "accessed 2026-09-19",
@@ -31537,14 +31604,13 @@
                 "url": "https://www.mohrss.gov.cn/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明计酬口径与工资数据发布方法。",
-                  "方法说明不是本职业具体工资结论。"
+                  "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。 综合工资导航非本细类工资。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation entry",
                 "id": "r2-pay-2",
-                "limitation": "方法说明不是本职业具体工资结论。",
+                "limitation": "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。 综合工资导航非本细类工资。",
                 "market": "美国",
                 "name": "BLS：Wage Data（工资数据方法说明）",
                 "period": "accessed 2026-09-19",
@@ -31553,14 +31619,13 @@
                 "url": "https://www.bls.gov/bls/blswage.htm"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明 OEWS 抽样、计酬口径与公布方法。",
-                  "方法说明不是本职业具体工资结论。"
+                  "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。 综合工资导航非具体OEWS方法。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation entry",
                 "id": "r2-pay-3",
-                "limitation": "方法说明不是本职业具体工资结论。",
+                "limitation": "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。 综合工资导航非具体OEWS方法。",
                 "market": "美国",
                 "name": "BLS Handbook of Methods：Occupational Employment and Wage Statistics",
                 "period": "accessed 2026-09-19",
@@ -31569,14 +31634,13 @@
                 "url": "https://www.bls.gov/bls/blswage.htm"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于核对本职业的执照与认证与培训查询入口。",
-                  "该页不列出本职业的强制证书；上岗与驾驶与从业资格与安全与食品要求以企业与车队与门店与法域为准。"
+                  "O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。 认证查询不证明统一免驾驶照。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official credential lookup",
                 "id": "ratify",
-                "limitation": "该页不列出本职业的强制证书；上岗与驾驶与从业资格与安全与食品要求以企业与车队与门店与法域为准。",
+                "limitation": "O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。 认证查询不证明统一免驾驶照。",
                 "market": "美国",
                 "name": "O*NET OnLine：53-3031.00 执照与培训入口",
                 "period": "accessed 2026-09-19",
@@ -31585,14 +31649,13 @@
                 "url": "https://www.onetonline.org/link/localcert/53-3031.00"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于核对职业安全与工作条件信息。",
-                  "不提供本职业采用率、替代概率或合规结论。"
+                  "实际OOH查询入口，不是工会或本职业精确统计。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation entry",
                 "id": "sag",
-                "limitation": "不提供本职业采用率、替代概率或合规结论。",
+                "limitation": "实际OOH查询入口，不是工会或本职业精确统计。",
                 "market": "美国",
                 "name": "BLS Occupational Outlook Handbook / Occupation Finder（职业安全与工作条件核对入口）",
                 "period": "accessed 2026-09-19",
@@ -31601,14 +31664,13 @@
                 "url": "https://www.bls.gov/ooh/occupation-finder.htm"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于核对 OEWS 统计口径与期间。",
-                  "不提供本职业采用率、替代概率或合规结论。"
+                  "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。 实际OEWS首页，不是O*NET任务档案。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official navigation entry",
                 "id": "sag-moa",
-                "limitation": "不提供本职业采用率、替代概率或合规结论。",
+                "limitation": "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。 实际OEWS首页，不是O*NET任务档案。",
                 "market": "美国",
                 "name": "BLS Occupational Employment and Wage Statistics（统计口径核对入口）",
                 "period": "2025 年工资数据口径; accessed 2026-09-19",
@@ -31617,20 +31679,199 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于核对道路运输从业人员管理与道路运输经营相关公开要求。",
-                  "主管部门入口不代替法规原文与本辖区要求；不规定工资水平。"
+                  "交通部首页仅入口，不是具体雇主程序/法规原文。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation entry",
                 "id": "teacher",
-                "limitation": "主管部门入口不代替法规原文与本辖区要求；不规定工资水平。",
+                "limitation": "交通部首页仅入口，不是具体雇主程序/法规原文。",
                 "market": "中国大陆",
                 "name": "中华人民共和国交通运输部（道路运输管理公开入口）",
                 "period": "accessed 2026-09-19",
                 "publisher": "中华人民共和国交通运输部",
                 "scope": "industry_proxy",
                 "url": "https://www.mot.gov.cn/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-oews-concepts",
+                "limitation": "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。",
+                "market": "美国",
+                "name": "BLS OEWS工资人群与组成",
+                "period": "现行方法；本批检索2026-10-09",
+                "publisher": "Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "货物价格库存和一般路线不必都是个人信息；真实资料和系统权限分别核。"
+                ],
+                "evidence_type": "official law",
+                "id": "r5-cn-pipl",
+                "limitation": "可识别客户或人员信息按合法依据、目的必要及安全责任核，客户位置货款不一律敏感，轨迹金融账户等具体内容另核敏感保护要求。去标识非匿名化，账号不自动准许外传。",
+                "market": "中国内地",
+                "name": "个人信息保护法：客户及配送人员信息边界",
+                "period": "2021法；本批实际读；检索2026-10-09",
+                "publisher": "全国人大/中央网信办",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "普通自动化与GenAI分开，实际功能及效果需另核。"
+                ],
+                "evidence_type": "official framework",
+                "id": "r5-nist-current",
+                "limitation": "跨职业自愿AI治理框架，非道路驾驶运输资格或食品运输法，非路线及移动商务产品能力效果实测。",
+                "market": "跨市场",
+                "name": "NIST AI RMF官方框架说明",
+                "period": "自愿框架1.0；本批实际读；检索2026-10-09",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本批实际读ILO2025摘要，本职业未核SOC53-3031与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。"
+                ],
+                "evidence_type": "official research summary",
+                "id": "r5-ilo-current",
+                "limitation": "本批实际读ILO2025摘要，本职业未核SOC53-3031与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。",
+                "market": "跨市场",
+                "name": "ILO2025 GenAI暴露研究官方摘要",
+                "period": "2025研究摘要；本批实际读；检索2026-10-09",
+                "publisher": "ILO",
+                "scope": "contextual",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。"
+                ],
+                "evidence_type": "official wage table",
+                "id": "r5-wages",
+                "limitation": "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。",
+                "market": "美国",
+                "name": "53-3031美国2025工资全国分位",
+                "period": "2025",
+                "publisher": "O*NET转引BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/53-3031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。 O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。"
+                ],
+                "evidence_type": "official employment projections",
+                "id": "r5-bls-projections",
+                "limitation": "BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。 O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。",
+                "market": "美国",
+                "name": "BLS53-3031就业预测2025—2035",
+                "period": "2025—2035",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "路线订单、销量库存提示、对账及记录整理属编辑待验证应用，传统路线规划/商务软件不等GenAI；软件目录7类通信IBM Domino、路线账务数据库、库存、地图路线、Office、bMobile项目/销售、Excel。Hot2技能Excel/Office各低于1%，2025美国本职业所有唯一招聘为分母，不是有技能广告内比例、不是0使用/0AI。ILO任务暴露/NIST治理不提供本职业采用/替代概率或提效实测。"
+                ],
+                "evidence_type": "job-posting software skills",
+                "id": "r5-hot",
+                "limitation": "路线订单、销量库存提示、对账及记录整理属编辑待验证应用，传统路线规划/商务软件不等GenAI；软件目录7类通信IBM Domino、路线账务数据库、库存、地图路线、Office、bMobile项目/销售、Excel。Hot2技能Excel/Office各低于1%，2025美国本职业所有唯一招聘为分母，不是有技能广告内比例、不是0使用/0AI。ILO任务暴露/NIST治理不提供本职业采用/替代概率或提效实测。",
+                "market": "美国",
+                "name": "53-3031招聘软件关键词2025",
+                "period": "2025",
+                "publisher": "O*NET/Lightcast",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/53-3031.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "车辆总重低于26001磅，主要从配送中心取货送达，可装卸；定义不支持绝不收款。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "r5-light",
+                "limitation": "车辆总重低于26001磅，主要从配送中心取货送达，可装卸；定义不支持绝不收款。",
+                "market": "美国",
+                "name": "O*NET轻型卡车司机53-3033.00",
+                "period": "检索2026-10-09",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/53-3033.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。"
+                ],
+                "evidence_type": "official legislation",
+                "id": "r5-road",
+                "limitation": "《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。",
+                "market": "中国大陆",
+                "name": "道路运输从业人员管理规定2026第四次修正",
+                "period": "2026-03-20施行",
+                "publisher": "政府公开/转载",
+                "scope": "general_legislation",
+                "url": "https://xxgk.mot.gov.cn/jigou/fgs/202602/t20260213_4200283.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "道路运输条例2026-01-30第六次修订：2条范围为运输经营及相关业务；21/22货运车辆/安全管理及驾驶证、主管部门年龄和知识考试（4500千克及以下普通货运例外）；24条同类普通货运经营无需该条经营许可证及车辆营运证，是经营/车辆手续不是个人驾驶许可。28条适用经营者教育与从业规程、连续驾驶不超4小时，30/31条车辆维护检测与经营者事故等应急预案。实际经营属性、总质量和货物类别须核，不能按司机兼销售名称决定。"
+                ],
+                "evidence_type": "official legislation",
+                "id": "r5-road-regulation",
+                "limitation": "道路运输条例2026-01-30第六次修订：2条范围为运输经营及相关业务；21/22货运车辆/安全管理及驾驶证、主管部门年龄和知识考试（4500千克及以下普通货运例外）；24条同类普通货运经营无需该条经营许可证及车辆营运证，是经营/车辆手续不是个人驾驶许可。28条适用经营者教育与从业规程、连续驾驶不超4小时，30/31条车辆维护检测与经营者事故等应急预案。实际经营属性、总质量和货物类别须核，不能按司机兼销售名称决定。",
+                "market": "中国大陆",
+                "name": "道路运输条例2026第六次修订",
+                "period": "2026-01-30第六次修订",
+                "publisher": "政府公开/转载",
+                "scope": "general_legislation",
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=1806"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "道路交通安全法2021：19条相应驾驶证和准驾车型；21条出车前认真检查安全技术性能，不驾驶安全隐患车；22条过度疲劳等影响安全驾驶不得驾驶。70条事故立即停车保护现场、人伤立即抢救迅速報警；无伤事实成因无争议可即行撤离恢复交通协商，不撤须迅速報警，轻微财产损失事实清楚先撤再协商。73条公安交管部门制作事故认定书，本人/单位不自行发正式责任结论。一般投诉/货款差异和事故不能套同一停作业上报顺序；未采企业重启制度。"
+                ],
+                "evidence_type": "official legislation",
+                "id": "r5-traffic",
+                "limitation": "道路交通安全法2021：19条相应驾驶证和准驾车型；21条出车前认真检查安全技术性能，不驾驶安全隐患车；22条过度疲劳等影响安全驾驶不得驾驶。70条事故立即停车保护现场、人伤立即抢救迅速報警；无伤事实成因无争议可即行撤离恢复交通协商，不撤须迅速報警，轻微财产损失事实清楚先撤再协商。73条公安交管部门制作事故认定书，本人/单位不自行发正式责任结论。一般投诉/货款差异和事故不能套同一停作业上报顺序；未采企业重启制度。",
+                "market": "中国大陆",
+                "name": "道路交通安全法2021政府正文",
+                "period": "2021修正",
+                "publisher": "政府公开/转载",
+                "scope": "general_legislation",
+                "url": "https://jtgl.beijing.gov.cn/jgj/jgxx/flfg/fl/205308/index.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "食品安全法2025修正政府正文：33条6项运输贮存装卸容器工具设备安全无害清洁、防污染、所需温湿条件且不与有毒有害同运；非食品经营者从事贮存运输装卸也适用该项。45条健康制度及接触直接入口食品人员每年健康检查证明，不是所有包装食品配送员统一健康证。44条经营企业培训/管理、主要负责人责任；47条经营条件不再符合须整改、潜在食品事故风险立即停食品经营并向县级以上所在地食安部门报告；63条不合标准或可能有害食品由相应生产/经营者停止、通知及依法召回，非配送员任意销毁权限。41条另有重点液态食品道路散装运输准运制度，仅该特定范围，具体目录/配套本轮未核，不泛化普通包裹。"
+                ],
+                "evidence_type": "official legislation",
+                "id": "r5-food",
+                "limitation": "食品安全法2025修正政府正文：33条6项运输贮存装卸容器工具设备安全无害清洁、防污染、所需温湿条件且不与有毒有害同运；非食品经营者从事贮存运输装卸也适用该项。45条健康制度及接触直接入口食品人员每年健康检查证明，不是所有包装食品配送员统一健康证。44条经营企业培训/管理、主要负责人责任；47条经营条件不再符合须整改、潜在食品事故风险立即停食品经营并向县级以上所在地食安部门报告；63条不合标准或可能有害食品由相应生产/经营者停止、通知及依法召回，非配送员任意销毁权限。41条另有重点液态食品道路散装运输准运制度，仅该特定范围，具体目录/配套本轮未核，不泛化普通包裹。",
+                "market": "中国大陆",
+                "name": "食品安全法2025修正政府正文",
+                "period": "政府2025修正正文",
+                "publisher": "政府公开/转载",
+                "scope": "general_legislation",
+                "url": "https://gxs.pingliang.gov.cn/zfxxgk/fdzdgknr/zcjd/sjzcjd/art/2025/art_c7c32dfcb9c14ca9acce3ed581b209b7.html"
               }
             ]
           },
@@ -32222,7 +32463,7 @@
         },
         "evidence_rows": [
           {
-            "source_ref": "r2-ai",
+            "source_ref": "onet",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.1.limit",
               "block": "ai-impact",
@@ -32257,7 +32498,7 @@
             }
           },
           {
-            "source_ref": "sag",
+            "source_ref": "r5-wages",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.2.limit",
               "block": "ai-impact",
@@ -32292,7 +32533,7 @@
             }
           },
           {
-            "source_ref": "sag-moa",
+            "source_ref": "r5-nist-current",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.3.limit",
               "block": "ai-impact",
@@ -32327,7 +32568,7 @@
             }
           },
           {
-            "source_ref": "bls",
+            "source_ref": "onet",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.4.limit",
               "block": "ai-impact",
@@ -32362,7 +32603,7 @@
             }
           },
           {
-            "source_ref": "nist",
+            "source_ref": "employer",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.5.limit",
               "block": "ai-impact",
@@ -33204,7 +33445,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "r5-road",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33212,7 +33453,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "r5-road",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34091,7 +34332,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "sag-moa"
             ],
             "id": "image-use",
             "mitigation": {
@@ -34127,7 +34368,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "sag-moa"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -34272,7 +34513,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
+              "sag-moa",
               "employer"
             ],
             "id": "audition-feedback",
@@ -34300,7 +34541,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "r5-wages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34308,7 +34549,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "r5-wages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34323,7 +34564,7 @@
           },
           {
             "href": {
-              "$source": "employer",
+              "$source": "r5-food",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34331,7 +34572,7 @@
             },
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-food",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34346,7 +34587,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "r5-road",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34354,7 +34595,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "r5-road",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34369,7 +34610,7 @@
           },
           {
             "href": {
-              "$source": "sag-moa",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34377,7 +34618,7 @@
             },
             "id": "sag-moa",
             "label": {
-              "$source": "sag-moa",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34392,7 +34633,7 @@
           },
           {
             "href": {
-              "$source": "nist",
+              "$source": "r5-traffic",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34400,7 +34641,7 @@
             },
             "id": "nist",
             "label": {
-              "$source": "nist",
+              "$source": "r5-traffic",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34426,43 +34667,43 @@
           "bls_table": [
             {
               "指标": "数据类型",
-              "数值": "驾驶与从业资格与食品安全与收款要求为主",
-              "说明": "中国大陆公开工资统计按行业门类与单位类型发布，且本职业相关岗位分散在交通运输、仓储和邮政业与批发和零售业与餐饮供应等行业，未建立与本职业对应的职业级口径；本页因此保留缺口，不以行业均值替代。"
+              "数值": "职业工资缺口；行业年均另列",
+              "说明": "国家统计局2025城镇单位工资：交通运输仓储邮政非私营133981/私营73133元、批发零售135749/69622元、住宿餐饮62461/55123元，税前年平均，仅匹配可能行业背景，不是司机兼销售员职业中位/分位/月薪。5人以上法人就业统计排个体/自由职业等，不全排提成、项目、外包、派遣雇员。证据不足：未取得中国精确全国职业工资及真实薪酬样本，不能称全国从未发布、普遍补贴扣款或旺季必加薪。扣款是否合法须按实际法律合同核，不由页面授权。"
             },
             {
               "指标": "道路运输从业资格",
-              "数值": "经营性客货运输须持从业资格证",
-              "说明": "按《道路运输从业人员管理规定》（交通运输部令 2026 年第 4 号第四次修正，自 2026 年 3 月 20 日起施行），从事经营性道路客货运输的驾驶人须取得相应从业资格证；未取得相应从业资格证件或使用失效与伪造与变造证件或超越核定范围驾驶道路客运车辆的，责令改正并处 200 元以上 2000 元以下罚款；驾驶道路货运车辆违反同一情形的，责令改正并处 200 元罚款（第四十六条）。"
+              "数值": "按经营属性/车辆/货物类别核",
+              "说明": "《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。"
             },
             {
               "指标": "适用范围",
-              "数值": "非所有开小车顺带卖货者适用",
-              "说明": "该规定适用营业性道路运输的从业人员，使用总质量 4500 千克及以下普通货运车辆驾驶员与非经营性私人用车驾驶员不需取得从业资格证，该规定不涉及出租汽车驾驶员；并非每个开小车顺便卖货的员工都属其调整范围。"
+              "数值": "4500千克普通货运例外与其他义务分开",
+              "说明": "《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。 道路运输条例2026-01-30第六次修订：2条范围为运输经营及相关业务；21/22货运车辆/安全管理及驾驶证、主管部门年龄和知识考试（4500千克及以下普通货运例外）；24条同类普通货运经营无需该条经营许可证及车辆营运证，是经营/车辆手续不是个人驾驶许可。28条适用经营者教育与从业规程、连续驾驶不超4小时，30/31条车辆维护检测与经营者事故等应急预案。实际经营属性、总质量和货物类别须核，不能按司机兼销售名称决定。"
             },
             {
               "指标": "交通安全与食品安全",
-              "数值": "持证驾驶与食品贮存运输要求",
-              "说明": "应按准驾车型持相应机动车驾驶证并遵守《中华人民共和国道路交通安全法》；（如涉食品配送）应按《中华人民共和国食品安全法》保障食品贮存与运输与配送条件与从业人员健康管理要求（本页按法律名称与一般要求引用，未逐条核对条文编号）。"
+              "数值": "机动车驾驶及食品具体条件分别核",
+              "说明": "道路交通安全法2021：19条相应驾驶证和准驾车型；21条出车前认真检查安全技术性能，不驾驶安全隐患车；22条过度疲劳等影响安全驾驶不得驾驶。70条事故立即停车保护现场、人伤立即抢救迅速報警；无伤事实成因无争议可即行撤离恢复交通协商，不撤须迅速報警，轻微财产损失事实清楚先撤再协商。73条公安交管部门制作事故认定书，本人/单位不自行发正式责任结论。一般投诉/货款差异和事故不能套同一停作业上报顺序；未采企业重启制度。 食品安全法2025修正政府正文：33条6项运输贮存装卸容器工具设备安全无害清洁、防污染、所需温湿条件且不与有毒有害同运；非食品经营者从事贮存运输装卸也适用该项。45条健康制度及接触直接入口食品人员每年健康检查证明，不是所有包装食品配送员统一健康证。44条经营企业培训/管理、主要负责人责任；47条经营条件不再符合须整改、潜在食品事故风险立即停食品经营并向县级以上所在地食安部门报告；63条不合标准或可能有害食品由相应生产/经营者停止、通知及依法召回，非配送员任意销毁权限。41条另有重点液态食品道路散装运输准运制度，仅该特定范围，具体目录/配套本轮未核，不泛化普通包裹。"
             },
             {
               "指标": "计酬方式",
-              "数值": "固定工资或含提成与补贴",
-              "说明": "相关岗位计酬结构差别较大，常见基本工资加提成或绩效与油补与餐补与全勤等补贴，并可能含货款差错与货损扣款。"
+              "数值": "实际计酬、补贴扣款未采",
+              "说明": "编辑核对合同并核扣款合法性，不授扣款权。"
             },
             {
               "指标": "工时与作业节奏",
-              "数值": "规律排班但常早起与旺季加班",
-              "说明": "美国反馈工作时间「规律」82%，但常见早起与旺季与配送时效驱动的加班；作息与防护与疲劳管理按企业制度与法规执行。"
+              "数值": "美国反馈/OOH；中国班次未采",
+              "说明": "美国57项情境实际读：户外各种天气每天100%、期限每天92%、冷热每天82%/每周但非每天18%、面对面每天77%/每周但非每天18%；典型周超40小时81%/40小时14%，规律82%/不规律18%。持续用手76%、重复动作64%、弯腰扭身59%，封闭车每天78%/从不22%；决策自由很大43%/一些14%/没有14%，每日决策39%，污染物每天40%。不愉快愤怒人员每天19%/每周但非每天18%，冲突每周但非每天26%/每年但非每月15%/从不17%；暴力人员每年但非每月18%/从不82%，不是天天人身攻击。错误极严重32%/严重19%/完全不严重12%，竞争极度21%。电话/邮件/持续接触/团队/自动化等本次反馈未给比例，不填0、不推GenAI采用率或个体事故率。 O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。"
             },
             {
               "指标": "样本边界",
-              "数值": "职业级缺口",
-              "说明": "招聘报价、行业门类均值与提成制与个体经营都不能折算为全国中位数，也不能与美国受雇工资统计直接比较。"
+              "数值": "工资样本范围",
+              "说明": "国家统计局2025城镇单位工资：交通运输仓储邮政非私营133981/私营73133元、批发零售135749/69622元、住宿餐饮62461/55123元，税前年平均，仅匹配可能行业背景，不是司机兼销售员职业中位/分位/月薪。5人以上法人就业统计排个体/自由职业等，不全排提成、项目、外包、派遣雇员。证据不足：未取得中国精确全国职业工资及真实薪酬样本，不能称全国从未发布、普遍补贴扣款或旺季必加薪。扣款是否合法须按实际法律合同核，不由页面授权。"
             },
             {
               "指标": "地区比较",
-              "数值": "中美证据分别解释",
-              "说明": "美国分位为受雇税前工资统计口径（不含提成与绩效与油补与餐补）；中国大陆按企业与岗位与提成与补贴制度确定，两者应分别解释，不能直接换算或合并。"
+              "数值": "中美各自解释",
+              "说明": "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。 国家统计局2025城镇单位工资：交通运输仓储邮政非私营133981/私营73133元、批发零售135749/69622元、住宿餐饮62461/55123元，税前年平均，仅匹配可能行业背景，不是司机兼销售员职业中位/分位/月薪。5人以上法人就业统计排个体/自由职业等，不全排提成、项目、外包、派遣雇员。证据不足：未取得中国精确全国职业工资及真实薪酬样本，不能称全国从未发布、普遍补贴扣款或旺季必加薪。扣款是否合法须按实际法律合同核，不由页面授权。"
             }
           ],
           "china_ai_row": {
@@ -34475,7 +34716,7 @@
           "china_edu_table": [
             {
               "学历段": "道路运输从业资格",
-              "岗位方向": "从事经营性道路客货运输的驾驶人应按《道路运输从业人员管理规定》（交通运输部令 2026 年第 4 号第四次修正，自 2026 年 3 月 20 日起施行）取得相应从业资格证；使用总质量 4500 千克及以下普通货运车辆驾驶员与非经营性私人用车驾驶员不需取得从业资格证，该规定不涉及出租汽车驾驶员。",
+              "岗位方向": "《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
                 "block": "china-salary",
@@ -34485,7 +34726,7 @@
             },
             {
               "学历段": "交通安全与食品安全",
-              "岗位方向": "应按准驾车型持相应机动车驾驶证并遵守《中华人民共和国道路交通安全法》；（如涉食品配送）应按《中华人民共和国食品安全法》保障食品贮存与运输与配送条件与从业人员健康管理要求。",
+              "岗位方向": "道路交通安全法2021：19条相应驾驶证和准驾车型；21条出车前认真检查安全技术性能，不驾驶安全隐患车；22条过度疲劳等影响安全驾驶不得驾驶。70条事故立即停车保护现场、人伤立即抢救迅速報警；无伤事实成因无争议可即行撤离恢复交通协商，不撤须迅速報警，轻微财产损失事实清楚先撤再协商。73条公安交管部门制作事故认定书，本人/单位不自行发正式责任结论。一般投诉/货款差异和事故不能套同一停作业上报顺序；未采企业重启制度。 食品安全法2025修正政府正文：33条6项运输贮存装卸容器工具设备安全无害清洁、防污染、所需温湿条件且不与有毒有害同运；非食品经营者从事贮存运输装卸也适用该项。45条健康制度及接触直接入口食品人员每年健康检查证明，不是所有包装食品配送员统一健康证。44条经营企业培训/管理、主要负责人责任；47条经营条件不再符合须整改、潜在食品事故风险立即停食品经营并向县级以上所在地食安部门报告；63条不合标准或可能有害食品由相应生产/经营者停止、通知及依法召回，非配送员任意销毁权限。41条另有重点液态食品道路散装运输准运制度，仅该特定范围，具体目录/配套本轮未核，不泛化普通包裹。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
                 "block": "china-salary",
@@ -34495,7 +34736,7 @@
             },
             {
               "学历段": "计酬结构",
-              "岗位方向": "本职业相关报酬通常由基本工资加提成或绩效与油补与餐补与全勤等补贴构成，并可能含货款差错与货损扣款，不同行业与企业与路线差别较大。",
+              "岗位方向": "实际计酬及补贴扣款未采，按真实合同及法律核。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.theater",
                 "block": "china-salary",
@@ -34505,7 +34746,7 @@
             },
             {
               "学历段": "全国职业级工资分布",
-              "岗位方向": "本轮未取得可核对的职业级工资统计；不以行业均值或招聘报价替代，行业平均工资只作为可见行业代理。",
+              "岗位方向": "国家统计局2025城镇单位工资：交通运输仓储邮政非私营133981/私营73133元、批发零售135749/69622元、住宿餐饮62461/55123元，税前年平均，仅匹配可能行业背景，不是司机兼销售员职业中位/分位/月薪。5人以上法人就业统计排个体/自由职业等，不全排提成、项目、外包、派遣雇员。证据不足：未取得中国精确全国职业工资及真实薪酬样本，不能称全国从未发布、普遍补贴扣款或旺季必加薪。扣款是否合法须按实际法律合同核，不由页面授权。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.national",
                 "block": "china-salary",
@@ -34615,7 +34856,7 @@
               "月薪参考": {
                 "$join": [
                   {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
+                    "$fact": "r5-current-china-jiaojiang-featured-daily-2026",
                     "field": "display_value"
                   },
                   {
@@ -34641,7 +34882,7 @@
           "china_soc_row": "中国大陆薪资口径",
           "edu": "训练与驾驶与从业资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "r5-current-china-jiaojiang-featured-daily-2026"
           ],
           "sources_note": "来源链接按各自适用范围使用。",
           "ui": {
@@ -34704,13 +34945,13 @@
         },
         "bls_table": [
           {
-            "fact_ref": "median",
-            "指标": "薪资 · 10 分位",
+            "fact_ref": "r5-current-low",
+            "指标": "薪资 · 第10分位",
             "数值": {
-              "$fact": "low",
+              "$fact": "r5-current-low",
               "field": "display_value"
             },
-            "说明": "本职业 2025 年工资数据的分布低端，是统计位置而不是入职起薪。"
+            "说明": "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。"
           },
           {
             "指标": "薪资 · 25 分位",
@@ -34718,13 +34959,13 @@
             "说明": "本职业 2025 年工资数据的下四分位；小时口径为 14.52 美元。"
           },
           {
-            "fact_ref": "median",
-            "指标": "薪资 · 中位数",
+            "fact_ref": "r5-current-median",
+            "指标": "薪资 · 中位",
             "数值": {
-              "$fact": "median",
+              "$fact": "r5-current-median",
               "field": "display_value"
             },
-            "说明": "本职业 2025 年工资数据的中间位置：一半从业者低于、一半高于该值（中位时薪 18.64 美元）。"
+            "说明": "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。"
           },
           {
             "指标": "薪资 · 75 分位",
@@ -34732,40 +34973,40 @@
             "说明": "本职业 2025 年工资数据的上四分位；小时口径为 23.56 美元。"
           },
           {
-            "fact_ref": "median",
-            "指标": "薪资 · 90 分位",
+            "fact_ref": "r5-current-high",
+            "指标": "薪资 · 第90分位",
             "数值": {
-              "$fact": "high",
+              "$fact": "r5-current-high",
               "field": "display_value"
             },
-            "说明": "本职业 2025 年工资数据的分布高端，通常与行业、企业与路线密度与销量与提成相关。"
+            "说明": "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024 就业 · 本职业人数",
+            "fact_ref": "r5-current-employment",
+            "指标": "2025就业存量",
             "数值": {
-              "$fact": "employment",
+              "$fact": "r5-current-employment",
               "field": "display_value"
             },
-            "说明": "2024 年本职业就业规模（O*NET 摘要页口径约 451,500 人）；规模大、更替需求多。"
+            "说明": "BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 增长预测",
+            "fact_ref": "r5-current-growth",
+            "指标": "2025—2035预测变化",
             "数值": {
-              "$fact": "growth",
+              "$fact": "r5-current-growth",
               "field": "display_value"
             },
-            "说明": "O*NET 摘要页标注为「远高于平均（Much faster than average，7% 或更高）」，该页未给出单一精确百分比，本页按口径原文表述；未取得 BLS 职业展望本职业页一手口径。"
+            "说明": "BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 预计空缺",
+            "fact_ref": "r5-current-openings",
+            "指标": "2025—2035年均空缺",
             "数值": {
-              "$fact": "openings",
+              "$fact": "r5-current-openings",
               "field": "display_value"
             },
-            "说明": "约 51,300 个，为预测期内因增长与更替等形成的合计空缺，不是每年净增。"
+            "说明": "BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。"
           }
         ],
         "boundary": {
@@ -34827,7 +35068,7 @@
           "type": "prose"
         },
         "growth": {
-          "$fact": "growth",
+          "$fact": "r5-current-growth",
           "field": "display_value"
         },
         "heading": {
@@ -34842,13 +35083,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024 年基期（O*NET 摘要页与详细资料页）",
+        "industry_period": "2025基期；行业就业份额与工资分开",
         "industry_rows": [
           {
-            "fact_ref": "median",
-            "industry": "食品与饮料配送与批发与零售与餐饮供应等路线销售场景（O*NET 摘要页与任务描述，未附行业门类占比与人数）",
+            "fact_ref": "r5-current-industry-theater",
+            "industry": "住宿餐饮40%/批发25%（O*NET本职业就业份额）",
             "median": {
-              "$fact": "industry-theater",
+              "$fact": "r5-current-industry-theater",
               "field": "display_value"
             },
             "note": {
@@ -34859,10 +35100,10 @@
             }
           },
           {
-            "fact_ref": "median",
-            "industry": "道路与车辆驾驶室与客户交付点与门店或仓库，按路线与配送时效与客户需求安排",
+            "fact_ref": "r5-current-industry-amusement",
+            "industry": "学历和训练组（非行业工资）",
             "median": {
-              "$fact": "industry-education",
+              "$fact": "r5-current-industry-amusement",
               "field": "display_value"
             },
             "note": {
@@ -34873,10 +35114,10 @@
             }
           },
           {
-            "fact_ref": "median",
-            "industry": "工作情境：户外各种天气「每天」100%、每天时间压力 92%、每天在封闭车辆内 78%、每天面对面讨论 77%、持续用手 76%、每天暴露于污染物 40%",
+            "fact_ref": "r5-current-industry-education",
+            "industry": "实际工作情境（非行业工资）",
             "median": {
-              "$fact": "industry-amusement",
+              "$fact": "r5-current-industry-education",
               "field": "display_value"
             },
             "note": {
@@ -34887,8 +35128,8 @@
             }
           },
           {
-            "industry": "O*NET 未提供更细的行业分布与行业工资",
-            "median": "统计不含自雇",
+            "industry": "OOH本职业行业年薪中位另列",
+            "median": "批发49090/运输仓储45690/零售36640/食品服务饮料30580美元；自雇7.3%不在工资样本",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -34943,7 +35184,7 @@
           }
         ],
         "median": {
-          "$fact": "median",
+          "$fact": "r5-current-median",
           "field": "display_value"
         },
         "outlook_heading": {
@@ -34953,7 +35194,7 @@
           "type": "prose"
         },
         "outlook_period": {
-          "$fact": "growth",
+          "$fact": "r5-current-growth",
           "field": "period"
         },
         "wage_column_labels": [
@@ -34979,7 +35220,7 @@
             },
             "label": "较低工资位置",
             "value": {
-              "$fact": "low",
+              "$fact": "r5-current-low",
               "field": "display_value"
             }
           },
@@ -34993,7 +35234,7 @@
             },
             "label": "全国中位工资",
             "value": {
-              "$fact": "median",
+              "$fact": "r5-current-median",
               "field": "display_value"
             }
           },
@@ -35007,7 +35248,7 @@
             },
             "label": "较高工资位置",
             "value": {
-              "$fact": "high",
+              "$fact": "r5-current-high",
               "field": "display_value"
             }
           }
@@ -35159,10 +35400,7 @@
         "outlook_evidence": [
           {
             "geography": "美国",
-            "horizon": {
-              "$fact": "growth",
-              "field": "period"
-            },
+            "horizon": "2025—2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.2",
               "block": "market-signals",
@@ -35177,15 +35415,12 @@
             },
             "metric": "就业总体变化",
             "occupation_scope": "司机兼销售员（O*NET-SOC 53-3031.00）",
-            "source_id": "bls",
-            "value": {
-              "$fact": "growth",
-              "field": "display_value"
-            }
+            "source_id": "r5-bls-projections",
+            "value": "BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。"
           },
           {
             "geography": "美国",
-            "horizon": "2024 年基期",
+            "horizon": "2025—2035",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -35200,12 +35435,12 @@
             },
             "metric": "本职业就业规模",
             "occupation_scope": "司机兼销售员（O*NET-SOC 53-3031.00）",
-            "source_id": "ratify",
-            "value": "2024 年约 451,500 人（O*NET 摘要页口径）；本职业规模大、更替需求多，统计波动与行业景气相关"
+            "source_id": "r5-bls-projections",
+            "value": "BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。"
           },
           {
             "geography": "美国与中国大陆",
-            "horizon": "现行口径",
+            "horizon": "2026/实际法域",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.4",
               "block": "market-signals",
@@ -35220,8 +35455,8 @@
             },
             "metric": "训练与驾驶与从业资格路径",
             "occupation_scope": "司机兼销售员（O*NET-SOC 53-3031.00）",
-            "source_id": "employer",
-            "value": "美国以路线带教与在岗培训为主（Job Zone 1-2），无统一执照；中国大陆不设统一准入类职业资格，但从事经营性道路客货运输的驾驶人须按《道路运输从业人员管理规定》（交通运输部令 2026 年第 4 号）取得相应从业资格证（使用总质量 4500 千克及以下普通货运车辆驾驶员与非经营性私人用车驾驶员不需取得从业资格证，该规定不涉及出租汽车驾驶员）"
+            "source_id": "r5-road",
+            "value": "O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。 《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。 道路运输条例2026-01-30第六次修订：2条范围为运输经营及相关业务；21/22货运车辆/安全管理及驾驶证、主管部门年龄和知识考试（4500千克及以下普通货运例外）；24条同类普通货运经营无需该条经营许可证及车辆营运证，是经营/车辆手续不是个人驾驶许可。28条适用经营者教育与从业规程、连续驾驶不超4小时，30/31条车辆维护检测与经营者事故等应急预案。实际经营属性、总质量和货物类别须核，不能按司机兼销售名称决定。"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
@@ -35335,7 +35570,7 @@
             },
             "target_href": "/zh/career/jobs/heavy-and-tractor-trailer-truck-drivers",
             "target_slug": "heavy-and-tractor-trailer-truck-drivers",
-            "target_title": "重型与半挂卡车司机：与本职业在长途货运上的差异",
+            "target_title": "重型与半挂卡车司机：按车型与货运任务比较",
             "transition_distance": {
               "$item": "actors.display.market_signal_card.transitions.agent.distance",
               "block": "market-signals",
@@ -35358,7 +35593,7 @@
             },
             "target_href": "/zh/career/jobs/light-truck-drivers",
             "target_slug": "light-truck-drivers",
-            "target_title": "轻型卡车司机：与本职业在纯配送上的差异",
+            "target_title": "轻型卡车司机：主要取送货的职责差异",
             "transition_distance": {
               "$item": "actors.display.market_signal_card.transitions.teacher.distance",
               "block": "market-signals",
@@ -37062,6 +37297,148 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "38,770美元/年；18.64美元/时（2025中位）",
+        "fact_id": "r5-current-median",
+        "market": "美国",
+        "measure": "受雇工资分位",
+        "occupation_scope": "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。",
+        "period": "2025",
+        "source_refs": [
+          "r5-wages",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "22,590美元/年；10.86美元/时（2025第10分位）",
+        "fact_id": "r5-current-low",
+        "market": "美国",
+        "measure": "受雇工资分位",
+        "occupation_scope": "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。",
+        "period": "2025",
+        "source_refs": [
+          "r5-wages",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "59,980美元/年；28.84美元/时（2025第90分位）",
+        "fact_id": "r5-current-high",
+        "market": "美国",
+        "measure": "受雇工资分位",
+        "occupation_scope": "美国53-3031精确职业2025全国10/25/50/75/90分位年22,590/30,200/38,770/49,000/59,980美元，时10.86/14.52/18.64/23.56/28.84美元，正确原数字保留。OEWS受雇直时税前工资含适用小费、佣金/提成、生产奖金等，排自雇、加班溢价、轮班差额和非生产奖金等；不能一概排提成制、外包或派遣雇员及所有绩效补贴。分位不是起薪/工龄等级/个人上限；未采路线密度/销量对分位的因果估计。",
+        "period": "2025",
+        "source_refs": [
+          "r5-wages",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025就业442.9千人",
+        "fact_id": "r5-current-employment",
+        "market": "美国",
+        "measure": "就业存量",
+        "occupation_scope": "BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025—2035增长7.9%；净增35.2千人",
+        "fact_id": "r5-current-growth",
+        "market": "美国",
+        "measure": "预测变化",
+        "occupation_scope": "BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025—2035年均空缺约45,500（含更替）",
+        "fact_id": "r5-current-openings",
+        "market": "美国",
+        "measure": "年均空缺",
+        "occupation_scope": "BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "美国53-3031.00定义沿既定路线/区域驾驶车辆销售或配送商品、收取或递送商业洗涤等，接单、收款、上货为可能职责，不能说每人必须所有任务。11任务6Core/5Supplemental：驾驶配送83、向熟客介绍新产品/服务及价格77、每日记录76、聆听解决投诉75、收款找零和客户凭据记录74、维护卡车/食品分发设备及清洁74为Core；促销陈列79、售货机收币补货撤旧78、按公司规则订单及销售合同67、核客户/交付清单装车63、出售特色食品重要性未提供为Supplemental。维修与清洁可在本职职责中，重大维修/处置权限须另核；冷链、批号保质期适用于实际食品而非所有货物。",
+        "fact_id": "r5-current-identity",
+        "market": "美国",
+        "measure": "任务与边界",
+        "occupation_scope": "美国53-3031.00定义沿既定路线/区域驾驶车辆销售或配送商品、收取或递送商业洗涤等，接单、收款、上货为可能职责，不能说每人必须所有任务。11任务6Core/5Supplemental：驾驶配送83、向熟客介绍新产品/服务及价格77、每日记录76、聆听解决投诉75、收款找零和客户凭据记录74、维护卡车/食品分发设备及清洁74为Core；促销陈列79、售货机收币补货撤旧78、按公司规则订单及销售合同67、核客户/交付清单装车63、出售特色食品重要性未提供为Supplemental。维修与清洁可在本职职责中，重大维修/处置权限须另核；冷链、批号保质期适用于实际食品而非所有货物。",
+        "period": "2026页面",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET2025本职业行业就业份额住宿餐饮40%、批发25%；OOH更细食品服务及饮料场所39%、批发25%、零售9%、运输仓储6%，自雇取整7%与精细7.3%区分。这些是本职业就业分布，不是工资。OOH本职业2025行业年薪中位：批发49,090、运输仓储45,690、零售36,640、食品服务饮料30,580美元；只适用该职业在该行业受雇工资，不替中国或个人报价。",
+        "fact_id": "r5-current-industry-theater",
+        "market": "美国",
+        "measure": "行业份额/行业职业工资分开",
+        "occupation_scope": "O*NET2025本职业行业就业份额住宿餐饮40%、批发25%；OOH更细食品服务及饮料场所39%、批发25%、零售9%、运输仓储6%，自雇取整7%与精细7.3%区分。这些是本职业就业分布，不是工资。OOH本职业2025行业年薪中位：批发49,090、运输仓储45,690、零售36,640、食品服务饮料30,580美元；只适用该职业在该行业受雇工资，不替中国或个人报价。",
+        "period": "2025",
+        "source_refs": [
+          "onet",
+          "bls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "美国57项情境实际读：户外各种天气每天100%、期限每天92%、冷热每天82%/每周但非每天18%、面对面每天77%/每周但非每天18%；典型周超40小时81%/40小时14%，规律82%/不规律18%。持续用手76%、重复动作64%、弯腰扭身59%，封闭车每天78%/从不22%；决策自由很大43%/一些14%/没有14%，每日决策39%，污染物每天40%。不愉快愤怒人员每天19%/每周但非每天18%，冲突每周但非每天26%/每年但非每月15%/从不17%；暴力人员每年但非每月18%/从不82%，不是天天人身攻击。错误极严重32%/严重19%/完全不严重12%，竞争极度21%。电话/邮件/持续接触/团队/自动化等本次反馈未给比例，不填0、不推GenAI采用率或个体事故率。",
+        "fact_id": "r5-current-industry-education",
+        "market": "美国",
+        "measure": "情境非行业工资",
+        "occupation_scope": "美国57项情境实际读：户外各种天气每天100%、期限每天92%、冷热每天82%/每周但非每天18%、面对面每天77%/每周但非每天18%；典型周超40小时81%/40小时14%，规律82%/不规律18%。持续用手76%、重复动作64%、弯腰扭身59%，封闭车每天78%/从不22%；决策自由很大43%/一些14%/没有14%，每日决策39%，污染物每天40%。不愉快愤怒人员每天19%/每周但非每天18%，冲突每周但非每天26%/每年但非每月15%/从不17%；暴力人员每年但非每月18%/从不82%，不是天天人身攻击。错误极严重32%/严重19%/完全不严重12%，竞争极度21%。电话/邮件/持续接触/团队/自动化等本次反馈未给比例，不填0、不推GenAI采用率或个体事故率。",
+        "period": "2026页面",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。 BLS53-3031精确行2025就业442.9千人→2035预计478.1千人，净增35.2千人，增长7.9%；2025—2035年均空缺45.5千人约45,500（含增长与更替），不是十年合计或年净增。自雇7.3%，就业含自雇、OEWS工资不含自雇。O*NET类别7%或更高、OOH精确行取整8%，精细7.9%优先；OOH总体7%/年均152700是司机兼销售+轻卡合并，不当本职业数。美国预测不代表中国需求、某路线或个人录用，也非AI因果。",
+        "fact_id": "r5-current-industry-amusement",
+        "market": "美国",
+        "measure": "教育与自雇",
+        "occupation_scope": "O*NET教育反馈仅定性：部分新入职工作要求高中或同等，部分低于高中；不编造百分比。Job Zone1—2/SVP<6为准备组、在岗训练数天至一年，不等每个岗位同课程。BLS本职业典型高中或同等、相关经验None、短期在岗训练；OOH合并职业叙述1个月或以下训练、须工作州驾驶证和良好驾驶记录，具体州/车型条件未逐一核。None不是免训练，查询入口不能证明全国驾驶免照。",
+        "period": "2025/2026",
+        "source_refs": [
+          "onet",
+          "r5-bls-projections",
+          "bls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "国家统计局2025城镇单位工资：交通运输仓储邮政非私营133981/私营73133元、批发零售135749/69622元、住宿餐饮62461/55123元，税前年平均，仅匹配可能行业背景，不是司机兼销售员职业中位/分位/月薪。5人以上法人就业统计排个体/自由职业等，不全排提成、项目、外包、派遣雇员。证据不足：未取得中国精确全国职业工资及真实薪酬样本，不能称全国从未发布、普遍补贴扣款或旺季必加薪。扣款是否合法须按实际法律合同核，不由页面授权。 《道路运输从业人员管理规定》2026第4号第四次修正2026-03-20施行，2/6条列经营性客货驾驶员及危险货物等资格对象；10条经营性货运相应驾驶证、年龄不超过63、相关知识/考试证，非所有机动车驾驶证统一63。29条资格证有效6年、届满30日前换，32条超过63等注销。38条适用驾驶员不得超限超载、连续驾驶超过4小时、超速疲劳；46条客运证缺失/失效伪造变造/越范围200—2000元、货运同情形200元，危险货物另47条5—10万元，不机械按普通货运罚。52条总质量4500千克及以下普通货运车辆驾驶人员不适用本规定，不等免机动车驾驶证、危险货运或食品义务。非经营性活动不能由此规章称免全部资格，出租汽车适用专门规则本轮未穷尽核，不称完全不涉及。 道路运输条例2026-01-30第六次修订：2条范围为运输经营及相关业务；21/22货运车辆/安全管理及驾驶证、主管部门年龄和知识考试（4500千克及以下普通货运例外）；24条同类普通货运经营无需该条经营许可证及车辆营运证，是经营/车辆手续不是个人驾驶许可。28条适用经营者教育与从业规程、连续驾驶不超4小时，30/31条车辆维护检测与经营者事故等应急预案。实际经营属性、总质量和货物类别须核，不能按司机兼销售名称决定。 道路交通安全法2021：19条相应驾驶证和准驾车型；21条出车前认真检查安全技术性能，不驾驶安全隐患车；22条过度疲劳等影响安全驾驶不得驾驶。70条事故立即停车保护现场、人伤立即抢救迅速報警；无伤事实成因无争议可即行撤离恢复交通协商，不撤须迅速報警，轻微财产损失事实清楚先撤再协商。73条公安交管部门制作事故认定书，本人/单位不自行发正式责任结论。一般投诉/货款差异和事故不能套同一停作业上报顺序；未采企业重启制度。 食品安全法2025修正政府正文：33条6项运输贮存装卸容器工具设备安全无害清洁、防污染、所需温湿条件且不与有毒有害同运；非食品经营者从事贮存运输装卸也适用该项。45条健康制度及接触直接入口食品人员每年健康检查证明，不是所有包装食品配送员统一健康证。44条经营企业培训/管理、主要负责人责任；47条经营条件不再符合须整改、潜在食品事故风险立即停食品经营并向县级以上所在地食安部门报告；63条不合标准或可能有害食品由相应生产/经营者停止、通知及依法召回，非配送员任意销毁权限。41条另有重点液态食品道路散装运输准运制度，仅该特定范围，具体目录/配套本轮未核，不泛化普通包裹。",
+        "fact_id": "r5-current-china-jiaojiang-featured-daily-2026",
+        "market": "中国大陆",
+        "measure": "工资缺口与法规对象",
+        "occupation_scope": "国家统计局2025城镇单位工资：交通运输仓储邮政非私营133981/私营73133元、批发零售135749/69622元、住宿餐饮62461/55123元，税前年平均，仅匹配可能行业背景，不是司机兼销售员职业中位/分位/月薪。5人以上法人就业统计排个体/自由职业等，不全排提成、项目、外包、派遣雇员。证据不足：未取得中国精确全国职业工资及真实薪酬样本，不能称全国从未发布、普遍补贴扣款或旺季必加薪。扣款是否合法须按实际法律合同核，不由页面授权。",
+        "period": "2025/2026",
+        "source_refs": [
+          "nbs",
+          "r5-road",
+          "r5-road-regulation",
+          "r5-traffic",
+          "r5-food"
+        ]
       }
     ]
   },
@@ -37070,7 +37447,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "路线配送与销售 · 交付与收款 · 车辆与食品安全",
@@ -37121,7 +37498,7 @@
       "text": "司机兼销售员"
     }
   },
-  "source_content_sha256": "cdf23668ab6df8ff6a1583bbcc61ffd92b01dfbf2a3e184e04b1495610754471",
+  "source_content_sha256": "dafb195b663ade76524e04d23b689640858ca27e74442d7e742cf007fcd7e7c5",
   "subject": {
     "canonical_slug": "driver-sales-workers",
     "name": "司机兼销售员",

@@ -7268,7 +7268,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "证据不足：查阅NBS2025行业工资和中国法官法制度条文，未建立中国大陆法官全国职业工资分布、分学历/地区工资及全国职业就业预测；行业均值、美国数据和一条遴选名额不代填。本页是美国23-1023.00法院法官、裁判官与治安法官，在法庭内依法主持及裁判；不混入23-1021行政听证职业。工作闭环从核管辖和程序，经审材料、研究法律到说明理由、送达及记录；中文名称不建立中美资格等同。"
+              "证据不足：查阅NBS2025行业工资和中国法官法制度条文，未建立中国大陆法官全国职业工资分布、分学历/地区工资及全国职业就业预测；行业均值、美国数据和一条遴选名额不代填。本页是美国23-1023.00法院法官、裁判官与治安法官，在法庭内依法主持及裁判；不混入23-1021行政听证职业。工作闭环从核管辖和程序，经审材料、研究法律到说明理由、送达及记录；中文名称不建立中美资格等同。当前美国全国工资：2025年中位153,990美元/年；2025就业25,300人，2025—2035增长3%、年均空缺800个（总体预测，非AI归因）。中国精确职业工资缺口保留，行业均值只作宽参考。"
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.profile.definition-block.1",
@@ -7357,7 +7357,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入｜O*NET法院职业兴趣E71、C52、S49（I47），代码ECS；2024就业27,300人，2024—2034增长分类3%—4%、年均空缺900个；2024政府行业分布100%。这些不同指标不互相替代。美国法院法官入口按联邦、州及地方分开：Article III相关法官经总统提名、参议院确认，宪法无具体统一资格；联邦magistrate由地区法院在职法官多数票任用，全职任期八年。州和地方另核。Job Zone第五级是跨职业准备分类，不是本职业统一PhD/MD/JD或五年律师门槛。"
+              "研究输入｜O*NET法院23-1023.00、ECS兴趣只表活动偏好。当前2025就业25,300人、2025—2035增长分类3%—4%、年均空缺800个；BLS法院组件精确增长3%，组合空缺1,300另属两职业。美国Article III与联邦magistrate任用不同，州和地方单核；Job Zone不是统一博士或律师年限门槛。"
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.profile.onet-structured-fields-block.7",
@@ -7680,7 +7680,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业范围｜本页的中国侧结论只限中国大陆市场与当前统计口径；中国司法人员的选任、等级与职业保障制度由《法官法》等法律与主管机关规定，属于制度与资格边界，不提供职业工资数值。"
+              "宽口径参考｜NBS表2的2025城镇非私营公共管理、社会保障和社会组织行业平均年工资119,465元；表5无私营对应项。它不是法官工资、等级待遇或个人报价。依据：https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html。职业精确分布缺口保持。"
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.china-salary.career-snapshot-primary-locale.2",
@@ -7731,12 +7731,9 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国工资｜2025年5月，BLS OOH中的法院法官等组件，非包含行政听证的组合。"
+              "美国薪资参考｜O*NET 23-1023.00 国家工资页，2025年BLS OEWS，美国全国精确职业口径；2026-10-11核对。"
             ]
           },
-          "fact_refs": [
-            "us-wage-median"
-          ],
           "id": "judges-magistrate-judges-and-magistrates.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
             "bls-ooh-judges"
@@ -7748,14 +7745,9 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得该精确职业25、75分位；O*NET工资入口抓取失败。美国2025年5月法院法官等年工资中位153,990美元；最低10%低于46,950、最高10%高于221,710美元。采用BLS OOH直接文本，不把阈值写成已取得的完整分位表。"
+              "美国2025年工资｜第10/25/50/75/90百分位年工资分别为 46,950 / 85,710 / 153,990 / 194,950 / 221,710 美元，中位数为153,990美元/年。百分位不是最低工资或经验等级；数据不等于个人到手收入。"
             ]
           },
-          "fact_refs": [
-            "us-wage-median",
-            "us-wage-p10",
-            "us-wage-p90"
-          ],
           "id": "judges-magistrate-judges-and-magistrates.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
             "bls-ooh-judges"
@@ -7767,7 +7759,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资定义｜OEWS常规税前工资包含符合定义的佣金、激励工资和生产奖金；排除非生产奖金、加班溢价、利润分享及雇主福利成本。年薪不是起薪、到手收入、全部报酬或个人报价。"
+              "薪资口径｜OEWS统计受雇者正常工时税前工资，包含佣金与生产奖金，排除加班溢价、非生产奖金及雇主福利成本，不覆盖自雇收入；分位不是起薪。方法依据：https://www.bls.gov/oes/current/oes_tec.htm。"
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.us-salary.career-snapshot-secondary-locale.3",
@@ -7784,9 +7776,6 @@
               "解读说明｜该口径可用于理解本职业的工资分布与需求方向，不能作为个人报价，也不能与中国大陆或任何其他市场直接比较；美国法官的选任与薪酬由各法域制度决定，统计分位不代表具体法域或具体审级的待遇。"
             ]
           },
-          "fact_refs": [
-            "us-wage-median"
-          ],
           "id": "judges-magistrate-judges-and-magistrates.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
             "bls-ooh-judges",
@@ -7799,7 +7788,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业口径｜O*NET2024政府分布100%不是工资；BLS2025年法院法官等州政府中位176,500美元/年、地方政府102,460美元/年，均排除教育与医院。不能平均作全国中位，不补未知联邦行业数值。"
+              "行业口径｜O*NET当前2025政府分布100%为就业占比；BLS2025法院组件州政府年工资中位176,500美元、地方政府102,460美元（排除教育和医院）保持。未取得联邦法院行业工资，不用行政法官组件代填。"
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.us-salary.career-snapshot-secondary-locale.5",
@@ -8070,7 +8059,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "法域要求｜中国2019法官法第12条规定学历、法律工作及初任法律资格等条件；法学本科及法学学位，或符合规定的非法学本科及相应法律学位/法律专业知识等路径分别核。法律工作通常五年，法律或法学硕士四年、法学博士三年；初任需依法考试考核选任，资格不等于任命。美国：美国法院法官入口按联邦、州及地方分开：Article III相关法官经总统提名、参议院确认，宪法无具体统一资格；联邦magistrate由地区法院在职法官多数票任用，全职任期八年。州和地方另核。Job Zone第五级是跨职业准备分类，不是本职业统一PhD/MD/JD或五年律师门槛。中国在任法官不得兼任律师、仲裁员或公证员；相邻方向比较不是违规兼职建议。"
+              "法域要求｜中国2019法官法第12条规定学历、法律工作及初任法律资格等条件；普通高等学校法学类本科学历并获得学士及以上学位，或符合规定的非法学本科及相应法律学位/法律专业知识等路径分别核。法律工作通常五年，法律或法学硕士四年、法学博士三年；初任需依法考试考核选任，资格不等于任命。美国：美国法院法官入口按联邦、州及地方分开：Article III相关法官经总统提名、参议院确认，宪法无具体统一资格；联邦magistrate由地区法院在职法官多数票任用，全职任期八年。州和地方另核。Job Zone第五级是跨职业准备分类，不是本职业统一PhD/MD/JD或五年律师门槛。中国在任法官不得兼任律师、仲裁员或公证员；相邻方向比较不是违规兼职建议。"
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.path.career-path-block.3",
@@ -8183,7 +8172,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "市场信号｜O*NET精确法院职业2024就业27,300、2024—2034增长3%—4%、年均空缺900；BLS OOH新期法院组件2025就业25,300→2035预计26,000、增长3%。基期不同不相减，不将组合1,300空缺套法院。中国全国需求本轮未建立；甘肃2026公告仅历史遴选样本。"
+              "美国总体就业预测，非AI归因｜O*NET 23-1023.00：2025年就业25,300人，2025—2035增长3%，预计年均空缺800个（含增长与替补）。证据不足：中国该职业全国就业预测及规范招聘样本未取得，不能转换个人录用概率。"
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.market-signals.market-signal-card.2",
@@ -8200,7 +8189,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业展望（O*NET 呈现的 BLS 口径，2024—2034）：增长 3%—4%、预计年均空缺约 900 个；空缺含增长与替换需求，不等于净新增岗位，也不构成个人任职保证。"
+              "美国总体就业预测，非AI归因｜O*NET 23-1023.00：2025年就业25,300人，2025—2035增长3%，预计年均空缺800个（含增长与替补）。证据不足：中国该职业全国就业预测及规范招聘样本未取得，不能转换个人录用概率。"
             ]
           },
           "id": "judges-magistrate-judges-and-magistrates.market-signals.market-signal-card.3",
@@ -9602,7 +9591,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "AI 可辅助记录整理与信息汇总，但不能替代授权判断和最终责任。"
+          "编辑建议：只用全虚构材料试验整理、摘要及复算；是否采用须核机关许可并回核原文。没有本页提效实测，裁判及责任由审判人员承担。"
         ],
         "heading": "法官的工作对象与 AI 边界"
       },
@@ -10352,7 +10341,7 @@
         "authority_sources": {
           "$join": [
             {
-              "$source": "bls-ooh-judges",
+              "$source": "source-pack-onet-localwages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10360,7 +10349,7 @@
             },
             "｜",
             {
-              "$source": "bls-ooh-judges",
+              "$source": "source-pack-onet-localwages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10371,22 +10360,12 @@
         },
         "bls_table": [
           {
-            "指标": "薪资 · 最低10%边界",
-            "数值": "低于46,950美元/年",
-            "说明": "BLS OOH 2025法院组件直接文本，阈值不是起薪。"
-          },
-          {
-            "指标": "薪资 · 25 分位",
-            "数值": "暂无安全数值",
-            "说明": "证据不足：本轮未取得该精确职业25、75分位；O*NET工资入口抓取失败。"
-          },
-          {
-            "指标": "薪资 · 中位数",
-            "数值": "153,990 美元/年（中位数）",
+            "指标": "薪资 · 10 分位",
+            "数值": "46,950 美元/年",
             "说明": {
               "$join": [
                 {
-                  "$source": "bls-ooh-judges",
+                  "$source": "source-pack-onet-localwages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10394,15 +10373,23 @@
                 },
                 "｜",
                 {
-                  "$source": "bls-ooh-judges",
+                  "$source": "source-pack-onet-localwages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
                   "item": "judges-magistrate-judges-and-magistrates.source-register.published.1"
-                },
-                "；",
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "薪资 · 25 分位",
+            "数值": "85,710 美元/年",
+            "说明": {
+              "$join": [
                 {
-                  "$source": "bls-oews-methods",
+                  "$source": "source-pack-onet-localwages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10410,7 +10397,31 @@
                 },
                 "｜",
                 {
-                  "$source": "bls-oews-methods",
+                  "$source": "source-pack-onet-localwages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "judges-magistrate-judges-and-magistrates.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "薪资 · 中位数",
+            "数值": "153,990 美元/年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "source-pack-onet-localwages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "judges-magistrate-judges-and-magistrates.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "source-pack-onet-localwages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10422,28 +10433,66 @@
           },
           {
             "指标": "薪资 · 75 分位",
-            "数值": "暂无安全数值",
-            "说明": "证据不足：本轮未取得该精确职业25、75分位；O*NET工资入口抓取失败。"
+            "数值": "194,950 美元/年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "source-pack-onet-localwages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "judges-magistrate-judges-and-magistrates.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "source-pack-onet-localwages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "judges-magistrate-judges-and-magistrates.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
           },
           {
-            "指标": "薪资 · 最高10%边界",
-            "数值": "高于221,710美元/年",
-            "说明": "BLS OOH 2025法院组件直接文本，阈值不是起薪。"
+            "指标": "薪资 · 90 分位",
+            "数值": "221,710 美元/年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "source-pack-onet-localwages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "judges-magistrate-judges-and-magistrates.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "source-pack-onet-localwages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "judges-magistrate-judges-and-magistrates.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
           },
           {
             "指标": "就业 · 规模",
-            "数值": "约 27,300 人（2024 年）",
-            "说明": "美国法院精确职业的2024基期与2024—2034预测；不同于BLS新期，空缺非净新增。"
+            "数值": "25,300 人（2025，美国）",
+            "说明": "美国精确职业总体就业预测，非AI归因；不代表实时招聘样本或个人录用概率。"
           },
           {
             "指标": "就业 · 增长",
-            "数值": "3%—4%（2024—2034）",
-            "说明": "美国法院精确职业的2024基期与2024—2034预测；不同于BLS新期，空缺非净新增。"
+            "数值": "3%（2025—2035）",
+            "说明": "美国精确职业总体就业预测，非AI归因；不代表实时招聘样本或个人录用概率。"
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "约 900 个/年（2024—2034）",
-            "说明": "美国法院精确职业的2024基期与2024—2034预测；不同于BLS新期，空缺非净新增。"
+            "数值": "800 个/年（2025—2035，含增长与替补）",
+            "说明": "美国精确职业总体就业预测，非AI归因；不代表实时招聘样本或个人录用概率。"
           }
         ],
         "boundary": "美国精确职业与组合或更宽组口径必须分开；具体统计范围以来源标注为准，未取得的分位不等于零。",
@@ -10473,7 +10522,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "3%—4%（2024—2034，精确职业口径）",
+        "growth": "3%（2025—2035，总体就业预测，非AI归因）",
         "heading": {
           "$item": "judges-magistrate-judges-and-magistrates.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10534,9 +10583,9 @@
             "question": "能否跨市场比较？"
           }
         ],
-        "median": "153,990 美元/年（2025 年 5 月，精确职业口径）",
+        "median": "153,990 美元/年（2025，美国精确职业）",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "O*NET2024就业、2024—2034预测；BLS2025—2035另列",
+        "outlook_period": "2025基期 / 2025—2035预测；2026-10-11核对",
         "wage_column_labels": [
           "分位",
           "年度参考",
@@ -10552,21 +10601,21 @@
         "wage_tiers": [
           {
             "equivalent": "保留官方年薪单位，不作个人时薪折算",
-            "interpretation": "统计位置，不是起薪或个人实发收入。",
-            "label": "最低10%边界",
-            "value": "低于46,950美元/年"
+            "interpretation": "2025美国全国工资分位，不等于个人报价或经验等级。",
+            "label": "第10百分位",
+            "value": "46,950 美元/年"
           },
           {
             "equivalent": "O*NET呈现74.03美元/小时；不是实际每周工时推断",
-            "interpretation": "统计位置，不是起薪或个人实发收入。",
+            "interpretation": "2025美国全国工资分位，不等于个人报价或经验等级。",
             "label": "中位数",
-            "value": "153,990 美元/年（中位数）"
+            "value": "153,990 美元/年"
           },
           {
             "equivalent": "保留官方年薪单位，不作个人时薪折算",
-            "interpretation": "统计位置，不是起薪或个人实发收入。",
-            "label": "最高10%边界",
-            "value": "高于221,710美元/年"
+            "interpretation": "2025美国全国工资分位，不等于个人报价或经验等级。",
+            "label": "第90百分位",
+            "value": "221,710 美元/年"
           }
         ]
       },
@@ -10647,8 +10696,8 @@
         "outlook_evidence": [
           {
             "geography": "美国",
-            "horizon": "2024基期及2024—2034预测",
-            "interpretation": "900含增长及替换，不是净新增；BLS新期法院就业25,300→26,000、增长3%另列。",
+            "horizon": "2025基期、2025—2035预测",
+            "interpretation": "当前O*NET已同步新期，800为法院职业空缺；BLS组合1,300不是本职业。",
             "limitation": "不拼接基期或套组合空缺",
             "metric": "就业规模、增长及年均空缺",
             "occupation_scope": "法院23-1023.00",
@@ -10696,7 +10745,7 @@
               "field": "name",
               "item": "judges-magistrate-judges-and-magistrates.source-register.published.1"
             },
-            "scope": "2024精确法院展望"
+            "scope": "2025—2035精确法院法官职业展望"
           },
           {
             "href": {
@@ -11269,7 +11318,7 @@
             "item": "judges-magistrate-judges-and-magistrates.source-register.published.1"
           }
         },
-        "note": "来源说明｜精确美国法院职业23-1023.00，与23-1021行政听证分开；ECS和工作情境为美国职业资料。O*NET2024就业与2024—2034展望保留原期，BLS OOH2025工资/就业和2025—2035组件预测另列；工资入口未取得，当前用BLS直接中位与10%边界，25/75缺口保留。中国司法部法官法、最高法伦理及AI意见各支持对应制度，不证明全国工资或AI效果。美国法院FAQ及准则只按联邦类别适用。甘肃公告是报名已结束的既有员额法官遴选；T练习规则和输入全虚构，NIST/ILO不是法官采用或提效实测。"
+        "note": "2026-10-11作者核对｜O*NET 23-1023.00提供职业任务与准备背景，国家工资页的2025分位为46,950 / 85,710 / 153,990 / 194,950 / 221,710美元/年；就业为2025基期、2025—2035预测。NBS表2/5只支持中国公共管理、社会保障和社会组织行业平均年工资，不能替代本职业。AI分析是任务级编辑判断。共享登记、Hero和FAQ保留原口径，未宣称全页一致。"
       },
       "work_context_block": {
         "$item": "judges-magistrate-judges-and-magistrates.profile.work-context-block.5",
@@ -11391,7 +11440,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "法官 · 管辖、程序与伦理边界",
@@ -11442,7 +11491,7 @@
       "text": "法官职业判断：审判权、程序与边界"
     }
   },
-  "source_content_sha256": "7071392e53ea72cba97b640a9467e3dc4ecd9a438314b9761f88149a3c59aae3",
+  "source_content_sha256": "c4d10e504d8158df38a222a6a3183ca9aa8c949b251ba22ab24e6a95b30a88af",
   "subject": {
     "canonical_slug": "judges-magistrate-judges-and-magistrates",
     "name": "法官",

@@ -29518,7 +29518,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "岗位条件与建议核对证据",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -34987,7 +34987,7 @@
             },
             "evidence_refs": [
               "health",
-              "employer"
+              "onet"
             ],
             "id": "record-version",
             "mitigation": {
@@ -35989,7 +35989,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最低 10%",
+            "label": "第10百分位（P10）",
             "value": {
               "$fact": "us-wage-low10-2025",
               "field": "display_value"
@@ -36017,7 +36017,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最高 10%",
+            "label": "第90百分位（P90）",
             "value": {
               "$fact": "us-wage-high10-2025",
               "field": "display_value"
@@ -37924,7 +37924,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "肉品生产 · 分割加工 · 包装交接",
@@ -37975,7 +37975,7 @@
       "text": "屠宰与肉类包装工"
     }
   },
-  "source_content_sha256": "6e1db864e20e53fcf872f2e7f1eb82a6c668344b8274b88bc25b3cc089cdab25",
+  "source_content_sha256": "73bb538ef51e0ff3158300b31060edf8d52a9ca3034e7ab121bd29743a05a668",
   "subject": {
     "canonical_slug": "slaughterers-and-meat-packers",
     "name": "屠宰与肉类包装工",

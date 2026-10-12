@@ -5,13 +5,25 @@
       "fact:china-jiaojiang-featured-daily-2026": {
         "status": "mapped"
       },
+      "fact:china-jiaojiang-featured-daily-2026-g04-current": {
+        "status": "pending_mapping"
+      },
       "fact:employment": {
         "status": "mapped"
+      },
+      "fact:employment-g04-current": {
+        "status": "pending_mapping"
       },
       "fact:growth": {
         "status": "mapped"
       },
+      "fact:growth-g04-current": {
+        "status": "pending_mapping"
+      },
       "fact:high": {
+        "status": "pending_mapping"
+      },
+      "fact:high-g04-current": {
         "status": "pending_mapping"
       },
       "fact:identity": {
@@ -23,7 +35,16 @@
       "fact:industry-education": {
         "status": "pending_mapping"
       },
+      "fact:industry-education-g04-current": {
+        "status": "pending_mapping"
+      },
+      "fact:industry-state-g04-current": {
+        "status": "pending_mapping"
+      },
       "fact:industry-theater": {
+        "status": "pending_mapping"
+      },
+      "fact:industry-theater-g04-current": {
         "status": "pending_mapping"
       },
       "fact:low": {
@@ -34,6 +55,9 @@
       },
       "fact:openings": {
         "status": "mapped"
+      },
+      "fact:openings-g04-current": {
+        "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
@@ -9063,20 +9087,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.06.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            {
-              "id": "audition-feedback"
-            },
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.06.mitigation": {
         "ref": {
@@ -22781,7 +22793,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "高校刑事司法与执法教师的工作可以分成三类相连但独立的工作面。第一类是教学与课程设计：按培养目标编写或修订课程大纲与教学材料，备课并讲授刑法、执法与侦查技术、惩教与司法行政等课程，主持课堂讨论、组织案例与模拟演练，布置并批改作业、论文与试卷、登记成绩，并按学校要求维护出勤与教学档案。第二类是学术研究与写作：持续跟踪刑事司法与执法领域的新进展，阅读文献、与同行讨论并参加专业会议，在特定领域开展研究、撰写并在专业期刊或专著发表成果，编写参考文献与阅读材料，撰写项目申请书以争取外部研究经费，并可能面向政府部门或行业提供专业咨询。第三类是学生指导与校务协作：按固定时间接待学生、指导学业与职业发展、撰写推荐信，指导学生实习、助教与研究工作，参与学生招募与就业推荐，参加处理院校政策与系务的委员会，并可能承担系主任等行政职务或担任学生社团指导教师。三类工作面交替进行，但依据、责任与考核不同；研究型大学、教学型院校、社区学院与警务培训机构的侧重也不同。"
+              "高校刑事司法与执法教师的工作可以分成三类相连但独立的工作面。第一类是教学与课程设计：按培养目标编写或修订课程大纲与教学材料，备课并讲授刑法、执法与侦查技术、惩教与司法行政等课程，主持课堂讨论、组织案例与模拟演练，布置并批改作业、论文与试卷、登记成绩，并按学校要求维护出勤与教学档案。第二类是学术研究与写作：持续跟踪刑事司法与执法领域的新进展，阅读文献、与同行讨论并参加专业会议，在特定领域开展研究、撰写并在专业期刊或专著发表成果，编写参考文献与阅读材料，撰写项目申请书以争取外部研究经费，并可能面向政府部门或行业提供专业咨询。第三类是学生指导与校务协作：按固定时间接待学生、指导学业与职业发展、撰写推荐信，指导学生实习、助教与研究工作，参与学生招募与就业推荐，参加处理院校政策与系务的委员会，并可能承担系主任等行政职务或担任学生社团指导教师。三类工作面交替进行，但依据、责任与考核不同；研究型大学、教学型院校、社区学院与警务培训机构的侧重也不同。 三工作面为编辑组织，研究发表、经费申请、实习研究指导和社团为Supplemental，实际承担不一，不是每位教师固定流程。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.answer",
@@ -22851,7 +22863,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "跟踪领域进展 → 阅读文献与同行讨论 → 提出研究问题 → 开展研究 → 撰写并发表成果 → 申请研究经费"
+              "跟踪领域进展 → 阅读文献与同行讨论 → 提出研究问题 → 开展研究 → 撰写并发表成果 → 申请研究经费 三工作面为编辑组织，研究发表、经费申请、实习研究指导和社团为Supplemental，实际承担不一，不是每位教师固定流程。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.stage.steps",
@@ -22893,7 +22905,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "固定时间接待学生 → 指导学业与职业 → 撰写推荐信 → 指导实习与助教 → 参与招募与推荐 → 参与校务委员会"
+              "固定时间接待学生 → 指导学业与职业 → 撰写推荐信 → 指导实习与助教 → 参与招募与推荐 → 参与校务委员会 三工作面为编辑组织，研究发表、经费申请、实习研究指导和社团为Supplemental，实际承担不一，不是每位教师固定流程。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.shared.value",
@@ -23122,7 +23134,8 @@
           },
           "id": "actors.display.career_quick_answers_block.comparison.responsibility.primary",
           "source_refs": [
-            "onet"
+            "onet",
+            "g04-higher-ed"
           ],
           "type": "prose"
         },
@@ -23159,7 +23172,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "与院系同事、教学委员会、教务与学术管理部门按权限提交与复核；与实习与合作单位协调指导；遇到课程内容争议、学术诚信问题、学生记录风险或利益冲突时停止自行处置并按制度升级并保留记录。"
+              "与院系同事、教学委员会、教务与学术管理部门按权限提交与复核；与实习与合作单位协调指导；遇到课程内容争议、学术诚信问题、学生记录风险或利益冲突时按实际事项、角色权限与院校程序核对、报送并保留记录。 普通争议不自动授权全面中止或恢复教学工作。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.cooperation.primary",
@@ -23257,7 +23270,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "要确认讲授的刑事司法与执法知识有可靠依据、与课程大纲和培养目标一致，并区分通行观点与争议观点；内容失准会误导学生并影响专业判断。"
+              "编辑风险推演：要确认讲授的刑事司法与执法知识有可靠依据、与课程大纲和培养目标一致，并区分通行观点与争议观点；内容失准可能误导学生并影响专业判断。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.01.question",
@@ -23285,7 +23298,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "作业、论文与考试的评分标准要事先明确并一致适用，成绩与出勤记录要完整可追溯；评价尺度不一或记录缺失会引发争议并损害学业公正。"
+              "编辑风险推演：作业、论文与考试的评分标准要事先明确并一致适用，成绩与出勤记录要完整可追溯；评价尺度不一或记录缺失可能引发争议并损害学业公正。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.03.question",
@@ -23327,12 +23340,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "引用与数据处理要如实标注来源，不夸大结论、不重复发表或不当署名；学术诚信问题会直接影响职业信誉与机构责任。"
+              "编辑风险推演：引用与数据处理要如实标注来源，不夸大结论、不重复发表或不当署名；学术诚信问题可能影响职业信誉与机构责任。 学术不端认定与责任按事实、科研相关适用范围、学校调查程序及权限核，不将疑点或普通评分争议自动认定。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.05.question",
           "source_refs": [
-            "onet"
+            "g04-misconduct"
           ],
           "type": "prose"
         },
@@ -23355,7 +23368,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "遇到课程内容争议、学生学术诚信问题、学生记录与隐私风险，或校外咨询等利益冲突时，要停止自行处置，按院校制度与学术程序升级并保留记录。"
+              "遇到课程内容争议、学生学术诚信问题、学生记录与隐私风险，或校外咨询等利益冲突时，要依真实角色权限按院校制度核对、报送并保留必要记录。 普通争议不自动授权全面中止或恢复教学工作。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.06.question",
@@ -23411,7 +23424,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "学生指导｜指导学业与职业发展｜按固定时间接待学生，指导学业与职业发展、撰写推荐信，指导学生社团，并参与学生招募、注册与就业推荐活动。"
+              "固定办公时间、学业职业指导、推荐信及招生注册就业推荐为Core；学生社团指导为Supplemental，实际承担按单位核。"
             ]
           },
           "id": "actors.display.responsibilities_block.04",
@@ -23425,7 +23438,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "研究与写作｜开展研究并发表成果｜持续跟踪领域进展，阅读文献并与同行讨论、参加专业会议，在特定领域开展研究、撰写并在专业期刊或专著发表成果，撰写项目申请书争取外部研究经费。"
+              "跟踪领域进展属于Core；独立研究发表与经费申请为Supplemental，是否作为考核及其比例按岗位真实安排核对，不推全体教师统一科研指标。"
             ]
           },
           "id": "actors.display.responsibilities_block.05",
@@ -23481,7 +23494,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作场所｜O*NET 2026 年对高校刑事司法与执法教师（25-1111.00）的调查：95% 把「环境可控的室内作业」记为最高频回答；工作以高校院系、教室、办公室与实验室为主，部分岗位在警务、司法或培训机构授课。"
+              "美国当前O*NET回答：95%每天在环境可控室内工作；高校教室、办公室等是编辑场景，不把2026页面更新当统一调查年份。"
             ]
           },
           "id": "actors.display.work_context_block.locations",
@@ -23495,12 +23508,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "主要对象与设备｜课程大纲与教学材料、教材与文献数据库、学生作业与考试材料、成绩与出勤记录系统、教学平台与学习管理系统（O*NET 技术档案列出学习管理系统、办公与演示软件、电子表格与文字处理、文献检索与查重工具等技术关键词）；对象与工具清单来自本职业任务与技术档案，不是采购或授权建议。"
+              "2025年1月1日至12月31日美国Lightcast招聘关键词：Office5%、Excel2%、PowerPoint1%；Google Docs、Access、Outlook、Word没有披露数值，非0。技术目录另列Blackboard Learn、Sakai、Turnitin、DOC Cop、NCIC等；目录不等热门招聘比例，查重工具不等文献检索或学术不端认定。"
             ]
           },
           "id": "actors.display.work_context_block.materials",
           "source_refs": [
-            "onet"
+            "onet",
+            "g04-hot"
           ],
           "type": "prose"
         },
@@ -23509,7 +23523,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "再布置与批改作业、登记成绩并维护教学档案，按固定时间接待并指导学生在学业与职业方面的疑问；研究与写作按提出问题、阅读文献、开展研究与撰写发表的路径推进，并按需参与院校委员会与专业服务；遇到内容争议、学术诚信问题或利益冲突时停止自行处置并按制度升级；交接前整理课程与学生记录。"
+              "再布置与批改作业、登记成绩并维护教学档案，按固定时间接待并指导学生在学业与职业方面的疑问；研究与写作按提出问题、阅读文献、开展研究与撰写发表的路径推进，并按需参与院校委员会与专业服务；遇到内容争议、学术诚信问题或利益冲突时按实际事项、角色权限与院校程序核对、报送；交接前整理课程与学生记录。 普通争议不自动授权全面中止或恢复教学工作。"
             ]
           },
           "id": "actors.display.work_context_block.organization",
@@ -23523,7 +23537,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "节奏与强度｜O*NET 2026 年对高校刑事司法与执法教师（25-1111.00）的调查：87% 表示工作时间表为固定常规安排，65% 表示每周超过 40 小时，59% 把「坐着」记为约一半时间，46% 表示每天有公开演讲、22% 把「时间压力」记为每天出现、35% 记为每周一次以上；学期、考试与申报节点决定忙季。"
+              "当前美国工作情境回答：邮件97%、面对面讨论63%、电话53%、可控室内95%、公开演讲46%每日；持续接触55%；外部客户公众59%极重要；决策影响58%很重要、决策频率51%每日、协调带领37%极重要、准确35%极重要。常规安排87%，每周>40小时65%，坐着约一半时间59%。时间压力22%每日、35%每周但非每日、38%每月但非每周；重复任务15%极重要/33%很重要；竞争27%高度/17%极度。当前页面更新时间不等统一调查年，不外推中国，也不等疾病发生率。 学期考试申报的具体峰值须目标单位核，不是该响应数据测得。"
             ]
           },
           "id": "actors.display.work_context_block.schedule",
@@ -23537,7 +23551,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "并向院系与学生提交评价与指导记录；O*NET 2026 年对高校刑事司法与执法教师（25-1111.00）的调查：97% 把电子邮件、63% 把面对面讨论、53% 把电话沟通记为最高频回答，55% 表示持续与他人接触、59% 把对校外客户或公众的接触（含合作单位与招生）记为最高重要度。"
+              "按真实权限向院系和学生沟通；邮件97%、面对面讨论63%、电话53%为每日响应，持续接触55%，外部客户或公众59%答极重要；统计没有把该项细分成招生或合作单位。"
             ]
           },
           "id": "actors.display.work_context_block.collaboration",
@@ -23551,7 +23565,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "复核与责任链条｜O*NET 2026 年对高校刑事司法与执法教师（25-1111.00）的调查：58% 把决策对同事或机构结果的影响记为非常重要、51% 表示每天作出影响工作的决策、37% 把协调或带领他人记为极其重要、35% 把准确与严谨记为最高重要度；课程内容、评价标准与成绩记录按院校制度留痕，学术诚信与利益冲突事项须按程序处理并存档。"
+              "复核责任链：当前美国响应58%决策影响很重要、51%每日作出相关决定、37%协调带领极重要、35%准确极重要；页面更新非统一调查年。教师、学校与学术委员会各依实际权限，不把响应分档当法律授权。"
             ]
           },
           "id": "actors.display.work_context_block.review",
@@ -23565,7 +23579,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "质量与职业要求｜O*NET 2026 年对高校刑事司法与执法教师（25-1111.00）的调查：13% 把「错误的后果」记为严重、27% 记为较严重、42% 记为不严重，17% 把重复同一任务记为极其重要、33% 记为非常重要，28% 把竞争程度记为高度竞争、17% 记为极其竞争；涉及学术诚信、成绩登记与学生隐私、课程内容合规与校外咨询边界时，以院校制度与适用规定为准，本页不构成聘任、资格或法律意见。"
+              "当前美国工作情境回答：邮件97%、面对面讨论63%、电话53%、可控室内95%、公开演讲46%每日；持续接触55%；外部客户公众59%极重要；决策影响58%很重要、决策频率51%每日、协调带领37%极重要、准确35%极重要。常规安排87%，每周>40小时65%，坐着约一半时间59%。时间压力22%每日、35%每周但非每日、38%每月但非每周；重复任务15%极重要/33%很重要；竞争27%高度/17%极度。当前页面更新时间不等统一调查年，不外推中国，也不等疾病发生率。 学术、成绩和信息处理责任分别按适用规则和实际角色核。"
             ]
           },
           "id": "actors.display.work_context_block.quality",
@@ -23607,7 +23621,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2024 年就业约 16,200 人、预测标签 Slower than average（增长 1% 至 2%）与 Job Zone Five（SVP 8.0 及以上）"
+              "美国25-1111.00当前BLS2025—2035预测：2025就业15,700人，2035预测15,900人，增长2%（Slower than average标签1%—2%），年均1,100个含增长与替换的空缺；非每年净增或个人录用概率。 美国本岗新聘教育回答仅显示39%硕士、26%博士、11%中等后教育证书，未显示余项不补零；Job Zone Five/SVP8及以上是通用准备层级，不把其法律学位等例子当本岗规定学位，也不推出统一培训年限或中国条件。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
@@ -23621,7 +23635,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2024 年行业分布（教育服务 98%、其他行业 2%）与教育需求反馈（硕士 39%、博士 26%、中等后教育证书 11%）"
+              "2025美国本岗行业就业：教育服务99%、其他行业合计1%；行业就业占比不是工资、院校类型或中国岗位分布。 美国本岗新聘教育回答仅显示39%硕士、26%博士、11%中等后教育证书，未显示余项不补零；Job Zone Five/SVP8及以上是通用准备层级，不把其法律学位等例子当本岗规定学位，也不推出统一培训年限或中国条件。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
@@ -23635,12 +23649,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆高校教师岗与警务、司法培训机构教官岗的分类与用工语境，与中国职业级工资缺口"
+              "中国《高等教育法》46条规定高校教师资格：研究生或本科毕业且符合教学能力等条件；未达该学历者有规定的考试认定途径。47条规定高校教师职务及条件，48条聘任以合同明确权利义务。资格、职称职务、岗位聘任及培训分开，不能把资格一概写成录用后训练，也不能把全部岗位改为硕博硬门槛；非高校培训教官另核机构属性和适用规定。 中国职业级工资及一一分类对应未取得。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
           "source_refs": [
-            "onet"
+            "g04-higher-ed"
           ],
           "type": "prose"
         },
@@ -23654,7 +23668,7 @@
           },
           "id": "actors.display.onet_structured_fields_block.sag",
           "source_refs": [
-            "onet"
+            "g04-nbs"
           ],
           "type": "prose"
         },
@@ -23663,7 +23677,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "高校刑事司法与执法教师在美国对应 O*NET-SOC 25-1111.00（Criminal Justice and Law Enforcement Teachers, Postsecondary）。官方范围为：教授刑事司法、惩教与执法行政课程，既包括以教学为主的教师，也包括教学与科研并重的教师。工作内容包括编写与修订课程大纲与教学材料，备课并讲授刑法、执法与侦查技术等课程，主持课堂讨论并组织案例与模拟演练，布置并批改作业、论文与试卷、登记成绩与出勤，按固定时间接待并指导学生的学业与职业发展，与同事协作处理教学与研究议题，参与学生招募、注册与就业推荐，在特定领域开展研究并撰写、发表成果，指导本科与研究生教学、实习与研究，参加处理院校政策与系务的委员会，并可能担任行政职务或面向政府与行业提供专业咨询。中国侧，同类岗位为高校教师岗与警务、司法培训机构教官岗，中美两套分类不是一一对应：本页不把美国的准备层级、工资或资格套用到中国大陆，也不把院校行政管理者、其他学科教师、法学教师、社会工作教师或惩教官与法警的职责并入本职业。"
+              "高校刑事司法与执法教师对应美国O*NET-SOC25-1111.00，教授刑事司法、惩教和执法行政课程，包括教学为主及教学科研并重者。美国25-1111.00当前23任务分17Core、6Supplemental。Core包括讲授刑法、防御性警务与侦查技术，主持讨论、批改作业论文、编制评阅考试或委托他人、跟踪领域进展、成绩出勤记录、大纲讲义、课程修订、办公时间、学业职业指导、同事协作、招生注册就业推荐、教材用品、推荐信、校务委员会、阅读参考文献及校园社区活动。6Supplemental为研究发表、指导本科研究生教学实习研究、系主任等行政工作、学生社团、经费申请、政府行业咨询；不是所有岗位必做或统一科研考核。 中国高校教师与警务司法培训教官仅作工作对象比较，分类、权限、任职和工资不自动一一对应；行政管理者亦可能授课，教学岗位亦可能参与行政，须核实际主要职责。"
             ]
           },
           "id": "actors.display.definition_block.definition",
@@ -24141,7 +24155,7 @@
           },
           "id": "actors.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "r2-ai",
+            "onet",
             "nist"
           ],
           "type": "prose"
@@ -24166,7 +24180,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "指院校或培训机构是否真的把工具放进教学与科研流程。采用取决于预算、数据与考试安全要求、学术规范与评价制度以及教师培训，通常慢于技术能力本身。"
+              "组织采用取决于真实预算、考试及数据安全、院校规范和培训安排；本轮未取得本岗采用率或与技术发展速度的实测比较。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.3",
@@ -24181,7 +24195,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "引入工具时责任不能随系统一起转移；下面是本职业可执行的人工控制步骤。"
+              "以下人工复核与记录为编辑治理建议，具体权限和义务按法域、学校制度与角色落实。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.4",
@@ -24201,8 +24215,7 @@
           },
           "id": "actors.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag"
           ],
           "type": "prose"
         },
@@ -24211,7 +24224,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有可核对的本职业因果数据。技术能力、组织采用与编制数量是三个不同层次，本页不把其中任何一层写成结论。"
+              "本轮未取得本岗AI采用、效率、编制或工资因果数据，不推这些数据完全不存在。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.6",
@@ -24241,7 +24254,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "指编制数量与收入的实际变化，由招生规模与学科需求、公共安全与司法政策、院校经费结构以及工具采用共同决定；本页没有可核对的本职业单职业因果数据。"
+              "编制收入的实际变化需具体证据；编辑可核招生学科、政策经费与工具条件，本页未取得本岗因果数据，不称这些共同决定变化。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.8",
@@ -24256,13 +24269,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "列出雇主招聘与教学场景中提到的软件与其他技术关键词（如学习管理系统、办公与演示软件、电子表格与文字处理、文献检索与查重工具）。"
+              "2025年1月1日至12月31日美国Lightcast招聘关键词：Office5%、Excel2%、PowerPoint1%；Google Docs、Access、Outlook、Word没有披露数值，非0。技术目录另列Blackboard Learn、Sakai、Turnitin、DOC Cop、NCIC等；目录不等热门招聘比例，查重工具不等文献检索或学术不端认定。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.9",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "g04-hot"
           ],
           "type": "prose"
         },
@@ -24286,7 +24299,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答：目前可核对的是任务层面的变化，而不是岗位替代的时间表。文献检索与综述工具、教学平台与学习管理系统、讲义与题库草拟工具、写作与文字处理工具、查重与格式检查工具可减少资料检索、材料整理、讲义与题库草拟、作业初筛等重复工作；但课程内容判断与讲授、课堂讨论的组织与反馈、学生评价与成绩登记、学业与职业指导、研究方法与结论、学术诚信判断以及对教学过程与学术成果负责仍依赖人工，并受院校制度与学术规范约束。技术暴露不等于组织采用，更不等于岗位消失或收入变化。"
+              "任务层面的编辑试用方向包括资料归集、讲义题目草稿、格式检查与记录整理；尚未取得本岗减少工时或改善评价的实测效果。课程依据、讲授反馈、最终评分、推荐及研究成果须明确人工责任，工具提供者的责任另按法律合同核。传统教学平台和查重软件不等生成式AI采用，任务暴露不等岗位替代或工资变化。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24316,7 +24329,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 对高校刑事司法与执法教师（25-1111.00）的技术与热门技术统计"
+              "本岗软件目录与2025Lightcast招聘关键词分别使用；2025年1月1日至12月31日美国Lightcast招聘关键词：Office5%、Excel2%、PowerPoint1%；Google Docs、Access、Outlook、Word没有披露数值，非0。技术目录另列Blackboard Learn、Sakai、Turnitin、DOC Cop、NCIC等；目录不等热门招聘比例，查重工具不等文献检索或学术不端认定。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.1.object",
@@ -24361,7 +24374,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "研究不提供本职业单职业分数、采用率或替代日期。"
+              "本轮未取得25-1111.00与研究分类精确匹配的暴露值、采用率或替代日期；不声称研究无任何职业细分。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.limit",
@@ -24421,7 +24434,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势（BLS 2024—2034 年预测）"
+              "O*NET就业趋势：BLS2025—2035预测"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.object",
@@ -24436,13 +24449,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2024 年就业约 16,200 人，预测标签 Slower than average（增长 1% 至 2%），年均约 1,200 个含增长与替换的空缺。"
+              "美国25-1111.00当前BLS2025—2035预测：2025就业15,700人，2035预测15,900人，增长2%（Slower than average标签1%—2%），年均1,100个含增长与替换的空缺；非每年净增或个人录用概率。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -24481,7 +24493,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "要求明确 AI 系统的角色、责任、记录与人工监督。"
+              "NIST AI RMF1.0是自愿框架，建议明确角色、责任和监督；不是高校强制法条。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.conclusion",
@@ -24526,7 +24538,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 为高校刑事司法与执法教师（25-1111.00）列出备课并向本科或研究生讲授刑法、执法与侦查技术等课程、发起并主持课堂讨论、批改并评分学生作业与论文、编制与评阅考试或委托他人完成、通过阅读文献与参加专业会议跟踪领域进展、维护学生出勤与成绩记录、编写大纲与作业讲义、规划与修订课程内容与教学方法、按固定时间接待并指导学生的学业与职业发展、与同事协作处理教学与研究议题、参与学生招募与注册与就业推荐、选择并获取教材与教学用品、撰写推荐信、参加处理院校政策的委员会、编写阅读材料参考文献、参与校园与社区活动、在特定领域开展研究与发表、指导本科与研究生教学与实习与研究、承担系主任等行政工作、担任学生社团指导教师、撰写研究经费申请，以及面向政府或行业提供专业咨询等任务。"
+              "美国25-1111.00当前23任务分17Core、6Supplemental。Core包括讲授刑法、防御性警务与侦查技术，主持讨论、批改作业论文、编制评阅考试或委托他人、跟踪领域进展、成绩出勤记录、大纲讲义、课程修订、办公时间、学业职业指导、同事协作、招生注册就业推荐、教材用品、推荐信、校务委员会、阅读参考文献及校园社区活动。6Supplemental为研究发表、指导本科研究生教学实习研究、系主任等行政工作、学生社团、经费申请、政府行业咨询；不是所有岗位必做或统一科研考核。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.1.answer",
@@ -24556,13 +24568,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 技术档案列出学习管理系统（如 Blackboard Learn、Sakai）、数据库查询与办公软件（Access、Outlook、Office、PowerPoint、Excel、Word）、文献检索与查重工具（Turnitin）等；这属于招聘与教学场景的市场信号，不代表使用率或熟练度。"
+              "2025年1月1日至12月31日美国Lightcast招聘关键词：Office5%、Excel2%、PowerPoint1%；Google Docs、Access、Outlook、Word没有披露数值，非0。技术目录另列Blackboard Learn、Sakai、Turnitin、DOC Cop、NCIC等；目录不等热门招聘比例，查重工具不等文献检索或学术不端认定。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "g04-hot"
           ],
           "type": "prose"
         },
@@ -24631,13 +24643,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）显示该细分 2024 年约 16,200 人，预测标签为 Slower than average（增长 1% 至 2%），年均约 1,200 个含增长与替换的空缺；该预测不含技术替代时点。"
+              "美国25-1111.00当前BLS2025—2035预测：2025就业15,700人，2035预测15,900人，增长2%（Slower than average标签1%—2%），年均1,100个含增长与替换的空缺；非每年净增或个人录用概率。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -24751,7 +24762,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供本职业岗位与教学场景提到的技术关键词，属市场信号"
+              "2025年1月1日至12月31日美国Lightcast招聘关键词：Office5%、Excel2%、PowerPoint1%；Google Docs、Access、Outlook、Word没有披露数值，非0。技术目录另列Blackboard Learn、Sakai、Turnitin、DOC Cop、NCIC等；目录不等热门招聘比例，查重工具不等文献检索或学术不端认定。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.scope",
@@ -24781,7 +24792,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按任务度量生成式 AI 与职业任务的接近程度，不提供单职业分数或自动化率"
+              "全球任务暴露方法，不能由本轮未取得精确匹配值推断研究不提供职业明细。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
@@ -24871,7 +24882,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供该细分 2024—2034 年就业预测与职位空缺（O*NET 就业趋势页，基于 BLS 预测）"
+              "美国25-1111.00当前BLS2025—2035预测：2025就业15,700人，2035预测15,900人，增长2%（Slower than average标签1%—2%），年均1,100个含增长与替换的空缺；非每年净增或个人录用概率。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
@@ -24901,7 +24912,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供 AI 系统风险治理的角色、责任、记录与人工监督要求"
+              "自愿AI风险治理建议，包括角色责任、记录与人工监督；非教师强制法。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.nist.scope",
@@ -24991,7 +25002,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "检索与材料生成工具可归集资料并生成讲义草稿。"
+              "编辑试用方向：检索与材料生成工具可归集资料并生成讲义草稿。 本岗效率效果未取得，需真实样本和人工核对。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.1.change",
@@ -25051,7 +25062,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "平台工具可辅助分组、记录与随堂反馈。"
+              "编辑试用方向：平台工具可辅助分组、记录与随堂反馈。 本岗效率效果未取得，需真实样本和人工核对。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.2.change",
@@ -25111,7 +25122,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可作初筛与格式检查并汇总分数。"
+              "编辑试用方向：工具可作初筛与格式检查并汇总分数。 本岗效率效果未取得，需真实样本和人工核对。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.change",
@@ -25171,7 +25182,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可按模板生成大纲与材料草案。"
+              "编辑试用方向：工具可按模板生成大纲与材料草案。 本岗效率效果未取得，需真实样本和人工核对。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.change",
@@ -25231,7 +25242,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "系统可汇总学生记录与提醒节点。"
+              "编辑试用方向：系统可汇总学生记录与提醒节点。 本岗效率效果未取得，需真实样本和人工核对。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.change",
@@ -25291,7 +25302,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "检索与写作工具可整理文献并润色表达。"
+              "编辑试用方向：检索与写作工具可整理文献并润色表达。 本岗效率效果未取得，需真实样本和人工核对。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.change",
@@ -25351,7 +25362,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "会议与文档工具可辅助材料整理与留档。"
+              "编辑试用方向：会议与文档工具可辅助材料整理与留档。 本岗效率效果未取得，需真实样本和人工核对。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.7.change",
@@ -25396,7 +25407,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "文献检索与综述工具可按主题归集资料并生成材料草稿。"
+              "编辑建议：文献检索与综述工具可按主题归集资料并生成材料草稿。 不作为本岗已实现的效率或替代结论。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.1.change",
@@ -25441,7 +25452,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可依据模板生成讲义与题目，并对作业作初步筛查。"
+              "编辑建议：工具可依据模板生成讲义与题目，并对作业作初步筛查。 不作为本岗已实现的效率或替代结论。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.2.change",
@@ -25486,7 +25497,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "写作工具可润色表达、整理参考文献格式并检查格式一致性。"
+              "编辑建议：写作工具可润色表达、整理参考文献格式并检查格式一致性。 不作为本岗已实现的效率或替代结论。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.3.change",
@@ -25531,13 +25542,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核对课程内容与讲义的资料来源、时效与适用范围，确认引用与数据来自可核查的文献或官方资料；输入或来源问题会直接进入课堂。"
+              "编辑风险推演：核对课程内容与讲义的资料来源、时效与适用范围，确认引用与数据来自可核查的文献或官方资料；输入或来源问题若实际采纳且未纠正可能传入课堂。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.1.description",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "g04-misconduct"
           ],
           "type": "prose"
         },
@@ -25621,7 +25632,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "发现学术诚信问题、学生记录与隐私风险、课程内容争议或利益冲突时停止自行处置并按制度升级。"
+              "发现学术诚信问题、学生记录与隐私风险、课程内容争议或利益冲突时按实际事项、角色权限与院校程序核对、报送。 普通争议不自动授权全面中止或恢复教学工作。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.4.description",
@@ -25651,7 +25662,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "使用的教学平台、检索与写作工具须由经培训并按权限操作的人员执行；不得用未经验证的工具输出或生成内容替代院校制度与学术规范。"
+              "编辑建议：按学校实际权限、考试和数据管理制度核平台及工具使用条件，安排必要培训；未取得本岗所有工具均有统一培训准入制度的证据。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.5.description",
@@ -25681,7 +25692,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具与模型不会对课程内容的准确性与学术责任负责，误用会带来错误讲授与学术风险。"
+              "未经核实的生成内容可能带来错误讲授或引证风险；教师与学校责任不能因使用工具免除，服务方责任另按实际法律及合同核。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.1.consequence",
@@ -25816,13 +25827,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "学生成绩、评价与个人信息属敏感信息，越权访问或不当共享会带来合规风险。"
+              "中国个人信息保护法按可识别自然人信息、合法处理基础、目的与最小必要处理；学生成绩评价不因名称全部自动成为法定敏感信息。美国FERPA适用于接受美国教育部资助的机构，教育记录须直接关联学生且由机构或其代理维护，存在法定排除；18岁或进入高等教育者的权利转给合资格学生。披露一般须99.30的签署注明日期同意，99.31允许包括有合法教育利益的校方人员等例外，外包还须满足规定条件；不是全部教师或软件厂商均可自由访问，不直接套中国。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.4.consequence",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-pipl",
+            "g04-ferpa"
           ],
           "type": "prose"
         },
@@ -25831,13 +25842,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按院校制度与最小必要原则访问、使用与共享学生信息，操作留痕，异常按制度上报。"
+              "编辑建议：先核法域、处理基础、记录类型和实际角色权限，再核共享及输入外部工具的条件；记录与异常处置按学校现行制度，不由工具许可代替。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.4.control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-pipl",
+            "g04-ferpa"
           ],
           "type": "prose"
         },
@@ -26047,7 +26058,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "常见场景：以高校教师岗位为主的岗位（教学与科研并重、按事业单位薪酬制度计酬），以警务与司法培训机构教官为主的岗位，以及以兼职授课或专项培训为主的外聘岗位；计酬方式与考核方式差异较大。"
+              "高校专任、警务司法培训和外聘授课可作为编辑核对场景；具体用工和计酬、科研比例须真实单位公告与合同核，本轮未取得全国岗位占比或一律事业单位聘任的证据。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.3",
@@ -26103,7 +26114,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "：中国大陆同类岗位多称高校教师岗、公安院校教师岗、警务或司法培训机构教官岗，以事业单位岗位设置与聘任制度为主，薪酬按岗位等级、绩效与地区差异确定，没有与 O*NET-SOC 25-1111.00 对应的统一职业分类或统一计酬口径"
+              "中国一一职业分类映射、职业级工资及不同聘任方式占比未取得，不能由缺口断言不存在统一分类或全部按事业单位计酬。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
@@ -26131,7 +26142,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：美国口径下该职业准备层级为 Job Zone Five（需要广泛准备，SVP 8.0 及以上），多数要求研究生学历（硕士或博士，部分要求法律学位）；美国口径与中国大陆高校教师与警务教官岗位的录用与学历要求不可直接等同，具体以目标单位要求为准。"
+              "美国本岗新聘教育回答仅显示39%硕士、26%博士、11%中等后教育证书，未显示余项不补零；Job Zone Five/SVP8及以上是通用准备层级，不把其法律学位等例子当本岗规定学位，也不推出统一培训年限或中国条件。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -26145,12 +26156,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：中国大陆同类岗位通常经公开招聘进入高校或公安、司法院校与培训机构，多数要求相关学科硕士或博士学位并具备教学与科研能力；学历、学科背景与科研成果是不同层级的条件，不能互相替代。"
+              "中国《高等教育法》46条规定高校教师资格：研究生或本科毕业且符合教学能力等条件；未达该学历者有规定的考试认定途径。47条规定高校教师职务及条件，48条聘任以合同明确权利义务。资格、职称职务、岗位聘任及培训分开，不能把资格一概写成录用后训练，也不能把全部岗位改为硕博硬门槛；非高校培训教官另核机构属性和适用规定。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "sag-moa"
+            "g04-higher-ed"
           ],
           "type": "prose"
         },
@@ -26173,7 +26184,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：院系负责人或学科带头人方向通常要求职称、科研与教学业绩，任职条件由院校制度规定；本页不构成资格认定。"
+              "编辑核对院系或学科负责人实际职务、聘任与教学科研业绩要求，本轮未取得全国统一招聘比例。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -26201,7 +26212,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与工资的关系：检索、教学平台与写作工具可能改变备课、批改与写作的分工与工作方式，但中国大陆公开工资统计按行业门类与人员类别聚合发布，工具变化不会产生可核对的职业级数值；本页因此不给出任何与 AI 相关的本职业工资影响数字。"
+              "本轮未取得AI对中国本岗工资的因果数据；工具或统计门类都不能证明未来不会产生职业级数据。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
@@ -26215,12 +26226,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页中国大陆薪资板块只保留证据边界：不把行业均值当作职业工资、不用美国数据替代，也不陈述本职业的全国中位数、起薪或分位数。"
+              "条件行业背景：仅目标雇主法人主营行业归教育时，国家统计局2025教育城镇非私营单位133,539元、私营单位63,908元税前年平均工资可作背景。城镇5人以上法人单位，不含个体工商户和自由职业者；警务司法培训机构不能仅凭名称归教育，不混用两个人群，不代本岗中位数、起薪、分位或月到手。 中国本岗全国工资分布、招聘报价与分位仍为缺口。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "sag-moa"
+            "g04-nbs"
           ],
           "type": "prose"
         }
@@ -26237,7 +26248,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国统计口径：本页的工资与分位为 O*NET／OEWS 25-1111.00（Criminal Justice and Law Enforcement Teachers, Postsecondary）单一职业口径；就业规模与就业预测取自 O*NET 就业趋势页（基于 BLS 2024—2034 年预测）。"
+              "美国工资为25-1111.00单职业2025 OEWS数据；美国25-1111.00当前BLS2025—2035预测：2025就业15,700人，2035预测15,900人，增长2%（Slower than average标签1%—2%），年均1,100个含增长与替换的空缺；非每年净增或个人录用概率。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.1",
@@ -26252,7 +26263,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "分位是统计位置，不是讲师、助理教授、副教授或教授的等级划分；同一分位的从业者在院校类型、学科方向与职称上差异很大，高分段通常与院校类型（研究型院校）与职称职级相关。"
+              "分位是工资分布位置，不是讲师、教授或经验等级；该表未证明高分位由院校类型、职称或学科方向造成。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.2",
@@ -26267,7 +26278,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可用于推算本职业个人到手收入或起薪的细分数据（美国，2025 年工资数据期）；该 O*NET 工资页未公布小时工资表，按小时或按课时披露的报酬也不能在没有课时量与聘任安排的情况下推算稳定年薪或月收入，兼职与非标准用工同样会使实际收入不同于全职口径。"
+              "OEWS覆盖有薪全职和兼职雇员、排除自雇，工资为常规税前报酬且不含加班溢价等。教师通常不全年工作2080小时，所以BLS对本职业公布年度工资，当前五个年值已披露而时薪未披露，不按2080倒算时薪；个人课时费、月到手、起薪仍未取得。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.3",
@@ -26312,7 +26323,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得本职业按州或地区细分的工资中位数（美国，2025 年工资数据期）；地区数值须在 O*NET 当地工资页按地区与期间查询，不能当作个人报价。工资统计与档案的用途不同：OEWS 用于工资，O*NET 用于任务、工作情境与准备层级，就业预测限于 2024—2034 年预测期，引用时分别保留。"
+              "本轮未查询本岗具体州或地区中位数，不能冒充不存在地区数据；全国年度值和2025—2035预测各守统计口径，不当个人报价。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.6",
@@ -26387,7 +26398,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "分位对应分布位置而不是职称或资历：第 10 分位与第 90 分位之间的差异同时来自院校类型、学科方向、地区与聘任方式；来源没有证明与经验的对应关系。"
+              "工资分位只说明分布位置，当前表没有院校、职称、经验、地区或聘任方式的分位因果分解。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.percentile",
@@ -26402,7 +26413,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "预测是职业总量的变化，不是个人找到工作的概率；该口径预测为增长 1% 至 2%（慢于平均），同时仍会产生替换性空缺。"
+              "美国25-1111.00当前BLS2025—2035预测：2025就业15,700人，2035预测15,900人，增长2%（Slower than average标签1%—2%），年均1,100个含增长与替换的空缺；非每年净增或个人录用概率。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.project",
@@ -26432,13 +26443,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "教育服务是 O*NET 单列的行业，占 2024 年该项就业分布的 98%。"
+              "2025教育服务占99%；2025美国本岗行业就业：教育服务99%、其他行业合计1%；行业就业占比不是工资、院校类型或中国岗位分布。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
-            "bls",
-            "oews"
+            "g04-industry"
           ],
           "type": "prose"
         },
@@ -26447,13 +26457,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他行业合计占 2%，是 O*NET 单列的其余行业；这些是就业分布，不是工资中位数。"
+              "2025其他行业合计1%；2025美国本岗行业就业：教育服务99%、其他行业合计1%；行业就业占比不是工资、院校类型或中国岗位分布。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
-            "bls",
-            "oews"
+            "g04-industry"
           ],
           "type": "prose"
         },
@@ -26467,8 +26476,7 @@
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.amusement",
           "source_refs": [
-            "bls",
-            "oews"
+            "g04-industry"
           ],
           "type": "prose"
         },
@@ -26482,8 +26490,7 @@
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
           "source_refs": [
-            "bls",
-            "oews"
+            "g04-industry"
           ],
           "type": "prose"
         },
@@ -26507,7 +26514,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "统计工资以有薪岗位为准：是否全职、是否有暑期与项目薪酬以及课时与聘任方式，都会影响实际到手收入，因此时薪、课时费与年收入不能互相替代。"
+              "编辑核薪酬公告与合同的观察项：统计工资以有薪岗位为准：是否全职、是否有暑期与项目薪酬以及课时与聘任方式，都会影响实际到手收入，因此时薪、课时费与年收入不能互相替代。 本轮未取得这些因素对本岗工资差异的因果大小。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.paid-work",
@@ -26522,7 +26529,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "同一职业名下的职责差异不小：以教学为主的院校与以研究为主的大学、社区学院与警务培训机构，对应不同的课时量、科研要求与计酬口径。"
+              "编辑核薪酬公告与合同的观察项：同一职业名下的职责差异不小：以教学为主的院校与以研究为主的大学、社区学院与警务培训机构，对应不同的课时量、科研要求与计酬口径。 本轮未取得这些因素对本岗工资差异的因果大小。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.scope",
@@ -26537,7 +26544,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工作机构与安排影响收入：研究型大学、教学型院校、社区学院或警务与司法培训机构，所在地区与学科方向（刑事司法、执法、惩教、司法行政）以及是否承担行政职务。"
+              "编辑核薪酬公告与合同的观察项：工作机构与安排影响收入：研究型大学、教学型院校、社区学院或警务与司法培训机构，所在地区与学科方向（刑事司法、执法、惩教、司法行政）以及是否承担行政职务。 本轮未取得这些因素对本岗工资差异的因果大小。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.setting",
@@ -26590,7 +26597,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意把专业知识讲清楚、能接受公开讲授与同行评议、并对评价尺度与记录保持一致的人，通常更容易适应。"
+              "编辑观察：愿意讲授并核证、接受反馈和保持评价记录一致，可通过实际任务体验核；未取得这些偏好预测本岗胜任的效度。"
             ]
           },
           "id": "actors.fit.personality-fit-block.1",
@@ -26604,7 +26611,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "教学需要每学期重复备课、批改与登记，并在多轮教学中保持评价尺度一致；能把重复当作评价可靠的前提，才能持续做对。"
+              "编辑观察：备课批改与登记需要保持评价一致，重复体验可供自我观察；不把能接受重复写成持续胜任的充分条件。"
             ]
           },
           "id": "actors.fit.personality-fit-block.2",
@@ -26618,7 +26625,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "课程评审与论文投稿常被要求补充依据或修改；能把评议当作质量控制而不是否定自己，才能持续合作。"
+              "编辑观察：课程与论文评议可要求补充依据，如何回应反馈须实际观察，不由偏好描述预测合作成功。"
             ]
           },
           "id": "actors.fit.personality-fit-block.3",
@@ -26884,7 +26891,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "官方来源：O*NET OnLine 25-1111.00 兴趣代码（2026 年更新）"
+              "官方来源：O*NET OnLine 25-1111.00 兴趣代码（2026 年更新）；本产品与本岗的匹配、预测效度本轮未取得。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.riasec.evidence-level",
@@ -26940,7 +26947,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "宜人性与尽责性与这类工作的关系最直接：前者对应面对学生疑问与不同意见的耐心，后者对应备课、批改与记录的一致可靠。大五没有官方的职业匹配阈值，本页只把它当作自我观察工具。"
+              "尽责、耐心等可作编辑自我观察问题；未取得大五与本岗表现或本产品职业匹配的效度，不断言宜人性与尽责性关系最直接。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.big-five.answer",
@@ -26982,7 +26989,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "通用工具：大五量表描述特质倾向，无官方职业匹配阈值"
+              "通用工具：大五量表描述特质倾向，无官方职业匹配阈值；本产品与本岗的匹配、预测效度本轮未取得。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -27038,7 +27045,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "偏好课堂互动的人可能更适合教学方向。"
+              "可观察是否愿意课堂互动，不据类型或偏好分配教学岗位。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.1",
@@ -27052,7 +27059,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "偏好独立研究的人可能更适合科研方向。"
+              "可观察是否愿意独立阅读写作，不据类型或偏好分配科研岗位。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.2",
@@ -27066,7 +27073,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "通用工具：类型偏好描述，非职业适配测评"
+              "通用工具：类型偏好描述，非职业适配测评；本产品与本岗的匹配、预测效度本轮未取得。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.evidence-level",
@@ -27164,7 +27171,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "通用工具：动机描述，非职业适配测评"
+              "通用工具：动机描述，非职业适配测评；本产品与本岗的匹配、预测效度本轮未取得。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.enneagram.evidence-level",
@@ -27220,7 +27227,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业准备层级为 Job Zone Five（SVP 8.0 及以上），多数要求研究生学历，工作以阅读、写作、讲授与研究方法为主；IQ 类量表描述的是通用认知表现，与岗位要求没有官方对应关系。"
+              "美国本岗新聘教育回答仅显示39%硕士、26%博士、11%中等后教育证书，未显示余项不补零；Job Zone Five/SVP8及以上是通用准备层级，不把其法律学位等例子当本岗规定学位，也不推出统一培训年限或中国条件。 阅读论证写作可作任务观察；未取得IQ与本岗录用或表现的效度。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.answer",
@@ -27262,7 +27269,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "通用工具：认知表现描述，无官方职业门槛"
+              "通用工具：认知表现描述，无官方职业门槛；本产品与本岗的匹配、预测效度本轮未取得。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.evidence-level",
@@ -27360,7 +27367,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "通用工具：沟通与情绪描述，非岗位门槛"
+              "通用工具：沟通与情绪描述，非岗位门槛；本产品与本岗的匹配、预测效度本轮未取得。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.eq.evidence-level",
@@ -27388,7 +27395,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "在高校院系承担刑事司法、执法与惩教课程的教学，编写大纲与材料并指导学生的学业与职业发展；适合愿意长期站在讲台并把知识讲清楚的人。"
+              "教学方向含课程大纲材料、讲授评价及学生指导；编辑自问是否愿意体验讲授解释与持续备课，不由愿意推胜任。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.camera.signals",
@@ -27430,7 +27437,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "在特定领域开展研究、撰写并在专业期刊或专著发表成果，申请研究经费并参与学术交流；适合愿意长期阅读文献、提出问题并写作的人。"
+              "科研发表为Supplemental任务，实际比重另核；编辑自问是否愿意体验文献阅读、提出问题与写作，不由偏好推适配效度。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.stage.signals",
@@ -27570,7 +27577,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "通常要求法律专业背景与执业经验，转入需补足法律实务能力。"
+              "需另核法学课程、专业背景和单位聘任条件；实际任务档案不能证明所有法学教师均需律师执照或执业经验。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.watchouts",
@@ -27612,7 +27619,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "通常要求社会工作专业背景与督导资格，转入需补足实务督导能力。"
+              "需另核社会工作课程、实习督导与单位条件；当前档案不能证明所有教师均需统一督导资格。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.art.watchouts",
@@ -27682,7 +27689,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "教学型院校更看重课时、课程建设与学生指导，研究型大学更看重课题与发表：先看清目标方向再决定。"
+              "编辑建议：实际核目标岗位的教学科研比例与考核，不仅凭院校类型或人格偏好确定方向。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.interest.answer",
@@ -27766,7 +27773,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "教学按学期与考试周推进、科研按申报与评审周期推进，22% 把时间压力记为每天出现、35% 记为每周一次以上；具体按院校情况核对。"
+              "美国时间压力22%每日、35%每周但非每日；学期考试申报具体峰值按单位核，不由该调查得出。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.schedule.answer",
@@ -27794,7 +27801,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "把知识讲清楚与把研究写扎实靠长期练习与反馈；把授课反馈、批改记录与评审意见记录下来，比测试分数更能说明适配。"
+              "编辑建议：记录讲授批改和评审反馈，作为体验材料；未取得其比测评分数更能预测本岗适配的比较效度。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.practice.answer",
@@ -27822,7 +27829,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。测试描述偏好线索，不预测工作表现，也不构成录用、资格或适应性判断；真正的判断来自实际备课、讲授与写作反馈。"
+              "测试供偏好探索；编辑建议结合任务体验材料与现实条件继续观察，未取得测评或备课讲授写作反馈预测本岗表现的效度，不给最终决定权。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.test.answer",
@@ -27989,8 +27996,8 @@
           },
           "id": "actors.risk.career-risk-cards.1",
           "source_refs": [
-            "sag",
-            "nist"
+            "g04-misconduct",
+            "onet"
           ],
           "type": "prose"
         },
@@ -28034,8 +28041,8 @@
           },
           "id": "actors.risk.career-risk-cards.4",
           "source_refs": [
-            "sag",
-            "nist"
+            "g04-pipl",
+            "g04-ferpa"
           ],
           "type": "prose"
         },
@@ -28089,7 +28096,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险集中在三类：长时间阅读写作与公开讲授带来的状态负担，学术诚信、成绩登记与学生记录管理不当造成的专业与合规风险，以及课程内容争议、学生隐私与校外咨询利益冲突造成的责任风险；学期、考试周与申报节点前也会累积影响。"
+              "编辑风险推演：风险集中在三类：长时间阅读写作与公开讲授带来的状态负担，学术诚信、成绩登记与学生记录管理不当造成的专业与合规风险，以及课程内容争议、学生隐私与校外咨询利益冲突造成的责任风险；学期考试申报节点是否出现峰值及其影响未取得证据。"
             ]
           },
           "id": "actors.display.career_risk_cards.direct-answer",
@@ -28104,13 +28111,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险场景来自 O*NET 任务档案与工作情境百分比（O*NET-SOC 25-1111.00）、学术诚信与成绩评价的一般要求、学生记录与个人信息保护要求，以及课程内容与校外咨询的边界要求；中国大陆的岗位与用工语境来自公开信息；引入自动化或 AI 工具时的责任与记录要求参考 NIST AI 风险管理框架。"
+              "任务与情境支持风险场景，非疾病或事故率。中国高校研究活动适用教育部令40号及现行细则，资格职务聘任参照高等教育法；信息处理区分中国PIPL与美国FERPA适用条件；NIST仅自愿治理框架。"
             ]
           },
           "id": "actors.display.career_risk_cards.evidence-scope",
           "source_refs": [
-            "sag",
-            "nist"
+            "g04-higher-ed",
+            "g04-misconduct",
+            "g04-ferpa"
           ],
           "type": "prose"
         },
@@ -28179,13 +28187,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "引证不实、数据或方法问题未如实说明，或在成果署名与发表上处理不当，会动摇课程内容与学术成果的可信度；本职业以研究与发表为重要考核内容。"
+              "教育部令40号适用于高校科学研究及相关活动中的学术不端预防处理，学校是主体、学术委员会承担调查认定；教师对指导的学生科研与学位论文负有必要审核义务。相似度或查重提示不是自动认定，研究数据与引证署名应真实，认定处分按学校权限和适用现行细则处理；一般课堂评分争议不自动变科研学术不端案件。 本岗研究发表是Supplemental，不推所有教师以发表为核心考核。"
             ]
           },
           "id": "actors.display.career_risk_cards.image-use.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "g04-misconduct"
           ],
           "type": "prose"
         },
@@ -28194,7 +28201,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "学术诚信问题会直接影响职业信誉、机构责任与后续考核。"
+              "编辑风险推演：学术诚信问题可能影响职业信誉、机构责任与后续考核。 学术不端认定与责任按事实、科研相关适用范围、学校调查程序及权限核，不将疑点或普通评分争议自动认定。"
             ]
           },
           "id": "actors.display.career_risk_cards.image-use.consequence",
@@ -28239,7 +28246,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "评分标准事先不明确或前后不一致、成绩与出勤记录缺失或与依据不符，会引发学生申诉并损害学业公正；多课程并行时更易出现偏差。"
+              "编辑风险推演：评分标准事先不明确或前后不一致、成绩与出勤记录缺失或与依据不符，可能引发学生申诉并损害学业公正；多课程并行为编辑待核场景，未取相对偏差率。"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.scenario",
@@ -28254,7 +28261,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "评价不一致或记录缺失会造成申诉、复核与责任不清。"
+              "编辑风险推演：评价不一致或记录缺失可能造成申诉、复核与责任不清。"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.consequence",
@@ -28299,7 +28306,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "讲授内容与培养目标或院校规范不一致、把争议观点当作定论、或在课堂上引入与课程无关的立场，会引发争议并影响学习效果。"
+              "编辑风险推演：讲授内容与培养目标或院校规范不一致、把争议观点当作定论、或在课堂上引入与课程无关的立场，可能引发争议并影响学习效果。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-income.scenario",
@@ -28314,7 +28321,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "内容边界处理不当会造成教学争议与机构责任。"
+              "编辑风险推演：内容边界处理不当可能造成教学争议与机构责任。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-income.consequence",
@@ -28359,13 +28366,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "越权访问、不当共享学生成绩与个人信息，或在推荐与评价中写入未经核实的内容，会带来合规风险与信任损失；指导与推荐环节更需谨慎。"
+              "中国个人信息保护法按可识别自然人信息、合法处理基础、目的与最小必要处理；学生成绩评价不因名称全部自动成为法定敏感信息。美国FERPA适用于接受美国教育部资助的机构，教育记录须直接关联学生且由机构或其代理维护，存在法定排除；18岁或进入高等教育者的权利转给合资格学生。披露一般须99.30的签署注明日期同意，99.31允许包括有合法教育利益的校方人员等例外，外包还须满足规定条件；不是全部教师或软件厂商均可自由访问，不直接套中国。"
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "g04-pipl",
+            "g04-ferpa"
           ],
           "type": "prose"
         },
@@ -28374,7 +28381,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "学生信息处理不当会带来合规风险与信任损失。"
+              "编辑风险推演：学生信息处理不当可能带来合规风险与信任损失。"
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.consequence",
@@ -28434,7 +28441,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "利益冲突未处理会影响公正性与机构声誉。"
+              "编辑风险推演：利益冲突未处理可能影响公正性与机构声誉。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.consequence",
@@ -28479,7 +28486,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 显示该职业 65% 表示每周超过 40 小时、59% 把坐着记为约一半时间、46% 表示每天有公开演讲、22% 把时间压力记为每天出现、35% 记为每周一次以上；学期、考试周与申报节点前压力更集中。"
+              "当前美国工作情境回答：邮件97%、面对面讨论63%、电话53%、可控室内95%、公开演讲46%每日；持续接触55%；外部客户公众59%极重要；决策影响58%很重要、决策频率51%每日、协调带领37%极重要、准确35%极重要。常规安排87%，每周>40小时65%，坐着约一半时间59%。时间压力22%每日、35%每周但非每日、38%每月但非每周；重复任务15%极重要/33%很重要；竞争27%高度/17%极度。当前页面更新时间不等统一调查年，不外推中国，也不等疾病发生率。 学期考试申报压力峰值与个人健康效应本轮未取得。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.scenario",
@@ -28494,7 +28501,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "长期久坐阅读写作与密集公开讲授会累积影响状态与判断稳定性。"
+              "编辑负荷观察：长时间坐着、公开讲授和压力可作为安排与状态核对线索；未取得本岗伤病、倦怠或判断损伤发生率。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.consequence",
@@ -28509,7 +28516,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于美国 2024—2034 年该细分就业预测与职位空缺（O*NET 就业趋势页，基于 BLS 预测）。"
+              "美国25-1111.00当前BLS2025—2035预测：2025就业15,700人，2035预测15,900人，增长2%（Slower than average标签1%—2%），年均1,100个含增长与替换的空缺；非每年净增或个人录用概率。 就业预测不是法规或风险发生率依据。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.bls",
@@ -28539,13 +28546,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于中国大陆高校教师与警务司法教官岗位的用工与合规边界的方向性核对。"
+              "中国《高等教育法》46条规定高校教师资格：研究生或本科毕业且符合教学能力等条件；未达该学历者有规定的考试认定途径。47条规定高校教师职务及条件，48条聘任以合同明确权利义务。资格、职称职务、岗位聘任及培训分开，不能把资格一概写成录用后训练，也不能把全部岗位改为硕博硬门槛；非高校培训教官另核机构属性和适用规定。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.cn-rule",
           "source_refs": [
-            "sag",
-            "nist"
+            "g04-higher-ed"
           ],
           "type": "prose"
         },
@@ -28569,7 +28575,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于引入自动化或 AI 系统时的责任、记录与人工监督要求。"
+              "自愿AI风险治理建议，法定责任与院校制度另核。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.nist",
@@ -28593,7 +28599,7 @@
           "data": {
             "paragraphs": [
               "本页不引用具体在招公告，也不把历史招聘案例计为在招岗位；招聘与任职条件须按目标单位当年公开信息核对。",
-              "示例中的教学评价、科研观察与试用期考察方式为编辑设计，用于说明常见验证方式，不代表任何单位的统一流程。"
+              "教学科研及试用观察为编辑核对示例，不代表常见雇主验证方式或任何单位统一流程。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
@@ -28618,7 +28624,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "编辑可准备与核对的证据",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -28656,7 +28662,7 @@
                 "负责学生事务、教务、招生与院校运行管理，制定并执行院校政策与服务流程。",
                 "院校运行、政策执行、学生事务协调。",
                 "一份虚构的学生事务流程说明样本。",
-                "属相邻职业，重心在院校运行与学生事务管理，不承担课程讲授与学术责任。"
+                "相邻职业以院校运行与学生事务管理为主要目的；档案也含授课，教师也可能参与行政，核实际职责及权限。"
               ]
             ]
           },
@@ -28678,7 +28684,7 @@
                 "id": "employer-0",
                 "values": [
                   "学历与训练背景要求",
-                  "美国口径下该职业准备层级为 Job Zone Five（需要广泛准备，SVP 8.0 及以上），多数要求研究生学历；教育需求反馈为硕士 39%、博士 26%、中等后教育证书 11%。",
+                  "美国本岗新聘教育回答仅显示39%硕士、26%博士、11%中等后教育证书，未显示余项不补零；Job Zone Five/SVP8及以上是通用准备层级，不把其法律学位等例子当本岗规定学位，也不推出统一培训年限或中国条件。",
                   "O*NET 摘要页显示准备层级为 Job Zone Five；美国口径与中国大陆高校教师与警务教官岗位的录用与学历要求不可直接等同。"
                 ]
               },
@@ -28686,8 +28692,8 @@
                 "id": "employer-1",
                 "values": [
                   "学科背景与教学科研能力",
-                  "通常需要刑事司法、执法或相关学科的学历背景，能讲授与建设课程、开展研究并指导学生；具体聘任、考核与职称条件由院校制度规定。",
-                  "本页未取得中国大陆全国统一的资格公开条件，须按目标单位当年要求核对；本页不构成聘任或资格建议。"
+                  "编辑任务准备：学科知识、课程评价与研究能力按具体职责核，不推全部岗位统一学位和科研比例。",
+                  "中国《高等教育法》46条规定高校教师资格：研究生或本科毕业且符合教学能力等条件；未达该学历者有规定的考试认定途径。47条规定高校教师职务及条件，48条聘任以合同明确权利义务。资格、职称职务、岗位聘任及培训分开，不能把资格一概写成录用后训练，也不能把全部岗位改为硕博硬门槛；非高校培训教官另核机构属性和适用规定。"
                 ]
               },
               {
@@ -28702,8 +28708,8 @@
                 "id": "availability",
                 "values": [
                   "常见对象与工具范围",
-                  "课程大纲与教学材料、教材与文献数据库、学生作业与考试材料、成绩与出勤记录系统、教学平台与学习管理系统、办公与演示软件、文献检索与查重工具；O*NET 技术档案列出学习管理系统、数据库与办公软件、文献检索与查重等技术关键词。",
-                  "工具熟练度是市场偏好与招聘信号，不等于核心能力或授权。"
+                  "2025年1月1日至12月31日美国Lightcast招聘关键词：Office5%、Excel2%、PowerPoint1%；Google Docs、Access、Outlook、Word没有披露数值，非0。技术目录另列Blackboard Learn、Sakai、Turnitin、DOC Cop、NCIC等；目录不等热门招聘比例，查重工具不等文献检索或学术不端认定。",
+                  "软件目录不是招聘样本、使用率、熟练度或强制准入证明。"
                 ]
               }
             ]
@@ -28841,64 +28847,63 @@
               [
                 "学历与学科背景",
                 "准备进入高校教学或培训机构的人",
-                "满足多数岗位的录用条件",
-                "院校岗位通常要求，按目标单位核对",
+                "编辑核对该准备项与具体公告、岗位职责的关系；未取全国录用效度或比例。",
+                "具体招聘学位条件另核；中国高校教师资格有高等教育法46条规定及例外途径。",
                 "按目标单位招聘公告",
-                "高（硕士或博士阶段）",
+                "本轮未取得统一时长、费用或回报，按真实项目和个人准备核。",
                 "学历不代表教学能力或研究水平。"
               ],
               [
                 "教学能力与试讲",
                 "承担课程讲授与评价的人",
-                "通常是核心录用与考核依据",
-                "多数岗位普遍要求",
+                "编辑核对该准备项与具体公告、岗位职责的关系；未取全国录用效度或比例。",
+                "教学能力是高校教师资格条件之一；具体试讲程序不是该法统一规定。",
                 "通过助教、试讲与教学反馈积累",
-                "中（持续练习）",
+                "本轮未取得统一时长、费用或回报，按真实项目和个人准备核。",
                 "教学能力不等于课程建设或管理授权。"
               ],
               [
                 "科研成果与发表",
                 "研究型院校与需考核科研的岗位",
-                "影响录用、职称与考核结果",
+                "编辑核对该准备项与具体公告、岗位职责的关系；未取全国录用效度或比例。",
                 "按院校类型与职称岗位而定",
                 "通过课题参与、论文撰写与评审积累",
-                "高（数年至持续）",
+                "本轮未取得统一时长、费用或回报，按真实项目和个人准备核。",
                 "成果数量不等于研究质量或学术影响力。"
               ],
               [
                 "教师资格与岗前培训",
                 "高校专任教师岗位",
-                "通常是任职后的必备环节",
-                "属录用后环节，按院校与主管部门要求",
-                "由院校组织或按主管部门要求办理",
-                "中（数周至数月）",
+                "中国高校教师资格、职务聘任与岗前培训分开。",
+                "高校教师资格有法定条件，不能一概当纯录用后培训。",
+                "46条资格认定条件与47条职务条件、48条聘任合同分别核；非高校教官另核。",
+                "本轮未取得统一时长、费用或回报，按真实项目和个人准备核。",
                 "培训合格不等于永久授权，须按制度与考核执行。"
               ],
               [
                 "实务背景与行业经验",
                 "警务与司法培训方向的岗位",
-                "影响实务课程的授课资格与竞争度",
+                "编辑核对该准备项与具体公告、岗位职责的关系；未取全国录用效度或比例。",
                 "按岗位与机构而定",
                 "通过实务岗位经历与项目参与积累",
-                "中至长（视方向）",
+                "本轮未取得统一时长、费用或回报，按真实项目和个人准备核。",
                 "实务经验不自动等同教学资格或研究能力。"
               ],
               [
                 "职称与学科负责能力",
                 "准备承担学科或院系管理职责的人",
-                "影响相关岗位的竞争与准备度",
-                "不是入职门槛",
+                "编辑核对该准备项与具体公告、岗位职责的关系；未取全国录用效度或比例。",
+                "不是全部岗位统一初始门槛；职务和聘任须按47—48条及单位规则核。",
                 "按院校制度与评审要求",
-                "长（教学与科研业绩积累）",
+                "本轮未取得统一时长、费用或回报，按真实项目和个人准备核。",
                 "职称不等于管理授权或合规责任岗位授权。"
               ]
             ]
           },
           "id": "actors.path.credential-decision.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "g04-higher-ed",
+            "onet"
           ],
           "title": "训练、资格与聘任怎么选择",
           "type": "table"
@@ -28909,16 +28914,15 @@
           "data": {
             "paragraphs": [
               "本页把学历与学科背景、教学能力与试讲、科研成果与发表、教师资格与岗前培训、实务背景与行业经验以及职称与学科负责能力分开：学历与培训是基础，教学与科研能力须通过实际教学与研究成果体现。",
-              "美国口径来自 O*NET 准备层级（Job Zone Five：多数要求研究生学历；SVP 8.0 及以上）与 BLS 相关说明；这些不等于中国的任职条件。",
-              "中国大陆口径：同类岗位为高校教师岗与公安、司法院校及培训机构教官岗，多按公开招聘的学历、学科与科研成果要求录用；本页未取得全国统一的强制资质公开条件，须按目标单位与主管部门现行规定核对，不能把美国准备层级当作中国门槛，也不能把岗位名称当作跨机构或跨系统的授权。",
+              "美国本岗新聘教育回答仅显示39%硕士、26%博士、11%中等后教育证书，未显示余项不补零；Job Zone Five/SVP8及以上是通用准备层级，不把其法律学位等例子当本岗规定学位，也不推出统一培训年限或中国条件。",
+              "中国《高等教育法》46条规定高校教师资格：研究生或本科毕业且符合教学能力等条件；未达该学历者有规定的考试认定途径。47条规定高校教师职务及条件，48条聘任以合同明确权利义务。资格、职称职务、岗位聘任及培训分开，不能把资格一概写成录用后训练，也不能把全部岗位改为硕博硬门槛；非高校培训教官另核机构属性和适用规定。",
               "任何资格与任职要求都应以单位与主管部门的现行规定为准；本页不构成录用承诺、资格意见或法律意见。"
             ]
           },
           "id": "actors.path.credential-boundary.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "g04-higher-ed",
+            "onet"
           ],
           "title": "训练、资格与聘任边界",
           "type": "notice"
@@ -28928,7 +28932,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入行通常要求相关学科的研究生学历：美国多数岗位要求硕士或博士并提供助教与教学训练，常从助教与兼职授课起步；能否把课程内容讲清楚、把评价做一致、把研究写扎实，是比证书更可核对的准备证据。"
+              "编辑入行核对：美国新聘教育回答与具体岗位条件分开，教学、评价、研究及记录的能力证据也不替代法定资格；助教、兼职或博士后不是统一必经路线。"
             ]
           },
           "id": "actors.path.career-path-block.1",
@@ -28944,7 +28948,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国口径下，该职业准备层级为 Job Zone Five（需要广泛准备，SVP 8.0 及以上），多数要求研究生学历，其中约 39% 的受访者表示要求硕士、26% 表示要求博士、11% 表示要求中等后教育证书；入行多从助教、兼职讲师或博士后研究做起，再承担独立课程与课程建设；"
+              "美国本岗新聘教育回答仅显示39%硕士、26%博士、11%中等后教育证书，未显示余项不补零；Job Zone Five/SVP8及以上是通用准备层级，不把其法律学位等例子当本岗规定学位，也不推出统一培训年限或中国条件。 以下三方向四阶为编辑能力组织，不代表真实晋升顺序或统一年限。"
             ]
           },
           "id": "actors.path.career-path-block.2",
@@ -28960,14 +28964,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆没有与 O*NET-SOC 一一对应的职业细类，同类岗位为高校教师岗与公安、司法院校及培训机构教官岗，多按公开招聘的学历、学科与科研成果要求录用，录用与任职条件须按目标单位与现行规定核对。"
+              "中国《高等教育法》46条规定高校教师资格：研究生或本科毕业且符合教学能力等条件；未达该学历者有规定的考试认定途径。47条规定高校教师职务及条件，48条聘任以合同明确权利义务。资格、职称职务、岗位聘任及培训分开，不能把资格一概写成录用后训练，也不能把全部岗位改为硕博硬门槛；非高校培训教官另核机构属性和适用规定。 本轮未取得本岗中国分类一一映射、统一招聘条件与岗位分布，不断言全国分类不存在。"
             ]
           },
           "id": "actors.path.career-path-block.3",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "g04-higher-ed",
+            "onet"
           ],
           "type": "prose"
         },
@@ -29161,14 +29164,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域：美国口径来自 O*NET 与 BLS 公开资料；中国大陆口径参考高校教师岗位与公安、司法院校及培训机构教官岗位的公开用工信息方向，具体要求以目标单位与现行规定为准。"
+              "美国任务与新聘回答不作中国门槛；中国高校资格职务聘任按高等教育法46—48，非高校警务司法培训机构另核。"
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "g04-higher-ed"
           ],
           "type": "prose"
         },
@@ -29321,14 +29322,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与课程体系与学科建设、带训青年教师并承担院系事务；该阶段通常要求先积累教学与科研业绩，任职条件由院校制度规定。"
+              "编辑发展方向：参与课程学科建设、带训与院系事务；具体职务任职依高教法及学校要求核，不作为统一晋升阶段。"
             ]
           },
           "id": "actors.display.career_path_block.ladder.develop.description",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "g04-higher-ed"
           ],
           "type": "prose"
         },
@@ -29401,7 +29400,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求相关学科在读研究生或硕士及以上学历；条件按单位规定。"
+              "教学辅助为编辑准备方向，不推统一硕士或在读研究生门槛；中国高校助教职务与普通辅助岗位分开核。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.credentials",
@@ -29481,7 +29480,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按院校要求；学历、试讲与教学能力为核心依据。"
+              "编辑准备方向：核目标公告的学历、教学和试讲条件；资格、聘任与训练分开，不称统一核心依据。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.02.credentials",
@@ -29561,7 +29560,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按院校制度与岗位要求。"
+              "编辑准备方向：按院校制度与岗位要求。 原说明非已核统一招聘条件；法定资格、聘任、培训及具体单位要求分别核。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.03.credentials",
@@ -29641,14 +29640,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求教学业绩与管理经验，条件由院校制度规定。"
+              "编辑准备方向：核目标职务的教学与管理要求；高教法47条教授副教授的经验条件依法适用，不扩大到全部管理岗。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.04.credentials",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "g04-higher-ed"
           ],
           "type": "prose"
         },
@@ -29737,7 +29734,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求相关学科硕士或博士学历；条件按单位规定。"
+              "编辑准备方向：核目标学科公告实际学位要求，不据美国教育响应推中国统一硕博门槛。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.01.credentials",
@@ -29817,7 +29814,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按院校要求；研究能力与成果为核心依据。"
+              "编辑准备方向：核目标研究任务及公告成果条件，未取得全国核心录用依据。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.02.credentials",
@@ -29897,7 +29894,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按院校制度与岗位要求。"
+              "编辑准备方向：按院校制度与岗位要求。 原说明非已核统一招聘条件；法定资格、聘任、培训及具体单位要求分别核。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.03.credentials",
@@ -29977,7 +29974,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按院校制度与规定。"
+              "编辑准备方向：按院校制度与规定。 原说明非已核统一招聘条件；法定资格、聘任、培训及具体单位要求分别核。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.04.credentials",
@@ -30073,7 +30070,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求相关学科背景与实务经验；条件按单位规定。"
+              "编辑准备方向：实务知识、教学及演练能力按实际课程和机构核；统一招聘条件及训练时间未取得，任职不由本页授予。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.01.credentials",
@@ -30153,7 +30150,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按单位要求；实务经验与教学能力为核心依据。"
+              "编辑准备方向：实务知识、教学及演练能力按实际课程和机构核；统一招聘条件及训练时间未取得，任职不由本页授予。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.02.credentials",
@@ -30233,7 +30230,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按单位制度与岗位要求。"
+              "编辑准备方向：实务知识、教学及演练能力按实际课程和机构核；统一招聘条件及训练时间未取得，任职不由本页授予。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.03.credentials",
@@ -30313,7 +30310,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按单位制度与规定。"
+              "编辑准备方向：实务知识、教学及演练能力按实际课程和机构核；统一招聘条件及训练时间未取得，任职不由本页授予。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.04.credentials",
@@ -30345,14 +30342,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "该细分 2024—2034 年就业预测与职位空缺（O*NET 就业趋势页，基于 BLS 预测）。"
+              "美国25-1111.00当前BLS2025—2035预测：2025就业15,700人，2035预测15,900人，增长2%（Slower than average标签1%—2%），年均1,100个含增长与替换的空缺；非每年净增或个人录用概率。"
             ]
           },
           "id": "actors.display.career_path_block.source.bls",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -30393,7 +30388,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明工资分位的统计位置与不可年化，不提供个人收入结论。"
+              "官方年度工资分位已公布可引用；教师不按2080倒算未披露时薪，不能推个人稳定到手月收入。"
             ]
           },
           "id": "actors.display.career_path_block.source.r2-pay-3",
@@ -30417,7 +30412,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需求信号要分三层看：官方就业预测反映职业总量变化，高等教育与公共安全相关学科布局以及院校经费与岗位设置决定岗位分布，"
+              "需求证据分官方就业预测与真实单位招聘公告核；学科经费和岗位设置可作编辑待核条件，不由预测证明岗位分布因果。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
@@ -30432,13 +30427,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）显示该细分 2024 年约 16,200 人，预测标签为 Slower than average（增长 1% 至 2%），年均约 1,200 个含增长与替换的空缺；该预测不含技术替代时点。"
+              "美国25-1111.00当前BLS2025—2035预测：2025就业15,700人，2035预测15,900人，增长2%（Slower than average标签1%—2%），年均1,100个含增长与替换的空缺；非每年净增或个人录用概率。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls",
-            "oews"
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -30452,8 +30446,7 @@
           },
           "id": "actors.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls",
-            "oews"
+            "ratify"
           ],
           "type": "prose"
         },
@@ -30477,7 +30470,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "招聘公告只能说明某一时点某一单位的岗位需求。三者不能互相替代。"
+              "招聘公告仅说明特定时点单位岗位；资格查询另用于条件核查，不是岗位需求统计，分别使用。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.5",
@@ -30557,8 +30550,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.agent.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30572,8 +30564,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.agent.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30582,13 +30573,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从课程教学与学术责任转向院校运行与学生事务管理。"
+              "编辑方向比较：管理以院校运行和学生事务为主要目的，也可授课；教学也可承担行政，不推任务完全互斥或转岗成功率。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30602,8 +30592,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.teacher.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30617,8 +30606,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.teacher.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30632,8 +30620,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.teacher.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30647,8 +30634,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30662,8 +30648,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30677,8 +30662,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30692,8 +30676,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.art.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30702,13 +30685,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足：社会工作专业背景、临床实务与督导资格。"
+              "编辑能力差距：社会工作课程、实习与临床实务督导及研究方法；是否需资格按目标单位法域核，不推统一督导证。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30722,8 +30704,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.art.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30737,8 +30718,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.directing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30747,13 +30727,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足：心理学知识体系与实验研究方法。"
+              "编辑能力差距：心理学学科与研究方法、学生实验及相应课程安排；档案还含临床服务Supplemental，实际承担及资格另核。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30767,8 +30746,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.directing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30782,8 +30760,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.announcing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30797,8 +30774,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.announcing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30812,8 +30788,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.announcing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30827,8 +30802,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.editing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30842,8 +30816,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.editing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30857,8 +30830,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.editing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30872,8 +30844,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.dancing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30887,8 +30858,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.dancing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30902,8 +30872,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.dancing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30912,7 +30881,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于该细分 2024—2034 年就业预测与职位空缺（O*NET 就业趋势页，基于 BLS 预测）。"
+              "美国25-1111.00当前BLS2025—2035预测：2025就业15,700人，2035预测15,900人，增长2%（Slower than average标签1%—2%），年均1,100个含增长与替换的空缺；非每年净增或个人录用概率。"
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
@@ -30932,8 +30901,7 @@
           },
           "id": "actors.display.market_signal_card.source.ratify",
           "source_refs": [
-            "bls",
-            "oews"
+            "ratify"
           ],
           "type": "prose"
         },
@@ -31099,7 +31067,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "FermatMind 职业内容编辑团队（来源核查与练习设计）"
+              "FermatMind职业内容编辑；本轮九模块来源核对"
             ]
           },
           "id": "actors.display.source_card.author",
@@ -31113,7 +31081,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源：O*NET OnLine 高校刑事司法与执法教师（25-1111.00）职业档案、全国工资（OEWS 2025 年工资数据）与就业趋势（基于 BLS 2024—2034 年预测）、ILO 生成式 AI 与职业任务暴露研究、NIST AI 风险管理框架，以及国家统计局公开资料；各条目的口径与使用限制见下方来源登记。"
+              "来源：O*NET25-1111任务、情境、兴趣与新聘教育、2025年度工资与2025—2035预测；NBS2025条件行业背景，高等教育法、教育部令40号、PIPL及美国FERPA各守适用范围，ILO任务暴露方法与NIST自愿框架不代本岗因果。"
             ]
           },
           "id": "actors.display.source_card.source",
@@ -31127,7 +31095,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "更新：2026-09-18（各来源检索日期见来源登记）"
+              "九模块核对：2026-10-09；保护范围未重审，实际期间和边界见来源登记。"
             ]
           },
           "id": "actors.display.source_card.updated-at",
@@ -31258,7 +31226,7 @@
                 ],
                 "evidence_type": "official source",
                 "id": "agent",
-                "limitation": "只支持高校教育行政管理者（相邻职业）的学生事务、教务与院校运行管理任务；不把院校管理与政策执行职责并入本职业的教学与学术责任。",
+                "limitation": "实际任务含招生教务政策评估及授课；管理主要目的不等绝对不承担教学。",
                 "market": "美国",
                 "name": "O*NET OnLine：Education Administrators, Postsecondary（11-9033.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31290,7 +31258,7 @@
                 ],
                 "evidence_type": "official source",
                 "id": "art",
-                "limitation": "只支持高校社会工作教师（相邻职业）的社会工作与临床实务课程教学与实习督导任务；通常要求社会工作专业背景与督导资格，不把社会服务教学职责并入本职业。",
+                "limitation": "实际社会工作教学、实习及研究任务支持能力比较，不证明全部教师须统一督导资格。",
                 "market": "美国",
                 "name": "O*NET OnLine：Social Work Teachers, Postsecondary（25-1113.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31301,12 +31269,11 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "支持该细分的就业与预测口径。",
-                  "不含中国大陆信息，不能替代中国大陆数据。"
+                  "美国25-1111.00当前BLS2025—2035预测：2025就业15,700人，2035预测15,900人，增长2%（Slower than average标签1%—2%），年均1,100个含增长与替换的空缺；非每年净增或个人录用概率。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "支持该细分 2024 年就业约 16,200 人、预测标签 Slower than average（增长 1% 至 2%）与年均约 1,200 个含增长与替换的空缺；本页就业与预测以该 O*NET 就业趋势页为准。",
+                "limitation": "原保护Hero/FAQ仍消费旧2024—2034事实，不作当前证据；九模块隔离使用g04-trends。",
                 "market": "美国",
                 "name": "O*NET OnLine：Criminal Justice and Law Enforcement Teachers, Postsecondary 就业趋势（基于 BLS 2024—2034 年预测）",
                 "period": "2024—2034 年预测期；检索 2026-09-18",
@@ -31317,16 +31284,15 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "支持中国大陆高校教师与警务司法教官岗位的分类与用工语境。",
-                  "不据此推定任职资格、授权或工资数值。"
+                  "首页不是高校任职、学术纪律或信息处理法规。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official website index",
                 "id": "cn-rule",
-                "limitation": "支持中国大陆同类岗位为高校教师岗与公安、司法院校及培训机构教官岗、多按公开招聘的学历与学科与科研成果要求录用、按院校聘任与考核制度管理的分类语境；不证明全国统一的强制资质，也不能把该类岗位与美国职业代码一一对应。",
+                "limitation": "保护范围引用保留不等核实，九模块法规另列。",
                 "market": "中国内地",
-                "name": "中国大陆公开高等教育与公安司法培训用工信息（高校教师与警务司法教官岗位）",
+                "name": "国家统计局主页：原cn-rule索引",
                 "period": "现行规定；检索 2026-09-18",
-                "publisher": "公开高等教育与公安司法培训用工信息",
+                "publisher": "国家统计局",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/"
               },
@@ -31354,7 +31320,7 @@
                 ],
                 "evidence_type": "official source",
                 "id": "directing",
-                "limitation": "只支持高校心理学教师（相邻职业）的心理学课程教学与实验研究任务；学科对象为心理学知识体系与实验研究方法，不把其课程与研究职责并入本职业。",
+                "limitation": "实际心理学教学研究、实验及临床服务Supplemental任务；是否承担按具体岗位核。",
                 "market": "美国",
                 "name": "O*NET OnLine：Psychology Teachers, Postsecondary（25-1066.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31397,12 +31363,11 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "支持入行准备层级与教育需求的观察点。",
-                  "不构成具体雇主的录用条件或中国大陆的门槛。"
+                  "美国本岗新聘教育回答仅显示39%硕士、26%博士、11%中等后教育证书，未显示余项不补零；Job Zone Five/SVP8及以上是通用准备层级，不把其法律学位等例子当本岗规定学位，也不推出统一培训年限或中国条件。"
                 ],
                 "evidence_type": "official source",
                 "id": "employer",
-                "limitation": "支持本职业的准备层级（Job Zone Five，SVP 8.0 及以上）、兴趣代码（SI）与教育需求反馈（硕士 39%、博士 26%、中等后教育证书 11%）；不代表具体雇主的招聘条件，也不等同于中国大陆的要求。",
+                "limitation": "通用准备层级与本岗新聘回答分开；非中国或具体单位招聘条件。",
                 "market": "美国",
                 "name": "O*NET OnLine：Criminal Justice and Law Enforcement Teachers, Postsecondary 摘要（25-1111.00）",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31418,7 +31383,7 @@
                 ],
                 "evidence_type": "official source",
                 "id": "enrichment",
-                "limitation": "只支持高校法学教师（相邻职业）的法律课程教学与法学研究任务；通常要求法律专业背景与执业经验，不把法学教学职责并入本职业。",
+                "limitation": "实际法律教学、案例与研究任务支持学科比较，不证明全部教师必须律师执照或执业经验。",
                 "market": "美国",
                 "name": "O*NET OnLine：Law Teachers, Postsecondary（25-1112.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31432,11 +31397,11 @@
                   "兴趣问卷只用于自我观察。",
                   "不得作为录用、排班或晋升依据。"
                 ],
-                "evidence_type": "official tool",
+                "evidence_type": "official tool entry",
                 "id": "interest-profiler",
-                "limitation": "兴趣问卷只描述体验偏好，不替代能力、资格、健康或录用判断，也不预测工作表现。",
+                "limitation": "原URL是主页与工具导航，不是本产品或本岗预测效度证据。",
                 "market": "美国/通用",
-                "name": "O*NET Interest Profiler（职业兴趣问卷）",
+                "name": "O*NET主页与Interest Profiler导航入口",
                 "period": "当前工具；检索 2026-09-18",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
@@ -31445,12 +31410,11 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "登记中国大陆公开工资统计的细分层级。",
-                  "代理值不得写成本职业工资。"
+                  "2025教育行业条件背景见g04-nbs。"
                 ],
-                "evidence_type": "official statistics",
+                "evidence_type": "official website index",
                 "id": "nbs",
-                "limitation": "公开工资统计按行业门类与人员类别发布，未建立与 25-1111.00 对应的职业细类；行业或人员类别均值不是本职业工资，也不能外推为全国职业收入。",
+                "limitation": "主页不证明全国职业工资或分类不存在。",
                 "market": "中国内地",
                 "name": "国家统计局：公开统计与工资发布入口",
                 "period": "现行发布；检索 2026-09-18",
@@ -31461,12 +31425,11 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "用于说明引入 AI 系统时的治理、记录与人工监督要求。",
-                  "框架不替代院校制度与适用规定的责任划分。"
+                  "AI RMF1.0为自愿治理框架。"
                 ],
                 "evidence_type": "institutional framework",
                 "id": "nist",
-                "limitation": "提供 AI 系统风险治理的用语与流程要求（角色、责任、记录与人工监督）；不规定教学与科研流程、学术诚信或学生信息保护要求。",
+                "limitation": "非高校强制法、教师资格和服务方责任豁免。",
                 "market": "美国",
                 "name": "NIST：Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
                 "period": "AI RMF 1.0；检索 2026-09-18",
@@ -31493,12 +31456,13 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "支持本职业的任务、工作情境与准备层级。",
-                  "不含技术采用与岗位替代数据。"
+                  "美国25-1111.00当前23任务分17Core、6Supplemental。Core包括讲授刑法、防御性警务与侦查技术，主持讨论、批改作业论文、编制评阅考试或委托他人、跟踪领域进展、成绩出勤记录、大纲讲义、课程修订、办公时间、学业职业指导、同事协作、招生注册就业推荐、教材用品、推荐信、校务委员会、阅读参考文献及校园社区活动。6Supplemental为研究发表、指导本科研究生教学实习研究、系主任等行政工作、学生社团、经费申请、政府行业咨询；不是所有岗位必做或统一科研考核。",
+                  "当前美国工作情境回答：邮件97%、面对面讨论63%、电话53%、可控室内95%、公开演讲46%每日；持续接触55%；外部客户公众59%极重要；决策影响58%很重要、决策频率51%每日、协调带领37%极重要、准确35%极重要。常规安排87%，每周>40小时65%，坐着约一半时间59%。时间压力22%每日、35%每周但非每日、38%每月但非每周；重复任务15%极重要/33%很重要；竞争27%高度/17%极度。当前页面更新时间不等统一调查年，不外推中国，也不等疾病发生率。",
+                  "美国本岗新聘教育回答仅显示39%硕士、26%博士、11%中等后教育证书，未显示余项不补零；Job Zone Five/SVP8及以上是通用准备层级，不把其法律学位等例子当本岗规定学位，也不推出统一培训年限或中国条件。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet",
-                "limitation": "支持本职业的任务、工作活动、工作情境百分比、准备层级、兴趣代码与 2024 年行业就业占比；为单一职业口径，不含技术采用、岗位替代或收入变化数据。",
+                "limitation": "2025美国本岗行业就业：教育服务99%、其他行业合计1%；行业就业占比不是工资、院校类型或中国岗位分布。 任务分类非固定日链，页面更新非统一调查年。",
                 "market": "美国",
                 "name": "O*NET OnLine：Criminal Justice and Law Enforcement Teachers, Postsecondary（25-1111.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31509,15 +31473,14 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "支持雇主技术关键词的市场信号说明。",
-                  "关键词不等于采用率或能力要求。"
+                  "2025年1月1日至12月31日美国Lightcast招聘关键词：Office5%、Excel2%、PowerPoint1%；Google Docs、Access、Outlook、Word没有披露数值，非0。技术目录另列Blackboard Learn、Sakai、Turnitin、DOC Cop、NCIC等；目录不等热门招聘比例，查重工具不等文献检索或学术不端认定。"
                 ],
-                "evidence_type": "official occupation data",
+                "evidence_type": "job posting technology keyword data",
                 "id": "r2-ai",
-                "limitation": "列出雇主招聘与教学场景中提到的软件与其他技术关键词（如学习管理系统、办公与演示软件、电子表格与文字处理、文献检索与查重工具）；技术关键词是市场信号，不衡量使用率、熟练度或岗位替代。",
+                "limitation": "招聘关键词非软件目录、使用率或生成式AI效率。",
                 "market": "美国",
                 "name": "O*NET OnLine：Criminal Justice and Law Enforcement Teachers, Postsecondary 热门技术（25-1111.00）",
-                "period": "页面 2026 年更新；检索 2026-09-18",
+                "period": "2025Lightcast",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/25-1111.00"
@@ -31528,9 +31491,9 @@
                   "登记中国大陆公开工资统计的细分层级。",
                   "未取得本职业单列数值，不使用代理数字。"
                 ],
-                "evidence_type": "official statistics",
+                "evidence_type": "official website index",
                 "id": "r2-pay-1",
-                "limitation": "公开工资统计只按区域、行业门类与人员类别发布，未建立与本职业一一对应的职业细类；本页未取得本职业单列数值，缺口在页面可见位置标记。",
+                "limitation": "职业工资未取得，不由首页断言最高细分或从未发布。",
                 "market": "中国内地",
                 "name": "国家统计局：公开工资统计发布入口",
                 "period": "现行发布；检索 2026-09-18",
@@ -31541,12 +31504,11 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "说明时薪、课时费与年收入不可直接互换。",
-                  "不提供个人收入结论。"
+                  "当前OEWS覆盖有薪全兼职，常规税前排除自雇等；教师通常不工作全年2080小时，公布年度工资，不反算本岗时薪。"
                 ],
                 "evidence_type": "official methodology",
                 "id": "r2-pay-2",
-                "limitation": "说明 OEWS 的覆盖人群、工资构成与折算假设；不提供本职业具体数值，也不用于把时薪或课时费换算为个人月收入。",
+                "limitation": "方法说明不代本岗具体年度值、个人月到手和岗位报价。",
                 "market": "美国",
                 "name": "BLS Handbook of Methods：OEWS 工资与折算口径",
                 "period": "现行方法说明；检索 2026-09-18",
@@ -31557,12 +31519,11 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "用于说明工资分位的统计位置。",
-                  "不提供个人收入结论，也不能按固定工时年化。"
+                  "2025全国年度五分位45000/60020/76590/100870/140240美元，当前未披露时薪。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-3",
-                "limitation": "公示本职业年工资分位 45,000／60,020／76,590／100,870／140,240 美元；该页未公布小时工资表；分位是统计位置，不是职称等级，也不能换算个人月收入或到手工资；按州或地区细分的数据须在该页按地区与期间查询。",
+                "limitation": "年度值已经公布；不按2080反推未披露时薪，不证职称或机构因果。",
                 "market": "美国",
                 "name": "O*NET OnLine：Criminal Justice and Law Enforcement Teachers, Postsecondary 全国工资（25-1111.00）",
                 "period": "2025 年工资数据；检索 2026-09-18",
@@ -31573,12 +31534,11 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "支持认证与培训信息的核对入口。",
-                  "入口不预测岗位数量或工资水平。"
+                  "下载页静态正文Loading，动态具体列表未取得。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official certification query entry",
                 "id": "ratify",
-                "limitation": "提供该细分的认证与培训查询入口，用于核对证书与培训信息；属于信息入口说明，不预测岗位数量或工资水平，也不替代中国大陆的聘任与资格条件。",
+                "limitation": "不能证明无证照、具体培训或中国资格。",
                 "market": "美国",
                 "name": "O*NET OnLine：Criminal Justice and Law Enforcement Teachers, Postsecondary 认证与培训入口（25-1111.00）",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31594,7 +31554,7 @@
                 ],
                 "evidence_type": "institutional research",
                 "id": "sag",
-                "limitation": "按任务级暴露度量生成式 AI 与职业任务的接近程度；不提供本职业单职业分数、采用率、自动化率或替代日期。",
+                "limitation": "本轮未取得25-1111精确匹配值及采用/替代因果，非研究完全没有职业细分。",
                 "market": "全球",
                 "name": "ILO：Generative AI and Jobs — Refined Global Index of Occupational Exposure",
                 "period": "研究发表时点；检索 2026-09-18",
@@ -31605,12 +31565,12 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "支持任务、工作活动与工作情境百分比。",
-                  "不含技术采用、岗位数量或收入变化数据。"
+                  "美国25-1111.00当前23任务分17Core、6Supplemental。Core包括讲授刑法、防御性警务与侦查技术，主持讨论、批改作业论文、编制评阅考试或委托他人、跟踪领域进展、成绩出勤记录、大纲讲义、课程修订、办公时间、学业职业指导、同事协作、招生注册就业推荐、教材用品、推荐信、校务委员会、阅读参考文献及校园社区活动。6Supplemental为研究发表、指导本科研究生教学实习研究、系主任等行政工作、学生社团、经费申请、政府行业咨询；不是所有岗位必做或统一科研考核。",
+                  "当前美国工作情境回答：邮件97%、面对面讨论63%、电话53%、可控室内95%、公开演讲46%每日；持续接触55%；外部客户公众59%极重要；决策影响58%很重要、决策频率51%每日、协调带领37%极重要、准确35%极重要。常规安排87%，每周>40小时65%，坐着约一半时间59%。时间压力22%每日、35%每周但非每日、38%每月但非每周；重复任务15%极重要/33%很重要；竞争27%高度/17%极度。当前页面更新时间不等统一调查年，不外推中国，也不等疾病发生率。"
                 ],
                 "evidence_type": "official source",
                 "id": "sag-moa",
-                "limitation": "支持本职业（25-1111.00）的任务、工作活动与工作情境百分比；该页为单一职业口径，不含技术采用或岗位替代数据。",
+                "limitation": "情境响应为美国样本，不是中国或疾病发生率。",
                 "market": "美国",
                 "name": "O*NET OnLine：Criminal Justice and Law Enforcement Teachers, Postsecondary 详细资料（25-1111.00）",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31633,6 +31593,126 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/25-1011.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国25-1111.00当前BLS2025—2035预测：2025就业15,700人，2035预测15,900人，增长2%（Slower than average标签1%—2%），年均1,100个含增长与替换的空缺；非每年净增或个人录用概率。"
+                ],
+                "evidence_type": "official employment projection",
+                "id": "g04-trends",
+                "limitation": "职业总量非录用概率或AI效果",
+                "market": "美国",
+                "name": "O*NET25-1111.00 BLS2025—2035就业趋势",
+                "period": "2025—2035",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/25-1111.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025美国本岗行业就业：教育服务99%、其他行业合计1%；行业就业占比不是工资、院校类型或中国岗位分布。"
+                ],
+                "evidence_type": "official occupation industry employment distribution",
+                "id": "g04-industry",
+                "limitation": "行业比例非工资或中国分布",
+                "market": "美国",
+                "name": "O*NET25-1111.00 2025行业就业",
+                "period": "2025",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/25-1111.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025年1月1日至12月31日美国Lightcast招聘关键词：Office5%、Excel2%、PowerPoint1%；Google Docs、Access、Outlook、Word没有披露数值，非0。技术目录另列Blackboard Learn、Sakai、Turnitin、DOC Cop、NCIC等；目录不等热门招聘比例，查重工具不等文献检索或学术不端认定。"
+                ],
+                "evidence_type": "job posting technology keyword data",
+                "id": "g04-hot",
+                "limitation": "目录与热门技术比例分开，非采用效果",
+                "market": "美国",
+                "name": "O*NET25-1111.00 2025Lightcast招聘关键词",
+                "period": "2025",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/25-1111.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国《高等教育法》46条规定高校教师资格：研究生或本科毕业且符合教学能力等条件；未达该学历者有规定的考试认定途径。47条规定高校教师职务及条件，48条聘任以合同明确权利义务。资格、职称职务、岗位聘任及培训分开，不能把资格一概写成录用后训练，也不能把全部岗位改为硕博硬门槛；非高校培训教官另核机构属性和适用规定。"
+                ],
+                "evidence_type": "law",
+                "id": "g04-higher-ed",
+                "limitation": "实际核46—48条，不推非高校教官和所有招聘条件",
+                "market": "中国内地",
+                "name": "中华人民共和国高等教育法：教师资格职务聘任",
+                "period": "2018修正版本",
+                "publisher": "教育部",
+                "scope": "contextual",
+                "url": "https://hudong.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/202204/t20220421_620257.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "教育部令40号适用于高校科学研究及相关活动中的学术不端预防处理，学校是主体、学术委员会承担调查认定；教师对指导的学生科研与学位论文负有必要审核义务。相似度或查重提示不是自动认定，研究数据与引证署名应真实，认定处分按学校权限和适用现行细则处理；一般课堂评分争议不自动变科研学术不端案件。"
+                ],
+                "evidence_type": "ministerial regulation",
+                "id": "g04-misconduct",
+                "limitation": "适用科学研究及相关活动，现行细则和学校程序另核，不把普通课堂争议直接定不端",
+                "market": "中国内地",
+                "name": "高等学校预防与处理学术不端行为办法：教育部令40号",
+                "period": "2016发布；现行页面有效性是",
+                "publisher": "北京市人民政府转载教育部",
+                "scope": "contextual",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/201905/t20190522_59345.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国FERPA适用于接受美国教育部资助的机构，教育记录须直接关联学生且由机构或其代理维护，存在法定排除；18岁或进入高等教育者的权利转给合资格学生。披露一般须99.30的签署注明日期同意，99.31允许包括有合法教育利益的校方人员等例外，外包还须满足规定条件；不是全部教师或软件厂商均可自由访问，不直接套中国。"
+                ],
+                "evidence_type": "federal regulation",
+                "id": "g04-ferpa",
+                "limitation": "实际相关99.1/3/5/30/31，不推所有记录访问必须同意或所有学校适用",
+                "market": "美国",
+                "name": "美国FERPA法规：适用机构、教育记录及披露条件",
+                "period": "当前法规页面",
+                "publisher": "U.S. Department of Education",
+                "scope": "contextual",
+                "url": "https://studentprivacy.ed.gov/ferpa"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "条件行业背景：仅目标雇主法人主营行业归教育时，国家统计局2025教育城镇非私营单位133,539元、私营单位63,908元税前年平均工资可作背景。城镇5人以上法人单位，不含个体工商户和自由职业者；警务司法培训机构不能仅凭名称归教育，不混用两个人群，不代本岗中位数、起薪、分位或月到手。"
+                ],
+                "evidence_type": "official wage statistics",
+                "id": "g04-nbs",
+                "limitation": "法人主营行业匹配的条件背景非本岗工资。",
+                "market": "中国内地",
+                "name": "国家统计局2025年城镇单位就业人员平均工资",
+                "period": "2025工资，2026-05-15发布",
+                "publisher": "中国政府官方网站",
+                "scope": "proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国个人信息保护法按可识别自然人信息、合法处理基础、目的与最小必要处理；学生成绩评价不因名称全部自动成为法定敏感信息。"
+                ],
+                "evidence_type": "law",
+                "id": "g04-pipl",
+                "limitation": "中国信息处理法，不把所有成绩自动归敏感，不混美国FERPA。",
+                "market": "中国内地",
+                "name": "中华人民共和国个人信息保护法（网信办全文）",
+                "period": "2021-11-01施行",
+                "publisher": "中国政府官方网站",
+                "scope": "proxy",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
               }
             ]
           },
@@ -32093,7 +32173,7 @@
           },
           {
             "来源": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32112,7 +32192,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32337,7 +32417,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32356,7 +32436,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32575,14 +32655,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33160,7 +33240,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33168,7 +33248,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33206,7 +33286,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "g04-higher-ed",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33214,7 +33294,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "g04-higher-ed",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33249,6 +33329,24 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "g04-higher-ed",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "g04-higher-ed",
+            "label": {
+              "$source": "g04-higher-ed",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            },
+            "scope": "实际核46—48条，不推非高校教官和所有招聘条件"
           }
         ],
         "tracks": [
@@ -34093,7 +34191,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "sag-moa"
+              "onet",
+              "g04-misconduct"
             ],
             "id": "image-use",
             "mitigation": {
@@ -34129,7 +34228,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls"
+              "onet"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -34165,7 +34264,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls"
+              "onet"
             ],
             "id": "project-income",
             "mitigation": {
@@ -34201,7 +34300,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "cn-rule"
+              "g04-pipl",
+              "g04-ferpa"
             ],
             "id": "identity-procedure",
             "mitigation": {
@@ -34237,8 +34337,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "nist",
-              "sag-moa"
+              "g04-misconduct",
+              "nist"
             ],
             "id": "project-data",
             "mitigation": {
@@ -34274,8 +34374,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
-              "employer"
+              "sag-moa"
             ],
             "id": "audition-feedback",
             "mitigation": {
@@ -34302,7 +34401,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34310,7 +34409,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34348,7 +34447,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "g04-higher-ed",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34356,7 +34455,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "g04-higher-ed",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34414,6 +34513,60 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "g04-misconduct",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "g04-misconduct",
+            "label": {
+              "$source": "g04-misconduct",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            },
+            "scope": "适用科学研究及相关活动，现行细则和学校程序另核，不把普通课堂争议直接定不端"
+          },
+          {
+            "href": {
+              "$source": "g04-pipl",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "g04-pipl",
+            "label": {
+              "$source": "g04-pipl",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            },
+            "scope": "中国信息处理法，不把所有成绩自动归敏感，不混美国FERPA。"
+          },
+          {
+            "href": {
+              "$source": "g04-ferpa",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "g04-ferpa",
+            "label": {
+              "$source": "g04-ferpa",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            },
+            "scope": "实际相关99.1/3/5/30/31，不推所有记录访问必须同意或所有学校适用"
           }
         ]
       },
@@ -34429,16 +34582,16 @@
             {
               "指标": "数据与口径",
               "数值": "本轮未取得与高校刑事司法与执法教师（O*NET-SOC 25-1111.00）对应的中国大陆职业级工资数值，故不展示具体数字；缺口已在页面可见位置标记。",
-              "说明": "中国大陆公开工资统计最高细分到行业门类与人员类别，不发布该职业细类数值。"
+              "说明": "未取得职业精确工资不等统计从未发布；可条件使用2025教育行业背景。"
             },
             {
               "指标": "查阅范围",
-              "数值": "国家统计局工资与统计发布页面、院校公开招聘信息（检索 2026-09-18）",
+              "数值": "本轮2026-10-09核2025城镇单位平均工资原页及高等教育法；未取中国本岗招聘样本。",
               "说明": "只用于说明实际查阅范围与时间，不作数值换算依据。"
             },
             {
               "指标": "职业分类",
-              "数值": "中国大陆同类岗位多称高校教师岗、公安院校教师岗、警务或司法培训机构教官岗，以事业单位岗位设置与聘任制度为主",
+              "数值": "高校教师与警务司法教官为编辑工作场景比较；一一分类映射与岗位占比未取得。",
               "说明": "用于中国语境说明；不能把该类岗位直接等同于美国职业代码的职责或工资，也不能据此推定任职资格。"
             },
             {
@@ -34448,8 +34601,8 @@
             },
             {
               "指标": "统计覆盖",
-              "数值": "国家统计局城镇单位工资统计覆盖城镇法人单位，不含个体工商户与自由职业者等",
-              "说明": "部分外聘授课与专项培训岗位以非标准用工形式存在，公开职业级数据未单列，行业均值不能代表该职业实际收入。"
+              "数值": "城镇5人以上法人单位，不含个体工商户与自由职业者。",
+              "说明": "条件行业背景：仅目标雇主法人主营行业归教育时，国家统计局2025教育城镇非私营单位133,539元、私营单位63,908元税前年平均工资可作背景。城镇5人以上法人单位，不含个体工商户和自由职业者；警务司法培训机构不能仅凭名称归教育，不混用两个人群，不代本岗中位数、起薪、分位或月到手。"
             },
             {
               "指标": "市场对照",
@@ -34459,7 +34612,7 @@
             {
               "指标": "证据不足",
               "数值": "未取得中国大陆高校教师岗与警务司法教官岗职业级工资分布（公开统计口径）",
-              "说明": "按缺口处理，不用行业均值或人群均值代填。"
+              "说明": "条件行业背景：仅目标雇主法人主营行业归教育时，国家统计局2025教育城镇非私营单位133,539元、私营单位63,908元税前年平均工资可作背景。城镇5人以上法人单位，不含个体工商户和自由职业者；警务司法培训机构不能仅凭名称归教育，不混用两个人群，不代本岗中位数、起薪、分位或月到手。"
             },
             {
               "指标": "证据不足",
@@ -34473,10 +34626,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_class_row": "中国大陆用工场景：普通高校与公安司法类院校的刑事司法与执法相关院系、警务与司法培训机构、开设相关专业的高等职业院校；公开工资统计按行业门类与人员类别发布，未建立与 O*NET-SOC 25-1111.00 对应的职业细类，本页不据分类推定任职资格或收入。",
+          "china_class_row": "中国一一职业分类映射未取得，不断言未建立职业细类；具体资格和聘任另核。",
           "china_edu_table": [
             {
-              "学历段": "本科及以上＋相关学科训练",
+              "学历段": "编辑准备方向：学科内容与教学辅助能力",
               "岗位方向": "教学辅助与实验或实训指导岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -34486,7 +34639,7 @@
               }
             },
             {
-              "学历段": "硕士及以上＋刑事司法或执法相关学科",
+              "学历段": "编辑准备方向：课程组织与评价能力",
               "岗位方向": "高校教学与科研岗位、培训机构教官岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -34496,7 +34649,7 @@
               }
             },
             {
-              "学历段": "博士＋科研成果（研究型院校）",
+              "学历段": "编辑准备方向：研究设计与引证能力",
               "岗位方向": "专任教师、课题负责人与研究生导师方向",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.theater",
@@ -34506,7 +34659,7 @@
               }
             },
             {
-              "学历段": "职称与教学科研业绩",
+              "学历段": "编辑准备方向：课程学科管理能力",
               "岗位方向": "院系负责人或学科带头人方向",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -34552,7 +34705,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国大陆公开信息检索入口：国家统计局工资与统计发布页面与院校公开招聘信息；本轮未取得该职业单列数值。",
+          "china_open": "本轮核NBS2025行业工资及法定高校资格；本岗全国工资与招聘报价未取得。",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
@@ -34581,7 +34734,7 @@
               "月薪参考": {
                 "$join": [
                   {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
+                    "$fact": "china-jiaojiang-featured-daily-2026-g04-current",
                     "field": "display_value"
                   },
                   {
@@ -34604,28 +34757,28 @@
               }
             }
           ],
-          "china_soc_row": "美国职业代码：O*NET-SOC 25-1111.00（Criminal Justice and Law Enforcement Teachers, Postsecondary）；BLS 就业预测经 O*NET 就业趋势页发布；中国大陆未建立与之对应的职业级工资口径。",
+          "china_soc_row": "中国一一职业分类映射未取得，不断言未建立职业细类；具体资格和聘任另核。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "china-jiaojiang-featured-daily-2026-g04-current"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响这个职业的工资吗？",
             "driver_heading": "教学与科研工作怎样安排学期与周期？",
             "official_heading": "官方统计口径与缺失说明",
-            "scenario_caption": "学历与训练背景、岗位方向与说明（编辑整理，不是薪资统计）",
-            "scenario_heading": "不同学历与训练背景对应哪些高校教学与培训岗位方向？",
+            "scenario_caption": "任务准备与岗位方向，非统一学历门槛或薪资统计",
+            "scenario_heading": "哪些准备方向需要结合目标岗位核对？",
             "scenario_interpretation_label": "说明与核对建议",
-            "scenario_role_label": "学历与训练背景",
+            "scenario_role_label": "编辑准备方向",
             "scenario_value_label": "岗位方向"
           },
-          "us_growth": "增长 1% 至 2%（2024—2034 年，标签「慢于平均」）",
+          "us_growth": "美国25-1111.00当前BLS2025—2035预测：2025就业15,700人，2035预测15,900人，增长2%（Slower than average标签1%—2%），年均1,100个含增长与替换的空缺；非每年净增或个人录用概率。",
           "us_median": "76,590美元/年（中位数，2025 年工资数据）"
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "O*NET OnLine 全国工资：Criminal Justice and Law Enforcement Teachers, Postsecondary 25-1111.00（2025 年工资数据）｜https://www.onetonline.org/link/localwages/25-1111.00；O*NET 就业趋势（BLS 2024—2034 年预测）｜https://www.onetonline.org/link/localtrends/25-1111.00",
+        "authority_sources": "2025全国年度工资与BLS2025—2035就业预测分别核：https://www.onetonline.org/link/localwages/25-1111.00；https://www.onetonline.org/link/localtrends/25-1111.00",
         "bls_table": [
           {
             "fact_ref": "low",
@@ -34656,40 +34809,40 @@
             "说明": "第 75 百分位是分布上四分之一的位置，来源为同一统计期；不能据此推断经验年限或职称；O*NET 全国工资：25-1111.00（2025 年工资数据）｜https://www.onetonline.org/link/localwages/25-1111.00"
           },
           {
-            "fact_ref": "high",
+            "fact_ref": "high-g04-current",
             "指标": "薪资 · 90 分位",
             "数值": {
-              "$fact": "high",
+              "$fact": "high-g04-current",
               "field": "display_value"
             },
-            "说明": "第 90 百分位是高分段位置，通常与院校类型、职称职级与学科方向差异相关，来源没有证明与经验的对应关系；O*NET 全国工资：25-1111.00（2025 年工资数据）｜https://www.onetonline.org/link/localwages/25-1111.00"
+            "说明": "第90分位是年度工资位置，不由此证明职称、院校或学科造成差异。"
           },
           {
-            "fact_ref": "employment",
-            "指标": "2024 就业 · 基期人数",
+            "fact_ref": "employment-g04-current",
+            "指标": "2025就业 · 基期人数",
             "数值": {
-              "$fact": "employment",
+              "$fact": "employment-g04-current",
               "field": "display_value"
             },
-            "说明": "就业规模是存量统计，不是当年招聘数量或岗位空缺数；来源为 O*NET 就业趋势页（基于 BLS 2024—2034 年预测）。"
+            "说明": "美国25-1111.00当前BLS2025—2035预测：2025就业15,700人，2035预测15,900人，增长2%（Slower than average标签1%—2%），年均1,100个含增长与替换的空缺；非每年净增或个人录用概率。"
           },
           {
-            "fact_ref": "growth",
-            "指标": "2024—2034 就业 · 增长预测",
+            "fact_ref": "growth-g04-current",
+            "指标": "2025—2035就业 · 变化预测",
             "数值": {
-              "$fact": "growth",
+              "$fact": "growth-g04-current",
               "field": "display_value"
             },
-            "说明": "预测标签为「慢于平均」，属于预测期的相对变化；该预测不含技术替代时点，也不代表个人录用概率。"
+            "说明": "美国25-1111.00当前BLS2025—2035预测：2025就业15,700人，2035预测15,900人，增长2%（Slower than average标签1%—2%），年均1,100个含增长与替换的空缺；非每年净增或个人录用概率。"
           },
           {
-            "fact_ref": "openings",
-            "指标": "2024—2034 就业 · 职位空缺",
+            "fact_ref": "openings-g04-current",
+            "指标": "2025—2035就业 · 年均空缺",
             "数值": {
-              "$fact": "openings",
+              "$fact": "openings-g04-current",
               "field": "display_value"
             },
-            "说明": "该口径空缺说明含因增长与替换产生的职位空缺，不是每年净增岗位数；预测期为 2024—2034 年。"
+            "说明": "美国25-1111.00当前BLS2025—2035预测：2025就业15,700人，2035预测15,900人，增长2%（Slower than average标签1%—2%），年均1,100个含增长与替换的空缺；非每年净增或个人录用概率。"
           }
         ],
         "boundary": {
@@ -34751,7 +34904,7 @@
           "type": "prose"
         },
         "growth": {
-          "$fact": "growth",
+          "$fact": "growth-g04-current",
           "field": "display_value"
         },
         "heading": {
@@ -34766,13 +34919,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024 年（O*NET 行业分布，25-1111.00 口径）",
+        "industry_period": "2025年美国本岗行业就业分布",
         "industry_rows": [
           {
-            "fact_ref": "median",
+            "fact_ref": "industry-theater-g04-current",
             "industry": "教育服务",
             "median": {
-              "$fact": "industry-theater",
+              "$fact": "industry-theater-g04-current",
               "field": "display_value"
             },
             "note": {
@@ -34783,10 +34936,10 @@
             }
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "industry-education-g04-current",
             "industry": "其他行业（合计）",
             "median": {
-              "$fact": "industry-education",
+              "$fact": "industry-education-g04-current",
               "field": "display_value"
             },
             "note": {
@@ -34797,10 +34950,10 @@
             }
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "industry-state-g04-current",
             "industry": "行业统计状态",
             "median": {
-              "$fact": "industry-amusement",
+              "$fact": "industry-state-g04-current",
               "field": "display_value"
             },
             "note": {
@@ -34812,7 +34965,7 @@
           },
           {
             "industry": "高校刑事司法与执法教师所在行业（统计分类）",
-            "median": "分布合计｜100%（2024 年 O*NET 行业分布；教育服务 98%、其他行业 2%）",
+            "median": "2025行业就业合计100%：教育服务99%、其他行业1%。",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -34863,7 +35016,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "question": "地区工资数据能否当作我的报价？"
+            "question": "就业预测能说明个人录用吗？"
           }
         ],
         "median": {
@@ -34877,7 +35030,7 @@
           "type": "prose"
         },
         "outlook_period": {
-          "$fact": "growth",
+          "$fact": "growth-g04-current",
           "field": "period"
         },
         "wage_column_labels": [
@@ -34894,7 +35047,7 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "不可按固定工时年化",
+            "equivalent": "官方年度值已公布；本岗时薪未披露，不按2080倒算。",
             "interpretation": {
               "$item": "actors.us-salary.career-snapshot-secondary-locale.2",
               "block": "us-salary",
@@ -34931,7 +35084,7 @@
             },
             "label": "较高工资位置（第 90 分位）",
             "value": {
-              "$fact": "high",
+              "$fact": "high-g04-current",
               "field": "display_value"
             }
           }
@@ -35084,7 +35237,7 @@
           {
             "geography": "美国",
             "horizon": {
-              "$fact": "growth",
+              "$fact": "growth-g04-current",
               "field": "period"
             },
             "interpretation": {
@@ -35100,10 +35253,10 @@
               "type": "prose"
             },
             "metric": "就业总体变化",
-            "occupation_scope": "高校刑事司法与执法教师（O*NET 就业趋势页，基于 BLS 2024—2034 年预测）",
-            "source_id": "bls",
+            "occupation_scope": "美国25-1111.00 BLS2025—2035",
+            "source_id": "g04-trends",
             "value": {
-              "$fact": "growth",
+              "$fact": "growth-g04-current",
               "field": "display_value"
             }
           },
@@ -35152,7 +35305,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35160,7 +35313,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35452,7 +35605,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET OnLine 就业趋势（BLS 2024—2034 年预测）",
+            "label": "BLS2025—2035趋势与通用准备层级",
             "secondary_value": null,
             "value": {
               "$item": "actors.display.onet_structured_fields_block.bls",
@@ -36216,14 +36369,14 @@
           },
           {
             "href": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36986,6 +37139,102 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "15,700人（2025美国本岗）",
+        "fact_id": "employment-g04-current",
+        "market": "美国",
+        "measure": "就业规模（存量统计）",
+        "occupation_scope": "美国25-1111.00当前BLS2025—2035预测：2025就业15,700人，2035预测15,900人，增长2%（Slower than average标签1%—2%），年均1,100个含增长与替换的空缺；非每年净增或个人录用概率。",
+        "period": "2025—2035预测；核2026-10-09",
+        "source_refs": [
+          "g04-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "增长2%（2025—2035；15,700→15,900；Slower than average标签1%—2%）",
+        "fact_id": "growth-g04-current",
+        "market": "美国",
+        "measure": "预测就业变化（职业总量）",
+        "occupation_scope": "美国25-1111.00当前BLS2025—2035预测：2025就业15,700人，2035预测15,900人，增长2%（Slower than average标签1%—2%），年均1,100个含增长与替换的空缺；非每年净增或个人录用概率。",
+        "period": "2025—2035预测；核2026-10-09",
+        "source_refs": [
+          "g04-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均1,100个（2025—2035；含增长与替换）",
+        "fact_id": "openings-g04-current",
+        "market": "美国",
+        "measure": "年均职位空缺（含增长与替换）",
+        "occupation_scope": "美国25-1111.00当前BLS2025—2035预测：2025就业15,700人，2035预测15,900人，增长2%（Slower than average标签1%—2%），年均1,100个含增长与替换的空缺；非每年净增或个人录用概率。",
+        "period": "2025—2035预测；核2026-10-09",
+        "source_refs": [
+          "g04-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "教育服务｜99%（2025行业就业占比）",
+        "fact_id": "industry-theater-g04-current",
+        "market": "美国",
+        "measure": "行业就业占比（非工资）",
+        "occupation_scope": "2025美国本岗行业就业：教育服务99%、其他行业合计1%；行业就业占比不是工资、院校类型或中国岗位分布。",
+        "period": "2025；核2026-10-09",
+        "source_refs": [
+          "g04-industry"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "其他行业｜1%（2025行业就业占比）",
+        "fact_id": "industry-education-g04-current",
+        "market": "美国",
+        "measure": "行业就业占比（非工资）",
+        "occupation_scope": "2025美国本岗行业就业：教育服务99%、其他行业合计1%；行业就业占比不是工资、院校类型或中国岗位分布。",
+        "period": "2025；核2026-10-09",
+        "source_refs": [
+          "g04-industry"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "140,240美元/年（第90分位，2025）",
+        "fact_id": "high-g04-current",
+        "market": "美国",
+        "measure": "高端分位工资（单一职业口径）",
+        "occupation_scope": "2025本岗年度工资分布位置，不推职称和机构因果。",
+        "period": "2025；核2026-10-09",
+        "source_refs": [
+          "r2-pay-3"
+        ]
+      },
+      {
+        "derivation": "中国大陆精确职业工资未取得；不使用行业平均、行业均值或人群均值替代本职业工资。",
+        "display_value": "条件行业背景：仅目标雇主法人主营行业归教育时，国家统计局2025教育城镇非私营单位133,539元、私营单位63,908元税前年平均工资可作背景。城镇5人以上法人单位，不含个体工商户和自由职业者；警务司法培训机构不能仅凭名称归教育，不混用两个人群，不代本岗中位数、起薪、分位或月到手。",
+        "fact_id": "china-jiaojiang-featured-daily-2026-g04-current",
+        "market": "中国内地",
+        "measure": "未取得的统计位置（中国大陆高校刑事司法与执法教师职业级工资）",
+        "occupation_scope": "条件行业背景：仅目标雇主法人主营行业归教育时，国家统计局2025教育城镇非私营单位133,539元、私营单位63,908元税前年平均工资可作背景。城镇5人以上法人单位，不含个体工商户和自由职业者；警务司法培训机构不能仅凭名称归教育，不混用两个人群，不代本岗中位数、起薪、分位或月到手。",
+        "period": "2025；核2026-10-09",
+        "source_refs": [
+          "g04-nbs"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "行业披露：教育服务与其他行业两类，未披露更细院校分布",
+        "fact_id": "industry-state-g04-current",
+        "market": "美国",
+        "measure": "行业披露状态",
+        "occupation_scope": "2025美国本岗行业就业：教育服务99%、其他行业合计1%；行业就业占比不是工资、院校类型或中国岗位分布。",
+        "period": "2025；核2026-10-09",
+        "source_refs": [
+          "g04-industry"
+        ]
       }
     ]
   },
@@ -36994,7 +37243,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "教育服务 · 高校刑事司法与执法教学",
@@ -37045,7 +37294,7 @@
       "text": "高校刑事司法与执法教师"
     }
   },
-  "source_content_sha256": "53495b4cb32e91b4deb659a3f583abee27747fcc86e227c0a8820f5f97342a80",
+  "source_content_sha256": "5fa789eed8c80367de188c3d3197c3f88331ad72c5b496c1b5f739e1d9e4a722",
   "subject": {
     "canonical_slug": "criminal-justice-and-law-enforcement-teachers-postsecondary",
     "name": "高校刑事司法与执法教师",

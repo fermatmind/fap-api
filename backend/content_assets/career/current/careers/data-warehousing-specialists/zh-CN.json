@@ -17,6 +17,9 @@
       "fact:path-parent": {
         "status": "pending_mapping"
       },
+      "fact:r5-current-market": {
+        "status": "pending_mapping"
+      },
       "fact:wage-median": {
         "status": "mapped"
       },
@@ -7332,14 +7335,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "职业范围：本页只覆盖 O*NET-SOC 15-1243.01 数据仓库专家，官方范围为设计、建模或实施企业数据仓库活动，为数据库信息仓库编程与配置，并向仓库用户提供支持；涵盖来源映射、抽取转换装载、仓库结构与元数据、质量核对、测试与排障等任务。该职业薪资与就业在 O*NET 页面按父职业数据库架构师（15-1243.00）代理口径公布。"
+              "自身15-1243.01设计/建模/实施企业数据仓库、程序配置与用户支持，18任务均核心，包括过程模型、来源映射、结构质量、元数据、测试与排障。粒度、维表/事实表、可重跑/隔离/对账与血缘为编辑实践建议，不宣称全部都由O*NET逐字规定；工资/就业/行业明确15-1243父职业代理。"
             ]
           },
           "id": "data-warehousing-specialists.profile.definition-block.1",
           "source_refs": [
-            "bls-dbarch-outlook",
-            "bls-dbarch-wage",
-            "onet-dws"
+            "r5-onet-current"
           ],
           "type": "prose"
         },
@@ -7353,7 +7354,7 @@
           },
           "id": "data-warehousing-specialists.profile.responsibilities-block.1",
           "source_refs": [
-            "onet-dws"
+            "r5-onet-current"
           ],
           "type": "list"
         },
@@ -7367,7 +7368,7 @@
           },
           "id": "data-warehousing-specialists.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-dws"
+            "r5-onet-current"
           ],
           "type": "list"
         },
@@ -7381,7 +7382,7 @@
           },
           "id": "data-warehousing-specialists.profile.responsibilities-block.3",
           "source_refs": [
-            "onet-dws"
+            "r5-onet-current"
           ],
           "type": "list"
         },
@@ -7395,8 +7396,8 @@
           },
           "id": "data-warehousing-specialists.profile.work-context-block.1",
           "source_refs": [
-            "editorial-dws",
-            "onet-dws"
+            "r5-editorial-dws",
+            "r5-onet-current"
           ],
           "type": "prose"
         },
@@ -7405,12 +7406,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作情境与作业条件：以办公室或远程的屏幕前工作为主，需要长时间坐姿与高认知投入；O*NET 调查显示该职业 96% 表示每天在环境可控的室内工作、86% 表示持续或几乎持续坐着工作、100% 表示每天使用电子邮件、55% 表示每天进行面对面讨论、50% 表示每天通电话、57% 表示做得准确精确「极其重要」、52% 表示与工作团队协作「非常重要」、65% 表示对如何做决定有「有一些」自由。不同用人单位的数据可得性、平台复杂度与合规要求差异明显。"
+              "美国受访96%每日可控室内/86%持续坐姿、100%每日邮件、55%每日面对面/50%每日电话、57%准确极其重要、52%协作非常重要、65%决策Somefreedom；48%时间压力每月及以上但非每周、30%每周及以上但非每日。非远程率、工时法律或发布授权。"
             ]
           },
           "id": "data-warehousing-specialists.profile.work-context-block.2",
           "source_refs": [
-            "onet-dws"
+            "r5-onet-current"
           ],
           "type": "prose"
         },
@@ -7419,13 +7420,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "专业依据与使用边界：本页以 O*NET 15-1243.01 的任务、工作活动与工作情境为本细分口径；薪资、就业与行业分布为 O*NET 页面标注的父职业数据库架构师代理口径；雇主技术关键词来自 O*NET 热门技术页的招聘提及率；中国大陆公开工资统计未建立与该细分对应的职业级口径，按证据缺口处理。各来源只按自身对象、市场与时期使用，不互相换算。"
+              "自身O*NET JobZone4/SVP7至低于8，78%学士/4%高中/4%中等后证书是新雇员所需学历意见，非员工构成。BLS父职业典型学士/少于5年相关经验/无在岗训练类别，非固定最低年资/无需训练或中国法律。工资/就业/行业父代理与任务自身分开；2025美国招聘64项，Excel25/Office18/SQL16/PowerBI9/Python7/PowerPoint7/Outlook6/Tableau5/Access5%，非现场使用/熟练度/GenAI率；提及不能推平台采购、业务用途或权限。中国职业工资/真实在招缺口保留，NBS只实际行业背景。"
             ]
           },
           "id": "data-warehousing-specialists.profile.onet-structured-fields-block.1",
           "source_refs": [
-            "onet-dws",
-            "onet-hot"
+            "r5-onet-current",
+            "r5-bls-current",
+            "r5-hottech-current",
+            "r5-nbs-it"
           ],
           "type": "prose"
         },
@@ -7439,7 +7442,7 @@
           },
           "id": "data-warehousing-specialists.profile.career-quick-answers-block.1",
           "source_refs": [
-            "onet-dws"
+            "r5-onet-current"
           ],
           "type": "prose"
         },
@@ -7453,8 +7456,8 @@
           },
           "id": "data-warehousing-specialists.profile.career-quick-answers-block.2",
           "source_refs": [
-            "editorial-dws",
-            "onet-dws"
+            "r5-editorial-dws",
+            "r5-onet-current"
           ],
           "type": "prose"
         },
@@ -7463,12 +7466,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "边界与分工：数据仓库专家负责面向分析的数据层设计与装载；数据库管理员负责数据库运行、性能、容量与访问安全；数据库架构师负责更高层的数据体系与标准设计；数据科学家与商业智能分析师负责建模、结论与指标呈现；工程与平台团队负责平台与调度运行，职责不能自动互换。自动化工具、纸面练习或一般职业资料都不能授予数据访问、生产变更或发布权限。"
+              "按主要产出对照仓库实施、数据库运行/安全与系统设计，职责可交叠；DBA也可改结构/程序，不能称从不数据层建模/加载，父职业也不是人人更高级。发布/数据用途与签批权限按真实任命核，岗位名不赋管理权。"
             ]
           },
           "id": "data-warehousing-specialists.profile.definition-block.2",
           "source_refs": [
-            "editorial-dws"
+            "r5-onet-current",
+            "onet-dba",
+            "bls-dbarch-path"
           ],
           "type": "prose"
         }
@@ -7611,8 +7616,8 @@
           },
           "id": "data-warehousing-specialists.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "editorial-dws",
-            "onet-hot"
+            "r5-editorial-dws",
+            "r5-hottech-current"
           ],
           "type": "prose"
         },
@@ -7621,12 +7626,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答：目前可核对的是任务层面的变化，而不是岗位替代的时间表。生成型助手可以承担部分 SQL 与映射草稿、测试断言与文档摘要、故障信息汇总，这类可减少部分重复编码与整理工作；但快速生成不等于数据可用、口径正确或可以上线——业务口径与粒度确认、数据授权、异常处置与对账签署、上线与回退审批仍需人工承担。本职业工作情境显示 57% 表示做得准确精确「极其重要」、65% 表示对如何做决定有「有一些」自由、48% 表示每月一次以上面对时间压力、43% 表示竞争程度「中等竞争」；技术暴露不等于组织采用，也不等于岗位消失；ILO 的任务暴露框架不能解释为岗位流失概率。"
+              "已核自身任务与招聘词，SQL/映射、测试/文档与排障草稿为编辑待验证候选，未测提效/采用或裁员日期；模型生成不代业务规则/合法用途核查。NIST自愿建议与PIPL适用义务分开，父预测不证明细类AI因果。"
             ]
           },
           "id": "data-warehousing-specialists.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "editorial-dws"
+            "r5-onet-current",
+            "r5-hottech-current",
+            "r5-cn-pipl",
+            "r5-nist-core",
+            "r5-ilo-index"
           ],
           "type": "prose"
         },
@@ -7640,7 +7649,7 @@
           },
           "id": "data-warehousing-specialists.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "editorial-dws"
+            "r5-editorial-dws"
           ],
           "type": "prose"
         },
@@ -7654,7 +7663,7 @@
           },
           "id": "data-warehousing-specialists.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "editorial-dws"
+            "r5-editorial-dws"
           ],
           "type": "prose"
         },
@@ -7668,7 +7677,7 @@
           },
           "id": "data-warehousing-specialists.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "editorial-dws"
+            "r5-editorial-dws"
           ],
           "type": "prose"
         },
@@ -7682,7 +7691,7 @@
           },
           "id": "data-warehousing-specialists.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "editorial-dws"
+            "r5-editorial-dws"
           ],
           "type": "prose"
         },
@@ -7691,13 +7700,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "当前变化：生成型助手可草拟 SQL、转换规则与字段映射草稿，缩短初稿时间；输出必须在隔离数据上按业务口径回归后才可进入评审。"
+              "编辑待验证工具候选，非实测提效/采用：SQL映射、测试或文档草稿应以真实口径和获许可样本核误差/返工；本页没有已实施实验。"
             ]
           },
           "id": "data-warehousing-specialists.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "editorial-dws",
-            "onet-hot"
+            "r5-onet-current",
+            "r5-nist-core"
           ],
           "type": "prose"
         },
@@ -7706,12 +7715,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "当前变化：工具可生成测试断言、字段说明与故障摘要草稿，辅助文档与排障整理；断言是否覆盖真实失败方式仍须人工判断。"
+              "编辑待验证工具候选，非实测提效/采用：SQL映射、测试或文档草稿应以真实口径和获许可样本核误差/返工；本页没有已实施实验。"
             ]
           },
           "id": "data-warehousing-specialists.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "editorial-dws"
+            "r5-onet-current",
+            "r5-nist-core"
           ],
           "type": "prose"
         }
@@ -7733,7 +7743,7 @@
           },
           "id": "data-warehousing-specialists.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-wages"
+            "r5-nbs-it"
           ],
           "type": "prose"
         },
@@ -7742,12 +7752,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "用工场景与计酬方式：以互联网与软件服务、金融保险、专业服务与制造等机构的全职岗位为主，多按月薪与年度奖金计酬，也存在项目制与外包形式。"
+              "编辑合同核对：岗位职级、合同主体、月薪/奖金/工时与外包安排；本轮无真实在招样本，不宣称全职或某付薪形式占主流。"
             ]
           },
           "id": "data-warehousing-specialists.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wages"
+            "r5-nbs-it"
           ],
           "type": "prose"
         },
@@ -7756,12 +7766,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业分类与口径：中国大陆同类多称数据仓库工程师、数据开发工程师或数据平台工程师，岗位名称与实际职责差异较大；公开工资统计按行业门类与人员类别发布，未建立与该细分一一对应的职业级口径。"
+              "中文按实际数据仓库/开发职责对照，未核中美分类一一对应；所读NBS信息技术2025非私营248752/私营128166元税前年均，5人及以上法人，排除个体自由职业、非私营非仅国企，仅实际归属行业单位背景，不代本职业工资。"
             ]
           },
           "id": "data-warehousing-specialists.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "editorial-dws"
+            "r5-nbs-it"
           ],
           "type": "prose"
         },
@@ -7775,8 +7785,8 @@
           },
           "id": "data-warehousing-specialists.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "editorial-dws",
-            "nbs-wages"
+            "r5-editorial-dws",
+            "r5-nbs-it"
           ],
           "type": "prose"
         }
@@ -7798,8 +7808,8 @@
           },
           "id": "data-warehousing-specialists.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "bls-dbarch-wage",
-            "editorial-dws"
+            "r5-wages-current",
+            "r5-editorial-dws"
           ],
           "type": "prose"
         },
@@ -7808,7 +7818,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 15-1243.01 全国工资页公示 2025 年 5 月 BLS OEWS 工资数据，中位年薪 139,500 美元（67.07 美元/时），第 10 分位 86,240 美元、第 90 分位 204,000 美元；页面明确标注为父职业 Database Architects（15-1243.00）的代理口径，不是本细分的精确工资，中位数也不是起薪或个人保证。"
+              "父职业15-1243代理2025年五分位86240/109370/139500/169290/204000美元，时41.46/52.58/67.07/81.39/98.08，官方年值直接引非本页年化，非本细类精确工资或起薪。OEWS非农雇员直时税前、排除自雇；含部分激励/生产奖金/津贴，排除加班溢价/非生产奖金等，不代个人税后。"
             ]
           },
           "fact_refs": [
@@ -7816,7 +7826,8 @@
           ],
           "id": "data-warehousing-specialists.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "bls-dbarch-wage"
+            "r5-wages-current",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -7833,7 +7844,7 @@
           ],
           "id": "data-warehousing-specialists.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "bls-dbarch-wage"
+            "r5-wages-current"
           ],
           "type": "prose"
         },
@@ -7847,8 +7858,8 @@
           },
           "id": "data-warehousing-specialists.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "bls-dbarch-wage",
-            "editorial-dws"
+            "r5-wages-current",
+            "r5-editorial-dws"
           ],
           "type": "prose"
         },
@@ -7862,7 +7873,7 @@
           },
           "id": "data-warehousing-specialists.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "editorial-dws"
+            "r5-editorial-dws"
           ],
           "type": "prose"
         },
@@ -7876,9 +7887,9 @@
           },
           "id": "data-warehousing-specialists.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "bls-dbarch-outlook",
-            "bls-dbarch-wage",
-            "editorial-dws"
+            "r5-bls-current",
+            "r5-wages-current",
+            "r5-editorial-dws"
           ],
           "type": "prose"
         }
@@ -7900,8 +7911,8 @@
           },
           "id": "data-warehousing-specialists.fit.riasec-fit-block.1",
           "source_refs": [
-            "editorial-dws",
-            "onet-dws"
+            "r5-editorial-dws",
+            "r5-onet-current"
           ],
           "type": "prose"
         },
@@ -7915,7 +7926,7 @@
           },
           "id": "data-warehousing-specialists.fit.riasec-fit-block.2",
           "source_refs": [
-            "onet-dws"
+            "r5-onet-current"
           ],
           "type": "prose"
         },
@@ -7924,13 +7935,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "适配信号：愿意先澄清口径再动手、对一致性与细节有耐心、能接受大量时间花在核对与对账、愿意按流程与权限作业、并能把限制如实告知业务用户的人，通常更容易适应。"
+              "编辑自我观察：是否愿意澄清口径、持续核对并如实记录限制；本轮未测时间占比或某特质更易适配的效度。19风格Impact细节100/尽责87/好奇72/谨慎69/正直69非比例/人格成功率。"
             ]
           },
           "id": "data-warehousing-specialists.fit.riasec-fit-block.3",
           "source_refs": [
-            "editorial-dws",
-            "onet-dws"
+            "r5-onet-current"
           ],
           "type": "prose"
         },
@@ -7944,8 +7954,8 @@
           },
           "id": "data-warehousing-specialists.fit.riasec-fit-block.4",
           "source_refs": [
-            "editorial-dws",
-            "onet-dws"
+            "r5-editorial-dws",
+            "r5-onet-current"
           ],
           "type": "prose"
         },
@@ -7959,7 +7969,7 @@
           },
           "id": "data-warehousing-specialists.fit.riasec-fit-block.5",
           "source_refs": [
-            "onet-dws"
+            "r5-onet-current"
           ],
           "type": "prose"
         },
@@ -7968,12 +7978,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣与任务：O*NET 为数据仓库专家（15-1243.01）公示的兴趣代码是 CI——常规型对应按程序与规范组织数据并核对质量，研究型对应分析数据关系与改进方法。请用实际任务核对是否愿意在口径、质量与复现上持续投入；兴趣代码只说明活动类型，不预测工作表现。"
+              "自身六兴趣C90/I63/E34/R32/S17/A10非百分比或员工人格，CI仅活动偏好，不推录用/能力/成功概率。"
             ]
           },
           "id": "data-warehousing-specialists.fit.riasec-fit-block.6",
           "source_refs": [
-            "onet-dws"
+            "r5-onet-current"
           ],
           "type": "prose"
         },
@@ -7982,14 +7992,15 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "稳定执行：尽责性与求知欲与这类工作的关系最直接——前者对应按规范持久核对与交付，后者对应持续学习方法与工具。大五没有官方的职业匹配阈值，本页只把它当作自我观察工具。"
+              "编辑观察执行与学习体验，O*NET工作风格非大五职业效度研究；未核尽责/求知关系最直接或统一职业阈值。"
             ]
           },
           "id": "data-warehousing-specialists.fit.riasec-fit-block.7",
           "source_refs": [
-            "editorial-dws"
+            "r5-onet-current"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -8001,7 +8012,8 @@
           },
           "id": "data-warehousing-specialists.fit.riasec-fit-block.8",
           "source_refs": [
-            "editorial-dws"
+            "r5-onet-current",
+            "r5-editorial-dws"
           ],
           "type": "prose"
         }
@@ -8018,12 +8030,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "数据仓库专家的风险集中在四类：口径与粒度未澄清导致数据层不可信；装载与转换不可重跑导致问题无法复现；质量断言与对账缺失使错误数据进入分析层；以及在未授权环境使用受限数据或未经评审变更生产结构带来的合规与交付风险。错误后果往往在下游报表与模型才显现，修正成本更高。"
+              "编辑风险场景：业务口径/质量、重跑复现、合法用途/权限与实际变更责任需核；没有职业事故率或事后修正成本一定更高的实测。中国含可识别个人信息处理应核PIPL13合法依据（非一律同意）、6最小必要/8质量、51合理权限与定期安全培训；账号不代合法依据。21外包委托范围/监督/转委托条件和59受托安全协助分别核，单位制度不取代法律。"
             ]
           },
           "id": "data-warehousing-specialists.risk.career-risk-cards.1",
           "source_refs": [
-            "editorial-dws"
+            "r5-onet-current",
+            "r5-cn-pipl",
+            "r5-nist-core"
           ],
           "type": "prose"
         },
@@ -8037,7 +8051,7 @@
           },
           "id": "data-warehousing-specialists.risk.career-risk-cards.2",
           "source_refs": [
-            "editorial-dws"
+            "r5-editorial-dws"
           ],
           "type": "prose"
         },
@@ -8051,7 +8065,7 @@
           },
           "id": "data-warehousing-specialists.risk.career-risk-cards.3",
           "source_refs": [
-            "editorial-dws"
+            "r5-editorial-dws"
           ],
           "type": "prose"
         },
@@ -8065,7 +8079,7 @@
           },
           "id": "data-warehousing-specialists.risk.career-risk-cards.4",
           "source_refs": [
-            "editorial-dws"
+            "r5-editorial-dws"
           ],
           "type": "prose"
         },
@@ -8079,7 +8093,7 @@
           },
           "id": "data-warehousing-specialists.risk.career-risk-cards.5",
           "source_refs": [
-            "editorial-dws"
+            "r5-editorial-dws"
           ],
           "type": "prose"
         }
@@ -8113,7 +8127,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直答：入行通常依靠信息技术相关专业训练与项目实践积累；美国该职业准备层级为 Job Zone Four（SVP 7.0 至低于 8.0），官方教育调查显示新入职者中 78% 要求学士学位、4% 要求高中或同等学历、4% 要求中等后证书；能否独立完成一次从口径澄清、建模与加载到对账与元数据交付的闭环，是比证书更可核对的准备证据。"
+              "自身O*NET JobZone4/SVP7至低于8，78%学士/4%高中/4%中等后证书是新雇员所需学历意见，非员工构成。BLS父职业典型学士/少于5年相关经验/无在岗训练类别，非固定最低年资/无需训练或中国法律。编辑路线按实际项目观察，不是统一晋级顺序/比证书必然有效，课程证不代合法用途或岗位任命。"
             ]
           },
           "fact_refs": [
@@ -8121,7 +8135,8 @@
           ],
           "id": "data-warehousing-specialists.path.career-path-block.2",
           "source_refs": [
-            "onet-dws"
+            "r5-onet-current",
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -8130,12 +8145,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "口径说明：美国口径来自 O*NET 15-1243.01（准备层级与教育调查为本细分口径；薪资与就业为父职业数据库架构师代理口径）；中国大陆没有与 O*NET-SOC 一一对应的职业细类，同类多称数据仓库工程师或数据开发工程师，岗位聘用、数据访问与生产发布权限是不同层级的条件。"
+              "自身任务/所需学历意见与父代理工资/就业分开；中国实际职责对照未核一一对应分類或真实招聘。中国含可识别个人信息处理应核PIPL13合法依据（非一律同意）、6最小必要/8质量、51合理权限与定期安全培训；账号不代合法依据。21外包委托范围/监督/转委托条件和59受托安全协助分别核，单位制度不取代法律。"
             ]
           },
           "id": "data-warehousing-specialists.path.career-path-block.3",
           "source_refs": [
-            "editorial-dws"
+            "r5-onet-current",
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -8144,12 +8160,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格与授权边界：学历与专业训练、数据访问授权、生产变更与发布权限、工具与平台认证以及培训证书不是同一层状态，不能互相替代；具体要求以目标单位与现行规定为准。"
+              "学历/平台技能、课程证、账号、合法处理依据、生产发布任命与行业权限分别核；未核全国统一强制数据仓库职业证书，不推一概无需行业/岗位资格。"
             ]
           },
           "id": "data-warehousing-specialists.path.career-path-block.4",
           "source_refs": [
-            "editorial-dws"
+            "r5-cn-pipl",
+            "r5-onet-current"
           ],
           "type": "prose"
         },
@@ -8220,6 +8237,13 @@
               "evidence",
               "next_step"
             ],
+            "column_labels": [
+              "编辑岗位例",
+              "初期任务例",
+              "观察点（非雇主统一）",
+              "虚构证据例",
+              "职责区别"
+            ],
             "rows": [
               [
                 "数据开发或数据支持岗",
@@ -8247,14 +8271,14 @@
                 "维护数据标准、元数据与权限规则，协调评审与合规要求。",
                 "标准理解、评审组织与跨部门协作。",
                 "一份虚构的数据标准与评审记录样本。",
-                "侧重治理与协调，不直接承担单表建模与发布执行。"
+                "治理与实施可交叠，不按名称排除单表建模/执行责任"
               ],
               [
                 "数据库管理员（相邻方向）",
                 "维护数据库运行、性能、容量、备份恢复与访问安全。",
                 "运行稳定性、性能与安全控制能力。",
                 "一份虚构的备份恢复与权限清单样本。",
-                "属相邻职业，以数据库运行与安全为核心，不承担数据层建模与加载。"
+                "DBA主要运行/安全，但也可修改结构/程序，不能称从不建模与加载"
               ]
             ]
           },
@@ -8314,23 +8338,32 @@
               "next_step",
               "review"
             ],
+            "column_labels": [
+              "资格准备项",
+              "适用对象",
+              "编辑求职核对",
+              "条件/证据",
+              "法域/办理核对",
+              "投入缺口",
+              "限制"
+            ],
             "rows": [
               [
                 "学历与专业训练",
                 "准备进入数据仓库岗位的人",
-                "满足多数岗位的基本条件",
-                "美国口径下准备层级为 Job Zone Four，教育调查显示 78% 要求学士学位、4% 要求高中或同等学历、4% 要求中等后证书；中国大陆多要求信息技术相关专业背景，按目标单位核对",
+                "编辑核对，未核中国多数岗位统一要求",
+                "自身O*NET JobZone4/SVP7至低于8，78%学士/4%高中/4%中等后证书是新雇员所需学历意见，非员工构成。BLS父职业典型学士/少于5年相关经验/无在岗训练类别，非固定最低年资/无需训练或中国法律。",
                 "按目标单位招聘公告",
-                "中至长（本科及以上）",
+                "证据不足：本轮无统一费用/培训时长",
                 "学历不代表数据授权、发布权限或录用结果。"
               ],
               [
                 "数据访问授权",
                 "接触受限数据的人",
                 "影响可处理的数据范围与合规边界",
-                "不是全部岗位的入门门槛",
+                "中国含可识别个人信息处理应核PIPL13合法依据（非一律同意）、6最小必要/8质量、51合理权限与定期安全培训；账号不代合法依据。21外包委托范围/监督/转委托条件和59受托安全协助分别核，单位制度不取代法律。",
                 "按单位数据治理制度确认并培训",
-                "中（依数据类型与规定）",
+                "证据不足：本轮无统一费用/培训时长",
                 "授权有范围与期限，不等于通用资格或法律意见。"
               ],
               [
@@ -8339,7 +8372,7 @@
                 "影响能否独立变更与发布",
                 "通常由单位按岗位与流程授予",
                 "按单位变更与发布审批流程申请",
-                "中（依系统与制度）",
+                "证据不足：本轮无统一费用/培训时长",
                 "发布权限不等于质量结论或合规审批。"
               ],
               [
@@ -8348,7 +8381,7 @@
                 "影响能否通过技术考核与独立交付",
                 "通常按岗位要求考察",
                 "通过课程、项目与实践积累",
-                "中（持续练习）",
+                "证据不足：本轮无统一费用/培训时长",
                 "工具熟练度不等于口径理解与数据质量能力。"
               ],
               [
@@ -8357,16 +8390,16 @@
                 "影响方案可行性与评审通过率",
                 "不是通用入职门槛",
                 "通过岗位培训与项目积累",
-                "中至长（持续积累）",
+                "证据不足：本轮无统一费用/培训时长",
                 "治理知识不等于监管授权或执业资格。"
               ],
               [
                 "培训证书",
                 "希望证明技能的人",
                 "可作为能力的参考证据",
-                "不是入职门槛",
+                "未核全国强制职业证书，不推全部岗位从不要求",
                 "按培训机构的报名条件参加",
-                "低至中（依课程）",
+                "证据不足：本轮无统一费用/培训时长",
                 "培训证书不等于数据授权、发布权限或录用承诺。"
               ]
             ]
@@ -8395,7 +8428,7 @@
           ],
           "id": "data-warehousing-specialists.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls-dbarch-outlook"
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -8404,7 +8437,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直答：需求信号要分三层看——官方就业预测反映职业总量变化，业务数据量增长与数据驱动决策决定岗位分布，招聘公告只能说明某一时点某一单位的需求；三者不能互相替代。本页就业与空缺为 O*NET 15-1243.01 页面标注的父职业数据库架构师代理口径。"
+              "官方父预测、真实单位安排与当期招聘样本分开；业务量/数据决策为编辑待调查条件，非已证实决定岗位分布；本轮无中国真实招聘。"
             ]
           },
           "fact_refs": [
@@ -8412,7 +8445,7 @@
           ],
           "id": "data-warehousing-specialists.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls-dbarch-outlook"
+            "r5-bls-current"
           ],
           "type": "prose"
         },
@@ -8421,26 +8454,29 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页（15-1243.01，数据为父职业 Database Architects）显示2024 年约 66,900 人、2034 年约 72,700 人，2024—2034 年增长 9%（标签「远快于平均」），十年内年均约 4,000 个含增长与更替的空缺；该预测为职业总量口径，不含技术替代时点，也不代表个人录用概率。BLS 职业展望手册另有数据库管理员与架构师合并口径（2025 年约 144,500 人、2025—2035 年增长 4%、年均约 7,300 个空缺），两套口径期间与人群不同，分别引用不合并。"
+              "父职业15-1243代理：2025约69500→2035约76000，净增6500/+9.4%，年均3900空缺含增长与替换，自雇2.1%；O*NET7%及以上只是分类，非本细类或个人录用概率。OOH数据库管理员与架构师合并为另一人群，不能用合并144500/4%/7300代本父代理。"
             ]
           },
           "id": "data-warehousing-specialists.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls-dbarch-outlook"
+            "r5-bls-current"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "迁移的共同能力：数据模型与查询基础、口径与质量意识、以及按流程协作的交付习惯；这些能力是向相邻方向迁移的共同起点，不代表自动胜任。"
+              "条件性编辑映射：只有实际训练或职责已有相关经验时，数据库结构、查询及数据核对经验可作任务对照，不证明可直接转岗。"
             ]
           },
           "id": "data-warehousing-specialists.market-signals.market-signal-card.4",
           "source_refs": [
-            "editorial-dws"
+            "r5-onet-current",
+            "onet-dba",
+            "r5-editorial-dws"
           ],
           "type": "prose"
         },
@@ -8454,8 +8490,9 @@
           },
           "id": "data-warehousing-specialists.market-signals.market-signal-card.5",
           "source_refs": [
-            "bls-dbarch-outlook",
-            "editorial-dws"
+            "r5-onet-current",
+            "onet-dba",
+            "r5-editorial-dws"
           ],
           "type": "prose"
         }
@@ -8599,14 +8636,14 @@
           },
           "id": "data-warehousing-specialists.sources.boundary.1",
           "source_refs": [
-            "bls-dbarch-outlook",
+            "r5-bls-current",
             "bls-dbarch-path",
-            "bls-dbarch-wage",
+            "r5-wages-current",
             "editorial-dws",
-            "nbs-wages",
+            "r5-nbs-it",
             "onet-dba",
-            "onet-dws",
-            "onet-hot",
+            "r5-onet-current",
+            "r5-hottech-current",
             "onet-itm",
             "onet-net",
             "onet-sys"
@@ -8618,22 +8655,12 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "paragraphs": [
-              "中国大陆公开工资统计未建立与该细分对应的职业级口径，按证据缺口处理，不以行业均值或招聘报价样本代填，也不做汇率或购买力换算。"
+              "本轮未取得中国本职业工资/招聘分布，不由未取得断言全国从未建立职业统计；NBS匹配行业背景不代职业工资。"
             ]
           },
           "id": "data-warehousing-specialists.sources.boundary.1.2",
           "source_refs": [
-            "bls-dbarch-outlook",
-            "bls-dbarch-path",
-            "bls-dbarch-wage",
-            "editorial-dws",
-            "nbs-wages",
-            "onet-dba",
-            "onet-dws",
-            "onet-hot",
-            "onet-itm",
-            "onet-net",
-            "onet-sys"
+            "r5-nbs-it"
           ],
           "type": "prose"
         },
@@ -8647,14 +8674,14 @@
           },
           "id": "data-warehousing-specialists.sources.boundary.1.3",
           "source_refs": [
-            "bls-dbarch-outlook",
+            "r5-bls-current",
             "bls-dbarch-path",
-            "bls-dbarch-wage",
+            "r5-wages-current",
             "editorial-dws",
-            "nbs-wages",
+            "r5-nbs-it",
             "onet-dba",
-            "onet-dws",
-            "onet-hot",
+            "r5-onet-current",
+            "r5-hottech-current",
             "onet-itm",
             "onet-net",
             "onet-sys"
@@ -8762,7 +8789,8 @@
                 "accessed_at": "2026-09-19",
                 "details": [
                   "支持父职业 Database Architects 2024 年约 66,900 人、2034 年约 72,700 人、2024—2034 年增长 9%（远快于平均）、年均约 4,000 个含增长与更替的空缺。",
-                  "O*NET 就业趋势页明确标注该数据为 Database Architects（父职业）口径。"
+                  "O*NET 就业趋势页明确标注该数据为 Database Architects（父职业）口径。",
+                  "本轮当前2025—2035父代理9.4%、3900；自身任务/学历意见与父统计分开，保护旧事实仍保留"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "bls-dbarch-outlook",
@@ -8858,7 +8886,8 @@
                 "accessed_at": "2026-09-19",
                 "details": [
                   "支持本细分职业身份、18 项任务、17 项工作情境百分比、工作风格与教育调查。",
-                  "该页公示的薪资、就业与行业分布标注为父职业 Database Architects 代理口径，本页已在正文与事实登记中显式披露。"
+                  "该页公示的薪资、就业与行业分布标注为父职业 Database Architects 代理口径，本页已在正文与事实登记中显式披露。",
+                  "本轮当前2025—2035父代理9.4%、3900；自身任务/学历意见与父统计分开，保护旧事实仍保留"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet-dws",
@@ -8933,6 +8962,216 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/15-1211.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "18任务均核心；19风格Impact细节100尽责87好奇72谨慎69正直69，非比例。CI评分C90I63E34R32S17A10非员工人格。学历78学士4高中4中等后证书为所需意见非员工构成；Updated非统一调查年。工资/就业/行业按15-1243父职业代理。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-onet-current",
+                "limitation": "18任务均核心；19风格Impact细节100尽责87好奇72谨慎69正直69，非比例。CI评分C90I63E34R32S17A10非员工人格。学历78学士4高中4中等后证书为所需意见非员工构成；Updated非统一调查年。工资/就业/行业按15-1243父职业代理。",
+                "market": "美国",
+                "name": "O*NET详细档案：数据仓库15-1243.01",
+                "period": "检索2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/15-1243.01"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "15-1243代理年10/25/50/75/90分位86240/109370/139500/169290/204000，时41.46/52.58/67.07/81.39/98.08；直接引官方值，非本页年化或细分工资、个人报价/税后。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-wages-current",
+                "limitation": "15-1243代理年10/25/50/75/90分位86240/109370/139500/169290/204000，时41.46/52.58/67.07/81.39/98.08；直接引官方值，非本页年化或细分工资、个人报价/税后。",
+                "market": "美国",
+                "name": "O*NET2025全国工资：数据库架构师父职业代理",
+                "period": "2025OEWS全国工资；检索2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "parent proxy",
+                "url": "https://www.onetonline.org/link/localwages/15-1243.01"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "64项，Excel25/Office18/SQL16/PowerBI9/Python7/PowerPoint7/Outlook6/Tableau5/Access5%，美国招聘提及非实际使用/熟练度/GenAI率；Under1不等于0。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-hottech-current",
+                "limitation": "64项，Excel25/Office18/SQL16/PowerBI9/Python7/PowerPoint7/Outlook6/Tableau5/Access5%，美国招聘提及非实际使用/熟练度/GenAI率；Under1不等于0。",
+                "market": "美国",
+                "name": "O*NET热门技术：2025数据仓库招聘文本",
+                "period": "2025全年美国Lightcast去重招聘文本；检索2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/15-1243.01"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "15-1243：2025 69.5千→2035 76.0千，+6.5千/+9.4%、年均3.9千空缺、自雇2.1%；不是数据仓库自身统计或OOH数据库管理员与架构师合并。典型学士/少于5年相关经验/无在岗训练类别非固定最少年资或中国法律。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-bls-current",
+                "limitation": "15-1243：2025 69.5千→2035 76.0千，+6.5千/+9.4%、年均3.9千空缺、自雇2.1%；不是数据仓库自身统计或OOH数据库管理员与架构师合并。典型学士/少于5年相关经验/无在岗训练类别非固定最少年资或中国法律。",
+                "market": "美国",
+                "name": "BLS表1.2：数据库架构师父职业预测",
+                "period": "2025基期/2025—2035预测；检索2026-10-09",
+                "publisher": "Bureau of Labor Statistics",
+                "scope": "parent proxy",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "非农全/兼职雇员；排除自雇等。工资直时税前，包含基础/生活成本/保证/危险工作/激励佣金与生产奖金/小费；排除加班溢价、班次差额、非生产奖金等。不能一概称不含绩效或津贴，不代个人扣税/实际报酬。"
+                ],
+                "evidence_type": "official methodology",
+                "id": "r5-oews-concepts",
+                "limitation": "非农全/兼职雇员；排除自雇等。工资直时税前，包含基础/生活成本/保证/危险工作/激励佣金与生产奖金/小费；排除加班溢价、班次差额、非生产奖金等。不能一概称不含绩效或津贴，不代个人扣税/实际报酬。",
+                "market": "美国",
+                "name": "BLS OEWS方法：工资包含与排除",
+                "period": "当前方法页；检索2026-10-09",
+                "publisher": "Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "NIST自愿风险治理建议，非PIPL强制法律/职业资格，不证明本职业AI采用、提效或因果。"
+                ],
+                "evidence_type": "institutional framework",
+                "id": "r5-nist-core",
+                "limitation": "NIST自愿风险治理建议，非PIPL强制法律/职业资格，不证明本职业AI采用、提效或因果。",
+                "market": "美国",
+                "name": "NIST AI RMF Core：GOVERN 3.2等",
+                "period": "AI RMF 1.0（2023）；检索 2026-10-09",
+                "publisher": "National Institute of Standards and Technology",
+                "scope": "contextual",
+                "url": "https://airc.nist.gov/airmf-resources/airmf/5-sec-core/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "ILO宽口径任务暴露方法，本轮所读摘要未核15-1243.01匹配分数，不断言完整研究没有或用暴露推裁员。"
+                ],
+                "evidence_type": "institutional research",
+                "id": "r5-ilo-index",
+                "limitation": "ILO宽口径任务暴露方法，本轮所读摘要未核15-1243.01匹配分数，不断言完整研究没有或用暴露推裁员。",
+                "market": "全球",
+                "name": "ILO：Generative AI and Jobs—Refined Global Index（摘要）",
+                "period": "2025-05-20研究摘要；检索 2026-10-09",
+                "publisher": "International Labour Organization",
+                "scope": "contextual",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "NBS2025信息传输软件IT服务非私营248752/私营128166元税前年均，5人及以上法人，排除个体/自由职业，非私营非仅国企；只作真实单位行业匹配背景，不代本职业工资或中美行业对应。"
+                ],
+                "evidence_type": "official industry wage",
+                "id": "r5-nbs-it",
+                "limitation": "NBS2025信息传输软件IT服务非私营248752/私营128166元税前年均，5人及以上法人，排除个体/自由职业，非私营非仅国企；只作真实单位行业匹配背景，不代本职业工资或中美行业对应。",
+                "market": "中国内地",
+                "name": "NBS2025工资：信息技术行业背景",
+                "period": "2025统计；2026-05-15发布；检索2026-10-09",
+                "publisher": "国家统计局",
+                "scope": "broader proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "4个人信息不含匿名化信息；6最小必要、8质量、13多项合法处理依据不全需同意；21委托范围与监督/转委托条件、51合理权限/定期教育、57泄露补救通知和避免危害例外、59受托安全协助。单位账号不代法律依据，操作员与处理者责任区分；非全国数据录入职业证书法或所有商业数据规则。"
+                ],
+                "evidence_type": "official law",
+                "id": "r5-cn-pipl",
+                "limitation": "4个人信息不含匿名化信息；6最小必要、8质量、13多项合法处理依据不全需同意；21委托范围与监督/转委托条件、51合理权限/定期教育、57泄露补救通知和避免危害例外、59受托安全协助。单位账号不代法律依据，操作员与处理者责任区分；非全国数据录入职业证书法或所有商业数据规则。",
+                "market": "中国内地",
+                "name": "个人信息保护法：处理依据、受托与操作权限",
+                "period": "2021-08-20通过；2021-11-01施行；检索2026-10-09",
+                "publisher": "国家互联网信息办公室（转载人大文本）",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "25项目标任务原文；任务交叠不等于可直接转岗。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-target-dbarch",
+                "limitation": "实际读取25项目标Tasks，用于条件性编辑任务对照；不证明转岗成功、个人能力、资格或统一距离。",
+                "market": "美国",
+                "name": "O*NET目标任务：数据库架构师 15-1243.00",
+                "period": "当前页面；检索2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1243.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "17项目标任务原文；任务交叠不等于可直接转岗。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-target-ds",
+                "limitation": "实际读取17项目标Tasks，用于条件性编辑任务对照；不证明转岗成功、个人能力、资格或统一距离。",
+                "market": "美国",
+                "name": "O*NET目标任务：数据科学家 15-2051.00",
+                "period": "当前页面；检索2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-2051.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "17项目标任务原文；任务交叠不等于可直接转岗。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-target-bi",
+                "limitation": "实际读取17项目标Tasks，用于条件性编辑任务对照；不证明转岗成功、个人能力、资格或统一距离。",
+                "market": "美国",
+                "name": "O*NET目标任务：商业智能分析师 15-2051.01",
+                "period": "当前页面；检索2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-2051.01"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "28项目标任务原文；任务交叠不等于可直接转岗。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-target-systems",
+                "limitation": "实际读取28项目标Tasks，用于条件性编辑任务对照；不证明转岗成功、个人能力、资格或统一距离。",
+                "market": "美国",
+                "name": "O*NET目标任务：计算机系统工程师／架构师 15-1299.08",
+                "period": "当前页面；检索2026-10-09",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1299.08"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本页风险模块已有上下文锚点，表示内部编辑说明，非国家统计局外部资料。"
+                ],
+                "evidence_type": "editorial_synthesis",
+                "id": "r5-editorial-dws",
+                "limitation": "本页编辑风险与迁移核对建议，无外部官方原文；不支持统计、法规、事故成本或个人适配结论。",
+                "market": "编辑设计",
+                "name": "数据仓库授权模块编辑说明（本页风险核对）",
+                "period": "2026-10-09本地定点修订",
+                "publisher": "FermatMind editorial",
+                "scope": "editorial_synthesis",
+                "url": "#career-visual-group-risk"
               }
             ]
           },
@@ -9110,7 +9349,7 @@
         "authority_links": [
           {
             "来源": {
-              "$source": "onet-dws",
+              "$source": "r5-onet-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -9119,7 +9358,7 @@
             "类型": "官方职业档案",
             "适用范围": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。",
             "链接": {
-              "$source": "onet-dws",
+              "$source": "r5-onet-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9128,7 +9367,7 @@
           },
           {
             "来源": {
-              "$source": "onet-hot",
+              "$source": "r5-hottech-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -9137,7 +9376,7 @@
             "类型": "招聘提及率统计",
             "适用范围": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。",
             "链接": {
-              "$source": "onet-hot",
+              "$source": "r5-hottech-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9146,7 +9385,7 @@
           },
           {
             "来源": {
-              "$source": "bls-dbarch-wage",
+              "$source": "r5-wages-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -9155,7 +9394,7 @@
             "类型": "官方工资与就业统计",
             "适用范围": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。",
             "链接": {
-              "$source": "bls-dbarch-wage",
+              "$source": "r5-wages-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9171,17 +9410,17 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "可草拟 SQL、转换规则与字段映射草稿。",
+            "AI主要改变": "编辑待验证候选，非本页实测：可草拟 SQL、转换规则与字段映射草稿。",
             "仍由人负责": "口径、粒度与业务规则的正确性由人确认。",
             "方向": "代码与映射"
           },
           {
-            "AI主要改变": "可生成测试断言、文档与故障摘要草稿。",
+            "AI主要改变": "编辑待验证候选，非本页实测：可生成测试断言、文档与故障摘要草稿。",
             "仍由人负责": "断言是否覆盖真实失败方式、文档是否准确由人判断。",
             "方向": "测试与文档"
           },
           {
-            "AI主要改变": "可自动跑规则并汇总异常清单。",
+            "AI主要改变": "编辑待验证候选，非本页实测：可自动跑规则并汇总异常清单。",
             "仍由人负责": "异常处置、隔离与对账签署由人负责。",
             "方向": "质量与对账"
           }
@@ -9196,16 +9435,16 @@
           {
             "使用限制": "属官方职业档案；工资与就业为该页标注的父职业代理口径，不等于本细分工资。",
             "来源": {
-              "$source": "onet-dws",
+              "$source": "r5-onet-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "data-warehousing-specialists.source-register.published.1"
             },
             "研究对象": "O*NET 15-1243.01 任务与工作情境",
-            "结论": "提供本职业 18 项任务（如开发包含来源、装载、转换与抽取的仓库过程模型、核对结构与准确性、在来源系统与仓库和数据市场之间映射数据、设计并实现仓库结构）与 17 项工作情境百分比。",
+            "结论": "自身18任务均核心，57工作情境题非只有所摘17项；工资/就业/行业15-1243父代理，情境非事故率",
             "链接": {
-              "$source": "onet-dws",
+              "$source": "r5-onet-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9215,16 +9454,16 @@
           {
             "使用限制": "提及率是市场信号，不衡量使用率、熟练度或岗位替代。",
             "来源": {
-              "$source": "onet-hot",
+              "$source": "r5-hottech-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "data-warehousing-specialists.source-register.published.1"
             },
             "研究对象": "O*NET 15-1243.01 雇主技术关键词提及率",
-            "结论": "列出雇主招聘中的软件与技术关键词及提及率（Microsoft Excel 25%、Microsoft Office 18%、SQL 16%、Microsoft Power BI 9%、Python 7%、Tableau 5% 等）。",
+            "结论": "2025美国招聘64项，Excel25/Office18/SQL16/PowerBI9/Python7/PowerPoint7/Outlook6/Tableau5/Access5%，非现场使用/熟练度/GenAI率；提及不能推平台采购、业务用途或权限。",
             "链接": {
-              "$source": "onet-hot",
+              "$source": "r5-hottech-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9232,18 +9471,18 @@
             }
           },
           {
-            "使用限制": "属父职业与合并口径，不代表 15-1243.01 的精确工资或岗位数。",
+            "使用限制": "BLS表1.2为Database Architects父职业15-1243代理，非管理员与架构师合并，也非15-1243.01自身工资或岗位数。",
             "来源": {
-              "$source": "bls-dbarch-wage",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "data-warehousing-specialists.source-register.published.1"
             },
-            "研究对象": "BLS 职业展望手册：数据库管理员与架构师",
-            "结论": "提供 2025 年 5 月数据库架构师中位年薪 139,500 美元；合并口径下 2025 年约 144,500 人、2025—2035 年增长 4%、就业变化约 +6,500 人、年均约 7,300 个空缺。",
+            "研究对象": "15-1243父职业代理；非合并管理员/架构师",
+            "结论": "2025父职业工资代理与2025—2035父预测：父职业15-1243代理：2025约69500→2035约76000，净增6500/+9.4%，年均3900空缺含增长与替换，自雇2.1%；O*NET7%及以上只是分类，非本细类或个人录用概率。",
             "链接": {
-              "$source": "bls-dbarch-wage",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9259,11 +9498,11 @@
         },
         "method_cards": [
           {
-            "含义": "草拟 SQL 与映射规则、生成测试断言与文档摘要、汇总故障信息。",
+            "含义": "编辑待验证候选，非实测采用：SQL/映射、测试与文档草稿",
             "概念": "AI 可辅助的任务"
           },
           {
-            "含义": "技术演示不等于生产采用；采用取决于数据治理成熟度、审计要求与团队能力。",
+            "含义": "实际组织采用需雇主证据；系统/治理/能力是编辑核对项，非已证实因果",
             "概念": "组织采用"
           },
           {
@@ -9275,14 +9514,14 @@
           {
             "回答": "不能从任务暴露推导岗位裁撤日期；本页没有单职业的替代数据。",
             "来源": {
-              "$source": "onet-dws",
+              "$source": "r5-onet-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "data-warehousing-specialists.source-register.published.1"
             },
             "链接": {
-              "$source": "onet-dws",
+              "$source": "r5-onet-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9291,16 +9530,16 @@
             "问题": "AI 会直接取代数据仓库专家吗？"
           },
           {
-            "回答": "草拟 SQL 与映射规则、生成测试断言与文档、汇总质量异常与故障信息。",
+            "回答": "编辑待验证候选：SQL映射、测试文档或故障摘要；本页没有提效实验",
             "来源": {
-              "$source": "onet-dws",
+              "$source": "r5-onet-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "data-warehousing-specialists.source-register.published.1"
             },
             "链接": {
-              "$source": "onet-dws",
+              "$source": "r5-onet-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9311,14 +9550,14 @@
           {
             "回答": "业务口径与粒度确认、数据授权、异常处置与对账签署、上线与回退审批。",
             "来源": {
-              "$source": "onet-dws",
+              "$source": "r5-onet-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "data-warehousing-specialists.source-register.published.1"
             },
             "链接": {
-              "$source": "onet-dws",
+              "$source": "r5-onet-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9336,7 +9575,7 @@
         "responsibility_steps": [
           {
             "步骤": "确认输入与权限",
-            "说明": "确认数据来源、字段定义与使用权限来自受控记录。"
+            "说明": "中国含可识别个人信息处理应核PIPL13合法依据（非一律同意）、6最小必要/8质量、51合理权限与定期安全培训；账号不代合法依据。21外包委托范围/监督/转委托条件和59受托安全协助分别核，单位制度不取代法律。"
           },
           {
             "步骤": "限定范围",
@@ -9359,7 +9598,7 @@
           },
           {
             "为什么重要": "在未授权环境使用受限数据会带来合规风险。",
-            "控制方式": "按单位数据治理要求在授权范围内处理，并保留访问与变更记录。",
+            "控制方式": "中国含可识别个人信息处理应核PIPL13合法依据（非一律同意）、6最小必要/8质量、51合理权限与定期安全培训；账号不代合法依据。21外包委托范围/监督/转委托条件和59受托安全协助分别核，单位制度不取代法律。",
             "风险": "权限与数据范围越界"
           },
           {
@@ -9395,31 +9634,31 @@
             "人的控制点": "异常是否成立、是否隔离或更正由人决定。",
             "任务": "核对结构与准确性",
             "工作方向": "数据质量",
-            "当前变化": "规则引擎可提示重复、缺失与格式异常。"
+            "当前变化": "编辑待验证候选/核对项，非本页实测采用或提效：规则引擎可提示重复、缺失与格式异常。"
           },
           {
             "人的控制点": "粒度、历史保留与性能权衡由人决定。",
             "任务": "设计仓库结构与装载流程",
             "工作方向": "建模与装载",
-            "当前变化": "工具可生成候选模型与示例装载脚本。"
+            "当前变化": "编辑待验证候选/核对项，非本页实测采用或提效：工具可生成候选模型与示例装载脚本。"
           },
           {
             "人的控制点": "数据授权与使用范围只能由有权限人员决定。",
             "任务": "处理受限数据与访问控制",
             "工作方向": "权限与合规",
-            "当前变化": "工具可辅助权限清单与最小必要范围的整理。"
+            "当前变化": "编辑待验证候选/核对项，非本页实测采用或提效：工具可辅助权限清单与最小必要范围的整理。"
           },
           {
             "人的控制点": "是否可上线与回退由有职责人员审批。",
             "任务": "上线与变更发布",
             "工作方向": "发布与变更",
-            "当前变化": "流水线可自动化构建、测试与部署步骤。"
+            "当前变化": "编辑待验证候选/核对项，非本页实测采用或提效：流水线可自动化构建、测试与部署步骤。"
           },
           {
             "人的控制点": "不能从任务暴露推导岗位裁撤日期或收入变化。",
             "任务": "判断采用与替代影响",
             "工作方向": "任务变化判断",
-            "当前变化": "现有材料不提供本职业生成式 AI 采用率或替代时间表。"
+            "当前变化": "编辑待验证候选/核对项，非本页实测采用或提效：现有材料不提供本职业生成式 AI 采用率或替代时间表。"
           }
         ],
         "transition": {
@@ -9562,7 +9801,7 @@
             "copy_key": "career.item.career-path-block",
             "type": "prose"
           },
-          "jurisdiction": "适用法域：美国口径来自 O*NET 与 BLS 公开资料（薪资与就业为父职业数据库架构师代理口径）；中国大陆口径参考数据仓库与数据开发岗位的公开招聘与用工信息方向，具体要求以目标单位与现行规定为准。",
+          "jurisdiction": "美国自身O*NET任务/教育意见与BLS父代理准备分开；中国所读PIPL，未核真实招聘/全部行业或跨境配套",
           "summary": {
             "$item": "data-warehousing-specialists.path.career-path-block.3",
             "block": "path",
@@ -9574,7 +9813,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "onet-dws",
+              "$source": "r5-onet-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9582,7 +9821,7 @@
             },
             "id": "onet-dws",
             "label": {
-              "$source": "onet-dws",
+              "$source": "r5-onet-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -9610,7 +9849,7 @@
           },
           {
             "href": {
-              "$source": "bls-dbarch-outlook",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9618,7 +9857,7 @@
             },
             "id": "bls-dbarch-outlook",
             "label": {
-              "$source": "bls-dbarch-outlook",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -9650,7 +9889,7 @@
             "id": "entry",
             "stages": [
               {
-                "credentials": "按单位与岗位要求核验。",
+                "credentials": "编辑核对：目标岗位训练/技能/任命与实际权限，未核中国统一条件或自然晋级",
                 "next_moves": "熟悉口径、结构与质量规则。",
                 "readiness_evidence": "能按规范完成数据核对、字段映射与记录填写。",
                 "responsibility": {
@@ -9662,7 +9901,7 @@
                 "role": "受训辅助（在监督下）"
               },
               {
-                "credentials": "按单位要求核验。",
+                "credentials": "编辑核对：目标岗位训练/技能/任命与实际权限，未核中国统一条件或自然晋级",
                 "next_moves": "学习性能调优与治理要求。",
                 "readiness_evidence": "能独立完成建模、加载与对账并交付元数据。",
                 "responsibility": {
@@ -9674,7 +9913,7 @@
                 "role": "独立负责数据层"
               },
               {
-                "credentials": "按单位制度核验。",
+                "credentials": "编辑核对：目标岗位训练/技能/任命与实际权限，未核中国统一条件或自然晋级",
                 "next_moves": "学习数据治理与协作流程。",
                 "readiness_evidence": "能处理复杂口径与故障并带教新人。",
                 "responsibility": {
@@ -9686,7 +9925,7 @@
                 "role": "骨干与带训"
               },
               {
-                "credentials": "按单位制度与任职要求核验。",
+                "credentials": "编辑核对：目标岗位训练/技能/任命与实际权限，未核中国统一条件或自然晋级",
                 "next_moves": "核对该方向任职要求。",
                 "readiness_evidence": "能组织标准、审批与跨团队协作。",
                 "responsibility": {
@@ -9704,28 +9943,28 @@
             "id": "specialist",
             "stages": [
               {
-                "credentials": "按单位要求核验。",
+                "credentials": "编辑核对：目标岗位训练/技能/任命与实际权限，未核中国统一条件或自然晋级",
                 "next_moves": "学习建模标准与评审方法。",
                 "readiness_evidence": "能说明粒度选择与历史处理依据。",
                 "responsibility": "设计粒度、维度与事实结构并维护历史保留策略。",
                 "role": "维度与事实设计"
               },
               {
-                "credentials": "按单位要求。",
+                "credentials": "编辑核对：目标岗位训练/技能/任命与实际权限，未核中国统一条件或自然晋级",
                 "next_moves": "学习调度与依赖管理。",
                 "readiness_evidence": "能在重跑后得到一致结果并保留运行记录。",
                 "responsibility": "实现可重跑的抽取、转换与装载并处理迟到与更正确数据。",
                 "role": "抽取转换装载实现"
               },
               {
-                "credentials": "按单位要求。",
+                "credentials": "编辑核对：目标岗位训练/技能/任命与实际权限，未核中国统一条件或自然晋级",
                 "next_moves": "学习质量度量与根因分析。",
                 "readiness_evidence": "能提供异常清单、隔离记录与对账结论。",
                 "responsibility": "建立断言、隔离机制与对账口径并处理异常。",
                 "role": "数据质量与对账"
               },
               {
-                "credentials": "按单位要求。",
+                "credentials": "编辑核对：目标岗位训练/技能/任命与实际权限，未核中国统一条件或自然晋级",
                 "next_moves": "学习数据治理规范。",
                 "readiness_evidence": "能按血缘说明变更影响范围。",
                 "responsibility": "维护元数据、血缘与变更记录，支持审计与影响分析。",
@@ -9738,28 +9977,28 @@
             "id": "management",
             "stages": [
               {
-                "credentials": "按单位要求核验。",
+                "credentials": "编辑核对：目标岗位训练/技能/任命与实际权限，未核中国统一条件或自然晋级",
                 "next_moves": "学习需求与验收方法。",
                 "readiness_evidence": "能复述需求并写出可核对的口径说明。",
                 "responsibility": "把业务问题翻译为可实施的数据需求与验收条件。",
                 "role": "与业务方澄清需求"
               },
               {
-                "credentials": "按单位要求。",
+                "credentials": "编辑核对：目标岗位训练/技能/任命与实际权限，未核中国统一条件或自然晋级",
                 "next_moves": "学习接口与契约管理。",
                 "readiness_evidence": "能按接口约定交付并处理变更通告。",
                 "responsibility": "与上下游团队协作交付数据接口与数据契约。",
                 "role": "与工程和数据科学协作"
               },
               {
-                "credentials": "按单位要求。",
+                "credentials": "编辑核对：目标岗位训练/技能/任命与实际权限，未核中国统一条件或自然晋级",
                 "next_moves": "学习容量与成本度量。",
                 "readiness_evidence": "能给出优化前后对照与依据。",
                 "responsibility": "在满足时效与质量前提下优化查询与存储成本。",
                 "role": "性能与成本优化"
               },
               {
-                "credentials": "按单位制度与任职要求。",
+                "credentials": "编辑核对：目标岗位训练/技能/任命与实际权限，未核中国统一条件或自然晋级",
                 "next_moves": "核对该方向任职要求。",
                 "readiness_evidence": "能兼顾质量、合规与交付效率。",
                 "responsibility": "负责平台标准、发布流程与跨团队治理决策。",
@@ -9863,7 +10102,7 @@
             }
           },
           {
-            "answer": "资格与责任须按法域、机构与雇主分别核验：美国该职业准备层级为 Job Zone Four（SVP 7.0 至低于 8.0），薪资与就业数据为父职业数据库架构师代理口径；中国大陆公开工资统计未建立与该细分对应的职业级口径，本页按证据缺口处理。生产环境的数据访问、变更与发布权限由用人单位按数据治理与合规要求授予，纸面练习与自动化工具都不能替代该授权。",
+            "answer": "自身O*NET JobZone4/SVP7至低于8，78%学士/4%高中/4%中等后证书是新雇员所需学历意见，非员工构成。BLS父职业典型学士/少于5年相关经验/无在岗训练类别，非固定最低年资/无需训练或中国法律。 中国含可识别个人信息处理应核PIPL13合法依据（非一律同意）、6最小必要/8质量、51合理权限与定期安全培训；账号不代合法依据。21外包委托范围/监督/转委托条件和59受托安全协助分别核，单位制度不取代法律。",
             "key": "qa1",
             "question": "资格与授权边界是什么？",
             "table": {
@@ -9884,7 +10123,7 @@
                   "alternate_value": null,
                   "label": "中国",
                   "secondary_value": null,
-                  "value": "未建立对应职业级工资口径（证据不足）"
+                  "value": "本轮未取得中国职业工资，未核分类一一对应"
                 },
                 {
                   "alternate_value": null,
@@ -9924,19 +10163,19 @@
           "copy_key": "career.item.career-risk-cards",
           "type": "prose"
         },
-        "evidence_scope": "风险场景来自 O*NET 15-1243.01 的任务与工作情境（如核对结构与准确性、在来源系统与仓库之间映射数据、设计并实现仓库结构、为客户需求编写或修改程序），以及数据仓库实践中通用的质量、权限与变更控制要求；本页只按来源明确范围解释。",
+        "evidence_scope": "自身任务情境与编辑风险例分开，PIPL适用个人信息法律、NIST自愿指南分别核；没有本职业事故/成本统计",
         "heading": "数据仓库专家的风险与控制点",
         "risks": [
           {
             "affected_roles": "数据仓库专家",
-            "consequence": "会产生口径不一致的数据层，导致下游报表与模型结论错误且难以追溯。",
+            "consequence": "可能形成口径不一致的数据层，影响下游解释或增加追溯难度；具体错误、损失和概率未核，不表示必然产生错误结论。",
             "evidence_refs": [
-              "onet-dws",
-              "editorial-dws"
+              "r5-onet-current",
+              "r5-editorial-dws"
             ],
             "id": "risk-1",
             "mitigation": "先确认业务定义、主键与粒度并留痕；口径冲突时暂停受影响部分并升级确认。",
-            "scenario": "业务口径与目标粒度未澄清即开始建模，或按未经确认的定义直接加载。",
+            "scenario": "编辑场景，非事故样本：业务口径与目标粒度未澄清即开始建模，或按未经确认的定义直接加载。",
             "title": {
               "$item": "data-warehousing-specialists.risk.career-risk-cards.2",
               "block": "risk",
@@ -9946,14 +10185,14 @@
           },
           {
             "affected_roles": "数据仓库专家",
-            "consequence": "问题难以复现与定位，返工成本高，影响数据可信度。",
+            "consequence": "可能增加复现、定位或返工困难，影响数据可信度；具体返工成本及比较基准未核。",
             "evidence_refs": [
-              "onet-dws",
-              "editorial-dws"
+              "r5-onet-current",
+              "r5-editorial-dws"
             ],
             "id": "risk-2",
             "mitigation": "把加载实现为可重跑流程，保留脚本版本、参数与运行日志，关键步骤可回溯。",
-            "scenario": "加载与转换不可重跑，或缺少版本、参数与运行记录。",
+            "scenario": "编辑场景，非事故样本：加载与转换不可重跑，或缺少版本、参数与运行记录。",
             "title": {
               "$item": "data-warehousing-specialists.risk.career-risk-cards.3",
               "block": "risk",
@@ -9963,14 +10202,14 @@
           },
           {
             "affected_roles": "数据仓库专家",
-            "consequence": "错误数据进入分析层并放大业务损失，事后修正成本更高。",
+            "consequence": "可能令错误进入分析层，未核本职业损失或事后成本增幅",
             "evidence_refs": [
-              "onet-dws",
-              "editorial-dws"
+              "r5-onet-current",
+              "r5-editorial-dws"
             ],
             "id": "risk-3",
             "mitigation": "为关键字段与金额设置断言与对账，异常行进入隔离表并保留原始记录。",
-            "scenario": "质量断言缺失或对账未做，异常行被默认接收。",
+            "scenario": "编辑场景，非事故样本：质量断言缺失或对账未做，异常行被默认接收。",
             "title": {
               "$item": "data-warehousing-specialists.risk.career-risk-cards.4",
               "block": "risk",
@@ -9982,12 +10221,13 @@
             "affected_roles": "数据仓库专家",
             "consequence": "带来合规与信任风险，可能影响当事人权益与机构资质。",
             "evidence_refs": [
-              "editorial-dws",
-              "onet-dws"
+              "r5-onet-current",
+              "r5-editorial-dws",
+              "r5-cn-pipl"
             ],
             "id": "risk-4",
-            "mitigation": "按单位数据治理与最小必要原则在授权范围内处理，保留访问与变更记录。",
-            "scenario": "在未授权环境使用受限数据，或把数据导出到未经批准的工具。",
+            "mitigation": "中国含可识别个人信息处理应核PIPL13合法依据（非一律同意）、6最小必要/8质量、51合理权限与定期安全培训；账号不代合法依据。21外包委托范围/监督/转委托条件和59受托安全协助分别核，单位制度不取代法律。",
+            "scenario": "编辑场景，非事故样本：在未授权环境使用受限数据，或把数据导出到未经批准的工具。",
             "title": {
               "$item": "data-warehousing-specialists.risk.career-risk-cards.5",
               "block": "risk",
@@ -9997,25 +10237,28 @@
           },
           {
             "affected_roles": "数据仓库专家",
-            "consequence": "可能中断下游使用并造成数据不一致，恢复成本高。",
+            "consequence": "可能中断下游使用或造成数据不一致；具体恢复成本及幅度未核。",
             "evidence_refs": [
-              "editorial-dws",
-              "onet-dws"
+              "r5-onet-current",
+              "r5-editorial-dws",
+              "r5-nist-core"
             ],
             "id": "risk-5",
             "mitigation": "按变更流程评审与审批，准备回退方案并保留发布记录。",
-            "scenario": "未经评审直接变更生产结构或发布加载，缺少回退方案。",
+            "scenario": "编辑场景，非事故样本：未经评审直接变更生产结构或发布加载，缺少回退方案。",
             "title": "未评审的生产变更"
           },
           {
             "affected_roles": "数据仓库专家",
             "consequence": "可能产生合规与质量后果。",
             "evidence_refs": [
-              "editorial-dws"
+              "r5-onet-current",
+              "r5-editorial-dws",
+              "r5-cn-pipl"
             ],
             "id": "risk-boundary",
             "mitigation": "停止并在授权链内升级。",
-            "scenario": "遇到超出授权范围的数据或发布任务。",
+            "scenario": "编辑场景，非事故样本：遇到超出授权范围的数据或发布任务。",
             "title": "责任边界"
           }
         ],
@@ -10023,7 +10266,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "onet-dws",
+              "$source": "r5-onet-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10031,7 +10274,7 @@
             },
             "id": "onet-dws",
             "label": {
-              "$source": "onet-dws",
+              "$source": "r5-onet-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10041,7 +10284,7 @@
           },
           {
             "href": {
-              "$source": "onet-hot",
+              "$source": "r5-hottech-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10049,7 +10292,7 @@
             },
             "id": "onet-hot",
             "label": {
-              "$source": "onet-hot",
+              "$source": "r5-hottech-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10059,39 +10302,57 @@
           },
           {
             "href": {
-              "$source": "bls-dbarch-wage",
+              "$source": "r5-nist-core",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "data-warehousing-specialists.source-register.published.1"
             },
-            "id": "bls-dbarch-wage",
+            "id": "r5-nist-core",
             "label": {
-              "$source": "bls-dbarch-wage",
+              "$source": "r5-nist-core",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "data-warehousing-specialists.source-register.published.1"
             },
-            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "scope": "NIST自愿风险治理建议，非强制仓库方法/事故率或中国法律"
           },
           {
             "href": {
-              "$source": "editorial-dws",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "data-warehousing-specialists.source-register.published.1"
             },
-            "id": "editorial-dws",
+            "id": "r5-cn-pipl",
             "label": {
-              "$source": "editorial-dws",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "data-warehousing-specialists.source-register.published.1"
             },
-            "scope": "仅用于说明本页虚构练习与编辑整理内容，不支持外部统计或合规结论。"
+            "scope": "PIPL个人信息处理的依据/质量/委托和权限义务，非所有商业数据或已核全国岗位资格"
+          },
+          {
+            "href": {
+              "$source": "r5-editorial-dws",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "id": "r5-editorial-dws",
+            "label": {
+              "$source": "r5-editorial-dws",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "scope": "本页编辑建议，不冒充官方统计、法定义务或已测成本"
           }
         ]
       },
@@ -10101,7 +10362,12 @@
             {
               "指标": "中国大陆薪资口径",
               "数值": "证据不足：未取得中国大陆该职业单列数值",
-              "说明": "中国大陆公开工资统计最高细分到行业门类与人员类别，不发布该职业细类数值，不以行业代理值替代。"
+              "说明": "本轮未取得职业工资，不宣称全部统计最高细分仅行业"
+            },
+            {
+              "指标": "行业背景（非职业工资）",
+              "数值": "NBS2025信息技术非私营248752/私营128166元税前年均",
+              "说明": "5人及以上法人；排除个体自由职业，仅实际归属该行业的单位背景"
             }
           ],
           "china_ai_row": {
@@ -10118,24 +10384,24 @@
           },
           "china_edu_table": [
             {
-              "学历段": "专科或本科＋信息技术相关训练",
-              "岗位方向": "数据开发或数据支持岗",
-              "说明": "按单位招聘与岗位要求核验。"
+              "学历段": "目标公告的学历与训练条件（编辑核对项）",
+              "岗位方向": "按实际数据开发/支持职责核对，不由专科本科分配",
+              "说明": "本轮未取得中国学历与岗位分布/招聘样本；这里只列目标单位需核条件，不构成全国规律。"
             },
             {
-              "学历段": "本科（计算机、软件或信息管理相关）",
-              "岗位方向": "数据仓库或数据平台开发岗",
-              "说明": "专业名称与课程按单位要求核验。"
+              "学历段": "数据建模、装载与测试训练（编辑核对项）",
+              "岗位方向": "按目标仓库/平台职责核准备，不推本科学历即具备",
+              "说明": "本轮未取得中国学历与岗位分布/招聘样本；这里只列目标单位需核条件，不构成全国规律。"
             },
             {
-              "学历段": "本科及以上＋数据建模与装载经验",
-              "岗位方向": "数据仓库主管或数据架构方向",
-              "说明": "按单位任职条件核验。"
+              "学历段": "拟承担架构或主管职责时的任命条件（编辑核对项）",
+              "岗位方向": "按目标单位经验与职责核，不把学历经验组合视为统一晋级",
+              "说明": "本轮未取得中国学历与岗位分布/招聘样本；这里只列目标单位需核条件，不构成全国规律。"
             },
             {
-              "学历段": "经验＋数据治理与协作能力",
-              "岗位方向": "数据治理或数据平台管理方向",
-              "说明": "任职条件由单位规定。"
+              "学历段": "拟承担治理或管理职责时的授权条件（编辑核对项）",
+              "岗位方向": "另核管理范围、协作及授权，不由治理经验自动任命",
+              "说明": "本轮未取得中国学历与岗位分布/招聘样本；这里只列目标单位需核条件，不构成全国规律。"
             }
           ],
           "china_industry_table": [
@@ -10162,11 +10428,11 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国大陆公开信息检索入口：国家统计局工资与统计发布页面、主管部门与行业公开信息；本轮未取得该职业单列数值。",
+          "china_open": "实际所读NBS2025行业工资与PIPL；未取得本职业当期招聘/职业工资",
           "china_ref": {
             "$join": [
               {
-                "$source": "nbs-wages",
+                "$source": "r5-nbs-it",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -10174,7 +10440,7 @@
               },
               "｜",
               {
-                "$source": "nbs-wages",
+                "$source": "r5-nbs-it",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10207,7 +10473,7 @@
           "sources_note": {
             "$join": [
               {
-                "$source": "bls-dbarch-wage",
+                "$source": "r5-wages-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -10215,7 +10481,7 @@
               },
               "｜",
               {
-                "$source": "bls-dbarch-wage",
+                "$source": "r5-wages-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10234,7 +10500,7 @@
             "scenario_role_label": "学历与训练背景",
             "scenario_value_label": "岗位方向"
           },
-          "us_growth": "增长 9%（2024—2034 年，父职业代理口径）",
+          "us_growth": "增长9.4%（2025—2035父代理）",
           "us_median": "139,500 美元/年（2025 年 5 月；父职业 Database Architects 代理口径）"
         }
       },
@@ -10242,7 +10508,7 @@
         "authority_sources": {
           "$join": [
             {
-              "$source": "bls-dbarch-wage",
+              "$source": "r5-wages-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10250,7 +10516,7 @@
             },
             "｜",
             {
-              "$source": "bls-dbarch-wage",
+              "$source": "r5-wages-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10266,7 +10532,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "bls-dbarch-wage",
+                  "$source": "r5-wages-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10274,7 +10540,7 @@
                 },
                 "｜",
                 {
-                  "$source": "bls-dbarch-wage",
+                  "$source": "r5-wages-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10290,7 +10556,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "onet-dws",
+                  "$source": "r5-onet-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10298,7 +10564,7 @@
                 },
                 "｜",
                 {
-                  "$source": "onet-dws",
+                  "$source": "r5-onet-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10314,7 +10580,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "onet-dws",
+                  "$source": "r5-onet-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10322,7 +10588,7 @@
                 },
                 "｜",
                 {
-                  "$source": "onet-dws",
+                  "$source": "r5-onet-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10338,7 +10604,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "bls-dbarch-wage",
+                  "$source": "r5-wages-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10346,7 +10612,7 @@
                 },
                 "｜",
                 {
-                  "$source": "bls-dbarch-wage",
+                  "$source": "r5-wages-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10362,7 +10628,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "bls-dbarch-wage",
+                  "$source": "r5-wages-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10370,7 +10636,7 @@
                 },
                 "｜",
                 {
-                  "$source": "bls-dbarch-wage",
+                  "$source": "r5-wages-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10382,11 +10648,11 @@
           },
           {
             "指标": "美国就业规模",
-            "数值": "约 66,900 人（2024 年，父职业代理口径）",
+            "数值": "约69500人（2025父代理）",
             "说明": {
               "$join": [
                 {
-                  "$source": "onet-dws",
+                  "$source": "r5-onet-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10394,7 +10660,7 @@
                 },
                 "｜",
                 {
-                  "$source": "onet-dws",
+                  "$source": "r5-onet-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10406,11 +10672,11 @@
           },
           {
             "指标": "美国就业增长",
-            "数值": "增长 9%（2024—2034 年，标签「远快于平均」）",
+            "数值": "增长9.4%/净增6500（2025—2035父代理）",
             "说明": {
               "$join": [
                 {
-                  "$source": "onet-dws",
+                  "$source": "r5-onet-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10418,7 +10684,7 @@
                 },
                 "｜",
                 {
-                  "$source": "onet-dws",
+                  "$source": "r5-onet-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10430,11 +10696,11 @@
           },
           {
             "指标": "美国就业空缺",
-            "数值": "年均约 4,000 个（2024—2034 年，含增长与更替）",
+            "数值": "年均3900空缺（2025—2035父代理，含替换）",
             "说明": {
               "$join": [
                 {
-                  "$source": "onet-dws",
+                  "$source": "r5-onet-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10442,7 +10708,7 @@
                 },
                 "｜",
                 {
-                  "$source": "onet-dws",
+                  "$source": "r5-onet-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10462,15 +10728,15 @@
         },
         "factor_rows": [
           {
-            "answer": "所在行业、机构规模与数据平台复杂度影响岗位与计酬。",
+            "answer": "编辑薪酬核对项：真实合同/职责/工时报酬与地区；本轮无因素贡献或远程外包份额证据，父全国分位不代细类个人收入",
             "factor": "行业与机构规模"
           },
           {
-            "answer": "是否承担架构设计、治理或团队协作职责影响报价。",
+            "answer": "编辑薪酬核对项：真实合同/职责/工时报酬与地区；本轮无因素贡献或远程外包份额证据，父全国分位不代细类个人收入",
             "factor": "职责范围与资历"
           },
           {
-            "answer": "地区、远程比例与外包或派遣形式影响实际收入。",
+            "answer": "编辑薪酬核对项：真实合同/职责/工时报酬与地区；本轮无因素贡献或远程外包份额证据，父全国分位不代细类个人收入",
             "factor": "地区与用工形式"
           }
         ],
@@ -10480,7 +10746,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "增长 9%（2024—2034 年）",
+        "growth": "2025—2035父职业Database Architects代理增长9.4%，非数据仓库细类自身或OOH合并统计",
         "heading": {
           "$item": "data-warehousing-specialists.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10493,27 +10759,27 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024 年（O*NET 行业分布，父职业 Database Architects 代理口径）",
+        "industry_period": "2025父职业15-1243行业代理，非自身",
         "industry_rows": [
           {
             "industry": "专业、科学与技术服务",
-            "median": "36%（2024 年就业占比）",
+            "median": "35%（2025专业科学技术父代理）",
             "note": "O*NET 行业页单列门类。"
           },
           {
             "industry": "金融与保险",
-            "median": "16%（2024 年就业占比）",
+            "median": "15%（2025金融保险父代理）",
             "note": "O*NET 行业页单列门类。"
           },
           {
             "industry": "信息业",
-            "median": "13%（2024 年就业占比）",
+            "median": "15%（2025信息父代理）",
             "note": "O*NET 行业页单列门类。"
           },
           {
-            "industry": "其他行业",
-            "median": "35%（2024 年就业占比，含企业管理与行政支持服务）",
-            "note": "O*NET 行业页合并公布的门类。"
+            "industry": "其余行业（编辑差额）",
+            "median": "余35%编辑差额，非官方第四门类/自雇",
+            "note": "100−35−15−15=35%仅编辑差额，非官方合并门类/自雇或细类分布"
           }
         ],
         "industry_value_label": "行业就业占比／统计状态",
@@ -10543,7 +10809,7 @@
         ],
         "median": "139,500 美元/年（2025 年 5 月）",
         "outlook_heading": "就业展望",
-        "outlook_period": "2024—2034 年（O*NET 就业趋势页，数据为父职业 Database Architects）",
+        "outlook_period": "2025—2035父职业15-1243代理",
         "wage_column_labels": [
           "工资位置",
           "工资参考（年薪／时薪）",
@@ -10559,7 +10825,7 @@
         "wage_tiers": [
           {
             "equivalent": "分布低端统计位置",
-            "interpretation": "不是入职起薪，也不含奖金股权差异。",
+            "interpretation": "统计分布位置，非入职起薪、个人到手或总报酬；OEWS可包含规定的激励和生产奖金，排除非生产奖金等，不一概排除奖金。",
             "label": "较低工资位置（第 10 分位）",
             "value": "86,240 美元/年"
           },
@@ -10665,42 +10931,37 @@
         "outlook_evidence": [
           {
             "geography": "美国",
-            "horizon": "2024—2034 年",
-            "interpretation": "年均空缺含增长与更替，不等于每年净增 4,000 人。",
+            "horizon": "2025—2035父职业代理",
+            "interpretation": "非每年净增3900",
             "limitation": "是职业总量统计，且为父职业代理口径，不是个人录用保证。",
             "metric": "市场信号",
             "occupation_scope": "O*NET 15-1243.01（数据为父职业 Database Architects）",
-            "value": {
-              "$item": "data-warehousing-specialists.market-signals.market-signal-card.3",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            }
+            "value": "年均3900空缺，含增长与替换"
           },
           {
             "geography": "美国",
-            "horizon": "2024 年",
-            "interpretation": "就业规模是存量统计，与职位空缺不是同一指标。",
+            "horizon": "2025—2035父职业代理",
+            "interpretation": "父职业存量，非细类在招数",
             "limitation": "不能作为个人就业保证。",
             "metric": "就业规模",
             "occupation_scope": "O*NET 15-1243.01（父职业代理口径）",
-            "value": "约 66,900 人（2024 年）"
+            "value": "2025约69500人→2035约76000"
           },
           {
             "geography": "美国",
-            "horizon": "2024—2034 年",
-            "interpretation": "职位空缺含增长与更替，需按来源口径解释。",
+            "horizon": "2025—2035父职业代理",
+            "interpretation": "十年父职业预测非个人机会",
             "limitation": "不能作为个人就业保证。",
-            "metric": "职位空缺",
+            "metric": "就业总体变化",
             "occupation_scope": "O*NET 15-1243.01（父职业代理口径）",
-            "value": "年均约 4,000 个"
+            "value": "增长9.4%/净增6500"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
             "href": {
-              "$source": "onet-dws",
+              "$source": "r5-onet-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10708,7 +10969,7 @@
             },
             "id": "onet-dws",
             "label": {
-              "$source": "onet-dws",
+              "$source": "r5-onet-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10718,7 +10979,7 @@
           },
           {
             "href": {
-              "$source": "bls-dbarch-outlook",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10726,7 +10987,7 @@
             },
             "id": "bls-dbarch-outlook",
             "label": {
-              "$source": "bls-dbarch-outlook",
+              "$source": "r5-bls-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10736,7 +10997,7 @@
           },
           {
             "href": {
-              "$source": "bls-dbarch-wage",
+              "$source": "r5-wages-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10744,7 +11005,7 @@
             },
             "id": "bls-dbarch-wage",
             "label": {
-              "$source": "bls-dbarch-wage",
+              "$source": "r5-wages-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10754,7 +11015,7 @@
           },
           {
             "href": {
-              "$source": "onet-hot",
+              "$source": "r5-hottech-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10762,13 +11023,121 @@
             },
             "id": "onet-hot",
             "label": {
-              "$source": "onet-hot",
+              "$source": "r5-hottech-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "data-warehousing-specialists.source-register.published.1"
             },
             "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "onet-dba",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "id": "onet-dba",
+            "label": {
+              "$source": "onet-dba",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "scope": "数据库管理员目标Tasks支持本条任务对照；编辑差距与距离非实测转岗结果。"
+          },
+          {
+            "href": {
+              "$source": "r5-target-dbarch",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "id": "r5-target-dbarch",
+            "label": {
+              "$source": "r5-target-dbarch",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "scope": "数据库架构师目标Tasks支持本条任务对照；编辑差距与距离非实测转岗结果。"
+          },
+          {
+            "href": {
+              "$source": "r5-target-ds",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "id": "r5-target-ds",
+            "label": {
+              "$source": "r5-target-ds",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "scope": "数据科学家目标Tasks支持本条任务对照；编辑差距与距离非实测转岗结果。"
+          },
+          {
+            "href": {
+              "$source": "r5-target-bi",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "id": "r5-target-bi",
+            "label": {
+              "$source": "r5-target-bi",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "scope": "商业智能分析师目标Tasks支持本条任务对照；编辑差距与距离非实测转岗结果。"
+          },
+          {
+            "href": {
+              "$source": "onet-sys",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "id": "onet-sys",
+            "label": {
+              "$source": "onet-sys",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "scope": "计算机系统分析师目标Tasks支持本条任务对照；编辑差距与距离非实测转岗结果。"
+          },
+          {
+            "href": {
+              "$source": "r5-target-systems",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "id": "r5-target-systems",
+            "label": {
+              "$source": "r5-target-systems",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "scope": "计算机系统工程师／架构师目标Tasks支持本条任务对照；编辑差距与距离非实测转岗结果。"
           }
         ],
         "transitions": [
@@ -10792,7 +11161,7 @@
           },
           {
             "capability_gaps": "需补足：体系级架构设计、标准制定与跨系统治理。",
-            "shared_capabilities": "共同能力：数据模型与结构设计。",
+            "shared_capabilities": "条件性编辑映射：只有实际训练或职责已有相关经验时，数据模型与结构设计 可作任务对照，不证明已胜任或可直接转岗。",
             "target_href": "/zh/career/jobs/database-architects",
             "target_slug": "database-architects",
             "target_title": "数据库架构师（相邻职业）",
@@ -10800,7 +11169,7 @@
           },
           {
             "capability_gaps": "需补足：统计建模、验证与结论解释能力。",
-            "shared_capabilities": "共同能力：数据准备、编程与统计基础。",
+            "shared_capabilities": "条件性编辑映射：只有实际训练或职责已有相关经验时，数据准备、编程与统计基础 可作任务对照，不证明已胜任或可直接转岗。",
             "target_href": "/zh/career/jobs/data-scientists",
             "target_slug": "data-scientists",
             "target_title": "数据科学家（相邻职业）",
@@ -10808,7 +11177,7 @@
           },
           {
             "capability_gaps": "需补足：指标体系设计、报表交付与业务沟通。",
-            "shared_capabilities": "共同能力：指标理解与可视化交付。",
+            "shared_capabilities": "条件性编辑映射：只有实际训练或职责已有相关经验时，指标理解与可视化交付 可作任务对照，不证明已胜任或可直接转岗。",
             "target_href": "/zh/career/jobs/business-intelligence-analysts",
             "target_slug": "business-intelligence-analysts",
             "target_title": "商业智能分析师（相邻职业）",
@@ -10816,7 +11185,7 @@
           },
           {
             "capability_gaps": "需补足：业务流程分析、系统改进与跨部门协调。",
-            "shared_capabilities": "共同能力：系统分析、需求理解与方案设计。",
+            "shared_capabilities": "条件性编辑映射：只有实际训练或职责已有相关经验时，系统分析、需求理解与方案设计 可作任务对照，不证明已胜任或可直接转岗。",
             "target_href": "/zh/career/jobs/computer-systems-analysts",
             "target_slug": "computer-systems-analysts",
             "target_title": "计算机系统分析师（相邻职业）",
@@ -10824,7 +11193,7 @@
           },
           {
             "capability_gaps": "需补足：系统集成设计、工程实现与性能规划。",
-            "shared_capabilities": "共同能力：系统结构与集成意识。",
+            "shared_capabilities": "条件性编辑映射：只有实际训练或职责已有相关经验时，系统结构与集成意识 可作任务对照，不证明已胜任或可直接转岗。",
             "target_href": "/zh/career/jobs/computer-systems-engineers-architects",
             "target_slug": "computer-systems-engineers-architects",
             "target_title": "计算机系统工程师／架构师（相邻职业）",
@@ -10872,12 +11241,7 @@
             "watchout": "不作人格诊断或录用结论。"
           },
           {
-            "answer": {
-              "$item": "data-warehousing-specialists.fit.riasec-fit-block.7",
-              "block": "fit",
-              "copy_key": "career.item.riasec-fit-block",
-              "type": "prose"
-            },
+            "answer": "编辑观察执行/学习体验，未核大五在本职业预测效度或最直接关系",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣测试",
             "evidence_level": "工作样本",
@@ -10919,7 +11283,7 @@
             "watchout": "不作人格诊断或录用结论。"
           },
           {
-            "answer": "需要结构化思维、对细节敏感与按证据判定的习惯；IQ 类量表与岗位要求没有官方对应。",
+            "answer": "自身O*NET JobZone4/SVP7至低于8，78%学士/4%高中/4%中等后证书是新雇员所需学历意见，非员工构成。BLS父职业典型学士/少于5年相关经验/无在岗训练类别，非固定最低年资/无需训练或中国法律。IQ类量表不代实际能力与项目观察",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣测试",
             "evidence_level": "工作样本",
@@ -10962,7 +11326,7 @@
         "directions": [
           {
             "direction": "数据库管理员方向（相邻职业）",
-            "fit_signals": "共同能力：数据库结构、查询与性能意识。",
+            "fit_signals": "条件性编辑映射：只有实际训练或职责已有相关经验时，数据库结构、查询与性能意识 可作任务对照，不证明可直接转岗。",
             "target": {
               "href": {
                 "$link": "data-warehousing-specialists.direction-comparison.adjacent-career-comparison-table.1",
@@ -10984,7 +11348,7 @@
           },
           {
             "direction": "数据库架构师方向（相邻职业）",
-            "fit_signals": "共同能力：数据模型、标准与体系设计。",
+            "fit_signals": "条件性编辑映射：只有实际训练或职责已有相关经验时，数据模型、标准与体系设计 可作任务对照，不证明可直接转岗。",
             "target": {
               "href": {
                 "$link": "data-warehousing-specialists.direction-comparison.adjacent-career-comparison-table.1",
@@ -11006,7 +11370,7 @@
           },
           {
             "direction": "数据科学家方向（相邻职业）",
-            "fit_signals": "共同能力：数据准备、统计与编程基础。",
+            "fit_signals": "条件性编辑映射：只有实际训练或职责已有相关经验时，数据准备、统计与编程基础 可作任务对照，不证明可直接转岗。",
             "target": {
               "href": {
                 "$link": "data-warehousing-specialists.direction-comparison.adjacent-career-comparison-table.1",
@@ -11028,7 +11392,7 @@
           },
           {
             "direction": "商业智能分析师方向（相邻职业）",
-            "fit_signals": "共同能力：指标理解与可视化交付。",
+            "fit_signals": "条件性编辑映射：只有实际训练或职责已有相关经验时，指标理解与可视化交付 可作任务对照，不证明可直接转岗。",
             "target": {
               "href": {
                 "$link": "data-warehousing-specialists.direction-comparison.adjacent-career-comparison-table.1",
@@ -11075,7 +11439,7 @@
             "question": "能否严格按数据权限作业？"
           },
           {
-            "answer": "保留版本、参数与运行记录，保证结果可复现。",
+            "answer": "编辑建议保留版本/参数/日志以帮助复现，不能保证外部依赖变化后全部结果一致",
             "question": "能否让加载可重跑并留痕？"
           },
           {
@@ -11138,14 +11502,14 @@
         "source_links": [
           {
             "href": {
-              "$source": "onet-dws",
+              "$source": "r5-onet-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "data-warehousing-specialists.source-register.published.1"
             },
             "label": {
-              "$source": "onet-dws",
+              "$source": "r5-onet-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -11155,14 +11519,14 @@
           },
           {
             "href": {
-              "$source": "onet-hot",
+              "$source": "r5-hottech-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "data-warehousing-specialists.source-register.published.1"
             },
             "label": {
-              "$source": "onet-hot",
+              "$source": "r5-hottech-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -11189,20 +11553,92 @@
           },
           {
             "href": {
-              "$source": "editorial-dws",
+              "$source": "r5-editorial-dws",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "data-warehousing-specialists.source-register.published.1"
             },
             "label": {
-              "$source": "editorial-dws",
+              "$source": "r5-editorial-dws",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "data-warehousing-specialists.source-register.published.1"
             },
-            "usage": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+            "usage": "本页编辑观察与风险核对建议，无外部官方来源，不支持人格预测或统计。"
+          },
+          {
+            "href": {
+              "$source": "onet-dba",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "id": "onet-dba",
+            "label": {
+              "$source": "onet-dba",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "usage": "数据库管理员目标Tasks及编辑任务对照，非个人适配验证。"
+          },
+          {
+            "href": {
+              "$source": "r5-target-dbarch",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "id": "r5-target-dbarch",
+            "label": {
+              "$source": "r5-target-dbarch",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "usage": "数据库架构师目标Tasks及编辑任务对照，非个人适配验证。"
+          },
+          {
+            "href": {
+              "$source": "r5-target-ds",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "id": "r5-target-ds",
+            "label": {
+              "$source": "r5-target-ds",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "usage": "数据科学家目标Tasks及编辑任务对照，非个人适配验证。"
+          },
+          {
+            "href": {
+              "$source": "r5-target-bi",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "id": "r5-target-bi",
+            "label": {
+              "$source": "r5-target-bi",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "data-warehousing-specialists.source-register.published.1"
+            },
+            "usage": "商业智能分析师目标Tasks及编辑任务对照，非个人适配验证。"
           }
         ]
       },
@@ -11263,21 +11699,21 @@
         "eeat_signals": {
           "author": "FermatMind research workflow",
           "source": {
-            "$source": "onet-dws",
+            "$source": "r5-onet-current",
             "block": "source-register",
             "copy_key": "career.item.published-sources",
             "field": "name",
             "item": "data-warehousing-specialists.source-register.published.1"
           },
           "updated_at": {
-            "$source": "onet-dws",
+            "$source": "r5-onet-current",
             "block": "source-register",
             "copy_key": "career.item.published-sources",
             "field": "period",
             "item": "data-warehousing-specialists.source-register.published.1"
           }
         },
-        "note": "来源范围、限制和统计时期按原始证据分别核对；本职业薪资与就业为父职业 Database Architects 代理口径。"
+        "note": "自身任务/教育意见与父代理工资/就业/行业分开；中国职业工资/招聘缺口，NBS行业背景不代个人所得"
       },
       "work_context_block": {
         "$join": [
@@ -11455,6 +11891,18 @@
           "onet-dws",
           "bls-dbarch-outlook"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "父职业15-1243代理：2025约69500→2035约76000，净增6500/+9.4%，年均3900空缺含增长与替换，自雇2.1%；O*NET7%及以上只是分类，非本细类或个人录用概率。",
+        "fact_id": "r5-current-market",
+        "market": "美国",
+        "measure": "父职业就业预测",
+        "occupation_scope": "15-1243父代理，非15-1243.01精确统计",
+        "period": "2025基期/2025—2035",
+        "source_refs": [
+          "r5-bls-current"
+        ]
       }
     ]
   },
@@ -11463,7 +11911,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "数据仓库与数据层建设 · 抽取转换装载与建模 · 质量与元数据",
@@ -11514,7 +11962,7 @@
       "text": "数据仓库专家"
     }
   },
-  "source_content_sha256": "a3fe8646ea43df66b864c1a6488c56aa8ca3620f58f856d2109a2826acc3e0de",
+  "source_content_sha256": "42786630b5b361fdbe6e17ed3b1e9c3eb914e1dee758b757e3c6b1a3385e9e6e",
   "subject": {
     "canonical_slug": "data-warehousing-specialists",
     "name": "数据仓库专家",

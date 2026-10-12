@@ -7537,7 +7537,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "流程仿真与优化、数据分析与根因辅助、文档与报表生成、图纸与工艺参数检索等工具可辅助分析产线数据、识别瓶颈并起草文档；但问题界定、现场判断、方案取舍、变更审批与安全合规判断仍由工程师负责。"
+              "编辑任务假设：经验证的分析或仿真工具可能辅助产线数据处理和方案比较，生成式AI可起草虚构材料下的文档。传统仿真/CAD/统计软件不等于生成式AI；未取得本职业采用率或岗位结果。根因要用数据和实验核验，方案实施、质量与安全审批仍由授权人员负责。"
             ]
           },
           "id": "manufacturing-engineers.ai-impact.ai-impact-table.2",
@@ -7565,7 +7565,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不同环节受影响不同：数据分析、仿真与文档生成更易被工具辅助，但问题界定、现场判断、方案取舍与推进实施仍由人负责。"
+              "编辑比较：数据整理与文档草稿可能获得辅助，但使用依赖数据权限、方法适用与复核；工具给出的相关性不等于失效根因，实际变更需验证与审批。"
             ]
           },
           "id": "manufacturing-engineers.ai-impact.ai-impact-table.4",
@@ -7607,7 +7607,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑建议：数据分析、流程识别与文档生成可由工具辅助；当前资料不证明机构普遍采用这些系统。"
+              "编辑假设：可能辅助数据整理或草稿；须核分析方法和原始数据，不能由软件清单推导AI采用或效果。"
             ]
           },
           "id": "manufacturing-engineers.ai-impact.ai-impact-table.7",
@@ -7643,7 +7643,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开职业工资：国家统计局按行业门类发布城镇单位就业人员年平均工资，制造工程师主要计入制造业等行业，行业平均不能替代本职业工资。"
+              "证据不足：本次未建立中国制造工程师精确职业工资分布；制造业城镇单位年均工资仅供相应雇主行业背景，不推断所有公开来源都无职业数据，也不证明全国从业者主要归此门类。"
             ]
           },
           "id": "manufacturing-engineers.china-salary.career-snapshot-primary-locale.1",
@@ -7724,7 +7724,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 该职业页展示的工资与就业为父职业 Industrial Engineers（17-2112.00）口径：2025 年 BLS OEWS 年薪中位数 102,440 美元（约 49.25 美元/小时）；就业方面 2024 年约 351,100 人、2024—2034 年预计远快于平均（Much faster than average，7% 或更高）、期间职位空缺约 25,200 个。该页未展示本职业 17-2112.03 的精确值，也未展示分位工资。以上为美国全国口径且为父职业展示，「远快于平均」为统计预测，不等于个人就业结果。"
+              "2025美国工资参考为父职业Industrial Engineers（17-2112），非17-2112.03制造工程师精确值：年薪中位102,440、时薪49.25美元，父职业P10/25/50/75/90见原表。旧2024—2034就业事实保留；25,200是预测年均空缺。最新父职业为2025年365,100人、2025—2035增长12%、年均23,100；不同版本不拼接。"
             ]
           },
           "fact_refs": [
@@ -7744,7 +7744,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资统计位置：以上为美国全国口径且为父职业 Industrial Engineers 展示；不代表本职业精确中位数、起薪或个人到手收入，且未披露分位。"
+              "父职业参考：2025OEWS美国全国Industrial Engineers年薪与时薪分位分别列示，不等于制造工程师精确工资、个人工时、到手收入或资历等级。"
             ]
           },
           "fact_refs": [
@@ -7761,7 +7761,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "怎样理解这些位置：O*NET 该职业页只展示父职业中位数，不展示本职业精确值或分位；中位数不是新手或资深等级。就业规模与「远快于平均」是职业统计，须与个人机会分开解释。"
+              "当前全国工资页发布父职业完整分位；制造工程师细分精确值仍未取得。分位描述分布位置，不代表新手/资深，父职业就业与空缺也不代表细分职业规模。"
             ]
           },
           "fact_refs": [
@@ -7778,15 +7778,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布与局限：该页 2024 年主要行业为 Manufacturing 与 Professional, Scientific, and Technical Services；行业分布是雇主场景信号，不是需求预测。"
+              "分行业参考仍是父职业Industrial Engineers：BLS2025年5月专业科学技术服务107,610、计算机电子产品制造105,370、运输设备制造102,390、机械制造99,070美元/年中位。每行均不等于制造工程师细分工资；未取得本细分精确行业表。"
             ]
           },
           "fact_refs": [
-            "us-employment-2024"
+            "us-wage-median"
           ],
           "id": "manufacturing-engineers.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "onet-industry"
+            "bls-ooh-industrial"
           ],
           "type": "prose"
         },
@@ -7795,7 +7795,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "规模与口径提示：该职业页 2024 年就业约 351,100 人（父职业）、预计远快于平均；引用时须标明年份、覆盖范围与父职业展示口径，且中位数与增长描述不能跨市场拼接。"
+              "就业版本：保留旧2024年父职业351,100人与2024—2034年均空缺25,200；最新父职业2025年365,100人、2025—2035年均23,100。空缺含替补，非净新增、十年合计或当前招聘。"
             ]
           },
           "fact_refs": [
@@ -8034,7 +8034,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国侧该职业属 Job Zone 4（需要大量准备）：多数岗位要求四年制学士学位（约 76%），部分要求两年制学位，通常需要数年相关工作或职业培训；具体学历与经验要求按雇主与行业核对。"
+              "ONet本职业新聘学历调查76%本科、16%两年学位、4%部分大学未获学位，属调查回答而非法定统一门槛；Job Zone4描述职业组准备程度，不证明每个入门岗位须数年经历。实际要求按目标工艺与雇主核查。"
             ]
           },
           "id": "manufacturing-engineers.path.career-path-block.2",
@@ -8048,12 +8048,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国：以机械、工业、制造或相关工程本科加实习与项目实践为常见路径，部分岗位要求或偏好硕士。中国大陆：无与该 O*NET 精确对应的统一职业资格，岗位多按用人单位与行业要求确定，涉及特种设备、安全与注册类结论须由具备相应资格的人员出具，须分别核对。"
+              "美国可参考工业、制造、机械等工程学习与项目实践；BLS父职业通常本科、入门不要求PE许可，向公众提供专业服务或法定签字另核州与任务，不能写所有制造岗位须注册。未取得本细分硕士偏好比例。中国本次未建立精确资格映射，实际活动的安全、特种设备及签字权限须按适用制度核查。"
             ]
           },
           "id": "manufacturing-engineers.path.career-path-block.3",
           "source_refs": [
-            "onet-education"
+            "onet-education",
+            "bls-ooh-industrial"
           ],
           "type": "prose"
         },
@@ -8155,7 +8156,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 该职业页展示的就业为父职业 Industrial Engineers（17-2112.00）口径：2024 年就业约 351,100 人，2024—2034 年预计远快于平均（7% 或更高），期间职位空缺约 25,200 个；这是职业统计，不是个人录用概率，也不同于招聘样本。"
+              "本页参考的是父职业Industrial Engineers；旧2024年351,100人与2024—2034年均25,200空缺保留。最新BLS父职业2025年365,100人、2025—2035增长12%、年均23,100；不是制造工程师精确规模、招聘样本或个人录用概率。"
             ]
           },
           "id": "manufacturing-engineers.market-signals.market-signal-card.2",
@@ -8197,7 +8198,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：目标行业的工艺与合规知识、特定质量与统计工具的实操训练，或转向工业工程、质量、运营与供应链方向所需的经验与责任证据。"
+              "第一目标汽车工程师：须补车辆与零部件设计、性能/可靠性及试验验证、汽车行业要求；产线改进与可制造性经验不等于整车或系统设计胜任。按具体研发对象补专业项目与授权证据。"
             ]
           },
           "id": "manufacturing-engineers.market-signals.market-signal-card.5",
@@ -8636,6 +8637,36 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "2025父职业工资/分行业及就业，教育和PE规则均按工业工程师范围使用。"
+                ],
+                "evidence_type": "official occupation or safety guidance",
+                "id": "bls-ooh-industrial",
+                "limitation": "按父职业或触发作业范围使用，不证明制造工程师细分统计、所有岗位任务或中国许可。",
+                "market": "美国",
+                "name": "BLS工业工程师职业手册（父职业参考）",
+                "period": "2025统计/现行网页；2026-10-11查阅",
+                "publisher": "BLS",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/industrial-engineers.htm"
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "设备检修或改造触发危险能量控制时，按训练授权程序执行；非所有制造工程师日常任务。"
+                ],
+                "evidence_type": "official occupation or safety guidance",
+                "id": "osha-energy",
+                "limitation": "按父职业或触发作业范围使用，不证明制造工程师细分统计、所有岗位任务或中国许可。",
+                "market": "美国",
+                "name": "OSHA危险能量控制",
+                "period": "2025统计/现行网页；2026-10-11查阅",
+                "publisher": "OSHA",
+                "scope": "market_signal",
+                "url": "https://www.osha.gov/control-hazardous-energy"
               }
             ]
           },
@@ -8747,7 +8778,7 @@
           },
           {
             "人群": "在岗者",
-            "应对重点": "保留数据与改进依据。"
+            "应对重点": "用授权数据及原始记录复核；未获许可不向外部AI提交工艺参数或客户资料。"
           },
           {
             "人群": "管理者",
@@ -8824,12 +8855,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "数据处理与模式识别",
+            "AI主要改变": "可能辅助数据处理或模式识别；不是已验证的根因结论。",
             "仍由人负责": "问题界定与结论判断",
             "方向": "分析与根因"
           },
           {
-            "AI主要改变": "起草辅助",
+            "AI主要改变": "可能起草文档，工程参数与依据须逐项复核。",
             "仍由人负责": "取舍与责任",
             "方向": "方案与文档"
           }
@@ -8939,7 +8970,7 @@
             "问题": "AI 会取代制造工程师吗？"
           },
           {
-            "回答": "目前只写到可辅助的数据分析、仿真与文档起草，问题界定、现场判断与变更责任仍由人承担。",
+            "回答": "仅列任务假设，未取得本职业采用或先后顺序研究；问题界定、实验验证、审批与实施仍须工程责任人员承担。",
             "来源": {
               "$source": "onet-tasks",
               "block": "source-register",
@@ -9180,7 +9211,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "流程仿真与优化、数据分析与根因辅助、文档与报表生成、图纸与工艺参数检索等工具可辅助分析产线数据、识别瓶颈并起草文档；但问题界定、现场判断、方案取舍、变更审批与安全合规判断仍由工程师负责。"
+          "编辑任务假设：经验证的分析或仿真工具可能辅助产线数据处理和方案比较，生成式AI可起草虚构材料下的文档。传统仿真/CAD/统计软件不等于生成式AI；未取得本职业采用率或岗位结果。根因要用数据和实验核验，方案实施、质量与安全审批仍由授权人员负责。"
         ],
         "heading": "制造工程师的工作对象与 AI 边界"
       },
@@ -9590,7 +9621,7 @@
         "schema_version": "career.quick_answers.v1"
       },
       "career_risk_cards": {
-        "boundary": "涉及安全、注册与特种设备的最终工程结论由具备相应资格的机构或人员承担；本页不替代专业工程意见或法律要求。",
+        "boundary": "普通工程分析、设备作业授权和法定专业签字是不同边界；按具体任务及法域核验，雇主与工程人员各按职责负责。",
         "context_links": [
           {
             "href": "#career-visual-group-risk",
@@ -9605,7 +9636,7 @@
             "affected_roles": "分析与改进岗位",
             "consequence": "可能做出无效或错误改进。",
             "evidence_refs": [
-              "onet-tasks"
+              "manufacturing-engineers.display.source.onet-tasks"
             ],
             "id": "risk-1",
             "mitigation": "核对数据来源、口径与统计假设。",
@@ -9621,10 +9652,10 @@
             "affected_roles": "改进与实施岗位",
             "consequence": "可能影响产品与人员安全。",
             "evidence_refs": [
-              "onet-tasks"
+              "manufacturing-engineers.display.source.osha-energy"
             ],
             "id": "risk-2",
-            "mitigation": "评估影响并按流程审批。",
+            "mitigation": "评估变更质量/安全影响并审批验证；涉及检修、改造及危险能量时由训练授权人员执行能量隔离程序，不把停机等于安全隔离。",
             "scenario": "变更未评估质量与安全影响。",
             "title": {
               "$item": "manufacturing-engineers.risk.career-risk-cards.2",
@@ -9637,7 +9668,7 @@
             "affected_roles": "改进与规划岗位",
             "consequence": "可能导致改进无法落地。",
             "evidence_refs": [
-              "onet-context"
+              "manufacturing-engineers.display.source.onet-tasks"
             ],
             "id": "risk-3",
             "mitigation": "核算成本、产能与回收期。",
@@ -9653,7 +9684,7 @@
             "affected_roles": "改进与实施岗位",
             "consequence": "可能导致方案无法落地。",
             "evidence_refs": [
-              "onet-summary"
+              "manufacturing-engineers.display.source.onet-summary"
             ],
             "id": "risk-4",
             "mitigation": "明确相关方与变更计划。",
@@ -9669,10 +9700,10 @@
             "affected_roles": "工程判断岗位",
             "consequence": "可能违反工程规范与责任要求。",
             "evidence_refs": [
-              "onet-cert"
+              "manufacturing-engineers.display.source.bls-ooh-industrial"
             ],
             "id": "risk-5",
-            "mitigation": "明确边界并在越界时转交具备资格人员。",
+            "mitigation": "核实际任务、雇主授权与适用签字资格；普通入门岗位不因此全部需要PE，法定专业活动交适格人员且保留自身职责。",
             "scenario": "超出工程或授权边界出具结论。",
             "title": {
               "$item": "manufacturing-engineers.risk.career-risk-cards.5",
@@ -9685,7 +9716,7 @@
             "affected_roles": "现场与工艺岗位",
             "consequence": "可能导致返工或误判。",
             "evidence_refs": [
-              "onet-tasks"
+              "manufacturing-engineers.display.source.onet-tasks"
             ],
             "id": "risk-6",
             "mitigation": "先核实并记录差异，再决定继续或升级。",
@@ -9766,6 +9797,18 @@
               "item": "manufacturing-engineers.source-register.published.1"
             },
             "scope": "执照与认证入口；不替代执业授权。"
+          },
+          {
+            "href": "https://www.bls.gov/ooh/architecture-and-engineering/industrial-engineers.htm",
+            "id": "manufacturing-engineers.display.source.bls-ooh-industrial",
+            "label": "BLS工业工程师职业手册（父职业参考）",
+            "scope": "2025父职业工资/分行业及就业，教育和PE规则均按工业工程师范围使用。"
+          },
+          {
+            "href": "https://www.osha.gov/control-hazardous-energy",
+            "id": "manufacturing-engineers.display.source.osha-energy",
+            "label": "OSHA危险能量控制",
+            "scope": "设备检修或改造触发危险能量控制时，按训练授权程序执行；非所有制造工程师日常任务。"
           }
         ]
       },
@@ -9775,7 +9818,7 @@
             {
               "指标": "中国大陆职业工资",
               "数值": "证据不足：未单列",
-              "说明": "国家统计局按行业门类发布，未单列本职业工资。"
+              "说明": "本次未取得安全对应职业分布；不能证明所有公开来源未发布。"
             },
             {
               "指标": "中国大陆行业代理",
@@ -9862,7 +9905,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国大陆无本职业单列工资；下列为行业代理，不是起薪、中位数或到手收入。",
+          "china_open": "未取得中国精确职业分布；制造业单位均值仅为对应雇主背景，不含个体工商户和自由职业者，不代起薪或职业中位数。",
           "china_ref": {
             "$join": [
               {
@@ -9895,7 +9938,7 @@
             },
             {
               "城市/区间": "本职业精确工资",
-              "月薪参考": "证据不足：未单列"
+              "月薪参考": "证据不足：未取得安全对应分布"
             }
           ],
           "china_soc_row": {
@@ -9942,20 +9985,26 @@
         "authority_sources": {
           "$join": [
             {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "manufacturing-engineers.source-register.published.1"
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "manufacturing-engineers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "manufacturing-engineers.source-register.published.1"
+                }
+              ],
+              "separator": ""
             },
-            "｜",
-            {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "manufacturing-engineers.source-register.published.1"
-            }
+            "；BLS父职业手册｜https://www.bls.gov/ooh/architecture-and-engineering/industrial-engineers.htm"
           ],
           "separator": ""
         },
@@ -10010,7 +10059,7 @@
           },
           {
             "指标": "薪资 · 最低 10%",
-            "数值": "未披露",
+            "数值": "$74,370/年（P10，父职业）",
             "说明": {
               "$join": [
                 {
@@ -10033,8 +10082,8 @@
             }
           },
           {
-            "指标": "薪资 · 最高 90%",
-            "数值": "未披露",
+            "指标": "薪资 · P90分位（父职业）",
+            "数值": "$159,860/年（P90，父职业）",
             "说明": {
               "$join": [
                 {
@@ -10130,7 +10179,7 @@
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "约 25,200 个（2024—2034 期合计，父职业）",
+            "数值": "约25,200个/年（旧2024—2034，父职业）",
             "说明": {
               "$join": [
                 {
@@ -10153,7 +10202,7 @@
             }
           }
         ],
-        "boundary": "美国全国口径：工资与就业为 O*NET 展示的父职业 Industrial Engineers（17-2112.00）数据，工资为 2025 OEWS、就业展望为 2024—2034 预测；不包括本职业 17-2112.03 精确值，也不含个人到手收入、起薪或录用结论。",
+        "boundary": "美国2025OEWS工资和行业参考均为父职业Industrial Engineers（17-2112）；制造工程师17-2112.03精确值未取得。旧就业2024—2034与最新2025—2035分别解释，不混用。",
         "direct_answer": {
           "$item": "manufacturing-engineers.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10162,11 +10211,11 @@
         },
         "factor_rows": [
           {
-            "answer": "多数岗位要求四年制学士学位、部分要求两年制学位并通常需数年相关经验；注册类结论须由具备资格的人员出具。",
+            "answer": "ONet本职业学历调查76%本科、16%两年学位、4%部分大学未获学位；Job Zone4组说明不代表人人须数年既有经验。法律签字按具体任务和州核。",
             "factor": "资格"
           },
           {
-            "answer": "以工艺、质量与项目管理经验为主；结构化分析与改进结果比证书名称更常被参考。",
+            "answer": "核目标岗位工艺、统计、质量和项目交付要求；未取得分析结果与证书录用权重比较。",
             "factor": "经验"
           },
           {
@@ -10193,30 +10242,30 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024",
+        "industry_period": "2025年5月（父职业17-2112）",
         "industry_rows": [
           {
-            "industry": "Manufacturing",
-            "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体中位数为准。"
+            "industry": "专业、科学和技术服务",
+            "median": "$107,610/年",
+            "note": "2025年5月父职业Industrial Engineers；非制造工程师细分工资。"
           },
           {
-            "industry": "Professional, Scientific, and Technical Services",
-            "median": "见就业行",
-            "note": "行业口径为雇主场景信号，不跨职业外推。"
+            "industry": "计算机和电子产品制造",
+            "median": "$105,370/年",
+            "note": "2025年5月父职业Industrial Engineers；非制造工程师细分工资。"
           },
           {
-            "industry": "行业口径说明二",
-            "median": "见就业行",
-            "note": "地区与行业差异大，不得跨地区外推。"
+            "industry": "运输设备制造",
+            "median": "$102,390/年",
+            "note": "2025年5月父职业Industrial Engineers；非制造工程师细分工资。"
           },
           {
-            "industry": "行业口径说明三",
-            "median": "见就业行",
-            "note": "分位工资未披露，不以推断值替代。"
+            "industry": "机械制造",
+            "median": "$99,070/年",
+            "note": "2025年5月父职业Industrial Engineers；非制造工程师细分工资。"
           }
         ],
-        "industry_value_label": "行业值",
+        "industry_value_label": "父职业年薪中位数（美元/年）",
         "interpretation_heading": {
           "$item": "manufacturing-engineers.us-salary.career-snapshot-secondary-locale.4",
           "block": "us-salary",
@@ -10225,7 +10274,7 @@
         },
         "interpretation_rows": [
           {
-            "answer": "美元/年；为 BLS 2025 OEWS 全国中位数，但为父职业 Industrial Engineers 展示口径，未展示本职业精确值或分位，不含个人到手收入。",
+            "answer": "2025美国全国父职业分位表，非制造工程师精确工资或个人收入。",
             "question": "工资"
           },
           {
@@ -10233,7 +10282,7 @@
             "question": "就业"
           },
           {
-            "answer": "2024—2034 预测远快于平均（7% 或更高），为父职业口径与职业统计，不是个人录用结果。",
+            "answer": "旧2024—2034与最新2025—2035分别看待；最新父职业增长12%、年均23,100空缺，非细分录用结果。",
             "question": "展望"
           },
           {
@@ -10258,22 +10307,34 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "—",
-            "interpretation": "O*NET 该页未展示分位工资；不以推断值替代。",
-            "label": "最低 10%",
-            "value": "未披露"
+            "equivalent": "$35.76/小时",
+            "interpretation": "2025美国全国Industrial Engineers分位；非制造工程师精确值或个人工时换算。",
+            "label": "P10（父职业）",
+            "value": "$74,370/年"
+          },
+          {
+            "equivalent": "$40.19/小时",
+            "interpretation": "2025美国全国Industrial Engineers分位；非制造工程师精确值或个人工时换算。",
+            "label": "P25（父职业）",
+            "value": "$83,600/年"
           },
           {
             "equivalent": "$49.25/小时",
-            "interpretation": "2025 美国全国年薪中位数，为父职业 Industrial Engineers 展示口径。",
-            "label": "中位数（50%）",
-            "value": "$102,440/年（父职业）"
+            "interpretation": "2025美国全国Industrial Engineers分位；非制造工程师精确值或个人工时换算。",
+            "label": "P50（父职业）",
+            "value": "$102,440/年"
           },
           {
-            "equivalent": "—",
-            "interpretation": "O*NET 该页未展示分位工资；不以推断值替代。",
-            "label": "最高 90%",
-            "value": "未披露"
+            "equivalent": "$62.14/小时",
+            "interpretation": "2025美国全国Industrial Engineers分位；非制造工程师精确值或个人工时换算。",
+            "label": "P75（父职业）",
+            "value": "$129,250/年"
+          },
+          {
+            "equivalent": "$76.85/小时",
+            "interpretation": "2025美国全国Industrial Engineers分位；非制造工程师精确值或个人工时换算。",
+            "label": "P90（父职业）",
+            "value": "$159,860/年"
           }
         ]
       },
@@ -10369,17 +10430,17 @@
           {
             "geography": "美国全国",
             "horizon": "2024—2034",
-            "interpretation": "为 2024—2034 年期间合计，含增长与替代需求，不等于在招岗位数。",
+            "interpretation": "旧2024—2034预测年均空缺，含替补；非十年合计，最新2025—2035年均23,100另列。",
             "limitation": "不能作为个人录用概率。",
-            "metric": "职位空缺（期合计）",
+            "metric": "预测年均职位空缺（父职业）",
             "occupation_scope": "展示口径：Industrial Engineers（17-2112.00 父职业）",
-            "value": "约 25,200 个（父职业）"
+            "value": "约25,200个/年（旧父职业版本）"
           },
           {
             "geography": "美国全国",
             "horizon": "2025",
             "interpretation": "为 BLS 2025 OEWS 全国中位数，为父职业口径，不代表本职业精确值或起薪。",
-            "limitation": "未披露分位；不含个人到手收入。",
+            "limitation": "父职业完整分位已取得；制造工程师精确值仍缺，不含个人到手收入。",
             "metric": "年薪中位数",
             "occupation_scope": "展示口径：Industrial Engineers（17-2112.00 父职业）",
             "value": "$102,440/年（父职业）"
@@ -10481,7 +10542,7 @@
           },
           {
             "capability_gaps": "需补足人因与工效方法。",
-            "shared_capabilities": "系统与人的分析基础。",
+            "shared_capabilities": "过程观察、数据分析与跨部门沟通，不假定已有人的认知/人体测量研究能力。",
             "target_href": "/zh/career/jobs/human-factors-engineers-and-ergonomists",
             "target_slug": "human-factors-engineers-and-ergonomists",
             "target_title": "人因工程师与工效学家",
@@ -10512,8 +10573,8 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补足机电系统集成能力。",
-            "shared_capabilities": "机械与自动化基础。",
+            "capability_gaps": "须补传感、执行机构、电气/控制与软硬件集成验证；产线改进经验不直接授予机电系统设计能力。",
+            "shared_capabilities": "设备与工艺需求分析，不假定所有岗位已有自动化控制设计经验。",
             "target_href": "/zh/career/jobs/mechatronics-engineers",
             "target_slug": "mechatronics-engineers",
             "target_title": "机电一体化工程师",
@@ -10550,7 +10611,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "riasec",
             "label": "RIASEC",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10569,7 +10630,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "big-five",
             "label": "大五人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10588,7 +10649,7 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "mbti",
             "label": "MBTI",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10602,7 +10663,7 @@
             "answer": "需要结合真实任务、边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "enneagram",
             "label": "九型人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10616,7 +10677,7 @@
             "answer": "需要结合真实任务、边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "iq",
             "label": "认知能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -10630,7 +10691,7 @@
             "answer": "需要结合真实任务、边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑提示；未提供本职业效度研究",
             "id": "eq",
             "label": "情绪能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
@@ -11152,7 +11213,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "制造流程设计",
@@ -11203,7 +11264,7 @@
       "text": "制造工程师职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "0c042455fbbeae486c5579311faad34b2921aabab4ceeb266e8e0244bb3079e6",
+  "source_content_sha256": "6649b35bf5679994c31fad444c4d81974f9b12977e37e6dabbea4701a3f05521",
   "subject": {
     "canonical_slug": "manufacturing-engineers",
     "name": "制造工程师",

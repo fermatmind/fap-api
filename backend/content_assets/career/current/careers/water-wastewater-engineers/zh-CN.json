@@ -27765,7 +27765,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "联邦政府不含邮政117790美元/年为土木工程师母职业行业中位，不是水处理设计师单列或剧场工资。"
+              "联邦政府不含邮政117790美元/年为土木工程师母职业行业中位，不是水与污水处理工程师单列工资或中国政府岗位待遇。"
             ]
           },
           "id": "water-wastewater-engineers.display.career_snapshot_secondary_locale.industry.theater",
@@ -29560,7 +29560,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "结合精确任务、母职业环境、历史校招、中国专业负责人通知及NIST方法；非事故率或个人评分。签章通知仅核正文，未编附件完整目录。"
+              "结合精确任务、母职业环境、历史校招、中国专业负责人通知及NIST方法；非事故率或个人评分。签章通知及其附件说明相关给排水工程专业负责人在设计文件责任栏签字盖章，不是全员初级入职门槛。"
             ]
           },
           "id": "water-wastewater-engineers.display.career_risk_cards.evidence-scope",
@@ -30339,7 +30339,7 @@
             "paragraphs": [
               "相关工程知识、考试资格、注册、职称与雇主条件用途不同，不合为中美通用工程证。",
               "北京2026附件7按专业学历与设计实践核基础及专业条件；一般专业考试需基础合格，符合截至2002-12-31的列明历史条件者可免基础。给排水为本专业、环境工程等属相近类别，个人资格交对应机关审查。",
-              "2026-06-01起有关中型及以上工程设计按资质标准适用相应注册专业负责人，年龄不超过70周岁并签字盖章负责；不能推所有初级入职者必须注册。本页未读该通知DOCX附件完整签章目录。",
+              "2026-06-01起有关中型及以上工程设计按资质标准适用相应注册专业负责人，年龄不超过70周岁并签字盖章负责。附件将给排水专业范围对应到相关工程，设计文件包括初步设计、施工图及计算书等；不能推所有初级入职者必须注册。",
               "W26只虚构负荷算术，不代真实设计实践、模型验证、安全训练或运行权限。"
             ]
           },
@@ -32677,13 +32677,14 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-12",
                 "details": [
-                  "按设计资质标准相关中型及以上工程相应专业负责人需注册工程师，年龄不超过70周岁，责任栏签字盖章并负责。"
+                  "按设计资质标准相关中型及以上工程相应专业负责人需注册工程师，年龄不超过70周岁，责任栏签字盖章并负责。",
+                  "附件给排水专业范围为资质标准规定的相关中型及以上工程；相应负责人对初步设计、施工图、计算书等责任栏签字盖章。"
                 ],
                 "evidence_type": "official regulatory text",
                 "id": "cn-rule",
-                "limitation": "只核2026通知正文，未读DOCX附件完整签章目录；非所有初级入职统一要求或全国招聘量。",
+                "limitation": "已核2026通知正文及原DOCX附件给排水专业范围；专业负责人设计文件签章责任非所有初级入职统一要求或全国招聘量。",
                 "market": "中国",
                 "name": "住建部2026注册公用设备电气工程师执业通知公开文本",
                 "period": "2026-03-25发布／2026-06-01实施",
@@ -32738,13 +32739,14 @@
                 "url": "https://www.onetonline.org/link/summary/11-9121.02"
               },
               {
-                "accessed_at": "2026-10-03",
+                "accessed_at": "2026-10-12",
                 "details": [
-                  "按设计资质标准相关中型及以上工程相应专业负责人需注册工程师，年龄不超过70周岁，责任栏签字盖章并负责。"
+                  "按设计资质标准相关中型及以上工程相应专业负责人需注册工程师，年龄不超过70周岁，责任栏签字盖章并负责。",
+                  "附件给排水专业范围为资质标准规定的相关中型及以上工程；相应负责人对初步设计、施工图、计算书等责任栏签字盖章。"
                 ],
                 "evidence_type": "official regulatory text",
                 "id": "nbs",
-                "limitation": "只核2026通知正文，未读DOCX附件完整签章目录；非所有初级入职统一要求或全国招聘量。",
+                "limitation": "已核2026通知正文及原DOCX附件给排水专业范围；专业负责人设计文件签章责任非所有初级入职统一要求或全国招聘量。",
                 "market": "中国",
                 "name": "住建部2026注册公用设备电气工程师执业通知公开文本",
                 "period": "2026-03-25发布／2026-06-01实施",
@@ -35569,7 +35571,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls"
+              "bls-ooh"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -35714,7 +35716,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
+              "bls-ooh",
               "employer"
             ],
             "id": "audition-feedback",
@@ -36602,7 +36604,7 @@
             },
             "metric": "专业负责人设计签章",
             "occupation_scope": "相应中型及以上工程，非职业统计",
-            "source_id": "ratify",
+            "source_id": "cn-rule",
             "value": "注册专业负责人签字盖章并负责"
           },
           {
@@ -38472,7 +38474,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "O*NET 17-2051.02",
@@ -38523,7 +38525,7 @@
       "text": "水与污水处理工程师：职责、工资范围与工程准备"
     }
   },
-  "source_content_sha256": "957726c653dadb31353cdb994e1f553916c5893bc091772191054a04654d04b8",
+  "source_content_sha256": "3bf97526faff04b7e819ee81385b5c3d4d2983b4fb7ccf8790a2e347f62481d4",
   "subject": {
     "canonical_slug": "water-wastewater-engineers",
     "name": "水与污水处理工程师",

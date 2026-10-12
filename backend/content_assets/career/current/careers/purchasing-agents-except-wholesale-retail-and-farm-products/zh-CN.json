@@ -29383,7 +29383,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "准备与核对建议（编辑整理）",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -29594,14 +29594,14 @@
             "rows": [
               [
                 "面试追问费用差异",
-                "能否解释范围变动与审批边界",
-                "能指出哪项信息尚未确认，并说明向谁确认",
+                "能否区分80g需求、70g报价和未确认税运费，解释哪些条件不能直接比较",
+                "指出A3规格与费用缺项、A4最新交期冲突，按A5分开提出决定请求",
                 "单个雇主的提问方式不能推广为行业统一考试"
               ],
               [
                 "面试追问优先级",
-                "如何比较两项同时到期的需求",
-                "能说明判断依据并承认资源约束",
+                "怎样处理报价有效期、需求到期和批准答复时间之间的冲突",
+                "用原件时间线说明待确认事项及负责人，未回复不默认批准",
                 "不要求候选人给出唯一正确答案"
               ],
               [
@@ -29727,7 +29727,7 @@
               "主要适合谁",
               "求职现实作用",
               "是否普遍入职门槛",
-              "报考／注册条件",
+              "学习、经历与授权条件",
               "投入等级",
               "重要限制"
             ],
@@ -32386,17 +32386,17 @@
                 "url": "https://arxiv.org/abs/2303.10130"
               },
               {
-                "accessed_at": "2026-09-28",
+                "accessed_at": "2026-10-12",
                 "details": [
                   "O*NET采购员工资与就业栏统计说明：仅支持所列资料对象范围内的任务、统计或分析。",
-                  "本页O*NET工资就业栏注明更宽买手与采购员组，预测年份与当前BLS2025–2035资料不同，不混用。"
+                  "O*NET当前工资、就业与预测为更宽13-1020买手与采购员组，年度与当前BLS一致；仍不单列13-1023，不与采购经理混用。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-wages",
-                "limitation": "本页O*NET工资就业栏注明更宽买手与采购员组，预测年份与当前BLS2025–2035资料不同，不混用。",
+                "limitation": "O*NET当前工资、就业与预测为更宽13-1020买手与采购员组，年度与当前BLS一致；仍不单列13-1023，不与采购经理混用。",
                 "market": "美国",
                 "name": "O*NET采购员工资与就业栏统计说明",
-                "period": "2025工资；2024就业/2024–2034预测",
+                "period": "2025工资；2025就业/2025–2035预测",
                 "publisher": "O*NET OnLine",
                 "scope": "美国买手与采购员更宽组（13-1020）",
                 "url": "https://www.onetonline.org/link/summary/13-1023.00"
@@ -34375,7 +34375,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "采购员和相邻岗位的边界在哪里？",
+            "question": "采购员和采购经理的职责边界在哪里？",
             "table": {
               "rows": [
                 {
@@ -34660,7 +34660,7 @@
             },
             "evidence_refs": [
               "onet",
-              "editor"
+              "bls"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -34692,7 +34692,7 @@
             },
             "evidence_refs": [
               "onet",
-              "editor"
+              "bls"
             ],
             "id": "record-version",
             "mitigation": {
@@ -34724,7 +34724,7 @@
             },
             "evidence_refs": [
               "nist",
-              "editor"
+              "onet"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34756,7 +34756,7 @@
             },
             "evidence_refs": [
               "onet",
-              "editor"
+              "bls"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -34788,7 +34788,7 @@
             },
             "evidence_refs": [
               "onet",
-              "editor"
+              "bls"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -34820,7 +34820,7 @@
             },
             "evidence_refs": [
               "onet",
-              "editor"
+              "bls"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35536,7 +35536,7 @@
           "type": "prose"
         },
         "heading": "美国买手与采购员组工资参考",
-        "industry_heading": "不同行业的美国工资差多少？",
+        "industry_heading": "13-1020组在不同行业的年工资中位数",
         "industry_period": {
           "$fact": "us-wage-2025",
           "field": "period"
@@ -37629,7 +37629,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "采购员 · 任务核对",
@@ -37680,7 +37680,7 @@
       "text": "采购员"
     }
   },
-  "source_content_sha256": "0e729e316ddbfa094505d623f1edf9b08f54d93ff5de989b28e881a55461bb37",
+  "source_content_sha256": "8c474504c50cd6589f8aafabdb3208ea06f08540d90485eb48e2def07c3247ab",
   "subject": {
     "canonical_slug": "purchasing-agents-except-wholesale-retail-and-farm-products",
     "name": "采购员",

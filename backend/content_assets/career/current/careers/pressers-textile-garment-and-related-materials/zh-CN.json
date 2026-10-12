@@ -23406,7 +23406,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "核心为手工或机器整烫定型、材料准备、冷却包装和缺陷检验；O*NET还列去渍、机器清洁维护、缝接材料等交叉任务，实际分工和设备工艺另核。"
+              "用于核对手工/机器整烫、材料准备、检验与冷却包装，以及去渍或维护等交叉任务；不是现场工艺单。"
             ]
           },
           "id": "pressers-textile-garment-and-related-materials.profile.onet-structured-fields-block.1",
@@ -23470,7 +23470,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS典型无需正式学历、经验None分类、短期在岗训练，具体岗位和设备训练另核。"
+              "用于美国51-6021典型无需正式学历、经验None和短期OJT分类；不代表免现场培训。"
             ]
           },
           "id": "pressers-textile-garment-and-related-materials.profile.onet-structured-fields-block.2",
@@ -23499,7 +23499,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国制造业行业工资不提供烫工个人分布。"
+              "用于中国城镇制造业税前年平均工资背景，不给烫工个人工资分位。"
             ]
           },
           "id": "pressers-textile-garment-and-related-materials.profile.onet-structured-fields-block.3",
@@ -23528,7 +23528,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS2025–2035本职26,300到22,200人、-15.7%，年均2,200空缺。"
+              "用于美国本职总体就业变化及年均空缺，不测AI因果或中国趋势。"
             ]
           },
           "id": "pressers-textile-garment-and-related-materials.profile.onet-structured-fields-block.4",
@@ -23557,7 +23557,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "输入为件号、工单、面料条件和设备状态；真实客户资料依场所权限处理。"
+              "O*NET支持件号、材料及设备工作任务；实际工单与客户资料按场所要求核。"
             ]
           },
           "id": "pressers-textile-garment-and-related-materials.profile.onet-structured-fields-block.5",
@@ -24679,10 +24679,10 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "NIST 生成式人工智能风险管理画像",
+                "entity": "O*NET烫工材料与设备任务",
                 "id": "link-14",
                 "relation": "career.evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+                "url": "https://www.onetonline.org/link/details/51-6021.00"
               },
               {
                 "entity": "《GPTs are GPTs》（任务影响估计与限制）",
@@ -24697,10 +24697,10 @@
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "NIST 风险管理框架中的复核与记录要求",
+                "entity": "O*NET烫工材料与设备任务",
                 "id": "link-17",
                 "relation": "career.evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+                "url": "https://www.onetonline.org/link/details/51-6021.00"
               },
               {
                 "entity": "《GPTs are GPTs》中关于不预测采用时间表的说明",
@@ -24856,7 +24856,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可辅助衣物外观缺陷提示和批次记录；面料、热设备、压烫工艺与实物质量仍须人工核。任务暴露研究不提供51-6021实际裁员率。"
+              "外观缺陷提示和批次记录整理是待验证的辅助设想；本页未取得岗位级效果。图像算法与生成式文本分别评估；面料、热设备、压烫工艺和实物质量须授权人员核查，任务暴露研究不证明51-6021裁员因果。"
             ]
           },
           "id": "pressers-textile-garment-and-related-materials.ai-impact.ai-impact-table.18",
@@ -25560,7 +25560,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET任务；NIST复核背景"
+              "O*NET本职任务与具体岗位核查，非统一编程门槛。"
             ]
           },
           "id": "pressers-textile-garment-and-related-materials.ai-impact.ai-impact-table.67",
@@ -25649,7 +25649,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST治理；不是热设备标准"
+              "O*NET按材料耐热条件选设备及按规格调控任务，非可直接执行的工艺参数。"
             ]
           },
           "id": "pressers-textile-garment-and-related-materials.ai-impact.ai-impact-table.73",
@@ -29026,10 +29026,10 @@
           "id": "pressers-textile-garment-and-related-materials.risk.career-risk-cards.7",
           "source_refs": [
             "onet",
-            "bls",
             "facilities",
-            "privacy",
-            "employer"
+            "employer",
+            "editor",
+            "nist"
           ],
           "type": "links"
         },
@@ -29624,9 +29624,11 @@
           "id": "pressers-textile-garment-and-related-materials.path.employer-evidence.1",
           "source_refs": [
             "employer",
-            "editor"
+            "editor",
+            "bls",
+            "onet"
           ],
-          "title": "雇主在招聘中通常看什么？",
+          "title": "入行核查依据与编辑准备建议",
           "type": "cards"
         },
         {
@@ -29906,7 +29908,7 @@
                 "整烫人员",
                 "识别标签和耐热",
                 "依岗位",
-                "练标记",
+                "核所选课程或岗位培训条件；练习任务不是报名资格。",
                 "持续",
                 "不猜参数"
               ],
@@ -29933,7 +29935,7 @@
                 "成品交接者",
                 "核压痕和污渍",
                 "依厂区",
-                "练记录",
+                "核所选课程或岗位培训条件；练习任务不是报名资格。",
                 "持续",
                 "最终放行另核"
               ]
@@ -34976,7 +34978,7 @@
             },
             "evidence_refs": [
               "onet",
-              "health"
+              "employer"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -35008,7 +35010,7 @@
             },
             "evidence_refs": [
               "onet",
-              "operations"
+              "facilities"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -35039,7 +35041,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "nist",
+              "privacy",
               "editor"
             ],
             "id": "single-coverage",
@@ -35206,6 +35208,12 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": "https://www.fermatmind.com",
+            "id": "editor",
+            "label": "FermatMind本页编辑场景",
+            "scope": "本页Tv1/Av1虚构情境；链接仅为发布者首页，不是外部事故或设备标准证据。"
           }
         ]
       },
@@ -36601,7 +36609,7 @@
           },
           {
             "alternate_value": null,
-            "label": "工作输入与资料使用边界",
+            "label": "O*NET材料、工单与设备任务",
             "secondary_value": null,
             "value": {
               "$item": "pressers-textile-garment-and-related-materials.profile.onet-structured-fields-block.5",
@@ -37882,7 +37890,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "纺织服装整烫 · 定型与检验",
@@ -37933,7 +37941,7 @@
       "text": "烫工"
     }
   },
-  "source_content_sha256": "d459cd54d3d5a02494cd74108a599e5b3af1f20ba4148df6d58073ee6d29448d",
+  "source_content_sha256": "ac4af4ae1f89578ba21f44b7c9a53dc7ef6e7fe8fd39d7820f5230db54fdbb17",
   "subject": {
     "canonical_slug": "pressers-textile-garment-and-related-materials",
     "name": "烫工",

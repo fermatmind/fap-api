@@ -1702,6 +1702,12 @@
       },
       "item:agents-and-business-managers-of-artists-performers-and-athletes.us-salary.career-snapshot-secondary-locale.9": {
         "status": "mapped"
+      },
+      "item:agents-and-business-managers-of-artists-performers-and-athletes.us-salary.cross-review-industry_period": {
+        "status": "pending_mapping"
+      },
+      "item:agents-and-business-managers-of-artists-performers-and-athletes.us-salary.cross-review-outlook_period": {
+        "status": "pending_mapping"
       }
     },
     "module_order": [
@@ -12442,14 +12448,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.industry_period": {
-        "ref": {
-          "id": "us-wage-2025",
-          "path": [
-            "period"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.industry_rows.01.industry": {
         "ref": {
@@ -12730,14 +12730,8 @@
         "status": "mapped"
       },
       "career_snapshot_secondary_locale.outlook_period": {
-        "ref": {
-          "id": "us-growth-2025-2035",
-          "path": [
-            "period"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_snapshot_secondary_locale.wage_heading": {
         "ref": {
@@ -23467,7 +23461,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "板块标题｜艺术家、演艺人员与运动员经纪及业务经理的工作环境与方式\n直接答案｜工作对象是客户、机会与合同；O*NET 显示高频电话邮件及持续联络，地点和行程按具体岗位核对。\n常见组织与地点｜演出经纪、体育经纪及工作室是可探索的机构类型；O*NET 行业入口列艺术娱乐休闲约60%，不是组织或出差频率调查。\n工作材料与系统｜客户授权、报价合同、账目与通告表；2025全年美国招聘文本Office3%、Excel2%、Outlook1%，不代表实际采用率。\n任务组织方式｜机会筛选—授权核对—条款准备—沟通复核—执行与结算为编辑归纳。\n截止日期与工作强度｜66%每天严期限、45%每周超过40小时、36%极强竞争；不能推成多数夜晚周末或频繁出差。\n协作与汇报关系｜与客户、主办方及机构相关人员联络，法务财务分工按组织实际制度，不由职位名称决定。\n复核与责任链条｜对外报价、签约与付款按授权核对，异常停止并记录。\n质量与职业要求｜以可追溯条款、档期及账目记录探索任务表现，不是录用预测。"
+              "板块标题｜艺术家、演艺人员与运动员经纪及业务经理的工作环境与方式\n直接答案｜工作对象是客户、机会与合同；O*NET 显示高频电话邮件及持续联络，地点和行程按具体岗位核对。\n常见组织与地点｜演出经纪、体育经纪及工作室是可探索的机构类型；O*NET 行业入口列艺术娱乐休闲本次当前页42%，不是组织或出差频率调查。\n工作材料与系统｜客户授权、报价合同、账目与通告表；2025全年美国招聘文本Office3%、Excel2%、Outlook1%，不代表实际采用率。\n任务组织方式｜机会筛选—授权核对—条款准备—沟通复核—执行与结算为编辑归纳。\n截止日期与工作强度｜66%每天严期限、45%每周超过40小时、36%极强竞争；不能推成多数夜晚周末或频繁出差。\n协作与汇报关系｜与客户、主办方及机构相关人员联络，法务财务分工按组织实际制度，不由职位名称决定。\n复核与责任链条｜对外报价、签约与付款按授权核对，异常停止并记录。\n质量与职业要求｜以可追溯条款、档期及账目记录探索任务表现，不是录用预测。"
             ]
           },
           "id": "agents-and-business-managers-of-artists-performers-and-athletes.profile.work-context-block.1",
@@ -24648,7 +24642,7 @@
             "bls",
             "operations",
             "employer",
-            "cnclass",
+            "cnclass-cross-repair",
             "onet",
             "oews",
             "ep"
@@ -24904,7 +24898,7 @@
           },
           "id": "agents-and-business-managers-of-artists-performers-and-athletes.ai-impact.ai-impact-table.27",
           "source_refs": [
-            "cnclass"
+            "cnclass-cross-repair"
           ],
           "type": "prose"
         },
@@ -24918,7 +24912,7 @@
           },
           "id": "agents-and-business-managers-of-artists-performers-and-athletes.ai-impact.ai-impact-table.28",
           "source_refs": [
-            "cnclass"
+            "cnclass-cross-repair"
           ],
           "type": "prose"
         },
@@ -26670,7 +26664,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆无可核验招聘样本，本页不提供该学历段薪酬。"
+              "证据不足：本页未取得中国大陆该学历段可核验招聘报价样本，不提供该学历段薪酬。"
             ]
           },
           "id": "agents-and-business-managers-of-artists-performers-and-athletes.china-salary.career-snapshot-primary-locale.36",
@@ -27411,7 +27405,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布显示该行业约占该职业就业 60%；本页未取得行业内工资。"
+              "O*NET 行业分布显示该行业约占该职业就业42%；本页未取得行业内工资。"
             ]
           },
           "id": "agents-and-business-managers-of-artists-performers-and-athletes.us-salary.career-snapshot-secondary-locale.36",
@@ -27453,7 +27447,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布显示其余行业合计约占 40%；未取得行业内工资分位。"
+              "O*NET 行业分布显示其余行业合计约占58%；未取得行业内工资分位。"
             ]
           },
           "id": "agents-and-business-managers-of-artists-performers-and-athletes.us-salary.career-snapshot-secondary-locale.39",
@@ -27551,26 +27545,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "这是全国口径的中位年薪，不区分行业、地区与单位类型。"
+              "不是。中位数只表示分布的中间位置，一半从业者低于、一半高于该值，不能当作新人起薪或固定底薪。"
             ]
           },
           "id": "agents-and-business-managers-of-artists-performers-and-athletes.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "oews",
-            "oews"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "不是。中位数只表示分布的中间位置，一半从业者低于、一半高于该值，不能当作新人起薪或固定底薪。"
-            ]
-          },
-          "id": "agents-and-business-managers-of-artists-performers-and-athletes.us-salary.career-snapshot-secondary-locale.47",
-          "source_refs": [
+            "bls",
             "oews"
           ],
           "type": "prose"
@@ -27583,8 +27563,9 @@
               "不能。OEWS 的年薪与小时工资来自同一统计口径，小时值是统计折算，不代表每个人实际有薪时数。实际收入还取决于分成与佣金比例、客户资源与代理品类，不能由全国分位推算个人到手收入。"
             ]
           },
-          "id": "agents-and-business-managers-of-artists-performers-and-athletes.us-salary.career-snapshot-secondary-locale.48",
+          "id": "agents-and-business-managers-of-artists-performers-and-athletes.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
+            "bls",
             "oews"
           ],
           "type": "prose"
@@ -27597,10 +27578,25 @@
               "工资分位来自 O*NET 展示的 BLS OEWS 2025 年 5 月全国数据；就业规模与 2025—2035 年预测来自 BLS 就业预测，两者统计产品与统计期不同。"
             ]
           },
+          "id": "agents-and-business-managers-of-artists-performers-and-athletes.us-salary.career-snapshot-secondary-locale.48",
+          "source_refs": [
+            "bls",
+            "oews"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "具体收入须核目标岗位的合同、客户与代理事项、佣金分成及计薪工时；全国OEWS雇员工资不等于自雇经纪收入或个人报价。"
+            ]
+          },
           "id": "agents-and-business-managers-of-artists-performers-and-athletes.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "oews",
-            "bls"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27659,6 +27655,34 @@
           "source_refs": [
             "oews",
             "oews"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "工资统计期：2025年5月；美国13-1011雇员工资口径。"
+            ]
+          },
+          "id": "agents-and-business-managers-of-artists-performers-and-athletes.us-salary.cross-review-industry_period",
+          "source_refs": [
+            "bls"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "就业预测期：2025—2035；基年2025。"
+            ]
+          },
+          "id": "agents-and-business-managers-of-artists-performers-and-athletes.us-salary.cross-review-outlook_period",
+          "source_refs": [
+            "bls"
           ],
           "type": "prose"
         }
@@ -27802,7 +27826,7 @@
             "hr",
             "ep",
             "operations",
-            "cnclass",
+            "cnclass-cross-repair",
             "privacy",
             "facilities"
           ],
@@ -28352,7 +28376,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "以研究证据为交付，不承担签约与报酬谈判。"
+              "以研究设计与证据分析为主要交付；签约或商务谈判职责须看岗位，不由职业名称一概排除。"
             ]
           },
           "id": "agents-and-business-managers-of-artists-performers-and-athletes.fit.personality-fit-block.36",
@@ -28436,7 +28460,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "以活动落地为交付，客户合同谈判较少。"
+              "以活动流程、场地与供应商协调为交付；客户及供应商合同谈判范围须看岗位，不能笼统称较少。"
             ]
           },
           "id": "agents-and-business-managers-of-artists-performers-and-athletes.fit.personality-fit-block.42",
@@ -31321,7 +31345,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "行业口径含全部就业人员，不能拆分岗位。"
+              "限调查范围内城镇非私营法人单位就业人员；不覆盖所有从业者，不能拆成本職薪酬。"
             ]
           },
           "id": "agents-and-business-managers-of-artists-performers-and-athletes.market-signals.market-signal-card.26",
@@ -31568,7 +31592,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "媒体沟通与写作训练"
+              "媒体写作、事实核对与危机沟通训练；客户关系经验不能代替公开传播判断。"
             ]
           },
           "id": "agents-and-business-managers-of-artists-performers-and-athletes.market-signals.market-signal-card.43",
@@ -31910,7 +31934,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-02"
+              "2026-10-08（本轮限定九板块修订）"
             ]
           },
           "id": "agents-and-business-managers-of-artists-performers-and-athletes.sources.source-card.3",
@@ -32406,6 +32430,22 @@
                 "publisher": "国家版权局",
                 "scope": "contextual",
                 "url": "https://www.ncac.gov.cn/xxfb/flfg/flfg_532/202103/t20210309_50530.html"
+              },
+              {
+                "accessed_at": "2026-10-08",
+                "details": [
+                  "艺术、娱乐和休闲业42%；其他行业58%（含农林渔猎）。",
+                  "当前页面未标统计年，不能反推10月2日版本或变化原因。"
+                ],
+                "evidence_type": "官方行业分布",
+                "id": "cnclass-cross-repair",
+                "limitation": "只给出行业就业占比，不含行业工资；不能据此推断中国行业结构。",
+                "market": "美国",
+                "name": "O*NET 13-1011.00 行业分布",
+                "period": "当前行业分布页面未标数据年；2026-10-08核对",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/13-1011.00"
               }
             ]
           },
@@ -34764,7 +34804,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "单人对接的客户与项目中段"
+            "title": "单人对接的客户与项目中断"
           },
           {
             "affected_roles": {
@@ -35275,7 +35315,7 @@
           "ui": {
             "ai_heading": "AI 会影响艺术家、演艺人员与运动员经纪及业务经理的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "公开招聘样本（历史公告，非官方统计）",
+            "official_heading": "官方宽口径工资代理（不是招聘样本）",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
             "scenario_heading": "艺术家、演艺人员与运动员经纪及业务经理在不同学历背景下通常从哪些岗位方向开始？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -35499,8 +35539,10 @@
         "heading": "美国艺术家、演艺人员与运动员经纪及业务经理工资多少？",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
-          "$fact": "us-wage-2025",
-          "field": "period"
+          "$item": "agents-and-business-managers-of-artists-performers-and-athletes.us-salary.cross-review-industry_period",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
         },
         "industry_rows": [
           {
@@ -35636,8 +35678,10 @@
         },
         "outlook_heading": "美国就业前景",
         "outlook_period": {
-          "$fact": "us-growth-2025-2035",
-          "field": "period"
+          "$item": "agents-and-business-managers-of-artists-performers-and-athletes.us-salary.cross-review-outlook_period",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
         },
         "wage_column_labels": [
           "工资统计位置",
@@ -37695,7 +37739,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "RIASEC · ESC",
@@ -37746,7 +37790,7 @@
       "text": "艺术家、演艺人员与运动员经纪及业务经理"
     }
   },
-  "source_content_sha256": "f76792c3ab327aeea845edc248947de608b86c8975e7cacd004658b40e7e2e67",
+  "source_content_sha256": "8b2665b5639d243b4e3ab43339a7516c0c5bc4e12c45640e17608ad1f83e8881",
   "subject": {
     "canonical_slug": "agents-and-business-managers-of-artists-performers-and-athletes",
     "name": "艺术家、演艺人员与运动员经纪及业务经理",

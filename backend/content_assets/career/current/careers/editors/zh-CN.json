@@ -7355,14 +7355,16 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "先确认受众、目的、来源与截止期。",
-              "区分事实错误、风格选择和作者意图。",
-              "发布前核版本、权限、事实和最终责任人。"
+              "编辑检查建议：确认受众、目的、来源与截止期。",
+              "区分事实错误、风格选择和作者意图，修改权限按实际作品与法域核。",
+              "发布前核版本与责任岗位；不是所有机构共用同一审批链。"
             ]
           },
           "id": "editors.profile.responsibilities-block.3",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "r5-editor",
+            "r5-copyright"
           ],
           "type": "list"
         },
@@ -7399,12 +7401,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET任务覆盖事实核查、写作、校对、可读性和出版生产。"
+              "美国O*NET22任务包括核事实、原创写作、校对、可读性、出版生产、部分版权许可安排；各岗位分工不同。美国BLS典型传播/新闻/英语或相关学士与写作校对经验，强写作的其他背景也可能进入；专业内容可需相关经验。O*NET新聘反馈69%学士、16%大学学习无学位、12%两年制副学位（所列97%），不是中国招聘比例；BLS少于5年相关工作是统计典型分类，不等统一必须5年或无需其他经验。"
             ]
           },
           "id": "editors.profile.onet-structured-fields-block.1",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "r5-ooh-current"
           ],
           "type": "prose"
         },
@@ -7427,12 +7430,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "伦理、法律、隐私和最终发布由机构授权责任人决定。"
+              "编辑交付核对建议：确认受众与目的、输入稿件和版本，记录实质修改、事实/引文及权限核查、作者反馈和未决项，再核终稿版本、实际审批及发布授权是否可追溯衔接。中国指定出版岗位资格另见资格问答和路径，不能用资格段代替工作闭环；真实机构流程仍须另核。"
             ]
           },
           "id": "editors.profile.career-quick-answers-block.2",
           "source_refs": [
-            "editorial"
+            "r5-ooh-current",
+            "r5-qual",
+            "r5-copyright",
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -7441,14 +7447,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "27-3041.00不等于以原创材料为主的作家或以技术说明为主的技术写作者。"
+              "编辑主要规划、审阅、修订出版内容，作者主要原创、技术写作者主要技术材料；编辑任务也含写标题、故事和文章，按实际主要职责区分，不能解释成编辑绝不写作。"
             ]
           },
           "id": "editors.profile.definition-block.2",
           "source_refs": [
             "onet-details",
-            "onet-tech",
-            "onet-writers"
+            "onet-writers",
+            "onet-tech"
           ],
           "type": "prose"
         }
@@ -7652,12 +7658,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助拼写、语法和一致性检查。"
+              "编辑候选，未核本职业部署或提效：可辅助拼写、语法和一致性检查。 工具输出逐项对回原稿与来源。"
             ]
           },
           "id": "editors.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "editorial"
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -7666,12 +7674,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助版本比较、结构建议和待核清单。"
+              "编辑候选，未核本职业部署或提效：可辅助版本比较、结构建议和待核清单。 工具输出逐项对回原稿与来源。"
             ]
           },
           "id": "editors.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "editorial"
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -7680,12 +7690,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能证明引文、事实或来源真实。"
+              "生成输出不能单独作为引文、事实和来源真实的凭据；仍核可定位原文，不作技术永远无法辅助验证的预测。"
             ]
           },
           "id": "editors.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "editorial"
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -7694,12 +7706,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能自动理解作者意图、语境与伤害风险。"
+              "语境、作者意图与伤害风险需要有权限人员复核；不从当前任务边界推出永久无法自动化。"
             ]
           },
           "id": "editors.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "editorial"
+            "onet-details",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -7750,12 +7765,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "效率提升不等于最终发布责任转移。"
+              "未取得本职业效率或净就业因果证据；编辑建议比较同任务错误、复核时间和改写失真，工具不自动承担法律或发布责任。"
             ]
           },
           "id": "editors.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "editorial"
+            "r5-ilo-current",
+            "r5-nist-current",
+            "r5-editor"
           ],
           "type": "prose"
         }
@@ -7772,12 +7789,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本页所核国家统计局与人力资源社会保障部资料未取得与 27-3041.00 一一对应的中国精确职业分位，仅到行业与人员大类口径。"
+              "中国精确编辑工资分布未取得。2025文化体育娱乐行业城镇非私营129,447/私营64,015元年均是部分文化内容方向背景；科学研究技术服务182,064/83,560可作专业服务方向背景，不证明所有出版编辑属于这些行业。5+城镇法人税前年均、含多个职业、排除个体/自由职业，不能当编辑中位、起薪、稿酬或月薪。"
             ]
           },
           "id": "editors.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -7786,12 +7803,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业或人员大类均值不能冒充编辑个人报价。"
+              "中国精确编辑工资分布未取得。2025文化体育娱乐行业城镇非私营129,447/私营64,015元年均是部分文化内容方向背景；科学研究技术服务182,064/83,560可作专业服务方向背景，不证明所有出版编辑属于这些行业。5+城镇法人税前年均、含多个职业、排除个体/自由职业，不能当编辑中位、起薪、稿酬或月薪。"
             ]
           },
           "id": "editors.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs"
+            "r5-nbs-current"
           ],
           "type": "prose"
         },
@@ -7892,12 +7909,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国分布不是个人起薪承诺。"
+              "美国27-3041，2025年5月年薪10/25/50/75/90分位41,250/57,300/77,920/106,100/153,700美元；中位时薪37.46。OEWS受雇税前直时工资、排除自雇；BLS就业包含自雇，两者人群不同。中位不是均值，分位不对应职级或个人起薪。"
             ]
           },
           "id": "editors.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "editorial"
+            "onet-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -7906,12 +7924,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "岗位行业、地区、资历、专业领域与管理责任会影响报价。"
+              "BLS2025主要行业年薪中位：影视103,320、流媒体/社交网络等86,470、专业科学技术服务77,400、报纸出版62,600美元。是美国本职业行业分布，不证明资历的工资因果效应；具体合同另核。"
             ]
           },
           "id": "editors.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "editorial"
+            "r5-ooh-current"
           ],
           "type": "prose"
         }
@@ -8048,12 +8066,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "事实或引文错误；每次交稿前由编辑核原始来源、语境和日期，关键争议交责任编辑。"
+              "编辑建议核原始来源、语境和日期，关键争议按实际责任岗位处理，不预设每机构都有责任编辑。"
             ]
           },
           "id": "editors.risk.career-risk-cards.1",
           "source_refs": [
-            "editorial"
+            "onet-details",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -8062,12 +8081,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未经授权披露隐私或机密；导入工具或外发前核权限和最少必要范围，疑点交法务/隐私责任人。"
+              "编辑材料含可识别个人信息时按个人信息保护法核合法基础、目的、最小必要和安全；敏感信息按28条类型和风险判断，不是全部稿件自动敏感。编辑建议核工具接收方、用途、训练使用、留存和权限；实际内部报告/暂停/恢复制度未取得，机构批准不替代法律义务。"
             ]
           },
           "id": "editors.risk.career-risk-cards.2",
           "source_refs": [
-            "editorial"
+            "onet-details",
+            "r5-editor",
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -8076,12 +8097,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "版权或署名不清；发布前核授权、许可、引用和署名，缺失即暂停。"
+              "中国著作权法2020修正版：10条署名/修改/完整权；24条符合具体法定条件的使用可免许可和付酬，须署名作品并不影响正常使用、不得不合理损害权利。26/29条许可合同及未明确许可权利边界；36条图书修改删节须作者许可，报刊文字修改删节可依法进行、内容修改须作者许可。不是所有文字修改均须另批，也不是有引用/机构同意即取得全部版权。 编辑建议确认适用许可或法定例外，权限不明先不依赖材料；不是一律缺授权即侵权。"
             ]
           },
           "id": "editors.risk.career-risk-cards.3",
           "source_refs": [
-            "editorial"
+            "onet-details",
+            "r5-editor",
+            "r5-copyright"
           ],
           "type": "prose"
         },
@@ -8090,12 +8113,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "版本错发；每次发布前由指定发布人核版本号、批准状态、截止时间和渠道。"
+              "编辑建议核版本号、批准状态和渠道，实际发布人与暂停/恢复流程未取得。"
             ]
           },
           "id": "editors.risk.career-risk-cards.4",
           "source_refs": [
-            "editorial"
+            "onet-details",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -8104,12 +8128,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "工具生成伪来源或改写失真；逐项回到原稿与来源复核，工具无事实确认和发布权。"
+              "编辑建议逐项对回原稿与引用，标明生成失真；工具输出不能自行成为事实证据或授予发布权。"
             ]
           },
           "id": "editors.risk.career-risk-cards.5",
           "source_refs": [
-            "editorial"
+            "onet-details",
+            "r5-editor"
           ],
           "type": "prose"
         }
@@ -8126,12 +8151,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "典型需要英语、传播或新闻等相关学士学位及写作校对经验。"
+              "美国BLS典型传播/新闻/英语或相关学士与写作校对经验，强写作的其他背景也可能进入；专业内容可需相关经验。O*NET新聘反馈69%学士、16%大学学习无学位、12%两年制副学位（所列97%），不是中国招聘比例；BLS少于5年相关工作是统计典型分类，不等统一必须5年或无需其他经验。 中国指定出版单位出版专业技术岗位适用国家新闻出版署规章：第2条范围含图书、非新闻性期刊、音像、电子、网络出版单位的编辑/校对和报纸、新闻性期刊的校对；4条到岗2年内取出版专业资格并登记，责任编辑到岗前须中级以上、注册并取证。5条规定出版单位社长、总编、主编、编辑室主任（含副职）的资格登记注册。报纸/新闻性期刊采编和少数民族编辑校对依32条另行规定，不能扩为所有自媒体/企业内容编辑统一门槛。14/16条区分资格登记与责任编辑注册，机构授权不能替代法定资格。"
             ]
           },
           "id": "editors.path.career-path-block.1",
           "source_refs": [
-            "bls-path"
+            "r5-ooh-current",
+            "r5-qual"
           ],
           "type": "prose"
         },
@@ -8168,12 +8194,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "再承担结构编辑、作者协作、多项目与出版协调。"
+              "编辑能力进阶建议：结构编辑、作者协作和多项目出版协调；BLS指出可管理或转原创/实质编辑/自由职业，不是固定晋升顺序。"
             ]
           },
           "id": "editors.path.career-path-block.4",
           "source_refs": [
-            "editorial"
+            "r5-ooh-current",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -8210,12 +8237,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学历和作品不自动赋予机构最终发布、版权或法务签字权。"
+              "中国指定出版单位出版专业技术岗位适用国家新闻出版署规章：第2条范围含图书、非新闻性期刊、音像、电子、网络出版单位的编辑/校对和报纸、新闻性期刊的校对；4条到岗2年内取出版专业资格并登记，责任编辑到岗前须中级以上、注册并取证。5条规定出版单位社长、总编、主编、编辑室主任（含副职）的资格登记注册。报纸/新闻性期刊采编和少数民族编辑校对依32条另行规定，不能扩为所有自媒体/企业内容编辑统一门槛。14/16条区分资格登记与责任编辑注册，机构授权不能替代法定资格。 学历、作品和工具训练不能自动取得责任编辑注册或实际发布权。"
             ]
           },
           "id": "editors.path.career-path-block.7",
           "source_refs": [
-            "editorial"
+            "r5-qual",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -8244,18 +8272,25 @@
               "evidence",
               "next_step"
             ],
+            "column_labels": [
+              "岗位方向",
+              "初始任务",
+              "边界",
+              "观察证据",
+              "后续发展"
+            ],
             "rows": [
               [
                 "助理编辑或校对",
                 "按风格规则校对文字、核对事实与格式并在带教下整理待核清单。",
-                "不独立对外确认事实或承担发布责任。",
+                "具体带教/发布范围核岗位制度；中国指定出版岗位资格登记另核",
                 "校对与核查记录、带教评语。",
                 "独立完成常规稿件的核查与修订。"
               ],
               [
                 "编辑（通用方向）",
                 "按受众与目的改写结构与表达并与作者沟通修订。",
-                "不得覆盖作者意图或越过审批发布。",
+                "作者修改权限按作品/法域核，不把所有文字改动一概等同须作者许可",
                 "修订说明、核查表与版本记录。",
                 "承担复杂结构与多稿统筹。"
               ],
@@ -8276,13 +8311,20 @@
               [
                 "责任编辑或主编方向",
                 "参与选题与发布决策并承担终审责任。",
-                "版权、隐私与法务与发布决定权按机构授权。",
+                "中国指定出版单位出版专业技术岗位适用国家新闻出版署规章：第2条范围含图书、非新闻性期刊、音像、电子、网络出版单位的编辑/校对和报纸、新闻性期刊的校对；4条到岗2年内取出版专业资格并登记，责任编辑到岗前须中级以上、注册并取证。5条规定出版单位社长、总编、主编、编辑室主任（含副职）的资格登记注册。报纸/新闻性期刊采编和少数民族编辑校对依32条另行规定，不能扩为所有自媒体/企业内容编辑统一门槛。14/16条区分资格登记与责任编辑注册，机构授权不能替代法定资格。",
                 "终审记录、版权与授权记录。",
                 "向出版管理方向发展。"
               ]
             ]
           },
           "id": "editors.path.entry-role-comparison.current.v1",
+          "source_refs": [
+            "onet-details",
+            "r5-ooh-current",
+            "r5-qual",
+            "r5-copyright",
+            "r5-editor"
+          ],
           "type": "table"
         },
         {
@@ -8338,22 +8380,31 @@
               "next_step",
               "review"
             ],
+            "column_labels": [
+              "资格或训练",
+              "适用条件",
+              "是否入口要求",
+              "核对材料",
+              "地域与岗位边界",
+              "下一步",
+              "核验对象"
+            ],
             "rows": [
               [
                 "学士学位（典型入口）",
                 "传播、新闻或英语等相关专业",
                 "是：BLS 称通常需要相关学士学位",
                 "学位材料与课程记录",
-                "按机构与岗位核验",
+                "美国BLS典型，不是中国统一学历",
                 "核对目标岗位学历要求",
                 "由机构确认"
               ],
               [
                 "写作与校对经验",
                 "写作、校对或编辑相关经验",
-                "是：通常要求少于 5 年相关经验",
+                "美国BLS典型少于5年相关工作经验分类，非固定最低年数",
                 "作品集与带教评语",
-                "按机构与岗位核验",
+                "美国统计典型；实际岗位经验另核",
                 "核对目标岗位经验要求",
                 "由机构确认"
               ],
@@ -8385,17 +8436,23 @@
                 "由法务或合规确认"
               ],
               [
-                "机构发布与审批授权",
-                "对外发布与终审权限",
-                "否：属机构内部授权",
-                "授权与审批记录",
-                "按机构与法域核验",
-                "核对目标岗位授权范围",
+                "中国出版岗位资格登记、责任编辑注册与机构权限",
+                "中国指定出版单位出版专业技术岗位适用国家新闻出版署规章：第2条范围含图书、非新闻性期刊、音像、电子、网络出版单位的编辑/校对和报纸、新闻性期刊的校对；4条到岗2年内取出版专业资格并登记，责任编辑到岗前须中级以上、注册并取证。5条规定出版单位社长、总编、主编、编辑室主任（含副职）的资格登记注册。报纸/新闻性期刊采编和少数民族编辑校对依32条另行规定，不能扩为所有自媒体/企业内容编辑统一门槛。14/16条区分资格登记与责任编辑注册，机构授权不能替代法定资格。",
+                "中国指定出版岗位有法定要求；不是单纯机构内部授权",
+                "按实际岗位核出版专业职业资格证与资格登记；责任编辑还须核注册及责任编辑证书。首次责任编辑注册材料按第16条含中级以上资格证原件、身份证复印件、注册申请表、继续教育证明；另核机构实际权限和审批记录，不外推所有编辑同证。",
+                "仅规章指定出版单位/人员；其他编辑岗位及采编另核",
+                "先核岗位类别、资格登记/注册，再核机构发布权",
                 "由机构确认"
               ]
             ]
           },
           "id": "editors.path.credential-decision.current.v1",
+          "source_refs": [
+            "r5-ooh-current",
+            "r5-qual",
+            "r5-copyright",
+            "r5-editor"
+          ],
           "type": "table"
         }
       ]
@@ -8439,12 +8496,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035 年预计下降 1%（Decline），预计年均约 7,900 个空缺，多数来自替补需求。"
+              "美国2025就业105,000人、2035预计103,800人，BLS另报净变化约-1,100，三项分别取整不能用端点相减替代原表；2025—2035下降1%，年均7,900空缺全部来自转岗/退出替代，非新增。BLS提阅读需求或支持图书编辑、印刷报刊失去份额可能下降，非AI就业因果或中国需求。"
             ]
           },
           "id": "editors.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-trends"
+            "r5-ooh-current"
           ],
           "type": "prose"
         },
@@ -8460,7 +8517,8 @@
           "source_refs": [
             "bls-outlook"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
@@ -8474,7 +8532,8 @@
           "source_refs": [
             "editorial"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         }
       ]
     },
@@ -8633,21 +8692,14 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "paragraphs": [
-              "事实、版权、隐私、伦理和最终发布由具名责任人复核。"
+              "版权、个人信息、出版资格分别核原法；机构规则未采，工具或内部批准不能免除法律义务。中国著作权法2020修正版：10条署名/修改/完整权；24条符合具体法定条件的使用可免许可和付酬，须署名作品并不影响正常使用、不得不合理损害权利。26/29条许可合同及未明确许可权利边界；36条图书修改删节须作者许可，报刊文字修改删节可依法进行、内容修改须作者许可。不是所有文字修改均须另批，也不是有引用/机构同意即取得全部版权。"
             ]
           },
           "id": "editors.sources.boundary.1.2",
           "source_refs": [
-            "bls-outlook",
-            "bls-path",
-            "bls-work",
-            "editorial",
-            "nbs",
-            "onet-details",
-            "onet-tech",
-            "onet-trends",
-            "onet-wages",
-            "onet-writers"
+            "r5-copyright",
+            "r5-qual",
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -8656,21 +8708,12 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "paragraphs": [
-              "中国工资仅陈述本页所核来源范围。"
+              "中国精确编辑工资分布未取得。2025文化体育娱乐行业城镇非私营129,447/私营64,015元年均是部分文化内容方向背景；科学研究技术服务182,064/83,560可作专业服务方向背景，不证明所有出版编辑属于这些行业。5+城镇法人税前年均、含多个职业、排除个体/自由职业，不能当编辑中位、起薪、稿酬或月薪。"
             ]
           },
           "id": "editors.sources.boundary.1.3",
           "source_refs": [
-            "bls-outlook",
-            "bls-path",
-            "bls-work",
-            "editorial",
-            "nbs",
-            "onet-details",
-            "onet-tech",
-            "onet-trends",
-            "onet-wages",
-            "onet-writers"
+            "r5-nbs-current"
           ],
           "type": "prose"
         }
@@ -8788,14 +8831,13 @@
                 "url": "https://www.bls.gov/ooh/media-and-communication/editors.htm"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "可通过本条所列来源链接查看原文。",
-                  "仅支持所列职业、市场、时期和口径。"
+                  "美国BLS典型传播/新闻/英语或相关学士与写作校对经验，强写作的其他背景也可能进入；专业内容可需相关经验。O*NET新聘反馈69%学士、16%大学学习无学位、12%两年制副学位（所列97%），不是中国招聘比例；BLS少于5年相关工作是统计典型分类，不等统一必须5年或无需其他经验。"
                 ],
                 "evidence_type": "official entry path",
                 "id": "bls-path",
-                "limitation": "仅支持所列职业、市场、时期和口径。",
+                "limitation": "美国BLS典型传播/新闻/英语或相关学士与写作校对经验，强写作的其他背景也可能进入；专业内容可需相关经验。O*NET新聘反馈69%学士、16%大学学习无学位、12%两年制副学位（所列97%），不是中国招聘比例；BLS少于5年相关工作是统计典型分类，不等统一必须5年或无需其他经验。",
                 "market": "美国",
                 "name": "BLS OOH — Editors education and qualities",
                 "period": "current page; accessed 2026-09-06",
@@ -8804,14 +8846,13 @@
                 "url": "https://www.bls.gov/ooh/media-and-communication/editors.htm"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "可通过本条所列来源链接查看原文。",
-                  "仅支持所列职业、市场、时期和口径。"
+                  "BLS职责含核事实、改写、评估、终稿批准；编辑也可原创，工作可办公室/远程与截止压力。"
                 ],
                 "evidence_type": "official duties and work context",
                 "id": "bls-work",
-                "limitation": "仅支持所列职业、市场、时期和口径。",
+                "limitation": "BLS职责含核事实、改写、评估、终稿批准；编辑也可原创，工作可办公室/远程与截止压力。",
                 "market": "美国",
                 "name": "BLS OOH — Editors duties and work context",
                 "period": "current page; accessed 2026-09-06",
@@ -8836,14 +8877,13 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "可通过本条所列来源链接查看原文。",
-                  "按行业和人员大类聚合，不是27-3041.00精确职业工资。"
+                  "保留原URL路径；当前正文另登记r5-nbs-current。中国精确编辑工资分布未取得。2025文化体育娱乐行业城镇非私营129,447/私营64,015元年均是部分文化内容方向背景；科学研究技术服务182,064/83,560可作专业服务方向背景，不证明所有出版编辑属于这些行业。5+城镇法人税前年均、含多个职业、排除个体/自由职业，不能当编辑中位、起薪、稿酬或月薪。"
                 ],
                 "evidence_type": "official aggregate wage statistics",
                 "id": "nbs",
-                "limitation": "按行业和人员大类聚合，不是27-3041.00精确职业工资。",
+                "limitation": "保留原URL路径；当前正文另登记r5-nbs-current。中国精确编辑工资分布未取得。2025文化体育娱乐行业城镇非私营129,447/私营64,015元年均是部分文化内容方向背景；科学研究技术服务182,064/83,560可作专业服务方向背景，不证明所有出版编辑属于这些行业。5+城镇法人税前年均、含多个职业、排除个体/自由职业，不能当编辑中位、起薪、稿酬或月薪。",
                 "market": "中国大陆",
                 "name": "国家统计局 — 2025年城镇单位就业人员年平均工资情况",
                 "period": "2025 wage aggregates published 2026",
@@ -8852,14 +8892,13 @@
                 "url": "https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "可通过本条所列来源链接查看原文。",
-                  "仅支持所列职业、市场、时期和口径。"
+                  "2026美国档案22任务（19核心/3补充），兴趣A73/C61/E52/I32/S26/R1、教育69/16/12，按岗位不需人人全承担。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-details",
-                "limitation": "仅支持所列职业、市场、时期和口径。",
+                "limitation": "2026美国档案22任务（19核心/3补充），兴趣A73/C61/E52/I32/S26/R1、教育69/16/12，按岗位不需人人全承担。",
                 "market": "美国",
                 "name": "O*NET — Editors 27-3041.00",
                 "period": "current page; accessed 2026-09-06",
@@ -8900,14 +8939,13 @@
                 "url": "https://www.onetonline.org/link/localtrends/27-3041.00"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "可通过本条所列来源链接查看原文。",
-                  "仅支持所列职业、市场、时期和口径。"
+                  "美国27-3041，2025年5月年薪10/25/50/75/90分位41,250/57,300/77,920/106,100/153,700美元；中位时薪37.46。OEWS受雇税前直时工资、排除自雇；BLS就业包含自雇，两者人群不同。中位不是均值，分位不对应职级或个人起薪。"
                 ],
                 "evidence_type": "official wage distribution",
                 "id": "onet-wages",
-                "limitation": "仅支持所列职业、市场、时期和口径。",
+                "limitation": "美国27-3041，2025年5月年薪10/25/50/75/90分位41,250/57,300/77,920/106,100/153,700美元；中位时薪37.46。OEWS受雇税前直时工资、排除自雇；BLS就业包含自雇，两者人群不同。中位不是均值，分位不对应职级或个人起薪。",
                 "market": "美国",
                 "name": "O*NET — National wages 27-3041.00",
                 "period": "2025 BLS wage data",
@@ -9010,6 +9048,156 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/25-1082.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-oews-concepts",
+                "limitation": "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。",
+                "market": "美国",
+                "name": "BLS OEWS工资人群与组成",
+                "period": "现行方法；本批检索2026-10-09",
+                "publisher": "Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。"
+                ],
+                "evidence_type": "official law",
+                "id": "r5-cn-pipl",
+                "limitation": "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。",
+                "market": "中国内地",
+                "name": "个人信息保护法：稿件及编辑研究资料中的可识别个人信息边界",
+                "period": "2021法；本批实际读；检索2026-10-09",
+                "publisher": "全国人大/中央网信办",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "自愿AI治理建议非稿件及编辑研究资料的行业技术规范或岗位授权，也非工具采用/提效实测。"
+                ],
+                "evidence_type": "official framework",
+                "id": "r5-nist-current",
+                "limitation": "自愿AI治理建议非稿件及编辑研究资料的行业技术规范或岗位授权，也非工具采用/提效实测。",
+                "market": "跨市场",
+                "name": "NIST AI RMF官方框架说明",
+                "period": "自愿框架1.0；本批实际读；检索2026-10-09",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本批实际读ILO2025摘要，本职业未核SOC27-3041与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。"
+                ],
+                "evidence_type": "official research summary",
+                "id": "r5-ilo-current",
+                "limitation": "本批实际读ILO2025摘要，本职业未核SOC27-3041与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。",
+                "market": "跨市场",
+                "name": "ILO2025 GenAI暴露研究官方摘要",
+                "period": "2025研究摘要；本批实际读；检索2026-10-09",
+                "publisher": "ILO",
+                "scope": "contextual",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国指定出版单位出版专业技术岗位适用国家新闻出版署规章：第2条范围含图书、非新闻性期刊、音像、电子、网络出版单位的编辑/校对和报纸、新闻性期刊的校对；4条到岗2年内取出版专业资格并登记，责任编辑到岗前须中级以上、注册并取证。5条规定出版单位社长、总编、主编、编辑室主任（含副职）的资格登记注册。报纸/新闻性期刊采编和少数民族编辑校对依32条另行规定，不能扩为所有自媒体/企业内容编辑统一门槛。14/16条区分资格登记与责任编辑注册，机构授权不能替代法定资格。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "r5-qual",
+                "limitation": "中国指定出版单位出版专业技术岗位适用国家新闻出版署规章：第2条范围含图书、非新闻性期刊、音像、电子、网络出版单位的编辑/校对和报纸、新闻性期刊的校对；4条到岗2年内取出版专业资格并登记，责任编辑到岗前须中级以上、注册并取证。5条规定出版单位社长、总编、主编、编辑室主任（含副职）的资格登记注册。报纸/新闻性期刊采编和少数民族编辑校对依32条另行规定，不能扩为所有自媒体/企业内容编辑统一门槛。14/16条区分资格登记与责任编辑注册，机构授权不能替代法定资格。",
+                "market": "中国大陆",
+                "name": "出版专业技术人员职业资格管理规定正文",
+                "period": "2008-06-01施行/署现行公开文本",
+                "publisher": "国家新闻出版署",
+                "scope": "primary_document",
+                "url": "https://www.nppa.gov.cn/xxgk/fdzdgknr/zcfg_210/bmgz_213/202112/t20211209_442151.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国著作权法2020修正版：10条署名/修改/完整权；24条符合具体法定条件的使用可免许可和付酬，须署名作品并不影响正常使用、不得不合理损害权利。26/29条许可合同及未明确许可权利边界；36条图书修改删节须作者许可，报刊文字修改删节可依法进行、内容修改须作者许可。不是所有文字修改均须另批，也不是有引用/机构同意即取得全部版权。"
+                ],
+                "evidence_type": "official law",
+                "id": "r5-copyright",
+                "limitation": "中国著作权法2020修正版：10条署名/修改/完整权；24条符合具体法定条件的使用可免许可和付酬，须署名作品并不影响正常使用、不得不合理损害权利。26/29条许可合同及未明确许可权利边界；36条图书修改删节须作者许可，报刊文字修改删节可依法进行、内容修改须作者许可。不是所有文字修改均须另批，也不是有引用/机构同意即取得全部版权。",
+                "market": "中国大陆",
+                "name": "中华人民共和国著作权法2020修正正文",
+                "period": "2021-06-01实施",
+                "publisher": "全国人大常委会 / 国家版权局",
+                "scope": "primary_document",
+                "url": "https://www.ncac.gov.cn/xxfb/flfg/flfg_532/202103/t20210309_50530.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国精确编辑工资分布未取得。2025文化体育娱乐行业城镇非私营129,447/私营64,015元年均是部分文化内容方向背景；科学研究技术服务182,064/83,560可作专业服务方向背景，不证明所有出版编辑属于这些行业。5+城镇法人税前年均、含多个职业、排除个体/自由职业，不能当编辑中位、起薪、稿酬或月薪。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "r5-nbs-current",
+                "limitation": "中国精确编辑工资分布未取得。2025文化体育娱乐行业城镇非私营129,447/私营64,015元年均是部分文化内容方向背景；科学研究技术服务182,064/83,560可作专业服务方向背景，不证明所有出版编辑属于这些行业。5+城镇法人税前年均、含多个职业、排除个体/自由职业，不能当编辑中位、起薪、稿酬或月薪。",
+                "market": "中国大陆",
+                "name": "国家统计局2025工资原发布正文",
+                "period": "2025年度/2026-05-15发布",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "编辑候选及风险控制不是本职业实测、法定统一内部程序、招聘样本或成功率。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "r5-editor",
+                "limitation": "编辑候选及风险控制不是本职业实测、法定统一内部程序、招聘样本或成功率。",
+                "market": "全球",
+                "name": "编辑AI候选、风险和转岗编辑说明",
+                "period": "2026-10-09实读",
+                "publisher": "FermatMind本轮作者",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国2025就业105,000人、2035预计103,800人，BLS另报净变化约-1,100，三项分别取整不能用端点相减替代原表；2025—2035下降1%，年均7,900空缺全部来自转岗/退出替代，非新增。BLS提阅读需求或支持图书编辑、印刷报刊失去份额可能下降，非AI就业因果或中国需求。 美国BLS典型传播/新闻/英语或相关学士与写作校对经验，强写作的其他背景也可能进入；专业内容可需相关经验。O*NET新聘反馈69%学士、16%大学学习无学位、12%两年制副学位（所列97%），不是中国招聘比例；BLS少于5年相关工作是统计典型分类，不等统一必须5年或无需其他经验。 编辑可写标题/故事/文章、授权岗位可终审；不由代码排除写作或终审职责。"
+                ],
+                "evidence_type": "official occupational outlook",
+                "id": "r5-ooh-current",
+                "limitation": "美国2025就业105,000人、2035预计103,800人，BLS另报净变化约-1,100，三项分别取整不能用端点相减替代原表；2025—2035下降1%，年均7,900空缺全部来自转岗/退出替代，非新增。BLS提阅读需求或支持图书编辑、印刷报刊失去份额可能下降，非AI就业因果或中国需求。 美国BLS典型传播/新闻/英语或相关学士与写作校对经验，强写作的其他背景也可能进入；专业内容可需相关经验。O*NET新聘反馈69%学士、16%大学学习无学位、12%两年制副学位（所列97%），不是中国招聘比例；BLS少于5年相关工作是统计典型分类，不等统一必须5年或无需其他经验。 编辑可写标题/故事/文章、授权岗位可终审；不由代码排除写作或终审职责。",
+                "market": "美国",
+                "name": "BLS编辑2025—2035当前职业正文",
+                "period": "2025工资/2025—2035预测",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/media-and-communication/editors.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025全年美国编辑唯一招聘软件技能比例：Office13%、Excel11%、PowerPoint/Photoshop各8%、Word7%、Outlook/HTML各6%、InDesign/CreativeCloud/WordPress各4%；22行含Project比例未给，不等0。分母为关联本职业全部唯一招聘，不是GenAI采用、提效或替代率。"
+                ],
+                "evidence_type": "job posting skill statistics",
+                "id": "r5-hot",
+                "limitation": "2025全年美国编辑唯一招聘软件技能比例：Office13%、Excel11%、PowerPoint/Photoshop各8%、Word7%、Outlook/HTML各6%、InDesign/CreativeCloud/WordPress各4%；22行含Project比例未给，不等0。分母为关联本职业全部唯一招聘，不是GenAI采用、提效或替代率。",
+                "market": "美国",
+                "name": "O*NET编辑招聘软件技能",
+                "period": "2025全年",
+                "publisher": "O*NET / Lightcast",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/27-3041.00"
               }
             ]
           },
@@ -9269,7 +9457,7 @@
         "authority_links": [
           {
             "来源": {
-              "$source": "bls-outlook",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -9278,7 +9466,7 @@
             "类型": "官方或研究来源",
             "适用范围": "仅按来源原始口径使用",
             "链接": {
-              "$source": "bls-outlook",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9330,12 +9518,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "语言与一致性检查与草稿",
+            "AI主要改变": "编辑候选，未核效果：语言与一致性检查与草稿",
             "仍由人负责": "事实核查、结构与受众判断",
             "方向": "核心产出"
           },
           {
-            "AI主要改变": "版本比较与待核清单起草",
+            "AI主要改变": "编辑候选，未核效果：版本比较与待核清单起草",
             "仍由人负责": "原始来源核对与发布审批",
             "方向": "工作流程"
           }
@@ -9348,18 +9536,19 @@
         },
         "evidence_rows": [
           {
-            "使用限制": "仅适用于所列职业、市场与时期；不外推到中国或所有机构与雇主。",
+            "source_ref": "r5-hot",
+            "使用限制": "非GenAI采用或效果",
             "来源": {
-              "$source": "bls-outlook",
+              "$source": "r5-hot",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "editors.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "2025美国招聘软件技能",
+            "结论": "2025全年美国编辑唯一招聘软件技能比例：Office13%、Excel11%、PowerPoint/Photoshop各8%、Word7%、Outlook/HTML各6%、InDesign/CreativeCloud/WordPress各4%；22行含Project比例未给，不等0。分母为关联本职业全部唯一招聘，不是GenAI采用、提效或替代率。",
             "链接": {
-              "$source": "bls-outlook",
+              "$source": "r5-hot",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9367,18 +9556,19 @@
             }
           },
           {
-            "使用限制": "仅适用于所列职业、市场与时期；不外推到中国或所有机构与雇主。",
+            "source_ref": "r5-ilo-current",
+            "使用限制": "非中国编辑实测效果",
             "来源": {
-              "$source": "bls-path",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "editors.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "ILO任务暴露研究",
+            "结论": "暴露不等裁员率或替代日期",
             "链接": {
-              "$source": "bls-path",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9386,18 +9576,19 @@
             }
           },
           {
-            "使用限制": "仅适用于所列职业、市场与时期；不外推到中国或所有机构与雇主。",
+            "source_ref": "r5-nist-current",
+            "使用限制": "非本职业提效或替代预测",
             "来源": {
-              "$source": "bls-work",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "editors.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "NIST治理框架",
+            "结论": "治理参考不授予机构发布权限",
             "链接": {
-              "$source": "bls-work",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9413,7 +9604,7 @@
         },
         "method_cards": [
           {
-            "含义": "先区分可辅助任务与必须由编辑完成的判断。",
+            "含义": "区分编辑辅助候选与有权限人员须复核的判断，不作不可替代预测",
             "概念": "任务能力"
           },
           {
@@ -9429,14 +9620,14 @@
           {
             "回答": "不能从任务暴露推导替代日期；事实核查、语境判断与发布责任仍需人负责。",
             "来源": {
-              "$source": "bls-outlook",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "editors.source-register.published.1"
             },
             "链接": {
-              "$source": "bls-outlook",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9447,14 +9638,14 @@
           {
             "回答": "先限定在拼写语法与一致性检查、版本比较与待核清单。",
             "来源": {
-              "$source": "bls-path",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "editors.source-register.published.1"
             },
             "链接": {
-              "$source": "bls-path",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9502,7 +9693,7 @@
           },
           {
             "步骤": "记录升级",
-            "说明": "发现事实或授权问题立即停止并上报。"
+            "说明": "编辑建议标明事实/授权疑点；实际报告对象、暂停/恢复程序另核，不设通用上报顺序"
           }
         ],
         "risk_rows": [
@@ -9555,25 +9746,25 @@
             "人的控制点": "由具名责任人确认定稿。",
             "任务": "形成版本与修订记录",
             "工作方向": "复盘与改进",
-            "当前变化": "可能辅助整理"
+            "当前变化": "编辑候选，未核效果：可能辅助整理"
           },
           {
             "人的控制点": "回到版本与规则文件核对。",
             "任务": "核对版本与风格规则",
             "工作方向": "输入与版本",
-            "当前变化": "可辅助拼写、语法和一致性检查。"
+            "当前变化": "编辑候选，未核效果：可辅助拼写、语法和一致性检查。"
           },
           {
-            "人的控制点": "发现越界或隐患即停止并升级。",
+            "人的控制点": "编辑建议标明未核来源和权限疑点，按实际制度处理；未取得统一停止/升级/恢复程序",
             "任务": "识别来源缺失与授权不明",
             "工作方向": "边界与异常",
-            "当前变化": "可辅助版本比较、结构建议和待核清单。"
+            "当前变化": "编辑候选，未核效果：可辅助版本比较、结构建议和待核清单。"
           },
           {
             "人的控制点": "责任人确认权限、结论与留痕。",
             "任务": "形成可追溯的定稿交付",
             "工作方向": "采用与责任",
-            "当前变化": "不能证明引文、事实或来源真实。"
+            "当前变化": "生成输出不能单独证明引文、事实或来源真实；即使用工具辅助核查，仍须回到原文复核。"
           }
         ],
         "transition": {
@@ -9673,12 +9864,12 @@
       },
       "career_ai_description_block": {
         "body": [
-          "AI 与语言工具可辅助拼写语法与一致性检查、版本比较、结构建议与待核清单；但事实与引文与来源的真实性、作者意图与语境、版权与隐私与法务与发布审批的最终责任仍由具名编辑与机构承担。"
+          "编辑试验候选：语法、结构、版本比对和检索提示等用途须验证；本轮未取得编辑职业AI采用或提效实证。传统语言工具与生成式AI分开，生成输出不能单独证明引文、事实或来源真实，须核原文与版本；发布权限仍按实际岗位、机构制度与法域核。"
         ],
         "heading": "编辑的工作对象与 AI 边界"
       },
       "career_path_block": {
-        "boundary": "入口要求、领域经验、版权与发布授权与最终责任由具体机构与岗位核验。",
+        "boundary": "美国BLS典型传播/新闻/英语或相关学士与写作校对经验，强写作的其他背景也可能进入；专业内容可需相关经验。O*NET新聘反馈69%学士、16%大学学习无学位、12%两年制副学位（所列97%），不是中国招聘比例；BLS少于5年相关工作是统计典型分类，不等统一必须5年或无需其他经验。 中国指定出版单位出版专业技术岗位适用国家新闻出版署规章：第2条范围含图书、非新闻性期刊、音像、电子、网络出版单位的编辑/校对和报纸、新闻性期刊的校对；4条到岗2年内取出版专业资格并登记，责任编辑到岗前须中级以上、注册并取证。5条规定出版单位社长、总编、主编、编辑室主任（含副职）的资格登记注册。报纸/新闻性期刊采编和少数民族编辑校对依32条另行规定，不能扩为所有自媒体/企业内容编辑统一门槛。14/16条区分资格登记与责任编辑注册，机构授权不能替代法定资格。 路径观察为编辑建议，具体制度未采",
         "competence_ladder": [
           {
             "description": "确认受众、目的、来源与截止期。",
@@ -9716,7 +9907,7 @@
             "copy_key": "career.item.career-path-block",
             "type": "prose"
           },
-          "jurisdiction": "学历、领域经验、版权与发布授权与最终责任按机构与岗位核验。",
+          "jurisdiction": "中国指定出版单位出版专业技术岗位适用国家新闻出版署规章：第2条范围含图书、非新闻性期刊、音像、电子、网络出版单位的编辑/校对和报纸、新闻性期刊的校对；4条到岗2年内取出版专业资格并登记，责任编辑到岗前须中级以上、注册并取证。5条规定出版单位社长、总编、主编、编辑室主任（含副职）的资格登记注册。报纸/新闻性期刊采编和少数民族编辑校对依32条另行规定，不能扩为所有自媒体/企业内容编辑统一门槛。14/16条区分资格登记与责任编辑注册，机构授权不能替代法定资格。",
           "summary": {
             "$item": "editors.path.career-path-block.3",
             "block": "path",
@@ -9728,7 +9919,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls-outlook",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9736,7 +9927,7 @@
             },
             "id": "bls-outlook",
             "label": {
-              "$source": "bls-outlook",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -9782,7 +9973,7 @@
           },
           {
             "href": {
-              "$source": "nbs",
+              "$source": "r5-nbs-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9790,7 +9981,7 @@
             },
             "id": "nbs",
             "label": {
-              "$source": "nbs",
+              "$source": "r5-nbs-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -9875,7 +10066,7 @@
                 "credentials": "按机构与岗位规则核验。",
                 "next_moves": "按授权链处理并留痕。",
                 "readiness_evidence": "有升级与处理记录。",
-                "responsibility": "识别来源、授权或事实异常并停止。",
+                "responsibility": "编辑建议识别来源/授权/事实异常，标明限制；实际暂停条件另核",
                 "role": "异常处理"
               },
               {
@@ -9909,7 +10100,7 @@
                 "credentials": "按机构与岗位规则核验。",
                 "next_moves": "保留决定依据。",
                 "readiness_evidence": "异常及时上报。",
-                "responsibility": "设置停止与升级条件。",
+                "responsibility": "编辑建议核真实暂停、报告和恢复程序，未取得统一制度",
                 "role": "风险升级"
               },
               {
@@ -10017,7 +10208,7 @@
             }
           },
           {
-            "answer": "美国通常需要传播、新闻或英语等相关学士学位及写作与校对经验；版权、隐私、法务与最终发布权按机构与岗位核验，编辑不等于作者也不等于最终发布责任人。",
+            "answer": "美国典型相关学士与写作校对经验；编辑也可写作及按岗位终审。中国指定出版单位出版专业技术岗位适用国家新闻出版署规章：第2条范围含图书、非新闻性期刊、音像、电子、网络出版单位的编辑/校对和报纸、新闻性期刊的校对；4条到岗2年内取出版专业资格并登记，责任编辑到岗前须中级以上、注册并取证。5条规定出版单位社长、总编、主编、编辑室主任（含副职）的资格登记注册。报纸/新闻性期刊采编和少数民族编辑校对依32条另行规定，不能扩为所有自媒体/企业内容编辑统一门槛。14/16条区分资格登记与责任编辑注册，机构授权不能替代法定资格。 版权、隐私与实际发布权限分别核法律、合同和机构制度。",
             "key": "qa1",
             "question": "资格边界是什么？",
             "table": {
@@ -10073,17 +10264,17 @@
           }
         ],
         "direct_answer": "先识别事实与引文、隐私与机密、版权与署名、版本错发、工具伪来源五类风险。",
-        "evidence_scope": "风险项按本职业内容与所列来源（BLS OOH 与 O*NET）边界解释。",
+        "evidence_scope": "BLS/O*NET支持职业背景，风险后果和内部检查为编辑分析；版权、个人信息、出版资格分别核中国原文，不是统一机构审批流程",
         "heading": "编辑的风险与控制点",
         "risks": [
           {
             "affected_roles": "编辑",
             "consequence": "可能误导读者并损害机构公信力。",
             "evidence_refs": [
-              "bls-outlook"
+              "r5-editor"
             ],
             "id": "risk-1",
-            "mitigation": "每次交稿前核原始来源、语境与日期，关键争议交责任编辑。",
+            "mitigation": "编辑建议核原始来源、语境和日期，关键争议按实际责任岗位处理，不预设每机构都有责任编辑。",
             "scenario": "事实或引文错误未被发现。",
             "title": {
               "$item": "editors.risk.career-risk-cards.1",
@@ -10096,10 +10287,11 @@
             "affected_roles": "编辑",
             "consequence": "可能造成法律与信任风险。",
             "evidence_refs": [
-              "bls-outlook"
+              "r5-editor",
+              "r5-cn-pipl"
             ],
             "id": "risk-2",
-            "mitigation": "导入工具或外发前核权限与最小必要范围，疑点交隐私或法务责任人。",
+            "mitigation": "编辑材料含可识别个人信息时按个人信息保护法核合法基础、目的、最小必要和安全；敏感信息按28条类型和风险判断，不是全部稿件自动敏感。编辑建议核工具接收方、用途、训练使用、留存和权限；实际内部报告/暂停/恢复制度未取得，机构批准不替代法律义务。",
             "scenario": "未经授权披露隐私或机密。",
             "title": {
               "$item": "editors.risk.career-risk-cards.2",
@@ -10112,10 +10304,11 @@
             "affected_roles": "编辑",
             "consequence": "可能引发侵权或署名纠纷。",
             "evidence_refs": [
-              "bls-outlook"
+              "r5-editor",
+              "r5-copyright"
             ],
             "id": "risk-3",
-            "mitigation": "发布前核授权、许可、引用与署名，缺失即暂停。",
+            "mitigation": "中国著作权法2020修正版：10条署名/修改/完整权；24条符合具体法定条件的使用可免许可和付酬，须署名作品并不影响正常使用、不得不合理损害权利。26/29条许可合同及未明确许可权利边界；36条图书修改删节须作者许可，报刊文字修改删节可依法进行、内容修改须作者许可。不是所有文字修改均须另批，也不是有引用/机构同意即取得全部版权。 编辑建议确认适用许可或法定例外，权限不明先不依赖材料；不是一律缺授权即侵权。",
             "scenario": "版权或署名不清。",
             "title": {
               "$item": "editors.risk.career-risk-cards.3",
@@ -10128,10 +10321,10 @@
             "affected_roles": "编辑",
             "consequence": "可能发布错误内容且无法追溯。",
             "evidence_refs": [
-              "bls-outlook"
+              "r5-editor"
             ],
             "id": "risk-4",
-            "mitigation": "每次发布前由指定发布人核版本号、批准状态与渠道。",
+            "mitigation": "编辑建议核版本号、批准状态和渠道，实际发布人与暂停/恢复流程未取得。",
             "scenario": "版本错发或草稿被当定稿。",
             "title": {
               "$item": "editors.risk.career-risk-cards.4",
@@ -10144,10 +10337,10 @@
             "affected_roles": "编辑",
             "consequence": "可能把虚构来源或扭曲表述带入定稿。",
             "evidence_refs": [
-              "bls-outlook"
+              "r5-editor"
             ],
             "id": "risk-5",
-            "mitigation": "逐项回到原稿与来源复核，工具无事实确认与发布权。",
+            "mitigation": "编辑建议逐项对回原稿与引用，标明生成失真；工具输出不能自行成为事实证据或授予发布权。",
             "scenario": "工具生成伪来源或改写失真。",
             "title": {
               "$item": "editors.risk.career-risk-cards.5",
@@ -10160,10 +10353,11 @@
             "affected_roles": "编辑",
             "consequence": "可能产生不可逆的合规或声誉后果。",
             "evidence_refs": [
-              "bls-outlook"
+              "r5-qual",
+              "r5-editor"
             ],
             "id": "risk-boundary",
-            "mitigation": "停止并按机构发布与法务授权链升级。",
+            "mitigation": "中国指定出版单位出版专业技术岗位适用国家新闻出版署规章：第2条范围含图书、非新闻性期刊、音像、电子、网络出版单位的编辑/校对和报纸、新闻性期刊的校对；4条到岗2年内取出版专业资格并登记，责任编辑到岗前须中级以上、注册并取证。5条规定出版单位社长、总编、主编、编辑室主任（含副职）的资格登记注册。报纸/新闻性期刊采编和少数民族编辑校对依32条另行规定，不能扩为所有自媒体/企业内容编辑统一门槛。14/16条区分资格登记与责任编辑注册，机构授权不能替代法定资格。 编辑建议核真实机构权限，法律义务不能由内部授权免除",
             "scenario": "遇到超出授权范围的发布或法务决定。",
             "title": "责任边界"
           }
@@ -10172,7 +10366,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls-outlook",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10180,7 +10374,7 @@
             },
             "id": "bls-outlook",
             "label": {
-              "$source": "bls-outlook",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10226,7 +10420,7 @@
           },
           {
             "href": {
-              "$source": "nbs",
+              "$source": "r5-nbs-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10234,13 +10428,79 @@
             },
             "id": "nbs",
             "label": {
-              "$source": "nbs",
+              "$source": "r5-nbs-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "editors.source-register.published.1"
             },
             "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": null,
+            "id": "r5-editor",
+            "label": {
+              "$source": "r5-editor",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "editors.source-register.published.1"
+            },
+            "scope": "编辑候选及风险控制不是本职业实测、法定统一内部程序、招聘样本或成功率。"
+          },
+          {
+            "href": {
+              "$source": "r5-qual",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "editors.source-register.published.1"
+            },
+            "id": "r5-qual",
+            "label": {
+              "$source": "r5-qual",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "editors.source-register.published.1"
+            },
+            "scope": "中国指定出版单位出版专业技术岗位适用国家新闻出版署规章：第2条范围含图书、非新闻性期刊、音像、电子、网络出版单位的编辑/校对和报纸、新闻性期刊的校对；4条到岗2年内取出版专业资格并登记，责任编辑到岗前须中级以上、注册并取证。5条规定出版单位社长、总编、主编、编辑室主任（含副职）的资格登记注册。报纸/新闻性期刊采编和少数民族编辑校对依32条另行规定，不能扩为所有自媒体/企业内容编辑统一门槛。14/16条区分资格登记与责任编辑注册，机构授权不能替代法定资格。"
+          },
+          {
+            "href": {
+              "$source": "r5-copyright",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "editors.source-register.published.1"
+            },
+            "id": "r5-copyright",
+            "label": {
+              "$source": "r5-copyright",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "editors.source-register.published.1"
+            },
+            "scope": "中国著作权法2020修正版：10条署名/修改/完整权；24条符合具体法定条件的使用可免许可和付酬，须署名作品并不影响正常使用、不得不合理损害权利。26/29条许可合同及未明确许可权利边界；36条图书修改删节须作者许可，报刊文字修改删节可依法进行、内容修改须作者许可。不是所有文字修改均须另批，也不是有引用/机构同意即取得全部版权。"
+          },
+          {
+            "href": {
+              "$source": "r5-cn-pipl",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "editors.source-register.published.1"
+            },
+            "id": "r5-cn-pipl",
+            "label": {
+              "$source": "r5-cn-pipl",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "editors.source-register.published.1"
+            },
+            "scope": "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。"
           }
         ]
       },
@@ -10249,8 +10509,8 @@
           "bls_table": [
             {
               "指标": "中国大陆薪资口径",
-              "数值": "证据不足：未取得全国单职业口径",
-              "说明": "现有官方来源为行业与人员大类聚合，未建立与 27-3041.00 精确对应的全国职业工资分布。"
+              "数值": "精确职业缺口＋匹配行业代理",
+              "说明": "中国精确编辑工资分布未取得。2025文化体育娱乐行业城镇非私营129,447/私营64,015元年均是部分文化内容方向背景；科学研究技术服务182,064/83,560可作专业服务方向背景，不证明所有出版编辑属于这些行业。5+城镇法人税前年均、含多个职业、排除个体/自由职业，不能当编辑中位、起薪、稿酬或月薪。"
             }
           ],
           "china_ai_row": {
@@ -10269,7 +10529,7 @@
             {
               "学历段": "入口要求",
               "岗位方向": "编辑岗位",
-              "说明": "通常需要传播、新闻或英语等相关学士学位及写作与校对经验。"
+              "说明": "美国BLS典型学士和经验不可外推中国；中国指定出版岗位资格另核。中国指定出版单位出版专业技术岗位适用国家新闻出版署规章：第2条范围含图书、非新闻性期刊、音像、电子、网络出版单位的编辑/校对和报纸、新闻性期刊的校对；4条到岗2年内取出版专业资格并登记，责任编辑到岗前须中级以上、注册并取证。5条规定出版单位社长、总编、主编、编辑室主任（含副职）的资格登记注册。报纸/新闻性期刊采编和少数民族编辑校对依32条另行规定，不能扩为所有自媒体/企业内容编辑统一门槛。14/16条区分资格登记与责任编辑注册，机构授权不能替代法定资格。"
             },
             {
               "学历段": "在职训练",
@@ -10294,14 +10554,14 @@
               "需求": "证据不足：未取得全国单职业口径"
             },
             {
-              "备注": "岗位与地区差异明显。",
-              "行业": "专业、科学与技术服务",
-              "需求": "证据不足：未取得全国单职业口径"
+              "备注": "中国精确编辑工资分布未取得。2025文化体育娱乐行业城镇非私营129,447/私营64,015元年均是部分文化内容方向背景；科学研究技术服务182,064/83,560可作专业服务方向背景，不证明所有出版编辑属于这些行业。5+城镇法人税前年均、含多个职业、排除个体/自由职业，不能当编辑中位、起薪、稿酬或月薪。",
+              "行业": "科学研究和技术服务业",
+              "需求": "2025行业年均182,064/83,560元"
             },
             {
-              "备注": "需按具体岗位核对。",
-              "行业": "出版与文化传媒",
-              "需求": "证据不足：未取得全国单职业口径"
+              "备注": "中国精确编辑工资分布未取得。2025文化体育娱乐行业城镇非私营129,447/私营64,015元年均是部分文化内容方向背景；科学研究技术服务182,064/83,560可作专业服务方向背景，不证明所有出版编辑属于这些行业。5+城镇法人税前年均、含多个职业、排除个体/自由职业，不能当编辑中位、起薪、稿酬或月薪。",
+              "行业": "文化、体育和娱乐业",
+              "需求": "2025行业年均129,447/64,015元"
             }
           ],
           "china_intl": "中国与美国职业口径不作自动等同。",
@@ -10315,7 +10575,7 @@
           "china_ref": {
             "$join": [
               {
-                "$source": "bls-outlook",
+                "$source": "r5-nbs-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -10323,7 +10583,7 @@
               },
               "｜",
               {
-                "$source": "bls-outlook",
+                "$source": "r5-nbs-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10332,7 +10592,7 @@
             ],
             "separator": ""
           },
-          "china_salary_note": "中国公开来源仅用于说明口径边界，不提供本职业工资。",
+          "china_salary_note": "中国精确编辑工资分布未取得。2025文化体育娱乐行业城镇非私营129,447/私营64,015元年均是部分文化内容方向背景；科学研究技术服务182,064/83,560可作专业服务方向背景，不证明所有出版编辑属于这些行业。5+城镇法人税前年均、含多个职业、排除个体/自由职业，不能当编辑中位、起薪、稿酬或月薪。",
           "china_salary_table": [
             {
               "城市/区间": "全国单职业",
@@ -10340,7 +10600,7 @@
             },
             {
               "城市/区间": "行业平均工资（不可替代）",
-              "月薪参考": "证据不足：不以行业均值替代职业工资"
+              "月薪参考": "2025文化行业年均129,447/64,015元（非私营/私营）；非编辑月薪"
             },
             {
               "城市/区间": "招聘报价（不可替代）",
@@ -10356,7 +10616,7 @@
           "sources_note": {
             "$join": [
               {
-                "$source": "nbs",
+                "$source": "r5-nbs-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -10364,7 +10624,7 @@
               },
               "｜",
               {
-                "$source": "nbs",
+                "$source": "r5-nbs-current",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10391,7 +10651,7 @@
         "authority_sources": {
           "$join": [
             {
-              "$source": "nbs",
+              "$source": "onet-wages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10399,7 +10659,7 @@
             },
             "｜",
             {
-              "$source": "nbs",
+              "$source": "onet-wages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10415,7 +10675,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "bls-outlook",
+                  "$source": "r5-ooh-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10423,7 +10683,7 @@
                 },
                 "｜",
                 {
-                  "$source": "bls-outlook",
+                  "$source": "r5-ooh-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10439,7 +10699,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "bls-outlook",
+                  "$source": "r5-ooh-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10447,7 +10707,7 @@
                 },
                 "｜",
                 {
-                  "$source": "bls-outlook",
+                  "$source": "r5-ooh-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10463,7 +10723,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "bls-outlook",
+                  "$source": "r5-ooh-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10471,7 +10731,7 @@
                 },
                 "｜",
                 {
-                  "$source": "bls-outlook",
+                  "$source": "r5-ooh-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10487,7 +10747,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "bls-outlook",
+                  "$source": "r5-ooh-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10495,7 +10755,7 @@
                 },
                 "｜",
                 {
-                  "$source": "bls-outlook",
+                  "$source": "r5-ooh-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10511,7 +10771,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "bls-outlook",
+                  "$source": "r5-ooh-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10519,7 +10779,7 @@
                 },
                 "｜",
                 {
-                  "$source": "bls-outlook",
+                  "$source": "r5-ooh-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10535,7 +10795,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "nbs",
+                  "$source": "r5-ooh-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10543,7 +10803,7 @@
                 },
                 "｜",
                 {
-                  "$source": "nbs",
+                  "$source": "r5-ooh-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10559,7 +10819,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "nbs",
+                  "$source": "r5-ooh-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10567,7 +10827,7 @@
                 },
                 "｜",
                 {
-                  "$source": "nbs",
+                  "$source": "r5-ooh-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10583,7 +10843,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "nbs",
+                  "$source": "r5-ooh-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10591,7 +10851,7 @@
                 },
                 "｜",
                 {
-                  "$source": "nbs",
+                  "$source": "r5-ooh-current",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10645,19 +10905,19 @@
         "industry_period": "2025 年 5 月工资数据",
         "industry_rows": [
           {
-            "industry": "信息业（Information）",
-            "median": "按来源",
-            "note": "BLS 列为该职业主要行业之一。"
+            "industry": "电影和视频行业",
+            "median": "103,320美元/年",
+            "note": "BLS2025本职业主要行业年薪中位"
           },
           {
             "industry": "专业、科学与技术服务",
-            "median": "按来源",
-            "note": "BLS 列为该职业主要行业之一。"
+            "median": "77,400美元/年",
+            "note": "BLS2025美国本职业主要行业年薪中位"
           },
           {
-            "industry": "机构/雇主",
-            "median": "需核对",
-            "note": "版权与发布要求可能不同。"
+            "industry": "报纸出版",
+            "median": "62,600美元/年",
+            "note": "BLS2025美国本职业主要行业年薪中位"
           },
           {
             "industry": "时期",
@@ -10682,7 +10942,7 @@
             "question": "能否外推中国？"
           },
           {
-            "answer": "不能；中位数不是起薪，空缺主要来自替补而非净新增。",
+            "answer": "中位不是起薪；当前BLS年均空缺全部来自转岗/退出替代，不是新增",
             "question": "能否保证个人结果？"
           },
           {
@@ -10720,7 +10980,7 @@
           },
           {
             "equivalent": "第 90 百分位",
-            "interpretation": "分布高端，通常与专业领域、机构与资历相关。",
+            "interpretation": "美国本职业90分位；非高资历或特定专业个人工资保证",
             "label": "高位",
             "value": "153,700 美元/年"
           }
@@ -10833,12 +11093,12 @@
             "limitation": "预测不是个人录用保证。",
             "metric": "就业规模",
             "occupation_scope": "编辑（27-3041.00）",
-            "value": "约 105,000 人（2025 年）"
+            "value": "2025约105,000人；2035预计103,800，BLS另报净变化-1,100（分别取整）"
           },
           {
             "geography": "美国",
             "horizon": "2025—2035 年",
-            "interpretation": "空缺主要来自替补需求，不等于净新增。",
+            "interpretation": "BLS当前预测空缺全部来自转岗/退出替代，非净新增",
             "limitation": "预测不是个人录用保证。",
             "metric": "职位空缺",
             "occupation_scope": "编辑（27-3041.00）",
@@ -10849,7 +11109,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls-outlook",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10857,7 +11117,7 @@
             },
             "id": "bls-outlook",
             "label": {
-              "$source": "bls-outlook",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10903,7 +11163,7 @@
           },
           {
             "href": {
-              "$source": "nbs",
+              "$source": "r5-nbs-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10911,7 +11171,7 @@
             },
             "id": "nbs",
             "label": {
-              "$source": "nbs",
+              "$source": "r5-nbs-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10922,62 +11182,58 @@
         ],
         "transitions": [
           {
-            "capability_gaps": {
-              "$item": "editors.market-signals.market-signal-card.5",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "shared_capabilities": {
-              "$item": "editors.market-signals.market-signal-card.4",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "capability_gaps": "需补：经营分析、组织研究与管理咨询方法",
+            "shared_capabilities": "编辑可核迁移能力：信息整理、清晰表达和问题拆解",
+            "source_id": "onet-adjacent-management-analysts",
             "target_href": "/zh/career/jobs/management-analysts",
             "target_slug": "management-analysts",
             "target_title": "管理咨询分析师：与本职业在经营分析上的差异",
-            "transition_distance": "中，需补经营与管理咨询方法"
+            "transition_distance": "编辑比较：中，需补经营与管理咨询方法；非个人成功率或资格互认"
           },
           {
-            "capability_gaps": "需要补足：经营分析与管理咨询方法。",
-            "shared_capabilities": "可转移能力：信息整理、逻辑与清晰写作。",
+            "capability_gaps": "需补：界面/交互设计、可用性及浏览器设备测试",
+            "shared_capabilities": "编辑可核迁移能力：内容结构与受众沟通",
+            "source_id": "onet-adjacent-web-and-digital-interface-designers",
             "target_href": "/zh/career/jobs/web-and-digital-interface-designers",
             "target_slug": "web-and-digital-interface-designers",
             "target_title": "网页与数字界面设计师：与本职业在界面与交互上的差异",
-            "transition_distance": "远，需补设计与可用性方法"
+            "transition_distance": "编辑比较：远，需补设计与可用性方法；非个人成功率或资格互认"
           },
           {
-            "capability_gaps": "需要补足：界面设计、交互与可用性方法。",
-            "shared_capabilities": "可转移能力：内容结构与受众沟通。",
+            "capability_gaps": "需补：网站部署维护、质量测试、权限和技术运维",
+            "shared_capabilities": "编辑可核迁移能力：内容发布和版本意识",
+            "source_id": "onet-adjacent-web-administrators",
             "target_href": "/zh/career/jobs/web-administrators",
             "target_slug": "web-administrators",
             "target_title": "网站管理员：与本职业在内容运维与权限上的差异",
-            "transition_distance": "中，需补系统与权限管理"
+            "transition_distance": "编辑比较：中，需补系统与权限管理；非个人成功率或资格互认"
           },
           {
-            "capability_gaps": "需要补足：网站系统、权限与运维管理。",
-            "shared_capabilities": "可转移能力：内容发布与流程意识。",
+            "capability_gaps": "需补：企业文档系统、元数据及保存销毁生命周期",
+            "shared_capabilities": "编辑可核迁移能力：版本、检索和规范记录",
+            "source_id": "onet-adjacent-document-management-specialists",
             "target_href": "/zh/career/jobs/document-management-specialists",
             "target_slug": "document-management-specialists",
             "target_title": "文档管理专员：与本职业在文档生命周期管理上的差异",
-            "transition_distance": "近，内容相近但合规与元数据不同"
+            "transition_distance": "编辑比较：近，内容相近但合规与元数据不同；非个人成功率或资格互认"
           },
           {
-            "capability_gaps": "需要补足：元数据、文档生命周期与合规规则。",
-            "shared_capabilities": "可转移能力：版本管理与检索与规范意识。",
+            "capability_gaps": "需补：图书馆学领域研究与高校教学训练、实际资格",
+            "shared_capabilities": "编辑可核迁移能力：写作、资料检索和内容组织",
+            "source_id": "onet-adjacent-library-science-teachers-postsecondary",
             "target_href": "/zh/career/jobs/library-science-teachers-postsecondary",
             "target_slug": "library-science-teachers-postsecondary",
             "target_title": "高校图书馆学教师：与本职业在教学与研究上的差异",
-            "transition_distance": "远，需补学位与学术路径"
+            "transition_distance": "编辑比较：远，需补学位与学术路径；非个人成功率或资格互认"
           },
           {
-            "capability_gaps": "需要补足：图书馆学学位与学术教学路径。",
-            "shared_capabilities": "可转移能力：信息组织、写作与研究方法。",
+            "capability_gaps": "需补：原创题材、叙事/文体及版权署名、市场开发",
+            "shared_capabilities": "编辑可核迁移能力：语言表达、结构修订与研究",
+            "source_id": "onet-writers",
             "target_href": "/zh/career/jobs/writers-and-authors",
             "target_slug": "writers-and-authors",
             "target_title": "作家与作者：与本职业在原创与署名责任上的差异",
-            "transition_distance": "近，文字相近但产出与责任不同"
+            "transition_distance": "编辑比较：近，文字相近但产出与责任不同；非个人成功率或资格互认"
           }
         ]
       },
@@ -11217,7 +11473,7 @@
                 "field": "entity"
               }
             },
-            "watchouts": "授权不明即暂停。"
+            "watchouts": "编辑检查建议：先不依赖权限待核材料，核许可、法定例外及适用修改边界；实际暂停或报告程序按机构制度，本轮未取得。"
           },
           {
             "direction": "长期训练",
@@ -11257,7 +11513,7 @@
             "question": "能否补足机构发布与版权授权要求？"
           },
           {
-            "answer": "工具不能确认事实或取得发布授权。",
+            "answer": "工具可作为待验证的辅助核查候选；生成输出不能单独确认事实，须复核原文与版本，也不能自动取得发布授权。",
             "question": "能否理解工具与 AI 的边界？"
           },
           {
@@ -11304,14 +11560,14 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls-outlook",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "editors.source-register.published.1"
             },
             "label": {
-              "$source": "bls-outlook",
+              "$source": "r5-ooh-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -11355,14 +11611,14 @@
           },
           {
             "href": {
-              "$source": "nbs",
+              "$source": "r5-nbs-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "editors.source-register.published.1"
             },
             "label": {
-              "$source": "nbs",
+              "$source": "r5-nbs-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -11421,22 +11677,22 @@
       ],
       "riasec_fit_block": {
         "fit_interest": "兴趣只提示探索方向；实际适配以可复核的编辑作品与试做观察核验。",
-        "interest": "官方兴趣代码 ACE（艺术型、常规型、企业型）：以创意写作与媒体内容、按规范组织与核对信息，并参与选题与管理协调。",
+        "interest": "O*NET美国职业兴趣A73/C61/E52/I32/S26/R1；ACE为前三兴趣概括，不作个人能力或人格诊断。",
         "riasec": "ACE",
-        "riasec_short": "官方兴趣代码 ACE；不作人格诊断或录用依据。"
+        "riasec_short": "ACE概括美国职业兴趣前三项，非个人诊断或录用标准"
       },
       "source_card": {
         "eeat_signals": {
           "author": "FermatMind research workflow",
           "source": {
-            "$source": "bls-outlook",
+            "$source": "r5-ooh-current",
             "block": "source-register",
             "copy_key": "career.item.published-sources",
             "field": "name",
             "item": "editors.source-register.published.1"
           },
           "updated_at": {
-            "$source": "bls-outlook",
+            "$source": "r5-ooh-current",
             "block": "source-register",
             "copy_key": "career.item.published-sources",
             "field": "period",
@@ -11599,7 +11855,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "内容规划与审阅 · 事实核查与语言编辑 · 版本与发布协调",
@@ -11650,7 +11906,7 @@
       "text": "编辑"
     }
   },
-  "source_content_sha256": "ef01790c981d9d3d7d46b86f38d16b6f3bbbbf40b599e2fc0bc1e1a5d49a8b8c",
+  "source_content_sha256": "6f50d84af971347194c6b71eeb6203c7ea1784eba82cf0e547539db9edbb4c5c",
   "subject": {
     "canonical_slug": "editors",
     "name": "编辑",

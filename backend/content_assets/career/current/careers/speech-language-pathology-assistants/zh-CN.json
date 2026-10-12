@@ -29833,7 +29833,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "ASHA范围指导不覆盖州法规，州资格和机构任务另核；CMS支付规则不等临床资格或所有保险。"
+              "ASHA指导支持监督、解释与记录权限，不覆盖州法规；S的比例、缺值和版本情境全属编辑虚构，不是临床结果或事故率。CMS仅支持Medicare支付边界，其他保险另核。"
             ]
           },
           "id": "speech-language-pathology-assistants.risk.career-risk-cards.10",
@@ -33508,7 +33508,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-10-01核本职原文；NHC/NBS和通用AI方法在同目标此前核实基础上复用并检查适用范围。"
+              "2026-10-12核本次九模块的O*NET、BLS父职业统计、加州注册、ASHA和CMS资料；NBS行业参考沿用已核原文。NHC完整条文访问受限，保留历史材料并登记本轮缺口。"
             ]
           },
           "id": "speech-language-pathology-assistants.sources.source-card.3",
@@ -36417,7 +36417,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
+              "oews-method",
               "bls"
             ],
             "id": "delivery-acceptance",
@@ -36551,6 +36551,30 @@
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$source": "oews-method",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "speech-language-pathology-assistants.source-register.published.1"
+            },
+            "id": "oews-method",
+            "label": {
+              "$source": "oews-method",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "speech-language-pathology-assistants.source-register.published.1"
+            },
+            "scope": {
+              "$source": "oews-method",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "limitation",
+              "item": "speech-language-pathology-assistants.source-register.published.1"
             }
           }
         ]
@@ -37468,7 +37492,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "bls",
             "value": {
               "$item": "speech-language-pathology-assistants.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -39266,7 +39290,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "SLP指导监督 · 支持角色",
@@ -39317,7 +39341,7 @@
       "text": "言语病理学助理"
     }
   },
-  "source_content_sha256": "790eec2499974b0e24ac70c9d1a6aa78743d8bc09aa0dff77542ef8baf1e9822",
+  "source_content_sha256": "394a4c1acbbde23adfe0c6c99e796b8de64300d2f30971696a752389f7d05a41",
   "subject": {
     "canonical_slug": "speech-language-pathology-assistants",
     "name": "言语病理学助理",

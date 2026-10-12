@@ -13123,7 +13123,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国无同口径全国预测；美国辅助员及组合职业数据均不代替助理。"
+              "证据不足：本次所核资料未取得中国助理同口径全国预测；美国辅助员及组合职业数据不能代替助理。"
             ]
           },
           "id": "occupational-therapy-assistants.market-signals.market-signal-card.5",
@@ -13870,7 +13870,7 @@
             "链接": "https://www.bls.gov/ooh/healthcare/occupational-therapy-assistants-and-aides.htm"
           }
         ],
-        "difference_intro": "文书整理可加快，但工具看不到真实肌力、疲劳、跌倒风险或当事人的生活目标。",
+        "difference_intro": "以下是从职业任务提出的编辑试用方向，未验证文书速度、准确性或本职业采用率；模型草稿不能替代实时动作、疲劳、跌倒风险和当事人目标的专业核实。",
         "difference_rows": [
           {
             "AI主要改变": "整理草稿和缺测提醒。",
@@ -14145,10 +14145,10 @@
             "scope": "美国助理教育、职责与许可边界"
           },
           {
-            "href": "https://www.onetonline.org/link/details/31-2011.00",
+            "href": "https://www.nbcot.org/get-certified/eligibility",
             "id": "faa",
-            "label": "O*NET活动",
-            "scope": "美国助理教育、职责与许可边界"
+            "label": "NBCOT COTA考试资格",
+            "scope": "美国COTA考试资格；不等同州执照或机构权限。"
           }
         ],
         "tracks": [
@@ -14456,8 +14456,8 @@
             "title": "患者转移跌倒"
           },
           {
-            "affected_roles": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
-            "consequence": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
+            "affected_roles": "当事人、作业治疗助理和监督治疗师",
+            "consequence": "自行改变目标可能偏离既定计划并使治疗效果与责任难以复核。",
             "evidence_refs": [
               "onet",
               "privacy"
@@ -14468,8 +14468,8 @@
             "title": "目标偏离"
           },
           {
-            "affected_roles": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
-            "consequence": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
+            "affected_roles": "当事人、照护者、器具指导人员及治疗师",
+            "consequence": "器具尺寸、环境或指导不适配可能造成活动困难、疼痛或跌倒。",
             "evidence_refs": [
               "privacy",
               "privacy"
@@ -14480,8 +14480,8 @@
             "title": "辅具不适配"
           },
           {
-            "affected_roles": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
-            "consequence": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
+            "affected_roles": "当事人、助理和机构数据负责人",
+            "consequence": "未获准处理可识别患者资料可能泄露健康信息并损害信任。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14492,8 +14492,8 @@
             "title": "病历隐私"
           },
           {
-            "affected_roles": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
-            "consequence": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
+            "affected_roles": "当事人、助理、治疗师及后续接手团队",
+            "consequence": "未记疼痛、疲劳或进展可能延误复评、调整和风险升级。",
             "evidence_refs": [
               "bls",
               "bls"
@@ -14504,8 +14504,8 @@
             "title": "漏记变化"
           },
           {
-            "affected_roles": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
-            "consequence": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
+            "affected_roles": "当事人、助理、监督治疗师及机构",
+            "consequence": "未经授权的计划结论可能导致错误干预和责任不清。",
             "evidence_refs": [
               "onet",
               "onet"
@@ -14522,31 +14522,31 @@
             "href": "https://www.bls.gov/ooh/healthcare/occupational-therapy-assistants-and-aides.htm",
             "id": "onet",
             "label": "BLS职责",
-            "scope": "助理临床活动与风险"
+            "scope": "美国职业职责和工作环境；风险场景/后果为编辑提示，不是事故频率、隐私法规或目标州授权证明。"
           },
           {
             "href": "https://www.onetonline.org/link/details/31-2011.00",
             "id": "bls",
             "label": "O*NET任务",
-            "scope": "助理临床活动与风险"
+            "scope": "美国职业职责和工作环境；风险场景/后果为编辑提示，不是事故频率、隐私法规或目标州授权证明。"
           },
           {
             "href": "https://www.bls.gov/ooh/healthcare/occupational-therapy-assistants-and-aides.htm",
             "id": "facilities",
             "label": "BLS环境",
-            "scope": "助理临床活动与风险"
+            "scope": "美国职业职责和工作环境；风险场景/后果为编辑提示，不是事故频率、隐私法规或目标州授权证明。"
           },
           {
             "href": "https://www.onetonline.org/link/details/31-2011.00",
             "id": "privacy",
             "label": "O*NET工作活动",
-            "scope": "助理临床活动与风险"
+            "scope": "美国职业职责和工作环境；风险场景/后果为编辑提示，不是事故频率、隐私法规或目标州授权证明。"
           },
           {
             "href": "https://www.bls.gov/ooh/healthcare/occupational-therapy-assistants-and-aides.htm",
             "id": "onet",
             "label": "BLS教育许可",
-            "scope": "助理临床活动与风险"
+            "scope": "美国职业职责和工作环境；风险场景/后果为编辑提示，不是事故频率、隐私法规或目标州授权证明。"
           }
         ]
       },
@@ -14971,7 +14971,7 @@
             "value": "约52,200"
           },
           {
-            "geography": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
+            "geography": "美国",
             "horizon": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
             "interpretation": "31-2011总体预测非AI因果，净增11200与年均8100含替补空缺分清。",
             "limitation": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
@@ -14981,7 +14981,7 @@
             "value": "21.5%"
           },
           {
-            "geography": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
+            "geography": "美国",
             "horizon": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
             "interpretation": "含新增及替补，不由组合8600拆分，非净增11200或中国需求。",
             "limitation": "非AI采用、替代或个人失业概率。",
@@ -15132,7 +15132,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
+            "cta_label": "查看RIASEC兴趣测评",
             "evidence_level": {
               "$item": "occupational-therapy-assistants.fit.personality-fit-block.8",
               "block": "fit",
@@ -15151,10 +15151,10 @@
             "watchout": "量表结果不等于入学、执照或雇主授权。"
           },
           {
-            "answer": "作业治疗助理可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "观察自己能否说明具体活动和当事人反应，并在挫折或不适时及时向治疗师反馈。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
+            "cta_label": "查看RIASEC兴趣测评",
+            "evidence_level": "编辑职业探索建议；没有本页个体预测效度验证",
             "id": "big-five",
             "label": "沟通风格",
             "question": "做作业治疗助理需要怎样的能力与工作方式？",
@@ -15167,10 +15167,10 @@
             "watchout": "量表结果不等于入学、执照或雇主授权。"
           },
           {
-            "answer": "作业治疗助理可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "把动作、提示次数和实际反应分开记录，发现未知不补造；由带教者指出遗漏。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
+            "cta_label": "查看RIASEC兴趣测评",
+            "evidence_level": "编辑职业探索建议；没有本页个体预测效度验证",
             "id": "mbti",
             "label": "观察能力",
             "question": "做作业治疗助理需要怎样的能力与工作方式？",
@@ -15183,10 +15183,10 @@
             "watchout": "量表结果不等于入学、执照或雇主授权。"
           },
           {
-            "answer": "作业治疗助理可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "反思是否愿意在治疗师监督下耐心支持当事人目标，接受反复练习和记录责任。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
+            "cta_label": "查看RIASEC兴趣测评",
+            "evidence_level": "编辑职业探索建议；没有本页个体预测效度验证",
             "id": "enneagram",
             "label": "价值偏好",
             "question": "做作业治疗助理需要怎样的能力与工作方式？",
@@ -15199,10 +15199,10 @@
             "watchout": "量表结果不等于入学、执照或雇主授权。"
           },
           {
-            "answer": "作业治疗助理可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "核医院、学校、护理或居家任务的近距离接触、转移负荷、班次和监督安排。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
+            "cta_label": "查看RIASEC兴趣测评",
+            "evidence_level": "编辑职业探索建议；没有本页个体预测效度验证",
             "id": "iq",
             "label": "场景偏好",
             "question": "做作业治疗助理需要怎样的能力与工作方式？",
@@ -15215,10 +15215,10 @@
             "watchout": "量表结果不等于入学、执照或雇主授权。"
           },
           {
-            "answer": "作业治疗助理可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "只用虚构情境了解自己是否愿意拆活动、列未知和修订记录；真实实践须按项目与机构监督安排。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "查看相关测评",
-            "evidence_level": "在作业治疗师指导下实施活动训练、观察反应、记录进展并交接风险。",
+            "cta_label": "查看RIASEC兴趣测评",
+            "evidence_level": "编辑职业探索建议；没有本页个体预测效度验证",
             "id": "eq",
             "label": "虚构案例",
             "question": "做作业治疗助理需要怎样的能力与工作方式？",
@@ -15427,8 +15427,8 @@
       "riasec_fit_block": {
         "fit_interest": "能按治疗计划指导训练、记录客观进展，并在异常时求助治疗师。",
         "interest": "喜欢与当事人一起练实际生活活动，耐心观察小步变化。",
-        "riasec": "社会型S、研究型I和现实型R兴趣可供探索；量表不证明治疗能力。",
-        "riasec_short": "S/I/R：助人、观察与实践。"
+        "riasec": "O*NET职业兴趣环境中的社会型S、常规型C和现实型R可用于探索任务偏好；不是个体治疗能力或许可证明。",
+        "riasec_short": "S/C/R：助人、流程记录与实际活动。"
       },
       "source_card": {
         "eeat_signals": {
@@ -15439,7 +15439,7 @@
             "type": "prose"
           },
           "source": "BLS/O*NET美国助理职责、工资和就业；NBCOT认证；国家统计局中国工资缺口。",
-          "updated_at": "2026-09-26核BLS 2025工资及2025—2035预测。"
+          "updated_at": "2026-10-12 本次九模块作者核对，统计期分别保留。"
         },
         "note": "证据只支持作业治疗助理在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -15451,7 +15451,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "职业任务来源"
+            "label": "了解MBTI测评（英文）"
           },
           {
             "href": {
@@ -15461,7 +15461,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "美国工资来源"
+            "label": "了解大五测评（英文）"
           },
           {
             "href": {
@@ -15471,7 +15471,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "资格来源"
+            "label": "了解MBTI测评（中文）"
           },
           {
             "href": {
@@ -15481,7 +15481,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "职业边界说明"
+            "label": "了解大五测评（中文）"
           }
         ]
       },
@@ -15703,7 +15703,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "作业治疗助理 · O*NET 31-2011.00",
@@ -15754,7 +15754,7 @@
       "text": "作业治疗助理：职责、工资、认证与入行"
     }
   },
-  "source_content_sha256": "db40314f262fe196452956d0eaa83489b5ee4114f21cd323c30ad28699815d20",
+  "source_content_sha256": "8f7ac5992a00e9eec1ab64e2630a83d327224b66517fd4031b9fe2b41326c40b",
   "subject": {
     "canonical_slug": "occupational-therapy-assistants",
     "name": "作业治疗助理",

@@ -35,6 +35,33 @@
       "fact:openings": {
         "status": "mapped"
       },
+      "fact:r5-china-jiaojiang-featured-daily-2026": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-employment": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-high": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-industry-amusement": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-industry-theater": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-low": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-median": {
+        "status": "pending_mapping"
+      },
+      "fact:r5-openings": {
+        "status": "pending_mapping"
+      },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
       },
@@ -11902,40 +11929,16 @@
         "status": "mapped"
       },
       "entry_decisions.credential-boundary.paragraphs.02": {
-        "ref": {
-          "id": "actors.path.credential-boundary.1",
-          "path": [
-            "data",
-            "paragraphs",
-            1
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.credential-boundary.paragraphs.03": {
-        "ref": {
-          "id": "actors.path.credential-boundary.1",
-          "path": [
-            "data",
-            "paragraphs",
-            2
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.credential-boundary.paragraphs.04": {
-        "ref": {
-          "id": "actors.path.credential-boundary.1",
-          "path": [
-            "data",
-            "paragraphs",
-            3
-          ],
-          "source": "item"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "entry_decisions.credential-boundary.title": {
         "ref": {
@@ -22753,7 +22756,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "判断六：研究与学生数据与对外建议是否守住边界——是否按学术规范处理数据与引用与经费与利益冲突，不在课堂或公开渠道把分析包装成投资、政策或法律建议，也不越权对外承诺结论。"
+              "判断六：研究与学生数据与对外建议是否守住边界——是否按学术规范处理数据与引用与经费与利益冲突，不在课堂或公开渠道把分析包装成超出权限的投资、政策或法律意见，也不越权对外承诺结论。"
             ]
           },
           "id": "actors.profile.work-context-block.7",
@@ -23201,12 +23204,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "不按培养方案与课程目标教学、不公开评分标准或事后改标准、不按要求维护成绩与出勤与学生记录、不对疑似学术不端按制度处理、不按学术规范处理数据与引用与经费与利益冲突、不在课堂或公开渠道把分析包装成投资或政策或法律建议、不超出授权对外承诺结论。"
+              "边界：不擅离教学计划、不随意改评分标准、不忽视学生记录与疑似学术不端；政府或行业专业咨询可属补充任务，但不等投资/法律执业或政策决定权。实际课程与对外合作制度另核。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.boundary.primary",
           "source_refs": [
-            "onet"
+            "onet",
+            "r5-teacher-law",
+            "r5-teacher-reg",
+            "r5-research-reg"
           ],
           "type": "prose"
         },
@@ -23243,7 +23249,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "常见错误集中在四类：一是课程目标与考核方式脱节，导致讲授内容与评估要求不一致、学生无所适从；二是数据与文献口径不清或把相关性当成因果，导致讲解与结论失真；三是评分标准不统一或反馈不可解释，导致评估不公平与申诉；四是学生记录与学术诚信与利益冲突处理不当，或把课堂分析越界包装成投资或政策建议，导致学术与合规风险。核对办法是每项都有一个可回看的依据：教学大纲与教学日历与评分标准、讲义与数据字典与文献与识别限制说明、评分与反馈与成绩与出勤记录、学术诚信与数据使用与利益冲突与项目与经费记录，而不是靠记忆或口头默契。"
+              "常见错误集中在四类：一是课程目标与考核方式脱节，导致讲授内容与评估要求不一致、学生无所适从；二是数据与文献口径不清或把相关性当成因果，导致讲解与结论失真；三是评分标准不统一或反馈不可解释，导致评估不公平与申诉；四是学生记录与学术诚信与利益冲突处理不当，或把课堂分析越界包装成超出权限的投资或政策意见，导致学术与合规风险。核对办法是每项都有一个可回看的依据：教学大纲与教学日历与评分标准、讲义与数据字典与文献与识别限制说明、评分与反馈与成绩与出勤记录、学术诚信与数据使用与利益冲突与项目与经费记录，而不是靠记忆或口头默契。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.answer",
@@ -23313,12 +23319,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按学科与院校制度执行：中国大陆高校教师应依《中华人民共和国教师法》与《教师资格条例》取得高等学校教师资格并在认定范围内任教，学校实行教师职务与聘任制度，岗位多经事业单位公开招聘，教师的考核应客观公正并充分听取本人与其他教师与学生的意见。具体适用以所在法域法规与院校制度与学术规范为准，本页按法规与制度名称与已核要点引用而未逐条核对条文编号。"
+              "编辑检查建议：核课程实际评分依据是否可取得、作业与考试标准是否事前明确、评阅记录与反馈是否可追溯，以及真实复核/申诉渠道；如遇争议按本校适用制度处理。本轮未取得具体课程评分细则或申诉程序，不能用教师法的教师考核条款证明学生评分制度；资格与招聘条件见入行板块。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.04.answer",
           "source_refs": [
-            "onet"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -23355,12 +23361,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "疑似学术不端、学生数据泄露、利益冲突或超出授权的对外建议出现时，是否按「先按制度保护学生数据与留存证据、停止受影响环节、按流程记录与上报、必要时请院系与学术与合规部门介入」的顺序处理？"
+              "教育部令40号适用于高校科学研究及相关活动：学校为预防处理主体，学术委员会依法调查/认定；教师指导学生学术规范并必要审核论文，不能个人或AI查重分数直接认定。举报由指定受理部门处理，接触材料人员保密；按程序调查、申辩、认定、处理与复核。课程评分/考试作弊具体规程另核，不能把科研办法泛化所有成绩争议。 数据泄露响应按实际法律义务/院校程序，不能把先登记后报告设为统一顺序。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.06.question",
           "source_refs": [
-            "onet"
+            "r5-research-reg",
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -23439,12 +23446,15 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "责任边界：本职业承担按课程目标与学科方法讲授与评估与指导学生并对研究过程与引用与数据与经费与利益冲突的执行责任；不按大纲教学、不公开评分标准或事后改标准、不按要求维护学生记录、不对疑似学术不端按制度处理、不按学术规范处理数据与引用与经费与利益冲突、不把课堂分析包装成投资或政策或法律建议、不超出授权对外承诺结论，异常事项按制度上报。"
+              "依法履行教学科研、指导与记录职责；可以按岗位从事政府或行业专业咨询，不等于个人取得投资/法律执业或政策决定权。科研学术不端按学校/学术委员会程序，不由教师或AI自行定性；具体课程评分申诉制度未取得。"
             ]
           },
           "id": "actors.display.responsibilities_block.06",
           "source_refs": [
-            "onet"
+            "onet",
+            "r5-teacher-law",
+            "r5-teacher-reg",
+            "r5-research-reg"
           ],
           "type": "prose"
         },
@@ -23593,12 +23603,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 25-1063.00：2024 年就业约 15,800 人，2024—2034 年预测为「低于平均（Slower than average，1% 至 2%）」，2024—2034 年预计空缺 1,200（预测期合计口径）；准备层级 Job Zone Five（SVP 8.0 及以上），兴趣代码 SI（社会型＋研究型）；任务 22 项。"
+              "美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。 O*NET教育反馈81%博士、10%硕士后证书、7%硕士（所列三项98%），不是98%全市场招聘样本；Job Zone Five/SVP8+为准备层级，不能推中国人人须博士。中国法定高校资格学历为研究生或本科，具体招聘可另设条件。 美国职业兴趣S87/I76/C48/E39/A34/R29，SI为前两兴趣概括。22任务19核心/3补充。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.onet",
           "source_refs": [
-            "onet"
+            "onet",
+            "r5-projections",
+            "r5-trends"
           ],
           "type": "prose"
         },
@@ -23607,12 +23619,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "工资为 BLS 2025 年工资数据口径：中位 123,920 美元/年；该页仅提供中位数，未提供 10/25/75/90 分位与小时口径，本页在相应位置保留缺口而不插值。"
+              "美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
           "source_refs": [
-            "onet"
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -23621,12 +23634,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2024 年主要行业为教育服务业（Educational Services）；常见岗位为讲师与助理教授与副教授与教授等教学与教学研究岗，多为院校聘用并按月或按年计酬。"
+              "2025 O*NET教育服务业100%为精确职业行业比例，不能据此推院校级别、普遍月薪或兼职支付；本轮真实招聘样本未采。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
           "source_refs": [
-            "onet"
+            "onet",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -23635,12 +23649,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆相关要求按法规区分：高校教师应依《中华人民共和国教师法》与《教师资格条例》取得高等学校教师资格并在认定范围内任教（教师法第十条国家实行教师资格制度；第十一条（五）取得高等学校教师资格应具备研究生或大学本科毕业学历；教师资格条例由国务院令第 188 号发布），岗位多经事业单位公开招聘与院校评聘，具体以招聘公告与院校制度为准。本条按法规与制度名称与已核要点引用，未逐条核对条文编号。"
+              "中国公民专门从事学校教育教学须依法取得相应教师资格；教师法10/11（五）/13条和教师资格条例2/4（七）/13条分别规定制度、研究生或本科资格学历及认定。跨学段任教另核相应认定与岗位条件。受委托高校认定本校在职/拟聘人员；其他按行政隶属关系认定，具体申报材料和招聘要求核当期公告。事业单位新聘原则公开招聘，政策安置、上级任命、涉密等例外；不是所有民办高校或科研助理均走该程序。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
           "source_refs": [
-            "onet"
+            "r5-teacher-law",
+            "r5-teacher-reg",
+            "r5-public-employment"
           ],
           "type": "prose"
         },
@@ -23663,7 +23679,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页精确对应美国 O*NET 25-1063.00 Economics Teachers, Postsecondary（高校经济学教师）：讲授经济学课程的高校教师，课程覆盖微观经济学、宏观经济学、计量经济学与价格理论等，包含以教学为主的岗位与教学与研究并重的岗位。工作含按培养方案与课程目标编写与修订教学大纲与教学日历、准备讲义与案例与习题与数据集与阅读材料、选择教材与教学材料、按大纲讲授并组织课堂讨论、按标准评阅作业与考试并维护成绩与出勤与学业记录、固定答疑与学业与职业辅导、指导论文与实习与研究、阅读文献与参加学术会议、开展经济研究并撰写论文与专著、撰写项目申请争取经费、向政府或行业提供专业咨询、参与院系与学术委员会与招生与培养工作并指导学生组织与校园与社区活动；属高等教育学科教学与研究岗位，不含其他学科高校教师（农业科学、人类学与考古学、地区民族与文化研究、商学、政治学、社会学、数学科学等）与中小学教师与教育行政与教务管理岗与非教学岗位的经济学家与金融分析师；不提供投资、理财、政策或法律意见。"
+              "本页精确对应美国 O*NET 25-1063.00 Economics Teachers, Postsecondary（高校经济学教师）：讲授经济学课程的高校教师，课程覆盖微观经济学、宏观经济学、计量经济学与价格理论等，包含以教学为主的岗位与教学与研究并重的岗位。工作含按培养方案与课程目标编写与修订教学大纲与教学日历、准备讲义与案例与习题与数据集与阅读材料、选择教材与教学材料、按大纲讲授并组织课堂讨论、按标准评阅作业与考试并维护成绩与出勤与学业记录、固定答疑与学业与职业辅导、指导论文与实习与研究、阅读文献与参加学术会议、开展经济研究并撰写论文与专著、撰写项目申请争取经费、向政府或行业提供专业咨询、参与院系与学术委员会与招生与培养工作并指导学生组织与校园与社区活动；属高等教育学科教学与研究岗位，不含其他学科高校教师（农业科学、人类学与考古学、地区民族与文化研究、商学、政治学、社会学、数学科学等）与中小学教师与教育行政与教务管理岗与非教学岗位的经济学家与金融分析师；提供政府或行业专业咨询属于部分岗位补充任务，但不据职业名取得投资、法律执业或政策决定权。"
             ]
           },
           "id": "actors.display.definition_block.definition",
@@ -24136,13 +24152,17 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以下为基于职业任务与工作情境的有限编辑推演，并非该职业的实际部署证据：AI 与教学与研究辅助工具在高校经济学教学中主要辅助资料检索与文献整理、讲义与题目与案例初稿、数据清洗与统计与计量代码辅助、作业与考试的初评与查重与学术诚信初筛、以及成绩与学情与课程评估的数据整理。"
+              "编辑候选：检索、讲义题目初稿、计量代码草稿和记录整理可在获准资料上测试；O*NET软件档案不等GenAI部署。2025美国全职业唯一招聘为Hot分母，Office2%、Excel1%，其余9项未给不填0。没有本职业采用/提效/净就业证据；ILO暴露非裁员，UNESCO教师能力框架非中国法规，NIST治理非院校授权。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "editor",
+            "r5-research-reg",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -24166,13 +24186,17 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "课程资料与文献检索与讲义初稿可提高效率，但课程目标与考核方式与教学内容与材料选择仍须由教师与院系确认。"
+              "编辑候选：检索、讲义题目初稿、计量代码草稿和记录整理可在获准资料上测试；O*NET软件档案不等GenAI部署。2025美国全职业唯一招聘为Hot分母，Office2%、Excel1%，其余9项未给不填0。没有本职业采用/提效/净就业证据；ILO暴露非裁员，UNESCO教师能力框架非中国法规，NIST治理非院校授权。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "editor",
+            "r5-research-reg",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -24181,13 +24205,17 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数据清洗与统计与计量代码与图表可辅助提示，但模型设定与识别策略与因果解释仍须由研究者按方法与数据核对。"
+              "编辑候选，未核采用或效果：数据清洗与统计与计量代码与图表可辅助提示，但模型设定与识别策略与因果解释仍须由研究者按方法与数据核对。 教育部令40号适用于高校科学研究及相关活动：学校为预防处理主体，学术委员会依法调查/认定；教师指导学生学术规范并必要审核论文，不能个人或AI查重分数直接认定。举报由指定受理部门处理，接触材料人员保密；按程序调查、申辩、认定、处理与复核。课程评分/考试作弊具体规程另核，不能把科研办法泛化所有成绩争议。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "editor",
+            "r5-research-reg",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -24196,13 +24224,17 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "作业与考试的初评与查重可减少重复劳动，但最终评分与学术不端判定与申诉处理不能交给系统。"
+              "编辑候选，未核采用或效果：作业与考试的初评与查重可减少重复劳动，但最终评分与学术不端判定与申诉处理不能交给系统。 教育部令40号适用于高校科学研究及相关活动：学校为预防处理主体，学术委员会依法调查/认定；教师指导学生学术规范并必要审核论文，不能个人或AI查重分数直接认定。举报由指定受理部门处理，接触材料人员保密；按程序调查、申辩、认定、处理与复核。课程评分/考试作弊具体规程另核，不能把科研办法泛化所有成绩争议。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "editor",
+            "r5-research-reg",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -24211,13 +24243,17 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "学生个体差异与课堂讨论与学业与职业辅导与论文指导需要现场判断与人际沟通，难以完全交给系统。"
+              "编辑候选，未核采用或效果：学生个体差异与课堂讨论与学业与职业辅导与论文指导需要现场判断与人际沟通，难以完全交给系统。 教育部令40号适用于高校科学研究及相关活动：学校为预防处理主体，学术委员会依法调查/认定；教师指导学生学术规范并必要审核论文，不能个人或AI查重分数直接认定。举报由指定受理部门处理，接触材料人员保密；按程序调查、申辩、认定、处理与复核。课程评分/考试作弊具体规程另核，不能把科研办法泛化所有成绩争议。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "editor",
+            "r5-research-reg",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -24226,13 +24262,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "学生数据与成绩与论文与项目与个人数据属于敏感信息，只能在批准的系统内按最小必要原则处理并留痕。"
+              "中国个人信息保护法按可识别个人及实际内容判断；学生成绩、论文与项目数据不当然全部是法定敏感个人信息。28条敏感类别及14岁以下个人信息另核目的/必要性/严格措施；一般个人信息同样须有合法基础、最小必要与安全措施。编辑建议核系统接收方、用途、训练使用、保留期限与权限，院校批准不替代法律义务。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -24241,13 +24276,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "最终的课程目标与评分与学术诚信与数据使用与研究结论与对外咨询责任，以及学术不端与利益冲突与数据泄露的处置，由教师与院系与学术机构承担并留痕。"
+              "教育部令40号适用于高校科学研究及相关活动：学校为预防处理主体，学术委员会依法调查/认定；教师指导学生学术规范并必要审核论文，不能个人或AI查重分数直接认定。举报由指定受理部门处理，接触材料人员保密；按程序调查、申辩、认定、处理与复核。课程评分/考试作弊具体规程另核，不能把科研办法泛化所有成绩争议。 具体课程评分、工具使用、数据处理与咨询责任按岗位和制度落实，AI不能承接法律义务。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-research-reg",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -24286,13 +24321,17 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI 可辅助资料检索与文献整理、讲义与题目初稿、数据清洗与统计与计量代码与图表、作业初评与查重与课程评估数据整理，但不能替代课程目标与评估公平、学术诚信判定、模型设定与因果解释、论文指导与研究结论以及对外咨询责任。"
+              "编辑候选：检索、讲义题目初稿、计量代码草稿和记录整理可在获准资料上测试；O*NET软件档案不等GenAI部署。2025美国全职业唯一招聘为Hot分母，Office2%、Excel1%，其余9项未给不填0。没有本职业采用/提效/净就业证据；ILO暴露非裁员，UNESCO教师能力框架非中国法规，NIST治理非院校授权。 教育部令40号适用于高校科学研究及相关活动：学校为预防处理主体，学术委员会依法调查/认定；教师指导学生学术规范并必要审核论文，不能个人或AI查重分数直接认定。举报由指定受理部门处理，接触材料人员保密；按程序调查、申辩、认定、处理与复核。课程评分/考试作弊具体规程另核，不能把科研办法泛化所有成绩争议。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "editor",
+            "r5-research-reg",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -24316,13 +24355,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业档案（任务与工作情境）"
+              "O*NET任务与情境"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.1.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24331,13 +24369,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅适用于美国 25-1063.00 的任务与情境描述，不映射中国岗位或教师资格制度。"
+              "美国职业档案非部署/替代证据"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.1.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24346,13 +24383,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS OEWS 工资与就业统计"
+              "OEWS工资方法"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24361,13 +24397,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅适用于所列职业与期间，不提供自动化或替代结论。"
+              "工资定义非AI使用证据"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24376,13 +24411,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "UNESCO 教师 AI 能力框架（人本与伦理与专业判断）"
+              "UNESCO教师AI框架"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "editor"
           ],
           "type": "prose"
         },
@@ -24391,13 +24425,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "治理与伦理原则供参考：人本、隐私、评估公平与人工监督。"
+              "15能力/5维度/3水平参考，非中国法或本职业采用率"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "editor"
           ],
           "type": "prose"
         },
@@ -24406,13 +24439,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不提供本职业采用率、替代概率或时间表。"
+              "15能力/5维度/3水平参考，非中国法或本职业采用率"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "editor"
           ],
           "type": "prose"
         },
@@ -24421,13 +24453,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "行业与用工结构来源"
+              "BLS精确就业预测"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-projections"
           ],
           "type": "prose"
         },
@@ -24436,13 +24467,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "说明本职业岗位主要分布在教育服务业。"
+              "职业总量预测非AI因果"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-projections"
           ],
           "type": "prose"
         },
@@ -24451,13 +24481,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用工结构不等于个人录用或收入保证。"
+              "职业总量预测非AI因果"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-projections"
           ],
           "type": "prose"
         },
@@ -24466,13 +24495,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合（本页说明与练习设计）"
+              "编辑候选说明"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -24481,13 +24509,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅用于整理本页的说明与练习边界。"
+              "编辑建议非实际效果"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -24496,13 +24523,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合不是外部事实、标准、法规或工资证据。"
+              "编辑建议非实际效果"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.limit",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -24631,13 +24657,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能；评分与学术不端判定须由教师与院系按标准与制度核对，工具只能提示。"
+              "教育部令40号适用于高校科学研究及相关活动：学校为预防处理主体，学术委员会依法调查/认定；教师指导学生学术规范并必要审核论文，不能个人或AI查重分数直接认定。举报由指定受理部门处理，接触材料人员保密；按程序调查、申辩、认定、处理与复核。课程评分/考试作弊具体规程另核，不能把科研办法泛化所有成绩争议。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-research-reg"
           ],
           "type": "prose"
         },
@@ -24661,13 +24686,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "只在批准的系统内按最小必要处理，不用于工作以外用途，并按制度留痕并接受监督。"
+              "中国个人信息保护法按可识别个人及实际内容判断；学生成绩、论文与项目数据不当然全部是法定敏感个人信息。28条敏感类别及14岁以下个人信息另核目的/必要性/严格措施；一般个人信息同样须有合法基础、最小必要与安全措施。编辑建议核系统接收方、用途、训练使用、保留期限与权限，院校批准不替代法律义务。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.6.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -24691,13 +24715,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用可比的课程目标达成与评分一致性、评教与申诉率、论文与项目产出与复现情况做前后对照，并保留人工校核记录。"
+              "编辑试验建议：在相同任务/难度与评分标准下比较错误、复核时间与反馈质量；单次前后变化不能证明因果，不能拿论文数量或申诉变化直接归因AI。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.7.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-editor",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24736,13 +24762,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "编辑综合"
+              "国际组织任务暴露研究，非编辑综合或部署率。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24751,13 +24778,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅用于本页 AI 边界的说明，不代表采用率或替代结论。"
+              "国际组织任务暴露研究，非编辑综合或部署率。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.r2-ai.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-ilo-current",
+            "r5-nist-current",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24766,13 +24794,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "教育行业口径（不适用于本职业薪资）"
+              "BLS职业查询导航，不是演员工会、院校制度或教育行业薪资表。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24781,13 +24808,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用影视或演员工会口径，仅登记其不适用。"
+              "BLS职业查询导航，不是演员工会、院校制度或教育行业薪资表。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24796,13 +24822,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "教育行业口径（不适用于本职业薪资）"
+              "OEWS工资查询入口，不是UNESCO框架。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24811,13 +24837,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不使用该口径替代职业工资，仅登记其不适用。"
+              "OEWS工资查询入口，不是UNESCO框架。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24826,13 +24852,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "院校与学术制度口径（不用于工资结论）"
+              "O*NET资格查询目录，不是院校制度或法定证书清单。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24841,13 +24866,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅按院校与学术制度与资格要求登记，不用于工资结论。"
+              "O*NET资格查询目录，不是院校制度或法定证书清单。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet"
           ],
           "type": "prose"
         },
@@ -24856,13 +24880,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "官方统计"
+              "美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。 美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.type",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-projections",
+            "r5-trends",
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24871,13 +24897,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "仅按 BLS/OEWS 2025 年工资与 O*NET 2024—2034 年预测口径使用。"
+              "美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。 美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-projections",
+            "r5-trends",
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -24991,13 +25019,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助资料检索与文献整理与讲义与题目与案例初稿"
+              "编辑候选，未核采用/提效：可辅助资料检索与文献整理与讲义与题目与案例初稿"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.1.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "editor",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25051,13 +25082,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助生成讨论题与案例与示例与可视化"
+              "编辑候选，未核采用/提效：可辅助生成讨论题与案例与示例与可视化"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.2.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "editor",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25111,13 +25145,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助作业与考试初评与查重与成绩汇总"
+              "编辑候选，未核采用/提效：可辅助作业与考试初评与查重与成绩汇总"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "editor",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25126,13 +25163,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "最终评分与反馈与学术不端判定由教师与院系负责。"
+              "评分按院校标准由有权限人员核；科研学术不端调查与认定按学校/学术委员会程序，教师负责指导、审核与配合，不自行凭系统定性。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-research-reg",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25171,13 +25208,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助资料检索与文献与写作反馈草稿"
+              "编辑候选，未核采用/提效：可辅助资料检索与文献与写作反馈草稿"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "editor",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25231,13 +25271,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助数据清洗与统计与计量代码与文献综述初稿"
+              "编辑候选，未核采用/提效：可辅助数据清洗与统计与计量代码与文献综述初稿"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "editor",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25291,13 +25334,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助材料整理与预算与格式与文献综述草稿"
+              "编辑候选，未核采用/提效：可辅助材料整理与预算与格式与文献综述草稿"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "editor",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25351,13 +25397,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助记录汇总与委员会材料与课程评估数据整理"
+              "编辑候选，未核采用/提效：可辅助记录汇总与委员会材料与课程评估数据整理"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.7.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "editor",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25366,13 +25415,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录结论与学术不端判定与上报由教师与院系负责。"
+              "评分按院校标准由有权限人员核；科研学术不端调查与认定按学校/学术委员会程序，教师负责指导、审核与配合，不自行凭系统定性。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.7.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-research-reg",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25396,13 +25445,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "资料检索与初稿与数据整理自动化"
+              "编辑候选，未核实际采用：资料检索与初稿与数据整理自动化"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.1.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "editor",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25441,13 +25493,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "初评与查重与提示"
+              "编辑候选，未核实际采用：初评与查重与提示"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.2.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "editor",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25486,13 +25541,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "学生与项目数据整理"
+              "编辑候选，未核实际采用：学生与项目数据整理"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.3.change",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "onet",
+            "r5-ilo-current",
+            "r5-nist-current",
+            "editor",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25591,13 +25649,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "由教师或院系或学术委员会复核课程目标与评分与学术诚信与研究结论相关环节。"
+              "教育部令40号适用于高校科学研究及相关活动：学校为预防处理主体，学术委员会依法调查/认定；教师指导学生学术规范并必要审核论文，不能个人或AI查重分数直接认定。举报由指定受理部门处理，接触材料人员保密；按程序调查、申辩、认定、处理与复核。课程评分/考试作弊具体规程另核，不能把科研办法泛化所有成绩争议。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.3.description",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-research-reg"
           ],
           "type": "prose"
         },
@@ -25621,13 +25678,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "学术不端与数据泄露与利益冲突与越权指令登记后按规定上报。"
+              "编辑核实际报告对象与时限；科研举报由指定部门受理，不设通用“登记后再报”顺序；数据泄露另依法律与院校程序。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.4.description",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "r5-research-reg",
+            "r5-cn-pipl",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -25861,7 +25919,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "会导致把课堂或研究分析包装成投资或政策或法律建议与利益冲突未披露。"
+              "会导致把课堂或研究分析包装成超出权限的投资或政策或法律意见与利益冲突未披露。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.5.consequence",
@@ -26019,12 +26077,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与中国大陆「高校经济学教师」精确对应的全国单职业工资口径。中国大陆官方公开工资资料按行业与单位类型统计（如教育行业与高等学校），本轮未建立与美国 O*NET 25-1063.00 一一对应的全国职业工资分布。"
+              "本职业中国全国精确工资分布未取得。NBS2025教育行业城镇非私营133539元/年、私营63908元/年为匹配行业税前均值：5+城镇法人单位，排除个体/自由职业；包括按定义工资奖金津贴，不能一概排除绩效或合同制。涵盖各类教育岗位，非高校经济学教师中位/分位/起薪/月薪。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26033,12 +26091,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不把教育行业或高等学校平均工资、招聘平台报价或课时费与项目费与讲座费改写成该职业的中位数、分位数、起薪或月薪。"
+              "本职业中国全国精确工资分布未取得。NBS2025教育行业城镇非私营133539元/年、私营63908元/年为匹配行业税前均值：5+城镇法人单位，排除个体/自由职业；包括按定义工资奖金津贴，不能一概排除绩效或合同制。涵盖各类教育岗位，非高校经济学教师中位/分位/起薪/月薪。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26075,12 +26133,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "计酬口径常见差异：高校教师收入常由基本工资与岗位津贴与绩效工资与教学与科研成果奖励与项目与讲座与咨询报酬等构成，部分院校另有住房与子弟入学与非货币福利；比较时必须先确认统计量、计酬周期与是否含非货币条件，再作比较。"
+              "事业单位条例32条工资包括基本工资、绩效工资、津贴补贴；不是所有民办院校/外部咨询收入统一结构。编辑另核课时、科研/项目、住房等实际合同项，未采典型比例。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "r5-public-employment",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -26131,12 +26190,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本职业相关报酬通常由基本工资与岗位与绩效工资与科研与教学奖励以及项目与讲座与咨询报酬构成，不同地区与院校与岗位层级差别较大。"
+              "事业单位基本工资、绩效与津贴补贴依法定制度；其他项目报酬与非货币待遇核实际合同，本轮未采典型样本。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "sag-moa"
+            "r5-public-employment",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -26145,12 +26205,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业门类平均工资覆盖的是该行业全部就业人员，不等于本职业的岗位工资，也不覆盖绩效与项目与讲座报酬与合同制与非货币福利。"
+              "本职业中国全国精确工资分布未取得。NBS2025教育行业城镇非私营133539元/年、私营63908元/年为匹配行业税前均值：5+城镇法人单位，排除个体/自由职业；包括按定义工资奖金津贴，不能一概排除绩效或合同制。涵盖各类教育岗位，非高校经济学教师中位/分位/起薪/月薪。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26159,12 +26219,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "院校招聘与职称评聘与项目申报旺季时，岗位竞争与工作量上升，绩效与科研奖励会随成果与项目经费波动变化。"
+              "编辑核聘期、课程与项目节点、绩效条件；未核旺季竞争/收入必上升或住房子女福利普遍存在。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "sag-moa"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -26173,12 +26233,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆未发布与美国 25-1063.00 一一对应的全国职业工资分布，因此不给出中位数或分位数；行业平均工资只作为可见行业代理，并明确排除。"
+              "本职业中国全国精确工资分布未取得。NBS2025教育行业城镇非私营133539元/年、私营63908元/年为匹配行业税前均值：5+城镇法人单位，排除个体/自由职业；包括按定义工资奖金津贴，不能一概排除绩效或合同制。涵盖各类教育岗位，非高校经济学教师中位/分位/起薪/月薪。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26187,7 +26247,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "影响计酬的因素主要是城市与地区、院校类型与层级与岗位是教学为主还是教学科研并重、职称与聘用方式、是否含科研绩效与项目与讲座报酬与非货币福利，以及是否含行政职务。"
+              "编辑计酬核对项：地区、院校和实际岗位、职称与聘用方式、工资项目及行政职责；是否存在科研、项目或讲座报酬和福利须核真实合同。本轮未采其普遍构成或影响程度，不推所有民办与事业单位同构。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
@@ -26237,13 +26297,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国统计口径：O*NET-SOC 25-1063.00 为精确职业口径。BLS 2025 年工资数据中位为 123,920 美元/年；该页仅给出中位数，未提供 10/25/75/90 分位与小时口径，本页在相应位置保留缺口。"
+              "美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26252,13 +26312,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资分位是统计位置，不是讲师、副教授或教授的等级标签；同一职业内部因地区、院校类型与学科与是否含暑期薪酬与科研经费差异很大。本页因来源未提供分位，不展示分位数值，也不以其他职业分位推算。"
+              "美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26267,13 +26327,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：2025 年工资数据未提供 10/25/75/90 分位与小时口径，因此本页不给出分位与时薪，也不在没有个人合同工时的前提下推算月收入。"
+              "美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26282,13 +26342,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业规模、预测变化与预计空缺分别回答不同问题，不能混成个人录用概率；本职业预测为「低于平均（1% 至 2%）」，空缺含增长与更替。"
+              "美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-projections",
+            "r5-trends"
           ],
           "type": "prose"
         },
@@ -26297,13 +26357,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业工资表只说明该职业在特定行业与统计期的覆盖，不能代表所有院校；本页来源只给出主要行业为教育服务业。"
+              "O*NET2025本职业教育服务业100%；此行业比例不是院校类型、细分学科工资或所有教师统计。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet"
           ],
           "type": "prose"
         },
@@ -26357,13 +26416,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位 123,920 美元/年（2025 年工资数据）；该来源仅提供中位数。"
+              "2025年薪中位123920美元；年度工资率/无小时数据。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.tier.median",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26387,13 +26446,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本页来源只提供中位数，未提供 10/25/75/90 分位与小时口径，因此不展示分位数值，也不从他处推算或插值；若需要分位应按最新 OEWS 原始表核对。"
+              "美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.percentile",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26402,13 +26461,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024 年就业约 15,800 人；2024—2034 年预测为「低于平均（Slower than average，1% 至 2%）」，2024—2034 年预计空缺 1,200（该页为预测期合计口径，含增长与更替，不是每年净增）。"
+              "美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.project",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-projections",
+            "r5-trends"
           ],
           "type": "prose"
         },
@@ -26432,13 +26491,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本页未取得更细的学科与院校类型分布与行业工资数值；来源只给出主要行业为教育服务业，本页不据此推断收入。"
+              "教育服务业100%是2025本职业行业比例；更细院校/学科工资未核。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet"
           ],
           "type": "prose"
         },
@@ -26447,13 +26505,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "教育反馈：81% 要求博士学位、10% 要求硕士后证书、7% 要求硕士学位（该页显示这三项、合计 98%）；与 Job Zone Five 的准备层级一致，多数岗位需研究生教育。"
+              "O*NET教育反馈81%博士、10%硕士后证书、7%硕士（所列三项98%），不是98%全市场招聘样本；Job Zone Five/SVP8+为准备层级，不能推中国人人须博士。中国法定高校资格学历为研究生或本科，具体招聘可另设条件。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "r5-teacher-law",
+            "r5-teacher-reg"
           ],
           "type": "prose"
         },
@@ -26522,13 +26581,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本页只使用精确职业口径与所列期间的数据；不把代理口径写成该职业的精确事实，未取得的分位与小时口径保持缺口。"
+              "美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.scope",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -26567,13 +26626,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国统计不代表中国大陆职业工资或就业结果；本页未引用 BLS 职业展望本职业页数值。"
+              "美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。 美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.boundary.detail",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-projections",
+            "r5-trends",
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         }
@@ -26716,7 +26777,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "官方兴趣代码 SI；不作人格诊断或录用依据。"
+              "SI为美国职业兴趣前两项概括，不是个人诊断/录用判断。"
             ]
           },
           "id": "actors.display.riasec_fit_block.short",
@@ -26730,7 +26791,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "官方兴趣代码 SI（社会型＋研究型）：以把经济学知识与方法教给并帮助学习者（社会型，具体领域含教学与教育、社会科学、专业咨询）与以理论与数据研究经济现象（研究型，具体领域含社会科学、数学与统计）为主。"
+              "美国职业兴趣S87/I76/C48/E39/A34/R29；SI概括社会/研究任务偏好，不作能力或人格诊断。"
             ]
           },
           "id": "actors.display.riasec_fit_block.interest",
@@ -27444,7 +27505,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不得评分不一致或事后改标准或不按制度处理疑似学术不端或越权给出投资或政策建议。"
+              "不得评分不一致或事后改标准或不按制度处理疑似学术不端或越权给出超出权限的投资或政策意见。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.stage.watchouts",
@@ -27710,7 +27771,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要但不是主要：以课堂公开讲授（每周以上 68%）与学生答疑与同事协作为主；每天邮件 96% 也是主要沟通方式。"
+              "公开演讲每周非每日68%、每日29%，邮件每日96%，不据此判断陌生人沟通是否主要或个人外向。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.outgoing.answer",
@@ -27878,12 +27939,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "BLS/OEWS：用于说明工资与就业口径与统计位置（本页来源仅提供中位数）。"
+              "美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.bls",
           "source_refs": [
-            "onet"
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -27892,12 +27954,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "院校与课程制度与授权规则：用于说明课程目标、评分、学术诚信与数据使用与工具授权与记录边界。"
+              "本轮未取得院校评分/咨询/工具权限制度；观察点为编辑建议。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.employer",
           "source_refs": [
-            "onet"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -27920,12 +27982,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻学科对照（农业科学与人类学与考古学）：用于说明学科对象与方法的差异。"
+              "相邻学科定义与编辑比较，不当自动转岗证明。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.agent",
           "source_refs": [
-            "onet"
+            "onet",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -27934,12 +27997,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "相邻学科对照（地区民族与文化研究与商学）：用于说明课程定位与证据类型的差异。"
+              "高校人类学与考古学教师实际任务档案，用于相邻学科比较，不推资格互认。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.teacher",
           "source_refs": [
-            "onet"
+            "b12-anthropology"
           ],
           "type": "prose"
         },
@@ -27948,12 +28011,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "教师法规（《中华人民共和国教师法》与《教师资格条例》）：用于说明教师资格与学历与认定要求（按法规名称与已核要点引用）。"
+              "高校区域、族群与文化研究教师实际档案，用于相邻学科能力缺口比较，不以经济学档案代证。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.enrichment",
           "source_refs": [
-            "onet"
+            "b12-area"
           ],
           "type": "prose"
         },
@@ -27962,12 +28025,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "编辑综合：用于本页练习与边界设计，不构成外部事实或标准与资格证据。"
+              "编辑观察与比较非外部事实。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.art",
           "source_refs": [
-            "onet"
+            "r5-editor"
           ],
           "type": "prose"
         }
@@ -27984,13 +28047,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "课程目标与评估脱节风险：课程目标与教学内容与考核方式不一致，导致讲授与评估要求脱节、学生申诉与返工。"
+              "编辑建议先核课程目标、教学计划和评分标准并留修订依据；未取得具体院校审批和申诉流程。"
             ]
           },
           "id": "actors.risk.career-risk-cards.1",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -27999,13 +28062,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "数据口径与因果推断错误风险：数据来源与时期与单位与样本与识别限制未说明或把相关性当成因果，导致讲解与结论失真与学术争议。"
+              "编辑建议核原数据、识别假设、模型代码、引用与限制，不能以相关性直接作因果结论。"
             ]
           },
           "id": "actors.risk.career-risk-cards.2",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -28014,13 +28077,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "评分不一致与反馈不可解释风险：未事前公开评分标准或评分不一致或反馈不可解释，导致评估不公平与申诉与信任受损。"
+              "编辑建议按实际课程标准复核评分并保留申诉渠道；教师资格法规不直接规定本校评分细则。"
             ]
           },
           "id": "actors.risk.career-risk-cards.3",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -28029,13 +28092,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "学生数据与学术诚信风险：学生数据与成绩与论文未按最小必要与安全处理，或抄袭代写与 AI 代做等疑似学术不端未按制度处理。"
+              "中国个人信息保护法按可识别个人及实际内容判断；学生成绩、论文与项目数据不当然全部是法定敏感个人信息。28条敏感类别及14岁以下个人信息另核目的/必要性/严格措施；一般个人信息同样须有合法基础、最小必要与安全措施。编辑建议核系统接收方、用途、训练使用、保留期限与权限，院校批准不替代法律义务。 教育部令40号适用于高校科学研究及相关活动：学校为预防处理主体，学术委员会依法调查/认定；教师指导学生学术规范并必要审核论文，不能个人或AI查重分数直接认定。举报由指定受理部门处理，接触材料人员保密；按程序调查、申辩、认定、处理与复核。课程评分/考试作弊具体规程另核，不能把科研办法泛化所有成绩争议。"
             ]
           },
           "id": "actors.risk.career-risk-cards.4",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-editor",
+            "r5-research-reg",
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -28044,13 +28109,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "对外建议越界与利益冲突风险：把课堂或研究分析包装成投资或政策或法律建议或未披露利益冲突，导致合规与信任风险。"
+              "专业咨询属于部分岗位补充任务，不能一概禁政策建议；编辑核授权、利益冲突和职业许可，未取得校内咨询流程。"
             ]
           },
           "id": "actors.risk.career-risk-cards.5",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -28059,13 +28124,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "课程与材料与版权风险：教材与讲义与案例与数据集使用未核对版权与授权与来源，导致侵权与后续无法复现。"
+              "编辑建议核教材、数据与引用的权属/许可及合理使用条件，保存来源；本轮未取得具体授权和版权适用意见，不保证材料均可用。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.mitigation",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -28104,13 +28169,17 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险项按本职业内容与所列来源（O*NET 工作情境、院校与课程制度、《中华人民共和国教师法》与《教师资格条例》）边界解释。"
+              "任务/情境支持职业背景；后果为编辑风险分析非发生率。教师资格法不直接证明校内评分或版权流程；科研学术不端与个人信息分别核正文。"
             ]
           },
           "id": "actors.display.career_risk_cards.evidence-scope",
           "source_refs": [
-            "sag",
-            "nist"
+            "onet",
+            "r5-teacher-law",
+            "r5-teacher-reg",
+            "r5-research-reg",
+            "r5-cn-pipl",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -28419,7 +28488,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "把课堂或研究分析包装成投资或政策或法律建议或未披露利益冲突。"
+              "把课堂或研究分析包装成超出权限的投资或政策或法律意见或未披露利益冲突。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.scenario",
@@ -28524,13 +28593,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "院校与课程制度与授权规则：用于课程目标、评分、学术诚信与数据使用与工具授权与记录边界。"
+              "本项编辑控制建议，未取得实际校内制度。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.employer",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -28539,13 +28607,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "教师法规（《中华人民共和国教师法》与《教师资格条例》）：用于教师资格与学历与认定口径（按法规名称与已核要点引用）。"
+              "教育部令40号适用于高校科学研究及相关活动：学校为预防处理主体，学术委员会依法调查/认定；教师指导学生学术规范并必要审核论文，不能个人或AI查重分数直接认定。举报由指定受理部门处理，接触材料人员保密；按程序调查、申辩、认定、处理与复核。课程评分/考试作弊具体规程另核，不能把科研办法泛化所有成绩争议。 中国个人信息保护法按可识别个人及实际内容判断；学生成绩、论文与项目数据不当然全部是法定敏感个人信息。28条敏感类别及14岁以下个人信息另核目的/必要性/严格措施；一般个人信息同样须有合法基础、最小必要与安全措施。编辑建议核系统接收方、用途、训练使用、保留期限与权限，院校批准不替代法律义务。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.cn-rule",
           "source_refs": [
-            "sag",
-            "nist"
+            "r5-research-reg",
+            "r5-cn-pipl"
           ],
           "type": "prose"
         },
@@ -28554,13 +28622,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "不使用影视或演员工会口径；仅登记其不适用。"
+              "UNESCO教师AI框架提供人本/伦理能力参考，不是影视或工资资料。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.sag",
           "source_refs": [
-            "sag",
-            "nist"
+            "editor"
           ],
           "type": "prose"
         },
@@ -28592,14 +28659,15 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘公告与院校聘用条件中的学历、资格与计酬关系必须逐条读取；本职业多数岗位以研究生教育与教学与助教与研究经历上手，一项条件可放宽不代表教师资格与聘用与评估与学术规范要求可以替代。"
+              "本轮未采真实招聘样本；编辑核目标岗位身份、学位/教学研究经历、资格认定与合同薪酬；美国教育反馈不代中国实际公告。O*NET教育反馈81%博士、10%硕士后证书、7%硕士（所列三项98%），不是98%全市场招聘样本；Job Zone Five/SVP8+为准备层级，不能推中国人人须博士。中国法定高校资格学历为研究生或本科，具体招聘可另设条件。"
             ]
           },
           "id": "actors.path.recruitment-sample.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "r5-teacher-law",
+            "r5-teacher-reg",
+            "r5-editor"
           ],
           "type": "notice"
         },
@@ -28623,7 +28691,7 @@
             ],
             "rows": [
               [
-                "教学岗（讲师／教学助理）",
+                "教学岗位与教学辅助（身份须分开）",
                 "在带教下承担课程辅导与讨论课与作业与考试评阅与答疑并维护学生记录。",
                 "课程目标与评分标准与学术诚信与数据使用要求；学生评教与同行听课。",
                 "用虚构课程目标与匿名数据集写一节微课的教学目标与数据解释与评分 rubric，并保留助教或辅导记录。",
@@ -28634,7 +28702,7 @@
                 "独立承担课程并开展经济学研究、撰写论文与项目申请并参与院系事务。",
                 "课程评估与同行评议与发表与项目与经费要求。",
                 "提交一份可复现的研究设计与数据与代码说明，或一份课程设计与教学材料样本。",
-                "偏教学与研究并重，学位授予与学术不端判定与经费合规由院校与学术委员会承担。"
+                "教学科研并重；科研学术不端认定由学术委员会、处理由学校依程序，非共同包办全部经费权限"
               ],
               [
                 "研究岗（研究助理／博士后方向）",
@@ -28648,22 +28716,22 @@
                 "固定答疑与学业与职业辅导并协助指导论文与实习与研究。",
                 "学业与职业建议边界与学生数据安全与记录要求。",
                 "写一份学业与职业辅导记录与边界说明。",
-                "偏辅导与记录执行，学位与就业结论由教师与院系承担。"
+                "学生辅导；学位决定按授予单位程序，就业结果不由教师/院系保证"
               ],
               [
                 "课程与教学支持岗",
                 "协助课程设计、数字教学与评估数据整理与教学技术工具维护。",
                 "课程目标与数据使用与工具授权与记录要求。",
                 "用课程评估数据做一份可复核的改进建议。",
-                "偏支持与记录，课程目标与评分与学术诚信判定由教师与院系承担。"
+                "偏支持、整理记录与报告；课程目标和评分按本校真实制度由有权人员确认，相关评分程序本轮未取得。科研学术不端由学术委员会按办法调查认定、学校依法处理，支持人员不直接认定。"
               ]
             ]
           },
           "id": "actors.path.entry-role-comparison.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "r5-research-reg",
+            "r5-editor"
           ],
           "title": "常见入门方向与初期任务",
           "type": "table"
@@ -28833,8 +28901,8 @@
             "rows": [
               [
                 "高等学校教师资格（中国大陆）",
-                "在中国大陆普通高等学校专门从事教育教学工作的人员",
-                "合规要求：依《中华人民共和国教师法》第十条国家实行教师资格制度；第十一条（五）取得高等学校教师资格应具备研究生或大学本科毕业学历；第十三条普通高等学校的教师资格由国务院或者省、自治区、直辖市教育行政部门或者由其委托的学校认定；《教师资格条例》（国务院令第 188 号）第二条与第四条（七）规定高等学校教师资格类别与认定。",
+                "中国公民在高校专门从事教育教学；岗位身份与拟聘公告核定",
+                "中国公民专门从事学校教育教学须依法取得相应教师资格；教师法10/11（五）/13条和教师资格条例2/4（七）/13条分别规定制度、研究生或本科资格学历及认定。跨学段任教另核相应认定与岗位条件。受委托高校认定本校在职/拟聘人员；其他按行政隶属关系认定，具体申报材料和招聘要求核当期公告。事业单位新聘原则公开招聘，政策安置、上级任命、涉密等例外；不是所有民办高校或科研助理均走该程序。",
                 "是（针对在各级各类学校专门从事教育教学工作的人员）：属法律与行政法规明确要求。",
                 "按教育行政部门与受委托高校的认定公告提交身份与学历与体检与思想品德等材料并按期申请。",
                 "认定申请与办理时间。",
@@ -28843,17 +28911,17 @@
               [
                 "事业单位公开招聘与院校评聘（中国大陆）",
                 "报考高校教师岗位的人员",
-                "合规要求：高校教师岗位多经事业单位公开招聘与院校评聘，公开招聘应按规定发布公告并按程序组织考试或考察与体检与公示。",
-                "视岗位与院校而定：编制内岗位普遍要求，具体以招聘公告为准。",
+                "中国公民专门从事学校教育教学须依法取得相应教师资格；教师法10/11（五）/13条和教师资格条例2/4（七）/13条分别规定制度、研究生或本科资格学历及认定。跨学段任教另核相应认定与岗位条件。受委托高校认定本校在职/拟聘人员；其他按行政隶属关系认定，具体申报材料和招聘要求核当期公告。事业单位新聘原则公开招聘，政策安置、上级任命、涉密等例外；不是所有民办高校或科研助理均走该程序。",
+                "事业单位新聘原则公开招聘且有法定例外；民办/辅助岗位另核",
                 "按招聘公告岗位条件报名并经资格审查与考试或考察与体检与公示。",
                 "备考与办理时间。",
-                "本条按《事业单位人事管理条例》与院校招聘制度名称与一般口径引用，未逐条核对条文编号。"
+                "已读条例8—10，不把全部高校/编制内每种聘任等同公开招聘。"
               ],
               [
                 "研究生教育与研究训练",
                 "零基础或转行者",
-                "现实入口：多数岗位需研究生教育（O*NET 显示 Job Zone Five，81% 要求博士学位、10% 硕士后证书、7% 硕士学位）。",
-                "是：O*NET 显示多数岗位需研究生教育。",
+                "O*NET教育反馈81%博士、10%硕士后证书、7%硕士（所列三项98%），不是98%全市场招聘样本；Job Zone Five/SVP8+为准备层级，不能推中国人人须博士。中国法定高校资格学历为研究生或本科，具体招聘可另设条件。",
+                "美国从业者反馈与统计典型条件；中国不是统一博士门槛",
                 "按目标院校与学科要求完成学位与研究训练并参与教学或助教经历。",
                 "学位与研究训练时间。",
                 "取得学位不等于取得教师资格或岗位聘用或学术服务授权。"
@@ -28890,8 +28958,12 @@
           "id": "actors.path.credential-decision.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "r5-teacher-law",
+            "r5-teacher-reg",
+            "r5-projections",
+            "r5-trends",
+            "r5-public-employment",
+            "r5-editor"
           ],
           "title": "训练、资格与材料怎么选择",
           "type": "table"
@@ -28901,17 +28973,15 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "学历与经验要求必须逐条读取：本职业多数岗位需研究生教育（O*NET 显示 Job Zone Five，教育反馈为 81% 博士学位、10% 硕士后证书、7% 硕士学位）；一项条件可放宽不代表教师资格与聘用与评估与学术规范要求可以替代。",
-              "本页建议的作品与七天体验只用于职业探索，不构成教师资格、学位、岗位聘用或学术授权。",
-              "进入本职业不是只报一个课程：先核对目标岗位的课程与教学周与研究项目与聘用方式与岗位层级、是否需要研究生教育与教学或研究经历、以及院校与院系的学术规范与数据使用规则。",
-              "涉及教师资格、岗位聘用、评分与学术不端判定与学位授予与对外咨询的环节，须先确认资格与授权要求并按制度执行；不得在无资格与无授权条件下独立承担相应职责。"
+              "O*NET教育反馈81%博士、10%硕士后证书、7%硕士（所列三项98%），不是98%全市场招聘样本；Job Zone Five/SVP8+为准备层级，不能推中国人人须博士。中国法定高校资格学历为研究生或本科，具体招聘可另设条件。 中国公民专门从事学校教育教学须依法取得相应教师资格；教师法10/11（五）/13条和教师资格条例2/4（七）/13条分别规定制度、研究生或本科资格学历及认定。跨学段任教另核相应认定与岗位条件。受委托高校认定本校在职/拟聘人员；其他按行政隶属关系认定，具体申报材料和招聘要求核当期公告。事业单位新聘原则公开招聘，政策安置、上级任命、涉密等例外；不是所有民办高校或科研助理均走该程序。 教育部令40号适用于高校科学研究及相关活动：学校为预防处理主体，学术委员会依法调查/认定；教师指导学生学术规范并必要审核论文，不能个人或AI查重分数直接认定。举报由指定受理部门处理，接触材料人员保密；按程序调查、申辩、认定、处理与复核。课程评分/考试作弊具体规程另核，不能把科研办法泛化所有成绩争议。"
             ]
           },
           "id": "actors.path.credential-boundary.1",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-teacher-law",
+            "r5-teacher-reg",
+            "r5-research-reg",
+            "onet"
           ],
           "title": "训练、资格与学术边界",
           "type": "notice"
@@ -29136,14 +29206,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入口要求、教师资格与学术边界由具体法域、院校与学科核验；本页练习不构成教师资格或学位或岗位聘用或学术授权。"
+              "中国公民专门从事学校教育教学须依法取得相应教师资格；教师法10/11（五）/13条和教师资格条例2/4（七）/13条分别规定制度、研究生或本科资格学历及认定。跨学段任教另核相应认定与岗位条件。受委托高校认定本校在职/拟聘人员；其他按行政隶属关系认定，具体申报材料和招聘要求核当期公告。事业单位新聘原则公开招聘，政策安置、上级任命、涉密等例外；不是所有民办高校或科研助理均走该程序。 路径与雇主观察证据为编辑建议非招聘样本；研究助理/课程支持与独立教师身份分开。"
             ]
           },
           "id": "actors.display.career_path_block.boundary",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-teacher-law",
+            "r5-teacher-reg",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -29152,14 +29222,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国由院校与学科规定并须遵守学术规范与研究伦理；中国大陆高校教师应依《中华人民共和国教师法》与《教师资格条例》取得高等学校教师资格并在认定范围内任教，岗位多经事业单位公开招聘与院校评聘。"
+              "中国公民专门从事学校教育教学须依法取得相应教师资格；教师法10/11（五）/13条和教师资格条例2/4（七）/13条分别规定制度、研究生或本科资格学历及认定。跨学段任教另核相应认定与岗位条件。受委托高校认定本校在职/拟聘人员；其他按行政隶属关系认定，具体申报材料和招聘要求核当期公告。事业单位新聘原则公开招聘，政策安置、上级任命、涉密等例外；不是所有民办高校或科研助理均走该程序。"
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-teacher-law",
+            "r5-teacher-reg",
+            "r5-public-employment"
           ],
           "type": "prose"
         },
@@ -29168,14 +29238,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆相关依据：依《中华人民共和国教师法》（第十条国家实行教师资格制度；第十一条（五）取得高等学校教师资格应具备研究生或大学本科毕业学历；第十三条普通高等学校的教师资格由国务院或者省、自治区、直辖市教育行政部门或者由其委托的学校认定）与《教师资格条例》（1995 年国务院令第 188 号；第二条在各级各类学校专门从事教育教学工作应依法取得教师资格；第四条（七）高等学校教师资格），高校教师岗位多经事业单位公开招聘与院校评聘。上述按法规与制度名称与已核要点引用，未逐条核对条文编号。"
+              "中国公民专门从事学校教育教学须依法取得相应教师资格；教师法10/11（五）/13条和教师资格条例2/4（七）/13条分别规定制度、研究生或本科资格学历及认定。跨学段任教另核相应认定与岗位条件。受委托高校认定本校在职/拟聘人员；其他按行政隶属关系认定，具体申报材料和招聘要求核当期公告。事业单位新聘原则公开招聘，政策安置、上级任命、涉密等例外；不是所有民办高校或科研助理均走该程序。"
             ]
           },
           "id": "actors.display.career_path_block.locale.summary",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-teacher-law",
+            "r5-teacher-reg",
+            "r5-public-employment"
           ],
           "type": "prose"
         },
@@ -29184,14 +29254,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国本职业准备层级为 Job Zone Five（SVP 8.0 及以上），教育反馈为 81% 博士学位、10% 硕士后证书、7% 硕士学位，兴趣代码 SI；中国大陆实际以教师资格与院校招聘与评聘要求为准。"
+              "O*NET教育反馈81%博士、10%硕士后证书、7%硕士（所列三项98%），不是98%全市场招聘样本；Job Zone Five/SVP8+为准备层级，不能推中国人人须博士。中国法定高校资格学历为研究生或本科，具体招聘可另设条件。 美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。"
             ]
           },
           "id": "actors.display.career_path_block.locale.credentials",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "r5-projections",
+            "r5-trends",
+            "r5-teacher-law",
+            "r5-teacher-reg"
           ],
           "type": "prose"
         },
@@ -30352,14 +30424,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "院校与课程制度与授权规则：用于入口要求与课程目标、评分、学术诚信与数据使用与工具授权与记录边界。"
+              "本轮未取得校内制度/招聘样本；路径为编辑建议，工资统计不规定授权。"
             ]
           },
           "id": "actors.display.career_path_block.source.employer",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30384,14 +30454,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "工资与环境口径：本页不使用影视或演员工会口径；工资引用 OEWS（本页来源仅提供中位数），环境引用 O*NET。"
+              "本轮未取得校内制度/招聘样本；路径为编辑建议，工资统计不规定授权。"
             ]
           },
           "id": "actors.display.career_path_block.source.r2-pay-3",
           "source_refs": [
-            "onet",
-            "bls",
-            "cn-rule"
+            "r5-editor"
           ],
           "type": "prose"
         }
@@ -30408,13 +30476,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 25-1063.00 精确职业数据：2024 年就业约 15,800 人。"
+              "美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-projections",
+            "r5-trends"
           ],
           "type": "prose"
         },
@@ -30423,13 +30491,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年预测为「低于平均（Slower than average，1% 至 2%）」，2024—2034 年预计空缺 1,200（该页为预测期合计口径，含增长与更替，不是每年净增）。"
+              "美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-projections",
+            "r5-trends"
           ],
           "type": "prose"
         },
@@ -30438,13 +30506,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "这些全国数据只对应美国 25-1063.00，不代表某州、某院校或学科，也不代表中国市场或个人录用概率；本职业预测低于平均，统计波动与高教经费与学科需求相关。"
+              "美国全国职业预测非中国或个人机会；未核高教经费或AI变化对本职业预测的因果影响。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-projections",
+            "r5-trends",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30453,13 +30522,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本职业岗位主要分布在教育服务业（Educational Services），以院校聘用为主，另有兼职与合同制与项目聘任。"
+              "O*NET2025本职业教育服务业100%；兼职/合同/项目方式与薪酬另核，未采分布。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet"
           ],
           "type": "prose"
         },
@@ -30573,13 +30641,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，学科对象与方法不同"
+              "编辑比较：中，学科对象与方法不同；未核个人成功率或自动资格互认。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.agent.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30618,13 +30685,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，证据类型与方法不同"
+              "编辑比较：中，证据类型与方法不同；未核个人成功率或自动资格互认。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30633,13 +30699,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：教学与评估与区域与比较研究方法。"
+              "编辑可核教学、评估与一般研究训练；不能据经济学教师身份推已掌握区域/族群文化研究方法。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30663,13 +30729,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，分析单位与证据类型不同"
+              "编辑比较：中，分析单位与证据类型不同；未核个人成功率或自动资格互认。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30708,13 +30773,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，教学能力相近但课程定位不同"
+              "编辑比较：近，教学能力相近但课程定位不同；未核个人成功率或自动资格互认。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30753,13 +30817,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，社会科学相近但对象不同"
+              "编辑比较：近，社会科学相近但对象不同；未核个人成功率或自动资格互认。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.directing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30768,13 +30831,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可转移能力：教学与研究与社会调查与统计分析。"
+              "编辑可核教学、量化分析与学术写作；社会调查经验须个人证据，非人人已具备。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "onet",
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30798,13 +30861,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，方法相近但理论框架不同"
+              "编辑比较：近，方法相近但理论框架不同；未核个人成功率或自动资格互认。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30843,13 +30905,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中，方法相近但理论深度不同"
+              "编辑比较：中，方法相近但理论深度不同；未核个人成功率或自动资格互认。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.editing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30888,13 +30949,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "近，学科相同但岗位性质不同"
+              "编辑比较：近，学科相同但岗位性质不同；未核个人成功率或自动资格互认。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -30918,13 +30978,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "教师资格与院校制度：用于资格与聘用与评估与数据使用口径（按法规与制度名称与已核要点引用）。"
+              "中国公民专门从事学校教育教学须依法取得相应教师资格；教师法10/11（五）/13条和教师资格条例2/4（七）/13条分别规定制度、研究生或本科资格学历及认定。跨学段任教另核相应认定与岗位条件。受委托高校认定本校在职/拟聘人员；其他按行政隶属关系认定，具体申报材料和招聘要求核当期公告。事业单位新聘原则公开招聘，政策安置、上级任命、涉密等例外；不是所有民办高校或科研助理均走该程序。"
             ]
           },
           "id": "actors.display.market_signal_card.source.ratify",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-teacher-law",
+            "r5-teacher-reg"
           ],
           "type": "prose"
         },
@@ -30933,13 +30993,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "院校与科研机构用工与计酬规则：用于课程目标、评分、学术诚信与数据使用与记录边界。"
+              "没有招聘或校内制度样本；具体用工/薪酬另核。"
             ]
           },
           "id": "actors.display.market_signal_card.source.employer",
           "source_refs": [
-            "bls",
-            "oews"
+            "r5-editor"
           ],
           "type": "prose"
         },
@@ -31125,12 +31184,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "2026-09-19"
+              "2026-10-09"
             ]
           },
           "id": "actors.display.source_card.updated-at",
           "source_refs": [
-            "onet"
+            "onet",
+            "r5-projections",
+            "r5-trends",
+            "r5-wages",
+            "r5-oews-concepts"
           ],
           "type": "prose"
         },
@@ -31299,10 +31362,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于核对教育与教师类职业信息与就业展望的查询入口与方法说明。",
-                  "本职业一手展望页本轮未取得；不据入口页推断本职业具体数值。"
+                  "既有部门/方法/检索入口不代替法规、统计或研究正文；新增实际文档用于授权九模块。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation / query entry",
                 "id": "bls",
                 "limitation": "本职业一手展望页本轮未取得；不据入口页推断本职业具体数值。",
                 "market": "美国",
@@ -31315,10 +31377,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "规定国家实行教师资格制度；取得高等学校教师资格应具备研究生或大学本科毕业学历；普通高等学校的教师资格由国务院或者省、自治区、直辖市教育行政部门或者由其委托的学校认定；高等学校教师资格类别与认定按《教师资格条例》（国务院令第 188 号）执行。",
-                  "为教师资格与认定要求，不规定工资水平；本条按法规名称与已核要点引用，具体以现行法规原文与认定公告为准。"
+                  "既有部门/方法/检索入口不代替法规、统计或研究正文；新增实际文档用于授权九模块。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation / query entry",
                 "id": "cn-rule",
                 "limitation": "为教师资格与认定要求，不规定工资水平；本条按法规名称与已核要点引用，具体以现行法规原文与认定公告为准。",
                 "market": "中国大陆",
@@ -31331,10 +31392,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于说明学生数据与学术诚信与评估公平应保留人的责任与留痕。",
-                  "不提供本职业采用率或合规结论。"
+                  "既有部门/方法/检索入口不代替法规、统计或研究正文；新增实际文档用于授权九模块。"
                 ],
-                "evidence_type": "editorial design",
+                "evidence_type": "official navigation / query entry",
                 "id": "dancing",
                 "limitation": "不提供本职业采用率或合规结论。",
                 "market": "全球",
@@ -31347,10 +31407,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于核对教师资格与教师队伍建设与学术规范相关公开要求。",
-                  "主管部门入口不代替法规原文与院校制度。"
+                  "既有部门/方法/检索入口不代替法规、统计或研究正文；新增实际文档用于授权九模块。"
                 ],
-                "evidence_type": "editorial design",
+                "evidence_type": "official navigation / query entry",
                 "id": "directing",
                 "limitation": "主管部门入口不代替法规原文与院校制度。",
                 "market": "中国大陆",
@@ -31363,10 +31422,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于说明课程与材料与数据版本与复现应保留复核与留痕。",
-                  "不提供本职业采用率或合规结论。"
+                  "既有部门/方法/检索入口不代替法规、统计或研究正文；新增实际文档用于授权九模块。"
                 ],
-                "evidence_type": "editorial design",
+                "evidence_type": "official navigation / query entry",
                 "id": "editing",
                 "limitation": "不提供本职业采用率或合规结论。",
                 "market": "全球",
@@ -31377,10 +31435,9 @@
                 "url": "https://www.ilo.org/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "把 AI 使用放在人本、伦理、专业判断与持续学习之下，用于说明教师使用 AI 的伦理与专业边界。",
-                  "提供能力框架与原则，不提供本职业采用率、替代概率或合规结论。"
+                  "实际发布页：2024框架，2026-01-16更新，15能力/5维度/3水平；人本/伦理等原则，不是本职业部署率或具体评分标准。"
                 ],
                 "evidence_type": "official guidance",
                 "id": "editor",
@@ -31395,17 +31452,16 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于说明中国大陆高校教师岗位招聘公告与聘用条件（学历与资格与聘期与薪酬结构）的阅读方法。",
-                  "招聘报价与公告不是职业级统计口径，也不代表本职业中位数或起薪。"
+                  "部门首页不是招聘样本、院校薪酬或授权制度；本轮样本未采，比较项是编辑建议。"
                 ],
-                "evidence_type": "recruitment sample",
+                "evidence_type": "editorial navigation / query entry",
                 "id": "employer",
                 "limitation": "招聘报价与公告不是职业级统计口径，也不代表本职业中位数或起薪。",
                 "market": "中国大陆",
                 "name": "中国公共招聘与事业单位公开招聘口径核对入口",
                 "period": "accessed 2026-09-19",
                 "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "recruitment_proxy",
+                "scope": "editorial_synthesis",
                 "url": "https://www.mohrss.gov.cn/"
               },
               {
@@ -31441,14 +31497,13 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "为行业与单位类型层级口径（如教育行业与高等学校），作为可见行业代理使用。",
-                  "行业平均工资不是本职业中位数或起薪或个人到手收入，本页明确排除。"
+                  "本职业中国全国精确工资分布未取得。NBS2025教育行业城镇非私营133539元/年、私营63908元/年为匹配行业税前均值：5+城镇法人单位，排除个体/自由职业；包括按定义工资奖金津贴，不能一概排除绩效或合同制。涵盖各类教育岗位，非高校经济学教师中位/分位/起薪/月薪。"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs",
-                "limitation": "行业平均工资不是本职业中位数或起薪或个人到手收入，本页明确排除。",
+                "limitation": "本职业中国全国精确工资分布未取得。NBS2025教育行业城镇非私营133539元/年、私营63908元/年为匹配行业税前均值：5+城镇法人单位，排除个体/自由职业；包括按定义工资奖金津贴，不能一概排除绩效或合同制。涵盖各类教育岗位，非高校经济学教师中位/分位/起薪/月薪。",
                 "market": "中国大陆",
                 "name": "国家统计局公开渠道：2025 年城镇单位就业人员年平均工资情况",
                 "period": "2025 年；accessed 2026-09-19",
@@ -31489,17 +31544,17 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "accessed_at": "2026-09-19",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "核验职业定义、22 项任务、工作情境与准备层级（Job Zone Five，SVP 8.0 及以上）与兴趣代码 SI 与 2024 年就业 15,800 与 2024—2034 年预测与 2025 年工资中位数。",
-                  "美国精确职业数据；2025 年工资来源仅提供中位数，不提供分位与小时口径；不定义中国资格、工资或标准与资质。"
+                  "25-1063美国精确定义、22任务（19Core、3Supplemental）、57情境、14软件类、教育81/10/7、职业兴趣S87/I76等；个体资质另核。",
+                  "美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet",
                 "limitation": "美国精确职业数据；2025 年工资来源仅提供中位数，不提供分位与小时口径；不定义中国资格、工资或标准与资质。",
                 "market": "美国",
                 "name": "O*NET OnLine：Economics Teachers, Postsecondary（25-1063.00）职业档案",
-                "period": "updated 2026; accessed 2026-09-19",
+                "period": "2026档案/2025—2035预测",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/25-1063.00"
@@ -31507,10 +31562,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "把任务层面的生成式 AI 暴露与「实际采用、岗位增减」区分开。",
-                  "不提供本职业采用率、裁员率或因果就业证据。"
+                  "既有部门/方法/检索入口不代替法规、统计或研究正文；新增实际文档用于授权九模块。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation / query entry",
                 "id": "r2-ai",
                 "limitation": "不提供本职业采用率、裁员率或因果就业证据。",
                 "market": "全球",
@@ -31523,33 +31577,31 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于说明中国大陆高校教师招聘公告与聘用条件的阅读方法。",
-                  "招聘报价不是职业级统计口径，也不代表本职业中位数或起薪。"
+                  "部门首页不是招聘样本、院校薪酬或授权制度；本轮样本未采，比较项是编辑建议。"
                 ],
-                "evidence_type": "editorial synthesis",
+                "evidence_type": "editorial navigation / query entry",
                 "id": "r2-pay-1",
                 "limitation": "招聘报价不是职业级统计口径，也不代表本职业中位数或起薪。",
                 "market": "中国大陆",
                 "name": "中国公共招聘与聘用条件核对入口（编辑整理）",
                 "period": "accessed 2026-09-19",
                 "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "recruitment_proxy",
+                "scope": "editorial_synthesis",
                 "url": "https://www.mohrss.gov.cn/"
               },
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于说明基本工资与绩效与科研与教学奖励与项目与讲座报酬与非货币福利等计酬口径差异。",
-                  "招聘与公告口径不是职业级统计口径。"
+                  "部门首页不是招聘样本、院校薪酬或授权制度；本轮样本未采，比较项是编辑建议。"
                 ],
-                "evidence_type": "recruitment sample",
+                "evidence_type": "editorial navigation / query entry",
                 "id": "r2-pay-2",
                 "limitation": "招聘与公告口径不是职业级统计口径。",
                 "market": "中国大陆",
                 "name": "计酬与福利口径核对入口",
                 "period": "accessed 2026-09-19",
                 "publisher": "中华人民共和国人力资源和社会保障部",
-                "scope": "recruitment_proxy",
+                "scope": "editorial_synthesis",
                 "url": "https://www.mohrss.gov.cn/"
               },
               {
@@ -31571,10 +31623,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于核对本职业的执照与认证与培训查询入口。",
-                  "该页不列出本职业的强制证书；岗位聘用与资格与评估与学术要求以院校与法域为准。"
+                  "既有部门/方法/检索入口不代替法规、统计或研究正文；新增实际文档用于授权九模块。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation / query entry",
                 "id": "ratify",
                 "limitation": "该页不列出本职业的强制证书；岗位聘用与资格与评估与学术要求以院校与法域为准。",
                 "market": "美国",
@@ -31587,10 +31638,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于核对职业工作条件与工作情境信息。",
-                  "不提供本职业采用率、替代概率或合规结论。"
+                  "既有部门/方法/检索入口不代替法规、统计或研究正文；新增实际文档用于授权九模块。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation / query entry",
                 "id": "sag",
                 "limitation": "不提供本职业采用率、替代概率或合规结论。",
                 "market": "美国",
@@ -31603,10 +31653,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于核对教育服务业用工与工资统计口径与期间。",
-                  "不提供本职业采用率、替代概率或合规结论。"
+                  "既有部门/方法/检索入口不代替法规、统计或研究正文；新增实际文档用于授权九模块。"
                 ],
-                "evidence_type": "official employment projections and wage table",
+                "evidence_type": "official navigation / query entry",
                 "id": "sag-moa",
                 "limitation": "不提供本职业采用率、替代概率或合规结论。",
                 "market": "美国",
@@ -31619,10 +31668,9 @@
               {
                 "accessed_at": "2026-09-19",
                 "details": [
-                  "用于核对教师资格考试与认定与培训与学历条件的公开要求。",
-                  "主管部门入口不代替法规原文与认定公告；不规定工资水平。"
+                  "既有部门/方法/检索入口不代替法规、统计或研究正文；新增实际文档用于授权九模块。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official navigation / query entry",
                 "id": "teacher",
                 "limitation": "主管部门入口不代替法规原文与认定公告；不规定工资水平。",
                 "market": "中国大陆",
@@ -31631,6 +31679,231 @@
                 "publisher": "中华人民共和国教育部 / 中国教师资格网",
                 "scope": "primary_document",
                 "url": "https://www.moe.gov.cn/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。"
+                ],
+                "evidence_type": "official occupation data",
+                "id": "r5-oews-concepts",
+                "limitation": "全兼职雇员直时税前、排除自雇；含计件/佣金/生产奖金和部分津贴，排除加班溢价/轮班差额等，不一概排除绩效。个人全年工时和到手另核。",
+                "market": "美国",
+                "name": "BLS OEWS工资人群与组成",
+                "period": "现行方法；本批检索2026-10-09",
+                "publisher": "Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。"
+                ],
+                "evidence_type": "official law",
+                "id": "r5-cn-pipl",
+                "limitation": "个人信息保护法按可识别自然人信息、合法依据、明确目的、最小必要和安全处理；一般组织文件/业务数据/用户信息不能全称敏感个人信息，健康/金融账户等需另核28条敏感范围与必要性/适用单独同意/影响评估。涉密、商业秘密及个人信息法律概念分开，去标识非匿名化，批准账号不自动准许外部AI上传。保密/网络/数据其他具体条款本轮未逐核，按真实职能/主管规则核，不伪称已核全套合规。",
+                "market": "中国内地",
+                "name": "个人信息保护法：学生与经济学教学研究资料中的可识别个人信息边界",
+                "period": "2021法；本批实际读；检索2026-10-09",
+                "publisher": "全国人大/中央网信办",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "自愿AI治理建议非学生与经济学教学研究资料的行业技术规范或岗位授权，也非工具采用/提效实测。"
+                ],
+                "evidence_type": "official framework",
+                "id": "r5-nist-current",
+                "limitation": "自愿AI治理建议非学生与经济学教学研究资料的行业技术规范或岗位授权，也非工具采用/提效实测。",
+                "market": "跨市场",
+                "name": "NIST AI RMF官方框架说明",
+                "period": "自愿框架1.0；本批实际读；检索2026-10-09",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "本批实际读ILO2025摘要，本职业未核SOC25-1063与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。"
+                ],
+                "evidence_type": "official research summary",
+                "id": "r5-ilo-current",
+                "limitation": "本批实际读ILO2025摘要，本职业未核SOC25-1063与ISCO可靠映射和评分，不称完整研究无评分；暴露非采用、效果或替代。",
+                "market": "跨市场",
+                "name": "ILO2025 GenAI暴露研究官方摘要",
+                "period": "2025研究摘要；本批实际读；检索2026-10-09",
+                "publisher": "ILO",
+                "scope": "contextual",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。"
+                ],
+                "evidence_type": "official wage statistics",
+                "id": "r5-wages",
+                "limitation": "美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。",
+                "market": "美国",
+                "name": "O*NET转引BLS高校经济学教师工资五分位",
+                "period": "2025工资",
+                "publisher": "O*NET / BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/25-1063.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。"
+                ],
+                "evidence_type": "official employment projections",
+                "id": "r5-trends",
+                "limitation": "美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。",
+                "market": "美国",
+                "name": "O*NET25-1063国家就业趋势",
+                "period": "2025—2035",
+                "publisher": "O*NET / BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/25-1063.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。"
+                ],
+                "evidence_type": "official employment projections",
+                "id": "r5-projections",
+                "limitation": "美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。",
+                "market": "美国",
+                "name": "BLS25-1063预测与特征精确行",
+                "period": "2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "编辑候选：检索、讲义题目初稿、计量代码草稿和记录整理可在获准资料上测试；O*NET软件档案不等GenAI部署。2025美国全职业唯一招聘为Hot分母，Office2%、Excel1%，其余9项未给不填0。没有本职业采用/提效/净就业证据；ILO暴露非裁员，UNESCO教师能力框架非中国法规，NIST治理非院校授权。"
+                ],
+                "evidence_type": "job posting skill statistics",
+                "id": "r5-hot",
+                "limitation": "编辑候选：检索、讲义题目初稿、计量代码草稿和记录整理可在获准资料上测试；O*NET软件档案不等GenAI部署。2025美国全职业唯一招聘为Hot分母，Office2%、Excel1%，其余9项未给不填0。没有本职业采用/提效/净就业证据；ILO暴露非裁员，UNESCO教师能力框架非中国法规，NIST治理非院校授权。",
+                "market": "美国",
+                "name": "O*NET25-1063招聘软件技能",
+                "period": "2025招聘",
+                "publisher": "O*NET / Lightcast",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/25-1063.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实读2、7—13、16—17、22—24条支持资格、教学科研、咨询与考核权责；政府2009修正本，实际核10/11/13/23条；未使用旧刑法援引。中国公民专门从事学校教育教学须依法取得相应教师资格；教师法10/11（五）/13条和教师资格条例2/4（七）/13条分别规定制度、研究生或本科资格学历及认定。跨学段任教另核相应认定与岗位条件。受委托高校认定本校在职/拟聘人员；其他按行政隶属关系认定，具体申报材料和招聘要求核当期公告。事业单位新聘原则公开招聘，政策安置、上级任命、涉密等例外；不是所有民办高校或科研助理均走该程序。"
+                ],
+                "evidence_type": "official law",
+                "id": "r5-teacher-law",
+                "limitation": "实读2、7—13、16—17、22—24条支持资格、教学科研、咨询与考核权责；政府2009修正本，实际核10/11/13/23条；未使用旧刑法援引。中国公民专门从事学校教育教学须依法取得相应教师资格；教师法10/11（五）/13条和教师资格条例2/4（七）/13条分别规定制度、研究生或本科资格学历及认定。跨学段任教另核相应认定与岗位条件。受委托高校认定本校在职/拟聘人员；其他按行政隶属关系认定，具体申报材料和招聘要求核当期公告。事业单位新聘原则公开招聘，政策安置、上级任命、涉密等例外；不是所有民办高校或科研助理均走该程序。",
+                "market": "中国大陆",
+                "name": "教师法资格、任用与考核正文（政府转载）",
+                "period": "2026-10-09实读",
+                "publisher": "全国人大常委会 / 政府政务公开",
+                "scope": "primary_document",
+                "url": "https://public.zzsj.gov.cn/D53Z/4888317.jhtml"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "中国公民专门从事学校教育教学须依法取得相应教师资格；教师法10/11（五）/13条和教师资格条例2/4（七）/13条分别规定制度、研究生或本科资格学历及认定。跨学段任教另核相应认定与岗位条件。受委托高校认定本校在职/拟聘人员；其他按行政隶属关系认定，具体申报材料和招聘要求核当期公告。事业单位新聘原则公开招聘，政策安置、上级任命、涉密等例外；不是所有民办高校或科研助理均走该程序。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "r5-teacher-reg",
+                "limitation": "中国公民专门从事学校教育教学须依法取得相应教师资格；教师法10/11（五）/13条和教师资格条例2/4（七）/13条分别规定制度、研究生或本科资格学历及认定。跨学段任教另核相应认定与岗位条件。受委托高校认定本校在职/拟聘人员；其他按行政隶属关系认定，具体申报材料和招聘要求核当期公告。事业单位新聘原则公开招聘，政策安置、上级任命、涉密等例外；不是所有民办高校或科研助理均走该程序。",
+                "market": "中国大陆",
+                "name": "教师资格条例正文",
+                "period": "1995-12-12实施",
+                "publisher": "国务院 / 北京市政府",
+                "scope": "primary_document",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/199512/t19951212_780558.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "8—10招聘/例外，20—24考核培训，32条基本工资绩效津贴；仅事业单位。中国公民专门从事学校教育教学须依法取得相应教师资格；教师法10/11（五）/13条和教师资格条例2/4（七）/13条分别规定制度、研究生或本科资格学历及认定。跨学段任教另核相应认定与岗位条件。受委托高校认定本校在职/拟聘人员；其他按行政隶属关系认定，具体申报材料和招聘要求核当期公告。事业单位新聘原则公开招聘，政策安置、上级任命、涉密等例外；不是所有民办高校或科研助理均走该程序。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "r5-public-employment",
+                "limitation": "8—10招聘/例外，20—24考核培训，32条基本工资绩效津贴；仅事业单位。中国公民专门从事学校教育教学须依法取得相应教师资格；教师法10/11（五）/13条和教师资格条例2/4（七）/13条分别规定制度、研究生或本科资格学历及认定。跨学段任教另核相应认定与岗位条件。受委托高校认定本校在职/拟聘人员；其他按行政隶属关系认定，具体申报材料和招聘要求核当期公告。事业单位新聘原则公开招聘，政策安置、上级任命、涉密等例外；不是所有民办高校或科研助理均走该程序。",
+                "market": "中国大陆",
+                "name": "事业单位人事管理条例正文",
+                "period": "2014-07-01实施",
+                "publisher": "国务院 / 北京市政府",
+                "scope": "industry_proxy",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/qtwj/201411/t20141115_781285.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "教育部令40号适用于高校科学研究及相关活动：学校为预防处理主体，学术委员会依法调查/认定；教师指导学生学术规范并必要审核论文，不能个人或AI查重分数直接认定。举报由指定受理部门处理，接触材料人员保密；按程序调查、申辩、认定、处理与复核。课程评分/考试作弊具体规程另核，不能把科研办法泛化所有成绩争议。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "r5-research-reg",
+                "limitation": "教育部令40号适用于高校科学研究及相关活动：学校为预防处理主体，学术委员会依法调查/认定；教师指导学生学术规范并必要审核论文，不能个人或AI查重分数直接认定。举报由指定受理部门处理，接触材料人员保密；按程序调查、申辩、认定、处理与复核。课程评分/考试作弊具体规程另核，不能把科研办法泛化所有成绩争议。",
+                "market": "中国大陆",
+                "name": "高等学校预防与处理学术不端行为办法正文",
+                "period": "2016-09-01实施",
+                "publisher": "教育部 / 北京市政府",
+                "scope": "industry_proxy",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/201905/t20190522_59345.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "编辑建议与可能风险非招聘样本、制度、发生率或个人成功率。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "r5-editor",
+                "limitation": "编辑建议与可能风险非招聘样本、制度、发生率或个人成功率。",
+                "market": "全球",
+                "name": "本项观察、AI候选和转岗比较编辑说明",
+                "period": "2026-10-09实读",
+                "publisher": "FermatMind本轮作者",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-10-10",
+                "details": [
+                  "用于相邻学科教学与研究任务比较；不是经济学教师自动取得该学科技能、资格或招聘证明。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "b12-anthropology",
+                "limitation": "用于相邻学科教学与研究任务比较；不是经济学教师自动取得该学科技能、资格或招聘证明。",
+                "market": "美国",
+                "name": "O*NET：高校人类学与考古学教师25-1061.00",
+                "period": "职业档案检索2026-10-10",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/25-1061.00"
+              },
+              {
+                "accessed_at": "2026-10-10",
+                "details": [
+                  "用于相邻区域/族群/文化研究教学任务比较；经济学经验不自动证明该领域研究与教学能力。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "b12-area",
+                "limitation": "用于相邻区域/族群/文化研究教学任务比较；经济学经验不自动证明该领域研究与教学能力。",
+                "market": "美国",
+                "name": "O*NET：高校区域、族群与文化研究教师25-1062.00",
+                "period": "职业档案检索2026-10-10",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/25-1062.00"
               }
             ]
           },
@@ -31979,7 +32252,7 @@
           },
           {
             "来源": {
-              "$source": "r2-ai",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -31998,7 +32271,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "r2-ai",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32091,7 +32364,7 @@
           },
           {
             "来源": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32110,7 +32383,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32119,7 +32392,7 @@
           },
           {
             "来源": {
-              "$source": "nist",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32138,7 +32411,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "nist",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32222,7 +32495,7 @@
         },
         "evidence_rows": [
           {
-            "source_ref": "r2-ai",
+            "source_ref": "onet",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.1.limit",
               "block": "ai-impact",
@@ -32230,7 +32503,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "r2-ai",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32249,7 +32522,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "r2-ai",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32257,7 +32530,7 @@
             }
           },
           {
-            "source_ref": "sag",
+            "source_ref": "r5-oews-concepts",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.2.limit",
               "block": "ai-impact",
@@ -32265,7 +32538,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag",
+              "$source": "r5-oews-concepts",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32284,7 +32557,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "sag",
+              "$source": "r5-oews-concepts",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32292,7 +32565,7 @@
             }
           },
           {
-            "source_ref": "sag-moa",
+            "source_ref": "editor",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.3.limit",
               "block": "ai-impact",
@@ -32300,7 +32573,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag-moa",
+              "$source": "editor",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32319,7 +32592,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "sag-moa",
+              "$source": "editor",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32327,7 +32600,7 @@
             }
           },
           {
-            "source_ref": "bls",
+            "source_ref": "r5-projections",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.4.limit",
               "block": "ai-impact",
@@ -32335,7 +32608,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32354,7 +32627,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32362,7 +32635,7 @@
             }
           },
           {
-            "source_ref": "nist",
+            "source_ref": "r5-editor",
             "使用限制": {
               "$item": "actors.display.ai_impact_table.evidence.5.limit",
               "block": "ai-impact",
@@ -32370,7 +32643,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "nist",
+              "$source": "r5-editor",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32388,13 +32661,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "链接": {
-              "$source": "nist",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "actors.source-register.published.1"
-            }
+            "链接": null
           }
         ],
         "heading": {
@@ -32449,7 +32716,7 @@
         ],
         "questions": [
           {
-            "source_ref": "bls",
+            "source_ref": "r5-projections",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.1.answer",
               "block": "ai-impact",
@@ -32478,7 +32745,7 @@
             }
           },
           {
-            "source_ref": "r2-ai",
+            "source_ref": "r5-ilo-current",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.2.answer",
               "block": "ai-impact",
@@ -32486,14 +32753,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "r2-ai",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "r2-ai",
+              "$source": "r5-ilo-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32507,7 +32774,7 @@
             }
           },
           {
-            "source_ref": "nist",
+            "source_ref": "r5-nist-current",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.3.answer",
               "block": "ai-impact",
@@ -32515,14 +32782,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag-moa",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "sag-moa",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32544,14 +32811,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag-moa",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "sag-moa",
+              "$source": "onet",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32565,7 +32832,7 @@
             }
           },
           {
-            "source_ref": "nist",
+            "source_ref": "r5-nist-current",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.5.answer",
               "block": "ai-impact",
@@ -32573,14 +32840,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32594,7 +32861,7 @@
             }
           },
           {
-            "source_ref": "sag",
+            "source_ref": "r5-cn-pipl",
             "回答": {
               "$item": "actors.display.ai_impact_table.questions.6.answer",
               "block": "ai-impact",
@@ -32602,14 +32869,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "sag",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "sag",
+              "$source": "r5-cn-pipl",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32631,14 +32898,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "nist",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "nist",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33158,7 +33425,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33166,7 +33433,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33180,16 +33447,10 @@
             }
           },
           {
-            "href": {
-              "$source": "employer",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "actors.source-register.published.1"
-            },
+            "href": null,
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-editor",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33204,7 +33465,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "r5-teacher-reg",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33212,7 +33473,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "r5-teacher-reg",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33227,7 +33488,7 @@
           },
           {
             "href": {
-              "$source": "r2-pay-3",
+              "$source": "r5-oews-concepts",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33235,7 +33496,7 @@
             },
             "id": "r2-pay-3",
             "label": {
-              "$source": "r2-pay-3",
+              "$source": "r5-oews-concepts",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34091,7 +34352,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "onet",
+              "employer"
             ],
             "id": "image-use",
             "mitigation": {
@@ -34127,7 +34389,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet"
+              "onet",
+              "employer"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -34163,7 +34426,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "cn-rule"
+              "onet",
+              "employer"
             ],
             "id": "project-income",
             "mitigation": {
@@ -34199,7 +34463,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "cn-rule"
+              "cn-rule",
+              "employer"
             ],
             "id": "identity-procedure",
             "mitigation": {
@@ -34235,8 +34500,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "nist",
-              "sag-moa"
+              "onet",
+              "employer"
             ],
             "id": "project-data",
             "mitigation": {
@@ -34300,7 +34565,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34308,7 +34573,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34322,16 +34587,10 @@
             }
           },
           {
-            "href": {
-              "$source": "employer",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "actors.source-register.published.1"
-            },
+            "href": null,
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-editor",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34346,7 +34605,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "r5-research-reg",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34354,7 +34613,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "r5-research-reg",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34369,7 +34628,7 @@
           },
           {
             "href": {
-              "$source": "sag-moa",
+              "$source": "editor",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34377,7 +34636,7 @@
             },
             "id": "sag-moa",
             "label": {
-              "$source": "sag-moa",
+              "$source": "editor",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34392,7 +34651,7 @@
           },
           {
             "href": {
-              "$source": "nist",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34400,7 +34659,7 @@
             },
             "id": "nist",
             "label": {
-              "$source": "nist",
+              "$source": "r5-nist-current",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34412,6 +34671,24 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "onet",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "onet",
+            "label": {
+              "$source": "onet",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            },
+            "scope": "BLS/OEWS 与 O*NET：用于工资、就业与工作情境与准备层级口径。"
           }
         ]
       },
@@ -34426,8 +34703,8 @@
           "bls_table": [
             {
               "指标": "数据类型",
-              "数值": "教师资格与院校制度为主",
-              "说明": "中国大陆公开工资统计按行业门类与单位类型发布，本职业相关岗位集中在教育行业与高等学校，未建立与美国 25-1063.00 对应的职业级口径；本页保留缺口，不以行业均值替代。"
+              "数值": "精确职业缺口＋教育行业代理",
+              "说明": "本职业中国全国精确工资分布未取得。NBS2025教育行业城镇非私营133539元/年、私营63908元/年为匹配行业税前均值：5+城镇法人单位，排除个体/自由职业；包括按定义工资奖金津贴，不能一概排除绩效或合同制。涵盖各类教育岗位，非高校经济学教师中位/分位/起薪/月薪。"
             },
             {
               "指标": "高等学校教师资格",
@@ -34446,8 +34723,8 @@
             },
             {
               "指标": "计酬方式",
-              "数值": "基本工资＋绩效＋项目与讲座报酬",
-              "说明": "收入常由基本工资与岗位与绩效工资与教学与科研奖励与项目与讲座与咨询报酬构成，部分院校另有住房与子女入学等非货币条件。"
+              "数值": "事业单位：基本工资＋绩效工资＋津贴补贴；其他机构按实际合同核",
+              "说明": "事业单位工资法定基本/绩效/津贴；项目/咨询和福利核合同，未采普遍构成。"
             },
             {
               "指标": "工时与作业节奏",
@@ -34462,7 +34739,7 @@
             {
               "指标": "地区比较",
               "数值": "中美证据分别解释",
-              "说明": "美国中位为受雇税前工资统计口径（不含暑期薪酬与科研经费与非货币福利）；中国大陆按院校与岗位与职称与绩效制度确定，两者应分别解释，不能直接换算或合并。"
+              "说明": "美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。 本职业中国全国精确工资分布未取得。NBS2025教育行业城镇非私营133539元/年、私营63908元/年为匹配行业税前均值：5+城镇法人单位，排除个体/自由职业；包括按定义工资奖金津贴，不能一概排除绩效或合同制。涵盖各类教育岗位，非高校经济学教师中位/分位/起薪/月薪。"
             }
           ],
           "china_ai_row": {
@@ -34475,7 +34752,7 @@
           "china_edu_table": [
             {
               "学历段": "高等学校教师资格",
-              "岗位方向": "依《中华人民共和国教师法》与《教师资格条例》（国务院令第 188 号）取得高等学校教师资格并在认定范围内任教。",
+              "岗位方向": "中国公民专门从事学校教育教学须依法取得相应教师资格；教师法10/11（五）/13条和教师资格条例2/4（七）/13条分别规定制度、研究生或本科资格学历及认定。跨学段任教另核相应认定与岗位条件。受委托高校认定本校在职/拟聘人员；其他按行政隶属关系认定，具体申报材料和招聘要求核当期公告。事业单位新聘原则公开招聘，政策安置、上级任命、涉密等例外；不是所有民办高校或科研助理均走该程序。 教育部令40号适用于高校科学研究及相关活动：学校为预防处理主体，学术委员会依法调查/认定；教师指导学生学术规范并必要审核论文，不能个人或AI查重分数直接认定。举报由指定受理部门处理，接触材料人员保密；按程序调查、申辩、认定、处理与复核。课程评分/考试作弊具体规程另核，不能把科研办法泛化所有成绩争议。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
                 "block": "china-salary",
@@ -34485,7 +34762,7 @@
             },
             {
               "学历段": "岗位聘用",
-              "岗位方向": "高校教师岗位多经事业单位公开招聘与院校评聘，具体以招聘公告与院校制度为准。",
+              "岗位方向": "中国公民专门从事学校教育教学须依法取得相应教师资格；教师法10/11（五）/13条和教师资格条例2/4（七）/13条分别规定制度、研究生或本科资格学历及认定。跨学段任教另核相应认定与岗位条件。受委托高校认定本校在职/拟聘人员；其他按行政隶属关系认定，具体申报材料和招聘要求核当期公告。事业单位新聘原则公开招聘，政策安置、上级任命、涉密等例外；不是所有民办高校或科研助理均走该程序。 教育部令40号适用于高校科学研究及相关活动：学校为预防处理主体，学术委员会依法调查/认定；教师指导学生学术规范并必要审核论文，不能个人或AI查重分数直接认定。举报由指定受理部门处理，接触材料人员保密；按程序调查、申辩、认定、处理与复核。课程评分/考试作弊具体规程另核，不能把科研办法泛化所有成绩争议。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
                 "block": "china-salary",
@@ -34495,7 +34772,7 @@
             },
             {
               "学历段": "评估与学术诚信",
-              "岗位方向": "评分按标准并事前公开；疑似学术不端与数据与利益冲突按院校制度与学术规范处理。",
+              "岗位方向": "中国公民专门从事学校教育教学须依法取得相应教师资格；教师法10/11（五）/13条和教师资格条例2/4（七）/13条分别规定制度、研究生或本科资格学历及认定。跨学段任教另核相应认定与岗位条件。受委托高校认定本校在职/拟聘人员；其他按行政隶属关系认定，具体申报材料和招聘要求核当期公告。事业单位新聘原则公开招聘，政策安置、上级任命、涉密等例外；不是所有民办高校或科研助理均走该程序。 教育部令40号适用于高校科学研究及相关活动：学校为预防处理主体，学术委员会依法调查/认定；教师指导学生学术规范并必要审核论文，不能个人或AI查重分数直接认定。举报由指定受理部门处理，接触材料人员保密；按程序调查、申辩、认定、处理与复核。课程评分/考试作弊具体规程另核，不能把科研办法泛化所有成绩争议。",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.theater",
                 "block": "china-salary",
@@ -34546,14 +34823,14 @@
           "china_intl": {
             "$join": [
               {
-                "$source": "r2-pay-3",
+                "$source": "r5-oews-concepts",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
                 "item": "actors.source-register.published.1"
               },
               {
-                "$source": "r2-pay-3",
+                "$source": "r5-oews-concepts",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -34578,14 +34855,14 @@
           "china_ref": {
             "$join": [
               {
-                "$source": "r2-pay-1",
+                "$source": "nbs",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
                 "item": "actors.source-register.published.1"
               },
               {
-                "$source": "r2-pay-1",
+                "$source": "nbs",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -34615,7 +34892,7 @@
               "月薪参考": {
                 "$join": [
                   {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
+                    "$fact": "r5-china-jiaojiang-featured-daily-2026",
                     "field": "display_value"
                   },
                   {
@@ -34641,7 +34918,7 @@
           "china_soc_row": "中国大陆薪资口径",
           "edu": "教师资格与训练与研究经历见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "r5-china-jiaojiang-featured-daily-2026"
           ],
           "sources_note": "来源链接按各自适用范围使用。",
           "ui": {
@@ -34664,14 +34941,14 @@
             {
               "$join": [
                 {
-                  "$source": "bls",
+                  "$source": "r5-projections",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
                   "item": "actors.source-register.published.1"
                 },
                 {
-                  "$source": "bls",
+                  "$source": "r5-projections",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -34683,14 +34960,14 @@
             {
               "$join": [
                 {
-                  "$source": "oews",
+                  "$source": "r5-wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
                   "item": "actors.source-register.published.1"
                 },
                 {
-                  "$source": "oews",
+                  "$source": "r5-wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -34704,68 +34981,68 @@
         },
         "bls_table": [
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-low",
             "指标": "薪资 · 10 分位",
             "数值": {
-              "$fact": "low",
+              "$fact": "r5-low",
               "field": "display_value"
             },
-            "说明": "本职业 2025 年工资数据的分布低端；该来源未提供该分位，本页保留缺口而不插值。"
+            "说明": "美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。"
           },
           {
             "指标": "薪资 · 25 分位",
-            "数值": "原文未提供",
-            "说明": "该来源未提供该分位，也不从其他分位插值。"
+            "数值": "86,840美元/年（第25分位）",
+            "说明": "美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-median",
             "指标": "薪资 · 中位数",
             "数值": {
-              "$fact": "median",
+              "$fact": "r5-median",
               "field": "display_value"
             },
-            "说明": "本职业 2025 年工资数据仅提供中位数：一半从业者低于、一半高于该值；该来源未提供小时口径。"
+            "说明": "美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。"
           },
           {
             "指标": "薪资 · 75 分位",
-            "数值": "原文未提供",
-            "说明": "该来源未提供该分位，也不从其他分位插值。"
+            "数值": "168,770美元/年（第75分位）",
+            "说明": "美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。"
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-high",
             "指标": "薪资 · 90 分位",
             "数值": {
-              "$fact": "high",
+              "$fact": "r5-high",
               "field": "display_value"
             },
-            "说明": "该来源未提供该分位，本页保留缺口。"
+            "说明": "美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024 就业 · 本职业人数",
+            "fact_ref": "r5-employment",
+            "指标": "2025就业存量",
             "数值": {
-              "$fact": "employment",
+              "$fact": "r5-employment",
               "field": "display_value"
             },
-            "说明": "2024 年本职业就业规模（O*NET 摘要页口径约 15,800 人）；随高教经费与学科需求变化。"
+            "说明": "美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 增长预测",
+            "fact_ref": "r5-growth",
+            "指标": "2025—2035预测增长",
             "数值": {
-              "$fact": "growth",
+              "$fact": "r5-growth",
               "field": "display_value"
             },
-            "说明": "O*NET 摘要页标注为「低于平均（Slower than average，1% 至 2%）」，本页按口径原文表述；未取得 BLS 职业展望本职业页一手口径。"
+            "说明": "美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。"
           },
           {
-            "fact_ref": "median",
-            "指标": "2024—2034 就业 · 预计空缺",
+            "fact_ref": "r5-openings",
+            "指标": "2025—2035年均空缺",
             "数值": {
-              "$fact": "openings",
+              "$fact": "r5-openings",
               "field": "display_value"
             },
-            "说明": "约 1,200 个，为预测期内因增长与更替等形成的合计空缺，不是每年净增。"
+            "说明": "美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。"
           }
         ],
         "boundary": {
@@ -34827,7 +35104,7 @@
           "type": "prose"
         },
         "growth": {
-          "$fact": "growth",
+          "$fact": "r5-growth",
           "field": "display_value"
         },
         "heading": {
@@ -34842,13 +35119,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024 年基期（O*NET 摘要页与详细资料页）",
+        "industry_period": "2025就业行业/2026档案",
         "industry_rows": [
           {
-            "fact_ref": "median",
-            "industry": "教育服务业（Educational Services，O*NET 摘要页 2024 年口径；未附更细的学科或院校类型分布与人数）",
+            "fact_ref": "r5-median",
+            "industry": "教育服务业（2025本职业100%）",
             "median": {
-              "$fact": "industry-theater",
+              "$fact": "r5-industry-theater",
               "field": "display_value"
             },
             "note": {
@@ -34859,7 +35136,7 @@
             }
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-median",
             "industry": "课堂与办公室与研究室与图书馆，按学期与教学周与科研项目安排",
             "median": {
               "$fact": "industry-education",
@@ -34873,10 +35150,10 @@
             }
           },
           {
-            "fact_ref": "median",
+            "fact_ref": "r5-median",
             "industry": "工作情境：每天邮件 96%、决策自由度「很大」79%、公开演讲每周以上（非每天）68%、每周工作时间超过 40 小时 60%、精确或准确「极其重要」45%、竞争「极度激烈」29%",
             "median": {
-              "$fact": "industry-amusement",
+              "$fact": "r5-industry-amusement",
               "field": "display_value"
             },
             "note": {
@@ -34888,7 +35165,7 @@
           },
           {
             "industry": "O*NET 未提供更细的学科与院校类型分布与行业工资",
-            "median": "统计不含自雇",
+            "median": "OEWS排除自雇；BLS自雇比例未给",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -34943,7 +35220,7 @@
           }
         ],
         "median": {
-          "$fact": "median",
+          "$fact": "r5-median",
           "field": "display_value"
         },
         "outlook_heading": {
@@ -34953,7 +35230,7 @@
           "type": "prose"
         },
         "outlook_period": {
-          "$fact": "growth",
+          "$fact": "r5-growth",
           "field": "period"
         },
         "wage_column_labels": [
@@ -34979,7 +35256,7 @@
             },
             "label": "较低工资位置",
             "value": {
-              "$fact": "low",
+              "$fact": "r5-low",
               "field": "display_value"
             }
           },
@@ -34993,7 +35270,7 @@
             },
             "label": "全国中位工资",
             "value": {
-              "$fact": "median",
+              "$fact": "r5-median",
               "field": "display_value"
             }
           },
@@ -35007,7 +35284,7 @@
             },
             "label": "较高工资位置",
             "value": {
-              "$fact": "high",
+              "$fact": "r5-high",
               "field": "display_value"
             }
           }
@@ -35160,7 +35437,7 @@
           {
             "geography": "美国",
             "horizon": {
-              "$fact": "growth",
+              "$fact": "r5-growth",
               "field": "period"
             },
             "interpretation": {
@@ -35177,15 +35454,15 @@
             },
             "metric": "就业总体变化",
             "occupation_scope": "高校经济学教师（O*NET-SOC 25-1063.00）",
-            "source_id": "bls",
+            "source_id": "r5-projections",
             "value": {
-              "$fact": "growth",
+              "$fact": "r5-growth",
               "field": "display_value"
             }
           },
           {
             "geography": "美国",
-            "horizon": "2024 年基期",
+            "horizon": "2025基期",
             "interpretation": {
               "$item": "actors.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -35200,8 +35477,8 @@
             },
             "metric": "本职业就业规模",
             "occupation_scope": "高校经济学教师（O*NET-SOC 25-1063.00）",
-            "source_id": "ratify",
-            "value": "2024 年约 15,800 人（O*NET 摘要页口径）；本职业预测低于平均，统计波动与高教经费与学科需求相关"
+            "source_id": "r5-projections",
+            "value": "本职业14600人；2035预计15000，非实时招聘"
           },
           {
             "geography": "美国与中国大陆",
@@ -35220,15 +35497,15 @@
             },
             "metric": "训练与资格与学术规范路径",
             "occupation_scope": "高校经济学教师（O*NET-SOC 25-1063.00）",
-            "source_id": "employer",
-            "value": "美国以研究生教育与教学或助教与研究经历为主（Job Zone Five，81% 博士学位），无统一执照；中国大陆高校教师应依《中华人民共和国教师法》与《教师资格条例》取得高等学校教师资格并在认定范围内任教，岗位多经事业单位公开招聘与院校评聘"
+            "source_id": "r5-teacher-reg",
+            "value": "O*NET教育反馈81%博士、10%硕士后证书、7%硕士（所列三项98%），不是98%全市场招聘样本；Job Zone Five/SVP8+为准备层级，不能推中国人人须博士。中国法定高校资格学历为研究生或本科，具体招聘可另设条件。 中国公民专门从事学校教育教学须依法取得相应教师资格；教师法10/11（五）/13条和教师资格条例2/4（七）/13条分别规定制度、研究生或本科资格学历及认定。跨学段任教另核相应认定与岗位条件。受委托高校认定本校在职/拟聘人员；其他按行政隶属关系认定，具体申报材料和招聘要求核当期公告。事业单位新聘原则公开招聘，政策安置、上级任命、涉密等例外；不是所有民办高校或科研助理均走该程序。"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35236,7 +35513,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35251,7 +35528,7 @@
           },
           {
             "href": {
-              "$source": "ratify",
+              "$source": "r5-teacher-reg",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35259,7 +35536,7 @@
             },
             "id": "ratify",
             "label": {
-              "$source": "ratify",
+              "$source": "r5-teacher-reg",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35273,16 +35550,10 @@
             }
           },
           {
-            "href": {
-              "$source": "employer",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "actors.source-register.published.1"
-            },
+            "href": null,
             "id": "employer",
             "label": {
-              "$source": "employer",
+              "$source": "r5-editor",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35528,7 +35799,7 @@
           },
           {
             "alternate_value": null,
-            "label": "OEWS 与 O*NET 全国工资（本职业 2025 年工资数据仅提供中位数）",
+            "label": "OEWS 与 O*NET 全国年工资（2025年10/25/50/75/90百分位；未提供小时口径）",
             "secondary_value": null,
             "value": {
               "$item": "actors.display.onet_structured_fields_block.bls",
@@ -36292,14 +36563,14 @@
           },
           {
             "href": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "bls",
+              "$source": "r5-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36313,15 +36584,9 @@
             }
           },
           {
-            "href": {
-              "$source": "employer",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "actors.source-register.published.1"
-            },
+            "href": null,
             "label": {
-              "$source": "employer",
+              "$source": "r5-editor",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36380,14 +36645,14 @@
           },
           {
             "href": {
-              "$source": "teacher",
+              "$source": "b12-anthropology",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "teacher",
+              "$source": "b12-anthropology",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36402,14 +36667,14 @@
           },
           {
             "href": {
-              "$source": "enrichment",
+              "$source": "b12-area",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "enrichment",
+              "$source": "b12-area",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36423,15 +36688,9 @@
             }
           },
           {
-            "href": {
-              "$source": "art",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "actors.source-register.published.1"
-            },
+            "href": null,
             "label": {
-              "$source": "art",
+              "$source": "r5-editor",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -37062,6 +37321,120 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "123,920美元/年（2025中位）",
+        "fact_id": "r5-median",
+        "market": "美国",
+        "measure": "中位年工资（2025年50百分位）",
+        "occupation_scope": "美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。",
+        "period": "2025",
+        "source_refs": [
+          "r5-wages",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "64,060美元/年（2025第10分位）",
+        "fact_id": "r5-low",
+        "market": "美国",
+        "measure": "年工资10百分位（2025年）",
+        "occupation_scope": "美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。",
+        "period": "2025",
+        "source_refs": [
+          "r5-wages",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "224,200美元/年（2025第90分位）",
+        "fact_id": "r5-high",
+        "market": "美国",
+        "measure": "年工资90百分位（2025年）",
+        "occupation_scope": "美国25-1063 2025年年薪10/25/50/75/90分位64060/86840/123920/168770/224200美元，来自当前O*NET全国工资原表，非插值。无小时数据；OEWS教师年工资直接采用所报年度工资率而非统一2080小时换算，不以2080小时倒推时薪。受雇税前直时工资、排除自雇；不能一概称暑期、项目或咨询工资全不计，实际报酬项按OEWS定义和合同核。分位非讲师/教授等级或起薪承诺。",
+        "period": "2025",
+        "source_refs": [
+          "r5-wages",
+          "r5-oews-concepts"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025美国本职业14600人",
+        "fact_id": "r5-employment",
+        "market": "美国",
+        "measure": "就业规模（存量统计）",
+        "occupation_scope": "美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。",
+        "period": "2025",
+        "source_refs": [
+          "r5-projections",
+          "r5-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025—2035精确增长2.4%；O*NET取整2%",
+        "fact_id": "r5-growth",
+        "market": "美国",
+        "measure": "预测就业变化（职业总量）",
+        "occupation_scope": "美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-projections",
+          "r5-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025—2035年均1000空缺，含增长与替代",
+        "fact_id": "r5-openings",
+        "market": "美国",
+        "measure": "预测期职位空缺（含更替需求）",
+        "occupation_scope": "美国25-1063精确行2025就业14600、2035预计15000，净增约400；BLS精确增长2.4%，O*NET趋势取整2%/Slower than average。2025—2035年均1000空缺含增长与替代，不是十年合计或年净增；自雇比例“—”不是0。BLS典型博士或专业学位、相关工作经验None、在岗训练None是统计分类，不保证无需研究/教学经历。",
+        "period": "2025—2035",
+        "source_refs": [
+          "r5-projections",
+          "r5-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025本职业教育服务业100%",
+        "fact_id": "r5-industry-theater",
+        "market": "美国",
+        "measure": "本职业在教育服务业的就业比例（2025年）",
+        "occupation_scope": "美国25-1063行业比例非院校结构",
+        "period": "2025",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "教育反馈三项98%；2025行业100%；更细院校工资未核",
+        "fact_id": "r5-industry-amusement",
+        "market": "美国",
+        "measure": "行业与情境信息的可得性边界",
+        "occupation_scope": "美国25-1063",
+        "period": "2025/2026",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "本职业中国全国精确工资分布未取得。NBS2025教育行业城镇非私营133539元/年、私营63908元/年为匹配行业税前均值：5+城镇法人单位，排除个体/自由职业；包括按定义工资奖金津贴，不能一概排除绩效或合同制。涵盖各类教育岗位，非高校经济学教师中位/分位/起薪/月薪。",
+        "fact_id": "r5-china-jiaojiang-featured-daily-2026",
+        "market": "中国内地",
+        "measure": "未取得的统计位置（中国大陆职业级工资）",
+        "occupation_scope": "本职业中国全国精确工资分布未取得。NBS2025教育行业城镇非私营133539元/年、私营63908元/年为匹配行业税前均值：5+城镇法人单位，排除个体/自由职业；包括按定义工资奖金津贴，不能一概排除绩效或合同制。涵盖各类教育岗位，非高校经济学教师中位/分位/起薪/月薪。",
+        "period": "2025",
+        "source_refs": [
+          "nbs"
+        ]
       }
     ]
   },
@@ -37070,7 +37443,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "经济学课程 · 教学与研究 · 评估与学术服务",
@@ -37121,7 +37494,7 @@
       "text": "高校经济学教师"
     }
   },
-  "source_content_sha256": "5cd7d9fdce54fa5274b173ef523f9a05b3adff1aaae155c52af58f1dfe0ebc95",
+  "source_content_sha256": "bdf233285d02860d7983810ffd93a4f296563ff6379afb8521c593f595de512f",
   "subject": {
     "canonical_slug": "economics-teachers-postsecondary",
     "name": "高校经济学教师",

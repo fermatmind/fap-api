@@ -5,13 +5,25 @@
       "fact:china-jiaojiang-featured-daily-2026": {
         "status": "mapped"
       },
+      "fact:china-jiaojiang-featured-daily-2026-g04-current": {
+        "status": "pending_mapping"
+      },
       "fact:employment": {
         "status": "mapped"
+      },
+      "fact:employment-g04-current": {
+        "status": "pending_mapping"
       },
       "fact:growth": {
         "status": "mapped"
       },
+      "fact:growth-g04-current": {
+        "status": "pending_mapping"
+      },
       "fact:high": {
+        "status": "pending_mapping"
+      },
+      "fact:high-g04-current": {
         "status": "pending_mapping"
       },
       "fact:identity": {
@@ -20,10 +32,19 @@
       "fact:industry-amusement": {
         "status": "pending_mapping"
       },
+      "fact:industry-amusement-g04-current": {
+        "status": "pending_mapping"
+      },
       "fact:industry-education": {
         "status": "pending_mapping"
       },
+      "fact:industry-education-g04-current": {
+        "status": "pending_mapping"
+      },
       "fact:industry-theater": {
+        "status": "pending_mapping"
+      },
+      "fact:industry-theater-g04-current": {
         "status": "pending_mapping"
       },
       "fact:low": {
@@ -34,6 +55,9 @@
       },
       "fact:openings": {
         "status": "mapped"
+      },
+      "fact:openings-g04-current": {
+        "status": "pending_mapping"
       },
       "item:actors.ai-impact.ai-impact-table.1": {
         "status": "mapped"
@@ -8971,20 +8995,8 @@
         "status": "mapped"
       },
       "career_risk_cards.risks.05.evidence_refs.02": {
-        "ref": {
-          "path": [
-            "components",
-            "career_risk_cards",
-            "risks",
-            {
-              "id": "project-data"
-            },
-            "evidence_refs",
-            1
-          ],
-          "source": "display"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "career_risk_cards.risks.05.mitigation": {
         "ref": {
@@ -22669,7 +22681,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "信贷授权员、核查员、文员的工作对象是个人或企业的信贷申请、信用记录与客户账户，产出是可复核的授权或拒绝决定、信用核查与公开记录核实结果、调查结果与建议报告、收费与付款记录以及对拒绝理由的说明；处理依据是机构的预定标准与授权权限、信用信息保护与查询披露要求，不是岗位名称。"
+              "本岗针对信用申请及账户做资料调查、记录和按既定标准的信用处理；具体Core/Supplemental/New分开。美国43-4041.00当前部分档案列16任务：4Core为收费付款记录、汇总分析调查信用信息、银行等信用服务信息获取及相互提供、访谈收集个人财务数据；7Supplemental为按预定标准决定新信用、签购单登账、接收申请信息、寄账单、公开记录核实、向订户转达报告、制备信用卡或账户标牌；5New为催收、投诉交易核实、前雇主等核推荐就业健康或社会行为、调查建议报告、挑逾期档案。New未提供重要性评分，不把全部称Core或每日必做。美国任务中的健康或逮捕记录核查不是中国合法收集授权。"
             ]
           },
           "id": "actors.profile.work-context-block.1",
@@ -22711,7 +22723,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "按申请与账单周期推进：先接收申请与委托材料并访谈收集数据，获取并交换征信信息，查阅公开记录核实事项，"
+              "编辑流程示例：核申请与信用资料，按实际预定标准形成决定或提交有权岗位，并按适用规则记录及通知；实际任务组合与权限依机构业务核。"
             ]
           },
           "id": "actors.profile.work-context-block.4",
@@ -22739,7 +22751,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "协作与汇报关系｜与销售与业务部门按约定接收申请，与征信机构与信用服务机构交换信息，与主管、风控与合规按权限提交与复核，"
+              "协作与汇报关系｜与申请人、业务、信用服务和审批岗位按权限核资料及提交；不设全国统一汇报链或审批权。"
             ]
           },
           "id": "actors.profile.work-context-block.6",
@@ -22781,7 +22793,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "信贷授权员、核查员、文员的工作可以分成三类相连但独立的工作面。第一类是申请接收与资料核查：接收邮寄或电话传来的信贷申请与签购单，通过面谈或电话向申请人收集完成信用报告所需的个人与财务数据，向银行、征信机构与其他信用服务机构获取信息并按请求互提供信息，查阅公开记录核实居住与产权、破产、留置、债务或欠税等事项，汇总并分析调查所得的信用信息。第二类是授权判定与决定通知：按预定标准评估计算机化的信用记录与还款历史，决定是否批准新信贷，编制调查结果与建议报告，处理申请并向申请人通知接受或拒绝，对拒绝给出具体、准确的理由并留存记录。第三类是账户记录与催收：记录客户的收费与付款、向客户寄送账单，在客户档案中识别并挑选逾期账户用于催收，电话联系客户催收逾期账款，与客户沟通解决投诉或核实财务与信贷交易。三类工作面交替进行，但依据、责任与授权不同；银行与信贷机构、批发与零售贸易、行政支持与征信服务等方向的侧重也不同。"
+              "美国43-4041.00当前部分档案列16任务：4Core为收费付款记录、汇总分析调查信用信息、银行等信用服务信息获取及相互提供、访谈收集个人财务数据；7Supplemental为按预定标准决定新信用、签购单登账、接收申请信息、寄账单、公开记录核实、向订户转达报告、制备信用卡或账户标牌；5New为催收、投诉交易核实、前雇主等核推荐就业健康或社会行为、调查建议报告、挑逾期档案。New未提供重要性评分，不把全部称Core或每日必做。美国任务中的健康或逮捕记录核查不是中国合法收集授权。 下方三工作面为编辑组织示例，非所有岗位完整固定流程。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.answer",
@@ -22893,7 +22905,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "记录收费与付款 → 寄送账单 → 整理客户档案 → 挑选逾期账户 → 电话催收 → 解决投诉与核实交易"
+              "收费付款记录Core；寄账单与登账Supplemental；逾期档案、催收、投诉交易核实New，不是全部每日固定链。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.systems.shared.value",
@@ -22963,7 +22975,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的核心目的：信贷分析师针对授信判断更深入的信用风险；信贷专员与客户接洽并推动贷款申请；会计师和审计师编制与审计财务信息；财务经理统筹财务活动与团队；簿记会计与审计文员记录与核对账务；银行柜员办理柜台现金与账户业务。"
+              "按主要任务比较：信用分析含财报比率与风险报告；信贷专员也信用分析并限额内批准或转呈；会计审计编审财报及税务；财务经理统筹资金团队并有贷款审批；簿记文员维护账务与核差异；柜员处理现金及客户账户，兼有贷款资料等任务。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.purpose.secondary",
@@ -22991,7 +23003,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "个人或企业的信贷申请、信用记录与客户账户、收费与付款记录；依据是机构预定标准与授权权限、信用信息保护与查询披露要求、不歧视与不利行动通知规定。"
+              "对象为信用申请、记录、账户和收费付款；按机构预定标准与实际权限处理。中国PIPL/征信/贷款规则与美国RegB通知条款分别核，不能把不利行动通知统称中国规则。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.inputs.primary",
@@ -23005,7 +23017,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的对象与依据：授信风险与财务报表（信贷分析师）、客户贷款需求与产品（信贷专员）、账簿与财务报告及会计准则（会计审计）、部门财务活动（财务经理）、凭证与账目（簿记文员）、柜台交易与账户（银行柜员）。"
+              "相邻可共用信用财务、客户账户和贷款资料，分别侧重风险分析、贷款流程、财报审计、财务统筹、账务记录或柜台交易，不能因同一资料绝对划断。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.inputs.secondary",
@@ -23047,7 +23059,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的过程：数据与财报分析到风险判断（信贷分析师）、客户接洽到申请推进（信贷专员）、记账到编制与审计报告（会计审计）、统筹财务计划与管控（财务经理）、登账到对账与核对（簿记文员）、受理到办理柜台交易（银行柜员）。"
+              "信用分析做财报比率及风险报告；信贷专员分析信用、限额内审批或转呈；会计审计编审账务；财务经理资金风险和贷款决策；簿记文员录账对账；柜员交易核实及客户资料。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.process.secondary",
@@ -23122,7 +23134,8 @@
           },
           "id": "actors.display.career_quick_answers_block.comparison.responsibility.primary",
           "source_refs": [
-            "onet"
+            "g04-personal-loan",
+            "g04-working-loan"
           ],
           "type": "prose"
         },
@@ -23131,7 +23144,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的责任主体：信贷分析师对信用风险判断负责；信贷专员对客户接洽与申请推进负责；会计审计对财务信息与审计意见负责；财务经理对部门财务活动负责；簿记文员对账务记录负责；银行柜员对柜台交易负责。"
+              "实际责任按职责和授权核；信贷专员非只业务推进，经理非只管理团队；相邻也可处理信用、贷款或催收，不因职业名称自动转移权限。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.responsibility.secondary",
@@ -23159,7 +23172,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "与销售与业务部门按约定接收申请；与征信机构与信用服务机构交换信息；与主管、风控与合规按权限提交与复核；遇到数据缺口、疑似欺诈、投诉或超出授权范围的情形时停止自行处置并按制度升级并保留记录。"
+              "按真实许可向业务、客户、信用服务等岗位收集核对资料；编辑异常建议：记录事实、缺口与待核项，按真实权限联系有权岗位；普通投诉应按授权核实，不一概停止处理，也不由本页授予中止整体业务或恢复权。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.cooperation.primary",
@@ -23201,7 +23214,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "岗位名称相近不代表权限相同：对象是具体信贷申请的授权与核查、更深入的信用风险分析、账务与审计、财务统筹、账务记录还是柜台交易，以及是否承担授权与合规责任，决定职责范围与授权，不能按名称互换。"
+              "主要对象输出与具体授权共同划范围，信用分析、授权核查、贷款、账户、财务管理的任务可重叠；不得按名称互换或宣称本岗从不分析信用。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.comparison.boundary.primary",
@@ -23257,7 +23270,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "要确认申请人身份、所填数据与来源的时点与完整性，区分已核实与待确认信息；用来源不明或未核实的数据判定，会让授权决定从一开始就站不住。"
+              "编辑风险推演：要确认申请人身份、所填数据与来源的时点与完整性，区分已核实与待确认信息；用来源不明或未核实的数据判定，可能使授权决定从一开始就站不住。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.01.question",
@@ -23271,12 +23284,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "要按流程获取征信信息并查阅公开记录核实居住与产权、破产、留置、债务或欠税等事项；核实不到位会把错误或不完整信息带入决定。"
+              "美国公开记录核实为Supplemental、前雇主等查询为New；数据对象与取得使用条件按当地法及真实权限核。征信业管理条例13/14/18/20/21/22/25按主体核：个人收集/查询同意和用途有法定例外；企业资料规则另列；个人疾病与病史等属于征信机构禁止采集内容，不能因美国任务就收集。经营个人征信业务机构须明确工作人员查询个人信息的权限程序并登记；征信机构或信息提供者收到错误遗漏异议应按规定标注，自收到异议起20日内核查处理并书面答复。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.02.question",
           "source_refs": [
-            "onet"
+            "onet",
+            "g04-credit"
           ],
           "type": "prose"
         },
@@ -23285,7 +23299,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "要按机构预定标准评估计算机化的信用记录与还款历史，并保留判定依据；凭个人偏好或经验替代标准会造成不一致与争议。"
+              "编辑风险推演：要按机构预定标准评估计算机化的信用记录与还款历史，并保留判定依据；凭个人偏好或经验替代标准可能造成不一致与争议。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.03.question",
@@ -23299,12 +23313,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "授权或拒绝决定要能说清依据的信用信息与适用标准；对拒绝要给出具体、准确的理由，不能以含糊或不可解释的技术输出替代。"
+              "美国Regulation B§1002.9：适用不利行动通知可直接说明具体主要理由，也可按条款通知请求理由的权利；不是任何拒绝都必须当场完整说明。一般完整申请30日通知，企业信用有收入及贸易信用等不同安排；具体理由须反映实际采用因素，不能仅称内部政策或评分不足。解释义务不等所有决定必须人工。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.04.question",
           "source_refs": [
-            "onet"
+            "g04-regb"
           ],
           "type": "prose"
         },
@@ -23327,12 +23341,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "要在授权范围内查询、使用与披露个人与企业信用信息，遵循最小必要原则；越权查询或不当披露会造成合规与法律风险。"
+              "个人信息保护法仅已识别或可识别自然人信息，金融账户属敏感个人信息；企业信用信息不一概等敏感个人信息。处理需核第13条等合法基础、目的明确、最小必要与准确要求，同意并非唯一基础。 征信业管理条例13/14/18/20/21/22/25按主体核：个人收集/查询同意和用途有法定例外；企业资料规则另列；个人疾病与病史等属于征信机构禁止采集内容，不能因美国任务就收集。经营个人征信业务机构须明确工作人员查询个人信息的权限程序并登记；征信机构或信息提供者收到错误遗漏异议应按规定标注，自收到异议起20日内核查处理并书面答复。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.05.question",
           "source_refs": [
-            "onet"
+            "g04-pipl",
+            "g04-credit",
+            "g04-personal-loan",
+            "g04-working-loan"
           ],
           "type": "prose"
         },
@@ -23355,7 +23372,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "遇到数据缺口、疑似欺诈、客户投诉或超出授权范围等情形，要停止自行处置，按机构制度升级并保留记录，把已确认与待定事项写清楚。"
+              "编辑异常建议：记录事实、缺口与待核项，按真实权限联系有权岗位；普通投诉应按授权核实，不一概停止处理，也不由本页授予中止整体业务或恢复权。"
             ]
           },
           "id": "actors.display.career_quick_answers_block.judgments.06.question",
@@ -23369,7 +23386,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "申请接收与资料整理｜接收申请并整理资料｜接收邮寄或电话传来的信贷申请与签购单，从销售人员或商户处通过电话接收信息，必要时为客户制备信用卡或赊购卡与账户标牌。"
+              "美国Supplemental：接收申请或签购信息、签购单登账及制备卡片标牌；不是全部岗位每日必做。"
             ]
           },
           "id": "actors.display.responsibilities_block.01",
@@ -23383,7 +23400,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "访谈与数据收集｜访谈收集个人与财务数据｜通过电话或面谈访谈信贷申请人，收集完成信用报告所需的个人与财务数据，并核对资料完整性。"
+              "美国Core：电话或面谈访谈，收集信用报告所需个人财务资料；具体数据取得处理必须当地合法获准。"
             ]
           },
           "id": "actors.display.responsibilities_block.02",
@@ -23397,7 +23414,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "征信获取与记录核实｜获取信用信息并核实记录｜向银行、征信机构与其他信用服务机构获取申请人信息并按请求互提供信息，查阅公开资料核实居住与产权、破产、留置、债务或欠税等事项，联系前雇主或相关人士核实推荐、雇佣与历史信息。"
+              "美国获取银行等信用服务信息并相互提供为Core；公开记录核实为Supplemental；前雇主等核推荐就业健康社会行为为New。征信业管理条例13/14/18/20/21/22/25按主体核：个人收集/查询同意和用途有法定例外；企业资料规则另列；个人疾病与病史等属于征信机构禁止采集内容，不能因美国任务就收集。经营个人征信业务机构须明确工作人员查询个人信息的权限程序并登记；征信机构或信息提供者收到错误遗漏异议应按规定标注，自收到异议起20日内核查处理并书面答复。"
             ]
           },
           "id": "actors.display.responsibilities_block.03",
@@ -23411,7 +23428,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "信用评估与授权判定｜按预定标准评估并判定｜评估计算机化的信用记录与还款历史，按预定标准决定是否批准新信贷；汇总并分析调查所得信用信息，编制调查结果与建议报告。"
+              "美国汇总分析调查信用资料为Core；预定标准批准新信用为Supplemental；调查建议报告为New。分档非频率或中国授权。"
             ]
           },
           "id": "actors.display.responsibilities_block.04",
@@ -23425,12 +23442,12 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "决定处理与通知｜处理申请并通知决定｜处理信贷申请并向申请人通知接受或拒绝，对拒绝给出具体、准确的理由并留存；通过邮寄或电话向订户转达信用报告信息。"
+              "职业总述含处理申请及通知；向订户转达信用报告为Supplemental，通知理由法律另按法域核。美国Regulation B§1002.9：适用不利行动通知可直接说明具体主要理由，也可按条款通知请求理由的权利；不是任何拒绝都必须当场完整说明。一般完整申请30日通知，企业信用有收入及贸易信用等不同安排；具体理由须反映实际采用因素，不能仅称内部政策或评分不足。解释义务不等所有决定必须人工。"
             ]
           },
           "id": "actors.display.responsibilities_block.05",
           "source_refs": [
-            "onet"
+            "g04-regb"
           ],
           "type": "prose"
         },
@@ -23439,7 +23456,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
-              "账户记录与催收｜记录收费付款并催收｜记录客户的收费与付款、向客户寄送账单并把签购单归档到客户分户账，审阅个人或企业客户档案、识别并挑选逾期账户用于催收，电话催收逾期账款并与客户沟通解决投诉或核实财务与信贷交易。"
+              "美国收费付款记录Core；寄账单/签购单登账Supplemental；逾期档案、催收、投诉交易核实New。具体分工、数据及催收权限另核。"
             ]
           },
           "id": "actors.display.responsibilities_block.06",
@@ -23467,7 +23484,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "信贷授权员、核查员、文员的工作以办公环境中的资料处理、电话沟通与系统核对为主，需要长时间坐着处理数据与文件，并通过电话与面谈频繁沟通，同时按申请与账单周期推进；"
+              "美国档案展示电话、接触他人、久坐、准确等标准化评分，不是响应百分比；实际场所、节奏和工时须按目标岗位核。"
             ]
           },
           "id": "actors.display.work_context_block.summary",
@@ -23481,12 +23498,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作场所｜O*NET 2026 年对信贷授权员、核查员、文员（43-4041.00）的调查：78% 在工作情境调查中把「环境可控的室内作业」记为最高档回答；工作以银行与信贷机构网点、消费金融与征信服务机构、批发与零售企业的信用或账务后台为主。"
+              "美国当前可控室内Context评分78/100，不是78%最高档；未取得中国具体网点、后台或单位分布。"
             ]
           },
           "id": "actors.display.work_context_block.locations",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "g04-scales"
           ],
           "type": "prose"
         },
@@ -23495,12 +23513,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "主要对象与设备｜信贷申请与签购单、信用记录与公开记录、客户账户与账单、收费与付款记录、业务与征信查询系统、电子表格与办公软件、电话与邮件、打印机与归档系统；O*NET 技术档案列出雇主招聘中提到的电子表格、办公软件与数据库查询等技术关键词；对象与工具清单来自本职业任务与工作活动，不是采购或作业授权建议。"
+              "对象含申请、信用记录、账单账户与收费付款；软件目录及招聘关键词分开。2025 Lightcast全美招聘热门：Excel26%、Office17%、Outlook12%、Word与PowerPoint各7%、SAP与SQL各3%、Tableau与Access各1%、SharePoint小于1%。招聘词不是软件采用率、生成式AI比例、熟练度或强制门槛。"
             ]
           },
           "id": "actors.display.work_context_block.materials",
           "source_refs": [
-            "onet"
+            "g04-hot"
           ],
           "type": "prose"
         },
@@ -23509,7 +23527,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "再按预定标准评估信用记录并作出授权或拒绝决定、编制调查结果与建议、处理申请并通知，随后记录收费与付款、寄送账单并处理逾期催收；遇到数据缺口、疑似欺诈、投诉或超出授权范围的情形时停止自行处置并按制度升级；交接前整理核查与决定记录。"
+              "随后按实际授权评估、记录并通知，客户账户处理看分工；这是编辑流程非所有任务固定链。编辑异常建议：记录事实、缺口与待核项，按真实权限联系有权岗位；普通投诉应按授权核实，不一概停止处理，也不由本页授予中止整体业务或恢复权。"
             ]
           },
           "id": "actors.display.work_context_block.organization",
@@ -23523,12 +23541,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "节奏与强度｜O*NET 2026 年对信贷授权员、核查员、文员（43-4041.00）的调查：92% 在工作情境调查中把「坐着」与「时间压力」记为最高档回答，83% 把「重复同一任务」记为高重要度、72% 把「重复动作」记为高档回答，88% 把「自主决定任务与优先级」记为高档回答、85% 把「决策自由度」记为高档回答；申请与账单周期和催收时限决定当日节奏。"
+              "当前情境评分：久坐92、时间压力92、重复任务重要性83、重复动作72、优先级88、决策自由85（0—100）。不是最高档响应人数百分比，不证明月初月末季末更忙或实际每周工时。"
             ]
           },
           "id": "actors.display.work_context_block.schedule",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "g04-scales"
           ],
           "type": "prose"
         },
@@ -23537,12 +23556,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "并向主管与客户提交结论与记录；O*NET 2026 年对信贷授权员、核查员、文员（43-4041.00）的调查：100% 把电话沟通、96% 把电子邮件、93% 把面对面讨论记为最高频回答，97% 把与他人接触、92% 把对外部客户或公众的接触记为高档回答。"
+              "并按单位流程提交记录；美国Context评分电话100、邮件96、面对面93、接触他人97、外部客户92（0—100），不能解读成对应比例每天或持续接触。"
             ]
           },
           "id": "actors.display.work_context_block.collaboration",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "g04-scales"
           ],
           "type": "prose"
         },
@@ -23551,12 +23571,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "复核与责任链条｜O*NET 2026 年对信贷授权员、核查员、文员（43-4041.00）的调查：93% 认为准确与严谨为最高重要度、91% 把与工作团队协作记为高重要度，88% 把决策结果对同事或公司业绩的影响记为高档回答、54% 把「错误的后果」记为高档回答；申请、核查与决定记录按机构规定留痕，授权与合规事项须按权限与制度处理并存档。"
+              "当前情境评分准确93、团队91、决策影响88、错误后果54（0—100）；不是最高档回答人数或真实出错率，责任按实际权限规则核。"
             ]
           },
           "id": "actors.display.work_context_block.review",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "g04-scales"
           ],
           "type": "prose"
         },
@@ -23565,12 +23586,15 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "质量与职业要求｜O*NET 2026 年对信贷授权员、核查员、文员（43-4041.00）的调查：71% 把与不满或失礼客户的接触、78% 把冲突情形记为高档回答，56% 把竞争程度记为高档回答；涉及个人与企业信用信息保护、查询与披露权限、不歧视与不利行动通知时，以适用规定与机构制度为准，本页不构成作业授权或合规意见。"
+              "美国情境评分不满客户71、冲突78、竞争56（0—100），不是人数比例或冲突发生率。个人信息保护法仅已识别或可识别自然人信息，金融账户属敏感个人信息；企业信用信息不一概等敏感个人信息。处理需核第13条等合法基础、目的明确、最小必要与准确要求，同意并非唯一基础。 美国Regulation B§1002.9：适用不利行动通知可直接说明具体主要理由，也可按条款通知请求理由的权利；不是任何拒绝都必须当场完整说明。一般完整申请30日通知，企业信用有收入及贸易信用等不同安排；具体理由须反映实际采用因素，不能仅称内部政策或评分不足。解释义务不等所有决定必须人工。"
             ]
           },
           "id": "actors.display.work_context_block.quality",
           "source_refs": [
-            "onet"
+            "onet",
+            "g04-scales",
+            "g04-pipl",
+            "g04-regb"
           ],
           "type": "prose"
         },
@@ -23593,7 +23617,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "信贷授权员、核查员、文员的任务、工作活动、工作情境百分比、准备层级与兴趣代码 CES"
+              "本岗部分档案：16任务4Core/7Supplemental/5New，55情境0—100评分、Zone1-2及CES；响应分档和教育分布未取得。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.onet",
@@ -23607,7 +23631,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2024 年就业约 12,000 人、预测标签 Decline（-1% 或更低，约 -6%）与 Job Zone 1-2（SVP 低于 6.0）"
+              "美国本岗2025就业12,200人→2035预测11,300人，2025—2035变化-7%（Decline）；年均空缺900个含增长与替换，不是累计、每年净增或录用率。预测非已发生变化。 美国当前部分档案Job Zone1-2、SVP低于6；高中文凭或GED及几日至一年在岗训练是跨职业层级通用说明，不是本岗实际新聘学历百分比、统一培训期或中国学历门槛。本岗教育响应分布未取得。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.bls",
@@ -23621,7 +23645,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "2024 年行业分布（金融与保险 33%、批发贸易 12%、零售贸易 11%、其他行业 24%）与技术工具"
+              "美国2025本岗行业就业：金融保险27%、零售17%、批发14%、行政支持11%、企业管理11%、其他20%含房地产租赁；合计100%。这是就业归类非工资，不保留旧33/12/11/10/10/24为当前。 2025 Lightcast全美招聘热门：Excel26%、Office17%、Outlook12%、Word与PowerPoint各7%、SAP与SQL各3%、Tableau与Access各1%、SharePoint小于1%。招聘词不是软件采用率、生成式AI比例、熟练度或强制门槛。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.employer",
@@ -23635,7 +23659,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆银行信贷前台、消费金融与征信服务岗位的分类与用工语境，与中国职业级工资缺口"
+              "中国规则按个人信息、征信业务和贷款主体分别核，不从统计首页推统一职业分類或用工分布。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.cn",
@@ -23649,7 +23673,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆行业均值代理与职业级工资缺口"
+              "证据不足：中国本岗全国工资分布、招聘报价与职业一一映射未取得。NBS2025金融业非私营税前年均211,164元、私营140,451元；批发零售非私营135,749元、私营69,622元；须法人主营行业匹配才作条件背景，非本岗中位/月到手。城镇5人及以上法人、不含个体自由职业，均为行业背景，不代本岗工资。"
             ]
           },
           "id": "actors.display.onet_structured_fields_block.sag",
@@ -23663,7 +23687,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "信贷授权员、核查员、文员在美国对应 O*NET-SOC 43-4041.00（Credit Authorizers, Checkers, and Clerks）。工作内容包括授权客户账户的信贷交易，并调查个人或企业申请人的历史与信用状况：接收邮寄或电话传来的信贷申请与签购单，通过面谈或电话访谈申请人以收集完成信用报告所需的个人与财务数据，向银行、征信机构与其他信用服务机构获取信息并按请求互提供信息，查阅公开资料核实居住与产权、破产、留置、债务或欠税等事项，按预定标准评估计算机化的信用记录与还款历史以决定是否批准新信贷，汇总并分析调查所得信用信息、编制调查结果与建议报告，处理申请并向申请人通知接受或拒绝，记录客户的收费与付款、向客户寄送账单并把签购单归档，审阅客户档案识别并挑选逾期账户用于催收、电话催收逾期账款，与客户沟通解决投诉或核实财务与信贷交易。中国侧，同类岗位分散在银行信贷前台、消费金融与征信服务等方向，中美两套分类不是一一对应：本页不把美国的准备层级、工资或资格套用到中国大陆，也不把信贷分析师、信贷专员、会计师和审计师、财务经理、簿记会计与审计文员或银行柜员的职责并入本职业。"
+              "美国O*NET-SOC43-4041.00 Credit Authorizers, Checkers, and Clerks。美国43-4041.00当前部分档案列16任务：4Core为收费付款记录、汇总分析调查信用信息、银行等信用服务信息获取及相互提供、访谈收集个人财务数据；7Supplemental为按预定标准决定新信用、签购单登账、接收申请信息、寄账单、公开记录核实、向订户转达报告、制备信用卡或账户标牌；5New为催收、投诉交易核实、前雇主等核推荐就业健康或社会行为、调查建议报告、挑逾期档案。New未提供重要性评分，不把全部称Core或每日必做。美国任务中的健康或逮捕记录核查不是中国合法收集授权。 中国只列编辑检索方向，未取一一分类映射，不把美国准备、工资或资料核查对象直接套用。"
             ]
           },
           "id": "actors.display.definition_block.definition",
@@ -24166,7 +24190,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "指银行、信贷机构或征信服务方是否真的把工具放进流程。采用取决于预算、数据权限与合规要求、模型验证与人员培训，通常慢于技术能力本身。"
+              "组织采用须核真实接入、数据权限、验证与训练；本轮未取本岗采用比例或速度，不说通常慢于技术能力。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.3",
@@ -24181,7 +24205,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "引入工具时责任不能随系统一起转移；下面是本职业可执行的人工控制步骤。"
+              "以下为编辑核对建议及注明法域的规则，实际责任按法律关系、机构权限与合同核，非本页统一操作授权。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.4",
@@ -24241,7 +24265,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "指编制数量与收入的实际变化，由信贷业务量、风控与合规要求、自动化工具采用以及地区金融业结构共同决定；本页没有可核对的本职业单职业因果数据。"
+              "业务、制度、地区与技术等可作待检验因素，本轮未取本岗编制工资因果估计，不把可能影响说成共同决定的已证因果。"
             ]
           },
           "id": "actors.ai-impact.ai-impact-table.8",
@@ -24286,7 +24310,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答：目前可核对的是任务层面的变化，而不是岗位替代的时间表。业务与征信查询系统、电子表格与办公软件、记录比对与规则引擎、信函与通知模板可减少材料分类、缺项提示、记录比对与通知草案等重复工作；但数据来源与适用标准判断、授权或拒绝决定、拒绝理由的说明、查询与披露的权限合规、与客户沟通解决投诉仍依赖人工，并受适用规定与机构制度约束。技术暴露不等于组织采用，更不等于岗位消失或收入变化。"
+              "本轮核到部分任务档案、Context评分、招聘关键词及规则，未取得本岗AI上线效率实验。材料归集、缺项、比对、模板为编辑可试方向，须验证准确与权限。自动化决定是否复审及通知按法域，不一概说依赖人工。中国适用个人贷款管理办法21条：审贷分离授权独立审批；适用线上自动审批的贷款人应建立人工复审机制作为补充并设触发条件，非每笔都人工。贷后发现不能有效识别风险时由贷款人停止自动审批流程；流动资金贷款办法20条按分级和转授权。二者2024-07-01施行，直接主体为境内商业银行等吸收公众存款机构，其他业务按参照条款与自身规则核。 美国Regulation B§1002.9：适用不利行动通知可直接说明具体主要理由，也可按条款通知请求理由的权利；不是任何拒绝都必须当场完整说明。一般完整申请30日通知，企业信用有收入及贸易信用等不同安排；具体理由须反映实际采用因素，不能仅称内部政策或评分不足。解释义务不等所有决定必须人工。"
             ]
           },
           "id": "actors.display.ai_impact_table.answer",
@@ -24316,13 +24340,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 对信贷授权员、核查员、文员（43-4041.00）的雇主技术关键词统计"
+              "2025 Lightcast全美43-4041.00招聘技术词，O*NET展示"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.1.object",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-hot"
           ],
           "type": "prose"
         },
@@ -24361,7 +24384,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "研究不提供本职业单职业分数、采用率或替代日期。"
+              "本轮未取得43-4041.00精确匹配暴露评分及采用或替代因果，不声称ILO完全没有职业明细。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.2.limit",
@@ -24376,7 +24399,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 对信贷授权员、核查员、文员（43-4041.00）的任务与工作情境调查"
+              "O*NET当前部分任务及Context标准化评分档案，非统一2026调查年"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.object",
@@ -24391,7 +24414,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "列出接收申请、访谈收集数据、获取征信与核实公开记录、按标准评估与授权、编制报告、处理申请与通知、记录收费付款与催收等任务及工作情境百分比。"
+              "美国43-4041.00当前部分档案列16任务：4Core为收费付款记录、汇总分析调查信用信息、银行等信用服务信息获取及相互提供、访谈收集个人财务数据；7Supplemental为按预定标准决定新信用、签购单登账、接收申请信息、寄账单、公开记录核实、向订户转达报告、制备信用卡或账户标牌；5New为催收、投诉交易核实、前雇主等核推荐就业健康或社会行为、调查建议报告、挑逾期档案。New未提供重要性评分，不把全部称Core或每日必做。美国任务中的健康或逮捕记录核查不是中国合法收集授权。 美国当前55项情境显示0—100标准化评分（非人群百分比）：电话100、接触他人97、邮件96、面对面93、准确93、外部客户92、久坐92、时间压力92、团队91、优先级88、决策影响88、决策自由85、重复任务重要性83、冲突78、可控室内78、重复动作72、不满客户71、竞争56、错误后果54、自动化49。未取得响应分档分布，不能据评分说多少人每日、持续或最高档。页面2026更新不是统一调查年。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.3.conclusion",
@@ -24421,7 +24444,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势（BLS 2024—2034 年预测）"
+              "O*NET就业趋势：BLS2025—2035预测"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.object",
@@ -24436,13 +24459,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2024 年就业约 12,000 人，预测标签 Decline（-1% 或更低，约 -6%），年均约 1,000 个含增长与替换的空缺。"
+              "美国本岗2025就业12,200人→2035预测11,300人，2025—2035变化-7%（Decline）；年均空缺900个含增长与替换，不是累计、每年净增或录用率。预测非已发生变化。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.4.conclusion",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -24481,7 +24503,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "要求明确 AI 系统的角色、责任、记录与人工监督。"
+              "NIST AI RMF1.0为自愿治理建议，角色责任记录与监督不是中国强制审批法。"
             ]
           },
           "id": "actors.display.ai_impact_table.evidence.5.conclusion",
@@ -24526,7 +24548,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 为信贷授权员、核查员、文员（43-4041.00）列出保留客户收费与付款记录、汇总分析调查所得信用信息、向银行与征信机构获取并互提供信息、访谈申请人收集个人与财务数据、按预定标准评估信用记录决定是否批准新信贷、接收申请与签购单、寄送账单、查阅公开资料核实、向订户转达信用报告、制备信用卡或账户标牌、电话催收逾期账款、与客户沟通解决投诉或核实交易、联系相关人士核实信息、编制调查结果与建议报告、审阅客户档案挑选逾期账户等任务。"
+              "美国43-4041.00当前部分档案列16任务：4Core为收费付款记录、汇总分析调查信用信息、银行等信用服务信息获取及相互提供、访谈收集个人财务数据；7Supplemental为按预定标准决定新信用、签购单登账、接收申请信息、寄账单、公开记录核实、向订户转达报告、制备信用卡或账户标牌；5New为催收、投诉交易核实、前雇主等核推荐就业健康或社会行为、调查建议报告、挑逾期档案。New未提供重要性评分，不把全部称Core或每日必做。美国任务中的健康或逮捕记录核查不是中国合法收集授权。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.1.answer",
@@ -24556,13 +24578,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 技术档案列出雇主在该岗位招聘中提到的电子表格、办公软件与数据库查询等技术关键词（如 Excel、Office、Outlook、Word、PowerPoint、SAP、SQL）；这属于招聘市场信号，不代表使用率或熟练度。"
+              "2025 Lightcast全美招聘热门：Excel26%、Office17%、Outlook12%、Word与PowerPoint各7%、SAP与SQL各3%、Tableau与Access各1%、SharePoint小于1%。招聘词不是软件采用率、生成式AI比例、熟练度或强制门槛。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.2.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-hot"
           ],
           "type": "prose"
         },
@@ -24586,7 +24607,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。O*NET 的工作情境百分比描述任务与环境条件（如电话与邮件沟通频率、久坐、重复任务与决策自由度），不含技术采用、编制数量或个人收入的变化数据。"
+              "不能。美国当前55项情境显示0—100标准化评分（非人群百分比）：电话100、接触他人97、邮件96、面对面93、准确93、外部客户92、久坐92、时间压力92、团队91、优先级88、决策影响88、决策自由85、重复任务重要性83、冲突78、可控室内78、重复动作72、不满客户71、竞争56、错误后果54、自动化49。未取得响应分档分布，不能据评分说多少人每日、持续或最高档。页面2026更新不是统一调查年。 情境评分不能推AI采用、编制变化或个人收入。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.3.answer",
@@ -24631,13 +24652,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）显示该细分 2024 年约 12,000 人，预测标签为 Decline（-1% 或更低，约 -6%），年均约 1,000 个含增长与替换的空缺；该预测不含技术替代时点。"
+              "美国本岗2025就业12,200人→2035预测11,300人，2025—2035变化-7%（Decline）；年均空缺900个含增长与替换，不是累计、每年净增或录用率。预测非已发生变化。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.5.answer",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -24661,7 +24681,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。任务暴露度量说明任务与技术的接近程度，不给出替代日期或单职业预测。"
+              "任务暴露不直接推替代日期；本轮未取本岗精确匹配分数、采用或替代因果，不称所有研究均无职业值。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.6.answer",
@@ -24691,7 +24711,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "应明确角色与责任、保留访问与操作记录并设置人工监督点；治理框架不替代信用信息保护、查询披露权限、不歧视与不利行动通知要求。"
+              "NIST作为自愿参考；真实数据、审批及通知规则按法域和机构核。中国适用个人贷款管理办法21条：审贷分离授权独立审批；适用线上自动审批的贷款人应建立人工复审机制作为补充并设触发条件，非每笔都人工。贷后发现不能有效识别风险时由贷款人停止自动审批流程；流动资金贷款办法20条按分级和转授权。二者2024-07-01施行，直接主体为境内商业银行等吸收公众存款机构，其他业务按参照条款与自身规则核。 美国Regulation B§1002.9：适用不利行动通知可直接说明具体主要理由，也可按条款通知请求理由的权利；不是任何拒绝都必须当场完整说明。一般完整申请30日通知，企业信用有收入及贸易信用等不同安排；具体理由须反映实际采用因素，不能仅称内部政策或评分不足。解释义务不等所有决定必须人工。"
             ]
           },
           "id": "actors.display.ai_impact_table.questions.7.answer",
@@ -24721,13 +24741,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供信贷授权员、核查员、文员的任务、工作活动、工作情境百分比与兴趣代码 CES"
+              "美国43-4041.00当前部分档案列16任务：4Core为收费付款记录、汇总分析调查信用信息、银行等信用服务信息获取及相互提供、访谈收集个人财务数据；7Supplemental为按预定标准决定新信用、签购单登账、接收申请信息、寄账单、公开记录核实、向订户转达报告、制备信用卡或账户标牌；5New为催收、投诉交易核实、前雇主等核推荐就业健康或社会行为、调查建议报告、挑逾期档案。New未提供重要性评分，不把全部称Core或每日必做。美国任务中的健康或逮捕记录核查不是中国合法收集授权。 美国当前55项情境显示0—100标准化评分（非人群百分比）：电话100、接触他人97、邮件96、面对面93、准确93、外部客户92、久坐92、时间压力92、团队91、优先级88、决策影响88、决策自由85、重复任务重要性83、冲突78、可控室内78、重复动作72、不满客户71、竞争56、错误后果54、自动化49。未取得响应分档分布，不能据评分说多少人每日、持续或最高档。页面2026更新不是统一调查年。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.onet.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "g04-scales"
           ],
           "type": "prose"
         },
@@ -24781,7 +24801,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按任务度量生成式 AI 与职业任务的接近程度，不提供单职业分数或自动化率"
+              "支持任务暴露方法边界，本轮未取本岗精确匹配分数或采用率。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag.scope",
@@ -24811,13 +24831,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供本职业的任务、工作活动与工作情境百分比"
+              "部分任务与55项Context标准化评分，非响应人群百分比；其他资料仍在补充。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.sag-moa.scope",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "sag-moa",
+            "g04-scales"
           ],
           "type": "prose"
         },
@@ -24841,7 +24861,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供该细分的认证与培训查询入口，用于核对证书与培训信息"
+              "认证查询入口静态Loading，动态结果未取；不能推有无证照或具体学徒。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.ratify.scope",
@@ -24871,7 +24891,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供该细分 2024—2034 年就业预测与职位空缺（O*NET 就业趋势页，基于 BLS 预测）"
+              "美国本岗2025就业12,200人→2035预测11,300人，2025—2035变化-7%（Decline）；年均空缺900个含增长与替换，不是累计、每年净增或录用率。预测非已发生变化。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.bls.scope",
@@ -24901,7 +24921,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提供 AI 系统风险治理的角色、责任、记录与人工监督要求"
+              "自愿AI治理框架参考，非强制中国征信或美国拒绝通知法。"
             ]
           },
           "id": "actors.display.ai_impact_table.authority.nist.scope",
@@ -24991,7 +25011,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "系统可按类型归集申请与签购单并提示缺项。"
+              "编辑可试验候选，非本岗上线效果证明：系统可按类型归集申请与签购单并提示缺项。 实际权限、数据与准确度先验证；不能无授权批量查询征信。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.1.change",
@@ -25006,7 +25026,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断材料真伪与来源、决定是否可受理仍由经办人负责。"
+              "编辑核材料来源及缺项，是否可受理由实际程序和权限决定，不能保证单一经办人有最终受理权限。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.1.human-control",
@@ -25051,7 +25071,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "表单与工具可辅助结构化采集与校验。"
+              "编辑可试验候选，非本岗上线效果证明：表单与工具可辅助结构化采集与校验。 实际权限、数据与准确度先验证；不能无授权批量查询征信。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.2.change",
@@ -25111,7 +25131,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "系统可批量获取征信信息并比对公开记录关键词。"
+              "编辑可试验候选，非本岗上线效果证明：系统可批量获取征信信息并比对公开记录关键词。 实际权限、数据与准确度先验证；不能无授权批量查询征信。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.3.change",
@@ -25171,7 +25191,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "规则引擎可按标准给出候选判定。"
+              "编辑可试验候选，非本岗上线效果证明：规则引擎可按标准给出候选判定。 实际权限、数据与准确度先验证；不能无授权批量查询征信。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.change",
@@ -25186,13 +25206,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "适用标准的确认、授权或拒绝决定与责任仍由经办人承担。"
+              "按真实权限核标准、输入与例外，机构及实际法定主体负责，非所有拒绝都必须经办人单笔人工决定。中国适用个人贷款管理办法21条：审贷分离授权独立审批；适用线上自动审批的贷款人应建立人工复审机制作为补充并设触发条件，非每笔都人工。贷后发现不能有效识别风险时由贷款人停止自动审批流程；流动资金贷款办法20条按分级和转授权。二者2024-07-01施行，直接主体为境内商业银行等吸收公众存款机构，其他业务按参照条款与自身规则核。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.4.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-personal-loan",
+            "g04-working-loan"
           ],
           "type": "prose"
         },
@@ -25231,7 +25251,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "模板与工具可汇总要点并生成报告初稿。"
+              "编辑可试验候选，非本岗上线效果证明：模板与工具可汇总要点并生成报告初稿。 实际权限、数据与准确度先验证；不能无授权批量查询征信。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.5.change",
@@ -25291,7 +25311,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "系统可自动生成通知与理由草案。"
+              "编辑可试验候选，非本岗上线效果证明：系统可自动生成通知与理由草案。 实际权限、数据与准确度先验证；不能无授权批量查询征信。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.change",
@@ -25306,13 +25326,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核对理由具体准确性、符合通知要求并承担披露责任。"
+              "美国Regulation B§1002.9：适用不利行动通知可直接说明具体主要理由，也可按条款通知请求理由的权利；不是任何拒绝都必须当场完整说明。一般完整申请30日通知，企业信用有收入及贸易信用等不同安排；具体理由须反映实际采用因素，不能仅称内部政策或评分不足。解释义务不等所有决定必须人工。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.6.human-control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-regb"
           ],
           "type": "prose"
         },
@@ -25351,7 +25370,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "系统可记录收费付款、筛选逾期账户并提示催收。"
+              "编辑可试验候选，非本岗上线效果证明：系统可记录收费付款、筛选逾期账户并提示催收。 实际权限、数据与准确度先验证；不能无授权批量查询征信。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.7.change",
@@ -25366,7 +25385,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核对差异、处理客户异议并决定催收与升级方式。"
+              "按真实权限核差异、客户异议及催收条件，必要交有权岗位；不单凭系统命中自行决定全部处置。"
             ]
           },
           "id": "actors.display.ai_impact_table.tasks.7.human-control",
@@ -25396,7 +25415,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "系统与规则工具可按类型归集申请材料并提示缺项或格式问题。"
+              "编辑辅助候选：系统与规则工具可按类型归集申请材料并提示缺项或格式问题。 未取得本岗采用率或效率实验，须先核权限与准确。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.1.change",
@@ -25441,7 +25460,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可自动比对系统记录、账单与信用信息并标记不一致。"
+              "编辑辅助候选：工具可自动比对系统记录、账单与信用信息并标记不一致。 未取得本岗采用率或效率实验，须先核权限与准确。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.2.change",
@@ -25486,7 +25505,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可依据模板生成账单、通知与拒绝理由草案。"
+              "编辑辅助候选：工具可依据模板生成账单、通知与拒绝理由草案。 未取得本岗采用率或效率实验，须先核权限与准确。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.3.change",
@@ -25501,13 +25520,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核对理由是否具体准确、是否符合不歧视与不利行动通知要求并承担披露责任。"
+              "美国Regulation B§1002.9：适用不利行动通知可直接说明具体主要理由，也可按条款通知请求理由的权利；不是任何拒绝都必须当场完整说明。一般完整申请30日通知，企业信用有收入及贸易信用等不同安排；具体理由须反映实际采用因素，不能仅称内部政策或评分不足。解释义务不等所有决定必须人工。"
             ]
           },
           "id": "actors.display.ai_impact_table.differences.3.human-responsibility",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-regb"
           ],
           "type": "prose"
         },
@@ -25531,7 +25549,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "核对申请数据、信用记录与公开记录的来源、时点与完整性，确认使用的是机构现行预定标准；输入或标准问题会直接进入决定。"
+              "编辑风险推演：核对申请数据、信用记录与公开记录的来源、时点与完整性，确认使用的是机构现行预定标准；输入或标准问题若实际采纳且未纠正可能传入决定。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.1.description",
@@ -25561,13 +25579,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对授权或拒绝决定、拒绝理由与例外处理保留人工复核，不以工具输出替代责任人判断。"
+              "中国适用个人贷款管理办法21条：审贷分离授权独立审批；适用线上自动审批的贷款人应建立人工复审机制作为补充并设触发条件，非每笔都人工。贷后发现不能有效识别风险时由贷款人停止自动审批流程；流动资金贷款办法20条按分级和转授权。二者2024-07-01施行，直接主体为境内商业银行等吸收公众存款机构，其他业务按参照条款与自身规则核。 美国Regulation B§1002.9：适用不利行动通知可直接说明具体主要理由，也可按条款通知请求理由的权利；不是任何拒绝都必须当场完整说明。一般完整申请30日通知，企业信用有收入及贸易信用等不同安排；具体理由须反映实际采用因素，不能仅称内部政策或评分不足。解释义务不等所有决定必须人工。 个人信息保护法24条重大权益自动化决定有解释与拒绝仅自动化权利，非禁止全部算法。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.2.description",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-personal-loan",
+            "g04-working-loan",
+            "g04-regb",
+            "g04-pipl"
           ],
           "type": "prose"
         },
@@ -25621,7 +25641,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "发现数据缺口、疑似欺诈、客户投诉、查询披露越权或超出授权范围时停止自行处置并按制度升级。"
+              "编辑异常建议：记录事实、缺口与待核项，按真实权限联系有权岗位；普通投诉应按授权核实，不一概停止处理，也不由本页授予中止整体业务或恢复权。"
             ]
           },
           "id": "actors.display.ai_impact_table.responsibility.4.description",
@@ -25681,7 +25701,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "自动评分与规则不会对授权结论与合规责任负责，误用会带来错误授权与合规风险。"
+              "模型误用可能造成错批或合规问题，业务、审批、数据和系统服务方责任按实际法律关系与合同核，不能说服务提供方均无责任。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.1.consequence",
@@ -25696,13 +25716,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把工具输出当作线索，核对输入、标准与例外，最终判断由责任人按机构制度作出并留痕。"
+              "中国适用个人贷款管理办法21条：审贷分离授权独立审批；适用线上自动审批的贷款人应建立人工复审机制作为补充并设触发条件，非每笔都人工。贷后发现不能有效识别风险时由贷款人停止自动审批流程；流动资金贷款办法20条按分级和转授权。二者2024-07-01施行，直接主体为境内商业银行等吸收公众存款机构，其他业务按参照条款与自身规则核。 美国Regulation B§1002.9：适用不利行动通知可直接说明具体主要理由，也可按条款通知请求理由的权利；不是任何拒绝都必须当场完整说明。一般完整申请30日通知，企业信用有收入及贸易信用等不同安排；具体理由须反映实际采用因素，不能仅称内部政策或评分不足。解释义务不等所有决定必须人工。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.1.control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-personal-loan",
+            "g04-working-loan",
+            "g04-regb",
+            "g04-pipl"
           ],
           "type": "prose"
         },
@@ -25726,13 +25748,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "个人与企业信用信息属敏感信息，越权查询或不当披露会带来合规与法律风险。"
+              "个人信息保护法仅已识别或可识别自然人信息，金融账户属敏感个人信息；企业信用信息不一概等敏感个人信息。处理需核第13条等合法基础、目的明确、最小必要与准确要求，同意并非唯一基础。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.2.consequence",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-pipl"
           ],
           "type": "prose"
         },
@@ -25741,13 +25762,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按机构制度与适用规定的最小必要与权限原则查询、使用与披露，操作留痕，异常按制度上报。"
+              "征信业管理条例13/14/18/20/21/22/25按主体核：个人收集/查询同意和用途有法定例外；企业资料规则另列；个人疾病与病史等属于征信机构禁止采集内容，不能因美国任务就收集。经营个人征信业务机构须明确工作人员查询个人信息的权限程序并登记；征信机构或信息提供者收到错误遗漏异议应按规定标注，自收到异议起20日内核查处理并书面答复。 个人信息保护法仅已识别或可识别自然人信息，金融账户属敏感个人信息；企业信用信息不一概等敏感个人信息。处理需核第13条等合法基础、目的明确、最小必要与准确要求，同意并非唯一基础。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.2.control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-credit",
+            "g04-pipl"
           ],
           "type": "prose"
         },
@@ -25771,7 +25792,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以含糊或不可解释的技术输出替代具体理由，会带来不歧视与不利行动通知方面的风险。"
+              "美国适用不利行动理由如未准确反映实际主要因素，可能不符Regulation B；信息不透明不自动等已发生歧视，具体事实另核。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.3.consequence",
@@ -25786,13 +25807,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "依据的信用信息与适用标准要能说清，对拒绝给出具体、准确的理由并如实通知与留存。"
+              "美国Regulation B§1002.9：适用不利行动通知可直接说明具体主要理由，也可按条款通知请求理由的权利；不是任何拒绝都必须当场完整说明。一般完整申请30日通知，企业信用有收入及贸易信用等不同安排；具体理由须反映实际采用因素，不能仅称内部政策或评分不足。解释义务不等所有决定必须人工。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.3.control",
           "source_refs": [
-            "r2-ai",
-            "nist"
+            "g04-regb"
           ],
           "type": "prose"
         },
@@ -25816,7 +25836,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "身份或申请数据未核实会造成错误授权或欺诈通过。"
+              "编辑风险推演：身份或申请数据未核实可能造成错误授权或欺诈通过。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.4.consequence",
@@ -25861,7 +25881,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "收费与付款记录、账单与分户账不一致会让账户与催收失去依据。"
+              "编辑风险推演：收费与付款记录、账单与分户账不一致可能增加账户与催收依据的核对难度。"
             ]
           },
           "id": "actors.display.ai_impact_table.risks.5.consequence",
@@ -25936,7 +25956,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "把系统与规则输出当作线索与草稿，保留对数据来源、适用标准与决定的独立复核，并如实留痕。"
+              "编辑建议在真实岗位权限内核输入、适用标准、例外与需复审的条件；按实际流程记录，不把所有自动决定强制改成人工单笔判断。"
             ]
           },
           "id": "actors.display.ai_impact_table.actions.2.action",
@@ -26033,7 +26053,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "主要用人场景：商业银行与信贷机构的信贷前台与授信支持、消费金融公司与小额贷款公司、融资担保与信用保险、征信与信用服务机构，以及批发与零售企业的信用与账务部门。"
+              "编辑检索场景为银行信用授信支持、征信服务及批零企业信用账户等；未取中国全国场景岗位占比或招聘样本。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
@@ -26047,7 +26067,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "常见场景：以银行或信贷机构内部资料核查与授权处理为主的岗位，以征信与信用服务为主的岗位，以及以账单与账款催收为主的岗位；计酬方式与绩效结构差异较大。"
+              "编辑比较资料核查、信用服务、账单催收等方向；具体计酬按目标单位核，未取得全国各方向收入差异。"
             ]
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.3",
@@ -26103,7 +26123,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "：中国大陆同类岗位多称信贷审查岗、授信资料核查岗、征信查询与信用服务岗或账款催收岗，分属金融业与商务服务等行业，常见银行、消费金融公司与征信机构并存，没有与 O*NET-SOC 43-4041.00 对应的统一职业分类或计酬口径"
+              "行业均值仅作法人主营行业匹配背景，不能当职业工资；本轮未取得中国一一映射，不断言官方不存在。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
@@ -26131,7 +26151,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：美国口径下该职业准备层级为 Job Zone 1-2（需要很少至一些准备，SVP 低于 6.0），通常要求高中文凭或同等学历，岗位培训从几天到一年不等。美国口径与中国大陆同类岗位的录用与学历要求不可直接等同，具体以目标单位要求为准。"
+              "美国当前部分档案Job Zone1-2、SVP低于6；高中文凭或GED及几日至一年在岗训练是跨职业层级通用说明，不是本岗实际新聘学历百分比、统一培训期或中国学历门槛。本岗教育响应分布未取得。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -26145,7 +26165,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：中国大陆同类岗位通常经招聘进入银行、消费金融或征信服务机构，部分岗位要求金融、会计或相关专业背景；学历、专业背景与相关经验是不同层级的条件，不能互相替代。"
+              "编辑建议分别核目标单位学历、专业、经验及权限；本轮未核中国招聘样本，不称通常统一专业要求。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -26159,12 +26179,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：涉及个人与企业信用信息保护、征信业务规范、查询与披露权限以及账款催收的岗位受适用规定与机构制度约束，职责与可授权范围须按具体岗位与现行规定核对；本页不构成法律或合规意见。"
+              "个人信息保护法仅已识别或可识别自然人信息，金融账户属敏感个人信息；企业信用信息不一概等敏感个人信息。处理需核第13条等合法基础、目的明确、最小必要与准确要求，同意并非唯一基础。 征信业管理条例13/14/18/20/21/22/25按主体核：个人收集/查询同意和用途有法定例外；企业资料规则另列；个人疾病与病史等属于征信机构禁止采集内容，不能因美国任务就收集。经营个人征信业务机构须明确工作人员查询个人信息的权限程序并登记；征信机构或信息提供者收到错误遗漏异议应按规定标注，自收到异议起20日内核查处理并书面答复。 中国适用个人贷款管理办法21条：审贷分离授权独立审批；适用线上自动审批的贷款人应建立人工复审机制作为补充并设触发条件，非每笔都人工。贷后发现不能有效识别风险时由贷款人停止自动审批流程；流动资金贷款办法20条按分级和转授权。二者2024-07-01施行，直接主体为境内商业银行等吸收公众存款机构，其他业务按参照条款与自身规则核。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "sag-moa"
+            "g04-pipl",
+            "g04-credit",
+            "g04-personal-loan",
+            "g04-working-loan"
           ],
           "type": "prose"
         },
@@ -26173,7 +26196,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "编辑整理：信贷主管或信用服务团队负责方向通常要求相关经验与统筹能力，任职条件由单位制度规定；本页不构成资格认定。"
+              "编辑管理能力方向：核标准、团队及带训统筹与实际权限，未取得统一晋升经验年限或收入溢价。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -26187,7 +26210,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "常见场景：资料核查与授权处理多按申请与账单周期推进，月初月末与季末更集中；收入结构随机构与绩效安排而异，具体按单位情况核对。"
+              "编辑核对目标单位申请账单和服务周期、实际加班与计酬；未取得月初月末季末更集中或中国岗位节奏统计。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
@@ -26201,7 +26224,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与工资的关系：业务系统、规则引擎与办公软件可能改变资料核查、记录比对与通知编制的分工与工作方式，但中国大陆公开工资统计按行业门类与人员类别聚合发布，工具变化不会产生可核对的职业级数值；本页因此不给出任何与 AI 相关的本职业工资影响数字。"
+              "本轮未取AI采用对中国本岗工资的因果估计；行业平均不能代算职业影响，也不称工具不会产生可测数值。"
             ]
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
@@ -26237,7 +26260,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国统计口径：本页的工资与分位为 O*NET／OEWS 43-4041.00（Credit Authorizers, Checkers, and Clerks）单一职业口径；就业规模与就业预测取自 O*NET 就业趋势页（基于 BLS 2024—2034 年预测）。"
+              "美国2025 OEWS43-4041.00全国有薪全兼职常规税前工资，排除自雇等人群及加班溢价；官方已披露年值，2080标准不等个人全年工时或月到手。分位非起薪、职级，不能证明行业、机构、地区或经验的工资因果。 美国本岗2025就业12,200人→2035预测11,300人，2025—2035变化-7%（Decline）；年均空缺900个含增长与替换，不是累计、每年净增或录用率。预测非已发生变化。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.1",
@@ -26252,7 +26275,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "分位是统计位置，不是新手、资深或主管等级；同一分位的从业者在行业、机构与岗位职责上差异很大，高分段通常与所在行业（如金融与保险）、机构类型与职责范围相关。"
+              "第10至90分位只分布位置，不是职级资历；未取得行业、机构或职责的工资因果估计。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.2",
@@ -26267,7 +26290,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "按小时披露的工资不能在没有个人工时与出勤情况时推算稳定年薪或月收入；兼职与季节性安排也会使实际收入不同于全职口径。"
+              "美国2025 OEWS43-4041.00全国有薪全兼职常规税前工资，排除自雇等人群及加班溢价；官方已披露年值，2080标准不等个人全年工时或月到手。分位非起薪、职级，不能证明行业、机构、地区或经验的工资因果。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.3",
@@ -26297,7 +26320,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业表只说明该口径下的就业分布（O*NET 单列金融与保险、批发贸易，其余行业归入其他行业），不代表所有雇主的工资；不同行业与地区的工资差异要看具体岗位与地区。"
+              "美国2025本岗行业就业：金融保险27%、零售17%、批发14%、行政支持11%、企业管理11%、其他20%含房地产租赁；合计100%。这是就业归类非工资，不保留旧33/12/11/10/10/24为当前。 行业就业不能解释本岗个人工资。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.5",
@@ -26312,7 +26335,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资统计与档案的用途不同：OEWS 用于工资，O*NET 用于任务、工作情境与准备层级，就业预测限于 2024—2034 年预测期；引用时分别保留。"
+              "工资为2025 OEWS，任务情境O*NET部分档案，预测2025—2035，分别使用；Context是评分非比例。"
             ]
           },
           "id": "actors.us-salary.career-snapshot-secondary-locale.6",
@@ -26387,7 +26410,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "分位对应分布位置而不是资历：第 10 分位与第 90 分位之间的差异同时来自行业、机构类型、地区与岗位职责；来源没有证明与经验年限的对应关系。"
+              "分位非资历职级，未取行业、机构、地区或经验工资效应，不据分位解释收入原因。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.percentile",
@@ -26402,7 +26425,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "预测是职业总量的变化，不是个人找到工作的概率；该口径预测为下降（-1% 或更低），同时仍会产生替换性空缺。"
+              "美国本岗2025就业12,200人→2035预测11,300人，2025—2035变化-7%（Decline）；年均空缺900个含增长与替换，不是累计、每年净增或录用率。预测非已发生变化。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.interpretation.project",
@@ -26432,13 +26455,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "金融与保险是 O*NET 单列的行业，占 2024 年该项就业分布的 33%。"
+              "2025美国本岗金融保险就业27%，非工资或中国用工占比。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.theater",
           "source_refs": [
-            "bls",
-            "oews"
+            "g04-industry"
           ],
           "type": "prose"
         },
@@ -26447,13 +26469,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "批发贸易占 12%，是 O*NET 单列的另一行业；这些是就业分布，不是工资中位数。"
+              "2025美国本岗批发就业14%，非工资。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.education",
           "source_refs": [
-            "bls",
-            "oews"
+            "g04-industry"
           ],
           "type": "prose"
         },
@@ -26462,13 +26483,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他行业合计占 24%（含房地产与租赁）；行业分布按 O*NET 原口径保留，本页不推算未披露的细分行业与雇主类型。"
+              "2025其他20%含房地产租赁等，未逐一分列，不把其余已单列行业算进其他。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.amusement",
           "source_refs": [
-            "bls",
-            "oews"
+            "g04-industry"
           ],
           "type": "prose"
         },
@@ -26477,13 +26497,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业表只说明就业归类，本行按原口径保留，不推算雇主类型或收入差异；零售贸易 11%、行政与支持服务 10%、企业管理与企业管理服务 10% 也在此口径内单列。"
+              "美国2025本岗行业就业：金融保险27%、零售17%、批发14%、行政支持11%、企业管理11%、其他20%含房地产租赁；合计100%。这是就业归类非工资，不保留旧33/12/11/10/10/24为当前。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
           "source_refs": [
-            "bls",
-            "oews"
+            "g04-industry"
           ],
           "type": "prose"
         },
@@ -26507,7 +26526,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "统计工资以有薪岗位为准：每周工时、兼职或季节性安排以及是否含绩效，都会影响实际到手收入，因此时薪与年收入不能互相替代。"
+              "美国2025 OEWS43-4041.00全国有薪全兼职常规税前工资，排除自雇等人群及加班溢价；官方已披露年值，2080标准不等个人全年工时或月到手。分位非起薪、职级，不能证明行业、机构、地区或经验的工资因果。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.paid-work",
@@ -26537,7 +26556,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工作机构与安排影响收入：金融与保险机构、批发与零售贸易、行政与支持服务或其他行业，所在地区与岗位职责（资料核查、授权处理、征信服务、账款催收）以及是否为全职、绩效挂钩或非标准用工。"
+              "编辑核地区、合同、工时与计酬项目；未取得这些因素的工资效应，行业就业非收入差异原因。"
             ]
           },
           "id": "actors.display.career_snapshot_secondary_locale.factor.setting",
@@ -26590,7 +26609,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意长时间处理资料与数据、对细节与记录保持一致、并能按规则与标准稳定交付、耐心沟通的人，通常更容易适应。"
+              "编辑自我观察是否愿意持续处理资料、核标准记录并沟通；本轮未取得这些偏好预测本岗胜任或录用的效度。"
             ]
           },
           "id": "actors.fit.personality-fit-block.1",
@@ -26604,7 +26623,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "这类工作需要大量按标准核对、录入与留痕；能把重复当作决定可靠的前提，才能持续做对。"
+              "编辑建议核标准、资料与留痕；容忍重复的偏好不保证做对或判定可靠。"
             ]
           },
           "id": "actors.fit.personality-fit-block.2",
@@ -26618,7 +26637,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "授权与核查记录常被主管或合规复核要求补充依据或修正；能把复核当作质量控制而不是否定自己，才能持续合作。"
+              "编辑观察能否回应复核疑问并据证修正；不把单一态度视作持续合作必要人格条件。"
             ]
           },
           "id": "actors.fit.personality-fit-block.3",
@@ -26632,12 +26651,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 显示该职业 92% 把时间压力与久坐记为最高档回答、93% 认为准确为最高重要度；在压力下保持按标准核对，比抢先处理更稳妥。"
+              "美国久坐92、时间压力92、准确93为0—100Context评分，非92%或93%最高档响应；核实际岗位条件，未取个人耐受效度。"
             ]
           },
           "id": "actors.fit.personality-fit-block.4",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "g04-scales"
           ],
           "type": "prose"
         },
@@ -26772,7 +26792,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适配不是人格判断，而是把日常工作的真实要求——长时间在办公环境处理资料与数据、按预定标准反复核对记录、通过电话与面谈频繁沟通、并面对投诉或不满客户以及固定的时限压力——"
+              "适配探索从申请核对、标准应用、记录和沟通任务开始；编辑建议观察具体体验，不由兴趣或偏好推胜任或录用。"
             ]
           },
           "id": "actors.display.personality_fit_block.direct-answer",
@@ -26800,7 +26820,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "先用虚构的信贷申请材料完成一次「接收申请—访谈整理—核对信用记录—按标准判定—写通知与记录」练习，或跟做一次真实的资料核查，再判断偏好。"
+              "编辑建议用完全虚构申请体验资料核查、标准与通知；真实查询须合法获准，不用真实未脱敏个人征信作开放体验。体验非胜任证明。"
             ]
           },
           "id": "actors.display.personality_fit_block.signal.experiment",
@@ -26940,7 +26960,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "尽责性与宜人性与这类工作的关系最直接：前者对应资料核对与按标准交付，后者对应面对不满客户与投诉时保持专业。大五没有官方的职业匹配阈值，本页只把它当作自我观察工具。"
+              "尽责、宜人等只作编辑观察提问；本轮没有特质与本岗表现的关联强度或效度，不称关系最直接。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.big-five.answer",
@@ -26982,7 +27002,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "通用工具：大五量表描述特质倾向，无官方职业匹配阈值"
+              "编辑观察线索，未核本产品量表与本岗匹配阈值或效度。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.big-five.evidence-level",
@@ -27038,7 +27058,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "偏好独立专注的人可能更适合资料核查方向。"
+              "编辑观察独立核查是否能专注并说明依据，不由MBTI类型推方向。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.1",
@@ -27052,7 +27072,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "偏好协作与沟通的人可能更适合客户与业务对接方向。"
+              "编辑观察协作时是否清楚沟通回应核实，不由MBTI类型推方向。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.mbti.signals.2",
@@ -27220,7 +27240,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业准备层级为 Job Zone 1-2（SVP 低于 6.0），通常要求高中文凭或同等学历，工作以资料处理、标准应用、系统录入与书面表达为主；IQ 类量表描述的是通用认知表现，与岗位要求没有官方对应关系。"
+              "美国当前部分档案Job Zone1-2、SVP低于6；高中文凭或GED及几日至一年在岗训练是跨职业层级通用说明，不是本岗实际新聘学历百分比、统一培训期或中国学历门槛。本岗教育响应分布未取得。 IQ类测量与本岗阈值/效度对应未取得。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.iq.answer",
@@ -27318,12 +27338,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "这类岗位需要与申请人、商户和客户沟通，处理投诉并核实交易；O*NET 调查显示 100% 把电话沟通、96% 把电子邮件、93% 把面对面讨论记为最高频回答，92% 把对外部客户或公众的接触记为高档回答。同时需要面对时限压力与不满客户。情绪类工具只提供自我观察角度，不是岗位门槛。"
+              "美国电话100、邮件96、面对面93、外部客户92为标准化情境评分，不是这些比例每天沟通。编辑观察如何说明依据处理疑问，不是EQ量表门槛或预测效度。"
             ]
           },
           "id": "actors.display.personality_fit_block.assessments.eq.answer",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "g04-scales"
           ],
           "type": "prose"
         },
@@ -27388,7 +27409,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "在银行或信贷机构的信贷前台与授信支持岗，完成资料核查、信用记录评估与授权处理并通知决定；适合愿意在标准与权限边界内稳定交付的人。"
+              "编辑观察机构信用核查方向的实际任务、资料与决定记录是否愿意持续处理；本轮未取偏好预测胜任证据。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.camera.signals",
@@ -27430,7 +27451,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "在征信机构或信用服务部门，处理信用信息查询、记录核实与信用报告服务并按要求留痕；适合愿意在数据质量与合规要求下工作的人。"
+              "编辑观察征信服务的核质量、合法查询与记录要求；本轮未取偏好预测胜任证据。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.stage.signals",
@@ -27477,7 +27498,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.agent.signals",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27514,12 +27535,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "与客户接洽贷款需求、评估并推动贷款申请落地。"
+              "美国信贷专员含客户咨询、信用财务分析、限额内批准或转呈贷款申请，不仅业务推动。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.signals",
           "source_refs": [
-            "onet"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -27528,7 +27549,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "重心在与客户开发与业务推动，转入需补足客户沟通与业务推动能力。"
+              "编辑转向需核贷款流程、客户咨询及真实审批权限，信用分析可重叠，非后台变纯销售。"
             ]
           },
           "id": "actors.display.personality_fit_block.directions.teacher.watchouts",
@@ -27561,7 +27582,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.enrichment.signals",
           "source_refs": [
-            "onet"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -27603,7 +27624,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.art.signals",
           "source_refs": [
-            "onet"
+            "directing"
           ],
           "type": "prose"
         },
@@ -27617,7 +27638,7 @@
           },
           "id": "actors.display.personality_fit_block.directions.art.watchouts",
           "source_refs": [
-            "onet"
+            "directing"
           ],
           "type": "prose"
         },
@@ -27710,12 +27731,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "按 O*NET 调查，100% 把电话沟通、96% 把电子邮件、93% 把面对面讨论记为最高频回答，92% 把对外部客户或公众的接触记为高档回答；既要沟通核实，也要独立完成核对与记录。"
+              "电话100、邮件96、面对面93、外部客户92为美国标准化情境评分，未取得每日或最高档人数比例；编辑核实际沟通对象与频率。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.outgoing.answer",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "g04-scales"
           ],
           "type": "prose"
         },
@@ -27738,12 +27760,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 显示 92% 把坐着记为最高档回答、72% 把重复动作记为高档回答、92% 把对外客户接触记为高档回答，71% 把与不满或失礼客户的接触记为高档回答；对久坐或高频沟通敏感的人应优先核对工作形态。"
+              "久坐92、重复动作72、不满客户71为0—100评分，不能称这些比例持续或最高档；核真实岗位姿势、沟通和休息安排。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.appearance.answer",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "g04-scales"
           ],
           "type": "prose"
         },
@@ -27766,12 +27789,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "资料核查与授权处理多按申请与账单周期推进，月初月末与季末更集中，92% 把时间压力记为最高档回答；具体按单位情况核对。"
+              "时间压力92为美国情境评分；实际截止周期另核，未取月初月末季末集中或中国加班分布。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.schedule.answer",
           "source_refs": [
-            "onet"
+            "sag-moa",
+            "g04-scales"
           ],
           "type": "prose"
         },
@@ -27794,7 +27818,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "标准应用与资料判断靠长期练习与复核反馈；把处理量、复核意见与决定修正记录下来，比测试分数更能说明适配。"
+              "编辑建议记录核查、复核与修正以观察继续意愿，未证明其比测试分数更能预测适配。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.practice.answer",
@@ -27822,7 +27846,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。测试描述偏好线索，不预测工作表现，也不构成录用、资格或适应性判断；真正的判断来自实际资料处理与复核反馈。"
+              "问卷、体验反馈与资格条件分别核；未验证本产品问卷或工作样本预测本岗胜任的效度，不称某项真正决定适配。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.test.answer",
@@ -27850,7 +27874,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用本页虚构练习或一次真实资料核查来核对真实条件，并把观察结果与目标方向的对象、数据来源与权限边界逐项对照。"
+              "编辑建议用虚构资料或合法获准体验，核任务和权限条件，不把短体验等录用或资格证明。"
             ]
           },
           "id": "actors.display.personality_fit_block.questions.next.answer",
@@ -27925,7 +27949,7 @@
           },
           "id": "actors.display.personality_fit_block.source.agent",
           "source_refs": [
-            "onet"
+            "agent"
           ],
           "type": "prose"
         },
@@ -27934,12 +27958,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于信贷专员方向的客户接洽与业务推动对照（相邻职业）。"
+              "支持信贷专员信用财务分析、限额内批准或转呈和客户咨询，非纯业务推动。"
             ]
           },
           "id": "actors.display.personality_fit_block.source.teacher",
           "source_refs": [
-            "onet"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -27953,7 +27977,7 @@
           },
           "id": "actors.display.personality_fit_block.source.enrichment",
           "source_refs": [
-            "onet"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -27967,7 +27991,7 @@
           },
           "id": "actors.display.personality_fit_block.source.art",
           "source_refs": [
-            "onet"
+            "directing"
           ],
           "type": "prose"
         }
@@ -27984,13 +28008,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按适用规定与机构制度的最小必要与权限原则查询、使用与披露并留痕，超出权限的请求按制度升级并拒绝。"
+              "个人信息保护法仅已识别或可识别自然人信息，金融账户属敏感个人信息；企业信用信息不一概等敏感个人信息。处理需核第13条等合法基础、目的明确、最小必要与准确要求，同意并非唯一基础。 征信业管理条例13/14/18/20/21/22/25按主体核：个人收集/查询同意和用途有法定例外；企业资料规则另列；个人疾病与病史等属于征信机构禁止采集内容，不能因美国任务就收集。经营个人征信业务机构须明确工作人员查询个人信息的权限程序并登记；征信机构或信息提供者收到错误遗漏异议应按规定标注，自收到异议起20日内核查处理并书面答复。"
             ]
           },
           "id": "actors.risk.career-risk-cards.1",
           "source_refs": [
-            "sag",
-            "nist"
+            "g04-pipl",
+            "g04-credit",
+            "g04-personal-loan",
+            "g04-working-loan"
           ],
           "type": "prose"
         },
@@ -27999,13 +28025,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在授权范围内按预定标准处理并留存依据，超授权事项提交有权人员审批，不口头承诺额度或条件。"
+              "中国适用个人贷款管理办法21条：审贷分离授权独立审批；适用线上自动审批的贷款人应建立人工复审机制作为补充并设触发条件，非每笔都人工。贷后发现不能有效识别风险时由贷款人停止自动审批流程；流动资金贷款办法20条按分级和转授权。二者2024-07-01施行，直接主体为境内商业银行等吸收公众存款机构，其他业务按参照条款与自身规则核。 编辑异常建议：记录事实、缺口与待核项，按真实权限联系有权岗位；普通投诉应按授权核实，不一概停止处理，也不由本页授予中止整体业务或恢复权。"
             ]
           },
           "id": "actors.risk.career-risk-cards.2",
           "source_refs": [
-            "sag",
-            "nist"
+            "g04-personal-loan",
+            "g04-working-loan",
+            "g04-regb",
+            "g04-pipl"
           ],
           "type": "prose"
         },
@@ -28014,13 +28042,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "保留判定依据的信用信息与适用标准，对拒绝给出具体、准确的理由并如实通知与留存。"
+              "美国Regulation B§1002.9：适用不利行动通知可直接说明具体主要理由，也可按条款通知请求理由的权利；不是任何拒绝都必须当场完整说明。一般完整申请30日通知，企业信用有收入及贸易信用等不同安排；具体理由须反映实际采用因素，不能仅称内部政策或评分不足。解释义务不等所有决定必须人工。"
             ]
           },
           "id": "actors.risk.career-risk-cards.3",
           "source_refs": [
-            "sag",
-            "nist"
+            "g04-regb"
           ],
           "type": "prose"
         },
@@ -28029,13 +28056,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按机构制度与适用规定处理数据权限、查询披露与催收并保留记录；具体权利义务以现行规定为准，本页不构成法律或合规意见。"
+              "个人信息保护法仅已识别或可识别自然人信息，金融账户属敏感个人信息；企业信用信息不一概等敏感个人信息。处理需核第13条等合法基础、目的明确、最小必要与准确要求，同意并非唯一基础。 征信业管理条例13/14/18/20/21/22/25按主体核：个人收集/查询同意和用途有法定例外；企业资料规则另列；个人疾病与病史等属于征信机构禁止采集内容，不能因美国任务就收集。经营个人征信业务机构须明确工作人员查询个人信息的权限程序并登记；征信机构或信息提供者收到错误遗漏异议应按规定标注，自收到异议起20日内核查处理并书面答复。 编辑异常建议：记录事实、缺口与待核项，按真实权限联系有权岗位；普通投诉应按授权核实，不一概停止处理，也不由本页授予中止整体业务或恢复权。"
             ]
           },
           "id": "actors.risk.career-risk-cards.4",
           "source_refs": [
-            "sag",
-            "nist"
+            "g04-pipl",
+            "g04-credit",
+            "g04-personal-loan",
+            "g04-working-loan"
           ],
           "type": "prose"
         },
@@ -28089,7 +28118,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险集中在三类：长时间久坐、高频电话沟通与面对不满客户造成的身体与状态负担，个人与企业信用信息超权限查询披露、授权与审批越界造成的合规与法律风险，以及决定不可解释、理由不具体、记录与收费付款不一致造成的专业与业务风险；申请与账单周期和催收时限前也会累积影响。"
+              "可核任务与情境评分支持资料核查、标准、沟通、久坐等观察，非人数百分比或疾病发生率；数据权限、错批、通知和账务风险按具体法域及事实核，不把美国通知规则套中国。"
             ]
           },
           "id": "actors.display.career_risk_cards.direct-answer",
@@ -28104,7 +28133,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险场景来自 O*NET 任务档案与工作情境百分比（O*NET-SOC 43-4041.00）、信用信息保护与征信业务规范、以及不歧视与不利行动通知的一般要求；中国大陆的岗位与用工语境来自公开信息；引入自动化或 AI 工具时的责任与记录要求参考 NIST AI 风险管理框架。"
+              "O*NET部分档案任务与55项Context评分，非响应百分比；中国PIPL/征信/贷款规则及美国RegB按主体分开；NIST是自愿治理建议。"
             ]
           },
           "id": "actors.display.career_risk_cards.evidence-scope",
@@ -28179,13 +28208,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "越权查询、使用或披露个人与企业信用信息，或超出最小必要范围采集与共享，会把合规与法律风险带入流程；O*NET 显示该职业 88% 把决策结果对同事或公司业绩的影响记为高档回答。"
+              "个人信息保护法仅已识别或可识别自然人信息，金融账户属敏感个人信息；企业信用信息不一概等敏感个人信息。处理需核第13条等合法基础、目的明确、最小必要与准确要求，同意并非唯一基础。 征信业管理条例13/14/18/20/21/22/25按主体核：个人收集/查询同意和用途有法定例外；企业资料规则另列；个人疾病与病史等属于征信机构禁止采集内容，不能因美国任务就收集。经营个人征信业务机构须明确工作人员查询个人信息的权限程序并登记；征信机构或信息提供者收到错误遗漏异议应按规定标注，自收到异议起20日内核查处理并书面答复。"
             ]
           },
           "id": "actors.display.career_risk_cards.image-use.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "g04-pipl",
+            "g04-credit",
+            "g04-personal-loan",
+            "g04-working-loan"
           ],
           "type": "prose"
         },
@@ -28194,7 +28225,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "信用信息处理不当会带来合规处罚、责任错位与信誉损失。"
+              "违法查询处理信息可能产生责任与损失，具体处罚和归责核主体行为，不从Context评分直接认定。"
             ]
           },
           "id": "actors.display.career_risk_cards.image-use.consequence",
@@ -28239,13 +28270,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "超出授权范围直接批准或承诺信贷、变更标准或绕过审批，会造成责任错位与合规风险；机构标准与授权权限是按岗位设定的。"
+              "中国适用个人贷款管理办法21条：审贷分离授权独立审批；适用线上自动审批的贷款人应建立人工复审机制作为补充并设触发条件，非每笔都人工。贷后发现不能有效识别风险时由贷款人停止自动审批流程；流动资金贷款办法20条按分级和转授权。二者2024-07-01施行，直接主体为境内商业银行等吸收公众存款机构，其他业务按参照条款与自身规则核。"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "g04-personal-loan",
+            "g04-working-loan",
+            "g04-regb",
+            "g04-pipl"
           ],
           "type": "prose"
         },
@@ -28254,7 +28287,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "越权授权会带来错误授信、合规处罚与个人责任。"
+              "超授权处理可能造成错批及责任问题，具体归责核权限行为，不保证每次都同一处罚或个人责任。"
             ]
           },
           "id": "actors.display.career_risk_cards.physical-boundary.consequence",
@@ -28299,13 +28332,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "对拒绝只给出含糊或不可解释的理由，或用不透明的自动输出替代具体理由，会把不歧视与不利行动通知方面的风险带入流程；决定须依据可核对的信用信息与适用标准。"
+              "美国Regulation B§1002.9：适用不利行动通知可直接说明具体主要理由，也可按条款通知请求理由的权利；不是任何拒绝都必须当场完整说明。一般完整申请30日通知，企业信用有收入及贸易信用等不同安排；具体理由须反映实际采用因素，不能仅称内部政策或评分不足。解释义务不等所有决定必须人工。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-income.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "g04-regb"
           ],
           "type": "prose"
         },
@@ -28314,7 +28346,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "理由不具体会造成争议、投诉与合规风险，并损害申请人权益。"
+              "编辑风险推演：理由不具体可能造成争议、投诉与合规风险，并损害申请人权益。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-income.consequence",
@@ -28359,13 +28391,15 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国大陆同类岗位多称信贷审查岗、授信资料核查岗、征信查询与信用服务岗或账款催收岗，分属金融业与商务服务等行业，数据权限、查询披露与催收要求因机构与岗位不同。"
+              "个人信息保护法仅已识别或可识别自然人信息，金融账户属敏感个人信息；企业信用信息不一概等敏感个人信息。处理需核第13条等合法基础、目的明确、最小必要与准确要求，同意并非唯一基础。 征信业管理条例13/14/18/20/21/22/25按主体核：个人收集/查询同意和用途有法定例外；企业资料规则另列；个人疾病与病史等属于征信机构禁止采集内容，不能因美国任务就收集。经营个人征信业务机构须明确工作人员查询个人信息的权限程序并登记；征信机构或信息提供者收到错误遗漏异议应按规定标注，自收到异议起20日内核查处理并书面答复。 中国适用个人贷款管理办法21条：审贷分离授权独立审批；适用线上自动审批的贷款人应建立人工复审机制作为补充并设触发条件，非每笔都人工。贷后发现不能有效识别风险时由贷款人停止自动审批流程；流动资金贷款办法20条按分级和转授权。二者2024-07-01施行，直接主体为境内商业银行等吸收公众存款机构，其他业务按参照条款与自身规则核。"
             ]
           },
           "id": "actors.display.career_risk_cards.identity-procedure.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "g04-pipl",
+            "g04-credit",
+            "g04-personal-loan",
+            "g04-working-loan"
           ],
           "type": "prose"
         },
@@ -28419,7 +28453,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "收费与付款记录、账单与客户分户账不一致，或缺少版本与核对记录，会让账户与催收失去依据；多轮更正时更易出现争议。"
+              "编辑风险推演：收费与付款记录、账单与客户分户账不一致，或缺少版本与核对记录，可能增加账户与催收依据的核对难度；编辑建议多轮更正核版本一致，不由次数推争议率。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.scenario",
@@ -28434,7 +28468,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "记录不一致会造成账务差错、错误催收与责任不清。"
+              "编辑风险推演：记录不一致可能造成账务差错、错误催收与责任不清。"
             ]
           },
           "id": "actors.display.career_risk_cards.project-data.consequence",
@@ -28479,13 +28513,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 显示该职业 100% 把电话沟通、97% 把与他人接触、96% 把电子邮件记为最高频回答，92% 把坐着与时间压力、78% 把冲突情形、71% 把与不满或失礼客户的接触记为高档回答；申请与账单周期和催收时限前压力更集中。"
+              "美国当前55项情境显示0—100标准化评分（非人群百分比）：电话100、接触他人97、邮件96、面对面93、准确93、外部客户92、久坐92、时间压力92、团队91、优先级88、决策影响88、决策自由85、重复任务重要性83、冲突78、可控室内78、重复动作72、不满客户71、竞争56、错误后果54、自动化49。未取得响应分档分布，不能据评分说多少人每日、持续或最高档。页面2026更新不是统一调查年。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.scenario",
           "source_refs": [
-            "sag",
-            "nist"
+            "sag-moa",
+            "g04-scales"
           ],
           "type": "prose"
         },
@@ -28494,7 +28528,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "长期高频沟通、久坐与面对投诉会累积影响状态与判断稳定性。"
+              "编辑观察固定姿势、限时与沟通负担，未取本岗疾病或心理损伤发生率、判断损伤因果，不据评分诊断个人。"
             ]
           },
           "id": "actors.display.career_risk_cards.audition-feedback.consequence",
@@ -28509,7 +28543,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于美国 2024—2034 年该细分就业预测与职位空缺（O*NET 就业趋势页，基于 BLS 预测）。"
+              "支持美国2025—2035职业总量，不支持错批、通知争议、疾病或出错率。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.bls",
@@ -28539,7 +28573,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于中国大陆信贷授权与信用核查岗位的用工与合规边界的方向性核对。"
+              "原统计首页不能证明金融征信用工；本轮中国边界用具体个人信息、征信和贷款条款。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.cn-rule",
@@ -28554,7 +28588,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于工作情境百分比与作业条件（O*NET 43-4041.00；对应来源 id 为 sag-moa）。"
+              "当前55项Context0—100评分而非响应人数百分比，支持任务情境观察。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.sag",
@@ -28569,7 +28603,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于引入自动化或 AI 系统时的责任、记录与人工监督要求。"
+              "自愿AI治理建议，非强制通知、审批或疾病证据。"
             ]
           },
           "id": "actors.display.career_risk_cards.source.nist",
@@ -28618,7 +28652,7 @@
             "column_labels": [
               "入门岗位",
               "入职初期主要做什么",
-              "雇主通常看什么",
+              "编辑准备能力线索（非招聘样本）",
               "没经验如何证明",
               "与其他方向的区别"
             ],
@@ -28632,7 +28666,7 @@
               ],
               [
                 "信贷审查与授信资料核查岗",
-                "独立完成常见申请的信用记录核查、公开记录核实与按预定标准的处理，按授权提交复核。",
+                "编辑能力方向：在真实训练和权限下核信用资料、适用标准并提交复核；不预设新人可独立决定。",
                 "标准应用、数据核对、记录与依据一致。",
                 "一份虚构的信用核查与判定记录样本。",
                 "对核查与授权处理负责，须在授权范围内提交审批。"
@@ -28678,7 +28712,7 @@
                 "id": "employer-0",
                 "values": [
                   "学历与训练背景要求",
-                  "美国口径下该职业准备层级为 Job Zone 1-2（通常要求高中文凭或同等学历，岗位培训从几天到一年；SVP 低于 6.0）。",
+                  "美国当前部分档案Job Zone1-2、SVP低于6；高中文凭或GED及几日至一年在岗训练是跨职业层级通用说明，不是本岗实际新聘学历百分比、统一培训期或中国学历门槛。本岗教育响应分布未取得。",
                   "O*NET 摘要页显示准备层级为 Job Zone 1-2；美国口径与中国大陆同类岗位的录用与学历要求不可直接等同。"
                 ]
               },
@@ -28686,7 +28720,7 @@
                 "id": "employer-1",
                 "values": [
                   "基础金融与信用知识",
-                  "通常需要理解信贷与信用基础业务、能按预定标准核对资料并作出处理；具体数据来源、权限与流程由单位制度规定。",
+                  "编辑准备：理解信用业务、按标准核资料和记录；具体要求按目标单位核，未取得中国招聘样本。",
                   "本页未取得中国大陆全国统一的资格公开条件，须按目标单位当年要求核对；本页不构成授权或录用建议。"
                 ]
               },
@@ -28695,7 +28729,7 @@
                 "values": [
                   "可观察的专业能力证据",
                   "能核对申请人身份与数据来源、能按标准评估信用记录并发现异常、能如实记录处理与决定并留痕（来自 O*NET 任务与工作情境数据）。",
-                  "以上是任务与情境观察点，不是人格标签或录用阈值；工作情境显示 93% 认为准确为最高重要度、97% 把与他人接触记为最高频回答、72% 把重复动作记为高档回答、54% 把错误后果记为高档回答。"
+                  "准确93、接触他人97、重复动作72、错误后果54是Context0—100评分，非对应比例最高档响应；不测个人能力或录用阈值。"
                 ]
               },
               {
@@ -28703,7 +28737,7 @@
                 "values": [
                   "常见对象与工具范围",
                   "信贷申请与签购单、信用记录与公开记录、客户账户与账单、收费与付款记录、业务与征信查询系统、电子表格与办公软件、电话与邮件、打印机与归档系统；O*NET 列出的本职业技术关键词含电子表格、办公软件与数据库查询工具。",
-                  "工具熟练度是市场偏好与招聘信号，不等于核心能力或授权。"
+                  "招聘关键词不测熟练度、实际使用或授权，准备建议另核。"
                 ]
               }
             ]
@@ -28841,37 +28875,37 @@
               [
                 "学历与专业背景",
                 "准备进入信贷授权与信用核查岗位的人",
-                "满足多数岗位的录用条件",
+                "核目标单位明确条件，未取得中国多数岗位学历分布。",
                 "不是统一强制门槛，按目标单位核对",
                 "按目标单位招聘公告",
-                "低至中（在校或入职前完成）",
+                "实际费用、周期或获得条件未核；按目标项目/单位核，不编统一投入等级。",
                 "学历不代表处理能力或判断质量。"
               ],
               [
                 "金融与信用基础知识",
                 "从事信贷核查、征信与信用服务的人",
-                "通常是核心录用与能力依据",
-                "多数岗位普遍要求",
+                "编辑能力准备方向，未取得全国录用影响比较。",
+                "按目标单位要求，本轮未取得全国普遍门槛。",
                 "通过课程、培训或岗位实践积累",
-                "低至中（数周至数月）",
+                "实际费用、周期或获得条件未核；按目标项目/单位核，不编统一投入等级。",
                 "知识不等于机构授权或审批权限。"
               ],
               [
                 "岗位培训与认证",
                 "希望在信用与金融方向提升竞争力的人",
-                "影响部分岗位的竞争与准备度",
+                "编辑准备线索：核具体任务、培训认证与目标公告条件；未取得竞争收益比较证据。",
                 "按岗位与机构而定，不是统一门槛",
                 "按认证机构与培训项目要求",
-                "中（培训与考试周期）",
+                "实际费用、周期或获得条件未核；按目标项目/单位核，不编统一投入等级。",
                 "认证不替代机构授权与合规要求。"
               ],
               [
                 "在岗训练",
                 "已被录用的人员",
-                "通常决定能否独立承接核查与授权处理",
+                "用于能力准备，能否独立处理须核真实权限和复核安排。",
                 "属录用后环节",
                 "由单位安排",
-                "低至中（数天至一年）",
+                "实际费用、周期或获得条件未核；按目标项目/单位核，不编统一投入等级。",
                 "训练合格不等于永久授权，须按权限与制度执行。"
               ],
               [
@@ -28880,16 +28914,16 @@
                 "决定可查询的数据与可处理的决定范围",
                 "属岗位授权，不是可选",
                 "按机构制度与适用规定授予",
-                "不适用（由机构制度规定）",
+                "实际费用、周期或获得条件未核；按目标项目/单位核，不编统一投入等级。",
                 "授权不可跨机构通用，本页不构成合规意见。"
               ],
               [
                 "信贷主管与带训能力",
                 "准备承担主管或指导职责的人",
-                "影响相关岗位的竞争与准备度",
+                "编辑准备线索：核具体任务、培训认证与目标公告条件；未取得竞争收益比较证据。",
                 "不是入职门槛",
                 "按单位制度与岗位要求",
-                "中（内部培训或带教）",
+                "实际费用、周期或获得条件未核；按目标项目/单位核，不编统一投入等级。",
                 "管理训练不等于授权、合规或财务责任岗位授权。"
               ]
             ]
@@ -28897,8 +28931,11 @@
           "id": "actors.path.credential-decision.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "ratify",
+            "g04-pipl",
+            "g04-credit",
+            "g04-personal-loan",
+            "g04-working-loan"
           ],
           "title": "训练、资格与授权怎么选择",
           "type": "table"
@@ -28909,16 +28946,17 @@
           "data": {
             "paragraphs": [
               "本页把学历与专业背景、金融与信用基础知识、岗位培训与认证、在岗训练、数据权限与授权范围以及信贷主管与带训能力分开：学历与知识是基础，训练与授权按单位制度与现行规定获得。",
-              "美国口径来自 O*NET 准备层级（Job Zone 1-2：通常要求高中文凭或同等学历，岗位培训从几天到一年；SVP 低于 6.0）与 BLS 相关说明；这些不等于中国的任职条件。",
-              "中国大陆口径：同类岗位多称信贷审查岗、授信资料核查岗、征信查询与信用服务岗或账款催收岗，分属金融业与商务服务等行业；本页未取得全国统一的强制资质公开条件，须按目标单位与主管部门现行规定核对，不能把美国准备层级当作中国门槛，也不能把岗位名称当作跨机构的授权。",
+              "美国当前部分档案Job Zone1-2、SVP低于6；高中文凭或GED及几日至一年在岗训练是跨职业层级通用说明，不是本岗实际新聘学历百分比、统一培训期或中国学历门槛。本岗教育响应分布未取得。",
+              "中国职业一一映射与全国资质资料未取得，非官方不存在；按目标业务的资格、数据与决定权限分别核。征信业管理条例13/14/18/20/21/22/25按主体核：个人收集/查询同意和用途有法定例外；企业资料规则另列；个人疾病与病史等属于征信机构禁止采集内容，不能因美国任务就收集。经营个人征信业务机构须明确工作人员查询个人信息的权限程序并登记；征信机构或信息提供者收到错误遗漏异议应按规定标注，自收到异议起20日内核查处理并书面答复。 中国适用个人贷款管理办法21条：审贷分离授权独立审批；适用线上自动审批的贷款人应建立人工复审机制作为补充并设触发条件，非每笔都人工。贷后发现不能有效识别风险时由贷款人停止自动审批流程；流动资金贷款办法20条按分级和转授权。二者2024-07-01施行，直接主体为境内商业银行等吸收公众存款机构，其他业务按参照条款与自身规则核。",
               "任何资格与任职要求都应以单位与主管部门的现行规定为准；本页不构成录用承诺、资格意见或法律意见。"
             ]
           },
           "id": "actors.path.credential-boundary.1",
           "source_refs": [
             "onet",
-            "bls",
-            "cn-rule"
+            "g04-credit",
+            "g04-personal-loan",
+            "g04-working-loan"
           ],
           "title": "训练、资格与作业边界",
           "type": "notice"
@@ -28928,7 +28966,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入行通常不要求专门学历但要求细致与合规意识：美国多数岗位要求高中文凭或同等学历并提供在岗训练，并从信贷资料整理、征信查询与客户服务辅助做起；能否按标准核对资料、把记录做准并如实说明依据，是比证书更可核对的准备证据。"
+              "美国当前部分档案Job Zone1-2、SVP低于6；高中文凭或GED及几日至一年在岗训练是跨职业层级通用说明，不是本岗实际新聘学历百分比、统一培训期或中国学历门槛。本岗教育响应分布未取得。 编辑可练标准、核查与记录，未取中国统一学历、助理必经路线或能力比证书更重要证据。"
             ]
           },
           "id": "actors.path.career-path-block.1",
@@ -28944,7 +28982,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国口径下，该职业准备层级为 Job Zone 1-2（需要很少至一些准备，SVP 低于 6.0），通常要求高中文凭或同等学历，岗位培训从几天到一年不等；入行多从信贷资料整理、征信查询与客户服务辅助做起，再承担标准的应用与授权处理；"
+              "美国当前部分档案Job Zone1-2、SVP低于6；高中文凭或GED及几日至一年在岗训练是跨职业层级通用说明，不是本岗实际新聘学历百分比、统一培训期或中国学历门槛。本岗教育响应分布未取得。 下方阶梯和分轨为编辑能力规划，非已证晋升路线；"
             ]
           },
           "id": "actors.path.career-path-block.2",
@@ -28960,7 +28998,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆没有与 O*NET-SOC 一一对应的职业细类，同类岗位多称信贷审查岗、授信资料核查岗、征信查询与信用服务岗或账款催收岗，录用与任职条件须按目标单位与现行规定核对。"
+              "中国一一职业映射与全国资格资料未取得，非官方不存在；任职、业务资格和数据审批权限按目标单位及规则核。"
             ]
           },
           "id": "actors.path.career-path-block.3",
@@ -29161,7 +29199,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域：美国口径来自 O*NET 与 BLS 公开资料；中国大陆口径参考银行信贷前台、消费金融与征信服务岗位的公开用工信息方向，具体要求以目标单位与现行规定为准。"
+              "美国用O*NET部分档案及适用RegB；中国个人信息、征信和贷款规则按主体核，不从统计首页证明用工。"
             ]
           },
           "id": "actors.display.career_path_block.locale.jurisdiction",
@@ -29321,7 +29359,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与标准与流程执行、质量把关与团队协作，承担带训与统筹；该阶段通常要求先积累核查与授权经验，任职条件由单位制度规定。"
+              "编辑能力方向：标准、质量、带训和统筹；实际管理权限另核，未取得统一晋升经验与顺序。"
             ]
           },
           "id": "actors.display.career_path_block.ladder.develop.description",
@@ -29401,7 +29439,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入职通常要求高中或中专以上学历与基础金融知识；条件按单位规定。"
+              "具体学历、金融知识和权限核目标单位；未取得中国本方向招聘样本，不称通常高中中专门槛。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.01.credentials",
@@ -29481,7 +29519,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按单位要求；金融与信用基础知识为核心依据。"
+              "编辑准备线索：核金融信用知识与目标单位任务条件，不据此断言全国核心任职依据。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.02.credentials",
@@ -29641,7 +29679,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "管理方向通常要求核查与授权经验，条件由单位制度规定。"
+              "管理职责、经验及实际授权核目标单位；未取得统一任职或晋升年限。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.screen.04.credentials",
@@ -29737,7 +29775,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入职通常要求高中或中专以上学历与基础金融知识；条件按单位规定。"
+              "具体学历、知识、查询权限核目标单位；未取中国全国入职条件。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.stage.01.credentials",
@@ -30073,7 +30111,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入职通常要求高中或中专以上学历与基础金融知识；条件按单位规定。"
+              "核目标单位账务资料岗位要求与数据权限，未取全国统一高中中专门槛。"
             ]
           },
           "id": "actors.display.career_path_block.tracks.live-entertainment.01.credentials",
@@ -30345,7 +30383,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "该细分 2024—2034 年就业预测与职位空缺（O*NET 就业趋势页，基于 BLS 预测）。"
+              "支持美国2025—2035职业预测，不证明从辅助岗起步或晋升顺序。"
             ]
           },
           "id": "actors.display.career_path_block.source.bls",
@@ -30377,7 +30415,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于中国大陆信贷授权与信用核查岗位的用工与合规边界的方向性核对。"
+              "原统计首页非职业资格或征信贷款法；具体权限用本轮实际条款。"
             ]
           },
           "id": "actors.display.career_path_block.source.cn-rule",
@@ -30393,7 +30431,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明工资分位的统计位置与不可年化，不提供个人收入结论。"
+              "2025本岗官方年工资已披露，标准2080不等个人实际工时或月到手。"
             ]
           },
           "id": "actors.display.career_path_block.source.r2-pay-3",
@@ -30417,7 +30455,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需求信号要分三层看：官方就业预测反映职业总量变化，信贷与信用业务量以及征信与合规要求决定岗位分布，"
+              "官方就业预测、实际岗位公告和业务资料分别核，不能将规则入口或业务规模直接当岗位需求统计。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.1",
@@ -30432,13 +30470,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 就业趋势页（基于 BLS 2024—2034 年预测）显示该细分 2024 年约 12,000 人，预测标签为 Decline（-1% 或更低，该口径预测变化约 -6%），年均约 1,000 个含增长与替换的空缺；该预测不含技术替代时点。"
+              "美国本岗2025就业12,200人→2035预测11,300人，2025—2035变化-7%（Decline）；年均空缺900个含增长与替换，不是累计、每年净增或录用率。预测非已发生变化。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls",
-            "oews"
+            "g04-trends"
           ],
           "type": "prose"
         },
@@ -30447,13 +30484,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 提供该细分的认证与培训查询入口，用于核对证书与培训信息；这属于信息入口说明，而不是需求信号。"
+              "本窗重新访问O*NET本岗认证查询，主内容实际显示6项认证目录；导航中的Loading不是列表结果。目录不等全国法定许可、当前招生或岗位需求，具体项目报名与适用条件未逐项取得。"
             ]
           },
           "id": "actors.market-signals.market-signal-card.3",
           "source_refs": [
             "bls",
-            "oews"
+            "oews",
+            "ratify"
           ],
           "type": "prose"
         },
@@ -30557,8 +30595,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.agent.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30572,8 +30609,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.agent.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30587,8 +30623,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.agent.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "agent"
           ],
           "type": "prose"
         },
@@ -30602,8 +30637,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.teacher.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30617,8 +30651,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.teacher.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30627,13 +30660,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从后台资料核查转向面向客户的业务推进。"
+              "编辑转向看贷款咨询、财务信用分析、限额内审批或转呈，分析与资料核查可重叠，非仅后台转销售。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.teacher.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "teacher"
           ],
           "type": "prose"
         },
@@ -30647,8 +30679,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30662,8 +30693,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30677,8 +30707,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.enrichment.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "enrichment"
           ],
           "type": "prose"
         },
@@ -30692,8 +30721,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.art.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30707,8 +30735,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.art.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30717,13 +30744,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从执行与核查转向财务统筹与团队管理。"
+              "编辑转向财务资金风险与团队，档案也含贷款审批和申请评估；需核实际管理责任及权限。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.art.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "art"
           ],
           "type": "prose"
         },
@@ -30737,8 +30763,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.directing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30752,8 +30777,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.directing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30767,8 +30791,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.directing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "directing"
           ],
           "type": "prose"
         },
@@ -30782,8 +30805,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.announcing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30797,8 +30819,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.announcing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30807,13 +30828,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从后台核查与授权转向柜台交易与服务。"
+              "编辑转向柜台收付、交易核实与账户服务；柜员也含部分贷款资料任务，不绝对排除。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.announcing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "announcing"
           ],
           "type": "prose"
         },
@@ -30827,8 +30847,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.editing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30842,8 +30861,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.editing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30857,8 +30875,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.editing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "editing"
           ],
           "type": "prose"
         },
@@ -30872,8 +30889,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.dancing.shared",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30887,8 +30903,7 @@
           },
           "id": "actors.display.market_signal_card.transitions.dancing.gaps",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30897,13 +30912,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "距离说明：从信贷核查转向账户开立与客户信息处理。"
+              "编辑转向开户客户信息与交易服务，新账户文员也有贷款申请及信用记录任务，不绝对排除信贷交叠。"
             ]
           },
           "id": "actors.display.market_signal_card.transitions.dancing.distance",
           "source_refs": [
-            "bls",
-            "oews"
+            "dancing"
           ],
           "type": "prose"
         },
@@ -30912,7 +30926,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于该细分 2024—2034 年就业预测与职位空缺（O*NET 就业趋势页，基于 BLS 预测）。"
+              "美国本岗2025就业12,200人→2035预测11,300人，2025—2035变化-7%（Decline）；年均空缺900个含增长与替换，不是累计、每年净增或录用率。预测非已发生变化。"
             ]
           },
           "id": "actors.display.market_signal_card.source.bls",
@@ -30927,7 +30941,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于查询认证与培训信息的官方入口，不预测岗位数量或工资水平。"
+              "认证查询入口结果未取得，不测需求或工资，不是注册学徒证明。"
             ]
           },
           "id": "actors.display.market_signal_card.source.ratify",
@@ -31113,12 +31127,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源：O*NET OnLine 信贷授权员、核查员、文员（43-4041.00）职业档案、全国工资（OEWS 2025 年工资数据）与就业趋势（基于 BLS 2024—2034 年预测）、ILO 生成式 AI 与职业任务暴露研究、NIST AI 风险管理框架，以及国家统计局公开资料；各条目的口径与使用限制见下方来源登记。"
+              "O*NET部分任务与Context评分、2025工资/行业/热门、2025—2035预测、NBS2025行业工资、中国PIPL/征信/贷款法及美国Regulation B通知条款；ILO与NIST为方法/自愿框架，按各自范围使用。"
             ]
           },
           "id": "actors.display.source_card.source",
           "source_refs": [
-            "onet"
+            "g04-trends",
+            "g04-industry",
+            "g04-nbs"
           ],
           "type": "prose"
         },
@@ -31127,7 +31143,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "更新：2026-09-18（各来源检索日期见来源登记）"
+              "本轮九模块作者修订：2026-10-09；范围外保留原值，统计期及检索范围分别记。"
             ]
           },
           "id": "actors.display.source_card.updated-at",
@@ -31290,7 +31306,7 @@
                 ],
                 "evidence_type": "official source",
                 "id": "art",
-                "limitation": "只支持财务经理（相邻职业）的财务活动统筹与团队管理任务；同口径中位年薪 166,570 美元（O*NET 全国工资，2025 年工资数据）；不把财务统筹职责并入本职业。",
+                "limitation": "实际17任务含贷款审批及申请评估、财务资金与团队，非仅团队统筹；不直接并入本岗。",
                 "market": "美国",
                 "name": "O*NET OnLine：Financial Managers（11-3031.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31301,12 +31317,11 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "支持该细分的就业与预测口径。",
-                  "不含中国大陆信息，不能替代中国大陆数据。"
+                  "当前直连原文2025—2035与网页工具旧缓存差异已记录，未回改保护字段。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "bls",
-                "limitation": "支持该细分 2024 年就业约 12,000 人、预测标签 Decline（-1% 或更低，该口径预测变化约 -6%）与年均约 1,000 个含增长与替换的空缺；本页就业与预测以该 O*NET 就业趋势页为准。",
+                "limitation": "原2024—2034引用为保护Hero/FAQ保留，当前直连页已2025—2035；12,000/-6%/1,000不再当当前数据支持，九模块用g04-trends。",
                 "market": "美国",
                 "name": "O*NET OnLine：Credit Authorizers, Checkers, and Clerks 就业趋势（基于 BLS 2024—2034 年预测）",
                 "period": "2024—2034 年预测期；检索 2026-09-18",
@@ -31317,16 +31332,15 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "支持中国大陆信贷授权与信用核查岗位的分类与用工语境。",
-                  "不据此推定任职资格、授权或工资数值。"
+                  "原主页不能证明职业分类、用工或权限；真实条款由新增g04来源支持。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official website index",
                 "id": "cn-rule",
-                "limitation": "支持中国大陆同类岗位多称信贷审查岗、授信资料核查岗、征信查询与信用服务岗或账款催收岗、分属金融业与商务服务等行业、数据权限与查询披露因机构与岗位不同的分类语境；不证明全国统一的强制资质，也不能把该类岗位与美国职业代码一一对应。",
+                "limitation": "不支持原信用核查职业分类或全国资质主张；保护FAQ保留原依赖不等核实。",
                 "market": "中国内地",
-                "name": "中国大陆公开金融与征信用工信息（信贷授权与信用核查岗位）",
+                "name": "国家统计局主页（原cn-rule登记，非金融征信用工法规）",
                 "period": "现行规定；检索 2026-09-18",
-                "publisher": "公开金融与征信用工信息",
+                "publisher": "国家统计局",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/"
               },
@@ -31386,7 +31400,7 @@
                 ],
                 "evidence_type": "official source",
                 "id": "editor",
-                "limitation": "支持金融审查员（相邻职业）的金融机构合规检查与记录核查任务；重心在监管合规与检查，通常不承担具体信贷申请的授权与核查。",
+                "limitation": "实际17任务16Core/1Supplemental，含金融机构合规、贷款文件与问题账户检查；这是相邻监管检查目的，具体权限另核，不以名称绝对排除信用资料。",
                 "market": "美国",
                 "name": "O*NET OnLine：Financial Examiners（13-2061.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31397,12 +31411,11 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "支持入行准备层级与教育需求的观察点。",
-                  "不构成具体雇主的录用条件或中国大陆的门槛。"
+                  "通用Job Zone说明不是中国门槛或本岗实际教育比例。"
                 ],
                 "evidence_type": "official source",
                 "id": "employer",
-                "limitation": "支持本职业的准备层级（Job Zone 1-2，SVP 低于 6.0）与兴趣代码（CES）；不代表具体雇主的招聘条件，也不等同于中国大陆的要求。",
+                "limitation": "美国当前部分档案Job Zone1-2、SVP低于6；高中文凭或GED及几日至一年在岗训练是跨职业层级通用说明，不是本岗实际新聘学历百分比、统一培训期或中国学历门槛。本岗教育响应分布未取得。",
                 "market": "美国",
                 "name": "O*NET OnLine：Credit Authorizers, Checkers, and Clerks 摘要（43-4041.00）",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31432,11 +31445,11 @@
                   "兴趣问卷只用于自我观察。",
                   "不得作为录用、排班或晋升依据。"
                 ],
-                "evidence_type": "official tool",
+                "evidence_type": "official tool entry",
                 "id": "interest-profiler",
-                "limitation": "兴趣问卷只描述体验偏好，不替代能力、资格、健康或录用判断，也不预测工作表现。",
+                "limitation": "原URL是O*NET主页入口，不是本产品问卷或本岗匹配效度证据；CES兴趣可由本岗档案核。",
                 "market": "美国/通用",
-                "name": "O*NET Interest Profiler（职业兴趣问卷）",
+                "name": "O*NET主页与Interest Profiler导航入口",
                 "period": "当前工具；检索 2026-09-18",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
@@ -31445,12 +31458,11 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "登记中国大陆公开工资统计的细分层级。",
-                  "代理值不得写成本职业工资。"
+                  "职业工资缺口不推官方完全不存在更细统计。"
                 ],
-                "evidence_type": "official statistics",
+                "evidence_type": "official website index",
                 "id": "nbs",
-                "limitation": "公开工资统计按行业门类与人员类别发布，未建立与 43-4041.00 对应的职业细类；行业或人员类别均值不是本职业工资，也不能外推为全国职业收入。",
+                "limitation": "原首页仅入口，不证明职业映射不存在；实际2025行业均值见g04-nbs。",
                 "market": "中国内地",
                 "name": "国家统计局：公开统计与工资发布入口",
                 "period": "现行发布；检索 2026-09-18",
@@ -31461,12 +31473,11 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "用于说明引入 AI 系统时的治理、记录与人工监督要求。",
-                  "框架不替代机构制度与适用规定的责任划分。"
+                  "角色责任和监督作框架参考，实际法定义务另核。"
                 ],
                 "evidence_type": "institutional framework",
                 "id": "nist",
-                "limitation": "提供 AI 系统风险治理的用语与流程要求（角色、责任、记录与人工监督）；不规定信贷与征信流程、信用信息保护或不歧视与通知要求。",
+                "limitation": "AI RMF1.0自愿治理建议，不构成中国贷款或美国通知强制条款。",
                 "market": "美国",
                 "name": "NIST：Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
                 "period": "AI RMF 1.0；检索 2026-09-18",
@@ -31493,12 +31504,11 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "支持本职业的任务、工作情境与准备层级。",
-                  "不含技术采用与岗位替代数据。"
+                  "当前部分档案仍在补充；55项Context是0—100评分而非响应百分比。"
                 ],
                 "evidence_type": "official occupation data",
                 "id": "onet",
-                "limitation": "支持本职业的任务、工作活动、工作情境百分比、准备层级、兴趣代码与 2024 年行业就业占比；为单一职业口径，不含技术采用、岗位替代或收入变化数据。",
+                "limitation": "美国43-4041.00当前部分档案列16任务：4Core为收费付款记录、汇总分析调查信用信息、银行等信用服务信息获取及相互提供、访谈收集个人财务数据；7Supplemental为按预定标准决定新信用、签购单登账、接收申请信息、寄账单、公开记录核实、向订户转达报告、制备信用卡或账户标牌；5New为催收、投诉交易核实、前雇主等核推荐就业健康或社会行为、调查建议报告、挑逾期档案。New未提供重要性评分，不把全部称Core或每日必做。美国任务中的健康或逮捕记录核查不是中国合法收集授权。 美国当前55项情境显示0—100标准化评分（非人群百分比）：电话100、接触他人97、邮件96、面对面93、准确93、外部客户92、久坐92、时间压力92、团队91、优先级88、决策影响88、决策自由85、重复任务重要性83、冲突78、可控室内78、重复动作72、不满客户71、竞争56、错误后果54、自动化49。未取得响应分档分布，不能据评分说多少人每日、持续或最高档。页面2026更新不是统一调查年。 美国2025本岗行业就业：金融保险27%、零售17%、批发14%、行政支持11%、企业管理11%、其他20%含房地产租赁；合计100%。这是就业归类非工资，不保留旧33/12/11/10/10/24为当前。",
                 "market": "美国",
                 "name": "O*NET OnLine：Credit Authorizers, Checkers, and Clerks（43-4041.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31509,15 +31519,14 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "支持雇主技术关键词的市场信号说明。",
-                  "关键词不等于采用率或能力要求。"
+                  "2025 Lightcast全美招聘热门：Excel26%、Office17%、Outlook12%、Word与PowerPoint各7%、SAP与SQL各3%、Tableau与Access各1%、SharePoint小于1%。招聘词不是软件采用率、生成式AI比例、熟练度或强制门槛。"
                 ],
-                "evidence_type": "official occupation data",
+                "evidence_type": "job posting technology keyword data",
                 "id": "r2-ai",
-                "limitation": "列出雇主招聘中提到的电子表格、办公软件与数据库查询等技术关键词；招聘关键词是市场信号，不衡量使用率、熟练度或岗位替代。",
+                "limitation": "关键词非AI采用率、熟练度或强制招聘条件。",
                 "market": "美国",
                 "name": "O*NET OnLine：Credit Authorizers, Checkers, and Clerks 热门技术（43-4041.00）",
-                "period": "页面 2026 年更新；检索 2026-09-18",
+                "period": "2025 Lightcast招聘，本轮核2026-10-09",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/43-4041.00"
@@ -31525,12 +31534,11 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "登记中国大陆公开工资统计的细分层级。",
-                  "未取得本职业单列数值，不使用代理数字。"
+                  "职业工资及一一映射未取得，不补0。"
                 ],
-                "evidence_type": "official statistics",
+                "evidence_type": "official website index",
                 "id": "r2-pay-1",
-                "limitation": "公开工资统计只按区域、行业门类与人员类别发布，未建立与本职业一一对应的职业细类；本页未取得本职业单列数值，缺口在页面可见位置标记。",
+                "limitation": "原首页仅入口，实际行业均值见g04-nbs，不能推无职业分类。",
                 "market": "中国内地",
                 "name": "国家统计局：公开工资统计发布入口",
                 "period": "现行发布；检索 2026-09-18",
@@ -31555,10 +31563,9 @@
                 "url": "https://www.bls.gov/opub/hom/oews/concepts.htm"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-09",
                 "details": [
-                  "用于说明工资分位的统计位置。",
-                  "不提供个人收入结论，也不能按固定工时年化。"
+                  "2025官方年度分位已披露，标准2080不等个人全年工时或月到手。"
                 ],
                 "evidence_type": "official statistics",
                 "id": "r2-pay-3",
@@ -31571,17 +31578,16 @@
                 "url": "https://www.onetonline.org/link/localwages/43-4041.00"
               },
               {
-                "accessed_at": "2026-09-18",
+                "accessed_at": "2026-10-10",
                 "details": [
-                  "支持认证与培训信息的核对入口。",
-                  "入口不预测岗位数量或工资水平。"
+                  "本窗2026-10-10重新访问该认证查询，主内容显示6项认证目录；导航Loading不代列表结果。"
                 ],
-                "evidence_type": "official guidance",
+                "evidence_type": "official certification query entry",
                 "id": "ratify",
-                "limitation": "提供该细分的认证与培训查询入口，用于核对证书与培训信息；属于信息入口说明，不预测岗位数量或工资水平，也不替代中国大陆的用工条件。",
+                "limitation": "目录非全国法定许可、当前招生或岗位需求；各项目报名条件未逐项取得，学徒查询另核。",
                 "market": "美国",
                 "name": "O*NET OnLine：Credit Authorizers, Checkers, and Clerks 认证与培训入口（43-4041.00）",
-                "period": "页面 2026 年更新；检索 2026-09-18",
+                "period": "2026-10-10访问的认证查询目录，非项目招生期间",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/43-4041.00"
@@ -31594,7 +31600,7 @@
                 ],
                 "evidence_type": "institutional research",
                 "id": "sag",
-                "limitation": "按任务级暴露度量生成式 AI 与职业任务的接近程度；不提供本职业单职业分数、采用率、自动化率或替代日期。",
+                "limitation": "支持全球任务暴露方法；本轮未取得43-4041精确匹配评分或采用/替代因果，非研究无任何职业明细。",
                 "market": "全球",
                 "name": "ILO：Generative AI and Jobs — Refined Global Index of Occupational Exposure",
                 "period": "研究发表时点；检索 2026-09-18",
@@ -31605,12 +31611,11 @@
               {
                 "accessed_at": "2026-09-18",
                 "details": [
-                  "支持任务、工作活动与工作情境百分比。",
-                  "不含技术采用、岗位数量或收入变化数据。"
+                  "当前部分档案；情境均值评分不是最高档回答人数。"
                 ],
                 "evidence_type": "official source",
                 "id": "sag-moa",
-                "limitation": "支持本职业（43-4041.00）的任务、工作活动与工作情境百分比；该页为单一职业口径，不含技术采用或岗位替代数据。",
+                "limitation": "美国43-4041.00当前部分档案列16任务：4Core为收费付款记录、汇总分析调查信用信息、银行等信用服务信息获取及相互提供、访谈收集个人财务数据；7Supplemental为按预定标准决定新信用、签购单登账、接收申请信息、寄账单、公开记录核实、向订户转达报告、制备信用卡或账户标牌；5New为催收、投诉交易核实、前雇主等核推荐就业健康或社会行为、调查建议报告、挑逾期档案。New未提供重要性评分，不把全部称Core或每日必做。美国任务中的健康或逮捕记录核查不是中国合法收集授权。 美国当前55项情境显示0—100标准化评分（非人群百分比）：电话100、接触他人97、邮件96、面对面93、准确93、外部客户92、久坐92、时间压力92、团队91、优先级88、决策影响88、决策自由85、重复任务重要性83、冲突78、可控室内78、重复动作72、不满客户71、竞争56、错误后果54、自动化49。未取得响应分档分布，不能据评分说多少人每日、持续或最高档。页面2026更新不是统一调查年。",
                 "market": "美国",
                 "name": "O*NET OnLine：Credit Authorizers, Checkers, and Clerks 详细资料（43-4041.00）",
                 "period": "页面 2026 年更新；检索 2026-09-18",
@@ -31626,13 +31631,166 @@
                 ],
                 "evidence_type": "official source",
                 "id": "teacher",
-                "limitation": "只支持信贷专员（相邻职业）的客户接洽与贷款申请推动任务；同口径中位年薪 76,690 美元（O*NET 全国工资，2025 年工资数据）；不把业务推动职责并入本职业。",
+                "limitation": "实际30任务14Core/3Supplemental/13New，含信用财务分析、限额内审批或转呈及客户咨询，非仅业务推进。",
                 "market": "美国",
                 "name": "O*NET OnLine：Loan Officers（13-2072.00）职业档案",
                 "period": "页面 2026 年更新；检索 2026-09-18",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/13-2072.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国本岗2025就业12,200人→2035预测11,300人，2025—2035变化-7%（Decline）；年均空缺900个含增长与替换，不是累计、每年净增或录用率。预测非已发生变化。"
+                ],
+                "evidence_type": "official employment projection",
+                "id": "g04-trends",
+                "limitation": "直连当前2025—2035；网页工具缓存仍2024—2034，按实际当前源，不证明AI因果",
+                "market": "美国",
+                "name": "O*NET43-4041.00就业趋势（BLS2025—2035）",
+                "period": "2025—2035",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/43-4041.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "美国2025本岗行业就业：金融保险27%、零售17%、批发14%、行政支持11%、企业管理11%、其他20%含房地产租赁；合计100%。这是就业归类非工资，不保留旧33/12/11/10/10/24为当前。"
+                ],
+                "evidence_type": "official occupation industry employment distribution",
+                "id": "g04-industry",
+                "limitation": "details明确2025；行业就业非工资，非中国单位占比",
+                "market": "美国",
+                "name": "O*NET43-4041.00：2025行业就业分布",
+                "period": "2025",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/43-4041.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "2025 Lightcast全美招聘热门：Excel26%、Office17%、Outlook12%、Word与PowerPoint各7%、SAP与SQL各3%、Tableau与Access各1%、SharePoint小于1%。招聘词不是软件采用率、生成式AI比例、熟练度或强制门槛。"
+                ],
+                "evidence_type": "job posting technology keyword data",
+                "id": "g04-hot",
+                "limitation": "招聘词不是采用率或强制条件",
+                "market": "美国",
+                "name": "O*NET43-4041.00热门招聘技术（2025 Lightcast）",
+                "period": "2025",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/43-4041.00"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "各描述指标均值标准化到0—100，不等相应回答人群比例；Context含不同量表。"
+                ],
+                "evidence_type": "official methodology",
+                "id": "g04-scales",
+                "limitation": "必须结合实际表头，本岗只有Context评分未取分档响应",
+                "market": "美国",
+                "name": "O*NET Scales, Ratings, and Standardized Scores",
+                "period": "当前方法",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/help/online/scales"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际核a1/a2/a3及b2主要理由和评分/判断混合说明；不以撤回2022-03通告作现行规范。",
+                  "美国Regulation B§1002.9：适用不利行动通知可直接说明具体主要理由，也可按条款通知请求理由的权利；不是任何拒绝都必须当场完整说明。一般完整申请30日通知，企业信用有收入及贸易信用等不同安排；具体理由须反映实际采用因素，不能仅称内部政策或评分不足。解释义务不等所有决定必须人工。"
+                ],
+                "evidence_type": "federal regulation",
+                "id": "g04-regb",
+                "limitation": "美国适用信用人义务，非中国通用通知法；企业信用与不同申请状态条款分别核",
+                "market": "美国",
+                "name": "CFPB Regulation B §1002.9 Notifications",
+                "period": "页面标当前版本",
+                "publisher": "Consumer Financial Protection Bureau",
+                "scope": "contextual",
+                "url": "https://www.consumerfinance.gov/rules-policy/regulations/1002/9/"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "证据不足：中国本岗全国工资分布、招聘报价与职业一一映射未取得。NBS2025金融业非私营税前年均211,164元、私营140,451元；批发零售非私营135,749元、私营69,622元；须法人主营行业匹配才作条件背景，非本岗中位/月到手。城镇5人及以上法人、不含个体自由职业，均为行业背景，不代本岗工资。"
+                ],
+                "evidence_type": "official wage statistics",
+                "id": "g04-nbs",
+                "limitation": "金融或批零行业须法人主营行业匹配，非本岗工资或月到手。",
+                "market": "中国内地",
+                "name": "国家统计局2025年城镇单位就业人员平均工资",
+                "period": "2025工资，2026-05-15发布",
+                "publisher": "中国政府官方网站",
+                "scope": "proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际核4/6/8/13/14/21/23/24/28/29条。",
+                  "个人信息保护法适用于已识别或可识别自然人信息，金融账户属于敏感个人信息；不能把所有企业信用信息统称敏感个人信息。处理须有第13条等适用依据并符合目的明确、最小必要与准确要求，不把同意作为唯一合法基础。"
+                ],
+                "evidence_type": "law",
+                "id": "g04-pipl",
+                "limitation": "自然人信息范围；同意例外与敏感信息规则依适用条件核，不把企业信息全部视作个人敏感信息",
+                "market": "中国内地",
+                "name": "中华人民共和国个人信息保护法（网信办全文）",
+                "period": "2021-11-01施行",
+                "publisher": "中国政府官方网站",
+                "scope": "proxy",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "征信业管理条例13/14/18/20/21/22/25按主体核：个人收集/查询同意和用途有法定例外；企业资料规则另列；个人疾病与病史等属于征信机构禁止采集内容，不能因美国任务就收集。经营个人征信业务机构须明确工作人员查询个人信息的权限程序并登记；征信机构或信息提供者收到错误遗漏异议应按规定标注，自收到异议起20日内核查处理并书面答复。"
+                ],
+                "evidence_type": "administrative regulation",
+                "id": "g04-credit",
+                "limitation": "征信机构个人疾病病史禁止采集与普通岗位权限区分，不能照搬美国任务。",
+                "market": "中国内地",
+                "name": "征信业管理条例（国务院631号，市场监管总局转载）",
+                "period": "2013-03-15施行",
+                "publisher": "中国政府官方网站",
+                "scope": "proxy",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_f06d5be45fcf464abe3fbdb9b2b3b37c.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际核适用范围、20/21条及参照条款。",
+                  "适用个人贷款管理办法第21条：审贷分离、授权独立审批；适用线上自动审批的贷款人应建立人工复审机制作为补充并设触发条件，非每笔必须人工决定。贷后发现自动审批不能有效识别风险时，由贷款人停止该流程。流动资金贷款管理办法第20条强调分级审批及转授权边界；二者2024-07-01施行，直接适用境内商业银行等吸收公众存款机构，其他机构按各自规则及参照条款核。"
+                ],
+                "evidence_type": "departmental regulation",
+                "id": "g04-personal-loan",
+                "limitation": "贷款人审批机制义务，非每笔必人工决定或任意分析师停全机构权限",
+                "market": "中国内地",
+                "name": "个人贷款管理办法（金融监管总局2024第3号，交通运输部信用站转载）",
+                "period": "2024-07-01施行",
+                "publisher": "中国政府官方网站",
+                "scope": "proxy",
+                "url": "https://credit.mot.gov.cn/zhengcefagui/202408/t20240807_4147084.html"
+              },
+              {
+                "accessed_at": "2026-10-09",
+                "details": [
+                  "实际核适用范围及17—20条风险评价、评级、需求和分级授权审批。"
+                ],
+                "evidence_type": "departmental regulation",
+                "id": "g04-working-loan",
+                "limitation": "仅匹配贷款业务与法定主体，非所有个人信贷或征信机构统一规则",
+                "market": "中国内地",
+                "name": "流动资金贷款管理办法（金融监管总局2024第2号，交通运输部信用站转载）",
+                "period": "2024-07-01施行",
+                "publisher": "中国政府官方网站",
+                "scope": "proxy",
+                "url": "https://credit.mot.gov.cn/zhengcefagui/202408/t20240807_4147083.html"
               }
             ]
           },
@@ -32093,7 +32251,7 @@
           },
           {
             "来源": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32112,7 +32270,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32337,7 +32495,7 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -32356,7 +32514,7 @@
               "type": "prose"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -32575,14 +32733,14 @@
               "type": "prose"
             },
             "来源": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "actors.source-register.published.1"
             },
             "链接": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33160,7 +33318,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33168,7 +33326,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33206,7 +33364,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "g04-credit",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -33214,7 +33372,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "g04-credit",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -33249,6 +33407,114 @@
               "copy_key": "career.item.career-path-block",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "g04-pipl",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "g04-pipl",
+            "label": {
+              "$source": "g04-pipl",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            },
+            "scope": "自然人信息范围；同意例外与敏感信息规则依适用条件核，不把企业信息全部视作个人敏感信息"
+          },
+          {
+            "href": {
+              "$source": "g04-credit",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "g04-credit",
+            "label": {
+              "$source": "g04-credit",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            },
+            "scope": "征信机构个人疾病病史禁止采集与普通岗位权限区分，不能照搬美国任务。"
+          },
+          {
+            "href": {
+              "$source": "g04-personal-loan",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "g04-personal-loan",
+            "label": {
+              "$source": "g04-personal-loan",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            },
+            "scope": "贷款人审批机制义务，非每笔必人工决定或任意分析师停全机构权限"
+          },
+          {
+            "href": {
+              "$source": "g04-working-loan",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "g04-working-loan",
+            "label": {
+              "$source": "g04-working-loan",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            },
+            "scope": "仅匹配贷款业务与法定主体，非所有个人信贷或征信机构统一规则"
+          },
+          {
+            "href": {
+              "$source": "g04-regb",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "g04-regb",
+            "label": {
+              "$source": "g04-regb",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            },
+            "scope": "美国适用信用人义务，非中国通用通知法；企业信用与不同申请状态条款分别核"
+          },
+          {
+            "href": {
+              "$source": "g04-scales",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "g04-scales",
+            "label": {
+              "$source": "g04-scales",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            },
+            "scope": "必须结合实际表头，本岗只有Context评分未取分档响应"
           }
         ],
         "tracks": [
@@ -34093,7 +34359,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "sag-moa"
+              "g04-pipl",
+              "g04-credit"
             ],
             "id": "image-use",
             "mitigation": {
@@ -34129,7 +34396,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls"
+              "g04-personal-loan",
+              "g04-working-loan"
             ],
             "id": "physical-boundary",
             "mitigation": {
@@ -34165,7 +34433,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls"
+              "g04-regb"
             ],
             "id": "project-income",
             "mitigation": {
@@ -34201,7 +34469,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "cn-rule"
+              "g04-pipl",
+              "g04-credit",
+              "g04-personal-loan"
             ],
             "id": "identity-procedure",
             "mitigation": {
@@ -34237,8 +34507,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "nist",
-              "sag-moa"
+              "onet"
             ],
             "id": "project-data",
             "mitigation": {
@@ -34274,8 +34543,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
-              "employer"
+              "sag-moa",
+              "g04-scales"
             ],
             "id": "audition-feedback",
             "mitigation": {
@@ -34302,7 +34571,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34310,7 +34579,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34348,7 +34617,7 @@
           },
           {
             "href": {
-              "$source": "cn-rule",
+              "$source": "g04-credit",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -34356,7 +34625,7 @@
             },
             "id": "cn-rule",
             "label": {
-              "$source": "cn-rule",
+              "$source": "g04-credit",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -34414,6 +34683,114 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$source": "g04-pipl",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "g04-pipl",
+            "label": {
+              "$source": "g04-pipl",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            },
+            "scope": "自然人信息范围；同意例外与敏感信息规则依适用条件核，不把企业信息全部视作个人敏感信息"
+          },
+          {
+            "href": {
+              "$source": "g04-credit",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "g04-credit",
+            "label": {
+              "$source": "g04-credit",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            },
+            "scope": "征信机构个人疾病病史禁止采集与普通岗位权限区分，不能照搬美国任务。"
+          },
+          {
+            "href": {
+              "$source": "g04-personal-loan",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "g04-personal-loan",
+            "label": {
+              "$source": "g04-personal-loan",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            },
+            "scope": "贷款人审批机制义务，非每笔必人工决定或任意分析师停全机构权限"
+          },
+          {
+            "href": {
+              "$source": "g04-working-loan",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "g04-working-loan",
+            "label": {
+              "$source": "g04-working-loan",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            },
+            "scope": "仅匹配贷款业务与法定主体，非所有个人信贷或征信机构统一规则"
+          },
+          {
+            "href": {
+              "$source": "g04-regb",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "g04-regb",
+            "label": {
+              "$source": "g04-regb",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            },
+            "scope": "美国适用信用人义务，非中国通用通知法；企业信用与不同申请状态条款分别核"
+          },
+          {
+            "href": {
+              "$source": "g04-scales",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "actors.source-register.published.1"
+            },
+            "id": "g04-scales",
+            "label": {
+              "$source": "g04-scales",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "actors.source-register.published.1"
+            },
+            "scope": "必须结合实际表头，本岗只有Context评分未取分档响应"
           }
         ]
       },
@@ -34429,16 +34806,16 @@
             {
               "指标": "数据与口径",
               "数值": "本轮未取得与信贷授权员、核查员、文员（O*NET-SOC 43-4041.00）对应的中国大陆职业级工资数值，故不展示具体数字；缺口已在页面可见位置标记。",
-              "说明": "中国大陆公开工资统计最高细分到行业门类与人员类别，不发布该职业细类数值。"
+              "说明": "本轮实际查NBS2025行业年平均，未取本岗全国工资分布，不证明官方从未发布职业资料。"
             },
             {
               "指标": "查阅范围",
-              "数值": "国家统计局工资与统计发布页面（检索 2026-09-18）",
+              "数值": "NBS2025城镇单位平均工资（2026-05-15发布，本轮核2026-10-09）",
               "说明": "只用于说明实际查阅范围与时间，不作数值换算依据。"
             },
             {
               "指标": "职业分类",
-              "数值": "中国大陆同类岗位多称信贷审查岗、授信资料核查岗、征信查询与信用服务岗或账款催收岗，分属金融业与商务服务等行业",
+              "数值": "编辑检索信用核查、授权、征信服务、账户记录等方向；未取一一职业映射或全国用工占比。",
               "说明": "用于中国语境说明；不能把该类岗位直接等同于美国职业代码的职责或工资，也不能据此推定任职资格。"
             },
             {
@@ -34448,8 +34825,8 @@
             },
             {
               "指标": "统计覆盖",
-              "数值": "国家统计局城镇单位工资统计覆盖城镇法人单位，不含个体工商户与自由职业者等",
-              "说明": "部分信用与催收岗位以非标准用工形式存在，公开职业级数据未单列，行业均值不能代表该职业实际收入。"
+              "数值": "NBS城镇5人及以上法人，不含个体自由职业；金融非私营211,164，批零非私营135,749/私营69,622元税前年均（2025）。",
+              "说明": "须法人主营行业匹配才作背景；非本岗中位起薪或月到手，未取非标准用工占比。"
             },
             {
               "指标": "市场对照",
@@ -34473,10 +34850,10 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_class_row": "中国大陆用工场景：银行信贷前台与授信支持、消费金融与小额贷款、融资担保与信用保险、征信与信用服务及账款催收；公开工资统计按行业门类与人员类别发布，未建立与 O*NET-SOC 43-4041.00 对应的职业细类，本页不据分类推定任职资格或收入。",
+          "china_class_row": "编辑方向按实际职责与法人主营行业核；未取43-4041.00一一分类映射，不推任职资格或职业收入。",
           "china_edu_table": [
             {
-              "学历段": "高中或中专＋基础金融知识",
+              "学历段": "美国通用准备观察（非中国学历门槛）",
               "岗位方向": "信贷资料整理与征信查询辅助岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.featured",
@@ -34486,7 +34863,7 @@
               }
             },
             {
-              "学历段": "大专及以上＋金融或会计专业",
+              "学历段": "信用和资料基础（编辑准备方向）",
               "岗位方向": "信贷审查、授信资料核查与信用服务岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.background",
@@ -34496,7 +34873,7 @@
               }
             },
             {
-              "学历段": "本科及以上＋信贷或风控经验",
+              "学历段": "合法数据与决定权限（编辑核对方向）",
               "岗位方向": "信贷审批支持、征信与信用管理岗位",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.theater",
@@ -34506,7 +34883,7 @@
               }
             },
             {
-              "学历段": "相关经验＋带训",
+              "学历段": "统筹带训（编辑准备方向）",
               "岗位方向": "信贷主管或信用服务团队负责方向",
               "说明": {
                 "$item": "actors.display.career_snapshot_primary_locale.scenario.national",
@@ -34552,14 +34929,14 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "中国大陆公开信息检索入口：国家统计局工资与统计发布页面；本轮未取得该职业单列数值。",
+          "china_open": "实际查阅NBS2025行业平均工资；本岗全国职业工资与招聘报价分布未取得。",
           "china_open_note": {
             "$item": "actors.china-salary.career-snapshot-primary-locale.5",
             "block": "china-salary",
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_ref": "国家统计局：公开统计与工资发布入口｜https://www.stats.gov.cn/",
+          "china_ref": "NBS2025城镇单位平均工资｜https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html",
           "china_salary_note": {
             "$item": "actors.display.career_snapshot_primary_locale.boundary",
             "block": "china-salary",
@@ -34581,7 +34958,7 @@
               "月薪参考": {
                 "$join": [
                   {
-                    "$fact": "china-jiaojiang-featured-daily-2026",
+                    "$fact": "china-jiaojiang-featured-daily-2026-g04-current",
                     "field": "display_value"
                   },
                   {
@@ -34604,28 +34981,28 @@
               }
             }
           ],
-          "china_soc_row": "美国职业代码：O*NET-SOC 43-4041.00（Credit Authorizers, Checkers, and Clerks）；BLS 就业预测经 O*NET 就业趋势页发布；中国大陆未建立与之对应的职业级工资口径。",
+          "china_soc_row": "美国43-4041.00；中国本轮未取得一一职业映射和全国职业工资，非断言不存在。",
           "edu": "训练与资格见入行模块",
           "fact_refs": [
-            "china-jiaojiang-featured-daily-2026"
+            "china-jiaojiang-featured-daily-2026-g04-current"
           ],
           "sources_note": "来源链接按各自的统计或公告范围使用；统计期、调查对象与计酬口径不同时分别引用，不做相互换算。",
           "ui": {
             "ai_heading": "AI 或自动化会影响这个职业的工资吗？",
             "driver_heading": "信贷授权与核查工作怎样安排申请与账单周期？",
             "official_heading": "官方统计口径与缺失说明",
-            "scenario_caption": "学历与训练背景、岗位方向与说明（编辑整理，不是薪资统计）",
-            "scenario_heading": "不同学历与训练背景对应哪些信贷授权与信用核查岗位方向？",
+            "scenario_caption": "编辑准备方向，非中国学历门槛、招聘或薪资统计",
+            "scenario_heading": "准备能力与岗位方向怎样核对？",
             "scenario_interpretation_label": "说明与核对建议",
-            "scenario_role_label": "学历与训练背景",
+            "scenario_role_label": "准备观察方向",
             "scenario_value_label": "岗位方向"
           },
-          "us_growth": "下降 -1% 或更低（2024—2034 年，标签 Decline）",
+          "us_growth": "-7%（2025—2035；12,200→11,300）",
           "us_median": "50,080美元/年（中位数，2025 年工资数据）"
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "O*NET OnLine 全国工资：Credit Authorizers, Checkers, and Clerks 43-4041.00（2025 年工资数据）｜https://www.onetonline.org/link/localwages/43-4041.00；O*NET 就业趋势（BLS 2024—2034 年预测）｜https://www.onetonline.org/link/localtrends/43-4041.00",
+        "authority_sources": "O*NET43-4041.00全国工资2025 OEWS｜https://www.onetonline.org/link/localwages/43-4041.00；就业趋势BLS2025—2035｜https://www.onetonline.org/link/localtrends/43-4041.00",
         "bls_table": [
           {
             "fact_ref": "low",
@@ -34656,40 +35033,40 @@
             "说明": "第 75 百分位是分布上四分之一的位置，来源为同一统计期；不能据此推断经验年限或职级；O*NET 全国工资：43-4041.00（2025 年工资数据）｜https://www.onetonline.org/link/localwages/43-4041.00"
           },
           {
-            "fact_ref": "high",
+            "fact_ref": "high-g04-current",
             "指标": "薪资 · 90 分位",
             "数值": {
-              "$fact": "high",
+              "$fact": "high-g04-current",
               "field": "display_value"
             },
-            "说明": "第 90 百分位是高分段位置，通常与所在行业、机构与岗位职责差异相关，来源没有证明与经验的对应关系；O*NET 全国工资：43-4041.00（2025 年工资数据）｜https://www.onetonline.org/link/localwages/43-4041.00"
+            "说明": "第90分位仅分布位置，未取得行业、机构、职责或资历工资效应；2025本岗全国工资。"
           },
           {
-            "fact_ref": "employment",
-            "指标": "2024 就业 · 基期人数",
+            "fact_ref": "employment-g04-current",
+            "指标": "2025就业 · 基期人数",
             "数值": {
-              "$fact": "employment",
+              "$fact": "employment-g04-current",
               "field": "display_value"
             },
-            "说明": "就业规模是存量统计，不是当年招聘数量或岗位空缺数；来源为 O*NET 就业趋势页（基于 BLS 2024—2034 年预测）。"
+            "说明": "美国本岗2025就业12,200人→2035预测11,300人，2025—2035变化-7%（Decline）；年均空缺900个含增长与替换，不是累计、每年净增或录用率。预测非已发生变化。"
           },
           {
-            "fact_ref": "growth",
-            "指标": "2024—2034 就业 · 增长预测",
+            "fact_ref": "growth-g04-current",
+            "指标": "2025—2035就业 · 变化预测",
             "数值": {
-              "$fact": "growth",
+              "$fact": "growth-g04-current",
               "field": "display_value"
             },
-            "说明": "预测标签为「下降」，属于预测期的相对变化；该预测不含技术替代时点，也不代表个人录用概率。"
+            "说明": "美国本岗2025就业12,200人→2035预测11,300人，2025—2035变化-7%（Decline）；年均空缺900个含增长与替换，不是累计、每年净增或录用率。预测非已发生变化。"
           },
           {
-            "fact_ref": "openings",
-            "指标": "2024—2034 就业 · 职位空缺",
+            "fact_ref": "openings-g04-current",
+            "指标": "2025—2035就业 · 年均空缺",
             "数值": {
-              "$fact": "openings",
+              "$fact": "openings-g04-current",
               "field": "display_value"
             },
-            "说明": "该口径空缺说明含因增长与替换产生的职位空缺，不是每年净增岗位数；预测期为 2024—2034 年。"
+            "说明": "美国本岗2025就业12,200人→2035预测11,300人，2025—2035变化-7%（Decline）；年均空缺900个含增长与替换，不是累计、每年净增或录用率。预测非已发生变化。"
           }
         ],
         "boundary": {
@@ -34751,7 +35128,7 @@
           "type": "prose"
         },
         "growth": {
-          "$fact": "growth",
+          "$fact": "growth-g04-current",
           "field": "display_value"
         },
         "heading": {
@@ -34766,13 +35143,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024 年（O*NET 行业分布，43-4041.00 口径）",
+        "industry_period": "2025美国本岗行业就业分布，非工资",
         "industry_rows": [
           {
             "fact_ref": "median",
             "industry": "金融与保险",
             "median": {
-              "$fact": "industry-theater",
+              "$fact": "industry-theater-g04-current",
               "field": "display_value"
             },
             "note": {
@@ -34786,7 +35163,7 @@
             "fact_ref": "median",
             "industry": "批发贸易",
             "median": {
-              "$fact": "industry-education",
+              "$fact": "industry-education-g04-current",
               "field": "display_value"
             },
             "note": {
@@ -34800,7 +35177,7 @@
             "fact_ref": "median",
             "industry": "其他行业",
             "median": {
-              "$fact": "industry-amusement",
+              "$fact": "industry-amusement-g04-current",
               "field": "display_value"
             },
             "note": {
@@ -34812,7 +35189,7 @@
           },
           {
             "industry": "信贷授权员、核查员、文员所在行业（统计分类）",
-            "median": "分布合计｜100%（2024 年 O*NET 行业分布；金融与保险 33%、批发贸易 12%、零售贸易 11%、行政与支持服务 10%、企业管理与企业管理服务 10%、其他行业 24%）",
+            "median": "美国2025本岗行业就业：金融保险27%、零售17%、批发14%、行政支持11%、企业管理11%、其他20%含房地产租赁；合计100%。这是就业归类非工资，不保留旧33/12/11/10/10/24为当前。",
             "note": {
               "$item": "actors.display.career_snapshot_secondary_locale.industry.self-employed",
               "block": "us-salary",
@@ -34877,7 +35254,7 @@
           "type": "prose"
         },
         "outlook_period": {
-          "$fact": "growth",
+          "$fact": "growth-g04-current",
           "field": "period"
         },
         "wage_column_labels": [
@@ -34894,7 +35271,7 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "不可按固定工时年化",
+            "equivalent": "官方年值已披露，非个人实际工时年化",
             "interpretation": {
               "$item": "actors.us-salary.career-snapshot-secondary-locale.2",
               "block": "us-salary",
@@ -34931,7 +35308,7 @@
             },
             "label": "较高工资位置（第 90 分位）",
             "value": {
-              "$fact": "high",
+              "$fact": "high-g04-current",
               "field": "display_value"
             }
           }
@@ -35084,7 +35461,7 @@
           {
             "geography": "美国",
             "horizon": {
-              "$fact": "growth",
+              "$fact": "growth-g04-current",
               "field": "period"
             },
             "interpretation": {
@@ -35100,10 +35477,10 @@
               "type": "prose"
             },
             "metric": "就业总体变化",
-            "occupation_scope": "信贷授权员、核查员、文员（O*NET 就业趋势页，基于 BLS 2024—2034 年预测）",
-            "source_id": "bls",
+            "occupation_scope": "美国43-4041.00，BLS2025—2035",
+            "source_id": "g04-trends",
             "value": {
-              "$fact": "growth",
+              "$fact": "growth-g04-current",
               "field": "display_value"
             }
           },
@@ -35152,7 +35529,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -35160,7 +35537,7 @@
             },
             "id": "bls",
             "label": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -35452,7 +35829,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET OnLine 就业趋势（BLS 2024—2034 年预测）",
+            "label": "O*NET就业趋势：BLS2025—2035",
             "secondary_value": null,
             "value": {
               "$item": "actors.display.onet_structured_fields_block.bls",
@@ -35474,7 +35851,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中国公开金融与征信用工信息",
+            "label": "中国个人信息、征信与贷款条款（按主体）",
             "secondary_value": null,
             "value": {
               "$item": "actors.display.onet_structured_fields_block.cn",
@@ -36216,14 +36593,14 @@
           },
           {
             "href": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "bls",
+              "$source": "g04-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36348,14 +36725,14 @@
           },
           {
             "href": {
-              "$source": "art",
+              "$source": "directing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "actors.source-register.published.1"
             },
             "label": {
-              "$source": "art",
+              "$source": "directing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -36986,6 +37363,102 @@
         "source_refs": [
           "r2-pay-1"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "12,200人（2025美国本岗）",
+        "fact_id": "employment-g04-current",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "美国本岗2025就业12,200人→2035预测11,300人，2025—2035变化-7%（Decline）；年均空缺900个含增长与替换，不是累计、每年净增或录用率。预测非已发生变化。",
+        "period": "2025—2035预测；本轮核2026-10-09",
+        "source_refs": [
+          "g04-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "-7%（2025—2035，Decline；12,200→11,300）",
+        "fact_id": "growth-g04-current",
+        "market": "美国",
+        "measure": "就业变化率",
+        "occupation_scope": "美国本岗2025就业12,200人→2035预测11,300人，2025—2035变化-7%（Decline）；年均空缺900个含增长与替换，不是累计、每年净增或录用率。预测非已发生变化。",
+        "period": "2025—2035预测；本轮核2026-10-09",
+        "source_refs": [
+          "g04-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均900个（2025—2035，含增长与替换）",
+        "fact_id": "openings-g04-current",
+        "market": "美国",
+        "measure": "年均职位空缺",
+        "occupation_scope": "美国本岗2025就业12,200人→2035预测11,300人，2025—2035变化-7%（Decline）；年均空缺900个含增长与替换，不是累计、每年净增或录用率。预测非已发生变化。",
+        "period": "2025—2035预测；本轮核2026-10-09",
+        "source_refs": [
+          "g04-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "金融与保险｜27%（2025行业就业占比）",
+        "fact_id": "industry-theater-g04-current",
+        "market": "美国",
+        "measure": "行业就业占比（非工资）",
+        "occupation_scope": "美国2025本岗行业就业：金融保险27%、零售17%、批发14%、行政支持11%、企业管理11%、其他20%含房地产租赁；合计100%。这是就业归类非工资，不保留旧33/12/11/10/10/24为当前。",
+        "period": "2025行业/工资；本轮核2026-10-09",
+        "source_refs": [
+          "g04-industry"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "批发贸易｜14%（2025行业就业占比）",
+        "fact_id": "industry-education-g04-current",
+        "market": "美国",
+        "measure": "行业就业占比（非工资）",
+        "occupation_scope": "美国2025本岗行业就业：金融保险27%、零售17%、批发14%、行政支持11%、企业管理11%、其他20%含房地产租赁；合计100%。这是就业归类非工资，不保留旧33/12/11/10/10/24为当前。",
+        "period": "2025行业/工资；本轮核2026-10-09",
+        "source_refs": [
+          "g04-industry"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "其他行业｜20%（2025，含房地产租赁等）",
+        "fact_id": "industry-amusement-g04-current",
+        "market": "美国",
+        "measure": "行业就业占比（非工资）",
+        "occupation_scope": "美国2025本岗行业就业：金融保险27%、零售17%、批发14%、行政支持11%、企业管理11%、其他20%含房地产租赁；合计100%。这是就业归类非工资，不保留旧33/12/11/10/10/24为当前。",
+        "period": "2025行业/工资；本轮核2026-10-09",
+        "source_refs": [
+          "g04-industry"
+        ]
+      },
+      {
+        "derivation": "条件匹配行业背景，职业级工资缺口保留，不换算月薪。",
+        "display_value": "证据不足：中国本岗全国工资分布、招聘报价与职业一一映射未取得。NBS2025金融业非私营税前年均211,164元、私营140,451元；批发零售非私营135,749元、私营69,622元；须法人主营行业匹配才作条件背景，非本岗中位/月到手。城镇5人及以上法人、不含个体自由职业，均为行业背景，不代本岗工资。",
+        "fact_id": "china-jiaojiang-featured-daily-2026-g04-current",
+        "market": "中国内地",
+        "measure": "未取得的统计位置（中国大陆信贷授权与信用核查岗位职业级工资）",
+        "occupation_scope": "证据不足：中国本岗全国工资分布、招聘报价与职业一一映射未取得。NBS2025金融业非私营税前年均211,164元、私营140,451元；批发零售非私营135,749元、私营69,622元；须法人主营行业匹配才作条件背景，非本岗中位/月到手。城镇5人及以上法人、不含个体自由职业，均为行业背景，不代本岗工资。",
+        "period": "2025行业/工资；本轮核2026-10-09",
+        "source_refs": [
+          "g04-nbs"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "72,700美元/年（第90分位；时薪34.95美元；2025）",
+        "fact_id": "high-g04-current",
+        "market": "美国",
+        "measure": "第 90 百分位年工资（单一职业口径）",
+        "occupation_scope": "美国2025 OEWS43-4041.00全国有薪全兼职常规税前工资，排除自雇等人群及加班溢价；官方已披露年值，2080标准不等个人全年工时或月到手。分位非起薪、职级，不能证明行业、机构、地区或经验的工资因果。",
+        "period": "2025行业/工资；本轮核2026-10-09",
+        "source_refs": [
+          "r2-pay-3"
+        ]
       }
     ]
   },
@@ -36994,7 +37467,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "金融与商务服务 · 信贷授权与信用核查",
@@ -37045,7 +37518,7 @@
       "text": "信贷授权员、核查员、文员"
     }
   },
-  "source_content_sha256": "67da3c4fd173828f02dd412ecf166dcc5afa1e5672eaca1fec24e7d47b91620c",
+  "source_content_sha256": "634eddeb51999c001acbd4653e75ba6e2201f5167f4c63ab230e874562aba538",
   "subject": {
     "canonical_slug": "credit-authorizers-checkers-and-clerks",
     "name": "信贷授权员、核查员、文员",

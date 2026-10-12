@@ -27961,7 +27961,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "用图样和停工卡观察现实型兴趣；现场体验须合格带教。"
+              "O*NET 47-4091.00 当前兴趣指标现实型 R 99 较高；实物、测量与施工可作探索线索，不是个人成绩或安全资格，现场体验须合格带教。"
             ]
           },
           "id": "segmental-pavers.fit.riasec-fit-block.9",
@@ -28194,7 +28194,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能清楚交接异常、接受复核并按授权升级，比抽象情商标签更可观察。"
+              "编辑建议练习清楚交接异常、接受复核并按授权升级；本页未取得本工种情商或练习预测效度比较。"
             ]
           },
           "id": "segmental-pavers.fit.personality-fit-block.22",
@@ -28268,7 +28268,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "更应观察能否耐心测量、保持缝宽、记录缺陷并遵守设备和停工程序。"
+              "编辑建议观察测量、缝宽、缺陷记录和设备停工程序；这些是任务体验线索，不是经验证的人格表现排序。"
             ]
           },
           "id": "segmental-pavers.fit.personality-fit-block.27",
@@ -29160,13 +29160,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "护罩或切割隔离失效可伤人。"
+              "护罩或切割隔离失效可伤人；切割含硅块材还需核呼吸性结晶二氧化硅粉尘暴露，不能只看机械护罩。"
             ]
           },
           "id": "segmental-pavers.risk.career-risk-cards.24",
           "source_refs": [
             "onet",
-            "onet"
+            "osha-silica-construction"
           ],
           "type": "prose"
         },
@@ -29175,13 +29175,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "设备异常停用，训练和现场安排核验后才操作。"
+              "设备异常停用，训练和现场安排核验后才操作。美国适用施工中切割含硅材料，OSHA 1926.1153须完整执行表1对应设备控制或依(d)评估限暴露；台式砌材锯表1为持续向锯片供水，手持锯呼吸防护另随室内外与时长核，不能套为中国统一规程。"
             ]
           },
           "id": "segmental-pavers.risk.career-risk-cards.25",
           "source_refs": [
             "onet",
-            "onet"
+            "osha-silica-construction"
           ],
           "type": "prose"
         },
@@ -32009,7 +32009,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮2026-10-02核读O*NET任务、2025美国汇总工资、2025–2035预测、2023行业表、NBS2025工资与AI方法资料；其他来源历史核读日保留。A1–A5全部虚构。"
+              "本轮2026-10-12核读O*NET任务、兴趣与准备度、2025美国全国父级工资、2025–2035预测、2023行业表和OSHA施工含硅材料控制；NBS及AI方法核查记录见作者材料，其他历史记录保留。纽约工资页只取United States行；A1–A5全部虚构。"
             ]
           },
           "id": "segmental-pavers.sources.source-card.3",
@@ -32221,7 +32221,7 @@
                 "evidence_type": "精确职业任务",
                 "id": "facilities",
                 "limitation": "铺装基层、垫层、边缘约束、铺块、切割、填缝与压实；工资和预测采用 47-4090 宽口径。",
-                "market": "美国/国际",
+                "market": "美国",
                 "name": "O*NET 47-4091.00 块状铺装工任务",
                 "period": "2026",
                 "publisher": "O*NET OnLine",
@@ -32237,7 +32237,7 @@
                 "evidence_type": "汇总职业就业与空缺",
                 "id": "operations",
                 "limitation": "47-4090 行包含多个职业，不能分派给块状铺装工。",
-                "market": "美国/国际",
+                "market": "美国",
                 "name": "BLS 2025–2035 预测 47-4090",
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
@@ -32269,7 +32269,7 @@
                 "evidence_type": "精确职业任务",
                 "id": "health",
                 "limitation": "铺装基层、垫层、边缘约束、铺块、切割、填缝与压实；工资和预测采用 47-4090 宽口径。",
-                "market": "美国/国际",
+                "market": "美国",
                 "name": "O*NET 47-4091.00 块状铺装工任务",
                 "period": "2026",
                 "publisher": "O*NET OnLine",
@@ -32318,7 +32318,7 @@
                 "evidence_type": "AI 通用风险",
                 "id": "nist",
                 "limitation": "不代替现场勘查、测量与安全决定。",
-                "market": "美国/国际",
+                "market": "美国",
                 "name": "NIST 生成式 AI 风险管理画像",
                 "period": "2024",
                 "publisher": "NIST",
@@ -32334,7 +32334,7 @@
                 "evidence_type": "美国职业任务暴露",
                 "id": "arxiv",
                 "limitation": "潜在影响不等于实际部署。",
-                "market": "美国/国际",
+                "market": "美国",
                 "name": "《GPTs are GPTs》任务影响研究",
                 "period": "2023",
                 "publisher": "研究论文",
@@ -32366,7 +32366,7 @@
                 "evidence_type": "铺装和客户沟通任务",
                 "id": "employer",
                 "limitation": "训练和施工授权另核。",
-                "market": "美国/国际",
+                "market": "美国",
                 "name": "O*NET 47-4091.00 工作活动",
                 "period": "2026",
                 "publisher": "O*NET OnLine",
@@ -32382,7 +32382,7 @@
                 "evidence_type": "精确职业任务",
                 "id": "segmental-pavers",
                 "limitation": "铺装基层、垫层、边缘约束、铺块、切割、填缝与压实；工资和预测采用 47-4090 宽口径。",
-                "market": "美国/国际",
+                "market": "美国",
                 "name": "O*NET 47-4091.00 块状铺装工任务",
                 "period": "2026",
                 "publisher": "O*NET OnLine",
@@ -32414,7 +32414,7 @@
                 "evidence_type": "汇总职业年薪分位",
                 "id": "r2-pay-2",
                 "limitation": "O*NET 明示数据来自 Miscellaneous Construction and Related Workers。",
-                "market": "美国/国际",
+                "market": "美国",
                 "name": "O*NET 2025 工资分位 47-4090",
                 "period": "2025",
                 "publisher": "O*NET OnLine / BLS",
@@ -32446,7 +32446,7 @@
                 "evidence_type": "汇总职业就业与空缺",
                 "id": "census",
                 "limitation": "47-4090 行包含多个职业，不能分派给块状铺装工。",
-                "market": "美国/国际",
+                "market": "美国",
                 "name": "BLS 2025–2035 预测 47-4090",
                 "period": "2025–2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
@@ -32461,7 +32461,7 @@
                 "evidence_type": "精确职业任务",
                 "id": "msresearch",
                 "limitation": "铺装基层、垫层、边缘约束、铺块、切割、填缝与压实；工资和预测采用 47-4090 宽口径。",
-                "market": "美国/国际",
+                "market": "美国",
                 "name": "O*NET 47-4091.00 块状铺装工任务",
                 "period": "2026",
                 "publisher": "O*NET OnLine",
@@ -32477,7 +32477,7 @@
                 "evidence_type": "汇总职业年薪分位",
                 "id": "onet-wages",
                 "limitation": "O*NET 明示数据来自 Miscellaneous Construction and Related Workers。",
-                "market": "美国/国际",
+                "market": "美国",
                 "name": "O*NET 2025 工资分位 47-4090",
                 "period": "2025",
                 "publisher": "O*NET OnLine / BLS",
@@ -32493,7 +32493,7 @@
                 "evidence_type": "铺装和客户沟通任务",
                 "id": "archivists",
                 "limitation": "训练和施工授权另核。",
-                "market": "美国/国际",
+                "market": "美国",
                 "name": "O*NET 47-4091.00 工作活动",
                 "period": "2026",
                 "publisher": "O*NET OnLine",
@@ -32509,7 +32509,7 @@
                 "evidence_type": "汇总职业年薪分位",
                 "id": "oews-method",
                 "limitation": "O*NET 明示数据来自 Miscellaneous Construction and Related Workers。",
-                "market": "美国/国际",
+                "market": "美国",
                 "name": "O*NET 2025 工资分位 47-4090",
                 "period": "2025",
                 "publisher": "O*NET OnLine / BLS",
@@ -32530,6 +32530,21 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/oes/2023/may/oes474090.htm"
+              },
+              {
+                "accessed_at": "2026-10-12",
+                "details": [
+                  "(c)完整执行表1或按(d)评估并限暴露；表1区分台式砌材锯与手持锯、室内外及时长。"
+                ],
+                "evidence_type": "施工粉尘控制规则",
+                "id": "osha-silica-construction",
+                "limitation": "仅适用条文规定的美国施工含硅材料暴露；按具体设备、地点、时长和路径核，不是中国统一安全资格。",
+                "market": "美国",
+                "name": "OSHA 1926.1153 施工呼吸性结晶二氧化硅",
+                "period": "现行在线条文；2026-10-12查阅",
+                "publisher": "Occupational Safety and Health Administration",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.1153"
               }
             ]
           },
@@ -37726,7 +37741,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
       "块状铺装工 · O*NET 47-4091.00",
@@ -37777,7 +37792,7 @@
       "text": "块状铺路工"
     }
   },
-  "source_content_sha256": "c0e4233113bc1ee6abf964a710655b1f3bab585aa9a0f3e791e8f8ca89de176e",
+  "source_content_sha256": "13da7b3fb9805021adadf8bb1d73bc2a01a7f76b85cc2989853a97a5a8b75ab6",
   "subject": {
     "canonical_slug": "segmental-pavers",
     "name": "块状铺路工",

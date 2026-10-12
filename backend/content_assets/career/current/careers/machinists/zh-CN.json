@@ -7543,7 +7543,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "CAM 编程、刀具路径优化与在线测量工具可辅助生成程序与汇总检验数据，但装夹找正、试切判断、精度处置与安全操作仍由机械师负责。"
+              "编辑试验候选：只在虚构尺寸与检验记录上做整理核验，CAM与路径工具不等于生成式AI采用。真实程序、装夹、刀具路径、首件和精度处置须由授权人员依据机床工艺复核；本页M01不生成真实切削程序。"
             ]
           },
           "id": "machinists.ai-impact.ai-impact-table.2",
@@ -7571,7 +7571,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不同环节受影响不同：编程、路径优化与检验数据汇总更易自动化，但装夹找正、首件判断与精度处置仍由人负责。"
+              "编辑任务拆分：上述辅助步骤是待验证候选。本轮未取得各环节自动化难度排序或实际采用效果，现场判断和授权责任由岗位责任人确认。"
             ]
           },
           "id": "machinists.ai-impact.ai-impact-table.4",
@@ -7649,7 +7649,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本页所核国家统计局行业工资和人社企业薪酬资料未取得与51-4041.00精密机加工岗位安全对应的中国全国职业工资中位数；行业均值、相关岗位报价及美国数字不代填。 国家统计局制造业年均工资仅行业代理，不等于本职业工资。"
+              "本轮所核行业资料未建立51-4041.00中国全国职业工资中位对应；NBS2025制造113594/76055、全国非私营129441元仅行业代理，不以美国、相关岗位报价或技能等级填补。"
             ]
           },
           "id": "machinists.china-salary.career-snapshot-primary-locale.1",
@@ -7730,7 +7730,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025美国全国51-4041.00年薪第10/25/50/75/90分位为39,200/47,570/58,750/67,700/80,010美元，时薪对应18.85/22.87/28.24/32.55/38.47美元。 2024就业299,500人，2024—2034官方预测0%（Little or no change），2034预计299,600人；年均空缺29,500含增长与更替，不等于净增或在招数。 两个时期分开，全国分位不是起薪、技能等级或到手收入。"
+              "2025美国51-4041.00全国年薪第10/25/50/75/90分位39200/47570/58750/67700/80010美元，小时18.85/22.87/28.24/32.55/38.47；2025就业288300、2035预计291200，2025—2035增长1%、年均空缺26100含替补。时期单位分开，非起薪技能等级或个人到手。"
             ]
           },
           "fact_refs": [
@@ -7767,7 +7767,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国分位不代表个人资历"
+              "第10与90百分位是美国全国该职业工资分布边界，不对应新手或资深等级；分位表不能分解学历、经验、地区或雇主等因素的作用。"
             ]
           },
           "fact_refs": [
@@ -7784,7 +7784,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布与局限：该页 2024 年主要行业为 Manufacturing；行业分布是雇主场景信号，不是需求预测。"
+              "O*NET2025本职业制造业就业84%；美国行业场景非中国构成、制造细行业工资或需求预测。"
             ]
           },
           "fact_refs": [
@@ -7801,7 +7801,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资与就业的解释边界"
+              "2025就业288,300人、2025—2035增长1%。年均空缺26,100包含替补，并非当前在招岗位或每年新增人数；不推导个人机会或AI因果。"
             ]
           },
           "fact_refs": [
@@ -7911,7 +7911,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "大五等通用人格量表不提供本职业的岗位证据，只能用于自我反思；应结合真实的机床操作、测量检验与工艺分析体验继续核对。"
+              "本轮未取得机械师人格效度研究；结合M01纸面尺寸与未决项记录观察核验习惯，不把纸面在范围等同真实检验放行或安全适任。"
             ]
           },
           "id": "machinists.fit.riasec-fit-block.7",
@@ -7952,7 +7952,8 @@
           },
           "id": "machinists.risk.career-risk-cards.1",
           "source_refs": [
-            "onet-context"
+            "onet-context",
+            "osha-energy-control"
           ],
           "type": "prose"
         },
@@ -8040,7 +8041,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国侧该职业属 Job Zone 3（中等准备）：通常需要职业学校培训、相关在岗经验或副学士学位，并需一至两年培训；具体要求按雇主与行业核对。"
+              "O*NET36%受访者认为新入职者需高中或同等、33%中学后证书、17%部分大学无学位，非在岗学历；JobZone3一至两年训练为组别描述，目标机床、工艺及雇主训练另核。"
             ]
           },
           "id": "machinists.path.career-path-block.2",
@@ -8161,7 +8162,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024就业299,500人，2024—2034官方预测0%（Little or no change），2034预计299,600人；年均空缺29,500含增长与更替，不等于净增或在招数。 本职业美国统计非个人录用概率，与招聘样本分开。"
+              "美国O*NET/BLS：2025就业288,300、2035预计291,200，2025—2035增长1%，年均空缺26,100（增长与替补）。职业预测非当前招聘样本或个人录用概率。"
             ]
           },
           "id": "machinists.market-signals.market-signal-card.2",
@@ -8175,7 +8176,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024主要行业为Manufacturing；2024就业299,500人，2024—2034官方预测0%（Little or no change），2034预计299,600人；年均空缺29,500含增长与更替，不等于净增或在招数。 行业分布不是需求预测。"
+              "O*NET2025本职业制造业就业84%；美国行业场景非中国构成、制造细行业工资或需求预测。"
             ]
           },
           "id": "machinists.market-signals.market-signal-card.3",
@@ -8203,7 +8204,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需要补足：目标雇主的设备操作授权与安全培训、精密加工与数控工艺，或转向工具模具、质量检测与生产管理所需的经验与责任证据。"
+              "转数控机床程序员需补目标控制系统、程序校验、工艺文件、刀具路径与首件协同；机床操作经验不自动授予程序批准权。"
             ]
           },
           "id": "machinists.market-signals.market-signal-card.5",
@@ -8658,6 +8659,21 @@
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
+              },
+              {
+                "accessed_at": "2026-10-11",
+                "details": [
+                  "适用维修维护的危险能源控制与训练"
+                ],
+                "evidence_type": "official safety standard",
+                "id": "osha-energy-control",
+                "limitation": "排除和例外另核，不覆盖所有正常生产或中国，不代完整机床规程",
+                "market": "美国",
+                "name": "OSHA1910.147 Control of hazardous energy",
+                "period": "当前，2026-10-11核查",
+                "publisher": "OSHA",
+                "scope": "美国受覆盖设备维修",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
               }
             ]
           },
@@ -8846,12 +8862,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "程序与路径生成",
+            "AI主要改变": "编辑待验证候选：程序与路径生成",
             "仍由人负责": "工艺可行性与公差核对",
             "方向": "工艺与编程"
           },
           {
-            "AI主要改变": "数据汇总",
+            "AI主要改变": "编辑待验证候选：数据汇总",
             "仍由人负责": "合格判定与处置",
             "方向": "检验与记录"
           }
@@ -8885,7 +8901,7 @@
           {
             "使用限制": "不替代所在地法律与雇主规程。",
             "来源": {
-              "$source": "onet-context",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -8894,7 +8910,7 @@
             "研究对象": "51-4041.00 的任务与工作情境",
             "结论": "支持任务拆分，不支持 AI 采用率",
             "链接": {
-              "$source": "onet-context",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8911,7 +8927,7 @@
               "item": "machinists.source-register.published.1"
             },
             "研究对象": "51-4041.00 就业预测",
-            "结论": "支持规模与变化判断",
+            "结论": "支持2025—2035职业就业预测，不证明AI因果",
             "链接": {
               "$source": "onet-trends",
               "block": "source-register",
@@ -8961,7 +8977,7 @@
             "问题": "AI 会取代机械师吗？"
           },
           {
-            "回答": "目前只写到可辅助的编程、路径优化与数据汇总，装夹找正、首件判断与精度处置仍由人承担。",
+            "回答": "编辑试验候选：只在虚构尺寸与检验记录上做整理核验，CAM与路径工具不等于生成式AI采用。真实程序、装夹、刀具路径、首件和精度处置须由授权人员依据机床工艺复核；本页M01不生成真实切削程序。",
             "来源": {
               "$source": "onet-details",
               "block": "source-register",
@@ -8976,10 +8992,10 @@
               "field": "url",
               "item": "machinists.source-register.published.1"
             },
-            "问题": "自动化会先影响哪个环节？"
+            "问题": "数字化工具可在哪些步骤做受控试验？"
           },
           {
-            "回答": "没有职业级采用率来源，本页不提供这类数字。",
+            "回答": "证据不足：本轮未取得该职业AI采用率、节省工时或因果就业研究。",
             "来源": {
               "$source": "onet-details",
               "block": "source-register",
@@ -9209,12 +9225,12 @@
       },
       "career_ai_description_block": {
         "body": [
-          "CAM 编程、刀具路径优化与在线测量工具可辅助生成程序与汇总检验数据，但装夹找正、试切判断、精度处置与安全操作仍由机械师负责。"
+          "编辑试验候选：只在虚构尺寸与检验记录上做整理核验，CAM与路径工具不等于生成式AI采用。真实程序、装夹、刀具路径、首件和精度处置须由授权人员依据机床工艺复核；本页M01不生成真实切削程序。"
         ],
         "heading": "机械师的工作对象与 AI 边界"
       },
       "career_path_block": {
-        "boundary": "操作授权、职业资格与特种作业资格由具体法域与雇主核验；认证不等于设备操作授权。",
+        "boundary": "三路线为编辑目标非固定晋升：机加工、数控编程和工具模具工艺分别补资格与授权；纸面M01不证明真实加工能力。",
         "competence_ladder": [
           {
             "description": "确认图纸、公差与工艺要求。",
@@ -9446,35 +9462,35 @@
             "id": "track-2",
             "stages": [
               {
-                "credentials": "按雇主要求核验。",
-                "next_moves": "补足工装与质量标准知识。",
-                "readiness_evidence": "保留工装与检验记录。",
-                "responsibility": "在监督下参与工装或检验。",
-                "role": "工装/质检助理"
+                "credentials": "目标工装工艺与安全训练核",
+                "next_moves": "补模具结构、装配及精密计量",
+                "readiness_evidence": "图纸版本、尺寸原值与学习记录",
+                "responsibility": "在监督下核工装图纸、材料与检验记录",
+                "role": "工具模具助理"
               },
               {
-                "credentials": "按岗位与雇主要求核验。",
-                "next_moves": "补足精密工艺与计量知识。",
-                "readiness_evidence": "保留制造与检验记录。",
-                "responsibility": "独立制造工装或开展检验。",
-                "role": "工具模具制造工或质检员"
+                "credentials": "目标机床和检验签认权限核",
+                "next_moves": "补复杂模具修配与试模",
+                "readiness_evidence": "工装制造、配合检验与试用记录",
+                "responsibility": "在授权内加工装配工装并验证配合",
+                "role": "工具与模具制造工"
               },
               {
-                "credentials": "按企业要求核验。",
-                "next_moves": "补足专项与协作知识。",
-                "readiness_evidence": "保留专项与改进记录。",
-                "responsibility": "负责专项工装或质量改进。",
-                "role": "专业骨干"
+                "credentials": "技术复核与机型授权核",
+                "next_moves": "补工装寿命分析与带教",
+                "readiness_evidence": "修配依据、试用复核及版本记录",
+                "responsibility": "解决复杂配合与工装磨损问题",
+                "role": "工具模具技术骨干"
               },
               {
-                "credentials": "按企业要求核验。",
-                "next_moves": "补足管理责任证据。",
-                "readiness_evidence": "保留团队与体系记录。",
-                "responsibility": "负责团队与质量体系。",
-                "role": "主管"
+                "credentials": "企业工装制造任用核",
+                "next_moves": "补跨工艺协同与质量改进",
+                "readiness_evidence": "计划、工装变更、质量复盘与带教记录",
+                "responsibility": "组织工装制造修配计划和质量复核",
+                "role": "工具模具制造负责人"
               }
             ],
-            "title": "转向工具模具与质量"
+            "title": "转向工具与模具制造"
           }
         ]
       },
@@ -9627,14 +9643,14 @@
           }
         ],
         "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
-        "evidence_scope": "依据 O*NET 51-4041.00 的任务与工作情境，以及图纸工艺、装夹找正、量具检验与设备安全中的具体要求；具体规则按雇主与适用法规核对，不跨范围外推。",
+        "evidence_scope": "机床、公差、装夹、图纸、噪声及异常任务形成编辑风险，非事故率；适用维修能源控制核美国OSHA1910.147，设备防护与许可按目标批准规程。",
         "heading": "机械师的工作风险与边界",
         "risks": [
           {
             "affected_roles": "机床操作岗位",
             "consequence": "可能造成机械与刀具伤害。",
             "evidence_refs": [
-              "onet-context"
+              "machinists.display.source.onet-context"
             ],
             "id": "risk-1",
             "mitigation": "按规程操作并穿戴防护。",
@@ -9650,7 +9666,7 @@
             "affected_roles": "加工与检验岗位",
             "consequence": "可能导致尺寸超差与报废。",
             "evidence_refs": [
-              "onet-tasks"
+              "machinists.display.source.onet-tasks"
             ],
             "id": "risk-2",
             "mitigation": "核对基准、首件检验后再加工。",
@@ -9666,7 +9682,7 @@
             "affected_roles": "装夹与加工岗位",
             "consequence": "可能造成偏差与安全隐患。",
             "evidence_refs": [
-              "onet-tasks"
+              "machinists.display.source.onet-tasks"
             ],
             "id": "risk-3",
             "mitigation": "按基准装夹并复核紧固。",
@@ -9682,7 +9698,7 @@
             "affected_roles": "工艺与编程岗位",
             "consequence": "可能批量加工错误。",
             "evidence_refs": [
-              "onet-tasks"
+              "machinists.display.source.onet-tasks"
             ],
             "id": "risk-4",
             "mitigation": "读图复核并与工艺确认。",
@@ -9698,7 +9714,7 @@
             "affected_roles": "现场作业岗位",
             "consequence": "可能造成人身伤害。",
             "evidence_refs": [
-              "onet-context"
+              "machinists.display.source.onet-context"
             ],
             "id": "risk-5",
             "mitigation": "遵守防护与作业许可要求。",
@@ -9714,10 +9730,10 @@
             "affected_roles": "机床操作岗位",
             "consequence": "可能造成批量废品与安全问题。",
             "evidence_refs": [
-              "onet-tasks"
+              "machinists.display.source.onet-tasks"
             ],
             "id": "risk-6",
-            "mitigation": "立即停机、检查并按规程处置。",
+            "mitigation": "按机床批准异常规程停止相关危险作业并报告；涉及清堵维护先由授权人员核能源控制，不以停机按钮代能源隔离，也不旁路防护。",
             "scenario": "发现刀具磨损或设备异常仍继续加工时。",
             "title": "设备或刀具异常未停止即处置"
           }
@@ -9804,7 +9820,7 @@
             {
               "指标": "中国大陆职业工资",
               "数值": "证据不足：所核资料未取得",
-              "说明": "所核NBS行业工资和人社企业薪酬资料未取得精确对应全国职业中位数。"
+              "说明": "本轮国家统计局行业资料未建立本职业单列对应；不表示所有公开渠道均无数据。"
             },
             {
               "指标": "中国大陆行业代理",
@@ -9891,7 +9907,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "证据不足：本页所核国家统计局行业工资和人社企业薪酬资料未取得与51-4041.00精密机加工岗位安全对应的中国全国职业工资中位数；行业均值、相关岗位报价及美国数字不代填。 下列行业代理不作职业中位数或起薪。",
+          "china_open": "证据不足：本轮未建立本职业单列工资对应；下列行业平均仅作宽口径代理，非职业中位数、起薪或到手收入。",
           "china_ref": {
             "$join": [
               {
@@ -10111,7 +10127,7 @@
           },
           {
             "指标": "就业 · 规模",
-            "数值": "299,500 人（2024）",
+            "数值": "288,300人（2025）",
             "说明": {
               "$join": [
                 {
@@ -10135,7 +10151,7 @@
           },
           {
             "指标": "就业 · 变化",
-            "数值": "0% · 2034预计299,600人（2024—2034）",
+            "数值": "1%（2025—2035）",
             "说明": {
               "$join": [
                 {
@@ -10159,7 +10175,7 @@
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "约 29,500 个/年（2024—2034 年均）",
+            "数值": "26,100个/年（2025—2035增长与替补）",
             "说明": {
               "$join": [
                 {
@@ -10182,7 +10198,7 @@
             }
           }
         ],
-        "boundary": "美国全国口径：工资、就业与行业均为 O*NET 展示的本职业 51-4041.00 数据，工资为 2025 OEWS、就业展望为 2024—2034 预测；不含个人到手收入、起薪或录用结论。",
+        "boundary": "美国全国：2025 OEWS工资与2025—2035就业预测分别解释，不跨职业/法域拼接，不作为个人报价。",
         "direct_answer": {
           "$item": "machinists.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10191,15 +10207,15 @@
         },
         "factor_rows": [
           {
-            "answer": "通常需要职业学校培训、相关经验或副学士学位并需一至两年培训；认证不等于设备操作或特种作业资格。",
+            "answer": "36/33/17为新入职教育需要意见，JobZone不规定该岗位一至两年；设备与工艺授权另核。",
             "factor": "资格"
           },
           {
-            "answer": "多以学徒或在岗训练进入；读图、量具与数控经验比证书名称更常被参考。",
+            "answer": "编辑建议：展示图纸基准、量具状态、工艺与首件记录；没有读图数控经验优于证书的比较研究，技能证书和设备授权分别核。",
             "factor": "经验"
           },
           {
-            "answer": "受制造业分布与行业结构影响大，不得跨地区外推。",
+            "answer": "制造地区与雇主条件逐岗核，全国分位未估计其收入影响。",
             "factor": "地区"
           }
         ],
@@ -10209,7 +10225,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "0%（2024—2034）",
+        "growth": "1%（2025—2035）",
         "heading": {
           "$item": "machinists.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10222,27 +10238,27 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "2024",
+        "industry_period": "2025",
         "industry_rows": [
           {
             "industry": "Manufacturing",
             "median": "未单列",
-            "note": "本页未取得分行业工资分项；以整体中位数为准。"
+            "note": "证据不足：本轮未取得该职业×行业工资子表；整体分位不能冒充分行业中位工资。"
           },
           {
             "industry": "行业口径说明一",
             "median": "见就业行",
-            "note": "工资、就业与行业均为本职业展示口径，不跨职业外推。"
+            "note": "证据不足：本轮未取得该职业×行业工资子表；整体分位不能冒充分行业中位工资。"
           },
           {
             "industry": "行业口径说明二",
             "median": "见就业行",
-            "note": "地区与技能差异大，不得跨地区外推。"
+            "note": "证据不足：本轮未取得该职业×行业工资子表；整体分位不能冒充分行业中位工资。"
           },
           {
             "industry": "行业口径说明三",
             "median": "见就业行",
-            "note": "全国工资五分位已公布；不能作为制造业内具体行业工资分项。"
+            "note": "证据不足：本轮未取得该职业×行业工资子表；整体分位不能冒充分行业中位工资。"
           }
         ],
         "industry_value_label": "行业值",
@@ -10258,11 +10274,11 @@
             "question": "工资"
           },
           {
-            "answer": "2024 年在岗人数，不是招聘职位数。",
+            "answer": "2025就业人数，不是当前在招职位。",
             "question": "就业"
           },
           {
-            "answer": "2024就业299,500人，2024—2034官方预测0%（Little or no change），2034预计299,600人；年均空缺29,500含增长与更替，不等于净增或在招数。 官方0%为展示精度，不等于总人数完全相同。",
+            "answer": "2025—2035增长1%；不推导个人录用概率或AI因果。",
             "question": "展望"
           },
           {
@@ -10272,7 +10288,7 @@
         ],
         "median": "$58,750/年（2025）",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "2024—2034",
+        "outlook_period": "2025—2035",
         "wage_column_labels": [
           "分位",
           "年度参考",
@@ -10289,7 +10305,7 @@
           {
             "equivalent": "$18.85/小时",
             "interpretation": "2025全国第10分位，非新手起薪；另第25分位$47,570/年、$22.87/小时。",
-            "label": "第10分位",
+            "label": "第10百分位",
             "value": "$39,200/年"
           },
           {
@@ -10301,7 +10317,7 @@
           {
             "equivalent": "$38.47/小时",
             "interpretation": "2025全国第90分位，非资深等级；另第75分位$67,700/年、$32.55/小时。",
-            "label": "第90分位",
+            "label": "第90百分位",
             "value": "$80,010/年"
           }
         ]
@@ -10383,7 +10399,7 @@
         "outlook_evidence": [
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
+            "horizon": "2025—2035",
             "interpretation": "就业规模、变化与职位空缺必须分别解释。",
             "limitation": "为职业统计，不能作为个人就业保证。",
             "metric": "就业规模与变化",
@@ -10397,12 +10413,12 @@
           },
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
-            "interpretation": "为 2024—2034 年预测期年均值（O*NET 标注为 annual job openings），含增长与替代需求，不等于在招岗位数。",
+            "horizon": "2025—2035",
+            "interpretation": "2025—2035年均增长与替补空缺，非净增或当前在招。",
             "limitation": "不能作为个人录用概率。",
             "metric": "职位空缺（年均）",
             "occupation_scope": "展示口径：Machinists（51-4041.00）",
-            "value": "约 29,500 个/年"
+            "value": "26,100个/年（增长与替补）"
           },
           {
             "geography": "美国全国",
@@ -10517,7 +10533,7 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补足其他机床与工艺知识。",
+            "capability_gaps": "需补目标车床设置、回转件工艺、装夹与车削精度控制，按机型重核授权；不把转车工写成补其他机床。",
             "shared_capabilities": "车床加工基础。",
             "target_href": "/zh/career/jobs/lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic",
@@ -10533,7 +10549,7 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补足编程与工艺知识。",
+            "capability_gaps": "需补目标数控机型设置、程序调用与首件及联锁训练；不默认操作员须承担独立编程职责。",
             "shared_capabilities": "数控操作基础。",
             "target_href": "/zh/career/jobs/computer-numerically-controlled-tool-operators",
             "target_slug": "computer-numerically-controlled-tool-operators",
@@ -11043,7 +11059,7 @@
             "item": "machinists.source-register.published.1"
           }
         },
-        "note": "来源范围、限制和统计时期按原始证据分别核对。来源使用说明：O*NET 51-4041.00 机械师（摘要）：提供 51-4041.00 的职业身份、官方描述、兴趣代码、Job Zone、技能与知识。；该页工资与就业数据为本职业口径。；O*NET 51-4041.00（详细档案）：提供 51-4041.00 的任务、工作活动、工作情境、技能与知识细节。；任务与雇主规程存在差异。；O*NET 51-4041.00 任务（Tasks）：提供计算尺寸公差、加工零件、测量检验、设置与操作机床、编写数控程序、阅读图纸、监控进给与转速、维护机床、装配与找正夹具等任务清单。；任务样本不代表每个岗位执行全部任务。；O*NET 51-4041.00 工作情境（Work Context）：描述防护装备使用、手部操作、精确性要求、站立、设备节拍、时间压力、危险设备与噪音等情境。；美国工作情境不替代中国法律与雇主规程。；O*NET 51-4041.00 全国工资（BLS OEWS 展示）：2025美国全国51-4041.00年薪第10/25/50/75/90分位为39,200/47,570/58,750/67,700/80,010美元，时薪对应18.85/22.87/28.24/32.55/38.47美元。；全国分位非起薪资历。；O*NET 51-4041.00 全国就业趋势：2024就业299,500人，2024—2034官方预测0%（Little or no change），2034预计299,600人；年均空缺29,500含增长与更替，不等于净增或在招数。；预测不是录用保证。；Industries: 51-4041.00：该页 2024 年主要行业为 Manufacturing。；行业分布是雇主场景信号，不是增长或需求预测。；O*NET 51-4041.00 教育与职业准备：Job Zone 3（中等准备）：通常需要职业学校培训、相关在岗经验或副学士学位，并需一至两年培训。；教育分布不等于每个雇主的硬性要求。；National Certifications: 51-4041.00：O*NET 提供的美国全国认证查询入口。；证书与培训不等于执业授权或雇主录用条件。；Generative AI and Jobs (ILO Working Paper 140, 2025)：按任务层面评估生成式 AI 的职业暴露。；暴露指数不等于采用率、岗位结果或录用概率。；2025年城镇单位就业人员年平均工资情况：提供城镇非私营与私营单位分行业门类年平均工资，用于核对中国工资公开口径。；行业平均不是职业中位数，且不含个体工商户与自由职业者。；企业薪酬调查信息（2024年）：人力资源和社会保障部企业薪酬调查信息，按职业/岗位分类的薪酬查询入口。；覆盖城镇企业，不含机关事业单位；本页未取得与 51-4041.00 精确对应的条目。；FermatMind 机械师任务影响量表：整理可辅助任务与人工控制点，用于任务级 AI 与适配讨论。；编辑量表不等于采用率、裁员、法规或证照证据。；"
+        "note": "51-4041.00为精密机加工角色。2025五分位39200/47570/58750/67700/80010、小时28.24核实；2025—2035就业288300→291200、1%、空缺26100，2025制造84%。教育36/33/17为新入职需要，RCI R100C57I45为活动偏好；JobZone非固定训练。NBS2025制造为代理；OSHA1910.147只核美国受覆盖维修能源控制，不涵盖完整机床规程或中国。M01练习保留，非真实检验放行。保护FAQ共享旧预测、行业及训练说法待复核；精确中国工资准入、AI人格及细行业工资仍缺。"
       },
       "work_context_block": {
         "$item": "machinists.profile.work-context-block.5",
@@ -11189,7 +11205,7 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI影响"
+      "label": "AI 任务暴露"
     },
     "badges": [
       "机床设置与操作",
@@ -11240,7 +11256,7 @@
       "text": "机械师职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "52ba02a52772b4c1b780d484ddc3ac9e7fe87982d9762c3c22c38ca130c2e683",
+  "source_content_sha256": "eee00040f745f5d18589b9e6098f7b0f5157f95faac24f981223d3091bb3cf98",
   "subject": {
     "canonical_slug": "machinists",
     "name": "机械师",
